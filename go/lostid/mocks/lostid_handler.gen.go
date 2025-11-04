@@ -2,7 +2,7 @@
 
 package mocks
 
-//go:generate minimock -i buf.build/gen/go/antinvestor/lostid/connectrpc/go/lostid/v1/lostidv1connect.LostIdServiceHandler -o lostid_handler.gen.go -n LostIdServiceHandlerMock -p mocks
+//go:generate minimock -i buf.build/gen/go/antinvestor/lostid/connectrpc/go/lostid/v1/lostidv1connect.LostIdServiceClient -o lostid_handler.gen.go -n LostIdServiceClientMock -p mocks
 
 import (
 	context "context"
@@ -16,8 +16,8 @@ import (
 	"github.com/gojuno/minimock/v3"
 )
 
-// LostIdServiceHandlerMock implements mm_lostidv1connect.LostIdServiceHandler
-type LostIdServiceHandlerMock struct {
+// LostIdServiceClientMock implements mm_lostidv1connect.LostIdServiceClient
+type LostIdServiceClientMock struct {
 	t          minimock.Tester
 	finishOnce sync.Once
 
@@ -26,119 +26,119 @@ type LostIdServiceHandlerMock struct {
 	inspectFuncCollectible   func(ctx context.Context, pp1 *connect.Request[v1.CollectibleRequest])
 	afterCollectibleCounter  uint64
 	beforeCollectibleCounter uint64
-	CollectibleMock          mLostIdServiceHandlerMockCollectible
+	CollectibleMock          mLostIdServiceClientMockCollectible
 
-	funcListCollectible          func(ctx context.Context, pp1 *connect.Request[v1.ListCollectibleRequest], pp2 *connect.ServerStream[v1.ListCollectibleResponse]) (err error)
+	funcListCollectible          func(ctx context.Context, pp1 *connect.Request[v1.ListCollectibleRequest]) (pp2 *connect.ServerStreamForClient[v1.ListCollectibleResponse], err error)
 	funcListCollectibleOrigin    string
-	inspectFuncListCollectible   func(ctx context.Context, pp1 *connect.Request[v1.ListCollectibleRequest], pp2 *connect.ServerStream[v1.ListCollectibleResponse])
+	inspectFuncListCollectible   func(ctx context.Context, pp1 *connect.Request[v1.ListCollectibleRequest])
 	afterListCollectibleCounter  uint64
 	beforeListCollectibleCounter uint64
-	ListCollectibleMock          mLostIdServiceHandlerMockListCollectible
+	ListCollectibleMock          mLostIdServiceClientMockListCollectible
 
-	funcListSearch          func(ctx context.Context, pp1 *connect.Request[v1.ListSearchRequest], pp2 *connect.ServerStream[v1.ListSearchResponse]) (err error)
+	funcListSearch          func(ctx context.Context, pp1 *connect.Request[v1.ListSearchRequest]) (pp2 *connect.ServerStreamForClient[v1.ListSearchResponse], err error)
 	funcListSearchOrigin    string
-	inspectFuncListSearch   func(ctx context.Context, pp1 *connect.Request[v1.ListSearchRequest], pp2 *connect.ServerStream[v1.ListSearchResponse])
+	inspectFuncListSearch   func(ctx context.Context, pp1 *connect.Request[v1.ListSearchRequest])
 	afterListSearchCounter  uint64
 	beforeListSearchCounter uint64
-	ListSearchMock          mLostIdServiceHandlerMockListSearch
+	ListSearchMock          mLostIdServiceClientMockListSearch
 
-	funcListTransaction          func(ctx context.Context, pp1 *connect.Request[v1.ListTransactionRequest], pp2 *connect.ServerStream[v1.ListTransactionResponse]) (err error)
+	funcListTransaction          func(ctx context.Context, pp1 *connect.Request[v1.ListTransactionRequest]) (pp2 *connect.ServerStreamForClient[v1.ListTransactionResponse], err error)
 	funcListTransactionOrigin    string
-	inspectFuncListTransaction   func(ctx context.Context, pp1 *connect.Request[v1.ListTransactionRequest], pp2 *connect.ServerStream[v1.ListTransactionResponse])
+	inspectFuncListTransaction   func(ctx context.Context, pp1 *connect.Request[v1.ListTransactionRequest])
 	afterListTransactionCounter  uint64
 	beforeListTransactionCounter uint64
-	ListTransactionMock          mLostIdServiceHandlerMockListTransaction
+	ListTransactionMock          mLostIdServiceClientMockListTransaction
 
 	funcProgress          func(ctx context.Context, pp1 *connect.Request[v1.ProgressRequest]) (pp2 *connect.Response[v1.ProgressResponse], err error)
 	funcProgressOrigin    string
 	inspectFuncProgress   func(ctx context.Context, pp1 *connect.Request[v1.ProgressRequest])
 	afterProgressCounter  uint64
 	beforeProgressCounter uint64
-	ProgressMock          mLostIdServiceHandlerMockProgress
+	ProgressMock          mLostIdServiceClientMockProgress
 
 	funcSearch          func(ctx context.Context, pp1 *connect.Request[v11.SearchRequest]) (pp2 *connect.Response[v1.SearchResponse], err error)
 	funcSearchOrigin    string
 	inspectFuncSearch   func(ctx context.Context, pp1 *connect.Request[v11.SearchRequest])
 	afterSearchCounter  uint64
 	beforeSearchCounter uint64
-	SearchMock          mLostIdServiceHandlerMockSearch
+	SearchMock          mLostIdServiceClientMockSearch
 }
 
-// NewLostIdServiceHandlerMock returns a mock for mm_lostidv1connect.LostIdServiceHandler
-func NewLostIdServiceHandlerMock(t minimock.Tester) *LostIdServiceHandlerMock {
-	m := &LostIdServiceHandlerMock{t: t}
+// NewLostIdServiceClientMock returns a mock for mm_lostidv1connect.LostIdServiceClient
+func NewLostIdServiceClientMock(t minimock.Tester) *LostIdServiceClientMock {
+	m := &LostIdServiceClientMock{t: t}
 
 	if controller, ok := t.(minimock.MockController); ok {
 		controller.RegisterMocker(m)
 	}
 
-	m.CollectibleMock = mLostIdServiceHandlerMockCollectible{mock: m}
-	m.CollectibleMock.callArgs = []*LostIdServiceHandlerMockCollectibleParams{}
+	m.CollectibleMock = mLostIdServiceClientMockCollectible{mock: m}
+	m.CollectibleMock.callArgs = []*LostIdServiceClientMockCollectibleParams{}
 
-	m.ListCollectibleMock = mLostIdServiceHandlerMockListCollectible{mock: m}
-	m.ListCollectibleMock.callArgs = []*LostIdServiceHandlerMockListCollectibleParams{}
+	m.ListCollectibleMock = mLostIdServiceClientMockListCollectible{mock: m}
+	m.ListCollectibleMock.callArgs = []*LostIdServiceClientMockListCollectibleParams{}
 
-	m.ListSearchMock = mLostIdServiceHandlerMockListSearch{mock: m}
-	m.ListSearchMock.callArgs = []*LostIdServiceHandlerMockListSearchParams{}
+	m.ListSearchMock = mLostIdServiceClientMockListSearch{mock: m}
+	m.ListSearchMock.callArgs = []*LostIdServiceClientMockListSearchParams{}
 
-	m.ListTransactionMock = mLostIdServiceHandlerMockListTransaction{mock: m}
-	m.ListTransactionMock.callArgs = []*LostIdServiceHandlerMockListTransactionParams{}
+	m.ListTransactionMock = mLostIdServiceClientMockListTransaction{mock: m}
+	m.ListTransactionMock.callArgs = []*LostIdServiceClientMockListTransactionParams{}
 
-	m.ProgressMock = mLostIdServiceHandlerMockProgress{mock: m}
-	m.ProgressMock.callArgs = []*LostIdServiceHandlerMockProgressParams{}
+	m.ProgressMock = mLostIdServiceClientMockProgress{mock: m}
+	m.ProgressMock.callArgs = []*LostIdServiceClientMockProgressParams{}
 
-	m.SearchMock = mLostIdServiceHandlerMockSearch{mock: m}
-	m.SearchMock.callArgs = []*LostIdServiceHandlerMockSearchParams{}
+	m.SearchMock = mLostIdServiceClientMockSearch{mock: m}
+	m.SearchMock.callArgs = []*LostIdServiceClientMockSearchParams{}
 
 	t.Cleanup(m.MinimockFinish)
 
 	return m
 }
 
-type mLostIdServiceHandlerMockCollectible struct {
+type mLostIdServiceClientMockCollectible struct {
 	optional           bool
-	mock               *LostIdServiceHandlerMock
-	defaultExpectation *LostIdServiceHandlerMockCollectibleExpectation
-	expectations       []*LostIdServiceHandlerMockCollectibleExpectation
+	mock               *LostIdServiceClientMock
+	defaultExpectation *LostIdServiceClientMockCollectibleExpectation
+	expectations       []*LostIdServiceClientMockCollectibleExpectation
 
-	callArgs []*LostIdServiceHandlerMockCollectibleParams
+	callArgs []*LostIdServiceClientMockCollectibleParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// LostIdServiceHandlerMockCollectibleExpectation specifies expectation struct of the LostIdServiceHandler.Collectible
-type LostIdServiceHandlerMockCollectibleExpectation struct {
-	mock               *LostIdServiceHandlerMock
-	params             *LostIdServiceHandlerMockCollectibleParams
-	paramPtrs          *LostIdServiceHandlerMockCollectibleParamPtrs
-	expectationOrigins LostIdServiceHandlerMockCollectibleExpectationOrigins
-	results            *LostIdServiceHandlerMockCollectibleResults
+// LostIdServiceClientMockCollectibleExpectation specifies expectation struct of the LostIdServiceClient.Collectible
+type LostIdServiceClientMockCollectibleExpectation struct {
+	mock               *LostIdServiceClientMock
+	params             *LostIdServiceClientMockCollectibleParams
+	paramPtrs          *LostIdServiceClientMockCollectibleParamPtrs
+	expectationOrigins LostIdServiceClientMockCollectibleExpectationOrigins
+	results            *LostIdServiceClientMockCollectibleResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// LostIdServiceHandlerMockCollectibleParams contains parameters of the LostIdServiceHandler.Collectible
-type LostIdServiceHandlerMockCollectibleParams struct {
+// LostIdServiceClientMockCollectibleParams contains parameters of the LostIdServiceClient.Collectible
+type LostIdServiceClientMockCollectibleParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.CollectibleRequest]
 }
 
-// LostIdServiceHandlerMockCollectibleParamPtrs contains pointers to parameters of the LostIdServiceHandler.Collectible
-type LostIdServiceHandlerMockCollectibleParamPtrs struct {
+// LostIdServiceClientMockCollectibleParamPtrs contains pointers to parameters of the LostIdServiceClient.Collectible
+type LostIdServiceClientMockCollectibleParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.CollectibleRequest]
 }
 
-// LostIdServiceHandlerMockCollectibleResults contains results of the LostIdServiceHandler.Collectible
-type LostIdServiceHandlerMockCollectibleResults struct {
+// LostIdServiceClientMockCollectibleResults contains results of the LostIdServiceClient.Collectible
+type LostIdServiceClientMockCollectibleResults struct {
 	pp2 *connect.Response[v1.CollectibleResponse]
 	err error
 }
 
-// LostIdServiceHandlerMockCollectibleOrigins contains origins of expectations of the LostIdServiceHandler.Collectible
-type LostIdServiceHandlerMockCollectibleExpectationOrigins struct {
+// LostIdServiceClientMockCollectibleOrigins contains origins of expectations of the LostIdServiceClient.Collectible
+type LostIdServiceClientMockCollectibleExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -149,26 +149,26 @@ type LostIdServiceHandlerMockCollectibleExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmCollectible *mLostIdServiceHandlerMockCollectible) Optional() *mLostIdServiceHandlerMockCollectible {
+func (mmCollectible *mLostIdServiceClientMockCollectible) Optional() *mLostIdServiceClientMockCollectible {
 	mmCollectible.optional = true
 	return mmCollectible
 }
 
-// Expect sets up expected params for LostIdServiceHandler.Collectible
-func (mmCollectible *mLostIdServiceHandlerMockCollectible) Expect(ctx context.Context, pp1 *connect.Request[v1.CollectibleRequest]) *mLostIdServiceHandlerMockCollectible {
+// Expect sets up expected params for LostIdServiceClient.Collectible
+func (mmCollectible *mLostIdServiceClientMockCollectible) Expect(ctx context.Context, pp1 *connect.Request[v1.CollectibleRequest]) *mLostIdServiceClientMockCollectible {
 	if mmCollectible.mock.funcCollectible != nil {
-		mmCollectible.mock.t.Fatalf("LostIdServiceHandlerMock.Collectible mock is already set by Set")
+		mmCollectible.mock.t.Fatalf("LostIdServiceClientMock.Collectible mock is already set by Set")
 	}
 
 	if mmCollectible.defaultExpectation == nil {
-		mmCollectible.defaultExpectation = &LostIdServiceHandlerMockCollectibleExpectation{}
+		mmCollectible.defaultExpectation = &LostIdServiceClientMockCollectibleExpectation{}
 	}
 
 	if mmCollectible.defaultExpectation.paramPtrs != nil {
-		mmCollectible.mock.t.Fatalf("LostIdServiceHandlerMock.Collectible mock is already set by ExpectParams functions")
+		mmCollectible.mock.t.Fatalf("LostIdServiceClientMock.Collectible mock is already set by ExpectParams functions")
 	}
 
-	mmCollectible.defaultExpectation.params = &LostIdServiceHandlerMockCollectibleParams{ctx, pp1}
+	mmCollectible.defaultExpectation.params = &LostIdServiceClientMockCollectibleParams{ctx, pp1}
 	mmCollectible.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmCollectible.expectations {
 		if minimock.Equal(e.params, mmCollectible.defaultExpectation.params) {
@@ -179,22 +179,22 @@ func (mmCollectible *mLostIdServiceHandlerMockCollectible) Expect(ctx context.Co
 	return mmCollectible
 }
 
-// ExpectCtxParam1 sets up expected param ctx for LostIdServiceHandler.Collectible
-func (mmCollectible *mLostIdServiceHandlerMockCollectible) ExpectCtxParam1(ctx context.Context) *mLostIdServiceHandlerMockCollectible {
+// ExpectCtxParam1 sets up expected param ctx for LostIdServiceClient.Collectible
+func (mmCollectible *mLostIdServiceClientMockCollectible) ExpectCtxParam1(ctx context.Context) *mLostIdServiceClientMockCollectible {
 	if mmCollectible.mock.funcCollectible != nil {
-		mmCollectible.mock.t.Fatalf("LostIdServiceHandlerMock.Collectible mock is already set by Set")
+		mmCollectible.mock.t.Fatalf("LostIdServiceClientMock.Collectible mock is already set by Set")
 	}
 
 	if mmCollectible.defaultExpectation == nil {
-		mmCollectible.defaultExpectation = &LostIdServiceHandlerMockCollectibleExpectation{}
+		mmCollectible.defaultExpectation = &LostIdServiceClientMockCollectibleExpectation{}
 	}
 
 	if mmCollectible.defaultExpectation.params != nil {
-		mmCollectible.mock.t.Fatalf("LostIdServiceHandlerMock.Collectible mock is already set by Expect")
+		mmCollectible.mock.t.Fatalf("LostIdServiceClientMock.Collectible mock is already set by Expect")
 	}
 
 	if mmCollectible.defaultExpectation.paramPtrs == nil {
-		mmCollectible.defaultExpectation.paramPtrs = &LostIdServiceHandlerMockCollectibleParamPtrs{}
+		mmCollectible.defaultExpectation.paramPtrs = &LostIdServiceClientMockCollectibleParamPtrs{}
 	}
 	mmCollectible.defaultExpectation.paramPtrs.ctx = &ctx
 	mmCollectible.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -202,22 +202,22 @@ func (mmCollectible *mLostIdServiceHandlerMockCollectible) ExpectCtxParam1(ctx c
 	return mmCollectible
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for LostIdServiceHandler.Collectible
-func (mmCollectible *mLostIdServiceHandlerMockCollectible) ExpectPp1Param2(pp1 *connect.Request[v1.CollectibleRequest]) *mLostIdServiceHandlerMockCollectible {
+// ExpectPp1Param2 sets up expected param pp1 for LostIdServiceClient.Collectible
+func (mmCollectible *mLostIdServiceClientMockCollectible) ExpectPp1Param2(pp1 *connect.Request[v1.CollectibleRequest]) *mLostIdServiceClientMockCollectible {
 	if mmCollectible.mock.funcCollectible != nil {
-		mmCollectible.mock.t.Fatalf("LostIdServiceHandlerMock.Collectible mock is already set by Set")
+		mmCollectible.mock.t.Fatalf("LostIdServiceClientMock.Collectible mock is already set by Set")
 	}
 
 	if mmCollectible.defaultExpectation == nil {
-		mmCollectible.defaultExpectation = &LostIdServiceHandlerMockCollectibleExpectation{}
+		mmCollectible.defaultExpectation = &LostIdServiceClientMockCollectibleExpectation{}
 	}
 
 	if mmCollectible.defaultExpectation.params != nil {
-		mmCollectible.mock.t.Fatalf("LostIdServiceHandlerMock.Collectible mock is already set by Expect")
+		mmCollectible.mock.t.Fatalf("LostIdServiceClientMock.Collectible mock is already set by Expect")
 	}
 
 	if mmCollectible.defaultExpectation.paramPtrs == nil {
-		mmCollectible.defaultExpectation.paramPtrs = &LostIdServiceHandlerMockCollectibleParamPtrs{}
+		mmCollectible.defaultExpectation.paramPtrs = &LostIdServiceClientMockCollectibleParamPtrs{}
 	}
 	mmCollectible.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmCollectible.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -225,10 +225,10 @@ func (mmCollectible *mLostIdServiceHandlerMockCollectible) ExpectPp1Param2(pp1 *
 	return mmCollectible
 }
 
-// Inspect accepts an inspector function that has same arguments as the LostIdServiceHandler.Collectible
-func (mmCollectible *mLostIdServiceHandlerMockCollectible) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.CollectibleRequest])) *mLostIdServiceHandlerMockCollectible {
+// Inspect accepts an inspector function that has same arguments as the LostIdServiceClient.Collectible
+func (mmCollectible *mLostIdServiceClientMockCollectible) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.CollectibleRequest])) *mLostIdServiceClientMockCollectible {
 	if mmCollectible.mock.inspectFuncCollectible != nil {
-		mmCollectible.mock.t.Fatalf("Inspect function is already set for LostIdServiceHandlerMock.Collectible")
+		mmCollectible.mock.t.Fatalf("Inspect function is already set for LostIdServiceClientMock.Collectible")
 	}
 
 	mmCollectible.mock.inspectFuncCollectible = f
@@ -236,28 +236,28 @@ func (mmCollectible *mLostIdServiceHandlerMockCollectible) Inspect(f func(ctx co
 	return mmCollectible
 }
 
-// Return sets up results that will be returned by LostIdServiceHandler.Collectible
-func (mmCollectible *mLostIdServiceHandlerMockCollectible) Return(pp2 *connect.Response[v1.CollectibleResponse], err error) *LostIdServiceHandlerMock {
+// Return sets up results that will be returned by LostIdServiceClient.Collectible
+func (mmCollectible *mLostIdServiceClientMockCollectible) Return(pp2 *connect.Response[v1.CollectibleResponse], err error) *LostIdServiceClientMock {
 	if mmCollectible.mock.funcCollectible != nil {
-		mmCollectible.mock.t.Fatalf("LostIdServiceHandlerMock.Collectible mock is already set by Set")
+		mmCollectible.mock.t.Fatalf("LostIdServiceClientMock.Collectible mock is already set by Set")
 	}
 
 	if mmCollectible.defaultExpectation == nil {
-		mmCollectible.defaultExpectation = &LostIdServiceHandlerMockCollectibleExpectation{mock: mmCollectible.mock}
+		mmCollectible.defaultExpectation = &LostIdServiceClientMockCollectibleExpectation{mock: mmCollectible.mock}
 	}
-	mmCollectible.defaultExpectation.results = &LostIdServiceHandlerMockCollectibleResults{pp2, err}
+	mmCollectible.defaultExpectation.results = &LostIdServiceClientMockCollectibleResults{pp2, err}
 	mmCollectible.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmCollectible.mock
 }
 
-// Set uses given function f to mock the LostIdServiceHandler.Collectible method
-func (mmCollectible *mLostIdServiceHandlerMockCollectible) Set(f func(ctx context.Context, pp1 *connect.Request[v1.CollectibleRequest]) (pp2 *connect.Response[v1.CollectibleResponse], err error)) *LostIdServiceHandlerMock {
+// Set uses given function f to mock the LostIdServiceClient.Collectible method
+func (mmCollectible *mLostIdServiceClientMockCollectible) Set(f func(ctx context.Context, pp1 *connect.Request[v1.CollectibleRequest]) (pp2 *connect.Response[v1.CollectibleResponse], err error)) *LostIdServiceClientMock {
 	if mmCollectible.defaultExpectation != nil {
-		mmCollectible.mock.t.Fatalf("Default expectation is already set for the LostIdServiceHandler.Collectible method")
+		mmCollectible.mock.t.Fatalf("Default expectation is already set for the LostIdServiceClient.Collectible method")
 	}
 
 	if len(mmCollectible.expectations) > 0 {
-		mmCollectible.mock.t.Fatalf("Some expectations are already set for the LostIdServiceHandler.Collectible method")
+		mmCollectible.mock.t.Fatalf("Some expectations are already set for the LostIdServiceClient.Collectible method")
 	}
 
 	mmCollectible.mock.funcCollectible = f
@@ -265,39 +265,39 @@ func (mmCollectible *mLostIdServiceHandlerMockCollectible) Set(f func(ctx contex
 	return mmCollectible.mock
 }
 
-// When sets expectation for the LostIdServiceHandler.Collectible which will trigger the result defined by the following
+// When sets expectation for the LostIdServiceClient.Collectible which will trigger the result defined by the following
 // Then helper
-func (mmCollectible *mLostIdServiceHandlerMockCollectible) When(ctx context.Context, pp1 *connect.Request[v1.CollectibleRequest]) *LostIdServiceHandlerMockCollectibleExpectation {
+func (mmCollectible *mLostIdServiceClientMockCollectible) When(ctx context.Context, pp1 *connect.Request[v1.CollectibleRequest]) *LostIdServiceClientMockCollectibleExpectation {
 	if mmCollectible.mock.funcCollectible != nil {
-		mmCollectible.mock.t.Fatalf("LostIdServiceHandlerMock.Collectible mock is already set by Set")
+		mmCollectible.mock.t.Fatalf("LostIdServiceClientMock.Collectible mock is already set by Set")
 	}
 
-	expectation := &LostIdServiceHandlerMockCollectibleExpectation{
+	expectation := &LostIdServiceClientMockCollectibleExpectation{
 		mock:               mmCollectible.mock,
-		params:             &LostIdServiceHandlerMockCollectibleParams{ctx, pp1},
-		expectationOrigins: LostIdServiceHandlerMockCollectibleExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &LostIdServiceClientMockCollectibleParams{ctx, pp1},
+		expectationOrigins: LostIdServiceClientMockCollectibleExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmCollectible.expectations = append(mmCollectible.expectations, expectation)
 	return expectation
 }
 
-// Then sets up LostIdServiceHandler.Collectible return parameters for the expectation previously defined by the When method
-func (e *LostIdServiceHandlerMockCollectibleExpectation) Then(pp2 *connect.Response[v1.CollectibleResponse], err error) *LostIdServiceHandlerMock {
-	e.results = &LostIdServiceHandlerMockCollectibleResults{pp2, err}
+// Then sets up LostIdServiceClient.Collectible return parameters for the expectation previously defined by the When method
+func (e *LostIdServiceClientMockCollectibleExpectation) Then(pp2 *connect.Response[v1.CollectibleResponse], err error) *LostIdServiceClientMock {
+	e.results = &LostIdServiceClientMockCollectibleResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times LostIdServiceHandler.Collectible should be invoked
-func (mmCollectible *mLostIdServiceHandlerMockCollectible) Times(n uint64) *mLostIdServiceHandlerMockCollectible {
+// Times sets number of times LostIdServiceClient.Collectible should be invoked
+func (mmCollectible *mLostIdServiceClientMockCollectible) Times(n uint64) *mLostIdServiceClientMockCollectible {
 	if n == 0 {
-		mmCollectible.mock.t.Fatalf("Times of LostIdServiceHandlerMock.Collectible mock can not be zero")
+		mmCollectible.mock.t.Fatalf("Times of LostIdServiceClientMock.Collectible mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmCollectible.expectedInvocations, n)
 	mmCollectible.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmCollectible
 }
 
-func (mmCollectible *mLostIdServiceHandlerMockCollectible) invocationsDone() bool {
+func (mmCollectible *mLostIdServiceClientMockCollectible) invocationsDone() bool {
 	if len(mmCollectible.expectations) == 0 && mmCollectible.defaultExpectation == nil && mmCollectible.mock.funcCollectible == nil {
 		return true
 	}
@@ -308,8 +308,8 @@ func (mmCollectible *mLostIdServiceHandlerMockCollectible) invocationsDone() boo
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// Collectible implements mm_lostidv1connect.LostIdServiceHandler
-func (mmCollectible *LostIdServiceHandlerMock) Collectible(ctx context.Context, pp1 *connect.Request[v1.CollectibleRequest]) (pp2 *connect.Response[v1.CollectibleResponse], err error) {
+// Collectible implements mm_lostidv1connect.LostIdServiceClient
+func (mmCollectible *LostIdServiceClientMock) Collectible(ctx context.Context, pp1 *connect.Request[v1.CollectibleRequest]) (pp2 *connect.Response[v1.CollectibleResponse], err error) {
 	mm_atomic.AddUint64(&mmCollectible.beforeCollectibleCounter, 1)
 	defer mm_atomic.AddUint64(&mmCollectible.afterCollectibleCounter, 1)
 
@@ -319,7 +319,7 @@ func (mmCollectible *LostIdServiceHandlerMock) Collectible(ctx context.Context, 
 		mmCollectible.inspectFuncCollectible(ctx, pp1)
 	}
 
-	mm_params := LostIdServiceHandlerMockCollectibleParams{ctx, pp1}
+	mm_params := LostIdServiceClientMockCollectibleParams{ctx, pp1}
 
 	// Record call args
 	mmCollectible.CollectibleMock.mutex.Lock()
@@ -338,54 +338,54 @@ func (mmCollectible *LostIdServiceHandlerMock) Collectible(ctx context.Context, 
 		mm_want := mmCollectible.CollectibleMock.defaultExpectation.params
 		mm_want_ptrs := mmCollectible.CollectibleMock.defaultExpectation.paramPtrs
 
-		mm_got := LostIdServiceHandlerMockCollectibleParams{ctx, pp1}
+		mm_got := LostIdServiceClientMockCollectibleParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmCollectible.t.Errorf("LostIdServiceHandlerMock.Collectible got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmCollectible.t.Errorf("LostIdServiceClientMock.Collectible got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmCollectible.CollectibleMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmCollectible.t.Errorf("LostIdServiceHandlerMock.Collectible got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmCollectible.t.Errorf("LostIdServiceClientMock.Collectible got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmCollectible.CollectibleMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmCollectible.t.Errorf("LostIdServiceHandlerMock.Collectible got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmCollectible.t.Errorf("LostIdServiceClientMock.Collectible got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmCollectible.CollectibleMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmCollectible.CollectibleMock.defaultExpectation.results
 		if mm_results == nil {
-			mmCollectible.t.Fatal("No results are set for the LostIdServiceHandlerMock.Collectible")
+			mmCollectible.t.Fatal("No results are set for the LostIdServiceClientMock.Collectible")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmCollectible.funcCollectible != nil {
 		return mmCollectible.funcCollectible(ctx, pp1)
 	}
-	mmCollectible.t.Fatalf("Unexpected call to LostIdServiceHandlerMock.Collectible. %v %v", ctx, pp1)
+	mmCollectible.t.Fatalf("Unexpected call to LostIdServiceClientMock.Collectible. %v %v", ctx, pp1)
 	return
 }
 
-// CollectibleAfterCounter returns a count of finished LostIdServiceHandlerMock.Collectible invocations
-func (mmCollectible *LostIdServiceHandlerMock) CollectibleAfterCounter() uint64 {
+// CollectibleAfterCounter returns a count of finished LostIdServiceClientMock.Collectible invocations
+func (mmCollectible *LostIdServiceClientMock) CollectibleAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmCollectible.afterCollectibleCounter)
 }
 
-// CollectibleBeforeCounter returns a count of LostIdServiceHandlerMock.Collectible invocations
-func (mmCollectible *LostIdServiceHandlerMock) CollectibleBeforeCounter() uint64 {
+// CollectibleBeforeCounter returns a count of LostIdServiceClientMock.Collectible invocations
+func (mmCollectible *LostIdServiceClientMock) CollectibleBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmCollectible.beforeCollectibleCounter)
 }
 
-// Calls returns a list of arguments used in each call to LostIdServiceHandlerMock.Collectible.
+// Calls returns a list of arguments used in each call to LostIdServiceClientMock.Collectible.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmCollectible *mLostIdServiceHandlerMockCollectible) Calls() []*LostIdServiceHandlerMockCollectibleParams {
+func (mmCollectible *mLostIdServiceClientMockCollectible) Calls() []*LostIdServiceClientMockCollectibleParams {
 	mmCollectible.mutex.RLock()
 
-	argCopy := make([]*LostIdServiceHandlerMockCollectibleParams, len(mmCollectible.callArgs))
+	argCopy := make([]*LostIdServiceClientMockCollectibleParams, len(mmCollectible.callArgs))
 	copy(argCopy, mmCollectible.callArgs)
 
 	mmCollectible.mutex.RUnlock()
@@ -395,7 +395,7 @@ func (mmCollectible *mLostIdServiceHandlerMockCollectible) Calls() []*LostIdServ
 
 // MinimockCollectibleDone returns true if the count of the Collectible invocations corresponds
 // the number of defined expectations
-func (m *LostIdServiceHandlerMock) MinimockCollectibleDone() bool {
+func (m *LostIdServiceClientMock) MinimockCollectibleDone() bool {
 	if m.CollectibleMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -411,10 +411,10 @@ func (m *LostIdServiceHandlerMock) MinimockCollectibleDone() bool {
 }
 
 // MinimockCollectibleInspect logs each unmet expectation
-func (m *LostIdServiceHandlerMock) MinimockCollectibleInspect() {
+func (m *LostIdServiceClientMock) MinimockCollectibleInspect() {
 	for _, e := range m.CollectibleMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to LostIdServiceHandlerMock.Collectible at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to LostIdServiceClientMock.Collectible at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -422,71 +422,69 @@ func (m *LostIdServiceHandlerMock) MinimockCollectibleInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.CollectibleMock.defaultExpectation != nil && afterCollectibleCounter < 1 {
 		if m.CollectibleMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to LostIdServiceHandlerMock.Collectible at\n%s", m.CollectibleMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to LostIdServiceClientMock.Collectible at\n%s", m.CollectibleMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to LostIdServiceHandlerMock.Collectible at\n%s with params: %#v", m.CollectibleMock.defaultExpectation.expectationOrigins.origin, *m.CollectibleMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to LostIdServiceClientMock.Collectible at\n%s with params: %#v", m.CollectibleMock.defaultExpectation.expectationOrigins.origin, *m.CollectibleMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcCollectible != nil && afterCollectibleCounter < 1 {
-		m.t.Errorf("Expected call to LostIdServiceHandlerMock.Collectible at\n%s", m.funcCollectibleOrigin)
+		m.t.Errorf("Expected call to LostIdServiceClientMock.Collectible at\n%s", m.funcCollectibleOrigin)
 	}
 
 	if !m.CollectibleMock.invocationsDone() && afterCollectibleCounter > 0 {
-		m.t.Errorf("Expected %d calls to LostIdServiceHandlerMock.Collectible at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to LostIdServiceClientMock.Collectible at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.CollectibleMock.expectedInvocations), m.CollectibleMock.expectedInvocationsOrigin, afterCollectibleCounter)
 	}
 }
 
-type mLostIdServiceHandlerMockListCollectible struct {
+type mLostIdServiceClientMockListCollectible struct {
 	optional           bool
-	mock               *LostIdServiceHandlerMock
-	defaultExpectation *LostIdServiceHandlerMockListCollectibleExpectation
-	expectations       []*LostIdServiceHandlerMockListCollectibleExpectation
+	mock               *LostIdServiceClientMock
+	defaultExpectation *LostIdServiceClientMockListCollectibleExpectation
+	expectations       []*LostIdServiceClientMockListCollectibleExpectation
 
-	callArgs []*LostIdServiceHandlerMockListCollectibleParams
+	callArgs []*LostIdServiceClientMockListCollectibleParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// LostIdServiceHandlerMockListCollectibleExpectation specifies expectation struct of the LostIdServiceHandler.ListCollectible
-type LostIdServiceHandlerMockListCollectibleExpectation struct {
-	mock               *LostIdServiceHandlerMock
-	params             *LostIdServiceHandlerMockListCollectibleParams
-	paramPtrs          *LostIdServiceHandlerMockListCollectibleParamPtrs
-	expectationOrigins LostIdServiceHandlerMockListCollectibleExpectationOrigins
-	results            *LostIdServiceHandlerMockListCollectibleResults
+// LostIdServiceClientMockListCollectibleExpectation specifies expectation struct of the LostIdServiceClient.ListCollectible
+type LostIdServiceClientMockListCollectibleExpectation struct {
+	mock               *LostIdServiceClientMock
+	params             *LostIdServiceClientMockListCollectibleParams
+	paramPtrs          *LostIdServiceClientMockListCollectibleParamPtrs
+	expectationOrigins LostIdServiceClientMockListCollectibleExpectationOrigins
+	results            *LostIdServiceClientMockListCollectibleResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// LostIdServiceHandlerMockListCollectibleParams contains parameters of the LostIdServiceHandler.ListCollectible
-type LostIdServiceHandlerMockListCollectibleParams struct {
+// LostIdServiceClientMockListCollectibleParams contains parameters of the LostIdServiceClient.ListCollectible
+type LostIdServiceClientMockListCollectibleParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.ListCollectibleRequest]
-	pp2 *connect.ServerStream[v1.ListCollectibleResponse]
 }
 
-// LostIdServiceHandlerMockListCollectibleParamPtrs contains pointers to parameters of the LostIdServiceHandler.ListCollectible
-type LostIdServiceHandlerMockListCollectibleParamPtrs struct {
+// LostIdServiceClientMockListCollectibleParamPtrs contains pointers to parameters of the LostIdServiceClient.ListCollectible
+type LostIdServiceClientMockListCollectibleParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.ListCollectibleRequest]
-	pp2 **connect.ServerStream[v1.ListCollectibleResponse]
 }
 
-// LostIdServiceHandlerMockListCollectibleResults contains results of the LostIdServiceHandler.ListCollectible
-type LostIdServiceHandlerMockListCollectibleResults struct {
+// LostIdServiceClientMockListCollectibleResults contains results of the LostIdServiceClient.ListCollectible
+type LostIdServiceClientMockListCollectibleResults struct {
+	pp2 *connect.ServerStreamForClient[v1.ListCollectibleResponse]
 	err error
 }
 
-// LostIdServiceHandlerMockListCollectibleOrigins contains origins of expectations of the LostIdServiceHandler.ListCollectible
-type LostIdServiceHandlerMockListCollectibleExpectationOrigins struct {
+// LostIdServiceClientMockListCollectibleOrigins contains origins of expectations of the LostIdServiceClient.ListCollectible
+type LostIdServiceClientMockListCollectibleExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
-	originPp2 string
 }
 
 // Marks this method to be optional. The default behavior of any method with Return() is '1 or more', meaning
@@ -494,26 +492,26 @@ type LostIdServiceHandlerMockListCollectibleExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmListCollectible *mLostIdServiceHandlerMockListCollectible) Optional() *mLostIdServiceHandlerMockListCollectible {
+func (mmListCollectible *mLostIdServiceClientMockListCollectible) Optional() *mLostIdServiceClientMockListCollectible {
 	mmListCollectible.optional = true
 	return mmListCollectible
 }
 
-// Expect sets up expected params for LostIdServiceHandler.ListCollectible
-func (mmListCollectible *mLostIdServiceHandlerMockListCollectible) Expect(ctx context.Context, pp1 *connect.Request[v1.ListCollectibleRequest], pp2 *connect.ServerStream[v1.ListCollectibleResponse]) *mLostIdServiceHandlerMockListCollectible {
+// Expect sets up expected params for LostIdServiceClient.ListCollectible
+func (mmListCollectible *mLostIdServiceClientMockListCollectible) Expect(ctx context.Context, pp1 *connect.Request[v1.ListCollectibleRequest]) *mLostIdServiceClientMockListCollectible {
 	if mmListCollectible.mock.funcListCollectible != nil {
-		mmListCollectible.mock.t.Fatalf("LostIdServiceHandlerMock.ListCollectible mock is already set by Set")
+		mmListCollectible.mock.t.Fatalf("LostIdServiceClientMock.ListCollectible mock is already set by Set")
 	}
 
 	if mmListCollectible.defaultExpectation == nil {
-		mmListCollectible.defaultExpectation = &LostIdServiceHandlerMockListCollectibleExpectation{}
+		mmListCollectible.defaultExpectation = &LostIdServiceClientMockListCollectibleExpectation{}
 	}
 
 	if mmListCollectible.defaultExpectation.paramPtrs != nil {
-		mmListCollectible.mock.t.Fatalf("LostIdServiceHandlerMock.ListCollectible mock is already set by ExpectParams functions")
+		mmListCollectible.mock.t.Fatalf("LostIdServiceClientMock.ListCollectible mock is already set by ExpectParams functions")
 	}
 
-	mmListCollectible.defaultExpectation.params = &LostIdServiceHandlerMockListCollectibleParams{ctx, pp1, pp2}
+	mmListCollectible.defaultExpectation.params = &LostIdServiceClientMockListCollectibleParams{ctx, pp1}
 	mmListCollectible.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmListCollectible.expectations {
 		if minimock.Equal(e.params, mmListCollectible.defaultExpectation.params) {
@@ -524,22 +522,22 @@ func (mmListCollectible *mLostIdServiceHandlerMockListCollectible) Expect(ctx co
 	return mmListCollectible
 }
 
-// ExpectCtxParam1 sets up expected param ctx for LostIdServiceHandler.ListCollectible
-func (mmListCollectible *mLostIdServiceHandlerMockListCollectible) ExpectCtxParam1(ctx context.Context) *mLostIdServiceHandlerMockListCollectible {
+// ExpectCtxParam1 sets up expected param ctx for LostIdServiceClient.ListCollectible
+func (mmListCollectible *mLostIdServiceClientMockListCollectible) ExpectCtxParam1(ctx context.Context) *mLostIdServiceClientMockListCollectible {
 	if mmListCollectible.mock.funcListCollectible != nil {
-		mmListCollectible.mock.t.Fatalf("LostIdServiceHandlerMock.ListCollectible mock is already set by Set")
+		mmListCollectible.mock.t.Fatalf("LostIdServiceClientMock.ListCollectible mock is already set by Set")
 	}
 
 	if mmListCollectible.defaultExpectation == nil {
-		mmListCollectible.defaultExpectation = &LostIdServiceHandlerMockListCollectibleExpectation{}
+		mmListCollectible.defaultExpectation = &LostIdServiceClientMockListCollectibleExpectation{}
 	}
 
 	if mmListCollectible.defaultExpectation.params != nil {
-		mmListCollectible.mock.t.Fatalf("LostIdServiceHandlerMock.ListCollectible mock is already set by Expect")
+		mmListCollectible.mock.t.Fatalf("LostIdServiceClientMock.ListCollectible mock is already set by Expect")
 	}
 
 	if mmListCollectible.defaultExpectation.paramPtrs == nil {
-		mmListCollectible.defaultExpectation.paramPtrs = &LostIdServiceHandlerMockListCollectibleParamPtrs{}
+		mmListCollectible.defaultExpectation.paramPtrs = &LostIdServiceClientMockListCollectibleParamPtrs{}
 	}
 	mmListCollectible.defaultExpectation.paramPtrs.ctx = &ctx
 	mmListCollectible.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -547,22 +545,22 @@ func (mmListCollectible *mLostIdServiceHandlerMockListCollectible) ExpectCtxPara
 	return mmListCollectible
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for LostIdServiceHandler.ListCollectible
-func (mmListCollectible *mLostIdServiceHandlerMockListCollectible) ExpectPp1Param2(pp1 *connect.Request[v1.ListCollectibleRequest]) *mLostIdServiceHandlerMockListCollectible {
+// ExpectPp1Param2 sets up expected param pp1 for LostIdServiceClient.ListCollectible
+func (mmListCollectible *mLostIdServiceClientMockListCollectible) ExpectPp1Param2(pp1 *connect.Request[v1.ListCollectibleRequest]) *mLostIdServiceClientMockListCollectible {
 	if mmListCollectible.mock.funcListCollectible != nil {
-		mmListCollectible.mock.t.Fatalf("LostIdServiceHandlerMock.ListCollectible mock is already set by Set")
+		mmListCollectible.mock.t.Fatalf("LostIdServiceClientMock.ListCollectible mock is already set by Set")
 	}
 
 	if mmListCollectible.defaultExpectation == nil {
-		mmListCollectible.defaultExpectation = &LostIdServiceHandlerMockListCollectibleExpectation{}
+		mmListCollectible.defaultExpectation = &LostIdServiceClientMockListCollectibleExpectation{}
 	}
 
 	if mmListCollectible.defaultExpectation.params != nil {
-		mmListCollectible.mock.t.Fatalf("LostIdServiceHandlerMock.ListCollectible mock is already set by Expect")
+		mmListCollectible.mock.t.Fatalf("LostIdServiceClientMock.ListCollectible mock is already set by Expect")
 	}
 
 	if mmListCollectible.defaultExpectation.paramPtrs == nil {
-		mmListCollectible.defaultExpectation.paramPtrs = &LostIdServiceHandlerMockListCollectibleParamPtrs{}
+		mmListCollectible.defaultExpectation.paramPtrs = &LostIdServiceClientMockListCollectibleParamPtrs{}
 	}
 	mmListCollectible.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmListCollectible.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -570,33 +568,10 @@ func (mmListCollectible *mLostIdServiceHandlerMockListCollectible) ExpectPp1Para
 	return mmListCollectible
 }
 
-// ExpectPp2Param3 sets up expected param pp2 for LostIdServiceHandler.ListCollectible
-func (mmListCollectible *mLostIdServiceHandlerMockListCollectible) ExpectPp2Param3(pp2 *connect.ServerStream[v1.ListCollectibleResponse]) *mLostIdServiceHandlerMockListCollectible {
-	if mmListCollectible.mock.funcListCollectible != nil {
-		mmListCollectible.mock.t.Fatalf("LostIdServiceHandlerMock.ListCollectible mock is already set by Set")
-	}
-
-	if mmListCollectible.defaultExpectation == nil {
-		mmListCollectible.defaultExpectation = &LostIdServiceHandlerMockListCollectibleExpectation{}
-	}
-
-	if mmListCollectible.defaultExpectation.params != nil {
-		mmListCollectible.mock.t.Fatalf("LostIdServiceHandlerMock.ListCollectible mock is already set by Expect")
-	}
-
-	if mmListCollectible.defaultExpectation.paramPtrs == nil {
-		mmListCollectible.defaultExpectation.paramPtrs = &LostIdServiceHandlerMockListCollectibleParamPtrs{}
-	}
-	mmListCollectible.defaultExpectation.paramPtrs.pp2 = &pp2
-	mmListCollectible.defaultExpectation.expectationOrigins.originPp2 = minimock.CallerInfo(1)
-
-	return mmListCollectible
-}
-
-// Inspect accepts an inspector function that has same arguments as the LostIdServiceHandler.ListCollectible
-func (mmListCollectible *mLostIdServiceHandlerMockListCollectible) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.ListCollectibleRequest], pp2 *connect.ServerStream[v1.ListCollectibleResponse])) *mLostIdServiceHandlerMockListCollectible {
+// Inspect accepts an inspector function that has same arguments as the LostIdServiceClient.ListCollectible
+func (mmListCollectible *mLostIdServiceClientMockListCollectible) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.ListCollectibleRequest])) *mLostIdServiceClientMockListCollectible {
 	if mmListCollectible.mock.inspectFuncListCollectible != nil {
-		mmListCollectible.mock.t.Fatalf("Inspect function is already set for LostIdServiceHandlerMock.ListCollectible")
+		mmListCollectible.mock.t.Fatalf("Inspect function is already set for LostIdServiceClientMock.ListCollectible")
 	}
 
 	mmListCollectible.mock.inspectFuncListCollectible = f
@@ -604,28 +579,28 @@ func (mmListCollectible *mLostIdServiceHandlerMockListCollectible) Inspect(f fun
 	return mmListCollectible
 }
 
-// Return sets up results that will be returned by LostIdServiceHandler.ListCollectible
-func (mmListCollectible *mLostIdServiceHandlerMockListCollectible) Return(err error) *LostIdServiceHandlerMock {
+// Return sets up results that will be returned by LostIdServiceClient.ListCollectible
+func (mmListCollectible *mLostIdServiceClientMockListCollectible) Return(pp2 *connect.ServerStreamForClient[v1.ListCollectibleResponse], err error) *LostIdServiceClientMock {
 	if mmListCollectible.mock.funcListCollectible != nil {
-		mmListCollectible.mock.t.Fatalf("LostIdServiceHandlerMock.ListCollectible mock is already set by Set")
+		mmListCollectible.mock.t.Fatalf("LostIdServiceClientMock.ListCollectible mock is already set by Set")
 	}
 
 	if mmListCollectible.defaultExpectation == nil {
-		mmListCollectible.defaultExpectation = &LostIdServiceHandlerMockListCollectibleExpectation{mock: mmListCollectible.mock}
+		mmListCollectible.defaultExpectation = &LostIdServiceClientMockListCollectibleExpectation{mock: mmListCollectible.mock}
 	}
-	mmListCollectible.defaultExpectation.results = &LostIdServiceHandlerMockListCollectibleResults{err}
+	mmListCollectible.defaultExpectation.results = &LostIdServiceClientMockListCollectibleResults{pp2, err}
 	mmListCollectible.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmListCollectible.mock
 }
 
-// Set uses given function f to mock the LostIdServiceHandler.ListCollectible method
-func (mmListCollectible *mLostIdServiceHandlerMockListCollectible) Set(f func(ctx context.Context, pp1 *connect.Request[v1.ListCollectibleRequest], pp2 *connect.ServerStream[v1.ListCollectibleResponse]) (err error)) *LostIdServiceHandlerMock {
+// Set uses given function f to mock the LostIdServiceClient.ListCollectible method
+func (mmListCollectible *mLostIdServiceClientMockListCollectible) Set(f func(ctx context.Context, pp1 *connect.Request[v1.ListCollectibleRequest]) (pp2 *connect.ServerStreamForClient[v1.ListCollectibleResponse], err error)) *LostIdServiceClientMock {
 	if mmListCollectible.defaultExpectation != nil {
-		mmListCollectible.mock.t.Fatalf("Default expectation is already set for the LostIdServiceHandler.ListCollectible method")
+		mmListCollectible.mock.t.Fatalf("Default expectation is already set for the LostIdServiceClient.ListCollectible method")
 	}
 
 	if len(mmListCollectible.expectations) > 0 {
-		mmListCollectible.mock.t.Fatalf("Some expectations are already set for the LostIdServiceHandler.ListCollectible method")
+		mmListCollectible.mock.t.Fatalf("Some expectations are already set for the LostIdServiceClient.ListCollectible method")
 	}
 
 	mmListCollectible.mock.funcListCollectible = f
@@ -633,39 +608,39 @@ func (mmListCollectible *mLostIdServiceHandlerMockListCollectible) Set(f func(ct
 	return mmListCollectible.mock
 }
 
-// When sets expectation for the LostIdServiceHandler.ListCollectible which will trigger the result defined by the following
+// When sets expectation for the LostIdServiceClient.ListCollectible which will trigger the result defined by the following
 // Then helper
-func (mmListCollectible *mLostIdServiceHandlerMockListCollectible) When(ctx context.Context, pp1 *connect.Request[v1.ListCollectibleRequest], pp2 *connect.ServerStream[v1.ListCollectibleResponse]) *LostIdServiceHandlerMockListCollectibleExpectation {
+func (mmListCollectible *mLostIdServiceClientMockListCollectible) When(ctx context.Context, pp1 *connect.Request[v1.ListCollectibleRequest]) *LostIdServiceClientMockListCollectibleExpectation {
 	if mmListCollectible.mock.funcListCollectible != nil {
-		mmListCollectible.mock.t.Fatalf("LostIdServiceHandlerMock.ListCollectible mock is already set by Set")
+		mmListCollectible.mock.t.Fatalf("LostIdServiceClientMock.ListCollectible mock is already set by Set")
 	}
 
-	expectation := &LostIdServiceHandlerMockListCollectibleExpectation{
+	expectation := &LostIdServiceClientMockListCollectibleExpectation{
 		mock:               mmListCollectible.mock,
-		params:             &LostIdServiceHandlerMockListCollectibleParams{ctx, pp1, pp2},
-		expectationOrigins: LostIdServiceHandlerMockListCollectibleExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &LostIdServiceClientMockListCollectibleParams{ctx, pp1},
+		expectationOrigins: LostIdServiceClientMockListCollectibleExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmListCollectible.expectations = append(mmListCollectible.expectations, expectation)
 	return expectation
 }
 
-// Then sets up LostIdServiceHandler.ListCollectible return parameters for the expectation previously defined by the When method
-func (e *LostIdServiceHandlerMockListCollectibleExpectation) Then(err error) *LostIdServiceHandlerMock {
-	e.results = &LostIdServiceHandlerMockListCollectibleResults{err}
+// Then sets up LostIdServiceClient.ListCollectible return parameters for the expectation previously defined by the When method
+func (e *LostIdServiceClientMockListCollectibleExpectation) Then(pp2 *connect.ServerStreamForClient[v1.ListCollectibleResponse], err error) *LostIdServiceClientMock {
+	e.results = &LostIdServiceClientMockListCollectibleResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times LostIdServiceHandler.ListCollectible should be invoked
-func (mmListCollectible *mLostIdServiceHandlerMockListCollectible) Times(n uint64) *mLostIdServiceHandlerMockListCollectible {
+// Times sets number of times LostIdServiceClient.ListCollectible should be invoked
+func (mmListCollectible *mLostIdServiceClientMockListCollectible) Times(n uint64) *mLostIdServiceClientMockListCollectible {
 	if n == 0 {
-		mmListCollectible.mock.t.Fatalf("Times of LostIdServiceHandlerMock.ListCollectible mock can not be zero")
+		mmListCollectible.mock.t.Fatalf("Times of LostIdServiceClientMock.ListCollectible mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmListCollectible.expectedInvocations, n)
 	mmListCollectible.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmListCollectible
 }
 
-func (mmListCollectible *mLostIdServiceHandlerMockListCollectible) invocationsDone() bool {
+func (mmListCollectible *mLostIdServiceClientMockListCollectible) invocationsDone() bool {
 	if len(mmListCollectible.expectations) == 0 && mmListCollectible.defaultExpectation == nil && mmListCollectible.mock.funcListCollectible == nil {
 		return true
 	}
@@ -676,18 +651,18 @@ func (mmListCollectible *mLostIdServiceHandlerMockListCollectible) invocationsDo
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// ListCollectible implements mm_lostidv1connect.LostIdServiceHandler
-func (mmListCollectible *LostIdServiceHandlerMock) ListCollectible(ctx context.Context, pp1 *connect.Request[v1.ListCollectibleRequest], pp2 *connect.ServerStream[v1.ListCollectibleResponse]) (err error) {
+// ListCollectible implements mm_lostidv1connect.LostIdServiceClient
+func (mmListCollectible *LostIdServiceClientMock) ListCollectible(ctx context.Context, pp1 *connect.Request[v1.ListCollectibleRequest]) (pp2 *connect.ServerStreamForClient[v1.ListCollectibleResponse], err error) {
 	mm_atomic.AddUint64(&mmListCollectible.beforeListCollectibleCounter, 1)
 	defer mm_atomic.AddUint64(&mmListCollectible.afterListCollectibleCounter, 1)
 
 	mmListCollectible.t.Helper()
 
 	if mmListCollectible.inspectFuncListCollectible != nil {
-		mmListCollectible.inspectFuncListCollectible(ctx, pp1, pp2)
+		mmListCollectible.inspectFuncListCollectible(ctx, pp1)
 	}
 
-	mm_params := LostIdServiceHandlerMockListCollectibleParams{ctx, pp1, pp2}
+	mm_params := LostIdServiceClientMockListCollectibleParams{ctx, pp1}
 
 	// Record call args
 	mmListCollectible.ListCollectibleMock.mutex.Lock()
@@ -697,7 +672,7 @@ func (mmListCollectible *LostIdServiceHandlerMock) ListCollectible(ctx context.C
 	for _, e := range mmListCollectible.ListCollectibleMock.expectations {
 		if minimock.Equal(*e.params, mm_params) {
 			mm_atomic.AddUint64(&e.Counter, 1)
-			return e.results.err
+			return e.results.pp2, e.results.err
 		}
 	}
 
@@ -706,59 +681,54 @@ func (mmListCollectible *LostIdServiceHandlerMock) ListCollectible(ctx context.C
 		mm_want := mmListCollectible.ListCollectibleMock.defaultExpectation.params
 		mm_want_ptrs := mmListCollectible.ListCollectibleMock.defaultExpectation.paramPtrs
 
-		mm_got := LostIdServiceHandlerMockListCollectibleParams{ctx, pp1, pp2}
+		mm_got := LostIdServiceClientMockListCollectibleParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmListCollectible.t.Errorf("LostIdServiceHandlerMock.ListCollectible got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmListCollectible.t.Errorf("LostIdServiceClientMock.ListCollectible got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmListCollectible.ListCollectibleMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmListCollectible.t.Errorf("LostIdServiceHandlerMock.ListCollectible got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmListCollectible.t.Errorf("LostIdServiceClientMock.ListCollectible got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmListCollectible.ListCollectibleMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
-			if mm_want_ptrs.pp2 != nil && !minimock.Equal(*mm_want_ptrs.pp2, mm_got.pp2) {
-				mmListCollectible.t.Errorf("LostIdServiceHandlerMock.ListCollectible got unexpected parameter pp2, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
-					mmListCollectible.ListCollectibleMock.defaultExpectation.expectationOrigins.originPp2, *mm_want_ptrs.pp2, mm_got.pp2, minimock.Diff(*mm_want_ptrs.pp2, mm_got.pp2))
-			}
-
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmListCollectible.t.Errorf("LostIdServiceHandlerMock.ListCollectible got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmListCollectible.t.Errorf("LostIdServiceClientMock.ListCollectible got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmListCollectible.ListCollectibleMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmListCollectible.ListCollectibleMock.defaultExpectation.results
 		if mm_results == nil {
-			mmListCollectible.t.Fatal("No results are set for the LostIdServiceHandlerMock.ListCollectible")
+			mmListCollectible.t.Fatal("No results are set for the LostIdServiceClientMock.ListCollectible")
 		}
-		return (*mm_results).err
+		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmListCollectible.funcListCollectible != nil {
-		return mmListCollectible.funcListCollectible(ctx, pp1, pp2)
+		return mmListCollectible.funcListCollectible(ctx, pp1)
 	}
-	mmListCollectible.t.Fatalf("Unexpected call to LostIdServiceHandlerMock.ListCollectible. %v %v %v", ctx, pp1, pp2)
+	mmListCollectible.t.Fatalf("Unexpected call to LostIdServiceClientMock.ListCollectible. %v %v", ctx, pp1)
 	return
 }
 
-// ListCollectibleAfterCounter returns a count of finished LostIdServiceHandlerMock.ListCollectible invocations
-func (mmListCollectible *LostIdServiceHandlerMock) ListCollectibleAfterCounter() uint64 {
+// ListCollectibleAfterCounter returns a count of finished LostIdServiceClientMock.ListCollectible invocations
+func (mmListCollectible *LostIdServiceClientMock) ListCollectibleAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmListCollectible.afterListCollectibleCounter)
 }
 
-// ListCollectibleBeforeCounter returns a count of LostIdServiceHandlerMock.ListCollectible invocations
-func (mmListCollectible *LostIdServiceHandlerMock) ListCollectibleBeforeCounter() uint64 {
+// ListCollectibleBeforeCounter returns a count of LostIdServiceClientMock.ListCollectible invocations
+func (mmListCollectible *LostIdServiceClientMock) ListCollectibleBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmListCollectible.beforeListCollectibleCounter)
 }
 
-// Calls returns a list of arguments used in each call to LostIdServiceHandlerMock.ListCollectible.
+// Calls returns a list of arguments used in each call to LostIdServiceClientMock.ListCollectible.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmListCollectible *mLostIdServiceHandlerMockListCollectible) Calls() []*LostIdServiceHandlerMockListCollectibleParams {
+func (mmListCollectible *mLostIdServiceClientMockListCollectible) Calls() []*LostIdServiceClientMockListCollectibleParams {
 	mmListCollectible.mutex.RLock()
 
-	argCopy := make([]*LostIdServiceHandlerMockListCollectibleParams, len(mmListCollectible.callArgs))
+	argCopy := make([]*LostIdServiceClientMockListCollectibleParams, len(mmListCollectible.callArgs))
 	copy(argCopy, mmListCollectible.callArgs)
 
 	mmListCollectible.mutex.RUnlock()
@@ -768,7 +738,7 @@ func (mmListCollectible *mLostIdServiceHandlerMockListCollectible) Calls() []*Lo
 
 // MinimockListCollectibleDone returns true if the count of the ListCollectible invocations corresponds
 // the number of defined expectations
-func (m *LostIdServiceHandlerMock) MinimockListCollectibleDone() bool {
+func (m *LostIdServiceClientMock) MinimockListCollectibleDone() bool {
 	if m.ListCollectibleMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -784,10 +754,10 @@ func (m *LostIdServiceHandlerMock) MinimockListCollectibleDone() bool {
 }
 
 // MinimockListCollectibleInspect logs each unmet expectation
-func (m *LostIdServiceHandlerMock) MinimockListCollectibleInspect() {
+func (m *LostIdServiceClientMock) MinimockListCollectibleInspect() {
 	for _, e := range m.ListCollectibleMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to LostIdServiceHandlerMock.ListCollectible at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to LostIdServiceClientMock.ListCollectible at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -795,71 +765,69 @@ func (m *LostIdServiceHandlerMock) MinimockListCollectibleInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.ListCollectibleMock.defaultExpectation != nil && afterListCollectibleCounter < 1 {
 		if m.ListCollectibleMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to LostIdServiceHandlerMock.ListCollectible at\n%s", m.ListCollectibleMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to LostIdServiceClientMock.ListCollectible at\n%s", m.ListCollectibleMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to LostIdServiceHandlerMock.ListCollectible at\n%s with params: %#v", m.ListCollectibleMock.defaultExpectation.expectationOrigins.origin, *m.ListCollectibleMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to LostIdServiceClientMock.ListCollectible at\n%s with params: %#v", m.ListCollectibleMock.defaultExpectation.expectationOrigins.origin, *m.ListCollectibleMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcListCollectible != nil && afterListCollectibleCounter < 1 {
-		m.t.Errorf("Expected call to LostIdServiceHandlerMock.ListCollectible at\n%s", m.funcListCollectibleOrigin)
+		m.t.Errorf("Expected call to LostIdServiceClientMock.ListCollectible at\n%s", m.funcListCollectibleOrigin)
 	}
 
 	if !m.ListCollectibleMock.invocationsDone() && afterListCollectibleCounter > 0 {
-		m.t.Errorf("Expected %d calls to LostIdServiceHandlerMock.ListCollectible at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to LostIdServiceClientMock.ListCollectible at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.ListCollectibleMock.expectedInvocations), m.ListCollectibleMock.expectedInvocationsOrigin, afterListCollectibleCounter)
 	}
 }
 
-type mLostIdServiceHandlerMockListSearch struct {
+type mLostIdServiceClientMockListSearch struct {
 	optional           bool
-	mock               *LostIdServiceHandlerMock
-	defaultExpectation *LostIdServiceHandlerMockListSearchExpectation
-	expectations       []*LostIdServiceHandlerMockListSearchExpectation
+	mock               *LostIdServiceClientMock
+	defaultExpectation *LostIdServiceClientMockListSearchExpectation
+	expectations       []*LostIdServiceClientMockListSearchExpectation
 
-	callArgs []*LostIdServiceHandlerMockListSearchParams
+	callArgs []*LostIdServiceClientMockListSearchParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// LostIdServiceHandlerMockListSearchExpectation specifies expectation struct of the LostIdServiceHandler.ListSearch
-type LostIdServiceHandlerMockListSearchExpectation struct {
-	mock               *LostIdServiceHandlerMock
-	params             *LostIdServiceHandlerMockListSearchParams
-	paramPtrs          *LostIdServiceHandlerMockListSearchParamPtrs
-	expectationOrigins LostIdServiceHandlerMockListSearchExpectationOrigins
-	results            *LostIdServiceHandlerMockListSearchResults
+// LostIdServiceClientMockListSearchExpectation specifies expectation struct of the LostIdServiceClient.ListSearch
+type LostIdServiceClientMockListSearchExpectation struct {
+	mock               *LostIdServiceClientMock
+	params             *LostIdServiceClientMockListSearchParams
+	paramPtrs          *LostIdServiceClientMockListSearchParamPtrs
+	expectationOrigins LostIdServiceClientMockListSearchExpectationOrigins
+	results            *LostIdServiceClientMockListSearchResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// LostIdServiceHandlerMockListSearchParams contains parameters of the LostIdServiceHandler.ListSearch
-type LostIdServiceHandlerMockListSearchParams struct {
+// LostIdServiceClientMockListSearchParams contains parameters of the LostIdServiceClient.ListSearch
+type LostIdServiceClientMockListSearchParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.ListSearchRequest]
-	pp2 *connect.ServerStream[v1.ListSearchResponse]
 }
 
-// LostIdServiceHandlerMockListSearchParamPtrs contains pointers to parameters of the LostIdServiceHandler.ListSearch
-type LostIdServiceHandlerMockListSearchParamPtrs struct {
+// LostIdServiceClientMockListSearchParamPtrs contains pointers to parameters of the LostIdServiceClient.ListSearch
+type LostIdServiceClientMockListSearchParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.ListSearchRequest]
-	pp2 **connect.ServerStream[v1.ListSearchResponse]
 }
 
-// LostIdServiceHandlerMockListSearchResults contains results of the LostIdServiceHandler.ListSearch
-type LostIdServiceHandlerMockListSearchResults struct {
+// LostIdServiceClientMockListSearchResults contains results of the LostIdServiceClient.ListSearch
+type LostIdServiceClientMockListSearchResults struct {
+	pp2 *connect.ServerStreamForClient[v1.ListSearchResponse]
 	err error
 }
 
-// LostIdServiceHandlerMockListSearchOrigins contains origins of expectations of the LostIdServiceHandler.ListSearch
-type LostIdServiceHandlerMockListSearchExpectationOrigins struct {
+// LostIdServiceClientMockListSearchOrigins contains origins of expectations of the LostIdServiceClient.ListSearch
+type LostIdServiceClientMockListSearchExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
-	originPp2 string
 }
 
 // Marks this method to be optional. The default behavior of any method with Return() is '1 or more', meaning
@@ -867,26 +835,26 @@ type LostIdServiceHandlerMockListSearchExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmListSearch *mLostIdServiceHandlerMockListSearch) Optional() *mLostIdServiceHandlerMockListSearch {
+func (mmListSearch *mLostIdServiceClientMockListSearch) Optional() *mLostIdServiceClientMockListSearch {
 	mmListSearch.optional = true
 	return mmListSearch
 }
 
-// Expect sets up expected params for LostIdServiceHandler.ListSearch
-func (mmListSearch *mLostIdServiceHandlerMockListSearch) Expect(ctx context.Context, pp1 *connect.Request[v1.ListSearchRequest], pp2 *connect.ServerStream[v1.ListSearchResponse]) *mLostIdServiceHandlerMockListSearch {
+// Expect sets up expected params for LostIdServiceClient.ListSearch
+func (mmListSearch *mLostIdServiceClientMockListSearch) Expect(ctx context.Context, pp1 *connect.Request[v1.ListSearchRequest]) *mLostIdServiceClientMockListSearch {
 	if mmListSearch.mock.funcListSearch != nil {
-		mmListSearch.mock.t.Fatalf("LostIdServiceHandlerMock.ListSearch mock is already set by Set")
+		mmListSearch.mock.t.Fatalf("LostIdServiceClientMock.ListSearch mock is already set by Set")
 	}
 
 	if mmListSearch.defaultExpectation == nil {
-		mmListSearch.defaultExpectation = &LostIdServiceHandlerMockListSearchExpectation{}
+		mmListSearch.defaultExpectation = &LostIdServiceClientMockListSearchExpectation{}
 	}
 
 	if mmListSearch.defaultExpectation.paramPtrs != nil {
-		mmListSearch.mock.t.Fatalf("LostIdServiceHandlerMock.ListSearch mock is already set by ExpectParams functions")
+		mmListSearch.mock.t.Fatalf("LostIdServiceClientMock.ListSearch mock is already set by ExpectParams functions")
 	}
 
-	mmListSearch.defaultExpectation.params = &LostIdServiceHandlerMockListSearchParams{ctx, pp1, pp2}
+	mmListSearch.defaultExpectation.params = &LostIdServiceClientMockListSearchParams{ctx, pp1}
 	mmListSearch.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmListSearch.expectations {
 		if minimock.Equal(e.params, mmListSearch.defaultExpectation.params) {
@@ -897,22 +865,22 @@ func (mmListSearch *mLostIdServiceHandlerMockListSearch) Expect(ctx context.Cont
 	return mmListSearch
 }
 
-// ExpectCtxParam1 sets up expected param ctx for LostIdServiceHandler.ListSearch
-func (mmListSearch *mLostIdServiceHandlerMockListSearch) ExpectCtxParam1(ctx context.Context) *mLostIdServiceHandlerMockListSearch {
+// ExpectCtxParam1 sets up expected param ctx for LostIdServiceClient.ListSearch
+func (mmListSearch *mLostIdServiceClientMockListSearch) ExpectCtxParam1(ctx context.Context) *mLostIdServiceClientMockListSearch {
 	if mmListSearch.mock.funcListSearch != nil {
-		mmListSearch.mock.t.Fatalf("LostIdServiceHandlerMock.ListSearch mock is already set by Set")
+		mmListSearch.mock.t.Fatalf("LostIdServiceClientMock.ListSearch mock is already set by Set")
 	}
 
 	if mmListSearch.defaultExpectation == nil {
-		mmListSearch.defaultExpectation = &LostIdServiceHandlerMockListSearchExpectation{}
+		mmListSearch.defaultExpectation = &LostIdServiceClientMockListSearchExpectation{}
 	}
 
 	if mmListSearch.defaultExpectation.params != nil {
-		mmListSearch.mock.t.Fatalf("LostIdServiceHandlerMock.ListSearch mock is already set by Expect")
+		mmListSearch.mock.t.Fatalf("LostIdServiceClientMock.ListSearch mock is already set by Expect")
 	}
 
 	if mmListSearch.defaultExpectation.paramPtrs == nil {
-		mmListSearch.defaultExpectation.paramPtrs = &LostIdServiceHandlerMockListSearchParamPtrs{}
+		mmListSearch.defaultExpectation.paramPtrs = &LostIdServiceClientMockListSearchParamPtrs{}
 	}
 	mmListSearch.defaultExpectation.paramPtrs.ctx = &ctx
 	mmListSearch.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -920,22 +888,22 @@ func (mmListSearch *mLostIdServiceHandlerMockListSearch) ExpectCtxParam1(ctx con
 	return mmListSearch
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for LostIdServiceHandler.ListSearch
-func (mmListSearch *mLostIdServiceHandlerMockListSearch) ExpectPp1Param2(pp1 *connect.Request[v1.ListSearchRequest]) *mLostIdServiceHandlerMockListSearch {
+// ExpectPp1Param2 sets up expected param pp1 for LostIdServiceClient.ListSearch
+func (mmListSearch *mLostIdServiceClientMockListSearch) ExpectPp1Param2(pp1 *connect.Request[v1.ListSearchRequest]) *mLostIdServiceClientMockListSearch {
 	if mmListSearch.mock.funcListSearch != nil {
-		mmListSearch.mock.t.Fatalf("LostIdServiceHandlerMock.ListSearch mock is already set by Set")
+		mmListSearch.mock.t.Fatalf("LostIdServiceClientMock.ListSearch mock is already set by Set")
 	}
 
 	if mmListSearch.defaultExpectation == nil {
-		mmListSearch.defaultExpectation = &LostIdServiceHandlerMockListSearchExpectation{}
+		mmListSearch.defaultExpectation = &LostIdServiceClientMockListSearchExpectation{}
 	}
 
 	if mmListSearch.defaultExpectation.params != nil {
-		mmListSearch.mock.t.Fatalf("LostIdServiceHandlerMock.ListSearch mock is already set by Expect")
+		mmListSearch.mock.t.Fatalf("LostIdServiceClientMock.ListSearch mock is already set by Expect")
 	}
 
 	if mmListSearch.defaultExpectation.paramPtrs == nil {
-		mmListSearch.defaultExpectation.paramPtrs = &LostIdServiceHandlerMockListSearchParamPtrs{}
+		mmListSearch.defaultExpectation.paramPtrs = &LostIdServiceClientMockListSearchParamPtrs{}
 	}
 	mmListSearch.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmListSearch.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -943,33 +911,10 @@ func (mmListSearch *mLostIdServiceHandlerMockListSearch) ExpectPp1Param2(pp1 *co
 	return mmListSearch
 }
 
-// ExpectPp2Param3 sets up expected param pp2 for LostIdServiceHandler.ListSearch
-func (mmListSearch *mLostIdServiceHandlerMockListSearch) ExpectPp2Param3(pp2 *connect.ServerStream[v1.ListSearchResponse]) *mLostIdServiceHandlerMockListSearch {
-	if mmListSearch.mock.funcListSearch != nil {
-		mmListSearch.mock.t.Fatalf("LostIdServiceHandlerMock.ListSearch mock is already set by Set")
-	}
-
-	if mmListSearch.defaultExpectation == nil {
-		mmListSearch.defaultExpectation = &LostIdServiceHandlerMockListSearchExpectation{}
-	}
-
-	if mmListSearch.defaultExpectation.params != nil {
-		mmListSearch.mock.t.Fatalf("LostIdServiceHandlerMock.ListSearch mock is already set by Expect")
-	}
-
-	if mmListSearch.defaultExpectation.paramPtrs == nil {
-		mmListSearch.defaultExpectation.paramPtrs = &LostIdServiceHandlerMockListSearchParamPtrs{}
-	}
-	mmListSearch.defaultExpectation.paramPtrs.pp2 = &pp2
-	mmListSearch.defaultExpectation.expectationOrigins.originPp2 = minimock.CallerInfo(1)
-
-	return mmListSearch
-}
-
-// Inspect accepts an inspector function that has same arguments as the LostIdServiceHandler.ListSearch
-func (mmListSearch *mLostIdServiceHandlerMockListSearch) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.ListSearchRequest], pp2 *connect.ServerStream[v1.ListSearchResponse])) *mLostIdServiceHandlerMockListSearch {
+// Inspect accepts an inspector function that has same arguments as the LostIdServiceClient.ListSearch
+func (mmListSearch *mLostIdServiceClientMockListSearch) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.ListSearchRequest])) *mLostIdServiceClientMockListSearch {
 	if mmListSearch.mock.inspectFuncListSearch != nil {
-		mmListSearch.mock.t.Fatalf("Inspect function is already set for LostIdServiceHandlerMock.ListSearch")
+		mmListSearch.mock.t.Fatalf("Inspect function is already set for LostIdServiceClientMock.ListSearch")
 	}
 
 	mmListSearch.mock.inspectFuncListSearch = f
@@ -977,28 +922,28 @@ func (mmListSearch *mLostIdServiceHandlerMockListSearch) Inspect(f func(ctx cont
 	return mmListSearch
 }
 
-// Return sets up results that will be returned by LostIdServiceHandler.ListSearch
-func (mmListSearch *mLostIdServiceHandlerMockListSearch) Return(err error) *LostIdServiceHandlerMock {
+// Return sets up results that will be returned by LostIdServiceClient.ListSearch
+func (mmListSearch *mLostIdServiceClientMockListSearch) Return(pp2 *connect.ServerStreamForClient[v1.ListSearchResponse], err error) *LostIdServiceClientMock {
 	if mmListSearch.mock.funcListSearch != nil {
-		mmListSearch.mock.t.Fatalf("LostIdServiceHandlerMock.ListSearch mock is already set by Set")
+		mmListSearch.mock.t.Fatalf("LostIdServiceClientMock.ListSearch mock is already set by Set")
 	}
 
 	if mmListSearch.defaultExpectation == nil {
-		mmListSearch.defaultExpectation = &LostIdServiceHandlerMockListSearchExpectation{mock: mmListSearch.mock}
+		mmListSearch.defaultExpectation = &LostIdServiceClientMockListSearchExpectation{mock: mmListSearch.mock}
 	}
-	mmListSearch.defaultExpectation.results = &LostIdServiceHandlerMockListSearchResults{err}
+	mmListSearch.defaultExpectation.results = &LostIdServiceClientMockListSearchResults{pp2, err}
 	mmListSearch.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmListSearch.mock
 }
 
-// Set uses given function f to mock the LostIdServiceHandler.ListSearch method
-func (mmListSearch *mLostIdServiceHandlerMockListSearch) Set(f func(ctx context.Context, pp1 *connect.Request[v1.ListSearchRequest], pp2 *connect.ServerStream[v1.ListSearchResponse]) (err error)) *LostIdServiceHandlerMock {
+// Set uses given function f to mock the LostIdServiceClient.ListSearch method
+func (mmListSearch *mLostIdServiceClientMockListSearch) Set(f func(ctx context.Context, pp1 *connect.Request[v1.ListSearchRequest]) (pp2 *connect.ServerStreamForClient[v1.ListSearchResponse], err error)) *LostIdServiceClientMock {
 	if mmListSearch.defaultExpectation != nil {
-		mmListSearch.mock.t.Fatalf("Default expectation is already set for the LostIdServiceHandler.ListSearch method")
+		mmListSearch.mock.t.Fatalf("Default expectation is already set for the LostIdServiceClient.ListSearch method")
 	}
 
 	if len(mmListSearch.expectations) > 0 {
-		mmListSearch.mock.t.Fatalf("Some expectations are already set for the LostIdServiceHandler.ListSearch method")
+		mmListSearch.mock.t.Fatalf("Some expectations are already set for the LostIdServiceClient.ListSearch method")
 	}
 
 	mmListSearch.mock.funcListSearch = f
@@ -1006,39 +951,39 @@ func (mmListSearch *mLostIdServiceHandlerMockListSearch) Set(f func(ctx context.
 	return mmListSearch.mock
 }
 
-// When sets expectation for the LostIdServiceHandler.ListSearch which will trigger the result defined by the following
+// When sets expectation for the LostIdServiceClient.ListSearch which will trigger the result defined by the following
 // Then helper
-func (mmListSearch *mLostIdServiceHandlerMockListSearch) When(ctx context.Context, pp1 *connect.Request[v1.ListSearchRequest], pp2 *connect.ServerStream[v1.ListSearchResponse]) *LostIdServiceHandlerMockListSearchExpectation {
+func (mmListSearch *mLostIdServiceClientMockListSearch) When(ctx context.Context, pp1 *connect.Request[v1.ListSearchRequest]) *LostIdServiceClientMockListSearchExpectation {
 	if mmListSearch.mock.funcListSearch != nil {
-		mmListSearch.mock.t.Fatalf("LostIdServiceHandlerMock.ListSearch mock is already set by Set")
+		mmListSearch.mock.t.Fatalf("LostIdServiceClientMock.ListSearch mock is already set by Set")
 	}
 
-	expectation := &LostIdServiceHandlerMockListSearchExpectation{
+	expectation := &LostIdServiceClientMockListSearchExpectation{
 		mock:               mmListSearch.mock,
-		params:             &LostIdServiceHandlerMockListSearchParams{ctx, pp1, pp2},
-		expectationOrigins: LostIdServiceHandlerMockListSearchExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &LostIdServiceClientMockListSearchParams{ctx, pp1},
+		expectationOrigins: LostIdServiceClientMockListSearchExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmListSearch.expectations = append(mmListSearch.expectations, expectation)
 	return expectation
 }
 
-// Then sets up LostIdServiceHandler.ListSearch return parameters for the expectation previously defined by the When method
-func (e *LostIdServiceHandlerMockListSearchExpectation) Then(err error) *LostIdServiceHandlerMock {
-	e.results = &LostIdServiceHandlerMockListSearchResults{err}
+// Then sets up LostIdServiceClient.ListSearch return parameters for the expectation previously defined by the When method
+func (e *LostIdServiceClientMockListSearchExpectation) Then(pp2 *connect.ServerStreamForClient[v1.ListSearchResponse], err error) *LostIdServiceClientMock {
+	e.results = &LostIdServiceClientMockListSearchResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times LostIdServiceHandler.ListSearch should be invoked
-func (mmListSearch *mLostIdServiceHandlerMockListSearch) Times(n uint64) *mLostIdServiceHandlerMockListSearch {
+// Times sets number of times LostIdServiceClient.ListSearch should be invoked
+func (mmListSearch *mLostIdServiceClientMockListSearch) Times(n uint64) *mLostIdServiceClientMockListSearch {
 	if n == 0 {
-		mmListSearch.mock.t.Fatalf("Times of LostIdServiceHandlerMock.ListSearch mock can not be zero")
+		mmListSearch.mock.t.Fatalf("Times of LostIdServiceClientMock.ListSearch mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmListSearch.expectedInvocations, n)
 	mmListSearch.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmListSearch
 }
 
-func (mmListSearch *mLostIdServiceHandlerMockListSearch) invocationsDone() bool {
+func (mmListSearch *mLostIdServiceClientMockListSearch) invocationsDone() bool {
 	if len(mmListSearch.expectations) == 0 && mmListSearch.defaultExpectation == nil && mmListSearch.mock.funcListSearch == nil {
 		return true
 	}
@@ -1049,18 +994,18 @@ func (mmListSearch *mLostIdServiceHandlerMockListSearch) invocationsDone() bool 
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// ListSearch implements mm_lostidv1connect.LostIdServiceHandler
-func (mmListSearch *LostIdServiceHandlerMock) ListSearch(ctx context.Context, pp1 *connect.Request[v1.ListSearchRequest], pp2 *connect.ServerStream[v1.ListSearchResponse]) (err error) {
+// ListSearch implements mm_lostidv1connect.LostIdServiceClient
+func (mmListSearch *LostIdServiceClientMock) ListSearch(ctx context.Context, pp1 *connect.Request[v1.ListSearchRequest]) (pp2 *connect.ServerStreamForClient[v1.ListSearchResponse], err error) {
 	mm_atomic.AddUint64(&mmListSearch.beforeListSearchCounter, 1)
 	defer mm_atomic.AddUint64(&mmListSearch.afterListSearchCounter, 1)
 
 	mmListSearch.t.Helper()
 
 	if mmListSearch.inspectFuncListSearch != nil {
-		mmListSearch.inspectFuncListSearch(ctx, pp1, pp2)
+		mmListSearch.inspectFuncListSearch(ctx, pp1)
 	}
 
-	mm_params := LostIdServiceHandlerMockListSearchParams{ctx, pp1, pp2}
+	mm_params := LostIdServiceClientMockListSearchParams{ctx, pp1}
 
 	// Record call args
 	mmListSearch.ListSearchMock.mutex.Lock()
@@ -1070,7 +1015,7 @@ func (mmListSearch *LostIdServiceHandlerMock) ListSearch(ctx context.Context, pp
 	for _, e := range mmListSearch.ListSearchMock.expectations {
 		if minimock.Equal(*e.params, mm_params) {
 			mm_atomic.AddUint64(&e.Counter, 1)
-			return e.results.err
+			return e.results.pp2, e.results.err
 		}
 	}
 
@@ -1079,59 +1024,54 @@ func (mmListSearch *LostIdServiceHandlerMock) ListSearch(ctx context.Context, pp
 		mm_want := mmListSearch.ListSearchMock.defaultExpectation.params
 		mm_want_ptrs := mmListSearch.ListSearchMock.defaultExpectation.paramPtrs
 
-		mm_got := LostIdServiceHandlerMockListSearchParams{ctx, pp1, pp2}
+		mm_got := LostIdServiceClientMockListSearchParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmListSearch.t.Errorf("LostIdServiceHandlerMock.ListSearch got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmListSearch.t.Errorf("LostIdServiceClientMock.ListSearch got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmListSearch.ListSearchMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmListSearch.t.Errorf("LostIdServiceHandlerMock.ListSearch got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmListSearch.t.Errorf("LostIdServiceClientMock.ListSearch got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmListSearch.ListSearchMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
-			if mm_want_ptrs.pp2 != nil && !minimock.Equal(*mm_want_ptrs.pp2, mm_got.pp2) {
-				mmListSearch.t.Errorf("LostIdServiceHandlerMock.ListSearch got unexpected parameter pp2, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
-					mmListSearch.ListSearchMock.defaultExpectation.expectationOrigins.originPp2, *mm_want_ptrs.pp2, mm_got.pp2, minimock.Diff(*mm_want_ptrs.pp2, mm_got.pp2))
-			}
-
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmListSearch.t.Errorf("LostIdServiceHandlerMock.ListSearch got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmListSearch.t.Errorf("LostIdServiceClientMock.ListSearch got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmListSearch.ListSearchMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmListSearch.ListSearchMock.defaultExpectation.results
 		if mm_results == nil {
-			mmListSearch.t.Fatal("No results are set for the LostIdServiceHandlerMock.ListSearch")
+			mmListSearch.t.Fatal("No results are set for the LostIdServiceClientMock.ListSearch")
 		}
-		return (*mm_results).err
+		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmListSearch.funcListSearch != nil {
-		return mmListSearch.funcListSearch(ctx, pp1, pp2)
+		return mmListSearch.funcListSearch(ctx, pp1)
 	}
-	mmListSearch.t.Fatalf("Unexpected call to LostIdServiceHandlerMock.ListSearch. %v %v %v", ctx, pp1, pp2)
+	mmListSearch.t.Fatalf("Unexpected call to LostIdServiceClientMock.ListSearch. %v %v", ctx, pp1)
 	return
 }
 
-// ListSearchAfterCounter returns a count of finished LostIdServiceHandlerMock.ListSearch invocations
-func (mmListSearch *LostIdServiceHandlerMock) ListSearchAfterCounter() uint64 {
+// ListSearchAfterCounter returns a count of finished LostIdServiceClientMock.ListSearch invocations
+func (mmListSearch *LostIdServiceClientMock) ListSearchAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmListSearch.afterListSearchCounter)
 }
 
-// ListSearchBeforeCounter returns a count of LostIdServiceHandlerMock.ListSearch invocations
-func (mmListSearch *LostIdServiceHandlerMock) ListSearchBeforeCounter() uint64 {
+// ListSearchBeforeCounter returns a count of LostIdServiceClientMock.ListSearch invocations
+func (mmListSearch *LostIdServiceClientMock) ListSearchBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmListSearch.beforeListSearchCounter)
 }
 
-// Calls returns a list of arguments used in each call to LostIdServiceHandlerMock.ListSearch.
+// Calls returns a list of arguments used in each call to LostIdServiceClientMock.ListSearch.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmListSearch *mLostIdServiceHandlerMockListSearch) Calls() []*LostIdServiceHandlerMockListSearchParams {
+func (mmListSearch *mLostIdServiceClientMockListSearch) Calls() []*LostIdServiceClientMockListSearchParams {
 	mmListSearch.mutex.RLock()
 
-	argCopy := make([]*LostIdServiceHandlerMockListSearchParams, len(mmListSearch.callArgs))
+	argCopy := make([]*LostIdServiceClientMockListSearchParams, len(mmListSearch.callArgs))
 	copy(argCopy, mmListSearch.callArgs)
 
 	mmListSearch.mutex.RUnlock()
@@ -1141,7 +1081,7 @@ func (mmListSearch *mLostIdServiceHandlerMockListSearch) Calls() []*LostIdServic
 
 // MinimockListSearchDone returns true if the count of the ListSearch invocations corresponds
 // the number of defined expectations
-func (m *LostIdServiceHandlerMock) MinimockListSearchDone() bool {
+func (m *LostIdServiceClientMock) MinimockListSearchDone() bool {
 	if m.ListSearchMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -1157,10 +1097,10 @@ func (m *LostIdServiceHandlerMock) MinimockListSearchDone() bool {
 }
 
 // MinimockListSearchInspect logs each unmet expectation
-func (m *LostIdServiceHandlerMock) MinimockListSearchInspect() {
+func (m *LostIdServiceClientMock) MinimockListSearchInspect() {
 	for _, e := range m.ListSearchMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to LostIdServiceHandlerMock.ListSearch at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to LostIdServiceClientMock.ListSearch at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -1168,71 +1108,69 @@ func (m *LostIdServiceHandlerMock) MinimockListSearchInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.ListSearchMock.defaultExpectation != nil && afterListSearchCounter < 1 {
 		if m.ListSearchMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to LostIdServiceHandlerMock.ListSearch at\n%s", m.ListSearchMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to LostIdServiceClientMock.ListSearch at\n%s", m.ListSearchMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to LostIdServiceHandlerMock.ListSearch at\n%s with params: %#v", m.ListSearchMock.defaultExpectation.expectationOrigins.origin, *m.ListSearchMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to LostIdServiceClientMock.ListSearch at\n%s with params: %#v", m.ListSearchMock.defaultExpectation.expectationOrigins.origin, *m.ListSearchMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcListSearch != nil && afterListSearchCounter < 1 {
-		m.t.Errorf("Expected call to LostIdServiceHandlerMock.ListSearch at\n%s", m.funcListSearchOrigin)
+		m.t.Errorf("Expected call to LostIdServiceClientMock.ListSearch at\n%s", m.funcListSearchOrigin)
 	}
 
 	if !m.ListSearchMock.invocationsDone() && afterListSearchCounter > 0 {
-		m.t.Errorf("Expected %d calls to LostIdServiceHandlerMock.ListSearch at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to LostIdServiceClientMock.ListSearch at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.ListSearchMock.expectedInvocations), m.ListSearchMock.expectedInvocationsOrigin, afterListSearchCounter)
 	}
 }
 
-type mLostIdServiceHandlerMockListTransaction struct {
+type mLostIdServiceClientMockListTransaction struct {
 	optional           bool
-	mock               *LostIdServiceHandlerMock
-	defaultExpectation *LostIdServiceHandlerMockListTransactionExpectation
-	expectations       []*LostIdServiceHandlerMockListTransactionExpectation
+	mock               *LostIdServiceClientMock
+	defaultExpectation *LostIdServiceClientMockListTransactionExpectation
+	expectations       []*LostIdServiceClientMockListTransactionExpectation
 
-	callArgs []*LostIdServiceHandlerMockListTransactionParams
+	callArgs []*LostIdServiceClientMockListTransactionParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// LostIdServiceHandlerMockListTransactionExpectation specifies expectation struct of the LostIdServiceHandler.ListTransaction
-type LostIdServiceHandlerMockListTransactionExpectation struct {
-	mock               *LostIdServiceHandlerMock
-	params             *LostIdServiceHandlerMockListTransactionParams
-	paramPtrs          *LostIdServiceHandlerMockListTransactionParamPtrs
-	expectationOrigins LostIdServiceHandlerMockListTransactionExpectationOrigins
-	results            *LostIdServiceHandlerMockListTransactionResults
+// LostIdServiceClientMockListTransactionExpectation specifies expectation struct of the LostIdServiceClient.ListTransaction
+type LostIdServiceClientMockListTransactionExpectation struct {
+	mock               *LostIdServiceClientMock
+	params             *LostIdServiceClientMockListTransactionParams
+	paramPtrs          *LostIdServiceClientMockListTransactionParamPtrs
+	expectationOrigins LostIdServiceClientMockListTransactionExpectationOrigins
+	results            *LostIdServiceClientMockListTransactionResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// LostIdServiceHandlerMockListTransactionParams contains parameters of the LostIdServiceHandler.ListTransaction
-type LostIdServiceHandlerMockListTransactionParams struct {
+// LostIdServiceClientMockListTransactionParams contains parameters of the LostIdServiceClient.ListTransaction
+type LostIdServiceClientMockListTransactionParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.ListTransactionRequest]
-	pp2 *connect.ServerStream[v1.ListTransactionResponse]
 }
 
-// LostIdServiceHandlerMockListTransactionParamPtrs contains pointers to parameters of the LostIdServiceHandler.ListTransaction
-type LostIdServiceHandlerMockListTransactionParamPtrs struct {
+// LostIdServiceClientMockListTransactionParamPtrs contains pointers to parameters of the LostIdServiceClient.ListTransaction
+type LostIdServiceClientMockListTransactionParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.ListTransactionRequest]
-	pp2 **connect.ServerStream[v1.ListTransactionResponse]
 }
 
-// LostIdServiceHandlerMockListTransactionResults contains results of the LostIdServiceHandler.ListTransaction
-type LostIdServiceHandlerMockListTransactionResults struct {
+// LostIdServiceClientMockListTransactionResults contains results of the LostIdServiceClient.ListTransaction
+type LostIdServiceClientMockListTransactionResults struct {
+	pp2 *connect.ServerStreamForClient[v1.ListTransactionResponse]
 	err error
 }
 
-// LostIdServiceHandlerMockListTransactionOrigins contains origins of expectations of the LostIdServiceHandler.ListTransaction
-type LostIdServiceHandlerMockListTransactionExpectationOrigins struct {
+// LostIdServiceClientMockListTransactionOrigins contains origins of expectations of the LostIdServiceClient.ListTransaction
+type LostIdServiceClientMockListTransactionExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
-	originPp2 string
 }
 
 // Marks this method to be optional. The default behavior of any method with Return() is '1 or more', meaning
@@ -1240,26 +1178,26 @@ type LostIdServiceHandlerMockListTransactionExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmListTransaction *mLostIdServiceHandlerMockListTransaction) Optional() *mLostIdServiceHandlerMockListTransaction {
+func (mmListTransaction *mLostIdServiceClientMockListTransaction) Optional() *mLostIdServiceClientMockListTransaction {
 	mmListTransaction.optional = true
 	return mmListTransaction
 }
 
-// Expect sets up expected params for LostIdServiceHandler.ListTransaction
-func (mmListTransaction *mLostIdServiceHandlerMockListTransaction) Expect(ctx context.Context, pp1 *connect.Request[v1.ListTransactionRequest], pp2 *connect.ServerStream[v1.ListTransactionResponse]) *mLostIdServiceHandlerMockListTransaction {
+// Expect sets up expected params for LostIdServiceClient.ListTransaction
+func (mmListTransaction *mLostIdServiceClientMockListTransaction) Expect(ctx context.Context, pp1 *connect.Request[v1.ListTransactionRequest]) *mLostIdServiceClientMockListTransaction {
 	if mmListTransaction.mock.funcListTransaction != nil {
-		mmListTransaction.mock.t.Fatalf("LostIdServiceHandlerMock.ListTransaction mock is already set by Set")
+		mmListTransaction.mock.t.Fatalf("LostIdServiceClientMock.ListTransaction mock is already set by Set")
 	}
 
 	if mmListTransaction.defaultExpectation == nil {
-		mmListTransaction.defaultExpectation = &LostIdServiceHandlerMockListTransactionExpectation{}
+		mmListTransaction.defaultExpectation = &LostIdServiceClientMockListTransactionExpectation{}
 	}
 
 	if mmListTransaction.defaultExpectation.paramPtrs != nil {
-		mmListTransaction.mock.t.Fatalf("LostIdServiceHandlerMock.ListTransaction mock is already set by ExpectParams functions")
+		mmListTransaction.mock.t.Fatalf("LostIdServiceClientMock.ListTransaction mock is already set by ExpectParams functions")
 	}
 
-	mmListTransaction.defaultExpectation.params = &LostIdServiceHandlerMockListTransactionParams{ctx, pp1, pp2}
+	mmListTransaction.defaultExpectation.params = &LostIdServiceClientMockListTransactionParams{ctx, pp1}
 	mmListTransaction.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmListTransaction.expectations {
 		if minimock.Equal(e.params, mmListTransaction.defaultExpectation.params) {
@@ -1270,22 +1208,22 @@ func (mmListTransaction *mLostIdServiceHandlerMockListTransaction) Expect(ctx co
 	return mmListTransaction
 }
 
-// ExpectCtxParam1 sets up expected param ctx for LostIdServiceHandler.ListTransaction
-func (mmListTransaction *mLostIdServiceHandlerMockListTransaction) ExpectCtxParam1(ctx context.Context) *mLostIdServiceHandlerMockListTransaction {
+// ExpectCtxParam1 sets up expected param ctx for LostIdServiceClient.ListTransaction
+func (mmListTransaction *mLostIdServiceClientMockListTransaction) ExpectCtxParam1(ctx context.Context) *mLostIdServiceClientMockListTransaction {
 	if mmListTransaction.mock.funcListTransaction != nil {
-		mmListTransaction.mock.t.Fatalf("LostIdServiceHandlerMock.ListTransaction mock is already set by Set")
+		mmListTransaction.mock.t.Fatalf("LostIdServiceClientMock.ListTransaction mock is already set by Set")
 	}
 
 	if mmListTransaction.defaultExpectation == nil {
-		mmListTransaction.defaultExpectation = &LostIdServiceHandlerMockListTransactionExpectation{}
+		mmListTransaction.defaultExpectation = &LostIdServiceClientMockListTransactionExpectation{}
 	}
 
 	if mmListTransaction.defaultExpectation.params != nil {
-		mmListTransaction.mock.t.Fatalf("LostIdServiceHandlerMock.ListTransaction mock is already set by Expect")
+		mmListTransaction.mock.t.Fatalf("LostIdServiceClientMock.ListTransaction mock is already set by Expect")
 	}
 
 	if mmListTransaction.defaultExpectation.paramPtrs == nil {
-		mmListTransaction.defaultExpectation.paramPtrs = &LostIdServiceHandlerMockListTransactionParamPtrs{}
+		mmListTransaction.defaultExpectation.paramPtrs = &LostIdServiceClientMockListTransactionParamPtrs{}
 	}
 	mmListTransaction.defaultExpectation.paramPtrs.ctx = &ctx
 	mmListTransaction.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -1293,22 +1231,22 @@ func (mmListTransaction *mLostIdServiceHandlerMockListTransaction) ExpectCtxPara
 	return mmListTransaction
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for LostIdServiceHandler.ListTransaction
-func (mmListTransaction *mLostIdServiceHandlerMockListTransaction) ExpectPp1Param2(pp1 *connect.Request[v1.ListTransactionRequest]) *mLostIdServiceHandlerMockListTransaction {
+// ExpectPp1Param2 sets up expected param pp1 for LostIdServiceClient.ListTransaction
+func (mmListTransaction *mLostIdServiceClientMockListTransaction) ExpectPp1Param2(pp1 *connect.Request[v1.ListTransactionRequest]) *mLostIdServiceClientMockListTransaction {
 	if mmListTransaction.mock.funcListTransaction != nil {
-		mmListTransaction.mock.t.Fatalf("LostIdServiceHandlerMock.ListTransaction mock is already set by Set")
+		mmListTransaction.mock.t.Fatalf("LostIdServiceClientMock.ListTransaction mock is already set by Set")
 	}
 
 	if mmListTransaction.defaultExpectation == nil {
-		mmListTransaction.defaultExpectation = &LostIdServiceHandlerMockListTransactionExpectation{}
+		mmListTransaction.defaultExpectation = &LostIdServiceClientMockListTransactionExpectation{}
 	}
 
 	if mmListTransaction.defaultExpectation.params != nil {
-		mmListTransaction.mock.t.Fatalf("LostIdServiceHandlerMock.ListTransaction mock is already set by Expect")
+		mmListTransaction.mock.t.Fatalf("LostIdServiceClientMock.ListTransaction mock is already set by Expect")
 	}
 
 	if mmListTransaction.defaultExpectation.paramPtrs == nil {
-		mmListTransaction.defaultExpectation.paramPtrs = &LostIdServiceHandlerMockListTransactionParamPtrs{}
+		mmListTransaction.defaultExpectation.paramPtrs = &LostIdServiceClientMockListTransactionParamPtrs{}
 	}
 	mmListTransaction.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmListTransaction.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -1316,33 +1254,10 @@ func (mmListTransaction *mLostIdServiceHandlerMockListTransaction) ExpectPp1Para
 	return mmListTransaction
 }
 
-// ExpectPp2Param3 sets up expected param pp2 for LostIdServiceHandler.ListTransaction
-func (mmListTransaction *mLostIdServiceHandlerMockListTransaction) ExpectPp2Param3(pp2 *connect.ServerStream[v1.ListTransactionResponse]) *mLostIdServiceHandlerMockListTransaction {
-	if mmListTransaction.mock.funcListTransaction != nil {
-		mmListTransaction.mock.t.Fatalf("LostIdServiceHandlerMock.ListTransaction mock is already set by Set")
-	}
-
-	if mmListTransaction.defaultExpectation == nil {
-		mmListTransaction.defaultExpectation = &LostIdServiceHandlerMockListTransactionExpectation{}
-	}
-
-	if mmListTransaction.defaultExpectation.params != nil {
-		mmListTransaction.mock.t.Fatalf("LostIdServiceHandlerMock.ListTransaction mock is already set by Expect")
-	}
-
-	if mmListTransaction.defaultExpectation.paramPtrs == nil {
-		mmListTransaction.defaultExpectation.paramPtrs = &LostIdServiceHandlerMockListTransactionParamPtrs{}
-	}
-	mmListTransaction.defaultExpectation.paramPtrs.pp2 = &pp2
-	mmListTransaction.defaultExpectation.expectationOrigins.originPp2 = minimock.CallerInfo(1)
-
-	return mmListTransaction
-}
-
-// Inspect accepts an inspector function that has same arguments as the LostIdServiceHandler.ListTransaction
-func (mmListTransaction *mLostIdServiceHandlerMockListTransaction) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.ListTransactionRequest], pp2 *connect.ServerStream[v1.ListTransactionResponse])) *mLostIdServiceHandlerMockListTransaction {
+// Inspect accepts an inspector function that has same arguments as the LostIdServiceClient.ListTransaction
+func (mmListTransaction *mLostIdServiceClientMockListTransaction) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.ListTransactionRequest])) *mLostIdServiceClientMockListTransaction {
 	if mmListTransaction.mock.inspectFuncListTransaction != nil {
-		mmListTransaction.mock.t.Fatalf("Inspect function is already set for LostIdServiceHandlerMock.ListTransaction")
+		mmListTransaction.mock.t.Fatalf("Inspect function is already set for LostIdServiceClientMock.ListTransaction")
 	}
 
 	mmListTransaction.mock.inspectFuncListTransaction = f
@@ -1350,28 +1265,28 @@ func (mmListTransaction *mLostIdServiceHandlerMockListTransaction) Inspect(f fun
 	return mmListTransaction
 }
 
-// Return sets up results that will be returned by LostIdServiceHandler.ListTransaction
-func (mmListTransaction *mLostIdServiceHandlerMockListTransaction) Return(err error) *LostIdServiceHandlerMock {
+// Return sets up results that will be returned by LostIdServiceClient.ListTransaction
+func (mmListTransaction *mLostIdServiceClientMockListTransaction) Return(pp2 *connect.ServerStreamForClient[v1.ListTransactionResponse], err error) *LostIdServiceClientMock {
 	if mmListTransaction.mock.funcListTransaction != nil {
-		mmListTransaction.mock.t.Fatalf("LostIdServiceHandlerMock.ListTransaction mock is already set by Set")
+		mmListTransaction.mock.t.Fatalf("LostIdServiceClientMock.ListTransaction mock is already set by Set")
 	}
 
 	if mmListTransaction.defaultExpectation == nil {
-		mmListTransaction.defaultExpectation = &LostIdServiceHandlerMockListTransactionExpectation{mock: mmListTransaction.mock}
+		mmListTransaction.defaultExpectation = &LostIdServiceClientMockListTransactionExpectation{mock: mmListTransaction.mock}
 	}
-	mmListTransaction.defaultExpectation.results = &LostIdServiceHandlerMockListTransactionResults{err}
+	mmListTransaction.defaultExpectation.results = &LostIdServiceClientMockListTransactionResults{pp2, err}
 	mmListTransaction.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmListTransaction.mock
 }
 
-// Set uses given function f to mock the LostIdServiceHandler.ListTransaction method
-func (mmListTransaction *mLostIdServiceHandlerMockListTransaction) Set(f func(ctx context.Context, pp1 *connect.Request[v1.ListTransactionRequest], pp2 *connect.ServerStream[v1.ListTransactionResponse]) (err error)) *LostIdServiceHandlerMock {
+// Set uses given function f to mock the LostIdServiceClient.ListTransaction method
+func (mmListTransaction *mLostIdServiceClientMockListTransaction) Set(f func(ctx context.Context, pp1 *connect.Request[v1.ListTransactionRequest]) (pp2 *connect.ServerStreamForClient[v1.ListTransactionResponse], err error)) *LostIdServiceClientMock {
 	if mmListTransaction.defaultExpectation != nil {
-		mmListTransaction.mock.t.Fatalf("Default expectation is already set for the LostIdServiceHandler.ListTransaction method")
+		mmListTransaction.mock.t.Fatalf("Default expectation is already set for the LostIdServiceClient.ListTransaction method")
 	}
 
 	if len(mmListTransaction.expectations) > 0 {
-		mmListTransaction.mock.t.Fatalf("Some expectations are already set for the LostIdServiceHandler.ListTransaction method")
+		mmListTransaction.mock.t.Fatalf("Some expectations are already set for the LostIdServiceClient.ListTransaction method")
 	}
 
 	mmListTransaction.mock.funcListTransaction = f
@@ -1379,39 +1294,39 @@ func (mmListTransaction *mLostIdServiceHandlerMockListTransaction) Set(f func(ct
 	return mmListTransaction.mock
 }
 
-// When sets expectation for the LostIdServiceHandler.ListTransaction which will trigger the result defined by the following
+// When sets expectation for the LostIdServiceClient.ListTransaction which will trigger the result defined by the following
 // Then helper
-func (mmListTransaction *mLostIdServiceHandlerMockListTransaction) When(ctx context.Context, pp1 *connect.Request[v1.ListTransactionRequest], pp2 *connect.ServerStream[v1.ListTransactionResponse]) *LostIdServiceHandlerMockListTransactionExpectation {
+func (mmListTransaction *mLostIdServiceClientMockListTransaction) When(ctx context.Context, pp1 *connect.Request[v1.ListTransactionRequest]) *LostIdServiceClientMockListTransactionExpectation {
 	if mmListTransaction.mock.funcListTransaction != nil {
-		mmListTransaction.mock.t.Fatalf("LostIdServiceHandlerMock.ListTransaction mock is already set by Set")
+		mmListTransaction.mock.t.Fatalf("LostIdServiceClientMock.ListTransaction mock is already set by Set")
 	}
 
-	expectation := &LostIdServiceHandlerMockListTransactionExpectation{
+	expectation := &LostIdServiceClientMockListTransactionExpectation{
 		mock:               mmListTransaction.mock,
-		params:             &LostIdServiceHandlerMockListTransactionParams{ctx, pp1, pp2},
-		expectationOrigins: LostIdServiceHandlerMockListTransactionExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &LostIdServiceClientMockListTransactionParams{ctx, pp1},
+		expectationOrigins: LostIdServiceClientMockListTransactionExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmListTransaction.expectations = append(mmListTransaction.expectations, expectation)
 	return expectation
 }
 
-// Then sets up LostIdServiceHandler.ListTransaction return parameters for the expectation previously defined by the When method
-func (e *LostIdServiceHandlerMockListTransactionExpectation) Then(err error) *LostIdServiceHandlerMock {
-	e.results = &LostIdServiceHandlerMockListTransactionResults{err}
+// Then sets up LostIdServiceClient.ListTransaction return parameters for the expectation previously defined by the When method
+func (e *LostIdServiceClientMockListTransactionExpectation) Then(pp2 *connect.ServerStreamForClient[v1.ListTransactionResponse], err error) *LostIdServiceClientMock {
+	e.results = &LostIdServiceClientMockListTransactionResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times LostIdServiceHandler.ListTransaction should be invoked
-func (mmListTransaction *mLostIdServiceHandlerMockListTransaction) Times(n uint64) *mLostIdServiceHandlerMockListTransaction {
+// Times sets number of times LostIdServiceClient.ListTransaction should be invoked
+func (mmListTransaction *mLostIdServiceClientMockListTransaction) Times(n uint64) *mLostIdServiceClientMockListTransaction {
 	if n == 0 {
-		mmListTransaction.mock.t.Fatalf("Times of LostIdServiceHandlerMock.ListTransaction mock can not be zero")
+		mmListTransaction.mock.t.Fatalf("Times of LostIdServiceClientMock.ListTransaction mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmListTransaction.expectedInvocations, n)
 	mmListTransaction.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmListTransaction
 }
 
-func (mmListTransaction *mLostIdServiceHandlerMockListTransaction) invocationsDone() bool {
+func (mmListTransaction *mLostIdServiceClientMockListTransaction) invocationsDone() bool {
 	if len(mmListTransaction.expectations) == 0 && mmListTransaction.defaultExpectation == nil && mmListTransaction.mock.funcListTransaction == nil {
 		return true
 	}
@@ -1422,18 +1337,18 @@ func (mmListTransaction *mLostIdServiceHandlerMockListTransaction) invocationsDo
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// ListTransaction implements mm_lostidv1connect.LostIdServiceHandler
-func (mmListTransaction *LostIdServiceHandlerMock) ListTransaction(ctx context.Context, pp1 *connect.Request[v1.ListTransactionRequest], pp2 *connect.ServerStream[v1.ListTransactionResponse]) (err error) {
+// ListTransaction implements mm_lostidv1connect.LostIdServiceClient
+func (mmListTransaction *LostIdServiceClientMock) ListTransaction(ctx context.Context, pp1 *connect.Request[v1.ListTransactionRequest]) (pp2 *connect.ServerStreamForClient[v1.ListTransactionResponse], err error) {
 	mm_atomic.AddUint64(&mmListTransaction.beforeListTransactionCounter, 1)
 	defer mm_atomic.AddUint64(&mmListTransaction.afterListTransactionCounter, 1)
 
 	mmListTransaction.t.Helper()
 
 	if mmListTransaction.inspectFuncListTransaction != nil {
-		mmListTransaction.inspectFuncListTransaction(ctx, pp1, pp2)
+		mmListTransaction.inspectFuncListTransaction(ctx, pp1)
 	}
 
-	mm_params := LostIdServiceHandlerMockListTransactionParams{ctx, pp1, pp2}
+	mm_params := LostIdServiceClientMockListTransactionParams{ctx, pp1}
 
 	// Record call args
 	mmListTransaction.ListTransactionMock.mutex.Lock()
@@ -1443,7 +1358,7 @@ func (mmListTransaction *LostIdServiceHandlerMock) ListTransaction(ctx context.C
 	for _, e := range mmListTransaction.ListTransactionMock.expectations {
 		if minimock.Equal(*e.params, mm_params) {
 			mm_atomic.AddUint64(&e.Counter, 1)
-			return e.results.err
+			return e.results.pp2, e.results.err
 		}
 	}
 
@@ -1452,59 +1367,54 @@ func (mmListTransaction *LostIdServiceHandlerMock) ListTransaction(ctx context.C
 		mm_want := mmListTransaction.ListTransactionMock.defaultExpectation.params
 		mm_want_ptrs := mmListTransaction.ListTransactionMock.defaultExpectation.paramPtrs
 
-		mm_got := LostIdServiceHandlerMockListTransactionParams{ctx, pp1, pp2}
+		mm_got := LostIdServiceClientMockListTransactionParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmListTransaction.t.Errorf("LostIdServiceHandlerMock.ListTransaction got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmListTransaction.t.Errorf("LostIdServiceClientMock.ListTransaction got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmListTransaction.ListTransactionMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmListTransaction.t.Errorf("LostIdServiceHandlerMock.ListTransaction got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmListTransaction.t.Errorf("LostIdServiceClientMock.ListTransaction got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmListTransaction.ListTransactionMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
-			if mm_want_ptrs.pp2 != nil && !minimock.Equal(*mm_want_ptrs.pp2, mm_got.pp2) {
-				mmListTransaction.t.Errorf("LostIdServiceHandlerMock.ListTransaction got unexpected parameter pp2, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
-					mmListTransaction.ListTransactionMock.defaultExpectation.expectationOrigins.originPp2, *mm_want_ptrs.pp2, mm_got.pp2, minimock.Diff(*mm_want_ptrs.pp2, mm_got.pp2))
-			}
-
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmListTransaction.t.Errorf("LostIdServiceHandlerMock.ListTransaction got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmListTransaction.t.Errorf("LostIdServiceClientMock.ListTransaction got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmListTransaction.ListTransactionMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmListTransaction.ListTransactionMock.defaultExpectation.results
 		if mm_results == nil {
-			mmListTransaction.t.Fatal("No results are set for the LostIdServiceHandlerMock.ListTransaction")
+			mmListTransaction.t.Fatal("No results are set for the LostIdServiceClientMock.ListTransaction")
 		}
-		return (*mm_results).err
+		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmListTransaction.funcListTransaction != nil {
-		return mmListTransaction.funcListTransaction(ctx, pp1, pp2)
+		return mmListTransaction.funcListTransaction(ctx, pp1)
 	}
-	mmListTransaction.t.Fatalf("Unexpected call to LostIdServiceHandlerMock.ListTransaction. %v %v %v", ctx, pp1, pp2)
+	mmListTransaction.t.Fatalf("Unexpected call to LostIdServiceClientMock.ListTransaction. %v %v", ctx, pp1)
 	return
 }
 
-// ListTransactionAfterCounter returns a count of finished LostIdServiceHandlerMock.ListTransaction invocations
-func (mmListTransaction *LostIdServiceHandlerMock) ListTransactionAfterCounter() uint64 {
+// ListTransactionAfterCounter returns a count of finished LostIdServiceClientMock.ListTransaction invocations
+func (mmListTransaction *LostIdServiceClientMock) ListTransactionAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmListTransaction.afterListTransactionCounter)
 }
 
-// ListTransactionBeforeCounter returns a count of LostIdServiceHandlerMock.ListTransaction invocations
-func (mmListTransaction *LostIdServiceHandlerMock) ListTransactionBeforeCounter() uint64 {
+// ListTransactionBeforeCounter returns a count of LostIdServiceClientMock.ListTransaction invocations
+func (mmListTransaction *LostIdServiceClientMock) ListTransactionBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmListTransaction.beforeListTransactionCounter)
 }
 
-// Calls returns a list of arguments used in each call to LostIdServiceHandlerMock.ListTransaction.
+// Calls returns a list of arguments used in each call to LostIdServiceClientMock.ListTransaction.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmListTransaction *mLostIdServiceHandlerMockListTransaction) Calls() []*LostIdServiceHandlerMockListTransactionParams {
+func (mmListTransaction *mLostIdServiceClientMockListTransaction) Calls() []*LostIdServiceClientMockListTransactionParams {
 	mmListTransaction.mutex.RLock()
 
-	argCopy := make([]*LostIdServiceHandlerMockListTransactionParams, len(mmListTransaction.callArgs))
+	argCopy := make([]*LostIdServiceClientMockListTransactionParams, len(mmListTransaction.callArgs))
 	copy(argCopy, mmListTransaction.callArgs)
 
 	mmListTransaction.mutex.RUnlock()
@@ -1514,7 +1424,7 @@ func (mmListTransaction *mLostIdServiceHandlerMockListTransaction) Calls() []*Lo
 
 // MinimockListTransactionDone returns true if the count of the ListTransaction invocations corresponds
 // the number of defined expectations
-func (m *LostIdServiceHandlerMock) MinimockListTransactionDone() bool {
+func (m *LostIdServiceClientMock) MinimockListTransactionDone() bool {
 	if m.ListTransactionMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -1530,10 +1440,10 @@ func (m *LostIdServiceHandlerMock) MinimockListTransactionDone() bool {
 }
 
 // MinimockListTransactionInspect logs each unmet expectation
-func (m *LostIdServiceHandlerMock) MinimockListTransactionInspect() {
+func (m *LostIdServiceClientMock) MinimockListTransactionInspect() {
 	for _, e := range m.ListTransactionMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to LostIdServiceHandlerMock.ListTransaction at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to LostIdServiceClientMock.ListTransaction at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -1541,66 +1451,66 @@ func (m *LostIdServiceHandlerMock) MinimockListTransactionInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.ListTransactionMock.defaultExpectation != nil && afterListTransactionCounter < 1 {
 		if m.ListTransactionMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to LostIdServiceHandlerMock.ListTransaction at\n%s", m.ListTransactionMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to LostIdServiceClientMock.ListTransaction at\n%s", m.ListTransactionMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to LostIdServiceHandlerMock.ListTransaction at\n%s with params: %#v", m.ListTransactionMock.defaultExpectation.expectationOrigins.origin, *m.ListTransactionMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to LostIdServiceClientMock.ListTransaction at\n%s with params: %#v", m.ListTransactionMock.defaultExpectation.expectationOrigins.origin, *m.ListTransactionMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcListTransaction != nil && afterListTransactionCounter < 1 {
-		m.t.Errorf("Expected call to LostIdServiceHandlerMock.ListTransaction at\n%s", m.funcListTransactionOrigin)
+		m.t.Errorf("Expected call to LostIdServiceClientMock.ListTransaction at\n%s", m.funcListTransactionOrigin)
 	}
 
 	if !m.ListTransactionMock.invocationsDone() && afterListTransactionCounter > 0 {
-		m.t.Errorf("Expected %d calls to LostIdServiceHandlerMock.ListTransaction at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to LostIdServiceClientMock.ListTransaction at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.ListTransactionMock.expectedInvocations), m.ListTransactionMock.expectedInvocationsOrigin, afterListTransactionCounter)
 	}
 }
 
-type mLostIdServiceHandlerMockProgress struct {
+type mLostIdServiceClientMockProgress struct {
 	optional           bool
-	mock               *LostIdServiceHandlerMock
-	defaultExpectation *LostIdServiceHandlerMockProgressExpectation
-	expectations       []*LostIdServiceHandlerMockProgressExpectation
+	mock               *LostIdServiceClientMock
+	defaultExpectation *LostIdServiceClientMockProgressExpectation
+	expectations       []*LostIdServiceClientMockProgressExpectation
 
-	callArgs []*LostIdServiceHandlerMockProgressParams
+	callArgs []*LostIdServiceClientMockProgressParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// LostIdServiceHandlerMockProgressExpectation specifies expectation struct of the LostIdServiceHandler.Progress
-type LostIdServiceHandlerMockProgressExpectation struct {
-	mock               *LostIdServiceHandlerMock
-	params             *LostIdServiceHandlerMockProgressParams
-	paramPtrs          *LostIdServiceHandlerMockProgressParamPtrs
-	expectationOrigins LostIdServiceHandlerMockProgressExpectationOrigins
-	results            *LostIdServiceHandlerMockProgressResults
+// LostIdServiceClientMockProgressExpectation specifies expectation struct of the LostIdServiceClient.Progress
+type LostIdServiceClientMockProgressExpectation struct {
+	mock               *LostIdServiceClientMock
+	params             *LostIdServiceClientMockProgressParams
+	paramPtrs          *LostIdServiceClientMockProgressParamPtrs
+	expectationOrigins LostIdServiceClientMockProgressExpectationOrigins
+	results            *LostIdServiceClientMockProgressResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// LostIdServiceHandlerMockProgressParams contains parameters of the LostIdServiceHandler.Progress
-type LostIdServiceHandlerMockProgressParams struct {
+// LostIdServiceClientMockProgressParams contains parameters of the LostIdServiceClient.Progress
+type LostIdServiceClientMockProgressParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.ProgressRequest]
 }
 
-// LostIdServiceHandlerMockProgressParamPtrs contains pointers to parameters of the LostIdServiceHandler.Progress
-type LostIdServiceHandlerMockProgressParamPtrs struct {
+// LostIdServiceClientMockProgressParamPtrs contains pointers to parameters of the LostIdServiceClient.Progress
+type LostIdServiceClientMockProgressParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.ProgressRequest]
 }
 
-// LostIdServiceHandlerMockProgressResults contains results of the LostIdServiceHandler.Progress
-type LostIdServiceHandlerMockProgressResults struct {
+// LostIdServiceClientMockProgressResults contains results of the LostIdServiceClient.Progress
+type LostIdServiceClientMockProgressResults struct {
 	pp2 *connect.Response[v1.ProgressResponse]
 	err error
 }
 
-// LostIdServiceHandlerMockProgressOrigins contains origins of expectations of the LostIdServiceHandler.Progress
-type LostIdServiceHandlerMockProgressExpectationOrigins struct {
+// LostIdServiceClientMockProgressOrigins contains origins of expectations of the LostIdServiceClient.Progress
+type LostIdServiceClientMockProgressExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -1611,26 +1521,26 @@ type LostIdServiceHandlerMockProgressExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmProgress *mLostIdServiceHandlerMockProgress) Optional() *mLostIdServiceHandlerMockProgress {
+func (mmProgress *mLostIdServiceClientMockProgress) Optional() *mLostIdServiceClientMockProgress {
 	mmProgress.optional = true
 	return mmProgress
 }
 
-// Expect sets up expected params for LostIdServiceHandler.Progress
-func (mmProgress *mLostIdServiceHandlerMockProgress) Expect(ctx context.Context, pp1 *connect.Request[v1.ProgressRequest]) *mLostIdServiceHandlerMockProgress {
+// Expect sets up expected params for LostIdServiceClient.Progress
+func (mmProgress *mLostIdServiceClientMockProgress) Expect(ctx context.Context, pp1 *connect.Request[v1.ProgressRequest]) *mLostIdServiceClientMockProgress {
 	if mmProgress.mock.funcProgress != nil {
-		mmProgress.mock.t.Fatalf("LostIdServiceHandlerMock.Progress mock is already set by Set")
+		mmProgress.mock.t.Fatalf("LostIdServiceClientMock.Progress mock is already set by Set")
 	}
 
 	if mmProgress.defaultExpectation == nil {
-		mmProgress.defaultExpectation = &LostIdServiceHandlerMockProgressExpectation{}
+		mmProgress.defaultExpectation = &LostIdServiceClientMockProgressExpectation{}
 	}
 
 	if mmProgress.defaultExpectation.paramPtrs != nil {
-		mmProgress.mock.t.Fatalf("LostIdServiceHandlerMock.Progress mock is already set by ExpectParams functions")
+		mmProgress.mock.t.Fatalf("LostIdServiceClientMock.Progress mock is already set by ExpectParams functions")
 	}
 
-	mmProgress.defaultExpectation.params = &LostIdServiceHandlerMockProgressParams{ctx, pp1}
+	mmProgress.defaultExpectation.params = &LostIdServiceClientMockProgressParams{ctx, pp1}
 	mmProgress.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmProgress.expectations {
 		if minimock.Equal(e.params, mmProgress.defaultExpectation.params) {
@@ -1641,22 +1551,22 @@ func (mmProgress *mLostIdServiceHandlerMockProgress) Expect(ctx context.Context,
 	return mmProgress
 }
 
-// ExpectCtxParam1 sets up expected param ctx for LostIdServiceHandler.Progress
-func (mmProgress *mLostIdServiceHandlerMockProgress) ExpectCtxParam1(ctx context.Context) *mLostIdServiceHandlerMockProgress {
+// ExpectCtxParam1 sets up expected param ctx for LostIdServiceClient.Progress
+func (mmProgress *mLostIdServiceClientMockProgress) ExpectCtxParam1(ctx context.Context) *mLostIdServiceClientMockProgress {
 	if mmProgress.mock.funcProgress != nil {
-		mmProgress.mock.t.Fatalf("LostIdServiceHandlerMock.Progress mock is already set by Set")
+		mmProgress.mock.t.Fatalf("LostIdServiceClientMock.Progress mock is already set by Set")
 	}
 
 	if mmProgress.defaultExpectation == nil {
-		mmProgress.defaultExpectation = &LostIdServiceHandlerMockProgressExpectation{}
+		mmProgress.defaultExpectation = &LostIdServiceClientMockProgressExpectation{}
 	}
 
 	if mmProgress.defaultExpectation.params != nil {
-		mmProgress.mock.t.Fatalf("LostIdServiceHandlerMock.Progress mock is already set by Expect")
+		mmProgress.mock.t.Fatalf("LostIdServiceClientMock.Progress mock is already set by Expect")
 	}
 
 	if mmProgress.defaultExpectation.paramPtrs == nil {
-		mmProgress.defaultExpectation.paramPtrs = &LostIdServiceHandlerMockProgressParamPtrs{}
+		mmProgress.defaultExpectation.paramPtrs = &LostIdServiceClientMockProgressParamPtrs{}
 	}
 	mmProgress.defaultExpectation.paramPtrs.ctx = &ctx
 	mmProgress.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -1664,22 +1574,22 @@ func (mmProgress *mLostIdServiceHandlerMockProgress) ExpectCtxParam1(ctx context
 	return mmProgress
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for LostIdServiceHandler.Progress
-func (mmProgress *mLostIdServiceHandlerMockProgress) ExpectPp1Param2(pp1 *connect.Request[v1.ProgressRequest]) *mLostIdServiceHandlerMockProgress {
+// ExpectPp1Param2 sets up expected param pp1 for LostIdServiceClient.Progress
+func (mmProgress *mLostIdServiceClientMockProgress) ExpectPp1Param2(pp1 *connect.Request[v1.ProgressRequest]) *mLostIdServiceClientMockProgress {
 	if mmProgress.mock.funcProgress != nil {
-		mmProgress.mock.t.Fatalf("LostIdServiceHandlerMock.Progress mock is already set by Set")
+		mmProgress.mock.t.Fatalf("LostIdServiceClientMock.Progress mock is already set by Set")
 	}
 
 	if mmProgress.defaultExpectation == nil {
-		mmProgress.defaultExpectation = &LostIdServiceHandlerMockProgressExpectation{}
+		mmProgress.defaultExpectation = &LostIdServiceClientMockProgressExpectation{}
 	}
 
 	if mmProgress.defaultExpectation.params != nil {
-		mmProgress.mock.t.Fatalf("LostIdServiceHandlerMock.Progress mock is already set by Expect")
+		mmProgress.mock.t.Fatalf("LostIdServiceClientMock.Progress mock is already set by Expect")
 	}
 
 	if mmProgress.defaultExpectation.paramPtrs == nil {
-		mmProgress.defaultExpectation.paramPtrs = &LostIdServiceHandlerMockProgressParamPtrs{}
+		mmProgress.defaultExpectation.paramPtrs = &LostIdServiceClientMockProgressParamPtrs{}
 	}
 	mmProgress.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmProgress.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -1687,10 +1597,10 @@ func (mmProgress *mLostIdServiceHandlerMockProgress) ExpectPp1Param2(pp1 *connec
 	return mmProgress
 }
 
-// Inspect accepts an inspector function that has same arguments as the LostIdServiceHandler.Progress
-func (mmProgress *mLostIdServiceHandlerMockProgress) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.ProgressRequest])) *mLostIdServiceHandlerMockProgress {
+// Inspect accepts an inspector function that has same arguments as the LostIdServiceClient.Progress
+func (mmProgress *mLostIdServiceClientMockProgress) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.ProgressRequest])) *mLostIdServiceClientMockProgress {
 	if mmProgress.mock.inspectFuncProgress != nil {
-		mmProgress.mock.t.Fatalf("Inspect function is already set for LostIdServiceHandlerMock.Progress")
+		mmProgress.mock.t.Fatalf("Inspect function is already set for LostIdServiceClientMock.Progress")
 	}
 
 	mmProgress.mock.inspectFuncProgress = f
@@ -1698,28 +1608,28 @@ func (mmProgress *mLostIdServiceHandlerMockProgress) Inspect(f func(ctx context.
 	return mmProgress
 }
 
-// Return sets up results that will be returned by LostIdServiceHandler.Progress
-func (mmProgress *mLostIdServiceHandlerMockProgress) Return(pp2 *connect.Response[v1.ProgressResponse], err error) *LostIdServiceHandlerMock {
+// Return sets up results that will be returned by LostIdServiceClient.Progress
+func (mmProgress *mLostIdServiceClientMockProgress) Return(pp2 *connect.Response[v1.ProgressResponse], err error) *LostIdServiceClientMock {
 	if mmProgress.mock.funcProgress != nil {
-		mmProgress.mock.t.Fatalf("LostIdServiceHandlerMock.Progress mock is already set by Set")
+		mmProgress.mock.t.Fatalf("LostIdServiceClientMock.Progress mock is already set by Set")
 	}
 
 	if mmProgress.defaultExpectation == nil {
-		mmProgress.defaultExpectation = &LostIdServiceHandlerMockProgressExpectation{mock: mmProgress.mock}
+		mmProgress.defaultExpectation = &LostIdServiceClientMockProgressExpectation{mock: mmProgress.mock}
 	}
-	mmProgress.defaultExpectation.results = &LostIdServiceHandlerMockProgressResults{pp2, err}
+	mmProgress.defaultExpectation.results = &LostIdServiceClientMockProgressResults{pp2, err}
 	mmProgress.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmProgress.mock
 }
 
-// Set uses given function f to mock the LostIdServiceHandler.Progress method
-func (mmProgress *mLostIdServiceHandlerMockProgress) Set(f func(ctx context.Context, pp1 *connect.Request[v1.ProgressRequest]) (pp2 *connect.Response[v1.ProgressResponse], err error)) *LostIdServiceHandlerMock {
+// Set uses given function f to mock the LostIdServiceClient.Progress method
+func (mmProgress *mLostIdServiceClientMockProgress) Set(f func(ctx context.Context, pp1 *connect.Request[v1.ProgressRequest]) (pp2 *connect.Response[v1.ProgressResponse], err error)) *LostIdServiceClientMock {
 	if mmProgress.defaultExpectation != nil {
-		mmProgress.mock.t.Fatalf("Default expectation is already set for the LostIdServiceHandler.Progress method")
+		mmProgress.mock.t.Fatalf("Default expectation is already set for the LostIdServiceClient.Progress method")
 	}
 
 	if len(mmProgress.expectations) > 0 {
-		mmProgress.mock.t.Fatalf("Some expectations are already set for the LostIdServiceHandler.Progress method")
+		mmProgress.mock.t.Fatalf("Some expectations are already set for the LostIdServiceClient.Progress method")
 	}
 
 	mmProgress.mock.funcProgress = f
@@ -1727,39 +1637,39 @@ func (mmProgress *mLostIdServiceHandlerMockProgress) Set(f func(ctx context.Cont
 	return mmProgress.mock
 }
 
-// When sets expectation for the LostIdServiceHandler.Progress which will trigger the result defined by the following
+// When sets expectation for the LostIdServiceClient.Progress which will trigger the result defined by the following
 // Then helper
-func (mmProgress *mLostIdServiceHandlerMockProgress) When(ctx context.Context, pp1 *connect.Request[v1.ProgressRequest]) *LostIdServiceHandlerMockProgressExpectation {
+func (mmProgress *mLostIdServiceClientMockProgress) When(ctx context.Context, pp1 *connect.Request[v1.ProgressRequest]) *LostIdServiceClientMockProgressExpectation {
 	if mmProgress.mock.funcProgress != nil {
-		mmProgress.mock.t.Fatalf("LostIdServiceHandlerMock.Progress mock is already set by Set")
+		mmProgress.mock.t.Fatalf("LostIdServiceClientMock.Progress mock is already set by Set")
 	}
 
-	expectation := &LostIdServiceHandlerMockProgressExpectation{
+	expectation := &LostIdServiceClientMockProgressExpectation{
 		mock:               mmProgress.mock,
-		params:             &LostIdServiceHandlerMockProgressParams{ctx, pp1},
-		expectationOrigins: LostIdServiceHandlerMockProgressExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &LostIdServiceClientMockProgressParams{ctx, pp1},
+		expectationOrigins: LostIdServiceClientMockProgressExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmProgress.expectations = append(mmProgress.expectations, expectation)
 	return expectation
 }
 
-// Then sets up LostIdServiceHandler.Progress return parameters for the expectation previously defined by the When method
-func (e *LostIdServiceHandlerMockProgressExpectation) Then(pp2 *connect.Response[v1.ProgressResponse], err error) *LostIdServiceHandlerMock {
-	e.results = &LostIdServiceHandlerMockProgressResults{pp2, err}
+// Then sets up LostIdServiceClient.Progress return parameters for the expectation previously defined by the When method
+func (e *LostIdServiceClientMockProgressExpectation) Then(pp2 *connect.Response[v1.ProgressResponse], err error) *LostIdServiceClientMock {
+	e.results = &LostIdServiceClientMockProgressResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times LostIdServiceHandler.Progress should be invoked
-func (mmProgress *mLostIdServiceHandlerMockProgress) Times(n uint64) *mLostIdServiceHandlerMockProgress {
+// Times sets number of times LostIdServiceClient.Progress should be invoked
+func (mmProgress *mLostIdServiceClientMockProgress) Times(n uint64) *mLostIdServiceClientMockProgress {
 	if n == 0 {
-		mmProgress.mock.t.Fatalf("Times of LostIdServiceHandlerMock.Progress mock can not be zero")
+		mmProgress.mock.t.Fatalf("Times of LostIdServiceClientMock.Progress mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmProgress.expectedInvocations, n)
 	mmProgress.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmProgress
 }
 
-func (mmProgress *mLostIdServiceHandlerMockProgress) invocationsDone() bool {
+func (mmProgress *mLostIdServiceClientMockProgress) invocationsDone() bool {
 	if len(mmProgress.expectations) == 0 && mmProgress.defaultExpectation == nil && mmProgress.mock.funcProgress == nil {
 		return true
 	}
@@ -1770,8 +1680,8 @@ func (mmProgress *mLostIdServiceHandlerMockProgress) invocationsDone() bool {
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// Progress implements mm_lostidv1connect.LostIdServiceHandler
-func (mmProgress *LostIdServiceHandlerMock) Progress(ctx context.Context, pp1 *connect.Request[v1.ProgressRequest]) (pp2 *connect.Response[v1.ProgressResponse], err error) {
+// Progress implements mm_lostidv1connect.LostIdServiceClient
+func (mmProgress *LostIdServiceClientMock) Progress(ctx context.Context, pp1 *connect.Request[v1.ProgressRequest]) (pp2 *connect.Response[v1.ProgressResponse], err error) {
 	mm_atomic.AddUint64(&mmProgress.beforeProgressCounter, 1)
 	defer mm_atomic.AddUint64(&mmProgress.afterProgressCounter, 1)
 
@@ -1781,7 +1691,7 @@ func (mmProgress *LostIdServiceHandlerMock) Progress(ctx context.Context, pp1 *c
 		mmProgress.inspectFuncProgress(ctx, pp1)
 	}
 
-	mm_params := LostIdServiceHandlerMockProgressParams{ctx, pp1}
+	mm_params := LostIdServiceClientMockProgressParams{ctx, pp1}
 
 	// Record call args
 	mmProgress.ProgressMock.mutex.Lock()
@@ -1800,54 +1710,54 @@ func (mmProgress *LostIdServiceHandlerMock) Progress(ctx context.Context, pp1 *c
 		mm_want := mmProgress.ProgressMock.defaultExpectation.params
 		mm_want_ptrs := mmProgress.ProgressMock.defaultExpectation.paramPtrs
 
-		mm_got := LostIdServiceHandlerMockProgressParams{ctx, pp1}
+		mm_got := LostIdServiceClientMockProgressParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmProgress.t.Errorf("LostIdServiceHandlerMock.Progress got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmProgress.t.Errorf("LostIdServiceClientMock.Progress got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmProgress.ProgressMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmProgress.t.Errorf("LostIdServiceHandlerMock.Progress got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmProgress.t.Errorf("LostIdServiceClientMock.Progress got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmProgress.ProgressMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmProgress.t.Errorf("LostIdServiceHandlerMock.Progress got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmProgress.t.Errorf("LostIdServiceClientMock.Progress got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmProgress.ProgressMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmProgress.ProgressMock.defaultExpectation.results
 		if mm_results == nil {
-			mmProgress.t.Fatal("No results are set for the LostIdServiceHandlerMock.Progress")
+			mmProgress.t.Fatal("No results are set for the LostIdServiceClientMock.Progress")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmProgress.funcProgress != nil {
 		return mmProgress.funcProgress(ctx, pp1)
 	}
-	mmProgress.t.Fatalf("Unexpected call to LostIdServiceHandlerMock.Progress. %v %v", ctx, pp1)
+	mmProgress.t.Fatalf("Unexpected call to LostIdServiceClientMock.Progress. %v %v", ctx, pp1)
 	return
 }
 
-// ProgressAfterCounter returns a count of finished LostIdServiceHandlerMock.Progress invocations
-func (mmProgress *LostIdServiceHandlerMock) ProgressAfterCounter() uint64 {
+// ProgressAfterCounter returns a count of finished LostIdServiceClientMock.Progress invocations
+func (mmProgress *LostIdServiceClientMock) ProgressAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmProgress.afterProgressCounter)
 }
 
-// ProgressBeforeCounter returns a count of LostIdServiceHandlerMock.Progress invocations
-func (mmProgress *LostIdServiceHandlerMock) ProgressBeforeCounter() uint64 {
+// ProgressBeforeCounter returns a count of LostIdServiceClientMock.Progress invocations
+func (mmProgress *LostIdServiceClientMock) ProgressBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmProgress.beforeProgressCounter)
 }
 
-// Calls returns a list of arguments used in each call to LostIdServiceHandlerMock.Progress.
+// Calls returns a list of arguments used in each call to LostIdServiceClientMock.Progress.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmProgress *mLostIdServiceHandlerMockProgress) Calls() []*LostIdServiceHandlerMockProgressParams {
+func (mmProgress *mLostIdServiceClientMockProgress) Calls() []*LostIdServiceClientMockProgressParams {
 	mmProgress.mutex.RLock()
 
-	argCopy := make([]*LostIdServiceHandlerMockProgressParams, len(mmProgress.callArgs))
+	argCopy := make([]*LostIdServiceClientMockProgressParams, len(mmProgress.callArgs))
 	copy(argCopy, mmProgress.callArgs)
 
 	mmProgress.mutex.RUnlock()
@@ -1857,7 +1767,7 @@ func (mmProgress *mLostIdServiceHandlerMockProgress) Calls() []*LostIdServiceHan
 
 // MinimockProgressDone returns true if the count of the Progress invocations corresponds
 // the number of defined expectations
-func (m *LostIdServiceHandlerMock) MinimockProgressDone() bool {
+func (m *LostIdServiceClientMock) MinimockProgressDone() bool {
 	if m.ProgressMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -1873,10 +1783,10 @@ func (m *LostIdServiceHandlerMock) MinimockProgressDone() bool {
 }
 
 // MinimockProgressInspect logs each unmet expectation
-func (m *LostIdServiceHandlerMock) MinimockProgressInspect() {
+func (m *LostIdServiceClientMock) MinimockProgressInspect() {
 	for _, e := range m.ProgressMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to LostIdServiceHandlerMock.Progress at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to LostIdServiceClientMock.Progress at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -1884,66 +1794,66 @@ func (m *LostIdServiceHandlerMock) MinimockProgressInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.ProgressMock.defaultExpectation != nil && afterProgressCounter < 1 {
 		if m.ProgressMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to LostIdServiceHandlerMock.Progress at\n%s", m.ProgressMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to LostIdServiceClientMock.Progress at\n%s", m.ProgressMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to LostIdServiceHandlerMock.Progress at\n%s with params: %#v", m.ProgressMock.defaultExpectation.expectationOrigins.origin, *m.ProgressMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to LostIdServiceClientMock.Progress at\n%s with params: %#v", m.ProgressMock.defaultExpectation.expectationOrigins.origin, *m.ProgressMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcProgress != nil && afterProgressCounter < 1 {
-		m.t.Errorf("Expected call to LostIdServiceHandlerMock.Progress at\n%s", m.funcProgressOrigin)
+		m.t.Errorf("Expected call to LostIdServiceClientMock.Progress at\n%s", m.funcProgressOrigin)
 	}
 
 	if !m.ProgressMock.invocationsDone() && afterProgressCounter > 0 {
-		m.t.Errorf("Expected %d calls to LostIdServiceHandlerMock.Progress at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to LostIdServiceClientMock.Progress at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.ProgressMock.expectedInvocations), m.ProgressMock.expectedInvocationsOrigin, afterProgressCounter)
 	}
 }
 
-type mLostIdServiceHandlerMockSearch struct {
+type mLostIdServiceClientMockSearch struct {
 	optional           bool
-	mock               *LostIdServiceHandlerMock
-	defaultExpectation *LostIdServiceHandlerMockSearchExpectation
-	expectations       []*LostIdServiceHandlerMockSearchExpectation
+	mock               *LostIdServiceClientMock
+	defaultExpectation *LostIdServiceClientMockSearchExpectation
+	expectations       []*LostIdServiceClientMockSearchExpectation
 
-	callArgs []*LostIdServiceHandlerMockSearchParams
+	callArgs []*LostIdServiceClientMockSearchParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// LostIdServiceHandlerMockSearchExpectation specifies expectation struct of the LostIdServiceHandler.Search
-type LostIdServiceHandlerMockSearchExpectation struct {
-	mock               *LostIdServiceHandlerMock
-	params             *LostIdServiceHandlerMockSearchParams
-	paramPtrs          *LostIdServiceHandlerMockSearchParamPtrs
-	expectationOrigins LostIdServiceHandlerMockSearchExpectationOrigins
-	results            *LostIdServiceHandlerMockSearchResults
+// LostIdServiceClientMockSearchExpectation specifies expectation struct of the LostIdServiceClient.Search
+type LostIdServiceClientMockSearchExpectation struct {
+	mock               *LostIdServiceClientMock
+	params             *LostIdServiceClientMockSearchParams
+	paramPtrs          *LostIdServiceClientMockSearchParamPtrs
+	expectationOrigins LostIdServiceClientMockSearchExpectationOrigins
+	results            *LostIdServiceClientMockSearchResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// LostIdServiceHandlerMockSearchParams contains parameters of the LostIdServiceHandler.Search
-type LostIdServiceHandlerMockSearchParams struct {
+// LostIdServiceClientMockSearchParams contains parameters of the LostIdServiceClient.Search
+type LostIdServiceClientMockSearchParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v11.SearchRequest]
 }
 
-// LostIdServiceHandlerMockSearchParamPtrs contains pointers to parameters of the LostIdServiceHandler.Search
-type LostIdServiceHandlerMockSearchParamPtrs struct {
+// LostIdServiceClientMockSearchParamPtrs contains pointers to parameters of the LostIdServiceClient.Search
+type LostIdServiceClientMockSearchParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v11.SearchRequest]
 }
 
-// LostIdServiceHandlerMockSearchResults contains results of the LostIdServiceHandler.Search
-type LostIdServiceHandlerMockSearchResults struct {
+// LostIdServiceClientMockSearchResults contains results of the LostIdServiceClient.Search
+type LostIdServiceClientMockSearchResults struct {
 	pp2 *connect.Response[v1.SearchResponse]
 	err error
 }
 
-// LostIdServiceHandlerMockSearchOrigins contains origins of expectations of the LostIdServiceHandler.Search
-type LostIdServiceHandlerMockSearchExpectationOrigins struct {
+// LostIdServiceClientMockSearchOrigins contains origins of expectations of the LostIdServiceClient.Search
+type LostIdServiceClientMockSearchExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -1954,26 +1864,26 @@ type LostIdServiceHandlerMockSearchExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmSearch *mLostIdServiceHandlerMockSearch) Optional() *mLostIdServiceHandlerMockSearch {
+func (mmSearch *mLostIdServiceClientMockSearch) Optional() *mLostIdServiceClientMockSearch {
 	mmSearch.optional = true
 	return mmSearch
 }
 
-// Expect sets up expected params for LostIdServiceHandler.Search
-func (mmSearch *mLostIdServiceHandlerMockSearch) Expect(ctx context.Context, pp1 *connect.Request[v11.SearchRequest]) *mLostIdServiceHandlerMockSearch {
+// Expect sets up expected params for LostIdServiceClient.Search
+func (mmSearch *mLostIdServiceClientMockSearch) Expect(ctx context.Context, pp1 *connect.Request[v11.SearchRequest]) *mLostIdServiceClientMockSearch {
 	if mmSearch.mock.funcSearch != nil {
-		mmSearch.mock.t.Fatalf("LostIdServiceHandlerMock.Search mock is already set by Set")
+		mmSearch.mock.t.Fatalf("LostIdServiceClientMock.Search mock is already set by Set")
 	}
 
 	if mmSearch.defaultExpectation == nil {
-		mmSearch.defaultExpectation = &LostIdServiceHandlerMockSearchExpectation{}
+		mmSearch.defaultExpectation = &LostIdServiceClientMockSearchExpectation{}
 	}
 
 	if mmSearch.defaultExpectation.paramPtrs != nil {
-		mmSearch.mock.t.Fatalf("LostIdServiceHandlerMock.Search mock is already set by ExpectParams functions")
+		mmSearch.mock.t.Fatalf("LostIdServiceClientMock.Search mock is already set by ExpectParams functions")
 	}
 
-	mmSearch.defaultExpectation.params = &LostIdServiceHandlerMockSearchParams{ctx, pp1}
+	mmSearch.defaultExpectation.params = &LostIdServiceClientMockSearchParams{ctx, pp1}
 	mmSearch.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmSearch.expectations {
 		if minimock.Equal(e.params, mmSearch.defaultExpectation.params) {
@@ -1984,22 +1894,22 @@ func (mmSearch *mLostIdServiceHandlerMockSearch) Expect(ctx context.Context, pp1
 	return mmSearch
 }
 
-// ExpectCtxParam1 sets up expected param ctx for LostIdServiceHandler.Search
-func (mmSearch *mLostIdServiceHandlerMockSearch) ExpectCtxParam1(ctx context.Context) *mLostIdServiceHandlerMockSearch {
+// ExpectCtxParam1 sets up expected param ctx for LostIdServiceClient.Search
+func (mmSearch *mLostIdServiceClientMockSearch) ExpectCtxParam1(ctx context.Context) *mLostIdServiceClientMockSearch {
 	if mmSearch.mock.funcSearch != nil {
-		mmSearch.mock.t.Fatalf("LostIdServiceHandlerMock.Search mock is already set by Set")
+		mmSearch.mock.t.Fatalf("LostIdServiceClientMock.Search mock is already set by Set")
 	}
 
 	if mmSearch.defaultExpectation == nil {
-		mmSearch.defaultExpectation = &LostIdServiceHandlerMockSearchExpectation{}
+		mmSearch.defaultExpectation = &LostIdServiceClientMockSearchExpectation{}
 	}
 
 	if mmSearch.defaultExpectation.params != nil {
-		mmSearch.mock.t.Fatalf("LostIdServiceHandlerMock.Search mock is already set by Expect")
+		mmSearch.mock.t.Fatalf("LostIdServiceClientMock.Search mock is already set by Expect")
 	}
 
 	if mmSearch.defaultExpectation.paramPtrs == nil {
-		mmSearch.defaultExpectation.paramPtrs = &LostIdServiceHandlerMockSearchParamPtrs{}
+		mmSearch.defaultExpectation.paramPtrs = &LostIdServiceClientMockSearchParamPtrs{}
 	}
 	mmSearch.defaultExpectation.paramPtrs.ctx = &ctx
 	mmSearch.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -2007,22 +1917,22 @@ func (mmSearch *mLostIdServiceHandlerMockSearch) ExpectCtxParam1(ctx context.Con
 	return mmSearch
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for LostIdServiceHandler.Search
-func (mmSearch *mLostIdServiceHandlerMockSearch) ExpectPp1Param2(pp1 *connect.Request[v11.SearchRequest]) *mLostIdServiceHandlerMockSearch {
+// ExpectPp1Param2 sets up expected param pp1 for LostIdServiceClient.Search
+func (mmSearch *mLostIdServiceClientMockSearch) ExpectPp1Param2(pp1 *connect.Request[v11.SearchRequest]) *mLostIdServiceClientMockSearch {
 	if mmSearch.mock.funcSearch != nil {
-		mmSearch.mock.t.Fatalf("LostIdServiceHandlerMock.Search mock is already set by Set")
+		mmSearch.mock.t.Fatalf("LostIdServiceClientMock.Search mock is already set by Set")
 	}
 
 	if mmSearch.defaultExpectation == nil {
-		mmSearch.defaultExpectation = &LostIdServiceHandlerMockSearchExpectation{}
+		mmSearch.defaultExpectation = &LostIdServiceClientMockSearchExpectation{}
 	}
 
 	if mmSearch.defaultExpectation.params != nil {
-		mmSearch.mock.t.Fatalf("LostIdServiceHandlerMock.Search mock is already set by Expect")
+		mmSearch.mock.t.Fatalf("LostIdServiceClientMock.Search mock is already set by Expect")
 	}
 
 	if mmSearch.defaultExpectation.paramPtrs == nil {
-		mmSearch.defaultExpectation.paramPtrs = &LostIdServiceHandlerMockSearchParamPtrs{}
+		mmSearch.defaultExpectation.paramPtrs = &LostIdServiceClientMockSearchParamPtrs{}
 	}
 	mmSearch.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmSearch.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -2030,10 +1940,10 @@ func (mmSearch *mLostIdServiceHandlerMockSearch) ExpectPp1Param2(pp1 *connect.Re
 	return mmSearch
 }
 
-// Inspect accepts an inspector function that has same arguments as the LostIdServiceHandler.Search
-func (mmSearch *mLostIdServiceHandlerMockSearch) Inspect(f func(ctx context.Context, pp1 *connect.Request[v11.SearchRequest])) *mLostIdServiceHandlerMockSearch {
+// Inspect accepts an inspector function that has same arguments as the LostIdServiceClient.Search
+func (mmSearch *mLostIdServiceClientMockSearch) Inspect(f func(ctx context.Context, pp1 *connect.Request[v11.SearchRequest])) *mLostIdServiceClientMockSearch {
 	if mmSearch.mock.inspectFuncSearch != nil {
-		mmSearch.mock.t.Fatalf("Inspect function is already set for LostIdServiceHandlerMock.Search")
+		mmSearch.mock.t.Fatalf("Inspect function is already set for LostIdServiceClientMock.Search")
 	}
 
 	mmSearch.mock.inspectFuncSearch = f
@@ -2041,28 +1951,28 @@ func (mmSearch *mLostIdServiceHandlerMockSearch) Inspect(f func(ctx context.Cont
 	return mmSearch
 }
 
-// Return sets up results that will be returned by LostIdServiceHandler.Search
-func (mmSearch *mLostIdServiceHandlerMockSearch) Return(pp2 *connect.Response[v1.SearchResponse], err error) *LostIdServiceHandlerMock {
+// Return sets up results that will be returned by LostIdServiceClient.Search
+func (mmSearch *mLostIdServiceClientMockSearch) Return(pp2 *connect.Response[v1.SearchResponse], err error) *LostIdServiceClientMock {
 	if mmSearch.mock.funcSearch != nil {
-		mmSearch.mock.t.Fatalf("LostIdServiceHandlerMock.Search mock is already set by Set")
+		mmSearch.mock.t.Fatalf("LostIdServiceClientMock.Search mock is already set by Set")
 	}
 
 	if mmSearch.defaultExpectation == nil {
-		mmSearch.defaultExpectation = &LostIdServiceHandlerMockSearchExpectation{mock: mmSearch.mock}
+		mmSearch.defaultExpectation = &LostIdServiceClientMockSearchExpectation{mock: mmSearch.mock}
 	}
-	mmSearch.defaultExpectation.results = &LostIdServiceHandlerMockSearchResults{pp2, err}
+	mmSearch.defaultExpectation.results = &LostIdServiceClientMockSearchResults{pp2, err}
 	mmSearch.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmSearch.mock
 }
 
-// Set uses given function f to mock the LostIdServiceHandler.Search method
-func (mmSearch *mLostIdServiceHandlerMockSearch) Set(f func(ctx context.Context, pp1 *connect.Request[v11.SearchRequest]) (pp2 *connect.Response[v1.SearchResponse], err error)) *LostIdServiceHandlerMock {
+// Set uses given function f to mock the LostIdServiceClient.Search method
+func (mmSearch *mLostIdServiceClientMockSearch) Set(f func(ctx context.Context, pp1 *connect.Request[v11.SearchRequest]) (pp2 *connect.Response[v1.SearchResponse], err error)) *LostIdServiceClientMock {
 	if mmSearch.defaultExpectation != nil {
-		mmSearch.mock.t.Fatalf("Default expectation is already set for the LostIdServiceHandler.Search method")
+		mmSearch.mock.t.Fatalf("Default expectation is already set for the LostIdServiceClient.Search method")
 	}
 
 	if len(mmSearch.expectations) > 0 {
-		mmSearch.mock.t.Fatalf("Some expectations are already set for the LostIdServiceHandler.Search method")
+		mmSearch.mock.t.Fatalf("Some expectations are already set for the LostIdServiceClient.Search method")
 	}
 
 	mmSearch.mock.funcSearch = f
@@ -2070,39 +1980,39 @@ func (mmSearch *mLostIdServiceHandlerMockSearch) Set(f func(ctx context.Context,
 	return mmSearch.mock
 }
 
-// When sets expectation for the LostIdServiceHandler.Search which will trigger the result defined by the following
+// When sets expectation for the LostIdServiceClient.Search which will trigger the result defined by the following
 // Then helper
-func (mmSearch *mLostIdServiceHandlerMockSearch) When(ctx context.Context, pp1 *connect.Request[v11.SearchRequest]) *LostIdServiceHandlerMockSearchExpectation {
+func (mmSearch *mLostIdServiceClientMockSearch) When(ctx context.Context, pp1 *connect.Request[v11.SearchRequest]) *LostIdServiceClientMockSearchExpectation {
 	if mmSearch.mock.funcSearch != nil {
-		mmSearch.mock.t.Fatalf("LostIdServiceHandlerMock.Search mock is already set by Set")
+		mmSearch.mock.t.Fatalf("LostIdServiceClientMock.Search mock is already set by Set")
 	}
 
-	expectation := &LostIdServiceHandlerMockSearchExpectation{
+	expectation := &LostIdServiceClientMockSearchExpectation{
 		mock:               mmSearch.mock,
-		params:             &LostIdServiceHandlerMockSearchParams{ctx, pp1},
-		expectationOrigins: LostIdServiceHandlerMockSearchExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &LostIdServiceClientMockSearchParams{ctx, pp1},
+		expectationOrigins: LostIdServiceClientMockSearchExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmSearch.expectations = append(mmSearch.expectations, expectation)
 	return expectation
 }
 
-// Then sets up LostIdServiceHandler.Search return parameters for the expectation previously defined by the When method
-func (e *LostIdServiceHandlerMockSearchExpectation) Then(pp2 *connect.Response[v1.SearchResponse], err error) *LostIdServiceHandlerMock {
-	e.results = &LostIdServiceHandlerMockSearchResults{pp2, err}
+// Then sets up LostIdServiceClient.Search return parameters for the expectation previously defined by the When method
+func (e *LostIdServiceClientMockSearchExpectation) Then(pp2 *connect.Response[v1.SearchResponse], err error) *LostIdServiceClientMock {
+	e.results = &LostIdServiceClientMockSearchResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times LostIdServiceHandler.Search should be invoked
-func (mmSearch *mLostIdServiceHandlerMockSearch) Times(n uint64) *mLostIdServiceHandlerMockSearch {
+// Times sets number of times LostIdServiceClient.Search should be invoked
+func (mmSearch *mLostIdServiceClientMockSearch) Times(n uint64) *mLostIdServiceClientMockSearch {
 	if n == 0 {
-		mmSearch.mock.t.Fatalf("Times of LostIdServiceHandlerMock.Search mock can not be zero")
+		mmSearch.mock.t.Fatalf("Times of LostIdServiceClientMock.Search mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmSearch.expectedInvocations, n)
 	mmSearch.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmSearch
 }
 
-func (mmSearch *mLostIdServiceHandlerMockSearch) invocationsDone() bool {
+func (mmSearch *mLostIdServiceClientMockSearch) invocationsDone() bool {
 	if len(mmSearch.expectations) == 0 && mmSearch.defaultExpectation == nil && mmSearch.mock.funcSearch == nil {
 		return true
 	}
@@ -2113,8 +2023,8 @@ func (mmSearch *mLostIdServiceHandlerMockSearch) invocationsDone() bool {
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// Search implements mm_lostidv1connect.LostIdServiceHandler
-func (mmSearch *LostIdServiceHandlerMock) Search(ctx context.Context, pp1 *connect.Request[v11.SearchRequest]) (pp2 *connect.Response[v1.SearchResponse], err error) {
+// Search implements mm_lostidv1connect.LostIdServiceClient
+func (mmSearch *LostIdServiceClientMock) Search(ctx context.Context, pp1 *connect.Request[v11.SearchRequest]) (pp2 *connect.Response[v1.SearchResponse], err error) {
 	mm_atomic.AddUint64(&mmSearch.beforeSearchCounter, 1)
 	defer mm_atomic.AddUint64(&mmSearch.afterSearchCounter, 1)
 
@@ -2124,7 +2034,7 @@ func (mmSearch *LostIdServiceHandlerMock) Search(ctx context.Context, pp1 *conne
 		mmSearch.inspectFuncSearch(ctx, pp1)
 	}
 
-	mm_params := LostIdServiceHandlerMockSearchParams{ctx, pp1}
+	mm_params := LostIdServiceClientMockSearchParams{ctx, pp1}
 
 	// Record call args
 	mmSearch.SearchMock.mutex.Lock()
@@ -2143,54 +2053,54 @@ func (mmSearch *LostIdServiceHandlerMock) Search(ctx context.Context, pp1 *conne
 		mm_want := mmSearch.SearchMock.defaultExpectation.params
 		mm_want_ptrs := mmSearch.SearchMock.defaultExpectation.paramPtrs
 
-		mm_got := LostIdServiceHandlerMockSearchParams{ctx, pp1}
+		mm_got := LostIdServiceClientMockSearchParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmSearch.t.Errorf("LostIdServiceHandlerMock.Search got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmSearch.t.Errorf("LostIdServiceClientMock.Search got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmSearch.SearchMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmSearch.t.Errorf("LostIdServiceHandlerMock.Search got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmSearch.t.Errorf("LostIdServiceClientMock.Search got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmSearch.SearchMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmSearch.t.Errorf("LostIdServiceHandlerMock.Search got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmSearch.t.Errorf("LostIdServiceClientMock.Search got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmSearch.SearchMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmSearch.SearchMock.defaultExpectation.results
 		if mm_results == nil {
-			mmSearch.t.Fatal("No results are set for the LostIdServiceHandlerMock.Search")
+			mmSearch.t.Fatal("No results are set for the LostIdServiceClientMock.Search")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmSearch.funcSearch != nil {
 		return mmSearch.funcSearch(ctx, pp1)
 	}
-	mmSearch.t.Fatalf("Unexpected call to LostIdServiceHandlerMock.Search. %v %v", ctx, pp1)
+	mmSearch.t.Fatalf("Unexpected call to LostIdServiceClientMock.Search. %v %v", ctx, pp1)
 	return
 }
 
-// SearchAfterCounter returns a count of finished LostIdServiceHandlerMock.Search invocations
-func (mmSearch *LostIdServiceHandlerMock) SearchAfterCounter() uint64 {
+// SearchAfterCounter returns a count of finished LostIdServiceClientMock.Search invocations
+func (mmSearch *LostIdServiceClientMock) SearchAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmSearch.afterSearchCounter)
 }
 
-// SearchBeforeCounter returns a count of LostIdServiceHandlerMock.Search invocations
-func (mmSearch *LostIdServiceHandlerMock) SearchBeforeCounter() uint64 {
+// SearchBeforeCounter returns a count of LostIdServiceClientMock.Search invocations
+func (mmSearch *LostIdServiceClientMock) SearchBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmSearch.beforeSearchCounter)
 }
 
-// Calls returns a list of arguments used in each call to LostIdServiceHandlerMock.Search.
+// Calls returns a list of arguments used in each call to LostIdServiceClientMock.Search.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmSearch *mLostIdServiceHandlerMockSearch) Calls() []*LostIdServiceHandlerMockSearchParams {
+func (mmSearch *mLostIdServiceClientMockSearch) Calls() []*LostIdServiceClientMockSearchParams {
 	mmSearch.mutex.RLock()
 
-	argCopy := make([]*LostIdServiceHandlerMockSearchParams, len(mmSearch.callArgs))
+	argCopy := make([]*LostIdServiceClientMockSearchParams, len(mmSearch.callArgs))
 	copy(argCopy, mmSearch.callArgs)
 
 	mmSearch.mutex.RUnlock()
@@ -2200,7 +2110,7 @@ func (mmSearch *mLostIdServiceHandlerMockSearch) Calls() []*LostIdServiceHandler
 
 // MinimockSearchDone returns true if the count of the Search invocations corresponds
 // the number of defined expectations
-func (m *LostIdServiceHandlerMock) MinimockSearchDone() bool {
+func (m *LostIdServiceClientMock) MinimockSearchDone() bool {
 	if m.SearchMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -2216,10 +2126,10 @@ func (m *LostIdServiceHandlerMock) MinimockSearchDone() bool {
 }
 
 // MinimockSearchInspect logs each unmet expectation
-func (m *LostIdServiceHandlerMock) MinimockSearchInspect() {
+func (m *LostIdServiceClientMock) MinimockSearchInspect() {
 	for _, e := range m.SearchMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to LostIdServiceHandlerMock.Search at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to LostIdServiceClientMock.Search at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -2227,24 +2137,24 @@ func (m *LostIdServiceHandlerMock) MinimockSearchInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.SearchMock.defaultExpectation != nil && afterSearchCounter < 1 {
 		if m.SearchMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to LostIdServiceHandlerMock.Search at\n%s", m.SearchMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to LostIdServiceClientMock.Search at\n%s", m.SearchMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to LostIdServiceHandlerMock.Search at\n%s with params: %#v", m.SearchMock.defaultExpectation.expectationOrigins.origin, *m.SearchMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to LostIdServiceClientMock.Search at\n%s with params: %#v", m.SearchMock.defaultExpectation.expectationOrigins.origin, *m.SearchMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcSearch != nil && afterSearchCounter < 1 {
-		m.t.Errorf("Expected call to LostIdServiceHandlerMock.Search at\n%s", m.funcSearchOrigin)
+		m.t.Errorf("Expected call to LostIdServiceClientMock.Search at\n%s", m.funcSearchOrigin)
 	}
 
 	if !m.SearchMock.invocationsDone() && afterSearchCounter > 0 {
-		m.t.Errorf("Expected %d calls to LostIdServiceHandlerMock.Search at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to LostIdServiceClientMock.Search at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.SearchMock.expectedInvocations), m.SearchMock.expectedInvocationsOrigin, afterSearchCounter)
 	}
 }
 
 // MinimockFinish checks that all mocked methods have been called the expected number of times
-func (m *LostIdServiceHandlerMock) MinimockFinish() {
+func (m *LostIdServiceClientMock) MinimockFinish() {
 	m.finishOnce.Do(func() {
 		if !m.minimockDone() {
 			m.MinimockCollectibleInspect()
@@ -2263,7 +2173,7 @@ func (m *LostIdServiceHandlerMock) MinimockFinish() {
 }
 
 // MinimockWait waits for all mocked methods to be called the expected number of times
-func (m *LostIdServiceHandlerMock) MinimockWait(timeout mm_time.Duration) {
+func (m *LostIdServiceClientMock) MinimockWait(timeout mm_time.Duration) {
 	timeoutCh := mm_time.After(timeout)
 	for {
 		if m.minimockDone() {
@@ -2278,7 +2188,7 @@ func (m *LostIdServiceHandlerMock) MinimockWait(timeout mm_time.Duration) {
 	}
 }
 
-func (m *LostIdServiceHandlerMock) minimockDone() bool {
+func (m *LostIdServiceClientMock) minimockDone() bool {
 	done := true
 	return done &&
 		m.MinimockCollectibleDone() &&

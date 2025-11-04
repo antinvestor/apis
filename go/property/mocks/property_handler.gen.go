@@ -2,7 +2,7 @@
 
 package mocks
 
-//go:generate minimock -i buf.build/gen/go/antinvestor/property/connectrpc/go/property/v1/propertyv1connect.PropertyServiceHandler -o property_handler.gen.go -n PropertyServiceHandlerMock -p mocks
+//go:generate minimock -i buf.build/gen/go/antinvestor/property/connectrpc/go/property/v1/propertyv1connect.PropertyServiceClient -o property_handler.gen.go -n PropertyServiceClientMock -p mocks
 
 import (
 	context "context"
@@ -15,8 +15,8 @@ import (
 	"github.com/gojuno/minimock/v3"
 )
 
-// PropertyServiceHandlerMock implements mm_propertyv1connect.PropertyServiceHandler
-type PropertyServiceHandlerMock struct {
+// PropertyServiceClientMock implements mm_propertyv1connect.PropertyServiceClient
+type PropertyServiceClientMock struct {
 	t          minimock.Tester
 	finishOnce sync.Once
 
@@ -25,189 +25,189 @@ type PropertyServiceHandlerMock struct {
 	inspectFuncAddLocality   func(ctx context.Context, pp1 *connect.Request[v1.AddLocalityRequest])
 	afterAddLocalityCounter  uint64
 	beforeAddLocalityCounter uint64
-	AddLocalityMock          mPropertyServiceHandlerMockAddLocality
+	AddLocalityMock          mPropertyServiceClientMockAddLocality
 
 	funcAddPropertyType          func(ctx context.Context, pp1 *connect.Request[v1.AddPropertyTypeRequest]) (pp2 *connect.Response[v1.AddPropertyTypeResponse], err error)
 	funcAddPropertyTypeOrigin    string
 	inspectFuncAddPropertyType   func(ctx context.Context, pp1 *connect.Request[v1.AddPropertyTypeRequest])
 	afterAddPropertyTypeCounter  uint64
 	beforeAddPropertyTypeCounter uint64
-	AddPropertyTypeMock          mPropertyServiceHandlerMockAddPropertyType
+	AddPropertyTypeMock          mPropertyServiceClientMockAddPropertyType
 
 	funcAddSubscription          func(ctx context.Context, pp1 *connect.Request[v1.AddSubscriptionRequest]) (pp2 *connect.Response[v1.AddSubscriptionResponse], err error)
 	funcAddSubscriptionOrigin    string
 	inspectFuncAddSubscription   func(ctx context.Context, pp1 *connect.Request[v1.AddSubscriptionRequest])
 	afterAddSubscriptionCounter  uint64
 	beforeAddSubscriptionCounter uint64
-	AddSubscriptionMock          mPropertyServiceHandlerMockAddSubscription
+	AddSubscriptionMock          mPropertyServiceClientMockAddSubscription
 
 	funcCreateProperty          func(ctx context.Context, pp1 *connect.Request[v1.CreatePropertyRequest]) (pp2 *connect.Response[v1.CreatePropertyResponse], err error)
 	funcCreatePropertyOrigin    string
 	inspectFuncCreateProperty   func(ctx context.Context, pp1 *connect.Request[v1.CreatePropertyRequest])
 	afterCreatePropertyCounter  uint64
 	beforeCreatePropertyCounter uint64
-	CreatePropertyMock          mPropertyServiceHandlerMockCreateProperty
+	CreatePropertyMock          mPropertyServiceClientMockCreateProperty
 
 	funcDeleteLocality          func(ctx context.Context, pp1 *connect.Request[v1.DeleteLocalityRequest]) (pp2 *connect.Response[v1.DeleteLocalityResponse], err error)
 	funcDeleteLocalityOrigin    string
 	inspectFuncDeleteLocality   func(ctx context.Context, pp1 *connect.Request[v1.DeleteLocalityRequest])
 	afterDeleteLocalityCounter  uint64
 	beforeDeleteLocalityCounter uint64
-	DeleteLocalityMock          mPropertyServiceHandlerMockDeleteLocality
+	DeleteLocalityMock          mPropertyServiceClientMockDeleteLocality
 
 	funcDeleteProperty          func(ctx context.Context, pp1 *connect.Request[v1.DeletePropertyRequest]) (pp2 *connect.Response[v1.DeletePropertyResponse], err error)
 	funcDeletePropertyOrigin    string
 	inspectFuncDeleteProperty   func(ctx context.Context, pp1 *connect.Request[v1.DeletePropertyRequest])
 	afterDeletePropertyCounter  uint64
 	beforeDeletePropertyCounter uint64
-	DeletePropertyMock          mPropertyServiceHandlerMockDeleteProperty
+	DeletePropertyMock          mPropertyServiceClientMockDeleteProperty
 
 	funcDeleteSubscription          func(ctx context.Context, pp1 *connect.Request[v1.DeleteSubscriptionRequest]) (pp2 *connect.Response[v1.DeleteSubscriptionResponse], err error)
 	funcDeleteSubscriptionOrigin    string
 	inspectFuncDeleteSubscription   func(ctx context.Context, pp1 *connect.Request[v1.DeleteSubscriptionRequest])
 	afterDeleteSubscriptionCounter  uint64
 	beforeDeleteSubscriptionCounter uint64
-	DeleteSubscriptionMock          mPropertyServiceHandlerMockDeleteSubscription
+	DeleteSubscriptionMock          mPropertyServiceClientMockDeleteSubscription
 
-	funcHistoryOfProperty          func(ctx context.Context, pp1 *connect.Request[v1.HistoryOfPropertyRequest], pp2 *connect.ServerStream[v1.HistoryOfPropertyResponse]) (err error)
+	funcHistoryOfProperty          func(ctx context.Context, pp1 *connect.Request[v1.HistoryOfPropertyRequest]) (pp2 *connect.ServerStreamForClient[v1.HistoryOfPropertyResponse], err error)
 	funcHistoryOfPropertyOrigin    string
-	inspectFuncHistoryOfProperty   func(ctx context.Context, pp1 *connect.Request[v1.HistoryOfPropertyRequest], pp2 *connect.ServerStream[v1.HistoryOfPropertyResponse])
+	inspectFuncHistoryOfProperty   func(ctx context.Context, pp1 *connect.Request[v1.HistoryOfPropertyRequest])
 	afterHistoryOfPropertyCounter  uint64
 	beforeHistoryOfPropertyCounter uint64
-	HistoryOfPropertyMock          mPropertyServiceHandlerMockHistoryOfProperty
+	HistoryOfPropertyMock          mPropertyServiceClientMockHistoryOfProperty
 
-	funcListPropertyType          func(ctx context.Context, pp1 *connect.Request[v1.ListPropertyTypeRequest], pp2 *connect.ServerStream[v1.ListPropertyTypeResponse]) (err error)
+	funcListPropertyType          func(ctx context.Context, pp1 *connect.Request[v1.ListPropertyTypeRequest]) (pp2 *connect.ServerStreamForClient[v1.ListPropertyTypeResponse], err error)
 	funcListPropertyTypeOrigin    string
-	inspectFuncListPropertyType   func(ctx context.Context, pp1 *connect.Request[v1.ListPropertyTypeRequest], pp2 *connect.ServerStream[v1.ListPropertyTypeResponse])
+	inspectFuncListPropertyType   func(ctx context.Context, pp1 *connect.Request[v1.ListPropertyTypeRequest])
 	afterListPropertyTypeCounter  uint64
 	beforeListPropertyTypeCounter uint64
-	ListPropertyTypeMock          mPropertyServiceHandlerMockListPropertyType
+	ListPropertyTypeMock          mPropertyServiceClientMockListPropertyType
 
-	funcListSubscription          func(ctx context.Context, pp1 *connect.Request[v1.ListSubscriptionRequest], pp2 *connect.ServerStream[v1.ListSubscriptionResponse]) (err error)
+	funcListSubscription          func(ctx context.Context, pp1 *connect.Request[v1.ListSubscriptionRequest]) (pp2 *connect.ServerStreamForClient[v1.ListSubscriptionResponse], err error)
 	funcListSubscriptionOrigin    string
-	inspectFuncListSubscription   func(ctx context.Context, pp1 *connect.Request[v1.ListSubscriptionRequest], pp2 *connect.ServerStream[v1.ListSubscriptionResponse])
+	inspectFuncListSubscription   func(ctx context.Context, pp1 *connect.Request[v1.ListSubscriptionRequest])
 	afterListSubscriptionCounter  uint64
 	beforeListSubscriptionCounter uint64
-	ListSubscriptionMock          mPropertyServiceHandlerMockListSubscription
+	ListSubscriptionMock          mPropertyServiceClientMockListSubscription
 
-	funcSearchProperty          func(ctx context.Context, pp1 *connect.Request[v1.SearchPropertyRequest], pp2 *connect.ServerStream[v1.SearchPropertyResponse]) (err error)
+	funcSearchProperty          func(ctx context.Context, pp1 *connect.Request[v1.SearchPropertyRequest]) (pp2 *connect.ServerStreamForClient[v1.SearchPropertyResponse], err error)
 	funcSearchPropertyOrigin    string
-	inspectFuncSearchProperty   func(ctx context.Context, pp1 *connect.Request[v1.SearchPropertyRequest], pp2 *connect.ServerStream[v1.SearchPropertyResponse])
+	inspectFuncSearchProperty   func(ctx context.Context, pp1 *connect.Request[v1.SearchPropertyRequest])
 	afterSearchPropertyCounter  uint64
 	beforeSearchPropertyCounter uint64
-	SearchPropertyMock          mPropertyServiceHandlerMockSearchProperty
+	SearchPropertyMock          mPropertyServiceClientMockSearchProperty
 
 	funcStateOfProperty          func(ctx context.Context, pp1 *connect.Request[v1.StateOfPropertyRequest]) (pp2 *connect.Response[v1.StateOfPropertyResponse], err error)
 	funcStateOfPropertyOrigin    string
 	inspectFuncStateOfProperty   func(ctx context.Context, pp1 *connect.Request[v1.StateOfPropertyRequest])
 	afterStateOfPropertyCounter  uint64
 	beforeStateOfPropertyCounter uint64
-	StateOfPropertyMock          mPropertyServiceHandlerMockStateOfProperty
+	StateOfPropertyMock          mPropertyServiceClientMockStateOfProperty
 
 	funcUpdateProperty          func(ctx context.Context, pp1 *connect.Request[v1.UpdatePropertyRequest]) (pp2 *connect.Response[v1.UpdatePropertyResponse], err error)
 	funcUpdatePropertyOrigin    string
 	inspectFuncUpdateProperty   func(ctx context.Context, pp1 *connect.Request[v1.UpdatePropertyRequest])
 	afterUpdatePropertyCounter  uint64
 	beforeUpdatePropertyCounter uint64
-	UpdatePropertyMock          mPropertyServiceHandlerMockUpdateProperty
+	UpdatePropertyMock          mPropertyServiceClientMockUpdateProperty
 }
 
-// NewPropertyServiceHandlerMock returns a mock for mm_propertyv1connect.PropertyServiceHandler
-func NewPropertyServiceHandlerMock(t minimock.Tester) *PropertyServiceHandlerMock {
-	m := &PropertyServiceHandlerMock{t: t}
+// NewPropertyServiceClientMock returns a mock for mm_propertyv1connect.PropertyServiceClient
+func NewPropertyServiceClientMock(t minimock.Tester) *PropertyServiceClientMock {
+	m := &PropertyServiceClientMock{t: t}
 
 	if controller, ok := t.(minimock.MockController); ok {
 		controller.RegisterMocker(m)
 	}
 
-	m.AddLocalityMock = mPropertyServiceHandlerMockAddLocality{mock: m}
-	m.AddLocalityMock.callArgs = []*PropertyServiceHandlerMockAddLocalityParams{}
+	m.AddLocalityMock = mPropertyServiceClientMockAddLocality{mock: m}
+	m.AddLocalityMock.callArgs = []*PropertyServiceClientMockAddLocalityParams{}
 
-	m.AddPropertyTypeMock = mPropertyServiceHandlerMockAddPropertyType{mock: m}
-	m.AddPropertyTypeMock.callArgs = []*PropertyServiceHandlerMockAddPropertyTypeParams{}
+	m.AddPropertyTypeMock = mPropertyServiceClientMockAddPropertyType{mock: m}
+	m.AddPropertyTypeMock.callArgs = []*PropertyServiceClientMockAddPropertyTypeParams{}
 
-	m.AddSubscriptionMock = mPropertyServiceHandlerMockAddSubscription{mock: m}
-	m.AddSubscriptionMock.callArgs = []*PropertyServiceHandlerMockAddSubscriptionParams{}
+	m.AddSubscriptionMock = mPropertyServiceClientMockAddSubscription{mock: m}
+	m.AddSubscriptionMock.callArgs = []*PropertyServiceClientMockAddSubscriptionParams{}
 
-	m.CreatePropertyMock = mPropertyServiceHandlerMockCreateProperty{mock: m}
-	m.CreatePropertyMock.callArgs = []*PropertyServiceHandlerMockCreatePropertyParams{}
+	m.CreatePropertyMock = mPropertyServiceClientMockCreateProperty{mock: m}
+	m.CreatePropertyMock.callArgs = []*PropertyServiceClientMockCreatePropertyParams{}
 
-	m.DeleteLocalityMock = mPropertyServiceHandlerMockDeleteLocality{mock: m}
-	m.DeleteLocalityMock.callArgs = []*PropertyServiceHandlerMockDeleteLocalityParams{}
+	m.DeleteLocalityMock = mPropertyServiceClientMockDeleteLocality{mock: m}
+	m.DeleteLocalityMock.callArgs = []*PropertyServiceClientMockDeleteLocalityParams{}
 
-	m.DeletePropertyMock = mPropertyServiceHandlerMockDeleteProperty{mock: m}
-	m.DeletePropertyMock.callArgs = []*PropertyServiceHandlerMockDeletePropertyParams{}
+	m.DeletePropertyMock = mPropertyServiceClientMockDeleteProperty{mock: m}
+	m.DeletePropertyMock.callArgs = []*PropertyServiceClientMockDeletePropertyParams{}
 
-	m.DeleteSubscriptionMock = mPropertyServiceHandlerMockDeleteSubscription{mock: m}
-	m.DeleteSubscriptionMock.callArgs = []*PropertyServiceHandlerMockDeleteSubscriptionParams{}
+	m.DeleteSubscriptionMock = mPropertyServiceClientMockDeleteSubscription{mock: m}
+	m.DeleteSubscriptionMock.callArgs = []*PropertyServiceClientMockDeleteSubscriptionParams{}
 
-	m.HistoryOfPropertyMock = mPropertyServiceHandlerMockHistoryOfProperty{mock: m}
-	m.HistoryOfPropertyMock.callArgs = []*PropertyServiceHandlerMockHistoryOfPropertyParams{}
+	m.HistoryOfPropertyMock = mPropertyServiceClientMockHistoryOfProperty{mock: m}
+	m.HistoryOfPropertyMock.callArgs = []*PropertyServiceClientMockHistoryOfPropertyParams{}
 
-	m.ListPropertyTypeMock = mPropertyServiceHandlerMockListPropertyType{mock: m}
-	m.ListPropertyTypeMock.callArgs = []*PropertyServiceHandlerMockListPropertyTypeParams{}
+	m.ListPropertyTypeMock = mPropertyServiceClientMockListPropertyType{mock: m}
+	m.ListPropertyTypeMock.callArgs = []*PropertyServiceClientMockListPropertyTypeParams{}
 
-	m.ListSubscriptionMock = mPropertyServiceHandlerMockListSubscription{mock: m}
-	m.ListSubscriptionMock.callArgs = []*PropertyServiceHandlerMockListSubscriptionParams{}
+	m.ListSubscriptionMock = mPropertyServiceClientMockListSubscription{mock: m}
+	m.ListSubscriptionMock.callArgs = []*PropertyServiceClientMockListSubscriptionParams{}
 
-	m.SearchPropertyMock = mPropertyServiceHandlerMockSearchProperty{mock: m}
-	m.SearchPropertyMock.callArgs = []*PropertyServiceHandlerMockSearchPropertyParams{}
+	m.SearchPropertyMock = mPropertyServiceClientMockSearchProperty{mock: m}
+	m.SearchPropertyMock.callArgs = []*PropertyServiceClientMockSearchPropertyParams{}
 
-	m.StateOfPropertyMock = mPropertyServiceHandlerMockStateOfProperty{mock: m}
-	m.StateOfPropertyMock.callArgs = []*PropertyServiceHandlerMockStateOfPropertyParams{}
+	m.StateOfPropertyMock = mPropertyServiceClientMockStateOfProperty{mock: m}
+	m.StateOfPropertyMock.callArgs = []*PropertyServiceClientMockStateOfPropertyParams{}
 
-	m.UpdatePropertyMock = mPropertyServiceHandlerMockUpdateProperty{mock: m}
-	m.UpdatePropertyMock.callArgs = []*PropertyServiceHandlerMockUpdatePropertyParams{}
+	m.UpdatePropertyMock = mPropertyServiceClientMockUpdateProperty{mock: m}
+	m.UpdatePropertyMock.callArgs = []*PropertyServiceClientMockUpdatePropertyParams{}
 
 	t.Cleanup(m.MinimockFinish)
 
 	return m
 }
 
-type mPropertyServiceHandlerMockAddLocality struct {
+type mPropertyServiceClientMockAddLocality struct {
 	optional           bool
-	mock               *PropertyServiceHandlerMock
-	defaultExpectation *PropertyServiceHandlerMockAddLocalityExpectation
-	expectations       []*PropertyServiceHandlerMockAddLocalityExpectation
+	mock               *PropertyServiceClientMock
+	defaultExpectation *PropertyServiceClientMockAddLocalityExpectation
+	expectations       []*PropertyServiceClientMockAddLocalityExpectation
 
-	callArgs []*PropertyServiceHandlerMockAddLocalityParams
+	callArgs []*PropertyServiceClientMockAddLocalityParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// PropertyServiceHandlerMockAddLocalityExpectation specifies expectation struct of the PropertyServiceHandler.AddLocality
-type PropertyServiceHandlerMockAddLocalityExpectation struct {
-	mock               *PropertyServiceHandlerMock
-	params             *PropertyServiceHandlerMockAddLocalityParams
-	paramPtrs          *PropertyServiceHandlerMockAddLocalityParamPtrs
-	expectationOrigins PropertyServiceHandlerMockAddLocalityExpectationOrigins
-	results            *PropertyServiceHandlerMockAddLocalityResults
+// PropertyServiceClientMockAddLocalityExpectation specifies expectation struct of the PropertyServiceClient.AddLocality
+type PropertyServiceClientMockAddLocalityExpectation struct {
+	mock               *PropertyServiceClientMock
+	params             *PropertyServiceClientMockAddLocalityParams
+	paramPtrs          *PropertyServiceClientMockAddLocalityParamPtrs
+	expectationOrigins PropertyServiceClientMockAddLocalityExpectationOrigins
+	results            *PropertyServiceClientMockAddLocalityResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// PropertyServiceHandlerMockAddLocalityParams contains parameters of the PropertyServiceHandler.AddLocality
-type PropertyServiceHandlerMockAddLocalityParams struct {
+// PropertyServiceClientMockAddLocalityParams contains parameters of the PropertyServiceClient.AddLocality
+type PropertyServiceClientMockAddLocalityParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.AddLocalityRequest]
 }
 
-// PropertyServiceHandlerMockAddLocalityParamPtrs contains pointers to parameters of the PropertyServiceHandler.AddLocality
-type PropertyServiceHandlerMockAddLocalityParamPtrs struct {
+// PropertyServiceClientMockAddLocalityParamPtrs contains pointers to parameters of the PropertyServiceClient.AddLocality
+type PropertyServiceClientMockAddLocalityParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.AddLocalityRequest]
 }
 
-// PropertyServiceHandlerMockAddLocalityResults contains results of the PropertyServiceHandler.AddLocality
-type PropertyServiceHandlerMockAddLocalityResults struct {
+// PropertyServiceClientMockAddLocalityResults contains results of the PropertyServiceClient.AddLocality
+type PropertyServiceClientMockAddLocalityResults struct {
 	pp2 *connect.Response[v1.AddLocalityResponse]
 	err error
 }
 
-// PropertyServiceHandlerMockAddLocalityOrigins contains origins of expectations of the PropertyServiceHandler.AddLocality
-type PropertyServiceHandlerMockAddLocalityExpectationOrigins struct {
+// PropertyServiceClientMockAddLocalityOrigins contains origins of expectations of the PropertyServiceClient.AddLocality
+type PropertyServiceClientMockAddLocalityExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -218,26 +218,26 @@ type PropertyServiceHandlerMockAddLocalityExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmAddLocality *mPropertyServiceHandlerMockAddLocality) Optional() *mPropertyServiceHandlerMockAddLocality {
+func (mmAddLocality *mPropertyServiceClientMockAddLocality) Optional() *mPropertyServiceClientMockAddLocality {
 	mmAddLocality.optional = true
 	return mmAddLocality
 }
 
-// Expect sets up expected params for PropertyServiceHandler.AddLocality
-func (mmAddLocality *mPropertyServiceHandlerMockAddLocality) Expect(ctx context.Context, pp1 *connect.Request[v1.AddLocalityRequest]) *mPropertyServiceHandlerMockAddLocality {
+// Expect sets up expected params for PropertyServiceClient.AddLocality
+func (mmAddLocality *mPropertyServiceClientMockAddLocality) Expect(ctx context.Context, pp1 *connect.Request[v1.AddLocalityRequest]) *mPropertyServiceClientMockAddLocality {
 	if mmAddLocality.mock.funcAddLocality != nil {
-		mmAddLocality.mock.t.Fatalf("PropertyServiceHandlerMock.AddLocality mock is already set by Set")
+		mmAddLocality.mock.t.Fatalf("PropertyServiceClientMock.AddLocality mock is already set by Set")
 	}
 
 	if mmAddLocality.defaultExpectation == nil {
-		mmAddLocality.defaultExpectation = &PropertyServiceHandlerMockAddLocalityExpectation{}
+		mmAddLocality.defaultExpectation = &PropertyServiceClientMockAddLocalityExpectation{}
 	}
 
 	if mmAddLocality.defaultExpectation.paramPtrs != nil {
-		mmAddLocality.mock.t.Fatalf("PropertyServiceHandlerMock.AddLocality mock is already set by ExpectParams functions")
+		mmAddLocality.mock.t.Fatalf("PropertyServiceClientMock.AddLocality mock is already set by ExpectParams functions")
 	}
 
-	mmAddLocality.defaultExpectation.params = &PropertyServiceHandlerMockAddLocalityParams{ctx, pp1}
+	mmAddLocality.defaultExpectation.params = &PropertyServiceClientMockAddLocalityParams{ctx, pp1}
 	mmAddLocality.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmAddLocality.expectations {
 		if minimock.Equal(e.params, mmAddLocality.defaultExpectation.params) {
@@ -248,22 +248,22 @@ func (mmAddLocality *mPropertyServiceHandlerMockAddLocality) Expect(ctx context.
 	return mmAddLocality
 }
 
-// ExpectCtxParam1 sets up expected param ctx for PropertyServiceHandler.AddLocality
-func (mmAddLocality *mPropertyServiceHandlerMockAddLocality) ExpectCtxParam1(ctx context.Context) *mPropertyServiceHandlerMockAddLocality {
+// ExpectCtxParam1 sets up expected param ctx for PropertyServiceClient.AddLocality
+func (mmAddLocality *mPropertyServiceClientMockAddLocality) ExpectCtxParam1(ctx context.Context) *mPropertyServiceClientMockAddLocality {
 	if mmAddLocality.mock.funcAddLocality != nil {
-		mmAddLocality.mock.t.Fatalf("PropertyServiceHandlerMock.AddLocality mock is already set by Set")
+		mmAddLocality.mock.t.Fatalf("PropertyServiceClientMock.AddLocality mock is already set by Set")
 	}
 
 	if mmAddLocality.defaultExpectation == nil {
-		mmAddLocality.defaultExpectation = &PropertyServiceHandlerMockAddLocalityExpectation{}
+		mmAddLocality.defaultExpectation = &PropertyServiceClientMockAddLocalityExpectation{}
 	}
 
 	if mmAddLocality.defaultExpectation.params != nil {
-		mmAddLocality.mock.t.Fatalf("PropertyServiceHandlerMock.AddLocality mock is already set by Expect")
+		mmAddLocality.mock.t.Fatalf("PropertyServiceClientMock.AddLocality mock is already set by Expect")
 	}
 
 	if mmAddLocality.defaultExpectation.paramPtrs == nil {
-		mmAddLocality.defaultExpectation.paramPtrs = &PropertyServiceHandlerMockAddLocalityParamPtrs{}
+		mmAddLocality.defaultExpectation.paramPtrs = &PropertyServiceClientMockAddLocalityParamPtrs{}
 	}
 	mmAddLocality.defaultExpectation.paramPtrs.ctx = &ctx
 	mmAddLocality.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -271,22 +271,22 @@ func (mmAddLocality *mPropertyServiceHandlerMockAddLocality) ExpectCtxParam1(ctx
 	return mmAddLocality
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for PropertyServiceHandler.AddLocality
-func (mmAddLocality *mPropertyServiceHandlerMockAddLocality) ExpectPp1Param2(pp1 *connect.Request[v1.AddLocalityRequest]) *mPropertyServiceHandlerMockAddLocality {
+// ExpectPp1Param2 sets up expected param pp1 for PropertyServiceClient.AddLocality
+func (mmAddLocality *mPropertyServiceClientMockAddLocality) ExpectPp1Param2(pp1 *connect.Request[v1.AddLocalityRequest]) *mPropertyServiceClientMockAddLocality {
 	if mmAddLocality.mock.funcAddLocality != nil {
-		mmAddLocality.mock.t.Fatalf("PropertyServiceHandlerMock.AddLocality mock is already set by Set")
+		mmAddLocality.mock.t.Fatalf("PropertyServiceClientMock.AddLocality mock is already set by Set")
 	}
 
 	if mmAddLocality.defaultExpectation == nil {
-		mmAddLocality.defaultExpectation = &PropertyServiceHandlerMockAddLocalityExpectation{}
+		mmAddLocality.defaultExpectation = &PropertyServiceClientMockAddLocalityExpectation{}
 	}
 
 	if mmAddLocality.defaultExpectation.params != nil {
-		mmAddLocality.mock.t.Fatalf("PropertyServiceHandlerMock.AddLocality mock is already set by Expect")
+		mmAddLocality.mock.t.Fatalf("PropertyServiceClientMock.AddLocality mock is already set by Expect")
 	}
 
 	if mmAddLocality.defaultExpectation.paramPtrs == nil {
-		mmAddLocality.defaultExpectation.paramPtrs = &PropertyServiceHandlerMockAddLocalityParamPtrs{}
+		mmAddLocality.defaultExpectation.paramPtrs = &PropertyServiceClientMockAddLocalityParamPtrs{}
 	}
 	mmAddLocality.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmAddLocality.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -294,10 +294,10 @@ func (mmAddLocality *mPropertyServiceHandlerMockAddLocality) ExpectPp1Param2(pp1
 	return mmAddLocality
 }
 
-// Inspect accepts an inspector function that has same arguments as the PropertyServiceHandler.AddLocality
-func (mmAddLocality *mPropertyServiceHandlerMockAddLocality) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.AddLocalityRequest])) *mPropertyServiceHandlerMockAddLocality {
+// Inspect accepts an inspector function that has same arguments as the PropertyServiceClient.AddLocality
+func (mmAddLocality *mPropertyServiceClientMockAddLocality) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.AddLocalityRequest])) *mPropertyServiceClientMockAddLocality {
 	if mmAddLocality.mock.inspectFuncAddLocality != nil {
-		mmAddLocality.mock.t.Fatalf("Inspect function is already set for PropertyServiceHandlerMock.AddLocality")
+		mmAddLocality.mock.t.Fatalf("Inspect function is already set for PropertyServiceClientMock.AddLocality")
 	}
 
 	mmAddLocality.mock.inspectFuncAddLocality = f
@@ -305,28 +305,28 @@ func (mmAddLocality *mPropertyServiceHandlerMockAddLocality) Inspect(f func(ctx 
 	return mmAddLocality
 }
 
-// Return sets up results that will be returned by PropertyServiceHandler.AddLocality
-func (mmAddLocality *mPropertyServiceHandlerMockAddLocality) Return(pp2 *connect.Response[v1.AddLocalityResponse], err error) *PropertyServiceHandlerMock {
+// Return sets up results that will be returned by PropertyServiceClient.AddLocality
+func (mmAddLocality *mPropertyServiceClientMockAddLocality) Return(pp2 *connect.Response[v1.AddLocalityResponse], err error) *PropertyServiceClientMock {
 	if mmAddLocality.mock.funcAddLocality != nil {
-		mmAddLocality.mock.t.Fatalf("PropertyServiceHandlerMock.AddLocality mock is already set by Set")
+		mmAddLocality.mock.t.Fatalf("PropertyServiceClientMock.AddLocality mock is already set by Set")
 	}
 
 	if mmAddLocality.defaultExpectation == nil {
-		mmAddLocality.defaultExpectation = &PropertyServiceHandlerMockAddLocalityExpectation{mock: mmAddLocality.mock}
+		mmAddLocality.defaultExpectation = &PropertyServiceClientMockAddLocalityExpectation{mock: mmAddLocality.mock}
 	}
-	mmAddLocality.defaultExpectation.results = &PropertyServiceHandlerMockAddLocalityResults{pp2, err}
+	mmAddLocality.defaultExpectation.results = &PropertyServiceClientMockAddLocalityResults{pp2, err}
 	mmAddLocality.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmAddLocality.mock
 }
 
-// Set uses given function f to mock the PropertyServiceHandler.AddLocality method
-func (mmAddLocality *mPropertyServiceHandlerMockAddLocality) Set(f func(ctx context.Context, pp1 *connect.Request[v1.AddLocalityRequest]) (pp2 *connect.Response[v1.AddLocalityResponse], err error)) *PropertyServiceHandlerMock {
+// Set uses given function f to mock the PropertyServiceClient.AddLocality method
+func (mmAddLocality *mPropertyServiceClientMockAddLocality) Set(f func(ctx context.Context, pp1 *connect.Request[v1.AddLocalityRequest]) (pp2 *connect.Response[v1.AddLocalityResponse], err error)) *PropertyServiceClientMock {
 	if mmAddLocality.defaultExpectation != nil {
-		mmAddLocality.mock.t.Fatalf("Default expectation is already set for the PropertyServiceHandler.AddLocality method")
+		mmAddLocality.mock.t.Fatalf("Default expectation is already set for the PropertyServiceClient.AddLocality method")
 	}
 
 	if len(mmAddLocality.expectations) > 0 {
-		mmAddLocality.mock.t.Fatalf("Some expectations are already set for the PropertyServiceHandler.AddLocality method")
+		mmAddLocality.mock.t.Fatalf("Some expectations are already set for the PropertyServiceClient.AddLocality method")
 	}
 
 	mmAddLocality.mock.funcAddLocality = f
@@ -334,39 +334,39 @@ func (mmAddLocality *mPropertyServiceHandlerMockAddLocality) Set(f func(ctx cont
 	return mmAddLocality.mock
 }
 
-// When sets expectation for the PropertyServiceHandler.AddLocality which will trigger the result defined by the following
+// When sets expectation for the PropertyServiceClient.AddLocality which will trigger the result defined by the following
 // Then helper
-func (mmAddLocality *mPropertyServiceHandlerMockAddLocality) When(ctx context.Context, pp1 *connect.Request[v1.AddLocalityRequest]) *PropertyServiceHandlerMockAddLocalityExpectation {
+func (mmAddLocality *mPropertyServiceClientMockAddLocality) When(ctx context.Context, pp1 *connect.Request[v1.AddLocalityRequest]) *PropertyServiceClientMockAddLocalityExpectation {
 	if mmAddLocality.mock.funcAddLocality != nil {
-		mmAddLocality.mock.t.Fatalf("PropertyServiceHandlerMock.AddLocality mock is already set by Set")
+		mmAddLocality.mock.t.Fatalf("PropertyServiceClientMock.AddLocality mock is already set by Set")
 	}
 
-	expectation := &PropertyServiceHandlerMockAddLocalityExpectation{
+	expectation := &PropertyServiceClientMockAddLocalityExpectation{
 		mock:               mmAddLocality.mock,
-		params:             &PropertyServiceHandlerMockAddLocalityParams{ctx, pp1},
-		expectationOrigins: PropertyServiceHandlerMockAddLocalityExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &PropertyServiceClientMockAddLocalityParams{ctx, pp1},
+		expectationOrigins: PropertyServiceClientMockAddLocalityExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmAddLocality.expectations = append(mmAddLocality.expectations, expectation)
 	return expectation
 }
 
-// Then sets up PropertyServiceHandler.AddLocality return parameters for the expectation previously defined by the When method
-func (e *PropertyServiceHandlerMockAddLocalityExpectation) Then(pp2 *connect.Response[v1.AddLocalityResponse], err error) *PropertyServiceHandlerMock {
-	e.results = &PropertyServiceHandlerMockAddLocalityResults{pp2, err}
+// Then sets up PropertyServiceClient.AddLocality return parameters for the expectation previously defined by the When method
+func (e *PropertyServiceClientMockAddLocalityExpectation) Then(pp2 *connect.Response[v1.AddLocalityResponse], err error) *PropertyServiceClientMock {
+	e.results = &PropertyServiceClientMockAddLocalityResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times PropertyServiceHandler.AddLocality should be invoked
-func (mmAddLocality *mPropertyServiceHandlerMockAddLocality) Times(n uint64) *mPropertyServiceHandlerMockAddLocality {
+// Times sets number of times PropertyServiceClient.AddLocality should be invoked
+func (mmAddLocality *mPropertyServiceClientMockAddLocality) Times(n uint64) *mPropertyServiceClientMockAddLocality {
 	if n == 0 {
-		mmAddLocality.mock.t.Fatalf("Times of PropertyServiceHandlerMock.AddLocality mock can not be zero")
+		mmAddLocality.mock.t.Fatalf("Times of PropertyServiceClientMock.AddLocality mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmAddLocality.expectedInvocations, n)
 	mmAddLocality.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmAddLocality
 }
 
-func (mmAddLocality *mPropertyServiceHandlerMockAddLocality) invocationsDone() bool {
+func (mmAddLocality *mPropertyServiceClientMockAddLocality) invocationsDone() bool {
 	if len(mmAddLocality.expectations) == 0 && mmAddLocality.defaultExpectation == nil && mmAddLocality.mock.funcAddLocality == nil {
 		return true
 	}
@@ -377,8 +377,8 @@ func (mmAddLocality *mPropertyServiceHandlerMockAddLocality) invocationsDone() b
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// AddLocality implements mm_propertyv1connect.PropertyServiceHandler
-func (mmAddLocality *PropertyServiceHandlerMock) AddLocality(ctx context.Context, pp1 *connect.Request[v1.AddLocalityRequest]) (pp2 *connect.Response[v1.AddLocalityResponse], err error) {
+// AddLocality implements mm_propertyv1connect.PropertyServiceClient
+func (mmAddLocality *PropertyServiceClientMock) AddLocality(ctx context.Context, pp1 *connect.Request[v1.AddLocalityRequest]) (pp2 *connect.Response[v1.AddLocalityResponse], err error) {
 	mm_atomic.AddUint64(&mmAddLocality.beforeAddLocalityCounter, 1)
 	defer mm_atomic.AddUint64(&mmAddLocality.afterAddLocalityCounter, 1)
 
@@ -388,7 +388,7 @@ func (mmAddLocality *PropertyServiceHandlerMock) AddLocality(ctx context.Context
 		mmAddLocality.inspectFuncAddLocality(ctx, pp1)
 	}
 
-	mm_params := PropertyServiceHandlerMockAddLocalityParams{ctx, pp1}
+	mm_params := PropertyServiceClientMockAddLocalityParams{ctx, pp1}
 
 	// Record call args
 	mmAddLocality.AddLocalityMock.mutex.Lock()
@@ -407,54 +407,54 @@ func (mmAddLocality *PropertyServiceHandlerMock) AddLocality(ctx context.Context
 		mm_want := mmAddLocality.AddLocalityMock.defaultExpectation.params
 		mm_want_ptrs := mmAddLocality.AddLocalityMock.defaultExpectation.paramPtrs
 
-		mm_got := PropertyServiceHandlerMockAddLocalityParams{ctx, pp1}
+		mm_got := PropertyServiceClientMockAddLocalityParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmAddLocality.t.Errorf("PropertyServiceHandlerMock.AddLocality got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmAddLocality.t.Errorf("PropertyServiceClientMock.AddLocality got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmAddLocality.AddLocalityMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmAddLocality.t.Errorf("PropertyServiceHandlerMock.AddLocality got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmAddLocality.t.Errorf("PropertyServiceClientMock.AddLocality got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmAddLocality.AddLocalityMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmAddLocality.t.Errorf("PropertyServiceHandlerMock.AddLocality got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmAddLocality.t.Errorf("PropertyServiceClientMock.AddLocality got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmAddLocality.AddLocalityMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmAddLocality.AddLocalityMock.defaultExpectation.results
 		if mm_results == nil {
-			mmAddLocality.t.Fatal("No results are set for the PropertyServiceHandlerMock.AddLocality")
+			mmAddLocality.t.Fatal("No results are set for the PropertyServiceClientMock.AddLocality")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmAddLocality.funcAddLocality != nil {
 		return mmAddLocality.funcAddLocality(ctx, pp1)
 	}
-	mmAddLocality.t.Fatalf("Unexpected call to PropertyServiceHandlerMock.AddLocality. %v %v", ctx, pp1)
+	mmAddLocality.t.Fatalf("Unexpected call to PropertyServiceClientMock.AddLocality. %v %v", ctx, pp1)
 	return
 }
 
-// AddLocalityAfterCounter returns a count of finished PropertyServiceHandlerMock.AddLocality invocations
-func (mmAddLocality *PropertyServiceHandlerMock) AddLocalityAfterCounter() uint64 {
+// AddLocalityAfterCounter returns a count of finished PropertyServiceClientMock.AddLocality invocations
+func (mmAddLocality *PropertyServiceClientMock) AddLocalityAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmAddLocality.afterAddLocalityCounter)
 }
 
-// AddLocalityBeforeCounter returns a count of PropertyServiceHandlerMock.AddLocality invocations
-func (mmAddLocality *PropertyServiceHandlerMock) AddLocalityBeforeCounter() uint64 {
+// AddLocalityBeforeCounter returns a count of PropertyServiceClientMock.AddLocality invocations
+func (mmAddLocality *PropertyServiceClientMock) AddLocalityBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmAddLocality.beforeAddLocalityCounter)
 }
 
-// Calls returns a list of arguments used in each call to PropertyServiceHandlerMock.AddLocality.
+// Calls returns a list of arguments used in each call to PropertyServiceClientMock.AddLocality.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmAddLocality *mPropertyServiceHandlerMockAddLocality) Calls() []*PropertyServiceHandlerMockAddLocalityParams {
+func (mmAddLocality *mPropertyServiceClientMockAddLocality) Calls() []*PropertyServiceClientMockAddLocalityParams {
 	mmAddLocality.mutex.RLock()
 
-	argCopy := make([]*PropertyServiceHandlerMockAddLocalityParams, len(mmAddLocality.callArgs))
+	argCopy := make([]*PropertyServiceClientMockAddLocalityParams, len(mmAddLocality.callArgs))
 	copy(argCopy, mmAddLocality.callArgs)
 
 	mmAddLocality.mutex.RUnlock()
@@ -464,7 +464,7 @@ func (mmAddLocality *mPropertyServiceHandlerMockAddLocality) Calls() []*Property
 
 // MinimockAddLocalityDone returns true if the count of the AddLocality invocations corresponds
 // the number of defined expectations
-func (m *PropertyServiceHandlerMock) MinimockAddLocalityDone() bool {
+func (m *PropertyServiceClientMock) MinimockAddLocalityDone() bool {
 	if m.AddLocalityMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -480,10 +480,10 @@ func (m *PropertyServiceHandlerMock) MinimockAddLocalityDone() bool {
 }
 
 // MinimockAddLocalityInspect logs each unmet expectation
-func (m *PropertyServiceHandlerMock) MinimockAddLocalityInspect() {
+func (m *PropertyServiceClientMock) MinimockAddLocalityInspect() {
 	for _, e := range m.AddLocalityMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to PropertyServiceHandlerMock.AddLocality at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to PropertyServiceClientMock.AddLocality at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -491,66 +491,66 @@ func (m *PropertyServiceHandlerMock) MinimockAddLocalityInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.AddLocalityMock.defaultExpectation != nil && afterAddLocalityCounter < 1 {
 		if m.AddLocalityMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to PropertyServiceHandlerMock.AddLocality at\n%s", m.AddLocalityMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to PropertyServiceClientMock.AddLocality at\n%s", m.AddLocalityMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to PropertyServiceHandlerMock.AddLocality at\n%s with params: %#v", m.AddLocalityMock.defaultExpectation.expectationOrigins.origin, *m.AddLocalityMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to PropertyServiceClientMock.AddLocality at\n%s with params: %#v", m.AddLocalityMock.defaultExpectation.expectationOrigins.origin, *m.AddLocalityMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcAddLocality != nil && afterAddLocalityCounter < 1 {
-		m.t.Errorf("Expected call to PropertyServiceHandlerMock.AddLocality at\n%s", m.funcAddLocalityOrigin)
+		m.t.Errorf("Expected call to PropertyServiceClientMock.AddLocality at\n%s", m.funcAddLocalityOrigin)
 	}
 
 	if !m.AddLocalityMock.invocationsDone() && afterAddLocalityCounter > 0 {
-		m.t.Errorf("Expected %d calls to PropertyServiceHandlerMock.AddLocality at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to PropertyServiceClientMock.AddLocality at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.AddLocalityMock.expectedInvocations), m.AddLocalityMock.expectedInvocationsOrigin, afterAddLocalityCounter)
 	}
 }
 
-type mPropertyServiceHandlerMockAddPropertyType struct {
+type mPropertyServiceClientMockAddPropertyType struct {
 	optional           bool
-	mock               *PropertyServiceHandlerMock
-	defaultExpectation *PropertyServiceHandlerMockAddPropertyTypeExpectation
-	expectations       []*PropertyServiceHandlerMockAddPropertyTypeExpectation
+	mock               *PropertyServiceClientMock
+	defaultExpectation *PropertyServiceClientMockAddPropertyTypeExpectation
+	expectations       []*PropertyServiceClientMockAddPropertyTypeExpectation
 
-	callArgs []*PropertyServiceHandlerMockAddPropertyTypeParams
+	callArgs []*PropertyServiceClientMockAddPropertyTypeParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// PropertyServiceHandlerMockAddPropertyTypeExpectation specifies expectation struct of the PropertyServiceHandler.AddPropertyType
-type PropertyServiceHandlerMockAddPropertyTypeExpectation struct {
-	mock               *PropertyServiceHandlerMock
-	params             *PropertyServiceHandlerMockAddPropertyTypeParams
-	paramPtrs          *PropertyServiceHandlerMockAddPropertyTypeParamPtrs
-	expectationOrigins PropertyServiceHandlerMockAddPropertyTypeExpectationOrigins
-	results            *PropertyServiceHandlerMockAddPropertyTypeResults
+// PropertyServiceClientMockAddPropertyTypeExpectation specifies expectation struct of the PropertyServiceClient.AddPropertyType
+type PropertyServiceClientMockAddPropertyTypeExpectation struct {
+	mock               *PropertyServiceClientMock
+	params             *PropertyServiceClientMockAddPropertyTypeParams
+	paramPtrs          *PropertyServiceClientMockAddPropertyTypeParamPtrs
+	expectationOrigins PropertyServiceClientMockAddPropertyTypeExpectationOrigins
+	results            *PropertyServiceClientMockAddPropertyTypeResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// PropertyServiceHandlerMockAddPropertyTypeParams contains parameters of the PropertyServiceHandler.AddPropertyType
-type PropertyServiceHandlerMockAddPropertyTypeParams struct {
+// PropertyServiceClientMockAddPropertyTypeParams contains parameters of the PropertyServiceClient.AddPropertyType
+type PropertyServiceClientMockAddPropertyTypeParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.AddPropertyTypeRequest]
 }
 
-// PropertyServiceHandlerMockAddPropertyTypeParamPtrs contains pointers to parameters of the PropertyServiceHandler.AddPropertyType
-type PropertyServiceHandlerMockAddPropertyTypeParamPtrs struct {
+// PropertyServiceClientMockAddPropertyTypeParamPtrs contains pointers to parameters of the PropertyServiceClient.AddPropertyType
+type PropertyServiceClientMockAddPropertyTypeParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.AddPropertyTypeRequest]
 }
 
-// PropertyServiceHandlerMockAddPropertyTypeResults contains results of the PropertyServiceHandler.AddPropertyType
-type PropertyServiceHandlerMockAddPropertyTypeResults struct {
+// PropertyServiceClientMockAddPropertyTypeResults contains results of the PropertyServiceClient.AddPropertyType
+type PropertyServiceClientMockAddPropertyTypeResults struct {
 	pp2 *connect.Response[v1.AddPropertyTypeResponse]
 	err error
 }
 
-// PropertyServiceHandlerMockAddPropertyTypeOrigins contains origins of expectations of the PropertyServiceHandler.AddPropertyType
-type PropertyServiceHandlerMockAddPropertyTypeExpectationOrigins struct {
+// PropertyServiceClientMockAddPropertyTypeOrigins contains origins of expectations of the PropertyServiceClient.AddPropertyType
+type PropertyServiceClientMockAddPropertyTypeExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -561,26 +561,26 @@ type PropertyServiceHandlerMockAddPropertyTypeExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmAddPropertyType *mPropertyServiceHandlerMockAddPropertyType) Optional() *mPropertyServiceHandlerMockAddPropertyType {
+func (mmAddPropertyType *mPropertyServiceClientMockAddPropertyType) Optional() *mPropertyServiceClientMockAddPropertyType {
 	mmAddPropertyType.optional = true
 	return mmAddPropertyType
 }
 
-// Expect sets up expected params for PropertyServiceHandler.AddPropertyType
-func (mmAddPropertyType *mPropertyServiceHandlerMockAddPropertyType) Expect(ctx context.Context, pp1 *connect.Request[v1.AddPropertyTypeRequest]) *mPropertyServiceHandlerMockAddPropertyType {
+// Expect sets up expected params for PropertyServiceClient.AddPropertyType
+func (mmAddPropertyType *mPropertyServiceClientMockAddPropertyType) Expect(ctx context.Context, pp1 *connect.Request[v1.AddPropertyTypeRequest]) *mPropertyServiceClientMockAddPropertyType {
 	if mmAddPropertyType.mock.funcAddPropertyType != nil {
-		mmAddPropertyType.mock.t.Fatalf("PropertyServiceHandlerMock.AddPropertyType mock is already set by Set")
+		mmAddPropertyType.mock.t.Fatalf("PropertyServiceClientMock.AddPropertyType mock is already set by Set")
 	}
 
 	if mmAddPropertyType.defaultExpectation == nil {
-		mmAddPropertyType.defaultExpectation = &PropertyServiceHandlerMockAddPropertyTypeExpectation{}
+		mmAddPropertyType.defaultExpectation = &PropertyServiceClientMockAddPropertyTypeExpectation{}
 	}
 
 	if mmAddPropertyType.defaultExpectation.paramPtrs != nil {
-		mmAddPropertyType.mock.t.Fatalf("PropertyServiceHandlerMock.AddPropertyType mock is already set by ExpectParams functions")
+		mmAddPropertyType.mock.t.Fatalf("PropertyServiceClientMock.AddPropertyType mock is already set by ExpectParams functions")
 	}
 
-	mmAddPropertyType.defaultExpectation.params = &PropertyServiceHandlerMockAddPropertyTypeParams{ctx, pp1}
+	mmAddPropertyType.defaultExpectation.params = &PropertyServiceClientMockAddPropertyTypeParams{ctx, pp1}
 	mmAddPropertyType.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmAddPropertyType.expectations {
 		if minimock.Equal(e.params, mmAddPropertyType.defaultExpectation.params) {
@@ -591,22 +591,22 @@ func (mmAddPropertyType *mPropertyServiceHandlerMockAddPropertyType) Expect(ctx 
 	return mmAddPropertyType
 }
 
-// ExpectCtxParam1 sets up expected param ctx for PropertyServiceHandler.AddPropertyType
-func (mmAddPropertyType *mPropertyServiceHandlerMockAddPropertyType) ExpectCtxParam1(ctx context.Context) *mPropertyServiceHandlerMockAddPropertyType {
+// ExpectCtxParam1 sets up expected param ctx for PropertyServiceClient.AddPropertyType
+func (mmAddPropertyType *mPropertyServiceClientMockAddPropertyType) ExpectCtxParam1(ctx context.Context) *mPropertyServiceClientMockAddPropertyType {
 	if mmAddPropertyType.mock.funcAddPropertyType != nil {
-		mmAddPropertyType.mock.t.Fatalf("PropertyServiceHandlerMock.AddPropertyType mock is already set by Set")
+		mmAddPropertyType.mock.t.Fatalf("PropertyServiceClientMock.AddPropertyType mock is already set by Set")
 	}
 
 	if mmAddPropertyType.defaultExpectation == nil {
-		mmAddPropertyType.defaultExpectation = &PropertyServiceHandlerMockAddPropertyTypeExpectation{}
+		mmAddPropertyType.defaultExpectation = &PropertyServiceClientMockAddPropertyTypeExpectation{}
 	}
 
 	if mmAddPropertyType.defaultExpectation.params != nil {
-		mmAddPropertyType.mock.t.Fatalf("PropertyServiceHandlerMock.AddPropertyType mock is already set by Expect")
+		mmAddPropertyType.mock.t.Fatalf("PropertyServiceClientMock.AddPropertyType mock is already set by Expect")
 	}
 
 	if mmAddPropertyType.defaultExpectation.paramPtrs == nil {
-		mmAddPropertyType.defaultExpectation.paramPtrs = &PropertyServiceHandlerMockAddPropertyTypeParamPtrs{}
+		mmAddPropertyType.defaultExpectation.paramPtrs = &PropertyServiceClientMockAddPropertyTypeParamPtrs{}
 	}
 	mmAddPropertyType.defaultExpectation.paramPtrs.ctx = &ctx
 	mmAddPropertyType.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -614,22 +614,22 @@ func (mmAddPropertyType *mPropertyServiceHandlerMockAddPropertyType) ExpectCtxPa
 	return mmAddPropertyType
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for PropertyServiceHandler.AddPropertyType
-func (mmAddPropertyType *mPropertyServiceHandlerMockAddPropertyType) ExpectPp1Param2(pp1 *connect.Request[v1.AddPropertyTypeRequest]) *mPropertyServiceHandlerMockAddPropertyType {
+// ExpectPp1Param2 sets up expected param pp1 for PropertyServiceClient.AddPropertyType
+func (mmAddPropertyType *mPropertyServiceClientMockAddPropertyType) ExpectPp1Param2(pp1 *connect.Request[v1.AddPropertyTypeRequest]) *mPropertyServiceClientMockAddPropertyType {
 	if mmAddPropertyType.mock.funcAddPropertyType != nil {
-		mmAddPropertyType.mock.t.Fatalf("PropertyServiceHandlerMock.AddPropertyType mock is already set by Set")
+		mmAddPropertyType.mock.t.Fatalf("PropertyServiceClientMock.AddPropertyType mock is already set by Set")
 	}
 
 	if mmAddPropertyType.defaultExpectation == nil {
-		mmAddPropertyType.defaultExpectation = &PropertyServiceHandlerMockAddPropertyTypeExpectation{}
+		mmAddPropertyType.defaultExpectation = &PropertyServiceClientMockAddPropertyTypeExpectation{}
 	}
 
 	if mmAddPropertyType.defaultExpectation.params != nil {
-		mmAddPropertyType.mock.t.Fatalf("PropertyServiceHandlerMock.AddPropertyType mock is already set by Expect")
+		mmAddPropertyType.mock.t.Fatalf("PropertyServiceClientMock.AddPropertyType mock is already set by Expect")
 	}
 
 	if mmAddPropertyType.defaultExpectation.paramPtrs == nil {
-		mmAddPropertyType.defaultExpectation.paramPtrs = &PropertyServiceHandlerMockAddPropertyTypeParamPtrs{}
+		mmAddPropertyType.defaultExpectation.paramPtrs = &PropertyServiceClientMockAddPropertyTypeParamPtrs{}
 	}
 	mmAddPropertyType.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmAddPropertyType.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -637,10 +637,10 @@ func (mmAddPropertyType *mPropertyServiceHandlerMockAddPropertyType) ExpectPp1Pa
 	return mmAddPropertyType
 }
 
-// Inspect accepts an inspector function that has same arguments as the PropertyServiceHandler.AddPropertyType
-func (mmAddPropertyType *mPropertyServiceHandlerMockAddPropertyType) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.AddPropertyTypeRequest])) *mPropertyServiceHandlerMockAddPropertyType {
+// Inspect accepts an inspector function that has same arguments as the PropertyServiceClient.AddPropertyType
+func (mmAddPropertyType *mPropertyServiceClientMockAddPropertyType) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.AddPropertyTypeRequest])) *mPropertyServiceClientMockAddPropertyType {
 	if mmAddPropertyType.mock.inspectFuncAddPropertyType != nil {
-		mmAddPropertyType.mock.t.Fatalf("Inspect function is already set for PropertyServiceHandlerMock.AddPropertyType")
+		mmAddPropertyType.mock.t.Fatalf("Inspect function is already set for PropertyServiceClientMock.AddPropertyType")
 	}
 
 	mmAddPropertyType.mock.inspectFuncAddPropertyType = f
@@ -648,28 +648,28 @@ func (mmAddPropertyType *mPropertyServiceHandlerMockAddPropertyType) Inspect(f f
 	return mmAddPropertyType
 }
 
-// Return sets up results that will be returned by PropertyServiceHandler.AddPropertyType
-func (mmAddPropertyType *mPropertyServiceHandlerMockAddPropertyType) Return(pp2 *connect.Response[v1.AddPropertyTypeResponse], err error) *PropertyServiceHandlerMock {
+// Return sets up results that will be returned by PropertyServiceClient.AddPropertyType
+func (mmAddPropertyType *mPropertyServiceClientMockAddPropertyType) Return(pp2 *connect.Response[v1.AddPropertyTypeResponse], err error) *PropertyServiceClientMock {
 	if mmAddPropertyType.mock.funcAddPropertyType != nil {
-		mmAddPropertyType.mock.t.Fatalf("PropertyServiceHandlerMock.AddPropertyType mock is already set by Set")
+		mmAddPropertyType.mock.t.Fatalf("PropertyServiceClientMock.AddPropertyType mock is already set by Set")
 	}
 
 	if mmAddPropertyType.defaultExpectation == nil {
-		mmAddPropertyType.defaultExpectation = &PropertyServiceHandlerMockAddPropertyTypeExpectation{mock: mmAddPropertyType.mock}
+		mmAddPropertyType.defaultExpectation = &PropertyServiceClientMockAddPropertyTypeExpectation{mock: mmAddPropertyType.mock}
 	}
-	mmAddPropertyType.defaultExpectation.results = &PropertyServiceHandlerMockAddPropertyTypeResults{pp2, err}
+	mmAddPropertyType.defaultExpectation.results = &PropertyServiceClientMockAddPropertyTypeResults{pp2, err}
 	mmAddPropertyType.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmAddPropertyType.mock
 }
 
-// Set uses given function f to mock the PropertyServiceHandler.AddPropertyType method
-func (mmAddPropertyType *mPropertyServiceHandlerMockAddPropertyType) Set(f func(ctx context.Context, pp1 *connect.Request[v1.AddPropertyTypeRequest]) (pp2 *connect.Response[v1.AddPropertyTypeResponse], err error)) *PropertyServiceHandlerMock {
+// Set uses given function f to mock the PropertyServiceClient.AddPropertyType method
+func (mmAddPropertyType *mPropertyServiceClientMockAddPropertyType) Set(f func(ctx context.Context, pp1 *connect.Request[v1.AddPropertyTypeRequest]) (pp2 *connect.Response[v1.AddPropertyTypeResponse], err error)) *PropertyServiceClientMock {
 	if mmAddPropertyType.defaultExpectation != nil {
-		mmAddPropertyType.mock.t.Fatalf("Default expectation is already set for the PropertyServiceHandler.AddPropertyType method")
+		mmAddPropertyType.mock.t.Fatalf("Default expectation is already set for the PropertyServiceClient.AddPropertyType method")
 	}
 
 	if len(mmAddPropertyType.expectations) > 0 {
-		mmAddPropertyType.mock.t.Fatalf("Some expectations are already set for the PropertyServiceHandler.AddPropertyType method")
+		mmAddPropertyType.mock.t.Fatalf("Some expectations are already set for the PropertyServiceClient.AddPropertyType method")
 	}
 
 	mmAddPropertyType.mock.funcAddPropertyType = f
@@ -677,39 +677,39 @@ func (mmAddPropertyType *mPropertyServiceHandlerMockAddPropertyType) Set(f func(
 	return mmAddPropertyType.mock
 }
 
-// When sets expectation for the PropertyServiceHandler.AddPropertyType which will trigger the result defined by the following
+// When sets expectation for the PropertyServiceClient.AddPropertyType which will trigger the result defined by the following
 // Then helper
-func (mmAddPropertyType *mPropertyServiceHandlerMockAddPropertyType) When(ctx context.Context, pp1 *connect.Request[v1.AddPropertyTypeRequest]) *PropertyServiceHandlerMockAddPropertyTypeExpectation {
+func (mmAddPropertyType *mPropertyServiceClientMockAddPropertyType) When(ctx context.Context, pp1 *connect.Request[v1.AddPropertyTypeRequest]) *PropertyServiceClientMockAddPropertyTypeExpectation {
 	if mmAddPropertyType.mock.funcAddPropertyType != nil {
-		mmAddPropertyType.mock.t.Fatalf("PropertyServiceHandlerMock.AddPropertyType mock is already set by Set")
+		mmAddPropertyType.mock.t.Fatalf("PropertyServiceClientMock.AddPropertyType mock is already set by Set")
 	}
 
-	expectation := &PropertyServiceHandlerMockAddPropertyTypeExpectation{
+	expectation := &PropertyServiceClientMockAddPropertyTypeExpectation{
 		mock:               mmAddPropertyType.mock,
-		params:             &PropertyServiceHandlerMockAddPropertyTypeParams{ctx, pp1},
-		expectationOrigins: PropertyServiceHandlerMockAddPropertyTypeExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &PropertyServiceClientMockAddPropertyTypeParams{ctx, pp1},
+		expectationOrigins: PropertyServiceClientMockAddPropertyTypeExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmAddPropertyType.expectations = append(mmAddPropertyType.expectations, expectation)
 	return expectation
 }
 
-// Then sets up PropertyServiceHandler.AddPropertyType return parameters for the expectation previously defined by the When method
-func (e *PropertyServiceHandlerMockAddPropertyTypeExpectation) Then(pp2 *connect.Response[v1.AddPropertyTypeResponse], err error) *PropertyServiceHandlerMock {
-	e.results = &PropertyServiceHandlerMockAddPropertyTypeResults{pp2, err}
+// Then sets up PropertyServiceClient.AddPropertyType return parameters for the expectation previously defined by the When method
+func (e *PropertyServiceClientMockAddPropertyTypeExpectation) Then(pp2 *connect.Response[v1.AddPropertyTypeResponse], err error) *PropertyServiceClientMock {
+	e.results = &PropertyServiceClientMockAddPropertyTypeResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times PropertyServiceHandler.AddPropertyType should be invoked
-func (mmAddPropertyType *mPropertyServiceHandlerMockAddPropertyType) Times(n uint64) *mPropertyServiceHandlerMockAddPropertyType {
+// Times sets number of times PropertyServiceClient.AddPropertyType should be invoked
+func (mmAddPropertyType *mPropertyServiceClientMockAddPropertyType) Times(n uint64) *mPropertyServiceClientMockAddPropertyType {
 	if n == 0 {
-		mmAddPropertyType.mock.t.Fatalf("Times of PropertyServiceHandlerMock.AddPropertyType mock can not be zero")
+		mmAddPropertyType.mock.t.Fatalf("Times of PropertyServiceClientMock.AddPropertyType mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmAddPropertyType.expectedInvocations, n)
 	mmAddPropertyType.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmAddPropertyType
 }
 
-func (mmAddPropertyType *mPropertyServiceHandlerMockAddPropertyType) invocationsDone() bool {
+func (mmAddPropertyType *mPropertyServiceClientMockAddPropertyType) invocationsDone() bool {
 	if len(mmAddPropertyType.expectations) == 0 && mmAddPropertyType.defaultExpectation == nil && mmAddPropertyType.mock.funcAddPropertyType == nil {
 		return true
 	}
@@ -720,8 +720,8 @@ func (mmAddPropertyType *mPropertyServiceHandlerMockAddPropertyType) invocations
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// AddPropertyType implements mm_propertyv1connect.PropertyServiceHandler
-func (mmAddPropertyType *PropertyServiceHandlerMock) AddPropertyType(ctx context.Context, pp1 *connect.Request[v1.AddPropertyTypeRequest]) (pp2 *connect.Response[v1.AddPropertyTypeResponse], err error) {
+// AddPropertyType implements mm_propertyv1connect.PropertyServiceClient
+func (mmAddPropertyType *PropertyServiceClientMock) AddPropertyType(ctx context.Context, pp1 *connect.Request[v1.AddPropertyTypeRequest]) (pp2 *connect.Response[v1.AddPropertyTypeResponse], err error) {
 	mm_atomic.AddUint64(&mmAddPropertyType.beforeAddPropertyTypeCounter, 1)
 	defer mm_atomic.AddUint64(&mmAddPropertyType.afterAddPropertyTypeCounter, 1)
 
@@ -731,7 +731,7 @@ func (mmAddPropertyType *PropertyServiceHandlerMock) AddPropertyType(ctx context
 		mmAddPropertyType.inspectFuncAddPropertyType(ctx, pp1)
 	}
 
-	mm_params := PropertyServiceHandlerMockAddPropertyTypeParams{ctx, pp1}
+	mm_params := PropertyServiceClientMockAddPropertyTypeParams{ctx, pp1}
 
 	// Record call args
 	mmAddPropertyType.AddPropertyTypeMock.mutex.Lock()
@@ -750,54 +750,54 @@ func (mmAddPropertyType *PropertyServiceHandlerMock) AddPropertyType(ctx context
 		mm_want := mmAddPropertyType.AddPropertyTypeMock.defaultExpectation.params
 		mm_want_ptrs := mmAddPropertyType.AddPropertyTypeMock.defaultExpectation.paramPtrs
 
-		mm_got := PropertyServiceHandlerMockAddPropertyTypeParams{ctx, pp1}
+		mm_got := PropertyServiceClientMockAddPropertyTypeParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmAddPropertyType.t.Errorf("PropertyServiceHandlerMock.AddPropertyType got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmAddPropertyType.t.Errorf("PropertyServiceClientMock.AddPropertyType got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmAddPropertyType.AddPropertyTypeMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmAddPropertyType.t.Errorf("PropertyServiceHandlerMock.AddPropertyType got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmAddPropertyType.t.Errorf("PropertyServiceClientMock.AddPropertyType got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmAddPropertyType.AddPropertyTypeMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmAddPropertyType.t.Errorf("PropertyServiceHandlerMock.AddPropertyType got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmAddPropertyType.t.Errorf("PropertyServiceClientMock.AddPropertyType got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmAddPropertyType.AddPropertyTypeMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmAddPropertyType.AddPropertyTypeMock.defaultExpectation.results
 		if mm_results == nil {
-			mmAddPropertyType.t.Fatal("No results are set for the PropertyServiceHandlerMock.AddPropertyType")
+			mmAddPropertyType.t.Fatal("No results are set for the PropertyServiceClientMock.AddPropertyType")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmAddPropertyType.funcAddPropertyType != nil {
 		return mmAddPropertyType.funcAddPropertyType(ctx, pp1)
 	}
-	mmAddPropertyType.t.Fatalf("Unexpected call to PropertyServiceHandlerMock.AddPropertyType. %v %v", ctx, pp1)
+	mmAddPropertyType.t.Fatalf("Unexpected call to PropertyServiceClientMock.AddPropertyType. %v %v", ctx, pp1)
 	return
 }
 
-// AddPropertyTypeAfterCounter returns a count of finished PropertyServiceHandlerMock.AddPropertyType invocations
-func (mmAddPropertyType *PropertyServiceHandlerMock) AddPropertyTypeAfterCounter() uint64 {
+// AddPropertyTypeAfterCounter returns a count of finished PropertyServiceClientMock.AddPropertyType invocations
+func (mmAddPropertyType *PropertyServiceClientMock) AddPropertyTypeAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmAddPropertyType.afterAddPropertyTypeCounter)
 }
 
-// AddPropertyTypeBeforeCounter returns a count of PropertyServiceHandlerMock.AddPropertyType invocations
-func (mmAddPropertyType *PropertyServiceHandlerMock) AddPropertyTypeBeforeCounter() uint64 {
+// AddPropertyTypeBeforeCounter returns a count of PropertyServiceClientMock.AddPropertyType invocations
+func (mmAddPropertyType *PropertyServiceClientMock) AddPropertyTypeBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmAddPropertyType.beforeAddPropertyTypeCounter)
 }
 
-// Calls returns a list of arguments used in each call to PropertyServiceHandlerMock.AddPropertyType.
+// Calls returns a list of arguments used in each call to PropertyServiceClientMock.AddPropertyType.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmAddPropertyType *mPropertyServiceHandlerMockAddPropertyType) Calls() []*PropertyServiceHandlerMockAddPropertyTypeParams {
+func (mmAddPropertyType *mPropertyServiceClientMockAddPropertyType) Calls() []*PropertyServiceClientMockAddPropertyTypeParams {
 	mmAddPropertyType.mutex.RLock()
 
-	argCopy := make([]*PropertyServiceHandlerMockAddPropertyTypeParams, len(mmAddPropertyType.callArgs))
+	argCopy := make([]*PropertyServiceClientMockAddPropertyTypeParams, len(mmAddPropertyType.callArgs))
 	copy(argCopy, mmAddPropertyType.callArgs)
 
 	mmAddPropertyType.mutex.RUnlock()
@@ -807,7 +807,7 @@ func (mmAddPropertyType *mPropertyServiceHandlerMockAddPropertyType) Calls() []*
 
 // MinimockAddPropertyTypeDone returns true if the count of the AddPropertyType invocations corresponds
 // the number of defined expectations
-func (m *PropertyServiceHandlerMock) MinimockAddPropertyTypeDone() bool {
+func (m *PropertyServiceClientMock) MinimockAddPropertyTypeDone() bool {
 	if m.AddPropertyTypeMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -823,10 +823,10 @@ func (m *PropertyServiceHandlerMock) MinimockAddPropertyTypeDone() bool {
 }
 
 // MinimockAddPropertyTypeInspect logs each unmet expectation
-func (m *PropertyServiceHandlerMock) MinimockAddPropertyTypeInspect() {
+func (m *PropertyServiceClientMock) MinimockAddPropertyTypeInspect() {
 	for _, e := range m.AddPropertyTypeMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to PropertyServiceHandlerMock.AddPropertyType at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to PropertyServiceClientMock.AddPropertyType at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -834,66 +834,66 @@ func (m *PropertyServiceHandlerMock) MinimockAddPropertyTypeInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.AddPropertyTypeMock.defaultExpectation != nil && afterAddPropertyTypeCounter < 1 {
 		if m.AddPropertyTypeMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to PropertyServiceHandlerMock.AddPropertyType at\n%s", m.AddPropertyTypeMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to PropertyServiceClientMock.AddPropertyType at\n%s", m.AddPropertyTypeMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to PropertyServiceHandlerMock.AddPropertyType at\n%s with params: %#v", m.AddPropertyTypeMock.defaultExpectation.expectationOrigins.origin, *m.AddPropertyTypeMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to PropertyServiceClientMock.AddPropertyType at\n%s with params: %#v", m.AddPropertyTypeMock.defaultExpectation.expectationOrigins.origin, *m.AddPropertyTypeMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcAddPropertyType != nil && afterAddPropertyTypeCounter < 1 {
-		m.t.Errorf("Expected call to PropertyServiceHandlerMock.AddPropertyType at\n%s", m.funcAddPropertyTypeOrigin)
+		m.t.Errorf("Expected call to PropertyServiceClientMock.AddPropertyType at\n%s", m.funcAddPropertyTypeOrigin)
 	}
 
 	if !m.AddPropertyTypeMock.invocationsDone() && afterAddPropertyTypeCounter > 0 {
-		m.t.Errorf("Expected %d calls to PropertyServiceHandlerMock.AddPropertyType at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to PropertyServiceClientMock.AddPropertyType at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.AddPropertyTypeMock.expectedInvocations), m.AddPropertyTypeMock.expectedInvocationsOrigin, afterAddPropertyTypeCounter)
 	}
 }
 
-type mPropertyServiceHandlerMockAddSubscription struct {
+type mPropertyServiceClientMockAddSubscription struct {
 	optional           bool
-	mock               *PropertyServiceHandlerMock
-	defaultExpectation *PropertyServiceHandlerMockAddSubscriptionExpectation
-	expectations       []*PropertyServiceHandlerMockAddSubscriptionExpectation
+	mock               *PropertyServiceClientMock
+	defaultExpectation *PropertyServiceClientMockAddSubscriptionExpectation
+	expectations       []*PropertyServiceClientMockAddSubscriptionExpectation
 
-	callArgs []*PropertyServiceHandlerMockAddSubscriptionParams
+	callArgs []*PropertyServiceClientMockAddSubscriptionParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// PropertyServiceHandlerMockAddSubscriptionExpectation specifies expectation struct of the PropertyServiceHandler.AddSubscription
-type PropertyServiceHandlerMockAddSubscriptionExpectation struct {
-	mock               *PropertyServiceHandlerMock
-	params             *PropertyServiceHandlerMockAddSubscriptionParams
-	paramPtrs          *PropertyServiceHandlerMockAddSubscriptionParamPtrs
-	expectationOrigins PropertyServiceHandlerMockAddSubscriptionExpectationOrigins
-	results            *PropertyServiceHandlerMockAddSubscriptionResults
+// PropertyServiceClientMockAddSubscriptionExpectation specifies expectation struct of the PropertyServiceClient.AddSubscription
+type PropertyServiceClientMockAddSubscriptionExpectation struct {
+	mock               *PropertyServiceClientMock
+	params             *PropertyServiceClientMockAddSubscriptionParams
+	paramPtrs          *PropertyServiceClientMockAddSubscriptionParamPtrs
+	expectationOrigins PropertyServiceClientMockAddSubscriptionExpectationOrigins
+	results            *PropertyServiceClientMockAddSubscriptionResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// PropertyServiceHandlerMockAddSubscriptionParams contains parameters of the PropertyServiceHandler.AddSubscription
-type PropertyServiceHandlerMockAddSubscriptionParams struct {
+// PropertyServiceClientMockAddSubscriptionParams contains parameters of the PropertyServiceClient.AddSubscription
+type PropertyServiceClientMockAddSubscriptionParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.AddSubscriptionRequest]
 }
 
-// PropertyServiceHandlerMockAddSubscriptionParamPtrs contains pointers to parameters of the PropertyServiceHandler.AddSubscription
-type PropertyServiceHandlerMockAddSubscriptionParamPtrs struct {
+// PropertyServiceClientMockAddSubscriptionParamPtrs contains pointers to parameters of the PropertyServiceClient.AddSubscription
+type PropertyServiceClientMockAddSubscriptionParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.AddSubscriptionRequest]
 }
 
-// PropertyServiceHandlerMockAddSubscriptionResults contains results of the PropertyServiceHandler.AddSubscription
-type PropertyServiceHandlerMockAddSubscriptionResults struct {
+// PropertyServiceClientMockAddSubscriptionResults contains results of the PropertyServiceClient.AddSubscription
+type PropertyServiceClientMockAddSubscriptionResults struct {
 	pp2 *connect.Response[v1.AddSubscriptionResponse]
 	err error
 }
 
-// PropertyServiceHandlerMockAddSubscriptionOrigins contains origins of expectations of the PropertyServiceHandler.AddSubscription
-type PropertyServiceHandlerMockAddSubscriptionExpectationOrigins struct {
+// PropertyServiceClientMockAddSubscriptionOrigins contains origins of expectations of the PropertyServiceClient.AddSubscription
+type PropertyServiceClientMockAddSubscriptionExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -904,26 +904,26 @@ type PropertyServiceHandlerMockAddSubscriptionExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmAddSubscription *mPropertyServiceHandlerMockAddSubscription) Optional() *mPropertyServiceHandlerMockAddSubscription {
+func (mmAddSubscription *mPropertyServiceClientMockAddSubscription) Optional() *mPropertyServiceClientMockAddSubscription {
 	mmAddSubscription.optional = true
 	return mmAddSubscription
 }
 
-// Expect sets up expected params for PropertyServiceHandler.AddSubscription
-func (mmAddSubscription *mPropertyServiceHandlerMockAddSubscription) Expect(ctx context.Context, pp1 *connect.Request[v1.AddSubscriptionRequest]) *mPropertyServiceHandlerMockAddSubscription {
+// Expect sets up expected params for PropertyServiceClient.AddSubscription
+func (mmAddSubscription *mPropertyServiceClientMockAddSubscription) Expect(ctx context.Context, pp1 *connect.Request[v1.AddSubscriptionRequest]) *mPropertyServiceClientMockAddSubscription {
 	if mmAddSubscription.mock.funcAddSubscription != nil {
-		mmAddSubscription.mock.t.Fatalf("PropertyServiceHandlerMock.AddSubscription mock is already set by Set")
+		mmAddSubscription.mock.t.Fatalf("PropertyServiceClientMock.AddSubscription mock is already set by Set")
 	}
 
 	if mmAddSubscription.defaultExpectation == nil {
-		mmAddSubscription.defaultExpectation = &PropertyServiceHandlerMockAddSubscriptionExpectation{}
+		mmAddSubscription.defaultExpectation = &PropertyServiceClientMockAddSubscriptionExpectation{}
 	}
 
 	if mmAddSubscription.defaultExpectation.paramPtrs != nil {
-		mmAddSubscription.mock.t.Fatalf("PropertyServiceHandlerMock.AddSubscription mock is already set by ExpectParams functions")
+		mmAddSubscription.mock.t.Fatalf("PropertyServiceClientMock.AddSubscription mock is already set by ExpectParams functions")
 	}
 
-	mmAddSubscription.defaultExpectation.params = &PropertyServiceHandlerMockAddSubscriptionParams{ctx, pp1}
+	mmAddSubscription.defaultExpectation.params = &PropertyServiceClientMockAddSubscriptionParams{ctx, pp1}
 	mmAddSubscription.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmAddSubscription.expectations {
 		if minimock.Equal(e.params, mmAddSubscription.defaultExpectation.params) {
@@ -934,22 +934,22 @@ func (mmAddSubscription *mPropertyServiceHandlerMockAddSubscription) Expect(ctx 
 	return mmAddSubscription
 }
 
-// ExpectCtxParam1 sets up expected param ctx for PropertyServiceHandler.AddSubscription
-func (mmAddSubscription *mPropertyServiceHandlerMockAddSubscription) ExpectCtxParam1(ctx context.Context) *mPropertyServiceHandlerMockAddSubscription {
+// ExpectCtxParam1 sets up expected param ctx for PropertyServiceClient.AddSubscription
+func (mmAddSubscription *mPropertyServiceClientMockAddSubscription) ExpectCtxParam1(ctx context.Context) *mPropertyServiceClientMockAddSubscription {
 	if mmAddSubscription.mock.funcAddSubscription != nil {
-		mmAddSubscription.mock.t.Fatalf("PropertyServiceHandlerMock.AddSubscription mock is already set by Set")
+		mmAddSubscription.mock.t.Fatalf("PropertyServiceClientMock.AddSubscription mock is already set by Set")
 	}
 
 	if mmAddSubscription.defaultExpectation == nil {
-		mmAddSubscription.defaultExpectation = &PropertyServiceHandlerMockAddSubscriptionExpectation{}
+		mmAddSubscription.defaultExpectation = &PropertyServiceClientMockAddSubscriptionExpectation{}
 	}
 
 	if mmAddSubscription.defaultExpectation.params != nil {
-		mmAddSubscription.mock.t.Fatalf("PropertyServiceHandlerMock.AddSubscription mock is already set by Expect")
+		mmAddSubscription.mock.t.Fatalf("PropertyServiceClientMock.AddSubscription mock is already set by Expect")
 	}
 
 	if mmAddSubscription.defaultExpectation.paramPtrs == nil {
-		mmAddSubscription.defaultExpectation.paramPtrs = &PropertyServiceHandlerMockAddSubscriptionParamPtrs{}
+		mmAddSubscription.defaultExpectation.paramPtrs = &PropertyServiceClientMockAddSubscriptionParamPtrs{}
 	}
 	mmAddSubscription.defaultExpectation.paramPtrs.ctx = &ctx
 	mmAddSubscription.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -957,22 +957,22 @@ func (mmAddSubscription *mPropertyServiceHandlerMockAddSubscription) ExpectCtxPa
 	return mmAddSubscription
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for PropertyServiceHandler.AddSubscription
-func (mmAddSubscription *mPropertyServiceHandlerMockAddSubscription) ExpectPp1Param2(pp1 *connect.Request[v1.AddSubscriptionRequest]) *mPropertyServiceHandlerMockAddSubscription {
+// ExpectPp1Param2 sets up expected param pp1 for PropertyServiceClient.AddSubscription
+func (mmAddSubscription *mPropertyServiceClientMockAddSubscription) ExpectPp1Param2(pp1 *connect.Request[v1.AddSubscriptionRequest]) *mPropertyServiceClientMockAddSubscription {
 	if mmAddSubscription.mock.funcAddSubscription != nil {
-		mmAddSubscription.mock.t.Fatalf("PropertyServiceHandlerMock.AddSubscription mock is already set by Set")
+		mmAddSubscription.mock.t.Fatalf("PropertyServiceClientMock.AddSubscription mock is already set by Set")
 	}
 
 	if mmAddSubscription.defaultExpectation == nil {
-		mmAddSubscription.defaultExpectation = &PropertyServiceHandlerMockAddSubscriptionExpectation{}
+		mmAddSubscription.defaultExpectation = &PropertyServiceClientMockAddSubscriptionExpectation{}
 	}
 
 	if mmAddSubscription.defaultExpectation.params != nil {
-		mmAddSubscription.mock.t.Fatalf("PropertyServiceHandlerMock.AddSubscription mock is already set by Expect")
+		mmAddSubscription.mock.t.Fatalf("PropertyServiceClientMock.AddSubscription mock is already set by Expect")
 	}
 
 	if mmAddSubscription.defaultExpectation.paramPtrs == nil {
-		mmAddSubscription.defaultExpectation.paramPtrs = &PropertyServiceHandlerMockAddSubscriptionParamPtrs{}
+		mmAddSubscription.defaultExpectation.paramPtrs = &PropertyServiceClientMockAddSubscriptionParamPtrs{}
 	}
 	mmAddSubscription.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmAddSubscription.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -980,10 +980,10 @@ func (mmAddSubscription *mPropertyServiceHandlerMockAddSubscription) ExpectPp1Pa
 	return mmAddSubscription
 }
 
-// Inspect accepts an inspector function that has same arguments as the PropertyServiceHandler.AddSubscription
-func (mmAddSubscription *mPropertyServiceHandlerMockAddSubscription) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.AddSubscriptionRequest])) *mPropertyServiceHandlerMockAddSubscription {
+// Inspect accepts an inspector function that has same arguments as the PropertyServiceClient.AddSubscription
+func (mmAddSubscription *mPropertyServiceClientMockAddSubscription) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.AddSubscriptionRequest])) *mPropertyServiceClientMockAddSubscription {
 	if mmAddSubscription.mock.inspectFuncAddSubscription != nil {
-		mmAddSubscription.mock.t.Fatalf("Inspect function is already set for PropertyServiceHandlerMock.AddSubscription")
+		mmAddSubscription.mock.t.Fatalf("Inspect function is already set for PropertyServiceClientMock.AddSubscription")
 	}
 
 	mmAddSubscription.mock.inspectFuncAddSubscription = f
@@ -991,28 +991,28 @@ func (mmAddSubscription *mPropertyServiceHandlerMockAddSubscription) Inspect(f f
 	return mmAddSubscription
 }
 
-// Return sets up results that will be returned by PropertyServiceHandler.AddSubscription
-func (mmAddSubscription *mPropertyServiceHandlerMockAddSubscription) Return(pp2 *connect.Response[v1.AddSubscriptionResponse], err error) *PropertyServiceHandlerMock {
+// Return sets up results that will be returned by PropertyServiceClient.AddSubscription
+func (mmAddSubscription *mPropertyServiceClientMockAddSubscription) Return(pp2 *connect.Response[v1.AddSubscriptionResponse], err error) *PropertyServiceClientMock {
 	if mmAddSubscription.mock.funcAddSubscription != nil {
-		mmAddSubscription.mock.t.Fatalf("PropertyServiceHandlerMock.AddSubscription mock is already set by Set")
+		mmAddSubscription.mock.t.Fatalf("PropertyServiceClientMock.AddSubscription mock is already set by Set")
 	}
 
 	if mmAddSubscription.defaultExpectation == nil {
-		mmAddSubscription.defaultExpectation = &PropertyServiceHandlerMockAddSubscriptionExpectation{mock: mmAddSubscription.mock}
+		mmAddSubscription.defaultExpectation = &PropertyServiceClientMockAddSubscriptionExpectation{mock: mmAddSubscription.mock}
 	}
-	mmAddSubscription.defaultExpectation.results = &PropertyServiceHandlerMockAddSubscriptionResults{pp2, err}
+	mmAddSubscription.defaultExpectation.results = &PropertyServiceClientMockAddSubscriptionResults{pp2, err}
 	mmAddSubscription.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmAddSubscription.mock
 }
 
-// Set uses given function f to mock the PropertyServiceHandler.AddSubscription method
-func (mmAddSubscription *mPropertyServiceHandlerMockAddSubscription) Set(f func(ctx context.Context, pp1 *connect.Request[v1.AddSubscriptionRequest]) (pp2 *connect.Response[v1.AddSubscriptionResponse], err error)) *PropertyServiceHandlerMock {
+// Set uses given function f to mock the PropertyServiceClient.AddSubscription method
+func (mmAddSubscription *mPropertyServiceClientMockAddSubscription) Set(f func(ctx context.Context, pp1 *connect.Request[v1.AddSubscriptionRequest]) (pp2 *connect.Response[v1.AddSubscriptionResponse], err error)) *PropertyServiceClientMock {
 	if mmAddSubscription.defaultExpectation != nil {
-		mmAddSubscription.mock.t.Fatalf("Default expectation is already set for the PropertyServiceHandler.AddSubscription method")
+		mmAddSubscription.mock.t.Fatalf("Default expectation is already set for the PropertyServiceClient.AddSubscription method")
 	}
 
 	if len(mmAddSubscription.expectations) > 0 {
-		mmAddSubscription.mock.t.Fatalf("Some expectations are already set for the PropertyServiceHandler.AddSubscription method")
+		mmAddSubscription.mock.t.Fatalf("Some expectations are already set for the PropertyServiceClient.AddSubscription method")
 	}
 
 	mmAddSubscription.mock.funcAddSubscription = f
@@ -1020,39 +1020,39 @@ func (mmAddSubscription *mPropertyServiceHandlerMockAddSubscription) Set(f func(
 	return mmAddSubscription.mock
 }
 
-// When sets expectation for the PropertyServiceHandler.AddSubscription which will trigger the result defined by the following
+// When sets expectation for the PropertyServiceClient.AddSubscription which will trigger the result defined by the following
 // Then helper
-func (mmAddSubscription *mPropertyServiceHandlerMockAddSubscription) When(ctx context.Context, pp1 *connect.Request[v1.AddSubscriptionRequest]) *PropertyServiceHandlerMockAddSubscriptionExpectation {
+func (mmAddSubscription *mPropertyServiceClientMockAddSubscription) When(ctx context.Context, pp1 *connect.Request[v1.AddSubscriptionRequest]) *PropertyServiceClientMockAddSubscriptionExpectation {
 	if mmAddSubscription.mock.funcAddSubscription != nil {
-		mmAddSubscription.mock.t.Fatalf("PropertyServiceHandlerMock.AddSubscription mock is already set by Set")
+		mmAddSubscription.mock.t.Fatalf("PropertyServiceClientMock.AddSubscription mock is already set by Set")
 	}
 
-	expectation := &PropertyServiceHandlerMockAddSubscriptionExpectation{
+	expectation := &PropertyServiceClientMockAddSubscriptionExpectation{
 		mock:               mmAddSubscription.mock,
-		params:             &PropertyServiceHandlerMockAddSubscriptionParams{ctx, pp1},
-		expectationOrigins: PropertyServiceHandlerMockAddSubscriptionExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &PropertyServiceClientMockAddSubscriptionParams{ctx, pp1},
+		expectationOrigins: PropertyServiceClientMockAddSubscriptionExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmAddSubscription.expectations = append(mmAddSubscription.expectations, expectation)
 	return expectation
 }
 
-// Then sets up PropertyServiceHandler.AddSubscription return parameters for the expectation previously defined by the When method
-func (e *PropertyServiceHandlerMockAddSubscriptionExpectation) Then(pp2 *connect.Response[v1.AddSubscriptionResponse], err error) *PropertyServiceHandlerMock {
-	e.results = &PropertyServiceHandlerMockAddSubscriptionResults{pp2, err}
+// Then sets up PropertyServiceClient.AddSubscription return parameters for the expectation previously defined by the When method
+func (e *PropertyServiceClientMockAddSubscriptionExpectation) Then(pp2 *connect.Response[v1.AddSubscriptionResponse], err error) *PropertyServiceClientMock {
+	e.results = &PropertyServiceClientMockAddSubscriptionResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times PropertyServiceHandler.AddSubscription should be invoked
-func (mmAddSubscription *mPropertyServiceHandlerMockAddSubscription) Times(n uint64) *mPropertyServiceHandlerMockAddSubscription {
+// Times sets number of times PropertyServiceClient.AddSubscription should be invoked
+func (mmAddSubscription *mPropertyServiceClientMockAddSubscription) Times(n uint64) *mPropertyServiceClientMockAddSubscription {
 	if n == 0 {
-		mmAddSubscription.mock.t.Fatalf("Times of PropertyServiceHandlerMock.AddSubscription mock can not be zero")
+		mmAddSubscription.mock.t.Fatalf("Times of PropertyServiceClientMock.AddSubscription mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmAddSubscription.expectedInvocations, n)
 	mmAddSubscription.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmAddSubscription
 }
 
-func (mmAddSubscription *mPropertyServiceHandlerMockAddSubscription) invocationsDone() bool {
+func (mmAddSubscription *mPropertyServiceClientMockAddSubscription) invocationsDone() bool {
 	if len(mmAddSubscription.expectations) == 0 && mmAddSubscription.defaultExpectation == nil && mmAddSubscription.mock.funcAddSubscription == nil {
 		return true
 	}
@@ -1063,8 +1063,8 @@ func (mmAddSubscription *mPropertyServiceHandlerMockAddSubscription) invocations
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// AddSubscription implements mm_propertyv1connect.PropertyServiceHandler
-func (mmAddSubscription *PropertyServiceHandlerMock) AddSubscription(ctx context.Context, pp1 *connect.Request[v1.AddSubscriptionRequest]) (pp2 *connect.Response[v1.AddSubscriptionResponse], err error) {
+// AddSubscription implements mm_propertyv1connect.PropertyServiceClient
+func (mmAddSubscription *PropertyServiceClientMock) AddSubscription(ctx context.Context, pp1 *connect.Request[v1.AddSubscriptionRequest]) (pp2 *connect.Response[v1.AddSubscriptionResponse], err error) {
 	mm_atomic.AddUint64(&mmAddSubscription.beforeAddSubscriptionCounter, 1)
 	defer mm_atomic.AddUint64(&mmAddSubscription.afterAddSubscriptionCounter, 1)
 
@@ -1074,7 +1074,7 @@ func (mmAddSubscription *PropertyServiceHandlerMock) AddSubscription(ctx context
 		mmAddSubscription.inspectFuncAddSubscription(ctx, pp1)
 	}
 
-	mm_params := PropertyServiceHandlerMockAddSubscriptionParams{ctx, pp1}
+	mm_params := PropertyServiceClientMockAddSubscriptionParams{ctx, pp1}
 
 	// Record call args
 	mmAddSubscription.AddSubscriptionMock.mutex.Lock()
@@ -1093,54 +1093,54 @@ func (mmAddSubscription *PropertyServiceHandlerMock) AddSubscription(ctx context
 		mm_want := mmAddSubscription.AddSubscriptionMock.defaultExpectation.params
 		mm_want_ptrs := mmAddSubscription.AddSubscriptionMock.defaultExpectation.paramPtrs
 
-		mm_got := PropertyServiceHandlerMockAddSubscriptionParams{ctx, pp1}
+		mm_got := PropertyServiceClientMockAddSubscriptionParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmAddSubscription.t.Errorf("PropertyServiceHandlerMock.AddSubscription got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmAddSubscription.t.Errorf("PropertyServiceClientMock.AddSubscription got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmAddSubscription.AddSubscriptionMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmAddSubscription.t.Errorf("PropertyServiceHandlerMock.AddSubscription got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmAddSubscription.t.Errorf("PropertyServiceClientMock.AddSubscription got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmAddSubscription.AddSubscriptionMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmAddSubscription.t.Errorf("PropertyServiceHandlerMock.AddSubscription got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmAddSubscription.t.Errorf("PropertyServiceClientMock.AddSubscription got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmAddSubscription.AddSubscriptionMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmAddSubscription.AddSubscriptionMock.defaultExpectation.results
 		if mm_results == nil {
-			mmAddSubscription.t.Fatal("No results are set for the PropertyServiceHandlerMock.AddSubscription")
+			mmAddSubscription.t.Fatal("No results are set for the PropertyServiceClientMock.AddSubscription")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmAddSubscription.funcAddSubscription != nil {
 		return mmAddSubscription.funcAddSubscription(ctx, pp1)
 	}
-	mmAddSubscription.t.Fatalf("Unexpected call to PropertyServiceHandlerMock.AddSubscription. %v %v", ctx, pp1)
+	mmAddSubscription.t.Fatalf("Unexpected call to PropertyServiceClientMock.AddSubscription. %v %v", ctx, pp1)
 	return
 }
 
-// AddSubscriptionAfterCounter returns a count of finished PropertyServiceHandlerMock.AddSubscription invocations
-func (mmAddSubscription *PropertyServiceHandlerMock) AddSubscriptionAfterCounter() uint64 {
+// AddSubscriptionAfterCounter returns a count of finished PropertyServiceClientMock.AddSubscription invocations
+func (mmAddSubscription *PropertyServiceClientMock) AddSubscriptionAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmAddSubscription.afterAddSubscriptionCounter)
 }
 
-// AddSubscriptionBeforeCounter returns a count of PropertyServiceHandlerMock.AddSubscription invocations
-func (mmAddSubscription *PropertyServiceHandlerMock) AddSubscriptionBeforeCounter() uint64 {
+// AddSubscriptionBeforeCounter returns a count of PropertyServiceClientMock.AddSubscription invocations
+func (mmAddSubscription *PropertyServiceClientMock) AddSubscriptionBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmAddSubscription.beforeAddSubscriptionCounter)
 }
 
-// Calls returns a list of arguments used in each call to PropertyServiceHandlerMock.AddSubscription.
+// Calls returns a list of arguments used in each call to PropertyServiceClientMock.AddSubscription.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmAddSubscription *mPropertyServiceHandlerMockAddSubscription) Calls() []*PropertyServiceHandlerMockAddSubscriptionParams {
+func (mmAddSubscription *mPropertyServiceClientMockAddSubscription) Calls() []*PropertyServiceClientMockAddSubscriptionParams {
 	mmAddSubscription.mutex.RLock()
 
-	argCopy := make([]*PropertyServiceHandlerMockAddSubscriptionParams, len(mmAddSubscription.callArgs))
+	argCopy := make([]*PropertyServiceClientMockAddSubscriptionParams, len(mmAddSubscription.callArgs))
 	copy(argCopy, mmAddSubscription.callArgs)
 
 	mmAddSubscription.mutex.RUnlock()
@@ -1150,7 +1150,7 @@ func (mmAddSubscription *mPropertyServiceHandlerMockAddSubscription) Calls() []*
 
 // MinimockAddSubscriptionDone returns true if the count of the AddSubscription invocations corresponds
 // the number of defined expectations
-func (m *PropertyServiceHandlerMock) MinimockAddSubscriptionDone() bool {
+func (m *PropertyServiceClientMock) MinimockAddSubscriptionDone() bool {
 	if m.AddSubscriptionMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -1166,10 +1166,10 @@ func (m *PropertyServiceHandlerMock) MinimockAddSubscriptionDone() bool {
 }
 
 // MinimockAddSubscriptionInspect logs each unmet expectation
-func (m *PropertyServiceHandlerMock) MinimockAddSubscriptionInspect() {
+func (m *PropertyServiceClientMock) MinimockAddSubscriptionInspect() {
 	for _, e := range m.AddSubscriptionMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to PropertyServiceHandlerMock.AddSubscription at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to PropertyServiceClientMock.AddSubscription at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -1177,66 +1177,66 @@ func (m *PropertyServiceHandlerMock) MinimockAddSubscriptionInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.AddSubscriptionMock.defaultExpectation != nil && afterAddSubscriptionCounter < 1 {
 		if m.AddSubscriptionMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to PropertyServiceHandlerMock.AddSubscription at\n%s", m.AddSubscriptionMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to PropertyServiceClientMock.AddSubscription at\n%s", m.AddSubscriptionMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to PropertyServiceHandlerMock.AddSubscription at\n%s with params: %#v", m.AddSubscriptionMock.defaultExpectation.expectationOrigins.origin, *m.AddSubscriptionMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to PropertyServiceClientMock.AddSubscription at\n%s with params: %#v", m.AddSubscriptionMock.defaultExpectation.expectationOrigins.origin, *m.AddSubscriptionMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcAddSubscription != nil && afterAddSubscriptionCounter < 1 {
-		m.t.Errorf("Expected call to PropertyServiceHandlerMock.AddSubscription at\n%s", m.funcAddSubscriptionOrigin)
+		m.t.Errorf("Expected call to PropertyServiceClientMock.AddSubscription at\n%s", m.funcAddSubscriptionOrigin)
 	}
 
 	if !m.AddSubscriptionMock.invocationsDone() && afterAddSubscriptionCounter > 0 {
-		m.t.Errorf("Expected %d calls to PropertyServiceHandlerMock.AddSubscription at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to PropertyServiceClientMock.AddSubscription at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.AddSubscriptionMock.expectedInvocations), m.AddSubscriptionMock.expectedInvocationsOrigin, afterAddSubscriptionCounter)
 	}
 }
 
-type mPropertyServiceHandlerMockCreateProperty struct {
+type mPropertyServiceClientMockCreateProperty struct {
 	optional           bool
-	mock               *PropertyServiceHandlerMock
-	defaultExpectation *PropertyServiceHandlerMockCreatePropertyExpectation
-	expectations       []*PropertyServiceHandlerMockCreatePropertyExpectation
+	mock               *PropertyServiceClientMock
+	defaultExpectation *PropertyServiceClientMockCreatePropertyExpectation
+	expectations       []*PropertyServiceClientMockCreatePropertyExpectation
 
-	callArgs []*PropertyServiceHandlerMockCreatePropertyParams
+	callArgs []*PropertyServiceClientMockCreatePropertyParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// PropertyServiceHandlerMockCreatePropertyExpectation specifies expectation struct of the PropertyServiceHandler.CreateProperty
-type PropertyServiceHandlerMockCreatePropertyExpectation struct {
-	mock               *PropertyServiceHandlerMock
-	params             *PropertyServiceHandlerMockCreatePropertyParams
-	paramPtrs          *PropertyServiceHandlerMockCreatePropertyParamPtrs
-	expectationOrigins PropertyServiceHandlerMockCreatePropertyExpectationOrigins
-	results            *PropertyServiceHandlerMockCreatePropertyResults
+// PropertyServiceClientMockCreatePropertyExpectation specifies expectation struct of the PropertyServiceClient.CreateProperty
+type PropertyServiceClientMockCreatePropertyExpectation struct {
+	mock               *PropertyServiceClientMock
+	params             *PropertyServiceClientMockCreatePropertyParams
+	paramPtrs          *PropertyServiceClientMockCreatePropertyParamPtrs
+	expectationOrigins PropertyServiceClientMockCreatePropertyExpectationOrigins
+	results            *PropertyServiceClientMockCreatePropertyResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// PropertyServiceHandlerMockCreatePropertyParams contains parameters of the PropertyServiceHandler.CreateProperty
-type PropertyServiceHandlerMockCreatePropertyParams struct {
+// PropertyServiceClientMockCreatePropertyParams contains parameters of the PropertyServiceClient.CreateProperty
+type PropertyServiceClientMockCreatePropertyParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.CreatePropertyRequest]
 }
 
-// PropertyServiceHandlerMockCreatePropertyParamPtrs contains pointers to parameters of the PropertyServiceHandler.CreateProperty
-type PropertyServiceHandlerMockCreatePropertyParamPtrs struct {
+// PropertyServiceClientMockCreatePropertyParamPtrs contains pointers to parameters of the PropertyServiceClient.CreateProperty
+type PropertyServiceClientMockCreatePropertyParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.CreatePropertyRequest]
 }
 
-// PropertyServiceHandlerMockCreatePropertyResults contains results of the PropertyServiceHandler.CreateProperty
-type PropertyServiceHandlerMockCreatePropertyResults struct {
+// PropertyServiceClientMockCreatePropertyResults contains results of the PropertyServiceClient.CreateProperty
+type PropertyServiceClientMockCreatePropertyResults struct {
 	pp2 *connect.Response[v1.CreatePropertyResponse]
 	err error
 }
 
-// PropertyServiceHandlerMockCreatePropertyOrigins contains origins of expectations of the PropertyServiceHandler.CreateProperty
-type PropertyServiceHandlerMockCreatePropertyExpectationOrigins struct {
+// PropertyServiceClientMockCreatePropertyOrigins contains origins of expectations of the PropertyServiceClient.CreateProperty
+type PropertyServiceClientMockCreatePropertyExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -1247,26 +1247,26 @@ type PropertyServiceHandlerMockCreatePropertyExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmCreateProperty *mPropertyServiceHandlerMockCreateProperty) Optional() *mPropertyServiceHandlerMockCreateProperty {
+func (mmCreateProperty *mPropertyServiceClientMockCreateProperty) Optional() *mPropertyServiceClientMockCreateProperty {
 	mmCreateProperty.optional = true
 	return mmCreateProperty
 }
 
-// Expect sets up expected params for PropertyServiceHandler.CreateProperty
-func (mmCreateProperty *mPropertyServiceHandlerMockCreateProperty) Expect(ctx context.Context, pp1 *connect.Request[v1.CreatePropertyRequest]) *mPropertyServiceHandlerMockCreateProperty {
+// Expect sets up expected params for PropertyServiceClient.CreateProperty
+func (mmCreateProperty *mPropertyServiceClientMockCreateProperty) Expect(ctx context.Context, pp1 *connect.Request[v1.CreatePropertyRequest]) *mPropertyServiceClientMockCreateProperty {
 	if mmCreateProperty.mock.funcCreateProperty != nil {
-		mmCreateProperty.mock.t.Fatalf("PropertyServiceHandlerMock.CreateProperty mock is already set by Set")
+		mmCreateProperty.mock.t.Fatalf("PropertyServiceClientMock.CreateProperty mock is already set by Set")
 	}
 
 	if mmCreateProperty.defaultExpectation == nil {
-		mmCreateProperty.defaultExpectation = &PropertyServiceHandlerMockCreatePropertyExpectation{}
+		mmCreateProperty.defaultExpectation = &PropertyServiceClientMockCreatePropertyExpectation{}
 	}
 
 	if mmCreateProperty.defaultExpectation.paramPtrs != nil {
-		mmCreateProperty.mock.t.Fatalf("PropertyServiceHandlerMock.CreateProperty mock is already set by ExpectParams functions")
+		mmCreateProperty.mock.t.Fatalf("PropertyServiceClientMock.CreateProperty mock is already set by ExpectParams functions")
 	}
 
-	mmCreateProperty.defaultExpectation.params = &PropertyServiceHandlerMockCreatePropertyParams{ctx, pp1}
+	mmCreateProperty.defaultExpectation.params = &PropertyServiceClientMockCreatePropertyParams{ctx, pp1}
 	mmCreateProperty.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmCreateProperty.expectations {
 		if minimock.Equal(e.params, mmCreateProperty.defaultExpectation.params) {
@@ -1277,22 +1277,22 @@ func (mmCreateProperty *mPropertyServiceHandlerMockCreateProperty) Expect(ctx co
 	return mmCreateProperty
 }
 
-// ExpectCtxParam1 sets up expected param ctx for PropertyServiceHandler.CreateProperty
-func (mmCreateProperty *mPropertyServiceHandlerMockCreateProperty) ExpectCtxParam1(ctx context.Context) *mPropertyServiceHandlerMockCreateProperty {
+// ExpectCtxParam1 sets up expected param ctx for PropertyServiceClient.CreateProperty
+func (mmCreateProperty *mPropertyServiceClientMockCreateProperty) ExpectCtxParam1(ctx context.Context) *mPropertyServiceClientMockCreateProperty {
 	if mmCreateProperty.mock.funcCreateProperty != nil {
-		mmCreateProperty.mock.t.Fatalf("PropertyServiceHandlerMock.CreateProperty mock is already set by Set")
+		mmCreateProperty.mock.t.Fatalf("PropertyServiceClientMock.CreateProperty mock is already set by Set")
 	}
 
 	if mmCreateProperty.defaultExpectation == nil {
-		mmCreateProperty.defaultExpectation = &PropertyServiceHandlerMockCreatePropertyExpectation{}
+		mmCreateProperty.defaultExpectation = &PropertyServiceClientMockCreatePropertyExpectation{}
 	}
 
 	if mmCreateProperty.defaultExpectation.params != nil {
-		mmCreateProperty.mock.t.Fatalf("PropertyServiceHandlerMock.CreateProperty mock is already set by Expect")
+		mmCreateProperty.mock.t.Fatalf("PropertyServiceClientMock.CreateProperty mock is already set by Expect")
 	}
 
 	if mmCreateProperty.defaultExpectation.paramPtrs == nil {
-		mmCreateProperty.defaultExpectation.paramPtrs = &PropertyServiceHandlerMockCreatePropertyParamPtrs{}
+		mmCreateProperty.defaultExpectation.paramPtrs = &PropertyServiceClientMockCreatePropertyParamPtrs{}
 	}
 	mmCreateProperty.defaultExpectation.paramPtrs.ctx = &ctx
 	mmCreateProperty.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -1300,22 +1300,22 @@ func (mmCreateProperty *mPropertyServiceHandlerMockCreateProperty) ExpectCtxPara
 	return mmCreateProperty
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for PropertyServiceHandler.CreateProperty
-func (mmCreateProperty *mPropertyServiceHandlerMockCreateProperty) ExpectPp1Param2(pp1 *connect.Request[v1.CreatePropertyRequest]) *mPropertyServiceHandlerMockCreateProperty {
+// ExpectPp1Param2 sets up expected param pp1 for PropertyServiceClient.CreateProperty
+func (mmCreateProperty *mPropertyServiceClientMockCreateProperty) ExpectPp1Param2(pp1 *connect.Request[v1.CreatePropertyRequest]) *mPropertyServiceClientMockCreateProperty {
 	if mmCreateProperty.mock.funcCreateProperty != nil {
-		mmCreateProperty.mock.t.Fatalf("PropertyServiceHandlerMock.CreateProperty mock is already set by Set")
+		mmCreateProperty.mock.t.Fatalf("PropertyServiceClientMock.CreateProperty mock is already set by Set")
 	}
 
 	if mmCreateProperty.defaultExpectation == nil {
-		mmCreateProperty.defaultExpectation = &PropertyServiceHandlerMockCreatePropertyExpectation{}
+		mmCreateProperty.defaultExpectation = &PropertyServiceClientMockCreatePropertyExpectation{}
 	}
 
 	if mmCreateProperty.defaultExpectation.params != nil {
-		mmCreateProperty.mock.t.Fatalf("PropertyServiceHandlerMock.CreateProperty mock is already set by Expect")
+		mmCreateProperty.mock.t.Fatalf("PropertyServiceClientMock.CreateProperty mock is already set by Expect")
 	}
 
 	if mmCreateProperty.defaultExpectation.paramPtrs == nil {
-		mmCreateProperty.defaultExpectation.paramPtrs = &PropertyServiceHandlerMockCreatePropertyParamPtrs{}
+		mmCreateProperty.defaultExpectation.paramPtrs = &PropertyServiceClientMockCreatePropertyParamPtrs{}
 	}
 	mmCreateProperty.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmCreateProperty.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -1323,10 +1323,10 @@ func (mmCreateProperty *mPropertyServiceHandlerMockCreateProperty) ExpectPp1Para
 	return mmCreateProperty
 }
 
-// Inspect accepts an inspector function that has same arguments as the PropertyServiceHandler.CreateProperty
-func (mmCreateProperty *mPropertyServiceHandlerMockCreateProperty) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.CreatePropertyRequest])) *mPropertyServiceHandlerMockCreateProperty {
+// Inspect accepts an inspector function that has same arguments as the PropertyServiceClient.CreateProperty
+func (mmCreateProperty *mPropertyServiceClientMockCreateProperty) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.CreatePropertyRequest])) *mPropertyServiceClientMockCreateProperty {
 	if mmCreateProperty.mock.inspectFuncCreateProperty != nil {
-		mmCreateProperty.mock.t.Fatalf("Inspect function is already set for PropertyServiceHandlerMock.CreateProperty")
+		mmCreateProperty.mock.t.Fatalf("Inspect function is already set for PropertyServiceClientMock.CreateProperty")
 	}
 
 	mmCreateProperty.mock.inspectFuncCreateProperty = f
@@ -1334,28 +1334,28 @@ func (mmCreateProperty *mPropertyServiceHandlerMockCreateProperty) Inspect(f fun
 	return mmCreateProperty
 }
 
-// Return sets up results that will be returned by PropertyServiceHandler.CreateProperty
-func (mmCreateProperty *mPropertyServiceHandlerMockCreateProperty) Return(pp2 *connect.Response[v1.CreatePropertyResponse], err error) *PropertyServiceHandlerMock {
+// Return sets up results that will be returned by PropertyServiceClient.CreateProperty
+func (mmCreateProperty *mPropertyServiceClientMockCreateProperty) Return(pp2 *connect.Response[v1.CreatePropertyResponse], err error) *PropertyServiceClientMock {
 	if mmCreateProperty.mock.funcCreateProperty != nil {
-		mmCreateProperty.mock.t.Fatalf("PropertyServiceHandlerMock.CreateProperty mock is already set by Set")
+		mmCreateProperty.mock.t.Fatalf("PropertyServiceClientMock.CreateProperty mock is already set by Set")
 	}
 
 	if mmCreateProperty.defaultExpectation == nil {
-		mmCreateProperty.defaultExpectation = &PropertyServiceHandlerMockCreatePropertyExpectation{mock: mmCreateProperty.mock}
+		mmCreateProperty.defaultExpectation = &PropertyServiceClientMockCreatePropertyExpectation{mock: mmCreateProperty.mock}
 	}
-	mmCreateProperty.defaultExpectation.results = &PropertyServiceHandlerMockCreatePropertyResults{pp2, err}
+	mmCreateProperty.defaultExpectation.results = &PropertyServiceClientMockCreatePropertyResults{pp2, err}
 	mmCreateProperty.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmCreateProperty.mock
 }
 
-// Set uses given function f to mock the PropertyServiceHandler.CreateProperty method
-func (mmCreateProperty *mPropertyServiceHandlerMockCreateProperty) Set(f func(ctx context.Context, pp1 *connect.Request[v1.CreatePropertyRequest]) (pp2 *connect.Response[v1.CreatePropertyResponse], err error)) *PropertyServiceHandlerMock {
+// Set uses given function f to mock the PropertyServiceClient.CreateProperty method
+func (mmCreateProperty *mPropertyServiceClientMockCreateProperty) Set(f func(ctx context.Context, pp1 *connect.Request[v1.CreatePropertyRequest]) (pp2 *connect.Response[v1.CreatePropertyResponse], err error)) *PropertyServiceClientMock {
 	if mmCreateProperty.defaultExpectation != nil {
-		mmCreateProperty.mock.t.Fatalf("Default expectation is already set for the PropertyServiceHandler.CreateProperty method")
+		mmCreateProperty.mock.t.Fatalf("Default expectation is already set for the PropertyServiceClient.CreateProperty method")
 	}
 
 	if len(mmCreateProperty.expectations) > 0 {
-		mmCreateProperty.mock.t.Fatalf("Some expectations are already set for the PropertyServiceHandler.CreateProperty method")
+		mmCreateProperty.mock.t.Fatalf("Some expectations are already set for the PropertyServiceClient.CreateProperty method")
 	}
 
 	mmCreateProperty.mock.funcCreateProperty = f
@@ -1363,39 +1363,39 @@ func (mmCreateProperty *mPropertyServiceHandlerMockCreateProperty) Set(f func(ct
 	return mmCreateProperty.mock
 }
 
-// When sets expectation for the PropertyServiceHandler.CreateProperty which will trigger the result defined by the following
+// When sets expectation for the PropertyServiceClient.CreateProperty which will trigger the result defined by the following
 // Then helper
-func (mmCreateProperty *mPropertyServiceHandlerMockCreateProperty) When(ctx context.Context, pp1 *connect.Request[v1.CreatePropertyRequest]) *PropertyServiceHandlerMockCreatePropertyExpectation {
+func (mmCreateProperty *mPropertyServiceClientMockCreateProperty) When(ctx context.Context, pp1 *connect.Request[v1.CreatePropertyRequest]) *PropertyServiceClientMockCreatePropertyExpectation {
 	if mmCreateProperty.mock.funcCreateProperty != nil {
-		mmCreateProperty.mock.t.Fatalf("PropertyServiceHandlerMock.CreateProperty mock is already set by Set")
+		mmCreateProperty.mock.t.Fatalf("PropertyServiceClientMock.CreateProperty mock is already set by Set")
 	}
 
-	expectation := &PropertyServiceHandlerMockCreatePropertyExpectation{
+	expectation := &PropertyServiceClientMockCreatePropertyExpectation{
 		mock:               mmCreateProperty.mock,
-		params:             &PropertyServiceHandlerMockCreatePropertyParams{ctx, pp1},
-		expectationOrigins: PropertyServiceHandlerMockCreatePropertyExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &PropertyServiceClientMockCreatePropertyParams{ctx, pp1},
+		expectationOrigins: PropertyServiceClientMockCreatePropertyExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmCreateProperty.expectations = append(mmCreateProperty.expectations, expectation)
 	return expectation
 }
 
-// Then sets up PropertyServiceHandler.CreateProperty return parameters for the expectation previously defined by the When method
-func (e *PropertyServiceHandlerMockCreatePropertyExpectation) Then(pp2 *connect.Response[v1.CreatePropertyResponse], err error) *PropertyServiceHandlerMock {
-	e.results = &PropertyServiceHandlerMockCreatePropertyResults{pp2, err}
+// Then sets up PropertyServiceClient.CreateProperty return parameters for the expectation previously defined by the When method
+func (e *PropertyServiceClientMockCreatePropertyExpectation) Then(pp2 *connect.Response[v1.CreatePropertyResponse], err error) *PropertyServiceClientMock {
+	e.results = &PropertyServiceClientMockCreatePropertyResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times PropertyServiceHandler.CreateProperty should be invoked
-func (mmCreateProperty *mPropertyServiceHandlerMockCreateProperty) Times(n uint64) *mPropertyServiceHandlerMockCreateProperty {
+// Times sets number of times PropertyServiceClient.CreateProperty should be invoked
+func (mmCreateProperty *mPropertyServiceClientMockCreateProperty) Times(n uint64) *mPropertyServiceClientMockCreateProperty {
 	if n == 0 {
-		mmCreateProperty.mock.t.Fatalf("Times of PropertyServiceHandlerMock.CreateProperty mock can not be zero")
+		mmCreateProperty.mock.t.Fatalf("Times of PropertyServiceClientMock.CreateProperty mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmCreateProperty.expectedInvocations, n)
 	mmCreateProperty.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmCreateProperty
 }
 
-func (mmCreateProperty *mPropertyServiceHandlerMockCreateProperty) invocationsDone() bool {
+func (mmCreateProperty *mPropertyServiceClientMockCreateProperty) invocationsDone() bool {
 	if len(mmCreateProperty.expectations) == 0 && mmCreateProperty.defaultExpectation == nil && mmCreateProperty.mock.funcCreateProperty == nil {
 		return true
 	}
@@ -1406,8 +1406,8 @@ func (mmCreateProperty *mPropertyServiceHandlerMockCreateProperty) invocationsDo
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// CreateProperty implements mm_propertyv1connect.PropertyServiceHandler
-func (mmCreateProperty *PropertyServiceHandlerMock) CreateProperty(ctx context.Context, pp1 *connect.Request[v1.CreatePropertyRequest]) (pp2 *connect.Response[v1.CreatePropertyResponse], err error) {
+// CreateProperty implements mm_propertyv1connect.PropertyServiceClient
+func (mmCreateProperty *PropertyServiceClientMock) CreateProperty(ctx context.Context, pp1 *connect.Request[v1.CreatePropertyRequest]) (pp2 *connect.Response[v1.CreatePropertyResponse], err error) {
 	mm_atomic.AddUint64(&mmCreateProperty.beforeCreatePropertyCounter, 1)
 	defer mm_atomic.AddUint64(&mmCreateProperty.afterCreatePropertyCounter, 1)
 
@@ -1417,7 +1417,7 @@ func (mmCreateProperty *PropertyServiceHandlerMock) CreateProperty(ctx context.C
 		mmCreateProperty.inspectFuncCreateProperty(ctx, pp1)
 	}
 
-	mm_params := PropertyServiceHandlerMockCreatePropertyParams{ctx, pp1}
+	mm_params := PropertyServiceClientMockCreatePropertyParams{ctx, pp1}
 
 	// Record call args
 	mmCreateProperty.CreatePropertyMock.mutex.Lock()
@@ -1436,54 +1436,54 @@ func (mmCreateProperty *PropertyServiceHandlerMock) CreateProperty(ctx context.C
 		mm_want := mmCreateProperty.CreatePropertyMock.defaultExpectation.params
 		mm_want_ptrs := mmCreateProperty.CreatePropertyMock.defaultExpectation.paramPtrs
 
-		mm_got := PropertyServiceHandlerMockCreatePropertyParams{ctx, pp1}
+		mm_got := PropertyServiceClientMockCreatePropertyParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmCreateProperty.t.Errorf("PropertyServiceHandlerMock.CreateProperty got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmCreateProperty.t.Errorf("PropertyServiceClientMock.CreateProperty got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmCreateProperty.CreatePropertyMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmCreateProperty.t.Errorf("PropertyServiceHandlerMock.CreateProperty got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmCreateProperty.t.Errorf("PropertyServiceClientMock.CreateProperty got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmCreateProperty.CreatePropertyMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmCreateProperty.t.Errorf("PropertyServiceHandlerMock.CreateProperty got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmCreateProperty.t.Errorf("PropertyServiceClientMock.CreateProperty got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmCreateProperty.CreatePropertyMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmCreateProperty.CreatePropertyMock.defaultExpectation.results
 		if mm_results == nil {
-			mmCreateProperty.t.Fatal("No results are set for the PropertyServiceHandlerMock.CreateProperty")
+			mmCreateProperty.t.Fatal("No results are set for the PropertyServiceClientMock.CreateProperty")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmCreateProperty.funcCreateProperty != nil {
 		return mmCreateProperty.funcCreateProperty(ctx, pp1)
 	}
-	mmCreateProperty.t.Fatalf("Unexpected call to PropertyServiceHandlerMock.CreateProperty. %v %v", ctx, pp1)
+	mmCreateProperty.t.Fatalf("Unexpected call to PropertyServiceClientMock.CreateProperty. %v %v", ctx, pp1)
 	return
 }
 
-// CreatePropertyAfterCounter returns a count of finished PropertyServiceHandlerMock.CreateProperty invocations
-func (mmCreateProperty *PropertyServiceHandlerMock) CreatePropertyAfterCounter() uint64 {
+// CreatePropertyAfterCounter returns a count of finished PropertyServiceClientMock.CreateProperty invocations
+func (mmCreateProperty *PropertyServiceClientMock) CreatePropertyAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmCreateProperty.afterCreatePropertyCounter)
 }
 
-// CreatePropertyBeforeCounter returns a count of PropertyServiceHandlerMock.CreateProperty invocations
-func (mmCreateProperty *PropertyServiceHandlerMock) CreatePropertyBeforeCounter() uint64 {
+// CreatePropertyBeforeCounter returns a count of PropertyServiceClientMock.CreateProperty invocations
+func (mmCreateProperty *PropertyServiceClientMock) CreatePropertyBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmCreateProperty.beforeCreatePropertyCounter)
 }
 
-// Calls returns a list of arguments used in each call to PropertyServiceHandlerMock.CreateProperty.
+// Calls returns a list of arguments used in each call to PropertyServiceClientMock.CreateProperty.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmCreateProperty *mPropertyServiceHandlerMockCreateProperty) Calls() []*PropertyServiceHandlerMockCreatePropertyParams {
+func (mmCreateProperty *mPropertyServiceClientMockCreateProperty) Calls() []*PropertyServiceClientMockCreatePropertyParams {
 	mmCreateProperty.mutex.RLock()
 
-	argCopy := make([]*PropertyServiceHandlerMockCreatePropertyParams, len(mmCreateProperty.callArgs))
+	argCopy := make([]*PropertyServiceClientMockCreatePropertyParams, len(mmCreateProperty.callArgs))
 	copy(argCopy, mmCreateProperty.callArgs)
 
 	mmCreateProperty.mutex.RUnlock()
@@ -1493,7 +1493,7 @@ func (mmCreateProperty *mPropertyServiceHandlerMockCreateProperty) Calls() []*Pr
 
 // MinimockCreatePropertyDone returns true if the count of the CreateProperty invocations corresponds
 // the number of defined expectations
-func (m *PropertyServiceHandlerMock) MinimockCreatePropertyDone() bool {
+func (m *PropertyServiceClientMock) MinimockCreatePropertyDone() bool {
 	if m.CreatePropertyMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -1509,10 +1509,10 @@ func (m *PropertyServiceHandlerMock) MinimockCreatePropertyDone() bool {
 }
 
 // MinimockCreatePropertyInspect logs each unmet expectation
-func (m *PropertyServiceHandlerMock) MinimockCreatePropertyInspect() {
+func (m *PropertyServiceClientMock) MinimockCreatePropertyInspect() {
 	for _, e := range m.CreatePropertyMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to PropertyServiceHandlerMock.CreateProperty at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to PropertyServiceClientMock.CreateProperty at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -1520,66 +1520,66 @@ func (m *PropertyServiceHandlerMock) MinimockCreatePropertyInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.CreatePropertyMock.defaultExpectation != nil && afterCreatePropertyCounter < 1 {
 		if m.CreatePropertyMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to PropertyServiceHandlerMock.CreateProperty at\n%s", m.CreatePropertyMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to PropertyServiceClientMock.CreateProperty at\n%s", m.CreatePropertyMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to PropertyServiceHandlerMock.CreateProperty at\n%s with params: %#v", m.CreatePropertyMock.defaultExpectation.expectationOrigins.origin, *m.CreatePropertyMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to PropertyServiceClientMock.CreateProperty at\n%s with params: %#v", m.CreatePropertyMock.defaultExpectation.expectationOrigins.origin, *m.CreatePropertyMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcCreateProperty != nil && afterCreatePropertyCounter < 1 {
-		m.t.Errorf("Expected call to PropertyServiceHandlerMock.CreateProperty at\n%s", m.funcCreatePropertyOrigin)
+		m.t.Errorf("Expected call to PropertyServiceClientMock.CreateProperty at\n%s", m.funcCreatePropertyOrigin)
 	}
 
 	if !m.CreatePropertyMock.invocationsDone() && afterCreatePropertyCounter > 0 {
-		m.t.Errorf("Expected %d calls to PropertyServiceHandlerMock.CreateProperty at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to PropertyServiceClientMock.CreateProperty at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.CreatePropertyMock.expectedInvocations), m.CreatePropertyMock.expectedInvocationsOrigin, afterCreatePropertyCounter)
 	}
 }
 
-type mPropertyServiceHandlerMockDeleteLocality struct {
+type mPropertyServiceClientMockDeleteLocality struct {
 	optional           bool
-	mock               *PropertyServiceHandlerMock
-	defaultExpectation *PropertyServiceHandlerMockDeleteLocalityExpectation
-	expectations       []*PropertyServiceHandlerMockDeleteLocalityExpectation
+	mock               *PropertyServiceClientMock
+	defaultExpectation *PropertyServiceClientMockDeleteLocalityExpectation
+	expectations       []*PropertyServiceClientMockDeleteLocalityExpectation
 
-	callArgs []*PropertyServiceHandlerMockDeleteLocalityParams
+	callArgs []*PropertyServiceClientMockDeleteLocalityParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// PropertyServiceHandlerMockDeleteLocalityExpectation specifies expectation struct of the PropertyServiceHandler.DeleteLocality
-type PropertyServiceHandlerMockDeleteLocalityExpectation struct {
-	mock               *PropertyServiceHandlerMock
-	params             *PropertyServiceHandlerMockDeleteLocalityParams
-	paramPtrs          *PropertyServiceHandlerMockDeleteLocalityParamPtrs
-	expectationOrigins PropertyServiceHandlerMockDeleteLocalityExpectationOrigins
-	results            *PropertyServiceHandlerMockDeleteLocalityResults
+// PropertyServiceClientMockDeleteLocalityExpectation specifies expectation struct of the PropertyServiceClient.DeleteLocality
+type PropertyServiceClientMockDeleteLocalityExpectation struct {
+	mock               *PropertyServiceClientMock
+	params             *PropertyServiceClientMockDeleteLocalityParams
+	paramPtrs          *PropertyServiceClientMockDeleteLocalityParamPtrs
+	expectationOrigins PropertyServiceClientMockDeleteLocalityExpectationOrigins
+	results            *PropertyServiceClientMockDeleteLocalityResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// PropertyServiceHandlerMockDeleteLocalityParams contains parameters of the PropertyServiceHandler.DeleteLocality
-type PropertyServiceHandlerMockDeleteLocalityParams struct {
+// PropertyServiceClientMockDeleteLocalityParams contains parameters of the PropertyServiceClient.DeleteLocality
+type PropertyServiceClientMockDeleteLocalityParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.DeleteLocalityRequest]
 }
 
-// PropertyServiceHandlerMockDeleteLocalityParamPtrs contains pointers to parameters of the PropertyServiceHandler.DeleteLocality
-type PropertyServiceHandlerMockDeleteLocalityParamPtrs struct {
+// PropertyServiceClientMockDeleteLocalityParamPtrs contains pointers to parameters of the PropertyServiceClient.DeleteLocality
+type PropertyServiceClientMockDeleteLocalityParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.DeleteLocalityRequest]
 }
 
-// PropertyServiceHandlerMockDeleteLocalityResults contains results of the PropertyServiceHandler.DeleteLocality
-type PropertyServiceHandlerMockDeleteLocalityResults struct {
+// PropertyServiceClientMockDeleteLocalityResults contains results of the PropertyServiceClient.DeleteLocality
+type PropertyServiceClientMockDeleteLocalityResults struct {
 	pp2 *connect.Response[v1.DeleteLocalityResponse]
 	err error
 }
 
-// PropertyServiceHandlerMockDeleteLocalityOrigins contains origins of expectations of the PropertyServiceHandler.DeleteLocality
-type PropertyServiceHandlerMockDeleteLocalityExpectationOrigins struct {
+// PropertyServiceClientMockDeleteLocalityOrigins contains origins of expectations of the PropertyServiceClient.DeleteLocality
+type PropertyServiceClientMockDeleteLocalityExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -1590,26 +1590,26 @@ type PropertyServiceHandlerMockDeleteLocalityExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmDeleteLocality *mPropertyServiceHandlerMockDeleteLocality) Optional() *mPropertyServiceHandlerMockDeleteLocality {
+func (mmDeleteLocality *mPropertyServiceClientMockDeleteLocality) Optional() *mPropertyServiceClientMockDeleteLocality {
 	mmDeleteLocality.optional = true
 	return mmDeleteLocality
 }
 
-// Expect sets up expected params for PropertyServiceHandler.DeleteLocality
-func (mmDeleteLocality *mPropertyServiceHandlerMockDeleteLocality) Expect(ctx context.Context, pp1 *connect.Request[v1.DeleteLocalityRequest]) *mPropertyServiceHandlerMockDeleteLocality {
+// Expect sets up expected params for PropertyServiceClient.DeleteLocality
+func (mmDeleteLocality *mPropertyServiceClientMockDeleteLocality) Expect(ctx context.Context, pp1 *connect.Request[v1.DeleteLocalityRequest]) *mPropertyServiceClientMockDeleteLocality {
 	if mmDeleteLocality.mock.funcDeleteLocality != nil {
-		mmDeleteLocality.mock.t.Fatalf("PropertyServiceHandlerMock.DeleteLocality mock is already set by Set")
+		mmDeleteLocality.mock.t.Fatalf("PropertyServiceClientMock.DeleteLocality mock is already set by Set")
 	}
 
 	if mmDeleteLocality.defaultExpectation == nil {
-		mmDeleteLocality.defaultExpectation = &PropertyServiceHandlerMockDeleteLocalityExpectation{}
+		mmDeleteLocality.defaultExpectation = &PropertyServiceClientMockDeleteLocalityExpectation{}
 	}
 
 	if mmDeleteLocality.defaultExpectation.paramPtrs != nil {
-		mmDeleteLocality.mock.t.Fatalf("PropertyServiceHandlerMock.DeleteLocality mock is already set by ExpectParams functions")
+		mmDeleteLocality.mock.t.Fatalf("PropertyServiceClientMock.DeleteLocality mock is already set by ExpectParams functions")
 	}
 
-	mmDeleteLocality.defaultExpectation.params = &PropertyServiceHandlerMockDeleteLocalityParams{ctx, pp1}
+	mmDeleteLocality.defaultExpectation.params = &PropertyServiceClientMockDeleteLocalityParams{ctx, pp1}
 	mmDeleteLocality.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmDeleteLocality.expectations {
 		if minimock.Equal(e.params, mmDeleteLocality.defaultExpectation.params) {
@@ -1620,22 +1620,22 @@ func (mmDeleteLocality *mPropertyServiceHandlerMockDeleteLocality) Expect(ctx co
 	return mmDeleteLocality
 }
 
-// ExpectCtxParam1 sets up expected param ctx for PropertyServiceHandler.DeleteLocality
-func (mmDeleteLocality *mPropertyServiceHandlerMockDeleteLocality) ExpectCtxParam1(ctx context.Context) *mPropertyServiceHandlerMockDeleteLocality {
+// ExpectCtxParam1 sets up expected param ctx for PropertyServiceClient.DeleteLocality
+func (mmDeleteLocality *mPropertyServiceClientMockDeleteLocality) ExpectCtxParam1(ctx context.Context) *mPropertyServiceClientMockDeleteLocality {
 	if mmDeleteLocality.mock.funcDeleteLocality != nil {
-		mmDeleteLocality.mock.t.Fatalf("PropertyServiceHandlerMock.DeleteLocality mock is already set by Set")
+		mmDeleteLocality.mock.t.Fatalf("PropertyServiceClientMock.DeleteLocality mock is already set by Set")
 	}
 
 	if mmDeleteLocality.defaultExpectation == nil {
-		mmDeleteLocality.defaultExpectation = &PropertyServiceHandlerMockDeleteLocalityExpectation{}
+		mmDeleteLocality.defaultExpectation = &PropertyServiceClientMockDeleteLocalityExpectation{}
 	}
 
 	if mmDeleteLocality.defaultExpectation.params != nil {
-		mmDeleteLocality.mock.t.Fatalf("PropertyServiceHandlerMock.DeleteLocality mock is already set by Expect")
+		mmDeleteLocality.mock.t.Fatalf("PropertyServiceClientMock.DeleteLocality mock is already set by Expect")
 	}
 
 	if mmDeleteLocality.defaultExpectation.paramPtrs == nil {
-		mmDeleteLocality.defaultExpectation.paramPtrs = &PropertyServiceHandlerMockDeleteLocalityParamPtrs{}
+		mmDeleteLocality.defaultExpectation.paramPtrs = &PropertyServiceClientMockDeleteLocalityParamPtrs{}
 	}
 	mmDeleteLocality.defaultExpectation.paramPtrs.ctx = &ctx
 	mmDeleteLocality.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -1643,22 +1643,22 @@ func (mmDeleteLocality *mPropertyServiceHandlerMockDeleteLocality) ExpectCtxPara
 	return mmDeleteLocality
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for PropertyServiceHandler.DeleteLocality
-func (mmDeleteLocality *mPropertyServiceHandlerMockDeleteLocality) ExpectPp1Param2(pp1 *connect.Request[v1.DeleteLocalityRequest]) *mPropertyServiceHandlerMockDeleteLocality {
+// ExpectPp1Param2 sets up expected param pp1 for PropertyServiceClient.DeleteLocality
+func (mmDeleteLocality *mPropertyServiceClientMockDeleteLocality) ExpectPp1Param2(pp1 *connect.Request[v1.DeleteLocalityRequest]) *mPropertyServiceClientMockDeleteLocality {
 	if mmDeleteLocality.mock.funcDeleteLocality != nil {
-		mmDeleteLocality.mock.t.Fatalf("PropertyServiceHandlerMock.DeleteLocality mock is already set by Set")
+		mmDeleteLocality.mock.t.Fatalf("PropertyServiceClientMock.DeleteLocality mock is already set by Set")
 	}
 
 	if mmDeleteLocality.defaultExpectation == nil {
-		mmDeleteLocality.defaultExpectation = &PropertyServiceHandlerMockDeleteLocalityExpectation{}
+		mmDeleteLocality.defaultExpectation = &PropertyServiceClientMockDeleteLocalityExpectation{}
 	}
 
 	if mmDeleteLocality.defaultExpectation.params != nil {
-		mmDeleteLocality.mock.t.Fatalf("PropertyServiceHandlerMock.DeleteLocality mock is already set by Expect")
+		mmDeleteLocality.mock.t.Fatalf("PropertyServiceClientMock.DeleteLocality mock is already set by Expect")
 	}
 
 	if mmDeleteLocality.defaultExpectation.paramPtrs == nil {
-		mmDeleteLocality.defaultExpectation.paramPtrs = &PropertyServiceHandlerMockDeleteLocalityParamPtrs{}
+		mmDeleteLocality.defaultExpectation.paramPtrs = &PropertyServiceClientMockDeleteLocalityParamPtrs{}
 	}
 	mmDeleteLocality.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmDeleteLocality.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -1666,10 +1666,10 @@ func (mmDeleteLocality *mPropertyServiceHandlerMockDeleteLocality) ExpectPp1Para
 	return mmDeleteLocality
 }
 
-// Inspect accepts an inspector function that has same arguments as the PropertyServiceHandler.DeleteLocality
-func (mmDeleteLocality *mPropertyServiceHandlerMockDeleteLocality) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.DeleteLocalityRequest])) *mPropertyServiceHandlerMockDeleteLocality {
+// Inspect accepts an inspector function that has same arguments as the PropertyServiceClient.DeleteLocality
+func (mmDeleteLocality *mPropertyServiceClientMockDeleteLocality) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.DeleteLocalityRequest])) *mPropertyServiceClientMockDeleteLocality {
 	if mmDeleteLocality.mock.inspectFuncDeleteLocality != nil {
-		mmDeleteLocality.mock.t.Fatalf("Inspect function is already set for PropertyServiceHandlerMock.DeleteLocality")
+		mmDeleteLocality.mock.t.Fatalf("Inspect function is already set for PropertyServiceClientMock.DeleteLocality")
 	}
 
 	mmDeleteLocality.mock.inspectFuncDeleteLocality = f
@@ -1677,28 +1677,28 @@ func (mmDeleteLocality *mPropertyServiceHandlerMockDeleteLocality) Inspect(f fun
 	return mmDeleteLocality
 }
 
-// Return sets up results that will be returned by PropertyServiceHandler.DeleteLocality
-func (mmDeleteLocality *mPropertyServiceHandlerMockDeleteLocality) Return(pp2 *connect.Response[v1.DeleteLocalityResponse], err error) *PropertyServiceHandlerMock {
+// Return sets up results that will be returned by PropertyServiceClient.DeleteLocality
+func (mmDeleteLocality *mPropertyServiceClientMockDeleteLocality) Return(pp2 *connect.Response[v1.DeleteLocalityResponse], err error) *PropertyServiceClientMock {
 	if mmDeleteLocality.mock.funcDeleteLocality != nil {
-		mmDeleteLocality.mock.t.Fatalf("PropertyServiceHandlerMock.DeleteLocality mock is already set by Set")
+		mmDeleteLocality.mock.t.Fatalf("PropertyServiceClientMock.DeleteLocality mock is already set by Set")
 	}
 
 	if mmDeleteLocality.defaultExpectation == nil {
-		mmDeleteLocality.defaultExpectation = &PropertyServiceHandlerMockDeleteLocalityExpectation{mock: mmDeleteLocality.mock}
+		mmDeleteLocality.defaultExpectation = &PropertyServiceClientMockDeleteLocalityExpectation{mock: mmDeleteLocality.mock}
 	}
-	mmDeleteLocality.defaultExpectation.results = &PropertyServiceHandlerMockDeleteLocalityResults{pp2, err}
+	mmDeleteLocality.defaultExpectation.results = &PropertyServiceClientMockDeleteLocalityResults{pp2, err}
 	mmDeleteLocality.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmDeleteLocality.mock
 }
 
-// Set uses given function f to mock the PropertyServiceHandler.DeleteLocality method
-func (mmDeleteLocality *mPropertyServiceHandlerMockDeleteLocality) Set(f func(ctx context.Context, pp1 *connect.Request[v1.DeleteLocalityRequest]) (pp2 *connect.Response[v1.DeleteLocalityResponse], err error)) *PropertyServiceHandlerMock {
+// Set uses given function f to mock the PropertyServiceClient.DeleteLocality method
+func (mmDeleteLocality *mPropertyServiceClientMockDeleteLocality) Set(f func(ctx context.Context, pp1 *connect.Request[v1.DeleteLocalityRequest]) (pp2 *connect.Response[v1.DeleteLocalityResponse], err error)) *PropertyServiceClientMock {
 	if mmDeleteLocality.defaultExpectation != nil {
-		mmDeleteLocality.mock.t.Fatalf("Default expectation is already set for the PropertyServiceHandler.DeleteLocality method")
+		mmDeleteLocality.mock.t.Fatalf("Default expectation is already set for the PropertyServiceClient.DeleteLocality method")
 	}
 
 	if len(mmDeleteLocality.expectations) > 0 {
-		mmDeleteLocality.mock.t.Fatalf("Some expectations are already set for the PropertyServiceHandler.DeleteLocality method")
+		mmDeleteLocality.mock.t.Fatalf("Some expectations are already set for the PropertyServiceClient.DeleteLocality method")
 	}
 
 	mmDeleteLocality.mock.funcDeleteLocality = f
@@ -1706,39 +1706,39 @@ func (mmDeleteLocality *mPropertyServiceHandlerMockDeleteLocality) Set(f func(ct
 	return mmDeleteLocality.mock
 }
 
-// When sets expectation for the PropertyServiceHandler.DeleteLocality which will trigger the result defined by the following
+// When sets expectation for the PropertyServiceClient.DeleteLocality which will trigger the result defined by the following
 // Then helper
-func (mmDeleteLocality *mPropertyServiceHandlerMockDeleteLocality) When(ctx context.Context, pp1 *connect.Request[v1.DeleteLocalityRequest]) *PropertyServiceHandlerMockDeleteLocalityExpectation {
+func (mmDeleteLocality *mPropertyServiceClientMockDeleteLocality) When(ctx context.Context, pp1 *connect.Request[v1.DeleteLocalityRequest]) *PropertyServiceClientMockDeleteLocalityExpectation {
 	if mmDeleteLocality.mock.funcDeleteLocality != nil {
-		mmDeleteLocality.mock.t.Fatalf("PropertyServiceHandlerMock.DeleteLocality mock is already set by Set")
+		mmDeleteLocality.mock.t.Fatalf("PropertyServiceClientMock.DeleteLocality mock is already set by Set")
 	}
 
-	expectation := &PropertyServiceHandlerMockDeleteLocalityExpectation{
+	expectation := &PropertyServiceClientMockDeleteLocalityExpectation{
 		mock:               mmDeleteLocality.mock,
-		params:             &PropertyServiceHandlerMockDeleteLocalityParams{ctx, pp1},
-		expectationOrigins: PropertyServiceHandlerMockDeleteLocalityExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &PropertyServiceClientMockDeleteLocalityParams{ctx, pp1},
+		expectationOrigins: PropertyServiceClientMockDeleteLocalityExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmDeleteLocality.expectations = append(mmDeleteLocality.expectations, expectation)
 	return expectation
 }
 
-// Then sets up PropertyServiceHandler.DeleteLocality return parameters for the expectation previously defined by the When method
-func (e *PropertyServiceHandlerMockDeleteLocalityExpectation) Then(pp2 *connect.Response[v1.DeleteLocalityResponse], err error) *PropertyServiceHandlerMock {
-	e.results = &PropertyServiceHandlerMockDeleteLocalityResults{pp2, err}
+// Then sets up PropertyServiceClient.DeleteLocality return parameters for the expectation previously defined by the When method
+func (e *PropertyServiceClientMockDeleteLocalityExpectation) Then(pp2 *connect.Response[v1.DeleteLocalityResponse], err error) *PropertyServiceClientMock {
+	e.results = &PropertyServiceClientMockDeleteLocalityResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times PropertyServiceHandler.DeleteLocality should be invoked
-func (mmDeleteLocality *mPropertyServiceHandlerMockDeleteLocality) Times(n uint64) *mPropertyServiceHandlerMockDeleteLocality {
+// Times sets number of times PropertyServiceClient.DeleteLocality should be invoked
+func (mmDeleteLocality *mPropertyServiceClientMockDeleteLocality) Times(n uint64) *mPropertyServiceClientMockDeleteLocality {
 	if n == 0 {
-		mmDeleteLocality.mock.t.Fatalf("Times of PropertyServiceHandlerMock.DeleteLocality mock can not be zero")
+		mmDeleteLocality.mock.t.Fatalf("Times of PropertyServiceClientMock.DeleteLocality mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmDeleteLocality.expectedInvocations, n)
 	mmDeleteLocality.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmDeleteLocality
 }
 
-func (mmDeleteLocality *mPropertyServiceHandlerMockDeleteLocality) invocationsDone() bool {
+func (mmDeleteLocality *mPropertyServiceClientMockDeleteLocality) invocationsDone() bool {
 	if len(mmDeleteLocality.expectations) == 0 && mmDeleteLocality.defaultExpectation == nil && mmDeleteLocality.mock.funcDeleteLocality == nil {
 		return true
 	}
@@ -1749,8 +1749,8 @@ func (mmDeleteLocality *mPropertyServiceHandlerMockDeleteLocality) invocationsDo
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// DeleteLocality implements mm_propertyv1connect.PropertyServiceHandler
-func (mmDeleteLocality *PropertyServiceHandlerMock) DeleteLocality(ctx context.Context, pp1 *connect.Request[v1.DeleteLocalityRequest]) (pp2 *connect.Response[v1.DeleteLocalityResponse], err error) {
+// DeleteLocality implements mm_propertyv1connect.PropertyServiceClient
+func (mmDeleteLocality *PropertyServiceClientMock) DeleteLocality(ctx context.Context, pp1 *connect.Request[v1.DeleteLocalityRequest]) (pp2 *connect.Response[v1.DeleteLocalityResponse], err error) {
 	mm_atomic.AddUint64(&mmDeleteLocality.beforeDeleteLocalityCounter, 1)
 	defer mm_atomic.AddUint64(&mmDeleteLocality.afterDeleteLocalityCounter, 1)
 
@@ -1760,7 +1760,7 @@ func (mmDeleteLocality *PropertyServiceHandlerMock) DeleteLocality(ctx context.C
 		mmDeleteLocality.inspectFuncDeleteLocality(ctx, pp1)
 	}
 
-	mm_params := PropertyServiceHandlerMockDeleteLocalityParams{ctx, pp1}
+	mm_params := PropertyServiceClientMockDeleteLocalityParams{ctx, pp1}
 
 	// Record call args
 	mmDeleteLocality.DeleteLocalityMock.mutex.Lock()
@@ -1779,54 +1779,54 @@ func (mmDeleteLocality *PropertyServiceHandlerMock) DeleteLocality(ctx context.C
 		mm_want := mmDeleteLocality.DeleteLocalityMock.defaultExpectation.params
 		mm_want_ptrs := mmDeleteLocality.DeleteLocalityMock.defaultExpectation.paramPtrs
 
-		mm_got := PropertyServiceHandlerMockDeleteLocalityParams{ctx, pp1}
+		mm_got := PropertyServiceClientMockDeleteLocalityParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmDeleteLocality.t.Errorf("PropertyServiceHandlerMock.DeleteLocality got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmDeleteLocality.t.Errorf("PropertyServiceClientMock.DeleteLocality got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmDeleteLocality.DeleteLocalityMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmDeleteLocality.t.Errorf("PropertyServiceHandlerMock.DeleteLocality got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmDeleteLocality.t.Errorf("PropertyServiceClientMock.DeleteLocality got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmDeleteLocality.DeleteLocalityMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmDeleteLocality.t.Errorf("PropertyServiceHandlerMock.DeleteLocality got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmDeleteLocality.t.Errorf("PropertyServiceClientMock.DeleteLocality got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmDeleteLocality.DeleteLocalityMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmDeleteLocality.DeleteLocalityMock.defaultExpectation.results
 		if mm_results == nil {
-			mmDeleteLocality.t.Fatal("No results are set for the PropertyServiceHandlerMock.DeleteLocality")
+			mmDeleteLocality.t.Fatal("No results are set for the PropertyServiceClientMock.DeleteLocality")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmDeleteLocality.funcDeleteLocality != nil {
 		return mmDeleteLocality.funcDeleteLocality(ctx, pp1)
 	}
-	mmDeleteLocality.t.Fatalf("Unexpected call to PropertyServiceHandlerMock.DeleteLocality. %v %v", ctx, pp1)
+	mmDeleteLocality.t.Fatalf("Unexpected call to PropertyServiceClientMock.DeleteLocality. %v %v", ctx, pp1)
 	return
 }
 
-// DeleteLocalityAfterCounter returns a count of finished PropertyServiceHandlerMock.DeleteLocality invocations
-func (mmDeleteLocality *PropertyServiceHandlerMock) DeleteLocalityAfterCounter() uint64 {
+// DeleteLocalityAfterCounter returns a count of finished PropertyServiceClientMock.DeleteLocality invocations
+func (mmDeleteLocality *PropertyServiceClientMock) DeleteLocalityAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmDeleteLocality.afterDeleteLocalityCounter)
 }
 
-// DeleteLocalityBeforeCounter returns a count of PropertyServiceHandlerMock.DeleteLocality invocations
-func (mmDeleteLocality *PropertyServiceHandlerMock) DeleteLocalityBeforeCounter() uint64 {
+// DeleteLocalityBeforeCounter returns a count of PropertyServiceClientMock.DeleteLocality invocations
+func (mmDeleteLocality *PropertyServiceClientMock) DeleteLocalityBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmDeleteLocality.beforeDeleteLocalityCounter)
 }
 
-// Calls returns a list of arguments used in each call to PropertyServiceHandlerMock.DeleteLocality.
+// Calls returns a list of arguments used in each call to PropertyServiceClientMock.DeleteLocality.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmDeleteLocality *mPropertyServiceHandlerMockDeleteLocality) Calls() []*PropertyServiceHandlerMockDeleteLocalityParams {
+func (mmDeleteLocality *mPropertyServiceClientMockDeleteLocality) Calls() []*PropertyServiceClientMockDeleteLocalityParams {
 	mmDeleteLocality.mutex.RLock()
 
-	argCopy := make([]*PropertyServiceHandlerMockDeleteLocalityParams, len(mmDeleteLocality.callArgs))
+	argCopy := make([]*PropertyServiceClientMockDeleteLocalityParams, len(mmDeleteLocality.callArgs))
 	copy(argCopy, mmDeleteLocality.callArgs)
 
 	mmDeleteLocality.mutex.RUnlock()
@@ -1836,7 +1836,7 @@ func (mmDeleteLocality *mPropertyServiceHandlerMockDeleteLocality) Calls() []*Pr
 
 // MinimockDeleteLocalityDone returns true if the count of the DeleteLocality invocations corresponds
 // the number of defined expectations
-func (m *PropertyServiceHandlerMock) MinimockDeleteLocalityDone() bool {
+func (m *PropertyServiceClientMock) MinimockDeleteLocalityDone() bool {
 	if m.DeleteLocalityMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -1852,10 +1852,10 @@ func (m *PropertyServiceHandlerMock) MinimockDeleteLocalityDone() bool {
 }
 
 // MinimockDeleteLocalityInspect logs each unmet expectation
-func (m *PropertyServiceHandlerMock) MinimockDeleteLocalityInspect() {
+func (m *PropertyServiceClientMock) MinimockDeleteLocalityInspect() {
 	for _, e := range m.DeleteLocalityMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to PropertyServiceHandlerMock.DeleteLocality at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to PropertyServiceClientMock.DeleteLocality at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -1863,66 +1863,66 @@ func (m *PropertyServiceHandlerMock) MinimockDeleteLocalityInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.DeleteLocalityMock.defaultExpectation != nil && afterDeleteLocalityCounter < 1 {
 		if m.DeleteLocalityMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to PropertyServiceHandlerMock.DeleteLocality at\n%s", m.DeleteLocalityMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to PropertyServiceClientMock.DeleteLocality at\n%s", m.DeleteLocalityMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to PropertyServiceHandlerMock.DeleteLocality at\n%s with params: %#v", m.DeleteLocalityMock.defaultExpectation.expectationOrigins.origin, *m.DeleteLocalityMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to PropertyServiceClientMock.DeleteLocality at\n%s with params: %#v", m.DeleteLocalityMock.defaultExpectation.expectationOrigins.origin, *m.DeleteLocalityMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcDeleteLocality != nil && afterDeleteLocalityCounter < 1 {
-		m.t.Errorf("Expected call to PropertyServiceHandlerMock.DeleteLocality at\n%s", m.funcDeleteLocalityOrigin)
+		m.t.Errorf("Expected call to PropertyServiceClientMock.DeleteLocality at\n%s", m.funcDeleteLocalityOrigin)
 	}
 
 	if !m.DeleteLocalityMock.invocationsDone() && afterDeleteLocalityCounter > 0 {
-		m.t.Errorf("Expected %d calls to PropertyServiceHandlerMock.DeleteLocality at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to PropertyServiceClientMock.DeleteLocality at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.DeleteLocalityMock.expectedInvocations), m.DeleteLocalityMock.expectedInvocationsOrigin, afterDeleteLocalityCounter)
 	}
 }
 
-type mPropertyServiceHandlerMockDeleteProperty struct {
+type mPropertyServiceClientMockDeleteProperty struct {
 	optional           bool
-	mock               *PropertyServiceHandlerMock
-	defaultExpectation *PropertyServiceHandlerMockDeletePropertyExpectation
-	expectations       []*PropertyServiceHandlerMockDeletePropertyExpectation
+	mock               *PropertyServiceClientMock
+	defaultExpectation *PropertyServiceClientMockDeletePropertyExpectation
+	expectations       []*PropertyServiceClientMockDeletePropertyExpectation
 
-	callArgs []*PropertyServiceHandlerMockDeletePropertyParams
+	callArgs []*PropertyServiceClientMockDeletePropertyParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// PropertyServiceHandlerMockDeletePropertyExpectation specifies expectation struct of the PropertyServiceHandler.DeleteProperty
-type PropertyServiceHandlerMockDeletePropertyExpectation struct {
-	mock               *PropertyServiceHandlerMock
-	params             *PropertyServiceHandlerMockDeletePropertyParams
-	paramPtrs          *PropertyServiceHandlerMockDeletePropertyParamPtrs
-	expectationOrigins PropertyServiceHandlerMockDeletePropertyExpectationOrigins
-	results            *PropertyServiceHandlerMockDeletePropertyResults
+// PropertyServiceClientMockDeletePropertyExpectation specifies expectation struct of the PropertyServiceClient.DeleteProperty
+type PropertyServiceClientMockDeletePropertyExpectation struct {
+	mock               *PropertyServiceClientMock
+	params             *PropertyServiceClientMockDeletePropertyParams
+	paramPtrs          *PropertyServiceClientMockDeletePropertyParamPtrs
+	expectationOrigins PropertyServiceClientMockDeletePropertyExpectationOrigins
+	results            *PropertyServiceClientMockDeletePropertyResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// PropertyServiceHandlerMockDeletePropertyParams contains parameters of the PropertyServiceHandler.DeleteProperty
-type PropertyServiceHandlerMockDeletePropertyParams struct {
+// PropertyServiceClientMockDeletePropertyParams contains parameters of the PropertyServiceClient.DeleteProperty
+type PropertyServiceClientMockDeletePropertyParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.DeletePropertyRequest]
 }
 
-// PropertyServiceHandlerMockDeletePropertyParamPtrs contains pointers to parameters of the PropertyServiceHandler.DeleteProperty
-type PropertyServiceHandlerMockDeletePropertyParamPtrs struct {
+// PropertyServiceClientMockDeletePropertyParamPtrs contains pointers to parameters of the PropertyServiceClient.DeleteProperty
+type PropertyServiceClientMockDeletePropertyParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.DeletePropertyRequest]
 }
 
-// PropertyServiceHandlerMockDeletePropertyResults contains results of the PropertyServiceHandler.DeleteProperty
-type PropertyServiceHandlerMockDeletePropertyResults struct {
+// PropertyServiceClientMockDeletePropertyResults contains results of the PropertyServiceClient.DeleteProperty
+type PropertyServiceClientMockDeletePropertyResults struct {
 	pp2 *connect.Response[v1.DeletePropertyResponse]
 	err error
 }
 
-// PropertyServiceHandlerMockDeletePropertyOrigins contains origins of expectations of the PropertyServiceHandler.DeleteProperty
-type PropertyServiceHandlerMockDeletePropertyExpectationOrigins struct {
+// PropertyServiceClientMockDeletePropertyOrigins contains origins of expectations of the PropertyServiceClient.DeleteProperty
+type PropertyServiceClientMockDeletePropertyExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -1933,26 +1933,26 @@ type PropertyServiceHandlerMockDeletePropertyExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmDeleteProperty *mPropertyServiceHandlerMockDeleteProperty) Optional() *mPropertyServiceHandlerMockDeleteProperty {
+func (mmDeleteProperty *mPropertyServiceClientMockDeleteProperty) Optional() *mPropertyServiceClientMockDeleteProperty {
 	mmDeleteProperty.optional = true
 	return mmDeleteProperty
 }
 
-// Expect sets up expected params for PropertyServiceHandler.DeleteProperty
-func (mmDeleteProperty *mPropertyServiceHandlerMockDeleteProperty) Expect(ctx context.Context, pp1 *connect.Request[v1.DeletePropertyRequest]) *mPropertyServiceHandlerMockDeleteProperty {
+// Expect sets up expected params for PropertyServiceClient.DeleteProperty
+func (mmDeleteProperty *mPropertyServiceClientMockDeleteProperty) Expect(ctx context.Context, pp1 *connect.Request[v1.DeletePropertyRequest]) *mPropertyServiceClientMockDeleteProperty {
 	if mmDeleteProperty.mock.funcDeleteProperty != nil {
-		mmDeleteProperty.mock.t.Fatalf("PropertyServiceHandlerMock.DeleteProperty mock is already set by Set")
+		mmDeleteProperty.mock.t.Fatalf("PropertyServiceClientMock.DeleteProperty mock is already set by Set")
 	}
 
 	if mmDeleteProperty.defaultExpectation == nil {
-		mmDeleteProperty.defaultExpectation = &PropertyServiceHandlerMockDeletePropertyExpectation{}
+		mmDeleteProperty.defaultExpectation = &PropertyServiceClientMockDeletePropertyExpectation{}
 	}
 
 	if mmDeleteProperty.defaultExpectation.paramPtrs != nil {
-		mmDeleteProperty.mock.t.Fatalf("PropertyServiceHandlerMock.DeleteProperty mock is already set by ExpectParams functions")
+		mmDeleteProperty.mock.t.Fatalf("PropertyServiceClientMock.DeleteProperty mock is already set by ExpectParams functions")
 	}
 
-	mmDeleteProperty.defaultExpectation.params = &PropertyServiceHandlerMockDeletePropertyParams{ctx, pp1}
+	mmDeleteProperty.defaultExpectation.params = &PropertyServiceClientMockDeletePropertyParams{ctx, pp1}
 	mmDeleteProperty.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmDeleteProperty.expectations {
 		if minimock.Equal(e.params, mmDeleteProperty.defaultExpectation.params) {
@@ -1963,22 +1963,22 @@ func (mmDeleteProperty *mPropertyServiceHandlerMockDeleteProperty) Expect(ctx co
 	return mmDeleteProperty
 }
 
-// ExpectCtxParam1 sets up expected param ctx for PropertyServiceHandler.DeleteProperty
-func (mmDeleteProperty *mPropertyServiceHandlerMockDeleteProperty) ExpectCtxParam1(ctx context.Context) *mPropertyServiceHandlerMockDeleteProperty {
+// ExpectCtxParam1 sets up expected param ctx for PropertyServiceClient.DeleteProperty
+func (mmDeleteProperty *mPropertyServiceClientMockDeleteProperty) ExpectCtxParam1(ctx context.Context) *mPropertyServiceClientMockDeleteProperty {
 	if mmDeleteProperty.mock.funcDeleteProperty != nil {
-		mmDeleteProperty.mock.t.Fatalf("PropertyServiceHandlerMock.DeleteProperty mock is already set by Set")
+		mmDeleteProperty.mock.t.Fatalf("PropertyServiceClientMock.DeleteProperty mock is already set by Set")
 	}
 
 	if mmDeleteProperty.defaultExpectation == nil {
-		mmDeleteProperty.defaultExpectation = &PropertyServiceHandlerMockDeletePropertyExpectation{}
+		mmDeleteProperty.defaultExpectation = &PropertyServiceClientMockDeletePropertyExpectation{}
 	}
 
 	if mmDeleteProperty.defaultExpectation.params != nil {
-		mmDeleteProperty.mock.t.Fatalf("PropertyServiceHandlerMock.DeleteProperty mock is already set by Expect")
+		mmDeleteProperty.mock.t.Fatalf("PropertyServiceClientMock.DeleteProperty mock is already set by Expect")
 	}
 
 	if mmDeleteProperty.defaultExpectation.paramPtrs == nil {
-		mmDeleteProperty.defaultExpectation.paramPtrs = &PropertyServiceHandlerMockDeletePropertyParamPtrs{}
+		mmDeleteProperty.defaultExpectation.paramPtrs = &PropertyServiceClientMockDeletePropertyParamPtrs{}
 	}
 	mmDeleteProperty.defaultExpectation.paramPtrs.ctx = &ctx
 	mmDeleteProperty.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -1986,22 +1986,22 @@ func (mmDeleteProperty *mPropertyServiceHandlerMockDeleteProperty) ExpectCtxPara
 	return mmDeleteProperty
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for PropertyServiceHandler.DeleteProperty
-func (mmDeleteProperty *mPropertyServiceHandlerMockDeleteProperty) ExpectPp1Param2(pp1 *connect.Request[v1.DeletePropertyRequest]) *mPropertyServiceHandlerMockDeleteProperty {
+// ExpectPp1Param2 sets up expected param pp1 for PropertyServiceClient.DeleteProperty
+func (mmDeleteProperty *mPropertyServiceClientMockDeleteProperty) ExpectPp1Param2(pp1 *connect.Request[v1.DeletePropertyRequest]) *mPropertyServiceClientMockDeleteProperty {
 	if mmDeleteProperty.mock.funcDeleteProperty != nil {
-		mmDeleteProperty.mock.t.Fatalf("PropertyServiceHandlerMock.DeleteProperty mock is already set by Set")
+		mmDeleteProperty.mock.t.Fatalf("PropertyServiceClientMock.DeleteProperty mock is already set by Set")
 	}
 
 	if mmDeleteProperty.defaultExpectation == nil {
-		mmDeleteProperty.defaultExpectation = &PropertyServiceHandlerMockDeletePropertyExpectation{}
+		mmDeleteProperty.defaultExpectation = &PropertyServiceClientMockDeletePropertyExpectation{}
 	}
 
 	if mmDeleteProperty.defaultExpectation.params != nil {
-		mmDeleteProperty.mock.t.Fatalf("PropertyServiceHandlerMock.DeleteProperty mock is already set by Expect")
+		mmDeleteProperty.mock.t.Fatalf("PropertyServiceClientMock.DeleteProperty mock is already set by Expect")
 	}
 
 	if mmDeleteProperty.defaultExpectation.paramPtrs == nil {
-		mmDeleteProperty.defaultExpectation.paramPtrs = &PropertyServiceHandlerMockDeletePropertyParamPtrs{}
+		mmDeleteProperty.defaultExpectation.paramPtrs = &PropertyServiceClientMockDeletePropertyParamPtrs{}
 	}
 	mmDeleteProperty.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmDeleteProperty.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -2009,10 +2009,10 @@ func (mmDeleteProperty *mPropertyServiceHandlerMockDeleteProperty) ExpectPp1Para
 	return mmDeleteProperty
 }
 
-// Inspect accepts an inspector function that has same arguments as the PropertyServiceHandler.DeleteProperty
-func (mmDeleteProperty *mPropertyServiceHandlerMockDeleteProperty) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.DeletePropertyRequest])) *mPropertyServiceHandlerMockDeleteProperty {
+// Inspect accepts an inspector function that has same arguments as the PropertyServiceClient.DeleteProperty
+func (mmDeleteProperty *mPropertyServiceClientMockDeleteProperty) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.DeletePropertyRequest])) *mPropertyServiceClientMockDeleteProperty {
 	if mmDeleteProperty.mock.inspectFuncDeleteProperty != nil {
-		mmDeleteProperty.mock.t.Fatalf("Inspect function is already set for PropertyServiceHandlerMock.DeleteProperty")
+		mmDeleteProperty.mock.t.Fatalf("Inspect function is already set for PropertyServiceClientMock.DeleteProperty")
 	}
 
 	mmDeleteProperty.mock.inspectFuncDeleteProperty = f
@@ -2020,28 +2020,28 @@ func (mmDeleteProperty *mPropertyServiceHandlerMockDeleteProperty) Inspect(f fun
 	return mmDeleteProperty
 }
 
-// Return sets up results that will be returned by PropertyServiceHandler.DeleteProperty
-func (mmDeleteProperty *mPropertyServiceHandlerMockDeleteProperty) Return(pp2 *connect.Response[v1.DeletePropertyResponse], err error) *PropertyServiceHandlerMock {
+// Return sets up results that will be returned by PropertyServiceClient.DeleteProperty
+func (mmDeleteProperty *mPropertyServiceClientMockDeleteProperty) Return(pp2 *connect.Response[v1.DeletePropertyResponse], err error) *PropertyServiceClientMock {
 	if mmDeleteProperty.mock.funcDeleteProperty != nil {
-		mmDeleteProperty.mock.t.Fatalf("PropertyServiceHandlerMock.DeleteProperty mock is already set by Set")
+		mmDeleteProperty.mock.t.Fatalf("PropertyServiceClientMock.DeleteProperty mock is already set by Set")
 	}
 
 	if mmDeleteProperty.defaultExpectation == nil {
-		mmDeleteProperty.defaultExpectation = &PropertyServiceHandlerMockDeletePropertyExpectation{mock: mmDeleteProperty.mock}
+		mmDeleteProperty.defaultExpectation = &PropertyServiceClientMockDeletePropertyExpectation{mock: mmDeleteProperty.mock}
 	}
-	mmDeleteProperty.defaultExpectation.results = &PropertyServiceHandlerMockDeletePropertyResults{pp2, err}
+	mmDeleteProperty.defaultExpectation.results = &PropertyServiceClientMockDeletePropertyResults{pp2, err}
 	mmDeleteProperty.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmDeleteProperty.mock
 }
 
-// Set uses given function f to mock the PropertyServiceHandler.DeleteProperty method
-func (mmDeleteProperty *mPropertyServiceHandlerMockDeleteProperty) Set(f func(ctx context.Context, pp1 *connect.Request[v1.DeletePropertyRequest]) (pp2 *connect.Response[v1.DeletePropertyResponse], err error)) *PropertyServiceHandlerMock {
+// Set uses given function f to mock the PropertyServiceClient.DeleteProperty method
+func (mmDeleteProperty *mPropertyServiceClientMockDeleteProperty) Set(f func(ctx context.Context, pp1 *connect.Request[v1.DeletePropertyRequest]) (pp2 *connect.Response[v1.DeletePropertyResponse], err error)) *PropertyServiceClientMock {
 	if mmDeleteProperty.defaultExpectation != nil {
-		mmDeleteProperty.mock.t.Fatalf("Default expectation is already set for the PropertyServiceHandler.DeleteProperty method")
+		mmDeleteProperty.mock.t.Fatalf("Default expectation is already set for the PropertyServiceClient.DeleteProperty method")
 	}
 
 	if len(mmDeleteProperty.expectations) > 0 {
-		mmDeleteProperty.mock.t.Fatalf("Some expectations are already set for the PropertyServiceHandler.DeleteProperty method")
+		mmDeleteProperty.mock.t.Fatalf("Some expectations are already set for the PropertyServiceClient.DeleteProperty method")
 	}
 
 	mmDeleteProperty.mock.funcDeleteProperty = f
@@ -2049,39 +2049,39 @@ func (mmDeleteProperty *mPropertyServiceHandlerMockDeleteProperty) Set(f func(ct
 	return mmDeleteProperty.mock
 }
 
-// When sets expectation for the PropertyServiceHandler.DeleteProperty which will trigger the result defined by the following
+// When sets expectation for the PropertyServiceClient.DeleteProperty which will trigger the result defined by the following
 // Then helper
-func (mmDeleteProperty *mPropertyServiceHandlerMockDeleteProperty) When(ctx context.Context, pp1 *connect.Request[v1.DeletePropertyRequest]) *PropertyServiceHandlerMockDeletePropertyExpectation {
+func (mmDeleteProperty *mPropertyServiceClientMockDeleteProperty) When(ctx context.Context, pp1 *connect.Request[v1.DeletePropertyRequest]) *PropertyServiceClientMockDeletePropertyExpectation {
 	if mmDeleteProperty.mock.funcDeleteProperty != nil {
-		mmDeleteProperty.mock.t.Fatalf("PropertyServiceHandlerMock.DeleteProperty mock is already set by Set")
+		mmDeleteProperty.mock.t.Fatalf("PropertyServiceClientMock.DeleteProperty mock is already set by Set")
 	}
 
-	expectation := &PropertyServiceHandlerMockDeletePropertyExpectation{
+	expectation := &PropertyServiceClientMockDeletePropertyExpectation{
 		mock:               mmDeleteProperty.mock,
-		params:             &PropertyServiceHandlerMockDeletePropertyParams{ctx, pp1},
-		expectationOrigins: PropertyServiceHandlerMockDeletePropertyExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &PropertyServiceClientMockDeletePropertyParams{ctx, pp1},
+		expectationOrigins: PropertyServiceClientMockDeletePropertyExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmDeleteProperty.expectations = append(mmDeleteProperty.expectations, expectation)
 	return expectation
 }
 
-// Then sets up PropertyServiceHandler.DeleteProperty return parameters for the expectation previously defined by the When method
-func (e *PropertyServiceHandlerMockDeletePropertyExpectation) Then(pp2 *connect.Response[v1.DeletePropertyResponse], err error) *PropertyServiceHandlerMock {
-	e.results = &PropertyServiceHandlerMockDeletePropertyResults{pp2, err}
+// Then sets up PropertyServiceClient.DeleteProperty return parameters for the expectation previously defined by the When method
+func (e *PropertyServiceClientMockDeletePropertyExpectation) Then(pp2 *connect.Response[v1.DeletePropertyResponse], err error) *PropertyServiceClientMock {
+	e.results = &PropertyServiceClientMockDeletePropertyResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times PropertyServiceHandler.DeleteProperty should be invoked
-func (mmDeleteProperty *mPropertyServiceHandlerMockDeleteProperty) Times(n uint64) *mPropertyServiceHandlerMockDeleteProperty {
+// Times sets number of times PropertyServiceClient.DeleteProperty should be invoked
+func (mmDeleteProperty *mPropertyServiceClientMockDeleteProperty) Times(n uint64) *mPropertyServiceClientMockDeleteProperty {
 	if n == 0 {
-		mmDeleteProperty.mock.t.Fatalf("Times of PropertyServiceHandlerMock.DeleteProperty mock can not be zero")
+		mmDeleteProperty.mock.t.Fatalf("Times of PropertyServiceClientMock.DeleteProperty mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmDeleteProperty.expectedInvocations, n)
 	mmDeleteProperty.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmDeleteProperty
 }
 
-func (mmDeleteProperty *mPropertyServiceHandlerMockDeleteProperty) invocationsDone() bool {
+func (mmDeleteProperty *mPropertyServiceClientMockDeleteProperty) invocationsDone() bool {
 	if len(mmDeleteProperty.expectations) == 0 && mmDeleteProperty.defaultExpectation == nil && mmDeleteProperty.mock.funcDeleteProperty == nil {
 		return true
 	}
@@ -2092,8 +2092,8 @@ func (mmDeleteProperty *mPropertyServiceHandlerMockDeleteProperty) invocationsDo
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// DeleteProperty implements mm_propertyv1connect.PropertyServiceHandler
-func (mmDeleteProperty *PropertyServiceHandlerMock) DeleteProperty(ctx context.Context, pp1 *connect.Request[v1.DeletePropertyRequest]) (pp2 *connect.Response[v1.DeletePropertyResponse], err error) {
+// DeleteProperty implements mm_propertyv1connect.PropertyServiceClient
+func (mmDeleteProperty *PropertyServiceClientMock) DeleteProperty(ctx context.Context, pp1 *connect.Request[v1.DeletePropertyRequest]) (pp2 *connect.Response[v1.DeletePropertyResponse], err error) {
 	mm_atomic.AddUint64(&mmDeleteProperty.beforeDeletePropertyCounter, 1)
 	defer mm_atomic.AddUint64(&mmDeleteProperty.afterDeletePropertyCounter, 1)
 
@@ -2103,7 +2103,7 @@ func (mmDeleteProperty *PropertyServiceHandlerMock) DeleteProperty(ctx context.C
 		mmDeleteProperty.inspectFuncDeleteProperty(ctx, pp1)
 	}
 
-	mm_params := PropertyServiceHandlerMockDeletePropertyParams{ctx, pp1}
+	mm_params := PropertyServiceClientMockDeletePropertyParams{ctx, pp1}
 
 	// Record call args
 	mmDeleteProperty.DeletePropertyMock.mutex.Lock()
@@ -2122,54 +2122,54 @@ func (mmDeleteProperty *PropertyServiceHandlerMock) DeleteProperty(ctx context.C
 		mm_want := mmDeleteProperty.DeletePropertyMock.defaultExpectation.params
 		mm_want_ptrs := mmDeleteProperty.DeletePropertyMock.defaultExpectation.paramPtrs
 
-		mm_got := PropertyServiceHandlerMockDeletePropertyParams{ctx, pp1}
+		mm_got := PropertyServiceClientMockDeletePropertyParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmDeleteProperty.t.Errorf("PropertyServiceHandlerMock.DeleteProperty got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmDeleteProperty.t.Errorf("PropertyServiceClientMock.DeleteProperty got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmDeleteProperty.DeletePropertyMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmDeleteProperty.t.Errorf("PropertyServiceHandlerMock.DeleteProperty got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmDeleteProperty.t.Errorf("PropertyServiceClientMock.DeleteProperty got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmDeleteProperty.DeletePropertyMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmDeleteProperty.t.Errorf("PropertyServiceHandlerMock.DeleteProperty got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmDeleteProperty.t.Errorf("PropertyServiceClientMock.DeleteProperty got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmDeleteProperty.DeletePropertyMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmDeleteProperty.DeletePropertyMock.defaultExpectation.results
 		if mm_results == nil {
-			mmDeleteProperty.t.Fatal("No results are set for the PropertyServiceHandlerMock.DeleteProperty")
+			mmDeleteProperty.t.Fatal("No results are set for the PropertyServiceClientMock.DeleteProperty")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmDeleteProperty.funcDeleteProperty != nil {
 		return mmDeleteProperty.funcDeleteProperty(ctx, pp1)
 	}
-	mmDeleteProperty.t.Fatalf("Unexpected call to PropertyServiceHandlerMock.DeleteProperty. %v %v", ctx, pp1)
+	mmDeleteProperty.t.Fatalf("Unexpected call to PropertyServiceClientMock.DeleteProperty. %v %v", ctx, pp1)
 	return
 }
 
-// DeletePropertyAfterCounter returns a count of finished PropertyServiceHandlerMock.DeleteProperty invocations
-func (mmDeleteProperty *PropertyServiceHandlerMock) DeletePropertyAfterCounter() uint64 {
+// DeletePropertyAfterCounter returns a count of finished PropertyServiceClientMock.DeleteProperty invocations
+func (mmDeleteProperty *PropertyServiceClientMock) DeletePropertyAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmDeleteProperty.afterDeletePropertyCounter)
 }
 
-// DeletePropertyBeforeCounter returns a count of PropertyServiceHandlerMock.DeleteProperty invocations
-func (mmDeleteProperty *PropertyServiceHandlerMock) DeletePropertyBeforeCounter() uint64 {
+// DeletePropertyBeforeCounter returns a count of PropertyServiceClientMock.DeleteProperty invocations
+func (mmDeleteProperty *PropertyServiceClientMock) DeletePropertyBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmDeleteProperty.beforeDeletePropertyCounter)
 }
 
-// Calls returns a list of arguments used in each call to PropertyServiceHandlerMock.DeleteProperty.
+// Calls returns a list of arguments used in each call to PropertyServiceClientMock.DeleteProperty.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmDeleteProperty *mPropertyServiceHandlerMockDeleteProperty) Calls() []*PropertyServiceHandlerMockDeletePropertyParams {
+func (mmDeleteProperty *mPropertyServiceClientMockDeleteProperty) Calls() []*PropertyServiceClientMockDeletePropertyParams {
 	mmDeleteProperty.mutex.RLock()
 
-	argCopy := make([]*PropertyServiceHandlerMockDeletePropertyParams, len(mmDeleteProperty.callArgs))
+	argCopy := make([]*PropertyServiceClientMockDeletePropertyParams, len(mmDeleteProperty.callArgs))
 	copy(argCopy, mmDeleteProperty.callArgs)
 
 	mmDeleteProperty.mutex.RUnlock()
@@ -2179,7 +2179,7 @@ func (mmDeleteProperty *mPropertyServiceHandlerMockDeleteProperty) Calls() []*Pr
 
 // MinimockDeletePropertyDone returns true if the count of the DeleteProperty invocations corresponds
 // the number of defined expectations
-func (m *PropertyServiceHandlerMock) MinimockDeletePropertyDone() bool {
+func (m *PropertyServiceClientMock) MinimockDeletePropertyDone() bool {
 	if m.DeletePropertyMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -2195,10 +2195,10 @@ func (m *PropertyServiceHandlerMock) MinimockDeletePropertyDone() bool {
 }
 
 // MinimockDeletePropertyInspect logs each unmet expectation
-func (m *PropertyServiceHandlerMock) MinimockDeletePropertyInspect() {
+func (m *PropertyServiceClientMock) MinimockDeletePropertyInspect() {
 	for _, e := range m.DeletePropertyMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to PropertyServiceHandlerMock.DeleteProperty at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to PropertyServiceClientMock.DeleteProperty at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -2206,66 +2206,66 @@ func (m *PropertyServiceHandlerMock) MinimockDeletePropertyInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.DeletePropertyMock.defaultExpectation != nil && afterDeletePropertyCounter < 1 {
 		if m.DeletePropertyMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to PropertyServiceHandlerMock.DeleteProperty at\n%s", m.DeletePropertyMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to PropertyServiceClientMock.DeleteProperty at\n%s", m.DeletePropertyMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to PropertyServiceHandlerMock.DeleteProperty at\n%s with params: %#v", m.DeletePropertyMock.defaultExpectation.expectationOrigins.origin, *m.DeletePropertyMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to PropertyServiceClientMock.DeleteProperty at\n%s with params: %#v", m.DeletePropertyMock.defaultExpectation.expectationOrigins.origin, *m.DeletePropertyMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcDeleteProperty != nil && afterDeletePropertyCounter < 1 {
-		m.t.Errorf("Expected call to PropertyServiceHandlerMock.DeleteProperty at\n%s", m.funcDeletePropertyOrigin)
+		m.t.Errorf("Expected call to PropertyServiceClientMock.DeleteProperty at\n%s", m.funcDeletePropertyOrigin)
 	}
 
 	if !m.DeletePropertyMock.invocationsDone() && afterDeletePropertyCounter > 0 {
-		m.t.Errorf("Expected %d calls to PropertyServiceHandlerMock.DeleteProperty at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to PropertyServiceClientMock.DeleteProperty at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.DeletePropertyMock.expectedInvocations), m.DeletePropertyMock.expectedInvocationsOrigin, afterDeletePropertyCounter)
 	}
 }
 
-type mPropertyServiceHandlerMockDeleteSubscription struct {
+type mPropertyServiceClientMockDeleteSubscription struct {
 	optional           bool
-	mock               *PropertyServiceHandlerMock
-	defaultExpectation *PropertyServiceHandlerMockDeleteSubscriptionExpectation
-	expectations       []*PropertyServiceHandlerMockDeleteSubscriptionExpectation
+	mock               *PropertyServiceClientMock
+	defaultExpectation *PropertyServiceClientMockDeleteSubscriptionExpectation
+	expectations       []*PropertyServiceClientMockDeleteSubscriptionExpectation
 
-	callArgs []*PropertyServiceHandlerMockDeleteSubscriptionParams
+	callArgs []*PropertyServiceClientMockDeleteSubscriptionParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// PropertyServiceHandlerMockDeleteSubscriptionExpectation specifies expectation struct of the PropertyServiceHandler.DeleteSubscription
-type PropertyServiceHandlerMockDeleteSubscriptionExpectation struct {
-	mock               *PropertyServiceHandlerMock
-	params             *PropertyServiceHandlerMockDeleteSubscriptionParams
-	paramPtrs          *PropertyServiceHandlerMockDeleteSubscriptionParamPtrs
-	expectationOrigins PropertyServiceHandlerMockDeleteSubscriptionExpectationOrigins
-	results            *PropertyServiceHandlerMockDeleteSubscriptionResults
+// PropertyServiceClientMockDeleteSubscriptionExpectation specifies expectation struct of the PropertyServiceClient.DeleteSubscription
+type PropertyServiceClientMockDeleteSubscriptionExpectation struct {
+	mock               *PropertyServiceClientMock
+	params             *PropertyServiceClientMockDeleteSubscriptionParams
+	paramPtrs          *PropertyServiceClientMockDeleteSubscriptionParamPtrs
+	expectationOrigins PropertyServiceClientMockDeleteSubscriptionExpectationOrigins
+	results            *PropertyServiceClientMockDeleteSubscriptionResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// PropertyServiceHandlerMockDeleteSubscriptionParams contains parameters of the PropertyServiceHandler.DeleteSubscription
-type PropertyServiceHandlerMockDeleteSubscriptionParams struct {
+// PropertyServiceClientMockDeleteSubscriptionParams contains parameters of the PropertyServiceClient.DeleteSubscription
+type PropertyServiceClientMockDeleteSubscriptionParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.DeleteSubscriptionRequest]
 }
 
-// PropertyServiceHandlerMockDeleteSubscriptionParamPtrs contains pointers to parameters of the PropertyServiceHandler.DeleteSubscription
-type PropertyServiceHandlerMockDeleteSubscriptionParamPtrs struct {
+// PropertyServiceClientMockDeleteSubscriptionParamPtrs contains pointers to parameters of the PropertyServiceClient.DeleteSubscription
+type PropertyServiceClientMockDeleteSubscriptionParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.DeleteSubscriptionRequest]
 }
 
-// PropertyServiceHandlerMockDeleteSubscriptionResults contains results of the PropertyServiceHandler.DeleteSubscription
-type PropertyServiceHandlerMockDeleteSubscriptionResults struct {
+// PropertyServiceClientMockDeleteSubscriptionResults contains results of the PropertyServiceClient.DeleteSubscription
+type PropertyServiceClientMockDeleteSubscriptionResults struct {
 	pp2 *connect.Response[v1.DeleteSubscriptionResponse]
 	err error
 }
 
-// PropertyServiceHandlerMockDeleteSubscriptionOrigins contains origins of expectations of the PropertyServiceHandler.DeleteSubscription
-type PropertyServiceHandlerMockDeleteSubscriptionExpectationOrigins struct {
+// PropertyServiceClientMockDeleteSubscriptionOrigins contains origins of expectations of the PropertyServiceClient.DeleteSubscription
+type PropertyServiceClientMockDeleteSubscriptionExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -2276,26 +2276,26 @@ type PropertyServiceHandlerMockDeleteSubscriptionExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmDeleteSubscription *mPropertyServiceHandlerMockDeleteSubscription) Optional() *mPropertyServiceHandlerMockDeleteSubscription {
+func (mmDeleteSubscription *mPropertyServiceClientMockDeleteSubscription) Optional() *mPropertyServiceClientMockDeleteSubscription {
 	mmDeleteSubscription.optional = true
 	return mmDeleteSubscription
 }
 
-// Expect sets up expected params for PropertyServiceHandler.DeleteSubscription
-func (mmDeleteSubscription *mPropertyServiceHandlerMockDeleteSubscription) Expect(ctx context.Context, pp1 *connect.Request[v1.DeleteSubscriptionRequest]) *mPropertyServiceHandlerMockDeleteSubscription {
+// Expect sets up expected params for PropertyServiceClient.DeleteSubscription
+func (mmDeleteSubscription *mPropertyServiceClientMockDeleteSubscription) Expect(ctx context.Context, pp1 *connect.Request[v1.DeleteSubscriptionRequest]) *mPropertyServiceClientMockDeleteSubscription {
 	if mmDeleteSubscription.mock.funcDeleteSubscription != nil {
-		mmDeleteSubscription.mock.t.Fatalf("PropertyServiceHandlerMock.DeleteSubscription mock is already set by Set")
+		mmDeleteSubscription.mock.t.Fatalf("PropertyServiceClientMock.DeleteSubscription mock is already set by Set")
 	}
 
 	if mmDeleteSubscription.defaultExpectation == nil {
-		mmDeleteSubscription.defaultExpectation = &PropertyServiceHandlerMockDeleteSubscriptionExpectation{}
+		mmDeleteSubscription.defaultExpectation = &PropertyServiceClientMockDeleteSubscriptionExpectation{}
 	}
 
 	if mmDeleteSubscription.defaultExpectation.paramPtrs != nil {
-		mmDeleteSubscription.mock.t.Fatalf("PropertyServiceHandlerMock.DeleteSubscription mock is already set by ExpectParams functions")
+		mmDeleteSubscription.mock.t.Fatalf("PropertyServiceClientMock.DeleteSubscription mock is already set by ExpectParams functions")
 	}
 
-	mmDeleteSubscription.defaultExpectation.params = &PropertyServiceHandlerMockDeleteSubscriptionParams{ctx, pp1}
+	mmDeleteSubscription.defaultExpectation.params = &PropertyServiceClientMockDeleteSubscriptionParams{ctx, pp1}
 	mmDeleteSubscription.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmDeleteSubscription.expectations {
 		if minimock.Equal(e.params, mmDeleteSubscription.defaultExpectation.params) {
@@ -2306,22 +2306,22 @@ func (mmDeleteSubscription *mPropertyServiceHandlerMockDeleteSubscription) Expec
 	return mmDeleteSubscription
 }
 
-// ExpectCtxParam1 sets up expected param ctx for PropertyServiceHandler.DeleteSubscription
-func (mmDeleteSubscription *mPropertyServiceHandlerMockDeleteSubscription) ExpectCtxParam1(ctx context.Context) *mPropertyServiceHandlerMockDeleteSubscription {
+// ExpectCtxParam1 sets up expected param ctx for PropertyServiceClient.DeleteSubscription
+func (mmDeleteSubscription *mPropertyServiceClientMockDeleteSubscription) ExpectCtxParam1(ctx context.Context) *mPropertyServiceClientMockDeleteSubscription {
 	if mmDeleteSubscription.mock.funcDeleteSubscription != nil {
-		mmDeleteSubscription.mock.t.Fatalf("PropertyServiceHandlerMock.DeleteSubscription mock is already set by Set")
+		mmDeleteSubscription.mock.t.Fatalf("PropertyServiceClientMock.DeleteSubscription mock is already set by Set")
 	}
 
 	if mmDeleteSubscription.defaultExpectation == nil {
-		mmDeleteSubscription.defaultExpectation = &PropertyServiceHandlerMockDeleteSubscriptionExpectation{}
+		mmDeleteSubscription.defaultExpectation = &PropertyServiceClientMockDeleteSubscriptionExpectation{}
 	}
 
 	if mmDeleteSubscription.defaultExpectation.params != nil {
-		mmDeleteSubscription.mock.t.Fatalf("PropertyServiceHandlerMock.DeleteSubscription mock is already set by Expect")
+		mmDeleteSubscription.mock.t.Fatalf("PropertyServiceClientMock.DeleteSubscription mock is already set by Expect")
 	}
 
 	if mmDeleteSubscription.defaultExpectation.paramPtrs == nil {
-		mmDeleteSubscription.defaultExpectation.paramPtrs = &PropertyServiceHandlerMockDeleteSubscriptionParamPtrs{}
+		mmDeleteSubscription.defaultExpectation.paramPtrs = &PropertyServiceClientMockDeleteSubscriptionParamPtrs{}
 	}
 	mmDeleteSubscription.defaultExpectation.paramPtrs.ctx = &ctx
 	mmDeleteSubscription.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -2329,22 +2329,22 @@ func (mmDeleteSubscription *mPropertyServiceHandlerMockDeleteSubscription) Expec
 	return mmDeleteSubscription
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for PropertyServiceHandler.DeleteSubscription
-func (mmDeleteSubscription *mPropertyServiceHandlerMockDeleteSubscription) ExpectPp1Param2(pp1 *connect.Request[v1.DeleteSubscriptionRequest]) *mPropertyServiceHandlerMockDeleteSubscription {
+// ExpectPp1Param2 sets up expected param pp1 for PropertyServiceClient.DeleteSubscription
+func (mmDeleteSubscription *mPropertyServiceClientMockDeleteSubscription) ExpectPp1Param2(pp1 *connect.Request[v1.DeleteSubscriptionRequest]) *mPropertyServiceClientMockDeleteSubscription {
 	if mmDeleteSubscription.mock.funcDeleteSubscription != nil {
-		mmDeleteSubscription.mock.t.Fatalf("PropertyServiceHandlerMock.DeleteSubscription mock is already set by Set")
+		mmDeleteSubscription.mock.t.Fatalf("PropertyServiceClientMock.DeleteSubscription mock is already set by Set")
 	}
 
 	if mmDeleteSubscription.defaultExpectation == nil {
-		mmDeleteSubscription.defaultExpectation = &PropertyServiceHandlerMockDeleteSubscriptionExpectation{}
+		mmDeleteSubscription.defaultExpectation = &PropertyServiceClientMockDeleteSubscriptionExpectation{}
 	}
 
 	if mmDeleteSubscription.defaultExpectation.params != nil {
-		mmDeleteSubscription.mock.t.Fatalf("PropertyServiceHandlerMock.DeleteSubscription mock is already set by Expect")
+		mmDeleteSubscription.mock.t.Fatalf("PropertyServiceClientMock.DeleteSubscription mock is already set by Expect")
 	}
 
 	if mmDeleteSubscription.defaultExpectation.paramPtrs == nil {
-		mmDeleteSubscription.defaultExpectation.paramPtrs = &PropertyServiceHandlerMockDeleteSubscriptionParamPtrs{}
+		mmDeleteSubscription.defaultExpectation.paramPtrs = &PropertyServiceClientMockDeleteSubscriptionParamPtrs{}
 	}
 	mmDeleteSubscription.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmDeleteSubscription.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -2352,10 +2352,10 @@ func (mmDeleteSubscription *mPropertyServiceHandlerMockDeleteSubscription) Expec
 	return mmDeleteSubscription
 }
 
-// Inspect accepts an inspector function that has same arguments as the PropertyServiceHandler.DeleteSubscription
-func (mmDeleteSubscription *mPropertyServiceHandlerMockDeleteSubscription) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.DeleteSubscriptionRequest])) *mPropertyServiceHandlerMockDeleteSubscription {
+// Inspect accepts an inspector function that has same arguments as the PropertyServiceClient.DeleteSubscription
+func (mmDeleteSubscription *mPropertyServiceClientMockDeleteSubscription) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.DeleteSubscriptionRequest])) *mPropertyServiceClientMockDeleteSubscription {
 	if mmDeleteSubscription.mock.inspectFuncDeleteSubscription != nil {
-		mmDeleteSubscription.mock.t.Fatalf("Inspect function is already set for PropertyServiceHandlerMock.DeleteSubscription")
+		mmDeleteSubscription.mock.t.Fatalf("Inspect function is already set for PropertyServiceClientMock.DeleteSubscription")
 	}
 
 	mmDeleteSubscription.mock.inspectFuncDeleteSubscription = f
@@ -2363,28 +2363,28 @@ func (mmDeleteSubscription *mPropertyServiceHandlerMockDeleteSubscription) Inspe
 	return mmDeleteSubscription
 }
 
-// Return sets up results that will be returned by PropertyServiceHandler.DeleteSubscription
-func (mmDeleteSubscription *mPropertyServiceHandlerMockDeleteSubscription) Return(pp2 *connect.Response[v1.DeleteSubscriptionResponse], err error) *PropertyServiceHandlerMock {
+// Return sets up results that will be returned by PropertyServiceClient.DeleteSubscription
+func (mmDeleteSubscription *mPropertyServiceClientMockDeleteSubscription) Return(pp2 *connect.Response[v1.DeleteSubscriptionResponse], err error) *PropertyServiceClientMock {
 	if mmDeleteSubscription.mock.funcDeleteSubscription != nil {
-		mmDeleteSubscription.mock.t.Fatalf("PropertyServiceHandlerMock.DeleteSubscription mock is already set by Set")
+		mmDeleteSubscription.mock.t.Fatalf("PropertyServiceClientMock.DeleteSubscription mock is already set by Set")
 	}
 
 	if mmDeleteSubscription.defaultExpectation == nil {
-		mmDeleteSubscription.defaultExpectation = &PropertyServiceHandlerMockDeleteSubscriptionExpectation{mock: mmDeleteSubscription.mock}
+		mmDeleteSubscription.defaultExpectation = &PropertyServiceClientMockDeleteSubscriptionExpectation{mock: mmDeleteSubscription.mock}
 	}
-	mmDeleteSubscription.defaultExpectation.results = &PropertyServiceHandlerMockDeleteSubscriptionResults{pp2, err}
+	mmDeleteSubscription.defaultExpectation.results = &PropertyServiceClientMockDeleteSubscriptionResults{pp2, err}
 	mmDeleteSubscription.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmDeleteSubscription.mock
 }
 
-// Set uses given function f to mock the PropertyServiceHandler.DeleteSubscription method
-func (mmDeleteSubscription *mPropertyServiceHandlerMockDeleteSubscription) Set(f func(ctx context.Context, pp1 *connect.Request[v1.DeleteSubscriptionRequest]) (pp2 *connect.Response[v1.DeleteSubscriptionResponse], err error)) *PropertyServiceHandlerMock {
+// Set uses given function f to mock the PropertyServiceClient.DeleteSubscription method
+func (mmDeleteSubscription *mPropertyServiceClientMockDeleteSubscription) Set(f func(ctx context.Context, pp1 *connect.Request[v1.DeleteSubscriptionRequest]) (pp2 *connect.Response[v1.DeleteSubscriptionResponse], err error)) *PropertyServiceClientMock {
 	if mmDeleteSubscription.defaultExpectation != nil {
-		mmDeleteSubscription.mock.t.Fatalf("Default expectation is already set for the PropertyServiceHandler.DeleteSubscription method")
+		mmDeleteSubscription.mock.t.Fatalf("Default expectation is already set for the PropertyServiceClient.DeleteSubscription method")
 	}
 
 	if len(mmDeleteSubscription.expectations) > 0 {
-		mmDeleteSubscription.mock.t.Fatalf("Some expectations are already set for the PropertyServiceHandler.DeleteSubscription method")
+		mmDeleteSubscription.mock.t.Fatalf("Some expectations are already set for the PropertyServiceClient.DeleteSubscription method")
 	}
 
 	mmDeleteSubscription.mock.funcDeleteSubscription = f
@@ -2392,39 +2392,39 @@ func (mmDeleteSubscription *mPropertyServiceHandlerMockDeleteSubscription) Set(f
 	return mmDeleteSubscription.mock
 }
 
-// When sets expectation for the PropertyServiceHandler.DeleteSubscription which will trigger the result defined by the following
+// When sets expectation for the PropertyServiceClient.DeleteSubscription which will trigger the result defined by the following
 // Then helper
-func (mmDeleteSubscription *mPropertyServiceHandlerMockDeleteSubscription) When(ctx context.Context, pp1 *connect.Request[v1.DeleteSubscriptionRequest]) *PropertyServiceHandlerMockDeleteSubscriptionExpectation {
+func (mmDeleteSubscription *mPropertyServiceClientMockDeleteSubscription) When(ctx context.Context, pp1 *connect.Request[v1.DeleteSubscriptionRequest]) *PropertyServiceClientMockDeleteSubscriptionExpectation {
 	if mmDeleteSubscription.mock.funcDeleteSubscription != nil {
-		mmDeleteSubscription.mock.t.Fatalf("PropertyServiceHandlerMock.DeleteSubscription mock is already set by Set")
+		mmDeleteSubscription.mock.t.Fatalf("PropertyServiceClientMock.DeleteSubscription mock is already set by Set")
 	}
 
-	expectation := &PropertyServiceHandlerMockDeleteSubscriptionExpectation{
+	expectation := &PropertyServiceClientMockDeleteSubscriptionExpectation{
 		mock:               mmDeleteSubscription.mock,
-		params:             &PropertyServiceHandlerMockDeleteSubscriptionParams{ctx, pp1},
-		expectationOrigins: PropertyServiceHandlerMockDeleteSubscriptionExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &PropertyServiceClientMockDeleteSubscriptionParams{ctx, pp1},
+		expectationOrigins: PropertyServiceClientMockDeleteSubscriptionExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmDeleteSubscription.expectations = append(mmDeleteSubscription.expectations, expectation)
 	return expectation
 }
 
-// Then sets up PropertyServiceHandler.DeleteSubscription return parameters for the expectation previously defined by the When method
-func (e *PropertyServiceHandlerMockDeleteSubscriptionExpectation) Then(pp2 *connect.Response[v1.DeleteSubscriptionResponse], err error) *PropertyServiceHandlerMock {
-	e.results = &PropertyServiceHandlerMockDeleteSubscriptionResults{pp2, err}
+// Then sets up PropertyServiceClient.DeleteSubscription return parameters for the expectation previously defined by the When method
+func (e *PropertyServiceClientMockDeleteSubscriptionExpectation) Then(pp2 *connect.Response[v1.DeleteSubscriptionResponse], err error) *PropertyServiceClientMock {
+	e.results = &PropertyServiceClientMockDeleteSubscriptionResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times PropertyServiceHandler.DeleteSubscription should be invoked
-func (mmDeleteSubscription *mPropertyServiceHandlerMockDeleteSubscription) Times(n uint64) *mPropertyServiceHandlerMockDeleteSubscription {
+// Times sets number of times PropertyServiceClient.DeleteSubscription should be invoked
+func (mmDeleteSubscription *mPropertyServiceClientMockDeleteSubscription) Times(n uint64) *mPropertyServiceClientMockDeleteSubscription {
 	if n == 0 {
-		mmDeleteSubscription.mock.t.Fatalf("Times of PropertyServiceHandlerMock.DeleteSubscription mock can not be zero")
+		mmDeleteSubscription.mock.t.Fatalf("Times of PropertyServiceClientMock.DeleteSubscription mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmDeleteSubscription.expectedInvocations, n)
 	mmDeleteSubscription.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmDeleteSubscription
 }
 
-func (mmDeleteSubscription *mPropertyServiceHandlerMockDeleteSubscription) invocationsDone() bool {
+func (mmDeleteSubscription *mPropertyServiceClientMockDeleteSubscription) invocationsDone() bool {
 	if len(mmDeleteSubscription.expectations) == 0 && mmDeleteSubscription.defaultExpectation == nil && mmDeleteSubscription.mock.funcDeleteSubscription == nil {
 		return true
 	}
@@ -2435,8 +2435,8 @@ func (mmDeleteSubscription *mPropertyServiceHandlerMockDeleteSubscription) invoc
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// DeleteSubscription implements mm_propertyv1connect.PropertyServiceHandler
-func (mmDeleteSubscription *PropertyServiceHandlerMock) DeleteSubscription(ctx context.Context, pp1 *connect.Request[v1.DeleteSubscriptionRequest]) (pp2 *connect.Response[v1.DeleteSubscriptionResponse], err error) {
+// DeleteSubscription implements mm_propertyv1connect.PropertyServiceClient
+func (mmDeleteSubscription *PropertyServiceClientMock) DeleteSubscription(ctx context.Context, pp1 *connect.Request[v1.DeleteSubscriptionRequest]) (pp2 *connect.Response[v1.DeleteSubscriptionResponse], err error) {
 	mm_atomic.AddUint64(&mmDeleteSubscription.beforeDeleteSubscriptionCounter, 1)
 	defer mm_atomic.AddUint64(&mmDeleteSubscription.afterDeleteSubscriptionCounter, 1)
 
@@ -2446,7 +2446,7 @@ func (mmDeleteSubscription *PropertyServiceHandlerMock) DeleteSubscription(ctx c
 		mmDeleteSubscription.inspectFuncDeleteSubscription(ctx, pp1)
 	}
 
-	mm_params := PropertyServiceHandlerMockDeleteSubscriptionParams{ctx, pp1}
+	mm_params := PropertyServiceClientMockDeleteSubscriptionParams{ctx, pp1}
 
 	// Record call args
 	mmDeleteSubscription.DeleteSubscriptionMock.mutex.Lock()
@@ -2465,54 +2465,54 @@ func (mmDeleteSubscription *PropertyServiceHandlerMock) DeleteSubscription(ctx c
 		mm_want := mmDeleteSubscription.DeleteSubscriptionMock.defaultExpectation.params
 		mm_want_ptrs := mmDeleteSubscription.DeleteSubscriptionMock.defaultExpectation.paramPtrs
 
-		mm_got := PropertyServiceHandlerMockDeleteSubscriptionParams{ctx, pp1}
+		mm_got := PropertyServiceClientMockDeleteSubscriptionParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmDeleteSubscription.t.Errorf("PropertyServiceHandlerMock.DeleteSubscription got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmDeleteSubscription.t.Errorf("PropertyServiceClientMock.DeleteSubscription got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmDeleteSubscription.DeleteSubscriptionMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmDeleteSubscription.t.Errorf("PropertyServiceHandlerMock.DeleteSubscription got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmDeleteSubscription.t.Errorf("PropertyServiceClientMock.DeleteSubscription got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmDeleteSubscription.DeleteSubscriptionMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmDeleteSubscription.t.Errorf("PropertyServiceHandlerMock.DeleteSubscription got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmDeleteSubscription.t.Errorf("PropertyServiceClientMock.DeleteSubscription got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmDeleteSubscription.DeleteSubscriptionMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmDeleteSubscription.DeleteSubscriptionMock.defaultExpectation.results
 		if mm_results == nil {
-			mmDeleteSubscription.t.Fatal("No results are set for the PropertyServiceHandlerMock.DeleteSubscription")
+			mmDeleteSubscription.t.Fatal("No results are set for the PropertyServiceClientMock.DeleteSubscription")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmDeleteSubscription.funcDeleteSubscription != nil {
 		return mmDeleteSubscription.funcDeleteSubscription(ctx, pp1)
 	}
-	mmDeleteSubscription.t.Fatalf("Unexpected call to PropertyServiceHandlerMock.DeleteSubscription. %v %v", ctx, pp1)
+	mmDeleteSubscription.t.Fatalf("Unexpected call to PropertyServiceClientMock.DeleteSubscription. %v %v", ctx, pp1)
 	return
 }
 
-// DeleteSubscriptionAfterCounter returns a count of finished PropertyServiceHandlerMock.DeleteSubscription invocations
-func (mmDeleteSubscription *PropertyServiceHandlerMock) DeleteSubscriptionAfterCounter() uint64 {
+// DeleteSubscriptionAfterCounter returns a count of finished PropertyServiceClientMock.DeleteSubscription invocations
+func (mmDeleteSubscription *PropertyServiceClientMock) DeleteSubscriptionAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmDeleteSubscription.afterDeleteSubscriptionCounter)
 }
 
-// DeleteSubscriptionBeforeCounter returns a count of PropertyServiceHandlerMock.DeleteSubscription invocations
-func (mmDeleteSubscription *PropertyServiceHandlerMock) DeleteSubscriptionBeforeCounter() uint64 {
+// DeleteSubscriptionBeforeCounter returns a count of PropertyServiceClientMock.DeleteSubscription invocations
+func (mmDeleteSubscription *PropertyServiceClientMock) DeleteSubscriptionBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmDeleteSubscription.beforeDeleteSubscriptionCounter)
 }
 
-// Calls returns a list of arguments used in each call to PropertyServiceHandlerMock.DeleteSubscription.
+// Calls returns a list of arguments used in each call to PropertyServiceClientMock.DeleteSubscription.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmDeleteSubscription *mPropertyServiceHandlerMockDeleteSubscription) Calls() []*PropertyServiceHandlerMockDeleteSubscriptionParams {
+func (mmDeleteSubscription *mPropertyServiceClientMockDeleteSubscription) Calls() []*PropertyServiceClientMockDeleteSubscriptionParams {
 	mmDeleteSubscription.mutex.RLock()
 
-	argCopy := make([]*PropertyServiceHandlerMockDeleteSubscriptionParams, len(mmDeleteSubscription.callArgs))
+	argCopy := make([]*PropertyServiceClientMockDeleteSubscriptionParams, len(mmDeleteSubscription.callArgs))
 	copy(argCopy, mmDeleteSubscription.callArgs)
 
 	mmDeleteSubscription.mutex.RUnlock()
@@ -2522,7 +2522,7 @@ func (mmDeleteSubscription *mPropertyServiceHandlerMockDeleteSubscription) Calls
 
 // MinimockDeleteSubscriptionDone returns true if the count of the DeleteSubscription invocations corresponds
 // the number of defined expectations
-func (m *PropertyServiceHandlerMock) MinimockDeleteSubscriptionDone() bool {
+func (m *PropertyServiceClientMock) MinimockDeleteSubscriptionDone() bool {
 	if m.DeleteSubscriptionMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -2538,10 +2538,10 @@ func (m *PropertyServiceHandlerMock) MinimockDeleteSubscriptionDone() bool {
 }
 
 // MinimockDeleteSubscriptionInspect logs each unmet expectation
-func (m *PropertyServiceHandlerMock) MinimockDeleteSubscriptionInspect() {
+func (m *PropertyServiceClientMock) MinimockDeleteSubscriptionInspect() {
 	for _, e := range m.DeleteSubscriptionMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to PropertyServiceHandlerMock.DeleteSubscription at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to PropertyServiceClientMock.DeleteSubscription at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -2549,71 +2549,69 @@ func (m *PropertyServiceHandlerMock) MinimockDeleteSubscriptionInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.DeleteSubscriptionMock.defaultExpectation != nil && afterDeleteSubscriptionCounter < 1 {
 		if m.DeleteSubscriptionMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to PropertyServiceHandlerMock.DeleteSubscription at\n%s", m.DeleteSubscriptionMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to PropertyServiceClientMock.DeleteSubscription at\n%s", m.DeleteSubscriptionMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to PropertyServiceHandlerMock.DeleteSubscription at\n%s with params: %#v", m.DeleteSubscriptionMock.defaultExpectation.expectationOrigins.origin, *m.DeleteSubscriptionMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to PropertyServiceClientMock.DeleteSubscription at\n%s with params: %#v", m.DeleteSubscriptionMock.defaultExpectation.expectationOrigins.origin, *m.DeleteSubscriptionMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcDeleteSubscription != nil && afterDeleteSubscriptionCounter < 1 {
-		m.t.Errorf("Expected call to PropertyServiceHandlerMock.DeleteSubscription at\n%s", m.funcDeleteSubscriptionOrigin)
+		m.t.Errorf("Expected call to PropertyServiceClientMock.DeleteSubscription at\n%s", m.funcDeleteSubscriptionOrigin)
 	}
 
 	if !m.DeleteSubscriptionMock.invocationsDone() && afterDeleteSubscriptionCounter > 0 {
-		m.t.Errorf("Expected %d calls to PropertyServiceHandlerMock.DeleteSubscription at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to PropertyServiceClientMock.DeleteSubscription at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.DeleteSubscriptionMock.expectedInvocations), m.DeleteSubscriptionMock.expectedInvocationsOrigin, afterDeleteSubscriptionCounter)
 	}
 }
 
-type mPropertyServiceHandlerMockHistoryOfProperty struct {
+type mPropertyServiceClientMockHistoryOfProperty struct {
 	optional           bool
-	mock               *PropertyServiceHandlerMock
-	defaultExpectation *PropertyServiceHandlerMockHistoryOfPropertyExpectation
-	expectations       []*PropertyServiceHandlerMockHistoryOfPropertyExpectation
+	mock               *PropertyServiceClientMock
+	defaultExpectation *PropertyServiceClientMockHistoryOfPropertyExpectation
+	expectations       []*PropertyServiceClientMockHistoryOfPropertyExpectation
 
-	callArgs []*PropertyServiceHandlerMockHistoryOfPropertyParams
+	callArgs []*PropertyServiceClientMockHistoryOfPropertyParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// PropertyServiceHandlerMockHistoryOfPropertyExpectation specifies expectation struct of the PropertyServiceHandler.HistoryOfProperty
-type PropertyServiceHandlerMockHistoryOfPropertyExpectation struct {
-	mock               *PropertyServiceHandlerMock
-	params             *PropertyServiceHandlerMockHistoryOfPropertyParams
-	paramPtrs          *PropertyServiceHandlerMockHistoryOfPropertyParamPtrs
-	expectationOrigins PropertyServiceHandlerMockHistoryOfPropertyExpectationOrigins
-	results            *PropertyServiceHandlerMockHistoryOfPropertyResults
+// PropertyServiceClientMockHistoryOfPropertyExpectation specifies expectation struct of the PropertyServiceClient.HistoryOfProperty
+type PropertyServiceClientMockHistoryOfPropertyExpectation struct {
+	mock               *PropertyServiceClientMock
+	params             *PropertyServiceClientMockHistoryOfPropertyParams
+	paramPtrs          *PropertyServiceClientMockHistoryOfPropertyParamPtrs
+	expectationOrigins PropertyServiceClientMockHistoryOfPropertyExpectationOrigins
+	results            *PropertyServiceClientMockHistoryOfPropertyResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// PropertyServiceHandlerMockHistoryOfPropertyParams contains parameters of the PropertyServiceHandler.HistoryOfProperty
-type PropertyServiceHandlerMockHistoryOfPropertyParams struct {
+// PropertyServiceClientMockHistoryOfPropertyParams contains parameters of the PropertyServiceClient.HistoryOfProperty
+type PropertyServiceClientMockHistoryOfPropertyParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.HistoryOfPropertyRequest]
-	pp2 *connect.ServerStream[v1.HistoryOfPropertyResponse]
 }
 
-// PropertyServiceHandlerMockHistoryOfPropertyParamPtrs contains pointers to parameters of the PropertyServiceHandler.HistoryOfProperty
-type PropertyServiceHandlerMockHistoryOfPropertyParamPtrs struct {
+// PropertyServiceClientMockHistoryOfPropertyParamPtrs contains pointers to parameters of the PropertyServiceClient.HistoryOfProperty
+type PropertyServiceClientMockHistoryOfPropertyParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.HistoryOfPropertyRequest]
-	pp2 **connect.ServerStream[v1.HistoryOfPropertyResponse]
 }
 
-// PropertyServiceHandlerMockHistoryOfPropertyResults contains results of the PropertyServiceHandler.HistoryOfProperty
-type PropertyServiceHandlerMockHistoryOfPropertyResults struct {
+// PropertyServiceClientMockHistoryOfPropertyResults contains results of the PropertyServiceClient.HistoryOfProperty
+type PropertyServiceClientMockHistoryOfPropertyResults struct {
+	pp2 *connect.ServerStreamForClient[v1.HistoryOfPropertyResponse]
 	err error
 }
 
-// PropertyServiceHandlerMockHistoryOfPropertyOrigins contains origins of expectations of the PropertyServiceHandler.HistoryOfProperty
-type PropertyServiceHandlerMockHistoryOfPropertyExpectationOrigins struct {
+// PropertyServiceClientMockHistoryOfPropertyOrigins contains origins of expectations of the PropertyServiceClient.HistoryOfProperty
+type PropertyServiceClientMockHistoryOfPropertyExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
-	originPp2 string
 }
 
 // Marks this method to be optional. The default behavior of any method with Return() is '1 or more', meaning
@@ -2621,26 +2619,26 @@ type PropertyServiceHandlerMockHistoryOfPropertyExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmHistoryOfProperty *mPropertyServiceHandlerMockHistoryOfProperty) Optional() *mPropertyServiceHandlerMockHistoryOfProperty {
+func (mmHistoryOfProperty *mPropertyServiceClientMockHistoryOfProperty) Optional() *mPropertyServiceClientMockHistoryOfProperty {
 	mmHistoryOfProperty.optional = true
 	return mmHistoryOfProperty
 }
 
-// Expect sets up expected params for PropertyServiceHandler.HistoryOfProperty
-func (mmHistoryOfProperty *mPropertyServiceHandlerMockHistoryOfProperty) Expect(ctx context.Context, pp1 *connect.Request[v1.HistoryOfPropertyRequest], pp2 *connect.ServerStream[v1.HistoryOfPropertyResponse]) *mPropertyServiceHandlerMockHistoryOfProperty {
+// Expect sets up expected params for PropertyServiceClient.HistoryOfProperty
+func (mmHistoryOfProperty *mPropertyServiceClientMockHistoryOfProperty) Expect(ctx context.Context, pp1 *connect.Request[v1.HistoryOfPropertyRequest]) *mPropertyServiceClientMockHistoryOfProperty {
 	if mmHistoryOfProperty.mock.funcHistoryOfProperty != nil {
-		mmHistoryOfProperty.mock.t.Fatalf("PropertyServiceHandlerMock.HistoryOfProperty mock is already set by Set")
+		mmHistoryOfProperty.mock.t.Fatalf("PropertyServiceClientMock.HistoryOfProperty mock is already set by Set")
 	}
 
 	if mmHistoryOfProperty.defaultExpectation == nil {
-		mmHistoryOfProperty.defaultExpectation = &PropertyServiceHandlerMockHistoryOfPropertyExpectation{}
+		mmHistoryOfProperty.defaultExpectation = &PropertyServiceClientMockHistoryOfPropertyExpectation{}
 	}
 
 	if mmHistoryOfProperty.defaultExpectation.paramPtrs != nil {
-		mmHistoryOfProperty.mock.t.Fatalf("PropertyServiceHandlerMock.HistoryOfProperty mock is already set by ExpectParams functions")
+		mmHistoryOfProperty.mock.t.Fatalf("PropertyServiceClientMock.HistoryOfProperty mock is already set by ExpectParams functions")
 	}
 
-	mmHistoryOfProperty.defaultExpectation.params = &PropertyServiceHandlerMockHistoryOfPropertyParams{ctx, pp1, pp2}
+	mmHistoryOfProperty.defaultExpectation.params = &PropertyServiceClientMockHistoryOfPropertyParams{ctx, pp1}
 	mmHistoryOfProperty.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmHistoryOfProperty.expectations {
 		if minimock.Equal(e.params, mmHistoryOfProperty.defaultExpectation.params) {
@@ -2651,22 +2649,22 @@ func (mmHistoryOfProperty *mPropertyServiceHandlerMockHistoryOfProperty) Expect(
 	return mmHistoryOfProperty
 }
 
-// ExpectCtxParam1 sets up expected param ctx for PropertyServiceHandler.HistoryOfProperty
-func (mmHistoryOfProperty *mPropertyServiceHandlerMockHistoryOfProperty) ExpectCtxParam1(ctx context.Context) *mPropertyServiceHandlerMockHistoryOfProperty {
+// ExpectCtxParam1 sets up expected param ctx for PropertyServiceClient.HistoryOfProperty
+func (mmHistoryOfProperty *mPropertyServiceClientMockHistoryOfProperty) ExpectCtxParam1(ctx context.Context) *mPropertyServiceClientMockHistoryOfProperty {
 	if mmHistoryOfProperty.mock.funcHistoryOfProperty != nil {
-		mmHistoryOfProperty.mock.t.Fatalf("PropertyServiceHandlerMock.HistoryOfProperty mock is already set by Set")
+		mmHistoryOfProperty.mock.t.Fatalf("PropertyServiceClientMock.HistoryOfProperty mock is already set by Set")
 	}
 
 	if mmHistoryOfProperty.defaultExpectation == nil {
-		mmHistoryOfProperty.defaultExpectation = &PropertyServiceHandlerMockHistoryOfPropertyExpectation{}
+		mmHistoryOfProperty.defaultExpectation = &PropertyServiceClientMockHistoryOfPropertyExpectation{}
 	}
 
 	if mmHistoryOfProperty.defaultExpectation.params != nil {
-		mmHistoryOfProperty.mock.t.Fatalf("PropertyServiceHandlerMock.HistoryOfProperty mock is already set by Expect")
+		mmHistoryOfProperty.mock.t.Fatalf("PropertyServiceClientMock.HistoryOfProperty mock is already set by Expect")
 	}
 
 	if mmHistoryOfProperty.defaultExpectation.paramPtrs == nil {
-		mmHistoryOfProperty.defaultExpectation.paramPtrs = &PropertyServiceHandlerMockHistoryOfPropertyParamPtrs{}
+		mmHistoryOfProperty.defaultExpectation.paramPtrs = &PropertyServiceClientMockHistoryOfPropertyParamPtrs{}
 	}
 	mmHistoryOfProperty.defaultExpectation.paramPtrs.ctx = &ctx
 	mmHistoryOfProperty.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -2674,22 +2672,22 @@ func (mmHistoryOfProperty *mPropertyServiceHandlerMockHistoryOfProperty) ExpectC
 	return mmHistoryOfProperty
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for PropertyServiceHandler.HistoryOfProperty
-func (mmHistoryOfProperty *mPropertyServiceHandlerMockHistoryOfProperty) ExpectPp1Param2(pp1 *connect.Request[v1.HistoryOfPropertyRequest]) *mPropertyServiceHandlerMockHistoryOfProperty {
+// ExpectPp1Param2 sets up expected param pp1 for PropertyServiceClient.HistoryOfProperty
+func (mmHistoryOfProperty *mPropertyServiceClientMockHistoryOfProperty) ExpectPp1Param2(pp1 *connect.Request[v1.HistoryOfPropertyRequest]) *mPropertyServiceClientMockHistoryOfProperty {
 	if mmHistoryOfProperty.mock.funcHistoryOfProperty != nil {
-		mmHistoryOfProperty.mock.t.Fatalf("PropertyServiceHandlerMock.HistoryOfProperty mock is already set by Set")
+		mmHistoryOfProperty.mock.t.Fatalf("PropertyServiceClientMock.HistoryOfProperty mock is already set by Set")
 	}
 
 	if mmHistoryOfProperty.defaultExpectation == nil {
-		mmHistoryOfProperty.defaultExpectation = &PropertyServiceHandlerMockHistoryOfPropertyExpectation{}
+		mmHistoryOfProperty.defaultExpectation = &PropertyServiceClientMockHistoryOfPropertyExpectation{}
 	}
 
 	if mmHistoryOfProperty.defaultExpectation.params != nil {
-		mmHistoryOfProperty.mock.t.Fatalf("PropertyServiceHandlerMock.HistoryOfProperty mock is already set by Expect")
+		mmHistoryOfProperty.mock.t.Fatalf("PropertyServiceClientMock.HistoryOfProperty mock is already set by Expect")
 	}
 
 	if mmHistoryOfProperty.defaultExpectation.paramPtrs == nil {
-		mmHistoryOfProperty.defaultExpectation.paramPtrs = &PropertyServiceHandlerMockHistoryOfPropertyParamPtrs{}
+		mmHistoryOfProperty.defaultExpectation.paramPtrs = &PropertyServiceClientMockHistoryOfPropertyParamPtrs{}
 	}
 	mmHistoryOfProperty.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmHistoryOfProperty.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -2697,33 +2695,10 @@ func (mmHistoryOfProperty *mPropertyServiceHandlerMockHistoryOfProperty) ExpectP
 	return mmHistoryOfProperty
 }
 
-// ExpectPp2Param3 sets up expected param pp2 for PropertyServiceHandler.HistoryOfProperty
-func (mmHistoryOfProperty *mPropertyServiceHandlerMockHistoryOfProperty) ExpectPp2Param3(pp2 *connect.ServerStream[v1.HistoryOfPropertyResponse]) *mPropertyServiceHandlerMockHistoryOfProperty {
-	if mmHistoryOfProperty.mock.funcHistoryOfProperty != nil {
-		mmHistoryOfProperty.mock.t.Fatalf("PropertyServiceHandlerMock.HistoryOfProperty mock is already set by Set")
-	}
-
-	if mmHistoryOfProperty.defaultExpectation == nil {
-		mmHistoryOfProperty.defaultExpectation = &PropertyServiceHandlerMockHistoryOfPropertyExpectation{}
-	}
-
-	if mmHistoryOfProperty.defaultExpectation.params != nil {
-		mmHistoryOfProperty.mock.t.Fatalf("PropertyServiceHandlerMock.HistoryOfProperty mock is already set by Expect")
-	}
-
-	if mmHistoryOfProperty.defaultExpectation.paramPtrs == nil {
-		mmHistoryOfProperty.defaultExpectation.paramPtrs = &PropertyServiceHandlerMockHistoryOfPropertyParamPtrs{}
-	}
-	mmHistoryOfProperty.defaultExpectation.paramPtrs.pp2 = &pp2
-	mmHistoryOfProperty.defaultExpectation.expectationOrigins.originPp2 = minimock.CallerInfo(1)
-
-	return mmHistoryOfProperty
-}
-
-// Inspect accepts an inspector function that has same arguments as the PropertyServiceHandler.HistoryOfProperty
-func (mmHistoryOfProperty *mPropertyServiceHandlerMockHistoryOfProperty) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.HistoryOfPropertyRequest], pp2 *connect.ServerStream[v1.HistoryOfPropertyResponse])) *mPropertyServiceHandlerMockHistoryOfProperty {
+// Inspect accepts an inspector function that has same arguments as the PropertyServiceClient.HistoryOfProperty
+func (mmHistoryOfProperty *mPropertyServiceClientMockHistoryOfProperty) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.HistoryOfPropertyRequest])) *mPropertyServiceClientMockHistoryOfProperty {
 	if mmHistoryOfProperty.mock.inspectFuncHistoryOfProperty != nil {
-		mmHistoryOfProperty.mock.t.Fatalf("Inspect function is already set for PropertyServiceHandlerMock.HistoryOfProperty")
+		mmHistoryOfProperty.mock.t.Fatalf("Inspect function is already set for PropertyServiceClientMock.HistoryOfProperty")
 	}
 
 	mmHistoryOfProperty.mock.inspectFuncHistoryOfProperty = f
@@ -2731,28 +2706,28 @@ func (mmHistoryOfProperty *mPropertyServiceHandlerMockHistoryOfProperty) Inspect
 	return mmHistoryOfProperty
 }
 
-// Return sets up results that will be returned by PropertyServiceHandler.HistoryOfProperty
-func (mmHistoryOfProperty *mPropertyServiceHandlerMockHistoryOfProperty) Return(err error) *PropertyServiceHandlerMock {
+// Return sets up results that will be returned by PropertyServiceClient.HistoryOfProperty
+func (mmHistoryOfProperty *mPropertyServiceClientMockHistoryOfProperty) Return(pp2 *connect.ServerStreamForClient[v1.HistoryOfPropertyResponse], err error) *PropertyServiceClientMock {
 	if mmHistoryOfProperty.mock.funcHistoryOfProperty != nil {
-		mmHistoryOfProperty.mock.t.Fatalf("PropertyServiceHandlerMock.HistoryOfProperty mock is already set by Set")
+		mmHistoryOfProperty.mock.t.Fatalf("PropertyServiceClientMock.HistoryOfProperty mock is already set by Set")
 	}
 
 	if mmHistoryOfProperty.defaultExpectation == nil {
-		mmHistoryOfProperty.defaultExpectation = &PropertyServiceHandlerMockHistoryOfPropertyExpectation{mock: mmHistoryOfProperty.mock}
+		mmHistoryOfProperty.defaultExpectation = &PropertyServiceClientMockHistoryOfPropertyExpectation{mock: mmHistoryOfProperty.mock}
 	}
-	mmHistoryOfProperty.defaultExpectation.results = &PropertyServiceHandlerMockHistoryOfPropertyResults{err}
+	mmHistoryOfProperty.defaultExpectation.results = &PropertyServiceClientMockHistoryOfPropertyResults{pp2, err}
 	mmHistoryOfProperty.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmHistoryOfProperty.mock
 }
 
-// Set uses given function f to mock the PropertyServiceHandler.HistoryOfProperty method
-func (mmHistoryOfProperty *mPropertyServiceHandlerMockHistoryOfProperty) Set(f func(ctx context.Context, pp1 *connect.Request[v1.HistoryOfPropertyRequest], pp2 *connect.ServerStream[v1.HistoryOfPropertyResponse]) (err error)) *PropertyServiceHandlerMock {
+// Set uses given function f to mock the PropertyServiceClient.HistoryOfProperty method
+func (mmHistoryOfProperty *mPropertyServiceClientMockHistoryOfProperty) Set(f func(ctx context.Context, pp1 *connect.Request[v1.HistoryOfPropertyRequest]) (pp2 *connect.ServerStreamForClient[v1.HistoryOfPropertyResponse], err error)) *PropertyServiceClientMock {
 	if mmHistoryOfProperty.defaultExpectation != nil {
-		mmHistoryOfProperty.mock.t.Fatalf("Default expectation is already set for the PropertyServiceHandler.HistoryOfProperty method")
+		mmHistoryOfProperty.mock.t.Fatalf("Default expectation is already set for the PropertyServiceClient.HistoryOfProperty method")
 	}
 
 	if len(mmHistoryOfProperty.expectations) > 0 {
-		mmHistoryOfProperty.mock.t.Fatalf("Some expectations are already set for the PropertyServiceHandler.HistoryOfProperty method")
+		mmHistoryOfProperty.mock.t.Fatalf("Some expectations are already set for the PropertyServiceClient.HistoryOfProperty method")
 	}
 
 	mmHistoryOfProperty.mock.funcHistoryOfProperty = f
@@ -2760,39 +2735,39 @@ func (mmHistoryOfProperty *mPropertyServiceHandlerMockHistoryOfProperty) Set(f f
 	return mmHistoryOfProperty.mock
 }
 
-// When sets expectation for the PropertyServiceHandler.HistoryOfProperty which will trigger the result defined by the following
+// When sets expectation for the PropertyServiceClient.HistoryOfProperty which will trigger the result defined by the following
 // Then helper
-func (mmHistoryOfProperty *mPropertyServiceHandlerMockHistoryOfProperty) When(ctx context.Context, pp1 *connect.Request[v1.HistoryOfPropertyRequest], pp2 *connect.ServerStream[v1.HistoryOfPropertyResponse]) *PropertyServiceHandlerMockHistoryOfPropertyExpectation {
+func (mmHistoryOfProperty *mPropertyServiceClientMockHistoryOfProperty) When(ctx context.Context, pp1 *connect.Request[v1.HistoryOfPropertyRequest]) *PropertyServiceClientMockHistoryOfPropertyExpectation {
 	if mmHistoryOfProperty.mock.funcHistoryOfProperty != nil {
-		mmHistoryOfProperty.mock.t.Fatalf("PropertyServiceHandlerMock.HistoryOfProperty mock is already set by Set")
+		mmHistoryOfProperty.mock.t.Fatalf("PropertyServiceClientMock.HistoryOfProperty mock is already set by Set")
 	}
 
-	expectation := &PropertyServiceHandlerMockHistoryOfPropertyExpectation{
+	expectation := &PropertyServiceClientMockHistoryOfPropertyExpectation{
 		mock:               mmHistoryOfProperty.mock,
-		params:             &PropertyServiceHandlerMockHistoryOfPropertyParams{ctx, pp1, pp2},
-		expectationOrigins: PropertyServiceHandlerMockHistoryOfPropertyExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &PropertyServiceClientMockHistoryOfPropertyParams{ctx, pp1},
+		expectationOrigins: PropertyServiceClientMockHistoryOfPropertyExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmHistoryOfProperty.expectations = append(mmHistoryOfProperty.expectations, expectation)
 	return expectation
 }
 
-// Then sets up PropertyServiceHandler.HistoryOfProperty return parameters for the expectation previously defined by the When method
-func (e *PropertyServiceHandlerMockHistoryOfPropertyExpectation) Then(err error) *PropertyServiceHandlerMock {
-	e.results = &PropertyServiceHandlerMockHistoryOfPropertyResults{err}
+// Then sets up PropertyServiceClient.HistoryOfProperty return parameters for the expectation previously defined by the When method
+func (e *PropertyServiceClientMockHistoryOfPropertyExpectation) Then(pp2 *connect.ServerStreamForClient[v1.HistoryOfPropertyResponse], err error) *PropertyServiceClientMock {
+	e.results = &PropertyServiceClientMockHistoryOfPropertyResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times PropertyServiceHandler.HistoryOfProperty should be invoked
-func (mmHistoryOfProperty *mPropertyServiceHandlerMockHistoryOfProperty) Times(n uint64) *mPropertyServiceHandlerMockHistoryOfProperty {
+// Times sets number of times PropertyServiceClient.HistoryOfProperty should be invoked
+func (mmHistoryOfProperty *mPropertyServiceClientMockHistoryOfProperty) Times(n uint64) *mPropertyServiceClientMockHistoryOfProperty {
 	if n == 0 {
-		mmHistoryOfProperty.mock.t.Fatalf("Times of PropertyServiceHandlerMock.HistoryOfProperty mock can not be zero")
+		mmHistoryOfProperty.mock.t.Fatalf("Times of PropertyServiceClientMock.HistoryOfProperty mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmHistoryOfProperty.expectedInvocations, n)
 	mmHistoryOfProperty.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmHistoryOfProperty
 }
 
-func (mmHistoryOfProperty *mPropertyServiceHandlerMockHistoryOfProperty) invocationsDone() bool {
+func (mmHistoryOfProperty *mPropertyServiceClientMockHistoryOfProperty) invocationsDone() bool {
 	if len(mmHistoryOfProperty.expectations) == 0 && mmHistoryOfProperty.defaultExpectation == nil && mmHistoryOfProperty.mock.funcHistoryOfProperty == nil {
 		return true
 	}
@@ -2803,18 +2778,18 @@ func (mmHistoryOfProperty *mPropertyServiceHandlerMockHistoryOfProperty) invocat
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// HistoryOfProperty implements mm_propertyv1connect.PropertyServiceHandler
-func (mmHistoryOfProperty *PropertyServiceHandlerMock) HistoryOfProperty(ctx context.Context, pp1 *connect.Request[v1.HistoryOfPropertyRequest], pp2 *connect.ServerStream[v1.HistoryOfPropertyResponse]) (err error) {
+// HistoryOfProperty implements mm_propertyv1connect.PropertyServiceClient
+func (mmHistoryOfProperty *PropertyServiceClientMock) HistoryOfProperty(ctx context.Context, pp1 *connect.Request[v1.HistoryOfPropertyRequest]) (pp2 *connect.ServerStreamForClient[v1.HistoryOfPropertyResponse], err error) {
 	mm_atomic.AddUint64(&mmHistoryOfProperty.beforeHistoryOfPropertyCounter, 1)
 	defer mm_atomic.AddUint64(&mmHistoryOfProperty.afterHistoryOfPropertyCounter, 1)
 
 	mmHistoryOfProperty.t.Helper()
 
 	if mmHistoryOfProperty.inspectFuncHistoryOfProperty != nil {
-		mmHistoryOfProperty.inspectFuncHistoryOfProperty(ctx, pp1, pp2)
+		mmHistoryOfProperty.inspectFuncHistoryOfProperty(ctx, pp1)
 	}
 
-	mm_params := PropertyServiceHandlerMockHistoryOfPropertyParams{ctx, pp1, pp2}
+	mm_params := PropertyServiceClientMockHistoryOfPropertyParams{ctx, pp1}
 
 	// Record call args
 	mmHistoryOfProperty.HistoryOfPropertyMock.mutex.Lock()
@@ -2824,7 +2799,7 @@ func (mmHistoryOfProperty *PropertyServiceHandlerMock) HistoryOfProperty(ctx con
 	for _, e := range mmHistoryOfProperty.HistoryOfPropertyMock.expectations {
 		if minimock.Equal(*e.params, mm_params) {
 			mm_atomic.AddUint64(&e.Counter, 1)
-			return e.results.err
+			return e.results.pp2, e.results.err
 		}
 	}
 
@@ -2833,59 +2808,54 @@ func (mmHistoryOfProperty *PropertyServiceHandlerMock) HistoryOfProperty(ctx con
 		mm_want := mmHistoryOfProperty.HistoryOfPropertyMock.defaultExpectation.params
 		mm_want_ptrs := mmHistoryOfProperty.HistoryOfPropertyMock.defaultExpectation.paramPtrs
 
-		mm_got := PropertyServiceHandlerMockHistoryOfPropertyParams{ctx, pp1, pp2}
+		mm_got := PropertyServiceClientMockHistoryOfPropertyParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmHistoryOfProperty.t.Errorf("PropertyServiceHandlerMock.HistoryOfProperty got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmHistoryOfProperty.t.Errorf("PropertyServiceClientMock.HistoryOfProperty got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmHistoryOfProperty.HistoryOfPropertyMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmHistoryOfProperty.t.Errorf("PropertyServiceHandlerMock.HistoryOfProperty got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmHistoryOfProperty.t.Errorf("PropertyServiceClientMock.HistoryOfProperty got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmHistoryOfProperty.HistoryOfPropertyMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
-			if mm_want_ptrs.pp2 != nil && !minimock.Equal(*mm_want_ptrs.pp2, mm_got.pp2) {
-				mmHistoryOfProperty.t.Errorf("PropertyServiceHandlerMock.HistoryOfProperty got unexpected parameter pp2, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
-					mmHistoryOfProperty.HistoryOfPropertyMock.defaultExpectation.expectationOrigins.originPp2, *mm_want_ptrs.pp2, mm_got.pp2, minimock.Diff(*mm_want_ptrs.pp2, mm_got.pp2))
-			}
-
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmHistoryOfProperty.t.Errorf("PropertyServiceHandlerMock.HistoryOfProperty got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmHistoryOfProperty.t.Errorf("PropertyServiceClientMock.HistoryOfProperty got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmHistoryOfProperty.HistoryOfPropertyMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmHistoryOfProperty.HistoryOfPropertyMock.defaultExpectation.results
 		if mm_results == nil {
-			mmHistoryOfProperty.t.Fatal("No results are set for the PropertyServiceHandlerMock.HistoryOfProperty")
+			mmHistoryOfProperty.t.Fatal("No results are set for the PropertyServiceClientMock.HistoryOfProperty")
 		}
-		return (*mm_results).err
+		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmHistoryOfProperty.funcHistoryOfProperty != nil {
-		return mmHistoryOfProperty.funcHistoryOfProperty(ctx, pp1, pp2)
+		return mmHistoryOfProperty.funcHistoryOfProperty(ctx, pp1)
 	}
-	mmHistoryOfProperty.t.Fatalf("Unexpected call to PropertyServiceHandlerMock.HistoryOfProperty. %v %v %v", ctx, pp1, pp2)
+	mmHistoryOfProperty.t.Fatalf("Unexpected call to PropertyServiceClientMock.HistoryOfProperty. %v %v", ctx, pp1)
 	return
 }
 
-// HistoryOfPropertyAfterCounter returns a count of finished PropertyServiceHandlerMock.HistoryOfProperty invocations
-func (mmHistoryOfProperty *PropertyServiceHandlerMock) HistoryOfPropertyAfterCounter() uint64 {
+// HistoryOfPropertyAfterCounter returns a count of finished PropertyServiceClientMock.HistoryOfProperty invocations
+func (mmHistoryOfProperty *PropertyServiceClientMock) HistoryOfPropertyAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmHistoryOfProperty.afterHistoryOfPropertyCounter)
 }
 
-// HistoryOfPropertyBeforeCounter returns a count of PropertyServiceHandlerMock.HistoryOfProperty invocations
-func (mmHistoryOfProperty *PropertyServiceHandlerMock) HistoryOfPropertyBeforeCounter() uint64 {
+// HistoryOfPropertyBeforeCounter returns a count of PropertyServiceClientMock.HistoryOfProperty invocations
+func (mmHistoryOfProperty *PropertyServiceClientMock) HistoryOfPropertyBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmHistoryOfProperty.beforeHistoryOfPropertyCounter)
 }
 
-// Calls returns a list of arguments used in each call to PropertyServiceHandlerMock.HistoryOfProperty.
+// Calls returns a list of arguments used in each call to PropertyServiceClientMock.HistoryOfProperty.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmHistoryOfProperty *mPropertyServiceHandlerMockHistoryOfProperty) Calls() []*PropertyServiceHandlerMockHistoryOfPropertyParams {
+func (mmHistoryOfProperty *mPropertyServiceClientMockHistoryOfProperty) Calls() []*PropertyServiceClientMockHistoryOfPropertyParams {
 	mmHistoryOfProperty.mutex.RLock()
 
-	argCopy := make([]*PropertyServiceHandlerMockHistoryOfPropertyParams, len(mmHistoryOfProperty.callArgs))
+	argCopy := make([]*PropertyServiceClientMockHistoryOfPropertyParams, len(mmHistoryOfProperty.callArgs))
 	copy(argCopy, mmHistoryOfProperty.callArgs)
 
 	mmHistoryOfProperty.mutex.RUnlock()
@@ -2895,7 +2865,7 @@ func (mmHistoryOfProperty *mPropertyServiceHandlerMockHistoryOfProperty) Calls()
 
 // MinimockHistoryOfPropertyDone returns true if the count of the HistoryOfProperty invocations corresponds
 // the number of defined expectations
-func (m *PropertyServiceHandlerMock) MinimockHistoryOfPropertyDone() bool {
+func (m *PropertyServiceClientMock) MinimockHistoryOfPropertyDone() bool {
 	if m.HistoryOfPropertyMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -2911,10 +2881,10 @@ func (m *PropertyServiceHandlerMock) MinimockHistoryOfPropertyDone() bool {
 }
 
 // MinimockHistoryOfPropertyInspect logs each unmet expectation
-func (m *PropertyServiceHandlerMock) MinimockHistoryOfPropertyInspect() {
+func (m *PropertyServiceClientMock) MinimockHistoryOfPropertyInspect() {
 	for _, e := range m.HistoryOfPropertyMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to PropertyServiceHandlerMock.HistoryOfProperty at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to PropertyServiceClientMock.HistoryOfProperty at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -2922,71 +2892,69 @@ func (m *PropertyServiceHandlerMock) MinimockHistoryOfPropertyInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.HistoryOfPropertyMock.defaultExpectation != nil && afterHistoryOfPropertyCounter < 1 {
 		if m.HistoryOfPropertyMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to PropertyServiceHandlerMock.HistoryOfProperty at\n%s", m.HistoryOfPropertyMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to PropertyServiceClientMock.HistoryOfProperty at\n%s", m.HistoryOfPropertyMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to PropertyServiceHandlerMock.HistoryOfProperty at\n%s with params: %#v", m.HistoryOfPropertyMock.defaultExpectation.expectationOrigins.origin, *m.HistoryOfPropertyMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to PropertyServiceClientMock.HistoryOfProperty at\n%s with params: %#v", m.HistoryOfPropertyMock.defaultExpectation.expectationOrigins.origin, *m.HistoryOfPropertyMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcHistoryOfProperty != nil && afterHistoryOfPropertyCounter < 1 {
-		m.t.Errorf("Expected call to PropertyServiceHandlerMock.HistoryOfProperty at\n%s", m.funcHistoryOfPropertyOrigin)
+		m.t.Errorf("Expected call to PropertyServiceClientMock.HistoryOfProperty at\n%s", m.funcHistoryOfPropertyOrigin)
 	}
 
 	if !m.HistoryOfPropertyMock.invocationsDone() && afterHistoryOfPropertyCounter > 0 {
-		m.t.Errorf("Expected %d calls to PropertyServiceHandlerMock.HistoryOfProperty at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to PropertyServiceClientMock.HistoryOfProperty at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.HistoryOfPropertyMock.expectedInvocations), m.HistoryOfPropertyMock.expectedInvocationsOrigin, afterHistoryOfPropertyCounter)
 	}
 }
 
-type mPropertyServiceHandlerMockListPropertyType struct {
+type mPropertyServiceClientMockListPropertyType struct {
 	optional           bool
-	mock               *PropertyServiceHandlerMock
-	defaultExpectation *PropertyServiceHandlerMockListPropertyTypeExpectation
-	expectations       []*PropertyServiceHandlerMockListPropertyTypeExpectation
+	mock               *PropertyServiceClientMock
+	defaultExpectation *PropertyServiceClientMockListPropertyTypeExpectation
+	expectations       []*PropertyServiceClientMockListPropertyTypeExpectation
 
-	callArgs []*PropertyServiceHandlerMockListPropertyTypeParams
+	callArgs []*PropertyServiceClientMockListPropertyTypeParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// PropertyServiceHandlerMockListPropertyTypeExpectation specifies expectation struct of the PropertyServiceHandler.ListPropertyType
-type PropertyServiceHandlerMockListPropertyTypeExpectation struct {
-	mock               *PropertyServiceHandlerMock
-	params             *PropertyServiceHandlerMockListPropertyTypeParams
-	paramPtrs          *PropertyServiceHandlerMockListPropertyTypeParamPtrs
-	expectationOrigins PropertyServiceHandlerMockListPropertyTypeExpectationOrigins
-	results            *PropertyServiceHandlerMockListPropertyTypeResults
+// PropertyServiceClientMockListPropertyTypeExpectation specifies expectation struct of the PropertyServiceClient.ListPropertyType
+type PropertyServiceClientMockListPropertyTypeExpectation struct {
+	mock               *PropertyServiceClientMock
+	params             *PropertyServiceClientMockListPropertyTypeParams
+	paramPtrs          *PropertyServiceClientMockListPropertyTypeParamPtrs
+	expectationOrigins PropertyServiceClientMockListPropertyTypeExpectationOrigins
+	results            *PropertyServiceClientMockListPropertyTypeResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// PropertyServiceHandlerMockListPropertyTypeParams contains parameters of the PropertyServiceHandler.ListPropertyType
-type PropertyServiceHandlerMockListPropertyTypeParams struct {
+// PropertyServiceClientMockListPropertyTypeParams contains parameters of the PropertyServiceClient.ListPropertyType
+type PropertyServiceClientMockListPropertyTypeParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.ListPropertyTypeRequest]
-	pp2 *connect.ServerStream[v1.ListPropertyTypeResponse]
 }
 
-// PropertyServiceHandlerMockListPropertyTypeParamPtrs contains pointers to parameters of the PropertyServiceHandler.ListPropertyType
-type PropertyServiceHandlerMockListPropertyTypeParamPtrs struct {
+// PropertyServiceClientMockListPropertyTypeParamPtrs contains pointers to parameters of the PropertyServiceClient.ListPropertyType
+type PropertyServiceClientMockListPropertyTypeParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.ListPropertyTypeRequest]
-	pp2 **connect.ServerStream[v1.ListPropertyTypeResponse]
 }
 
-// PropertyServiceHandlerMockListPropertyTypeResults contains results of the PropertyServiceHandler.ListPropertyType
-type PropertyServiceHandlerMockListPropertyTypeResults struct {
+// PropertyServiceClientMockListPropertyTypeResults contains results of the PropertyServiceClient.ListPropertyType
+type PropertyServiceClientMockListPropertyTypeResults struct {
+	pp2 *connect.ServerStreamForClient[v1.ListPropertyTypeResponse]
 	err error
 }
 
-// PropertyServiceHandlerMockListPropertyTypeOrigins contains origins of expectations of the PropertyServiceHandler.ListPropertyType
-type PropertyServiceHandlerMockListPropertyTypeExpectationOrigins struct {
+// PropertyServiceClientMockListPropertyTypeOrigins contains origins of expectations of the PropertyServiceClient.ListPropertyType
+type PropertyServiceClientMockListPropertyTypeExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
-	originPp2 string
 }
 
 // Marks this method to be optional. The default behavior of any method with Return() is '1 or more', meaning
@@ -2994,26 +2962,26 @@ type PropertyServiceHandlerMockListPropertyTypeExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmListPropertyType *mPropertyServiceHandlerMockListPropertyType) Optional() *mPropertyServiceHandlerMockListPropertyType {
+func (mmListPropertyType *mPropertyServiceClientMockListPropertyType) Optional() *mPropertyServiceClientMockListPropertyType {
 	mmListPropertyType.optional = true
 	return mmListPropertyType
 }
 
-// Expect sets up expected params for PropertyServiceHandler.ListPropertyType
-func (mmListPropertyType *mPropertyServiceHandlerMockListPropertyType) Expect(ctx context.Context, pp1 *connect.Request[v1.ListPropertyTypeRequest], pp2 *connect.ServerStream[v1.ListPropertyTypeResponse]) *mPropertyServiceHandlerMockListPropertyType {
+// Expect sets up expected params for PropertyServiceClient.ListPropertyType
+func (mmListPropertyType *mPropertyServiceClientMockListPropertyType) Expect(ctx context.Context, pp1 *connect.Request[v1.ListPropertyTypeRequest]) *mPropertyServiceClientMockListPropertyType {
 	if mmListPropertyType.mock.funcListPropertyType != nil {
-		mmListPropertyType.mock.t.Fatalf("PropertyServiceHandlerMock.ListPropertyType mock is already set by Set")
+		mmListPropertyType.mock.t.Fatalf("PropertyServiceClientMock.ListPropertyType mock is already set by Set")
 	}
 
 	if mmListPropertyType.defaultExpectation == nil {
-		mmListPropertyType.defaultExpectation = &PropertyServiceHandlerMockListPropertyTypeExpectation{}
+		mmListPropertyType.defaultExpectation = &PropertyServiceClientMockListPropertyTypeExpectation{}
 	}
 
 	if mmListPropertyType.defaultExpectation.paramPtrs != nil {
-		mmListPropertyType.mock.t.Fatalf("PropertyServiceHandlerMock.ListPropertyType mock is already set by ExpectParams functions")
+		mmListPropertyType.mock.t.Fatalf("PropertyServiceClientMock.ListPropertyType mock is already set by ExpectParams functions")
 	}
 
-	mmListPropertyType.defaultExpectation.params = &PropertyServiceHandlerMockListPropertyTypeParams{ctx, pp1, pp2}
+	mmListPropertyType.defaultExpectation.params = &PropertyServiceClientMockListPropertyTypeParams{ctx, pp1}
 	mmListPropertyType.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmListPropertyType.expectations {
 		if minimock.Equal(e.params, mmListPropertyType.defaultExpectation.params) {
@@ -3024,22 +2992,22 @@ func (mmListPropertyType *mPropertyServiceHandlerMockListPropertyType) Expect(ct
 	return mmListPropertyType
 }
 
-// ExpectCtxParam1 sets up expected param ctx for PropertyServiceHandler.ListPropertyType
-func (mmListPropertyType *mPropertyServiceHandlerMockListPropertyType) ExpectCtxParam1(ctx context.Context) *mPropertyServiceHandlerMockListPropertyType {
+// ExpectCtxParam1 sets up expected param ctx for PropertyServiceClient.ListPropertyType
+func (mmListPropertyType *mPropertyServiceClientMockListPropertyType) ExpectCtxParam1(ctx context.Context) *mPropertyServiceClientMockListPropertyType {
 	if mmListPropertyType.mock.funcListPropertyType != nil {
-		mmListPropertyType.mock.t.Fatalf("PropertyServiceHandlerMock.ListPropertyType mock is already set by Set")
+		mmListPropertyType.mock.t.Fatalf("PropertyServiceClientMock.ListPropertyType mock is already set by Set")
 	}
 
 	if mmListPropertyType.defaultExpectation == nil {
-		mmListPropertyType.defaultExpectation = &PropertyServiceHandlerMockListPropertyTypeExpectation{}
+		mmListPropertyType.defaultExpectation = &PropertyServiceClientMockListPropertyTypeExpectation{}
 	}
 
 	if mmListPropertyType.defaultExpectation.params != nil {
-		mmListPropertyType.mock.t.Fatalf("PropertyServiceHandlerMock.ListPropertyType mock is already set by Expect")
+		mmListPropertyType.mock.t.Fatalf("PropertyServiceClientMock.ListPropertyType mock is already set by Expect")
 	}
 
 	if mmListPropertyType.defaultExpectation.paramPtrs == nil {
-		mmListPropertyType.defaultExpectation.paramPtrs = &PropertyServiceHandlerMockListPropertyTypeParamPtrs{}
+		mmListPropertyType.defaultExpectation.paramPtrs = &PropertyServiceClientMockListPropertyTypeParamPtrs{}
 	}
 	mmListPropertyType.defaultExpectation.paramPtrs.ctx = &ctx
 	mmListPropertyType.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -3047,22 +3015,22 @@ func (mmListPropertyType *mPropertyServiceHandlerMockListPropertyType) ExpectCtx
 	return mmListPropertyType
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for PropertyServiceHandler.ListPropertyType
-func (mmListPropertyType *mPropertyServiceHandlerMockListPropertyType) ExpectPp1Param2(pp1 *connect.Request[v1.ListPropertyTypeRequest]) *mPropertyServiceHandlerMockListPropertyType {
+// ExpectPp1Param2 sets up expected param pp1 for PropertyServiceClient.ListPropertyType
+func (mmListPropertyType *mPropertyServiceClientMockListPropertyType) ExpectPp1Param2(pp1 *connect.Request[v1.ListPropertyTypeRequest]) *mPropertyServiceClientMockListPropertyType {
 	if mmListPropertyType.mock.funcListPropertyType != nil {
-		mmListPropertyType.mock.t.Fatalf("PropertyServiceHandlerMock.ListPropertyType mock is already set by Set")
+		mmListPropertyType.mock.t.Fatalf("PropertyServiceClientMock.ListPropertyType mock is already set by Set")
 	}
 
 	if mmListPropertyType.defaultExpectation == nil {
-		mmListPropertyType.defaultExpectation = &PropertyServiceHandlerMockListPropertyTypeExpectation{}
+		mmListPropertyType.defaultExpectation = &PropertyServiceClientMockListPropertyTypeExpectation{}
 	}
 
 	if mmListPropertyType.defaultExpectation.params != nil {
-		mmListPropertyType.mock.t.Fatalf("PropertyServiceHandlerMock.ListPropertyType mock is already set by Expect")
+		mmListPropertyType.mock.t.Fatalf("PropertyServiceClientMock.ListPropertyType mock is already set by Expect")
 	}
 
 	if mmListPropertyType.defaultExpectation.paramPtrs == nil {
-		mmListPropertyType.defaultExpectation.paramPtrs = &PropertyServiceHandlerMockListPropertyTypeParamPtrs{}
+		mmListPropertyType.defaultExpectation.paramPtrs = &PropertyServiceClientMockListPropertyTypeParamPtrs{}
 	}
 	mmListPropertyType.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmListPropertyType.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -3070,33 +3038,10 @@ func (mmListPropertyType *mPropertyServiceHandlerMockListPropertyType) ExpectPp1
 	return mmListPropertyType
 }
 
-// ExpectPp2Param3 sets up expected param pp2 for PropertyServiceHandler.ListPropertyType
-func (mmListPropertyType *mPropertyServiceHandlerMockListPropertyType) ExpectPp2Param3(pp2 *connect.ServerStream[v1.ListPropertyTypeResponse]) *mPropertyServiceHandlerMockListPropertyType {
-	if mmListPropertyType.mock.funcListPropertyType != nil {
-		mmListPropertyType.mock.t.Fatalf("PropertyServiceHandlerMock.ListPropertyType mock is already set by Set")
-	}
-
-	if mmListPropertyType.defaultExpectation == nil {
-		mmListPropertyType.defaultExpectation = &PropertyServiceHandlerMockListPropertyTypeExpectation{}
-	}
-
-	if mmListPropertyType.defaultExpectation.params != nil {
-		mmListPropertyType.mock.t.Fatalf("PropertyServiceHandlerMock.ListPropertyType mock is already set by Expect")
-	}
-
-	if mmListPropertyType.defaultExpectation.paramPtrs == nil {
-		mmListPropertyType.defaultExpectation.paramPtrs = &PropertyServiceHandlerMockListPropertyTypeParamPtrs{}
-	}
-	mmListPropertyType.defaultExpectation.paramPtrs.pp2 = &pp2
-	mmListPropertyType.defaultExpectation.expectationOrigins.originPp2 = minimock.CallerInfo(1)
-
-	return mmListPropertyType
-}
-
-// Inspect accepts an inspector function that has same arguments as the PropertyServiceHandler.ListPropertyType
-func (mmListPropertyType *mPropertyServiceHandlerMockListPropertyType) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.ListPropertyTypeRequest], pp2 *connect.ServerStream[v1.ListPropertyTypeResponse])) *mPropertyServiceHandlerMockListPropertyType {
+// Inspect accepts an inspector function that has same arguments as the PropertyServiceClient.ListPropertyType
+func (mmListPropertyType *mPropertyServiceClientMockListPropertyType) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.ListPropertyTypeRequest])) *mPropertyServiceClientMockListPropertyType {
 	if mmListPropertyType.mock.inspectFuncListPropertyType != nil {
-		mmListPropertyType.mock.t.Fatalf("Inspect function is already set for PropertyServiceHandlerMock.ListPropertyType")
+		mmListPropertyType.mock.t.Fatalf("Inspect function is already set for PropertyServiceClientMock.ListPropertyType")
 	}
 
 	mmListPropertyType.mock.inspectFuncListPropertyType = f
@@ -3104,28 +3049,28 @@ func (mmListPropertyType *mPropertyServiceHandlerMockListPropertyType) Inspect(f
 	return mmListPropertyType
 }
 
-// Return sets up results that will be returned by PropertyServiceHandler.ListPropertyType
-func (mmListPropertyType *mPropertyServiceHandlerMockListPropertyType) Return(err error) *PropertyServiceHandlerMock {
+// Return sets up results that will be returned by PropertyServiceClient.ListPropertyType
+func (mmListPropertyType *mPropertyServiceClientMockListPropertyType) Return(pp2 *connect.ServerStreamForClient[v1.ListPropertyTypeResponse], err error) *PropertyServiceClientMock {
 	if mmListPropertyType.mock.funcListPropertyType != nil {
-		mmListPropertyType.mock.t.Fatalf("PropertyServiceHandlerMock.ListPropertyType mock is already set by Set")
+		mmListPropertyType.mock.t.Fatalf("PropertyServiceClientMock.ListPropertyType mock is already set by Set")
 	}
 
 	if mmListPropertyType.defaultExpectation == nil {
-		mmListPropertyType.defaultExpectation = &PropertyServiceHandlerMockListPropertyTypeExpectation{mock: mmListPropertyType.mock}
+		mmListPropertyType.defaultExpectation = &PropertyServiceClientMockListPropertyTypeExpectation{mock: mmListPropertyType.mock}
 	}
-	mmListPropertyType.defaultExpectation.results = &PropertyServiceHandlerMockListPropertyTypeResults{err}
+	mmListPropertyType.defaultExpectation.results = &PropertyServiceClientMockListPropertyTypeResults{pp2, err}
 	mmListPropertyType.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmListPropertyType.mock
 }
 
-// Set uses given function f to mock the PropertyServiceHandler.ListPropertyType method
-func (mmListPropertyType *mPropertyServiceHandlerMockListPropertyType) Set(f func(ctx context.Context, pp1 *connect.Request[v1.ListPropertyTypeRequest], pp2 *connect.ServerStream[v1.ListPropertyTypeResponse]) (err error)) *PropertyServiceHandlerMock {
+// Set uses given function f to mock the PropertyServiceClient.ListPropertyType method
+func (mmListPropertyType *mPropertyServiceClientMockListPropertyType) Set(f func(ctx context.Context, pp1 *connect.Request[v1.ListPropertyTypeRequest]) (pp2 *connect.ServerStreamForClient[v1.ListPropertyTypeResponse], err error)) *PropertyServiceClientMock {
 	if mmListPropertyType.defaultExpectation != nil {
-		mmListPropertyType.mock.t.Fatalf("Default expectation is already set for the PropertyServiceHandler.ListPropertyType method")
+		mmListPropertyType.mock.t.Fatalf("Default expectation is already set for the PropertyServiceClient.ListPropertyType method")
 	}
 
 	if len(mmListPropertyType.expectations) > 0 {
-		mmListPropertyType.mock.t.Fatalf("Some expectations are already set for the PropertyServiceHandler.ListPropertyType method")
+		mmListPropertyType.mock.t.Fatalf("Some expectations are already set for the PropertyServiceClient.ListPropertyType method")
 	}
 
 	mmListPropertyType.mock.funcListPropertyType = f
@@ -3133,39 +3078,39 @@ func (mmListPropertyType *mPropertyServiceHandlerMockListPropertyType) Set(f fun
 	return mmListPropertyType.mock
 }
 
-// When sets expectation for the PropertyServiceHandler.ListPropertyType which will trigger the result defined by the following
+// When sets expectation for the PropertyServiceClient.ListPropertyType which will trigger the result defined by the following
 // Then helper
-func (mmListPropertyType *mPropertyServiceHandlerMockListPropertyType) When(ctx context.Context, pp1 *connect.Request[v1.ListPropertyTypeRequest], pp2 *connect.ServerStream[v1.ListPropertyTypeResponse]) *PropertyServiceHandlerMockListPropertyTypeExpectation {
+func (mmListPropertyType *mPropertyServiceClientMockListPropertyType) When(ctx context.Context, pp1 *connect.Request[v1.ListPropertyTypeRequest]) *PropertyServiceClientMockListPropertyTypeExpectation {
 	if mmListPropertyType.mock.funcListPropertyType != nil {
-		mmListPropertyType.mock.t.Fatalf("PropertyServiceHandlerMock.ListPropertyType mock is already set by Set")
+		mmListPropertyType.mock.t.Fatalf("PropertyServiceClientMock.ListPropertyType mock is already set by Set")
 	}
 
-	expectation := &PropertyServiceHandlerMockListPropertyTypeExpectation{
+	expectation := &PropertyServiceClientMockListPropertyTypeExpectation{
 		mock:               mmListPropertyType.mock,
-		params:             &PropertyServiceHandlerMockListPropertyTypeParams{ctx, pp1, pp2},
-		expectationOrigins: PropertyServiceHandlerMockListPropertyTypeExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &PropertyServiceClientMockListPropertyTypeParams{ctx, pp1},
+		expectationOrigins: PropertyServiceClientMockListPropertyTypeExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmListPropertyType.expectations = append(mmListPropertyType.expectations, expectation)
 	return expectation
 }
 
-// Then sets up PropertyServiceHandler.ListPropertyType return parameters for the expectation previously defined by the When method
-func (e *PropertyServiceHandlerMockListPropertyTypeExpectation) Then(err error) *PropertyServiceHandlerMock {
-	e.results = &PropertyServiceHandlerMockListPropertyTypeResults{err}
+// Then sets up PropertyServiceClient.ListPropertyType return parameters for the expectation previously defined by the When method
+func (e *PropertyServiceClientMockListPropertyTypeExpectation) Then(pp2 *connect.ServerStreamForClient[v1.ListPropertyTypeResponse], err error) *PropertyServiceClientMock {
+	e.results = &PropertyServiceClientMockListPropertyTypeResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times PropertyServiceHandler.ListPropertyType should be invoked
-func (mmListPropertyType *mPropertyServiceHandlerMockListPropertyType) Times(n uint64) *mPropertyServiceHandlerMockListPropertyType {
+// Times sets number of times PropertyServiceClient.ListPropertyType should be invoked
+func (mmListPropertyType *mPropertyServiceClientMockListPropertyType) Times(n uint64) *mPropertyServiceClientMockListPropertyType {
 	if n == 0 {
-		mmListPropertyType.mock.t.Fatalf("Times of PropertyServiceHandlerMock.ListPropertyType mock can not be zero")
+		mmListPropertyType.mock.t.Fatalf("Times of PropertyServiceClientMock.ListPropertyType mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmListPropertyType.expectedInvocations, n)
 	mmListPropertyType.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmListPropertyType
 }
 
-func (mmListPropertyType *mPropertyServiceHandlerMockListPropertyType) invocationsDone() bool {
+func (mmListPropertyType *mPropertyServiceClientMockListPropertyType) invocationsDone() bool {
 	if len(mmListPropertyType.expectations) == 0 && mmListPropertyType.defaultExpectation == nil && mmListPropertyType.mock.funcListPropertyType == nil {
 		return true
 	}
@@ -3176,18 +3121,18 @@ func (mmListPropertyType *mPropertyServiceHandlerMockListPropertyType) invocatio
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// ListPropertyType implements mm_propertyv1connect.PropertyServiceHandler
-func (mmListPropertyType *PropertyServiceHandlerMock) ListPropertyType(ctx context.Context, pp1 *connect.Request[v1.ListPropertyTypeRequest], pp2 *connect.ServerStream[v1.ListPropertyTypeResponse]) (err error) {
+// ListPropertyType implements mm_propertyv1connect.PropertyServiceClient
+func (mmListPropertyType *PropertyServiceClientMock) ListPropertyType(ctx context.Context, pp1 *connect.Request[v1.ListPropertyTypeRequest]) (pp2 *connect.ServerStreamForClient[v1.ListPropertyTypeResponse], err error) {
 	mm_atomic.AddUint64(&mmListPropertyType.beforeListPropertyTypeCounter, 1)
 	defer mm_atomic.AddUint64(&mmListPropertyType.afterListPropertyTypeCounter, 1)
 
 	mmListPropertyType.t.Helper()
 
 	if mmListPropertyType.inspectFuncListPropertyType != nil {
-		mmListPropertyType.inspectFuncListPropertyType(ctx, pp1, pp2)
+		mmListPropertyType.inspectFuncListPropertyType(ctx, pp1)
 	}
 
-	mm_params := PropertyServiceHandlerMockListPropertyTypeParams{ctx, pp1, pp2}
+	mm_params := PropertyServiceClientMockListPropertyTypeParams{ctx, pp1}
 
 	// Record call args
 	mmListPropertyType.ListPropertyTypeMock.mutex.Lock()
@@ -3197,7 +3142,7 @@ func (mmListPropertyType *PropertyServiceHandlerMock) ListPropertyType(ctx conte
 	for _, e := range mmListPropertyType.ListPropertyTypeMock.expectations {
 		if minimock.Equal(*e.params, mm_params) {
 			mm_atomic.AddUint64(&e.Counter, 1)
-			return e.results.err
+			return e.results.pp2, e.results.err
 		}
 	}
 
@@ -3206,59 +3151,54 @@ func (mmListPropertyType *PropertyServiceHandlerMock) ListPropertyType(ctx conte
 		mm_want := mmListPropertyType.ListPropertyTypeMock.defaultExpectation.params
 		mm_want_ptrs := mmListPropertyType.ListPropertyTypeMock.defaultExpectation.paramPtrs
 
-		mm_got := PropertyServiceHandlerMockListPropertyTypeParams{ctx, pp1, pp2}
+		mm_got := PropertyServiceClientMockListPropertyTypeParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmListPropertyType.t.Errorf("PropertyServiceHandlerMock.ListPropertyType got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmListPropertyType.t.Errorf("PropertyServiceClientMock.ListPropertyType got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmListPropertyType.ListPropertyTypeMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmListPropertyType.t.Errorf("PropertyServiceHandlerMock.ListPropertyType got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmListPropertyType.t.Errorf("PropertyServiceClientMock.ListPropertyType got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmListPropertyType.ListPropertyTypeMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
-			if mm_want_ptrs.pp2 != nil && !minimock.Equal(*mm_want_ptrs.pp2, mm_got.pp2) {
-				mmListPropertyType.t.Errorf("PropertyServiceHandlerMock.ListPropertyType got unexpected parameter pp2, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
-					mmListPropertyType.ListPropertyTypeMock.defaultExpectation.expectationOrigins.originPp2, *mm_want_ptrs.pp2, mm_got.pp2, minimock.Diff(*mm_want_ptrs.pp2, mm_got.pp2))
-			}
-
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmListPropertyType.t.Errorf("PropertyServiceHandlerMock.ListPropertyType got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmListPropertyType.t.Errorf("PropertyServiceClientMock.ListPropertyType got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmListPropertyType.ListPropertyTypeMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmListPropertyType.ListPropertyTypeMock.defaultExpectation.results
 		if mm_results == nil {
-			mmListPropertyType.t.Fatal("No results are set for the PropertyServiceHandlerMock.ListPropertyType")
+			mmListPropertyType.t.Fatal("No results are set for the PropertyServiceClientMock.ListPropertyType")
 		}
-		return (*mm_results).err
+		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmListPropertyType.funcListPropertyType != nil {
-		return mmListPropertyType.funcListPropertyType(ctx, pp1, pp2)
+		return mmListPropertyType.funcListPropertyType(ctx, pp1)
 	}
-	mmListPropertyType.t.Fatalf("Unexpected call to PropertyServiceHandlerMock.ListPropertyType. %v %v %v", ctx, pp1, pp2)
+	mmListPropertyType.t.Fatalf("Unexpected call to PropertyServiceClientMock.ListPropertyType. %v %v", ctx, pp1)
 	return
 }
 
-// ListPropertyTypeAfterCounter returns a count of finished PropertyServiceHandlerMock.ListPropertyType invocations
-func (mmListPropertyType *PropertyServiceHandlerMock) ListPropertyTypeAfterCounter() uint64 {
+// ListPropertyTypeAfterCounter returns a count of finished PropertyServiceClientMock.ListPropertyType invocations
+func (mmListPropertyType *PropertyServiceClientMock) ListPropertyTypeAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmListPropertyType.afterListPropertyTypeCounter)
 }
 
-// ListPropertyTypeBeforeCounter returns a count of PropertyServiceHandlerMock.ListPropertyType invocations
-func (mmListPropertyType *PropertyServiceHandlerMock) ListPropertyTypeBeforeCounter() uint64 {
+// ListPropertyTypeBeforeCounter returns a count of PropertyServiceClientMock.ListPropertyType invocations
+func (mmListPropertyType *PropertyServiceClientMock) ListPropertyTypeBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmListPropertyType.beforeListPropertyTypeCounter)
 }
 
-// Calls returns a list of arguments used in each call to PropertyServiceHandlerMock.ListPropertyType.
+// Calls returns a list of arguments used in each call to PropertyServiceClientMock.ListPropertyType.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmListPropertyType *mPropertyServiceHandlerMockListPropertyType) Calls() []*PropertyServiceHandlerMockListPropertyTypeParams {
+func (mmListPropertyType *mPropertyServiceClientMockListPropertyType) Calls() []*PropertyServiceClientMockListPropertyTypeParams {
 	mmListPropertyType.mutex.RLock()
 
-	argCopy := make([]*PropertyServiceHandlerMockListPropertyTypeParams, len(mmListPropertyType.callArgs))
+	argCopy := make([]*PropertyServiceClientMockListPropertyTypeParams, len(mmListPropertyType.callArgs))
 	copy(argCopy, mmListPropertyType.callArgs)
 
 	mmListPropertyType.mutex.RUnlock()
@@ -3268,7 +3208,7 @@ func (mmListPropertyType *mPropertyServiceHandlerMockListPropertyType) Calls() [
 
 // MinimockListPropertyTypeDone returns true if the count of the ListPropertyType invocations corresponds
 // the number of defined expectations
-func (m *PropertyServiceHandlerMock) MinimockListPropertyTypeDone() bool {
+func (m *PropertyServiceClientMock) MinimockListPropertyTypeDone() bool {
 	if m.ListPropertyTypeMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -3284,10 +3224,10 @@ func (m *PropertyServiceHandlerMock) MinimockListPropertyTypeDone() bool {
 }
 
 // MinimockListPropertyTypeInspect logs each unmet expectation
-func (m *PropertyServiceHandlerMock) MinimockListPropertyTypeInspect() {
+func (m *PropertyServiceClientMock) MinimockListPropertyTypeInspect() {
 	for _, e := range m.ListPropertyTypeMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to PropertyServiceHandlerMock.ListPropertyType at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to PropertyServiceClientMock.ListPropertyType at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -3295,71 +3235,69 @@ func (m *PropertyServiceHandlerMock) MinimockListPropertyTypeInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.ListPropertyTypeMock.defaultExpectation != nil && afterListPropertyTypeCounter < 1 {
 		if m.ListPropertyTypeMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to PropertyServiceHandlerMock.ListPropertyType at\n%s", m.ListPropertyTypeMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to PropertyServiceClientMock.ListPropertyType at\n%s", m.ListPropertyTypeMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to PropertyServiceHandlerMock.ListPropertyType at\n%s with params: %#v", m.ListPropertyTypeMock.defaultExpectation.expectationOrigins.origin, *m.ListPropertyTypeMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to PropertyServiceClientMock.ListPropertyType at\n%s with params: %#v", m.ListPropertyTypeMock.defaultExpectation.expectationOrigins.origin, *m.ListPropertyTypeMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcListPropertyType != nil && afterListPropertyTypeCounter < 1 {
-		m.t.Errorf("Expected call to PropertyServiceHandlerMock.ListPropertyType at\n%s", m.funcListPropertyTypeOrigin)
+		m.t.Errorf("Expected call to PropertyServiceClientMock.ListPropertyType at\n%s", m.funcListPropertyTypeOrigin)
 	}
 
 	if !m.ListPropertyTypeMock.invocationsDone() && afterListPropertyTypeCounter > 0 {
-		m.t.Errorf("Expected %d calls to PropertyServiceHandlerMock.ListPropertyType at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to PropertyServiceClientMock.ListPropertyType at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.ListPropertyTypeMock.expectedInvocations), m.ListPropertyTypeMock.expectedInvocationsOrigin, afterListPropertyTypeCounter)
 	}
 }
 
-type mPropertyServiceHandlerMockListSubscription struct {
+type mPropertyServiceClientMockListSubscription struct {
 	optional           bool
-	mock               *PropertyServiceHandlerMock
-	defaultExpectation *PropertyServiceHandlerMockListSubscriptionExpectation
-	expectations       []*PropertyServiceHandlerMockListSubscriptionExpectation
+	mock               *PropertyServiceClientMock
+	defaultExpectation *PropertyServiceClientMockListSubscriptionExpectation
+	expectations       []*PropertyServiceClientMockListSubscriptionExpectation
 
-	callArgs []*PropertyServiceHandlerMockListSubscriptionParams
+	callArgs []*PropertyServiceClientMockListSubscriptionParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// PropertyServiceHandlerMockListSubscriptionExpectation specifies expectation struct of the PropertyServiceHandler.ListSubscription
-type PropertyServiceHandlerMockListSubscriptionExpectation struct {
-	mock               *PropertyServiceHandlerMock
-	params             *PropertyServiceHandlerMockListSubscriptionParams
-	paramPtrs          *PropertyServiceHandlerMockListSubscriptionParamPtrs
-	expectationOrigins PropertyServiceHandlerMockListSubscriptionExpectationOrigins
-	results            *PropertyServiceHandlerMockListSubscriptionResults
+// PropertyServiceClientMockListSubscriptionExpectation specifies expectation struct of the PropertyServiceClient.ListSubscription
+type PropertyServiceClientMockListSubscriptionExpectation struct {
+	mock               *PropertyServiceClientMock
+	params             *PropertyServiceClientMockListSubscriptionParams
+	paramPtrs          *PropertyServiceClientMockListSubscriptionParamPtrs
+	expectationOrigins PropertyServiceClientMockListSubscriptionExpectationOrigins
+	results            *PropertyServiceClientMockListSubscriptionResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// PropertyServiceHandlerMockListSubscriptionParams contains parameters of the PropertyServiceHandler.ListSubscription
-type PropertyServiceHandlerMockListSubscriptionParams struct {
+// PropertyServiceClientMockListSubscriptionParams contains parameters of the PropertyServiceClient.ListSubscription
+type PropertyServiceClientMockListSubscriptionParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.ListSubscriptionRequest]
-	pp2 *connect.ServerStream[v1.ListSubscriptionResponse]
 }
 
-// PropertyServiceHandlerMockListSubscriptionParamPtrs contains pointers to parameters of the PropertyServiceHandler.ListSubscription
-type PropertyServiceHandlerMockListSubscriptionParamPtrs struct {
+// PropertyServiceClientMockListSubscriptionParamPtrs contains pointers to parameters of the PropertyServiceClient.ListSubscription
+type PropertyServiceClientMockListSubscriptionParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.ListSubscriptionRequest]
-	pp2 **connect.ServerStream[v1.ListSubscriptionResponse]
 }
 
-// PropertyServiceHandlerMockListSubscriptionResults contains results of the PropertyServiceHandler.ListSubscription
-type PropertyServiceHandlerMockListSubscriptionResults struct {
+// PropertyServiceClientMockListSubscriptionResults contains results of the PropertyServiceClient.ListSubscription
+type PropertyServiceClientMockListSubscriptionResults struct {
+	pp2 *connect.ServerStreamForClient[v1.ListSubscriptionResponse]
 	err error
 }
 
-// PropertyServiceHandlerMockListSubscriptionOrigins contains origins of expectations of the PropertyServiceHandler.ListSubscription
-type PropertyServiceHandlerMockListSubscriptionExpectationOrigins struct {
+// PropertyServiceClientMockListSubscriptionOrigins contains origins of expectations of the PropertyServiceClient.ListSubscription
+type PropertyServiceClientMockListSubscriptionExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
-	originPp2 string
 }
 
 // Marks this method to be optional. The default behavior of any method with Return() is '1 or more', meaning
@@ -3367,26 +3305,26 @@ type PropertyServiceHandlerMockListSubscriptionExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmListSubscription *mPropertyServiceHandlerMockListSubscription) Optional() *mPropertyServiceHandlerMockListSubscription {
+func (mmListSubscription *mPropertyServiceClientMockListSubscription) Optional() *mPropertyServiceClientMockListSubscription {
 	mmListSubscription.optional = true
 	return mmListSubscription
 }
 
-// Expect sets up expected params for PropertyServiceHandler.ListSubscription
-func (mmListSubscription *mPropertyServiceHandlerMockListSubscription) Expect(ctx context.Context, pp1 *connect.Request[v1.ListSubscriptionRequest], pp2 *connect.ServerStream[v1.ListSubscriptionResponse]) *mPropertyServiceHandlerMockListSubscription {
+// Expect sets up expected params for PropertyServiceClient.ListSubscription
+func (mmListSubscription *mPropertyServiceClientMockListSubscription) Expect(ctx context.Context, pp1 *connect.Request[v1.ListSubscriptionRequest]) *mPropertyServiceClientMockListSubscription {
 	if mmListSubscription.mock.funcListSubscription != nil {
-		mmListSubscription.mock.t.Fatalf("PropertyServiceHandlerMock.ListSubscription mock is already set by Set")
+		mmListSubscription.mock.t.Fatalf("PropertyServiceClientMock.ListSubscription mock is already set by Set")
 	}
 
 	if mmListSubscription.defaultExpectation == nil {
-		mmListSubscription.defaultExpectation = &PropertyServiceHandlerMockListSubscriptionExpectation{}
+		mmListSubscription.defaultExpectation = &PropertyServiceClientMockListSubscriptionExpectation{}
 	}
 
 	if mmListSubscription.defaultExpectation.paramPtrs != nil {
-		mmListSubscription.mock.t.Fatalf("PropertyServiceHandlerMock.ListSubscription mock is already set by ExpectParams functions")
+		mmListSubscription.mock.t.Fatalf("PropertyServiceClientMock.ListSubscription mock is already set by ExpectParams functions")
 	}
 
-	mmListSubscription.defaultExpectation.params = &PropertyServiceHandlerMockListSubscriptionParams{ctx, pp1, pp2}
+	mmListSubscription.defaultExpectation.params = &PropertyServiceClientMockListSubscriptionParams{ctx, pp1}
 	mmListSubscription.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmListSubscription.expectations {
 		if minimock.Equal(e.params, mmListSubscription.defaultExpectation.params) {
@@ -3397,22 +3335,22 @@ func (mmListSubscription *mPropertyServiceHandlerMockListSubscription) Expect(ct
 	return mmListSubscription
 }
 
-// ExpectCtxParam1 sets up expected param ctx for PropertyServiceHandler.ListSubscription
-func (mmListSubscription *mPropertyServiceHandlerMockListSubscription) ExpectCtxParam1(ctx context.Context) *mPropertyServiceHandlerMockListSubscription {
+// ExpectCtxParam1 sets up expected param ctx for PropertyServiceClient.ListSubscription
+func (mmListSubscription *mPropertyServiceClientMockListSubscription) ExpectCtxParam1(ctx context.Context) *mPropertyServiceClientMockListSubscription {
 	if mmListSubscription.mock.funcListSubscription != nil {
-		mmListSubscription.mock.t.Fatalf("PropertyServiceHandlerMock.ListSubscription mock is already set by Set")
+		mmListSubscription.mock.t.Fatalf("PropertyServiceClientMock.ListSubscription mock is already set by Set")
 	}
 
 	if mmListSubscription.defaultExpectation == nil {
-		mmListSubscription.defaultExpectation = &PropertyServiceHandlerMockListSubscriptionExpectation{}
+		mmListSubscription.defaultExpectation = &PropertyServiceClientMockListSubscriptionExpectation{}
 	}
 
 	if mmListSubscription.defaultExpectation.params != nil {
-		mmListSubscription.mock.t.Fatalf("PropertyServiceHandlerMock.ListSubscription mock is already set by Expect")
+		mmListSubscription.mock.t.Fatalf("PropertyServiceClientMock.ListSubscription mock is already set by Expect")
 	}
 
 	if mmListSubscription.defaultExpectation.paramPtrs == nil {
-		mmListSubscription.defaultExpectation.paramPtrs = &PropertyServiceHandlerMockListSubscriptionParamPtrs{}
+		mmListSubscription.defaultExpectation.paramPtrs = &PropertyServiceClientMockListSubscriptionParamPtrs{}
 	}
 	mmListSubscription.defaultExpectation.paramPtrs.ctx = &ctx
 	mmListSubscription.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -3420,22 +3358,22 @@ func (mmListSubscription *mPropertyServiceHandlerMockListSubscription) ExpectCtx
 	return mmListSubscription
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for PropertyServiceHandler.ListSubscription
-func (mmListSubscription *mPropertyServiceHandlerMockListSubscription) ExpectPp1Param2(pp1 *connect.Request[v1.ListSubscriptionRequest]) *mPropertyServiceHandlerMockListSubscription {
+// ExpectPp1Param2 sets up expected param pp1 for PropertyServiceClient.ListSubscription
+func (mmListSubscription *mPropertyServiceClientMockListSubscription) ExpectPp1Param2(pp1 *connect.Request[v1.ListSubscriptionRequest]) *mPropertyServiceClientMockListSubscription {
 	if mmListSubscription.mock.funcListSubscription != nil {
-		mmListSubscription.mock.t.Fatalf("PropertyServiceHandlerMock.ListSubscription mock is already set by Set")
+		mmListSubscription.mock.t.Fatalf("PropertyServiceClientMock.ListSubscription mock is already set by Set")
 	}
 
 	if mmListSubscription.defaultExpectation == nil {
-		mmListSubscription.defaultExpectation = &PropertyServiceHandlerMockListSubscriptionExpectation{}
+		mmListSubscription.defaultExpectation = &PropertyServiceClientMockListSubscriptionExpectation{}
 	}
 
 	if mmListSubscription.defaultExpectation.params != nil {
-		mmListSubscription.mock.t.Fatalf("PropertyServiceHandlerMock.ListSubscription mock is already set by Expect")
+		mmListSubscription.mock.t.Fatalf("PropertyServiceClientMock.ListSubscription mock is already set by Expect")
 	}
 
 	if mmListSubscription.defaultExpectation.paramPtrs == nil {
-		mmListSubscription.defaultExpectation.paramPtrs = &PropertyServiceHandlerMockListSubscriptionParamPtrs{}
+		mmListSubscription.defaultExpectation.paramPtrs = &PropertyServiceClientMockListSubscriptionParamPtrs{}
 	}
 	mmListSubscription.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmListSubscription.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -3443,33 +3381,10 @@ func (mmListSubscription *mPropertyServiceHandlerMockListSubscription) ExpectPp1
 	return mmListSubscription
 }
 
-// ExpectPp2Param3 sets up expected param pp2 for PropertyServiceHandler.ListSubscription
-func (mmListSubscription *mPropertyServiceHandlerMockListSubscription) ExpectPp2Param3(pp2 *connect.ServerStream[v1.ListSubscriptionResponse]) *mPropertyServiceHandlerMockListSubscription {
-	if mmListSubscription.mock.funcListSubscription != nil {
-		mmListSubscription.mock.t.Fatalf("PropertyServiceHandlerMock.ListSubscription mock is already set by Set")
-	}
-
-	if mmListSubscription.defaultExpectation == nil {
-		mmListSubscription.defaultExpectation = &PropertyServiceHandlerMockListSubscriptionExpectation{}
-	}
-
-	if mmListSubscription.defaultExpectation.params != nil {
-		mmListSubscription.mock.t.Fatalf("PropertyServiceHandlerMock.ListSubscription mock is already set by Expect")
-	}
-
-	if mmListSubscription.defaultExpectation.paramPtrs == nil {
-		mmListSubscription.defaultExpectation.paramPtrs = &PropertyServiceHandlerMockListSubscriptionParamPtrs{}
-	}
-	mmListSubscription.defaultExpectation.paramPtrs.pp2 = &pp2
-	mmListSubscription.defaultExpectation.expectationOrigins.originPp2 = minimock.CallerInfo(1)
-
-	return mmListSubscription
-}
-
-// Inspect accepts an inspector function that has same arguments as the PropertyServiceHandler.ListSubscription
-func (mmListSubscription *mPropertyServiceHandlerMockListSubscription) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.ListSubscriptionRequest], pp2 *connect.ServerStream[v1.ListSubscriptionResponse])) *mPropertyServiceHandlerMockListSubscription {
+// Inspect accepts an inspector function that has same arguments as the PropertyServiceClient.ListSubscription
+func (mmListSubscription *mPropertyServiceClientMockListSubscription) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.ListSubscriptionRequest])) *mPropertyServiceClientMockListSubscription {
 	if mmListSubscription.mock.inspectFuncListSubscription != nil {
-		mmListSubscription.mock.t.Fatalf("Inspect function is already set for PropertyServiceHandlerMock.ListSubscription")
+		mmListSubscription.mock.t.Fatalf("Inspect function is already set for PropertyServiceClientMock.ListSubscription")
 	}
 
 	mmListSubscription.mock.inspectFuncListSubscription = f
@@ -3477,28 +3392,28 @@ func (mmListSubscription *mPropertyServiceHandlerMockListSubscription) Inspect(f
 	return mmListSubscription
 }
 
-// Return sets up results that will be returned by PropertyServiceHandler.ListSubscription
-func (mmListSubscription *mPropertyServiceHandlerMockListSubscription) Return(err error) *PropertyServiceHandlerMock {
+// Return sets up results that will be returned by PropertyServiceClient.ListSubscription
+func (mmListSubscription *mPropertyServiceClientMockListSubscription) Return(pp2 *connect.ServerStreamForClient[v1.ListSubscriptionResponse], err error) *PropertyServiceClientMock {
 	if mmListSubscription.mock.funcListSubscription != nil {
-		mmListSubscription.mock.t.Fatalf("PropertyServiceHandlerMock.ListSubscription mock is already set by Set")
+		mmListSubscription.mock.t.Fatalf("PropertyServiceClientMock.ListSubscription mock is already set by Set")
 	}
 
 	if mmListSubscription.defaultExpectation == nil {
-		mmListSubscription.defaultExpectation = &PropertyServiceHandlerMockListSubscriptionExpectation{mock: mmListSubscription.mock}
+		mmListSubscription.defaultExpectation = &PropertyServiceClientMockListSubscriptionExpectation{mock: mmListSubscription.mock}
 	}
-	mmListSubscription.defaultExpectation.results = &PropertyServiceHandlerMockListSubscriptionResults{err}
+	mmListSubscription.defaultExpectation.results = &PropertyServiceClientMockListSubscriptionResults{pp2, err}
 	mmListSubscription.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmListSubscription.mock
 }
 
-// Set uses given function f to mock the PropertyServiceHandler.ListSubscription method
-func (mmListSubscription *mPropertyServiceHandlerMockListSubscription) Set(f func(ctx context.Context, pp1 *connect.Request[v1.ListSubscriptionRequest], pp2 *connect.ServerStream[v1.ListSubscriptionResponse]) (err error)) *PropertyServiceHandlerMock {
+// Set uses given function f to mock the PropertyServiceClient.ListSubscription method
+func (mmListSubscription *mPropertyServiceClientMockListSubscription) Set(f func(ctx context.Context, pp1 *connect.Request[v1.ListSubscriptionRequest]) (pp2 *connect.ServerStreamForClient[v1.ListSubscriptionResponse], err error)) *PropertyServiceClientMock {
 	if mmListSubscription.defaultExpectation != nil {
-		mmListSubscription.mock.t.Fatalf("Default expectation is already set for the PropertyServiceHandler.ListSubscription method")
+		mmListSubscription.mock.t.Fatalf("Default expectation is already set for the PropertyServiceClient.ListSubscription method")
 	}
 
 	if len(mmListSubscription.expectations) > 0 {
-		mmListSubscription.mock.t.Fatalf("Some expectations are already set for the PropertyServiceHandler.ListSubscription method")
+		mmListSubscription.mock.t.Fatalf("Some expectations are already set for the PropertyServiceClient.ListSubscription method")
 	}
 
 	mmListSubscription.mock.funcListSubscription = f
@@ -3506,39 +3421,39 @@ func (mmListSubscription *mPropertyServiceHandlerMockListSubscription) Set(f fun
 	return mmListSubscription.mock
 }
 
-// When sets expectation for the PropertyServiceHandler.ListSubscription which will trigger the result defined by the following
+// When sets expectation for the PropertyServiceClient.ListSubscription which will trigger the result defined by the following
 // Then helper
-func (mmListSubscription *mPropertyServiceHandlerMockListSubscription) When(ctx context.Context, pp1 *connect.Request[v1.ListSubscriptionRequest], pp2 *connect.ServerStream[v1.ListSubscriptionResponse]) *PropertyServiceHandlerMockListSubscriptionExpectation {
+func (mmListSubscription *mPropertyServiceClientMockListSubscription) When(ctx context.Context, pp1 *connect.Request[v1.ListSubscriptionRequest]) *PropertyServiceClientMockListSubscriptionExpectation {
 	if mmListSubscription.mock.funcListSubscription != nil {
-		mmListSubscription.mock.t.Fatalf("PropertyServiceHandlerMock.ListSubscription mock is already set by Set")
+		mmListSubscription.mock.t.Fatalf("PropertyServiceClientMock.ListSubscription mock is already set by Set")
 	}
 
-	expectation := &PropertyServiceHandlerMockListSubscriptionExpectation{
+	expectation := &PropertyServiceClientMockListSubscriptionExpectation{
 		mock:               mmListSubscription.mock,
-		params:             &PropertyServiceHandlerMockListSubscriptionParams{ctx, pp1, pp2},
-		expectationOrigins: PropertyServiceHandlerMockListSubscriptionExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &PropertyServiceClientMockListSubscriptionParams{ctx, pp1},
+		expectationOrigins: PropertyServiceClientMockListSubscriptionExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmListSubscription.expectations = append(mmListSubscription.expectations, expectation)
 	return expectation
 }
 
-// Then sets up PropertyServiceHandler.ListSubscription return parameters for the expectation previously defined by the When method
-func (e *PropertyServiceHandlerMockListSubscriptionExpectation) Then(err error) *PropertyServiceHandlerMock {
-	e.results = &PropertyServiceHandlerMockListSubscriptionResults{err}
+// Then sets up PropertyServiceClient.ListSubscription return parameters for the expectation previously defined by the When method
+func (e *PropertyServiceClientMockListSubscriptionExpectation) Then(pp2 *connect.ServerStreamForClient[v1.ListSubscriptionResponse], err error) *PropertyServiceClientMock {
+	e.results = &PropertyServiceClientMockListSubscriptionResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times PropertyServiceHandler.ListSubscription should be invoked
-func (mmListSubscription *mPropertyServiceHandlerMockListSubscription) Times(n uint64) *mPropertyServiceHandlerMockListSubscription {
+// Times sets number of times PropertyServiceClient.ListSubscription should be invoked
+func (mmListSubscription *mPropertyServiceClientMockListSubscription) Times(n uint64) *mPropertyServiceClientMockListSubscription {
 	if n == 0 {
-		mmListSubscription.mock.t.Fatalf("Times of PropertyServiceHandlerMock.ListSubscription mock can not be zero")
+		mmListSubscription.mock.t.Fatalf("Times of PropertyServiceClientMock.ListSubscription mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmListSubscription.expectedInvocations, n)
 	mmListSubscription.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmListSubscription
 }
 
-func (mmListSubscription *mPropertyServiceHandlerMockListSubscription) invocationsDone() bool {
+func (mmListSubscription *mPropertyServiceClientMockListSubscription) invocationsDone() bool {
 	if len(mmListSubscription.expectations) == 0 && mmListSubscription.defaultExpectation == nil && mmListSubscription.mock.funcListSubscription == nil {
 		return true
 	}
@@ -3549,18 +3464,18 @@ func (mmListSubscription *mPropertyServiceHandlerMockListSubscription) invocatio
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// ListSubscription implements mm_propertyv1connect.PropertyServiceHandler
-func (mmListSubscription *PropertyServiceHandlerMock) ListSubscription(ctx context.Context, pp1 *connect.Request[v1.ListSubscriptionRequest], pp2 *connect.ServerStream[v1.ListSubscriptionResponse]) (err error) {
+// ListSubscription implements mm_propertyv1connect.PropertyServiceClient
+func (mmListSubscription *PropertyServiceClientMock) ListSubscription(ctx context.Context, pp1 *connect.Request[v1.ListSubscriptionRequest]) (pp2 *connect.ServerStreamForClient[v1.ListSubscriptionResponse], err error) {
 	mm_atomic.AddUint64(&mmListSubscription.beforeListSubscriptionCounter, 1)
 	defer mm_atomic.AddUint64(&mmListSubscription.afterListSubscriptionCounter, 1)
 
 	mmListSubscription.t.Helper()
 
 	if mmListSubscription.inspectFuncListSubscription != nil {
-		mmListSubscription.inspectFuncListSubscription(ctx, pp1, pp2)
+		mmListSubscription.inspectFuncListSubscription(ctx, pp1)
 	}
 
-	mm_params := PropertyServiceHandlerMockListSubscriptionParams{ctx, pp1, pp2}
+	mm_params := PropertyServiceClientMockListSubscriptionParams{ctx, pp1}
 
 	// Record call args
 	mmListSubscription.ListSubscriptionMock.mutex.Lock()
@@ -3570,7 +3485,7 @@ func (mmListSubscription *PropertyServiceHandlerMock) ListSubscription(ctx conte
 	for _, e := range mmListSubscription.ListSubscriptionMock.expectations {
 		if minimock.Equal(*e.params, mm_params) {
 			mm_atomic.AddUint64(&e.Counter, 1)
-			return e.results.err
+			return e.results.pp2, e.results.err
 		}
 	}
 
@@ -3579,59 +3494,54 @@ func (mmListSubscription *PropertyServiceHandlerMock) ListSubscription(ctx conte
 		mm_want := mmListSubscription.ListSubscriptionMock.defaultExpectation.params
 		mm_want_ptrs := mmListSubscription.ListSubscriptionMock.defaultExpectation.paramPtrs
 
-		mm_got := PropertyServiceHandlerMockListSubscriptionParams{ctx, pp1, pp2}
+		mm_got := PropertyServiceClientMockListSubscriptionParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmListSubscription.t.Errorf("PropertyServiceHandlerMock.ListSubscription got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmListSubscription.t.Errorf("PropertyServiceClientMock.ListSubscription got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmListSubscription.ListSubscriptionMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmListSubscription.t.Errorf("PropertyServiceHandlerMock.ListSubscription got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmListSubscription.t.Errorf("PropertyServiceClientMock.ListSubscription got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmListSubscription.ListSubscriptionMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
-			if mm_want_ptrs.pp2 != nil && !minimock.Equal(*mm_want_ptrs.pp2, mm_got.pp2) {
-				mmListSubscription.t.Errorf("PropertyServiceHandlerMock.ListSubscription got unexpected parameter pp2, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
-					mmListSubscription.ListSubscriptionMock.defaultExpectation.expectationOrigins.originPp2, *mm_want_ptrs.pp2, mm_got.pp2, minimock.Diff(*mm_want_ptrs.pp2, mm_got.pp2))
-			}
-
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmListSubscription.t.Errorf("PropertyServiceHandlerMock.ListSubscription got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmListSubscription.t.Errorf("PropertyServiceClientMock.ListSubscription got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmListSubscription.ListSubscriptionMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmListSubscription.ListSubscriptionMock.defaultExpectation.results
 		if mm_results == nil {
-			mmListSubscription.t.Fatal("No results are set for the PropertyServiceHandlerMock.ListSubscription")
+			mmListSubscription.t.Fatal("No results are set for the PropertyServiceClientMock.ListSubscription")
 		}
-		return (*mm_results).err
+		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmListSubscription.funcListSubscription != nil {
-		return mmListSubscription.funcListSubscription(ctx, pp1, pp2)
+		return mmListSubscription.funcListSubscription(ctx, pp1)
 	}
-	mmListSubscription.t.Fatalf("Unexpected call to PropertyServiceHandlerMock.ListSubscription. %v %v %v", ctx, pp1, pp2)
+	mmListSubscription.t.Fatalf("Unexpected call to PropertyServiceClientMock.ListSubscription. %v %v", ctx, pp1)
 	return
 }
 
-// ListSubscriptionAfterCounter returns a count of finished PropertyServiceHandlerMock.ListSubscription invocations
-func (mmListSubscription *PropertyServiceHandlerMock) ListSubscriptionAfterCounter() uint64 {
+// ListSubscriptionAfterCounter returns a count of finished PropertyServiceClientMock.ListSubscription invocations
+func (mmListSubscription *PropertyServiceClientMock) ListSubscriptionAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmListSubscription.afterListSubscriptionCounter)
 }
 
-// ListSubscriptionBeforeCounter returns a count of PropertyServiceHandlerMock.ListSubscription invocations
-func (mmListSubscription *PropertyServiceHandlerMock) ListSubscriptionBeforeCounter() uint64 {
+// ListSubscriptionBeforeCounter returns a count of PropertyServiceClientMock.ListSubscription invocations
+func (mmListSubscription *PropertyServiceClientMock) ListSubscriptionBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmListSubscription.beforeListSubscriptionCounter)
 }
 
-// Calls returns a list of arguments used in each call to PropertyServiceHandlerMock.ListSubscription.
+// Calls returns a list of arguments used in each call to PropertyServiceClientMock.ListSubscription.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmListSubscription *mPropertyServiceHandlerMockListSubscription) Calls() []*PropertyServiceHandlerMockListSubscriptionParams {
+func (mmListSubscription *mPropertyServiceClientMockListSubscription) Calls() []*PropertyServiceClientMockListSubscriptionParams {
 	mmListSubscription.mutex.RLock()
 
-	argCopy := make([]*PropertyServiceHandlerMockListSubscriptionParams, len(mmListSubscription.callArgs))
+	argCopy := make([]*PropertyServiceClientMockListSubscriptionParams, len(mmListSubscription.callArgs))
 	copy(argCopy, mmListSubscription.callArgs)
 
 	mmListSubscription.mutex.RUnlock()
@@ -3641,7 +3551,7 @@ func (mmListSubscription *mPropertyServiceHandlerMockListSubscription) Calls() [
 
 // MinimockListSubscriptionDone returns true if the count of the ListSubscription invocations corresponds
 // the number of defined expectations
-func (m *PropertyServiceHandlerMock) MinimockListSubscriptionDone() bool {
+func (m *PropertyServiceClientMock) MinimockListSubscriptionDone() bool {
 	if m.ListSubscriptionMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -3657,10 +3567,10 @@ func (m *PropertyServiceHandlerMock) MinimockListSubscriptionDone() bool {
 }
 
 // MinimockListSubscriptionInspect logs each unmet expectation
-func (m *PropertyServiceHandlerMock) MinimockListSubscriptionInspect() {
+func (m *PropertyServiceClientMock) MinimockListSubscriptionInspect() {
 	for _, e := range m.ListSubscriptionMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to PropertyServiceHandlerMock.ListSubscription at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to PropertyServiceClientMock.ListSubscription at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -3668,71 +3578,69 @@ func (m *PropertyServiceHandlerMock) MinimockListSubscriptionInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.ListSubscriptionMock.defaultExpectation != nil && afterListSubscriptionCounter < 1 {
 		if m.ListSubscriptionMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to PropertyServiceHandlerMock.ListSubscription at\n%s", m.ListSubscriptionMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to PropertyServiceClientMock.ListSubscription at\n%s", m.ListSubscriptionMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to PropertyServiceHandlerMock.ListSubscription at\n%s with params: %#v", m.ListSubscriptionMock.defaultExpectation.expectationOrigins.origin, *m.ListSubscriptionMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to PropertyServiceClientMock.ListSubscription at\n%s with params: %#v", m.ListSubscriptionMock.defaultExpectation.expectationOrigins.origin, *m.ListSubscriptionMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcListSubscription != nil && afterListSubscriptionCounter < 1 {
-		m.t.Errorf("Expected call to PropertyServiceHandlerMock.ListSubscription at\n%s", m.funcListSubscriptionOrigin)
+		m.t.Errorf("Expected call to PropertyServiceClientMock.ListSubscription at\n%s", m.funcListSubscriptionOrigin)
 	}
 
 	if !m.ListSubscriptionMock.invocationsDone() && afterListSubscriptionCounter > 0 {
-		m.t.Errorf("Expected %d calls to PropertyServiceHandlerMock.ListSubscription at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to PropertyServiceClientMock.ListSubscription at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.ListSubscriptionMock.expectedInvocations), m.ListSubscriptionMock.expectedInvocationsOrigin, afterListSubscriptionCounter)
 	}
 }
 
-type mPropertyServiceHandlerMockSearchProperty struct {
+type mPropertyServiceClientMockSearchProperty struct {
 	optional           bool
-	mock               *PropertyServiceHandlerMock
-	defaultExpectation *PropertyServiceHandlerMockSearchPropertyExpectation
-	expectations       []*PropertyServiceHandlerMockSearchPropertyExpectation
+	mock               *PropertyServiceClientMock
+	defaultExpectation *PropertyServiceClientMockSearchPropertyExpectation
+	expectations       []*PropertyServiceClientMockSearchPropertyExpectation
 
-	callArgs []*PropertyServiceHandlerMockSearchPropertyParams
+	callArgs []*PropertyServiceClientMockSearchPropertyParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// PropertyServiceHandlerMockSearchPropertyExpectation specifies expectation struct of the PropertyServiceHandler.SearchProperty
-type PropertyServiceHandlerMockSearchPropertyExpectation struct {
-	mock               *PropertyServiceHandlerMock
-	params             *PropertyServiceHandlerMockSearchPropertyParams
-	paramPtrs          *PropertyServiceHandlerMockSearchPropertyParamPtrs
-	expectationOrigins PropertyServiceHandlerMockSearchPropertyExpectationOrigins
-	results            *PropertyServiceHandlerMockSearchPropertyResults
+// PropertyServiceClientMockSearchPropertyExpectation specifies expectation struct of the PropertyServiceClient.SearchProperty
+type PropertyServiceClientMockSearchPropertyExpectation struct {
+	mock               *PropertyServiceClientMock
+	params             *PropertyServiceClientMockSearchPropertyParams
+	paramPtrs          *PropertyServiceClientMockSearchPropertyParamPtrs
+	expectationOrigins PropertyServiceClientMockSearchPropertyExpectationOrigins
+	results            *PropertyServiceClientMockSearchPropertyResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// PropertyServiceHandlerMockSearchPropertyParams contains parameters of the PropertyServiceHandler.SearchProperty
-type PropertyServiceHandlerMockSearchPropertyParams struct {
+// PropertyServiceClientMockSearchPropertyParams contains parameters of the PropertyServiceClient.SearchProperty
+type PropertyServiceClientMockSearchPropertyParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.SearchPropertyRequest]
-	pp2 *connect.ServerStream[v1.SearchPropertyResponse]
 }
 
-// PropertyServiceHandlerMockSearchPropertyParamPtrs contains pointers to parameters of the PropertyServiceHandler.SearchProperty
-type PropertyServiceHandlerMockSearchPropertyParamPtrs struct {
+// PropertyServiceClientMockSearchPropertyParamPtrs contains pointers to parameters of the PropertyServiceClient.SearchProperty
+type PropertyServiceClientMockSearchPropertyParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.SearchPropertyRequest]
-	pp2 **connect.ServerStream[v1.SearchPropertyResponse]
 }
 
-// PropertyServiceHandlerMockSearchPropertyResults contains results of the PropertyServiceHandler.SearchProperty
-type PropertyServiceHandlerMockSearchPropertyResults struct {
+// PropertyServiceClientMockSearchPropertyResults contains results of the PropertyServiceClient.SearchProperty
+type PropertyServiceClientMockSearchPropertyResults struct {
+	pp2 *connect.ServerStreamForClient[v1.SearchPropertyResponse]
 	err error
 }
 
-// PropertyServiceHandlerMockSearchPropertyOrigins contains origins of expectations of the PropertyServiceHandler.SearchProperty
-type PropertyServiceHandlerMockSearchPropertyExpectationOrigins struct {
+// PropertyServiceClientMockSearchPropertyOrigins contains origins of expectations of the PropertyServiceClient.SearchProperty
+type PropertyServiceClientMockSearchPropertyExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
-	originPp2 string
 }
 
 // Marks this method to be optional. The default behavior of any method with Return() is '1 or more', meaning
@@ -3740,26 +3648,26 @@ type PropertyServiceHandlerMockSearchPropertyExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmSearchProperty *mPropertyServiceHandlerMockSearchProperty) Optional() *mPropertyServiceHandlerMockSearchProperty {
+func (mmSearchProperty *mPropertyServiceClientMockSearchProperty) Optional() *mPropertyServiceClientMockSearchProperty {
 	mmSearchProperty.optional = true
 	return mmSearchProperty
 }
 
-// Expect sets up expected params for PropertyServiceHandler.SearchProperty
-func (mmSearchProperty *mPropertyServiceHandlerMockSearchProperty) Expect(ctx context.Context, pp1 *connect.Request[v1.SearchPropertyRequest], pp2 *connect.ServerStream[v1.SearchPropertyResponse]) *mPropertyServiceHandlerMockSearchProperty {
+// Expect sets up expected params for PropertyServiceClient.SearchProperty
+func (mmSearchProperty *mPropertyServiceClientMockSearchProperty) Expect(ctx context.Context, pp1 *connect.Request[v1.SearchPropertyRequest]) *mPropertyServiceClientMockSearchProperty {
 	if mmSearchProperty.mock.funcSearchProperty != nil {
-		mmSearchProperty.mock.t.Fatalf("PropertyServiceHandlerMock.SearchProperty mock is already set by Set")
+		mmSearchProperty.mock.t.Fatalf("PropertyServiceClientMock.SearchProperty mock is already set by Set")
 	}
 
 	if mmSearchProperty.defaultExpectation == nil {
-		mmSearchProperty.defaultExpectation = &PropertyServiceHandlerMockSearchPropertyExpectation{}
+		mmSearchProperty.defaultExpectation = &PropertyServiceClientMockSearchPropertyExpectation{}
 	}
 
 	if mmSearchProperty.defaultExpectation.paramPtrs != nil {
-		mmSearchProperty.mock.t.Fatalf("PropertyServiceHandlerMock.SearchProperty mock is already set by ExpectParams functions")
+		mmSearchProperty.mock.t.Fatalf("PropertyServiceClientMock.SearchProperty mock is already set by ExpectParams functions")
 	}
 
-	mmSearchProperty.defaultExpectation.params = &PropertyServiceHandlerMockSearchPropertyParams{ctx, pp1, pp2}
+	mmSearchProperty.defaultExpectation.params = &PropertyServiceClientMockSearchPropertyParams{ctx, pp1}
 	mmSearchProperty.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmSearchProperty.expectations {
 		if minimock.Equal(e.params, mmSearchProperty.defaultExpectation.params) {
@@ -3770,22 +3678,22 @@ func (mmSearchProperty *mPropertyServiceHandlerMockSearchProperty) Expect(ctx co
 	return mmSearchProperty
 }
 
-// ExpectCtxParam1 sets up expected param ctx for PropertyServiceHandler.SearchProperty
-func (mmSearchProperty *mPropertyServiceHandlerMockSearchProperty) ExpectCtxParam1(ctx context.Context) *mPropertyServiceHandlerMockSearchProperty {
+// ExpectCtxParam1 sets up expected param ctx for PropertyServiceClient.SearchProperty
+func (mmSearchProperty *mPropertyServiceClientMockSearchProperty) ExpectCtxParam1(ctx context.Context) *mPropertyServiceClientMockSearchProperty {
 	if mmSearchProperty.mock.funcSearchProperty != nil {
-		mmSearchProperty.mock.t.Fatalf("PropertyServiceHandlerMock.SearchProperty mock is already set by Set")
+		mmSearchProperty.mock.t.Fatalf("PropertyServiceClientMock.SearchProperty mock is already set by Set")
 	}
 
 	if mmSearchProperty.defaultExpectation == nil {
-		mmSearchProperty.defaultExpectation = &PropertyServiceHandlerMockSearchPropertyExpectation{}
+		mmSearchProperty.defaultExpectation = &PropertyServiceClientMockSearchPropertyExpectation{}
 	}
 
 	if mmSearchProperty.defaultExpectation.params != nil {
-		mmSearchProperty.mock.t.Fatalf("PropertyServiceHandlerMock.SearchProperty mock is already set by Expect")
+		mmSearchProperty.mock.t.Fatalf("PropertyServiceClientMock.SearchProperty mock is already set by Expect")
 	}
 
 	if mmSearchProperty.defaultExpectation.paramPtrs == nil {
-		mmSearchProperty.defaultExpectation.paramPtrs = &PropertyServiceHandlerMockSearchPropertyParamPtrs{}
+		mmSearchProperty.defaultExpectation.paramPtrs = &PropertyServiceClientMockSearchPropertyParamPtrs{}
 	}
 	mmSearchProperty.defaultExpectation.paramPtrs.ctx = &ctx
 	mmSearchProperty.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -3793,22 +3701,22 @@ func (mmSearchProperty *mPropertyServiceHandlerMockSearchProperty) ExpectCtxPara
 	return mmSearchProperty
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for PropertyServiceHandler.SearchProperty
-func (mmSearchProperty *mPropertyServiceHandlerMockSearchProperty) ExpectPp1Param2(pp1 *connect.Request[v1.SearchPropertyRequest]) *mPropertyServiceHandlerMockSearchProperty {
+// ExpectPp1Param2 sets up expected param pp1 for PropertyServiceClient.SearchProperty
+func (mmSearchProperty *mPropertyServiceClientMockSearchProperty) ExpectPp1Param2(pp1 *connect.Request[v1.SearchPropertyRequest]) *mPropertyServiceClientMockSearchProperty {
 	if mmSearchProperty.mock.funcSearchProperty != nil {
-		mmSearchProperty.mock.t.Fatalf("PropertyServiceHandlerMock.SearchProperty mock is already set by Set")
+		mmSearchProperty.mock.t.Fatalf("PropertyServiceClientMock.SearchProperty mock is already set by Set")
 	}
 
 	if mmSearchProperty.defaultExpectation == nil {
-		mmSearchProperty.defaultExpectation = &PropertyServiceHandlerMockSearchPropertyExpectation{}
+		mmSearchProperty.defaultExpectation = &PropertyServiceClientMockSearchPropertyExpectation{}
 	}
 
 	if mmSearchProperty.defaultExpectation.params != nil {
-		mmSearchProperty.mock.t.Fatalf("PropertyServiceHandlerMock.SearchProperty mock is already set by Expect")
+		mmSearchProperty.mock.t.Fatalf("PropertyServiceClientMock.SearchProperty mock is already set by Expect")
 	}
 
 	if mmSearchProperty.defaultExpectation.paramPtrs == nil {
-		mmSearchProperty.defaultExpectation.paramPtrs = &PropertyServiceHandlerMockSearchPropertyParamPtrs{}
+		mmSearchProperty.defaultExpectation.paramPtrs = &PropertyServiceClientMockSearchPropertyParamPtrs{}
 	}
 	mmSearchProperty.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmSearchProperty.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -3816,33 +3724,10 @@ func (mmSearchProperty *mPropertyServiceHandlerMockSearchProperty) ExpectPp1Para
 	return mmSearchProperty
 }
 
-// ExpectPp2Param3 sets up expected param pp2 for PropertyServiceHandler.SearchProperty
-func (mmSearchProperty *mPropertyServiceHandlerMockSearchProperty) ExpectPp2Param3(pp2 *connect.ServerStream[v1.SearchPropertyResponse]) *mPropertyServiceHandlerMockSearchProperty {
-	if mmSearchProperty.mock.funcSearchProperty != nil {
-		mmSearchProperty.mock.t.Fatalf("PropertyServiceHandlerMock.SearchProperty mock is already set by Set")
-	}
-
-	if mmSearchProperty.defaultExpectation == nil {
-		mmSearchProperty.defaultExpectation = &PropertyServiceHandlerMockSearchPropertyExpectation{}
-	}
-
-	if mmSearchProperty.defaultExpectation.params != nil {
-		mmSearchProperty.mock.t.Fatalf("PropertyServiceHandlerMock.SearchProperty mock is already set by Expect")
-	}
-
-	if mmSearchProperty.defaultExpectation.paramPtrs == nil {
-		mmSearchProperty.defaultExpectation.paramPtrs = &PropertyServiceHandlerMockSearchPropertyParamPtrs{}
-	}
-	mmSearchProperty.defaultExpectation.paramPtrs.pp2 = &pp2
-	mmSearchProperty.defaultExpectation.expectationOrigins.originPp2 = minimock.CallerInfo(1)
-
-	return mmSearchProperty
-}
-
-// Inspect accepts an inspector function that has same arguments as the PropertyServiceHandler.SearchProperty
-func (mmSearchProperty *mPropertyServiceHandlerMockSearchProperty) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.SearchPropertyRequest], pp2 *connect.ServerStream[v1.SearchPropertyResponse])) *mPropertyServiceHandlerMockSearchProperty {
+// Inspect accepts an inspector function that has same arguments as the PropertyServiceClient.SearchProperty
+func (mmSearchProperty *mPropertyServiceClientMockSearchProperty) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.SearchPropertyRequest])) *mPropertyServiceClientMockSearchProperty {
 	if mmSearchProperty.mock.inspectFuncSearchProperty != nil {
-		mmSearchProperty.mock.t.Fatalf("Inspect function is already set for PropertyServiceHandlerMock.SearchProperty")
+		mmSearchProperty.mock.t.Fatalf("Inspect function is already set for PropertyServiceClientMock.SearchProperty")
 	}
 
 	mmSearchProperty.mock.inspectFuncSearchProperty = f
@@ -3850,28 +3735,28 @@ func (mmSearchProperty *mPropertyServiceHandlerMockSearchProperty) Inspect(f fun
 	return mmSearchProperty
 }
 
-// Return sets up results that will be returned by PropertyServiceHandler.SearchProperty
-func (mmSearchProperty *mPropertyServiceHandlerMockSearchProperty) Return(err error) *PropertyServiceHandlerMock {
+// Return sets up results that will be returned by PropertyServiceClient.SearchProperty
+func (mmSearchProperty *mPropertyServiceClientMockSearchProperty) Return(pp2 *connect.ServerStreamForClient[v1.SearchPropertyResponse], err error) *PropertyServiceClientMock {
 	if mmSearchProperty.mock.funcSearchProperty != nil {
-		mmSearchProperty.mock.t.Fatalf("PropertyServiceHandlerMock.SearchProperty mock is already set by Set")
+		mmSearchProperty.mock.t.Fatalf("PropertyServiceClientMock.SearchProperty mock is already set by Set")
 	}
 
 	if mmSearchProperty.defaultExpectation == nil {
-		mmSearchProperty.defaultExpectation = &PropertyServiceHandlerMockSearchPropertyExpectation{mock: mmSearchProperty.mock}
+		mmSearchProperty.defaultExpectation = &PropertyServiceClientMockSearchPropertyExpectation{mock: mmSearchProperty.mock}
 	}
-	mmSearchProperty.defaultExpectation.results = &PropertyServiceHandlerMockSearchPropertyResults{err}
+	mmSearchProperty.defaultExpectation.results = &PropertyServiceClientMockSearchPropertyResults{pp2, err}
 	mmSearchProperty.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmSearchProperty.mock
 }
 
-// Set uses given function f to mock the PropertyServiceHandler.SearchProperty method
-func (mmSearchProperty *mPropertyServiceHandlerMockSearchProperty) Set(f func(ctx context.Context, pp1 *connect.Request[v1.SearchPropertyRequest], pp2 *connect.ServerStream[v1.SearchPropertyResponse]) (err error)) *PropertyServiceHandlerMock {
+// Set uses given function f to mock the PropertyServiceClient.SearchProperty method
+func (mmSearchProperty *mPropertyServiceClientMockSearchProperty) Set(f func(ctx context.Context, pp1 *connect.Request[v1.SearchPropertyRequest]) (pp2 *connect.ServerStreamForClient[v1.SearchPropertyResponse], err error)) *PropertyServiceClientMock {
 	if mmSearchProperty.defaultExpectation != nil {
-		mmSearchProperty.mock.t.Fatalf("Default expectation is already set for the PropertyServiceHandler.SearchProperty method")
+		mmSearchProperty.mock.t.Fatalf("Default expectation is already set for the PropertyServiceClient.SearchProperty method")
 	}
 
 	if len(mmSearchProperty.expectations) > 0 {
-		mmSearchProperty.mock.t.Fatalf("Some expectations are already set for the PropertyServiceHandler.SearchProperty method")
+		mmSearchProperty.mock.t.Fatalf("Some expectations are already set for the PropertyServiceClient.SearchProperty method")
 	}
 
 	mmSearchProperty.mock.funcSearchProperty = f
@@ -3879,39 +3764,39 @@ func (mmSearchProperty *mPropertyServiceHandlerMockSearchProperty) Set(f func(ct
 	return mmSearchProperty.mock
 }
 
-// When sets expectation for the PropertyServiceHandler.SearchProperty which will trigger the result defined by the following
+// When sets expectation for the PropertyServiceClient.SearchProperty which will trigger the result defined by the following
 // Then helper
-func (mmSearchProperty *mPropertyServiceHandlerMockSearchProperty) When(ctx context.Context, pp1 *connect.Request[v1.SearchPropertyRequest], pp2 *connect.ServerStream[v1.SearchPropertyResponse]) *PropertyServiceHandlerMockSearchPropertyExpectation {
+func (mmSearchProperty *mPropertyServiceClientMockSearchProperty) When(ctx context.Context, pp1 *connect.Request[v1.SearchPropertyRequest]) *PropertyServiceClientMockSearchPropertyExpectation {
 	if mmSearchProperty.mock.funcSearchProperty != nil {
-		mmSearchProperty.mock.t.Fatalf("PropertyServiceHandlerMock.SearchProperty mock is already set by Set")
+		mmSearchProperty.mock.t.Fatalf("PropertyServiceClientMock.SearchProperty mock is already set by Set")
 	}
 
-	expectation := &PropertyServiceHandlerMockSearchPropertyExpectation{
+	expectation := &PropertyServiceClientMockSearchPropertyExpectation{
 		mock:               mmSearchProperty.mock,
-		params:             &PropertyServiceHandlerMockSearchPropertyParams{ctx, pp1, pp2},
-		expectationOrigins: PropertyServiceHandlerMockSearchPropertyExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &PropertyServiceClientMockSearchPropertyParams{ctx, pp1},
+		expectationOrigins: PropertyServiceClientMockSearchPropertyExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmSearchProperty.expectations = append(mmSearchProperty.expectations, expectation)
 	return expectation
 }
 
-// Then sets up PropertyServiceHandler.SearchProperty return parameters for the expectation previously defined by the When method
-func (e *PropertyServiceHandlerMockSearchPropertyExpectation) Then(err error) *PropertyServiceHandlerMock {
-	e.results = &PropertyServiceHandlerMockSearchPropertyResults{err}
+// Then sets up PropertyServiceClient.SearchProperty return parameters for the expectation previously defined by the When method
+func (e *PropertyServiceClientMockSearchPropertyExpectation) Then(pp2 *connect.ServerStreamForClient[v1.SearchPropertyResponse], err error) *PropertyServiceClientMock {
+	e.results = &PropertyServiceClientMockSearchPropertyResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times PropertyServiceHandler.SearchProperty should be invoked
-func (mmSearchProperty *mPropertyServiceHandlerMockSearchProperty) Times(n uint64) *mPropertyServiceHandlerMockSearchProperty {
+// Times sets number of times PropertyServiceClient.SearchProperty should be invoked
+func (mmSearchProperty *mPropertyServiceClientMockSearchProperty) Times(n uint64) *mPropertyServiceClientMockSearchProperty {
 	if n == 0 {
-		mmSearchProperty.mock.t.Fatalf("Times of PropertyServiceHandlerMock.SearchProperty mock can not be zero")
+		mmSearchProperty.mock.t.Fatalf("Times of PropertyServiceClientMock.SearchProperty mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmSearchProperty.expectedInvocations, n)
 	mmSearchProperty.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmSearchProperty
 }
 
-func (mmSearchProperty *mPropertyServiceHandlerMockSearchProperty) invocationsDone() bool {
+func (mmSearchProperty *mPropertyServiceClientMockSearchProperty) invocationsDone() bool {
 	if len(mmSearchProperty.expectations) == 0 && mmSearchProperty.defaultExpectation == nil && mmSearchProperty.mock.funcSearchProperty == nil {
 		return true
 	}
@@ -3922,18 +3807,18 @@ func (mmSearchProperty *mPropertyServiceHandlerMockSearchProperty) invocationsDo
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// SearchProperty implements mm_propertyv1connect.PropertyServiceHandler
-func (mmSearchProperty *PropertyServiceHandlerMock) SearchProperty(ctx context.Context, pp1 *connect.Request[v1.SearchPropertyRequest], pp2 *connect.ServerStream[v1.SearchPropertyResponse]) (err error) {
+// SearchProperty implements mm_propertyv1connect.PropertyServiceClient
+func (mmSearchProperty *PropertyServiceClientMock) SearchProperty(ctx context.Context, pp1 *connect.Request[v1.SearchPropertyRequest]) (pp2 *connect.ServerStreamForClient[v1.SearchPropertyResponse], err error) {
 	mm_atomic.AddUint64(&mmSearchProperty.beforeSearchPropertyCounter, 1)
 	defer mm_atomic.AddUint64(&mmSearchProperty.afterSearchPropertyCounter, 1)
 
 	mmSearchProperty.t.Helper()
 
 	if mmSearchProperty.inspectFuncSearchProperty != nil {
-		mmSearchProperty.inspectFuncSearchProperty(ctx, pp1, pp2)
+		mmSearchProperty.inspectFuncSearchProperty(ctx, pp1)
 	}
 
-	mm_params := PropertyServiceHandlerMockSearchPropertyParams{ctx, pp1, pp2}
+	mm_params := PropertyServiceClientMockSearchPropertyParams{ctx, pp1}
 
 	// Record call args
 	mmSearchProperty.SearchPropertyMock.mutex.Lock()
@@ -3943,7 +3828,7 @@ func (mmSearchProperty *PropertyServiceHandlerMock) SearchProperty(ctx context.C
 	for _, e := range mmSearchProperty.SearchPropertyMock.expectations {
 		if minimock.Equal(*e.params, mm_params) {
 			mm_atomic.AddUint64(&e.Counter, 1)
-			return e.results.err
+			return e.results.pp2, e.results.err
 		}
 	}
 
@@ -3952,59 +3837,54 @@ func (mmSearchProperty *PropertyServiceHandlerMock) SearchProperty(ctx context.C
 		mm_want := mmSearchProperty.SearchPropertyMock.defaultExpectation.params
 		mm_want_ptrs := mmSearchProperty.SearchPropertyMock.defaultExpectation.paramPtrs
 
-		mm_got := PropertyServiceHandlerMockSearchPropertyParams{ctx, pp1, pp2}
+		mm_got := PropertyServiceClientMockSearchPropertyParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmSearchProperty.t.Errorf("PropertyServiceHandlerMock.SearchProperty got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmSearchProperty.t.Errorf("PropertyServiceClientMock.SearchProperty got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmSearchProperty.SearchPropertyMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmSearchProperty.t.Errorf("PropertyServiceHandlerMock.SearchProperty got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmSearchProperty.t.Errorf("PropertyServiceClientMock.SearchProperty got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmSearchProperty.SearchPropertyMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
-			if mm_want_ptrs.pp2 != nil && !minimock.Equal(*mm_want_ptrs.pp2, mm_got.pp2) {
-				mmSearchProperty.t.Errorf("PropertyServiceHandlerMock.SearchProperty got unexpected parameter pp2, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
-					mmSearchProperty.SearchPropertyMock.defaultExpectation.expectationOrigins.originPp2, *mm_want_ptrs.pp2, mm_got.pp2, minimock.Diff(*mm_want_ptrs.pp2, mm_got.pp2))
-			}
-
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmSearchProperty.t.Errorf("PropertyServiceHandlerMock.SearchProperty got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmSearchProperty.t.Errorf("PropertyServiceClientMock.SearchProperty got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmSearchProperty.SearchPropertyMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmSearchProperty.SearchPropertyMock.defaultExpectation.results
 		if mm_results == nil {
-			mmSearchProperty.t.Fatal("No results are set for the PropertyServiceHandlerMock.SearchProperty")
+			mmSearchProperty.t.Fatal("No results are set for the PropertyServiceClientMock.SearchProperty")
 		}
-		return (*mm_results).err
+		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmSearchProperty.funcSearchProperty != nil {
-		return mmSearchProperty.funcSearchProperty(ctx, pp1, pp2)
+		return mmSearchProperty.funcSearchProperty(ctx, pp1)
 	}
-	mmSearchProperty.t.Fatalf("Unexpected call to PropertyServiceHandlerMock.SearchProperty. %v %v %v", ctx, pp1, pp2)
+	mmSearchProperty.t.Fatalf("Unexpected call to PropertyServiceClientMock.SearchProperty. %v %v", ctx, pp1)
 	return
 }
 
-// SearchPropertyAfterCounter returns a count of finished PropertyServiceHandlerMock.SearchProperty invocations
-func (mmSearchProperty *PropertyServiceHandlerMock) SearchPropertyAfterCounter() uint64 {
+// SearchPropertyAfterCounter returns a count of finished PropertyServiceClientMock.SearchProperty invocations
+func (mmSearchProperty *PropertyServiceClientMock) SearchPropertyAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmSearchProperty.afterSearchPropertyCounter)
 }
 
-// SearchPropertyBeforeCounter returns a count of PropertyServiceHandlerMock.SearchProperty invocations
-func (mmSearchProperty *PropertyServiceHandlerMock) SearchPropertyBeforeCounter() uint64 {
+// SearchPropertyBeforeCounter returns a count of PropertyServiceClientMock.SearchProperty invocations
+func (mmSearchProperty *PropertyServiceClientMock) SearchPropertyBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmSearchProperty.beforeSearchPropertyCounter)
 }
 
-// Calls returns a list of arguments used in each call to PropertyServiceHandlerMock.SearchProperty.
+// Calls returns a list of arguments used in each call to PropertyServiceClientMock.SearchProperty.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmSearchProperty *mPropertyServiceHandlerMockSearchProperty) Calls() []*PropertyServiceHandlerMockSearchPropertyParams {
+func (mmSearchProperty *mPropertyServiceClientMockSearchProperty) Calls() []*PropertyServiceClientMockSearchPropertyParams {
 	mmSearchProperty.mutex.RLock()
 
-	argCopy := make([]*PropertyServiceHandlerMockSearchPropertyParams, len(mmSearchProperty.callArgs))
+	argCopy := make([]*PropertyServiceClientMockSearchPropertyParams, len(mmSearchProperty.callArgs))
 	copy(argCopy, mmSearchProperty.callArgs)
 
 	mmSearchProperty.mutex.RUnlock()
@@ -4014,7 +3894,7 @@ func (mmSearchProperty *mPropertyServiceHandlerMockSearchProperty) Calls() []*Pr
 
 // MinimockSearchPropertyDone returns true if the count of the SearchProperty invocations corresponds
 // the number of defined expectations
-func (m *PropertyServiceHandlerMock) MinimockSearchPropertyDone() bool {
+func (m *PropertyServiceClientMock) MinimockSearchPropertyDone() bool {
 	if m.SearchPropertyMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -4030,10 +3910,10 @@ func (m *PropertyServiceHandlerMock) MinimockSearchPropertyDone() bool {
 }
 
 // MinimockSearchPropertyInspect logs each unmet expectation
-func (m *PropertyServiceHandlerMock) MinimockSearchPropertyInspect() {
+func (m *PropertyServiceClientMock) MinimockSearchPropertyInspect() {
 	for _, e := range m.SearchPropertyMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to PropertyServiceHandlerMock.SearchProperty at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to PropertyServiceClientMock.SearchProperty at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -4041,66 +3921,66 @@ func (m *PropertyServiceHandlerMock) MinimockSearchPropertyInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.SearchPropertyMock.defaultExpectation != nil && afterSearchPropertyCounter < 1 {
 		if m.SearchPropertyMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to PropertyServiceHandlerMock.SearchProperty at\n%s", m.SearchPropertyMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to PropertyServiceClientMock.SearchProperty at\n%s", m.SearchPropertyMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to PropertyServiceHandlerMock.SearchProperty at\n%s with params: %#v", m.SearchPropertyMock.defaultExpectation.expectationOrigins.origin, *m.SearchPropertyMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to PropertyServiceClientMock.SearchProperty at\n%s with params: %#v", m.SearchPropertyMock.defaultExpectation.expectationOrigins.origin, *m.SearchPropertyMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcSearchProperty != nil && afterSearchPropertyCounter < 1 {
-		m.t.Errorf("Expected call to PropertyServiceHandlerMock.SearchProperty at\n%s", m.funcSearchPropertyOrigin)
+		m.t.Errorf("Expected call to PropertyServiceClientMock.SearchProperty at\n%s", m.funcSearchPropertyOrigin)
 	}
 
 	if !m.SearchPropertyMock.invocationsDone() && afterSearchPropertyCounter > 0 {
-		m.t.Errorf("Expected %d calls to PropertyServiceHandlerMock.SearchProperty at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to PropertyServiceClientMock.SearchProperty at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.SearchPropertyMock.expectedInvocations), m.SearchPropertyMock.expectedInvocationsOrigin, afterSearchPropertyCounter)
 	}
 }
 
-type mPropertyServiceHandlerMockStateOfProperty struct {
+type mPropertyServiceClientMockStateOfProperty struct {
 	optional           bool
-	mock               *PropertyServiceHandlerMock
-	defaultExpectation *PropertyServiceHandlerMockStateOfPropertyExpectation
-	expectations       []*PropertyServiceHandlerMockStateOfPropertyExpectation
+	mock               *PropertyServiceClientMock
+	defaultExpectation *PropertyServiceClientMockStateOfPropertyExpectation
+	expectations       []*PropertyServiceClientMockStateOfPropertyExpectation
 
-	callArgs []*PropertyServiceHandlerMockStateOfPropertyParams
+	callArgs []*PropertyServiceClientMockStateOfPropertyParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// PropertyServiceHandlerMockStateOfPropertyExpectation specifies expectation struct of the PropertyServiceHandler.StateOfProperty
-type PropertyServiceHandlerMockStateOfPropertyExpectation struct {
-	mock               *PropertyServiceHandlerMock
-	params             *PropertyServiceHandlerMockStateOfPropertyParams
-	paramPtrs          *PropertyServiceHandlerMockStateOfPropertyParamPtrs
-	expectationOrigins PropertyServiceHandlerMockStateOfPropertyExpectationOrigins
-	results            *PropertyServiceHandlerMockStateOfPropertyResults
+// PropertyServiceClientMockStateOfPropertyExpectation specifies expectation struct of the PropertyServiceClient.StateOfProperty
+type PropertyServiceClientMockStateOfPropertyExpectation struct {
+	mock               *PropertyServiceClientMock
+	params             *PropertyServiceClientMockStateOfPropertyParams
+	paramPtrs          *PropertyServiceClientMockStateOfPropertyParamPtrs
+	expectationOrigins PropertyServiceClientMockStateOfPropertyExpectationOrigins
+	results            *PropertyServiceClientMockStateOfPropertyResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// PropertyServiceHandlerMockStateOfPropertyParams contains parameters of the PropertyServiceHandler.StateOfProperty
-type PropertyServiceHandlerMockStateOfPropertyParams struct {
+// PropertyServiceClientMockStateOfPropertyParams contains parameters of the PropertyServiceClient.StateOfProperty
+type PropertyServiceClientMockStateOfPropertyParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.StateOfPropertyRequest]
 }
 
-// PropertyServiceHandlerMockStateOfPropertyParamPtrs contains pointers to parameters of the PropertyServiceHandler.StateOfProperty
-type PropertyServiceHandlerMockStateOfPropertyParamPtrs struct {
+// PropertyServiceClientMockStateOfPropertyParamPtrs contains pointers to parameters of the PropertyServiceClient.StateOfProperty
+type PropertyServiceClientMockStateOfPropertyParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.StateOfPropertyRequest]
 }
 
-// PropertyServiceHandlerMockStateOfPropertyResults contains results of the PropertyServiceHandler.StateOfProperty
-type PropertyServiceHandlerMockStateOfPropertyResults struct {
+// PropertyServiceClientMockStateOfPropertyResults contains results of the PropertyServiceClient.StateOfProperty
+type PropertyServiceClientMockStateOfPropertyResults struct {
 	pp2 *connect.Response[v1.StateOfPropertyResponse]
 	err error
 }
 
-// PropertyServiceHandlerMockStateOfPropertyOrigins contains origins of expectations of the PropertyServiceHandler.StateOfProperty
-type PropertyServiceHandlerMockStateOfPropertyExpectationOrigins struct {
+// PropertyServiceClientMockStateOfPropertyOrigins contains origins of expectations of the PropertyServiceClient.StateOfProperty
+type PropertyServiceClientMockStateOfPropertyExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -4111,26 +3991,26 @@ type PropertyServiceHandlerMockStateOfPropertyExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmStateOfProperty *mPropertyServiceHandlerMockStateOfProperty) Optional() *mPropertyServiceHandlerMockStateOfProperty {
+func (mmStateOfProperty *mPropertyServiceClientMockStateOfProperty) Optional() *mPropertyServiceClientMockStateOfProperty {
 	mmStateOfProperty.optional = true
 	return mmStateOfProperty
 }
 
-// Expect sets up expected params for PropertyServiceHandler.StateOfProperty
-func (mmStateOfProperty *mPropertyServiceHandlerMockStateOfProperty) Expect(ctx context.Context, pp1 *connect.Request[v1.StateOfPropertyRequest]) *mPropertyServiceHandlerMockStateOfProperty {
+// Expect sets up expected params for PropertyServiceClient.StateOfProperty
+func (mmStateOfProperty *mPropertyServiceClientMockStateOfProperty) Expect(ctx context.Context, pp1 *connect.Request[v1.StateOfPropertyRequest]) *mPropertyServiceClientMockStateOfProperty {
 	if mmStateOfProperty.mock.funcStateOfProperty != nil {
-		mmStateOfProperty.mock.t.Fatalf("PropertyServiceHandlerMock.StateOfProperty mock is already set by Set")
+		mmStateOfProperty.mock.t.Fatalf("PropertyServiceClientMock.StateOfProperty mock is already set by Set")
 	}
 
 	if mmStateOfProperty.defaultExpectation == nil {
-		mmStateOfProperty.defaultExpectation = &PropertyServiceHandlerMockStateOfPropertyExpectation{}
+		mmStateOfProperty.defaultExpectation = &PropertyServiceClientMockStateOfPropertyExpectation{}
 	}
 
 	if mmStateOfProperty.defaultExpectation.paramPtrs != nil {
-		mmStateOfProperty.mock.t.Fatalf("PropertyServiceHandlerMock.StateOfProperty mock is already set by ExpectParams functions")
+		mmStateOfProperty.mock.t.Fatalf("PropertyServiceClientMock.StateOfProperty mock is already set by ExpectParams functions")
 	}
 
-	mmStateOfProperty.defaultExpectation.params = &PropertyServiceHandlerMockStateOfPropertyParams{ctx, pp1}
+	mmStateOfProperty.defaultExpectation.params = &PropertyServiceClientMockStateOfPropertyParams{ctx, pp1}
 	mmStateOfProperty.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmStateOfProperty.expectations {
 		if minimock.Equal(e.params, mmStateOfProperty.defaultExpectation.params) {
@@ -4141,22 +4021,22 @@ func (mmStateOfProperty *mPropertyServiceHandlerMockStateOfProperty) Expect(ctx 
 	return mmStateOfProperty
 }
 
-// ExpectCtxParam1 sets up expected param ctx for PropertyServiceHandler.StateOfProperty
-func (mmStateOfProperty *mPropertyServiceHandlerMockStateOfProperty) ExpectCtxParam1(ctx context.Context) *mPropertyServiceHandlerMockStateOfProperty {
+// ExpectCtxParam1 sets up expected param ctx for PropertyServiceClient.StateOfProperty
+func (mmStateOfProperty *mPropertyServiceClientMockStateOfProperty) ExpectCtxParam1(ctx context.Context) *mPropertyServiceClientMockStateOfProperty {
 	if mmStateOfProperty.mock.funcStateOfProperty != nil {
-		mmStateOfProperty.mock.t.Fatalf("PropertyServiceHandlerMock.StateOfProperty mock is already set by Set")
+		mmStateOfProperty.mock.t.Fatalf("PropertyServiceClientMock.StateOfProperty mock is already set by Set")
 	}
 
 	if mmStateOfProperty.defaultExpectation == nil {
-		mmStateOfProperty.defaultExpectation = &PropertyServiceHandlerMockStateOfPropertyExpectation{}
+		mmStateOfProperty.defaultExpectation = &PropertyServiceClientMockStateOfPropertyExpectation{}
 	}
 
 	if mmStateOfProperty.defaultExpectation.params != nil {
-		mmStateOfProperty.mock.t.Fatalf("PropertyServiceHandlerMock.StateOfProperty mock is already set by Expect")
+		mmStateOfProperty.mock.t.Fatalf("PropertyServiceClientMock.StateOfProperty mock is already set by Expect")
 	}
 
 	if mmStateOfProperty.defaultExpectation.paramPtrs == nil {
-		mmStateOfProperty.defaultExpectation.paramPtrs = &PropertyServiceHandlerMockStateOfPropertyParamPtrs{}
+		mmStateOfProperty.defaultExpectation.paramPtrs = &PropertyServiceClientMockStateOfPropertyParamPtrs{}
 	}
 	mmStateOfProperty.defaultExpectation.paramPtrs.ctx = &ctx
 	mmStateOfProperty.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -4164,22 +4044,22 @@ func (mmStateOfProperty *mPropertyServiceHandlerMockStateOfProperty) ExpectCtxPa
 	return mmStateOfProperty
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for PropertyServiceHandler.StateOfProperty
-func (mmStateOfProperty *mPropertyServiceHandlerMockStateOfProperty) ExpectPp1Param2(pp1 *connect.Request[v1.StateOfPropertyRequest]) *mPropertyServiceHandlerMockStateOfProperty {
+// ExpectPp1Param2 sets up expected param pp1 for PropertyServiceClient.StateOfProperty
+func (mmStateOfProperty *mPropertyServiceClientMockStateOfProperty) ExpectPp1Param2(pp1 *connect.Request[v1.StateOfPropertyRequest]) *mPropertyServiceClientMockStateOfProperty {
 	if mmStateOfProperty.mock.funcStateOfProperty != nil {
-		mmStateOfProperty.mock.t.Fatalf("PropertyServiceHandlerMock.StateOfProperty mock is already set by Set")
+		mmStateOfProperty.mock.t.Fatalf("PropertyServiceClientMock.StateOfProperty mock is already set by Set")
 	}
 
 	if mmStateOfProperty.defaultExpectation == nil {
-		mmStateOfProperty.defaultExpectation = &PropertyServiceHandlerMockStateOfPropertyExpectation{}
+		mmStateOfProperty.defaultExpectation = &PropertyServiceClientMockStateOfPropertyExpectation{}
 	}
 
 	if mmStateOfProperty.defaultExpectation.params != nil {
-		mmStateOfProperty.mock.t.Fatalf("PropertyServiceHandlerMock.StateOfProperty mock is already set by Expect")
+		mmStateOfProperty.mock.t.Fatalf("PropertyServiceClientMock.StateOfProperty mock is already set by Expect")
 	}
 
 	if mmStateOfProperty.defaultExpectation.paramPtrs == nil {
-		mmStateOfProperty.defaultExpectation.paramPtrs = &PropertyServiceHandlerMockStateOfPropertyParamPtrs{}
+		mmStateOfProperty.defaultExpectation.paramPtrs = &PropertyServiceClientMockStateOfPropertyParamPtrs{}
 	}
 	mmStateOfProperty.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmStateOfProperty.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -4187,10 +4067,10 @@ func (mmStateOfProperty *mPropertyServiceHandlerMockStateOfProperty) ExpectPp1Pa
 	return mmStateOfProperty
 }
 
-// Inspect accepts an inspector function that has same arguments as the PropertyServiceHandler.StateOfProperty
-func (mmStateOfProperty *mPropertyServiceHandlerMockStateOfProperty) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.StateOfPropertyRequest])) *mPropertyServiceHandlerMockStateOfProperty {
+// Inspect accepts an inspector function that has same arguments as the PropertyServiceClient.StateOfProperty
+func (mmStateOfProperty *mPropertyServiceClientMockStateOfProperty) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.StateOfPropertyRequest])) *mPropertyServiceClientMockStateOfProperty {
 	if mmStateOfProperty.mock.inspectFuncStateOfProperty != nil {
-		mmStateOfProperty.mock.t.Fatalf("Inspect function is already set for PropertyServiceHandlerMock.StateOfProperty")
+		mmStateOfProperty.mock.t.Fatalf("Inspect function is already set for PropertyServiceClientMock.StateOfProperty")
 	}
 
 	mmStateOfProperty.mock.inspectFuncStateOfProperty = f
@@ -4198,28 +4078,28 @@ func (mmStateOfProperty *mPropertyServiceHandlerMockStateOfProperty) Inspect(f f
 	return mmStateOfProperty
 }
 
-// Return sets up results that will be returned by PropertyServiceHandler.StateOfProperty
-func (mmStateOfProperty *mPropertyServiceHandlerMockStateOfProperty) Return(pp2 *connect.Response[v1.StateOfPropertyResponse], err error) *PropertyServiceHandlerMock {
+// Return sets up results that will be returned by PropertyServiceClient.StateOfProperty
+func (mmStateOfProperty *mPropertyServiceClientMockStateOfProperty) Return(pp2 *connect.Response[v1.StateOfPropertyResponse], err error) *PropertyServiceClientMock {
 	if mmStateOfProperty.mock.funcStateOfProperty != nil {
-		mmStateOfProperty.mock.t.Fatalf("PropertyServiceHandlerMock.StateOfProperty mock is already set by Set")
+		mmStateOfProperty.mock.t.Fatalf("PropertyServiceClientMock.StateOfProperty mock is already set by Set")
 	}
 
 	if mmStateOfProperty.defaultExpectation == nil {
-		mmStateOfProperty.defaultExpectation = &PropertyServiceHandlerMockStateOfPropertyExpectation{mock: mmStateOfProperty.mock}
+		mmStateOfProperty.defaultExpectation = &PropertyServiceClientMockStateOfPropertyExpectation{mock: mmStateOfProperty.mock}
 	}
-	mmStateOfProperty.defaultExpectation.results = &PropertyServiceHandlerMockStateOfPropertyResults{pp2, err}
+	mmStateOfProperty.defaultExpectation.results = &PropertyServiceClientMockStateOfPropertyResults{pp2, err}
 	mmStateOfProperty.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmStateOfProperty.mock
 }
 
-// Set uses given function f to mock the PropertyServiceHandler.StateOfProperty method
-func (mmStateOfProperty *mPropertyServiceHandlerMockStateOfProperty) Set(f func(ctx context.Context, pp1 *connect.Request[v1.StateOfPropertyRequest]) (pp2 *connect.Response[v1.StateOfPropertyResponse], err error)) *PropertyServiceHandlerMock {
+// Set uses given function f to mock the PropertyServiceClient.StateOfProperty method
+func (mmStateOfProperty *mPropertyServiceClientMockStateOfProperty) Set(f func(ctx context.Context, pp1 *connect.Request[v1.StateOfPropertyRequest]) (pp2 *connect.Response[v1.StateOfPropertyResponse], err error)) *PropertyServiceClientMock {
 	if mmStateOfProperty.defaultExpectation != nil {
-		mmStateOfProperty.mock.t.Fatalf("Default expectation is already set for the PropertyServiceHandler.StateOfProperty method")
+		mmStateOfProperty.mock.t.Fatalf("Default expectation is already set for the PropertyServiceClient.StateOfProperty method")
 	}
 
 	if len(mmStateOfProperty.expectations) > 0 {
-		mmStateOfProperty.mock.t.Fatalf("Some expectations are already set for the PropertyServiceHandler.StateOfProperty method")
+		mmStateOfProperty.mock.t.Fatalf("Some expectations are already set for the PropertyServiceClient.StateOfProperty method")
 	}
 
 	mmStateOfProperty.mock.funcStateOfProperty = f
@@ -4227,39 +4107,39 @@ func (mmStateOfProperty *mPropertyServiceHandlerMockStateOfProperty) Set(f func(
 	return mmStateOfProperty.mock
 }
 
-// When sets expectation for the PropertyServiceHandler.StateOfProperty which will trigger the result defined by the following
+// When sets expectation for the PropertyServiceClient.StateOfProperty which will trigger the result defined by the following
 // Then helper
-func (mmStateOfProperty *mPropertyServiceHandlerMockStateOfProperty) When(ctx context.Context, pp1 *connect.Request[v1.StateOfPropertyRequest]) *PropertyServiceHandlerMockStateOfPropertyExpectation {
+func (mmStateOfProperty *mPropertyServiceClientMockStateOfProperty) When(ctx context.Context, pp1 *connect.Request[v1.StateOfPropertyRequest]) *PropertyServiceClientMockStateOfPropertyExpectation {
 	if mmStateOfProperty.mock.funcStateOfProperty != nil {
-		mmStateOfProperty.mock.t.Fatalf("PropertyServiceHandlerMock.StateOfProperty mock is already set by Set")
+		mmStateOfProperty.mock.t.Fatalf("PropertyServiceClientMock.StateOfProperty mock is already set by Set")
 	}
 
-	expectation := &PropertyServiceHandlerMockStateOfPropertyExpectation{
+	expectation := &PropertyServiceClientMockStateOfPropertyExpectation{
 		mock:               mmStateOfProperty.mock,
-		params:             &PropertyServiceHandlerMockStateOfPropertyParams{ctx, pp1},
-		expectationOrigins: PropertyServiceHandlerMockStateOfPropertyExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &PropertyServiceClientMockStateOfPropertyParams{ctx, pp1},
+		expectationOrigins: PropertyServiceClientMockStateOfPropertyExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmStateOfProperty.expectations = append(mmStateOfProperty.expectations, expectation)
 	return expectation
 }
 
-// Then sets up PropertyServiceHandler.StateOfProperty return parameters for the expectation previously defined by the When method
-func (e *PropertyServiceHandlerMockStateOfPropertyExpectation) Then(pp2 *connect.Response[v1.StateOfPropertyResponse], err error) *PropertyServiceHandlerMock {
-	e.results = &PropertyServiceHandlerMockStateOfPropertyResults{pp2, err}
+// Then sets up PropertyServiceClient.StateOfProperty return parameters for the expectation previously defined by the When method
+func (e *PropertyServiceClientMockStateOfPropertyExpectation) Then(pp2 *connect.Response[v1.StateOfPropertyResponse], err error) *PropertyServiceClientMock {
+	e.results = &PropertyServiceClientMockStateOfPropertyResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times PropertyServiceHandler.StateOfProperty should be invoked
-func (mmStateOfProperty *mPropertyServiceHandlerMockStateOfProperty) Times(n uint64) *mPropertyServiceHandlerMockStateOfProperty {
+// Times sets number of times PropertyServiceClient.StateOfProperty should be invoked
+func (mmStateOfProperty *mPropertyServiceClientMockStateOfProperty) Times(n uint64) *mPropertyServiceClientMockStateOfProperty {
 	if n == 0 {
-		mmStateOfProperty.mock.t.Fatalf("Times of PropertyServiceHandlerMock.StateOfProperty mock can not be zero")
+		mmStateOfProperty.mock.t.Fatalf("Times of PropertyServiceClientMock.StateOfProperty mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmStateOfProperty.expectedInvocations, n)
 	mmStateOfProperty.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmStateOfProperty
 }
 
-func (mmStateOfProperty *mPropertyServiceHandlerMockStateOfProperty) invocationsDone() bool {
+func (mmStateOfProperty *mPropertyServiceClientMockStateOfProperty) invocationsDone() bool {
 	if len(mmStateOfProperty.expectations) == 0 && mmStateOfProperty.defaultExpectation == nil && mmStateOfProperty.mock.funcStateOfProperty == nil {
 		return true
 	}
@@ -4270,8 +4150,8 @@ func (mmStateOfProperty *mPropertyServiceHandlerMockStateOfProperty) invocations
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// StateOfProperty implements mm_propertyv1connect.PropertyServiceHandler
-func (mmStateOfProperty *PropertyServiceHandlerMock) StateOfProperty(ctx context.Context, pp1 *connect.Request[v1.StateOfPropertyRequest]) (pp2 *connect.Response[v1.StateOfPropertyResponse], err error) {
+// StateOfProperty implements mm_propertyv1connect.PropertyServiceClient
+func (mmStateOfProperty *PropertyServiceClientMock) StateOfProperty(ctx context.Context, pp1 *connect.Request[v1.StateOfPropertyRequest]) (pp2 *connect.Response[v1.StateOfPropertyResponse], err error) {
 	mm_atomic.AddUint64(&mmStateOfProperty.beforeStateOfPropertyCounter, 1)
 	defer mm_atomic.AddUint64(&mmStateOfProperty.afterStateOfPropertyCounter, 1)
 
@@ -4281,7 +4161,7 @@ func (mmStateOfProperty *PropertyServiceHandlerMock) StateOfProperty(ctx context
 		mmStateOfProperty.inspectFuncStateOfProperty(ctx, pp1)
 	}
 
-	mm_params := PropertyServiceHandlerMockStateOfPropertyParams{ctx, pp1}
+	mm_params := PropertyServiceClientMockStateOfPropertyParams{ctx, pp1}
 
 	// Record call args
 	mmStateOfProperty.StateOfPropertyMock.mutex.Lock()
@@ -4300,54 +4180,54 @@ func (mmStateOfProperty *PropertyServiceHandlerMock) StateOfProperty(ctx context
 		mm_want := mmStateOfProperty.StateOfPropertyMock.defaultExpectation.params
 		mm_want_ptrs := mmStateOfProperty.StateOfPropertyMock.defaultExpectation.paramPtrs
 
-		mm_got := PropertyServiceHandlerMockStateOfPropertyParams{ctx, pp1}
+		mm_got := PropertyServiceClientMockStateOfPropertyParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmStateOfProperty.t.Errorf("PropertyServiceHandlerMock.StateOfProperty got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmStateOfProperty.t.Errorf("PropertyServiceClientMock.StateOfProperty got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmStateOfProperty.StateOfPropertyMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmStateOfProperty.t.Errorf("PropertyServiceHandlerMock.StateOfProperty got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmStateOfProperty.t.Errorf("PropertyServiceClientMock.StateOfProperty got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmStateOfProperty.StateOfPropertyMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmStateOfProperty.t.Errorf("PropertyServiceHandlerMock.StateOfProperty got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmStateOfProperty.t.Errorf("PropertyServiceClientMock.StateOfProperty got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmStateOfProperty.StateOfPropertyMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmStateOfProperty.StateOfPropertyMock.defaultExpectation.results
 		if mm_results == nil {
-			mmStateOfProperty.t.Fatal("No results are set for the PropertyServiceHandlerMock.StateOfProperty")
+			mmStateOfProperty.t.Fatal("No results are set for the PropertyServiceClientMock.StateOfProperty")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmStateOfProperty.funcStateOfProperty != nil {
 		return mmStateOfProperty.funcStateOfProperty(ctx, pp1)
 	}
-	mmStateOfProperty.t.Fatalf("Unexpected call to PropertyServiceHandlerMock.StateOfProperty. %v %v", ctx, pp1)
+	mmStateOfProperty.t.Fatalf("Unexpected call to PropertyServiceClientMock.StateOfProperty. %v %v", ctx, pp1)
 	return
 }
 
-// StateOfPropertyAfterCounter returns a count of finished PropertyServiceHandlerMock.StateOfProperty invocations
-func (mmStateOfProperty *PropertyServiceHandlerMock) StateOfPropertyAfterCounter() uint64 {
+// StateOfPropertyAfterCounter returns a count of finished PropertyServiceClientMock.StateOfProperty invocations
+func (mmStateOfProperty *PropertyServiceClientMock) StateOfPropertyAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmStateOfProperty.afterStateOfPropertyCounter)
 }
 
-// StateOfPropertyBeforeCounter returns a count of PropertyServiceHandlerMock.StateOfProperty invocations
-func (mmStateOfProperty *PropertyServiceHandlerMock) StateOfPropertyBeforeCounter() uint64 {
+// StateOfPropertyBeforeCounter returns a count of PropertyServiceClientMock.StateOfProperty invocations
+func (mmStateOfProperty *PropertyServiceClientMock) StateOfPropertyBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmStateOfProperty.beforeStateOfPropertyCounter)
 }
 
-// Calls returns a list of arguments used in each call to PropertyServiceHandlerMock.StateOfProperty.
+// Calls returns a list of arguments used in each call to PropertyServiceClientMock.StateOfProperty.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmStateOfProperty *mPropertyServiceHandlerMockStateOfProperty) Calls() []*PropertyServiceHandlerMockStateOfPropertyParams {
+func (mmStateOfProperty *mPropertyServiceClientMockStateOfProperty) Calls() []*PropertyServiceClientMockStateOfPropertyParams {
 	mmStateOfProperty.mutex.RLock()
 
-	argCopy := make([]*PropertyServiceHandlerMockStateOfPropertyParams, len(mmStateOfProperty.callArgs))
+	argCopy := make([]*PropertyServiceClientMockStateOfPropertyParams, len(mmStateOfProperty.callArgs))
 	copy(argCopy, mmStateOfProperty.callArgs)
 
 	mmStateOfProperty.mutex.RUnlock()
@@ -4357,7 +4237,7 @@ func (mmStateOfProperty *mPropertyServiceHandlerMockStateOfProperty) Calls() []*
 
 // MinimockStateOfPropertyDone returns true if the count of the StateOfProperty invocations corresponds
 // the number of defined expectations
-func (m *PropertyServiceHandlerMock) MinimockStateOfPropertyDone() bool {
+func (m *PropertyServiceClientMock) MinimockStateOfPropertyDone() bool {
 	if m.StateOfPropertyMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -4373,10 +4253,10 @@ func (m *PropertyServiceHandlerMock) MinimockStateOfPropertyDone() bool {
 }
 
 // MinimockStateOfPropertyInspect logs each unmet expectation
-func (m *PropertyServiceHandlerMock) MinimockStateOfPropertyInspect() {
+func (m *PropertyServiceClientMock) MinimockStateOfPropertyInspect() {
 	for _, e := range m.StateOfPropertyMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to PropertyServiceHandlerMock.StateOfProperty at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to PropertyServiceClientMock.StateOfProperty at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -4384,66 +4264,66 @@ func (m *PropertyServiceHandlerMock) MinimockStateOfPropertyInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.StateOfPropertyMock.defaultExpectation != nil && afterStateOfPropertyCounter < 1 {
 		if m.StateOfPropertyMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to PropertyServiceHandlerMock.StateOfProperty at\n%s", m.StateOfPropertyMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to PropertyServiceClientMock.StateOfProperty at\n%s", m.StateOfPropertyMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to PropertyServiceHandlerMock.StateOfProperty at\n%s with params: %#v", m.StateOfPropertyMock.defaultExpectation.expectationOrigins.origin, *m.StateOfPropertyMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to PropertyServiceClientMock.StateOfProperty at\n%s with params: %#v", m.StateOfPropertyMock.defaultExpectation.expectationOrigins.origin, *m.StateOfPropertyMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcStateOfProperty != nil && afterStateOfPropertyCounter < 1 {
-		m.t.Errorf("Expected call to PropertyServiceHandlerMock.StateOfProperty at\n%s", m.funcStateOfPropertyOrigin)
+		m.t.Errorf("Expected call to PropertyServiceClientMock.StateOfProperty at\n%s", m.funcStateOfPropertyOrigin)
 	}
 
 	if !m.StateOfPropertyMock.invocationsDone() && afterStateOfPropertyCounter > 0 {
-		m.t.Errorf("Expected %d calls to PropertyServiceHandlerMock.StateOfProperty at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to PropertyServiceClientMock.StateOfProperty at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.StateOfPropertyMock.expectedInvocations), m.StateOfPropertyMock.expectedInvocationsOrigin, afterStateOfPropertyCounter)
 	}
 }
 
-type mPropertyServiceHandlerMockUpdateProperty struct {
+type mPropertyServiceClientMockUpdateProperty struct {
 	optional           bool
-	mock               *PropertyServiceHandlerMock
-	defaultExpectation *PropertyServiceHandlerMockUpdatePropertyExpectation
-	expectations       []*PropertyServiceHandlerMockUpdatePropertyExpectation
+	mock               *PropertyServiceClientMock
+	defaultExpectation *PropertyServiceClientMockUpdatePropertyExpectation
+	expectations       []*PropertyServiceClientMockUpdatePropertyExpectation
 
-	callArgs []*PropertyServiceHandlerMockUpdatePropertyParams
+	callArgs []*PropertyServiceClientMockUpdatePropertyParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// PropertyServiceHandlerMockUpdatePropertyExpectation specifies expectation struct of the PropertyServiceHandler.UpdateProperty
-type PropertyServiceHandlerMockUpdatePropertyExpectation struct {
-	mock               *PropertyServiceHandlerMock
-	params             *PropertyServiceHandlerMockUpdatePropertyParams
-	paramPtrs          *PropertyServiceHandlerMockUpdatePropertyParamPtrs
-	expectationOrigins PropertyServiceHandlerMockUpdatePropertyExpectationOrigins
-	results            *PropertyServiceHandlerMockUpdatePropertyResults
+// PropertyServiceClientMockUpdatePropertyExpectation specifies expectation struct of the PropertyServiceClient.UpdateProperty
+type PropertyServiceClientMockUpdatePropertyExpectation struct {
+	mock               *PropertyServiceClientMock
+	params             *PropertyServiceClientMockUpdatePropertyParams
+	paramPtrs          *PropertyServiceClientMockUpdatePropertyParamPtrs
+	expectationOrigins PropertyServiceClientMockUpdatePropertyExpectationOrigins
+	results            *PropertyServiceClientMockUpdatePropertyResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// PropertyServiceHandlerMockUpdatePropertyParams contains parameters of the PropertyServiceHandler.UpdateProperty
-type PropertyServiceHandlerMockUpdatePropertyParams struct {
+// PropertyServiceClientMockUpdatePropertyParams contains parameters of the PropertyServiceClient.UpdateProperty
+type PropertyServiceClientMockUpdatePropertyParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.UpdatePropertyRequest]
 }
 
-// PropertyServiceHandlerMockUpdatePropertyParamPtrs contains pointers to parameters of the PropertyServiceHandler.UpdateProperty
-type PropertyServiceHandlerMockUpdatePropertyParamPtrs struct {
+// PropertyServiceClientMockUpdatePropertyParamPtrs contains pointers to parameters of the PropertyServiceClient.UpdateProperty
+type PropertyServiceClientMockUpdatePropertyParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.UpdatePropertyRequest]
 }
 
-// PropertyServiceHandlerMockUpdatePropertyResults contains results of the PropertyServiceHandler.UpdateProperty
-type PropertyServiceHandlerMockUpdatePropertyResults struct {
+// PropertyServiceClientMockUpdatePropertyResults contains results of the PropertyServiceClient.UpdateProperty
+type PropertyServiceClientMockUpdatePropertyResults struct {
 	pp2 *connect.Response[v1.UpdatePropertyResponse]
 	err error
 }
 
-// PropertyServiceHandlerMockUpdatePropertyOrigins contains origins of expectations of the PropertyServiceHandler.UpdateProperty
-type PropertyServiceHandlerMockUpdatePropertyExpectationOrigins struct {
+// PropertyServiceClientMockUpdatePropertyOrigins contains origins of expectations of the PropertyServiceClient.UpdateProperty
+type PropertyServiceClientMockUpdatePropertyExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -4454,26 +4334,26 @@ type PropertyServiceHandlerMockUpdatePropertyExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmUpdateProperty *mPropertyServiceHandlerMockUpdateProperty) Optional() *mPropertyServiceHandlerMockUpdateProperty {
+func (mmUpdateProperty *mPropertyServiceClientMockUpdateProperty) Optional() *mPropertyServiceClientMockUpdateProperty {
 	mmUpdateProperty.optional = true
 	return mmUpdateProperty
 }
 
-// Expect sets up expected params for PropertyServiceHandler.UpdateProperty
-func (mmUpdateProperty *mPropertyServiceHandlerMockUpdateProperty) Expect(ctx context.Context, pp1 *connect.Request[v1.UpdatePropertyRequest]) *mPropertyServiceHandlerMockUpdateProperty {
+// Expect sets up expected params for PropertyServiceClient.UpdateProperty
+func (mmUpdateProperty *mPropertyServiceClientMockUpdateProperty) Expect(ctx context.Context, pp1 *connect.Request[v1.UpdatePropertyRequest]) *mPropertyServiceClientMockUpdateProperty {
 	if mmUpdateProperty.mock.funcUpdateProperty != nil {
-		mmUpdateProperty.mock.t.Fatalf("PropertyServiceHandlerMock.UpdateProperty mock is already set by Set")
+		mmUpdateProperty.mock.t.Fatalf("PropertyServiceClientMock.UpdateProperty mock is already set by Set")
 	}
 
 	if mmUpdateProperty.defaultExpectation == nil {
-		mmUpdateProperty.defaultExpectation = &PropertyServiceHandlerMockUpdatePropertyExpectation{}
+		mmUpdateProperty.defaultExpectation = &PropertyServiceClientMockUpdatePropertyExpectation{}
 	}
 
 	if mmUpdateProperty.defaultExpectation.paramPtrs != nil {
-		mmUpdateProperty.mock.t.Fatalf("PropertyServiceHandlerMock.UpdateProperty mock is already set by ExpectParams functions")
+		mmUpdateProperty.mock.t.Fatalf("PropertyServiceClientMock.UpdateProperty mock is already set by ExpectParams functions")
 	}
 
-	mmUpdateProperty.defaultExpectation.params = &PropertyServiceHandlerMockUpdatePropertyParams{ctx, pp1}
+	mmUpdateProperty.defaultExpectation.params = &PropertyServiceClientMockUpdatePropertyParams{ctx, pp1}
 	mmUpdateProperty.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmUpdateProperty.expectations {
 		if minimock.Equal(e.params, mmUpdateProperty.defaultExpectation.params) {
@@ -4484,22 +4364,22 @@ func (mmUpdateProperty *mPropertyServiceHandlerMockUpdateProperty) Expect(ctx co
 	return mmUpdateProperty
 }
 
-// ExpectCtxParam1 sets up expected param ctx for PropertyServiceHandler.UpdateProperty
-func (mmUpdateProperty *mPropertyServiceHandlerMockUpdateProperty) ExpectCtxParam1(ctx context.Context) *mPropertyServiceHandlerMockUpdateProperty {
+// ExpectCtxParam1 sets up expected param ctx for PropertyServiceClient.UpdateProperty
+func (mmUpdateProperty *mPropertyServiceClientMockUpdateProperty) ExpectCtxParam1(ctx context.Context) *mPropertyServiceClientMockUpdateProperty {
 	if mmUpdateProperty.mock.funcUpdateProperty != nil {
-		mmUpdateProperty.mock.t.Fatalf("PropertyServiceHandlerMock.UpdateProperty mock is already set by Set")
+		mmUpdateProperty.mock.t.Fatalf("PropertyServiceClientMock.UpdateProperty mock is already set by Set")
 	}
 
 	if mmUpdateProperty.defaultExpectation == nil {
-		mmUpdateProperty.defaultExpectation = &PropertyServiceHandlerMockUpdatePropertyExpectation{}
+		mmUpdateProperty.defaultExpectation = &PropertyServiceClientMockUpdatePropertyExpectation{}
 	}
 
 	if mmUpdateProperty.defaultExpectation.params != nil {
-		mmUpdateProperty.mock.t.Fatalf("PropertyServiceHandlerMock.UpdateProperty mock is already set by Expect")
+		mmUpdateProperty.mock.t.Fatalf("PropertyServiceClientMock.UpdateProperty mock is already set by Expect")
 	}
 
 	if mmUpdateProperty.defaultExpectation.paramPtrs == nil {
-		mmUpdateProperty.defaultExpectation.paramPtrs = &PropertyServiceHandlerMockUpdatePropertyParamPtrs{}
+		mmUpdateProperty.defaultExpectation.paramPtrs = &PropertyServiceClientMockUpdatePropertyParamPtrs{}
 	}
 	mmUpdateProperty.defaultExpectation.paramPtrs.ctx = &ctx
 	mmUpdateProperty.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -4507,22 +4387,22 @@ func (mmUpdateProperty *mPropertyServiceHandlerMockUpdateProperty) ExpectCtxPara
 	return mmUpdateProperty
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for PropertyServiceHandler.UpdateProperty
-func (mmUpdateProperty *mPropertyServiceHandlerMockUpdateProperty) ExpectPp1Param2(pp1 *connect.Request[v1.UpdatePropertyRequest]) *mPropertyServiceHandlerMockUpdateProperty {
+// ExpectPp1Param2 sets up expected param pp1 for PropertyServiceClient.UpdateProperty
+func (mmUpdateProperty *mPropertyServiceClientMockUpdateProperty) ExpectPp1Param2(pp1 *connect.Request[v1.UpdatePropertyRequest]) *mPropertyServiceClientMockUpdateProperty {
 	if mmUpdateProperty.mock.funcUpdateProperty != nil {
-		mmUpdateProperty.mock.t.Fatalf("PropertyServiceHandlerMock.UpdateProperty mock is already set by Set")
+		mmUpdateProperty.mock.t.Fatalf("PropertyServiceClientMock.UpdateProperty mock is already set by Set")
 	}
 
 	if mmUpdateProperty.defaultExpectation == nil {
-		mmUpdateProperty.defaultExpectation = &PropertyServiceHandlerMockUpdatePropertyExpectation{}
+		mmUpdateProperty.defaultExpectation = &PropertyServiceClientMockUpdatePropertyExpectation{}
 	}
 
 	if mmUpdateProperty.defaultExpectation.params != nil {
-		mmUpdateProperty.mock.t.Fatalf("PropertyServiceHandlerMock.UpdateProperty mock is already set by Expect")
+		mmUpdateProperty.mock.t.Fatalf("PropertyServiceClientMock.UpdateProperty mock is already set by Expect")
 	}
 
 	if mmUpdateProperty.defaultExpectation.paramPtrs == nil {
-		mmUpdateProperty.defaultExpectation.paramPtrs = &PropertyServiceHandlerMockUpdatePropertyParamPtrs{}
+		mmUpdateProperty.defaultExpectation.paramPtrs = &PropertyServiceClientMockUpdatePropertyParamPtrs{}
 	}
 	mmUpdateProperty.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmUpdateProperty.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -4530,10 +4410,10 @@ func (mmUpdateProperty *mPropertyServiceHandlerMockUpdateProperty) ExpectPp1Para
 	return mmUpdateProperty
 }
 
-// Inspect accepts an inspector function that has same arguments as the PropertyServiceHandler.UpdateProperty
-func (mmUpdateProperty *mPropertyServiceHandlerMockUpdateProperty) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.UpdatePropertyRequest])) *mPropertyServiceHandlerMockUpdateProperty {
+// Inspect accepts an inspector function that has same arguments as the PropertyServiceClient.UpdateProperty
+func (mmUpdateProperty *mPropertyServiceClientMockUpdateProperty) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.UpdatePropertyRequest])) *mPropertyServiceClientMockUpdateProperty {
 	if mmUpdateProperty.mock.inspectFuncUpdateProperty != nil {
-		mmUpdateProperty.mock.t.Fatalf("Inspect function is already set for PropertyServiceHandlerMock.UpdateProperty")
+		mmUpdateProperty.mock.t.Fatalf("Inspect function is already set for PropertyServiceClientMock.UpdateProperty")
 	}
 
 	mmUpdateProperty.mock.inspectFuncUpdateProperty = f
@@ -4541,28 +4421,28 @@ func (mmUpdateProperty *mPropertyServiceHandlerMockUpdateProperty) Inspect(f fun
 	return mmUpdateProperty
 }
 
-// Return sets up results that will be returned by PropertyServiceHandler.UpdateProperty
-func (mmUpdateProperty *mPropertyServiceHandlerMockUpdateProperty) Return(pp2 *connect.Response[v1.UpdatePropertyResponse], err error) *PropertyServiceHandlerMock {
+// Return sets up results that will be returned by PropertyServiceClient.UpdateProperty
+func (mmUpdateProperty *mPropertyServiceClientMockUpdateProperty) Return(pp2 *connect.Response[v1.UpdatePropertyResponse], err error) *PropertyServiceClientMock {
 	if mmUpdateProperty.mock.funcUpdateProperty != nil {
-		mmUpdateProperty.mock.t.Fatalf("PropertyServiceHandlerMock.UpdateProperty mock is already set by Set")
+		mmUpdateProperty.mock.t.Fatalf("PropertyServiceClientMock.UpdateProperty mock is already set by Set")
 	}
 
 	if mmUpdateProperty.defaultExpectation == nil {
-		mmUpdateProperty.defaultExpectation = &PropertyServiceHandlerMockUpdatePropertyExpectation{mock: mmUpdateProperty.mock}
+		mmUpdateProperty.defaultExpectation = &PropertyServiceClientMockUpdatePropertyExpectation{mock: mmUpdateProperty.mock}
 	}
-	mmUpdateProperty.defaultExpectation.results = &PropertyServiceHandlerMockUpdatePropertyResults{pp2, err}
+	mmUpdateProperty.defaultExpectation.results = &PropertyServiceClientMockUpdatePropertyResults{pp2, err}
 	mmUpdateProperty.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmUpdateProperty.mock
 }
 
-// Set uses given function f to mock the PropertyServiceHandler.UpdateProperty method
-func (mmUpdateProperty *mPropertyServiceHandlerMockUpdateProperty) Set(f func(ctx context.Context, pp1 *connect.Request[v1.UpdatePropertyRequest]) (pp2 *connect.Response[v1.UpdatePropertyResponse], err error)) *PropertyServiceHandlerMock {
+// Set uses given function f to mock the PropertyServiceClient.UpdateProperty method
+func (mmUpdateProperty *mPropertyServiceClientMockUpdateProperty) Set(f func(ctx context.Context, pp1 *connect.Request[v1.UpdatePropertyRequest]) (pp2 *connect.Response[v1.UpdatePropertyResponse], err error)) *PropertyServiceClientMock {
 	if mmUpdateProperty.defaultExpectation != nil {
-		mmUpdateProperty.mock.t.Fatalf("Default expectation is already set for the PropertyServiceHandler.UpdateProperty method")
+		mmUpdateProperty.mock.t.Fatalf("Default expectation is already set for the PropertyServiceClient.UpdateProperty method")
 	}
 
 	if len(mmUpdateProperty.expectations) > 0 {
-		mmUpdateProperty.mock.t.Fatalf("Some expectations are already set for the PropertyServiceHandler.UpdateProperty method")
+		mmUpdateProperty.mock.t.Fatalf("Some expectations are already set for the PropertyServiceClient.UpdateProperty method")
 	}
 
 	mmUpdateProperty.mock.funcUpdateProperty = f
@@ -4570,39 +4450,39 @@ func (mmUpdateProperty *mPropertyServiceHandlerMockUpdateProperty) Set(f func(ct
 	return mmUpdateProperty.mock
 }
 
-// When sets expectation for the PropertyServiceHandler.UpdateProperty which will trigger the result defined by the following
+// When sets expectation for the PropertyServiceClient.UpdateProperty which will trigger the result defined by the following
 // Then helper
-func (mmUpdateProperty *mPropertyServiceHandlerMockUpdateProperty) When(ctx context.Context, pp1 *connect.Request[v1.UpdatePropertyRequest]) *PropertyServiceHandlerMockUpdatePropertyExpectation {
+func (mmUpdateProperty *mPropertyServiceClientMockUpdateProperty) When(ctx context.Context, pp1 *connect.Request[v1.UpdatePropertyRequest]) *PropertyServiceClientMockUpdatePropertyExpectation {
 	if mmUpdateProperty.mock.funcUpdateProperty != nil {
-		mmUpdateProperty.mock.t.Fatalf("PropertyServiceHandlerMock.UpdateProperty mock is already set by Set")
+		mmUpdateProperty.mock.t.Fatalf("PropertyServiceClientMock.UpdateProperty mock is already set by Set")
 	}
 
-	expectation := &PropertyServiceHandlerMockUpdatePropertyExpectation{
+	expectation := &PropertyServiceClientMockUpdatePropertyExpectation{
 		mock:               mmUpdateProperty.mock,
-		params:             &PropertyServiceHandlerMockUpdatePropertyParams{ctx, pp1},
-		expectationOrigins: PropertyServiceHandlerMockUpdatePropertyExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &PropertyServiceClientMockUpdatePropertyParams{ctx, pp1},
+		expectationOrigins: PropertyServiceClientMockUpdatePropertyExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmUpdateProperty.expectations = append(mmUpdateProperty.expectations, expectation)
 	return expectation
 }
 
-// Then sets up PropertyServiceHandler.UpdateProperty return parameters for the expectation previously defined by the When method
-func (e *PropertyServiceHandlerMockUpdatePropertyExpectation) Then(pp2 *connect.Response[v1.UpdatePropertyResponse], err error) *PropertyServiceHandlerMock {
-	e.results = &PropertyServiceHandlerMockUpdatePropertyResults{pp2, err}
+// Then sets up PropertyServiceClient.UpdateProperty return parameters for the expectation previously defined by the When method
+func (e *PropertyServiceClientMockUpdatePropertyExpectation) Then(pp2 *connect.Response[v1.UpdatePropertyResponse], err error) *PropertyServiceClientMock {
+	e.results = &PropertyServiceClientMockUpdatePropertyResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times PropertyServiceHandler.UpdateProperty should be invoked
-func (mmUpdateProperty *mPropertyServiceHandlerMockUpdateProperty) Times(n uint64) *mPropertyServiceHandlerMockUpdateProperty {
+// Times sets number of times PropertyServiceClient.UpdateProperty should be invoked
+func (mmUpdateProperty *mPropertyServiceClientMockUpdateProperty) Times(n uint64) *mPropertyServiceClientMockUpdateProperty {
 	if n == 0 {
-		mmUpdateProperty.mock.t.Fatalf("Times of PropertyServiceHandlerMock.UpdateProperty mock can not be zero")
+		mmUpdateProperty.mock.t.Fatalf("Times of PropertyServiceClientMock.UpdateProperty mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmUpdateProperty.expectedInvocations, n)
 	mmUpdateProperty.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmUpdateProperty
 }
 
-func (mmUpdateProperty *mPropertyServiceHandlerMockUpdateProperty) invocationsDone() bool {
+func (mmUpdateProperty *mPropertyServiceClientMockUpdateProperty) invocationsDone() bool {
 	if len(mmUpdateProperty.expectations) == 0 && mmUpdateProperty.defaultExpectation == nil && mmUpdateProperty.mock.funcUpdateProperty == nil {
 		return true
 	}
@@ -4613,8 +4493,8 @@ func (mmUpdateProperty *mPropertyServiceHandlerMockUpdateProperty) invocationsDo
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// UpdateProperty implements mm_propertyv1connect.PropertyServiceHandler
-func (mmUpdateProperty *PropertyServiceHandlerMock) UpdateProperty(ctx context.Context, pp1 *connect.Request[v1.UpdatePropertyRequest]) (pp2 *connect.Response[v1.UpdatePropertyResponse], err error) {
+// UpdateProperty implements mm_propertyv1connect.PropertyServiceClient
+func (mmUpdateProperty *PropertyServiceClientMock) UpdateProperty(ctx context.Context, pp1 *connect.Request[v1.UpdatePropertyRequest]) (pp2 *connect.Response[v1.UpdatePropertyResponse], err error) {
 	mm_atomic.AddUint64(&mmUpdateProperty.beforeUpdatePropertyCounter, 1)
 	defer mm_atomic.AddUint64(&mmUpdateProperty.afterUpdatePropertyCounter, 1)
 
@@ -4624,7 +4504,7 @@ func (mmUpdateProperty *PropertyServiceHandlerMock) UpdateProperty(ctx context.C
 		mmUpdateProperty.inspectFuncUpdateProperty(ctx, pp1)
 	}
 
-	mm_params := PropertyServiceHandlerMockUpdatePropertyParams{ctx, pp1}
+	mm_params := PropertyServiceClientMockUpdatePropertyParams{ctx, pp1}
 
 	// Record call args
 	mmUpdateProperty.UpdatePropertyMock.mutex.Lock()
@@ -4643,54 +4523,54 @@ func (mmUpdateProperty *PropertyServiceHandlerMock) UpdateProperty(ctx context.C
 		mm_want := mmUpdateProperty.UpdatePropertyMock.defaultExpectation.params
 		mm_want_ptrs := mmUpdateProperty.UpdatePropertyMock.defaultExpectation.paramPtrs
 
-		mm_got := PropertyServiceHandlerMockUpdatePropertyParams{ctx, pp1}
+		mm_got := PropertyServiceClientMockUpdatePropertyParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmUpdateProperty.t.Errorf("PropertyServiceHandlerMock.UpdateProperty got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmUpdateProperty.t.Errorf("PropertyServiceClientMock.UpdateProperty got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmUpdateProperty.UpdatePropertyMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmUpdateProperty.t.Errorf("PropertyServiceHandlerMock.UpdateProperty got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmUpdateProperty.t.Errorf("PropertyServiceClientMock.UpdateProperty got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmUpdateProperty.UpdatePropertyMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmUpdateProperty.t.Errorf("PropertyServiceHandlerMock.UpdateProperty got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmUpdateProperty.t.Errorf("PropertyServiceClientMock.UpdateProperty got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmUpdateProperty.UpdatePropertyMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmUpdateProperty.UpdatePropertyMock.defaultExpectation.results
 		if mm_results == nil {
-			mmUpdateProperty.t.Fatal("No results are set for the PropertyServiceHandlerMock.UpdateProperty")
+			mmUpdateProperty.t.Fatal("No results are set for the PropertyServiceClientMock.UpdateProperty")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmUpdateProperty.funcUpdateProperty != nil {
 		return mmUpdateProperty.funcUpdateProperty(ctx, pp1)
 	}
-	mmUpdateProperty.t.Fatalf("Unexpected call to PropertyServiceHandlerMock.UpdateProperty. %v %v", ctx, pp1)
+	mmUpdateProperty.t.Fatalf("Unexpected call to PropertyServiceClientMock.UpdateProperty. %v %v", ctx, pp1)
 	return
 }
 
-// UpdatePropertyAfterCounter returns a count of finished PropertyServiceHandlerMock.UpdateProperty invocations
-func (mmUpdateProperty *PropertyServiceHandlerMock) UpdatePropertyAfterCounter() uint64 {
+// UpdatePropertyAfterCounter returns a count of finished PropertyServiceClientMock.UpdateProperty invocations
+func (mmUpdateProperty *PropertyServiceClientMock) UpdatePropertyAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmUpdateProperty.afterUpdatePropertyCounter)
 }
 
-// UpdatePropertyBeforeCounter returns a count of PropertyServiceHandlerMock.UpdateProperty invocations
-func (mmUpdateProperty *PropertyServiceHandlerMock) UpdatePropertyBeforeCounter() uint64 {
+// UpdatePropertyBeforeCounter returns a count of PropertyServiceClientMock.UpdateProperty invocations
+func (mmUpdateProperty *PropertyServiceClientMock) UpdatePropertyBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmUpdateProperty.beforeUpdatePropertyCounter)
 }
 
-// Calls returns a list of arguments used in each call to PropertyServiceHandlerMock.UpdateProperty.
+// Calls returns a list of arguments used in each call to PropertyServiceClientMock.UpdateProperty.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmUpdateProperty *mPropertyServiceHandlerMockUpdateProperty) Calls() []*PropertyServiceHandlerMockUpdatePropertyParams {
+func (mmUpdateProperty *mPropertyServiceClientMockUpdateProperty) Calls() []*PropertyServiceClientMockUpdatePropertyParams {
 	mmUpdateProperty.mutex.RLock()
 
-	argCopy := make([]*PropertyServiceHandlerMockUpdatePropertyParams, len(mmUpdateProperty.callArgs))
+	argCopy := make([]*PropertyServiceClientMockUpdatePropertyParams, len(mmUpdateProperty.callArgs))
 	copy(argCopy, mmUpdateProperty.callArgs)
 
 	mmUpdateProperty.mutex.RUnlock()
@@ -4700,7 +4580,7 @@ func (mmUpdateProperty *mPropertyServiceHandlerMockUpdateProperty) Calls() []*Pr
 
 // MinimockUpdatePropertyDone returns true if the count of the UpdateProperty invocations corresponds
 // the number of defined expectations
-func (m *PropertyServiceHandlerMock) MinimockUpdatePropertyDone() bool {
+func (m *PropertyServiceClientMock) MinimockUpdatePropertyDone() bool {
 	if m.UpdatePropertyMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -4716,10 +4596,10 @@ func (m *PropertyServiceHandlerMock) MinimockUpdatePropertyDone() bool {
 }
 
 // MinimockUpdatePropertyInspect logs each unmet expectation
-func (m *PropertyServiceHandlerMock) MinimockUpdatePropertyInspect() {
+func (m *PropertyServiceClientMock) MinimockUpdatePropertyInspect() {
 	for _, e := range m.UpdatePropertyMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to PropertyServiceHandlerMock.UpdateProperty at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to PropertyServiceClientMock.UpdateProperty at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -4727,24 +4607,24 @@ func (m *PropertyServiceHandlerMock) MinimockUpdatePropertyInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.UpdatePropertyMock.defaultExpectation != nil && afterUpdatePropertyCounter < 1 {
 		if m.UpdatePropertyMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to PropertyServiceHandlerMock.UpdateProperty at\n%s", m.UpdatePropertyMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to PropertyServiceClientMock.UpdateProperty at\n%s", m.UpdatePropertyMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to PropertyServiceHandlerMock.UpdateProperty at\n%s with params: %#v", m.UpdatePropertyMock.defaultExpectation.expectationOrigins.origin, *m.UpdatePropertyMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to PropertyServiceClientMock.UpdateProperty at\n%s with params: %#v", m.UpdatePropertyMock.defaultExpectation.expectationOrigins.origin, *m.UpdatePropertyMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcUpdateProperty != nil && afterUpdatePropertyCounter < 1 {
-		m.t.Errorf("Expected call to PropertyServiceHandlerMock.UpdateProperty at\n%s", m.funcUpdatePropertyOrigin)
+		m.t.Errorf("Expected call to PropertyServiceClientMock.UpdateProperty at\n%s", m.funcUpdatePropertyOrigin)
 	}
 
 	if !m.UpdatePropertyMock.invocationsDone() && afterUpdatePropertyCounter > 0 {
-		m.t.Errorf("Expected %d calls to PropertyServiceHandlerMock.UpdateProperty at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to PropertyServiceClientMock.UpdateProperty at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.UpdatePropertyMock.expectedInvocations), m.UpdatePropertyMock.expectedInvocationsOrigin, afterUpdatePropertyCounter)
 	}
 }
 
 // MinimockFinish checks that all mocked methods have been called the expected number of times
-func (m *PropertyServiceHandlerMock) MinimockFinish() {
+func (m *PropertyServiceClientMock) MinimockFinish() {
 	m.finishOnce.Do(func() {
 		if !m.minimockDone() {
 			m.MinimockAddLocalityInspect()
@@ -4777,7 +4657,7 @@ func (m *PropertyServiceHandlerMock) MinimockFinish() {
 }
 
 // MinimockWait waits for all mocked methods to be called the expected number of times
-func (m *PropertyServiceHandlerMock) MinimockWait(timeout mm_time.Duration) {
+func (m *PropertyServiceClientMock) MinimockWait(timeout mm_time.Duration) {
 	timeoutCh := mm_time.After(timeout)
 	for {
 		if m.minimockDone() {
@@ -4792,7 +4672,7 @@ func (m *PropertyServiceHandlerMock) MinimockWait(timeout mm_time.Duration) {
 	}
 }
 
-func (m *PropertyServiceHandlerMock) minimockDone() bool {
+func (m *PropertyServiceClientMock) minimockDone() bool {
 	done := true
 	return done &&
 		m.MinimockAddLocalityDone() &&

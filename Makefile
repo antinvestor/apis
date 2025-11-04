@@ -165,19 +165,19 @@ openapi_files_gen_dart: ## Generate the dart open api spec for the files server
 
 .PHONY: generate_minimock_mocks
 generate_minimock_mocks: $(BIN)/minimock
-	$(call connect_handler_mock,chat,v1,chat,ChatServiceHandler,)
-	$(call connect_handler_mock,chat,v1,gateway,GatewayServiceHandler,)
-	$(call connect_handler_mock,device,v1,device,DeviceServiceHandler,)
-	$(call connect_handler_mock,files,v1,files,FilesServiceHandler,)
-	$(call connect_handler_mock,notification,v1,notification,NotificationServiceHandler,)
-	$(call connect_handler_mock,ocr,v1,ocr,OCRServiceHandler,)
-	$(call connect_handler_mock,partition,v1,partition,PartitionServiceHandler,)
-	$(call connect_handler_mock,payment,v1,payment,PaymentServiceHandler,)
-	$(call connect_handler_mock,profile,v1,profile,ProfileServiceHandler,)
-	$(call connect_handler_mock,property,v1,property,PropertyServiceHandler,)
-	$(call connect_handler_mock,settings,v1,settings,SettingsServiceHandler,settingz)
-	$(call connect_handler_mock,ledger,v1,ledger,LedgerServiceHandler,)
-	$(call connect_handler_mock,lostid,v1,lostid,LostIdServiceHandler,)
+	$(call connect_handler_mock,chat,v1,chat,ChatServiceClient,)
+	$(call connect_handler_mock,chat,v1,gateway,GatewayServiceClient,)
+	$(call connect_handler_mock,device,v1,device,DeviceServiceClient,)
+	$(call connect_handler_mock,files,v1,files,FilesServiceClient,)
+	$(call connect_handler_mock,notification,v1,notification,NotificationServiceClient,)
+	$(call connect_handler_mock,ocr,v1,ocr,OCRServiceClient,)
+	$(call connect_handler_mock,partition,v1,partition,PartitionServiceClient,)
+	$(call connect_handler_mock,payment,v1,payment,PaymentServiceClient,)
+	$(call connect_handler_mock,profile,v1,profile,ProfileServiceClient,)
+	$(call connect_handler_mock,property,v1,property,PropertyServiceClient,)
+	$(call connect_handler_mock,settings,v1,settings,SettingsServiceClient,settingz)
+	$(call connect_handler_mock,ledger,v1,ledger,LedgerServiceClient,)
+	$(call connect_handler_mock,lostid,v1,lostid,LostIdServiceClient,)
 
 
 .PHONY: generate_buf_gen

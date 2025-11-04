@@ -2,7 +2,7 @@
 
 package mocks
 
-//go:generate minimock -i buf.build/gen/go/antinvestor/profile/connectrpc/go/profile/v1/profilev1connect.ProfileServiceHandler -o profile_handler.gen.go -n ProfileServiceHandlerMock -p mocks
+//go:generate minimock -i buf.build/gen/go/antinvestor/profile/connectrpc/go/profile/v1/profilev1connect.ProfileServiceClient -o profile_handler.gen.go -n ProfileServiceClientMock -p mocks
 
 import (
 	context "context"
@@ -15,8 +15,8 @@ import (
 	"github.com/gojuno/minimock/v3"
 )
 
-// ProfileServiceHandlerMock implements mm_profilev1connect.ProfileServiceHandler
-type ProfileServiceHandlerMock struct {
+// ProfileServiceClientMock implements mm_profilev1connect.ProfileServiceClient
+type ProfileServiceClientMock struct {
 	t          minimock.Tester
 	finishOnce sync.Once
 
@@ -25,239 +25,239 @@ type ProfileServiceHandlerMock struct {
 	inspectFuncAddAddress   func(ctx context.Context, pp1 *connect.Request[v1.AddAddressRequest])
 	afterAddAddressCounter  uint64
 	beforeAddAddressCounter uint64
-	AddAddressMock          mProfileServiceHandlerMockAddAddress
+	AddAddressMock          mProfileServiceClientMockAddAddress
 
 	funcAddContact          func(ctx context.Context, pp1 *connect.Request[v1.AddContactRequest]) (pp2 *connect.Response[v1.AddContactResponse], err error)
 	funcAddContactOrigin    string
 	inspectFuncAddContact   func(ctx context.Context, pp1 *connect.Request[v1.AddContactRequest])
 	afterAddContactCounter  uint64
 	beforeAddContactCounter uint64
-	AddContactMock          mProfileServiceHandlerMockAddContact
+	AddContactMock          mProfileServiceClientMockAddContact
 
 	funcAddRelationship          func(ctx context.Context, pp1 *connect.Request[v1.AddRelationshipRequest]) (pp2 *connect.Response[v1.AddRelationshipResponse], err error)
 	funcAddRelationshipOrigin    string
 	inspectFuncAddRelationship   func(ctx context.Context, pp1 *connect.Request[v1.AddRelationshipRequest])
 	afterAddRelationshipCounter  uint64
 	beforeAddRelationshipCounter uint64
-	AddRelationshipMock          mProfileServiceHandlerMockAddRelationship
+	AddRelationshipMock          mProfileServiceClientMockAddRelationship
 
 	funcAddRoster          func(ctx context.Context, pp1 *connect.Request[v1.AddRosterRequest]) (pp2 *connect.Response[v1.AddRosterResponse], err error)
 	funcAddRosterOrigin    string
 	inspectFuncAddRoster   func(ctx context.Context, pp1 *connect.Request[v1.AddRosterRequest])
 	afterAddRosterCounter  uint64
 	beforeAddRosterCounter uint64
-	AddRosterMock          mProfileServiceHandlerMockAddRoster
+	AddRosterMock          mProfileServiceClientMockAddRoster
 
 	funcCheckVerification          func(ctx context.Context, pp1 *connect.Request[v1.CheckVerificationRequest]) (pp2 *connect.Response[v1.CheckVerificationResponse], err error)
 	funcCheckVerificationOrigin    string
 	inspectFuncCheckVerification   func(ctx context.Context, pp1 *connect.Request[v1.CheckVerificationRequest])
 	afterCheckVerificationCounter  uint64
 	beforeCheckVerificationCounter uint64
-	CheckVerificationMock          mProfileServiceHandlerMockCheckVerification
+	CheckVerificationMock          mProfileServiceClientMockCheckVerification
 
 	funcCreate          func(ctx context.Context, pp1 *connect.Request[v1.CreateRequest]) (pp2 *connect.Response[v1.CreateResponse], err error)
 	funcCreateOrigin    string
 	inspectFuncCreate   func(ctx context.Context, pp1 *connect.Request[v1.CreateRequest])
 	afterCreateCounter  uint64
 	beforeCreateCounter uint64
-	CreateMock          mProfileServiceHandlerMockCreate
+	CreateMock          mProfileServiceClientMockCreate
 
 	funcCreateContact          func(ctx context.Context, pp1 *connect.Request[v1.CreateContactRequest]) (pp2 *connect.Response[v1.CreateContactResponse], err error)
 	funcCreateContactOrigin    string
 	inspectFuncCreateContact   func(ctx context.Context, pp1 *connect.Request[v1.CreateContactRequest])
 	afterCreateContactCounter  uint64
 	beforeCreateContactCounter uint64
-	CreateContactMock          mProfileServiceHandlerMockCreateContact
+	CreateContactMock          mProfileServiceClientMockCreateContact
 
 	funcCreateContactVerification          func(ctx context.Context, pp1 *connect.Request[v1.CreateContactVerificationRequest]) (pp2 *connect.Response[v1.CreateContactVerificationResponse], err error)
 	funcCreateContactVerificationOrigin    string
 	inspectFuncCreateContactVerification   func(ctx context.Context, pp1 *connect.Request[v1.CreateContactVerificationRequest])
 	afterCreateContactVerificationCounter  uint64
 	beforeCreateContactVerificationCounter uint64
-	CreateContactVerificationMock          mProfileServiceHandlerMockCreateContactVerification
+	CreateContactVerificationMock          mProfileServiceClientMockCreateContactVerification
 
 	funcDeleteRelationship          func(ctx context.Context, pp1 *connect.Request[v1.DeleteRelationshipRequest]) (pp2 *connect.Response[v1.DeleteRelationshipResponse], err error)
 	funcDeleteRelationshipOrigin    string
 	inspectFuncDeleteRelationship   func(ctx context.Context, pp1 *connect.Request[v1.DeleteRelationshipRequest])
 	afterDeleteRelationshipCounter  uint64
 	beforeDeleteRelationshipCounter uint64
-	DeleteRelationshipMock          mProfileServiceHandlerMockDeleteRelationship
+	DeleteRelationshipMock          mProfileServiceClientMockDeleteRelationship
 
 	funcGetByContact          func(ctx context.Context, pp1 *connect.Request[v1.GetByContactRequest]) (pp2 *connect.Response[v1.GetByContactResponse], err error)
 	funcGetByContactOrigin    string
 	inspectFuncGetByContact   func(ctx context.Context, pp1 *connect.Request[v1.GetByContactRequest])
 	afterGetByContactCounter  uint64
 	beforeGetByContactCounter uint64
-	GetByContactMock          mProfileServiceHandlerMockGetByContact
+	GetByContactMock          mProfileServiceClientMockGetByContact
 
 	funcGetById          func(ctx context.Context, pp1 *connect.Request[v1.GetByIdRequest]) (pp2 *connect.Response[v1.GetByIdResponse], err error)
 	funcGetByIdOrigin    string
 	inspectFuncGetById   func(ctx context.Context, pp1 *connect.Request[v1.GetByIdRequest])
 	afterGetByIdCounter  uint64
 	beforeGetByIdCounter uint64
-	GetByIdMock          mProfileServiceHandlerMockGetById
+	GetByIdMock          mProfileServiceClientMockGetById
 
-	funcListRelationship          func(ctx context.Context, pp1 *connect.Request[v1.ListRelationshipRequest], pp2 *connect.ServerStream[v1.ListRelationshipResponse]) (err error)
+	funcListRelationship          func(ctx context.Context, pp1 *connect.Request[v1.ListRelationshipRequest]) (pp2 *connect.ServerStreamForClient[v1.ListRelationshipResponse], err error)
 	funcListRelationshipOrigin    string
-	inspectFuncListRelationship   func(ctx context.Context, pp1 *connect.Request[v1.ListRelationshipRequest], pp2 *connect.ServerStream[v1.ListRelationshipResponse])
+	inspectFuncListRelationship   func(ctx context.Context, pp1 *connect.Request[v1.ListRelationshipRequest])
 	afterListRelationshipCounter  uint64
 	beforeListRelationshipCounter uint64
-	ListRelationshipMock          mProfileServiceHandlerMockListRelationship
+	ListRelationshipMock          mProfileServiceClientMockListRelationship
 
 	funcMerge          func(ctx context.Context, pp1 *connect.Request[v1.MergeRequest]) (pp2 *connect.Response[v1.MergeResponse], err error)
 	funcMergeOrigin    string
 	inspectFuncMerge   func(ctx context.Context, pp1 *connect.Request[v1.MergeRequest])
 	afterMergeCounter  uint64
 	beforeMergeCounter uint64
-	MergeMock          mProfileServiceHandlerMockMerge
+	MergeMock          mProfileServiceClientMockMerge
 
 	funcRemoveContact          func(ctx context.Context, pp1 *connect.Request[v1.RemoveContactRequest]) (pp2 *connect.Response[v1.RemoveContactResponse], err error)
 	funcRemoveContactOrigin    string
 	inspectFuncRemoveContact   func(ctx context.Context, pp1 *connect.Request[v1.RemoveContactRequest])
 	afterRemoveContactCounter  uint64
 	beforeRemoveContactCounter uint64
-	RemoveContactMock          mProfileServiceHandlerMockRemoveContact
+	RemoveContactMock          mProfileServiceClientMockRemoveContact
 
 	funcRemoveRoster          func(ctx context.Context, pp1 *connect.Request[v1.RemoveRosterRequest]) (pp2 *connect.Response[v1.RemoveRosterResponse], err error)
 	funcRemoveRosterOrigin    string
 	inspectFuncRemoveRoster   func(ctx context.Context, pp1 *connect.Request[v1.RemoveRosterRequest])
 	afterRemoveRosterCounter  uint64
 	beforeRemoveRosterCounter uint64
-	RemoveRosterMock          mProfileServiceHandlerMockRemoveRoster
+	RemoveRosterMock          mProfileServiceClientMockRemoveRoster
 
-	funcSearch          func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest], pp2 *connect.ServerStream[v1.SearchResponse]) (err error)
+	funcSearch          func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) (pp2 *connect.ServerStreamForClient[v1.SearchResponse], err error)
 	funcSearchOrigin    string
-	inspectFuncSearch   func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest], pp2 *connect.ServerStream[v1.SearchResponse])
+	inspectFuncSearch   func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest])
 	afterSearchCounter  uint64
 	beforeSearchCounter uint64
-	SearchMock          mProfileServiceHandlerMockSearch
+	SearchMock          mProfileServiceClientMockSearch
 
-	funcSearchRoster          func(ctx context.Context, pp1 *connect.Request[v1.SearchRosterRequest], pp2 *connect.ServerStream[v1.SearchRosterResponse]) (err error)
+	funcSearchRoster          func(ctx context.Context, pp1 *connect.Request[v1.SearchRosterRequest]) (pp2 *connect.ServerStreamForClient[v1.SearchRosterResponse], err error)
 	funcSearchRosterOrigin    string
-	inspectFuncSearchRoster   func(ctx context.Context, pp1 *connect.Request[v1.SearchRosterRequest], pp2 *connect.ServerStream[v1.SearchRosterResponse])
+	inspectFuncSearchRoster   func(ctx context.Context, pp1 *connect.Request[v1.SearchRosterRequest])
 	afterSearchRosterCounter  uint64
 	beforeSearchRosterCounter uint64
-	SearchRosterMock          mProfileServiceHandlerMockSearchRoster
+	SearchRosterMock          mProfileServiceClientMockSearchRoster
 
 	funcUpdate          func(ctx context.Context, pp1 *connect.Request[v1.UpdateRequest]) (pp2 *connect.Response[v1.UpdateResponse], err error)
 	funcUpdateOrigin    string
 	inspectFuncUpdate   func(ctx context.Context, pp1 *connect.Request[v1.UpdateRequest])
 	afterUpdateCounter  uint64
 	beforeUpdateCounter uint64
-	UpdateMock          mProfileServiceHandlerMockUpdate
+	UpdateMock          mProfileServiceClientMockUpdate
 }
 
-// NewProfileServiceHandlerMock returns a mock for mm_profilev1connect.ProfileServiceHandler
-func NewProfileServiceHandlerMock(t minimock.Tester) *ProfileServiceHandlerMock {
-	m := &ProfileServiceHandlerMock{t: t}
+// NewProfileServiceClientMock returns a mock for mm_profilev1connect.ProfileServiceClient
+func NewProfileServiceClientMock(t minimock.Tester) *ProfileServiceClientMock {
+	m := &ProfileServiceClientMock{t: t}
 
 	if controller, ok := t.(minimock.MockController); ok {
 		controller.RegisterMocker(m)
 	}
 
-	m.AddAddressMock = mProfileServiceHandlerMockAddAddress{mock: m}
-	m.AddAddressMock.callArgs = []*ProfileServiceHandlerMockAddAddressParams{}
+	m.AddAddressMock = mProfileServiceClientMockAddAddress{mock: m}
+	m.AddAddressMock.callArgs = []*ProfileServiceClientMockAddAddressParams{}
 
-	m.AddContactMock = mProfileServiceHandlerMockAddContact{mock: m}
-	m.AddContactMock.callArgs = []*ProfileServiceHandlerMockAddContactParams{}
+	m.AddContactMock = mProfileServiceClientMockAddContact{mock: m}
+	m.AddContactMock.callArgs = []*ProfileServiceClientMockAddContactParams{}
 
-	m.AddRelationshipMock = mProfileServiceHandlerMockAddRelationship{mock: m}
-	m.AddRelationshipMock.callArgs = []*ProfileServiceHandlerMockAddRelationshipParams{}
+	m.AddRelationshipMock = mProfileServiceClientMockAddRelationship{mock: m}
+	m.AddRelationshipMock.callArgs = []*ProfileServiceClientMockAddRelationshipParams{}
 
-	m.AddRosterMock = mProfileServiceHandlerMockAddRoster{mock: m}
-	m.AddRosterMock.callArgs = []*ProfileServiceHandlerMockAddRosterParams{}
+	m.AddRosterMock = mProfileServiceClientMockAddRoster{mock: m}
+	m.AddRosterMock.callArgs = []*ProfileServiceClientMockAddRosterParams{}
 
-	m.CheckVerificationMock = mProfileServiceHandlerMockCheckVerification{mock: m}
-	m.CheckVerificationMock.callArgs = []*ProfileServiceHandlerMockCheckVerificationParams{}
+	m.CheckVerificationMock = mProfileServiceClientMockCheckVerification{mock: m}
+	m.CheckVerificationMock.callArgs = []*ProfileServiceClientMockCheckVerificationParams{}
 
-	m.CreateMock = mProfileServiceHandlerMockCreate{mock: m}
-	m.CreateMock.callArgs = []*ProfileServiceHandlerMockCreateParams{}
+	m.CreateMock = mProfileServiceClientMockCreate{mock: m}
+	m.CreateMock.callArgs = []*ProfileServiceClientMockCreateParams{}
 
-	m.CreateContactMock = mProfileServiceHandlerMockCreateContact{mock: m}
-	m.CreateContactMock.callArgs = []*ProfileServiceHandlerMockCreateContactParams{}
+	m.CreateContactMock = mProfileServiceClientMockCreateContact{mock: m}
+	m.CreateContactMock.callArgs = []*ProfileServiceClientMockCreateContactParams{}
 
-	m.CreateContactVerificationMock = mProfileServiceHandlerMockCreateContactVerification{mock: m}
-	m.CreateContactVerificationMock.callArgs = []*ProfileServiceHandlerMockCreateContactVerificationParams{}
+	m.CreateContactVerificationMock = mProfileServiceClientMockCreateContactVerification{mock: m}
+	m.CreateContactVerificationMock.callArgs = []*ProfileServiceClientMockCreateContactVerificationParams{}
 
-	m.DeleteRelationshipMock = mProfileServiceHandlerMockDeleteRelationship{mock: m}
-	m.DeleteRelationshipMock.callArgs = []*ProfileServiceHandlerMockDeleteRelationshipParams{}
+	m.DeleteRelationshipMock = mProfileServiceClientMockDeleteRelationship{mock: m}
+	m.DeleteRelationshipMock.callArgs = []*ProfileServiceClientMockDeleteRelationshipParams{}
 
-	m.GetByContactMock = mProfileServiceHandlerMockGetByContact{mock: m}
-	m.GetByContactMock.callArgs = []*ProfileServiceHandlerMockGetByContactParams{}
+	m.GetByContactMock = mProfileServiceClientMockGetByContact{mock: m}
+	m.GetByContactMock.callArgs = []*ProfileServiceClientMockGetByContactParams{}
 
-	m.GetByIdMock = mProfileServiceHandlerMockGetById{mock: m}
-	m.GetByIdMock.callArgs = []*ProfileServiceHandlerMockGetByIdParams{}
+	m.GetByIdMock = mProfileServiceClientMockGetById{mock: m}
+	m.GetByIdMock.callArgs = []*ProfileServiceClientMockGetByIdParams{}
 
-	m.ListRelationshipMock = mProfileServiceHandlerMockListRelationship{mock: m}
-	m.ListRelationshipMock.callArgs = []*ProfileServiceHandlerMockListRelationshipParams{}
+	m.ListRelationshipMock = mProfileServiceClientMockListRelationship{mock: m}
+	m.ListRelationshipMock.callArgs = []*ProfileServiceClientMockListRelationshipParams{}
 
-	m.MergeMock = mProfileServiceHandlerMockMerge{mock: m}
-	m.MergeMock.callArgs = []*ProfileServiceHandlerMockMergeParams{}
+	m.MergeMock = mProfileServiceClientMockMerge{mock: m}
+	m.MergeMock.callArgs = []*ProfileServiceClientMockMergeParams{}
 
-	m.RemoveContactMock = mProfileServiceHandlerMockRemoveContact{mock: m}
-	m.RemoveContactMock.callArgs = []*ProfileServiceHandlerMockRemoveContactParams{}
+	m.RemoveContactMock = mProfileServiceClientMockRemoveContact{mock: m}
+	m.RemoveContactMock.callArgs = []*ProfileServiceClientMockRemoveContactParams{}
 
-	m.RemoveRosterMock = mProfileServiceHandlerMockRemoveRoster{mock: m}
-	m.RemoveRosterMock.callArgs = []*ProfileServiceHandlerMockRemoveRosterParams{}
+	m.RemoveRosterMock = mProfileServiceClientMockRemoveRoster{mock: m}
+	m.RemoveRosterMock.callArgs = []*ProfileServiceClientMockRemoveRosterParams{}
 
-	m.SearchMock = mProfileServiceHandlerMockSearch{mock: m}
-	m.SearchMock.callArgs = []*ProfileServiceHandlerMockSearchParams{}
+	m.SearchMock = mProfileServiceClientMockSearch{mock: m}
+	m.SearchMock.callArgs = []*ProfileServiceClientMockSearchParams{}
 
-	m.SearchRosterMock = mProfileServiceHandlerMockSearchRoster{mock: m}
-	m.SearchRosterMock.callArgs = []*ProfileServiceHandlerMockSearchRosterParams{}
+	m.SearchRosterMock = mProfileServiceClientMockSearchRoster{mock: m}
+	m.SearchRosterMock.callArgs = []*ProfileServiceClientMockSearchRosterParams{}
 
-	m.UpdateMock = mProfileServiceHandlerMockUpdate{mock: m}
-	m.UpdateMock.callArgs = []*ProfileServiceHandlerMockUpdateParams{}
+	m.UpdateMock = mProfileServiceClientMockUpdate{mock: m}
+	m.UpdateMock.callArgs = []*ProfileServiceClientMockUpdateParams{}
 
 	t.Cleanup(m.MinimockFinish)
 
 	return m
 }
 
-type mProfileServiceHandlerMockAddAddress struct {
+type mProfileServiceClientMockAddAddress struct {
 	optional           bool
-	mock               *ProfileServiceHandlerMock
-	defaultExpectation *ProfileServiceHandlerMockAddAddressExpectation
-	expectations       []*ProfileServiceHandlerMockAddAddressExpectation
+	mock               *ProfileServiceClientMock
+	defaultExpectation *ProfileServiceClientMockAddAddressExpectation
+	expectations       []*ProfileServiceClientMockAddAddressExpectation
 
-	callArgs []*ProfileServiceHandlerMockAddAddressParams
+	callArgs []*ProfileServiceClientMockAddAddressParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// ProfileServiceHandlerMockAddAddressExpectation specifies expectation struct of the ProfileServiceHandler.AddAddress
-type ProfileServiceHandlerMockAddAddressExpectation struct {
-	mock               *ProfileServiceHandlerMock
-	params             *ProfileServiceHandlerMockAddAddressParams
-	paramPtrs          *ProfileServiceHandlerMockAddAddressParamPtrs
-	expectationOrigins ProfileServiceHandlerMockAddAddressExpectationOrigins
-	results            *ProfileServiceHandlerMockAddAddressResults
+// ProfileServiceClientMockAddAddressExpectation specifies expectation struct of the ProfileServiceClient.AddAddress
+type ProfileServiceClientMockAddAddressExpectation struct {
+	mock               *ProfileServiceClientMock
+	params             *ProfileServiceClientMockAddAddressParams
+	paramPtrs          *ProfileServiceClientMockAddAddressParamPtrs
+	expectationOrigins ProfileServiceClientMockAddAddressExpectationOrigins
+	results            *ProfileServiceClientMockAddAddressResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// ProfileServiceHandlerMockAddAddressParams contains parameters of the ProfileServiceHandler.AddAddress
-type ProfileServiceHandlerMockAddAddressParams struct {
+// ProfileServiceClientMockAddAddressParams contains parameters of the ProfileServiceClient.AddAddress
+type ProfileServiceClientMockAddAddressParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.AddAddressRequest]
 }
 
-// ProfileServiceHandlerMockAddAddressParamPtrs contains pointers to parameters of the ProfileServiceHandler.AddAddress
-type ProfileServiceHandlerMockAddAddressParamPtrs struct {
+// ProfileServiceClientMockAddAddressParamPtrs contains pointers to parameters of the ProfileServiceClient.AddAddress
+type ProfileServiceClientMockAddAddressParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.AddAddressRequest]
 }
 
-// ProfileServiceHandlerMockAddAddressResults contains results of the ProfileServiceHandler.AddAddress
-type ProfileServiceHandlerMockAddAddressResults struct {
+// ProfileServiceClientMockAddAddressResults contains results of the ProfileServiceClient.AddAddress
+type ProfileServiceClientMockAddAddressResults struct {
 	pp2 *connect.Response[v1.AddAddressResponse]
 	err error
 }
 
-// ProfileServiceHandlerMockAddAddressOrigins contains origins of expectations of the ProfileServiceHandler.AddAddress
-type ProfileServiceHandlerMockAddAddressExpectationOrigins struct {
+// ProfileServiceClientMockAddAddressOrigins contains origins of expectations of the ProfileServiceClient.AddAddress
+type ProfileServiceClientMockAddAddressExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -268,26 +268,26 @@ type ProfileServiceHandlerMockAddAddressExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmAddAddress *mProfileServiceHandlerMockAddAddress) Optional() *mProfileServiceHandlerMockAddAddress {
+func (mmAddAddress *mProfileServiceClientMockAddAddress) Optional() *mProfileServiceClientMockAddAddress {
 	mmAddAddress.optional = true
 	return mmAddAddress
 }
 
-// Expect sets up expected params for ProfileServiceHandler.AddAddress
-func (mmAddAddress *mProfileServiceHandlerMockAddAddress) Expect(ctx context.Context, pp1 *connect.Request[v1.AddAddressRequest]) *mProfileServiceHandlerMockAddAddress {
+// Expect sets up expected params for ProfileServiceClient.AddAddress
+func (mmAddAddress *mProfileServiceClientMockAddAddress) Expect(ctx context.Context, pp1 *connect.Request[v1.AddAddressRequest]) *mProfileServiceClientMockAddAddress {
 	if mmAddAddress.mock.funcAddAddress != nil {
-		mmAddAddress.mock.t.Fatalf("ProfileServiceHandlerMock.AddAddress mock is already set by Set")
+		mmAddAddress.mock.t.Fatalf("ProfileServiceClientMock.AddAddress mock is already set by Set")
 	}
 
 	if mmAddAddress.defaultExpectation == nil {
-		mmAddAddress.defaultExpectation = &ProfileServiceHandlerMockAddAddressExpectation{}
+		mmAddAddress.defaultExpectation = &ProfileServiceClientMockAddAddressExpectation{}
 	}
 
 	if mmAddAddress.defaultExpectation.paramPtrs != nil {
-		mmAddAddress.mock.t.Fatalf("ProfileServiceHandlerMock.AddAddress mock is already set by ExpectParams functions")
+		mmAddAddress.mock.t.Fatalf("ProfileServiceClientMock.AddAddress mock is already set by ExpectParams functions")
 	}
 
-	mmAddAddress.defaultExpectation.params = &ProfileServiceHandlerMockAddAddressParams{ctx, pp1}
+	mmAddAddress.defaultExpectation.params = &ProfileServiceClientMockAddAddressParams{ctx, pp1}
 	mmAddAddress.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmAddAddress.expectations {
 		if minimock.Equal(e.params, mmAddAddress.defaultExpectation.params) {
@@ -298,22 +298,22 @@ func (mmAddAddress *mProfileServiceHandlerMockAddAddress) Expect(ctx context.Con
 	return mmAddAddress
 }
 
-// ExpectCtxParam1 sets up expected param ctx for ProfileServiceHandler.AddAddress
-func (mmAddAddress *mProfileServiceHandlerMockAddAddress) ExpectCtxParam1(ctx context.Context) *mProfileServiceHandlerMockAddAddress {
+// ExpectCtxParam1 sets up expected param ctx for ProfileServiceClient.AddAddress
+func (mmAddAddress *mProfileServiceClientMockAddAddress) ExpectCtxParam1(ctx context.Context) *mProfileServiceClientMockAddAddress {
 	if mmAddAddress.mock.funcAddAddress != nil {
-		mmAddAddress.mock.t.Fatalf("ProfileServiceHandlerMock.AddAddress mock is already set by Set")
+		mmAddAddress.mock.t.Fatalf("ProfileServiceClientMock.AddAddress mock is already set by Set")
 	}
 
 	if mmAddAddress.defaultExpectation == nil {
-		mmAddAddress.defaultExpectation = &ProfileServiceHandlerMockAddAddressExpectation{}
+		mmAddAddress.defaultExpectation = &ProfileServiceClientMockAddAddressExpectation{}
 	}
 
 	if mmAddAddress.defaultExpectation.params != nil {
-		mmAddAddress.mock.t.Fatalf("ProfileServiceHandlerMock.AddAddress mock is already set by Expect")
+		mmAddAddress.mock.t.Fatalf("ProfileServiceClientMock.AddAddress mock is already set by Expect")
 	}
 
 	if mmAddAddress.defaultExpectation.paramPtrs == nil {
-		mmAddAddress.defaultExpectation.paramPtrs = &ProfileServiceHandlerMockAddAddressParamPtrs{}
+		mmAddAddress.defaultExpectation.paramPtrs = &ProfileServiceClientMockAddAddressParamPtrs{}
 	}
 	mmAddAddress.defaultExpectation.paramPtrs.ctx = &ctx
 	mmAddAddress.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -321,22 +321,22 @@ func (mmAddAddress *mProfileServiceHandlerMockAddAddress) ExpectCtxParam1(ctx co
 	return mmAddAddress
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for ProfileServiceHandler.AddAddress
-func (mmAddAddress *mProfileServiceHandlerMockAddAddress) ExpectPp1Param2(pp1 *connect.Request[v1.AddAddressRequest]) *mProfileServiceHandlerMockAddAddress {
+// ExpectPp1Param2 sets up expected param pp1 for ProfileServiceClient.AddAddress
+func (mmAddAddress *mProfileServiceClientMockAddAddress) ExpectPp1Param2(pp1 *connect.Request[v1.AddAddressRequest]) *mProfileServiceClientMockAddAddress {
 	if mmAddAddress.mock.funcAddAddress != nil {
-		mmAddAddress.mock.t.Fatalf("ProfileServiceHandlerMock.AddAddress mock is already set by Set")
+		mmAddAddress.mock.t.Fatalf("ProfileServiceClientMock.AddAddress mock is already set by Set")
 	}
 
 	if mmAddAddress.defaultExpectation == nil {
-		mmAddAddress.defaultExpectation = &ProfileServiceHandlerMockAddAddressExpectation{}
+		mmAddAddress.defaultExpectation = &ProfileServiceClientMockAddAddressExpectation{}
 	}
 
 	if mmAddAddress.defaultExpectation.params != nil {
-		mmAddAddress.mock.t.Fatalf("ProfileServiceHandlerMock.AddAddress mock is already set by Expect")
+		mmAddAddress.mock.t.Fatalf("ProfileServiceClientMock.AddAddress mock is already set by Expect")
 	}
 
 	if mmAddAddress.defaultExpectation.paramPtrs == nil {
-		mmAddAddress.defaultExpectation.paramPtrs = &ProfileServiceHandlerMockAddAddressParamPtrs{}
+		mmAddAddress.defaultExpectation.paramPtrs = &ProfileServiceClientMockAddAddressParamPtrs{}
 	}
 	mmAddAddress.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmAddAddress.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -344,10 +344,10 @@ func (mmAddAddress *mProfileServiceHandlerMockAddAddress) ExpectPp1Param2(pp1 *c
 	return mmAddAddress
 }
 
-// Inspect accepts an inspector function that has same arguments as the ProfileServiceHandler.AddAddress
-func (mmAddAddress *mProfileServiceHandlerMockAddAddress) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.AddAddressRequest])) *mProfileServiceHandlerMockAddAddress {
+// Inspect accepts an inspector function that has same arguments as the ProfileServiceClient.AddAddress
+func (mmAddAddress *mProfileServiceClientMockAddAddress) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.AddAddressRequest])) *mProfileServiceClientMockAddAddress {
 	if mmAddAddress.mock.inspectFuncAddAddress != nil {
-		mmAddAddress.mock.t.Fatalf("Inspect function is already set for ProfileServiceHandlerMock.AddAddress")
+		mmAddAddress.mock.t.Fatalf("Inspect function is already set for ProfileServiceClientMock.AddAddress")
 	}
 
 	mmAddAddress.mock.inspectFuncAddAddress = f
@@ -355,28 +355,28 @@ func (mmAddAddress *mProfileServiceHandlerMockAddAddress) Inspect(f func(ctx con
 	return mmAddAddress
 }
 
-// Return sets up results that will be returned by ProfileServiceHandler.AddAddress
-func (mmAddAddress *mProfileServiceHandlerMockAddAddress) Return(pp2 *connect.Response[v1.AddAddressResponse], err error) *ProfileServiceHandlerMock {
+// Return sets up results that will be returned by ProfileServiceClient.AddAddress
+func (mmAddAddress *mProfileServiceClientMockAddAddress) Return(pp2 *connect.Response[v1.AddAddressResponse], err error) *ProfileServiceClientMock {
 	if mmAddAddress.mock.funcAddAddress != nil {
-		mmAddAddress.mock.t.Fatalf("ProfileServiceHandlerMock.AddAddress mock is already set by Set")
+		mmAddAddress.mock.t.Fatalf("ProfileServiceClientMock.AddAddress mock is already set by Set")
 	}
 
 	if mmAddAddress.defaultExpectation == nil {
-		mmAddAddress.defaultExpectation = &ProfileServiceHandlerMockAddAddressExpectation{mock: mmAddAddress.mock}
+		mmAddAddress.defaultExpectation = &ProfileServiceClientMockAddAddressExpectation{mock: mmAddAddress.mock}
 	}
-	mmAddAddress.defaultExpectation.results = &ProfileServiceHandlerMockAddAddressResults{pp2, err}
+	mmAddAddress.defaultExpectation.results = &ProfileServiceClientMockAddAddressResults{pp2, err}
 	mmAddAddress.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmAddAddress.mock
 }
 
-// Set uses given function f to mock the ProfileServiceHandler.AddAddress method
-func (mmAddAddress *mProfileServiceHandlerMockAddAddress) Set(f func(ctx context.Context, pp1 *connect.Request[v1.AddAddressRequest]) (pp2 *connect.Response[v1.AddAddressResponse], err error)) *ProfileServiceHandlerMock {
+// Set uses given function f to mock the ProfileServiceClient.AddAddress method
+func (mmAddAddress *mProfileServiceClientMockAddAddress) Set(f func(ctx context.Context, pp1 *connect.Request[v1.AddAddressRequest]) (pp2 *connect.Response[v1.AddAddressResponse], err error)) *ProfileServiceClientMock {
 	if mmAddAddress.defaultExpectation != nil {
-		mmAddAddress.mock.t.Fatalf("Default expectation is already set for the ProfileServiceHandler.AddAddress method")
+		mmAddAddress.mock.t.Fatalf("Default expectation is already set for the ProfileServiceClient.AddAddress method")
 	}
 
 	if len(mmAddAddress.expectations) > 0 {
-		mmAddAddress.mock.t.Fatalf("Some expectations are already set for the ProfileServiceHandler.AddAddress method")
+		mmAddAddress.mock.t.Fatalf("Some expectations are already set for the ProfileServiceClient.AddAddress method")
 	}
 
 	mmAddAddress.mock.funcAddAddress = f
@@ -384,39 +384,39 @@ func (mmAddAddress *mProfileServiceHandlerMockAddAddress) Set(f func(ctx context
 	return mmAddAddress.mock
 }
 
-// When sets expectation for the ProfileServiceHandler.AddAddress which will trigger the result defined by the following
+// When sets expectation for the ProfileServiceClient.AddAddress which will trigger the result defined by the following
 // Then helper
-func (mmAddAddress *mProfileServiceHandlerMockAddAddress) When(ctx context.Context, pp1 *connect.Request[v1.AddAddressRequest]) *ProfileServiceHandlerMockAddAddressExpectation {
+func (mmAddAddress *mProfileServiceClientMockAddAddress) When(ctx context.Context, pp1 *connect.Request[v1.AddAddressRequest]) *ProfileServiceClientMockAddAddressExpectation {
 	if mmAddAddress.mock.funcAddAddress != nil {
-		mmAddAddress.mock.t.Fatalf("ProfileServiceHandlerMock.AddAddress mock is already set by Set")
+		mmAddAddress.mock.t.Fatalf("ProfileServiceClientMock.AddAddress mock is already set by Set")
 	}
 
-	expectation := &ProfileServiceHandlerMockAddAddressExpectation{
+	expectation := &ProfileServiceClientMockAddAddressExpectation{
 		mock:               mmAddAddress.mock,
-		params:             &ProfileServiceHandlerMockAddAddressParams{ctx, pp1},
-		expectationOrigins: ProfileServiceHandlerMockAddAddressExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &ProfileServiceClientMockAddAddressParams{ctx, pp1},
+		expectationOrigins: ProfileServiceClientMockAddAddressExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmAddAddress.expectations = append(mmAddAddress.expectations, expectation)
 	return expectation
 }
 
-// Then sets up ProfileServiceHandler.AddAddress return parameters for the expectation previously defined by the When method
-func (e *ProfileServiceHandlerMockAddAddressExpectation) Then(pp2 *connect.Response[v1.AddAddressResponse], err error) *ProfileServiceHandlerMock {
-	e.results = &ProfileServiceHandlerMockAddAddressResults{pp2, err}
+// Then sets up ProfileServiceClient.AddAddress return parameters for the expectation previously defined by the When method
+func (e *ProfileServiceClientMockAddAddressExpectation) Then(pp2 *connect.Response[v1.AddAddressResponse], err error) *ProfileServiceClientMock {
+	e.results = &ProfileServiceClientMockAddAddressResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times ProfileServiceHandler.AddAddress should be invoked
-func (mmAddAddress *mProfileServiceHandlerMockAddAddress) Times(n uint64) *mProfileServiceHandlerMockAddAddress {
+// Times sets number of times ProfileServiceClient.AddAddress should be invoked
+func (mmAddAddress *mProfileServiceClientMockAddAddress) Times(n uint64) *mProfileServiceClientMockAddAddress {
 	if n == 0 {
-		mmAddAddress.mock.t.Fatalf("Times of ProfileServiceHandlerMock.AddAddress mock can not be zero")
+		mmAddAddress.mock.t.Fatalf("Times of ProfileServiceClientMock.AddAddress mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmAddAddress.expectedInvocations, n)
 	mmAddAddress.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmAddAddress
 }
 
-func (mmAddAddress *mProfileServiceHandlerMockAddAddress) invocationsDone() bool {
+func (mmAddAddress *mProfileServiceClientMockAddAddress) invocationsDone() bool {
 	if len(mmAddAddress.expectations) == 0 && mmAddAddress.defaultExpectation == nil && mmAddAddress.mock.funcAddAddress == nil {
 		return true
 	}
@@ -427,8 +427,8 @@ func (mmAddAddress *mProfileServiceHandlerMockAddAddress) invocationsDone() bool
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// AddAddress implements mm_profilev1connect.ProfileServiceHandler
-func (mmAddAddress *ProfileServiceHandlerMock) AddAddress(ctx context.Context, pp1 *connect.Request[v1.AddAddressRequest]) (pp2 *connect.Response[v1.AddAddressResponse], err error) {
+// AddAddress implements mm_profilev1connect.ProfileServiceClient
+func (mmAddAddress *ProfileServiceClientMock) AddAddress(ctx context.Context, pp1 *connect.Request[v1.AddAddressRequest]) (pp2 *connect.Response[v1.AddAddressResponse], err error) {
 	mm_atomic.AddUint64(&mmAddAddress.beforeAddAddressCounter, 1)
 	defer mm_atomic.AddUint64(&mmAddAddress.afterAddAddressCounter, 1)
 
@@ -438,7 +438,7 @@ func (mmAddAddress *ProfileServiceHandlerMock) AddAddress(ctx context.Context, p
 		mmAddAddress.inspectFuncAddAddress(ctx, pp1)
 	}
 
-	mm_params := ProfileServiceHandlerMockAddAddressParams{ctx, pp1}
+	mm_params := ProfileServiceClientMockAddAddressParams{ctx, pp1}
 
 	// Record call args
 	mmAddAddress.AddAddressMock.mutex.Lock()
@@ -457,54 +457,54 @@ func (mmAddAddress *ProfileServiceHandlerMock) AddAddress(ctx context.Context, p
 		mm_want := mmAddAddress.AddAddressMock.defaultExpectation.params
 		mm_want_ptrs := mmAddAddress.AddAddressMock.defaultExpectation.paramPtrs
 
-		mm_got := ProfileServiceHandlerMockAddAddressParams{ctx, pp1}
+		mm_got := ProfileServiceClientMockAddAddressParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmAddAddress.t.Errorf("ProfileServiceHandlerMock.AddAddress got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmAddAddress.t.Errorf("ProfileServiceClientMock.AddAddress got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmAddAddress.AddAddressMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmAddAddress.t.Errorf("ProfileServiceHandlerMock.AddAddress got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmAddAddress.t.Errorf("ProfileServiceClientMock.AddAddress got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmAddAddress.AddAddressMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmAddAddress.t.Errorf("ProfileServiceHandlerMock.AddAddress got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmAddAddress.t.Errorf("ProfileServiceClientMock.AddAddress got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmAddAddress.AddAddressMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmAddAddress.AddAddressMock.defaultExpectation.results
 		if mm_results == nil {
-			mmAddAddress.t.Fatal("No results are set for the ProfileServiceHandlerMock.AddAddress")
+			mmAddAddress.t.Fatal("No results are set for the ProfileServiceClientMock.AddAddress")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmAddAddress.funcAddAddress != nil {
 		return mmAddAddress.funcAddAddress(ctx, pp1)
 	}
-	mmAddAddress.t.Fatalf("Unexpected call to ProfileServiceHandlerMock.AddAddress. %v %v", ctx, pp1)
+	mmAddAddress.t.Fatalf("Unexpected call to ProfileServiceClientMock.AddAddress. %v %v", ctx, pp1)
 	return
 }
 
-// AddAddressAfterCounter returns a count of finished ProfileServiceHandlerMock.AddAddress invocations
-func (mmAddAddress *ProfileServiceHandlerMock) AddAddressAfterCounter() uint64 {
+// AddAddressAfterCounter returns a count of finished ProfileServiceClientMock.AddAddress invocations
+func (mmAddAddress *ProfileServiceClientMock) AddAddressAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmAddAddress.afterAddAddressCounter)
 }
 
-// AddAddressBeforeCounter returns a count of ProfileServiceHandlerMock.AddAddress invocations
-func (mmAddAddress *ProfileServiceHandlerMock) AddAddressBeforeCounter() uint64 {
+// AddAddressBeforeCounter returns a count of ProfileServiceClientMock.AddAddress invocations
+func (mmAddAddress *ProfileServiceClientMock) AddAddressBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmAddAddress.beforeAddAddressCounter)
 }
 
-// Calls returns a list of arguments used in each call to ProfileServiceHandlerMock.AddAddress.
+// Calls returns a list of arguments used in each call to ProfileServiceClientMock.AddAddress.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmAddAddress *mProfileServiceHandlerMockAddAddress) Calls() []*ProfileServiceHandlerMockAddAddressParams {
+func (mmAddAddress *mProfileServiceClientMockAddAddress) Calls() []*ProfileServiceClientMockAddAddressParams {
 	mmAddAddress.mutex.RLock()
 
-	argCopy := make([]*ProfileServiceHandlerMockAddAddressParams, len(mmAddAddress.callArgs))
+	argCopy := make([]*ProfileServiceClientMockAddAddressParams, len(mmAddAddress.callArgs))
 	copy(argCopy, mmAddAddress.callArgs)
 
 	mmAddAddress.mutex.RUnlock()
@@ -514,7 +514,7 @@ func (mmAddAddress *mProfileServiceHandlerMockAddAddress) Calls() []*ProfileServ
 
 // MinimockAddAddressDone returns true if the count of the AddAddress invocations corresponds
 // the number of defined expectations
-func (m *ProfileServiceHandlerMock) MinimockAddAddressDone() bool {
+func (m *ProfileServiceClientMock) MinimockAddAddressDone() bool {
 	if m.AddAddressMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -530,10 +530,10 @@ func (m *ProfileServiceHandlerMock) MinimockAddAddressDone() bool {
 }
 
 // MinimockAddAddressInspect logs each unmet expectation
-func (m *ProfileServiceHandlerMock) MinimockAddAddressInspect() {
+func (m *ProfileServiceClientMock) MinimockAddAddressInspect() {
 	for _, e := range m.AddAddressMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.AddAddress at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.AddAddress at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -541,66 +541,66 @@ func (m *ProfileServiceHandlerMock) MinimockAddAddressInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.AddAddressMock.defaultExpectation != nil && afterAddAddressCounter < 1 {
 		if m.AddAddressMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.AddAddress at\n%s", m.AddAddressMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.AddAddress at\n%s", m.AddAddressMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.AddAddress at\n%s with params: %#v", m.AddAddressMock.defaultExpectation.expectationOrigins.origin, *m.AddAddressMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.AddAddress at\n%s with params: %#v", m.AddAddressMock.defaultExpectation.expectationOrigins.origin, *m.AddAddressMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcAddAddress != nil && afterAddAddressCounter < 1 {
-		m.t.Errorf("Expected call to ProfileServiceHandlerMock.AddAddress at\n%s", m.funcAddAddressOrigin)
+		m.t.Errorf("Expected call to ProfileServiceClientMock.AddAddress at\n%s", m.funcAddAddressOrigin)
 	}
 
 	if !m.AddAddressMock.invocationsDone() && afterAddAddressCounter > 0 {
-		m.t.Errorf("Expected %d calls to ProfileServiceHandlerMock.AddAddress at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to ProfileServiceClientMock.AddAddress at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.AddAddressMock.expectedInvocations), m.AddAddressMock.expectedInvocationsOrigin, afterAddAddressCounter)
 	}
 }
 
-type mProfileServiceHandlerMockAddContact struct {
+type mProfileServiceClientMockAddContact struct {
 	optional           bool
-	mock               *ProfileServiceHandlerMock
-	defaultExpectation *ProfileServiceHandlerMockAddContactExpectation
-	expectations       []*ProfileServiceHandlerMockAddContactExpectation
+	mock               *ProfileServiceClientMock
+	defaultExpectation *ProfileServiceClientMockAddContactExpectation
+	expectations       []*ProfileServiceClientMockAddContactExpectation
 
-	callArgs []*ProfileServiceHandlerMockAddContactParams
+	callArgs []*ProfileServiceClientMockAddContactParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// ProfileServiceHandlerMockAddContactExpectation specifies expectation struct of the ProfileServiceHandler.AddContact
-type ProfileServiceHandlerMockAddContactExpectation struct {
-	mock               *ProfileServiceHandlerMock
-	params             *ProfileServiceHandlerMockAddContactParams
-	paramPtrs          *ProfileServiceHandlerMockAddContactParamPtrs
-	expectationOrigins ProfileServiceHandlerMockAddContactExpectationOrigins
-	results            *ProfileServiceHandlerMockAddContactResults
+// ProfileServiceClientMockAddContactExpectation specifies expectation struct of the ProfileServiceClient.AddContact
+type ProfileServiceClientMockAddContactExpectation struct {
+	mock               *ProfileServiceClientMock
+	params             *ProfileServiceClientMockAddContactParams
+	paramPtrs          *ProfileServiceClientMockAddContactParamPtrs
+	expectationOrigins ProfileServiceClientMockAddContactExpectationOrigins
+	results            *ProfileServiceClientMockAddContactResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// ProfileServiceHandlerMockAddContactParams contains parameters of the ProfileServiceHandler.AddContact
-type ProfileServiceHandlerMockAddContactParams struct {
+// ProfileServiceClientMockAddContactParams contains parameters of the ProfileServiceClient.AddContact
+type ProfileServiceClientMockAddContactParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.AddContactRequest]
 }
 
-// ProfileServiceHandlerMockAddContactParamPtrs contains pointers to parameters of the ProfileServiceHandler.AddContact
-type ProfileServiceHandlerMockAddContactParamPtrs struct {
+// ProfileServiceClientMockAddContactParamPtrs contains pointers to parameters of the ProfileServiceClient.AddContact
+type ProfileServiceClientMockAddContactParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.AddContactRequest]
 }
 
-// ProfileServiceHandlerMockAddContactResults contains results of the ProfileServiceHandler.AddContact
-type ProfileServiceHandlerMockAddContactResults struct {
+// ProfileServiceClientMockAddContactResults contains results of the ProfileServiceClient.AddContact
+type ProfileServiceClientMockAddContactResults struct {
 	pp2 *connect.Response[v1.AddContactResponse]
 	err error
 }
 
-// ProfileServiceHandlerMockAddContactOrigins contains origins of expectations of the ProfileServiceHandler.AddContact
-type ProfileServiceHandlerMockAddContactExpectationOrigins struct {
+// ProfileServiceClientMockAddContactOrigins contains origins of expectations of the ProfileServiceClient.AddContact
+type ProfileServiceClientMockAddContactExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -611,26 +611,26 @@ type ProfileServiceHandlerMockAddContactExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmAddContact *mProfileServiceHandlerMockAddContact) Optional() *mProfileServiceHandlerMockAddContact {
+func (mmAddContact *mProfileServiceClientMockAddContact) Optional() *mProfileServiceClientMockAddContact {
 	mmAddContact.optional = true
 	return mmAddContact
 }
 
-// Expect sets up expected params for ProfileServiceHandler.AddContact
-func (mmAddContact *mProfileServiceHandlerMockAddContact) Expect(ctx context.Context, pp1 *connect.Request[v1.AddContactRequest]) *mProfileServiceHandlerMockAddContact {
+// Expect sets up expected params for ProfileServiceClient.AddContact
+func (mmAddContact *mProfileServiceClientMockAddContact) Expect(ctx context.Context, pp1 *connect.Request[v1.AddContactRequest]) *mProfileServiceClientMockAddContact {
 	if mmAddContact.mock.funcAddContact != nil {
-		mmAddContact.mock.t.Fatalf("ProfileServiceHandlerMock.AddContact mock is already set by Set")
+		mmAddContact.mock.t.Fatalf("ProfileServiceClientMock.AddContact mock is already set by Set")
 	}
 
 	if mmAddContact.defaultExpectation == nil {
-		mmAddContact.defaultExpectation = &ProfileServiceHandlerMockAddContactExpectation{}
+		mmAddContact.defaultExpectation = &ProfileServiceClientMockAddContactExpectation{}
 	}
 
 	if mmAddContact.defaultExpectation.paramPtrs != nil {
-		mmAddContact.mock.t.Fatalf("ProfileServiceHandlerMock.AddContact mock is already set by ExpectParams functions")
+		mmAddContact.mock.t.Fatalf("ProfileServiceClientMock.AddContact mock is already set by ExpectParams functions")
 	}
 
-	mmAddContact.defaultExpectation.params = &ProfileServiceHandlerMockAddContactParams{ctx, pp1}
+	mmAddContact.defaultExpectation.params = &ProfileServiceClientMockAddContactParams{ctx, pp1}
 	mmAddContact.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmAddContact.expectations {
 		if minimock.Equal(e.params, mmAddContact.defaultExpectation.params) {
@@ -641,22 +641,22 @@ func (mmAddContact *mProfileServiceHandlerMockAddContact) Expect(ctx context.Con
 	return mmAddContact
 }
 
-// ExpectCtxParam1 sets up expected param ctx for ProfileServiceHandler.AddContact
-func (mmAddContact *mProfileServiceHandlerMockAddContact) ExpectCtxParam1(ctx context.Context) *mProfileServiceHandlerMockAddContact {
+// ExpectCtxParam1 sets up expected param ctx for ProfileServiceClient.AddContact
+func (mmAddContact *mProfileServiceClientMockAddContact) ExpectCtxParam1(ctx context.Context) *mProfileServiceClientMockAddContact {
 	if mmAddContact.mock.funcAddContact != nil {
-		mmAddContact.mock.t.Fatalf("ProfileServiceHandlerMock.AddContact mock is already set by Set")
+		mmAddContact.mock.t.Fatalf("ProfileServiceClientMock.AddContact mock is already set by Set")
 	}
 
 	if mmAddContact.defaultExpectation == nil {
-		mmAddContact.defaultExpectation = &ProfileServiceHandlerMockAddContactExpectation{}
+		mmAddContact.defaultExpectation = &ProfileServiceClientMockAddContactExpectation{}
 	}
 
 	if mmAddContact.defaultExpectation.params != nil {
-		mmAddContact.mock.t.Fatalf("ProfileServiceHandlerMock.AddContact mock is already set by Expect")
+		mmAddContact.mock.t.Fatalf("ProfileServiceClientMock.AddContact mock is already set by Expect")
 	}
 
 	if mmAddContact.defaultExpectation.paramPtrs == nil {
-		mmAddContact.defaultExpectation.paramPtrs = &ProfileServiceHandlerMockAddContactParamPtrs{}
+		mmAddContact.defaultExpectation.paramPtrs = &ProfileServiceClientMockAddContactParamPtrs{}
 	}
 	mmAddContact.defaultExpectation.paramPtrs.ctx = &ctx
 	mmAddContact.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -664,22 +664,22 @@ func (mmAddContact *mProfileServiceHandlerMockAddContact) ExpectCtxParam1(ctx co
 	return mmAddContact
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for ProfileServiceHandler.AddContact
-func (mmAddContact *mProfileServiceHandlerMockAddContact) ExpectPp1Param2(pp1 *connect.Request[v1.AddContactRequest]) *mProfileServiceHandlerMockAddContact {
+// ExpectPp1Param2 sets up expected param pp1 for ProfileServiceClient.AddContact
+func (mmAddContact *mProfileServiceClientMockAddContact) ExpectPp1Param2(pp1 *connect.Request[v1.AddContactRequest]) *mProfileServiceClientMockAddContact {
 	if mmAddContact.mock.funcAddContact != nil {
-		mmAddContact.mock.t.Fatalf("ProfileServiceHandlerMock.AddContact mock is already set by Set")
+		mmAddContact.mock.t.Fatalf("ProfileServiceClientMock.AddContact mock is already set by Set")
 	}
 
 	if mmAddContact.defaultExpectation == nil {
-		mmAddContact.defaultExpectation = &ProfileServiceHandlerMockAddContactExpectation{}
+		mmAddContact.defaultExpectation = &ProfileServiceClientMockAddContactExpectation{}
 	}
 
 	if mmAddContact.defaultExpectation.params != nil {
-		mmAddContact.mock.t.Fatalf("ProfileServiceHandlerMock.AddContact mock is already set by Expect")
+		mmAddContact.mock.t.Fatalf("ProfileServiceClientMock.AddContact mock is already set by Expect")
 	}
 
 	if mmAddContact.defaultExpectation.paramPtrs == nil {
-		mmAddContact.defaultExpectation.paramPtrs = &ProfileServiceHandlerMockAddContactParamPtrs{}
+		mmAddContact.defaultExpectation.paramPtrs = &ProfileServiceClientMockAddContactParamPtrs{}
 	}
 	mmAddContact.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmAddContact.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -687,10 +687,10 @@ func (mmAddContact *mProfileServiceHandlerMockAddContact) ExpectPp1Param2(pp1 *c
 	return mmAddContact
 }
 
-// Inspect accepts an inspector function that has same arguments as the ProfileServiceHandler.AddContact
-func (mmAddContact *mProfileServiceHandlerMockAddContact) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.AddContactRequest])) *mProfileServiceHandlerMockAddContact {
+// Inspect accepts an inspector function that has same arguments as the ProfileServiceClient.AddContact
+func (mmAddContact *mProfileServiceClientMockAddContact) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.AddContactRequest])) *mProfileServiceClientMockAddContact {
 	if mmAddContact.mock.inspectFuncAddContact != nil {
-		mmAddContact.mock.t.Fatalf("Inspect function is already set for ProfileServiceHandlerMock.AddContact")
+		mmAddContact.mock.t.Fatalf("Inspect function is already set for ProfileServiceClientMock.AddContact")
 	}
 
 	mmAddContact.mock.inspectFuncAddContact = f
@@ -698,28 +698,28 @@ func (mmAddContact *mProfileServiceHandlerMockAddContact) Inspect(f func(ctx con
 	return mmAddContact
 }
 
-// Return sets up results that will be returned by ProfileServiceHandler.AddContact
-func (mmAddContact *mProfileServiceHandlerMockAddContact) Return(pp2 *connect.Response[v1.AddContactResponse], err error) *ProfileServiceHandlerMock {
+// Return sets up results that will be returned by ProfileServiceClient.AddContact
+func (mmAddContact *mProfileServiceClientMockAddContact) Return(pp2 *connect.Response[v1.AddContactResponse], err error) *ProfileServiceClientMock {
 	if mmAddContact.mock.funcAddContact != nil {
-		mmAddContact.mock.t.Fatalf("ProfileServiceHandlerMock.AddContact mock is already set by Set")
+		mmAddContact.mock.t.Fatalf("ProfileServiceClientMock.AddContact mock is already set by Set")
 	}
 
 	if mmAddContact.defaultExpectation == nil {
-		mmAddContact.defaultExpectation = &ProfileServiceHandlerMockAddContactExpectation{mock: mmAddContact.mock}
+		mmAddContact.defaultExpectation = &ProfileServiceClientMockAddContactExpectation{mock: mmAddContact.mock}
 	}
-	mmAddContact.defaultExpectation.results = &ProfileServiceHandlerMockAddContactResults{pp2, err}
+	mmAddContact.defaultExpectation.results = &ProfileServiceClientMockAddContactResults{pp2, err}
 	mmAddContact.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmAddContact.mock
 }
 
-// Set uses given function f to mock the ProfileServiceHandler.AddContact method
-func (mmAddContact *mProfileServiceHandlerMockAddContact) Set(f func(ctx context.Context, pp1 *connect.Request[v1.AddContactRequest]) (pp2 *connect.Response[v1.AddContactResponse], err error)) *ProfileServiceHandlerMock {
+// Set uses given function f to mock the ProfileServiceClient.AddContact method
+func (mmAddContact *mProfileServiceClientMockAddContact) Set(f func(ctx context.Context, pp1 *connect.Request[v1.AddContactRequest]) (pp2 *connect.Response[v1.AddContactResponse], err error)) *ProfileServiceClientMock {
 	if mmAddContact.defaultExpectation != nil {
-		mmAddContact.mock.t.Fatalf("Default expectation is already set for the ProfileServiceHandler.AddContact method")
+		mmAddContact.mock.t.Fatalf("Default expectation is already set for the ProfileServiceClient.AddContact method")
 	}
 
 	if len(mmAddContact.expectations) > 0 {
-		mmAddContact.mock.t.Fatalf("Some expectations are already set for the ProfileServiceHandler.AddContact method")
+		mmAddContact.mock.t.Fatalf("Some expectations are already set for the ProfileServiceClient.AddContact method")
 	}
 
 	mmAddContact.mock.funcAddContact = f
@@ -727,39 +727,39 @@ func (mmAddContact *mProfileServiceHandlerMockAddContact) Set(f func(ctx context
 	return mmAddContact.mock
 }
 
-// When sets expectation for the ProfileServiceHandler.AddContact which will trigger the result defined by the following
+// When sets expectation for the ProfileServiceClient.AddContact which will trigger the result defined by the following
 // Then helper
-func (mmAddContact *mProfileServiceHandlerMockAddContact) When(ctx context.Context, pp1 *connect.Request[v1.AddContactRequest]) *ProfileServiceHandlerMockAddContactExpectation {
+func (mmAddContact *mProfileServiceClientMockAddContact) When(ctx context.Context, pp1 *connect.Request[v1.AddContactRequest]) *ProfileServiceClientMockAddContactExpectation {
 	if mmAddContact.mock.funcAddContact != nil {
-		mmAddContact.mock.t.Fatalf("ProfileServiceHandlerMock.AddContact mock is already set by Set")
+		mmAddContact.mock.t.Fatalf("ProfileServiceClientMock.AddContact mock is already set by Set")
 	}
 
-	expectation := &ProfileServiceHandlerMockAddContactExpectation{
+	expectation := &ProfileServiceClientMockAddContactExpectation{
 		mock:               mmAddContact.mock,
-		params:             &ProfileServiceHandlerMockAddContactParams{ctx, pp1},
-		expectationOrigins: ProfileServiceHandlerMockAddContactExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &ProfileServiceClientMockAddContactParams{ctx, pp1},
+		expectationOrigins: ProfileServiceClientMockAddContactExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmAddContact.expectations = append(mmAddContact.expectations, expectation)
 	return expectation
 }
 
-// Then sets up ProfileServiceHandler.AddContact return parameters for the expectation previously defined by the When method
-func (e *ProfileServiceHandlerMockAddContactExpectation) Then(pp2 *connect.Response[v1.AddContactResponse], err error) *ProfileServiceHandlerMock {
-	e.results = &ProfileServiceHandlerMockAddContactResults{pp2, err}
+// Then sets up ProfileServiceClient.AddContact return parameters for the expectation previously defined by the When method
+func (e *ProfileServiceClientMockAddContactExpectation) Then(pp2 *connect.Response[v1.AddContactResponse], err error) *ProfileServiceClientMock {
+	e.results = &ProfileServiceClientMockAddContactResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times ProfileServiceHandler.AddContact should be invoked
-func (mmAddContact *mProfileServiceHandlerMockAddContact) Times(n uint64) *mProfileServiceHandlerMockAddContact {
+// Times sets number of times ProfileServiceClient.AddContact should be invoked
+func (mmAddContact *mProfileServiceClientMockAddContact) Times(n uint64) *mProfileServiceClientMockAddContact {
 	if n == 0 {
-		mmAddContact.mock.t.Fatalf("Times of ProfileServiceHandlerMock.AddContact mock can not be zero")
+		mmAddContact.mock.t.Fatalf("Times of ProfileServiceClientMock.AddContact mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmAddContact.expectedInvocations, n)
 	mmAddContact.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmAddContact
 }
 
-func (mmAddContact *mProfileServiceHandlerMockAddContact) invocationsDone() bool {
+func (mmAddContact *mProfileServiceClientMockAddContact) invocationsDone() bool {
 	if len(mmAddContact.expectations) == 0 && mmAddContact.defaultExpectation == nil && mmAddContact.mock.funcAddContact == nil {
 		return true
 	}
@@ -770,8 +770,8 @@ func (mmAddContact *mProfileServiceHandlerMockAddContact) invocationsDone() bool
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// AddContact implements mm_profilev1connect.ProfileServiceHandler
-func (mmAddContact *ProfileServiceHandlerMock) AddContact(ctx context.Context, pp1 *connect.Request[v1.AddContactRequest]) (pp2 *connect.Response[v1.AddContactResponse], err error) {
+// AddContact implements mm_profilev1connect.ProfileServiceClient
+func (mmAddContact *ProfileServiceClientMock) AddContact(ctx context.Context, pp1 *connect.Request[v1.AddContactRequest]) (pp2 *connect.Response[v1.AddContactResponse], err error) {
 	mm_atomic.AddUint64(&mmAddContact.beforeAddContactCounter, 1)
 	defer mm_atomic.AddUint64(&mmAddContact.afterAddContactCounter, 1)
 
@@ -781,7 +781,7 @@ func (mmAddContact *ProfileServiceHandlerMock) AddContact(ctx context.Context, p
 		mmAddContact.inspectFuncAddContact(ctx, pp1)
 	}
 
-	mm_params := ProfileServiceHandlerMockAddContactParams{ctx, pp1}
+	mm_params := ProfileServiceClientMockAddContactParams{ctx, pp1}
 
 	// Record call args
 	mmAddContact.AddContactMock.mutex.Lock()
@@ -800,54 +800,54 @@ func (mmAddContact *ProfileServiceHandlerMock) AddContact(ctx context.Context, p
 		mm_want := mmAddContact.AddContactMock.defaultExpectation.params
 		mm_want_ptrs := mmAddContact.AddContactMock.defaultExpectation.paramPtrs
 
-		mm_got := ProfileServiceHandlerMockAddContactParams{ctx, pp1}
+		mm_got := ProfileServiceClientMockAddContactParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmAddContact.t.Errorf("ProfileServiceHandlerMock.AddContact got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmAddContact.t.Errorf("ProfileServiceClientMock.AddContact got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmAddContact.AddContactMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmAddContact.t.Errorf("ProfileServiceHandlerMock.AddContact got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmAddContact.t.Errorf("ProfileServiceClientMock.AddContact got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmAddContact.AddContactMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmAddContact.t.Errorf("ProfileServiceHandlerMock.AddContact got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmAddContact.t.Errorf("ProfileServiceClientMock.AddContact got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmAddContact.AddContactMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmAddContact.AddContactMock.defaultExpectation.results
 		if mm_results == nil {
-			mmAddContact.t.Fatal("No results are set for the ProfileServiceHandlerMock.AddContact")
+			mmAddContact.t.Fatal("No results are set for the ProfileServiceClientMock.AddContact")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmAddContact.funcAddContact != nil {
 		return mmAddContact.funcAddContact(ctx, pp1)
 	}
-	mmAddContact.t.Fatalf("Unexpected call to ProfileServiceHandlerMock.AddContact. %v %v", ctx, pp1)
+	mmAddContact.t.Fatalf("Unexpected call to ProfileServiceClientMock.AddContact. %v %v", ctx, pp1)
 	return
 }
 
-// AddContactAfterCounter returns a count of finished ProfileServiceHandlerMock.AddContact invocations
-func (mmAddContact *ProfileServiceHandlerMock) AddContactAfterCounter() uint64 {
+// AddContactAfterCounter returns a count of finished ProfileServiceClientMock.AddContact invocations
+func (mmAddContact *ProfileServiceClientMock) AddContactAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmAddContact.afterAddContactCounter)
 }
 
-// AddContactBeforeCounter returns a count of ProfileServiceHandlerMock.AddContact invocations
-func (mmAddContact *ProfileServiceHandlerMock) AddContactBeforeCounter() uint64 {
+// AddContactBeforeCounter returns a count of ProfileServiceClientMock.AddContact invocations
+func (mmAddContact *ProfileServiceClientMock) AddContactBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmAddContact.beforeAddContactCounter)
 }
 
-// Calls returns a list of arguments used in each call to ProfileServiceHandlerMock.AddContact.
+// Calls returns a list of arguments used in each call to ProfileServiceClientMock.AddContact.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmAddContact *mProfileServiceHandlerMockAddContact) Calls() []*ProfileServiceHandlerMockAddContactParams {
+func (mmAddContact *mProfileServiceClientMockAddContact) Calls() []*ProfileServiceClientMockAddContactParams {
 	mmAddContact.mutex.RLock()
 
-	argCopy := make([]*ProfileServiceHandlerMockAddContactParams, len(mmAddContact.callArgs))
+	argCopy := make([]*ProfileServiceClientMockAddContactParams, len(mmAddContact.callArgs))
 	copy(argCopy, mmAddContact.callArgs)
 
 	mmAddContact.mutex.RUnlock()
@@ -857,7 +857,7 @@ func (mmAddContact *mProfileServiceHandlerMockAddContact) Calls() []*ProfileServ
 
 // MinimockAddContactDone returns true if the count of the AddContact invocations corresponds
 // the number of defined expectations
-func (m *ProfileServiceHandlerMock) MinimockAddContactDone() bool {
+func (m *ProfileServiceClientMock) MinimockAddContactDone() bool {
 	if m.AddContactMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -873,10 +873,10 @@ func (m *ProfileServiceHandlerMock) MinimockAddContactDone() bool {
 }
 
 // MinimockAddContactInspect logs each unmet expectation
-func (m *ProfileServiceHandlerMock) MinimockAddContactInspect() {
+func (m *ProfileServiceClientMock) MinimockAddContactInspect() {
 	for _, e := range m.AddContactMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.AddContact at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.AddContact at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -884,66 +884,66 @@ func (m *ProfileServiceHandlerMock) MinimockAddContactInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.AddContactMock.defaultExpectation != nil && afterAddContactCounter < 1 {
 		if m.AddContactMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.AddContact at\n%s", m.AddContactMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.AddContact at\n%s", m.AddContactMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.AddContact at\n%s with params: %#v", m.AddContactMock.defaultExpectation.expectationOrigins.origin, *m.AddContactMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.AddContact at\n%s with params: %#v", m.AddContactMock.defaultExpectation.expectationOrigins.origin, *m.AddContactMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcAddContact != nil && afterAddContactCounter < 1 {
-		m.t.Errorf("Expected call to ProfileServiceHandlerMock.AddContact at\n%s", m.funcAddContactOrigin)
+		m.t.Errorf("Expected call to ProfileServiceClientMock.AddContact at\n%s", m.funcAddContactOrigin)
 	}
 
 	if !m.AddContactMock.invocationsDone() && afterAddContactCounter > 0 {
-		m.t.Errorf("Expected %d calls to ProfileServiceHandlerMock.AddContact at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to ProfileServiceClientMock.AddContact at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.AddContactMock.expectedInvocations), m.AddContactMock.expectedInvocationsOrigin, afterAddContactCounter)
 	}
 }
 
-type mProfileServiceHandlerMockAddRelationship struct {
+type mProfileServiceClientMockAddRelationship struct {
 	optional           bool
-	mock               *ProfileServiceHandlerMock
-	defaultExpectation *ProfileServiceHandlerMockAddRelationshipExpectation
-	expectations       []*ProfileServiceHandlerMockAddRelationshipExpectation
+	mock               *ProfileServiceClientMock
+	defaultExpectation *ProfileServiceClientMockAddRelationshipExpectation
+	expectations       []*ProfileServiceClientMockAddRelationshipExpectation
 
-	callArgs []*ProfileServiceHandlerMockAddRelationshipParams
+	callArgs []*ProfileServiceClientMockAddRelationshipParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// ProfileServiceHandlerMockAddRelationshipExpectation specifies expectation struct of the ProfileServiceHandler.AddRelationship
-type ProfileServiceHandlerMockAddRelationshipExpectation struct {
-	mock               *ProfileServiceHandlerMock
-	params             *ProfileServiceHandlerMockAddRelationshipParams
-	paramPtrs          *ProfileServiceHandlerMockAddRelationshipParamPtrs
-	expectationOrigins ProfileServiceHandlerMockAddRelationshipExpectationOrigins
-	results            *ProfileServiceHandlerMockAddRelationshipResults
+// ProfileServiceClientMockAddRelationshipExpectation specifies expectation struct of the ProfileServiceClient.AddRelationship
+type ProfileServiceClientMockAddRelationshipExpectation struct {
+	mock               *ProfileServiceClientMock
+	params             *ProfileServiceClientMockAddRelationshipParams
+	paramPtrs          *ProfileServiceClientMockAddRelationshipParamPtrs
+	expectationOrigins ProfileServiceClientMockAddRelationshipExpectationOrigins
+	results            *ProfileServiceClientMockAddRelationshipResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// ProfileServiceHandlerMockAddRelationshipParams contains parameters of the ProfileServiceHandler.AddRelationship
-type ProfileServiceHandlerMockAddRelationshipParams struct {
+// ProfileServiceClientMockAddRelationshipParams contains parameters of the ProfileServiceClient.AddRelationship
+type ProfileServiceClientMockAddRelationshipParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.AddRelationshipRequest]
 }
 
-// ProfileServiceHandlerMockAddRelationshipParamPtrs contains pointers to parameters of the ProfileServiceHandler.AddRelationship
-type ProfileServiceHandlerMockAddRelationshipParamPtrs struct {
+// ProfileServiceClientMockAddRelationshipParamPtrs contains pointers to parameters of the ProfileServiceClient.AddRelationship
+type ProfileServiceClientMockAddRelationshipParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.AddRelationshipRequest]
 }
 
-// ProfileServiceHandlerMockAddRelationshipResults contains results of the ProfileServiceHandler.AddRelationship
-type ProfileServiceHandlerMockAddRelationshipResults struct {
+// ProfileServiceClientMockAddRelationshipResults contains results of the ProfileServiceClient.AddRelationship
+type ProfileServiceClientMockAddRelationshipResults struct {
 	pp2 *connect.Response[v1.AddRelationshipResponse]
 	err error
 }
 
-// ProfileServiceHandlerMockAddRelationshipOrigins contains origins of expectations of the ProfileServiceHandler.AddRelationship
-type ProfileServiceHandlerMockAddRelationshipExpectationOrigins struct {
+// ProfileServiceClientMockAddRelationshipOrigins contains origins of expectations of the ProfileServiceClient.AddRelationship
+type ProfileServiceClientMockAddRelationshipExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -954,26 +954,26 @@ type ProfileServiceHandlerMockAddRelationshipExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmAddRelationship *mProfileServiceHandlerMockAddRelationship) Optional() *mProfileServiceHandlerMockAddRelationship {
+func (mmAddRelationship *mProfileServiceClientMockAddRelationship) Optional() *mProfileServiceClientMockAddRelationship {
 	mmAddRelationship.optional = true
 	return mmAddRelationship
 }
 
-// Expect sets up expected params for ProfileServiceHandler.AddRelationship
-func (mmAddRelationship *mProfileServiceHandlerMockAddRelationship) Expect(ctx context.Context, pp1 *connect.Request[v1.AddRelationshipRequest]) *mProfileServiceHandlerMockAddRelationship {
+// Expect sets up expected params for ProfileServiceClient.AddRelationship
+func (mmAddRelationship *mProfileServiceClientMockAddRelationship) Expect(ctx context.Context, pp1 *connect.Request[v1.AddRelationshipRequest]) *mProfileServiceClientMockAddRelationship {
 	if mmAddRelationship.mock.funcAddRelationship != nil {
-		mmAddRelationship.mock.t.Fatalf("ProfileServiceHandlerMock.AddRelationship mock is already set by Set")
+		mmAddRelationship.mock.t.Fatalf("ProfileServiceClientMock.AddRelationship mock is already set by Set")
 	}
 
 	if mmAddRelationship.defaultExpectation == nil {
-		mmAddRelationship.defaultExpectation = &ProfileServiceHandlerMockAddRelationshipExpectation{}
+		mmAddRelationship.defaultExpectation = &ProfileServiceClientMockAddRelationshipExpectation{}
 	}
 
 	if mmAddRelationship.defaultExpectation.paramPtrs != nil {
-		mmAddRelationship.mock.t.Fatalf("ProfileServiceHandlerMock.AddRelationship mock is already set by ExpectParams functions")
+		mmAddRelationship.mock.t.Fatalf("ProfileServiceClientMock.AddRelationship mock is already set by ExpectParams functions")
 	}
 
-	mmAddRelationship.defaultExpectation.params = &ProfileServiceHandlerMockAddRelationshipParams{ctx, pp1}
+	mmAddRelationship.defaultExpectation.params = &ProfileServiceClientMockAddRelationshipParams{ctx, pp1}
 	mmAddRelationship.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmAddRelationship.expectations {
 		if minimock.Equal(e.params, mmAddRelationship.defaultExpectation.params) {
@@ -984,22 +984,22 @@ func (mmAddRelationship *mProfileServiceHandlerMockAddRelationship) Expect(ctx c
 	return mmAddRelationship
 }
 
-// ExpectCtxParam1 sets up expected param ctx for ProfileServiceHandler.AddRelationship
-func (mmAddRelationship *mProfileServiceHandlerMockAddRelationship) ExpectCtxParam1(ctx context.Context) *mProfileServiceHandlerMockAddRelationship {
+// ExpectCtxParam1 sets up expected param ctx for ProfileServiceClient.AddRelationship
+func (mmAddRelationship *mProfileServiceClientMockAddRelationship) ExpectCtxParam1(ctx context.Context) *mProfileServiceClientMockAddRelationship {
 	if mmAddRelationship.mock.funcAddRelationship != nil {
-		mmAddRelationship.mock.t.Fatalf("ProfileServiceHandlerMock.AddRelationship mock is already set by Set")
+		mmAddRelationship.mock.t.Fatalf("ProfileServiceClientMock.AddRelationship mock is already set by Set")
 	}
 
 	if mmAddRelationship.defaultExpectation == nil {
-		mmAddRelationship.defaultExpectation = &ProfileServiceHandlerMockAddRelationshipExpectation{}
+		mmAddRelationship.defaultExpectation = &ProfileServiceClientMockAddRelationshipExpectation{}
 	}
 
 	if mmAddRelationship.defaultExpectation.params != nil {
-		mmAddRelationship.mock.t.Fatalf("ProfileServiceHandlerMock.AddRelationship mock is already set by Expect")
+		mmAddRelationship.mock.t.Fatalf("ProfileServiceClientMock.AddRelationship mock is already set by Expect")
 	}
 
 	if mmAddRelationship.defaultExpectation.paramPtrs == nil {
-		mmAddRelationship.defaultExpectation.paramPtrs = &ProfileServiceHandlerMockAddRelationshipParamPtrs{}
+		mmAddRelationship.defaultExpectation.paramPtrs = &ProfileServiceClientMockAddRelationshipParamPtrs{}
 	}
 	mmAddRelationship.defaultExpectation.paramPtrs.ctx = &ctx
 	mmAddRelationship.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -1007,22 +1007,22 @@ func (mmAddRelationship *mProfileServiceHandlerMockAddRelationship) ExpectCtxPar
 	return mmAddRelationship
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for ProfileServiceHandler.AddRelationship
-func (mmAddRelationship *mProfileServiceHandlerMockAddRelationship) ExpectPp1Param2(pp1 *connect.Request[v1.AddRelationshipRequest]) *mProfileServiceHandlerMockAddRelationship {
+// ExpectPp1Param2 sets up expected param pp1 for ProfileServiceClient.AddRelationship
+func (mmAddRelationship *mProfileServiceClientMockAddRelationship) ExpectPp1Param2(pp1 *connect.Request[v1.AddRelationshipRequest]) *mProfileServiceClientMockAddRelationship {
 	if mmAddRelationship.mock.funcAddRelationship != nil {
-		mmAddRelationship.mock.t.Fatalf("ProfileServiceHandlerMock.AddRelationship mock is already set by Set")
+		mmAddRelationship.mock.t.Fatalf("ProfileServiceClientMock.AddRelationship mock is already set by Set")
 	}
 
 	if mmAddRelationship.defaultExpectation == nil {
-		mmAddRelationship.defaultExpectation = &ProfileServiceHandlerMockAddRelationshipExpectation{}
+		mmAddRelationship.defaultExpectation = &ProfileServiceClientMockAddRelationshipExpectation{}
 	}
 
 	if mmAddRelationship.defaultExpectation.params != nil {
-		mmAddRelationship.mock.t.Fatalf("ProfileServiceHandlerMock.AddRelationship mock is already set by Expect")
+		mmAddRelationship.mock.t.Fatalf("ProfileServiceClientMock.AddRelationship mock is already set by Expect")
 	}
 
 	if mmAddRelationship.defaultExpectation.paramPtrs == nil {
-		mmAddRelationship.defaultExpectation.paramPtrs = &ProfileServiceHandlerMockAddRelationshipParamPtrs{}
+		mmAddRelationship.defaultExpectation.paramPtrs = &ProfileServiceClientMockAddRelationshipParamPtrs{}
 	}
 	mmAddRelationship.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmAddRelationship.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -1030,10 +1030,10 @@ func (mmAddRelationship *mProfileServiceHandlerMockAddRelationship) ExpectPp1Par
 	return mmAddRelationship
 }
 
-// Inspect accepts an inspector function that has same arguments as the ProfileServiceHandler.AddRelationship
-func (mmAddRelationship *mProfileServiceHandlerMockAddRelationship) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.AddRelationshipRequest])) *mProfileServiceHandlerMockAddRelationship {
+// Inspect accepts an inspector function that has same arguments as the ProfileServiceClient.AddRelationship
+func (mmAddRelationship *mProfileServiceClientMockAddRelationship) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.AddRelationshipRequest])) *mProfileServiceClientMockAddRelationship {
 	if mmAddRelationship.mock.inspectFuncAddRelationship != nil {
-		mmAddRelationship.mock.t.Fatalf("Inspect function is already set for ProfileServiceHandlerMock.AddRelationship")
+		mmAddRelationship.mock.t.Fatalf("Inspect function is already set for ProfileServiceClientMock.AddRelationship")
 	}
 
 	mmAddRelationship.mock.inspectFuncAddRelationship = f
@@ -1041,28 +1041,28 @@ func (mmAddRelationship *mProfileServiceHandlerMockAddRelationship) Inspect(f fu
 	return mmAddRelationship
 }
 
-// Return sets up results that will be returned by ProfileServiceHandler.AddRelationship
-func (mmAddRelationship *mProfileServiceHandlerMockAddRelationship) Return(pp2 *connect.Response[v1.AddRelationshipResponse], err error) *ProfileServiceHandlerMock {
+// Return sets up results that will be returned by ProfileServiceClient.AddRelationship
+func (mmAddRelationship *mProfileServiceClientMockAddRelationship) Return(pp2 *connect.Response[v1.AddRelationshipResponse], err error) *ProfileServiceClientMock {
 	if mmAddRelationship.mock.funcAddRelationship != nil {
-		mmAddRelationship.mock.t.Fatalf("ProfileServiceHandlerMock.AddRelationship mock is already set by Set")
+		mmAddRelationship.mock.t.Fatalf("ProfileServiceClientMock.AddRelationship mock is already set by Set")
 	}
 
 	if mmAddRelationship.defaultExpectation == nil {
-		mmAddRelationship.defaultExpectation = &ProfileServiceHandlerMockAddRelationshipExpectation{mock: mmAddRelationship.mock}
+		mmAddRelationship.defaultExpectation = &ProfileServiceClientMockAddRelationshipExpectation{mock: mmAddRelationship.mock}
 	}
-	mmAddRelationship.defaultExpectation.results = &ProfileServiceHandlerMockAddRelationshipResults{pp2, err}
+	mmAddRelationship.defaultExpectation.results = &ProfileServiceClientMockAddRelationshipResults{pp2, err}
 	mmAddRelationship.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmAddRelationship.mock
 }
 
-// Set uses given function f to mock the ProfileServiceHandler.AddRelationship method
-func (mmAddRelationship *mProfileServiceHandlerMockAddRelationship) Set(f func(ctx context.Context, pp1 *connect.Request[v1.AddRelationshipRequest]) (pp2 *connect.Response[v1.AddRelationshipResponse], err error)) *ProfileServiceHandlerMock {
+// Set uses given function f to mock the ProfileServiceClient.AddRelationship method
+func (mmAddRelationship *mProfileServiceClientMockAddRelationship) Set(f func(ctx context.Context, pp1 *connect.Request[v1.AddRelationshipRequest]) (pp2 *connect.Response[v1.AddRelationshipResponse], err error)) *ProfileServiceClientMock {
 	if mmAddRelationship.defaultExpectation != nil {
-		mmAddRelationship.mock.t.Fatalf("Default expectation is already set for the ProfileServiceHandler.AddRelationship method")
+		mmAddRelationship.mock.t.Fatalf("Default expectation is already set for the ProfileServiceClient.AddRelationship method")
 	}
 
 	if len(mmAddRelationship.expectations) > 0 {
-		mmAddRelationship.mock.t.Fatalf("Some expectations are already set for the ProfileServiceHandler.AddRelationship method")
+		mmAddRelationship.mock.t.Fatalf("Some expectations are already set for the ProfileServiceClient.AddRelationship method")
 	}
 
 	mmAddRelationship.mock.funcAddRelationship = f
@@ -1070,39 +1070,39 @@ func (mmAddRelationship *mProfileServiceHandlerMockAddRelationship) Set(f func(c
 	return mmAddRelationship.mock
 }
 
-// When sets expectation for the ProfileServiceHandler.AddRelationship which will trigger the result defined by the following
+// When sets expectation for the ProfileServiceClient.AddRelationship which will trigger the result defined by the following
 // Then helper
-func (mmAddRelationship *mProfileServiceHandlerMockAddRelationship) When(ctx context.Context, pp1 *connect.Request[v1.AddRelationshipRequest]) *ProfileServiceHandlerMockAddRelationshipExpectation {
+func (mmAddRelationship *mProfileServiceClientMockAddRelationship) When(ctx context.Context, pp1 *connect.Request[v1.AddRelationshipRequest]) *ProfileServiceClientMockAddRelationshipExpectation {
 	if mmAddRelationship.mock.funcAddRelationship != nil {
-		mmAddRelationship.mock.t.Fatalf("ProfileServiceHandlerMock.AddRelationship mock is already set by Set")
+		mmAddRelationship.mock.t.Fatalf("ProfileServiceClientMock.AddRelationship mock is already set by Set")
 	}
 
-	expectation := &ProfileServiceHandlerMockAddRelationshipExpectation{
+	expectation := &ProfileServiceClientMockAddRelationshipExpectation{
 		mock:               mmAddRelationship.mock,
-		params:             &ProfileServiceHandlerMockAddRelationshipParams{ctx, pp1},
-		expectationOrigins: ProfileServiceHandlerMockAddRelationshipExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &ProfileServiceClientMockAddRelationshipParams{ctx, pp1},
+		expectationOrigins: ProfileServiceClientMockAddRelationshipExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmAddRelationship.expectations = append(mmAddRelationship.expectations, expectation)
 	return expectation
 }
 
-// Then sets up ProfileServiceHandler.AddRelationship return parameters for the expectation previously defined by the When method
-func (e *ProfileServiceHandlerMockAddRelationshipExpectation) Then(pp2 *connect.Response[v1.AddRelationshipResponse], err error) *ProfileServiceHandlerMock {
-	e.results = &ProfileServiceHandlerMockAddRelationshipResults{pp2, err}
+// Then sets up ProfileServiceClient.AddRelationship return parameters for the expectation previously defined by the When method
+func (e *ProfileServiceClientMockAddRelationshipExpectation) Then(pp2 *connect.Response[v1.AddRelationshipResponse], err error) *ProfileServiceClientMock {
+	e.results = &ProfileServiceClientMockAddRelationshipResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times ProfileServiceHandler.AddRelationship should be invoked
-func (mmAddRelationship *mProfileServiceHandlerMockAddRelationship) Times(n uint64) *mProfileServiceHandlerMockAddRelationship {
+// Times sets number of times ProfileServiceClient.AddRelationship should be invoked
+func (mmAddRelationship *mProfileServiceClientMockAddRelationship) Times(n uint64) *mProfileServiceClientMockAddRelationship {
 	if n == 0 {
-		mmAddRelationship.mock.t.Fatalf("Times of ProfileServiceHandlerMock.AddRelationship mock can not be zero")
+		mmAddRelationship.mock.t.Fatalf("Times of ProfileServiceClientMock.AddRelationship mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmAddRelationship.expectedInvocations, n)
 	mmAddRelationship.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmAddRelationship
 }
 
-func (mmAddRelationship *mProfileServiceHandlerMockAddRelationship) invocationsDone() bool {
+func (mmAddRelationship *mProfileServiceClientMockAddRelationship) invocationsDone() bool {
 	if len(mmAddRelationship.expectations) == 0 && mmAddRelationship.defaultExpectation == nil && mmAddRelationship.mock.funcAddRelationship == nil {
 		return true
 	}
@@ -1113,8 +1113,8 @@ func (mmAddRelationship *mProfileServiceHandlerMockAddRelationship) invocationsD
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// AddRelationship implements mm_profilev1connect.ProfileServiceHandler
-func (mmAddRelationship *ProfileServiceHandlerMock) AddRelationship(ctx context.Context, pp1 *connect.Request[v1.AddRelationshipRequest]) (pp2 *connect.Response[v1.AddRelationshipResponse], err error) {
+// AddRelationship implements mm_profilev1connect.ProfileServiceClient
+func (mmAddRelationship *ProfileServiceClientMock) AddRelationship(ctx context.Context, pp1 *connect.Request[v1.AddRelationshipRequest]) (pp2 *connect.Response[v1.AddRelationshipResponse], err error) {
 	mm_atomic.AddUint64(&mmAddRelationship.beforeAddRelationshipCounter, 1)
 	defer mm_atomic.AddUint64(&mmAddRelationship.afterAddRelationshipCounter, 1)
 
@@ -1124,7 +1124,7 @@ func (mmAddRelationship *ProfileServiceHandlerMock) AddRelationship(ctx context.
 		mmAddRelationship.inspectFuncAddRelationship(ctx, pp1)
 	}
 
-	mm_params := ProfileServiceHandlerMockAddRelationshipParams{ctx, pp1}
+	mm_params := ProfileServiceClientMockAddRelationshipParams{ctx, pp1}
 
 	// Record call args
 	mmAddRelationship.AddRelationshipMock.mutex.Lock()
@@ -1143,54 +1143,54 @@ func (mmAddRelationship *ProfileServiceHandlerMock) AddRelationship(ctx context.
 		mm_want := mmAddRelationship.AddRelationshipMock.defaultExpectation.params
 		mm_want_ptrs := mmAddRelationship.AddRelationshipMock.defaultExpectation.paramPtrs
 
-		mm_got := ProfileServiceHandlerMockAddRelationshipParams{ctx, pp1}
+		mm_got := ProfileServiceClientMockAddRelationshipParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmAddRelationship.t.Errorf("ProfileServiceHandlerMock.AddRelationship got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmAddRelationship.t.Errorf("ProfileServiceClientMock.AddRelationship got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmAddRelationship.AddRelationshipMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmAddRelationship.t.Errorf("ProfileServiceHandlerMock.AddRelationship got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmAddRelationship.t.Errorf("ProfileServiceClientMock.AddRelationship got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmAddRelationship.AddRelationshipMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmAddRelationship.t.Errorf("ProfileServiceHandlerMock.AddRelationship got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmAddRelationship.t.Errorf("ProfileServiceClientMock.AddRelationship got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmAddRelationship.AddRelationshipMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmAddRelationship.AddRelationshipMock.defaultExpectation.results
 		if mm_results == nil {
-			mmAddRelationship.t.Fatal("No results are set for the ProfileServiceHandlerMock.AddRelationship")
+			mmAddRelationship.t.Fatal("No results are set for the ProfileServiceClientMock.AddRelationship")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmAddRelationship.funcAddRelationship != nil {
 		return mmAddRelationship.funcAddRelationship(ctx, pp1)
 	}
-	mmAddRelationship.t.Fatalf("Unexpected call to ProfileServiceHandlerMock.AddRelationship. %v %v", ctx, pp1)
+	mmAddRelationship.t.Fatalf("Unexpected call to ProfileServiceClientMock.AddRelationship. %v %v", ctx, pp1)
 	return
 }
 
-// AddRelationshipAfterCounter returns a count of finished ProfileServiceHandlerMock.AddRelationship invocations
-func (mmAddRelationship *ProfileServiceHandlerMock) AddRelationshipAfterCounter() uint64 {
+// AddRelationshipAfterCounter returns a count of finished ProfileServiceClientMock.AddRelationship invocations
+func (mmAddRelationship *ProfileServiceClientMock) AddRelationshipAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmAddRelationship.afterAddRelationshipCounter)
 }
 
-// AddRelationshipBeforeCounter returns a count of ProfileServiceHandlerMock.AddRelationship invocations
-func (mmAddRelationship *ProfileServiceHandlerMock) AddRelationshipBeforeCounter() uint64 {
+// AddRelationshipBeforeCounter returns a count of ProfileServiceClientMock.AddRelationship invocations
+func (mmAddRelationship *ProfileServiceClientMock) AddRelationshipBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmAddRelationship.beforeAddRelationshipCounter)
 }
 
-// Calls returns a list of arguments used in each call to ProfileServiceHandlerMock.AddRelationship.
+// Calls returns a list of arguments used in each call to ProfileServiceClientMock.AddRelationship.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmAddRelationship *mProfileServiceHandlerMockAddRelationship) Calls() []*ProfileServiceHandlerMockAddRelationshipParams {
+func (mmAddRelationship *mProfileServiceClientMockAddRelationship) Calls() []*ProfileServiceClientMockAddRelationshipParams {
 	mmAddRelationship.mutex.RLock()
 
-	argCopy := make([]*ProfileServiceHandlerMockAddRelationshipParams, len(mmAddRelationship.callArgs))
+	argCopy := make([]*ProfileServiceClientMockAddRelationshipParams, len(mmAddRelationship.callArgs))
 	copy(argCopy, mmAddRelationship.callArgs)
 
 	mmAddRelationship.mutex.RUnlock()
@@ -1200,7 +1200,7 @@ func (mmAddRelationship *mProfileServiceHandlerMockAddRelationship) Calls() []*P
 
 // MinimockAddRelationshipDone returns true if the count of the AddRelationship invocations corresponds
 // the number of defined expectations
-func (m *ProfileServiceHandlerMock) MinimockAddRelationshipDone() bool {
+func (m *ProfileServiceClientMock) MinimockAddRelationshipDone() bool {
 	if m.AddRelationshipMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -1216,10 +1216,10 @@ func (m *ProfileServiceHandlerMock) MinimockAddRelationshipDone() bool {
 }
 
 // MinimockAddRelationshipInspect logs each unmet expectation
-func (m *ProfileServiceHandlerMock) MinimockAddRelationshipInspect() {
+func (m *ProfileServiceClientMock) MinimockAddRelationshipInspect() {
 	for _, e := range m.AddRelationshipMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.AddRelationship at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.AddRelationship at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -1227,66 +1227,66 @@ func (m *ProfileServiceHandlerMock) MinimockAddRelationshipInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.AddRelationshipMock.defaultExpectation != nil && afterAddRelationshipCounter < 1 {
 		if m.AddRelationshipMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.AddRelationship at\n%s", m.AddRelationshipMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.AddRelationship at\n%s", m.AddRelationshipMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.AddRelationship at\n%s with params: %#v", m.AddRelationshipMock.defaultExpectation.expectationOrigins.origin, *m.AddRelationshipMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.AddRelationship at\n%s with params: %#v", m.AddRelationshipMock.defaultExpectation.expectationOrigins.origin, *m.AddRelationshipMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcAddRelationship != nil && afterAddRelationshipCounter < 1 {
-		m.t.Errorf("Expected call to ProfileServiceHandlerMock.AddRelationship at\n%s", m.funcAddRelationshipOrigin)
+		m.t.Errorf("Expected call to ProfileServiceClientMock.AddRelationship at\n%s", m.funcAddRelationshipOrigin)
 	}
 
 	if !m.AddRelationshipMock.invocationsDone() && afterAddRelationshipCounter > 0 {
-		m.t.Errorf("Expected %d calls to ProfileServiceHandlerMock.AddRelationship at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to ProfileServiceClientMock.AddRelationship at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.AddRelationshipMock.expectedInvocations), m.AddRelationshipMock.expectedInvocationsOrigin, afterAddRelationshipCounter)
 	}
 }
 
-type mProfileServiceHandlerMockAddRoster struct {
+type mProfileServiceClientMockAddRoster struct {
 	optional           bool
-	mock               *ProfileServiceHandlerMock
-	defaultExpectation *ProfileServiceHandlerMockAddRosterExpectation
-	expectations       []*ProfileServiceHandlerMockAddRosterExpectation
+	mock               *ProfileServiceClientMock
+	defaultExpectation *ProfileServiceClientMockAddRosterExpectation
+	expectations       []*ProfileServiceClientMockAddRosterExpectation
 
-	callArgs []*ProfileServiceHandlerMockAddRosterParams
+	callArgs []*ProfileServiceClientMockAddRosterParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// ProfileServiceHandlerMockAddRosterExpectation specifies expectation struct of the ProfileServiceHandler.AddRoster
-type ProfileServiceHandlerMockAddRosterExpectation struct {
-	mock               *ProfileServiceHandlerMock
-	params             *ProfileServiceHandlerMockAddRosterParams
-	paramPtrs          *ProfileServiceHandlerMockAddRosterParamPtrs
-	expectationOrigins ProfileServiceHandlerMockAddRosterExpectationOrigins
-	results            *ProfileServiceHandlerMockAddRosterResults
+// ProfileServiceClientMockAddRosterExpectation specifies expectation struct of the ProfileServiceClient.AddRoster
+type ProfileServiceClientMockAddRosterExpectation struct {
+	mock               *ProfileServiceClientMock
+	params             *ProfileServiceClientMockAddRosterParams
+	paramPtrs          *ProfileServiceClientMockAddRosterParamPtrs
+	expectationOrigins ProfileServiceClientMockAddRosterExpectationOrigins
+	results            *ProfileServiceClientMockAddRosterResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// ProfileServiceHandlerMockAddRosterParams contains parameters of the ProfileServiceHandler.AddRoster
-type ProfileServiceHandlerMockAddRosterParams struct {
+// ProfileServiceClientMockAddRosterParams contains parameters of the ProfileServiceClient.AddRoster
+type ProfileServiceClientMockAddRosterParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.AddRosterRequest]
 }
 
-// ProfileServiceHandlerMockAddRosterParamPtrs contains pointers to parameters of the ProfileServiceHandler.AddRoster
-type ProfileServiceHandlerMockAddRosterParamPtrs struct {
+// ProfileServiceClientMockAddRosterParamPtrs contains pointers to parameters of the ProfileServiceClient.AddRoster
+type ProfileServiceClientMockAddRosterParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.AddRosterRequest]
 }
 
-// ProfileServiceHandlerMockAddRosterResults contains results of the ProfileServiceHandler.AddRoster
-type ProfileServiceHandlerMockAddRosterResults struct {
+// ProfileServiceClientMockAddRosterResults contains results of the ProfileServiceClient.AddRoster
+type ProfileServiceClientMockAddRosterResults struct {
 	pp2 *connect.Response[v1.AddRosterResponse]
 	err error
 }
 
-// ProfileServiceHandlerMockAddRosterOrigins contains origins of expectations of the ProfileServiceHandler.AddRoster
-type ProfileServiceHandlerMockAddRosterExpectationOrigins struct {
+// ProfileServiceClientMockAddRosterOrigins contains origins of expectations of the ProfileServiceClient.AddRoster
+type ProfileServiceClientMockAddRosterExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -1297,26 +1297,26 @@ type ProfileServiceHandlerMockAddRosterExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmAddRoster *mProfileServiceHandlerMockAddRoster) Optional() *mProfileServiceHandlerMockAddRoster {
+func (mmAddRoster *mProfileServiceClientMockAddRoster) Optional() *mProfileServiceClientMockAddRoster {
 	mmAddRoster.optional = true
 	return mmAddRoster
 }
 
-// Expect sets up expected params for ProfileServiceHandler.AddRoster
-func (mmAddRoster *mProfileServiceHandlerMockAddRoster) Expect(ctx context.Context, pp1 *connect.Request[v1.AddRosterRequest]) *mProfileServiceHandlerMockAddRoster {
+// Expect sets up expected params for ProfileServiceClient.AddRoster
+func (mmAddRoster *mProfileServiceClientMockAddRoster) Expect(ctx context.Context, pp1 *connect.Request[v1.AddRosterRequest]) *mProfileServiceClientMockAddRoster {
 	if mmAddRoster.mock.funcAddRoster != nil {
-		mmAddRoster.mock.t.Fatalf("ProfileServiceHandlerMock.AddRoster mock is already set by Set")
+		mmAddRoster.mock.t.Fatalf("ProfileServiceClientMock.AddRoster mock is already set by Set")
 	}
 
 	if mmAddRoster.defaultExpectation == nil {
-		mmAddRoster.defaultExpectation = &ProfileServiceHandlerMockAddRosterExpectation{}
+		mmAddRoster.defaultExpectation = &ProfileServiceClientMockAddRosterExpectation{}
 	}
 
 	if mmAddRoster.defaultExpectation.paramPtrs != nil {
-		mmAddRoster.mock.t.Fatalf("ProfileServiceHandlerMock.AddRoster mock is already set by ExpectParams functions")
+		mmAddRoster.mock.t.Fatalf("ProfileServiceClientMock.AddRoster mock is already set by ExpectParams functions")
 	}
 
-	mmAddRoster.defaultExpectation.params = &ProfileServiceHandlerMockAddRosterParams{ctx, pp1}
+	mmAddRoster.defaultExpectation.params = &ProfileServiceClientMockAddRosterParams{ctx, pp1}
 	mmAddRoster.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmAddRoster.expectations {
 		if minimock.Equal(e.params, mmAddRoster.defaultExpectation.params) {
@@ -1327,22 +1327,22 @@ func (mmAddRoster *mProfileServiceHandlerMockAddRoster) Expect(ctx context.Conte
 	return mmAddRoster
 }
 
-// ExpectCtxParam1 sets up expected param ctx for ProfileServiceHandler.AddRoster
-func (mmAddRoster *mProfileServiceHandlerMockAddRoster) ExpectCtxParam1(ctx context.Context) *mProfileServiceHandlerMockAddRoster {
+// ExpectCtxParam1 sets up expected param ctx for ProfileServiceClient.AddRoster
+func (mmAddRoster *mProfileServiceClientMockAddRoster) ExpectCtxParam1(ctx context.Context) *mProfileServiceClientMockAddRoster {
 	if mmAddRoster.mock.funcAddRoster != nil {
-		mmAddRoster.mock.t.Fatalf("ProfileServiceHandlerMock.AddRoster mock is already set by Set")
+		mmAddRoster.mock.t.Fatalf("ProfileServiceClientMock.AddRoster mock is already set by Set")
 	}
 
 	if mmAddRoster.defaultExpectation == nil {
-		mmAddRoster.defaultExpectation = &ProfileServiceHandlerMockAddRosterExpectation{}
+		mmAddRoster.defaultExpectation = &ProfileServiceClientMockAddRosterExpectation{}
 	}
 
 	if mmAddRoster.defaultExpectation.params != nil {
-		mmAddRoster.mock.t.Fatalf("ProfileServiceHandlerMock.AddRoster mock is already set by Expect")
+		mmAddRoster.mock.t.Fatalf("ProfileServiceClientMock.AddRoster mock is already set by Expect")
 	}
 
 	if mmAddRoster.defaultExpectation.paramPtrs == nil {
-		mmAddRoster.defaultExpectation.paramPtrs = &ProfileServiceHandlerMockAddRosterParamPtrs{}
+		mmAddRoster.defaultExpectation.paramPtrs = &ProfileServiceClientMockAddRosterParamPtrs{}
 	}
 	mmAddRoster.defaultExpectation.paramPtrs.ctx = &ctx
 	mmAddRoster.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -1350,22 +1350,22 @@ func (mmAddRoster *mProfileServiceHandlerMockAddRoster) ExpectCtxParam1(ctx cont
 	return mmAddRoster
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for ProfileServiceHandler.AddRoster
-func (mmAddRoster *mProfileServiceHandlerMockAddRoster) ExpectPp1Param2(pp1 *connect.Request[v1.AddRosterRequest]) *mProfileServiceHandlerMockAddRoster {
+// ExpectPp1Param2 sets up expected param pp1 for ProfileServiceClient.AddRoster
+func (mmAddRoster *mProfileServiceClientMockAddRoster) ExpectPp1Param2(pp1 *connect.Request[v1.AddRosterRequest]) *mProfileServiceClientMockAddRoster {
 	if mmAddRoster.mock.funcAddRoster != nil {
-		mmAddRoster.mock.t.Fatalf("ProfileServiceHandlerMock.AddRoster mock is already set by Set")
+		mmAddRoster.mock.t.Fatalf("ProfileServiceClientMock.AddRoster mock is already set by Set")
 	}
 
 	if mmAddRoster.defaultExpectation == nil {
-		mmAddRoster.defaultExpectation = &ProfileServiceHandlerMockAddRosterExpectation{}
+		mmAddRoster.defaultExpectation = &ProfileServiceClientMockAddRosterExpectation{}
 	}
 
 	if mmAddRoster.defaultExpectation.params != nil {
-		mmAddRoster.mock.t.Fatalf("ProfileServiceHandlerMock.AddRoster mock is already set by Expect")
+		mmAddRoster.mock.t.Fatalf("ProfileServiceClientMock.AddRoster mock is already set by Expect")
 	}
 
 	if mmAddRoster.defaultExpectation.paramPtrs == nil {
-		mmAddRoster.defaultExpectation.paramPtrs = &ProfileServiceHandlerMockAddRosterParamPtrs{}
+		mmAddRoster.defaultExpectation.paramPtrs = &ProfileServiceClientMockAddRosterParamPtrs{}
 	}
 	mmAddRoster.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmAddRoster.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -1373,10 +1373,10 @@ func (mmAddRoster *mProfileServiceHandlerMockAddRoster) ExpectPp1Param2(pp1 *con
 	return mmAddRoster
 }
 
-// Inspect accepts an inspector function that has same arguments as the ProfileServiceHandler.AddRoster
-func (mmAddRoster *mProfileServiceHandlerMockAddRoster) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.AddRosterRequest])) *mProfileServiceHandlerMockAddRoster {
+// Inspect accepts an inspector function that has same arguments as the ProfileServiceClient.AddRoster
+func (mmAddRoster *mProfileServiceClientMockAddRoster) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.AddRosterRequest])) *mProfileServiceClientMockAddRoster {
 	if mmAddRoster.mock.inspectFuncAddRoster != nil {
-		mmAddRoster.mock.t.Fatalf("Inspect function is already set for ProfileServiceHandlerMock.AddRoster")
+		mmAddRoster.mock.t.Fatalf("Inspect function is already set for ProfileServiceClientMock.AddRoster")
 	}
 
 	mmAddRoster.mock.inspectFuncAddRoster = f
@@ -1384,28 +1384,28 @@ func (mmAddRoster *mProfileServiceHandlerMockAddRoster) Inspect(f func(ctx conte
 	return mmAddRoster
 }
 
-// Return sets up results that will be returned by ProfileServiceHandler.AddRoster
-func (mmAddRoster *mProfileServiceHandlerMockAddRoster) Return(pp2 *connect.Response[v1.AddRosterResponse], err error) *ProfileServiceHandlerMock {
+// Return sets up results that will be returned by ProfileServiceClient.AddRoster
+func (mmAddRoster *mProfileServiceClientMockAddRoster) Return(pp2 *connect.Response[v1.AddRosterResponse], err error) *ProfileServiceClientMock {
 	if mmAddRoster.mock.funcAddRoster != nil {
-		mmAddRoster.mock.t.Fatalf("ProfileServiceHandlerMock.AddRoster mock is already set by Set")
+		mmAddRoster.mock.t.Fatalf("ProfileServiceClientMock.AddRoster mock is already set by Set")
 	}
 
 	if mmAddRoster.defaultExpectation == nil {
-		mmAddRoster.defaultExpectation = &ProfileServiceHandlerMockAddRosterExpectation{mock: mmAddRoster.mock}
+		mmAddRoster.defaultExpectation = &ProfileServiceClientMockAddRosterExpectation{mock: mmAddRoster.mock}
 	}
-	mmAddRoster.defaultExpectation.results = &ProfileServiceHandlerMockAddRosterResults{pp2, err}
+	mmAddRoster.defaultExpectation.results = &ProfileServiceClientMockAddRosterResults{pp2, err}
 	mmAddRoster.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmAddRoster.mock
 }
 
-// Set uses given function f to mock the ProfileServiceHandler.AddRoster method
-func (mmAddRoster *mProfileServiceHandlerMockAddRoster) Set(f func(ctx context.Context, pp1 *connect.Request[v1.AddRosterRequest]) (pp2 *connect.Response[v1.AddRosterResponse], err error)) *ProfileServiceHandlerMock {
+// Set uses given function f to mock the ProfileServiceClient.AddRoster method
+func (mmAddRoster *mProfileServiceClientMockAddRoster) Set(f func(ctx context.Context, pp1 *connect.Request[v1.AddRosterRequest]) (pp2 *connect.Response[v1.AddRosterResponse], err error)) *ProfileServiceClientMock {
 	if mmAddRoster.defaultExpectation != nil {
-		mmAddRoster.mock.t.Fatalf("Default expectation is already set for the ProfileServiceHandler.AddRoster method")
+		mmAddRoster.mock.t.Fatalf("Default expectation is already set for the ProfileServiceClient.AddRoster method")
 	}
 
 	if len(mmAddRoster.expectations) > 0 {
-		mmAddRoster.mock.t.Fatalf("Some expectations are already set for the ProfileServiceHandler.AddRoster method")
+		mmAddRoster.mock.t.Fatalf("Some expectations are already set for the ProfileServiceClient.AddRoster method")
 	}
 
 	mmAddRoster.mock.funcAddRoster = f
@@ -1413,39 +1413,39 @@ func (mmAddRoster *mProfileServiceHandlerMockAddRoster) Set(f func(ctx context.C
 	return mmAddRoster.mock
 }
 
-// When sets expectation for the ProfileServiceHandler.AddRoster which will trigger the result defined by the following
+// When sets expectation for the ProfileServiceClient.AddRoster which will trigger the result defined by the following
 // Then helper
-func (mmAddRoster *mProfileServiceHandlerMockAddRoster) When(ctx context.Context, pp1 *connect.Request[v1.AddRosterRequest]) *ProfileServiceHandlerMockAddRosterExpectation {
+func (mmAddRoster *mProfileServiceClientMockAddRoster) When(ctx context.Context, pp1 *connect.Request[v1.AddRosterRequest]) *ProfileServiceClientMockAddRosterExpectation {
 	if mmAddRoster.mock.funcAddRoster != nil {
-		mmAddRoster.mock.t.Fatalf("ProfileServiceHandlerMock.AddRoster mock is already set by Set")
+		mmAddRoster.mock.t.Fatalf("ProfileServiceClientMock.AddRoster mock is already set by Set")
 	}
 
-	expectation := &ProfileServiceHandlerMockAddRosterExpectation{
+	expectation := &ProfileServiceClientMockAddRosterExpectation{
 		mock:               mmAddRoster.mock,
-		params:             &ProfileServiceHandlerMockAddRosterParams{ctx, pp1},
-		expectationOrigins: ProfileServiceHandlerMockAddRosterExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &ProfileServiceClientMockAddRosterParams{ctx, pp1},
+		expectationOrigins: ProfileServiceClientMockAddRosterExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmAddRoster.expectations = append(mmAddRoster.expectations, expectation)
 	return expectation
 }
 
-// Then sets up ProfileServiceHandler.AddRoster return parameters for the expectation previously defined by the When method
-func (e *ProfileServiceHandlerMockAddRosterExpectation) Then(pp2 *connect.Response[v1.AddRosterResponse], err error) *ProfileServiceHandlerMock {
-	e.results = &ProfileServiceHandlerMockAddRosterResults{pp2, err}
+// Then sets up ProfileServiceClient.AddRoster return parameters for the expectation previously defined by the When method
+func (e *ProfileServiceClientMockAddRosterExpectation) Then(pp2 *connect.Response[v1.AddRosterResponse], err error) *ProfileServiceClientMock {
+	e.results = &ProfileServiceClientMockAddRosterResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times ProfileServiceHandler.AddRoster should be invoked
-func (mmAddRoster *mProfileServiceHandlerMockAddRoster) Times(n uint64) *mProfileServiceHandlerMockAddRoster {
+// Times sets number of times ProfileServiceClient.AddRoster should be invoked
+func (mmAddRoster *mProfileServiceClientMockAddRoster) Times(n uint64) *mProfileServiceClientMockAddRoster {
 	if n == 0 {
-		mmAddRoster.mock.t.Fatalf("Times of ProfileServiceHandlerMock.AddRoster mock can not be zero")
+		mmAddRoster.mock.t.Fatalf("Times of ProfileServiceClientMock.AddRoster mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmAddRoster.expectedInvocations, n)
 	mmAddRoster.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmAddRoster
 }
 
-func (mmAddRoster *mProfileServiceHandlerMockAddRoster) invocationsDone() bool {
+func (mmAddRoster *mProfileServiceClientMockAddRoster) invocationsDone() bool {
 	if len(mmAddRoster.expectations) == 0 && mmAddRoster.defaultExpectation == nil && mmAddRoster.mock.funcAddRoster == nil {
 		return true
 	}
@@ -1456,8 +1456,8 @@ func (mmAddRoster *mProfileServiceHandlerMockAddRoster) invocationsDone() bool {
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// AddRoster implements mm_profilev1connect.ProfileServiceHandler
-func (mmAddRoster *ProfileServiceHandlerMock) AddRoster(ctx context.Context, pp1 *connect.Request[v1.AddRosterRequest]) (pp2 *connect.Response[v1.AddRosterResponse], err error) {
+// AddRoster implements mm_profilev1connect.ProfileServiceClient
+func (mmAddRoster *ProfileServiceClientMock) AddRoster(ctx context.Context, pp1 *connect.Request[v1.AddRosterRequest]) (pp2 *connect.Response[v1.AddRosterResponse], err error) {
 	mm_atomic.AddUint64(&mmAddRoster.beforeAddRosterCounter, 1)
 	defer mm_atomic.AddUint64(&mmAddRoster.afterAddRosterCounter, 1)
 
@@ -1467,7 +1467,7 @@ func (mmAddRoster *ProfileServiceHandlerMock) AddRoster(ctx context.Context, pp1
 		mmAddRoster.inspectFuncAddRoster(ctx, pp1)
 	}
 
-	mm_params := ProfileServiceHandlerMockAddRosterParams{ctx, pp1}
+	mm_params := ProfileServiceClientMockAddRosterParams{ctx, pp1}
 
 	// Record call args
 	mmAddRoster.AddRosterMock.mutex.Lock()
@@ -1486,54 +1486,54 @@ func (mmAddRoster *ProfileServiceHandlerMock) AddRoster(ctx context.Context, pp1
 		mm_want := mmAddRoster.AddRosterMock.defaultExpectation.params
 		mm_want_ptrs := mmAddRoster.AddRosterMock.defaultExpectation.paramPtrs
 
-		mm_got := ProfileServiceHandlerMockAddRosterParams{ctx, pp1}
+		mm_got := ProfileServiceClientMockAddRosterParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmAddRoster.t.Errorf("ProfileServiceHandlerMock.AddRoster got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmAddRoster.t.Errorf("ProfileServiceClientMock.AddRoster got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmAddRoster.AddRosterMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmAddRoster.t.Errorf("ProfileServiceHandlerMock.AddRoster got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmAddRoster.t.Errorf("ProfileServiceClientMock.AddRoster got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmAddRoster.AddRosterMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmAddRoster.t.Errorf("ProfileServiceHandlerMock.AddRoster got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmAddRoster.t.Errorf("ProfileServiceClientMock.AddRoster got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmAddRoster.AddRosterMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmAddRoster.AddRosterMock.defaultExpectation.results
 		if mm_results == nil {
-			mmAddRoster.t.Fatal("No results are set for the ProfileServiceHandlerMock.AddRoster")
+			mmAddRoster.t.Fatal("No results are set for the ProfileServiceClientMock.AddRoster")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmAddRoster.funcAddRoster != nil {
 		return mmAddRoster.funcAddRoster(ctx, pp1)
 	}
-	mmAddRoster.t.Fatalf("Unexpected call to ProfileServiceHandlerMock.AddRoster. %v %v", ctx, pp1)
+	mmAddRoster.t.Fatalf("Unexpected call to ProfileServiceClientMock.AddRoster. %v %v", ctx, pp1)
 	return
 }
 
-// AddRosterAfterCounter returns a count of finished ProfileServiceHandlerMock.AddRoster invocations
-func (mmAddRoster *ProfileServiceHandlerMock) AddRosterAfterCounter() uint64 {
+// AddRosterAfterCounter returns a count of finished ProfileServiceClientMock.AddRoster invocations
+func (mmAddRoster *ProfileServiceClientMock) AddRosterAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmAddRoster.afterAddRosterCounter)
 }
 
-// AddRosterBeforeCounter returns a count of ProfileServiceHandlerMock.AddRoster invocations
-func (mmAddRoster *ProfileServiceHandlerMock) AddRosterBeforeCounter() uint64 {
+// AddRosterBeforeCounter returns a count of ProfileServiceClientMock.AddRoster invocations
+func (mmAddRoster *ProfileServiceClientMock) AddRosterBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmAddRoster.beforeAddRosterCounter)
 }
 
-// Calls returns a list of arguments used in each call to ProfileServiceHandlerMock.AddRoster.
+// Calls returns a list of arguments used in each call to ProfileServiceClientMock.AddRoster.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmAddRoster *mProfileServiceHandlerMockAddRoster) Calls() []*ProfileServiceHandlerMockAddRosterParams {
+func (mmAddRoster *mProfileServiceClientMockAddRoster) Calls() []*ProfileServiceClientMockAddRosterParams {
 	mmAddRoster.mutex.RLock()
 
-	argCopy := make([]*ProfileServiceHandlerMockAddRosterParams, len(mmAddRoster.callArgs))
+	argCopy := make([]*ProfileServiceClientMockAddRosterParams, len(mmAddRoster.callArgs))
 	copy(argCopy, mmAddRoster.callArgs)
 
 	mmAddRoster.mutex.RUnlock()
@@ -1543,7 +1543,7 @@ func (mmAddRoster *mProfileServiceHandlerMockAddRoster) Calls() []*ProfileServic
 
 // MinimockAddRosterDone returns true if the count of the AddRoster invocations corresponds
 // the number of defined expectations
-func (m *ProfileServiceHandlerMock) MinimockAddRosterDone() bool {
+func (m *ProfileServiceClientMock) MinimockAddRosterDone() bool {
 	if m.AddRosterMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -1559,10 +1559,10 @@ func (m *ProfileServiceHandlerMock) MinimockAddRosterDone() bool {
 }
 
 // MinimockAddRosterInspect logs each unmet expectation
-func (m *ProfileServiceHandlerMock) MinimockAddRosterInspect() {
+func (m *ProfileServiceClientMock) MinimockAddRosterInspect() {
 	for _, e := range m.AddRosterMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.AddRoster at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.AddRoster at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -1570,66 +1570,66 @@ func (m *ProfileServiceHandlerMock) MinimockAddRosterInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.AddRosterMock.defaultExpectation != nil && afterAddRosterCounter < 1 {
 		if m.AddRosterMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.AddRoster at\n%s", m.AddRosterMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.AddRoster at\n%s", m.AddRosterMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.AddRoster at\n%s with params: %#v", m.AddRosterMock.defaultExpectation.expectationOrigins.origin, *m.AddRosterMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.AddRoster at\n%s with params: %#v", m.AddRosterMock.defaultExpectation.expectationOrigins.origin, *m.AddRosterMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcAddRoster != nil && afterAddRosterCounter < 1 {
-		m.t.Errorf("Expected call to ProfileServiceHandlerMock.AddRoster at\n%s", m.funcAddRosterOrigin)
+		m.t.Errorf("Expected call to ProfileServiceClientMock.AddRoster at\n%s", m.funcAddRosterOrigin)
 	}
 
 	if !m.AddRosterMock.invocationsDone() && afterAddRosterCounter > 0 {
-		m.t.Errorf("Expected %d calls to ProfileServiceHandlerMock.AddRoster at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to ProfileServiceClientMock.AddRoster at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.AddRosterMock.expectedInvocations), m.AddRosterMock.expectedInvocationsOrigin, afterAddRosterCounter)
 	}
 }
 
-type mProfileServiceHandlerMockCheckVerification struct {
+type mProfileServiceClientMockCheckVerification struct {
 	optional           bool
-	mock               *ProfileServiceHandlerMock
-	defaultExpectation *ProfileServiceHandlerMockCheckVerificationExpectation
-	expectations       []*ProfileServiceHandlerMockCheckVerificationExpectation
+	mock               *ProfileServiceClientMock
+	defaultExpectation *ProfileServiceClientMockCheckVerificationExpectation
+	expectations       []*ProfileServiceClientMockCheckVerificationExpectation
 
-	callArgs []*ProfileServiceHandlerMockCheckVerificationParams
+	callArgs []*ProfileServiceClientMockCheckVerificationParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// ProfileServiceHandlerMockCheckVerificationExpectation specifies expectation struct of the ProfileServiceHandler.CheckVerification
-type ProfileServiceHandlerMockCheckVerificationExpectation struct {
-	mock               *ProfileServiceHandlerMock
-	params             *ProfileServiceHandlerMockCheckVerificationParams
-	paramPtrs          *ProfileServiceHandlerMockCheckVerificationParamPtrs
-	expectationOrigins ProfileServiceHandlerMockCheckVerificationExpectationOrigins
-	results            *ProfileServiceHandlerMockCheckVerificationResults
+// ProfileServiceClientMockCheckVerificationExpectation specifies expectation struct of the ProfileServiceClient.CheckVerification
+type ProfileServiceClientMockCheckVerificationExpectation struct {
+	mock               *ProfileServiceClientMock
+	params             *ProfileServiceClientMockCheckVerificationParams
+	paramPtrs          *ProfileServiceClientMockCheckVerificationParamPtrs
+	expectationOrigins ProfileServiceClientMockCheckVerificationExpectationOrigins
+	results            *ProfileServiceClientMockCheckVerificationResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// ProfileServiceHandlerMockCheckVerificationParams contains parameters of the ProfileServiceHandler.CheckVerification
-type ProfileServiceHandlerMockCheckVerificationParams struct {
+// ProfileServiceClientMockCheckVerificationParams contains parameters of the ProfileServiceClient.CheckVerification
+type ProfileServiceClientMockCheckVerificationParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.CheckVerificationRequest]
 }
 
-// ProfileServiceHandlerMockCheckVerificationParamPtrs contains pointers to parameters of the ProfileServiceHandler.CheckVerification
-type ProfileServiceHandlerMockCheckVerificationParamPtrs struct {
+// ProfileServiceClientMockCheckVerificationParamPtrs contains pointers to parameters of the ProfileServiceClient.CheckVerification
+type ProfileServiceClientMockCheckVerificationParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.CheckVerificationRequest]
 }
 
-// ProfileServiceHandlerMockCheckVerificationResults contains results of the ProfileServiceHandler.CheckVerification
-type ProfileServiceHandlerMockCheckVerificationResults struct {
+// ProfileServiceClientMockCheckVerificationResults contains results of the ProfileServiceClient.CheckVerification
+type ProfileServiceClientMockCheckVerificationResults struct {
 	pp2 *connect.Response[v1.CheckVerificationResponse]
 	err error
 }
 
-// ProfileServiceHandlerMockCheckVerificationOrigins contains origins of expectations of the ProfileServiceHandler.CheckVerification
-type ProfileServiceHandlerMockCheckVerificationExpectationOrigins struct {
+// ProfileServiceClientMockCheckVerificationOrigins contains origins of expectations of the ProfileServiceClient.CheckVerification
+type ProfileServiceClientMockCheckVerificationExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -1640,26 +1640,26 @@ type ProfileServiceHandlerMockCheckVerificationExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmCheckVerification *mProfileServiceHandlerMockCheckVerification) Optional() *mProfileServiceHandlerMockCheckVerification {
+func (mmCheckVerification *mProfileServiceClientMockCheckVerification) Optional() *mProfileServiceClientMockCheckVerification {
 	mmCheckVerification.optional = true
 	return mmCheckVerification
 }
 
-// Expect sets up expected params for ProfileServiceHandler.CheckVerification
-func (mmCheckVerification *mProfileServiceHandlerMockCheckVerification) Expect(ctx context.Context, pp1 *connect.Request[v1.CheckVerificationRequest]) *mProfileServiceHandlerMockCheckVerification {
+// Expect sets up expected params for ProfileServiceClient.CheckVerification
+func (mmCheckVerification *mProfileServiceClientMockCheckVerification) Expect(ctx context.Context, pp1 *connect.Request[v1.CheckVerificationRequest]) *mProfileServiceClientMockCheckVerification {
 	if mmCheckVerification.mock.funcCheckVerification != nil {
-		mmCheckVerification.mock.t.Fatalf("ProfileServiceHandlerMock.CheckVerification mock is already set by Set")
+		mmCheckVerification.mock.t.Fatalf("ProfileServiceClientMock.CheckVerification mock is already set by Set")
 	}
 
 	if mmCheckVerification.defaultExpectation == nil {
-		mmCheckVerification.defaultExpectation = &ProfileServiceHandlerMockCheckVerificationExpectation{}
+		mmCheckVerification.defaultExpectation = &ProfileServiceClientMockCheckVerificationExpectation{}
 	}
 
 	if mmCheckVerification.defaultExpectation.paramPtrs != nil {
-		mmCheckVerification.mock.t.Fatalf("ProfileServiceHandlerMock.CheckVerification mock is already set by ExpectParams functions")
+		mmCheckVerification.mock.t.Fatalf("ProfileServiceClientMock.CheckVerification mock is already set by ExpectParams functions")
 	}
 
-	mmCheckVerification.defaultExpectation.params = &ProfileServiceHandlerMockCheckVerificationParams{ctx, pp1}
+	mmCheckVerification.defaultExpectation.params = &ProfileServiceClientMockCheckVerificationParams{ctx, pp1}
 	mmCheckVerification.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmCheckVerification.expectations {
 		if minimock.Equal(e.params, mmCheckVerification.defaultExpectation.params) {
@@ -1670,22 +1670,22 @@ func (mmCheckVerification *mProfileServiceHandlerMockCheckVerification) Expect(c
 	return mmCheckVerification
 }
 
-// ExpectCtxParam1 sets up expected param ctx for ProfileServiceHandler.CheckVerification
-func (mmCheckVerification *mProfileServiceHandlerMockCheckVerification) ExpectCtxParam1(ctx context.Context) *mProfileServiceHandlerMockCheckVerification {
+// ExpectCtxParam1 sets up expected param ctx for ProfileServiceClient.CheckVerification
+func (mmCheckVerification *mProfileServiceClientMockCheckVerification) ExpectCtxParam1(ctx context.Context) *mProfileServiceClientMockCheckVerification {
 	if mmCheckVerification.mock.funcCheckVerification != nil {
-		mmCheckVerification.mock.t.Fatalf("ProfileServiceHandlerMock.CheckVerification mock is already set by Set")
+		mmCheckVerification.mock.t.Fatalf("ProfileServiceClientMock.CheckVerification mock is already set by Set")
 	}
 
 	if mmCheckVerification.defaultExpectation == nil {
-		mmCheckVerification.defaultExpectation = &ProfileServiceHandlerMockCheckVerificationExpectation{}
+		mmCheckVerification.defaultExpectation = &ProfileServiceClientMockCheckVerificationExpectation{}
 	}
 
 	if mmCheckVerification.defaultExpectation.params != nil {
-		mmCheckVerification.mock.t.Fatalf("ProfileServiceHandlerMock.CheckVerification mock is already set by Expect")
+		mmCheckVerification.mock.t.Fatalf("ProfileServiceClientMock.CheckVerification mock is already set by Expect")
 	}
 
 	if mmCheckVerification.defaultExpectation.paramPtrs == nil {
-		mmCheckVerification.defaultExpectation.paramPtrs = &ProfileServiceHandlerMockCheckVerificationParamPtrs{}
+		mmCheckVerification.defaultExpectation.paramPtrs = &ProfileServiceClientMockCheckVerificationParamPtrs{}
 	}
 	mmCheckVerification.defaultExpectation.paramPtrs.ctx = &ctx
 	mmCheckVerification.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -1693,22 +1693,22 @@ func (mmCheckVerification *mProfileServiceHandlerMockCheckVerification) ExpectCt
 	return mmCheckVerification
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for ProfileServiceHandler.CheckVerification
-func (mmCheckVerification *mProfileServiceHandlerMockCheckVerification) ExpectPp1Param2(pp1 *connect.Request[v1.CheckVerificationRequest]) *mProfileServiceHandlerMockCheckVerification {
+// ExpectPp1Param2 sets up expected param pp1 for ProfileServiceClient.CheckVerification
+func (mmCheckVerification *mProfileServiceClientMockCheckVerification) ExpectPp1Param2(pp1 *connect.Request[v1.CheckVerificationRequest]) *mProfileServiceClientMockCheckVerification {
 	if mmCheckVerification.mock.funcCheckVerification != nil {
-		mmCheckVerification.mock.t.Fatalf("ProfileServiceHandlerMock.CheckVerification mock is already set by Set")
+		mmCheckVerification.mock.t.Fatalf("ProfileServiceClientMock.CheckVerification mock is already set by Set")
 	}
 
 	if mmCheckVerification.defaultExpectation == nil {
-		mmCheckVerification.defaultExpectation = &ProfileServiceHandlerMockCheckVerificationExpectation{}
+		mmCheckVerification.defaultExpectation = &ProfileServiceClientMockCheckVerificationExpectation{}
 	}
 
 	if mmCheckVerification.defaultExpectation.params != nil {
-		mmCheckVerification.mock.t.Fatalf("ProfileServiceHandlerMock.CheckVerification mock is already set by Expect")
+		mmCheckVerification.mock.t.Fatalf("ProfileServiceClientMock.CheckVerification mock is already set by Expect")
 	}
 
 	if mmCheckVerification.defaultExpectation.paramPtrs == nil {
-		mmCheckVerification.defaultExpectation.paramPtrs = &ProfileServiceHandlerMockCheckVerificationParamPtrs{}
+		mmCheckVerification.defaultExpectation.paramPtrs = &ProfileServiceClientMockCheckVerificationParamPtrs{}
 	}
 	mmCheckVerification.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmCheckVerification.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -1716,10 +1716,10 @@ func (mmCheckVerification *mProfileServiceHandlerMockCheckVerification) ExpectPp
 	return mmCheckVerification
 }
 
-// Inspect accepts an inspector function that has same arguments as the ProfileServiceHandler.CheckVerification
-func (mmCheckVerification *mProfileServiceHandlerMockCheckVerification) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.CheckVerificationRequest])) *mProfileServiceHandlerMockCheckVerification {
+// Inspect accepts an inspector function that has same arguments as the ProfileServiceClient.CheckVerification
+func (mmCheckVerification *mProfileServiceClientMockCheckVerification) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.CheckVerificationRequest])) *mProfileServiceClientMockCheckVerification {
 	if mmCheckVerification.mock.inspectFuncCheckVerification != nil {
-		mmCheckVerification.mock.t.Fatalf("Inspect function is already set for ProfileServiceHandlerMock.CheckVerification")
+		mmCheckVerification.mock.t.Fatalf("Inspect function is already set for ProfileServiceClientMock.CheckVerification")
 	}
 
 	mmCheckVerification.mock.inspectFuncCheckVerification = f
@@ -1727,28 +1727,28 @@ func (mmCheckVerification *mProfileServiceHandlerMockCheckVerification) Inspect(
 	return mmCheckVerification
 }
 
-// Return sets up results that will be returned by ProfileServiceHandler.CheckVerification
-func (mmCheckVerification *mProfileServiceHandlerMockCheckVerification) Return(pp2 *connect.Response[v1.CheckVerificationResponse], err error) *ProfileServiceHandlerMock {
+// Return sets up results that will be returned by ProfileServiceClient.CheckVerification
+func (mmCheckVerification *mProfileServiceClientMockCheckVerification) Return(pp2 *connect.Response[v1.CheckVerificationResponse], err error) *ProfileServiceClientMock {
 	if mmCheckVerification.mock.funcCheckVerification != nil {
-		mmCheckVerification.mock.t.Fatalf("ProfileServiceHandlerMock.CheckVerification mock is already set by Set")
+		mmCheckVerification.mock.t.Fatalf("ProfileServiceClientMock.CheckVerification mock is already set by Set")
 	}
 
 	if mmCheckVerification.defaultExpectation == nil {
-		mmCheckVerification.defaultExpectation = &ProfileServiceHandlerMockCheckVerificationExpectation{mock: mmCheckVerification.mock}
+		mmCheckVerification.defaultExpectation = &ProfileServiceClientMockCheckVerificationExpectation{mock: mmCheckVerification.mock}
 	}
-	mmCheckVerification.defaultExpectation.results = &ProfileServiceHandlerMockCheckVerificationResults{pp2, err}
+	mmCheckVerification.defaultExpectation.results = &ProfileServiceClientMockCheckVerificationResults{pp2, err}
 	mmCheckVerification.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmCheckVerification.mock
 }
 
-// Set uses given function f to mock the ProfileServiceHandler.CheckVerification method
-func (mmCheckVerification *mProfileServiceHandlerMockCheckVerification) Set(f func(ctx context.Context, pp1 *connect.Request[v1.CheckVerificationRequest]) (pp2 *connect.Response[v1.CheckVerificationResponse], err error)) *ProfileServiceHandlerMock {
+// Set uses given function f to mock the ProfileServiceClient.CheckVerification method
+func (mmCheckVerification *mProfileServiceClientMockCheckVerification) Set(f func(ctx context.Context, pp1 *connect.Request[v1.CheckVerificationRequest]) (pp2 *connect.Response[v1.CheckVerificationResponse], err error)) *ProfileServiceClientMock {
 	if mmCheckVerification.defaultExpectation != nil {
-		mmCheckVerification.mock.t.Fatalf("Default expectation is already set for the ProfileServiceHandler.CheckVerification method")
+		mmCheckVerification.mock.t.Fatalf("Default expectation is already set for the ProfileServiceClient.CheckVerification method")
 	}
 
 	if len(mmCheckVerification.expectations) > 0 {
-		mmCheckVerification.mock.t.Fatalf("Some expectations are already set for the ProfileServiceHandler.CheckVerification method")
+		mmCheckVerification.mock.t.Fatalf("Some expectations are already set for the ProfileServiceClient.CheckVerification method")
 	}
 
 	mmCheckVerification.mock.funcCheckVerification = f
@@ -1756,39 +1756,39 @@ func (mmCheckVerification *mProfileServiceHandlerMockCheckVerification) Set(f fu
 	return mmCheckVerification.mock
 }
 
-// When sets expectation for the ProfileServiceHandler.CheckVerification which will trigger the result defined by the following
+// When sets expectation for the ProfileServiceClient.CheckVerification which will trigger the result defined by the following
 // Then helper
-func (mmCheckVerification *mProfileServiceHandlerMockCheckVerification) When(ctx context.Context, pp1 *connect.Request[v1.CheckVerificationRequest]) *ProfileServiceHandlerMockCheckVerificationExpectation {
+func (mmCheckVerification *mProfileServiceClientMockCheckVerification) When(ctx context.Context, pp1 *connect.Request[v1.CheckVerificationRequest]) *ProfileServiceClientMockCheckVerificationExpectation {
 	if mmCheckVerification.mock.funcCheckVerification != nil {
-		mmCheckVerification.mock.t.Fatalf("ProfileServiceHandlerMock.CheckVerification mock is already set by Set")
+		mmCheckVerification.mock.t.Fatalf("ProfileServiceClientMock.CheckVerification mock is already set by Set")
 	}
 
-	expectation := &ProfileServiceHandlerMockCheckVerificationExpectation{
+	expectation := &ProfileServiceClientMockCheckVerificationExpectation{
 		mock:               mmCheckVerification.mock,
-		params:             &ProfileServiceHandlerMockCheckVerificationParams{ctx, pp1},
-		expectationOrigins: ProfileServiceHandlerMockCheckVerificationExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &ProfileServiceClientMockCheckVerificationParams{ctx, pp1},
+		expectationOrigins: ProfileServiceClientMockCheckVerificationExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmCheckVerification.expectations = append(mmCheckVerification.expectations, expectation)
 	return expectation
 }
 
-// Then sets up ProfileServiceHandler.CheckVerification return parameters for the expectation previously defined by the When method
-func (e *ProfileServiceHandlerMockCheckVerificationExpectation) Then(pp2 *connect.Response[v1.CheckVerificationResponse], err error) *ProfileServiceHandlerMock {
-	e.results = &ProfileServiceHandlerMockCheckVerificationResults{pp2, err}
+// Then sets up ProfileServiceClient.CheckVerification return parameters for the expectation previously defined by the When method
+func (e *ProfileServiceClientMockCheckVerificationExpectation) Then(pp2 *connect.Response[v1.CheckVerificationResponse], err error) *ProfileServiceClientMock {
+	e.results = &ProfileServiceClientMockCheckVerificationResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times ProfileServiceHandler.CheckVerification should be invoked
-func (mmCheckVerification *mProfileServiceHandlerMockCheckVerification) Times(n uint64) *mProfileServiceHandlerMockCheckVerification {
+// Times sets number of times ProfileServiceClient.CheckVerification should be invoked
+func (mmCheckVerification *mProfileServiceClientMockCheckVerification) Times(n uint64) *mProfileServiceClientMockCheckVerification {
 	if n == 0 {
-		mmCheckVerification.mock.t.Fatalf("Times of ProfileServiceHandlerMock.CheckVerification mock can not be zero")
+		mmCheckVerification.mock.t.Fatalf("Times of ProfileServiceClientMock.CheckVerification mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmCheckVerification.expectedInvocations, n)
 	mmCheckVerification.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmCheckVerification
 }
 
-func (mmCheckVerification *mProfileServiceHandlerMockCheckVerification) invocationsDone() bool {
+func (mmCheckVerification *mProfileServiceClientMockCheckVerification) invocationsDone() bool {
 	if len(mmCheckVerification.expectations) == 0 && mmCheckVerification.defaultExpectation == nil && mmCheckVerification.mock.funcCheckVerification == nil {
 		return true
 	}
@@ -1799,8 +1799,8 @@ func (mmCheckVerification *mProfileServiceHandlerMockCheckVerification) invocati
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// CheckVerification implements mm_profilev1connect.ProfileServiceHandler
-func (mmCheckVerification *ProfileServiceHandlerMock) CheckVerification(ctx context.Context, pp1 *connect.Request[v1.CheckVerificationRequest]) (pp2 *connect.Response[v1.CheckVerificationResponse], err error) {
+// CheckVerification implements mm_profilev1connect.ProfileServiceClient
+func (mmCheckVerification *ProfileServiceClientMock) CheckVerification(ctx context.Context, pp1 *connect.Request[v1.CheckVerificationRequest]) (pp2 *connect.Response[v1.CheckVerificationResponse], err error) {
 	mm_atomic.AddUint64(&mmCheckVerification.beforeCheckVerificationCounter, 1)
 	defer mm_atomic.AddUint64(&mmCheckVerification.afterCheckVerificationCounter, 1)
 
@@ -1810,7 +1810,7 @@ func (mmCheckVerification *ProfileServiceHandlerMock) CheckVerification(ctx cont
 		mmCheckVerification.inspectFuncCheckVerification(ctx, pp1)
 	}
 
-	mm_params := ProfileServiceHandlerMockCheckVerificationParams{ctx, pp1}
+	mm_params := ProfileServiceClientMockCheckVerificationParams{ctx, pp1}
 
 	// Record call args
 	mmCheckVerification.CheckVerificationMock.mutex.Lock()
@@ -1829,54 +1829,54 @@ func (mmCheckVerification *ProfileServiceHandlerMock) CheckVerification(ctx cont
 		mm_want := mmCheckVerification.CheckVerificationMock.defaultExpectation.params
 		mm_want_ptrs := mmCheckVerification.CheckVerificationMock.defaultExpectation.paramPtrs
 
-		mm_got := ProfileServiceHandlerMockCheckVerificationParams{ctx, pp1}
+		mm_got := ProfileServiceClientMockCheckVerificationParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmCheckVerification.t.Errorf("ProfileServiceHandlerMock.CheckVerification got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmCheckVerification.t.Errorf("ProfileServiceClientMock.CheckVerification got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmCheckVerification.CheckVerificationMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmCheckVerification.t.Errorf("ProfileServiceHandlerMock.CheckVerification got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmCheckVerification.t.Errorf("ProfileServiceClientMock.CheckVerification got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmCheckVerification.CheckVerificationMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmCheckVerification.t.Errorf("ProfileServiceHandlerMock.CheckVerification got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmCheckVerification.t.Errorf("ProfileServiceClientMock.CheckVerification got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmCheckVerification.CheckVerificationMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmCheckVerification.CheckVerificationMock.defaultExpectation.results
 		if mm_results == nil {
-			mmCheckVerification.t.Fatal("No results are set for the ProfileServiceHandlerMock.CheckVerification")
+			mmCheckVerification.t.Fatal("No results are set for the ProfileServiceClientMock.CheckVerification")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmCheckVerification.funcCheckVerification != nil {
 		return mmCheckVerification.funcCheckVerification(ctx, pp1)
 	}
-	mmCheckVerification.t.Fatalf("Unexpected call to ProfileServiceHandlerMock.CheckVerification. %v %v", ctx, pp1)
+	mmCheckVerification.t.Fatalf("Unexpected call to ProfileServiceClientMock.CheckVerification. %v %v", ctx, pp1)
 	return
 }
 
-// CheckVerificationAfterCounter returns a count of finished ProfileServiceHandlerMock.CheckVerification invocations
-func (mmCheckVerification *ProfileServiceHandlerMock) CheckVerificationAfterCounter() uint64 {
+// CheckVerificationAfterCounter returns a count of finished ProfileServiceClientMock.CheckVerification invocations
+func (mmCheckVerification *ProfileServiceClientMock) CheckVerificationAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmCheckVerification.afterCheckVerificationCounter)
 }
 
-// CheckVerificationBeforeCounter returns a count of ProfileServiceHandlerMock.CheckVerification invocations
-func (mmCheckVerification *ProfileServiceHandlerMock) CheckVerificationBeforeCounter() uint64 {
+// CheckVerificationBeforeCounter returns a count of ProfileServiceClientMock.CheckVerification invocations
+func (mmCheckVerification *ProfileServiceClientMock) CheckVerificationBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmCheckVerification.beforeCheckVerificationCounter)
 }
 
-// Calls returns a list of arguments used in each call to ProfileServiceHandlerMock.CheckVerification.
+// Calls returns a list of arguments used in each call to ProfileServiceClientMock.CheckVerification.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmCheckVerification *mProfileServiceHandlerMockCheckVerification) Calls() []*ProfileServiceHandlerMockCheckVerificationParams {
+func (mmCheckVerification *mProfileServiceClientMockCheckVerification) Calls() []*ProfileServiceClientMockCheckVerificationParams {
 	mmCheckVerification.mutex.RLock()
 
-	argCopy := make([]*ProfileServiceHandlerMockCheckVerificationParams, len(mmCheckVerification.callArgs))
+	argCopy := make([]*ProfileServiceClientMockCheckVerificationParams, len(mmCheckVerification.callArgs))
 	copy(argCopy, mmCheckVerification.callArgs)
 
 	mmCheckVerification.mutex.RUnlock()
@@ -1886,7 +1886,7 @@ func (mmCheckVerification *mProfileServiceHandlerMockCheckVerification) Calls() 
 
 // MinimockCheckVerificationDone returns true if the count of the CheckVerification invocations corresponds
 // the number of defined expectations
-func (m *ProfileServiceHandlerMock) MinimockCheckVerificationDone() bool {
+func (m *ProfileServiceClientMock) MinimockCheckVerificationDone() bool {
 	if m.CheckVerificationMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -1902,10 +1902,10 @@ func (m *ProfileServiceHandlerMock) MinimockCheckVerificationDone() bool {
 }
 
 // MinimockCheckVerificationInspect logs each unmet expectation
-func (m *ProfileServiceHandlerMock) MinimockCheckVerificationInspect() {
+func (m *ProfileServiceClientMock) MinimockCheckVerificationInspect() {
 	for _, e := range m.CheckVerificationMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.CheckVerification at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.CheckVerification at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -1913,66 +1913,66 @@ func (m *ProfileServiceHandlerMock) MinimockCheckVerificationInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.CheckVerificationMock.defaultExpectation != nil && afterCheckVerificationCounter < 1 {
 		if m.CheckVerificationMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.CheckVerification at\n%s", m.CheckVerificationMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.CheckVerification at\n%s", m.CheckVerificationMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.CheckVerification at\n%s with params: %#v", m.CheckVerificationMock.defaultExpectation.expectationOrigins.origin, *m.CheckVerificationMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.CheckVerification at\n%s with params: %#v", m.CheckVerificationMock.defaultExpectation.expectationOrigins.origin, *m.CheckVerificationMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcCheckVerification != nil && afterCheckVerificationCounter < 1 {
-		m.t.Errorf("Expected call to ProfileServiceHandlerMock.CheckVerification at\n%s", m.funcCheckVerificationOrigin)
+		m.t.Errorf("Expected call to ProfileServiceClientMock.CheckVerification at\n%s", m.funcCheckVerificationOrigin)
 	}
 
 	if !m.CheckVerificationMock.invocationsDone() && afterCheckVerificationCounter > 0 {
-		m.t.Errorf("Expected %d calls to ProfileServiceHandlerMock.CheckVerification at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to ProfileServiceClientMock.CheckVerification at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.CheckVerificationMock.expectedInvocations), m.CheckVerificationMock.expectedInvocationsOrigin, afterCheckVerificationCounter)
 	}
 }
 
-type mProfileServiceHandlerMockCreate struct {
+type mProfileServiceClientMockCreate struct {
 	optional           bool
-	mock               *ProfileServiceHandlerMock
-	defaultExpectation *ProfileServiceHandlerMockCreateExpectation
-	expectations       []*ProfileServiceHandlerMockCreateExpectation
+	mock               *ProfileServiceClientMock
+	defaultExpectation *ProfileServiceClientMockCreateExpectation
+	expectations       []*ProfileServiceClientMockCreateExpectation
 
-	callArgs []*ProfileServiceHandlerMockCreateParams
+	callArgs []*ProfileServiceClientMockCreateParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// ProfileServiceHandlerMockCreateExpectation specifies expectation struct of the ProfileServiceHandler.Create
-type ProfileServiceHandlerMockCreateExpectation struct {
-	mock               *ProfileServiceHandlerMock
-	params             *ProfileServiceHandlerMockCreateParams
-	paramPtrs          *ProfileServiceHandlerMockCreateParamPtrs
-	expectationOrigins ProfileServiceHandlerMockCreateExpectationOrigins
-	results            *ProfileServiceHandlerMockCreateResults
+// ProfileServiceClientMockCreateExpectation specifies expectation struct of the ProfileServiceClient.Create
+type ProfileServiceClientMockCreateExpectation struct {
+	mock               *ProfileServiceClientMock
+	params             *ProfileServiceClientMockCreateParams
+	paramPtrs          *ProfileServiceClientMockCreateParamPtrs
+	expectationOrigins ProfileServiceClientMockCreateExpectationOrigins
+	results            *ProfileServiceClientMockCreateResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// ProfileServiceHandlerMockCreateParams contains parameters of the ProfileServiceHandler.Create
-type ProfileServiceHandlerMockCreateParams struct {
+// ProfileServiceClientMockCreateParams contains parameters of the ProfileServiceClient.Create
+type ProfileServiceClientMockCreateParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.CreateRequest]
 }
 
-// ProfileServiceHandlerMockCreateParamPtrs contains pointers to parameters of the ProfileServiceHandler.Create
-type ProfileServiceHandlerMockCreateParamPtrs struct {
+// ProfileServiceClientMockCreateParamPtrs contains pointers to parameters of the ProfileServiceClient.Create
+type ProfileServiceClientMockCreateParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.CreateRequest]
 }
 
-// ProfileServiceHandlerMockCreateResults contains results of the ProfileServiceHandler.Create
-type ProfileServiceHandlerMockCreateResults struct {
+// ProfileServiceClientMockCreateResults contains results of the ProfileServiceClient.Create
+type ProfileServiceClientMockCreateResults struct {
 	pp2 *connect.Response[v1.CreateResponse]
 	err error
 }
 
-// ProfileServiceHandlerMockCreateOrigins contains origins of expectations of the ProfileServiceHandler.Create
-type ProfileServiceHandlerMockCreateExpectationOrigins struct {
+// ProfileServiceClientMockCreateOrigins contains origins of expectations of the ProfileServiceClient.Create
+type ProfileServiceClientMockCreateExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -1983,26 +1983,26 @@ type ProfileServiceHandlerMockCreateExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmCreate *mProfileServiceHandlerMockCreate) Optional() *mProfileServiceHandlerMockCreate {
+func (mmCreate *mProfileServiceClientMockCreate) Optional() *mProfileServiceClientMockCreate {
 	mmCreate.optional = true
 	return mmCreate
 }
 
-// Expect sets up expected params for ProfileServiceHandler.Create
-func (mmCreate *mProfileServiceHandlerMockCreate) Expect(ctx context.Context, pp1 *connect.Request[v1.CreateRequest]) *mProfileServiceHandlerMockCreate {
+// Expect sets up expected params for ProfileServiceClient.Create
+func (mmCreate *mProfileServiceClientMockCreate) Expect(ctx context.Context, pp1 *connect.Request[v1.CreateRequest]) *mProfileServiceClientMockCreate {
 	if mmCreate.mock.funcCreate != nil {
-		mmCreate.mock.t.Fatalf("ProfileServiceHandlerMock.Create mock is already set by Set")
+		mmCreate.mock.t.Fatalf("ProfileServiceClientMock.Create mock is already set by Set")
 	}
 
 	if mmCreate.defaultExpectation == nil {
-		mmCreate.defaultExpectation = &ProfileServiceHandlerMockCreateExpectation{}
+		mmCreate.defaultExpectation = &ProfileServiceClientMockCreateExpectation{}
 	}
 
 	if mmCreate.defaultExpectation.paramPtrs != nil {
-		mmCreate.mock.t.Fatalf("ProfileServiceHandlerMock.Create mock is already set by ExpectParams functions")
+		mmCreate.mock.t.Fatalf("ProfileServiceClientMock.Create mock is already set by ExpectParams functions")
 	}
 
-	mmCreate.defaultExpectation.params = &ProfileServiceHandlerMockCreateParams{ctx, pp1}
+	mmCreate.defaultExpectation.params = &ProfileServiceClientMockCreateParams{ctx, pp1}
 	mmCreate.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmCreate.expectations {
 		if minimock.Equal(e.params, mmCreate.defaultExpectation.params) {
@@ -2013,22 +2013,22 @@ func (mmCreate *mProfileServiceHandlerMockCreate) Expect(ctx context.Context, pp
 	return mmCreate
 }
 
-// ExpectCtxParam1 sets up expected param ctx for ProfileServiceHandler.Create
-func (mmCreate *mProfileServiceHandlerMockCreate) ExpectCtxParam1(ctx context.Context) *mProfileServiceHandlerMockCreate {
+// ExpectCtxParam1 sets up expected param ctx for ProfileServiceClient.Create
+func (mmCreate *mProfileServiceClientMockCreate) ExpectCtxParam1(ctx context.Context) *mProfileServiceClientMockCreate {
 	if mmCreate.mock.funcCreate != nil {
-		mmCreate.mock.t.Fatalf("ProfileServiceHandlerMock.Create mock is already set by Set")
+		mmCreate.mock.t.Fatalf("ProfileServiceClientMock.Create mock is already set by Set")
 	}
 
 	if mmCreate.defaultExpectation == nil {
-		mmCreate.defaultExpectation = &ProfileServiceHandlerMockCreateExpectation{}
+		mmCreate.defaultExpectation = &ProfileServiceClientMockCreateExpectation{}
 	}
 
 	if mmCreate.defaultExpectation.params != nil {
-		mmCreate.mock.t.Fatalf("ProfileServiceHandlerMock.Create mock is already set by Expect")
+		mmCreate.mock.t.Fatalf("ProfileServiceClientMock.Create mock is already set by Expect")
 	}
 
 	if mmCreate.defaultExpectation.paramPtrs == nil {
-		mmCreate.defaultExpectation.paramPtrs = &ProfileServiceHandlerMockCreateParamPtrs{}
+		mmCreate.defaultExpectation.paramPtrs = &ProfileServiceClientMockCreateParamPtrs{}
 	}
 	mmCreate.defaultExpectation.paramPtrs.ctx = &ctx
 	mmCreate.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -2036,22 +2036,22 @@ func (mmCreate *mProfileServiceHandlerMockCreate) ExpectCtxParam1(ctx context.Co
 	return mmCreate
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for ProfileServiceHandler.Create
-func (mmCreate *mProfileServiceHandlerMockCreate) ExpectPp1Param2(pp1 *connect.Request[v1.CreateRequest]) *mProfileServiceHandlerMockCreate {
+// ExpectPp1Param2 sets up expected param pp1 for ProfileServiceClient.Create
+func (mmCreate *mProfileServiceClientMockCreate) ExpectPp1Param2(pp1 *connect.Request[v1.CreateRequest]) *mProfileServiceClientMockCreate {
 	if mmCreate.mock.funcCreate != nil {
-		mmCreate.mock.t.Fatalf("ProfileServiceHandlerMock.Create mock is already set by Set")
+		mmCreate.mock.t.Fatalf("ProfileServiceClientMock.Create mock is already set by Set")
 	}
 
 	if mmCreate.defaultExpectation == nil {
-		mmCreate.defaultExpectation = &ProfileServiceHandlerMockCreateExpectation{}
+		mmCreate.defaultExpectation = &ProfileServiceClientMockCreateExpectation{}
 	}
 
 	if mmCreate.defaultExpectation.params != nil {
-		mmCreate.mock.t.Fatalf("ProfileServiceHandlerMock.Create mock is already set by Expect")
+		mmCreate.mock.t.Fatalf("ProfileServiceClientMock.Create mock is already set by Expect")
 	}
 
 	if mmCreate.defaultExpectation.paramPtrs == nil {
-		mmCreate.defaultExpectation.paramPtrs = &ProfileServiceHandlerMockCreateParamPtrs{}
+		mmCreate.defaultExpectation.paramPtrs = &ProfileServiceClientMockCreateParamPtrs{}
 	}
 	mmCreate.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmCreate.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -2059,10 +2059,10 @@ func (mmCreate *mProfileServiceHandlerMockCreate) ExpectPp1Param2(pp1 *connect.R
 	return mmCreate
 }
 
-// Inspect accepts an inspector function that has same arguments as the ProfileServiceHandler.Create
-func (mmCreate *mProfileServiceHandlerMockCreate) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.CreateRequest])) *mProfileServiceHandlerMockCreate {
+// Inspect accepts an inspector function that has same arguments as the ProfileServiceClient.Create
+func (mmCreate *mProfileServiceClientMockCreate) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.CreateRequest])) *mProfileServiceClientMockCreate {
 	if mmCreate.mock.inspectFuncCreate != nil {
-		mmCreate.mock.t.Fatalf("Inspect function is already set for ProfileServiceHandlerMock.Create")
+		mmCreate.mock.t.Fatalf("Inspect function is already set for ProfileServiceClientMock.Create")
 	}
 
 	mmCreate.mock.inspectFuncCreate = f
@@ -2070,28 +2070,28 @@ func (mmCreate *mProfileServiceHandlerMockCreate) Inspect(f func(ctx context.Con
 	return mmCreate
 }
 
-// Return sets up results that will be returned by ProfileServiceHandler.Create
-func (mmCreate *mProfileServiceHandlerMockCreate) Return(pp2 *connect.Response[v1.CreateResponse], err error) *ProfileServiceHandlerMock {
+// Return sets up results that will be returned by ProfileServiceClient.Create
+func (mmCreate *mProfileServiceClientMockCreate) Return(pp2 *connect.Response[v1.CreateResponse], err error) *ProfileServiceClientMock {
 	if mmCreate.mock.funcCreate != nil {
-		mmCreate.mock.t.Fatalf("ProfileServiceHandlerMock.Create mock is already set by Set")
+		mmCreate.mock.t.Fatalf("ProfileServiceClientMock.Create mock is already set by Set")
 	}
 
 	if mmCreate.defaultExpectation == nil {
-		mmCreate.defaultExpectation = &ProfileServiceHandlerMockCreateExpectation{mock: mmCreate.mock}
+		mmCreate.defaultExpectation = &ProfileServiceClientMockCreateExpectation{mock: mmCreate.mock}
 	}
-	mmCreate.defaultExpectation.results = &ProfileServiceHandlerMockCreateResults{pp2, err}
+	mmCreate.defaultExpectation.results = &ProfileServiceClientMockCreateResults{pp2, err}
 	mmCreate.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmCreate.mock
 }
 
-// Set uses given function f to mock the ProfileServiceHandler.Create method
-func (mmCreate *mProfileServiceHandlerMockCreate) Set(f func(ctx context.Context, pp1 *connect.Request[v1.CreateRequest]) (pp2 *connect.Response[v1.CreateResponse], err error)) *ProfileServiceHandlerMock {
+// Set uses given function f to mock the ProfileServiceClient.Create method
+func (mmCreate *mProfileServiceClientMockCreate) Set(f func(ctx context.Context, pp1 *connect.Request[v1.CreateRequest]) (pp2 *connect.Response[v1.CreateResponse], err error)) *ProfileServiceClientMock {
 	if mmCreate.defaultExpectation != nil {
-		mmCreate.mock.t.Fatalf("Default expectation is already set for the ProfileServiceHandler.Create method")
+		mmCreate.mock.t.Fatalf("Default expectation is already set for the ProfileServiceClient.Create method")
 	}
 
 	if len(mmCreate.expectations) > 0 {
-		mmCreate.mock.t.Fatalf("Some expectations are already set for the ProfileServiceHandler.Create method")
+		mmCreate.mock.t.Fatalf("Some expectations are already set for the ProfileServiceClient.Create method")
 	}
 
 	mmCreate.mock.funcCreate = f
@@ -2099,39 +2099,39 @@ func (mmCreate *mProfileServiceHandlerMockCreate) Set(f func(ctx context.Context
 	return mmCreate.mock
 }
 
-// When sets expectation for the ProfileServiceHandler.Create which will trigger the result defined by the following
+// When sets expectation for the ProfileServiceClient.Create which will trigger the result defined by the following
 // Then helper
-func (mmCreate *mProfileServiceHandlerMockCreate) When(ctx context.Context, pp1 *connect.Request[v1.CreateRequest]) *ProfileServiceHandlerMockCreateExpectation {
+func (mmCreate *mProfileServiceClientMockCreate) When(ctx context.Context, pp1 *connect.Request[v1.CreateRequest]) *ProfileServiceClientMockCreateExpectation {
 	if mmCreate.mock.funcCreate != nil {
-		mmCreate.mock.t.Fatalf("ProfileServiceHandlerMock.Create mock is already set by Set")
+		mmCreate.mock.t.Fatalf("ProfileServiceClientMock.Create mock is already set by Set")
 	}
 
-	expectation := &ProfileServiceHandlerMockCreateExpectation{
+	expectation := &ProfileServiceClientMockCreateExpectation{
 		mock:               mmCreate.mock,
-		params:             &ProfileServiceHandlerMockCreateParams{ctx, pp1},
-		expectationOrigins: ProfileServiceHandlerMockCreateExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &ProfileServiceClientMockCreateParams{ctx, pp1},
+		expectationOrigins: ProfileServiceClientMockCreateExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmCreate.expectations = append(mmCreate.expectations, expectation)
 	return expectation
 }
 
-// Then sets up ProfileServiceHandler.Create return parameters for the expectation previously defined by the When method
-func (e *ProfileServiceHandlerMockCreateExpectation) Then(pp2 *connect.Response[v1.CreateResponse], err error) *ProfileServiceHandlerMock {
-	e.results = &ProfileServiceHandlerMockCreateResults{pp2, err}
+// Then sets up ProfileServiceClient.Create return parameters for the expectation previously defined by the When method
+func (e *ProfileServiceClientMockCreateExpectation) Then(pp2 *connect.Response[v1.CreateResponse], err error) *ProfileServiceClientMock {
+	e.results = &ProfileServiceClientMockCreateResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times ProfileServiceHandler.Create should be invoked
-func (mmCreate *mProfileServiceHandlerMockCreate) Times(n uint64) *mProfileServiceHandlerMockCreate {
+// Times sets number of times ProfileServiceClient.Create should be invoked
+func (mmCreate *mProfileServiceClientMockCreate) Times(n uint64) *mProfileServiceClientMockCreate {
 	if n == 0 {
-		mmCreate.mock.t.Fatalf("Times of ProfileServiceHandlerMock.Create mock can not be zero")
+		mmCreate.mock.t.Fatalf("Times of ProfileServiceClientMock.Create mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmCreate.expectedInvocations, n)
 	mmCreate.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmCreate
 }
 
-func (mmCreate *mProfileServiceHandlerMockCreate) invocationsDone() bool {
+func (mmCreate *mProfileServiceClientMockCreate) invocationsDone() bool {
 	if len(mmCreate.expectations) == 0 && mmCreate.defaultExpectation == nil && mmCreate.mock.funcCreate == nil {
 		return true
 	}
@@ -2142,8 +2142,8 @@ func (mmCreate *mProfileServiceHandlerMockCreate) invocationsDone() bool {
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// Create implements mm_profilev1connect.ProfileServiceHandler
-func (mmCreate *ProfileServiceHandlerMock) Create(ctx context.Context, pp1 *connect.Request[v1.CreateRequest]) (pp2 *connect.Response[v1.CreateResponse], err error) {
+// Create implements mm_profilev1connect.ProfileServiceClient
+func (mmCreate *ProfileServiceClientMock) Create(ctx context.Context, pp1 *connect.Request[v1.CreateRequest]) (pp2 *connect.Response[v1.CreateResponse], err error) {
 	mm_atomic.AddUint64(&mmCreate.beforeCreateCounter, 1)
 	defer mm_atomic.AddUint64(&mmCreate.afterCreateCounter, 1)
 
@@ -2153,7 +2153,7 @@ func (mmCreate *ProfileServiceHandlerMock) Create(ctx context.Context, pp1 *conn
 		mmCreate.inspectFuncCreate(ctx, pp1)
 	}
 
-	mm_params := ProfileServiceHandlerMockCreateParams{ctx, pp1}
+	mm_params := ProfileServiceClientMockCreateParams{ctx, pp1}
 
 	// Record call args
 	mmCreate.CreateMock.mutex.Lock()
@@ -2172,54 +2172,54 @@ func (mmCreate *ProfileServiceHandlerMock) Create(ctx context.Context, pp1 *conn
 		mm_want := mmCreate.CreateMock.defaultExpectation.params
 		mm_want_ptrs := mmCreate.CreateMock.defaultExpectation.paramPtrs
 
-		mm_got := ProfileServiceHandlerMockCreateParams{ctx, pp1}
+		mm_got := ProfileServiceClientMockCreateParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmCreate.t.Errorf("ProfileServiceHandlerMock.Create got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmCreate.t.Errorf("ProfileServiceClientMock.Create got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmCreate.CreateMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmCreate.t.Errorf("ProfileServiceHandlerMock.Create got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmCreate.t.Errorf("ProfileServiceClientMock.Create got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmCreate.CreateMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmCreate.t.Errorf("ProfileServiceHandlerMock.Create got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmCreate.t.Errorf("ProfileServiceClientMock.Create got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmCreate.CreateMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmCreate.CreateMock.defaultExpectation.results
 		if mm_results == nil {
-			mmCreate.t.Fatal("No results are set for the ProfileServiceHandlerMock.Create")
+			mmCreate.t.Fatal("No results are set for the ProfileServiceClientMock.Create")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmCreate.funcCreate != nil {
 		return mmCreate.funcCreate(ctx, pp1)
 	}
-	mmCreate.t.Fatalf("Unexpected call to ProfileServiceHandlerMock.Create. %v %v", ctx, pp1)
+	mmCreate.t.Fatalf("Unexpected call to ProfileServiceClientMock.Create. %v %v", ctx, pp1)
 	return
 }
 
-// CreateAfterCounter returns a count of finished ProfileServiceHandlerMock.Create invocations
-func (mmCreate *ProfileServiceHandlerMock) CreateAfterCounter() uint64 {
+// CreateAfterCounter returns a count of finished ProfileServiceClientMock.Create invocations
+func (mmCreate *ProfileServiceClientMock) CreateAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmCreate.afterCreateCounter)
 }
 
-// CreateBeforeCounter returns a count of ProfileServiceHandlerMock.Create invocations
-func (mmCreate *ProfileServiceHandlerMock) CreateBeforeCounter() uint64 {
+// CreateBeforeCounter returns a count of ProfileServiceClientMock.Create invocations
+func (mmCreate *ProfileServiceClientMock) CreateBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmCreate.beforeCreateCounter)
 }
 
-// Calls returns a list of arguments used in each call to ProfileServiceHandlerMock.Create.
+// Calls returns a list of arguments used in each call to ProfileServiceClientMock.Create.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmCreate *mProfileServiceHandlerMockCreate) Calls() []*ProfileServiceHandlerMockCreateParams {
+func (mmCreate *mProfileServiceClientMockCreate) Calls() []*ProfileServiceClientMockCreateParams {
 	mmCreate.mutex.RLock()
 
-	argCopy := make([]*ProfileServiceHandlerMockCreateParams, len(mmCreate.callArgs))
+	argCopy := make([]*ProfileServiceClientMockCreateParams, len(mmCreate.callArgs))
 	copy(argCopy, mmCreate.callArgs)
 
 	mmCreate.mutex.RUnlock()
@@ -2229,7 +2229,7 @@ func (mmCreate *mProfileServiceHandlerMockCreate) Calls() []*ProfileServiceHandl
 
 // MinimockCreateDone returns true if the count of the Create invocations corresponds
 // the number of defined expectations
-func (m *ProfileServiceHandlerMock) MinimockCreateDone() bool {
+func (m *ProfileServiceClientMock) MinimockCreateDone() bool {
 	if m.CreateMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -2245,10 +2245,10 @@ func (m *ProfileServiceHandlerMock) MinimockCreateDone() bool {
 }
 
 // MinimockCreateInspect logs each unmet expectation
-func (m *ProfileServiceHandlerMock) MinimockCreateInspect() {
+func (m *ProfileServiceClientMock) MinimockCreateInspect() {
 	for _, e := range m.CreateMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.Create at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.Create at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -2256,66 +2256,66 @@ func (m *ProfileServiceHandlerMock) MinimockCreateInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.CreateMock.defaultExpectation != nil && afterCreateCounter < 1 {
 		if m.CreateMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.Create at\n%s", m.CreateMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.Create at\n%s", m.CreateMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.Create at\n%s with params: %#v", m.CreateMock.defaultExpectation.expectationOrigins.origin, *m.CreateMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.Create at\n%s with params: %#v", m.CreateMock.defaultExpectation.expectationOrigins.origin, *m.CreateMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcCreate != nil && afterCreateCounter < 1 {
-		m.t.Errorf("Expected call to ProfileServiceHandlerMock.Create at\n%s", m.funcCreateOrigin)
+		m.t.Errorf("Expected call to ProfileServiceClientMock.Create at\n%s", m.funcCreateOrigin)
 	}
 
 	if !m.CreateMock.invocationsDone() && afterCreateCounter > 0 {
-		m.t.Errorf("Expected %d calls to ProfileServiceHandlerMock.Create at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to ProfileServiceClientMock.Create at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.CreateMock.expectedInvocations), m.CreateMock.expectedInvocationsOrigin, afterCreateCounter)
 	}
 }
 
-type mProfileServiceHandlerMockCreateContact struct {
+type mProfileServiceClientMockCreateContact struct {
 	optional           bool
-	mock               *ProfileServiceHandlerMock
-	defaultExpectation *ProfileServiceHandlerMockCreateContactExpectation
-	expectations       []*ProfileServiceHandlerMockCreateContactExpectation
+	mock               *ProfileServiceClientMock
+	defaultExpectation *ProfileServiceClientMockCreateContactExpectation
+	expectations       []*ProfileServiceClientMockCreateContactExpectation
 
-	callArgs []*ProfileServiceHandlerMockCreateContactParams
+	callArgs []*ProfileServiceClientMockCreateContactParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// ProfileServiceHandlerMockCreateContactExpectation specifies expectation struct of the ProfileServiceHandler.CreateContact
-type ProfileServiceHandlerMockCreateContactExpectation struct {
-	mock               *ProfileServiceHandlerMock
-	params             *ProfileServiceHandlerMockCreateContactParams
-	paramPtrs          *ProfileServiceHandlerMockCreateContactParamPtrs
-	expectationOrigins ProfileServiceHandlerMockCreateContactExpectationOrigins
-	results            *ProfileServiceHandlerMockCreateContactResults
+// ProfileServiceClientMockCreateContactExpectation specifies expectation struct of the ProfileServiceClient.CreateContact
+type ProfileServiceClientMockCreateContactExpectation struct {
+	mock               *ProfileServiceClientMock
+	params             *ProfileServiceClientMockCreateContactParams
+	paramPtrs          *ProfileServiceClientMockCreateContactParamPtrs
+	expectationOrigins ProfileServiceClientMockCreateContactExpectationOrigins
+	results            *ProfileServiceClientMockCreateContactResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// ProfileServiceHandlerMockCreateContactParams contains parameters of the ProfileServiceHandler.CreateContact
-type ProfileServiceHandlerMockCreateContactParams struct {
+// ProfileServiceClientMockCreateContactParams contains parameters of the ProfileServiceClient.CreateContact
+type ProfileServiceClientMockCreateContactParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.CreateContactRequest]
 }
 
-// ProfileServiceHandlerMockCreateContactParamPtrs contains pointers to parameters of the ProfileServiceHandler.CreateContact
-type ProfileServiceHandlerMockCreateContactParamPtrs struct {
+// ProfileServiceClientMockCreateContactParamPtrs contains pointers to parameters of the ProfileServiceClient.CreateContact
+type ProfileServiceClientMockCreateContactParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.CreateContactRequest]
 }
 
-// ProfileServiceHandlerMockCreateContactResults contains results of the ProfileServiceHandler.CreateContact
-type ProfileServiceHandlerMockCreateContactResults struct {
+// ProfileServiceClientMockCreateContactResults contains results of the ProfileServiceClient.CreateContact
+type ProfileServiceClientMockCreateContactResults struct {
 	pp2 *connect.Response[v1.CreateContactResponse]
 	err error
 }
 
-// ProfileServiceHandlerMockCreateContactOrigins contains origins of expectations of the ProfileServiceHandler.CreateContact
-type ProfileServiceHandlerMockCreateContactExpectationOrigins struct {
+// ProfileServiceClientMockCreateContactOrigins contains origins of expectations of the ProfileServiceClient.CreateContact
+type ProfileServiceClientMockCreateContactExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -2326,26 +2326,26 @@ type ProfileServiceHandlerMockCreateContactExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmCreateContact *mProfileServiceHandlerMockCreateContact) Optional() *mProfileServiceHandlerMockCreateContact {
+func (mmCreateContact *mProfileServiceClientMockCreateContact) Optional() *mProfileServiceClientMockCreateContact {
 	mmCreateContact.optional = true
 	return mmCreateContact
 }
 
-// Expect sets up expected params for ProfileServiceHandler.CreateContact
-func (mmCreateContact *mProfileServiceHandlerMockCreateContact) Expect(ctx context.Context, pp1 *connect.Request[v1.CreateContactRequest]) *mProfileServiceHandlerMockCreateContact {
+// Expect sets up expected params for ProfileServiceClient.CreateContact
+func (mmCreateContact *mProfileServiceClientMockCreateContact) Expect(ctx context.Context, pp1 *connect.Request[v1.CreateContactRequest]) *mProfileServiceClientMockCreateContact {
 	if mmCreateContact.mock.funcCreateContact != nil {
-		mmCreateContact.mock.t.Fatalf("ProfileServiceHandlerMock.CreateContact mock is already set by Set")
+		mmCreateContact.mock.t.Fatalf("ProfileServiceClientMock.CreateContact mock is already set by Set")
 	}
 
 	if mmCreateContact.defaultExpectation == nil {
-		mmCreateContact.defaultExpectation = &ProfileServiceHandlerMockCreateContactExpectation{}
+		mmCreateContact.defaultExpectation = &ProfileServiceClientMockCreateContactExpectation{}
 	}
 
 	if mmCreateContact.defaultExpectation.paramPtrs != nil {
-		mmCreateContact.mock.t.Fatalf("ProfileServiceHandlerMock.CreateContact mock is already set by ExpectParams functions")
+		mmCreateContact.mock.t.Fatalf("ProfileServiceClientMock.CreateContact mock is already set by ExpectParams functions")
 	}
 
-	mmCreateContact.defaultExpectation.params = &ProfileServiceHandlerMockCreateContactParams{ctx, pp1}
+	mmCreateContact.defaultExpectation.params = &ProfileServiceClientMockCreateContactParams{ctx, pp1}
 	mmCreateContact.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmCreateContact.expectations {
 		if minimock.Equal(e.params, mmCreateContact.defaultExpectation.params) {
@@ -2356,22 +2356,22 @@ func (mmCreateContact *mProfileServiceHandlerMockCreateContact) Expect(ctx conte
 	return mmCreateContact
 }
 
-// ExpectCtxParam1 sets up expected param ctx for ProfileServiceHandler.CreateContact
-func (mmCreateContact *mProfileServiceHandlerMockCreateContact) ExpectCtxParam1(ctx context.Context) *mProfileServiceHandlerMockCreateContact {
+// ExpectCtxParam1 sets up expected param ctx for ProfileServiceClient.CreateContact
+func (mmCreateContact *mProfileServiceClientMockCreateContact) ExpectCtxParam1(ctx context.Context) *mProfileServiceClientMockCreateContact {
 	if mmCreateContact.mock.funcCreateContact != nil {
-		mmCreateContact.mock.t.Fatalf("ProfileServiceHandlerMock.CreateContact mock is already set by Set")
+		mmCreateContact.mock.t.Fatalf("ProfileServiceClientMock.CreateContact mock is already set by Set")
 	}
 
 	if mmCreateContact.defaultExpectation == nil {
-		mmCreateContact.defaultExpectation = &ProfileServiceHandlerMockCreateContactExpectation{}
+		mmCreateContact.defaultExpectation = &ProfileServiceClientMockCreateContactExpectation{}
 	}
 
 	if mmCreateContact.defaultExpectation.params != nil {
-		mmCreateContact.mock.t.Fatalf("ProfileServiceHandlerMock.CreateContact mock is already set by Expect")
+		mmCreateContact.mock.t.Fatalf("ProfileServiceClientMock.CreateContact mock is already set by Expect")
 	}
 
 	if mmCreateContact.defaultExpectation.paramPtrs == nil {
-		mmCreateContact.defaultExpectation.paramPtrs = &ProfileServiceHandlerMockCreateContactParamPtrs{}
+		mmCreateContact.defaultExpectation.paramPtrs = &ProfileServiceClientMockCreateContactParamPtrs{}
 	}
 	mmCreateContact.defaultExpectation.paramPtrs.ctx = &ctx
 	mmCreateContact.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -2379,22 +2379,22 @@ func (mmCreateContact *mProfileServiceHandlerMockCreateContact) ExpectCtxParam1(
 	return mmCreateContact
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for ProfileServiceHandler.CreateContact
-func (mmCreateContact *mProfileServiceHandlerMockCreateContact) ExpectPp1Param2(pp1 *connect.Request[v1.CreateContactRequest]) *mProfileServiceHandlerMockCreateContact {
+// ExpectPp1Param2 sets up expected param pp1 for ProfileServiceClient.CreateContact
+func (mmCreateContact *mProfileServiceClientMockCreateContact) ExpectPp1Param2(pp1 *connect.Request[v1.CreateContactRequest]) *mProfileServiceClientMockCreateContact {
 	if mmCreateContact.mock.funcCreateContact != nil {
-		mmCreateContact.mock.t.Fatalf("ProfileServiceHandlerMock.CreateContact mock is already set by Set")
+		mmCreateContact.mock.t.Fatalf("ProfileServiceClientMock.CreateContact mock is already set by Set")
 	}
 
 	if mmCreateContact.defaultExpectation == nil {
-		mmCreateContact.defaultExpectation = &ProfileServiceHandlerMockCreateContactExpectation{}
+		mmCreateContact.defaultExpectation = &ProfileServiceClientMockCreateContactExpectation{}
 	}
 
 	if mmCreateContact.defaultExpectation.params != nil {
-		mmCreateContact.mock.t.Fatalf("ProfileServiceHandlerMock.CreateContact mock is already set by Expect")
+		mmCreateContact.mock.t.Fatalf("ProfileServiceClientMock.CreateContact mock is already set by Expect")
 	}
 
 	if mmCreateContact.defaultExpectation.paramPtrs == nil {
-		mmCreateContact.defaultExpectation.paramPtrs = &ProfileServiceHandlerMockCreateContactParamPtrs{}
+		mmCreateContact.defaultExpectation.paramPtrs = &ProfileServiceClientMockCreateContactParamPtrs{}
 	}
 	mmCreateContact.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmCreateContact.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -2402,10 +2402,10 @@ func (mmCreateContact *mProfileServiceHandlerMockCreateContact) ExpectPp1Param2(
 	return mmCreateContact
 }
 
-// Inspect accepts an inspector function that has same arguments as the ProfileServiceHandler.CreateContact
-func (mmCreateContact *mProfileServiceHandlerMockCreateContact) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.CreateContactRequest])) *mProfileServiceHandlerMockCreateContact {
+// Inspect accepts an inspector function that has same arguments as the ProfileServiceClient.CreateContact
+func (mmCreateContact *mProfileServiceClientMockCreateContact) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.CreateContactRequest])) *mProfileServiceClientMockCreateContact {
 	if mmCreateContact.mock.inspectFuncCreateContact != nil {
-		mmCreateContact.mock.t.Fatalf("Inspect function is already set for ProfileServiceHandlerMock.CreateContact")
+		mmCreateContact.mock.t.Fatalf("Inspect function is already set for ProfileServiceClientMock.CreateContact")
 	}
 
 	mmCreateContact.mock.inspectFuncCreateContact = f
@@ -2413,28 +2413,28 @@ func (mmCreateContact *mProfileServiceHandlerMockCreateContact) Inspect(f func(c
 	return mmCreateContact
 }
 
-// Return sets up results that will be returned by ProfileServiceHandler.CreateContact
-func (mmCreateContact *mProfileServiceHandlerMockCreateContact) Return(pp2 *connect.Response[v1.CreateContactResponse], err error) *ProfileServiceHandlerMock {
+// Return sets up results that will be returned by ProfileServiceClient.CreateContact
+func (mmCreateContact *mProfileServiceClientMockCreateContact) Return(pp2 *connect.Response[v1.CreateContactResponse], err error) *ProfileServiceClientMock {
 	if mmCreateContact.mock.funcCreateContact != nil {
-		mmCreateContact.mock.t.Fatalf("ProfileServiceHandlerMock.CreateContact mock is already set by Set")
+		mmCreateContact.mock.t.Fatalf("ProfileServiceClientMock.CreateContact mock is already set by Set")
 	}
 
 	if mmCreateContact.defaultExpectation == nil {
-		mmCreateContact.defaultExpectation = &ProfileServiceHandlerMockCreateContactExpectation{mock: mmCreateContact.mock}
+		mmCreateContact.defaultExpectation = &ProfileServiceClientMockCreateContactExpectation{mock: mmCreateContact.mock}
 	}
-	mmCreateContact.defaultExpectation.results = &ProfileServiceHandlerMockCreateContactResults{pp2, err}
+	mmCreateContact.defaultExpectation.results = &ProfileServiceClientMockCreateContactResults{pp2, err}
 	mmCreateContact.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmCreateContact.mock
 }
 
-// Set uses given function f to mock the ProfileServiceHandler.CreateContact method
-func (mmCreateContact *mProfileServiceHandlerMockCreateContact) Set(f func(ctx context.Context, pp1 *connect.Request[v1.CreateContactRequest]) (pp2 *connect.Response[v1.CreateContactResponse], err error)) *ProfileServiceHandlerMock {
+// Set uses given function f to mock the ProfileServiceClient.CreateContact method
+func (mmCreateContact *mProfileServiceClientMockCreateContact) Set(f func(ctx context.Context, pp1 *connect.Request[v1.CreateContactRequest]) (pp2 *connect.Response[v1.CreateContactResponse], err error)) *ProfileServiceClientMock {
 	if mmCreateContact.defaultExpectation != nil {
-		mmCreateContact.mock.t.Fatalf("Default expectation is already set for the ProfileServiceHandler.CreateContact method")
+		mmCreateContact.mock.t.Fatalf("Default expectation is already set for the ProfileServiceClient.CreateContact method")
 	}
 
 	if len(mmCreateContact.expectations) > 0 {
-		mmCreateContact.mock.t.Fatalf("Some expectations are already set for the ProfileServiceHandler.CreateContact method")
+		mmCreateContact.mock.t.Fatalf("Some expectations are already set for the ProfileServiceClient.CreateContact method")
 	}
 
 	mmCreateContact.mock.funcCreateContact = f
@@ -2442,39 +2442,39 @@ func (mmCreateContact *mProfileServiceHandlerMockCreateContact) Set(f func(ctx c
 	return mmCreateContact.mock
 }
 
-// When sets expectation for the ProfileServiceHandler.CreateContact which will trigger the result defined by the following
+// When sets expectation for the ProfileServiceClient.CreateContact which will trigger the result defined by the following
 // Then helper
-func (mmCreateContact *mProfileServiceHandlerMockCreateContact) When(ctx context.Context, pp1 *connect.Request[v1.CreateContactRequest]) *ProfileServiceHandlerMockCreateContactExpectation {
+func (mmCreateContact *mProfileServiceClientMockCreateContact) When(ctx context.Context, pp1 *connect.Request[v1.CreateContactRequest]) *ProfileServiceClientMockCreateContactExpectation {
 	if mmCreateContact.mock.funcCreateContact != nil {
-		mmCreateContact.mock.t.Fatalf("ProfileServiceHandlerMock.CreateContact mock is already set by Set")
+		mmCreateContact.mock.t.Fatalf("ProfileServiceClientMock.CreateContact mock is already set by Set")
 	}
 
-	expectation := &ProfileServiceHandlerMockCreateContactExpectation{
+	expectation := &ProfileServiceClientMockCreateContactExpectation{
 		mock:               mmCreateContact.mock,
-		params:             &ProfileServiceHandlerMockCreateContactParams{ctx, pp1},
-		expectationOrigins: ProfileServiceHandlerMockCreateContactExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &ProfileServiceClientMockCreateContactParams{ctx, pp1},
+		expectationOrigins: ProfileServiceClientMockCreateContactExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmCreateContact.expectations = append(mmCreateContact.expectations, expectation)
 	return expectation
 }
 
-// Then sets up ProfileServiceHandler.CreateContact return parameters for the expectation previously defined by the When method
-func (e *ProfileServiceHandlerMockCreateContactExpectation) Then(pp2 *connect.Response[v1.CreateContactResponse], err error) *ProfileServiceHandlerMock {
-	e.results = &ProfileServiceHandlerMockCreateContactResults{pp2, err}
+// Then sets up ProfileServiceClient.CreateContact return parameters for the expectation previously defined by the When method
+func (e *ProfileServiceClientMockCreateContactExpectation) Then(pp2 *connect.Response[v1.CreateContactResponse], err error) *ProfileServiceClientMock {
+	e.results = &ProfileServiceClientMockCreateContactResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times ProfileServiceHandler.CreateContact should be invoked
-func (mmCreateContact *mProfileServiceHandlerMockCreateContact) Times(n uint64) *mProfileServiceHandlerMockCreateContact {
+// Times sets number of times ProfileServiceClient.CreateContact should be invoked
+func (mmCreateContact *mProfileServiceClientMockCreateContact) Times(n uint64) *mProfileServiceClientMockCreateContact {
 	if n == 0 {
-		mmCreateContact.mock.t.Fatalf("Times of ProfileServiceHandlerMock.CreateContact mock can not be zero")
+		mmCreateContact.mock.t.Fatalf("Times of ProfileServiceClientMock.CreateContact mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmCreateContact.expectedInvocations, n)
 	mmCreateContact.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmCreateContact
 }
 
-func (mmCreateContact *mProfileServiceHandlerMockCreateContact) invocationsDone() bool {
+func (mmCreateContact *mProfileServiceClientMockCreateContact) invocationsDone() bool {
 	if len(mmCreateContact.expectations) == 0 && mmCreateContact.defaultExpectation == nil && mmCreateContact.mock.funcCreateContact == nil {
 		return true
 	}
@@ -2485,8 +2485,8 @@ func (mmCreateContact *mProfileServiceHandlerMockCreateContact) invocationsDone(
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// CreateContact implements mm_profilev1connect.ProfileServiceHandler
-func (mmCreateContact *ProfileServiceHandlerMock) CreateContact(ctx context.Context, pp1 *connect.Request[v1.CreateContactRequest]) (pp2 *connect.Response[v1.CreateContactResponse], err error) {
+// CreateContact implements mm_profilev1connect.ProfileServiceClient
+func (mmCreateContact *ProfileServiceClientMock) CreateContact(ctx context.Context, pp1 *connect.Request[v1.CreateContactRequest]) (pp2 *connect.Response[v1.CreateContactResponse], err error) {
 	mm_atomic.AddUint64(&mmCreateContact.beforeCreateContactCounter, 1)
 	defer mm_atomic.AddUint64(&mmCreateContact.afterCreateContactCounter, 1)
 
@@ -2496,7 +2496,7 @@ func (mmCreateContact *ProfileServiceHandlerMock) CreateContact(ctx context.Cont
 		mmCreateContact.inspectFuncCreateContact(ctx, pp1)
 	}
 
-	mm_params := ProfileServiceHandlerMockCreateContactParams{ctx, pp1}
+	mm_params := ProfileServiceClientMockCreateContactParams{ctx, pp1}
 
 	// Record call args
 	mmCreateContact.CreateContactMock.mutex.Lock()
@@ -2515,54 +2515,54 @@ func (mmCreateContact *ProfileServiceHandlerMock) CreateContact(ctx context.Cont
 		mm_want := mmCreateContact.CreateContactMock.defaultExpectation.params
 		mm_want_ptrs := mmCreateContact.CreateContactMock.defaultExpectation.paramPtrs
 
-		mm_got := ProfileServiceHandlerMockCreateContactParams{ctx, pp1}
+		mm_got := ProfileServiceClientMockCreateContactParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmCreateContact.t.Errorf("ProfileServiceHandlerMock.CreateContact got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmCreateContact.t.Errorf("ProfileServiceClientMock.CreateContact got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmCreateContact.CreateContactMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmCreateContact.t.Errorf("ProfileServiceHandlerMock.CreateContact got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmCreateContact.t.Errorf("ProfileServiceClientMock.CreateContact got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmCreateContact.CreateContactMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmCreateContact.t.Errorf("ProfileServiceHandlerMock.CreateContact got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmCreateContact.t.Errorf("ProfileServiceClientMock.CreateContact got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmCreateContact.CreateContactMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmCreateContact.CreateContactMock.defaultExpectation.results
 		if mm_results == nil {
-			mmCreateContact.t.Fatal("No results are set for the ProfileServiceHandlerMock.CreateContact")
+			mmCreateContact.t.Fatal("No results are set for the ProfileServiceClientMock.CreateContact")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmCreateContact.funcCreateContact != nil {
 		return mmCreateContact.funcCreateContact(ctx, pp1)
 	}
-	mmCreateContact.t.Fatalf("Unexpected call to ProfileServiceHandlerMock.CreateContact. %v %v", ctx, pp1)
+	mmCreateContact.t.Fatalf("Unexpected call to ProfileServiceClientMock.CreateContact. %v %v", ctx, pp1)
 	return
 }
 
-// CreateContactAfterCounter returns a count of finished ProfileServiceHandlerMock.CreateContact invocations
-func (mmCreateContact *ProfileServiceHandlerMock) CreateContactAfterCounter() uint64 {
+// CreateContactAfterCounter returns a count of finished ProfileServiceClientMock.CreateContact invocations
+func (mmCreateContact *ProfileServiceClientMock) CreateContactAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmCreateContact.afterCreateContactCounter)
 }
 
-// CreateContactBeforeCounter returns a count of ProfileServiceHandlerMock.CreateContact invocations
-func (mmCreateContact *ProfileServiceHandlerMock) CreateContactBeforeCounter() uint64 {
+// CreateContactBeforeCounter returns a count of ProfileServiceClientMock.CreateContact invocations
+func (mmCreateContact *ProfileServiceClientMock) CreateContactBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmCreateContact.beforeCreateContactCounter)
 }
 
-// Calls returns a list of arguments used in each call to ProfileServiceHandlerMock.CreateContact.
+// Calls returns a list of arguments used in each call to ProfileServiceClientMock.CreateContact.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmCreateContact *mProfileServiceHandlerMockCreateContact) Calls() []*ProfileServiceHandlerMockCreateContactParams {
+func (mmCreateContact *mProfileServiceClientMockCreateContact) Calls() []*ProfileServiceClientMockCreateContactParams {
 	mmCreateContact.mutex.RLock()
 
-	argCopy := make([]*ProfileServiceHandlerMockCreateContactParams, len(mmCreateContact.callArgs))
+	argCopy := make([]*ProfileServiceClientMockCreateContactParams, len(mmCreateContact.callArgs))
 	copy(argCopy, mmCreateContact.callArgs)
 
 	mmCreateContact.mutex.RUnlock()
@@ -2572,7 +2572,7 @@ func (mmCreateContact *mProfileServiceHandlerMockCreateContact) Calls() []*Profi
 
 // MinimockCreateContactDone returns true if the count of the CreateContact invocations corresponds
 // the number of defined expectations
-func (m *ProfileServiceHandlerMock) MinimockCreateContactDone() bool {
+func (m *ProfileServiceClientMock) MinimockCreateContactDone() bool {
 	if m.CreateContactMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -2588,10 +2588,10 @@ func (m *ProfileServiceHandlerMock) MinimockCreateContactDone() bool {
 }
 
 // MinimockCreateContactInspect logs each unmet expectation
-func (m *ProfileServiceHandlerMock) MinimockCreateContactInspect() {
+func (m *ProfileServiceClientMock) MinimockCreateContactInspect() {
 	for _, e := range m.CreateContactMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.CreateContact at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.CreateContact at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -2599,66 +2599,66 @@ func (m *ProfileServiceHandlerMock) MinimockCreateContactInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.CreateContactMock.defaultExpectation != nil && afterCreateContactCounter < 1 {
 		if m.CreateContactMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.CreateContact at\n%s", m.CreateContactMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.CreateContact at\n%s", m.CreateContactMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.CreateContact at\n%s with params: %#v", m.CreateContactMock.defaultExpectation.expectationOrigins.origin, *m.CreateContactMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.CreateContact at\n%s with params: %#v", m.CreateContactMock.defaultExpectation.expectationOrigins.origin, *m.CreateContactMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcCreateContact != nil && afterCreateContactCounter < 1 {
-		m.t.Errorf("Expected call to ProfileServiceHandlerMock.CreateContact at\n%s", m.funcCreateContactOrigin)
+		m.t.Errorf("Expected call to ProfileServiceClientMock.CreateContact at\n%s", m.funcCreateContactOrigin)
 	}
 
 	if !m.CreateContactMock.invocationsDone() && afterCreateContactCounter > 0 {
-		m.t.Errorf("Expected %d calls to ProfileServiceHandlerMock.CreateContact at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to ProfileServiceClientMock.CreateContact at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.CreateContactMock.expectedInvocations), m.CreateContactMock.expectedInvocationsOrigin, afterCreateContactCounter)
 	}
 }
 
-type mProfileServiceHandlerMockCreateContactVerification struct {
+type mProfileServiceClientMockCreateContactVerification struct {
 	optional           bool
-	mock               *ProfileServiceHandlerMock
-	defaultExpectation *ProfileServiceHandlerMockCreateContactVerificationExpectation
-	expectations       []*ProfileServiceHandlerMockCreateContactVerificationExpectation
+	mock               *ProfileServiceClientMock
+	defaultExpectation *ProfileServiceClientMockCreateContactVerificationExpectation
+	expectations       []*ProfileServiceClientMockCreateContactVerificationExpectation
 
-	callArgs []*ProfileServiceHandlerMockCreateContactVerificationParams
+	callArgs []*ProfileServiceClientMockCreateContactVerificationParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// ProfileServiceHandlerMockCreateContactVerificationExpectation specifies expectation struct of the ProfileServiceHandler.CreateContactVerification
-type ProfileServiceHandlerMockCreateContactVerificationExpectation struct {
-	mock               *ProfileServiceHandlerMock
-	params             *ProfileServiceHandlerMockCreateContactVerificationParams
-	paramPtrs          *ProfileServiceHandlerMockCreateContactVerificationParamPtrs
-	expectationOrigins ProfileServiceHandlerMockCreateContactVerificationExpectationOrigins
-	results            *ProfileServiceHandlerMockCreateContactVerificationResults
+// ProfileServiceClientMockCreateContactVerificationExpectation specifies expectation struct of the ProfileServiceClient.CreateContactVerification
+type ProfileServiceClientMockCreateContactVerificationExpectation struct {
+	mock               *ProfileServiceClientMock
+	params             *ProfileServiceClientMockCreateContactVerificationParams
+	paramPtrs          *ProfileServiceClientMockCreateContactVerificationParamPtrs
+	expectationOrigins ProfileServiceClientMockCreateContactVerificationExpectationOrigins
+	results            *ProfileServiceClientMockCreateContactVerificationResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// ProfileServiceHandlerMockCreateContactVerificationParams contains parameters of the ProfileServiceHandler.CreateContactVerification
-type ProfileServiceHandlerMockCreateContactVerificationParams struct {
+// ProfileServiceClientMockCreateContactVerificationParams contains parameters of the ProfileServiceClient.CreateContactVerification
+type ProfileServiceClientMockCreateContactVerificationParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.CreateContactVerificationRequest]
 }
 
-// ProfileServiceHandlerMockCreateContactVerificationParamPtrs contains pointers to parameters of the ProfileServiceHandler.CreateContactVerification
-type ProfileServiceHandlerMockCreateContactVerificationParamPtrs struct {
+// ProfileServiceClientMockCreateContactVerificationParamPtrs contains pointers to parameters of the ProfileServiceClient.CreateContactVerification
+type ProfileServiceClientMockCreateContactVerificationParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.CreateContactVerificationRequest]
 }
 
-// ProfileServiceHandlerMockCreateContactVerificationResults contains results of the ProfileServiceHandler.CreateContactVerification
-type ProfileServiceHandlerMockCreateContactVerificationResults struct {
+// ProfileServiceClientMockCreateContactVerificationResults contains results of the ProfileServiceClient.CreateContactVerification
+type ProfileServiceClientMockCreateContactVerificationResults struct {
 	pp2 *connect.Response[v1.CreateContactVerificationResponse]
 	err error
 }
 
-// ProfileServiceHandlerMockCreateContactVerificationOrigins contains origins of expectations of the ProfileServiceHandler.CreateContactVerification
-type ProfileServiceHandlerMockCreateContactVerificationExpectationOrigins struct {
+// ProfileServiceClientMockCreateContactVerificationOrigins contains origins of expectations of the ProfileServiceClient.CreateContactVerification
+type ProfileServiceClientMockCreateContactVerificationExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -2669,26 +2669,26 @@ type ProfileServiceHandlerMockCreateContactVerificationExpectationOrigins struct
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmCreateContactVerification *mProfileServiceHandlerMockCreateContactVerification) Optional() *mProfileServiceHandlerMockCreateContactVerification {
+func (mmCreateContactVerification *mProfileServiceClientMockCreateContactVerification) Optional() *mProfileServiceClientMockCreateContactVerification {
 	mmCreateContactVerification.optional = true
 	return mmCreateContactVerification
 }
 
-// Expect sets up expected params for ProfileServiceHandler.CreateContactVerification
-func (mmCreateContactVerification *mProfileServiceHandlerMockCreateContactVerification) Expect(ctx context.Context, pp1 *connect.Request[v1.CreateContactVerificationRequest]) *mProfileServiceHandlerMockCreateContactVerification {
+// Expect sets up expected params for ProfileServiceClient.CreateContactVerification
+func (mmCreateContactVerification *mProfileServiceClientMockCreateContactVerification) Expect(ctx context.Context, pp1 *connect.Request[v1.CreateContactVerificationRequest]) *mProfileServiceClientMockCreateContactVerification {
 	if mmCreateContactVerification.mock.funcCreateContactVerification != nil {
-		mmCreateContactVerification.mock.t.Fatalf("ProfileServiceHandlerMock.CreateContactVerification mock is already set by Set")
+		mmCreateContactVerification.mock.t.Fatalf("ProfileServiceClientMock.CreateContactVerification mock is already set by Set")
 	}
 
 	if mmCreateContactVerification.defaultExpectation == nil {
-		mmCreateContactVerification.defaultExpectation = &ProfileServiceHandlerMockCreateContactVerificationExpectation{}
+		mmCreateContactVerification.defaultExpectation = &ProfileServiceClientMockCreateContactVerificationExpectation{}
 	}
 
 	if mmCreateContactVerification.defaultExpectation.paramPtrs != nil {
-		mmCreateContactVerification.mock.t.Fatalf("ProfileServiceHandlerMock.CreateContactVerification mock is already set by ExpectParams functions")
+		mmCreateContactVerification.mock.t.Fatalf("ProfileServiceClientMock.CreateContactVerification mock is already set by ExpectParams functions")
 	}
 
-	mmCreateContactVerification.defaultExpectation.params = &ProfileServiceHandlerMockCreateContactVerificationParams{ctx, pp1}
+	mmCreateContactVerification.defaultExpectation.params = &ProfileServiceClientMockCreateContactVerificationParams{ctx, pp1}
 	mmCreateContactVerification.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmCreateContactVerification.expectations {
 		if minimock.Equal(e.params, mmCreateContactVerification.defaultExpectation.params) {
@@ -2699,22 +2699,22 @@ func (mmCreateContactVerification *mProfileServiceHandlerMockCreateContactVerifi
 	return mmCreateContactVerification
 }
 
-// ExpectCtxParam1 sets up expected param ctx for ProfileServiceHandler.CreateContactVerification
-func (mmCreateContactVerification *mProfileServiceHandlerMockCreateContactVerification) ExpectCtxParam1(ctx context.Context) *mProfileServiceHandlerMockCreateContactVerification {
+// ExpectCtxParam1 sets up expected param ctx for ProfileServiceClient.CreateContactVerification
+func (mmCreateContactVerification *mProfileServiceClientMockCreateContactVerification) ExpectCtxParam1(ctx context.Context) *mProfileServiceClientMockCreateContactVerification {
 	if mmCreateContactVerification.mock.funcCreateContactVerification != nil {
-		mmCreateContactVerification.mock.t.Fatalf("ProfileServiceHandlerMock.CreateContactVerification mock is already set by Set")
+		mmCreateContactVerification.mock.t.Fatalf("ProfileServiceClientMock.CreateContactVerification mock is already set by Set")
 	}
 
 	if mmCreateContactVerification.defaultExpectation == nil {
-		mmCreateContactVerification.defaultExpectation = &ProfileServiceHandlerMockCreateContactVerificationExpectation{}
+		mmCreateContactVerification.defaultExpectation = &ProfileServiceClientMockCreateContactVerificationExpectation{}
 	}
 
 	if mmCreateContactVerification.defaultExpectation.params != nil {
-		mmCreateContactVerification.mock.t.Fatalf("ProfileServiceHandlerMock.CreateContactVerification mock is already set by Expect")
+		mmCreateContactVerification.mock.t.Fatalf("ProfileServiceClientMock.CreateContactVerification mock is already set by Expect")
 	}
 
 	if mmCreateContactVerification.defaultExpectation.paramPtrs == nil {
-		mmCreateContactVerification.defaultExpectation.paramPtrs = &ProfileServiceHandlerMockCreateContactVerificationParamPtrs{}
+		mmCreateContactVerification.defaultExpectation.paramPtrs = &ProfileServiceClientMockCreateContactVerificationParamPtrs{}
 	}
 	mmCreateContactVerification.defaultExpectation.paramPtrs.ctx = &ctx
 	mmCreateContactVerification.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -2722,22 +2722,22 @@ func (mmCreateContactVerification *mProfileServiceHandlerMockCreateContactVerifi
 	return mmCreateContactVerification
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for ProfileServiceHandler.CreateContactVerification
-func (mmCreateContactVerification *mProfileServiceHandlerMockCreateContactVerification) ExpectPp1Param2(pp1 *connect.Request[v1.CreateContactVerificationRequest]) *mProfileServiceHandlerMockCreateContactVerification {
+// ExpectPp1Param2 sets up expected param pp1 for ProfileServiceClient.CreateContactVerification
+func (mmCreateContactVerification *mProfileServiceClientMockCreateContactVerification) ExpectPp1Param2(pp1 *connect.Request[v1.CreateContactVerificationRequest]) *mProfileServiceClientMockCreateContactVerification {
 	if mmCreateContactVerification.mock.funcCreateContactVerification != nil {
-		mmCreateContactVerification.mock.t.Fatalf("ProfileServiceHandlerMock.CreateContactVerification mock is already set by Set")
+		mmCreateContactVerification.mock.t.Fatalf("ProfileServiceClientMock.CreateContactVerification mock is already set by Set")
 	}
 
 	if mmCreateContactVerification.defaultExpectation == nil {
-		mmCreateContactVerification.defaultExpectation = &ProfileServiceHandlerMockCreateContactVerificationExpectation{}
+		mmCreateContactVerification.defaultExpectation = &ProfileServiceClientMockCreateContactVerificationExpectation{}
 	}
 
 	if mmCreateContactVerification.defaultExpectation.params != nil {
-		mmCreateContactVerification.mock.t.Fatalf("ProfileServiceHandlerMock.CreateContactVerification mock is already set by Expect")
+		mmCreateContactVerification.mock.t.Fatalf("ProfileServiceClientMock.CreateContactVerification mock is already set by Expect")
 	}
 
 	if mmCreateContactVerification.defaultExpectation.paramPtrs == nil {
-		mmCreateContactVerification.defaultExpectation.paramPtrs = &ProfileServiceHandlerMockCreateContactVerificationParamPtrs{}
+		mmCreateContactVerification.defaultExpectation.paramPtrs = &ProfileServiceClientMockCreateContactVerificationParamPtrs{}
 	}
 	mmCreateContactVerification.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmCreateContactVerification.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -2745,10 +2745,10 @@ func (mmCreateContactVerification *mProfileServiceHandlerMockCreateContactVerifi
 	return mmCreateContactVerification
 }
 
-// Inspect accepts an inspector function that has same arguments as the ProfileServiceHandler.CreateContactVerification
-func (mmCreateContactVerification *mProfileServiceHandlerMockCreateContactVerification) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.CreateContactVerificationRequest])) *mProfileServiceHandlerMockCreateContactVerification {
+// Inspect accepts an inspector function that has same arguments as the ProfileServiceClient.CreateContactVerification
+func (mmCreateContactVerification *mProfileServiceClientMockCreateContactVerification) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.CreateContactVerificationRequest])) *mProfileServiceClientMockCreateContactVerification {
 	if mmCreateContactVerification.mock.inspectFuncCreateContactVerification != nil {
-		mmCreateContactVerification.mock.t.Fatalf("Inspect function is already set for ProfileServiceHandlerMock.CreateContactVerification")
+		mmCreateContactVerification.mock.t.Fatalf("Inspect function is already set for ProfileServiceClientMock.CreateContactVerification")
 	}
 
 	mmCreateContactVerification.mock.inspectFuncCreateContactVerification = f
@@ -2756,28 +2756,28 @@ func (mmCreateContactVerification *mProfileServiceHandlerMockCreateContactVerifi
 	return mmCreateContactVerification
 }
 
-// Return sets up results that will be returned by ProfileServiceHandler.CreateContactVerification
-func (mmCreateContactVerification *mProfileServiceHandlerMockCreateContactVerification) Return(pp2 *connect.Response[v1.CreateContactVerificationResponse], err error) *ProfileServiceHandlerMock {
+// Return sets up results that will be returned by ProfileServiceClient.CreateContactVerification
+func (mmCreateContactVerification *mProfileServiceClientMockCreateContactVerification) Return(pp2 *connect.Response[v1.CreateContactVerificationResponse], err error) *ProfileServiceClientMock {
 	if mmCreateContactVerification.mock.funcCreateContactVerification != nil {
-		mmCreateContactVerification.mock.t.Fatalf("ProfileServiceHandlerMock.CreateContactVerification mock is already set by Set")
+		mmCreateContactVerification.mock.t.Fatalf("ProfileServiceClientMock.CreateContactVerification mock is already set by Set")
 	}
 
 	if mmCreateContactVerification.defaultExpectation == nil {
-		mmCreateContactVerification.defaultExpectation = &ProfileServiceHandlerMockCreateContactVerificationExpectation{mock: mmCreateContactVerification.mock}
+		mmCreateContactVerification.defaultExpectation = &ProfileServiceClientMockCreateContactVerificationExpectation{mock: mmCreateContactVerification.mock}
 	}
-	mmCreateContactVerification.defaultExpectation.results = &ProfileServiceHandlerMockCreateContactVerificationResults{pp2, err}
+	mmCreateContactVerification.defaultExpectation.results = &ProfileServiceClientMockCreateContactVerificationResults{pp2, err}
 	mmCreateContactVerification.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmCreateContactVerification.mock
 }
 
-// Set uses given function f to mock the ProfileServiceHandler.CreateContactVerification method
-func (mmCreateContactVerification *mProfileServiceHandlerMockCreateContactVerification) Set(f func(ctx context.Context, pp1 *connect.Request[v1.CreateContactVerificationRequest]) (pp2 *connect.Response[v1.CreateContactVerificationResponse], err error)) *ProfileServiceHandlerMock {
+// Set uses given function f to mock the ProfileServiceClient.CreateContactVerification method
+func (mmCreateContactVerification *mProfileServiceClientMockCreateContactVerification) Set(f func(ctx context.Context, pp1 *connect.Request[v1.CreateContactVerificationRequest]) (pp2 *connect.Response[v1.CreateContactVerificationResponse], err error)) *ProfileServiceClientMock {
 	if mmCreateContactVerification.defaultExpectation != nil {
-		mmCreateContactVerification.mock.t.Fatalf("Default expectation is already set for the ProfileServiceHandler.CreateContactVerification method")
+		mmCreateContactVerification.mock.t.Fatalf("Default expectation is already set for the ProfileServiceClient.CreateContactVerification method")
 	}
 
 	if len(mmCreateContactVerification.expectations) > 0 {
-		mmCreateContactVerification.mock.t.Fatalf("Some expectations are already set for the ProfileServiceHandler.CreateContactVerification method")
+		mmCreateContactVerification.mock.t.Fatalf("Some expectations are already set for the ProfileServiceClient.CreateContactVerification method")
 	}
 
 	mmCreateContactVerification.mock.funcCreateContactVerification = f
@@ -2785,39 +2785,39 @@ func (mmCreateContactVerification *mProfileServiceHandlerMockCreateContactVerifi
 	return mmCreateContactVerification.mock
 }
 
-// When sets expectation for the ProfileServiceHandler.CreateContactVerification which will trigger the result defined by the following
+// When sets expectation for the ProfileServiceClient.CreateContactVerification which will trigger the result defined by the following
 // Then helper
-func (mmCreateContactVerification *mProfileServiceHandlerMockCreateContactVerification) When(ctx context.Context, pp1 *connect.Request[v1.CreateContactVerificationRequest]) *ProfileServiceHandlerMockCreateContactVerificationExpectation {
+func (mmCreateContactVerification *mProfileServiceClientMockCreateContactVerification) When(ctx context.Context, pp1 *connect.Request[v1.CreateContactVerificationRequest]) *ProfileServiceClientMockCreateContactVerificationExpectation {
 	if mmCreateContactVerification.mock.funcCreateContactVerification != nil {
-		mmCreateContactVerification.mock.t.Fatalf("ProfileServiceHandlerMock.CreateContactVerification mock is already set by Set")
+		mmCreateContactVerification.mock.t.Fatalf("ProfileServiceClientMock.CreateContactVerification mock is already set by Set")
 	}
 
-	expectation := &ProfileServiceHandlerMockCreateContactVerificationExpectation{
+	expectation := &ProfileServiceClientMockCreateContactVerificationExpectation{
 		mock:               mmCreateContactVerification.mock,
-		params:             &ProfileServiceHandlerMockCreateContactVerificationParams{ctx, pp1},
-		expectationOrigins: ProfileServiceHandlerMockCreateContactVerificationExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &ProfileServiceClientMockCreateContactVerificationParams{ctx, pp1},
+		expectationOrigins: ProfileServiceClientMockCreateContactVerificationExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmCreateContactVerification.expectations = append(mmCreateContactVerification.expectations, expectation)
 	return expectation
 }
 
-// Then sets up ProfileServiceHandler.CreateContactVerification return parameters for the expectation previously defined by the When method
-func (e *ProfileServiceHandlerMockCreateContactVerificationExpectation) Then(pp2 *connect.Response[v1.CreateContactVerificationResponse], err error) *ProfileServiceHandlerMock {
-	e.results = &ProfileServiceHandlerMockCreateContactVerificationResults{pp2, err}
+// Then sets up ProfileServiceClient.CreateContactVerification return parameters for the expectation previously defined by the When method
+func (e *ProfileServiceClientMockCreateContactVerificationExpectation) Then(pp2 *connect.Response[v1.CreateContactVerificationResponse], err error) *ProfileServiceClientMock {
+	e.results = &ProfileServiceClientMockCreateContactVerificationResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times ProfileServiceHandler.CreateContactVerification should be invoked
-func (mmCreateContactVerification *mProfileServiceHandlerMockCreateContactVerification) Times(n uint64) *mProfileServiceHandlerMockCreateContactVerification {
+// Times sets number of times ProfileServiceClient.CreateContactVerification should be invoked
+func (mmCreateContactVerification *mProfileServiceClientMockCreateContactVerification) Times(n uint64) *mProfileServiceClientMockCreateContactVerification {
 	if n == 0 {
-		mmCreateContactVerification.mock.t.Fatalf("Times of ProfileServiceHandlerMock.CreateContactVerification mock can not be zero")
+		mmCreateContactVerification.mock.t.Fatalf("Times of ProfileServiceClientMock.CreateContactVerification mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmCreateContactVerification.expectedInvocations, n)
 	mmCreateContactVerification.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmCreateContactVerification
 }
 
-func (mmCreateContactVerification *mProfileServiceHandlerMockCreateContactVerification) invocationsDone() bool {
+func (mmCreateContactVerification *mProfileServiceClientMockCreateContactVerification) invocationsDone() bool {
 	if len(mmCreateContactVerification.expectations) == 0 && mmCreateContactVerification.defaultExpectation == nil && mmCreateContactVerification.mock.funcCreateContactVerification == nil {
 		return true
 	}
@@ -2828,8 +2828,8 @@ func (mmCreateContactVerification *mProfileServiceHandlerMockCreateContactVerifi
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// CreateContactVerification implements mm_profilev1connect.ProfileServiceHandler
-func (mmCreateContactVerification *ProfileServiceHandlerMock) CreateContactVerification(ctx context.Context, pp1 *connect.Request[v1.CreateContactVerificationRequest]) (pp2 *connect.Response[v1.CreateContactVerificationResponse], err error) {
+// CreateContactVerification implements mm_profilev1connect.ProfileServiceClient
+func (mmCreateContactVerification *ProfileServiceClientMock) CreateContactVerification(ctx context.Context, pp1 *connect.Request[v1.CreateContactVerificationRequest]) (pp2 *connect.Response[v1.CreateContactVerificationResponse], err error) {
 	mm_atomic.AddUint64(&mmCreateContactVerification.beforeCreateContactVerificationCounter, 1)
 	defer mm_atomic.AddUint64(&mmCreateContactVerification.afterCreateContactVerificationCounter, 1)
 
@@ -2839,7 +2839,7 @@ func (mmCreateContactVerification *ProfileServiceHandlerMock) CreateContactVerif
 		mmCreateContactVerification.inspectFuncCreateContactVerification(ctx, pp1)
 	}
 
-	mm_params := ProfileServiceHandlerMockCreateContactVerificationParams{ctx, pp1}
+	mm_params := ProfileServiceClientMockCreateContactVerificationParams{ctx, pp1}
 
 	// Record call args
 	mmCreateContactVerification.CreateContactVerificationMock.mutex.Lock()
@@ -2858,54 +2858,54 @@ func (mmCreateContactVerification *ProfileServiceHandlerMock) CreateContactVerif
 		mm_want := mmCreateContactVerification.CreateContactVerificationMock.defaultExpectation.params
 		mm_want_ptrs := mmCreateContactVerification.CreateContactVerificationMock.defaultExpectation.paramPtrs
 
-		mm_got := ProfileServiceHandlerMockCreateContactVerificationParams{ctx, pp1}
+		mm_got := ProfileServiceClientMockCreateContactVerificationParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmCreateContactVerification.t.Errorf("ProfileServiceHandlerMock.CreateContactVerification got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmCreateContactVerification.t.Errorf("ProfileServiceClientMock.CreateContactVerification got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmCreateContactVerification.CreateContactVerificationMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmCreateContactVerification.t.Errorf("ProfileServiceHandlerMock.CreateContactVerification got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmCreateContactVerification.t.Errorf("ProfileServiceClientMock.CreateContactVerification got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmCreateContactVerification.CreateContactVerificationMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmCreateContactVerification.t.Errorf("ProfileServiceHandlerMock.CreateContactVerification got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmCreateContactVerification.t.Errorf("ProfileServiceClientMock.CreateContactVerification got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmCreateContactVerification.CreateContactVerificationMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmCreateContactVerification.CreateContactVerificationMock.defaultExpectation.results
 		if mm_results == nil {
-			mmCreateContactVerification.t.Fatal("No results are set for the ProfileServiceHandlerMock.CreateContactVerification")
+			mmCreateContactVerification.t.Fatal("No results are set for the ProfileServiceClientMock.CreateContactVerification")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmCreateContactVerification.funcCreateContactVerification != nil {
 		return mmCreateContactVerification.funcCreateContactVerification(ctx, pp1)
 	}
-	mmCreateContactVerification.t.Fatalf("Unexpected call to ProfileServiceHandlerMock.CreateContactVerification. %v %v", ctx, pp1)
+	mmCreateContactVerification.t.Fatalf("Unexpected call to ProfileServiceClientMock.CreateContactVerification. %v %v", ctx, pp1)
 	return
 }
 
-// CreateContactVerificationAfterCounter returns a count of finished ProfileServiceHandlerMock.CreateContactVerification invocations
-func (mmCreateContactVerification *ProfileServiceHandlerMock) CreateContactVerificationAfterCounter() uint64 {
+// CreateContactVerificationAfterCounter returns a count of finished ProfileServiceClientMock.CreateContactVerification invocations
+func (mmCreateContactVerification *ProfileServiceClientMock) CreateContactVerificationAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmCreateContactVerification.afterCreateContactVerificationCounter)
 }
 
-// CreateContactVerificationBeforeCounter returns a count of ProfileServiceHandlerMock.CreateContactVerification invocations
-func (mmCreateContactVerification *ProfileServiceHandlerMock) CreateContactVerificationBeforeCounter() uint64 {
+// CreateContactVerificationBeforeCounter returns a count of ProfileServiceClientMock.CreateContactVerification invocations
+func (mmCreateContactVerification *ProfileServiceClientMock) CreateContactVerificationBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmCreateContactVerification.beforeCreateContactVerificationCounter)
 }
 
-// Calls returns a list of arguments used in each call to ProfileServiceHandlerMock.CreateContactVerification.
+// Calls returns a list of arguments used in each call to ProfileServiceClientMock.CreateContactVerification.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmCreateContactVerification *mProfileServiceHandlerMockCreateContactVerification) Calls() []*ProfileServiceHandlerMockCreateContactVerificationParams {
+func (mmCreateContactVerification *mProfileServiceClientMockCreateContactVerification) Calls() []*ProfileServiceClientMockCreateContactVerificationParams {
 	mmCreateContactVerification.mutex.RLock()
 
-	argCopy := make([]*ProfileServiceHandlerMockCreateContactVerificationParams, len(mmCreateContactVerification.callArgs))
+	argCopy := make([]*ProfileServiceClientMockCreateContactVerificationParams, len(mmCreateContactVerification.callArgs))
 	copy(argCopy, mmCreateContactVerification.callArgs)
 
 	mmCreateContactVerification.mutex.RUnlock()
@@ -2915,7 +2915,7 @@ func (mmCreateContactVerification *mProfileServiceHandlerMockCreateContactVerifi
 
 // MinimockCreateContactVerificationDone returns true if the count of the CreateContactVerification invocations corresponds
 // the number of defined expectations
-func (m *ProfileServiceHandlerMock) MinimockCreateContactVerificationDone() bool {
+func (m *ProfileServiceClientMock) MinimockCreateContactVerificationDone() bool {
 	if m.CreateContactVerificationMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -2931,10 +2931,10 @@ func (m *ProfileServiceHandlerMock) MinimockCreateContactVerificationDone() bool
 }
 
 // MinimockCreateContactVerificationInspect logs each unmet expectation
-func (m *ProfileServiceHandlerMock) MinimockCreateContactVerificationInspect() {
+func (m *ProfileServiceClientMock) MinimockCreateContactVerificationInspect() {
 	for _, e := range m.CreateContactVerificationMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.CreateContactVerification at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.CreateContactVerification at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -2942,66 +2942,66 @@ func (m *ProfileServiceHandlerMock) MinimockCreateContactVerificationInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.CreateContactVerificationMock.defaultExpectation != nil && afterCreateContactVerificationCounter < 1 {
 		if m.CreateContactVerificationMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.CreateContactVerification at\n%s", m.CreateContactVerificationMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.CreateContactVerification at\n%s", m.CreateContactVerificationMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.CreateContactVerification at\n%s with params: %#v", m.CreateContactVerificationMock.defaultExpectation.expectationOrigins.origin, *m.CreateContactVerificationMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.CreateContactVerification at\n%s with params: %#v", m.CreateContactVerificationMock.defaultExpectation.expectationOrigins.origin, *m.CreateContactVerificationMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcCreateContactVerification != nil && afterCreateContactVerificationCounter < 1 {
-		m.t.Errorf("Expected call to ProfileServiceHandlerMock.CreateContactVerification at\n%s", m.funcCreateContactVerificationOrigin)
+		m.t.Errorf("Expected call to ProfileServiceClientMock.CreateContactVerification at\n%s", m.funcCreateContactVerificationOrigin)
 	}
 
 	if !m.CreateContactVerificationMock.invocationsDone() && afterCreateContactVerificationCounter > 0 {
-		m.t.Errorf("Expected %d calls to ProfileServiceHandlerMock.CreateContactVerification at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to ProfileServiceClientMock.CreateContactVerification at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.CreateContactVerificationMock.expectedInvocations), m.CreateContactVerificationMock.expectedInvocationsOrigin, afterCreateContactVerificationCounter)
 	}
 }
 
-type mProfileServiceHandlerMockDeleteRelationship struct {
+type mProfileServiceClientMockDeleteRelationship struct {
 	optional           bool
-	mock               *ProfileServiceHandlerMock
-	defaultExpectation *ProfileServiceHandlerMockDeleteRelationshipExpectation
-	expectations       []*ProfileServiceHandlerMockDeleteRelationshipExpectation
+	mock               *ProfileServiceClientMock
+	defaultExpectation *ProfileServiceClientMockDeleteRelationshipExpectation
+	expectations       []*ProfileServiceClientMockDeleteRelationshipExpectation
 
-	callArgs []*ProfileServiceHandlerMockDeleteRelationshipParams
+	callArgs []*ProfileServiceClientMockDeleteRelationshipParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// ProfileServiceHandlerMockDeleteRelationshipExpectation specifies expectation struct of the ProfileServiceHandler.DeleteRelationship
-type ProfileServiceHandlerMockDeleteRelationshipExpectation struct {
-	mock               *ProfileServiceHandlerMock
-	params             *ProfileServiceHandlerMockDeleteRelationshipParams
-	paramPtrs          *ProfileServiceHandlerMockDeleteRelationshipParamPtrs
-	expectationOrigins ProfileServiceHandlerMockDeleteRelationshipExpectationOrigins
-	results            *ProfileServiceHandlerMockDeleteRelationshipResults
+// ProfileServiceClientMockDeleteRelationshipExpectation specifies expectation struct of the ProfileServiceClient.DeleteRelationship
+type ProfileServiceClientMockDeleteRelationshipExpectation struct {
+	mock               *ProfileServiceClientMock
+	params             *ProfileServiceClientMockDeleteRelationshipParams
+	paramPtrs          *ProfileServiceClientMockDeleteRelationshipParamPtrs
+	expectationOrigins ProfileServiceClientMockDeleteRelationshipExpectationOrigins
+	results            *ProfileServiceClientMockDeleteRelationshipResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// ProfileServiceHandlerMockDeleteRelationshipParams contains parameters of the ProfileServiceHandler.DeleteRelationship
-type ProfileServiceHandlerMockDeleteRelationshipParams struct {
+// ProfileServiceClientMockDeleteRelationshipParams contains parameters of the ProfileServiceClient.DeleteRelationship
+type ProfileServiceClientMockDeleteRelationshipParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.DeleteRelationshipRequest]
 }
 
-// ProfileServiceHandlerMockDeleteRelationshipParamPtrs contains pointers to parameters of the ProfileServiceHandler.DeleteRelationship
-type ProfileServiceHandlerMockDeleteRelationshipParamPtrs struct {
+// ProfileServiceClientMockDeleteRelationshipParamPtrs contains pointers to parameters of the ProfileServiceClient.DeleteRelationship
+type ProfileServiceClientMockDeleteRelationshipParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.DeleteRelationshipRequest]
 }
 
-// ProfileServiceHandlerMockDeleteRelationshipResults contains results of the ProfileServiceHandler.DeleteRelationship
-type ProfileServiceHandlerMockDeleteRelationshipResults struct {
+// ProfileServiceClientMockDeleteRelationshipResults contains results of the ProfileServiceClient.DeleteRelationship
+type ProfileServiceClientMockDeleteRelationshipResults struct {
 	pp2 *connect.Response[v1.DeleteRelationshipResponse]
 	err error
 }
 
-// ProfileServiceHandlerMockDeleteRelationshipOrigins contains origins of expectations of the ProfileServiceHandler.DeleteRelationship
-type ProfileServiceHandlerMockDeleteRelationshipExpectationOrigins struct {
+// ProfileServiceClientMockDeleteRelationshipOrigins contains origins of expectations of the ProfileServiceClient.DeleteRelationship
+type ProfileServiceClientMockDeleteRelationshipExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -3012,26 +3012,26 @@ type ProfileServiceHandlerMockDeleteRelationshipExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmDeleteRelationship *mProfileServiceHandlerMockDeleteRelationship) Optional() *mProfileServiceHandlerMockDeleteRelationship {
+func (mmDeleteRelationship *mProfileServiceClientMockDeleteRelationship) Optional() *mProfileServiceClientMockDeleteRelationship {
 	mmDeleteRelationship.optional = true
 	return mmDeleteRelationship
 }
 
-// Expect sets up expected params for ProfileServiceHandler.DeleteRelationship
-func (mmDeleteRelationship *mProfileServiceHandlerMockDeleteRelationship) Expect(ctx context.Context, pp1 *connect.Request[v1.DeleteRelationshipRequest]) *mProfileServiceHandlerMockDeleteRelationship {
+// Expect sets up expected params for ProfileServiceClient.DeleteRelationship
+func (mmDeleteRelationship *mProfileServiceClientMockDeleteRelationship) Expect(ctx context.Context, pp1 *connect.Request[v1.DeleteRelationshipRequest]) *mProfileServiceClientMockDeleteRelationship {
 	if mmDeleteRelationship.mock.funcDeleteRelationship != nil {
-		mmDeleteRelationship.mock.t.Fatalf("ProfileServiceHandlerMock.DeleteRelationship mock is already set by Set")
+		mmDeleteRelationship.mock.t.Fatalf("ProfileServiceClientMock.DeleteRelationship mock is already set by Set")
 	}
 
 	if mmDeleteRelationship.defaultExpectation == nil {
-		mmDeleteRelationship.defaultExpectation = &ProfileServiceHandlerMockDeleteRelationshipExpectation{}
+		mmDeleteRelationship.defaultExpectation = &ProfileServiceClientMockDeleteRelationshipExpectation{}
 	}
 
 	if mmDeleteRelationship.defaultExpectation.paramPtrs != nil {
-		mmDeleteRelationship.mock.t.Fatalf("ProfileServiceHandlerMock.DeleteRelationship mock is already set by ExpectParams functions")
+		mmDeleteRelationship.mock.t.Fatalf("ProfileServiceClientMock.DeleteRelationship mock is already set by ExpectParams functions")
 	}
 
-	mmDeleteRelationship.defaultExpectation.params = &ProfileServiceHandlerMockDeleteRelationshipParams{ctx, pp1}
+	mmDeleteRelationship.defaultExpectation.params = &ProfileServiceClientMockDeleteRelationshipParams{ctx, pp1}
 	mmDeleteRelationship.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmDeleteRelationship.expectations {
 		if minimock.Equal(e.params, mmDeleteRelationship.defaultExpectation.params) {
@@ -3042,22 +3042,22 @@ func (mmDeleteRelationship *mProfileServiceHandlerMockDeleteRelationship) Expect
 	return mmDeleteRelationship
 }
 
-// ExpectCtxParam1 sets up expected param ctx for ProfileServiceHandler.DeleteRelationship
-func (mmDeleteRelationship *mProfileServiceHandlerMockDeleteRelationship) ExpectCtxParam1(ctx context.Context) *mProfileServiceHandlerMockDeleteRelationship {
+// ExpectCtxParam1 sets up expected param ctx for ProfileServiceClient.DeleteRelationship
+func (mmDeleteRelationship *mProfileServiceClientMockDeleteRelationship) ExpectCtxParam1(ctx context.Context) *mProfileServiceClientMockDeleteRelationship {
 	if mmDeleteRelationship.mock.funcDeleteRelationship != nil {
-		mmDeleteRelationship.mock.t.Fatalf("ProfileServiceHandlerMock.DeleteRelationship mock is already set by Set")
+		mmDeleteRelationship.mock.t.Fatalf("ProfileServiceClientMock.DeleteRelationship mock is already set by Set")
 	}
 
 	if mmDeleteRelationship.defaultExpectation == nil {
-		mmDeleteRelationship.defaultExpectation = &ProfileServiceHandlerMockDeleteRelationshipExpectation{}
+		mmDeleteRelationship.defaultExpectation = &ProfileServiceClientMockDeleteRelationshipExpectation{}
 	}
 
 	if mmDeleteRelationship.defaultExpectation.params != nil {
-		mmDeleteRelationship.mock.t.Fatalf("ProfileServiceHandlerMock.DeleteRelationship mock is already set by Expect")
+		mmDeleteRelationship.mock.t.Fatalf("ProfileServiceClientMock.DeleteRelationship mock is already set by Expect")
 	}
 
 	if mmDeleteRelationship.defaultExpectation.paramPtrs == nil {
-		mmDeleteRelationship.defaultExpectation.paramPtrs = &ProfileServiceHandlerMockDeleteRelationshipParamPtrs{}
+		mmDeleteRelationship.defaultExpectation.paramPtrs = &ProfileServiceClientMockDeleteRelationshipParamPtrs{}
 	}
 	mmDeleteRelationship.defaultExpectation.paramPtrs.ctx = &ctx
 	mmDeleteRelationship.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -3065,22 +3065,22 @@ func (mmDeleteRelationship *mProfileServiceHandlerMockDeleteRelationship) Expect
 	return mmDeleteRelationship
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for ProfileServiceHandler.DeleteRelationship
-func (mmDeleteRelationship *mProfileServiceHandlerMockDeleteRelationship) ExpectPp1Param2(pp1 *connect.Request[v1.DeleteRelationshipRequest]) *mProfileServiceHandlerMockDeleteRelationship {
+// ExpectPp1Param2 sets up expected param pp1 for ProfileServiceClient.DeleteRelationship
+func (mmDeleteRelationship *mProfileServiceClientMockDeleteRelationship) ExpectPp1Param2(pp1 *connect.Request[v1.DeleteRelationshipRequest]) *mProfileServiceClientMockDeleteRelationship {
 	if mmDeleteRelationship.mock.funcDeleteRelationship != nil {
-		mmDeleteRelationship.mock.t.Fatalf("ProfileServiceHandlerMock.DeleteRelationship mock is already set by Set")
+		mmDeleteRelationship.mock.t.Fatalf("ProfileServiceClientMock.DeleteRelationship mock is already set by Set")
 	}
 
 	if mmDeleteRelationship.defaultExpectation == nil {
-		mmDeleteRelationship.defaultExpectation = &ProfileServiceHandlerMockDeleteRelationshipExpectation{}
+		mmDeleteRelationship.defaultExpectation = &ProfileServiceClientMockDeleteRelationshipExpectation{}
 	}
 
 	if mmDeleteRelationship.defaultExpectation.params != nil {
-		mmDeleteRelationship.mock.t.Fatalf("ProfileServiceHandlerMock.DeleteRelationship mock is already set by Expect")
+		mmDeleteRelationship.mock.t.Fatalf("ProfileServiceClientMock.DeleteRelationship mock is already set by Expect")
 	}
 
 	if mmDeleteRelationship.defaultExpectation.paramPtrs == nil {
-		mmDeleteRelationship.defaultExpectation.paramPtrs = &ProfileServiceHandlerMockDeleteRelationshipParamPtrs{}
+		mmDeleteRelationship.defaultExpectation.paramPtrs = &ProfileServiceClientMockDeleteRelationshipParamPtrs{}
 	}
 	mmDeleteRelationship.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmDeleteRelationship.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -3088,10 +3088,10 @@ func (mmDeleteRelationship *mProfileServiceHandlerMockDeleteRelationship) Expect
 	return mmDeleteRelationship
 }
 
-// Inspect accepts an inspector function that has same arguments as the ProfileServiceHandler.DeleteRelationship
-func (mmDeleteRelationship *mProfileServiceHandlerMockDeleteRelationship) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.DeleteRelationshipRequest])) *mProfileServiceHandlerMockDeleteRelationship {
+// Inspect accepts an inspector function that has same arguments as the ProfileServiceClient.DeleteRelationship
+func (mmDeleteRelationship *mProfileServiceClientMockDeleteRelationship) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.DeleteRelationshipRequest])) *mProfileServiceClientMockDeleteRelationship {
 	if mmDeleteRelationship.mock.inspectFuncDeleteRelationship != nil {
-		mmDeleteRelationship.mock.t.Fatalf("Inspect function is already set for ProfileServiceHandlerMock.DeleteRelationship")
+		mmDeleteRelationship.mock.t.Fatalf("Inspect function is already set for ProfileServiceClientMock.DeleteRelationship")
 	}
 
 	mmDeleteRelationship.mock.inspectFuncDeleteRelationship = f
@@ -3099,28 +3099,28 @@ func (mmDeleteRelationship *mProfileServiceHandlerMockDeleteRelationship) Inspec
 	return mmDeleteRelationship
 }
 
-// Return sets up results that will be returned by ProfileServiceHandler.DeleteRelationship
-func (mmDeleteRelationship *mProfileServiceHandlerMockDeleteRelationship) Return(pp2 *connect.Response[v1.DeleteRelationshipResponse], err error) *ProfileServiceHandlerMock {
+// Return sets up results that will be returned by ProfileServiceClient.DeleteRelationship
+func (mmDeleteRelationship *mProfileServiceClientMockDeleteRelationship) Return(pp2 *connect.Response[v1.DeleteRelationshipResponse], err error) *ProfileServiceClientMock {
 	if mmDeleteRelationship.mock.funcDeleteRelationship != nil {
-		mmDeleteRelationship.mock.t.Fatalf("ProfileServiceHandlerMock.DeleteRelationship mock is already set by Set")
+		mmDeleteRelationship.mock.t.Fatalf("ProfileServiceClientMock.DeleteRelationship mock is already set by Set")
 	}
 
 	if mmDeleteRelationship.defaultExpectation == nil {
-		mmDeleteRelationship.defaultExpectation = &ProfileServiceHandlerMockDeleteRelationshipExpectation{mock: mmDeleteRelationship.mock}
+		mmDeleteRelationship.defaultExpectation = &ProfileServiceClientMockDeleteRelationshipExpectation{mock: mmDeleteRelationship.mock}
 	}
-	mmDeleteRelationship.defaultExpectation.results = &ProfileServiceHandlerMockDeleteRelationshipResults{pp2, err}
+	mmDeleteRelationship.defaultExpectation.results = &ProfileServiceClientMockDeleteRelationshipResults{pp2, err}
 	mmDeleteRelationship.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmDeleteRelationship.mock
 }
 
-// Set uses given function f to mock the ProfileServiceHandler.DeleteRelationship method
-func (mmDeleteRelationship *mProfileServiceHandlerMockDeleteRelationship) Set(f func(ctx context.Context, pp1 *connect.Request[v1.DeleteRelationshipRequest]) (pp2 *connect.Response[v1.DeleteRelationshipResponse], err error)) *ProfileServiceHandlerMock {
+// Set uses given function f to mock the ProfileServiceClient.DeleteRelationship method
+func (mmDeleteRelationship *mProfileServiceClientMockDeleteRelationship) Set(f func(ctx context.Context, pp1 *connect.Request[v1.DeleteRelationshipRequest]) (pp2 *connect.Response[v1.DeleteRelationshipResponse], err error)) *ProfileServiceClientMock {
 	if mmDeleteRelationship.defaultExpectation != nil {
-		mmDeleteRelationship.mock.t.Fatalf("Default expectation is already set for the ProfileServiceHandler.DeleteRelationship method")
+		mmDeleteRelationship.mock.t.Fatalf("Default expectation is already set for the ProfileServiceClient.DeleteRelationship method")
 	}
 
 	if len(mmDeleteRelationship.expectations) > 0 {
-		mmDeleteRelationship.mock.t.Fatalf("Some expectations are already set for the ProfileServiceHandler.DeleteRelationship method")
+		mmDeleteRelationship.mock.t.Fatalf("Some expectations are already set for the ProfileServiceClient.DeleteRelationship method")
 	}
 
 	mmDeleteRelationship.mock.funcDeleteRelationship = f
@@ -3128,39 +3128,39 @@ func (mmDeleteRelationship *mProfileServiceHandlerMockDeleteRelationship) Set(f 
 	return mmDeleteRelationship.mock
 }
 
-// When sets expectation for the ProfileServiceHandler.DeleteRelationship which will trigger the result defined by the following
+// When sets expectation for the ProfileServiceClient.DeleteRelationship which will trigger the result defined by the following
 // Then helper
-func (mmDeleteRelationship *mProfileServiceHandlerMockDeleteRelationship) When(ctx context.Context, pp1 *connect.Request[v1.DeleteRelationshipRequest]) *ProfileServiceHandlerMockDeleteRelationshipExpectation {
+func (mmDeleteRelationship *mProfileServiceClientMockDeleteRelationship) When(ctx context.Context, pp1 *connect.Request[v1.DeleteRelationshipRequest]) *ProfileServiceClientMockDeleteRelationshipExpectation {
 	if mmDeleteRelationship.mock.funcDeleteRelationship != nil {
-		mmDeleteRelationship.mock.t.Fatalf("ProfileServiceHandlerMock.DeleteRelationship mock is already set by Set")
+		mmDeleteRelationship.mock.t.Fatalf("ProfileServiceClientMock.DeleteRelationship mock is already set by Set")
 	}
 
-	expectation := &ProfileServiceHandlerMockDeleteRelationshipExpectation{
+	expectation := &ProfileServiceClientMockDeleteRelationshipExpectation{
 		mock:               mmDeleteRelationship.mock,
-		params:             &ProfileServiceHandlerMockDeleteRelationshipParams{ctx, pp1},
-		expectationOrigins: ProfileServiceHandlerMockDeleteRelationshipExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &ProfileServiceClientMockDeleteRelationshipParams{ctx, pp1},
+		expectationOrigins: ProfileServiceClientMockDeleteRelationshipExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmDeleteRelationship.expectations = append(mmDeleteRelationship.expectations, expectation)
 	return expectation
 }
 
-// Then sets up ProfileServiceHandler.DeleteRelationship return parameters for the expectation previously defined by the When method
-func (e *ProfileServiceHandlerMockDeleteRelationshipExpectation) Then(pp2 *connect.Response[v1.DeleteRelationshipResponse], err error) *ProfileServiceHandlerMock {
-	e.results = &ProfileServiceHandlerMockDeleteRelationshipResults{pp2, err}
+// Then sets up ProfileServiceClient.DeleteRelationship return parameters for the expectation previously defined by the When method
+func (e *ProfileServiceClientMockDeleteRelationshipExpectation) Then(pp2 *connect.Response[v1.DeleteRelationshipResponse], err error) *ProfileServiceClientMock {
+	e.results = &ProfileServiceClientMockDeleteRelationshipResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times ProfileServiceHandler.DeleteRelationship should be invoked
-func (mmDeleteRelationship *mProfileServiceHandlerMockDeleteRelationship) Times(n uint64) *mProfileServiceHandlerMockDeleteRelationship {
+// Times sets number of times ProfileServiceClient.DeleteRelationship should be invoked
+func (mmDeleteRelationship *mProfileServiceClientMockDeleteRelationship) Times(n uint64) *mProfileServiceClientMockDeleteRelationship {
 	if n == 0 {
-		mmDeleteRelationship.mock.t.Fatalf("Times of ProfileServiceHandlerMock.DeleteRelationship mock can not be zero")
+		mmDeleteRelationship.mock.t.Fatalf("Times of ProfileServiceClientMock.DeleteRelationship mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmDeleteRelationship.expectedInvocations, n)
 	mmDeleteRelationship.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmDeleteRelationship
 }
 
-func (mmDeleteRelationship *mProfileServiceHandlerMockDeleteRelationship) invocationsDone() bool {
+func (mmDeleteRelationship *mProfileServiceClientMockDeleteRelationship) invocationsDone() bool {
 	if len(mmDeleteRelationship.expectations) == 0 && mmDeleteRelationship.defaultExpectation == nil && mmDeleteRelationship.mock.funcDeleteRelationship == nil {
 		return true
 	}
@@ -3171,8 +3171,8 @@ func (mmDeleteRelationship *mProfileServiceHandlerMockDeleteRelationship) invoca
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// DeleteRelationship implements mm_profilev1connect.ProfileServiceHandler
-func (mmDeleteRelationship *ProfileServiceHandlerMock) DeleteRelationship(ctx context.Context, pp1 *connect.Request[v1.DeleteRelationshipRequest]) (pp2 *connect.Response[v1.DeleteRelationshipResponse], err error) {
+// DeleteRelationship implements mm_profilev1connect.ProfileServiceClient
+func (mmDeleteRelationship *ProfileServiceClientMock) DeleteRelationship(ctx context.Context, pp1 *connect.Request[v1.DeleteRelationshipRequest]) (pp2 *connect.Response[v1.DeleteRelationshipResponse], err error) {
 	mm_atomic.AddUint64(&mmDeleteRelationship.beforeDeleteRelationshipCounter, 1)
 	defer mm_atomic.AddUint64(&mmDeleteRelationship.afterDeleteRelationshipCounter, 1)
 
@@ -3182,7 +3182,7 @@ func (mmDeleteRelationship *ProfileServiceHandlerMock) DeleteRelationship(ctx co
 		mmDeleteRelationship.inspectFuncDeleteRelationship(ctx, pp1)
 	}
 
-	mm_params := ProfileServiceHandlerMockDeleteRelationshipParams{ctx, pp1}
+	mm_params := ProfileServiceClientMockDeleteRelationshipParams{ctx, pp1}
 
 	// Record call args
 	mmDeleteRelationship.DeleteRelationshipMock.mutex.Lock()
@@ -3201,54 +3201,54 @@ func (mmDeleteRelationship *ProfileServiceHandlerMock) DeleteRelationship(ctx co
 		mm_want := mmDeleteRelationship.DeleteRelationshipMock.defaultExpectation.params
 		mm_want_ptrs := mmDeleteRelationship.DeleteRelationshipMock.defaultExpectation.paramPtrs
 
-		mm_got := ProfileServiceHandlerMockDeleteRelationshipParams{ctx, pp1}
+		mm_got := ProfileServiceClientMockDeleteRelationshipParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmDeleteRelationship.t.Errorf("ProfileServiceHandlerMock.DeleteRelationship got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmDeleteRelationship.t.Errorf("ProfileServiceClientMock.DeleteRelationship got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmDeleteRelationship.DeleteRelationshipMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmDeleteRelationship.t.Errorf("ProfileServiceHandlerMock.DeleteRelationship got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmDeleteRelationship.t.Errorf("ProfileServiceClientMock.DeleteRelationship got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmDeleteRelationship.DeleteRelationshipMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmDeleteRelationship.t.Errorf("ProfileServiceHandlerMock.DeleteRelationship got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmDeleteRelationship.t.Errorf("ProfileServiceClientMock.DeleteRelationship got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmDeleteRelationship.DeleteRelationshipMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmDeleteRelationship.DeleteRelationshipMock.defaultExpectation.results
 		if mm_results == nil {
-			mmDeleteRelationship.t.Fatal("No results are set for the ProfileServiceHandlerMock.DeleteRelationship")
+			mmDeleteRelationship.t.Fatal("No results are set for the ProfileServiceClientMock.DeleteRelationship")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmDeleteRelationship.funcDeleteRelationship != nil {
 		return mmDeleteRelationship.funcDeleteRelationship(ctx, pp1)
 	}
-	mmDeleteRelationship.t.Fatalf("Unexpected call to ProfileServiceHandlerMock.DeleteRelationship. %v %v", ctx, pp1)
+	mmDeleteRelationship.t.Fatalf("Unexpected call to ProfileServiceClientMock.DeleteRelationship. %v %v", ctx, pp1)
 	return
 }
 
-// DeleteRelationshipAfterCounter returns a count of finished ProfileServiceHandlerMock.DeleteRelationship invocations
-func (mmDeleteRelationship *ProfileServiceHandlerMock) DeleteRelationshipAfterCounter() uint64 {
+// DeleteRelationshipAfterCounter returns a count of finished ProfileServiceClientMock.DeleteRelationship invocations
+func (mmDeleteRelationship *ProfileServiceClientMock) DeleteRelationshipAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmDeleteRelationship.afterDeleteRelationshipCounter)
 }
 
-// DeleteRelationshipBeforeCounter returns a count of ProfileServiceHandlerMock.DeleteRelationship invocations
-func (mmDeleteRelationship *ProfileServiceHandlerMock) DeleteRelationshipBeforeCounter() uint64 {
+// DeleteRelationshipBeforeCounter returns a count of ProfileServiceClientMock.DeleteRelationship invocations
+func (mmDeleteRelationship *ProfileServiceClientMock) DeleteRelationshipBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmDeleteRelationship.beforeDeleteRelationshipCounter)
 }
 
-// Calls returns a list of arguments used in each call to ProfileServiceHandlerMock.DeleteRelationship.
+// Calls returns a list of arguments used in each call to ProfileServiceClientMock.DeleteRelationship.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmDeleteRelationship *mProfileServiceHandlerMockDeleteRelationship) Calls() []*ProfileServiceHandlerMockDeleteRelationshipParams {
+func (mmDeleteRelationship *mProfileServiceClientMockDeleteRelationship) Calls() []*ProfileServiceClientMockDeleteRelationshipParams {
 	mmDeleteRelationship.mutex.RLock()
 
-	argCopy := make([]*ProfileServiceHandlerMockDeleteRelationshipParams, len(mmDeleteRelationship.callArgs))
+	argCopy := make([]*ProfileServiceClientMockDeleteRelationshipParams, len(mmDeleteRelationship.callArgs))
 	copy(argCopy, mmDeleteRelationship.callArgs)
 
 	mmDeleteRelationship.mutex.RUnlock()
@@ -3258,7 +3258,7 @@ func (mmDeleteRelationship *mProfileServiceHandlerMockDeleteRelationship) Calls(
 
 // MinimockDeleteRelationshipDone returns true if the count of the DeleteRelationship invocations corresponds
 // the number of defined expectations
-func (m *ProfileServiceHandlerMock) MinimockDeleteRelationshipDone() bool {
+func (m *ProfileServiceClientMock) MinimockDeleteRelationshipDone() bool {
 	if m.DeleteRelationshipMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -3274,10 +3274,10 @@ func (m *ProfileServiceHandlerMock) MinimockDeleteRelationshipDone() bool {
 }
 
 // MinimockDeleteRelationshipInspect logs each unmet expectation
-func (m *ProfileServiceHandlerMock) MinimockDeleteRelationshipInspect() {
+func (m *ProfileServiceClientMock) MinimockDeleteRelationshipInspect() {
 	for _, e := range m.DeleteRelationshipMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.DeleteRelationship at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.DeleteRelationship at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -3285,66 +3285,66 @@ func (m *ProfileServiceHandlerMock) MinimockDeleteRelationshipInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.DeleteRelationshipMock.defaultExpectation != nil && afterDeleteRelationshipCounter < 1 {
 		if m.DeleteRelationshipMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.DeleteRelationship at\n%s", m.DeleteRelationshipMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.DeleteRelationship at\n%s", m.DeleteRelationshipMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.DeleteRelationship at\n%s with params: %#v", m.DeleteRelationshipMock.defaultExpectation.expectationOrigins.origin, *m.DeleteRelationshipMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.DeleteRelationship at\n%s with params: %#v", m.DeleteRelationshipMock.defaultExpectation.expectationOrigins.origin, *m.DeleteRelationshipMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcDeleteRelationship != nil && afterDeleteRelationshipCounter < 1 {
-		m.t.Errorf("Expected call to ProfileServiceHandlerMock.DeleteRelationship at\n%s", m.funcDeleteRelationshipOrigin)
+		m.t.Errorf("Expected call to ProfileServiceClientMock.DeleteRelationship at\n%s", m.funcDeleteRelationshipOrigin)
 	}
 
 	if !m.DeleteRelationshipMock.invocationsDone() && afterDeleteRelationshipCounter > 0 {
-		m.t.Errorf("Expected %d calls to ProfileServiceHandlerMock.DeleteRelationship at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to ProfileServiceClientMock.DeleteRelationship at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.DeleteRelationshipMock.expectedInvocations), m.DeleteRelationshipMock.expectedInvocationsOrigin, afterDeleteRelationshipCounter)
 	}
 }
 
-type mProfileServiceHandlerMockGetByContact struct {
+type mProfileServiceClientMockGetByContact struct {
 	optional           bool
-	mock               *ProfileServiceHandlerMock
-	defaultExpectation *ProfileServiceHandlerMockGetByContactExpectation
-	expectations       []*ProfileServiceHandlerMockGetByContactExpectation
+	mock               *ProfileServiceClientMock
+	defaultExpectation *ProfileServiceClientMockGetByContactExpectation
+	expectations       []*ProfileServiceClientMockGetByContactExpectation
 
-	callArgs []*ProfileServiceHandlerMockGetByContactParams
+	callArgs []*ProfileServiceClientMockGetByContactParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// ProfileServiceHandlerMockGetByContactExpectation specifies expectation struct of the ProfileServiceHandler.GetByContact
-type ProfileServiceHandlerMockGetByContactExpectation struct {
-	mock               *ProfileServiceHandlerMock
-	params             *ProfileServiceHandlerMockGetByContactParams
-	paramPtrs          *ProfileServiceHandlerMockGetByContactParamPtrs
-	expectationOrigins ProfileServiceHandlerMockGetByContactExpectationOrigins
-	results            *ProfileServiceHandlerMockGetByContactResults
+// ProfileServiceClientMockGetByContactExpectation specifies expectation struct of the ProfileServiceClient.GetByContact
+type ProfileServiceClientMockGetByContactExpectation struct {
+	mock               *ProfileServiceClientMock
+	params             *ProfileServiceClientMockGetByContactParams
+	paramPtrs          *ProfileServiceClientMockGetByContactParamPtrs
+	expectationOrigins ProfileServiceClientMockGetByContactExpectationOrigins
+	results            *ProfileServiceClientMockGetByContactResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// ProfileServiceHandlerMockGetByContactParams contains parameters of the ProfileServiceHandler.GetByContact
-type ProfileServiceHandlerMockGetByContactParams struct {
+// ProfileServiceClientMockGetByContactParams contains parameters of the ProfileServiceClient.GetByContact
+type ProfileServiceClientMockGetByContactParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.GetByContactRequest]
 }
 
-// ProfileServiceHandlerMockGetByContactParamPtrs contains pointers to parameters of the ProfileServiceHandler.GetByContact
-type ProfileServiceHandlerMockGetByContactParamPtrs struct {
+// ProfileServiceClientMockGetByContactParamPtrs contains pointers to parameters of the ProfileServiceClient.GetByContact
+type ProfileServiceClientMockGetByContactParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.GetByContactRequest]
 }
 
-// ProfileServiceHandlerMockGetByContactResults contains results of the ProfileServiceHandler.GetByContact
-type ProfileServiceHandlerMockGetByContactResults struct {
+// ProfileServiceClientMockGetByContactResults contains results of the ProfileServiceClient.GetByContact
+type ProfileServiceClientMockGetByContactResults struct {
 	pp2 *connect.Response[v1.GetByContactResponse]
 	err error
 }
 
-// ProfileServiceHandlerMockGetByContactOrigins contains origins of expectations of the ProfileServiceHandler.GetByContact
-type ProfileServiceHandlerMockGetByContactExpectationOrigins struct {
+// ProfileServiceClientMockGetByContactOrigins contains origins of expectations of the ProfileServiceClient.GetByContact
+type ProfileServiceClientMockGetByContactExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -3355,26 +3355,26 @@ type ProfileServiceHandlerMockGetByContactExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmGetByContact *mProfileServiceHandlerMockGetByContact) Optional() *mProfileServiceHandlerMockGetByContact {
+func (mmGetByContact *mProfileServiceClientMockGetByContact) Optional() *mProfileServiceClientMockGetByContact {
 	mmGetByContact.optional = true
 	return mmGetByContact
 }
 
-// Expect sets up expected params for ProfileServiceHandler.GetByContact
-func (mmGetByContact *mProfileServiceHandlerMockGetByContact) Expect(ctx context.Context, pp1 *connect.Request[v1.GetByContactRequest]) *mProfileServiceHandlerMockGetByContact {
+// Expect sets up expected params for ProfileServiceClient.GetByContact
+func (mmGetByContact *mProfileServiceClientMockGetByContact) Expect(ctx context.Context, pp1 *connect.Request[v1.GetByContactRequest]) *mProfileServiceClientMockGetByContact {
 	if mmGetByContact.mock.funcGetByContact != nil {
-		mmGetByContact.mock.t.Fatalf("ProfileServiceHandlerMock.GetByContact mock is already set by Set")
+		mmGetByContact.mock.t.Fatalf("ProfileServiceClientMock.GetByContact mock is already set by Set")
 	}
 
 	if mmGetByContact.defaultExpectation == nil {
-		mmGetByContact.defaultExpectation = &ProfileServiceHandlerMockGetByContactExpectation{}
+		mmGetByContact.defaultExpectation = &ProfileServiceClientMockGetByContactExpectation{}
 	}
 
 	if mmGetByContact.defaultExpectation.paramPtrs != nil {
-		mmGetByContact.mock.t.Fatalf("ProfileServiceHandlerMock.GetByContact mock is already set by ExpectParams functions")
+		mmGetByContact.mock.t.Fatalf("ProfileServiceClientMock.GetByContact mock is already set by ExpectParams functions")
 	}
 
-	mmGetByContact.defaultExpectation.params = &ProfileServiceHandlerMockGetByContactParams{ctx, pp1}
+	mmGetByContact.defaultExpectation.params = &ProfileServiceClientMockGetByContactParams{ctx, pp1}
 	mmGetByContact.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmGetByContact.expectations {
 		if minimock.Equal(e.params, mmGetByContact.defaultExpectation.params) {
@@ -3385,22 +3385,22 @@ func (mmGetByContact *mProfileServiceHandlerMockGetByContact) Expect(ctx context
 	return mmGetByContact
 }
 
-// ExpectCtxParam1 sets up expected param ctx for ProfileServiceHandler.GetByContact
-func (mmGetByContact *mProfileServiceHandlerMockGetByContact) ExpectCtxParam1(ctx context.Context) *mProfileServiceHandlerMockGetByContact {
+// ExpectCtxParam1 sets up expected param ctx for ProfileServiceClient.GetByContact
+func (mmGetByContact *mProfileServiceClientMockGetByContact) ExpectCtxParam1(ctx context.Context) *mProfileServiceClientMockGetByContact {
 	if mmGetByContact.mock.funcGetByContact != nil {
-		mmGetByContact.mock.t.Fatalf("ProfileServiceHandlerMock.GetByContact mock is already set by Set")
+		mmGetByContact.mock.t.Fatalf("ProfileServiceClientMock.GetByContact mock is already set by Set")
 	}
 
 	if mmGetByContact.defaultExpectation == nil {
-		mmGetByContact.defaultExpectation = &ProfileServiceHandlerMockGetByContactExpectation{}
+		mmGetByContact.defaultExpectation = &ProfileServiceClientMockGetByContactExpectation{}
 	}
 
 	if mmGetByContact.defaultExpectation.params != nil {
-		mmGetByContact.mock.t.Fatalf("ProfileServiceHandlerMock.GetByContact mock is already set by Expect")
+		mmGetByContact.mock.t.Fatalf("ProfileServiceClientMock.GetByContact mock is already set by Expect")
 	}
 
 	if mmGetByContact.defaultExpectation.paramPtrs == nil {
-		mmGetByContact.defaultExpectation.paramPtrs = &ProfileServiceHandlerMockGetByContactParamPtrs{}
+		mmGetByContact.defaultExpectation.paramPtrs = &ProfileServiceClientMockGetByContactParamPtrs{}
 	}
 	mmGetByContact.defaultExpectation.paramPtrs.ctx = &ctx
 	mmGetByContact.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -3408,22 +3408,22 @@ func (mmGetByContact *mProfileServiceHandlerMockGetByContact) ExpectCtxParam1(ct
 	return mmGetByContact
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for ProfileServiceHandler.GetByContact
-func (mmGetByContact *mProfileServiceHandlerMockGetByContact) ExpectPp1Param2(pp1 *connect.Request[v1.GetByContactRequest]) *mProfileServiceHandlerMockGetByContact {
+// ExpectPp1Param2 sets up expected param pp1 for ProfileServiceClient.GetByContact
+func (mmGetByContact *mProfileServiceClientMockGetByContact) ExpectPp1Param2(pp1 *connect.Request[v1.GetByContactRequest]) *mProfileServiceClientMockGetByContact {
 	if mmGetByContact.mock.funcGetByContact != nil {
-		mmGetByContact.mock.t.Fatalf("ProfileServiceHandlerMock.GetByContact mock is already set by Set")
+		mmGetByContact.mock.t.Fatalf("ProfileServiceClientMock.GetByContact mock is already set by Set")
 	}
 
 	if mmGetByContact.defaultExpectation == nil {
-		mmGetByContact.defaultExpectation = &ProfileServiceHandlerMockGetByContactExpectation{}
+		mmGetByContact.defaultExpectation = &ProfileServiceClientMockGetByContactExpectation{}
 	}
 
 	if mmGetByContact.defaultExpectation.params != nil {
-		mmGetByContact.mock.t.Fatalf("ProfileServiceHandlerMock.GetByContact mock is already set by Expect")
+		mmGetByContact.mock.t.Fatalf("ProfileServiceClientMock.GetByContact mock is already set by Expect")
 	}
 
 	if mmGetByContact.defaultExpectation.paramPtrs == nil {
-		mmGetByContact.defaultExpectation.paramPtrs = &ProfileServiceHandlerMockGetByContactParamPtrs{}
+		mmGetByContact.defaultExpectation.paramPtrs = &ProfileServiceClientMockGetByContactParamPtrs{}
 	}
 	mmGetByContact.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmGetByContact.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -3431,10 +3431,10 @@ func (mmGetByContact *mProfileServiceHandlerMockGetByContact) ExpectPp1Param2(pp
 	return mmGetByContact
 }
 
-// Inspect accepts an inspector function that has same arguments as the ProfileServiceHandler.GetByContact
-func (mmGetByContact *mProfileServiceHandlerMockGetByContact) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.GetByContactRequest])) *mProfileServiceHandlerMockGetByContact {
+// Inspect accepts an inspector function that has same arguments as the ProfileServiceClient.GetByContact
+func (mmGetByContact *mProfileServiceClientMockGetByContact) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.GetByContactRequest])) *mProfileServiceClientMockGetByContact {
 	if mmGetByContact.mock.inspectFuncGetByContact != nil {
-		mmGetByContact.mock.t.Fatalf("Inspect function is already set for ProfileServiceHandlerMock.GetByContact")
+		mmGetByContact.mock.t.Fatalf("Inspect function is already set for ProfileServiceClientMock.GetByContact")
 	}
 
 	mmGetByContact.mock.inspectFuncGetByContact = f
@@ -3442,28 +3442,28 @@ func (mmGetByContact *mProfileServiceHandlerMockGetByContact) Inspect(f func(ctx
 	return mmGetByContact
 }
 
-// Return sets up results that will be returned by ProfileServiceHandler.GetByContact
-func (mmGetByContact *mProfileServiceHandlerMockGetByContact) Return(pp2 *connect.Response[v1.GetByContactResponse], err error) *ProfileServiceHandlerMock {
+// Return sets up results that will be returned by ProfileServiceClient.GetByContact
+func (mmGetByContact *mProfileServiceClientMockGetByContact) Return(pp2 *connect.Response[v1.GetByContactResponse], err error) *ProfileServiceClientMock {
 	if mmGetByContact.mock.funcGetByContact != nil {
-		mmGetByContact.mock.t.Fatalf("ProfileServiceHandlerMock.GetByContact mock is already set by Set")
+		mmGetByContact.mock.t.Fatalf("ProfileServiceClientMock.GetByContact mock is already set by Set")
 	}
 
 	if mmGetByContact.defaultExpectation == nil {
-		mmGetByContact.defaultExpectation = &ProfileServiceHandlerMockGetByContactExpectation{mock: mmGetByContact.mock}
+		mmGetByContact.defaultExpectation = &ProfileServiceClientMockGetByContactExpectation{mock: mmGetByContact.mock}
 	}
-	mmGetByContact.defaultExpectation.results = &ProfileServiceHandlerMockGetByContactResults{pp2, err}
+	mmGetByContact.defaultExpectation.results = &ProfileServiceClientMockGetByContactResults{pp2, err}
 	mmGetByContact.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmGetByContact.mock
 }
 
-// Set uses given function f to mock the ProfileServiceHandler.GetByContact method
-func (mmGetByContact *mProfileServiceHandlerMockGetByContact) Set(f func(ctx context.Context, pp1 *connect.Request[v1.GetByContactRequest]) (pp2 *connect.Response[v1.GetByContactResponse], err error)) *ProfileServiceHandlerMock {
+// Set uses given function f to mock the ProfileServiceClient.GetByContact method
+func (mmGetByContact *mProfileServiceClientMockGetByContact) Set(f func(ctx context.Context, pp1 *connect.Request[v1.GetByContactRequest]) (pp2 *connect.Response[v1.GetByContactResponse], err error)) *ProfileServiceClientMock {
 	if mmGetByContact.defaultExpectation != nil {
-		mmGetByContact.mock.t.Fatalf("Default expectation is already set for the ProfileServiceHandler.GetByContact method")
+		mmGetByContact.mock.t.Fatalf("Default expectation is already set for the ProfileServiceClient.GetByContact method")
 	}
 
 	if len(mmGetByContact.expectations) > 0 {
-		mmGetByContact.mock.t.Fatalf("Some expectations are already set for the ProfileServiceHandler.GetByContact method")
+		mmGetByContact.mock.t.Fatalf("Some expectations are already set for the ProfileServiceClient.GetByContact method")
 	}
 
 	mmGetByContact.mock.funcGetByContact = f
@@ -3471,39 +3471,39 @@ func (mmGetByContact *mProfileServiceHandlerMockGetByContact) Set(f func(ctx con
 	return mmGetByContact.mock
 }
 
-// When sets expectation for the ProfileServiceHandler.GetByContact which will trigger the result defined by the following
+// When sets expectation for the ProfileServiceClient.GetByContact which will trigger the result defined by the following
 // Then helper
-func (mmGetByContact *mProfileServiceHandlerMockGetByContact) When(ctx context.Context, pp1 *connect.Request[v1.GetByContactRequest]) *ProfileServiceHandlerMockGetByContactExpectation {
+func (mmGetByContact *mProfileServiceClientMockGetByContact) When(ctx context.Context, pp1 *connect.Request[v1.GetByContactRequest]) *ProfileServiceClientMockGetByContactExpectation {
 	if mmGetByContact.mock.funcGetByContact != nil {
-		mmGetByContact.mock.t.Fatalf("ProfileServiceHandlerMock.GetByContact mock is already set by Set")
+		mmGetByContact.mock.t.Fatalf("ProfileServiceClientMock.GetByContact mock is already set by Set")
 	}
 
-	expectation := &ProfileServiceHandlerMockGetByContactExpectation{
+	expectation := &ProfileServiceClientMockGetByContactExpectation{
 		mock:               mmGetByContact.mock,
-		params:             &ProfileServiceHandlerMockGetByContactParams{ctx, pp1},
-		expectationOrigins: ProfileServiceHandlerMockGetByContactExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &ProfileServiceClientMockGetByContactParams{ctx, pp1},
+		expectationOrigins: ProfileServiceClientMockGetByContactExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmGetByContact.expectations = append(mmGetByContact.expectations, expectation)
 	return expectation
 }
 
-// Then sets up ProfileServiceHandler.GetByContact return parameters for the expectation previously defined by the When method
-func (e *ProfileServiceHandlerMockGetByContactExpectation) Then(pp2 *connect.Response[v1.GetByContactResponse], err error) *ProfileServiceHandlerMock {
-	e.results = &ProfileServiceHandlerMockGetByContactResults{pp2, err}
+// Then sets up ProfileServiceClient.GetByContact return parameters for the expectation previously defined by the When method
+func (e *ProfileServiceClientMockGetByContactExpectation) Then(pp2 *connect.Response[v1.GetByContactResponse], err error) *ProfileServiceClientMock {
+	e.results = &ProfileServiceClientMockGetByContactResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times ProfileServiceHandler.GetByContact should be invoked
-func (mmGetByContact *mProfileServiceHandlerMockGetByContact) Times(n uint64) *mProfileServiceHandlerMockGetByContact {
+// Times sets number of times ProfileServiceClient.GetByContact should be invoked
+func (mmGetByContact *mProfileServiceClientMockGetByContact) Times(n uint64) *mProfileServiceClientMockGetByContact {
 	if n == 0 {
-		mmGetByContact.mock.t.Fatalf("Times of ProfileServiceHandlerMock.GetByContact mock can not be zero")
+		mmGetByContact.mock.t.Fatalf("Times of ProfileServiceClientMock.GetByContact mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmGetByContact.expectedInvocations, n)
 	mmGetByContact.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmGetByContact
 }
 
-func (mmGetByContact *mProfileServiceHandlerMockGetByContact) invocationsDone() bool {
+func (mmGetByContact *mProfileServiceClientMockGetByContact) invocationsDone() bool {
 	if len(mmGetByContact.expectations) == 0 && mmGetByContact.defaultExpectation == nil && mmGetByContact.mock.funcGetByContact == nil {
 		return true
 	}
@@ -3514,8 +3514,8 @@ func (mmGetByContact *mProfileServiceHandlerMockGetByContact) invocationsDone() 
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// GetByContact implements mm_profilev1connect.ProfileServiceHandler
-func (mmGetByContact *ProfileServiceHandlerMock) GetByContact(ctx context.Context, pp1 *connect.Request[v1.GetByContactRequest]) (pp2 *connect.Response[v1.GetByContactResponse], err error) {
+// GetByContact implements mm_profilev1connect.ProfileServiceClient
+func (mmGetByContact *ProfileServiceClientMock) GetByContact(ctx context.Context, pp1 *connect.Request[v1.GetByContactRequest]) (pp2 *connect.Response[v1.GetByContactResponse], err error) {
 	mm_atomic.AddUint64(&mmGetByContact.beforeGetByContactCounter, 1)
 	defer mm_atomic.AddUint64(&mmGetByContact.afterGetByContactCounter, 1)
 
@@ -3525,7 +3525,7 @@ func (mmGetByContact *ProfileServiceHandlerMock) GetByContact(ctx context.Contex
 		mmGetByContact.inspectFuncGetByContact(ctx, pp1)
 	}
 
-	mm_params := ProfileServiceHandlerMockGetByContactParams{ctx, pp1}
+	mm_params := ProfileServiceClientMockGetByContactParams{ctx, pp1}
 
 	// Record call args
 	mmGetByContact.GetByContactMock.mutex.Lock()
@@ -3544,54 +3544,54 @@ func (mmGetByContact *ProfileServiceHandlerMock) GetByContact(ctx context.Contex
 		mm_want := mmGetByContact.GetByContactMock.defaultExpectation.params
 		mm_want_ptrs := mmGetByContact.GetByContactMock.defaultExpectation.paramPtrs
 
-		mm_got := ProfileServiceHandlerMockGetByContactParams{ctx, pp1}
+		mm_got := ProfileServiceClientMockGetByContactParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmGetByContact.t.Errorf("ProfileServiceHandlerMock.GetByContact got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmGetByContact.t.Errorf("ProfileServiceClientMock.GetByContact got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmGetByContact.GetByContactMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmGetByContact.t.Errorf("ProfileServiceHandlerMock.GetByContact got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmGetByContact.t.Errorf("ProfileServiceClientMock.GetByContact got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmGetByContact.GetByContactMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmGetByContact.t.Errorf("ProfileServiceHandlerMock.GetByContact got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmGetByContact.t.Errorf("ProfileServiceClientMock.GetByContact got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmGetByContact.GetByContactMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmGetByContact.GetByContactMock.defaultExpectation.results
 		if mm_results == nil {
-			mmGetByContact.t.Fatal("No results are set for the ProfileServiceHandlerMock.GetByContact")
+			mmGetByContact.t.Fatal("No results are set for the ProfileServiceClientMock.GetByContact")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmGetByContact.funcGetByContact != nil {
 		return mmGetByContact.funcGetByContact(ctx, pp1)
 	}
-	mmGetByContact.t.Fatalf("Unexpected call to ProfileServiceHandlerMock.GetByContact. %v %v", ctx, pp1)
+	mmGetByContact.t.Fatalf("Unexpected call to ProfileServiceClientMock.GetByContact. %v %v", ctx, pp1)
 	return
 }
 
-// GetByContactAfterCounter returns a count of finished ProfileServiceHandlerMock.GetByContact invocations
-func (mmGetByContact *ProfileServiceHandlerMock) GetByContactAfterCounter() uint64 {
+// GetByContactAfterCounter returns a count of finished ProfileServiceClientMock.GetByContact invocations
+func (mmGetByContact *ProfileServiceClientMock) GetByContactAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmGetByContact.afterGetByContactCounter)
 }
 
-// GetByContactBeforeCounter returns a count of ProfileServiceHandlerMock.GetByContact invocations
-func (mmGetByContact *ProfileServiceHandlerMock) GetByContactBeforeCounter() uint64 {
+// GetByContactBeforeCounter returns a count of ProfileServiceClientMock.GetByContact invocations
+func (mmGetByContact *ProfileServiceClientMock) GetByContactBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmGetByContact.beforeGetByContactCounter)
 }
 
-// Calls returns a list of arguments used in each call to ProfileServiceHandlerMock.GetByContact.
+// Calls returns a list of arguments used in each call to ProfileServiceClientMock.GetByContact.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmGetByContact *mProfileServiceHandlerMockGetByContact) Calls() []*ProfileServiceHandlerMockGetByContactParams {
+func (mmGetByContact *mProfileServiceClientMockGetByContact) Calls() []*ProfileServiceClientMockGetByContactParams {
 	mmGetByContact.mutex.RLock()
 
-	argCopy := make([]*ProfileServiceHandlerMockGetByContactParams, len(mmGetByContact.callArgs))
+	argCopy := make([]*ProfileServiceClientMockGetByContactParams, len(mmGetByContact.callArgs))
 	copy(argCopy, mmGetByContact.callArgs)
 
 	mmGetByContact.mutex.RUnlock()
@@ -3601,7 +3601,7 @@ func (mmGetByContact *mProfileServiceHandlerMockGetByContact) Calls() []*Profile
 
 // MinimockGetByContactDone returns true if the count of the GetByContact invocations corresponds
 // the number of defined expectations
-func (m *ProfileServiceHandlerMock) MinimockGetByContactDone() bool {
+func (m *ProfileServiceClientMock) MinimockGetByContactDone() bool {
 	if m.GetByContactMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -3617,10 +3617,10 @@ func (m *ProfileServiceHandlerMock) MinimockGetByContactDone() bool {
 }
 
 // MinimockGetByContactInspect logs each unmet expectation
-func (m *ProfileServiceHandlerMock) MinimockGetByContactInspect() {
+func (m *ProfileServiceClientMock) MinimockGetByContactInspect() {
 	for _, e := range m.GetByContactMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.GetByContact at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.GetByContact at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -3628,66 +3628,66 @@ func (m *ProfileServiceHandlerMock) MinimockGetByContactInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.GetByContactMock.defaultExpectation != nil && afterGetByContactCounter < 1 {
 		if m.GetByContactMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.GetByContact at\n%s", m.GetByContactMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.GetByContact at\n%s", m.GetByContactMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.GetByContact at\n%s with params: %#v", m.GetByContactMock.defaultExpectation.expectationOrigins.origin, *m.GetByContactMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.GetByContact at\n%s with params: %#v", m.GetByContactMock.defaultExpectation.expectationOrigins.origin, *m.GetByContactMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcGetByContact != nil && afterGetByContactCounter < 1 {
-		m.t.Errorf("Expected call to ProfileServiceHandlerMock.GetByContact at\n%s", m.funcGetByContactOrigin)
+		m.t.Errorf("Expected call to ProfileServiceClientMock.GetByContact at\n%s", m.funcGetByContactOrigin)
 	}
 
 	if !m.GetByContactMock.invocationsDone() && afterGetByContactCounter > 0 {
-		m.t.Errorf("Expected %d calls to ProfileServiceHandlerMock.GetByContact at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to ProfileServiceClientMock.GetByContact at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.GetByContactMock.expectedInvocations), m.GetByContactMock.expectedInvocationsOrigin, afterGetByContactCounter)
 	}
 }
 
-type mProfileServiceHandlerMockGetById struct {
+type mProfileServiceClientMockGetById struct {
 	optional           bool
-	mock               *ProfileServiceHandlerMock
-	defaultExpectation *ProfileServiceHandlerMockGetByIdExpectation
-	expectations       []*ProfileServiceHandlerMockGetByIdExpectation
+	mock               *ProfileServiceClientMock
+	defaultExpectation *ProfileServiceClientMockGetByIdExpectation
+	expectations       []*ProfileServiceClientMockGetByIdExpectation
 
-	callArgs []*ProfileServiceHandlerMockGetByIdParams
+	callArgs []*ProfileServiceClientMockGetByIdParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// ProfileServiceHandlerMockGetByIdExpectation specifies expectation struct of the ProfileServiceHandler.GetById
-type ProfileServiceHandlerMockGetByIdExpectation struct {
-	mock               *ProfileServiceHandlerMock
-	params             *ProfileServiceHandlerMockGetByIdParams
-	paramPtrs          *ProfileServiceHandlerMockGetByIdParamPtrs
-	expectationOrigins ProfileServiceHandlerMockGetByIdExpectationOrigins
-	results            *ProfileServiceHandlerMockGetByIdResults
+// ProfileServiceClientMockGetByIdExpectation specifies expectation struct of the ProfileServiceClient.GetById
+type ProfileServiceClientMockGetByIdExpectation struct {
+	mock               *ProfileServiceClientMock
+	params             *ProfileServiceClientMockGetByIdParams
+	paramPtrs          *ProfileServiceClientMockGetByIdParamPtrs
+	expectationOrigins ProfileServiceClientMockGetByIdExpectationOrigins
+	results            *ProfileServiceClientMockGetByIdResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// ProfileServiceHandlerMockGetByIdParams contains parameters of the ProfileServiceHandler.GetById
-type ProfileServiceHandlerMockGetByIdParams struct {
+// ProfileServiceClientMockGetByIdParams contains parameters of the ProfileServiceClient.GetById
+type ProfileServiceClientMockGetByIdParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.GetByIdRequest]
 }
 
-// ProfileServiceHandlerMockGetByIdParamPtrs contains pointers to parameters of the ProfileServiceHandler.GetById
-type ProfileServiceHandlerMockGetByIdParamPtrs struct {
+// ProfileServiceClientMockGetByIdParamPtrs contains pointers to parameters of the ProfileServiceClient.GetById
+type ProfileServiceClientMockGetByIdParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.GetByIdRequest]
 }
 
-// ProfileServiceHandlerMockGetByIdResults contains results of the ProfileServiceHandler.GetById
-type ProfileServiceHandlerMockGetByIdResults struct {
+// ProfileServiceClientMockGetByIdResults contains results of the ProfileServiceClient.GetById
+type ProfileServiceClientMockGetByIdResults struct {
 	pp2 *connect.Response[v1.GetByIdResponse]
 	err error
 }
 
-// ProfileServiceHandlerMockGetByIdOrigins contains origins of expectations of the ProfileServiceHandler.GetById
-type ProfileServiceHandlerMockGetByIdExpectationOrigins struct {
+// ProfileServiceClientMockGetByIdOrigins contains origins of expectations of the ProfileServiceClient.GetById
+type ProfileServiceClientMockGetByIdExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -3698,26 +3698,26 @@ type ProfileServiceHandlerMockGetByIdExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmGetById *mProfileServiceHandlerMockGetById) Optional() *mProfileServiceHandlerMockGetById {
+func (mmGetById *mProfileServiceClientMockGetById) Optional() *mProfileServiceClientMockGetById {
 	mmGetById.optional = true
 	return mmGetById
 }
 
-// Expect sets up expected params for ProfileServiceHandler.GetById
-func (mmGetById *mProfileServiceHandlerMockGetById) Expect(ctx context.Context, pp1 *connect.Request[v1.GetByIdRequest]) *mProfileServiceHandlerMockGetById {
+// Expect sets up expected params for ProfileServiceClient.GetById
+func (mmGetById *mProfileServiceClientMockGetById) Expect(ctx context.Context, pp1 *connect.Request[v1.GetByIdRequest]) *mProfileServiceClientMockGetById {
 	if mmGetById.mock.funcGetById != nil {
-		mmGetById.mock.t.Fatalf("ProfileServiceHandlerMock.GetById mock is already set by Set")
+		mmGetById.mock.t.Fatalf("ProfileServiceClientMock.GetById mock is already set by Set")
 	}
 
 	if mmGetById.defaultExpectation == nil {
-		mmGetById.defaultExpectation = &ProfileServiceHandlerMockGetByIdExpectation{}
+		mmGetById.defaultExpectation = &ProfileServiceClientMockGetByIdExpectation{}
 	}
 
 	if mmGetById.defaultExpectation.paramPtrs != nil {
-		mmGetById.mock.t.Fatalf("ProfileServiceHandlerMock.GetById mock is already set by ExpectParams functions")
+		mmGetById.mock.t.Fatalf("ProfileServiceClientMock.GetById mock is already set by ExpectParams functions")
 	}
 
-	mmGetById.defaultExpectation.params = &ProfileServiceHandlerMockGetByIdParams{ctx, pp1}
+	mmGetById.defaultExpectation.params = &ProfileServiceClientMockGetByIdParams{ctx, pp1}
 	mmGetById.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmGetById.expectations {
 		if minimock.Equal(e.params, mmGetById.defaultExpectation.params) {
@@ -3728,22 +3728,22 @@ func (mmGetById *mProfileServiceHandlerMockGetById) Expect(ctx context.Context, 
 	return mmGetById
 }
 
-// ExpectCtxParam1 sets up expected param ctx for ProfileServiceHandler.GetById
-func (mmGetById *mProfileServiceHandlerMockGetById) ExpectCtxParam1(ctx context.Context) *mProfileServiceHandlerMockGetById {
+// ExpectCtxParam1 sets up expected param ctx for ProfileServiceClient.GetById
+func (mmGetById *mProfileServiceClientMockGetById) ExpectCtxParam1(ctx context.Context) *mProfileServiceClientMockGetById {
 	if mmGetById.mock.funcGetById != nil {
-		mmGetById.mock.t.Fatalf("ProfileServiceHandlerMock.GetById mock is already set by Set")
+		mmGetById.mock.t.Fatalf("ProfileServiceClientMock.GetById mock is already set by Set")
 	}
 
 	if mmGetById.defaultExpectation == nil {
-		mmGetById.defaultExpectation = &ProfileServiceHandlerMockGetByIdExpectation{}
+		mmGetById.defaultExpectation = &ProfileServiceClientMockGetByIdExpectation{}
 	}
 
 	if mmGetById.defaultExpectation.params != nil {
-		mmGetById.mock.t.Fatalf("ProfileServiceHandlerMock.GetById mock is already set by Expect")
+		mmGetById.mock.t.Fatalf("ProfileServiceClientMock.GetById mock is already set by Expect")
 	}
 
 	if mmGetById.defaultExpectation.paramPtrs == nil {
-		mmGetById.defaultExpectation.paramPtrs = &ProfileServiceHandlerMockGetByIdParamPtrs{}
+		mmGetById.defaultExpectation.paramPtrs = &ProfileServiceClientMockGetByIdParamPtrs{}
 	}
 	mmGetById.defaultExpectation.paramPtrs.ctx = &ctx
 	mmGetById.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -3751,22 +3751,22 @@ func (mmGetById *mProfileServiceHandlerMockGetById) ExpectCtxParam1(ctx context.
 	return mmGetById
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for ProfileServiceHandler.GetById
-func (mmGetById *mProfileServiceHandlerMockGetById) ExpectPp1Param2(pp1 *connect.Request[v1.GetByIdRequest]) *mProfileServiceHandlerMockGetById {
+// ExpectPp1Param2 sets up expected param pp1 for ProfileServiceClient.GetById
+func (mmGetById *mProfileServiceClientMockGetById) ExpectPp1Param2(pp1 *connect.Request[v1.GetByIdRequest]) *mProfileServiceClientMockGetById {
 	if mmGetById.mock.funcGetById != nil {
-		mmGetById.mock.t.Fatalf("ProfileServiceHandlerMock.GetById mock is already set by Set")
+		mmGetById.mock.t.Fatalf("ProfileServiceClientMock.GetById mock is already set by Set")
 	}
 
 	if mmGetById.defaultExpectation == nil {
-		mmGetById.defaultExpectation = &ProfileServiceHandlerMockGetByIdExpectation{}
+		mmGetById.defaultExpectation = &ProfileServiceClientMockGetByIdExpectation{}
 	}
 
 	if mmGetById.defaultExpectation.params != nil {
-		mmGetById.mock.t.Fatalf("ProfileServiceHandlerMock.GetById mock is already set by Expect")
+		mmGetById.mock.t.Fatalf("ProfileServiceClientMock.GetById mock is already set by Expect")
 	}
 
 	if mmGetById.defaultExpectation.paramPtrs == nil {
-		mmGetById.defaultExpectation.paramPtrs = &ProfileServiceHandlerMockGetByIdParamPtrs{}
+		mmGetById.defaultExpectation.paramPtrs = &ProfileServiceClientMockGetByIdParamPtrs{}
 	}
 	mmGetById.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmGetById.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -3774,10 +3774,10 @@ func (mmGetById *mProfileServiceHandlerMockGetById) ExpectPp1Param2(pp1 *connect
 	return mmGetById
 }
 
-// Inspect accepts an inspector function that has same arguments as the ProfileServiceHandler.GetById
-func (mmGetById *mProfileServiceHandlerMockGetById) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.GetByIdRequest])) *mProfileServiceHandlerMockGetById {
+// Inspect accepts an inspector function that has same arguments as the ProfileServiceClient.GetById
+func (mmGetById *mProfileServiceClientMockGetById) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.GetByIdRequest])) *mProfileServiceClientMockGetById {
 	if mmGetById.mock.inspectFuncGetById != nil {
-		mmGetById.mock.t.Fatalf("Inspect function is already set for ProfileServiceHandlerMock.GetById")
+		mmGetById.mock.t.Fatalf("Inspect function is already set for ProfileServiceClientMock.GetById")
 	}
 
 	mmGetById.mock.inspectFuncGetById = f
@@ -3785,28 +3785,28 @@ func (mmGetById *mProfileServiceHandlerMockGetById) Inspect(f func(ctx context.C
 	return mmGetById
 }
 
-// Return sets up results that will be returned by ProfileServiceHandler.GetById
-func (mmGetById *mProfileServiceHandlerMockGetById) Return(pp2 *connect.Response[v1.GetByIdResponse], err error) *ProfileServiceHandlerMock {
+// Return sets up results that will be returned by ProfileServiceClient.GetById
+func (mmGetById *mProfileServiceClientMockGetById) Return(pp2 *connect.Response[v1.GetByIdResponse], err error) *ProfileServiceClientMock {
 	if mmGetById.mock.funcGetById != nil {
-		mmGetById.mock.t.Fatalf("ProfileServiceHandlerMock.GetById mock is already set by Set")
+		mmGetById.mock.t.Fatalf("ProfileServiceClientMock.GetById mock is already set by Set")
 	}
 
 	if mmGetById.defaultExpectation == nil {
-		mmGetById.defaultExpectation = &ProfileServiceHandlerMockGetByIdExpectation{mock: mmGetById.mock}
+		mmGetById.defaultExpectation = &ProfileServiceClientMockGetByIdExpectation{mock: mmGetById.mock}
 	}
-	mmGetById.defaultExpectation.results = &ProfileServiceHandlerMockGetByIdResults{pp2, err}
+	mmGetById.defaultExpectation.results = &ProfileServiceClientMockGetByIdResults{pp2, err}
 	mmGetById.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmGetById.mock
 }
 
-// Set uses given function f to mock the ProfileServiceHandler.GetById method
-func (mmGetById *mProfileServiceHandlerMockGetById) Set(f func(ctx context.Context, pp1 *connect.Request[v1.GetByIdRequest]) (pp2 *connect.Response[v1.GetByIdResponse], err error)) *ProfileServiceHandlerMock {
+// Set uses given function f to mock the ProfileServiceClient.GetById method
+func (mmGetById *mProfileServiceClientMockGetById) Set(f func(ctx context.Context, pp1 *connect.Request[v1.GetByIdRequest]) (pp2 *connect.Response[v1.GetByIdResponse], err error)) *ProfileServiceClientMock {
 	if mmGetById.defaultExpectation != nil {
-		mmGetById.mock.t.Fatalf("Default expectation is already set for the ProfileServiceHandler.GetById method")
+		mmGetById.mock.t.Fatalf("Default expectation is already set for the ProfileServiceClient.GetById method")
 	}
 
 	if len(mmGetById.expectations) > 0 {
-		mmGetById.mock.t.Fatalf("Some expectations are already set for the ProfileServiceHandler.GetById method")
+		mmGetById.mock.t.Fatalf("Some expectations are already set for the ProfileServiceClient.GetById method")
 	}
 
 	mmGetById.mock.funcGetById = f
@@ -3814,39 +3814,39 @@ func (mmGetById *mProfileServiceHandlerMockGetById) Set(f func(ctx context.Conte
 	return mmGetById.mock
 }
 
-// When sets expectation for the ProfileServiceHandler.GetById which will trigger the result defined by the following
+// When sets expectation for the ProfileServiceClient.GetById which will trigger the result defined by the following
 // Then helper
-func (mmGetById *mProfileServiceHandlerMockGetById) When(ctx context.Context, pp1 *connect.Request[v1.GetByIdRequest]) *ProfileServiceHandlerMockGetByIdExpectation {
+func (mmGetById *mProfileServiceClientMockGetById) When(ctx context.Context, pp1 *connect.Request[v1.GetByIdRequest]) *ProfileServiceClientMockGetByIdExpectation {
 	if mmGetById.mock.funcGetById != nil {
-		mmGetById.mock.t.Fatalf("ProfileServiceHandlerMock.GetById mock is already set by Set")
+		mmGetById.mock.t.Fatalf("ProfileServiceClientMock.GetById mock is already set by Set")
 	}
 
-	expectation := &ProfileServiceHandlerMockGetByIdExpectation{
+	expectation := &ProfileServiceClientMockGetByIdExpectation{
 		mock:               mmGetById.mock,
-		params:             &ProfileServiceHandlerMockGetByIdParams{ctx, pp1},
-		expectationOrigins: ProfileServiceHandlerMockGetByIdExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &ProfileServiceClientMockGetByIdParams{ctx, pp1},
+		expectationOrigins: ProfileServiceClientMockGetByIdExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmGetById.expectations = append(mmGetById.expectations, expectation)
 	return expectation
 }
 
-// Then sets up ProfileServiceHandler.GetById return parameters for the expectation previously defined by the When method
-func (e *ProfileServiceHandlerMockGetByIdExpectation) Then(pp2 *connect.Response[v1.GetByIdResponse], err error) *ProfileServiceHandlerMock {
-	e.results = &ProfileServiceHandlerMockGetByIdResults{pp2, err}
+// Then sets up ProfileServiceClient.GetById return parameters for the expectation previously defined by the When method
+func (e *ProfileServiceClientMockGetByIdExpectation) Then(pp2 *connect.Response[v1.GetByIdResponse], err error) *ProfileServiceClientMock {
+	e.results = &ProfileServiceClientMockGetByIdResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times ProfileServiceHandler.GetById should be invoked
-func (mmGetById *mProfileServiceHandlerMockGetById) Times(n uint64) *mProfileServiceHandlerMockGetById {
+// Times sets number of times ProfileServiceClient.GetById should be invoked
+func (mmGetById *mProfileServiceClientMockGetById) Times(n uint64) *mProfileServiceClientMockGetById {
 	if n == 0 {
-		mmGetById.mock.t.Fatalf("Times of ProfileServiceHandlerMock.GetById mock can not be zero")
+		mmGetById.mock.t.Fatalf("Times of ProfileServiceClientMock.GetById mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmGetById.expectedInvocations, n)
 	mmGetById.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmGetById
 }
 
-func (mmGetById *mProfileServiceHandlerMockGetById) invocationsDone() bool {
+func (mmGetById *mProfileServiceClientMockGetById) invocationsDone() bool {
 	if len(mmGetById.expectations) == 0 && mmGetById.defaultExpectation == nil && mmGetById.mock.funcGetById == nil {
 		return true
 	}
@@ -3857,8 +3857,8 @@ func (mmGetById *mProfileServiceHandlerMockGetById) invocationsDone() bool {
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// GetById implements mm_profilev1connect.ProfileServiceHandler
-func (mmGetById *ProfileServiceHandlerMock) GetById(ctx context.Context, pp1 *connect.Request[v1.GetByIdRequest]) (pp2 *connect.Response[v1.GetByIdResponse], err error) {
+// GetById implements mm_profilev1connect.ProfileServiceClient
+func (mmGetById *ProfileServiceClientMock) GetById(ctx context.Context, pp1 *connect.Request[v1.GetByIdRequest]) (pp2 *connect.Response[v1.GetByIdResponse], err error) {
 	mm_atomic.AddUint64(&mmGetById.beforeGetByIdCounter, 1)
 	defer mm_atomic.AddUint64(&mmGetById.afterGetByIdCounter, 1)
 
@@ -3868,7 +3868,7 @@ func (mmGetById *ProfileServiceHandlerMock) GetById(ctx context.Context, pp1 *co
 		mmGetById.inspectFuncGetById(ctx, pp1)
 	}
 
-	mm_params := ProfileServiceHandlerMockGetByIdParams{ctx, pp1}
+	mm_params := ProfileServiceClientMockGetByIdParams{ctx, pp1}
 
 	// Record call args
 	mmGetById.GetByIdMock.mutex.Lock()
@@ -3887,54 +3887,54 @@ func (mmGetById *ProfileServiceHandlerMock) GetById(ctx context.Context, pp1 *co
 		mm_want := mmGetById.GetByIdMock.defaultExpectation.params
 		mm_want_ptrs := mmGetById.GetByIdMock.defaultExpectation.paramPtrs
 
-		mm_got := ProfileServiceHandlerMockGetByIdParams{ctx, pp1}
+		mm_got := ProfileServiceClientMockGetByIdParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmGetById.t.Errorf("ProfileServiceHandlerMock.GetById got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmGetById.t.Errorf("ProfileServiceClientMock.GetById got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmGetById.GetByIdMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmGetById.t.Errorf("ProfileServiceHandlerMock.GetById got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmGetById.t.Errorf("ProfileServiceClientMock.GetById got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmGetById.GetByIdMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmGetById.t.Errorf("ProfileServiceHandlerMock.GetById got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmGetById.t.Errorf("ProfileServiceClientMock.GetById got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmGetById.GetByIdMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmGetById.GetByIdMock.defaultExpectation.results
 		if mm_results == nil {
-			mmGetById.t.Fatal("No results are set for the ProfileServiceHandlerMock.GetById")
+			mmGetById.t.Fatal("No results are set for the ProfileServiceClientMock.GetById")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmGetById.funcGetById != nil {
 		return mmGetById.funcGetById(ctx, pp1)
 	}
-	mmGetById.t.Fatalf("Unexpected call to ProfileServiceHandlerMock.GetById. %v %v", ctx, pp1)
+	mmGetById.t.Fatalf("Unexpected call to ProfileServiceClientMock.GetById. %v %v", ctx, pp1)
 	return
 }
 
-// GetByIdAfterCounter returns a count of finished ProfileServiceHandlerMock.GetById invocations
-func (mmGetById *ProfileServiceHandlerMock) GetByIdAfterCounter() uint64 {
+// GetByIdAfterCounter returns a count of finished ProfileServiceClientMock.GetById invocations
+func (mmGetById *ProfileServiceClientMock) GetByIdAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmGetById.afterGetByIdCounter)
 }
 
-// GetByIdBeforeCounter returns a count of ProfileServiceHandlerMock.GetById invocations
-func (mmGetById *ProfileServiceHandlerMock) GetByIdBeforeCounter() uint64 {
+// GetByIdBeforeCounter returns a count of ProfileServiceClientMock.GetById invocations
+func (mmGetById *ProfileServiceClientMock) GetByIdBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmGetById.beforeGetByIdCounter)
 }
 
-// Calls returns a list of arguments used in each call to ProfileServiceHandlerMock.GetById.
+// Calls returns a list of arguments used in each call to ProfileServiceClientMock.GetById.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmGetById *mProfileServiceHandlerMockGetById) Calls() []*ProfileServiceHandlerMockGetByIdParams {
+func (mmGetById *mProfileServiceClientMockGetById) Calls() []*ProfileServiceClientMockGetByIdParams {
 	mmGetById.mutex.RLock()
 
-	argCopy := make([]*ProfileServiceHandlerMockGetByIdParams, len(mmGetById.callArgs))
+	argCopy := make([]*ProfileServiceClientMockGetByIdParams, len(mmGetById.callArgs))
 	copy(argCopy, mmGetById.callArgs)
 
 	mmGetById.mutex.RUnlock()
@@ -3944,7 +3944,7 @@ func (mmGetById *mProfileServiceHandlerMockGetById) Calls() []*ProfileServiceHan
 
 // MinimockGetByIdDone returns true if the count of the GetById invocations corresponds
 // the number of defined expectations
-func (m *ProfileServiceHandlerMock) MinimockGetByIdDone() bool {
+func (m *ProfileServiceClientMock) MinimockGetByIdDone() bool {
 	if m.GetByIdMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -3960,10 +3960,10 @@ func (m *ProfileServiceHandlerMock) MinimockGetByIdDone() bool {
 }
 
 // MinimockGetByIdInspect logs each unmet expectation
-func (m *ProfileServiceHandlerMock) MinimockGetByIdInspect() {
+func (m *ProfileServiceClientMock) MinimockGetByIdInspect() {
 	for _, e := range m.GetByIdMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.GetById at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.GetById at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -3971,71 +3971,69 @@ func (m *ProfileServiceHandlerMock) MinimockGetByIdInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.GetByIdMock.defaultExpectation != nil && afterGetByIdCounter < 1 {
 		if m.GetByIdMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.GetById at\n%s", m.GetByIdMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.GetById at\n%s", m.GetByIdMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.GetById at\n%s with params: %#v", m.GetByIdMock.defaultExpectation.expectationOrigins.origin, *m.GetByIdMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.GetById at\n%s with params: %#v", m.GetByIdMock.defaultExpectation.expectationOrigins.origin, *m.GetByIdMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcGetById != nil && afterGetByIdCounter < 1 {
-		m.t.Errorf("Expected call to ProfileServiceHandlerMock.GetById at\n%s", m.funcGetByIdOrigin)
+		m.t.Errorf("Expected call to ProfileServiceClientMock.GetById at\n%s", m.funcGetByIdOrigin)
 	}
 
 	if !m.GetByIdMock.invocationsDone() && afterGetByIdCounter > 0 {
-		m.t.Errorf("Expected %d calls to ProfileServiceHandlerMock.GetById at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to ProfileServiceClientMock.GetById at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.GetByIdMock.expectedInvocations), m.GetByIdMock.expectedInvocationsOrigin, afterGetByIdCounter)
 	}
 }
 
-type mProfileServiceHandlerMockListRelationship struct {
+type mProfileServiceClientMockListRelationship struct {
 	optional           bool
-	mock               *ProfileServiceHandlerMock
-	defaultExpectation *ProfileServiceHandlerMockListRelationshipExpectation
-	expectations       []*ProfileServiceHandlerMockListRelationshipExpectation
+	mock               *ProfileServiceClientMock
+	defaultExpectation *ProfileServiceClientMockListRelationshipExpectation
+	expectations       []*ProfileServiceClientMockListRelationshipExpectation
 
-	callArgs []*ProfileServiceHandlerMockListRelationshipParams
+	callArgs []*ProfileServiceClientMockListRelationshipParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// ProfileServiceHandlerMockListRelationshipExpectation specifies expectation struct of the ProfileServiceHandler.ListRelationship
-type ProfileServiceHandlerMockListRelationshipExpectation struct {
-	mock               *ProfileServiceHandlerMock
-	params             *ProfileServiceHandlerMockListRelationshipParams
-	paramPtrs          *ProfileServiceHandlerMockListRelationshipParamPtrs
-	expectationOrigins ProfileServiceHandlerMockListRelationshipExpectationOrigins
-	results            *ProfileServiceHandlerMockListRelationshipResults
+// ProfileServiceClientMockListRelationshipExpectation specifies expectation struct of the ProfileServiceClient.ListRelationship
+type ProfileServiceClientMockListRelationshipExpectation struct {
+	mock               *ProfileServiceClientMock
+	params             *ProfileServiceClientMockListRelationshipParams
+	paramPtrs          *ProfileServiceClientMockListRelationshipParamPtrs
+	expectationOrigins ProfileServiceClientMockListRelationshipExpectationOrigins
+	results            *ProfileServiceClientMockListRelationshipResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// ProfileServiceHandlerMockListRelationshipParams contains parameters of the ProfileServiceHandler.ListRelationship
-type ProfileServiceHandlerMockListRelationshipParams struct {
+// ProfileServiceClientMockListRelationshipParams contains parameters of the ProfileServiceClient.ListRelationship
+type ProfileServiceClientMockListRelationshipParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.ListRelationshipRequest]
-	pp2 *connect.ServerStream[v1.ListRelationshipResponse]
 }
 
-// ProfileServiceHandlerMockListRelationshipParamPtrs contains pointers to parameters of the ProfileServiceHandler.ListRelationship
-type ProfileServiceHandlerMockListRelationshipParamPtrs struct {
+// ProfileServiceClientMockListRelationshipParamPtrs contains pointers to parameters of the ProfileServiceClient.ListRelationship
+type ProfileServiceClientMockListRelationshipParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.ListRelationshipRequest]
-	pp2 **connect.ServerStream[v1.ListRelationshipResponse]
 }
 
-// ProfileServiceHandlerMockListRelationshipResults contains results of the ProfileServiceHandler.ListRelationship
-type ProfileServiceHandlerMockListRelationshipResults struct {
+// ProfileServiceClientMockListRelationshipResults contains results of the ProfileServiceClient.ListRelationship
+type ProfileServiceClientMockListRelationshipResults struct {
+	pp2 *connect.ServerStreamForClient[v1.ListRelationshipResponse]
 	err error
 }
 
-// ProfileServiceHandlerMockListRelationshipOrigins contains origins of expectations of the ProfileServiceHandler.ListRelationship
-type ProfileServiceHandlerMockListRelationshipExpectationOrigins struct {
+// ProfileServiceClientMockListRelationshipOrigins contains origins of expectations of the ProfileServiceClient.ListRelationship
+type ProfileServiceClientMockListRelationshipExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
-	originPp2 string
 }
 
 // Marks this method to be optional. The default behavior of any method with Return() is '1 or more', meaning
@@ -4043,26 +4041,26 @@ type ProfileServiceHandlerMockListRelationshipExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmListRelationship *mProfileServiceHandlerMockListRelationship) Optional() *mProfileServiceHandlerMockListRelationship {
+func (mmListRelationship *mProfileServiceClientMockListRelationship) Optional() *mProfileServiceClientMockListRelationship {
 	mmListRelationship.optional = true
 	return mmListRelationship
 }
 
-// Expect sets up expected params for ProfileServiceHandler.ListRelationship
-func (mmListRelationship *mProfileServiceHandlerMockListRelationship) Expect(ctx context.Context, pp1 *connect.Request[v1.ListRelationshipRequest], pp2 *connect.ServerStream[v1.ListRelationshipResponse]) *mProfileServiceHandlerMockListRelationship {
+// Expect sets up expected params for ProfileServiceClient.ListRelationship
+func (mmListRelationship *mProfileServiceClientMockListRelationship) Expect(ctx context.Context, pp1 *connect.Request[v1.ListRelationshipRequest]) *mProfileServiceClientMockListRelationship {
 	if mmListRelationship.mock.funcListRelationship != nil {
-		mmListRelationship.mock.t.Fatalf("ProfileServiceHandlerMock.ListRelationship mock is already set by Set")
+		mmListRelationship.mock.t.Fatalf("ProfileServiceClientMock.ListRelationship mock is already set by Set")
 	}
 
 	if mmListRelationship.defaultExpectation == nil {
-		mmListRelationship.defaultExpectation = &ProfileServiceHandlerMockListRelationshipExpectation{}
+		mmListRelationship.defaultExpectation = &ProfileServiceClientMockListRelationshipExpectation{}
 	}
 
 	if mmListRelationship.defaultExpectation.paramPtrs != nil {
-		mmListRelationship.mock.t.Fatalf("ProfileServiceHandlerMock.ListRelationship mock is already set by ExpectParams functions")
+		mmListRelationship.mock.t.Fatalf("ProfileServiceClientMock.ListRelationship mock is already set by ExpectParams functions")
 	}
 
-	mmListRelationship.defaultExpectation.params = &ProfileServiceHandlerMockListRelationshipParams{ctx, pp1, pp2}
+	mmListRelationship.defaultExpectation.params = &ProfileServiceClientMockListRelationshipParams{ctx, pp1}
 	mmListRelationship.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmListRelationship.expectations {
 		if minimock.Equal(e.params, mmListRelationship.defaultExpectation.params) {
@@ -4073,22 +4071,22 @@ func (mmListRelationship *mProfileServiceHandlerMockListRelationship) Expect(ctx
 	return mmListRelationship
 }
 
-// ExpectCtxParam1 sets up expected param ctx for ProfileServiceHandler.ListRelationship
-func (mmListRelationship *mProfileServiceHandlerMockListRelationship) ExpectCtxParam1(ctx context.Context) *mProfileServiceHandlerMockListRelationship {
+// ExpectCtxParam1 sets up expected param ctx for ProfileServiceClient.ListRelationship
+func (mmListRelationship *mProfileServiceClientMockListRelationship) ExpectCtxParam1(ctx context.Context) *mProfileServiceClientMockListRelationship {
 	if mmListRelationship.mock.funcListRelationship != nil {
-		mmListRelationship.mock.t.Fatalf("ProfileServiceHandlerMock.ListRelationship mock is already set by Set")
+		mmListRelationship.mock.t.Fatalf("ProfileServiceClientMock.ListRelationship mock is already set by Set")
 	}
 
 	if mmListRelationship.defaultExpectation == nil {
-		mmListRelationship.defaultExpectation = &ProfileServiceHandlerMockListRelationshipExpectation{}
+		mmListRelationship.defaultExpectation = &ProfileServiceClientMockListRelationshipExpectation{}
 	}
 
 	if mmListRelationship.defaultExpectation.params != nil {
-		mmListRelationship.mock.t.Fatalf("ProfileServiceHandlerMock.ListRelationship mock is already set by Expect")
+		mmListRelationship.mock.t.Fatalf("ProfileServiceClientMock.ListRelationship mock is already set by Expect")
 	}
 
 	if mmListRelationship.defaultExpectation.paramPtrs == nil {
-		mmListRelationship.defaultExpectation.paramPtrs = &ProfileServiceHandlerMockListRelationshipParamPtrs{}
+		mmListRelationship.defaultExpectation.paramPtrs = &ProfileServiceClientMockListRelationshipParamPtrs{}
 	}
 	mmListRelationship.defaultExpectation.paramPtrs.ctx = &ctx
 	mmListRelationship.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -4096,22 +4094,22 @@ func (mmListRelationship *mProfileServiceHandlerMockListRelationship) ExpectCtxP
 	return mmListRelationship
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for ProfileServiceHandler.ListRelationship
-func (mmListRelationship *mProfileServiceHandlerMockListRelationship) ExpectPp1Param2(pp1 *connect.Request[v1.ListRelationshipRequest]) *mProfileServiceHandlerMockListRelationship {
+// ExpectPp1Param2 sets up expected param pp1 for ProfileServiceClient.ListRelationship
+func (mmListRelationship *mProfileServiceClientMockListRelationship) ExpectPp1Param2(pp1 *connect.Request[v1.ListRelationshipRequest]) *mProfileServiceClientMockListRelationship {
 	if mmListRelationship.mock.funcListRelationship != nil {
-		mmListRelationship.mock.t.Fatalf("ProfileServiceHandlerMock.ListRelationship mock is already set by Set")
+		mmListRelationship.mock.t.Fatalf("ProfileServiceClientMock.ListRelationship mock is already set by Set")
 	}
 
 	if mmListRelationship.defaultExpectation == nil {
-		mmListRelationship.defaultExpectation = &ProfileServiceHandlerMockListRelationshipExpectation{}
+		mmListRelationship.defaultExpectation = &ProfileServiceClientMockListRelationshipExpectation{}
 	}
 
 	if mmListRelationship.defaultExpectation.params != nil {
-		mmListRelationship.mock.t.Fatalf("ProfileServiceHandlerMock.ListRelationship mock is already set by Expect")
+		mmListRelationship.mock.t.Fatalf("ProfileServiceClientMock.ListRelationship mock is already set by Expect")
 	}
 
 	if mmListRelationship.defaultExpectation.paramPtrs == nil {
-		mmListRelationship.defaultExpectation.paramPtrs = &ProfileServiceHandlerMockListRelationshipParamPtrs{}
+		mmListRelationship.defaultExpectation.paramPtrs = &ProfileServiceClientMockListRelationshipParamPtrs{}
 	}
 	mmListRelationship.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmListRelationship.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -4119,33 +4117,10 @@ func (mmListRelationship *mProfileServiceHandlerMockListRelationship) ExpectPp1P
 	return mmListRelationship
 }
 
-// ExpectPp2Param3 sets up expected param pp2 for ProfileServiceHandler.ListRelationship
-func (mmListRelationship *mProfileServiceHandlerMockListRelationship) ExpectPp2Param3(pp2 *connect.ServerStream[v1.ListRelationshipResponse]) *mProfileServiceHandlerMockListRelationship {
-	if mmListRelationship.mock.funcListRelationship != nil {
-		mmListRelationship.mock.t.Fatalf("ProfileServiceHandlerMock.ListRelationship mock is already set by Set")
-	}
-
-	if mmListRelationship.defaultExpectation == nil {
-		mmListRelationship.defaultExpectation = &ProfileServiceHandlerMockListRelationshipExpectation{}
-	}
-
-	if mmListRelationship.defaultExpectation.params != nil {
-		mmListRelationship.mock.t.Fatalf("ProfileServiceHandlerMock.ListRelationship mock is already set by Expect")
-	}
-
-	if mmListRelationship.defaultExpectation.paramPtrs == nil {
-		mmListRelationship.defaultExpectation.paramPtrs = &ProfileServiceHandlerMockListRelationshipParamPtrs{}
-	}
-	mmListRelationship.defaultExpectation.paramPtrs.pp2 = &pp2
-	mmListRelationship.defaultExpectation.expectationOrigins.originPp2 = minimock.CallerInfo(1)
-
-	return mmListRelationship
-}
-
-// Inspect accepts an inspector function that has same arguments as the ProfileServiceHandler.ListRelationship
-func (mmListRelationship *mProfileServiceHandlerMockListRelationship) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.ListRelationshipRequest], pp2 *connect.ServerStream[v1.ListRelationshipResponse])) *mProfileServiceHandlerMockListRelationship {
+// Inspect accepts an inspector function that has same arguments as the ProfileServiceClient.ListRelationship
+func (mmListRelationship *mProfileServiceClientMockListRelationship) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.ListRelationshipRequest])) *mProfileServiceClientMockListRelationship {
 	if mmListRelationship.mock.inspectFuncListRelationship != nil {
-		mmListRelationship.mock.t.Fatalf("Inspect function is already set for ProfileServiceHandlerMock.ListRelationship")
+		mmListRelationship.mock.t.Fatalf("Inspect function is already set for ProfileServiceClientMock.ListRelationship")
 	}
 
 	mmListRelationship.mock.inspectFuncListRelationship = f
@@ -4153,28 +4128,28 @@ func (mmListRelationship *mProfileServiceHandlerMockListRelationship) Inspect(f 
 	return mmListRelationship
 }
 
-// Return sets up results that will be returned by ProfileServiceHandler.ListRelationship
-func (mmListRelationship *mProfileServiceHandlerMockListRelationship) Return(err error) *ProfileServiceHandlerMock {
+// Return sets up results that will be returned by ProfileServiceClient.ListRelationship
+func (mmListRelationship *mProfileServiceClientMockListRelationship) Return(pp2 *connect.ServerStreamForClient[v1.ListRelationshipResponse], err error) *ProfileServiceClientMock {
 	if mmListRelationship.mock.funcListRelationship != nil {
-		mmListRelationship.mock.t.Fatalf("ProfileServiceHandlerMock.ListRelationship mock is already set by Set")
+		mmListRelationship.mock.t.Fatalf("ProfileServiceClientMock.ListRelationship mock is already set by Set")
 	}
 
 	if mmListRelationship.defaultExpectation == nil {
-		mmListRelationship.defaultExpectation = &ProfileServiceHandlerMockListRelationshipExpectation{mock: mmListRelationship.mock}
+		mmListRelationship.defaultExpectation = &ProfileServiceClientMockListRelationshipExpectation{mock: mmListRelationship.mock}
 	}
-	mmListRelationship.defaultExpectation.results = &ProfileServiceHandlerMockListRelationshipResults{err}
+	mmListRelationship.defaultExpectation.results = &ProfileServiceClientMockListRelationshipResults{pp2, err}
 	mmListRelationship.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmListRelationship.mock
 }
 
-// Set uses given function f to mock the ProfileServiceHandler.ListRelationship method
-func (mmListRelationship *mProfileServiceHandlerMockListRelationship) Set(f func(ctx context.Context, pp1 *connect.Request[v1.ListRelationshipRequest], pp2 *connect.ServerStream[v1.ListRelationshipResponse]) (err error)) *ProfileServiceHandlerMock {
+// Set uses given function f to mock the ProfileServiceClient.ListRelationship method
+func (mmListRelationship *mProfileServiceClientMockListRelationship) Set(f func(ctx context.Context, pp1 *connect.Request[v1.ListRelationshipRequest]) (pp2 *connect.ServerStreamForClient[v1.ListRelationshipResponse], err error)) *ProfileServiceClientMock {
 	if mmListRelationship.defaultExpectation != nil {
-		mmListRelationship.mock.t.Fatalf("Default expectation is already set for the ProfileServiceHandler.ListRelationship method")
+		mmListRelationship.mock.t.Fatalf("Default expectation is already set for the ProfileServiceClient.ListRelationship method")
 	}
 
 	if len(mmListRelationship.expectations) > 0 {
-		mmListRelationship.mock.t.Fatalf("Some expectations are already set for the ProfileServiceHandler.ListRelationship method")
+		mmListRelationship.mock.t.Fatalf("Some expectations are already set for the ProfileServiceClient.ListRelationship method")
 	}
 
 	mmListRelationship.mock.funcListRelationship = f
@@ -4182,39 +4157,39 @@ func (mmListRelationship *mProfileServiceHandlerMockListRelationship) Set(f func
 	return mmListRelationship.mock
 }
 
-// When sets expectation for the ProfileServiceHandler.ListRelationship which will trigger the result defined by the following
+// When sets expectation for the ProfileServiceClient.ListRelationship which will trigger the result defined by the following
 // Then helper
-func (mmListRelationship *mProfileServiceHandlerMockListRelationship) When(ctx context.Context, pp1 *connect.Request[v1.ListRelationshipRequest], pp2 *connect.ServerStream[v1.ListRelationshipResponse]) *ProfileServiceHandlerMockListRelationshipExpectation {
+func (mmListRelationship *mProfileServiceClientMockListRelationship) When(ctx context.Context, pp1 *connect.Request[v1.ListRelationshipRequest]) *ProfileServiceClientMockListRelationshipExpectation {
 	if mmListRelationship.mock.funcListRelationship != nil {
-		mmListRelationship.mock.t.Fatalf("ProfileServiceHandlerMock.ListRelationship mock is already set by Set")
+		mmListRelationship.mock.t.Fatalf("ProfileServiceClientMock.ListRelationship mock is already set by Set")
 	}
 
-	expectation := &ProfileServiceHandlerMockListRelationshipExpectation{
+	expectation := &ProfileServiceClientMockListRelationshipExpectation{
 		mock:               mmListRelationship.mock,
-		params:             &ProfileServiceHandlerMockListRelationshipParams{ctx, pp1, pp2},
-		expectationOrigins: ProfileServiceHandlerMockListRelationshipExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &ProfileServiceClientMockListRelationshipParams{ctx, pp1},
+		expectationOrigins: ProfileServiceClientMockListRelationshipExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmListRelationship.expectations = append(mmListRelationship.expectations, expectation)
 	return expectation
 }
 
-// Then sets up ProfileServiceHandler.ListRelationship return parameters for the expectation previously defined by the When method
-func (e *ProfileServiceHandlerMockListRelationshipExpectation) Then(err error) *ProfileServiceHandlerMock {
-	e.results = &ProfileServiceHandlerMockListRelationshipResults{err}
+// Then sets up ProfileServiceClient.ListRelationship return parameters for the expectation previously defined by the When method
+func (e *ProfileServiceClientMockListRelationshipExpectation) Then(pp2 *connect.ServerStreamForClient[v1.ListRelationshipResponse], err error) *ProfileServiceClientMock {
+	e.results = &ProfileServiceClientMockListRelationshipResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times ProfileServiceHandler.ListRelationship should be invoked
-func (mmListRelationship *mProfileServiceHandlerMockListRelationship) Times(n uint64) *mProfileServiceHandlerMockListRelationship {
+// Times sets number of times ProfileServiceClient.ListRelationship should be invoked
+func (mmListRelationship *mProfileServiceClientMockListRelationship) Times(n uint64) *mProfileServiceClientMockListRelationship {
 	if n == 0 {
-		mmListRelationship.mock.t.Fatalf("Times of ProfileServiceHandlerMock.ListRelationship mock can not be zero")
+		mmListRelationship.mock.t.Fatalf("Times of ProfileServiceClientMock.ListRelationship mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmListRelationship.expectedInvocations, n)
 	mmListRelationship.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmListRelationship
 }
 
-func (mmListRelationship *mProfileServiceHandlerMockListRelationship) invocationsDone() bool {
+func (mmListRelationship *mProfileServiceClientMockListRelationship) invocationsDone() bool {
 	if len(mmListRelationship.expectations) == 0 && mmListRelationship.defaultExpectation == nil && mmListRelationship.mock.funcListRelationship == nil {
 		return true
 	}
@@ -4225,18 +4200,18 @@ func (mmListRelationship *mProfileServiceHandlerMockListRelationship) invocation
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// ListRelationship implements mm_profilev1connect.ProfileServiceHandler
-func (mmListRelationship *ProfileServiceHandlerMock) ListRelationship(ctx context.Context, pp1 *connect.Request[v1.ListRelationshipRequest], pp2 *connect.ServerStream[v1.ListRelationshipResponse]) (err error) {
+// ListRelationship implements mm_profilev1connect.ProfileServiceClient
+func (mmListRelationship *ProfileServiceClientMock) ListRelationship(ctx context.Context, pp1 *connect.Request[v1.ListRelationshipRequest]) (pp2 *connect.ServerStreamForClient[v1.ListRelationshipResponse], err error) {
 	mm_atomic.AddUint64(&mmListRelationship.beforeListRelationshipCounter, 1)
 	defer mm_atomic.AddUint64(&mmListRelationship.afterListRelationshipCounter, 1)
 
 	mmListRelationship.t.Helper()
 
 	if mmListRelationship.inspectFuncListRelationship != nil {
-		mmListRelationship.inspectFuncListRelationship(ctx, pp1, pp2)
+		mmListRelationship.inspectFuncListRelationship(ctx, pp1)
 	}
 
-	mm_params := ProfileServiceHandlerMockListRelationshipParams{ctx, pp1, pp2}
+	mm_params := ProfileServiceClientMockListRelationshipParams{ctx, pp1}
 
 	// Record call args
 	mmListRelationship.ListRelationshipMock.mutex.Lock()
@@ -4246,7 +4221,7 @@ func (mmListRelationship *ProfileServiceHandlerMock) ListRelationship(ctx contex
 	for _, e := range mmListRelationship.ListRelationshipMock.expectations {
 		if minimock.Equal(*e.params, mm_params) {
 			mm_atomic.AddUint64(&e.Counter, 1)
-			return e.results.err
+			return e.results.pp2, e.results.err
 		}
 	}
 
@@ -4255,59 +4230,54 @@ func (mmListRelationship *ProfileServiceHandlerMock) ListRelationship(ctx contex
 		mm_want := mmListRelationship.ListRelationshipMock.defaultExpectation.params
 		mm_want_ptrs := mmListRelationship.ListRelationshipMock.defaultExpectation.paramPtrs
 
-		mm_got := ProfileServiceHandlerMockListRelationshipParams{ctx, pp1, pp2}
+		mm_got := ProfileServiceClientMockListRelationshipParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmListRelationship.t.Errorf("ProfileServiceHandlerMock.ListRelationship got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmListRelationship.t.Errorf("ProfileServiceClientMock.ListRelationship got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmListRelationship.ListRelationshipMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmListRelationship.t.Errorf("ProfileServiceHandlerMock.ListRelationship got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmListRelationship.t.Errorf("ProfileServiceClientMock.ListRelationship got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmListRelationship.ListRelationshipMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
-			if mm_want_ptrs.pp2 != nil && !minimock.Equal(*mm_want_ptrs.pp2, mm_got.pp2) {
-				mmListRelationship.t.Errorf("ProfileServiceHandlerMock.ListRelationship got unexpected parameter pp2, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
-					mmListRelationship.ListRelationshipMock.defaultExpectation.expectationOrigins.originPp2, *mm_want_ptrs.pp2, mm_got.pp2, minimock.Diff(*mm_want_ptrs.pp2, mm_got.pp2))
-			}
-
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmListRelationship.t.Errorf("ProfileServiceHandlerMock.ListRelationship got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmListRelationship.t.Errorf("ProfileServiceClientMock.ListRelationship got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmListRelationship.ListRelationshipMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmListRelationship.ListRelationshipMock.defaultExpectation.results
 		if mm_results == nil {
-			mmListRelationship.t.Fatal("No results are set for the ProfileServiceHandlerMock.ListRelationship")
+			mmListRelationship.t.Fatal("No results are set for the ProfileServiceClientMock.ListRelationship")
 		}
-		return (*mm_results).err
+		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmListRelationship.funcListRelationship != nil {
-		return mmListRelationship.funcListRelationship(ctx, pp1, pp2)
+		return mmListRelationship.funcListRelationship(ctx, pp1)
 	}
-	mmListRelationship.t.Fatalf("Unexpected call to ProfileServiceHandlerMock.ListRelationship. %v %v %v", ctx, pp1, pp2)
+	mmListRelationship.t.Fatalf("Unexpected call to ProfileServiceClientMock.ListRelationship. %v %v", ctx, pp1)
 	return
 }
 
-// ListRelationshipAfterCounter returns a count of finished ProfileServiceHandlerMock.ListRelationship invocations
-func (mmListRelationship *ProfileServiceHandlerMock) ListRelationshipAfterCounter() uint64 {
+// ListRelationshipAfterCounter returns a count of finished ProfileServiceClientMock.ListRelationship invocations
+func (mmListRelationship *ProfileServiceClientMock) ListRelationshipAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmListRelationship.afterListRelationshipCounter)
 }
 
-// ListRelationshipBeforeCounter returns a count of ProfileServiceHandlerMock.ListRelationship invocations
-func (mmListRelationship *ProfileServiceHandlerMock) ListRelationshipBeforeCounter() uint64 {
+// ListRelationshipBeforeCounter returns a count of ProfileServiceClientMock.ListRelationship invocations
+func (mmListRelationship *ProfileServiceClientMock) ListRelationshipBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmListRelationship.beforeListRelationshipCounter)
 }
 
-// Calls returns a list of arguments used in each call to ProfileServiceHandlerMock.ListRelationship.
+// Calls returns a list of arguments used in each call to ProfileServiceClientMock.ListRelationship.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmListRelationship *mProfileServiceHandlerMockListRelationship) Calls() []*ProfileServiceHandlerMockListRelationshipParams {
+func (mmListRelationship *mProfileServiceClientMockListRelationship) Calls() []*ProfileServiceClientMockListRelationshipParams {
 	mmListRelationship.mutex.RLock()
 
-	argCopy := make([]*ProfileServiceHandlerMockListRelationshipParams, len(mmListRelationship.callArgs))
+	argCopy := make([]*ProfileServiceClientMockListRelationshipParams, len(mmListRelationship.callArgs))
 	copy(argCopy, mmListRelationship.callArgs)
 
 	mmListRelationship.mutex.RUnlock()
@@ -4317,7 +4287,7 @@ func (mmListRelationship *mProfileServiceHandlerMockListRelationship) Calls() []
 
 // MinimockListRelationshipDone returns true if the count of the ListRelationship invocations corresponds
 // the number of defined expectations
-func (m *ProfileServiceHandlerMock) MinimockListRelationshipDone() bool {
+func (m *ProfileServiceClientMock) MinimockListRelationshipDone() bool {
 	if m.ListRelationshipMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -4333,10 +4303,10 @@ func (m *ProfileServiceHandlerMock) MinimockListRelationshipDone() bool {
 }
 
 // MinimockListRelationshipInspect logs each unmet expectation
-func (m *ProfileServiceHandlerMock) MinimockListRelationshipInspect() {
+func (m *ProfileServiceClientMock) MinimockListRelationshipInspect() {
 	for _, e := range m.ListRelationshipMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.ListRelationship at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.ListRelationship at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -4344,66 +4314,66 @@ func (m *ProfileServiceHandlerMock) MinimockListRelationshipInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.ListRelationshipMock.defaultExpectation != nil && afterListRelationshipCounter < 1 {
 		if m.ListRelationshipMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.ListRelationship at\n%s", m.ListRelationshipMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.ListRelationship at\n%s", m.ListRelationshipMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.ListRelationship at\n%s with params: %#v", m.ListRelationshipMock.defaultExpectation.expectationOrigins.origin, *m.ListRelationshipMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.ListRelationship at\n%s with params: %#v", m.ListRelationshipMock.defaultExpectation.expectationOrigins.origin, *m.ListRelationshipMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcListRelationship != nil && afterListRelationshipCounter < 1 {
-		m.t.Errorf("Expected call to ProfileServiceHandlerMock.ListRelationship at\n%s", m.funcListRelationshipOrigin)
+		m.t.Errorf("Expected call to ProfileServiceClientMock.ListRelationship at\n%s", m.funcListRelationshipOrigin)
 	}
 
 	if !m.ListRelationshipMock.invocationsDone() && afterListRelationshipCounter > 0 {
-		m.t.Errorf("Expected %d calls to ProfileServiceHandlerMock.ListRelationship at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to ProfileServiceClientMock.ListRelationship at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.ListRelationshipMock.expectedInvocations), m.ListRelationshipMock.expectedInvocationsOrigin, afterListRelationshipCounter)
 	}
 }
 
-type mProfileServiceHandlerMockMerge struct {
+type mProfileServiceClientMockMerge struct {
 	optional           bool
-	mock               *ProfileServiceHandlerMock
-	defaultExpectation *ProfileServiceHandlerMockMergeExpectation
-	expectations       []*ProfileServiceHandlerMockMergeExpectation
+	mock               *ProfileServiceClientMock
+	defaultExpectation *ProfileServiceClientMockMergeExpectation
+	expectations       []*ProfileServiceClientMockMergeExpectation
 
-	callArgs []*ProfileServiceHandlerMockMergeParams
+	callArgs []*ProfileServiceClientMockMergeParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// ProfileServiceHandlerMockMergeExpectation specifies expectation struct of the ProfileServiceHandler.Merge
-type ProfileServiceHandlerMockMergeExpectation struct {
-	mock               *ProfileServiceHandlerMock
-	params             *ProfileServiceHandlerMockMergeParams
-	paramPtrs          *ProfileServiceHandlerMockMergeParamPtrs
-	expectationOrigins ProfileServiceHandlerMockMergeExpectationOrigins
-	results            *ProfileServiceHandlerMockMergeResults
+// ProfileServiceClientMockMergeExpectation specifies expectation struct of the ProfileServiceClient.Merge
+type ProfileServiceClientMockMergeExpectation struct {
+	mock               *ProfileServiceClientMock
+	params             *ProfileServiceClientMockMergeParams
+	paramPtrs          *ProfileServiceClientMockMergeParamPtrs
+	expectationOrigins ProfileServiceClientMockMergeExpectationOrigins
+	results            *ProfileServiceClientMockMergeResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// ProfileServiceHandlerMockMergeParams contains parameters of the ProfileServiceHandler.Merge
-type ProfileServiceHandlerMockMergeParams struct {
+// ProfileServiceClientMockMergeParams contains parameters of the ProfileServiceClient.Merge
+type ProfileServiceClientMockMergeParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.MergeRequest]
 }
 
-// ProfileServiceHandlerMockMergeParamPtrs contains pointers to parameters of the ProfileServiceHandler.Merge
-type ProfileServiceHandlerMockMergeParamPtrs struct {
+// ProfileServiceClientMockMergeParamPtrs contains pointers to parameters of the ProfileServiceClient.Merge
+type ProfileServiceClientMockMergeParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.MergeRequest]
 }
 
-// ProfileServiceHandlerMockMergeResults contains results of the ProfileServiceHandler.Merge
-type ProfileServiceHandlerMockMergeResults struct {
+// ProfileServiceClientMockMergeResults contains results of the ProfileServiceClient.Merge
+type ProfileServiceClientMockMergeResults struct {
 	pp2 *connect.Response[v1.MergeResponse]
 	err error
 }
 
-// ProfileServiceHandlerMockMergeOrigins contains origins of expectations of the ProfileServiceHandler.Merge
-type ProfileServiceHandlerMockMergeExpectationOrigins struct {
+// ProfileServiceClientMockMergeOrigins contains origins of expectations of the ProfileServiceClient.Merge
+type ProfileServiceClientMockMergeExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -4414,26 +4384,26 @@ type ProfileServiceHandlerMockMergeExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmMerge *mProfileServiceHandlerMockMerge) Optional() *mProfileServiceHandlerMockMerge {
+func (mmMerge *mProfileServiceClientMockMerge) Optional() *mProfileServiceClientMockMerge {
 	mmMerge.optional = true
 	return mmMerge
 }
 
-// Expect sets up expected params for ProfileServiceHandler.Merge
-func (mmMerge *mProfileServiceHandlerMockMerge) Expect(ctx context.Context, pp1 *connect.Request[v1.MergeRequest]) *mProfileServiceHandlerMockMerge {
+// Expect sets up expected params for ProfileServiceClient.Merge
+func (mmMerge *mProfileServiceClientMockMerge) Expect(ctx context.Context, pp1 *connect.Request[v1.MergeRequest]) *mProfileServiceClientMockMerge {
 	if mmMerge.mock.funcMerge != nil {
-		mmMerge.mock.t.Fatalf("ProfileServiceHandlerMock.Merge mock is already set by Set")
+		mmMerge.mock.t.Fatalf("ProfileServiceClientMock.Merge mock is already set by Set")
 	}
 
 	if mmMerge.defaultExpectation == nil {
-		mmMerge.defaultExpectation = &ProfileServiceHandlerMockMergeExpectation{}
+		mmMerge.defaultExpectation = &ProfileServiceClientMockMergeExpectation{}
 	}
 
 	if mmMerge.defaultExpectation.paramPtrs != nil {
-		mmMerge.mock.t.Fatalf("ProfileServiceHandlerMock.Merge mock is already set by ExpectParams functions")
+		mmMerge.mock.t.Fatalf("ProfileServiceClientMock.Merge mock is already set by ExpectParams functions")
 	}
 
-	mmMerge.defaultExpectation.params = &ProfileServiceHandlerMockMergeParams{ctx, pp1}
+	mmMerge.defaultExpectation.params = &ProfileServiceClientMockMergeParams{ctx, pp1}
 	mmMerge.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmMerge.expectations {
 		if minimock.Equal(e.params, mmMerge.defaultExpectation.params) {
@@ -4444,22 +4414,22 @@ func (mmMerge *mProfileServiceHandlerMockMerge) Expect(ctx context.Context, pp1 
 	return mmMerge
 }
 
-// ExpectCtxParam1 sets up expected param ctx for ProfileServiceHandler.Merge
-func (mmMerge *mProfileServiceHandlerMockMerge) ExpectCtxParam1(ctx context.Context) *mProfileServiceHandlerMockMerge {
+// ExpectCtxParam1 sets up expected param ctx for ProfileServiceClient.Merge
+func (mmMerge *mProfileServiceClientMockMerge) ExpectCtxParam1(ctx context.Context) *mProfileServiceClientMockMerge {
 	if mmMerge.mock.funcMerge != nil {
-		mmMerge.mock.t.Fatalf("ProfileServiceHandlerMock.Merge mock is already set by Set")
+		mmMerge.mock.t.Fatalf("ProfileServiceClientMock.Merge mock is already set by Set")
 	}
 
 	if mmMerge.defaultExpectation == nil {
-		mmMerge.defaultExpectation = &ProfileServiceHandlerMockMergeExpectation{}
+		mmMerge.defaultExpectation = &ProfileServiceClientMockMergeExpectation{}
 	}
 
 	if mmMerge.defaultExpectation.params != nil {
-		mmMerge.mock.t.Fatalf("ProfileServiceHandlerMock.Merge mock is already set by Expect")
+		mmMerge.mock.t.Fatalf("ProfileServiceClientMock.Merge mock is already set by Expect")
 	}
 
 	if mmMerge.defaultExpectation.paramPtrs == nil {
-		mmMerge.defaultExpectation.paramPtrs = &ProfileServiceHandlerMockMergeParamPtrs{}
+		mmMerge.defaultExpectation.paramPtrs = &ProfileServiceClientMockMergeParamPtrs{}
 	}
 	mmMerge.defaultExpectation.paramPtrs.ctx = &ctx
 	mmMerge.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -4467,22 +4437,22 @@ func (mmMerge *mProfileServiceHandlerMockMerge) ExpectCtxParam1(ctx context.Cont
 	return mmMerge
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for ProfileServiceHandler.Merge
-func (mmMerge *mProfileServiceHandlerMockMerge) ExpectPp1Param2(pp1 *connect.Request[v1.MergeRequest]) *mProfileServiceHandlerMockMerge {
+// ExpectPp1Param2 sets up expected param pp1 for ProfileServiceClient.Merge
+func (mmMerge *mProfileServiceClientMockMerge) ExpectPp1Param2(pp1 *connect.Request[v1.MergeRequest]) *mProfileServiceClientMockMerge {
 	if mmMerge.mock.funcMerge != nil {
-		mmMerge.mock.t.Fatalf("ProfileServiceHandlerMock.Merge mock is already set by Set")
+		mmMerge.mock.t.Fatalf("ProfileServiceClientMock.Merge mock is already set by Set")
 	}
 
 	if mmMerge.defaultExpectation == nil {
-		mmMerge.defaultExpectation = &ProfileServiceHandlerMockMergeExpectation{}
+		mmMerge.defaultExpectation = &ProfileServiceClientMockMergeExpectation{}
 	}
 
 	if mmMerge.defaultExpectation.params != nil {
-		mmMerge.mock.t.Fatalf("ProfileServiceHandlerMock.Merge mock is already set by Expect")
+		mmMerge.mock.t.Fatalf("ProfileServiceClientMock.Merge mock is already set by Expect")
 	}
 
 	if mmMerge.defaultExpectation.paramPtrs == nil {
-		mmMerge.defaultExpectation.paramPtrs = &ProfileServiceHandlerMockMergeParamPtrs{}
+		mmMerge.defaultExpectation.paramPtrs = &ProfileServiceClientMockMergeParamPtrs{}
 	}
 	mmMerge.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmMerge.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -4490,10 +4460,10 @@ func (mmMerge *mProfileServiceHandlerMockMerge) ExpectPp1Param2(pp1 *connect.Req
 	return mmMerge
 }
 
-// Inspect accepts an inspector function that has same arguments as the ProfileServiceHandler.Merge
-func (mmMerge *mProfileServiceHandlerMockMerge) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.MergeRequest])) *mProfileServiceHandlerMockMerge {
+// Inspect accepts an inspector function that has same arguments as the ProfileServiceClient.Merge
+func (mmMerge *mProfileServiceClientMockMerge) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.MergeRequest])) *mProfileServiceClientMockMerge {
 	if mmMerge.mock.inspectFuncMerge != nil {
-		mmMerge.mock.t.Fatalf("Inspect function is already set for ProfileServiceHandlerMock.Merge")
+		mmMerge.mock.t.Fatalf("Inspect function is already set for ProfileServiceClientMock.Merge")
 	}
 
 	mmMerge.mock.inspectFuncMerge = f
@@ -4501,28 +4471,28 @@ func (mmMerge *mProfileServiceHandlerMockMerge) Inspect(f func(ctx context.Conte
 	return mmMerge
 }
 
-// Return sets up results that will be returned by ProfileServiceHandler.Merge
-func (mmMerge *mProfileServiceHandlerMockMerge) Return(pp2 *connect.Response[v1.MergeResponse], err error) *ProfileServiceHandlerMock {
+// Return sets up results that will be returned by ProfileServiceClient.Merge
+func (mmMerge *mProfileServiceClientMockMerge) Return(pp2 *connect.Response[v1.MergeResponse], err error) *ProfileServiceClientMock {
 	if mmMerge.mock.funcMerge != nil {
-		mmMerge.mock.t.Fatalf("ProfileServiceHandlerMock.Merge mock is already set by Set")
+		mmMerge.mock.t.Fatalf("ProfileServiceClientMock.Merge mock is already set by Set")
 	}
 
 	if mmMerge.defaultExpectation == nil {
-		mmMerge.defaultExpectation = &ProfileServiceHandlerMockMergeExpectation{mock: mmMerge.mock}
+		mmMerge.defaultExpectation = &ProfileServiceClientMockMergeExpectation{mock: mmMerge.mock}
 	}
-	mmMerge.defaultExpectation.results = &ProfileServiceHandlerMockMergeResults{pp2, err}
+	mmMerge.defaultExpectation.results = &ProfileServiceClientMockMergeResults{pp2, err}
 	mmMerge.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmMerge.mock
 }
 
-// Set uses given function f to mock the ProfileServiceHandler.Merge method
-func (mmMerge *mProfileServiceHandlerMockMerge) Set(f func(ctx context.Context, pp1 *connect.Request[v1.MergeRequest]) (pp2 *connect.Response[v1.MergeResponse], err error)) *ProfileServiceHandlerMock {
+// Set uses given function f to mock the ProfileServiceClient.Merge method
+func (mmMerge *mProfileServiceClientMockMerge) Set(f func(ctx context.Context, pp1 *connect.Request[v1.MergeRequest]) (pp2 *connect.Response[v1.MergeResponse], err error)) *ProfileServiceClientMock {
 	if mmMerge.defaultExpectation != nil {
-		mmMerge.mock.t.Fatalf("Default expectation is already set for the ProfileServiceHandler.Merge method")
+		mmMerge.mock.t.Fatalf("Default expectation is already set for the ProfileServiceClient.Merge method")
 	}
 
 	if len(mmMerge.expectations) > 0 {
-		mmMerge.mock.t.Fatalf("Some expectations are already set for the ProfileServiceHandler.Merge method")
+		mmMerge.mock.t.Fatalf("Some expectations are already set for the ProfileServiceClient.Merge method")
 	}
 
 	mmMerge.mock.funcMerge = f
@@ -4530,39 +4500,39 @@ func (mmMerge *mProfileServiceHandlerMockMerge) Set(f func(ctx context.Context, 
 	return mmMerge.mock
 }
 
-// When sets expectation for the ProfileServiceHandler.Merge which will trigger the result defined by the following
+// When sets expectation for the ProfileServiceClient.Merge which will trigger the result defined by the following
 // Then helper
-func (mmMerge *mProfileServiceHandlerMockMerge) When(ctx context.Context, pp1 *connect.Request[v1.MergeRequest]) *ProfileServiceHandlerMockMergeExpectation {
+func (mmMerge *mProfileServiceClientMockMerge) When(ctx context.Context, pp1 *connect.Request[v1.MergeRequest]) *ProfileServiceClientMockMergeExpectation {
 	if mmMerge.mock.funcMerge != nil {
-		mmMerge.mock.t.Fatalf("ProfileServiceHandlerMock.Merge mock is already set by Set")
+		mmMerge.mock.t.Fatalf("ProfileServiceClientMock.Merge mock is already set by Set")
 	}
 
-	expectation := &ProfileServiceHandlerMockMergeExpectation{
+	expectation := &ProfileServiceClientMockMergeExpectation{
 		mock:               mmMerge.mock,
-		params:             &ProfileServiceHandlerMockMergeParams{ctx, pp1},
-		expectationOrigins: ProfileServiceHandlerMockMergeExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &ProfileServiceClientMockMergeParams{ctx, pp1},
+		expectationOrigins: ProfileServiceClientMockMergeExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmMerge.expectations = append(mmMerge.expectations, expectation)
 	return expectation
 }
 
-// Then sets up ProfileServiceHandler.Merge return parameters for the expectation previously defined by the When method
-func (e *ProfileServiceHandlerMockMergeExpectation) Then(pp2 *connect.Response[v1.MergeResponse], err error) *ProfileServiceHandlerMock {
-	e.results = &ProfileServiceHandlerMockMergeResults{pp2, err}
+// Then sets up ProfileServiceClient.Merge return parameters for the expectation previously defined by the When method
+func (e *ProfileServiceClientMockMergeExpectation) Then(pp2 *connect.Response[v1.MergeResponse], err error) *ProfileServiceClientMock {
+	e.results = &ProfileServiceClientMockMergeResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times ProfileServiceHandler.Merge should be invoked
-func (mmMerge *mProfileServiceHandlerMockMerge) Times(n uint64) *mProfileServiceHandlerMockMerge {
+// Times sets number of times ProfileServiceClient.Merge should be invoked
+func (mmMerge *mProfileServiceClientMockMerge) Times(n uint64) *mProfileServiceClientMockMerge {
 	if n == 0 {
-		mmMerge.mock.t.Fatalf("Times of ProfileServiceHandlerMock.Merge mock can not be zero")
+		mmMerge.mock.t.Fatalf("Times of ProfileServiceClientMock.Merge mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmMerge.expectedInvocations, n)
 	mmMerge.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmMerge
 }
 
-func (mmMerge *mProfileServiceHandlerMockMerge) invocationsDone() bool {
+func (mmMerge *mProfileServiceClientMockMerge) invocationsDone() bool {
 	if len(mmMerge.expectations) == 0 && mmMerge.defaultExpectation == nil && mmMerge.mock.funcMerge == nil {
 		return true
 	}
@@ -4573,8 +4543,8 @@ func (mmMerge *mProfileServiceHandlerMockMerge) invocationsDone() bool {
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// Merge implements mm_profilev1connect.ProfileServiceHandler
-func (mmMerge *ProfileServiceHandlerMock) Merge(ctx context.Context, pp1 *connect.Request[v1.MergeRequest]) (pp2 *connect.Response[v1.MergeResponse], err error) {
+// Merge implements mm_profilev1connect.ProfileServiceClient
+func (mmMerge *ProfileServiceClientMock) Merge(ctx context.Context, pp1 *connect.Request[v1.MergeRequest]) (pp2 *connect.Response[v1.MergeResponse], err error) {
 	mm_atomic.AddUint64(&mmMerge.beforeMergeCounter, 1)
 	defer mm_atomic.AddUint64(&mmMerge.afterMergeCounter, 1)
 
@@ -4584,7 +4554,7 @@ func (mmMerge *ProfileServiceHandlerMock) Merge(ctx context.Context, pp1 *connec
 		mmMerge.inspectFuncMerge(ctx, pp1)
 	}
 
-	mm_params := ProfileServiceHandlerMockMergeParams{ctx, pp1}
+	mm_params := ProfileServiceClientMockMergeParams{ctx, pp1}
 
 	// Record call args
 	mmMerge.MergeMock.mutex.Lock()
@@ -4603,54 +4573,54 @@ func (mmMerge *ProfileServiceHandlerMock) Merge(ctx context.Context, pp1 *connec
 		mm_want := mmMerge.MergeMock.defaultExpectation.params
 		mm_want_ptrs := mmMerge.MergeMock.defaultExpectation.paramPtrs
 
-		mm_got := ProfileServiceHandlerMockMergeParams{ctx, pp1}
+		mm_got := ProfileServiceClientMockMergeParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmMerge.t.Errorf("ProfileServiceHandlerMock.Merge got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmMerge.t.Errorf("ProfileServiceClientMock.Merge got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmMerge.MergeMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmMerge.t.Errorf("ProfileServiceHandlerMock.Merge got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmMerge.t.Errorf("ProfileServiceClientMock.Merge got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmMerge.MergeMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmMerge.t.Errorf("ProfileServiceHandlerMock.Merge got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmMerge.t.Errorf("ProfileServiceClientMock.Merge got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmMerge.MergeMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmMerge.MergeMock.defaultExpectation.results
 		if mm_results == nil {
-			mmMerge.t.Fatal("No results are set for the ProfileServiceHandlerMock.Merge")
+			mmMerge.t.Fatal("No results are set for the ProfileServiceClientMock.Merge")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmMerge.funcMerge != nil {
 		return mmMerge.funcMerge(ctx, pp1)
 	}
-	mmMerge.t.Fatalf("Unexpected call to ProfileServiceHandlerMock.Merge. %v %v", ctx, pp1)
+	mmMerge.t.Fatalf("Unexpected call to ProfileServiceClientMock.Merge. %v %v", ctx, pp1)
 	return
 }
 
-// MergeAfterCounter returns a count of finished ProfileServiceHandlerMock.Merge invocations
-func (mmMerge *ProfileServiceHandlerMock) MergeAfterCounter() uint64 {
+// MergeAfterCounter returns a count of finished ProfileServiceClientMock.Merge invocations
+func (mmMerge *ProfileServiceClientMock) MergeAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmMerge.afterMergeCounter)
 }
 
-// MergeBeforeCounter returns a count of ProfileServiceHandlerMock.Merge invocations
-func (mmMerge *ProfileServiceHandlerMock) MergeBeforeCounter() uint64 {
+// MergeBeforeCounter returns a count of ProfileServiceClientMock.Merge invocations
+func (mmMerge *ProfileServiceClientMock) MergeBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmMerge.beforeMergeCounter)
 }
 
-// Calls returns a list of arguments used in each call to ProfileServiceHandlerMock.Merge.
+// Calls returns a list of arguments used in each call to ProfileServiceClientMock.Merge.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmMerge *mProfileServiceHandlerMockMerge) Calls() []*ProfileServiceHandlerMockMergeParams {
+func (mmMerge *mProfileServiceClientMockMerge) Calls() []*ProfileServiceClientMockMergeParams {
 	mmMerge.mutex.RLock()
 
-	argCopy := make([]*ProfileServiceHandlerMockMergeParams, len(mmMerge.callArgs))
+	argCopy := make([]*ProfileServiceClientMockMergeParams, len(mmMerge.callArgs))
 	copy(argCopy, mmMerge.callArgs)
 
 	mmMerge.mutex.RUnlock()
@@ -4660,7 +4630,7 @@ func (mmMerge *mProfileServiceHandlerMockMerge) Calls() []*ProfileServiceHandler
 
 // MinimockMergeDone returns true if the count of the Merge invocations corresponds
 // the number of defined expectations
-func (m *ProfileServiceHandlerMock) MinimockMergeDone() bool {
+func (m *ProfileServiceClientMock) MinimockMergeDone() bool {
 	if m.MergeMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -4676,10 +4646,10 @@ func (m *ProfileServiceHandlerMock) MinimockMergeDone() bool {
 }
 
 // MinimockMergeInspect logs each unmet expectation
-func (m *ProfileServiceHandlerMock) MinimockMergeInspect() {
+func (m *ProfileServiceClientMock) MinimockMergeInspect() {
 	for _, e := range m.MergeMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.Merge at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.Merge at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -4687,66 +4657,66 @@ func (m *ProfileServiceHandlerMock) MinimockMergeInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.MergeMock.defaultExpectation != nil && afterMergeCounter < 1 {
 		if m.MergeMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.Merge at\n%s", m.MergeMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.Merge at\n%s", m.MergeMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.Merge at\n%s with params: %#v", m.MergeMock.defaultExpectation.expectationOrigins.origin, *m.MergeMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.Merge at\n%s with params: %#v", m.MergeMock.defaultExpectation.expectationOrigins.origin, *m.MergeMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcMerge != nil && afterMergeCounter < 1 {
-		m.t.Errorf("Expected call to ProfileServiceHandlerMock.Merge at\n%s", m.funcMergeOrigin)
+		m.t.Errorf("Expected call to ProfileServiceClientMock.Merge at\n%s", m.funcMergeOrigin)
 	}
 
 	if !m.MergeMock.invocationsDone() && afterMergeCounter > 0 {
-		m.t.Errorf("Expected %d calls to ProfileServiceHandlerMock.Merge at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to ProfileServiceClientMock.Merge at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.MergeMock.expectedInvocations), m.MergeMock.expectedInvocationsOrigin, afterMergeCounter)
 	}
 }
 
-type mProfileServiceHandlerMockRemoveContact struct {
+type mProfileServiceClientMockRemoveContact struct {
 	optional           bool
-	mock               *ProfileServiceHandlerMock
-	defaultExpectation *ProfileServiceHandlerMockRemoveContactExpectation
-	expectations       []*ProfileServiceHandlerMockRemoveContactExpectation
+	mock               *ProfileServiceClientMock
+	defaultExpectation *ProfileServiceClientMockRemoveContactExpectation
+	expectations       []*ProfileServiceClientMockRemoveContactExpectation
 
-	callArgs []*ProfileServiceHandlerMockRemoveContactParams
+	callArgs []*ProfileServiceClientMockRemoveContactParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// ProfileServiceHandlerMockRemoveContactExpectation specifies expectation struct of the ProfileServiceHandler.RemoveContact
-type ProfileServiceHandlerMockRemoveContactExpectation struct {
-	mock               *ProfileServiceHandlerMock
-	params             *ProfileServiceHandlerMockRemoveContactParams
-	paramPtrs          *ProfileServiceHandlerMockRemoveContactParamPtrs
-	expectationOrigins ProfileServiceHandlerMockRemoveContactExpectationOrigins
-	results            *ProfileServiceHandlerMockRemoveContactResults
+// ProfileServiceClientMockRemoveContactExpectation specifies expectation struct of the ProfileServiceClient.RemoveContact
+type ProfileServiceClientMockRemoveContactExpectation struct {
+	mock               *ProfileServiceClientMock
+	params             *ProfileServiceClientMockRemoveContactParams
+	paramPtrs          *ProfileServiceClientMockRemoveContactParamPtrs
+	expectationOrigins ProfileServiceClientMockRemoveContactExpectationOrigins
+	results            *ProfileServiceClientMockRemoveContactResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// ProfileServiceHandlerMockRemoveContactParams contains parameters of the ProfileServiceHandler.RemoveContact
-type ProfileServiceHandlerMockRemoveContactParams struct {
+// ProfileServiceClientMockRemoveContactParams contains parameters of the ProfileServiceClient.RemoveContact
+type ProfileServiceClientMockRemoveContactParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.RemoveContactRequest]
 }
 
-// ProfileServiceHandlerMockRemoveContactParamPtrs contains pointers to parameters of the ProfileServiceHandler.RemoveContact
-type ProfileServiceHandlerMockRemoveContactParamPtrs struct {
+// ProfileServiceClientMockRemoveContactParamPtrs contains pointers to parameters of the ProfileServiceClient.RemoveContact
+type ProfileServiceClientMockRemoveContactParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.RemoveContactRequest]
 }
 
-// ProfileServiceHandlerMockRemoveContactResults contains results of the ProfileServiceHandler.RemoveContact
-type ProfileServiceHandlerMockRemoveContactResults struct {
+// ProfileServiceClientMockRemoveContactResults contains results of the ProfileServiceClient.RemoveContact
+type ProfileServiceClientMockRemoveContactResults struct {
 	pp2 *connect.Response[v1.RemoveContactResponse]
 	err error
 }
 
-// ProfileServiceHandlerMockRemoveContactOrigins contains origins of expectations of the ProfileServiceHandler.RemoveContact
-type ProfileServiceHandlerMockRemoveContactExpectationOrigins struct {
+// ProfileServiceClientMockRemoveContactOrigins contains origins of expectations of the ProfileServiceClient.RemoveContact
+type ProfileServiceClientMockRemoveContactExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -4757,26 +4727,26 @@ type ProfileServiceHandlerMockRemoveContactExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmRemoveContact *mProfileServiceHandlerMockRemoveContact) Optional() *mProfileServiceHandlerMockRemoveContact {
+func (mmRemoveContact *mProfileServiceClientMockRemoveContact) Optional() *mProfileServiceClientMockRemoveContact {
 	mmRemoveContact.optional = true
 	return mmRemoveContact
 }
 
-// Expect sets up expected params for ProfileServiceHandler.RemoveContact
-func (mmRemoveContact *mProfileServiceHandlerMockRemoveContact) Expect(ctx context.Context, pp1 *connect.Request[v1.RemoveContactRequest]) *mProfileServiceHandlerMockRemoveContact {
+// Expect sets up expected params for ProfileServiceClient.RemoveContact
+func (mmRemoveContact *mProfileServiceClientMockRemoveContact) Expect(ctx context.Context, pp1 *connect.Request[v1.RemoveContactRequest]) *mProfileServiceClientMockRemoveContact {
 	if mmRemoveContact.mock.funcRemoveContact != nil {
-		mmRemoveContact.mock.t.Fatalf("ProfileServiceHandlerMock.RemoveContact mock is already set by Set")
+		mmRemoveContact.mock.t.Fatalf("ProfileServiceClientMock.RemoveContact mock is already set by Set")
 	}
 
 	if mmRemoveContact.defaultExpectation == nil {
-		mmRemoveContact.defaultExpectation = &ProfileServiceHandlerMockRemoveContactExpectation{}
+		mmRemoveContact.defaultExpectation = &ProfileServiceClientMockRemoveContactExpectation{}
 	}
 
 	if mmRemoveContact.defaultExpectation.paramPtrs != nil {
-		mmRemoveContact.mock.t.Fatalf("ProfileServiceHandlerMock.RemoveContact mock is already set by ExpectParams functions")
+		mmRemoveContact.mock.t.Fatalf("ProfileServiceClientMock.RemoveContact mock is already set by ExpectParams functions")
 	}
 
-	mmRemoveContact.defaultExpectation.params = &ProfileServiceHandlerMockRemoveContactParams{ctx, pp1}
+	mmRemoveContact.defaultExpectation.params = &ProfileServiceClientMockRemoveContactParams{ctx, pp1}
 	mmRemoveContact.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmRemoveContact.expectations {
 		if minimock.Equal(e.params, mmRemoveContact.defaultExpectation.params) {
@@ -4787,22 +4757,22 @@ func (mmRemoveContact *mProfileServiceHandlerMockRemoveContact) Expect(ctx conte
 	return mmRemoveContact
 }
 
-// ExpectCtxParam1 sets up expected param ctx for ProfileServiceHandler.RemoveContact
-func (mmRemoveContact *mProfileServiceHandlerMockRemoveContact) ExpectCtxParam1(ctx context.Context) *mProfileServiceHandlerMockRemoveContact {
+// ExpectCtxParam1 sets up expected param ctx for ProfileServiceClient.RemoveContact
+func (mmRemoveContact *mProfileServiceClientMockRemoveContact) ExpectCtxParam1(ctx context.Context) *mProfileServiceClientMockRemoveContact {
 	if mmRemoveContact.mock.funcRemoveContact != nil {
-		mmRemoveContact.mock.t.Fatalf("ProfileServiceHandlerMock.RemoveContact mock is already set by Set")
+		mmRemoveContact.mock.t.Fatalf("ProfileServiceClientMock.RemoveContact mock is already set by Set")
 	}
 
 	if mmRemoveContact.defaultExpectation == nil {
-		mmRemoveContact.defaultExpectation = &ProfileServiceHandlerMockRemoveContactExpectation{}
+		mmRemoveContact.defaultExpectation = &ProfileServiceClientMockRemoveContactExpectation{}
 	}
 
 	if mmRemoveContact.defaultExpectation.params != nil {
-		mmRemoveContact.mock.t.Fatalf("ProfileServiceHandlerMock.RemoveContact mock is already set by Expect")
+		mmRemoveContact.mock.t.Fatalf("ProfileServiceClientMock.RemoveContact mock is already set by Expect")
 	}
 
 	if mmRemoveContact.defaultExpectation.paramPtrs == nil {
-		mmRemoveContact.defaultExpectation.paramPtrs = &ProfileServiceHandlerMockRemoveContactParamPtrs{}
+		mmRemoveContact.defaultExpectation.paramPtrs = &ProfileServiceClientMockRemoveContactParamPtrs{}
 	}
 	mmRemoveContact.defaultExpectation.paramPtrs.ctx = &ctx
 	mmRemoveContact.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -4810,22 +4780,22 @@ func (mmRemoveContact *mProfileServiceHandlerMockRemoveContact) ExpectCtxParam1(
 	return mmRemoveContact
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for ProfileServiceHandler.RemoveContact
-func (mmRemoveContact *mProfileServiceHandlerMockRemoveContact) ExpectPp1Param2(pp1 *connect.Request[v1.RemoveContactRequest]) *mProfileServiceHandlerMockRemoveContact {
+// ExpectPp1Param2 sets up expected param pp1 for ProfileServiceClient.RemoveContact
+func (mmRemoveContact *mProfileServiceClientMockRemoveContact) ExpectPp1Param2(pp1 *connect.Request[v1.RemoveContactRequest]) *mProfileServiceClientMockRemoveContact {
 	if mmRemoveContact.mock.funcRemoveContact != nil {
-		mmRemoveContact.mock.t.Fatalf("ProfileServiceHandlerMock.RemoveContact mock is already set by Set")
+		mmRemoveContact.mock.t.Fatalf("ProfileServiceClientMock.RemoveContact mock is already set by Set")
 	}
 
 	if mmRemoveContact.defaultExpectation == nil {
-		mmRemoveContact.defaultExpectation = &ProfileServiceHandlerMockRemoveContactExpectation{}
+		mmRemoveContact.defaultExpectation = &ProfileServiceClientMockRemoveContactExpectation{}
 	}
 
 	if mmRemoveContact.defaultExpectation.params != nil {
-		mmRemoveContact.mock.t.Fatalf("ProfileServiceHandlerMock.RemoveContact mock is already set by Expect")
+		mmRemoveContact.mock.t.Fatalf("ProfileServiceClientMock.RemoveContact mock is already set by Expect")
 	}
 
 	if mmRemoveContact.defaultExpectation.paramPtrs == nil {
-		mmRemoveContact.defaultExpectation.paramPtrs = &ProfileServiceHandlerMockRemoveContactParamPtrs{}
+		mmRemoveContact.defaultExpectation.paramPtrs = &ProfileServiceClientMockRemoveContactParamPtrs{}
 	}
 	mmRemoveContact.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmRemoveContact.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -4833,10 +4803,10 @@ func (mmRemoveContact *mProfileServiceHandlerMockRemoveContact) ExpectPp1Param2(
 	return mmRemoveContact
 }
 
-// Inspect accepts an inspector function that has same arguments as the ProfileServiceHandler.RemoveContact
-func (mmRemoveContact *mProfileServiceHandlerMockRemoveContact) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.RemoveContactRequest])) *mProfileServiceHandlerMockRemoveContact {
+// Inspect accepts an inspector function that has same arguments as the ProfileServiceClient.RemoveContact
+func (mmRemoveContact *mProfileServiceClientMockRemoveContact) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.RemoveContactRequest])) *mProfileServiceClientMockRemoveContact {
 	if mmRemoveContact.mock.inspectFuncRemoveContact != nil {
-		mmRemoveContact.mock.t.Fatalf("Inspect function is already set for ProfileServiceHandlerMock.RemoveContact")
+		mmRemoveContact.mock.t.Fatalf("Inspect function is already set for ProfileServiceClientMock.RemoveContact")
 	}
 
 	mmRemoveContact.mock.inspectFuncRemoveContact = f
@@ -4844,28 +4814,28 @@ func (mmRemoveContact *mProfileServiceHandlerMockRemoveContact) Inspect(f func(c
 	return mmRemoveContact
 }
 
-// Return sets up results that will be returned by ProfileServiceHandler.RemoveContact
-func (mmRemoveContact *mProfileServiceHandlerMockRemoveContact) Return(pp2 *connect.Response[v1.RemoveContactResponse], err error) *ProfileServiceHandlerMock {
+// Return sets up results that will be returned by ProfileServiceClient.RemoveContact
+func (mmRemoveContact *mProfileServiceClientMockRemoveContact) Return(pp2 *connect.Response[v1.RemoveContactResponse], err error) *ProfileServiceClientMock {
 	if mmRemoveContact.mock.funcRemoveContact != nil {
-		mmRemoveContact.mock.t.Fatalf("ProfileServiceHandlerMock.RemoveContact mock is already set by Set")
+		mmRemoveContact.mock.t.Fatalf("ProfileServiceClientMock.RemoveContact mock is already set by Set")
 	}
 
 	if mmRemoveContact.defaultExpectation == nil {
-		mmRemoveContact.defaultExpectation = &ProfileServiceHandlerMockRemoveContactExpectation{mock: mmRemoveContact.mock}
+		mmRemoveContact.defaultExpectation = &ProfileServiceClientMockRemoveContactExpectation{mock: mmRemoveContact.mock}
 	}
-	mmRemoveContact.defaultExpectation.results = &ProfileServiceHandlerMockRemoveContactResults{pp2, err}
+	mmRemoveContact.defaultExpectation.results = &ProfileServiceClientMockRemoveContactResults{pp2, err}
 	mmRemoveContact.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmRemoveContact.mock
 }
 
-// Set uses given function f to mock the ProfileServiceHandler.RemoveContact method
-func (mmRemoveContact *mProfileServiceHandlerMockRemoveContact) Set(f func(ctx context.Context, pp1 *connect.Request[v1.RemoveContactRequest]) (pp2 *connect.Response[v1.RemoveContactResponse], err error)) *ProfileServiceHandlerMock {
+// Set uses given function f to mock the ProfileServiceClient.RemoveContact method
+func (mmRemoveContact *mProfileServiceClientMockRemoveContact) Set(f func(ctx context.Context, pp1 *connect.Request[v1.RemoveContactRequest]) (pp2 *connect.Response[v1.RemoveContactResponse], err error)) *ProfileServiceClientMock {
 	if mmRemoveContact.defaultExpectation != nil {
-		mmRemoveContact.mock.t.Fatalf("Default expectation is already set for the ProfileServiceHandler.RemoveContact method")
+		mmRemoveContact.mock.t.Fatalf("Default expectation is already set for the ProfileServiceClient.RemoveContact method")
 	}
 
 	if len(mmRemoveContact.expectations) > 0 {
-		mmRemoveContact.mock.t.Fatalf("Some expectations are already set for the ProfileServiceHandler.RemoveContact method")
+		mmRemoveContact.mock.t.Fatalf("Some expectations are already set for the ProfileServiceClient.RemoveContact method")
 	}
 
 	mmRemoveContact.mock.funcRemoveContact = f
@@ -4873,39 +4843,39 @@ func (mmRemoveContact *mProfileServiceHandlerMockRemoveContact) Set(f func(ctx c
 	return mmRemoveContact.mock
 }
 
-// When sets expectation for the ProfileServiceHandler.RemoveContact which will trigger the result defined by the following
+// When sets expectation for the ProfileServiceClient.RemoveContact which will trigger the result defined by the following
 // Then helper
-func (mmRemoveContact *mProfileServiceHandlerMockRemoveContact) When(ctx context.Context, pp1 *connect.Request[v1.RemoveContactRequest]) *ProfileServiceHandlerMockRemoveContactExpectation {
+func (mmRemoveContact *mProfileServiceClientMockRemoveContact) When(ctx context.Context, pp1 *connect.Request[v1.RemoveContactRequest]) *ProfileServiceClientMockRemoveContactExpectation {
 	if mmRemoveContact.mock.funcRemoveContact != nil {
-		mmRemoveContact.mock.t.Fatalf("ProfileServiceHandlerMock.RemoveContact mock is already set by Set")
+		mmRemoveContact.mock.t.Fatalf("ProfileServiceClientMock.RemoveContact mock is already set by Set")
 	}
 
-	expectation := &ProfileServiceHandlerMockRemoveContactExpectation{
+	expectation := &ProfileServiceClientMockRemoveContactExpectation{
 		mock:               mmRemoveContact.mock,
-		params:             &ProfileServiceHandlerMockRemoveContactParams{ctx, pp1},
-		expectationOrigins: ProfileServiceHandlerMockRemoveContactExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &ProfileServiceClientMockRemoveContactParams{ctx, pp1},
+		expectationOrigins: ProfileServiceClientMockRemoveContactExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmRemoveContact.expectations = append(mmRemoveContact.expectations, expectation)
 	return expectation
 }
 
-// Then sets up ProfileServiceHandler.RemoveContact return parameters for the expectation previously defined by the When method
-func (e *ProfileServiceHandlerMockRemoveContactExpectation) Then(pp2 *connect.Response[v1.RemoveContactResponse], err error) *ProfileServiceHandlerMock {
-	e.results = &ProfileServiceHandlerMockRemoveContactResults{pp2, err}
+// Then sets up ProfileServiceClient.RemoveContact return parameters for the expectation previously defined by the When method
+func (e *ProfileServiceClientMockRemoveContactExpectation) Then(pp2 *connect.Response[v1.RemoveContactResponse], err error) *ProfileServiceClientMock {
+	e.results = &ProfileServiceClientMockRemoveContactResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times ProfileServiceHandler.RemoveContact should be invoked
-func (mmRemoveContact *mProfileServiceHandlerMockRemoveContact) Times(n uint64) *mProfileServiceHandlerMockRemoveContact {
+// Times sets number of times ProfileServiceClient.RemoveContact should be invoked
+func (mmRemoveContact *mProfileServiceClientMockRemoveContact) Times(n uint64) *mProfileServiceClientMockRemoveContact {
 	if n == 0 {
-		mmRemoveContact.mock.t.Fatalf("Times of ProfileServiceHandlerMock.RemoveContact mock can not be zero")
+		mmRemoveContact.mock.t.Fatalf("Times of ProfileServiceClientMock.RemoveContact mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmRemoveContact.expectedInvocations, n)
 	mmRemoveContact.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmRemoveContact
 }
 
-func (mmRemoveContact *mProfileServiceHandlerMockRemoveContact) invocationsDone() bool {
+func (mmRemoveContact *mProfileServiceClientMockRemoveContact) invocationsDone() bool {
 	if len(mmRemoveContact.expectations) == 0 && mmRemoveContact.defaultExpectation == nil && mmRemoveContact.mock.funcRemoveContact == nil {
 		return true
 	}
@@ -4916,8 +4886,8 @@ func (mmRemoveContact *mProfileServiceHandlerMockRemoveContact) invocationsDone(
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// RemoveContact implements mm_profilev1connect.ProfileServiceHandler
-func (mmRemoveContact *ProfileServiceHandlerMock) RemoveContact(ctx context.Context, pp1 *connect.Request[v1.RemoveContactRequest]) (pp2 *connect.Response[v1.RemoveContactResponse], err error) {
+// RemoveContact implements mm_profilev1connect.ProfileServiceClient
+func (mmRemoveContact *ProfileServiceClientMock) RemoveContact(ctx context.Context, pp1 *connect.Request[v1.RemoveContactRequest]) (pp2 *connect.Response[v1.RemoveContactResponse], err error) {
 	mm_atomic.AddUint64(&mmRemoveContact.beforeRemoveContactCounter, 1)
 	defer mm_atomic.AddUint64(&mmRemoveContact.afterRemoveContactCounter, 1)
 
@@ -4927,7 +4897,7 @@ func (mmRemoveContact *ProfileServiceHandlerMock) RemoveContact(ctx context.Cont
 		mmRemoveContact.inspectFuncRemoveContact(ctx, pp1)
 	}
 
-	mm_params := ProfileServiceHandlerMockRemoveContactParams{ctx, pp1}
+	mm_params := ProfileServiceClientMockRemoveContactParams{ctx, pp1}
 
 	// Record call args
 	mmRemoveContact.RemoveContactMock.mutex.Lock()
@@ -4946,54 +4916,54 @@ func (mmRemoveContact *ProfileServiceHandlerMock) RemoveContact(ctx context.Cont
 		mm_want := mmRemoveContact.RemoveContactMock.defaultExpectation.params
 		mm_want_ptrs := mmRemoveContact.RemoveContactMock.defaultExpectation.paramPtrs
 
-		mm_got := ProfileServiceHandlerMockRemoveContactParams{ctx, pp1}
+		mm_got := ProfileServiceClientMockRemoveContactParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmRemoveContact.t.Errorf("ProfileServiceHandlerMock.RemoveContact got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmRemoveContact.t.Errorf("ProfileServiceClientMock.RemoveContact got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmRemoveContact.RemoveContactMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmRemoveContact.t.Errorf("ProfileServiceHandlerMock.RemoveContact got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmRemoveContact.t.Errorf("ProfileServiceClientMock.RemoveContact got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmRemoveContact.RemoveContactMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmRemoveContact.t.Errorf("ProfileServiceHandlerMock.RemoveContact got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmRemoveContact.t.Errorf("ProfileServiceClientMock.RemoveContact got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmRemoveContact.RemoveContactMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmRemoveContact.RemoveContactMock.defaultExpectation.results
 		if mm_results == nil {
-			mmRemoveContact.t.Fatal("No results are set for the ProfileServiceHandlerMock.RemoveContact")
+			mmRemoveContact.t.Fatal("No results are set for the ProfileServiceClientMock.RemoveContact")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmRemoveContact.funcRemoveContact != nil {
 		return mmRemoveContact.funcRemoveContact(ctx, pp1)
 	}
-	mmRemoveContact.t.Fatalf("Unexpected call to ProfileServiceHandlerMock.RemoveContact. %v %v", ctx, pp1)
+	mmRemoveContact.t.Fatalf("Unexpected call to ProfileServiceClientMock.RemoveContact. %v %v", ctx, pp1)
 	return
 }
 
-// RemoveContactAfterCounter returns a count of finished ProfileServiceHandlerMock.RemoveContact invocations
-func (mmRemoveContact *ProfileServiceHandlerMock) RemoveContactAfterCounter() uint64 {
+// RemoveContactAfterCounter returns a count of finished ProfileServiceClientMock.RemoveContact invocations
+func (mmRemoveContact *ProfileServiceClientMock) RemoveContactAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmRemoveContact.afterRemoveContactCounter)
 }
 
-// RemoveContactBeforeCounter returns a count of ProfileServiceHandlerMock.RemoveContact invocations
-func (mmRemoveContact *ProfileServiceHandlerMock) RemoveContactBeforeCounter() uint64 {
+// RemoveContactBeforeCounter returns a count of ProfileServiceClientMock.RemoveContact invocations
+func (mmRemoveContact *ProfileServiceClientMock) RemoveContactBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmRemoveContact.beforeRemoveContactCounter)
 }
 
-// Calls returns a list of arguments used in each call to ProfileServiceHandlerMock.RemoveContact.
+// Calls returns a list of arguments used in each call to ProfileServiceClientMock.RemoveContact.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmRemoveContact *mProfileServiceHandlerMockRemoveContact) Calls() []*ProfileServiceHandlerMockRemoveContactParams {
+func (mmRemoveContact *mProfileServiceClientMockRemoveContact) Calls() []*ProfileServiceClientMockRemoveContactParams {
 	mmRemoveContact.mutex.RLock()
 
-	argCopy := make([]*ProfileServiceHandlerMockRemoveContactParams, len(mmRemoveContact.callArgs))
+	argCopy := make([]*ProfileServiceClientMockRemoveContactParams, len(mmRemoveContact.callArgs))
 	copy(argCopy, mmRemoveContact.callArgs)
 
 	mmRemoveContact.mutex.RUnlock()
@@ -5003,7 +4973,7 @@ func (mmRemoveContact *mProfileServiceHandlerMockRemoveContact) Calls() []*Profi
 
 // MinimockRemoveContactDone returns true if the count of the RemoveContact invocations corresponds
 // the number of defined expectations
-func (m *ProfileServiceHandlerMock) MinimockRemoveContactDone() bool {
+func (m *ProfileServiceClientMock) MinimockRemoveContactDone() bool {
 	if m.RemoveContactMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -5019,10 +4989,10 @@ func (m *ProfileServiceHandlerMock) MinimockRemoveContactDone() bool {
 }
 
 // MinimockRemoveContactInspect logs each unmet expectation
-func (m *ProfileServiceHandlerMock) MinimockRemoveContactInspect() {
+func (m *ProfileServiceClientMock) MinimockRemoveContactInspect() {
 	for _, e := range m.RemoveContactMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.RemoveContact at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.RemoveContact at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -5030,66 +5000,66 @@ func (m *ProfileServiceHandlerMock) MinimockRemoveContactInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.RemoveContactMock.defaultExpectation != nil && afterRemoveContactCounter < 1 {
 		if m.RemoveContactMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.RemoveContact at\n%s", m.RemoveContactMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.RemoveContact at\n%s", m.RemoveContactMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.RemoveContact at\n%s with params: %#v", m.RemoveContactMock.defaultExpectation.expectationOrigins.origin, *m.RemoveContactMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.RemoveContact at\n%s with params: %#v", m.RemoveContactMock.defaultExpectation.expectationOrigins.origin, *m.RemoveContactMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcRemoveContact != nil && afterRemoveContactCounter < 1 {
-		m.t.Errorf("Expected call to ProfileServiceHandlerMock.RemoveContact at\n%s", m.funcRemoveContactOrigin)
+		m.t.Errorf("Expected call to ProfileServiceClientMock.RemoveContact at\n%s", m.funcRemoveContactOrigin)
 	}
 
 	if !m.RemoveContactMock.invocationsDone() && afterRemoveContactCounter > 0 {
-		m.t.Errorf("Expected %d calls to ProfileServiceHandlerMock.RemoveContact at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to ProfileServiceClientMock.RemoveContact at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.RemoveContactMock.expectedInvocations), m.RemoveContactMock.expectedInvocationsOrigin, afterRemoveContactCounter)
 	}
 }
 
-type mProfileServiceHandlerMockRemoveRoster struct {
+type mProfileServiceClientMockRemoveRoster struct {
 	optional           bool
-	mock               *ProfileServiceHandlerMock
-	defaultExpectation *ProfileServiceHandlerMockRemoveRosterExpectation
-	expectations       []*ProfileServiceHandlerMockRemoveRosterExpectation
+	mock               *ProfileServiceClientMock
+	defaultExpectation *ProfileServiceClientMockRemoveRosterExpectation
+	expectations       []*ProfileServiceClientMockRemoveRosterExpectation
 
-	callArgs []*ProfileServiceHandlerMockRemoveRosterParams
+	callArgs []*ProfileServiceClientMockRemoveRosterParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// ProfileServiceHandlerMockRemoveRosterExpectation specifies expectation struct of the ProfileServiceHandler.RemoveRoster
-type ProfileServiceHandlerMockRemoveRosterExpectation struct {
-	mock               *ProfileServiceHandlerMock
-	params             *ProfileServiceHandlerMockRemoveRosterParams
-	paramPtrs          *ProfileServiceHandlerMockRemoveRosterParamPtrs
-	expectationOrigins ProfileServiceHandlerMockRemoveRosterExpectationOrigins
-	results            *ProfileServiceHandlerMockRemoveRosterResults
+// ProfileServiceClientMockRemoveRosterExpectation specifies expectation struct of the ProfileServiceClient.RemoveRoster
+type ProfileServiceClientMockRemoveRosterExpectation struct {
+	mock               *ProfileServiceClientMock
+	params             *ProfileServiceClientMockRemoveRosterParams
+	paramPtrs          *ProfileServiceClientMockRemoveRosterParamPtrs
+	expectationOrigins ProfileServiceClientMockRemoveRosterExpectationOrigins
+	results            *ProfileServiceClientMockRemoveRosterResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// ProfileServiceHandlerMockRemoveRosterParams contains parameters of the ProfileServiceHandler.RemoveRoster
-type ProfileServiceHandlerMockRemoveRosterParams struct {
+// ProfileServiceClientMockRemoveRosterParams contains parameters of the ProfileServiceClient.RemoveRoster
+type ProfileServiceClientMockRemoveRosterParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.RemoveRosterRequest]
 }
 
-// ProfileServiceHandlerMockRemoveRosterParamPtrs contains pointers to parameters of the ProfileServiceHandler.RemoveRoster
-type ProfileServiceHandlerMockRemoveRosterParamPtrs struct {
+// ProfileServiceClientMockRemoveRosterParamPtrs contains pointers to parameters of the ProfileServiceClient.RemoveRoster
+type ProfileServiceClientMockRemoveRosterParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.RemoveRosterRequest]
 }
 
-// ProfileServiceHandlerMockRemoveRosterResults contains results of the ProfileServiceHandler.RemoveRoster
-type ProfileServiceHandlerMockRemoveRosterResults struct {
+// ProfileServiceClientMockRemoveRosterResults contains results of the ProfileServiceClient.RemoveRoster
+type ProfileServiceClientMockRemoveRosterResults struct {
 	pp2 *connect.Response[v1.RemoveRosterResponse]
 	err error
 }
 
-// ProfileServiceHandlerMockRemoveRosterOrigins contains origins of expectations of the ProfileServiceHandler.RemoveRoster
-type ProfileServiceHandlerMockRemoveRosterExpectationOrigins struct {
+// ProfileServiceClientMockRemoveRosterOrigins contains origins of expectations of the ProfileServiceClient.RemoveRoster
+type ProfileServiceClientMockRemoveRosterExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -5100,26 +5070,26 @@ type ProfileServiceHandlerMockRemoveRosterExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmRemoveRoster *mProfileServiceHandlerMockRemoveRoster) Optional() *mProfileServiceHandlerMockRemoveRoster {
+func (mmRemoveRoster *mProfileServiceClientMockRemoveRoster) Optional() *mProfileServiceClientMockRemoveRoster {
 	mmRemoveRoster.optional = true
 	return mmRemoveRoster
 }
 
-// Expect sets up expected params for ProfileServiceHandler.RemoveRoster
-func (mmRemoveRoster *mProfileServiceHandlerMockRemoveRoster) Expect(ctx context.Context, pp1 *connect.Request[v1.RemoveRosterRequest]) *mProfileServiceHandlerMockRemoveRoster {
+// Expect sets up expected params for ProfileServiceClient.RemoveRoster
+func (mmRemoveRoster *mProfileServiceClientMockRemoveRoster) Expect(ctx context.Context, pp1 *connect.Request[v1.RemoveRosterRequest]) *mProfileServiceClientMockRemoveRoster {
 	if mmRemoveRoster.mock.funcRemoveRoster != nil {
-		mmRemoveRoster.mock.t.Fatalf("ProfileServiceHandlerMock.RemoveRoster mock is already set by Set")
+		mmRemoveRoster.mock.t.Fatalf("ProfileServiceClientMock.RemoveRoster mock is already set by Set")
 	}
 
 	if mmRemoveRoster.defaultExpectation == nil {
-		mmRemoveRoster.defaultExpectation = &ProfileServiceHandlerMockRemoveRosterExpectation{}
+		mmRemoveRoster.defaultExpectation = &ProfileServiceClientMockRemoveRosterExpectation{}
 	}
 
 	if mmRemoveRoster.defaultExpectation.paramPtrs != nil {
-		mmRemoveRoster.mock.t.Fatalf("ProfileServiceHandlerMock.RemoveRoster mock is already set by ExpectParams functions")
+		mmRemoveRoster.mock.t.Fatalf("ProfileServiceClientMock.RemoveRoster mock is already set by ExpectParams functions")
 	}
 
-	mmRemoveRoster.defaultExpectation.params = &ProfileServiceHandlerMockRemoveRosterParams{ctx, pp1}
+	mmRemoveRoster.defaultExpectation.params = &ProfileServiceClientMockRemoveRosterParams{ctx, pp1}
 	mmRemoveRoster.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmRemoveRoster.expectations {
 		if minimock.Equal(e.params, mmRemoveRoster.defaultExpectation.params) {
@@ -5130,22 +5100,22 @@ func (mmRemoveRoster *mProfileServiceHandlerMockRemoveRoster) Expect(ctx context
 	return mmRemoveRoster
 }
 
-// ExpectCtxParam1 sets up expected param ctx for ProfileServiceHandler.RemoveRoster
-func (mmRemoveRoster *mProfileServiceHandlerMockRemoveRoster) ExpectCtxParam1(ctx context.Context) *mProfileServiceHandlerMockRemoveRoster {
+// ExpectCtxParam1 sets up expected param ctx for ProfileServiceClient.RemoveRoster
+func (mmRemoveRoster *mProfileServiceClientMockRemoveRoster) ExpectCtxParam1(ctx context.Context) *mProfileServiceClientMockRemoveRoster {
 	if mmRemoveRoster.mock.funcRemoveRoster != nil {
-		mmRemoveRoster.mock.t.Fatalf("ProfileServiceHandlerMock.RemoveRoster mock is already set by Set")
+		mmRemoveRoster.mock.t.Fatalf("ProfileServiceClientMock.RemoveRoster mock is already set by Set")
 	}
 
 	if mmRemoveRoster.defaultExpectation == nil {
-		mmRemoveRoster.defaultExpectation = &ProfileServiceHandlerMockRemoveRosterExpectation{}
+		mmRemoveRoster.defaultExpectation = &ProfileServiceClientMockRemoveRosterExpectation{}
 	}
 
 	if mmRemoveRoster.defaultExpectation.params != nil {
-		mmRemoveRoster.mock.t.Fatalf("ProfileServiceHandlerMock.RemoveRoster mock is already set by Expect")
+		mmRemoveRoster.mock.t.Fatalf("ProfileServiceClientMock.RemoveRoster mock is already set by Expect")
 	}
 
 	if mmRemoveRoster.defaultExpectation.paramPtrs == nil {
-		mmRemoveRoster.defaultExpectation.paramPtrs = &ProfileServiceHandlerMockRemoveRosterParamPtrs{}
+		mmRemoveRoster.defaultExpectation.paramPtrs = &ProfileServiceClientMockRemoveRosterParamPtrs{}
 	}
 	mmRemoveRoster.defaultExpectation.paramPtrs.ctx = &ctx
 	mmRemoveRoster.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -5153,22 +5123,22 @@ func (mmRemoveRoster *mProfileServiceHandlerMockRemoveRoster) ExpectCtxParam1(ct
 	return mmRemoveRoster
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for ProfileServiceHandler.RemoveRoster
-func (mmRemoveRoster *mProfileServiceHandlerMockRemoveRoster) ExpectPp1Param2(pp1 *connect.Request[v1.RemoveRosterRequest]) *mProfileServiceHandlerMockRemoveRoster {
+// ExpectPp1Param2 sets up expected param pp1 for ProfileServiceClient.RemoveRoster
+func (mmRemoveRoster *mProfileServiceClientMockRemoveRoster) ExpectPp1Param2(pp1 *connect.Request[v1.RemoveRosterRequest]) *mProfileServiceClientMockRemoveRoster {
 	if mmRemoveRoster.mock.funcRemoveRoster != nil {
-		mmRemoveRoster.mock.t.Fatalf("ProfileServiceHandlerMock.RemoveRoster mock is already set by Set")
+		mmRemoveRoster.mock.t.Fatalf("ProfileServiceClientMock.RemoveRoster mock is already set by Set")
 	}
 
 	if mmRemoveRoster.defaultExpectation == nil {
-		mmRemoveRoster.defaultExpectation = &ProfileServiceHandlerMockRemoveRosterExpectation{}
+		mmRemoveRoster.defaultExpectation = &ProfileServiceClientMockRemoveRosterExpectation{}
 	}
 
 	if mmRemoveRoster.defaultExpectation.params != nil {
-		mmRemoveRoster.mock.t.Fatalf("ProfileServiceHandlerMock.RemoveRoster mock is already set by Expect")
+		mmRemoveRoster.mock.t.Fatalf("ProfileServiceClientMock.RemoveRoster mock is already set by Expect")
 	}
 
 	if mmRemoveRoster.defaultExpectation.paramPtrs == nil {
-		mmRemoveRoster.defaultExpectation.paramPtrs = &ProfileServiceHandlerMockRemoveRosterParamPtrs{}
+		mmRemoveRoster.defaultExpectation.paramPtrs = &ProfileServiceClientMockRemoveRosterParamPtrs{}
 	}
 	mmRemoveRoster.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmRemoveRoster.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -5176,10 +5146,10 @@ func (mmRemoveRoster *mProfileServiceHandlerMockRemoveRoster) ExpectPp1Param2(pp
 	return mmRemoveRoster
 }
 
-// Inspect accepts an inspector function that has same arguments as the ProfileServiceHandler.RemoveRoster
-func (mmRemoveRoster *mProfileServiceHandlerMockRemoveRoster) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.RemoveRosterRequest])) *mProfileServiceHandlerMockRemoveRoster {
+// Inspect accepts an inspector function that has same arguments as the ProfileServiceClient.RemoveRoster
+func (mmRemoveRoster *mProfileServiceClientMockRemoveRoster) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.RemoveRosterRequest])) *mProfileServiceClientMockRemoveRoster {
 	if mmRemoveRoster.mock.inspectFuncRemoveRoster != nil {
-		mmRemoveRoster.mock.t.Fatalf("Inspect function is already set for ProfileServiceHandlerMock.RemoveRoster")
+		mmRemoveRoster.mock.t.Fatalf("Inspect function is already set for ProfileServiceClientMock.RemoveRoster")
 	}
 
 	mmRemoveRoster.mock.inspectFuncRemoveRoster = f
@@ -5187,28 +5157,28 @@ func (mmRemoveRoster *mProfileServiceHandlerMockRemoveRoster) Inspect(f func(ctx
 	return mmRemoveRoster
 }
 
-// Return sets up results that will be returned by ProfileServiceHandler.RemoveRoster
-func (mmRemoveRoster *mProfileServiceHandlerMockRemoveRoster) Return(pp2 *connect.Response[v1.RemoveRosterResponse], err error) *ProfileServiceHandlerMock {
+// Return sets up results that will be returned by ProfileServiceClient.RemoveRoster
+func (mmRemoveRoster *mProfileServiceClientMockRemoveRoster) Return(pp2 *connect.Response[v1.RemoveRosterResponse], err error) *ProfileServiceClientMock {
 	if mmRemoveRoster.mock.funcRemoveRoster != nil {
-		mmRemoveRoster.mock.t.Fatalf("ProfileServiceHandlerMock.RemoveRoster mock is already set by Set")
+		mmRemoveRoster.mock.t.Fatalf("ProfileServiceClientMock.RemoveRoster mock is already set by Set")
 	}
 
 	if mmRemoveRoster.defaultExpectation == nil {
-		mmRemoveRoster.defaultExpectation = &ProfileServiceHandlerMockRemoveRosterExpectation{mock: mmRemoveRoster.mock}
+		mmRemoveRoster.defaultExpectation = &ProfileServiceClientMockRemoveRosterExpectation{mock: mmRemoveRoster.mock}
 	}
-	mmRemoveRoster.defaultExpectation.results = &ProfileServiceHandlerMockRemoveRosterResults{pp2, err}
+	mmRemoveRoster.defaultExpectation.results = &ProfileServiceClientMockRemoveRosterResults{pp2, err}
 	mmRemoveRoster.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmRemoveRoster.mock
 }
 
-// Set uses given function f to mock the ProfileServiceHandler.RemoveRoster method
-func (mmRemoveRoster *mProfileServiceHandlerMockRemoveRoster) Set(f func(ctx context.Context, pp1 *connect.Request[v1.RemoveRosterRequest]) (pp2 *connect.Response[v1.RemoveRosterResponse], err error)) *ProfileServiceHandlerMock {
+// Set uses given function f to mock the ProfileServiceClient.RemoveRoster method
+func (mmRemoveRoster *mProfileServiceClientMockRemoveRoster) Set(f func(ctx context.Context, pp1 *connect.Request[v1.RemoveRosterRequest]) (pp2 *connect.Response[v1.RemoveRosterResponse], err error)) *ProfileServiceClientMock {
 	if mmRemoveRoster.defaultExpectation != nil {
-		mmRemoveRoster.mock.t.Fatalf("Default expectation is already set for the ProfileServiceHandler.RemoveRoster method")
+		mmRemoveRoster.mock.t.Fatalf("Default expectation is already set for the ProfileServiceClient.RemoveRoster method")
 	}
 
 	if len(mmRemoveRoster.expectations) > 0 {
-		mmRemoveRoster.mock.t.Fatalf("Some expectations are already set for the ProfileServiceHandler.RemoveRoster method")
+		mmRemoveRoster.mock.t.Fatalf("Some expectations are already set for the ProfileServiceClient.RemoveRoster method")
 	}
 
 	mmRemoveRoster.mock.funcRemoveRoster = f
@@ -5216,39 +5186,39 @@ func (mmRemoveRoster *mProfileServiceHandlerMockRemoveRoster) Set(f func(ctx con
 	return mmRemoveRoster.mock
 }
 
-// When sets expectation for the ProfileServiceHandler.RemoveRoster which will trigger the result defined by the following
+// When sets expectation for the ProfileServiceClient.RemoveRoster which will trigger the result defined by the following
 // Then helper
-func (mmRemoveRoster *mProfileServiceHandlerMockRemoveRoster) When(ctx context.Context, pp1 *connect.Request[v1.RemoveRosterRequest]) *ProfileServiceHandlerMockRemoveRosterExpectation {
+func (mmRemoveRoster *mProfileServiceClientMockRemoveRoster) When(ctx context.Context, pp1 *connect.Request[v1.RemoveRosterRequest]) *ProfileServiceClientMockRemoveRosterExpectation {
 	if mmRemoveRoster.mock.funcRemoveRoster != nil {
-		mmRemoveRoster.mock.t.Fatalf("ProfileServiceHandlerMock.RemoveRoster mock is already set by Set")
+		mmRemoveRoster.mock.t.Fatalf("ProfileServiceClientMock.RemoveRoster mock is already set by Set")
 	}
 
-	expectation := &ProfileServiceHandlerMockRemoveRosterExpectation{
+	expectation := &ProfileServiceClientMockRemoveRosterExpectation{
 		mock:               mmRemoveRoster.mock,
-		params:             &ProfileServiceHandlerMockRemoveRosterParams{ctx, pp1},
-		expectationOrigins: ProfileServiceHandlerMockRemoveRosterExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &ProfileServiceClientMockRemoveRosterParams{ctx, pp1},
+		expectationOrigins: ProfileServiceClientMockRemoveRosterExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmRemoveRoster.expectations = append(mmRemoveRoster.expectations, expectation)
 	return expectation
 }
 
-// Then sets up ProfileServiceHandler.RemoveRoster return parameters for the expectation previously defined by the When method
-func (e *ProfileServiceHandlerMockRemoveRosterExpectation) Then(pp2 *connect.Response[v1.RemoveRosterResponse], err error) *ProfileServiceHandlerMock {
-	e.results = &ProfileServiceHandlerMockRemoveRosterResults{pp2, err}
+// Then sets up ProfileServiceClient.RemoveRoster return parameters for the expectation previously defined by the When method
+func (e *ProfileServiceClientMockRemoveRosterExpectation) Then(pp2 *connect.Response[v1.RemoveRosterResponse], err error) *ProfileServiceClientMock {
+	e.results = &ProfileServiceClientMockRemoveRosterResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times ProfileServiceHandler.RemoveRoster should be invoked
-func (mmRemoveRoster *mProfileServiceHandlerMockRemoveRoster) Times(n uint64) *mProfileServiceHandlerMockRemoveRoster {
+// Times sets number of times ProfileServiceClient.RemoveRoster should be invoked
+func (mmRemoveRoster *mProfileServiceClientMockRemoveRoster) Times(n uint64) *mProfileServiceClientMockRemoveRoster {
 	if n == 0 {
-		mmRemoveRoster.mock.t.Fatalf("Times of ProfileServiceHandlerMock.RemoveRoster mock can not be zero")
+		mmRemoveRoster.mock.t.Fatalf("Times of ProfileServiceClientMock.RemoveRoster mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmRemoveRoster.expectedInvocations, n)
 	mmRemoveRoster.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmRemoveRoster
 }
 
-func (mmRemoveRoster *mProfileServiceHandlerMockRemoveRoster) invocationsDone() bool {
+func (mmRemoveRoster *mProfileServiceClientMockRemoveRoster) invocationsDone() bool {
 	if len(mmRemoveRoster.expectations) == 0 && mmRemoveRoster.defaultExpectation == nil && mmRemoveRoster.mock.funcRemoveRoster == nil {
 		return true
 	}
@@ -5259,8 +5229,8 @@ func (mmRemoveRoster *mProfileServiceHandlerMockRemoveRoster) invocationsDone() 
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// RemoveRoster implements mm_profilev1connect.ProfileServiceHandler
-func (mmRemoveRoster *ProfileServiceHandlerMock) RemoveRoster(ctx context.Context, pp1 *connect.Request[v1.RemoveRosterRequest]) (pp2 *connect.Response[v1.RemoveRosterResponse], err error) {
+// RemoveRoster implements mm_profilev1connect.ProfileServiceClient
+func (mmRemoveRoster *ProfileServiceClientMock) RemoveRoster(ctx context.Context, pp1 *connect.Request[v1.RemoveRosterRequest]) (pp2 *connect.Response[v1.RemoveRosterResponse], err error) {
 	mm_atomic.AddUint64(&mmRemoveRoster.beforeRemoveRosterCounter, 1)
 	defer mm_atomic.AddUint64(&mmRemoveRoster.afterRemoveRosterCounter, 1)
 
@@ -5270,7 +5240,7 @@ func (mmRemoveRoster *ProfileServiceHandlerMock) RemoveRoster(ctx context.Contex
 		mmRemoveRoster.inspectFuncRemoveRoster(ctx, pp1)
 	}
 
-	mm_params := ProfileServiceHandlerMockRemoveRosterParams{ctx, pp1}
+	mm_params := ProfileServiceClientMockRemoveRosterParams{ctx, pp1}
 
 	// Record call args
 	mmRemoveRoster.RemoveRosterMock.mutex.Lock()
@@ -5289,54 +5259,54 @@ func (mmRemoveRoster *ProfileServiceHandlerMock) RemoveRoster(ctx context.Contex
 		mm_want := mmRemoveRoster.RemoveRosterMock.defaultExpectation.params
 		mm_want_ptrs := mmRemoveRoster.RemoveRosterMock.defaultExpectation.paramPtrs
 
-		mm_got := ProfileServiceHandlerMockRemoveRosterParams{ctx, pp1}
+		mm_got := ProfileServiceClientMockRemoveRosterParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmRemoveRoster.t.Errorf("ProfileServiceHandlerMock.RemoveRoster got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmRemoveRoster.t.Errorf("ProfileServiceClientMock.RemoveRoster got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmRemoveRoster.RemoveRosterMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmRemoveRoster.t.Errorf("ProfileServiceHandlerMock.RemoveRoster got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmRemoveRoster.t.Errorf("ProfileServiceClientMock.RemoveRoster got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmRemoveRoster.RemoveRosterMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmRemoveRoster.t.Errorf("ProfileServiceHandlerMock.RemoveRoster got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmRemoveRoster.t.Errorf("ProfileServiceClientMock.RemoveRoster got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmRemoveRoster.RemoveRosterMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmRemoveRoster.RemoveRosterMock.defaultExpectation.results
 		if mm_results == nil {
-			mmRemoveRoster.t.Fatal("No results are set for the ProfileServiceHandlerMock.RemoveRoster")
+			mmRemoveRoster.t.Fatal("No results are set for the ProfileServiceClientMock.RemoveRoster")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmRemoveRoster.funcRemoveRoster != nil {
 		return mmRemoveRoster.funcRemoveRoster(ctx, pp1)
 	}
-	mmRemoveRoster.t.Fatalf("Unexpected call to ProfileServiceHandlerMock.RemoveRoster. %v %v", ctx, pp1)
+	mmRemoveRoster.t.Fatalf("Unexpected call to ProfileServiceClientMock.RemoveRoster. %v %v", ctx, pp1)
 	return
 }
 
-// RemoveRosterAfterCounter returns a count of finished ProfileServiceHandlerMock.RemoveRoster invocations
-func (mmRemoveRoster *ProfileServiceHandlerMock) RemoveRosterAfterCounter() uint64 {
+// RemoveRosterAfterCounter returns a count of finished ProfileServiceClientMock.RemoveRoster invocations
+func (mmRemoveRoster *ProfileServiceClientMock) RemoveRosterAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmRemoveRoster.afterRemoveRosterCounter)
 }
 
-// RemoveRosterBeforeCounter returns a count of ProfileServiceHandlerMock.RemoveRoster invocations
-func (mmRemoveRoster *ProfileServiceHandlerMock) RemoveRosterBeforeCounter() uint64 {
+// RemoveRosterBeforeCounter returns a count of ProfileServiceClientMock.RemoveRoster invocations
+func (mmRemoveRoster *ProfileServiceClientMock) RemoveRosterBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmRemoveRoster.beforeRemoveRosterCounter)
 }
 
-// Calls returns a list of arguments used in each call to ProfileServiceHandlerMock.RemoveRoster.
+// Calls returns a list of arguments used in each call to ProfileServiceClientMock.RemoveRoster.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmRemoveRoster *mProfileServiceHandlerMockRemoveRoster) Calls() []*ProfileServiceHandlerMockRemoveRosterParams {
+func (mmRemoveRoster *mProfileServiceClientMockRemoveRoster) Calls() []*ProfileServiceClientMockRemoveRosterParams {
 	mmRemoveRoster.mutex.RLock()
 
-	argCopy := make([]*ProfileServiceHandlerMockRemoveRosterParams, len(mmRemoveRoster.callArgs))
+	argCopy := make([]*ProfileServiceClientMockRemoveRosterParams, len(mmRemoveRoster.callArgs))
 	copy(argCopy, mmRemoveRoster.callArgs)
 
 	mmRemoveRoster.mutex.RUnlock()
@@ -5346,7 +5316,7 @@ func (mmRemoveRoster *mProfileServiceHandlerMockRemoveRoster) Calls() []*Profile
 
 // MinimockRemoveRosterDone returns true if the count of the RemoveRoster invocations corresponds
 // the number of defined expectations
-func (m *ProfileServiceHandlerMock) MinimockRemoveRosterDone() bool {
+func (m *ProfileServiceClientMock) MinimockRemoveRosterDone() bool {
 	if m.RemoveRosterMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -5362,10 +5332,10 @@ func (m *ProfileServiceHandlerMock) MinimockRemoveRosterDone() bool {
 }
 
 // MinimockRemoveRosterInspect logs each unmet expectation
-func (m *ProfileServiceHandlerMock) MinimockRemoveRosterInspect() {
+func (m *ProfileServiceClientMock) MinimockRemoveRosterInspect() {
 	for _, e := range m.RemoveRosterMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.RemoveRoster at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.RemoveRoster at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -5373,71 +5343,69 @@ func (m *ProfileServiceHandlerMock) MinimockRemoveRosterInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.RemoveRosterMock.defaultExpectation != nil && afterRemoveRosterCounter < 1 {
 		if m.RemoveRosterMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.RemoveRoster at\n%s", m.RemoveRosterMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.RemoveRoster at\n%s", m.RemoveRosterMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.RemoveRoster at\n%s with params: %#v", m.RemoveRosterMock.defaultExpectation.expectationOrigins.origin, *m.RemoveRosterMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.RemoveRoster at\n%s with params: %#v", m.RemoveRosterMock.defaultExpectation.expectationOrigins.origin, *m.RemoveRosterMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcRemoveRoster != nil && afterRemoveRosterCounter < 1 {
-		m.t.Errorf("Expected call to ProfileServiceHandlerMock.RemoveRoster at\n%s", m.funcRemoveRosterOrigin)
+		m.t.Errorf("Expected call to ProfileServiceClientMock.RemoveRoster at\n%s", m.funcRemoveRosterOrigin)
 	}
 
 	if !m.RemoveRosterMock.invocationsDone() && afterRemoveRosterCounter > 0 {
-		m.t.Errorf("Expected %d calls to ProfileServiceHandlerMock.RemoveRoster at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to ProfileServiceClientMock.RemoveRoster at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.RemoveRosterMock.expectedInvocations), m.RemoveRosterMock.expectedInvocationsOrigin, afterRemoveRosterCounter)
 	}
 }
 
-type mProfileServiceHandlerMockSearch struct {
+type mProfileServiceClientMockSearch struct {
 	optional           bool
-	mock               *ProfileServiceHandlerMock
-	defaultExpectation *ProfileServiceHandlerMockSearchExpectation
-	expectations       []*ProfileServiceHandlerMockSearchExpectation
+	mock               *ProfileServiceClientMock
+	defaultExpectation *ProfileServiceClientMockSearchExpectation
+	expectations       []*ProfileServiceClientMockSearchExpectation
 
-	callArgs []*ProfileServiceHandlerMockSearchParams
+	callArgs []*ProfileServiceClientMockSearchParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// ProfileServiceHandlerMockSearchExpectation specifies expectation struct of the ProfileServiceHandler.Search
-type ProfileServiceHandlerMockSearchExpectation struct {
-	mock               *ProfileServiceHandlerMock
-	params             *ProfileServiceHandlerMockSearchParams
-	paramPtrs          *ProfileServiceHandlerMockSearchParamPtrs
-	expectationOrigins ProfileServiceHandlerMockSearchExpectationOrigins
-	results            *ProfileServiceHandlerMockSearchResults
+// ProfileServiceClientMockSearchExpectation specifies expectation struct of the ProfileServiceClient.Search
+type ProfileServiceClientMockSearchExpectation struct {
+	mock               *ProfileServiceClientMock
+	params             *ProfileServiceClientMockSearchParams
+	paramPtrs          *ProfileServiceClientMockSearchParamPtrs
+	expectationOrigins ProfileServiceClientMockSearchExpectationOrigins
+	results            *ProfileServiceClientMockSearchResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// ProfileServiceHandlerMockSearchParams contains parameters of the ProfileServiceHandler.Search
-type ProfileServiceHandlerMockSearchParams struct {
+// ProfileServiceClientMockSearchParams contains parameters of the ProfileServiceClient.Search
+type ProfileServiceClientMockSearchParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.SearchRequest]
-	pp2 *connect.ServerStream[v1.SearchResponse]
 }
 
-// ProfileServiceHandlerMockSearchParamPtrs contains pointers to parameters of the ProfileServiceHandler.Search
-type ProfileServiceHandlerMockSearchParamPtrs struct {
+// ProfileServiceClientMockSearchParamPtrs contains pointers to parameters of the ProfileServiceClient.Search
+type ProfileServiceClientMockSearchParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.SearchRequest]
-	pp2 **connect.ServerStream[v1.SearchResponse]
 }
 
-// ProfileServiceHandlerMockSearchResults contains results of the ProfileServiceHandler.Search
-type ProfileServiceHandlerMockSearchResults struct {
+// ProfileServiceClientMockSearchResults contains results of the ProfileServiceClient.Search
+type ProfileServiceClientMockSearchResults struct {
+	pp2 *connect.ServerStreamForClient[v1.SearchResponse]
 	err error
 }
 
-// ProfileServiceHandlerMockSearchOrigins contains origins of expectations of the ProfileServiceHandler.Search
-type ProfileServiceHandlerMockSearchExpectationOrigins struct {
+// ProfileServiceClientMockSearchOrigins contains origins of expectations of the ProfileServiceClient.Search
+type ProfileServiceClientMockSearchExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
-	originPp2 string
 }
 
 // Marks this method to be optional. The default behavior of any method with Return() is '1 or more', meaning
@@ -5445,26 +5413,26 @@ type ProfileServiceHandlerMockSearchExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmSearch *mProfileServiceHandlerMockSearch) Optional() *mProfileServiceHandlerMockSearch {
+func (mmSearch *mProfileServiceClientMockSearch) Optional() *mProfileServiceClientMockSearch {
 	mmSearch.optional = true
 	return mmSearch
 }
 
-// Expect sets up expected params for ProfileServiceHandler.Search
-func (mmSearch *mProfileServiceHandlerMockSearch) Expect(ctx context.Context, pp1 *connect.Request[v1.SearchRequest], pp2 *connect.ServerStream[v1.SearchResponse]) *mProfileServiceHandlerMockSearch {
+// Expect sets up expected params for ProfileServiceClient.Search
+func (mmSearch *mProfileServiceClientMockSearch) Expect(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) *mProfileServiceClientMockSearch {
 	if mmSearch.mock.funcSearch != nil {
-		mmSearch.mock.t.Fatalf("ProfileServiceHandlerMock.Search mock is already set by Set")
+		mmSearch.mock.t.Fatalf("ProfileServiceClientMock.Search mock is already set by Set")
 	}
 
 	if mmSearch.defaultExpectation == nil {
-		mmSearch.defaultExpectation = &ProfileServiceHandlerMockSearchExpectation{}
+		mmSearch.defaultExpectation = &ProfileServiceClientMockSearchExpectation{}
 	}
 
 	if mmSearch.defaultExpectation.paramPtrs != nil {
-		mmSearch.mock.t.Fatalf("ProfileServiceHandlerMock.Search mock is already set by ExpectParams functions")
+		mmSearch.mock.t.Fatalf("ProfileServiceClientMock.Search mock is already set by ExpectParams functions")
 	}
 
-	mmSearch.defaultExpectation.params = &ProfileServiceHandlerMockSearchParams{ctx, pp1, pp2}
+	mmSearch.defaultExpectation.params = &ProfileServiceClientMockSearchParams{ctx, pp1}
 	mmSearch.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmSearch.expectations {
 		if minimock.Equal(e.params, mmSearch.defaultExpectation.params) {
@@ -5475,22 +5443,22 @@ func (mmSearch *mProfileServiceHandlerMockSearch) Expect(ctx context.Context, pp
 	return mmSearch
 }
 
-// ExpectCtxParam1 sets up expected param ctx for ProfileServiceHandler.Search
-func (mmSearch *mProfileServiceHandlerMockSearch) ExpectCtxParam1(ctx context.Context) *mProfileServiceHandlerMockSearch {
+// ExpectCtxParam1 sets up expected param ctx for ProfileServiceClient.Search
+func (mmSearch *mProfileServiceClientMockSearch) ExpectCtxParam1(ctx context.Context) *mProfileServiceClientMockSearch {
 	if mmSearch.mock.funcSearch != nil {
-		mmSearch.mock.t.Fatalf("ProfileServiceHandlerMock.Search mock is already set by Set")
+		mmSearch.mock.t.Fatalf("ProfileServiceClientMock.Search mock is already set by Set")
 	}
 
 	if mmSearch.defaultExpectation == nil {
-		mmSearch.defaultExpectation = &ProfileServiceHandlerMockSearchExpectation{}
+		mmSearch.defaultExpectation = &ProfileServiceClientMockSearchExpectation{}
 	}
 
 	if mmSearch.defaultExpectation.params != nil {
-		mmSearch.mock.t.Fatalf("ProfileServiceHandlerMock.Search mock is already set by Expect")
+		mmSearch.mock.t.Fatalf("ProfileServiceClientMock.Search mock is already set by Expect")
 	}
 
 	if mmSearch.defaultExpectation.paramPtrs == nil {
-		mmSearch.defaultExpectation.paramPtrs = &ProfileServiceHandlerMockSearchParamPtrs{}
+		mmSearch.defaultExpectation.paramPtrs = &ProfileServiceClientMockSearchParamPtrs{}
 	}
 	mmSearch.defaultExpectation.paramPtrs.ctx = &ctx
 	mmSearch.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -5498,22 +5466,22 @@ func (mmSearch *mProfileServiceHandlerMockSearch) ExpectCtxParam1(ctx context.Co
 	return mmSearch
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for ProfileServiceHandler.Search
-func (mmSearch *mProfileServiceHandlerMockSearch) ExpectPp1Param2(pp1 *connect.Request[v1.SearchRequest]) *mProfileServiceHandlerMockSearch {
+// ExpectPp1Param2 sets up expected param pp1 for ProfileServiceClient.Search
+func (mmSearch *mProfileServiceClientMockSearch) ExpectPp1Param2(pp1 *connect.Request[v1.SearchRequest]) *mProfileServiceClientMockSearch {
 	if mmSearch.mock.funcSearch != nil {
-		mmSearch.mock.t.Fatalf("ProfileServiceHandlerMock.Search mock is already set by Set")
+		mmSearch.mock.t.Fatalf("ProfileServiceClientMock.Search mock is already set by Set")
 	}
 
 	if mmSearch.defaultExpectation == nil {
-		mmSearch.defaultExpectation = &ProfileServiceHandlerMockSearchExpectation{}
+		mmSearch.defaultExpectation = &ProfileServiceClientMockSearchExpectation{}
 	}
 
 	if mmSearch.defaultExpectation.params != nil {
-		mmSearch.mock.t.Fatalf("ProfileServiceHandlerMock.Search mock is already set by Expect")
+		mmSearch.mock.t.Fatalf("ProfileServiceClientMock.Search mock is already set by Expect")
 	}
 
 	if mmSearch.defaultExpectation.paramPtrs == nil {
-		mmSearch.defaultExpectation.paramPtrs = &ProfileServiceHandlerMockSearchParamPtrs{}
+		mmSearch.defaultExpectation.paramPtrs = &ProfileServiceClientMockSearchParamPtrs{}
 	}
 	mmSearch.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmSearch.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -5521,33 +5489,10 @@ func (mmSearch *mProfileServiceHandlerMockSearch) ExpectPp1Param2(pp1 *connect.R
 	return mmSearch
 }
 
-// ExpectPp2Param3 sets up expected param pp2 for ProfileServiceHandler.Search
-func (mmSearch *mProfileServiceHandlerMockSearch) ExpectPp2Param3(pp2 *connect.ServerStream[v1.SearchResponse]) *mProfileServiceHandlerMockSearch {
-	if mmSearch.mock.funcSearch != nil {
-		mmSearch.mock.t.Fatalf("ProfileServiceHandlerMock.Search mock is already set by Set")
-	}
-
-	if mmSearch.defaultExpectation == nil {
-		mmSearch.defaultExpectation = &ProfileServiceHandlerMockSearchExpectation{}
-	}
-
-	if mmSearch.defaultExpectation.params != nil {
-		mmSearch.mock.t.Fatalf("ProfileServiceHandlerMock.Search mock is already set by Expect")
-	}
-
-	if mmSearch.defaultExpectation.paramPtrs == nil {
-		mmSearch.defaultExpectation.paramPtrs = &ProfileServiceHandlerMockSearchParamPtrs{}
-	}
-	mmSearch.defaultExpectation.paramPtrs.pp2 = &pp2
-	mmSearch.defaultExpectation.expectationOrigins.originPp2 = minimock.CallerInfo(1)
-
-	return mmSearch
-}
-
-// Inspect accepts an inspector function that has same arguments as the ProfileServiceHandler.Search
-func (mmSearch *mProfileServiceHandlerMockSearch) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest], pp2 *connect.ServerStream[v1.SearchResponse])) *mProfileServiceHandlerMockSearch {
+// Inspect accepts an inspector function that has same arguments as the ProfileServiceClient.Search
+func (mmSearch *mProfileServiceClientMockSearch) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest])) *mProfileServiceClientMockSearch {
 	if mmSearch.mock.inspectFuncSearch != nil {
-		mmSearch.mock.t.Fatalf("Inspect function is already set for ProfileServiceHandlerMock.Search")
+		mmSearch.mock.t.Fatalf("Inspect function is already set for ProfileServiceClientMock.Search")
 	}
 
 	mmSearch.mock.inspectFuncSearch = f
@@ -5555,28 +5500,28 @@ func (mmSearch *mProfileServiceHandlerMockSearch) Inspect(f func(ctx context.Con
 	return mmSearch
 }
 
-// Return sets up results that will be returned by ProfileServiceHandler.Search
-func (mmSearch *mProfileServiceHandlerMockSearch) Return(err error) *ProfileServiceHandlerMock {
+// Return sets up results that will be returned by ProfileServiceClient.Search
+func (mmSearch *mProfileServiceClientMockSearch) Return(pp2 *connect.ServerStreamForClient[v1.SearchResponse], err error) *ProfileServiceClientMock {
 	if mmSearch.mock.funcSearch != nil {
-		mmSearch.mock.t.Fatalf("ProfileServiceHandlerMock.Search mock is already set by Set")
+		mmSearch.mock.t.Fatalf("ProfileServiceClientMock.Search mock is already set by Set")
 	}
 
 	if mmSearch.defaultExpectation == nil {
-		mmSearch.defaultExpectation = &ProfileServiceHandlerMockSearchExpectation{mock: mmSearch.mock}
+		mmSearch.defaultExpectation = &ProfileServiceClientMockSearchExpectation{mock: mmSearch.mock}
 	}
-	mmSearch.defaultExpectation.results = &ProfileServiceHandlerMockSearchResults{err}
+	mmSearch.defaultExpectation.results = &ProfileServiceClientMockSearchResults{pp2, err}
 	mmSearch.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmSearch.mock
 }
 
-// Set uses given function f to mock the ProfileServiceHandler.Search method
-func (mmSearch *mProfileServiceHandlerMockSearch) Set(f func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest], pp2 *connect.ServerStream[v1.SearchResponse]) (err error)) *ProfileServiceHandlerMock {
+// Set uses given function f to mock the ProfileServiceClient.Search method
+func (mmSearch *mProfileServiceClientMockSearch) Set(f func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) (pp2 *connect.ServerStreamForClient[v1.SearchResponse], err error)) *ProfileServiceClientMock {
 	if mmSearch.defaultExpectation != nil {
-		mmSearch.mock.t.Fatalf("Default expectation is already set for the ProfileServiceHandler.Search method")
+		mmSearch.mock.t.Fatalf("Default expectation is already set for the ProfileServiceClient.Search method")
 	}
 
 	if len(mmSearch.expectations) > 0 {
-		mmSearch.mock.t.Fatalf("Some expectations are already set for the ProfileServiceHandler.Search method")
+		mmSearch.mock.t.Fatalf("Some expectations are already set for the ProfileServiceClient.Search method")
 	}
 
 	mmSearch.mock.funcSearch = f
@@ -5584,39 +5529,39 @@ func (mmSearch *mProfileServiceHandlerMockSearch) Set(f func(ctx context.Context
 	return mmSearch.mock
 }
 
-// When sets expectation for the ProfileServiceHandler.Search which will trigger the result defined by the following
+// When sets expectation for the ProfileServiceClient.Search which will trigger the result defined by the following
 // Then helper
-func (mmSearch *mProfileServiceHandlerMockSearch) When(ctx context.Context, pp1 *connect.Request[v1.SearchRequest], pp2 *connect.ServerStream[v1.SearchResponse]) *ProfileServiceHandlerMockSearchExpectation {
+func (mmSearch *mProfileServiceClientMockSearch) When(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) *ProfileServiceClientMockSearchExpectation {
 	if mmSearch.mock.funcSearch != nil {
-		mmSearch.mock.t.Fatalf("ProfileServiceHandlerMock.Search mock is already set by Set")
+		mmSearch.mock.t.Fatalf("ProfileServiceClientMock.Search mock is already set by Set")
 	}
 
-	expectation := &ProfileServiceHandlerMockSearchExpectation{
+	expectation := &ProfileServiceClientMockSearchExpectation{
 		mock:               mmSearch.mock,
-		params:             &ProfileServiceHandlerMockSearchParams{ctx, pp1, pp2},
-		expectationOrigins: ProfileServiceHandlerMockSearchExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &ProfileServiceClientMockSearchParams{ctx, pp1},
+		expectationOrigins: ProfileServiceClientMockSearchExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmSearch.expectations = append(mmSearch.expectations, expectation)
 	return expectation
 }
 
-// Then sets up ProfileServiceHandler.Search return parameters for the expectation previously defined by the When method
-func (e *ProfileServiceHandlerMockSearchExpectation) Then(err error) *ProfileServiceHandlerMock {
-	e.results = &ProfileServiceHandlerMockSearchResults{err}
+// Then sets up ProfileServiceClient.Search return parameters for the expectation previously defined by the When method
+func (e *ProfileServiceClientMockSearchExpectation) Then(pp2 *connect.ServerStreamForClient[v1.SearchResponse], err error) *ProfileServiceClientMock {
+	e.results = &ProfileServiceClientMockSearchResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times ProfileServiceHandler.Search should be invoked
-func (mmSearch *mProfileServiceHandlerMockSearch) Times(n uint64) *mProfileServiceHandlerMockSearch {
+// Times sets number of times ProfileServiceClient.Search should be invoked
+func (mmSearch *mProfileServiceClientMockSearch) Times(n uint64) *mProfileServiceClientMockSearch {
 	if n == 0 {
-		mmSearch.mock.t.Fatalf("Times of ProfileServiceHandlerMock.Search mock can not be zero")
+		mmSearch.mock.t.Fatalf("Times of ProfileServiceClientMock.Search mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmSearch.expectedInvocations, n)
 	mmSearch.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmSearch
 }
 
-func (mmSearch *mProfileServiceHandlerMockSearch) invocationsDone() bool {
+func (mmSearch *mProfileServiceClientMockSearch) invocationsDone() bool {
 	if len(mmSearch.expectations) == 0 && mmSearch.defaultExpectation == nil && mmSearch.mock.funcSearch == nil {
 		return true
 	}
@@ -5627,18 +5572,18 @@ func (mmSearch *mProfileServiceHandlerMockSearch) invocationsDone() bool {
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// Search implements mm_profilev1connect.ProfileServiceHandler
-func (mmSearch *ProfileServiceHandlerMock) Search(ctx context.Context, pp1 *connect.Request[v1.SearchRequest], pp2 *connect.ServerStream[v1.SearchResponse]) (err error) {
+// Search implements mm_profilev1connect.ProfileServiceClient
+func (mmSearch *ProfileServiceClientMock) Search(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) (pp2 *connect.ServerStreamForClient[v1.SearchResponse], err error) {
 	mm_atomic.AddUint64(&mmSearch.beforeSearchCounter, 1)
 	defer mm_atomic.AddUint64(&mmSearch.afterSearchCounter, 1)
 
 	mmSearch.t.Helper()
 
 	if mmSearch.inspectFuncSearch != nil {
-		mmSearch.inspectFuncSearch(ctx, pp1, pp2)
+		mmSearch.inspectFuncSearch(ctx, pp1)
 	}
 
-	mm_params := ProfileServiceHandlerMockSearchParams{ctx, pp1, pp2}
+	mm_params := ProfileServiceClientMockSearchParams{ctx, pp1}
 
 	// Record call args
 	mmSearch.SearchMock.mutex.Lock()
@@ -5648,7 +5593,7 @@ func (mmSearch *ProfileServiceHandlerMock) Search(ctx context.Context, pp1 *conn
 	for _, e := range mmSearch.SearchMock.expectations {
 		if minimock.Equal(*e.params, mm_params) {
 			mm_atomic.AddUint64(&e.Counter, 1)
-			return e.results.err
+			return e.results.pp2, e.results.err
 		}
 	}
 
@@ -5657,59 +5602,54 @@ func (mmSearch *ProfileServiceHandlerMock) Search(ctx context.Context, pp1 *conn
 		mm_want := mmSearch.SearchMock.defaultExpectation.params
 		mm_want_ptrs := mmSearch.SearchMock.defaultExpectation.paramPtrs
 
-		mm_got := ProfileServiceHandlerMockSearchParams{ctx, pp1, pp2}
+		mm_got := ProfileServiceClientMockSearchParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmSearch.t.Errorf("ProfileServiceHandlerMock.Search got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmSearch.t.Errorf("ProfileServiceClientMock.Search got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmSearch.SearchMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmSearch.t.Errorf("ProfileServiceHandlerMock.Search got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmSearch.t.Errorf("ProfileServiceClientMock.Search got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmSearch.SearchMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
-			if mm_want_ptrs.pp2 != nil && !minimock.Equal(*mm_want_ptrs.pp2, mm_got.pp2) {
-				mmSearch.t.Errorf("ProfileServiceHandlerMock.Search got unexpected parameter pp2, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
-					mmSearch.SearchMock.defaultExpectation.expectationOrigins.originPp2, *mm_want_ptrs.pp2, mm_got.pp2, minimock.Diff(*mm_want_ptrs.pp2, mm_got.pp2))
-			}
-
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmSearch.t.Errorf("ProfileServiceHandlerMock.Search got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmSearch.t.Errorf("ProfileServiceClientMock.Search got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmSearch.SearchMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmSearch.SearchMock.defaultExpectation.results
 		if mm_results == nil {
-			mmSearch.t.Fatal("No results are set for the ProfileServiceHandlerMock.Search")
+			mmSearch.t.Fatal("No results are set for the ProfileServiceClientMock.Search")
 		}
-		return (*mm_results).err
+		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmSearch.funcSearch != nil {
-		return mmSearch.funcSearch(ctx, pp1, pp2)
+		return mmSearch.funcSearch(ctx, pp1)
 	}
-	mmSearch.t.Fatalf("Unexpected call to ProfileServiceHandlerMock.Search. %v %v %v", ctx, pp1, pp2)
+	mmSearch.t.Fatalf("Unexpected call to ProfileServiceClientMock.Search. %v %v", ctx, pp1)
 	return
 }
 
-// SearchAfterCounter returns a count of finished ProfileServiceHandlerMock.Search invocations
-func (mmSearch *ProfileServiceHandlerMock) SearchAfterCounter() uint64 {
+// SearchAfterCounter returns a count of finished ProfileServiceClientMock.Search invocations
+func (mmSearch *ProfileServiceClientMock) SearchAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmSearch.afterSearchCounter)
 }
 
-// SearchBeforeCounter returns a count of ProfileServiceHandlerMock.Search invocations
-func (mmSearch *ProfileServiceHandlerMock) SearchBeforeCounter() uint64 {
+// SearchBeforeCounter returns a count of ProfileServiceClientMock.Search invocations
+func (mmSearch *ProfileServiceClientMock) SearchBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmSearch.beforeSearchCounter)
 }
 
-// Calls returns a list of arguments used in each call to ProfileServiceHandlerMock.Search.
+// Calls returns a list of arguments used in each call to ProfileServiceClientMock.Search.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmSearch *mProfileServiceHandlerMockSearch) Calls() []*ProfileServiceHandlerMockSearchParams {
+func (mmSearch *mProfileServiceClientMockSearch) Calls() []*ProfileServiceClientMockSearchParams {
 	mmSearch.mutex.RLock()
 
-	argCopy := make([]*ProfileServiceHandlerMockSearchParams, len(mmSearch.callArgs))
+	argCopy := make([]*ProfileServiceClientMockSearchParams, len(mmSearch.callArgs))
 	copy(argCopy, mmSearch.callArgs)
 
 	mmSearch.mutex.RUnlock()
@@ -5719,7 +5659,7 @@ func (mmSearch *mProfileServiceHandlerMockSearch) Calls() []*ProfileServiceHandl
 
 // MinimockSearchDone returns true if the count of the Search invocations corresponds
 // the number of defined expectations
-func (m *ProfileServiceHandlerMock) MinimockSearchDone() bool {
+func (m *ProfileServiceClientMock) MinimockSearchDone() bool {
 	if m.SearchMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -5735,10 +5675,10 @@ func (m *ProfileServiceHandlerMock) MinimockSearchDone() bool {
 }
 
 // MinimockSearchInspect logs each unmet expectation
-func (m *ProfileServiceHandlerMock) MinimockSearchInspect() {
+func (m *ProfileServiceClientMock) MinimockSearchInspect() {
 	for _, e := range m.SearchMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.Search at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.Search at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -5746,71 +5686,69 @@ func (m *ProfileServiceHandlerMock) MinimockSearchInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.SearchMock.defaultExpectation != nil && afterSearchCounter < 1 {
 		if m.SearchMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.Search at\n%s", m.SearchMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.Search at\n%s", m.SearchMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.Search at\n%s with params: %#v", m.SearchMock.defaultExpectation.expectationOrigins.origin, *m.SearchMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.Search at\n%s with params: %#v", m.SearchMock.defaultExpectation.expectationOrigins.origin, *m.SearchMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcSearch != nil && afterSearchCounter < 1 {
-		m.t.Errorf("Expected call to ProfileServiceHandlerMock.Search at\n%s", m.funcSearchOrigin)
+		m.t.Errorf("Expected call to ProfileServiceClientMock.Search at\n%s", m.funcSearchOrigin)
 	}
 
 	if !m.SearchMock.invocationsDone() && afterSearchCounter > 0 {
-		m.t.Errorf("Expected %d calls to ProfileServiceHandlerMock.Search at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to ProfileServiceClientMock.Search at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.SearchMock.expectedInvocations), m.SearchMock.expectedInvocationsOrigin, afterSearchCounter)
 	}
 }
 
-type mProfileServiceHandlerMockSearchRoster struct {
+type mProfileServiceClientMockSearchRoster struct {
 	optional           bool
-	mock               *ProfileServiceHandlerMock
-	defaultExpectation *ProfileServiceHandlerMockSearchRosterExpectation
-	expectations       []*ProfileServiceHandlerMockSearchRosterExpectation
+	mock               *ProfileServiceClientMock
+	defaultExpectation *ProfileServiceClientMockSearchRosterExpectation
+	expectations       []*ProfileServiceClientMockSearchRosterExpectation
 
-	callArgs []*ProfileServiceHandlerMockSearchRosterParams
+	callArgs []*ProfileServiceClientMockSearchRosterParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// ProfileServiceHandlerMockSearchRosterExpectation specifies expectation struct of the ProfileServiceHandler.SearchRoster
-type ProfileServiceHandlerMockSearchRosterExpectation struct {
-	mock               *ProfileServiceHandlerMock
-	params             *ProfileServiceHandlerMockSearchRosterParams
-	paramPtrs          *ProfileServiceHandlerMockSearchRosterParamPtrs
-	expectationOrigins ProfileServiceHandlerMockSearchRosterExpectationOrigins
-	results            *ProfileServiceHandlerMockSearchRosterResults
+// ProfileServiceClientMockSearchRosterExpectation specifies expectation struct of the ProfileServiceClient.SearchRoster
+type ProfileServiceClientMockSearchRosterExpectation struct {
+	mock               *ProfileServiceClientMock
+	params             *ProfileServiceClientMockSearchRosterParams
+	paramPtrs          *ProfileServiceClientMockSearchRosterParamPtrs
+	expectationOrigins ProfileServiceClientMockSearchRosterExpectationOrigins
+	results            *ProfileServiceClientMockSearchRosterResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// ProfileServiceHandlerMockSearchRosterParams contains parameters of the ProfileServiceHandler.SearchRoster
-type ProfileServiceHandlerMockSearchRosterParams struct {
+// ProfileServiceClientMockSearchRosterParams contains parameters of the ProfileServiceClient.SearchRoster
+type ProfileServiceClientMockSearchRosterParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.SearchRosterRequest]
-	pp2 *connect.ServerStream[v1.SearchRosterResponse]
 }
 
-// ProfileServiceHandlerMockSearchRosterParamPtrs contains pointers to parameters of the ProfileServiceHandler.SearchRoster
-type ProfileServiceHandlerMockSearchRosterParamPtrs struct {
+// ProfileServiceClientMockSearchRosterParamPtrs contains pointers to parameters of the ProfileServiceClient.SearchRoster
+type ProfileServiceClientMockSearchRosterParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.SearchRosterRequest]
-	pp2 **connect.ServerStream[v1.SearchRosterResponse]
 }
 
-// ProfileServiceHandlerMockSearchRosterResults contains results of the ProfileServiceHandler.SearchRoster
-type ProfileServiceHandlerMockSearchRosterResults struct {
+// ProfileServiceClientMockSearchRosterResults contains results of the ProfileServiceClient.SearchRoster
+type ProfileServiceClientMockSearchRosterResults struct {
+	pp2 *connect.ServerStreamForClient[v1.SearchRosterResponse]
 	err error
 }
 
-// ProfileServiceHandlerMockSearchRosterOrigins contains origins of expectations of the ProfileServiceHandler.SearchRoster
-type ProfileServiceHandlerMockSearchRosterExpectationOrigins struct {
+// ProfileServiceClientMockSearchRosterOrigins contains origins of expectations of the ProfileServiceClient.SearchRoster
+type ProfileServiceClientMockSearchRosterExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
-	originPp2 string
 }
 
 // Marks this method to be optional. The default behavior of any method with Return() is '1 or more', meaning
@@ -5818,26 +5756,26 @@ type ProfileServiceHandlerMockSearchRosterExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmSearchRoster *mProfileServiceHandlerMockSearchRoster) Optional() *mProfileServiceHandlerMockSearchRoster {
+func (mmSearchRoster *mProfileServiceClientMockSearchRoster) Optional() *mProfileServiceClientMockSearchRoster {
 	mmSearchRoster.optional = true
 	return mmSearchRoster
 }
 
-// Expect sets up expected params for ProfileServiceHandler.SearchRoster
-func (mmSearchRoster *mProfileServiceHandlerMockSearchRoster) Expect(ctx context.Context, pp1 *connect.Request[v1.SearchRosterRequest], pp2 *connect.ServerStream[v1.SearchRosterResponse]) *mProfileServiceHandlerMockSearchRoster {
+// Expect sets up expected params for ProfileServiceClient.SearchRoster
+func (mmSearchRoster *mProfileServiceClientMockSearchRoster) Expect(ctx context.Context, pp1 *connect.Request[v1.SearchRosterRequest]) *mProfileServiceClientMockSearchRoster {
 	if mmSearchRoster.mock.funcSearchRoster != nil {
-		mmSearchRoster.mock.t.Fatalf("ProfileServiceHandlerMock.SearchRoster mock is already set by Set")
+		mmSearchRoster.mock.t.Fatalf("ProfileServiceClientMock.SearchRoster mock is already set by Set")
 	}
 
 	if mmSearchRoster.defaultExpectation == nil {
-		mmSearchRoster.defaultExpectation = &ProfileServiceHandlerMockSearchRosterExpectation{}
+		mmSearchRoster.defaultExpectation = &ProfileServiceClientMockSearchRosterExpectation{}
 	}
 
 	if mmSearchRoster.defaultExpectation.paramPtrs != nil {
-		mmSearchRoster.mock.t.Fatalf("ProfileServiceHandlerMock.SearchRoster mock is already set by ExpectParams functions")
+		mmSearchRoster.mock.t.Fatalf("ProfileServiceClientMock.SearchRoster mock is already set by ExpectParams functions")
 	}
 
-	mmSearchRoster.defaultExpectation.params = &ProfileServiceHandlerMockSearchRosterParams{ctx, pp1, pp2}
+	mmSearchRoster.defaultExpectation.params = &ProfileServiceClientMockSearchRosterParams{ctx, pp1}
 	mmSearchRoster.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmSearchRoster.expectations {
 		if minimock.Equal(e.params, mmSearchRoster.defaultExpectation.params) {
@@ -5848,22 +5786,22 @@ func (mmSearchRoster *mProfileServiceHandlerMockSearchRoster) Expect(ctx context
 	return mmSearchRoster
 }
 
-// ExpectCtxParam1 sets up expected param ctx for ProfileServiceHandler.SearchRoster
-func (mmSearchRoster *mProfileServiceHandlerMockSearchRoster) ExpectCtxParam1(ctx context.Context) *mProfileServiceHandlerMockSearchRoster {
+// ExpectCtxParam1 sets up expected param ctx for ProfileServiceClient.SearchRoster
+func (mmSearchRoster *mProfileServiceClientMockSearchRoster) ExpectCtxParam1(ctx context.Context) *mProfileServiceClientMockSearchRoster {
 	if mmSearchRoster.mock.funcSearchRoster != nil {
-		mmSearchRoster.mock.t.Fatalf("ProfileServiceHandlerMock.SearchRoster mock is already set by Set")
+		mmSearchRoster.mock.t.Fatalf("ProfileServiceClientMock.SearchRoster mock is already set by Set")
 	}
 
 	if mmSearchRoster.defaultExpectation == nil {
-		mmSearchRoster.defaultExpectation = &ProfileServiceHandlerMockSearchRosterExpectation{}
+		mmSearchRoster.defaultExpectation = &ProfileServiceClientMockSearchRosterExpectation{}
 	}
 
 	if mmSearchRoster.defaultExpectation.params != nil {
-		mmSearchRoster.mock.t.Fatalf("ProfileServiceHandlerMock.SearchRoster mock is already set by Expect")
+		mmSearchRoster.mock.t.Fatalf("ProfileServiceClientMock.SearchRoster mock is already set by Expect")
 	}
 
 	if mmSearchRoster.defaultExpectation.paramPtrs == nil {
-		mmSearchRoster.defaultExpectation.paramPtrs = &ProfileServiceHandlerMockSearchRosterParamPtrs{}
+		mmSearchRoster.defaultExpectation.paramPtrs = &ProfileServiceClientMockSearchRosterParamPtrs{}
 	}
 	mmSearchRoster.defaultExpectation.paramPtrs.ctx = &ctx
 	mmSearchRoster.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -5871,22 +5809,22 @@ func (mmSearchRoster *mProfileServiceHandlerMockSearchRoster) ExpectCtxParam1(ct
 	return mmSearchRoster
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for ProfileServiceHandler.SearchRoster
-func (mmSearchRoster *mProfileServiceHandlerMockSearchRoster) ExpectPp1Param2(pp1 *connect.Request[v1.SearchRosterRequest]) *mProfileServiceHandlerMockSearchRoster {
+// ExpectPp1Param2 sets up expected param pp1 for ProfileServiceClient.SearchRoster
+func (mmSearchRoster *mProfileServiceClientMockSearchRoster) ExpectPp1Param2(pp1 *connect.Request[v1.SearchRosterRequest]) *mProfileServiceClientMockSearchRoster {
 	if mmSearchRoster.mock.funcSearchRoster != nil {
-		mmSearchRoster.mock.t.Fatalf("ProfileServiceHandlerMock.SearchRoster mock is already set by Set")
+		mmSearchRoster.mock.t.Fatalf("ProfileServiceClientMock.SearchRoster mock is already set by Set")
 	}
 
 	if mmSearchRoster.defaultExpectation == nil {
-		mmSearchRoster.defaultExpectation = &ProfileServiceHandlerMockSearchRosterExpectation{}
+		mmSearchRoster.defaultExpectation = &ProfileServiceClientMockSearchRosterExpectation{}
 	}
 
 	if mmSearchRoster.defaultExpectation.params != nil {
-		mmSearchRoster.mock.t.Fatalf("ProfileServiceHandlerMock.SearchRoster mock is already set by Expect")
+		mmSearchRoster.mock.t.Fatalf("ProfileServiceClientMock.SearchRoster mock is already set by Expect")
 	}
 
 	if mmSearchRoster.defaultExpectation.paramPtrs == nil {
-		mmSearchRoster.defaultExpectation.paramPtrs = &ProfileServiceHandlerMockSearchRosterParamPtrs{}
+		mmSearchRoster.defaultExpectation.paramPtrs = &ProfileServiceClientMockSearchRosterParamPtrs{}
 	}
 	mmSearchRoster.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmSearchRoster.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -5894,33 +5832,10 @@ func (mmSearchRoster *mProfileServiceHandlerMockSearchRoster) ExpectPp1Param2(pp
 	return mmSearchRoster
 }
 
-// ExpectPp2Param3 sets up expected param pp2 for ProfileServiceHandler.SearchRoster
-func (mmSearchRoster *mProfileServiceHandlerMockSearchRoster) ExpectPp2Param3(pp2 *connect.ServerStream[v1.SearchRosterResponse]) *mProfileServiceHandlerMockSearchRoster {
-	if mmSearchRoster.mock.funcSearchRoster != nil {
-		mmSearchRoster.mock.t.Fatalf("ProfileServiceHandlerMock.SearchRoster mock is already set by Set")
-	}
-
-	if mmSearchRoster.defaultExpectation == nil {
-		mmSearchRoster.defaultExpectation = &ProfileServiceHandlerMockSearchRosterExpectation{}
-	}
-
-	if mmSearchRoster.defaultExpectation.params != nil {
-		mmSearchRoster.mock.t.Fatalf("ProfileServiceHandlerMock.SearchRoster mock is already set by Expect")
-	}
-
-	if mmSearchRoster.defaultExpectation.paramPtrs == nil {
-		mmSearchRoster.defaultExpectation.paramPtrs = &ProfileServiceHandlerMockSearchRosterParamPtrs{}
-	}
-	mmSearchRoster.defaultExpectation.paramPtrs.pp2 = &pp2
-	mmSearchRoster.defaultExpectation.expectationOrigins.originPp2 = minimock.CallerInfo(1)
-
-	return mmSearchRoster
-}
-
-// Inspect accepts an inspector function that has same arguments as the ProfileServiceHandler.SearchRoster
-func (mmSearchRoster *mProfileServiceHandlerMockSearchRoster) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.SearchRosterRequest], pp2 *connect.ServerStream[v1.SearchRosterResponse])) *mProfileServiceHandlerMockSearchRoster {
+// Inspect accepts an inspector function that has same arguments as the ProfileServiceClient.SearchRoster
+func (mmSearchRoster *mProfileServiceClientMockSearchRoster) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.SearchRosterRequest])) *mProfileServiceClientMockSearchRoster {
 	if mmSearchRoster.mock.inspectFuncSearchRoster != nil {
-		mmSearchRoster.mock.t.Fatalf("Inspect function is already set for ProfileServiceHandlerMock.SearchRoster")
+		mmSearchRoster.mock.t.Fatalf("Inspect function is already set for ProfileServiceClientMock.SearchRoster")
 	}
 
 	mmSearchRoster.mock.inspectFuncSearchRoster = f
@@ -5928,28 +5843,28 @@ func (mmSearchRoster *mProfileServiceHandlerMockSearchRoster) Inspect(f func(ctx
 	return mmSearchRoster
 }
 
-// Return sets up results that will be returned by ProfileServiceHandler.SearchRoster
-func (mmSearchRoster *mProfileServiceHandlerMockSearchRoster) Return(err error) *ProfileServiceHandlerMock {
+// Return sets up results that will be returned by ProfileServiceClient.SearchRoster
+func (mmSearchRoster *mProfileServiceClientMockSearchRoster) Return(pp2 *connect.ServerStreamForClient[v1.SearchRosterResponse], err error) *ProfileServiceClientMock {
 	if mmSearchRoster.mock.funcSearchRoster != nil {
-		mmSearchRoster.mock.t.Fatalf("ProfileServiceHandlerMock.SearchRoster mock is already set by Set")
+		mmSearchRoster.mock.t.Fatalf("ProfileServiceClientMock.SearchRoster mock is already set by Set")
 	}
 
 	if mmSearchRoster.defaultExpectation == nil {
-		mmSearchRoster.defaultExpectation = &ProfileServiceHandlerMockSearchRosterExpectation{mock: mmSearchRoster.mock}
+		mmSearchRoster.defaultExpectation = &ProfileServiceClientMockSearchRosterExpectation{mock: mmSearchRoster.mock}
 	}
-	mmSearchRoster.defaultExpectation.results = &ProfileServiceHandlerMockSearchRosterResults{err}
+	mmSearchRoster.defaultExpectation.results = &ProfileServiceClientMockSearchRosterResults{pp2, err}
 	mmSearchRoster.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmSearchRoster.mock
 }
 
-// Set uses given function f to mock the ProfileServiceHandler.SearchRoster method
-func (mmSearchRoster *mProfileServiceHandlerMockSearchRoster) Set(f func(ctx context.Context, pp1 *connect.Request[v1.SearchRosterRequest], pp2 *connect.ServerStream[v1.SearchRosterResponse]) (err error)) *ProfileServiceHandlerMock {
+// Set uses given function f to mock the ProfileServiceClient.SearchRoster method
+func (mmSearchRoster *mProfileServiceClientMockSearchRoster) Set(f func(ctx context.Context, pp1 *connect.Request[v1.SearchRosterRequest]) (pp2 *connect.ServerStreamForClient[v1.SearchRosterResponse], err error)) *ProfileServiceClientMock {
 	if mmSearchRoster.defaultExpectation != nil {
-		mmSearchRoster.mock.t.Fatalf("Default expectation is already set for the ProfileServiceHandler.SearchRoster method")
+		mmSearchRoster.mock.t.Fatalf("Default expectation is already set for the ProfileServiceClient.SearchRoster method")
 	}
 
 	if len(mmSearchRoster.expectations) > 0 {
-		mmSearchRoster.mock.t.Fatalf("Some expectations are already set for the ProfileServiceHandler.SearchRoster method")
+		mmSearchRoster.mock.t.Fatalf("Some expectations are already set for the ProfileServiceClient.SearchRoster method")
 	}
 
 	mmSearchRoster.mock.funcSearchRoster = f
@@ -5957,39 +5872,39 @@ func (mmSearchRoster *mProfileServiceHandlerMockSearchRoster) Set(f func(ctx con
 	return mmSearchRoster.mock
 }
 
-// When sets expectation for the ProfileServiceHandler.SearchRoster which will trigger the result defined by the following
+// When sets expectation for the ProfileServiceClient.SearchRoster which will trigger the result defined by the following
 // Then helper
-func (mmSearchRoster *mProfileServiceHandlerMockSearchRoster) When(ctx context.Context, pp1 *connect.Request[v1.SearchRosterRequest], pp2 *connect.ServerStream[v1.SearchRosterResponse]) *ProfileServiceHandlerMockSearchRosterExpectation {
+func (mmSearchRoster *mProfileServiceClientMockSearchRoster) When(ctx context.Context, pp1 *connect.Request[v1.SearchRosterRequest]) *ProfileServiceClientMockSearchRosterExpectation {
 	if mmSearchRoster.mock.funcSearchRoster != nil {
-		mmSearchRoster.mock.t.Fatalf("ProfileServiceHandlerMock.SearchRoster mock is already set by Set")
+		mmSearchRoster.mock.t.Fatalf("ProfileServiceClientMock.SearchRoster mock is already set by Set")
 	}
 
-	expectation := &ProfileServiceHandlerMockSearchRosterExpectation{
+	expectation := &ProfileServiceClientMockSearchRosterExpectation{
 		mock:               mmSearchRoster.mock,
-		params:             &ProfileServiceHandlerMockSearchRosterParams{ctx, pp1, pp2},
-		expectationOrigins: ProfileServiceHandlerMockSearchRosterExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &ProfileServiceClientMockSearchRosterParams{ctx, pp1},
+		expectationOrigins: ProfileServiceClientMockSearchRosterExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmSearchRoster.expectations = append(mmSearchRoster.expectations, expectation)
 	return expectation
 }
 
-// Then sets up ProfileServiceHandler.SearchRoster return parameters for the expectation previously defined by the When method
-func (e *ProfileServiceHandlerMockSearchRosterExpectation) Then(err error) *ProfileServiceHandlerMock {
-	e.results = &ProfileServiceHandlerMockSearchRosterResults{err}
+// Then sets up ProfileServiceClient.SearchRoster return parameters for the expectation previously defined by the When method
+func (e *ProfileServiceClientMockSearchRosterExpectation) Then(pp2 *connect.ServerStreamForClient[v1.SearchRosterResponse], err error) *ProfileServiceClientMock {
+	e.results = &ProfileServiceClientMockSearchRosterResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times ProfileServiceHandler.SearchRoster should be invoked
-func (mmSearchRoster *mProfileServiceHandlerMockSearchRoster) Times(n uint64) *mProfileServiceHandlerMockSearchRoster {
+// Times sets number of times ProfileServiceClient.SearchRoster should be invoked
+func (mmSearchRoster *mProfileServiceClientMockSearchRoster) Times(n uint64) *mProfileServiceClientMockSearchRoster {
 	if n == 0 {
-		mmSearchRoster.mock.t.Fatalf("Times of ProfileServiceHandlerMock.SearchRoster mock can not be zero")
+		mmSearchRoster.mock.t.Fatalf("Times of ProfileServiceClientMock.SearchRoster mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmSearchRoster.expectedInvocations, n)
 	mmSearchRoster.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmSearchRoster
 }
 
-func (mmSearchRoster *mProfileServiceHandlerMockSearchRoster) invocationsDone() bool {
+func (mmSearchRoster *mProfileServiceClientMockSearchRoster) invocationsDone() bool {
 	if len(mmSearchRoster.expectations) == 0 && mmSearchRoster.defaultExpectation == nil && mmSearchRoster.mock.funcSearchRoster == nil {
 		return true
 	}
@@ -6000,18 +5915,18 @@ func (mmSearchRoster *mProfileServiceHandlerMockSearchRoster) invocationsDone() 
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// SearchRoster implements mm_profilev1connect.ProfileServiceHandler
-func (mmSearchRoster *ProfileServiceHandlerMock) SearchRoster(ctx context.Context, pp1 *connect.Request[v1.SearchRosterRequest], pp2 *connect.ServerStream[v1.SearchRosterResponse]) (err error) {
+// SearchRoster implements mm_profilev1connect.ProfileServiceClient
+func (mmSearchRoster *ProfileServiceClientMock) SearchRoster(ctx context.Context, pp1 *connect.Request[v1.SearchRosterRequest]) (pp2 *connect.ServerStreamForClient[v1.SearchRosterResponse], err error) {
 	mm_atomic.AddUint64(&mmSearchRoster.beforeSearchRosterCounter, 1)
 	defer mm_atomic.AddUint64(&mmSearchRoster.afterSearchRosterCounter, 1)
 
 	mmSearchRoster.t.Helper()
 
 	if mmSearchRoster.inspectFuncSearchRoster != nil {
-		mmSearchRoster.inspectFuncSearchRoster(ctx, pp1, pp2)
+		mmSearchRoster.inspectFuncSearchRoster(ctx, pp1)
 	}
 
-	mm_params := ProfileServiceHandlerMockSearchRosterParams{ctx, pp1, pp2}
+	mm_params := ProfileServiceClientMockSearchRosterParams{ctx, pp1}
 
 	// Record call args
 	mmSearchRoster.SearchRosterMock.mutex.Lock()
@@ -6021,7 +5936,7 @@ func (mmSearchRoster *ProfileServiceHandlerMock) SearchRoster(ctx context.Contex
 	for _, e := range mmSearchRoster.SearchRosterMock.expectations {
 		if minimock.Equal(*e.params, mm_params) {
 			mm_atomic.AddUint64(&e.Counter, 1)
-			return e.results.err
+			return e.results.pp2, e.results.err
 		}
 	}
 
@@ -6030,59 +5945,54 @@ func (mmSearchRoster *ProfileServiceHandlerMock) SearchRoster(ctx context.Contex
 		mm_want := mmSearchRoster.SearchRosterMock.defaultExpectation.params
 		mm_want_ptrs := mmSearchRoster.SearchRosterMock.defaultExpectation.paramPtrs
 
-		mm_got := ProfileServiceHandlerMockSearchRosterParams{ctx, pp1, pp2}
+		mm_got := ProfileServiceClientMockSearchRosterParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmSearchRoster.t.Errorf("ProfileServiceHandlerMock.SearchRoster got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmSearchRoster.t.Errorf("ProfileServiceClientMock.SearchRoster got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmSearchRoster.SearchRosterMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmSearchRoster.t.Errorf("ProfileServiceHandlerMock.SearchRoster got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmSearchRoster.t.Errorf("ProfileServiceClientMock.SearchRoster got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmSearchRoster.SearchRosterMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
-			if mm_want_ptrs.pp2 != nil && !minimock.Equal(*mm_want_ptrs.pp2, mm_got.pp2) {
-				mmSearchRoster.t.Errorf("ProfileServiceHandlerMock.SearchRoster got unexpected parameter pp2, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
-					mmSearchRoster.SearchRosterMock.defaultExpectation.expectationOrigins.originPp2, *mm_want_ptrs.pp2, mm_got.pp2, minimock.Diff(*mm_want_ptrs.pp2, mm_got.pp2))
-			}
-
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmSearchRoster.t.Errorf("ProfileServiceHandlerMock.SearchRoster got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmSearchRoster.t.Errorf("ProfileServiceClientMock.SearchRoster got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmSearchRoster.SearchRosterMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmSearchRoster.SearchRosterMock.defaultExpectation.results
 		if mm_results == nil {
-			mmSearchRoster.t.Fatal("No results are set for the ProfileServiceHandlerMock.SearchRoster")
+			mmSearchRoster.t.Fatal("No results are set for the ProfileServiceClientMock.SearchRoster")
 		}
-		return (*mm_results).err
+		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmSearchRoster.funcSearchRoster != nil {
-		return mmSearchRoster.funcSearchRoster(ctx, pp1, pp2)
+		return mmSearchRoster.funcSearchRoster(ctx, pp1)
 	}
-	mmSearchRoster.t.Fatalf("Unexpected call to ProfileServiceHandlerMock.SearchRoster. %v %v %v", ctx, pp1, pp2)
+	mmSearchRoster.t.Fatalf("Unexpected call to ProfileServiceClientMock.SearchRoster. %v %v", ctx, pp1)
 	return
 }
 
-// SearchRosterAfterCounter returns a count of finished ProfileServiceHandlerMock.SearchRoster invocations
-func (mmSearchRoster *ProfileServiceHandlerMock) SearchRosterAfterCounter() uint64 {
+// SearchRosterAfterCounter returns a count of finished ProfileServiceClientMock.SearchRoster invocations
+func (mmSearchRoster *ProfileServiceClientMock) SearchRosterAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmSearchRoster.afterSearchRosterCounter)
 }
 
-// SearchRosterBeforeCounter returns a count of ProfileServiceHandlerMock.SearchRoster invocations
-func (mmSearchRoster *ProfileServiceHandlerMock) SearchRosterBeforeCounter() uint64 {
+// SearchRosterBeforeCounter returns a count of ProfileServiceClientMock.SearchRoster invocations
+func (mmSearchRoster *ProfileServiceClientMock) SearchRosterBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmSearchRoster.beforeSearchRosterCounter)
 }
 
-// Calls returns a list of arguments used in each call to ProfileServiceHandlerMock.SearchRoster.
+// Calls returns a list of arguments used in each call to ProfileServiceClientMock.SearchRoster.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmSearchRoster *mProfileServiceHandlerMockSearchRoster) Calls() []*ProfileServiceHandlerMockSearchRosterParams {
+func (mmSearchRoster *mProfileServiceClientMockSearchRoster) Calls() []*ProfileServiceClientMockSearchRosterParams {
 	mmSearchRoster.mutex.RLock()
 
-	argCopy := make([]*ProfileServiceHandlerMockSearchRosterParams, len(mmSearchRoster.callArgs))
+	argCopy := make([]*ProfileServiceClientMockSearchRosterParams, len(mmSearchRoster.callArgs))
 	copy(argCopy, mmSearchRoster.callArgs)
 
 	mmSearchRoster.mutex.RUnlock()
@@ -6092,7 +6002,7 @@ func (mmSearchRoster *mProfileServiceHandlerMockSearchRoster) Calls() []*Profile
 
 // MinimockSearchRosterDone returns true if the count of the SearchRoster invocations corresponds
 // the number of defined expectations
-func (m *ProfileServiceHandlerMock) MinimockSearchRosterDone() bool {
+func (m *ProfileServiceClientMock) MinimockSearchRosterDone() bool {
 	if m.SearchRosterMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -6108,10 +6018,10 @@ func (m *ProfileServiceHandlerMock) MinimockSearchRosterDone() bool {
 }
 
 // MinimockSearchRosterInspect logs each unmet expectation
-func (m *ProfileServiceHandlerMock) MinimockSearchRosterInspect() {
+func (m *ProfileServiceClientMock) MinimockSearchRosterInspect() {
 	for _, e := range m.SearchRosterMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.SearchRoster at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.SearchRoster at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -6119,66 +6029,66 @@ func (m *ProfileServiceHandlerMock) MinimockSearchRosterInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.SearchRosterMock.defaultExpectation != nil && afterSearchRosterCounter < 1 {
 		if m.SearchRosterMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.SearchRoster at\n%s", m.SearchRosterMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.SearchRoster at\n%s", m.SearchRosterMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.SearchRoster at\n%s with params: %#v", m.SearchRosterMock.defaultExpectation.expectationOrigins.origin, *m.SearchRosterMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.SearchRoster at\n%s with params: %#v", m.SearchRosterMock.defaultExpectation.expectationOrigins.origin, *m.SearchRosterMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcSearchRoster != nil && afterSearchRosterCounter < 1 {
-		m.t.Errorf("Expected call to ProfileServiceHandlerMock.SearchRoster at\n%s", m.funcSearchRosterOrigin)
+		m.t.Errorf("Expected call to ProfileServiceClientMock.SearchRoster at\n%s", m.funcSearchRosterOrigin)
 	}
 
 	if !m.SearchRosterMock.invocationsDone() && afterSearchRosterCounter > 0 {
-		m.t.Errorf("Expected %d calls to ProfileServiceHandlerMock.SearchRoster at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to ProfileServiceClientMock.SearchRoster at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.SearchRosterMock.expectedInvocations), m.SearchRosterMock.expectedInvocationsOrigin, afterSearchRosterCounter)
 	}
 }
 
-type mProfileServiceHandlerMockUpdate struct {
+type mProfileServiceClientMockUpdate struct {
 	optional           bool
-	mock               *ProfileServiceHandlerMock
-	defaultExpectation *ProfileServiceHandlerMockUpdateExpectation
-	expectations       []*ProfileServiceHandlerMockUpdateExpectation
+	mock               *ProfileServiceClientMock
+	defaultExpectation *ProfileServiceClientMockUpdateExpectation
+	expectations       []*ProfileServiceClientMockUpdateExpectation
 
-	callArgs []*ProfileServiceHandlerMockUpdateParams
+	callArgs []*ProfileServiceClientMockUpdateParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// ProfileServiceHandlerMockUpdateExpectation specifies expectation struct of the ProfileServiceHandler.Update
-type ProfileServiceHandlerMockUpdateExpectation struct {
-	mock               *ProfileServiceHandlerMock
-	params             *ProfileServiceHandlerMockUpdateParams
-	paramPtrs          *ProfileServiceHandlerMockUpdateParamPtrs
-	expectationOrigins ProfileServiceHandlerMockUpdateExpectationOrigins
-	results            *ProfileServiceHandlerMockUpdateResults
+// ProfileServiceClientMockUpdateExpectation specifies expectation struct of the ProfileServiceClient.Update
+type ProfileServiceClientMockUpdateExpectation struct {
+	mock               *ProfileServiceClientMock
+	params             *ProfileServiceClientMockUpdateParams
+	paramPtrs          *ProfileServiceClientMockUpdateParamPtrs
+	expectationOrigins ProfileServiceClientMockUpdateExpectationOrigins
+	results            *ProfileServiceClientMockUpdateResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// ProfileServiceHandlerMockUpdateParams contains parameters of the ProfileServiceHandler.Update
-type ProfileServiceHandlerMockUpdateParams struct {
+// ProfileServiceClientMockUpdateParams contains parameters of the ProfileServiceClient.Update
+type ProfileServiceClientMockUpdateParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.UpdateRequest]
 }
 
-// ProfileServiceHandlerMockUpdateParamPtrs contains pointers to parameters of the ProfileServiceHandler.Update
-type ProfileServiceHandlerMockUpdateParamPtrs struct {
+// ProfileServiceClientMockUpdateParamPtrs contains pointers to parameters of the ProfileServiceClient.Update
+type ProfileServiceClientMockUpdateParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.UpdateRequest]
 }
 
-// ProfileServiceHandlerMockUpdateResults contains results of the ProfileServiceHandler.Update
-type ProfileServiceHandlerMockUpdateResults struct {
+// ProfileServiceClientMockUpdateResults contains results of the ProfileServiceClient.Update
+type ProfileServiceClientMockUpdateResults struct {
 	pp2 *connect.Response[v1.UpdateResponse]
 	err error
 }
 
-// ProfileServiceHandlerMockUpdateOrigins contains origins of expectations of the ProfileServiceHandler.Update
-type ProfileServiceHandlerMockUpdateExpectationOrigins struct {
+// ProfileServiceClientMockUpdateOrigins contains origins of expectations of the ProfileServiceClient.Update
+type ProfileServiceClientMockUpdateExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -6189,26 +6099,26 @@ type ProfileServiceHandlerMockUpdateExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmUpdate *mProfileServiceHandlerMockUpdate) Optional() *mProfileServiceHandlerMockUpdate {
+func (mmUpdate *mProfileServiceClientMockUpdate) Optional() *mProfileServiceClientMockUpdate {
 	mmUpdate.optional = true
 	return mmUpdate
 }
 
-// Expect sets up expected params for ProfileServiceHandler.Update
-func (mmUpdate *mProfileServiceHandlerMockUpdate) Expect(ctx context.Context, pp1 *connect.Request[v1.UpdateRequest]) *mProfileServiceHandlerMockUpdate {
+// Expect sets up expected params for ProfileServiceClient.Update
+func (mmUpdate *mProfileServiceClientMockUpdate) Expect(ctx context.Context, pp1 *connect.Request[v1.UpdateRequest]) *mProfileServiceClientMockUpdate {
 	if mmUpdate.mock.funcUpdate != nil {
-		mmUpdate.mock.t.Fatalf("ProfileServiceHandlerMock.Update mock is already set by Set")
+		mmUpdate.mock.t.Fatalf("ProfileServiceClientMock.Update mock is already set by Set")
 	}
 
 	if mmUpdate.defaultExpectation == nil {
-		mmUpdate.defaultExpectation = &ProfileServiceHandlerMockUpdateExpectation{}
+		mmUpdate.defaultExpectation = &ProfileServiceClientMockUpdateExpectation{}
 	}
 
 	if mmUpdate.defaultExpectation.paramPtrs != nil {
-		mmUpdate.mock.t.Fatalf("ProfileServiceHandlerMock.Update mock is already set by ExpectParams functions")
+		mmUpdate.mock.t.Fatalf("ProfileServiceClientMock.Update mock is already set by ExpectParams functions")
 	}
 
-	mmUpdate.defaultExpectation.params = &ProfileServiceHandlerMockUpdateParams{ctx, pp1}
+	mmUpdate.defaultExpectation.params = &ProfileServiceClientMockUpdateParams{ctx, pp1}
 	mmUpdate.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmUpdate.expectations {
 		if minimock.Equal(e.params, mmUpdate.defaultExpectation.params) {
@@ -6219,22 +6129,22 @@ func (mmUpdate *mProfileServiceHandlerMockUpdate) Expect(ctx context.Context, pp
 	return mmUpdate
 }
 
-// ExpectCtxParam1 sets up expected param ctx for ProfileServiceHandler.Update
-func (mmUpdate *mProfileServiceHandlerMockUpdate) ExpectCtxParam1(ctx context.Context) *mProfileServiceHandlerMockUpdate {
+// ExpectCtxParam1 sets up expected param ctx for ProfileServiceClient.Update
+func (mmUpdate *mProfileServiceClientMockUpdate) ExpectCtxParam1(ctx context.Context) *mProfileServiceClientMockUpdate {
 	if mmUpdate.mock.funcUpdate != nil {
-		mmUpdate.mock.t.Fatalf("ProfileServiceHandlerMock.Update mock is already set by Set")
+		mmUpdate.mock.t.Fatalf("ProfileServiceClientMock.Update mock is already set by Set")
 	}
 
 	if mmUpdate.defaultExpectation == nil {
-		mmUpdate.defaultExpectation = &ProfileServiceHandlerMockUpdateExpectation{}
+		mmUpdate.defaultExpectation = &ProfileServiceClientMockUpdateExpectation{}
 	}
 
 	if mmUpdate.defaultExpectation.params != nil {
-		mmUpdate.mock.t.Fatalf("ProfileServiceHandlerMock.Update mock is already set by Expect")
+		mmUpdate.mock.t.Fatalf("ProfileServiceClientMock.Update mock is already set by Expect")
 	}
 
 	if mmUpdate.defaultExpectation.paramPtrs == nil {
-		mmUpdate.defaultExpectation.paramPtrs = &ProfileServiceHandlerMockUpdateParamPtrs{}
+		mmUpdate.defaultExpectation.paramPtrs = &ProfileServiceClientMockUpdateParamPtrs{}
 	}
 	mmUpdate.defaultExpectation.paramPtrs.ctx = &ctx
 	mmUpdate.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -6242,22 +6152,22 @@ func (mmUpdate *mProfileServiceHandlerMockUpdate) ExpectCtxParam1(ctx context.Co
 	return mmUpdate
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for ProfileServiceHandler.Update
-func (mmUpdate *mProfileServiceHandlerMockUpdate) ExpectPp1Param2(pp1 *connect.Request[v1.UpdateRequest]) *mProfileServiceHandlerMockUpdate {
+// ExpectPp1Param2 sets up expected param pp1 for ProfileServiceClient.Update
+func (mmUpdate *mProfileServiceClientMockUpdate) ExpectPp1Param2(pp1 *connect.Request[v1.UpdateRequest]) *mProfileServiceClientMockUpdate {
 	if mmUpdate.mock.funcUpdate != nil {
-		mmUpdate.mock.t.Fatalf("ProfileServiceHandlerMock.Update mock is already set by Set")
+		mmUpdate.mock.t.Fatalf("ProfileServiceClientMock.Update mock is already set by Set")
 	}
 
 	if mmUpdate.defaultExpectation == nil {
-		mmUpdate.defaultExpectation = &ProfileServiceHandlerMockUpdateExpectation{}
+		mmUpdate.defaultExpectation = &ProfileServiceClientMockUpdateExpectation{}
 	}
 
 	if mmUpdate.defaultExpectation.params != nil {
-		mmUpdate.mock.t.Fatalf("ProfileServiceHandlerMock.Update mock is already set by Expect")
+		mmUpdate.mock.t.Fatalf("ProfileServiceClientMock.Update mock is already set by Expect")
 	}
 
 	if mmUpdate.defaultExpectation.paramPtrs == nil {
-		mmUpdate.defaultExpectation.paramPtrs = &ProfileServiceHandlerMockUpdateParamPtrs{}
+		mmUpdate.defaultExpectation.paramPtrs = &ProfileServiceClientMockUpdateParamPtrs{}
 	}
 	mmUpdate.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmUpdate.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -6265,10 +6175,10 @@ func (mmUpdate *mProfileServiceHandlerMockUpdate) ExpectPp1Param2(pp1 *connect.R
 	return mmUpdate
 }
 
-// Inspect accepts an inspector function that has same arguments as the ProfileServiceHandler.Update
-func (mmUpdate *mProfileServiceHandlerMockUpdate) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.UpdateRequest])) *mProfileServiceHandlerMockUpdate {
+// Inspect accepts an inspector function that has same arguments as the ProfileServiceClient.Update
+func (mmUpdate *mProfileServiceClientMockUpdate) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.UpdateRequest])) *mProfileServiceClientMockUpdate {
 	if mmUpdate.mock.inspectFuncUpdate != nil {
-		mmUpdate.mock.t.Fatalf("Inspect function is already set for ProfileServiceHandlerMock.Update")
+		mmUpdate.mock.t.Fatalf("Inspect function is already set for ProfileServiceClientMock.Update")
 	}
 
 	mmUpdate.mock.inspectFuncUpdate = f
@@ -6276,28 +6186,28 @@ func (mmUpdate *mProfileServiceHandlerMockUpdate) Inspect(f func(ctx context.Con
 	return mmUpdate
 }
 
-// Return sets up results that will be returned by ProfileServiceHandler.Update
-func (mmUpdate *mProfileServiceHandlerMockUpdate) Return(pp2 *connect.Response[v1.UpdateResponse], err error) *ProfileServiceHandlerMock {
+// Return sets up results that will be returned by ProfileServiceClient.Update
+func (mmUpdate *mProfileServiceClientMockUpdate) Return(pp2 *connect.Response[v1.UpdateResponse], err error) *ProfileServiceClientMock {
 	if mmUpdate.mock.funcUpdate != nil {
-		mmUpdate.mock.t.Fatalf("ProfileServiceHandlerMock.Update mock is already set by Set")
+		mmUpdate.mock.t.Fatalf("ProfileServiceClientMock.Update mock is already set by Set")
 	}
 
 	if mmUpdate.defaultExpectation == nil {
-		mmUpdate.defaultExpectation = &ProfileServiceHandlerMockUpdateExpectation{mock: mmUpdate.mock}
+		mmUpdate.defaultExpectation = &ProfileServiceClientMockUpdateExpectation{mock: mmUpdate.mock}
 	}
-	mmUpdate.defaultExpectation.results = &ProfileServiceHandlerMockUpdateResults{pp2, err}
+	mmUpdate.defaultExpectation.results = &ProfileServiceClientMockUpdateResults{pp2, err}
 	mmUpdate.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmUpdate.mock
 }
 
-// Set uses given function f to mock the ProfileServiceHandler.Update method
-func (mmUpdate *mProfileServiceHandlerMockUpdate) Set(f func(ctx context.Context, pp1 *connect.Request[v1.UpdateRequest]) (pp2 *connect.Response[v1.UpdateResponse], err error)) *ProfileServiceHandlerMock {
+// Set uses given function f to mock the ProfileServiceClient.Update method
+func (mmUpdate *mProfileServiceClientMockUpdate) Set(f func(ctx context.Context, pp1 *connect.Request[v1.UpdateRequest]) (pp2 *connect.Response[v1.UpdateResponse], err error)) *ProfileServiceClientMock {
 	if mmUpdate.defaultExpectation != nil {
-		mmUpdate.mock.t.Fatalf("Default expectation is already set for the ProfileServiceHandler.Update method")
+		mmUpdate.mock.t.Fatalf("Default expectation is already set for the ProfileServiceClient.Update method")
 	}
 
 	if len(mmUpdate.expectations) > 0 {
-		mmUpdate.mock.t.Fatalf("Some expectations are already set for the ProfileServiceHandler.Update method")
+		mmUpdate.mock.t.Fatalf("Some expectations are already set for the ProfileServiceClient.Update method")
 	}
 
 	mmUpdate.mock.funcUpdate = f
@@ -6305,39 +6215,39 @@ func (mmUpdate *mProfileServiceHandlerMockUpdate) Set(f func(ctx context.Context
 	return mmUpdate.mock
 }
 
-// When sets expectation for the ProfileServiceHandler.Update which will trigger the result defined by the following
+// When sets expectation for the ProfileServiceClient.Update which will trigger the result defined by the following
 // Then helper
-func (mmUpdate *mProfileServiceHandlerMockUpdate) When(ctx context.Context, pp1 *connect.Request[v1.UpdateRequest]) *ProfileServiceHandlerMockUpdateExpectation {
+func (mmUpdate *mProfileServiceClientMockUpdate) When(ctx context.Context, pp1 *connect.Request[v1.UpdateRequest]) *ProfileServiceClientMockUpdateExpectation {
 	if mmUpdate.mock.funcUpdate != nil {
-		mmUpdate.mock.t.Fatalf("ProfileServiceHandlerMock.Update mock is already set by Set")
+		mmUpdate.mock.t.Fatalf("ProfileServiceClientMock.Update mock is already set by Set")
 	}
 
-	expectation := &ProfileServiceHandlerMockUpdateExpectation{
+	expectation := &ProfileServiceClientMockUpdateExpectation{
 		mock:               mmUpdate.mock,
-		params:             &ProfileServiceHandlerMockUpdateParams{ctx, pp1},
-		expectationOrigins: ProfileServiceHandlerMockUpdateExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &ProfileServiceClientMockUpdateParams{ctx, pp1},
+		expectationOrigins: ProfileServiceClientMockUpdateExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmUpdate.expectations = append(mmUpdate.expectations, expectation)
 	return expectation
 }
 
-// Then sets up ProfileServiceHandler.Update return parameters for the expectation previously defined by the When method
-func (e *ProfileServiceHandlerMockUpdateExpectation) Then(pp2 *connect.Response[v1.UpdateResponse], err error) *ProfileServiceHandlerMock {
-	e.results = &ProfileServiceHandlerMockUpdateResults{pp2, err}
+// Then sets up ProfileServiceClient.Update return parameters for the expectation previously defined by the When method
+func (e *ProfileServiceClientMockUpdateExpectation) Then(pp2 *connect.Response[v1.UpdateResponse], err error) *ProfileServiceClientMock {
+	e.results = &ProfileServiceClientMockUpdateResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times ProfileServiceHandler.Update should be invoked
-func (mmUpdate *mProfileServiceHandlerMockUpdate) Times(n uint64) *mProfileServiceHandlerMockUpdate {
+// Times sets number of times ProfileServiceClient.Update should be invoked
+func (mmUpdate *mProfileServiceClientMockUpdate) Times(n uint64) *mProfileServiceClientMockUpdate {
 	if n == 0 {
-		mmUpdate.mock.t.Fatalf("Times of ProfileServiceHandlerMock.Update mock can not be zero")
+		mmUpdate.mock.t.Fatalf("Times of ProfileServiceClientMock.Update mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmUpdate.expectedInvocations, n)
 	mmUpdate.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmUpdate
 }
 
-func (mmUpdate *mProfileServiceHandlerMockUpdate) invocationsDone() bool {
+func (mmUpdate *mProfileServiceClientMockUpdate) invocationsDone() bool {
 	if len(mmUpdate.expectations) == 0 && mmUpdate.defaultExpectation == nil && mmUpdate.mock.funcUpdate == nil {
 		return true
 	}
@@ -6348,8 +6258,8 @@ func (mmUpdate *mProfileServiceHandlerMockUpdate) invocationsDone() bool {
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// Update implements mm_profilev1connect.ProfileServiceHandler
-func (mmUpdate *ProfileServiceHandlerMock) Update(ctx context.Context, pp1 *connect.Request[v1.UpdateRequest]) (pp2 *connect.Response[v1.UpdateResponse], err error) {
+// Update implements mm_profilev1connect.ProfileServiceClient
+func (mmUpdate *ProfileServiceClientMock) Update(ctx context.Context, pp1 *connect.Request[v1.UpdateRequest]) (pp2 *connect.Response[v1.UpdateResponse], err error) {
 	mm_atomic.AddUint64(&mmUpdate.beforeUpdateCounter, 1)
 	defer mm_atomic.AddUint64(&mmUpdate.afterUpdateCounter, 1)
 
@@ -6359,7 +6269,7 @@ func (mmUpdate *ProfileServiceHandlerMock) Update(ctx context.Context, pp1 *conn
 		mmUpdate.inspectFuncUpdate(ctx, pp1)
 	}
 
-	mm_params := ProfileServiceHandlerMockUpdateParams{ctx, pp1}
+	mm_params := ProfileServiceClientMockUpdateParams{ctx, pp1}
 
 	// Record call args
 	mmUpdate.UpdateMock.mutex.Lock()
@@ -6378,54 +6288,54 @@ func (mmUpdate *ProfileServiceHandlerMock) Update(ctx context.Context, pp1 *conn
 		mm_want := mmUpdate.UpdateMock.defaultExpectation.params
 		mm_want_ptrs := mmUpdate.UpdateMock.defaultExpectation.paramPtrs
 
-		mm_got := ProfileServiceHandlerMockUpdateParams{ctx, pp1}
+		mm_got := ProfileServiceClientMockUpdateParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmUpdate.t.Errorf("ProfileServiceHandlerMock.Update got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmUpdate.t.Errorf("ProfileServiceClientMock.Update got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmUpdate.UpdateMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmUpdate.t.Errorf("ProfileServiceHandlerMock.Update got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmUpdate.t.Errorf("ProfileServiceClientMock.Update got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmUpdate.UpdateMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmUpdate.t.Errorf("ProfileServiceHandlerMock.Update got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmUpdate.t.Errorf("ProfileServiceClientMock.Update got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmUpdate.UpdateMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmUpdate.UpdateMock.defaultExpectation.results
 		if mm_results == nil {
-			mmUpdate.t.Fatal("No results are set for the ProfileServiceHandlerMock.Update")
+			mmUpdate.t.Fatal("No results are set for the ProfileServiceClientMock.Update")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmUpdate.funcUpdate != nil {
 		return mmUpdate.funcUpdate(ctx, pp1)
 	}
-	mmUpdate.t.Fatalf("Unexpected call to ProfileServiceHandlerMock.Update. %v %v", ctx, pp1)
+	mmUpdate.t.Fatalf("Unexpected call to ProfileServiceClientMock.Update. %v %v", ctx, pp1)
 	return
 }
 
-// UpdateAfterCounter returns a count of finished ProfileServiceHandlerMock.Update invocations
-func (mmUpdate *ProfileServiceHandlerMock) UpdateAfterCounter() uint64 {
+// UpdateAfterCounter returns a count of finished ProfileServiceClientMock.Update invocations
+func (mmUpdate *ProfileServiceClientMock) UpdateAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmUpdate.afterUpdateCounter)
 }
 
-// UpdateBeforeCounter returns a count of ProfileServiceHandlerMock.Update invocations
-func (mmUpdate *ProfileServiceHandlerMock) UpdateBeforeCounter() uint64 {
+// UpdateBeforeCounter returns a count of ProfileServiceClientMock.Update invocations
+func (mmUpdate *ProfileServiceClientMock) UpdateBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmUpdate.beforeUpdateCounter)
 }
 
-// Calls returns a list of arguments used in each call to ProfileServiceHandlerMock.Update.
+// Calls returns a list of arguments used in each call to ProfileServiceClientMock.Update.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmUpdate *mProfileServiceHandlerMockUpdate) Calls() []*ProfileServiceHandlerMockUpdateParams {
+func (mmUpdate *mProfileServiceClientMockUpdate) Calls() []*ProfileServiceClientMockUpdateParams {
 	mmUpdate.mutex.RLock()
 
-	argCopy := make([]*ProfileServiceHandlerMockUpdateParams, len(mmUpdate.callArgs))
+	argCopy := make([]*ProfileServiceClientMockUpdateParams, len(mmUpdate.callArgs))
 	copy(argCopy, mmUpdate.callArgs)
 
 	mmUpdate.mutex.RUnlock()
@@ -6435,7 +6345,7 @@ func (mmUpdate *mProfileServiceHandlerMockUpdate) Calls() []*ProfileServiceHandl
 
 // MinimockUpdateDone returns true if the count of the Update invocations corresponds
 // the number of defined expectations
-func (m *ProfileServiceHandlerMock) MinimockUpdateDone() bool {
+func (m *ProfileServiceClientMock) MinimockUpdateDone() bool {
 	if m.UpdateMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -6451,10 +6361,10 @@ func (m *ProfileServiceHandlerMock) MinimockUpdateDone() bool {
 }
 
 // MinimockUpdateInspect logs each unmet expectation
-func (m *ProfileServiceHandlerMock) MinimockUpdateInspect() {
+func (m *ProfileServiceClientMock) MinimockUpdateInspect() {
 	for _, e := range m.UpdateMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.Update at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.Update at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -6462,24 +6372,24 @@ func (m *ProfileServiceHandlerMock) MinimockUpdateInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.UpdateMock.defaultExpectation != nil && afterUpdateCounter < 1 {
 		if m.UpdateMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.Update at\n%s", m.UpdateMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.Update at\n%s", m.UpdateMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to ProfileServiceHandlerMock.Update at\n%s with params: %#v", m.UpdateMock.defaultExpectation.expectationOrigins.origin, *m.UpdateMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to ProfileServiceClientMock.Update at\n%s with params: %#v", m.UpdateMock.defaultExpectation.expectationOrigins.origin, *m.UpdateMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcUpdate != nil && afterUpdateCounter < 1 {
-		m.t.Errorf("Expected call to ProfileServiceHandlerMock.Update at\n%s", m.funcUpdateOrigin)
+		m.t.Errorf("Expected call to ProfileServiceClientMock.Update at\n%s", m.funcUpdateOrigin)
 	}
 
 	if !m.UpdateMock.invocationsDone() && afterUpdateCounter > 0 {
-		m.t.Errorf("Expected %d calls to ProfileServiceHandlerMock.Update at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to ProfileServiceClientMock.Update at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.UpdateMock.expectedInvocations), m.UpdateMock.expectedInvocationsOrigin, afterUpdateCounter)
 	}
 }
 
 // MinimockFinish checks that all mocked methods have been called the expected number of times
-func (m *ProfileServiceHandlerMock) MinimockFinish() {
+func (m *ProfileServiceClientMock) MinimockFinish() {
 	m.finishOnce.Do(func() {
 		if !m.minimockDone() {
 			m.MinimockAddAddressInspect()
@@ -6522,7 +6432,7 @@ func (m *ProfileServiceHandlerMock) MinimockFinish() {
 }
 
 // MinimockWait waits for all mocked methods to be called the expected number of times
-func (m *ProfileServiceHandlerMock) MinimockWait(timeout mm_time.Duration) {
+func (m *ProfileServiceClientMock) MinimockWait(timeout mm_time.Duration) {
 	timeoutCh := mm_time.After(timeout)
 	for {
 		if m.minimockDone() {
@@ -6537,7 +6447,7 @@ func (m *ProfileServiceHandlerMock) MinimockWait(timeout mm_time.Duration) {
 	}
 }
 
-func (m *ProfileServiceHandlerMock) minimockDone() bool {
+func (m *ProfileServiceClientMock) minimockDone() bool {
 	done := true
 	return done &&
 		m.MinimockAddAddressDone() &&

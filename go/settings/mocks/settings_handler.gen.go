@@ -2,7 +2,7 @@
 
 package mocks
 
-//go:generate minimock -i buf.build/gen/go/antinvestor/settingz/connectrpc/go/settings/v1/settingsv1connect.SettingsServiceHandler -o settings_handler.gen.go -n SettingsServiceHandlerMock -p mocks
+//go:generate minimock -i buf.build/gen/go/antinvestor/settingz/connectrpc/go/settings/v1/settingsv1connect.SettingsServiceClient -o settings_handler.gen.go -n SettingsServiceClientMock -p mocks
 
 import (
 	context "context"
@@ -16,8 +16,8 @@ import (
 	"github.com/gojuno/minimock/v3"
 )
 
-// SettingsServiceHandlerMock implements mm_settingsv1connect.SettingsServiceHandler
-type SettingsServiceHandlerMock struct {
+// SettingsServiceClientMock implements mm_settingsv1connect.SettingsServiceClient
+type SettingsServiceClientMock struct {
 	t          minimock.Tester
 	finishOnce sync.Once
 
@@ -26,99 +26,99 @@ type SettingsServiceHandlerMock struct {
 	inspectFuncGet   func(ctx context.Context, pp1 *connect.Request[v1.GetRequest])
 	afterGetCounter  uint64
 	beforeGetCounter uint64
-	GetMock          mSettingsServiceHandlerMockGet
+	GetMock          mSettingsServiceClientMockGet
 
-	funcList          func(ctx context.Context, pp1 *connect.Request[v1.ListRequest], pp2 *connect.ServerStream[v1.ListResponse]) (err error)
+	funcList          func(ctx context.Context, pp1 *connect.Request[v1.ListRequest]) (pp2 *connect.ServerStreamForClient[v1.ListResponse], err error)
 	funcListOrigin    string
-	inspectFuncList   func(ctx context.Context, pp1 *connect.Request[v1.ListRequest], pp2 *connect.ServerStream[v1.ListResponse])
+	inspectFuncList   func(ctx context.Context, pp1 *connect.Request[v1.ListRequest])
 	afterListCounter  uint64
 	beforeListCounter uint64
-	ListMock          mSettingsServiceHandlerMockList
+	ListMock          mSettingsServiceClientMockList
 
-	funcSearch          func(ctx context.Context, pp1 *connect.Request[v11.SearchRequest], pp2 *connect.ServerStream[v1.SearchResponse]) (err error)
+	funcSearch          func(ctx context.Context, pp1 *connect.Request[v11.SearchRequest]) (pp2 *connect.ServerStreamForClient[v1.SearchResponse], err error)
 	funcSearchOrigin    string
-	inspectFuncSearch   func(ctx context.Context, pp1 *connect.Request[v11.SearchRequest], pp2 *connect.ServerStream[v1.SearchResponse])
+	inspectFuncSearch   func(ctx context.Context, pp1 *connect.Request[v11.SearchRequest])
 	afterSearchCounter  uint64
 	beforeSearchCounter uint64
-	SearchMock          mSettingsServiceHandlerMockSearch
+	SearchMock          mSettingsServiceClientMockSearch
 
 	funcSet          func(ctx context.Context, pp1 *connect.Request[v1.SetRequest]) (pp2 *connect.Response[v1.SetResponse], err error)
 	funcSetOrigin    string
 	inspectFuncSet   func(ctx context.Context, pp1 *connect.Request[v1.SetRequest])
 	afterSetCounter  uint64
 	beforeSetCounter uint64
-	SetMock          mSettingsServiceHandlerMockSet
+	SetMock          mSettingsServiceClientMockSet
 }
 
-// NewSettingsServiceHandlerMock returns a mock for mm_settingsv1connect.SettingsServiceHandler
-func NewSettingsServiceHandlerMock(t minimock.Tester) *SettingsServiceHandlerMock {
-	m := &SettingsServiceHandlerMock{t: t}
+// NewSettingsServiceClientMock returns a mock for mm_settingsv1connect.SettingsServiceClient
+func NewSettingsServiceClientMock(t minimock.Tester) *SettingsServiceClientMock {
+	m := &SettingsServiceClientMock{t: t}
 
 	if controller, ok := t.(minimock.MockController); ok {
 		controller.RegisterMocker(m)
 	}
 
-	m.GetMock = mSettingsServiceHandlerMockGet{mock: m}
-	m.GetMock.callArgs = []*SettingsServiceHandlerMockGetParams{}
+	m.GetMock = mSettingsServiceClientMockGet{mock: m}
+	m.GetMock.callArgs = []*SettingsServiceClientMockGetParams{}
 
-	m.ListMock = mSettingsServiceHandlerMockList{mock: m}
-	m.ListMock.callArgs = []*SettingsServiceHandlerMockListParams{}
+	m.ListMock = mSettingsServiceClientMockList{mock: m}
+	m.ListMock.callArgs = []*SettingsServiceClientMockListParams{}
 
-	m.SearchMock = mSettingsServiceHandlerMockSearch{mock: m}
-	m.SearchMock.callArgs = []*SettingsServiceHandlerMockSearchParams{}
+	m.SearchMock = mSettingsServiceClientMockSearch{mock: m}
+	m.SearchMock.callArgs = []*SettingsServiceClientMockSearchParams{}
 
-	m.SetMock = mSettingsServiceHandlerMockSet{mock: m}
-	m.SetMock.callArgs = []*SettingsServiceHandlerMockSetParams{}
+	m.SetMock = mSettingsServiceClientMockSet{mock: m}
+	m.SetMock.callArgs = []*SettingsServiceClientMockSetParams{}
 
 	t.Cleanup(m.MinimockFinish)
 
 	return m
 }
 
-type mSettingsServiceHandlerMockGet struct {
+type mSettingsServiceClientMockGet struct {
 	optional           bool
-	mock               *SettingsServiceHandlerMock
-	defaultExpectation *SettingsServiceHandlerMockGetExpectation
-	expectations       []*SettingsServiceHandlerMockGetExpectation
+	mock               *SettingsServiceClientMock
+	defaultExpectation *SettingsServiceClientMockGetExpectation
+	expectations       []*SettingsServiceClientMockGetExpectation
 
-	callArgs []*SettingsServiceHandlerMockGetParams
+	callArgs []*SettingsServiceClientMockGetParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// SettingsServiceHandlerMockGetExpectation specifies expectation struct of the SettingsServiceHandler.Get
-type SettingsServiceHandlerMockGetExpectation struct {
-	mock               *SettingsServiceHandlerMock
-	params             *SettingsServiceHandlerMockGetParams
-	paramPtrs          *SettingsServiceHandlerMockGetParamPtrs
-	expectationOrigins SettingsServiceHandlerMockGetExpectationOrigins
-	results            *SettingsServiceHandlerMockGetResults
+// SettingsServiceClientMockGetExpectation specifies expectation struct of the SettingsServiceClient.Get
+type SettingsServiceClientMockGetExpectation struct {
+	mock               *SettingsServiceClientMock
+	params             *SettingsServiceClientMockGetParams
+	paramPtrs          *SettingsServiceClientMockGetParamPtrs
+	expectationOrigins SettingsServiceClientMockGetExpectationOrigins
+	results            *SettingsServiceClientMockGetResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// SettingsServiceHandlerMockGetParams contains parameters of the SettingsServiceHandler.Get
-type SettingsServiceHandlerMockGetParams struct {
+// SettingsServiceClientMockGetParams contains parameters of the SettingsServiceClient.Get
+type SettingsServiceClientMockGetParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.GetRequest]
 }
 
-// SettingsServiceHandlerMockGetParamPtrs contains pointers to parameters of the SettingsServiceHandler.Get
-type SettingsServiceHandlerMockGetParamPtrs struct {
+// SettingsServiceClientMockGetParamPtrs contains pointers to parameters of the SettingsServiceClient.Get
+type SettingsServiceClientMockGetParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.GetRequest]
 }
 
-// SettingsServiceHandlerMockGetResults contains results of the SettingsServiceHandler.Get
-type SettingsServiceHandlerMockGetResults struct {
+// SettingsServiceClientMockGetResults contains results of the SettingsServiceClient.Get
+type SettingsServiceClientMockGetResults struct {
 	pp2 *connect.Response[v1.GetResponse]
 	err error
 }
 
-// SettingsServiceHandlerMockGetOrigins contains origins of expectations of the SettingsServiceHandler.Get
-type SettingsServiceHandlerMockGetExpectationOrigins struct {
+// SettingsServiceClientMockGetOrigins contains origins of expectations of the SettingsServiceClient.Get
+type SettingsServiceClientMockGetExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -129,26 +129,26 @@ type SettingsServiceHandlerMockGetExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmGet *mSettingsServiceHandlerMockGet) Optional() *mSettingsServiceHandlerMockGet {
+func (mmGet *mSettingsServiceClientMockGet) Optional() *mSettingsServiceClientMockGet {
 	mmGet.optional = true
 	return mmGet
 }
 
-// Expect sets up expected params for SettingsServiceHandler.Get
-func (mmGet *mSettingsServiceHandlerMockGet) Expect(ctx context.Context, pp1 *connect.Request[v1.GetRequest]) *mSettingsServiceHandlerMockGet {
+// Expect sets up expected params for SettingsServiceClient.Get
+func (mmGet *mSettingsServiceClientMockGet) Expect(ctx context.Context, pp1 *connect.Request[v1.GetRequest]) *mSettingsServiceClientMockGet {
 	if mmGet.mock.funcGet != nil {
-		mmGet.mock.t.Fatalf("SettingsServiceHandlerMock.Get mock is already set by Set")
+		mmGet.mock.t.Fatalf("SettingsServiceClientMock.Get mock is already set by Set")
 	}
 
 	if mmGet.defaultExpectation == nil {
-		mmGet.defaultExpectation = &SettingsServiceHandlerMockGetExpectation{}
+		mmGet.defaultExpectation = &SettingsServiceClientMockGetExpectation{}
 	}
 
 	if mmGet.defaultExpectation.paramPtrs != nil {
-		mmGet.mock.t.Fatalf("SettingsServiceHandlerMock.Get mock is already set by ExpectParams functions")
+		mmGet.mock.t.Fatalf("SettingsServiceClientMock.Get mock is already set by ExpectParams functions")
 	}
 
-	mmGet.defaultExpectation.params = &SettingsServiceHandlerMockGetParams{ctx, pp1}
+	mmGet.defaultExpectation.params = &SettingsServiceClientMockGetParams{ctx, pp1}
 	mmGet.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmGet.expectations {
 		if minimock.Equal(e.params, mmGet.defaultExpectation.params) {
@@ -159,22 +159,22 @@ func (mmGet *mSettingsServiceHandlerMockGet) Expect(ctx context.Context, pp1 *co
 	return mmGet
 }
 
-// ExpectCtxParam1 sets up expected param ctx for SettingsServiceHandler.Get
-func (mmGet *mSettingsServiceHandlerMockGet) ExpectCtxParam1(ctx context.Context) *mSettingsServiceHandlerMockGet {
+// ExpectCtxParam1 sets up expected param ctx for SettingsServiceClient.Get
+func (mmGet *mSettingsServiceClientMockGet) ExpectCtxParam1(ctx context.Context) *mSettingsServiceClientMockGet {
 	if mmGet.mock.funcGet != nil {
-		mmGet.mock.t.Fatalf("SettingsServiceHandlerMock.Get mock is already set by Set")
+		mmGet.mock.t.Fatalf("SettingsServiceClientMock.Get mock is already set by Set")
 	}
 
 	if mmGet.defaultExpectation == nil {
-		mmGet.defaultExpectation = &SettingsServiceHandlerMockGetExpectation{}
+		mmGet.defaultExpectation = &SettingsServiceClientMockGetExpectation{}
 	}
 
 	if mmGet.defaultExpectation.params != nil {
-		mmGet.mock.t.Fatalf("SettingsServiceHandlerMock.Get mock is already set by Expect")
+		mmGet.mock.t.Fatalf("SettingsServiceClientMock.Get mock is already set by Expect")
 	}
 
 	if mmGet.defaultExpectation.paramPtrs == nil {
-		mmGet.defaultExpectation.paramPtrs = &SettingsServiceHandlerMockGetParamPtrs{}
+		mmGet.defaultExpectation.paramPtrs = &SettingsServiceClientMockGetParamPtrs{}
 	}
 	mmGet.defaultExpectation.paramPtrs.ctx = &ctx
 	mmGet.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -182,22 +182,22 @@ func (mmGet *mSettingsServiceHandlerMockGet) ExpectCtxParam1(ctx context.Context
 	return mmGet
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for SettingsServiceHandler.Get
-func (mmGet *mSettingsServiceHandlerMockGet) ExpectPp1Param2(pp1 *connect.Request[v1.GetRequest]) *mSettingsServiceHandlerMockGet {
+// ExpectPp1Param2 sets up expected param pp1 for SettingsServiceClient.Get
+func (mmGet *mSettingsServiceClientMockGet) ExpectPp1Param2(pp1 *connect.Request[v1.GetRequest]) *mSettingsServiceClientMockGet {
 	if mmGet.mock.funcGet != nil {
-		mmGet.mock.t.Fatalf("SettingsServiceHandlerMock.Get mock is already set by Set")
+		mmGet.mock.t.Fatalf("SettingsServiceClientMock.Get mock is already set by Set")
 	}
 
 	if mmGet.defaultExpectation == nil {
-		mmGet.defaultExpectation = &SettingsServiceHandlerMockGetExpectation{}
+		mmGet.defaultExpectation = &SettingsServiceClientMockGetExpectation{}
 	}
 
 	if mmGet.defaultExpectation.params != nil {
-		mmGet.mock.t.Fatalf("SettingsServiceHandlerMock.Get mock is already set by Expect")
+		mmGet.mock.t.Fatalf("SettingsServiceClientMock.Get mock is already set by Expect")
 	}
 
 	if mmGet.defaultExpectation.paramPtrs == nil {
-		mmGet.defaultExpectation.paramPtrs = &SettingsServiceHandlerMockGetParamPtrs{}
+		mmGet.defaultExpectation.paramPtrs = &SettingsServiceClientMockGetParamPtrs{}
 	}
 	mmGet.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmGet.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -205,10 +205,10 @@ func (mmGet *mSettingsServiceHandlerMockGet) ExpectPp1Param2(pp1 *connect.Reques
 	return mmGet
 }
 
-// Inspect accepts an inspector function that has same arguments as the SettingsServiceHandler.Get
-func (mmGet *mSettingsServiceHandlerMockGet) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.GetRequest])) *mSettingsServiceHandlerMockGet {
+// Inspect accepts an inspector function that has same arguments as the SettingsServiceClient.Get
+func (mmGet *mSettingsServiceClientMockGet) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.GetRequest])) *mSettingsServiceClientMockGet {
 	if mmGet.mock.inspectFuncGet != nil {
-		mmGet.mock.t.Fatalf("Inspect function is already set for SettingsServiceHandlerMock.Get")
+		mmGet.mock.t.Fatalf("Inspect function is already set for SettingsServiceClientMock.Get")
 	}
 
 	mmGet.mock.inspectFuncGet = f
@@ -216,28 +216,28 @@ func (mmGet *mSettingsServiceHandlerMockGet) Inspect(f func(ctx context.Context,
 	return mmGet
 }
 
-// Return sets up results that will be returned by SettingsServiceHandler.Get
-func (mmGet *mSettingsServiceHandlerMockGet) Return(pp2 *connect.Response[v1.GetResponse], err error) *SettingsServiceHandlerMock {
+// Return sets up results that will be returned by SettingsServiceClient.Get
+func (mmGet *mSettingsServiceClientMockGet) Return(pp2 *connect.Response[v1.GetResponse], err error) *SettingsServiceClientMock {
 	if mmGet.mock.funcGet != nil {
-		mmGet.mock.t.Fatalf("SettingsServiceHandlerMock.Get mock is already set by Set")
+		mmGet.mock.t.Fatalf("SettingsServiceClientMock.Get mock is already set by Set")
 	}
 
 	if mmGet.defaultExpectation == nil {
-		mmGet.defaultExpectation = &SettingsServiceHandlerMockGetExpectation{mock: mmGet.mock}
+		mmGet.defaultExpectation = &SettingsServiceClientMockGetExpectation{mock: mmGet.mock}
 	}
-	mmGet.defaultExpectation.results = &SettingsServiceHandlerMockGetResults{pp2, err}
+	mmGet.defaultExpectation.results = &SettingsServiceClientMockGetResults{pp2, err}
 	mmGet.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmGet.mock
 }
 
-// Set uses given function f to mock the SettingsServiceHandler.Get method
-func (mmGet *mSettingsServiceHandlerMockGet) Set(f func(ctx context.Context, pp1 *connect.Request[v1.GetRequest]) (pp2 *connect.Response[v1.GetResponse], err error)) *SettingsServiceHandlerMock {
+// Set uses given function f to mock the SettingsServiceClient.Get method
+func (mmGet *mSettingsServiceClientMockGet) Set(f func(ctx context.Context, pp1 *connect.Request[v1.GetRequest]) (pp2 *connect.Response[v1.GetResponse], err error)) *SettingsServiceClientMock {
 	if mmGet.defaultExpectation != nil {
-		mmGet.mock.t.Fatalf("Default expectation is already set for the SettingsServiceHandler.Get method")
+		mmGet.mock.t.Fatalf("Default expectation is already set for the SettingsServiceClient.Get method")
 	}
 
 	if len(mmGet.expectations) > 0 {
-		mmGet.mock.t.Fatalf("Some expectations are already set for the SettingsServiceHandler.Get method")
+		mmGet.mock.t.Fatalf("Some expectations are already set for the SettingsServiceClient.Get method")
 	}
 
 	mmGet.mock.funcGet = f
@@ -245,39 +245,39 @@ func (mmGet *mSettingsServiceHandlerMockGet) Set(f func(ctx context.Context, pp1
 	return mmGet.mock
 }
 
-// When sets expectation for the SettingsServiceHandler.Get which will trigger the result defined by the following
+// When sets expectation for the SettingsServiceClient.Get which will trigger the result defined by the following
 // Then helper
-func (mmGet *mSettingsServiceHandlerMockGet) When(ctx context.Context, pp1 *connect.Request[v1.GetRequest]) *SettingsServiceHandlerMockGetExpectation {
+func (mmGet *mSettingsServiceClientMockGet) When(ctx context.Context, pp1 *connect.Request[v1.GetRequest]) *SettingsServiceClientMockGetExpectation {
 	if mmGet.mock.funcGet != nil {
-		mmGet.mock.t.Fatalf("SettingsServiceHandlerMock.Get mock is already set by Set")
+		mmGet.mock.t.Fatalf("SettingsServiceClientMock.Get mock is already set by Set")
 	}
 
-	expectation := &SettingsServiceHandlerMockGetExpectation{
+	expectation := &SettingsServiceClientMockGetExpectation{
 		mock:               mmGet.mock,
-		params:             &SettingsServiceHandlerMockGetParams{ctx, pp1},
-		expectationOrigins: SettingsServiceHandlerMockGetExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &SettingsServiceClientMockGetParams{ctx, pp1},
+		expectationOrigins: SettingsServiceClientMockGetExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmGet.expectations = append(mmGet.expectations, expectation)
 	return expectation
 }
 
-// Then sets up SettingsServiceHandler.Get return parameters for the expectation previously defined by the When method
-func (e *SettingsServiceHandlerMockGetExpectation) Then(pp2 *connect.Response[v1.GetResponse], err error) *SettingsServiceHandlerMock {
-	e.results = &SettingsServiceHandlerMockGetResults{pp2, err}
+// Then sets up SettingsServiceClient.Get return parameters for the expectation previously defined by the When method
+func (e *SettingsServiceClientMockGetExpectation) Then(pp2 *connect.Response[v1.GetResponse], err error) *SettingsServiceClientMock {
+	e.results = &SettingsServiceClientMockGetResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times SettingsServiceHandler.Get should be invoked
-func (mmGet *mSettingsServiceHandlerMockGet) Times(n uint64) *mSettingsServiceHandlerMockGet {
+// Times sets number of times SettingsServiceClient.Get should be invoked
+func (mmGet *mSettingsServiceClientMockGet) Times(n uint64) *mSettingsServiceClientMockGet {
 	if n == 0 {
-		mmGet.mock.t.Fatalf("Times of SettingsServiceHandlerMock.Get mock can not be zero")
+		mmGet.mock.t.Fatalf("Times of SettingsServiceClientMock.Get mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmGet.expectedInvocations, n)
 	mmGet.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmGet
 }
 
-func (mmGet *mSettingsServiceHandlerMockGet) invocationsDone() bool {
+func (mmGet *mSettingsServiceClientMockGet) invocationsDone() bool {
 	if len(mmGet.expectations) == 0 && mmGet.defaultExpectation == nil && mmGet.mock.funcGet == nil {
 		return true
 	}
@@ -288,8 +288,8 @@ func (mmGet *mSettingsServiceHandlerMockGet) invocationsDone() bool {
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// Get implements mm_settingsv1connect.SettingsServiceHandler
-func (mmGet *SettingsServiceHandlerMock) Get(ctx context.Context, pp1 *connect.Request[v1.GetRequest]) (pp2 *connect.Response[v1.GetResponse], err error) {
+// Get implements mm_settingsv1connect.SettingsServiceClient
+func (mmGet *SettingsServiceClientMock) Get(ctx context.Context, pp1 *connect.Request[v1.GetRequest]) (pp2 *connect.Response[v1.GetResponse], err error) {
 	mm_atomic.AddUint64(&mmGet.beforeGetCounter, 1)
 	defer mm_atomic.AddUint64(&mmGet.afterGetCounter, 1)
 
@@ -299,7 +299,7 @@ func (mmGet *SettingsServiceHandlerMock) Get(ctx context.Context, pp1 *connect.R
 		mmGet.inspectFuncGet(ctx, pp1)
 	}
 
-	mm_params := SettingsServiceHandlerMockGetParams{ctx, pp1}
+	mm_params := SettingsServiceClientMockGetParams{ctx, pp1}
 
 	// Record call args
 	mmGet.GetMock.mutex.Lock()
@@ -318,54 +318,54 @@ func (mmGet *SettingsServiceHandlerMock) Get(ctx context.Context, pp1 *connect.R
 		mm_want := mmGet.GetMock.defaultExpectation.params
 		mm_want_ptrs := mmGet.GetMock.defaultExpectation.paramPtrs
 
-		mm_got := SettingsServiceHandlerMockGetParams{ctx, pp1}
+		mm_got := SettingsServiceClientMockGetParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmGet.t.Errorf("SettingsServiceHandlerMock.Get got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmGet.t.Errorf("SettingsServiceClientMock.Get got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmGet.GetMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmGet.t.Errorf("SettingsServiceHandlerMock.Get got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmGet.t.Errorf("SettingsServiceClientMock.Get got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmGet.GetMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmGet.t.Errorf("SettingsServiceHandlerMock.Get got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmGet.t.Errorf("SettingsServiceClientMock.Get got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmGet.GetMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmGet.GetMock.defaultExpectation.results
 		if mm_results == nil {
-			mmGet.t.Fatal("No results are set for the SettingsServiceHandlerMock.Get")
+			mmGet.t.Fatal("No results are set for the SettingsServiceClientMock.Get")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmGet.funcGet != nil {
 		return mmGet.funcGet(ctx, pp1)
 	}
-	mmGet.t.Fatalf("Unexpected call to SettingsServiceHandlerMock.Get. %v %v", ctx, pp1)
+	mmGet.t.Fatalf("Unexpected call to SettingsServiceClientMock.Get. %v %v", ctx, pp1)
 	return
 }
 
-// GetAfterCounter returns a count of finished SettingsServiceHandlerMock.Get invocations
-func (mmGet *SettingsServiceHandlerMock) GetAfterCounter() uint64 {
+// GetAfterCounter returns a count of finished SettingsServiceClientMock.Get invocations
+func (mmGet *SettingsServiceClientMock) GetAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmGet.afterGetCounter)
 }
 
-// GetBeforeCounter returns a count of SettingsServiceHandlerMock.Get invocations
-func (mmGet *SettingsServiceHandlerMock) GetBeforeCounter() uint64 {
+// GetBeforeCounter returns a count of SettingsServiceClientMock.Get invocations
+func (mmGet *SettingsServiceClientMock) GetBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmGet.beforeGetCounter)
 }
 
-// Calls returns a list of arguments used in each call to SettingsServiceHandlerMock.Get.
+// Calls returns a list of arguments used in each call to SettingsServiceClientMock.Get.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmGet *mSettingsServiceHandlerMockGet) Calls() []*SettingsServiceHandlerMockGetParams {
+func (mmGet *mSettingsServiceClientMockGet) Calls() []*SettingsServiceClientMockGetParams {
 	mmGet.mutex.RLock()
 
-	argCopy := make([]*SettingsServiceHandlerMockGetParams, len(mmGet.callArgs))
+	argCopy := make([]*SettingsServiceClientMockGetParams, len(mmGet.callArgs))
 	copy(argCopy, mmGet.callArgs)
 
 	mmGet.mutex.RUnlock()
@@ -375,7 +375,7 @@ func (mmGet *mSettingsServiceHandlerMockGet) Calls() []*SettingsServiceHandlerMo
 
 // MinimockGetDone returns true if the count of the Get invocations corresponds
 // the number of defined expectations
-func (m *SettingsServiceHandlerMock) MinimockGetDone() bool {
+func (m *SettingsServiceClientMock) MinimockGetDone() bool {
 	if m.GetMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -391,10 +391,10 @@ func (m *SettingsServiceHandlerMock) MinimockGetDone() bool {
 }
 
 // MinimockGetInspect logs each unmet expectation
-func (m *SettingsServiceHandlerMock) MinimockGetInspect() {
+func (m *SettingsServiceClientMock) MinimockGetInspect() {
 	for _, e := range m.GetMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to SettingsServiceHandlerMock.Get at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to SettingsServiceClientMock.Get at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -402,71 +402,69 @@ func (m *SettingsServiceHandlerMock) MinimockGetInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.GetMock.defaultExpectation != nil && afterGetCounter < 1 {
 		if m.GetMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to SettingsServiceHandlerMock.Get at\n%s", m.GetMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to SettingsServiceClientMock.Get at\n%s", m.GetMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to SettingsServiceHandlerMock.Get at\n%s with params: %#v", m.GetMock.defaultExpectation.expectationOrigins.origin, *m.GetMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to SettingsServiceClientMock.Get at\n%s with params: %#v", m.GetMock.defaultExpectation.expectationOrigins.origin, *m.GetMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcGet != nil && afterGetCounter < 1 {
-		m.t.Errorf("Expected call to SettingsServiceHandlerMock.Get at\n%s", m.funcGetOrigin)
+		m.t.Errorf("Expected call to SettingsServiceClientMock.Get at\n%s", m.funcGetOrigin)
 	}
 
 	if !m.GetMock.invocationsDone() && afterGetCounter > 0 {
-		m.t.Errorf("Expected %d calls to SettingsServiceHandlerMock.Get at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to SettingsServiceClientMock.Get at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.GetMock.expectedInvocations), m.GetMock.expectedInvocationsOrigin, afterGetCounter)
 	}
 }
 
-type mSettingsServiceHandlerMockList struct {
+type mSettingsServiceClientMockList struct {
 	optional           bool
-	mock               *SettingsServiceHandlerMock
-	defaultExpectation *SettingsServiceHandlerMockListExpectation
-	expectations       []*SettingsServiceHandlerMockListExpectation
+	mock               *SettingsServiceClientMock
+	defaultExpectation *SettingsServiceClientMockListExpectation
+	expectations       []*SettingsServiceClientMockListExpectation
 
-	callArgs []*SettingsServiceHandlerMockListParams
+	callArgs []*SettingsServiceClientMockListParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// SettingsServiceHandlerMockListExpectation specifies expectation struct of the SettingsServiceHandler.List
-type SettingsServiceHandlerMockListExpectation struct {
-	mock               *SettingsServiceHandlerMock
-	params             *SettingsServiceHandlerMockListParams
-	paramPtrs          *SettingsServiceHandlerMockListParamPtrs
-	expectationOrigins SettingsServiceHandlerMockListExpectationOrigins
-	results            *SettingsServiceHandlerMockListResults
+// SettingsServiceClientMockListExpectation specifies expectation struct of the SettingsServiceClient.List
+type SettingsServiceClientMockListExpectation struct {
+	mock               *SettingsServiceClientMock
+	params             *SettingsServiceClientMockListParams
+	paramPtrs          *SettingsServiceClientMockListParamPtrs
+	expectationOrigins SettingsServiceClientMockListExpectationOrigins
+	results            *SettingsServiceClientMockListResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// SettingsServiceHandlerMockListParams contains parameters of the SettingsServiceHandler.List
-type SettingsServiceHandlerMockListParams struct {
+// SettingsServiceClientMockListParams contains parameters of the SettingsServiceClient.List
+type SettingsServiceClientMockListParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.ListRequest]
-	pp2 *connect.ServerStream[v1.ListResponse]
 }
 
-// SettingsServiceHandlerMockListParamPtrs contains pointers to parameters of the SettingsServiceHandler.List
-type SettingsServiceHandlerMockListParamPtrs struct {
+// SettingsServiceClientMockListParamPtrs contains pointers to parameters of the SettingsServiceClient.List
+type SettingsServiceClientMockListParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.ListRequest]
-	pp2 **connect.ServerStream[v1.ListResponse]
 }
 
-// SettingsServiceHandlerMockListResults contains results of the SettingsServiceHandler.List
-type SettingsServiceHandlerMockListResults struct {
+// SettingsServiceClientMockListResults contains results of the SettingsServiceClient.List
+type SettingsServiceClientMockListResults struct {
+	pp2 *connect.ServerStreamForClient[v1.ListResponse]
 	err error
 }
 
-// SettingsServiceHandlerMockListOrigins contains origins of expectations of the SettingsServiceHandler.List
-type SettingsServiceHandlerMockListExpectationOrigins struct {
+// SettingsServiceClientMockListOrigins contains origins of expectations of the SettingsServiceClient.List
+type SettingsServiceClientMockListExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
-	originPp2 string
 }
 
 // Marks this method to be optional. The default behavior of any method with Return() is '1 or more', meaning
@@ -474,26 +472,26 @@ type SettingsServiceHandlerMockListExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmList *mSettingsServiceHandlerMockList) Optional() *mSettingsServiceHandlerMockList {
+func (mmList *mSettingsServiceClientMockList) Optional() *mSettingsServiceClientMockList {
 	mmList.optional = true
 	return mmList
 }
 
-// Expect sets up expected params for SettingsServiceHandler.List
-func (mmList *mSettingsServiceHandlerMockList) Expect(ctx context.Context, pp1 *connect.Request[v1.ListRequest], pp2 *connect.ServerStream[v1.ListResponse]) *mSettingsServiceHandlerMockList {
+// Expect sets up expected params for SettingsServiceClient.List
+func (mmList *mSettingsServiceClientMockList) Expect(ctx context.Context, pp1 *connect.Request[v1.ListRequest]) *mSettingsServiceClientMockList {
 	if mmList.mock.funcList != nil {
-		mmList.mock.t.Fatalf("SettingsServiceHandlerMock.List mock is already set by Set")
+		mmList.mock.t.Fatalf("SettingsServiceClientMock.List mock is already set by Set")
 	}
 
 	if mmList.defaultExpectation == nil {
-		mmList.defaultExpectation = &SettingsServiceHandlerMockListExpectation{}
+		mmList.defaultExpectation = &SettingsServiceClientMockListExpectation{}
 	}
 
 	if mmList.defaultExpectation.paramPtrs != nil {
-		mmList.mock.t.Fatalf("SettingsServiceHandlerMock.List mock is already set by ExpectParams functions")
+		mmList.mock.t.Fatalf("SettingsServiceClientMock.List mock is already set by ExpectParams functions")
 	}
 
-	mmList.defaultExpectation.params = &SettingsServiceHandlerMockListParams{ctx, pp1, pp2}
+	mmList.defaultExpectation.params = &SettingsServiceClientMockListParams{ctx, pp1}
 	mmList.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmList.expectations {
 		if minimock.Equal(e.params, mmList.defaultExpectation.params) {
@@ -504,22 +502,22 @@ func (mmList *mSettingsServiceHandlerMockList) Expect(ctx context.Context, pp1 *
 	return mmList
 }
 
-// ExpectCtxParam1 sets up expected param ctx for SettingsServiceHandler.List
-func (mmList *mSettingsServiceHandlerMockList) ExpectCtxParam1(ctx context.Context) *mSettingsServiceHandlerMockList {
+// ExpectCtxParam1 sets up expected param ctx for SettingsServiceClient.List
+func (mmList *mSettingsServiceClientMockList) ExpectCtxParam1(ctx context.Context) *mSettingsServiceClientMockList {
 	if mmList.mock.funcList != nil {
-		mmList.mock.t.Fatalf("SettingsServiceHandlerMock.List mock is already set by Set")
+		mmList.mock.t.Fatalf("SettingsServiceClientMock.List mock is already set by Set")
 	}
 
 	if mmList.defaultExpectation == nil {
-		mmList.defaultExpectation = &SettingsServiceHandlerMockListExpectation{}
+		mmList.defaultExpectation = &SettingsServiceClientMockListExpectation{}
 	}
 
 	if mmList.defaultExpectation.params != nil {
-		mmList.mock.t.Fatalf("SettingsServiceHandlerMock.List mock is already set by Expect")
+		mmList.mock.t.Fatalf("SettingsServiceClientMock.List mock is already set by Expect")
 	}
 
 	if mmList.defaultExpectation.paramPtrs == nil {
-		mmList.defaultExpectation.paramPtrs = &SettingsServiceHandlerMockListParamPtrs{}
+		mmList.defaultExpectation.paramPtrs = &SettingsServiceClientMockListParamPtrs{}
 	}
 	mmList.defaultExpectation.paramPtrs.ctx = &ctx
 	mmList.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -527,22 +525,22 @@ func (mmList *mSettingsServiceHandlerMockList) ExpectCtxParam1(ctx context.Conte
 	return mmList
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for SettingsServiceHandler.List
-func (mmList *mSettingsServiceHandlerMockList) ExpectPp1Param2(pp1 *connect.Request[v1.ListRequest]) *mSettingsServiceHandlerMockList {
+// ExpectPp1Param2 sets up expected param pp1 for SettingsServiceClient.List
+func (mmList *mSettingsServiceClientMockList) ExpectPp1Param2(pp1 *connect.Request[v1.ListRequest]) *mSettingsServiceClientMockList {
 	if mmList.mock.funcList != nil {
-		mmList.mock.t.Fatalf("SettingsServiceHandlerMock.List mock is already set by Set")
+		mmList.mock.t.Fatalf("SettingsServiceClientMock.List mock is already set by Set")
 	}
 
 	if mmList.defaultExpectation == nil {
-		mmList.defaultExpectation = &SettingsServiceHandlerMockListExpectation{}
+		mmList.defaultExpectation = &SettingsServiceClientMockListExpectation{}
 	}
 
 	if mmList.defaultExpectation.params != nil {
-		mmList.mock.t.Fatalf("SettingsServiceHandlerMock.List mock is already set by Expect")
+		mmList.mock.t.Fatalf("SettingsServiceClientMock.List mock is already set by Expect")
 	}
 
 	if mmList.defaultExpectation.paramPtrs == nil {
-		mmList.defaultExpectation.paramPtrs = &SettingsServiceHandlerMockListParamPtrs{}
+		mmList.defaultExpectation.paramPtrs = &SettingsServiceClientMockListParamPtrs{}
 	}
 	mmList.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmList.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -550,33 +548,10 @@ func (mmList *mSettingsServiceHandlerMockList) ExpectPp1Param2(pp1 *connect.Requ
 	return mmList
 }
 
-// ExpectPp2Param3 sets up expected param pp2 for SettingsServiceHandler.List
-func (mmList *mSettingsServiceHandlerMockList) ExpectPp2Param3(pp2 *connect.ServerStream[v1.ListResponse]) *mSettingsServiceHandlerMockList {
-	if mmList.mock.funcList != nil {
-		mmList.mock.t.Fatalf("SettingsServiceHandlerMock.List mock is already set by Set")
-	}
-
-	if mmList.defaultExpectation == nil {
-		mmList.defaultExpectation = &SettingsServiceHandlerMockListExpectation{}
-	}
-
-	if mmList.defaultExpectation.params != nil {
-		mmList.mock.t.Fatalf("SettingsServiceHandlerMock.List mock is already set by Expect")
-	}
-
-	if mmList.defaultExpectation.paramPtrs == nil {
-		mmList.defaultExpectation.paramPtrs = &SettingsServiceHandlerMockListParamPtrs{}
-	}
-	mmList.defaultExpectation.paramPtrs.pp2 = &pp2
-	mmList.defaultExpectation.expectationOrigins.originPp2 = minimock.CallerInfo(1)
-
-	return mmList
-}
-
-// Inspect accepts an inspector function that has same arguments as the SettingsServiceHandler.List
-func (mmList *mSettingsServiceHandlerMockList) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.ListRequest], pp2 *connect.ServerStream[v1.ListResponse])) *mSettingsServiceHandlerMockList {
+// Inspect accepts an inspector function that has same arguments as the SettingsServiceClient.List
+func (mmList *mSettingsServiceClientMockList) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.ListRequest])) *mSettingsServiceClientMockList {
 	if mmList.mock.inspectFuncList != nil {
-		mmList.mock.t.Fatalf("Inspect function is already set for SettingsServiceHandlerMock.List")
+		mmList.mock.t.Fatalf("Inspect function is already set for SettingsServiceClientMock.List")
 	}
 
 	mmList.mock.inspectFuncList = f
@@ -584,28 +559,28 @@ func (mmList *mSettingsServiceHandlerMockList) Inspect(f func(ctx context.Contex
 	return mmList
 }
 
-// Return sets up results that will be returned by SettingsServiceHandler.List
-func (mmList *mSettingsServiceHandlerMockList) Return(err error) *SettingsServiceHandlerMock {
+// Return sets up results that will be returned by SettingsServiceClient.List
+func (mmList *mSettingsServiceClientMockList) Return(pp2 *connect.ServerStreamForClient[v1.ListResponse], err error) *SettingsServiceClientMock {
 	if mmList.mock.funcList != nil {
-		mmList.mock.t.Fatalf("SettingsServiceHandlerMock.List mock is already set by Set")
+		mmList.mock.t.Fatalf("SettingsServiceClientMock.List mock is already set by Set")
 	}
 
 	if mmList.defaultExpectation == nil {
-		mmList.defaultExpectation = &SettingsServiceHandlerMockListExpectation{mock: mmList.mock}
+		mmList.defaultExpectation = &SettingsServiceClientMockListExpectation{mock: mmList.mock}
 	}
-	mmList.defaultExpectation.results = &SettingsServiceHandlerMockListResults{err}
+	mmList.defaultExpectation.results = &SettingsServiceClientMockListResults{pp2, err}
 	mmList.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmList.mock
 }
 
-// Set uses given function f to mock the SettingsServiceHandler.List method
-func (mmList *mSettingsServiceHandlerMockList) Set(f func(ctx context.Context, pp1 *connect.Request[v1.ListRequest], pp2 *connect.ServerStream[v1.ListResponse]) (err error)) *SettingsServiceHandlerMock {
+// Set uses given function f to mock the SettingsServiceClient.List method
+func (mmList *mSettingsServiceClientMockList) Set(f func(ctx context.Context, pp1 *connect.Request[v1.ListRequest]) (pp2 *connect.ServerStreamForClient[v1.ListResponse], err error)) *SettingsServiceClientMock {
 	if mmList.defaultExpectation != nil {
-		mmList.mock.t.Fatalf("Default expectation is already set for the SettingsServiceHandler.List method")
+		mmList.mock.t.Fatalf("Default expectation is already set for the SettingsServiceClient.List method")
 	}
 
 	if len(mmList.expectations) > 0 {
-		mmList.mock.t.Fatalf("Some expectations are already set for the SettingsServiceHandler.List method")
+		mmList.mock.t.Fatalf("Some expectations are already set for the SettingsServiceClient.List method")
 	}
 
 	mmList.mock.funcList = f
@@ -613,39 +588,39 @@ func (mmList *mSettingsServiceHandlerMockList) Set(f func(ctx context.Context, p
 	return mmList.mock
 }
 
-// When sets expectation for the SettingsServiceHandler.List which will trigger the result defined by the following
+// When sets expectation for the SettingsServiceClient.List which will trigger the result defined by the following
 // Then helper
-func (mmList *mSettingsServiceHandlerMockList) When(ctx context.Context, pp1 *connect.Request[v1.ListRequest], pp2 *connect.ServerStream[v1.ListResponse]) *SettingsServiceHandlerMockListExpectation {
+func (mmList *mSettingsServiceClientMockList) When(ctx context.Context, pp1 *connect.Request[v1.ListRequest]) *SettingsServiceClientMockListExpectation {
 	if mmList.mock.funcList != nil {
-		mmList.mock.t.Fatalf("SettingsServiceHandlerMock.List mock is already set by Set")
+		mmList.mock.t.Fatalf("SettingsServiceClientMock.List mock is already set by Set")
 	}
 
-	expectation := &SettingsServiceHandlerMockListExpectation{
+	expectation := &SettingsServiceClientMockListExpectation{
 		mock:               mmList.mock,
-		params:             &SettingsServiceHandlerMockListParams{ctx, pp1, pp2},
-		expectationOrigins: SettingsServiceHandlerMockListExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &SettingsServiceClientMockListParams{ctx, pp1},
+		expectationOrigins: SettingsServiceClientMockListExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmList.expectations = append(mmList.expectations, expectation)
 	return expectation
 }
 
-// Then sets up SettingsServiceHandler.List return parameters for the expectation previously defined by the When method
-func (e *SettingsServiceHandlerMockListExpectation) Then(err error) *SettingsServiceHandlerMock {
-	e.results = &SettingsServiceHandlerMockListResults{err}
+// Then sets up SettingsServiceClient.List return parameters for the expectation previously defined by the When method
+func (e *SettingsServiceClientMockListExpectation) Then(pp2 *connect.ServerStreamForClient[v1.ListResponse], err error) *SettingsServiceClientMock {
+	e.results = &SettingsServiceClientMockListResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times SettingsServiceHandler.List should be invoked
-func (mmList *mSettingsServiceHandlerMockList) Times(n uint64) *mSettingsServiceHandlerMockList {
+// Times sets number of times SettingsServiceClient.List should be invoked
+func (mmList *mSettingsServiceClientMockList) Times(n uint64) *mSettingsServiceClientMockList {
 	if n == 0 {
-		mmList.mock.t.Fatalf("Times of SettingsServiceHandlerMock.List mock can not be zero")
+		mmList.mock.t.Fatalf("Times of SettingsServiceClientMock.List mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmList.expectedInvocations, n)
 	mmList.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmList
 }
 
-func (mmList *mSettingsServiceHandlerMockList) invocationsDone() bool {
+func (mmList *mSettingsServiceClientMockList) invocationsDone() bool {
 	if len(mmList.expectations) == 0 && mmList.defaultExpectation == nil && mmList.mock.funcList == nil {
 		return true
 	}
@@ -656,18 +631,18 @@ func (mmList *mSettingsServiceHandlerMockList) invocationsDone() bool {
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// List implements mm_settingsv1connect.SettingsServiceHandler
-func (mmList *SettingsServiceHandlerMock) List(ctx context.Context, pp1 *connect.Request[v1.ListRequest], pp2 *connect.ServerStream[v1.ListResponse]) (err error) {
+// List implements mm_settingsv1connect.SettingsServiceClient
+func (mmList *SettingsServiceClientMock) List(ctx context.Context, pp1 *connect.Request[v1.ListRequest]) (pp2 *connect.ServerStreamForClient[v1.ListResponse], err error) {
 	mm_atomic.AddUint64(&mmList.beforeListCounter, 1)
 	defer mm_atomic.AddUint64(&mmList.afterListCounter, 1)
 
 	mmList.t.Helper()
 
 	if mmList.inspectFuncList != nil {
-		mmList.inspectFuncList(ctx, pp1, pp2)
+		mmList.inspectFuncList(ctx, pp1)
 	}
 
-	mm_params := SettingsServiceHandlerMockListParams{ctx, pp1, pp2}
+	mm_params := SettingsServiceClientMockListParams{ctx, pp1}
 
 	// Record call args
 	mmList.ListMock.mutex.Lock()
@@ -677,7 +652,7 @@ func (mmList *SettingsServiceHandlerMock) List(ctx context.Context, pp1 *connect
 	for _, e := range mmList.ListMock.expectations {
 		if minimock.Equal(*e.params, mm_params) {
 			mm_atomic.AddUint64(&e.Counter, 1)
-			return e.results.err
+			return e.results.pp2, e.results.err
 		}
 	}
 
@@ -686,59 +661,54 @@ func (mmList *SettingsServiceHandlerMock) List(ctx context.Context, pp1 *connect
 		mm_want := mmList.ListMock.defaultExpectation.params
 		mm_want_ptrs := mmList.ListMock.defaultExpectation.paramPtrs
 
-		mm_got := SettingsServiceHandlerMockListParams{ctx, pp1, pp2}
+		mm_got := SettingsServiceClientMockListParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmList.t.Errorf("SettingsServiceHandlerMock.List got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmList.t.Errorf("SettingsServiceClientMock.List got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmList.ListMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmList.t.Errorf("SettingsServiceHandlerMock.List got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmList.t.Errorf("SettingsServiceClientMock.List got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmList.ListMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
-			if mm_want_ptrs.pp2 != nil && !minimock.Equal(*mm_want_ptrs.pp2, mm_got.pp2) {
-				mmList.t.Errorf("SettingsServiceHandlerMock.List got unexpected parameter pp2, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
-					mmList.ListMock.defaultExpectation.expectationOrigins.originPp2, *mm_want_ptrs.pp2, mm_got.pp2, minimock.Diff(*mm_want_ptrs.pp2, mm_got.pp2))
-			}
-
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmList.t.Errorf("SettingsServiceHandlerMock.List got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmList.t.Errorf("SettingsServiceClientMock.List got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmList.ListMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmList.ListMock.defaultExpectation.results
 		if mm_results == nil {
-			mmList.t.Fatal("No results are set for the SettingsServiceHandlerMock.List")
+			mmList.t.Fatal("No results are set for the SettingsServiceClientMock.List")
 		}
-		return (*mm_results).err
+		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmList.funcList != nil {
-		return mmList.funcList(ctx, pp1, pp2)
+		return mmList.funcList(ctx, pp1)
 	}
-	mmList.t.Fatalf("Unexpected call to SettingsServiceHandlerMock.List. %v %v %v", ctx, pp1, pp2)
+	mmList.t.Fatalf("Unexpected call to SettingsServiceClientMock.List. %v %v", ctx, pp1)
 	return
 }
 
-// ListAfterCounter returns a count of finished SettingsServiceHandlerMock.List invocations
-func (mmList *SettingsServiceHandlerMock) ListAfterCounter() uint64 {
+// ListAfterCounter returns a count of finished SettingsServiceClientMock.List invocations
+func (mmList *SettingsServiceClientMock) ListAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmList.afterListCounter)
 }
 
-// ListBeforeCounter returns a count of SettingsServiceHandlerMock.List invocations
-func (mmList *SettingsServiceHandlerMock) ListBeforeCounter() uint64 {
+// ListBeforeCounter returns a count of SettingsServiceClientMock.List invocations
+func (mmList *SettingsServiceClientMock) ListBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmList.beforeListCounter)
 }
 
-// Calls returns a list of arguments used in each call to SettingsServiceHandlerMock.List.
+// Calls returns a list of arguments used in each call to SettingsServiceClientMock.List.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmList *mSettingsServiceHandlerMockList) Calls() []*SettingsServiceHandlerMockListParams {
+func (mmList *mSettingsServiceClientMockList) Calls() []*SettingsServiceClientMockListParams {
 	mmList.mutex.RLock()
 
-	argCopy := make([]*SettingsServiceHandlerMockListParams, len(mmList.callArgs))
+	argCopy := make([]*SettingsServiceClientMockListParams, len(mmList.callArgs))
 	copy(argCopy, mmList.callArgs)
 
 	mmList.mutex.RUnlock()
@@ -748,7 +718,7 @@ func (mmList *mSettingsServiceHandlerMockList) Calls() []*SettingsServiceHandler
 
 // MinimockListDone returns true if the count of the List invocations corresponds
 // the number of defined expectations
-func (m *SettingsServiceHandlerMock) MinimockListDone() bool {
+func (m *SettingsServiceClientMock) MinimockListDone() bool {
 	if m.ListMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -764,10 +734,10 @@ func (m *SettingsServiceHandlerMock) MinimockListDone() bool {
 }
 
 // MinimockListInspect logs each unmet expectation
-func (m *SettingsServiceHandlerMock) MinimockListInspect() {
+func (m *SettingsServiceClientMock) MinimockListInspect() {
 	for _, e := range m.ListMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to SettingsServiceHandlerMock.List at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to SettingsServiceClientMock.List at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -775,71 +745,69 @@ func (m *SettingsServiceHandlerMock) MinimockListInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.ListMock.defaultExpectation != nil && afterListCounter < 1 {
 		if m.ListMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to SettingsServiceHandlerMock.List at\n%s", m.ListMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to SettingsServiceClientMock.List at\n%s", m.ListMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to SettingsServiceHandlerMock.List at\n%s with params: %#v", m.ListMock.defaultExpectation.expectationOrigins.origin, *m.ListMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to SettingsServiceClientMock.List at\n%s with params: %#v", m.ListMock.defaultExpectation.expectationOrigins.origin, *m.ListMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcList != nil && afterListCounter < 1 {
-		m.t.Errorf("Expected call to SettingsServiceHandlerMock.List at\n%s", m.funcListOrigin)
+		m.t.Errorf("Expected call to SettingsServiceClientMock.List at\n%s", m.funcListOrigin)
 	}
 
 	if !m.ListMock.invocationsDone() && afterListCounter > 0 {
-		m.t.Errorf("Expected %d calls to SettingsServiceHandlerMock.List at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to SettingsServiceClientMock.List at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.ListMock.expectedInvocations), m.ListMock.expectedInvocationsOrigin, afterListCounter)
 	}
 }
 
-type mSettingsServiceHandlerMockSearch struct {
+type mSettingsServiceClientMockSearch struct {
 	optional           bool
-	mock               *SettingsServiceHandlerMock
-	defaultExpectation *SettingsServiceHandlerMockSearchExpectation
-	expectations       []*SettingsServiceHandlerMockSearchExpectation
+	mock               *SettingsServiceClientMock
+	defaultExpectation *SettingsServiceClientMockSearchExpectation
+	expectations       []*SettingsServiceClientMockSearchExpectation
 
-	callArgs []*SettingsServiceHandlerMockSearchParams
+	callArgs []*SettingsServiceClientMockSearchParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// SettingsServiceHandlerMockSearchExpectation specifies expectation struct of the SettingsServiceHandler.Search
-type SettingsServiceHandlerMockSearchExpectation struct {
-	mock               *SettingsServiceHandlerMock
-	params             *SettingsServiceHandlerMockSearchParams
-	paramPtrs          *SettingsServiceHandlerMockSearchParamPtrs
-	expectationOrigins SettingsServiceHandlerMockSearchExpectationOrigins
-	results            *SettingsServiceHandlerMockSearchResults
+// SettingsServiceClientMockSearchExpectation specifies expectation struct of the SettingsServiceClient.Search
+type SettingsServiceClientMockSearchExpectation struct {
+	mock               *SettingsServiceClientMock
+	params             *SettingsServiceClientMockSearchParams
+	paramPtrs          *SettingsServiceClientMockSearchParamPtrs
+	expectationOrigins SettingsServiceClientMockSearchExpectationOrigins
+	results            *SettingsServiceClientMockSearchResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// SettingsServiceHandlerMockSearchParams contains parameters of the SettingsServiceHandler.Search
-type SettingsServiceHandlerMockSearchParams struct {
+// SettingsServiceClientMockSearchParams contains parameters of the SettingsServiceClient.Search
+type SettingsServiceClientMockSearchParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v11.SearchRequest]
-	pp2 *connect.ServerStream[v1.SearchResponse]
 }
 
-// SettingsServiceHandlerMockSearchParamPtrs contains pointers to parameters of the SettingsServiceHandler.Search
-type SettingsServiceHandlerMockSearchParamPtrs struct {
+// SettingsServiceClientMockSearchParamPtrs contains pointers to parameters of the SettingsServiceClient.Search
+type SettingsServiceClientMockSearchParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v11.SearchRequest]
-	pp2 **connect.ServerStream[v1.SearchResponse]
 }
 
-// SettingsServiceHandlerMockSearchResults contains results of the SettingsServiceHandler.Search
-type SettingsServiceHandlerMockSearchResults struct {
+// SettingsServiceClientMockSearchResults contains results of the SettingsServiceClient.Search
+type SettingsServiceClientMockSearchResults struct {
+	pp2 *connect.ServerStreamForClient[v1.SearchResponse]
 	err error
 }
 
-// SettingsServiceHandlerMockSearchOrigins contains origins of expectations of the SettingsServiceHandler.Search
-type SettingsServiceHandlerMockSearchExpectationOrigins struct {
+// SettingsServiceClientMockSearchOrigins contains origins of expectations of the SettingsServiceClient.Search
+type SettingsServiceClientMockSearchExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
-	originPp2 string
 }
 
 // Marks this method to be optional. The default behavior of any method with Return() is '1 or more', meaning
@@ -847,26 +815,26 @@ type SettingsServiceHandlerMockSearchExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmSearch *mSettingsServiceHandlerMockSearch) Optional() *mSettingsServiceHandlerMockSearch {
+func (mmSearch *mSettingsServiceClientMockSearch) Optional() *mSettingsServiceClientMockSearch {
 	mmSearch.optional = true
 	return mmSearch
 }
 
-// Expect sets up expected params for SettingsServiceHandler.Search
-func (mmSearch *mSettingsServiceHandlerMockSearch) Expect(ctx context.Context, pp1 *connect.Request[v11.SearchRequest], pp2 *connect.ServerStream[v1.SearchResponse]) *mSettingsServiceHandlerMockSearch {
+// Expect sets up expected params for SettingsServiceClient.Search
+func (mmSearch *mSettingsServiceClientMockSearch) Expect(ctx context.Context, pp1 *connect.Request[v11.SearchRequest]) *mSettingsServiceClientMockSearch {
 	if mmSearch.mock.funcSearch != nil {
-		mmSearch.mock.t.Fatalf("SettingsServiceHandlerMock.Search mock is already set by Set")
+		mmSearch.mock.t.Fatalf("SettingsServiceClientMock.Search mock is already set by Set")
 	}
 
 	if mmSearch.defaultExpectation == nil {
-		mmSearch.defaultExpectation = &SettingsServiceHandlerMockSearchExpectation{}
+		mmSearch.defaultExpectation = &SettingsServiceClientMockSearchExpectation{}
 	}
 
 	if mmSearch.defaultExpectation.paramPtrs != nil {
-		mmSearch.mock.t.Fatalf("SettingsServiceHandlerMock.Search mock is already set by ExpectParams functions")
+		mmSearch.mock.t.Fatalf("SettingsServiceClientMock.Search mock is already set by ExpectParams functions")
 	}
 
-	mmSearch.defaultExpectation.params = &SettingsServiceHandlerMockSearchParams{ctx, pp1, pp2}
+	mmSearch.defaultExpectation.params = &SettingsServiceClientMockSearchParams{ctx, pp1}
 	mmSearch.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmSearch.expectations {
 		if minimock.Equal(e.params, mmSearch.defaultExpectation.params) {
@@ -877,22 +845,22 @@ func (mmSearch *mSettingsServiceHandlerMockSearch) Expect(ctx context.Context, p
 	return mmSearch
 }
 
-// ExpectCtxParam1 sets up expected param ctx for SettingsServiceHandler.Search
-func (mmSearch *mSettingsServiceHandlerMockSearch) ExpectCtxParam1(ctx context.Context) *mSettingsServiceHandlerMockSearch {
+// ExpectCtxParam1 sets up expected param ctx for SettingsServiceClient.Search
+func (mmSearch *mSettingsServiceClientMockSearch) ExpectCtxParam1(ctx context.Context) *mSettingsServiceClientMockSearch {
 	if mmSearch.mock.funcSearch != nil {
-		mmSearch.mock.t.Fatalf("SettingsServiceHandlerMock.Search mock is already set by Set")
+		mmSearch.mock.t.Fatalf("SettingsServiceClientMock.Search mock is already set by Set")
 	}
 
 	if mmSearch.defaultExpectation == nil {
-		mmSearch.defaultExpectation = &SettingsServiceHandlerMockSearchExpectation{}
+		mmSearch.defaultExpectation = &SettingsServiceClientMockSearchExpectation{}
 	}
 
 	if mmSearch.defaultExpectation.params != nil {
-		mmSearch.mock.t.Fatalf("SettingsServiceHandlerMock.Search mock is already set by Expect")
+		mmSearch.mock.t.Fatalf("SettingsServiceClientMock.Search mock is already set by Expect")
 	}
 
 	if mmSearch.defaultExpectation.paramPtrs == nil {
-		mmSearch.defaultExpectation.paramPtrs = &SettingsServiceHandlerMockSearchParamPtrs{}
+		mmSearch.defaultExpectation.paramPtrs = &SettingsServiceClientMockSearchParamPtrs{}
 	}
 	mmSearch.defaultExpectation.paramPtrs.ctx = &ctx
 	mmSearch.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -900,22 +868,22 @@ func (mmSearch *mSettingsServiceHandlerMockSearch) ExpectCtxParam1(ctx context.C
 	return mmSearch
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for SettingsServiceHandler.Search
-func (mmSearch *mSettingsServiceHandlerMockSearch) ExpectPp1Param2(pp1 *connect.Request[v11.SearchRequest]) *mSettingsServiceHandlerMockSearch {
+// ExpectPp1Param2 sets up expected param pp1 for SettingsServiceClient.Search
+func (mmSearch *mSettingsServiceClientMockSearch) ExpectPp1Param2(pp1 *connect.Request[v11.SearchRequest]) *mSettingsServiceClientMockSearch {
 	if mmSearch.mock.funcSearch != nil {
-		mmSearch.mock.t.Fatalf("SettingsServiceHandlerMock.Search mock is already set by Set")
+		mmSearch.mock.t.Fatalf("SettingsServiceClientMock.Search mock is already set by Set")
 	}
 
 	if mmSearch.defaultExpectation == nil {
-		mmSearch.defaultExpectation = &SettingsServiceHandlerMockSearchExpectation{}
+		mmSearch.defaultExpectation = &SettingsServiceClientMockSearchExpectation{}
 	}
 
 	if mmSearch.defaultExpectation.params != nil {
-		mmSearch.mock.t.Fatalf("SettingsServiceHandlerMock.Search mock is already set by Expect")
+		mmSearch.mock.t.Fatalf("SettingsServiceClientMock.Search mock is already set by Expect")
 	}
 
 	if mmSearch.defaultExpectation.paramPtrs == nil {
-		mmSearch.defaultExpectation.paramPtrs = &SettingsServiceHandlerMockSearchParamPtrs{}
+		mmSearch.defaultExpectation.paramPtrs = &SettingsServiceClientMockSearchParamPtrs{}
 	}
 	mmSearch.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmSearch.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -923,33 +891,10 @@ func (mmSearch *mSettingsServiceHandlerMockSearch) ExpectPp1Param2(pp1 *connect.
 	return mmSearch
 }
 
-// ExpectPp2Param3 sets up expected param pp2 for SettingsServiceHandler.Search
-func (mmSearch *mSettingsServiceHandlerMockSearch) ExpectPp2Param3(pp2 *connect.ServerStream[v1.SearchResponse]) *mSettingsServiceHandlerMockSearch {
-	if mmSearch.mock.funcSearch != nil {
-		mmSearch.mock.t.Fatalf("SettingsServiceHandlerMock.Search mock is already set by Set")
-	}
-
-	if mmSearch.defaultExpectation == nil {
-		mmSearch.defaultExpectation = &SettingsServiceHandlerMockSearchExpectation{}
-	}
-
-	if mmSearch.defaultExpectation.params != nil {
-		mmSearch.mock.t.Fatalf("SettingsServiceHandlerMock.Search mock is already set by Expect")
-	}
-
-	if mmSearch.defaultExpectation.paramPtrs == nil {
-		mmSearch.defaultExpectation.paramPtrs = &SettingsServiceHandlerMockSearchParamPtrs{}
-	}
-	mmSearch.defaultExpectation.paramPtrs.pp2 = &pp2
-	mmSearch.defaultExpectation.expectationOrigins.originPp2 = minimock.CallerInfo(1)
-
-	return mmSearch
-}
-
-// Inspect accepts an inspector function that has same arguments as the SettingsServiceHandler.Search
-func (mmSearch *mSettingsServiceHandlerMockSearch) Inspect(f func(ctx context.Context, pp1 *connect.Request[v11.SearchRequest], pp2 *connect.ServerStream[v1.SearchResponse])) *mSettingsServiceHandlerMockSearch {
+// Inspect accepts an inspector function that has same arguments as the SettingsServiceClient.Search
+func (mmSearch *mSettingsServiceClientMockSearch) Inspect(f func(ctx context.Context, pp1 *connect.Request[v11.SearchRequest])) *mSettingsServiceClientMockSearch {
 	if mmSearch.mock.inspectFuncSearch != nil {
-		mmSearch.mock.t.Fatalf("Inspect function is already set for SettingsServiceHandlerMock.Search")
+		mmSearch.mock.t.Fatalf("Inspect function is already set for SettingsServiceClientMock.Search")
 	}
 
 	mmSearch.mock.inspectFuncSearch = f
@@ -957,28 +902,28 @@ func (mmSearch *mSettingsServiceHandlerMockSearch) Inspect(f func(ctx context.Co
 	return mmSearch
 }
 
-// Return sets up results that will be returned by SettingsServiceHandler.Search
-func (mmSearch *mSettingsServiceHandlerMockSearch) Return(err error) *SettingsServiceHandlerMock {
+// Return sets up results that will be returned by SettingsServiceClient.Search
+func (mmSearch *mSettingsServiceClientMockSearch) Return(pp2 *connect.ServerStreamForClient[v1.SearchResponse], err error) *SettingsServiceClientMock {
 	if mmSearch.mock.funcSearch != nil {
-		mmSearch.mock.t.Fatalf("SettingsServiceHandlerMock.Search mock is already set by Set")
+		mmSearch.mock.t.Fatalf("SettingsServiceClientMock.Search mock is already set by Set")
 	}
 
 	if mmSearch.defaultExpectation == nil {
-		mmSearch.defaultExpectation = &SettingsServiceHandlerMockSearchExpectation{mock: mmSearch.mock}
+		mmSearch.defaultExpectation = &SettingsServiceClientMockSearchExpectation{mock: mmSearch.mock}
 	}
-	mmSearch.defaultExpectation.results = &SettingsServiceHandlerMockSearchResults{err}
+	mmSearch.defaultExpectation.results = &SettingsServiceClientMockSearchResults{pp2, err}
 	mmSearch.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmSearch.mock
 }
 
-// Set uses given function f to mock the SettingsServiceHandler.Search method
-func (mmSearch *mSettingsServiceHandlerMockSearch) Set(f func(ctx context.Context, pp1 *connect.Request[v11.SearchRequest], pp2 *connect.ServerStream[v1.SearchResponse]) (err error)) *SettingsServiceHandlerMock {
+// Set uses given function f to mock the SettingsServiceClient.Search method
+func (mmSearch *mSettingsServiceClientMockSearch) Set(f func(ctx context.Context, pp1 *connect.Request[v11.SearchRequest]) (pp2 *connect.ServerStreamForClient[v1.SearchResponse], err error)) *SettingsServiceClientMock {
 	if mmSearch.defaultExpectation != nil {
-		mmSearch.mock.t.Fatalf("Default expectation is already set for the SettingsServiceHandler.Search method")
+		mmSearch.mock.t.Fatalf("Default expectation is already set for the SettingsServiceClient.Search method")
 	}
 
 	if len(mmSearch.expectations) > 0 {
-		mmSearch.mock.t.Fatalf("Some expectations are already set for the SettingsServiceHandler.Search method")
+		mmSearch.mock.t.Fatalf("Some expectations are already set for the SettingsServiceClient.Search method")
 	}
 
 	mmSearch.mock.funcSearch = f
@@ -986,39 +931,39 @@ func (mmSearch *mSettingsServiceHandlerMockSearch) Set(f func(ctx context.Contex
 	return mmSearch.mock
 }
 
-// When sets expectation for the SettingsServiceHandler.Search which will trigger the result defined by the following
+// When sets expectation for the SettingsServiceClient.Search which will trigger the result defined by the following
 // Then helper
-func (mmSearch *mSettingsServiceHandlerMockSearch) When(ctx context.Context, pp1 *connect.Request[v11.SearchRequest], pp2 *connect.ServerStream[v1.SearchResponse]) *SettingsServiceHandlerMockSearchExpectation {
+func (mmSearch *mSettingsServiceClientMockSearch) When(ctx context.Context, pp1 *connect.Request[v11.SearchRequest]) *SettingsServiceClientMockSearchExpectation {
 	if mmSearch.mock.funcSearch != nil {
-		mmSearch.mock.t.Fatalf("SettingsServiceHandlerMock.Search mock is already set by Set")
+		mmSearch.mock.t.Fatalf("SettingsServiceClientMock.Search mock is already set by Set")
 	}
 
-	expectation := &SettingsServiceHandlerMockSearchExpectation{
+	expectation := &SettingsServiceClientMockSearchExpectation{
 		mock:               mmSearch.mock,
-		params:             &SettingsServiceHandlerMockSearchParams{ctx, pp1, pp2},
-		expectationOrigins: SettingsServiceHandlerMockSearchExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &SettingsServiceClientMockSearchParams{ctx, pp1},
+		expectationOrigins: SettingsServiceClientMockSearchExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmSearch.expectations = append(mmSearch.expectations, expectation)
 	return expectation
 }
 
-// Then sets up SettingsServiceHandler.Search return parameters for the expectation previously defined by the When method
-func (e *SettingsServiceHandlerMockSearchExpectation) Then(err error) *SettingsServiceHandlerMock {
-	e.results = &SettingsServiceHandlerMockSearchResults{err}
+// Then sets up SettingsServiceClient.Search return parameters for the expectation previously defined by the When method
+func (e *SettingsServiceClientMockSearchExpectation) Then(pp2 *connect.ServerStreamForClient[v1.SearchResponse], err error) *SettingsServiceClientMock {
+	e.results = &SettingsServiceClientMockSearchResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times SettingsServiceHandler.Search should be invoked
-func (mmSearch *mSettingsServiceHandlerMockSearch) Times(n uint64) *mSettingsServiceHandlerMockSearch {
+// Times sets number of times SettingsServiceClient.Search should be invoked
+func (mmSearch *mSettingsServiceClientMockSearch) Times(n uint64) *mSettingsServiceClientMockSearch {
 	if n == 0 {
-		mmSearch.mock.t.Fatalf("Times of SettingsServiceHandlerMock.Search mock can not be zero")
+		mmSearch.mock.t.Fatalf("Times of SettingsServiceClientMock.Search mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmSearch.expectedInvocations, n)
 	mmSearch.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmSearch
 }
 
-func (mmSearch *mSettingsServiceHandlerMockSearch) invocationsDone() bool {
+func (mmSearch *mSettingsServiceClientMockSearch) invocationsDone() bool {
 	if len(mmSearch.expectations) == 0 && mmSearch.defaultExpectation == nil && mmSearch.mock.funcSearch == nil {
 		return true
 	}
@@ -1029,18 +974,18 @@ func (mmSearch *mSettingsServiceHandlerMockSearch) invocationsDone() bool {
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// Search implements mm_settingsv1connect.SettingsServiceHandler
-func (mmSearch *SettingsServiceHandlerMock) Search(ctx context.Context, pp1 *connect.Request[v11.SearchRequest], pp2 *connect.ServerStream[v1.SearchResponse]) (err error) {
+// Search implements mm_settingsv1connect.SettingsServiceClient
+func (mmSearch *SettingsServiceClientMock) Search(ctx context.Context, pp1 *connect.Request[v11.SearchRequest]) (pp2 *connect.ServerStreamForClient[v1.SearchResponse], err error) {
 	mm_atomic.AddUint64(&mmSearch.beforeSearchCounter, 1)
 	defer mm_atomic.AddUint64(&mmSearch.afterSearchCounter, 1)
 
 	mmSearch.t.Helper()
 
 	if mmSearch.inspectFuncSearch != nil {
-		mmSearch.inspectFuncSearch(ctx, pp1, pp2)
+		mmSearch.inspectFuncSearch(ctx, pp1)
 	}
 
-	mm_params := SettingsServiceHandlerMockSearchParams{ctx, pp1, pp2}
+	mm_params := SettingsServiceClientMockSearchParams{ctx, pp1}
 
 	// Record call args
 	mmSearch.SearchMock.mutex.Lock()
@@ -1050,7 +995,7 @@ func (mmSearch *SettingsServiceHandlerMock) Search(ctx context.Context, pp1 *con
 	for _, e := range mmSearch.SearchMock.expectations {
 		if minimock.Equal(*e.params, mm_params) {
 			mm_atomic.AddUint64(&e.Counter, 1)
-			return e.results.err
+			return e.results.pp2, e.results.err
 		}
 	}
 
@@ -1059,59 +1004,54 @@ func (mmSearch *SettingsServiceHandlerMock) Search(ctx context.Context, pp1 *con
 		mm_want := mmSearch.SearchMock.defaultExpectation.params
 		mm_want_ptrs := mmSearch.SearchMock.defaultExpectation.paramPtrs
 
-		mm_got := SettingsServiceHandlerMockSearchParams{ctx, pp1, pp2}
+		mm_got := SettingsServiceClientMockSearchParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmSearch.t.Errorf("SettingsServiceHandlerMock.Search got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmSearch.t.Errorf("SettingsServiceClientMock.Search got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmSearch.SearchMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmSearch.t.Errorf("SettingsServiceHandlerMock.Search got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmSearch.t.Errorf("SettingsServiceClientMock.Search got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmSearch.SearchMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
-			if mm_want_ptrs.pp2 != nil && !minimock.Equal(*mm_want_ptrs.pp2, mm_got.pp2) {
-				mmSearch.t.Errorf("SettingsServiceHandlerMock.Search got unexpected parameter pp2, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
-					mmSearch.SearchMock.defaultExpectation.expectationOrigins.originPp2, *mm_want_ptrs.pp2, mm_got.pp2, minimock.Diff(*mm_want_ptrs.pp2, mm_got.pp2))
-			}
-
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmSearch.t.Errorf("SettingsServiceHandlerMock.Search got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmSearch.t.Errorf("SettingsServiceClientMock.Search got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmSearch.SearchMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmSearch.SearchMock.defaultExpectation.results
 		if mm_results == nil {
-			mmSearch.t.Fatal("No results are set for the SettingsServiceHandlerMock.Search")
+			mmSearch.t.Fatal("No results are set for the SettingsServiceClientMock.Search")
 		}
-		return (*mm_results).err
+		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmSearch.funcSearch != nil {
-		return mmSearch.funcSearch(ctx, pp1, pp2)
+		return mmSearch.funcSearch(ctx, pp1)
 	}
-	mmSearch.t.Fatalf("Unexpected call to SettingsServiceHandlerMock.Search. %v %v %v", ctx, pp1, pp2)
+	mmSearch.t.Fatalf("Unexpected call to SettingsServiceClientMock.Search. %v %v", ctx, pp1)
 	return
 }
 
-// SearchAfterCounter returns a count of finished SettingsServiceHandlerMock.Search invocations
-func (mmSearch *SettingsServiceHandlerMock) SearchAfterCounter() uint64 {
+// SearchAfterCounter returns a count of finished SettingsServiceClientMock.Search invocations
+func (mmSearch *SettingsServiceClientMock) SearchAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmSearch.afterSearchCounter)
 }
 
-// SearchBeforeCounter returns a count of SettingsServiceHandlerMock.Search invocations
-func (mmSearch *SettingsServiceHandlerMock) SearchBeforeCounter() uint64 {
+// SearchBeforeCounter returns a count of SettingsServiceClientMock.Search invocations
+func (mmSearch *SettingsServiceClientMock) SearchBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmSearch.beforeSearchCounter)
 }
 
-// Calls returns a list of arguments used in each call to SettingsServiceHandlerMock.Search.
+// Calls returns a list of arguments used in each call to SettingsServiceClientMock.Search.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmSearch *mSettingsServiceHandlerMockSearch) Calls() []*SettingsServiceHandlerMockSearchParams {
+func (mmSearch *mSettingsServiceClientMockSearch) Calls() []*SettingsServiceClientMockSearchParams {
 	mmSearch.mutex.RLock()
 
-	argCopy := make([]*SettingsServiceHandlerMockSearchParams, len(mmSearch.callArgs))
+	argCopy := make([]*SettingsServiceClientMockSearchParams, len(mmSearch.callArgs))
 	copy(argCopy, mmSearch.callArgs)
 
 	mmSearch.mutex.RUnlock()
@@ -1121,7 +1061,7 @@ func (mmSearch *mSettingsServiceHandlerMockSearch) Calls() []*SettingsServiceHan
 
 // MinimockSearchDone returns true if the count of the Search invocations corresponds
 // the number of defined expectations
-func (m *SettingsServiceHandlerMock) MinimockSearchDone() bool {
+func (m *SettingsServiceClientMock) MinimockSearchDone() bool {
 	if m.SearchMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -1137,10 +1077,10 @@ func (m *SettingsServiceHandlerMock) MinimockSearchDone() bool {
 }
 
 // MinimockSearchInspect logs each unmet expectation
-func (m *SettingsServiceHandlerMock) MinimockSearchInspect() {
+func (m *SettingsServiceClientMock) MinimockSearchInspect() {
 	for _, e := range m.SearchMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to SettingsServiceHandlerMock.Search at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to SettingsServiceClientMock.Search at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -1148,66 +1088,66 @@ func (m *SettingsServiceHandlerMock) MinimockSearchInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.SearchMock.defaultExpectation != nil && afterSearchCounter < 1 {
 		if m.SearchMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to SettingsServiceHandlerMock.Search at\n%s", m.SearchMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to SettingsServiceClientMock.Search at\n%s", m.SearchMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to SettingsServiceHandlerMock.Search at\n%s with params: %#v", m.SearchMock.defaultExpectation.expectationOrigins.origin, *m.SearchMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to SettingsServiceClientMock.Search at\n%s with params: %#v", m.SearchMock.defaultExpectation.expectationOrigins.origin, *m.SearchMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcSearch != nil && afterSearchCounter < 1 {
-		m.t.Errorf("Expected call to SettingsServiceHandlerMock.Search at\n%s", m.funcSearchOrigin)
+		m.t.Errorf("Expected call to SettingsServiceClientMock.Search at\n%s", m.funcSearchOrigin)
 	}
 
 	if !m.SearchMock.invocationsDone() && afterSearchCounter > 0 {
-		m.t.Errorf("Expected %d calls to SettingsServiceHandlerMock.Search at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to SettingsServiceClientMock.Search at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.SearchMock.expectedInvocations), m.SearchMock.expectedInvocationsOrigin, afterSearchCounter)
 	}
 }
 
-type mSettingsServiceHandlerMockSet struct {
+type mSettingsServiceClientMockSet struct {
 	optional           bool
-	mock               *SettingsServiceHandlerMock
-	defaultExpectation *SettingsServiceHandlerMockSetExpectation
-	expectations       []*SettingsServiceHandlerMockSetExpectation
+	mock               *SettingsServiceClientMock
+	defaultExpectation *SettingsServiceClientMockSetExpectation
+	expectations       []*SettingsServiceClientMockSetExpectation
 
-	callArgs []*SettingsServiceHandlerMockSetParams
+	callArgs []*SettingsServiceClientMockSetParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// SettingsServiceHandlerMockSetExpectation specifies expectation struct of the SettingsServiceHandler.Set
-type SettingsServiceHandlerMockSetExpectation struct {
-	mock               *SettingsServiceHandlerMock
-	params             *SettingsServiceHandlerMockSetParams
-	paramPtrs          *SettingsServiceHandlerMockSetParamPtrs
-	expectationOrigins SettingsServiceHandlerMockSetExpectationOrigins
-	results            *SettingsServiceHandlerMockSetResults
+// SettingsServiceClientMockSetExpectation specifies expectation struct of the SettingsServiceClient.Set
+type SettingsServiceClientMockSetExpectation struct {
+	mock               *SettingsServiceClientMock
+	params             *SettingsServiceClientMockSetParams
+	paramPtrs          *SettingsServiceClientMockSetParamPtrs
+	expectationOrigins SettingsServiceClientMockSetExpectationOrigins
+	results            *SettingsServiceClientMockSetResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// SettingsServiceHandlerMockSetParams contains parameters of the SettingsServiceHandler.Set
-type SettingsServiceHandlerMockSetParams struct {
+// SettingsServiceClientMockSetParams contains parameters of the SettingsServiceClient.Set
+type SettingsServiceClientMockSetParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.SetRequest]
 }
 
-// SettingsServiceHandlerMockSetParamPtrs contains pointers to parameters of the SettingsServiceHandler.Set
-type SettingsServiceHandlerMockSetParamPtrs struct {
+// SettingsServiceClientMockSetParamPtrs contains pointers to parameters of the SettingsServiceClient.Set
+type SettingsServiceClientMockSetParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.SetRequest]
 }
 
-// SettingsServiceHandlerMockSetResults contains results of the SettingsServiceHandler.Set
-type SettingsServiceHandlerMockSetResults struct {
+// SettingsServiceClientMockSetResults contains results of the SettingsServiceClient.Set
+type SettingsServiceClientMockSetResults struct {
 	pp2 *connect.Response[v1.SetResponse]
 	err error
 }
 
-// SettingsServiceHandlerMockSetOrigins contains origins of expectations of the SettingsServiceHandler.Set
-type SettingsServiceHandlerMockSetExpectationOrigins struct {
+// SettingsServiceClientMockSetOrigins contains origins of expectations of the SettingsServiceClient.Set
+type SettingsServiceClientMockSetExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -1218,26 +1158,26 @@ type SettingsServiceHandlerMockSetExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmSet *mSettingsServiceHandlerMockSet) Optional() *mSettingsServiceHandlerMockSet {
+func (mmSet *mSettingsServiceClientMockSet) Optional() *mSettingsServiceClientMockSet {
 	mmSet.optional = true
 	return mmSet
 }
 
-// Expect sets up expected params for SettingsServiceHandler.Set
-func (mmSet *mSettingsServiceHandlerMockSet) Expect(ctx context.Context, pp1 *connect.Request[v1.SetRequest]) *mSettingsServiceHandlerMockSet {
+// Expect sets up expected params for SettingsServiceClient.Set
+func (mmSet *mSettingsServiceClientMockSet) Expect(ctx context.Context, pp1 *connect.Request[v1.SetRequest]) *mSettingsServiceClientMockSet {
 	if mmSet.mock.funcSet != nil {
-		mmSet.mock.t.Fatalf("SettingsServiceHandlerMock.Set mock is already set by Set")
+		mmSet.mock.t.Fatalf("SettingsServiceClientMock.Set mock is already set by Set")
 	}
 
 	if mmSet.defaultExpectation == nil {
-		mmSet.defaultExpectation = &SettingsServiceHandlerMockSetExpectation{}
+		mmSet.defaultExpectation = &SettingsServiceClientMockSetExpectation{}
 	}
 
 	if mmSet.defaultExpectation.paramPtrs != nil {
-		mmSet.mock.t.Fatalf("SettingsServiceHandlerMock.Set mock is already set by ExpectParams functions")
+		mmSet.mock.t.Fatalf("SettingsServiceClientMock.Set mock is already set by ExpectParams functions")
 	}
 
-	mmSet.defaultExpectation.params = &SettingsServiceHandlerMockSetParams{ctx, pp1}
+	mmSet.defaultExpectation.params = &SettingsServiceClientMockSetParams{ctx, pp1}
 	mmSet.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmSet.expectations {
 		if minimock.Equal(e.params, mmSet.defaultExpectation.params) {
@@ -1248,22 +1188,22 @@ func (mmSet *mSettingsServiceHandlerMockSet) Expect(ctx context.Context, pp1 *co
 	return mmSet
 }
 
-// ExpectCtxParam1 sets up expected param ctx for SettingsServiceHandler.Set
-func (mmSet *mSettingsServiceHandlerMockSet) ExpectCtxParam1(ctx context.Context) *mSettingsServiceHandlerMockSet {
+// ExpectCtxParam1 sets up expected param ctx for SettingsServiceClient.Set
+func (mmSet *mSettingsServiceClientMockSet) ExpectCtxParam1(ctx context.Context) *mSettingsServiceClientMockSet {
 	if mmSet.mock.funcSet != nil {
-		mmSet.mock.t.Fatalf("SettingsServiceHandlerMock.Set mock is already set by Set")
+		mmSet.mock.t.Fatalf("SettingsServiceClientMock.Set mock is already set by Set")
 	}
 
 	if mmSet.defaultExpectation == nil {
-		mmSet.defaultExpectation = &SettingsServiceHandlerMockSetExpectation{}
+		mmSet.defaultExpectation = &SettingsServiceClientMockSetExpectation{}
 	}
 
 	if mmSet.defaultExpectation.params != nil {
-		mmSet.mock.t.Fatalf("SettingsServiceHandlerMock.Set mock is already set by Expect")
+		mmSet.mock.t.Fatalf("SettingsServiceClientMock.Set mock is already set by Expect")
 	}
 
 	if mmSet.defaultExpectation.paramPtrs == nil {
-		mmSet.defaultExpectation.paramPtrs = &SettingsServiceHandlerMockSetParamPtrs{}
+		mmSet.defaultExpectation.paramPtrs = &SettingsServiceClientMockSetParamPtrs{}
 	}
 	mmSet.defaultExpectation.paramPtrs.ctx = &ctx
 	mmSet.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -1271,22 +1211,22 @@ func (mmSet *mSettingsServiceHandlerMockSet) ExpectCtxParam1(ctx context.Context
 	return mmSet
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for SettingsServiceHandler.Set
-func (mmSet *mSettingsServiceHandlerMockSet) ExpectPp1Param2(pp1 *connect.Request[v1.SetRequest]) *mSettingsServiceHandlerMockSet {
+// ExpectPp1Param2 sets up expected param pp1 for SettingsServiceClient.Set
+func (mmSet *mSettingsServiceClientMockSet) ExpectPp1Param2(pp1 *connect.Request[v1.SetRequest]) *mSettingsServiceClientMockSet {
 	if mmSet.mock.funcSet != nil {
-		mmSet.mock.t.Fatalf("SettingsServiceHandlerMock.Set mock is already set by Set")
+		mmSet.mock.t.Fatalf("SettingsServiceClientMock.Set mock is already set by Set")
 	}
 
 	if mmSet.defaultExpectation == nil {
-		mmSet.defaultExpectation = &SettingsServiceHandlerMockSetExpectation{}
+		mmSet.defaultExpectation = &SettingsServiceClientMockSetExpectation{}
 	}
 
 	if mmSet.defaultExpectation.params != nil {
-		mmSet.mock.t.Fatalf("SettingsServiceHandlerMock.Set mock is already set by Expect")
+		mmSet.mock.t.Fatalf("SettingsServiceClientMock.Set mock is already set by Expect")
 	}
 
 	if mmSet.defaultExpectation.paramPtrs == nil {
-		mmSet.defaultExpectation.paramPtrs = &SettingsServiceHandlerMockSetParamPtrs{}
+		mmSet.defaultExpectation.paramPtrs = &SettingsServiceClientMockSetParamPtrs{}
 	}
 	mmSet.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmSet.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -1294,10 +1234,10 @@ func (mmSet *mSettingsServiceHandlerMockSet) ExpectPp1Param2(pp1 *connect.Reques
 	return mmSet
 }
 
-// Inspect accepts an inspector function that has same arguments as the SettingsServiceHandler.Set
-func (mmSet *mSettingsServiceHandlerMockSet) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.SetRequest])) *mSettingsServiceHandlerMockSet {
+// Inspect accepts an inspector function that has same arguments as the SettingsServiceClient.Set
+func (mmSet *mSettingsServiceClientMockSet) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.SetRequest])) *mSettingsServiceClientMockSet {
 	if mmSet.mock.inspectFuncSet != nil {
-		mmSet.mock.t.Fatalf("Inspect function is already set for SettingsServiceHandlerMock.Set")
+		mmSet.mock.t.Fatalf("Inspect function is already set for SettingsServiceClientMock.Set")
 	}
 
 	mmSet.mock.inspectFuncSet = f
@@ -1305,28 +1245,28 @@ func (mmSet *mSettingsServiceHandlerMockSet) Inspect(f func(ctx context.Context,
 	return mmSet
 }
 
-// Return sets up results that will be returned by SettingsServiceHandler.Set
-func (mmSet *mSettingsServiceHandlerMockSet) Return(pp2 *connect.Response[v1.SetResponse], err error) *SettingsServiceHandlerMock {
+// Return sets up results that will be returned by SettingsServiceClient.Set
+func (mmSet *mSettingsServiceClientMockSet) Return(pp2 *connect.Response[v1.SetResponse], err error) *SettingsServiceClientMock {
 	if mmSet.mock.funcSet != nil {
-		mmSet.mock.t.Fatalf("SettingsServiceHandlerMock.Set mock is already set by Set")
+		mmSet.mock.t.Fatalf("SettingsServiceClientMock.Set mock is already set by Set")
 	}
 
 	if mmSet.defaultExpectation == nil {
-		mmSet.defaultExpectation = &SettingsServiceHandlerMockSetExpectation{mock: mmSet.mock}
+		mmSet.defaultExpectation = &SettingsServiceClientMockSetExpectation{mock: mmSet.mock}
 	}
-	mmSet.defaultExpectation.results = &SettingsServiceHandlerMockSetResults{pp2, err}
+	mmSet.defaultExpectation.results = &SettingsServiceClientMockSetResults{pp2, err}
 	mmSet.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmSet.mock
 }
 
-// Set uses given function f to mock the SettingsServiceHandler.Set method
-func (mmSet *mSettingsServiceHandlerMockSet) Set(f func(ctx context.Context, pp1 *connect.Request[v1.SetRequest]) (pp2 *connect.Response[v1.SetResponse], err error)) *SettingsServiceHandlerMock {
+// Set uses given function f to mock the SettingsServiceClient.Set method
+func (mmSet *mSettingsServiceClientMockSet) Set(f func(ctx context.Context, pp1 *connect.Request[v1.SetRequest]) (pp2 *connect.Response[v1.SetResponse], err error)) *SettingsServiceClientMock {
 	if mmSet.defaultExpectation != nil {
-		mmSet.mock.t.Fatalf("Default expectation is already set for the SettingsServiceHandler.Set method")
+		mmSet.mock.t.Fatalf("Default expectation is already set for the SettingsServiceClient.Set method")
 	}
 
 	if len(mmSet.expectations) > 0 {
-		mmSet.mock.t.Fatalf("Some expectations are already set for the SettingsServiceHandler.Set method")
+		mmSet.mock.t.Fatalf("Some expectations are already set for the SettingsServiceClient.Set method")
 	}
 
 	mmSet.mock.funcSet = f
@@ -1334,39 +1274,39 @@ func (mmSet *mSettingsServiceHandlerMockSet) Set(f func(ctx context.Context, pp1
 	return mmSet.mock
 }
 
-// When sets expectation for the SettingsServiceHandler.Set which will trigger the result defined by the following
+// When sets expectation for the SettingsServiceClient.Set which will trigger the result defined by the following
 // Then helper
-func (mmSet *mSettingsServiceHandlerMockSet) When(ctx context.Context, pp1 *connect.Request[v1.SetRequest]) *SettingsServiceHandlerMockSetExpectation {
+func (mmSet *mSettingsServiceClientMockSet) When(ctx context.Context, pp1 *connect.Request[v1.SetRequest]) *SettingsServiceClientMockSetExpectation {
 	if mmSet.mock.funcSet != nil {
-		mmSet.mock.t.Fatalf("SettingsServiceHandlerMock.Set mock is already set by Set")
+		mmSet.mock.t.Fatalf("SettingsServiceClientMock.Set mock is already set by Set")
 	}
 
-	expectation := &SettingsServiceHandlerMockSetExpectation{
+	expectation := &SettingsServiceClientMockSetExpectation{
 		mock:               mmSet.mock,
-		params:             &SettingsServiceHandlerMockSetParams{ctx, pp1},
-		expectationOrigins: SettingsServiceHandlerMockSetExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &SettingsServiceClientMockSetParams{ctx, pp1},
+		expectationOrigins: SettingsServiceClientMockSetExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmSet.expectations = append(mmSet.expectations, expectation)
 	return expectation
 }
 
-// Then sets up SettingsServiceHandler.Set return parameters for the expectation previously defined by the When method
-func (e *SettingsServiceHandlerMockSetExpectation) Then(pp2 *connect.Response[v1.SetResponse], err error) *SettingsServiceHandlerMock {
-	e.results = &SettingsServiceHandlerMockSetResults{pp2, err}
+// Then sets up SettingsServiceClient.Set return parameters for the expectation previously defined by the When method
+func (e *SettingsServiceClientMockSetExpectation) Then(pp2 *connect.Response[v1.SetResponse], err error) *SettingsServiceClientMock {
+	e.results = &SettingsServiceClientMockSetResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times SettingsServiceHandler.Set should be invoked
-func (mmSet *mSettingsServiceHandlerMockSet) Times(n uint64) *mSettingsServiceHandlerMockSet {
+// Times sets number of times SettingsServiceClient.Set should be invoked
+func (mmSet *mSettingsServiceClientMockSet) Times(n uint64) *mSettingsServiceClientMockSet {
 	if n == 0 {
-		mmSet.mock.t.Fatalf("Times of SettingsServiceHandlerMock.Set mock can not be zero")
+		mmSet.mock.t.Fatalf("Times of SettingsServiceClientMock.Set mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmSet.expectedInvocations, n)
 	mmSet.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmSet
 }
 
-func (mmSet *mSettingsServiceHandlerMockSet) invocationsDone() bool {
+func (mmSet *mSettingsServiceClientMockSet) invocationsDone() bool {
 	if len(mmSet.expectations) == 0 && mmSet.defaultExpectation == nil && mmSet.mock.funcSet == nil {
 		return true
 	}
@@ -1377,8 +1317,8 @@ func (mmSet *mSettingsServiceHandlerMockSet) invocationsDone() bool {
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// Set implements mm_settingsv1connect.SettingsServiceHandler
-func (mmSet *SettingsServiceHandlerMock) Set(ctx context.Context, pp1 *connect.Request[v1.SetRequest]) (pp2 *connect.Response[v1.SetResponse], err error) {
+// Set implements mm_settingsv1connect.SettingsServiceClient
+func (mmSet *SettingsServiceClientMock) Set(ctx context.Context, pp1 *connect.Request[v1.SetRequest]) (pp2 *connect.Response[v1.SetResponse], err error) {
 	mm_atomic.AddUint64(&mmSet.beforeSetCounter, 1)
 	defer mm_atomic.AddUint64(&mmSet.afterSetCounter, 1)
 
@@ -1388,7 +1328,7 @@ func (mmSet *SettingsServiceHandlerMock) Set(ctx context.Context, pp1 *connect.R
 		mmSet.inspectFuncSet(ctx, pp1)
 	}
 
-	mm_params := SettingsServiceHandlerMockSetParams{ctx, pp1}
+	mm_params := SettingsServiceClientMockSetParams{ctx, pp1}
 
 	// Record call args
 	mmSet.SetMock.mutex.Lock()
@@ -1407,54 +1347,54 @@ func (mmSet *SettingsServiceHandlerMock) Set(ctx context.Context, pp1 *connect.R
 		mm_want := mmSet.SetMock.defaultExpectation.params
 		mm_want_ptrs := mmSet.SetMock.defaultExpectation.paramPtrs
 
-		mm_got := SettingsServiceHandlerMockSetParams{ctx, pp1}
+		mm_got := SettingsServiceClientMockSetParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmSet.t.Errorf("SettingsServiceHandlerMock.Set got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmSet.t.Errorf("SettingsServiceClientMock.Set got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmSet.SetMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmSet.t.Errorf("SettingsServiceHandlerMock.Set got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmSet.t.Errorf("SettingsServiceClientMock.Set got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmSet.SetMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmSet.t.Errorf("SettingsServiceHandlerMock.Set got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmSet.t.Errorf("SettingsServiceClientMock.Set got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmSet.SetMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmSet.SetMock.defaultExpectation.results
 		if mm_results == nil {
-			mmSet.t.Fatal("No results are set for the SettingsServiceHandlerMock.Set")
+			mmSet.t.Fatal("No results are set for the SettingsServiceClientMock.Set")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmSet.funcSet != nil {
 		return mmSet.funcSet(ctx, pp1)
 	}
-	mmSet.t.Fatalf("Unexpected call to SettingsServiceHandlerMock.Set. %v %v", ctx, pp1)
+	mmSet.t.Fatalf("Unexpected call to SettingsServiceClientMock.Set. %v %v", ctx, pp1)
 	return
 }
 
-// SetAfterCounter returns a count of finished SettingsServiceHandlerMock.Set invocations
-func (mmSet *SettingsServiceHandlerMock) SetAfterCounter() uint64 {
+// SetAfterCounter returns a count of finished SettingsServiceClientMock.Set invocations
+func (mmSet *SettingsServiceClientMock) SetAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmSet.afterSetCounter)
 }
 
-// SetBeforeCounter returns a count of SettingsServiceHandlerMock.Set invocations
-func (mmSet *SettingsServiceHandlerMock) SetBeforeCounter() uint64 {
+// SetBeforeCounter returns a count of SettingsServiceClientMock.Set invocations
+func (mmSet *SettingsServiceClientMock) SetBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmSet.beforeSetCounter)
 }
 
-// Calls returns a list of arguments used in each call to SettingsServiceHandlerMock.Set.
+// Calls returns a list of arguments used in each call to SettingsServiceClientMock.Set.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmSet *mSettingsServiceHandlerMockSet) Calls() []*SettingsServiceHandlerMockSetParams {
+func (mmSet *mSettingsServiceClientMockSet) Calls() []*SettingsServiceClientMockSetParams {
 	mmSet.mutex.RLock()
 
-	argCopy := make([]*SettingsServiceHandlerMockSetParams, len(mmSet.callArgs))
+	argCopy := make([]*SettingsServiceClientMockSetParams, len(mmSet.callArgs))
 	copy(argCopy, mmSet.callArgs)
 
 	mmSet.mutex.RUnlock()
@@ -1464,7 +1404,7 @@ func (mmSet *mSettingsServiceHandlerMockSet) Calls() []*SettingsServiceHandlerMo
 
 // MinimockSetDone returns true if the count of the Set invocations corresponds
 // the number of defined expectations
-func (m *SettingsServiceHandlerMock) MinimockSetDone() bool {
+func (m *SettingsServiceClientMock) MinimockSetDone() bool {
 	if m.SetMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -1480,10 +1420,10 @@ func (m *SettingsServiceHandlerMock) MinimockSetDone() bool {
 }
 
 // MinimockSetInspect logs each unmet expectation
-func (m *SettingsServiceHandlerMock) MinimockSetInspect() {
+func (m *SettingsServiceClientMock) MinimockSetInspect() {
 	for _, e := range m.SetMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to SettingsServiceHandlerMock.Set at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to SettingsServiceClientMock.Set at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -1491,24 +1431,24 @@ func (m *SettingsServiceHandlerMock) MinimockSetInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.SetMock.defaultExpectation != nil && afterSetCounter < 1 {
 		if m.SetMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to SettingsServiceHandlerMock.Set at\n%s", m.SetMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to SettingsServiceClientMock.Set at\n%s", m.SetMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to SettingsServiceHandlerMock.Set at\n%s with params: %#v", m.SetMock.defaultExpectation.expectationOrigins.origin, *m.SetMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to SettingsServiceClientMock.Set at\n%s with params: %#v", m.SetMock.defaultExpectation.expectationOrigins.origin, *m.SetMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcSet != nil && afterSetCounter < 1 {
-		m.t.Errorf("Expected call to SettingsServiceHandlerMock.Set at\n%s", m.funcSetOrigin)
+		m.t.Errorf("Expected call to SettingsServiceClientMock.Set at\n%s", m.funcSetOrigin)
 	}
 
 	if !m.SetMock.invocationsDone() && afterSetCounter > 0 {
-		m.t.Errorf("Expected %d calls to SettingsServiceHandlerMock.Set at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to SettingsServiceClientMock.Set at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.SetMock.expectedInvocations), m.SetMock.expectedInvocationsOrigin, afterSetCounter)
 	}
 }
 
 // MinimockFinish checks that all mocked methods have been called the expected number of times
-func (m *SettingsServiceHandlerMock) MinimockFinish() {
+func (m *SettingsServiceClientMock) MinimockFinish() {
 	m.finishOnce.Do(func() {
 		if !m.minimockDone() {
 			m.MinimockGetInspect()
@@ -1523,7 +1463,7 @@ func (m *SettingsServiceHandlerMock) MinimockFinish() {
 }
 
 // MinimockWait waits for all mocked methods to be called the expected number of times
-func (m *SettingsServiceHandlerMock) MinimockWait(timeout mm_time.Duration) {
+func (m *SettingsServiceClientMock) MinimockWait(timeout mm_time.Duration) {
 	timeoutCh := mm_time.After(timeout)
 	for {
 		if m.minimockDone() {
@@ -1538,7 +1478,7 @@ func (m *SettingsServiceHandlerMock) MinimockWait(timeout mm_time.Duration) {
 	}
 }
 
-func (m *SettingsServiceHandlerMock) minimockDone() bool {
+func (m *SettingsServiceClientMock) minimockDone() bool {
 	done := true
 	return done &&
 		m.MinimockGetDone() &&

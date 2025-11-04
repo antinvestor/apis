@@ -2,7 +2,7 @@
 
 package mocks
 
-//go:generate minimock -i buf.build/gen/go/antinvestor/device/connectrpc/go/device/v1/devicev1connect.DeviceServiceHandler -o device_handler.gen.go -n DeviceServiceHandlerMock -p mocks
+//go:generate minimock -i buf.build/gen/go/antinvestor/device/connectrpc/go/device/v1/devicev1connect.DeviceServiceClient -o device_handler.gen.go -n DeviceServiceClientMock -p mocks
 
 import (
 	context "context"
@@ -15,8 +15,8 @@ import (
 	"github.com/gojuno/minimock/v3"
 )
 
-// DeviceServiceHandlerMock implements mm_devicev1connect.DeviceServiceHandler
-type DeviceServiceHandlerMock struct {
+// DeviceServiceClientMock implements mm_devicev1connect.DeviceServiceClient
+type DeviceServiceClientMock struct {
 	t          minimock.Tester
 	finishOnce sync.Once
 
@@ -25,219 +25,219 @@ type DeviceServiceHandlerMock struct {
 	inspectFuncAddKey   func(ctx context.Context, pp1 *connect.Request[v1.AddKeyRequest])
 	afterAddKeyCounter  uint64
 	beforeAddKeyCounter uint64
-	AddKeyMock          mDeviceServiceHandlerMockAddKey
+	AddKeyMock          mDeviceServiceClientMockAddKey
 
 	funcCreate          func(ctx context.Context, pp1 *connect.Request[v1.CreateRequest]) (pp2 *connect.Response[v1.CreateResponse], err error)
 	funcCreateOrigin    string
 	inspectFuncCreate   func(ctx context.Context, pp1 *connect.Request[v1.CreateRequest])
 	afterCreateCounter  uint64
 	beforeCreateCounter uint64
-	CreateMock          mDeviceServiceHandlerMockCreate
+	CreateMock          mDeviceServiceClientMockCreate
 
 	funcDeRegisterKey          func(ctx context.Context, pp1 *connect.Request[v1.DeRegisterKeyRequest]) (pp2 *connect.Response[v1.DeRegisterKeyResponse], err error)
 	funcDeRegisterKeyOrigin    string
 	inspectFuncDeRegisterKey   func(ctx context.Context, pp1 *connect.Request[v1.DeRegisterKeyRequest])
 	afterDeRegisterKeyCounter  uint64
 	beforeDeRegisterKeyCounter uint64
-	DeRegisterKeyMock          mDeviceServiceHandlerMockDeRegisterKey
+	DeRegisterKeyMock          mDeviceServiceClientMockDeRegisterKey
 
 	funcGetById          func(ctx context.Context, pp1 *connect.Request[v1.GetByIdRequest]) (pp2 *connect.Response[v1.GetByIdResponse], err error)
 	funcGetByIdOrigin    string
 	inspectFuncGetById   func(ctx context.Context, pp1 *connect.Request[v1.GetByIdRequest])
 	afterGetByIdCounter  uint64
 	beforeGetByIdCounter uint64
-	GetByIdMock          mDeviceServiceHandlerMockGetById
+	GetByIdMock          mDeviceServiceClientMockGetById
 
 	funcGetBySessionId          func(ctx context.Context, pp1 *connect.Request[v1.GetBySessionIdRequest]) (pp2 *connect.Response[v1.GetBySessionIdResponse], err error)
 	funcGetBySessionIdOrigin    string
 	inspectFuncGetBySessionId   func(ctx context.Context, pp1 *connect.Request[v1.GetBySessionIdRequest])
 	afterGetBySessionIdCounter  uint64
 	beforeGetBySessionIdCounter uint64
-	GetBySessionIdMock          mDeviceServiceHandlerMockGetBySessionId
+	GetBySessionIdMock          mDeviceServiceClientMockGetBySessionId
 
 	funcLink          func(ctx context.Context, pp1 *connect.Request[v1.LinkRequest]) (pp2 *connect.Response[v1.LinkResponse], err error)
 	funcLinkOrigin    string
 	inspectFuncLink   func(ctx context.Context, pp1 *connect.Request[v1.LinkRequest])
 	afterLinkCounter  uint64
 	beforeLinkCounter uint64
-	LinkMock          mDeviceServiceHandlerMockLink
+	LinkMock          mDeviceServiceClientMockLink
 
-	funcListLogs          func(ctx context.Context, pp1 *connect.Request[v1.ListLogsRequest], pp2 *connect.ServerStream[v1.ListLogsResponse]) (err error)
+	funcListLogs          func(ctx context.Context, pp1 *connect.Request[v1.ListLogsRequest]) (pp2 *connect.ServerStreamForClient[v1.ListLogsResponse], err error)
 	funcListLogsOrigin    string
-	inspectFuncListLogs   func(ctx context.Context, pp1 *connect.Request[v1.ListLogsRequest], pp2 *connect.ServerStream[v1.ListLogsResponse])
+	inspectFuncListLogs   func(ctx context.Context, pp1 *connect.Request[v1.ListLogsRequest])
 	afterListLogsCounter  uint64
 	beforeListLogsCounter uint64
-	ListLogsMock          mDeviceServiceHandlerMockListLogs
+	ListLogsMock          mDeviceServiceClientMockListLogs
 
 	funcLog          func(ctx context.Context, pp1 *connect.Request[v1.LogRequest]) (pp2 *connect.Response[v1.LogResponse], err error)
 	funcLogOrigin    string
 	inspectFuncLog   func(ctx context.Context, pp1 *connect.Request[v1.LogRequest])
 	afterLogCounter  uint64
 	beforeLogCounter uint64
-	LogMock          mDeviceServiceHandlerMockLog
+	LogMock          mDeviceServiceClientMockLog
 
 	funcNotify          func(ctx context.Context, pp1 *connect.Request[v1.NotifyRequest]) (pp2 *connect.Response[v1.NotifyResponse], err error)
 	funcNotifyOrigin    string
 	inspectFuncNotify   func(ctx context.Context, pp1 *connect.Request[v1.NotifyRequest])
 	afterNotifyCounter  uint64
 	beforeNotifyCounter uint64
-	NotifyMock          mDeviceServiceHandlerMockNotify
+	NotifyMock          mDeviceServiceClientMockNotify
 
 	funcRegisterKey          func(ctx context.Context, pp1 *connect.Request[v1.RegisterKeyRequest]) (pp2 *connect.Response[v1.RegisterKeyResponse], err error)
 	funcRegisterKeyOrigin    string
 	inspectFuncRegisterKey   func(ctx context.Context, pp1 *connect.Request[v1.RegisterKeyRequest])
 	afterRegisterKeyCounter  uint64
 	beforeRegisterKeyCounter uint64
-	RegisterKeyMock          mDeviceServiceHandlerMockRegisterKey
+	RegisterKeyMock          mDeviceServiceClientMockRegisterKey
 
 	funcRemove          func(ctx context.Context, pp1 *connect.Request[v1.RemoveRequest]) (pp2 *connect.Response[v1.RemoveResponse], err error)
 	funcRemoveOrigin    string
 	inspectFuncRemove   func(ctx context.Context, pp1 *connect.Request[v1.RemoveRequest])
 	afterRemoveCounter  uint64
 	beforeRemoveCounter uint64
-	RemoveMock          mDeviceServiceHandlerMockRemove
+	RemoveMock          mDeviceServiceClientMockRemove
 
 	funcRemoveKey          func(ctx context.Context, pp1 *connect.Request[v1.RemoveKeyRequest]) (pp2 *connect.Response[v1.RemoveKeyResponse], err error)
 	funcRemoveKeyOrigin    string
 	inspectFuncRemoveKey   func(ctx context.Context, pp1 *connect.Request[v1.RemoveKeyRequest])
 	afterRemoveKeyCounter  uint64
 	beforeRemoveKeyCounter uint64
-	RemoveKeyMock          mDeviceServiceHandlerMockRemoveKey
+	RemoveKeyMock          mDeviceServiceClientMockRemoveKey
 
-	funcSearch          func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest], pp2 *connect.ServerStream[v1.SearchResponse]) (err error)
+	funcSearch          func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) (pp2 *connect.ServerStreamForClient[v1.SearchResponse], err error)
 	funcSearchOrigin    string
-	inspectFuncSearch   func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest], pp2 *connect.ServerStream[v1.SearchResponse])
+	inspectFuncSearch   func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest])
 	afterSearchCounter  uint64
 	beforeSearchCounter uint64
-	SearchMock          mDeviceServiceHandlerMockSearch
+	SearchMock          mDeviceServiceClientMockSearch
 
 	funcSearchKey          func(ctx context.Context, pp1 *connect.Request[v1.SearchKeyRequest]) (pp2 *connect.Response[v1.SearchKeyResponse], err error)
 	funcSearchKeyOrigin    string
 	inspectFuncSearchKey   func(ctx context.Context, pp1 *connect.Request[v1.SearchKeyRequest])
 	afterSearchKeyCounter  uint64
 	beforeSearchKeyCounter uint64
-	SearchKeyMock          mDeviceServiceHandlerMockSearchKey
+	SearchKeyMock          mDeviceServiceClientMockSearchKey
 
 	funcUpdate          func(ctx context.Context, pp1 *connect.Request[v1.UpdateRequest]) (pp2 *connect.Response[v1.UpdateResponse], err error)
 	funcUpdateOrigin    string
 	inspectFuncUpdate   func(ctx context.Context, pp1 *connect.Request[v1.UpdateRequest])
 	afterUpdateCounter  uint64
 	beforeUpdateCounter uint64
-	UpdateMock          mDeviceServiceHandlerMockUpdate
+	UpdateMock          mDeviceServiceClientMockUpdate
 
 	funcUpdatePresence          func(ctx context.Context, pp1 *connect.Request[v1.UpdatePresenceRequest]) (pp2 *connect.Response[v1.UpdatePresenceResponse], err error)
 	funcUpdatePresenceOrigin    string
 	inspectFuncUpdatePresence   func(ctx context.Context, pp1 *connect.Request[v1.UpdatePresenceRequest])
 	afterUpdatePresenceCounter  uint64
 	beforeUpdatePresenceCounter uint64
-	UpdatePresenceMock          mDeviceServiceHandlerMockUpdatePresence
+	UpdatePresenceMock          mDeviceServiceClientMockUpdatePresence
 }
 
-// NewDeviceServiceHandlerMock returns a mock for mm_devicev1connect.DeviceServiceHandler
-func NewDeviceServiceHandlerMock(t minimock.Tester) *DeviceServiceHandlerMock {
-	m := &DeviceServiceHandlerMock{t: t}
+// NewDeviceServiceClientMock returns a mock for mm_devicev1connect.DeviceServiceClient
+func NewDeviceServiceClientMock(t minimock.Tester) *DeviceServiceClientMock {
+	m := &DeviceServiceClientMock{t: t}
 
 	if controller, ok := t.(minimock.MockController); ok {
 		controller.RegisterMocker(m)
 	}
 
-	m.AddKeyMock = mDeviceServiceHandlerMockAddKey{mock: m}
-	m.AddKeyMock.callArgs = []*DeviceServiceHandlerMockAddKeyParams{}
+	m.AddKeyMock = mDeviceServiceClientMockAddKey{mock: m}
+	m.AddKeyMock.callArgs = []*DeviceServiceClientMockAddKeyParams{}
 
-	m.CreateMock = mDeviceServiceHandlerMockCreate{mock: m}
-	m.CreateMock.callArgs = []*DeviceServiceHandlerMockCreateParams{}
+	m.CreateMock = mDeviceServiceClientMockCreate{mock: m}
+	m.CreateMock.callArgs = []*DeviceServiceClientMockCreateParams{}
 
-	m.DeRegisterKeyMock = mDeviceServiceHandlerMockDeRegisterKey{mock: m}
-	m.DeRegisterKeyMock.callArgs = []*DeviceServiceHandlerMockDeRegisterKeyParams{}
+	m.DeRegisterKeyMock = mDeviceServiceClientMockDeRegisterKey{mock: m}
+	m.DeRegisterKeyMock.callArgs = []*DeviceServiceClientMockDeRegisterKeyParams{}
 
-	m.GetByIdMock = mDeviceServiceHandlerMockGetById{mock: m}
-	m.GetByIdMock.callArgs = []*DeviceServiceHandlerMockGetByIdParams{}
+	m.GetByIdMock = mDeviceServiceClientMockGetById{mock: m}
+	m.GetByIdMock.callArgs = []*DeviceServiceClientMockGetByIdParams{}
 
-	m.GetBySessionIdMock = mDeviceServiceHandlerMockGetBySessionId{mock: m}
-	m.GetBySessionIdMock.callArgs = []*DeviceServiceHandlerMockGetBySessionIdParams{}
+	m.GetBySessionIdMock = mDeviceServiceClientMockGetBySessionId{mock: m}
+	m.GetBySessionIdMock.callArgs = []*DeviceServiceClientMockGetBySessionIdParams{}
 
-	m.LinkMock = mDeviceServiceHandlerMockLink{mock: m}
-	m.LinkMock.callArgs = []*DeviceServiceHandlerMockLinkParams{}
+	m.LinkMock = mDeviceServiceClientMockLink{mock: m}
+	m.LinkMock.callArgs = []*DeviceServiceClientMockLinkParams{}
 
-	m.ListLogsMock = mDeviceServiceHandlerMockListLogs{mock: m}
-	m.ListLogsMock.callArgs = []*DeviceServiceHandlerMockListLogsParams{}
+	m.ListLogsMock = mDeviceServiceClientMockListLogs{mock: m}
+	m.ListLogsMock.callArgs = []*DeviceServiceClientMockListLogsParams{}
 
-	m.LogMock = mDeviceServiceHandlerMockLog{mock: m}
-	m.LogMock.callArgs = []*DeviceServiceHandlerMockLogParams{}
+	m.LogMock = mDeviceServiceClientMockLog{mock: m}
+	m.LogMock.callArgs = []*DeviceServiceClientMockLogParams{}
 
-	m.NotifyMock = mDeviceServiceHandlerMockNotify{mock: m}
-	m.NotifyMock.callArgs = []*DeviceServiceHandlerMockNotifyParams{}
+	m.NotifyMock = mDeviceServiceClientMockNotify{mock: m}
+	m.NotifyMock.callArgs = []*DeviceServiceClientMockNotifyParams{}
 
-	m.RegisterKeyMock = mDeviceServiceHandlerMockRegisterKey{mock: m}
-	m.RegisterKeyMock.callArgs = []*DeviceServiceHandlerMockRegisterKeyParams{}
+	m.RegisterKeyMock = mDeviceServiceClientMockRegisterKey{mock: m}
+	m.RegisterKeyMock.callArgs = []*DeviceServiceClientMockRegisterKeyParams{}
 
-	m.RemoveMock = mDeviceServiceHandlerMockRemove{mock: m}
-	m.RemoveMock.callArgs = []*DeviceServiceHandlerMockRemoveParams{}
+	m.RemoveMock = mDeviceServiceClientMockRemove{mock: m}
+	m.RemoveMock.callArgs = []*DeviceServiceClientMockRemoveParams{}
 
-	m.RemoveKeyMock = mDeviceServiceHandlerMockRemoveKey{mock: m}
-	m.RemoveKeyMock.callArgs = []*DeviceServiceHandlerMockRemoveKeyParams{}
+	m.RemoveKeyMock = mDeviceServiceClientMockRemoveKey{mock: m}
+	m.RemoveKeyMock.callArgs = []*DeviceServiceClientMockRemoveKeyParams{}
 
-	m.SearchMock = mDeviceServiceHandlerMockSearch{mock: m}
-	m.SearchMock.callArgs = []*DeviceServiceHandlerMockSearchParams{}
+	m.SearchMock = mDeviceServiceClientMockSearch{mock: m}
+	m.SearchMock.callArgs = []*DeviceServiceClientMockSearchParams{}
 
-	m.SearchKeyMock = mDeviceServiceHandlerMockSearchKey{mock: m}
-	m.SearchKeyMock.callArgs = []*DeviceServiceHandlerMockSearchKeyParams{}
+	m.SearchKeyMock = mDeviceServiceClientMockSearchKey{mock: m}
+	m.SearchKeyMock.callArgs = []*DeviceServiceClientMockSearchKeyParams{}
 
-	m.UpdateMock = mDeviceServiceHandlerMockUpdate{mock: m}
-	m.UpdateMock.callArgs = []*DeviceServiceHandlerMockUpdateParams{}
+	m.UpdateMock = mDeviceServiceClientMockUpdate{mock: m}
+	m.UpdateMock.callArgs = []*DeviceServiceClientMockUpdateParams{}
 
-	m.UpdatePresenceMock = mDeviceServiceHandlerMockUpdatePresence{mock: m}
-	m.UpdatePresenceMock.callArgs = []*DeviceServiceHandlerMockUpdatePresenceParams{}
+	m.UpdatePresenceMock = mDeviceServiceClientMockUpdatePresence{mock: m}
+	m.UpdatePresenceMock.callArgs = []*DeviceServiceClientMockUpdatePresenceParams{}
 
 	t.Cleanup(m.MinimockFinish)
 
 	return m
 }
 
-type mDeviceServiceHandlerMockAddKey struct {
+type mDeviceServiceClientMockAddKey struct {
 	optional           bool
-	mock               *DeviceServiceHandlerMock
-	defaultExpectation *DeviceServiceHandlerMockAddKeyExpectation
-	expectations       []*DeviceServiceHandlerMockAddKeyExpectation
+	mock               *DeviceServiceClientMock
+	defaultExpectation *DeviceServiceClientMockAddKeyExpectation
+	expectations       []*DeviceServiceClientMockAddKeyExpectation
 
-	callArgs []*DeviceServiceHandlerMockAddKeyParams
+	callArgs []*DeviceServiceClientMockAddKeyParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// DeviceServiceHandlerMockAddKeyExpectation specifies expectation struct of the DeviceServiceHandler.AddKey
-type DeviceServiceHandlerMockAddKeyExpectation struct {
-	mock               *DeviceServiceHandlerMock
-	params             *DeviceServiceHandlerMockAddKeyParams
-	paramPtrs          *DeviceServiceHandlerMockAddKeyParamPtrs
-	expectationOrigins DeviceServiceHandlerMockAddKeyExpectationOrigins
-	results            *DeviceServiceHandlerMockAddKeyResults
+// DeviceServiceClientMockAddKeyExpectation specifies expectation struct of the DeviceServiceClient.AddKey
+type DeviceServiceClientMockAddKeyExpectation struct {
+	mock               *DeviceServiceClientMock
+	params             *DeviceServiceClientMockAddKeyParams
+	paramPtrs          *DeviceServiceClientMockAddKeyParamPtrs
+	expectationOrigins DeviceServiceClientMockAddKeyExpectationOrigins
+	results            *DeviceServiceClientMockAddKeyResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// DeviceServiceHandlerMockAddKeyParams contains parameters of the DeviceServiceHandler.AddKey
-type DeviceServiceHandlerMockAddKeyParams struct {
+// DeviceServiceClientMockAddKeyParams contains parameters of the DeviceServiceClient.AddKey
+type DeviceServiceClientMockAddKeyParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.AddKeyRequest]
 }
 
-// DeviceServiceHandlerMockAddKeyParamPtrs contains pointers to parameters of the DeviceServiceHandler.AddKey
-type DeviceServiceHandlerMockAddKeyParamPtrs struct {
+// DeviceServiceClientMockAddKeyParamPtrs contains pointers to parameters of the DeviceServiceClient.AddKey
+type DeviceServiceClientMockAddKeyParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.AddKeyRequest]
 }
 
-// DeviceServiceHandlerMockAddKeyResults contains results of the DeviceServiceHandler.AddKey
-type DeviceServiceHandlerMockAddKeyResults struct {
+// DeviceServiceClientMockAddKeyResults contains results of the DeviceServiceClient.AddKey
+type DeviceServiceClientMockAddKeyResults struct {
 	pp2 *connect.Response[v1.AddKeyResponse]
 	err error
 }
 
-// DeviceServiceHandlerMockAddKeyOrigins contains origins of expectations of the DeviceServiceHandler.AddKey
-type DeviceServiceHandlerMockAddKeyExpectationOrigins struct {
+// DeviceServiceClientMockAddKeyOrigins contains origins of expectations of the DeviceServiceClient.AddKey
+type DeviceServiceClientMockAddKeyExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -248,26 +248,26 @@ type DeviceServiceHandlerMockAddKeyExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmAddKey *mDeviceServiceHandlerMockAddKey) Optional() *mDeviceServiceHandlerMockAddKey {
+func (mmAddKey *mDeviceServiceClientMockAddKey) Optional() *mDeviceServiceClientMockAddKey {
 	mmAddKey.optional = true
 	return mmAddKey
 }
 
-// Expect sets up expected params for DeviceServiceHandler.AddKey
-func (mmAddKey *mDeviceServiceHandlerMockAddKey) Expect(ctx context.Context, pp1 *connect.Request[v1.AddKeyRequest]) *mDeviceServiceHandlerMockAddKey {
+// Expect sets up expected params for DeviceServiceClient.AddKey
+func (mmAddKey *mDeviceServiceClientMockAddKey) Expect(ctx context.Context, pp1 *connect.Request[v1.AddKeyRequest]) *mDeviceServiceClientMockAddKey {
 	if mmAddKey.mock.funcAddKey != nil {
-		mmAddKey.mock.t.Fatalf("DeviceServiceHandlerMock.AddKey mock is already set by Set")
+		mmAddKey.mock.t.Fatalf("DeviceServiceClientMock.AddKey mock is already set by Set")
 	}
 
 	if mmAddKey.defaultExpectation == nil {
-		mmAddKey.defaultExpectation = &DeviceServiceHandlerMockAddKeyExpectation{}
+		mmAddKey.defaultExpectation = &DeviceServiceClientMockAddKeyExpectation{}
 	}
 
 	if mmAddKey.defaultExpectation.paramPtrs != nil {
-		mmAddKey.mock.t.Fatalf("DeviceServiceHandlerMock.AddKey mock is already set by ExpectParams functions")
+		mmAddKey.mock.t.Fatalf("DeviceServiceClientMock.AddKey mock is already set by ExpectParams functions")
 	}
 
-	mmAddKey.defaultExpectation.params = &DeviceServiceHandlerMockAddKeyParams{ctx, pp1}
+	mmAddKey.defaultExpectation.params = &DeviceServiceClientMockAddKeyParams{ctx, pp1}
 	mmAddKey.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmAddKey.expectations {
 		if minimock.Equal(e.params, mmAddKey.defaultExpectation.params) {
@@ -278,22 +278,22 @@ func (mmAddKey *mDeviceServiceHandlerMockAddKey) Expect(ctx context.Context, pp1
 	return mmAddKey
 }
 
-// ExpectCtxParam1 sets up expected param ctx for DeviceServiceHandler.AddKey
-func (mmAddKey *mDeviceServiceHandlerMockAddKey) ExpectCtxParam1(ctx context.Context) *mDeviceServiceHandlerMockAddKey {
+// ExpectCtxParam1 sets up expected param ctx for DeviceServiceClient.AddKey
+func (mmAddKey *mDeviceServiceClientMockAddKey) ExpectCtxParam1(ctx context.Context) *mDeviceServiceClientMockAddKey {
 	if mmAddKey.mock.funcAddKey != nil {
-		mmAddKey.mock.t.Fatalf("DeviceServiceHandlerMock.AddKey mock is already set by Set")
+		mmAddKey.mock.t.Fatalf("DeviceServiceClientMock.AddKey mock is already set by Set")
 	}
 
 	if mmAddKey.defaultExpectation == nil {
-		mmAddKey.defaultExpectation = &DeviceServiceHandlerMockAddKeyExpectation{}
+		mmAddKey.defaultExpectation = &DeviceServiceClientMockAddKeyExpectation{}
 	}
 
 	if mmAddKey.defaultExpectation.params != nil {
-		mmAddKey.mock.t.Fatalf("DeviceServiceHandlerMock.AddKey mock is already set by Expect")
+		mmAddKey.mock.t.Fatalf("DeviceServiceClientMock.AddKey mock is already set by Expect")
 	}
 
 	if mmAddKey.defaultExpectation.paramPtrs == nil {
-		mmAddKey.defaultExpectation.paramPtrs = &DeviceServiceHandlerMockAddKeyParamPtrs{}
+		mmAddKey.defaultExpectation.paramPtrs = &DeviceServiceClientMockAddKeyParamPtrs{}
 	}
 	mmAddKey.defaultExpectation.paramPtrs.ctx = &ctx
 	mmAddKey.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -301,22 +301,22 @@ func (mmAddKey *mDeviceServiceHandlerMockAddKey) ExpectCtxParam1(ctx context.Con
 	return mmAddKey
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for DeviceServiceHandler.AddKey
-func (mmAddKey *mDeviceServiceHandlerMockAddKey) ExpectPp1Param2(pp1 *connect.Request[v1.AddKeyRequest]) *mDeviceServiceHandlerMockAddKey {
+// ExpectPp1Param2 sets up expected param pp1 for DeviceServiceClient.AddKey
+func (mmAddKey *mDeviceServiceClientMockAddKey) ExpectPp1Param2(pp1 *connect.Request[v1.AddKeyRequest]) *mDeviceServiceClientMockAddKey {
 	if mmAddKey.mock.funcAddKey != nil {
-		mmAddKey.mock.t.Fatalf("DeviceServiceHandlerMock.AddKey mock is already set by Set")
+		mmAddKey.mock.t.Fatalf("DeviceServiceClientMock.AddKey mock is already set by Set")
 	}
 
 	if mmAddKey.defaultExpectation == nil {
-		mmAddKey.defaultExpectation = &DeviceServiceHandlerMockAddKeyExpectation{}
+		mmAddKey.defaultExpectation = &DeviceServiceClientMockAddKeyExpectation{}
 	}
 
 	if mmAddKey.defaultExpectation.params != nil {
-		mmAddKey.mock.t.Fatalf("DeviceServiceHandlerMock.AddKey mock is already set by Expect")
+		mmAddKey.mock.t.Fatalf("DeviceServiceClientMock.AddKey mock is already set by Expect")
 	}
 
 	if mmAddKey.defaultExpectation.paramPtrs == nil {
-		mmAddKey.defaultExpectation.paramPtrs = &DeviceServiceHandlerMockAddKeyParamPtrs{}
+		mmAddKey.defaultExpectation.paramPtrs = &DeviceServiceClientMockAddKeyParamPtrs{}
 	}
 	mmAddKey.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmAddKey.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -324,10 +324,10 @@ func (mmAddKey *mDeviceServiceHandlerMockAddKey) ExpectPp1Param2(pp1 *connect.Re
 	return mmAddKey
 }
 
-// Inspect accepts an inspector function that has same arguments as the DeviceServiceHandler.AddKey
-func (mmAddKey *mDeviceServiceHandlerMockAddKey) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.AddKeyRequest])) *mDeviceServiceHandlerMockAddKey {
+// Inspect accepts an inspector function that has same arguments as the DeviceServiceClient.AddKey
+func (mmAddKey *mDeviceServiceClientMockAddKey) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.AddKeyRequest])) *mDeviceServiceClientMockAddKey {
 	if mmAddKey.mock.inspectFuncAddKey != nil {
-		mmAddKey.mock.t.Fatalf("Inspect function is already set for DeviceServiceHandlerMock.AddKey")
+		mmAddKey.mock.t.Fatalf("Inspect function is already set for DeviceServiceClientMock.AddKey")
 	}
 
 	mmAddKey.mock.inspectFuncAddKey = f
@@ -335,28 +335,28 @@ func (mmAddKey *mDeviceServiceHandlerMockAddKey) Inspect(f func(ctx context.Cont
 	return mmAddKey
 }
 
-// Return sets up results that will be returned by DeviceServiceHandler.AddKey
-func (mmAddKey *mDeviceServiceHandlerMockAddKey) Return(pp2 *connect.Response[v1.AddKeyResponse], err error) *DeviceServiceHandlerMock {
+// Return sets up results that will be returned by DeviceServiceClient.AddKey
+func (mmAddKey *mDeviceServiceClientMockAddKey) Return(pp2 *connect.Response[v1.AddKeyResponse], err error) *DeviceServiceClientMock {
 	if mmAddKey.mock.funcAddKey != nil {
-		mmAddKey.mock.t.Fatalf("DeviceServiceHandlerMock.AddKey mock is already set by Set")
+		mmAddKey.mock.t.Fatalf("DeviceServiceClientMock.AddKey mock is already set by Set")
 	}
 
 	if mmAddKey.defaultExpectation == nil {
-		mmAddKey.defaultExpectation = &DeviceServiceHandlerMockAddKeyExpectation{mock: mmAddKey.mock}
+		mmAddKey.defaultExpectation = &DeviceServiceClientMockAddKeyExpectation{mock: mmAddKey.mock}
 	}
-	mmAddKey.defaultExpectation.results = &DeviceServiceHandlerMockAddKeyResults{pp2, err}
+	mmAddKey.defaultExpectation.results = &DeviceServiceClientMockAddKeyResults{pp2, err}
 	mmAddKey.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmAddKey.mock
 }
 
-// Set uses given function f to mock the DeviceServiceHandler.AddKey method
-func (mmAddKey *mDeviceServiceHandlerMockAddKey) Set(f func(ctx context.Context, pp1 *connect.Request[v1.AddKeyRequest]) (pp2 *connect.Response[v1.AddKeyResponse], err error)) *DeviceServiceHandlerMock {
+// Set uses given function f to mock the DeviceServiceClient.AddKey method
+func (mmAddKey *mDeviceServiceClientMockAddKey) Set(f func(ctx context.Context, pp1 *connect.Request[v1.AddKeyRequest]) (pp2 *connect.Response[v1.AddKeyResponse], err error)) *DeviceServiceClientMock {
 	if mmAddKey.defaultExpectation != nil {
-		mmAddKey.mock.t.Fatalf("Default expectation is already set for the DeviceServiceHandler.AddKey method")
+		mmAddKey.mock.t.Fatalf("Default expectation is already set for the DeviceServiceClient.AddKey method")
 	}
 
 	if len(mmAddKey.expectations) > 0 {
-		mmAddKey.mock.t.Fatalf("Some expectations are already set for the DeviceServiceHandler.AddKey method")
+		mmAddKey.mock.t.Fatalf("Some expectations are already set for the DeviceServiceClient.AddKey method")
 	}
 
 	mmAddKey.mock.funcAddKey = f
@@ -364,39 +364,39 @@ func (mmAddKey *mDeviceServiceHandlerMockAddKey) Set(f func(ctx context.Context,
 	return mmAddKey.mock
 }
 
-// When sets expectation for the DeviceServiceHandler.AddKey which will trigger the result defined by the following
+// When sets expectation for the DeviceServiceClient.AddKey which will trigger the result defined by the following
 // Then helper
-func (mmAddKey *mDeviceServiceHandlerMockAddKey) When(ctx context.Context, pp1 *connect.Request[v1.AddKeyRequest]) *DeviceServiceHandlerMockAddKeyExpectation {
+func (mmAddKey *mDeviceServiceClientMockAddKey) When(ctx context.Context, pp1 *connect.Request[v1.AddKeyRequest]) *DeviceServiceClientMockAddKeyExpectation {
 	if mmAddKey.mock.funcAddKey != nil {
-		mmAddKey.mock.t.Fatalf("DeviceServiceHandlerMock.AddKey mock is already set by Set")
+		mmAddKey.mock.t.Fatalf("DeviceServiceClientMock.AddKey mock is already set by Set")
 	}
 
-	expectation := &DeviceServiceHandlerMockAddKeyExpectation{
+	expectation := &DeviceServiceClientMockAddKeyExpectation{
 		mock:               mmAddKey.mock,
-		params:             &DeviceServiceHandlerMockAddKeyParams{ctx, pp1},
-		expectationOrigins: DeviceServiceHandlerMockAddKeyExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &DeviceServiceClientMockAddKeyParams{ctx, pp1},
+		expectationOrigins: DeviceServiceClientMockAddKeyExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmAddKey.expectations = append(mmAddKey.expectations, expectation)
 	return expectation
 }
 
-// Then sets up DeviceServiceHandler.AddKey return parameters for the expectation previously defined by the When method
-func (e *DeviceServiceHandlerMockAddKeyExpectation) Then(pp2 *connect.Response[v1.AddKeyResponse], err error) *DeviceServiceHandlerMock {
-	e.results = &DeviceServiceHandlerMockAddKeyResults{pp2, err}
+// Then sets up DeviceServiceClient.AddKey return parameters for the expectation previously defined by the When method
+func (e *DeviceServiceClientMockAddKeyExpectation) Then(pp2 *connect.Response[v1.AddKeyResponse], err error) *DeviceServiceClientMock {
+	e.results = &DeviceServiceClientMockAddKeyResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times DeviceServiceHandler.AddKey should be invoked
-func (mmAddKey *mDeviceServiceHandlerMockAddKey) Times(n uint64) *mDeviceServiceHandlerMockAddKey {
+// Times sets number of times DeviceServiceClient.AddKey should be invoked
+func (mmAddKey *mDeviceServiceClientMockAddKey) Times(n uint64) *mDeviceServiceClientMockAddKey {
 	if n == 0 {
-		mmAddKey.mock.t.Fatalf("Times of DeviceServiceHandlerMock.AddKey mock can not be zero")
+		mmAddKey.mock.t.Fatalf("Times of DeviceServiceClientMock.AddKey mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmAddKey.expectedInvocations, n)
 	mmAddKey.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmAddKey
 }
 
-func (mmAddKey *mDeviceServiceHandlerMockAddKey) invocationsDone() bool {
+func (mmAddKey *mDeviceServiceClientMockAddKey) invocationsDone() bool {
 	if len(mmAddKey.expectations) == 0 && mmAddKey.defaultExpectation == nil && mmAddKey.mock.funcAddKey == nil {
 		return true
 	}
@@ -407,8 +407,8 @@ func (mmAddKey *mDeviceServiceHandlerMockAddKey) invocationsDone() bool {
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// AddKey implements mm_devicev1connect.DeviceServiceHandler
-func (mmAddKey *DeviceServiceHandlerMock) AddKey(ctx context.Context, pp1 *connect.Request[v1.AddKeyRequest]) (pp2 *connect.Response[v1.AddKeyResponse], err error) {
+// AddKey implements mm_devicev1connect.DeviceServiceClient
+func (mmAddKey *DeviceServiceClientMock) AddKey(ctx context.Context, pp1 *connect.Request[v1.AddKeyRequest]) (pp2 *connect.Response[v1.AddKeyResponse], err error) {
 	mm_atomic.AddUint64(&mmAddKey.beforeAddKeyCounter, 1)
 	defer mm_atomic.AddUint64(&mmAddKey.afterAddKeyCounter, 1)
 
@@ -418,7 +418,7 @@ func (mmAddKey *DeviceServiceHandlerMock) AddKey(ctx context.Context, pp1 *conne
 		mmAddKey.inspectFuncAddKey(ctx, pp1)
 	}
 
-	mm_params := DeviceServiceHandlerMockAddKeyParams{ctx, pp1}
+	mm_params := DeviceServiceClientMockAddKeyParams{ctx, pp1}
 
 	// Record call args
 	mmAddKey.AddKeyMock.mutex.Lock()
@@ -437,54 +437,54 @@ func (mmAddKey *DeviceServiceHandlerMock) AddKey(ctx context.Context, pp1 *conne
 		mm_want := mmAddKey.AddKeyMock.defaultExpectation.params
 		mm_want_ptrs := mmAddKey.AddKeyMock.defaultExpectation.paramPtrs
 
-		mm_got := DeviceServiceHandlerMockAddKeyParams{ctx, pp1}
+		mm_got := DeviceServiceClientMockAddKeyParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmAddKey.t.Errorf("DeviceServiceHandlerMock.AddKey got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmAddKey.t.Errorf("DeviceServiceClientMock.AddKey got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmAddKey.AddKeyMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmAddKey.t.Errorf("DeviceServiceHandlerMock.AddKey got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmAddKey.t.Errorf("DeviceServiceClientMock.AddKey got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmAddKey.AddKeyMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmAddKey.t.Errorf("DeviceServiceHandlerMock.AddKey got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmAddKey.t.Errorf("DeviceServiceClientMock.AddKey got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmAddKey.AddKeyMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmAddKey.AddKeyMock.defaultExpectation.results
 		if mm_results == nil {
-			mmAddKey.t.Fatal("No results are set for the DeviceServiceHandlerMock.AddKey")
+			mmAddKey.t.Fatal("No results are set for the DeviceServiceClientMock.AddKey")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmAddKey.funcAddKey != nil {
 		return mmAddKey.funcAddKey(ctx, pp1)
 	}
-	mmAddKey.t.Fatalf("Unexpected call to DeviceServiceHandlerMock.AddKey. %v %v", ctx, pp1)
+	mmAddKey.t.Fatalf("Unexpected call to DeviceServiceClientMock.AddKey. %v %v", ctx, pp1)
 	return
 }
 
-// AddKeyAfterCounter returns a count of finished DeviceServiceHandlerMock.AddKey invocations
-func (mmAddKey *DeviceServiceHandlerMock) AddKeyAfterCounter() uint64 {
+// AddKeyAfterCounter returns a count of finished DeviceServiceClientMock.AddKey invocations
+func (mmAddKey *DeviceServiceClientMock) AddKeyAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmAddKey.afterAddKeyCounter)
 }
 
-// AddKeyBeforeCounter returns a count of DeviceServiceHandlerMock.AddKey invocations
-func (mmAddKey *DeviceServiceHandlerMock) AddKeyBeforeCounter() uint64 {
+// AddKeyBeforeCounter returns a count of DeviceServiceClientMock.AddKey invocations
+func (mmAddKey *DeviceServiceClientMock) AddKeyBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmAddKey.beforeAddKeyCounter)
 }
 
-// Calls returns a list of arguments used in each call to DeviceServiceHandlerMock.AddKey.
+// Calls returns a list of arguments used in each call to DeviceServiceClientMock.AddKey.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmAddKey *mDeviceServiceHandlerMockAddKey) Calls() []*DeviceServiceHandlerMockAddKeyParams {
+func (mmAddKey *mDeviceServiceClientMockAddKey) Calls() []*DeviceServiceClientMockAddKeyParams {
 	mmAddKey.mutex.RLock()
 
-	argCopy := make([]*DeviceServiceHandlerMockAddKeyParams, len(mmAddKey.callArgs))
+	argCopy := make([]*DeviceServiceClientMockAddKeyParams, len(mmAddKey.callArgs))
 	copy(argCopy, mmAddKey.callArgs)
 
 	mmAddKey.mutex.RUnlock()
@@ -494,7 +494,7 @@ func (mmAddKey *mDeviceServiceHandlerMockAddKey) Calls() []*DeviceServiceHandler
 
 // MinimockAddKeyDone returns true if the count of the AddKey invocations corresponds
 // the number of defined expectations
-func (m *DeviceServiceHandlerMock) MinimockAddKeyDone() bool {
+func (m *DeviceServiceClientMock) MinimockAddKeyDone() bool {
 	if m.AddKeyMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -510,10 +510,10 @@ func (m *DeviceServiceHandlerMock) MinimockAddKeyDone() bool {
 }
 
 // MinimockAddKeyInspect logs each unmet expectation
-func (m *DeviceServiceHandlerMock) MinimockAddKeyInspect() {
+func (m *DeviceServiceClientMock) MinimockAddKeyInspect() {
 	for _, e := range m.AddKeyMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.AddKey at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.AddKey at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -521,66 +521,66 @@ func (m *DeviceServiceHandlerMock) MinimockAddKeyInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.AddKeyMock.defaultExpectation != nil && afterAddKeyCounter < 1 {
 		if m.AddKeyMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.AddKey at\n%s", m.AddKeyMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.AddKey at\n%s", m.AddKeyMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.AddKey at\n%s with params: %#v", m.AddKeyMock.defaultExpectation.expectationOrigins.origin, *m.AddKeyMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.AddKey at\n%s with params: %#v", m.AddKeyMock.defaultExpectation.expectationOrigins.origin, *m.AddKeyMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcAddKey != nil && afterAddKeyCounter < 1 {
-		m.t.Errorf("Expected call to DeviceServiceHandlerMock.AddKey at\n%s", m.funcAddKeyOrigin)
+		m.t.Errorf("Expected call to DeviceServiceClientMock.AddKey at\n%s", m.funcAddKeyOrigin)
 	}
 
 	if !m.AddKeyMock.invocationsDone() && afterAddKeyCounter > 0 {
-		m.t.Errorf("Expected %d calls to DeviceServiceHandlerMock.AddKey at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to DeviceServiceClientMock.AddKey at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.AddKeyMock.expectedInvocations), m.AddKeyMock.expectedInvocationsOrigin, afterAddKeyCounter)
 	}
 }
 
-type mDeviceServiceHandlerMockCreate struct {
+type mDeviceServiceClientMockCreate struct {
 	optional           bool
-	mock               *DeviceServiceHandlerMock
-	defaultExpectation *DeviceServiceHandlerMockCreateExpectation
-	expectations       []*DeviceServiceHandlerMockCreateExpectation
+	mock               *DeviceServiceClientMock
+	defaultExpectation *DeviceServiceClientMockCreateExpectation
+	expectations       []*DeviceServiceClientMockCreateExpectation
 
-	callArgs []*DeviceServiceHandlerMockCreateParams
+	callArgs []*DeviceServiceClientMockCreateParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// DeviceServiceHandlerMockCreateExpectation specifies expectation struct of the DeviceServiceHandler.Create
-type DeviceServiceHandlerMockCreateExpectation struct {
-	mock               *DeviceServiceHandlerMock
-	params             *DeviceServiceHandlerMockCreateParams
-	paramPtrs          *DeviceServiceHandlerMockCreateParamPtrs
-	expectationOrigins DeviceServiceHandlerMockCreateExpectationOrigins
-	results            *DeviceServiceHandlerMockCreateResults
+// DeviceServiceClientMockCreateExpectation specifies expectation struct of the DeviceServiceClient.Create
+type DeviceServiceClientMockCreateExpectation struct {
+	mock               *DeviceServiceClientMock
+	params             *DeviceServiceClientMockCreateParams
+	paramPtrs          *DeviceServiceClientMockCreateParamPtrs
+	expectationOrigins DeviceServiceClientMockCreateExpectationOrigins
+	results            *DeviceServiceClientMockCreateResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// DeviceServiceHandlerMockCreateParams contains parameters of the DeviceServiceHandler.Create
-type DeviceServiceHandlerMockCreateParams struct {
+// DeviceServiceClientMockCreateParams contains parameters of the DeviceServiceClient.Create
+type DeviceServiceClientMockCreateParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.CreateRequest]
 }
 
-// DeviceServiceHandlerMockCreateParamPtrs contains pointers to parameters of the DeviceServiceHandler.Create
-type DeviceServiceHandlerMockCreateParamPtrs struct {
+// DeviceServiceClientMockCreateParamPtrs contains pointers to parameters of the DeviceServiceClient.Create
+type DeviceServiceClientMockCreateParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.CreateRequest]
 }
 
-// DeviceServiceHandlerMockCreateResults contains results of the DeviceServiceHandler.Create
-type DeviceServiceHandlerMockCreateResults struct {
+// DeviceServiceClientMockCreateResults contains results of the DeviceServiceClient.Create
+type DeviceServiceClientMockCreateResults struct {
 	pp2 *connect.Response[v1.CreateResponse]
 	err error
 }
 
-// DeviceServiceHandlerMockCreateOrigins contains origins of expectations of the DeviceServiceHandler.Create
-type DeviceServiceHandlerMockCreateExpectationOrigins struct {
+// DeviceServiceClientMockCreateOrigins contains origins of expectations of the DeviceServiceClient.Create
+type DeviceServiceClientMockCreateExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -591,26 +591,26 @@ type DeviceServiceHandlerMockCreateExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmCreate *mDeviceServiceHandlerMockCreate) Optional() *mDeviceServiceHandlerMockCreate {
+func (mmCreate *mDeviceServiceClientMockCreate) Optional() *mDeviceServiceClientMockCreate {
 	mmCreate.optional = true
 	return mmCreate
 }
 
-// Expect sets up expected params for DeviceServiceHandler.Create
-func (mmCreate *mDeviceServiceHandlerMockCreate) Expect(ctx context.Context, pp1 *connect.Request[v1.CreateRequest]) *mDeviceServiceHandlerMockCreate {
+// Expect sets up expected params for DeviceServiceClient.Create
+func (mmCreate *mDeviceServiceClientMockCreate) Expect(ctx context.Context, pp1 *connect.Request[v1.CreateRequest]) *mDeviceServiceClientMockCreate {
 	if mmCreate.mock.funcCreate != nil {
-		mmCreate.mock.t.Fatalf("DeviceServiceHandlerMock.Create mock is already set by Set")
+		mmCreate.mock.t.Fatalf("DeviceServiceClientMock.Create mock is already set by Set")
 	}
 
 	if mmCreate.defaultExpectation == nil {
-		mmCreate.defaultExpectation = &DeviceServiceHandlerMockCreateExpectation{}
+		mmCreate.defaultExpectation = &DeviceServiceClientMockCreateExpectation{}
 	}
 
 	if mmCreate.defaultExpectation.paramPtrs != nil {
-		mmCreate.mock.t.Fatalf("DeviceServiceHandlerMock.Create mock is already set by ExpectParams functions")
+		mmCreate.mock.t.Fatalf("DeviceServiceClientMock.Create mock is already set by ExpectParams functions")
 	}
 
-	mmCreate.defaultExpectation.params = &DeviceServiceHandlerMockCreateParams{ctx, pp1}
+	mmCreate.defaultExpectation.params = &DeviceServiceClientMockCreateParams{ctx, pp1}
 	mmCreate.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmCreate.expectations {
 		if minimock.Equal(e.params, mmCreate.defaultExpectation.params) {
@@ -621,22 +621,22 @@ func (mmCreate *mDeviceServiceHandlerMockCreate) Expect(ctx context.Context, pp1
 	return mmCreate
 }
 
-// ExpectCtxParam1 sets up expected param ctx for DeviceServiceHandler.Create
-func (mmCreate *mDeviceServiceHandlerMockCreate) ExpectCtxParam1(ctx context.Context) *mDeviceServiceHandlerMockCreate {
+// ExpectCtxParam1 sets up expected param ctx for DeviceServiceClient.Create
+func (mmCreate *mDeviceServiceClientMockCreate) ExpectCtxParam1(ctx context.Context) *mDeviceServiceClientMockCreate {
 	if mmCreate.mock.funcCreate != nil {
-		mmCreate.mock.t.Fatalf("DeviceServiceHandlerMock.Create mock is already set by Set")
+		mmCreate.mock.t.Fatalf("DeviceServiceClientMock.Create mock is already set by Set")
 	}
 
 	if mmCreate.defaultExpectation == nil {
-		mmCreate.defaultExpectation = &DeviceServiceHandlerMockCreateExpectation{}
+		mmCreate.defaultExpectation = &DeviceServiceClientMockCreateExpectation{}
 	}
 
 	if mmCreate.defaultExpectation.params != nil {
-		mmCreate.mock.t.Fatalf("DeviceServiceHandlerMock.Create mock is already set by Expect")
+		mmCreate.mock.t.Fatalf("DeviceServiceClientMock.Create mock is already set by Expect")
 	}
 
 	if mmCreate.defaultExpectation.paramPtrs == nil {
-		mmCreate.defaultExpectation.paramPtrs = &DeviceServiceHandlerMockCreateParamPtrs{}
+		mmCreate.defaultExpectation.paramPtrs = &DeviceServiceClientMockCreateParamPtrs{}
 	}
 	mmCreate.defaultExpectation.paramPtrs.ctx = &ctx
 	mmCreate.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -644,22 +644,22 @@ func (mmCreate *mDeviceServiceHandlerMockCreate) ExpectCtxParam1(ctx context.Con
 	return mmCreate
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for DeviceServiceHandler.Create
-func (mmCreate *mDeviceServiceHandlerMockCreate) ExpectPp1Param2(pp1 *connect.Request[v1.CreateRequest]) *mDeviceServiceHandlerMockCreate {
+// ExpectPp1Param2 sets up expected param pp1 for DeviceServiceClient.Create
+func (mmCreate *mDeviceServiceClientMockCreate) ExpectPp1Param2(pp1 *connect.Request[v1.CreateRequest]) *mDeviceServiceClientMockCreate {
 	if mmCreate.mock.funcCreate != nil {
-		mmCreate.mock.t.Fatalf("DeviceServiceHandlerMock.Create mock is already set by Set")
+		mmCreate.mock.t.Fatalf("DeviceServiceClientMock.Create mock is already set by Set")
 	}
 
 	if mmCreate.defaultExpectation == nil {
-		mmCreate.defaultExpectation = &DeviceServiceHandlerMockCreateExpectation{}
+		mmCreate.defaultExpectation = &DeviceServiceClientMockCreateExpectation{}
 	}
 
 	if mmCreate.defaultExpectation.params != nil {
-		mmCreate.mock.t.Fatalf("DeviceServiceHandlerMock.Create mock is already set by Expect")
+		mmCreate.mock.t.Fatalf("DeviceServiceClientMock.Create mock is already set by Expect")
 	}
 
 	if mmCreate.defaultExpectation.paramPtrs == nil {
-		mmCreate.defaultExpectation.paramPtrs = &DeviceServiceHandlerMockCreateParamPtrs{}
+		mmCreate.defaultExpectation.paramPtrs = &DeviceServiceClientMockCreateParamPtrs{}
 	}
 	mmCreate.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmCreate.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -667,10 +667,10 @@ func (mmCreate *mDeviceServiceHandlerMockCreate) ExpectPp1Param2(pp1 *connect.Re
 	return mmCreate
 }
 
-// Inspect accepts an inspector function that has same arguments as the DeviceServiceHandler.Create
-func (mmCreate *mDeviceServiceHandlerMockCreate) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.CreateRequest])) *mDeviceServiceHandlerMockCreate {
+// Inspect accepts an inspector function that has same arguments as the DeviceServiceClient.Create
+func (mmCreate *mDeviceServiceClientMockCreate) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.CreateRequest])) *mDeviceServiceClientMockCreate {
 	if mmCreate.mock.inspectFuncCreate != nil {
-		mmCreate.mock.t.Fatalf("Inspect function is already set for DeviceServiceHandlerMock.Create")
+		mmCreate.mock.t.Fatalf("Inspect function is already set for DeviceServiceClientMock.Create")
 	}
 
 	mmCreate.mock.inspectFuncCreate = f
@@ -678,28 +678,28 @@ func (mmCreate *mDeviceServiceHandlerMockCreate) Inspect(f func(ctx context.Cont
 	return mmCreate
 }
 
-// Return sets up results that will be returned by DeviceServiceHandler.Create
-func (mmCreate *mDeviceServiceHandlerMockCreate) Return(pp2 *connect.Response[v1.CreateResponse], err error) *DeviceServiceHandlerMock {
+// Return sets up results that will be returned by DeviceServiceClient.Create
+func (mmCreate *mDeviceServiceClientMockCreate) Return(pp2 *connect.Response[v1.CreateResponse], err error) *DeviceServiceClientMock {
 	if mmCreate.mock.funcCreate != nil {
-		mmCreate.mock.t.Fatalf("DeviceServiceHandlerMock.Create mock is already set by Set")
+		mmCreate.mock.t.Fatalf("DeviceServiceClientMock.Create mock is already set by Set")
 	}
 
 	if mmCreate.defaultExpectation == nil {
-		mmCreate.defaultExpectation = &DeviceServiceHandlerMockCreateExpectation{mock: mmCreate.mock}
+		mmCreate.defaultExpectation = &DeviceServiceClientMockCreateExpectation{mock: mmCreate.mock}
 	}
-	mmCreate.defaultExpectation.results = &DeviceServiceHandlerMockCreateResults{pp2, err}
+	mmCreate.defaultExpectation.results = &DeviceServiceClientMockCreateResults{pp2, err}
 	mmCreate.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmCreate.mock
 }
 
-// Set uses given function f to mock the DeviceServiceHandler.Create method
-func (mmCreate *mDeviceServiceHandlerMockCreate) Set(f func(ctx context.Context, pp1 *connect.Request[v1.CreateRequest]) (pp2 *connect.Response[v1.CreateResponse], err error)) *DeviceServiceHandlerMock {
+// Set uses given function f to mock the DeviceServiceClient.Create method
+func (mmCreate *mDeviceServiceClientMockCreate) Set(f func(ctx context.Context, pp1 *connect.Request[v1.CreateRequest]) (pp2 *connect.Response[v1.CreateResponse], err error)) *DeviceServiceClientMock {
 	if mmCreate.defaultExpectation != nil {
-		mmCreate.mock.t.Fatalf("Default expectation is already set for the DeviceServiceHandler.Create method")
+		mmCreate.mock.t.Fatalf("Default expectation is already set for the DeviceServiceClient.Create method")
 	}
 
 	if len(mmCreate.expectations) > 0 {
-		mmCreate.mock.t.Fatalf("Some expectations are already set for the DeviceServiceHandler.Create method")
+		mmCreate.mock.t.Fatalf("Some expectations are already set for the DeviceServiceClient.Create method")
 	}
 
 	mmCreate.mock.funcCreate = f
@@ -707,39 +707,39 @@ func (mmCreate *mDeviceServiceHandlerMockCreate) Set(f func(ctx context.Context,
 	return mmCreate.mock
 }
 
-// When sets expectation for the DeviceServiceHandler.Create which will trigger the result defined by the following
+// When sets expectation for the DeviceServiceClient.Create which will trigger the result defined by the following
 // Then helper
-func (mmCreate *mDeviceServiceHandlerMockCreate) When(ctx context.Context, pp1 *connect.Request[v1.CreateRequest]) *DeviceServiceHandlerMockCreateExpectation {
+func (mmCreate *mDeviceServiceClientMockCreate) When(ctx context.Context, pp1 *connect.Request[v1.CreateRequest]) *DeviceServiceClientMockCreateExpectation {
 	if mmCreate.mock.funcCreate != nil {
-		mmCreate.mock.t.Fatalf("DeviceServiceHandlerMock.Create mock is already set by Set")
+		mmCreate.mock.t.Fatalf("DeviceServiceClientMock.Create mock is already set by Set")
 	}
 
-	expectation := &DeviceServiceHandlerMockCreateExpectation{
+	expectation := &DeviceServiceClientMockCreateExpectation{
 		mock:               mmCreate.mock,
-		params:             &DeviceServiceHandlerMockCreateParams{ctx, pp1},
-		expectationOrigins: DeviceServiceHandlerMockCreateExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &DeviceServiceClientMockCreateParams{ctx, pp1},
+		expectationOrigins: DeviceServiceClientMockCreateExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmCreate.expectations = append(mmCreate.expectations, expectation)
 	return expectation
 }
 
-// Then sets up DeviceServiceHandler.Create return parameters for the expectation previously defined by the When method
-func (e *DeviceServiceHandlerMockCreateExpectation) Then(pp2 *connect.Response[v1.CreateResponse], err error) *DeviceServiceHandlerMock {
-	e.results = &DeviceServiceHandlerMockCreateResults{pp2, err}
+// Then sets up DeviceServiceClient.Create return parameters for the expectation previously defined by the When method
+func (e *DeviceServiceClientMockCreateExpectation) Then(pp2 *connect.Response[v1.CreateResponse], err error) *DeviceServiceClientMock {
+	e.results = &DeviceServiceClientMockCreateResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times DeviceServiceHandler.Create should be invoked
-func (mmCreate *mDeviceServiceHandlerMockCreate) Times(n uint64) *mDeviceServiceHandlerMockCreate {
+// Times sets number of times DeviceServiceClient.Create should be invoked
+func (mmCreate *mDeviceServiceClientMockCreate) Times(n uint64) *mDeviceServiceClientMockCreate {
 	if n == 0 {
-		mmCreate.mock.t.Fatalf("Times of DeviceServiceHandlerMock.Create mock can not be zero")
+		mmCreate.mock.t.Fatalf("Times of DeviceServiceClientMock.Create mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmCreate.expectedInvocations, n)
 	mmCreate.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmCreate
 }
 
-func (mmCreate *mDeviceServiceHandlerMockCreate) invocationsDone() bool {
+func (mmCreate *mDeviceServiceClientMockCreate) invocationsDone() bool {
 	if len(mmCreate.expectations) == 0 && mmCreate.defaultExpectation == nil && mmCreate.mock.funcCreate == nil {
 		return true
 	}
@@ -750,8 +750,8 @@ func (mmCreate *mDeviceServiceHandlerMockCreate) invocationsDone() bool {
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// Create implements mm_devicev1connect.DeviceServiceHandler
-func (mmCreate *DeviceServiceHandlerMock) Create(ctx context.Context, pp1 *connect.Request[v1.CreateRequest]) (pp2 *connect.Response[v1.CreateResponse], err error) {
+// Create implements mm_devicev1connect.DeviceServiceClient
+func (mmCreate *DeviceServiceClientMock) Create(ctx context.Context, pp1 *connect.Request[v1.CreateRequest]) (pp2 *connect.Response[v1.CreateResponse], err error) {
 	mm_atomic.AddUint64(&mmCreate.beforeCreateCounter, 1)
 	defer mm_atomic.AddUint64(&mmCreate.afterCreateCounter, 1)
 
@@ -761,7 +761,7 @@ func (mmCreate *DeviceServiceHandlerMock) Create(ctx context.Context, pp1 *conne
 		mmCreate.inspectFuncCreate(ctx, pp1)
 	}
 
-	mm_params := DeviceServiceHandlerMockCreateParams{ctx, pp1}
+	mm_params := DeviceServiceClientMockCreateParams{ctx, pp1}
 
 	// Record call args
 	mmCreate.CreateMock.mutex.Lock()
@@ -780,54 +780,54 @@ func (mmCreate *DeviceServiceHandlerMock) Create(ctx context.Context, pp1 *conne
 		mm_want := mmCreate.CreateMock.defaultExpectation.params
 		mm_want_ptrs := mmCreate.CreateMock.defaultExpectation.paramPtrs
 
-		mm_got := DeviceServiceHandlerMockCreateParams{ctx, pp1}
+		mm_got := DeviceServiceClientMockCreateParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmCreate.t.Errorf("DeviceServiceHandlerMock.Create got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmCreate.t.Errorf("DeviceServiceClientMock.Create got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmCreate.CreateMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmCreate.t.Errorf("DeviceServiceHandlerMock.Create got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmCreate.t.Errorf("DeviceServiceClientMock.Create got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmCreate.CreateMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmCreate.t.Errorf("DeviceServiceHandlerMock.Create got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmCreate.t.Errorf("DeviceServiceClientMock.Create got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmCreate.CreateMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmCreate.CreateMock.defaultExpectation.results
 		if mm_results == nil {
-			mmCreate.t.Fatal("No results are set for the DeviceServiceHandlerMock.Create")
+			mmCreate.t.Fatal("No results are set for the DeviceServiceClientMock.Create")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmCreate.funcCreate != nil {
 		return mmCreate.funcCreate(ctx, pp1)
 	}
-	mmCreate.t.Fatalf("Unexpected call to DeviceServiceHandlerMock.Create. %v %v", ctx, pp1)
+	mmCreate.t.Fatalf("Unexpected call to DeviceServiceClientMock.Create. %v %v", ctx, pp1)
 	return
 }
 
-// CreateAfterCounter returns a count of finished DeviceServiceHandlerMock.Create invocations
-func (mmCreate *DeviceServiceHandlerMock) CreateAfterCounter() uint64 {
+// CreateAfterCounter returns a count of finished DeviceServiceClientMock.Create invocations
+func (mmCreate *DeviceServiceClientMock) CreateAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmCreate.afterCreateCounter)
 }
 
-// CreateBeforeCounter returns a count of DeviceServiceHandlerMock.Create invocations
-func (mmCreate *DeviceServiceHandlerMock) CreateBeforeCounter() uint64 {
+// CreateBeforeCounter returns a count of DeviceServiceClientMock.Create invocations
+func (mmCreate *DeviceServiceClientMock) CreateBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmCreate.beforeCreateCounter)
 }
 
-// Calls returns a list of arguments used in each call to DeviceServiceHandlerMock.Create.
+// Calls returns a list of arguments used in each call to DeviceServiceClientMock.Create.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmCreate *mDeviceServiceHandlerMockCreate) Calls() []*DeviceServiceHandlerMockCreateParams {
+func (mmCreate *mDeviceServiceClientMockCreate) Calls() []*DeviceServiceClientMockCreateParams {
 	mmCreate.mutex.RLock()
 
-	argCopy := make([]*DeviceServiceHandlerMockCreateParams, len(mmCreate.callArgs))
+	argCopy := make([]*DeviceServiceClientMockCreateParams, len(mmCreate.callArgs))
 	copy(argCopy, mmCreate.callArgs)
 
 	mmCreate.mutex.RUnlock()
@@ -837,7 +837,7 @@ func (mmCreate *mDeviceServiceHandlerMockCreate) Calls() []*DeviceServiceHandler
 
 // MinimockCreateDone returns true if the count of the Create invocations corresponds
 // the number of defined expectations
-func (m *DeviceServiceHandlerMock) MinimockCreateDone() bool {
+func (m *DeviceServiceClientMock) MinimockCreateDone() bool {
 	if m.CreateMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -853,10 +853,10 @@ func (m *DeviceServiceHandlerMock) MinimockCreateDone() bool {
 }
 
 // MinimockCreateInspect logs each unmet expectation
-func (m *DeviceServiceHandlerMock) MinimockCreateInspect() {
+func (m *DeviceServiceClientMock) MinimockCreateInspect() {
 	for _, e := range m.CreateMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.Create at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.Create at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -864,66 +864,66 @@ func (m *DeviceServiceHandlerMock) MinimockCreateInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.CreateMock.defaultExpectation != nil && afterCreateCounter < 1 {
 		if m.CreateMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.Create at\n%s", m.CreateMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.Create at\n%s", m.CreateMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.Create at\n%s with params: %#v", m.CreateMock.defaultExpectation.expectationOrigins.origin, *m.CreateMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.Create at\n%s with params: %#v", m.CreateMock.defaultExpectation.expectationOrigins.origin, *m.CreateMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcCreate != nil && afterCreateCounter < 1 {
-		m.t.Errorf("Expected call to DeviceServiceHandlerMock.Create at\n%s", m.funcCreateOrigin)
+		m.t.Errorf("Expected call to DeviceServiceClientMock.Create at\n%s", m.funcCreateOrigin)
 	}
 
 	if !m.CreateMock.invocationsDone() && afterCreateCounter > 0 {
-		m.t.Errorf("Expected %d calls to DeviceServiceHandlerMock.Create at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to DeviceServiceClientMock.Create at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.CreateMock.expectedInvocations), m.CreateMock.expectedInvocationsOrigin, afterCreateCounter)
 	}
 }
 
-type mDeviceServiceHandlerMockDeRegisterKey struct {
+type mDeviceServiceClientMockDeRegisterKey struct {
 	optional           bool
-	mock               *DeviceServiceHandlerMock
-	defaultExpectation *DeviceServiceHandlerMockDeRegisterKeyExpectation
-	expectations       []*DeviceServiceHandlerMockDeRegisterKeyExpectation
+	mock               *DeviceServiceClientMock
+	defaultExpectation *DeviceServiceClientMockDeRegisterKeyExpectation
+	expectations       []*DeviceServiceClientMockDeRegisterKeyExpectation
 
-	callArgs []*DeviceServiceHandlerMockDeRegisterKeyParams
+	callArgs []*DeviceServiceClientMockDeRegisterKeyParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// DeviceServiceHandlerMockDeRegisterKeyExpectation specifies expectation struct of the DeviceServiceHandler.DeRegisterKey
-type DeviceServiceHandlerMockDeRegisterKeyExpectation struct {
-	mock               *DeviceServiceHandlerMock
-	params             *DeviceServiceHandlerMockDeRegisterKeyParams
-	paramPtrs          *DeviceServiceHandlerMockDeRegisterKeyParamPtrs
-	expectationOrigins DeviceServiceHandlerMockDeRegisterKeyExpectationOrigins
-	results            *DeviceServiceHandlerMockDeRegisterKeyResults
+// DeviceServiceClientMockDeRegisterKeyExpectation specifies expectation struct of the DeviceServiceClient.DeRegisterKey
+type DeviceServiceClientMockDeRegisterKeyExpectation struct {
+	mock               *DeviceServiceClientMock
+	params             *DeviceServiceClientMockDeRegisterKeyParams
+	paramPtrs          *DeviceServiceClientMockDeRegisterKeyParamPtrs
+	expectationOrigins DeviceServiceClientMockDeRegisterKeyExpectationOrigins
+	results            *DeviceServiceClientMockDeRegisterKeyResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// DeviceServiceHandlerMockDeRegisterKeyParams contains parameters of the DeviceServiceHandler.DeRegisterKey
-type DeviceServiceHandlerMockDeRegisterKeyParams struct {
+// DeviceServiceClientMockDeRegisterKeyParams contains parameters of the DeviceServiceClient.DeRegisterKey
+type DeviceServiceClientMockDeRegisterKeyParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.DeRegisterKeyRequest]
 }
 
-// DeviceServiceHandlerMockDeRegisterKeyParamPtrs contains pointers to parameters of the DeviceServiceHandler.DeRegisterKey
-type DeviceServiceHandlerMockDeRegisterKeyParamPtrs struct {
+// DeviceServiceClientMockDeRegisterKeyParamPtrs contains pointers to parameters of the DeviceServiceClient.DeRegisterKey
+type DeviceServiceClientMockDeRegisterKeyParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.DeRegisterKeyRequest]
 }
 
-// DeviceServiceHandlerMockDeRegisterKeyResults contains results of the DeviceServiceHandler.DeRegisterKey
-type DeviceServiceHandlerMockDeRegisterKeyResults struct {
+// DeviceServiceClientMockDeRegisterKeyResults contains results of the DeviceServiceClient.DeRegisterKey
+type DeviceServiceClientMockDeRegisterKeyResults struct {
 	pp2 *connect.Response[v1.DeRegisterKeyResponse]
 	err error
 }
 
-// DeviceServiceHandlerMockDeRegisterKeyOrigins contains origins of expectations of the DeviceServiceHandler.DeRegisterKey
-type DeviceServiceHandlerMockDeRegisterKeyExpectationOrigins struct {
+// DeviceServiceClientMockDeRegisterKeyOrigins contains origins of expectations of the DeviceServiceClient.DeRegisterKey
+type DeviceServiceClientMockDeRegisterKeyExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -934,26 +934,26 @@ type DeviceServiceHandlerMockDeRegisterKeyExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmDeRegisterKey *mDeviceServiceHandlerMockDeRegisterKey) Optional() *mDeviceServiceHandlerMockDeRegisterKey {
+func (mmDeRegisterKey *mDeviceServiceClientMockDeRegisterKey) Optional() *mDeviceServiceClientMockDeRegisterKey {
 	mmDeRegisterKey.optional = true
 	return mmDeRegisterKey
 }
 
-// Expect sets up expected params for DeviceServiceHandler.DeRegisterKey
-func (mmDeRegisterKey *mDeviceServiceHandlerMockDeRegisterKey) Expect(ctx context.Context, pp1 *connect.Request[v1.DeRegisterKeyRequest]) *mDeviceServiceHandlerMockDeRegisterKey {
+// Expect sets up expected params for DeviceServiceClient.DeRegisterKey
+func (mmDeRegisterKey *mDeviceServiceClientMockDeRegisterKey) Expect(ctx context.Context, pp1 *connect.Request[v1.DeRegisterKeyRequest]) *mDeviceServiceClientMockDeRegisterKey {
 	if mmDeRegisterKey.mock.funcDeRegisterKey != nil {
-		mmDeRegisterKey.mock.t.Fatalf("DeviceServiceHandlerMock.DeRegisterKey mock is already set by Set")
+		mmDeRegisterKey.mock.t.Fatalf("DeviceServiceClientMock.DeRegisterKey mock is already set by Set")
 	}
 
 	if mmDeRegisterKey.defaultExpectation == nil {
-		mmDeRegisterKey.defaultExpectation = &DeviceServiceHandlerMockDeRegisterKeyExpectation{}
+		mmDeRegisterKey.defaultExpectation = &DeviceServiceClientMockDeRegisterKeyExpectation{}
 	}
 
 	if mmDeRegisterKey.defaultExpectation.paramPtrs != nil {
-		mmDeRegisterKey.mock.t.Fatalf("DeviceServiceHandlerMock.DeRegisterKey mock is already set by ExpectParams functions")
+		mmDeRegisterKey.mock.t.Fatalf("DeviceServiceClientMock.DeRegisterKey mock is already set by ExpectParams functions")
 	}
 
-	mmDeRegisterKey.defaultExpectation.params = &DeviceServiceHandlerMockDeRegisterKeyParams{ctx, pp1}
+	mmDeRegisterKey.defaultExpectation.params = &DeviceServiceClientMockDeRegisterKeyParams{ctx, pp1}
 	mmDeRegisterKey.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmDeRegisterKey.expectations {
 		if minimock.Equal(e.params, mmDeRegisterKey.defaultExpectation.params) {
@@ -964,22 +964,22 @@ func (mmDeRegisterKey *mDeviceServiceHandlerMockDeRegisterKey) Expect(ctx contex
 	return mmDeRegisterKey
 }
 
-// ExpectCtxParam1 sets up expected param ctx for DeviceServiceHandler.DeRegisterKey
-func (mmDeRegisterKey *mDeviceServiceHandlerMockDeRegisterKey) ExpectCtxParam1(ctx context.Context) *mDeviceServiceHandlerMockDeRegisterKey {
+// ExpectCtxParam1 sets up expected param ctx for DeviceServiceClient.DeRegisterKey
+func (mmDeRegisterKey *mDeviceServiceClientMockDeRegisterKey) ExpectCtxParam1(ctx context.Context) *mDeviceServiceClientMockDeRegisterKey {
 	if mmDeRegisterKey.mock.funcDeRegisterKey != nil {
-		mmDeRegisterKey.mock.t.Fatalf("DeviceServiceHandlerMock.DeRegisterKey mock is already set by Set")
+		mmDeRegisterKey.mock.t.Fatalf("DeviceServiceClientMock.DeRegisterKey mock is already set by Set")
 	}
 
 	if mmDeRegisterKey.defaultExpectation == nil {
-		mmDeRegisterKey.defaultExpectation = &DeviceServiceHandlerMockDeRegisterKeyExpectation{}
+		mmDeRegisterKey.defaultExpectation = &DeviceServiceClientMockDeRegisterKeyExpectation{}
 	}
 
 	if mmDeRegisterKey.defaultExpectation.params != nil {
-		mmDeRegisterKey.mock.t.Fatalf("DeviceServiceHandlerMock.DeRegisterKey mock is already set by Expect")
+		mmDeRegisterKey.mock.t.Fatalf("DeviceServiceClientMock.DeRegisterKey mock is already set by Expect")
 	}
 
 	if mmDeRegisterKey.defaultExpectation.paramPtrs == nil {
-		mmDeRegisterKey.defaultExpectation.paramPtrs = &DeviceServiceHandlerMockDeRegisterKeyParamPtrs{}
+		mmDeRegisterKey.defaultExpectation.paramPtrs = &DeviceServiceClientMockDeRegisterKeyParamPtrs{}
 	}
 	mmDeRegisterKey.defaultExpectation.paramPtrs.ctx = &ctx
 	mmDeRegisterKey.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -987,22 +987,22 @@ func (mmDeRegisterKey *mDeviceServiceHandlerMockDeRegisterKey) ExpectCtxParam1(c
 	return mmDeRegisterKey
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for DeviceServiceHandler.DeRegisterKey
-func (mmDeRegisterKey *mDeviceServiceHandlerMockDeRegisterKey) ExpectPp1Param2(pp1 *connect.Request[v1.DeRegisterKeyRequest]) *mDeviceServiceHandlerMockDeRegisterKey {
+// ExpectPp1Param2 sets up expected param pp1 for DeviceServiceClient.DeRegisterKey
+func (mmDeRegisterKey *mDeviceServiceClientMockDeRegisterKey) ExpectPp1Param2(pp1 *connect.Request[v1.DeRegisterKeyRequest]) *mDeviceServiceClientMockDeRegisterKey {
 	if mmDeRegisterKey.mock.funcDeRegisterKey != nil {
-		mmDeRegisterKey.mock.t.Fatalf("DeviceServiceHandlerMock.DeRegisterKey mock is already set by Set")
+		mmDeRegisterKey.mock.t.Fatalf("DeviceServiceClientMock.DeRegisterKey mock is already set by Set")
 	}
 
 	if mmDeRegisterKey.defaultExpectation == nil {
-		mmDeRegisterKey.defaultExpectation = &DeviceServiceHandlerMockDeRegisterKeyExpectation{}
+		mmDeRegisterKey.defaultExpectation = &DeviceServiceClientMockDeRegisterKeyExpectation{}
 	}
 
 	if mmDeRegisterKey.defaultExpectation.params != nil {
-		mmDeRegisterKey.mock.t.Fatalf("DeviceServiceHandlerMock.DeRegisterKey mock is already set by Expect")
+		mmDeRegisterKey.mock.t.Fatalf("DeviceServiceClientMock.DeRegisterKey mock is already set by Expect")
 	}
 
 	if mmDeRegisterKey.defaultExpectation.paramPtrs == nil {
-		mmDeRegisterKey.defaultExpectation.paramPtrs = &DeviceServiceHandlerMockDeRegisterKeyParamPtrs{}
+		mmDeRegisterKey.defaultExpectation.paramPtrs = &DeviceServiceClientMockDeRegisterKeyParamPtrs{}
 	}
 	mmDeRegisterKey.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmDeRegisterKey.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -1010,10 +1010,10 @@ func (mmDeRegisterKey *mDeviceServiceHandlerMockDeRegisterKey) ExpectPp1Param2(p
 	return mmDeRegisterKey
 }
 
-// Inspect accepts an inspector function that has same arguments as the DeviceServiceHandler.DeRegisterKey
-func (mmDeRegisterKey *mDeviceServiceHandlerMockDeRegisterKey) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.DeRegisterKeyRequest])) *mDeviceServiceHandlerMockDeRegisterKey {
+// Inspect accepts an inspector function that has same arguments as the DeviceServiceClient.DeRegisterKey
+func (mmDeRegisterKey *mDeviceServiceClientMockDeRegisterKey) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.DeRegisterKeyRequest])) *mDeviceServiceClientMockDeRegisterKey {
 	if mmDeRegisterKey.mock.inspectFuncDeRegisterKey != nil {
-		mmDeRegisterKey.mock.t.Fatalf("Inspect function is already set for DeviceServiceHandlerMock.DeRegisterKey")
+		mmDeRegisterKey.mock.t.Fatalf("Inspect function is already set for DeviceServiceClientMock.DeRegisterKey")
 	}
 
 	mmDeRegisterKey.mock.inspectFuncDeRegisterKey = f
@@ -1021,28 +1021,28 @@ func (mmDeRegisterKey *mDeviceServiceHandlerMockDeRegisterKey) Inspect(f func(ct
 	return mmDeRegisterKey
 }
 
-// Return sets up results that will be returned by DeviceServiceHandler.DeRegisterKey
-func (mmDeRegisterKey *mDeviceServiceHandlerMockDeRegisterKey) Return(pp2 *connect.Response[v1.DeRegisterKeyResponse], err error) *DeviceServiceHandlerMock {
+// Return sets up results that will be returned by DeviceServiceClient.DeRegisterKey
+func (mmDeRegisterKey *mDeviceServiceClientMockDeRegisterKey) Return(pp2 *connect.Response[v1.DeRegisterKeyResponse], err error) *DeviceServiceClientMock {
 	if mmDeRegisterKey.mock.funcDeRegisterKey != nil {
-		mmDeRegisterKey.mock.t.Fatalf("DeviceServiceHandlerMock.DeRegisterKey mock is already set by Set")
+		mmDeRegisterKey.mock.t.Fatalf("DeviceServiceClientMock.DeRegisterKey mock is already set by Set")
 	}
 
 	if mmDeRegisterKey.defaultExpectation == nil {
-		mmDeRegisterKey.defaultExpectation = &DeviceServiceHandlerMockDeRegisterKeyExpectation{mock: mmDeRegisterKey.mock}
+		mmDeRegisterKey.defaultExpectation = &DeviceServiceClientMockDeRegisterKeyExpectation{mock: mmDeRegisterKey.mock}
 	}
-	mmDeRegisterKey.defaultExpectation.results = &DeviceServiceHandlerMockDeRegisterKeyResults{pp2, err}
+	mmDeRegisterKey.defaultExpectation.results = &DeviceServiceClientMockDeRegisterKeyResults{pp2, err}
 	mmDeRegisterKey.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmDeRegisterKey.mock
 }
 
-// Set uses given function f to mock the DeviceServiceHandler.DeRegisterKey method
-func (mmDeRegisterKey *mDeviceServiceHandlerMockDeRegisterKey) Set(f func(ctx context.Context, pp1 *connect.Request[v1.DeRegisterKeyRequest]) (pp2 *connect.Response[v1.DeRegisterKeyResponse], err error)) *DeviceServiceHandlerMock {
+// Set uses given function f to mock the DeviceServiceClient.DeRegisterKey method
+func (mmDeRegisterKey *mDeviceServiceClientMockDeRegisterKey) Set(f func(ctx context.Context, pp1 *connect.Request[v1.DeRegisterKeyRequest]) (pp2 *connect.Response[v1.DeRegisterKeyResponse], err error)) *DeviceServiceClientMock {
 	if mmDeRegisterKey.defaultExpectation != nil {
-		mmDeRegisterKey.mock.t.Fatalf("Default expectation is already set for the DeviceServiceHandler.DeRegisterKey method")
+		mmDeRegisterKey.mock.t.Fatalf("Default expectation is already set for the DeviceServiceClient.DeRegisterKey method")
 	}
 
 	if len(mmDeRegisterKey.expectations) > 0 {
-		mmDeRegisterKey.mock.t.Fatalf("Some expectations are already set for the DeviceServiceHandler.DeRegisterKey method")
+		mmDeRegisterKey.mock.t.Fatalf("Some expectations are already set for the DeviceServiceClient.DeRegisterKey method")
 	}
 
 	mmDeRegisterKey.mock.funcDeRegisterKey = f
@@ -1050,39 +1050,39 @@ func (mmDeRegisterKey *mDeviceServiceHandlerMockDeRegisterKey) Set(f func(ctx co
 	return mmDeRegisterKey.mock
 }
 
-// When sets expectation for the DeviceServiceHandler.DeRegisterKey which will trigger the result defined by the following
+// When sets expectation for the DeviceServiceClient.DeRegisterKey which will trigger the result defined by the following
 // Then helper
-func (mmDeRegisterKey *mDeviceServiceHandlerMockDeRegisterKey) When(ctx context.Context, pp1 *connect.Request[v1.DeRegisterKeyRequest]) *DeviceServiceHandlerMockDeRegisterKeyExpectation {
+func (mmDeRegisterKey *mDeviceServiceClientMockDeRegisterKey) When(ctx context.Context, pp1 *connect.Request[v1.DeRegisterKeyRequest]) *DeviceServiceClientMockDeRegisterKeyExpectation {
 	if mmDeRegisterKey.mock.funcDeRegisterKey != nil {
-		mmDeRegisterKey.mock.t.Fatalf("DeviceServiceHandlerMock.DeRegisterKey mock is already set by Set")
+		mmDeRegisterKey.mock.t.Fatalf("DeviceServiceClientMock.DeRegisterKey mock is already set by Set")
 	}
 
-	expectation := &DeviceServiceHandlerMockDeRegisterKeyExpectation{
+	expectation := &DeviceServiceClientMockDeRegisterKeyExpectation{
 		mock:               mmDeRegisterKey.mock,
-		params:             &DeviceServiceHandlerMockDeRegisterKeyParams{ctx, pp1},
-		expectationOrigins: DeviceServiceHandlerMockDeRegisterKeyExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &DeviceServiceClientMockDeRegisterKeyParams{ctx, pp1},
+		expectationOrigins: DeviceServiceClientMockDeRegisterKeyExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmDeRegisterKey.expectations = append(mmDeRegisterKey.expectations, expectation)
 	return expectation
 }
 
-// Then sets up DeviceServiceHandler.DeRegisterKey return parameters for the expectation previously defined by the When method
-func (e *DeviceServiceHandlerMockDeRegisterKeyExpectation) Then(pp2 *connect.Response[v1.DeRegisterKeyResponse], err error) *DeviceServiceHandlerMock {
-	e.results = &DeviceServiceHandlerMockDeRegisterKeyResults{pp2, err}
+// Then sets up DeviceServiceClient.DeRegisterKey return parameters for the expectation previously defined by the When method
+func (e *DeviceServiceClientMockDeRegisterKeyExpectation) Then(pp2 *connect.Response[v1.DeRegisterKeyResponse], err error) *DeviceServiceClientMock {
+	e.results = &DeviceServiceClientMockDeRegisterKeyResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times DeviceServiceHandler.DeRegisterKey should be invoked
-func (mmDeRegisterKey *mDeviceServiceHandlerMockDeRegisterKey) Times(n uint64) *mDeviceServiceHandlerMockDeRegisterKey {
+// Times sets number of times DeviceServiceClient.DeRegisterKey should be invoked
+func (mmDeRegisterKey *mDeviceServiceClientMockDeRegisterKey) Times(n uint64) *mDeviceServiceClientMockDeRegisterKey {
 	if n == 0 {
-		mmDeRegisterKey.mock.t.Fatalf("Times of DeviceServiceHandlerMock.DeRegisterKey mock can not be zero")
+		mmDeRegisterKey.mock.t.Fatalf("Times of DeviceServiceClientMock.DeRegisterKey mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmDeRegisterKey.expectedInvocations, n)
 	mmDeRegisterKey.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmDeRegisterKey
 }
 
-func (mmDeRegisterKey *mDeviceServiceHandlerMockDeRegisterKey) invocationsDone() bool {
+func (mmDeRegisterKey *mDeviceServiceClientMockDeRegisterKey) invocationsDone() bool {
 	if len(mmDeRegisterKey.expectations) == 0 && mmDeRegisterKey.defaultExpectation == nil && mmDeRegisterKey.mock.funcDeRegisterKey == nil {
 		return true
 	}
@@ -1093,8 +1093,8 @@ func (mmDeRegisterKey *mDeviceServiceHandlerMockDeRegisterKey) invocationsDone()
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// DeRegisterKey implements mm_devicev1connect.DeviceServiceHandler
-func (mmDeRegisterKey *DeviceServiceHandlerMock) DeRegisterKey(ctx context.Context, pp1 *connect.Request[v1.DeRegisterKeyRequest]) (pp2 *connect.Response[v1.DeRegisterKeyResponse], err error) {
+// DeRegisterKey implements mm_devicev1connect.DeviceServiceClient
+func (mmDeRegisterKey *DeviceServiceClientMock) DeRegisterKey(ctx context.Context, pp1 *connect.Request[v1.DeRegisterKeyRequest]) (pp2 *connect.Response[v1.DeRegisterKeyResponse], err error) {
 	mm_atomic.AddUint64(&mmDeRegisterKey.beforeDeRegisterKeyCounter, 1)
 	defer mm_atomic.AddUint64(&mmDeRegisterKey.afterDeRegisterKeyCounter, 1)
 
@@ -1104,7 +1104,7 @@ func (mmDeRegisterKey *DeviceServiceHandlerMock) DeRegisterKey(ctx context.Conte
 		mmDeRegisterKey.inspectFuncDeRegisterKey(ctx, pp1)
 	}
 
-	mm_params := DeviceServiceHandlerMockDeRegisterKeyParams{ctx, pp1}
+	mm_params := DeviceServiceClientMockDeRegisterKeyParams{ctx, pp1}
 
 	// Record call args
 	mmDeRegisterKey.DeRegisterKeyMock.mutex.Lock()
@@ -1123,54 +1123,54 @@ func (mmDeRegisterKey *DeviceServiceHandlerMock) DeRegisterKey(ctx context.Conte
 		mm_want := mmDeRegisterKey.DeRegisterKeyMock.defaultExpectation.params
 		mm_want_ptrs := mmDeRegisterKey.DeRegisterKeyMock.defaultExpectation.paramPtrs
 
-		mm_got := DeviceServiceHandlerMockDeRegisterKeyParams{ctx, pp1}
+		mm_got := DeviceServiceClientMockDeRegisterKeyParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmDeRegisterKey.t.Errorf("DeviceServiceHandlerMock.DeRegisterKey got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmDeRegisterKey.t.Errorf("DeviceServiceClientMock.DeRegisterKey got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmDeRegisterKey.DeRegisterKeyMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmDeRegisterKey.t.Errorf("DeviceServiceHandlerMock.DeRegisterKey got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmDeRegisterKey.t.Errorf("DeviceServiceClientMock.DeRegisterKey got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmDeRegisterKey.DeRegisterKeyMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmDeRegisterKey.t.Errorf("DeviceServiceHandlerMock.DeRegisterKey got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmDeRegisterKey.t.Errorf("DeviceServiceClientMock.DeRegisterKey got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmDeRegisterKey.DeRegisterKeyMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmDeRegisterKey.DeRegisterKeyMock.defaultExpectation.results
 		if mm_results == nil {
-			mmDeRegisterKey.t.Fatal("No results are set for the DeviceServiceHandlerMock.DeRegisterKey")
+			mmDeRegisterKey.t.Fatal("No results are set for the DeviceServiceClientMock.DeRegisterKey")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmDeRegisterKey.funcDeRegisterKey != nil {
 		return mmDeRegisterKey.funcDeRegisterKey(ctx, pp1)
 	}
-	mmDeRegisterKey.t.Fatalf("Unexpected call to DeviceServiceHandlerMock.DeRegisterKey. %v %v", ctx, pp1)
+	mmDeRegisterKey.t.Fatalf("Unexpected call to DeviceServiceClientMock.DeRegisterKey. %v %v", ctx, pp1)
 	return
 }
 
-// DeRegisterKeyAfterCounter returns a count of finished DeviceServiceHandlerMock.DeRegisterKey invocations
-func (mmDeRegisterKey *DeviceServiceHandlerMock) DeRegisterKeyAfterCounter() uint64 {
+// DeRegisterKeyAfterCounter returns a count of finished DeviceServiceClientMock.DeRegisterKey invocations
+func (mmDeRegisterKey *DeviceServiceClientMock) DeRegisterKeyAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmDeRegisterKey.afterDeRegisterKeyCounter)
 }
 
-// DeRegisterKeyBeforeCounter returns a count of DeviceServiceHandlerMock.DeRegisterKey invocations
-func (mmDeRegisterKey *DeviceServiceHandlerMock) DeRegisterKeyBeforeCounter() uint64 {
+// DeRegisterKeyBeforeCounter returns a count of DeviceServiceClientMock.DeRegisterKey invocations
+func (mmDeRegisterKey *DeviceServiceClientMock) DeRegisterKeyBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmDeRegisterKey.beforeDeRegisterKeyCounter)
 }
 
-// Calls returns a list of arguments used in each call to DeviceServiceHandlerMock.DeRegisterKey.
+// Calls returns a list of arguments used in each call to DeviceServiceClientMock.DeRegisterKey.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmDeRegisterKey *mDeviceServiceHandlerMockDeRegisterKey) Calls() []*DeviceServiceHandlerMockDeRegisterKeyParams {
+func (mmDeRegisterKey *mDeviceServiceClientMockDeRegisterKey) Calls() []*DeviceServiceClientMockDeRegisterKeyParams {
 	mmDeRegisterKey.mutex.RLock()
 
-	argCopy := make([]*DeviceServiceHandlerMockDeRegisterKeyParams, len(mmDeRegisterKey.callArgs))
+	argCopy := make([]*DeviceServiceClientMockDeRegisterKeyParams, len(mmDeRegisterKey.callArgs))
 	copy(argCopy, mmDeRegisterKey.callArgs)
 
 	mmDeRegisterKey.mutex.RUnlock()
@@ -1180,7 +1180,7 @@ func (mmDeRegisterKey *mDeviceServiceHandlerMockDeRegisterKey) Calls() []*Device
 
 // MinimockDeRegisterKeyDone returns true if the count of the DeRegisterKey invocations corresponds
 // the number of defined expectations
-func (m *DeviceServiceHandlerMock) MinimockDeRegisterKeyDone() bool {
+func (m *DeviceServiceClientMock) MinimockDeRegisterKeyDone() bool {
 	if m.DeRegisterKeyMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -1196,10 +1196,10 @@ func (m *DeviceServiceHandlerMock) MinimockDeRegisterKeyDone() bool {
 }
 
 // MinimockDeRegisterKeyInspect logs each unmet expectation
-func (m *DeviceServiceHandlerMock) MinimockDeRegisterKeyInspect() {
+func (m *DeviceServiceClientMock) MinimockDeRegisterKeyInspect() {
 	for _, e := range m.DeRegisterKeyMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.DeRegisterKey at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.DeRegisterKey at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -1207,66 +1207,66 @@ func (m *DeviceServiceHandlerMock) MinimockDeRegisterKeyInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.DeRegisterKeyMock.defaultExpectation != nil && afterDeRegisterKeyCounter < 1 {
 		if m.DeRegisterKeyMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.DeRegisterKey at\n%s", m.DeRegisterKeyMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.DeRegisterKey at\n%s", m.DeRegisterKeyMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.DeRegisterKey at\n%s with params: %#v", m.DeRegisterKeyMock.defaultExpectation.expectationOrigins.origin, *m.DeRegisterKeyMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.DeRegisterKey at\n%s with params: %#v", m.DeRegisterKeyMock.defaultExpectation.expectationOrigins.origin, *m.DeRegisterKeyMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcDeRegisterKey != nil && afterDeRegisterKeyCounter < 1 {
-		m.t.Errorf("Expected call to DeviceServiceHandlerMock.DeRegisterKey at\n%s", m.funcDeRegisterKeyOrigin)
+		m.t.Errorf("Expected call to DeviceServiceClientMock.DeRegisterKey at\n%s", m.funcDeRegisterKeyOrigin)
 	}
 
 	if !m.DeRegisterKeyMock.invocationsDone() && afterDeRegisterKeyCounter > 0 {
-		m.t.Errorf("Expected %d calls to DeviceServiceHandlerMock.DeRegisterKey at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to DeviceServiceClientMock.DeRegisterKey at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.DeRegisterKeyMock.expectedInvocations), m.DeRegisterKeyMock.expectedInvocationsOrigin, afterDeRegisterKeyCounter)
 	}
 }
 
-type mDeviceServiceHandlerMockGetById struct {
+type mDeviceServiceClientMockGetById struct {
 	optional           bool
-	mock               *DeviceServiceHandlerMock
-	defaultExpectation *DeviceServiceHandlerMockGetByIdExpectation
-	expectations       []*DeviceServiceHandlerMockGetByIdExpectation
+	mock               *DeviceServiceClientMock
+	defaultExpectation *DeviceServiceClientMockGetByIdExpectation
+	expectations       []*DeviceServiceClientMockGetByIdExpectation
 
-	callArgs []*DeviceServiceHandlerMockGetByIdParams
+	callArgs []*DeviceServiceClientMockGetByIdParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// DeviceServiceHandlerMockGetByIdExpectation specifies expectation struct of the DeviceServiceHandler.GetById
-type DeviceServiceHandlerMockGetByIdExpectation struct {
-	mock               *DeviceServiceHandlerMock
-	params             *DeviceServiceHandlerMockGetByIdParams
-	paramPtrs          *DeviceServiceHandlerMockGetByIdParamPtrs
-	expectationOrigins DeviceServiceHandlerMockGetByIdExpectationOrigins
-	results            *DeviceServiceHandlerMockGetByIdResults
+// DeviceServiceClientMockGetByIdExpectation specifies expectation struct of the DeviceServiceClient.GetById
+type DeviceServiceClientMockGetByIdExpectation struct {
+	mock               *DeviceServiceClientMock
+	params             *DeviceServiceClientMockGetByIdParams
+	paramPtrs          *DeviceServiceClientMockGetByIdParamPtrs
+	expectationOrigins DeviceServiceClientMockGetByIdExpectationOrigins
+	results            *DeviceServiceClientMockGetByIdResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// DeviceServiceHandlerMockGetByIdParams contains parameters of the DeviceServiceHandler.GetById
-type DeviceServiceHandlerMockGetByIdParams struct {
+// DeviceServiceClientMockGetByIdParams contains parameters of the DeviceServiceClient.GetById
+type DeviceServiceClientMockGetByIdParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.GetByIdRequest]
 }
 
-// DeviceServiceHandlerMockGetByIdParamPtrs contains pointers to parameters of the DeviceServiceHandler.GetById
-type DeviceServiceHandlerMockGetByIdParamPtrs struct {
+// DeviceServiceClientMockGetByIdParamPtrs contains pointers to parameters of the DeviceServiceClient.GetById
+type DeviceServiceClientMockGetByIdParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.GetByIdRequest]
 }
 
-// DeviceServiceHandlerMockGetByIdResults contains results of the DeviceServiceHandler.GetById
-type DeviceServiceHandlerMockGetByIdResults struct {
+// DeviceServiceClientMockGetByIdResults contains results of the DeviceServiceClient.GetById
+type DeviceServiceClientMockGetByIdResults struct {
 	pp2 *connect.Response[v1.GetByIdResponse]
 	err error
 }
 
-// DeviceServiceHandlerMockGetByIdOrigins contains origins of expectations of the DeviceServiceHandler.GetById
-type DeviceServiceHandlerMockGetByIdExpectationOrigins struct {
+// DeviceServiceClientMockGetByIdOrigins contains origins of expectations of the DeviceServiceClient.GetById
+type DeviceServiceClientMockGetByIdExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -1277,26 +1277,26 @@ type DeviceServiceHandlerMockGetByIdExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmGetById *mDeviceServiceHandlerMockGetById) Optional() *mDeviceServiceHandlerMockGetById {
+func (mmGetById *mDeviceServiceClientMockGetById) Optional() *mDeviceServiceClientMockGetById {
 	mmGetById.optional = true
 	return mmGetById
 }
 
-// Expect sets up expected params for DeviceServiceHandler.GetById
-func (mmGetById *mDeviceServiceHandlerMockGetById) Expect(ctx context.Context, pp1 *connect.Request[v1.GetByIdRequest]) *mDeviceServiceHandlerMockGetById {
+// Expect sets up expected params for DeviceServiceClient.GetById
+func (mmGetById *mDeviceServiceClientMockGetById) Expect(ctx context.Context, pp1 *connect.Request[v1.GetByIdRequest]) *mDeviceServiceClientMockGetById {
 	if mmGetById.mock.funcGetById != nil {
-		mmGetById.mock.t.Fatalf("DeviceServiceHandlerMock.GetById mock is already set by Set")
+		mmGetById.mock.t.Fatalf("DeviceServiceClientMock.GetById mock is already set by Set")
 	}
 
 	if mmGetById.defaultExpectation == nil {
-		mmGetById.defaultExpectation = &DeviceServiceHandlerMockGetByIdExpectation{}
+		mmGetById.defaultExpectation = &DeviceServiceClientMockGetByIdExpectation{}
 	}
 
 	if mmGetById.defaultExpectation.paramPtrs != nil {
-		mmGetById.mock.t.Fatalf("DeviceServiceHandlerMock.GetById mock is already set by ExpectParams functions")
+		mmGetById.mock.t.Fatalf("DeviceServiceClientMock.GetById mock is already set by ExpectParams functions")
 	}
 
-	mmGetById.defaultExpectation.params = &DeviceServiceHandlerMockGetByIdParams{ctx, pp1}
+	mmGetById.defaultExpectation.params = &DeviceServiceClientMockGetByIdParams{ctx, pp1}
 	mmGetById.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmGetById.expectations {
 		if minimock.Equal(e.params, mmGetById.defaultExpectation.params) {
@@ -1307,22 +1307,22 @@ func (mmGetById *mDeviceServiceHandlerMockGetById) Expect(ctx context.Context, p
 	return mmGetById
 }
 
-// ExpectCtxParam1 sets up expected param ctx for DeviceServiceHandler.GetById
-func (mmGetById *mDeviceServiceHandlerMockGetById) ExpectCtxParam1(ctx context.Context) *mDeviceServiceHandlerMockGetById {
+// ExpectCtxParam1 sets up expected param ctx for DeviceServiceClient.GetById
+func (mmGetById *mDeviceServiceClientMockGetById) ExpectCtxParam1(ctx context.Context) *mDeviceServiceClientMockGetById {
 	if mmGetById.mock.funcGetById != nil {
-		mmGetById.mock.t.Fatalf("DeviceServiceHandlerMock.GetById mock is already set by Set")
+		mmGetById.mock.t.Fatalf("DeviceServiceClientMock.GetById mock is already set by Set")
 	}
 
 	if mmGetById.defaultExpectation == nil {
-		mmGetById.defaultExpectation = &DeviceServiceHandlerMockGetByIdExpectation{}
+		mmGetById.defaultExpectation = &DeviceServiceClientMockGetByIdExpectation{}
 	}
 
 	if mmGetById.defaultExpectation.params != nil {
-		mmGetById.mock.t.Fatalf("DeviceServiceHandlerMock.GetById mock is already set by Expect")
+		mmGetById.mock.t.Fatalf("DeviceServiceClientMock.GetById mock is already set by Expect")
 	}
 
 	if mmGetById.defaultExpectation.paramPtrs == nil {
-		mmGetById.defaultExpectation.paramPtrs = &DeviceServiceHandlerMockGetByIdParamPtrs{}
+		mmGetById.defaultExpectation.paramPtrs = &DeviceServiceClientMockGetByIdParamPtrs{}
 	}
 	mmGetById.defaultExpectation.paramPtrs.ctx = &ctx
 	mmGetById.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -1330,22 +1330,22 @@ func (mmGetById *mDeviceServiceHandlerMockGetById) ExpectCtxParam1(ctx context.C
 	return mmGetById
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for DeviceServiceHandler.GetById
-func (mmGetById *mDeviceServiceHandlerMockGetById) ExpectPp1Param2(pp1 *connect.Request[v1.GetByIdRequest]) *mDeviceServiceHandlerMockGetById {
+// ExpectPp1Param2 sets up expected param pp1 for DeviceServiceClient.GetById
+func (mmGetById *mDeviceServiceClientMockGetById) ExpectPp1Param2(pp1 *connect.Request[v1.GetByIdRequest]) *mDeviceServiceClientMockGetById {
 	if mmGetById.mock.funcGetById != nil {
-		mmGetById.mock.t.Fatalf("DeviceServiceHandlerMock.GetById mock is already set by Set")
+		mmGetById.mock.t.Fatalf("DeviceServiceClientMock.GetById mock is already set by Set")
 	}
 
 	if mmGetById.defaultExpectation == nil {
-		mmGetById.defaultExpectation = &DeviceServiceHandlerMockGetByIdExpectation{}
+		mmGetById.defaultExpectation = &DeviceServiceClientMockGetByIdExpectation{}
 	}
 
 	if mmGetById.defaultExpectation.params != nil {
-		mmGetById.mock.t.Fatalf("DeviceServiceHandlerMock.GetById mock is already set by Expect")
+		mmGetById.mock.t.Fatalf("DeviceServiceClientMock.GetById mock is already set by Expect")
 	}
 
 	if mmGetById.defaultExpectation.paramPtrs == nil {
-		mmGetById.defaultExpectation.paramPtrs = &DeviceServiceHandlerMockGetByIdParamPtrs{}
+		mmGetById.defaultExpectation.paramPtrs = &DeviceServiceClientMockGetByIdParamPtrs{}
 	}
 	mmGetById.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmGetById.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -1353,10 +1353,10 @@ func (mmGetById *mDeviceServiceHandlerMockGetById) ExpectPp1Param2(pp1 *connect.
 	return mmGetById
 }
 
-// Inspect accepts an inspector function that has same arguments as the DeviceServiceHandler.GetById
-func (mmGetById *mDeviceServiceHandlerMockGetById) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.GetByIdRequest])) *mDeviceServiceHandlerMockGetById {
+// Inspect accepts an inspector function that has same arguments as the DeviceServiceClient.GetById
+func (mmGetById *mDeviceServiceClientMockGetById) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.GetByIdRequest])) *mDeviceServiceClientMockGetById {
 	if mmGetById.mock.inspectFuncGetById != nil {
-		mmGetById.mock.t.Fatalf("Inspect function is already set for DeviceServiceHandlerMock.GetById")
+		mmGetById.mock.t.Fatalf("Inspect function is already set for DeviceServiceClientMock.GetById")
 	}
 
 	mmGetById.mock.inspectFuncGetById = f
@@ -1364,28 +1364,28 @@ func (mmGetById *mDeviceServiceHandlerMockGetById) Inspect(f func(ctx context.Co
 	return mmGetById
 }
 
-// Return sets up results that will be returned by DeviceServiceHandler.GetById
-func (mmGetById *mDeviceServiceHandlerMockGetById) Return(pp2 *connect.Response[v1.GetByIdResponse], err error) *DeviceServiceHandlerMock {
+// Return sets up results that will be returned by DeviceServiceClient.GetById
+func (mmGetById *mDeviceServiceClientMockGetById) Return(pp2 *connect.Response[v1.GetByIdResponse], err error) *DeviceServiceClientMock {
 	if mmGetById.mock.funcGetById != nil {
-		mmGetById.mock.t.Fatalf("DeviceServiceHandlerMock.GetById mock is already set by Set")
+		mmGetById.mock.t.Fatalf("DeviceServiceClientMock.GetById mock is already set by Set")
 	}
 
 	if mmGetById.defaultExpectation == nil {
-		mmGetById.defaultExpectation = &DeviceServiceHandlerMockGetByIdExpectation{mock: mmGetById.mock}
+		mmGetById.defaultExpectation = &DeviceServiceClientMockGetByIdExpectation{mock: mmGetById.mock}
 	}
-	mmGetById.defaultExpectation.results = &DeviceServiceHandlerMockGetByIdResults{pp2, err}
+	mmGetById.defaultExpectation.results = &DeviceServiceClientMockGetByIdResults{pp2, err}
 	mmGetById.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmGetById.mock
 }
 
-// Set uses given function f to mock the DeviceServiceHandler.GetById method
-func (mmGetById *mDeviceServiceHandlerMockGetById) Set(f func(ctx context.Context, pp1 *connect.Request[v1.GetByIdRequest]) (pp2 *connect.Response[v1.GetByIdResponse], err error)) *DeviceServiceHandlerMock {
+// Set uses given function f to mock the DeviceServiceClient.GetById method
+func (mmGetById *mDeviceServiceClientMockGetById) Set(f func(ctx context.Context, pp1 *connect.Request[v1.GetByIdRequest]) (pp2 *connect.Response[v1.GetByIdResponse], err error)) *DeviceServiceClientMock {
 	if mmGetById.defaultExpectation != nil {
-		mmGetById.mock.t.Fatalf("Default expectation is already set for the DeviceServiceHandler.GetById method")
+		mmGetById.mock.t.Fatalf("Default expectation is already set for the DeviceServiceClient.GetById method")
 	}
 
 	if len(mmGetById.expectations) > 0 {
-		mmGetById.mock.t.Fatalf("Some expectations are already set for the DeviceServiceHandler.GetById method")
+		mmGetById.mock.t.Fatalf("Some expectations are already set for the DeviceServiceClient.GetById method")
 	}
 
 	mmGetById.mock.funcGetById = f
@@ -1393,39 +1393,39 @@ func (mmGetById *mDeviceServiceHandlerMockGetById) Set(f func(ctx context.Contex
 	return mmGetById.mock
 }
 
-// When sets expectation for the DeviceServiceHandler.GetById which will trigger the result defined by the following
+// When sets expectation for the DeviceServiceClient.GetById which will trigger the result defined by the following
 // Then helper
-func (mmGetById *mDeviceServiceHandlerMockGetById) When(ctx context.Context, pp1 *connect.Request[v1.GetByIdRequest]) *DeviceServiceHandlerMockGetByIdExpectation {
+func (mmGetById *mDeviceServiceClientMockGetById) When(ctx context.Context, pp1 *connect.Request[v1.GetByIdRequest]) *DeviceServiceClientMockGetByIdExpectation {
 	if mmGetById.mock.funcGetById != nil {
-		mmGetById.mock.t.Fatalf("DeviceServiceHandlerMock.GetById mock is already set by Set")
+		mmGetById.mock.t.Fatalf("DeviceServiceClientMock.GetById mock is already set by Set")
 	}
 
-	expectation := &DeviceServiceHandlerMockGetByIdExpectation{
+	expectation := &DeviceServiceClientMockGetByIdExpectation{
 		mock:               mmGetById.mock,
-		params:             &DeviceServiceHandlerMockGetByIdParams{ctx, pp1},
-		expectationOrigins: DeviceServiceHandlerMockGetByIdExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &DeviceServiceClientMockGetByIdParams{ctx, pp1},
+		expectationOrigins: DeviceServiceClientMockGetByIdExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmGetById.expectations = append(mmGetById.expectations, expectation)
 	return expectation
 }
 
-// Then sets up DeviceServiceHandler.GetById return parameters for the expectation previously defined by the When method
-func (e *DeviceServiceHandlerMockGetByIdExpectation) Then(pp2 *connect.Response[v1.GetByIdResponse], err error) *DeviceServiceHandlerMock {
-	e.results = &DeviceServiceHandlerMockGetByIdResults{pp2, err}
+// Then sets up DeviceServiceClient.GetById return parameters for the expectation previously defined by the When method
+func (e *DeviceServiceClientMockGetByIdExpectation) Then(pp2 *connect.Response[v1.GetByIdResponse], err error) *DeviceServiceClientMock {
+	e.results = &DeviceServiceClientMockGetByIdResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times DeviceServiceHandler.GetById should be invoked
-func (mmGetById *mDeviceServiceHandlerMockGetById) Times(n uint64) *mDeviceServiceHandlerMockGetById {
+// Times sets number of times DeviceServiceClient.GetById should be invoked
+func (mmGetById *mDeviceServiceClientMockGetById) Times(n uint64) *mDeviceServiceClientMockGetById {
 	if n == 0 {
-		mmGetById.mock.t.Fatalf("Times of DeviceServiceHandlerMock.GetById mock can not be zero")
+		mmGetById.mock.t.Fatalf("Times of DeviceServiceClientMock.GetById mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmGetById.expectedInvocations, n)
 	mmGetById.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmGetById
 }
 
-func (mmGetById *mDeviceServiceHandlerMockGetById) invocationsDone() bool {
+func (mmGetById *mDeviceServiceClientMockGetById) invocationsDone() bool {
 	if len(mmGetById.expectations) == 0 && mmGetById.defaultExpectation == nil && mmGetById.mock.funcGetById == nil {
 		return true
 	}
@@ -1436,8 +1436,8 @@ func (mmGetById *mDeviceServiceHandlerMockGetById) invocationsDone() bool {
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// GetById implements mm_devicev1connect.DeviceServiceHandler
-func (mmGetById *DeviceServiceHandlerMock) GetById(ctx context.Context, pp1 *connect.Request[v1.GetByIdRequest]) (pp2 *connect.Response[v1.GetByIdResponse], err error) {
+// GetById implements mm_devicev1connect.DeviceServiceClient
+func (mmGetById *DeviceServiceClientMock) GetById(ctx context.Context, pp1 *connect.Request[v1.GetByIdRequest]) (pp2 *connect.Response[v1.GetByIdResponse], err error) {
 	mm_atomic.AddUint64(&mmGetById.beforeGetByIdCounter, 1)
 	defer mm_atomic.AddUint64(&mmGetById.afterGetByIdCounter, 1)
 
@@ -1447,7 +1447,7 @@ func (mmGetById *DeviceServiceHandlerMock) GetById(ctx context.Context, pp1 *con
 		mmGetById.inspectFuncGetById(ctx, pp1)
 	}
 
-	mm_params := DeviceServiceHandlerMockGetByIdParams{ctx, pp1}
+	mm_params := DeviceServiceClientMockGetByIdParams{ctx, pp1}
 
 	// Record call args
 	mmGetById.GetByIdMock.mutex.Lock()
@@ -1466,54 +1466,54 @@ func (mmGetById *DeviceServiceHandlerMock) GetById(ctx context.Context, pp1 *con
 		mm_want := mmGetById.GetByIdMock.defaultExpectation.params
 		mm_want_ptrs := mmGetById.GetByIdMock.defaultExpectation.paramPtrs
 
-		mm_got := DeviceServiceHandlerMockGetByIdParams{ctx, pp1}
+		mm_got := DeviceServiceClientMockGetByIdParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmGetById.t.Errorf("DeviceServiceHandlerMock.GetById got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmGetById.t.Errorf("DeviceServiceClientMock.GetById got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmGetById.GetByIdMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmGetById.t.Errorf("DeviceServiceHandlerMock.GetById got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmGetById.t.Errorf("DeviceServiceClientMock.GetById got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmGetById.GetByIdMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmGetById.t.Errorf("DeviceServiceHandlerMock.GetById got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmGetById.t.Errorf("DeviceServiceClientMock.GetById got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmGetById.GetByIdMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmGetById.GetByIdMock.defaultExpectation.results
 		if mm_results == nil {
-			mmGetById.t.Fatal("No results are set for the DeviceServiceHandlerMock.GetById")
+			mmGetById.t.Fatal("No results are set for the DeviceServiceClientMock.GetById")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmGetById.funcGetById != nil {
 		return mmGetById.funcGetById(ctx, pp1)
 	}
-	mmGetById.t.Fatalf("Unexpected call to DeviceServiceHandlerMock.GetById. %v %v", ctx, pp1)
+	mmGetById.t.Fatalf("Unexpected call to DeviceServiceClientMock.GetById. %v %v", ctx, pp1)
 	return
 }
 
-// GetByIdAfterCounter returns a count of finished DeviceServiceHandlerMock.GetById invocations
-func (mmGetById *DeviceServiceHandlerMock) GetByIdAfterCounter() uint64 {
+// GetByIdAfterCounter returns a count of finished DeviceServiceClientMock.GetById invocations
+func (mmGetById *DeviceServiceClientMock) GetByIdAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmGetById.afterGetByIdCounter)
 }
 
-// GetByIdBeforeCounter returns a count of DeviceServiceHandlerMock.GetById invocations
-func (mmGetById *DeviceServiceHandlerMock) GetByIdBeforeCounter() uint64 {
+// GetByIdBeforeCounter returns a count of DeviceServiceClientMock.GetById invocations
+func (mmGetById *DeviceServiceClientMock) GetByIdBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmGetById.beforeGetByIdCounter)
 }
 
-// Calls returns a list of arguments used in each call to DeviceServiceHandlerMock.GetById.
+// Calls returns a list of arguments used in each call to DeviceServiceClientMock.GetById.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmGetById *mDeviceServiceHandlerMockGetById) Calls() []*DeviceServiceHandlerMockGetByIdParams {
+func (mmGetById *mDeviceServiceClientMockGetById) Calls() []*DeviceServiceClientMockGetByIdParams {
 	mmGetById.mutex.RLock()
 
-	argCopy := make([]*DeviceServiceHandlerMockGetByIdParams, len(mmGetById.callArgs))
+	argCopy := make([]*DeviceServiceClientMockGetByIdParams, len(mmGetById.callArgs))
 	copy(argCopy, mmGetById.callArgs)
 
 	mmGetById.mutex.RUnlock()
@@ -1523,7 +1523,7 @@ func (mmGetById *mDeviceServiceHandlerMockGetById) Calls() []*DeviceServiceHandl
 
 // MinimockGetByIdDone returns true if the count of the GetById invocations corresponds
 // the number of defined expectations
-func (m *DeviceServiceHandlerMock) MinimockGetByIdDone() bool {
+func (m *DeviceServiceClientMock) MinimockGetByIdDone() bool {
 	if m.GetByIdMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -1539,10 +1539,10 @@ func (m *DeviceServiceHandlerMock) MinimockGetByIdDone() bool {
 }
 
 // MinimockGetByIdInspect logs each unmet expectation
-func (m *DeviceServiceHandlerMock) MinimockGetByIdInspect() {
+func (m *DeviceServiceClientMock) MinimockGetByIdInspect() {
 	for _, e := range m.GetByIdMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.GetById at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.GetById at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -1550,66 +1550,66 @@ func (m *DeviceServiceHandlerMock) MinimockGetByIdInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.GetByIdMock.defaultExpectation != nil && afterGetByIdCounter < 1 {
 		if m.GetByIdMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.GetById at\n%s", m.GetByIdMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.GetById at\n%s", m.GetByIdMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.GetById at\n%s with params: %#v", m.GetByIdMock.defaultExpectation.expectationOrigins.origin, *m.GetByIdMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.GetById at\n%s with params: %#v", m.GetByIdMock.defaultExpectation.expectationOrigins.origin, *m.GetByIdMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcGetById != nil && afterGetByIdCounter < 1 {
-		m.t.Errorf("Expected call to DeviceServiceHandlerMock.GetById at\n%s", m.funcGetByIdOrigin)
+		m.t.Errorf("Expected call to DeviceServiceClientMock.GetById at\n%s", m.funcGetByIdOrigin)
 	}
 
 	if !m.GetByIdMock.invocationsDone() && afterGetByIdCounter > 0 {
-		m.t.Errorf("Expected %d calls to DeviceServiceHandlerMock.GetById at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to DeviceServiceClientMock.GetById at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.GetByIdMock.expectedInvocations), m.GetByIdMock.expectedInvocationsOrigin, afterGetByIdCounter)
 	}
 }
 
-type mDeviceServiceHandlerMockGetBySessionId struct {
+type mDeviceServiceClientMockGetBySessionId struct {
 	optional           bool
-	mock               *DeviceServiceHandlerMock
-	defaultExpectation *DeviceServiceHandlerMockGetBySessionIdExpectation
-	expectations       []*DeviceServiceHandlerMockGetBySessionIdExpectation
+	mock               *DeviceServiceClientMock
+	defaultExpectation *DeviceServiceClientMockGetBySessionIdExpectation
+	expectations       []*DeviceServiceClientMockGetBySessionIdExpectation
 
-	callArgs []*DeviceServiceHandlerMockGetBySessionIdParams
+	callArgs []*DeviceServiceClientMockGetBySessionIdParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// DeviceServiceHandlerMockGetBySessionIdExpectation specifies expectation struct of the DeviceServiceHandler.GetBySessionId
-type DeviceServiceHandlerMockGetBySessionIdExpectation struct {
-	mock               *DeviceServiceHandlerMock
-	params             *DeviceServiceHandlerMockGetBySessionIdParams
-	paramPtrs          *DeviceServiceHandlerMockGetBySessionIdParamPtrs
-	expectationOrigins DeviceServiceHandlerMockGetBySessionIdExpectationOrigins
-	results            *DeviceServiceHandlerMockGetBySessionIdResults
+// DeviceServiceClientMockGetBySessionIdExpectation specifies expectation struct of the DeviceServiceClient.GetBySessionId
+type DeviceServiceClientMockGetBySessionIdExpectation struct {
+	mock               *DeviceServiceClientMock
+	params             *DeviceServiceClientMockGetBySessionIdParams
+	paramPtrs          *DeviceServiceClientMockGetBySessionIdParamPtrs
+	expectationOrigins DeviceServiceClientMockGetBySessionIdExpectationOrigins
+	results            *DeviceServiceClientMockGetBySessionIdResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// DeviceServiceHandlerMockGetBySessionIdParams contains parameters of the DeviceServiceHandler.GetBySessionId
-type DeviceServiceHandlerMockGetBySessionIdParams struct {
+// DeviceServiceClientMockGetBySessionIdParams contains parameters of the DeviceServiceClient.GetBySessionId
+type DeviceServiceClientMockGetBySessionIdParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.GetBySessionIdRequest]
 }
 
-// DeviceServiceHandlerMockGetBySessionIdParamPtrs contains pointers to parameters of the DeviceServiceHandler.GetBySessionId
-type DeviceServiceHandlerMockGetBySessionIdParamPtrs struct {
+// DeviceServiceClientMockGetBySessionIdParamPtrs contains pointers to parameters of the DeviceServiceClient.GetBySessionId
+type DeviceServiceClientMockGetBySessionIdParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.GetBySessionIdRequest]
 }
 
-// DeviceServiceHandlerMockGetBySessionIdResults contains results of the DeviceServiceHandler.GetBySessionId
-type DeviceServiceHandlerMockGetBySessionIdResults struct {
+// DeviceServiceClientMockGetBySessionIdResults contains results of the DeviceServiceClient.GetBySessionId
+type DeviceServiceClientMockGetBySessionIdResults struct {
 	pp2 *connect.Response[v1.GetBySessionIdResponse]
 	err error
 }
 
-// DeviceServiceHandlerMockGetBySessionIdOrigins contains origins of expectations of the DeviceServiceHandler.GetBySessionId
-type DeviceServiceHandlerMockGetBySessionIdExpectationOrigins struct {
+// DeviceServiceClientMockGetBySessionIdOrigins contains origins of expectations of the DeviceServiceClient.GetBySessionId
+type DeviceServiceClientMockGetBySessionIdExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -1620,26 +1620,26 @@ type DeviceServiceHandlerMockGetBySessionIdExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmGetBySessionId *mDeviceServiceHandlerMockGetBySessionId) Optional() *mDeviceServiceHandlerMockGetBySessionId {
+func (mmGetBySessionId *mDeviceServiceClientMockGetBySessionId) Optional() *mDeviceServiceClientMockGetBySessionId {
 	mmGetBySessionId.optional = true
 	return mmGetBySessionId
 }
 
-// Expect sets up expected params for DeviceServiceHandler.GetBySessionId
-func (mmGetBySessionId *mDeviceServiceHandlerMockGetBySessionId) Expect(ctx context.Context, pp1 *connect.Request[v1.GetBySessionIdRequest]) *mDeviceServiceHandlerMockGetBySessionId {
+// Expect sets up expected params for DeviceServiceClient.GetBySessionId
+func (mmGetBySessionId *mDeviceServiceClientMockGetBySessionId) Expect(ctx context.Context, pp1 *connect.Request[v1.GetBySessionIdRequest]) *mDeviceServiceClientMockGetBySessionId {
 	if mmGetBySessionId.mock.funcGetBySessionId != nil {
-		mmGetBySessionId.mock.t.Fatalf("DeviceServiceHandlerMock.GetBySessionId mock is already set by Set")
+		mmGetBySessionId.mock.t.Fatalf("DeviceServiceClientMock.GetBySessionId mock is already set by Set")
 	}
 
 	if mmGetBySessionId.defaultExpectation == nil {
-		mmGetBySessionId.defaultExpectation = &DeviceServiceHandlerMockGetBySessionIdExpectation{}
+		mmGetBySessionId.defaultExpectation = &DeviceServiceClientMockGetBySessionIdExpectation{}
 	}
 
 	if mmGetBySessionId.defaultExpectation.paramPtrs != nil {
-		mmGetBySessionId.mock.t.Fatalf("DeviceServiceHandlerMock.GetBySessionId mock is already set by ExpectParams functions")
+		mmGetBySessionId.mock.t.Fatalf("DeviceServiceClientMock.GetBySessionId mock is already set by ExpectParams functions")
 	}
 
-	mmGetBySessionId.defaultExpectation.params = &DeviceServiceHandlerMockGetBySessionIdParams{ctx, pp1}
+	mmGetBySessionId.defaultExpectation.params = &DeviceServiceClientMockGetBySessionIdParams{ctx, pp1}
 	mmGetBySessionId.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmGetBySessionId.expectations {
 		if minimock.Equal(e.params, mmGetBySessionId.defaultExpectation.params) {
@@ -1650,22 +1650,22 @@ func (mmGetBySessionId *mDeviceServiceHandlerMockGetBySessionId) Expect(ctx cont
 	return mmGetBySessionId
 }
 
-// ExpectCtxParam1 sets up expected param ctx for DeviceServiceHandler.GetBySessionId
-func (mmGetBySessionId *mDeviceServiceHandlerMockGetBySessionId) ExpectCtxParam1(ctx context.Context) *mDeviceServiceHandlerMockGetBySessionId {
+// ExpectCtxParam1 sets up expected param ctx for DeviceServiceClient.GetBySessionId
+func (mmGetBySessionId *mDeviceServiceClientMockGetBySessionId) ExpectCtxParam1(ctx context.Context) *mDeviceServiceClientMockGetBySessionId {
 	if mmGetBySessionId.mock.funcGetBySessionId != nil {
-		mmGetBySessionId.mock.t.Fatalf("DeviceServiceHandlerMock.GetBySessionId mock is already set by Set")
+		mmGetBySessionId.mock.t.Fatalf("DeviceServiceClientMock.GetBySessionId mock is already set by Set")
 	}
 
 	if mmGetBySessionId.defaultExpectation == nil {
-		mmGetBySessionId.defaultExpectation = &DeviceServiceHandlerMockGetBySessionIdExpectation{}
+		mmGetBySessionId.defaultExpectation = &DeviceServiceClientMockGetBySessionIdExpectation{}
 	}
 
 	if mmGetBySessionId.defaultExpectation.params != nil {
-		mmGetBySessionId.mock.t.Fatalf("DeviceServiceHandlerMock.GetBySessionId mock is already set by Expect")
+		mmGetBySessionId.mock.t.Fatalf("DeviceServiceClientMock.GetBySessionId mock is already set by Expect")
 	}
 
 	if mmGetBySessionId.defaultExpectation.paramPtrs == nil {
-		mmGetBySessionId.defaultExpectation.paramPtrs = &DeviceServiceHandlerMockGetBySessionIdParamPtrs{}
+		mmGetBySessionId.defaultExpectation.paramPtrs = &DeviceServiceClientMockGetBySessionIdParamPtrs{}
 	}
 	mmGetBySessionId.defaultExpectation.paramPtrs.ctx = &ctx
 	mmGetBySessionId.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -1673,22 +1673,22 @@ func (mmGetBySessionId *mDeviceServiceHandlerMockGetBySessionId) ExpectCtxParam1
 	return mmGetBySessionId
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for DeviceServiceHandler.GetBySessionId
-func (mmGetBySessionId *mDeviceServiceHandlerMockGetBySessionId) ExpectPp1Param2(pp1 *connect.Request[v1.GetBySessionIdRequest]) *mDeviceServiceHandlerMockGetBySessionId {
+// ExpectPp1Param2 sets up expected param pp1 for DeviceServiceClient.GetBySessionId
+func (mmGetBySessionId *mDeviceServiceClientMockGetBySessionId) ExpectPp1Param2(pp1 *connect.Request[v1.GetBySessionIdRequest]) *mDeviceServiceClientMockGetBySessionId {
 	if mmGetBySessionId.mock.funcGetBySessionId != nil {
-		mmGetBySessionId.mock.t.Fatalf("DeviceServiceHandlerMock.GetBySessionId mock is already set by Set")
+		mmGetBySessionId.mock.t.Fatalf("DeviceServiceClientMock.GetBySessionId mock is already set by Set")
 	}
 
 	if mmGetBySessionId.defaultExpectation == nil {
-		mmGetBySessionId.defaultExpectation = &DeviceServiceHandlerMockGetBySessionIdExpectation{}
+		mmGetBySessionId.defaultExpectation = &DeviceServiceClientMockGetBySessionIdExpectation{}
 	}
 
 	if mmGetBySessionId.defaultExpectation.params != nil {
-		mmGetBySessionId.mock.t.Fatalf("DeviceServiceHandlerMock.GetBySessionId mock is already set by Expect")
+		mmGetBySessionId.mock.t.Fatalf("DeviceServiceClientMock.GetBySessionId mock is already set by Expect")
 	}
 
 	if mmGetBySessionId.defaultExpectation.paramPtrs == nil {
-		mmGetBySessionId.defaultExpectation.paramPtrs = &DeviceServiceHandlerMockGetBySessionIdParamPtrs{}
+		mmGetBySessionId.defaultExpectation.paramPtrs = &DeviceServiceClientMockGetBySessionIdParamPtrs{}
 	}
 	mmGetBySessionId.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmGetBySessionId.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -1696,10 +1696,10 @@ func (mmGetBySessionId *mDeviceServiceHandlerMockGetBySessionId) ExpectPp1Param2
 	return mmGetBySessionId
 }
 
-// Inspect accepts an inspector function that has same arguments as the DeviceServiceHandler.GetBySessionId
-func (mmGetBySessionId *mDeviceServiceHandlerMockGetBySessionId) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.GetBySessionIdRequest])) *mDeviceServiceHandlerMockGetBySessionId {
+// Inspect accepts an inspector function that has same arguments as the DeviceServiceClient.GetBySessionId
+func (mmGetBySessionId *mDeviceServiceClientMockGetBySessionId) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.GetBySessionIdRequest])) *mDeviceServiceClientMockGetBySessionId {
 	if mmGetBySessionId.mock.inspectFuncGetBySessionId != nil {
-		mmGetBySessionId.mock.t.Fatalf("Inspect function is already set for DeviceServiceHandlerMock.GetBySessionId")
+		mmGetBySessionId.mock.t.Fatalf("Inspect function is already set for DeviceServiceClientMock.GetBySessionId")
 	}
 
 	mmGetBySessionId.mock.inspectFuncGetBySessionId = f
@@ -1707,28 +1707,28 @@ func (mmGetBySessionId *mDeviceServiceHandlerMockGetBySessionId) Inspect(f func(
 	return mmGetBySessionId
 }
 
-// Return sets up results that will be returned by DeviceServiceHandler.GetBySessionId
-func (mmGetBySessionId *mDeviceServiceHandlerMockGetBySessionId) Return(pp2 *connect.Response[v1.GetBySessionIdResponse], err error) *DeviceServiceHandlerMock {
+// Return sets up results that will be returned by DeviceServiceClient.GetBySessionId
+func (mmGetBySessionId *mDeviceServiceClientMockGetBySessionId) Return(pp2 *connect.Response[v1.GetBySessionIdResponse], err error) *DeviceServiceClientMock {
 	if mmGetBySessionId.mock.funcGetBySessionId != nil {
-		mmGetBySessionId.mock.t.Fatalf("DeviceServiceHandlerMock.GetBySessionId mock is already set by Set")
+		mmGetBySessionId.mock.t.Fatalf("DeviceServiceClientMock.GetBySessionId mock is already set by Set")
 	}
 
 	if mmGetBySessionId.defaultExpectation == nil {
-		mmGetBySessionId.defaultExpectation = &DeviceServiceHandlerMockGetBySessionIdExpectation{mock: mmGetBySessionId.mock}
+		mmGetBySessionId.defaultExpectation = &DeviceServiceClientMockGetBySessionIdExpectation{mock: mmGetBySessionId.mock}
 	}
-	mmGetBySessionId.defaultExpectation.results = &DeviceServiceHandlerMockGetBySessionIdResults{pp2, err}
+	mmGetBySessionId.defaultExpectation.results = &DeviceServiceClientMockGetBySessionIdResults{pp2, err}
 	mmGetBySessionId.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmGetBySessionId.mock
 }
 
-// Set uses given function f to mock the DeviceServiceHandler.GetBySessionId method
-func (mmGetBySessionId *mDeviceServiceHandlerMockGetBySessionId) Set(f func(ctx context.Context, pp1 *connect.Request[v1.GetBySessionIdRequest]) (pp2 *connect.Response[v1.GetBySessionIdResponse], err error)) *DeviceServiceHandlerMock {
+// Set uses given function f to mock the DeviceServiceClient.GetBySessionId method
+func (mmGetBySessionId *mDeviceServiceClientMockGetBySessionId) Set(f func(ctx context.Context, pp1 *connect.Request[v1.GetBySessionIdRequest]) (pp2 *connect.Response[v1.GetBySessionIdResponse], err error)) *DeviceServiceClientMock {
 	if mmGetBySessionId.defaultExpectation != nil {
-		mmGetBySessionId.mock.t.Fatalf("Default expectation is already set for the DeviceServiceHandler.GetBySessionId method")
+		mmGetBySessionId.mock.t.Fatalf("Default expectation is already set for the DeviceServiceClient.GetBySessionId method")
 	}
 
 	if len(mmGetBySessionId.expectations) > 0 {
-		mmGetBySessionId.mock.t.Fatalf("Some expectations are already set for the DeviceServiceHandler.GetBySessionId method")
+		mmGetBySessionId.mock.t.Fatalf("Some expectations are already set for the DeviceServiceClient.GetBySessionId method")
 	}
 
 	mmGetBySessionId.mock.funcGetBySessionId = f
@@ -1736,39 +1736,39 @@ func (mmGetBySessionId *mDeviceServiceHandlerMockGetBySessionId) Set(f func(ctx 
 	return mmGetBySessionId.mock
 }
 
-// When sets expectation for the DeviceServiceHandler.GetBySessionId which will trigger the result defined by the following
+// When sets expectation for the DeviceServiceClient.GetBySessionId which will trigger the result defined by the following
 // Then helper
-func (mmGetBySessionId *mDeviceServiceHandlerMockGetBySessionId) When(ctx context.Context, pp1 *connect.Request[v1.GetBySessionIdRequest]) *DeviceServiceHandlerMockGetBySessionIdExpectation {
+func (mmGetBySessionId *mDeviceServiceClientMockGetBySessionId) When(ctx context.Context, pp1 *connect.Request[v1.GetBySessionIdRequest]) *DeviceServiceClientMockGetBySessionIdExpectation {
 	if mmGetBySessionId.mock.funcGetBySessionId != nil {
-		mmGetBySessionId.mock.t.Fatalf("DeviceServiceHandlerMock.GetBySessionId mock is already set by Set")
+		mmGetBySessionId.mock.t.Fatalf("DeviceServiceClientMock.GetBySessionId mock is already set by Set")
 	}
 
-	expectation := &DeviceServiceHandlerMockGetBySessionIdExpectation{
+	expectation := &DeviceServiceClientMockGetBySessionIdExpectation{
 		mock:               mmGetBySessionId.mock,
-		params:             &DeviceServiceHandlerMockGetBySessionIdParams{ctx, pp1},
-		expectationOrigins: DeviceServiceHandlerMockGetBySessionIdExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &DeviceServiceClientMockGetBySessionIdParams{ctx, pp1},
+		expectationOrigins: DeviceServiceClientMockGetBySessionIdExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmGetBySessionId.expectations = append(mmGetBySessionId.expectations, expectation)
 	return expectation
 }
 
-// Then sets up DeviceServiceHandler.GetBySessionId return parameters for the expectation previously defined by the When method
-func (e *DeviceServiceHandlerMockGetBySessionIdExpectation) Then(pp2 *connect.Response[v1.GetBySessionIdResponse], err error) *DeviceServiceHandlerMock {
-	e.results = &DeviceServiceHandlerMockGetBySessionIdResults{pp2, err}
+// Then sets up DeviceServiceClient.GetBySessionId return parameters for the expectation previously defined by the When method
+func (e *DeviceServiceClientMockGetBySessionIdExpectation) Then(pp2 *connect.Response[v1.GetBySessionIdResponse], err error) *DeviceServiceClientMock {
+	e.results = &DeviceServiceClientMockGetBySessionIdResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times DeviceServiceHandler.GetBySessionId should be invoked
-func (mmGetBySessionId *mDeviceServiceHandlerMockGetBySessionId) Times(n uint64) *mDeviceServiceHandlerMockGetBySessionId {
+// Times sets number of times DeviceServiceClient.GetBySessionId should be invoked
+func (mmGetBySessionId *mDeviceServiceClientMockGetBySessionId) Times(n uint64) *mDeviceServiceClientMockGetBySessionId {
 	if n == 0 {
-		mmGetBySessionId.mock.t.Fatalf("Times of DeviceServiceHandlerMock.GetBySessionId mock can not be zero")
+		mmGetBySessionId.mock.t.Fatalf("Times of DeviceServiceClientMock.GetBySessionId mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmGetBySessionId.expectedInvocations, n)
 	mmGetBySessionId.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmGetBySessionId
 }
 
-func (mmGetBySessionId *mDeviceServiceHandlerMockGetBySessionId) invocationsDone() bool {
+func (mmGetBySessionId *mDeviceServiceClientMockGetBySessionId) invocationsDone() bool {
 	if len(mmGetBySessionId.expectations) == 0 && mmGetBySessionId.defaultExpectation == nil && mmGetBySessionId.mock.funcGetBySessionId == nil {
 		return true
 	}
@@ -1779,8 +1779,8 @@ func (mmGetBySessionId *mDeviceServiceHandlerMockGetBySessionId) invocationsDone
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// GetBySessionId implements mm_devicev1connect.DeviceServiceHandler
-func (mmGetBySessionId *DeviceServiceHandlerMock) GetBySessionId(ctx context.Context, pp1 *connect.Request[v1.GetBySessionIdRequest]) (pp2 *connect.Response[v1.GetBySessionIdResponse], err error) {
+// GetBySessionId implements mm_devicev1connect.DeviceServiceClient
+func (mmGetBySessionId *DeviceServiceClientMock) GetBySessionId(ctx context.Context, pp1 *connect.Request[v1.GetBySessionIdRequest]) (pp2 *connect.Response[v1.GetBySessionIdResponse], err error) {
 	mm_atomic.AddUint64(&mmGetBySessionId.beforeGetBySessionIdCounter, 1)
 	defer mm_atomic.AddUint64(&mmGetBySessionId.afterGetBySessionIdCounter, 1)
 
@@ -1790,7 +1790,7 @@ func (mmGetBySessionId *DeviceServiceHandlerMock) GetBySessionId(ctx context.Con
 		mmGetBySessionId.inspectFuncGetBySessionId(ctx, pp1)
 	}
 
-	mm_params := DeviceServiceHandlerMockGetBySessionIdParams{ctx, pp1}
+	mm_params := DeviceServiceClientMockGetBySessionIdParams{ctx, pp1}
 
 	// Record call args
 	mmGetBySessionId.GetBySessionIdMock.mutex.Lock()
@@ -1809,54 +1809,54 @@ func (mmGetBySessionId *DeviceServiceHandlerMock) GetBySessionId(ctx context.Con
 		mm_want := mmGetBySessionId.GetBySessionIdMock.defaultExpectation.params
 		mm_want_ptrs := mmGetBySessionId.GetBySessionIdMock.defaultExpectation.paramPtrs
 
-		mm_got := DeviceServiceHandlerMockGetBySessionIdParams{ctx, pp1}
+		mm_got := DeviceServiceClientMockGetBySessionIdParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmGetBySessionId.t.Errorf("DeviceServiceHandlerMock.GetBySessionId got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmGetBySessionId.t.Errorf("DeviceServiceClientMock.GetBySessionId got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmGetBySessionId.GetBySessionIdMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmGetBySessionId.t.Errorf("DeviceServiceHandlerMock.GetBySessionId got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmGetBySessionId.t.Errorf("DeviceServiceClientMock.GetBySessionId got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmGetBySessionId.GetBySessionIdMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmGetBySessionId.t.Errorf("DeviceServiceHandlerMock.GetBySessionId got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmGetBySessionId.t.Errorf("DeviceServiceClientMock.GetBySessionId got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmGetBySessionId.GetBySessionIdMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmGetBySessionId.GetBySessionIdMock.defaultExpectation.results
 		if mm_results == nil {
-			mmGetBySessionId.t.Fatal("No results are set for the DeviceServiceHandlerMock.GetBySessionId")
+			mmGetBySessionId.t.Fatal("No results are set for the DeviceServiceClientMock.GetBySessionId")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmGetBySessionId.funcGetBySessionId != nil {
 		return mmGetBySessionId.funcGetBySessionId(ctx, pp1)
 	}
-	mmGetBySessionId.t.Fatalf("Unexpected call to DeviceServiceHandlerMock.GetBySessionId. %v %v", ctx, pp1)
+	mmGetBySessionId.t.Fatalf("Unexpected call to DeviceServiceClientMock.GetBySessionId. %v %v", ctx, pp1)
 	return
 }
 
-// GetBySessionIdAfterCounter returns a count of finished DeviceServiceHandlerMock.GetBySessionId invocations
-func (mmGetBySessionId *DeviceServiceHandlerMock) GetBySessionIdAfterCounter() uint64 {
+// GetBySessionIdAfterCounter returns a count of finished DeviceServiceClientMock.GetBySessionId invocations
+func (mmGetBySessionId *DeviceServiceClientMock) GetBySessionIdAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmGetBySessionId.afterGetBySessionIdCounter)
 }
 
-// GetBySessionIdBeforeCounter returns a count of DeviceServiceHandlerMock.GetBySessionId invocations
-func (mmGetBySessionId *DeviceServiceHandlerMock) GetBySessionIdBeforeCounter() uint64 {
+// GetBySessionIdBeforeCounter returns a count of DeviceServiceClientMock.GetBySessionId invocations
+func (mmGetBySessionId *DeviceServiceClientMock) GetBySessionIdBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmGetBySessionId.beforeGetBySessionIdCounter)
 }
 
-// Calls returns a list of arguments used in each call to DeviceServiceHandlerMock.GetBySessionId.
+// Calls returns a list of arguments used in each call to DeviceServiceClientMock.GetBySessionId.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmGetBySessionId *mDeviceServiceHandlerMockGetBySessionId) Calls() []*DeviceServiceHandlerMockGetBySessionIdParams {
+func (mmGetBySessionId *mDeviceServiceClientMockGetBySessionId) Calls() []*DeviceServiceClientMockGetBySessionIdParams {
 	mmGetBySessionId.mutex.RLock()
 
-	argCopy := make([]*DeviceServiceHandlerMockGetBySessionIdParams, len(mmGetBySessionId.callArgs))
+	argCopy := make([]*DeviceServiceClientMockGetBySessionIdParams, len(mmGetBySessionId.callArgs))
 	copy(argCopy, mmGetBySessionId.callArgs)
 
 	mmGetBySessionId.mutex.RUnlock()
@@ -1866,7 +1866,7 @@ func (mmGetBySessionId *mDeviceServiceHandlerMockGetBySessionId) Calls() []*Devi
 
 // MinimockGetBySessionIdDone returns true if the count of the GetBySessionId invocations corresponds
 // the number of defined expectations
-func (m *DeviceServiceHandlerMock) MinimockGetBySessionIdDone() bool {
+func (m *DeviceServiceClientMock) MinimockGetBySessionIdDone() bool {
 	if m.GetBySessionIdMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -1882,10 +1882,10 @@ func (m *DeviceServiceHandlerMock) MinimockGetBySessionIdDone() bool {
 }
 
 // MinimockGetBySessionIdInspect logs each unmet expectation
-func (m *DeviceServiceHandlerMock) MinimockGetBySessionIdInspect() {
+func (m *DeviceServiceClientMock) MinimockGetBySessionIdInspect() {
 	for _, e := range m.GetBySessionIdMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.GetBySessionId at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.GetBySessionId at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -1893,66 +1893,66 @@ func (m *DeviceServiceHandlerMock) MinimockGetBySessionIdInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.GetBySessionIdMock.defaultExpectation != nil && afterGetBySessionIdCounter < 1 {
 		if m.GetBySessionIdMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.GetBySessionId at\n%s", m.GetBySessionIdMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.GetBySessionId at\n%s", m.GetBySessionIdMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.GetBySessionId at\n%s with params: %#v", m.GetBySessionIdMock.defaultExpectation.expectationOrigins.origin, *m.GetBySessionIdMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.GetBySessionId at\n%s with params: %#v", m.GetBySessionIdMock.defaultExpectation.expectationOrigins.origin, *m.GetBySessionIdMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcGetBySessionId != nil && afterGetBySessionIdCounter < 1 {
-		m.t.Errorf("Expected call to DeviceServiceHandlerMock.GetBySessionId at\n%s", m.funcGetBySessionIdOrigin)
+		m.t.Errorf("Expected call to DeviceServiceClientMock.GetBySessionId at\n%s", m.funcGetBySessionIdOrigin)
 	}
 
 	if !m.GetBySessionIdMock.invocationsDone() && afterGetBySessionIdCounter > 0 {
-		m.t.Errorf("Expected %d calls to DeviceServiceHandlerMock.GetBySessionId at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to DeviceServiceClientMock.GetBySessionId at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.GetBySessionIdMock.expectedInvocations), m.GetBySessionIdMock.expectedInvocationsOrigin, afterGetBySessionIdCounter)
 	}
 }
 
-type mDeviceServiceHandlerMockLink struct {
+type mDeviceServiceClientMockLink struct {
 	optional           bool
-	mock               *DeviceServiceHandlerMock
-	defaultExpectation *DeviceServiceHandlerMockLinkExpectation
-	expectations       []*DeviceServiceHandlerMockLinkExpectation
+	mock               *DeviceServiceClientMock
+	defaultExpectation *DeviceServiceClientMockLinkExpectation
+	expectations       []*DeviceServiceClientMockLinkExpectation
 
-	callArgs []*DeviceServiceHandlerMockLinkParams
+	callArgs []*DeviceServiceClientMockLinkParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// DeviceServiceHandlerMockLinkExpectation specifies expectation struct of the DeviceServiceHandler.Link
-type DeviceServiceHandlerMockLinkExpectation struct {
-	mock               *DeviceServiceHandlerMock
-	params             *DeviceServiceHandlerMockLinkParams
-	paramPtrs          *DeviceServiceHandlerMockLinkParamPtrs
-	expectationOrigins DeviceServiceHandlerMockLinkExpectationOrigins
-	results            *DeviceServiceHandlerMockLinkResults
+// DeviceServiceClientMockLinkExpectation specifies expectation struct of the DeviceServiceClient.Link
+type DeviceServiceClientMockLinkExpectation struct {
+	mock               *DeviceServiceClientMock
+	params             *DeviceServiceClientMockLinkParams
+	paramPtrs          *DeviceServiceClientMockLinkParamPtrs
+	expectationOrigins DeviceServiceClientMockLinkExpectationOrigins
+	results            *DeviceServiceClientMockLinkResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// DeviceServiceHandlerMockLinkParams contains parameters of the DeviceServiceHandler.Link
-type DeviceServiceHandlerMockLinkParams struct {
+// DeviceServiceClientMockLinkParams contains parameters of the DeviceServiceClient.Link
+type DeviceServiceClientMockLinkParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.LinkRequest]
 }
 
-// DeviceServiceHandlerMockLinkParamPtrs contains pointers to parameters of the DeviceServiceHandler.Link
-type DeviceServiceHandlerMockLinkParamPtrs struct {
+// DeviceServiceClientMockLinkParamPtrs contains pointers to parameters of the DeviceServiceClient.Link
+type DeviceServiceClientMockLinkParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.LinkRequest]
 }
 
-// DeviceServiceHandlerMockLinkResults contains results of the DeviceServiceHandler.Link
-type DeviceServiceHandlerMockLinkResults struct {
+// DeviceServiceClientMockLinkResults contains results of the DeviceServiceClient.Link
+type DeviceServiceClientMockLinkResults struct {
 	pp2 *connect.Response[v1.LinkResponse]
 	err error
 }
 
-// DeviceServiceHandlerMockLinkOrigins contains origins of expectations of the DeviceServiceHandler.Link
-type DeviceServiceHandlerMockLinkExpectationOrigins struct {
+// DeviceServiceClientMockLinkOrigins contains origins of expectations of the DeviceServiceClient.Link
+type DeviceServiceClientMockLinkExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -1963,26 +1963,26 @@ type DeviceServiceHandlerMockLinkExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmLink *mDeviceServiceHandlerMockLink) Optional() *mDeviceServiceHandlerMockLink {
+func (mmLink *mDeviceServiceClientMockLink) Optional() *mDeviceServiceClientMockLink {
 	mmLink.optional = true
 	return mmLink
 }
 
-// Expect sets up expected params for DeviceServiceHandler.Link
-func (mmLink *mDeviceServiceHandlerMockLink) Expect(ctx context.Context, pp1 *connect.Request[v1.LinkRequest]) *mDeviceServiceHandlerMockLink {
+// Expect sets up expected params for DeviceServiceClient.Link
+func (mmLink *mDeviceServiceClientMockLink) Expect(ctx context.Context, pp1 *connect.Request[v1.LinkRequest]) *mDeviceServiceClientMockLink {
 	if mmLink.mock.funcLink != nil {
-		mmLink.mock.t.Fatalf("DeviceServiceHandlerMock.Link mock is already set by Set")
+		mmLink.mock.t.Fatalf("DeviceServiceClientMock.Link mock is already set by Set")
 	}
 
 	if mmLink.defaultExpectation == nil {
-		mmLink.defaultExpectation = &DeviceServiceHandlerMockLinkExpectation{}
+		mmLink.defaultExpectation = &DeviceServiceClientMockLinkExpectation{}
 	}
 
 	if mmLink.defaultExpectation.paramPtrs != nil {
-		mmLink.mock.t.Fatalf("DeviceServiceHandlerMock.Link mock is already set by ExpectParams functions")
+		mmLink.mock.t.Fatalf("DeviceServiceClientMock.Link mock is already set by ExpectParams functions")
 	}
 
-	mmLink.defaultExpectation.params = &DeviceServiceHandlerMockLinkParams{ctx, pp1}
+	mmLink.defaultExpectation.params = &DeviceServiceClientMockLinkParams{ctx, pp1}
 	mmLink.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmLink.expectations {
 		if minimock.Equal(e.params, mmLink.defaultExpectation.params) {
@@ -1993,22 +1993,22 @@ func (mmLink *mDeviceServiceHandlerMockLink) Expect(ctx context.Context, pp1 *co
 	return mmLink
 }
 
-// ExpectCtxParam1 sets up expected param ctx for DeviceServiceHandler.Link
-func (mmLink *mDeviceServiceHandlerMockLink) ExpectCtxParam1(ctx context.Context) *mDeviceServiceHandlerMockLink {
+// ExpectCtxParam1 sets up expected param ctx for DeviceServiceClient.Link
+func (mmLink *mDeviceServiceClientMockLink) ExpectCtxParam1(ctx context.Context) *mDeviceServiceClientMockLink {
 	if mmLink.mock.funcLink != nil {
-		mmLink.mock.t.Fatalf("DeviceServiceHandlerMock.Link mock is already set by Set")
+		mmLink.mock.t.Fatalf("DeviceServiceClientMock.Link mock is already set by Set")
 	}
 
 	if mmLink.defaultExpectation == nil {
-		mmLink.defaultExpectation = &DeviceServiceHandlerMockLinkExpectation{}
+		mmLink.defaultExpectation = &DeviceServiceClientMockLinkExpectation{}
 	}
 
 	if mmLink.defaultExpectation.params != nil {
-		mmLink.mock.t.Fatalf("DeviceServiceHandlerMock.Link mock is already set by Expect")
+		mmLink.mock.t.Fatalf("DeviceServiceClientMock.Link mock is already set by Expect")
 	}
 
 	if mmLink.defaultExpectation.paramPtrs == nil {
-		mmLink.defaultExpectation.paramPtrs = &DeviceServiceHandlerMockLinkParamPtrs{}
+		mmLink.defaultExpectation.paramPtrs = &DeviceServiceClientMockLinkParamPtrs{}
 	}
 	mmLink.defaultExpectation.paramPtrs.ctx = &ctx
 	mmLink.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -2016,22 +2016,22 @@ func (mmLink *mDeviceServiceHandlerMockLink) ExpectCtxParam1(ctx context.Context
 	return mmLink
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for DeviceServiceHandler.Link
-func (mmLink *mDeviceServiceHandlerMockLink) ExpectPp1Param2(pp1 *connect.Request[v1.LinkRequest]) *mDeviceServiceHandlerMockLink {
+// ExpectPp1Param2 sets up expected param pp1 for DeviceServiceClient.Link
+func (mmLink *mDeviceServiceClientMockLink) ExpectPp1Param2(pp1 *connect.Request[v1.LinkRequest]) *mDeviceServiceClientMockLink {
 	if mmLink.mock.funcLink != nil {
-		mmLink.mock.t.Fatalf("DeviceServiceHandlerMock.Link mock is already set by Set")
+		mmLink.mock.t.Fatalf("DeviceServiceClientMock.Link mock is already set by Set")
 	}
 
 	if mmLink.defaultExpectation == nil {
-		mmLink.defaultExpectation = &DeviceServiceHandlerMockLinkExpectation{}
+		mmLink.defaultExpectation = &DeviceServiceClientMockLinkExpectation{}
 	}
 
 	if mmLink.defaultExpectation.params != nil {
-		mmLink.mock.t.Fatalf("DeviceServiceHandlerMock.Link mock is already set by Expect")
+		mmLink.mock.t.Fatalf("DeviceServiceClientMock.Link mock is already set by Expect")
 	}
 
 	if mmLink.defaultExpectation.paramPtrs == nil {
-		mmLink.defaultExpectation.paramPtrs = &DeviceServiceHandlerMockLinkParamPtrs{}
+		mmLink.defaultExpectation.paramPtrs = &DeviceServiceClientMockLinkParamPtrs{}
 	}
 	mmLink.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmLink.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -2039,10 +2039,10 @@ func (mmLink *mDeviceServiceHandlerMockLink) ExpectPp1Param2(pp1 *connect.Reques
 	return mmLink
 }
 
-// Inspect accepts an inspector function that has same arguments as the DeviceServiceHandler.Link
-func (mmLink *mDeviceServiceHandlerMockLink) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.LinkRequest])) *mDeviceServiceHandlerMockLink {
+// Inspect accepts an inspector function that has same arguments as the DeviceServiceClient.Link
+func (mmLink *mDeviceServiceClientMockLink) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.LinkRequest])) *mDeviceServiceClientMockLink {
 	if mmLink.mock.inspectFuncLink != nil {
-		mmLink.mock.t.Fatalf("Inspect function is already set for DeviceServiceHandlerMock.Link")
+		mmLink.mock.t.Fatalf("Inspect function is already set for DeviceServiceClientMock.Link")
 	}
 
 	mmLink.mock.inspectFuncLink = f
@@ -2050,28 +2050,28 @@ func (mmLink *mDeviceServiceHandlerMockLink) Inspect(f func(ctx context.Context,
 	return mmLink
 }
 
-// Return sets up results that will be returned by DeviceServiceHandler.Link
-func (mmLink *mDeviceServiceHandlerMockLink) Return(pp2 *connect.Response[v1.LinkResponse], err error) *DeviceServiceHandlerMock {
+// Return sets up results that will be returned by DeviceServiceClient.Link
+func (mmLink *mDeviceServiceClientMockLink) Return(pp2 *connect.Response[v1.LinkResponse], err error) *DeviceServiceClientMock {
 	if mmLink.mock.funcLink != nil {
-		mmLink.mock.t.Fatalf("DeviceServiceHandlerMock.Link mock is already set by Set")
+		mmLink.mock.t.Fatalf("DeviceServiceClientMock.Link mock is already set by Set")
 	}
 
 	if mmLink.defaultExpectation == nil {
-		mmLink.defaultExpectation = &DeviceServiceHandlerMockLinkExpectation{mock: mmLink.mock}
+		mmLink.defaultExpectation = &DeviceServiceClientMockLinkExpectation{mock: mmLink.mock}
 	}
-	mmLink.defaultExpectation.results = &DeviceServiceHandlerMockLinkResults{pp2, err}
+	mmLink.defaultExpectation.results = &DeviceServiceClientMockLinkResults{pp2, err}
 	mmLink.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmLink.mock
 }
 
-// Set uses given function f to mock the DeviceServiceHandler.Link method
-func (mmLink *mDeviceServiceHandlerMockLink) Set(f func(ctx context.Context, pp1 *connect.Request[v1.LinkRequest]) (pp2 *connect.Response[v1.LinkResponse], err error)) *DeviceServiceHandlerMock {
+// Set uses given function f to mock the DeviceServiceClient.Link method
+func (mmLink *mDeviceServiceClientMockLink) Set(f func(ctx context.Context, pp1 *connect.Request[v1.LinkRequest]) (pp2 *connect.Response[v1.LinkResponse], err error)) *DeviceServiceClientMock {
 	if mmLink.defaultExpectation != nil {
-		mmLink.mock.t.Fatalf("Default expectation is already set for the DeviceServiceHandler.Link method")
+		mmLink.mock.t.Fatalf("Default expectation is already set for the DeviceServiceClient.Link method")
 	}
 
 	if len(mmLink.expectations) > 0 {
-		mmLink.mock.t.Fatalf("Some expectations are already set for the DeviceServiceHandler.Link method")
+		mmLink.mock.t.Fatalf("Some expectations are already set for the DeviceServiceClient.Link method")
 	}
 
 	mmLink.mock.funcLink = f
@@ -2079,39 +2079,39 @@ func (mmLink *mDeviceServiceHandlerMockLink) Set(f func(ctx context.Context, pp1
 	return mmLink.mock
 }
 
-// When sets expectation for the DeviceServiceHandler.Link which will trigger the result defined by the following
+// When sets expectation for the DeviceServiceClient.Link which will trigger the result defined by the following
 // Then helper
-func (mmLink *mDeviceServiceHandlerMockLink) When(ctx context.Context, pp1 *connect.Request[v1.LinkRequest]) *DeviceServiceHandlerMockLinkExpectation {
+func (mmLink *mDeviceServiceClientMockLink) When(ctx context.Context, pp1 *connect.Request[v1.LinkRequest]) *DeviceServiceClientMockLinkExpectation {
 	if mmLink.mock.funcLink != nil {
-		mmLink.mock.t.Fatalf("DeviceServiceHandlerMock.Link mock is already set by Set")
+		mmLink.mock.t.Fatalf("DeviceServiceClientMock.Link mock is already set by Set")
 	}
 
-	expectation := &DeviceServiceHandlerMockLinkExpectation{
+	expectation := &DeviceServiceClientMockLinkExpectation{
 		mock:               mmLink.mock,
-		params:             &DeviceServiceHandlerMockLinkParams{ctx, pp1},
-		expectationOrigins: DeviceServiceHandlerMockLinkExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &DeviceServiceClientMockLinkParams{ctx, pp1},
+		expectationOrigins: DeviceServiceClientMockLinkExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmLink.expectations = append(mmLink.expectations, expectation)
 	return expectation
 }
 
-// Then sets up DeviceServiceHandler.Link return parameters for the expectation previously defined by the When method
-func (e *DeviceServiceHandlerMockLinkExpectation) Then(pp2 *connect.Response[v1.LinkResponse], err error) *DeviceServiceHandlerMock {
-	e.results = &DeviceServiceHandlerMockLinkResults{pp2, err}
+// Then sets up DeviceServiceClient.Link return parameters for the expectation previously defined by the When method
+func (e *DeviceServiceClientMockLinkExpectation) Then(pp2 *connect.Response[v1.LinkResponse], err error) *DeviceServiceClientMock {
+	e.results = &DeviceServiceClientMockLinkResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times DeviceServiceHandler.Link should be invoked
-func (mmLink *mDeviceServiceHandlerMockLink) Times(n uint64) *mDeviceServiceHandlerMockLink {
+// Times sets number of times DeviceServiceClient.Link should be invoked
+func (mmLink *mDeviceServiceClientMockLink) Times(n uint64) *mDeviceServiceClientMockLink {
 	if n == 0 {
-		mmLink.mock.t.Fatalf("Times of DeviceServiceHandlerMock.Link mock can not be zero")
+		mmLink.mock.t.Fatalf("Times of DeviceServiceClientMock.Link mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmLink.expectedInvocations, n)
 	mmLink.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmLink
 }
 
-func (mmLink *mDeviceServiceHandlerMockLink) invocationsDone() bool {
+func (mmLink *mDeviceServiceClientMockLink) invocationsDone() bool {
 	if len(mmLink.expectations) == 0 && mmLink.defaultExpectation == nil && mmLink.mock.funcLink == nil {
 		return true
 	}
@@ -2122,8 +2122,8 @@ func (mmLink *mDeviceServiceHandlerMockLink) invocationsDone() bool {
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// Link implements mm_devicev1connect.DeviceServiceHandler
-func (mmLink *DeviceServiceHandlerMock) Link(ctx context.Context, pp1 *connect.Request[v1.LinkRequest]) (pp2 *connect.Response[v1.LinkResponse], err error) {
+// Link implements mm_devicev1connect.DeviceServiceClient
+func (mmLink *DeviceServiceClientMock) Link(ctx context.Context, pp1 *connect.Request[v1.LinkRequest]) (pp2 *connect.Response[v1.LinkResponse], err error) {
 	mm_atomic.AddUint64(&mmLink.beforeLinkCounter, 1)
 	defer mm_atomic.AddUint64(&mmLink.afterLinkCounter, 1)
 
@@ -2133,7 +2133,7 @@ func (mmLink *DeviceServiceHandlerMock) Link(ctx context.Context, pp1 *connect.R
 		mmLink.inspectFuncLink(ctx, pp1)
 	}
 
-	mm_params := DeviceServiceHandlerMockLinkParams{ctx, pp1}
+	mm_params := DeviceServiceClientMockLinkParams{ctx, pp1}
 
 	// Record call args
 	mmLink.LinkMock.mutex.Lock()
@@ -2152,54 +2152,54 @@ func (mmLink *DeviceServiceHandlerMock) Link(ctx context.Context, pp1 *connect.R
 		mm_want := mmLink.LinkMock.defaultExpectation.params
 		mm_want_ptrs := mmLink.LinkMock.defaultExpectation.paramPtrs
 
-		mm_got := DeviceServiceHandlerMockLinkParams{ctx, pp1}
+		mm_got := DeviceServiceClientMockLinkParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmLink.t.Errorf("DeviceServiceHandlerMock.Link got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmLink.t.Errorf("DeviceServiceClientMock.Link got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmLink.LinkMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmLink.t.Errorf("DeviceServiceHandlerMock.Link got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmLink.t.Errorf("DeviceServiceClientMock.Link got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmLink.LinkMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmLink.t.Errorf("DeviceServiceHandlerMock.Link got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmLink.t.Errorf("DeviceServiceClientMock.Link got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmLink.LinkMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmLink.LinkMock.defaultExpectation.results
 		if mm_results == nil {
-			mmLink.t.Fatal("No results are set for the DeviceServiceHandlerMock.Link")
+			mmLink.t.Fatal("No results are set for the DeviceServiceClientMock.Link")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmLink.funcLink != nil {
 		return mmLink.funcLink(ctx, pp1)
 	}
-	mmLink.t.Fatalf("Unexpected call to DeviceServiceHandlerMock.Link. %v %v", ctx, pp1)
+	mmLink.t.Fatalf("Unexpected call to DeviceServiceClientMock.Link. %v %v", ctx, pp1)
 	return
 }
 
-// LinkAfterCounter returns a count of finished DeviceServiceHandlerMock.Link invocations
-func (mmLink *DeviceServiceHandlerMock) LinkAfterCounter() uint64 {
+// LinkAfterCounter returns a count of finished DeviceServiceClientMock.Link invocations
+func (mmLink *DeviceServiceClientMock) LinkAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmLink.afterLinkCounter)
 }
 
-// LinkBeforeCounter returns a count of DeviceServiceHandlerMock.Link invocations
-func (mmLink *DeviceServiceHandlerMock) LinkBeforeCounter() uint64 {
+// LinkBeforeCounter returns a count of DeviceServiceClientMock.Link invocations
+func (mmLink *DeviceServiceClientMock) LinkBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmLink.beforeLinkCounter)
 }
 
-// Calls returns a list of arguments used in each call to DeviceServiceHandlerMock.Link.
+// Calls returns a list of arguments used in each call to DeviceServiceClientMock.Link.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmLink *mDeviceServiceHandlerMockLink) Calls() []*DeviceServiceHandlerMockLinkParams {
+func (mmLink *mDeviceServiceClientMockLink) Calls() []*DeviceServiceClientMockLinkParams {
 	mmLink.mutex.RLock()
 
-	argCopy := make([]*DeviceServiceHandlerMockLinkParams, len(mmLink.callArgs))
+	argCopy := make([]*DeviceServiceClientMockLinkParams, len(mmLink.callArgs))
 	copy(argCopy, mmLink.callArgs)
 
 	mmLink.mutex.RUnlock()
@@ -2209,7 +2209,7 @@ func (mmLink *mDeviceServiceHandlerMockLink) Calls() []*DeviceServiceHandlerMock
 
 // MinimockLinkDone returns true if the count of the Link invocations corresponds
 // the number of defined expectations
-func (m *DeviceServiceHandlerMock) MinimockLinkDone() bool {
+func (m *DeviceServiceClientMock) MinimockLinkDone() bool {
 	if m.LinkMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -2225,10 +2225,10 @@ func (m *DeviceServiceHandlerMock) MinimockLinkDone() bool {
 }
 
 // MinimockLinkInspect logs each unmet expectation
-func (m *DeviceServiceHandlerMock) MinimockLinkInspect() {
+func (m *DeviceServiceClientMock) MinimockLinkInspect() {
 	for _, e := range m.LinkMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.Link at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.Link at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -2236,71 +2236,69 @@ func (m *DeviceServiceHandlerMock) MinimockLinkInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.LinkMock.defaultExpectation != nil && afterLinkCounter < 1 {
 		if m.LinkMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.Link at\n%s", m.LinkMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.Link at\n%s", m.LinkMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.Link at\n%s with params: %#v", m.LinkMock.defaultExpectation.expectationOrigins.origin, *m.LinkMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.Link at\n%s with params: %#v", m.LinkMock.defaultExpectation.expectationOrigins.origin, *m.LinkMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcLink != nil && afterLinkCounter < 1 {
-		m.t.Errorf("Expected call to DeviceServiceHandlerMock.Link at\n%s", m.funcLinkOrigin)
+		m.t.Errorf("Expected call to DeviceServiceClientMock.Link at\n%s", m.funcLinkOrigin)
 	}
 
 	if !m.LinkMock.invocationsDone() && afterLinkCounter > 0 {
-		m.t.Errorf("Expected %d calls to DeviceServiceHandlerMock.Link at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to DeviceServiceClientMock.Link at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.LinkMock.expectedInvocations), m.LinkMock.expectedInvocationsOrigin, afterLinkCounter)
 	}
 }
 
-type mDeviceServiceHandlerMockListLogs struct {
+type mDeviceServiceClientMockListLogs struct {
 	optional           bool
-	mock               *DeviceServiceHandlerMock
-	defaultExpectation *DeviceServiceHandlerMockListLogsExpectation
-	expectations       []*DeviceServiceHandlerMockListLogsExpectation
+	mock               *DeviceServiceClientMock
+	defaultExpectation *DeviceServiceClientMockListLogsExpectation
+	expectations       []*DeviceServiceClientMockListLogsExpectation
 
-	callArgs []*DeviceServiceHandlerMockListLogsParams
+	callArgs []*DeviceServiceClientMockListLogsParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// DeviceServiceHandlerMockListLogsExpectation specifies expectation struct of the DeviceServiceHandler.ListLogs
-type DeviceServiceHandlerMockListLogsExpectation struct {
-	mock               *DeviceServiceHandlerMock
-	params             *DeviceServiceHandlerMockListLogsParams
-	paramPtrs          *DeviceServiceHandlerMockListLogsParamPtrs
-	expectationOrigins DeviceServiceHandlerMockListLogsExpectationOrigins
-	results            *DeviceServiceHandlerMockListLogsResults
+// DeviceServiceClientMockListLogsExpectation specifies expectation struct of the DeviceServiceClient.ListLogs
+type DeviceServiceClientMockListLogsExpectation struct {
+	mock               *DeviceServiceClientMock
+	params             *DeviceServiceClientMockListLogsParams
+	paramPtrs          *DeviceServiceClientMockListLogsParamPtrs
+	expectationOrigins DeviceServiceClientMockListLogsExpectationOrigins
+	results            *DeviceServiceClientMockListLogsResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// DeviceServiceHandlerMockListLogsParams contains parameters of the DeviceServiceHandler.ListLogs
-type DeviceServiceHandlerMockListLogsParams struct {
+// DeviceServiceClientMockListLogsParams contains parameters of the DeviceServiceClient.ListLogs
+type DeviceServiceClientMockListLogsParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.ListLogsRequest]
-	pp2 *connect.ServerStream[v1.ListLogsResponse]
 }
 
-// DeviceServiceHandlerMockListLogsParamPtrs contains pointers to parameters of the DeviceServiceHandler.ListLogs
-type DeviceServiceHandlerMockListLogsParamPtrs struct {
+// DeviceServiceClientMockListLogsParamPtrs contains pointers to parameters of the DeviceServiceClient.ListLogs
+type DeviceServiceClientMockListLogsParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.ListLogsRequest]
-	pp2 **connect.ServerStream[v1.ListLogsResponse]
 }
 
-// DeviceServiceHandlerMockListLogsResults contains results of the DeviceServiceHandler.ListLogs
-type DeviceServiceHandlerMockListLogsResults struct {
+// DeviceServiceClientMockListLogsResults contains results of the DeviceServiceClient.ListLogs
+type DeviceServiceClientMockListLogsResults struct {
+	pp2 *connect.ServerStreamForClient[v1.ListLogsResponse]
 	err error
 }
 
-// DeviceServiceHandlerMockListLogsOrigins contains origins of expectations of the DeviceServiceHandler.ListLogs
-type DeviceServiceHandlerMockListLogsExpectationOrigins struct {
+// DeviceServiceClientMockListLogsOrigins contains origins of expectations of the DeviceServiceClient.ListLogs
+type DeviceServiceClientMockListLogsExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
-	originPp2 string
 }
 
 // Marks this method to be optional. The default behavior of any method with Return() is '1 or more', meaning
@@ -2308,26 +2306,26 @@ type DeviceServiceHandlerMockListLogsExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmListLogs *mDeviceServiceHandlerMockListLogs) Optional() *mDeviceServiceHandlerMockListLogs {
+func (mmListLogs *mDeviceServiceClientMockListLogs) Optional() *mDeviceServiceClientMockListLogs {
 	mmListLogs.optional = true
 	return mmListLogs
 }
 
-// Expect sets up expected params for DeviceServiceHandler.ListLogs
-func (mmListLogs *mDeviceServiceHandlerMockListLogs) Expect(ctx context.Context, pp1 *connect.Request[v1.ListLogsRequest], pp2 *connect.ServerStream[v1.ListLogsResponse]) *mDeviceServiceHandlerMockListLogs {
+// Expect sets up expected params for DeviceServiceClient.ListLogs
+func (mmListLogs *mDeviceServiceClientMockListLogs) Expect(ctx context.Context, pp1 *connect.Request[v1.ListLogsRequest]) *mDeviceServiceClientMockListLogs {
 	if mmListLogs.mock.funcListLogs != nil {
-		mmListLogs.mock.t.Fatalf("DeviceServiceHandlerMock.ListLogs mock is already set by Set")
+		mmListLogs.mock.t.Fatalf("DeviceServiceClientMock.ListLogs mock is already set by Set")
 	}
 
 	if mmListLogs.defaultExpectation == nil {
-		mmListLogs.defaultExpectation = &DeviceServiceHandlerMockListLogsExpectation{}
+		mmListLogs.defaultExpectation = &DeviceServiceClientMockListLogsExpectation{}
 	}
 
 	if mmListLogs.defaultExpectation.paramPtrs != nil {
-		mmListLogs.mock.t.Fatalf("DeviceServiceHandlerMock.ListLogs mock is already set by ExpectParams functions")
+		mmListLogs.mock.t.Fatalf("DeviceServiceClientMock.ListLogs mock is already set by ExpectParams functions")
 	}
 
-	mmListLogs.defaultExpectation.params = &DeviceServiceHandlerMockListLogsParams{ctx, pp1, pp2}
+	mmListLogs.defaultExpectation.params = &DeviceServiceClientMockListLogsParams{ctx, pp1}
 	mmListLogs.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmListLogs.expectations {
 		if minimock.Equal(e.params, mmListLogs.defaultExpectation.params) {
@@ -2338,22 +2336,22 @@ func (mmListLogs *mDeviceServiceHandlerMockListLogs) Expect(ctx context.Context,
 	return mmListLogs
 }
 
-// ExpectCtxParam1 sets up expected param ctx for DeviceServiceHandler.ListLogs
-func (mmListLogs *mDeviceServiceHandlerMockListLogs) ExpectCtxParam1(ctx context.Context) *mDeviceServiceHandlerMockListLogs {
+// ExpectCtxParam1 sets up expected param ctx for DeviceServiceClient.ListLogs
+func (mmListLogs *mDeviceServiceClientMockListLogs) ExpectCtxParam1(ctx context.Context) *mDeviceServiceClientMockListLogs {
 	if mmListLogs.mock.funcListLogs != nil {
-		mmListLogs.mock.t.Fatalf("DeviceServiceHandlerMock.ListLogs mock is already set by Set")
+		mmListLogs.mock.t.Fatalf("DeviceServiceClientMock.ListLogs mock is already set by Set")
 	}
 
 	if mmListLogs.defaultExpectation == nil {
-		mmListLogs.defaultExpectation = &DeviceServiceHandlerMockListLogsExpectation{}
+		mmListLogs.defaultExpectation = &DeviceServiceClientMockListLogsExpectation{}
 	}
 
 	if mmListLogs.defaultExpectation.params != nil {
-		mmListLogs.mock.t.Fatalf("DeviceServiceHandlerMock.ListLogs mock is already set by Expect")
+		mmListLogs.mock.t.Fatalf("DeviceServiceClientMock.ListLogs mock is already set by Expect")
 	}
 
 	if mmListLogs.defaultExpectation.paramPtrs == nil {
-		mmListLogs.defaultExpectation.paramPtrs = &DeviceServiceHandlerMockListLogsParamPtrs{}
+		mmListLogs.defaultExpectation.paramPtrs = &DeviceServiceClientMockListLogsParamPtrs{}
 	}
 	mmListLogs.defaultExpectation.paramPtrs.ctx = &ctx
 	mmListLogs.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -2361,22 +2359,22 @@ func (mmListLogs *mDeviceServiceHandlerMockListLogs) ExpectCtxParam1(ctx context
 	return mmListLogs
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for DeviceServiceHandler.ListLogs
-func (mmListLogs *mDeviceServiceHandlerMockListLogs) ExpectPp1Param2(pp1 *connect.Request[v1.ListLogsRequest]) *mDeviceServiceHandlerMockListLogs {
+// ExpectPp1Param2 sets up expected param pp1 for DeviceServiceClient.ListLogs
+func (mmListLogs *mDeviceServiceClientMockListLogs) ExpectPp1Param2(pp1 *connect.Request[v1.ListLogsRequest]) *mDeviceServiceClientMockListLogs {
 	if mmListLogs.mock.funcListLogs != nil {
-		mmListLogs.mock.t.Fatalf("DeviceServiceHandlerMock.ListLogs mock is already set by Set")
+		mmListLogs.mock.t.Fatalf("DeviceServiceClientMock.ListLogs mock is already set by Set")
 	}
 
 	if mmListLogs.defaultExpectation == nil {
-		mmListLogs.defaultExpectation = &DeviceServiceHandlerMockListLogsExpectation{}
+		mmListLogs.defaultExpectation = &DeviceServiceClientMockListLogsExpectation{}
 	}
 
 	if mmListLogs.defaultExpectation.params != nil {
-		mmListLogs.mock.t.Fatalf("DeviceServiceHandlerMock.ListLogs mock is already set by Expect")
+		mmListLogs.mock.t.Fatalf("DeviceServiceClientMock.ListLogs mock is already set by Expect")
 	}
 
 	if mmListLogs.defaultExpectation.paramPtrs == nil {
-		mmListLogs.defaultExpectation.paramPtrs = &DeviceServiceHandlerMockListLogsParamPtrs{}
+		mmListLogs.defaultExpectation.paramPtrs = &DeviceServiceClientMockListLogsParamPtrs{}
 	}
 	mmListLogs.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmListLogs.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -2384,33 +2382,10 @@ func (mmListLogs *mDeviceServiceHandlerMockListLogs) ExpectPp1Param2(pp1 *connec
 	return mmListLogs
 }
 
-// ExpectPp2Param3 sets up expected param pp2 for DeviceServiceHandler.ListLogs
-func (mmListLogs *mDeviceServiceHandlerMockListLogs) ExpectPp2Param3(pp2 *connect.ServerStream[v1.ListLogsResponse]) *mDeviceServiceHandlerMockListLogs {
-	if mmListLogs.mock.funcListLogs != nil {
-		mmListLogs.mock.t.Fatalf("DeviceServiceHandlerMock.ListLogs mock is already set by Set")
-	}
-
-	if mmListLogs.defaultExpectation == nil {
-		mmListLogs.defaultExpectation = &DeviceServiceHandlerMockListLogsExpectation{}
-	}
-
-	if mmListLogs.defaultExpectation.params != nil {
-		mmListLogs.mock.t.Fatalf("DeviceServiceHandlerMock.ListLogs mock is already set by Expect")
-	}
-
-	if mmListLogs.defaultExpectation.paramPtrs == nil {
-		mmListLogs.defaultExpectation.paramPtrs = &DeviceServiceHandlerMockListLogsParamPtrs{}
-	}
-	mmListLogs.defaultExpectation.paramPtrs.pp2 = &pp2
-	mmListLogs.defaultExpectation.expectationOrigins.originPp2 = minimock.CallerInfo(1)
-
-	return mmListLogs
-}
-
-// Inspect accepts an inspector function that has same arguments as the DeviceServiceHandler.ListLogs
-func (mmListLogs *mDeviceServiceHandlerMockListLogs) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.ListLogsRequest], pp2 *connect.ServerStream[v1.ListLogsResponse])) *mDeviceServiceHandlerMockListLogs {
+// Inspect accepts an inspector function that has same arguments as the DeviceServiceClient.ListLogs
+func (mmListLogs *mDeviceServiceClientMockListLogs) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.ListLogsRequest])) *mDeviceServiceClientMockListLogs {
 	if mmListLogs.mock.inspectFuncListLogs != nil {
-		mmListLogs.mock.t.Fatalf("Inspect function is already set for DeviceServiceHandlerMock.ListLogs")
+		mmListLogs.mock.t.Fatalf("Inspect function is already set for DeviceServiceClientMock.ListLogs")
 	}
 
 	mmListLogs.mock.inspectFuncListLogs = f
@@ -2418,28 +2393,28 @@ func (mmListLogs *mDeviceServiceHandlerMockListLogs) Inspect(f func(ctx context.
 	return mmListLogs
 }
 
-// Return sets up results that will be returned by DeviceServiceHandler.ListLogs
-func (mmListLogs *mDeviceServiceHandlerMockListLogs) Return(err error) *DeviceServiceHandlerMock {
+// Return sets up results that will be returned by DeviceServiceClient.ListLogs
+func (mmListLogs *mDeviceServiceClientMockListLogs) Return(pp2 *connect.ServerStreamForClient[v1.ListLogsResponse], err error) *DeviceServiceClientMock {
 	if mmListLogs.mock.funcListLogs != nil {
-		mmListLogs.mock.t.Fatalf("DeviceServiceHandlerMock.ListLogs mock is already set by Set")
+		mmListLogs.mock.t.Fatalf("DeviceServiceClientMock.ListLogs mock is already set by Set")
 	}
 
 	if mmListLogs.defaultExpectation == nil {
-		mmListLogs.defaultExpectation = &DeviceServiceHandlerMockListLogsExpectation{mock: mmListLogs.mock}
+		mmListLogs.defaultExpectation = &DeviceServiceClientMockListLogsExpectation{mock: mmListLogs.mock}
 	}
-	mmListLogs.defaultExpectation.results = &DeviceServiceHandlerMockListLogsResults{err}
+	mmListLogs.defaultExpectation.results = &DeviceServiceClientMockListLogsResults{pp2, err}
 	mmListLogs.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmListLogs.mock
 }
 
-// Set uses given function f to mock the DeviceServiceHandler.ListLogs method
-func (mmListLogs *mDeviceServiceHandlerMockListLogs) Set(f func(ctx context.Context, pp1 *connect.Request[v1.ListLogsRequest], pp2 *connect.ServerStream[v1.ListLogsResponse]) (err error)) *DeviceServiceHandlerMock {
+// Set uses given function f to mock the DeviceServiceClient.ListLogs method
+func (mmListLogs *mDeviceServiceClientMockListLogs) Set(f func(ctx context.Context, pp1 *connect.Request[v1.ListLogsRequest]) (pp2 *connect.ServerStreamForClient[v1.ListLogsResponse], err error)) *DeviceServiceClientMock {
 	if mmListLogs.defaultExpectation != nil {
-		mmListLogs.mock.t.Fatalf("Default expectation is already set for the DeviceServiceHandler.ListLogs method")
+		mmListLogs.mock.t.Fatalf("Default expectation is already set for the DeviceServiceClient.ListLogs method")
 	}
 
 	if len(mmListLogs.expectations) > 0 {
-		mmListLogs.mock.t.Fatalf("Some expectations are already set for the DeviceServiceHandler.ListLogs method")
+		mmListLogs.mock.t.Fatalf("Some expectations are already set for the DeviceServiceClient.ListLogs method")
 	}
 
 	mmListLogs.mock.funcListLogs = f
@@ -2447,39 +2422,39 @@ func (mmListLogs *mDeviceServiceHandlerMockListLogs) Set(f func(ctx context.Cont
 	return mmListLogs.mock
 }
 
-// When sets expectation for the DeviceServiceHandler.ListLogs which will trigger the result defined by the following
+// When sets expectation for the DeviceServiceClient.ListLogs which will trigger the result defined by the following
 // Then helper
-func (mmListLogs *mDeviceServiceHandlerMockListLogs) When(ctx context.Context, pp1 *connect.Request[v1.ListLogsRequest], pp2 *connect.ServerStream[v1.ListLogsResponse]) *DeviceServiceHandlerMockListLogsExpectation {
+func (mmListLogs *mDeviceServiceClientMockListLogs) When(ctx context.Context, pp1 *connect.Request[v1.ListLogsRequest]) *DeviceServiceClientMockListLogsExpectation {
 	if mmListLogs.mock.funcListLogs != nil {
-		mmListLogs.mock.t.Fatalf("DeviceServiceHandlerMock.ListLogs mock is already set by Set")
+		mmListLogs.mock.t.Fatalf("DeviceServiceClientMock.ListLogs mock is already set by Set")
 	}
 
-	expectation := &DeviceServiceHandlerMockListLogsExpectation{
+	expectation := &DeviceServiceClientMockListLogsExpectation{
 		mock:               mmListLogs.mock,
-		params:             &DeviceServiceHandlerMockListLogsParams{ctx, pp1, pp2},
-		expectationOrigins: DeviceServiceHandlerMockListLogsExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &DeviceServiceClientMockListLogsParams{ctx, pp1},
+		expectationOrigins: DeviceServiceClientMockListLogsExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmListLogs.expectations = append(mmListLogs.expectations, expectation)
 	return expectation
 }
 
-// Then sets up DeviceServiceHandler.ListLogs return parameters for the expectation previously defined by the When method
-func (e *DeviceServiceHandlerMockListLogsExpectation) Then(err error) *DeviceServiceHandlerMock {
-	e.results = &DeviceServiceHandlerMockListLogsResults{err}
+// Then sets up DeviceServiceClient.ListLogs return parameters for the expectation previously defined by the When method
+func (e *DeviceServiceClientMockListLogsExpectation) Then(pp2 *connect.ServerStreamForClient[v1.ListLogsResponse], err error) *DeviceServiceClientMock {
+	e.results = &DeviceServiceClientMockListLogsResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times DeviceServiceHandler.ListLogs should be invoked
-func (mmListLogs *mDeviceServiceHandlerMockListLogs) Times(n uint64) *mDeviceServiceHandlerMockListLogs {
+// Times sets number of times DeviceServiceClient.ListLogs should be invoked
+func (mmListLogs *mDeviceServiceClientMockListLogs) Times(n uint64) *mDeviceServiceClientMockListLogs {
 	if n == 0 {
-		mmListLogs.mock.t.Fatalf("Times of DeviceServiceHandlerMock.ListLogs mock can not be zero")
+		mmListLogs.mock.t.Fatalf("Times of DeviceServiceClientMock.ListLogs mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmListLogs.expectedInvocations, n)
 	mmListLogs.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmListLogs
 }
 
-func (mmListLogs *mDeviceServiceHandlerMockListLogs) invocationsDone() bool {
+func (mmListLogs *mDeviceServiceClientMockListLogs) invocationsDone() bool {
 	if len(mmListLogs.expectations) == 0 && mmListLogs.defaultExpectation == nil && mmListLogs.mock.funcListLogs == nil {
 		return true
 	}
@@ -2490,18 +2465,18 @@ func (mmListLogs *mDeviceServiceHandlerMockListLogs) invocationsDone() bool {
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// ListLogs implements mm_devicev1connect.DeviceServiceHandler
-func (mmListLogs *DeviceServiceHandlerMock) ListLogs(ctx context.Context, pp1 *connect.Request[v1.ListLogsRequest], pp2 *connect.ServerStream[v1.ListLogsResponse]) (err error) {
+// ListLogs implements mm_devicev1connect.DeviceServiceClient
+func (mmListLogs *DeviceServiceClientMock) ListLogs(ctx context.Context, pp1 *connect.Request[v1.ListLogsRequest]) (pp2 *connect.ServerStreamForClient[v1.ListLogsResponse], err error) {
 	mm_atomic.AddUint64(&mmListLogs.beforeListLogsCounter, 1)
 	defer mm_atomic.AddUint64(&mmListLogs.afterListLogsCounter, 1)
 
 	mmListLogs.t.Helper()
 
 	if mmListLogs.inspectFuncListLogs != nil {
-		mmListLogs.inspectFuncListLogs(ctx, pp1, pp2)
+		mmListLogs.inspectFuncListLogs(ctx, pp1)
 	}
 
-	mm_params := DeviceServiceHandlerMockListLogsParams{ctx, pp1, pp2}
+	mm_params := DeviceServiceClientMockListLogsParams{ctx, pp1}
 
 	// Record call args
 	mmListLogs.ListLogsMock.mutex.Lock()
@@ -2511,7 +2486,7 @@ func (mmListLogs *DeviceServiceHandlerMock) ListLogs(ctx context.Context, pp1 *c
 	for _, e := range mmListLogs.ListLogsMock.expectations {
 		if minimock.Equal(*e.params, mm_params) {
 			mm_atomic.AddUint64(&e.Counter, 1)
-			return e.results.err
+			return e.results.pp2, e.results.err
 		}
 	}
 
@@ -2520,59 +2495,54 @@ func (mmListLogs *DeviceServiceHandlerMock) ListLogs(ctx context.Context, pp1 *c
 		mm_want := mmListLogs.ListLogsMock.defaultExpectation.params
 		mm_want_ptrs := mmListLogs.ListLogsMock.defaultExpectation.paramPtrs
 
-		mm_got := DeviceServiceHandlerMockListLogsParams{ctx, pp1, pp2}
+		mm_got := DeviceServiceClientMockListLogsParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmListLogs.t.Errorf("DeviceServiceHandlerMock.ListLogs got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmListLogs.t.Errorf("DeviceServiceClientMock.ListLogs got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmListLogs.ListLogsMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmListLogs.t.Errorf("DeviceServiceHandlerMock.ListLogs got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmListLogs.t.Errorf("DeviceServiceClientMock.ListLogs got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmListLogs.ListLogsMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
-			if mm_want_ptrs.pp2 != nil && !minimock.Equal(*mm_want_ptrs.pp2, mm_got.pp2) {
-				mmListLogs.t.Errorf("DeviceServiceHandlerMock.ListLogs got unexpected parameter pp2, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
-					mmListLogs.ListLogsMock.defaultExpectation.expectationOrigins.originPp2, *mm_want_ptrs.pp2, mm_got.pp2, minimock.Diff(*mm_want_ptrs.pp2, mm_got.pp2))
-			}
-
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmListLogs.t.Errorf("DeviceServiceHandlerMock.ListLogs got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmListLogs.t.Errorf("DeviceServiceClientMock.ListLogs got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmListLogs.ListLogsMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmListLogs.ListLogsMock.defaultExpectation.results
 		if mm_results == nil {
-			mmListLogs.t.Fatal("No results are set for the DeviceServiceHandlerMock.ListLogs")
+			mmListLogs.t.Fatal("No results are set for the DeviceServiceClientMock.ListLogs")
 		}
-		return (*mm_results).err
+		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmListLogs.funcListLogs != nil {
-		return mmListLogs.funcListLogs(ctx, pp1, pp2)
+		return mmListLogs.funcListLogs(ctx, pp1)
 	}
-	mmListLogs.t.Fatalf("Unexpected call to DeviceServiceHandlerMock.ListLogs. %v %v %v", ctx, pp1, pp2)
+	mmListLogs.t.Fatalf("Unexpected call to DeviceServiceClientMock.ListLogs. %v %v", ctx, pp1)
 	return
 }
 
-// ListLogsAfterCounter returns a count of finished DeviceServiceHandlerMock.ListLogs invocations
-func (mmListLogs *DeviceServiceHandlerMock) ListLogsAfterCounter() uint64 {
+// ListLogsAfterCounter returns a count of finished DeviceServiceClientMock.ListLogs invocations
+func (mmListLogs *DeviceServiceClientMock) ListLogsAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmListLogs.afterListLogsCounter)
 }
 
-// ListLogsBeforeCounter returns a count of DeviceServiceHandlerMock.ListLogs invocations
-func (mmListLogs *DeviceServiceHandlerMock) ListLogsBeforeCounter() uint64 {
+// ListLogsBeforeCounter returns a count of DeviceServiceClientMock.ListLogs invocations
+func (mmListLogs *DeviceServiceClientMock) ListLogsBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmListLogs.beforeListLogsCounter)
 }
 
-// Calls returns a list of arguments used in each call to DeviceServiceHandlerMock.ListLogs.
+// Calls returns a list of arguments used in each call to DeviceServiceClientMock.ListLogs.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmListLogs *mDeviceServiceHandlerMockListLogs) Calls() []*DeviceServiceHandlerMockListLogsParams {
+func (mmListLogs *mDeviceServiceClientMockListLogs) Calls() []*DeviceServiceClientMockListLogsParams {
 	mmListLogs.mutex.RLock()
 
-	argCopy := make([]*DeviceServiceHandlerMockListLogsParams, len(mmListLogs.callArgs))
+	argCopy := make([]*DeviceServiceClientMockListLogsParams, len(mmListLogs.callArgs))
 	copy(argCopy, mmListLogs.callArgs)
 
 	mmListLogs.mutex.RUnlock()
@@ -2582,7 +2552,7 @@ func (mmListLogs *mDeviceServiceHandlerMockListLogs) Calls() []*DeviceServiceHan
 
 // MinimockListLogsDone returns true if the count of the ListLogs invocations corresponds
 // the number of defined expectations
-func (m *DeviceServiceHandlerMock) MinimockListLogsDone() bool {
+func (m *DeviceServiceClientMock) MinimockListLogsDone() bool {
 	if m.ListLogsMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -2598,10 +2568,10 @@ func (m *DeviceServiceHandlerMock) MinimockListLogsDone() bool {
 }
 
 // MinimockListLogsInspect logs each unmet expectation
-func (m *DeviceServiceHandlerMock) MinimockListLogsInspect() {
+func (m *DeviceServiceClientMock) MinimockListLogsInspect() {
 	for _, e := range m.ListLogsMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.ListLogs at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.ListLogs at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -2609,66 +2579,66 @@ func (m *DeviceServiceHandlerMock) MinimockListLogsInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.ListLogsMock.defaultExpectation != nil && afterListLogsCounter < 1 {
 		if m.ListLogsMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.ListLogs at\n%s", m.ListLogsMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.ListLogs at\n%s", m.ListLogsMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.ListLogs at\n%s with params: %#v", m.ListLogsMock.defaultExpectation.expectationOrigins.origin, *m.ListLogsMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.ListLogs at\n%s with params: %#v", m.ListLogsMock.defaultExpectation.expectationOrigins.origin, *m.ListLogsMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcListLogs != nil && afterListLogsCounter < 1 {
-		m.t.Errorf("Expected call to DeviceServiceHandlerMock.ListLogs at\n%s", m.funcListLogsOrigin)
+		m.t.Errorf("Expected call to DeviceServiceClientMock.ListLogs at\n%s", m.funcListLogsOrigin)
 	}
 
 	if !m.ListLogsMock.invocationsDone() && afterListLogsCounter > 0 {
-		m.t.Errorf("Expected %d calls to DeviceServiceHandlerMock.ListLogs at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to DeviceServiceClientMock.ListLogs at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.ListLogsMock.expectedInvocations), m.ListLogsMock.expectedInvocationsOrigin, afterListLogsCounter)
 	}
 }
 
-type mDeviceServiceHandlerMockLog struct {
+type mDeviceServiceClientMockLog struct {
 	optional           bool
-	mock               *DeviceServiceHandlerMock
-	defaultExpectation *DeviceServiceHandlerMockLogExpectation
-	expectations       []*DeviceServiceHandlerMockLogExpectation
+	mock               *DeviceServiceClientMock
+	defaultExpectation *DeviceServiceClientMockLogExpectation
+	expectations       []*DeviceServiceClientMockLogExpectation
 
-	callArgs []*DeviceServiceHandlerMockLogParams
+	callArgs []*DeviceServiceClientMockLogParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// DeviceServiceHandlerMockLogExpectation specifies expectation struct of the DeviceServiceHandler.Log
-type DeviceServiceHandlerMockLogExpectation struct {
-	mock               *DeviceServiceHandlerMock
-	params             *DeviceServiceHandlerMockLogParams
-	paramPtrs          *DeviceServiceHandlerMockLogParamPtrs
-	expectationOrigins DeviceServiceHandlerMockLogExpectationOrigins
-	results            *DeviceServiceHandlerMockLogResults
+// DeviceServiceClientMockLogExpectation specifies expectation struct of the DeviceServiceClient.Log
+type DeviceServiceClientMockLogExpectation struct {
+	mock               *DeviceServiceClientMock
+	params             *DeviceServiceClientMockLogParams
+	paramPtrs          *DeviceServiceClientMockLogParamPtrs
+	expectationOrigins DeviceServiceClientMockLogExpectationOrigins
+	results            *DeviceServiceClientMockLogResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// DeviceServiceHandlerMockLogParams contains parameters of the DeviceServiceHandler.Log
-type DeviceServiceHandlerMockLogParams struct {
+// DeviceServiceClientMockLogParams contains parameters of the DeviceServiceClient.Log
+type DeviceServiceClientMockLogParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.LogRequest]
 }
 
-// DeviceServiceHandlerMockLogParamPtrs contains pointers to parameters of the DeviceServiceHandler.Log
-type DeviceServiceHandlerMockLogParamPtrs struct {
+// DeviceServiceClientMockLogParamPtrs contains pointers to parameters of the DeviceServiceClient.Log
+type DeviceServiceClientMockLogParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.LogRequest]
 }
 
-// DeviceServiceHandlerMockLogResults contains results of the DeviceServiceHandler.Log
-type DeviceServiceHandlerMockLogResults struct {
+// DeviceServiceClientMockLogResults contains results of the DeviceServiceClient.Log
+type DeviceServiceClientMockLogResults struct {
 	pp2 *connect.Response[v1.LogResponse]
 	err error
 }
 
-// DeviceServiceHandlerMockLogOrigins contains origins of expectations of the DeviceServiceHandler.Log
-type DeviceServiceHandlerMockLogExpectationOrigins struct {
+// DeviceServiceClientMockLogOrigins contains origins of expectations of the DeviceServiceClient.Log
+type DeviceServiceClientMockLogExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -2679,26 +2649,26 @@ type DeviceServiceHandlerMockLogExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmLog *mDeviceServiceHandlerMockLog) Optional() *mDeviceServiceHandlerMockLog {
+func (mmLog *mDeviceServiceClientMockLog) Optional() *mDeviceServiceClientMockLog {
 	mmLog.optional = true
 	return mmLog
 }
 
-// Expect sets up expected params for DeviceServiceHandler.Log
-func (mmLog *mDeviceServiceHandlerMockLog) Expect(ctx context.Context, pp1 *connect.Request[v1.LogRequest]) *mDeviceServiceHandlerMockLog {
+// Expect sets up expected params for DeviceServiceClient.Log
+func (mmLog *mDeviceServiceClientMockLog) Expect(ctx context.Context, pp1 *connect.Request[v1.LogRequest]) *mDeviceServiceClientMockLog {
 	if mmLog.mock.funcLog != nil {
-		mmLog.mock.t.Fatalf("DeviceServiceHandlerMock.Log mock is already set by Set")
+		mmLog.mock.t.Fatalf("DeviceServiceClientMock.Log mock is already set by Set")
 	}
 
 	if mmLog.defaultExpectation == nil {
-		mmLog.defaultExpectation = &DeviceServiceHandlerMockLogExpectation{}
+		mmLog.defaultExpectation = &DeviceServiceClientMockLogExpectation{}
 	}
 
 	if mmLog.defaultExpectation.paramPtrs != nil {
-		mmLog.mock.t.Fatalf("DeviceServiceHandlerMock.Log mock is already set by ExpectParams functions")
+		mmLog.mock.t.Fatalf("DeviceServiceClientMock.Log mock is already set by ExpectParams functions")
 	}
 
-	mmLog.defaultExpectation.params = &DeviceServiceHandlerMockLogParams{ctx, pp1}
+	mmLog.defaultExpectation.params = &DeviceServiceClientMockLogParams{ctx, pp1}
 	mmLog.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmLog.expectations {
 		if minimock.Equal(e.params, mmLog.defaultExpectation.params) {
@@ -2709,22 +2679,22 @@ func (mmLog *mDeviceServiceHandlerMockLog) Expect(ctx context.Context, pp1 *conn
 	return mmLog
 }
 
-// ExpectCtxParam1 sets up expected param ctx for DeviceServiceHandler.Log
-func (mmLog *mDeviceServiceHandlerMockLog) ExpectCtxParam1(ctx context.Context) *mDeviceServiceHandlerMockLog {
+// ExpectCtxParam1 sets up expected param ctx for DeviceServiceClient.Log
+func (mmLog *mDeviceServiceClientMockLog) ExpectCtxParam1(ctx context.Context) *mDeviceServiceClientMockLog {
 	if mmLog.mock.funcLog != nil {
-		mmLog.mock.t.Fatalf("DeviceServiceHandlerMock.Log mock is already set by Set")
+		mmLog.mock.t.Fatalf("DeviceServiceClientMock.Log mock is already set by Set")
 	}
 
 	if mmLog.defaultExpectation == nil {
-		mmLog.defaultExpectation = &DeviceServiceHandlerMockLogExpectation{}
+		mmLog.defaultExpectation = &DeviceServiceClientMockLogExpectation{}
 	}
 
 	if mmLog.defaultExpectation.params != nil {
-		mmLog.mock.t.Fatalf("DeviceServiceHandlerMock.Log mock is already set by Expect")
+		mmLog.mock.t.Fatalf("DeviceServiceClientMock.Log mock is already set by Expect")
 	}
 
 	if mmLog.defaultExpectation.paramPtrs == nil {
-		mmLog.defaultExpectation.paramPtrs = &DeviceServiceHandlerMockLogParamPtrs{}
+		mmLog.defaultExpectation.paramPtrs = &DeviceServiceClientMockLogParamPtrs{}
 	}
 	mmLog.defaultExpectation.paramPtrs.ctx = &ctx
 	mmLog.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -2732,22 +2702,22 @@ func (mmLog *mDeviceServiceHandlerMockLog) ExpectCtxParam1(ctx context.Context) 
 	return mmLog
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for DeviceServiceHandler.Log
-func (mmLog *mDeviceServiceHandlerMockLog) ExpectPp1Param2(pp1 *connect.Request[v1.LogRequest]) *mDeviceServiceHandlerMockLog {
+// ExpectPp1Param2 sets up expected param pp1 for DeviceServiceClient.Log
+func (mmLog *mDeviceServiceClientMockLog) ExpectPp1Param2(pp1 *connect.Request[v1.LogRequest]) *mDeviceServiceClientMockLog {
 	if mmLog.mock.funcLog != nil {
-		mmLog.mock.t.Fatalf("DeviceServiceHandlerMock.Log mock is already set by Set")
+		mmLog.mock.t.Fatalf("DeviceServiceClientMock.Log mock is already set by Set")
 	}
 
 	if mmLog.defaultExpectation == nil {
-		mmLog.defaultExpectation = &DeviceServiceHandlerMockLogExpectation{}
+		mmLog.defaultExpectation = &DeviceServiceClientMockLogExpectation{}
 	}
 
 	if mmLog.defaultExpectation.params != nil {
-		mmLog.mock.t.Fatalf("DeviceServiceHandlerMock.Log mock is already set by Expect")
+		mmLog.mock.t.Fatalf("DeviceServiceClientMock.Log mock is already set by Expect")
 	}
 
 	if mmLog.defaultExpectation.paramPtrs == nil {
-		mmLog.defaultExpectation.paramPtrs = &DeviceServiceHandlerMockLogParamPtrs{}
+		mmLog.defaultExpectation.paramPtrs = &DeviceServiceClientMockLogParamPtrs{}
 	}
 	mmLog.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmLog.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -2755,10 +2725,10 @@ func (mmLog *mDeviceServiceHandlerMockLog) ExpectPp1Param2(pp1 *connect.Request[
 	return mmLog
 }
 
-// Inspect accepts an inspector function that has same arguments as the DeviceServiceHandler.Log
-func (mmLog *mDeviceServiceHandlerMockLog) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.LogRequest])) *mDeviceServiceHandlerMockLog {
+// Inspect accepts an inspector function that has same arguments as the DeviceServiceClient.Log
+func (mmLog *mDeviceServiceClientMockLog) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.LogRequest])) *mDeviceServiceClientMockLog {
 	if mmLog.mock.inspectFuncLog != nil {
-		mmLog.mock.t.Fatalf("Inspect function is already set for DeviceServiceHandlerMock.Log")
+		mmLog.mock.t.Fatalf("Inspect function is already set for DeviceServiceClientMock.Log")
 	}
 
 	mmLog.mock.inspectFuncLog = f
@@ -2766,28 +2736,28 @@ func (mmLog *mDeviceServiceHandlerMockLog) Inspect(f func(ctx context.Context, p
 	return mmLog
 }
 
-// Return sets up results that will be returned by DeviceServiceHandler.Log
-func (mmLog *mDeviceServiceHandlerMockLog) Return(pp2 *connect.Response[v1.LogResponse], err error) *DeviceServiceHandlerMock {
+// Return sets up results that will be returned by DeviceServiceClient.Log
+func (mmLog *mDeviceServiceClientMockLog) Return(pp2 *connect.Response[v1.LogResponse], err error) *DeviceServiceClientMock {
 	if mmLog.mock.funcLog != nil {
-		mmLog.mock.t.Fatalf("DeviceServiceHandlerMock.Log mock is already set by Set")
+		mmLog.mock.t.Fatalf("DeviceServiceClientMock.Log mock is already set by Set")
 	}
 
 	if mmLog.defaultExpectation == nil {
-		mmLog.defaultExpectation = &DeviceServiceHandlerMockLogExpectation{mock: mmLog.mock}
+		mmLog.defaultExpectation = &DeviceServiceClientMockLogExpectation{mock: mmLog.mock}
 	}
-	mmLog.defaultExpectation.results = &DeviceServiceHandlerMockLogResults{pp2, err}
+	mmLog.defaultExpectation.results = &DeviceServiceClientMockLogResults{pp2, err}
 	mmLog.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmLog.mock
 }
 
-// Set uses given function f to mock the DeviceServiceHandler.Log method
-func (mmLog *mDeviceServiceHandlerMockLog) Set(f func(ctx context.Context, pp1 *connect.Request[v1.LogRequest]) (pp2 *connect.Response[v1.LogResponse], err error)) *DeviceServiceHandlerMock {
+// Set uses given function f to mock the DeviceServiceClient.Log method
+func (mmLog *mDeviceServiceClientMockLog) Set(f func(ctx context.Context, pp1 *connect.Request[v1.LogRequest]) (pp2 *connect.Response[v1.LogResponse], err error)) *DeviceServiceClientMock {
 	if mmLog.defaultExpectation != nil {
-		mmLog.mock.t.Fatalf("Default expectation is already set for the DeviceServiceHandler.Log method")
+		mmLog.mock.t.Fatalf("Default expectation is already set for the DeviceServiceClient.Log method")
 	}
 
 	if len(mmLog.expectations) > 0 {
-		mmLog.mock.t.Fatalf("Some expectations are already set for the DeviceServiceHandler.Log method")
+		mmLog.mock.t.Fatalf("Some expectations are already set for the DeviceServiceClient.Log method")
 	}
 
 	mmLog.mock.funcLog = f
@@ -2795,39 +2765,39 @@ func (mmLog *mDeviceServiceHandlerMockLog) Set(f func(ctx context.Context, pp1 *
 	return mmLog.mock
 }
 
-// When sets expectation for the DeviceServiceHandler.Log which will trigger the result defined by the following
+// When sets expectation for the DeviceServiceClient.Log which will trigger the result defined by the following
 // Then helper
-func (mmLog *mDeviceServiceHandlerMockLog) When(ctx context.Context, pp1 *connect.Request[v1.LogRequest]) *DeviceServiceHandlerMockLogExpectation {
+func (mmLog *mDeviceServiceClientMockLog) When(ctx context.Context, pp1 *connect.Request[v1.LogRequest]) *DeviceServiceClientMockLogExpectation {
 	if mmLog.mock.funcLog != nil {
-		mmLog.mock.t.Fatalf("DeviceServiceHandlerMock.Log mock is already set by Set")
+		mmLog.mock.t.Fatalf("DeviceServiceClientMock.Log mock is already set by Set")
 	}
 
-	expectation := &DeviceServiceHandlerMockLogExpectation{
+	expectation := &DeviceServiceClientMockLogExpectation{
 		mock:               mmLog.mock,
-		params:             &DeviceServiceHandlerMockLogParams{ctx, pp1},
-		expectationOrigins: DeviceServiceHandlerMockLogExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &DeviceServiceClientMockLogParams{ctx, pp1},
+		expectationOrigins: DeviceServiceClientMockLogExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmLog.expectations = append(mmLog.expectations, expectation)
 	return expectation
 }
 
-// Then sets up DeviceServiceHandler.Log return parameters for the expectation previously defined by the When method
-func (e *DeviceServiceHandlerMockLogExpectation) Then(pp2 *connect.Response[v1.LogResponse], err error) *DeviceServiceHandlerMock {
-	e.results = &DeviceServiceHandlerMockLogResults{pp2, err}
+// Then sets up DeviceServiceClient.Log return parameters for the expectation previously defined by the When method
+func (e *DeviceServiceClientMockLogExpectation) Then(pp2 *connect.Response[v1.LogResponse], err error) *DeviceServiceClientMock {
+	e.results = &DeviceServiceClientMockLogResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times DeviceServiceHandler.Log should be invoked
-func (mmLog *mDeviceServiceHandlerMockLog) Times(n uint64) *mDeviceServiceHandlerMockLog {
+// Times sets number of times DeviceServiceClient.Log should be invoked
+func (mmLog *mDeviceServiceClientMockLog) Times(n uint64) *mDeviceServiceClientMockLog {
 	if n == 0 {
-		mmLog.mock.t.Fatalf("Times of DeviceServiceHandlerMock.Log mock can not be zero")
+		mmLog.mock.t.Fatalf("Times of DeviceServiceClientMock.Log mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmLog.expectedInvocations, n)
 	mmLog.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmLog
 }
 
-func (mmLog *mDeviceServiceHandlerMockLog) invocationsDone() bool {
+func (mmLog *mDeviceServiceClientMockLog) invocationsDone() bool {
 	if len(mmLog.expectations) == 0 && mmLog.defaultExpectation == nil && mmLog.mock.funcLog == nil {
 		return true
 	}
@@ -2838,8 +2808,8 @@ func (mmLog *mDeviceServiceHandlerMockLog) invocationsDone() bool {
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// Log implements mm_devicev1connect.DeviceServiceHandler
-func (mmLog *DeviceServiceHandlerMock) Log(ctx context.Context, pp1 *connect.Request[v1.LogRequest]) (pp2 *connect.Response[v1.LogResponse], err error) {
+// Log implements mm_devicev1connect.DeviceServiceClient
+func (mmLog *DeviceServiceClientMock) Log(ctx context.Context, pp1 *connect.Request[v1.LogRequest]) (pp2 *connect.Response[v1.LogResponse], err error) {
 	mm_atomic.AddUint64(&mmLog.beforeLogCounter, 1)
 	defer mm_atomic.AddUint64(&mmLog.afterLogCounter, 1)
 
@@ -2849,7 +2819,7 @@ func (mmLog *DeviceServiceHandlerMock) Log(ctx context.Context, pp1 *connect.Req
 		mmLog.inspectFuncLog(ctx, pp1)
 	}
 
-	mm_params := DeviceServiceHandlerMockLogParams{ctx, pp1}
+	mm_params := DeviceServiceClientMockLogParams{ctx, pp1}
 
 	// Record call args
 	mmLog.LogMock.mutex.Lock()
@@ -2868,54 +2838,54 @@ func (mmLog *DeviceServiceHandlerMock) Log(ctx context.Context, pp1 *connect.Req
 		mm_want := mmLog.LogMock.defaultExpectation.params
 		mm_want_ptrs := mmLog.LogMock.defaultExpectation.paramPtrs
 
-		mm_got := DeviceServiceHandlerMockLogParams{ctx, pp1}
+		mm_got := DeviceServiceClientMockLogParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmLog.t.Errorf("DeviceServiceHandlerMock.Log got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmLog.t.Errorf("DeviceServiceClientMock.Log got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmLog.LogMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmLog.t.Errorf("DeviceServiceHandlerMock.Log got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmLog.t.Errorf("DeviceServiceClientMock.Log got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmLog.LogMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmLog.t.Errorf("DeviceServiceHandlerMock.Log got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmLog.t.Errorf("DeviceServiceClientMock.Log got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmLog.LogMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmLog.LogMock.defaultExpectation.results
 		if mm_results == nil {
-			mmLog.t.Fatal("No results are set for the DeviceServiceHandlerMock.Log")
+			mmLog.t.Fatal("No results are set for the DeviceServiceClientMock.Log")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmLog.funcLog != nil {
 		return mmLog.funcLog(ctx, pp1)
 	}
-	mmLog.t.Fatalf("Unexpected call to DeviceServiceHandlerMock.Log. %v %v", ctx, pp1)
+	mmLog.t.Fatalf("Unexpected call to DeviceServiceClientMock.Log. %v %v", ctx, pp1)
 	return
 }
 
-// LogAfterCounter returns a count of finished DeviceServiceHandlerMock.Log invocations
-func (mmLog *DeviceServiceHandlerMock) LogAfterCounter() uint64 {
+// LogAfterCounter returns a count of finished DeviceServiceClientMock.Log invocations
+func (mmLog *DeviceServiceClientMock) LogAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmLog.afterLogCounter)
 }
 
-// LogBeforeCounter returns a count of DeviceServiceHandlerMock.Log invocations
-func (mmLog *DeviceServiceHandlerMock) LogBeforeCounter() uint64 {
+// LogBeforeCounter returns a count of DeviceServiceClientMock.Log invocations
+func (mmLog *DeviceServiceClientMock) LogBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmLog.beforeLogCounter)
 }
 
-// Calls returns a list of arguments used in each call to DeviceServiceHandlerMock.Log.
+// Calls returns a list of arguments used in each call to DeviceServiceClientMock.Log.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmLog *mDeviceServiceHandlerMockLog) Calls() []*DeviceServiceHandlerMockLogParams {
+func (mmLog *mDeviceServiceClientMockLog) Calls() []*DeviceServiceClientMockLogParams {
 	mmLog.mutex.RLock()
 
-	argCopy := make([]*DeviceServiceHandlerMockLogParams, len(mmLog.callArgs))
+	argCopy := make([]*DeviceServiceClientMockLogParams, len(mmLog.callArgs))
 	copy(argCopy, mmLog.callArgs)
 
 	mmLog.mutex.RUnlock()
@@ -2925,7 +2895,7 @@ func (mmLog *mDeviceServiceHandlerMockLog) Calls() []*DeviceServiceHandlerMockLo
 
 // MinimockLogDone returns true if the count of the Log invocations corresponds
 // the number of defined expectations
-func (m *DeviceServiceHandlerMock) MinimockLogDone() bool {
+func (m *DeviceServiceClientMock) MinimockLogDone() bool {
 	if m.LogMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -2941,10 +2911,10 @@ func (m *DeviceServiceHandlerMock) MinimockLogDone() bool {
 }
 
 // MinimockLogInspect logs each unmet expectation
-func (m *DeviceServiceHandlerMock) MinimockLogInspect() {
+func (m *DeviceServiceClientMock) MinimockLogInspect() {
 	for _, e := range m.LogMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.Log at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.Log at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -2952,66 +2922,66 @@ func (m *DeviceServiceHandlerMock) MinimockLogInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.LogMock.defaultExpectation != nil && afterLogCounter < 1 {
 		if m.LogMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.Log at\n%s", m.LogMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.Log at\n%s", m.LogMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.Log at\n%s with params: %#v", m.LogMock.defaultExpectation.expectationOrigins.origin, *m.LogMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.Log at\n%s with params: %#v", m.LogMock.defaultExpectation.expectationOrigins.origin, *m.LogMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcLog != nil && afterLogCounter < 1 {
-		m.t.Errorf("Expected call to DeviceServiceHandlerMock.Log at\n%s", m.funcLogOrigin)
+		m.t.Errorf("Expected call to DeviceServiceClientMock.Log at\n%s", m.funcLogOrigin)
 	}
 
 	if !m.LogMock.invocationsDone() && afterLogCounter > 0 {
-		m.t.Errorf("Expected %d calls to DeviceServiceHandlerMock.Log at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to DeviceServiceClientMock.Log at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.LogMock.expectedInvocations), m.LogMock.expectedInvocationsOrigin, afterLogCounter)
 	}
 }
 
-type mDeviceServiceHandlerMockNotify struct {
+type mDeviceServiceClientMockNotify struct {
 	optional           bool
-	mock               *DeviceServiceHandlerMock
-	defaultExpectation *DeviceServiceHandlerMockNotifyExpectation
-	expectations       []*DeviceServiceHandlerMockNotifyExpectation
+	mock               *DeviceServiceClientMock
+	defaultExpectation *DeviceServiceClientMockNotifyExpectation
+	expectations       []*DeviceServiceClientMockNotifyExpectation
 
-	callArgs []*DeviceServiceHandlerMockNotifyParams
+	callArgs []*DeviceServiceClientMockNotifyParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// DeviceServiceHandlerMockNotifyExpectation specifies expectation struct of the DeviceServiceHandler.Notify
-type DeviceServiceHandlerMockNotifyExpectation struct {
-	mock               *DeviceServiceHandlerMock
-	params             *DeviceServiceHandlerMockNotifyParams
-	paramPtrs          *DeviceServiceHandlerMockNotifyParamPtrs
-	expectationOrigins DeviceServiceHandlerMockNotifyExpectationOrigins
-	results            *DeviceServiceHandlerMockNotifyResults
+// DeviceServiceClientMockNotifyExpectation specifies expectation struct of the DeviceServiceClient.Notify
+type DeviceServiceClientMockNotifyExpectation struct {
+	mock               *DeviceServiceClientMock
+	params             *DeviceServiceClientMockNotifyParams
+	paramPtrs          *DeviceServiceClientMockNotifyParamPtrs
+	expectationOrigins DeviceServiceClientMockNotifyExpectationOrigins
+	results            *DeviceServiceClientMockNotifyResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// DeviceServiceHandlerMockNotifyParams contains parameters of the DeviceServiceHandler.Notify
-type DeviceServiceHandlerMockNotifyParams struct {
+// DeviceServiceClientMockNotifyParams contains parameters of the DeviceServiceClient.Notify
+type DeviceServiceClientMockNotifyParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.NotifyRequest]
 }
 
-// DeviceServiceHandlerMockNotifyParamPtrs contains pointers to parameters of the DeviceServiceHandler.Notify
-type DeviceServiceHandlerMockNotifyParamPtrs struct {
+// DeviceServiceClientMockNotifyParamPtrs contains pointers to parameters of the DeviceServiceClient.Notify
+type DeviceServiceClientMockNotifyParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.NotifyRequest]
 }
 
-// DeviceServiceHandlerMockNotifyResults contains results of the DeviceServiceHandler.Notify
-type DeviceServiceHandlerMockNotifyResults struct {
+// DeviceServiceClientMockNotifyResults contains results of the DeviceServiceClient.Notify
+type DeviceServiceClientMockNotifyResults struct {
 	pp2 *connect.Response[v1.NotifyResponse]
 	err error
 }
 
-// DeviceServiceHandlerMockNotifyOrigins contains origins of expectations of the DeviceServiceHandler.Notify
-type DeviceServiceHandlerMockNotifyExpectationOrigins struct {
+// DeviceServiceClientMockNotifyOrigins contains origins of expectations of the DeviceServiceClient.Notify
+type DeviceServiceClientMockNotifyExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -3022,26 +2992,26 @@ type DeviceServiceHandlerMockNotifyExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmNotify *mDeviceServiceHandlerMockNotify) Optional() *mDeviceServiceHandlerMockNotify {
+func (mmNotify *mDeviceServiceClientMockNotify) Optional() *mDeviceServiceClientMockNotify {
 	mmNotify.optional = true
 	return mmNotify
 }
 
-// Expect sets up expected params for DeviceServiceHandler.Notify
-func (mmNotify *mDeviceServiceHandlerMockNotify) Expect(ctx context.Context, pp1 *connect.Request[v1.NotifyRequest]) *mDeviceServiceHandlerMockNotify {
+// Expect sets up expected params for DeviceServiceClient.Notify
+func (mmNotify *mDeviceServiceClientMockNotify) Expect(ctx context.Context, pp1 *connect.Request[v1.NotifyRequest]) *mDeviceServiceClientMockNotify {
 	if mmNotify.mock.funcNotify != nil {
-		mmNotify.mock.t.Fatalf("DeviceServiceHandlerMock.Notify mock is already set by Set")
+		mmNotify.mock.t.Fatalf("DeviceServiceClientMock.Notify mock is already set by Set")
 	}
 
 	if mmNotify.defaultExpectation == nil {
-		mmNotify.defaultExpectation = &DeviceServiceHandlerMockNotifyExpectation{}
+		mmNotify.defaultExpectation = &DeviceServiceClientMockNotifyExpectation{}
 	}
 
 	if mmNotify.defaultExpectation.paramPtrs != nil {
-		mmNotify.mock.t.Fatalf("DeviceServiceHandlerMock.Notify mock is already set by ExpectParams functions")
+		mmNotify.mock.t.Fatalf("DeviceServiceClientMock.Notify mock is already set by ExpectParams functions")
 	}
 
-	mmNotify.defaultExpectation.params = &DeviceServiceHandlerMockNotifyParams{ctx, pp1}
+	mmNotify.defaultExpectation.params = &DeviceServiceClientMockNotifyParams{ctx, pp1}
 	mmNotify.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmNotify.expectations {
 		if minimock.Equal(e.params, mmNotify.defaultExpectation.params) {
@@ -3052,22 +3022,22 @@ func (mmNotify *mDeviceServiceHandlerMockNotify) Expect(ctx context.Context, pp1
 	return mmNotify
 }
 
-// ExpectCtxParam1 sets up expected param ctx for DeviceServiceHandler.Notify
-func (mmNotify *mDeviceServiceHandlerMockNotify) ExpectCtxParam1(ctx context.Context) *mDeviceServiceHandlerMockNotify {
+// ExpectCtxParam1 sets up expected param ctx for DeviceServiceClient.Notify
+func (mmNotify *mDeviceServiceClientMockNotify) ExpectCtxParam1(ctx context.Context) *mDeviceServiceClientMockNotify {
 	if mmNotify.mock.funcNotify != nil {
-		mmNotify.mock.t.Fatalf("DeviceServiceHandlerMock.Notify mock is already set by Set")
+		mmNotify.mock.t.Fatalf("DeviceServiceClientMock.Notify mock is already set by Set")
 	}
 
 	if mmNotify.defaultExpectation == nil {
-		mmNotify.defaultExpectation = &DeviceServiceHandlerMockNotifyExpectation{}
+		mmNotify.defaultExpectation = &DeviceServiceClientMockNotifyExpectation{}
 	}
 
 	if mmNotify.defaultExpectation.params != nil {
-		mmNotify.mock.t.Fatalf("DeviceServiceHandlerMock.Notify mock is already set by Expect")
+		mmNotify.mock.t.Fatalf("DeviceServiceClientMock.Notify mock is already set by Expect")
 	}
 
 	if mmNotify.defaultExpectation.paramPtrs == nil {
-		mmNotify.defaultExpectation.paramPtrs = &DeviceServiceHandlerMockNotifyParamPtrs{}
+		mmNotify.defaultExpectation.paramPtrs = &DeviceServiceClientMockNotifyParamPtrs{}
 	}
 	mmNotify.defaultExpectation.paramPtrs.ctx = &ctx
 	mmNotify.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -3075,22 +3045,22 @@ func (mmNotify *mDeviceServiceHandlerMockNotify) ExpectCtxParam1(ctx context.Con
 	return mmNotify
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for DeviceServiceHandler.Notify
-func (mmNotify *mDeviceServiceHandlerMockNotify) ExpectPp1Param2(pp1 *connect.Request[v1.NotifyRequest]) *mDeviceServiceHandlerMockNotify {
+// ExpectPp1Param2 sets up expected param pp1 for DeviceServiceClient.Notify
+func (mmNotify *mDeviceServiceClientMockNotify) ExpectPp1Param2(pp1 *connect.Request[v1.NotifyRequest]) *mDeviceServiceClientMockNotify {
 	if mmNotify.mock.funcNotify != nil {
-		mmNotify.mock.t.Fatalf("DeviceServiceHandlerMock.Notify mock is already set by Set")
+		mmNotify.mock.t.Fatalf("DeviceServiceClientMock.Notify mock is already set by Set")
 	}
 
 	if mmNotify.defaultExpectation == nil {
-		mmNotify.defaultExpectation = &DeviceServiceHandlerMockNotifyExpectation{}
+		mmNotify.defaultExpectation = &DeviceServiceClientMockNotifyExpectation{}
 	}
 
 	if mmNotify.defaultExpectation.params != nil {
-		mmNotify.mock.t.Fatalf("DeviceServiceHandlerMock.Notify mock is already set by Expect")
+		mmNotify.mock.t.Fatalf("DeviceServiceClientMock.Notify mock is already set by Expect")
 	}
 
 	if mmNotify.defaultExpectation.paramPtrs == nil {
-		mmNotify.defaultExpectation.paramPtrs = &DeviceServiceHandlerMockNotifyParamPtrs{}
+		mmNotify.defaultExpectation.paramPtrs = &DeviceServiceClientMockNotifyParamPtrs{}
 	}
 	mmNotify.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmNotify.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -3098,10 +3068,10 @@ func (mmNotify *mDeviceServiceHandlerMockNotify) ExpectPp1Param2(pp1 *connect.Re
 	return mmNotify
 }
 
-// Inspect accepts an inspector function that has same arguments as the DeviceServiceHandler.Notify
-func (mmNotify *mDeviceServiceHandlerMockNotify) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.NotifyRequest])) *mDeviceServiceHandlerMockNotify {
+// Inspect accepts an inspector function that has same arguments as the DeviceServiceClient.Notify
+func (mmNotify *mDeviceServiceClientMockNotify) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.NotifyRequest])) *mDeviceServiceClientMockNotify {
 	if mmNotify.mock.inspectFuncNotify != nil {
-		mmNotify.mock.t.Fatalf("Inspect function is already set for DeviceServiceHandlerMock.Notify")
+		mmNotify.mock.t.Fatalf("Inspect function is already set for DeviceServiceClientMock.Notify")
 	}
 
 	mmNotify.mock.inspectFuncNotify = f
@@ -3109,28 +3079,28 @@ func (mmNotify *mDeviceServiceHandlerMockNotify) Inspect(f func(ctx context.Cont
 	return mmNotify
 }
 
-// Return sets up results that will be returned by DeviceServiceHandler.Notify
-func (mmNotify *mDeviceServiceHandlerMockNotify) Return(pp2 *connect.Response[v1.NotifyResponse], err error) *DeviceServiceHandlerMock {
+// Return sets up results that will be returned by DeviceServiceClient.Notify
+func (mmNotify *mDeviceServiceClientMockNotify) Return(pp2 *connect.Response[v1.NotifyResponse], err error) *DeviceServiceClientMock {
 	if mmNotify.mock.funcNotify != nil {
-		mmNotify.mock.t.Fatalf("DeviceServiceHandlerMock.Notify mock is already set by Set")
+		mmNotify.mock.t.Fatalf("DeviceServiceClientMock.Notify mock is already set by Set")
 	}
 
 	if mmNotify.defaultExpectation == nil {
-		mmNotify.defaultExpectation = &DeviceServiceHandlerMockNotifyExpectation{mock: mmNotify.mock}
+		mmNotify.defaultExpectation = &DeviceServiceClientMockNotifyExpectation{mock: mmNotify.mock}
 	}
-	mmNotify.defaultExpectation.results = &DeviceServiceHandlerMockNotifyResults{pp2, err}
+	mmNotify.defaultExpectation.results = &DeviceServiceClientMockNotifyResults{pp2, err}
 	mmNotify.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmNotify.mock
 }
 
-// Set uses given function f to mock the DeviceServiceHandler.Notify method
-func (mmNotify *mDeviceServiceHandlerMockNotify) Set(f func(ctx context.Context, pp1 *connect.Request[v1.NotifyRequest]) (pp2 *connect.Response[v1.NotifyResponse], err error)) *DeviceServiceHandlerMock {
+// Set uses given function f to mock the DeviceServiceClient.Notify method
+func (mmNotify *mDeviceServiceClientMockNotify) Set(f func(ctx context.Context, pp1 *connect.Request[v1.NotifyRequest]) (pp2 *connect.Response[v1.NotifyResponse], err error)) *DeviceServiceClientMock {
 	if mmNotify.defaultExpectation != nil {
-		mmNotify.mock.t.Fatalf("Default expectation is already set for the DeviceServiceHandler.Notify method")
+		mmNotify.mock.t.Fatalf("Default expectation is already set for the DeviceServiceClient.Notify method")
 	}
 
 	if len(mmNotify.expectations) > 0 {
-		mmNotify.mock.t.Fatalf("Some expectations are already set for the DeviceServiceHandler.Notify method")
+		mmNotify.mock.t.Fatalf("Some expectations are already set for the DeviceServiceClient.Notify method")
 	}
 
 	mmNotify.mock.funcNotify = f
@@ -3138,39 +3108,39 @@ func (mmNotify *mDeviceServiceHandlerMockNotify) Set(f func(ctx context.Context,
 	return mmNotify.mock
 }
 
-// When sets expectation for the DeviceServiceHandler.Notify which will trigger the result defined by the following
+// When sets expectation for the DeviceServiceClient.Notify which will trigger the result defined by the following
 // Then helper
-func (mmNotify *mDeviceServiceHandlerMockNotify) When(ctx context.Context, pp1 *connect.Request[v1.NotifyRequest]) *DeviceServiceHandlerMockNotifyExpectation {
+func (mmNotify *mDeviceServiceClientMockNotify) When(ctx context.Context, pp1 *connect.Request[v1.NotifyRequest]) *DeviceServiceClientMockNotifyExpectation {
 	if mmNotify.mock.funcNotify != nil {
-		mmNotify.mock.t.Fatalf("DeviceServiceHandlerMock.Notify mock is already set by Set")
+		mmNotify.mock.t.Fatalf("DeviceServiceClientMock.Notify mock is already set by Set")
 	}
 
-	expectation := &DeviceServiceHandlerMockNotifyExpectation{
+	expectation := &DeviceServiceClientMockNotifyExpectation{
 		mock:               mmNotify.mock,
-		params:             &DeviceServiceHandlerMockNotifyParams{ctx, pp1},
-		expectationOrigins: DeviceServiceHandlerMockNotifyExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &DeviceServiceClientMockNotifyParams{ctx, pp1},
+		expectationOrigins: DeviceServiceClientMockNotifyExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmNotify.expectations = append(mmNotify.expectations, expectation)
 	return expectation
 }
 
-// Then sets up DeviceServiceHandler.Notify return parameters for the expectation previously defined by the When method
-func (e *DeviceServiceHandlerMockNotifyExpectation) Then(pp2 *connect.Response[v1.NotifyResponse], err error) *DeviceServiceHandlerMock {
-	e.results = &DeviceServiceHandlerMockNotifyResults{pp2, err}
+// Then sets up DeviceServiceClient.Notify return parameters for the expectation previously defined by the When method
+func (e *DeviceServiceClientMockNotifyExpectation) Then(pp2 *connect.Response[v1.NotifyResponse], err error) *DeviceServiceClientMock {
+	e.results = &DeviceServiceClientMockNotifyResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times DeviceServiceHandler.Notify should be invoked
-func (mmNotify *mDeviceServiceHandlerMockNotify) Times(n uint64) *mDeviceServiceHandlerMockNotify {
+// Times sets number of times DeviceServiceClient.Notify should be invoked
+func (mmNotify *mDeviceServiceClientMockNotify) Times(n uint64) *mDeviceServiceClientMockNotify {
 	if n == 0 {
-		mmNotify.mock.t.Fatalf("Times of DeviceServiceHandlerMock.Notify mock can not be zero")
+		mmNotify.mock.t.Fatalf("Times of DeviceServiceClientMock.Notify mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmNotify.expectedInvocations, n)
 	mmNotify.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmNotify
 }
 
-func (mmNotify *mDeviceServiceHandlerMockNotify) invocationsDone() bool {
+func (mmNotify *mDeviceServiceClientMockNotify) invocationsDone() bool {
 	if len(mmNotify.expectations) == 0 && mmNotify.defaultExpectation == nil && mmNotify.mock.funcNotify == nil {
 		return true
 	}
@@ -3181,8 +3151,8 @@ func (mmNotify *mDeviceServiceHandlerMockNotify) invocationsDone() bool {
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// Notify implements mm_devicev1connect.DeviceServiceHandler
-func (mmNotify *DeviceServiceHandlerMock) Notify(ctx context.Context, pp1 *connect.Request[v1.NotifyRequest]) (pp2 *connect.Response[v1.NotifyResponse], err error) {
+// Notify implements mm_devicev1connect.DeviceServiceClient
+func (mmNotify *DeviceServiceClientMock) Notify(ctx context.Context, pp1 *connect.Request[v1.NotifyRequest]) (pp2 *connect.Response[v1.NotifyResponse], err error) {
 	mm_atomic.AddUint64(&mmNotify.beforeNotifyCounter, 1)
 	defer mm_atomic.AddUint64(&mmNotify.afterNotifyCounter, 1)
 
@@ -3192,7 +3162,7 @@ func (mmNotify *DeviceServiceHandlerMock) Notify(ctx context.Context, pp1 *conne
 		mmNotify.inspectFuncNotify(ctx, pp1)
 	}
 
-	mm_params := DeviceServiceHandlerMockNotifyParams{ctx, pp1}
+	mm_params := DeviceServiceClientMockNotifyParams{ctx, pp1}
 
 	// Record call args
 	mmNotify.NotifyMock.mutex.Lock()
@@ -3211,54 +3181,54 @@ func (mmNotify *DeviceServiceHandlerMock) Notify(ctx context.Context, pp1 *conne
 		mm_want := mmNotify.NotifyMock.defaultExpectation.params
 		mm_want_ptrs := mmNotify.NotifyMock.defaultExpectation.paramPtrs
 
-		mm_got := DeviceServiceHandlerMockNotifyParams{ctx, pp1}
+		mm_got := DeviceServiceClientMockNotifyParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmNotify.t.Errorf("DeviceServiceHandlerMock.Notify got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmNotify.t.Errorf("DeviceServiceClientMock.Notify got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmNotify.NotifyMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmNotify.t.Errorf("DeviceServiceHandlerMock.Notify got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmNotify.t.Errorf("DeviceServiceClientMock.Notify got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmNotify.NotifyMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmNotify.t.Errorf("DeviceServiceHandlerMock.Notify got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmNotify.t.Errorf("DeviceServiceClientMock.Notify got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmNotify.NotifyMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmNotify.NotifyMock.defaultExpectation.results
 		if mm_results == nil {
-			mmNotify.t.Fatal("No results are set for the DeviceServiceHandlerMock.Notify")
+			mmNotify.t.Fatal("No results are set for the DeviceServiceClientMock.Notify")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmNotify.funcNotify != nil {
 		return mmNotify.funcNotify(ctx, pp1)
 	}
-	mmNotify.t.Fatalf("Unexpected call to DeviceServiceHandlerMock.Notify. %v %v", ctx, pp1)
+	mmNotify.t.Fatalf("Unexpected call to DeviceServiceClientMock.Notify. %v %v", ctx, pp1)
 	return
 }
 
-// NotifyAfterCounter returns a count of finished DeviceServiceHandlerMock.Notify invocations
-func (mmNotify *DeviceServiceHandlerMock) NotifyAfterCounter() uint64 {
+// NotifyAfterCounter returns a count of finished DeviceServiceClientMock.Notify invocations
+func (mmNotify *DeviceServiceClientMock) NotifyAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmNotify.afterNotifyCounter)
 }
 
-// NotifyBeforeCounter returns a count of DeviceServiceHandlerMock.Notify invocations
-func (mmNotify *DeviceServiceHandlerMock) NotifyBeforeCounter() uint64 {
+// NotifyBeforeCounter returns a count of DeviceServiceClientMock.Notify invocations
+func (mmNotify *DeviceServiceClientMock) NotifyBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmNotify.beforeNotifyCounter)
 }
 
-// Calls returns a list of arguments used in each call to DeviceServiceHandlerMock.Notify.
+// Calls returns a list of arguments used in each call to DeviceServiceClientMock.Notify.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmNotify *mDeviceServiceHandlerMockNotify) Calls() []*DeviceServiceHandlerMockNotifyParams {
+func (mmNotify *mDeviceServiceClientMockNotify) Calls() []*DeviceServiceClientMockNotifyParams {
 	mmNotify.mutex.RLock()
 
-	argCopy := make([]*DeviceServiceHandlerMockNotifyParams, len(mmNotify.callArgs))
+	argCopy := make([]*DeviceServiceClientMockNotifyParams, len(mmNotify.callArgs))
 	copy(argCopy, mmNotify.callArgs)
 
 	mmNotify.mutex.RUnlock()
@@ -3268,7 +3238,7 @@ func (mmNotify *mDeviceServiceHandlerMockNotify) Calls() []*DeviceServiceHandler
 
 // MinimockNotifyDone returns true if the count of the Notify invocations corresponds
 // the number of defined expectations
-func (m *DeviceServiceHandlerMock) MinimockNotifyDone() bool {
+func (m *DeviceServiceClientMock) MinimockNotifyDone() bool {
 	if m.NotifyMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -3284,10 +3254,10 @@ func (m *DeviceServiceHandlerMock) MinimockNotifyDone() bool {
 }
 
 // MinimockNotifyInspect logs each unmet expectation
-func (m *DeviceServiceHandlerMock) MinimockNotifyInspect() {
+func (m *DeviceServiceClientMock) MinimockNotifyInspect() {
 	for _, e := range m.NotifyMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.Notify at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.Notify at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -3295,66 +3265,66 @@ func (m *DeviceServiceHandlerMock) MinimockNotifyInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.NotifyMock.defaultExpectation != nil && afterNotifyCounter < 1 {
 		if m.NotifyMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.Notify at\n%s", m.NotifyMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.Notify at\n%s", m.NotifyMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.Notify at\n%s with params: %#v", m.NotifyMock.defaultExpectation.expectationOrigins.origin, *m.NotifyMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.Notify at\n%s with params: %#v", m.NotifyMock.defaultExpectation.expectationOrigins.origin, *m.NotifyMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcNotify != nil && afterNotifyCounter < 1 {
-		m.t.Errorf("Expected call to DeviceServiceHandlerMock.Notify at\n%s", m.funcNotifyOrigin)
+		m.t.Errorf("Expected call to DeviceServiceClientMock.Notify at\n%s", m.funcNotifyOrigin)
 	}
 
 	if !m.NotifyMock.invocationsDone() && afterNotifyCounter > 0 {
-		m.t.Errorf("Expected %d calls to DeviceServiceHandlerMock.Notify at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to DeviceServiceClientMock.Notify at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.NotifyMock.expectedInvocations), m.NotifyMock.expectedInvocationsOrigin, afterNotifyCounter)
 	}
 }
 
-type mDeviceServiceHandlerMockRegisterKey struct {
+type mDeviceServiceClientMockRegisterKey struct {
 	optional           bool
-	mock               *DeviceServiceHandlerMock
-	defaultExpectation *DeviceServiceHandlerMockRegisterKeyExpectation
-	expectations       []*DeviceServiceHandlerMockRegisterKeyExpectation
+	mock               *DeviceServiceClientMock
+	defaultExpectation *DeviceServiceClientMockRegisterKeyExpectation
+	expectations       []*DeviceServiceClientMockRegisterKeyExpectation
 
-	callArgs []*DeviceServiceHandlerMockRegisterKeyParams
+	callArgs []*DeviceServiceClientMockRegisterKeyParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// DeviceServiceHandlerMockRegisterKeyExpectation specifies expectation struct of the DeviceServiceHandler.RegisterKey
-type DeviceServiceHandlerMockRegisterKeyExpectation struct {
-	mock               *DeviceServiceHandlerMock
-	params             *DeviceServiceHandlerMockRegisterKeyParams
-	paramPtrs          *DeviceServiceHandlerMockRegisterKeyParamPtrs
-	expectationOrigins DeviceServiceHandlerMockRegisterKeyExpectationOrigins
-	results            *DeviceServiceHandlerMockRegisterKeyResults
+// DeviceServiceClientMockRegisterKeyExpectation specifies expectation struct of the DeviceServiceClient.RegisterKey
+type DeviceServiceClientMockRegisterKeyExpectation struct {
+	mock               *DeviceServiceClientMock
+	params             *DeviceServiceClientMockRegisterKeyParams
+	paramPtrs          *DeviceServiceClientMockRegisterKeyParamPtrs
+	expectationOrigins DeviceServiceClientMockRegisterKeyExpectationOrigins
+	results            *DeviceServiceClientMockRegisterKeyResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// DeviceServiceHandlerMockRegisterKeyParams contains parameters of the DeviceServiceHandler.RegisterKey
-type DeviceServiceHandlerMockRegisterKeyParams struct {
+// DeviceServiceClientMockRegisterKeyParams contains parameters of the DeviceServiceClient.RegisterKey
+type DeviceServiceClientMockRegisterKeyParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.RegisterKeyRequest]
 }
 
-// DeviceServiceHandlerMockRegisterKeyParamPtrs contains pointers to parameters of the DeviceServiceHandler.RegisterKey
-type DeviceServiceHandlerMockRegisterKeyParamPtrs struct {
+// DeviceServiceClientMockRegisterKeyParamPtrs contains pointers to parameters of the DeviceServiceClient.RegisterKey
+type DeviceServiceClientMockRegisterKeyParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.RegisterKeyRequest]
 }
 
-// DeviceServiceHandlerMockRegisterKeyResults contains results of the DeviceServiceHandler.RegisterKey
-type DeviceServiceHandlerMockRegisterKeyResults struct {
+// DeviceServiceClientMockRegisterKeyResults contains results of the DeviceServiceClient.RegisterKey
+type DeviceServiceClientMockRegisterKeyResults struct {
 	pp2 *connect.Response[v1.RegisterKeyResponse]
 	err error
 }
 
-// DeviceServiceHandlerMockRegisterKeyOrigins contains origins of expectations of the DeviceServiceHandler.RegisterKey
-type DeviceServiceHandlerMockRegisterKeyExpectationOrigins struct {
+// DeviceServiceClientMockRegisterKeyOrigins contains origins of expectations of the DeviceServiceClient.RegisterKey
+type DeviceServiceClientMockRegisterKeyExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -3365,26 +3335,26 @@ type DeviceServiceHandlerMockRegisterKeyExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmRegisterKey *mDeviceServiceHandlerMockRegisterKey) Optional() *mDeviceServiceHandlerMockRegisterKey {
+func (mmRegisterKey *mDeviceServiceClientMockRegisterKey) Optional() *mDeviceServiceClientMockRegisterKey {
 	mmRegisterKey.optional = true
 	return mmRegisterKey
 }
 
-// Expect sets up expected params for DeviceServiceHandler.RegisterKey
-func (mmRegisterKey *mDeviceServiceHandlerMockRegisterKey) Expect(ctx context.Context, pp1 *connect.Request[v1.RegisterKeyRequest]) *mDeviceServiceHandlerMockRegisterKey {
+// Expect sets up expected params for DeviceServiceClient.RegisterKey
+func (mmRegisterKey *mDeviceServiceClientMockRegisterKey) Expect(ctx context.Context, pp1 *connect.Request[v1.RegisterKeyRequest]) *mDeviceServiceClientMockRegisterKey {
 	if mmRegisterKey.mock.funcRegisterKey != nil {
-		mmRegisterKey.mock.t.Fatalf("DeviceServiceHandlerMock.RegisterKey mock is already set by Set")
+		mmRegisterKey.mock.t.Fatalf("DeviceServiceClientMock.RegisterKey mock is already set by Set")
 	}
 
 	if mmRegisterKey.defaultExpectation == nil {
-		mmRegisterKey.defaultExpectation = &DeviceServiceHandlerMockRegisterKeyExpectation{}
+		mmRegisterKey.defaultExpectation = &DeviceServiceClientMockRegisterKeyExpectation{}
 	}
 
 	if mmRegisterKey.defaultExpectation.paramPtrs != nil {
-		mmRegisterKey.mock.t.Fatalf("DeviceServiceHandlerMock.RegisterKey mock is already set by ExpectParams functions")
+		mmRegisterKey.mock.t.Fatalf("DeviceServiceClientMock.RegisterKey mock is already set by ExpectParams functions")
 	}
 
-	mmRegisterKey.defaultExpectation.params = &DeviceServiceHandlerMockRegisterKeyParams{ctx, pp1}
+	mmRegisterKey.defaultExpectation.params = &DeviceServiceClientMockRegisterKeyParams{ctx, pp1}
 	mmRegisterKey.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmRegisterKey.expectations {
 		if minimock.Equal(e.params, mmRegisterKey.defaultExpectation.params) {
@@ -3395,22 +3365,22 @@ func (mmRegisterKey *mDeviceServiceHandlerMockRegisterKey) Expect(ctx context.Co
 	return mmRegisterKey
 }
 
-// ExpectCtxParam1 sets up expected param ctx for DeviceServiceHandler.RegisterKey
-func (mmRegisterKey *mDeviceServiceHandlerMockRegisterKey) ExpectCtxParam1(ctx context.Context) *mDeviceServiceHandlerMockRegisterKey {
+// ExpectCtxParam1 sets up expected param ctx for DeviceServiceClient.RegisterKey
+func (mmRegisterKey *mDeviceServiceClientMockRegisterKey) ExpectCtxParam1(ctx context.Context) *mDeviceServiceClientMockRegisterKey {
 	if mmRegisterKey.mock.funcRegisterKey != nil {
-		mmRegisterKey.mock.t.Fatalf("DeviceServiceHandlerMock.RegisterKey mock is already set by Set")
+		mmRegisterKey.mock.t.Fatalf("DeviceServiceClientMock.RegisterKey mock is already set by Set")
 	}
 
 	if mmRegisterKey.defaultExpectation == nil {
-		mmRegisterKey.defaultExpectation = &DeviceServiceHandlerMockRegisterKeyExpectation{}
+		mmRegisterKey.defaultExpectation = &DeviceServiceClientMockRegisterKeyExpectation{}
 	}
 
 	if mmRegisterKey.defaultExpectation.params != nil {
-		mmRegisterKey.mock.t.Fatalf("DeviceServiceHandlerMock.RegisterKey mock is already set by Expect")
+		mmRegisterKey.mock.t.Fatalf("DeviceServiceClientMock.RegisterKey mock is already set by Expect")
 	}
 
 	if mmRegisterKey.defaultExpectation.paramPtrs == nil {
-		mmRegisterKey.defaultExpectation.paramPtrs = &DeviceServiceHandlerMockRegisterKeyParamPtrs{}
+		mmRegisterKey.defaultExpectation.paramPtrs = &DeviceServiceClientMockRegisterKeyParamPtrs{}
 	}
 	mmRegisterKey.defaultExpectation.paramPtrs.ctx = &ctx
 	mmRegisterKey.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -3418,22 +3388,22 @@ func (mmRegisterKey *mDeviceServiceHandlerMockRegisterKey) ExpectCtxParam1(ctx c
 	return mmRegisterKey
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for DeviceServiceHandler.RegisterKey
-func (mmRegisterKey *mDeviceServiceHandlerMockRegisterKey) ExpectPp1Param2(pp1 *connect.Request[v1.RegisterKeyRequest]) *mDeviceServiceHandlerMockRegisterKey {
+// ExpectPp1Param2 sets up expected param pp1 for DeviceServiceClient.RegisterKey
+func (mmRegisterKey *mDeviceServiceClientMockRegisterKey) ExpectPp1Param2(pp1 *connect.Request[v1.RegisterKeyRequest]) *mDeviceServiceClientMockRegisterKey {
 	if mmRegisterKey.mock.funcRegisterKey != nil {
-		mmRegisterKey.mock.t.Fatalf("DeviceServiceHandlerMock.RegisterKey mock is already set by Set")
+		mmRegisterKey.mock.t.Fatalf("DeviceServiceClientMock.RegisterKey mock is already set by Set")
 	}
 
 	if mmRegisterKey.defaultExpectation == nil {
-		mmRegisterKey.defaultExpectation = &DeviceServiceHandlerMockRegisterKeyExpectation{}
+		mmRegisterKey.defaultExpectation = &DeviceServiceClientMockRegisterKeyExpectation{}
 	}
 
 	if mmRegisterKey.defaultExpectation.params != nil {
-		mmRegisterKey.mock.t.Fatalf("DeviceServiceHandlerMock.RegisterKey mock is already set by Expect")
+		mmRegisterKey.mock.t.Fatalf("DeviceServiceClientMock.RegisterKey mock is already set by Expect")
 	}
 
 	if mmRegisterKey.defaultExpectation.paramPtrs == nil {
-		mmRegisterKey.defaultExpectation.paramPtrs = &DeviceServiceHandlerMockRegisterKeyParamPtrs{}
+		mmRegisterKey.defaultExpectation.paramPtrs = &DeviceServiceClientMockRegisterKeyParamPtrs{}
 	}
 	mmRegisterKey.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmRegisterKey.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -3441,10 +3411,10 @@ func (mmRegisterKey *mDeviceServiceHandlerMockRegisterKey) ExpectPp1Param2(pp1 *
 	return mmRegisterKey
 }
 
-// Inspect accepts an inspector function that has same arguments as the DeviceServiceHandler.RegisterKey
-func (mmRegisterKey *mDeviceServiceHandlerMockRegisterKey) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.RegisterKeyRequest])) *mDeviceServiceHandlerMockRegisterKey {
+// Inspect accepts an inspector function that has same arguments as the DeviceServiceClient.RegisterKey
+func (mmRegisterKey *mDeviceServiceClientMockRegisterKey) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.RegisterKeyRequest])) *mDeviceServiceClientMockRegisterKey {
 	if mmRegisterKey.mock.inspectFuncRegisterKey != nil {
-		mmRegisterKey.mock.t.Fatalf("Inspect function is already set for DeviceServiceHandlerMock.RegisterKey")
+		mmRegisterKey.mock.t.Fatalf("Inspect function is already set for DeviceServiceClientMock.RegisterKey")
 	}
 
 	mmRegisterKey.mock.inspectFuncRegisterKey = f
@@ -3452,28 +3422,28 @@ func (mmRegisterKey *mDeviceServiceHandlerMockRegisterKey) Inspect(f func(ctx co
 	return mmRegisterKey
 }
 
-// Return sets up results that will be returned by DeviceServiceHandler.RegisterKey
-func (mmRegisterKey *mDeviceServiceHandlerMockRegisterKey) Return(pp2 *connect.Response[v1.RegisterKeyResponse], err error) *DeviceServiceHandlerMock {
+// Return sets up results that will be returned by DeviceServiceClient.RegisterKey
+func (mmRegisterKey *mDeviceServiceClientMockRegisterKey) Return(pp2 *connect.Response[v1.RegisterKeyResponse], err error) *DeviceServiceClientMock {
 	if mmRegisterKey.mock.funcRegisterKey != nil {
-		mmRegisterKey.mock.t.Fatalf("DeviceServiceHandlerMock.RegisterKey mock is already set by Set")
+		mmRegisterKey.mock.t.Fatalf("DeviceServiceClientMock.RegisterKey mock is already set by Set")
 	}
 
 	if mmRegisterKey.defaultExpectation == nil {
-		mmRegisterKey.defaultExpectation = &DeviceServiceHandlerMockRegisterKeyExpectation{mock: mmRegisterKey.mock}
+		mmRegisterKey.defaultExpectation = &DeviceServiceClientMockRegisterKeyExpectation{mock: mmRegisterKey.mock}
 	}
-	mmRegisterKey.defaultExpectation.results = &DeviceServiceHandlerMockRegisterKeyResults{pp2, err}
+	mmRegisterKey.defaultExpectation.results = &DeviceServiceClientMockRegisterKeyResults{pp2, err}
 	mmRegisterKey.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmRegisterKey.mock
 }
 
-// Set uses given function f to mock the DeviceServiceHandler.RegisterKey method
-func (mmRegisterKey *mDeviceServiceHandlerMockRegisterKey) Set(f func(ctx context.Context, pp1 *connect.Request[v1.RegisterKeyRequest]) (pp2 *connect.Response[v1.RegisterKeyResponse], err error)) *DeviceServiceHandlerMock {
+// Set uses given function f to mock the DeviceServiceClient.RegisterKey method
+func (mmRegisterKey *mDeviceServiceClientMockRegisterKey) Set(f func(ctx context.Context, pp1 *connect.Request[v1.RegisterKeyRequest]) (pp2 *connect.Response[v1.RegisterKeyResponse], err error)) *DeviceServiceClientMock {
 	if mmRegisterKey.defaultExpectation != nil {
-		mmRegisterKey.mock.t.Fatalf("Default expectation is already set for the DeviceServiceHandler.RegisterKey method")
+		mmRegisterKey.mock.t.Fatalf("Default expectation is already set for the DeviceServiceClient.RegisterKey method")
 	}
 
 	if len(mmRegisterKey.expectations) > 0 {
-		mmRegisterKey.mock.t.Fatalf("Some expectations are already set for the DeviceServiceHandler.RegisterKey method")
+		mmRegisterKey.mock.t.Fatalf("Some expectations are already set for the DeviceServiceClient.RegisterKey method")
 	}
 
 	mmRegisterKey.mock.funcRegisterKey = f
@@ -3481,39 +3451,39 @@ func (mmRegisterKey *mDeviceServiceHandlerMockRegisterKey) Set(f func(ctx contex
 	return mmRegisterKey.mock
 }
 
-// When sets expectation for the DeviceServiceHandler.RegisterKey which will trigger the result defined by the following
+// When sets expectation for the DeviceServiceClient.RegisterKey which will trigger the result defined by the following
 // Then helper
-func (mmRegisterKey *mDeviceServiceHandlerMockRegisterKey) When(ctx context.Context, pp1 *connect.Request[v1.RegisterKeyRequest]) *DeviceServiceHandlerMockRegisterKeyExpectation {
+func (mmRegisterKey *mDeviceServiceClientMockRegisterKey) When(ctx context.Context, pp1 *connect.Request[v1.RegisterKeyRequest]) *DeviceServiceClientMockRegisterKeyExpectation {
 	if mmRegisterKey.mock.funcRegisterKey != nil {
-		mmRegisterKey.mock.t.Fatalf("DeviceServiceHandlerMock.RegisterKey mock is already set by Set")
+		mmRegisterKey.mock.t.Fatalf("DeviceServiceClientMock.RegisterKey mock is already set by Set")
 	}
 
-	expectation := &DeviceServiceHandlerMockRegisterKeyExpectation{
+	expectation := &DeviceServiceClientMockRegisterKeyExpectation{
 		mock:               mmRegisterKey.mock,
-		params:             &DeviceServiceHandlerMockRegisterKeyParams{ctx, pp1},
-		expectationOrigins: DeviceServiceHandlerMockRegisterKeyExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &DeviceServiceClientMockRegisterKeyParams{ctx, pp1},
+		expectationOrigins: DeviceServiceClientMockRegisterKeyExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmRegisterKey.expectations = append(mmRegisterKey.expectations, expectation)
 	return expectation
 }
 
-// Then sets up DeviceServiceHandler.RegisterKey return parameters for the expectation previously defined by the When method
-func (e *DeviceServiceHandlerMockRegisterKeyExpectation) Then(pp2 *connect.Response[v1.RegisterKeyResponse], err error) *DeviceServiceHandlerMock {
-	e.results = &DeviceServiceHandlerMockRegisterKeyResults{pp2, err}
+// Then sets up DeviceServiceClient.RegisterKey return parameters for the expectation previously defined by the When method
+func (e *DeviceServiceClientMockRegisterKeyExpectation) Then(pp2 *connect.Response[v1.RegisterKeyResponse], err error) *DeviceServiceClientMock {
+	e.results = &DeviceServiceClientMockRegisterKeyResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times DeviceServiceHandler.RegisterKey should be invoked
-func (mmRegisterKey *mDeviceServiceHandlerMockRegisterKey) Times(n uint64) *mDeviceServiceHandlerMockRegisterKey {
+// Times sets number of times DeviceServiceClient.RegisterKey should be invoked
+func (mmRegisterKey *mDeviceServiceClientMockRegisterKey) Times(n uint64) *mDeviceServiceClientMockRegisterKey {
 	if n == 0 {
-		mmRegisterKey.mock.t.Fatalf("Times of DeviceServiceHandlerMock.RegisterKey mock can not be zero")
+		mmRegisterKey.mock.t.Fatalf("Times of DeviceServiceClientMock.RegisterKey mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmRegisterKey.expectedInvocations, n)
 	mmRegisterKey.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmRegisterKey
 }
 
-func (mmRegisterKey *mDeviceServiceHandlerMockRegisterKey) invocationsDone() bool {
+func (mmRegisterKey *mDeviceServiceClientMockRegisterKey) invocationsDone() bool {
 	if len(mmRegisterKey.expectations) == 0 && mmRegisterKey.defaultExpectation == nil && mmRegisterKey.mock.funcRegisterKey == nil {
 		return true
 	}
@@ -3524,8 +3494,8 @@ func (mmRegisterKey *mDeviceServiceHandlerMockRegisterKey) invocationsDone() boo
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// RegisterKey implements mm_devicev1connect.DeviceServiceHandler
-func (mmRegisterKey *DeviceServiceHandlerMock) RegisterKey(ctx context.Context, pp1 *connect.Request[v1.RegisterKeyRequest]) (pp2 *connect.Response[v1.RegisterKeyResponse], err error) {
+// RegisterKey implements mm_devicev1connect.DeviceServiceClient
+func (mmRegisterKey *DeviceServiceClientMock) RegisterKey(ctx context.Context, pp1 *connect.Request[v1.RegisterKeyRequest]) (pp2 *connect.Response[v1.RegisterKeyResponse], err error) {
 	mm_atomic.AddUint64(&mmRegisterKey.beforeRegisterKeyCounter, 1)
 	defer mm_atomic.AddUint64(&mmRegisterKey.afterRegisterKeyCounter, 1)
 
@@ -3535,7 +3505,7 @@ func (mmRegisterKey *DeviceServiceHandlerMock) RegisterKey(ctx context.Context, 
 		mmRegisterKey.inspectFuncRegisterKey(ctx, pp1)
 	}
 
-	mm_params := DeviceServiceHandlerMockRegisterKeyParams{ctx, pp1}
+	mm_params := DeviceServiceClientMockRegisterKeyParams{ctx, pp1}
 
 	// Record call args
 	mmRegisterKey.RegisterKeyMock.mutex.Lock()
@@ -3554,54 +3524,54 @@ func (mmRegisterKey *DeviceServiceHandlerMock) RegisterKey(ctx context.Context, 
 		mm_want := mmRegisterKey.RegisterKeyMock.defaultExpectation.params
 		mm_want_ptrs := mmRegisterKey.RegisterKeyMock.defaultExpectation.paramPtrs
 
-		mm_got := DeviceServiceHandlerMockRegisterKeyParams{ctx, pp1}
+		mm_got := DeviceServiceClientMockRegisterKeyParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmRegisterKey.t.Errorf("DeviceServiceHandlerMock.RegisterKey got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmRegisterKey.t.Errorf("DeviceServiceClientMock.RegisterKey got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmRegisterKey.RegisterKeyMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmRegisterKey.t.Errorf("DeviceServiceHandlerMock.RegisterKey got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmRegisterKey.t.Errorf("DeviceServiceClientMock.RegisterKey got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmRegisterKey.RegisterKeyMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmRegisterKey.t.Errorf("DeviceServiceHandlerMock.RegisterKey got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmRegisterKey.t.Errorf("DeviceServiceClientMock.RegisterKey got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmRegisterKey.RegisterKeyMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmRegisterKey.RegisterKeyMock.defaultExpectation.results
 		if mm_results == nil {
-			mmRegisterKey.t.Fatal("No results are set for the DeviceServiceHandlerMock.RegisterKey")
+			mmRegisterKey.t.Fatal("No results are set for the DeviceServiceClientMock.RegisterKey")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmRegisterKey.funcRegisterKey != nil {
 		return mmRegisterKey.funcRegisterKey(ctx, pp1)
 	}
-	mmRegisterKey.t.Fatalf("Unexpected call to DeviceServiceHandlerMock.RegisterKey. %v %v", ctx, pp1)
+	mmRegisterKey.t.Fatalf("Unexpected call to DeviceServiceClientMock.RegisterKey. %v %v", ctx, pp1)
 	return
 }
 
-// RegisterKeyAfterCounter returns a count of finished DeviceServiceHandlerMock.RegisterKey invocations
-func (mmRegisterKey *DeviceServiceHandlerMock) RegisterKeyAfterCounter() uint64 {
+// RegisterKeyAfterCounter returns a count of finished DeviceServiceClientMock.RegisterKey invocations
+func (mmRegisterKey *DeviceServiceClientMock) RegisterKeyAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmRegisterKey.afterRegisterKeyCounter)
 }
 
-// RegisterKeyBeforeCounter returns a count of DeviceServiceHandlerMock.RegisterKey invocations
-func (mmRegisterKey *DeviceServiceHandlerMock) RegisterKeyBeforeCounter() uint64 {
+// RegisterKeyBeforeCounter returns a count of DeviceServiceClientMock.RegisterKey invocations
+func (mmRegisterKey *DeviceServiceClientMock) RegisterKeyBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmRegisterKey.beforeRegisterKeyCounter)
 }
 
-// Calls returns a list of arguments used in each call to DeviceServiceHandlerMock.RegisterKey.
+// Calls returns a list of arguments used in each call to DeviceServiceClientMock.RegisterKey.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmRegisterKey *mDeviceServiceHandlerMockRegisterKey) Calls() []*DeviceServiceHandlerMockRegisterKeyParams {
+func (mmRegisterKey *mDeviceServiceClientMockRegisterKey) Calls() []*DeviceServiceClientMockRegisterKeyParams {
 	mmRegisterKey.mutex.RLock()
 
-	argCopy := make([]*DeviceServiceHandlerMockRegisterKeyParams, len(mmRegisterKey.callArgs))
+	argCopy := make([]*DeviceServiceClientMockRegisterKeyParams, len(mmRegisterKey.callArgs))
 	copy(argCopy, mmRegisterKey.callArgs)
 
 	mmRegisterKey.mutex.RUnlock()
@@ -3611,7 +3581,7 @@ func (mmRegisterKey *mDeviceServiceHandlerMockRegisterKey) Calls() []*DeviceServ
 
 // MinimockRegisterKeyDone returns true if the count of the RegisterKey invocations corresponds
 // the number of defined expectations
-func (m *DeviceServiceHandlerMock) MinimockRegisterKeyDone() bool {
+func (m *DeviceServiceClientMock) MinimockRegisterKeyDone() bool {
 	if m.RegisterKeyMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -3627,10 +3597,10 @@ func (m *DeviceServiceHandlerMock) MinimockRegisterKeyDone() bool {
 }
 
 // MinimockRegisterKeyInspect logs each unmet expectation
-func (m *DeviceServiceHandlerMock) MinimockRegisterKeyInspect() {
+func (m *DeviceServiceClientMock) MinimockRegisterKeyInspect() {
 	for _, e := range m.RegisterKeyMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.RegisterKey at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.RegisterKey at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -3638,66 +3608,66 @@ func (m *DeviceServiceHandlerMock) MinimockRegisterKeyInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.RegisterKeyMock.defaultExpectation != nil && afterRegisterKeyCounter < 1 {
 		if m.RegisterKeyMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.RegisterKey at\n%s", m.RegisterKeyMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.RegisterKey at\n%s", m.RegisterKeyMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.RegisterKey at\n%s with params: %#v", m.RegisterKeyMock.defaultExpectation.expectationOrigins.origin, *m.RegisterKeyMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.RegisterKey at\n%s with params: %#v", m.RegisterKeyMock.defaultExpectation.expectationOrigins.origin, *m.RegisterKeyMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcRegisterKey != nil && afterRegisterKeyCounter < 1 {
-		m.t.Errorf("Expected call to DeviceServiceHandlerMock.RegisterKey at\n%s", m.funcRegisterKeyOrigin)
+		m.t.Errorf("Expected call to DeviceServiceClientMock.RegisterKey at\n%s", m.funcRegisterKeyOrigin)
 	}
 
 	if !m.RegisterKeyMock.invocationsDone() && afterRegisterKeyCounter > 0 {
-		m.t.Errorf("Expected %d calls to DeviceServiceHandlerMock.RegisterKey at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to DeviceServiceClientMock.RegisterKey at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.RegisterKeyMock.expectedInvocations), m.RegisterKeyMock.expectedInvocationsOrigin, afterRegisterKeyCounter)
 	}
 }
 
-type mDeviceServiceHandlerMockRemove struct {
+type mDeviceServiceClientMockRemove struct {
 	optional           bool
-	mock               *DeviceServiceHandlerMock
-	defaultExpectation *DeviceServiceHandlerMockRemoveExpectation
-	expectations       []*DeviceServiceHandlerMockRemoveExpectation
+	mock               *DeviceServiceClientMock
+	defaultExpectation *DeviceServiceClientMockRemoveExpectation
+	expectations       []*DeviceServiceClientMockRemoveExpectation
 
-	callArgs []*DeviceServiceHandlerMockRemoveParams
+	callArgs []*DeviceServiceClientMockRemoveParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// DeviceServiceHandlerMockRemoveExpectation specifies expectation struct of the DeviceServiceHandler.Remove
-type DeviceServiceHandlerMockRemoveExpectation struct {
-	mock               *DeviceServiceHandlerMock
-	params             *DeviceServiceHandlerMockRemoveParams
-	paramPtrs          *DeviceServiceHandlerMockRemoveParamPtrs
-	expectationOrigins DeviceServiceHandlerMockRemoveExpectationOrigins
-	results            *DeviceServiceHandlerMockRemoveResults
+// DeviceServiceClientMockRemoveExpectation specifies expectation struct of the DeviceServiceClient.Remove
+type DeviceServiceClientMockRemoveExpectation struct {
+	mock               *DeviceServiceClientMock
+	params             *DeviceServiceClientMockRemoveParams
+	paramPtrs          *DeviceServiceClientMockRemoveParamPtrs
+	expectationOrigins DeviceServiceClientMockRemoveExpectationOrigins
+	results            *DeviceServiceClientMockRemoveResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// DeviceServiceHandlerMockRemoveParams contains parameters of the DeviceServiceHandler.Remove
-type DeviceServiceHandlerMockRemoveParams struct {
+// DeviceServiceClientMockRemoveParams contains parameters of the DeviceServiceClient.Remove
+type DeviceServiceClientMockRemoveParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.RemoveRequest]
 }
 
-// DeviceServiceHandlerMockRemoveParamPtrs contains pointers to parameters of the DeviceServiceHandler.Remove
-type DeviceServiceHandlerMockRemoveParamPtrs struct {
+// DeviceServiceClientMockRemoveParamPtrs contains pointers to parameters of the DeviceServiceClient.Remove
+type DeviceServiceClientMockRemoveParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.RemoveRequest]
 }
 
-// DeviceServiceHandlerMockRemoveResults contains results of the DeviceServiceHandler.Remove
-type DeviceServiceHandlerMockRemoveResults struct {
+// DeviceServiceClientMockRemoveResults contains results of the DeviceServiceClient.Remove
+type DeviceServiceClientMockRemoveResults struct {
 	pp2 *connect.Response[v1.RemoveResponse]
 	err error
 }
 
-// DeviceServiceHandlerMockRemoveOrigins contains origins of expectations of the DeviceServiceHandler.Remove
-type DeviceServiceHandlerMockRemoveExpectationOrigins struct {
+// DeviceServiceClientMockRemoveOrigins contains origins of expectations of the DeviceServiceClient.Remove
+type DeviceServiceClientMockRemoveExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -3708,26 +3678,26 @@ type DeviceServiceHandlerMockRemoveExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmRemove *mDeviceServiceHandlerMockRemove) Optional() *mDeviceServiceHandlerMockRemove {
+func (mmRemove *mDeviceServiceClientMockRemove) Optional() *mDeviceServiceClientMockRemove {
 	mmRemove.optional = true
 	return mmRemove
 }
 
-// Expect sets up expected params for DeviceServiceHandler.Remove
-func (mmRemove *mDeviceServiceHandlerMockRemove) Expect(ctx context.Context, pp1 *connect.Request[v1.RemoveRequest]) *mDeviceServiceHandlerMockRemove {
+// Expect sets up expected params for DeviceServiceClient.Remove
+func (mmRemove *mDeviceServiceClientMockRemove) Expect(ctx context.Context, pp1 *connect.Request[v1.RemoveRequest]) *mDeviceServiceClientMockRemove {
 	if mmRemove.mock.funcRemove != nil {
-		mmRemove.mock.t.Fatalf("DeviceServiceHandlerMock.Remove mock is already set by Set")
+		mmRemove.mock.t.Fatalf("DeviceServiceClientMock.Remove mock is already set by Set")
 	}
 
 	if mmRemove.defaultExpectation == nil {
-		mmRemove.defaultExpectation = &DeviceServiceHandlerMockRemoveExpectation{}
+		mmRemove.defaultExpectation = &DeviceServiceClientMockRemoveExpectation{}
 	}
 
 	if mmRemove.defaultExpectation.paramPtrs != nil {
-		mmRemove.mock.t.Fatalf("DeviceServiceHandlerMock.Remove mock is already set by ExpectParams functions")
+		mmRemove.mock.t.Fatalf("DeviceServiceClientMock.Remove mock is already set by ExpectParams functions")
 	}
 
-	mmRemove.defaultExpectation.params = &DeviceServiceHandlerMockRemoveParams{ctx, pp1}
+	mmRemove.defaultExpectation.params = &DeviceServiceClientMockRemoveParams{ctx, pp1}
 	mmRemove.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmRemove.expectations {
 		if minimock.Equal(e.params, mmRemove.defaultExpectation.params) {
@@ -3738,22 +3708,22 @@ func (mmRemove *mDeviceServiceHandlerMockRemove) Expect(ctx context.Context, pp1
 	return mmRemove
 }
 
-// ExpectCtxParam1 sets up expected param ctx for DeviceServiceHandler.Remove
-func (mmRemove *mDeviceServiceHandlerMockRemove) ExpectCtxParam1(ctx context.Context) *mDeviceServiceHandlerMockRemove {
+// ExpectCtxParam1 sets up expected param ctx for DeviceServiceClient.Remove
+func (mmRemove *mDeviceServiceClientMockRemove) ExpectCtxParam1(ctx context.Context) *mDeviceServiceClientMockRemove {
 	if mmRemove.mock.funcRemove != nil {
-		mmRemove.mock.t.Fatalf("DeviceServiceHandlerMock.Remove mock is already set by Set")
+		mmRemove.mock.t.Fatalf("DeviceServiceClientMock.Remove mock is already set by Set")
 	}
 
 	if mmRemove.defaultExpectation == nil {
-		mmRemove.defaultExpectation = &DeviceServiceHandlerMockRemoveExpectation{}
+		mmRemove.defaultExpectation = &DeviceServiceClientMockRemoveExpectation{}
 	}
 
 	if mmRemove.defaultExpectation.params != nil {
-		mmRemove.mock.t.Fatalf("DeviceServiceHandlerMock.Remove mock is already set by Expect")
+		mmRemove.mock.t.Fatalf("DeviceServiceClientMock.Remove mock is already set by Expect")
 	}
 
 	if mmRemove.defaultExpectation.paramPtrs == nil {
-		mmRemove.defaultExpectation.paramPtrs = &DeviceServiceHandlerMockRemoveParamPtrs{}
+		mmRemove.defaultExpectation.paramPtrs = &DeviceServiceClientMockRemoveParamPtrs{}
 	}
 	mmRemove.defaultExpectation.paramPtrs.ctx = &ctx
 	mmRemove.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -3761,22 +3731,22 @@ func (mmRemove *mDeviceServiceHandlerMockRemove) ExpectCtxParam1(ctx context.Con
 	return mmRemove
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for DeviceServiceHandler.Remove
-func (mmRemove *mDeviceServiceHandlerMockRemove) ExpectPp1Param2(pp1 *connect.Request[v1.RemoveRequest]) *mDeviceServiceHandlerMockRemove {
+// ExpectPp1Param2 sets up expected param pp1 for DeviceServiceClient.Remove
+func (mmRemove *mDeviceServiceClientMockRemove) ExpectPp1Param2(pp1 *connect.Request[v1.RemoveRequest]) *mDeviceServiceClientMockRemove {
 	if mmRemove.mock.funcRemove != nil {
-		mmRemove.mock.t.Fatalf("DeviceServiceHandlerMock.Remove mock is already set by Set")
+		mmRemove.mock.t.Fatalf("DeviceServiceClientMock.Remove mock is already set by Set")
 	}
 
 	if mmRemove.defaultExpectation == nil {
-		mmRemove.defaultExpectation = &DeviceServiceHandlerMockRemoveExpectation{}
+		mmRemove.defaultExpectation = &DeviceServiceClientMockRemoveExpectation{}
 	}
 
 	if mmRemove.defaultExpectation.params != nil {
-		mmRemove.mock.t.Fatalf("DeviceServiceHandlerMock.Remove mock is already set by Expect")
+		mmRemove.mock.t.Fatalf("DeviceServiceClientMock.Remove mock is already set by Expect")
 	}
 
 	if mmRemove.defaultExpectation.paramPtrs == nil {
-		mmRemove.defaultExpectation.paramPtrs = &DeviceServiceHandlerMockRemoveParamPtrs{}
+		mmRemove.defaultExpectation.paramPtrs = &DeviceServiceClientMockRemoveParamPtrs{}
 	}
 	mmRemove.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmRemove.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -3784,10 +3754,10 @@ func (mmRemove *mDeviceServiceHandlerMockRemove) ExpectPp1Param2(pp1 *connect.Re
 	return mmRemove
 }
 
-// Inspect accepts an inspector function that has same arguments as the DeviceServiceHandler.Remove
-func (mmRemove *mDeviceServiceHandlerMockRemove) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.RemoveRequest])) *mDeviceServiceHandlerMockRemove {
+// Inspect accepts an inspector function that has same arguments as the DeviceServiceClient.Remove
+func (mmRemove *mDeviceServiceClientMockRemove) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.RemoveRequest])) *mDeviceServiceClientMockRemove {
 	if mmRemove.mock.inspectFuncRemove != nil {
-		mmRemove.mock.t.Fatalf("Inspect function is already set for DeviceServiceHandlerMock.Remove")
+		mmRemove.mock.t.Fatalf("Inspect function is already set for DeviceServiceClientMock.Remove")
 	}
 
 	mmRemove.mock.inspectFuncRemove = f
@@ -3795,28 +3765,28 @@ func (mmRemove *mDeviceServiceHandlerMockRemove) Inspect(f func(ctx context.Cont
 	return mmRemove
 }
 
-// Return sets up results that will be returned by DeviceServiceHandler.Remove
-func (mmRemove *mDeviceServiceHandlerMockRemove) Return(pp2 *connect.Response[v1.RemoveResponse], err error) *DeviceServiceHandlerMock {
+// Return sets up results that will be returned by DeviceServiceClient.Remove
+func (mmRemove *mDeviceServiceClientMockRemove) Return(pp2 *connect.Response[v1.RemoveResponse], err error) *DeviceServiceClientMock {
 	if mmRemove.mock.funcRemove != nil {
-		mmRemove.mock.t.Fatalf("DeviceServiceHandlerMock.Remove mock is already set by Set")
+		mmRemove.mock.t.Fatalf("DeviceServiceClientMock.Remove mock is already set by Set")
 	}
 
 	if mmRemove.defaultExpectation == nil {
-		mmRemove.defaultExpectation = &DeviceServiceHandlerMockRemoveExpectation{mock: mmRemove.mock}
+		mmRemove.defaultExpectation = &DeviceServiceClientMockRemoveExpectation{mock: mmRemove.mock}
 	}
-	mmRemove.defaultExpectation.results = &DeviceServiceHandlerMockRemoveResults{pp2, err}
+	mmRemove.defaultExpectation.results = &DeviceServiceClientMockRemoveResults{pp2, err}
 	mmRemove.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmRemove.mock
 }
 
-// Set uses given function f to mock the DeviceServiceHandler.Remove method
-func (mmRemove *mDeviceServiceHandlerMockRemove) Set(f func(ctx context.Context, pp1 *connect.Request[v1.RemoveRequest]) (pp2 *connect.Response[v1.RemoveResponse], err error)) *DeviceServiceHandlerMock {
+// Set uses given function f to mock the DeviceServiceClient.Remove method
+func (mmRemove *mDeviceServiceClientMockRemove) Set(f func(ctx context.Context, pp1 *connect.Request[v1.RemoveRequest]) (pp2 *connect.Response[v1.RemoveResponse], err error)) *DeviceServiceClientMock {
 	if mmRemove.defaultExpectation != nil {
-		mmRemove.mock.t.Fatalf("Default expectation is already set for the DeviceServiceHandler.Remove method")
+		mmRemove.mock.t.Fatalf("Default expectation is already set for the DeviceServiceClient.Remove method")
 	}
 
 	if len(mmRemove.expectations) > 0 {
-		mmRemove.mock.t.Fatalf("Some expectations are already set for the DeviceServiceHandler.Remove method")
+		mmRemove.mock.t.Fatalf("Some expectations are already set for the DeviceServiceClient.Remove method")
 	}
 
 	mmRemove.mock.funcRemove = f
@@ -3824,39 +3794,39 @@ func (mmRemove *mDeviceServiceHandlerMockRemove) Set(f func(ctx context.Context,
 	return mmRemove.mock
 }
 
-// When sets expectation for the DeviceServiceHandler.Remove which will trigger the result defined by the following
+// When sets expectation for the DeviceServiceClient.Remove which will trigger the result defined by the following
 // Then helper
-func (mmRemove *mDeviceServiceHandlerMockRemove) When(ctx context.Context, pp1 *connect.Request[v1.RemoveRequest]) *DeviceServiceHandlerMockRemoveExpectation {
+func (mmRemove *mDeviceServiceClientMockRemove) When(ctx context.Context, pp1 *connect.Request[v1.RemoveRequest]) *DeviceServiceClientMockRemoveExpectation {
 	if mmRemove.mock.funcRemove != nil {
-		mmRemove.mock.t.Fatalf("DeviceServiceHandlerMock.Remove mock is already set by Set")
+		mmRemove.mock.t.Fatalf("DeviceServiceClientMock.Remove mock is already set by Set")
 	}
 
-	expectation := &DeviceServiceHandlerMockRemoveExpectation{
+	expectation := &DeviceServiceClientMockRemoveExpectation{
 		mock:               mmRemove.mock,
-		params:             &DeviceServiceHandlerMockRemoveParams{ctx, pp1},
-		expectationOrigins: DeviceServiceHandlerMockRemoveExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &DeviceServiceClientMockRemoveParams{ctx, pp1},
+		expectationOrigins: DeviceServiceClientMockRemoveExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmRemove.expectations = append(mmRemove.expectations, expectation)
 	return expectation
 }
 
-// Then sets up DeviceServiceHandler.Remove return parameters for the expectation previously defined by the When method
-func (e *DeviceServiceHandlerMockRemoveExpectation) Then(pp2 *connect.Response[v1.RemoveResponse], err error) *DeviceServiceHandlerMock {
-	e.results = &DeviceServiceHandlerMockRemoveResults{pp2, err}
+// Then sets up DeviceServiceClient.Remove return parameters for the expectation previously defined by the When method
+func (e *DeviceServiceClientMockRemoveExpectation) Then(pp2 *connect.Response[v1.RemoveResponse], err error) *DeviceServiceClientMock {
+	e.results = &DeviceServiceClientMockRemoveResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times DeviceServiceHandler.Remove should be invoked
-func (mmRemove *mDeviceServiceHandlerMockRemove) Times(n uint64) *mDeviceServiceHandlerMockRemove {
+// Times sets number of times DeviceServiceClient.Remove should be invoked
+func (mmRemove *mDeviceServiceClientMockRemove) Times(n uint64) *mDeviceServiceClientMockRemove {
 	if n == 0 {
-		mmRemove.mock.t.Fatalf("Times of DeviceServiceHandlerMock.Remove mock can not be zero")
+		mmRemove.mock.t.Fatalf("Times of DeviceServiceClientMock.Remove mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmRemove.expectedInvocations, n)
 	mmRemove.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmRemove
 }
 
-func (mmRemove *mDeviceServiceHandlerMockRemove) invocationsDone() bool {
+func (mmRemove *mDeviceServiceClientMockRemove) invocationsDone() bool {
 	if len(mmRemove.expectations) == 0 && mmRemove.defaultExpectation == nil && mmRemove.mock.funcRemove == nil {
 		return true
 	}
@@ -3867,8 +3837,8 @@ func (mmRemove *mDeviceServiceHandlerMockRemove) invocationsDone() bool {
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// Remove implements mm_devicev1connect.DeviceServiceHandler
-func (mmRemove *DeviceServiceHandlerMock) Remove(ctx context.Context, pp1 *connect.Request[v1.RemoveRequest]) (pp2 *connect.Response[v1.RemoveResponse], err error) {
+// Remove implements mm_devicev1connect.DeviceServiceClient
+func (mmRemove *DeviceServiceClientMock) Remove(ctx context.Context, pp1 *connect.Request[v1.RemoveRequest]) (pp2 *connect.Response[v1.RemoveResponse], err error) {
 	mm_atomic.AddUint64(&mmRemove.beforeRemoveCounter, 1)
 	defer mm_atomic.AddUint64(&mmRemove.afterRemoveCounter, 1)
 
@@ -3878,7 +3848,7 @@ func (mmRemove *DeviceServiceHandlerMock) Remove(ctx context.Context, pp1 *conne
 		mmRemove.inspectFuncRemove(ctx, pp1)
 	}
 
-	mm_params := DeviceServiceHandlerMockRemoveParams{ctx, pp1}
+	mm_params := DeviceServiceClientMockRemoveParams{ctx, pp1}
 
 	// Record call args
 	mmRemove.RemoveMock.mutex.Lock()
@@ -3897,54 +3867,54 @@ func (mmRemove *DeviceServiceHandlerMock) Remove(ctx context.Context, pp1 *conne
 		mm_want := mmRemove.RemoveMock.defaultExpectation.params
 		mm_want_ptrs := mmRemove.RemoveMock.defaultExpectation.paramPtrs
 
-		mm_got := DeviceServiceHandlerMockRemoveParams{ctx, pp1}
+		mm_got := DeviceServiceClientMockRemoveParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmRemove.t.Errorf("DeviceServiceHandlerMock.Remove got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmRemove.t.Errorf("DeviceServiceClientMock.Remove got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmRemove.RemoveMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmRemove.t.Errorf("DeviceServiceHandlerMock.Remove got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmRemove.t.Errorf("DeviceServiceClientMock.Remove got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmRemove.RemoveMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmRemove.t.Errorf("DeviceServiceHandlerMock.Remove got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmRemove.t.Errorf("DeviceServiceClientMock.Remove got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmRemove.RemoveMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmRemove.RemoveMock.defaultExpectation.results
 		if mm_results == nil {
-			mmRemove.t.Fatal("No results are set for the DeviceServiceHandlerMock.Remove")
+			mmRemove.t.Fatal("No results are set for the DeviceServiceClientMock.Remove")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmRemove.funcRemove != nil {
 		return mmRemove.funcRemove(ctx, pp1)
 	}
-	mmRemove.t.Fatalf("Unexpected call to DeviceServiceHandlerMock.Remove. %v %v", ctx, pp1)
+	mmRemove.t.Fatalf("Unexpected call to DeviceServiceClientMock.Remove. %v %v", ctx, pp1)
 	return
 }
 
-// RemoveAfterCounter returns a count of finished DeviceServiceHandlerMock.Remove invocations
-func (mmRemove *DeviceServiceHandlerMock) RemoveAfterCounter() uint64 {
+// RemoveAfterCounter returns a count of finished DeviceServiceClientMock.Remove invocations
+func (mmRemove *DeviceServiceClientMock) RemoveAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmRemove.afterRemoveCounter)
 }
 
-// RemoveBeforeCounter returns a count of DeviceServiceHandlerMock.Remove invocations
-func (mmRemove *DeviceServiceHandlerMock) RemoveBeforeCounter() uint64 {
+// RemoveBeforeCounter returns a count of DeviceServiceClientMock.Remove invocations
+func (mmRemove *DeviceServiceClientMock) RemoveBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmRemove.beforeRemoveCounter)
 }
 
-// Calls returns a list of arguments used in each call to DeviceServiceHandlerMock.Remove.
+// Calls returns a list of arguments used in each call to DeviceServiceClientMock.Remove.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmRemove *mDeviceServiceHandlerMockRemove) Calls() []*DeviceServiceHandlerMockRemoveParams {
+func (mmRemove *mDeviceServiceClientMockRemove) Calls() []*DeviceServiceClientMockRemoveParams {
 	mmRemove.mutex.RLock()
 
-	argCopy := make([]*DeviceServiceHandlerMockRemoveParams, len(mmRemove.callArgs))
+	argCopy := make([]*DeviceServiceClientMockRemoveParams, len(mmRemove.callArgs))
 	copy(argCopy, mmRemove.callArgs)
 
 	mmRemove.mutex.RUnlock()
@@ -3954,7 +3924,7 @@ func (mmRemove *mDeviceServiceHandlerMockRemove) Calls() []*DeviceServiceHandler
 
 // MinimockRemoveDone returns true if the count of the Remove invocations corresponds
 // the number of defined expectations
-func (m *DeviceServiceHandlerMock) MinimockRemoveDone() bool {
+func (m *DeviceServiceClientMock) MinimockRemoveDone() bool {
 	if m.RemoveMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -3970,10 +3940,10 @@ func (m *DeviceServiceHandlerMock) MinimockRemoveDone() bool {
 }
 
 // MinimockRemoveInspect logs each unmet expectation
-func (m *DeviceServiceHandlerMock) MinimockRemoveInspect() {
+func (m *DeviceServiceClientMock) MinimockRemoveInspect() {
 	for _, e := range m.RemoveMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.Remove at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.Remove at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -3981,66 +3951,66 @@ func (m *DeviceServiceHandlerMock) MinimockRemoveInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.RemoveMock.defaultExpectation != nil && afterRemoveCounter < 1 {
 		if m.RemoveMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.Remove at\n%s", m.RemoveMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.Remove at\n%s", m.RemoveMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.Remove at\n%s with params: %#v", m.RemoveMock.defaultExpectation.expectationOrigins.origin, *m.RemoveMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.Remove at\n%s with params: %#v", m.RemoveMock.defaultExpectation.expectationOrigins.origin, *m.RemoveMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcRemove != nil && afterRemoveCounter < 1 {
-		m.t.Errorf("Expected call to DeviceServiceHandlerMock.Remove at\n%s", m.funcRemoveOrigin)
+		m.t.Errorf("Expected call to DeviceServiceClientMock.Remove at\n%s", m.funcRemoveOrigin)
 	}
 
 	if !m.RemoveMock.invocationsDone() && afterRemoveCounter > 0 {
-		m.t.Errorf("Expected %d calls to DeviceServiceHandlerMock.Remove at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to DeviceServiceClientMock.Remove at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.RemoveMock.expectedInvocations), m.RemoveMock.expectedInvocationsOrigin, afterRemoveCounter)
 	}
 }
 
-type mDeviceServiceHandlerMockRemoveKey struct {
+type mDeviceServiceClientMockRemoveKey struct {
 	optional           bool
-	mock               *DeviceServiceHandlerMock
-	defaultExpectation *DeviceServiceHandlerMockRemoveKeyExpectation
-	expectations       []*DeviceServiceHandlerMockRemoveKeyExpectation
+	mock               *DeviceServiceClientMock
+	defaultExpectation *DeviceServiceClientMockRemoveKeyExpectation
+	expectations       []*DeviceServiceClientMockRemoveKeyExpectation
 
-	callArgs []*DeviceServiceHandlerMockRemoveKeyParams
+	callArgs []*DeviceServiceClientMockRemoveKeyParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// DeviceServiceHandlerMockRemoveKeyExpectation specifies expectation struct of the DeviceServiceHandler.RemoveKey
-type DeviceServiceHandlerMockRemoveKeyExpectation struct {
-	mock               *DeviceServiceHandlerMock
-	params             *DeviceServiceHandlerMockRemoveKeyParams
-	paramPtrs          *DeviceServiceHandlerMockRemoveKeyParamPtrs
-	expectationOrigins DeviceServiceHandlerMockRemoveKeyExpectationOrigins
-	results            *DeviceServiceHandlerMockRemoveKeyResults
+// DeviceServiceClientMockRemoveKeyExpectation specifies expectation struct of the DeviceServiceClient.RemoveKey
+type DeviceServiceClientMockRemoveKeyExpectation struct {
+	mock               *DeviceServiceClientMock
+	params             *DeviceServiceClientMockRemoveKeyParams
+	paramPtrs          *DeviceServiceClientMockRemoveKeyParamPtrs
+	expectationOrigins DeviceServiceClientMockRemoveKeyExpectationOrigins
+	results            *DeviceServiceClientMockRemoveKeyResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// DeviceServiceHandlerMockRemoveKeyParams contains parameters of the DeviceServiceHandler.RemoveKey
-type DeviceServiceHandlerMockRemoveKeyParams struct {
+// DeviceServiceClientMockRemoveKeyParams contains parameters of the DeviceServiceClient.RemoveKey
+type DeviceServiceClientMockRemoveKeyParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.RemoveKeyRequest]
 }
 
-// DeviceServiceHandlerMockRemoveKeyParamPtrs contains pointers to parameters of the DeviceServiceHandler.RemoveKey
-type DeviceServiceHandlerMockRemoveKeyParamPtrs struct {
+// DeviceServiceClientMockRemoveKeyParamPtrs contains pointers to parameters of the DeviceServiceClient.RemoveKey
+type DeviceServiceClientMockRemoveKeyParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.RemoveKeyRequest]
 }
 
-// DeviceServiceHandlerMockRemoveKeyResults contains results of the DeviceServiceHandler.RemoveKey
-type DeviceServiceHandlerMockRemoveKeyResults struct {
+// DeviceServiceClientMockRemoveKeyResults contains results of the DeviceServiceClient.RemoveKey
+type DeviceServiceClientMockRemoveKeyResults struct {
 	pp2 *connect.Response[v1.RemoveKeyResponse]
 	err error
 }
 
-// DeviceServiceHandlerMockRemoveKeyOrigins contains origins of expectations of the DeviceServiceHandler.RemoveKey
-type DeviceServiceHandlerMockRemoveKeyExpectationOrigins struct {
+// DeviceServiceClientMockRemoveKeyOrigins contains origins of expectations of the DeviceServiceClient.RemoveKey
+type DeviceServiceClientMockRemoveKeyExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -4051,26 +4021,26 @@ type DeviceServiceHandlerMockRemoveKeyExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmRemoveKey *mDeviceServiceHandlerMockRemoveKey) Optional() *mDeviceServiceHandlerMockRemoveKey {
+func (mmRemoveKey *mDeviceServiceClientMockRemoveKey) Optional() *mDeviceServiceClientMockRemoveKey {
 	mmRemoveKey.optional = true
 	return mmRemoveKey
 }
 
-// Expect sets up expected params for DeviceServiceHandler.RemoveKey
-func (mmRemoveKey *mDeviceServiceHandlerMockRemoveKey) Expect(ctx context.Context, pp1 *connect.Request[v1.RemoveKeyRequest]) *mDeviceServiceHandlerMockRemoveKey {
+// Expect sets up expected params for DeviceServiceClient.RemoveKey
+func (mmRemoveKey *mDeviceServiceClientMockRemoveKey) Expect(ctx context.Context, pp1 *connect.Request[v1.RemoveKeyRequest]) *mDeviceServiceClientMockRemoveKey {
 	if mmRemoveKey.mock.funcRemoveKey != nil {
-		mmRemoveKey.mock.t.Fatalf("DeviceServiceHandlerMock.RemoveKey mock is already set by Set")
+		mmRemoveKey.mock.t.Fatalf("DeviceServiceClientMock.RemoveKey mock is already set by Set")
 	}
 
 	if mmRemoveKey.defaultExpectation == nil {
-		mmRemoveKey.defaultExpectation = &DeviceServiceHandlerMockRemoveKeyExpectation{}
+		mmRemoveKey.defaultExpectation = &DeviceServiceClientMockRemoveKeyExpectation{}
 	}
 
 	if mmRemoveKey.defaultExpectation.paramPtrs != nil {
-		mmRemoveKey.mock.t.Fatalf("DeviceServiceHandlerMock.RemoveKey mock is already set by ExpectParams functions")
+		mmRemoveKey.mock.t.Fatalf("DeviceServiceClientMock.RemoveKey mock is already set by ExpectParams functions")
 	}
 
-	mmRemoveKey.defaultExpectation.params = &DeviceServiceHandlerMockRemoveKeyParams{ctx, pp1}
+	mmRemoveKey.defaultExpectation.params = &DeviceServiceClientMockRemoveKeyParams{ctx, pp1}
 	mmRemoveKey.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmRemoveKey.expectations {
 		if minimock.Equal(e.params, mmRemoveKey.defaultExpectation.params) {
@@ -4081,22 +4051,22 @@ func (mmRemoveKey *mDeviceServiceHandlerMockRemoveKey) Expect(ctx context.Contex
 	return mmRemoveKey
 }
 
-// ExpectCtxParam1 sets up expected param ctx for DeviceServiceHandler.RemoveKey
-func (mmRemoveKey *mDeviceServiceHandlerMockRemoveKey) ExpectCtxParam1(ctx context.Context) *mDeviceServiceHandlerMockRemoveKey {
+// ExpectCtxParam1 sets up expected param ctx for DeviceServiceClient.RemoveKey
+func (mmRemoveKey *mDeviceServiceClientMockRemoveKey) ExpectCtxParam1(ctx context.Context) *mDeviceServiceClientMockRemoveKey {
 	if mmRemoveKey.mock.funcRemoveKey != nil {
-		mmRemoveKey.mock.t.Fatalf("DeviceServiceHandlerMock.RemoveKey mock is already set by Set")
+		mmRemoveKey.mock.t.Fatalf("DeviceServiceClientMock.RemoveKey mock is already set by Set")
 	}
 
 	if mmRemoveKey.defaultExpectation == nil {
-		mmRemoveKey.defaultExpectation = &DeviceServiceHandlerMockRemoveKeyExpectation{}
+		mmRemoveKey.defaultExpectation = &DeviceServiceClientMockRemoveKeyExpectation{}
 	}
 
 	if mmRemoveKey.defaultExpectation.params != nil {
-		mmRemoveKey.mock.t.Fatalf("DeviceServiceHandlerMock.RemoveKey mock is already set by Expect")
+		mmRemoveKey.mock.t.Fatalf("DeviceServiceClientMock.RemoveKey mock is already set by Expect")
 	}
 
 	if mmRemoveKey.defaultExpectation.paramPtrs == nil {
-		mmRemoveKey.defaultExpectation.paramPtrs = &DeviceServiceHandlerMockRemoveKeyParamPtrs{}
+		mmRemoveKey.defaultExpectation.paramPtrs = &DeviceServiceClientMockRemoveKeyParamPtrs{}
 	}
 	mmRemoveKey.defaultExpectation.paramPtrs.ctx = &ctx
 	mmRemoveKey.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -4104,22 +4074,22 @@ func (mmRemoveKey *mDeviceServiceHandlerMockRemoveKey) ExpectCtxParam1(ctx conte
 	return mmRemoveKey
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for DeviceServiceHandler.RemoveKey
-func (mmRemoveKey *mDeviceServiceHandlerMockRemoveKey) ExpectPp1Param2(pp1 *connect.Request[v1.RemoveKeyRequest]) *mDeviceServiceHandlerMockRemoveKey {
+// ExpectPp1Param2 sets up expected param pp1 for DeviceServiceClient.RemoveKey
+func (mmRemoveKey *mDeviceServiceClientMockRemoveKey) ExpectPp1Param2(pp1 *connect.Request[v1.RemoveKeyRequest]) *mDeviceServiceClientMockRemoveKey {
 	if mmRemoveKey.mock.funcRemoveKey != nil {
-		mmRemoveKey.mock.t.Fatalf("DeviceServiceHandlerMock.RemoveKey mock is already set by Set")
+		mmRemoveKey.mock.t.Fatalf("DeviceServiceClientMock.RemoveKey mock is already set by Set")
 	}
 
 	if mmRemoveKey.defaultExpectation == nil {
-		mmRemoveKey.defaultExpectation = &DeviceServiceHandlerMockRemoveKeyExpectation{}
+		mmRemoveKey.defaultExpectation = &DeviceServiceClientMockRemoveKeyExpectation{}
 	}
 
 	if mmRemoveKey.defaultExpectation.params != nil {
-		mmRemoveKey.mock.t.Fatalf("DeviceServiceHandlerMock.RemoveKey mock is already set by Expect")
+		mmRemoveKey.mock.t.Fatalf("DeviceServiceClientMock.RemoveKey mock is already set by Expect")
 	}
 
 	if mmRemoveKey.defaultExpectation.paramPtrs == nil {
-		mmRemoveKey.defaultExpectation.paramPtrs = &DeviceServiceHandlerMockRemoveKeyParamPtrs{}
+		mmRemoveKey.defaultExpectation.paramPtrs = &DeviceServiceClientMockRemoveKeyParamPtrs{}
 	}
 	mmRemoveKey.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmRemoveKey.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -4127,10 +4097,10 @@ func (mmRemoveKey *mDeviceServiceHandlerMockRemoveKey) ExpectPp1Param2(pp1 *conn
 	return mmRemoveKey
 }
 
-// Inspect accepts an inspector function that has same arguments as the DeviceServiceHandler.RemoveKey
-func (mmRemoveKey *mDeviceServiceHandlerMockRemoveKey) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.RemoveKeyRequest])) *mDeviceServiceHandlerMockRemoveKey {
+// Inspect accepts an inspector function that has same arguments as the DeviceServiceClient.RemoveKey
+func (mmRemoveKey *mDeviceServiceClientMockRemoveKey) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.RemoveKeyRequest])) *mDeviceServiceClientMockRemoveKey {
 	if mmRemoveKey.mock.inspectFuncRemoveKey != nil {
-		mmRemoveKey.mock.t.Fatalf("Inspect function is already set for DeviceServiceHandlerMock.RemoveKey")
+		mmRemoveKey.mock.t.Fatalf("Inspect function is already set for DeviceServiceClientMock.RemoveKey")
 	}
 
 	mmRemoveKey.mock.inspectFuncRemoveKey = f
@@ -4138,28 +4108,28 @@ func (mmRemoveKey *mDeviceServiceHandlerMockRemoveKey) Inspect(f func(ctx contex
 	return mmRemoveKey
 }
 
-// Return sets up results that will be returned by DeviceServiceHandler.RemoveKey
-func (mmRemoveKey *mDeviceServiceHandlerMockRemoveKey) Return(pp2 *connect.Response[v1.RemoveKeyResponse], err error) *DeviceServiceHandlerMock {
+// Return sets up results that will be returned by DeviceServiceClient.RemoveKey
+func (mmRemoveKey *mDeviceServiceClientMockRemoveKey) Return(pp2 *connect.Response[v1.RemoveKeyResponse], err error) *DeviceServiceClientMock {
 	if mmRemoveKey.mock.funcRemoveKey != nil {
-		mmRemoveKey.mock.t.Fatalf("DeviceServiceHandlerMock.RemoveKey mock is already set by Set")
+		mmRemoveKey.mock.t.Fatalf("DeviceServiceClientMock.RemoveKey mock is already set by Set")
 	}
 
 	if mmRemoveKey.defaultExpectation == nil {
-		mmRemoveKey.defaultExpectation = &DeviceServiceHandlerMockRemoveKeyExpectation{mock: mmRemoveKey.mock}
+		mmRemoveKey.defaultExpectation = &DeviceServiceClientMockRemoveKeyExpectation{mock: mmRemoveKey.mock}
 	}
-	mmRemoveKey.defaultExpectation.results = &DeviceServiceHandlerMockRemoveKeyResults{pp2, err}
+	mmRemoveKey.defaultExpectation.results = &DeviceServiceClientMockRemoveKeyResults{pp2, err}
 	mmRemoveKey.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmRemoveKey.mock
 }
 
-// Set uses given function f to mock the DeviceServiceHandler.RemoveKey method
-func (mmRemoveKey *mDeviceServiceHandlerMockRemoveKey) Set(f func(ctx context.Context, pp1 *connect.Request[v1.RemoveKeyRequest]) (pp2 *connect.Response[v1.RemoveKeyResponse], err error)) *DeviceServiceHandlerMock {
+// Set uses given function f to mock the DeviceServiceClient.RemoveKey method
+func (mmRemoveKey *mDeviceServiceClientMockRemoveKey) Set(f func(ctx context.Context, pp1 *connect.Request[v1.RemoveKeyRequest]) (pp2 *connect.Response[v1.RemoveKeyResponse], err error)) *DeviceServiceClientMock {
 	if mmRemoveKey.defaultExpectation != nil {
-		mmRemoveKey.mock.t.Fatalf("Default expectation is already set for the DeviceServiceHandler.RemoveKey method")
+		mmRemoveKey.mock.t.Fatalf("Default expectation is already set for the DeviceServiceClient.RemoveKey method")
 	}
 
 	if len(mmRemoveKey.expectations) > 0 {
-		mmRemoveKey.mock.t.Fatalf("Some expectations are already set for the DeviceServiceHandler.RemoveKey method")
+		mmRemoveKey.mock.t.Fatalf("Some expectations are already set for the DeviceServiceClient.RemoveKey method")
 	}
 
 	mmRemoveKey.mock.funcRemoveKey = f
@@ -4167,39 +4137,39 @@ func (mmRemoveKey *mDeviceServiceHandlerMockRemoveKey) Set(f func(ctx context.Co
 	return mmRemoveKey.mock
 }
 
-// When sets expectation for the DeviceServiceHandler.RemoveKey which will trigger the result defined by the following
+// When sets expectation for the DeviceServiceClient.RemoveKey which will trigger the result defined by the following
 // Then helper
-func (mmRemoveKey *mDeviceServiceHandlerMockRemoveKey) When(ctx context.Context, pp1 *connect.Request[v1.RemoveKeyRequest]) *DeviceServiceHandlerMockRemoveKeyExpectation {
+func (mmRemoveKey *mDeviceServiceClientMockRemoveKey) When(ctx context.Context, pp1 *connect.Request[v1.RemoveKeyRequest]) *DeviceServiceClientMockRemoveKeyExpectation {
 	if mmRemoveKey.mock.funcRemoveKey != nil {
-		mmRemoveKey.mock.t.Fatalf("DeviceServiceHandlerMock.RemoveKey mock is already set by Set")
+		mmRemoveKey.mock.t.Fatalf("DeviceServiceClientMock.RemoveKey mock is already set by Set")
 	}
 
-	expectation := &DeviceServiceHandlerMockRemoveKeyExpectation{
+	expectation := &DeviceServiceClientMockRemoveKeyExpectation{
 		mock:               mmRemoveKey.mock,
-		params:             &DeviceServiceHandlerMockRemoveKeyParams{ctx, pp1},
-		expectationOrigins: DeviceServiceHandlerMockRemoveKeyExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &DeviceServiceClientMockRemoveKeyParams{ctx, pp1},
+		expectationOrigins: DeviceServiceClientMockRemoveKeyExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmRemoveKey.expectations = append(mmRemoveKey.expectations, expectation)
 	return expectation
 }
 
-// Then sets up DeviceServiceHandler.RemoveKey return parameters for the expectation previously defined by the When method
-func (e *DeviceServiceHandlerMockRemoveKeyExpectation) Then(pp2 *connect.Response[v1.RemoveKeyResponse], err error) *DeviceServiceHandlerMock {
-	e.results = &DeviceServiceHandlerMockRemoveKeyResults{pp2, err}
+// Then sets up DeviceServiceClient.RemoveKey return parameters for the expectation previously defined by the When method
+func (e *DeviceServiceClientMockRemoveKeyExpectation) Then(pp2 *connect.Response[v1.RemoveKeyResponse], err error) *DeviceServiceClientMock {
+	e.results = &DeviceServiceClientMockRemoveKeyResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times DeviceServiceHandler.RemoveKey should be invoked
-func (mmRemoveKey *mDeviceServiceHandlerMockRemoveKey) Times(n uint64) *mDeviceServiceHandlerMockRemoveKey {
+// Times sets number of times DeviceServiceClient.RemoveKey should be invoked
+func (mmRemoveKey *mDeviceServiceClientMockRemoveKey) Times(n uint64) *mDeviceServiceClientMockRemoveKey {
 	if n == 0 {
-		mmRemoveKey.mock.t.Fatalf("Times of DeviceServiceHandlerMock.RemoveKey mock can not be zero")
+		mmRemoveKey.mock.t.Fatalf("Times of DeviceServiceClientMock.RemoveKey mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmRemoveKey.expectedInvocations, n)
 	mmRemoveKey.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmRemoveKey
 }
 
-func (mmRemoveKey *mDeviceServiceHandlerMockRemoveKey) invocationsDone() bool {
+func (mmRemoveKey *mDeviceServiceClientMockRemoveKey) invocationsDone() bool {
 	if len(mmRemoveKey.expectations) == 0 && mmRemoveKey.defaultExpectation == nil && mmRemoveKey.mock.funcRemoveKey == nil {
 		return true
 	}
@@ -4210,8 +4180,8 @@ func (mmRemoveKey *mDeviceServiceHandlerMockRemoveKey) invocationsDone() bool {
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// RemoveKey implements mm_devicev1connect.DeviceServiceHandler
-func (mmRemoveKey *DeviceServiceHandlerMock) RemoveKey(ctx context.Context, pp1 *connect.Request[v1.RemoveKeyRequest]) (pp2 *connect.Response[v1.RemoveKeyResponse], err error) {
+// RemoveKey implements mm_devicev1connect.DeviceServiceClient
+func (mmRemoveKey *DeviceServiceClientMock) RemoveKey(ctx context.Context, pp1 *connect.Request[v1.RemoveKeyRequest]) (pp2 *connect.Response[v1.RemoveKeyResponse], err error) {
 	mm_atomic.AddUint64(&mmRemoveKey.beforeRemoveKeyCounter, 1)
 	defer mm_atomic.AddUint64(&mmRemoveKey.afterRemoveKeyCounter, 1)
 
@@ -4221,7 +4191,7 @@ func (mmRemoveKey *DeviceServiceHandlerMock) RemoveKey(ctx context.Context, pp1 
 		mmRemoveKey.inspectFuncRemoveKey(ctx, pp1)
 	}
 
-	mm_params := DeviceServiceHandlerMockRemoveKeyParams{ctx, pp1}
+	mm_params := DeviceServiceClientMockRemoveKeyParams{ctx, pp1}
 
 	// Record call args
 	mmRemoveKey.RemoveKeyMock.mutex.Lock()
@@ -4240,54 +4210,54 @@ func (mmRemoveKey *DeviceServiceHandlerMock) RemoveKey(ctx context.Context, pp1 
 		mm_want := mmRemoveKey.RemoveKeyMock.defaultExpectation.params
 		mm_want_ptrs := mmRemoveKey.RemoveKeyMock.defaultExpectation.paramPtrs
 
-		mm_got := DeviceServiceHandlerMockRemoveKeyParams{ctx, pp1}
+		mm_got := DeviceServiceClientMockRemoveKeyParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmRemoveKey.t.Errorf("DeviceServiceHandlerMock.RemoveKey got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmRemoveKey.t.Errorf("DeviceServiceClientMock.RemoveKey got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmRemoveKey.RemoveKeyMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmRemoveKey.t.Errorf("DeviceServiceHandlerMock.RemoveKey got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmRemoveKey.t.Errorf("DeviceServiceClientMock.RemoveKey got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmRemoveKey.RemoveKeyMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmRemoveKey.t.Errorf("DeviceServiceHandlerMock.RemoveKey got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmRemoveKey.t.Errorf("DeviceServiceClientMock.RemoveKey got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmRemoveKey.RemoveKeyMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmRemoveKey.RemoveKeyMock.defaultExpectation.results
 		if mm_results == nil {
-			mmRemoveKey.t.Fatal("No results are set for the DeviceServiceHandlerMock.RemoveKey")
+			mmRemoveKey.t.Fatal("No results are set for the DeviceServiceClientMock.RemoveKey")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmRemoveKey.funcRemoveKey != nil {
 		return mmRemoveKey.funcRemoveKey(ctx, pp1)
 	}
-	mmRemoveKey.t.Fatalf("Unexpected call to DeviceServiceHandlerMock.RemoveKey. %v %v", ctx, pp1)
+	mmRemoveKey.t.Fatalf("Unexpected call to DeviceServiceClientMock.RemoveKey. %v %v", ctx, pp1)
 	return
 }
 
-// RemoveKeyAfterCounter returns a count of finished DeviceServiceHandlerMock.RemoveKey invocations
-func (mmRemoveKey *DeviceServiceHandlerMock) RemoveKeyAfterCounter() uint64 {
+// RemoveKeyAfterCounter returns a count of finished DeviceServiceClientMock.RemoveKey invocations
+func (mmRemoveKey *DeviceServiceClientMock) RemoveKeyAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmRemoveKey.afterRemoveKeyCounter)
 }
 
-// RemoveKeyBeforeCounter returns a count of DeviceServiceHandlerMock.RemoveKey invocations
-func (mmRemoveKey *DeviceServiceHandlerMock) RemoveKeyBeforeCounter() uint64 {
+// RemoveKeyBeforeCounter returns a count of DeviceServiceClientMock.RemoveKey invocations
+func (mmRemoveKey *DeviceServiceClientMock) RemoveKeyBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmRemoveKey.beforeRemoveKeyCounter)
 }
 
-// Calls returns a list of arguments used in each call to DeviceServiceHandlerMock.RemoveKey.
+// Calls returns a list of arguments used in each call to DeviceServiceClientMock.RemoveKey.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmRemoveKey *mDeviceServiceHandlerMockRemoveKey) Calls() []*DeviceServiceHandlerMockRemoveKeyParams {
+func (mmRemoveKey *mDeviceServiceClientMockRemoveKey) Calls() []*DeviceServiceClientMockRemoveKeyParams {
 	mmRemoveKey.mutex.RLock()
 
-	argCopy := make([]*DeviceServiceHandlerMockRemoveKeyParams, len(mmRemoveKey.callArgs))
+	argCopy := make([]*DeviceServiceClientMockRemoveKeyParams, len(mmRemoveKey.callArgs))
 	copy(argCopy, mmRemoveKey.callArgs)
 
 	mmRemoveKey.mutex.RUnlock()
@@ -4297,7 +4267,7 @@ func (mmRemoveKey *mDeviceServiceHandlerMockRemoveKey) Calls() []*DeviceServiceH
 
 // MinimockRemoveKeyDone returns true if the count of the RemoveKey invocations corresponds
 // the number of defined expectations
-func (m *DeviceServiceHandlerMock) MinimockRemoveKeyDone() bool {
+func (m *DeviceServiceClientMock) MinimockRemoveKeyDone() bool {
 	if m.RemoveKeyMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -4313,10 +4283,10 @@ func (m *DeviceServiceHandlerMock) MinimockRemoveKeyDone() bool {
 }
 
 // MinimockRemoveKeyInspect logs each unmet expectation
-func (m *DeviceServiceHandlerMock) MinimockRemoveKeyInspect() {
+func (m *DeviceServiceClientMock) MinimockRemoveKeyInspect() {
 	for _, e := range m.RemoveKeyMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.RemoveKey at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.RemoveKey at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -4324,71 +4294,69 @@ func (m *DeviceServiceHandlerMock) MinimockRemoveKeyInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.RemoveKeyMock.defaultExpectation != nil && afterRemoveKeyCounter < 1 {
 		if m.RemoveKeyMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.RemoveKey at\n%s", m.RemoveKeyMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.RemoveKey at\n%s", m.RemoveKeyMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.RemoveKey at\n%s with params: %#v", m.RemoveKeyMock.defaultExpectation.expectationOrigins.origin, *m.RemoveKeyMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.RemoveKey at\n%s with params: %#v", m.RemoveKeyMock.defaultExpectation.expectationOrigins.origin, *m.RemoveKeyMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcRemoveKey != nil && afterRemoveKeyCounter < 1 {
-		m.t.Errorf("Expected call to DeviceServiceHandlerMock.RemoveKey at\n%s", m.funcRemoveKeyOrigin)
+		m.t.Errorf("Expected call to DeviceServiceClientMock.RemoveKey at\n%s", m.funcRemoveKeyOrigin)
 	}
 
 	if !m.RemoveKeyMock.invocationsDone() && afterRemoveKeyCounter > 0 {
-		m.t.Errorf("Expected %d calls to DeviceServiceHandlerMock.RemoveKey at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to DeviceServiceClientMock.RemoveKey at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.RemoveKeyMock.expectedInvocations), m.RemoveKeyMock.expectedInvocationsOrigin, afterRemoveKeyCounter)
 	}
 }
 
-type mDeviceServiceHandlerMockSearch struct {
+type mDeviceServiceClientMockSearch struct {
 	optional           bool
-	mock               *DeviceServiceHandlerMock
-	defaultExpectation *DeviceServiceHandlerMockSearchExpectation
-	expectations       []*DeviceServiceHandlerMockSearchExpectation
+	mock               *DeviceServiceClientMock
+	defaultExpectation *DeviceServiceClientMockSearchExpectation
+	expectations       []*DeviceServiceClientMockSearchExpectation
 
-	callArgs []*DeviceServiceHandlerMockSearchParams
+	callArgs []*DeviceServiceClientMockSearchParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// DeviceServiceHandlerMockSearchExpectation specifies expectation struct of the DeviceServiceHandler.Search
-type DeviceServiceHandlerMockSearchExpectation struct {
-	mock               *DeviceServiceHandlerMock
-	params             *DeviceServiceHandlerMockSearchParams
-	paramPtrs          *DeviceServiceHandlerMockSearchParamPtrs
-	expectationOrigins DeviceServiceHandlerMockSearchExpectationOrigins
-	results            *DeviceServiceHandlerMockSearchResults
+// DeviceServiceClientMockSearchExpectation specifies expectation struct of the DeviceServiceClient.Search
+type DeviceServiceClientMockSearchExpectation struct {
+	mock               *DeviceServiceClientMock
+	params             *DeviceServiceClientMockSearchParams
+	paramPtrs          *DeviceServiceClientMockSearchParamPtrs
+	expectationOrigins DeviceServiceClientMockSearchExpectationOrigins
+	results            *DeviceServiceClientMockSearchResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// DeviceServiceHandlerMockSearchParams contains parameters of the DeviceServiceHandler.Search
-type DeviceServiceHandlerMockSearchParams struct {
+// DeviceServiceClientMockSearchParams contains parameters of the DeviceServiceClient.Search
+type DeviceServiceClientMockSearchParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.SearchRequest]
-	pp2 *connect.ServerStream[v1.SearchResponse]
 }
 
-// DeviceServiceHandlerMockSearchParamPtrs contains pointers to parameters of the DeviceServiceHandler.Search
-type DeviceServiceHandlerMockSearchParamPtrs struct {
+// DeviceServiceClientMockSearchParamPtrs contains pointers to parameters of the DeviceServiceClient.Search
+type DeviceServiceClientMockSearchParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.SearchRequest]
-	pp2 **connect.ServerStream[v1.SearchResponse]
 }
 
-// DeviceServiceHandlerMockSearchResults contains results of the DeviceServiceHandler.Search
-type DeviceServiceHandlerMockSearchResults struct {
+// DeviceServiceClientMockSearchResults contains results of the DeviceServiceClient.Search
+type DeviceServiceClientMockSearchResults struct {
+	pp2 *connect.ServerStreamForClient[v1.SearchResponse]
 	err error
 }
 
-// DeviceServiceHandlerMockSearchOrigins contains origins of expectations of the DeviceServiceHandler.Search
-type DeviceServiceHandlerMockSearchExpectationOrigins struct {
+// DeviceServiceClientMockSearchOrigins contains origins of expectations of the DeviceServiceClient.Search
+type DeviceServiceClientMockSearchExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
-	originPp2 string
 }
 
 // Marks this method to be optional. The default behavior of any method with Return() is '1 or more', meaning
@@ -4396,26 +4364,26 @@ type DeviceServiceHandlerMockSearchExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmSearch *mDeviceServiceHandlerMockSearch) Optional() *mDeviceServiceHandlerMockSearch {
+func (mmSearch *mDeviceServiceClientMockSearch) Optional() *mDeviceServiceClientMockSearch {
 	mmSearch.optional = true
 	return mmSearch
 }
 
-// Expect sets up expected params for DeviceServiceHandler.Search
-func (mmSearch *mDeviceServiceHandlerMockSearch) Expect(ctx context.Context, pp1 *connect.Request[v1.SearchRequest], pp2 *connect.ServerStream[v1.SearchResponse]) *mDeviceServiceHandlerMockSearch {
+// Expect sets up expected params for DeviceServiceClient.Search
+func (mmSearch *mDeviceServiceClientMockSearch) Expect(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) *mDeviceServiceClientMockSearch {
 	if mmSearch.mock.funcSearch != nil {
-		mmSearch.mock.t.Fatalf("DeviceServiceHandlerMock.Search mock is already set by Set")
+		mmSearch.mock.t.Fatalf("DeviceServiceClientMock.Search mock is already set by Set")
 	}
 
 	if mmSearch.defaultExpectation == nil {
-		mmSearch.defaultExpectation = &DeviceServiceHandlerMockSearchExpectation{}
+		mmSearch.defaultExpectation = &DeviceServiceClientMockSearchExpectation{}
 	}
 
 	if mmSearch.defaultExpectation.paramPtrs != nil {
-		mmSearch.mock.t.Fatalf("DeviceServiceHandlerMock.Search mock is already set by ExpectParams functions")
+		mmSearch.mock.t.Fatalf("DeviceServiceClientMock.Search mock is already set by ExpectParams functions")
 	}
 
-	mmSearch.defaultExpectation.params = &DeviceServiceHandlerMockSearchParams{ctx, pp1, pp2}
+	mmSearch.defaultExpectation.params = &DeviceServiceClientMockSearchParams{ctx, pp1}
 	mmSearch.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmSearch.expectations {
 		if minimock.Equal(e.params, mmSearch.defaultExpectation.params) {
@@ -4426,22 +4394,22 @@ func (mmSearch *mDeviceServiceHandlerMockSearch) Expect(ctx context.Context, pp1
 	return mmSearch
 }
 
-// ExpectCtxParam1 sets up expected param ctx for DeviceServiceHandler.Search
-func (mmSearch *mDeviceServiceHandlerMockSearch) ExpectCtxParam1(ctx context.Context) *mDeviceServiceHandlerMockSearch {
+// ExpectCtxParam1 sets up expected param ctx for DeviceServiceClient.Search
+func (mmSearch *mDeviceServiceClientMockSearch) ExpectCtxParam1(ctx context.Context) *mDeviceServiceClientMockSearch {
 	if mmSearch.mock.funcSearch != nil {
-		mmSearch.mock.t.Fatalf("DeviceServiceHandlerMock.Search mock is already set by Set")
+		mmSearch.mock.t.Fatalf("DeviceServiceClientMock.Search mock is already set by Set")
 	}
 
 	if mmSearch.defaultExpectation == nil {
-		mmSearch.defaultExpectation = &DeviceServiceHandlerMockSearchExpectation{}
+		mmSearch.defaultExpectation = &DeviceServiceClientMockSearchExpectation{}
 	}
 
 	if mmSearch.defaultExpectation.params != nil {
-		mmSearch.mock.t.Fatalf("DeviceServiceHandlerMock.Search mock is already set by Expect")
+		mmSearch.mock.t.Fatalf("DeviceServiceClientMock.Search mock is already set by Expect")
 	}
 
 	if mmSearch.defaultExpectation.paramPtrs == nil {
-		mmSearch.defaultExpectation.paramPtrs = &DeviceServiceHandlerMockSearchParamPtrs{}
+		mmSearch.defaultExpectation.paramPtrs = &DeviceServiceClientMockSearchParamPtrs{}
 	}
 	mmSearch.defaultExpectation.paramPtrs.ctx = &ctx
 	mmSearch.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -4449,22 +4417,22 @@ func (mmSearch *mDeviceServiceHandlerMockSearch) ExpectCtxParam1(ctx context.Con
 	return mmSearch
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for DeviceServiceHandler.Search
-func (mmSearch *mDeviceServiceHandlerMockSearch) ExpectPp1Param2(pp1 *connect.Request[v1.SearchRequest]) *mDeviceServiceHandlerMockSearch {
+// ExpectPp1Param2 sets up expected param pp1 for DeviceServiceClient.Search
+func (mmSearch *mDeviceServiceClientMockSearch) ExpectPp1Param2(pp1 *connect.Request[v1.SearchRequest]) *mDeviceServiceClientMockSearch {
 	if mmSearch.mock.funcSearch != nil {
-		mmSearch.mock.t.Fatalf("DeviceServiceHandlerMock.Search mock is already set by Set")
+		mmSearch.mock.t.Fatalf("DeviceServiceClientMock.Search mock is already set by Set")
 	}
 
 	if mmSearch.defaultExpectation == nil {
-		mmSearch.defaultExpectation = &DeviceServiceHandlerMockSearchExpectation{}
+		mmSearch.defaultExpectation = &DeviceServiceClientMockSearchExpectation{}
 	}
 
 	if mmSearch.defaultExpectation.params != nil {
-		mmSearch.mock.t.Fatalf("DeviceServiceHandlerMock.Search mock is already set by Expect")
+		mmSearch.mock.t.Fatalf("DeviceServiceClientMock.Search mock is already set by Expect")
 	}
 
 	if mmSearch.defaultExpectation.paramPtrs == nil {
-		mmSearch.defaultExpectation.paramPtrs = &DeviceServiceHandlerMockSearchParamPtrs{}
+		mmSearch.defaultExpectation.paramPtrs = &DeviceServiceClientMockSearchParamPtrs{}
 	}
 	mmSearch.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmSearch.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -4472,33 +4440,10 @@ func (mmSearch *mDeviceServiceHandlerMockSearch) ExpectPp1Param2(pp1 *connect.Re
 	return mmSearch
 }
 
-// ExpectPp2Param3 sets up expected param pp2 for DeviceServiceHandler.Search
-func (mmSearch *mDeviceServiceHandlerMockSearch) ExpectPp2Param3(pp2 *connect.ServerStream[v1.SearchResponse]) *mDeviceServiceHandlerMockSearch {
-	if mmSearch.mock.funcSearch != nil {
-		mmSearch.mock.t.Fatalf("DeviceServiceHandlerMock.Search mock is already set by Set")
-	}
-
-	if mmSearch.defaultExpectation == nil {
-		mmSearch.defaultExpectation = &DeviceServiceHandlerMockSearchExpectation{}
-	}
-
-	if mmSearch.defaultExpectation.params != nil {
-		mmSearch.mock.t.Fatalf("DeviceServiceHandlerMock.Search mock is already set by Expect")
-	}
-
-	if mmSearch.defaultExpectation.paramPtrs == nil {
-		mmSearch.defaultExpectation.paramPtrs = &DeviceServiceHandlerMockSearchParamPtrs{}
-	}
-	mmSearch.defaultExpectation.paramPtrs.pp2 = &pp2
-	mmSearch.defaultExpectation.expectationOrigins.originPp2 = minimock.CallerInfo(1)
-
-	return mmSearch
-}
-
-// Inspect accepts an inspector function that has same arguments as the DeviceServiceHandler.Search
-func (mmSearch *mDeviceServiceHandlerMockSearch) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest], pp2 *connect.ServerStream[v1.SearchResponse])) *mDeviceServiceHandlerMockSearch {
+// Inspect accepts an inspector function that has same arguments as the DeviceServiceClient.Search
+func (mmSearch *mDeviceServiceClientMockSearch) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest])) *mDeviceServiceClientMockSearch {
 	if mmSearch.mock.inspectFuncSearch != nil {
-		mmSearch.mock.t.Fatalf("Inspect function is already set for DeviceServiceHandlerMock.Search")
+		mmSearch.mock.t.Fatalf("Inspect function is already set for DeviceServiceClientMock.Search")
 	}
 
 	mmSearch.mock.inspectFuncSearch = f
@@ -4506,28 +4451,28 @@ func (mmSearch *mDeviceServiceHandlerMockSearch) Inspect(f func(ctx context.Cont
 	return mmSearch
 }
 
-// Return sets up results that will be returned by DeviceServiceHandler.Search
-func (mmSearch *mDeviceServiceHandlerMockSearch) Return(err error) *DeviceServiceHandlerMock {
+// Return sets up results that will be returned by DeviceServiceClient.Search
+func (mmSearch *mDeviceServiceClientMockSearch) Return(pp2 *connect.ServerStreamForClient[v1.SearchResponse], err error) *DeviceServiceClientMock {
 	if mmSearch.mock.funcSearch != nil {
-		mmSearch.mock.t.Fatalf("DeviceServiceHandlerMock.Search mock is already set by Set")
+		mmSearch.mock.t.Fatalf("DeviceServiceClientMock.Search mock is already set by Set")
 	}
 
 	if mmSearch.defaultExpectation == nil {
-		mmSearch.defaultExpectation = &DeviceServiceHandlerMockSearchExpectation{mock: mmSearch.mock}
+		mmSearch.defaultExpectation = &DeviceServiceClientMockSearchExpectation{mock: mmSearch.mock}
 	}
-	mmSearch.defaultExpectation.results = &DeviceServiceHandlerMockSearchResults{err}
+	mmSearch.defaultExpectation.results = &DeviceServiceClientMockSearchResults{pp2, err}
 	mmSearch.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmSearch.mock
 }
 
-// Set uses given function f to mock the DeviceServiceHandler.Search method
-func (mmSearch *mDeviceServiceHandlerMockSearch) Set(f func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest], pp2 *connect.ServerStream[v1.SearchResponse]) (err error)) *DeviceServiceHandlerMock {
+// Set uses given function f to mock the DeviceServiceClient.Search method
+func (mmSearch *mDeviceServiceClientMockSearch) Set(f func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) (pp2 *connect.ServerStreamForClient[v1.SearchResponse], err error)) *DeviceServiceClientMock {
 	if mmSearch.defaultExpectation != nil {
-		mmSearch.mock.t.Fatalf("Default expectation is already set for the DeviceServiceHandler.Search method")
+		mmSearch.mock.t.Fatalf("Default expectation is already set for the DeviceServiceClient.Search method")
 	}
 
 	if len(mmSearch.expectations) > 0 {
-		mmSearch.mock.t.Fatalf("Some expectations are already set for the DeviceServiceHandler.Search method")
+		mmSearch.mock.t.Fatalf("Some expectations are already set for the DeviceServiceClient.Search method")
 	}
 
 	mmSearch.mock.funcSearch = f
@@ -4535,39 +4480,39 @@ func (mmSearch *mDeviceServiceHandlerMockSearch) Set(f func(ctx context.Context,
 	return mmSearch.mock
 }
 
-// When sets expectation for the DeviceServiceHandler.Search which will trigger the result defined by the following
+// When sets expectation for the DeviceServiceClient.Search which will trigger the result defined by the following
 // Then helper
-func (mmSearch *mDeviceServiceHandlerMockSearch) When(ctx context.Context, pp1 *connect.Request[v1.SearchRequest], pp2 *connect.ServerStream[v1.SearchResponse]) *DeviceServiceHandlerMockSearchExpectation {
+func (mmSearch *mDeviceServiceClientMockSearch) When(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) *DeviceServiceClientMockSearchExpectation {
 	if mmSearch.mock.funcSearch != nil {
-		mmSearch.mock.t.Fatalf("DeviceServiceHandlerMock.Search mock is already set by Set")
+		mmSearch.mock.t.Fatalf("DeviceServiceClientMock.Search mock is already set by Set")
 	}
 
-	expectation := &DeviceServiceHandlerMockSearchExpectation{
+	expectation := &DeviceServiceClientMockSearchExpectation{
 		mock:               mmSearch.mock,
-		params:             &DeviceServiceHandlerMockSearchParams{ctx, pp1, pp2},
-		expectationOrigins: DeviceServiceHandlerMockSearchExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &DeviceServiceClientMockSearchParams{ctx, pp1},
+		expectationOrigins: DeviceServiceClientMockSearchExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmSearch.expectations = append(mmSearch.expectations, expectation)
 	return expectation
 }
 
-// Then sets up DeviceServiceHandler.Search return parameters for the expectation previously defined by the When method
-func (e *DeviceServiceHandlerMockSearchExpectation) Then(err error) *DeviceServiceHandlerMock {
-	e.results = &DeviceServiceHandlerMockSearchResults{err}
+// Then sets up DeviceServiceClient.Search return parameters for the expectation previously defined by the When method
+func (e *DeviceServiceClientMockSearchExpectation) Then(pp2 *connect.ServerStreamForClient[v1.SearchResponse], err error) *DeviceServiceClientMock {
+	e.results = &DeviceServiceClientMockSearchResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times DeviceServiceHandler.Search should be invoked
-func (mmSearch *mDeviceServiceHandlerMockSearch) Times(n uint64) *mDeviceServiceHandlerMockSearch {
+// Times sets number of times DeviceServiceClient.Search should be invoked
+func (mmSearch *mDeviceServiceClientMockSearch) Times(n uint64) *mDeviceServiceClientMockSearch {
 	if n == 0 {
-		mmSearch.mock.t.Fatalf("Times of DeviceServiceHandlerMock.Search mock can not be zero")
+		mmSearch.mock.t.Fatalf("Times of DeviceServiceClientMock.Search mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmSearch.expectedInvocations, n)
 	mmSearch.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmSearch
 }
 
-func (mmSearch *mDeviceServiceHandlerMockSearch) invocationsDone() bool {
+func (mmSearch *mDeviceServiceClientMockSearch) invocationsDone() bool {
 	if len(mmSearch.expectations) == 0 && mmSearch.defaultExpectation == nil && mmSearch.mock.funcSearch == nil {
 		return true
 	}
@@ -4578,18 +4523,18 @@ func (mmSearch *mDeviceServiceHandlerMockSearch) invocationsDone() bool {
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// Search implements mm_devicev1connect.DeviceServiceHandler
-func (mmSearch *DeviceServiceHandlerMock) Search(ctx context.Context, pp1 *connect.Request[v1.SearchRequest], pp2 *connect.ServerStream[v1.SearchResponse]) (err error) {
+// Search implements mm_devicev1connect.DeviceServiceClient
+func (mmSearch *DeviceServiceClientMock) Search(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) (pp2 *connect.ServerStreamForClient[v1.SearchResponse], err error) {
 	mm_atomic.AddUint64(&mmSearch.beforeSearchCounter, 1)
 	defer mm_atomic.AddUint64(&mmSearch.afterSearchCounter, 1)
 
 	mmSearch.t.Helper()
 
 	if mmSearch.inspectFuncSearch != nil {
-		mmSearch.inspectFuncSearch(ctx, pp1, pp2)
+		mmSearch.inspectFuncSearch(ctx, pp1)
 	}
 
-	mm_params := DeviceServiceHandlerMockSearchParams{ctx, pp1, pp2}
+	mm_params := DeviceServiceClientMockSearchParams{ctx, pp1}
 
 	// Record call args
 	mmSearch.SearchMock.mutex.Lock()
@@ -4599,7 +4544,7 @@ func (mmSearch *DeviceServiceHandlerMock) Search(ctx context.Context, pp1 *conne
 	for _, e := range mmSearch.SearchMock.expectations {
 		if minimock.Equal(*e.params, mm_params) {
 			mm_atomic.AddUint64(&e.Counter, 1)
-			return e.results.err
+			return e.results.pp2, e.results.err
 		}
 	}
 
@@ -4608,59 +4553,54 @@ func (mmSearch *DeviceServiceHandlerMock) Search(ctx context.Context, pp1 *conne
 		mm_want := mmSearch.SearchMock.defaultExpectation.params
 		mm_want_ptrs := mmSearch.SearchMock.defaultExpectation.paramPtrs
 
-		mm_got := DeviceServiceHandlerMockSearchParams{ctx, pp1, pp2}
+		mm_got := DeviceServiceClientMockSearchParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmSearch.t.Errorf("DeviceServiceHandlerMock.Search got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmSearch.t.Errorf("DeviceServiceClientMock.Search got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmSearch.SearchMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmSearch.t.Errorf("DeviceServiceHandlerMock.Search got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmSearch.t.Errorf("DeviceServiceClientMock.Search got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmSearch.SearchMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
-			if mm_want_ptrs.pp2 != nil && !minimock.Equal(*mm_want_ptrs.pp2, mm_got.pp2) {
-				mmSearch.t.Errorf("DeviceServiceHandlerMock.Search got unexpected parameter pp2, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
-					mmSearch.SearchMock.defaultExpectation.expectationOrigins.originPp2, *mm_want_ptrs.pp2, mm_got.pp2, minimock.Diff(*mm_want_ptrs.pp2, mm_got.pp2))
-			}
-
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmSearch.t.Errorf("DeviceServiceHandlerMock.Search got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmSearch.t.Errorf("DeviceServiceClientMock.Search got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmSearch.SearchMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmSearch.SearchMock.defaultExpectation.results
 		if mm_results == nil {
-			mmSearch.t.Fatal("No results are set for the DeviceServiceHandlerMock.Search")
+			mmSearch.t.Fatal("No results are set for the DeviceServiceClientMock.Search")
 		}
-		return (*mm_results).err
+		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmSearch.funcSearch != nil {
-		return mmSearch.funcSearch(ctx, pp1, pp2)
+		return mmSearch.funcSearch(ctx, pp1)
 	}
-	mmSearch.t.Fatalf("Unexpected call to DeviceServiceHandlerMock.Search. %v %v %v", ctx, pp1, pp2)
+	mmSearch.t.Fatalf("Unexpected call to DeviceServiceClientMock.Search. %v %v", ctx, pp1)
 	return
 }
 
-// SearchAfterCounter returns a count of finished DeviceServiceHandlerMock.Search invocations
-func (mmSearch *DeviceServiceHandlerMock) SearchAfterCounter() uint64 {
+// SearchAfterCounter returns a count of finished DeviceServiceClientMock.Search invocations
+func (mmSearch *DeviceServiceClientMock) SearchAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmSearch.afterSearchCounter)
 }
 
-// SearchBeforeCounter returns a count of DeviceServiceHandlerMock.Search invocations
-func (mmSearch *DeviceServiceHandlerMock) SearchBeforeCounter() uint64 {
+// SearchBeforeCounter returns a count of DeviceServiceClientMock.Search invocations
+func (mmSearch *DeviceServiceClientMock) SearchBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmSearch.beforeSearchCounter)
 }
 
-// Calls returns a list of arguments used in each call to DeviceServiceHandlerMock.Search.
+// Calls returns a list of arguments used in each call to DeviceServiceClientMock.Search.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmSearch *mDeviceServiceHandlerMockSearch) Calls() []*DeviceServiceHandlerMockSearchParams {
+func (mmSearch *mDeviceServiceClientMockSearch) Calls() []*DeviceServiceClientMockSearchParams {
 	mmSearch.mutex.RLock()
 
-	argCopy := make([]*DeviceServiceHandlerMockSearchParams, len(mmSearch.callArgs))
+	argCopy := make([]*DeviceServiceClientMockSearchParams, len(mmSearch.callArgs))
 	copy(argCopy, mmSearch.callArgs)
 
 	mmSearch.mutex.RUnlock()
@@ -4670,7 +4610,7 @@ func (mmSearch *mDeviceServiceHandlerMockSearch) Calls() []*DeviceServiceHandler
 
 // MinimockSearchDone returns true if the count of the Search invocations corresponds
 // the number of defined expectations
-func (m *DeviceServiceHandlerMock) MinimockSearchDone() bool {
+func (m *DeviceServiceClientMock) MinimockSearchDone() bool {
 	if m.SearchMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -4686,10 +4626,10 @@ func (m *DeviceServiceHandlerMock) MinimockSearchDone() bool {
 }
 
 // MinimockSearchInspect logs each unmet expectation
-func (m *DeviceServiceHandlerMock) MinimockSearchInspect() {
+func (m *DeviceServiceClientMock) MinimockSearchInspect() {
 	for _, e := range m.SearchMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.Search at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.Search at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -4697,66 +4637,66 @@ func (m *DeviceServiceHandlerMock) MinimockSearchInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.SearchMock.defaultExpectation != nil && afterSearchCounter < 1 {
 		if m.SearchMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.Search at\n%s", m.SearchMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.Search at\n%s", m.SearchMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.Search at\n%s with params: %#v", m.SearchMock.defaultExpectation.expectationOrigins.origin, *m.SearchMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.Search at\n%s with params: %#v", m.SearchMock.defaultExpectation.expectationOrigins.origin, *m.SearchMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcSearch != nil && afterSearchCounter < 1 {
-		m.t.Errorf("Expected call to DeviceServiceHandlerMock.Search at\n%s", m.funcSearchOrigin)
+		m.t.Errorf("Expected call to DeviceServiceClientMock.Search at\n%s", m.funcSearchOrigin)
 	}
 
 	if !m.SearchMock.invocationsDone() && afterSearchCounter > 0 {
-		m.t.Errorf("Expected %d calls to DeviceServiceHandlerMock.Search at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to DeviceServiceClientMock.Search at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.SearchMock.expectedInvocations), m.SearchMock.expectedInvocationsOrigin, afterSearchCounter)
 	}
 }
 
-type mDeviceServiceHandlerMockSearchKey struct {
+type mDeviceServiceClientMockSearchKey struct {
 	optional           bool
-	mock               *DeviceServiceHandlerMock
-	defaultExpectation *DeviceServiceHandlerMockSearchKeyExpectation
-	expectations       []*DeviceServiceHandlerMockSearchKeyExpectation
+	mock               *DeviceServiceClientMock
+	defaultExpectation *DeviceServiceClientMockSearchKeyExpectation
+	expectations       []*DeviceServiceClientMockSearchKeyExpectation
 
-	callArgs []*DeviceServiceHandlerMockSearchKeyParams
+	callArgs []*DeviceServiceClientMockSearchKeyParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// DeviceServiceHandlerMockSearchKeyExpectation specifies expectation struct of the DeviceServiceHandler.SearchKey
-type DeviceServiceHandlerMockSearchKeyExpectation struct {
-	mock               *DeviceServiceHandlerMock
-	params             *DeviceServiceHandlerMockSearchKeyParams
-	paramPtrs          *DeviceServiceHandlerMockSearchKeyParamPtrs
-	expectationOrigins DeviceServiceHandlerMockSearchKeyExpectationOrigins
-	results            *DeviceServiceHandlerMockSearchKeyResults
+// DeviceServiceClientMockSearchKeyExpectation specifies expectation struct of the DeviceServiceClient.SearchKey
+type DeviceServiceClientMockSearchKeyExpectation struct {
+	mock               *DeviceServiceClientMock
+	params             *DeviceServiceClientMockSearchKeyParams
+	paramPtrs          *DeviceServiceClientMockSearchKeyParamPtrs
+	expectationOrigins DeviceServiceClientMockSearchKeyExpectationOrigins
+	results            *DeviceServiceClientMockSearchKeyResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// DeviceServiceHandlerMockSearchKeyParams contains parameters of the DeviceServiceHandler.SearchKey
-type DeviceServiceHandlerMockSearchKeyParams struct {
+// DeviceServiceClientMockSearchKeyParams contains parameters of the DeviceServiceClient.SearchKey
+type DeviceServiceClientMockSearchKeyParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.SearchKeyRequest]
 }
 
-// DeviceServiceHandlerMockSearchKeyParamPtrs contains pointers to parameters of the DeviceServiceHandler.SearchKey
-type DeviceServiceHandlerMockSearchKeyParamPtrs struct {
+// DeviceServiceClientMockSearchKeyParamPtrs contains pointers to parameters of the DeviceServiceClient.SearchKey
+type DeviceServiceClientMockSearchKeyParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.SearchKeyRequest]
 }
 
-// DeviceServiceHandlerMockSearchKeyResults contains results of the DeviceServiceHandler.SearchKey
-type DeviceServiceHandlerMockSearchKeyResults struct {
+// DeviceServiceClientMockSearchKeyResults contains results of the DeviceServiceClient.SearchKey
+type DeviceServiceClientMockSearchKeyResults struct {
 	pp2 *connect.Response[v1.SearchKeyResponse]
 	err error
 }
 
-// DeviceServiceHandlerMockSearchKeyOrigins contains origins of expectations of the DeviceServiceHandler.SearchKey
-type DeviceServiceHandlerMockSearchKeyExpectationOrigins struct {
+// DeviceServiceClientMockSearchKeyOrigins contains origins of expectations of the DeviceServiceClient.SearchKey
+type DeviceServiceClientMockSearchKeyExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -4767,26 +4707,26 @@ type DeviceServiceHandlerMockSearchKeyExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmSearchKey *mDeviceServiceHandlerMockSearchKey) Optional() *mDeviceServiceHandlerMockSearchKey {
+func (mmSearchKey *mDeviceServiceClientMockSearchKey) Optional() *mDeviceServiceClientMockSearchKey {
 	mmSearchKey.optional = true
 	return mmSearchKey
 }
 
-// Expect sets up expected params for DeviceServiceHandler.SearchKey
-func (mmSearchKey *mDeviceServiceHandlerMockSearchKey) Expect(ctx context.Context, pp1 *connect.Request[v1.SearchKeyRequest]) *mDeviceServiceHandlerMockSearchKey {
+// Expect sets up expected params for DeviceServiceClient.SearchKey
+func (mmSearchKey *mDeviceServiceClientMockSearchKey) Expect(ctx context.Context, pp1 *connect.Request[v1.SearchKeyRequest]) *mDeviceServiceClientMockSearchKey {
 	if mmSearchKey.mock.funcSearchKey != nil {
-		mmSearchKey.mock.t.Fatalf("DeviceServiceHandlerMock.SearchKey mock is already set by Set")
+		mmSearchKey.mock.t.Fatalf("DeviceServiceClientMock.SearchKey mock is already set by Set")
 	}
 
 	if mmSearchKey.defaultExpectation == nil {
-		mmSearchKey.defaultExpectation = &DeviceServiceHandlerMockSearchKeyExpectation{}
+		mmSearchKey.defaultExpectation = &DeviceServiceClientMockSearchKeyExpectation{}
 	}
 
 	if mmSearchKey.defaultExpectation.paramPtrs != nil {
-		mmSearchKey.mock.t.Fatalf("DeviceServiceHandlerMock.SearchKey mock is already set by ExpectParams functions")
+		mmSearchKey.mock.t.Fatalf("DeviceServiceClientMock.SearchKey mock is already set by ExpectParams functions")
 	}
 
-	mmSearchKey.defaultExpectation.params = &DeviceServiceHandlerMockSearchKeyParams{ctx, pp1}
+	mmSearchKey.defaultExpectation.params = &DeviceServiceClientMockSearchKeyParams{ctx, pp1}
 	mmSearchKey.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmSearchKey.expectations {
 		if minimock.Equal(e.params, mmSearchKey.defaultExpectation.params) {
@@ -4797,22 +4737,22 @@ func (mmSearchKey *mDeviceServiceHandlerMockSearchKey) Expect(ctx context.Contex
 	return mmSearchKey
 }
 
-// ExpectCtxParam1 sets up expected param ctx for DeviceServiceHandler.SearchKey
-func (mmSearchKey *mDeviceServiceHandlerMockSearchKey) ExpectCtxParam1(ctx context.Context) *mDeviceServiceHandlerMockSearchKey {
+// ExpectCtxParam1 sets up expected param ctx for DeviceServiceClient.SearchKey
+func (mmSearchKey *mDeviceServiceClientMockSearchKey) ExpectCtxParam1(ctx context.Context) *mDeviceServiceClientMockSearchKey {
 	if mmSearchKey.mock.funcSearchKey != nil {
-		mmSearchKey.mock.t.Fatalf("DeviceServiceHandlerMock.SearchKey mock is already set by Set")
+		mmSearchKey.mock.t.Fatalf("DeviceServiceClientMock.SearchKey mock is already set by Set")
 	}
 
 	if mmSearchKey.defaultExpectation == nil {
-		mmSearchKey.defaultExpectation = &DeviceServiceHandlerMockSearchKeyExpectation{}
+		mmSearchKey.defaultExpectation = &DeviceServiceClientMockSearchKeyExpectation{}
 	}
 
 	if mmSearchKey.defaultExpectation.params != nil {
-		mmSearchKey.mock.t.Fatalf("DeviceServiceHandlerMock.SearchKey mock is already set by Expect")
+		mmSearchKey.mock.t.Fatalf("DeviceServiceClientMock.SearchKey mock is already set by Expect")
 	}
 
 	if mmSearchKey.defaultExpectation.paramPtrs == nil {
-		mmSearchKey.defaultExpectation.paramPtrs = &DeviceServiceHandlerMockSearchKeyParamPtrs{}
+		mmSearchKey.defaultExpectation.paramPtrs = &DeviceServiceClientMockSearchKeyParamPtrs{}
 	}
 	mmSearchKey.defaultExpectation.paramPtrs.ctx = &ctx
 	mmSearchKey.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -4820,22 +4760,22 @@ func (mmSearchKey *mDeviceServiceHandlerMockSearchKey) ExpectCtxParam1(ctx conte
 	return mmSearchKey
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for DeviceServiceHandler.SearchKey
-func (mmSearchKey *mDeviceServiceHandlerMockSearchKey) ExpectPp1Param2(pp1 *connect.Request[v1.SearchKeyRequest]) *mDeviceServiceHandlerMockSearchKey {
+// ExpectPp1Param2 sets up expected param pp1 for DeviceServiceClient.SearchKey
+func (mmSearchKey *mDeviceServiceClientMockSearchKey) ExpectPp1Param2(pp1 *connect.Request[v1.SearchKeyRequest]) *mDeviceServiceClientMockSearchKey {
 	if mmSearchKey.mock.funcSearchKey != nil {
-		mmSearchKey.mock.t.Fatalf("DeviceServiceHandlerMock.SearchKey mock is already set by Set")
+		mmSearchKey.mock.t.Fatalf("DeviceServiceClientMock.SearchKey mock is already set by Set")
 	}
 
 	if mmSearchKey.defaultExpectation == nil {
-		mmSearchKey.defaultExpectation = &DeviceServiceHandlerMockSearchKeyExpectation{}
+		mmSearchKey.defaultExpectation = &DeviceServiceClientMockSearchKeyExpectation{}
 	}
 
 	if mmSearchKey.defaultExpectation.params != nil {
-		mmSearchKey.mock.t.Fatalf("DeviceServiceHandlerMock.SearchKey mock is already set by Expect")
+		mmSearchKey.mock.t.Fatalf("DeviceServiceClientMock.SearchKey mock is already set by Expect")
 	}
 
 	if mmSearchKey.defaultExpectation.paramPtrs == nil {
-		mmSearchKey.defaultExpectation.paramPtrs = &DeviceServiceHandlerMockSearchKeyParamPtrs{}
+		mmSearchKey.defaultExpectation.paramPtrs = &DeviceServiceClientMockSearchKeyParamPtrs{}
 	}
 	mmSearchKey.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmSearchKey.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -4843,10 +4783,10 @@ func (mmSearchKey *mDeviceServiceHandlerMockSearchKey) ExpectPp1Param2(pp1 *conn
 	return mmSearchKey
 }
 
-// Inspect accepts an inspector function that has same arguments as the DeviceServiceHandler.SearchKey
-func (mmSearchKey *mDeviceServiceHandlerMockSearchKey) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.SearchKeyRequest])) *mDeviceServiceHandlerMockSearchKey {
+// Inspect accepts an inspector function that has same arguments as the DeviceServiceClient.SearchKey
+func (mmSearchKey *mDeviceServiceClientMockSearchKey) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.SearchKeyRequest])) *mDeviceServiceClientMockSearchKey {
 	if mmSearchKey.mock.inspectFuncSearchKey != nil {
-		mmSearchKey.mock.t.Fatalf("Inspect function is already set for DeviceServiceHandlerMock.SearchKey")
+		mmSearchKey.mock.t.Fatalf("Inspect function is already set for DeviceServiceClientMock.SearchKey")
 	}
 
 	mmSearchKey.mock.inspectFuncSearchKey = f
@@ -4854,28 +4794,28 @@ func (mmSearchKey *mDeviceServiceHandlerMockSearchKey) Inspect(f func(ctx contex
 	return mmSearchKey
 }
 
-// Return sets up results that will be returned by DeviceServiceHandler.SearchKey
-func (mmSearchKey *mDeviceServiceHandlerMockSearchKey) Return(pp2 *connect.Response[v1.SearchKeyResponse], err error) *DeviceServiceHandlerMock {
+// Return sets up results that will be returned by DeviceServiceClient.SearchKey
+func (mmSearchKey *mDeviceServiceClientMockSearchKey) Return(pp2 *connect.Response[v1.SearchKeyResponse], err error) *DeviceServiceClientMock {
 	if mmSearchKey.mock.funcSearchKey != nil {
-		mmSearchKey.mock.t.Fatalf("DeviceServiceHandlerMock.SearchKey mock is already set by Set")
+		mmSearchKey.mock.t.Fatalf("DeviceServiceClientMock.SearchKey mock is already set by Set")
 	}
 
 	if mmSearchKey.defaultExpectation == nil {
-		mmSearchKey.defaultExpectation = &DeviceServiceHandlerMockSearchKeyExpectation{mock: mmSearchKey.mock}
+		mmSearchKey.defaultExpectation = &DeviceServiceClientMockSearchKeyExpectation{mock: mmSearchKey.mock}
 	}
-	mmSearchKey.defaultExpectation.results = &DeviceServiceHandlerMockSearchKeyResults{pp2, err}
+	mmSearchKey.defaultExpectation.results = &DeviceServiceClientMockSearchKeyResults{pp2, err}
 	mmSearchKey.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmSearchKey.mock
 }
 
-// Set uses given function f to mock the DeviceServiceHandler.SearchKey method
-func (mmSearchKey *mDeviceServiceHandlerMockSearchKey) Set(f func(ctx context.Context, pp1 *connect.Request[v1.SearchKeyRequest]) (pp2 *connect.Response[v1.SearchKeyResponse], err error)) *DeviceServiceHandlerMock {
+// Set uses given function f to mock the DeviceServiceClient.SearchKey method
+func (mmSearchKey *mDeviceServiceClientMockSearchKey) Set(f func(ctx context.Context, pp1 *connect.Request[v1.SearchKeyRequest]) (pp2 *connect.Response[v1.SearchKeyResponse], err error)) *DeviceServiceClientMock {
 	if mmSearchKey.defaultExpectation != nil {
-		mmSearchKey.mock.t.Fatalf("Default expectation is already set for the DeviceServiceHandler.SearchKey method")
+		mmSearchKey.mock.t.Fatalf("Default expectation is already set for the DeviceServiceClient.SearchKey method")
 	}
 
 	if len(mmSearchKey.expectations) > 0 {
-		mmSearchKey.mock.t.Fatalf("Some expectations are already set for the DeviceServiceHandler.SearchKey method")
+		mmSearchKey.mock.t.Fatalf("Some expectations are already set for the DeviceServiceClient.SearchKey method")
 	}
 
 	mmSearchKey.mock.funcSearchKey = f
@@ -4883,39 +4823,39 @@ func (mmSearchKey *mDeviceServiceHandlerMockSearchKey) Set(f func(ctx context.Co
 	return mmSearchKey.mock
 }
 
-// When sets expectation for the DeviceServiceHandler.SearchKey which will trigger the result defined by the following
+// When sets expectation for the DeviceServiceClient.SearchKey which will trigger the result defined by the following
 // Then helper
-func (mmSearchKey *mDeviceServiceHandlerMockSearchKey) When(ctx context.Context, pp1 *connect.Request[v1.SearchKeyRequest]) *DeviceServiceHandlerMockSearchKeyExpectation {
+func (mmSearchKey *mDeviceServiceClientMockSearchKey) When(ctx context.Context, pp1 *connect.Request[v1.SearchKeyRequest]) *DeviceServiceClientMockSearchKeyExpectation {
 	if mmSearchKey.mock.funcSearchKey != nil {
-		mmSearchKey.mock.t.Fatalf("DeviceServiceHandlerMock.SearchKey mock is already set by Set")
+		mmSearchKey.mock.t.Fatalf("DeviceServiceClientMock.SearchKey mock is already set by Set")
 	}
 
-	expectation := &DeviceServiceHandlerMockSearchKeyExpectation{
+	expectation := &DeviceServiceClientMockSearchKeyExpectation{
 		mock:               mmSearchKey.mock,
-		params:             &DeviceServiceHandlerMockSearchKeyParams{ctx, pp1},
-		expectationOrigins: DeviceServiceHandlerMockSearchKeyExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &DeviceServiceClientMockSearchKeyParams{ctx, pp1},
+		expectationOrigins: DeviceServiceClientMockSearchKeyExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmSearchKey.expectations = append(mmSearchKey.expectations, expectation)
 	return expectation
 }
 
-// Then sets up DeviceServiceHandler.SearchKey return parameters for the expectation previously defined by the When method
-func (e *DeviceServiceHandlerMockSearchKeyExpectation) Then(pp2 *connect.Response[v1.SearchKeyResponse], err error) *DeviceServiceHandlerMock {
-	e.results = &DeviceServiceHandlerMockSearchKeyResults{pp2, err}
+// Then sets up DeviceServiceClient.SearchKey return parameters for the expectation previously defined by the When method
+func (e *DeviceServiceClientMockSearchKeyExpectation) Then(pp2 *connect.Response[v1.SearchKeyResponse], err error) *DeviceServiceClientMock {
+	e.results = &DeviceServiceClientMockSearchKeyResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times DeviceServiceHandler.SearchKey should be invoked
-func (mmSearchKey *mDeviceServiceHandlerMockSearchKey) Times(n uint64) *mDeviceServiceHandlerMockSearchKey {
+// Times sets number of times DeviceServiceClient.SearchKey should be invoked
+func (mmSearchKey *mDeviceServiceClientMockSearchKey) Times(n uint64) *mDeviceServiceClientMockSearchKey {
 	if n == 0 {
-		mmSearchKey.mock.t.Fatalf("Times of DeviceServiceHandlerMock.SearchKey mock can not be zero")
+		mmSearchKey.mock.t.Fatalf("Times of DeviceServiceClientMock.SearchKey mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmSearchKey.expectedInvocations, n)
 	mmSearchKey.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmSearchKey
 }
 
-func (mmSearchKey *mDeviceServiceHandlerMockSearchKey) invocationsDone() bool {
+func (mmSearchKey *mDeviceServiceClientMockSearchKey) invocationsDone() bool {
 	if len(mmSearchKey.expectations) == 0 && mmSearchKey.defaultExpectation == nil && mmSearchKey.mock.funcSearchKey == nil {
 		return true
 	}
@@ -4926,8 +4866,8 @@ func (mmSearchKey *mDeviceServiceHandlerMockSearchKey) invocationsDone() bool {
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// SearchKey implements mm_devicev1connect.DeviceServiceHandler
-func (mmSearchKey *DeviceServiceHandlerMock) SearchKey(ctx context.Context, pp1 *connect.Request[v1.SearchKeyRequest]) (pp2 *connect.Response[v1.SearchKeyResponse], err error) {
+// SearchKey implements mm_devicev1connect.DeviceServiceClient
+func (mmSearchKey *DeviceServiceClientMock) SearchKey(ctx context.Context, pp1 *connect.Request[v1.SearchKeyRequest]) (pp2 *connect.Response[v1.SearchKeyResponse], err error) {
 	mm_atomic.AddUint64(&mmSearchKey.beforeSearchKeyCounter, 1)
 	defer mm_atomic.AddUint64(&mmSearchKey.afterSearchKeyCounter, 1)
 
@@ -4937,7 +4877,7 @@ func (mmSearchKey *DeviceServiceHandlerMock) SearchKey(ctx context.Context, pp1 
 		mmSearchKey.inspectFuncSearchKey(ctx, pp1)
 	}
 
-	mm_params := DeviceServiceHandlerMockSearchKeyParams{ctx, pp1}
+	mm_params := DeviceServiceClientMockSearchKeyParams{ctx, pp1}
 
 	// Record call args
 	mmSearchKey.SearchKeyMock.mutex.Lock()
@@ -4956,54 +4896,54 @@ func (mmSearchKey *DeviceServiceHandlerMock) SearchKey(ctx context.Context, pp1 
 		mm_want := mmSearchKey.SearchKeyMock.defaultExpectation.params
 		mm_want_ptrs := mmSearchKey.SearchKeyMock.defaultExpectation.paramPtrs
 
-		mm_got := DeviceServiceHandlerMockSearchKeyParams{ctx, pp1}
+		mm_got := DeviceServiceClientMockSearchKeyParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmSearchKey.t.Errorf("DeviceServiceHandlerMock.SearchKey got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmSearchKey.t.Errorf("DeviceServiceClientMock.SearchKey got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmSearchKey.SearchKeyMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmSearchKey.t.Errorf("DeviceServiceHandlerMock.SearchKey got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmSearchKey.t.Errorf("DeviceServiceClientMock.SearchKey got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmSearchKey.SearchKeyMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmSearchKey.t.Errorf("DeviceServiceHandlerMock.SearchKey got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmSearchKey.t.Errorf("DeviceServiceClientMock.SearchKey got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmSearchKey.SearchKeyMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmSearchKey.SearchKeyMock.defaultExpectation.results
 		if mm_results == nil {
-			mmSearchKey.t.Fatal("No results are set for the DeviceServiceHandlerMock.SearchKey")
+			mmSearchKey.t.Fatal("No results are set for the DeviceServiceClientMock.SearchKey")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmSearchKey.funcSearchKey != nil {
 		return mmSearchKey.funcSearchKey(ctx, pp1)
 	}
-	mmSearchKey.t.Fatalf("Unexpected call to DeviceServiceHandlerMock.SearchKey. %v %v", ctx, pp1)
+	mmSearchKey.t.Fatalf("Unexpected call to DeviceServiceClientMock.SearchKey. %v %v", ctx, pp1)
 	return
 }
 
-// SearchKeyAfterCounter returns a count of finished DeviceServiceHandlerMock.SearchKey invocations
-func (mmSearchKey *DeviceServiceHandlerMock) SearchKeyAfterCounter() uint64 {
+// SearchKeyAfterCounter returns a count of finished DeviceServiceClientMock.SearchKey invocations
+func (mmSearchKey *DeviceServiceClientMock) SearchKeyAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmSearchKey.afterSearchKeyCounter)
 }
 
-// SearchKeyBeforeCounter returns a count of DeviceServiceHandlerMock.SearchKey invocations
-func (mmSearchKey *DeviceServiceHandlerMock) SearchKeyBeforeCounter() uint64 {
+// SearchKeyBeforeCounter returns a count of DeviceServiceClientMock.SearchKey invocations
+func (mmSearchKey *DeviceServiceClientMock) SearchKeyBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmSearchKey.beforeSearchKeyCounter)
 }
 
-// Calls returns a list of arguments used in each call to DeviceServiceHandlerMock.SearchKey.
+// Calls returns a list of arguments used in each call to DeviceServiceClientMock.SearchKey.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmSearchKey *mDeviceServiceHandlerMockSearchKey) Calls() []*DeviceServiceHandlerMockSearchKeyParams {
+func (mmSearchKey *mDeviceServiceClientMockSearchKey) Calls() []*DeviceServiceClientMockSearchKeyParams {
 	mmSearchKey.mutex.RLock()
 
-	argCopy := make([]*DeviceServiceHandlerMockSearchKeyParams, len(mmSearchKey.callArgs))
+	argCopy := make([]*DeviceServiceClientMockSearchKeyParams, len(mmSearchKey.callArgs))
 	copy(argCopy, mmSearchKey.callArgs)
 
 	mmSearchKey.mutex.RUnlock()
@@ -5013,7 +4953,7 @@ func (mmSearchKey *mDeviceServiceHandlerMockSearchKey) Calls() []*DeviceServiceH
 
 // MinimockSearchKeyDone returns true if the count of the SearchKey invocations corresponds
 // the number of defined expectations
-func (m *DeviceServiceHandlerMock) MinimockSearchKeyDone() bool {
+func (m *DeviceServiceClientMock) MinimockSearchKeyDone() bool {
 	if m.SearchKeyMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -5029,10 +4969,10 @@ func (m *DeviceServiceHandlerMock) MinimockSearchKeyDone() bool {
 }
 
 // MinimockSearchKeyInspect logs each unmet expectation
-func (m *DeviceServiceHandlerMock) MinimockSearchKeyInspect() {
+func (m *DeviceServiceClientMock) MinimockSearchKeyInspect() {
 	for _, e := range m.SearchKeyMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.SearchKey at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.SearchKey at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -5040,66 +4980,66 @@ func (m *DeviceServiceHandlerMock) MinimockSearchKeyInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.SearchKeyMock.defaultExpectation != nil && afterSearchKeyCounter < 1 {
 		if m.SearchKeyMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.SearchKey at\n%s", m.SearchKeyMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.SearchKey at\n%s", m.SearchKeyMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.SearchKey at\n%s with params: %#v", m.SearchKeyMock.defaultExpectation.expectationOrigins.origin, *m.SearchKeyMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.SearchKey at\n%s with params: %#v", m.SearchKeyMock.defaultExpectation.expectationOrigins.origin, *m.SearchKeyMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcSearchKey != nil && afterSearchKeyCounter < 1 {
-		m.t.Errorf("Expected call to DeviceServiceHandlerMock.SearchKey at\n%s", m.funcSearchKeyOrigin)
+		m.t.Errorf("Expected call to DeviceServiceClientMock.SearchKey at\n%s", m.funcSearchKeyOrigin)
 	}
 
 	if !m.SearchKeyMock.invocationsDone() && afterSearchKeyCounter > 0 {
-		m.t.Errorf("Expected %d calls to DeviceServiceHandlerMock.SearchKey at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to DeviceServiceClientMock.SearchKey at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.SearchKeyMock.expectedInvocations), m.SearchKeyMock.expectedInvocationsOrigin, afterSearchKeyCounter)
 	}
 }
 
-type mDeviceServiceHandlerMockUpdate struct {
+type mDeviceServiceClientMockUpdate struct {
 	optional           bool
-	mock               *DeviceServiceHandlerMock
-	defaultExpectation *DeviceServiceHandlerMockUpdateExpectation
-	expectations       []*DeviceServiceHandlerMockUpdateExpectation
+	mock               *DeviceServiceClientMock
+	defaultExpectation *DeviceServiceClientMockUpdateExpectation
+	expectations       []*DeviceServiceClientMockUpdateExpectation
 
-	callArgs []*DeviceServiceHandlerMockUpdateParams
+	callArgs []*DeviceServiceClientMockUpdateParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// DeviceServiceHandlerMockUpdateExpectation specifies expectation struct of the DeviceServiceHandler.Update
-type DeviceServiceHandlerMockUpdateExpectation struct {
-	mock               *DeviceServiceHandlerMock
-	params             *DeviceServiceHandlerMockUpdateParams
-	paramPtrs          *DeviceServiceHandlerMockUpdateParamPtrs
-	expectationOrigins DeviceServiceHandlerMockUpdateExpectationOrigins
-	results            *DeviceServiceHandlerMockUpdateResults
+// DeviceServiceClientMockUpdateExpectation specifies expectation struct of the DeviceServiceClient.Update
+type DeviceServiceClientMockUpdateExpectation struct {
+	mock               *DeviceServiceClientMock
+	params             *DeviceServiceClientMockUpdateParams
+	paramPtrs          *DeviceServiceClientMockUpdateParamPtrs
+	expectationOrigins DeviceServiceClientMockUpdateExpectationOrigins
+	results            *DeviceServiceClientMockUpdateResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// DeviceServiceHandlerMockUpdateParams contains parameters of the DeviceServiceHandler.Update
-type DeviceServiceHandlerMockUpdateParams struct {
+// DeviceServiceClientMockUpdateParams contains parameters of the DeviceServiceClient.Update
+type DeviceServiceClientMockUpdateParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.UpdateRequest]
 }
 
-// DeviceServiceHandlerMockUpdateParamPtrs contains pointers to parameters of the DeviceServiceHandler.Update
-type DeviceServiceHandlerMockUpdateParamPtrs struct {
+// DeviceServiceClientMockUpdateParamPtrs contains pointers to parameters of the DeviceServiceClient.Update
+type DeviceServiceClientMockUpdateParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.UpdateRequest]
 }
 
-// DeviceServiceHandlerMockUpdateResults contains results of the DeviceServiceHandler.Update
-type DeviceServiceHandlerMockUpdateResults struct {
+// DeviceServiceClientMockUpdateResults contains results of the DeviceServiceClient.Update
+type DeviceServiceClientMockUpdateResults struct {
 	pp2 *connect.Response[v1.UpdateResponse]
 	err error
 }
 
-// DeviceServiceHandlerMockUpdateOrigins contains origins of expectations of the DeviceServiceHandler.Update
-type DeviceServiceHandlerMockUpdateExpectationOrigins struct {
+// DeviceServiceClientMockUpdateOrigins contains origins of expectations of the DeviceServiceClient.Update
+type DeviceServiceClientMockUpdateExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -5110,26 +5050,26 @@ type DeviceServiceHandlerMockUpdateExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmUpdate *mDeviceServiceHandlerMockUpdate) Optional() *mDeviceServiceHandlerMockUpdate {
+func (mmUpdate *mDeviceServiceClientMockUpdate) Optional() *mDeviceServiceClientMockUpdate {
 	mmUpdate.optional = true
 	return mmUpdate
 }
 
-// Expect sets up expected params for DeviceServiceHandler.Update
-func (mmUpdate *mDeviceServiceHandlerMockUpdate) Expect(ctx context.Context, pp1 *connect.Request[v1.UpdateRequest]) *mDeviceServiceHandlerMockUpdate {
+// Expect sets up expected params for DeviceServiceClient.Update
+func (mmUpdate *mDeviceServiceClientMockUpdate) Expect(ctx context.Context, pp1 *connect.Request[v1.UpdateRequest]) *mDeviceServiceClientMockUpdate {
 	if mmUpdate.mock.funcUpdate != nil {
-		mmUpdate.mock.t.Fatalf("DeviceServiceHandlerMock.Update mock is already set by Set")
+		mmUpdate.mock.t.Fatalf("DeviceServiceClientMock.Update mock is already set by Set")
 	}
 
 	if mmUpdate.defaultExpectation == nil {
-		mmUpdate.defaultExpectation = &DeviceServiceHandlerMockUpdateExpectation{}
+		mmUpdate.defaultExpectation = &DeviceServiceClientMockUpdateExpectation{}
 	}
 
 	if mmUpdate.defaultExpectation.paramPtrs != nil {
-		mmUpdate.mock.t.Fatalf("DeviceServiceHandlerMock.Update mock is already set by ExpectParams functions")
+		mmUpdate.mock.t.Fatalf("DeviceServiceClientMock.Update mock is already set by ExpectParams functions")
 	}
 
-	mmUpdate.defaultExpectation.params = &DeviceServiceHandlerMockUpdateParams{ctx, pp1}
+	mmUpdate.defaultExpectation.params = &DeviceServiceClientMockUpdateParams{ctx, pp1}
 	mmUpdate.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmUpdate.expectations {
 		if minimock.Equal(e.params, mmUpdate.defaultExpectation.params) {
@@ -5140,22 +5080,22 @@ func (mmUpdate *mDeviceServiceHandlerMockUpdate) Expect(ctx context.Context, pp1
 	return mmUpdate
 }
 
-// ExpectCtxParam1 sets up expected param ctx for DeviceServiceHandler.Update
-func (mmUpdate *mDeviceServiceHandlerMockUpdate) ExpectCtxParam1(ctx context.Context) *mDeviceServiceHandlerMockUpdate {
+// ExpectCtxParam1 sets up expected param ctx for DeviceServiceClient.Update
+func (mmUpdate *mDeviceServiceClientMockUpdate) ExpectCtxParam1(ctx context.Context) *mDeviceServiceClientMockUpdate {
 	if mmUpdate.mock.funcUpdate != nil {
-		mmUpdate.mock.t.Fatalf("DeviceServiceHandlerMock.Update mock is already set by Set")
+		mmUpdate.mock.t.Fatalf("DeviceServiceClientMock.Update mock is already set by Set")
 	}
 
 	if mmUpdate.defaultExpectation == nil {
-		mmUpdate.defaultExpectation = &DeviceServiceHandlerMockUpdateExpectation{}
+		mmUpdate.defaultExpectation = &DeviceServiceClientMockUpdateExpectation{}
 	}
 
 	if mmUpdate.defaultExpectation.params != nil {
-		mmUpdate.mock.t.Fatalf("DeviceServiceHandlerMock.Update mock is already set by Expect")
+		mmUpdate.mock.t.Fatalf("DeviceServiceClientMock.Update mock is already set by Expect")
 	}
 
 	if mmUpdate.defaultExpectation.paramPtrs == nil {
-		mmUpdate.defaultExpectation.paramPtrs = &DeviceServiceHandlerMockUpdateParamPtrs{}
+		mmUpdate.defaultExpectation.paramPtrs = &DeviceServiceClientMockUpdateParamPtrs{}
 	}
 	mmUpdate.defaultExpectation.paramPtrs.ctx = &ctx
 	mmUpdate.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -5163,22 +5103,22 @@ func (mmUpdate *mDeviceServiceHandlerMockUpdate) ExpectCtxParam1(ctx context.Con
 	return mmUpdate
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for DeviceServiceHandler.Update
-func (mmUpdate *mDeviceServiceHandlerMockUpdate) ExpectPp1Param2(pp1 *connect.Request[v1.UpdateRequest]) *mDeviceServiceHandlerMockUpdate {
+// ExpectPp1Param2 sets up expected param pp1 for DeviceServiceClient.Update
+func (mmUpdate *mDeviceServiceClientMockUpdate) ExpectPp1Param2(pp1 *connect.Request[v1.UpdateRequest]) *mDeviceServiceClientMockUpdate {
 	if mmUpdate.mock.funcUpdate != nil {
-		mmUpdate.mock.t.Fatalf("DeviceServiceHandlerMock.Update mock is already set by Set")
+		mmUpdate.mock.t.Fatalf("DeviceServiceClientMock.Update mock is already set by Set")
 	}
 
 	if mmUpdate.defaultExpectation == nil {
-		mmUpdate.defaultExpectation = &DeviceServiceHandlerMockUpdateExpectation{}
+		mmUpdate.defaultExpectation = &DeviceServiceClientMockUpdateExpectation{}
 	}
 
 	if mmUpdate.defaultExpectation.params != nil {
-		mmUpdate.mock.t.Fatalf("DeviceServiceHandlerMock.Update mock is already set by Expect")
+		mmUpdate.mock.t.Fatalf("DeviceServiceClientMock.Update mock is already set by Expect")
 	}
 
 	if mmUpdate.defaultExpectation.paramPtrs == nil {
-		mmUpdate.defaultExpectation.paramPtrs = &DeviceServiceHandlerMockUpdateParamPtrs{}
+		mmUpdate.defaultExpectation.paramPtrs = &DeviceServiceClientMockUpdateParamPtrs{}
 	}
 	mmUpdate.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmUpdate.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -5186,10 +5126,10 @@ func (mmUpdate *mDeviceServiceHandlerMockUpdate) ExpectPp1Param2(pp1 *connect.Re
 	return mmUpdate
 }
 
-// Inspect accepts an inspector function that has same arguments as the DeviceServiceHandler.Update
-func (mmUpdate *mDeviceServiceHandlerMockUpdate) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.UpdateRequest])) *mDeviceServiceHandlerMockUpdate {
+// Inspect accepts an inspector function that has same arguments as the DeviceServiceClient.Update
+func (mmUpdate *mDeviceServiceClientMockUpdate) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.UpdateRequest])) *mDeviceServiceClientMockUpdate {
 	if mmUpdate.mock.inspectFuncUpdate != nil {
-		mmUpdate.mock.t.Fatalf("Inspect function is already set for DeviceServiceHandlerMock.Update")
+		mmUpdate.mock.t.Fatalf("Inspect function is already set for DeviceServiceClientMock.Update")
 	}
 
 	mmUpdate.mock.inspectFuncUpdate = f
@@ -5197,28 +5137,28 @@ func (mmUpdate *mDeviceServiceHandlerMockUpdate) Inspect(f func(ctx context.Cont
 	return mmUpdate
 }
 
-// Return sets up results that will be returned by DeviceServiceHandler.Update
-func (mmUpdate *mDeviceServiceHandlerMockUpdate) Return(pp2 *connect.Response[v1.UpdateResponse], err error) *DeviceServiceHandlerMock {
+// Return sets up results that will be returned by DeviceServiceClient.Update
+func (mmUpdate *mDeviceServiceClientMockUpdate) Return(pp2 *connect.Response[v1.UpdateResponse], err error) *DeviceServiceClientMock {
 	if mmUpdate.mock.funcUpdate != nil {
-		mmUpdate.mock.t.Fatalf("DeviceServiceHandlerMock.Update mock is already set by Set")
+		mmUpdate.mock.t.Fatalf("DeviceServiceClientMock.Update mock is already set by Set")
 	}
 
 	if mmUpdate.defaultExpectation == nil {
-		mmUpdate.defaultExpectation = &DeviceServiceHandlerMockUpdateExpectation{mock: mmUpdate.mock}
+		mmUpdate.defaultExpectation = &DeviceServiceClientMockUpdateExpectation{mock: mmUpdate.mock}
 	}
-	mmUpdate.defaultExpectation.results = &DeviceServiceHandlerMockUpdateResults{pp2, err}
+	mmUpdate.defaultExpectation.results = &DeviceServiceClientMockUpdateResults{pp2, err}
 	mmUpdate.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmUpdate.mock
 }
 
-// Set uses given function f to mock the DeviceServiceHandler.Update method
-func (mmUpdate *mDeviceServiceHandlerMockUpdate) Set(f func(ctx context.Context, pp1 *connect.Request[v1.UpdateRequest]) (pp2 *connect.Response[v1.UpdateResponse], err error)) *DeviceServiceHandlerMock {
+// Set uses given function f to mock the DeviceServiceClient.Update method
+func (mmUpdate *mDeviceServiceClientMockUpdate) Set(f func(ctx context.Context, pp1 *connect.Request[v1.UpdateRequest]) (pp2 *connect.Response[v1.UpdateResponse], err error)) *DeviceServiceClientMock {
 	if mmUpdate.defaultExpectation != nil {
-		mmUpdate.mock.t.Fatalf("Default expectation is already set for the DeviceServiceHandler.Update method")
+		mmUpdate.mock.t.Fatalf("Default expectation is already set for the DeviceServiceClient.Update method")
 	}
 
 	if len(mmUpdate.expectations) > 0 {
-		mmUpdate.mock.t.Fatalf("Some expectations are already set for the DeviceServiceHandler.Update method")
+		mmUpdate.mock.t.Fatalf("Some expectations are already set for the DeviceServiceClient.Update method")
 	}
 
 	mmUpdate.mock.funcUpdate = f
@@ -5226,39 +5166,39 @@ func (mmUpdate *mDeviceServiceHandlerMockUpdate) Set(f func(ctx context.Context,
 	return mmUpdate.mock
 }
 
-// When sets expectation for the DeviceServiceHandler.Update which will trigger the result defined by the following
+// When sets expectation for the DeviceServiceClient.Update which will trigger the result defined by the following
 // Then helper
-func (mmUpdate *mDeviceServiceHandlerMockUpdate) When(ctx context.Context, pp1 *connect.Request[v1.UpdateRequest]) *DeviceServiceHandlerMockUpdateExpectation {
+func (mmUpdate *mDeviceServiceClientMockUpdate) When(ctx context.Context, pp1 *connect.Request[v1.UpdateRequest]) *DeviceServiceClientMockUpdateExpectation {
 	if mmUpdate.mock.funcUpdate != nil {
-		mmUpdate.mock.t.Fatalf("DeviceServiceHandlerMock.Update mock is already set by Set")
+		mmUpdate.mock.t.Fatalf("DeviceServiceClientMock.Update mock is already set by Set")
 	}
 
-	expectation := &DeviceServiceHandlerMockUpdateExpectation{
+	expectation := &DeviceServiceClientMockUpdateExpectation{
 		mock:               mmUpdate.mock,
-		params:             &DeviceServiceHandlerMockUpdateParams{ctx, pp1},
-		expectationOrigins: DeviceServiceHandlerMockUpdateExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &DeviceServiceClientMockUpdateParams{ctx, pp1},
+		expectationOrigins: DeviceServiceClientMockUpdateExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmUpdate.expectations = append(mmUpdate.expectations, expectation)
 	return expectation
 }
 
-// Then sets up DeviceServiceHandler.Update return parameters for the expectation previously defined by the When method
-func (e *DeviceServiceHandlerMockUpdateExpectation) Then(pp2 *connect.Response[v1.UpdateResponse], err error) *DeviceServiceHandlerMock {
-	e.results = &DeviceServiceHandlerMockUpdateResults{pp2, err}
+// Then sets up DeviceServiceClient.Update return parameters for the expectation previously defined by the When method
+func (e *DeviceServiceClientMockUpdateExpectation) Then(pp2 *connect.Response[v1.UpdateResponse], err error) *DeviceServiceClientMock {
+	e.results = &DeviceServiceClientMockUpdateResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times DeviceServiceHandler.Update should be invoked
-func (mmUpdate *mDeviceServiceHandlerMockUpdate) Times(n uint64) *mDeviceServiceHandlerMockUpdate {
+// Times sets number of times DeviceServiceClient.Update should be invoked
+func (mmUpdate *mDeviceServiceClientMockUpdate) Times(n uint64) *mDeviceServiceClientMockUpdate {
 	if n == 0 {
-		mmUpdate.mock.t.Fatalf("Times of DeviceServiceHandlerMock.Update mock can not be zero")
+		mmUpdate.mock.t.Fatalf("Times of DeviceServiceClientMock.Update mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmUpdate.expectedInvocations, n)
 	mmUpdate.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmUpdate
 }
 
-func (mmUpdate *mDeviceServiceHandlerMockUpdate) invocationsDone() bool {
+func (mmUpdate *mDeviceServiceClientMockUpdate) invocationsDone() bool {
 	if len(mmUpdate.expectations) == 0 && mmUpdate.defaultExpectation == nil && mmUpdate.mock.funcUpdate == nil {
 		return true
 	}
@@ -5269,8 +5209,8 @@ func (mmUpdate *mDeviceServiceHandlerMockUpdate) invocationsDone() bool {
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// Update implements mm_devicev1connect.DeviceServiceHandler
-func (mmUpdate *DeviceServiceHandlerMock) Update(ctx context.Context, pp1 *connect.Request[v1.UpdateRequest]) (pp2 *connect.Response[v1.UpdateResponse], err error) {
+// Update implements mm_devicev1connect.DeviceServiceClient
+func (mmUpdate *DeviceServiceClientMock) Update(ctx context.Context, pp1 *connect.Request[v1.UpdateRequest]) (pp2 *connect.Response[v1.UpdateResponse], err error) {
 	mm_atomic.AddUint64(&mmUpdate.beforeUpdateCounter, 1)
 	defer mm_atomic.AddUint64(&mmUpdate.afterUpdateCounter, 1)
 
@@ -5280,7 +5220,7 @@ func (mmUpdate *DeviceServiceHandlerMock) Update(ctx context.Context, pp1 *conne
 		mmUpdate.inspectFuncUpdate(ctx, pp1)
 	}
 
-	mm_params := DeviceServiceHandlerMockUpdateParams{ctx, pp1}
+	mm_params := DeviceServiceClientMockUpdateParams{ctx, pp1}
 
 	// Record call args
 	mmUpdate.UpdateMock.mutex.Lock()
@@ -5299,54 +5239,54 @@ func (mmUpdate *DeviceServiceHandlerMock) Update(ctx context.Context, pp1 *conne
 		mm_want := mmUpdate.UpdateMock.defaultExpectation.params
 		mm_want_ptrs := mmUpdate.UpdateMock.defaultExpectation.paramPtrs
 
-		mm_got := DeviceServiceHandlerMockUpdateParams{ctx, pp1}
+		mm_got := DeviceServiceClientMockUpdateParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmUpdate.t.Errorf("DeviceServiceHandlerMock.Update got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmUpdate.t.Errorf("DeviceServiceClientMock.Update got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmUpdate.UpdateMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmUpdate.t.Errorf("DeviceServiceHandlerMock.Update got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmUpdate.t.Errorf("DeviceServiceClientMock.Update got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmUpdate.UpdateMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmUpdate.t.Errorf("DeviceServiceHandlerMock.Update got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmUpdate.t.Errorf("DeviceServiceClientMock.Update got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmUpdate.UpdateMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmUpdate.UpdateMock.defaultExpectation.results
 		if mm_results == nil {
-			mmUpdate.t.Fatal("No results are set for the DeviceServiceHandlerMock.Update")
+			mmUpdate.t.Fatal("No results are set for the DeviceServiceClientMock.Update")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmUpdate.funcUpdate != nil {
 		return mmUpdate.funcUpdate(ctx, pp1)
 	}
-	mmUpdate.t.Fatalf("Unexpected call to DeviceServiceHandlerMock.Update. %v %v", ctx, pp1)
+	mmUpdate.t.Fatalf("Unexpected call to DeviceServiceClientMock.Update. %v %v", ctx, pp1)
 	return
 }
 
-// UpdateAfterCounter returns a count of finished DeviceServiceHandlerMock.Update invocations
-func (mmUpdate *DeviceServiceHandlerMock) UpdateAfterCounter() uint64 {
+// UpdateAfterCounter returns a count of finished DeviceServiceClientMock.Update invocations
+func (mmUpdate *DeviceServiceClientMock) UpdateAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmUpdate.afterUpdateCounter)
 }
 
-// UpdateBeforeCounter returns a count of DeviceServiceHandlerMock.Update invocations
-func (mmUpdate *DeviceServiceHandlerMock) UpdateBeforeCounter() uint64 {
+// UpdateBeforeCounter returns a count of DeviceServiceClientMock.Update invocations
+func (mmUpdate *DeviceServiceClientMock) UpdateBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmUpdate.beforeUpdateCounter)
 }
 
-// Calls returns a list of arguments used in each call to DeviceServiceHandlerMock.Update.
+// Calls returns a list of arguments used in each call to DeviceServiceClientMock.Update.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmUpdate *mDeviceServiceHandlerMockUpdate) Calls() []*DeviceServiceHandlerMockUpdateParams {
+func (mmUpdate *mDeviceServiceClientMockUpdate) Calls() []*DeviceServiceClientMockUpdateParams {
 	mmUpdate.mutex.RLock()
 
-	argCopy := make([]*DeviceServiceHandlerMockUpdateParams, len(mmUpdate.callArgs))
+	argCopy := make([]*DeviceServiceClientMockUpdateParams, len(mmUpdate.callArgs))
 	copy(argCopy, mmUpdate.callArgs)
 
 	mmUpdate.mutex.RUnlock()
@@ -5356,7 +5296,7 @@ func (mmUpdate *mDeviceServiceHandlerMockUpdate) Calls() []*DeviceServiceHandler
 
 // MinimockUpdateDone returns true if the count of the Update invocations corresponds
 // the number of defined expectations
-func (m *DeviceServiceHandlerMock) MinimockUpdateDone() bool {
+func (m *DeviceServiceClientMock) MinimockUpdateDone() bool {
 	if m.UpdateMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -5372,10 +5312,10 @@ func (m *DeviceServiceHandlerMock) MinimockUpdateDone() bool {
 }
 
 // MinimockUpdateInspect logs each unmet expectation
-func (m *DeviceServiceHandlerMock) MinimockUpdateInspect() {
+func (m *DeviceServiceClientMock) MinimockUpdateInspect() {
 	for _, e := range m.UpdateMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.Update at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.Update at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -5383,66 +5323,66 @@ func (m *DeviceServiceHandlerMock) MinimockUpdateInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.UpdateMock.defaultExpectation != nil && afterUpdateCounter < 1 {
 		if m.UpdateMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.Update at\n%s", m.UpdateMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.Update at\n%s", m.UpdateMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.Update at\n%s with params: %#v", m.UpdateMock.defaultExpectation.expectationOrigins.origin, *m.UpdateMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.Update at\n%s with params: %#v", m.UpdateMock.defaultExpectation.expectationOrigins.origin, *m.UpdateMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcUpdate != nil && afterUpdateCounter < 1 {
-		m.t.Errorf("Expected call to DeviceServiceHandlerMock.Update at\n%s", m.funcUpdateOrigin)
+		m.t.Errorf("Expected call to DeviceServiceClientMock.Update at\n%s", m.funcUpdateOrigin)
 	}
 
 	if !m.UpdateMock.invocationsDone() && afterUpdateCounter > 0 {
-		m.t.Errorf("Expected %d calls to DeviceServiceHandlerMock.Update at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to DeviceServiceClientMock.Update at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.UpdateMock.expectedInvocations), m.UpdateMock.expectedInvocationsOrigin, afterUpdateCounter)
 	}
 }
 
-type mDeviceServiceHandlerMockUpdatePresence struct {
+type mDeviceServiceClientMockUpdatePresence struct {
 	optional           bool
-	mock               *DeviceServiceHandlerMock
-	defaultExpectation *DeviceServiceHandlerMockUpdatePresenceExpectation
-	expectations       []*DeviceServiceHandlerMockUpdatePresenceExpectation
+	mock               *DeviceServiceClientMock
+	defaultExpectation *DeviceServiceClientMockUpdatePresenceExpectation
+	expectations       []*DeviceServiceClientMockUpdatePresenceExpectation
 
-	callArgs []*DeviceServiceHandlerMockUpdatePresenceParams
+	callArgs []*DeviceServiceClientMockUpdatePresenceParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// DeviceServiceHandlerMockUpdatePresenceExpectation specifies expectation struct of the DeviceServiceHandler.UpdatePresence
-type DeviceServiceHandlerMockUpdatePresenceExpectation struct {
-	mock               *DeviceServiceHandlerMock
-	params             *DeviceServiceHandlerMockUpdatePresenceParams
-	paramPtrs          *DeviceServiceHandlerMockUpdatePresenceParamPtrs
-	expectationOrigins DeviceServiceHandlerMockUpdatePresenceExpectationOrigins
-	results            *DeviceServiceHandlerMockUpdatePresenceResults
+// DeviceServiceClientMockUpdatePresenceExpectation specifies expectation struct of the DeviceServiceClient.UpdatePresence
+type DeviceServiceClientMockUpdatePresenceExpectation struct {
+	mock               *DeviceServiceClientMock
+	params             *DeviceServiceClientMockUpdatePresenceParams
+	paramPtrs          *DeviceServiceClientMockUpdatePresenceParamPtrs
+	expectationOrigins DeviceServiceClientMockUpdatePresenceExpectationOrigins
+	results            *DeviceServiceClientMockUpdatePresenceResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// DeviceServiceHandlerMockUpdatePresenceParams contains parameters of the DeviceServiceHandler.UpdatePresence
-type DeviceServiceHandlerMockUpdatePresenceParams struct {
+// DeviceServiceClientMockUpdatePresenceParams contains parameters of the DeviceServiceClient.UpdatePresence
+type DeviceServiceClientMockUpdatePresenceParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.UpdatePresenceRequest]
 }
 
-// DeviceServiceHandlerMockUpdatePresenceParamPtrs contains pointers to parameters of the DeviceServiceHandler.UpdatePresence
-type DeviceServiceHandlerMockUpdatePresenceParamPtrs struct {
+// DeviceServiceClientMockUpdatePresenceParamPtrs contains pointers to parameters of the DeviceServiceClient.UpdatePresence
+type DeviceServiceClientMockUpdatePresenceParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.UpdatePresenceRequest]
 }
 
-// DeviceServiceHandlerMockUpdatePresenceResults contains results of the DeviceServiceHandler.UpdatePresence
-type DeviceServiceHandlerMockUpdatePresenceResults struct {
+// DeviceServiceClientMockUpdatePresenceResults contains results of the DeviceServiceClient.UpdatePresence
+type DeviceServiceClientMockUpdatePresenceResults struct {
 	pp2 *connect.Response[v1.UpdatePresenceResponse]
 	err error
 }
 
-// DeviceServiceHandlerMockUpdatePresenceOrigins contains origins of expectations of the DeviceServiceHandler.UpdatePresence
-type DeviceServiceHandlerMockUpdatePresenceExpectationOrigins struct {
+// DeviceServiceClientMockUpdatePresenceOrigins contains origins of expectations of the DeviceServiceClient.UpdatePresence
+type DeviceServiceClientMockUpdatePresenceExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -5453,26 +5393,26 @@ type DeviceServiceHandlerMockUpdatePresenceExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmUpdatePresence *mDeviceServiceHandlerMockUpdatePresence) Optional() *mDeviceServiceHandlerMockUpdatePresence {
+func (mmUpdatePresence *mDeviceServiceClientMockUpdatePresence) Optional() *mDeviceServiceClientMockUpdatePresence {
 	mmUpdatePresence.optional = true
 	return mmUpdatePresence
 }
 
-// Expect sets up expected params for DeviceServiceHandler.UpdatePresence
-func (mmUpdatePresence *mDeviceServiceHandlerMockUpdatePresence) Expect(ctx context.Context, pp1 *connect.Request[v1.UpdatePresenceRequest]) *mDeviceServiceHandlerMockUpdatePresence {
+// Expect sets up expected params for DeviceServiceClient.UpdatePresence
+func (mmUpdatePresence *mDeviceServiceClientMockUpdatePresence) Expect(ctx context.Context, pp1 *connect.Request[v1.UpdatePresenceRequest]) *mDeviceServiceClientMockUpdatePresence {
 	if mmUpdatePresence.mock.funcUpdatePresence != nil {
-		mmUpdatePresence.mock.t.Fatalf("DeviceServiceHandlerMock.UpdatePresence mock is already set by Set")
+		mmUpdatePresence.mock.t.Fatalf("DeviceServiceClientMock.UpdatePresence mock is already set by Set")
 	}
 
 	if mmUpdatePresence.defaultExpectation == nil {
-		mmUpdatePresence.defaultExpectation = &DeviceServiceHandlerMockUpdatePresenceExpectation{}
+		mmUpdatePresence.defaultExpectation = &DeviceServiceClientMockUpdatePresenceExpectation{}
 	}
 
 	if mmUpdatePresence.defaultExpectation.paramPtrs != nil {
-		mmUpdatePresence.mock.t.Fatalf("DeviceServiceHandlerMock.UpdatePresence mock is already set by ExpectParams functions")
+		mmUpdatePresence.mock.t.Fatalf("DeviceServiceClientMock.UpdatePresence mock is already set by ExpectParams functions")
 	}
 
-	mmUpdatePresence.defaultExpectation.params = &DeviceServiceHandlerMockUpdatePresenceParams{ctx, pp1}
+	mmUpdatePresence.defaultExpectation.params = &DeviceServiceClientMockUpdatePresenceParams{ctx, pp1}
 	mmUpdatePresence.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmUpdatePresence.expectations {
 		if minimock.Equal(e.params, mmUpdatePresence.defaultExpectation.params) {
@@ -5483,22 +5423,22 @@ func (mmUpdatePresence *mDeviceServiceHandlerMockUpdatePresence) Expect(ctx cont
 	return mmUpdatePresence
 }
 
-// ExpectCtxParam1 sets up expected param ctx for DeviceServiceHandler.UpdatePresence
-func (mmUpdatePresence *mDeviceServiceHandlerMockUpdatePresence) ExpectCtxParam1(ctx context.Context) *mDeviceServiceHandlerMockUpdatePresence {
+// ExpectCtxParam1 sets up expected param ctx for DeviceServiceClient.UpdatePresence
+func (mmUpdatePresence *mDeviceServiceClientMockUpdatePresence) ExpectCtxParam1(ctx context.Context) *mDeviceServiceClientMockUpdatePresence {
 	if mmUpdatePresence.mock.funcUpdatePresence != nil {
-		mmUpdatePresence.mock.t.Fatalf("DeviceServiceHandlerMock.UpdatePresence mock is already set by Set")
+		mmUpdatePresence.mock.t.Fatalf("DeviceServiceClientMock.UpdatePresence mock is already set by Set")
 	}
 
 	if mmUpdatePresence.defaultExpectation == nil {
-		mmUpdatePresence.defaultExpectation = &DeviceServiceHandlerMockUpdatePresenceExpectation{}
+		mmUpdatePresence.defaultExpectation = &DeviceServiceClientMockUpdatePresenceExpectation{}
 	}
 
 	if mmUpdatePresence.defaultExpectation.params != nil {
-		mmUpdatePresence.mock.t.Fatalf("DeviceServiceHandlerMock.UpdatePresence mock is already set by Expect")
+		mmUpdatePresence.mock.t.Fatalf("DeviceServiceClientMock.UpdatePresence mock is already set by Expect")
 	}
 
 	if mmUpdatePresence.defaultExpectation.paramPtrs == nil {
-		mmUpdatePresence.defaultExpectation.paramPtrs = &DeviceServiceHandlerMockUpdatePresenceParamPtrs{}
+		mmUpdatePresence.defaultExpectation.paramPtrs = &DeviceServiceClientMockUpdatePresenceParamPtrs{}
 	}
 	mmUpdatePresence.defaultExpectation.paramPtrs.ctx = &ctx
 	mmUpdatePresence.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -5506,22 +5446,22 @@ func (mmUpdatePresence *mDeviceServiceHandlerMockUpdatePresence) ExpectCtxParam1
 	return mmUpdatePresence
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for DeviceServiceHandler.UpdatePresence
-func (mmUpdatePresence *mDeviceServiceHandlerMockUpdatePresence) ExpectPp1Param2(pp1 *connect.Request[v1.UpdatePresenceRequest]) *mDeviceServiceHandlerMockUpdatePresence {
+// ExpectPp1Param2 sets up expected param pp1 for DeviceServiceClient.UpdatePresence
+func (mmUpdatePresence *mDeviceServiceClientMockUpdatePresence) ExpectPp1Param2(pp1 *connect.Request[v1.UpdatePresenceRequest]) *mDeviceServiceClientMockUpdatePresence {
 	if mmUpdatePresence.mock.funcUpdatePresence != nil {
-		mmUpdatePresence.mock.t.Fatalf("DeviceServiceHandlerMock.UpdatePresence mock is already set by Set")
+		mmUpdatePresence.mock.t.Fatalf("DeviceServiceClientMock.UpdatePresence mock is already set by Set")
 	}
 
 	if mmUpdatePresence.defaultExpectation == nil {
-		mmUpdatePresence.defaultExpectation = &DeviceServiceHandlerMockUpdatePresenceExpectation{}
+		mmUpdatePresence.defaultExpectation = &DeviceServiceClientMockUpdatePresenceExpectation{}
 	}
 
 	if mmUpdatePresence.defaultExpectation.params != nil {
-		mmUpdatePresence.mock.t.Fatalf("DeviceServiceHandlerMock.UpdatePresence mock is already set by Expect")
+		mmUpdatePresence.mock.t.Fatalf("DeviceServiceClientMock.UpdatePresence mock is already set by Expect")
 	}
 
 	if mmUpdatePresence.defaultExpectation.paramPtrs == nil {
-		mmUpdatePresence.defaultExpectation.paramPtrs = &DeviceServiceHandlerMockUpdatePresenceParamPtrs{}
+		mmUpdatePresence.defaultExpectation.paramPtrs = &DeviceServiceClientMockUpdatePresenceParamPtrs{}
 	}
 	mmUpdatePresence.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmUpdatePresence.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -5529,10 +5469,10 @@ func (mmUpdatePresence *mDeviceServiceHandlerMockUpdatePresence) ExpectPp1Param2
 	return mmUpdatePresence
 }
 
-// Inspect accepts an inspector function that has same arguments as the DeviceServiceHandler.UpdatePresence
-func (mmUpdatePresence *mDeviceServiceHandlerMockUpdatePresence) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.UpdatePresenceRequest])) *mDeviceServiceHandlerMockUpdatePresence {
+// Inspect accepts an inspector function that has same arguments as the DeviceServiceClient.UpdatePresence
+func (mmUpdatePresence *mDeviceServiceClientMockUpdatePresence) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.UpdatePresenceRequest])) *mDeviceServiceClientMockUpdatePresence {
 	if mmUpdatePresence.mock.inspectFuncUpdatePresence != nil {
-		mmUpdatePresence.mock.t.Fatalf("Inspect function is already set for DeviceServiceHandlerMock.UpdatePresence")
+		mmUpdatePresence.mock.t.Fatalf("Inspect function is already set for DeviceServiceClientMock.UpdatePresence")
 	}
 
 	mmUpdatePresence.mock.inspectFuncUpdatePresence = f
@@ -5540,28 +5480,28 @@ func (mmUpdatePresence *mDeviceServiceHandlerMockUpdatePresence) Inspect(f func(
 	return mmUpdatePresence
 }
 
-// Return sets up results that will be returned by DeviceServiceHandler.UpdatePresence
-func (mmUpdatePresence *mDeviceServiceHandlerMockUpdatePresence) Return(pp2 *connect.Response[v1.UpdatePresenceResponse], err error) *DeviceServiceHandlerMock {
+// Return sets up results that will be returned by DeviceServiceClient.UpdatePresence
+func (mmUpdatePresence *mDeviceServiceClientMockUpdatePresence) Return(pp2 *connect.Response[v1.UpdatePresenceResponse], err error) *DeviceServiceClientMock {
 	if mmUpdatePresence.mock.funcUpdatePresence != nil {
-		mmUpdatePresence.mock.t.Fatalf("DeviceServiceHandlerMock.UpdatePresence mock is already set by Set")
+		mmUpdatePresence.mock.t.Fatalf("DeviceServiceClientMock.UpdatePresence mock is already set by Set")
 	}
 
 	if mmUpdatePresence.defaultExpectation == nil {
-		mmUpdatePresence.defaultExpectation = &DeviceServiceHandlerMockUpdatePresenceExpectation{mock: mmUpdatePresence.mock}
+		mmUpdatePresence.defaultExpectation = &DeviceServiceClientMockUpdatePresenceExpectation{mock: mmUpdatePresence.mock}
 	}
-	mmUpdatePresence.defaultExpectation.results = &DeviceServiceHandlerMockUpdatePresenceResults{pp2, err}
+	mmUpdatePresence.defaultExpectation.results = &DeviceServiceClientMockUpdatePresenceResults{pp2, err}
 	mmUpdatePresence.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmUpdatePresence.mock
 }
 
-// Set uses given function f to mock the DeviceServiceHandler.UpdatePresence method
-func (mmUpdatePresence *mDeviceServiceHandlerMockUpdatePresence) Set(f func(ctx context.Context, pp1 *connect.Request[v1.UpdatePresenceRequest]) (pp2 *connect.Response[v1.UpdatePresenceResponse], err error)) *DeviceServiceHandlerMock {
+// Set uses given function f to mock the DeviceServiceClient.UpdatePresence method
+func (mmUpdatePresence *mDeviceServiceClientMockUpdatePresence) Set(f func(ctx context.Context, pp1 *connect.Request[v1.UpdatePresenceRequest]) (pp2 *connect.Response[v1.UpdatePresenceResponse], err error)) *DeviceServiceClientMock {
 	if mmUpdatePresence.defaultExpectation != nil {
-		mmUpdatePresence.mock.t.Fatalf("Default expectation is already set for the DeviceServiceHandler.UpdatePresence method")
+		mmUpdatePresence.mock.t.Fatalf("Default expectation is already set for the DeviceServiceClient.UpdatePresence method")
 	}
 
 	if len(mmUpdatePresence.expectations) > 0 {
-		mmUpdatePresence.mock.t.Fatalf("Some expectations are already set for the DeviceServiceHandler.UpdatePresence method")
+		mmUpdatePresence.mock.t.Fatalf("Some expectations are already set for the DeviceServiceClient.UpdatePresence method")
 	}
 
 	mmUpdatePresence.mock.funcUpdatePresence = f
@@ -5569,39 +5509,39 @@ func (mmUpdatePresence *mDeviceServiceHandlerMockUpdatePresence) Set(f func(ctx 
 	return mmUpdatePresence.mock
 }
 
-// When sets expectation for the DeviceServiceHandler.UpdatePresence which will trigger the result defined by the following
+// When sets expectation for the DeviceServiceClient.UpdatePresence which will trigger the result defined by the following
 // Then helper
-func (mmUpdatePresence *mDeviceServiceHandlerMockUpdatePresence) When(ctx context.Context, pp1 *connect.Request[v1.UpdatePresenceRequest]) *DeviceServiceHandlerMockUpdatePresenceExpectation {
+func (mmUpdatePresence *mDeviceServiceClientMockUpdatePresence) When(ctx context.Context, pp1 *connect.Request[v1.UpdatePresenceRequest]) *DeviceServiceClientMockUpdatePresenceExpectation {
 	if mmUpdatePresence.mock.funcUpdatePresence != nil {
-		mmUpdatePresence.mock.t.Fatalf("DeviceServiceHandlerMock.UpdatePresence mock is already set by Set")
+		mmUpdatePresence.mock.t.Fatalf("DeviceServiceClientMock.UpdatePresence mock is already set by Set")
 	}
 
-	expectation := &DeviceServiceHandlerMockUpdatePresenceExpectation{
+	expectation := &DeviceServiceClientMockUpdatePresenceExpectation{
 		mock:               mmUpdatePresence.mock,
-		params:             &DeviceServiceHandlerMockUpdatePresenceParams{ctx, pp1},
-		expectationOrigins: DeviceServiceHandlerMockUpdatePresenceExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &DeviceServiceClientMockUpdatePresenceParams{ctx, pp1},
+		expectationOrigins: DeviceServiceClientMockUpdatePresenceExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmUpdatePresence.expectations = append(mmUpdatePresence.expectations, expectation)
 	return expectation
 }
 
-// Then sets up DeviceServiceHandler.UpdatePresence return parameters for the expectation previously defined by the When method
-func (e *DeviceServiceHandlerMockUpdatePresenceExpectation) Then(pp2 *connect.Response[v1.UpdatePresenceResponse], err error) *DeviceServiceHandlerMock {
-	e.results = &DeviceServiceHandlerMockUpdatePresenceResults{pp2, err}
+// Then sets up DeviceServiceClient.UpdatePresence return parameters for the expectation previously defined by the When method
+func (e *DeviceServiceClientMockUpdatePresenceExpectation) Then(pp2 *connect.Response[v1.UpdatePresenceResponse], err error) *DeviceServiceClientMock {
+	e.results = &DeviceServiceClientMockUpdatePresenceResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times DeviceServiceHandler.UpdatePresence should be invoked
-func (mmUpdatePresence *mDeviceServiceHandlerMockUpdatePresence) Times(n uint64) *mDeviceServiceHandlerMockUpdatePresence {
+// Times sets number of times DeviceServiceClient.UpdatePresence should be invoked
+func (mmUpdatePresence *mDeviceServiceClientMockUpdatePresence) Times(n uint64) *mDeviceServiceClientMockUpdatePresence {
 	if n == 0 {
-		mmUpdatePresence.mock.t.Fatalf("Times of DeviceServiceHandlerMock.UpdatePresence mock can not be zero")
+		mmUpdatePresence.mock.t.Fatalf("Times of DeviceServiceClientMock.UpdatePresence mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmUpdatePresence.expectedInvocations, n)
 	mmUpdatePresence.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmUpdatePresence
 }
 
-func (mmUpdatePresence *mDeviceServiceHandlerMockUpdatePresence) invocationsDone() bool {
+func (mmUpdatePresence *mDeviceServiceClientMockUpdatePresence) invocationsDone() bool {
 	if len(mmUpdatePresence.expectations) == 0 && mmUpdatePresence.defaultExpectation == nil && mmUpdatePresence.mock.funcUpdatePresence == nil {
 		return true
 	}
@@ -5612,8 +5552,8 @@ func (mmUpdatePresence *mDeviceServiceHandlerMockUpdatePresence) invocationsDone
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// UpdatePresence implements mm_devicev1connect.DeviceServiceHandler
-func (mmUpdatePresence *DeviceServiceHandlerMock) UpdatePresence(ctx context.Context, pp1 *connect.Request[v1.UpdatePresenceRequest]) (pp2 *connect.Response[v1.UpdatePresenceResponse], err error) {
+// UpdatePresence implements mm_devicev1connect.DeviceServiceClient
+func (mmUpdatePresence *DeviceServiceClientMock) UpdatePresence(ctx context.Context, pp1 *connect.Request[v1.UpdatePresenceRequest]) (pp2 *connect.Response[v1.UpdatePresenceResponse], err error) {
 	mm_atomic.AddUint64(&mmUpdatePresence.beforeUpdatePresenceCounter, 1)
 	defer mm_atomic.AddUint64(&mmUpdatePresence.afterUpdatePresenceCounter, 1)
 
@@ -5623,7 +5563,7 @@ func (mmUpdatePresence *DeviceServiceHandlerMock) UpdatePresence(ctx context.Con
 		mmUpdatePresence.inspectFuncUpdatePresence(ctx, pp1)
 	}
 
-	mm_params := DeviceServiceHandlerMockUpdatePresenceParams{ctx, pp1}
+	mm_params := DeviceServiceClientMockUpdatePresenceParams{ctx, pp1}
 
 	// Record call args
 	mmUpdatePresence.UpdatePresenceMock.mutex.Lock()
@@ -5642,54 +5582,54 @@ func (mmUpdatePresence *DeviceServiceHandlerMock) UpdatePresence(ctx context.Con
 		mm_want := mmUpdatePresence.UpdatePresenceMock.defaultExpectation.params
 		mm_want_ptrs := mmUpdatePresence.UpdatePresenceMock.defaultExpectation.paramPtrs
 
-		mm_got := DeviceServiceHandlerMockUpdatePresenceParams{ctx, pp1}
+		mm_got := DeviceServiceClientMockUpdatePresenceParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmUpdatePresence.t.Errorf("DeviceServiceHandlerMock.UpdatePresence got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmUpdatePresence.t.Errorf("DeviceServiceClientMock.UpdatePresence got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmUpdatePresence.UpdatePresenceMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmUpdatePresence.t.Errorf("DeviceServiceHandlerMock.UpdatePresence got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmUpdatePresence.t.Errorf("DeviceServiceClientMock.UpdatePresence got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmUpdatePresence.UpdatePresenceMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmUpdatePresence.t.Errorf("DeviceServiceHandlerMock.UpdatePresence got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmUpdatePresence.t.Errorf("DeviceServiceClientMock.UpdatePresence got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmUpdatePresence.UpdatePresenceMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmUpdatePresence.UpdatePresenceMock.defaultExpectation.results
 		if mm_results == nil {
-			mmUpdatePresence.t.Fatal("No results are set for the DeviceServiceHandlerMock.UpdatePresence")
+			mmUpdatePresence.t.Fatal("No results are set for the DeviceServiceClientMock.UpdatePresence")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmUpdatePresence.funcUpdatePresence != nil {
 		return mmUpdatePresence.funcUpdatePresence(ctx, pp1)
 	}
-	mmUpdatePresence.t.Fatalf("Unexpected call to DeviceServiceHandlerMock.UpdatePresence. %v %v", ctx, pp1)
+	mmUpdatePresence.t.Fatalf("Unexpected call to DeviceServiceClientMock.UpdatePresence. %v %v", ctx, pp1)
 	return
 }
 
-// UpdatePresenceAfterCounter returns a count of finished DeviceServiceHandlerMock.UpdatePresence invocations
-func (mmUpdatePresence *DeviceServiceHandlerMock) UpdatePresenceAfterCounter() uint64 {
+// UpdatePresenceAfterCounter returns a count of finished DeviceServiceClientMock.UpdatePresence invocations
+func (mmUpdatePresence *DeviceServiceClientMock) UpdatePresenceAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmUpdatePresence.afterUpdatePresenceCounter)
 }
 
-// UpdatePresenceBeforeCounter returns a count of DeviceServiceHandlerMock.UpdatePresence invocations
-func (mmUpdatePresence *DeviceServiceHandlerMock) UpdatePresenceBeforeCounter() uint64 {
+// UpdatePresenceBeforeCounter returns a count of DeviceServiceClientMock.UpdatePresence invocations
+func (mmUpdatePresence *DeviceServiceClientMock) UpdatePresenceBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmUpdatePresence.beforeUpdatePresenceCounter)
 }
 
-// Calls returns a list of arguments used in each call to DeviceServiceHandlerMock.UpdatePresence.
+// Calls returns a list of arguments used in each call to DeviceServiceClientMock.UpdatePresence.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmUpdatePresence *mDeviceServiceHandlerMockUpdatePresence) Calls() []*DeviceServiceHandlerMockUpdatePresenceParams {
+func (mmUpdatePresence *mDeviceServiceClientMockUpdatePresence) Calls() []*DeviceServiceClientMockUpdatePresenceParams {
 	mmUpdatePresence.mutex.RLock()
 
-	argCopy := make([]*DeviceServiceHandlerMockUpdatePresenceParams, len(mmUpdatePresence.callArgs))
+	argCopy := make([]*DeviceServiceClientMockUpdatePresenceParams, len(mmUpdatePresence.callArgs))
 	copy(argCopy, mmUpdatePresence.callArgs)
 
 	mmUpdatePresence.mutex.RUnlock()
@@ -5699,7 +5639,7 @@ func (mmUpdatePresence *mDeviceServiceHandlerMockUpdatePresence) Calls() []*Devi
 
 // MinimockUpdatePresenceDone returns true if the count of the UpdatePresence invocations corresponds
 // the number of defined expectations
-func (m *DeviceServiceHandlerMock) MinimockUpdatePresenceDone() bool {
+func (m *DeviceServiceClientMock) MinimockUpdatePresenceDone() bool {
 	if m.UpdatePresenceMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -5715,10 +5655,10 @@ func (m *DeviceServiceHandlerMock) MinimockUpdatePresenceDone() bool {
 }
 
 // MinimockUpdatePresenceInspect logs each unmet expectation
-func (m *DeviceServiceHandlerMock) MinimockUpdatePresenceInspect() {
+func (m *DeviceServiceClientMock) MinimockUpdatePresenceInspect() {
 	for _, e := range m.UpdatePresenceMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.UpdatePresence at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.UpdatePresence at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -5726,24 +5666,24 @@ func (m *DeviceServiceHandlerMock) MinimockUpdatePresenceInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.UpdatePresenceMock.defaultExpectation != nil && afterUpdatePresenceCounter < 1 {
 		if m.UpdatePresenceMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.UpdatePresence at\n%s", m.UpdatePresenceMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.UpdatePresence at\n%s", m.UpdatePresenceMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to DeviceServiceHandlerMock.UpdatePresence at\n%s with params: %#v", m.UpdatePresenceMock.defaultExpectation.expectationOrigins.origin, *m.UpdatePresenceMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to DeviceServiceClientMock.UpdatePresence at\n%s with params: %#v", m.UpdatePresenceMock.defaultExpectation.expectationOrigins.origin, *m.UpdatePresenceMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcUpdatePresence != nil && afterUpdatePresenceCounter < 1 {
-		m.t.Errorf("Expected call to DeviceServiceHandlerMock.UpdatePresence at\n%s", m.funcUpdatePresenceOrigin)
+		m.t.Errorf("Expected call to DeviceServiceClientMock.UpdatePresence at\n%s", m.funcUpdatePresenceOrigin)
 	}
 
 	if !m.UpdatePresenceMock.invocationsDone() && afterUpdatePresenceCounter > 0 {
-		m.t.Errorf("Expected %d calls to DeviceServiceHandlerMock.UpdatePresence at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to DeviceServiceClientMock.UpdatePresence at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.UpdatePresenceMock.expectedInvocations), m.UpdatePresenceMock.expectedInvocationsOrigin, afterUpdatePresenceCounter)
 	}
 }
 
 // MinimockFinish checks that all mocked methods have been called the expected number of times
-func (m *DeviceServiceHandlerMock) MinimockFinish() {
+func (m *DeviceServiceClientMock) MinimockFinish() {
 	m.finishOnce.Do(func() {
 		if !m.minimockDone() {
 			m.MinimockAddKeyInspect()
@@ -5782,7 +5722,7 @@ func (m *DeviceServiceHandlerMock) MinimockFinish() {
 }
 
 // MinimockWait waits for all mocked methods to be called the expected number of times
-func (m *DeviceServiceHandlerMock) MinimockWait(timeout mm_time.Duration) {
+func (m *DeviceServiceClientMock) MinimockWait(timeout mm_time.Duration) {
 	timeoutCh := mm_time.After(timeout)
 	for {
 		if m.minimockDone() {
@@ -5797,7 +5737,7 @@ func (m *DeviceServiceHandlerMock) MinimockWait(timeout mm_time.Duration) {
 	}
 }
 
-func (m *DeviceServiceHandlerMock) minimockDone() bool {
+func (m *DeviceServiceClientMock) minimockDone() bool {
 	done := true
 	return done &&
 		m.MinimockAddKeyDone() &&

@@ -2,7 +2,7 @@
 
 package mocks
 
-//go:generate minimock -i buf.build/gen/go/antinvestor/ledger/connectrpc/go/ledger/v1/ledgerv1connect.LedgerServiceHandler -o ledger_handler.gen.go -n LedgerServiceHandlerMock -p mocks
+//go:generate minimock -i buf.build/gen/go/antinvestor/ledger/connectrpc/go/ledger/v1/ledgerv1connect.LedgerServiceClient -o ledger_handler.gen.go -n LedgerServiceClientMock -p mocks
 
 import (
 	context "context"
@@ -16,8 +16,8 @@ import (
 	"github.com/gojuno/minimock/v3"
 )
 
-// LedgerServiceHandlerMock implements mm_ledgerv1connect.LedgerServiceHandler
-type LedgerServiceHandlerMock struct {
+// LedgerServiceClientMock implements mm_ledgerv1connect.LedgerServiceClient
+type LedgerServiceClientMock struct {
 	t          minimock.Tester
 	finishOnce sync.Once
 
@@ -26,169 +26,169 @@ type LedgerServiceHandlerMock struct {
 	inspectFuncCreateAccount   func(ctx context.Context, pp1 *connect.Request[v11.Account])
 	afterCreateAccountCounter  uint64
 	beforeCreateAccountCounter uint64
-	CreateAccountMock          mLedgerServiceHandlerMockCreateAccount
+	CreateAccountMock          mLedgerServiceClientMockCreateAccount
 
 	funcCreateLedger          func(ctx context.Context, pp1 *connect.Request[v11.Ledger]) (pp2 *connect.Response[v11.Ledger], err error)
 	funcCreateLedgerOrigin    string
 	inspectFuncCreateLedger   func(ctx context.Context, pp1 *connect.Request[v11.Ledger])
 	afterCreateLedgerCounter  uint64
 	beforeCreateLedgerCounter uint64
-	CreateLedgerMock          mLedgerServiceHandlerMockCreateLedger
+	CreateLedgerMock          mLedgerServiceClientMockCreateLedger
 
 	funcCreateTransaction          func(ctx context.Context, pp1 *connect.Request[v11.Transaction]) (pp2 *connect.Response[v11.Transaction], err error)
 	funcCreateTransactionOrigin    string
 	inspectFuncCreateTransaction   func(ctx context.Context, pp1 *connect.Request[v11.Transaction])
 	afterCreateTransactionCounter  uint64
 	beforeCreateTransactionCounter uint64
-	CreateTransactionMock          mLedgerServiceHandlerMockCreateTransaction
+	CreateTransactionMock          mLedgerServiceClientMockCreateTransaction
 
 	funcReverseTransaction          func(ctx context.Context, pp1 *connect.Request[v11.Transaction]) (pp2 *connect.Response[v11.Transaction], err error)
 	funcReverseTransactionOrigin    string
 	inspectFuncReverseTransaction   func(ctx context.Context, pp1 *connect.Request[v11.Transaction])
 	afterReverseTransactionCounter  uint64
 	beforeReverseTransactionCounter uint64
-	ReverseTransactionMock          mLedgerServiceHandlerMockReverseTransaction
+	ReverseTransactionMock          mLedgerServiceClientMockReverseTransaction
 
-	funcSearchAccounts          func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest], pp2 *connect.ServerStream[v11.Account]) (err error)
+	funcSearchAccounts          func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) (pp2 *connect.ServerStreamForClient[v11.Account], err error)
 	funcSearchAccountsOrigin    string
-	inspectFuncSearchAccounts   func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest], pp2 *connect.ServerStream[v11.Account])
+	inspectFuncSearchAccounts   func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest])
 	afterSearchAccountsCounter  uint64
 	beforeSearchAccountsCounter uint64
-	SearchAccountsMock          mLedgerServiceHandlerMockSearchAccounts
+	SearchAccountsMock          mLedgerServiceClientMockSearchAccounts
 
-	funcSearchLedgers          func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest], pp2 *connect.ServerStream[v11.Ledger]) (err error)
+	funcSearchLedgers          func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) (pp2 *connect.ServerStreamForClient[v11.Ledger], err error)
 	funcSearchLedgersOrigin    string
-	inspectFuncSearchLedgers   func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest], pp2 *connect.ServerStream[v11.Ledger])
+	inspectFuncSearchLedgers   func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest])
 	afterSearchLedgersCounter  uint64
 	beforeSearchLedgersCounter uint64
-	SearchLedgersMock          mLedgerServiceHandlerMockSearchLedgers
+	SearchLedgersMock          mLedgerServiceClientMockSearchLedgers
 
-	funcSearchTransactionEntries          func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest], pp2 *connect.ServerStream[v11.TransactionEntry]) (err error)
+	funcSearchTransactionEntries          func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) (pp2 *connect.ServerStreamForClient[v11.TransactionEntry], err error)
 	funcSearchTransactionEntriesOrigin    string
-	inspectFuncSearchTransactionEntries   func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest], pp2 *connect.ServerStream[v11.TransactionEntry])
+	inspectFuncSearchTransactionEntries   func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest])
 	afterSearchTransactionEntriesCounter  uint64
 	beforeSearchTransactionEntriesCounter uint64
-	SearchTransactionEntriesMock          mLedgerServiceHandlerMockSearchTransactionEntries
+	SearchTransactionEntriesMock          mLedgerServiceClientMockSearchTransactionEntries
 
-	funcSearchTransactions          func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest], pp2 *connect.ServerStream[v11.Transaction]) (err error)
+	funcSearchTransactions          func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) (pp2 *connect.ServerStreamForClient[v11.Transaction], err error)
 	funcSearchTransactionsOrigin    string
-	inspectFuncSearchTransactions   func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest], pp2 *connect.ServerStream[v11.Transaction])
+	inspectFuncSearchTransactions   func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest])
 	afterSearchTransactionsCounter  uint64
 	beforeSearchTransactionsCounter uint64
-	SearchTransactionsMock          mLedgerServiceHandlerMockSearchTransactions
+	SearchTransactionsMock          mLedgerServiceClientMockSearchTransactions
 
 	funcUpdateAccount          func(ctx context.Context, pp1 *connect.Request[v11.Account]) (pp2 *connect.Response[v11.Account], err error)
 	funcUpdateAccountOrigin    string
 	inspectFuncUpdateAccount   func(ctx context.Context, pp1 *connect.Request[v11.Account])
 	afterUpdateAccountCounter  uint64
 	beforeUpdateAccountCounter uint64
-	UpdateAccountMock          mLedgerServiceHandlerMockUpdateAccount
+	UpdateAccountMock          mLedgerServiceClientMockUpdateAccount
 
 	funcUpdateLedger          func(ctx context.Context, pp1 *connect.Request[v11.Ledger]) (pp2 *connect.Response[v11.Ledger], err error)
 	funcUpdateLedgerOrigin    string
 	inspectFuncUpdateLedger   func(ctx context.Context, pp1 *connect.Request[v11.Ledger])
 	afterUpdateLedgerCounter  uint64
 	beforeUpdateLedgerCounter uint64
-	UpdateLedgerMock          mLedgerServiceHandlerMockUpdateLedger
+	UpdateLedgerMock          mLedgerServiceClientMockUpdateLedger
 
 	funcUpdateTransaction          func(ctx context.Context, pp1 *connect.Request[v11.Transaction]) (pp2 *connect.Response[v11.Transaction], err error)
 	funcUpdateTransactionOrigin    string
 	inspectFuncUpdateTransaction   func(ctx context.Context, pp1 *connect.Request[v11.Transaction])
 	afterUpdateTransactionCounter  uint64
 	beforeUpdateTransactionCounter uint64
-	UpdateTransactionMock          mLedgerServiceHandlerMockUpdateTransaction
+	UpdateTransactionMock          mLedgerServiceClientMockUpdateTransaction
 }
 
-// NewLedgerServiceHandlerMock returns a mock for mm_ledgerv1connect.LedgerServiceHandler
-func NewLedgerServiceHandlerMock(t minimock.Tester) *LedgerServiceHandlerMock {
-	m := &LedgerServiceHandlerMock{t: t}
+// NewLedgerServiceClientMock returns a mock for mm_ledgerv1connect.LedgerServiceClient
+func NewLedgerServiceClientMock(t minimock.Tester) *LedgerServiceClientMock {
+	m := &LedgerServiceClientMock{t: t}
 
 	if controller, ok := t.(minimock.MockController); ok {
 		controller.RegisterMocker(m)
 	}
 
-	m.CreateAccountMock = mLedgerServiceHandlerMockCreateAccount{mock: m}
-	m.CreateAccountMock.callArgs = []*LedgerServiceHandlerMockCreateAccountParams{}
+	m.CreateAccountMock = mLedgerServiceClientMockCreateAccount{mock: m}
+	m.CreateAccountMock.callArgs = []*LedgerServiceClientMockCreateAccountParams{}
 
-	m.CreateLedgerMock = mLedgerServiceHandlerMockCreateLedger{mock: m}
-	m.CreateLedgerMock.callArgs = []*LedgerServiceHandlerMockCreateLedgerParams{}
+	m.CreateLedgerMock = mLedgerServiceClientMockCreateLedger{mock: m}
+	m.CreateLedgerMock.callArgs = []*LedgerServiceClientMockCreateLedgerParams{}
 
-	m.CreateTransactionMock = mLedgerServiceHandlerMockCreateTransaction{mock: m}
-	m.CreateTransactionMock.callArgs = []*LedgerServiceHandlerMockCreateTransactionParams{}
+	m.CreateTransactionMock = mLedgerServiceClientMockCreateTransaction{mock: m}
+	m.CreateTransactionMock.callArgs = []*LedgerServiceClientMockCreateTransactionParams{}
 
-	m.ReverseTransactionMock = mLedgerServiceHandlerMockReverseTransaction{mock: m}
-	m.ReverseTransactionMock.callArgs = []*LedgerServiceHandlerMockReverseTransactionParams{}
+	m.ReverseTransactionMock = mLedgerServiceClientMockReverseTransaction{mock: m}
+	m.ReverseTransactionMock.callArgs = []*LedgerServiceClientMockReverseTransactionParams{}
 
-	m.SearchAccountsMock = mLedgerServiceHandlerMockSearchAccounts{mock: m}
-	m.SearchAccountsMock.callArgs = []*LedgerServiceHandlerMockSearchAccountsParams{}
+	m.SearchAccountsMock = mLedgerServiceClientMockSearchAccounts{mock: m}
+	m.SearchAccountsMock.callArgs = []*LedgerServiceClientMockSearchAccountsParams{}
 
-	m.SearchLedgersMock = mLedgerServiceHandlerMockSearchLedgers{mock: m}
-	m.SearchLedgersMock.callArgs = []*LedgerServiceHandlerMockSearchLedgersParams{}
+	m.SearchLedgersMock = mLedgerServiceClientMockSearchLedgers{mock: m}
+	m.SearchLedgersMock.callArgs = []*LedgerServiceClientMockSearchLedgersParams{}
 
-	m.SearchTransactionEntriesMock = mLedgerServiceHandlerMockSearchTransactionEntries{mock: m}
-	m.SearchTransactionEntriesMock.callArgs = []*LedgerServiceHandlerMockSearchTransactionEntriesParams{}
+	m.SearchTransactionEntriesMock = mLedgerServiceClientMockSearchTransactionEntries{mock: m}
+	m.SearchTransactionEntriesMock.callArgs = []*LedgerServiceClientMockSearchTransactionEntriesParams{}
 
-	m.SearchTransactionsMock = mLedgerServiceHandlerMockSearchTransactions{mock: m}
-	m.SearchTransactionsMock.callArgs = []*LedgerServiceHandlerMockSearchTransactionsParams{}
+	m.SearchTransactionsMock = mLedgerServiceClientMockSearchTransactions{mock: m}
+	m.SearchTransactionsMock.callArgs = []*LedgerServiceClientMockSearchTransactionsParams{}
 
-	m.UpdateAccountMock = mLedgerServiceHandlerMockUpdateAccount{mock: m}
-	m.UpdateAccountMock.callArgs = []*LedgerServiceHandlerMockUpdateAccountParams{}
+	m.UpdateAccountMock = mLedgerServiceClientMockUpdateAccount{mock: m}
+	m.UpdateAccountMock.callArgs = []*LedgerServiceClientMockUpdateAccountParams{}
 
-	m.UpdateLedgerMock = mLedgerServiceHandlerMockUpdateLedger{mock: m}
-	m.UpdateLedgerMock.callArgs = []*LedgerServiceHandlerMockUpdateLedgerParams{}
+	m.UpdateLedgerMock = mLedgerServiceClientMockUpdateLedger{mock: m}
+	m.UpdateLedgerMock.callArgs = []*LedgerServiceClientMockUpdateLedgerParams{}
 
-	m.UpdateTransactionMock = mLedgerServiceHandlerMockUpdateTransaction{mock: m}
-	m.UpdateTransactionMock.callArgs = []*LedgerServiceHandlerMockUpdateTransactionParams{}
+	m.UpdateTransactionMock = mLedgerServiceClientMockUpdateTransaction{mock: m}
+	m.UpdateTransactionMock.callArgs = []*LedgerServiceClientMockUpdateTransactionParams{}
 
 	t.Cleanup(m.MinimockFinish)
 
 	return m
 }
 
-type mLedgerServiceHandlerMockCreateAccount struct {
+type mLedgerServiceClientMockCreateAccount struct {
 	optional           bool
-	mock               *LedgerServiceHandlerMock
-	defaultExpectation *LedgerServiceHandlerMockCreateAccountExpectation
-	expectations       []*LedgerServiceHandlerMockCreateAccountExpectation
+	mock               *LedgerServiceClientMock
+	defaultExpectation *LedgerServiceClientMockCreateAccountExpectation
+	expectations       []*LedgerServiceClientMockCreateAccountExpectation
 
-	callArgs []*LedgerServiceHandlerMockCreateAccountParams
+	callArgs []*LedgerServiceClientMockCreateAccountParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// LedgerServiceHandlerMockCreateAccountExpectation specifies expectation struct of the LedgerServiceHandler.CreateAccount
-type LedgerServiceHandlerMockCreateAccountExpectation struct {
-	mock               *LedgerServiceHandlerMock
-	params             *LedgerServiceHandlerMockCreateAccountParams
-	paramPtrs          *LedgerServiceHandlerMockCreateAccountParamPtrs
-	expectationOrigins LedgerServiceHandlerMockCreateAccountExpectationOrigins
-	results            *LedgerServiceHandlerMockCreateAccountResults
+// LedgerServiceClientMockCreateAccountExpectation specifies expectation struct of the LedgerServiceClient.CreateAccount
+type LedgerServiceClientMockCreateAccountExpectation struct {
+	mock               *LedgerServiceClientMock
+	params             *LedgerServiceClientMockCreateAccountParams
+	paramPtrs          *LedgerServiceClientMockCreateAccountParamPtrs
+	expectationOrigins LedgerServiceClientMockCreateAccountExpectationOrigins
+	results            *LedgerServiceClientMockCreateAccountResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// LedgerServiceHandlerMockCreateAccountParams contains parameters of the LedgerServiceHandler.CreateAccount
-type LedgerServiceHandlerMockCreateAccountParams struct {
+// LedgerServiceClientMockCreateAccountParams contains parameters of the LedgerServiceClient.CreateAccount
+type LedgerServiceClientMockCreateAccountParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v11.Account]
 }
 
-// LedgerServiceHandlerMockCreateAccountParamPtrs contains pointers to parameters of the LedgerServiceHandler.CreateAccount
-type LedgerServiceHandlerMockCreateAccountParamPtrs struct {
+// LedgerServiceClientMockCreateAccountParamPtrs contains pointers to parameters of the LedgerServiceClient.CreateAccount
+type LedgerServiceClientMockCreateAccountParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v11.Account]
 }
 
-// LedgerServiceHandlerMockCreateAccountResults contains results of the LedgerServiceHandler.CreateAccount
-type LedgerServiceHandlerMockCreateAccountResults struct {
+// LedgerServiceClientMockCreateAccountResults contains results of the LedgerServiceClient.CreateAccount
+type LedgerServiceClientMockCreateAccountResults struct {
 	pp2 *connect.Response[v11.Account]
 	err error
 }
 
-// LedgerServiceHandlerMockCreateAccountOrigins contains origins of expectations of the LedgerServiceHandler.CreateAccount
-type LedgerServiceHandlerMockCreateAccountExpectationOrigins struct {
+// LedgerServiceClientMockCreateAccountOrigins contains origins of expectations of the LedgerServiceClient.CreateAccount
+type LedgerServiceClientMockCreateAccountExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -199,26 +199,26 @@ type LedgerServiceHandlerMockCreateAccountExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmCreateAccount *mLedgerServiceHandlerMockCreateAccount) Optional() *mLedgerServiceHandlerMockCreateAccount {
+func (mmCreateAccount *mLedgerServiceClientMockCreateAccount) Optional() *mLedgerServiceClientMockCreateAccount {
 	mmCreateAccount.optional = true
 	return mmCreateAccount
 }
 
-// Expect sets up expected params for LedgerServiceHandler.CreateAccount
-func (mmCreateAccount *mLedgerServiceHandlerMockCreateAccount) Expect(ctx context.Context, pp1 *connect.Request[v11.Account]) *mLedgerServiceHandlerMockCreateAccount {
+// Expect sets up expected params for LedgerServiceClient.CreateAccount
+func (mmCreateAccount *mLedgerServiceClientMockCreateAccount) Expect(ctx context.Context, pp1 *connect.Request[v11.Account]) *mLedgerServiceClientMockCreateAccount {
 	if mmCreateAccount.mock.funcCreateAccount != nil {
-		mmCreateAccount.mock.t.Fatalf("LedgerServiceHandlerMock.CreateAccount mock is already set by Set")
+		mmCreateAccount.mock.t.Fatalf("LedgerServiceClientMock.CreateAccount mock is already set by Set")
 	}
 
 	if mmCreateAccount.defaultExpectation == nil {
-		mmCreateAccount.defaultExpectation = &LedgerServiceHandlerMockCreateAccountExpectation{}
+		mmCreateAccount.defaultExpectation = &LedgerServiceClientMockCreateAccountExpectation{}
 	}
 
 	if mmCreateAccount.defaultExpectation.paramPtrs != nil {
-		mmCreateAccount.mock.t.Fatalf("LedgerServiceHandlerMock.CreateAccount mock is already set by ExpectParams functions")
+		mmCreateAccount.mock.t.Fatalf("LedgerServiceClientMock.CreateAccount mock is already set by ExpectParams functions")
 	}
 
-	mmCreateAccount.defaultExpectation.params = &LedgerServiceHandlerMockCreateAccountParams{ctx, pp1}
+	mmCreateAccount.defaultExpectation.params = &LedgerServiceClientMockCreateAccountParams{ctx, pp1}
 	mmCreateAccount.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmCreateAccount.expectations {
 		if minimock.Equal(e.params, mmCreateAccount.defaultExpectation.params) {
@@ -229,22 +229,22 @@ func (mmCreateAccount *mLedgerServiceHandlerMockCreateAccount) Expect(ctx contex
 	return mmCreateAccount
 }
 
-// ExpectCtxParam1 sets up expected param ctx for LedgerServiceHandler.CreateAccount
-func (mmCreateAccount *mLedgerServiceHandlerMockCreateAccount) ExpectCtxParam1(ctx context.Context) *mLedgerServiceHandlerMockCreateAccount {
+// ExpectCtxParam1 sets up expected param ctx for LedgerServiceClient.CreateAccount
+func (mmCreateAccount *mLedgerServiceClientMockCreateAccount) ExpectCtxParam1(ctx context.Context) *mLedgerServiceClientMockCreateAccount {
 	if mmCreateAccount.mock.funcCreateAccount != nil {
-		mmCreateAccount.mock.t.Fatalf("LedgerServiceHandlerMock.CreateAccount mock is already set by Set")
+		mmCreateAccount.mock.t.Fatalf("LedgerServiceClientMock.CreateAccount mock is already set by Set")
 	}
 
 	if mmCreateAccount.defaultExpectation == nil {
-		mmCreateAccount.defaultExpectation = &LedgerServiceHandlerMockCreateAccountExpectation{}
+		mmCreateAccount.defaultExpectation = &LedgerServiceClientMockCreateAccountExpectation{}
 	}
 
 	if mmCreateAccount.defaultExpectation.params != nil {
-		mmCreateAccount.mock.t.Fatalf("LedgerServiceHandlerMock.CreateAccount mock is already set by Expect")
+		mmCreateAccount.mock.t.Fatalf("LedgerServiceClientMock.CreateAccount mock is already set by Expect")
 	}
 
 	if mmCreateAccount.defaultExpectation.paramPtrs == nil {
-		mmCreateAccount.defaultExpectation.paramPtrs = &LedgerServiceHandlerMockCreateAccountParamPtrs{}
+		mmCreateAccount.defaultExpectation.paramPtrs = &LedgerServiceClientMockCreateAccountParamPtrs{}
 	}
 	mmCreateAccount.defaultExpectation.paramPtrs.ctx = &ctx
 	mmCreateAccount.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -252,22 +252,22 @@ func (mmCreateAccount *mLedgerServiceHandlerMockCreateAccount) ExpectCtxParam1(c
 	return mmCreateAccount
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for LedgerServiceHandler.CreateAccount
-func (mmCreateAccount *mLedgerServiceHandlerMockCreateAccount) ExpectPp1Param2(pp1 *connect.Request[v11.Account]) *mLedgerServiceHandlerMockCreateAccount {
+// ExpectPp1Param2 sets up expected param pp1 for LedgerServiceClient.CreateAccount
+func (mmCreateAccount *mLedgerServiceClientMockCreateAccount) ExpectPp1Param2(pp1 *connect.Request[v11.Account]) *mLedgerServiceClientMockCreateAccount {
 	if mmCreateAccount.mock.funcCreateAccount != nil {
-		mmCreateAccount.mock.t.Fatalf("LedgerServiceHandlerMock.CreateAccount mock is already set by Set")
+		mmCreateAccount.mock.t.Fatalf("LedgerServiceClientMock.CreateAccount mock is already set by Set")
 	}
 
 	if mmCreateAccount.defaultExpectation == nil {
-		mmCreateAccount.defaultExpectation = &LedgerServiceHandlerMockCreateAccountExpectation{}
+		mmCreateAccount.defaultExpectation = &LedgerServiceClientMockCreateAccountExpectation{}
 	}
 
 	if mmCreateAccount.defaultExpectation.params != nil {
-		mmCreateAccount.mock.t.Fatalf("LedgerServiceHandlerMock.CreateAccount mock is already set by Expect")
+		mmCreateAccount.mock.t.Fatalf("LedgerServiceClientMock.CreateAccount mock is already set by Expect")
 	}
 
 	if mmCreateAccount.defaultExpectation.paramPtrs == nil {
-		mmCreateAccount.defaultExpectation.paramPtrs = &LedgerServiceHandlerMockCreateAccountParamPtrs{}
+		mmCreateAccount.defaultExpectation.paramPtrs = &LedgerServiceClientMockCreateAccountParamPtrs{}
 	}
 	mmCreateAccount.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmCreateAccount.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -275,10 +275,10 @@ func (mmCreateAccount *mLedgerServiceHandlerMockCreateAccount) ExpectPp1Param2(p
 	return mmCreateAccount
 }
 
-// Inspect accepts an inspector function that has same arguments as the LedgerServiceHandler.CreateAccount
-func (mmCreateAccount *mLedgerServiceHandlerMockCreateAccount) Inspect(f func(ctx context.Context, pp1 *connect.Request[v11.Account])) *mLedgerServiceHandlerMockCreateAccount {
+// Inspect accepts an inspector function that has same arguments as the LedgerServiceClient.CreateAccount
+func (mmCreateAccount *mLedgerServiceClientMockCreateAccount) Inspect(f func(ctx context.Context, pp1 *connect.Request[v11.Account])) *mLedgerServiceClientMockCreateAccount {
 	if mmCreateAccount.mock.inspectFuncCreateAccount != nil {
-		mmCreateAccount.mock.t.Fatalf("Inspect function is already set for LedgerServiceHandlerMock.CreateAccount")
+		mmCreateAccount.mock.t.Fatalf("Inspect function is already set for LedgerServiceClientMock.CreateAccount")
 	}
 
 	mmCreateAccount.mock.inspectFuncCreateAccount = f
@@ -286,28 +286,28 @@ func (mmCreateAccount *mLedgerServiceHandlerMockCreateAccount) Inspect(f func(ct
 	return mmCreateAccount
 }
 
-// Return sets up results that will be returned by LedgerServiceHandler.CreateAccount
-func (mmCreateAccount *mLedgerServiceHandlerMockCreateAccount) Return(pp2 *connect.Response[v11.Account], err error) *LedgerServiceHandlerMock {
+// Return sets up results that will be returned by LedgerServiceClient.CreateAccount
+func (mmCreateAccount *mLedgerServiceClientMockCreateAccount) Return(pp2 *connect.Response[v11.Account], err error) *LedgerServiceClientMock {
 	if mmCreateAccount.mock.funcCreateAccount != nil {
-		mmCreateAccount.mock.t.Fatalf("LedgerServiceHandlerMock.CreateAccount mock is already set by Set")
+		mmCreateAccount.mock.t.Fatalf("LedgerServiceClientMock.CreateAccount mock is already set by Set")
 	}
 
 	if mmCreateAccount.defaultExpectation == nil {
-		mmCreateAccount.defaultExpectation = &LedgerServiceHandlerMockCreateAccountExpectation{mock: mmCreateAccount.mock}
+		mmCreateAccount.defaultExpectation = &LedgerServiceClientMockCreateAccountExpectation{mock: mmCreateAccount.mock}
 	}
-	mmCreateAccount.defaultExpectation.results = &LedgerServiceHandlerMockCreateAccountResults{pp2, err}
+	mmCreateAccount.defaultExpectation.results = &LedgerServiceClientMockCreateAccountResults{pp2, err}
 	mmCreateAccount.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmCreateAccount.mock
 }
 
-// Set uses given function f to mock the LedgerServiceHandler.CreateAccount method
-func (mmCreateAccount *mLedgerServiceHandlerMockCreateAccount) Set(f func(ctx context.Context, pp1 *connect.Request[v11.Account]) (pp2 *connect.Response[v11.Account], err error)) *LedgerServiceHandlerMock {
+// Set uses given function f to mock the LedgerServiceClient.CreateAccount method
+func (mmCreateAccount *mLedgerServiceClientMockCreateAccount) Set(f func(ctx context.Context, pp1 *connect.Request[v11.Account]) (pp2 *connect.Response[v11.Account], err error)) *LedgerServiceClientMock {
 	if mmCreateAccount.defaultExpectation != nil {
-		mmCreateAccount.mock.t.Fatalf("Default expectation is already set for the LedgerServiceHandler.CreateAccount method")
+		mmCreateAccount.mock.t.Fatalf("Default expectation is already set for the LedgerServiceClient.CreateAccount method")
 	}
 
 	if len(mmCreateAccount.expectations) > 0 {
-		mmCreateAccount.mock.t.Fatalf("Some expectations are already set for the LedgerServiceHandler.CreateAccount method")
+		mmCreateAccount.mock.t.Fatalf("Some expectations are already set for the LedgerServiceClient.CreateAccount method")
 	}
 
 	mmCreateAccount.mock.funcCreateAccount = f
@@ -315,39 +315,39 @@ func (mmCreateAccount *mLedgerServiceHandlerMockCreateAccount) Set(f func(ctx co
 	return mmCreateAccount.mock
 }
 
-// When sets expectation for the LedgerServiceHandler.CreateAccount which will trigger the result defined by the following
+// When sets expectation for the LedgerServiceClient.CreateAccount which will trigger the result defined by the following
 // Then helper
-func (mmCreateAccount *mLedgerServiceHandlerMockCreateAccount) When(ctx context.Context, pp1 *connect.Request[v11.Account]) *LedgerServiceHandlerMockCreateAccountExpectation {
+func (mmCreateAccount *mLedgerServiceClientMockCreateAccount) When(ctx context.Context, pp1 *connect.Request[v11.Account]) *LedgerServiceClientMockCreateAccountExpectation {
 	if mmCreateAccount.mock.funcCreateAccount != nil {
-		mmCreateAccount.mock.t.Fatalf("LedgerServiceHandlerMock.CreateAccount mock is already set by Set")
+		mmCreateAccount.mock.t.Fatalf("LedgerServiceClientMock.CreateAccount mock is already set by Set")
 	}
 
-	expectation := &LedgerServiceHandlerMockCreateAccountExpectation{
+	expectation := &LedgerServiceClientMockCreateAccountExpectation{
 		mock:               mmCreateAccount.mock,
-		params:             &LedgerServiceHandlerMockCreateAccountParams{ctx, pp1},
-		expectationOrigins: LedgerServiceHandlerMockCreateAccountExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &LedgerServiceClientMockCreateAccountParams{ctx, pp1},
+		expectationOrigins: LedgerServiceClientMockCreateAccountExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmCreateAccount.expectations = append(mmCreateAccount.expectations, expectation)
 	return expectation
 }
 
-// Then sets up LedgerServiceHandler.CreateAccount return parameters for the expectation previously defined by the When method
-func (e *LedgerServiceHandlerMockCreateAccountExpectation) Then(pp2 *connect.Response[v11.Account], err error) *LedgerServiceHandlerMock {
-	e.results = &LedgerServiceHandlerMockCreateAccountResults{pp2, err}
+// Then sets up LedgerServiceClient.CreateAccount return parameters for the expectation previously defined by the When method
+func (e *LedgerServiceClientMockCreateAccountExpectation) Then(pp2 *connect.Response[v11.Account], err error) *LedgerServiceClientMock {
+	e.results = &LedgerServiceClientMockCreateAccountResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times LedgerServiceHandler.CreateAccount should be invoked
-func (mmCreateAccount *mLedgerServiceHandlerMockCreateAccount) Times(n uint64) *mLedgerServiceHandlerMockCreateAccount {
+// Times sets number of times LedgerServiceClient.CreateAccount should be invoked
+func (mmCreateAccount *mLedgerServiceClientMockCreateAccount) Times(n uint64) *mLedgerServiceClientMockCreateAccount {
 	if n == 0 {
-		mmCreateAccount.mock.t.Fatalf("Times of LedgerServiceHandlerMock.CreateAccount mock can not be zero")
+		mmCreateAccount.mock.t.Fatalf("Times of LedgerServiceClientMock.CreateAccount mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmCreateAccount.expectedInvocations, n)
 	mmCreateAccount.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmCreateAccount
 }
 
-func (mmCreateAccount *mLedgerServiceHandlerMockCreateAccount) invocationsDone() bool {
+func (mmCreateAccount *mLedgerServiceClientMockCreateAccount) invocationsDone() bool {
 	if len(mmCreateAccount.expectations) == 0 && mmCreateAccount.defaultExpectation == nil && mmCreateAccount.mock.funcCreateAccount == nil {
 		return true
 	}
@@ -358,8 +358,8 @@ func (mmCreateAccount *mLedgerServiceHandlerMockCreateAccount) invocationsDone()
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// CreateAccount implements mm_ledgerv1connect.LedgerServiceHandler
-func (mmCreateAccount *LedgerServiceHandlerMock) CreateAccount(ctx context.Context, pp1 *connect.Request[v11.Account]) (pp2 *connect.Response[v11.Account], err error) {
+// CreateAccount implements mm_ledgerv1connect.LedgerServiceClient
+func (mmCreateAccount *LedgerServiceClientMock) CreateAccount(ctx context.Context, pp1 *connect.Request[v11.Account]) (pp2 *connect.Response[v11.Account], err error) {
 	mm_atomic.AddUint64(&mmCreateAccount.beforeCreateAccountCounter, 1)
 	defer mm_atomic.AddUint64(&mmCreateAccount.afterCreateAccountCounter, 1)
 
@@ -369,7 +369,7 @@ func (mmCreateAccount *LedgerServiceHandlerMock) CreateAccount(ctx context.Conte
 		mmCreateAccount.inspectFuncCreateAccount(ctx, pp1)
 	}
 
-	mm_params := LedgerServiceHandlerMockCreateAccountParams{ctx, pp1}
+	mm_params := LedgerServiceClientMockCreateAccountParams{ctx, pp1}
 
 	// Record call args
 	mmCreateAccount.CreateAccountMock.mutex.Lock()
@@ -388,54 +388,54 @@ func (mmCreateAccount *LedgerServiceHandlerMock) CreateAccount(ctx context.Conte
 		mm_want := mmCreateAccount.CreateAccountMock.defaultExpectation.params
 		mm_want_ptrs := mmCreateAccount.CreateAccountMock.defaultExpectation.paramPtrs
 
-		mm_got := LedgerServiceHandlerMockCreateAccountParams{ctx, pp1}
+		mm_got := LedgerServiceClientMockCreateAccountParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmCreateAccount.t.Errorf("LedgerServiceHandlerMock.CreateAccount got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmCreateAccount.t.Errorf("LedgerServiceClientMock.CreateAccount got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmCreateAccount.CreateAccountMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmCreateAccount.t.Errorf("LedgerServiceHandlerMock.CreateAccount got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmCreateAccount.t.Errorf("LedgerServiceClientMock.CreateAccount got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmCreateAccount.CreateAccountMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmCreateAccount.t.Errorf("LedgerServiceHandlerMock.CreateAccount got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmCreateAccount.t.Errorf("LedgerServiceClientMock.CreateAccount got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmCreateAccount.CreateAccountMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmCreateAccount.CreateAccountMock.defaultExpectation.results
 		if mm_results == nil {
-			mmCreateAccount.t.Fatal("No results are set for the LedgerServiceHandlerMock.CreateAccount")
+			mmCreateAccount.t.Fatal("No results are set for the LedgerServiceClientMock.CreateAccount")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmCreateAccount.funcCreateAccount != nil {
 		return mmCreateAccount.funcCreateAccount(ctx, pp1)
 	}
-	mmCreateAccount.t.Fatalf("Unexpected call to LedgerServiceHandlerMock.CreateAccount. %v %v", ctx, pp1)
+	mmCreateAccount.t.Fatalf("Unexpected call to LedgerServiceClientMock.CreateAccount. %v %v", ctx, pp1)
 	return
 }
 
-// CreateAccountAfterCounter returns a count of finished LedgerServiceHandlerMock.CreateAccount invocations
-func (mmCreateAccount *LedgerServiceHandlerMock) CreateAccountAfterCounter() uint64 {
+// CreateAccountAfterCounter returns a count of finished LedgerServiceClientMock.CreateAccount invocations
+func (mmCreateAccount *LedgerServiceClientMock) CreateAccountAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmCreateAccount.afterCreateAccountCounter)
 }
 
-// CreateAccountBeforeCounter returns a count of LedgerServiceHandlerMock.CreateAccount invocations
-func (mmCreateAccount *LedgerServiceHandlerMock) CreateAccountBeforeCounter() uint64 {
+// CreateAccountBeforeCounter returns a count of LedgerServiceClientMock.CreateAccount invocations
+func (mmCreateAccount *LedgerServiceClientMock) CreateAccountBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmCreateAccount.beforeCreateAccountCounter)
 }
 
-// Calls returns a list of arguments used in each call to LedgerServiceHandlerMock.CreateAccount.
+// Calls returns a list of arguments used in each call to LedgerServiceClientMock.CreateAccount.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmCreateAccount *mLedgerServiceHandlerMockCreateAccount) Calls() []*LedgerServiceHandlerMockCreateAccountParams {
+func (mmCreateAccount *mLedgerServiceClientMockCreateAccount) Calls() []*LedgerServiceClientMockCreateAccountParams {
 	mmCreateAccount.mutex.RLock()
 
-	argCopy := make([]*LedgerServiceHandlerMockCreateAccountParams, len(mmCreateAccount.callArgs))
+	argCopy := make([]*LedgerServiceClientMockCreateAccountParams, len(mmCreateAccount.callArgs))
 	copy(argCopy, mmCreateAccount.callArgs)
 
 	mmCreateAccount.mutex.RUnlock()
@@ -445,7 +445,7 @@ func (mmCreateAccount *mLedgerServiceHandlerMockCreateAccount) Calls() []*Ledger
 
 // MinimockCreateAccountDone returns true if the count of the CreateAccount invocations corresponds
 // the number of defined expectations
-func (m *LedgerServiceHandlerMock) MinimockCreateAccountDone() bool {
+func (m *LedgerServiceClientMock) MinimockCreateAccountDone() bool {
 	if m.CreateAccountMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -461,10 +461,10 @@ func (m *LedgerServiceHandlerMock) MinimockCreateAccountDone() bool {
 }
 
 // MinimockCreateAccountInspect logs each unmet expectation
-func (m *LedgerServiceHandlerMock) MinimockCreateAccountInspect() {
+func (m *LedgerServiceClientMock) MinimockCreateAccountInspect() {
 	for _, e := range m.CreateAccountMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to LedgerServiceHandlerMock.CreateAccount at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to LedgerServiceClientMock.CreateAccount at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -472,66 +472,66 @@ func (m *LedgerServiceHandlerMock) MinimockCreateAccountInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.CreateAccountMock.defaultExpectation != nil && afterCreateAccountCounter < 1 {
 		if m.CreateAccountMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to LedgerServiceHandlerMock.CreateAccount at\n%s", m.CreateAccountMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to LedgerServiceClientMock.CreateAccount at\n%s", m.CreateAccountMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to LedgerServiceHandlerMock.CreateAccount at\n%s with params: %#v", m.CreateAccountMock.defaultExpectation.expectationOrigins.origin, *m.CreateAccountMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to LedgerServiceClientMock.CreateAccount at\n%s with params: %#v", m.CreateAccountMock.defaultExpectation.expectationOrigins.origin, *m.CreateAccountMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcCreateAccount != nil && afterCreateAccountCounter < 1 {
-		m.t.Errorf("Expected call to LedgerServiceHandlerMock.CreateAccount at\n%s", m.funcCreateAccountOrigin)
+		m.t.Errorf("Expected call to LedgerServiceClientMock.CreateAccount at\n%s", m.funcCreateAccountOrigin)
 	}
 
 	if !m.CreateAccountMock.invocationsDone() && afterCreateAccountCounter > 0 {
-		m.t.Errorf("Expected %d calls to LedgerServiceHandlerMock.CreateAccount at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to LedgerServiceClientMock.CreateAccount at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.CreateAccountMock.expectedInvocations), m.CreateAccountMock.expectedInvocationsOrigin, afterCreateAccountCounter)
 	}
 }
 
-type mLedgerServiceHandlerMockCreateLedger struct {
+type mLedgerServiceClientMockCreateLedger struct {
 	optional           bool
-	mock               *LedgerServiceHandlerMock
-	defaultExpectation *LedgerServiceHandlerMockCreateLedgerExpectation
-	expectations       []*LedgerServiceHandlerMockCreateLedgerExpectation
+	mock               *LedgerServiceClientMock
+	defaultExpectation *LedgerServiceClientMockCreateLedgerExpectation
+	expectations       []*LedgerServiceClientMockCreateLedgerExpectation
 
-	callArgs []*LedgerServiceHandlerMockCreateLedgerParams
+	callArgs []*LedgerServiceClientMockCreateLedgerParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// LedgerServiceHandlerMockCreateLedgerExpectation specifies expectation struct of the LedgerServiceHandler.CreateLedger
-type LedgerServiceHandlerMockCreateLedgerExpectation struct {
-	mock               *LedgerServiceHandlerMock
-	params             *LedgerServiceHandlerMockCreateLedgerParams
-	paramPtrs          *LedgerServiceHandlerMockCreateLedgerParamPtrs
-	expectationOrigins LedgerServiceHandlerMockCreateLedgerExpectationOrigins
-	results            *LedgerServiceHandlerMockCreateLedgerResults
+// LedgerServiceClientMockCreateLedgerExpectation specifies expectation struct of the LedgerServiceClient.CreateLedger
+type LedgerServiceClientMockCreateLedgerExpectation struct {
+	mock               *LedgerServiceClientMock
+	params             *LedgerServiceClientMockCreateLedgerParams
+	paramPtrs          *LedgerServiceClientMockCreateLedgerParamPtrs
+	expectationOrigins LedgerServiceClientMockCreateLedgerExpectationOrigins
+	results            *LedgerServiceClientMockCreateLedgerResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// LedgerServiceHandlerMockCreateLedgerParams contains parameters of the LedgerServiceHandler.CreateLedger
-type LedgerServiceHandlerMockCreateLedgerParams struct {
+// LedgerServiceClientMockCreateLedgerParams contains parameters of the LedgerServiceClient.CreateLedger
+type LedgerServiceClientMockCreateLedgerParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v11.Ledger]
 }
 
-// LedgerServiceHandlerMockCreateLedgerParamPtrs contains pointers to parameters of the LedgerServiceHandler.CreateLedger
-type LedgerServiceHandlerMockCreateLedgerParamPtrs struct {
+// LedgerServiceClientMockCreateLedgerParamPtrs contains pointers to parameters of the LedgerServiceClient.CreateLedger
+type LedgerServiceClientMockCreateLedgerParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v11.Ledger]
 }
 
-// LedgerServiceHandlerMockCreateLedgerResults contains results of the LedgerServiceHandler.CreateLedger
-type LedgerServiceHandlerMockCreateLedgerResults struct {
+// LedgerServiceClientMockCreateLedgerResults contains results of the LedgerServiceClient.CreateLedger
+type LedgerServiceClientMockCreateLedgerResults struct {
 	pp2 *connect.Response[v11.Ledger]
 	err error
 }
 
-// LedgerServiceHandlerMockCreateLedgerOrigins contains origins of expectations of the LedgerServiceHandler.CreateLedger
-type LedgerServiceHandlerMockCreateLedgerExpectationOrigins struct {
+// LedgerServiceClientMockCreateLedgerOrigins contains origins of expectations of the LedgerServiceClient.CreateLedger
+type LedgerServiceClientMockCreateLedgerExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -542,26 +542,26 @@ type LedgerServiceHandlerMockCreateLedgerExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmCreateLedger *mLedgerServiceHandlerMockCreateLedger) Optional() *mLedgerServiceHandlerMockCreateLedger {
+func (mmCreateLedger *mLedgerServiceClientMockCreateLedger) Optional() *mLedgerServiceClientMockCreateLedger {
 	mmCreateLedger.optional = true
 	return mmCreateLedger
 }
 
-// Expect sets up expected params for LedgerServiceHandler.CreateLedger
-func (mmCreateLedger *mLedgerServiceHandlerMockCreateLedger) Expect(ctx context.Context, pp1 *connect.Request[v11.Ledger]) *mLedgerServiceHandlerMockCreateLedger {
+// Expect sets up expected params for LedgerServiceClient.CreateLedger
+func (mmCreateLedger *mLedgerServiceClientMockCreateLedger) Expect(ctx context.Context, pp1 *connect.Request[v11.Ledger]) *mLedgerServiceClientMockCreateLedger {
 	if mmCreateLedger.mock.funcCreateLedger != nil {
-		mmCreateLedger.mock.t.Fatalf("LedgerServiceHandlerMock.CreateLedger mock is already set by Set")
+		mmCreateLedger.mock.t.Fatalf("LedgerServiceClientMock.CreateLedger mock is already set by Set")
 	}
 
 	if mmCreateLedger.defaultExpectation == nil {
-		mmCreateLedger.defaultExpectation = &LedgerServiceHandlerMockCreateLedgerExpectation{}
+		mmCreateLedger.defaultExpectation = &LedgerServiceClientMockCreateLedgerExpectation{}
 	}
 
 	if mmCreateLedger.defaultExpectation.paramPtrs != nil {
-		mmCreateLedger.mock.t.Fatalf("LedgerServiceHandlerMock.CreateLedger mock is already set by ExpectParams functions")
+		mmCreateLedger.mock.t.Fatalf("LedgerServiceClientMock.CreateLedger mock is already set by ExpectParams functions")
 	}
 
-	mmCreateLedger.defaultExpectation.params = &LedgerServiceHandlerMockCreateLedgerParams{ctx, pp1}
+	mmCreateLedger.defaultExpectation.params = &LedgerServiceClientMockCreateLedgerParams{ctx, pp1}
 	mmCreateLedger.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmCreateLedger.expectations {
 		if minimock.Equal(e.params, mmCreateLedger.defaultExpectation.params) {
@@ -572,22 +572,22 @@ func (mmCreateLedger *mLedgerServiceHandlerMockCreateLedger) Expect(ctx context.
 	return mmCreateLedger
 }
 
-// ExpectCtxParam1 sets up expected param ctx for LedgerServiceHandler.CreateLedger
-func (mmCreateLedger *mLedgerServiceHandlerMockCreateLedger) ExpectCtxParam1(ctx context.Context) *mLedgerServiceHandlerMockCreateLedger {
+// ExpectCtxParam1 sets up expected param ctx for LedgerServiceClient.CreateLedger
+func (mmCreateLedger *mLedgerServiceClientMockCreateLedger) ExpectCtxParam1(ctx context.Context) *mLedgerServiceClientMockCreateLedger {
 	if mmCreateLedger.mock.funcCreateLedger != nil {
-		mmCreateLedger.mock.t.Fatalf("LedgerServiceHandlerMock.CreateLedger mock is already set by Set")
+		mmCreateLedger.mock.t.Fatalf("LedgerServiceClientMock.CreateLedger mock is already set by Set")
 	}
 
 	if mmCreateLedger.defaultExpectation == nil {
-		mmCreateLedger.defaultExpectation = &LedgerServiceHandlerMockCreateLedgerExpectation{}
+		mmCreateLedger.defaultExpectation = &LedgerServiceClientMockCreateLedgerExpectation{}
 	}
 
 	if mmCreateLedger.defaultExpectation.params != nil {
-		mmCreateLedger.mock.t.Fatalf("LedgerServiceHandlerMock.CreateLedger mock is already set by Expect")
+		mmCreateLedger.mock.t.Fatalf("LedgerServiceClientMock.CreateLedger mock is already set by Expect")
 	}
 
 	if mmCreateLedger.defaultExpectation.paramPtrs == nil {
-		mmCreateLedger.defaultExpectation.paramPtrs = &LedgerServiceHandlerMockCreateLedgerParamPtrs{}
+		mmCreateLedger.defaultExpectation.paramPtrs = &LedgerServiceClientMockCreateLedgerParamPtrs{}
 	}
 	mmCreateLedger.defaultExpectation.paramPtrs.ctx = &ctx
 	mmCreateLedger.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -595,22 +595,22 @@ func (mmCreateLedger *mLedgerServiceHandlerMockCreateLedger) ExpectCtxParam1(ctx
 	return mmCreateLedger
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for LedgerServiceHandler.CreateLedger
-func (mmCreateLedger *mLedgerServiceHandlerMockCreateLedger) ExpectPp1Param2(pp1 *connect.Request[v11.Ledger]) *mLedgerServiceHandlerMockCreateLedger {
+// ExpectPp1Param2 sets up expected param pp1 for LedgerServiceClient.CreateLedger
+func (mmCreateLedger *mLedgerServiceClientMockCreateLedger) ExpectPp1Param2(pp1 *connect.Request[v11.Ledger]) *mLedgerServiceClientMockCreateLedger {
 	if mmCreateLedger.mock.funcCreateLedger != nil {
-		mmCreateLedger.mock.t.Fatalf("LedgerServiceHandlerMock.CreateLedger mock is already set by Set")
+		mmCreateLedger.mock.t.Fatalf("LedgerServiceClientMock.CreateLedger mock is already set by Set")
 	}
 
 	if mmCreateLedger.defaultExpectation == nil {
-		mmCreateLedger.defaultExpectation = &LedgerServiceHandlerMockCreateLedgerExpectation{}
+		mmCreateLedger.defaultExpectation = &LedgerServiceClientMockCreateLedgerExpectation{}
 	}
 
 	if mmCreateLedger.defaultExpectation.params != nil {
-		mmCreateLedger.mock.t.Fatalf("LedgerServiceHandlerMock.CreateLedger mock is already set by Expect")
+		mmCreateLedger.mock.t.Fatalf("LedgerServiceClientMock.CreateLedger mock is already set by Expect")
 	}
 
 	if mmCreateLedger.defaultExpectation.paramPtrs == nil {
-		mmCreateLedger.defaultExpectation.paramPtrs = &LedgerServiceHandlerMockCreateLedgerParamPtrs{}
+		mmCreateLedger.defaultExpectation.paramPtrs = &LedgerServiceClientMockCreateLedgerParamPtrs{}
 	}
 	mmCreateLedger.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmCreateLedger.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -618,10 +618,10 @@ func (mmCreateLedger *mLedgerServiceHandlerMockCreateLedger) ExpectPp1Param2(pp1
 	return mmCreateLedger
 }
 
-// Inspect accepts an inspector function that has same arguments as the LedgerServiceHandler.CreateLedger
-func (mmCreateLedger *mLedgerServiceHandlerMockCreateLedger) Inspect(f func(ctx context.Context, pp1 *connect.Request[v11.Ledger])) *mLedgerServiceHandlerMockCreateLedger {
+// Inspect accepts an inspector function that has same arguments as the LedgerServiceClient.CreateLedger
+func (mmCreateLedger *mLedgerServiceClientMockCreateLedger) Inspect(f func(ctx context.Context, pp1 *connect.Request[v11.Ledger])) *mLedgerServiceClientMockCreateLedger {
 	if mmCreateLedger.mock.inspectFuncCreateLedger != nil {
-		mmCreateLedger.mock.t.Fatalf("Inspect function is already set for LedgerServiceHandlerMock.CreateLedger")
+		mmCreateLedger.mock.t.Fatalf("Inspect function is already set for LedgerServiceClientMock.CreateLedger")
 	}
 
 	mmCreateLedger.mock.inspectFuncCreateLedger = f
@@ -629,28 +629,28 @@ func (mmCreateLedger *mLedgerServiceHandlerMockCreateLedger) Inspect(f func(ctx 
 	return mmCreateLedger
 }
 
-// Return sets up results that will be returned by LedgerServiceHandler.CreateLedger
-func (mmCreateLedger *mLedgerServiceHandlerMockCreateLedger) Return(pp2 *connect.Response[v11.Ledger], err error) *LedgerServiceHandlerMock {
+// Return sets up results that will be returned by LedgerServiceClient.CreateLedger
+func (mmCreateLedger *mLedgerServiceClientMockCreateLedger) Return(pp2 *connect.Response[v11.Ledger], err error) *LedgerServiceClientMock {
 	if mmCreateLedger.mock.funcCreateLedger != nil {
-		mmCreateLedger.mock.t.Fatalf("LedgerServiceHandlerMock.CreateLedger mock is already set by Set")
+		mmCreateLedger.mock.t.Fatalf("LedgerServiceClientMock.CreateLedger mock is already set by Set")
 	}
 
 	if mmCreateLedger.defaultExpectation == nil {
-		mmCreateLedger.defaultExpectation = &LedgerServiceHandlerMockCreateLedgerExpectation{mock: mmCreateLedger.mock}
+		mmCreateLedger.defaultExpectation = &LedgerServiceClientMockCreateLedgerExpectation{mock: mmCreateLedger.mock}
 	}
-	mmCreateLedger.defaultExpectation.results = &LedgerServiceHandlerMockCreateLedgerResults{pp2, err}
+	mmCreateLedger.defaultExpectation.results = &LedgerServiceClientMockCreateLedgerResults{pp2, err}
 	mmCreateLedger.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmCreateLedger.mock
 }
 
-// Set uses given function f to mock the LedgerServiceHandler.CreateLedger method
-func (mmCreateLedger *mLedgerServiceHandlerMockCreateLedger) Set(f func(ctx context.Context, pp1 *connect.Request[v11.Ledger]) (pp2 *connect.Response[v11.Ledger], err error)) *LedgerServiceHandlerMock {
+// Set uses given function f to mock the LedgerServiceClient.CreateLedger method
+func (mmCreateLedger *mLedgerServiceClientMockCreateLedger) Set(f func(ctx context.Context, pp1 *connect.Request[v11.Ledger]) (pp2 *connect.Response[v11.Ledger], err error)) *LedgerServiceClientMock {
 	if mmCreateLedger.defaultExpectation != nil {
-		mmCreateLedger.mock.t.Fatalf("Default expectation is already set for the LedgerServiceHandler.CreateLedger method")
+		mmCreateLedger.mock.t.Fatalf("Default expectation is already set for the LedgerServiceClient.CreateLedger method")
 	}
 
 	if len(mmCreateLedger.expectations) > 0 {
-		mmCreateLedger.mock.t.Fatalf("Some expectations are already set for the LedgerServiceHandler.CreateLedger method")
+		mmCreateLedger.mock.t.Fatalf("Some expectations are already set for the LedgerServiceClient.CreateLedger method")
 	}
 
 	mmCreateLedger.mock.funcCreateLedger = f
@@ -658,39 +658,39 @@ func (mmCreateLedger *mLedgerServiceHandlerMockCreateLedger) Set(f func(ctx cont
 	return mmCreateLedger.mock
 }
 
-// When sets expectation for the LedgerServiceHandler.CreateLedger which will trigger the result defined by the following
+// When sets expectation for the LedgerServiceClient.CreateLedger which will trigger the result defined by the following
 // Then helper
-func (mmCreateLedger *mLedgerServiceHandlerMockCreateLedger) When(ctx context.Context, pp1 *connect.Request[v11.Ledger]) *LedgerServiceHandlerMockCreateLedgerExpectation {
+func (mmCreateLedger *mLedgerServiceClientMockCreateLedger) When(ctx context.Context, pp1 *connect.Request[v11.Ledger]) *LedgerServiceClientMockCreateLedgerExpectation {
 	if mmCreateLedger.mock.funcCreateLedger != nil {
-		mmCreateLedger.mock.t.Fatalf("LedgerServiceHandlerMock.CreateLedger mock is already set by Set")
+		mmCreateLedger.mock.t.Fatalf("LedgerServiceClientMock.CreateLedger mock is already set by Set")
 	}
 
-	expectation := &LedgerServiceHandlerMockCreateLedgerExpectation{
+	expectation := &LedgerServiceClientMockCreateLedgerExpectation{
 		mock:               mmCreateLedger.mock,
-		params:             &LedgerServiceHandlerMockCreateLedgerParams{ctx, pp1},
-		expectationOrigins: LedgerServiceHandlerMockCreateLedgerExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &LedgerServiceClientMockCreateLedgerParams{ctx, pp1},
+		expectationOrigins: LedgerServiceClientMockCreateLedgerExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmCreateLedger.expectations = append(mmCreateLedger.expectations, expectation)
 	return expectation
 }
 
-// Then sets up LedgerServiceHandler.CreateLedger return parameters for the expectation previously defined by the When method
-func (e *LedgerServiceHandlerMockCreateLedgerExpectation) Then(pp2 *connect.Response[v11.Ledger], err error) *LedgerServiceHandlerMock {
-	e.results = &LedgerServiceHandlerMockCreateLedgerResults{pp2, err}
+// Then sets up LedgerServiceClient.CreateLedger return parameters for the expectation previously defined by the When method
+func (e *LedgerServiceClientMockCreateLedgerExpectation) Then(pp2 *connect.Response[v11.Ledger], err error) *LedgerServiceClientMock {
+	e.results = &LedgerServiceClientMockCreateLedgerResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times LedgerServiceHandler.CreateLedger should be invoked
-func (mmCreateLedger *mLedgerServiceHandlerMockCreateLedger) Times(n uint64) *mLedgerServiceHandlerMockCreateLedger {
+// Times sets number of times LedgerServiceClient.CreateLedger should be invoked
+func (mmCreateLedger *mLedgerServiceClientMockCreateLedger) Times(n uint64) *mLedgerServiceClientMockCreateLedger {
 	if n == 0 {
-		mmCreateLedger.mock.t.Fatalf("Times of LedgerServiceHandlerMock.CreateLedger mock can not be zero")
+		mmCreateLedger.mock.t.Fatalf("Times of LedgerServiceClientMock.CreateLedger mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmCreateLedger.expectedInvocations, n)
 	mmCreateLedger.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmCreateLedger
 }
 
-func (mmCreateLedger *mLedgerServiceHandlerMockCreateLedger) invocationsDone() bool {
+func (mmCreateLedger *mLedgerServiceClientMockCreateLedger) invocationsDone() bool {
 	if len(mmCreateLedger.expectations) == 0 && mmCreateLedger.defaultExpectation == nil && mmCreateLedger.mock.funcCreateLedger == nil {
 		return true
 	}
@@ -701,8 +701,8 @@ func (mmCreateLedger *mLedgerServiceHandlerMockCreateLedger) invocationsDone() b
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// CreateLedger implements mm_ledgerv1connect.LedgerServiceHandler
-func (mmCreateLedger *LedgerServiceHandlerMock) CreateLedger(ctx context.Context, pp1 *connect.Request[v11.Ledger]) (pp2 *connect.Response[v11.Ledger], err error) {
+// CreateLedger implements mm_ledgerv1connect.LedgerServiceClient
+func (mmCreateLedger *LedgerServiceClientMock) CreateLedger(ctx context.Context, pp1 *connect.Request[v11.Ledger]) (pp2 *connect.Response[v11.Ledger], err error) {
 	mm_atomic.AddUint64(&mmCreateLedger.beforeCreateLedgerCounter, 1)
 	defer mm_atomic.AddUint64(&mmCreateLedger.afterCreateLedgerCounter, 1)
 
@@ -712,7 +712,7 @@ func (mmCreateLedger *LedgerServiceHandlerMock) CreateLedger(ctx context.Context
 		mmCreateLedger.inspectFuncCreateLedger(ctx, pp1)
 	}
 
-	mm_params := LedgerServiceHandlerMockCreateLedgerParams{ctx, pp1}
+	mm_params := LedgerServiceClientMockCreateLedgerParams{ctx, pp1}
 
 	// Record call args
 	mmCreateLedger.CreateLedgerMock.mutex.Lock()
@@ -731,54 +731,54 @@ func (mmCreateLedger *LedgerServiceHandlerMock) CreateLedger(ctx context.Context
 		mm_want := mmCreateLedger.CreateLedgerMock.defaultExpectation.params
 		mm_want_ptrs := mmCreateLedger.CreateLedgerMock.defaultExpectation.paramPtrs
 
-		mm_got := LedgerServiceHandlerMockCreateLedgerParams{ctx, pp1}
+		mm_got := LedgerServiceClientMockCreateLedgerParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmCreateLedger.t.Errorf("LedgerServiceHandlerMock.CreateLedger got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmCreateLedger.t.Errorf("LedgerServiceClientMock.CreateLedger got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmCreateLedger.CreateLedgerMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmCreateLedger.t.Errorf("LedgerServiceHandlerMock.CreateLedger got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmCreateLedger.t.Errorf("LedgerServiceClientMock.CreateLedger got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmCreateLedger.CreateLedgerMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmCreateLedger.t.Errorf("LedgerServiceHandlerMock.CreateLedger got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmCreateLedger.t.Errorf("LedgerServiceClientMock.CreateLedger got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmCreateLedger.CreateLedgerMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmCreateLedger.CreateLedgerMock.defaultExpectation.results
 		if mm_results == nil {
-			mmCreateLedger.t.Fatal("No results are set for the LedgerServiceHandlerMock.CreateLedger")
+			mmCreateLedger.t.Fatal("No results are set for the LedgerServiceClientMock.CreateLedger")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmCreateLedger.funcCreateLedger != nil {
 		return mmCreateLedger.funcCreateLedger(ctx, pp1)
 	}
-	mmCreateLedger.t.Fatalf("Unexpected call to LedgerServiceHandlerMock.CreateLedger. %v %v", ctx, pp1)
+	mmCreateLedger.t.Fatalf("Unexpected call to LedgerServiceClientMock.CreateLedger. %v %v", ctx, pp1)
 	return
 }
 
-// CreateLedgerAfterCounter returns a count of finished LedgerServiceHandlerMock.CreateLedger invocations
-func (mmCreateLedger *LedgerServiceHandlerMock) CreateLedgerAfterCounter() uint64 {
+// CreateLedgerAfterCounter returns a count of finished LedgerServiceClientMock.CreateLedger invocations
+func (mmCreateLedger *LedgerServiceClientMock) CreateLedgerAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmCreateLedger.afterCreateLedgerCounter)
 }
 
-// CreateLedgerBeforeCounter returns a count of LedgerServiceHandlerMock.CreateLedger invocations
-func (mmCreateLedger *LedgerServiceHandlerMock) CreateLedgerBeforeCounter() uint64 {
+// CreateLedgerBeforeCounter returns a count of LedgerServiceClientMock.CreateLedger invocations
+func (mmCreateLedger *LedgerServiceClientMock) CreateLedgerBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmCreateLedger.beforeCreateLedgerCounter)
 }
 
-// Calls returns a list of arguments used in each call to LedgerServiceHandlerMock.CreateLedger.
+// Calls returns a list of arguments used in each call to LedgerServiceClientMock.CreateLedger.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmCreateLedger *mLedgerServiceHandlerMockCreateLedger) Calls() []*LedgerServiceHandlerMockCreateLedgerParams {
+func (mmCreateLedger *mLedgerServiceClientMockCreateLedger) Calls() []*LedgerServiceClientMockCreateLedgerParams {
 	mmCreateLedger.mutex.RLock()
 
-	argCopy := make([]*LedgerServiceHandlerMockCreateLedgerParams, len(mmCreateLedger.callArgs))
+	argCopy := make([]*LedgerServiceClientMockCreateLedgerParams, len(mmCreateLedger.callArgs))
 	copy(argCopy, mmCreateLedger.callArgs)
 
 	mmCreateLedger.mutex.RUnlock()
@@ -788,7 +788,7 @@ func (mmCreateLedger *mLedgerServiceHandlerMockCreateLedger) Calls() []*LedgerSe
 
 // MinimockCreateLedgerDone returns true if the count of the CreateLedger invocations corresponds
 // the number of defined expectations
-func (m *LedgerServiceHandlerMock) MinimockCreateLedgerDone() bool {
+func (m *LedgerServiceClientMock) MinimockCreateLedgerDone() bool {
 	if m.CreateLedgerMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -804,10 +804,10 @@ func (m *LedgerServiceHandlerMock) MinimockCreateLedgerDone() bool {
 }
 
 // MinimockCreateLedgerInspect logs each unmet expectation
-func (m *LedgerServiceHandlerMock) MinimockCreateLedgerInspect() {
+func (m *LedgerServiceClientMock) MinimockCreateLedgerInspect() {
 	for _, e := range m.CreateLedgerMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to LedgerServiceHandlerMock.CreateLedger at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to LedgerServiceClientMock.CreateLedger at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -815,66 +815,66 @@ func (m *LedgerServiceHandlerMock) MinimockCreateLedgerInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.CreateLedgerMock.defaultExpectation != nil && afterCreateLedgerCounter < 1 {
 		if m.CreateLedgerMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to LedgerServiceHandlerMock.CreateLedger at\n%s", m.CreateLedgerMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to LedgerServiceClientMock.CreateLedger at\n%s", m.CreateLedgerMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to LedgerServiceHandlerMock.CreateLedger at\n%s with params: %#v", m.CreateLedgerMock.defaultExpectation.expectationOrigins.origin, *m.CreateLedgerMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to LedgerServiceClientMock.CreateLedger at\n%s with params: %#v", m.CreateLedgerMock.defaultExpectation.expectationOrigins.origin, *m.CreateLedgerMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcCreateLedger != nil && afterCreateLedgerCounter < 1 {
-		m.t.Errorf("Expected call to LedgerServiceHandlerMock.CreateLedger at\n%s", m.funcCreateLedgerOrigin)
+		m.t.Errorf("Expected call to LedgerServiceClientMock.CreateLedger at\n%s", m.funcCreateLedgerOrigin)
 	}
 
 	if !m.CreateLedgerMock.invocationsDone() && afterCreateLedgerCounter > 0 {
-		m.t.Errorf("Expected %d calls to LedgerServiceHandlerMock.CreateLedger at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to LedgerServiceClientMock.CreateLedger at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.CreateLedgerMock.expectedInvocations), m.CreateLedgerMock.expectedInvocationsOrigin, afterCreateLedgerCounter)
 	}
 }
 
-type mLedgerServiceHandlerMockCreateTransaction struct {
+type mLedgerServiceClientMockCreateTransaction struct {
 	optional           bool
-	mock               *LedgerServiceHandlerMock
-	defaultExpectation *LedgerServiceHandlerMockCreateTransactionExpectation
-	expectations       []*LedgerServiceHandlerMockCreateTransactionExpectation
+	mock               *LedgerServiceClientMock
+	defaultExpectation *LedgerServiceClientMockCreateTransactionExpectation
+	expectations       []*LedgerServiceClientMockCreateTransactionExpectation
 
-	callArgs []*LedgerServiceHandlerMockCreateTransactionParams
+	callArgs []*LedgerServiceClientMockCreateTransactionParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// LedgerServiceHandlerMockCreateTransactionExpectation specifies expectation struct of the LedgerServiceHandler.CreateTransaction
-type LedgerServiceHandlerMockCreateTransactionExpectation struct {
-	mock               *LedgerServiceHandlerMock
-	params             *LedgerServiceHandlerMockCreateTransactionParams
-	paramPtrs          *LedgerServiceHandlerMockCreateTransactionParamPtrs
-	expectationOrigins LedgerServiceHandlerMockCreateTransactionExpectationOrigins
-	results            *LedgerServiceHandlerMockCreateTransactionResults
+// LedgerServiceClientMockCreateTransactionExpectation specifies expectation struct of the LedgerServiceClient.CreateTransaction
+type LedgerServiceClientMockCreateTransactionExpectation struct {
+	mock               *LedgerServiceClientMock
+	params             *LedgerServiceClientMockCreateTransactionParams
+	paramPtrs          *LedgerServiceClientMockCreateTransactionParamPtrs
+	expectationOrigins LedgerServiceClientMockCreateTransactionExpectationOrigins
+	results            *LedgerServiceClientMockCreateTransactionResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// LedgerServiceHandlerMockCreateTransactionParams contains parameters of the LedgerServiceHandler.CreateTransaction
-type LedgerServiceHandlerMockCreateTransactionParams struct {
+// LedgerServiceClientMockCreateTransactionParams contains parameters of the LedgerServiceClient.CreateTransaction
+type LedgerServiceClientMockCreateTransactionParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v11.Transaction]
 }
 
-// LedgerServiceHandlerMockCreateTransactionParamPtrs contains pointers to parameters of the LedgerServiceHandler.CreateTransaction
-type LedgerServiceHandlerMockCreateTransactionParamPtrs struct {
+// LedgerServiceClientMockCreateTransactionParamPtrs contains pointers to parameters of the LedgerServiceClient.CreateTransaction
+type LedgerServiceClientMockCreateTransactionParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v11.Transaction]
 }
 
-// LedgerServiceHandlerMockCreateTransactionResults contains results of the LedgerServiceHandler.CreateTransaction
-type LedgerServiceHandlerMockCreateTransactionResults struct {
+// LedgerServiceClientMockCreateTransactionResults contains results of the LedgerServiceClient.CreateTransaction
+type LedgerServiceClientMockCreateTransactionResults struct {
 	pp2 *connect.Response[v11.Transaction]
 	err error
 }
 
-// LedgerServiceHandlerMockCreateTransactionOrigins contains origins of expectations of the LedgerServiceHandler.CreateTransaction
-type LedgerServiceHandlerMockCreateTransactionExpectationOrigins struct {
+// LedgerServiceClientMockCreateTransactionOrigins contains origins of expectations of the LedgerServiceClient.CreateTransaction
+type LedgerServiceClientMockCreateTransactionExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -885,26 +885,26 @@ type LedgerServiceHandlerMockCreateTransactionExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmCreateTransaction *mLedgerServiceHandlerMockCreateTransaction) Optional() *mLedgerServiceHandlerMockCreateTransaction {
+func (mmCreateTransaction *mLedgerServiceClientMockCreateTransaction) Optional() *mLedgerServiceClientMockCreateTransaction {
 	mmCreateTransaction.optional = true
 	return mmCreateTransaction
 }
 
-// Expect sets up expected params for LedgerServiceHandler.CreateTransaction
-func (mmCreateTransaction *mLedgerServiceHandlerMockCreateTransaction) Expect(ctx context.Context, pp1 *connect.Request[v11.Transaction]) *mLedgerServiceHandlerMockCreateTransaction {
+// Expect sets up expected params for LedgerServiceClient.CreateTransaction
+func (mmCreateTransaction *mLedgerServiceClientMockCreateTransaction) Expect(ctx context.Context, pp1 *connect.Request[v11.Transaction]) *mLedgerServiceClientMockCreateTransaction {
 	if mmCreateTransaction.mock.funcCreateTransaction != nil {
-		mmCreateTransaction.mock.t.Fatalf("LedgerServiceHandlerMock.CreateTransaction mock is already set by Set")
+		mmCreateTransaction.mock.t.Fatalf("LedgerServiceClientMock.CreateTransaction mock is already set by Set")
 	}
 
 	if mmCreateTransaction.defaultExpectation == nil {
-		mmCreateTransaction.defaultExpectation = &LedgerServiceHandlerMockCreateTransactionExpectation{}
+		mmCreateTransaction.defaultExpectation = &LedgerServiceClientMockCreateTransactionExpectation{}
 	}
 
 	if mmCreateTransaction.defaultExpectation.paramPtrs != nil {
-		mmCreateTransaction.mock.t.Fatalf("LedgerServiceHandlerMock.CreateTransaction mock is already set by ExpectParams functions")
+		mmCreateTransaction.mock.t.Fatalf("LedgerServiceClientMock.CreateTransaction mock is already set by ExpectParams functions")
 	}
 
-	mmCreateTransaction.defaultExpectation.params = &LedgerServiceHandlerMockCreateTransactionParams{ctx, pp1}
+	mmCreateTransaction.defaultExpectation.params = &LedgerServiceClientMockCreateTransactionParams{ctx, pp1}
 	mmCreateTransaction.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmCreateTransaction.expectations {
 		if minimock.Equal(e.params, mmCreateTransaction.defaultExpectation.params) {
@@ -915,22 +915,22 @@ func (mmCreateTransaction *mLedgerServiceHandlerMockCreateTransaction) Expect(ct
 	return mmCreateTransaction
 }
 
-// ExpectCtxParam1 sets up expected param ctx for LedgerServiceHandler.CreateTransaction
-func (mmCreateTransaction *mLedgerServiceHandlerMockCreateTransaction) ExpectCtxParam1(ctx context.Context) *mLedgerServiceHandlerMockCreateTransaction {
+// ExpectCtxParam1 sets up expected param ctx for LedgerServiceClient.CreateTransaction
+func (mmCreateTransaction *mLedgerServiceClientMockCreateTransaction) ExpectCtxParam1(ctx context.Context) *mLedgerServiceClientMockCreateTransaction {
 	if mmCreateTransaction.mock.funcCreateTransaction != nil {
-		mmCreateTransaction.mock.t.Fatalf("LedgerServiceHandlerMock.CreateTransaction mock is already set by Set")
+		mmCreateTransaction.mock.t.Fatalf("LedgerServiceClientMock.CreateTransaction mock is already set by Set")
 	}
 
 	if mmCreateTransaction.defaultExpectation == nil {
-		mmCreateTransaction.defaultExpectation = &LedgerServiceHandlerMockCreateTransactionExpectation{}
+		mmCreateTransaction.defaultExpectation = &LedgerServiceClientMockCreateTransactionExpectation{}
 	}
 
 	if mmCreateTransaction.defaultExpectation.params != nil {
-		mmCreateTransaction.mock.t.Fatalf("LedgerServiceHandlerMock.CreateTransaction mock is already set by Expect")
+		mmCreateTransaction.mock.t.Fatalf("LedgerServiceClientMock.CreateTransaction mock is already set by Expect")
 	}
 
 	if mmCreateTransaction.defaultExpectation.paramPtrs == nil {
-		mmCreateTransaction.defaultExpectation.paramPtrs = &LedgerServiceHandlerMockCreateTransactionParamPtrs{}
+		mmCreateTransaction.defaultExpectation.paramPtrs = &LedgerServiceClientMockCreateTransactionParamPtrs{}
 	}
 	mmCreateTransaction.defaultExpectation.paramPtrs.ctx = &ctx
 	mmCreateTransaction.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -938,22 +938,22 @@ func (mmCreateTransaction *mLedgerServiceHandlerMockCreateTransaction) ExpectCtx
 	return mmCreateTransaction
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for LedgerServiceHandler.CreateTransaction
-func (mmCreateTransaction *mLedgerServiceHandlerMockCreateTransaction) ExpectPp1Param2(pp1 *connect.Request[v11.Transaction]) *mLedgerServiceHandlerMockCreateTransaction {
+// ExpectPp1Param2 sets up expected param pp1 for LedgerServiceClient.CreateTransaction
+func (mmCreateTransaction *mLedgerServiceClientMockCreateTransaction) ExpectPp1Param2(pp1 *connect.Request[v11.Transaction]) *mLedgerServiceClientMockCreateTransaction {
 	if mmCreateTransaction.mock.funcCreateTransaction != nil {
-		mmCreateTransaction.mock.t.Fatalf("LedgerServiceHandlerMock.CreateTransaction mock is already set by Set")
+		mmCreateTransaction.mock.t.Fatalf("LedgerServiceClientMock.CreateTransaction mock is already set by Set")
 	}
 
 	if mmCreateTransaction.defaultExpectation == nil {
-		mmCreateTransaction.defaultExpectation = &LedgerServiceHandlerMockCreateTransactionExpectation{}
+		mmCreateTransaction.defaultExpectation = &LedgerServiceClientMockCreateTransactionExpectation{}
 	}
 
 	if mmCreateTransaction.defaultExpectation.params != nil {
-		mmCreateTransaction.mock.t.Fatalf("LedgerServiceHandlerMock.CreateTransaction mock is already set by Expect")
+		mmCreateTransaction.mock.t.Fatalf("LedgerServiceClientMock.CreateTransaction mock is already set by Expect")
 	}
 
 	if mmCreateTransaction.defaultExpectation.paramPtrs == nil {
-		mmCreateTransaction.defaultExpectation.paramPtrs = &LedgerServiceHandlerMockCreateTransactionParamPtrs{}
+		mmCreateTransaction.defaultExpectation.paramPtrs = &LedgerServiceClientMockCreateTransactionParamPtrs{}
 	}
 	mmCreateTransaction.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmCreateTransaction.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -961,10 +961,10 @@ func (mmCreateTransaction *mLedgerServiceHandlerMockCreateTransaction) ExpectPp1
 	return mmCreateTransaction
 }
 
-// Inspect accepts an inspector function that has same arguments as the LedgerServiceHandler.CreateTransaction
-func (mmCreateTransaction *mLedgerServiceHandlerMockCreateTransaction) Inspect(f func(ctx context.Context, pp1 *connect.Request[v11.Transaction])) *mLedgerServiceHandlerMockCreateTransaction {
+// Inspect accepts an inspector function that has same arguments as the LedgerServiceClient.CreateTransaction
+func (mmCreateTransaction *mLedgerServiceClientMockCreateTransaction) Inspect(f func(ctx context.Context, pp1 *connect.Request[v11.Transaction])) *mLedgerServiceClientMockCreateTransaction {
 	if mmCreateTransaction.mock.inspectFuncCreateTransaction != nil {
-		mmCreateTransaction.mock.t.Fatalf("Inspect function is already set for LedgerServiceHandlerMock.CreateTransaction")
+		mmCreateTransaction.mock.t.Fatalf("Inspect function is already set for LedgerServiceClientMock.CreateTransaction")
 	}
 
 	mmCreateTransaction.mock.inspectFuncCreateTransaction = f
@@ -972,28 +972,28 @@ func (mmCreateTransaction *mLedgerServiceHandlerMockCreateTransaction) Inspect(f
 	return mmCreateTransaction
 }
 
-// Return sets up results that will be returned by LedgerServiceHandler.CreateTransaction
-func (mmCreateTransaction *mLedgerServiceHandlerMockCreateTransaction) Return(pp2 *connect.Response[v11.Transaction], err error) *LedgerServiceHandlerMock {
+// Return sets up results that will be returned by LedgerServiceClient.CreateTransaction
+func (mmCreateTransaction *mLedgerServiceClientMockCreateTransaction) Return(pp2 *connect.Response[v11.Transaction], err error) *LedgerServiceClientMock {
 	if mmCreateTransaction.mock.funcCreateTransaction != nil {
-		mmCreateTransaction.mock.t.Fatalf("LedgerServiceHandlerMock.CreateTransaction mock is already set by Set")
+		mmCreateTransaction.mock.t.Fatalf("LedgerServiceClientMock.CreateTransaction mock is already set by Set")
 	}
 
 	if mmCreateTransaction.defaultExpectation == nil {
-		mmCreateTransaction.defaultExpectation = &LedgerServiceHandlerMockCreateTransactionExpectation{mock: mmCreateTransaction.mock}
+		mmCreateTransaction.defaultExpectation = &LedgerServiceClientMockCreateTransactionExpectation{mock: mmCreateTransaction.mock}
 	}
-	mmCreateTransaction.defaultExpectation.results = &LedgerServiceHandlerMockCreateTransactionResults{pp2, err}
+	mmCreateTransaction.defaultExpectation.results = &LedgerServiceClientMockCreateTransactionResults{pp2, err}
 	mmCreateTransaction.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmCreateTransaction.mock
 }
 
-// Set uses given function f to mock the LedgerServiceHandler.CreateTransaction method
-func (mmCreateTransaction *mLedgerServiceHandlerMockCreateTransaction) Set(f func(ctx context.Context, pp1 *connect.Request[v11.Transaction]) (pp2 *connect.Response[v11.Transaction], err error)) *LedgerServiceHandlerMock {
+// Set uses given function f to mock the LedgerServiceClient.CreateTransaction method
+func (mmCreateTransaction *mLedgerServiceClientMockCreateTransaction) Set(f func(ctx context.Context, pp1 *connect.Request[v11.Transaction]) (pp2 *connect.Response[v11.Transaction], err error)) *LedgerServiceClientMock {
 	if mmCreateTransaction.defaultExpectation != nil {
-		mmCreateTransaction.mock.t.Fatalf("Default expectation is already set for the LedgerServiceHandler.CreateTransaction method")
+		mmCreateTransaction.mock.t.Fatalf("Default expectation is already set for the LedgerServiceClient.CreateTransaction method")
 	}
 
 	if len(mmCreateTransaction.expectations) > 0 {
-		mmCreateTransaction.mock.t.Fatalf("Some expectations are already set for the LedgerServiceHandler.CreateTransaction method")
+		mmCreateTransaction.mock.t.Fatalf("Some expectations are already set for the LedgerServiceClient.CreateTransaction method")
 	}
 
 	mmCreateTransaction.mock.funcCreateTransaction = f
@@ -1001,39 +1001,39 @@ func (mmCreateTransaction *mLedgerServiceHandlerMockCreateTransaction) Set(f fun
 	return mmCreateTransaction.mock
 }
 
-// When sets expectation for the LedgerServiceHandler.CreateTransaction which will trigger the result defined by the following
+// When sets expectation for the LedgerServiceClient.CreateTransaction which will trigger the result defined by the following
 // Then helper
-func (mmCreateTransaction *mLedgerServiceHandlerMockCreateTransaction) When(ctx context.Context, pp1 *connect.Request[v11.Transaction]) *LedgerServiceHandlerMockCreateTransactionExpectation {
+func (mmCreateTransaction *mLedgerServiceClientMockCreateTransaction) When(ctx context.Context, pp1 *connect.Request[v11.Transaction]) *LedgerServiceClientMockCreateTransactionExpectation {
 	if mmCreateTransaction.mock.funcCreateTransaction != nil {
-		mmCreateTransaction.mock.t.Fatalf("LedgerServiceHandlerMock.CreateTransaction mock is already set by Set")
+		mmCreateTransaction.mock.t.Fatalf("LedgerServiceClientMock.CreateTransaction mock is already set by Set")
 	}
 
-	expectation := &LedgerServiceHandlerMockCreateTransactionExpectation{
+	expectation := &LedgerServiceClientMockCreateTransactionExpectation{
 		mock:               mmCreateTransaction.mock,
-		params:             &LedgerServiceHandlerMockCreateTransactionParams{ctx, pp1},
-		expectationOrigins: LedgerServiceHandlerMockCreateTransactionExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &LedgerServiceClientMockCreateTransactionParams{ctx, pp1},
+		expectationOrigins: LedgerServiceClientMockCreateTransactionExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmCreateTransaction.expectations = append(mmCreateTransaction.expectations, expectation)
 	return expectation
 }
 
-// Then sets up LedgerServiceHandler.CreateTransaction return parameters for the expectation previously defined by the When method
-func (e *LedgerServiceHandlerMockCreateTransactionExpectation) Then(pp2 *connect.Response[v11.Transaction], err error) *LedgerServiceHandlerMock {
-	e.results = &LedgerServiceHandlerMockCreateTransactionResults{pp2, err}
+// Then sets up LedgerServiceClient.CreateTransaction return parameters for the expectation previously defined by the When method
+func (e *LedgerServiceClientMockCreateTransactionExpectation) Then(pp2 *connect.Response[v11.Transaction], err error) *LedgerServiceClientMock {
+	e.results = &LedgerServiceClientMockCreateTransactionResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times LedgerServiceHandler.CreateTransaction should be invoked
-func (mmCreateTransaction *mLedgerServiceHandlerMockCreateTransaction) Times(n uint64) *mLedgerServiceHandlerMockCreateTransaction {
+// Times sets number of times LedgerServiceClient.CreateTransaction should be invoked
+func (mmCreateTransaction *mLedgerServiceClientMockCreateTransaction) Times(n uint64) *mLedgerServiceClientMockCreateTransaction {
 	if n == 0 {
-		mmCreateTransaction.mock.t.Fatalf("Times of LedgerServiceHandlerMock.CreateTransaction mock can not be zero")
+		mmCreateTransaction.mock.t.Fatalf("Times of LedgerServiceClientMock.CreateTransaction mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmCreateTransaction.expectedInvocations, n)
 	mmCreateTransaction.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmCreateTransaction
 }
 
-func (mmCreateTransaction *mLedgerServiceHandlerMockCreateTransaction) invocationsDone() bool {
+func (mmCreateTransaction *mLedgerServiceClientMockCreateTransaction) invocationsDone() bool {
 	if len(mmCreateTransaction.expectations) == 0 && mmCreateTransaction.defaultExpectation == nil && mmCreateTransaction.mock.funcCreateTransaction == nil {
 		return true
 	}
@@ -1044,8 +1044,8 @@ func (mmCreateTransaction *mLedgerServiceHandlerMockCreateTransaction) invocatio
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// CreateTransaction implements mm_ledgerv1connect.LedgerServiceHandler
-func (mmCreateTransaction *LedgerServiceHandlerMock) CreateTransaction(ctx context.Context, pp1 *connect.Request[v11.Transaction]) (pp2 *connect.Response[v11.Transaction], err error) {
+// CreateTransaction implements mm_ledgerv1connect.LedgerServiceClient
+func (mmCreateTransaction *LedgerServiceClientMock) CreateTransaction(ctx context.Context, pp1 *connect.Request[v11.Transaction]) (pp2 *connect.Response[v11.Transaction], err error) {
 	mm_atomic.AddUint64(&mmCreateTransaction.beforeCreateTransactionCounter, 1)
 	defer mm_atomic.AddUint64(&mmCreateTransaction.afterCreateTransactionCounter, 1)
 
@@ -1055,7 +1055,7 @@ func (mmCreateTransaction *LedgerServiceHandlerMock) CreateTransaction(ctx conte
 		mmCreateTransaction.inspectFuncCreateTransaction(ctx, pp1)
 	}
 
-	mm_params := LedgerServiceHandlerMockCreateTransactionParams{ctx, pp1}
+	mm_params := LedgerServiceClientMockCreateTransactionParams{ctx, pp1}
 
 	// Record call args
 	mmCreateTransaction.CreateTransactionMock.mutex.Lock()
@@ -1074,54 +1074,54 @@ func (mmCreateTransaction *LedgerServiceHandlerMock) CreateTransaction(ctx conte
 		mm_want := mmCreateTransaction.CreateTransactionMock.defaultExpectation.params
 		mm_want_ptrs := mmCreateTransaction.CreateTransactionMock.defaultExpectation.paramPtrs
 
-		mm_got := LedgerServiceHandlerMockCreateTransactionParams{ctx, pp1}
+		mm_got := LedgerServiceClientMockCreateTransactionParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmCreateTransaction.t.Errorf("LedgerServiceHandlerMock.CreateTransaction got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmCreateTransaction.t.Errorf("LedgerServiceClientMock.CreateTransaction got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmCreateTransaction.CreateTransactionMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmCreateTransaction.t.Errorf("LedgerServiceHandlerMock.CreateTransaction got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmCreateTransaction.t.Errorf("LedgerServiceClientMock.CreateTransaction got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmCreateTransaction.CreateTransactionMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmCreateTransaction.t.Errorf("LedgerServiceHandlerMock.CreateTransaction got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmCreateTransaction.t.Errorf("LedgerServiceClientMock.CreateTransaction got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmCreateTransaction.CreateTransactionMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmCreateTransaction.CreateTransactionMock.defaultExpectation.results
 		if mm_results == nil {
-			mmCreateTransaction.t.Fatal("No results are set for the LedgerServiceHandlerMock.CreateTransaction")
+			mmCreateTransaction.t.Fatal("No results are set for the LedgerServiceClientMock.CreateTransaction")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmCreateTransaction.funcCreateTransaction != nil {
 		return mmCreateTransaction.funcCreateTransaction(ctx, pp1)
 	}
-	mmCreateTransaction.t.Fatalf("Unexpected call to LedgerServiceHandlerMock.CreateTransaction. %v %v", ctx, pp1)
+	mmCreateTransaction.t.Fatalf("Unexpected call to LedgerServiceClientMock.CreateTransaction. %v %v", ctx, pp1)
 	return
 }
 
-// CreateTransactionAfterCounter returns a count of finished LedgerServiceHandlerMock.CreateTransaction invocations
-func (mmCreateTransaction *LedgerServiceHandlerMock) CreateTransactionAfterCounter() uint64 {
+// CreateTransactionAfterCounter returns a count of finished LedgerServiceClientMock.CreateTransaction invocations
+func (mmCreateTransaction *LedgerServiceClientMock) CreateTransactionAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmCreateTransaction.afterCreateTransactionCounter)
 }
 
-// CreateTransactionBeforeCounter returns a count of LedgerServiceHandlerMock.CreateTransaction invocations
-func (mmCreateTransaction *LedgerServiceHandlerMock) CreateTransactionBeforeCounter() uint64 {
+// CreateTransactionBeforeCounter returns a count of LedgerServiceClientMock.CreateTransaction invocations
+func (mmCreateTransaction *LedgerServiceClientMock) CreateTransactionBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmCreateTransaction.beforeCreateTransactionCounter)
 }
 
-// Calls returns a list of arguments used in each call to LedgerServiceHandlerMock.CreateTransaction.
+// Calls returns a list of arguments used in each call to LedgerServiceClientMock.CreateTransaction.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmCreateTransaction *mLedgerServiceHandlerMockCreateTransaction) Calls() []*LedgerServiceHandlerMockCreateTransactionParams {
+func (mmCreateTransaction *mLedgerServiceClientMockCreateTransaction) Calls() []*LedgerServiceClientMockCreateTransactionParams {
 	mmCreateTransaction.mutex.RLock()
 
-	argCopy := make([]*LedgerServiceHandlerMockCreateTransactionParams, len(mmCreateTransaction.callArgs))
+	argCopy := make([]*LedgerServiceClientMockCreateTransactionParams, len(mmCreateTransaction.callArgs))
 	copy(argCopy, mmCreateTransaction.callArgs)
 
 	mmCreateTransaction.mutex.RUnlock()
@@ -1131,7 +1131,7 @@ func (mmCreateTransaction *mLedgerServiceHandlerMockCreateTransaction) Calls() [
 
 // MinimockCreateTransactionDone returns true if the count of the CreateTransaction invocations corresponds
 // the number of defined expectations
-func (m *LedgerServiceHandlerMock) MinimockCreateTransactionDone() bool {
+func (m *LedgerServiceClientMock) MinimockCreateTransactionDone() bool {
 	if m.CreateTransactionMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -1147,10 +1147,10 @@ func (m *LedgerServiceHandlerMock) MinimockCreateTransactionDone() bool {
 }
 
 // MinimockCreateTransactionInspect logs each unmet expectation
-func (m *LedgerServiceHandlerMock) MinimockCreateTransactionInspect() {
+func (m *LedgerServiceClientMock) MinimockCreateTransactionInspect() {
 	for _, e := range m.CreateTransactionMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to LedgerServiceHandlerMock.CreateTransaction at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to LedgerServiceClientMock.CreateTransaction at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -1158,66 +1158,66 @@ func (m *LedgerServiceHandlerMock) MinimockCreateTransactionInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.CreateTransactionMock.defaultExpectation != nil && afterCreateTransactionCounter < 1 {
 		if m.CreateTransactionMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to LedgerServiceHandlerMock.CreateTransaction at\n%s", m.CreateTransactionMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to LedgerServiceClientMock.CreateTransaction at\n%s", m.CreateTransactionMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to LedgerServiceHandlerMock.CreateTransaction at\n%s with params: %#v", m.CreateTransactionMock.defaultExpectation.expectationOrigins.origin, *m.CreateTransactionMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to LedgerServiceClientMock.CreateTransaction at\n%s with params: %#v", m.CreateTransactionMock.defaultExpectation.expectationOrigins.origin, *m.CreateTransactionMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcCreateTransaction != nil && afterCreateTransactionCounter < 1 {
-		m.t.Errorf("Expected call to LedgerServiceHandlerMock.CreateTransaction at\n%s", m.funcCreateTransactionOrigin)
+		m.t.Errorf("Expected call to LedgerServiceClientMock.CreateTransaction at\n%s", m.funcCreateTransactionOrigin)
 	}
 
 	if !m.CreateTransactionMock.invocationsDone() && afterCreateTransactionCounter > 0 {
-		m.t.Errorf("Expected %d calls to LedgerServiceHandlerMock.CreateTransaction at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to LedgerServiceClientMock.CreateTransaction at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.CreateTransactionMock.expectedInvocations), m.CreateTransactionMock.expectedInvocationsOrigin, afterCreateTransactionCounter)
 	}
 }
 
-type mLedgerServiceHandlerMockReverseTransaction struct {
+type mLedgerServiceClientMockReverseTransaction struct {
 	optional           bool
-	mock               *LedgerServiceHandlerMock
-	defaultExpectation *LedgerServiceHandlerMockReverseTransactionExpectation
-	expectations       []*LedgerServiceHandlerMockReverseTransactionExpectation
+	mock               *LedgerServiceClientMock
+	defaultExpectation *LedgerServiceClientMockReverseTransactionExpectation
+	expectations       []*LedgerServiceClientMockReverseTransactionExpectation
 
-	callArgs []*LedgerServiceHandlerMockReverseTransactionParams
+	callArgs []*LedgerServiceClientMockReverseTransactionParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// LedgerServiceHandlerMockReverseTransactionExpectation specifies expectation struct of the LedgerServiceHandler.ReverseTransaction
-type LedgerServiceHandlerMockReverseTransactionExpectation struct {
-	mock               *LedgerServiceHandlerMock
-	params             *LedgerServiceHandlerMockReverseTransactionParams
-	paramPtrs          *LedgerServiceHandlerMockReverseTransactionParamPtrs
-	expectationOrigins LedgerServiceHandlerMockReverseTransactionExpectationOrigins
-	results            *LedgerServiceHandlerMockReverseTransactionResults
+// LedgerServiceClientMockReverseTransactionExpectation specifies expectation struct of the LedgerServiceClient.ReverseTransaction
+type LedgerServiceClientMockReverseTransactionExpectation struct {
+	mock               *LedgerServiceClientMock
+	params             *LedgerServiceClientMockReverseTransactionParams
+	paramPtrs          *LedgerServiceClientMockReverseTransactionParamPtrs
+	expectationOrigins LedgerServiceClientMockReverseTransactionExpectationOrigins
+	results            *LedgerServiceClientMockReverseTransactionResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// LedgerServiceHandlerMockReverseTransactionParams contains parameters of the LedgerServiceHandler.ReverseTransaction
-type LedgerServiceHandlerMockReverseTransactionParams struct {
+// LedgerServiceClientMockReverseTransactionParams contains parameters of the LedgerServiceClient.ReverseTransaction
+type LedgerServiceClientMockReverseTransactionParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v11.Transaction]
 }
 
-// LedgerServiceHandlerMockReverseTransactionParamPtrs contains pointers to parameters of the LedgerServiceHandler.ReverseTransaction
-type LedgerServiceHandlerMockReverseTransactionParamPtrs struct {
+// LedgerServiceClientMockReverseTransactionParamPtrs contains pointers to parameters of the LedgerServiceClient.ReverseTransaction
+type LedgerServiceClientMockReverseTransactionParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v11.Transaction]
 }
 
-// LedgerServiceHandlerMockReverseTransactionResults contains results of the LedgerServiceHandler.ReverseTransaction
-type LedgerServiceHandlerMockReverseTransactionResults struct {
+// LedgerServiceClientMockReverseTransactionResults contains results of the LedgerServiceClient.ReverseTransaction
+type LedgerServiceClientMockReverseTransactionResults struct {
 	pp2 *connect.Response[v11.Transaction]
 	err error
 }
 
-// LedgerServiceHandlerMockReverseTransactionOrigins contains origins of expectations of the LedgerServiceHandler.ReverseTransaction
-type LedgerServiceHandlerMockReverseTransactionExpectationOrigins struct {
+// LedgerServiceClientMockReverseTransactionOrigins contains origins of expectations of the LedgerServiceClient.ReverseTransaction
+type LedgerServiceClientMockReverseTransactionExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -1228,26 +1228,26 @@ type LedgerServiceHandlerMockReverseTransactionExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmReverseTransaction *mLedgerServiceHandlerMockReverseTransaction) Optional() *mLedgerServiceHandlerMockReverseTransaction {
+func (mmReverseTransaction *mLedgerServiceClientMockReverseTransaction) Optional() *mLedgerServiceClientMockReverseTransaction {
 	mmReverseTransaction.optional = true
 	return mmReverseTransaction
 }
 
-// Expect sets up expected params for LedgerServiceHandler.ReverseTransaction
-func (mmReverseTransaction *mLedgerServiceHandlerMockReverseTransaction) Expect(ctx context.Context, pp1 *connect.Request[v11.Transaction]) *mLedgerServiceHandlerMockReverseTransaction {
+// Expect sets up expected params for LedgerServiceClient.ReverseTransaction
+func (mmReverseTransaction *mLedgerServiceClientMockReverseTransaction) Expect(ctx context.Context, pp1 *connect.Request[v11.Transaction]) *mLedgerServiceClientMockReverseTransaction {
 	if mmReverseTransaction.mock.funcReverseTransaction != nil {
-		mmReverseTransaction.mock.t.Fatalf("LedgerServiceHandlerMock.ReverseTransaction mock is already set by Set")
+		mmReverseTransaction.mock.t.Fatalf("LedgerServiceClientMock.ReverseTransaction mock is already set by Set")
 	}
 
 	if mmReverseTransaction.defaultExpectation == nil {
-		mmReverseTransaction.defaultExpectation = &LedgerServiceHandlerMockReverseTransactionExpectation{}
+		mmReverseTransaction.defaultExpectation = &LedgerServiceClientMockReverseTransactionExpectation{}
 	}
 
 	if mmReverseTransaction.defaultExpectation.paramPtrs != nil {
-		mmReverseTransaction.mock.t.Fatalf("LedgerServiceHandlerMock.ReverseTransaction mock is already set by ExpectParams functions")
+		mmReverseTransaction.mock.t.Fatalf("LedgerServiceClientMock.ReverseTransaction mock is already set by ExpectParams functions")
 	}
 
-	mmReverseTransaction.defaultExpectation.params = &LedgerServiceHandlerMockReverseTransactionParams{ctx, pp1}
+	mmReverseTransaction.defaultExpectation.params = &LedgerServiceClientMockReverseTransactionParams{ctx, pp1}
 	mmReverseTransaction.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmReverseTransaction.expectations {
 		if minimock.Equal(e.params, mmReverseTransaction.defaultExpectation.params) {
@@ -1258,22 +1258,22 @@ func (mmReverseTransaction *mLedgerServiceHandlerMockReverseTransaction) Expect(
 	return mmReverseTransaction
 }
 
-// ExpectCtxParam1 sets up expected param ctx for LedgerServiceHandler.ReverseTransaction
-func (mmReverseTransaction *mLedgerServiceHandlerMockReverseTransaction) ExpectCtxParam1(ctx context.Context) *mLedgerServiceHandlerMockReverseTransaction {
+// ExpectCtxParam1 sets up expected param ctx for LedgerServiceClient.ReverseTransaction
+func (mmReverseTransaction *mLedgerServiceClientMockReverseTransaction) ExpectCtxParam1(ctx context.Context) *mLedgerServiceClientMockReverseTransaction {
 	if mmReverseTransaction.mock.funcReverseTransaction != nil {
-		mmReverseTransaction.mock.t.Fatalf("LedgerServiceHandlerMock.ReverseTransaction mock is already set by Set")
+		mmReverseTransaction.mock.t.Fatalf("LedgerServiceClientMock.ReverseTransaction mock is already set by Set")
 	}
 
 	if mmReverseTransaction.defaultExpectation == nil {
-		mmReverseTransaction.defaultExpectation = &LedgerServiceHandlerMockReverseTransactionExpectation{}
+		mmReverseTransaction.defaultExpectation = &LedgerServiceClientMockReverseTransactionExpectation{}
 	}
 
 	if mmReverseTransaction.defaultExpectation.params != nil {
-		mmReverseTransaction.mock.t.Fatalf("LedgerServiceHandlerMock.ReverseTransaction mock is already set by Expect")
+		mmReverseTransaction.mock.t.Fatalf("LedgerServiceClientMock.ReverseTransaction mock is already set by Expect")
 	}
 
 	if mmReverseTransaction.defaultExpectation.paramPtrs == nil {
-		mmReverseTransaction.defaultExpectation.paramPtrs = &LedgerServiceHandlerMockReverseTransactionParamPtrs{}
+		mmReverseTransaction.defaultExpectation.paramPtrs = &LedgerServiceClientMockReverseTransactionParamPtrs{}
 	}
 	mmReverseTransaction.defaultExpectation.paramPtrs.ctx = &ctx
 	mmReverseTransaction.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -1281,22 +1281,22 @@ func (mmReverseTransaction *mLedgerServiceHandlerMockReverseTransaction) ExpectC
 	return mmReverseTransaction
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for LedgerServiceHandler.ReverseTransaction
-func (mmReverseTransaction *mLedgerServiceHandlerMockReverseTransaction) ExpectPp1Param2(pp1 *connect.Request[v11.Transaction]) *mLedgerServiceHandlerMockReverseTransaction {
+// ExpectPp1Param2 sets up expected param pp1 for LedgerServiceClient.ReverseTransaction
+func (mmReverseTransaction *mLedgerServiceClientMockReverseTransaction) ExpectPp1Param2(pp1 *connect.Request[v11.Transaction]) *mLedgerServiceClientMockReverseTransaction {
 	if mmReverseTransaction.mock.funcReverseTransaction != nil {
-		mmReverseTransaction.mock.t.Fatalf("LedgerServiceHandlerMock.ReverseTransaction mock is already set by Set")
+		mmReverseTransaction.mock.t.Fatalf("LedgerServiceClientMock.ReverseTransaction mock is already set by Set")
 	}
 
 	if mmReverseTransaction.defaultExpectation == nil {
-		mmReverseTransaction.defaultExpectation = &LedgerServiceHandlerMockReverseTransactionExpectation{}
+		mmReverseTransaction.defaultExpectation = &LedgerServiceClientMockReverseTransactionExpectation{}
 	}
 
 	if mmReverseTransaction.defaultExpectation.params != nil {
-		mmReverseTransaction.mock.t.Fatalf("LedgerServiceHandlerMock.ReverseTransaction mock is already set by Expect")
+		mmReverseTransaction.mock.t.Fatalf("LedgerServiceClientMock.ReverseTransaction mock is already set by Expect")
 	}
 
 	if mmReverseTransaction.defaultExpectation.paramPtrs == nil {
-		mmReverseTransaction.defaultExpectation.paramPtrs = &LedgerServiceHandlerMockReverseTransactionParamPtrs{}
+		mmReverseTransaction.defaultExpectation.paramPtrs = &LedgerServiceClientMockReverseTransactionParamPtrs{}
 	}
 	mmReverseTransaction.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmReverseTransaction.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -1304,10 +1304,10 @@ func (mmReverseTransaction *mLedgerServiceHandlerMockReverseTransaction) ExpectP
 	return mmReverseTransaction
 }
 
-// Inspect accepts an inspector function that has same arguments as the LedgerServiceHandler.ReverseTransaction
-func (mmReverseTransaction *mLedgerServiceHandlerMockReverseTransaction) Inspect(f func(ctx context.Context, pp1 *connect.Request[v11.Transaction])) *mLedgerServiceHandlerMockReverseTransaction {
+// Inspect accepts an inspector function that has same arguments as the LedgerServiceClient.ReverseTransaction
+func (mmReverseTransaction *mLedgerServiceClientMockReverseTransaction) Inspect(f func(ctx context.Context, pp1 *connect.Request[v11.Transaction])) *mLedgerServiceClientMockReverseTransaction {
 	if mmReverseTransaction.mock.inspectFuncReverseTransaction != nil {
-		mmReverseTransaction.mock.t.Fatalf("Inspect function is already set for LedgerServiceHandlerMock.ReverseTransaction")
+		mmReverseTransaction.mock.t.Fatalf("Inspect function is already set for LedgerServiceClientMock.ReverseTransaction")
 	}
 
 	mmReverseTransaction.mock.inspectFuncReverseTransaction = f
@@ -1315,28 +1315,28 @@ func (mmReverseTransaction *mLedgerServiceHandlerMockReverseTransaction) Inspect
 	return mmReverseTransaction
 }
 
-// Return sets up results that will be returned by LedgerServiceHandler.ReverseTransaction
-func (mmReverseTransaction *mLedgerServiceHandlerMockReverseTransaction) Return(pp2 *connect.Response[v11.Transaction], err error) *LedgerServiceHandlerMock {
+// Return sets up results that will be returned by LedgerServiceClient.ReverseTransaction
+func (mmReverseTransaction *mLedgerServiceClientMockReverseTransaction) Return(pp2 *connect.Response[v11.Transaction], err error) *LedgerServiceClientMock {
 	if mmReverseTransaction.mock.funcReverseTransaction != nil {
-		mmReverseTransaction.mock.t.Fatalf("LedgerServiceHandlerMock.ReverseTransaction mock is already set by Set")
+		mmReverseTransaction.mock.t.Fatalf("LedgerServiceClientMock.ReverseTransaction mock is already set by Set")
 	}
 
 	if mmReverseTransaction.defaultExpectation == nil {
-		mmReverseTransaction.defaultExpectation = &LedgerServiceHandlerMockReverseTransactionExpectation{mock: mmReverseTransaction.mock}
+		mmReverseTransaction.defaultExpectation = &LedgerServiceClientMockReverseTransactionExpectation{mock: mmReverseTransaction.mock}
 	}
-	mmReverseTransaction.defaultExpectation.results = &LedgerServiceHandlerMockReverseTransactionResults{pp2, err}
+	mmReverseTransaction.defaultExpectation.results = &LedgerServiceClientMockReverseTransactionResults{pp2, err}
 	mmReverseTransaction.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmReverseTransaction.mock
 }
 
-// Set uses given function f to mock the LedgerServiceHandler.ReverseTransaction method
-func (mmReverseTransaction *mLedgerServiceHandlerMockReverseTransaction) Set(f func(ctx context.Context, pp1 *connect.Request[v11.Transaction]) (pp2 *connect.Response[v11.Transaction], err error)) *LedgerServiceHandlerMock {
+// Set uses given function f to mock the LedgerServiceClient.ReverseTransaction method
+func (mmReverseTransaction *mLedgerServiceClientMockReverseTransaction) Set(f func(ctx context.Context, pp1 *connect.Request[v11.Transaction]) (pp2 *connect.Response[v11.Transaction], err error)) *LedgerServiceClientMock {
 	if mmReverseTransaction.defaultExpectation != nil {
-		mmReverseTransaction.mock.t.Fatalf("Default expectation is already set for the LedgerServiceHandler.ReverseTransaction method")
+		mmReverseTransaction.mock.t.Fatalf("Default expectation is already set for the LedgerServiceClient.ReverseTransaction method")
 	}
 
 	if len(mmReverseTransaction.expectations) > 0 {
-		mmReverseTransaction.mock.t.Fatalf("Some expectations are already set for the LedgerServiceHandler.ReverseTransaction method")
+		mmReverseTransaction.mock.t.Fatalf("Some expectations are already set for the LedgerServiceClient.ReverseTransaction method")
 	}
 
 	mmReverseTransaction.mock.funcReverseTransaction = f
@@ -1344,39 +1344,39 @@ func (mmReverseTransaction *mLedgerServiceHandlerMockReverseTransaction) Set(f f
 	return mmReverseTransaction.mock
 }
 
-// When sets expectation for the LedgerServiceHandler.ReverseTransaction which will trigger the result defined by the following
+// When sets expectation for the LedgerServiceClient.ReverseTransaction which will trigger the result defined by the following
 // Then helper
-func (mmReverseTransaction *mLedgerServiceHandlerMockReverseTransaction) When(ctx context.Context, pp1 *connect.Request[v11.Transaction]) *LedgerServiceHandlerMockReverseTransactionExpectation {
+func (mmReverseTransaction *mLedgerServiceClientMockReverseTransaction) When(ctx context.Context, pp1 *connect.Request[v11.Transaction]) *LedgerServiceClientMockReverseTransactionExpectation {
 	if mmReverseTransaction.mock.funcReverseTransaction != nil {
-		mmReverseTransaction.mock.t.Fatalf("LedgerServiceHandlerMock.ReverseTransaction mock is already set by Set")
+		mmReverseTransaction.mock.t.Fatalf("LedgerServiceClientMock.ReverseTransaction mock is already set by Set")
 	}
 
-	expectation := &LedgerServiceHandlerMockReverseTransactionExpectation{
+	expectation := &LedgerServiceClientMockReverseTransactionExpectation{
 		mock:               mmReverseTransaction.mock,
-		params:             &LedgerServiceHandlerMockReverseTransactionParams{ctx, pp1},
-		expectationOrigins: LedgerServiceHandlerMockReverseTransactionExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &LedgerServiceClientMockReverseTransactionParams{ctx, pp1},
+		expectationOrigins: LedgerServiceClientMockReverseTransactionExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmReverseTransaction.expectations = append(mmReverseTransaction.expectations, expectation)
 	return expectation
 }
 
-// Then sets up LedgerServiceHandler.ReverseTransaction return parameters for the expectation previously defined by the When method
-func (e *LedgerServiceHandlerMockReverseTransactionExpectation) Then(pp2 *connect.Response[v11.Transaction], err error) *LedgerServiceHandlerMock {
-	e.results = &LedgerServiceHandlerMockReverseTransactionResults{pp2, err}
+// Then sets up LedgerServiceClient.ReverseTransaction return parameters for the expectation previously defined by the When method
+func (e *LedgerServiceClientMockReverseTransactionExpectation) Then(pp2 *connect.Response[v11.Transaction], err error) *LedgerServiceClientMock {
+	e.results = &LedgerServiceClientMockReverseTransactionResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times LedgerServiceHandler.ReverseTransaction should be invoked
-func (mmReverseTransaction *mLedgerServiceHandlerMockReverseTransaction) Times(n uint64) *mLedgerServiceHandlerMockReverseTransaction {
+// Times sets number of times LedgerServiceClient.ReverseTransaction should be invoked
+func (mmReverseTransaction *mLedgerServiceClientMockReverseTransaction) Times(n uint64) *mLedgerServiceClientMockReverseTransaction {
 	if n == 0 {
-		mmReverseTransaction.mock.t.Fatalf("Times of LedgerServiceHandlerMock.ReverseTransaction mock can not be zero")
+		mmReverseTransaction.mock.t.Fatalf("Times of LedgerServiceClientMock.ReverseTransaction mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmReverseTransaction.expectedInvocations, n)
 	mmReverseTransaction.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmReverseTransaction
 }
 
-func (mmReverseTransaction *mLedgerServiceHandlerMockReverseTransaction) invocationsDone() bool {
+func (mmReverseTransaction *mLedgerServiceClientMockReverseTransaction) invocationsDone() bool {
 	if len(mmReverseTransaction.expectations) == 0 && mmReverseTransaction.defaultExpectation == nil && mmReverseTransaction.mock.funcReverseTransaction == nil {
 		return true
 	}
@@ -1387,8 +1387,8 @@ func (mmReverseTransaction *mLedgerServiceHandlerMockReverseTransaction) invocat
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// ReverseTransaction implements mm_ledgerv1connect.LedgerServiceHandler
-func (mmReverseTransaction *LedgerServiceHandlerMock) ReverseTransaction(ctx context.Context, pp1 *connect.Request[v11.Transaction]) (pp2 *connect.Response[v11.Transaction], err error) {
+// ReverseTransaction implements mm_ledgerv1connect.LedgerServiceClient
+func (mmReverseTransaction *LedgerServiceClientMock) ReverseTransaction(ctx context.Context, pp1 *connect.Request[v11.Transaction]) (pp2 *connect.Response[v11.Transaction], err error) {
 	mm_atomic.AddUint64(&mmReverseTransaction.beforeReverseTransactionCounter, 1)
 	defer mm_atomic.AddUint64(&mmReverseTransaction.afterReverseTransactionCounter, 1)
 
@@ -1398,7 +1398,7 @@ func (mmReverseTransaction *LedgerServiceHandlerMock) ReverseTransaction(ctx con
 		mmReverseTransaction.inspectFuncReverseTransaction(ctx, pp1)
 	}
 
-	mm_params := LedgerServiceHandlerMockReverseTransactionParams{ctx, pp1}
+	mm_params := LedgerServiceClientMockReverseTransactionParams{ctx, pp1}
 
 	// Record call args
 	mmReverseTransaction.ReverseTransactionMock.mutex.Lock()
@@ -1417,54 +1417,54 @@ func (mmReverseTransaction *LedgerServiceHandlerMock) ReverseTransaction(ctx con
 		mm_want := mmReverseTransaction.ReverseTransactionMock.defaultExpectation.params
 		mm_want_ptrs := mmReverseTransaction.ReverseTransactionMock.defaultExpectation.paramPtrs
 
-		mm_got := LedgerServiceHandlerMockReverseTransactionParams{ctx, pp1}
+		mm_got := LedgerServiceClientMockReverseTransactionParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmReverseTransaction.t.Errorf("LedgerServiceHandlerMock.ReverseTransaction got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmReverseTransaction.t.Errorf("LedgerServiceClientMock.ReverseTransaction got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmReverseTransaction.ReverseTransactionMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmReverseTransaction.t.Errorf("LedgerServiceHandlerMock.ReverseTransaction got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmReverseTransaction.t.Errorf("LedgerServiceClientMock.ReverseTransaction got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmReverseTransaction.ReverseTransactionMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmReverseTransaction.t.Errorf("LedgerServiceHandlerMock.ReverseTransaction got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmReverseTransaction.t.Errorf("LedgerServiceClientMock.ReverseTransaction got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmReverseTransaction.ReverseTransactionMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmReverseTransaction.ReverseTransactionMock.defaultExpectation.results
 		if mm_results == nil {
-			mmReverseTransaction.t.Fatal("No results are set for the LedgerServiceHandlerMock.ReverseTransaction")
+			mmReverseTransaction.t.Fatal("No results are set for the LedgerServiceClientMock.ReverseTransaction")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmReverseTransaction.funcReverseTransaction != nil {
 		return mmReverseTransaction.funcReverseTransaction(ctx, pp1)
 	}
-	mmReverseTransaction.t.Fatalf("Unexpected call to LedgerServiceHandlerMock.ReverseTransaction. %v %v", ctx, pp1)
+	mmReverseTransaction.t.Fatalf("Unexpected call to LedgerServiceClientMock.ReverseTransaction. %v %v", ctx, pp1)
 	return
 }
 
-// ReverseTransactionAfterCounter returns a count of finished LedgerServiceHandlerMock.ReverseTransaction invocations
-func (mmReverseTransaction *LedgerServiceHandlerMock) ReverseTransactionAfterCounter() uint64 {
+// ReverseTransactionAfterCounter returns a count of finished LedgerServiceClientMock.ReverseTransaction invocations
+func (mmReverseTransaction *LedgerServiceClientMock) ReverseTransactionAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmReverseTransaction.afterReverseTransactionCounter)
 }
 
-// ReverseTransactionBeforeCounter returns a count of LedgerServiceHandlerMock.ReverseTransaction invocations
-func (mmReverseTransaction *LedgerServiceHandlerMock) ReverseTransactionBeforeCounter() uint64 {
+// ReverseTransactionBeforeCounter returns a count of LedgerServiceClientMock.ReverseTransaction invocations
+func (mmReverseTransaction *LedgerServiceClientMock) ReverseTransactionBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmReverseTransaction.beforeReverseTransactionCounter)
 }
 
-// Calls returns a list of arguments used in each call to LedgerServiceHandlerMock.ReverseTransaction.
+// Calls returns a list of arguments used in each call to LedgerServiceClientMock.ReverseTransaction.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmReverseTransaction *mLedgerServiceHandlerMockReverseTransaction) Calls() []*LedgerServiceHandlerMockReverseTransactionParams {
+func (mmReverseTransaction *mLedgerServiceClientMockReverseTransaction) Calls() []*LedgerServiceClientMockReverseTransactionParams {
 	mmReverseTransaction.mutex.RLock()
 
-	argCopy := make([]*LedgerServiceHandlerMockReverseTransactionParams, len(mmReverseTransaction.callArgs))
+	argCopy := make([]*LedgerServiceClientMockReverseTransactionParams, len(mmReverseTransaction.callArgs))
 	copy(argCopy, mmReverseTransaction.callArgs)
 
 	mmReverseTransaction.mutex.RUnlock()
@@ -1474,7 +1474,7 @@ func (mmReverseTransaction *mLedgerServiceHandlerMockReverseTransaction) Calls()
 
 // MinimockReverseTransactionDone returns true if the count of the ReverseTransaction invocations corresponds
 // the number of defined expectations
-func (m *LedgerServiceHandlerMock) MinimockReverseTransactionDone() bool {
+func (m *LedgerServiceClientMock) MinimockReverseTransactionDone() bool {
 	if m.ReverseTransactionMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -1490,10 +1490,10 @@ func (m *LedgerServiceHandlerMock) MinimockReverseTransactionDone() bool {
 }
 
 // MinimockReverseTransactionInspect logs each unmet expectation
-func (m *LedgerServiceHandlerMock) MinimockReverseTransactionInspect() {
+func (m *LedgerServiceClientMock) MinimockReverseTransactionInspect() {
 	for _, e := range m.ReverseTransactionMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to LedgerServiceHandlerMock.ReverseTransaction at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to LedgerServiceClientMock.ReverseTransaction at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -1501,71 +1501,69 @@ func (m *LedgerServiceHandlerMock) MinimockReverseTransactionInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.ReverseTransactionMock.defaultExpectation != nil && afterReverseTransactionCounter < 1 {
 		if m.ReverseTransactionMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to LedgerServiceHandlerMock.ReverseTransaction at\n%s", m.ReverseTransactionMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to LedgerServiceClientMock.ReverseTransaction at\n%s", m.ReverseTransactionMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to LedgerServiceHandlerMock.ReverseTransaction at\n%s with params: %#v", m.ReverseTransactionMock.defaultExpectation.expectationOrigins.origin, *m.ReverseTransactionMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to LedgerServiceClientMock.ReverseTransaction at\n%s with params: %#v", m.ReverseTransactionMock.defaultExpectation.expectationOrigins.origin, *m.ReverseTransactionMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcReverseTransaction != nil && afterReverseTransactionCounter < 1 {
-		m.t.Errorf("Expected call to LedgerServiceHandlerMock.ReverseTransaction at\n%s", m.funcReverseTransactionOrigin)
+		m.t.Errorf("Expected call to LedgerServiceClientMock.ReverseTransaction at\n%s", m.funcReverseTransactionOrigin)
 	}
 
 	if !m.ReverseTransactionMock.invocationsDone() && afterReverseTransactionCounter > 0 {
-		m.t.Errorf("Expected %d calls to LedgerServiceHandlerMock.ReverseTransaction at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to LedgerServiceClientMock.ReverseTransaction at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.ReverseTransactionMock.expectedInvocations), m.ReverseTransactionMock.expectedInvocationsOrigin, afterReverseTransactionCounter)
 	}
 }
 
-type mLedgerServiceHandlerMockSearchAccounts struct {
+type mLedgerServiceClientMockSearchAccounts struct {
 	optional           bool
-	mock               *LedgerServiceHandlerMock
-	defaultExpectation *LedgerServiceHandlerMockSearchAccountsExpectation
-	expectations       []*LedgerServiceHandlerMockSearchAccountsExpectation
+	mock               *LedgerServiceClientMock
+	defaultExpectation *LedgerServiceClientMockSearchAccountsExpectation
+	expectations       []*LedgerServiceClientMockSearchAccountsExpectation
 
-	callArgs []*LedgerServiceHandlerMockSearchAccountsParams
+	callArgs []*LedgerServiceClientMockSearchAccountsParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// LedgerServiceHandlerMockSearchAccountsExpectation specifies expectation struct of the LedgerServiceHandler.SearchAccounts
-type LedgerServiceHandlerMockSearchAccountsExpectation struct {
-	mock               *LedgerServiceHandlerMock
-	params             *LedgerServiceHandlerMockSearchAccountsParams
-	paramPtrs          *LedgerServiceHandlerMockSearchAccountsParamPtrs
-	expectationOrigins LedgerServiceHandlerMockSearchAccountsExpectationOrigins
-	results            *LedgerServiceHandlerMockSearchAccountsResults
+// LedgerServiceClientMockSearchAccountsExpectation specifies expectation struct of the LedgerServiceClient.SearchAccounts
+type LedgerServiceClientMockSearchAccountsExpectation struct {
+	mock               *LedgerServiceClientMock
+	params             *LedgerServiceClientMockSearchAccountsParams
+	paramPtrs          *LedgerServiceClientMockSearchAccountsParamPtrs
+	expectationOrigins LedgerServiceClientMockSearchAccountsExpectationOrigins
+	results            *LedgerServiceClientMockSearchAccountsResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// LedgerServiceHandlerMockSearchAccountsParams contains parameters of the LedgerServiceHandler.SearchAccounts
-type LedgerServiceHandlerMockSearchAccountsParams struct {
+// LedgerServiceClientMockSearchAccountsParams contains parameters of the LedgerServiceClient.SearchAccounts
+type LedgerServiceClientMockSearchAccountsParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.SearchRequest]
-	pp2 *connect.ServerStream[v11.Account]
 }
 
-// LedgerServiceHandlerMockSearchAccountsParamPtrs contains pointers to parameters of the LedgerServiceHandler.SearchAccounts
-type LedgerServiceHandlerMockSearchAccountsParamPtrs struct {
+// LedgerServiceClientMockSearchAccountsParamPtrs contains pointers to parameters of the LedgerServiceClient.SearchAccounts
+type LedgerServiceClientMockSearchAccountsParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.SearchRequest]
-	pp2 **connect.ServerStream[v11.Account]
 }
 
-// LedgerServiceHandlerMockSearchAccountsResults contains results of the LedgerServiceHandler.SearchAccounts
-type LedgerServiceHandlerMockSearchAccountsResults struct {
+// LedgerServiceClientMockSearchAccountsResults contains results of the LedgerServiceClient.SearchAccounts
+type LedgerServiceClientMockSearchAccountsResults struct {
+	pp2 *connect.ServerStreamForClient[v11.Account]
 	err error
 }
 
-// LedgerServiceHandlerMockSearchAccountsOrigins contains origins of expectations of the LedgerServiceHandler.SearchAccounts
-type LedgerServiceHandlerMockSearchAccountsExpectationOrigins struct {
+// LedgerServiceClientMockSearchAccountsOrigins contains origins of expectations of the LedgerServiceClient.SearchAccounts
+type LedgerServiceClientMockSearchAccountsExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
-	originPp2 string
 }
 
 // Marks this method to be optional. The default behavior of any method with Return() is '1 or more', meaning
@@ -1573,26 +1571,26 @@ type LedgerServiceHandlerMockSearchAccountsExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmSearchAccounts *mLedgerServiceHandlerMockSearchAccounts) Optional() *mLedgerServiceHandlerMockSearchAccounts {
+func (mmSearchAccounts *mLedgerServiceClientMockSearchAccounts) Optional() *mLedgerServiceClientMockSearchAccounts {
 	mmSearchAccounts.optional = true
 	return mmSearchAccounts
 }
 
-// Expect sets up expected params for LedgerServiceHandler.SearchAccounts
-func (mmSearchAccounts *mLedgerServiceHandlerMockSearchAccounts) Expect(ctx context.Context, pp1 *connect.Request[v1.SearchRequest], pp2 *connect.ServerStream[v11.Account]) *mLedgerServiceHandlerMockSearchAccounts {
+// Expect sets up expected params for LedgerServiceClient.SearchAccounts
+func (mmSearchAccounts *mLedgerServiceClientMockSearchAccounts) Expect(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) *mLedgerServiceClientMockSearchAccounts {
 	if mmSearchAccounts.mock.funcSearchAccounts != nil {
-		mmSearchAccounts.mock.t.Fatalf("LedgerServiceHandlerMock.SearchAccounts mock is already set by Set")
+		mmSearchAccounts.mock.t.Fatalf("LedgerServiceClientMock.SearchAccounts mock is already set by Set")
 	}
 
 	if mmSearchAccounts.defaultExpectation == nil {
-		mmSearchAccounts.defaultExpectation = &LedgerServiceHandlerMockSearchAccountsExpectation{}
+		mmSearchAccounts.defaultExpectation = &LedgerServiceClientMockSearchAccountsExpectation{}
 	}
 
 	if mmSearchAccounts.defaultExpectation.paramPtrs != nil {
-		mmSearchAccounts.mock.t.Fatalf("LedgerServiceHandlerMock.SearchAccounts mock is already set by ExpectParams functions")
+		mmSearchAccounts.mock.t.Fatalf("LedgerServiceClientMock.SearchAccounts mock is already set by ExpectParams functions")
 	}
 
-	mmSearchAccounts.defaultExpectation.params = &LedgerServiceHandlerMockSearchAccountsParams{ctx, pp1, pp2}
+	mmSearchAccounts.defaultExpectation.params = &LedgerServiceClientMockSearchAccountsParams{ctx, pp1}
 	mmSearchAccounts.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmSearchAccounts.expectations {
 		if minimock.Equal(e.params, mmSearchAccounts.defaultExpectation.params) {
@@ -1603,22 +1601,22 @@ func (mmSearchAccounts *mLedgerServiceHandlerMockSearchAccounts) Expect(ctx cont
 	return mmSearchAccounts
 }
 
-// ExpectCtxParam1 sets up expected param ctx for LedgerServiceHandler.SearchAccounts
-func (mmSearchAccounts *mLedgerServiceHandlerMockSearchAccounts) ExpectCtxParam1(ctx context.Context) *mLedgerServiceHandlerMockSearchAccounts {
+// ExpectCtxParam1 sets up expected param ctx for LedgerServiceClient.SearchAccounts
+func (mmSearchAccounts *mLedgerServiceClientMockSearchAccounts) ExpectCtxParam1(ctx context.Context) *mLedgerServiceClientMockSearchAccounts {
 	if mmSearchAccounts.mock.funcSearchAccounts != nil {
-		mmSearchAccounts.mock.t.Fatalf("LedgerServiceHandlerMock.SearchAccounts mock is already set by Set")
+		mmSearchAccounts.mock.t.Fatalf("LedgerServiceClientMock.SearchAccounts mock is already set by Set")
 	}
 
 	if mmSearchAccounts.defaultExpectation == nil {
-		mmSearchAccounts.defaultExpectation = &LedgerServiceHandlerMockSearchAccountsExpectation{}
+		mmSearchAccounts.defaultExpectation = &LedgerServiceClientMockSearchAccountsExpectation{}
 	}
 
 	if mmSearchAccounts.defaultExpectation.params != nil {
-		mmSearchAccounts.mock.t.Fatalf("LedgerServiceHandlerMock.SearchAccounts mock is already set by Expect")
+		mmSearchAccounts.mock.t.Fatalf("LedgerServiceClientMock.SearchAccounts mock is already set by Expect")
 	}
 
 	if mmSearchAccounts.defaultExpectation.paramPtrs == nil {
-		mmSearchAccounts.defaultExpectation.paramPtrs = &LedgerServiceHandlerMockSearchAccountsParamPtrs{}
+		mmSearchAccounts.defaultExpectation.paramPtrs = &LedgerServiceClientMockSearchAccountsParamPtrs{}
 	}
 	mmSearchAccounts.defaultExpectation.paramPtrs.ctx = &ctx
 	mmSearchAccounts.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -1626,22 +1624,22 @@ func (mmSearchAccounts *mLedgerServiceHandlerMockSearchAccounts) ExpectCtxParam1
 	return mmSearchAccounts
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for LedgerServiceHandler.SearchAccounts
-func (mmSearchAccounts *mLedgerServiceHandlerMockSearchAccounts) ExpectPp1Param2(pp1 *connect.Request[v1.SearchRequest]) *mLedgerServiceHandlerMockSearchAccounts {
+// ExpectPp1Param2 sets up expected param pp1 for LedgerServiceClient.SearchAccounts
+func (mmSearchAccounts *mLedgerServiceClientMockSearchAccounts) ExpectPp1Param2(pp1 *connect.Request[v1.SearchRequest]) *mLedgerServiceClientMockSearchAccounts {
 	if mmSearchAccounts.mock.funcSearchAccounts != nil {
-		mmSearchAccounts.mock.t.Fatalf("LedgerServiceHandlerMock.SearchAccounts mock is already set by Set")
+		mmSearchAccounts.mock.t.Fatalf("LedgerServiceClientMock.SearchAccounts mock is already set by Set")
 	}
 
 	if mmSearchAccounts.defaultExpectation == nil {
-		mmSearchAccounts.defaultExpectation = &LedgerServiceHandlerMockSearchAccountsExpectation{}
+		mmSearchAccounts.defaultExpectation = &LedgerServiceClientMockSearchAccountsExpectation{}
 	}
 
 	if mmSearchAccounts.defaultExpectation.params != nil {
-		mmSearchAccounts.mock.t.Fatalf("LedgerServiceHandlerMock.SearchAccounts mock is already set by Expect")
+		mmSearchAccounts.mock.t.Fatalf("LedgerServiceClientMock.SearchAccounts mock is already set by Expect")
 	}
 
 	if mmSearchAccounts.defaultExpectation.paramPtrs == nil {
-		mmSearchAccounts.defaultExpectation.paramPtrs = &LedgerServiceHandlerMockSearchAccountsParamPtrs{}
+		mmSearchAccounts.defaultExpectation.paramPtrs = &LedgerServiceClientMockSearchAccountsParamPtrs{}
 	}
 	mmSearchAccounts.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmSearchAccounts.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -1649,33 +1647,10 @@ func (mmSearchAccounts *mLedgerServiceHandlerMockSearchAccounts) ExpectPp1Param2
 	return mmSearchAccounts
 }
 
-// ExpectPp2Param3 sets up expected param pp2 for LedgerServiceHandler.SearchAccounts
-func (mmSearchAccounts *mLedgerServiceHandlerMockSearchAccounts) ExpectPp2Param3(pp2 *connect.ServerStream[v11.Account]) *mLedgerServiceHandlerMockSearchAccounts {
-	if mmSearchAccounts.mock.funcSearchAccounts != nil {
-		mmSearchAccounts.mock.t.Fatalf("LedgerServiceHandlerMock.SearchAccounts mock is already set by Set")
-	}
-
-	if mmSearchAccounts.defaultExpectation == nil {
-		mmSearchAccounts.defaultExpectation = &LedgerServiceHandlerMockSearchAccountsExpectation{}
-	}
-
-	if mmSearchAccounts.defaultExpectation.params != nil {
-		mmSearchAccounts.mock.t.Fatalf("LedgerServiceHandlerMock.SearchAccounts mock is already set by Expect")
-	}
-
-	if mmSearchAccounts.defaultExpectation.paramPtrs == nil {
-		mmSearchAccounts.defaultExpectation.paramPtrs = &LedgerServiceHandlerMockSearchAccountsParamPtrs{}
-	}
-	mmSearchAccounts.defaultExpectation.paramPtrs.pp2 = &pp2
-	mmSearchAccounts.defaultExpectation.expectationOrigins.originPp2 = minimock.CallerInfo(1)
-
-	return mmSearchAccounts
-}
-
-// Inspect accepts an inspector function that has same arguments as the LedgerServiceHandler.SearchAccounts
-func (mmSearchAccounts *mLedgerServiceHandlerMockSearchAccounts) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest], pp2 *connect.ServerStream[v11.Account])) *mLedgerServiceHandlerMockSearchAccounts {
+// Inspect accepts an inspector function that has same arguments as the LedgerServiceClient.SearchAccounts
+func (mmSearchAccounts *mLedgerServiceClientMockSearchAccounts) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest])) *mLedgerServiceClientMockSearchAccounts {
 	if mmSearchAccounts.mock.inspectFuncSearchAccounts != nil {
-		mmSearchAccounts.mock.t.Fatalf("Inspect function is already set for LedgerServiceHandlerMock.SearchAccounts")
+		mmSearchAccounts.mock.t.Fatalf("Inspect function is already set for LedgerServiceClientMock.SearchAccounts")
 	}
 
 	mmSearchAccounts.mock.inspectFuncSearchAccounts = f
@@ -1683,28 +1658,28 @@ func (mmSearchAccounts *mLedgerServiceHandlerMockSearchAccounts) Inspect(f func(
 	return mmSearchAccounts
 }
 
-// Return sets up results that will be returned by LedgerServiceHandler.SearchAccounts
-func (mmSearchAccounts *mLedgerServiceHandlerMockSearchAccounts) Return(err error) *LedgerServiceHandlerMock {
+// Return sets up results that will be returned by LedgerServiceClient.SearchAccounts
+func (mmSearchAccounts *mLedgerServiceClientMockSearchAccounts) Return(pp2 *connect.ServerStreamForClient[v11.Account], err error) *LedgerServiceClientMock {
 	if mmSearchAccounts.mock.funcSearchAccounts != nil {
-		mmSearchAccounts.mock.t.Fatalf("LedgerServiceHandlerMock.SearchAccounts mock is already set by Set")
+		mmSearchAccounts.mock.t.Fatalf("LedgerServiceClientMock.SearchAccounts mock is already set by Set")
 	}
 
 	if mmSearchAccounts.defaultExpectation == nil {
-		mmSearchAccounts.defaultExpectation = &LedgerServiceHandlerMockSearchAccountsExpectation{mock: mmSearchAccounts.mock}
+		mmSearchAccounts.defaultExpectation = &LedgerServiceClientMockSearchAccountsExpectation{mock: mmSearchAccounts.mock}
 	}
-	mmSearchAccounts.defaultExpectation.results = &LedgerServiceHandlerMockSearchAccountsResults{err}
+	mmSearchAccounts.defaultExpectation.results = &LedgerServiceClientMockSearchAccountsResults{pp2, err}
 	mmSearchAccounts.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmSearchAccounts.mock
 }
 
-// Set uses given function f to mock the LedgerServiceHandler.SearchAccounts method
-func (mmSearchAccounts *mLedgerServiceHandlerMockSearchAccounts) Set(f func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest], pp2 *connect.ServerStream[v11.Account]) (err error)) *LedgerServiceHandlerMock {
+// Set uses given function f to mock the LedgerServiceClient.SearchAccounts method
+func (mmSearchAccounts *mLedgerServiceClientMockSearchAccounts) Set(f func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) (pp2 *connect.ServerStreamForClient[v11.Account], err error)) *LedgerServiceClientMock {
 	if mmSearchAccounts.defaultExpectation != nil {
-		mmSearchAccounts.mock.t.Fatalf("Default expectation is already set for the LedgerServiceHandler.SearchAccounts method")
+		mmSearchAccounts.mock.t.Fatalf("Default expectation is already set for the LedgerServiceClient.SearchAccounts method")
 	}
 
 	if len(mmSearchAccounts.expectations) > 0 {
-		mmSearchAccounts.mock.t.Fatalf("Some expectations are already set for the LedgerServiceHandler.SearchAccounts method")
+		mmSearchAccounts.mock.t.Fatalf("Some expectations are already set for the LedgerServiceClient.SearchAccounts method")
 	}
 
 	mmSearchAccounts.mock.funcSearchAccounts = f
@@ -1712,39 +1687,39 @@ func (mmSearchAccounts *mLedgerServiceHandlerMockSearchAccounts) Set(f func(ctx 
 	return mmSearchAccounts.mock
 }
 
-// When sets expectation for the LedgerServiceHandler.SearchAccounts which will trigger the result defined by the following
+// When sets expectation for the LedgerServiceClient.SearchAccounts which will trigger the result defined by the following
 // Then helper
-func (mmSearchAccounts *mLedgerServiceHandlerMockSearchAccounts) When(ctx context.Context, pp1 *connect.Request[v1.SearchRequest], pp2 *connect.ServerStream[v11.Account]) *LedgerServiceHandlerMockSearchAccountsExpectation {
+func (mmSearchAccounts *mLedgerServiceClientMockSearchAccounts) When(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) *LedgerServiceClientMockSearchAccountsExpectation {
 	if mmSearchAccounts.mock.funcSearchAccounts != nil {
-		mmSearchAccounts.mock.t.Fatalf("LedgerServiceHandlerMock.SearchAccounts mock is already set by Set")
+		mmSearchAccounts.mock.t.Fatalf("LedgerServiceClientMock.SearchAccounts mock is already set by Set")
 	}
 
-	expectation := &LedgerServiceHandlerMockSearchAccountsExpectation{
+	expectation := &LedgerServiceClientMockSearchAccountsExpectation{
 		mock:               mmSearchAccounts.mock,
-		params:             &LedgerServiceHandlerMockSearchAccountsParams{ctx, pp1, pp2},
-		expectationOrigins: LedgerServiceHandlerMockSearchAccountsExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &LedgerServiceClientMockSearchAccountsParams{ctx, pp1},
+		expectationOrigins: LedgerServiceClientMockSearchAccountsExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmSearchAccounts.expectations = append(mmSearchAccounts.expectations, expectation)
 	return expectation
 }
 
-// Then sets up LedgerServiceHandler.SearchAccounts return parameters for the expectation previously defined by the When method
-func (e *LedgerServiceHandlerMockSearchAccountsExpectation) Then(err error) *LedgerServiceHandlerMock {
-	e.results = &LedgerServiceHandlerMockSearchAccountsResults{err}
+// Then sets up LedgerServiceClient.SearchAccounts return parameters for the expectation previously defined by the When method
+func (e *LedgerServiceClientMockSearchAccountsExpectation) Then(pp2 *connect.ServerStreamForClient[v11.Account], err error) *LedgerServiceClientMock {
+	e.results = &LedgerServiceClientMockSearchAccountsResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times LedgerServiceHandler.SearchAccounts should be invoked
-func (mmSearchAccounts *mLedgerServiceHandlerMockSearchAccounts) Times(n uint64) *mLedgerServiceHandlerMockSearchAccounts {
+// Times sets number of times LedgerServiceClient.SearchAccounts should be invoked
+func (mmSearchAccounts *mLedgerServiceClientMockSearchAccounts) Times(n uint64) *mLedgerServiceClientMockSearchAccounts {
 	if n == 0 {
-		mmSearchAccounts.mock.t.Fatalf("Times of LedgerServiceHandlerMock.SearchAccounts mock can not be zero")
+		mmSearchAccounts.mock.t.Fatalf("Times of LedgerServiceClientMock.SearchAccounts mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmSearchAccounts.expectedInvocations, n)
 	mmSearchAccounts.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmSearchAccounts
 }
 
-func (mmSearchAccounts *mLedgerServiceHandlerMockSearchAccounts) invocationsDone() bool {
+func (mmSearchAccounts *mLedgerServiceClientMockSearchAccounts) invocationsDone() bool {
 	if len(mmSearchAccounts.expectations) == 0 && mmSearchAccounts.defaultExpectation == nil && mmSearchAccounts.mock.funcSearchAccounts == nil {
 		return true
 	}
@@ -1755,18 +1730,18 @@ func (mmSearchAccounts *mLedgerServiceHandlerMockSearchAccounts) invocationsDone
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// SearchAccounts implements mm_ledgerv1connect.LedgerServiceHandler
-func (mmSearchAccounts *LedgerServiceHandlerMock) SearchAccounts(ctx context.Context, pp1 *connect.Request[v1.SearchRequest], pp2 *connect.ServerStream[v11.Account]) (err error) {
+// SearchAccounts implements mm_ledgerv1connect.LedgerServiceClient
+func (mmSearchAccounts *LedgerServiceClientMock) SearchAccounts(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) (pp2 *connect.ServerStreamForClient[v11.Account], err error) {
 	mm_atomic.AddUint64(&mmSearchAccounts.beforeSearchAccountsCounter, 1)
 	defer mm_atomic.AddUint64(&mmSearchAccounts.afterSearchAccountsCounter, 1)
 
 	mmSearchAccounts.t.Helper()
 
 	if mmSearchAccounts.inspectFuncSearchAccounts != nil {
-		mmSearchAccounts.inspectFuncSearchAccounts(ctx, pp1, pp2)
+		mmSearchAccounts.inspectFuncSearchAccounts(ctx, pp1)
 	}
 
-	mm_params := LedgerServiceHandlerMockSearchAccountsParams{ctx, pp1, pp2}
+	mm_params := LedgerServiceClientMockSearchAccountsParams{ctx, pp1}
 
 	// Record call args
 	mmSearchAccounts.SearchAccountsMock.mutex.Lock()
@@ -1776,7 +1751,7 @@ func (mmSearchAccounts *LedgerServiceHandlerMock) SearchAccounts(ctx context.Con
 	for _, e := range mmSearchAccounts.SearchAccountsMock.expectations {
 		if minimock.Equal(*e.params, mm_params) {
 			mm_atomic.AddUint64(&e.Counter, 1)
-			return e.results.err
+			return e.results.pp2, e.results.err
 		}
 	}
 
@@ -1785,59 +1760,54 @@ func (mmSearchAccounts *LedgerServiceHandlerMock) SearchAccounts(ctx context.Con
 		mm_want := mmSearchAccounts.SearchAccountsMock.defaultExpectation.params
 		mm_want_ptrs := mmSearchAccounts.SearchAccountsMock.defaultExpectation.paramPtrs
 
-		mm_got := LedgerServiceHandlerMockSearchAccountsParams{ctx, pp1, pp2}
+		mm_got := LedgerServiceClientMockSearchAccountsParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmSearchAccounts.t.Errorf("LedgerServiceHandlerMock.SearchAccounts got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmSearchAccounts.t.Errorf("LedgerServiceClientMock.SearchAccounts got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmSearchAccounts.SearchAccountsMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmSearchAccounts.t.Errorf("LedgerServiceHandlerMock.SearchAccounts got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmSearchAccounts.t.Errorf("LedgerServiceClientMock.SearchAccounts got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmSearchAccounts.SearchAccountsMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
-			if mm_want_ptrs.pp2 != nil && !minimock.Equal(*mm_want_ptrs.pp2, mm_got.pp2) {
-				mmSearchAccounts.t.Errorf("LedgerServiceHandlerMock.SearchAccounts got unexpected parameter pp2, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
-					mmSearchAccounts.SearchAccountsMock.defaultExpectation.expectationOrigins.originPp2, *mm_want_ptrs.pp2, mm_got.pp2, minimock.Diff(*mm_want_ptrs.pp2, mm_got.pp2))
-			}
-
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmSearchAccounts.t.Errorf("LedgerServiceHandlerMock.SearchAccounts got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmSearchAccounts.t.Errorf("LedgerServiceClientMock.SearchAccounts got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmSearchAccounts.SearchAccountsMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmSearchAccounts.SearchAccountsMock.defaultExpectation.results
 		if mm_results == nil {
-			mmSearchAccounts.t.Fatal("No results are set for the LedgerServiceHandlerMock.SearchAccounts")
+			mmSearchAccounts.t.Fatal("No results are set for the LedgerServiceClientMock.SearchAccounts")
 		}
-		return (*mm_results).err
+		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmSearchAccounts.funcSearchAccounts != nil {
-		return mmSearchAccounts.funcSearchAccounts(ctx, pp1, pp2)
+		return mmSearchAccounts.funcSearchAccounts(ctx, pp1)
 	}
-	mmSearchAccounts.t.Fatalf("Unexpected call to LedgerServiceHandlerMock.SearchAccounts. %v %v %v", ctx, pp1, pp2)
+	mmSearchAccounts.t.Fatalf("Unexpected call to LedgerServiceClientMock.SearchAccounts. %v %v", ctx, pp1)
 	return
 }
 
-// SearchAccountsAfterCounter returns a count of finished LedgerServiceHandlerMock.SearchAccounts invocations
-func (mmSearchAccounts *LedgerServiceHandlerMock) SearchAccountsAfterCounter() uint64 {
+// SearchAccountsAfterCounter returns a count of finished LedgerServiceClientMock.SearchAccounts invocations
+func (mmSearchAccounts *LedgerServiceClientMock) SearchAccountsAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmSearchAccounts.afterSearchAccountsCounter)
 }
 
-// SearchAccountsBeforeCounter returns a count of LedgerServiceHandlerMock.SearchAccounts invocations
-func (mmSearchAccounts *LedgerServiceHandlerMock) SearchAccountsBeforeCounter() uint64 {
+// SearchAccountsBeforeCounter returns a count of LedgerServiceClientMock.SearchAccounts invocations
+func (mmSearchAccounts *LedgerServiceClientMock) SearchAccountsBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmSearchAccounts.beforeSearchAccountsCounter)
 }
 
-// Calls returns a list of arguments used in each call to LedgerServiceHandlerMock.SearchAccounts.
+// Calls returns a list of arguments used in each call to LedgerServiceClientMock.SearchAccounts.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmSearchAccounts *mLedgerServiceHandlerMockSearchAccounts) Calls() []*LedgerServiceHandlerMockSearchAccountsParams {
+func (mmSearchAccounts *mLedgerServiceClientMockSearchAccounts) Calls() []*LedgerServiceClientMockSearchAccountsParams {
 	mmSearchAccounts.mutex.RLock()
 
-	argCopy := make([]*LedgerServiceHandlerMockSearchAccountsParams, len(mmSearchAccounts.callArgs))
+	argCopy := make([]*LedgerServiceClientMockSearchAccountsParams, len(mmSearchAccounts.callArgs))
 	copy(argCopy, mmSearchAccounts.callArgs)
 
 	mmSearchAccounts.mutex.RUnlock()
@@ -1847,7 +1817,7 @@ func (mmSearchAccounts *mLedgerServiceHandlerMockSearchAccounts) Calls() []*Ledg
 
 // MinimockSearchAccountsDone returns true if the count of the SearchAccounts invocations corresponds
 // the number of defined expectations
-func (m *LedgerServiceHandlerMock) MinimockSearchAccountsDone() bool {
+func (m *LedgerServiceClientMock) MinimockSearchAccountsDone() bool {
 	if m.SearchAccountsMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -1863,10 +1833,10 @@ func (m *LedgerServiceHandlerMock) MinimockSearchAccountsDone() bool {
 }
 
 // MinimockSearchAccountsInspect logs each unmet expectation
-func (m *LedgerServiceHandlerMock) MinimockSearchAccountsInspect() {
+func (m *LedgerServiceClientMock) MinimockSearchAccountsInspect() {
 	for _, e := range m.SearchAccountsMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to LedgerServiceHandlerMock.SearchAccounts at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to LedgerServiceClientMock.SearchAccounts at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -1874,71 +1844,69 @@ func (m *LedgerServiceHandlerMock) MinimockSearchAccountsInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.SearchAccountsMock.defaultExpectation != nil && afterSearchAccountsCounter < 1 {
 		if m.SearchAccountsMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to LedgerServiceHandlerMock.SearchAccounts at\n%s", m.SearchAccountsMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to LedgerServiceClientMock.SearchAccounts at\n%s", m.SearchAccountsMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to LedgerServiceHandlerMock.SearchAccounts at\n%s with params: %#v", m.SearchAccountsMock.defaultExpectation.expectationOrigins.origin, *m.SearchAccountsMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to LedgerServiceClientMock.SearchAccounts at\n%s with params: %#v", m.SearchAccountsMock.defaultExpectation.expectationOrigins.origin, *m.SearchAccountsMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcSearchAccounts != nil && afterSearchAccountsCounter < 1 {
-		m.t.Errorf("Expected call to LedgerServiceHandlerMock.SearchAccounts at\n%s", m.funcSearchAccountsOrigin)
+		m.t.Errorf("Expected call to LedgerServiceClientMock.SearchAccounts at\n%s", m.funcSearchAccountsOrigin)
 	}
 
 	if !m.SearchAccountsMock.invocationsDone() && afterSearchAccountsCounter > 0 {
-		m.t.Errorf("Expected %d calls to LedgerServiceHandlerMock.SearchAccounts at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to LedgerServiceClientMock.SearchAccounts at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.SearchAccountsMock.expectedInvocations), m.SearchAccountsMock.expectedInvocationsOrigin, afterSearchAccountsCounter)
 	}
 }
 
-type mLedgerServiceHandlerMockSearchLedgers struct {
+type mLedgerServiceClientMockSearchLedgers struct {
 	optional           bool
-	mock               *LedgerServiceHandlerMock
-	defaultExpectation *LedgerServiceHandlerMockSearchLedgersExpectation
-	expectations       []*LedgerServiceHandlerMockSearchLedgersExpectation
+	mock               *LedgerServiceClientMock
+	defaultExpectation *LedgerServiceClientMockSearchLedgersExpectation
+	expectations       []*LedgerServiceClientMockSearchLedgersExpectation
 
-	callArgs []*LedgerServiceHandlerMockSearchLedgersParams
+	callArgs []*LedgerServiceClientMockSearchLedgersParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// LedgerServiceHandlerMockSearchLedgersExpectation specifies expectation struct of the LedgerServiceHandler.SearchLedgers
-type LedgerServiceHandlerMockSearchLedgersExpectation struct {
-	mock               *LedgerServiceHandlerMock
-	params             *LedgerServiceHandlerMockSearchLedgersParams
-	paramPtrs          *LedgerServiceHandlerMockSearchLedgersParamPtrs
-	expectationOrigins LedgerServiceHandlerMockSearchLedgersExpectationOrigins
-	results            *LedgerServiceHandlerMockSearchLedgersResults
+// LedgerServiceClientMockSearchLedgersExpectation specifies expectation struct of the LedgerServiceClient.SearchLedgers
+type LedgerServiceClientMockSearchLedgersExpectation struct {
+	mock               *LedgerServiceClientMock
+	params             *LedgerServiceClientMockSearchLedgersParams
+	paramPtrs          *LedgerServiceClientMockSearchLedgersParamPtrs
+	expectationOrigins LedgerServiceClientMockSearchLedgersExpectationOrigins
+	results            *LedgerServiceClientMockSearchLedgersResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// LedgerServiceHandlerMockSearchLedgersParams contains parameters of the LedgerServiceHandler.SearchLedgers
-type LedgerServiceHandlerMockSearchLedgersParams struct {
+// LedgerServiceClientMockSearchLedgersParams contains parameters of the LedgerServiceClient.SearchLedgers
+type LedgerServiceClientMockSearchLedgersParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.SearchRequest]
-	pp2 *connect.ServerStream[v11.Ledger]
 }
 
-// LedgerServiceHandlerMockSearchLedgersParamPtrs contains pointers to parameters of the LedgerServiceHandler.SearchLedgers
-type LedgerServiceHandlerMockSearchLedgersParamPtrs struct {
+// LedgerServiceClientMockSearchLedgersParamPtrs contains pointers to parameters of the LedgerServiceClient.SearchLedgers
+type LedgerServiceClientMockSearchLedgersParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.SearchRequest]
-	pp2 **connect.ServerStream[v11.Ledger]
 }
 
-// LedgerServiceHandlerMockSearchLedgersResults contains results of the LedgerServiceHandler.SearchLedgers
-type LedgerServiceHandlerMockSearchLedgersResults struct {
+// LedgerServiceClientMockSearchLedgersResults contains results of the LedgerServiceClient.SearchLedgers
+type LedgerServiceClientMockSearchLedgersResults struct {
+	pp2 *connect.ServerStreamForClient[v11.Ledger]
 	err error
 }
 
-// LedgerServiceHandlerMockSearchLedgersOrigins contains origins of expectations of the LedgerServiceHandler.SearchLedgers
-type LedgerServiceHandlerMockSearchLedgersExpectationOrigins struct {
+// LedgerServiceClientMockSearchLedgersOrigins contains origins of expectations of the LedgerServiceClient.SearchLedgers
+type LedgerServiceClientMockSearchLedgersExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
-	originPp2 string
 }
 
 // Marks this method to be optional. The default behavior of any method with Return() is '1 or more', meaning
@@ -1946,26 +1914,26 @@ type LedgerServiceHandlerMockSearchLedgersExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmSearchLedgers *mLedgerServiceHandlerMockSearchLedgers) Optional() *mLedgerServiceHandlerMockSearchLedgers {
+func (mmSearchLedgers *mLedgerServiceClientMockSearchLedgers) Optional() *mLedgerServiceClientMockSearchLedgers {
 	mmSearchLedgers.optional = true
 	return mmSearchLedgers
 }
 
-// Expect sets up expected params for LedgerServiceHandler.SearchLedgers
-func (mmSearchLedgers *mLedgerServiceHandlerMockSearchLedgers) Expect(ctx context.Context, pp1 *connect.Request[v1.SearchRequest], pp2 *connect.ServerStream[v11.Ledger]) *mLedgerServiceHandlerMockSearchLedgers {
+// Expect sets up expected params for LedgerServiceClient.SearchLedgers
+func (mmSearchLedgers *mLedgerServiceClientMockSearchLedgers) Expect(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) *mLedgerServiceClientMockSearchLedgers {
 	if mmSearchLedgers.mock.funcSearchLedgers != nil {
-		mmSearchLedgers.mock.t.Fatalf("LedgerServiceHandlerMock.SearchLedgers mock is already set by Set")
+		mmSearchLedgers.mock.t.Fatalf("LedgerServiceClientMock.SearchLedgers mock is already set by Set")
 	}
 
 	if mmSearchLedgers.defaultExpectation == nil {
-		mmSearchLedgers.defaultExpectation = &LedgerServiceHandlerMockSearchLedgersExpectation{}
+		mmSearchLedgers.defaultExpectation = &LedgerServiceClientMockSearchLedgersExpectation{}
 	}
 
 	if mmSearchLedgers.defaultExpectation.paramPtrs != nil {
-		mmSearchLedgers.mock.t.Fatalf("LedgerServiceHandlerMock.SearchLedgers mock is already set by ExpectParams functions")
+		mmSearchLedgers.mock.t.Fatalf("LedgerServiceClientMock.SearchLedgers mock is already set by ExpectParams functions")
 	}
 
-	mmSearchLedgers.defaultExpectation.params = &LedgerServiceHandlerMockSearchLedgersParams{ctx, pp1, pp2}
+	mmSearchLedgers.defaultExpectation.params = &LedgerServiceClientMockSearchLedgersParams{ctx, pp1}
 	mmSearchLedgers.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmSearchLedgers.expectations {
 		if minimock.Equal(e.params, mmSearchLedgers.defaultExpectation.params) {
@@ -1976,22 +1944,22 @@ func (mmSearchLedgers *mLedgerServiceHandlerMockSearchLedgers) Expect(ctx contex
 	return mmSearchLedgers
 }
 
-// ExpectCtxParam1 sets up expected param ctx for LedgerServiceHandler.SearchLedgers
-func (mmSearchLedgers *mLedgerServiceHandlerMockSearchLedgers) ExpectCtxParam1(ctx context.Context) *mLedgerServiceHandlerMockSearchLedgers {
+// ExpectCtxParam1 sets up expected param ctx for LedgerServiceClient.SearchLedgers
+func (mmSearchLedgers *mLedgerServiceClientMockSearchLedgers) ExpectCtxParam1(ctx context.Context) *mLedgerServiceClientMockSearchLedgers {
 	if mmSearchLedgers.mock.funcSearchLedgers != nil {
-		mmSearchLedgers.mock.t.Fatalf("LedgerServiceHandlerMock.SearchLedgers mock is already set by Set")
+		mmSearchLedgers.mock.t.Fatalf("LedgerServiceClientMock.SearchLedgers mock is already set by Set")
 	}
 
 	if mmSearchLedgers.defaultExpectation == nil {
-		mmSearchLedgers.defaultExpectation = &LedgerServiceHandlerMockSearchLedgersExpectation{}
+		mmSearchLedgers.defaultExpectation = &LedgerServiceClientMockSearchLedgersExpectation{}
 	}
 
 	if mmSearchLedgers.defaultExpectation.params != nil {
-		mmSearchLedgers.mock.t.Fatalf("LedgerServiceHandlerMock.SearchLedgers mock is already set by Expect")
+		mmSearchLedgers.mock.t.Fatalf("LedgerServiceClientMock.SearchLedgers mock is already set by Expect")
 	}
 
 	if mmSearchLedgers.defaultExpectation.paramPtrs == nil {
-		mmSearchLedgers.defaultExpectation.paramPtrs = &LedgerServiceHandlerMockSearchLedgersParamPtrs{}
+		mmSearchLedgers.defaultExpectation.paramPtrs = &LedgerServiceClientMockSearchLedgersParamPtrs{}
 	}
 	mmSearchLedgers.defaultExpectation.paramPtrs.ctx = &ctx
 	mmSearchLedgers.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -1999,22 +1967,22 @@ func (mmSearchLedgers *mLedgerServiceHandlerMockSearchLedgers) ExpectCtxParam1(c
 	return mmSearchLedgers
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for LedgerServiceHandler.SearchLedgers
-func (mmSearchLedgers *mLedgerServiceHandlerMockSearchLedgers) ExpectPp1Param2(pp1 *connect.Request[v1.SearchRequest]) *mLedgerServiceHandlerMockSearchLedgers {
+// ExpectPp1Param2 sets up expected param pp1 for LedgerServiceClient.SearchLedgers
+func (mmSearchLedgers *mLedgerServiceClientMockSearchLedgers) ExpectPp1Param2(pp1 *connect.Request[v1.SearchRequest]) *mLedgerServiceClientMockSearchLedgers {
 	if mmSearchLedgers.mock.funcSearchLedgers != nil {
-		mmSearchLedgers.mock.t.Fatalf("LedgerServiceHandlerMock.SearchLedgers mock is already set by Set")
+		mmSearchLedgers.mock.t.Fatalf("LedgerServiceClientMock.SearchLedgers mock is already set by Set")
 	}
 
 	if mmSearchLedgers.defaultExpectation == nil {
-		mmSearchLedgers.defaultExpectation = &LedgerServiceHandlerMockSearchLedgersExpectation{}
+		mmSearchLedgers.defaultExpectation = &LedgerServiceClientMockSearchLedgersExpectation{}
 	}
 
 	if mmSearchLedgers.defaultExpectation.params != nil {
-		mmSearchLedgers.mock.t.Fatalf("LedgerServiceHandlerMock.SearchLedgers mock is already set by Expect")
+		mmSearchLedgers.mock.t.Fatalf("LedgerServiceClientMock.SearchLedgers mock is already set by Expect")
 	}
 
 	if mmSearchLedgers.defaultExpectation.paramPtrs == nil {
-		mmSearchLedgers.defaultExpectation.paramPtrs = &LedgerServiceHandlerMockSearchLedgersParamPtrs{}
+		mmSearchLedgers.defaultExpectation.paramPtrs = &LedgerServiceClientMockSearchLedgersParamPtrs{}
 	}
 	mmSearchLedgers.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmSearchLedgers.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -2022,33 +1990,10 @@ func (mmSearchLedgers *mLedgerServiceHandlerMockSearchLedgers) ExpectPp1Param2(p
 	return mmSearchLedgers
 }
 
-// ExpectPp2Param3 sets up expected param pp2 for LedgerServiceHandler.SearchLedgers
-func (mmSearchLedgers *mLedgerServiceHandlerMockSearchLedgers) ExpectPp2Param3(pp2 *connect.ServerStream[v11.Ledger]) *mLedgerServiceHandlerMockSearchLedgers {
-	if mmSearchLedgers.mock.funcSearchLedgers != nil {
-		mmSearchLedgers.mock.t.Fatalf("LedgerServiceHandlerMock.SearchLedgers mock is already set by Set")
-	}
-
-	if mmSearchLedgers.defaultExpectation == nil {
-		mmSearchLedgers.defaultExpectation = &LedgerServiceHandlerMockSearchLedgersExpectation{}
-	}
-
-	if mmSearchLedgers.defaultExpectation.params != nil {
-		mmSearchLedgers.mock.t.Fatalf("LedgerServiceHandlerMock.SearchLedgers mock is already set by Expect")
-	}
-
-	if mmSearchLedgers.defaultExpectation.paramPtrs == nil {
-		mmSearchLedgers.defaultExpectation.paramPtrs = &LedgerServiceHandlerMockSearchLedgersParamPtrs{}
-	}
-	mmSearchLedgers.defaultExpectation.paramPtrs.pp2 = &pp2
-	mmSearchLedgers.defaultExpectation.expectationOrigins.originPp2 = minimock.CallerInfo(1)
-
-	return mmSearchLedgers
-}
-
-// Inspect accepts an inspector function that has same arguments as the LedgerServiceHandler.SearchLedgers
-func (mmSearchLedgers *mLedgerServiceHandlerMockSearchLedgers) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest], pp2 *connect.ServerStream[v11.Ledger])) *mLedgerServiceHandlerMockSearchLedgers {
+// Inspect accepts an inspector function that has same arguments as the LedgerServiceClient.SearchLedgers
+func (mmSearchLedgers *mLedgerServiceClientMockSearchLedgers) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest])) *mLedgerServiceClientMockSearchLedgers {
 	if mmSearchLedgers.mock.inspectFuncSearchLedgers != nil {
-		mmSearchLedgers.mock.t.Fatalf("Inspect function is already set for LedgerServiceHandlerMock.SearchLedgers")
+		mmSearchLedgers.mock.t.Fatalf("Inspect function is already set for LedgerServiceClientMock.SearchLedgers")
 	}
 
 	mmSearchLedgers.mock.inspectFuncSearchLedgers = f
@@ -2056,28 +2001,28 @@ func (mmSearchLedgers *mLedgerServiceHandlerMockSearchLedgers) Inspect(f func(ct
 	return mmSearchLedgers
 }
 
-// Return sets up results that will be returned by LedgerServiceHandler.SearchLedgers
-func (mmSearchLedgers *mLedgerServiceHandlerMockSearchLedgers) Return(err error) *LedgerServiceHandlerMock {
+// Return sets up results that will be returned by LedgerServiceClient.SearchLedgers
+func (mmSearchLedgers *mLedgerServiceClientMockSearchLedgers) Return(pp2 *connect.ServerStreamForClient[v11.Ledger], err error) *LedgerServiceClientMock {
 	if mmSearchLedgers.mock.funcSearchLedgers != nil {
-		mmSearchLedgers.mock.t.Fatalf("LedgerServiceHandlerMock.SearchLedgers mock is already set by Set")
+		mmSearchLedgers.mock.t.Fatalf("LedgerServiceClientMock.SearchLedgers mock is already set by Set")
 	}
 
 	if mmSearchLedgers.defaultExpectation == nil {
-		mmSearchLedgers.defaultExpectation = &LedgerServiceHandlerMockSearchLedgersExpectation{mock: mmSearchLedgers.mock}
+		mmSearchLedgers.defaultExpectation = &LedgerServiceClientMockSearchLedgersExpectation{mock: mmSearchLedgers.mock}
 	}
-	mmSearchLedgers.defaultExpectation.results = &LedgerServiceHandlerMockSearchLedgersResults{err}
+	mmSearchLedgers.defaultExpectation.results = &LedgerServiceClientMockSearchLedgersResults{pp2, err}
 	mmSearchLedgers.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmSearchLedgers.mock
 }
 
-// Set uses given function f to mock the LedgerServiceHandler.SearchLedgers method
-func (mmSearchLedgers *mLedgerServiceHandlerMockSearchLedgers) Set(f func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest], pp2 *connect.ServerStream[v11.Ledger]) (err error)) *LedgerServiceHandlerMock {
+// Set uses given function f to mock the LedgerServiceClient.SearchLedgers method
+func (mmSearchLedgers *mLedgerServiceClientMockSearchLedgers) Set(f func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) (pp2 *connect.ServerStreamForClient[v11.Ledger], err error)) *LedgerServiceClientMock {
 	if mmSearchLedgers.defaultExpectation != nil {
-		mmSearchLedgers.mock.t.Fatalf("Default expectation is already set for the LedgerServiceHandler.SearchLedgers method")
+		mmSearchLedgers.mock.t.Fatalf("Default expectation is already set for the LedgerServiceClient.SearchLedgers method")
 	}
 
 	if len(mmSearchLedgers.expectations) > 0 {
-		mmSearchLedgers.mock.t.Fatalf("Some expectations are already set for the LedgerServiceHandler.SearchLedgers method")
+		mmSearchLedgers.mock.t.Fatalf("Some expectations are already set for the LedgerServiceClient.SearchLedgers method")
 	}
 
 	mmSearchLedgers.mock.funcSearchLedgers = f
@@ -2085,39 +2030,39 @@ func (mmSearchLedgers *mLedgerServiceHandlerMockSearchLedgers) Set(f func(ctx co
 	return mmSearchLedgers.mock
 }
 
-// When sets expectation for the LedgerServiceHandler.SearchLedgers which will trigger the result defined by the following
+// When sets expectation for the LedgerServiceClient.SearchLedgers which will trigger the result defined by the following
 // Then helper
-func (mmSearchLedgers *mLedgerServiceHandlerMockSearchLedgers) When(ctx context.Context, pp1 *connect.Request[v1.SearchRequest], pp2 *connect.ServerStream[v11.Ledger]) *LedgerServiceHandlerMockSearchLedgersExpectation {
+func (mmSearchLedgers *mLedgerServiceClientMockSearchLedgers) When(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) *LedgerServiceClientMockSearchLedgersExpectation {
 	if mmSearchLedgers.mock.funcSearchLedgers != nil {
-		mmSearchLedgers.mock.t.Fatalf("LedgerServiceHandlerMock.SearchLedgers mock is already set by Set")
+		mmSearchLedgers.mock.t.Fatalf("LedgerServiceClientMock.SearchLedgers mock is already set by Set")
 	}
 
-	expectation := &LedgerServiceHandlerMockSearchLedgersExpectation{
+	expectation := &LedgerServiceClientMockSearchLedgersExpectation{
 		mock:               mmSearchLedgers.mock,
-		params:             &LedgerServiceHandlerMockSearchLedgersParams{ctx, pp1, pp2},
-		expectationOrigins: LedgerServiceHandlerMockSearchLedgersExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &LedgerServiceClientMockSearchLedgersParams{ctx, pp1},
+		expectationOrigins: LedgerServiceClientMockSearchLedgersExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmSearchLedgers.expectations = append(mmSearchLedgers.expectations, expectation)
 	return expectation
 }
 
-// Then sets up LedgerServiceHandler.SearchLedgers return parameters for the expectation previously defined by the When method
-func (e *LedgerServiceHandlerMockSearchLedgersExpectation) Then(err error) *LedgerServiceHandlerMock {
-	e.results = &LedgerServiceHandlerMockSearchLedgersResults{err}
+// Then sets up LedgerServiceClient.SearchLedgers return parameters for the expectation previously defined by the When method
+func (e *LedgerServiceClientMockSearchLedgersExpectation) Then(pp2 *connect.ServerStreamForClient[v11.Ledger], err error) *LedgerServiceClientMock {
+	e.results = &LedgerServiceClientMockSearchLedgersResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times LedgerServiceHandler.SearchLedgers should be invoked
-func (mmSearchLedgers *mLedgerServiceHandlerMockSearchLedgers) Times(n uint64) *mLedgerServiceHandlerMockSearchLedgers {
+// Times sets number of times LedgerServiceClient.SearchLedgers should be invoked
+func (mmSearchLedgers *mLedgerServiceClientMockSearchLedgers) Times(n uint64) *mLedgerServiceClientMockSearchLedgers {
 	if n == 0 {
-		mmSearchLedgers.mock.t.Fatalf("Times of LedgerServiceHandlerMock.SearchLedgers mock can not be zero")
+		mmSearchLedgers.mock.t.Fatalf("Times of LedgerServiceClientMock.SearchLedgers mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmSearchLedgers.expectedInvocations, n)
 	mmSearchLedgers.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmSearchLedgers
 }
 
-func (mmSearchLedgers *mLedgerServiceHandlerMockSearchLedgers) invocationsDone() bool {
+func (mmSearchLedgers *mLedgerServiceClientMockSearchLedgers) invocationsDone() bool {
 	if len(mmSearchLedgers.expectations) == 0 && mmSearchLedgers.defaultExpectation == nil && mmSearchLedgers.mock.funcSearchLedgers == nil {
 		return true
 	}
@@ -2128,18 +2073,18 @@ func (mmSearchLedgers *mLedgerServiceHandlerMockSearchLedgers) invocationsDone()
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// SearchLedgers implements mm_ledgerv1connect.LedgerServiceHandler
-func (mmSearchLedgers *LedgerServiceHandlerMock) SearchLedgers(ctx context.Context, pp1 *connect.Request[v1.SearchRequest], pp2 *connect.ServerStream[v11.Ledger]) (err error) {
+// SearchLedgers implements mm_ledgerv1connect.LedgerServiceClient
+func (mmSearchLedgers *LedgerServiceClientMock) SearchLedgers(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) (pp2 *connect.ServerStreamForClient[v11.Ledger], err error) {
 	mm_atomic.AddUint64(&mmSearchLedgers.beforeSearchLedgersCounter, 1)
 	defer mm_atomic.AddUint64(&mmSearchLedgers.afterSearchLedgersCounter, 1)
 
 	mmSearchLedgers.t.Helper()
 
 	if mmSearchLedgers.inspectFuncSearchLedgers != nil {
-		mmSearchLedgers.inspectFuncSearchLedgers(ctx, pp1, pp2)
+		mmSearchLedgers.inspectFuncSearchLedgers(ctx, pp1)
 	}
 
-	mm_params := LedgerServiceHandlerMockSearchLedgersParams{ctx, pp1, pp2}
+	mm_params := LedgerServiceClientMockSearchLedgersParams{ctx, pp1}
 
 	// Record call args
 	mmSearchLedgers.SearchLedgersMock.mutex.Lock()
@@ -2149,7 +2094,7 @@ func (mmSearchLedgers *LedgerServiceHandlerMock) SearchLedgers(ctx context.Conte
 	for _, e := range mmSearchLedgers.SearchLedgersMock.expectations {
 		if minimock.Equal(*e.params, mm_params) {
 			mm_atomic.AddUint64(&e.Counter, 1)
-			return e.results.err
+			return e.results.pp2, e.results.err
 		}
 	}
 
@@ -2158,59 +2103,54 @@ func (mmSearchLedgers *LedgerServiceHandlerMock) SearchLedgers(ctx context.Conte
 		mm_want := mmSearchLedgers.SearchLedgersMock.defaultExpectation.params
 		mm_want_ptrs := mmSearchLedgers.SearchLedgersMock.defaultExpectation.paramPtrs
 
-		mm_got := LedgerServiceHandlerMockSearchLedgersParams{ctx, pp1, pp2}
+		mm_got := LedgerServiceClientMockSearchLedgersParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmSearchLedgers.t.Errorf("LedgerServiceHandlerMock.SearchLedgers got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmSearchLedgers.t.Errorf("LedgerServiceClientMock.SearchLedgers got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmSearchLedgers.SearchLedgersMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmSearchLedgers.t.Errorf("LedgerServiceHandlerMock.SearchLedgers got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmSearchLedgers.t.Errorf("LedgerServiceClientMock.SearchLedgers got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmSearchLedgers.SearchLedgersMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
-			if mm_want_ptrs.pp2 != nil && !minimock.Equal(*mm_want_ptrs.pp2, mm_got.pp2) {
-				mmSearchLedgers.t.Errorf("LedgerServiceHandlerMock.SearchLedgers got unexpected parameter pp2, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
-					mmSearchLedgers.SearchLedgersMock.defaultExpectation.expectationOrigins.originPp2, *mm_want_ptrs.pp2, mm_got.pp2, minimock.Diff(*mm_want_ptrs.pp2, mm_got.pp2))
-			}
-
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmSearchLedgers.t.Errorf("LedgerServiceHandlerMock.SearchLedgers got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmSearchLedgers.t.Errorf("LedgerServiceClientMock.SearchLedgers got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmSearchLedgers.SearchLedgersMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmSearchLedgers.SearchLedgersMock.defaultExpectation.results
 		if mm_results == nil {
-			mmSearchLedgers.t.Fatal("No results are set for the LedgerServiceHandlerMock.SearchLedgers")
+			mmSearchLedgers.t.Fatal("No results are set for the LedgerServiceClientMock.SearchLedgers")
 		}
-		return (*mm_results).err
+		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmSearchLedgers.funcSearchLedgers != nil {
-		return mmSearchLedgers.funcSearchLedgers(ctx, pp1, pp2)
+		return mmSearchLedgers.funcSearchLedgers(ctx, pp1)
 	}
-	mmSearchLedgers.t.Fatalf("Unexpected call to LedgerServiceHandlerMock.SearchLedgers. %v %v %v", ctx, pp1, pp2)
+	mmSearchLedgers.t.Fatalf("Unexpected call to LedgerServiceClientMock.SearchLedgers. %v %v", ctx, pp1)
 	return
 }
 
-// SearchLedgersAfterCounter returns a count of finished LedgerServiceHandlerMock.SearchLedgers invocations
-func (mmSearchLedgers *LedgerServiceHandlerMock) SearchLedgersAfterCounter() uint64 {
+// SearchLedgersAfterCounter returns a count of finished LedgerServiceClientMock.SearchLedgers invocations
+func (mmSearchLedgers *LedgerServiceClientMock) SearchLedgersAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmSearchLedgers.afterSearchLedgersCounter)
 }
 
-// SearchLedgersBeforeCounter returns a count of LedgerServiceHandlerMock.SearchLedgers invocations
-func (mmSearchLedgers *LedgerServiceHandlerMock) SearchLedgersBeforeCounter() uint64 {
+// SearchLedgersBeforeCounter returns a count of LedgerServiceClientMock.SearchLedgers invocations
+func (mmSearchLedgers *LedgerServiceClientMock) SearchLedgersBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmSearchLedgers.beforeSearchLedgersCounter)
 }
 
-// Calls returns a list of arguments used in each call to LedgerServiceHandlerMock.SearchLedgers.
+// Calls returns a list of arguments used in each call to LedgerServiceClientMock.SearchLedgers.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmSearchLedgers *mLedgerServiceHandlerMockSearchLedgers) Calls() []*LedgerServiceHandlerMockSearchLedgersParams {
+func (mmSearchLedgers *mLedgerServiceClientMockSearchLedgers) Calls() []*LedgerServiceClientMockSearchLedgersParams {
 	mmSearchLedgers.mutex.RLock()
 
-	argCopy := make([]*LedgerServiceHandlerMockSearchLedgersParams, len(mmSearchLedgers.callArgs))
+	argCopy := make([]*LedgerServiceClientMockSearchLedgersParams, len(mmSearchLedgers.callArgs))
 	copy(argCopy, mmSearchLedgers.callArgs)
 
 	mmSearchLedgers.mutex.RUnlock()
@@ -2220,7 +2160,7 @@ func (mmSearchLedgers *mLedgerServiceHandlerMockSearchLedgers) Calls() []*Ledger
 
 // MinimockSearchLedgersDone returns true if the count of the SearchLedgers invocations corresponds
 // the number of defined expectations
-func (m *LedgerServiceHandlerMock) MinimockSearchLedgersDone() bool {
+func (m *LedgerServiceClientMock) MinimockSearchLedgersDone() bool {
 	if m.SearchLedgersMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -2236,10 +2176,10 @@ func (m *LedgerServiceHandlerMock) MinimockSearchLedgersDone() bool {
 }
 
 // MinimockSearchLedgersInspect logs each unmet expectation
-func (m *LedgerServiceHandlerMock) MinimockSearchLedgersInspect() {
+func (m *LedgerServiceClientMock) MinimockSearchLedgersInspect() {
 	for _, e := range m.SearchLedgersMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to LedgerServiceHandlerMock.SearchLedgers at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to LedgerServiceClientMock.SearchLedgers at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -2247,71 +2187,69 @@ func (m *LedgerServiceHandlerMock) MinimockSearchLedgersInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.SearchLedgersMock.defaultExpectation != nil && afterSearchLedgersCounter < 1 {
 		if m.SearchLedgersMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to LedgerServiceHandlerMock.SearchLedgers at\n%s", m.SearchLedgersMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to LedgerServiceClientMock.SearchLedgers at\n%s", m.SearchLedgersMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to LedgerServiceHandlerMock.SearchLedgers at\n%s with params: %#v", m.SearchLedgersMock.defaultExpectation.expectationOrigins.origin, *m.SearchLedgersMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to LedgerServiceClientMock.SearchLedgers at\n%s with params: %#v", m.SearchLedgersMock.defaultExpectation.expectationOrigins.origin, *m.SearchLedgersMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcSearchLedgers != nil && afterSearchLedgersCounter < 1 {
-		m.t.Errorf("Expected call to LedgerServiceHandlerMock.SearchLedgers at\n%s", m.funcSearchLedgersOrigin)
+		m.t.Errorf("Expected call to LedgerServiceClientMock.SearchLedgers at\n%s", m.funcSearchLedgersOrigin)
 	}
 
 	if !m.SearchLedgersMock.invocationsDone() && afterSearchLedgersCounter > 0 {
-		m.t.Errorf("Expected %d calls to LedgerServiceHandlerMock.SearchLedgers at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to LedgerServiceClientMock.SearchLedgers at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.SearchLedgersMock.expectedInvocations), m.SearchLedgersMock.expectedInvocationsOrigin, afterSearchLedgersCounter)
 	}
 }
 
-type mLedgerServiceHandlerMockSearchTransactionEntries struct {
+type mLedgerServiceClientMockSearchTransactionEntries struct {
 	optional           bool
-	mock               *LedgerServiceHandlerMock
-	defaultExpectation *LedgerServiceHandlerMockSearchTransactionEntriesExpectation
-	expectations       []*LedgerServiceHandlerMockSearchTransactionEntriesExpectation
+	mock               *LedgerServiceClientMock
+	defaultExpectation *LedgerServiceClientMockSearchTransactionEntriesExpectation
+	expectations       []*LedgerServiceClientMockSearchTransactionEntriesExpectation
 
-	callArgs []*LedgerServiceHandlerMockSearchTransactionEntriesParams
+	callArgs []*LedgerServiceClientMockSearchTransactionEntriesParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// LedgerServiceHandlerMockSearchTransactionEntriesExpectation specifies expectation struct of the LedgerServiceHandler.SearchTransactionEntries
-type LedgerServiceHandlerMockSearchTransactionEntriesExpectation struct {
-	mock               *LedgerServiceHandlerMock
-	params             *LedgerServiceHandlerMockSearchTransactionEntriesParams
-	paramPtrs          *LedgerServiceHandlerMockSearchTransactionEntriesParamPtrs
-	expectationOrigins LedgerServiceHandlerMockSearchTransactionEntriesExpectationOrigins
-	results            *LedgerServiceHandlerMockSearchTransactionEntriesResults
+// LedgerServiceClientMockSearchTransactionEntriesExpectation specifies expectation struct of the LedgerServiceClient.SearchTransactionEntries
+type LedgerServiceClientMockSearchTransactionEntriesExpectation struct {
+	mock               *LedgerServiceClientMock
+	params             *LedgerServiceClientMockSearchTransactionEntriesParams
+	paramPtrs          *LedgerServiceClientMockSearchTransactionEntriesParamPtrs
+	expectationOrigins LedgerServiceClientMockSearchTransactionEntriesExpectationOrigins
+	results            *LedgerServiceClientMockSearchTransactionEntriesResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// LedgerServiceHandlerMockSearchTransactionEntriesParams contains parameters of the LedgerServiceHandler.SearchTransactionEntries
-type LedgerServiceHandlerMockSearchTransactionEntriesParams struct {
+// LedgerServiceClientMockSearchTransactionEntriesParams contains parameters of the LedgerServiceClient.SearchTransactionEntries
+type LedgerServiceClientMockSearchTransactionEntriesParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.SearchRequest]
-	pp2 *connect.ServerStream[v11.TransactionEntry]
 }
 
-// LedgerServiceHandlerMockSearchTransactionEntriesParamPtrs contains pointers to parameters of the LedgerServiceHandler.SearchTransactionEntries
-type LedgerServiceHandlerMockSearchTransactionEntriesParamPtrs struct {
+// LedgerServiceClientMockSearchTransactionEntriesParamPtrs contains pointers to parameters of the LedgerServiceClient.SearchTransactionEntries
+type LedgerServiceClientMockSearchTransactionEntriesParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.SearchRequest]
-	pp2 **connect.ServerStream[v11.TransactionEntry]
 }
 
-// LedgerServiceHandlerMockSearchTransactionEntriesResults contains results of the LedgerServiceHandler.SearchTransactionEntries
-type LedgerServiceHandlerMockSearchTransactionEntriesResults struct {
+// LedgerServiceClientMockSearchTransactionEntriesResults contains results of the LedgerServiceClient.SearchTransactionEntries
+type LedgerServiceClientMockSearchTransactionEntriesResults struct {
+	pp2 *connect.ServerStreamForClient[v11.TransactionEntry]
 	err error
 }
 
-// LedgerServiceHandlerMockSearchTransactionEntriesOrigins contains origins of expectations of the LedgerServiceHandler.SearchTransactionEntries
-type LedgerServiceHandlerMockSearchTransactionEntriesExpectationOrigins struct {
+// LedgerServiceClientMockSearchTransactionEntriesOrigins contains origins of expectations of the LedgerServiceClient.SearchTransactionEntries
+type LedgerServiceClientMockSearchTransactionEntriesExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
-	originPp2 string
 }
 
 // Marks this method to be optional. The default behavior of any method with Return() is '1 or more', meaning
@@ -2319,26 +2257,26 @@ type LedgerServiceHandlerMockSearchTransactionEntriesExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmSearchTransactionEntries *mLedgerServiceHandlerMockSearchTransactionEntries) Optional() *mLedgerServiceHandlerMockSearchTransactionEntries {
+func (mmSearchTransactionEntries *mLedgerServiceClientMockSearchTransactionEntries) Optional() *mLedgerServiceClientMockSearchTransactionEntries {
 	mmSearchTransactionEntries.optional = true
 	return mmSearchTransactionEntries
 }
 
-// Expect sets up expected params for LedgerServiceHandler.SearchTransactionEntries
-func (mmSearchTransactionEntries *mLedgerServiceHandlerMockSearchTransactionEntries) Expect(ctx context.Context, pp1 *connect.Request[v1.SearchRequest], pp2 *connect.ServerStream[v11.TransactionEntry]) *mLedgerServiceHandlerMockSearchTransactionEntries {
+// Expect sets up expected params for LedgerServiceClient.SearchTransactionEntries
+func (mmSearchTransactionEntries *mLedgerServiceClientMockSearchTransactionEntries) Expect(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) *mLedgerServiceClientMockSearchTransactionEntries {
 	if mmSearchTransactionEntries.mock.funcSearchTransactionEntries != nil {
-		mmSearchTransactionEntries.mock.t.Fatalf("LedgerServiceHandlerMock.SearchTransactionEntries mock is already set by Set")
+		mmSearchTransactionEntries.mock.t.Fatalf("LedgerServiceClientMock.SearchTransactionEntries mock is already set by Set")
 	}
 
 	if mmSearchTransactionEntries.defaultExpectation == nil {
-		mmSearchTransactionEntries.defaultExpectation = &LedgerServiceHandlerMockSearchTransactionEntriesExpectation{}
+		mmSearchTransactionEntries.defaultExpectation = &LedgerServiceClientMockSearchTransactionEntriesExpectation{}
 	}
 
 	if mmSearchTransactionEntries.defaultExpectation.paramPtrs != nil {
-		mmSearchTransactionEntries.mock.t.Fatalf("LedgerServiceHandlerMock.SearchTransactionEntries mock is already set by ExpectParams functions")
+		mmSearchTransactionEntries.mock.t.Fatalf("LedgerServiceClientMock.SearchTransactionEntries mock is already set by ExpectParams functions")
 	}
 
-	mmSearchTransactionEntries.defaultExpectation.params = &LedgerServiceHandlerMockSearchTransactionEntriesParams{ctx, pp1, pp2}
+	mmSearchTransactionEntries.defaultExpectation.params = &LedgerServiceClientMockSearchTransactionEntriesParams{ctx, pp1}
 	mmSearchTransactionEntries.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmSearchTransactionEntries.expectations {
 		if minimock.Equal(e.params, mmSearchTransactionEntries.defaultExpectation.params) {
@@ -2349,22 +2287,22 @@ func (mmSearchTransactionEntries *mLedgerServiceHandlerMockSearchTransactionEntr
 	return mmSearchTransactionEntries
 }
 
-// ExpectCtxParam1 sets up expected param ctx for LedgerServiceHandler.SearchTransactionEntries
-func (mmSearchTransactionEntries *mLedgerServiceHandlerMockSearchTransactionEntries) ExpectCtxParam1(ctx context.Context) *mLedgerServiceHandlerMockSearchTransactionEntries {
+// ExpectCtxParam1 sets up expected param ctx for LedgerServiceClient.SearchTransactionEntries
+func (mmSearchTransactionEntries *mLedgerServiceClientMockSearchTransactionEntries) ExpectCtxParam1(ctx context.Context) *mLedgerServiceClientMockSearchTransactionEntries {
 	if mmSearchTransactionEntries.mock.funcSearchTransactionEntries != nil {
-		mmSearchTransactionEntries.mock.t.Fatalf("LedgerServiceHandlerMock.SearchTransactionEntries mock is already set by Set")
+		mmSearchTransactionEntries.mock.t.Fatalf("LedgerServiceClientMock.SearchTransactionEntries mock is already set by Set")
 	}
 
 	if mmSearchTransactionEntries.defaultExpectation == nil {
-		mmSearchTransactionEntries.defaultExpectation = &LedgerServiceHandlerMockSearchTransactionEntriesExpectation{}
+		mmSearchTransactionEntries.defaultExpectation = &LedgerServiceClientMockSearchTransactionEntriesExpectation{}
 	}
 
 	if mmSearchTransactionEntries.defaultExpectation.params != nil {
-		mmSearchTransactionEntries.mock.t.Fatalf("LedgerServiceHandlerMock.SearchTransactionEntries mock is already set by Expect")
+		mmSearchTransactionEntries.mock.t.Fatalf("LedgerServiceClientMock.SearchTransactionEntries mock is already set by Expect")
 	}
 
 	if mmSearchTransactionEntries.defaultExpectation.paramPtrs == nil {
-		mmSearchTransactionEntries.defaultExpectation.paramPtrs = &LedgerServiceHandlerMockSearchTransactionEntriesParamPtrs{}
+		mmSearchTransactionEntries.defaultExpectation.paramPtrs = &LedgerServiceClientMockSearchTransactionEntriesParamPtrs{}
 	}
 	mmSearchTransactionEntries.defaultExpectation.paramPtrs.ctx = &ctx
 	mmSearchTransactionEntries.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -2372,22 +2310,22 @@ func (mmSearchTransactionEntries *mLedgerServiceHandlerMockSearchTransactionEntr
 	return mmSearchTransactionEntries
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for LedgerServiceHandler.SearchTransactionEntries
-func (mmSearchTransactionEntries *mLedgerServiceHandlerMockSearchTransactionEntries) ExpectPp1Param2(pp1 *connect.Request[v1.SearchRequest]) *mLedgerServiceHandlerMockSearchTransactionEntries {
+// ExpectPp1Param2 sets up expected param pp1 for LedgerServiceClient.SearchTransactionEntries
+func (mmSearchTransactionEntries *mLedgerServiceClientMockSearchTransactionEntries) ExpectPp1Param2(pp1 *connect.Request[v1.SearchRequest]) *mLedgerServiceClientMockSearchTransactionEntries {
 	if mmSearchTransactionEntries.mock.funcSearchTransactionEntries != nil {
-		mmSearchTransactionEntries.mock.t.Fatalf("LedgerServiceHandlerMock.SearchTransactionEntries mock is already set by Set")
+		mmSearchTransactionEntries.mock.t.Fatalf("LedgerServiceClientMock.SearchTransactionEntries mock is already set by Set")
 	}
 
 	if mmSearchTransactionEntries.defaultExpectation == nil {
-		mmSearchTransactionEntries.defaultExpectation = &LedgerServiceHandlerMockSearchTransactionEntriesExpectation{}
+		mmSearchTransactionEntries.defaultExpectation = &LedgerServiceClientMockSearchTransactionEntriesExpectation{}
 	}
 
 	if mmSearchTransactionEntries.defaultExpectation.params != nil {
-		mmSearchTransactionEntries.mock.t.Fatalf("LedgerServiceHandlerMock.SearchTransactionEntries mock is already set by Expect")
+		mmSearchTransactionEntries.mock.t.Fatalf("LedgerServiceClientMock.SearchTransactionEntries mock is already set by Expect")
 	}
 
 	if mmSearchTransactionEntries.defaultExpectation.paramPtrs == nil {
-		mmSearchTransactionEntries.defaultExpectation.paramPtrs = &LedgerServiceHandlerMockSearchTransactionEntriesParamPtrs{}
+		mmSearchTransactionEntries.defaultExpectation.paramPtrs = &LedgerServiceClientMockSearchTransactionEntriesParamPtrs{}
 	}
 	mmSearchTransactionEntries.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmSearchTransactionEntries.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -2395,33 +2333,10 @@ func (mmSearchTransactionEntries *mLedgerServiceHandlerMockSearchTransactionEntr
 	return mmSearchTransactionEntries
 }
 
-// ExpectPp2Param3 sets up expected param pp2 for LedgerServiceHandler.SearchTransactionEntries
-func (mmSearchTransactionEntries *mLedgerServiceHandlerMockSearchTransactionEntries) ExpectPp2Param3(pp2 *connect.ServerStream[v11.TransactionEntry]) *mLedgerServiceHandlerMockSearchTransactionEntries {
-	if mmSearchTransactionEntries.mock.funcSearchTransactionEntries != nil {
-		mmSearchTransactionEntries.mock.t.Fatalf("LedgerServiceHandlerMock.SearchTransactionEntries mock is already set by Set")
-	}
-
-	if mmSearchTransactionEntries.defaultExpectation == nil {
-		mmSearchTransactionEntries.defaultExpectation = &LedgerServiceHandlerMockSearchTransactionEntriesExpectation{}
-	}
-
-	if mmSearchTransactionEntries.defaultExpectation.params != nil {
-		mmSearchTransactionEntries.mock.t.Fatalf("LedgerServiceHandlerMock.SearchTransactionEntries mock is already set by Expect")
-	}
-
-	if mmSearchTransactionEntries.defaultExpectation.paramPtrs == nil {
-		mmSearchTransactionEntries.defaultExpectation.paramPtrs = &LedgerServiceHandlerMockSearchTransactionEntriesParamPtrs{}
-	}
-	mmSearchTransactionEntries.defaultExpectation.paramPtrs.pp2 = &pp2
-	mmSearchTransactionEntries.defaultExpectation.expectationOrigins.originPp2 = minimock.CallerInfo(1)
-
-	return mmSearchTransactionEntries
-}
-
-// Inspect accepts an inspector function that has same arguments as the LedgerServiceHandler.SearchTransactionEntries
-func (mmSearchTransactionEntries *mLedgerServiceHandlerMockSearchTransactionEntries) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest], pp2 *connect.ServerStream[v11.TransactionEntry])) *mLedgerServiceHandlerMockSearchTransactionEntries {
+// Inspect accepts an inspector function that has same arguments as the LedgerServiceClient.SearchTransactionEntries
+func (mmSearchTransactionEntries *mLedgerServiceClientMockSearchTransactionEntries) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest])) *mLedgerServiceClientMockSearchTransactionEntries {
 	if mmSearchTransactionEntries.mock.inspectFuncSearchTransactionEntries != nil {
-		mmSearchTransactionEntries.mock.t.Fatalf("Inspect function is already set for LedgerServiceHandlerMock.SearchTransactionEntries")
+		mmSearchTransactionEntries.mock.t.Fatalf("Inspect function is already set for LedgerServiceClientMock.SearchTransactionEntries")
 	}
 
 	mmSearchTransactionEntries.mock.inspectFuncSearchTransactionEntries = f
@@ -2429,28 +2344,28 @@ func (mmSearchTransactionEntries *mLedgerServiceHandlerMockSearchTransactionEntr
 	return mmSearchTransactionEntries
 }
 
-// Return sets up results that will be returned by LedgerServiceHandler.SearchTransactionEntries
-func (mmSearchTransactionEntries *mLedgerServiceHandlerMockSearchTransactionEntries) Return(err error) *LedgerServiceHandlerMock {
+// Return sets up results that will be returned by LedgerServiceClient.SearchTransactionEntries
+func (mmSearchTransactionEntries *mLedgerServiceClientMockSearchTransactionEntries) Return(pp2 *connect.ServerStreamForClient[v11.TransactionEntry], err error) *LedgerServiceClientMock {
 	if mmSearchTransactionEntries.mock.funcSearchTransactionEntries != nil {
-		mmSearchTransactionEntries.mock.t.Fatalf("LedgerServiceHandlerMock.SearchTransactionEntries mock is already set by Set")
+		mmSearchTransactionEntries.mock.t.Fatalf("LedgerServiceClientMock.SearchTransactionEntries mock is already set by Set")
 	}
 
 	if mmSearchTransactionEntries.defaultExpectation == nil {
-		mmSearchTransactionEntries.defaultExpectation = &LedgerServiceHandlerMockSearchTransactionEntriesExpectation{mock: mmSearchTransactionEntries.mock}
+		mmSearchTransactionEntries.defaultExpectation = &LedgerServiceClientMockSearchTransactionEntriesExpectation{mock: mmSearchTransactionEntries.mock}
 	}
-	mmSearchTransactionEntries.defaultExpectation.results = &LedgerServiceHandlerMockSearchTransactionEntriesResults{err}
+	mmSearchTransactionEntries.defaultExpectation.results = &LedgerServiceClientMockSearchTransactionEntriesResults{pp2, err}
 	mmSearchTransactionEntries.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmSearchTransactionEntries.mock
 }
 
-// Set uses given function f to mock the LedgerServiceHandler.SearchTransactionEntries method
-func (mmSearchTransactionEntries *mLedgerServiceHandlerMockSearchTransactionEntries) Set(f func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest], pp2 *connect.ServerStream[v11.TransactionEntry]) (err error)) *LedgerServiceHandlerMock {
+// Set uses given function f to mock the LedgerServiceClient.SearchTransactionEntries method
+func (mmSearchTransactionEntries *mLedgerServiceClientMockSearchTransactionEntries) Set(f func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) (pp2 *connect.ServerStreamForClient[v11.TransactionEntry], err error)) *LedgerServiceClientMock {
 	if mmSearchTransactionEntries.defaultExpectation != nil {
-		mmSearchTransactionEntries.mock.t.Fatalf("Default expectation is already set for the LedgerServiceHandler.SearchTransactionEntries method")
+		mmSearchTransactionEntries.mock.t.Fatalf("Default expectation is already set for the LedgerServiceClient.SearchTransactionEntries method")
 	}
 
 	if len(mmSearchTransactionEntries.expectations) > 0 {
-		mmSearchTransactionEntries.mock.t.Fatalf("Some expectations are already set for the LedgerServiceHandler.SearchTransactionEntries method")
+		mmSearchTransactionEntries.mock.t.Fatalf("Some expectations are already set for the LedgerServiceClient.SearchTransactionEntries method")
 	}
 
 	mmSearchTransactionEntries.mock.funcSearchTransactionEntries = f
@@ -2458,39 +2373,39 @@ func (mmSearchTransactionEntries *mLedgerServiceHandlerMockSearchTransactionEntr
 	return mmSearchTransactionEntries.mock
 }
 
-// When sets expectation for the LedgerServiceHandler.SearchTransactionEntries which will trigger the result defined by the following
+// When sets expectation for the LedgerServiceClient.SearchTransactionEntries which will trigger the result defined by the following
 // Then helper
-func (mmSearchTransactionEntries *mLedgerServiceHandlerMockSearchTransactionEntries) When(ctx context.Context, pp1 *connect.Request[v1.SearchRequest], pp2 *connect.ServerStream[v11.TransactionEntry]) *LedgerServiceHandlerMockSearchTransactionEntriesExpectation {
+func (mmSearchTransactionEntries *mLedgerServiceClientMockSearchTransactionEntries) When(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) *LedgerServiceClientMockSearchTransactionEntriesExpectation {
 	if mmSearchTransactionEntries.mock.funcSearchTransactionEntries != nil {
-		mmSearchTransactionEntries.mock.t.Fatalf("LedgerServiceHandlerMock.SearchTransactionEntries mock is already set by Set")
+		mmSearchTransactionEntries.mock.t.Fatalf("LedgerServiceClientMock.SearchTransactionEntries mock is already set by Set")
 	}
 
-	expectation := &LedgerServiceHandlerMockSearchTransactionEntriesExpectation{
+	expectation := &LedgerServiceClientMockSearchTransactionEntriesExpectation{
 		mock:               mmSearchTransactionEntries.mock,
-		params:             &LedgerServiceHandlerMockSearchTransactionEntriesParams{ctx, pp1, pp2},
-		expectationOrigins: LedgerServiceHandlerMockSearchTransactionEntriesExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &LedgerServiceClientMockSearchTransactionEntriesParams{ctx, pp1},
+		expectationOrigins: LedgerServiceClientMockSearchTransactionEntriesExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmSearchTransactionEntries.expectations = append(mmSearchTransactionEntries.expectations, expectation)
 	return expectation
 }
 
-// Then sets up LedgerServiceHandler.SearchTransactionEntries return parameters for the expectation previously defined by the When method
-func (e *LedgerServiceHandlerMockSearchTransactionEntriesExpectation) Then(err error) *LedgerServiceHandlerMock {
-	e.results = &LedgerServiceHandlerMockSearchTransactionEntriesResults{err}
+// Then sets up LedgerServiceClient.SearchTransactionEntries return parameters for the expectation previously defined by the When method
+func (e *LedgerServiceClientMockSearchTransactionEntriesExpectation) Then(pp2 *connect.ServerStreamForClient[v11.TransactionEntry], err error) *LedgerServiceClientMock {
+	e.results = &LedgerServiceClientMockSearchTransactionEntriesResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times LedgerServiceHandler.SearchTransactionEntries should be invoked
-func (mmSearchTransactionEntries *mLedgerServiceHandlerMockSearchTransactionEntries) Times(n uint64) *mLedgerServiceHandlerMockSearchTransactionEntries {
+// Times sets number of times LedgerServiceClient.SearchTransactionEntries should be invoked
+func (mmSearchTransactionEntries *mLedgerServiceClientMockSearchTransactionEntries) Times(n uint64) *mLedgerServiceClientMockSearchTransactionEntries {
 	if n == 0 {
-		mmSearchTransactionEntries.mock.t.Fatalf("Times of LedgerServiceHandlerMock.SearchTransactionEntries mock can not be zero")
+		mmSearchTransactionEntries.mock.t.Fatalf("Times of LedgerServiceClientMock.SearchTransactionEntries mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmSearchTransactionEntries.expectedInvocations, n)
 	mmSearchTransactionEntries.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmSearchTransactionEntries
 }
 
-func (mmSearchTransactionEntries *mLedgerServiceHandlerMockSearchTransactionEntries) invocationsDone() bool {
+func (mmSearchTransactionEntries *mLedgerServiceClientMockSearchTransactionEntries) invocationsDone() bool {
 	if len(mmSearchTransactionEntries.expectations) == 0 && mmSearchTransactionEntries.defaultExpectation == nil && mmSearchTransactionEntries.mock.funcSearchTransactionEntries == nil {
 		return true
 	}
@@ -2501,18 +2416,18 @@ func (mmSearchTransactionEntries *mLedgerServiceHandlerMockSearchTransactionEntr
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// SearchTransactionEntries implements mm_ledgerv1connect.LedgerServiceHandler
-func (mmSearchTransactionEntries *LedgerServiceHandlerMock) SearchTransactionEntries(ctx context.Context, pp1 *connect.Request[v1.SearchRequest], pp2 *connect.ServerStream[v11.TransactionEntry]) (err error) {
+// SearchTransactionEntries implements mm_ledgerv1connect.LedgerServiceClient
+func (mmSearchTransactionEntries *LedgerServiceClientMock) SearchTransactionEntries(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) (pp2 *connect.ServerStreamForClient[v11.TransactionEntry], err error) {
 	mm_atomic.AddUint64(&mmSearchTransactionEntries.beforeSearchTransactionEntriesCounter, 1)
 	defer mm_atomic.AddUint64(&mmSearchTransactionEntries.afterSearchTransactionEntriesCounter, 1)
 
 	mmSearchTransactionEntries.t.Helper()
 
 	if mmSearchTransactionEntries.inspectFuncSearchTransactionEntries != nil {
-		mmSearchTransactionEntries.inspectFuncSearchTransactionEntries(ctx, pp1, pp2)
+		mmSearchTransactionEntries.inspectFuncSearchTransactionEntries(ctx, pp1)
 	}
 
-	mm_params := LedgerServiceHandlerMockSearchTransactionEntriesParams{ctx, pp1, pp2}
+	mm_params := LedgerServiceClientMockSearchTransactionEntriesParams{ctx, pp1}
 
 	// Record call args
 	mmSearchTransactionEntries.SearchTransactionEntriesMock.mutex.Lock()
@@ -2522,7 +2437,7 @@ func (mmSearchTransactionEntries *LedgerServiceHandlerMock) SearchTransactionEnt
 	for _, e := range mmSearchTransactionEntries.SearchTransactionEntriesMock.expectations {
 		if minimock.Equal(*e.params, mm_params) {
 			mm_atomic.AddUint64(&e.Counter, 1)
-			return e.results.err
+			return e.results.pp2, e.results.err
 		}
 	}
 
@@ -2531,59 +2446,54 @@ func (mmSearchTransactionEntries *LedgerServiceHandlerMock) SearchTransactionEnt
 		mm_want := mmSearchTransactionEntries.SearchTransactionEntriesMock.defaultExpectation.params
 		mm_want_ptrs := mmSearchTransactionEntries.SearchTransactionEntriesMock.defaultExpectation.paramPtrs
 
-		mm_got := LedgerServiceHandlerMockSearchTransactionEntriesParams{ctx, pp1, pp2}
+		mm_got := LedgerServiceClientMockSearchTransactionEntriesParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmSearchTransactionEntries.t.Errorf("LedgerServiceHandlerMock.SearchTransactionEntries got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmSearchTransactionEntries.t.Errorf("LedgerServiceClientMock.SearchTransactionEntries got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmSearchTransactionEntries.SearchTransactionEntriesMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmSearchTransactionEntries.t.Errorf("LedgerServiceHandlerMock.SearchTransactionEntries got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmSearchTransactionEntries.t.Errorf("LedgerServiceClientMock.SearchTransactionEntries got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmSearchTransactionEntries.SearchTransactionEntriesMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
-			if mm_want_ptrs.pp2 != nil && !minimock.Equal(*mm_want_ptrs.pp2, mm_got.pp2) {
-				mmSearchTransactionEntries.t.Errorf("LedgerServiceHandlerMock.SearchTransactionEntries got unexpected parameter pp2, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
-					mmSearchTransactionEntries.SearchTransactionEntriesMock.defaultExpectation.expectationOrigins.originPp2, *mm_want_ptrs.pp2, mm_got.pp2, minimock.Diff(*mm_want_ptrs.pp2, mm_got.pp2))
-			}
-
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmSearchTransactionEntries.t.Errorf("LedgerServiceHandlerMock.SearchTransactionEntries got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmSearchTransactionEntries.t.Errorf("LedgerServiceClientMock.SearchTransactionEntries got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmSearchTransactionEntries.SearchTransactionEntriesMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmSearchTransactionEntries.SearchTransactionEntriesMock.defaultExpectation.results
 		if mm_results == nil {
-			mmSearchTransactionEntries.t.Fatal("No results are set for the LedgerServiceHandlerMock.SearchTransactionEntries")
+			mmSearchTransactionEntries.t.Fatal("No results are set for the LedgerServiceClientMock.SearchTransactionEntries")
 		}
-		return (*mm_results).err
+		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmSearchTransactionEntries.funcSearchTransactionEntries != nil {
-		return mmSearchTransactionEntries.funcSearchTransactionEntries(ctx, pp1, pp2)
+		return mmSearchTransactionEntries.funcSearchTransactionEntries(ctx, pp1)
 	}
-	mmSearchTransactionEntries.t.Fatalf("Unexpected call to LedgerServiceHandlerMock.SearchTransactionEntries. %v %v %v", ctx, pp1, pp2)
+	mmSearchTransactionEntries.t.Fatalf("Unexpected call to LedgerServiceClientMock.SearchTransactionEntries. %v %v", ctx, pp1)
 	return
 }
 
-// SearchTransactionEntriesAfterCounter returns a count of finished LedgerServiceHandlerMock.SearchTransactionEntries invocations
-func (mmSearchTransactionEntries *LedgerServiceHandlerMock) SearchTransactionEntriesAfterCounter() uint64 {
+// SearchTransactionEntriesAfterCounter returns a count of finished LedgerServiceClientMock.SearchTransactionEntries invocations
+func (mmSearchTransactionEntries *LedgerServiceClientMock) SearchTransactionEntriesAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmSearchTransactionEntries.afterSearchTransactionEntriesCounter)
 }
 
-// SearchTransactionEntriesBeforeCounter returns a count of LedgerServiceHandlerMock.SearchTransactionEntries invocations
-func (mmSearchTransactionEntries *LedgerServiceHandlerMock) SearchTransactionEntriesBeforeCounter() uint64 {
+// SearchTransactionEntriesBeforeCounter returns a count of LedgerServiceClientMock.SearchTransactionEntries invocations
+func (mmSearchTransactionEntries *LedgerServiceClientMock) SearchTransactionEntriesBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmSearchTransactionEntries.beforeSearchTransactionEntriesCounter)
 }
 
-// Calls returns a list of arguments used in each call to LedgerServiceHandlerMock.SearchTransactionEntries.
+// Calls returns a list of arguments used in each call to LedgerServiceClientMock.SearchTransactionEntries.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmSearchTransactionEntries *mLedgerServiceHandlerMockSearchTransactionEntries) Calls() []*LedgerServiceHandlerMockSearchTransactionEntriesParams {
+func (mmSearchTransactionEntries *mLedgerServiceClientMockSearchTransactionEntries) Calls() []*LedgerServiceClientMockSearchTransactionEntriesParams {
 	mmSearchTransactionEntries.mutex.RLock()
 
-	argCopy := make([]*LedgerServiceHandlerMockSearchTransactionEntriesParams, len(mmSearchTransactionEntries.callArgs))
+	argCopy := make([]*LedgerServiceClientMockSearchTransactionEntriesParams, len(mmSearchTransactionEntries.callArgs))
 	copy(argCopy, mmSearchTransactionEntries.callArgs)
 
 	mmSearchTransactionEntries.mutex.RUnlock()
@@ -2593,7 +2503,7 @@ func (mmSearchTransactionEntries *mLedgerServiceHandlerMockSearchTransactionEntr
 
 // MinimockSearchTransactionEntriesDone returns true if the count of the SearchTransactionEntries invocations corresponds
 // the number of defined expectations
-func (m *LedgerServiceHandlerMock) MinimockSearchTransactionEntriesDone() bool {
+func (m *LedgerServiceClientMock) MinimockSearchTransactionEntriesDone() bool {
 	if m.SearchTransactionEntriesMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -2609,10 +2519,10 @@ func (m *LedgerServiceHandlerMock) MinimockSearchTransactionEntriesDone() bool {
 }
 
 // MinimockSearchTransactionEntriesInspect logs each unmet expectation
-func (m *LedgerServiceHandlerMock) MinimockSearchTransactionEntriesInspect() {
+func (m *LedgerServiceClientMock) MinimockSearchTransactionEntriesInspect() {
 	for _, e := range m.SearchTransactionEntriesMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to LedgerServiceHandlerMock.SearchTransactionEntries at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to LedgerServiceClientMock.SearchTransactionEntries at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -2620,71 +2530,69 @@ func (m *LedgerServiceHandlerMock) MinimockSearchTransactionEntriesInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.SearchTransactionEntriesMock.defaultExpectation != nil && afterSearchTransactionEntriesCounter < 1 {
 		if m.SearchTransactionEntriesMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to LedgerServiceHandlerMock.SearchTransactionEntries at\n%s", m.SearchTransactionEntriesMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to LedgerServiceClientMock.SearchTransactionEntries at\n%s", m.SearchTransactionEntriesMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to LedgerServiceHandlerMock.SearchTransactionEntries at\n%s with params: %#v", m.SearchTransactionEntriesMock.defaultExpectation.expectationOrigins.origin, *m.SearchTransactionEntriesMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to LedgerServiceClientMock.SearchTransactionEntries at\n%s with params: %#v", m.SearchTransactionEntriesMock.defaultExpectation.expectationOrigins.origin, *m.SearchTransactionEntriesMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcSearchTransactionEntries != nil && afterSearchTransactionEntriesCounter < 1 {
-		m.t.Errorf("Expected call to LedgerServiceHandlerMock.SearchTransactionEntries at\n%s", m.funcSearchTransactionEntriesOrigin)
+		m.t.Errorf("Expected call to LedgerServiceClientMock.SearchTransactionEntries at\n%s", m.funcSearchTransactionEntriesOrigin)
 	}
 
 	if !m.SearchTransactionEntriesMock.invocationsDone() && afterSearchTransactionEntriesCounter > 0 {
-		m.t.Errorf("Expected %d calls to LedgerServiceHandlerMock.SearchTransactionEntries at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to LedgerServiceClientMock.SearchTransactionEntries at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.SearchTransactionEntriesMock.expectedInvocations), m.SearchTransactionEntriesMock.expectedInvocationsOrigin, afterSearchTransactionEntriesCounter)
 	}
 }
 
-type mLedgerServiceHandlerMockSearchTransactions struct {
+type mLedgerServiceClientMockSearchTransactions struct {
 	optional           bool
-	mock               *LedgerServiceHandlerMock
-	defaultExpectation *LedgerServiceHandlerMockSearchTransactionsExpectation
-	expectations       []*LedgerServiceHandlerMockSearchTransactionsExpectation
+	mock               *LedgerServiceClientMock
+	defaultExpectation *LedgerServiceClientMockSearchTransactionsExpectation
+	expectations       []*LedgerServiceClientMockSearchTransactionsExpectation
 
-	callArgs []*LedgerServiceHandlerMockSearchTransactionsParams
+	callArgs []*LedgerServiceClientMockSearchTransactionsParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// LedgerServiceHandlerMockSearchTransactionsExpectation specifies expectation struct of the LedgerServiceHandler.SearchTransactions
-type LedgerServiceHandlerMockSearchTransactionsExpectation struct {
-	mock               *LedgerServiceHandlerMock
-	params             *LedgerServiceHandlerMockSearchTransactionsParams
-	paramPtrs          *LedgerServiceHandlerMockSearchTransactionsParamPtrs
-	expectationOrigins LedgerServiceHandlerMockSearchTransactionsExpectationOrigins
-	results            *LedgerServiceHandlerMockSearchTransactionsResults
+// LedgerServiceClientMockSearchTransactionsExpectation specifies expectation struct of the LedgerServiceClient.SearchTransactions
+type LedgerServiceClientMockSearchTransactionsExpectation struct {
+	mock               *LedgerServiceClientMock
+	params             *LedgerServiceClientMockSearchTransactionsParams
+	paramPtrs          *LedgerServiceClientMockSearchTransactionsParamPtrs
+	expectationOrigins LedgerServiceClientMockSearchTransactionsExpectationOrigins
+	results            *LedgerServiceClientMockSearchTransactionsResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// LedgerServiceHandlerMockSearchTransactionsParams contains parameters of the LedgerServiceHandler.SearchTransactions
-type LedgerServiceHandlerMockSearchTransactionsParams struct {
+// LedgerServiceClientMockSearchTransactionsParams contains parameters of the LedgerServiceClient.SearchTransactions
+type LedgerServiceClientMockSearchTransactionsParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.SearchRequest]
-	pp2 *connect.ServerStream[v11.Transaction]
 }
 
-// LedgerServiceHandlerMockSearchTransactionsParamPtrs contains pointers to parameters of the LedgerServiceHandler.SearchTransactions
-type LedgerServiceHandlerMockSearchTransactionsParamPtrs struct {
+// LedgerServiceClientMockSearchTransactionsParamPtrs contains pointers to parameters of the LedgerServiceClient.SearchTransactions
+type LedgerServiceClientMockSearchTransactionsParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.SearchRequest]
-	pp2 **connect.ServerStream[v11.Transaction]
 }
 
-// LedgerServiceHandlerMockSearchTransactionsResults contains results of the LedgerServiceHandler.SearchTransactions
-type LedgerServiceHandlerMockSearchTransactionsResults struct {
+// LedgerServiceClientMockSearchTransactionsResults contains results of the LedgerServiceClient.SearchTransactions
+type LedgerServiceClientMockSearchTransactionsResults struct {
+	pp2 *connect.ServerStreamForClient[v11.Transaction]
 	err error
 }
 
-// LedgerServiceHandlerMockSearchTransactionsOrigins contains origins of expectations of the LedgerServiceHandler.SearchTransactions
-type LedgerServiceHandlerMockSearchTransactionsExpectationOrigins struct {
+// LedgerServiceClientMockSearchTransactionsOrigins contains origins of expectations of the LedgerServiceClient.SearchTransactions
+type LedgerServiceClientMockSearchTransactionsExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
-	originPp2 string
 }
 
 // Marks this method to be optional. The default behavior of any method with Return() is '1 or more', meaning
@@ -2692,26 +2600,26 @@ type LedgerServiceHandlerMockSearchTransactionsExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmSearchTransactions *mLedgerServiceHandlerMockSearchTransactions) Optional() *mLedgerServiceHandlerMockSearchTransactions {
+func (mmSearchTransactions *mLedgerServiceClientMockSearchTransactions) Optional() *mLedgerServiceClientMockSearchTransactions {
 	mmSearchTransactions.optional = true
 	return mmSearchTransactions
 }
 
-// Expect sets up expected params for LedgerServiceHandler.SearchTransactions
-func (mmSearchTransactions *mLedgerServiceHandlerMockSearchTransactions) Expect(ctx context.Context, pp1 *connect.Request[v1.SearchRequest], pp2 *connect.ServerStream[v11.Transaction]) *mLedgerServiceHandlerMockSearchTransactions {
+// Expect sets up expected params for LedgerServiceClient.SearchTransactions
+func (mmSearchTransactions *mLedgerServiceClientMockSearchTransactions) Expect(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) *mLedgerServiceClientMockSearchTransactions {
 	if mmSearchTransactions.mock.funcSearchTransactions != nil {
-		mmSearchTransactions.mock.t.Fatalf("LedgerServiceHandlerMock.SearchTransactions mock is already set by Set")
+		mmSearchTransactions.mock.t.Fatalf("LedgerServiceClientMock.SearchTransactions mock is already set by Set")
 	}
 
 	if mmSearchTransactions.defaultExpectation == nil {
-		mmSearchTransactions.defaultExpectation = &LedgerServiceHandlerMockSearchTransactionsExpectation{}
+		mmSearchTransactions.defaultExpectation = &LedgerServiceClientMockSearchTransactionsExpectation{}
 	}
 
 	if mmSearchTransactions.defaultExpectation.paramPtrs != nil {
-		mmSearchTransactions.mock.t.Fatalf("LedgerServiceHandlerMock.SearchTransactions mock is already set by ExpectParams functions")
+		mmSearchTransactions.mock.t.Fatalf("LedgerServiceClientMock.SearchTransactions mock is already set by ExpectParams functions")
 	}
 
-	mmSearchTransactions.defaultExpectation.params = &LedgerServiceHandlerMockSearchTransactionsParams{ctx, pp1, pp2}
+	mmSearchTransactions.defaultExpectation.params = &LedgerServiceClientMockSearchTransactionsParams{ctx, pp1}
 	mmSearchTransactions.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmSearchTransactions.expectations {
 		if minimock.Equal(e.params, mmSearchTransactions.defaultExpectation.params) {
@@ -2722,22 +2630,22 @@ func (mmSearchTransactions *mLedgerServiceHandlerMockSearchTransactions) Expect(
 	return mmSearchTransactions
 }
 
-// ExpectCtxParam1 sets up expected param ctx for LedgerServiceHandler.SearchTransactions
-func (mmSearchTransactions *mLedgerServiceHandlerMockSearchTransactions) ExpectCtxParam1(ctx context.Context) *mLedgerServiceHandlerMockSearchTransactions {
+// ExpectCtxParam1 sets up expected param ctx for LedgerServiceClient.SearchTransactions
+func (mmSearchTransactions *mLedgerServiceClientMockSearchTransactions) ExpectCtxParam1(ctx context.Context) *mLedgerServiceClientMockSearchTransactions {
 	if mmSearchTransactions.mock.funcSearchTransactions != nil {
-		mmSearchTransactions.mock.t.Fatalf("LedgerServiceHandlerMock.SearchTransactions mock is already set by Set")
+		mmSearchTransactions.mock.t.Fatalf("LedgerServiceClientMock.SearchTransactions mock is already set by Set")
 	}
 
 	if mmSearchTransactions.defaultExpectation == nil {
-		mmSearchTransactions.defaultExpectation = &LedgerServiceHandlerMockSearchTransactionsExpectation{}
+		mmSearchTransactions.defaultExpectation = &LedgerServiceClientMockSearchTransactionsExpectation{}
 	}
 
 	if mmSearchTransactions.defaultExpectation.params != nil {
-		mmSearchTransactions.mock.t.Fatalf("LedgerServiceHandlerMock.SearchTransactions mock is already set by Expect")
+		mmSearchTransactions.mock.t.Fatalf("LedgerServiceClientMock.SearchTransactions mock is already set by Expect")
 	}
 
 	if mmSearchTransactions.defaultExpectation.paramPtrs == nil {
-		mmSearchTransactions.defaultExpectation.paramPtrs = &LedgerServiceHandlerMockSearchTransactionsParamPtrs{}
+		mmSearchTransactions.defaultExpectation.paramPtrs = &LedgerServiceClientMockSearchTransactionsParamPtrs{}
 	}
 	mmSearchTransactions.defaultExpectation.paramPtrs.ctx = &ctx
 	mmSearchTransactions.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -2745,22 +2653,22 @@ func (mmSearchTransactions *mLedgerServiceHandlerMockSearchTransactions) ExpectC
 	return mmSearchTransactions
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for LedgerServiceHandler.SearchTransactions
-func (mmSearchTransactions *mLedgerServiceHandlerMockSearchTransactions) ExpectPp1Param2(pp1 *connect.Request[v1.SearchRequest]) *mLedgerServiceHandlerMockSearchTransactions {
+// ExpectPp1Param2 sets up expected param pp1 for LedgerServiceClient.SearchTransactions
+func (mmSearchTransactions *mLedgerServiceClientMockSearchTransactions) ExpectPp1Param2(pp1 *connect.Request[v1.SearchRequest]) *mLedgerServiceClientMockSearchTransactions {
 	if mmSearchTransactions.mock.funcSearchTransactions != nil {
-		mmSearchTransactions.mock.t.Fatalf("LedgerServiceHandlerMock.SearchTransactions mock is already set by Set")
+		mmSearchTransactions.mock.t.Fatalf("LedgerServiceClientMock.SearchTransactions mock is already set by Set")
 	}
 
 	if mmSearchTransactions.defaultExpectation == nil {
-		mmSearchTransactions.defaultExpectation = &LedgerServiceHandlerMockSearchTransactionsExpectation{}
+		mmSearchTransactions.defaultExpectation = &LedgerServiceClientMockSearchTransactionsExpectation{}
 	}
 
 	if mmSearchTransactions.defaultExpectation.params != nil {
-		mmSearchTransactions.mock.t.Fatalf("LedgerServiceHandlerMock.SearchTransactions mock is already set by Expect")
+		mmSearchTransactions.mock.t.Fatalf("LedgerServiceClientMock.SearchTransactions mock is already set by Expect")
 	}
 
 	if mmSearchTransactions.defaultExpectation.paramPtrs == nil {
-		mmSearchTransactions.defaultExpectation.paramPtrs = &LedgerServiceHandlerMockSearchTransactionsParamPtrs{}
+		mmSearchTransactions.defaultExpectation.paramPtrs = &LedgerServiceClientMockSearchTransactionsParamPtrs{}
 	}
 	mmSearchTransactions.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmSearchTransactions.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -2768,33 +2676,10 @@ func (mmSearchTransactions *mLedgerServiceHandlerMockSearchTransactions) ExpectP
 	return mmSearchTransactions
 }
 
-// ExpectPp2Param3 sets up expected param pp2 for LedgerServiceHandler.SearchTransactions
-func (mmSearchTransactions *mLedgerServiceHandlerMockSearchTransactions) ExpectPp2Param3(pp2 *connect.ServerStream[v11.Transaction]) *mLedgerServiceHandlerMockSearchTransactions {
-	if mmSearchTransactions.mock.funcSearchTransactions != nil {
-		mmSearchTransactions.mock.t.Fatalf("LedgerServiceHandlerMock.SearchTransactions mock is already set by Set")
-	}
-
-	if mmSearchTransactions.defaultExpectation == nil {
-		mmSearchTransactions.defaultExpectation = &LedgerServiceHandlerMockSearchTransactionsExpectation{}
-	}
-
-	if mmSearchTransactions.defaultExpectation.params != nil {
-		mmSearchTransactions.mock.t.Fatalf("LedgerServiceHandlerMock.SearchTransactions mock is already set by Expect")
-	}
-
-	if mmSearchTransactions.defaultExpectation.paramPtrs == nil {
-		mmSearchTransactions.defaultExpectation.paramPtrs = &LedgerServiceHandlerMockSearchTransactionsParamPtrs{}
-	}
-	mmSearchTransactions.defaultExpectation.paramPtrs.pp2 = &pp2
-	mmSearchTransactions.defaultExpectation.expectationOrigins.originPp2 = minimock.CallerInfo(1)
-
-	return mmSearchTransactions
-}
-
-// Inspect accepts an inspector function that has same arguments as the LedgerServiceHandler.SearchTransactions
-func (mmSearchTransactions *mLedgerServiceHandlerMockSearchTransactions) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest], pp2 *connect.ServerStream[v11.Transaction])) *mLedgerServiceHandlerMockSearchTransactions {
+// Inspect accepts an inspector function that has same arguments as the LedgerServiceClient.SearchTransactions
+func (mmSearchTransactions *mLedgerServiceClientMockSearchTransactions) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest])) *mLedgerServiceClientMockSearchTransactions {
 	if mmSearchTransactions.mock.inspectFuncSearchTransactions != nil {
-		mmSearchTransactions.mock.t.Fatalf("Inspect function is already set for LedgerServiceHandlerMock.SearchTransactions")
+		mmSearchTransactions.mock.t.Fatalf("Inspect function is already set for LedgerServiceClientMock.SearchTransactions")
 	}
 
 	mmSearchTransactions.mock.inspectFuncSearchTransactions = f
@@ -2802,28 +2687,28 @@ func (mmSearchTransactions *mLedgerServiceHandlerMockSearchTransactions) Inspect
 	return mmSearchTransactions
 }
 
-// Return sets up results that will be returned by LedgerServiceHandler.SearchTransactions
-func (mmSearchTransactions *mLedgerServiceHandlerMockSearchTransactions) Return(err error) *LedgerServiceHandlerMock {
+// Return sets up results that will be returned by LedgerServiceClient.SearchTransactions
+func (mmSearchTransactions *mLedgerServiceClientMockSearchTransactions) Return(pp2 *connect.ServerStreamForClient[v11.Transaction], err error) *LedgerServiceClientMock {
 	if mmSearchTransactions.mock.funcSearchTransactions != nil {
-		mmSearchTransactions.mock.t.Fatalf("LedgerServiceHandlerMock.SearchTransactions mock is already set by Set")
+		mmSearchTransactions.mock.t.Fatalf("LedgerServiceClientMock.SearchTransactions mock is already set by Set")
 	}
 
 	if mmSearchTransactions.defaultExpectation == nil {
-		mmSearchTransactions.defaultExpectation = &LedgerServiceHandlerMockSearchTransactionsExpectation{mock: mmSearchTransactions.mock}
+		mmSearchTransactions.defaultExpectation = &LedgerServiceClientMockSearchTransactionsExpectation{mock: mmSearchTransactions.mock}
 	}
-	mmSearchTransactions.defaultExpectation.results = &LedgerServiceHandlerMockSearchTransactionsResults{err}
+	mmSearchTransactions.defaultExpectation.results = &LedgerServiceClientMockSearchTransactionsResults{pp2, err}
 	mmSearchTransactions.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmSearchTransactions.mock
 }
 
-// Set uses given function f to mock the LedgerServiceHandler.SearchTransactions method
-func (mmSearchTransactions *mLedgerServiceHandlerMockSearchTransactions) Set(f func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest], pp2 *connect.ServerStream[v11.Transaction]) (err error)) *LedgerServiceHandlerMock {
+// Set uses given function f to mock the LedgerServiceClient.SearchTransactions method
+func (mmSearchTransactions *mLedgerServiceClientMockSearchTransactions) Set(f func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) (pp2 *connect.ServerStreamForClient[v11.Transaction], err error)) *LedgerServiceClientMock {
 	if mmSearchTransactions.defaultExpectation != nil {
-		mmSearchTransactions.mock.t.Fatalf("Default expectation is already set for the LedgerServiceHandler.SearchTransactions method")
+		mmSearchTransactions.mock.t.Fatalf("Default expectation is already set for the LedgerServiceClient.SearchTransactions method")
 	}
 
 	if len(mmSearchTransactions.expectations) > 0 {
-		mmSearchTransactions.mock.t.Fatalf("Some expectations are already set for the LedgerServiceHandler.SearchTransactions method")
+		mmSearchTransactions.mock.t.Fatalf("Some expectations are already set for the LedgerServiceClient.SearchTransactions method")
 	}
 
 	mmSearchTransactions.mock.funcSearchTransactions = f
@@ -2831,39 +2716,39 @@ func (mmSearchTransactions *mLedgerServiceHandlerMockSearchTransactions) Set(f f
 	return mmSearchTransactions.mock
 }
 
-// When sets expectation for the LedgerServiceHandler.SearchTransactions which will trigger the result defined by the following
+// When sets expectation for the LedgerServiceClient.SearchTransactions which will trigger the result defined by the following
 // Then helper
-func (mmSearchTransactions *mLedgerServiceHandlerMockSearchTransactions) When(ctx context.Context, pp1 *connect.Request[v1.SearchRequest], pp2 *connect.ServerStream[v11.Transaction]) *LedgerServiceHandlerMockSearchTransactionsExpectation {
+func (mmSearchTransactions *mLedgerServiceClientMockSearchTransactions) When(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) *LedgerServiceClientMockSearchTransactionsExpectation {
 	if mmSearchTransactions.mock.funcSearchTransactions != nil {
-		mmSearchTransactions.mock.t.Fatalf("LedgerServiceHandlerMock.SearchTransactions mock is already set by Set")
+		mmSearchTransactions.mock.t.Fatalf("LedgerServiceClientMock.SearchTransactions mock is already set by Set")
 	}
 
-	expectation := &LedgerServiceHandlerMockSearchTransactionsExpectation{
+	expectation := &LedgerServiceClientMockSearchTransactionsExpectation{
 		mock:               mmSearchTransactions.mock,
-		params:             &LedgerServiceHandlerMockSearchTransactionsParams{ctx, pp1, pp2},
-		expectationOrigins: LedgerServiceHandlerMockSearchTransactionsExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &LedgerServiceClientMockSearchTransactionsParams{ctx, pp1},
+		expectationOrigins: LedgerServiceClientMockSearchTransactionsExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmSearchTransactions.expectations = append(mmSearchTransactions.expectations, expectation)
 	return expectation
 }
 
-// Then sets up LedgerServiceHandler.SearchTransactions return parameters for the expectation previously defined by the When method
-func (e *LedgerServiceHandlerMockSearchTransactionsExpectation) Then(err error) *LedgerServiceHandlerMock {
-	e.results = &LedgerServiceHandlerMockSearchTransactionsResults{err}
+// Then sets up LedgerServiceClient.SearchTransactions return parameters for the expectation previously defined by the When method
+func (e *LedgerServiceClientMockSearchTransactionsExpectation) Then(pp2 *connect.ServerStreamForClient[v11.Transaction], err error) *LedgerServiceClientMock {
+	e.results = &LedgerServiceClientMockSearchTransactionsResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times LedgerServiceHandler.SearchTransactions should be invoked
-func (mmSearchTransactions *mLedgerServiceHandlerMockSearchTransactions) Times(n uint64) *mLedgerServiceHandlerMockSearchTransactions {
+// Times sets number of times LedgerServiceClient.SearchTransactions should be invoked
+func (mmSearchTransactions *mLedgerServiceClientMockSearchTransactions) Times(n uint64) *mLedgerServiceClientMockSearchTransactions {
 	if n == 0 {
-		mmSearchTransactions.mock.t.Fatalf("Times of LedgerServiceHandlerMock.SearchTransactions mock can not be zero")
+		mmSearchTransactions.mock.t.Fatalf("Times of LedgerServiceClientMock.SearchTransactions mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmSearchTransactions.expectedInvocations, n)
 	mmSearchTransactions.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmSearchTransactions
 }
 
-func (mmSearchTransactions *mLedgerServiceHandlerMockSearchTransactions) invocationsDone() bool {
+func (mmSearchTransactions *mLedgerServiceClientMockSearchTransactions) invocationsDone() bool {
 	if len(mmSearchTransactions.expectations) == 0 && mmSearchTransactions.defaultExpectation == nil && mmSearchTransactions.mock.funcSearchTransactions == nil {
 		return true
 	}
@@ -2874,18 +2759,18 @@ func (mmSearchTransactions *mLedgerServiceHandlerMockSearchTransactions) invocat
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// SearchTransactions implements mm_ledgerv1connect.LedgerServiceHandler
-func (mmSearchTransactions *LedgerServiceHandlerMock) SearchTransactions(ctx context.Context, pp1 *connect.Request[v1.SearchRequest], pp2 *connect.ServerStream[v11.Transaction]) (err error) {
+// SearchTransactions implements mm_ledgerv1connect.LedgerServiceClient
+func (mmSearchTransactions *LedgerServiceClientMock) SearchTransactions(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) (pp2 *connect.ServerStreamForClient[v11.Transaction], err error) {
 	mm_atomic.AddUint64(&mmSearchTransactions.beforeSearchTransactionsCounter, 1)
 	defer mm_atomic.AddUint64(&mmSearchTransactions.afterSearchTransactionsCounter, 1)
 
 	mmSearchTransactions.t.Helper()
 
 	if mmSearchTransactions.inspectFuncSearchTransactions != nil {
-		mmSearchTransactions.inspectFuncSearchTransactions(ctx, pp1, pp2)
+		mmSearchTransactions.inspectFuncSearchTransactions(ctx, pp1)
 	}
 
-	mm_params := LedgerServiceHandlerMockSearchTransactionsParams{ctx, pp1, pp2}
+	mm_params := LedgerServiceClientMockSearchTransactionsParams{ctx, pp1}
 
 	// Record call args
 	mmSearchTransactions.SearchTransactionsMock.mutex.Lock()
@@ -2895,7 +2780,7 @@ func (mmSearchTransactions *LedgerServiceHandlerMock) SearchTransactions(ctx con
 	for _, e := range mmSearchTransactions.SearchTransactionsMock.expectations {
 		if minimock.Equal(*e.params, mm_params) {
 			mm_atomic.AddUint64(&e.Counter, 1)
-			return e.results.err
+			return e.results.pp2, e.results.err
 		}
 	}
 
@@ -2904,59 +2789,54 @@ func (mmSearchTransactions *LedgerServiceHandlerMock) SearchTransactions(ctx con
 		mm_want := mmSearchTransactions.SearchTransactionsMock.defaultExpectation.params
 		mm_want_ptrs := mmSearchTransactions.SearchTransactionsMock.defaultExpectation.paramPtrs
 
-		mm_got := LedgerServiceHandlerMockSearchTransactionsParams{ctx, pp1, pp2}
+		mm_got := LedgerServiceClientMockSearchTransactionsParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmSearchTransactions.t.Errorf("LedgerServiceHandlerMock.SearchTransactions got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmSearchTransactions.t.Errorf("LedgerServiceClientMock.SearchTransactions got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmSearchTransactions.SearchTransactionsMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmSearchTransactions.t.Errorf("LedgerServiceHandlerMock.SearchTransactions got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmSearchTransactions.t.Errorf("LedgerServiceClientMock.SearchTransactions got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmSearchTransactions.SearchTransactionsMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
-			if mm_want_ptrs.pp2 != nil && !minimock.Equal(*mm_want_ptrs.pp2, mm_got.pp2) {
-				mmSearchTransactions.t.Errorf("LedgerServiceHandlerMock.SearchTransactions got unexpected parameter pp2, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
-					mmSearchTransactions.SearchTransactionsMock.defaultExpectation.expectationOrigins.originPp2, *mm_want_ptrs.pp2, mm_got.pp2, minimock.Diff(*mm_want_ptrs.pp2, mm_got.pp2))
-			}
-
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmSearchTransactions.t.Errorf("LedgerServiceHandlerMock.SearchTransactions got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmSearchTransactions.t.Errorf("LedgerServiceClientMock.SearchTransactions got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmSearchTransactions.SearchTransactionsMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmSearchTransactions.SearchTransactionsMock.defaultExpectation.results
 		if mm_results == nil {
-			mmSearchTransactions.t.Fatal("No results are set for the LedgerServiceHandlerMock.SearchTransactions")
+			mmSearchTransactions.t.Fatal("No results are set for the LedgerServiceClientMock.SearchTransactions")
 		}
-		return (*mm_results).err
+		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmSearchTransactions.funcSearchTransactions != nil {
-		return mmSearchTransactions.funcSearchTransactions(ctx, pp1, pp2)
+		return mmSearchTransactions.funcSearchTransactions(ctx, pp1)
 	}
-	mmSearchTransactions.t.Fatalf("Unexpected call to LedgerServiceHandlerMock.SearchTransactions. %v %v %v", ctx, pp1, pp2)
+	mmSearchTransactions.t.Fatalf("Unexpected call to LedgerServiceClientMock.SearchTransactions. %v %v", ctx, pp1)
 	return
 }
 
-// SearchTransactionsAfterCounter returns a count of finished LedgerServiceHandlerMock.SearchTransactions invocations
-func (mmSearchTransactions *LedgerServiceHandlerMock) SearchTransactionsAfterCounter() uint64 {
+// SearchTransactionsAfterCounter returns a count of finished LedgerServiceClientMock.SearchTransactions invocations
+func (mmSearchTransactions *LedgerServiceClientMock) SearchTransactionsAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmSearchTransactions.afterSearchTransactionsCounter)
 }
 
-// SearchTransactionsBeforeCounter returns a count of LedgerServiceHandlerMock.SearchTransactions invocations
-func (mmSearchTransactions *LedgerServiceHandlerMock) SearchTransactionsBeforeCounter() uint64 {
+// SearchTransactionsBeforeCounter returns a count of LedgerServiceClientMock.SearchTransactions invocations
+func (mmSearchTransactions *LedgerServiceClientMock) SearchTransactionsBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmSearchTransactions.beforeSearchTransactionsCounter)
 }
 
-// Calls returns a list of arguments used in each call to LedgerServiceHandlerMock.SearchTransactions.
+// Calls returns a list of arguments used in each call to LedgerServiceClientMock.SearchTransactions.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmSearchTransactions *mLedgerServiceHandlerMockSearchTransactions) Calls() []*LedgerServiceHandlerMockSearchTransactionsParams {
+func (mmSearchTransactions *mLedgerServiceClientMockSearchTransactions) Calls() []*LedgerServiceClientMockSearchTransactionsParams {
 	mmSearchTransactions.mutex.RLock()
 
-	argCopy := make([]*LedgerServiceHandlerMockSearchTransactionsParams, len(mmSearchTransactions.callArgs))
+	argCopy := make([]*LedgerServiceClientMockSearchTransactionsParams, len(mmSearchTransactions.callArgs))
 	copy(argCopy, mmSearchTransactions.callArgs)
 
 	mmSearchTransactions.mutex.RUnlock()
@@ -2966,7 +2846,7 @@ func (mmSearchTransactions *mLedgerServiceHandlerMockSearchTransactions) Calls()
 
 // MinimockSearchTransactionsDone returns true if the count of the SearchTransactions invocations corresponds
 // the number of defined expectations
-func (m *LedgerServiceHandlerMock) MinimockSearchTransactionsDone() bool {
+func (m *LedgerServiceClientMock) MinimockSearchTransactionsDone() bool {
 	if m.SearchTransactionsMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -2982,10 +2862,10 @@ func (m *LedgerServiceHandlerMock) MinimockSearchTransactionsDone() bool {
 }
 
 // MinimockSearchTransactionsInspect logs each unmet expectation
-func (m *LedgerServiceHandlerMock) MinimockSearchTransactionsInspect() {
+func (m *LedgerServiceClientMock) MinimockSearchTransactionsInspect() {
 	for _, e := range m.SearchTransactionsMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to LedgerServiceHandlerMock.SearchTransactions at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to LedgerServiceClientMock.SearchTransactions at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -2993,66 +2873,66 @@ func (m *LedgerServiceHandlerMock) MinimockSearchTransactionsInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.SearchTransactionsMock.defaultExpectation != nil && afterSearchTransactionsCounter < 1 {
 		if m.SearchTransactionsMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to LedgerServiceHandlerMock.SearchTransactions at\n%s", m.SearchTransactionsMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to LedgerServiceClientMock.SearchTransactions at\n%s", m.SearchTransactionsMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to LedgerServiceHandlerMock.SearchTransactions at\n%s with params: %#v", m.SearchTransactionsMock.defaultExpectation.expectationOrigins.origin, *m.SearchTransactionsMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to LedgerServiceClientMock.SearchTransactions at\n%s with params: %#v", m.SearchTransactionsMock.defaultExpectation.expectationOrigins.origin, *m.SearchTransactionsMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcSearchTransactions != nil && afterSearchTransactionsCounter < 1 {
-		m.t.Errorf("Expected call to LedgerServiceHandlerMock.SearchTransactions at\n%s", m.funcSearchTransactionsOrigin)
+		m.t.Errorf("Expected call to LedgerServiceClientMock.SearchTransactions at\n%s", m.funcSearchTransactionsOrigin)
 	}
 
 	if !m.SearchTransactionsMock.invocationsDone() && afterSearchTransactionsCounter > 0 {
-		m.t.Errorf("Expected %d calls to LedgerServiceHandlerMock.SearchTransactions at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to LedgerServiceClientMock.SearchTransactions at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.SearchTransactionsMock.expectedInvocations), m.SearchTransactionsMock.expectedInvocationsOrigin, afterSearchTransactionsCounter)
 	}
 }
 
-type mLedgerServiceHandlerMockUpdateAccount struct {
+type mLedgerServiceClientMockUpdateAccount struct {
 	optional           bool
-	mock               *LedgerServiceHandlerMock
-	defaultExpectation *LedgerServiceHandlerMockUpdateAccountExpectation
-	expectations       []*LedgerServiceHandlerMockUpdateAccountExpectation
+	mock               *LedgerServiceClientMock
+	defaultExpectation *LedgerServiceClientMockUpdateAccountExpectation
+	expectations       []*LedgerServiceClientMockUpdateAccountExpectation
 
-	callArgs []*LedgerServiceHandlerMockUpdateAccountParams
+	callArgs []*LedgerServiceClientMockUpdateAccountParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// LedgerServiceHandlerMockUpdateAccountExpectation specifies expectation struct of the LedgerServiceHandler.UpdateAccount
-type LedgerServiceHandlerMockUpdateAccountExpectation struct {
-	mock               *LedgerServiceHandlerMock
-	params             *LedgerServiceHandlerMockUpdateAccountParams
-	paramPtrs          *LedgerServiceHandlerMockUpdateAccountParamPtrs
-	expectationOrigins LedgerServiceHandlerMockUpdateAccountExpectationOrigins
-	results            *LedgerServiceHandlerMockUpdateAccountResults
+// LedgerServiceClientMockUpdateAccountExpectation specifies expectation struct of the LedgerServiceClient.UpdateAccount
+type LedgerServiceClientMockUpdateAccountExpectation struct {
+	mock               *LedgerServiceClientMock
+	params             *LedgerServiceClientMockUpdateAccountParams
+	paramPtrs          *LedgerServiceClientMockUpdateAccountParamPtrs
+	expectationOrigins LedgerServiceClientMockUpdateAccountExpectationOrigins
+	results            *LedgerServiceClientMockUpdateAccountResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// LedgerServiceHandlerMockUpdateAccountParams contains parameters of the LedgerServiceHandler.UpdateAccount
-type LedgerServiceHandlerMockUpdateAccountParams struct {
+// LedgerServiceClientMockUpdateAccountParams contains parameters of the LedgerServiceClient.UpdateAccount
+type LedgerServiceClientMockUpdateAccountParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v11.Account]
 }
 
-// LedgerServiceHandlerMockUpdateAccountParamPtrs contains pointers to parameters of the LedgerServiceHandler.UpdateAccount
-type LedgerServiceHandlerMockUpdateAccountParamPtrs struct {
+// LedgerServiceClientMockUpdateAccountParamPtrs contains pointers to parameters of the LedgerServiceClient.UpdateAccount
+type LedgerServiceClientMockUpdateAccountParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v11.Account]
 }
 
-// LedgerServiceHandlerMockUpdateAccountResults contains results of the LedgerServiceHandler.UpdateAccount
-type LedgerServiceHandlerMockUpdateAccountResults struct {
+// LedgerServiceClientMockUpdateAccountResults contains results of the LedgerServiceClient.UpdateAccount
+type LedgerServiceClientMockUpdateAccountResults struct {
 	pp2 *connect.Response[v11.Account]
 	err error
 }
 
-// LedgerServiceHandlerMockUpdateAccountOrigins contains origins of expectations of the LedgerServiceHandler.UpdateAccount
-type LedgerServiceHandlerMockUpdateAccountExpectationOrigins struct {
+// LedgerServiceClientMockUpdateAccountOrigins contains origins of expectations of the LedgerServiceClient.UpdateAccount
+type LedgerServiceClientMockUpdateAccountExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -3063,26 +2943,26 @@ type LedgerServiceHandlerMockUpdateAccountExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmUpdateAccount *mLedgerServiceHandlerMockUpdateAccount) Optional() *mLedgerServiceHandlerMockUpdateAccount {
+func (mmUpdateAccount *mLedgerServiceClientMockUpdateAccount) Optional() *mLedgerServiceClientMockUpdateAccount {
 	mmUpdateAccount.optional = true
 	return mmUpdateAccount
 }
 
-// Expect sets up expected params for LedgerServiceHandler.UpdateAccount
-func (mmUpdateAccount *mLedgerServiceHandlerMockUpdateAccount) Expect(ctx context.Context, pp1 *connect.Request[v11.Account]) *mLedgerServiceHandlerMockUpdateAccount {
+// Expect sets up expected params for LedgerServiceClient.UpdateAccount
+func (mmUpdateAccount *mLedgerServiceClientMockUpdateAccount) Expect(ctx context.Context, pp1 *connect.Request[v11.Account]) *mLedgerServiceClientMockUpdateAccount {
 	if mmUpdateAccount.mock.funcUpdateAccount != nil {
-		mmUpdateAccount.mock.t.Fatalf("LedgerServiceHandlerMock.UpdateAccount mock is already set by Set")
+		mmUpdateAccount.mock.t.Fatalf("LedgerServiceClientMock.UpdateAccount mock is already set by Set")
 	}
 
 	if mmUpdateAccount.defaultExpectation == nil {
-		mmUpdateAccount.defaultExpectation = &LedgerServiceHandlerMockUpdateAccountExpectation{}
+		mmUpdateAccount.defaultExpectation = &LedgerServiceClientMockUpdateAccountExpectation{}
 	}
 
 	if mmUpdateAccount.defaultExpectation.paramPtrs != nil {
-		mmUpdateAccount.mock.t.Fatalf("LedgerServiceHandlerMock.UpdateAccount mock is already set by ExpectParams functions")
+		mmUpdateAccount.mock.t.Fatalf("LedgerServiceClientMock.UpdateAccount mock is already set by ExpectParams functions")
 	}
 
-	mmUpdateAccount.defaultExpectation.params = &LedgerServiceHandlerMockUpdateAccountParams{ctx, pp1}
+	mmUpdateAccount.defaultExpectation.params = &LedgerServiceClientMockUpdateAccountParams{ctx, pp1}
 	mmUpdateAccount.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmUpdateAccount.expectations {
 		if minimock.Equal(e.params, mmUpdateAccount.defaultExpectation.params) {
@@ -3093,22 +2973,22 @@ func (mmUpdateAccount *mLedgerServiceHandlerMockUpdateAccount) Expect(ctx contex
 	return mmUpdateAccount
 }
 
-// ExpectCtxParam1 sets up expected param ctx for LedgerServiceHandler.UpdateAccount
-func (mmUpdateAccount *mLedgerServiceHandlerMockUpdateAccount) ExpectCtxParam1(ctx context.Context) *mLedgerServiceHandlerMockUpdateAccount {
+// ExpectCtxParam1 sets up expected param ctx for LedgerServiceClient.UpdateAccount
+func (mmUpdateAccount *mLedgerServiceClientMockUpdateAccount) ExpectCtxParam1(ctx context.Context) *mLedgerServiceClientMockUpdateAccount {
 	if mmUpdateAccount.mock.funcUpdateAccount != nil {
-		mmUpdateAccount.mock.t.Fatalf("LedgerServiceHandlerMock.UpdateAccount mock is already set by Set")
+		mmUpdateAccount.mock.t.Fatalf("LedgerServiceClientMock.UpdateAccount mock is already set by Set")
 	}
 
 	if mmUpdateAccount.defaultExpectation == nil {
-		mmUpdateAccount.defaultExpectation = &LedgerServiceHandlerMockUpdateAccountExpectation{}
+		mmUpdateAccount.defaultExpectation = &LedgerServiceClientMockUpdateAccountExpectation{}
 	}
 
 	if mmUpdateAccount.defaultExpectation.params != nil {
-		mmUpdateAccount.mock.t.Fatalf("LedgerServiceHandlerMock.UpdateAccount mock is already set by Expect")
+		mmUpdateAccount.mock.t.Fatalf("LedgerServiceClientMock.UpdateAccount mock is already set by Expect")
 	}
 
 	if mmUpdateAccount.defaultExpectation.paramPtrs == nil {
-		mmUpdateAccount.defaultExpectation.paramPtrs = &LedgerServiceHandlerMockUpdateAccountParamPtrs{}
+		mmUpdateAccount.defaultExpectation.paramPtrs = &LedgerServiceClientMockUpdateAccountParamPtrs{}
 	}
 	mmUpdateAccount.defaultExpectation.paramPtrs.ctx = &ctx
 	mmUpdateAccount.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -3116,22 +2996,22 @@ func (mmUpdateAccount *mLedgerServiceHandlerMockUpdateAccount) ExpectCtxParam1(c
 	return mmUpdateAccount
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for LedgerServiceHandler.UpdateAccount
-func (mmUpdateAccount *mLedgerServiceHandlerMockUpdateAccount) ExpectPp1Param2(pp1 *connect.Request[v11.Account]) *mLedgerServiceHandlerMockUpdateAccount {
+// ExpectPp1Param2 sets up expected param pp1 for LedgerServiceClient.UpdateAccount
+func (mmUpdateAccount *mLedgerServiceClientMockUpdateAccount) ExpectPp1Param2(pp1 *connect.Request[v11.Account]) *mLedgerServiceClientMockUpdateAccount {
 	if mmUpdateAccount.mock.funcUpdateAccount != nil {
-		mmUpdateAccount.mock.t.Fatalf("LedgerServiceHandlerMock.UpdateAccount mock is already set by Set")
+		mmUpdateAccount.mock.t.Fatalf("LedgerServiceClientMock.UpdateAccount mock is already set by Set")
 	}
 
 	if mmUpdateAccount.defaultExpectation == nil {
-		mmUpdateAccount.defaultExpectation = &LedgerServiceHandlerMockUpdateAccountExpectation{}
+		mmUpdateAccount.defaultExpectation = &LedgerServiceClientMockUpdateAccountExpectation{}
 	}
 
 	if mmUpdateAccount.defaultExpectation.params != nil {
-		mmUpdateAccount.mock.t.Fatalf("LedgerServiceHandlerMock.UpdateAccount mock is already set by Expect")
+		mmUpdateAccount.mock.t.Fatalf("LedgerServiceClientMock.UpdateAccount mock is already set by Expect")
 	}
 
 	if mmUpdateAccount.defaultExpectation.paramPtrs == nil {
-		mmUpdateAccount.defaultExpectation.paramPtrs = &LedgerServiceHandlerMockUpdateAccountParamPtrs{}
+		mmUpdateAccount.defaultExpectation.paramPtrs = &LedgerServiceClientMockUpdateAccountParamPtrs{}
 	}
 	mmUpdateAccount.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmUpdateAccount.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -3139,10 +3019,10 @@ func (mmUpdateAccount *mLedgerServiceHandlerMockUpdateAccount) ExpectPp1Param2(p
 	return mmUpdateAccount
 }
 
-// Inspect accepts an inspector function that has same arguments as the LedgerServiceHandler.UpdateAccount
-func (mmUpdateAccount *mLedgerServiceHandlerMockUpdateAccount) Inspect(f func(ctx context.Context, pp1 *connect.Request[v11.Account])) *mLedgerServiceHandlerMockUpdateAccount {
+// Inspect accepts an inspector function that has same arguments as the LedgerServiceClient.UpdateAccount
+func (mmUpdateAccount *mLedgerServiceClientMockUpdateAccount) Inspect(f func(ctx context.Context, pp1 *connect.Request[v11.Account])) *mLedgerServiceClientMockUpdateAccount {
 	if mmUpdateAccount.mock.inspectFuncUpdateAccount != nil {
-		mmUpdateAccount.mock.t.Fatalf("Inspect function is already set for LedgerServiceHandlerMock.UpdateAccount")
+		mmUpdateAccount.mock.t.Fatalf("Inspect function is already set for LedgerServiceClientMock.UpdateAccount")
 	}
 
 	mmUpdateAccount.mock.inspectFuncUpdateAccount = f
@@ -3150,28 +3030,28 @@ func (mmUpdateAccount *mLedgerServiceHandlerMockUpdateAccount) Inspect(f func(ct
 	return mmUpdateAccount
 }
 
-// Return sets up results that will be returned by LedgerServiceHandler.UpdateAccount
-func (mmUpdateAccount *mLedgerServiceHandlerMockUpdateAccount) Return(pp2 *connect.Response[v11.Account], err error) *LedgerServiceHandlerMock {
+// Return sets up results that will be returned by LedgerServiceClient.UpdateAccount
+func (mmUpdateAccount *mLedgerServiceClientMockUpdateAccount) Return(pp2 *connect.Response[v11.Account], err error) *LedgerServiceClientMock {
 	if mmUpdateAccount.mock.funcUpdateAccount != nil {
-		mmUpdateAccount.mock.t.Fatalf("LedgerServiceHandlerMock.UpdateAccount mock is already set by Set")
+		mmUpdateAccount.mock.t.Fatalf("LedgerServiceClientMock.UpdateAccount mock is already set by Set")
 	}
 
 	if mmUpdateAccount.defaultExpectation == nil {
-		mmUpdateAccount.defaultExpectation = &LedgerServiceHandlerMockUpdateAccountExpectation{mock: mmUpdateAccount.mock}
+		mmUpdateAccount.defaultExpectation = &LedgerServiceClientMockUpdateAccountExpectation{mock: mmUpdateAccount.mock}
 	}
-	mmUpdateAccount.defaultExpectation.results = &LedgerServiceHandlerMockUpdateAccountResults{pp2, err}
+	mmUpdateAccount.defaultExpectation.results = &LedgerServiceClientMockUpdateAccountResults{pp2, err}
 	mmUpdateAccount.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmUpdateAccount.mock
 }
 
-// Set uses given function f to mock the LedgerServiceHandler.UpdateAccount method
-func (mmUpdateAccount *mLedgerServiceHandlerMockUpdateAccount) Set(f func(ctx context.Context, pp1 *connect.Request[v11.Account]) (pp2 *connect.Response[v11.Account], err error)) *LedgerServiceHandlerMock {
+// Set uses given function f to mock the LedgerServiceClient.UpdateAccount method
+func (mmUpdateAccount *mLedgerServiceClientMockUpdateAccount) Set(f func(ctx context.Context, pp1 *connect.Request[v11.Account]) (pp2 *connect.Response[v11.Account], err error)) *LedgerServiceClientMock {
 	if mmUpdateAccount.defaultExpectation != nil {
-		mmUpdateAccount.mock.t.Fatalf("Default expectation is already set for the LedgerServiceHandler.UpdateAccount method")
+		mmUpdateAccount.mock.t.Fatalf("Default expectation is already set for the LedgerServiceClient.UpdateAccount method")
 	}
 
 	if len(mmUpdateAccount.expectations) > 0 {
-		mmUpdateAccount.mock.t.Fatalf("Some expectations are already set for the LedgerServiceHandler.UpdateAccount method")
+		mmUpdateAccount.mock.t.Fatalf("Some expectations are already set for the LedgerServiceClient.UpdateAccount method")
 	}
 
 	mmUpdateAccount.mock.funcUpdateAccount = f
@@ -3179,39 +3059,39 @@ func (mmUpdateAccount *mLedgerServiceHandlerMockUpdateAccount) Set(f func(ctx co
 	return mmUpdateAccount.mock
 }
 
-// When sets expectation for the LedgerServiceHandler.UpdateAccount which will trigger the result defined by the following
+// When sets expectation for the LedgerServiceClient.UpdateAccount which will trigger the result defined by the following
 // Then helper
-func (mmUpdateAccount *mLedgerServiceHandlerMockUpdateAccount) When(ctx context.Context, pp1 *connect.Request[v11.Account]) *LedgerServiceHandlerMockUpdateAccountExpectation {
+func (mmUpdateAccount *mLedgerServiceClientMockUpdateAccount) When(ctx context.Context, pp1 *connect.Request[v11.Account]) *LedgerServiceClientMockUpdateAccountExpectation {
 	if mmUpdateAccount.mock.funcUpdateAccount != nil {
-		mmUpdateAccount.mock.t.Fatalf("LedgerServiceHandlerMock.UpdateAccount mock is already set by Set")
+		mmUpdateAccount.mock.t.Fatalf("LedgerServiceClientMock.UpdateAccount mock is already set by Set")
 	}
 
-	expectation := &LedgerServiceHandlerMockUpdateAccountExpectation{
+	expectation := &LedgerServiceClientMockUpdateAccountExpectation{
 		mock:               mmUpdateAccount.mock,
-		params:             &LedgerServiceHandlerMockUpdateAccountParams{ctx, pp1},
-		expectationOrigins: LedgerServiceHandlerMockUpdateAccountExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &LedgerServiceClientMockUpdateAccountParams{ctx, pp1},
+		expectationOrigins: LedgerServiceClientMockUpdateAccountExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmUpdateAccount.expectations = append(mmUpdateAccount.expectations, expectation)
 	return expectation
 }
 
-// Then sets up LedgerServiceHandler.UpdateAccount return parameters for the expectation previously defined by the When method
-func (e *LedgerServiceHandlerMockUpdateAccountExpectation) Then(pp2 *connect.Response[v11.Account], err error) *LedgerServiceHandlerMock {
-	e.results = &LedgerServiceHandlerMockUpdateAccountResults{pp2, err}
+// Then sets up LedgerServiceClient.UpdateAccount return parameters for the expectation previously defined by the When method
+func (e *LedgerServiceClientMockUpdateAccountExpectation) Then(pp2 *connect.Response[v11.Account], err error) *LedgerServiceClientMock {
+	e.results = &LedgerServiceClientMockUpdateAccountResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times LedgerServiceHandler.UpdateAccount should be invoked
-func (mmUpdateAccount *mLedgerServiceHandlerMockUpdateAccount) Times(n uint64) *mLedgerServiceHandlerMockUpdateAccount {
+// Times sets number of times LedgerServiceClient.UpdateAccount should be invoked
+func (mmUpdateAccount *mLedgerServiceClientMockUpdateAccount) Times(n uint64) *mLedgerServiceClientMockUpdateAccount {
 	if n == 0 {
-		mmUpdateAccount.mock.t.Fatalf("Times of LedgerServiceHandlerMock.UpdateAccount mock can not be zero")
+		mmUpdateAccount.mock.t.Fatalf("Times of LedgerServiceClientMock.UpdateAccount mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmUpdateAccount.expectedInvocations, n)
 	mmUpdateAccount.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmUpdateAccount
 }
 
-func (mmUpdateAccount *mLedgerServiceHandlerMockUpdateAccount) invocationsDone() bool {
+func (mmUpdateAccount *mLedgerServiceClientMockUpdateAccount) invocationsDone() bool {
 	if len(mmUpdateAccount.expectations) == 0 && mmUpdateAccount.defaultExpectation == nil && mmUpdateAccount.mock.funcUpdateAccount == nil {
 		return true
 	}
@@ -3222,8 +3102,8 @@ func (mmUpdateAccount *mLedgerServiceHandlerMockUpdateAccount) invocationsDone()
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// UpdateAccount implements mm_ledgerv1connect.LedgerServiceHandler
-func (mmUpdateAccount *LedgerServiceHandlerMock) UpdateAccount(ctx context.Context, pp1 *connect.Request[v11.Account]) (pp2 *connect.Response[v11.Account], err error) {
+// UpdateAccount implements mm_ledgerv1connect.LedgerServiceClient
+func (mmUpdateAccount *LedgerServiceClientMock) UpdateAccount(ctx context.Context, pp1 *connect.Request[v11.Account]) (pp2 *connect.Response[v11.Account], err error) {
 	mm_atomic.AddUint64(&mmUpdateAccount.beforeUpdateAccountCounter, 1)
 	defer mm_atomic.AddUint64(&mmUpdateAccount.afterUpdateAccountCounter, 1)
 
@@ -3233,7 +3113,7 @@ func (mmUpdateAccount *LedgerServiceHandlerMock) UpdateAccount(ctx context.Conte
 		mmUpdateAccount.inspectFuncUpdateAccount(ctx, pp1)
 	}
 
-	mm_params := LedgerServiceHandlerMockUpdateAccountParams{ctx, pp1}
+	mm_params := LedgerServiceClientMockUpdateAccountParams{ctx, pp1}
 
 	// Record call args
 	mmUpdateAccount.UpdateAccountMock.mutex.Lock()
@@ -3252,54 +3132,54 @@ func (mmUpdateAccount *LedgerServiceHandlerMock) UpdateAccount(ctx context.Conte
 		mm_want := mmUpdateAccount.UpdateAccountMock.defaultExpectation.params
 		mm_want_ptrs := mmUpdateAccount.UpdateAccountMock.defaultExpectation.paramPtrs
 
-		mm_got := LedgerServiceHandlerMockUpdateAccountParams{ctx, pp1}
+		mm_got := LedgerServiceClientMockUpdateAccountParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmUpdateAccount.t.Errorf("LedgerServiceHandlerMock.UpdateAccount got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmUpdateAccount.t.Errorf("LedgerServiceClientMock.UpdateAccount got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmUpdateAccount.UpdateAccountMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmUpdateAccount.t.Errorf("LedgerServiceHandlerMock.UpdateAccount got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmUpdateAccount.t.Errorf("LedgerServiceClientMock.UpdateAccount got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmUpdateAccount.UpdateAccountMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmUpdateAccount.t.Errorf("LedgerServiceHandlerMock.UpdateAccount got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmUpdateAccount.t.Errorf("LedgerServiceClientMock.UpdateAccount got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmUpdateAccount.UpdateAccountMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmUpdateAccount.UpdateAccountMock.defaultExpectation.results
 		if mm_results == nil {
-			mmUpdateAccount.t.Fatal("No results are set for the LedgerServiceHandlerMock.UpdateAccount")
+			mmUpdateAccount.t.Fatal("No results are set for the LedgerServiceClientMock.UpdateAccount")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmUpdateAccount.funcUpdateAccount != nil {
 		return mmUpdateAccount.funcUpdateAccount(ctx, pp1)
 	}
-	mmUpdateAccount.t.Fatalf("Unexpected call to LedgerServiceHandlerMock.UpdateAccount. %v %v", ctx, pp1)
+	mmUpdateAccount.t.Fatalf("Unexpected call to LedgerServiceClientMock.UpdateAccount. %v %v", ctx, pp1)
 	return
 }
 
-// UpdateAccountAfterCounter returns a count of finished LedgerServiceHandlerMock.UpdateAccount invocations
-func (mmUpdateAccount *LedgerServiceHandlerMock) UpdateAccountAfterCounter() uint64 {
+// UpdateAccountAfterCounter returns a count of finished LedgerServiceClientMock.UpdateAccount invocations
+func (mmUpdateAccount *LedgerServiceClientMock) UpdateAccountAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmUpdateAccount.afterUpdateAccountCounter)
 }
 
-// UpdateAccountBeforeCounter returns a count of LedgerServiceHandlerMock.UpdateAccount invocations
-func (mmUpdateAccount *LedgerServiceHandlerMock) UpdateAccountBeforeCounter() uint64 {
+// UpdateAccountBeforeCounter returns a count of LedgerServiceClientMock.UpdateAccount invocations
+func (mmUpdateAccount *LedgerServiceClientMock) UpdateAccountBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmUpdateAccount.beforeUpdateAccountCounter)
 }
 
-// Calls returns a list of arguments used in each call to LedgerServiceHandlerMock.UpdateAccount.
+// Calls returns a list of arguments used in each call to LedgerServiceClientMock.UpdateAccount.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmUpdateAccount *mLedgerServiceHandlerMockUpdateAccount) Calls() []*LedgerServiceHandlerMockUpdateAccountParams {
+func (mmUpdateAccount *mLedgerServiceClientMockUpdateAccount) Calls() []*LedgerServiceClientMockUpdateAccountParams {
 	mmUpdateAccount.mutex.RLock()
 
-	argCopy := make([]*LedgerServiceHandlerMockUpdateAccountParams, len(mmUpdateAccount.callArgs))
+	argCopy := make([]*LedgerServiceClientMockUpdateAccountParams, len(mmUpdateAccount.callArgs))
 	copy(argCopy, mmUpdateAccount.callArgs)
 
 	mmUpdateAccount.mutex.RUnlock()
@@ -3309,7 +3189,7 @@ func (mmUpdateAccount *mLedgerServiceHandlerMockUpdateAccount) Calls() []*Ledger
 
 // MinimockUpdateAccountDone returns true if the count of the UpdateAccount invocations corresponds
 // the number of defined expectations
-func (m *LedgerServiceHandlerMock) MinimockUpdateAccountDone() bool {
+func (m *LedgerServiceClientMock) MinimockUpdateAccountDone() bool {
 	if m.UpdateAccountMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -3325,10 +3205,10 @@ func (m *LedgerServiceHandlerMock) MinimockUpdateAccountDone() bool {
 }
 
 // MinimockUpdateAccountInspect logs each unmet expectation
-func (m *LedgerServiceHandlerMock) MinimockUpdateAccountInspect() {
+func (m *LedgerServiceClientMock) MinimockUpdateAccountInspect() {
 	for _, e := range m.UpdateAccountMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to LedgerServiceHandlerMock.UpdateAccount at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to LedgerServiceClientMock.UpdateAccount at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -3336,66 +3216,66 @@ func (m *LedgerServiceHandlerMock) MinimockUpdateAccountInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.UpdateAccountMock.defaultExpectation != nil && afterUpdateAccountCounter < 1 {
 		if m.UpdateAccountMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to LedgerServiceHandlerMock.UpdateAccount at\n%s", m.UpdateAccountMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to LedgerServiceClientMock.UpdateAccount at\n%s", m.UpdateAccountMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to LedgerServiceHandlerMock.UpdateAccount at\n%s with params: %#v", m.UpdateAccountMock.defaultExpectation.expectationOrigins.origin, *m.UpdateAccountMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to LedgerServiceClientMock.UpdateAccount at\n%s with params: %#v", m.UpdateAccountMock.defaultExpectation.expectationOrigins.origin, *m.UpdateAccountMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcUpdateAccount != nil && afterUpdateAccountCounter < 1 {
-		m.t.Errorf("Expected call to LedgerServiceHandlerMock.UpdateAccount at\n%s", m.funcUpdateAccountOrigin)
+		m.t.Errorf("Expected call to LedgerServiceClientMock.UpdateAccount at\n%s", m.funcUpdateAccountOrigin)
 	}
 
 	if !m.UpdateAccountMock.invocationsDone() && afterUpdateAccountCounter > 0 {
-		m.t.Errorf("Expected %d calls to LedgerServiceHandlerMock.UpdateAccount at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to LedgerServiceClientMock.UpdateAccount at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.UpdateAccountMock.expectedInvocations), m.UpdateAccountMock.expectedInvocationsOrigin, afterUpdateAccountCounter)
 	}
 }
 
-type mLedgerServiceHandlerMockUpdateLedger struct {
+type mLedgerServiceClientMockUpdateLedger struct {
 	optional           bool
-	mock               *LedgerServiceHandlerMock
-	defaultExpectation *LedgerServiceHandlerMockUpdateLedgerExpectation
-	expectations       []*LedgerServiceHandlerMockUpdateLedgerExpectation
+	mock               *LedgerServiceClientMock
+	defaultExpectation *LedgerServiceClientMockUpdateLedgerExpectation
+	expectations       []*LedgerServiceClientMockUpdateLedgerExpectation
 
-	callArgs []*LedgerServiceHandlerMockUpdateLedgerParams
+	callArgs []*LedgerServiceClientMockUpdateLedgerParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// LedgerServiceHandlerMockUpdateLedgerExpectation specifies expectation struct of the LedgerServiceHandler.UpdateLedger
-type LedgerServiceHandlerMockUpdateLedgerExpectation struct {
-	mock               *LedgerServiceHandlerMock
-	params             *LedgerServiceHandlerMockUpdateLedgerParams
-	paramPtrs          *LedgerServiceHandlerMockUpdateLedgerParamPtrs
-	expectationOrigins LedgerServiceHandlerMockUpdateLedgerExpectationOrigins
-	results            *LedgerServiceHandlerMockUpdateLedgerResults
+// LedgerServiceClientMockUpdateLedgerExpectation specifies expectation struct of the LedgerServiceClient.UpdateLedger
+type LedgerServiceClientMockUpdateLedgerExpectation struct {
+	mock               *LedgerServiceClientMock
+	params             *LedgerServiceClientMockUpdateLedgerParams
+	paramPtrs          *LedgerServiceClientMockUpdateLedgerParamPtrs
+	expectationOrigins LedgerServiceClientMockUpdateLedgerExpectationOrigins
+	results            *LedgerServiceClientMockUpdateLedgerResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// LedgerServiceHandlerMockUpdateLedgerParams contains parameters of the LedgerServiceHandler.UpdateLedger
-type LedgerServiceHandlerMockUpdateLedgerParams struct {
+// LedgerServiceClientMockUpdateLedgerParams contains parameters of the LedgerServiceClient.UpdateLedger
+type LedgerServiceClientMockUpdateLedgerParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v11.Ledger]
 }
 
-// LedgerServiceHandlerMockUpdateLedgerParamPtrs contains pointers to parameters of the LedgerServiceHandler.UpdateLedger
-type LedgerServiceHandlerMockUpdateLedgerParamPtrs struct {
+// LedgerServiceClientMockUpdateLedgerParamPtrs contains pointers to parameters of the LedgerServiceClient.UpdateLedger
+type LedgerServiceClientMockUpdateLedgerParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v11.Ledger]
 }
 
-// LedgerServiceHandlerMockUpdateLedgerResults contains results of the LedgerServiceHandler.UpdateLedger
-type LedgerServiceHandlerMockUpdateLedgerResults struct {
+// LedgerServiceClientMockUpdateLedgerResults contains results of the LedgerServiceClient.UpdateLedger
+type LedgerServiceClientMockUpdateLedgerResults struct {
 	pp2 *connect.Response[v11.Ledger]
 	err error
 }
 
-// LedgerServiceHandlerMockUpdateLedgerOrigins contains origins of expectations of the LedgerServiceHandler.UpdateLedger
-type LedgerServiceHandlerMockUpdateLedgerExpectationOrigins struct {
+// LedgerServiceClientMockUpdateLedgerOrigins contains origins of expectations of the LedgerServiceClient.UpdateLedger
+type LedgerServiceClientMockUpdateLedgerExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -3406,26 +3286,26 @@ type LedgerServiceHandlerMockUpdateLedgerExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmUpdateLedger *mLedgerServiceHandlerMockUpdateLedger) Optional() *mLedgerServiceHandlerMockUpdateLedger {
+func (mmUpdateLedger *mLedgerServiceClientMockUpdateLedger) Optional() *mLedgerServiceClientMockUpdateLedger {
 	mmUpdateLedger.optional = true
 	return mmUpdateLedger
 }
 
-// Expect sets up expected params for LedgerServiceHandler.UpdateLedger
-func (mmUpdateLedger *mLedgerServiceHandlerMockUpdateLedger) Expect(ctx context.Context, pp1 *connect.Request[v11.Ledger]) *mLedgerServiceHandlerMockUpdateLedger {
+// Expect sets up expected params for LedgerServiceClient.UpdateLedger
+func (mmUpdateLedger *mLedgerServiceClientMockUpdateLedger) Expect(ctx context.Context, pp1 *connect.Request[v11.Ledger]) *mLedgerServiceClientMockUpdateLedger {
 	if mmUpdateLedger.mock.funcUpdateLedger != nil {
-		mmUpdateLedger.mock.t.Fatalf("LedgerServiceHandlerMock.UpdateLedger mock is already set by Set")
+		mmUpdateLedger.mock.t.Fatalf("LedgerServiceClientMock.UpdateLedger mock is already set by Set")
 	}
 
 	if mmUpdateLedger.defaultExpectation == nil {
-		mmUpdateLedger.defaultExpectation = &LedgerServiceHandlerMockUpdateLedgerExpectation{}
+		mmUpdateLedger.defaultExpectation = &LedgerServiceClientMockUpdateLedgerExpectation{}
 	}
 
 	if mmUpdateLedger.defaultExpectation.paramPtrs != nil {
-		mmUpdateLedger.mock.t.Fatalf("LedgerServiceHandlerMock.UpdateLedger mock is already set by ExpectParams functions")
+		mmUpdateLedger.mock.t.Fatalf("LedgerServiceClientMock.UpdateLedger mock is already set by ExpectParams functions")
 	}
 
-	mmUpdateLedger.defaultExpectation.params = &LedgerServiceHandlerMockUpdateLedgerParams{ctx, pp1}
+	mmUpdateLedger.defaultExpectation.params = &LedgerServiceClientMockUpdateLedgerParams{ctx, pp1}
 	mmUpdateLedger.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmUpdateLedger.expectations {
 		if minimock.Equal(e.params, mmUpdateLedger.defaultExpectation.params) {
@@ -3436,22 +3316,22 @@ func (mmUpdateLedger *mLedgerServiceHandlerMockUpdateLedger) Expect(ctx context.
 	return mmUpdateLedger
 }
 
-// ExpectCtxParam1 sets up expected param ctx for LedgerServiceHandler.UpdateLedger
-func (mmUpdateLedger *mLedgerServiceHandlerMockUpdateLedger) ExpectCtxParam1(ctx context.Context) *mLedgerServiceHandlerMockUpdateLedger {
+// ExpectCtxParam1 sets up expected param ctx for LedgerServiceClient.UpdateLedger
+func (mmUpdateLedger *mLedgerServiceClientMockUpdateLedger) ExpectCtxParam1(ctx context.Context) *mLedgerServiceClientMockUpdateLedger {
 	if mmUpdateLedger.mock.funcUpdateLedger != nil {
-		mmUpdateLedger.mock.t.Fatalf("LedgerServiceHandlerMock.UpdateLedger mock is already set by Set")
+		mmUpdateLedger.mock.t.Fatalf("LedgerServiceClientMock.UpdateLedger mock is already set by Set")
 	}
 
 	if mmUpdateLedger.defaultExpectation == nil {
-		mmUpdateLedger.defaultExpectation = &LedgerServiceHandlerMockUpdateLedgerExpectation{}
+		mmUpdateLedger.defaultExpectation = &LedgerServiceClientMockUpdateLedgerExpectation{}
 	}
 
 	if mmUpdateLedger.defaultExpectation.params != nil {
-		mmUpdateLedger.mock.t.Fatalf("LedgerServiceHandlerMock.UpdateLedger mock is already set by Expect")
+		mmUpdateLedger.mock.t.Fatalf("LedgerServiceClientMock.UpdateLedger mock is already set by Expect")
 	}
 
 	if mmUpdateLedger.defaultExpectation.paramPtrs == nil {
-		mmUpdateLedger.defaultExpectation.paramPtrs = &LedgerServiceHandlerMockUpdateLedgerParamPtrs{}
+		mmUpdateLedger.defaultExpectation.paramPtrs = &LedgerServiceClientMockUpdateLedgerParamPtrs{}
 	}
 	mmUpdateLedger.defaultExpectation.paramPtrs.ctx = &ctx
 	mmUpdateLedger.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -3459,22 +3339,22 @@ func (mmUpdateLedger *mLedgerServiceHandlerMockUpdateLedger) ExpectCtxParam1(ctx
 	return mmUpdateLedger
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for LedgerServiceHandler.UpdateLedger
-func (mmUpdateLedger *mLedgerServiceHandlerMockUpdateLedger) ExpectPp1Param2(pp1 *connect.Request[v11.Ledger]) *mLedgerServiceHandlerMockUpdateLedger {
+// ExpectPp1Param2 sets up expected param pp1 for LedgerServiceClient.UpdateLedger
+func (mmUpdateLedger *mLedgerServiceClientMockUpdateLedger) ExpectPp1Param2(pp1 *connect.Request[v11.Ledger]) *mLedgerServiceClientMockUpdateLedger {
 	if mmUpdateLedger.mock.funcUpdateLedger != nil {
-		mmUpdateLedger.mock.t.Fatalf("LedgerServiceHandlerMock.UpdateLedger mock is already set by Set")
+		mmUpdateLedger.mock.t.Fatalf("LedgerServiceClientMock.UpdateLedger mock is already set by Set")
 	}
 
 	if mmUpdateLedger.defaultExpectation == nil {
-		mmUpdateLedger.defaultExpectation = &LedgerServiceHandlerMockUpdateLedgerExpectation{}
+		mmUpdateLedger.defaultExpectation = &LedgerServiceClientMockUpdateLedgerExpectation{}
 	}
 
 	if mmUpdateLedger.defaultExpectation.params != nil {
-		mmUpdateLedger.mock.t.Fatalf("LedgerServiceHandlerMock.UpdateLedger mock is already set by Expect")
+		mmUpdateLedger.mock.t.Fatalf("LedgerServiceClientMock.UpdateLedger mock is already set by Expect")
 	}
 
 	if mmUpdateLedger.defaultExpectation.paramPtrs == nil {
-		mmUpdateLedger.defaultExpectation.paramPtrs = &LedgerServiceHandlerMockUpdateLedgerParamPtrs{}
+		mmUpdateLedger.defaultExpectation.paramPtrs = &LedgerServiceClientMockUpdateLedgerParamPtrs{}
 	}
 	mmUpdateLedger.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmUpdateLedger.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -3482,10 +3362,10 @@ func (mmUpdateLedger *mLedgerServiceHandlerMockUpdateLedger) ExpectPp1Param2(pp1
 	return mmUpdateLedger
 }
 
-// Inspect accepts an inspector function that has same arguments as the LedgerServiceHandler.UpdateLedger
-func (mmUpdateLedger *mLedgerServiceHandlerMockUpdateLedger) Inspect(f func(ctx context.Context, pp1 *connect.Request[v11.Ledger])) *mLedgerServiceHandlerMockUpdateLedger {
+// Inspect accepts an inspector function that has same arguments as the LedgerServiceClient.UpdateLedger
+func (mmUpdateLedger *mLedgerServiceClientMockUpdateLedger) Inspect(f func(ctx context.Context, pp1 *connect.Request[v11.Ledger])) *mLedgerServiceClientMockUpdateLedger {
 	if mmUpdateLedger.mock.inspectFuncUpdateLedger != nil {
-		mmUpdateLedger.mock.t.Fatalf("Inspect function is already set for LedgerServiceHandlerMock.UpdateLedger")
+		mmUpdateLedger.mock.t.Fatalf("Inspect function is already set for LedgerServiceClientMock.UpdateLedger")
 	}
 
 	mmUpdateLedger.mock.inspectFuncUpdateLedger = f
@@ -3493,28 +3373,28 @@ func (mmUpdateLedger *mLedgerServiceHandlerMockUpdateLedger) Inspect(f func(ctx 
 	return mmUpdateLedger
 }
 
-// Return sets up results that will be returned by LedgerServiceHandler.UpdateLedger
-func (mmUpdateLedger *mLedgerServiceHandlerMockUpdateLedger) Return(pp2 *connect.Response[v11.Ledger], err error) *LedgerServiceHandlerMock {
+// Return sets up results that will be returned by LedgerServiceClient.UpdateLedger
+func (mmUpdateLedger *mLedgerServiceClientMockUpdateLedger) Return(pp2 *connect.Response[v11.Ledger], err error) *LedgerServiceClientMock {
 	if mmUpdateLedger.mock.funcUpdateLedger != nil {
-		mmUpdateLedger.mock.t.Fatalf("LedgerServiceHandlerMock.UpdateLedger mock is already set by Set")
+		mmUpdateLedger.mock.t.Fatalf("LedgerServiceClientMock.UpdateLedger mock is already set by Set")
 	}
 
 	if mmUpdateLedger.defaultExpectation == nil {
-		mmUpdateLedger.defaultExpectation = &LedgerServiceHandlerMockUpdateLedgerExpectation{mock: mmUpdateLedger.mock}
+		mmUpdateLedger.defaultExpectation = &LedgerServiceClientMockUpdateLedgerExpectation{mock: mmUpdateLedger.mock}
 	}
-	mmUpdateLedger.defaultExpectation.results = &LedgerServiceHandlerMockUpdateLedgerResults{pp2, err}
+	mmUpdateLedger.defaultExpectation.results = &LedgerServiceClientMockUpdateLedgerResults{pp2, err}
 	mmUpdateLedger.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmUpdateLedger.mock
 }
 
-// Set uses given function f to mock the LedgerServiceHandler.UpdateLedger method
-func (mmUpdateLedger *mLedgerServiceHandlerMockUpdateLedger) Set(f func(ctx context.Context, pp1 *connect.Request[v11.Ledger]) (pp2 *connect.Response[v11.Ledger], err error)) *LedgerServiceHandlerMock {
+// Set uses given function f to mock the LedgerServiceClient.UpdateLedger method
+func (mmUpdateLedger *mLedgerServiceClientMockUpdateLedger) Set(f func(ctx context.Context, pp1 *connect.Request[v11.Ledger]) (pp2 *connect.Response[v11.Ledger], err error)) *LedgerServiceClientMock {
 	if mmUpdateLedger.defaultExpectation != nil {
-		mmUpdateLedger.mock.t.Fatalf("Default expectation is already set for the LedgerServiceHandler.UpdateLedger method")
+		mmUpdateLedger.mock.t.Fatalf("Default expectation is already set for the LedgerServiceClient.UpdateLedger method")
 	}
 
 	if len(mmUpdateLedger.expectations) > 0 {
-		mmUpdateLedger.mock.t.Fatalf("Some expectations are already set for the LedgerServiceHandler.UpdateLedger method")
+		mmUpdateLedger.mock.t.Fatalf("Some expectations are already set for the LedgerServiceClient.UpdateLedger method")
 	}
 
 	mmUpdateLedger.mock.funcUpdateLedger = f
@@ -3522,39 +3402,39 @@ func (mmUpdateLedger *mLedgerServiceHandlerMockUpdateLedger) Set(f func(ctx cont
 	return mmUpdateLedger.mock
 }
 
-// When sets expectation for the LedgerServiceHandler.UpdateLedger which will trigger the result defined by the following
+// When sets expectation for the LedgerServiceClient.UpdateLedger which will trigger the result defined by the following
 // Then helper
-func (mmUpdateLedger *mLedgerServiceHandlerMockUpdateLedger) When(ctx context.Context, pp1 *connect.Request[v11.Ledger]) *LedgerServiceHandlerMockUpdateLedgerExpectation {
+func (mmUpdateLedger *mLedgerServiceClientMockUpdateLedger) When(ctx context.Context, pp1 *connect.Request[v11.Ledger]) *LedgerServiceClientMockUpdateLedgerExpectation {
 	if mmUpdateLedger.mock.funcUpdateLedger != nil {
-		mmUpdateLedger.mock.t.Fatalf("LedgerServiceHandlerMock.UpdateLedger mock is already set by Set")
+		mmUpdateLedger.mock.t.Fatalf("LedgerServiceClientMock.UpdateLedger mock is already set by Set")
 	}
 
-	expectation := &LedgerServiceHandlerMockUpdateLedgerExpectation{
+	expectation := &LedgerServiceClientMockUpdateLedgerExpectation{
 		mock:               mmUpdateLedger.mock,
-		params:             &LedgerServiceHandlerMockUpdateLedgerParams{ctx, pp1},
-		expectationOrigins: LedgerServiceHandlerMockUpdateLedgerExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &LedgerServiceClientMockUpdateLedgerParams{ctx, pp1},
+		expectationOrigins: LedgerServiceClientMockUpdateLedgerExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmUpdateLedger.expectations = append(mmUpdateLedger.expectations, expectation)
 	return expectation
 }
 
-// Then sets up LedgerServiceHandler.UpdateLedger return parameters for the expectation previously defined by the When method
-func (e *LedgerServiceHandlerMockUpdateLedgerExpectation) Then(pp2 *connect.Response[v11.Ledger], err error) *LedgerServiceHandlerMock {
-	e.results = &LedgerServiceHandlerMockUpdateLedgerResults{pp2, err}
+// Then sets up LedgerServiceClient.UpdateLedger return parameters for the expectation previously defined by the When method
+func (e *LedgerServiceClientMockUpdateLedgerExpectation) Then(pp2 *connect.Response[v11.Ledger], err error) *LedgerServiceClientMock {
+	e.results = &LedgerServiceClientMockUpdateLedgerResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times LedgerServiceHandler.UpdateLedger should be invoked
-func (mmUpdateLedger *mLedgerServiceHandlerMockUpdateLedger) Times(n uint64) *mLedgerServiceHandlerMockUpdateLedger {
+// Times sets number of times LedgerServiceClient.UpdateLedger should be invoked
+func (mmUpdateLedger *mLedgerServiceClientMockUpdateLedger) Times(n uint64) *mLedgerServiceClientMockUpdateLedger {
 	if n == 0 {
-		mmUpdateLedger.mock.t.Fatalf("Times of LedgerServiceHandlerMock.UpdateLedger mock can not be zero")
+		mmUpdateLedger.mock.t.Fatalf("Times of LedgerServiceClientMock.UpdateLedger mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmUpdateLedger.expectedInvocations, n)
 	mmUpdateLedger.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmUpdateLedger
 }
 
-func (mmUpdateLedger *mLedgerServiceHandlerMockUpdateLedger) invocationsDone() bool {
+func (mmUpdateLedger *mLedgerServiceClientMockUpdateLedger) invocationsDone() bool {
 	if len(mmUpdateLedger.expectations) == 0 && mmUpdateLedger.defaultExpectation == nil && mmUpdateLedger.mock.funcUpdateLedger == nil {
 		return true
 	}
@@ -3565,8 +3445,8 @@ func (mmUpdateLedger *mLedgerServiceHandlerMockUpdateLedger) invocationsDone() b
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// UpdateLedger implements mm_ledgerv1connect.LedgerServiceHandler
-func (mmUpdateLedger *LedgerServiceHandlerMock) UpdateLedger(ctx context.Context, pp1 *connect.Request[v11.Ledger]) (pp2 *connect.Response[v11.Ledger], err error) {
+// UpdateLedger implements mm_ledgerv1connect.LedgerServiceClient
+func (mmUpdateLedger *LedgerServiceClientMock) UpdateLedger(ctx context.Context, pp1 *connect.Request[v11.Ledger]) (pp2 *connect.Response[v11.Ledger], err error) {
 	mm_atomic.AddUint64(&mmUpdateLedger.beforeUpdateLedgerCounter, 1)
 	defer mm_atomic.AddUint64(&mmUpdateLedger.afterUpdateLedgerCounter, 1)
 
@@ -3576,7 +3456,7 @@ func (mmUpdateLedger *LedgerServiceHandlerMock) UpdateLedger(ctx context.Context
 		mmUpdateLedger.inspectFuncUpdateLedger(ctx, pp1)
 	}
 
-	mm_params := LedgerServiceHandlerMockUpdateLedgerParams{ctx, pp1}
+	mm_params := LedgerServiceClientMockUpdateLedgerParams{ctx, pp1}
 
 	// Record call args
 	mmUpdateLedger.UpdateLedgerMock.mutex.Lock()
@@ -3595,54 +3475,54 @@ func (mmUpdateLedger *LedgerServiceHandlerMock) UpdateLedger(ctx context.Context
 		mm_want := mmUpdateLedger.UpdateLedgerMock.defaultExpectation.params
 		mm_want_ptrs := mmUpdateLedger.UpdateLedgerMock.defaultExpectation.paramPtrs
 
-		mm_got := LedgerServiceHandlerMockUpdateLedgerParams{ctx, pp1}
+		mm_got := LedgerServiceClientMockUpdateLedgerParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmUpdateLedger.t.Errorf("LedgerServiceHandlerMock.UpdateLedger got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmUpdateLedger.t.Errorf("LedgerServiceClientMock.UpdateLedger got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmUpdateLedger.UpdateLedgerMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmUpdateLedger.t.Errorf("LedgerServiceHandlerMock.UpdateLedger got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmUpdateLedger.t.Errorf("LedgerServiceClientMock.UpdateLedger got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmUpdateLedger.UpdateLedgerMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmUpdateLedger.t.Errorf("LedgerServiceHandlerMock.UpdateLedger got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmUpdateLedger.t.Errorf("LedgerServiceClientMock.UpdateLedger got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmUpdateLedger.UpdateLedgerMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmUpdateLedger.UpdateLedgerMock.defaultExpectation.results
 		if mm_results == nil {
-			mmUpdateLedger.t.Fatal("No results are set for the LedgerServiceHandlerMock.UpdateLedger")
+			mmUpdateLedger.t.Fatal("No results are set for the LedgerServiceClientMock.UpdateLedger")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmUpdateLedger.funcUpdateLedger != nil {
 		return mmUpdateLedger.funcUpdateLedger(ctx, pp1)
 	}
-	mmUpdateLedger.t.Fatalf("Unexpected call to LedgerServiceHandlerMock.UpdateLedger. %v %v", ctx, pp1)
+	mmUpdateLedger.t.Fatalf("Unexpected call to LedgerServiceClientMock.UpdateLedger. %v %v", ctx, pp1)
 	return
 }
 
-// UpdateLedgerAfterCounter returns a count of finished LedgerServiceHandlerMock.UpdateLedger invocations
-func (mmUpdateLedger *LedgerServiceHandlerMock) UpdateLedgerAfterCounter() uint64 {
+// UpdateLedgerAfterCounter returns a count of finished LedgerServiceClientMock.UpdateLedger invocations
+func (mmUpdateLedger *LedgerServiceClientMock) UpdateLedgerAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmUpdateLedger.afterUpdateLedgerCounter)
 }
 
-// UpdateLedgerBeforeCounter returns a count of LedgerServiceHandlerMock.UpdateLedger invocations
-func (mmUpdateLedger *LedgerServiceHandlerMock) UpdateLedgerBeforeCounter() uint64 {
+// UpdateLedgerBeforeCounter returns a count of LedgerServiceClientMock.UpdateLedger invocations
+func (mmUpdateLedger *LedgerServiceClientMock) UpdateLedgerBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmUpdateLedger.beforeUpdateLedgerCounter)
 }
 
-// Calls returns a list of arguments used in each call to LedgerServiceHandlerMock.UpdateLedger.
+// Calls returns a list of arguments used in each call to LedgerServiceClientMock.UpdateLedger.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmUpdateLedger *mLedgerServiceHandlerMockUpdateLedger) Calls() []*LedgerServiceHandlerMockUpdateLedgerParams {
+func (mmUpdateLedger *mLedgerServiceClientMockUpdateLedger) Calls() []*LedgerServiceClientMockUpdateLedgerParams {
 	mmUpdateLedger.mutex.RLock()
 
-	argCopy := make([]*LedgerServiceHandlerMockUpdateLedgerParams, len(mmUpdateLedger.callArgs))
+	argCopy := make([]*LedgerServiceClientMockUpdateLedgerParams, len(mmUpdateLedger.callArgs))
 	copy(argCopy, mmUpdateLedger.callArgs)
 
 	mmUpdateLedger.mutex.RUnlock()
@@ -3652,7 +3532,7 @@ func (mmUpdateLedger *mLedgerServiceHandlerMockUpdateLedger) Calls() []*LedgerSe
 
 // MinimockUpdateLedgerDone returns true if the count of the UpdateLedger invocations corresponds
 // the number of defined expectations
-func (m *LedgerServiceHandlerMock) MinimockUpdateLedgerDone() bool {
+func (m *LedgerServiceClientMock) MinimockUpdateLedgerDone() bool {
 	if m.UpdateLedgerMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -3668,10 +3548,10 @@ func (m *LedgerServiceHandlerMock) MinimockUpdateLedgerDone() bool {
 }
 
 // MinimockUpdateLedgerInspect logs each unmet expectation
-func (m *LedgerServiceHandlerMock) MinimockUpdateLedgerInspect() {
+func (m *LedgerServiceClientMock) MinimockUpdateLedgerInspect() {
 	for _, e := range m.UpdateLedgerMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to LedgerServiceHandlerMock.UpdateLedger at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to LedgerServiceClientMock.UpdateLedger at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -3679,66 +3559,66 @@ func (m *LedgerServiceHandlerMock) MinimockUpdateLedgerInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.UpdateLedgerMock.defaultExpectation != nil && afterUpdateLedgerCounter < 1 {
 		if m.UpdateLedgerMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to LedgerServiceHandlerMock.UpdateLedger at\n%s", m.UpdateLedgerMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to LedgerServiceClientMock.UpdateLedger at\n%s", m.UpdateLedgerMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to LedgerServiceHandlerMock.UpdateLedger at\n%s with params: %#v", m.UpdateLedgerMock.defaultExpectation.expectationOrigins.origin, *m.UpdateLedgerMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to LedgerServiceClientMock.UpdateLedger at\n%s with params: %#v", m.UpdateLedgerMock.defaultExpectation.expectationOrigins.origin, *m.UpdateLedgerMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcUpdateLedger != nil && afterUpdateLedgerCounter < 1 {
-		m.t.Errorf("Expected call to LedgerServiceHandlerMock.UpdateLedger at\n%s", m.funcUpdateLedgerOrigin)
+		m.t.Errorf("Expected call to LedgerServiceClientMock.UpdateLedger at\n%s", m.funcUpdateLedgerOrigin)
 	}
 
 	if !m.UpdateLedgerMock.invocationsDone() && afterUpdateLedgerCounter > 0 {
-		m.t.Errorf("Expected %d calls to LedgerServiceHandlerMock.UpdateLedger at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to LedgerServiceClientMock.UpdateLedger at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.UpdateLedgerMock.expectedInvocations), m.UpdateLedgerMock.expectedInvocationsOrigin, afterUpdateLedgerCounter)
 	}
 }
 
-type mLedgerServiceHandlerMockUpdateTransaction struct {
+type mLedgerServiceClientMockUpdateTransaction struct {
 	optional           bool
-	mock               *LedgerServiceHandlerMock
-	defaultExpectation *LedgerServiceHandlerMockUpdateTransactionExpectation
-	expectations       []*LedgerServiceHandlerMockUpdateTransactionExpectation
+	mock               *LedgerServiceClientMock
+	defaultExpectation *LedgerServiceClientMockUpdateTransactionExpectation
+	expectations       []*LedgerServiceClientMockUpdateTransactionExpectation
 
-	callArgs []*LedgerServiceHandlerMockUpdateTransactionParams
+	callArgs []*LedgerServiceClientMockUpdateTransactionParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// LedgerServiceHandlerMockUpdateTransactionExpectation specifies expectation struct of the LedgerServiceHandler.UpdateTransaction
-type LedgerServiceHandlerMockUpdateTransactionExpectation struct {
-	mock               *LedgerServiceHandlerMock
-	params             *LedgerServiceHandlerMockUpdateTransactionParams
-	paramPtrs          *LedgerServiceHandlerMockUpdateTransactionParamPtrs
-	expectationOrigins LedgerServiceHandlerMockUpdateTransactionExpectationOrigins
-	results            *LedgerServiceHandlerMockUpdateTransactionResults
+// LedgerServiceClientMockUpdateTransactionExpectation specifies expectation struct of the LedgerServiceClient.UpdateTransaction
+type LedgerServiceClientMockUpdateTransactionExpectation struct {
+	mock               *LedgerServiceClientMock
+	params             *LedgerServiceClientMockUpdateTransactionParams
+	paramPtrs          *LedgerServiceClientMockUpdateTransactionParamPtrs
+	expectationOrigins LedgerServiceClientMockUpdateTransactionExpectationOrigins
+	results            *LedgerServiceClientMockUpdateTransactionResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// LedgerServiceHandlerMockUpdateTransactionParams contains parameters of the LedgerServiceHandler.UpdateTransaction
-type LedgerServiceHandlerMockUpdateTransactionParams struct {
+// LedgerServiceClientMockUpdateTransactionParams contains parameters of the LedgerServiceClient.UpdateTransaction
+type LedgerServiceClientMockUpdateTransactionParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v11.Transaction]
 }
 
-// LedgerServiceHandlerMockUpdateTransactionParamPtrs contains pointers to parameters of the LedgerServiceHandler.UpdateTransaction
-type LedgerServiceHandlerMockUpdateTransactionParamPtrs struct {
+// LedgerServiceClientMockUpdateTransactionParamPtrs contains pointers to parameters of the LedgerServiceClient.UpdateTransaction
+type LedgerServiceClientMockUpdateTransactionParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v11.Transaction]
 }
 
-// LedgerServiceHandlerMockUpdateTransactionResults contains results of the LedgerServiceHandler.UpdateTransaction
-type LedgerServiceHandlerMockUpdateTransactionResults struct {
+// LedgerServiceClientMockUpdateTransactionResults contains results of the LedgerServiceClient.UpdateTransaction
+type LedgerServiceClientMockUpdateTransactionResults struct {
 	pp2 *connect.Response[v11.Transaction]
 	err error
 }
 
-// LedgerServiceHandlerMockUpdateTransactionOrigins contains origins of expectations of the LedgerServiceHandler.UpdateTransaction
-type LedgerServiceHandlerMockUpdateTransactionExpectationOrigins struct {
+// LedgerServiceClientMockUpdateTransactionOrigins contains origins of expectations of the LedgerServiceClient.UpdateTransaction
+type LedgerServiceClientMockUpdateTransactionExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -3749,26 +3629,26 @@ type LedgerServiceHandlerMockUpdateTransactionExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmUpdateTransaction *mLedgerServiceHandlerMockUpdateTransaction) Optional() *mLedgerServiceHandlerMockUpdateTransaction {
+func (mmUpdateTransaction *mLedgerServiceClientMockUpdateTransaction) Optional() *mLedgerServiceClientMockUpdateTransaction {
 	mmUpdateTransaction.optional = true
 	return mmUpdateTransaction
 }
 
-// Expect sets up expected params for LedgerServiceHandler.UpdateTransaction
-func (mmUpdateTransaction *mLedgerServiceHandlerMockUpdateTransaction) Expect(ctx context.Context, pp1 *connect.Request[v11.Transaction]) *mLedgerServiceHandlerMockUpdateTransaction {
+// Expect sets up expected params for LedgerServiceClient.UpdateTransaction
+func (mmUpdateTransaction *mLedgerServiceClientMockUpdateTransaction) Expect(ctx context.Context, pp1 *connect.Request[v11.Transaction]) *mLedgerServiceClientMockUpdateTransaction {
 	if mmUpdateTransaction.mock.funcUpdateTransaction != nil {
-		mmUpdateTransaction.mock.t.Fatalf("LedgerServiceHandlerMock.UpdateTransaction mock is already set by Set")
+		mmUpdateTransaction.mock.t.Fatalf("LedgerServiceClientMock.UpdateTransaction mock is already set by Set")
 	}
 
 	if mmUpdateTransaction.defaultExpectation == nil {
-		mmUpdateTransaction.defaultExpectation = &LedgerServiceHandlerMockUpdateTransactionExpectation{}
+		mmUpdateTransaction.defaultExpectation = &LedgerServiceClientMockUpdateTransactionExpectation{}
 	}
 
 	if mmUpdateTransaction.defaultExpectation.paramPtrs != nil {
-		mmUpdateTransaction.mock.t.Fatalf("LedgerServiceHandlerMock.UpdateTransaction mock is already set by ExpectParams functions")
+		mmUpdateTransaction.mock.t.Fatalf("LedgerServiceClientMock.UpdateTransaction mock is already set by ExpectParams functions")
 	}
 
-	mmUpdateTransaction.defaultExpectation.params = &LedgerServiceHandlerMockUpdateTransactionParams{ctx, pp1}
+	mmUpdateTransaction.defaultExpectation.params = &LedgerServiceClientMockUpdateTransactionParams{ctx, pp1}
 	mmUpdateTransaction.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmUpdateTransaction.expectations {
 		if minimock.Equal(e.params, mmUpdateTransaction.defaultExpectation.params) {
@@ -3779,22 +3659,22 @@ func (mmUpdateTransaction *mLedgerServiceHandlerMockUpdateTransaction) Expect(ct
 	return mmUpdateTransaction
 }
 
-// ExpectCtxParam1 sets up expected param ctx for LedgerServiceHandler.UpdateTransaction
-func (mmUpdateTransaction *mLedgerServiceHandlerMockUpdateTransaction) ExpectCtxParam1(ctx context.Context) *mLedgerServiceHandlerMockUpdateTransaction {
+// ExpectCtxParam1 sets up expected param ctx for LedgerServiceClient.UpdateTransaction
+func (mmUpdateTransaction *mLedgerServiceClientMockUpdateTransaction) ExpectCtxParam1(ctx context.Context) *mLedgerServiceClientMockUpdateTransaction {
 	if mmUpdateTransaction.mock.funcUpdateTransaction != nil {
-		mmUpdateTransaction.mock.t.Fatalf("LedgerServiceHandlerMock.UpdateTransaction mock is already set by Set")
+		mmUpdateTransaction.mock.t.Fatalf("LedgerServiceClientMock.UpdateTransaction mock is already set by Set")
 	}
 
 	if mmUpdateTransaction.defaultExpectation == nil {
-		mmUpdateTransaction.defaultExpectation = &LedgerServiceHandlerMockUpdateTransactionExpectation{}
+		mmUpdateTransaction.defaultExpectation = &LedgerServiceClientMockUpdateTransactionExpectation{}
 	}
 
 	if mmUpdateTransaction.defaultExpectation.params != nil {
-		mmUpdateTransaction.mock.t.Fatalf("LedgerServiceHandlerMock.UpdateTransaction mock is already set by Expect")
+		mmUpdateTransaction.mock.t.Fatalf("LedgerServiceClientMock.UpdateTransaction mock is already set by Expect")
 	}
 
 	if mmUpdateTransaction.defaultExpectation.paramPtrs == nil {
-		mmUpdateTransaction.defaultExpectation.paramPtrs = &LedgerServiceHandlerMockUpdateTransactionParamPtrs{}
+		mmUpdateTransaction.defaultExpectation.paramPtrs = &LedgerServiceClientMockUpdateTransactionParamPtrs{}
 	}
 	mmUpdateTransaction.defaultExpectation.paramPtrs.ctx = &ctx
 	mmUpdateTransaction.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -3802,22 +3682,22 @@ func (mmUpdateTransaction *mLedgerServiceHandlerMockUpdateTransaction) ExpectCtx
 	return mmUpdateTransaction
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for LedgerServiceHandler.UpdateTransaction
-func (mmUpdateTransaction *mLedgerServiceHandlerMockUpdateTransaction) ExpectPp1Param2(pp1 *connect.Request[v11.Transaction]) *mLedgerServiceHandlerMockUpdateTransaction {
+// ExpectPp1Param2 sets up expected param pp1 for LedgerServiceClient.UpdateTransaction
+func (mmUpdateTransaction *mLedgerServiceClientMockUpdateTransaction) ExpectPp1Param2(pp1 *connect.Request[v11.Transaction]) *mLedgerServiceClientMockUpdateTransaction {
 	if mmUpdateTransaction.mock.funcUpdateTransaction != nil {
-		mmUpdateTransaction.mock.t.Fatalf("LedgerServiceHandlerMock.UpdateTransaction mock is already set by Set")
+		mmUpdateTransaction.mock.t.Fatalf("LedgerServiceClientMock.UpdateTransaction mock is already set by Set")
 	}
 
 	if mmUpdateTransaction.defaultExpectation == nil {
-		mmUpdateTransaction.defaultExpectation = &LedgerServiceHandlerMockUpdateTransactionExpectation{}
+		mmUpdateTransaction.defaultExpectation = &LedgerServiceClientMockUpdateTransactionExpectation{}
 	}
 
 	if mmUpdateTransaction.defaultExpectation.params != nil {
-		mmUpdateTransaction.mock.t.Fatalf("LedgerServiceHandlerMock.UpdateTransaction mock is already set by Expect")
+		mmUpdateTransaction.mock.t.Fatalf("LedgerServiceClientMock.UpdateTransaction mock is already set by Expect")
 	}
 
 	if mmUpdateTransaction.defaultExpectation.paramPtrs == nil {
-		mmUpdateTransaction.defaultExpectation.paramPtrs = &LedgerServiceHandlerMockUpdateTransactionParamPtrs{}
+		mmUpdateTransaction.defaultExpectation.paramPtrs = &LedgerServiceClientMockUpdateTransactionParamPtrs{}
 	}
 	mmUpdateTransaction.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmUpdateTransaction.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -3825,10 +3705,10 @@ func (mmUpdateTransaction *mLedgerServiceHandlerMockUpdateTransaction) ExpectPp1
 	return mmUpdateTransaction
 }
 
-// Inspect accepts an inspector function that has same arguments as the LedgerServiceHandler.UpdateTransaction
-func (mmUpdateTransaction *mLedgerServiceHandlerMockUpdateTransaction) Inspect(f func(ctx context.Context, pp1 *connect.Request[v11.Transaction])) *mLedgerServiceHandlerMockUpdateTransaction {
+// Inspect accepts an inspector function that has same arguments as the LedgerServiceClient.UpdateTransaction
+func (mmUpdateTransaction *mLedgerServiceClientMockUpdateTransaction) Inspect(f func(ctx context.Context, pp1 *connect.Request[v11.Transaction])) *mLedgerServiceClientMockUpdateTransaction {
 	if mmUpdateTransaction.mock.inspectFuncUpdateTransaction != nil {
-		mmUpdateTransaction.mock.t.Fatalf("Inspect function is already set for LedgerServiceHandlerMock.UpdateTransaction")
+		mmUpdateTransaction.mock.t.Fatalf("Inspect function is already set for LedgerServiceClientMock.UpdateTransaction")
 	}
 
 	mmUpdateTransaction.mock.inspectFuncUpdateTransaction = f
@@ -3836,28 +3716,28 @@ func (mmUpdateTransaction *mLedgerServiceHandlerMockUpdateTransaction) Inspect(f
 	return mmUpdateTransaction
 }
 
-// Return sets up results that will be returned by LedgerServiceHandler.UpdateTransaction
-func (mmUpdateTransaction *mLedgerServiceHandlerMockUpdateTransaction) Return(pp2 *connect.Response[v11.Transaction], err error) *LedgerServiceHandlerMock {
+// Return sets up results that will be returned by LedgerServiceClient.UpdateTransaction
+func (mmUpdateTransaction *mLedgerServiceClientMockUpdateTransaction) Return(pp2 *connect.Response[v11.Transaction], err error) *LedgerServiceClientMock {
 	if mmUpdateTransaction.mock.funcUpdateTransaction != nil {
-		mmUpdateTransaction.mock.t.Fatalf("LedgerServiceHandlerMock.UpdateTransaction mock is already set by Set")
+		mmUpdateTransaction.mock.t.Fatalf("LedgerServiceClientMock.UpdateTransaction mock is already set by Set")
 	}
 
 	if mmUpdateTransaction.defaultExpectation == nil {
-		mmUpdateTransaction.defaultExpectation = &LedgerServiceHandlerMockUpdateTransactionExpectation{mock: mmUpdateTransaction.mock}
+		mmUpdateTransaction.defaultExpectation = &LedgerServiceClientMockUpdateTransactionExpectation{mock: mmUpdateTransaction.mock}
 	}
-	mmUpdateTransaction.defaultExpectation.results = &LedgerServiceHandlerMockUpdateTransactionResults{pp2, err}
+	mmUpdateTransaction.defaultExpectation.results = &LedgerServiceClientMockUpdateTransactionResults{pp2, err}
 	mmUpdateTransaction.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmUpdateTransaction.mock
 }
 
-// Set uses given function f to mock the LedgerServiceHandler.UpdateTransaction method
-func (mmUpdateTransaction *mLedgerServiceHandlerMockUpdateTransaction) Set(f func(ctx context.Context, pp1 *connect.Request[v11.Transaction]) (pp2 *connect.Response[v11.Transaction], err error)) *LedgerServiceHandlerMock {
+// Set uses given function f to mock the LedgerServiceClient.UpdateTransaction method
+func (mmUpdateTransaction *mLedgerServiceClientMockUpdateTransaction) Set(f func(ctx context.Context, pp1 *connect.Request[v11.Transaction]) (pp2 *connect.Response[v11.Transaction], err error)) *LedgerServiceClientMock {
 	if mmUpdateTransaction.defaultExpectation != nil {
-		mmUpdateTransaction.mock.t.Fatalf("Default expectation is already set for the LedgerServiceHandler.UpdateTransaction method")
+		mmUpdateTransaction.mock.t.Fatalf("Default expectation is already set for the LedgerServiceClient.UpdateTransaction method")
 	}
 
 	if len(mmUpdateTransaction.expectations) > 0 {
-		mmUpdateTransaction.mock.t.Fatalf("Some expectations are already set for the LedgerServiceHandler.UpdateTransaction method")
+		mmUpdateTransaction.mock.t.Fatalf("Some expectations are already set for the LedgerServiceClient.UpdateTransaction method")
 	}
 
 	mmUpdateTransaction.mock.funcUpdateTransaction = f
@@ -3865,39 +3745,39 @@ func (mmUpdateTransaction *mLedgerServiceHandlerMockUpdateTransaction) Set(f fun
 	return mmUpdateTransaction.mock
 }
 
-// When sets expectation for the LedgerServiceHandler.UpdateTransaction which will trigger the result defined by the following
+// When sets expectation for the LedgerServiceClient.UpdateTransaction which will trigger the result defined by the following
 // Then helper
-func (mmUpdateTransaction *mLedgerServiceHandlerMockUpdateTransaction) When(ctx context.Context, pp1 *connect.Request[v11.Transaction]) *LedgerServiceHandlerMockUpdateTransactionExpectation {
+func (mmUpdateTransaction *mLedgerServiceClientMockUpdateTransaction) When(ctx context.Context, pp1 *connect.Request[v11.Transaction]) *LedgerServiceClientMockUpdateTransactionExpectation {
 	if mmUpdateTransaction.mock.funcUpdateTransaction != nil {
-		mmUpdateTransaction.mock.t.Fatalf("LedgerServiceHandlerMock.UpdateTransaction mock is already set by Set")
+		mmUpdateTransaction.mock.t.Fatalf("LedgerServiceClientMock.UpdateTransaction mock is already set by Set")
 	}
 
-	expectation := &LedgerServiceHandlerMockUpdateTransactionExpectation{
+	expectation := &LedgerServiceClientMockUpdateTransactionExpectation{
 		mock:               mmUpdateTransaction.mock,
-		params:             &LedgerServiceHandlerMockUpdateTransactionParams{ctx, pp1},
-		expectationOrigins: LedgerServiceHandlerMockUpdateTransactionExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &LedgerServiceClientMockUpdateTransactionParams{ctx, pp1},
+		expectationOrigins: LedgerServiceClientMockUpdateTransactionExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmUpdateTransaction.expectations = append(mmUpdateTransaction.expectations, expectation)
 	return expectation
 }
 
-// Then sets up LedgerServiceHandler.UpdateTransaction return parameters for the expectation previously defined by the When method
-func (e *LedgerServiceHandlerMockUpdateTransactionExpectation) Then(pp2 *connect.Response[v11.Transaction], err error) *LedgerServiceHandlerMock {
-	e.results = &LedgerServiceHandlerMockUpdateTransactionResults{pp2, err}
+// Then sets up LedgerServiceClient.UpdateTransaction return parameters for the expectation previously defined by the When method
+func (e *LedgerServiceClientMockUpdateTransactionExpectation) Then(pp2 *connect.Response[v11.Transaction], err error) *LedgerServiceClientMock {
+	e.results = &LedgerServiceClientMockUpdateTransactionResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times LedgerServiceHandler.UpdateTransaction should be invoked
-func (mmUpdateTransaction *mLedgerServiceHandlerMockUpdateTransaction) Times(n uint64) *mLedgerServiceHandlerMockUpdateTransaction {
+// Times sets number of times LedgerServiceClient.UpdateTransaction should be invoked
+func (mmUpdateTransaction *mLedgerServiceClientMockUpdateTransaction) Times(n uint64) *mLedgerServiceClientMockUpdateTransaction {
 	if n == 0 {
-		mmUpdateTransaction.mock.t.Fatalf("Times of LedgerServiceHandlerMock.UpdateTransaction mock can not be zero")
+		mmUpdateTransaction.mock.t.Fatalf("Times of LedgerServiceClientMock.UpdateTransaction mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmUpdateTransaction.expectedInvocations, n)
 	mmUpdateTransaction.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmUpdateTransaction
 }
 
-func (mmUpdateTransaction *mLedgerServiceHandlerMockUpdateTransaction) invocationsDone() bool {
+func (mmUpdateTransaction *mLedgerServiceClientMockUpdateTransaction) invocationsDone() bool {
 	if len(mmUpdateTransaction.expectations) == 0 && mmUpdateTransaction.defaultExpectation == nil && mmUpdateTransaction.mock.funcUpdateTransaction == nil {
 		return true
 	}
@@ -3908,8 +3788,8 @@ func (mmUpdateTransaction *mLedgerServiceHandlerMockUpdateTransaction) invocatio
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// UpdateTransaction implements mm_ledgerv1connect.LedgerServiceHandler
-func (mmUpdateTransaction *LedgerServiceHandlerMock) UpdateTransaction(ctx context.Context, pp1 *connect.Request[v11.Transaction]) (pp2 *connect.Response[v11.Transaction], err error) {
+// UpdateTransaction implements mm_ledgerv1connect.LedgerServiceClient
+func (mmUpdateTransaction *LedgerServiceClientMock) UpdateTransaction(ctx context.Context, pp1 *connect.Request[v11.Transaction]) (pp2 *connect.Response[v11.Transaction], err error) {
 	mm_atomic.AddUint64(&mmUpdateTransaction.beforeUpdateTransactionCounter, 1)
 	defer mm_atomic.AddUint64(&mmUpdateTransaction.afterUpdateTransactionCounter, 1)
 
@@ -3919,7 +3799,7 @@ func (mmUpdateTransaction *LedgerServiceHandlerMock) UpdateTransaction(ctx conte
 		mmUpdateTransaction.inspectFuncUpdateTransaction(ctx, pp1)
 	}
 
-	mm_params := LedgerServiceHandlerMockUpdateTransactionParams{ctx, pp1}
+	mm_params := LedgerServiceClientMockUpdateTransactionParams{ctx, pp1}
 
 	// Record call args
 	mmUpdateTransaction.UpdateTransactionMock.mutex.Lock()
@@ -3938,54 +3818,54 @@ func (mmUpdateTransaction *LedgerServiceHandlerMock) UpdateTransaction(ctx conte
 		mm_want := mmUpdateTransaction.UpdateTransactionMock.defaultExpectation.params
 		mm_want_ptrs := mmUpdateTransaction.UpdateTransactionMock.defaultExpectation.paramPtrs
 
-		mm_got := LedgerServiceHandlerMockUpdateTransactionParams{ctx, pp1}
+		mm_got := LedgerServiceClientMockUpdateTransactionParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmUpdateTransaction.t.Errorf("LedgerServiceHandlerMock.UpdateTransaction got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmUpdateTransaction.t.Errorf("LedgerServiceClientMock.UpdateTransaction got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmUpdateTransaction.UpdateTransactionMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmUpdateTransaction.t.Errorf("LedgerServiceHandlerMock.UpdateTransaction got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmUpdateTransaction.t.Errorf("LedgerServiceClientMock.UpdateTransaction got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmUpdateTransaction.UpdateTransactionMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmUpdateTransaction.t.Errorf("LedgerServiceHandlerMock.UpdateTransaction got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmUpdateTransaction.t.Errorf("LedgerServiceClientMock.UpdateTransaction got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmUpdateTransaction.UpdateTransactionMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmUpdateTransaction.UpdateTransactionMock.defaultExpectation.results
 		if mm_results == nil {
-			mmUpdateTransaction.t.Fatal("No results are set for the LedgerServiceHandlerMock.UpdateTransaction")
+			mmUpdateTransaction.t.Fatal("No results are set for the LedgerServiceClientMock.UpdateTransaction")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmUpdateTransaction.funcUpdateTransaction != nil {
 		return mmUpdateTransaction.funcUpdateTransaction(ctx, pp1)
 	}
-	mmUpdateTransaction.t.Fatalf("Unexpected call to LedgerServiceHandlerMock.UpdateTransaction. %v %v", ctx, pp1)
+	mmUpdateTransaction.t.Fatalf("Unexpected call to LedgerServiceClientMock.UpdateTransaction. %v %v", ctx, pp1)
 	return
 }
 
-// UpdateTransactionAfterCounter returns a count of finished LedgerServiceHandlerMock.UpdateTransaction invocations
-func (mmUpdateTransaction *LedgerServiceHandlerMock) UpdateTransactionAfterCounter() uint64 {
+// UpdateTransactionAfterCounter returns a count of finished LedgerServiceClientMock.UpdateTransaction invocations
+func (mmUpdateTransaction *LedgerServiceClientMock) UpdateTransactionAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmUpdateTransaction.afterUpdateTransactionCounter)
 }
 
-// UpdateTransactionBeforeCounter returns a count of LedgerServiceHandlerMock.UpdateTransaction invocations
-func (mmUpdateTransaction *LedgerServiceHandlerMock) UpdateTransactionBeforeCounter() uint64 {
+// UpdateTransactionBeforeCounter returns a count of LedgerServiceClientMock.UpdateTransaction invocations
+func (mmUpdateTransaction *LedgerServiceClientMock) UpdateTransactionBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmUpdateTransaction.beforeUpdateTransactionCounter)
 }
 
-// Calls returns a list of arguments used in each call to LedgerServiceHandlerMock.UpdateTransaction.
+// Calls returns a list of arguments used in each call to LedgerServiceClientMock.UpdateTransaction.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmUpdateTransaction *mLedgerServiceHandlerMockUpdateTransaction) Calls() []*LedgerServiceHandlerMockUpdateTransactionParams {
+func (mmUpdateTransaction *mLedgerServiceClientMockUpdateTransaction) Calls() []*LedgerServiceClientMockUpdateTransactionParams {
 	mmUpdateTransaction.mutex.RLock()
 
-	argCopy := make([]*LedgerServiceHandlerMockUpdateTransactionParams, len(mmUpdateTransaction.callArgs))
+	argCopy := make([]*LedgerServiceClientMockUpdateTransactionParams, len(mmUpdateTransaction.callArgs))
 	copy(argCopy, mmUpdateTransaction.callArgs)
 
 	mmUpdateTransaction.mutex.RUnlock()
@@ -3995,7 +3875,7 @@ func (mmUpdateTransaction *mLedgerServiceHandlerMockUpdateTransaction) Calls() [
 
 // MinimockUpdateTransactionDone returns true if the count of the UpdateTransaction invocations corresponds
 // the number of defined expectations
-func (m *LedgerServiceHandlerMock) MinimockUpdateTransactionDone() bool {
+func (m *LedgerServiceClientMock) MinimockUpdateTransactionDone() bool {
 	if m.UpdateTransactionMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -4011,10 +3891,10 @@ func (m *LedgerServiceHandlerMock) MinimockUpdateTransactionDone() bool {
 }
 
 // MinimockUpdateTransactionInspect logs each unmet expectation
-func (m *LedgerServiceHandlerMock) MinimockUpdateTransactionInspect() {
+func (m *LedgerServiceClientMock) MinimockUpdateTransactionInspect() {
 	for _, e := range m.UpdateTransactionMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to LedgerServiceHandlerMock.UpdateTransaction at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to LedgerServiceClientMock.UpdateTransaction at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -4022,24 +3902,24 @@ func (m *LedgerServiceHandlerMock) MinimockUpdateTransactionInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.UpdateTransactionMock.defaultExpectation != nil && afterUpdateTransactionCounter < 1 {
 		if m.UpdateTransactionMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to LedgerServiceHandlerMock.UpdateTransaction at\n%s", m.UpdateTransactionMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to LedgerServiceClientMock.UpdateTransaction at\n%s", m.UpdateTransactionMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to LedgerServiceHandlerMock.UpdateTransaction at\n%s with params: %#v", m.UpdateTransactionMock.defaultExpectation.expectationOrigins.origin, *m.UpdateTransactionMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to LedgerServiceClientMock.UpdateTransaction at\n%s with params: %#v", m.UpdateTransactionMock.defaultExpectation.expectationOrigins.origin, *m.UpdateTransactionMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcUpdateTransaction != nil && afterUpdateTransactionCounter < 1 {
-		m.t.Errorf("Expected call to LedgerServiceHandlerMock.UpdateTransaction at\n%s", m.funcUpdateTransactionOrigin)
+		m.t.Errorf("Expected call to LedgerServiceClientMock.UpdateTransaction at\n%s", m.funcUpdateTransactionOrigin)
 	}
 
 	if !m.UpdateTransactionMock.invocationsDone() && afterUpdateTransactionCounter > 0 {
-		m.t.Errorf("Expected %d calls to LedgerServiceHandlerMock.UpdateTransaction at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to LedgerServiceClientMock.UpdateTransaction at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.UpdateTransactionMock.expectedInvocations), m.UpdateTransactionMock.expectedInvocationsOrigin, afterUpdateTransactionCounter)
 	}
 }
 
 // MinimockFinish checks that all mocked methods have been called the expected number of times
-func (m *LedgerServiceHandlerMock) MinimockFinish() {
+func (m *LedgerServiceClientMock) MinimockFinish() {
 	m.finishOnce.Do(func() {
 		if !m.minimockDone() {
 			m.MinimockCreateAccountInspect()
@@ -4068,7 +3948,7 @@ func (m *LedgerServiceHandlerMock) MinimockFinish() {
 }
 
 // MinimockWait waits for all mocked methods to be called the expected number of times
-func (m *LedgerServiceHandlerMock) MinimockWait(timeout mm_time.Duration) {
+func (m *LedgerServiceClientMock) MinimockWait(timeout mm_time.Duration) {
 	timeoutCh := mm_time.After(timeout)
 	for {
 		if m.minimockDone() {
@@ -4083,7 +3963,7 @@ func (m *LedgerServiceHandlerMock) MinimockWait(timeout mm_time.Duration) {
 	}
 }
 
-func (m *LedgerServiceHandlerMock) minimockDone() bool {
+func (m *LedgerServiceClientMock) minimockDone() bool {
 	done := true
 	return done &&
 		m.MinimockCreateAccountDone() &&

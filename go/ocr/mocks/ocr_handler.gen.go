@@ -2,7 +2,7 @@
 
 package mocks
 
-//go:generate minimock -i buf.build/gen/go/antinvestor/ocr/connectrpc/go/ocr/v1/ocrv1connect.OCRServiceHandler -o ocr_handler.gen.go -n OCRServiceHandlerMock -p mocks
+//go:generate minimock -i buf.build/gen/go/antinvestor/ocr/connectrpc/go/ocr/v1/ocrv1connect.OCRServiceClient -o ocr_handler.gen.go -n OCRServiceClientMock -p mocks
 
 import (
 	context "context"
@@ -16,8 +16,8 @@ import (
 	"github.com/gojuno/minimock/v3"
 )
 
-// OCRServiceHandlerMock implements mm_ocrv1connect.OCRServiceHandler
-type OCRServiceHandlerMock struct {
+// OCRServiceClientMock implements mm_ocrv1connect.OCRServiceClient
+type OCRServiceClientMock struct {
 	t          minimock.Tester
 	finishOnce sync.Once
 
@@ -26,79 +26,79 @@ type OCRServiceHandlerMock struct {
 	inspectFuncRecognize   func(ctx context.Context, pp1 *connect.Request[v1.RecognizeRequest])
 	afterRecognizeCounter  uint64
 	beforeRecognizeCounter uint64
-	RecognizeMock          mOCRServiceHandlerMockRecognize
+	RecognizeMock          mOCRServiceClientMockRecognize
 
 	funcStatus          func(ctx context.Context, pp1 *connect.Request[v11.StatusRequest]) (pp2 *connect.Response[v1.StatusResponse], err error)
 	funcStatusOrigin    string
 	inspectFuncStatus   func(ctx context.Context, pp1 *connect.Request[v11.StatusRequest])
 	afterStatusCounter  uint64
 	beforeStatusCounter uint64
-	StatusMock          mOCRServiceHandlerMockStatus
+	StatusMock          mOCRServiceClientMockStatus
 }
 
-// NewOCRServiceHandlerMock returns a mock for mm_ocrv1connect.OCRServiceHandler
-func NewOCRServiceHandlerMock(t minimock.Tester) *OCRServiceHandlerMock {
-	m := &OCRServiceHandlerMock{t: t}
+// NewOCRServiceClientMock returns a mock for mm_ocrv1connect.OCRServiceClient
+func NewOCRServiceClientMock(t minimock.Tester) *OCRServiceClientMock {
+	m := &OCRServiceClientMock{t: t}
 
 	if controller, ok := t.(minimock.MockController); ok {
 		controller.RegisterMocker(m)
 	}
 
-	m.RecognizeMock = mOCRServiceHandlerMockRecognize{mock: m}
-	m.RecognizeMock.callArgs = []*OCRServiceHandlerMockRecognizeParams{}
+	m.RecognizeMock = mOCRServiceClientMockRecognize{mock: m}
+	m.RecognizeMock.callArgs = []*OCRServiceClientMockRecognizeParams{}
 
-	m.StatusMock = mOCRServiceHandlerMockStatus{mock: m}
-	m.StatusMock.callArgs = []*OCRServiceHandlerMockStatusParams{}
+	m.StatusMock = mOCRServiceClientMockStatus{mock: m}
+	m.StatusMock.callArgs = []*OCRServiceClientMockStatusParams{}
 
 	t.Cleanup(m.MinimockFinish)
 
 	return m
 }
 
-type mOCRServiceHandlerMockRecognize struct {
+type mOCRServiceClientMockRecognize struct {
 	optional           bool
-	mock               *OCRServiceHandlerMock
-	defaultExpectation *OCRServiceHandlerMockRecognizeExpectation
-	expectations       []*OCRServiceHandlerMockRecognizeExpectation
+	mock               *OCRServiceClientMock
+	defaultExpectation *OCRServiceClientMockRecognizeExpectation
+	expectations       []*OCRServiceClientMockRecognizeExpectation
 
-	callArgs []*OCRServiceHandlerMockRecognizeParams
+	callArgs []*OCRServiceClientMockRecognizeParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// OCRServiceHandlerMockRecognizeExpectation specifies expectation struct of the OCRServiceHandler.Recognize
-type OCRServiceHandlerMockRecognizeExpectation struct {
-	mock               *OCRServiceHandlerMock
-	params             *OCRServiceHandlerMockRecognizeParams
-	paramPtrs          *OCRServiceHandlerMockRecognizeParamPtrs
-	expectationOrigins OCRServiceHandlerMockRecognizeExpectationOrigins
-	results            *OCRServiceHandlerMockRecognizeResults
+// OCRServiceClientMockRecognizeExpectation specifies expectation struct of the OCRServiceClient.Recognize
+type OCRServiceClientMockRecognizeExpectation struct {
+	mock               *OCRServiceClientMock
+	params             *OCRServiceClientMockRecognizeParams
+	paramPtrs          *OCRServiceClientMockRecognizeParamPtrs
+	expectationOrigins OCRServiceClientMockRecognizeExpectationOrigins
+	results            *OCRServiceClientMockRecognizeResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// OCRServiceHandlerMockRecognizeParams contains parameters of the OCRServiceHandler.Recognize
-type OCRServiceHandlerMockRecognizeParams struct {
+// OCRServiceClientMockRecognizeParams contains parameters of the OCRServiceClient.Recognize
+type OCRServiceClientMockRecognizeParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.RecognizeRequest]
 }
 
-// OCRServiceHandlerMockRecognizeParamPtrs contains pointers to parameters of the OCRServiceHandler.Recognize
-type OCRServiceHandlerMockRecognizeParamPtrs struct {
+// OCRServiceClientMockRecognizeParamPtrs contains pointers to parameters of the OCRServiceClient.Recognize
+type OCRServiceClientMockRecognizeParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.RecognizeRequest]
 }
 
-// OCRServiceHandlerMockRecognizeResults contains results of the OCRServiceHandler.Recognize
-type OCRServiceHandlerMockRecognizeResults struct {
+// OCRServiceClientMockRecognizeResults contains results of the OCRServiceClient.Recognize
+type OCRServiceClientMockRecognizeResults struct {
 	pp2 *connect.Response[v1.RecognizeResponse]
 	err error
 }
 
-// OCRServiceHandlerMockRecognizeOrigins contains origins of expectations of the OCRServiceHandler.Recognize
-type OCRServiceHandlerMockRecognizeExpectationOrigins struct {
+// OCRServiceClientMockRecognizeOrigins contains origins of expectations of the OCRServiceClient.Recognize
+type OCRServiceClientMockRecognizeExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -109,26 +109,26 @@ type OCRServiceHandlerMockRecognizeExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmRecognize *mOCRServiceHandlerMockRecognize) Optional() *mOCRServiceHandlerMockRecognize {
+func (mmRecognize *mOCRServiceClientMockRecognize) Optional() *mOCRServiceClientMockRecognize {
 	mmRecognize.optional = true
 	return mmRecognize
 }
 
-// Expect sets up expected params for OCRServiceHandler.Recognize
-func (mmRecognize *mOCRServiceHandlerMockRecognize) Expect(ctx context.Context, pp1 *connect.Request[v1.RecognizeRequest]) *mOCRServiceHandlerMockRecognize {
+// Expect sets up expected params for OCRServiceClient.Recognize
+func (mmRecognize *mOCRServiceClientMockRecognize) Expect(ctx context.Context, pp1 *connect.Request[v1.RecognizeRequest]) *mOCRServiceClientMockRecognize {
 	if mmRecognize.mock.funcRecognize != nil {
-		mmRecognize.mock.t.Fatalf("OCRServiceHandlerMock.Recognize mock is already set by Set")
+		mmRecognize.mock.t.Fatalf("OCRServiceClientMock.Recognize mock is already set by Set")
 	}
 
 	if mmRecognize.defaultExpectation == nil {
-		mmRecognize.defaultExpectation = &OCRServiceHandlerMockRecognizeExpectation{}
+		mmRecognize.defaultExpectation = &OCRServiceClientMockRecognizeExpectation{}
 	}
 
 	if mmRecognize.defaultExpectation.paramPtrs != nil {
-		mmRecognize.mock.t.Fatalf("OCRServiceHandlerMock.Recognize mock is already set by ExpectParams functions")
+		mmRecognize.mock.t.Fatalf("OCRServiceClientMock.Recognize mock is already set by ExpectParams functions")
 	}
 
-	mmRecognize.defaultExpectation.params = &OCRServiceHandlerMockRecognizeParams{ctx, pp1}
+	mmRecognize.defaultExpectation.params = &OCRServiceClientMockRecognizeParams{ctx, pp1}
 	mmRecognize.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmRecognize.expectations {
 		if minimock.Equal(e.params, mmRecognize.defaultExpectation.params) {
@@ -139,22 +139,22 @@ func (mmRecognize *mOCRServiceHandlerMockRecognize) Expect(ctx context.Context, 
 	return mmRecognize
 }
 
-// ExpectCtxParam1 sets up expected param ctx for OCRServiceHandler.Recognize
-func (mmRecognize *mOCRServiceHandlerMockRecognize) ExpectCtxParam1(ctx context.Context) *mOCRServiceHandlerMockRecognize {
+// ExpectCtxParam1 sets up expected param ctx for OCRServiceClient.Recognize
+func (mmRecognize *mOCRServiceClientMockRecognize) ExpectCtxParam1(ctx context.Context) *mOCRServiceClientMockRecognize {
 	if mmRecognize.mock.funcRecognize != nil {
-		mmRecognize.mock.t.Fatalf("OCRServiceHandlerMock.Recognize mock is already set by Set")
+		mmRecognize.mock.t.Fatalf("OCRServiceClientMock.Recognize mock is already set by Set")
 	}
 
 	if mmRecognize.defaultExpectation == nil {
-		mmRecognize.defaultExpectation = &OCRServiceHandlerMockRecognizeExpectation{}
+		mmRecognize.defaultExpectation = &OCRServiceClientMockRecognizeExpectation{}
 	}
 
 	if mmRecognize.defaultExpectation.params != nil {
-		mmRecognize.mock.t.Fatalf("OCRServiceHandlerMock.Recognize mock is already set by Expect")
+		mmRecognize.mock.t.Fatalf("OCRServiceClientMock.Recognize mock is already set by Expect")
 	}
 
 	if mmRecognize.defaultExpectation.paramPtrs == nil {
-		mmRecognize.defaultExpectation.paramPtrs = &OCRServiceHandlerMockRecognizeParamPtrs{}
+		mmRecognize.defaultExpectation.paramPtrs = &OCRServiceClientMockRecognizeParamPtrs{}
 	}
 	mmRecognize.defaultExpectation.paramPtrs.ctx = &ctx
 	mmRecognize.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -162,22 +162,22 @@ func (mmRecognize *mOCRServiceHandlerMockRecognize) ExpectCtxParam1(ctx context.
 	return mmRecognize
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for OCRServiceHandler.Recognize
-func (mmRecognize *mOCRServiceHandlerMockRecognize) ExpectPp1Param2(pp1 *connect.Request[v1.RecognizeRequest]) *mOCRServiceHandlerMockRecognize {
+// ExpectPp1Param2 sets up expected param pp1 for OCRServiceClient.Recognize
+func (mmRecognize *mOCRServiceClientMockRecognize) ExpectPp1Param2(pp1 *connect.Request[v1.RecognizeRequest]) *mOCRServiceClientMockRecognize {
 	if mmRecognize.mock.funcRecognize != nil {
-		mmRecognize.mock.t.Fatalf("OCRServiceHandlerMock.Recognize mock is already set by Set")
+		mmRecognize.mock.t.Fatalf("OCRServiceClientMock.Recognize mock is already set by Set")
 	}
 
 	if mmRecognize.defaultExpectation == nil {
-		mmRecognize.defaultExpectation = &OCRServiceHandlerMockRecognizeExpectation{}
+		mmRecognize.defaultExpectation = &OCRServiceClientMockRecognizeExpectation{}
 	}
 
 	if mmRecognize.defaultExpectation.params != nil {
-		mmRecognize.mock.t.Fatalf("OCRServiceHandlerMock.Recognize mock is already set by Expect")
+		mmRecognize.mock.t.Fatalf("OCRServiceClientMock.Recognize mock is already set by Expect")
 	}
 
 	if mmRecognize.defaultExpectation.paramPtrs == nil {
-		mmRecognize.defaultExpectation.paramPtrs = &OCRServiceHandlerMockRecognizeParamPtrs{}
+		mmRecognize.defaultExpectation.paramPtrs = &OCRServiceClientMockRecognizeParamPtrs{}
 	}
 	mmRecognize.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmRecognize.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -185,10 +185,10 @@ func (mmRecognize *mOCRServiceHandlerMockRecognize) ExpectPp1Param2(pp1 *connect
 	return mmRecognize
 }
 
-// Inspect accepts an inspector function that has same arguments as the OCRServiceHandler.Recognize
-func (mmRecognize *mOCRServiceHandlerMockRecognize) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.RecognizeRequest])) *mOCRServiceHandlerMockRecognize {
+// Inspect accepts an inspector function that has same arguments as the OCRServiceClient.Recognize
+func (mmRecognize *mOCRServiceClientMockRecognize) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.RecognizeRequest])) *mOCRServiceClientMockRecognize {
 	if mmRecognize.mock.inspectFuncRecognize != nil {
-		mmRecognize.mock.t.Fatalf("Inspect function is already set for OCRServiceHandlerMock.Recognize")
+		mmRecognize.mock.t.Fatalf("Inspect function is already set for OCRServiceClientMock.Recognize")
 	}
 
 	mmRecognize.mock.inspectFuncRecognize = f
@@ -196,28 +196,28 @@ func (mmRecognize *mOCRServiceHandlerMockRecognize) Inspect(f func(ctx context.C
 	return mmRecognize
 }
 
-// Return sets up results that will be returned by OCRServiceHandler.Recognize
-func (mmRecognize *mOCRServiceHandlerMockRecognize) Return(pp2 *connect.Response[v1.RecognizeResponse], err error) *OCRServiceHandlerMock {
+// Return sets up results that will be returned by OCRServiceClient.Recognize
+func (mmRecognize *mOCRServiceClientMockRecognize) Return(pp2 *connect.Response[v1.RecognizeResponse], err error) *OCRServiceClientMock {
 	if mmRecognize.mock.funcRecognize != nil {
-		mmRecognize.mock.t.Fatalf("OCRServiceHandlerMock.Recognize mock is already set by Set")
+		mmRecognize.mock.t.Fatalf("OCRServiceClientMock.Recognize mock is already set by Set")
 	}
 
 	if mmRecognize.defaultExpectation == nil {
-		mmRecognize.defaultExpectation = &OCRServiceHandlerMockRecognizeExpectation{mock: mmRecognize.mock}
+		mmRecognize.defaultExpectation = &OCRServiceClientMockRecognizeExpectation{mock: mmRecognize.mock}
 	}
-	mmRecognize.defaultExpectation.results = &OCRServiceHandlerMockRecognizeResults{pp2, err}
+	mmRecognize.defaultExpectation.results = &OCRServiceClientMockRecognizeResults{pp2, err}
 	mmRecognize.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmRecognize.mock
 }
 
-// Set uses given function f to mock the OCRServiceHandler.Recognize method
-func (mmRecognize *mOCRServiceHandlerMockRecognize) Set(f func(ctx context.Context, pp1 *connect.Request[v1.RecognizeRequest]) (pp2 *connect.Response[v1.RecognizeResponse], err error)) *OCRServiceHandlerMock {
+// Set uses given function f to mock the OCRServiceClient.Recognize method
+func (mmRecognize *mOCRServiceClientMockRecognize) Set(f func(ctx context.Context, pp1 *connect.Request[v1.RecognizeRequest]) (pp2 *connect.Response[v1.RecognizeResponse], err error)) *OCRServiceClientMock {
 	if mmRecognize.defaultExpectation != nil {
-		mmRecognize.mock.t.Fatalf("Default expectation is already set for the OCRServiceHandler.Recognize method")
+		mmRecognize.mock.t.Fatalf("Default expectation is already set for the OCRServiceClient.Recognize method")
 	}
 
 	if len(mmRecognize.expectations) > 0 {
-		mmRecognize.mock.t.Fatalf("Some expectations are already set for the OCRServiceHandler.Recognize method")
+		mmRecognize.mock.t.Fatalf("Some expectations are already set for the OCRServiceClient.Recognize method")
 	}
 
 	mmRecognize.mock.funcRecognize = f
@@ -225,39 +225,39 @@ func (mmRecognize *mOCRServiceHandlerMockRecognize) Set(f func(ctx context.Conte
 	return mmRecognize.mock
 }
 
-// When sets expectation for the OCRServiceHandler.Recognize which will trigger the result defined by the following
+// When sets expectation for the OCRServiceClient.Recognize which will trigger the result defined by the following
 // Then helper
-func (mmRecognize *mOCRServiceHandlerMockRecognize) When(ctx context.Context, pp1 *connect.Request[v1.RecognizeRequest]) *OCRServiceHandlerMockRecognizeExpectation {
+func (mmRecognize *mOCRServiceClientMockRecognize) When(ctx context.Context, pp1 *connect.Request[v1.RecognizeRequest]) *OCRServiceClientMockRecognizeExpectation {
 	if mmRecognize.mock.funcRecognize != nil {
-		mmRecognize.mock.t.Fatalf("OCRServiceHandlerMock.Recognize mock is already set by Set")
+		mmRecognize.mock.t.Fatalf("OCRServiceClientMock.Recognize mock is already set by Set")
 	}
 
-	expectation := &OCRServiceHandlerMockRecognizeExpectation{
+	expectation := &OCRServiceClientMockRecognizeExpectation{
 		mock:               mmRecognize.mock,
-		params:             &OCRServiceHandlerMockRecognizeParams{ctx, pp1},
-		expectationOrigins: OCRServiceHandlerMockRecognizeExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &OCRServiceClientMockRecognizeParams{ctx, pp1},
+		expectationOrigins: OCRServiceClientMockRecognizeExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmRecognize.expectations = append(mmRecognize.expectations, expectation)
 	return expectation
 }
 
-// Then sets up OCRServiceHandler.Recognize return parameters for the expectation previously defined by the When method
-func (e *OCRServiceHandlerMockRecognizeExpectation) Then(pp2 *connect.Response[v1.RecognizeResponse], err error) *OCRServiceHandlerMock {
-	e.results = &OCRServiceHandlerMockRecognizeResults{pp2, err}
+// Then sets up OCRServiceClient.Recognize return parameters for the expectation previously defined by the When method
+func (e *OCRServiceClientMockRecognizeExpectation) Then(pp2 *connect.Response[v1.RecognizeResponse], err error) *OCRServiceClientMock {
+	e.results = &OCRServiceClientMockRecognizeResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times OCRServiceHandler.Recognize should be invoked
-func (mmRecognize *mOCRServiceHandlerMockRecognize) Times(n uint64) *mOCRServiceHandlerMockRecognize {
+// Times sets number of times OCRServiceClient.Recognize should be invoked
+func (mmRecognize *mOCRServiceClientMockRecognize) Times(n uint64) *mOCRServiceClientMockRecognize {
 	if n == 0 {
-		mmRecognize.mock.t.Fatalf("Times of OCRServiceHandlerMock.Recognize mock can not be zero")
+		mmRecognize.mock.t.Fatalf("Times of OCRServiceClientMock.Recognize mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmRecognize.expectedInvocations, n)
 	mmRecognize.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmRecognize
 }
 
-func (mmRecognize *mOCRServiceHandlerMockRecognize) invocationsDone() bool {
+func (mmRecognize *mOCRServiceClientMockRecognize) invocationsDone() bool {
 	if len(mmRecognize.expectations) == 0 && mmRecognize.defaultExpectation == nil && mmRecognize.mock.funcRecognize == nil {
 		return true
 	}
@@ -268,8 +268,8 @@ func (mmRecognize *mOCRServiceHandlerMockRecognize) invocationsDone() bool {
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// Recognize implements mm_ocrv1connect.OCRServiceHandler
-func (mmRecognize *OCRServiceHandlerMock) Recognize(ctx context.Context, pp1 *connect.Request[v1.RecognizeRequest]) (pp2 *connect.Response[v1.RecognizeResponse], err error) {
+// Recognize implements mm_ocrv1connect.OCRServiceClient
+func (mmRecognize *OCRServiceClientMock) Recognize(ctx context.Context, pp1 *connect.Request[v1.RecognizeRequest]) (pp2 *connect.Response[v1.RecognizeResponse], err error) {
 	mm_atomic.AddUint64(&mmRecognize.beforeRecognizeCounter, 1)
 	defer mm_atomic.AddUint64(&mmRecognize.afterRecognizeCounter, 1)
 
@@ -279,7 +279,7 @@ func (mmRecognize *OCRServiceHandlerMock) Recognize(ctx context.Context, pp1 *co
 		mmRecognize.inspectFuncRecognize(ctx, pp1)
 	}
 
-	mm_params := OCRServiceHandlerMockRecognizeParams{ctx, pp1}
+	mm_params := OCRServiceClientMockRecognizeParams{ctx, pp1}
 
 	// Record call args
 	mmRecognize.RecognizeMock.mutex.Lock()
@@ -298,54 +298,54 @@ func (mmRecognize *OCRServiceHandlerMock) Recognize(ctx context.Context, pp1 *co
 		mm_want := mmRecognize.RecognizeMock.defaultExpectation.params
 		mm_want_ptrs := mmRecognize.RecognizeMock.defaultExpectation.paramPtrs
 
-		mm_got := OCRServiceHandlerMockRecognizeParams{ctx, pp1}
+		mm_got := OCRServiceClientMockRecognizeParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmRecognize.t.Errorf("OCRServiceHandlerMock.Recognize got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmRecognize.t.Errorf("OCRServiceClientMock.Recognize got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmRecognize.RecognizeMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmRecognize.t.Errorf("OCRServiceHandlerMock.Recognize got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmRecognize.t.Errorf("OCRServiceClientMock.Recognize got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmRecognize.RecognizeMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmRecognize.t.Errorf("OCRServiceHandlerMock.Recognize got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmRecognize.t.Errorf("OCRServiceClientMock.Recognize got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmRecognize.RecognizeMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmRecognize.RecognizeMock.defaultExpectation.results
 		if mm_results == nil {
-			mmRecognize.t.Fatal("No results are set for the OCRServiceHandlerMock.Recognize")
+			mmRecognize.t.Fatal("No results are set for the OCRServiceClientMock.Recognize")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmRecognize.funcRecognize != nil {
 		return mmRecognize.funcRecognize(ctx, pp1)
 	}
-	mmRecognize.t.Fatalf("Unexpected call to OCRServiceHandlerMock.Recognize. %v %v", ctx, pp1)
+	mmRecognize.t.Fatalf("Unexpected call to OCRServiceClientMock.Recognize. %v %v", ctx, pp1)
 	return
 }
 
-// RecognizeAfterCounter returns a count of finished OCRServiceHandlerMock.Recognize invocations
-func (mmRecognize *OCRServiceHandlerMock) RecognizeAfterCounter() uint64 {
+// RecognizeAfterCounter returns a count of finished OCRServiceClientMock.Recognize invocations
+func (mmRecognize *OCRServiceClientMock) RecognizeAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmRecognize.afterRecognizeCounter)
 }
 
-// RecognizeBeforeCounter returns a count of OCRServiceHandlerMock.Recognize invocations
-func (mmRecognize *OCRServiceHandlerMock) RecognizeBeforeCounter() uint64 {
+// RecognizeBeforeCounter returns a count of OCRServiceClientMock.Recognize invocations
+func (mmRecognize *OCRServiceClientMock) RecognizeBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmRecognize.beforeRecognizeCounter)
 }
 
-// Calls returns a list of arguments used in each call to OCRServiceHandlerMock.Recognize.
+// Calls returns a list of arguments used in each call to OCRServiceClientMock.Recognize.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmRecognize *mOCRServiceHandlerMockRecognize) Calls() []*OCRServiceHandlerMockRecognizeParams {
+func (mmRecognize *mOCRServiceClientMockRecognize) Calls() []*OCRServiceClientMockRecognizeParams {
 	mmRecognize.mutex.RLock()
 
-	argCopy := make([]*OCRServiceHandlerMockRecognizeParams, len(mmRecognize.callArgs))
+	argCopy := make([]*OCRServiceClientMockRecognizeParams, len(mmRecognize.callArgs))
 	copy(argCopy, mmRecognize.callArgs)
 
 	mmRecognize.mutex.RUnlock()
@@ -355,7 +355,7 @@ func (mmRecognize *mOCRServiceHandlerMockRecognize) Calls() []*OCRServiceHandler
 
 // MinimockRecognizeDone returns true if the count of the Recognize invocations corresponds
 // the number of defined expectations
-func (m *OCRServiceHandlerMock) MinimockRecognizeDone() bool {
+func (m *OCRServiceClientMock) MinimockRecognizeDone() bool {
 	if m.RecognizeMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -371,10 +371,10 @@ func (m *OCRServiceHandlerMock) MinimockRecognizeDone() bool {
 }
 
 // MinimockRecognizeInspect logs each unmet expectation
-func (m *OCRServiceHandlerMock) MinimockRecognizeInspect() {
+func (m *OCRServiceClientMock) MinimockRecognizeInspect() {
 	for _, e := range m.RecognizeMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to OCRServiceHandlerMock.Recognize at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to OCRServiceClientMock.Recognize at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -382,66 +382,66 @@ func (m *OCRServiceHandlerMock) MinimockRecognizeInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.RecognizeMock.defaultExpectation != nil && afterRecognizeCounter < 1 {
 		if m.RecognizeMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to OCRServiceHandlerMock.Recognize at\n%s", m.RecognizeMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to OCRServiceClientMock.Recognize at\n%s", m.RecognizeMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to OCRServiceHandlerMock.Recognize at\n%s with params: %#v", m.RecognizeMock.defaultExpectation.expectationOrigins.origin, *m.RecognizeMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to OCRServiceClientMock.Recognize at\n%s with params: %#v", m.RecognizeMock.defaultExpectation.expectationOrigins.origin, *m.RecognizeMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcRecognize != nil && afterRecognizeCounter < 1 {
-		m.t.Errorf("Expected call to OCRServiceHandlerMock.Recognize at\n%s", m.funcRecognizeOrigin)
+		m.t.Errorf("Expected call to OCRServiceClientMock.Recognize at\n%s", m.funcRecognizeOrigin)
 	}
 
 	if !m.RecognizeMock.invocationsDone() && afterRecognizeCounter > 0 {
-		m.t.Errorf("Expected %d calls to OCRServiceHandlerMock.Recognize at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to OCRServiceClientMock.Recognize at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.RecognizeMock.expectedInvocations), m.RecognizeMock.expectedInvocationsOrigin, afterRecognizeCounter)
 	}
 }
 
-type mOCRServiceHandlerMockStatus struct {
+type mOCRServiceClientMockStatus struct {
 	optional           bool
-	mock               *OCRServiceHandlerMock
-	defaultExpectation *OCRServiceHandlerMockStatusExpectation
-	expectations       []*OCRServiceHandlerMockStatusExpectation
+	mock               *OCRServiceClientMock
+	defaultExpectation *OCRServiceClientMockStatusExpectation
+	expectations       []*OCRServiceClientMockStatusExpectation
 
-	callArgs []*OCRServiceHandlerMockStatusParams
+	callArgs []*OCRServiceClientMockStatusParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// OCRServiceHandlerMockStatusExpectation specifies expectation struct of the OCRServiceHandler.Status
-type OCRServiceHandlerMockStatusExpectation struct {
-	mock               *OCRServiceHandlerMock
-	params             *OCRServiceHandlerMockStatusParams
-	paramPtrs          *OCRServiceHandlerMockStatusParamPtrs
-	expectationOrigins OCRServiceHandlerMockStatusExpectationOrigins
-	results            *OCRServiceHandlerMockStatusResults
+// OCRServiceClientMockStatusExpectation specifies expectation struct of the OCRServiceClient.Status
+type OCRServiceClientMockStatusExpectation struct {
+	mock               *OCRServiceClientMock
+	params             *OCRServiceClientMockStatusParams
+	paramPtrs          *OCRServiceClientMockStatusParamPtrs
+	expectationOrigins OCRServiceClientMockStatusExpectationOrigins
+	results            *OCRServiceClientMockStatusResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// OCRServiceHandlerMockStatusParams contains parameters of the OCRServiceHandler.Status
-type OCRServiceHandlerMockStatusParams struct {
+// OCRServiceClientMockStatusParams contains parameters of the OCRServiceClient.Status
+type OCRServiceClientMockStatusParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v11.StatusRequest]
 }
 
-// OCRServiceHandlerMockStatusParamPtrs contains pointers to parameters of the OCRServiceHandler.Status
-type OCRServiceHandlerMockStatusParamPtrs struct {
+// OCRServiceClientMockStatusParamPtrs contains pointers to parameters of the OCRServiceClient.Status
+type OCRServiceClientMockStatusParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v11.StatusRequest]
 }
 
-// OCRServiceHandlerMockStatusResults contains results of the OCRServiceHandler.Status
-type OCRServiceHandlerMockStatusResults struct {
+// OCRServiceClientMockStatusResults contains results of the OCRServiceClient.Status
+type OCRServiceClientMockStatusResults struct {
 	pp2 *connect.Response[v1.StatusResponse]
 	err error
 }
 
-// OCRServiceHandlerMockStatusOrigins contains origins of expectations of the OCRServiceHandler.Status
-type OCRServiceHandlerMockStatusExpectationOrigins struct {
+// OCRServiceClientMockStatusOrigins contains origins of expectations of the OCRServiceClient.Status
+type OCRServiceClientMockStatusExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -452,26 +452,26 @@ type OCRServiceHandlerMockStatusExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmStatus *mOCRServiceHandlerMockStatus) Optional() *mOCRServiceHandlerMockStatus {
+func (mmStatus *mOCRServiceClientMockStatus) Optional() *mOCRServiceClientMockStatus {
 	mmStatus.optional = true
 	return mmStatus
 }
 
-// Expect sets up expected params for OCRServiceHandler.Status
-func (mmStatus *mOCRServiceHandlerMockStatus) Expect(ctx context.Context, pp1 *connect.Request[v11.StatusRequest]) *mOCRServiceHandlerMockStatus {
+// Expect sets up expected params for OCRServiceClient.Status
+func (mmStatus *mOCRServiceClientMockStatus) Expect(ctx context.Context, pp1 *connect.Request[v11.StatusRequest]) *mOCRServiceClientMockStatus {
 	if mmStatus.mock.funcStatus != nil {
-		mmStatus.mock.t.Fatalf("OCRServiceHandlerMock.Status mock is already set by Set")
+		mmStatus.mock.t.Fatalf("OCRServiceClientMock.Status mock is already set by Set")
 	}
 
 	if mmStatus.defaultExpectation == nil {
-		mmStatus.defaultExpectation = &OCRServiceHandlerMockStatusExpectation{}
+		mmStatus.defaultExpectation = &OCRServiceClientMockStatusExpectation{}
 	}
 
 	if mmStatus.defaultExpectation.paramPtrs != nil {
-		mmStatus.mock.t.Fatalf("OCRServiceHandlerMock.Status mock is already set by ExpectParams functions")
+		mmStatus.mock.t.Fatalf("OCRServiceClientMock.Status mock is already set by ExpectParams functions")
 	}
 
-	mmStatus.defaultExpectation.params = &OCRServiceHandlerMockStatusParams{ctx, pp1}
+	mmStatus.defaultExpectation.params = &OCRServiceClientMockStatusParams{ctx, pp1}
 	mmStatus.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmStatus.expectations {
 		if minimock.Equal(e.params, mmStatus.defaultExpectation.params) {
@@ -482,22 +482,22 @@ func (mmStatus *mOCRServiceHandlerMockStatus) Expect(ctx context.Context, pp1 *c
 	return mmStatus
 }
 
-// ExpectCtxParam1 sets up expected param ctx for OCRServiceHandler.Status
-func (mmStatus *mOCRServiceHandlerMockStatus) ExpectCtxParam1(ctx context.Context) *mOCRServiceHandlerMockStatus {
+// ExpectCtxParam1 sets up expected param ctx for OCRServiceClient.Status
+func (mmStatus *mOCRServiceClientMockStatus) ExpectCtxParam1(ctx context.Context) *mOCRServiceClientMockStatus {
 	if mmStatus.mock.funcStatus != nil {
-		mmStatus.mock.t.Fatalf("OCRServiceHandlerMock.Status mock is already set by Set")
+		mmStatus.mock.t.Fatalf("OCRServiceClientMock.Status mock is already set by Set")
 	}
 
 	if mmStatus.defaultExpectation == nil {
-		mmStatus.defaultExpectation = &OCRServiceHandlerMockStatusExpectation{}
+		mmStatus.defaultExpectation = &OCRServiceClientMockStatusExpectation{}
 	}
 
 	if mmStatus.defaultExpectation.params != nil {
-		mmStatus.mock.t.Fatalf("OCRServiceHandlerMock.Status mock is already set by Expect")
+		mmStatus.mock.t.Fatalf("OCRServiceClientMock.Status mock is already set by Expect")
 	}
 
 	if mmStatus.defaultExpectation.paramPtrs == nil {
-		mmStatus.defaultExpectation.paramPtrs = &OCRServiceHandlerMockStatusParamPtrs{}
+		mmStatus.defaultExpectation.paramPtrs = &OCRServiceClientMockStatusParamPtrs{}
 	}
 	mmStatus.defaultExpectation.paramPtrs.ctx = &ctx
 	mmStatus.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -505,22 +505,22 @@ func (mmStatus *mOCRServiceHandlerMockStatus) ExpectCtxParam1(ctx context.Contex
 	return mmStatus
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for OCRServiceHandler.Status
-func (mmStatus *mOCRServiceHandlerMockStatus) ExpectPp1Param2(pp1 *connect.Request[v11.StatusRequest]) *mOCRServiceHandlerMockStatus {
+// ExpectPp1Param2 sets up expected param pp1 for OCRServiceClient.Status
+func (mmStatus *mOCRServiceClientMockStatus) ExpectPp1Param2(pp1 *connect.Request[v11.StatusRequest]) *mOCRServiceClientMockStatus {
 	if mmStatus.mock.funcStatus != nil {
-		mmStatus.mock.t.Fatalf("OCRServiceHandlerMock.Status mock is already set by Set")
+		mmStatus.mock.t.Fatalf("OCRServiceClientMock.Status mock is already set by Set")
 	}
 
 	if mmStatus.defaultExpectation == nil {
-		mmStatus.defaultExpectation = &OCRServiceHandlerMockStatusExpectation{}
+		mmStatus.defaultExpectation = &OCRServiceClientMockStatusExpectation{}
 	}
 
 	if mmStatus.defaultExpectation.params != nil {
-		mmStatus.mock.t.Fatalf("OCRServiceHandlerMock.Status mock is already set by Expect")
+		mmStatus.mock.t.Fatalf("OCRServiceClientMock.Status mock is already set by Expect")
 	}
 
 	if mmStatus.defaultExpectation.paramPtrs == nil {
-		mmStatus.defaultExpectation.paramPtrs = &OCRServiceHandlerMockStatusParamPtrs{}
+		mmStatus.defaultExpectation.paramPtrs = &OCRServiceClientMockStatusParamPtrs{}
 	}
 	mmStatus.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmStatus.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -528,10 +528,10 @@ func (mmStatus *mOCRServiceHandlerMockStatus) ExpectPp1Param2(pp1 *connect.Reque
 	return mmStatus
 }
 
-// Inspect accepts an inspector function that has same arguments as the OCRServiceHandler.Status
-func (mmStatus *mOCRServiceHandlerMockStatus) Inspect(f func(ctx context.Context, pp1 *connect.Request[v11.StatusRequest])) *mOCRServiceHandlerMockStatus {
+// Inspect accepts an inspector function that has same arguments as the OCRServiceClient.Status
+func (mmStatus *mOCRServiceClientMockStatus) Inspect(f func(ctx context.Context, pp1 *connect.Request[v11.StatusRequest])) *mOCRServiceClientMockStatus {
 	if mmStatus.mock.inspectFuncStatus != nil {
-		mmStatus.mock.t.Fatalf("Inspect function is already set for OCRServiceHandlerMock.Status")
+		mmStatus.mock.t.Fatalf("Inspect function is already set for OCRServiceClientMock.Status")
 	}
 
 	mmStatus.mock.inspectFuncStatus = f
@@ -539,28 +539,28 @@ func (mmStatus *mOCRServiceHandlerMockStatus) Inspect(f func(ctx context.Context
 	return mmStatus
 }
 
-// Return sets up results that will be returned by OCRServiceHandler.Status
-func (mmStatus *mOCRServiceHandlerMockStatus) Return(pp2 *connect.Response[v1.StatusResponse], err error) *OCRServiceHandlerMock {
+// Return sets up results that will be returned by OCRServiceClient.Status
+func (mmStatus *mOCRServiceClientMockStatus) Return(pp2 *connect.Response[v1.StatusResponse], err error) *OCRServiceClientMock {
 	if mmStatus.mock.funcStatus != nil {
-		mmStatus.mock.t.Fatalf("OCRServiceHandlerMock.Status mock is already set by Set")
+		mmStatus.mock.t.Fatalf("OCRServiceClientMock.Status mock is already set by Set")
 	}
 
 	if mmStatus.defaultExpectation == nil {
-		mmStatus.defaultExpectation = &OCRServiceHandlerMockStatusExpectation{mock: mmStatus.mock}
+		mmStatus.defaultExpectation = &OCRServiceClientMockStatusExpectation{mock: mmStatus.mock}
 	}
-	mmStatus.defaultExpectation.results = &OCRServiceHandlerMockStatusResults{pp2, err}
+	mmStatus.defaultExpectation.results = &OCRServiceClientMockStatusResults{pp2, err}
 	mmStatus.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmStatus.mock
 }
 
-// Set uses given function f to mock the OCRServiceHandler.Status method
-func (mmStatus *mOCRServiceHandlerMockStatus) Set(f func(ctx context.Context, pp1 *connect.Request[v11.StatusRequest]) (pp2 *connect.Response[v1.StatusResponse], err error)) *OCRServiceHandlerMock {
+// Set uses given function f to mock the OCRServiceClient.Status method
+func (mmStatus *mOCRServiceClientMockStatus) Set(f func(ctx context.Context, pp1 *connect.Request[v11.StatusRequest]) (pp2 *connect.Response[v1.StatusResponse], err error)) *OCRServiceClientMock {
 	if mmStatus.defaultExpectation != nil {
-		mmStatus.mock.t.Fatalf("Default expectation is already set for the OCRServiceHandler.Status method")
+		mmStatus.mock.t.Fatalf("Default expectation is already set for the OCRServiceClient.Status method")
 	}
 
 	if len(mmStatus.expectations) > 0 {
-		mmStatus.mock.t.Fatalf("Some expectations are already set for the OCRServiceHandler.Status method")
+		mmStatus.mock.t.Fatalf("Some expectations are already set for the OCRServiceClient.Status method")
 	}
 
 	mmStatus.mock.funcStatus = f
@@ -568,39 +568,39 @@ func (mmStatus *mOCRServiceHandlerMockStatus) Set(f func(ctx context.Context, pp
 	return mmStatus.mock
 }
 
-// When sets expectation for the OCRServiceHandler.Status which will trigger the result defined by the following
+// When sets expectation for the OCRServiceClient.Status which will trigger the result defined by the following
 // Then helper
-func (mmStatus *mOCRServiceHandlerMockStatus) When(ctx context.Context, pp1 *connect.Request[v11.StatusRequest]) *OCRServiceHandlerMockStatusExpectation {
+func (mmStatus *mOCRServiceClientMockStatus) When(ctx context.Context, pp1 *connect.Request[v11.StatusRequest]) *OCRServiceClientMockStatusExpectation {
 	if mmStatus.mock.funcStatus != nil {
-		mmStatus.mock.t.Fatalf("OCRServiceHandlerMock.Status mock is already set by Set")
+		mmStatus.mock.t.Fatalf("OCRServiceClientMock.Status mock is already set by Set")
 	}
 
-	expectation := &OCRServiceHandlerMockStatusExpectation{
+	expectation := &OCRServiceClientMockStatusExpectation{
 		mock:               mmStatus.mock,
-		params:             &OCRServiceHandlerMockStatusParams{ctx, pp1},
-		expectationOrigins: OCRServiceHandlerMockStatusExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &OCRServiceClientMockStatusParams{ctx, pp1},
+		expectationOrigins: OCRServiceClientMockStatusExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmStatus.expectations = append(mmStatus.expectations, expectation)
 	return expectation
 }
 
-// Then sets up OCRServiceHandler.Status return parameters for the expectation previously defined by the When method
-func (e *OCRServiceHandlerMockStatusExpectation) Then(pp2 *connect.Response[v1.StatusResponse], err error) *OCRServiceHandlerMock {
-	e.results = &OCRServiceHandlerMockStatusResults{pp2, err}
+// Then sets up OCRServiceClient.Status return parameters for the expectation previously defined by the When method
+func (e *OCRServiceClientMockStatusExpectation) Then(pp2 *connect.Response[v1.StatusResponse], err error) *OCRServiceClientMock {
+	e.results = &OCRServiceClientMockStatusResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times OCRServiceHandler.Status should be invoked
-func (mmStatus *mOCRServiceHandlerMockStatus) Times(n uint64) *mOCRServiceHandlerMockStatus {
+// Times sets number of times OCRServiceClient.Status should be invoked
+func (mmStatus *mOCRServiceClientMockStatus) Times(n uint64) *mOCRServiceClientMockStatus {
 	if n == 0 {
-		mmStatus.mock.t.Fatalf("Times of OCRServiceHandlerMock.Status mock can not be zero")
+		mmStatus.mock.t.Fatalf("Times of OCRServiceClientMock.Status mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmStatus.expectedInvocations, n)
 	mmStatus.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmStatus
 }
 
-func (mmStatus *mOCRServiceHandlerMockStatus) invocationsDone() bool {
+func (mmStatus *mOCRServiceClientMockStatus) invocationsDone() bool {
 	if len(mmStatus.expectations) == 0 && mmStatus.defaultExpectation == nil && mmStatus.mock.funcStatus == nil {
 		return true
 	}
@@ -611,8 +611,8 @@ func (mmStatus *mOCRServiceHandlerMockStatus) invocationsDone() bool {
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// Status implements mm_ocrv1connect.OCRServiceHandler
-func (mmStatus *OCRServiceHandlerMock) Status(ctx context.Context, pp1 *connect.Request[v11.StatusRequest]) (pp2 *connect.Response[v1.StatusResponse], err error) {
+// Status implements mm_ocrv1connect.OCRServiceClient
+func (mmStatus *OCRServiceClientMock) Status(ctx context.Context, pp1 *connect.Request[v11.StatusRequest]) (pp2 *connect.Response[v1.StatusResponse], err error) {
 	mm_atomic.AddUint64(&mmStatus.beforeStatusCounter, 1)
 	defer mm_atomic.AddUint64(&mmStatus.afterStatusCounter, 1)
 
@@ -622,7 +622,7 @@ func (mmStatus *OCRServiceHandlerMock) Status(ctx context.Context, pp1 *connect.
 		mmStatus.inspectFuncStatus(ctx, pp1)
 	}
 
-	mm_params := OCRServiceHandlerMockStatusParams{ctx, pp1}
+	mm_params := OCRServiceClientMockStatusParams{ctx, pp1}
 
 	// Record call args
 	mmStatus.StatusMock.mutex.Lock()
@@ -641,54 +641,54 @@ func (mmStatus *OCRServiceHandlerMock) Status(ctx context.Context, pp1 *connect.
 		mm_want := mmStatus.StatusMock.defaultExpectation.params
 		mm_want_ptrs := mmStatus.StatusMock.defaultExpectation.paramPtrs
 
-		mm_got := OCRServiceHandlerMockStatusParams{ctx, pp1}
+		mm_got := OCRServiceClientMockStatusParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmStatus.t.Errorf("OCRServiceHandlerMock.Status got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmStatus.t.Errorf("OCRServiceClientMock.Status got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmStatus.StatusMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmStatus.t.Errorf("OCRServiceHandlerMock.Status got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmStatus.t.Errorf("OCRServiceClientMock.Status got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmStatus.StatusMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmStatus.t.Errorf("OCRServiceHandlerMock.Status got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmStatus.t.Errorf("OCRServiceClientMock.Status got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmStatus.StatusMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmStatus.StatusMock.defaultExpectation.results
 		if mm_results == nil {
-			mmStatus.t.Fatal("No results are set for the OCRServiceHandlerMock.Status")
+			mmStatus.t.Fatal("No results are set for the OCRServiceClientMock.Status")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmStatus.funcStatus != nil {
 		return mmStatus.funcStatus(ctx, pp1)
 	}
-	mmStatus.t.Fatalf("Unexpected call to OCRServiceHandlerMock.Status. %v %v", ctx, pp1)
+	mmStatus.t.Fatalf("Unexpected call to OCRServiceClientMock.Status. %v %v", ctx, pp1)
 	return
 }
 
-// StatusAfterCounter returns a count of finished OCRServiceHandlerMock.Status invocations
-func (mmStatus *OCRServiceHandlerMock) StatusAfterCounter() uint64 {
+// StatusAfterCounter returns a count of finished OCRServiceClientMock.Status invocations
+func (mmStatus *OCRServiceClientMock) StatusAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmStatus.afterStatusCounter)
 }
 
-// StatusBeforeCounter returns a count of OCRServiceHandlerMock.Status invocations
-func (mmStatus *OCRServiceHandlerMock) StatusBeforeCounter() uint64 {
+// StatusBeforeCounter returns a count of OCRServiceClientMock.Status invocations
+func (mmStatus *OCRServiceClientMock) StatusBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmStatus.beforeStatusCounter)
 }
 
-// Calls returns a list of arguments used in each call to OCRServiceHandlerMock.Status.
+// Calls returns a list of arguments used in each call to OCRServiceClientMock.Status.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmStatus *mOCRServiceHandlerMockStatus) Calls() []*OCRServiceHandlerMockStatusParams {
+func (mmStatus *mOCRServiceClientMockStatus) Calls() []*OCRServiceClientMockStatusParams {
 	mmStatus.mutex.RLock()
 
-	argCopy := make([]*OCRServiceHandlerMockStatusParams, len(mmStatus.callArgs))
+	argCopy := make([]*OCRServiceClientMockStatusParams, len(mmStatus.callArgs))
 	copy(argCopy, mmStatus.callArgs)
 
 	mmStatus.mutex.RUnlock()
@@ -698,7 +698,7 @@ func (mmStatus *mOCRServiceHandlerMockStatus) Calls() []*OCRServiceHandlerMockSt
 
 // MinimockStatusDone returns true if the count of the Status invocations corresponds
 // the number of defined expectations
-func (m *OCRServiceHandlerMock) MinimockStatusDone() bool {
+func (m *OCRServiceClientMock) MinimockStatusDone() bool {
 	if m.StatusMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -714,10 +714,10 @@ func (m *OCRServiceHandlerMock) MinimockStatusDone() bool {
 }
 
 // MinimockStatusInspect logs each unmet expectation
-func (m *OCRServiceHandlerMock) MinimockStatusInspect() {
+func (m *OCRServiceClientMock) MinimockStatusInspect() {
 	for _, e := range m.StatusMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to OCRServiceHandlerMock.Status at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to OCRServiceClientMock.Status at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -725,24 +725,24 @@ func (m *OCRServiceHandlerMock) MinimockStatusInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.StatusMock.defaultExpectation != nil && afterStatusCounter < 1 {
 		if m.StatusMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to OCRServiceHandlerMock.Status at\n%s", m.StatusMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to OCRServiceClientMock.Status at\n%s", m.StatusMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to OCRServiceHandlerMock.Status at\n%s with params: %#v", m.StatusMock.defaultExpectation.expectationOrigins.origin, *m.StatusMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to OCRServiceClientMock.Status at\n%s with params: %#v", m.StatusMock.defaultExpectation.expectationOrigins.origin, *m.StatusMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcStatus != nil && afterStatusCounter < 1 {
-		m.t.Errorf("Expected call to OCRServiceHandlerMock.Status at\n%s", m.funcStatusOrigin)
+		m.t.Errorf("Expected call to OCRServiceClientMock.Status at\n%s", m.funcStatusOrigin)
 	}
 
 	if !m.StatusMock.invocationsDone() && afterStatusCounter > 0 {
-		m.t.Errorf("Expected %d calls to OCRServiceHandlerMock.Status at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to OCRServiceClientMock.Status at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.StatusMock.expectedInvocations), m.StatusMock.expectedInvocationsOrigin, afterStatusCounter)
 	}
 }
 
 // MinimockFinish checks that all mocked methods have been called the expected number of times
-func (m *OCRServiceHandlerMock) MinimockFinish() {
+func (m *OCRServiceClientMock) MinimockFinish() {
 	m.finishOnce.Do(func() {
 		if !m.minimockDone() {
 			m.MinimockRecognizeInspect()
@@ -753,7 +753,7 @@ func (m *OCRServiceHandlerMock) MinimockFinish() {
 }
 
 // MinimockWait waits for all mocked methods to be called the expected number of times
-func (m *OCRServiceHandlerMock) MinimockWait(timeout mm_time.Duration) {
+func (m *OCRServiceClientMock) MinimockWait(timeout mm_time.Duration) {
 	timeoutCh := mm_time.After(timeout)
 	for {
 		if m.minimockDone() {
@@ -768,7 +768,7 @@ func (m *OCRServiceHandlerMock) MinimockWait(timeout mm_time.Duration) {
 	}
 }
 
-func (m *OCRServiceHandlerMock) minimockDone() bool {
+func (m *OCRServiceClientMock) minimockDone() bool {
 	done := true
 	return done &&
 		m.MinimockRecognizeDone() &&

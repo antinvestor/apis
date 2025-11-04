@@ -2,7 +2,7 @@
 
 package mocks
 
-//go:generate minimock -i buf.build/gen/go/antinvestor/payment/connectrpc/go/payment/v1/paymentv1connect.PaymentServiceHandler -o payment_handler.gen.go -n PaymentServiceHandlerMock -p mocks
+//go:generate minimock -i buf.build/gen/go/antinvestor/payment/connectrpc/go/payment/v1/paymentv1connect.PaymentServiceClient -o payment_handler.gen.go -n PaymentServiceClientMock -p mocks
 
 import (
 	context "context"
@@ -16,8 +16,8 @@ import (
 	"github.com/gojuno/minimock/v3"
 )
 
-// PaymentServiceHandlerMock implements mm_paymentv1connect.PaymentServiceHandler
-type PaymentServiceHandlerMock struct {
+// PaymentServiceClientMock implements mm_paymentv1connect.PaymentServiceClient
+type PaymentServiceClientMock struct {
 	t          minimock.Tester
 	finishOnce sync.Once
 
@@ -26,149 +26,149 @@ type PaymentServiceHandlerMock struct {
 	inspectFuncCreatePaymentLink   func(ctx context.Context, pp1 *connect.Request[v1.CreatePaymentLinkRequest])
 	afterCreatePaymentLinkCounter  uint64
 	beforeCreatePaymentLinkCounter uint64
-	CreatePaymentLinkMock          mPaymentServiceHandlerMockCreatePaymentLink
+	CreatePaymentLinkMock          mPaymentServiceClientMockCreatePaymentLink
 
 	funcInitiatePrompt          func(ctx context.Context, pp1 *connect.Request[v1.InitiatePromptRequest]) (pp2 *connect.Response[v1.InitiatePromptResponse], err error)
 	funcInitiatePromptOrigin    string
 	inspectFuncInitiatePrompt   func(ctx context.Context, pp1 *connect.Request[v1.InitiatePromptRequest])
 	afterInitiatePromptCounter  uint64
 	beforeInitiatePromptCounter uint64
-	InitiatePromptMock          mPaymentServiceHandlerMockInitiatePrompt
+	InitiatePromptMock          mPaymentServiceClientMockInitiatePrompt
 
 	funcReceive          func(ctx context.Context, pp1 *connect.Request[v1.ReceiveRequest]) (pp2 *connect.Response[v1.ReceiveResponse], err error)
 	funcReceiveOrigin    string
 	inspectFuncReceive   func(ctx context.Context, pp1 *connect.Request[v1.ReceiveRequest])
 	afterReceiveCounter  uint64
 	beforeReceiveCounter uint64
-	ReceiveMock          mPaymentServiceHandlerMockReceive
+	ReceiveMock          mPaymentServiceClientMockReceive
 
 	funcReconcile          func(ctx context.Context, pp1 *connect.Request[v1.ReconcileRequest]) (pp2 *connect.Response[v1.ReconcileResponse], err error)
 	funcReconcileOrigin    string
 	inspectFuncReconcile   func(ctx context.Context, pp1 *connect.Request[v1.ReconcileRequest])
 	afterReconcileCounter  uint64
 	beforeReconcileCounter uint64
-	ReconcileMock          mPaymentServiceHandlerMockReconcile
+	ReconcileMock          mPaymentServiceClientMockReconcile
 
 	funcRelease          func(ctx context.Context, pp1 *connect.Request[v1.ReleaseRequest]) (pp2 *connect.Response[v1.ReleaseResponse], err error)
 	funcReleaseOrigin    string
 	inspectFuncRelease   func(ctx context.Context, pp1 *connect.Request[v1.ReleaseRequest])
 	afterReleaseCounter  uint64
 	beforeReleaseCounter uint64
-	ReleaseMock          mPaymentServiceHandlerMockRelease
+	ReleaseMock          mPaymentServiceClientMockRelease
 
-	funcSearch          func(ctx context.Context, pp1 *connect.Request[v11.SearchRequest], pp2 *connect.ServerStream[v1.SearchResponse]) (err error)
+	funcSearch          func(ctx context.Context, pp1 *connect.Request[v11.SearchRequest]) (pp2 *connect.ServerStreamForClient[v1.SearchResponse], err error)
 	funcSearchOrigin    string
-	inspectFuncSearch   func(ctx context.Context, pp1 *connect.Request[v11.SearchRequest], pp2 *connect.ServerStream[v1.SearchResponse])
+	inspectFuncSearch   func(ctx context.Context, pp1 *connect.Request[v11.SearchRequest])
 	afterSearchCounter  uint64
 	beforeSearchCounter uint64
-	SearchMock          mPaymentServiceHandlerMockSearch
+	SearchMock          mPaymentServiceClientMockSearch
 
 	funcSend          func(ctx context.Context, pp1 *connect.Request[v1.SendRequest]) (pp2 *connect.Response[v1.SendResponse], err error)
 	funcSendOrigin    string
 	inspectFuncSend   func(ctx context.Context, pp1 *connect.Request[v1.SendRequest])
 	afterSendCounter  uint64
 	beforeSendCounter uint64
-	SendMock          mPaymentServiceHandlerMockSend
+	SendMock          mPaymentServiceClientMockSend
 
 	funcStatus          func(ctx context.Context, pp1 *connect.Request[v11.StatusRequest]) (pp2 *connect.Response[v11.StatusResponse], err error)
 	funcStatusOrigin    string
 	inspectFuncStatus   func(ctx context.Context, pp1 *connect.Request[v11.StatusRequest])
 	afterStatusCounter  uint64
 	beforeStatusCounter uint64
-	StatusMock          mPaymentServiceHandlerMockStatus
+	StatusMock          mPaymentServiceClientMockStatus
 
 	funcStatusUpdate          func(ctx context.Context, pp1 *connect.Request[v11.StatusUpdateRequest]) (pp2 *connect.Response[v11.StatusUpdateResponse], err error)
 	funcStatusUpdateOrigin    string
 	inspectFuncStatusUpdate   func(ctx context.Context, pp1 *connect.Request[v11.StatusUpdateRequest])
 	afterStatusUpdateCounter  uint64
 	beforeStatusUpdateCounter uint64
-	StatusUpdateMock          mPaymentServiceHandlerMockStatusUpdate
+	StatusUpdateMock          mPaymentServiceClientMockStatusUpdate
 }
 
-// NewPaymentServiceHandlerMock returns a mock for mm_paymentv1connect.PaymentServiceHandler
-func NewPaymentServiceHandlerMock(t minimock.Tester) *PaymentServiceHandlerMock {
-	m := &PaymentServiceHandlerMock{t: t}
+// NewPaymentServiceClientMock returns a mock for mm_paymentv1connect.PaymentServiceClient
+func NewPaymentServiceClientMock(t minimock.Tester) *PaymentServiceClientMock {
+	m := &PaymentServiceClientMock{t: t}
 
 	if controller, ok := t.(minimock.MockController); ok {
 		controller.RegisterMocker(m)
 	}
 
-	m.CreatePaymentLinkMock = mPaymentServiceHandlerMockCreatePaymentLink{mock: m}
-	m.CreatePaymentLinkMock.callArgs = []*PaymentServiceHandlerMockCreatePaymentLinkParams{}
+	m.CreatePaymentLinkMock = mPaymentServiceClientMockCreatePaymentLink{mock: m}
+	m.CreatePaymentLinkMock.callArgs = []*PaymentServiceClientMockCreatePaymentLinkParams{}
 
-	m.InitiatePromptMock = mPaymentServiceHandlerMockInitiatePrompt{mock: m}
-	m.InitiatePromptMock.callArgs = []*PaymentServiceHandlerMockInitiatePromptParams{}
+	m.InitiatePromptMock = mPaymentServiceClientMockInitiatePrompt{mock: m}
+	m.InitiatePromptMock.callArgs = []*PaymentServiceClientMockInitiatePromptParams{}
 
-	m.ReceiveMock = mPaymentServiceHandlerMockReceive{mock: m}
-	m.ReceiveMock.callArgs = []*PaymentServiceHandlerMockReceiveParams{}
+	m.ReceiveMock = mPaymentServiceClientMockReceive{mock: m}
+	m.ReceiveMock.callArgs = []*PaymentServiceClientMockReceiveParams{}
 
-	m.ReconcileMock = mPaymentServiceHandlerMockReconcile{mock: m}
-	m.ReconcileMock.callArgs = []*PaymentServiceHandlerMockReconcileParams{}
+	m.ReconcileMock = mPaymentServiceClientMockReconcile{mock: m}
+	m.ReconcileMock.callArgs = []*PaymentServiceClientMockReconcileParams{}
 
-	m.ReleaseMock = mPaymentServiceHandlerMockRelease{mock: m}
-	m.ReleaseMock.callArgs = []*PaymentServiceHandlerMockReleaseParams{}
+	m.ReleaseMock = mPaymentServiceClientMockRelease{mock: m}
+	m.ReleaseMock.callArgs = []*PaymentServiceClientMockReleaseParams{}
 
-	m.SearchMock = mPaymentServiceHandlerMockSearch{mock: m}
-	m.SearchMock.callArgs = []*PaymentServiceHandlerMockSearchParams{}
+	m.SearchMock = mPaymentServiceClientMockSearch{mock: m}
+	m.SearchMock.callArgs = []*PaymentServiceClientMockSearchParams{}
 
-	m.SendMock = mPaymentServiceHandlerMockSend{mock: m}
-	m.SendMock.callArgs = []*PaymentServiceHandlerMockSendParams{}
+	m.SendMock = mPaymentServiceClientMockSend{mock: m}
+	m.SendMock.callArgs = []*PaymentServiceClientMockSendParams{}
 
-	m.StatusMock = mPaymentServiceHandlerMockStatus{mock: m}
-	m.StatusMock.callArgs = []*PaymentServiceHandlerMockStatusParams{}
+	m.StatusMock = mPaymentServiceClientMockStatus{mock: m}
+	m.StatusMock.callArgs = []*PaymentServiceClientMockStatusParams{}
 
-	m.StatusUpdateMock = mPaymentServiceHandlerMockStatusUpdate{mock: m}
-	m.StatusUpdateMock.callArgs = []*PaymentServiceHandlerMockStatusUpdateParams{}
+	m.StatusUpdateMock = mPaymentServiceClientMockStatusUpdate{mock: m}
+	m.StatusUpdateMock.callArgs = []*PaymentServiceClientMockStatusUpdateParams{}
 
 	t.Cleanup(m.MinimockFinish)
 
 	return m
 }
 
-type mPaymentServiceHandlerMockCreatePaymentLink struct {
+type mPaymentServiceClientMockCreatePaymentLink struct {
 	optional           bool
-	mock               *PaymentServiceHandlerMock
-	defaultExpectation *PaymentServiceHandlerMockCreatePaymentLinkExpectation
-	expectations       []*PaymentServiceHandlerMockCreatePaymentLinkExpectation
+	mock               *PaymentServiceClientMock
+	defaultExpectation *PaymentServiceClientMockCreatePaymentLinkExpectation
+	expectations       []*PaymentServiceClientMockCreatePaymentLinkExpectation
 
-	callArgs []*PaymentServiceHandlerMockCreatePaymentLinkParams
+	callArgs []*PaymentServiceClientMockCreatePaymentLinkParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// PaymentServiceHandlerMockCreatePaymentLinkExpectation specifies expectation struct of the PaymentServiceHandler.CreatePaymentLink
-type PaymentServiceHandlerMockCreatePaymentLinkExpectation struct {
-	mock               *PaymentServiceHandlerMock
-	params             *PaymentServiceHandlerMockCreatePaymentLinkParams
-	paramPtrs          *PaymentServiceHandlerMockCreatePaymentLinkParamPtrs
-	expectationOrigins PaymentServiceHandlerMockCreatePaymentLinkExpectationOrigins
-	results            *PaymentServiceHandlerMockCreatePaymentLinkResults
+// PaymentServiceClientMockCreatePaymentLinkExpectation specifies expectation struct of the PaymentServiceClient.CreatePaymentLink
+type PaymentServiceClientMockCreatePaymentLinkExpectation struct {
+	mock               *PaymentServiceClientMock
+	params             *PaymentServiceClientMockCreatePaymentLinkParams
+	paramPtrs          *PaymentServiceClientMockCreatePaymentLinkParamPtrs
+	expectationOrigins PaymentServiceClientMockCreatePaymentLinkExpectationOrigins
+	results            *PaymentServiceClientMockCreatePaymentLinkResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// PaymentServiceHandlerMockCreatePaymentLinkParams contains parameters of the PaymentServiceHandler.CreatePaymentLink
-type PaymentServiceHandlerMockCreatePaymentLinkParams struct {
+// PaymentServiceClientMockCreatePaymentLinkParams contains parameters of the PaymentServiceClient.CreatePaymentLink
+type PaymentServiceClientMockCreatePaymentLinkParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.CreatePaymentLinkRequest]
 }
 
-// PaymentServiceHandlerMockCreatePaymentLinkParamPtrs contains pointers to parameters of the PaymentServiceHandler.CreatePaymentLink
-type PaymentServiceHandlerMockCreatePaymentLinkParamPtrs struct {
+// PaymentServiceClientMockCreatePaymentLinkParamPtrs contains pointers to parameters of the PaymentServiceClient.CreatePaymentLink
+type PaymentServiceClientMockCreatePaymentLinkParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.CreatePaymentLinkRequest]
 }
 
-// PaymentServiceHandlerMockCreatePaymentLinkResults contains results of the PaymentServiceHandler.CreatePaymentLink
-type PaymentServiceHandlerMockCreatePaymentLinkResults struct {
+// PaymentServiceClientMockCreatePaymentLinkResults contains results of the PaymentServiceClient.CreatePaymentLink
+type PaymentServiceClientMockCreatePaymentLinkResults struct {
 	pp2 *connect.Response[v1.CreatePaymentLinkResponse]
 	err error
 }
 
-// PaymentServiceHandlerMockCreatePaymentLinkOrigins contains origins of expectations of the PaymentServiceHandler.CreatePaymentLink
-type PaymentServiceHandlerMockCreatePaymentLinkExpectationOrigins struct {
+// PaymentServiceClientMockCreatePaymentLinkOrigins contains origins of expectations of the PaymentServiceClient.CreatePaymentLink
+type PaymentServiceClientMockCreatePaymentLinkExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -179,26 +179,26 @@ type PaymentServiceHandlerMockCreatePaymentLinkExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmCreatePaymentLink *mPaymentServiceHandlerMockCreatePaymentLink) Optional() *mPaymentServiceHandlerMockCreatePaymentLink {
+func (mmCreatePaymentLink *mPaymentServiceClientMockCreatePaymentLink) Optional() *mPaymentServiceClientMockCreatePaymentLink {
 	mmCreatePaymentLink.optional = true
 	return mmCreatePaymentLink
 }
 
-// Expect sets up expected params for PaymentServiceHandler.CreatePaymentLink
-func (mmCreatePaymentLink *mPaymentServiceHandlerMockCreatePaymentLink) Expect(ctx context.Context, pp1 *connect.Request[v1.CreatePaymentLinkRequest]) *mPaymentServiceHandlerMockCreatePaymentLink {
+// Expect sets up expected params for PaymentServiceClient.CreatePaymentLink
+func (mmCreatePaymentLink *mPaymentServiceClientMockCreatePaymentLink) Expect(ctx context.Context, pp1 *connect.Request[v1.CreatePaymentLinkRequest]) *mPaymentServiceClientMockCreatePaymentLink {
 	if mmCreatePaymentLink.mock.funcCreatePaymentLink != nil {
-		mmCreatePaymentLink.mock.t.Fatalf("PaymentServiceHandlerMock.CreatePaymentLink mock is already set by Set")
+		mmCreatePaymentLink.mock.t.Fatalf("PaymentServiceClientMock.CreatePaymentLink mock is already set by Set")
 	}
 
 	if mmCreatePaymentLink.defaultExpectation == nil {
-		mmCreatePaymentLink.defaultExpectation = &PaymentServiceHandlerMockCreatePaymentLinkExpectation{}
+		mmCreatePaymentLink.defaultExpectation = &PaymentServiceClientMockCreatePaymentLinkExpectation{}
 	}
 
 	if mmCreatePaymentLink.defaultExpectation.paramPtrs != nil {
-		mmCreatePaymentLink.mock.t.Fatalf("PaymentServiceHandlerMock.CreatePaymentLink mock is already set by ExpectParams functions")
+		mmCreatePaymentLink.mock.t.Fatalf("PaymentServiceClientMock.CreatePaymentLink mock is already set by ExpectParams functions")
 	}
 
-	mmCreatePaymentLink.defaultExpectation.params = &PaymentServiceHandlerMockCreatePaymentLinkParams{ctx, pp1}
+	mmCreatePaymentLink.defaultExpectation.params = &PaymentServiceClientMockCreatePaymentLinkParams{ctx, pp1}
 	mmCreatePaymentLink.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmCreatePaymentLink.expectations {
 		if minimock.Equal(e.params, mmCreatePaymentLink.defaultExpectation.params) {
@@ -209,22 +209,22 @@ func (mmCreatePaymentLink *mPaymentServiceHandlerMockCreatePaymentLink) Expect(c
 	return mmCreatePaymentLink
 }
 
-// ExpectCtxParam1 sets up expected param ctx for PaymentServiceHandler.CreatePaymentLink
-func (mmCreatePaymentLink *mPaymentServiceHandlerMockCreatePaymentLink) ExpectCtxParam1(ctx context.Context) *mPaymentServiceHandlerMockCreatePaymentLink {
+// ExpectCtxParam1 sets up expected param ctx for PaymentServiceClient.CreatePaymentLink
+func (mmCreatePaymentLink *mPaymentServiceClientMockCreatePaymentLink) ExpectCtxParam1(ctx context.Context) *mPaymentServiceClientMockCreatePaymentLink {
 	if mmCreatePaymentLink.mock.funcCreatePaymentLink != nil {
-		mmCreatePaymentLink.mock.t.Fatalf("PaymentServiceHandlerMock.CreatePaymentLink mock is already set by Set")
+		mmCreatePaymentLink.mock.t.Fatalf("PaymentServiceClientMock.CreatePaymentLink mock is already set by Set")
 	}
 
 	if mmCreatePaymentLink.defaultExpectation == nil {
-		mmCreatePaymentLink.defaultExpectation = &PaymentServiceHandlerMockCreatePaymentLinkExpectation{}
+		mmCreatePaymentLink.defaultExpectation = &PaymentServiceClientMockCreatePaymentLinkExpectation{}
 	}
 
 	if mmCreatePaymentLink.defaultExpectation.params != nil {
-		mmCreatePaymentLink.mock.t.Fatalf("PaymentServiceHandlerMock.CreatePaymentLink mock is already set by Expect")
+		mmCreatePaymentLink.mock.t.Fatalf("PaymentServiceClientMock.CreatePaymentLink mock is already set by Expect")
 	}
 
 	if mmCreatePaymentLink.defaultExpectation.paramPtrs == nil {
-		mmCreatePaymentLink.defaultExpectation.paramPtrs = &PaymentServiceHandlerMockCreatePaymentLinkParamPtrs{}
+		mmCreatePaymentLink.defaultExpectation.paramPtrs = &PaymentServiceClientMockCreatePaymentLinkParamPtrs{}
 	}
 	mmCreatePaymentLink.defaultExpectation.paramPtrs.ctx = &ctx
 	mmCreatePaymentLink.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -232,22 +232,22 @@ func (mmCreatePaymentLink *mPaymentServiceHandlerMockCreatePaymentLink) ExpectCt
 	return mmCreatePaymentLink
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for PaymentServiceHandler.CreatePaymentLink
-func (mmCreatePaymentLink *mPaymentServiceHandlerMockCreatePaymentLink) ExpectPp1Param2(pp1 *connect.Request[v1.CreatePaymentLinkRequest]) *mPaymentServiceHandlerMockCreatePaymentLink {
+// ExpectPp1Param2 sets up expected param pp1 for PaymentServiceClient.CreatePaymentLink
+func (mmCreatePaymentLink *mPaymentServiceClientMockCreatePaymentLink) ExpectPp1Param2(pp1 *connect.Request[v1.CreatePaymentLinkRequest]) *mPaymentServiceClientMockCreatePaymentLink {
 	if mmCreatePaymentLink.mock.funcCreatePaymentLink != nil {
-		mmCreatePaymentLink.mock.t.Fatalf("PaymentServiceHandlerMock.CreatePaymentLink mock is already set by Set")
+		mmCreatePaymentLink.mock.t.Fatalf("PaymentServiceClientMock.CreatePaymentLink mock is already set by Set")
 	}
 
 	if mmCreatePaymentLink.defaultExpectation == nil {
-		mmCreatePaymentLink.defaultExpectation = &PaymentServiceHandlerMockCreatePaymentLinkExpectation{}
+		mmCreatePaymentLink.defaultExpectation = &PaymentServiceClientMockCreatePaymentLinkExpectation{}
 	}
 
 	if mmCreatePaymentLink.defaultExpectation.params != nil {
-		mmCreatePaymentLink.mock.t.Fatalf("PaymentServiceHandlerMock.CreatePaymentLink mock is already set by Expect")
+		mmCreatePaymentLink.mock.t.Fatalf("PaymentServiceClientMock.CreatePaymentLink mock is already set by Expect")
 	}
 
 	if mmCreatePaymentLink.defaultExpectation.paramPtrs == nil {
-		mmCreatePaymentLink.defaultExpectation.paramPtrs = &PaymentServiceHandlerMockCreatePaymentLinkParamPtrs{}
+		mmCreatePaymentLink.defaultExpectation.paramPtrs = &PaymentServiceClientMockCreatePaymentLinkParamPtrs{}
 	}
 	mmCreatePaymentLink.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmCreatePaymentLink.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -255,10 +255,10 @@ func (mmCreatePaymentLink *mPaymentServiceHandlerMockCreatePaymentLink) ExpectPp
 	return mmCreatePaymentLink
 }
 
-// Inspect accepts an inspector function that has same arguments as the PaymentServiceHandler.CreatePaymentLink
-func (mmCreatePaymentLink *mPaymentServiceHandlerMockCreatePaymentLink) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.CreatePaymentLinkRequest])) *mPaymentServiceHandlerMockCreatePaymentLink {
+// Inspect accepts an inspector function that has same arguments as the PaymentServiceClient.CreatePaymentLink
+func (mmCreatePaymentLink *mPaymentServiceClientMockCreatePaymentLink) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.CreatePaymentLinkRequest])) *mPaymentServiceClientMockCreatePaymentLink {
 	if mmCreatePaymentLink.mock.inspectFuncCreatePaymentLink != nil {
-		mmCreatePaymentLink.mock.t.Fatalf("Inspect function is already set for PaymentServiceHandlerMock.CreatePaymentLink")
+		mmCreatePaymentLink.mock.t.Fatalf("Inspect function is already set for PaymentServiceClientMock.CreatePaymentLink")
 	}
 
 	mmCreatePaymentLink.mock.inspectFuncCreatePaymentLink = f
@@ -266,28 +266,28 @@ func (mmCreatePaymentLink *mPaymentServiceHandlerMockCreatePaymentLink) Inspect(
 	return mmCreatePaymentLink
 }
 
-// Return sets up results that will be returned by PaymentServiceHandler.CreatePaymentLink
-func (mmCreatePaymentLink *mPaymentServiceHandlerMockCreatePaymentLink) Return(pp2 *connect.Response[v1.CreatePaymentLinkResponse], err error) *PaymentServiceHandlerMock {
+// Return sets up results that will be returned by PaymentServiceClient.CreatePaymentLink
+func (mmCreatePaymentLink *mPaymentServiceClientMockCreatePaymentLink) Return(pp2 *connect.Response[v1.CreatePaymentLinkResponse], err error) *PaymentServiceClientMock {
 	if mmCreatePaymentLink.mock.funcCreatePaymentLink != nil {
-		mmCreatePaymentLink.mock.t.Fatalf("PaymentServiceHandlerMock.CreatePaymentLink mock is already set by Set")
+		mmCreatePaymentLink.mock.t.Fatalf("PaymentServiceClientMock.CreatePaymentLink mock is already set by Set")
 	}
 
 	if mmCreatePaymentLink.defaultExpectation == nil {
-		mmCreatePaymentLink.defaultExpectation = &PaymentServiceHandlerMockCreatePaymentLinkExpectation{mock: mmCreatePaymentLink.mock}
+		mmCreatePaymentLink.defaultExpectation = &PaymentServiceClientMockCreatePaymentLinkExpectation{mock: mmCreatePaymentLink.mock}
 	}
-	mmCreatePaymentLink.defaultExpectation.results = &PaymentServiceHandlerMockCreatePaymentLinkResults{pp2, err}
+	mmCreatePaymentLink.defaultExpectation.results = &PaymentServiceClientMockCreatePaymentLinkResults{pp2, err}
 	mmCreatePaymentLink.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmCreatePaymentLink.mock
 }
 
-// Set uses given function f to mock the PaymentServiceHandler.CreatePaymentLink method
-func (mmCreatePaymentLink *mPaymentServiceHandlerMockCreatePaymentLink) Set(f func(ctx context.Context, pp1 *connect.Request[v1.CreatePaymentLinkRequest]) (pp2 *connect.Response[v1.CreatePaymentLinkResponse], err error)) *PaymentServiceHandlerMock {
+// Set uses given function f to mock the PaymentServiceClient.CreatePaymentLink method
+func (mmCreatePaymentLink *mPaymentServiceClientMockCreatePaymentLink) Set(f func(ctx context.Context, pp1 *connect.Request[v1.CreatePaymentLinkRequest]) (pp2 *connect.Response[v1.CreatePaymentLinkResponse], err error)) *PaymentServiceClientMock {
 	if mmCreatePaymentLink.defaultExpectation != nil {
-		mmCreatePaymentLink.mock.t.Fatalf("Default expectation is already set for the PaymentServiceHandler.CreatePaymentLink method")
+		mmCreatePaymentLink.mock.t.Fatalf("Default expectation is already set for the PaymentServiceClient.CreatePaymentLink method")
 	}
 
 	if len(mmCreatePaymentLink.expectations) > 0 {
-		mmCreatePaymentLink.mock.t.Fatalf("Some expectations are already set for the PaymentServiceHandler.CreatePaymentLink method")
+		mmCreatePaymentLink.mock.t.Fatalf("Some expectations are already set for the PaymentServiceClient.CreatePaymentLink method")
 	}
 
 	mmCreatePaymentLink.mock.funcCreatePaymentLink = f
@@ -295,39 +295,39 @@ func (mmCreatePaymentLink *mPaymentServiceHandlerMockCreatePaymentLink) Set(f fu
 	return mmCreatePaymentLink.mock
 }
 
-// When sets expectation for the PaymentServiceHandler.CreatePaymentLink which will trigger the result defined by the following
+// When sets expectation for the PaymentServiceClient.CreatePaymentLink which will trigger the result defined by the following
 // Then helper
-func (mmCreatePaymentLink *mPaymentServiceHandlerMockCreatePaymentLink) When(ctx context.Context, pp1 *connect.Request[v1.CreatePaymentLinkRequest]) *PaymentServiceHandlerMockCreatePaymentLinkExpectation {
+func (mmCreatePaymentLink *mPaymentServiceClientMockCreatePaymentLink) When(ctx context.Context, pp1 *connect.Request[v1.CreatePaymentLinkRequest]) *PaymentServiceClientMockCreatePaymentLinkExpectation {
 	if mmCreatePaymentLink.mock.funcCreatePaymentLink != nil {
-		mmCreatePaymentLink.mock.t.Fatalf("PaymentServiceHandlerMock.CreatePaymentLink mock is already set by Set")
+		mmCreatePaymentLink.mock.t.Fatalf("PaymentServiceClientMock.CreatePaymentLink mock is already set by Set")
 	}
 
-	expectation := &PaymentServiceHandlerMockCreatePaymentLinkExpectation{
+	expectation := &PaymentServiceClientMockCreatePaymentLinkExpectation{
 		mock:               mmCreatePaymentLink.mock,
-		params:             &PaymentServiceHandlerMockCreatePaymentLinkParams{ctx, pp1},
-		expectationOrigins: PaymentServiceHandlerMockCreatePaymentLinkExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &PaymentServiceClientMockCreatePaymentLinkParams{ctx, pp1},
+		expectationOrigins: PaymentServiceClientMockCreatePaymentLinkExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmCreatePaymentLink.expectations = append(mmCreatePaymentLink.expectations, expectation)
 	return expectation
 }
 
-// Then sets up PaymentServiceHandler.CreatePaymentLink return parameters for the expectation previously defined by the When method
-func (e *PaymentServiceHandlerMockCreatePaymentLinkExpectation) Then(pp2 *connect.Response[v1.CreatePaymentLinkResponse], err error) *PaymentServiceHandlerMock {
-	e.results = &PaymentServiceHandlerMockCreatePaymentLinkResults{pp2, err}
+// Then sets up PaymentServiceClient.CreatePaymentLink return parameters for the expectation previously defined by the When method
+func (e *PaymentServiceClientMockCreatePaymentLinkExpectation) Then(pp2 *connect.Response[v1.CreatePaymentLinkResponse], err error) *PaymentServiceClientMock {
+	e.results = &PaymentServiceClientMockCreatePaymentLinkResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times PaymentServiceHandler.CreatePaymentLink should be invoked
-func (mmCreatePaymentLink *mPaymentServiceHandlerMockCreatePaymentLink) Times(n uint64) *mPaymentServiceHandlerMockCreatePaymentLink {
+// Times sets number of times PaymentServiceClient.CreatePaymentLink should be invoked
+func (mmCreatePaymentLink *mPaymentServiceClientMockCreatePaymentLink) Times(n uint64) *mPaymentServiceClientMockCreatePaymentLink {
 	if n == 0 {
-		mmCreatePaymentLink.mock.t.Fatalf("Times of PaymentServiceHandlerMock.CreatePaymentLink mock can not be zero")
+		mmCreatePaymentLink.mock.t.Fatalf("Times of PaymentServiceClientMock.CreatePaymentLink mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmCreatePaymentLink.expectedInvocations, n)
 	mmCreatePaymentLink.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmCreatePaymentLink
 }
 
-func (mmCreatePaymentLink *mPaymentServiceHandlerMockCreatePaymentLink) invocationsDone() bool {
+func (mmCreatePaymentLink *mPaymentServiceClientMockCreatePaymentLink) invocationsDone() bool {
 	if len(mmCreatePaymentLink.expectations) == 0 && mmCreatePaymentLink.defaultExpectation == nil && mmCreatePaymentLink.mock.funcCreatePaymentLink == nil {
 		return true
 	}
@@ -338,8 +338,8 @@ func (mmCreatePaymentLink *mPaymentServiceHandlerMockCreatePaymentLink) invocati
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// CreatePaymentLink implements mm_paymentv1connect.PaymentServiceHandler
-func (mmCreatePaymentLink *PaymentServiceHandlerMock) CreatePaymentLink(ctx context.Context, pp1 *connect.Request[v1.CreatePaymentLinkRequest]) (pp2 *connect.Response[v1.CreatePaymentLinkResponse], err error) {
+// CreatePaymentLink implements mm_paymentv1connect.PaymentServiceClient
+func (mmCreatePaymentLink *PaymentServiceClientMock) CreatePaymentLink(ctx context.Context, pp1 *connect.Request[v1.CreatePaymentLinkRequest]) (pp2 *connect.Response[v1.CreatePaymentLinkResponse], err error) {
 	mm_atomic.AddUint64(&mmCreatePaymentLink.beforeCreatePaymentLinkCounter, 1)
 	defer mm_atomic.AddUint64(&mmCreatePaymentLink.afterCreatePaymentLinkCounter, 1)
 
@@ -349,7 +349,7 @@ func (mmCreatePaymentLink *PaymentServiceHandlerMock) CreatePaymentLink(ctx cont
 		mmCreatePaymentLink.inspectFuncCreatePaymentLink(ctx, pp1)
 	}
 
-	mm_params := PaymentServiceHandlerMockCreatePaymentLinkParams{ctx, pp1}
+	mm_params := PaymentServiceClientMockCreatePaymentLinkParams{ctx, pp1}
 
 	// Record call args
 	mmCreatePaymentLink.CreatePaymentLinkMock.mutex.Lock()
@@ -368,54 +368,54 @@ func (mmCreatePaymentLink *PaymentServiceHandlerMock) CreatePaymentLink(ctx cont
 		mm_want := mmCreatePaymentLink.CreatePaymentLinkMock.defaultExpectation.params
 		mm_want_ptrs := mmCreatePaymentLink.CreatePaymentLinkMock.defaultExpectation.paramPtrs
 
-		mm_got := PaymentServiceHandlerMockCreatePaymentLinkParams{ctx, pp1}
+		mm_got := PaymentServiceClientMockCreatePaymentLinkParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmCreatePaymentLink.t.Errorf("PaymentServiceHandlerMock.CreatePaymentLink got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmCreatePaymentLink.t.Errorf("PaymentServiceClientMock.CreatePaymentLink got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmCreatePaymentLink.CreatePaymentLinkMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmCreatePaymentLink.t.Errorf("PaymentServiceHandlerMock.CreatePaymentLink got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmCreatePaymentLink.t.Errorf("PaymentServiceClientMock.CreatePaymentLink got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmCreatePaymentLink.CreatePaymentLinkMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmCreatePaymentLink.t.Errorf("PaymentServiceHandlerMock.CreatePaymentLink got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmCreatePaymentLink.t.Errorf("PaymentServiceClientMock.CreatePaymentLink got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmCreatePaymentLink.CreatePaymentLinkMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmCreatePaymentLink.CreatePaymentLinkMock.defaultExpectation.results
 		if mm_results == nil {
-			mmCreatePaymentLink.t.Fatal("No results are set for the PaymentServiceHandlerMock.CreatePaymentLink")
+			mmCreatePaymentLink.t.Fatal("No results are set for the PaymentServiceClientMock.CreatePaymentLink")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmCreatePaymentLink.funcCreatePaymentLink != nil {
 		return mmCreatePaymentLink.funcCreatePaymentLink(ctx, pp1)
 	}
-	mmCreatePaymentLink.t.Fatalf("Unexpected call to PaymentServiceHandlerMock.CreatePaymentLink. %v %v", ctx, pp1)
+	mmCreatePaymentLink.t.Fatalf("Unexpected call to PaymentServiceClientMock.CreatePaymentLink. %v %v", ctx, pp1)
 	return
 }
 
-// CreatePaymentLinkAfterCounter returns a count of finished PaymentServiceHandlerMock.CreatePaymentLink invocations
-func (mmCreatePaymentLink *PaymentServiceHandlerMock) CreatePaymentLinkAfterCounter() uint64 {
+// CreatePaymentLinkAfterCounter returns a count of finished PaymentServiceClientMock.CreatePaymentLink invocations
+func (mmCreatePaymentLink *PaymentServiceClientMock) CreatePaymentLinkAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmCreatePaymentLink.afterCreatePaymentLinkCounter)
 }
 
-// CreatePaymentLinkBeforeCounter returns a count of PaymentServiceHandlerMock.CreatePaymentLink invocations
-func (mmCreatePaymentLink *PaymentServiceHandlerMock) CreatePaymentLinkBeforeCounter() uint64 {
+// CreatePaymentLinkBeforeCounter returns a count of PaymentServiceClientMock.CreatePaymentLink invocations
+func (mmCreatePaymentLink *PaymentServiceClientMock) CreatePaymentLinkBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmCreatePaymentLink.beforeCreatePaymentLinkCounter)
 }
 
-// Calls returns a list of arguments used in each call to PaymentServiceHandlerMock.CreatePaymentLink.
+// Calls returns a list of arguments used in each call to PaymentServiceClientMock.CreatePaymentLink.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmCreatePaymentLink *mPaymentServiceHandlerMockCreatePaymentLink) Calls() []*PaymentServiceHandlerMockCreatePaymentLinkParams {
+func (mmCreatePaymentLink *mPaymentServiceClientMockCreatePaymentLink) Calls() []*PaymentServiceClientMockCreatePaymentLinkParams {
 	mmCreatePaymentLink.mutex.RLock()
 
-	argCopy := make([]*PaymentServiceHandlerMockCreatePaymentLinkParams, len(mmCreatePaymentLink.callArgs))
+	argCopy := make([]*PaymentServiceClientMockCreatePaymentLinkParams, len(mmCreatePaymentLink.callArgs))
 	copy(argCopy, mmCreatePaymentLink.callArgs)
 
 	mmCreatePaymentLink.mutex.RUnlock()
@@ -425,7 +425,7 @@ func (mmCreatePaymentLink *mPaymentServiceHandlerMockCreatePaymentLink) Calls() 
 
 // MinimockCreatePaymentLinkDone returns true if the count of the CreatePaymentLink invocations corresponds
 // the number of defined expectations
-func (m *PaymentServiceHandlerMock) MinimockCreatePaymentLinkDone() bool {
+func (m *PaymentServiceClientMock) MinimockCreatePaymentLinkDone() bool {
 	if m.CreatePaymentLinkMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -441,10 +441,10 @@ func (m *PaymentServiceHandlerMock) MinimockCreatePaymentLinkDone() bool {
 }
 
 // MinimockCreatePaymentLinkInspect logs each unmet expectation
-func (m *PaymentServiceHandlerMock) MinimockCreatePaymentLinkInspect() {
+func (m *PaymentServiceClientMock) MinimockCreatePaymentLinkInspect() {
 	for _, e := range m.CreatePaymentLinkMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to PaymentServiceHandlerMock.CreatePaymentLink at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to PaymentServiceClientMock.CreatePaymentLink at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -452,66 +452,66 @@ func (m *PaymentServiceHandlerMock) MinimockCreatePaymentLinkInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.CreatePaymentLinkMock.defaultExpectation != nil && afterCreatePaymentLinkCounter < 1 {
 		if m.CreatePaymentLinkMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to PaymentServiceHandlerMock.CreatePaymentLink at\n%s", m.CreatePaymentLinkMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to PaymentServiceClientMock.CreatePaymentLink at\n%s", m.CreatePaymentLinkMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to PaymentServiceHandlerMock.CreatePaymentLink at\n%s with params: %#v", m.CreatePaymentLinkMock.defaultExpectation.expectationOrigins.origin, *m.CreatePaymentLinkMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to PaymentServiceClientMock.CreatePaymentLink at\n%s with params: %#v", m.CreatePaymentLinkMock.defaultExpectation.expectationOrigins.origin, *m.CreatePaymentLinkMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcCreatePaymentLink != nil && afterCreatePaymentLinkCounter < 1 {
-		m.t.Errorf("Expected call to PaymentServiceHandlerMock.CreatePaymentLink at\n%s", m.funcCreatePaymentLinkOrigin)
+		m.t.Errorf("Expected call to PaymentServiceClientMock.CreatePaymentLink at\n%s", m.funcCreatePaymentLinkOrigin)
 	}
 
 	if !m.CreatePaymentLinkMock.invocationsDone() && afterCreatePaymentLinkCounter > 0 {
-		m.t.Errorf("Expected %d calls to PaymentServiceHandlerMock.CreatePaymentLink at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to PaymentServiceClientMock.CreatePaymentLink at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.CreatePaymentLinkMock.expectedInvocations), m.CreatePaymentLinkMock.expectedInvocationsOrigin, afterCreatePaymentLinkCounter)
 	}
 }
 
-type mPaymentServiceHandlerMockInitiatePrompt struct {
+type mPaymentServiceClientMockInitiatePrompt struct {
 	optional           bool
-	mock               *PaymentServiceHandlerMock
-	defaultExpectation *PaymentServiceHandlerMockInitiatePromptExpectation
-	expectations       []*PaymentServiceHandlerMockInitiatePromptExpectation
+	mock               *PaymentServiceClientMock
+	defaultExpectation *PaymentServiceClientMockInitiatePromptExpectation
+	expectations       []*PaymentServiceClientMockInitiatePromptExpectation
 
-	callArgs []*PaymentServiceHandlerMockInitiatePromptParams
+	callArgs []*PaymentServiceClientMockInitiatePromptParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// PaymentServiceHandlerMockInitiatePromptExpectation specifies expectation struct of the PaymentServiceHandler.InitiatePrompt
-type PaymentServiceHandlerMockInitiatePromptExpectation struct {
-	mock               *PaymentServiceHandlerMock
-	params             *PaymentServiceHandlerMockInitiatePromptParams
-	paramPtrs          *PaymentServiceHandlerMockInitiatePromptParamPtrs
-	expectationOrigins PaymentServiceHandlerMockInitiatePromptExpectationOrigins
-	results            *PaymentServiceHandlerMockInitiatePromptResults
+// PaymentServiceClientMockInitiatePromptExpectation specifies expectation struct of the PaymentServiceClient.InitiatePrompt
+type PaymentServiceClientMockInitiatePromptExpectation struct {
+	mock               *PaymentServiceClientMock
+	params             *PaymentServiceClientMockInitiatePromptParams
+	paramPtrs          *PaymentServiceClientMockInitiatePromptParamPtrs
+	expectationOrigins PaymentServiceClientMockInitiatePromptExpectationOrigins
+	results            *PaymentServiceClientMockInitiatePromptResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// PaymentServiceHandlerMockInitiatePromptParams contains parameters of the PaymentServiceHandler.InitiatePrompt
-type PaymentServiceHandlerMockInitiatePromptParams struct {
+// PaymentServiceClientMockInitiatePromptParams contains parameters of the PaymentServiceClient.InitiatePrompt
+type PaymentServiceClientMockInitiatePromptParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.InitiatePromptRequest]
 }
 
-// PaymentServiceHandlerMockInitiatePromptParamPtrs contains pointers to parameters of the PaymentServiceHandler.InitiatePrompt
-type PaymentServiceHandlerMockInitiatePromptParamPtrs struct {
+// PaymentServiceClientMockInitiatePromptParamPtrs contains pointers to parameters of the PaymentServiceClient.InitiatePrompt
+type PaymentServiceClientMockInitiatePromptParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.InitiatePromptRequest]
 }
 
-// PaymentServiceHandlerMockInitiatePromptResults contains results of the PaymentServiceHandler.InitiatePrompt
-type PaymentServiceHandlerMockInitiatePromptResults struct {
+// PaymentServiceClientMockInitiatePromptResults contains results of the PaymentServiceClient.InitiatePrompt
+type PaymentServiceClientMockInitiatePromptResults struct {
 	pp2 *connect.Response[v1.InitiatePromptResponse]
 	err error
 }
 
-// PaymentServiceHandlerMockInitiatePromptOrigins contains origins of expectations of the PaymentServiceHandler.InitiatePrompt
-type PaymentServiceHandlerMockInitiatePromptExpectationOrigins struct {
+// PaymentServiceClientMockInitiatePromptOrigins contains origins of expectations of the PaymentServiceClient.InitiatePrompt
+type PaymentServiceClientMockInitiatePromptExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -522,26 +522,26 @@ type PaymentServiceHandlerMockInitiatePromptExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmInitiatePrompt *mPaymentServiceHandlerMockInitiatePrompt) Optional() *mPaymentServiceHandlerMockInitiatePrompt {
+func (mmInitiatePrompt *mPaymentServiceClientMockInitiatePrompt) Optional() *mPaymentServiceClientMockInitiatePrompt {
 	mmInitiatePrompt.optional = true
 	return mmInitiatePrompt
 }
 
-// Expect sets up expected params for PaymentServiceHandler.InitiatePrompt
-func (mmInitiatePrompt *mPaymentServiceHandlerMockInitiatePrompt) Expect(ctx context.Context, pp1 *connect.Request[v1.InitiatePromptRequest]) *mPaymentServiceHandlerMockInitiatePrompt {
+// Expect sets up expected params for PaymentServiceClient.InitiatePrompt
+func (mmInitiatePrompt *mPaymentServiceClientMockInitiatePrompt) Expect(ctx context.Context, pp1 *connect.Request[v1.InitiatePromptRequest]) *mPaymentServiceClientMockInitiatePrompt {
 	if mmInitiatePrompt.mock.funcInitiatePrompt != nil {
-		mmInitiatePrompt.mock.t.Fatalf("PaymentServiceHandlerMock.InitiatePrompt mock is already set by Set")
+		mmInitiatePrompt.mock.t.Fatalf("PaymentServiceClientMock.InitiatePrompt mock is already set by Set")
 	}
 
 	if mmInitiatePrompt.defaultExpectation == nil {
-		mmInitiatePrompt.defaultExpectation = &PaymentServiceHandlerMockInitiatePromptExpectation{}
+		mmInitiatePrompt.defaultExpectation = &PaymentServiceClientMockInitiatePromptExpectation{}
 	}
 
 	if mmInitiatePrompt.defaultExpectation.paramPtrs != nil {
-		mmInitiatePrompt.mock.t.Fatalf("PaymentServiceHandlerMock.InitiatePrompt mock is already set by ExpectParams functions")
+		mmInitiatePrompt.mock.t.Fatalf("PaymentServiceClientMock.InitiatePrompt mock is already set by ExpectParams functions")
 	}
 
-	mmInitiatePrompt.defaultExpectation.params = &PaymentServiceHandlerMockInitiatePromptParams{ctx, pp1}
+	mmInitiatePrompt.defaultExpectation.params = &PaymentServiceClientMockInitiatePromptParams{ctx, pp1}
 	mmInitiatePrompt.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmInitiatePrompt.expectations {
 		if minimock.Equal(e.params, mmInitiatePrompt.defaultExpectation.params) {
@@ -552,22 +552,22 @@ func (mmInitiatePrompt *mPaymentServiceHandlerMockInitiatePrompt) Expect(ctx con
 	return mmInitiatePrompt
 }
 
-// ExpectCtxParam1 sets up expected param ctx for PaymentServiceHandler.InitiatePrompt
-func (mmInitiatePrompt *mPaymentServiceHandlerMockInitiatePrompt) ExpectCtxParam1(ctx context.Context) *mPaymentServiceHandlerMockInitiatePrompt {
+// ExpectCtxParam1 sets up expected param ctx for PaymentServiceClient.InitiatePrompt
+func (mmInitiatePrompt *mPaymentServiceClientMockInitiatePrompt) ExpectCtxParam1(ctx context.Context) *mPaymentServiceClientMockInitiatePrompt {
 	if mmInitiatePrompt.mock.funcInitiatePrompt != nil {
-		mmInitiatePrompt.mock.t.Fatalf("PaymentServiceHandlerMock.InitiatePrompt mock is already set by Set")
+		mmInitiatePrompt.mock.t.Fatalf("PaymentServiceClientMock.InitiatePrompt mock is already set by Set")
 	}
 
 	if mmInitiatePrompt.defaultExpectation == nil {
-		mmInitiatePrompt.defaultExpectation = &PaymentServiceHandlerMockInitiatePromptExpectation{}
+		mmInitiatePrompt.defaultExpectation = &PaymentServiceClientMockInitiatePromptExpectation{}
 	}
 
 	if mmInitiatePrompt.defaultExpectation.params != nil {
-		mmInitiatePrompt.mock.t.Fatalf("PaymentServiceHandlerMock.InitiatePrompt mock is already set by Expect")
+		mmInitiatePrompt.mock.t.Fatalf("PaymentServiceClientMock.InitiatePrompt mock is already set by Expect")
 	}
 
 	if mmInitiatePrompt.defaultExpectation.paramPtrs == nil {
-		mmInitiatePrompt.defaultExpectation.paramPtrs = &PaymentServiceHandlerMockInitiatePromptParamPtrs{}
+		mmInitiatePrompt.defaultExpectation.paramPtrs = &PaymentServiceClientMockInitiatePromptParamPtrs{}
 	}
 	mmInitiatePrompt.defaultExpectation.paramPtrs.ctx = &ctx
 	mmInitiatePrompt.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -575,22 +575,22 @@ func (mmInitiatePrompt *mPaymentServiceHandlerMockInitiatePrompt) ExpectCtxParam
 	return mmInitiatePrompt
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for PaymentServiceHandler.InitiatePrompt
-func (mmInitiatePrompt *mPaymentServiceHandlerMockInitiatePrompt) ExpectPp1Param2(pp1 *connect.Request[v1.InitiatePromptRequest]) *mPaymentServiceHandlerMockInitiatePrompt {
+// ExpectPp1Param2 sets up expected param pp1 for PaymentServiceClient.InitiatePrompt
+func (mmInitiatePrompt *mPaymentServiceClientMockInitiatePrompt) ExpectPp1Param2(pp1 *connect.Request[v1.InitiatePromptRequest]) *mPaymentServiceClientMockInitiatePrompt {
 	if mmInitiatePrompt.mock.funcInitiatePrompt != nil {
-		mmInitiatePrompt.mock.t.Fatalf("PaymentServiceHandlerMock.InitiatePrompt mock is already set by Set")
+		mmInitiatePrompt.mock.t.Fatalf("PaymentServiceClientMock.InitiatePrompt mock is already set by Set")
 	}
 
 	if mmInitiatePrompt.defaultExpectation == nil {
-		mmInitiatePrompt.defaultExpectation = &PaymentServiceHandlerMockInitiatePromptExpectation{}
+		mmInitiatePrompt.defaultExpectation = &PaymentServiceClientMockInitiatePromptExpectation{}
 	}
 
 	if mmInitiatePrompt.defaultExpectation.params != nil {
-		mmInitiatePrompt.mock.t.Fatalf("PaymentServiceHandlerMock.InitiatePrompt mock is already set by Expect")
+		mmInitiatePrompt.mock.t.Fatalf("PaymentServiceClientMock.InitiatePrompt mock is already set by Expect")
 	}
 
 	if mmInitiatePrompt.defaultExpectation.paramPtrs == nil {
-		mmInitiatePrompt.defaultExpectation.paramPtrs = &PaymentServiceHandlerMockInitiatePromptParamPtrs{}
+		mmInitiatePrompt.defaultExpectation.paramPtrs = &PaymentServiceClientMockInitiatePromptParamPtrs{}
 	}
 	mmInitiatePrompt.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmInitiatePrompt.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -598,10 +598,10 @@ func (mmInitiatePrompt *mPaymentServiceHandlerMockInitiatePrompt) ExpectPp1Param
 	return mmInitiatePrompt
 }
 
-// Inspect accepts an inspector function that has same arguments as the PaymentServiceHandler.InitiatePrompt
-func (mmInitiatePrompt *mPaymentServiceHandlerMockInitiatePrompt) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.InitiatePromptRequest])) *mPaymentServiceHandlerMockInitiatePrompt {
+// Inspect accepts an inspector function that has same arguments as the PaymentServiceClient.InitiatePrompt
+func (mmInitiatePrompt *mPaymentServiceClientMockInitiatePrompt) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.InitiatePromptRequest])) *mPaymentServiceClientMockInitiatePrompt {
 	if mmInitiatePrompt.mock.inspectFuncInitiatePrompt != nil {
-		mmInitiatePrompt.mock.t.Fatalf("Inspect function is already set for PaymentServiceHandlerMock.InitiatePrompt")
+		mmInitiatePrompt.mock.t.Fatalf("Inspect function is already set for PaymentServiceClientMock.InitiatePrompt")
 	}
 
 	mmInitiatePrompt.mock.inspectFuncInitiatePrompt = f
@@ -609,28 +609,28 @@ func (mmInitiatePrompt *mPaymentServiceHandlerMockInitiatePrompt) Inspect(f func
 	return mmInitiatePrompt
 }
 
-// Return sets up results that will be returned by PaymentServiceHandler.InitiatePrompt
-func (mmInitiatePrompt *mPaymentServiceHandlerMockInitiatePrompt) Return(pp2 *connect.Response[v1.InitiatePromptResponse], err error) *PaymentServiceHandlerMock {
+// Return sets up results that will be returned by PaymentServiceClient.InitiatePrompt
+func (mmInitiatePrompt *mPaymentServiceClientMockInitiatePrompt) Return(pp2 *connect.Response[v1.InitiatePromptResponse], err error) *PaymentServiceClientMock {
 	if mmInitiatePrompt.mock.funcInitiatePrompt != nil {
-		mmInitiatePrompt.mock.t.Fatalf("PaymentServiceHandlerMock.InitiatePrompt mock is already set by Set")
+		mmInitiatePrompt.mock.t.Fatalf("PaymentServiceClientMock.InitiatePrompt mock is already set by Set")
 	}
 
 	if mmInitiatePrompt.defaultExpectation == nil {
-		mmInitiatePrompt.defaultExpectation = &PaymentServiceHandlerMockInitiatePromptExpectation{mock: mmInitiatePrompt.mock}
+		mmInitiatePrompt.defaultExpectation = &PaymentServiceClientMockInitiatePromptExpectation{mock: mmInitiatePrompt.mock}
 	}
-	mmInitiatePrompt.defaultExpectation.results = &PaymentServiceHandlerMockInitiatePromptResults{pp2, err}
+	mmInitiatePrompt.defaultExpectation.results = &PaymentServiceClientMockInitiatePromptResults{pp2, err}
 	mmInitiatePrompt.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmInitiatePrompt.mock
 }
 
-// Set uses given function f to mock the PaymentServiceHandler.InitiatePrompt method
-func (mmInitiatePrompt *mPaymentServiceHandlerMockInitiatePrompt) Set(f func(ctx context.Context, pp1 *connect.Request[v1.InitiatePromptRequest]) (pp2 *connect.Response[v1.InitiatePromptResponse], err error)) *PaymentServiceHandlerMock {
+// Set uses given function f to mock the PaymentServiceClient.InitiatePrompt method
+func (mmInitiatePrompt *mPaymentServiceClientMockInitiatePrompt) Set(f func(ctx context.Context, pp1 *connect.Request[v1.InitiatePromptRequest]) (pp2 *connect.Response[v1.InitiatePromptResponse], err error)) *PaymentServiceClientMock {
 	if mmInitiatePrompt.defaultExpectation != nil {
-		mmInitiatePrompt.mock.t.Fatalf("Default expectation is already set for the PaymentServiceHandler.InitiatePrompt method")
+		mmInitiatePrompt.mock.t.Fatalf("Default expectation is already set for the PaymentServiceClient.InitiatePrompt method")
 	}
 
 	if len(mmInitiatePrompt.expectations) > 0 {
-		mmInitiatePrompt.mock.t.Fatalf("Some expectations are already set for the PaymentServiceHandler.InitiatePrompt method")
+		mmInitiatePrompt.mock.t.Fatalf("Some expectations are already set for the PaymentServiceClient.InitiatePrompt method")
 	}
 
 	mmInitiatePrompt.mock.funcInitiatePrompt = f
@@ -638,39 +638,39 @@ func (mmInitiatePrompt *mPaymentServiceHandlerMockInitiatePrompt) Set(f func(ctx
 	return mmInitiatePrompt.mock
 }
 
-// When sets expectation for the PaymentServiceHandler.InitiatePrompt which will trigger the result defined by the following
+// When sets expectation for the PaymentServiceClient.InitiatePrompt which will trigger the result defined by the following
 // Then helper
-func (mmInitiatePrompt *mPaymentServiceHandlerMockInitiatePrompt) When(ctx context.Context, pp1 *connect.Request[v1.InitiatePromptRequest]) *PaymentServiceHandlerMockInitiatePromptExpectation {
+func (mmInitiatePrompt *mPaymentServiceClientMockInitiatePrompt) When(ctx context.Context, pp1 *connect.Request[v1.InitiatePromptRequest]) *PaymentServiceClientMockInitiatePromptExpectation {
 	if mmInitiatePrompt.mock.funcInitiatePrompt != nil {
-		mmInitiatePrompt.mock.t.Fatalf("PaymentServiceHandlerMock.InitiatePrompt mock is already set by Set")
+		mmInitiatePrompt.mock.t.Fatalf("PaymentServiceClientMock.InitiatePrompt mock is already set by Set")
 	}
 
-	expectation := &PaymentServiceHandlerMockInitiatePromptExpectation{
+	expectation := &PaymentServiceClientMockInitiatePromptExpectation{
 		mock:               mmInitiatePrompt.mock,
-		params:             &PaymentServiceHandlerMockInitiatePromptParams{ctx, pp1},
-		expectationOrigins: PaymentServiceHandlerMockInitiatePromptExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &PaymentServiceClientMockInitiatePromptParams{ctx, pp1},
+		expectationOrigins: PaymentServiceClientMockInitiatePromptExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmInitiatePrompt.expectations = append(mmInitiatePrompt.expectations, expectation)
 	return expectation
 }
 
-// Then sets up PaymentServiceHandler.InitiatePrompt return parameters for the expectation previously defined by the When method
-func (e *PaymentServiceHandlerMockInitiatePromptExpectation) Then(pp2 *connect.Response[v1.InitiatePromptResponse], err error) *PaymentServiceHandlerMock {
-	e.results = &PaymentServiceHandlerMockInitiatePromptResults{pp2, err}
+// Then sets up PaymentServiceClient.InitiatePrompt return parameters for the expectation previously defined by the When method
+func (e *PaymentServiceClientMockInitiatePromptExpectation) Then(pp2 *connect.Response[v1.InitiatePromptResponse], err error) *PaymentServiceClientMock {
+	e.results = &PaymentServiceClientMockInitiatePromptResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times PaymentServiceHandler.InitiatePrompt should be invoked
-func (mmInitiatePrompt *mPaymentServiceHandlerMockInitiatePrompt) Times(n uint64) *mPaymentServiceHandlerMockInitiatePrompt {
+// Times sets number of times PaymentServiceClient.InitiatePrompt should be invoked
+func (mmInitiatePrompt *mPaymentServiceClientMockInitiatePrompt) Times(n uint64) *mPaymentServiceClientMockInitiatePrompt {
 	if n == 0 {
-		mmInitiatePrompt.mock.t.Fatalf("Times of PaymentServiceHandlerMock.InitiatePrompt mock can not be zero")
+		mmInitiatePrompt.mock.t.Fatalf("Times of PaymentServiceClientMock.InitiatePrompt mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmInitiatePrompt.expectedInvocations, n)
 	mmInitiatePrompt.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmInitiatePrompt
 }
 
-func (mmInitiatePrompt *mPaymentServiceHandlerMockInitiatePrompt) invocationsDone() bool {
+func (mmInitiatePrompt *mPaymentServiceClientMockInitiatePrompt) invocationsDone() bool {
 	if len(mmInitiatePrompt.expectations) == 0 && mmInitiatePrompt.defaultExpectation == nil && mmInitiatePrompt.mock.funcInitiatePrompt == nil {
 		return true
 	}
@@ -681,8 +681,8 @@ func (mmInitiatePrompt *mPaymentServiceHandlerMockInitiatePrompt) invocationsDon
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// InitiatePrompt implements mm_paymentv1connect.PaymentServiceHandler
-func (mmInitiatePrompt *PaymentServiceHandlerMock) InitiatePrompt(ctx context.Context, pp1 *connect.Request[v1.InitiatePromptRequest]) (pp2 *connect.Response[v1.InitiatePromptResponse], err error) {
+// InitiatePrompt implements mm_paymentv1connect.PaymentServiceClient
+func (mmInitiatePrompt *PaymentServiceClientMock) InitiatePrompt(ctx context.Context, pp1 *connect.Request[v1.InitiatePromptRequest]) (pp2 *connect.Response[v1.InitiatePromptResponse], err error) {
 	mm_atomic.AddUint64(&mmInitiatePrompt.beforeInitiatePromptCounter, 1)
 	defer mm_atomic.AddUint64(&mmInitiatePrompt.afterInitiatePromptCounter, 1)
 
@@ -692,7 +692,7 @@ func (mmInitiatePrompt *PaymentServiceHandlerMock) InitiatePrompt(ctx context.Co
 		mmInitiatePrompt.inspectFuncInitiatePrompt(ctx, pp1)
 	}
 
-	mm_params := PaymentServiceHandlerMockInitiatePromptParams{ctx, pp1}
+	mm_params := PaymentServiceClientMockInitiatePromptParams{ctx, pp1}
 
 	// Record call args
 	mmInitiatePrompt.InitiatePromptMock.mutex.Lock()
@@ -711,54 +711,54 @@ func (mmInitiatePrompt *PaymentServiceHandlerMock) InitiatePrompt(ctx context.Co
 		mm_want := mmInitiatePrompt.InitiatePromptMock.defaultExpectation.params
 		mm_want_ptrs := mmInitiatePrompt.InitiatePromptMock.defaultExpectation.paramPtrs
 
-		mm_got := PaymentServiceHandlerMockInitiatePromptParams{ctx, pp1}
+		mm_got := PaymentServiceClientMockInitiatePromptParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmInitiatePrompt.t.Errorf("PaymentServiceHandlerMock.InitiatePrompt got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmInitiatePrompt.t.Errorf("PaymentServiceClientMock.InitiatePrompt got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmInitiatePrompt.InitiatePromptMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmInitiatePrompt.t.Errorf("PaymentServiceHandlerMock.InitiatePrompt got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmInitiatePrompt.t.Errorf("PaymentServiceClientMock.InitiatePrompt got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmInitiatePrompt.InitiatePromptMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmInitiatePrompt.t.Errorf("PaymentServiceHandlerMock.InitiatePrompt got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmInitiatePrompt.t.Errorf("PaymentServiceClientMock.InitiatePrompt got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmInitiatePrompt.InitiatePromptMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmInitiatePrompt.InitiatePromptMock.defaultExpectation.results
 		if mm_results == nil {
-			mmInitiatePrompt.t.Fatal("No results are set for the PaymentServiceHandlerMock.InitiatePrompt")
+			mmInitiatePrompt.t.Fatal("No results are set for the PaymentServiceClientMock.InitiatePrompt")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmInitiatePrompt.funcInitiatePrompt != nil {
 		return mmInitiatePrompt.funcInitiatePrompt(ctx, pp1)
 	}
-	mmInitiatePrompt.t.Fatalf("Unexpected call to PaymentServiceHandlerMock.InitiatePrompt. %v %v", ctx, pp1)
+	mmInitiatePrompt.t.Fatalf("Unexpected call to PaymentServiceClientMock.InitiatePrompt. %v %v", ctx, pp1)
 	return
 }
 
-// InitiatePromptAfterCounter returns a count of finished PaymentServiceHandlerMock.InitiatePrompt invocations
-func (mmInitiatePrompt *PaymentServiceHandlerMock) InitiatePromptAfterCounter() uint64 {
+// InitiatePromptAfterCounter returns a count of finished PaymentServiceClientMock.InitiatePrompt invocations
+func (mmInitiatePrompt *PaymentServiceClientMock) InitiatePromptAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmInitiatePrompt.afterInitiatePromptCounter)
 }
 
-// InitiatePromptBeforeCounter returns a count of PaymentServiceHandlerMock.InitiatePrompt invocations
-func (mmInitiatePrompt *PaymentServiceHandlerMock) InitiatePromptBeforeCounter() uint64 {
+// InitiatePromptBeforeCounter returns a count of PaymentServiceClientMock.InitiatePrompt invocations
+func (mmInitiatePrompt *PaymentServiceClientMock) InitiatePromptBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmInitiatePrompt.beforeInitiatePromptCounter)
 }
 
-// Calls returns a list of arguments used in each call to PaymentServiceHandlerMock.InitiatePrompt.
+// Calls returns a list of arguments used in each call to PaymentServiceClientMock.InitiatePrompt.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmInitiatePrompt *mPaymentServiceHandlerMockInitiatePrompt) Calls() []*PaymentServiceHandlerMockInitiatePromptParams {
+func (mmInitiatePrompt *mPaymentServiceClientMockInitiatePrompt) Calls() []*PaymentServiceClientMockInitiatePromptParams {
 	mmInitiatePrompt.mutex.RLock()
 
-	argCopy := make([]*PaymentServiceHandlerMockInitiatePromptParams, len(mmInitiatePrompt.callArgs))
+	argCopy := make([]*PaymentServiceClientMockInitiatePromptParams, len(mmInitiatePrompt.callArgs))
 	copy(argCopy, mmInitiatePrompt.callArgs)
 
 	mmInitiatePrompt.mutex.RUnlock()
@@ -768,7 +768,7 @@ func (mmInitiatePrompt *mPaymentServiceHandlerMockInitiatePrompt) Calls() []*Pay
 
 // MinimockInitiatePromptDone returns true if the count of the InitiatePrompt invocations corresponds
 // the number of defined expectations
-func (m *PaymentServiceHandlerMock) MinimockInitiatePromptDone() bool {
+func (m *PaymentServiceClientMock) MinimockInitiatePromptDone() bool {
 	if m.InitiatePromptMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -784,10 +784,10 @@ func (m *PaymentServiceHandlerMock) MinimockInitiatePromptDone() bool {
 }
 
 // MinimockInitiatePromptInspect logs each unmet expectation
-func (m *PaymentServiceHandlerMock) MinimockInitiatePromptInspect() {
+func (m *PaymentServiceClientMock) MinimockInitiatePromptInspect() {
 	for _, e := range m.InitiatePromptMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to PaymentServiceHandlerMock.InitiatePrompt at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to PaymentServiceClientMock.InitiatePrompt at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -795,66 +795,66 @@ func (m *PaymentServiceHandlerMock) MinimockInitiatePromptInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.InitiatePromptMock.defaultExpectation != nil && afterInitiatePromptCounter < 1 {
 		if m.InitiatePromptMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to PaymentServiceHandlerMock.InitiatePrompt at\n%s", m.InitiatePromptMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to PaymentServiceClientMock.InitiatePrompt at\n%s", m.InitiatePromptMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to PaymentServiceHandlerMock.InitiatePrompt at\n%s with params: %#v", m.InitiatePromptMock.defaultExpectation.expectationOrigins.origin, *m.InitiatePromptMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to PaymentServiceClientMock.InitiatePrompt at\n%s with params: %#v", m.InitiatePromptMock.defaultExpectation.expectationOrigins.origin, *m.InitiatePromptMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcInitiatePrompt != nil && afterInitiatePromptCounter < 1 {
-		m.t.Errorf("Expected call to PaymentServiceHandlerMock.InitiatePrompt at\n%s", m.funcInitiatePromptOrigin)
+		m.t.Errorf("Expected call to PaymentServiceClientMock.InitiatePrompt at\n%s", m.funcInitiatePromptOrigin)
 	}
 
 	if !m.InitiatePromptMock.invocationsDone() && afterInitiatePromptCounter > 0 {
-		m.t.Errorf("Expected %d calls to PaymentServiceHandlerMock.InitiatePrompt at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to PaymentServiceClientMock.InitiatePrompt at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.InitiatePromptMock.expectedInvocations), m.InitiatePromptMock.expectedInvocationsOrigin, afterInitiatePromptCounter)
 	}
 }
 
-type mPaymentServiceHandlerMockReceive struct {
+type mPaymentServiceClientMockReceive struct {
 	optional           bool
-	mock               *PaymentServiceHandlerMock
-	defaultExpectation *PaymentServiceHandlerMockReceiveExpectation
-	expectations       []*PaymentServiceHandlerMockReceiveExpectation
+	mock               *PaymentServiceClientMock
+	defaultExpectation *PaymentServiceClientMockReceiveExpectation
+	expectations       []*PaymentServiceClientMockReceiveExpectation
 
-	callArgs []*PaymentServiceHandlerMockReceiveParams
+	callArgs []*PaymentServiceClientMockReceiveParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// PaymentServiceHandlerMockReceiveExpectation specifies expectation struct of the PaymentServiceHandler.Receive
-type PaymentServiceHandlerMockReceiveExpectation struct {
-	mock               *PaymentServiceHandlerMock
-	params             *PaymentServiceHandlerMockReceiveParams
-	paramPtrs          *PaymentServiceHandlerMockReceiveParamPtrs
-	expectationOrigins PaymentServiceHandlerMockReceiveExpectationOrigins
-	results            *PaymentServiceHandlerMockReceiveResults
+// PaymentServiceClientMockReceiveExpectation specifies expectation struct of the PaymentServiceClient.Receive
+type PaymentServiceClientMockReceiveExpectation struct {
+	mock               *PaymentServiceClientMock
+	params             *PaymentServiceClientMockReceiveParams
+	paramPtrs          *PaymentServiceClientMockReceiveParamPtrs
+	expectationOrigins PaymentServiceClientMockReceiveExpectationOrigins
+	results            *PaymentServiceClientMockReceiveResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// PaymentServiceHandlerMockReceiveParams contains parameters of the PaymentServiceHandler.Receive
-type PaymentServiceHandlerMockReceiveParams struct {
+// PaymentServiceClientMockReceiveParams contains parameters of the PaymentServiceClient.Receive
+type PaymentServiceClientMockReceiveParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.ReceiveRequest]
 }
 
-// PaymentServiceHandlerMockReceiveParamPtrs contains pointers to parameters of the PaymentServiceHandler.Receive
-type PaymentServiceHandlerMockReceiveParamPtrs struct {
+// PaymentServiceClientMockReceiveParamPtrs contains pointers to parameters of the PaymentServiceClient.Receive
+type PaymentServiceClientMockReceiveParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.ReceiveRequest]
 }
 
-// PaymentServiceHandlerMockReceiveResults contains results of the PaymentServiceHandler.Receive
-type PaymentServiceHandlerMockReceiveResults struct {
+// PaymentServiceClientMockReceiveResults contains results of the PaymentServiceClient.Receive
+type PaymentServiceClientMockReceiveResults struct {
 	pp2 *connect.Response[v1.ReceiveResponse]
 	err error
 }
 
-// PaymentServiceHandlerMockReceiveOrigins contains origins of expectations of the PaymentServiceHandler.Receive
-type PaymentServiceHandlerMockReceiveExpectationOrigins struct {
+// PaymentServiceClientMockReceiveOrigins contains origins of expectations of the PaymentServiceClient.Receive
+type PaymentServiceClientMockReceiveExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -865,26 +865,26 @@ type PaymentServiceHandlerMockReceiveExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmReceive *mPaymentServiceHandlerMockReceive) Optional() *mPaymentServiceHandlerMockReceive {
+func (mmReceive *mPaymentServiceClientMockReceive) Optional() *mPaymentServiceClientMockReceive {
 	mmReceive.optional = true
 	return mmReceive
 }
 
-// Expect sets up expected params for PaymentServiceHandler.Receive
-func (mmReceive *mPaymentServiceHandlerMockReceive) Expect(ctx context.Context, pp1 *connect.Request[v1.ReceiveRequest]) *mPaymentServiceHandlerMockReceive {
+// Expect sets up expected params for PaymentServiceClient.Receive
+func (mmReceive *mPaymentServiceClientMockReceive) Expect(ctx context.Context, pp1 *connect.Request[v1.ReceiveRequest]) *mPaymentServiceClientMockReceive {
 	if mmReceive.mock.funcReceive != nil {
-		mmReceive.mock.t.Fatalf("PaymentServiceHandlerMock.Receive mock is already set by Set")
+		mmReceive.mock.t.Fatalf("PaymentServiceClientMock.Receive mock is already set by Set")
 	}
 
 	if mmReceive.defaultExpectation == nil {
-		mmReceive.defaultExpectation = &PaymentServiceHandlerMockReceiveExpectation{}
+		mmReceive.defaultExpectation = &PaymentServiceClientMockReceiveExpectation{}
 	}
 
 	if mmReceive.defaultExpectation.paramPtrs != nil {
-		mmReceive.mock.t.Fatalf("PaymentServiceHandlerMock.Receive mock is already set by ExpectParams functions")
+		mmReceive.mock.t.Fatalf("PaymentServiceClientMock.Receive mock is already set by ExpectParams functions")
 	}
 
-	mmReceive.defaultExpectation.params = &PaymentServiceHandlerMockReceiveParams{ctx, pp1}
+	mmReceive.defaultExpectation.params = &PaymentServiceClientMockReceiveParams{ctx, pp1}
 	mmReceive.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmReceive.expectations {
 		if minimock.Equal(e.params, mmReceive.defaultExpectation.params) {
@@ -895,22 +895,22 @@ func (mmReceive *mPaymentServiceHandlerMockReceive) Expect(ctx context.Context, 
 	return mmReceive
 }
 
-// ExpectCtxParam1 sets up expected param ctx for PaymentServiceHandler.Receive
-func (mmReceive *mPaymentServiceHandlerMockReceive) ExpectCtxParam1(ctx context.Context) *mPaymentServiceHandlerMockReceive {
+// ExpectCtxParam1 sets up expected param ctx for PaymentServiceClient.Receive
+func (mmReceive *mPaymentServiceClientMockReceive) ExpectCtxParam1(ctx context.Context) *mPaymentServiceClientMockReceive {
 	if mmReceive.mock.funcReceive != nil {
-		mmReceive.mock.t.Fatalf("PaymentServiceHandlerMock.Receive mock is already set by Set")
+		mmReceive.mock.t.Fatalf("PaymentServiceClientMock.Receive mock is already set by Set")
 	}
 
 	if mmReceive.defaultExpectation == nil {
-		mmReceive.defaultExpectation = &PaymentServiceHandlerMockReceiveExpectation{}
+		mmReceive.defaultExpectation = &PaymentServiceClientMockReceiveExpectation{}
 	}
 
 	if mmReceive.defaultExpectation.params != nil {
-		mmReceive.mock.t.Fatalf("PaymentServiceHandlerMock.Receive mock is already set by Expect")
+		mmReceive.mock.t.Fatalf("PaymentServiceClientMock.Receive mock is already set by Expect")
 	}
 
 	if mmReceive.defaultExpectation.paramPtrs == nil {
-		mmReceive.defaultExpectation.paramPtrs = &PaymentServiceHandlerMockReceiveParamPtrs{}
+		mmReceive.defaultExpectation.paramPtrs = &PaymentServiceClientMockReceiveParamPtrs{}
 	}
 	mmReceive.defaultExpectation.paramPtrs.ctx = &ctx
 	mmReceive.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -918,22 +918,22 @@ func (mmReceive *mPaymentServiceHandlerMockReceive) ExpectCtxParam1(ctx context.
 	return mmReceive
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for PaymentServiceHandler.Receive
-func (mmReceive *mPaymentServiceHandlerMockReceive) ExpectPp1Param2(pp1 *connect.Request[v1.ReceiveRequest]) *mPaymentServiceHandlerMockReceive {
+// ExpectPp1Param2 sets up expected param pp1 for PaymentServiceClient.Receive
+func (mmReceive *mPaymentServiceClientMockReceive) ExpectPp1Param2(pp1 *connect.Request[v1.ReceiveRequest]) *mPaymentServiceClientMockReceive {
 	if mmReceive.mock.funcReceive != nil {
-		mmReceive.mock.t.Fatalf("PaymentServiceHandlerMock.Receive mock is already set by Set")
+		mmReceive.mock.t.Fatalf("PaymentServiceClientMock.Receive mock is already set by Set")
 	}
 
 	if mmReceive.defaultExpectation == nil {
-		mmReceive.defaultExpectation = &PaymentServiceHandlerMockReceiveExpectation{}
+		mmReceive.defaultExpectation = &PaymentServiceClientMockReceiveExpectation{}
 	}
 
 	if mmReceive.defaultExpectation.params != nil {
-		mmReceive.mock.t.Fatalf("PaymentServiceHandlerMock.Receive mock is already set by Expect")
+		mmReceive.mock.t.Fatalf("PaymentServiceClientMock.Receive mock is already set by Expect")
 	}
 
 	if mmReceive.defaultExpectation.paramPtrs == nil {
-		mmReceive.defaultExpectation.paramPtrs = &PaymentServiceHandlerMockReceiveParamPtrs{}
+		mmReceive.defaultExpectation.paramPtrs = &PaymentServiceClientMockReceiveParamPtrs{}
 	}
 	mmReceive.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmReceive.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -941,10 +941,10 @@ func (mmReceive *mPaymentServiceHandlerMockReceive) ExpectPp1Param2(pp1 *connect
 	return mmReceive
 }
 
-// Inspect accepts an inspector function that has same arguments as the PaymentServiceHandler.Receive
-func (mmReceive *mPaymentServiceHandlerMockReceive) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.ReceiveRequest])) *mPaymentServiceHandlerMockReceive {
+// Inspect accepts an inspector function that has same arguments as the PaymentServiceClient.Receive
+func (mmReceive *mPaymentServiceClientMockReceive) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.ReceiveRequest])) *mPaymentServiceClientMockReceive {
 	if mmReceive.mock.inspectFuncReceive != nil {
-		mmReceive.mock.t.Fatalf("Inspect function is already set for PaymentServiceHandlerMock.Receive")
+		mmReceive.mock.t.Fatalf("Inspect function is already set for PaymentServiceClientMock.Receive")
 	}
 
 	mmReceive.mock.inspectFuncReceive = f
@@ -952,28 +952,28 @@ func (mmReceive *mPaymentServiceHandlerMockReceive) Inspect(f func(ctx context.C
 	return mmReceive
 }
 
-// Return sets up results that will be returned by PaymentServiceHandler.Receive
-func (mmReceive *mPaymentServiceHandlerMockReceive) Return(pp2 *connect.Response[v1.ReceiveResponse], err error) *PaymentServiceHandlerMock {
+// Return sets up results that will be returned by PaymentServiceClient.Receive
+func (mmReceive *mPaymentServiceClientMockReceive) Return(pp2 *connect.Response[v1.ReceiveResponse], err error) *PaymentServiceClientMock {
 	if mmReceive.mock.funcReceive != nil {
-		mmReceive.mock.t.Fatalf("PaymentServiceHandlerMock.Receive mock is already set by Set")
+		mmReceive.mock.t.Fatalf("PaymentServiceClientMock.Receive mock is already set by Set")
 	}
 
 	if mmReceive.defaultExpectation == nil {
-		mmReceive.defaultExpectation = &PaymentServiceHandlerMockReceiveExpectation{mock: mmReceive.mock}
+		mmReceive.defaultExpectation = &PaymentServiceClientMockReceiveExpectation{mock: mmReceive.mock}
 	}
-	mmReceive.defaultExpectation.results = &PaymentServiceHandlerMockReceiveResults{pp2, err}
+	mmReceive.defaultExpectation.results = &PaymentServiceClientMockReceiveResults{pp2, err}
 	mmReceive.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmReceive.mock
 }
 
-// Set uses given function f to mock the PaymentServiceHandler.Receive method
-func (mmReceive *mPaymentServiceHandlerMockReceive) Set(f func(ctx context.Context, pp1 *connect.Request[v1.ReceiveRequest]) (pp2 *connect.Response[v1.ReceiveResponse], err error)) *PaymentServiceHandlerMock {
+// Set uses given function f to mock the PaymentServiceClient.Receive method
+func (mmReceive *mPaymentServiceClientMockReceive) Set(f func(ctx context.Context, pp1 *connect.Request[v1.ReceiveRequest]) (pp2 *connect.Response[v1.ReceiveResponse], err error)) *PaymentServiceClientMock {
 	if mmReceive.defaultExpectation != nil {
-		mmReceive.mock.t.Fatalf("Default expectation is already set for the PaymentServiceHandler.Receive method")
+		mmReceive.mock.t.Fatalf("Default expectation is already set for the PaymentServiceClient.Receive method")
 	}
 
 	if len(mmReceive.expectations) > 0 {
-		mmReceive.mock.t.Fatalf("Some expectations are already set for the PaymentServiceHandler.Receive method")
+		mmReceive.mock.t.Fatalf("Some expectations are already set for the PaymentServiceClient.Receive method")
 	}
 
 	mmReceive.mock.funcReceive = f
@@ -981,39 +981,39 @@ func (mmReceive *mPaymentServiceHandlerMockReceive) Set(f func(ctx context.Conte
 	return mmReceive.mock
 }
 
-// When sets expectation for the PaymentServiceHandler.Receive which will trigger the result defined by the following
+// When sets expectation for the PaymentServiceClient.Receive which will trigger the result defined by the following
 // Then helper
-func (mmReceive *mPaymentServiceHandlerMockReceive) When(ctx context.Context, pp1 *connect.Request[v1.ReceiveRequest]) *PaymentServiceHandlerMockReceiveExpectation {
+func (mmReceive *mPaymentServiceClientMockReceive) When(ctx context.Context, pp1 *connect.Request[v1.ReceiveRequest]) *PaymentServiceClientMockReceiveExpectation {
 	if mmReceive.mock.funcReceive != nil {
-		mmReceive.mock.t.Fatalf("PaymentServiceHandlerMock.Receive mock is already set by Set")
+		mmReceive.mock.t.Fatalf("PaymentServiceClientMock.Receive mock is already set by Set")
 	}
 
-	expectation := &PaymentServiceHandlerMockReceiveExpectation{
+	expectation := &PaymentServiceClientMockReceiveExpectation{
 		mock:               mmReceive.mock,
-		params:             &PaymentServiceHandlerMockReceiveParams{ctx, pp1},
-		expectationOrigins: PaymentServiceHandlerMockReceiveExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &PaymentServiceClientMockReceiveParams{ctx, pp1},
+		expectationOrigins: PaymentServiceClientMockReceiveExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmReceive.expectations = append(mmReceive.expectations, expectation)
 	return expectation
 }
 
-// Then sets up PaymentServiceHandler.Receive return parameters for the expectation previously defined by the When method
-func (e *PaymentServiceHandlerMockReceiveExpectation) Then(pp2 *connect.Response[v1.ReceiveResponse], err error) *PaymentServiceHandlerMock {
-	e.results = &PaymentServiceHandlerMockReceiveResults{pp2, err}
+// Then sets up PaymentServiceClient.Receive return parameters for the expectation previously defined by the When method
+func (e *PaymentServiceClientMockReceiveExpectation) Then(pp2 *connect.Response[v1.ReceiveResponse], err error) *PaymentServiceClientMock {
+	e.results = &PaymentServiceClientMockReceiveResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times PaymentServiceHandler.Receive should be invoked
-func (mmReceive *mPaymentServiceHandlerMockReceive) Times(n uint64) *mPaymentServiceHandlerMockReceive {
+// Times sets number of times PaymentServiceClient.Receive should be invoked
+func (mmReceive *mPaymentServiceClientMockReceive) Times(n uint64) *mPaymentServiceClientMockReceive {
 	if n == 0 {
-		mmReceive.mock.t.Fatalf("Times of PaymentServiceHandlerMock.Receive mock can not be zero")
+		mmReceive.mock.t.Fatalf("Times of PaymentServiceClientMock.Receive mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmReceive.expectedInvocations, n)
 	mmReceive.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmReceive
 }
 
-func (mmReceive *mPaymentServiceHandlerMockReceive) invocationsDone() bool {
+func (mmReceive *mPaymentServiceClientMockReceive) invocationsDone() bool {
 	if len(mmReceive.expectations) == 0 && mmReceive.defaultExpectation == nil && mmReceive.mock.funcReceive == nil {
 		return true
 	}
@@ -1024,8 +1024,8 @@ func (mmReceive *mPaymentServiceHandlerMockReceive) invocationsDone() bool {
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// Receive implements mm_paymentv1connect.PaymentServiceHandler
-func (mmReceive *PaymentServiceHandlerMock) Receive(ctx context.Context, pp1 *connect.Request[v1.ReceiveRequest]) (pp2 *connect.Response[v1.ReceiveResponse], err error) {
+// Receive implements mm_paymentv1connect.PaymentServiceClient
+func (mmReceive *PaymentServiceClientMock) Receive(ctx context.Context, pp1 *connect.Request[v1.ReceiveRequest]) (pp2 *connect.Response[v1.ReceiveResponse], err error) {
 	mm_atomic.AddUint64(&mmReceive.beforeReceiveCounter, 1)
 	defer mm_atomic.AddUint64(&mmReceive.afterReceiveCounter, 1)
 
@@ -1035,7 +1035,7 @@ func (mmReceive *PaymentServiceHandlerMock) Receive(ctx context.Context, pp1 *co
 		mmReceive.inspectFuncReceive(ctx, pp1)
 	}
 
-	mm_params := PaymentServiceHandlerMockReceiveParams{ctx, pp1}
+	mm_params := PaymentServiceClientMockReceiveParams{ctx, pp1}
 
 	// Record call args
 	mmReceive.ReceiveMock.mutex.Lock()
@@ -1054,54 +1054,54 @@ func (mmReceive *PaymentServiceHandlerMock) Receive(ctx context.Context, pp1 *co
 		mm_want := mmReceive.ReceiveMock.defaultExpectation.params
 		mm_want_ptrs := mmReceive.ReceiveMock.defaultExpectation.paramPtrs
 
-		mm_got := PaymentServiceHandlerMockReceiveParams{ctx, pp1}
+		mm_got := PaymentServiceClientMockReceiveParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmReceive.t.Errorf("PaymentServiceHandlerMock.Receive got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmReceive.t.Errorf("PaymentServiceClientMock.Receive got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmReceive.ReceiveMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmReceive.t.Errorf("PaymentServiceHandlerMock.Receive got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmReceive.t.Errorf("PaymentServiceClientMock.Receive got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmReceive.ReceiveMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmReceive.t.Errorf("PaymentServiceHandlerMock.Receive got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmReceive.t.Errorf("PaymentServiceClientMock.Receive got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmReceive.ReceiveMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmReceive.ReceiveMock.defaultExpectation.results
 		if mm_results == nil {
-			mmReceive.t.Fatal("No results are set for the PaymentServiceHandlerMock.Receive")
+			mmReceive.t.Fatal("No results are set for the PaymentServiceClientMock.Receive")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmReceive.funcReceive != nil {
 		return mmReceive.funcReceive(ctx, pp1)
 	}
-	mmReceive.t.Fatalf("Unexpected call to PaymentServiceHandlerMock.Receive. %v %v", ctx, pp1)
+	mmReceive.t.Fatalf("Unexpected call to PaymentServiceClientMock.Receive. %v %v", ctx, pp1)
 	return
 }
 
-// ReceiveAfterCounter returns a count of finished PaymentServiceHandlerMock.Receive invocations
-func (mmReceive *PaymentServiceHandlerMock) ReceiveAfterCounter() uint64 {
+// ReceiveAfterCounter returns a count of finished PaymentServiceClientMock.Receive invocations
+func (mmReceive *PaymentServiceClientMock) ReceiveAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmReceive.afterReceiveCounter)
 }
 
-// ReceiveBeforeCounter returns a count of PaymentServiceHandlerMock.Receive invocations
-func (mmReceive *PaymentServiceHandlerMock) ReceiveBeforeCounter() uint64 {
+// ReceiveBeforeCounter returns a count of PaymentServiceClientMock.Receive invocations
+func (mmReceive *PaymentServiceClientMock) ReceiveBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmReceive.beforeReceiveCounter)
 }
 
-// Calls returns a list of arguments used in each call to PaymentServiceHandlerMock.Receive.
+// Calls returns a list of arguments used in each call to PaymentServiceClientMock.Receive.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmReceive *mPaymentServiceHandlerMockReceive) Calls() []*PaymentServiceHandlerMockReceiveParams {
+func (mmReceive *mPaymentServiceClientMockReceive) Calls() []*PaymentServiceClientMockReceiveParams {
 	mmReceive.mutex.RLock()
 
-	argCopy := make([]*PaymentServiceHandlerMockReceiveParams, len(mmReceive.callArgs))
+	argCopy := make([]*PaymentServiceClientMockReceiveParams, len(mmReceive.callArgs))
 	copy(argCopy, mmReceive.callArgs)
 
 	mmReceive.mutex.RUnlock()
@@ -1111,7 +1111,7 @@ func (mmReceive *mPaymentServiceHandlerMockReceive) Calls() []*PaymentServiceHan
 
 // MinimockReceiveDone returns true if the count of the Receive invocations corresponds
 // the number of defined expectations
-func (m *PaymentServiceHandlerMock) MinimockReceiveDone() bool {
+func (m *PaymentServiceClientMock) MinimockReceiveDone() bool {
 	if m.ReceiveMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -1127,10 +1127,10 @@ func (m *PaymentServiceHandlerMock) MinimockReceiveDone() bool {
 }
 
 // MinimockReceiveInspect logs each unmet expectation
-func (m *PaymentServiceHandlerMock) MinimockReceiveInspect() {
+func (m *PaymentServiceClientMock) MinimockReceiveInspect() {
 	for _, e := range m.ReceiveMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to PaymentServiceHandlerMock.Receive at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to PaymentServiceClientMock.Receive at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -1138,66 +1138,66 @@ func (m *PaymentServiceHandlerMock) MinimockReceiveInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.ReceiveMock.defaultExpectation != nil && afterReceiveCounter < 1 {
 		if m.ReceiveMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to PaymentServiceHandlerMock.Receive at\n%s", m.ReceiveMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to PaymentServiceClientMock.Receive at\n%s", m.ReceiveMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to PaymentServiceHandlerMock.Receive at\n%s with params: %#v", m.ReceiveMock.defaultExpectation.expectationOrigins.origin, *m.ReceiveMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to PaymentServiceClientMock.Receive at\n%s with params: %#v", m.ReceiveMock.defaultExpectation.expectationOrigins.origin, *m.ReceiveMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcReceive != nil && afterReceiveCounter < 1 {
-		m.t.Errorf("Expected call to PaymentServiceHandlerMock.Receive at\n%s", m.funcReceiveOrigin)
+		m.t.Errorf("Expected call to PaymentServiceClientMock.Receive at\n%s", m.funcReceiveOrigin)
 	}
 
 	if !m.ReceiveMock.invocationsDone() && afterReceiveCounter > 0 {
-		m.t.Errorf("Expected %d calls to PaymentServiceHandlerMock.Receive at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to PaymentServiceClientMock.Receive at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.ReceiveMock.expectedInvocations), m.ReceiveMock.expectedInvocationsOrigin, afterReceiveCounter)
 	}
 }
 
-type mPaymentServiceHandlerMockReconcile struct {
+type mPaymentServiceClientMockReconcile struct {
 	optional           bool
-	mock               *PaymentServiceHandlerMock
-	defaultExpectation *PaymentServiceHandlerMockReconcileExpectation
-	expectations       []*PaymentServiceHandlerMockReconcileExpectation
+	mock               *PaymentServiceClientMock
+	defaultExpectation *PaymentServiceClientMockReconcileExpectation
+	expectations       []*PaymentServiceClientMockReconcileExpectation
 
-	callArgs []*PaymentServiceHandlerMockReconcileParams
+	callArgs []*PaymentServiceClientMockReconcileParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// PaymentServiceHandlerMockReconcileExpectation specifies expectation struct of the PaymentServiceHandler.Reconcile
-type PaymentServiceHandlerMockReconcileExpectation struct {
-	mock               *PaymentServiceHandlerMock
-	params             *PaymentServiceHandlerMockReconcileParams
-	paramPtrs          *PaymentServiceHandlerMockReconcileParamPtrs
-	expectationOrigins PaymentServiceHandlerMockReconcileExpectationOrigins
-	results            *PaymentServiceHandlerMockReconcileResults
+// PaymentServiceClientMockReconcileExpectation specifies expectation struct of the PaymentServiceClient.Reconcile
+type PaymentServiceClientMockReconcileExpectation struct {
+	mock               *PaymentServiceClientMock
+	params             *PaymentServiceClientMockReconcileParams
+	paramPtrs          *PaymentServiceClientMockReconcileParamPtrs
+	expectationOrigins PaymentServiceClientMockReconcileExpectationOrigins
+	results            *PaymentServiceClientMockReconcileResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// PaymentServiceHandlerMockReconcileParams contains parameters of the PaymentServiceHandler.Reconcile
-type PaymentServiceHandlerMockReconcileParams struct {
+// PaymentServiceClientMockReconcileParams contains parameters of the PaymentServiceClient.Reconcile
+type PaymentServiceClientMockReconcileParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.ReconcileRequest]
 }
 
-// PaymentServiceHandlerMockReconcileParamPtrs contains pointers to parameters of the PaymentServiceHandler.Reconcile
-type PaymentServiceHandlerMockReconcileParamPtrs struct {
+// PaymentServiceClientMockReconcileParamPtrs contains pointers to parameters of the PaymentServiceClient.Reconcile
+type PaymentServiceClientMockReconcileParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.ReconcileRequest]
 }
 
-// PaymentServiceHandlerMockReconcileResults contains results of the PaymentServiceHandler.Reconcile
-type PaymentServiceHandlerMockReconcileResults struct {
+// PaymentServiceClientMockReconcileResults contains results of the PaymentServiceClient.Reconcile
+type PaymentServiceClientMockReconcileResults struct {
 	pp2 *connect.Response[v1.ReconcileResponse]
 	err error
 }
 
-// PaymentServiceHandlerMockReconcileOrigins contains origins of expectations of the PaymentServiceHandler.Reconcile
-type PaymentServiceHandlerMockReconcileExpectationOrigins struct {
+// PaymentServiceClientMockReconcileOrigins contains origins of expectations of the PaymentServiceClient.Reconcile
+type PaymentServiceClientMockReconcileExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -1208,26 +1208,26 @@ type PaymentServiceHandlerMockReconcileExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmReconcile *mPaymentServiceHandlerMockReconcile) Optional() *mPaymentServiceHandlerMockReconcile {
+func (mmReconcile *mPaymentServiceClientMockReconcile) Optional() *mPaymentServiceClientMockReconcile {
 	mmReconcile.optional = true
 	return mmReconcile
 }
 
-// Expect sets up expected params for PaymentServiceHandler.Reconcile
-func (mmReconcile *mPaymentServiceHandlerMockReconcile) Expect(ctx context.Context, pp1 *connect.Request[v1.ReconcileRequest]) *mPaymentServiceHandlerMockReconcile {
+// Expect sets up expected params for PaymentServiceClient.Reconcile
+func (mmReconcile *mPaymentServiceClientMockReconcile) Expect(ctx context.Context, pp1 *connect.Request[v1.ReconcileRequest]) *mPaymentServiceClientMockReconcile {
 	if mmReconcile.mock.funcReconcile != nil {
-		mmReconcile.mock.t.Fatalf("PaymentServiceHandlerMock.Reconcile mock is already set by Set")
+		mmReconcile.mock.t.Fatalf("PaymentServiceClientMock.Reconcile mock is already set by Set")
 	}
 
 	if mmReconcile.defaultExpectation == nil {
-		mmReconcile.defaultExpectation = &PaymentServiceHandlerMockReconcileExpectation{}
+		mmReconcile.defaultExpectation = &PaymentServiceClientMockReconcileExpectation{}
 	}
 
 	if mmReconcile.defaultExpectation.paramPtrs != nil {
-		mmReconcile.mock.t.Fatalf("PaymentServiceHandlerMock.Reconcile mock is already set by ExpectParams functions")
+		mmReconcile.mock.t.Fatalf("PaymentServiceClientMock.Reconcile mock is already set by ExpectParams functions")
 	}
 
-	mmReconcile.defaultExpectation.params = &PaymentServiceHandlerMockReconcileParams{ctx, pp1}
+	mmReconcile.defaultExpectation.params = &PaymentServiceClientMockReconcileParams{ctx, pp1}
 	mmReconcile.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmReconcile.expectations {
 		if minimock.Equal(e.params, mmReconcile.defaultExpectation.params) {
@@ -1238,22 +1238,22 @@ func (mmReconcile *mPaymentServiceHandlerMockReconcile) Expect(ctx context.Conte
 	return mmReconcile
 }
 
-// ExpectCtxParam1 sets up expected param ctx for PaymentServiceHandler.Reconcile
-func (mmReconcile *mPaymentServiceHandlerMockReconcile) ExpectCtxParam1(ctx context.Context) *mPaymentServiceHandlerMockReconcile {
+// ExpectCtxParam1 sets up expected param ctx for PaymentServiceClient.Reconcile
+func (mmReconcile *mPaymentServiceClientMockReconcile) ExpectCtxParam1(ctx context.Context) *mPaymentServiceClientMockReconcile {
 	if mmReconcile.mock.funcReconcile != nil {
-		mmReconcile.mock.t.Fatalf("PaymentServiceHandlerMock.Reconcile mock is already set by Set")
+		mmReconcile.mock.t.Fatalf("PaymentServiceClientMock.Reconcile mock is already set by Set")
 	}
 
 	if mmReconcile.defaultExpectation == nil {
-		mmReconcile.defaultExpectation = &PaymentServiceHandlerMockReconcileExpectation{}
+		mmReconcile.defaultExpectation = &PaymentServiceClientMockReconcileExpectation{}
 	}
 
 	if mmReconcile.defaultExpectation.params != nil {
-		mmReconcile.mock.t.Fatalf("PaymentServiceHandlerMock.Reconcile mock is already set by Expect")
+		mmReconcile.mock.t.Fatalf("PaymentServiceClientMock.Reconcile mock is already set by Expect")
 	}
 
 	if mmReconcile.defaultExpectation.paramPtrs == nil {
-		mmReconcile.defaultExpectation.paramPtrs = &PaymentServiceHandlerMockReconcileParamPtrs{}
+		mmReconcile.defaultExpectation.paramPtrs = &PaymentServiceClientMockReconcileParamPtrs{}
 	}
 	mmReconcile.defaultExpectation.paramPtrs.ctx = &ctx
 	mmReconcile.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -1261,22 +1261,22 @@ func (mmReconcile *mPaymentServiceHandlerMockReconcile) ExpectCtxParam1(ctx cont
 	return mmReconcile
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for PaymentServiceHandler.Reconcile
-func (mmReconcile *mPaymentServiceHandlerMockReconcile) ExpectPp1Param2(pp1 *connect.Request[v1.ReconcileRequest]) *mPaymentServiceHandlerMockReconcile {
+// ExpectPp1Param2 sets up expected param pp1 for PaymentServiceClient.Reconcile
+func (mmReconcile *mPaymentServiceClientMockReconcile) ExpectPp1Param2(pp1 *connect.Request[v1.ReconcileRequest]) *mPaymentServiceClientMockReconcile {
 	if mmReconcile.mock.funcReconcile != nil {
-		mmReconcile.mock.t.Fatalf("PaymentServiceHandlerMock.Reconcile mock is already set by Set")
+		mmReconcile.mock.t.Fatalf("PaymentServiceClientMock.Reconcile mock is already set by Set")
 	}
 
 	if mmReconcile.defaultExpectation == nil {
-		mmReconcile.defaultExpectation = &PaymentServiceHandlerMockReconcileExpectation{}
+		mmReconcile.defaultExpectation = &PaymentServiceClientMockReconcileExpectation{}
 	}
 
 	if mmReconcile.defaultExpectation.params != nil {
-		mmReconcile.mock.t.Fatalf("PaymentServiceHandlerMock.Reconcile mock is already set by Expect")
+		mmReconcile.mock.t.Fatalf("PaymentServiceClientMock.Reconcile mock is already set by Expect")
 	}
 
 	if mmReconcile.defaultExpectation.paramPtrs == nil {
-		mmReconcile.defaultExpectation.paramPtrs = &PaymentServiceHandlerMockReconcileParamPtrs{}
+		mmReconcile.defaultExpectation.paramPtrs = &PaymentServiceClientMockReconcileParamPtrs{}
 	}
 	mmReconcile.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmReconcile.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -1284,10 +1284,10 @@ func (mmReconcile *mPaymentServiceHandlerMockReconcile) ExpectPp1Param2(pp1 *con
 	return mmReconcile
 }
 
-// Inspect accepts an inspector function that has same arguments as the PaymentServiceHandler.Reconcile
-func (mmReconcile *mPaymentServiceHandlerMockReconcile) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.ReconcileRequest])) *mPaymentServiceHandlerMockReconcile {
+// Inspect accepts an inspector function that has same arguments as the PaymentServiceClient.Reconcile
+func (mmReconcile *mPaymentServiceClientMockReconcile) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.ReconcileRequest])) *mPaymentServiceClientMockReconcile {
 	if mmReconcile.mock.inspectFuncReconcile != nil {
-		mmReconcile.mock.t.Fatalf("Inspect function is already set for PaymentServiceHandlerMock.Reconcile")
+		mmReconcile.mock.t.Fatalf("Inspect function is already set for PaymentServiceClientMock.Reconcile")
 	}
 
 	mmReconcile.mock.inspectFuncReconcile = f
@@ -1295,28 +1295,28 @@ func (mmReconcile *mPaymentServiceHandlerMockReconcile) Inspect(f func(ctx conte
 	return mmReconcile
 }
 
-// Return sets up results that will be returned by PaymentServiceHandler.Reconcile
-func (mmReconcile *mPaymentServiceHandlerMockReconcile) Return(pp2 *connect.Response[v1.ReconcileResponse], err error) *PaymentServiceHandlerMock {
+// Return sets up results that will be returned by PaymentServiceClient.Reconcile
+func (mmReconcile *mPaymentServiceClientMockReconcile) Return(pp2 *connect.Response[v1.ReconcileResponse], err error) *PaymentServiceClientMock {
 	if mmReconcile.mock.funcReconcile != nil {
-		mmReconcile.mock.t.Fatalf("PaymentServiceHandlerMock.Reconcile mock is already set by Set")
+		mmReconcile.mock.t.Fatalf("PaymentServiceClientMock.Reconcile mock is already set by Set")
 	}
 
 	if mmReconcile.defaultExpectation == nil {
-		mmReconcile.defaultExpectation = &PaymentServiceHandlerMockReconcileExpectation{mock: mmReconcile.mock}
+		mmReconcile.defaultExpectation = &PaymentServiceClientMockReconcileExpectation{mock: mmReconcile.mock}
 	}
-	mmReconcile.defaultExpectation.results = &PaymentServiceHandlerMockReconcileResults{pp2, err}
+	mmReconcile.defaultExpectation.results = &PaymentServiceClientMockReconcileResults{pp2, err}
 	mmReconcile.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmReconcile.mock
 }
 
-// Set uses given function f to mock the PaymentServiceHandler.Reconcile method
-func (mmReconcile *mPaymentServiceHandlerMockReconcile) Set(f func(ctx context.Context, pp1 *connect.Request[v1.ReconcileRequest]) (pp2 *connect.Response[v1.ReconcileResponse], err error)) *PaymentServiceHandlerMock {
+// Set uses given function f to mock the PaymentServiceClient.Reconcile method
+func (mmReconcile *mPaymentServiceClientMockReconcile) Set(f func(ctx context.Context, pp1 *connect.Request[v1.ReconcileRequest]) (pp2 *connect.Response[v1.ReconcileResponse], err error)) *PaymentServiceClientMock {
 	if mmReconcile.defaultExpectation != nil {
-		mmReconcile.mock.t.Fatalf("Default expectation is already set for the PaymentServiceHandler.Reconcile method")
+		mmReconcile.mock.t.Fatalf("Default expectation is already set for the PaymentServiceClient.Reconcile method")
 	}
 
 	if len(mmReconcile.expectations) > 0 {
-		mmReconcile.mock.t.Fatalf("Some expectations are already set for the PaymentServiceHandler.Reconcile method")
+		mmReconcile.mock.t.Fatalf("Some expectations are already set for the PaymentServiceClient.Reconcile method")
 	}
 
 	mmReconcile.mock.funcReconcile = f
@@ -1324,39 +1324,39 @@ func (mmReconcile *mPaymentServiceHandlerMockReconcile) Set(f func(ctx context.C
 	return mmReconcile.mock
 }
 
-// When sets expectation for the PaymentServiceHandler.Reconcile which will trigger the result defined by the following
+// When sets expectation for the PaymentServiceClient.Reconcile which will trigger the result defined by the following
 // Then helper
-func (mmReconcile *mPaymentServiceHandlerMockReconcile) When(ctx context.Context, pp1 *connect.Request[v1.ReconcileRequest]) *PaymentServiceHandlerMockReconcileExpectation {
+func (mmReconcile *mPaymentServiceClientMockReconcile) When(ctx context.Context, pp1 *connect.Request[v1.ReconcileRequest]) *PaymentServiceClientMockReconcileExpectation {
 	if mmReconcile.mock.funcReconcile != nil {
-		mmReconcile.mock.t.Fatalf("PaymentServiceHandlerMock.Reconcile mock is already set by Set")
+		mmReconcile.mock.t.Fatalf("PaymentServiceClientMock.Reconcile mock is already set by Set")
 	}
 
-	expectation := &PaymentServiceHandlerMockReconcileExpectation{
+	expectation := &PaymentServiceClientMockReconcileExpectation{
 		mock:               mmReconcile.mock,
-		params:             &PaymentServiceHandlerMockReconcileParams{ctx, pp1},
-		expectationOrigins: PaymentServiceHandlerMockReconcileExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &PaymentServiceClientMockReconcileParams{ctx, pp1},
+		expectationOrigins: PaymentServiceClientMockReconcileExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmReconcile.expectations = append(mmReconcile.expectations, expectation)
 	return expectation
 }
 
-// Then sets up PaymentServiceHandler.Reconcile return parameters for the expectation previously defined by the When method
-func (e *PaymentServiceHandlerMockReconcileExpectation) Then(pp2 *connect.Response[v1.ReconcileResponse], err error) *PaymentServiceHandlerMock {
-	e.results = &PaymentServiceHandlerMockReconcileResults{pp2, err}
+// Then sets up PaymentServiceClient.Reconcile return parameters for the expectation previously defined by the When method
+func (e *PaymentServiceClientMockReconcileExpectation) Then(pp2 *connect.Response[v1.ReconcileResponse], err error) *PaymentServiceClientMock {
+	e.results = &PaymentServiceClientMockReconcileResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times PaymentServiceHandler.Reconcile should be invoked
-func (mmReconcile *mPaymentServiceHandlerMockReconcile) Times(n uint64) *mPaymentServiceHandlerMockReconcile {
+// Times sets number of times PaymentServiceClient.Reconcile should be invoked
+func (mmReconcile *mPaymentServiceClientMockReconcile) Times(n uint64) *mPaymentServiceClientMockReconcile {
 	if n == 0 {
-		mmReconcile.mock.t.Fatalf("Times of PaymentServiceHandlerMock.Reconcile mock can not be zero")
+		mmReconcile.mock.t.Fatalf("Times of PaymentServiceClientMock.Reconcile mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmReconcile.expectedInvocations, n)
 	mmReconcile.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmReconcile
 }
 
-func (mmReconcile *mPaymentServiceHandlerMockReconcile) invocationsDone() bool {
+func (mmReconcile *mPaymentServiceClientMockReconcile) invocationsDone() bool {
 	if len(mmReconcile.expectations) == 0 && mmReconcile.defaultExpectation == nil && mmReconcile.mock.funcReconcile == nil {
 		return true
 	}
@@ -1367,8 +1367,8 @@ func (mmReconcile *mPaymentServiceHandlerMockReconcile) invocationsDone() bool {
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// Reconcile implements mm_paymentv1connect.PaymentServiceHandler
-func (mmReconcile *PaymentServiceHandlerMock) Reconcile(ctx context.Context, pp1 *connect.Request[v1.ReconcileRequest]) (pp2 *connect.Response[v1.ReconcileResponse], err error) {
+// Reconcile implements mm_paymentv1connect.PaymentServiceClient
+func (mmReconcile *PaymentServiceClientMock) Reconcile(ctx context.Context, pp1 *connect.Request[v1.ReconcileRequest]) (pp2 *connect.Response[v1.ReconcileResponse], err error) {
 	mm_atomic.AddUint64(&mmReconcile.beforeReconcileCounter, 1)
 	defer mm_atomic.AddUint64(&mmReconcile.afterReconcileCounter, 1)
 
@@ -1378,7 +1378,7 @@ func (mmReconcile *PaymentServiceHandlerMock) Reconcile(ctx context.Context, pp1
 		mmReconcile.inspectFuncReconcile(ctx, pp1)
 	}
 
-	mm_params := PaymentServiceHandlerMockReconcileParams{ctx, pp1}
+	mm_params := PaymentServiceClientMockReconcileParams{ctx, pp1}
 
 	// Record call args
 	mmReconcile.ReconcileMock.mutex.Lock()
@@ -1397,54 +1397,54 @@ func (mmReconcile *PaymentServiceHandlerMock) Reconcile(ctx context.Context, pp1
 		mm_want := mmReconcile.ReconcileMock.defaultExpectation.params
 		mm_want_ptrs := mmReconcile.ReconcileMock.defaultExpectation.paramPtrs
 
-		mm_got := PaymentServiceHandlerMockReconcileParams{ctx, pp1}
+		mm_got := PaymentServiceClientMockReconcileParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmReconcile.t.Errorf("PaymentServiceHandlerMock.Reconcile got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmReconcile.t.Errorf("PaymentServiceClientMock.Reconcile got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmReconcile.ReconcileMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmReconcile.t.Errorf("PaymentServiceHandlerMock.Reconcile got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmReconcile.t.Errorf("PaymentServiceClientMock.Reconcile got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmReconcile.ReconcileMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmReconcile.t.Errorf("PaymentServiceHandlerMock.Reconcile got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmReconcile.t.Errorf("PaymentServiceClientMock.Reconcile got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmReconcile.ReconcileMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmReconcile.ReconcileMock.defaultExpectation.results
 		if mm_results == nil {
-			mmReconcile.t.Fatal("No results are set for the PaymentServiceHandlerMock.Reconcile")
+			mmReconcile.t.Fatal("No results are set for the PaymentServiceClientMock.Reconcile")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmReconcile.funcReconcile != nil {
 		return mmReconcile.funcReconcile(ctx, pp1)
 	}
-	mmReconcile.t.Fatalf("Unexpected call to PaymentServiceHandlerMock.Reconcile. %v %v", ctx, pp1)
+	mmReconcile.t.Fatalf("Unexpected call to PaymentServiceClientMock.Reconcile. %v %v", ctx, pp1)
 	return
 }
 
-// ReconcileAfterCounter returns a count of finished PaymentServiceHandlerMock.Reconcile invocations
-func (mmReconcile *PaymentServiceHandlerMock) ReconcileAfterCounter() uint64 {
+// ReconcileAfterCounter returns a count of finished PaymentServiceClientMock.Reconcile invocations
+func (mmReconcile *PaymentServiceClientMock) ReconcileAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmReconcile.afterReconcileCounter)
 }
 
-// ReconcileBeforeCounter returns a count of PaymentServiceHandlerMock.Reconcile invocations
-func (mmReconcile *PaymentServiceHandlerMock) ReconcileBeforeCounter() uint64 {
+// ReconcileBeforeCounter returns a count of PaymentServiceClientMock.Reconcile invocations
+func (mmReconcile *PaymentServiceClientMock) ReconcileBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmReconcile.beforeReconcileCounter)
 }
 
-// Calls returns a list of arguments used in each call to PaymentServiceHandlerMock.Reconcile.
+// Calls returns a list of arguments used in each call to PaymentServiceClientMock.Reconcile.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmReconcile *mPaymentServiceHandlerMockReconcile) Calls() []*PaymentServiceHandlerMockReconcileParams {
+func (mmReconcile *mPaymentServiceClientMockReconcile) Calls() []*PaymentServiceClientMockReconcileParams {
 	mmReconcile.mutex.RLock()
 
-	argCopy := make([]*PaymentServiceHandlerMockReconcileParams, len(mmReconcile.callArgs))
+	argCopy := make([]*PaymentServiceClientMockReconcileParams, len(mmReconcile.callArgs))
 	copy(argCopy, mmReconcile.callArgs)
 
 	mmReconcile.mutex.RUnlock()
@@ -1454,7 +1454,7 @@ func (mmReconcile *mPaymentServiceHandlerMockReconcile) Calls() []*PaymentServic
 
 // MinimockReconcileDone returns true if the count of the Reconcile invocations corresponds
 // the number of defined expectations
-func (m *PaymentServiceHandlerMock) MinimockReconcileDone() bool {
+func (m *PaymentServiceClientMock) MinimockReconcileDone() bool {
 	if m.ReconcileMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -1470,10 +1470,10 @@ func (m *PaymentServiceHandlerMock) MinimockReconcileDone() bool {
 }
 
 // MinimockReconcileInspect logs each unmet expectation
-func (m *PaymentServiceHandlerMock) MinimockReconcileInspect() {
+func (m *PaymentServiceClientMock) MinimockReconcileInspect() {
 	for _, e := range m.ReconcileMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to PaymentServiceHandlerMock.Reconcile at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to PaymentServiceClientMock.Reconcile at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -1481,66 +1481,66 @@ func (m *PaymentServiceHandlerMock) MinimockReconcileInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.ReconcileMock.defaultExpectation != nil && afterReconcileCounter < 1 {
 		if m.ReconcileMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to PaymentServiceHandlerMock.Reconcile at\n%s", m.ReconcileMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to PaymentServiceClientMock.Reconcile at\n%s", m.ReconcileMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to PaymentServiceHandlerMock.Reconcile at\n%s with params: %#v", m.ReconcileMock.defaultExpectation.expectationOrigins.origin, *m.ReconcileMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to PaymentServiceClientMock.Reconcile at\n%s with params: %#v", m.ReconcileMock.defaultExpectation.expectationOrigins.origin, *m.ReconcileMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcReconcile != nil && afterReconcileCounter < 1 {
-		m.t.Errorf("Expected call to PaymentServiceHandlerMock.Reconcile at\n%s", m.funcReconcileOrigin)
+		m.t.Errorf("Expected call to PaymentServiceClientMock.Reconcile at\n%s", m.funcReconcileOrigin)
 	}
 
 	if !m.ReconcileMock.invocationsDone() && afterReconcileCounter > 0 {
-		m.t.Errorf("Expected %d calls to PaymentServiceHandlerMock.Reconcile at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to PaymentServiceClientMock.Reconcile at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.ReconcileMock.expectedInvocations), m.ReconcileMock.expectedInvocationsOrigin, afterReconcileCounter)
 	}
 }
 
-type mPaymentServiceHandlerMockRelease struct {
+type mPaymentServiceClientMockRelease struct {
 	optional           bool
-	mock               *PaymentServiceHandlerMock
-	defaultExpectation *PaymentServiceHandlerMockReleaseExpectation
-	expectations       []*PaymentServiceHandlerMockReleaseExpectation
+	mock               *PaymentServiceClientMock
+	defaultExpectation *PaymentServiceClientMockReleaseExpectation
+	expectations       []*PaymentServiceClientMockReleaseExpectation
 
-	callArgs []*PaymentServiceHandlerMockReleaseParams
+	callArgs []*PaymentServiceClientMockReleaseParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// PaymentServiceHandlerMockReleaseExpectation specifies expectation struct of the PaymentServiceHandler.Release
-type PaymentServiceHandlerMockReleaseExpectation struct {
-	mock               *PaymentServiceHandlerMock
-	params             *PaymentServiceHandlerMockReleaseParams
-	paramPtrs          *PaymentServiceHandlerMockReleaseParamPtrs
-	expectationOrigins PaymentServiceHandlerMockReleaseExpectationOrigins
-	results            *PaymentServiceHandlerMockReleaseResults
+// PaymentServiceClientMockReleaseExpectation specifies expectation struct of the PaymentServiceClient.Release
+type PaymentServiceClientMockReleaseExpectation struct {
+	mock               *PaymentServiceClientMock
+	params             *PaymentServiceClientMockReleaseParams
+	paramPtrs          *PaymentServiceClientMockReleaseParamPtrs
+	expectationOrigins PaymentServiceClientMockReleaseExpectationOrigins
+	results            *PaymentServiceClientMockReleaseResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// PaymentServiceHandlerMockReleaseParams contains parameters of the PaymentServiceHandler.Release
-type PaymentServiceHandlerMockReleaseParams struct {
+// PaymentServiceClientMockReleaseParams contains parameters of the PaymentServiceClient.Release
+type PaymentServiceClientMockReleaseParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.ReleaseRequest]
 }
 
-// PaymentServiceHandlerMockReleaseParamPtrs contains pointers to parameters of the PaymentServiceHandler.Release
-type PaymentServiceHandlerMockReleaseParamPtrs struct {
+// PaymentServiceClientMockReleaseParamPtrs contains pointers to parameters of the PaymentServiceClient.Release
+type PaymentServiceClientMockReleaseParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.ReleaseRequest]
 }
 
-// PaymentServiceHandlerMockReleaseResults contains results of the PaymentServiceHandler.Release
-type PaymentServiceHandlerMockReleaseResults struct {
+// PaymentServiceClientMockReleaseResults contains results of the PaymentServiceClient.Release
+type PaymentServiceClientMockReleaseResults struct {
 	pp2 *connect.Response[v1.ReleaseResponse]
 	err error
 }
 
-// PaymentServiceHandlerMockReleaseOrigins contains origins of expectations of the PaymentServiceHandler.Release
-type PaymentServiceHandlerMockReleaseExpectationOrigins struct {
+// PaymentServiceClientMockReleaseOrigins contains origins of expectations of the PaymentServiceClient.Release
+type PaymentServiceClientMockReleaseExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -1551,26 +1551,26 @@ type PaymentServiceHandlerMockReleaseExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmRelease *mPaymentServiceHandlerMockRelease) Optional() *mPaymentServiceHandlerMockRelease {
+func (mmRelease *mPaymentServiceClientMockRelease) Optional() *mPaymentServiceClientMockRelease {
 	mmRelease.optional = true
 	return mmRelease
 }
 
-// Expect sets up expected params for PaymentServiceHandler.Release
-func (mmRelease *mPaymentServiceHandlerMockRelease) Expect(ctx context.Context, pp1 *connect.Request[v1.ReleaseRequest]) *mPaymentServiceHandlerMockRelease {
+// Expect sets up expected params for PaymentServiceClient.Release
+func (mmRelease *mPaymentServiceClientMockRelease) Expect(ctx context.Context, pp1 *connect.Request[v1.ReleaseRequest]) *mPaymentServiceClientMockRelease {
 	if mmRelease.mock.funcRelease != nil {
-		mmRelease.mock.t.Fatalf("PaymentServiceHandlerMock.Release mock is already set by Set")
+		mmRelease.mock.t.Fatalf("PaymentServiceClientMock.Release mock is already set by Set")
 	}
 
 	if mmRelease.defaultExpectation == nil {
-		mmRelease.defaultExpectation = &PaymentServiceHandlerMockReleaseExpectation{}
+		mmRelease.defaultExpectation = &PaymentServiceClientMockReleaseExpectation{}
 	}
 
 	if mmRelease.defaultExpectation.paramPtrs != nil {
-		mmRelease.mock.t.Fatalf("PaymentServiceHandlerMock.Release mock is already set by ExpectParams functions")
+		mmRelease.mock.t.Fatalf("PaymentServiceClientMock.Release mock is already set by ExpectParams functions")
 	}
 
-	mmRelease.defaultExpectation.params = &PaymentServiceHandlerMockReleaseParams{ctx, pp1}
+	mmRelease.defaultExpectation.params = &PaymentServiceClientMockReleaseParams{ctx, pp1}
 	mmRelease.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmRelease.expectations {
 		if minimock.Equal(e.params, mmRelease.defaultExpectation.params) {
@@ -1581,22 +1581,22 @@ func (mmRelease *mPaymentServiceHandlerMockRelease) Expect(ctx context.Context, 
 	return mmRelease
 }
 
-// ExpectCtxParam1 sets up expected param ctx for PaymentServiceHandler.Release
-func (mmRelease *mPaymentServiceHandlerMockRelease) ExpectCtxParam1(ctx context.Context) *mPaymentServiceHandlerMockRelease {
+// ExpectCtxParam1 sets up expected param ctx for PaymentServiceClient.Release
+func (mmRelease *mPaymentServiceClientMockRelease) ExpectCtxParam1(ctx context.Context) *mPaymentServiceClientMockRelease {
 	if mmRelease.mock.funcRelease != nil {
-		mmRelease.mock.t.Fatalf("PaymentServiceHandlerMock.Release mock is already set by Set")
+		mmRelease.mock.t.Fatalf("PaymentServiceClientMock.Release mock is already set by Set")
 	}
 
 	if mmRelease.defaultExpectation == nil {
-		mmRelease.defaultExpectation = &PaymentServiceHandlerMockReleaseExpectation{}
+		mmRelease.defaultExpectation = &PaymentServiceClientMockReleaseExpectation{}
 	}
 
 	if mmRelease.defaultExpectation.params != nil {
-		mmRelease.mock.t.Fatalf("PaymentServiceHandlerMock.Release mock is already set by Expect")
+		mmRelease.mock.t.Fatalf("PaymentServiceClientMock.Release mock is already set by Expect")
 	}
 
 	if mmRelease.defaultExpectation.paramPtrs == nil {
-		mmRelease.defaultExpectation.paramPtrs = &PaymentServiceHandlerMockReleaseParamPtrs{}
+		mmRelease.defaultExpectation.paramPtrs = &PaymentServiceClientMockReleaseParamPtrs{}
 	}
 	mmRelease.defaultExpectation.paramPtrs.ctx = &ctx
 	mmRelease.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -1604,22 +1604,22 @@ func (mmRelease *mPaymentServiceHandlerMockRelease) ExpectCtxParam1(ctx context.
 	return mmRelease
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for PaymentServiceHandler.Release
-func (mmRelease *mPaymentServiceHandlerMockRelease) ExpectPp1Param2(pp1 *connect.Request[v1.ReleaseRequest]) *mPaymentServiceHandlerMockRelease {
+// ExpectPp1Param2 sets up expected param pp1 for PaymentServiceClient.Release
+func (mmRelease *mPaymentServiceClientMockRelease) ExpectPp1Param2(pp1 *connect.Request[v1.ReleaseRequest]) *mPaymentServiceClientMockRelease {
 	if mmRelease.mock.funcRelease != nil {
-		mmRelease.mock.t.Fatalf("PaymentServiceHandlerMock.Release mock is already set by Set")
+		mmRelease.mock.t.Fatalf("PaymentServiceClientMock.Release mock is already set by Set")
 	}
 
 	if mmRelease.defaultExpectation == nil {
-		mmRelease.defaultExpectation = &PaymentServiceHandlerMockReleaseExpectation{}
+		mmRelease.defaultExpectation = &PaymentServiceClientMockReleaseExpectation{}
 	}
 
 	if mmRelease.defaultExpectation.params != nil {
-		mmRelease.mock.t.Fatalf("PaymentServiceHandlerMock.Release mock is already set by Expect")
+		mmRelease.mock.t.Fatalf("PaymentServiceClientMock.Release mock is already set by Expect")
 	}
 
 	if mmRelease.defaultExpectation.paramPtrs == nil {
-		mmRelease.defaultExpectation.paramPtrs = &PaymentServiceHandlerMockReleaseParamPtrs{}
+		mmRelease.defaultExpectation.paramPtrs = &PaymentServiceClientMockReleaseParamPtrs{}
 	}
 	mmRelease.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmRelease.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -1627,10 +1627,10 @@ func (mmRelease *mPaymentServiceHandlerMockRelease) ExpectPp1Param2(pp1 *connect
 	return mmRelease
 }
 
-// Inspect accepts an inspector function that has same arguments as the PaymentServiceHandler.Release
-func (mmRelease *mPaymentServiceHandlerMockRelease) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.ReleaseRequest])) *mPaymentServiceHandlerMockRelease {
+// Inspect accepts an inspector function that has same arguments as the PaymentServiceClient.Release
+func (mmRelease *mPaymentServiceClientMockRelease) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.ReleaseRequest])) *mPaymentServiceClientMockRelease {
 	if mmRelease.mock.inspectFuncRelease != nil {
-		mmRelease.mock.t.Fatalf("Inspect function is already set for PaymentServiceHandlerMock.Release")
+		mmRelease.mock.t.Fatalf("Inspect function is already set for PaymentServiceClientMock.Release")
 	}
 
 	mmRelease.mock.inspectFuncRelease = f
@@ -1638,28 +1638,28 @@ func (mmRelease *mPaymentServiceHandlerMockRelease) Inspect(f func(ctx context.C
 	return mmRelease
 }
 
-// Return sets up results that will be returned by PaymentServiceHandler.Release
-func (mmRelease *mPaymentServiceHandlerMockRelease) Return(pp2 *connect.Response[v1.ReleaseResponse], err error) *PaymentServiceHandlerMock {
+// Return sets up results that will be returned by PaymentServiceClient.Release
+func (mmRelease *mPaymentServiceClientMockRelease) Return(pp2 *connect.Response[v1.ReleaseResponse], err error) *PaymentServiceClientMock {
 	if mmRelease.mock.funcRelease != nil {
-		mmRelease.mock.t.Fatalf("PaymentServiceHandlerMock.Release mock is already set by Set")
+		mmRelease.mock.t.Fatalf("PaymentServiceClientMock.Release mock is already set by Set")
 	}
 
 	if mmRelease.defaultExpectation == nil {
-		mmRelease.defaultExpectation = &PaymentServiceHandlerMockReleaseExpectation{mock: mmRelease.mock}
+		mmRelease.defaultExpectation = &PaymentServiceClientMockReleaseExpectation{mock: mmRelease.mock}
 	}
-	mmRelease.defaultExpectation.results = &PaymentServiceHandlerMockReleaseResults{pp2, err}
+	mmRelease.defaultExpectation.results = &PaymentServiceClientMockReleaseResults{pp2, err}
 	mmRelease.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmRelease.mock
 }
 
-// Set uses given function f to mock the PaymentServiceHandler.Release method
-func (mmRelease *mPaymentServiceHandlerMockRelease) Set(f func(ctx context.Context, pp1 *connect.Request[v1.ReleaseRequest]) (pp2 *connect.Response[v1.ReleaseResponse], err error)) *PaymentServiceHandlerMock {
+// Set uses given function f to mock the PaymentServiceClient.Release method
+func (mmRelease *mPaymentServiceClientMockRelease) Set(f func(ctx context.Context, pp1 *connect.Request[v1.ReleaseRequest]) (pp2 *connect.Response[v1.ReleaseResponse], err error)) *PaymentServiceClientMock {
 	if mmRelease.defaultExpectation != nil {
-		mmRelease.mock.t.Fatalf("Default expectation is already set for the PaymentServiceHandler.Release method")
+		mmRelease.mock.t.Fatalf("Default expectation is already set for the PaymentServiceClient.Release method")
 	}
 
 	if len(mmRelease.expectations) > 0 {
-		mmRelease.mock.t.Fatalf("Some expectations are already set for the PaymentServiceHandler.Release method")
+		mmRelease.mock.t.Fatalf("Some expectations are already set for the PaymentServiceClient.Release method")
 	}
 
 	mmRelease.mock.funcRelease = f
@@ -1667,39 +1667,39 @@ func (mmRelease *mPaymentServiceHandlerMockRelease) Set(f func(ctx context.Conte
 	return mmRelease.mock
 }
 
-// When sets expectation for the PaymentServiceHandler.Release which will trigger the result defined by the following
+// When sets expectation for the PaymentServiceClient.Release which will trigger the result defined by the following
 // Then helper
-func (mmRelease *mPaymentServiceHandlerMockRelease) When(ctx context.Context, pp1 *connect.Request[v1.ReleaseRequest]) *PaymentServiceHandlerMockReleaseExpectation {
+func (mmRelease *mPaymentServiceClientMockRelease) When(ctx context.Context, pp1 *connect.Request[v1.ReleaseRequest]) *PaymentServiceClientMockReleaseExpectation {
 	if mmRelease.mock.funcRelease != nil {
-		mmRelease.mock.t.Fatalf("PaymentServiceHandlerMock.Release mock is already set by Set")
+		mmRelease.mock.t.Fatalf("PaymentServiceClientMock.Release mock is already set by Set")
 	}
 
-	expectation := &PaymentServiceHandlerMockReleaseExpectation{
+	expectation := &PaymentServiceClientMockReleaseExpectation{
 		mock:               mmRelease.mock,
-		params:             &PaymentServiceHandlerMockReleaseParams{ctx, pp1},
-		expectationOrigins: PaymentServiceHandlerMockReleaseExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &PaymentServiceClientMockReleaseParams{ctx, pp1},
+		expectationOrigins: PaymentServiceClientMockReleaseExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmRelease.expectations = append(mmRelease.expectations, expectation)
 	return expectation
 }
 
-// Then sets up PaymentServiceHandler.Release return parameters for the expectation previously defined by the When method
-func (e *PaymentServiceHandlerMockReleaseExpectation) Then(pp2 *connect.Response[v1.ReleaseResponse], err error) *PaymentServiceHandlerMock {
-	e.results = &PaymentServiceHandlerMockReleaseResults{pp2, err}
+// Then sets up PaymentServiceClient.Release return parameters for the expectation previously defined by the When method
+func (e *PaymentServiceClientMockReleaseExpectation) Then(pp2 *connect.Response[v1.ReleaseResponse], err error) *PaymentServiceClientMock {
+	e.results = &PaymentServiceClientMockReleaseResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times PaymentServiceHandler.Release should be invoked
-func (mmRelease *mPaymentServiceHandlerMockRelease) Times(n uint64) *mPaymentServiceHandlerMockRelease {
+// Times sets number of times PaymentServiceClient.Release should be invoked
+func (mmRelease *mPaymentServiceClientMockRelease) Times(n uint64) *mPaymentServiceClientMockRelease {
 	if n == 0 {
-		mmRelease.mock.t.Fatalf("Times of PaymentServiceHandlerMock.Release mock can not be zero")
+		mmRelease.mock.t.Fatalf("Times of PaymentServiceClientMock.Release mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmRelease.expectedInvocations, n)
 	mmRelease.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmRelease
 }
 
-func (mmRelease *mPaymentServiceHandlerMockRelease) invocationsDone() bool {
+func (mmRelease *mPaymentServiceClientMockRelease) invocationsDone() bool {
 	if len(mmRelease.expectations) == 0 && mmRelease.defaultExpectation == nil && mmRelease.mock.funcRelease == nil {
 		return true
 	}
@@ -1710,8 +1710,8 @@ func (mmRelease *mPaymentServiceHandlerMockRelease) invocationsDone() bool {
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// Release implements mm_paymentv1connect.PaymentServiceHandler
-func (mmRelease *PaymentServiceHandlerMock) Release(ctx context.Context, pp1 *connect.Request[v1.ReleaseRequest]) (pp2 *connect.Response[v1.ReleaseResponse], err error) {
+// Release implements mm_paymentv1connect.PaymentServiceClient
+func (mmRelease *PaymentServiceClientMock) Release(ctx context.Context, pp1 *connect.Request[v1.ReleaseRequest]) (pp2 *connect.Response[v1.ReleaseResponse], err error) {
 	mm_atomic.AddUint64(&mmRelease.beforeReleaseCounter, 1)
 	defer mm_atomic.AddUint64(&mmRelease.afterReleaseCounter, 1)
 
@@ -1721,7 +1721,7 @@ func (mmRelease *PaymentServiceHandlerMock) Release(ctx context.Context, pp1 *co
 		mmRelease.inspectFuncRelease(ctx, pp1)
 	}
 
-	mm_params := PaymentServiceHandlerMockReleaseParams{ctx, pp1}
+	mm_params := PaymentServiceClientMockReleaseParams{ctx, pp1}
 
 	// Record call args
 	mmRelease.ReleaseMock.mutex.Lock()
@@ -1740,54 +1740,54 @@ func (mmRelease *PaymentServiceHandlerMock) Release(ctx context.Context, pp1 *co
 		mm_want := mmRelease.ReleaseMock.defaultExpectation.params
 		mm_want_ptrs := mmRelease.ReleaseMock.defaultExpectation.paramPtrs
 
-		mm_got := PaymentServiceHandlerMockReleaseParams{ctx, pp1}
+		mm_got := PaymentServiceClientMockReleaseParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmRelease.t.Errorf("PaymentServiceHandlerMock.Release got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmRelease.t.Errorf("PaymentServiceClientMock.Release got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmRelease.ReleaseMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmRelease.t.Errorf("PaymentServiceHandlerMock.Release got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmRelease.t.Errorf("PaymentServiceClientMock.Release got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmRelease.ReleaseMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmRelease.t.Errorf("PaymentServiceHandlerMock.Release got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmRelease.t.Errorf("PaymentServiceClientMock.Release got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmRelease.ReleaseMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmRelease.ReleaseMock.defaultExpectation.results
 		if mm_results == nil {
-			mmRelease.t.Fatal("No results are set for the PaymentServiceHandlerMock.Release")
+			mmRelease.t.Fatal("No results are set for the PaymentServiceClientMock.Release")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmRelease.funcRelease != nil {
 		return mmRelease.funcRelease(ctx, pp1)
 	}
-	mmRelease.t.Fatalf("Unexpected call to PaymentServiceHandlerMock.Release. %v %v", ctx, pp1)
+	mmRelease.t.Fatalf("Unexpected call to PaymentServiceClientMock.Release. %v %v", ctx, pp1)
 	return
 }
 
-// ReleaseAfterCounter returns a count of finished PaymentServiceHandlerMock.Release invocations
-func (mmRelease *PaymentServiceHandlerMock) ReleaseAfterCounter() uint64 {
+// ReleaseAfterCounter returns a count of finished PaymentServiceClientMock.Release invocations
+func (mmRelease *PaymentServiceClientMock) ReleaseAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmRelease.afterReleaseCounter)
 }
 
-// ReleaseBeforeCounter returns a count of PaymentServiceHandlerMock.Release invocations
-func (mmRelease *PaymentServiceHandlerMock) ReleaseBeforeCounter() uint64 {
+// ReleaseBeforeCounter returns a count of PaymentServiceClientMock.Release invocations
+func (mmRelease *PaymentServiceClientMock) ReleaseBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmRelease.beforeReleaseCounter)
 }
 
-// Calls returns a list of arguments used in each call to PaymentServiceHandlerMock.Release.
+// Calls returns a list of arguments used in each call to PaymentServiceClientMock.Release.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmRelease *mPaymentServiceHandlerMockRelease) Calls() []*PaymentServiceHandlerMockReleaseParams {
+func (mmRelease *mPaymentServiceClientMockRelease) Calls() []*PaymentServiceClientMockReleaseParams {
 	mmRelease.mutex.RLock()
 
-	argCopy := make([]*PaymentServiceHandlerMockReleaseParams, len(mmRelease.callArgs))
+	argCopy := make([]*PaymentServiceClientMockReleaseParams, len(mmRelease.callArgs))
 	copy(argCopy, mmRelease.callArgs)
 
 	mmRelease.mutex.RUnlock()
@@ -1797,7 +1797,7 @@ func (mmRelease *mPaymentServiceHandlerMockRelease) Calls() []*PaymentServiceHan
 
 // MinimockReleaseDone returns true if the count of the Release invocations corresponds
 // the number of defined expectations
-func (m *PaymentServiceHandlerMock) MinimockReleaseDone() bool {
+func (m *PaymentServiceClientMock) MinimockReleaseDone() bool {
 	if m.ReleaseMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -1813,10 +1813,10 @@ func (m *PaymentServiceHandlerMock) MinimockReleaseDone() bool {
 }
 
 // MinimockReleaseInspect logs each unmet expectation
-func (m *PaymentServiceHandlerMock) MinimockReleaseInspect() {
+func (m *PaymentServiceClientMock) MinimockReleaseInspect() {
 	for _, e := range m.ReleaseMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to PaymentServiceHandlerMock.Release at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to PaymentServiceClientMock.Release at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -1824,71 +1824,69 @@ func (m *PaymentServiceHandlerMock) MinimockReleaseInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.ReleaseMock.defaultExpectation != nil && afterReleaseCounter < 1 {
 		if m.ReleaseMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to PaymentServiceHandlerMock.Release at\n%s", m.ReleaseMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to PaymentServiceClientMock.Release at\n%s", m.ReleaseMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to PaymentServiceHandlerMock.Release at\n%s with params: %#v", m.ReleaseMock.defaultExpectation.expectationOrigins.origin, *m.ReleaseMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to PaymentServiceClientMock.Release at\n%s with params: %#v", m.ReleaseMock.defaultExpectation.expectationOrigins.origin, *m.ReleaseMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcRelease != nil && afterReleaseCounter < 1 {
-		m.t.Errorf("Expected call to PaymentServiceHandlerMock.Release at\n%s", m.funcReleaseOrigin)
+		m.t.Errorf("Expected call to PaymentServiceClientMock.Release at\n%s", m.funcReleaseOrigin)
 	}
 
 	if !m.ReleaseMock.invocationsDone() && afterReleaseCounter > 0 {
-		m.t.Errorf("Expected %d calls to PaymentServiceHandlerMock.Release at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to PaymentServiceClientMock.Release at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.ReleaseMock.expectedInvocations), m.ReleaseMock.expectedInvocationsOrigin, afterReleaseCounter)
 	}
 }
 
-type mPaymentServiceHandlerMockSearch struct {
+type mPaymentServiceClientMockSearch struct {
 	optional           bool
-	mock               *PaymentServiceHandlerMock
-	defaultExpectation *PaymentServiceHandlerMockSearchExpectation
-	expectations       []*PaymentServiceHandlerMockSearchExpectation
+	mock               *PaymentServiceClientMock
+	defaultExpectation *PaymentServiceClientMockSearchExpectation
+	expectations       []*PaymentServiceClientMockSearchExpectation
 
-	callArgs []*PaymentServiceHandlerMockSearchParams
+	callArgs []*PaymentServiceClientMockSearchParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// PaymentServiceHandlerMockSearchExpectation specifies expectation struct of the PaymentServiceHandler.Search
-type PaymentServiceHandlerMockSearchExpectation struct {
-	mock               *PaymentServiceHandlerMock
-	params             *PaymentServiceHandlerMockSearchParams
-	paramPtrs          *PaymentServiceHandlerMockSearchParamPtrs
-	expectationOrigins PaymentServiceHandlerMockSearchExpectationOrigins
-	results            *PaymentServiceHandlerMockSearchResults
+// PaymentServiceClientMockSearchExpectation specifies expectation struct of the PaymentServiceClient.Search
+type PaymentServiceClientMockSearchExpectation struct {
+	mock               *PaymentServiceClientMock
+	params             *PaymentServiceClientMockSearchParams
+	paramPtrs          *PaymentServiceClientMockSearchParamPtrs
+	expectationOrigins PaymentServiceClientMockSearchExpectationOrigins
+	results            *PaymentServiceClientMockSearchResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// PaymentServiceHandlerMockSearchParams contains parameters of the PaymentServiceHandler.Search
-type PaymentServiceHandlerMockSearchParams struct {
+// PaymentServiceClientMockSearchParams contains parameters of the PaymentServiceClient.Search
+type PaymentServiceClientMockSearchParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v11.SearchRequest]
-	pp2 *connect.ServerStream[v1.SearchResponse]
 }
 
-// PaymentServiceHandlerMockSearchParamPtrs contains pointers to parameters of the PaymentServiceHandler.Search
-type PaymentServiceHandlerMockSearchParamPtrs struct {
+// PaymentServiceClientMockSearchParamPtrs contains pointers to parameters of the PaymentServiceClient.Search
+type PaymentServiceClientMockSearchParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v11.SearchRequest]
-	pp2 **connect.ServerStream[v1.SearchResponse]
 }
 
-// PaymentServiceHandlerMockSearchResults contains results of the PaymentServiceHandler.Search
-type PaymentServiceHandlerMockSearchResults struct {
+// PaymentServiceClientMockSearchResults contains results of the PaymentServiceClient.Search
+type PaymentServiceClientMockSearchResults struct {
+	pp2 *connect.ServerStreamForClient[v1.SearchResponse]
 	err error
 }
 
-// PaymentServiceHandlerMockSearchOrigins contains origins of expectations of the PaymentServiceHandler.Search
-type PaymentServiceHandlerMockSearchExpectationOrigins struct {
+// PaymentServiceClientMockSearchOrigins contains origins of expectations of the PaymentServiceClient.Search
+type PaymentServiceClientMockSearchExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
-	originPp2 string
 }
 
 // Marks this method to be optional. The default behavior of any method with Return() is '1 or more', meaning
@@ -1896,26 +1894,26 @@ type PaymentServiceHandlerMockSearchExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmSearch *mPaymentServiceHandlerMockSearch) Optional() *mPaymentServiceHandlerMockSearch {
+func (mmSearch *mPaymentServiceClientMockSearch) Optional() *mPaymentServiceClientMockSearch {
 	mmSearch.optional = true
 	return mmSearch
 }
 
-// Expect sets up expected params for PaymentServiceHandler.Search
-func (mmSearch *mPaymentServiceHandlerMockSearch) Expect(ctx context.Context, pp1 *connect.Request[v11.SearchRequest], pp2 *connect.ServerStream[v1.SearchResponse]) *mPaymentServiceHandlerMockSearch {
+// Expect sets up expected params for PaymentServiceClient.Search
+func (mmSearch *mPaymentServiceClientMockSearch) Expect(ctx context.Context, pp1 *connect.Request[v11.SearchRequest]) *mPaymentServiceClientMockSearch {
 	if mmSearch.mock.funcSearch != nil {
-		mmSearch.mock.t.Fatalf("PaymentServiceHandlerMock.Search mock is already set by Set")
+		mmSearch.mock.t.Fatalf("PaymentServiceClientMock.Search mock is already set by Set")
 	}
 
 	if mmSearch.defaultExpectation == nil {
-		mmSearch.defaultExpectation = &PaymentServiceHandlerMockSearchExpectation{}
+		mmSearch.defaultExpectation = &PaymentServiceClientMockSearchExpectation{}
 	}
 
 	if mmSearch.defaultExpectation.paramPtrs != nil {
-		mmSearch.mock.t.Fatalf("PaymentServiceHandlerMock.Search mock is already set by ExpectParams functions")
+		mmSearch.mock.t.Fatalf("PaymentServiceClientMock.Search mock is already set by ExpectParams functions")
 	}
 
-	mmSearch.defaultExpectation.params = &PaymentServiceHandlerMockSearchParams{ctx, pp1, pp2}
+	mmSearch.defaultExpectation.params = &PaymentServiceClientMockSearchParams{ctx, pp1}
 	mmSearch.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmSearch.expectations {
 		if minimock.Equal(e.params, mmSearch.defaultExpectation.params) {
@@ -1926,22 +1924,22 @@ func (mmSearch *mPaymentServiceHandlerMockSearch) Expect(ctx context.Context, pp
 	return mmSearch
 }
 
-// ExpectCtxParam1 sets up expected param ctx for PaymentServiceHandler.Search
-func (mmSearch *mPaymentServiceHandlerMockSearch) ExpectCtxParam1(ctx context.Context) *mPaymentServiceHandlerMockSearch {
+// ExpectCtxParam1 sets up expected param ctx for PaymentServiceClient.Search
+func (mmSearch *mPaymentServiceClientMockSearch) ExpectCtxParam1(ctx context.Context) *mPaymentServiceClientMockSearch {
 	if mmSearch.mock.funcSearch != nil {
-		mmSearch.mock.t.Fatalf("PaymentServiceHandlerMock.Search mock is already set by Set")
+		mmSearch.mock.t.Fatalf("PaymentServiceClientMock.Search mock is already set by Set")
 	}
 
 	if mmSearch.defaultExpectation == nil {
-		mmSearch.defaultExpectation = &PaymentServiceHandlerMockSearchExpectation{}
+		mmSearch.defaultExpectation = &PaymentServiceClientMockSearchExpectation{}
 	}
 
 	if mmSearch.defaultExpectation.params != nil {
-		mmSearch.mock.t.Fatalf("PaymentServiceHandlerMock.Search mock is already set by Expect")
+		mmSearch.mock.t.Fatalf("PaymentServiceClientMock.Search mock is already set by Expect")
 	}
 
 	if mmSearch.defaultExpectation.paramPtrs == nil {
-		mmSearch.defaultExpectation.paramPtrs = &PaymentServiceHandlerMockSearchParamPtrs{}
+		mmSearch.defaultExpectation.paramPtrs = &PaymentServiceClientMockSearchParamPtrs{}
 	}
 	mmSearch.defaultExpectation.paramPtrs.ctx = &ctx
 	mmSearch.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -1949,22 +1947,22 @@ func (mmSearch *mPaymentServiceHandlerMockSearch) ExpectCtxParam1(ctx context.Co
 	return mmSearch
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for PaymentServiceHandler.Search
-func (mmSearch *mPaymentServiceHandlerMockSearch) ExpectPp1Param2(pp1 *connect.Request[v11.SearchRequest]) *mPaymentServiceHandlerMockSearch {
+// ExpectPp1Param2 sets up expected param pp1 for PaymentServiceClient.Search
+func (mmSearch *mPaymentServiceClientMockSearch) ExpectPp1Param2(pp1 *connect.Request[v11.SearchRequest]) *mPaymentServiceClientMockSearch {
 	if mmSearch.mock.funcSearch != nil {
-		mmSearch.mock.t.Fatalf("PaymentServiceHandlerMock.Search mock is already set by Set")
+		mmSearch.mock.t.Fatalf("PaymentServiceClientMock.Search mock is already set by Set")
 	}
 
 	if mmSearch.defaultExpectation == nil {
-		mmSearch.defaultExpectation = &PaymentServiceHandlerMockSearchExpectation{}
+		mmSearch.defaultExpectation = &PaymentServiceClientMockSearchExpectation{}
 	}
 
 	if mmSearch.defaultExpectation.params != nil {
-		mmSearch.mock.t.Fatalf("PaymentServiceHandlerMock.Search mock is already set by Expect")
+		mmSearch.mock.t.Fatalf("PaymentServiceClientMock.Search mock is already set by Expect")
 	}
 
 	if mmSearch.defaultExpectation.paramPtrs == nil {
-		mmSearch.defaultExpectation.paramPtrs = &PaymentServiceHandlerMockSearchParamPtrs{}
+		mmSearch.defaultExpectation.paramPtrs = &PaymentServiceClientMockSearchParamPtrs{}
 	}
 	mmSearch.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmSearch.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -1972,33 +1970,10 @@ func (mmSearch *mPaymentServiceHandlerMockSearch) ExpectPp1Param2(pp1 *connect.R
 	return mmSearch
 }
 
-// ExpectPp2Param3 sets up expected param pp2 for PaymentServiceHandler.Search
-func (mmSearch *mPaymentServiceHandlerMockSearch) ExpectPp2Param3(pp2 *connect.ServerStream[v1.SearchResponse]) *mPaymentServiceHandlerMockSearch {
-	if mmSearch.mock.funcSearch != nil {
-		mmSearch.mock.t.Fatalf("PaymentServiceHandlerMock.Search mock is already set by Set")
-	}
-
-	if mmSearch.defaultExpectation == nil {
-		mmSearch.defaultExpectation = &PaymentServiceHandlerMockSearchExpectation{}
-	}
-
-	if mmSearch.defaultExpectation.params != nil {
-		mmSearch.mock.t.Fatalf("PaymentServiceHandlerMock.Search mock is already set by Expect")
-	}
-
-	if mmSearch.defaultExpectation.paramPtrs == nil {
-		mmSearch.defaultExpectation.paramPtrs = &PaymentServiceHandlerMockSearchParamPtrs{}
-	}
-	mmSearch.defaultExpectation.paramPtrs.pp2 = &pp2
-	mmSearch.defaultExpectation.expectationOrigins.originPp2 = minimock.CallerInfo(1)
-
-	return mmSearch
-}
-
-// Inspect accepts an inspector function that has same arguments as the PaymentServiceHandler.Search
-func (mmSearch *mPaymentServiceHandlerMockSearch) Inspect(f func(ctx context.Context, pp1 *connect.Request[v11.SearchRequest], pp2 *connect.ServerStream[v1.SearchResponse])) *mPaymentServiceHandlerMockSearch {
+// Inspect accepts an inspector function that has same arguments as the PaymentServiceClient.Search
+func (mmSearch *mPaymentServiceClientMockSearch) Inspect(f func(ctx context.Context, pp1 *connect.Request[v11.SearchRequest])) *mPaymentServiceClientMockSearch {
 	if mmSearch.mock.inspectFuncSearch != nil {
-		mmSearch.mock.t.Fatalf("Inspect function is already set for PaymentServiceHandlerMock.Search")
+		mmSearch.mock.t.Fatalf("Inspect function is already set for PaymentServiceClientMock.Search")
 	}
 
 	mmSearch.mock.inspectFuncSearch = f
@@ -2006,28 +1981,28 @@ func (mmSearch *mPaymentServiceHandlerMockSearch) Inspect(f func(ctx context.Con
 	return mmSearch
 }
 
-// Return sets up results that will be returned by PaymentServiceHandler.Search
-func (mmSearch *mPaymentServiceHandlerMockSearch) Return(err error) *PaymentServiceHandlerMock {
+// Return sets up results that will be returned by PaymentServiceClient.Search
+func (mmSearch *mPaymentServiceClientMockSearch) Return(pp2 *connect.ServerStreamForClient[v1.SearchResponse], err error) *PaymentServiceClientMock {
 	if mmSearch.mock.funcSearch != nil {
-		mmSearch.mock.t.Fatalf("PaymentServiceHandlerMock.Search mock is already set by Set")
+		mmSearch.mock.t.Fatalf("PaymentServiceClientMock.Search mock is already set by Set")
 	}
 
 	if mmSearch.defaultExpectation == nil {
-		mmSearch.defaultExpectation = &PaymentServiceHandlerMockSearchExpectation{mock: mmSearch.mock}
+		mmSearch.defaultExpectation = &PaymentServiceClientMockSearchExpectation{mock: mmSearch.mock}
 	}
-	mmSearch.defaultExpectation.results = &PaymentServiceHandlerMockSearchResults{err}
+	mmSearch.defaultExpectation.results = &PaymentServiceClientMockSearchResults{pp2, err}
 	mmSearch.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmSearch.mock
 }
 
-// Set uses given function f to mock the PaymentServiceHandler.Search method
-func (mmSearch *mPaymentServiceHandlerMockSearch) Set(f func(ctx context.Context, pp1 *connect.Request[v11.SearchRequest], pp2 *connect.ServerStream[v1.SearchResponse]) (err error)) *PaymentServiceHandlerMock {
+// Set uses given function f to mock the PaymentServiceClient.Search method
+func (mmSearch *mPaymentServiceClientMockSearch) Set(f func(ctx context.Context, pp1 *connect.Request[v11.SearchRequest]) (pp2 *connect.ServerStreamForClient[v1.SearchResponse], err error)) *PaymentServiceClientMock {
 	if mmSearch.defaultExpectation != nil {
-		mmSearch.mock.t.Fatalf("Default expectation is already set for the PaymentServiceHandler.Search method")
+		mmSearch.mock.t.Fatalf("Default expectation is already set for the PaymentServiceClient.Search method")
 	}
 
 	if len(mmSearch.expectations) > 0 {
-		mmSearch.mock.t.Fatalf("Some expectations are already set for the PaymentServiceHandler.Search method")
+		mmSearch.mock.t.Fatalf("Some expectations are already set for the PaymentServiceClient.Search method")
 	}
 
 	mmSearch.mock.funcSearch = f
@@ -2035,39 +2010,39 @@ func (mmSearch *mPaymentServiceHandlerMockSearch) Set(f func(ctx context.Context
 	return mmSearch.mock
 }
 
-// When sets expectation for the PaymentServiceHandler.Search which will trigger the result defined by the following
+// When sets expectation for the PaymentServiceClient.Search which will trigger the result defined by the following
 // Then helper
-func (mmSearch *mPaymentServiceHandlerMockSearch) When(ctx context.Context, pp1 *connect.Request[v11.SearchRequest], pp2 *connect.ServerStream[v1.SearchResponse]) *PaymentServiceHandlerMockSearchExpectation {
+func (mmSearch *mPaymentServiceClientMockSearch) When(ctx context.Context, pp1 *connect.Request[v11.SearchRequest]) *PaymentServiceClientMockSearchExpectation {
 	if mmSearch.mock.funcSearch != nil {
-		mmSearch.mock.t.Fatalf("PaymentServiceHandlerMock.Search mock is already set by Set")
+		mmSearch.mock.t.Fatalf("PaymentServiceClientMock.Search mock is already set by Set")
 	}
 
-	expectation := &PaymentServiceHandlerMockSearchExpectation{
+	expectation := &PaymentServiceClientMockSearchExpectation{
 		mock:               mmSearch.mock,
-		params:             &PaymentServiceHandlerMockSearchParams{ctx, pp1, pp2},
-		expectationOrigins: PaymentServiceHandlerMockSearchExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &PaymentServiceClientMockSearchParams{ctx, pp1},
+		expectationOrigins: PaymentServiceClientMockSearchExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmSearch.expectations = append(mmSearch.expectations, expectation)
 	return expectation
 }
 
-// Then sets up PaymentServiceHandler.Search return parameters for the expectation previously defined by the When method
-func (e *PaymentServiceHandlerMockSearchExpectation) Then(err error) *PaymentServiceHandlerMock {
-	e.results = &PaymentServiceHandlerMockSearchResults{err}
+// Then sets up PaymentServiceClient.Search return parameters for the expectation previously defined by the When method
+func (e *PaymentServiceClientMockSearchExpectation) Then(pp2 *connect.ServerStreamForClient[v1.SearchResponse], err error) *PaymentServiceClientMock {
+	e.results = &PaymentServiceClientMockSearchResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times PaymentServiceHandler.Search should be invoked
-func (mmSearch *mPaymentServiceHandlerMockSearch) Times(n uint64) *mPaymentServiceHandlerMockSearch {
+// Times sets number of times PaymentServiceClient.Search should be invoked
+func (mmSearch *mPaymentServiceClientMockSearch) Times(n uint64) *mPaymentServiceClientMockSearch {
 	if n == 0 {
-		mmSearch.mock.t.Fatalf("Times of PaymentServiceHandlerMock.Search mock can not be zero")
+		mmSearch.mock.t.Fatalf("Times of PaymentServiceClientMock.Search mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmSearch.expectedInvocations, n)
 	mmSearch.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmSearch
 }
 
-func (mmSearch *mPaymentServiceHandlerMockSearch) invocationsDone() bool {
+func (mmSearch *mPaymentServiceClientMockSearch) invocationsDone() bool {
 	if len(mmSearch.expectations) == 0 && mmSearch.defaultExpectation == nil && mmSearch.mock.funcSearch == nil {
 		return true
 	}
@@ -2078,18 +2053,18 @@ func (mmSearch *mPaymentServiceHandlerMockSearch) invocationsDone() bool {
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// Search implements mm_paymentv1connect.PaymentServiceHandler
-func (mmSearch *PaymentServiceHandlerMock) Search(ctx context.Context, pp1 *connect.Request[v11.SearchRequest], pp2 *connect.ServerStream[v1.SearchResponse]) (err error) {
+// Search implements mm_paymentv1connect.PaymentServiceClient
+func (mmSearch *PaymentServiceClientMock) Search(ctx context.Context, pp1 *connect.Request[v11.SearchRequest]) (pp2 *connect.ServerStreamForClient[v1.SearchResponse], err error) {
 	mm_atomic.AddUint64(&mmSearch.beforeSearchCounter, 1)
 	defer mm_atomic.AddUint64(&mmSearch.afterSearchCounter, 1)
 
 	mmSearch.t.Helper()
 
 	if mmSearch.inspectFuncSearch != nil {
-		mmSearch.inspectFuncSearch(ctx, pp1, pp2)
+		mmSearch.inspectFuncSearch(ctx, pp1)
 	}
 
-	mm_params := PaymentServiceHandlerMockSearchParams{ctx, pp1, pp2}
+	mm_params := PaymentServiceClientMockSearchParams{ctx, pp1}
 
 	// Record call args
 	mmSearch.SearchMock.mutex.Lock()
@@ -2099,7 +2074,7 @@ func (mmSearch *PaymentServiceHandlerMock) Search(ctx context.Context, pp1 *conn
 	for _, e := range mmSearch.SearchMock.expectations {
 		if minimock.Equal(*e.params, mm_params) {
 			mm_atomic.AddUint64(&e.Counter, 1)
-			return e.results.err
+			return e.results.pp2, e.results.err
 		}
 	}
 
@@ -2108,59 +2083,54 @@ func (mmSearch *PaymentServiceHandlerMock) Search(ctx context.Context, pp1 *conn
 		mm_want := mmSearch.SearchMock.defaultExpectation.params
 		mm_want_ptrs := mmSearch.SearchMock.defaultExpectation.paramPtrs
 
-		mm_got := PaymentServiceHandlerMockSearchParams{ctx, pp1, pp2}
+		mm_got := PaymentServiceClientMockSearchParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmSearch.t.Errorf("PaymentServiceHandlerMock.Search got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmSearch.t.Errorf("PaymentServiceClientMock.Search got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmSearch.SearchMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmSearch.t.Errorf("PaymentServiceHandlerMock.Search got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmSearch.t.Errorf("PaymentServiceClientMock.Search got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmSearch.SearchMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
-			if mm_want_ptrs.pp2 != nil && !minimock.Equal(*mm_want_ptrs.pp2, mm_got.pp2) {
-				mmSearch.t.Errorf("PaymentServiceHandlerMock.Search got unexpected parameter pp2, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
-					mmSearch.SearchMock.defaultExpectation.expectationOrigins.originPp2, *mm_want_ptrs.pp2, mm_got.pp2, minimock.Diff(*mm_want_ptrs.pp2, mm_got.pp2))
-			}
-
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmSearch.t.Errorf("PaymentServiceHandlerMock.Search got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmSearch.t.Errorf("PaymentServiceClientMock.Search got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmSearch.SearchMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmSearch.SearchMock.defaultExpectation.results
 		if mm_results == nil {
-			mmSearch.t.Fatal("No results are set for the PaymentServiceHandlerMock.Search")
+			mmSearch.t.Fatal("No results are set for the PaymentServiceClientMock.Search")
 		}
-		return (*mm_results).err
+		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmSearch.funcSearch != nil {
-		return mmSearch.funcSearch(ctx, pp1, pp2)
+		return mmSearch.funcSearch(ctx, pp1)
 	}
-	mmSearch.t.Fatalf("Unexpected call to PaymentServiceHandlerMock.Search. %v %v %v", ctx, pp1, pp2)
+	mmSearch.t.Fatalf("Unexpected call to PaymentServiceClientMock.Search. %v %v", ctx, pp1)
 	return
 }
 
-// SearchAfterCounter returns a count of finished PaymentServiceHandlerMock.Search invocations
-func (mmSearch *PaymentServiceHandlerMock) SearchAfterCounter() uint64 {
+// SearchAfterCounter returns a count of finished PaymentServiceClientMock.Search invocations
+func (mmSearch *PaymentServiceClientMock) SearchAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmSearch.afterSearchCounter)
 }
 
-// SearchBeforeCounter returns a count of PaymentServiceHandlerMock.Search invocations
-func (mmSearch *PaymentServiceHandlerMock) SearchBeforeCounter() uint64 {
+// SearchBeforeCounter returns a count of PaymentServiceClientMock.Search invocations
+func (mmSearch *PaymentServiceClientMock) SearchBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmSearch.beforeSearchCounter)
 }
 
-// Calls returns a list of arguments used in each call to PaymentServiceHandlerMock.Search.
+// Calls returns a list of arguments used in each call to PaymentServiceClientMock.Search.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmSearch *mPaymentServiceHandlerMockSearch) Calls() []*PaymentServiceHandlerMockSearchParams {
+func (mmSearch *mPaymentServiceClientMockSearch) Calls() []*PaymentServiceClientMockSearchParams {
 	mmSearch.mutex.RLock()
 
-	argCopy := make([]*PaymentServiceHandlerMockSearchParams, len(mmSearch.callArgs))
+	argCopy := make([]*PaymentServiceClientMockSearchParams, len(mmSearch.callArgs))
 	copy(argCopy, mmSearch.callArgs)
 
 	mmSearch.mutex.RUnlock()
@@ -2170,7 +2140,7 @@ func (mmSearch *mPaymentServiceHandlerMockSearch) Calls() []*PaymentServiceHandl
 
 // MinimockSearchDone returns true if the count of the Search invocations corresponds
 // the number of defined expectations
-func (m *PaymentServiceHandlerMock) MinimockSearchDone() bool {
+func (m *PaymentServiceClientMock) MinimockSearchDone() bool {
 	if m.SearchMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -2186,10 +2156,10 @@ func (m *PaymentServiceHandlerMock) MinimockSearchDone() bool {
 }
 
 // MinimockSearchInspect logs each unmet expectation
-func (m *PaymentServiceHandlerMock) MinimockSearchInspect() {
+func (m *PaymentServiceClientMock) MinimockSearchInspect() {
 	for _, e := range m.SearchMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to PaymentServiceHandlerMock.Search at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to PaymentServiceClientMock.Search at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -2197,66 +2167,66 @@ func (m *PaymentServiceHandlerMock) MinimockSearchInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.SearchMock.defaultExpectation != nil && afterSearchCounter < 1 {
 		if m.SearchMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to PaymentServiceHandlerMock.Search at\n%s", m.SearchMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to PaymentServiceClientMock.Search at\n%s", m.SearchMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to PaymentServiceHandlerMock.Search at\n%s with params: %#v", m.SearchMock.defaultExpectation.expectationOrigins.origin, *m.SearchMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to PaymentServiceClientMock.Search at\n%s with params: %#v", m.SearchMock.defaultExpectation.expectationOrigins.origin, *m.SearchMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcSearch != nil && afterSearchCounter < 1 {
-		m.t.Errorf("Expected call to PaymentServiceHandlerMock.Search at\n%s", m.funcSearchOrigin)
+		m.t.Errorf("Expected call to PaymentServiceClientMock.Search at\n%s", m.funcSearchOrigin)
 	}
 
 	if !m.SearchMock.invocationsDone() && afterSearchCounter > 0 {
-		m.t.Errorf("Expected %d calls to PaymentServiceHandlerMock.Search at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to PaymentServiceClientMock.Search at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.SearchMock.expectedInvocations), m.SearchMock.expectedInvocationsOrigin, afterSearchCounter)
 	}
 }
 
-type mPaymentServiceHandlerMockSend struct {
+type mPaymentServiceClientMockSend struct {
 	optional           bool
-	mock               *PaymentServiceHandlerMock
-	defaultExpectation *PaymentServiceHandlerMockSendExpectation
-	expectations       []*PaymentServiceHandlerMockSendExpectation
+	mock               *PaymentServiceClientMock
+	defaultExpectation *PaymentServiceClientMockSendExpectation
+	expectations       []*PaymentServiceClientMockSendExpectation
 
-	callArgs []*PaymentServiceHandlerMockSendParams
+	callArgs []*PaymentServiceClientMockSendParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// PaymentServiceHandlerMockSendExpectation specifies expectation struct of the PaymentServiceHandler.Send
-type PaymentServiceHandlerMockSendExpectation struct {
-	mock               *PaymentServiceHandlerMock
-	params             *PaymentServiceHandlerMockSendParams
-	paramPtrs          *PaymentServiceHandlerMockSendParamPtrs
-	expectationOrigins PaymentServiceHandlerMockSendExpectationOrigins
-	results            *PaymentServiceHandlerMockSendResults
+// PaymentServiceClientMockSendExpectation specifies expectation struct of the PaymentServiceClient.Send
+type PaymentServiceClientMockSendExpectation struct {
+	mock               *PaymentServiceClientMock
+	params             *PaymentServiceClientMockSendParams
+	paramPtrs          *PaymentServiceClientMockSendParamPtrs
+	expectationOrigins PaymentServiceClientMockSendExpectationOrigins
+	results            *PaymentServiceClientMockSendResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// PaymentServiceHandlerMockSendParams contains parameters of the PaymentServiceHandler.Send
-type PaymentServiceHandlerMockSendParams struct {
+// PaymentServiceClientMockSendParams contains parameters of the PaymentServiceClient.Send
+type PaymentServiceClientMockSendParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.SendRequest]
 }
 
-// PaymentServiceHandlerMockSendParamPtrs contains pointers to parameters of the PaymentServiceHandler.Send
-type PaymentServiceHandlerMockSendParamPtrs struct {
+// PaymentServiceClientMockSendParamPtrs contains pointers to parameters of the PaymentServiceClient.Send
+type PaymentServiceClientMockSendParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.SendRequest]
 }
 
-// PaymentServiceHandlerMockSendResults contains results of the PaymentServiceHandler.Send
-type PaymentServiceHandlerMockSendResults struct {
+// PaymentServiceClientMockSendResults contains results of the PaymentServiceClient.Send
+type PaymentServiceClientMockSendResults struct {
 	pp2 *connect.Response[v1.SendResponse]
 	err error
 }
 
-// PaymentServiceHandlerMockSendOrigins contains origins of expectations of the PaymentServiceHandler.Send
-type PaymentServiceHandlerMockSendExpectationOrigins struct {
+// PaymentServiceClientMockSendOrigins contains origins of expectations of the PaymentServiceClient.Send
+type PaymentServiceClientMockSendExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -2267,26 +2237,26 @@ type PaymentServiceHandlerMockSendExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmSend *mPaymentServiceHandlerMockSend) Optional() *mPaymentServiceHandlerMockSend {
+func (mmSend *mPaymentServiceClientMockSend) Optional() *mPaymentServiceClientMockSend {
 	mmSend.optional = true
 	return mmSend
 }
 
-// Expect sets up expected params for PaymentServiceHandler.Send
-func (mmSend *mPaymentServiceHandlerMockSend) Expect(ctx context.Context, pp1 *connect.Request[v1.SendRequest]) *mPaymentServiceHandlerMockSend {
+// Expect sets up expected params for PaymentServiceClient.Send
+func (mmSend *mPaymentServiceClientMockSend) Expect(ctx context.Context, pp1 *connect.Request[v1.SendRequest]) *mPaymentServiceClientMockSend {
 	if mmSend.mock.funcSend != nil {
-		mmSend.mock.t.Fatalf("PaymentServiceHandlerMock.Send mock is already set by Set")
+		mmSend.mock.t.Fatalf("PaymentServiceClientMock.Send mock is already set by Set")
 	}
 
 	if mmSend.defaultExpectation == nil {
-		mmSend.defaultExpectation = &PaymentServiceHandlerMockSendExpectation{}
+		mmSend.defaultExpectation = &PaymentServiceClientMockSendExpectation{}
 	}
 
 	if mmSend.defaultExpectation.paramPtrs != nil {
-		mmSend.mock.t.Fatalf("PaymentServiceHandlerMock.Send mock is already set by ExpectParams functions")
+		mmSend.mock.t.Fatalf("PaymentServiceClientMock.Send mock is already set by ExpectParams functions")
 	}
 
-	mmSend.defaultExpectation.params = &PaymentServiceHandlerMockSendParams{ctx, pp1}
+	mmSend.defaultExpectation.params = &PaymentServiceClientMockSendParams{ctx, pp1}
 	mmSend.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmSend.expectations {
 		if minimock.Equal(e.params, mmSend.defaultExpectation.params) {
@@ -2297,22 +2267,22 @@ func (mmSend *mPaymentServiceHandlerMockSend) Expect(ctx context.Context, pp1 *c
 	return mmSend
 }
 
-// ExpectCtxParam1 sets up expected param ctx for PaymentServiceHandler.Send
-func (mmSend *mPaymentServiceHandlerMockSend) ExpectCtxParam1(ctx context.Context) *mPaymentServiceHandlerMockSend {
+// ExpectCtxParam1 sets up expected param ctx for PaymentServiceClient.Send
+func (mmSend *mPaymentServiceClientMockSend) ExpectCtxParam1(ctx context.Context) *mPaymentServiceClientMockSend {
 	if mmSend.mock.funcSend != nil {
-		mmSend.mock.t.Fatalf("PaymentServiceHandlerMock.Send mock is already set by Set")
+		mmSend.mock.t.Fatalf("PaymentServiceClientMock.Send mock is already set by Set")
 	}
 
 	if mmSend.defaultExpectation == nil {
-		mmSend.defaultExpectation = &PaymentServiceHandlerMockSendExpectation{}
+		mmSend.defaultExpectation = &PaymentServiceClientMockSendExpectation{}
 	}
 
 	if mmSend.defaultExpectation.params != nil {
-		mmSend.mock.t.Fatalf("PaymentServiceHandlerMock.Send mock is already set by Expect")
+		mmSend.mock.t.Fatalf("PaymentServiceClientMock.Send mock is already set by Expect")
 	}
 
 	if mmSend.defaultExpectation.paramPtrs == nil {
-		mmSend.defaultExpectation.paramPtrs = &PaymentServiceHandlerMockSendParamPtrs{}
+		mmSend.defaultExpectation.paramPtrs = &PaymentServiceClientMockSendParamPtrs{}
 	}
 	mmSend.defaultExpectation.paramPtrs.ctx = &ctx
 	mmSend.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -2320,22 +2290,22 @@ func (mmSend *mPaymentServiceHandlerMockSend) ExpectCtxParam1(ctx context.Contex
 	return mmSend
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for PaymentServiceHandler.Send
-func (mmSend *mPaymentServiceHandlerMockSend) ExpectPp1Param2(pp1 *connect.Request[v1.SendRequest]) *mPaymentServiceHandlerMockSend {
+// ExpectPp1Param2 sets up expected param pp1 for PaymentServiceClient.Send
+func (mmSend *mPaymentServiceClientMockSend) ExpectPp1Param2(pp1 *connect.Request[v1.SendRequest]) *mPaymentServiceClientMockSend {
 	if mmSend.mock.funcSend != nil {
-		mmSend.mock.t.Fatalf("PaymentServiceHandlerMock.Send mock is already set by Set")
+		mmSend.mock.t.Fatalf("PaymentServiceClientMock.Send mock is already set by Set")
 	}
 
 	if mmSend.defaultExpectation == nil {
-		mmSend.defaultExpectation = &PaymentServiceHandlerMockSendExpectation{}
+		mmSend.defaultExpectation = &PaymentServiceClientMockSendExpectation{}
 	}
 
 	if mmSend.defaultExpectation.params != nil {
-		mmSend.mock.t.Fatalf("PaymentServiceHandlerMock.Send mock is already set by Expect")
+		mmSend.mock.t.Fatalf("PaymentServiceClientMock.Send mock is already set by Expect")
 	}
 
 	if mmSend.defaultExpectation.paramPtrs == nil {
-		mmSend.defaultExpectation.paramPtrs = &PaymentServiceHandlerMockSendParamPtrs{}
+		mmSend.defaultExpectation.paramPtrs = &PaymentServiceClientMockSendParamPtrs{}
 	}
 	mmSend.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmSend.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -2343,10 +2313,10 @@ func (mmSend *mPaymentServiceHandlerMockSend) ExpectPp1Param2(pp1 *connect.Reque
 	return mmSend
 }
 
-// Inspect accepts an inspector function that has same arguments as the PaymentServiceHandler.Send
-func (mmSend *mPaymentServiceHandlerMockSend) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.SendRequest])) *mPaymentServiceHandlerMockSend {
+// Inspect accepts an inspector function that has same arguments as the PaymentServiceClient.Send
+func (mmSend *mPaymentServiceClientMockSend) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.SendRequest])) *mPaymentServiceClientMockSend {
 	if mmSend.mock.inspectFuncSend != nil {
-		mmSend.mock.t.Fatalf("Inspect function is already set for PaymentServiceHandlerMock.Send")
+		mmSend.mock.t.Fatalf("Inspect function is already set for PaymentServiceClientMock.Send")
 	}
 
 	mmSend.mock.inspectFuncSend = f
@@ -2354,28 +2324,28 @@ func (mmSend *mPaymentServiceHandlerMockSend) Inspect(f func(ctx context.Context
 	return mmSend
 }
 
-// Return sets up results that will be returned by PaymentServiceHandler.Send
-func (mmSend *mPaymentServiceHandlerMockSend) Return(pp2 *connect.Response[v1.SendResponse], err error) *PaymentServiceHandlerMock {
+// Return sets up results that will be returned by PaymentServiceClient.Send
+func (mmSend *mPaymentServiceClientMockSend) Return(pp2 *connect.Response[v1.SendResponse], err error) *PaymentServiceClientMock {
 	if mmSend.mock.funcSend != nil {
-		mmSend.mock.t.Fatalf("PaymentServiceHandlerMock.Send mock is already set by Set")
+		mmSend.mock.t.Fatalf("PaymentServiceClientMock.Send mock is already set by Set")
 	}
 
 	if mmSend.defaultExpectation == nil {
-		mmSend.defaultExpectation = &PaymentServiceHandlerMockSendExpectation{mock: mmSend.mock}
+		mmSend.defaultExpectation = &PaymentServiceClientMockSendExpectation{mock: mmSend.mock}
 	}
-	mmSend.defaultExpectation.results = &PaymentServiceHandlerMockSendResults{pp2, err}
+	mmSend.defaultExpectation.results = &PaymentServiceClientMockSendResults{pp2, err}
 	mmSend.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmSend.mock
 }
 
-// Set uses given function f to mock the PaymentServiceHandler.Send method
-func (mmSend *mPaymentServiceHandlerMockSend) Set(f func(ctx context.Context, pp1 *connect.Request[v1.SendRequest]) (pp2 *connect.Response[v1.SendResponse], err error)) *PaymentServiceHandlerMock {
+// Set uses given function f to mock the PaymentServiceClient.Send method
+func (mmSend *mPaymentServiceClientMockSend) Set(f func(ctx context.Context, pp1 *connect.Request[v1.SendRequest]) (pp2 *connect.Response[v1.SendResponse], err error)) *PaymentServiceClientMock {
 	if mmSend.defaultExpectation != nil {
-		mmSend.mock.t.Fatalf("Default expectation is already set for the PaymentServiceHandler.Send method")
+		mmSend.mock.t.Fatalf("Default expectation is already set for the PaymentServiceClient.Send method")
 	}
 
 	if len(mmSend.expectations) > 0 {
-		mmSend.mock.t.Fatalf("Some expectations are already set for the PaymentServiceHandler.Send method")
+		mmSend.mock.t.Fatalf("Some expectations are already set for the PaymentServiceClient.Send method")
 	}
 
 	mmSend.mock.funcSend = f
@@ -2383,39 +2353,39 @@ func (mmSend *mPaymentServiceHandlerMockSend) Set(f func(ctx context.Context, pp
 	return mmSend.mock
 }
 
-// When sets expectation for the PaymentServiceHandler.Send which will trigger the result defined by the following
+// When sets expectation for the PaymentServiceClient.Send which will trigger the result defined by the following
 // Then helper
-func (mmSend *mPaymentServiceHandlerMockSend) When(ctx context.Context, pp1 *connect.Request[v1.SendRequest]) *PaymentServiceHandlerMockSendExpectation {
+func (mmSend *mPaymentServiceClientMockSend) When(ctx context.Context, pp1 *connect.Request[v1.SendRequest]) *PaymentServiceClientMockSendExpectation {
 	if mmSend.mock.funcSend != nil {
-		mmSend.mock.t.Fatalf("PaymentServiceHandlerMock.Send mock is already set by Set")
+		mmSend.mock.t.Fatalf("PaymentServiceClientMock.Send mock is already set by Set")
 	}
 
-	expectation := &PaymentServiceHandlerMockSendExpectation{
+	expectation := &PaymentServiceClientMockSendExpectation{
 		mock:               mmSend.mock,
-		params:             &PaymentServiceHandlerMockSendParams{ctx, pp1},
-		expectationOrigins: PaymentServiceHandlerMockSendExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &PaymentServiceClientMockSendParams{ctx, pp1},
+		expectationOrigins: PaymentServiceClientMockSendExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmSend.expectations = append(mmSend.expectations, expectation)
 	return expectation
 }
 
-// Then sets up PaymentServiceHandler.Send return parameters for the expectation previously defined by the When method
-func (e *PaymentServiceHandlerMockSendExpectation) Then(pp2 *connect.Response[v1.SendResponse], err error) *PaymentServiceHandlerMock {
-	e.results = &PaymentServiceHandlerMockSendResults{pp2, err}
+// Then sets up PaymentServiceClient.Send return parameters for the expectation previously defined by the When method
+func (e *PaymentServiceClientMockSendExpectation) Then(pp2 *connect.Response[v1.SendResponse], err error) *PaymentServiceClientMock {
+	e.results = &PaymentServiceClientMockSendResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times PaymentServiceHandler.Send should be invoked
-func (mmSend *mPaymentServiceHandlerMockSend) Times(n uint64) *mPaymentServiceHandlerMockSend {
+// Times sets number of times PaymentServiceClient.Send should be invoked
+func (mmSend *mPaymentServiceClientMockSend) Times(n uint64) *mPaymentServiceClientMockSend {
 	if n == 0 {
-		mmSend.mock.t.Fatalf("Times of PaymentServiceHandlerMock.Send mock can not be zero")
+		mmSend.mock.t.Fatalf("Times of PaymentServiceClientMock.Send mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmSend.expectedInvocations, n)
 	mmSend.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmSend
 }
 
-func (mmSend *mPaymentServiceHandlerMockSend) invocationsDone() bool {
+func (mmSend *mPaymentServiceClientMockSend) invocationsDone() bool {
 	if len(mmSend.expectations) == 0 && mmSend.defaultExpectation == nil && mmSend.mock.funcSend == nil {
 		return true
 	}
@@ -2426,8 +2396,8 @@ func (mmSend *mPaymentServiceHandlerMockSend) invocationsDone() bool {
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// Send implements mm_paymentv1connect.PaymentServiceHandler
-func (mmSend *PaymentServiceHandlerMock) Send(ctx context.Context, pp1 *connect.Request[v1.SendRequest]) (pp2 *connect.Response[v1.SendResponse], err error) {
+// Send implements mm_paymentv1connect.PaymentServiceClient
+func (mmSend *PaymentServiceClientMock) Send(ctx context.Context, pp1 *connect.Request[v1.SendRequest]) (pp2 *connect.Response[v1.SendResponse], err error) {
 	mm_atomic.AddUint64(&mmSend.beforeSendCounter, 1)
 	defer mm_atomic.AddUint64(&mmSend.afterSendCounter, 1)
 
@@ -2437,7 +2407,7 @@ func (mmSend *PaymentServiceHandlerMock) Send(ctx context.Context, pp1 *connect.
 		mmSend.inspectFuncSend(ctx, pp1)
 	}
 
-	mm_params := PaymentServiceHandlerMockSendParams{ctx, pp1}
+	mm_params := PaymentServiceClientMockSendParams{ctx, pp1}
 
 	// Record call args
 	mmSend.SendMock.mutex.Lock()
@@ -2456,54 +2426,54 @@ func (mmSend *PaymentServiceHandlerMock) Send(ctx context.Context, pp1 *connect.
 		mm_want := mmSend.SendMock.defaultExpectation.params
 		mm_want_ptrs := mmSend.SendMock.defaultExpectation.paramPtrs
 
-		mm_got := PaymentServiceHandlerMockSendParams{ctx, pp1}
+		mm_got := PaymentServiceClientMockSendParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmSend.t.Errorf("PaymentServiceHandlerMock.Send got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmSend.t.Errorf("PaymentServiceClientMock.Send got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmSend.SendMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmSend.t.Errorf("PaymentServiceHandlerMock.Send got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmSend.t.Errorf("PaymentServiceClientMock.Send got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmSend.SendMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmSend.t.Errorf("PaymentServiceHandlerMock.Send got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmSend.t.Errorf("PaymentServiceClientMock.Send got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmSend.SendMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmSend.SendMock.defaultExpectation.results
 		if mm_results == nil {
-			mmSend.t.Fatal("No results are set for the PaymentServiceHandlerMock.Send")
+			mmSend.t.Fatal("No results are set for the PaymentServiceClientMock.Send")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmSend.funcSend != nil {
 		return mmSend.funcSend(ctx, pp1)
 	}
-	mmSend.t.Fatalf("Unexpected call to PaymentServiceHandlerMock.Send. %v %v", ctx, pp1)
+	mmSend.t.Fatalf("Unexpected call to PaymentServiceClientMock.Send. %v %v", ctx, pp1)
 	return
 }
 
-// SendAfterCounter returns a count of finished PaymentServiceHandlerMock.Send invocations
-func (mmSend *PaymentServiceHandlerMock) SendAfterCounter() uint64 {
+// SendAfterCounter returns a count of finished PaymentServiceClientMock.Send invocations
+func (mmSend *PaymentServiceClientMock) SendAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmSend.afterSendCounter)
 }
 
-// SendBeforeCounter returns a count of PaymentServiceHandlerMock.Send invocations
-func (mmSend *PaymentServiceHandlerMock) SendBeforeCounter() uint64 {
+// SendBeforeCounter returns a count of PaymentServiceClientMock.Send invocations
+func (mmSend *PaymentServiceClientMock) SendBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmSend.beforeSendCounter)
 }
 
-// Calls returns a list of arguments used in each call to PaymentServiceHandlerMock.Send.
+// Calls returns a list of arguments used in each call to PaymentServiceClientMock.Send.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmSend *mPaymentServiceHandlerMockSend) Calls() []*PaymentServiceHandlerMockSendParams {
+func (mmSend *mPaymentServiceClientMockSend) Calls() []*PaymentServiceClientMockSendParams {
 	mmSend.mutex.RLock()
 
-	argCopy := make([]*PaymentServiceHandlerMockSendParams, len(mmSend.callArgs))
+	argCopy := make([]*PaymentServiceClientMockSendParams, len(mmSend.callArgs))
 	copy(argCopy, mmSend.callArgs)
 
 	mmSend.mutex.RUnlock()
@@ -2513,7 +2483,7 @@ func (mmSend *mPaymentServiceHandlerMockSend) Calls() []*PaymentServiceHandlerMo
 
 // MinimockSendDone returns true if the count of the Send invocations corresponds
 // the number of defined expectations
-func (m *PaymentServiceHandlerMock) MinimockSendDone() bool {
+func (m *PaymentServiceClientMock) MinimockSendDone() bool {
 	if m.SendMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -2529,10 +2499,10 @@ func (m *PaymentServiceHandlerMock) MinimockSendDone() bool {
 }
 
 // MinimockSendInspect logs each unmet expectation
-func (m *PaymentServiceHandlerMock) MinimockSendInspect() {
+func (m *PaymentServiceClientMock) MinimockSendInspect() {
 	for _, e := range m.SendMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to PaymentServiceHandlerMock.Send at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to PaymentServiceClientMock.Send at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -2540,66 +2510,66 @@ func (m *PaymentServiceHandlerMock) MinimockSendInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.SendMock.defaultExpectation != nil && afterSendCounter < 1 {
 		if m.SendMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to PaymentServiceHandlerMock.Send at\n%s", m.SendMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to PaymentServiceClientMock.Send at\n%s", m.SendMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to PaymentServiceHandlerMock.Send at\n%s with params: %#v", m.SendMock.defaultExpectation.expectationOrigins.origin, *m.SendMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to PaymentServiceClientMock.Send at\n%s with params: %#v", m.SendMock.defaultExpectation.expectationOrigins.origin, *m.SendMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcSend != nil && afterSendCounter < 1 {
-		m.t.Errorf("Expected call to PaymentServiceHandlerMock.Send at\n%s", m.funcSendOrigin)
+		m.t.Errorf("Expected call to PaymentServiceClientMock.Send at\n%s", m.funcSendOrigin)
 	}
 
 	if !m.SendMock.invocationsDone() && afterSendCounter > 0 {
-		m.t.Errorf("Expected %d calls to PaymentServiceHandlerMock.Send at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to PaymentServiceClientMock.Send at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.SendMock.expectedInvocations), m.SendMock.expectedInvocationsOrigin, afterSendCounter)
 	}
 }
 
-type mPaymentServiceHandlerMockStatus struct {
+type mPaymentServiceClientMockStatus struct {
 	optional           bool
-	mock               *PaymentServiceHandlerMock
-	defaultExpectation *PaymentServiceHandlerMockStatusExpectation
-	expectations       []*PaymentServiceHandlerMockStatusExpectation
+	mock               *PaymentServiceClientMock
+	defaultExpectation *PaymentServiceClientMockStatusExpectation
+	expectations       []*PaymentServiceClientMockStatusExpectation
 
-	callArgs []*PaymentServiceHandlerMockStatusParams
+	callArgs []*PaymentServiceClientMockStatusParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// PaymentServiceHandlerMockStatusExpectation specifies expectation struct of the PaymentServiceHandler.Status
-type PaymentServiceHandlerMockStatusExpectation struct {
-	mock               *PaymentServiceHandlerMock
-	params             *PaymentServiceHandlerMockStatusParams
-	paramPtrs          *PaymentServiceHandlerMockStatusParamPtrs
-	expectationOrigins PaymentServiceHandlerMockStatusExpectationOrigins
-	results            *PaymentServiceHandlerMockStatusResults
+// PaymentServiceClientMockStatusExpectation specifies expectation struct of the PaymentServiceClient.Status
+type PaymentServiceClientMockStatusExpectation struct {
+	mock               *PaymentServiceClientMock
+	params             *PaymentServiceClientMockStatusParams
+	paramPtrs          *PaymentServiceClientMockStatusParamPtrs
+	expectationOrigins PaymentServiceClientMockStatusExpectationOrigins
+	results            *PaymentServiceClientMockStatusResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// PaymentServiceHandlerMockStatusParams contains parameters of the PaymentServiceHandler.Status
-type PaymentServiceHandlerMockStatusParams struct {
+// PaymentServiceClientMockStatusParams contains parameters of the PaymentServiceClient.Status
+type PaymentServiceClientMockStatusParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v11.StatusRequest]
 }
 
-// PaymentServiceHandlerMockStatusParamPtrs contains pointers to parameters of the PaymentServiceHandler.Status
-type PaymentServiceHandlerMockStatusParamPtrs struct {
+// PaymentServiceClientMockStatusParamPtrs contains pointers to parameters of the PaymentServiceClient.Status
+type PaymentServiceClientMockStatusParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v11.StatusRequest]
 }
 
-// PaymentServiceHandlerMockStatusResults contains results of the PaymentServiceHandler.Status
-type PaymentServiceHandlerMockStatusResults struct {
+// PaymentServiceClientMockStatusResults contains results of the PaymentServiceClient.Status
+type PaymentServiceClientMockStatusResults struct {
 	pp2 *connect.Response[v11.StatusResponse]
 	err error
 }
 
-// PaymentServiceHandlerMockStatusOrigins contains origins of expectations of the PaymentServiceHandler.Status
-type PaymentServiceHandlerMockStatusExpectationOrigins struct {
+// PaymentServiceClientMockStatusOrigins contains origins of expectations of the PaymentServiceClient.Status
+type PaymentServiceClientMockStatusExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -2610,26 +2580,26 @@ type PaymentServiceHandlerMockStatusExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmStatus *mPaymentServiceHandlerMockStatus) Optional() *mPaymentServiceHandlerMockStatus {
+func (mmStatus *mPaymentServiceClientMockStatus) Optional() *mPaymentServiceClientMockStatus {
 	mmStatus.optional = true
 	return mmStatus
 }
 
-// Expect sets up expected params for PaymentServiceHandler.Status
-func (mmStatus *mPaymentServiceHandlerMockStatus) Expect(ctx context.Context, pp1 *connect.Request[v11.StatusRequest]) *mPaymentServiceHandlerMockStatus {
+// Expect sets up expected params for PaymentServiceClient.Status
+func (mmStatus *mPaymentServiceClientMockStatus) Expect(ctx context.Context, pp1 *connect.Request[v11.StatusRequest]) *mPaymentServiceClientMockStatus {
 	if mmStatus.mock.funcStatus != nil {
-		mmStatus.mock.t.Fatalf("PaymentServiceHandlerMock.Status mock is already set by Set")
+		mmStatus.mock.t.Fatalf("PaymentServiceClientMock.Status mock is already set by Set")
 	}
 
 	if mmStatus.defaultExpectation == nil {
-		mmStatus.defaultExpectation = &PaymentServiceHandlerMockStatusExpectation{}
+		mmStatus.defaultExpectation = &PaymentServiceClientMockStatusExpectation{}
 	}
 
 	if mmStatus.defaultExpectation.paramPtrs != nil {
-		mmStatus.mock.t.Fatalf("PaymentServiceHandlerMock.Status mock is already set by ExpectParams functions")
+		mmStatus.mock.t.Fatalf("PaymentServiceClientMock.Status mock is already set by ExpectParams functions")
 	}
 
-	mmStatus.defaultExpectation.params = &PaymentServiceHandlerMockStatusParams{ctx, pp1}
+	mmStatus.defaultExpectation.params = &PaymentServiceClientMockStatusParams{ctx, pp1}
 	mmStatus.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmStatus.expectations {
 		if minimock.Equal(e.params, mmStatus.defaultExpectation.params) {
@@ -2640,22 +2610,22 @@ func (mmStatus *mPaymentServiceHandlerMockStatus) Expect(ctx context.Context, pp
 	return mmStatus
 }
 
-// ExpectCtxParam1 sets up expected param ctx for PaymentServiceHandler.Status
-func (mmStatus *mPaymentServiceHandlerMockStatus) ExpectCtxParam1(ctx context.Context) *mPaymentServiceHandlerMockStatus {
+// ExpectCtxParam1 sets up expected param ctx for PaymentServiceClient.Status
+func (mmStatus *mPaymentServiceClientMockStatus) ExpectCtxParam1(ctx context.Context) *mPaymentServiceClientMockStatus {
 	if mmStatus.mock.funcStatus != nil {
-		mmStatus.mock.t.Fatalf("PaymentServiceHandlerMock.Status mock is already set by Set")
+		mmStatus.mock.t.Fatalf("PaymentServiceClientMock.Status mock is already set by Set")
 	}
 
 	if mmStatus.defaultExpectation == nil {
-		mmStatus.defaultExpectation = &PaymentServiceHandlerMockStatusExpectation{}
+		mmStatus.defaultExpectation = &PaymentServiceClientMockStatusExpectation{}
 	}
 
 	if mmStatus.defaultExpectation.params != nil {
-		mmStatus.mock.t.Fatalf("PaymentServiceHandlerMock.Status mock is already set by Expect")
+		mmStatus.mock.t.Fatalf("PaymentServiceClientMock.Status mock is already set by Expect")
 	}
 
 	if mmStatus.defaultExpectation.paramPtrs == nil {
-		mmStatus.defaultExpectation.paramPtrs = &PaymentServiceHandlerMockStatusParamPtrs{}
+		mmStatus.defaultExpectation.paramPtrs = &PaymentServiceClientMockStatusParamPtrs{}
 	}
 	mmStatus.defaultExpectation.paramPtrs.ctx = &ctx
 	mmStatus.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -2663,22 +2633,22 @@ func (mmStatus *mPaymentServiceHandlerMockStatus) ExpectCtxParam1(ctx context.Co
 	return mmStatus
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for PaymentServiceHandler.Status
-func (mmStatus *mPaymentServiceHandlerMockStatus) ExpectPp1Param2(pp1 *connect.Request[v11.StatusRequest]) *mPaymentServiceHandlerMockStatus {
+// ExpectPp1Param2 sets up expected param pp1 for PaymentServiceClient.Status
+func (mmStatus *mPaymentServiceClientMockStatus) ExpectPp1Param2(pp1 *connect.Request[v11.StatusRequest]) *mPaymentServiceClientMockStatus {
 	if mmStatus.mock.funcStatus != nil {
-		mmStatus.mock.t.Fatalf("PaymentServiceHandlerMock.Status mock is already set by Set")
+		mmStatus.mock.t.Fatalf("PaymentServiceClientMock.Status mock is already set by Set")
 	}
 
 	if mmStatus.defaultExpectation == nil {
-		mmStatus.defaultExpectation = &PaymentServiceHandlerMockStatusExpectation{}
+		mmStatus.defaultExpectation = &PaymentServiceClientMockStatusExpectation{}
 	}
 
 	if mmStatus.defaultExpectation.params != nil {
-		mmStatus.mock.t.Fatalf("PaymentServiceHandlerMock.Status mock is already set by Expect")
+		mmStatus.mock.t.Fatalf("PaymentServiceClientMock.Status mock is already set by Expect")
 	}
 
 	if mmStatus.defaultExpectation.paramPtrs == nil {
-		mmStatus.defaultExpectation.paramPtrs = &PaymentServiceHandlerMockStatusParamPtrs{}
+		mmStatus.defaultExpectation.paramPtrs = &PaymentServiceClientMockStatusParamPtrs{}
 	}
 	mmStatus.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmStatus.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -2686,10 +2656,10 @@ func (mmStatus *mPaymentServiceHandlerMockStatus) ExpectPp1Param2(pp1 *connect.R
 	return mmStatus
 }
 
-// Inspect accepts an inspector function that has same arguments as the PaymentServiceHandler.Status
-func (mmStatus *mPaymentServiceHandlerMockStatus) Inspect(f func(ctx context.Context, pp1 *connect.Request[v11.StatusRequest])) *mPaymentServiceHandlerMockStatus {
+// Inspect accepts an inspector function that has same arguments as the PaymentServiceClient.Status
+func (mmStatus *mPaymentServiceClientMockStatus) Inspect(f func(ctx context.Context, pp1 *connect.Request[v11.StatusRequest])) *mPaymentServiceClientMockStatus {
 	if mmStatus.mock.inspectFuncStatus != nil {
-		mmStatus.mock.t.Fatalf("Inspect function is already set for PaymentServiceHandlerMock.Status")
+		mmStatus.mock.t.Fatalf("Inspect function is already set for PaymentServiceClientMock.Status")
 	}
 
 	mmStatus.mock.inspectFuncStatus = f
@@ -2697,28 +2667,28 @@ func (mmStatus *mPaymentServiceHandlerMockStatus) Inspect(f func(ctx context.Con
 	return mmStatus
 }
 
-// Return sets up results that will be returned by PaymentServiceHandler.Status
-func (mmStatus *mPaymentServiceHandlerMockStatus) Return(pp2 *connect.Response[v11.StatusResponse], err error) *PaymentServiceHandlerMock {
+// Return sets up results that will be returned by PaymentServiceClient.Status
+func (mmStatus *mPaymentServiceClientMockStatus) Return(pp2 *connect.Response[v11.StatusResponse], err error) *PaymentServiceClientMock {
 	if mmStatus.mock.funcStatus != nil {
-		mmStatus.mock.t.Fatalf("PaymentServiceHandlerMock.Status mock is already set by Set")
+		mmStatus.mock.t.Fatalf("PaymentServiceClientMock.Status mock is already set by Set")
 	}
 
 	if mmStatus.defaultExpectation == nil {
-		mmStatus.defaultExpectation = &PaymentServiceHandlerMockStatusExpectation{mock: mmStatus.mock}
+		mmStatus.defaultExpectation = &PaymentServiceClientMockStatusExpectation{mock: mmStatus.mock}
 	}
-	mmStatus.defaultExpectation.results = &PaymentServiceHandlerMockStatusResults{pp2, err}
+	mmStatus.defaultExpectation.results = &PaymentServiceClientMockStatusResults{pp2, err}
 	mmStatus.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmStatus.mock
 }
 
-// Set uses given function f to mock the PaymentServiceHandler.Status method
-func (mmStatus *mPaymentServiceHandlerMockStatus) Set(f func(ctx context.Context, pp1 *connect.Request[v11.StatusRequest]) (pp2 *connect.Response[v11.StatusResponse], err error)) *PaymentServiceHandlerMock {
+// Set uses given function f to mock the PaymentServiceClient.Status method
+func (mmStatus *mPaymentServiceClientMockStatus) Set(f func(ctx context.Context, pp1 *connect.Request[v11.StatusRequest]) (pp2 *connect.Response[v11.StatusResponse], err error)) *PaymentServiceClientMock {
 	if mmStatus.defaultExpectation != nil {
-		mmStatus.mock.t.Fatalf("Default expectation is already set for the PaymentServiceHandler.Status method")
+		mmStatus.mock.t.Fatalf("Default expectation is already set for the PaymentServiceClient.Status method")
 	}
 
 	if len(mmStatus.expectations) > 0 {
-		mmStatus.mock.t.Fatalf("Some expectations are already set for the PaymentServiceHandler.Status method")
+		mmStatus.mock.t.Fatalf("Some expectations are already set for the PaymentServiceClient.Status method")
 	}
 
 	mmStatus.mock.funcStatus = f
@@ -2726,39 +2696,39 @@ func (mmStatus *mPaymentServiceHandlerMockStatus) Set(f func(ctx context.Context
 	return mmStatus.mock
 }
 
-// When sets expectation for the PaymentServiceHandler.Status which will trigger the result defined by the following
+// When sets expectation for the PaymentServiceClient.Status which will trigger the result defined by the following
 // Then helper
-func (mmStatus *mPaymentServiceHandlerMockStatus) When(ctx context.Context, pp1 *connect.Request[v11.StatusRequest]) *PaymentServiceHandlerMockStatusExpectation {
+func (mmStatus *mPaymentServiceClientMockStatus) When(ctx context.Context, pp1 *connect.Request[v11.StatusRequest]) *PaymentServiceClientMockStatusExpectation {
 	if mmStatus.mock.funcStatus != nil {
-		mmStatus.mock.t.Fatalf("PaymentServiceHandlerMock.Status mock is already set by Set")
+		mmStatus.mock.t.Fatalf("PaymentServiceClientMock.Status mock is already set by Set")
 	}
 
-	expectation := &PaymentServiceHandlerMockStatusExpectation{
+	expectation := &PaymentServiceClientMockStatusExpectation{
 		mock:               mmStatus.mock,
-		params:             &PaymentServiceHandlerMockStatusParams{ctx, pp1},
-		expectationOrigins: PaymentServiceHandlerMockStatusExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &PaymentServiceClientMockStatusParams{ctx, pp1},
+		expectationOrigins: PaymentServiceClientMockStatusExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmStatus.expectations = append(mmStatus.expectations, expectation)
 	return expectation
 }
 
-// Then sets up PaymentServiceHandler.Status return parameters for the expectation previously defined by the When method
-func (e *PaymentServiceHandlerMockStatusExpectation) Then(pp2 *connect.Response[v11.StatusResponse], err error) *PaymentServiceHandlerMock {
-	e.results = &PaymentServiceHandlerMockStatusResults{pp2, err}
+// Then sets up PaymentServiceClient.Status return parameters for the expectation previously defined by the When method
+func (e *PaymentServiceClientMockStatusExpectation) Then(pp2 *connect.Response[v11.StatusResponse], err error) *PaymentServiceClientMock {
+	e.results = &PaymentServiceClientMockStatusResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times PaymentServiceHandler.Status should be invoked
-func (mmStatus *mPaymentServiceHandlerMockStatus) Times(n uint64) *mPaymentServiceHandlerMockStatus {
+// Times sets number of times PaymentServiceClient.Status should be invoked
+func (mmStatus *mPaymentServiceClientMockStatus) Times(n uint64) *mPaymentServiceClientMockStatus {
 	if n == 0 {
-		mmStatus.mock.t.Fatalf("Times of PaymentServiceHandlerMock.Status mock can not be zero")
+		mmStatus.mock.t.Fatalf("Times of PaymentServiceClientMock.Status mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmStatus.expectedInvocations, n)
 	mmStatus.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmStatus
 }
 
-func (mmStatus *mPaymentServiceHandlerMockStatus) invocationsDone() bool {
+func (mmStatus *mPaymentServiceClientMockStatus) invocationsDone() bool {
 	if len(mmStatus.expectations) == 0 && mmStatus.defaultExpectation == nil && mmStatus.mock.funcStatus == nil {
 		return true
 	}
@@ -2769,8 +2739,8 @@ func (mmStatus *mPaymentServiceHandlerMockStatus) invocationsDone() bool {
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// Status implements mm_paymentv1connect.PaymentServiceHandler
-func (mmStatus *PaymentServiceHandlerMock) Status(ctx context.Context, pp1 *connect.Request[v11.StatusRequest]) (pp2 *connect.Response[v11.StatusResponse], err error) {
+// Status implements mm_paymentv1connect.PaymentServiceClient
+func (mmStatus *PaymentServiceClientMock) Status(ctx context.Context, pp1 *connect.Request[v11.StatusRequest]) (pp2 *connect.Response[v11.StatusResponse], err error) {
 	mm_atomic.AddUint64(&mmStatus.beforeStatusCounter, 1)
 	defer mm_atomic.AddUint64(&mmStatus.afterStatusCounter, 1)
 
@@ -2780,7 +2750,7 @@ func (mmStatus *PaymentServiceHandlerMock) Status(ctx context.Context, pp1 *conn
 		mmStatus.inspectFuncStatus(ctx, pp1)
 	}
 
-	mm_params := PaymentServiceHandlerMockStatusParams{ctx, pp1}
+	mm_params := PaymentServiceClientMockStatusParams{ctx, pp1}
 
 	// Record call args
 	mmStatus.StatusMock.mutex.Lock()
@@ -2799,54 +2769,54 @@ func (mmStatus *PaymentServiceHandlerMock) Status(ctx context.Context, pp1 *conn
 		mm_want := mmStatus.StatusMock.defaultExpectation.params
 		mm_want_ptrs := mmStatus.StatusMock.defaultExpectation.paramPtrs
 
-		mm_got := PaymentServiceHandlerMockStatusParams{ctx, pp1}
+		mm_got := PaymentServiceClientMockStatusParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmStatus.t.Errorf("PaymentServiceHandlerMock.Status got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmStatus.t.Errorf("PaymentServiceClientMock.Status got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmStatus.StatusMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmStatus.t.Errorf("PaymentServiceHandlerMock.Status got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmStatus.t.Errorf("PaymentServiceClientMock.Status got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmStatus.StatusMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmStatus.t.Errorf("PaymentServiceHandlerMock.Status got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmStatus.t.Errorf("PaymentServiceClientMock.Status got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmStatus.StatusMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmStatus.StatusMock.defaultExpectation.results
 		if mm_results == nil {
-			mmStatus.t.Fatal("No results are set for the PaymentServiceHandlerMock.Status")
+			mmStatus.t.Fatal("No results are set for the PaymentServiceClientMock.Status")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmStatus.funcStatus != nil {
 		return mmStatus.funcStatus(ctx, pp1)
 	}
-	mmStatus.t.Fatalf("Unexpected call to PaymentServiceHandlerMock.Status. %v %v", ctx, pp1)
+	mmStatus.t.Fatalf("Unexpected call to PaymentServiceClientMock.Status. %v %v", ctx, pp1)
 	return
 }
 
-// StatusAfterCounter returns a count of finished PaymentServiceHandlerMock.Status invocations
-func (mmStatus *PaymentServiceHandlerMock) StatusAfterCounter() uint64 {
+// StatusAfterCounter returns a count of finished PaymentServiceClientMock.Status invocations
+func (mmStatus *PaymentServiceClientMock) StatusAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmStatus.afterStatusCounter)
 }
 
-// StatusBeforeCounter returns a count of PaymentServiceHandlerMock.Status invocations
-func (mmStatus *PaymentServiceHandlerMock) StatusBeforeCounter() uint64 {
+// StatusBeforeCounter returns a count of PaymentServiceClientMock.Status invocations
+func (mmStatus *PaymentServiceClientMock) StatusBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmStatus.beforeStatusCounter)
 }
 
-// Calls returns a list of arguments used in each call to PaymentServiceHandlerMock.Status.
+// Calls returns a list of arguments used in each call to PaymentServiceClientMock.Status.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmStatus *mPaymentServiceHandlerMockStatus) Calls() []*PaymentServiceHandlerMockStatusParams {
+func (mmStatus *mPaymentServiceClientMockStatus) Calls() []*PaymentServiceClientMockStatusParams {
 	mmStatus.mutex.RLock()
 
-	argCopy := make([]*PaymentServiceHandlerMockStatusParams, len(mmStatus.callArgs))
+	argCopy := make([]*PaymentServiceClientMockStatusParams, len(mmStatus.callArgs))
 	copy(argCopy, mmStatus.callArgs)
 
 	mmStatus.mutex.RUnlock()
@@ -2856,7 +2826,7 @@ func (mmStatus *mPaymentServiceHandlerMockStatus) Calls() []*PaymentServiceHandl
 
 // MinimockStatusDone returns true if the count of the Status invocations corresponds
 // the number of defined expectations
-func (m *PaymentServiceHandlerMock) MinimockStatusDone() bool {
+func (m *PaymentServiceClientMock) MinimockStatusDone() bool {
 	if m.StatusMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -2872,10 +2842,10 @@ func (m *PaymentServiceHandlerMock) MinimockStatusDone() bool {
 }
 
 // MinimockStatusInspect logs each unmet expectation
-func (m *PaymentServiceHandlerMock) MinimockStatusInspect() {
+func (m *PaymentServiceClientMock) MinimockStatusInspect() {
 	for _, e := range m.StatusMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to PaymentServiceHandlerMock.Status at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to PaymentServiceClientMock.Status at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -2883,66 +2853,66 @@ func (m *PaymentServiceHandlerMock) MinimockStatusInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.StatusMock.defaultExpectation != nil && afterStatusCounter < 1 {
 		if m.StatusMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to PaymentServiceHandlerMock.Status at\n%s", m.StatusMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to PaymentServiceClientMock.Status at\n%s", m.StatusMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to PaymentServiceHandlerMock.Status at\n%s with params: %#v", m.StatusMock.defaultExpectation.expectationOrigins.origin, *m.StatusMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to PaymentServiceClientMock.Status at\n%s with params: %#v", m.StatusMock.defaultExpectation.expectationOrigins.origin, *m.StatusMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcStatus != nil && afterStatusCounter < 1 {
-		m.t.Errorf("Expected call to PaymentServiceHandlerMock.Status at\n%s", m.funcStatusOrigin)
+		m.t.Errorf("Expected call to PaymentServiceClientMock.Status at\n%s", m.funcStatusOrigin)
 	}
 
 	if !m.StatusMock.invocationsDone() && afterStatusCounter > 0 {
-		m.t.Errorf("Expected %d calls to PaymentServiceHandlerMock.Status at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to PaymentServiceClientMock.Status at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.StatusMock.expectedInvocations), m.StatusMock.expectedInvocationsOrigin, afterStatusCounter)
 	}
 }
 
-type mPaymentServiceHandlerMockStatusUpdate struct {
+type mPaymentServiceClientMockStatusUpdate struct {
 	optional           bool
-	mock               *PaymentServiceHandlerMock
-	defaultExpectation *PaymentServiceHandlerMockStatusUpdateExpectation
-	expectations       []*PaymentServiceHandlerMockStatusUpdateExpectation
+	mock               *PaymentServiceClientMock
+	defaultExpectation *PaymentServiceClientMockStatusUpdateExpectation
+	expectations       []*PaymentServiceClientMockStatusUpdateExpectation
 
-	callArgs []*PaymentServiceHandlerMockStatusUpdateParams
+	callArgs []*PaymentServiceClientMockStatusUpdateParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// PaymentServiceHandlerMockStatusUpdateExpectation specifies expectation struct of the PaymentServiceHandler.StatusUpdate
-type PaymentServiceHandlerMockStatusUpdateExpectation struct {
-	mock               *PaymentServiceHandlerMock
-	params             *PaymentServiceHandlerMockStatusUpdateParams
-	paramPtrs          *PaymentServiceHandlerMockStatusUpdateParamPtrs
-	expectationOrigins PaymentServiceHandlerMockStatusUpdateExpectationOrigins
-	results            *PaymentServiceHandlerMockStatusUpdateResults
+// PaymentServiceClientMockStatusUpdateExpectation specifies expectation struct of the PaymentServiceClient.StatusUpdate
+type PaymentServiceClientMockStatusUpdateExpectation struct {
+	mock               *PaymentServiceClientMock
+	params             *PaymentServiceClientMockStatusUpdateParams
+	paramPtrs          *PaymentServiceClientMockStatusUpdateParamPtrs
+	expectationOrigins PaymentServiceClientMockStatusUpdateExpectationOrigins
+	results            *PaymentServiceClientMockStatusUpdateResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// PaymentServiceHandlerMockStatusUpdateParams contains parameters of the PaymentServiceHandler.StatusUpdate
-type PaymentServiceHandlerMockStatusUpdateParams struct {
+// PaymentServiceClientMockStatusUpdateParams contains parameters of the PaymentServiceClient.StatusUpdate
+type PaymentServiceClientMockStatusUpdateParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v11.StatusUpdateRequest]
 }
 
-// PaymentServiceHandlerMockStatusUpdateParamPtrs contains pointers to parameters of the PaymentServiceHandler.StatusUpdate
-type PaymentServiceHandlerMockStatusUpdateParamPtrs struct {
+// PaymentServiceClientMockStatusUpdateParamPtrs contains pointers to parameters of the PaymentServiceClient.StatusUpdate
+type PaymentServiceClientMockStatusUpdateParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v11.StatusUpdateRequest]
 }
 
-// PaymentServiceHandlerMockStatusUpdateResults contains results of the PaymentServiceHandler.StatusUpdate
-type PaymentServiceHandlerMockStatusUpdateResults struct {
+// PaymentServiceClientMockStatusUpdateResults contains results of the PaymentServiceClient.StatusUpdate
+type PaymentServiceClientMockStatusUpdateResults struct {
 	pp2 *connect.Response[v11.StatusUpdateResponse]
 	err error
 }
 
-// PaymentServiceHandlerMockStatusUpdateOrigins contains origins of expectations of the PaymentServiceHandler.StatusUpdate
-type PaymentServiceHandlerMockStatusUpdateExpectationOrigins struct {
+// PaymentServiceClientMockStatusUpdateOrigins contains origins of expectations of the PaymentServiceClient.StatusUpdate
+type PaymentServiceClientMockStatusUpdateExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -2953,26 +2923,26 @@ type PaymentServiceHandlerMockStatusUpdateExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmStatusUpdate *mPaymentServiceHandlerMockStatusUpdate) Optional() *mPaymentServiceHandlerMockStatusUpdate {
+func (mmStatusUpdate *mPaymentServiceClientMockStatusUpdate) Optional() *mPaymentServiceClientMockStatusUpdate {
 	mmStatusUpdate.optional = true
 	return mmStatusUpdate
 }
 
-// Expect sets up expected params for PaymentServiceHandler.StatusUpdate
-func (mmStatusUpdate *mPaymentServiceHandlerMockStatusUpdate) Expect(ctx context.Context, pp1 *connect.Request[v11.StatusUpdateRequest]) *mPaymentServiceHandlerMockStatusUpdate {
+// Expect sets up expected params for PaymentServiceClient.StatusUpdate
+func (mmStatusUpdate *mPaymentServiceClientMockStatusUpdate) Expect(ctx context.Context, pp1 *connect.Request[v11.StatusUpdateRequest]) *mPaymentServiceClientMockStatusUpdate {
 	if mmStatusUpdate.mock.funcStatusUpdate != nil {
-		mmStatusUpdate.mock.t.Fatalf("PaymentServiceHandlerMock.StatusUpdate mock is already set by Set")
+		mmStatusUpdate.mock.t.Fatalf("PaymentServiceClientMock.StatusUpdate mock is already set by Set")
 	}
 
 	if mmStatusUpdate.defaultExpectation == nil {
-		mmStatusUpdate.defaultExpectation = &PaymentServiceHandlerMockStatusUpdateExpectation{}
+		mmStatusUpdate.defaultExpectation = &PaymentServiceClientMockStatusUpdateExpectation{}
 	}
 
 	if mmStatusUpdate.defaultExpectation.paramPtrs != nil {
-		mmStatusUpdate.mock.t.Fatalf("PaymentServiceHandlerMock.StatusUpdate mock is already set by ExpectParams functions")
+		mmStatusUpdate.mock.t.Fatalf("PaymentServiceClientMock.StatusUpdate mock is already set by ExpectParams functions")
 	}
 
-	mmStatusUpdate.defaultExpectation.params = &PaymentServiceHandlerMockStatusUpdateParams{ctx, pp1}
+	mmStatusUpdate.defaultExpectation.params = &PaymentServiceClientMockStatusUpdateParams{ctx, pp1}
 	mmStatusUpdate.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmStatusUpdate.expectations {
 		if minimock.Equal(e.params, mmStatusUpdate.defaultExpectation.params) {
@@ -2983,22 +2953,22 @@ func (mmStatusUpdate *mPaymentServiceHandlerMockStatusUpdate) Expect(ctx context
 	return mmStatusUpdate
 }
 
-// ExpectCtxParam1 sets up expected param ctx for PaymentServiceHandler.StatusUpdate
-func (mmStatusUpdate *mPaymentServiceHandlerMockStatusUpdate) ExpectCtxParam1(ctx context.Context) *mPaymentServiceHandlerMockStatusUpdate {
+// ExpectCtxParam1 sets up expected param ctx for PaymentServiceClient.StatusUpdate
+func (mmStatusUpdate *mPaymentServiceClientMockStatusUpdate) ExpectCtxParam1(ctx context.Context) *mPaymentServiceClientMockStatusUpdate {
 	if mmStatusUpdate.mock.funcStatusUpdate != nil {
-		mmStatusUpdate.mock.t.Fatalf("PaymentServiceHandlerMock.StatusUpdate mock is already set by Set")
+		mmStatusUpdate.mock.t.Fatalf("PaymentServiceClientMock.StatusUpdate mock is already set by Set")
 	}
 
 	if mmStatusUpdate.defaultExpectation == nil {
-		mmStatusUpdate.defaultExpectation = &PaymentServiceHandlerMockStatusUpdateExpectation{}
+		mmStatusUpdate.defaultExpectation = &PaymentServiceClientMockStatusUpdateExpectation{}
 	}
 
 	if mmStatusUpdate.defaultExpectation.params != nil {
-		mmStatusUpdate.mock.t.Fatalf("PaymentServiceHandlerMock.StatusUpdate mock is already set by Expect")
+		mmStatusUpdate.mock.t.Fatalf("PaymentServiceClientMock.StatusUpdate mock is already set by Expect")
 	}
 
 	if mmStatusUpdate.defaultExpectation.paramPtrs == nil {
-		mmStatusUpdate.defaultExpectation.paramPtrs = &PaymentServiceHandlerMockStatusUpdateParamPtrs{}
+		mmStatusUpdate.defaultExpectation.paramPtrs = &PaymentServiceClientMockStatusUpdateParamPtrs{}
 	}
 	mmStatusUpdate.defaultExpectation.paramPtrs.ctx = &ctx
 	mmStatusUpdate.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -3006,22 +2976,22 @@ func (mmStatusUpdate *mPaymentServiceHandlerMockStatusUpdate) ExpectCtxParam1(ct
 	return mmStatusUpdate
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for PaymentServiceHandler.StatusUpdate
-func (mmStatusUpdate *mPaymentServiceHandlerMockStatusUpdate) ExpectPp1Param2(pp1 *connect.Request[v11.StatusUpdateRequest]) *mPaymentServiceHandlerMockStatusUpdate {
+// ExpectPp1Param2 sets up expected param pp1 for PaymentServiceClient.StatusUpdate
+func (mmStatusUpdate *mPaymentServiceClientMockStatusUpdate) ExpectPp1Param2(pp1 *connect.Request[v11.StatusUpdateRequest]) *mPaymentServiceClientMockStatusUpdate {
 	if mmStatusUpdate.mock.funcStatusUpdate != nil {
-		mmStatusUpdate.mock.t.Fatalf("PaymentServiceHandlerMock.StatusUpdate mock is already set by Set")
+		mmStatusUpdate.mock.t.Fatalf("PaymentServiceClientMock.StatusUpdate mock is already set by Set")
 	}
 
 	if mmStatusUpdate.defaultExpectation == nil {
-		mmStatusUpdate.defaultExpectation = &PaymentServiceHandlerMockStatusUpdateExpectation{}
+		mmStatusUpdate.defaultExpectation = &PaymentServiceClientMockStatusUpdateExpectation{}
 	}
 
 	if mmStatusUpdate.defaultExpectation.params != nil {
-		mmStatusUpdate.mock.t.Fatalf("PaymentServiceHandlerMock.StatusUpdate mock is already set by Expect")
+		mmStatusUpdate.mock.t.Fatalf("PaymentServiceClientMock.StatusUpdate mock is already set by Expect")
 	}
 
 	if mmStatusUpdate.defaultExpectation.paramPtrs == nil {
-		mmStatusUpdate.defaultExpectation.paramPtrs = &PaymentServiceHandlerMockStatusUpdateParamPtrs{}
+		mmStatusUpdate.defaultExpectation.paramPtrs = &PaymentServiceClientMockStatusUpdateParamPtrs{}
 	}
 	mmStatusUpdate.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmStatusUpdate.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -3029,10 +2999,10 @@ func (mmStatusUpdate *mPaymentServiceHandlerMockStatusUpdate) ExpectPp1Param2(pp
 	return mmStatusUpdate
 }
 
-// Inspect accepts an inspector function that has same arguments as the PaymentServiceHandler.StatusUpdate
-func (mmStatusUpdate *mPaymentServiceHandlerMockStatusUpdate) Inspect(f func(ctx context.Context, pp1 *connect.Request[v11.StatusUpdateRequest])) *mPaymentServiceHandlerMockStatusUpdate {
+// Inspect accepts an inspector function that has same arguments as the PaymentServiceClient.StatusUpdate
+func (mmStatusUpdate *mPaymentServiceClientMockStatusUpdate) Inspect(f func(ctx context.Context, pp1 *connect.Request[v11.StatusUpdateRequest])) *mPaymentServiceClientMockStatusUpdate {
 	if mmStatusUpdate.mock.inspectFuncStatusUpdate != nil {
-		mmStatusUpdate.mock.t.Fatalf("Inspect function is already set for PaymentServiceHandlerMock.StatusUpdate")
+		mmStatusUpdate.mock.t.Fatalf("Inspect function is already set for PaymentServiceClientMock.StatusUpdate")
 	}
 
 	mmStatusUpdate.mock.inspectFuncStatusUpdate = f
@@ -3040,28 +3010,28 @@ func (mmStatusUpdate *mPaymentServiceHandlerMockStatusUpdate) Inspect(f func(ctx
 	return mmStatusUpdate
 }
 
-// Return sets up results that will be returned by PaymentServiceHandler.StatusUpdate
-func (mmStatusUpdate *mPaymentServiceHandlerMockStatusUpdate) Return(pp2 *connect.Response[v11.StatusUpdateResponse], err error) *PaymentServiceHandlerMock {
+// Return sets up results that will be returned by PaymentServiceClient.StatusUpdate
+func (mmStatusUpdate *mPaymentServiceClientMockStatusUpdate) Return(pp2 *connect.Response[v11.StatusUpdateResponse], err error) *PaymentServiceClientMock {
 	if mmStatusUpdate.mock.funcStatusUpdate != nil {
-		mmStatusUpdate.mock.t.Fatalf("PaymentServiceHandlerMock.StatusUpdate mock is already set by Set")
+		mmStatusUpdate.mock.t.Fatalf("PaymentServiceClientMock.StatusUpdate mock is already set by Set")
 	}
 
 	if mmStatusUpdate.defaultExpectation == nil {
-		mmStatusUpdate.defaultExpectation = &PaymentServiceHandlerMockStatusUpdateExpectation{mock: mmStatusUpdate.mock}
+		mmStatusUpdate.defaultExpectation = &PaymentServiceClientMockStatusUpdateExpectation{mock: mmStatusUpdate.mock}
 	}
-	mmStatusUpdate.defaultExpectation.results = &PaymentServiceHandlerMockStatusUpdateResults{pp2, err}
+	mmStatusUpdate.defaultExpectation.results = &PaymentServiceClientMockStatusUpdateResults{pp2, err}
 	mmStatusUpdate.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmStatusUpdate.mock
 }
 
-// Set uses given function f to mock the PaymentServiceHandler.StatusUpdate method
-func (mmStatusUpdate *mPaymentServiceHandlerMockStatusUpdate) Set(f func(ctx context.Context, pp1 *connect.Request[v11.StatusUpdateRequest]) (pp2 *connect.Response[v11.StatusUpdateResponse], err error)) *PaymentServiceHandlerMock {
+// Set uses given function f to mock the PaymentServiceClient.StatusUpdate method
+func (mmStatusUpdate *mPaymentServiceClientMockStatusUpdate) Set(f func(ctx context.Context, pp1 *connect.Request[v11.StatusUpdateRequest]) (pp2 *connect.Response[v11.StatusUpdateResponse], err error)) *PaymentServiceClientMock {
 	if mmStatusUpdate.defaultExpectation != nil {
-		mmStatusUpdate.mock.t.Fatalf("Default expectation is already set for the PaymentServiceHandler.StatusUpdate method")
+		mmStatusUpdate.mock.t.Fatalf("Default expectation is already set for the PaymentServiceClient.StatusUpdate method")
 	}
 
 	if len(mmStatusUpdate.expectations) > 0 {
-		mmStatusUpdate.mock.t.Fatalf("Some expectations are already set for the PaymentServiceHandler.StatusUpdate method")
+		mmStatusUpdate.mock.t.Fatalf("Some expectations are already set for the PaymentServiceClient.StatusUpdate method")
 	}
 
 	mmStatusUpdate.mock.funcStatusUpdate = f
@@ -3069,39 +3039,39 @@ func (mmStatusUpdate *mPaymentServiceHandlerMockStatusUpdate) Set(f func(ctx con
 	return mmStatusUpdate.mock
 }
 
-// When sets expectation for the PaymentServiceHandler.StatusUpdate which will trigger the result defined by the following
+// When sets expectation for the PaymentServiceClient.StatusUpdate which will trigger the result defined by the following
 // Then helper
-func (mmStatusUpdate *mPaymentServiceHandlerMockStatusUpdate) When(ctx context.Context, pp1 *connect.Request[v11.StatusUpdateRequest]) *PaymentServiceHandlerMockStatusUpdateExpectation {
+func (mmStatusUpdate *mPaymentServiceClientMockStatusUpdate) When(ctx context.Context, pp1 *connect.Request[v11.StatusUpdateRequest]) *PaymentServiceClientMockStatusUpdateExpectation {
 	if mmStatusUpdate.mock.funcStatusUpdate != nil {
-		mmStatusUpdate.mock.t.Fatalf("PaymentServiceHandlerMock.StatusUpdate mock is already set by Set")
+		mmStatusUpdate.mock.t.Fatalf("PaymentServiceClientMock.StatusUpdate mock is already set by Set")
 	}
 
-	expectation := &PaymentServiceHandlerMockStatusUpdateExpectation{
+	expectation := &PaymentServiceClientMockStatusUpdateExpectation{
 		mock:               mmStatusUpdate.mock,
-		params:             &PaymentServiceHandlerMockStatusUpdateParams{ctx, pp1},
-		expectationOrigins: PaymentServiceHandlerMockStatusUpdateExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &PaymentServiceClientMockStatusUpdateParams{ctx, pp1},
+		expectationOrigins: PaymentServiceClientMockStatusUpdateExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmStatusUpdate.expectations = append(mmStatusUpdate.expectations, expectation)
 	return expectation
 }
 
-// Then sets up PaymentServiceHandler.StatusUpdate return parameters for the expectation previously defined by the When method
-func (e *PaymentServiceHandlerMockStatusUpdateExpectation) Then(pp2 *connect.Response[v11.StatusUpdateResponse], err error) *PaymentServiceHandlerMock {
-	e.results = &PaymentServiceHandlerMockStatusUpdateResults{pp2, err}
+// Then sets up PaymentServiceClient.StatusUpdate return parameters for the expectation previously defined by the When method
+func (e *PaymentServiceClientMockStatusUpdateExpectation) Then(pp2 *connect.Response[v11.StatusUpdateResponse], err error) *PaymentServiceClientMock {
+	e.results = &PaymentServiceClientMockStatusUpdateResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times PaymentServiceHandler.StatusUpdate should be invoked
-func (mmStatusUpdate *mPaymentServiceHandlerMockStatusUpdate) Times(n uint64) *mPaymentServiceHandlerMockStatusUpdate {
+// Times sets number of times PaymentServiceClient.StatusUpdate should be invoked
+func (mmStatusUpdate *mPaymentServiceClientMockStatusUpdate) Times(n uint64) *mPaymentServiceClientMockStatusUpdate {
 	if n == 0 {
-		mmStatusUpdate.mock.t.Fatalf("Times of PaymentServiceHandlerMock.StatusUpdate mock can not be zero")
+		mmStatusUpdate.mock.t.Fatalf("Times of PaymentServiceClientMock.StatusUpdate mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmStatusUpdate.expectedInvocations, n)
 	mmStatusUpdate.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmStatusUpdate
 }
 
-func (mmStatusUpdate *mPaymentServiceHandlerMockStatusUpdate) invocationsDone() bool {
+func (mmStatusUpdate *mPaymentServiceClientMockStatusUpdate) invocationsDone() bool {
 	if len(mmStatusUpdate.expectations) == 0 && mmStatusUpdate.defaultExpectation == nil && mmStatusUpdate.mock.funcStatusUpdate == nil {
 		return true
 	}
@@ -3112,8 +3082,8 @@ func (mmStatusUpdate *mPaymentServiceHandlerMockStatusUpdate) invocationsDone() 
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// StatusUpdate implements mm_paymentv1connect.PaymentServiceHandler
-func (mmStatusUpdate *PaymentServiceHandlerMock) StatusUpdate(ctx context.Context, pp1 *connect.Request[v11.StatusUpdateRequest]) (pp2 *connect.Response[v11.StatusUpdateResponse], err error) {
+// StatusUpdate implements mm_paymentv1connect.PaymentServiceClient
+func (mmStatusUpdate *PaymentServiceClientMock) StatusUpdate(ctx context.Context, pp1 *connect.Request[v11.StatusUpdateRequest]) (pp2 *connect.Response[v11.StatusUpdateResponse], err error) {
 	mm_atomic.AddUint64(&mmStatusUpdate.beforeStatusUpdateCounter, 1)
 	defer mm_atomic.AddUint64(&mmStatusUpdate.afterStatusUpdateCounter, 1)
 
@@ -3123,7 +3093,7 @@ func (mmStatusUpdate *PaymentServiceHandlerMock) StatusUpdate(ctx context.Contex
 		mmStatusUpdate.inspectFuncStatusUpdate(ctx, pp1)
 	}
 
-	mm_params := PaymentServiceHandlerMockStatusUpdateParams{ctx, pp1}
+	mm_params := PaymentServiceClientMockStatusUpdateParams{ctx, pp1}
 
 	// Record call args
 	mmStatusUpdate.StatusUpdateMock.mutex.Lock()
@@ -3142,54 +3112,54 @@ func (mmStatusUpdate *PaymentServiceHandlerMock) StatusUpdate(ctx context.Contex
 		mm_want := mmStatusUpdate.StatusUpdateMock.defaultExpectation.params
 		mm_want_ptrs := mmStatusUpdate.StatusUpdateMock.defaultExpectation.paramPtrs
 
-		mm_got := PaymentServiceHandlerMockStatusUpdateParams{ctx, pp1}
+		mm_got := PaymentServiceClientMockStatusUpdateParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmStatusUpdate.t.Errorf("PaymentServiceHandlerMock.StatusUpdate got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmStatusUpdate.t.Errorf("PaymentServiceClientMock.StatusUpdate got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmStatusUpdate.StatusUpdateMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmStatusUpdate.t.Errorf("PaymentServiceHandlerMock.StatusUpdate got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmStatusUpdate.t.Errorf("PaymentServiceClientMock.StatusUpdate got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmStatusUpdate.StatusUpdateMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmStatusUpdate.t.Errorf("PaymentServiceHandlerMock.StatusUpdate got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmStatusUpdate.t.Errorf("PaymentServiceClientMock.StatusUpdate got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmStatusUpdate.StatusUpdateMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmStatusUpdate.StatusUpdateMock.defaultExpectation.results
 		if mm_results == nil {
-			mmStatusUpdate.t.Fatal("No results are set for the PaymentServiceHandlerMock.StatusUpdate")
+			mmStatusUpdate.t.Fatal("No results are set for the PaymentServiceClientMock.StatusUpdate")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmStatusUpdate.funcStatusUpdate != nil {
 		return mmStatusUpdate.funcStatusUpdate(ctx, pp1)
 	}
-	mmStatusUpdate.t.Fatalf("Unexpected call to PaymentServiceHandlerMock.StatusUpdate. %v %v", ctx, pp1)
+	mmStatusUpdate.t.Fatalf("Unexpected call to PaymentServiceClientMock.StatusUpdate. %v %v", ctx, pp1)
 	return
 }
 
-// StatusUpdateAfterCounter returns a count of finished PaymentServiceHandlerMock.StatusUpdate invocations
-func (mmStatusUpdate *PaymentServiceHandlerMock) StatusUpdateAfterCounter() uint64 {
+// StatusUpdateAfterCounter returns a count of finished PaymentServiceClientMock.StatusUpdate invocations
+func (mmStatusUpdate *PaymentServiceClientMock) StatusUpdateAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmStatusUpdate.afterStatusUpdateCounter)
 }
 
-// StatusUpdateBeforeCounter returns a count of PaymentServiceHandlerMock.StatusUpdate invocations
-func (mmStatusUpdate *PaymentServiceHandlerMock) StatusUpdateBeforeCounter() uint64 {
+// StatusUpdateBeforeCounter returns a count of PaymentServiceClientMock.StatusUpdate invocations
+func (mmStatusUpdate *PaymentServiceClientMock) StatusUpdateBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmStatusUpdate.beforeStatusUpdateCounter)
 }
 
-// Calls returns a list of arguments used in each call to PaymentServiceHandlerMock.StatusUpdate.
+// Calls returns a list of arguments used in each call to PaymentServiceClientMock.StatusUpdate.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmStatusUpdate *mPaymentServiceHandlerMockStatusUpdate) Calls() []*PaymentServiceHandlerMockStatusUpdateParams {
+func (mmStatusUpdate *mPaymentServiceClientMockStatusUpdate) Calls() []*PaymentServiceClientMockStatusUpdateParams {
 	mmStatusUpdate.mutex.RLock()
 
-	argCopy := make([]*PaymentServiceHandlerMockStatusUpdateParams, len(mmStatusUpdate.callArgs))
+	argCopy := make([]*PaymentServiceClientMockStatusUpdateParams, len(mmStatusUpdate.callArgs))
 	copy(argCopy, mmStatusUpdate.callArgs)
 
 	mmStatusUpdate.mutex.RUnlock()
@@ -3199,7 +3169,7 @@ func (mmStatusUpdate *mPaymentServiceHandlerMockStatusUpdate) Calls() []*Payment
 
 // MinimockStatusUpdateDone returns true if the count of the StatusUpdate invocations corresponds
 // the number of defined expectations
-func (m *PaymentServiceHandlerMock) MinimockStatusUpdateDone() bool {
+func (m *PaymentServiceClientMock) MinimockStatusUpdateDone() bool {
 	if m.StatusUpdateMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -3215,10 +3185,10 @@ func (m *PaymentServiceHandlerMock) MinimockStatusUpdateDone() bool {
 }
 
 // MinimockStatusUpdateInspect logs each unmet expectation
-func (m *PaymentServiceHandlerMock) MinimockStatusUpdateInspect() {
+func (m *PaymentServiceClientMock) MinimockStatusUpdateInspect() {
 	for _, e := range m.StatusUpdateMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to PaymentServiceHandlerMock.StatusUpdate at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to PaymentServiceClientMock.StatusUpdate at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -3226,24 +3196,24 @@ func (m *PaymentServiceHandlerMock) MinimockStatusUpdateInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.StatusUpdateMock.defaultExpectation != nil && afterStatusUpdateCounter < 1 {
 		if m.StatusUpdateMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to PaymentServiceHandlerMock.StatusUpdate at\n%s", m.StatusUpdateMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to PaymentServiceClientMock.StatusUpdate at\n%s", m.StatusUpdateMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to PaymentServiceHandlerMock.StatusUpdate at\n%s with params: %#v", m.StatusUpdateMock.defaultExpectation.expectationOrigins.origin, *m.StatusUpdateMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to PaymentServiceClientMock.StatusUpdate at\n%s with params: %#v", m.StatusUpdateMock.defaultExpectation.expectationOrigins.origin, *m.StatusUpdateMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcStatusUpdate != nil && afterStatusUpdateCounter < 1 {
-		m.t.Errorf("Expected call to PaymentServiceHandlerMock.StatusUpdate at\n%s", m.funcStatusUpdateOrigin)
+		m.t.Errorf("Expected call to PaymentServiceClientMock.StatusUpdate at\n%s", m.funcStatusUpdateOrigin)
 	}
 
 	if !m.StatusUpdateMock.invocationsDone() && afterStatusUpdateCounter > 0 {
-		m.t.Errorf("Expected %d calls to PaymentServiceHandlerMock.StatusUpdate at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to PaymentServiceClientMock.StatusUpdate at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.StatusUpdateMock.expectedInvocations), m.StatusUpdateMock.expectedInvocationsOrigin, afterStatusUpdateCounter)
 	}
 }
 
 // MinimockFinish checks that all mocked methods have been called the expected number of times
-func (m *PaymentServiceHandlerMock) MinimockFinish() {
+func (m *PaymentServiceClientMock) MinimockFinish() {
 	m.finishOnce.Do(func() {
 		if !m.minimockDone() {
 			m.MinimockCreatePaymentLinkInspect()
@@ -3268,7 +3238,7 @@ func (m *PaymentServiceHandlerMock) MinimockFinish() {
 }
 
 // MinimockWait waits for all mocked methods to be called the expected number of times
-func (m *PaymentServiceHandlerMock) MinimockWait(timeout mm_time.Duration) {
+func (m *PaymentServiceClientMock) MinimockWait(timeout mm_time.Duration) {
 	timeoutCh := mm_time.After(timeout)
 	for {
 		if m.minimockDone() {
@@ -3283,7 +3253,7 @@ func (m *PaymentServiceHandlerMock) MinimockWait(timeout mm_time.Duration) {
 	}
 }
 
-func (m *PaymentServiceHandlerMock) minimockDone() bool {
+func (m *PaymentServiceClientMock) minimockDone() bool {
 	done := true
 	return done &&
 		m.MinimockCreatePaymentLinkDone() &&

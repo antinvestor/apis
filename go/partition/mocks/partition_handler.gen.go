@@ -2,7 +2,7 @@
 
 package mocks
 
-//go:generate minimock -i buf.build/gen/go/antinvestor/partition/connectrpc/go/partition/v1/partitionv1connect.PartitionServiceHandler -o partition_handler.gen.go -n PartitionServiceHandlerMock -p mocks
+//go:generate minimock -i buf.build/gen/go/antinvestor/partition/connectrpc/go/partition/v1/partitionv1connect.PartitionServiceClient -o partition_handler.gen.go -n PartitionServiceClientMock -p mocks
 
 import (
 	context "context"
@@ -15,8 +15,8 @@ import (
 	"github.com/gojuno/minimock/v3"
 )
 
-// PartitionServiceHandlerMock implements mm_partitionv1connect.PartitionServiceHandler
-type PartitionServiceHandlerMock struct {
+// PartitionServiceClientMock implements mm_partitionv1connect.PartitionServiceClient
+type PartitionServiceClientMock struct {
 	t          minimock.Tester
 	finishOnce sync.Once
 
@@ -25,269 +25,269 @@ type PartitionServiceHandlerMock struct {
 	inspectFuncCreateAccess   func(ctx context.Context, pp1 *connect.Request[v1.CreateAccessRequest])
 	afterCreateAccessCounter  uint64
 	beforeCreateAccessCounter uint64
-	CreateAccessMock          mPartitionServiceHandlerMockCreateAccess
+	CreateAccessMock          mPartitionServiceClientMockCreateAccess
 
 	funcCreateAccessRole          func(ctx context.Context, pp1 *connect.Request[v1.CreateAccessRoleRequest]) (pp2 *connect.Response[v1.CreateAccessRoleResponse], err error)
 	funcCreateAccessRoleOrigin    string
 	inspectFuncCreateAccessRole   func(ctx context.Context, pp1 *connect.Request[v1.CreateAccessRoleRequest])
 	afterCreateAccessRoleCounter  uint64
 	beforeCreateAccessRoleCounter uint64
-	CreateAccessRoleMock          mPartitionServiceHandlerMockCreateAccessRole
+	CreateAccessRoleMock          mPartitionServiceClientMockCreateAccessRole
 
 	funcCreatePage          func(ctx context.Context, pp1 *connect.Request[v1.CreatePageRequest]) (pp2 *connect.Response[v1.CreatePageResponse], err error)
 	funcCreatePageOrigin    string
 	inspectFuncCreatePage   func(ctx context.Context, pp1 *connect.Request[v1.CreatePageRequest])
 	afterCreatePageCounter  uint64
 	beforeCreatePageCounter uint64
-	CreatePageMock          mPartitionServiceHandlerMockCreatePage
+	CreatePageMock          mPartitionServiceClientMockCreatePage
 
 	funcCreatePartition          func(ctx context.Context, pp1 *connect.Request[v1.CreatePartitionRequest]) (pp2 *connect.Response[v1.CreatePartitionResponse], err error)
 	funcCreatePartitionOrigin    string
 	inspectFuncCreatePartition   func(ctx context.Context, pp1 *connect.Request[v1.CreatePartitionRequest])
 	afterCreatePartitionCounter  uint64
 	beforeCreatePartitionCounter uint64
-	CreatePartitionMock          mPartitionServiceHandlerMockCreatePartition
+	CreatePartitionMock          mPartitionServiceClientMockCreatePartition
 
 	funcCreatePartitionRole          func(ctx context.Context, pp1 *connect.Request[v1.CreatePartitionRoleRequest]) (pp2 *connect.Response[v1.CreatePartitionRoleResponse], err error)
 	funcCreatePartitionRoleOrigin    string
 	inspectFuncCreatePartitionRole   func(ctx context.Context, pp1 *connect.Request[v1.CreatePartitionRoleRequest])
 	afterCreatePartitionRoleCounter  uint64
 	beforeCreatePartitionRoleCounter uint64
-	CreatePartitionRoleMock          mPartitionServiceHandlerMockCreatePartitionRole
+	CreatePartitionRoleMock          mPartitionServiceClientMockCreatePartitionRole
 
 	funcCreateTenant          func(ctx context.Context, pp1 *connect.Request[v1.CreateTenantRequest]) (pp2 *connect.Response[v1.CreateTenantResponse], err error)
 	funcCreateTenantOrigin    string
 	inspectFuncCreateTenant   func(ctx context.Context, pp1 *connect.Request[v1.CreateTenantRequest])
 	afterCreateTenantCounter  uint64
 	beforeCreateTenantCounter uint64
-	CreateTenantMock          mPartitionServiceHandlerMockCreateTenant
+	CreateTenantMock          mPartitionServiceClientMockCreateTenant
 
 	funcGetAccess          func(ctx context.Context, pp1 *connect.Request[v1.GetAccessRequest]) (pp2 *connect.Response[v1.GetAccessResponse], err error)
 	funcGetAccessOrigin    string
 	inspectFuncGetAccess   func(ctx context.Context, pp1 *connect.Request[v1.GetAccessRequest])
 	afterGetAccessCounter  uint64
 	beforeGetAccessCounter uint64
-	GetAccessMock          mPartitionServiceHandlerMockGetAccess
+	GetAccessMock          mPartitionServiceClientMockGetAccess
 
 	funcGetPage          func(ctx context.Context, pp1 *connect.Request[v1.GetPageRequest]) (pp2 *connect.Response[v1.GetPageResponse], err error)
 	funcGetPageOrigin    string
 	inspectFuncGetPage   func(ctx context.Context, pp1 *connect.Request[v1.GetPageRequest])
 	afterGetPageCounter  uint64
 	beforeGetPageCounter uint64
-	GetPageMock          mPartitionServiceHandlerMockGetPage
+	GetPageMock          mPartitionServiceClientMockGetPage
 
 	funcGetPartition          func(ctx context.Context, pp1 *connect.Request[v1.GetPartitionRequest]) (pp2 *connect.Response[v1.GetPartitionResponse], err error)
 	funcGetPartitionOrigin    string
 	inspectFuncGetPartition   func(ctx context.Context, pp1 *connect.Request[v1.GetPartitionRequest])
 	afterGetPartitionCounter  uint64
 	beforeGetPartitionCounter uint64
-	GetPartitionMock          mPartitionServiceHandlerMockGetPartition
+	GetPartitionMock          mPartitionServiceClientMockGetPartition
 
 	funcGetPartitionParents          func(ctx context.Context, pp1 *connect.Request[v1.GetPartitionParentsRequest]) (pp2 *connect.Response[v1.GetPartitionParentsResponse], err error)
 	funcGetPartitionParentsOrigin    string
 	inspectFuncGetPartitionParents   func(ctx context.Context, pp1 *connect.Request[v1.GetPartitionParentsRequest])
 	afterGetPartitionParentsCounter  uint64
 	beforeGetPartitionParentsCounter uint64
-	GetPartitionParentsMock          mPartitionServiceHandlerMockGetPartitionParents
+	GetPartitionParentsMock          mPartitionServiceClientMockGetPartitionParents
 
 	funcGetTenant          func(ctx context.Context, pp1 *connect.Request[v1.GetTenantRequest]) (pp2 *connect.Response[v1.GetTenantResponse], err error)
 	funcGetTenantOrigin    string
 	inspectFuncGetTenant   func(ctx context.Context, pp1 *connect.Request[v1.GetTenantRequest])
 	afterGetTenantCounter  uint64
 	beforeGetTenantCounter uint64
-	GetTenantMock          mPartitionServiceHandlerMockGetTenant
+	GetTenantMock          mPartitionServiceClientMockGetTenant
 
-	funcListAccessRole          func(ctx context.Context, pp1 *connect.Request[v1.ListAccessRoleRequest], pp2 *connect.ServerStream[v1.ListAccessRoleResponse]) (err error)
+	funcListAccessRole          func(ctx context.Context, pp1 *connect.Request[v1.ListAccessRoleRequest]) (pp2 *connect.ServerStreamForClient[v1.ListAccessRoleResponse], err error)
 	funcListAccessRoleOrigin    string
-	inspectFuncListAccessRole   func(ctx context.Context, pp1 *connect.Request[v1.ListAccessRoleRequest], pp2 *connect.ServerStream[v1.ListAccessRoleResponse])
+	inspectFuncListAccessRole   func(ctx context.Context, pp1 *connect.Request[v1.ListAccessRoleRequest])
 	afterListAccessRoleCounter  uint64
 	beforeListAccessRoleCounter uint64
-	ListAccessRoleMock          mPartitionServiceHandlerMockListAccessRole
+	ListAccessRoleMock          mPartitionServiceClientMockListAccessRole
 
-	funcListPartition          func(ctx context.Context, pp1 *connect.Request[v1.ListPartitionRequest], pp2 *connect.ServerStream[v1.ListPartitionResponse]) (err error)
+	funcListPartition          func(ctx context.Context, pp1 *connect.Request[v1.ListPartitionRequest]) (pp2 *connect.ServerStreamForClient[v1.ListPartitionResponse], err error)
 	funcListPartitionOrigin    string
-	inspectFuncListPartition   func(ctx context.Context, pp1 *connect.Request[v1.ListPartitionRequest], pp2 *connect.ServerStream[v1.ListPartitionResponse])
+	inspectFuncListPartition   func(ctx context.Context, pp1 *connect.Request[v1.ListPartitionRequest])
 	afterListPartitionCounter  uint64
 	beforeListPartitionCounter uint64
-	ListPartitionMock          mPartitionServiceHandlerMockListPartition
+	ListPartitionMock          mPartitionServiceClientMockListPartition
 
-	funcListPartitionRole          func(ctx context.Context, pp1 *connect.Request[v1.ListPartitionRoleRequest], pp2 *connect.ServerStream[v1.ListPartitionRoleResponse]) (err error)
+	funcListPartitionRole          func(ctx context.Context, pp1 *connect.Request[v1.ListPartitionRoleRequest]) (pp2 *connect.ServerStreamForClient[v1.ListPartitionRoleResponse], err error)
 	funcListPartitionRoleOrigin    string
-	inspectFuncListPartitionRole   func(ctx context.Context, pp1 *connect.Request[v1.ListPartitionRoleRequest], pp2 *connect.ServerStream[v1.ListPartitionRoleResponse])
+	inspectFuncListPartitionRole   func(ctx context.Context, pp1 *connect.Request[v1.ListPartitionRoleRequest])
 	afterListPartitionRoleCounter  uint64
 	beforeListPartitionRoleCounter uint64
-	ListPartitionRoleMock          mPartitionServiceHandlerMockListPartitionRole
+	ListPartitionRoleMock          mPartitionServiceClientMockListPartitionRole
 
-	funcListTenant          func(ctx context.Context, pp1 *connect.Request[v1.ListTenantRequest], pp2 *connect.ServerStream[v1.ListTenantResponse]) (err error)
+	funcListTenant          func(ctx context.Context, pp1 *connect.Request[v1.ListTenantRequest]) (pp2 *connect.ServerStreamForClient[v1.ListTenantResponse], err error)
 	funcListTenantOrigin    string
-	inspectFuncListTenant   func(ctx context.Context, pp1 *connect.Request[v1.ListTenantRequest], pp2 *connect.ServerStream[v1.ListTenantResponse])
+	inspectFuncListTenant   func(ctx context.Context, pp1 *connect.Request[v1.ListTenantRequest])
 	afterListTenantCounter  uint64
 	beforeListTenantCounter uint64
-	ListTenantMock          mPartitionServiceHandlerMockListTenant
+	ListTenantMock          mPartitionServiceClientMockListTenant
 
 	funcRemoveAccess          func(ctx context.Context, pp1 *connect.Request[v1.RemoveAccessRequest]) (pp2 *connect.Response[v1.RemoveAccessResponse], err error)
 	funcRemoveAccessOrigin    string
 	inspectFuncRemoveAccess   func(ctx context.Context, pp1 *connect.Request[v1.RemoveAccessRequest])
 	afterRemoveAccessCounter  uint64
 	beforeRemoveAccessCounter uint64
-	RemoveAccessMock          mPartitionServiceHandlerMockRemoveAccess
+	RemoveAccessMock          mPartitionServiceClientMockRemoveAccess
 
 	funcRemoveAccessRole          func(ctx context.Context, pp1 *connect.Request[v1.RemoveAccessRoleRequest]) (pp2 *connect.Response[v1.RemoveAccessRoleResponse], err error)
 	funcRemoveAccessRoleOrigin    string
 	inspectFuncRemoveAccessRole   func(ctx context.Context, pp1 *connect.Request[v1.RemoveAccessRoleRequest])
 	afterRemoveAccessRoleCounter  uint64
 	beforeRemoveAccessRoleCounter uint64
-	RemoveAccessRoleMock          mPartitionServiceHandlerMockRemoveAccessRole
+	RemoveAccessRoleMock          mPartitionServiceClientMockRemoveAccessRole
 
 	funcRemovePage          func(ctx context.Context, pp1 *connect.Request[v1.RemovePageRequest]) (pp2 *connect.Response[v1.RemovePageResponse], err error)
 	funcRemovePageOrigin    string
 	inspectFuncRemovePage   func(ctx context.Context, pp1 *connect.Request[v1.RemovePageRequest])
 	afterRemovePageCounter  uint64
 	beforeRemovePageCounter uint64
-	RemovePageMock          mPartitionServiceHandlerMockRemovePage
+	RemovePageMock          mPartitionServiceClientMockRemovePage
 
 	funcRemovePartitionRole          func(ctx context.Context, pp1 *connect.Request[v1.RemovePartitionRoleRequest]) (pp2 *connect.Response[v1.RemovePartitionRoleResponse], err error)
 	funcRemovePartitionRoleOrigin    string
 	inspectFuncRemovePartitionRole   func(ctx context.Context, pp1 *connect.Request[v1.RemovePartitionRoleRequest])
 	afterRemovePartitionRoleCounter  uint64
 	beforeRemovePartitionRoleCounter uint64
-	RemovePartitionRoleMock          mPartitionServiceHandlerMockRemovePartitionRole
+	RemovePartitionRoleMock          mPartitionServiceClientMockRemovePartitionRole
 
 	funcUpdatePartition          func(ctx context.Context, pp1 *connect.Request[v1.UpdatePartitionRequest]) (pp2 *connect.Response[v1.UpdatePartitionResponse], err error)
 	funcUpdatePartitionOrigin    string
 	inspectFuncUpdatePartition   func(ctx context.Context, pp1 *connect.Request[v1.UpdatePartitionRequest])
 	afterUpdatePartitionCounter  uint64
 	beforeUpdatePartitionCounter uint64
-	UpdatePartitionMock          mPartitionServiceHandlerMockUpdatePartition
+	UpdatePartitionMock          mPartitionServiceClientMockUpdatePartition
 
 	funcUpdateTenant          func(ctx context.Context, pp1 *connect.Request[v1.UpdateTenantRequest]) (pp2 *connect.Response[v1.UpdateTenantResponse], err error)
 	funcUpdateTenantOrigin    string
 	inspectFuncUpdateTenant   func(ctx context.Context, pp1 *connect.Request[v1.UpdateTenantRequest])
 	afterUpdateTenantCounter  uint64
 	beforeUpdateTenantCounter uint64
-	UpdateTenantMock          mPartitionServiceHandlerMockUpdateTenant
+	UpdateTenantMock          mPartitionServiceClientMockUpdateTenant
 }
 
-// NewPartitionServiceHandlerMock returns a mock for mm_partitionv1connect.PartitionServiceHandler
-func NewPartitionServiceHandlerMock(t minimock.Tester) *PartitionServiceHandlerMock {
-	m := &PartitionServiceHandlerMock{t: t}
+// NewPartitionServiceClientMock returns a mock for mm_partitionv1connect.PartitionServiceClient
+func NewPartitionServiceClientMock(t minimock.Tester) *PartitionServiceClientMock {
+	m := &PartitionServiceClientMock{t: t}
 
 	if controller, ok := t.(minimock.MockController); ok {
 		controller.RegisterMocker(m)
 	}
 
-	m.CreateAccessMock = mPartitionServiceHandlerMockCreateAccess{mock: m}
-	m.CreateAccessMock.callArgs = []*PartitionServiceHandlerMockCreateAccessParams{}
+	m.CreateAccessMock = mPartitionServiceClientMockCreateAccess{mock: m}
+	m.CreateAccessMock.callArgs = []*PartitionServiceClientMockCreateAccessParams{}
 
-	m.CreateAccessRoleMock = mPartitionServiceHandlerMockCreateAccessRole{mock: m}
-	m.CreateAccessRoleMock.callArgs = []*PartitionServiceHandlerMockCreateAccessRoleParams{}
+	m.CreateAccessRoleMock = mPartitionServiceClientMockCreateAccessRole{mock: m}
+	m.CreateAccessRoleMock.callArgs = []*PartitionServiceClientMockCreateAccessRoleParams{}
 
-	m.CreatePageMock = mPartitionServiceHandlerMockCreatePage{mock: m}
-	m.CreatePageMock.callArgs = []*PartitionServiceHandlerMockCreatePageParams{}
+	m.CreatePageMock = mPartitionServiceClientMockCreatePage{mock: m}
+	m.CreatePageMock.callArgs = []*PartitionServiceClientMockCreatePageParams{}
 
-	m.CreatePartitionMock = mPartitionServiceHandlerMockCreatePartition{mock: m}
-	m.CreatePartitionMock.callArgs = []*PartitionServiceHandlerMockCreatePartitionParams{}
+	m.CreatePartitionMock = mPartitionServiceClientMockCreatePartition{mock: m}
+	m.CreatePartitionMock.callArgs = []*PartitionServiceClientMockCreatePartitionParams{}
 
-	m.CreatePartitionRoleMock = mPartitionServiceHandlerMockCreatePartitionRole{mock: m}
-	m.CreatePartitionRoleMock.callArgs = []*PartitionServiceHandlerMockCreatePartitionRoleParams{}
+	m.CreatePartitionRoleMock = mPartitionServiceClientMockCreatePartitionRole{mock: m}
+	m.CreatePartitionRoleMock.callArgs = []*PartitionServiceClientMockCreatePartitionRoleParams{}
 
-	m.CreateTenantMock = mPartitionServiceHandlerMockCreateTenant{mock: m}
-	m.CreateTenantMock.callArgs = []*PartitionServiceHandlerMockCreateTenantParams{}
+	m.CreateTenantMock = mPartitionServiceClientMockCreateTenant{mock: m}
+	m.CreateTenantMock.callArgs = []*PartitionServiceClientMockCreateTenantParams{}
 
-	m.GetAccessMock = mPartitionServiceHandlerMockGetAccess{mock: m}
-	m.GetAccessMock.callArgs = []*PartitionServiceHandlerMockGetAccessParams{}
+	m.GetAccessMock = mPartitionServiceClientMockGetAccess{mock: m}
+	m.GetAccessMock.callArgs = []*PartitionServiceClientMockGetAccessParams{}
 
-	m.GetPageMock = mPartitionServiceHandlerMockGetPage{mock: m}
-	m.GetPageMock.callArgs = []*PartitionServiceHandlerMockGetPageParams{}
+	m.GetPageMock = mPartitionServiceClientMockGetPage{mock: m}
+	m.GetPageMock.callArgs = []*PartitionServiceClientMockGetPageParams{}
 
-	m.GetPartitionMock = mPartitionServiceHandlerMockGetPartition{mock: m}
-	m.GetPartitionMock.callArgs = []*PartitionServiceHandlerMockGetPartitionParams{}
+	m.GetPartitionMock = mPartitionServiceClientMockGetPartition{mock: m}
+	m.GetPartitionMock.callArgs = []*PartitionServiceClientMockGetPartitionParams{}
 
-	m.GetPartitionParentsMock = mPartitionServiceHandlerMockGetPartitionParents{mock: m}
-	m.GetPartitionParentsMock.callArgs = []*PartitionServiceHandlerMockGetPartitionParentsParams{}
+	m.GetPartitionParentsMock = mPartitionServiceClientMockGetPartitionParents{mock: m}
+	m.GetPartitionParentsMock.callArgs = []*PartitionServiceClientMockGetPartitionParentsParams{}
 
-	m.GetTenantMock = mPartitionServiceHandlerMockGetTenant{mock: m}
-	m.GetTenantMock.callArgs = []*PartitionServiceHandlerMockGetTenantParams{}
+	m.GetTenantMock = mPartitionServiceClientMockGetTenant{mock: m}
+	m.GetTenantMock.callArgs = []*PartitionServiceClientMockGetTenantParams{}
 
-	m.ListAccessRoleMock = mPartitionServiceHandlerMockListAccessRole{mock: m}
-	m.ListAccessRoleMock.callArgs = []*PartitionServiceHandlerMockListAccessRoleParams{}
+	m.ListAccessRoleMock = mPartitionServiceClientMockListAccessRole{mock: m}
+	m.ListAccessRoleMock.callArgs = []*PartitionServiceClientMockListAccessRoleParams{}
 
-	m.ListPartitionMock = mPartitionServiceHandlerMockListPartition{mock: m}
-	m.ListPartitionMock.callArgs = []*PartitionServiceHandlerMockListPartitionParams{}
+	m.ListPartitionMock = mPartitionServiceClientMockListPartition{mock: m}
+	m.ListPartitionMock.callArgs = []*PartitionServiceClientMockListPartitionParams{}
 
-	m.ListPartitionRoleMock = mPartitionServiceHandlerMockListPartitionRole{mock: m}
-	m.ListPartitionRoleMock.callArgs = []*PartitionServiceHandlerMockListPartitionRoleParams{}
+	m.ListPartitionRoleMock = mPartitionServiceClientMockListPartitionRole{mock: m}
+	m.ListPartitionRoleMock.callArgs = []*PartitionServiceClientMockListPartitionRoleParams{}
 
-	m.ListTenantMock = mPartitionServiceHandlerMockListTenant{mock: m}
-	m.ListTenantMock.callArgs = []*PartitionServiceHandlerMockListTenantParams{}
+	m.ListTenantMock = mPartitionServiceClientMockListTenant{mock: m}
+	m.ListTenantMock.callArgs = []*PartitionServiceClientMockListTenantParams{}
 
-	m.RemoveAccessMock = mPartitionServiceHandlerMockRemoveAccess{mock: m}
-	m.RemoveAccessMock.callArgs = []*PartitionServiceHandlerMockRemoveAccessParams{}
+	m.RemoveAccessMock = mPartitionServiceClientMockRemoveAccess{mock: m}
+	m.RemoveAccessMock.callArgs = []*PartitionServiceClientMockRemoveAccessParams{}
 
-	m.RemoveAccessRoleMock = mPartitionServiceHandlerMockRemoveAccessRole{mock: m}
-	m.RemoveAccessRoleMock.callArgs = []*PartitionServiceHandlerMockRemoveAccessRoleParams{}
+	m.RemoveAccessRoleMock = mPartitionServiceClientMockRemoveAccessRole{mock: m}
+	m.RemoveAccessRoleMock.callArgs = []*PartitionServiceClientMockRemoveAccessRoleParams{}
 
-	m.RemovePageMock = mPartitionServiceHandlerMockRemovePage{mock: m}
-	m.RemovePageMock.callArgs = []*PartitionServiceHandlerMockRemovePageParams{}
+	m.RemovePageMock = mPartitionServiceClientMockRemovePage{mock: m}
+	m.RemovePageMock.callArgs = []*PartitionServiceClientMockRemovePageParams{}
 
-	m.RemovePartitionRoleMock = mPartitionServiceHandlerMockRemovePartitionRole{mock: m}
-	m.RemovePartitionRoleMock.callArgs = []*PartitionServiceHandlerMockRemovePartitionRoleParams{}
+	m.RemovePartitionRoleMock = mPartitionServiceClientMockRemovePartitionRole{mock: m}
+	m.RemovePartitionRoleMock.callArgs = []*PartitionServiceClientMockRemovePartitionRoleParams{}
 
-	m.UpdatePartitionMock = mPartitionServiceHandlerMockUpdatePartition{mock: m}
-	m.UpdatePartitionMock.callArgs = []*PartitionServiceHandlerMockUpdatePartitionParams{}
+	m.UpdatePartitionMock = mPartitionServiceClientMockUpdatePartition{mock: m}
+	m.UpdatePartitionMock.callArgs = []*PartitionServiceClientMockUpdatePartitionParams{}
 
-	m.UpdateTenantMock = mPartitionServiceHandlerMockUpdateTenant{mock: m}
-	m.UpdateTenantMock.callArgs = []*PartitionServiceHandlerMockUpdateTenantParams{}
+	m.UpdateTenantMock = mPartitionServiceClientMockUpdateTenant{mock: m}
+	m.UpdateTenantMock.callArgs = []*PartitionServiceClientMockUpdateTenantParams{}
 
 	t.Cleanup(m.MinimockFinish)
 
 	return m
 }
 
-type mPartitionServiceHandlerMockCreateAccess struct {
+type mPartitionServiceClientMockCreateAccess struct {
 	optional           bool
-	mock               *PartitionServiceHandlerMock
-	defaultExpectation *PartitionServiceHandlerMockCreateAccessExpectation
-	expectations       []*PartitionServiceHandlerMockCreateAccessExpectation
+	mock               *PartitionServiceClientMock
+	defaultExpectation *PartitionServiceClientMockCreateAccessExpectation
+	expectations       []*PartitionServiceClientMockCreateAccessExpectation
 
-	callArgs []*PartitionServiceHandlerMockCreateAccessParams
+	callArgs []*PartitionServiceClientMockCreateAccessParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// PartitionServiceHandlerMockCreateAccessExpectation specifies expectation struct of the PartitionServiceHandler.CreateAccess
-type PartitionServiceHandlerMockCreateAccessExpectation struct {
-	mock               *PartitionServiceHandlerMock
-	params             *PartitionServiceHandlerMockCreateAccessParams
-	paramPtrs          *PartitionServiceHandlerMockCreateAccessParamPtrs
-	expectationOrigins PartitionServiceHandlerMockCreateAccessExpectationOrigins
-	results            *PartitionServiceHandlerMockCreateAccessResults
+// PartitionServiceClientMockCreateAccessExpectation specifies expectation struct of the PartitionServiceClient.CreateAccess
+type PartitionServiceClientMockCreateAccessExpectation struct {
+	mock               *PartitionServiceClientMock
+	params             *PartitionServiceClientMockCreateAccessParams
+	paramPtrs          *PartitionServiceClientMockCreateAccessParamPtrs
+	expectationOrigins PartitionServiceClientMockCreateAccessExpectationOrigins
+	results            *PartitionServiceClientMockCreateAccessResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// PartitionServiceHandlerMockCreateAccessParams contains parameters of the PartitionServiceHandler.CreateAccess
-type PartitionServiceHandlerMockCreateAccessParams struct {
+// PartitionServiceClientMockCreateAccessParams contains parameters of the PartitionServiceClient.CreateAccess
+type PartitionServiceClientMockCreateAccessParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.CreateAccessRequest]
 }
 
-// PartitionServiceHandlerMockCreateAccessParamPtrs contains pointers to parameters of the PartitionServiceHandler.CreateAccess
-type PartitionServiceHandlerMockCreateAccessParamPtrs struct {
+// PartitionServiceClientMockCreateAccessParamPtrs contains pointers to parameters of the PartitionServiceClient.CreateAccess
+type PartitionServiceClientMockCreateAccessParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.CreateAccessRequest]
 }
 
-// PartitionServiceHandlerMockCreateAccessResults contains results of the PartitionServiceHandler.CreateAccess
-type PartitionServiceHandlerMockCreateAccessResults struct {
+// PartitionServiceClientMockCreateAccessResults contains results of the PartitionServiceClient.CreateAccess
+type PartitionServiceClientMockCreateAccessResults struct {
 	pp2 *connect.Response[v1.CreateAccessResponse]
 	err error
 }
 
-// PartitionServiceHandlerMockCreateAccessOrigins contains origins of expectations of the PartitionServiceHandler.CreateAccess
-type PartitionServiceHandlerMockCreateAccessExpectationOrigins struct {
+// PartitionServiceClientMockCreateAccessOrigins contains origins of expectations of the PartitionServiceClient.CreateAccess
+type PartitionServiceClientMockCreateAccessExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -298,26 +298,26 @@ type PartitionServiceHandlerMockCreateAccessExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmCreateAccess *mPartitionServiceHandlerMockCreateAccess) Optional() *mPartitionServiceHandlerMockCreateAccess {
+func (mmCreateAccess *mPartitionServiceClientMockCreateAccess) Optional() *mPartitionServiceClientMockCreateAccess {
 	mmCreateAccess.optional = true
 	return mmCreateAccess
 }
 
-// Expect sets up expected params for PartitionServiceHandler.CreateAccess
-func (mmCreateAccess *mPartitionServiceHandlerMockCreateAccess) Expect(ctx context.Context, pp1 *connect.Request[v1.CreateAccessRequest]) *mPartitionServiceHandlerMockCreateAccess {
+// Expect sets up expected params for PartitionServiceClient.CreateAccess
+func (mmCreateAccess *mPartitionServiceClientMockCreateAccess) Expect(ctx context.Context, pp1 *connect.Request[v1.CreateAccessRequest]) *mPartitionServiceClientMockCreateAccess {
 	if mmCreateAccess.mock.funcCreateAccess != nil {
-		mmCreateAccess.mock.t.Fatalf("PartitionServiceHandlerMock.CreateAccess mock is already set by Set")
+		mmCreateAccess.mock.t.Fatalf("PartitionServiceClientMock.CreateAccess mock is already set by Set")
 	}
 
 	if mmCreateAccess.defaultExpectation == nil {
-		mmCreateAccess.defaultExpectation = &PartitionServiceHandlerMockCreateAccessExpectation{}
+		mmCreateAccess.defaultExpectation = &PartitionServiceClientMockCreateAccessExpectation{}
 	}
 
 	if mmCreateAccess.defaultExpectation.paramPtrs != nil {
-		mmCreateAccess.mock.t.Fatalf("PartitionServiceHandlerMock.CreateAccess mock is already set by ExpectParams functions")
+		mmCreateAccess.mock.t.Fatalf("PartitionServiceClientMock.CreateAccess mock is already set by ExpectParams functions")
 	}
 
-	mmCreateAccess.defaultExpectation.params = &PartitionServiceHandlerMockCreateAccessParams{ctx, pp1}
+	mmCreateAccess.defaultExpectation.params = &PartitionServiceClientMockCreateAccessParams{ctx, pp1}
 	mmCreateAccess.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmCreateAccess.expectations {
 		if minimock.Equal(e.params, mmCreateAccess.defaultExpectation.params) {
@@ -328,22 +328,22 @@ func (mmCreateAccess *mPartitionServiceHandlerMockCreateAccess) Expect(ctx conte
 	return mmCreateAccess
 }
 
-// ExpectCtxParam1 sets up expected param ctx for PartitionServiceHandler.CreateAccess
-func (mmCreateAccess *mPartitionServiceHandlerMockCreateAccess) ExpectCtxParam1(ctx context.Context) *mPartitionServiceHandlerMockCreateAccess {
+// ExpectCtxParam1 sets up expected param ctx for PartitionServiceClient.CreateAccess
+func (mmCreateAccess *mPartitionServiceClientMockCreateAccess) ExpectCtxParam1(ctx context.Context) *mPartitionServiceClientMockCreateAccess {
 	if mmCreateAccess.mock.funcCreateAccess != nil {
-		mmCreateAccess.mock.t.Fatalf("PartitionServiceHandlerMock.CreateAccess mock is already set by Set")
+		mmCreateAccess.mock.t.Fatalf("PartitionServiceClientMock.CreateAccess mock is already set by Set")
 	}
 
 	if mmCreateAccess.defaultExpectation == nil {
-		mmCreateAccess.defaultExpectation = &PartitionServiceHandlerMockCreateAccessExpectation{}
+		mmCreateAccess.defaultExpectation = &PartitionServiceClientMockCreateAccessExpectation{}
 	}
 
 	if mmCreateAccess.defaultExpectation.params != nil {
-		mmCreateAccess.mock.t.Fatalf("PartitionServiceHandlerMock.CreateAccess mock is already set by Expect")
+		mmCreateAccess.mock.t.Fatalf("PartitionServiceClientMock.CreateAccess mock is already set by Expect")
 	}
 
 	if mmCreateAccess.defaultExpectation.paramPtrs == nil {
-		mmCreateAccess.defaultExpectation.paramPtrs = &PartitionServiceHandlerMockCreateAccessParamPtrs{}
+		mmCreateAccess.defaultExpectation.paramPtrs = &PartitionServiceClientMockCreateAccessParamPtrs{}
 	}
 	mmCreateAccess.defaultExpectation.paramPtrs.ctx = &ctx
 	mmCreateAccess.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -351,22 +351,22 @@ func (mmCreateAccess *mPartitionServiceHandlerMockCreateAccess) ExpectCtxParam1(
 	return mmCreateAccess
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for PartitionServiceHandler.CreateAccess
-func (mmCreateAccess *mPartitionServiceHandlerMockCreateAccess) ExpectPp1Param2(pp1 *connect.Request[v1.CreateAccessRequest]) *mPartitionServiceHandlerMockCreateAccess {
+// ExpectPp1Param2 sets up expected param pp1 for PartitionServiceClient.CreateAccess
+func (mmCreateAccess *mPartitionServiceClientMockCreateAccess) ExpectPp1Param2(pp1 *connect.Request[v1.CreateAccessRequest]) *mPartitionServiceClientMockCreateAccess {
 	if mmCreateAccess.mock.funcCreateAccess != nil {
-		mmCreateAccess.mock.t.Fatalf("PartitionServiceHandlerMock.CreateAccess mock is already set by Set")
+		mmCreateAccess.mock.t.Fatalf("PartitionServiceClientMock.CreateAccess mock is already set by Set")
 	}
 
 	if mmCreateAccess.defaultExpectation == nil {
-		mmCreateAccess.defaultExpectation = &PartitionServiceHandlerMockCreateAccessExpectation{}
+		mmCreateAccess.defaultExpectation = &PartitionServiceClientMockCreateAccessExpectation{}
 	}
 
 	if mmCreateAccess.defaultExpectation.params != nil {
-		mmCreateAccess.mock.t.Fatalf("PartitionServiceHandlerMock.CreateAccess mock is already set by Expect")
+		mmCreateAccess.mock.t.Fatalf("PartitionServiceClientMock.CreateAccess mock is already set by Expect")
 	}
 
 	if mmCreateAccess.defaultExpectation.paramPtrs == nil {
-		mmCreateAccess.defaultExpectation.paramPtrs = &PartitionServiceHandlerMockCreateAccessParamPtrs{}
+		mmCreateAccess.defaultExpectation.paramPtrs = &PartitionServiceClientMockCreateAccessParamPtrs{}
 	}
 	mmCreateAccess.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmCreateAccess.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -374,10 +374,10 @@ func (mmCreateAccess *mPartitionServiceHandlerMockCreateAccess) ExpectPp1Param2(
 	return mmCreateAccess
 }
 
-// Inspect accepts an inspector function that has same arguments as the PartitionServiceHandler.CreateAccess
-func (mmCreateAccess *mPartitionServiceHandlerMockCreateAccess) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.CreateAccessRequest])) *mPartitionServiceHandlerMockCreateAccess {
+// Inspect accepts an inspector function that has same arguments as the PartitionServiceClient.CreateAccess
+func (mmCreateAccess *mPartitionServiceClientMockCreateAccess) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.CreateAccessRequest])) *mPartitionServiceClientMockCreateAccess {
 	if mmCreateAccess.mock.inspectFuncCreateAccess != nil {
-		mmCreateAccess.mock.t.Fatalf("Inspect function is already set for PartitionServiceHandlerMock.CreateAccess")
+		mmCreateAccess.mock.t.Fatalf("Inspect function is already set for PartitionServiceClientMock.CreateAccess")
 	}
 
 	mmCreateAccess.mock.inspectFuncCreateAccess = f
@@ -385,28 +385,28 @@ func (mmCreateAccess *mPartitionServiceHandlerMockCreateAccess) Inspect(f func(c
 	return mmCreateAccess
 }
 
-// Return sets up results that will be returned by PartitionServiceHandler.CreateAccess
-func (mmCreateAccess *mPartitionServiceHandlerMockCreateAccess) Return(pp2 *connect.Response[v1.CreateAccessResponse], err error) *PartitionServiceHandlerMock {
+// Return sets up results that will be returned by PartitionServiceClient.CreateAccess
+func (mmCreateAccess *mPartitionServiceClientMockCreateAccess) Return(pp2 *connect.Response[v1.CreateAccessResponse], err error) *PartitionServiceClientMock {
 	if mmCreateAccess.mock.funcCreateAccess != nil {
-		mmCreateAccess.mock.t.Fatalf("PartitionServiceHandlerMock.CreateAccess mock is already set by Set")
+		mmCreateAccess.mock.t.Fatalf("PartitionServiceClientMock.CreateAccess mock is already set by Set")
 	}
 
 	if mmCreateAccess.defaultExpectation == nil {
-		mmCreateAccess.defaultExpectation = &PartitionServiceHandlerMockCreateAccessExpectation{mock: mmCreateAccess.mock}
+		mmCreateAccess.defaultExpectation = &PartitionServiceClientMockCreateAccessExpectation{mock: mmCreateAccess.mock}
 	}
-	mmCreateAccess.defaultExpectation.results = &PartitionServiceHandlerMockCreateAccessResults{pp2, err}
+	mmCreateAccess.defaultExpectation.results = &PartitionServiceClientMockCreateAccessResults{pp2, err}
 	mmCreateAccess.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmCreateAccess.mock
 }
 
-// Set uses given function f to mock the PartitionServiceHandler.CreateAccess method
-func (mmCreateAccess *mPartitionServiceHandlerMockCreateAccess) Set(f func(ctx context.Context, pp1 *connect.Request[v1.CreateAccessRequest]) (pp2 *connect.Response[v1.CreateAccessResponse], err error)) *PartitionServiceHandlerMock {
+// Set uses given function f to mock the PartitionServiceClient.CreateAccess method
+func (mmCreateAccess *mPartitionServiceClientMockCreateAccess) Set(f func(ctx context.Context, pp1 *connect.Request[v1.CreateAccessRequest]) (pp2 *connect.Response[v1.CreateAccessResponse], err error)) *PartitionServiceClientMock {
 	if mmCreateAccess.defaultExpectation != nil {
-		mmCreateAccess.mock.t.Fatalf("Default expectation is already set for the PartitionServiceHandler.CreateAccess method")
+		mmCreateAccess.mock.t.Fatalf("Default expectation is already set for the PartitionServiceClient.CreateAccess method")
 	}
 
 	if len(mmCreateAccess.expectations) > 0 {
-		mmCreateAccess.mock.t.Fatalf("Some expectations are already set for the PartitionServiceHandler.CreateAccess method")
+		mmCreateAccess.mock.t.Fatalf("Some expectations are already set for the PartitionServiceClient.CreateAccess method")
 	}
 
 	mmCreateAccess.mock.funcCreateAccess = f
@@ -414,39 +414,39 @@ func (mmCreateAccess *mPartitionServiceHandlerMockCreateAccess) Set(f func(ctx c
 	return mmCreateAccess.mock
 }
 
-// When sets expectation for the PartitionServiceHandler.CreateAccess which will trigger the result defined by the following
+// When sets expectation for the PartitionServiceClient.CreateAccess which will trigger the result defined by the following
 // Then helper
-func (mmCreateAccess *mPartitionServiceHandlerMockCreateAccess) When(ctx context.Context, pp1 *connect.Request[v1.CreateAccessRequest]) *PartitionServiceHandlerMockCreateAccessExpectation {
+func (mmCreateAccess *mPartitionServiceClientMockCreateAccess) When(ctx context.Context, pp1 *connect.Request[v1.CreateAccessRequest]) *PartitionServiceClientMockCreateAccessExpectation {
 	if mmCreateAccess.mock.funcCreateAccess != nil {
-		mmCreateAccess.mock.t.Fatalf("PartitionServiceHandlerMock.CreateAccess mock is already set by Set")
+		mmCreateAccess.mock.t.Fatalf("PartitionServiceClientMock.CreateAccess mock is already set by Set")
 	}
 
-	expectation := &PartitionServiceHandlerMockCreateAccessExpectation{
+	expectation := &PartitionServiceClientMockCreateAccessExpectation{
 		mock:               mmCreateAccess.mock,
-		params:             &PartitionServiceHandlerMockCreateAccessParams{ctx, pp1},
-		expectationOrigins: PartitionServiceHandlerMockCreateAccessExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &PartitionServiceClientMockCreateAccessParams{ctx, pp1},
+		expectationOrigins: PartitionServiceClientMockCreateAccessExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmCreateAccess.expectations = append(mmCreateAccess.expectations, expectation)
 	return expectation
 }
 
-// Then sets up PartitionServiceHandler.CreateAccess return parameters for the expectation previously defined by the When method
-func (e *PartitionServiceHandlerMockCreateAccessExpectation) Then(pp2 *connect.Response[v1.CreateAccessResponse], err error) *PartitionServiceHandlerMock {
-	e.results = &PartitionServiceHandlerMockCreateAccessResults{pp2, err}
+// Then sets up PartitionServiceClient.CreateAccess return parameters for the expectation previously defined by the When method
+func (e *PartitionServiceClientMockCreateAccessExpectation) Then(pp2 *connect.Response[v1.CreateAccessResponse], err error) *PartitionServiceClientMock {
+	e.results = &PartitionServiceClientMockCreateAccessResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times PartitionServiceHandler.CreateAccess should be invoked
-func (mmCreateAccess *mPartitionServiceHandlerMockCreateAccess) Times(n uint64) *mPartitionServiceHandlerMockCreateAccess {
+// Times sets number of times PartitionServiceClient.CreateAccess should be invoked
+func (mmCreateAccess *mPartitionServiceClientMockCreateAccess) Times(n uint64) *mPartitionServiceClientMockCreateAccess {
 	if n == 0 {
-		mmCreateAccess.mock.t.Fatalf("Times of PartitionServiceHandlerMock.CreateAccess mock can not be zero")
+		mmCreateAccess.mock.t.Fatalf("Times of PartitionServiceClientMock.CreateAccess mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmCreateAccess.expectedInvocations, n)
 	mmCreateAccess.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmCreateAccess
 }
 
-func (mmCreateAccess *mPartitionServiceHandlerMockCreateAccess) invocationsDone() bool {
+func (mmCreateAccess *mPartitionServiceClientMockCreateAccess) invocationsDone() bool {
 	if len(mmCreateAccess.expectations) == 0 && mmCreateAccess.defaultExpectation == nil && mmCreateAccess.mock.funcCreateAccess == nil {
 		return true
 	}
@@ -457,8 +457,8 @@ func (mmCreateAccess *mPartitionServiceHandlerMockCreateAccess) invocationsDone(
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// CreateAccess implements mm_partitionv1connect.PartitionServiceHandler
-func (mmCreateAccess *PartitionServiceHandlerMock) CreateAccess(ctx context.Context, pp1 *connect.Request[v1.CreateAccessRequest]) (pp2 *connect.Response[v1.CreateAccessResponse], err error) {
+// CreateAccess implements mm_partitionv1connect.PartitionServiceClient
+func (mmCreateAccess *PartitionServiceClientMock) CreateAccess(ctx context.Context, pp1 *connect.Request[v1.CreateAccessRequest]) (pp2 *connect.Response[v1.CreateAccessResponse], err error) {
 	mm_atomic.AddUint64(&mmCreateAccess.beforeCreateAccessCounter, 1)
 	defer mm_atomic.AddUint64(&mmCreateAccess.afterCreateAccessCounter, 1)
 
@@ -468,7 +468,7 @@ func (mmCreateAccess *PartitionServiceHandlerMock) CreateAccess(ctx context.Cont
 		mmCreateAccess.inspectFuncCreateAccess(ctx, pp1)
 	}
 
-	mm_params := PartitionServiceHandlerMockCreateAccessParams{ctx, pp1}
+	mm_params := PartitionServiceClientMockCreateAccessParams{ctx, pp1}
 
 	// Record call args
 	mmCreateAccess.CreateAccessMock.mutex.Lock()
@@ -487,54 +487,54 @@ func (mmCreateAccess *PartitionServiceHandlerMock) CreateAccess(ctx context.Cont
 		mm_want := mmCreateAccess.CreateAccessMock.defaultExpectation.params
 		mm_want_ptrs := mmCreateAccess.CreateAccessMock.defaultExpectation.paramPtrs
 
-		mm_got := PartitionServiceHandlerMockCreateAccessParams{ctx, pp1}
+		mm_got := PartitionServiceClientMockCreateAccessParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmCreateAccess.t.Errorf("PartitionServiceHandlerMock.CreateAccess got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmCreateAccess.t.Errorf("PartitionServiceClientMock.CreateAccess got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmCreateAccess.CreateAccessMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmCreateAccess.t.Errorf("PartitionServiceHandlerMock.CreateAccess got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmCreateAccess.t.Errorf("PartitionServiceClientMock.CreateAccess got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmCreateAccess.CreateAccessMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmCreateAccess.t.Errorf("PartitionServiceHandlerMock.CreateAccess got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmCreateAccess.t.Errorf("PartitionServiceClientMock.CreateAccess got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmCreateAccess.CreateAccessMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmCreateAccess.CreateAccessMock.defaultExpectation.results
 		if mm_results == nil {
-			mmCreateAccess.t.Fatal("No results are set for the PartitionServiceHandlerMock.CreateAccess")
+			mmCreateAccess.t.Fatal("No results are set for the PartitionServiceClientMock.CreateAccess")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmCreateAccess.funcCreateAccess != nil {
 		return mmCreateAccess.funcCreateAccess(ctx, pp1)
 	}
-	mmCreateAccess.t.Fatalf("Unexpected call to PartitionServiceHandlerMock.CreateAccess. %v %v", ctx, pp1)
+	mmCreateAccess.t.Fatalf("Unexpected call to PartitionServiceClientMock.CreateAccess. %v %v", ctx, pp1)
 	return
 }
 
-// CreateAccessAfterCounter returns a count of finished PartitionServiceHandlerMock.CreateAccess invocations
-func (mmCreateAccess *PartitionServiceHandlerMock) CreateAccessAfterCounter() uint64 {
+// CreateAccessAfterCounter returns a count of finished PartitionServiceClientMock.CreateAccess invocations
+func (mmCreateAccess *PartitionServiceClientMock) CreateAccessAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmCreateAccess.afterCreateAccessCounter)
 }
 
-// CreateAccessBeforeCounter returns a count of PartitionServiceHandlerMock.CreateAccess invocations
-func (mmCreateAccess *PartitionServiceHandlerMock) CreateAccessBeforeCounter() uint64 {
+// CreateAccessBeforeCounter returns a count of PartitionServiceClientMock.CreateAccess invocations
+func (mmCreateAccess *PartitionServiceClientMock) CreateAccessBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmCreateAccess.beforeCreateAccessCounter)
 }
 
-// Calls returns a list of arguments used in each call to PartitionServiceHandlerMock.CreateAccess.
+// Calls returns a list of arguments used in each call to PartitionServiceClientMock.CreateAccess.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmCreateAccess *mPartitionServiceHandlerMockCreateAccess) Calls() []*PartitionServiceHandlerMockCreateAccessParams {
+func (mmCreateAccess *mPartitionServiceClientMockCreateAccess) Calls() []*PartitionServiceClientMockCreateAccessParams {
 	mmCreateAccess.mutex.RLock()
 
-	argCopy := make([]*PartitionServiceHandlerMockCreateAccessParams, len(mmCreateAccess.callArgs))
+	argCopy := make([]*PartitionServiceClientMockCreateAccessParams, len(mmCreateAccess.callArgs))
 	copy(argCopy, mmCreateAccess.callArgs)
 
 	mmCreateAccess.mutex.RUnlock()
@@ -544,7 +544,7 @@ func (mmCreateAccess *mPartitionServiceHandlerMockCreateAccess) Calls() []*Parti
 
 // MinimockCreateAccessDone returns true if the count of the CreateAccess invocations corresponds
 // the number of defined expectations
-func (m *PartitionServiceHandlerMock) MinimockCreateAccessDone() bool {
+func (m *PartitionServiceClientMock) MinimockCreateAccessDone() bool {
 	if m.CreateAccessMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -560,10 +560,10 @@ func (m *PartitionServiceHandlerMock) MinimockCreateAccessDone() bool {
 }
 
 // MinimockCreateAccessInspect logs each unmet expectation
-func (m *PartitionServiceHandlerMock) MinimockCreateAccessInspect() {
+func (m *PartitionServiceClientMock) MinimockCreateAccessInspect() {
 	for _, e := range m.CreateAccessMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.CreateAccess at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.CreateAccess at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -571,66 +571,66 @@ func (m *PartitionServiceHandlerMock) MinimockCreateAccessInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.CreateAccessMock.defaultExpectation != nil && afterCreateAccessCounter < 1 {
 		if m.CreateAccessMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.CreateAccess at\n%s", m.CreateAccessMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.CreateAccess at\n%s", m.CreateAccessMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.CreateAccess at\n%s with params: %#v", m.CreateAccessMock.defaultExpectation.expectationOrigins.origin, *m.CreateAccessMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.CreateAccess at\n%s with params: %#v", m.CreateAccessMock.defaultExpectation.expectationOrigins.origin, *m.CreateAccessMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcCreateAccess != nil && afterCreateAccessCounter < 1 {
-		m.t.Errorf("Expected call to PartitionServiceHandlerMock.CreateAccess at\n%s", m.funcCreateAccessOrigin)
+		m.t.Errorf("Expected call to PartitionServiceClientMock.CreateAccess at\n%s", m.funcCreateAccessOrigin)
 	}
 
 	if !m.CreateAccessMock.invocationsDone() && afterCreateAccessCounter > 0 {
-		m.t.Errorf("Expected %d calls to PartitionServiceHandlerMock.CreateAccess at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to PartitionServiceClientMock.CreateAccess at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.CreateAccessMock.expectedInvocations), m.CreateAccessMock.expectedInvocationsOrigin, afterCreateAccessCounter)
 	}
 }
 
-type mPartitionServiceHandlerMockCreateAccessRole struct {
+type mPartitionServiceClientMockCreateAccessRole struct {
 	optional           bool
-	mock               *PartitionServiceHandlerMock
-	defaultExpectation *PartitionServiceHandlerMockCreateAccessRoleExpectation
-	expectations       []*PartitionServiceHandlerMockCreateAccessRoleExpectation
+	mock               *PartitionServiceClientMock
+	defaultExpectation *PartitionServiceClientMockCreateAccessRoleExpectation
+	expectations       []*PartitionServiceClientMockCreateAccessRoleExpectation
 
-	callArgs []*PartitionServiceHandlerMockCreateAccessRoleParams
+	callArgs []*PartitionServiceClientMockCreateAccessRoleParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// PartitionServiceHandlerMockCreateAccessRoleExpectation specifies expectation struct of the PartitionServiceHandler.CreateAccessRole
-type PartitionServiceHandlerMockCreateAccessRoleExpectation struct {
-	mock               *PartitionServiceHandlerMock
-	params             *PartitionServiceHandlerMockCreateAccessRoleParams
-	paramPtrs          *PartitionServiceHandlerMockCreateAccessRoleParamPtrs
-	expectationOrigins PartitionServiceHandlerMockCreateAccessRoleExpectationOrigins
-	results            *PartitionServiceHandlerMockCreateAccessRoleResults
+// PartitionServiceClientMockCreateAccessRoleExpectation specifies expectation struct of the PartitionServiceClient.CreateAccessRole
+type PartitionServiceClientMockCreateAccessRoleExpectation struct {
+	mock               *PartitionServiceClientMock
+	params             *PartitionServiceClientMockCreateAccessRoleParams
+	paramPtrs          *PartitionServiceClientMockCreateAccessRoleParamPtrs
+	expectationOrigins PartitionServiceClientMockCreateAccessRoleExpectationOrigins
+	results            *PartitionServiceClientMockCreateAccessRoleResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// PartitionServiceHandlerMockCreateAccessRoleParams contains parameters of the PartitionServiceHandler.CreateAccessRole
-type PartitionServiceHandlerMockCreateAccessRoleParams struct {
+// PartitionServiceClientMockCreateAccessRoleParams contains parameters of the PartitionServiceClient.CreateAccessRole
+type PartitionServiceClientMockCreateAccessRoleParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.CreateAccessRoleRequest]
 }
 
-// PartitionServiceHandlerMockCreateAccessRoleParamPtrs contains pointers to parameters of the PartitionServiceHandler.CreateAccessRole
-type PartitionServiceHandlerMockCreateAccessRoleParamPtrs struct {
+// PartitionServiceClientMockCreateAccessRoleParamPtrs contains pointers to parameters of the PartitionServiceClient.CreateAccessRole
+type PartitionServiceClientMockCreateAccessRoleParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.CreateAccessRoleRequest]
 }
 
-// PartitionServiceHandlerMockCreateAccessRoleResults contains results of the PartitionServiceHandler.CreateAccessRole
-type PartitionServiceHandlerMockCreateAccessRoleResults struct {
+// PartitionServiceClientMockCreateAccessRoleResults contains results of the PartitionServiceClient.CreateAccessRole
+type PartitionServiceClientMockCreateAccessRoleResults struct {
 	pp2 *connect.Response[v1.CreateAccessRoleResponse]
 	err error
 }
 
-// PartitionServiceHandlerMockCreateAccessRoleOrigins contains origins of expectations of the PartitionServiceHandler.CreateAccessRole
-type PartitionServiceHandlerMockCreateAccessRoleExpectationOrigins struct {
+// PartitionServiceClientMockCreateAccessRoleOrigins contains origins of expectations of the PartitionServiceClient.CreateAccessRole
+type PartitionServiceClientMockCreateAccessRoleExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -641,26 +641,26 @@ type PartitionServiceHandlerMockCreateAccessRoleExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmCreateAccessRole *mPartitionServiceHandlerMockCreateAccessRole) Optional() *mPartitionServiceHandlerMockCreateAccessRole {
+func (mmCreateAccessRole *mPartitionServiceClientMockCreateAccessRole) Optional() *mPartitionServiceClientMockCreateAccessRole {
 	mmCreateAccessRole.optional = true
 	return mmCreateAccessRole
 }
 
-// Expect sets up expected params for PartitionServiceHandler.CreateAccessRole
-func (mmCreateAccessRole *mPartitionServiceHandlerMockCreateAccessRole) Expect(ctx context.Context, pp1 *connect.Request[v1.CreateAccessRoleRequest]) *mPartitionServiceHandlerMockCreateAccessRole {
+// Expect sets up expected params for PartitionServiceClient.CreateAccessRole
+func (mmCreateAccessRole *mPartitionServiceClientMockCreateAccessRole) Expect(ctx context.Context, pp1 *connect.Request[v1.CreateAccessRoleRequest]) *mPartitionServiceClientMockCreateAccessRole {
 	if mmCreateAccessRole.mock.funcCreateAccessRole != nil {
-		mmCreateAccessRole.mock.t.Fatalf("PartitionServiceHandlerMock.CreateAccessRole mock is already set by Set")
+		mmCreateAccessRole.mock.t.Fatalf("PartitionServiceClientMock.CreateAccessRole mock is already set by Set")
 	}
 
 	if mmCreateAccessRole.defaultExpectation == nil {
-		mmCreateAccessRole.defaultExpectation = &PartitionServiceHandlerMockCreateAccessRoleExpectation{}
+		mmCreateAccessRole.defaultExpectation = &PartitionServiceClientMockCreateAccessRoleExpectation{}
 	}
 
 	if mmCreateAccessRole.defaultExpectation.paramPtrs != nil {
-		mmCreateAccessRole.mock.t.Fatalf("PartitionServiceHandlerMock.CreateAccessRole mock is already set by ExpectParams functions")
+		mmCreateAccessRole.mock.t.Fatalf("PartitionServiceClientMock.CreateAccessRole mock is already set by ExpectParams functions")
 	}
 
-	mmCreateAccessRole.defaultExpectation.params = &PartitionServiceHandlerMockCreateAccessRoleParams{ctx, pp1}
+	mmCreateAccessRole.defaultExpectation.params = &PartitionServiceClientMockCreateAccessRoleParams{ctx, pp1}
 	mmCreateAccessRole.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmCreateAccessRole.expectations {
 		if minimock.Equal(e.params, mmCreateAccessRole.defaultExpectation.params) {
@@ -671,22 +671,22 @@ func (mmCreateAccessRole *mPartitionServiceHandlerMockCreateAccessRole) Expect(c
 	return mmCreateAccessRole
 }
 
-// ExpectCtxParam1 sets up expected param ctx for PartitionServiceHandler.CreateAccessRole
-func (mmCreateAccessRole *mPartitionServiceHandlerMockCreateAccessRole) ExpectCtxParam1(ctx context.Context) *mPartitionServiceHandlerMockCreateAccessRole {
+// ExpectCtxParam1 sets up expected param ctx for PartitionServiceClient.CreateAccessRole
+func (mmCreateAccessRole *mPartitionServiceClientMockCreateAccessRole) ExpectCtxParam1(ctx context.Context) *mPartitionServiceClientMockCreateAccessRole {
 	if mmCreateAccessRole.mock.funcCreateAccessRole != nil {
-		mmCreateAccessRole.mock.t.Fatalf("PartitionServiceHandlerMock.CreateAccessRole mock is already set by Set")
+		mmCreateAccessRole.mock.t.Fatalf("PartitionServiceClientMock.CreateAccessRole mock is already set by Set")
 	}
 
 	if mmCreateAccessRole.defaultExpectation == nil {
-		mmCreateAccessRole.defaultExpectation = &PartitionServiceHandlerMockCreateAccessRoleExpectation{}
+		mmCreateAccessRole.defaultExpectation = &PartitionServiceClientMockCreateAccessRoleExpectation{}
 	}
 
 	if mmCreateAccessRole.defaultExpectation.params != nil {
-		mmCreateAccessRole.mock.t.Fatalf("PartitionServiceHandlerMock.CreateAccessRole mock is already set by Expect")
+		mmCreateAccessRole.mock.t.Fatalf("PartitionServiceClientMock.CreateAccessRole mock is already set by Expect")
 	}
 
 	if mmCreateAccessRole.defaultExpectation.paramPtrs == nil {
-		mmCreateAccessRole.defaultExpectation.paramPtrs = &PartitionServiceHandlerMockCreateAccessRoleParamPtrs{}
+		mmCreateAccessRole.defaultExpectation.paramPtrs = &PartitionServiceClientMockCreateAccessRoleParamPtrs{}
 	}
 	mmCreateAccessRole.defaultExpectation.paramPtrs.ctx = &ctx
 	mmCreateAccessRole.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -694,22 +694,22 @@ func (mmCreateAccessRole *mPartitionServiceHandlerMockCreateAccessRole) ExpectCt
 	return mmCreateAccessRole
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for PartitionServiceHandler.CreateAccessRole
-func (mmCreateAccessRole *mPartitionServiceHandlerMockCreateAccessRole) ExpectPp1Param2(pp1 *connect.Request[v1.CreateAccessRoleRequest]) *mPartitionServiceHandlerMockCreateAccessRole {
+// ExpectPp1Param2 sets up expected param pp1 for PartitionServiceClient.CreateAccessRole
+func (mmCreateAccessRole *mPartitionServiceClientMockCreateAccessRole) ExpectPp1Param2(pp1 *connect.Request[v1.CreateAccessRoleRequest]) *mPartitionServiceClientMockCreateAccessRole {
 	if mmCreateAccessRole.mock.funcCreateAccessRole != nil {
-		mmCreateAccessRole.mock.t.Fatalf("PartitionServiceHandlerMock.CreateAccessRole mock is already set by Set")
+		mmCreateAccessRole.mock.t.Fatalf("PartitionServiceClientMock.CreateAccessRole mock is already set by Set")
 	}
 
 	if mmCreateAccessRole.defaultExpectation == nil {
-		mmCreateAccessRole.defaultExpectation = &PartitionServiceHandlerMockCreateAccessRoleExpectation{}
+		mmCreateAccessRole.defaultExpectation = &PartitionServiceClientMockCreateAccessRoleExpectation{}
 	}
 
 	if mmCreateAccessRole.defaultExpectation.params != nil {
-		mmCreateAccessRole.mock.t.Fatalf("PartitionServiceHandlerMock.CreateAccessRole mock is already set by Expect")
+		mmCreateAccessRole.mock.t.Fatalf("PartitionServiceClientMock.CreateAccessRole mock is already set by Expect")
 	}
 
 	if mmCreateAccessRole.defaultExpectation.paramPtrs == nil {
-		mmCreateAccessRole.defaultExpectation.paramPtrs = &PartitionServiceHandlerMockCreateAccessRoleParamPtrs{}
+		mmCreateAccessRole.defaultExpectation.paramPtrs = &PartitionServiceClientMockCreateAccessRoleParamPtrs{}
 	}
 	mmCreateAccessRole.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmCreateAccessRole.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -717,10 +717,10 @@ func (mmCreateAccessRole *mPartitionServiceHandlerMockCreateAccessRole) ExpectPp
 	return mmCreateAccessRole
 }
 
-// Inspect accepts an inspector function that has same arguments as the PartitionServiceHandler.CreateAccessRole
-func (mmCreateAccessRole *mPartitionServiceHandlerMockCreateAccessRole) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.CreateAccessRoleRequest])) *mPartitionServiceHandlerMockCreateAccessRole {
+// Inspect accepts an inspector function that has same arguments as the PartitionServiceClient.CreateAccessRole
+func (mmCreateAccessRole *mPartitionServiceClientMockCreateAccessRole) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.CreateAccessRoleRequest])) *mPartitionServiceClientMockCreateAccessRole {
 	if mmCreateAccessRole.mock.inspectFuncCreateAccessRole != nil {
-		mmCreateAccessRole.mock.t.Fatalf("Inspect function is already set for PartitionServiceHandlerMock.CreateAccessRole")
+		mmCreateAccessRole.mock.t.Fatalf("Inspect function is already set for PartitionServiceClientMock.CreateAccessRole")
 	}
 
 	mmCreateAccessRole.mock.inspectFuncCreateAccessRole = f
@@ -728,28 +728,28 @@ func (mmCreateAccessRole *mPartitionServiceHandlerMockCreateAccessRole) Inspect(
 	return mmCreateAccessRole
 }
 
-// Return sets up results that will be returned by PartitionServiceHandler.CreateAccessRole
-func (mmCreateAccessRole *mPartitionServiceHandlerMockCreateAccessRole) Return(pp2 *connect.Response[v1.CreateAccessRoleResponse], err error) *PartitionServiceHandlerMock {
+// Return sets up results that will be returned by PartitionServiceClient.CreateAccessRole
+func (mmCreateAccessRole *mPartitionServiceClientMockCreateAccessRole) Return(pp2 *connect.Response[v1.CreateAccessRoleResponse], err error) *PartitionServiceClientMock {
 	if mmCreateAccessRole.mock.funcCreateAccessRole != nil {
-		mmCreateAccessRole.mock.t.Fatalf("PartitionServiceHandlerMock.CreateAccessRole mock is already set by Set")
+		mmCreateAccessRole.mock.t.Fatalf("PartitionServiceClientMock.CreateAccessRole mock is already set by Set")
 	}
 
 	if mmCreateAccessRole.defaultExpectation == nil {
-		mmCreateAccessRole.defaultExpectation = &PartitionServiceHandlerMockCreateAccessRoleExpectation{mock: mmCreateAccessRole.mock}
+		mmCreateAccessRole.defaultExpectation = &PartitionServiceClientMockCreateAccessRoleExpectation{mock: mmCreateAccessRole.mock}
 	}
-	mmCreateAccessRole.defaultExpectation.results = &PartitionServiceHandlerMockCreateAccessRoleResults{pp2, err}
+	mmCreateAccessRole.defaultExpectation.results = &PartitionServiceClientMockCreateAccessRoleResults{pp2, err}
 	mmCreateAccessRole.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmCreateAccessRole.mock
 }
 
-// Set uses given function f to mock the PartitionServiceHandler.CreateAccessRole method
-func (mmCreateAccessRole *mPartitionServiceHandlerMockCreateAccessRole) Set(f func(ctx context.Context, pp1 *connect.Request[v1.CreateAccessRoleRequest]) (pp2 *connect.Response[v1.CreateAccessRoleResponse], err error)) *PartitionServiceHandlerMock {
+// Set uses given function f to mock the PartitionServiceClient.CreateAccessRole method
+func (mmCreateAccessRole *mPartitionServiceClientMockCreateAccessRole) Set(f func(ctx context.Context, pp1 *connect.Request[v1.CreateAccessRoleRequest]) (pp2 *connect.Response[v1.CreateAccessRoleResponse], err error)) *PartitionServiceClientMock {
 	if mmCreateAccessRole.defaultExpectation != nil {
-		mmCreateAccessRole.mock.t.Fatalf("Default expectation is already set for the PartitionServiceHandler.CreateAccessRole method")
+		mmCreateAccessRole.mock.t.Fatalf("Default expectation is already set for the PartitionServiceClient.CreateAccessRole method")
 	}
 
 	if len(mmCreateAccessRole.expectations) > 0 {
-		mmCreateAccessRole.mock.t.Fatalf("Some expectations are already set for the PartitionServiceHandler.CreateAccessRole method")
+		mmCreateAccessRole.mock.t.Fatalf("Some expectations are already set for the PartitionServiceClient.CreateAccessRole method")
 	}
 
 	mmCreateAccessRole.mock.funcCreateAccessRole = f
@@ -757,39 +757,39 @@ func (mmCreateAccessRole *mPartitionServiceHandlerMockCreateAccessRole) Set(f fu
 	return mmCreateAccessRole.mock
 }
 
-// When sets expectation for the PartitionServiceHandler.CreateAccessRole which will trigger the result defined by the following
+// When sets expectation for the PartitionServiceClient.CreateAccessRole which will trigger the result defined by the following
 // Then helper
-func (mmCreateAccessRole *mPartitionServiceHandlerMockCreateAccessRole) When(ctx context.Context, pp1 *connect.Request[v1.CreateAccessRoleRequest]) *PartitionServiceHandlerMockCreateAccessRoleExpectation {
+func (mmCreateAccessRole *mPartitionServiceClientMockCreateAccessRole) When(ctx context.Context, pp1 *connect.Request[v1.CreateAccessRoleRequest]) *PartitionServiceClientMockCreateAccessRoleExpectation {
 	if mmCreateAccessRole.mock.funcCreateAccessRole != nil {
-		mmCreateAccessRole.mock.t.Fatalf("PartitionServiceHandlerMock.CreateAccessRole mock is already set by Set")
+		mmCreateAccessRole.mock.t.Fatalf("PartitionServiceClientMock.CreateAccessRole mock is already set by Set")
 	}
 
-	expectation := &PartitionServiceHandlerMockCreateAccessRoleExpectation{
+	expectation := &PartitionServiceClientMockCreateAccessRoleExpectation{
 		mock:               mmCreateAccessRole.mock,
-		params:             &PartitionServiceHandlerMockCreateAccessRoleParams{ctx, pp1},
-		expectationOrigins: PartitionServiceHandlerMockCreateAccessRoleExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &PartitionServiceClientMockCreateAccessRoleParams{ctx, pp1},
+		expectationOrigins: PartitionServiceClientMockCreateAccessRoleExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmCreateAccessRole.expectations = append(mmCreateAccessRole.expectations, expectation)
 	return expectation
 }
 
-// Then sets up PartitionServiceHandler.CreateAccessRole return parameters for the expectation previously defined by the When method
-func (e *PartitionServiceHandlerMockCreateAccessRoleExpectation) Then(pp2 *connect.Response[v1.CreateAccessRoleResponse], err error) *PartitionServiceHandlerMock {
-	e.results = &PartitionServiceHandlerMockCreateAccessRoleResults{pp2, err}
+// Then sets up PartitionServiceClient.CreateAccessRole return parameters for the expectation previously defined by the When method
+func (e *PartitionServiceClientMockCreateAccessRoleExpectation) Then(pp2 *connect.Response[v1.CreateAccessRoleResponse], err error) *PartitionServiceClientMock {
+	e.results = &PartitionServiceClientMockCreateAccessRoleResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times PartitionServiceHandler.CreateAccessRole should be invoked
-func (mmCreateAccessRole *mPartitionServiceHandlerMockCreateAccessRole) Times(n uint64) *mPartitionServiceHandlerMockCreateAccessRole {
+// Times sets number of times PartitionServiceClient.CreateAccessRole should be invoked
+func (mmCreateAccessRole *mPartitionServiceClientMockCreateAccessRole) Times(n uint64) *mPartitionServiceClientMockCreateAccessRole {
 	if n == 0 {
-		mmCreateAccessRole.mock.t.Fatalf("Times of PartitionServiceHandlerMock.CreateAccessRole mock can not be zero")
+		mmCreateAccessRole.mock.t.Fatalf("Times of PartitionServiceClientMock.CreateAccessRole mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmCreateAccessRole.expectedInvocations, n)
 	mmCreateAccessRole.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmCreateAccessRole
 }
 
-func (mmCreateAccessRole *mPartitionServiceHandlerMockCreateAccessRole) invocationsDone() bool {
+func (mmCreateAccessRole *mPartitionServiceClientMockCreateAccessRole) invocationsDone() bool {
 	if len(mmCreateAccessRole.expectations) == 0 && mmCreateAccessRole.defaultExpectation == nil && mmCreateAccessRole.mock.funcCreateAccessRole == nil {
 		return true
 	}
@@ -800,8 +800,8 @@ func (mmCreateAccessRole *mPartitionServiceHandlerMockCreateAccessRole) invocati
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// CreateAccessRole implements mm_partitionv1connect.PartitionServiceHandler
-func (mmCreateAccessRole *PartitionServiceHandlerMock) CreateAccessRole(ctx context.Context, pp1 *connect.Request[v1.CreateAccessRoleRequest]) (pp2 *connect.Response[v1.CreateAccessRoleResponse], err error) {
+// CreateAccessRole implements mm_partitionv1connect.PartitionServiceClient
+func (mmCreateAccessRole *PartitionServiceClientMock) CreateAccessRole(ctx context.Context, pp1 *connect.Request[v1.CreateAccessRoleRequest]) (pp2 *connect.Response[v1.CreateAccessRoleResponse], err error) {
 	mm_atomic.AddUint64(&mmCreateAccessRole.beforeCreateAccessRoleCounter, 1)
 	defer mm_atomic.AddUint64(&mmCreateAccessRole.afterCreateAccessRoleCounter, 1)
 
@@ -811,7 +811,7 @@ func (mmCreateAccessRole *PartitionServiceHandlerMock) CreateAccessRole(ctx cont
 		mmCreateAccessRole.inspectFuncCreateAccessRole(ctx, pp1)
 	}
 
-	mm_params := PartitionServiceHandlerMockCreateAccessRoleParams{ctx, pp1}
+	mm_params := PartitionServiceClientMockCreateAccessRoleParams{ctx, pp1}
 
 	// Record call args
 	mmCreateAccessRole.CreateAccessRoleMock.mutex.Lock()
@@ -830,54 +830,54 @@ func (mmCreateAccessRole *PartitionServiceHandlerMock) CreateAccessRole(ctx cont
 		mm_want := mmCreateAccessRole.CreateAccessRoleMock.defaultExpectation.params
 		mm_want_ptrs := mmCreateAccessRole.CreateAccessRoleMock.defaultExpectation.paramPtrs
 
-		mm_got := PartitionServiceHandlerMockCreateAccessRoleParams{ctx, pp1}
+		mm_got := PartitionServiceClientMockCreateAccessRoleParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmCreateAccessRole.t.Errorf("PartitionServiceHandlerMock.CreateAccessRole got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmCreateAccessRole.t.Errorf("PartitionServiceClientMock.CreateAccessRole got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmCreateAccessRole.CreateAccessRoleMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmCreateAccessRole.t.Errorf("PartitionServiceHandlerMock.CreateAccessRole got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmCreateAccessRole.t.Errorf("PartitionServiceClientMock.CreateAccessRole got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmCreateAccessRole.CreateAccessRoleMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmCreateAccessRole.t.Errorf("PartitionServiceHandlerMock.CreateAccessRole got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmCreateAccessRole.t.Errorf("PartitionServiceClientMock.CreateAccessRole got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmCreateAccessRole.CreateAccessRoleMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmCreateAccessRole.CreateAccessRoleMock.defaultExpectation.results
 		if mm_results == nil {
-			mmCreateAccessRole.t.Fatal("No results are set for the PartitionServiceHandlerMock.CreateAccessRole")
+			mmCreateAccessRole.t.Fatal("No results are set for the PartitionServiceClientMock.CreateAccessRole")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmCreateAccessRole.funcCreateAccessRole != nil {
 		return mmCreateAccessRole.funcCreateAccessRole(ctx, pp1)
 	}
-	mmCreateAccessRole.t.Fatalf("Unexpected call to PartitionServiceHandlerMock.CreateAccessRole. %v %v", ctx, pp1)
+	mmCreateAccessRole.t.Fatalf("Unexpected call to PartitionServiceClientMock.CreateAccessRole. %v %v", ctx, pp1)
 	return
 }
 
-// CreateAccessRoleAfterCounter returns a count of finished PartitionServiceHandlerMock.CreateAccessRole invocations
-func (mmCreateAccessRole *PartitionServiceHandlerMock) CreateAccessRoleAfterCounter() uint64 {
+// CreateAccessRoleAfterCounter returns a count of finished PartitionServiceClientMock.CreateAccessRole invocations
+func (mmCreateAccessRole *PartitionServiceClientMock) CreateAccessRoleAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmCreateAccessRole.afterCreateAccessRoleCounter)
 }
 
-// CreateAccessRoleBeforeCounter returns a count of PartitionServiceHandlerMock.CreateAccessRole invocations
-func (mmCreateAccessRole *PartitionServiceHandlerMock) CreateAccessRoleBeforeCounter() uint64 {
+// CreateAccessRoleBeforeCounter returns a count of PartitionServiceClientMock.CreateAccessRole invocations
+func (mmCreateAccessRole *PartitionServiceClientMock) CreateAccessRoleBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmCreateAccessRole.beforeCreateAccessRoleCounter)
 }
 
-// Calls returns a list of arguments used in each call to PartitionServiceHandlerMock.CreateAccessRole.
+// Calls returns a list of arguments used in each call to PartitionServiceClientMock.CreateAccessRole.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmCreateAccessRole *mPartitionServiceHandlerMockCreateAccessRole) Calls() []*PartitionServiceHandlerMockCreateAccessRoleParams {
+func (mmCreateAccessRole *mPartitionServiceClientMockCreateAccessRole) Calls() []*PartitionServiceClientMockCreateAccessRoleParams {
 	mmCreateAccessRole.mutex.RLock()
 
-	argCopy := make([]*PartitionServiceHandlerMockCreateAccessRoleParams, len(mmCreateAccessRole.callArgs))
+	argCopy := make([]*PartitionServiceClientMockCreateAccessRoleParams, len(mmCreateAccessRole.callArgs))
 	copy(argCopy, mmCreateAccessRole.callArgs)
 
 	mmCreateAccessRole.mutex.RUnlock()
@@ -887,7 +887,7 @@ func (mmCreateAccessRole *mPartitionServiceHandlerMockCreateAccessRole) Calls() 
 
 // MinimockCreateAccessRoleDone returns true if the count of the CreateAccessRole invocations corresponds
 // the number of defined expectations
-func (m *PartitionServiceHandlerMock) MinimockCreateAccessRoleDone() bool {
+func (m *PartitionServiceClientMock) MinimockCreateAccessRoleDone() bool {
 	if m.CreateAccessRoleMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -903,10 +903,10 @@ func (m *PartitionServiceHandlerMock) MinimockCreateAccessRoleDone() bool {
 }
 
 // MinimockCreateAccessRoleInspect logs each unmet expectation
-func (m *PartitionServiceHandlerMock) MinimockCreateAccessRoleInspect() {
+func (m *PartitionServiceClientMock) MinimockCreateAccessRoleInspect() {
 	for _, e := range m.CreateAccessRoleMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.CreateAccessRole at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.CreateAccessRole at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -914,66 +914,66 @@ func (m *PartitionServiceHandlerMock) MinimockCreateAccessRoleInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.CreateAccessRoleMock.defaultExpectation != nil && afterCreateAccessRoleCounter < 1 {
 		if m.CreateAccessRoleMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.CreateAccessRole at\n%s", m.CreateAccessRoleMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.CreateAccessRole at\n%s", m.CreateAccessRoleMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.CreateAccessRole at\n%s with params: %#v", m.CreateAccessRoleMock.defaultExpectation.expectationOrigins.origin, *m.CreateAccessRoleMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.CreateAccessRole at\n%s with params: %#v", m.CreateAccessRoleMock.defaultExpectation.expectationOrigins.origin, *m.CreateAccessRoleMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcCreateAccessRole != nil && afterCreateAccessRoleCounter < 1 {
-		m.t.Errorf("Expected call to PartitionServiceHandlerMock.CreateAccessRole at\n%s", m.funcCreateAccessRoleOrigin)
+		m.t.Errorf("Expected call to PartitionServiceClientMock.CreateAccessRole at\n%s", m.funcCreateAccessRoleOrigin)
 	}
 
 	if !m.CreateAccessRoleMock.invocationsDone() && afterCreateAccessRoleCounter > 0 {
-		m.t.Errorf("Expected %d calls to PartitionServiceHandlerMock.CreateAccessRole at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to PartitionServiceClientMock.CreateAccessRole at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.CreateAccessRoleMock.expectedInvocations), m.CreateAccessRoleMock.expectedInvocationsOrigin, afterCreateAccessRoleCounter)
 	}
 }
 
-type mPartitionServiceHandlerMockCreatePage struct {
+type mPartitionServiceClientMockCreatePage struct {
 	optional           bool
-	mock               *PartitionServiceHandlerMock
-	defaultExpectation *PartitionServiceHandlerMockCreatePageExpectation
-	expectations       []*PartitionServiceHandlerMockCreatePageExpectation
+	mock               *PartitionServiceClientMock
+	defaultExpectation *PartitionServiceClientMockCreatePageExpectation
+	expectations       []*PartitionServiceClientMockCreatePageExpectation
 
-	callArgs []*PartitionServiceHandlerMockCreatePageParams
+	callArgs []*PartitionServiceClientMockCreatePageParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// PartitionServiceHandlerMockCreatePageExpectation specifies expectation struct of the PartitionServiceHandler.CreatePage
-type PartitionServiceHandlerMockCreatePageExpectation struct {
-	mock               *PartitionServiceHandlerMock
-	params             *PartitionServiceHandlerMockCreatePageParams
-	paramPtrs          *PartitionServiceHandlerMockCreatePageParamPtrs
-	expectationOrigins PartitionServiceHandlerMockCreatePageExpectationOrigins
-	results            *PartitionServiceHandlerMockCreatePageResults
+// PartitionServiceClientMockCreatePageExpectation specifies expectation struct of the PartitionServiceClient.CreatePage
+type PartitionServiceClientMockCreatePageExpectation struct {
+	mock               *PartitionServiceClientMock
+	params             *PartitionServiceClientMockCreatePageParams
+	paramPtrs          *PartitionServiceClientMockCreatePageParamPtrs
+	expectationOrigins PartitionServiceClientMockCreatePageExpectationOrigins
+	results            *PartitionServiceClientMockCreatePageResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// PartitionServiceHandlerMockCreatePageParams contains parameters of the PartitionServiceHandler.CreatePage
-type PartitionServiceHandlerMockCreatePageParams struct {
+// PartitionServiceClientMockCreatePageParams contains parameters of the PartitionServiceClient.CreatePage
+type PartitionServiceClientMockCreatePageParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.CreatePageRequest]
 }
 
-// PartitionServiceHandlerMockCreatePageParamPtrs contains pointers to parameters of the PartitionServiceHandler.CreatePage
-type PartitionServiceHandlerMockCreatePageParamPtrs struct {
+// PartitionServiceClientMockCreatePageParamPtrs contains pointers to parameters of the PartitionServiceClient.CreatePage
+type PartitionServiceClientMockCreatePageParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.CreatePageRequest]
 }
 
-// PartitionServiceHandlerMockCreatePageResults contains results of the PartitionServiceHandler.CreatePage
-type PartitionServiceHandlerMockCreatePageResults struct {
+// PartitionServiceClientMockCreatePageResults contains results of the PartitionServiceClient.CreatePage
+type PartitionServiceClientMockCreatePageResults struct {
 	pp2 *connect.Response[v1.CreatePageResponse]
 	err error
 }
 
-// PartitionServiceHandlerMockCreatePageOrigins contains origins of expectations of the PartitionServiceHandler.CreatePage
-type PartitionServiceHandlerMockCreatePageExpectationOrigins struct {
+// PartitionServiceClientMockCreatePageOrigins contains origins of expectations of the PartitionServiceClient.CreatePage
+type PartitionServiceClientMockCreatePageExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -984,26 +984,26 @@ type PartitionServiceHandlerMockCreatePageExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmCreatePage *mPartitionServiceHandlerMockCreatePage) Optional() *mPartitionServiceHandlerMockCreatePage {
+func (mmCreatePage *mPartitionServiceClientMockCreatePage) Optional() *mPartitionServiceClientMockCreatePage {
 	mmCreatePage.optional = true
 	return mmCreatePage
 }
 
-// Expect sets up expected params for PartitionServiceHandler.CreatePage
-func (mmCreatePage *mPartitionServiceHandlerMockCreatePage) Expect(ctx context.Context, pp1 *connect.Request[v1.CreatePageRequest]) *mPartitionServiceHandlerMockCreatePage {
+// Expect sets up expected params for PartitionServiceClient.CreatePage
+func (mmCreatePage *mPartitionServiceClientMockCreatePage) Expect(ctx context.Context, pp1 *connect.Request[v1.CreatePageRequest]) *mPartitionServiceClientMockCreatePage {
 	if mmCreatePage.mock.funcCreatePage != nil {
-		mmCreatePage.mock.t.Fatalf("PartitionServiceHandlerMock.CreatePage mock is already set by Set")
+		mmCreatePage.mock.t.Fatalf("PartitionServiceClientMock.CreatePage mock is already set by Set")
 	}
 
 	if mmCreatePage.defaultExpectation == nil {
-		mmCreatePage.defaultExpectation = &PartitionServiceHandlerMockCreatePageExpectation{}
+		mmCreatePage.defaultExpectation = &PartitionServiceClientMockCreatePageExpectation{}
 	}
 
 	if mmCreatePage.defaultExpectation.paramPtrs != nil {
-		mmCreatePage.mock.t.Fatalf("PartitionServiceHandlerMock.CreatePage mock is already set by ExpectParams functions")
+		mmCreatePage.mock.t.Fatalf("PartitionServiceClientMock.CreatePage mock is already set by ExpectParams functions")
 	}
 
-	mmCreatePage.defaultExpectation.params = &PartitionServiceHandlerMockCreatePageParams{ctx, pp1}
+	mmCreatePage.defaultExpectation.params = &PartitionServiceClientMockCreatePageParams{ctx, pp1}
 	mmCreatePage.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmCreatePage.expectations {
 		if minimock.Equal(e.params, mmCreatePage.defaultExpectation.params) {
@@ -1014,22 +1014,22 @@ func (mmCreatePage *mPartitionServiceHandlerMockCreatePage) Expect(ctx context.C
 	return mmCreatePage
 }
 
-// ExpectCtxParam1 sets up expected param ctx for PartitionServiceHandler.CreatePage
-func (mmCreatePage *mPartitionServiceHandlerMockCreatePage) ExpectCtxParam1(ctx context.Context) *mPartitionServiceHandlerMockCreatePage {
+// ExpectCtxParam1 sets up expected param ctx for PartitionServiceClient.CreatePage
+func (mmCreatePage *mPartitionServiceClientMockCreatePage) ExpectCtxParam1(ctx context.Context) *mPartitionServiceClientMockCreatePage {
 	if mmCreatePage.mock.funcCreatePage != nil {
-		mmCreatePage.mock.t.Fatalf("PartitionServiceHandlerMock.CreatePage mock is already set by Set")
+		mmCreatePage.mock.t.Fatalf("PartitionServiceClientMock.CreatePage mock is already set by Set")
 	}
 
 	if mmCreatePage.defaultExpectation == nil {
-		mmCreatePage.defaultExpectation = &PartitionServiceHandlerMockCreatePageExpectation{}
+		mmCreatePage.defaultExpectation = &PartitionServiceClientMockCreatePageExpectation{}
 	}
 
 	if mmCreatePage.defaultExpectation.params != nil {
-		mmCreatePage.mock.t.Fatalf("PartitionServiceHandlerMock.CreatePage mock is already set by Expect")
+		mmCreatePage.mock.t.Fatalf("PartitionServiceClientMock.CreatePage mock is already set by Expect")
 	}
 
 	if mmCreatePage.defaultExpectation.paramPtrs == nil {
-		mmCreatePage.defaultExpectation.paramPtrs = &PartitionServiceHandlerMockCreatePageParamPtrs{}
+		mmCreatePage.defaultExpectation.paramPtrs = &PartitionServiceClientMockCreatePageParamPtrs{}
 	}
 	mmCreatePage.defaultExpectation.paramPtrs.ctx = &ctx
 	mmCreatePage.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -1037,22 +1037,22 @@ func (mmCreatePage *mPartitionServiceHandlerMockCreatePage) ExpectCtxParam1(ctx 
 	return mmCreatePage
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for PartitionServiceHandler.CreatePage
-func (mmCreatePage *mPartitionServiceHandlerMockCreatePage) ExpectPp1Param2(pp1 *connect.Request[v1.CreatePageRequest]) *mPartitionServiceHandlerMockCreatePage {
+// ExpectPp1Param2 sets up expected param pp1 for PartitionServiceClient.CreatePage
+func (mmCreatePage *mPartitionServiceClientMockCreatePage) ExpectPp1Param2(pp1 *connect.Request[v1.CreatePageRequest]) *mPartitionServiceClientMockCreatePage {
 	if mmCreatePage.mock.funcCreatePage != nil {
-		mmCreatePage.mock.t.Fatalf("PartitionServiceHandlerMock.CreatePage mock is already set by Set")
+		mmCreatePage.mock.t.Fatalf("PartitionServiceClientMock.CreatePage mock is already set by Set")
 	}
 
 	if mmCreatePage.defaultExpectation == nil {
-		mmCreatePage.defaultExpectation = &PartitionServiceHandlerMockCreatePageExpectation{}
+		mmCreatePage.defaultExpectation = &PartitionServiceClientMockCreatePageExpectation{}
 	}
 
 	if mmCreatePage.defaultExpectation.params != nil {
-		mmCreatePage.mock.t.Fatalf("PartitionServiceHandlerMock.CreatePage mock is already set by Expect")
+		mmCreatePage.mock.t.Fatalf("PartitionServiceClientMock.CreatePage mock is already set by Expect")
 	}
 
 	if mmCreatePage.defaultExpectation.paramPtrs == nil {
-		mmCreatePage.defaultExpectation.paramPtrs = &PartitionServiceHandlerMockCreatePageParamPtrs{}
+		mmCreatePage.defaultExpectation.paramPtrs = &PartitionServiceClientMockCreatePageParamPtrs{}
 	}
 	mmCreatePage.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmCreatePage.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -1060,10 +1060,10 @@ func (mmCreatePage *mPartitionServiceHandlerMockCreatePage) ExpectPp1Param2(pp1 
 	return mmCreatePage
 }
 
-// Inspect accepts an inspector function that has same arguments as the PartitionServiceHandler.CreatePage
-func (mmCreatePage *mPartitionServiceHandlerMockCreatePage) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.CreatePageRequest])) *mPartitionServiceHandlerMockCreatePage {
+// Inspect accepts an inspector function that has same arguments as the PartitionServiceClient.CreatePage
+func (mmCreatePage *mPartitionServiceClientMockCreatePage) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.CreatePageRequest])) *mPartitionServiceClientMockCreatePage {
 	if mmCreatePage.mock.inspectFuncCreatePage != nil {
-		mmCreatePage.mock.t.Fatalf("Inspect function is already set for PartitionServiceHandlerMock.CreatePage")
+		mmCreatePage.mock.t.Fatalf("Inspect function is already set for PartitionServiceClientMock.CreatePage")
 	}
 
 	mmCreatePage.mock.inspectFuncCreatePage = f
@@ -1071,28 +1071,28 @@ func (mmCreatePage *mPartitionServiceHandlerMockCreatePage) Inspect(f func(ctx c
 	return mmCreatePage
 }
 
-// Return sets up results that will be returned by PartitionServiceHandler.CreatePage
-func (mmCreatePage *mPartitionServiceHandlerMockCreatePage) Return(pp2 *connect.Response[v1.CreatePageResponse], err error) *PartitionServiceHandlerMock {
+// Return sets up results that will be returned by PartitionServiceClient.CreatePage
+func (mmCreatePage *mPartitionServiceClientMockCreatePage) Return(pp2 *connect.Response[v1.CreatePageResponse], err error) *PartitionServiceClientMock {
 	if mmCreatePage.mock.funcCreatePage != nil {
-		mmCreatePage.mock.t.Fatalf("PartitionServiceHandlerMock.CreatePage mock is already set by Set")
+		mmCreatePage.mock.t.Fatalf("PartitionServiceClientMock.CreatePage mock is already set by Set")
 	}
 
 	if mmCreatePage.defaultExpectation == nil {
-		mmCreatePage.defaultExpectation = &PartitionServiceHandlerMockCreatePageExpectation{mock: mmCreatePage.mock}
+		mmCreatePage.defaultExpectation = &PartitionServiceClientMockCreatePageExpectation{mock: mmCreatePage.mock}
 	}
-	mmCreatePage.defaultExpectation.results = &PartitionServiceHandlerMockCreatePageResults{pp2, err}
+	mmCreatePage.defaultExpectation.results = &PartitionServiceClientMockCreatePageResults{pp2, err}
 	mmCreatePage.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmCreatePage.mock
 }
 
-// Set uses given function f to mock the PartitionServiceHandler.CreatePage method
-func (mmCreatePage *mPartitionServiceHandlerMockCreatePage) Set(f func(ctx context.Context, pp1 *connect.Request[v1.CreatePageRequest]) (pp2 *connect.Response[v1.CreatePageResponse], err error)) *PartitionServiceHandlerMock {
+// Set uses given function f to mock the PartitionServiceClient.CreatePage method
+func (mmCreatePage *mPartitionServiceClientMockCreatePage) Set(f func(ctx context.Context, pp1 *connect.Request[v1.CreatePageRequest]) (pp2 *connect.Response[v1.CreatePageResponse], err error)) *PartitionServiceClientMock {
 	if mmCreatePage.defaultExpectation != nil {
-		mmCreatePage.mock.t.Fatalf("Default expectation is already set for the PartitionServiceHandler.CreatePage method")
+		mmCreatePage.mock.t.Fatalf("Default expectation is already set for the PartitionServiceClient.CreatePage method")
 	}
 
 	if len(mmCreatePage.expectations) > 0 {
-		mmCreatePage.mock.t.Fatalf("Some expectations are already set for the PartitionServiceHandler.CreatePage method")
+		mmCreatePage.mock.t.Fatalf("Some expectations are already set for the PartitionServiceClient.CreatePage method")
 	}
 
 	mmCreatePage.mock.funcCreatePage = f
@@ -1100,39 +1100,39 @@ func (mmCreatePage *mPartitionServiceHandlerMockCreatePage) Set(f func(ctx conte
 	return mmCreatePage.mock
 }
 
-// When sets expectation for the PartitionServiceHandler.CreatePage which will trigger the result defined by the following
+// When sets expectation for the PartitionServiceClient.CreatePage which will trigger the result defined by the following
 // Then helper
-func (mmCreatePage *mPartitionServiceHandlerMockCreatePage) When(ctx context.Context, pp1 *connect.Request[v1.CreatePageRequest]) *PartitionServiceHandlerMockCreatePageExpectation {
+func (mmCreatePage *mPartitionServiceClientMockCreatePage) When(ctx context.Context, pp1 *connect.Request[v1.CreatePageRequest]) *PartitionServiceClientMockCreatePageExpectation {
 	if mmCreatePage.mock.funcCreatePage != nil {
-		mmCreatePage.mock.t.Fatalf("PartitionServiceHandlerMock.CreatePage mock is already set by Set")
+		mmCreatePage.mock.t.Fatalf("PartitionServiceClientMock.CreatePage mock is already set by Set")
 	}
 
-	expectation := &PartitionServiceHandlerMockCreatePageExpectation{
+	expectation := &PartitionServiceClientMockCreatePageExpectation{
 		mock:               mmCreatePage.mock,
-		params:             &PartitionServiceHandlerMockCreatePageParams{ctx, pp1},
-		expectationOrigins: PartitionServiceHandlerMockCreatePageExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &PartitionServiceClientMockCreatePageParams{ctx, pp1},
+		expectationOrigins: PartitionServiceClientMockCreatePageExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmCreatePage.expectations = append(mmCreatePage.expectations, expectation)
 	return expectation
 }
 
-// Then sets up PartitionServiceHandler.CreatePage return parameters for the expectation previously defined by the When method
-func (e *PartitionServiceHandlerMockCreatePageExpectation) Then(pp2 *connect.Response[v1.CreatePageResponse], err error) *PartitionServiceHandlerMock {
-	e.results = &PartitionServiceHandlerMockCreatePageResults{pp2, err}
+// Then sets up PartitionServiceClient.CreatePage return parameters for the expectation previously defined by the When method
+func (e *PartitionServiceClientMockCreatePageExpectation) Then(pp2 *connect.Response[v1.CreatePageResponse], err error) *PartitionServiceClientMock {
+	e.results = &PartitionServiceClientMockCreatePageResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times PartitionServiceHandler.CreatePage should be invoked
-func (mmCreatePage *mPartitionServiceHandlerMockCreatePage) Times(n uint64) *mPartitionServiceHandlerMockCreatePage {
+// Times sets number of times PartitionServiceClient.CreatePage should be invoked
+func (mmCreatePage *mPartitionServiceClientMockCreatePage) Times(n uint64) *mPartitionServiceClientMockCreatePage {
 	if n == 0 {
-		mmCreatePage.mock.t.Fatalf("Times of PartitionServiceHandlerMock.CreatePage mock can not be zero")
+		mmCreatePage.mock.t.Fatalf("Times of PartitionServiceClientMock.CreatePage mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmCreatePage.expectedInvocations, n)
 	mmCreatePage.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmCreatePage
 }
 
-func (mmCreatePage *mPartitionServiceHandlerMockCreatePage) invocationsDone() bool {
+func (mmCreatePage *mPartitionServiceClientMockCreatePage) invocationsDone() bool {
 	if len(mmCreatePage.expectations) == 0 && mmCreatePage.defaultExpectation == nil && mmCreatePage.mock.funcCreatePage == nil {
 		return true
 	}
@@ -1143,8 +1143,8 @@ func (mmCreatePage *mPartitionServiceHandlerMockCreatePage) invocationsDone() bo
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// CreatePage implements mm_partitionv1connect.PartitionServiceHandler
-func (mmCreatePage *PartitionServiceHandlerMock) CreatePage(ctx context.Context, pp1 *connect.Request[v1.CreatePageRequest]) (pp2 *connect.Response[v1.CreatePageResponse], err error) {
+// CreatePage implements mm_partitionv1connect.PartitionServiceClient
+func (mmCreatePage *PartitionServiceClientMock) CreatePage(ctx context.Context, pp1 *connect.Request[v1.CreatePageRequest]) (pp2 *connect.Response[v1.CreatePageResponse], err error) {
 	mm_atomic.AddUint64(&mmCreatePage.beforeCreatePageCounter, 1)
 	defer mm_atomic.AddUint64(&mmCreatePage.afterCreatePageCounter, 1)
 
@@ -1154,7 +1154,7 @@ func (mmCreatePage *PartitionServiceHandlerMock) CreatePage(ctx context.Context,
 		mmCreatePage.inspectFuncCreatePage(ctx, pp1)
 	}
 
-	mm_params := PartitionServiceHandlerMockCreatePageParams{ctx, pp1}
+	mm_params := PartitionServiceClientMockCreatePageParams{ctx, pp1}
 
 	// Record call args
 	mmCreatePage.CreatePageMock.mutex.Lock()
@@ -1173,54 +1173,54 @@ func (mmCreatePage *PartitionServiceHandlerMock) CreatePage(ctx context.Context,
 		mm_want := mmCreatePage.CreatePageMock.defaultExpectation.params
 		mm_want_ptrs := mmCreatePage.CreatePageMock.defaultExpectation.paramPtrs
 
-		mm_got := PartitionServiceHandlerMockCreatePageParams{ctx, pp1}
+		mm_got := PartitionServiceClientMockCreatePageParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmCreatePage.t.Errorf("PartitionServiceHandlerMock.CreatePage got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmCreatePage.t.Errorf("PartitionServiceClientMock.CreatePage got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmCreatePage.CreatePageMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmCreatePage.t.Errorf("PartitionServiceHandlerMock.CreatePage got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmCreatePage.t.Errorf("PartitionServiceClientMock.CreatePage got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmCreatePage.CreatePageMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmCreatePage.t.Errorf("PartitionServiceHandlerMock.CreatePage got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmCreatePage.t.Errorf("PartitionServiceClientMock.CreatePage got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmCreatePage.CreatePageMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmCreatePage.CreatePageMock.defaultExpectation.results
 		if mm_results == nil {
-			mmCreatePage.t.Fatal("No results are set for the PartitionServiceHandlerMock.CreatePage")
+			mmCreatePage.t.Fatal("No results are set for the PartitionServiceClientMock.CreatePage")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmCreatePage.funcCreatePage != nil {
 		return mmCreatePage.funcCreatePage(ctx, pp1)
 	}
-	mmCreatePage.t.Fatalf("Unexpected call to PartitionServiceHandlerMock.CreatePage. %v %v", ctx, pp1)
+	mmCreatePage.t.Fatalf("Unexpected call to PartitionServiceClientMock.CreatePage. %v %v", ctx, pp1)
 	return
 }
 
-// CreatePageAfterCounter returns a count of finished PartitionServiceHandlerMock.CreatePage invocations
-func (mmCreatePage *PartitionServiceHandlerMock) CreatePageAfterCounter() uint64 {
+// CreatePageAfterCounter returns a count of finished PartitionServiceClientMock.CreatePage invocations
+func (mmCreatePage *PartitionServiceClientMock) CreatePageAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmCreatePage.afterCreatePageCounter)
 }
 
-// CreatePageBeforeCounter returns a count of PartitionServiceHandlerMock.CreatePage invocations
-func (mmCreatePage *PartitionServiceHandlerMock) CreatePageBeforeCounter() uint64 {
+// CreatePageBeforeCounter returns a count of PartitionServiceClientMock.CreatePage invocations
+func (mmCreatePage *PartitionServiceClientMock) CreatePageBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmCreatePage.beforeCreatePageCounter)
 }
 
-// Calls returns a list of arguments used in each call to PartitionServiceHandlerMock.CreatePage.
+// Calls returns a list of arguments used in each call to PartitionServiceClientMock.CreatePage.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmCreatePage *mPartitionServiceHandlerMockCreatePage) Calls() []*PartitionServiceHandlerMockCreatePageParams {
+func (mmCreatePage *mPartitionServiceClientMockCreatePage) Calls() []*PartitionServiceClientMockCreatePageParams {
 	mmCreatePage.mutex.RLock()
 
-	argCopy := make([]*PartitionServiceHandlerMockCreatePageParams, len(mmCreatePage.callArgs))
+	argCopy := make([]*PartitionServiceClientMockCreatePageParams, len(mmCreatePage.callArgs))
 	copy(argCopy, mmCreatePage.callArgs)
 
 	mmCreatePage.mutex.RUnlock()
@@ -1230,7 +1230,7 @@ func (mmCreatePage *mPartitionServiceHandlerMockCreatePage) Calls() []*Partition
 
 // MinimockCreatePageDone returns true if the count of the CreatePage invocations corresponds
 // the number of defined expectations
-func (m *PartitionServiceHandlerMock) MinimockCreatePageDone() bool {
+func (m *PartitionServiceClientMock) MinimockCreatePageDone() bool {
 	if m.CreatePageMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -1246,10 +1246,10 @@ func (m *PartitionServiceHandlerMock) MinimockCreatePageDone() bool {
 }
 
 // MinimockCreatePageInspect logs each unmet expectation
-func (m *PartitionServiceHandlerMock) MinimockCreatePageInspect() {
+func (m *PartitionServiceClientMock) MinimockCreatePageInspect() {
 	for _, e := range m.CreatePageMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.CreatePage at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.CreatePage at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -1257,66 +1257,66 @@ func (m *PartitionServiceHandlerMock) MinimockCreatePageInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.CreatePageMock.defaultExpectation != nil && afterCreatePageCounter < 1 {
 		if m.CreatePageMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.CreatePage at\n%s", m.CreatePageMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.CreatePage at\n%s", m.CreatePageMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.CreatePage at\n%s with params: %#v", m.CreatePageMock.defaultExpectation.expectationOrigins.origin, *m.CreatePageMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.CreatePage at\n%s with params: %#v", m.CreatePageMock.defaultExpectation.expectationOrigins.origin, *m.CreatePageMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcCreatePage != nil && afterCreatePageCounter < 1 {
-		m.t.Errorf("Expected call to PartitionServiceHandlerMock.CreatePage at\n%s", m.funcCreatePageOrigin)
+		m.t.Errorf("Expected call to PartitionServiceClientMock.CreatePage at\n%s", m.funcCreatePageOrigin)
 	}
 
 	if !m.CreatePageMock.invocationsDone() && afterCreatePageCounter > 0 {
-		m.t.Errorf("Expected %d calls to PartitionServiceHandlerMock.CreatePage at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to PartitionServiceClientMock.CreatePage at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.CreatePageMock.expectedInvocations), m.CreatePageMock.expectedInvocationsOrigin, afterCreatePageCounter)
 	}
 }
 
-type mPartitionServiceHandlerMockCreatePartition struct {
+type mPartitionServiceClientMockCreatePartition struct {
 	optional           bool
-	mock               *PartitionServiceHandlerMock
-	defaultExpectation *PartitionServiceHandlerMockCreatePartitionExpectation
-	expectations       []*PartitionServiceHandlerMockCreatePartitionExpectation
+	mock               *PartitionServiceClientMock
+	defaultExpectation *PartitionServiceClientMockCreatePartitionExpectation
+	expectations       []*PartitionServiceClientMockCreatePartitionExpectation
 
-	callArgs []*PartitionServiceHandlerMockCreatePartitionParams
+	callArgs []*PartitionServiceClientMockCreatePartitionParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// PartitionServiceHandlerMockCreatePartitionExpectation specifies expectation struct of the PartitionServiceHandler.CreatePartition
-type PartitionServiceHandlerMockCreatePartitionExpectation struct {
-	mock               *PartitionServiceHandlerMock
-	params             *PartitionServiceHandlerMockCreatePartitionParams
-	paramPtrs          *PartitionServiceHandlerMockCreatePartitionParamPtrs
-	expectationOrigins PartitionServiceHandlerMockCreatePartitionExpectationOrigins
-	results            *PartitionServiceHandlerMockCreatePartitionResults
+// PartitionServiceClientMockCreatePartitionExpectation specifies expectation struct of the PartitionServiceClient.CreatePartition
+type PartitionServiceClientMockCreatePartitionExpectation struct {
+	mock               *PartitionServiceClientMock
+	params             *PartitionServiceClientMockCreatePartitionParams
+	paramPtrs          *PartitionServiceClientMockCreatePartitionParamPtrs
+	expectationOrigins PartitionServiceClientMockCreatePartitionExpectationOrigins
+	results            *PartitionServiceClientMockCreatePartitionResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// PartitionServiceHandlerMockCreatePartitionParams contains parameters of the PartitionServiceHandler.CreatePartition
-type PartitionServiceHandlerMockCreatePartitionParams struct {
+// PartitionServiceClientMockCreatePartitionParams contains parameters of the PartitionServiceClient.CreatePartition
+type PartitionServiceClientMockCreatePartitionParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.CreatePartitionRequest]
 }
 
-// PartitionServiceHandlerMockCreatePartitionParamPtrs contains pointers to parameters of the PartitionServiceHandler.CreatePartition
-type PartitionServiceHandlerMockCreatePartitionParamPtrs struct {
+// PartitionServiceClientMockCreatePartitionParamPtrs contains pointers to parameters of the PartitionServiceClient.CreatePartition
+type PartitionServiceClientMockCreatePartitionParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.CreatePartitionRequest]
 }
 
-// PartitionServiceHandlerMockCreatePartitionResults contains results of the PartitionServiceHandler.CreatePartition
-type PartitionServiceHandlerMockCreatePartitionResults struct {
+// PartitionServiceClientMockCreatePartitionResults contains results of the PartitionServiceClient.CreatePartition
+type PartitionServiceClientMockCreatePartitionResults struct {
 	pp2 *connect.Response[v1.CreatePartitionResponse]
 	err error
 }
 
-// PartitionServiceHandlerMockCreatePartitionOrigins contains origins of expectations of the PartitionServiceHandler.CreatePartition
-type PartitionServiceHandlerMockCreatePartitionExpectationOrigins struct {
+// PartitionServiceClientMockCreatePartitionOrigins contains origins of expectations of the PartitionServiceClient.CreatePartition
+type PartitionServiceClientMockCreatePartitionExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -1327,26 +1327,26 @@ type PartitionServiceHandlerMockCreatePartitionExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmCreatePartition *mPartitionServiceHandlerMockCreatePartition) Optional() *mPartitionServiceHandlerMockCreatePartition {
+func (mmCreatePartition *mPartitionServiceClientMockCreatePartition) Optional() *mPartitionServiceClientMockCreatePartition {
 	mmCreatePartition.optional = true
 	return mmCreatePartition
 }
 
-// Expect sets up expected params for PartitionServiceHandler.CreatePartition
-func (mmCreatePartition *mPartitionServiceHandlerMockCreatePartition) Expect(ctx context.Context, pp1 *connect.Request[v1.CreatePartitionRequest]) *mPartitionServiceHandlerMockCreatePartition {
+// Expect sets up expected params for PartitionServiceClient.CreatePartition
+func (mmCreatePartition *mPartitionServiceClientMockCreatePartition) Expect(ctx context.Context, pp1 *connect.Request[v1.CreatePartitionRequest]) *mPartitionServiceClientMockCreatePartition {
 	if mmCreatePartition.mock.funcCreatePartition != nil {
-		mmCreatePartition.mock.t.Fatalf("PartitionServiceHandlerMock.CreatePartition mock is already set by Set")
+		mmCreatePartition.mock.t.Fatalf("PartitionServiceClientMock.CreatePartition mock is already set by Set")
 	}
 
 	if mmCreatePartition.defaultExpectation == nil {
-		mmCreatePartition.defaultExpectation = &PartitionServiceHandlerMockCreatePartitionExpectation{}
+		mmCreatePartition.defaultExpectation = &PartitionServiceClientMockCreatePartitionExpectation{}
 	}
 
 	if mmCreatePartition.defaultExpectation.paramPtrs != nil {
-		mmCreatePartition.mock.t.Fatalf("PartitionServiceHandlerMock.CreatePartition mock is already set by ExpectParams functions")
+		mmCreatePartition.mock.t.Fatalf("PartitionServiceClientMock.CreatePartition mock is already set by ExpectParams functions")
 	}
 
-	mmCreatePartition.defaultExpectation.params = &PartitionServiceHandlerMockCreatePartitionParams{ctx, pp1}
+	mmCreatePartition.defaultExpectation.params = &PartitionServiceClientMockCreatePartitionParams{ctx, pp1}
 	mmCreatePartition.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmCreatePartition.expectations {
 		if minimock.Equal(e.params, mmCreatePartition.defaultExpectation.params) {
@@ -1357,22 +1357,22 @@ func (mmCreatePartition *mPartitionServiceHandlerMockCreatePartition) Expect(ctx
 	return mmCreatePartition
 }
 
-// ExpectCtxParam1 sets up expected param ctx for PartitionServiceHandler.CreatePartition
-func (mmCreatePartition *mPartitionServiceHandlerMockCreatePartition) ExpectCtxParam1(ctx context.Context) *mPartitionServiceHandlerMockCreatePartition {
+// ExpectCtxParam1 sets up expected param ctx for PartitionServiceClient.CreatePartition
+func (mmCreatePartition *mPartitionServiceClientMockCreatePartition) ExpectCtxParam1(ctx context.Context) *mPartitionServiceClientMockCreatePartition {
 	if mmCreatePartition.mock.funcCreatePartition != nil {
-		mmCreatePartition.mock.t.Fatalf("PartitionServiceHandlerMock.CreatePartition mock is already set by Set")
+		mmCreatePartition.mock.t.Fatalf("PartitionServiceClientMock.CreatePartition mock is already set by Set")
 	}
 
 	if mmCreatePartition.defaultExpectation == nil {
-		mmCreatePartition.defaultExpectation = &PartitionServiceHandlerMockCreatePartitionExpectation{}
+		mmCreatePartition.defaultExpectation = &PartitionServiceClientMockCreatePartitionExpectation{}
 	}
 
 	if mmCreatePartition.defaultExpectation.params != nil {
-		mmCreatePartition.mock.t.Fatalf("PartitionServiceHandlerMock.CreatePartition mock is already set by Expect")
+		mmCreatePartition.mock.t.Fatalf("PartitionServiceClientMock.CreatePartition mock is already set by Expect")
 	}
 
 	if mmCreatePartition.defaultExpectation.paramPtrs == nil {
-		mmCreatePartition.defaultExpectation.paramPtrs = &PartitionServiceHandlerMockCreatePartitionParamPtrs{}
+		mmCreatePartition.defaultExpectation.paramPtrs = &PartitionServiceClientMockCreatePartitionParamPtrs{}
 	}
 	mmCreatePartition.defaultExpectation.paramPtrs.ctx = &ctx
 	mmCreatePartition.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -1380,22 +1380,22 @@ func (mmCreatePartition *mPartitionServiceHandlerMockCreatePartition) ExpectCtxP
 	return mmCreatePartition
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for PartitionServiceHandler.CreatePartition
-func (mmCreatePartition *mPartitionServiceHandlerMockCreatePartition) ExpectPp1Param2(pp1 *connect.Request[v1.CreatePartitionRequest]) *mPartitionServiceHandlerMockCreatePartition {
+// ExpectPp1Param2 sets up expected param pp1 for PartitionServiceClient.CreatePartition
+func (mmCreatePartition *mPartitionServiceClientMockCreatePartition) ExpectPp1Param2(pp1 *connect.Request[v1.CreatePartitionRequest]) *mPartitionServiceClientMockCreatePartition {
 	if mmCreatePartition.mock.funcCreatePartition != nil {
-		mmCreatePartition.mock.t.Fatalf("PartitionServiceHandlerMock.CreatePartition mock is already set by Set")
+		mmCreatePartition.mock.t.Fatalf("PartitionServiceClientMock.CreatePartition mock is already set by Set")
 	}
 
 	if mmCreatePartition.defaultExpectation == nil {
-		mmCreatePartition.defaultExpectation = &PartitionServiceHandlerMockCreatePartitionExpectation{}
+		mmCreatePartition.defaultExpectation = &PartitionServiceClientMockCreatePartitionExpectation{}
 	}
 
 	if mmCreatePartition.defaultExpectation.params != nil {
-		mmCreatePartition.mock.t.Fatalf("PartitionServiceHandlerMock.CreatePartition mock is already set by Expect")
+		mmCreatePartition.mock.t.Fatalf("PartitionServiceClientMock.CreatePartition mock is already set by Expect")
 	}
 
 	if mmCreatePartition.defaultExpectation.paramPtrs == nil {
-		mmCreatePartition.defaultExpectation.paramPtrs = &PartitionServiceHandlerMockCreatePartitionParamPtrs{}
+		mmCreatePartition.defaultExpectation.paramPtrs = &PartitionServiceClientMockCreatePartitionParamPtrs{}
 	}
 	mmCreatePartition.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmCreatePartition.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -1403,10 +1403,10 @@ func (mmCreatePartition *mPartitionServiceHandlerMockCreatePartition) ExpectPp1P
 	return mmCreatePartition
 }
 
-// Inspect accepts an inspector function that has same arguments as the PartitionServiceHandler.CreatePartition
-func (mmCreatePartition *mPartitionServiceHandlerMockCreatePartition) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.CreatePartitionRequest])) *mPartitionServiceHandlerMockCreatePartition {
+// Inspect accepts an inspector function that has same arguments as the PartitionServiceClient.CreatePartition
+func (mmCreatePartition *mPartitionServiceClientMockCreatePartition) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.CreatePartitionRequest])) *mPartitionServiceClientMockCreatePartition {
 	if mmCreatePartition.mock.inspectFuncCreatePartition != nil {
-		mmCreatePartition.mock.t.Fatalf("Inspect function is already set for PartitionServiceHandlerMock.CreatePartition")
+		mmCreatePartition.mock.t.Fatalf("Inspect function is already set for PartitionServiceClientMock.CreatePartition")
 	}
 
 	mmCreatePartition.mock.inspectFuncCreatePartition = f
@@ -1414,28 +1414,28 @@ func (mmCreatePartition *mPartitionServiceHandlerMockCreatePartition) Inspect(f 
 	return mmCreatePartition
 }
 
-// Return sets up results that will be returned by PartitionServiceHandler.CreatePartition
-func (mmCreatePartition *mPartitionServiceHandlerMockCreatePartition) Return(pp2 *connect.Response[v1.CreatePartitionResponse], err error) *PartitionServiceHandlerMock {
+// Return sets up results that will be returned by PartitionServiceClient.CreatePartition
+func (mmCreatePartition *mPartitionServiceClientMockCreatePartition) Return(pp2 *connect.Response[v1.CreatePartitionResponse], err error) *PartitionServiceClientMock {
 	if mmCreatePartition.mock.funcCreatePartition != nil {
-		mmCreatePartition.mock.t.Fatalf("PartitionServiceHandlerMock.CreatePartition mock is already set by Set")
+		mmCreatePartition.mock.t.Fatalf("PartitionServiceClientMock.CreatePartition mock is already set by Set")
 	}
 
 	if mmCreatePartition.defaultExpectation == nil {
-		mmCreatePartition.defaultExpectation = &PartitionServiceHandlerMockCreatePartitionExpectation{mock: mmCreatePartition.mock}
+		mmCreatePartition.defaultExpectation = &PartitionServiceClientMockCreatePartitionExpectation{mock: mmCreatePartition.mock}
 	}
-	mmCreatePartition.defaultExpectation.results = &PartitionServiceHandlerMockCreatePartitionResults{pp2, err}
+	mmCreatePartition.defaultExpectation.results = &PartitionServiceClientMockCreatePartitionResults{pp2, err}
 	mmCreatePartition.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmCreatePartition.mock
 }
 
-// Set uses given function f to mock the PartitionServiceHandler.CreatePartition method
-func (mmCreatePartition *mPartitionServiceHandlerMockCreatePartition) Set(f func(ctx context.Context, pp1 *connect.Request[v1.CreatePartitionRequest]) (pp2 *connect.Response[v1.CreatePartitionResponse], err error)) *PartitionServiceHandlerMock {
+// Set uses given function f to mock the PartitionServiceClient.CreatePartition method
+func (mmCreatePartition *mPartitionServiceClientMockCreatePartition) Set(f func(ctx context.Context, pp1 *connect.Request[v1.CreatePartitionRequest]) (pp2 *connect.Response[v1.CreatePartitionResponse], err error)) *PartitionServiceClientMock {
 	if mmCreatePartition.defaultExpectation != nil {
-		mmCreatePartition.mock.t.Fatalf("Default expectation is already set for the PartitionServiceHandler.CreatePartition method")
+		mmCreatePartition.mock.t.Fatalf("Default expectation is already set for the PartitionServiceClient.CreatePartition method")
 	}
 
 	if len(mmCreatePartition.expectations) > 0 {
-		mmCreatePartition.mock.t.Fatalf("Some expectations are already set for the PartitionServiceHandler.CreatePartition method")
+		mmCreatePartition.mock.t.Fatalf("Some expectations are already set for the PartitionServiceClient.CreatePartition method")
 	}
 
 	mmCreatePartition.mock.funcCreatePartition = f
@@ -1443,39 +1443,39 @@ func (mmCreatePartition *mPartitionServiceHandlerMockCreatePartition) Set(f func
 	return mmCreatePartition.mock
 }
 
-// When sets expectation for the PartitionServiceHandler.CreatePartition which will trigger the result defined by the following
+// When sets expectation for the PartitionServiceClient.CreatePartition which will trigger the result defined by the following
 // Then helper
-func (mmCreatePartition *mPartitionServiceHandlerMockCreatePartition) When(ctx context.Context, pp1 *connect.Request[v1.CreatePartitionRequest]) *PartitionServiceHandlerMockCreatePartitionExpectation {
+func (mmCreatePartition *mPartitionServiceClientMockCreatePartition) When(ctx context.Context, pp1 *connect.Request[v1.CreatePartitionRequest]) *PartitionServiceClientMockCreatePartitionExpectation {
 	if mmCreatePartition.mock.funcCreatePartition != nil {
-		mmCreatePartition.mock.t.Fatalf("PartitionServiceHandlerMock.CreatePartition mock is already set by Set")
+		mmCreatePartition.mock.t.Fatalf("PartitionServiceClientMock.CreatePartition mock is already set by Set")
 	}
 
-	expectation := &PartitionServiceHandlerMockCreatePartitionExpectation{
+	expectation := &PartitionServiceClientMockCreatePartitionExpectation{
 		mock:               mmCreatePartition.mock,
-		params:             &PartitionServiceHandlerMockCreatePartitionParams{ctx, pp1},
-		expectationOrigins: PartitionServiceHandlerMockCreatePartitionExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &PartitionServiceClientMockCreatePartitionParams{ctx, pp1},
+		expectationOrigins: PartitionServiceClientMockCreatePartitionExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmCreatePartition.expectations = append(mmCreatePartition.expectations, expectation)
 	return expectation
 }
 
-// Then sets up PartitionServiceHandler.CreatePartition return parameters for the expectation previously defined by the When method
-func (e *PartitionServiceHandlerMockCreatePartitionExpectation) Then(pp2 *connect.Response[v1.CreatePartitionResponse], err error) *PartitionServiceHandlerMock {
-	e.results = &PartitionServiceHandlerMockCreatePartitionResults{pp2, err}
+// Then sets up PartitionServiceClient.CreatePartition return parameters for the expectation previously defined by the When method
+func (e *PartitionServiceClientMockCreatePartitionExpectation) Then(pp2 *connect.Response[v1.CreatePartitionResponse], err error) *PartitionServiceClientMock {
+	e.results = &PartitionServiceClientMockCreatePartitionResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times PartitionServiceHandler.CreatePartition should be invoked
-func (mmCreatePartition *mPartitionServiceHandlerMockCreatePartition) Times(n uint64) *mPartitionServiceHandlerMockCreatePartition {
+// Times sets number of times PartitionServiceClient.CreatePartition should be invoked
+func (mmCreatePartition *mPartitionServiceClientMockCreatePartition) Times(n uint64) *mPartitionServiceClientMockCreatePartition {
 	if n == 0 {
-		mmCreatePartition.mock.t.Fatalf("Times of PartitionServiceHandlerMock.CreatePartition mock can not be zero")
+		mmCreatePartition.mock.t.Fatalf("Times of PartitionServiceClientMock.CreatePartition mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmCreatePartition.expectedInvocations, n)
 	mmCreatePartition.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmCreatePartition
 }
 
-func (mmCreatePartition *mPartitionServiceHandlerMockCreatePartition) invocationsDone() bool {
+func (mmCreatePartition *mPartitionServiceClientMockCreatePartition) invocationsDone() bool {
 	if len(mmCreatePartition.expectations) == 0 && mmCreatePartition.defaultExpectation == nil && mmCreatePartition.mock.funcCreatePartition == nil {
 		return true
 	}
@@ -1486,8 +1486,8 @@ func (mmCreatePartition *mPartitionServiceHandlerMockCreatePartition) invocation
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// CreatePartition implements mm_partitionv1connect.PartitionServiceHandler
-func (mmCreatePartition *PartitionServiceHandlerMock) CreatePartition(ctx context.Context, pp1 *connect.Request[v1.CreatePartitionRequest]) (pp2 *connect.Response[v1.CreatePartitionResponse], err error) {
+// CreatePartition implements mm_partitionv1connect.PartitionServiceClient
+func (mmCreatePartition *PartitionServiceClientMock) CreatePartition(ctx context.Context, pp1 *connect.Request[v1.CreatePartitionRequest]) (pp2 *connect.Response[v1.CreatePartitionResponse], err error) {
 	mm_atomic.AddUint64(&mmCreatePartition.beforeCreatePartitionCounter, 1)
 	defer mm_atomic.AddUint64(&mmCreatePartition.afterCreatePartitionCounter, 1)
 
@@ -1497,7 +1497,7 @@ func (mmCreatePartition *PartitionServiceHandlerMock) CreatePartition(ctx contex
 		mmCreatePartition.inspectFuncCreatePartition(ctx, pp1)
 	}
 
-	mm_params := PartitionServiceHandlerMockCreatePartitionParams{ctx, pp1}
+	mm_params := PartitionServiceClientMockCreatePartitionParams{ctx, pp1}
 
 	// Record call args
 	mmCreatePartition.CreatePartitionMock.mutex.Lock()
@@ -1516,54 +1516,54 @@ func (mmCreatePartition *PartitionServiceHandlerMock) CreatePartition(ctx contex
 		mm_want := mmCreatePartition.CreatePartitionMock.defaultExpectation.params
 		mm_want_ptrs := mmCreatePartition.CreatePartitionMock.defaultExpectation.paramPtrs
 
-		mm_got := PartitionServiceHandlerMockCreatePartitionParams{ctx, pp1}
+		mm_got := PartitionServiceClientMockCreatePartitionParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmCreatePartition.t.Errorf("PartitionServiceHandlerMock.CreatePartition got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmCreatePartition.t.Errorf("PartitionServiceClientMock.CreatePartition got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmCreatePartition.CreatePartitionMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmCreatePartition.t.Errorf("PartitionServiceHandlerMock.CreatePartition got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmCreatePartition.t.Errorf("PartitionServiceClientMock.CreatePartition got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmCreatePartition.CreatePartitionMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmCreatePartition.t.Errorf("PartitionServiceHandlerMock.CreatePartition got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmCreatePartition.t.Errorf("PartitionServiceClientMock.CreatePartition got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmCreatePartition.CreatePartitionMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmCreatePartition.CreatePartitionMock.defaultExpectation.results
 		if mm_results == nil {
-			mmCreatePartition.t.Fatal("No results are set for the PartitionServiceHandlerMock.CreatePartition")
+			mmCreatePartition.t.Fatal("No results are set for the PartitionServiceClientMock.CreatePartition")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmCreatePartition.funcCreatePartition != nil {
 		return mmCreatePartition.funcCreatePartition(ctx, pp1)
 	}
-	mmCreatePartition.t.Fatalf("Unexpected call to PartitionServiceHandlerMock.CreatePartition. %v %v", ctx, pp1)
+	mmCreatePartition.t.Fatalf("Unexpected call to PartitionServiceClientMock.CreatePartition. %v %v", ctx, pp1)
 	return
 }
 
-// CreatePartitionAfterCounter returns a count of finished PartitionServiceHandlerMock.CreatePartition invocations
-func (mmCreatePartition *PartitionServiceHandlerMock) CreatePartitionAfterCounter() uint64 {
+// CreatePartitionAfterCounter returns a count of finished PartitionServiceClientMock.CreatePartition invocations
+func (mmCreatePartition *PartitionServiceClientMock) CreatePartitionAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmCreatePartition.afterCreatePartitionCounter)
 }
 
-// CreatePartitionBeforeCounter returns a count of PartitionServiceHandlerMock.CreatePartition invocations
-func (mmCreatePartition *PartitionServiceHandlerMock) CreatePartitionBeforeCounter() uint64 {
+// CreatePartitionBeforeCounter returns a count of PartitionServiceClientMock.CreatePartition invocations
+func (mmCreatePartition *PartitionServiceClientMock) CreatePartitionBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmCreatePartition.beforeCreatePartitionCounter)
 }
 
-// Calls returns a list of arguments used in each call to PartitionServiceHandlerMock.CreatePartition.
+// Calls returns a list of arguments used in each call to PartitionServiceClientMock.CreatePartition.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmCreatePartition *mPartitionServiceHandlerMockCreatePartition) Calls() []*PartitionServiceHandlerMockCreatePartitionParams {
+func (mmCreatePartition *mPartitionServiceClientMockCreatePartition) Calls() []*PartitionServiceClientMockCreatePartitionParams {
 	mmCreatePartition.mutex.RLock()
 
-	argCopy := make([]*PartitionServiceHandlerMockCreatePartitionParams, len(mmCreatePartition.callArgs))
+	argCopy := make([]*PartitionServiceClientMockCreatePartitionParams, len(mmCreatePartition.callArgs))
 	copy(argCopy, mmCreatePartition.callArgs)
 
 	mmCreatePartition.mutex.RUnlock()
@@ -1573,7 +1573,7 @@ func (mmCreatePartition *mPartitionServiceHandlerMockCreatePartition) Calls() []
 
 // MinimockCreatePartitionDone returns true if the count of the CreatePartition invocations corresponds
 // the number of defined expectations
-func (m *PartitionServiceHandlerMock) MinimockCreatePartitionDone() bool {
+func (m *PartitionServiceClientMock) MinimockCreatePartitionDone() bool {
 	if m.CreatePartitionMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -1589,10 +1589,10 @@ func (m *PartitionServiceHandlerMock) MinimockCreatePartitionDone() bool {
 }
 
 // MinimockCreatePartitionInspect logs each unmet expectation
-func (m *PartitionServiceHandlerMock) MinimockCreatePartitionInspect() {
+func (m *PartitionServiceClientMock) MinimockCreatePartitionInspect() {
 	for _, e := range m.CreatePartitionMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.CreatePartition at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.CreatePartition at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -1600,66 +1600,66 @@ func (m *PartitionServiceHandlerMock) MinimockCreatePartitionInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.CreatePartitionMock.defaultExpectation != nil && afterCreatePartitionCounter < 1 {
 		if m.CreatePartitionMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.CreatePartition at\n%s", m.CreatePartitionMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.CreatePartition at\n%s", m.CreatePartitionMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.CreatePartition at\n%s with params: %#v", m.CreatePartitionMock.defaultExpectation.expectationOrigins.origin, *m.CreatePartitionMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.CreatePartition at\n%s with params: %#v", m.CreatePartitionMock.defaultExpectation.expectationOrigins.origin, *m.CreatePartitionMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcCreatePartition != nil && afterCreatePartitionCounter < 1 {
-		m.t.Errorf("Expected call to PartitionServiceHandlerMock.CreatePartition at\n%s", m.funcCreatePartitionOrigin)
+		m.t.Errorf("Expected call to PartitionServiceClientMock.CreatePartition at\n%s", m.funcCreatePartitionOrigin)
 	}
 
 	if !m.CreatePartitionMock.invocationsDone() && afterCreatePartitionCounter > 0 {
-		m.t.Errorf("Expected %d calls to PartitionServiceHandlerMock.CreatePartition at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to PartitionServiceClientMock.CreatePartition at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.CreatePartitionMock.expectedInvocations), m.CreatePartitionMock.expectedInvocationsOrigin, afterCreatePartitionCounter)
 	}
 }
 
-type mPartitionServiceHandlerMockCreatePartitionRole struct {
+type mPartitionServiceClientMockCreatePartitionRole struct {
 	optional           bool
-	mock               *PartitionServiceHandlerMock
-	defaultExpectation *PartitionServiceHandlerMockCreatePartitionRoleExpectation
-	expectations       []*PartitionServiceHandlerMockCreatePartitionRoleExpectation
+	mock               *PartitionServiceClientMock
+	defaultExpectation *PartitionServiceClientMockCreatePartitionRoleExpectation
+	expectations       []*PartitionServiceClientMockCreatePartitionRoleExpectation
 
-	callArgs []*PartitionServiceHandlerMockCreatePartitionRoleParams
+	callArgs []*PartitionServiceClientMockCreatePartitionRoleParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// PartitionServiceHandlerMockCreatePartitionRoleExpectation specifies expectation struct of the PartitionServiceHandler.CreatePartitionRole
-type PartitionServiceHandlerMockCreatePartitionRoleExpectation struct {
-	mock               *PartitionServiceHandlerMock
-	params             *PartitionServiceHandlerMockCreatePartitionRoleParams
-	paramPtrs          *PartitionServiceHandlerMockCreatePartitionRoleParamPtrs
-	expectationOrigins PartitionServiceHandlerMockCreatePartitionRoleExpectationOrigins
-	results            *PartitionServiceHandlerMockCreatePartitionRoleResults
+// PartitionServiceClientMockCreatePartitionRoleExpectation specifies expectation struct of the PartitionServiceClient.CreatePartitionRole
+type PartitionServiceClientMockCreatePartitionRoleExpectation struct {
+	mock               *PartitionServiceClientMock
+	params             *PartitionServiceClientMockCreatePartitionRoleParams
+	paramPtrs          *PartitionServiceClientMockCreatePartitionRoleParamPtrs
+	expectationOrigins PartitionServiceClientMockCreatePartitionRoleExpectationOrigins
+	results            *PartitionServiceClientMockCreatePartitionRoleResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// PartitionServiceHandlerMockCreatePartitionRoleParams contains parameters of the PartitionServiceHandler.CreatePartitionRole
-type PartitionServiceHandlerMockCreatePartitionRoleParams struct {
+// PartitionServiceClientMockCreatePartitionRoleParams contains parameters of the PartitionServiceClient.CreatePartitionRole
+type PartitionServiceClientMockCreatePartitionRoleParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.CreatePartitionRoleRequest]
 }
 
-// PartitionServiceHandlerMockCreatePartitionRoleParamPtrs contains pointers to parameters of the PartitionServiceHandler.CreatePartitionRole
-type PartitionServiceHandlerMockCreatePartitionRoleParamPtrs struct {
+// PartitionServiceClientMockCreatePartitionRoleParamPtrs contains pointers to parameters of the PartitionServiceClient.CreatePartitionRole
+type PartitionServiceClientMockCreatePartitionRoleParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.CreatePartitionRoleRequest]
 }
 
-// PartitionServiceHandlerMockCreatePartitionRoleResults contains results of the PartitionServiceHandler.CreatePartitionRole
-type PartitionServiceHandlerMockCreatePartitionRoleResults struct {
+// PartitionServiceClientMockCreatePartitionRoleResults contains results of the PartitionServiceClient.CreatePartitionRole
+type PartitionServiceClientMockCreatePartitionRoleResults struct {
 	pp2 *connect.Response[v1.CreatePartitionRoleResponse]
 	err error
 }
 
-// PartitionServiceHandlerMockCreatePartitionRoleOrigins contains origins of expectations of the PartitionServiceHandler.CreatePartitionRole
-type PartitionServiceHandlerMockCreatePartitionRoleExpectationOrigins struct {
+// PartitionServiceClientMockCreatePartitionRoleOrigins contains origins of expectations of the PartitionServiceClient.CreatePartitionRole
+type PartitionServiceClientMockCreatePartitionRoleExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -1670,26 +1670,26 @@ type PartitionServiceHandlerMockCreatePartitionRoleExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmCreatePartitionRole *mPartitionServiceHandlerMockCreatePartitionRole) Optional() *mPartitionServiceHandlerMockCreatePartitionRole {
+func (mmCreatePartitionRole *mPartitionServiceClientMockCreatePartitionRole) Optional() *mPartitionServiceClientMockCreatePartitionRole {
 	mmCreatePartitionRole.optional = true
 	return mmCreatePartitionRole
 }
 
-// Expect sets up expected params for PartitionServiceHandler.CreatePartitionRole
-func (mmCreatePartitionRole *mPartitionServiceHandlerMockCreatePartitionRole) Expect(ctx context.Context, pp1 *connect.Request[v1.CreatePartitionRoleRequest]) *mPartitionServiceHandlerMockCreatePartitionRole {
+// Expect sets up expected params for PartitionServiceClient.CreatePartitionRole
+func (mmCreatePartitionRole *mPartitionServiceClientMockCreatePartitionRole) Expect(ctx context.Context, pp1 *connect.Request[v1.CreatePartitionRoleRequest]) *mPartitionServiceClientMockCreatePartitionRole {
 	if mmCreatePartitionRole.mock.funcCreatePartitionRole != nil {
-		mmCreatePartitionRole.mock.t.Fatalf("PartitionServiceHandlerMock.CreatePartitionRole mock is already set by Set")
+		mmCreatePartitionRole.mock.t.Fatalf("PartitionServiceClientMock.CreatePartitionRole mock is already set by Set")
 	}
 
 	if mmCreatePartitionRole.defaultExpectation == nil {
-		mmCreatePartitionRole.defaultExpectation = &PartitionServiceHandlerMockCreatePartitionRoleExpectation{}
+		mmCreatePartitionRole.defaultExpectation = &PartitionServiceClientMockCreatePartitionRoleExpectation{}
 	}
 
 	if mmCreatePartitionRole.defaultExpectation.paramPtrs != nil {
-		mmCreatePartitionRole.mock.t.Fatalf("PartitionServiceHandlerMock.CreatePartitionRole mock is already set by ExpectParams functions")
+		mmCreatePartitionRole.mock.t.Fatalf("PartitionServiceClientMock.CreatePartitionRole mock is already set by ExpectParams functions")
 	}
 
-	mmCreatePartitionRole.defaultExpectation.params = &PartitionServiceHandlerMockCreatePartitionRoleParams{ctx, pp1}
+	mmCreatePartitionRole.defaultExpectation.params = &PartitionServiceClientMockCreatePartitionRoleParams{ctx, pp1}
 	mmCreatePartitionRole.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmCreatePartitionRole.expectations {
 		if minimock.Equal(e.params, mmCreatePartitionRole.defaultExpectation.params) {
@@ -1700,22 +1700,22 @@ func (mmCreatePartitionRole *mPartitionServiceHandlerMockCreatePartitionRole) Ex
 	return mmCreatePartitionRole
 }
 
-// ExpectCtxParam1 sets up expected param ctx for PartitionServiceHandler.CreatePartitionRole
-func (mmCreatePartitionRole *mPartitionServiceHandlerMockCreatePartitionRole) ExpectCtxParam1(ctx context.Context) *mPartitionServiceHandlerMockCreatePartitionRole {
+// ExpectCtxParam1 sets up expected param ctx for PartitionServiceClient.CreatePartitionRole
+func (mmCreatePartitionRole *mPartitionServiceClientMockCreatePartitionRole) ExpectCtxParam1(ctx context.Context) *mPartitionServiceClientMockCreatePartitionRole {
 	if mmCreatePartitionRole.mock.funcCreatePartitionRole != nil {
-		mmCreatePartitionRole.mock.t.Fatalf("PartitionServiceHandlerMock.CreatePartitionRole mock is already set by Set")
+		mmCreatePartitionRole.mock.t.Fatalf("PartitionServiceClientMock.CreatePartitionRole mock is already set by Set")
 	}
 
 	if mmCreatePartitionRole.defaultExpectation == nil {
-		mmCreatePartitionRole.defaultExpectation = &PartitionServiceHandlerMockCreatePartitionRoleExpectation{}
+		mmCreatePartitionRole.defaultExpectation = &PartitionServiceClientMockCreatePartitionRoleExpectation{}
 	}
 
 	if mmCreatePartitionRole.defaultExpectation.params != nil {
-		mmCreatePartitionRole.mock.t.Fatalf("PartitionServiceHandlerMock.CreatePartitionRole mock is already set by Expect")
+		mmCreatePartitionRole.mock.t.Fatalf("PartitionServiceClientMock.CreatePartitionRole mock is already set by Expect")
 	}
 
 	if mmCreatePartitionRole.defaultExpectation.paramPtrs == nil {
-		mmCreatePartitionRole.defaultExpectation.paramPtrs = &PartitionServiceHandlerMockCreatePartitionRoleParamPtrs{}
+		mmCreatePartitionRole.defaultExpectation.paramPtrs = &PartitionServiceClientMockCreatePartitionRoleParamPtrs{}
 	}
 	mmCreatePartitionRole.defaultExpectation.paramPtrs.ctx = &ctx
 	mmCreatePartitionRole.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -1723,22 +1723,22 @@ func (mmCreatePartitionRole *mPartitionServiceHandlerMockCreatePartitionRole) Ex
 	return mmCreatePartitionRole
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for PartitionServiceHandler.CreatePartitionRole
-func (mmCreatePartitionRole *mPartitionServiceHandlerMockCreatePartitionRole) ExpectPp1Param2(pp1 *connect.Request[v1.CreatePartitionRoleRequest]) *mPartitionServiceHandlerMockCreatePartitionRole {
+// ExpectPp1Param2 sets up expected param pp1 for PartitionServiceClient.CreatePartitionRole
+func (mmCreatePartitionRole *mPartitionServiceClientMockCreatePartitionRole) ExpectPp1Param2(pp1 *connect.Request[v1.CreatePartitionRoleRequest]) *mPartitionServiceClientMockCreatePartitionRole {
 	if mmCreatePartitionRole.mock.funcCreatePartitionRole != nil {
-		mmCreatePartitionRole.mock.t.Fatalf("PartitionServiceHandlerMock.CreatePartitionRole mock is already set by Set")
+		mmCreatePartitionRole.mock.t.Fatalf("PartitionServiceClientMock.CreatePartitionRole mock is already set by Set")
 	}
 
 	if mmCreatePartitionRole.defaultExpectation == nil {
-		mmCreatePartitionRole.defaultExpectation = &PartitionServiceHandlerMockCreatePartitionRoleExpectation{}
+		mmCreatePartitionRole.defaultExpectation = &PartitionServiceClientMockCreatePartitionRoleExpectation{}
 	}
 
 	if mmCreatePartitionRole.defaultExpectation.params != nil {
-		mmCreatePartitionRole.mock.t.Fatalf("PartitionServiceHandlerMock.CreatePartitionRole mock is already set by Expect")
+		mmCreatePartitionRole.mock.t.Fatalf("PartitionServiceClientMock.CreatePartitionRole mock is already set by Expect")
 	}
 
 	if mmCreatePartitionRole.defaultExpectation.paramPtrs == nil {
-		mmCreatePartitionRole.defaultExpectation.paramPtrs = &PartitionServiceHandlerMockCreatePartitionRoleParamPtrs{}
+		mmCreatePartitionRole.defaultExpectation.paramPtrs = &PartitionServiceClientMockCreatePartitionRoleParamPtrs{}
 	}
 	mmCreatePartitionRole.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmCreatePartitionRole.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -1746,10 +1746,10 @@ func (mmCreatePartitionRole *mPartitionServiceHandlerMockCreatePartitionRole) Ex
 	return mmCreatePartitionRole
 }
 
-// Inspect accepts an inspector function that has same arguments as the PartitionServiceHandler.CreatePartitionRole
-func (mmCreatePartitionRole *mPartitionServiceHandlerMockCreatePartitionRole) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.CreatePartitionRoleRequest])) *mPartitionServiceHandlerMockCreatePartitionRole {
+// Inspect accepts an inspector function that has same arguments as the PartitionServiceClient.CreatePartitionRole
+func (mmCreatePartitionRole *mPartitionServiceClientMockCreatePartitionRole) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.CreatePartitionRoleRequest])) *mPartitionServiceClientMockCreatePartitionRole {
 	if mmCreatePartitionRole.mock.inspectFuncCreatePartitionRole != nil {
-		mmCreatePartitionRole.mock.t.Fatalf("Inspect function is already set for PartitionServiceHandlerMock.CreatePartitionRole")
+		mmCreatePartitionRole.mock.t.Fatalf("Inspect function is already set for PartitionServiceClientMock.CreatePartitionRole")
 	}
 
 	mmCreatePartitionRole.mock.inspectFuncCreatePartitionRole = f
@@ -1757,28 +1757,28 @@ func (mmCreatePartitionRole *mPartitionServiceHandlerMockCreatePartitionRole) In
 	return mmCreatePartitionRole
 }
 
-// Return sets up results that will be returned by PartitionServiceHandler.CreatePartitionRole
-func (mmCreatePartitionRole *mPartitionServiceHandlerMockCreatePartitionRole) Return(pp2 *connect.Response[v1.CreatePartitionRoleResponse], err error) *PartitionServiceHandlerMock {
+// Return sets up results that will be returned by PartitionServiceClient.CreatePartitionRole
+func (mmCreatePartitionRole *mPartitionServiceClientMockCreatePartitionRole) Return(pp2 *connect.Response[v1.CreatePartitionRoleResponse], err error) *PartitionServiceClientMock {
 	if mmCreatePartitionRole.mock.funcCreatePartitionRole != nil {
-		mmCreatePartitionRole.mock.t.Fatalf("PartitionServiceHandlerMock.CreatePartitionRole mock is already set by Set")
+		mmCreatePartitionRole.mock.t.Fatalf("PartitionServiceClientMock.CreatePartitionRole mock is already set by Set")
 	}
 
 	if mmCreatePartitionRole.defaultExpectation == nil {
-		mmCreatePartitionRole.defaultExpectation = &PartitionServiceHandlerMockCreatePartitionRoleExpectation{mock: mmCreatePartitionRole.mock}
+		mmCreatePartitionRole.defaultExpectation = &PartitionServiceClientMockCreatePartitionRoleExpectation{mock: mmCreatePartitionRole.mock}
 	}
-	mmCreatePartitionRole.defaultExpectation.results = &PartitionServiceHandlerMockCreatePartitionRoleResults{pp2, err}
+	mmCreatePartitionRole.defaultExpectation.results = &PartitionServiceClientMockCreatePartitionRoleResults{pp2, err}
 	mmCreatePartitionRole.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmCreatePartitionRole.mock
 }
 
-// Set uses given function f to mock the PartitionServiceHandler.CreatePartitionRole method
-func (mmCreatePartitionRole *mPartitionServiceHandlerMockCreatePartitionRole) Set(f func(ctx context.Context, pp1 *connect.Request[v1.CreatePartitionRoleRequest]) (pp2 *connect.Response[v1.CreatePartitionRoleResponse], err error)) *PartitionServiceHandlerMock {
+// Set uses given function f to mock the PartitionServiceClient.CreatePartitionRole method
+func (mmCreatePartitionRole *mPartitionServiceClientMockCreatePartitionRole) Set(f func(ctx context.Context, pp1 *connect.Request[v1.CreatePartitionRoleRequest]) (pp2 *connect.Response[v1.CreatePartitionRoleResponse], err error)) *PartitionServiceClientMock {
 	if mmCreatePartitionRole.defaultExpectation != nil {
-		mmCreatePartitionRole.mock.t.Fatalf("Default expectation is already set for the PartitionServiceHandler.CreatePartitionRole method")
+		mmCreatePartitionRole.mock.t.Fatalf("Default expectation is already set for the PartitionServiceClient.CreatePartitionRole method")
 	}
 
 	if len(mmCreatePartitionRole.expectations) > 0 {
-		mmCreatePartitionRole.mock.t.Fatalf("Some expectations are already set for the PartitionServiceHandler.CreatePartitionRole method")
+		mmCreatePartitionRole.mock.t.Fatalf("Some expectations are already set for the PartitionServiceClient.CreatePartitionRole method")
 	}
 
 	mmCreatePartitionRole.mock.funcCreatePartitionRole = f
@@ -1786,39 +1786,39 @@ func (mmCreatePartitionRole *mPartitionServiceHandlerMockCreatePartitionRole) Se
 	return mmCreatePartitionRole.mock
 }
 
-// When sets expectation for the PartitionServiceHandler.CreatePartitionRole which will trigger the result defined by the following
+// When sets expectation for the PartitionServiceClient.CreatePartitionRole which will trigger the result defined by the following
 // Then helper
-func (mmCreatePartitionRole *mPartitionServiceHandlerMockCreatePartitionRole) When(ctx context.Context, pp1 *connect.Request[v1.CreatePartitionRoleRequest]) *PartitionServiceHandlerMockCreatePartitionRoleExpectation {
+func (mmCreatePartitionRole *mPartitionServiceClientMockCreatePartitionRole) When(ctx context.Context, pp1 *connect.Request[v1.CreatePartitionRoleRequest]) *PartitionServiceClientMockCreatePartitionRoleExpectation {
 	if mmCreatePartitionRole.mock.funcCreatePartitionRole != nil {
-		mmCreatePartitionRole.mock.t.Fatalf("PartitionServiceHandlerMock.CreatePartitionRole mock is already set by Set")
+		mmCreatePartitionRole.mock.t.Fatalf("PartitionServiceClientMock.CreatePartitionRole mock is already set by Set")
 	}
 
-	expectation := &PartitionServiceHandlerMockCreatePartitionRoleExpectation{
+	expectation := &PartitionServiceClientMockCreatePartitionRoleExpectation{
 		mock:               mmCreatePartitionRole.mock,
-		params:             &PartitionServiceHandlerMockCreatePartitionRoleParams{ctx, pp1},
-		expectationOrigins: PartitionServiceHandlerMockCreatePartitionRoleExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &PartitionServiceClientMockCreatePartitionRoleParams{ctx, pp1},
+		expectationOrigins: PartitionServiceClientMockCreatePartitionRoleExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmCreatePartitionRole.expectations = append(mmCreatePartitionRole.expectations, expectation)
 	return expectation
 }
 
-// Then sets up PartitionServiceHandler.CreatePartitionRole return parameters for the expectation previously defined by the When method
-func (e *PartitionServiceHandlerMockCreatePartitionRoleExpectation) Then(pp2 *connect.Response[v1.CreatePartitionRoleResponse], err error) *PartitionServiceHandlerMock {
-	e.results = &PartitionServiceHandlerMockCreatePartitionRoleResults{pp2, err}
+// Then sets up PartitionServiceClient.CreatePartitionRole return parameters for the expectation previously defined by the When method
+func (e *PartitionServiceClientMockCreatePartitionRoleExpectation) Then(pp2 *connect.Response[v1.CreatePartitionRoleResponse], err error) *PartitionServiceClientMock {
+	e.results = &PartitionServiceClientMockCreatePartitionRoleResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times PartitionServiceHandler.CreatePartitionRole should be invoked
-func (mmCreatePartitionRole *mPartitionServiceHandlerMockCreatePartitionRole) Times(n uint64) *mPartitionServiceHandlerMockCreatePartitionRole {
+// Times sets number of times PartitionServiceClient.CreatePartitionRole should be invoked
+func (mmCreatePartitionRole *mPartitionServiceClientMockCreatePartitionRole) Times(n uint64) *mPartitionServiceClientMockCreatePartitionRole {
 	if n == 0 {
-		mmCreatePartitionRole.mock.t.Fatalf("Times of PartitionServiceHandlerMock.CreatePartitionRole mock can not be zero")
+		mmCreatePartitionRole.mock.t.Fatalf("Times of PartitionServiceClientMock.CreatePartitionRole mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmCreatePartitionRole.expectedInvocations, n)
 	mmCreatePartitionRole.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmCreatePartitionRole
 }
 
-func (mmCreatePartitionRole *mPartitionServiceHandlerMockCreatePartitionRole) invocationsDone() bool {
+func (mmCreatePartitionRole *mPartitionServiceClientMockCreatePartitionRole) invocationsDone() bool {
 	if len(mmCreatePartitionRole.expectations) == 0 && mmCreatePartitionRole.defaultExpectation == nil && mmCreatePartitionRole.mock.funcCreatePartitionRole == nil {
 		return true
 	}
@@ -1829,8 +1829,8 @@ func (mmCreatePartitionRole *mPartitionServiceHandlerMockCreatePartitionRole) in
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// CreatePartitionRole implements mm_partitionv1connect.PartitionServiceHandler
-func (mmCreatePartitionRole *PartitionServiceHandlerMock) CreatePartitionRole(ctx context.Context, pp1 *connect.Request[v1.CreatePartitionRoleRequest]) (pp2 *connect.Response[v1.CreatePartitionRoleResponse], err error) {
+// CreatePartitionRole implements mm_partitionv1connect.PartitionServiceClient
+func (mmCreatePartitionRole *PartitionServiceClientMock) CreatePartitionRole(ctx context.Context, pp1 *connect.Request[v1.CreatePartitionRoleRequest]) (pp2 *connect.Response[v1.CreatePartitionRoleResponse], err error) {
 	mm_atomic.AddUint64(&mmCreatePartitionRole.beforeCreatePartitionRoleCounter, 1)
 	defer mm_atomic.AddUint64(&mmCreatePartitionRole.afterCreatePartitionRoleCounter, 1)
 
@@ -1840,7 +1840,7 @@ func (mmCreatePartitionRole *PartitionServiceHandlerMock) CreatePartitionRole(ct
 		mmCreatePartitionRole.inspectFuncCreatePartitionRole(ctx, pp1)
 	}
 
-	mm_params := PartitionServiceHandlerMockCreatePartitionRoleParams{ctx, pp1}
+	mm_params := PartitionServiceClientMockCreatePartitionRoleParams{ctx, pp1}
 
 	// Record call args
 	mmCreatePartitionRole.CreatePartitionRoleMock.mutex.Lock()
@@ -1859,54 +1859,54 @@ func (mmCreatePartitionRole *PartitionServiceHandlerMock) CreatePartitionRole(ct
 		mm_want := mmCreatePartitionRole.CreatePartitionRoleMock.defaultExpectation.params
 		mm_want_ptrs := mmCreatePartitionRole.CreatePartitionRoleMock.defaultExpectation.paramPtrs
 
-		mm_got := PartitionServiceHandlerMockCreatePartitionRoleParams{ctx, pp1}
+		mm_got := PartitionServiceClientMockCreatePartitionRoleParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmCreatePartitionRole.t.Errorf("PartitionServiceHandlerMock.CreatePartitionRole got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmCreatePartitionRole.t.Errorf("PartitionServiceClientMock.CreatePartitionRole got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmCreatePartitionRole.CreatePartitionRoleMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmCreatePartitionRole.t.Errorf("PartitionServiceHandlerMock.CreatePartitionRole got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmCreatePartitionRole.t.Errorf("PartitionServiceClientMock.CreatePartitionRole got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmCreatePartitionRole.CreatePartitionRoleMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmCreatePartitionRole.t.Errorf("PartitionServiceHandlerMock.CreatePartitionRole got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmCreatePartitionRole.t.Errorf("PartitionServiceClientMock.CreatePartitionRole got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmCreatePartitionRole.CreatePartitionRoleMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmCreatePartitionRole.CreatePartitionRoleMock.defaultExpectation.results
 		if mm_results == nil {
-			mmCreatePartitionRole.t.Fatal("No results are set for the PartitionServiceHandlerMock.CreatePartitionRole")
+			mmCreatePartitionRole.t.Fatal("No results are set for the PartitionServiceClientMock.CreatePartitionRole")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmCreatePartitionRole.funcCreatePartitionRole != nil {
 		return mmCreatePartitionRole.funcCreatePartitionRole(ctx, pp1)
 	}
-	mmCreatePartitionRole.t.Fatalf("Unexpected call to PartitionServiceHandlerMock.CreatePartitionRole. %v %v", ctx, pp1)
+	mmCreatePartitionRole.t.Fatalf("Unexpected call to PartitionServiceClientMock.CreatePartitionRole. %v %v", ctx, pp1)
 	return
 }
 
-// CreatePartitionRoleAfterCounter returns a count of finished PartitionServiceHandlerMock.CreatePartitionRole invocations
-func (mmCreatePartitionRole *PartitionServiceHandlerMock) CreatePartitionRoleAfterCounter() uint64 {
+// CreatePartitionRoleAfterCounter returns a count of finished PartitionServiceClientMock.CreatePartitionRole invocations
+func (mmCreatePartitionRole *PartitionServiceClientMock) CreatePartitionRoleAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmCreatePartitionRole.afterCreatePartitionRoleCounter)
 }
 
-// CreatePartitionRoleBeforeCounter returns a count of PartitionServiceHandlerMock.CreatePartitionRole invocations
-func (mmCreatePartitionRole *PartitionServiceHandlerMock) CreatePartitionRoleBeforeCounter() uint64 {
+// CreatePartitionRoleBeforeCounter returns a count of PartitionServiceClientMock.CreatePartitionRole invocations
+func (mmCreatePartitionRole *PartitionServiceClientMock) CreatePartitionRoleBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmCreatePartitionRole.beforeCreatePartitionRoleCounter)
 }
 
-// Calls returns a list of arguments used in each call to PartitionServiceHandlerMock.CreatePartitionRole.
+// Calls returns a list of arguments used in each call to PartitionServiceClientMock.CreatePartitionRole.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmCreatePartitionRole *mPartitionServiceHandlerMockCreatePartitionRole) Calls() []*PartitionServiceHandlerMockCreatePartitionRoleParams {
+func (mmCreatePartitionRole *mPartitionServiceClientMockCreatePartitionRole) Calls() []*PartitionServiceClientMockCreatePartitionRoleParams {
 	mmCreatePartitionRole.mutex.RLock()
 
-	argCopy := make([]*PartitionServiceHandlerMockCreatePartitionRoleParams, len(mmCreatePartitionRole.callArgs))
+	argCopy := make([]*PartitionServiceClientMockCreatePartitionRoleParams, len(mmCreatePartitionRole.callArgs))
 	copy(argCopy, mmCreatePartitionRole.callArgs)
 
 	mmCreatePartitionRole.mutex.RUnlock()
@@ -1916,7 +1916,7 @@ func (mmCreatePartitionRole *mPartitionServiceHandlerMockCreatePartitionRole) Ca
 
 // MinimockCreatePartitionRoleDone returns true if the count of the CreatePartitionRole invocations corresponds
 // the number of defined expectations
-func (m *PartitionServiceHandlerMock) MinimockCreatePartitionRoleDone() bool {
+func (m *PartitionServiceClientMock) MinimockCreatePartitionRoleDone() bool {
 	if m.CreatePartitionRoleMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -1932,10 +1932,10 @@ func (m *PartitionServiceHandlerMock) MinimockCreatePartitionRoleDone() bool {
 }
 
 // MinimockCreatePartitionRoleInspect logs each unmet expectation
-func (m *PartitionServiceHandlerMock) MinimockCreatePartitionRoleInspect() {
+func (m *PartitionServiceClientMock) MinimockCreatePartitionRoleInspect() {
 	for _, e := range m.CreatePartitionRoleMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.CreatePartitionRole at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.CreatePartitionRole at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -1943,66 +1943,66 @@ func (m *PartitionServiceHandlerMock) MinimockCreatePartitionRoleInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.CreatePartitionRoleMock.defaultExpectation != nil && afterCreatePartitionRoleCounter < 1 {
 		if m.CreatePartitionRoleMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.CreatePartitionRole at\n%s", m.CreatePartitionRoleMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.CreatePartitionRole at\n%s", m.CreatePartitionRoleMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.CreatePartitionRole at\n%s with params: %#v", m.CreatePartitionRoleMock.defaultExpectation.expectationOrigins.origin, *m.CreatePartitionRoleMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.CreatePartitionRole at\n%s with params: %#v", m.CreatePartitionRoleMock.defaultExpectation.expectationOrigins.origin, *m.CreatePartitionRoleMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcCreatePartitionRole != nil && afterCreatePartitionRoleCounter < 1 {
-		m.t.Errorf("Expected call to PartitionServiceHandlerMock.CreatePartitionRole at\n%s", m.funcCreatePartitionRoleOrigin)
+		m.t.Errorf("Expected call to PartitionServiceClientMock.CreatePartitionRole at\n%s", m.funcCreatePartitionRoleOrigin)
 	}
 
 	if !m.CreatePartitionRoleMock.invocationsDone() && afterCreatePartitionRoleCounter > 0 {
-		m.t.Errorf("Expected %d calls to PartitionServiceHandlerMock.CreatePartitionRole at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to PartitionServiceClientMock.CreatePartitionRole at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.CreatePartitionRoleMock.expectedInvocations), m.CreatePartitionRoleMock.expectedInvocationsOrigin, afterCreatePartitionRoleCounter)
 	}
 }
 
-type mPartitionServiceHandlerMockCreateTenant struct {
+type mPartitionServiceClientMockCreateTenant struct {
 	optional           bool
-	mock               *PartitionServiceHandlerMock
-	defaultExpectation *PartitionServiceHandlerMockCreateTenantExpectation
-	expectations       []*PartitionServiceHandlerMockCreateTenantExpectation
+	mock               *PartitionServiceClientMock
+	defaultExpectation *PartitionServiceClientMockCreateTenantExpectation
+	expectations       []*PartitionServiceClientMockCreateTenantExpectation
 
-	callArgs []*PartitionServiceHandlerMockCreateTenantParams
+	callArgs []*PartitionServiceClientMockCreateTenantParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// PartitionServiceHandlerMockCreateTenantExpectation specifies expectation struct of the PartitionServiceHandler.CreateTenant
-type PartitionServiceHandlerMockCreateTenantExpectation struct {
-	mock               *PartitionServiceHandlerMock
-	params             *PartitionServiceHandlerMockCreateTenantParams
-	paramPtrs          *PartitionServiceHandlerMockCreateTenantParamPtrs
-	expectationOrigins PartitionServiceHandlerMockCreateTenantExpectationOrigins
-	results            *PartitionServiceHandlerMockCreateTenantResults
+// PartitionServiceClientMockCreateTenantExpectation specifies expectation struct of the PartitionServiceClient.CreateTenant
+type PartitionServiceClientMockCreateTenantExpectation struct {
+	mock               *PartitionServiceClientMock
+	params             *PartitionServiceClientMockCreateTenantParams
+	paramPtrs          *PartitionServiceClientMockCreateTenantParamPtrs
+	expectationOrigins PartitionServiceClientMockCreateTenantExpectationOrigins
+	results            *PartitionServiceClientMockCreateTenantResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// PartitionServiceHandlerMockCreateTenantParams contains parameters of the PartitionServiceHandler.CreateTenant
-type PartitionServiceHandlerMockCreateTenantParams struct {
+// PartitionServiceClientMockCreateTenantParams contains parameters of the PartitionServiceClient.CreateTenant
+type PartitionServiceClientMockCreateTenantParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.CreateTenantRequest]
 }
 
-// PartitionServiceHandlerMockCreateTenantParamPtrs contains pointers to parameters of the PartitionServiceHandler.CreateTenant
-type PartitionServiceHandlerMockCreateTenantParamPtrs struct {
+// PartitionServiceClientMockCreateTenantParamPtrs contains pointers to parameters of the PartitionServiceClient.CreateTenant
+type PartitionServiceClientMockCreateTenantParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.CreateTenantRequest]
 }
 
-// PartitionServiceHandlerMockCreateTenantResults contains results of the PartitionServiceHandler.CreateTenant
-type PartitionServiceHandlerMockCreateTenantResults struct {
+// PartitionServiceClientMockCreateTenantResults contains results of the PartitionServiceClient.CreateTenant
+type PartitionServiceClientMockCreateTenantResults struct {
 	pp2 *connect.Response[v1.CreateTenantResponse]
 	err error
 }
 
-// PartitionServiceHandlerMockCreateTenantOrigins contains origins of expectations of the PartitionServiceHandler.CreateTenant
-type PartitionServiceHandlerMockCreateTenantExpectationOrigins struct {
+// PartitionServiceClientMockCreateTenantOrigins contains origins of expectations of the PartitionServiceClient.CreateTenant
+type PartitionServiceClientMockCreateTenantExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -2013,26 +2013,26 @@ type PartitionServiceHandlerMockCreateTenantExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmCreateTenant *mPartitionServiceHandlerMockCreateTenant) Optional() *mPartitionServiceHandlerMockCreateTenant {
+func (mmCreateTenant *mPartitionServiceClientMockCreateTenant) Optional() *mPartitionServiceClientMockCreateTenant {
 	mmCreateTenant.optional = true
 	return mmCreateTenant
 }
 
-// Expect sets up expected params for PartitionServiceHandler.CreateTenant
-func (mmCreateTenant *mPartitionServiceHandlerMockCreateTenant) Expect(ctx context.Context, pp1 *connect.Request[v1.CreateTenantRequest]) *mPartitionServiceHandlerMockCreateTenant {
+// Expect sets up expected params for PartitionServiceClient.CreateTenant
+func (mmCreateTenant *mPartitionServiceClientMockCreateTenant) Expect(ctx context.Context, pp1 *connect.Request[v1.CreateTenantRequest]) *mPartitionServiceClientMockCreateTenant {
 	if mmCreateTenant.mock.funcCreateTenant != nil {
-		mmCreateTenant.mock.t.Fatalf("PartitionServiceHandlerMock.CreateTenant mock is already set by Set")
+		mmCreateTenant.mock.t.Fatalf("PartitionServiceClientMock.CreateTenant mock is already set by Set")
 	}
 
 	if mmCreateTenant.defaultExpectation == nil {
-		mmCreateTenant.defaultExpectation = &PartitionServiceHandlerMockCreateTenantExpectation{}
+		mmCreateTenant.defaultExpectation = &PartitionServiceClientMockCreateTenantExpectation{}
 	}
 
 	if mmCreateTenant.defaultExpectation.paramPtrs != nil {
-		mmCreateTenant.mock.t.Fatalf("PartitionServiceHandlerMock.CreateTenant mock is already set by ExpectParams functions")
+		mmCreateTenant.mock.t.Fatalf("PartitionServiceClientMock.CreateTenant mock is already set by ExpectParams functions")
 	}
 
-	mmCreateTenant.defaultExpectation.params = &PartitionServiceHandlerMockCreateTenantParams{ctx, pp1}
+	mmCreateTenant.defaultExpectation.params = &PartitionServiceClientMockCreateTenantParams{ctx, pp1}
 	mmCreateTenant.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmCreateTenant.expectations {
 		if minimock.Equal(e.params, mmCreateTenant.defaultExpectation.params) {
@@ -2043,22 +2043,22 @@ func (mmCreateTenant *mPartitionServiceHandlerMockCreateTenant) Expect(ctx conte
 	return mmCreateTenant
 }
 
-// ExpectCtxParam1 sets up expected param ctx for PartitionServiceHandler.CreateTenant
-func (mmCreateTenant *mPartitionServiceHandlerMockCreateTenant) ExpectCtxParam1(ctx context.Context) *mPartitionServiceHandlerMockCreateTenant {
+// ExpectCtxParam1 sets up expected param ctx for PartitionServiceClient.CreateTenant
+func (mmCreateTenant *mPartitionServiceClientMockCreateTenant) ExpectCtxParam1(ctx context.Context) *mPartitionServiceClientMockCreateTenant {
 	if mmCreateTenant.mock.funcCreateTenant != nil {
-		mmCreateTenant.mock.t.Fatalf("PartitionServiceHandlerMock.CreateTenant mock is already set by Set")
+		mmCreateTenant.mock.t.Fatalf("PartitionServiceClientMock.CreateTenant mock is already set by Set")
 	}
 
 	if mmCreateTenant.defaultExpectation == nil {
-		mmCreateTenant.defaultExpectation = &PartitionServiceHandlerMockCreateTenantExpectation{}
+		mmCreateTenant.defaultExpectation = &PartitionServiceClientMockCreateTenantExpectation{}
 	}
 
 	if mmCreateTenant.defaultExpectation.params != nil {
-		mmCreateTenant.mock.t.Fatalf("PartitionServiceHandlerMock.CreateTenant mock is already set by Expect")
+		mmCreateTenant.mock.t.Fatalf("PartitionServiceClientMock.CreateTenant mock is already set by Expect")
 	}
 
 	if mmCreateTenant.defaultExpectation.paramPtrs == nil {
-		mmCreateTenant.defaultExpectation.paramPtrs = &PartitionServiceHandlerMockCreateTenantParamPtrs{}
+		mmCreateTenant.defaultExpectation.paramPtrs = &PartitionServiceClientMockCreateTenantParamPtrs{}
 	}
 	mmCreateTenant.defaultExpectation.paramPtrs.ctx = &ctx
 	mmCreateTenant.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -2066,22 +2066,22 @@ func (mmCreateTenant *mPartitionServiceHandlerMockCreateTenant) ExpectCtxParam1(
 	return mmCreateTenant
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for PartitionServiceHandler.CreateTenant
-func (mmCreateTenant *mPartitionServiceHandlerMockCreateTenant) ExpectPp1Param2(pp1 *connect.Request[v1.CreateTenantRequest]) *mPartitionServiceHandlerMockCreateTenant {
+// ExpectPp1Param2 sets up expected param pp1 for PartitionServiceClient.CreateTenant
+func (mmCreateTenant *mPartitionServiceClientMockCreateTenant) ExpectPp1Param2(pp1 *connect.Request[v1.CreateTenantRequest]) *mPartitionServiceClientMockCreateTenant {
 	if mmCreateTenant.mock.funcCreateTenant != nil {
-		mmCreateTenant.mock.t.Fatalf("PartitionServiceHandlerMock.CreateTenant mock is already set by Set")
+		mmCreateTenant.mock.t.Fatalf("PartitionServiceClientMock.CreateTenant mock is already set by Set")
 	}
 
 	if mmCreateTenant.defaultExpectation == nil {
-		mmCreateTenant.defaultExpectation = &PartitionServiceHandlerMockCreateTenantExpectation{}
+		mmCreateTenant.defaultExpectation = &PartitionServiceClientMockCreateTenantExpectation{}
 	}
 
 	if mmCreateTenant.defaultExpectation.params != nil {
-		mmCreateTenant.mock.t.Fatalf("PartitionServiceHandlerMock.CreateTenant mock is already set by Expect")
+		mmCreateTenant.mock.t.Fatalf("PartitionServiceClientMock.CreateTenant mock is already set by Expect")
 	}
 
 	if mmCreateTenant.defaultExpectation.paramPtrs == nil {
-		mmCreateTenant.defaultExpectation.paramPtrs = &PartitionServiceHandlerMockCreateTenantParamPtrs{}
+		mmCreateTenant.defaultExpectation.paramPtrs = &PartitionServiceClientMockCreateTenantParamPtrs{}
 	}
 	mmCreateTenant.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmCreateTenant.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -2089,10 +2089,10 @@ func (mmCreateTenant *mPartitionServiceHandlerMockCreateTenant) ExpectPp1Param2(
 	return mmCreateTenant
 }
 
-// Inspect accepts an inspector function that has same arguments as the PartitionServiceHandler.CreateTenant
-func (mmCreateTenant *mPartitionServiceHandlerMockCreateTenant) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.CreateTenantRequest])) *mPartitionServiceHandlerMockCreateTenant {
+// Inspect accepts an inspector function that has same arguments as the PartitionServiceClient.CreateTenant
+func (mmCreateTenant *mPartitionServiceClientMockCreateTenant) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.CreateTenantRequest])) *mPartitionServiceClientMockCreateTenant {
 	if mmCreateTenant.mock.inspectFuncCreateTenant != nil {
-		mmCreateTenant.mock.t.Fatalf("Inspect function is already set for PartitionServiceHandlerMock.CreateTenant")
+		mmCreateTenant.mock.t.Fatalf("Inspect function is already set for PartitionServiceClientMock.CreateTenant")
 	}
 
 	mmCreateTenant.mock.inspectFuncCreateTenant = f
@@ -2100,28 +2100,28 @@ func (mmCreateTenant *mPartitionServiceHandlerMockCreateTenant) Inspect(f func(c
 	return mmCreateTenant
 }
 
-// Return sets up results that will be returned by PartitionServiceHandler.CreateTenant
-func (mmCreateTenant *mPartitionServiceHandlerMockCreateTenant) Return(pp2 *connect.Response[v1.CreateTenantResponse], err error) *PartitionServiceHandlerMock {
+// Return sets up results that will be returned by PartitionServiceClient.CreateTenant
+func (mmCreateTenant *mPartitionServiceClientMockCreateTenant) Return(pp2 *connect.Response[v1.CreateTenantResponse], err error) *PartitionServiceClientMock {
 	if mmCreateTenant.mock.funcCreateTenant != nil {
-		mmCreateTenant.mock.t.Fatalf("PartitionServiceHandlerMock.CreateTenant mock is already set by Set")
+		mmCreateTenant.mock.t.Fatalf("PartitionServiceClientMock.CreateTenant mock is already set by Set")
 	}
 
 	if mmCreateTenant.defaultExpectation == nil {
-		mmCreateTenant.defaultExpectation = &PartitionServiceHandlerMockCreateTenantExpectation{mock: mmCreateTenant.mock}
+		mmCreateTenant.defaultExpectation = &PartitionServiceClientMockCreateTenantExpectation{mock: mmCreateTenant.mock}
 	}
-	mmCreateTenant.defaultExpectation.results = &PartitionServiceHandlerMockCreateTenantResults{pp2, err}
+	mmCreateTenant.defaultExpectation.results = &PartitionServiceClientMockCreateTenantResults{pp2, err}
 	mmCreateTenant.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmCreateTenant.mock
 }
 
-// Set uses given function f to mock the PartitionServiceHandler.CreateTenant method
-func (mmCreateTenant *mPartitionServiceHandlerMockCreateTenant) Set(f func(ctx context.Context, pp1 *connect.Request[v1.CreateTenantRequest]) (pp2 *connect.Response[v1.CreateTenantResponse], err error)) *PartitionServiceHandlerMock {
+// Set uses given function f to mock the PartitionServiceClient.CreateTenant method
+func (mmCreateTenant *mPartitionServiceClientMockCreateTenant) Set(f func(ctx context.Context, pp1 *connect.Request[v1.CreateTenantRequest]) (pp2 *connect.Response[v1.CreateTenantResponse], err error)) *PartitionServiceClientMock {
 	if mmCreateTenant.defaultExpectation != nil {
-		mmCreateTenant.mock.t.Fatalf("Default expectation is already set for the PartitionServiceHandler.CreateTenant method")
+		mmCreateTenant.mock.t.Fatalf("Default expectation is already set for the PartitionServiceClient.CreateTenant method")
 	}
 
 	if len(mmCreateTenant.expectations) > 0 {
-		mmCreateTenant.mock.t.Fatalf("Some expectations are already set for the PartitionServiceHandler.CreateTenant method")
+		mmCreateTenant.mock.t.Fatalf("Some expectations are already set for the PartitionServiceClient.CreateTenant method")
 	}
 
 	mmCreateTenant.mock.funcCreateTenant = f
@@ -2129,39 +2129,39 @@ func (mmCreateTenant *mPartitionServiceHandlerMockCreateTenant) Set(f func(ctx c
 	return mmCreateTenant.mock
 }
 
-// When sets expectation for the PartitionServiceHandler.CreateTenant which will trigger the result defined by the following
+// When sets expectation for the PartitionServiceClient.CreateTenant which will trigger the result defined by the following
 // Then helper
-func (mmCreateTenant *mPartitionServiceHandlerMockCreateTenant) When(ctx context.Context, pp1 *connect.Request[v1.CreateTenantRequest]) *PartitionServiceHandlerMockCreateTenantExpectation {
+func (mmCreateTenant *mPartitionServiceClientMockCreateTenant) When(ctx context.Context, pp1 *connect.Request[v1.CreateTenantRequest]) *PartitionServiceClientMockCreateTenantExpectation {
 	if mmCreateTenant.mock.funcCreateTenant != nil {
-		mmCreateTenant.mock.t.Fatalf("PartitionServiceHandlerMock.CreateTenant mock is already set by Set")
+		mmCreateTenant.mock.t.Fatalf("PartitionServiceClientMock.CreateTenant mock is already set by Set")
 	}
 
-	expectation := &PartitionServiceHandlerMockCreateTenantExpectation{
+	expectation := &PartitionServiceClientMockCreateTenantExpectation{
 		mock:               mmCreateTenant.mock,
-		params:             &PartitionServiceHandlerMockCreateTenantParams{ctx, pp1},
-		expectationOrigins: PartitionServiceHandlerMockCreateTenantExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &PartitionServiceClientMockCreateTenantParams{ctx, pp1},
+		expectationOrigins: PartitionServiceClientMockCreateTenantExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmCreateTenant.expectations = append(mmCreateTenant.expectations, expectation)
 	return expectation
 }
 
-// Then sets up PartitionServiceHandler.CreateTenant return parameters for the expectation previously defined by the When method
-func (e *PartitionServiceHandlerMockCreateTenantExpectation) Then(pp2 *connect.Response[v1.CreateTenantResponse], err error) *PartitionServiceHandlerMock {
-	e.results = &PartitionServiceHandlerMockCreateTenantResults{pp2, err}
+// Then sets up PartitionServiceClient.CreateTenant return parameters for the expectation previously defined by the When method
+func (e *PartitionServiceClientMockCreateTenantExpectation) Then(pp2 *connect.Response[v1.CreateTenantResponse], err error) *PartitionServiceClientMock {
+	e.results = &PartitionServiceClientMockCreateTenantResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times PartitionServiceHandler.CreateTenant should be invoked
-func (mmCreateTenant *mPartitionServiceHandlerMockCreateTenant) Times(n uint64) *mPartitionServiceHandlerMockCreateTenant {
+// Times sets number of times PartitionServiceClient.CreateTenant should be invoked
+func (mmCreateTenant *mPartitionServiceClientMockCreateTenant) Times(n uint64) *mPartitionServiceClientMockCreateTenant {
 	if n == 0 {
-		mmCreateTenant.mock.t.Fatalf("Times of PartitionServiceHandlerMock.CreateTenant mock can not be zero")
+		mmCreateTenant.mock.t.Fatalf("Times of PartitionServiceClientMock.CreateTenant mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmCreateTenant.expectedInvocations, n)
 	mmCreateTenant.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmCreateTenant
 }
 
-func (mmCreateTenant *mPartitionServiceHandlerMockCreateTenant) invocationsDone() bool {
+func (mmCreateTenant *mPartitionServiceClientMockCreateTenant) invocationsDone() bool {
 	if len(mmCreateTenant.expectations) == 0 && mmCreateTenant.defaultExpectation == nil && mmCreateTenant.mock.funcCreateTenant == nil {
 		return true
 	}
@@ -2172,8 +2172,8 @@ func (mmCreateTenant *mPartitionServiceHandlerMockCreateTenant) invocationsDone(
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// CreateTenant implements mm_partitionv1connect.PartitionServiceHandler
-func (mmCreateTenant *PartitionServiceHandlerMock) CreateTenant(ctx context.Context, pp1 *connect.Request[v1.CreateTenantRequest]) (pp2 *connect.Response[v1.CreateTenantResponse], err error) {
+// CreateTenant implements mm_partitionv1connect.PartitionServiceClient
+func (mmCreateTenant *PartitionServiceClientMock) CreateTenant(ctx context.Context, pp1 *connect.Request[v1.CreateTenantRequest]) (pp2 *connect.Response[v1.CreateTenantResponse], err error) {
 	mm_atomic.AddUint64(&mmCreateTenant.beforeCreateTenantCounter, 1)
 	defer mm_atomic.AddUint64(&mmCreateTenant.afterCreateTenantCounter, 1)
 
@@ -2183,7 +2183,7 @@ func (mmCreateTenant *PartitionServiceHandlerMock) CreateTenant(ctx context.Cont
 		mmCreateTenant.inspectFuncCreateTenant(ctx, pp1)
 	}
 
-	mm_params := PartitionServiceHandlerMockCreateTenantParams{ctx, pp1}
+	mm_params := PartitionServiceClientMockCreateTenantParams{ctx, pp1}
 
 	// Record call args
 	mmCreateTenant.CreateTenantMock.mutex.Lock()
@@ -2202,54 +2202,54 @@ func (mmCreateTenant *PartitionServiceHandlerMock) CreateTenant(ctx context.Cont
 		mm_want := mmCreateTenant.CreateTenantMock.defaultExpectation.params
 		mm_want_ptrs := mmCreateTenant.CreateTenantMock.defaultExpectation.paramPtrs
 
-		mm_got := PartitionServiceHandlerMockCreateTenantParams{ctx, pp1}
+		mm_got := PartitionServiceClientMockCreateTenantParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmCreateTenant.t.Errorf("PartitionServiceHandlerMock.CreateTenant got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmCreateTenant.t.Errorf("PartitionServiceClientMock.CreateTenant got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmCreateTenant.CreateTenantMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmCreateTenant.t.Errorf("PartitionServiceHandlerMock.CreateTenant got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmCreateTenant.t.Errorf("PartitionServiceClientMock.CreateTenant got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmCreateTenant.CreateTenantMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmCreateTenant.t.Errorf("PartitionServiceHandlerMock.CreateTenant got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmCreateTenant.t.Errorf("PartitionServiceClientMock.CreateTenant got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmCreateTenant.CreateTenantMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmCreateTenant.CreateTenantMock.defaultExpectation.results
 		if mm_results == nil {
-			mmCreateTenant.t.Fatal("No results are set for the PartitionServiceHandlerMock.CreateTenant")
+			mmCreateTenant.t.Fatal("No results are set for the PartitionServiceClientMock.CreateTenant")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmCreateTenant.funcCreateTenant != nil {
 		return mmCreateTenant.funcCreateTenant(ctx, pp1)
 	}
-	mmCreateTenant.t.Fatalf("Unexpected call to PartitionServiceHandlerMock.CreateTenant. %v %v", ctx, pp1)
+	mmCreateTenant.t.Fatalf("Unexpected call to PartitionServiceClientMock.CreateTenant. %v %v", ctx, pp1)
 	return
 }
 
-// CreateTenantAfterCounter returns a count of finished PartitionServiceHandlerMock.CreateTenant invocations
-func (mmCreateTenant *PartitionServiceHandlerMock) CreateTenantAfterCounter() uint64 {
+// CreateTenantAfterCounter returns a count of finished PartitionServiceClientMock.CreateTenant invocations
+func (mmCreateTenant *PartitionServiceClientMock) CreateTenantAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmCreateTenant.afterCreateTenantCounter)
 }
 
-// CreateTenantBeforeCounter returns a count of PartitionServiceHandlerMock.CreateTenant invocations
-func (mmCreateTenant *PartitionServiceHandlerMock) CreateTenantBeforeCounter() uint64 {
+// CreateTenantBeforeCounter returns a count of PartitionServiceClientMock.CreateTenant invocations
+func (mmCreateTenant *PartitionServiceClientMock) CreateTenantBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmCreateTenant.beforeCreateTenantCounter)
 }
 
-// Calls returns a list of arguments used in each call to PartitionServiceHandlerMock.CreateTenant.
+// Calls returns a list of arguments used in each call to PartitionServiceClientMock.CreateTenant.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmCreateTenant *mPartitionServiceHandlerMockCreateTenant) Calls() []*PartitionServiceHandlerMockCreateTenantParams {
+func (mmCreateTenant *mPartitionServiceClientMockCreateTenant) Calls() []*PartitionServiceClientMockCreateTenantParams {
 	mmCreateTenant.mutex.RLock()
 
-	argCopy := make([]*PartitionServiceHandlerMockCreateTenantParams, len(mmCreateTenant.callArgs))
+	argCopy := make([]*PartitionServiceClientMockCreateTenantParams, len(mmCreateTenant.callArgs))
 	copy(argCopy, mmCreateTenant.callArgs)
 
 	mmCreateTenant.mutex.RUnlock()
@@ -2259,7 +2259,7 @@ func (mmCreateTenant *mPartitionServiceHandlerMockCreateTenant) Calls() []*Parti
 
 // MinimockCreateTenantDone returns true if the count of the CreateTenant invocations corresponds
 // the number of defined expectations
-func (m *PartitionServiceHandlerMock) MinimockCreateTenantDone() bool {
+func (m *PartitionServiceClientMock) MinimockCreateTenantDone() bool {
 	if m.CreateTenantMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -2275,10 +2275,10 @@ func (m *PartitionServiceHandlerMock) MinimockCreateTenantDone() bool {
 }
 
 // MinimockCreateTenantInspect logs each unmet expectation
-func (m *PartitionServiceHandlerMock) MinimockCreateTenantInspect() {
+func (m *PartitionServiceClientMock) MinimockCreateTenantInspect() {
 	for _, e := range m.CreateTenantMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.CreateTenant at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.CreateTenant at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -2286,66 +2286,66 @@ func (m *PartitionServiceHandlerMock) MinimockCreateTenantInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.CreateTenantMock.defaultExpectation != nil && afterCreateTenantCounter < 1 {
 		if m.CreateTenantMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.CreateTenant at\n%s", m.CreateTenantMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.CreateTenant at\n%s", m.CreateTenantMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.CreateTenant at\n%s with params: %#v", m.CreateTenantMock.defaultExpectation.expectationOrigins.origin, *m.CreateTenantMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.CreateTenant at\n%s with params: %#v", m.CreateTenantMock.defaultExpectation.expectationOrigins.origin, *m.CreateTenantMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcCreateTenant != nil && afterCreateTenantCounter < 1 {
-		m.t.Errorf("Expected call to PartitionServiceHandlerMock.CreateTenant at\n%s", m.funcCreateTenantOrigin)
+		m.t.Errorf("Expected call to PartitionServiceClientMock.CreateTenant at\n%s", m.funcCreateTenantOrigin)
 	}
 
 	if !m.CreateTenantMock.invocationsDone() && afterCreateTenantCounter > 0 {
-		m.t.Errorf("Expected %d calls to PartitionServiceHandlerMock.CreateTenant at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to PartitionServiceClientMock.CreateTenant at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.CreateTenantMock.expectedInvocations), m.CreateTenantMock.expectedInvocationsOrigin, afterCreateTenantCounter)
 	}
 }
 
-type mPartitionServiceHandlerMockGetAccess struct {
+type mPartitionServiceClientMockGetAccess struct {
 	optional           bool
-	mock               *PartitionServiceHandlerMock
-	defaultExpectation *PartitionServiceHandlerMockGetAccessExpectation
-	expectations       []*PartitionServiceHandlerMockGetAccessExpectation
+	mock               *PartitionServiceClientMock
+	defaultExpectation *PartitionServiceClientMockGetAccessExpectation
+	expectations       []*PartitionServiceClientMockGetAccessExpectation
 
-	callArgs []*PartitionServiceHandlerMockGetAccessParams
+	callArgs []*PartitionServiceClientMockGetAccessParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// PartitionServiceHandlerMockGetAccessExpectation specifies expectation struct of the PartitionServiceHandler.GetAccess
-type PartitionServiceHandlerMockGetAccessExpectation struct {
-	mock               *PartitionServiceHandlerMock
-	params             *PartitionServiceHandlerMockGetAccessParams
-	paramPtrs          *PartitionServiceHandlerMockGetAccessParamPtrs
-	expectationOrigins PartitionServiceHandlerMockGetAccessExpectationOrigins
-	results            *PartitionServiceHandlerMockGetAccessResults
+// PartitionServiceClientMockGetAccessExpectation specifies expectation struct of the PartitionServiceClient.GetAccess
+type PartitionServiceClientMockGetAccessExpectation struct {
+	mock               *PartitionServiceClientMock
+	params             *PartitionServiceClientMockGetAccessParams
+	paramPtrs          *PartitionServiceClientMockGetAccessParamPtrs
+	expectationOrigins PartitionServiceClientMockGetAccessExpectationOrigins
+	results            *PartitionServiceClientMockGetAccessResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// PartitionServiceHandlerMockGetAccessParams contains parameters of the PartitionServiceHandler.GetAccess
-type PartitionServiceHandlerMockGetAccessParams struct {
+// PartitionServiceClientMockGetAccessParams contains parameters of the PartitionServiceClient.GetAccess
+type PartitionServiceClientMockGetAccessParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.GetAccessRequest]
 }
 
-// PartitionServiceHandlerMockGetAccessParamPtrs contains pointers to parameters of the PartitionServiceHandler.GetAccess
-type PartitionServiceHandlerMockGetAccessParamPtrs struct {
+// PartitionServiceClientMockGetAccessParamPtrs contains pointers to parameters of the PartitionServiceClient.GetAccess
+type PartitionServiceClientMockGetAccessParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.GetAccessRequest]
 }
 
-// PartitionServiceHandlerMockGetAccessResults contains results of the PartitionServiceHandler.GetAccess
-type PartitionServiceHandlerMockGetAccessResults struct {
+// PartitionServiceClientMockGetAccessResults contains results of the PartitionServiceClient.GetAccess
+type PartitionServiceClientMockGetAccessResults struct {
 	pp2 *connect.Response[v1.GetAccessResponse]
 	err error
 }
 
-// PartitionServiceHandlerMockGetAccessOrigins contains origins of expectations of the PartitionServiceHandler.GetAccess
-type PartitionServiceHandlerMockGetAccessExpectationOrigins struct {
+// PartitionServiceClientMockGetAccessOrigins contains origins of expectations of the PartitionServiceClient.GetAccess
+type PartitionServiceClientMockGetAccessExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -2356,26 +2356,26 @@ type PartitionServiceHandlerMockGetAccessExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmGetAccess *mPartitionServiceHandlerMockGetAccess) Optional() *mPartitionServiceHandlerMockGetAccess {
+func (mmGetAccess *mPartitionServiceClientMockGetAccess) Optional() *mPartitionServiceClientMockGetAccess {
 	mmGetAccess.optional = true
 	return mmGetAccess
 }
 
-// Expect sets up expected params for PartitionServiceHandler.GetAccess
-func (mmGetAccess *mPartitionServiceHandlerMockGetAccess) Expect(ctx context.Context, pp1 *connect.Request[v1.GetAccessRequest]) *mPartitionServiceHandlerMockGetAccess {
+// Expect sets up expected params for PartitionServiceClient.GetAccess
+func (mmGetAccess *mPartitionServiceClientMockGetAccess) Expect(ctx context.Context, pp1 *connect.Request[v1.GetAccessRequest]) *mPartitionServiceClientMockGetAccess {
 	if mmGetAccess.mock.funcGetAccess != nil {
-		mmGetAccess.mock.t.Fatalf("PartitionServiceHandlerMock.GetAccess mock is already set by Set")
+		mmGetAccess.mock.t.Fatalf("PartitionServiceClientMock.GetAccess mock is already set by Set")
 	}
 
 	if mmGetAccess.defaultExpectation == nil {
-		mmGetAccess.defaultExpectation = &PartitionServiceHandlerMockGetAccessExpectation{}
+		mmGetAccess.defaultExpectation = &PartitionServiceClientMockGetAccessExpectation{}
 	}
 
 	if mmGetAccess.defaultExpectation.paramPtrs != nil {
-		mmGetAccess.mock.t.Fatalf("PartitionServiceHandlerMock.GetAccess mock is already set by ExpectParams functions")
+		mmGetAccess.mock.t.Fatalf("PartitionServiceClientMock.GetAccess mock is already set by ExpectParams functions")
 	}
 
-	mmGetAccess.defaultExpectation.params = &PartitionServiceHandlerMockGetAccessParams{ctx, pp1}
+	mmGetAccess.defaultExpectation.params = &PartitionServiceClientMockGetAccessParams{ctx, pp1}
 	mmGetAccess.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmGetAccess.expectations {
 		if minimock.Equal(e.params, mmGetAccess.defaultExpectation.params) {
@@ -2386,22 +2386,22 @@ func (mmGetAccess *mPartitionServiceHandlerMockGetAccess) Expect(ctx context.Con
 	return mmGetAccess
 }
 
-// ExpectCtxParam1 sets up expected param ctx for PartitionServiceHandler.GetAccess
-func (mmGetAccess *mPartitionServiceHandlerMockGetAccess) ExpectCtxParam1(ctx context.Context) *mPartitionServiceHandlerMockGetAccess {
+// ExpectCtxParam1 sets up expected param ctx for PartitionServiceClient.GetAccess
+func (mmGetAccess *mPartitionServiceClientMockGetAccess) ExpectCtxParam1(ctx context.Context) *mPartitionServiceClientMockGetAccess {
 	if mmGetAccess.mock.funcGetAccess != nil {
-		mmGetAccess.mock.t.Fatalf("PartitionServiceHandlerMock.GetAccess mock is already set by Set")
+		mmGetAccess.mock.t.Fatalf("PartitionServiceClientMock.GetAccess mock is already set by Set")
 	}
 
 	if mmGetAccess.defaultExpectation == nil {
-		mmGetAccess.defaultExpectation = &PartitionServiceHandlerMockGetAccessExpectation{}
+		mmGetAccess.defaultExpectation = &PartitionServiceClientMockGetAccessExpectation{}
 	}
 
 	if mmGetAccess.defaultExpectation.params != nil {
-		mmGetAccess.mock.t.Fatalf("PartitionServiceHandlerMock.GetAccess mock is already set by Expect")
+		mmGetAccess.mock.t.Fatalf("PartitionServiceClientMock.GetAccess mock is already set by Expect")
 	}
 
 	if mmGetAccess.defaultExpectation.paramPtrs == nil {
-		mmGetAccess.defaultExpectation.paramPtrs = &PartitionServiceHandlerMockGetAccessParamPtrs{}
+		mmGetAccess.defaultExpectation.paramPtrs = &PartitionServiceClientMockGetAccessParamPtrs{}
 	}
 	mmGetAccess.defaultExpectation.paramPtrs.ctx = &ctx
 	mmGetAccess.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -2409,22 +2409,22 @@ func (mmGetAccess *mPartitionServiceHandlerMockGetAccess) ExpectCtxParam1(ctx co
 	return mmGetAccess
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for PartitionServiceHandler.GetAccess
-func (mmGetAccess *mPartitionServiceHandlerMockGetAccess) ExpectPp1Param2(pp1 *connect.Request[v1.GetAccessRequest]) *mPartitionServiceHandlerMockGetAccess {
+// ExpectPp1Param2 sets up expected param pp1 for PartitionServiceClient.GetAccess
+func (mmGetAccess *mPartitionServiceClientMockGetAccess) ExpectPp1Param2(pp1 *connect.Request[v1.GetAccessRequest]) *mPartitionServiceClientMockGetAccess {
 	if mmGetAccess.mock.funcGetAccess != nil {
-		mmGetAccess.mock.t.Fatalf("PartitionServiceHandlerMock.GetAccess mock is already set by Set")
+		mmGetAccess.mock.t.Fatalf("PartitionServiceClientMock.GetAccess mock is already set by Set")
 	}
 
 	if mmGetAccess.defaultExpectation == nil {
-		mmGetAccess.defaultExpectation = &PartitionServiceHandlerMockGetAccessExpectation{}
+		mmGetAccess.defaultExpectation = &PartitionServiceClientMockGetAccessExpectation{}
 	}
 
 	if mmGetAccess.defaultExpectation.params != nil {
-		mmGetAccess.mock.t.Fatalf("PartitionServiceHandlerMock.GetAccess mock is already set by Expect")
+		mmGetAccess.mock.t.Fatalf("PartitionServiceClientMock.GetAccess mock is already set by Expect")
 	}
 
 	if mmGetAccess.defaultExpectation.paramPtrs == nil {
-		mmGetAccess.defaultExpectation.paramPtrs = &PartitionServiceHandlerMockGetAccessParamPtrs{}
+		mmGetAccess.defaultExpectation.paramPtrs = &PartitionServiceClientMockGetAccessParamPtrs{}
 	}
 	mmGetAccess.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmGetAccess.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -2432,10 +2432,10 @@ func (mmGetAccess *mPartitionServiceHandlerMockGetAccess) ExpectPp1Param2(pp1 *c
 	return mmGetAccess
 }
 
-// Inspect accepts an inspector function that has same arguments as the PartitionServiceHandler.GetAccess
-func (mmGetAccess *mPartitionServiceHandlerMockGetAccess) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.GetAccessRequest])) *mPartitionServiceHandlerMockGetAccess {
+// Inspect accepts an inspector function that has same arguments as the PartitionServiceClient.GetAccess
+func (mmGetAccess *mPartitionServiceClientMockGetAccess) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.GetAccessRequest])) *mPartitionServiceClientMockGetAccess {
 	if mmGetAccess.mock.inspectFuncGetAccess != nil {
-		mmGetAccess.mock.t.Fatalf("Inspect function is already set for PartitionServiceHandlerMock.GetAccess")
+		mmGetAccess.mock.t.Fatalf("Inspect function is already set for PartitionServiceClientMock.GetAccess")
 	}
 
 	mmGetAccess.mock.inspectFuncGetAccess = f
@@ -2443,28 +2443,28 @@ func (mmGetAccess *mPartitionServiceHandlerMockGetAccess) Inspect(f func(ctx con
 	return mmGetAccess
 }
 
-// Return sets up results that will be returned by PartitionServiceHandler.GetAccess
-func (mmGetAccess *mPartitionServiceHandlerMockGetAccess) Return(pp2 *connect.Response[v1.GetAccessResponse], err error) *PartitionServiceHandlerMock {
+// Return sets up results that will be returned by PartitionServiceClient.GetAccess
+func (mmGetAccess *mPartitionServiceClientMockGetAccess) Return(pp2 *connect.Response[v1.GetAccessResponse], err error) *PartitionServiceClientMock {
 	if mmGetAccess.mock.funcGetAccess != nil {
-		mmGetAccess.mock.t.Fatalf("PartitionServiceHandlerMock.GetAccess mock is already set by Set")
+		mmGetAccess.mock.t.Fatalf("PartitionServiceClientMock.GetAccess mock is already set by Set")
 	}
 
 	if mmGetAccess.defaultExpectation == nil {
-		mmGetAccess.defaultExpectation = &PartitionServiceHandlerMockGetAccessExpectation{mock: mmGetAccess.mock}
+		mmGetAccess.defaultExpectation = &PartitionServiceClientMockGetAccessExpectation{mock: mmGetAccess.mock}
 	}
-	mmGetAccess.defaultExpectation.results = &PartitionServiceHandlerMockGetAccessResults{pp2, err}
+	mmGetAccess.defaultExpectation.results = &PartitionServiceClientMockGetAccessResults{pp2, err}
 	mmGetAccess.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmGetAccess.mock
 }
 
-// Set uses given function f to mock the PartitionServiceHandler.GetAccess method
-func (mmGetAccess *mPartitionServiceHandlerMockGetAccess) Set(f func(ctx context.Context, pp1 *connect.Request[v1.GetAccessRequest]) (pp2 *connect.Response[v1.GetAccessResponse], err error)) *PartitionServiceHandlerMock {
+// Set uses given function f to mock the PartitionServiceClient.GetAccess method
+func (mmGetAccess *mPartitionServiceClientMockGetAccess) Set(f func(ctx context.Context, pp1 *connect.Request[v1.GetAccessRequest]) (pp2 *connect.Response[v1.GetAccessResponse], err error)) *PartitionServiceClientMock {
 	if mmGetAccess.defaultExpectation != nil {
-		mmGetAccess.mock.t.Fatalf("Default expectation is already set for the PartitionServiceHandler.GetAccess method")
+		mmGetAccess.mock.t.Fatalf("Default expectation is already set for the PartitionServiceClient.GetAccess method")
 	}
 
 	if len(mmGetAccess.expectations) > 0 {
-		mmGetAccess.mock.t.Fatalf("Some expectations are already set for the PartitionServiceHandler.GetAccess method")
+		mmGetAccess.mock.t.Fatalf("Some expectations are already set for the PartitionServiceClient.GetAccess method")
 	}
 
 	mmGetAccess.mock.funcGetAccess = f
@@ -2472,39 +2472,39 @@ func (mmGetAccess *mPartitionServiceHandlerMockGetAccess) Set(f func(ctx context
 	return mmGetAccess.mock
 }
 
-// When sets expectation for the PartitionServiceHandler.GetAccess which will trigger the result defined by the following
+// When sets expectation for the PartitionServiceClient.GetAccess which will trigger the result defined by the following
 // Then helper
-func (mmGetAccess *mPartitionServiceHandlerMockGetAccess) When(ctx context.Context, pp1 *connect.Request[v1.GetAccessRequest]) *PartitionServiceHandlerMockGetAccessExpectation {
+func (mmGetAccess *mPartitionServiceClientMockGetAccess) When(ctx context.Context, pp1 *connect.Request[v1.GetAccessRequest]) *PartitionServiceClientMockGetAccessExpectation {
 	if mmGetAccess.mock.funcGetAccess != nil {
-		mmGetAccess.mock.t.Fatalf("PartitionServiceHandlerMock.GetAccess mock is already set by Set")
+		mmGetAccess.mock.t.Fatalf("PartitionServiceClientMock.GetAccess mock is already set by Set")
 	}
 
-	expectation := &PartitionServiceHandlerMockGetAccessExpectation{
+	expectation := &PartitionServiceClientMockGetAccessExpectation{
 		mock:               mmGetAccess.mock,
-		params:             &PartitionServiceHandlerMockGetAccessParams{ctx, pp1},
-		expectationOrigins: PartitionServiceHandlerMockGetAccessExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &PartitionServiceClientMockGetAccessParams{ctx, pp1},
+		expectationOrigins: PartitionServiceClientMockGetAccessExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmGetAccess.expectations = append(mmGetAccess.expectations, expectation)
 	return expectation
 }
 
-// Then sets up PartitionServiceHandler.GetAccess return parameters for the expectation previously defined by the When method
-func (e *PartitionServiceHandlerMockGetAccessExpectation) Then(pp2 *connect.Response[v1.GetAccessResponse], err error) *PartitionServiceHandlerMock {
-	e.results = &PartitionServiceHandlerMockGetAccessResults{pp2, err}
+// Then sets up PartitionServiceClient.GetAccess return parameters for the expectation previously defined by the When method
+func (e *PartitionServiceClientMockGetAccessExpectation) Then(pp2 *connect.Response[v1.GetAccessResponse], err error) *PartitionServiceClientMock {
+	e.results = &PartitionServiceClientMockGetAccessResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times PartitionServiceHandler.GetAccess should be invoked
-func (mmGetAccess *mPartitionServiceHandlerMockGetAccess) Times(n uint64) *mPartitionServiceHandlerMockGetAccess {
+// Times sets number of times PartitionServiceClient.GetAccess should be invoked
+func (mmGetAccess *mPartitionServiceClientMockGetAccess) Times(n uint64) *mPartitionServiceClientMockGetAccess {
 	if n == 0 {
-		mmGetAccess.mock.t.Fatalf("Times of PartitionServiceHandlerMock.GetAccess mock can not be zero")
+		mmGetAccess.mock.t.Fatalf("Times of PartitionServiceClientMock.GetAccess mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmGetAccess.expectedInvocations, n)
 	mmGetAccess.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmGetAccess
 }
 
-func (mmGetAccess *mPartitionServiceHandlerMockGetAccess) invocationsDone() bool {
+func (mmGetAccess *mPartitionServiceClientMockGetAccess) invocationsDone() bool {
 	if len(mmGetAccess.expectations) == 0 && mmGetAccess.defaultExpectation == nil && mmGetAccess.mock.funcGetAccess == nil {
 		return true
 	}
@@ -2515,8 +2515,8 @@ func (mmGetAccess *mPartitionServiceHandlerMockGetAccess) invocationsDone() bool
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// GetAccess implements mm_partitionv1connect.PartitionServiceHandler
-func (mmGetAccess *PartitionServiceHandlerMock) GetAccess(ctx context.Context, pp1 *connect.Request[v1.GetAccessRequest]) (pp2 *connect.Response[v1.GetAccessResponse], err error) {
+// GetAccess implements mm_partitionv1connect.PartitionServiceClient
+func (mmGetAccess *PartitionServiceClientMock) GetAccess(ctx context.Context, pp1 *connect.Request[v1.GetAccessRequest]) (pp2 *connect.Response[v1.GetAccessResponse], err error) {
 	mm_atomic.AddUint64(&mmGetAccess.beforeGetAccessCounter, 1)
 	defer mm_atomic.AddUint64(&mmGetAccess.afterGetAccessCounter, 1)
 
@@ -2526,7 +2526,7 @@ func (mmGetAccess *PartitionServiceHandlerMock) GetAccess(ctx context.Context, p
 		mmGetAccess.inspectFuncGetAccess(ctx, pp1)
 	}
 
-	mm_params := PartitionServiceHandlerMockGetAccessParams{ctx, pp1}
+	mm_params := PartitionServiceClientMockGetAccessParams{ctx, pp1}
 
 	// Record call args
 	mmGetAccess.GetAccessMock.mutex.Lock()
@@ -2545,54 +2545,54 @@ func (mmGetAccess *PartitionServiceHandlerMock) GetAccess(ctx context.Context, p
 		mm_want := mmGetAccess.GetAccessMock.defaultExpectation.params
 		mm_want_ptrs := mmGetAccess.GetAccessMock.defaultExpectation.paramPtrs
 
-		mm_got := PartitionServiceHandlerMockGetAccessParams{ctx, pp1}
+		mm_got := PartitionServiceClientMockGetAccessParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmGetAccess.t.Errorf("PartitionServiceHandlerMock.GetAccess got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmGetAccess.t.Errorf("PartitionServiceClientMock.GetAccess got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmGetAccess.GetAccessMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmGetAccess.t.Errorf("PartitionServiceHandlerMock.GetAccess got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmGetAccess.t.Errorf("PartitionServiceClientMock.GetAccess got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmGetAccess.GetAccessMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmGetAccess.t.Errorf("PartitionServiceHandlerMock.GetAccess got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmGetAccess.t.Errorf("PartitionServiceClientMock.GetAccess got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmGetAccess.GetAccessMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmGetAccess.GetAccessMock.defaultExpectation.results
 		if mm_results == nil {
-			mmGetAccess.t.Fatal("No results are set for the PartitionServiceHandlerMock.GetAccess")
+			mmGetAccess.t.Fatal("No results are set for the PartitionServiceClientMock.GetAccess")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmGetAccess.funcGetAccess != nil {
 		return mmGetAccess.funcGetAccess(ctx, pp1)
 	}
-	mmGetAccess.t.Fatalf("Unexpected call to PartitionServiceHandlerMock.GetAccess. %v %v", ctx, pp1)
+	mmGetAccess.t.Fatalf("Unexpected call to PartitionServiceClientMock.GetAccess. %v %v", ctx, pp1)
 	return
 }
 
-// GetAccessAfterCounter returns a count of finished PartitionServiceHandlerMock.GetAccess invocations
-func (mmGetAccess *PartitionServiceHandlerMock) GetAccessAfterCounter() uint64 {
+// GetAccessAfterCounter returns a count of finished PartitionServiceClientMock.GetAccess invocations
+func (mmGetAccess *PartitionServiceClientMock) GetAccessAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmGetAccess.afterGetAccessCounter)
 }
 
-// GetAccessBeforeCounter returns a count of PartitionServiceHandlerMock.GetAccess invocations
-func (mmGetAccess *PartitionServiceHandlerMock) GetAccessBeforeCounter() uint64 {
+// GetAccessBeforeCounter returns a count of PartitionServiceClientMock.GetAccess invocations
+func (mmGetAccess *PartitionServiceClientMock) GetAccessBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmGetAccess.beforeGetAccessCounter)
 }
 
-// Calls returns a list of arguments used in each call to PartitionServiceHandlerMock.GetAccess.
+// Calls returns a list of arguments used in each call to PartitionServiceClientMock.GetAccess.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmGetAccess *mPartitionServiceHandlerMockGetAccess) Calls() []*PartitionServiceHandlerMockGetAccessParams {
+func (mmGetAccess *mPartitionServiceClientMockGetAccess) Calls() []*PartitionServiceClientMockGetAccessParams {
 	mmGetAccess.mutex.RLock()
 
-	argCopy := make([]*PartitionServiceHandlerMockGetAccessParams, len(mmGetAccess.callArgs))
+	argCopy := make([]*PartitionServiceClientMockGetAccessParams, len(mmGetAccess.callArgs))
 	copy(argCopy, mmGetAccess.callArgs)
 
 	mmGetAccess.mutex.RUnlock()
@@ -2602,7 +2602,7 @@ func (mmGetAccess *mPartitionServiceHandlerMockGetAccess) Calls() []*PartitionSe
 
 // MinimockGetAccessDone returns true if the count of the GetAccess invocations corresponds
 // the number of defined expectations
-func (m *PartitionServiceHandlerMock) MinimockGetAccessDone() bool {
+func (m *PartitionServiceClientMock) MinimockGetAccessDone() bool {
 	if m.GetAccessMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -2618,10 +2618,10 @@ func (m *PartitionServiceHandlerMock) MinimockGetAccessDone() bool {
 }
 
 // MinimockGetAccessInspect logs each unmet expectation
-func (m *PartitionServiceHandlerMock) MinimockGetAccessInspect() {
+func (m *PartitionServiceClientMock) MinimockGetAccessInspect() {
 	for _, e := range m.GetAccessMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.GetAccess at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.GetAccess at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -2629,66 +2629,66 @@ func (m *PartitionServiceHandlerMock) MinimockGetAccessInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.GetAccessMock.defaultExpectation != nil && afterGetAccessCounter < 1 {
 		if m.GetAccessMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.GetAccess at\n%s", m.GetAccessMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.GetAccess at\n%s", m.GetAccessMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.GetAccess at\n%s with params: %#v", m.GetAccessMock.defaultExpectation.expectationOrigins.origin, *m.GetAccessMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.GetAccess at\n%s with params: %#v", m.GetAccessMock.defaultExpectation.expectationOrigins.origin, *m.GetAccessMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcGetAccess != nil && afterGetAccessCounter < 1 {
-		m.t.Errorf("Expected call to PartitionServiceHandlerMock.GetAccess at\n%s", m.funcGetAccessOrigin)
+		m.t.Errorf("Expected call to PartitionServiceClientMock.GetAccess at\n%s", m.funcGetAccessOrigin)
 	}
 
 	if !m.GetAccessMock.invocationsDone() && afterGetAccessCounter > 0 {
-		m.t.Errorf("Expected %d calls to PartitionServiceHandlerMock.GetAccess at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to PartitionServiceClientMock.GetAccess at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.GetAccessMock.expectedInvocations), m.GetAccessMock.expectedInvocationsOrigin, afterGetAccessCounter)
 	}
 }
 
-type mPartitionServiceHandlerMockGetPage struct {
+type mPartitionServiceClientMockGetPage struct {
 	optional           bool
-	mock               *PartitionServiceHandlerMock
-	defaultExpectation *PartitionServiceHandlerMockGetPageExpectation
-	expectations       []*PartitionServiceHandlerMockGetPageExpectation
+	mock               *PartitionServiceClientMock
+	defaultExpectation *PartitionServiceClientMockGetPageExpectation
+	expectations       []*PartitionServiceClientMockGetPageExpectation
 
-	callArgs []*PartitionServiceHandlerMockGetPageParams
+	callArgs []*PartitionServiceClientMockGetPageParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// PartitionServiceHandlerMockGetPageExpectation specifies expectation struct of the PartitionServiceHandler.GetPage
-type PartitionServiceHandlerMockGetPageExpectation struct {
-	mock               *PartitionServiceHandlerMock
-	params             *PartitionServiceHandlerMockGetPageParams
-	paramPtrs          *PartitionServiceHandlerMockGetPageParamPtrs
-	expectationOrigins PartitionServiceHandlerMockGetPageExpectationOrigins
-	results            *PartitionServiceHandlerMockGetPageResults
+// PartitionServiceClientMockGetPageExpectation specifies expectation struct of the PartitionServiceClient.GetPage
+type PartitionServiceClientMockGetPageExpectation struct {
+	mock               *PartitionServiceClientMock
+	params             *PartitionServiceClientMockGetPageParams
+	paramPtrs          *PartitionServiceClientMockGetPageParamPtrs
+	expectationOrigins PartitionServiceClientMockGetPageExpectationOrigins
+	results            *PartitionServiceClientMockGetPageResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// PartitionServiceHandlerMockGetPageParams contains parameters of the PartitionServiceHandler.GetPage
-type PartitionServiceHandlerMockGetPageParams struct {
+// PartitionServiceClientMockGetPageParams contains parameters of the PartitionServiceClient.GetPage
+type PartitionServiceClientMockGetPageParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.GetPageRequest]
 }
 
-// PartitionServiceHandlerMockGetPageParamPtrs contains pointers to parameters of the PartitionServiceHandler.GetPage
-type PartitionServiceHandlerMockGetPageParamPtrs struct {
+// PartitionServiceClientMockGetPageParamPtrs contains pointers to parameters of the PartitionServiceClient.GetPage
+type PartitionServiceClientMockGetPageParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.GetPageRequest]
 }
 
-// PartitionServiceHandlerMockGetPageResults contains results of the PartitionServiceHandler.GetPage
-type PartitionServiceHandlerMockGetPageResults struct {
+// PartitionServiceClientMockGetPageResults contains results of the PartitionServiceClient.GetPage
+type PartitionServiceClientMockGetPageResults struct {
 	pp2 *connect.Response[v1.GetPageResponse]
 	err error
 }
 
-// PartitionServiceHandlerMockGetPageOrigins contains origins of expectations of the PartitionServiceHandler.GetPage
-type PartitionServiceHandlerMockGetPageExpectationOrigins struct {
+// PartitionServiceClientMockGetPageOrigins contains origins of expectations of the PartitionServiceClient.GetPage
+type PartitionServiceClientMockGetPageExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -2699,26 +2699,26 @@ type PartitionServiceHandlerMockGetPageExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmGetPage *mPartitionServiceHandlerMockGetPage) Optional() *mPartitionServiceHandlerMockGetPage {
+func (mmGetPage *mPartitionServiceClientMockGetPage) Optional() *mPartitionServiceClientMockGetPage {
 	mmGetPage.optional = true
 	return mmGetPage
 }
 
-// Expect sets up expected params for PartitionServiceHandler.GetPage
-func (mmGetPage *mPartitionServiceHandlerMockGetPage) Expect(ctx context.Context, pp1 *connect.Request[v1.GetPageRequest]) *mPartitionServiceHandlerMockGetPage {
+// Expect sets up expected params for PartitionServiceClient.GetPage
+func (mmGetPage *mPartitionServiceClientMockGetPage) Expect(ctx context.Context, pp1 *connect.Request[v1.GetPageRequest]) *mPartitionServiceClientMockGetPage {
 	if mmGetPage.mock.funcGetPage != nil {
-		mmGetPage.mock.t.Fatalf("PartitionServiceHandlerMock.GetPage mock is already set by Set")
+		mmGetPage.mock.t.Fatalf("PartitionServiceClientMock.GetPage mock is already set by Set")
 	}
 
 	if mmGetPage.defaultExpectation == nil {
-		mmGetPage.defaultExpectation = &PartitionServiceHandlerMockGetPageExpectation{}
+		mmGetPage.defaultExpectation = &PartitionServiceClientMockGetPageExpectation{}
 	}
 
 	if mmGetPage.defaultExpectation.paramPtrs != nil {
-		mmGetPage.mock.t.Fatalf("PartitionServiceHandlerMock.GetPage mock is already set by ExpectParams functions")
+		mmGetPage.mock.t.Fatalf("PartitionServiceClientMock.GetPage mock is already set by ExpectParams functions")
 	}
 
-	mmGetPage.defaultExpectation.params = &PartitionServiceHandlerMockGetPageParams{ctx, pp1}
+	mmGetPage.defaultExpectation.params = &PartitionServiceClientMockGetPageParams{ctx, pp1}
 	mmGetPage.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmGetPage.expectations {
 		if minimock.Equal(e.params, mmGetPage.defaultExpectation.params) {
@@ -2729,22 +2729,22 @@ func (mmGetPage *mPartitionServiceHandlerMockGetPage) Expect(ctx context.Context
 	return mmGetPage
 }
 
-// ExpectCtxParam1 sets up expected param ctx for PartitionServiceHandler.GetPage
-func (mmGetPage *mPartitionServiceHandlerMockGetPage) ExpectCtxParam1(ctx context.Context) *mPartitionServiceHandlerMockGetPage {
+// ExpectCtxParam1 sets up expected param ctx for PartitionServiceClient.GetPage
+func (mmGetPage *mPartitionServiceClientMockGetPage) ExpectCtxParam1(ctx context.Context) *mPartitionServiceClientMockGetPage {
 	if mmGetPage.mock.funcGetPage != nil {
-		mmGetPage.mock.t.Fatalf("PartitionServiceHandlerMock.GetPage mock is already set by Set")
+		mmGetPage.mock.t.Fatalf("PartitionServiceClientMock.GetPage mock is already set by Set")
 	}
 
 	if mmGetPage.defaultExpectation == nil {
-		mmGetPage.defaultExpectation = &PartitionServiceHandlerMockGetPageExpectation{}
+		mmGetPage.defaultExpectation = &PartitionServiceClientMockGetPageExpectation{}
 	}
 
 	if mmGetPage.defaultExpectation.params != nil {
-		mmGetPage.mock.t.Fatalf("PartitionServiceHandlerMock.GetPage mock is already set by Expect")
+		mmGetPage.mock.t.Fatalf("PartitionServiceClientMock.GetPage mock is already set by Expect")
 	}
 
 	if mmGetPage.defaultExpectation.paramPtrs == nil {
-		mmGetPage.defaultExpectation.paramPtrs = &PartitionServiceHandlerMockGetPageParamPtrs{}
+		mmGetPage.defaultExpectation.paramPtrs = &PartitionServiceClientMockGetPageParamPtrs{}
 	}
 	mmGetPage.defaultExpectation.paramPtrs.ctx = &ctx
 	mmGetPage.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -2752,22 +2752,22 @@ func (mmGetPage *mPartitionServiceHandlerMockGetPage) ExpectCtxParam1(ctx contex
 	return mmGetPage
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for PartitionServiceHandler.GetPage
-func (mmGetPage *mPartitionServiceHandlerMockGetPage) ExpectPp1Param2(pp1 *connect.Request[v1.GetPageRequest]) *mPartitionServiceHandlerMockGetPage {
+// ExpectPp1Param2 sets up expected param pp1 for PartitionServiceClient.GetPage
+func (mmGetPage *mPartitionServiceClientMockGetPage) ExpectPp1Param2(pp1 *connect.Request[v1.GetPageRequest]) *mPartitionServiceClientMockGetPage {
 	if mmGetPage.mock.funcGetPage != nil {
-		mmGetPage.mock.t.Fatalf("PartitionServiceHandlerMock.GetPage mock is already set by Set")
+		mmGetPage.mock.t.Fatalf("PartitionServiceClientMock.GetPage mock is already set by Set")
 	}
 
 	if mmGetPage.defaultExpectation == nil {
-		mmGetPage.defaultExpectation = &PartitionServiceHandlerMockGetPageExpectation{}
+		mmGetPage.defaultExpectation = &PartitionServiceClientMockGetPageExpectation{}
 	}
 
 	if mmGetPage.defaultExpectation.params != nil {
-		mmGetPage.mock.t.Fatalf("PartitionServiceHandlerMock.GetPage mock is already set by Expect")
+		mmGetPage.mock.t.Fatalf("PartitionServiceClientMock.GetPage mock is already set by Expect")
 	}
 
 	if mmGetPage.defaultExpectation.paramPtrs == nil {
-		mmGetPage.defaultExpectation.paramPtrs = &PartitionServiceHandlerMockGetPageParamPtrs{}
+		mmGetPage.defaultExpectation.paramPtrs = &PartitionServiceClientMockGetPageParamPtrs{}
 	}
 	mmGetPage.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmGetPage.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -2775,10 +2775,10 @@ func (mmGetPage *mPartitionServiceHandlerMockGetPage) ExpectPp1Param2(pp1 *conne
 	return mmGetPage
 }
 
-// Inspect accepts an inspector function that has same arguments as the PartitionServiceHandler.GetPage
-func (mmGetPage *mPartitionServiceHandlerMockGetPage) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.GetPageRequest])) *mPartitionServiceHandlerMockGetPage {
+// Inspect accepts an inspector function that has same arguments as the PartitionServiceClient.GetPage
+func (mmGetPage *mPartitionServiceClientMockGetPage) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.GetPageRequest])) *mPartitionServiceClientMockGetPage {
 	if mmGetPage.mock.inspectFuncGetPage != nil {
-		mmGetPage.mock.t.Fatalf("Inspect function is already set for PartitionServiceHandlerMock.GetPage")
+		mmGetPage.mock.t.Fatalf("Inspect function is already set for PartitionServiceClientMock.GetPage")
 	}
 
 	mmGetPage.mock.inspectFuncGetPage = f
@@ -2786,28 +2786,28 @@ func (mmGetPage *mPartitionServiceHandlerMockGetPage) Inspect(f func(ctx context
 	return mmGetPage
 }
 
-// Return sets up results that will be returned by PartitionServiceHandler.GetPage
-func (mmGetPage *mPartitionServiceHandlerMockGetPage) Return(pp2 *connect.Response[v1.GetPageResponse], err error) *PartitionServiceHandlerMock {
+// Return sets up results that will be returned by PartitionServiceClient.GetPage
+func (mmGetPage *mPartitionServiceClientMockGetPage) Return(pp2 *connect.Response[v1.GetPageResponse], err error) *PartitionServiceClientMock {
 	if mmGetPage.mock.funcGetPage != nil {
-		mmGetPage.mock.t.Fatalf("PartitionServiceHandlerMock.GetPage mock is already set by Set")
+		mmGetPage.mock.t.Fatalf("PartitionServiceClientMock.GetPage mock is already set by Set")
 	}
 
 	if mmGetPage.defaultExpectation == nil {
-		mmGetPage.defaultExpectation = &PartitionServiceHandlerMockGetPageExpectation{mock: mmGetPage.mock}
+		mmGetPage.defaultExpectation = &PartitionServiceClientMockGetPageExpectation{mock: mmGetPage.mock}
 	}
-	mmGetPage.defaultExpectation.results = &PartitionServiceHandlerMockGetPageResults{pp2, err}
+	mmGetPage.defaultExpectation.results = &PartitionServiceClientMockGetPageResults{pp2, err}
 	mmGetPage.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmGetPage.mock
 }
 
-// Set uses given function f to mock the PartitionServiceHandler.GetPage method
-func (mmGetPage *mPartitionServiceHandlerMockGetPage) Set(f func(ctx context.Context, pp1 *connect.Request[v1.GetPageRequest]) (pp2 *connect.Response[v1.GetPageResponse], err error)) *PartitionServiceHandlerMock {
+// Set uses given function f to mock the PartitionServiceClient.GetPage method
+func (mmGetPage *mPartitionServiceClientMockGetPage) Set(f func(ctx context.Context, pp1 *connect.Request[v1.GetPageRequest]) (pp2 *connect.Response[v1.GetPageResponse], err error)) *PartitionServiceClientMock {
 	if mmGetPage.defaultExpectation != nil {
-		mmGetPage.mock.t.Fatalf("Default expectation is already set for the PartitionServiceHandler.GetPage method")
+		mmGetPage.mock.t.Fatalf("Default expectation is already set for the PartitionServiceClient.GetPage method")
 	}
 
 	if len(mmGetPage.expectations) > 0 {
-		mmGetPage.mock.t.Fatalf("Some expectations are already set for the PartitionServiceHandler.GetPage method")
+		mmGetPage.mock.t.Fatalf("Some expectations are already set for the PartitionServiceClient.GetPage method")
 	}
 
 	mmGetPage.mock.funcGetPage = f
@@ -2815,39 +2815,39 @@ func (mmGetPage *mPartitionServiceHandlerMockGetPage) Set(f func(ctx context.Con
 	return mmGetPage.mock
 }
 
-// When sets expectation for the PartitionServiceHandler.GetPage which will trigger the result defined by the following
+// When sets expectation for the PartitionServiceClient.GetPage which will trigger the result defined by the following
 // Then helper
-func (mmGetPage *mPartitionServiceHandlerMockGetPage) When(ctx context.Context, pp1 *connect.Request[v1.GetPageRequest]) *PartitionServiceHandlerMockGetPageExpectation {
+func (mmGetPage *mPartitionServiceClientMockGetPage) When(ctx context.Context, pp1 *connect.Request[v1.GetPageRequest]) *PartitionServiceClientMockGetPageExpectation {
 	if mmGetPage.mock.funcGetPage != nil {
-		mmGetPage.mock.t.Fatalf("PartitionServiceHandlerMock.GetPage mock is already set by Set")
+		mmGetPage.mock.t.Fatalf("PartitionServiceClientMock.GetPage mock is already set by Set")
 	}
 
-	expectation := &PartitionServiceHandlerMockGetPageExpectation{
+	expectation := &PartitionServiceClientMockGetPageExpectation{
 		mock:               mmGetPage.mock,
-		params:             &PartitionServiceHandlerMockGetPageParams{ctx, pp1},
-		expectationOrigins: PartitionServiceHandlerMockGetPageExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &PartitionServiceClientMockGetPageParams{ctx, pp1},
+		expectationOrigins: PartitionServiceClientMockGetPageExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmGetPage.expectations = append(mmGetPage.expectations, expectation)
 	return expectation
 }
 
-// Then sets up PartitionServiceHandler.GetPage return parameters for the expectation previously defined by the When method
-func (e *PartitionServiceHandlerMockGetPageExpectation) Then(pp2 *connect.Response[v1.GetPageResponse], err error) *PartitionServiceHandlerMock {
-	e.results = &PartitionServiceHandlerMockGetPageResults{pp2, err}
+// Then sets up PartitionServiceClient.GetPage return parameters for the expectation previously defined by the When method
+func (e *PartitionServiceClientMockGetPageExpectation) Then(pp2 *connect.Response[v1.GetPageResponse], err error) *PartitionServiceClientMock {
+	e.results = &PartitionServiceClientMockGetPageResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times PartitionServiceHandler.GetPage should be invoked
-func (mmGetPage *mPartitionServiceHandlerMockGetPage) Times(n uint64) *mPartitionServiceHandlerMockGetPage {
+// Times sets number of times PartitionServiceClient.GetPage should be invoked
+func (mmGetPage *mPartitionServiceClientMockGetPage) Times(n uint64) *mPartitionServiceClientMockGetPage {
 	if n == 0 {
-		mmGetPage.mock.t.Fatalf("Times of PartitionServiceHandlerMock.GetPage mock can not be zero")
+		mmGetPage.mock.t.Fatalf("Times of PartitionServiceClientMock.GetPage mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmGetPage.expectedInvocations, n)
 	mmGetPage.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmGetPage
 }
 
-func (mmGetPage *mPartitionServiceHandlerMockGetPage) invocationsDone() bool {
+func (mmGetPage *mPartitionServiceClientMockGetPage) invocationsDone() bool {
 	if len(mmGetPage.expectations) == 0 && mmGetPage.defaultExpectation == nil && mmGetPage.mock.funcGetPage == nil {
 		return true
 	}
@@ -2858,8 +2858,8 @@ func (mmGetPage *mPartitionServiceHandlerMockGetPage) invocationsDone() bool {
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// GetPage implements mm_partitionv1connect.PartitionServiceHandler
-func (mmGetPage *PartitionServiceHandlerMock) GetPage(ctx context.Context, pp1 *connect.Request[v1.GetPageRequest]) (pp2 *connect.Response[v1.GetPageResponse], err error) {
+// GetPage implements mm_partitionv1connect.PartitionServiceClient
+func (mmGetPage *PartitionServiceClientMock) GetPage(ctx context.Context, pp1 *connect.Request[v1.GetPageRequest]) (pp2 *connect.Response[v1.GetPageResponse], err error) {
 	mm_atomic.AddUint64(&mmGetPage.beforeGetPageCounter, 1)
 	defer mm_atomic.AddUint64(&mmGetPage.afterGetPageCounter, 1)
 
@@ -2869,7 +2869,7 @@ func (mmGetPage *PartitionServiceHandlerMock) GetPage(ctx context.Context, pp1 *
 		mmGetPage.inspectFuncGetPage(ctx, pp1)
 	}
 
-	mm_params := PartitionServiceHandlerMockGetPageParams{ctx, pp1}
+	mm_params := PartitionServiceClientMockGetPageParams{ctx, pp1}
 
 	// Record call args
 	mmGetPage.GetPageMock.mutex.Lock()
@@ -2888,54 +2888,54 @@ func (mmGetPage *PartitionServiceHandlerMock) GetPage(ctx context.Context, pp1 *
 		mm_want := mmGetPage.GetPageMock.defaultExpectation.params
 		mm_want_ptrs := mmGetPage.GetPageMock.defaultExpectation.paramPtrs
 
-		mm_got := PartitionServiceHandlerMockGetPageParams{ctx, pp1}
+		mm_got := PartitionServiceClientMockGetPageParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmGetPage.t.Errorf("PartitionServiceHandlerMock.GetPage got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmGetPage.t.Errorf("PartitionServiceClientMock.GetPage got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmGetPage.GetPageMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmGetPage.t.Errorf("PartitionServiceHandlerMock.GetPage got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmGetPage.t.Errorf("PartitionServiceClientMock.GetPage got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmGetPage.GetPageMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmGetPage.t.Errorf("PartitionServiceHandlerMock.GetPage got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmGetPage.t.Errorf("PartitionServiceClientMock.GetPage got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmGetPage.GetPageMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmGetPage.GetPageMock.defaultExpectation.results
 		if mm_results == nil {
-			mmGetPage.t.Fatal("No results are set for the PartitionServiceHandlerMock.GetPage")
+			mmGetPage.t.Fatal("No results are set for the PartitionServiceClientMock.GetPage")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmGetPage.funcGetPage != nil {
 		return mmGetPage.funcGetPage(ctx, pp1)
 	}
-	mmGetPage.t.Fatalf("Unexpected call to PartitionServiceHandlerMock.GetPage. %v %v", ctx, pp1)
+	mmGetPage.t.Fatalf("Unexpected call to PartitionServiceClientMock.GetPage. %v %v", ctx, pp1)
 	return
 }
 
-// GetPageAfterCounter returns a count of finished PartitionServiceHandlerMock.GetPage invocations
-func (mmGetPage *PartitionServiceHandlerMock) GetPageAfterCounter() uint64 {
+// GetPageAfterCounter returns a count of finished PartitionServiceClientMock.GetPage invocations
+func (mmGetPage *PartitionServiceClientMock) GetPageAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmGetPage.afterGetPageCounter)
 }
 
-// GetPageBeforeCounter returns a count of PartitionServiceHandlerMock.GetPage invocations
-func (mmGetPage *PartitionServiceHandlerMock) GetPageBeforeCounter() uint64 {
+// GetPageBeforeCounter returns a count of PartitionServiceClientMock.GetPage invocations
+func (mmGetPage *PartitionServiceClientMock) GetPageBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmGetPage.beforeGetPageCounter)
 }
 
-// Calls returns a list of arguments used in each call to PartitionServiceHandlerMock.GetPage.
+// Calls returns a list of arguments used in each call to PartitionServiceClientMock.GetPage.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmGetPage *mPartitionServiceHandlerMockGetPage) Calls() []*PartitionServiceHandlerMockGetPageParams {
+func (mmGetPage *mPartitionServiceClientMockGetPage) Calls() []*PartitionServiceClientMockGetPageParams {
 	mmGetPage.mutex.RLock()
 
-	argCopy := make([]*PartitionServiceHandlerMockGetPageParams, len(mmGetPage.callArgs))
+	argCopy := make([]*PartitionServiceClientMockGetPageParams, len(mmGetPage.callArgs))
 	copy(argCopy, mmGetPage.callArgs)
 
 	mmGetPage.mutex.RUnlock()
@@ -2945,7 +2945,7 @@ func (mmGetPage *mPartitionServiceHandlerMockGetPage) Calls() []*PartitionServic
 
 // MinimockGetPageDone returns true if the count of the GetPage invocations corresponds
 // the number of defined expectations
-func (m *PartitionServiceHandlerMock) MinimockGetPageDone() bool {
+func (m *PartitionServiceClientMock) MinimockGetPageDone() bool {
 	if m.GetPageMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -2961,10 +2961,10 @@ func (m *PartitionServiceHandlerMock) MinimockGetPageDone() bool {
 }
 
 // MinimockGetPageInspect logs each unmet expectation
-func (m *PartitionServiceHandlerMock) MinimockGetPageInspect() {
+func (m *PartitionServiceClientMock) MinimockGetPageInspect() {
 	for _, e := range m.GetPageMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.GetPage at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.GetPage at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -2972,66 +2972,66 @@ func (m *PartitionServiceHandlerMock) MinimockGetPageInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.GetPageMock.defaultExpectation != nil && afterGetPageCounter < 1 {
 		if m.GetPageMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.GetPage at\n%s", m.GetPageMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.GetPage at\n%s", m.GetPageMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.GetPage at\n%s with params: %#v", m.GetPageMock.defaultExpectation.expectationOrigins.origin, *m.GetPageMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.GetPage at\n%s with params: %#v", m.GetPageMock.defaultExpectation.expectationOrigins.origin, *m.GetPageMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcGetPage != nil && afterGetPageCounter < 1 {
-		m.t.Errorf("Expected call to PartitionServiceHandlerMock.GetPage at\n%s", m.funcGetPageOrigin)
+		m.t.Errorf("Expected call to PartitionServiceClientMock.GetPage at\n%s", m.funcGetPageOrigin)
 	}
 
 	if !m.GetPageMock.invocationsDone() && afterGetPageCounter > 0 {
-		m.t.Errorf("Expected %d calls to PartitionServiceHandlerMock.GetPage at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to PartitionServiceClientMock.GetPage at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.GetPageMock.expectedInvocations), m.GetPageMock.expectedInvocationsOrigin, afterGetPageCounter)
 	}
 }
 
-type mPartitionServiceHandlerMockGetPartition struct {
+type mPartitionServiceClientMockGetPartition struct {
 	optional           bool
-	mock               *PartitionServiceHandlerMock
-	defaultExpectation *PartitionServiceHandlerMockGetPartitionExpectation
-	expectations       []*PartitionServiceHandlerMockGetPartitionExpectation
+	mock               *PartitionServiceClientMock
+	defaultExpectation *PartitionServiceClientMockGetPartitionExpectation
+	expectations       []*PartitionServiceClientMockGetPartitionExpectation
 
-	callArgs []*PartitionServiceHandlerMockGetPartitionParams
+	callArgs []*PartitionServiceClientMockGetPartitionParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// PartitionServiceHandlerMockGetPartitionExpectation specifies expectation struct of the PartitionServiceHandler.GetPartition
-type PartitionServiceHandlerMockGetPartitionExpectation struct {
-	mock               *PartitionServiceHandlerMock
-	params             *PartitionServiceHandlerMockGetPartitionParams
-	paramPtrs          *PartitionServiceHandlerMockGetPartitionParamPtrs
-	expectationOrigins PartitionServiceHandlerMockGetPartitionExpectationOrigins
-	results            *PartitionServiceHandlerMockGetPartitionResults
+// PartitionServiceClientMockGetPartitionExpectation specifies expectation struct of the PartitionServiceClient.GetPartition
+type PartitionServiceClientMockGetPartitionExpectation struct {
+	mock               *PartitionServiceClientMock
+	params             *PartitionServiceClientMockGetPartitionParams
+	paramPtrs          *PartitionServiceClientMockGetPartitionParamPtrs
+	expectationOrigins PartitionServiceClientMockGetPartitionExpectationOrigins
+	results            *PartitionServiceClientMockGetPartitionResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// PartitionServiceHandlerMockGetPartitionParams contains parameters of the PartitionServiceHandler.GetPartition
-type PartitionServiceHandlerMockGetPartitionParams struct {
+// PartitionServiceClientMockGetPartitionParams contains parameters of the PartitionServiceClient.GetPartition
+type PartitionServiceClientMockGetPartitionParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.GetPartitionRequest]
 }
 
-// PartitionServiceHandlerMockGetPartitionParamPtrs contains pointers to parameters of the PartitionServiceHandler.GetPartition
-type PartitionServiceHandlerMockGetPartitionParamPtrs struct {
+// PartitionServiceClientMockGetPartitionParamPtrs contains pointers to parameters of the PartitionServiceClient.GetPartition
+type PartitionServiceClientMockGetPartitionParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.GetPartitionRequest]
 }
 
-// PartitionServiceHandlerMockGetPartitionResults contains results of the PartitionServiceHandler.GetPartition
-type PartitionServiceHandlerMockGetPartitionResults struct {
+// PartitionServiceClientMockGetPartitionResults contains results of the PartitionServiceClient.GetPartition
+type PartitionServiceClientMockGetPartitionResults struct {
 	pp2 *connect.Response[v1.GetPartitionResponse]
 	err error
 }
 
-// PartitionServiceHandlerMockGetPartitionOrigins contains origins of expectations of the PartitionServiceHandler.GetPartition
-type PartitionServiceHandlerMockGetPartitionExpectationOrigins struct {
+// PartitionServiceClientMockGetPartitionOrigins contains origins of expectations of the PartitionServiceClient.GetPartition
+type PartitionServiceClientMockGetPartitionExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -3042,26 +3042,26 @@ type PartitionServiceHandlerMockGetPartitionExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmGetPartition *mPartitionServiceHandlerMockGetPartition) Optional() *mPartitionServiceHandlerMockGetPartition {
+func (mmGetPartition *mPartitionServiceClientMockGetPartition) Optional() *mPartitionServiceClientMockGetPartition {
 	mmGetPartition.optional = true
 	return mmGetPartition
 }
 
-// Expect sets up expected params for PartitionServiceHandler.GetPartition
-func (mmGetPartition *mPartitionServiceHandlerMockGetPartition) Expect(ctx context.Context, pp1 *connect.Request[v1.GetPartitionRequest]) *mPartitionServiceHandlerMockGetPartition {
+// Expect sets up expected params for PartitionServiceClient.GetPartition
+func (mmGetPartition *mPartitionServiceClientMockGetPartition) Expect(ctx context.Context, pp1 *connect.Request[v1.GetPartitionRequest]) *mPartitionServiceClientMockGetPartition {
 	if mmGetPartition.mock.funcGetPartition != nil {
-		mmGetPartition.mock.t.Fatalf("PartitionServiceHandlerMock.GetPartition mock is already set by Set")
+		mmGetPartition.mock.t.Fatalf("PartitionServiceClientMock.GetPartition mock is already set by Set")
 	}
 
 	if mmGetPartition.defaultExpectation == nil {
-		mmGetPartition.defaultExpectation = &PartitionServiceHandlerMockGetPartitionExpectation{}
+		mmGetPartition.defaultExpectation = &PartitionServiceClientMockGetPartitionExpectation{}
 	}
 
 	if mmGetPartition.defaultExpectation.paramPtrs != nil {
-		mmGetPartition.mock.t.Fatalf("PartitionServiceHandlerMock.GetPartition mock is already set by ExpectParams functions")
+		mmGetPartition.mock.t.Fatalf("PartitionServiceClientMock.GetPartition mock is already set by ExpectParams functions")
 	}
 
-	mmGetPartition.defaultExpectation.params = &PartitionServiceHandlerMockGetPartitionParams{ctx, pp1}
+	mmGetPartition.defaultExpectation.params = &PartitionServiceClientMockGetPartitionParams{ctx, pp1}
 	mmGetPartition.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmGetPartition.expectations {
 		if minimock.Equal(e.params, mmGetPartition.defaultExpectation.params) {
@@ -3072,22 +3072,22 @@ func (mmGetPartition *mPartitionServiceHandlerMockGetPartition) Expect(ctx conte
 	return mmGetPartition
 }
 
-// ExpectCtxParam1 sets up expected param ctx for PartitionServiceHandler.GetPartition
-func (mmGetPartition *mPartitionServiceHandlerMockGetPartition) ExpectCtxParam1(ctx context.Context) *mPartitionServiceHandlerMockGetPartition {
+// ExpectCtxParam1 sets up expected param ctx for PartitionServiceClient.GetPartition
+func (mmGetPartition *mPartitionServiceClientMockGetPartition) ExpectCtxParam1(ctx context.Context) *mPartitionServiceClientMockGetPartition {
 	if mmGetPartition.mock.funcGetPartition != nil {
-		mmGetPartition.mock.t.Fatalf("PartitionServiceHandlerMock.GetPartition mock is already set by Set")
+		mmGetPartition.mock.t.Fatalf("PartitionServiceClientMock.GetPartition mock is already set by Set")
 	}
 
 	if mmGetPartition.defaultExpectation == nil {
-		mmGetPartition.defaultExpectation = &PartitionServiceHandlerMockGetPartitionExpectation{}
+		mmGetPartition.defaultExpectation = &PartitionServiceClientMockGetPartitionExpectation{}
 	}
 
 	if mmGetPartition.defaultExpectation.params != nil {
-		mmGetPartition.mock.t.Fatalf("PartitionServiceHandlerMock.GetPartition mock is already set by Expect")
+		mmGetPartition.mock.t.Fatalf("PartitionServiceClientMock.GetPartition mock is already set by Expect")
 	}
 
 	if mmGetPartition.defaultExpectation.paramPtrs == nil {
-		mmGetPartition.defaultExpectation.paramPtrs = &PartitionServiceHandlerMockGetPartitionParamPtrs{}
+		mmGetPartition.defaultExpectation.paramPtrs = &PartitionServiceClientMockGetPartitionParamPtrs{}
 	}
 	mmGetPartition.defaultExpectation.paramPtrs.ctx = &ctx
 	mmGetPartition.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -3095,22 +3095,22 @@ func (mmGetPartition *mPartitionServiceHandlerMockGetPartition) ExpectCtxParam1(
 	return mmGetPartition
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for PartitionServiceHandler.GetPartition
-func (mmGetPartition *mPartitionServiceHandlerMockGetPartition) ExpectPp1Param2(pp1 *connect.Request[v1.GetPartitionRequest]) *mPartitionServiceHandlerMockGetPartition {
+// ExpectPp1Param2 sets up expected param pp1 for PartitionServiceClient.GetPartition
+func (mmGetPartition *mPartitionServiceClientMockGetPartition) ExpectPp1Param2(pp1 *connect.Request[v1.GetPartitionRequest]) *mPartitionServiceClientMockGetPartition {
 	if mmGetPartition.mock.funcGetPartition != nil {
-		mmGetPartition.mock.t.Fatalf("PartitionServiceHandlerMock.GetPartition mock is already set by Set")
+		mmGetPartition.mock.t.Fatalf("PartitionServiceClientMock.GetPartition mock is already set by Set")
 	}
 
 	if mmGetPartition.defaultExpectation == nil {
-		mmGetPartition.defaultExpectation = &PartitionServiceHandlerMockGetPartitionExpectation{}
+		mmGetPartition.defaultExpectation = &PartitionServiceClientMockGetPartitionExpectation{}
 	}
 
 	if mmGetPartition.defaultExpectation.params != nil {
-		mmGetPartition.mock.t.Fatalf("PartitionServiceHandlerMock.GetPartition mock is already set by Expect")
+		mmGetPartition.mock.t.Fatalf("PartitionServiceClientMock.GetPartition mock is already set by Expect")
 	}
 
 	if mmGetPartition.defaultExpectation.paramPtrs == nil {
-		mmGetPartition.defaultExpectation.paramPtrs = &PartitionServiceHandlerMockGetPartitionParamPtrs{}
+		mmGetPartition.defaultExpectation.paramPtrs = &PartitionServiceClientMockGetPartitionParamPtrs{}
 	}
 	mmGetPartition.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmGetPartition.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -3118,10 +3118,10 @@ func (mmGetPartition *mPartitionServiceHandlerMockGetPartition) ExpectPp1Param2(
 	return mmGetPartition
 }
 
-// Inspect accepts an inspector function that has same arguments as the PartitionServiceHandler.GetPartition
-func (mmGetPartition *mPartitionServiceHandlerMockGetPartition) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.GetPartitionRequest])) *mPartitionServiceHandlerMockGetPartition {
+// Inspect accepts an inspector function that has same arguments as the PartitionServiceClient.GetPartition
+func (mmGetPartition *mPartitionServiceClientMockGetPartition) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.GetPartitionRequest])) *mPartitionServiceClientMockGetPartition {
 	if mmGetPartition.mock.inspectFuncGetPartition != nil {
-		mmGetPartition.mock.t.Fatalf("Inspect function is already set for PartitionServiceHandlerMock.GetPartition")
+		mmGetPartition.mock.t.Fatalf("Inspect function is already set for PartitionServiceClientMock.GetPartition")
 	}
 
 	mmGetPartition.mock.inspectFuncGetPartition = f
@@ -3129,28 +3129,28 @@ func (mmGetPartition *mPartitionServiceHandlerMockGetPartition) Inspect(f func(c
 	return mmGetPartition
 }
 
-// Return sets up results that will be returned by PartitionServiceHandler.GetPartition
-func (mmGetPartition *mPartitionServiceHandlerMockGetPartition) Return(pp2 *connect.Response[v1.GetPartitionResponse], err error) *PartitionServiceHandlerMock {
+// Return sets up results that will be returned by PartitionServiceClient.GetPartition
+func (mmGetPartition *mPartitionServiceClientMockGetPartition) Return(pp2 *connect.Response[v1.GetPartitionResponse], err error) *PartitionServiceClientMock {
 	if mmGetPartition.mock.funcGetPartition != nil {
-		mmGetPartition.mock.t.Fatalf("PartitionServiceHandlerMock.GetPartition mock is already set by Set")
+		mmGetPartition.mock.t.Fatalf("PartitionServiceClientMock.GetPartition mock is already set by Set")
 	}
 
 	if mmGetPartition.defaultExpectation == nil {
-		mmGetPartition.defaultExpectation = &PartitionServiceHandlerMockGetPartitionExpectation{mock: mmGetPartition.mock}
+		mmGetPartition.defaultExpectation = &PartitionServiceClientMockGetPartitionExpectation{mock: mmGetPartition.mock}
 	}
-	mmGetPartition.defaultExpectation.results = &PartitionServiceHandlerMockGetPartitionResults{pp2, err}
+	mmGetPartition.defaultExpectation.results = &PartitionServiceClientMockGetPartitionResults{pp2, err}
 	mmGetPartition.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmGetPartition.mock
 }
 
-// Set uses given function f to mock the PartitionServiceHandler.GetPartition method
-func (mmGetPartition *mPartitionServiceHandlerMockGetPartition) Set(f func(ctx context.Context, pp1 *connect.Request[v1.GetPartitionRequest]) (pp2 *connect.Response[v1.GetPartitionResponse], err error)) *PartitionServiceHandlerMock {
+// Set uses given function f to mock the PartitionServiceClient.GetPartition method
+func (mmGetPartition *mPartitionServiceClientMockGetPartition) Set(f func(ctx context.Context, pp1 *connect.Request[v1.GetPartitionRequest]) (pp2 *connect.Response[v1.GetPartitionResponse], err error)) *PartitionServiceClientMock {
 	if mmGetPartition.defaultExpectation != nil {
-		mmGetPartition.mock.t.Fatalf("Default expectation is already set for the PartitionServiceHandler.GetPartition method")
+		mmGetPartition.mock.t.Fatalf("Default expectation is already set for the PartitionServiceClient.GetPartition method")
 	}
 
 	if len(mmGetPartition.expectations) > 0 {
-		mmGetPartition.mock.t.Fatalf("Some expectations are already set for the PartitionServiceHandler.GetPartition method")
+		mmGetPartition.mock.t.Fatalf("Some expectations are already set for the PartitionServiceClient.GetPartition method")
 	}
 
 	mmGetPartition.mock.funcGetPartition = f
@@ -3158,39 +3158,39 @@ func (mmGetPartition *mPartitionServiceHandlerMockGetPartition) Set(f func(ctx c
 	return mmGetPartition.mock
 }
 
-// When sets expectation for the PartitionServiceHandler.GetPartition which will trigger the result defined by the following
+// When sets expectation for the PartitionServiceClient.GetPartition which will trigger the result defined by the following
 // Then helper
-func (mmGetPartition *mPartitionServiceHandlerMockGetPartition) When(ctx context.Context, pp1 *connect.Request[v1.GetPartitionRequest]) *PartitionServiceHandlerMockGetPartitionExpectation {
+func (mmGetPartition *mPartitionServiceClientMockGetPartition) When(ctx context.Context, pp1 *connect.Request[v1.GetPartitionRequest]) *PartitionServiceClientMockGetPartitionExpectation {
 	if mmGetPartition.mock.funcGetPartition != nil {
-		mmGetPartition.mock.t.Fatalf("PartitionServiceHandlerMock.GetPartition mock is already set by Set")
+		mmGetPartition.mock.t.Fatalf("PartitionServiceClientMock.GetPartition mock is already set by Set")
 	}
 
-	expectation := &PartitionServiceHandlerMockGetPartitionExpectation{
+	expectation := &PartitionServiceClientMockGetPartitionExpectation{
 		mock:               mmGetPartition.mock,
-		params:             &PartitionServiceHandlerMockGetPartitionParams{ctx, pp1},
-		expectationOrigins: PartitionServiceHandlerMockGetPartitionExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &PartitionServiceClientMockGetPartitionParams{ctx, pp1},
+		expectationOrigins: PartitionServiceClientMockGetPartitionExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmGetPartition.expectations = append(mmGetPartition.expectations, expectation)
 	return expectation
 }
 
-// Then sets up PartitionServiceHandler.GetPartition return parameters for the expectation previously defined by the When method
-func (e *PartitionServiceHandlerMockGetPartitionExpectation) Then(pp2 *connect.Response[v1.GetPartitionResponse], err error) *PartitionServiceHandlerMock {
-	e.results = &PartitionServiceHandlerMockGetPartitionResults{pp2, err}
+// Then sets up PartitionServiceClient.GetPartition return parameters for the expectation previously defined by the When method
+func (e *PartitionServiceClientMockGetPartitionExpectation) Then(pp2 *connect.Response[v1.GetPartitionResponse], err error) *PartitionServiceClientMock {
+	e.results = &PartitionServiceClientMockGetPartitionResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times PartitionServiceHandler.GetPartition should be invoked
-func (mmGetPartition *mPartitionServiceHandlerMockGetPartition) Times(n uint64) *mPartitionServiceHandlerMockGetPartition {
+// Times sets number of times PartitionServiceClient.GetPartition should be invoked
+func (mmGetPartition *mPartitionServiceClientMockGetPartition) Times(n uint64) *mPartitionServiceClientMockGetPartition {
 	if n == 0 {
-		mmGetPartition.mock.t.Fatalf("Times of PartitionServiceHandlerMock.GetPartition mock can not be zero")
+		mmGetPartition.mock.t.Fatalf("Times of PartitionServiceClientMock.GetPartition mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmGetPartition.expectedInvocations, n)
 	mmGetPartition.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmGetPartition
 }
 
-func (mmGetPartition *mPartitionServiceHandlerMockGetPartition) invocationsDone() bool {
+func (mmGetPartition *mPartitionServiceClientMockGetPartition) invocationsDone() bool {
 	if len(mmGetPartition.expectations) == 0 && mmGetPartition.defaultExpectation == nil && mmGetPartition.mock.funcGetPartition == nil {
 		return true
 	}
@@ -3201,8 +3201,8 @@ func (mmGetPartition *mPartitionServiceHandlerMockGetPartition) invocationsDone(
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// GetPartition implements mm_partitionv1connect.PartitionServiceHandler
-func (mmGetPartition *PartitionServiceHandlerMock) GetPartition(ctx context.Context, pp1 *connect.Request[v1.GetPartitionRequest]) (pp2 *connect.Response[v1.GetPartitionResponse], err error) {
+// GetPartition implements mm_partitionv1connect.PartitionServiceClient
+func (mmGetPartition *PartitionServiceClientMock) GetPartition(ctx context.Context, pp1 *connect.Request[v1.GetPartitionRequest]) (pp2 *connect.Response[v1.GetPartitionResponse], err error) {
 	mm_atomic.AddUint64(&mmGetPartition.beforeGetPartitionCounter, 1)
 	defer mm_atomic.AddUint64(&mmGetPartition.afterGetPartitionCounter, 1)
 
@@ -3212,7 +3212,7 @@ func (mmGetPartition *PartitionServiceHandlerMock) GetPartition(ctx context.Cont
 		mmGetPartition.inspectFuncGetPartition(ctx, pp1)
 	}
 
-	mm_params := PartitionServiceHandlerMockGetPartitionParams{ctx, pp1}
+	mm_params := PartitionServiceClientMockGetPartitionParams{ctx, pp1}
 
 	// Record call args
 	mmGetPartition.GetPartitionMock.mutex.Lock()
@@ -3231,54 +3231,54 @@ func (mmGetPartition *PartitionServiceHandlerMock) GetPartition(ctx context.Cont
 		mm_want := mmGetPartition.GetPartitionMock.defaultExpectation.params
 		mm_want_ptrs := mmGetPartition.GetPartitionMock.defaultExpectation.paramPtrs
 
-		mm_got := PartitionServiceHandlerMockGetPartitionParams{ctx, pp1}
+		mm_got := PartitionServiceClientMockGetPartitionParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmGetPartition.t.Errorf("PartitionServiceHandlerMock.GetPartition got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmGetPartition.t.Errorf("PartitionServiceClientMock.GetPartition got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmGetPartition.GetPartitionMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmGetPartition.t.Errorf("PartitionServiceHandlerMock.GetPartition got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmGetPartition.t.Errorf("PartitionServiceClientMock.GetPartition got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmGetPartition.GetPartitionMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmGetPartition.t.Errorf("PartitionServiceHandlerMock.GetPartition got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmGetPartition.t.Errorf("PartitionServiceClientMock.GetPartition got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmGetPartition.GetPartitionMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmGetPartition.GetPartitionMock.defaultExpectation.results
 		if mm_results == nil {
-			mmGetPartition.t.Fatal("No results are set for the PartitionServiceHandlerMock.GetPartition")
+			mmGetPartition.t.Fatal("No results are set for the PartitionServiceClientMock.GetPartition")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmGetPartition.funcGetPartition != nil {
 		return mmGetPartition.funcGetPartition(ctx, pp1)
 	}
-	mmGetPartition.t.Fatalf("Unexpected call to PartitionServiceHandlerMock.GetPartition. %v %v", ctx, pp1)
+	mmGetPartition.t.Fatalf("Unexpected call to PartitionServiceClientMock.GetPartition. %v %v", ctx, pp1)
 	return
 }
 
-// GetPartitionAfterCounter returns a count of finished PartitionServiceHandlerMock.GetPartition invocations
-func (mmGetPartition *PartitionServiceHandlerMock) GetPartitionAfterCounter() uint64 {
+// GetPartitionAfterCounter returns a count of finished PartitionServiceClientMock.GetPartition invocations
+func (mmGetPartition *PartitionServiceClientMock) GetPartitionAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmGetPartition.afterGetPartitionCounter)
 }
 
-// GetPartitionBeforeCounter returns a count of PartitionServiceHandlerMock.GetPartition invocations
-func (mmGetPartition *PartitionServiceHandlerMock) GetPartitionBeforeCounter() uint64 {
+// GetPartitionBeforeCounter returns a count of PartitionServiceClientMock.GetPartition invocations
+func (mmGetPartition *PartitionServiceClientMock) GetPartitionBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmGetPartition.beforeGetPartitionCounter)
 }
 
-// Calls returns a list of arguments used in each call to PartitionServiceHandlerMock.GetPartition.
+// Calls returns a list of arguments used in each call to PartitionServiceClientMock.GetPartition.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmGetPartition *mPartitionServiceHandlerMockGetPartition) Calls() []*PartitionServiceHandlerMockGetPartitionParams {
+func (mmGetPartition *mPartitionServiceClientMockGetPartition) Calls() []*PartitionServiceClientMockGetPartitionParams {
 	mmGetPartition.mutex.RLock()
 
-	argCopy := make([]*PartitionServiceHandlerMockGetPartitionParams, len(mmGetPartition.callArgs))
+	argCopy := make([]*PartitionServiceClientMockGetPartitionParams, len(mmGetPartition.callArgs))
 	copy(argCopy, mmGetPartition.callArgs)
 
 	mmGetPartition.mutex.RUnlock()
@@ -3288,7 +3288,7 @@ func (mmGetPartition *mPartitionServiceHandlerMockGetPartition) Calls() []*Parti
 
 // MinimockGetPartitionDone returns true if the count of the GetPartition invocations corresponds
 // the number of defined expectations
-func (m *PartitionServiceHandlerMock) MinimockGetPartitionDone() bool {
+func (m *PartitionServiceClientMock) MinimockGetPartitionDone() bool {
 	if m.GetPartitionMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -3304,10 +3304,10 @@ func (m *PartitionServiceHandlerMock) MinimockGetPartitionDone() bool {
 }
 
 // MinimockGetPartitionInspect logs each unmet expectation
-func (m *PartitionServiceHandlerMock) MinimockGetPartitionInspect() {
+func (m *PartitionServiceClientMock) MinimockGetPartitionInspect() {
 	for _, e := range m.GetPartitionMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.GetPartition at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.GetPartition at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -3315,66 +3315,66 @@ func (m *PartitionServiceHandlerMock) MinimockGetPartitionInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.GetPartitionMock.defaultExpectation != nil && afterGetPartitionCounter < 1 {
 		if m.GetPartitionMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.GetPartition at\n%s", m.GetPartitionMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.GetPartition at\n%s", m.GetPartitionMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.GetPartition at\n%s with params: %#v", m.GetPartitionMock.defaultExpectation.expectationOrigins.origin, *m.GetPartitionMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.GetPartition at\n%s with params: %#v", m.GetPartitionMock.defaultExpectation.expectationOrigins.origin, *m.GetPartitionMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcGetPartition != nil && afterGetPartitionCounter < 1 {
-		m.t.Errorf("Expected call to PartitionServiceHandlerMock.GetPartition at\n%s", m.funcGetPartitionOrigin)
+		m.t.Errorf("Expected call to PartitionServiceClientMock.GetPartition at\n%s", m.funcGetPartitionOrigin)
 	}
 
 	if !m.GetPartitionMock.invocationsDone() && afterGetPartitionCounter > 0 {
-		m.t.Errorf("Expected %d calls to PartitionServiceHandlerMock.GetPartition at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to PartitionServiceClientMock.GetPartition at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.GetPartitionMock.expectedInvocations), m.GetPartitionMock.expectedInvocationsOrigin, afterGetPartitionCounter)
 	}
 }
 
-type mPartitionServiceHandlerMockGetPartitionParents struct {
+type mPartitionServiceClientMockGetPartitionParents struct {
 	optional           bool
-	mock               *PartitionServiceHandlerMock
-	defaultExpectation *PartitionServiceHandlerMockGetPartitionParentsExpectation
-	expectations       []*PartitionServiceHandlerMockGetPartitionParentsExpectation
+	mock               *PartitionServiceClientMock
+	defaultExpectation *PartitionServiceClientMockGetPartitionParentsExpectation
+	expectations       []*PartitionServiceClientMockGetPartitionParentsExpectation
 
-	callArgs []*PartitionServiceHandlerMockGetPartitionParentsParams
+	callArgs []*PartitionServiceClientMockGetPartitionParentsParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// PartitionServiceHandlerMockGetPartitionParentsExpectation specifies expectation struct of the PartitionServiceHandler.GetPartitionParents
-type PartitionServiceHandlerMockGetPartitionParentsExpectation struct {
-	mock               *PartitionServiceHandlerMock
-	params             *PartitionServiceHandlerMockGetPartitionParentsParams
-	paramPtrs          *PartitionServiceHandlerMockGetPartitionParentsParamPtrs
-	expectationOrigins PartitionServiceHandlerMockGetPartitionParentsExpectationOrigins
-	results            *PartitionServiceHandlerMockGetPartitionParentsResults
+// PartitionServiceClientMockGetPartitionParentsExpectation specifies expectation struct of the PartitionServiceClient.GetPartitionParents
+type PartitionServiceClientMockGetPartitionParentsExpectation struct {
+	mock               *PartitionServiceClientMock
+	params             *PartitionServiceClientMockGetPartitionParentsParams
+	paramPtrs          *PartitionServiceClientMockGetPartitionParentsParamPtrs
+	expectationOrigins PartitionServiceClientMockGetPartitionParentsExpectationOrigins
+	results            *PartitionServiceClientMockGetPartitionParentsResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// PartitionServiceHandlerMockGetPartitionParentsParams contains parameters of the PartitionServiceHandler.GetPartitionParents
-type PartitionServiceHandlerMockGetPartitionParentsParams struct {
+// PartitionServiceClientMockGetPartitionParentsParams contains parameters of the PartitionServiceClient.GetPartitionParents
+type PartitionServiceClientMockGetPartitionParentsParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.GetPartitionParentsRequest]
 }
 
-// PartitionServiceHandlerMockGetPartitionParentsParamPtrs contains pointers to parameters of the PartitionServiceHandler.GetPartitionParents
-type PartitionServiceHandlerMockGetPartitionParentsParamPtrs struct {
+// PartitionServiceClientMockGetPartitionParentsParamPtrs contains pointers to parameters of the PartitionServiceClient.GetPartitionParents
+type PartitionServiceClientMockGetPartitionParentsParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.GetPartitionParentsRequest]
 }
 
-// PartitionServiceHandlerMockGetPartitionParentsResults contains results of the PartitionServiceHandler.GetPartitionParents
-type PartitionServiceHandlerMockGetPartitionParentsResults struct {
+// PartitionServiceClientMockGetPartitionParentsResults contains results of the PartitionServiceClient.GetPartitionParents
+type PartitionServiceClientMockGetPartitionParentsResults struct {
 	pp2 *connect.Response[v1.GetPartitionParentsResponse]
 	err error
 }
 
-// PartitionServiceHandlerMockGetPartitionParentsOrigins contains origins of expectations of the PartitionServiceHandler.GetPartitionParents
-type PartitionServiceHandlerMockGetPartitionParentsExpectationOrigins struct {
+// PartitionServiceClientMockGetPartitionParentsOrigins contains origins of expectations of the PartitionServiceClient.GetPartitionParents
+type PartitionServiceClientMockGetPartitionParentsExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -3385,26 +3385,26 @@ type PartitionServiceHandlerMockGetPartitionParentsExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmGetPartitionParents *mPartitionServiceHandlerMockGetPartitionParents) Optional() *mPartitionServiceHandlerMockGetPartitionParents {
+func (mmGetPartitionParents *mPartitionServiceClientMockGetPartitionParents) Optional() *mPartitionServiceClientMockGetPartitionParents {
 	mmGetPartitionParents.optional = true
 	return mmGetPartitionParents
 }
 
-// Expect sets up expected params for PartitionServiceHandler.GetPartitionParents
-func (mmGetPartitionParents *mPartitionServiceHandlerMockGetPartitionParents) Expect(ctx context.Context, pp1 *connect.Request[v1.GetPartitionParentsRequest]) *mPartitionServiceHandlerMockGetPartitionParents {
+// Expect sets up expected params for PartitionServiceClient.GetPartitionParents
+func (mmGetPartitionParents *mPartitionServiceClientMockGetPartitionParents) Expect(ctx context.Context, pp1 *connect.Request[v1.GetPartitionParentsRequest]) *mPartitionServiceClientMockGetPartitionParents {
 	if mmGetPartitionParents.mock.funcGetPartitionParents != nil {
-		mmGetPartitionParents.mock.t.Fatalf("PartitionServiceHandlerMock.GetPartitionParents mock is already set by Set")
+		mmGetPartitionParents.mock.t.Fatalf("PartitionServiceClientMock.GetPartitionParents mock is already set by Set")
 	}
 
 	if mmGetPartitionParents.defaultExpectation == nil {
-		mmGetPartitionParents.defaultExpectation = &PartitionServiceHandlerMockGetPartitionParentsExpectation{}
+		mmGetPartitionParents.defaultExpectation = &PartitionServiceClientMockGetPartitionParentsExpectation{}
 	}
 
 	if mmGetPartitionParents.defaultExpectation.paramPtrs != nil {
-		mmGetPartitionParents.mock.t.Fatalf("PartitionServiceHandlerMock.GetPartitionParents mock is already set by ExpectParams functions")
+		mmGetPartitionParents.mock.t.Fatalf("PartitionServiceClientMock.GetPartitionParents mock is already set by ExpectParams functions")
 	}
 
-	mmGetPartitionParents.defaultExpectation.params = &PartitionServiceHandlerMockGetPartitionParentsParams{ctx, pp1}
+	mmGetPartitionParents.defaultExpectation.params = &PartitionServiceClientMockGetPartitionParentsParams{ctx, pp1}
 	mmGetPartitionParents.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmGetPartitionParents.expectations {
 		if minimock.Equal(e.params, mmGetPartitionParents.defaultExpectation.params) {
@@ -3415,22 +3415,22 @@ func (mmGetPartitionParents *mPartitionServiceHandlerMockGetPartitionParents) Ex
 	return mmGetPartitionParents
 }
 
-// ExpectCtxParam1 sets up expected param ctx for PartitionServiceHandler.GetPartitionParents
-func (mmGetPartitionParents *mPartitionServiceHandlerMockGetPartitionParents) ExpectCtxParam1(ctx context.Context) *mPartitionServiceHandlerMockGetPartitionParents {
+// ExpectCtxParam1 sets up expected param ctx for PartitionServiceClient.GetPartitionParents
+func (mmGetPartitionParents *mPartitionServiceClientMockGetPartitionParents) ExpectCtxParam1(ctx context.Context) *mPartitionServiceClientMockGetPartitionParents {
 	if mmGetPartitionParents.mock.funcGetPartitionParents != nil {
-		mmGetPartitionParents.mock.t.Fatalf("PartitionServiceHandlerMock.GetPartitionParents mock is already set by Set")
+		mmGetPartitionParents.mock.t.Fatalf("PartitionServiceClientMock.GetPartitionParents mock is already set by Set")
 	}
 
 	if mmGetPartitionParents.defaultExpectation == nil {
-		mmGetPartitionParents.defaultExpectation = &PartitionServiceHandlerMockGetPartitionParentsExpectation{}
+		mmGetPartitionParents.defaultExpectation = &PartitionServiceClientMockGetPartitionParentsExpectation{}
 	}
 
 	if mmGetPartitionParents.defaultExpectation.params != nil {
-		mmGetPartitionParents.mock.t.Fatalf("PartitionServiceHandlerMock.GetPartitionParents mock is already set by Expect")
+		mmGetPartitionParents.mock.t.Fatalf("PartitionServiceClientMock.GetPartitionParents mock is already set by Expect")
 	}
 
 	if mmGetPartitionParents.defaultExpectation.paramPtrs == nil {
-		mmGetPartitionParents.defaultExpectation.paramPtrs = &PartitionServiceHandlerMockGetPartitionParentsParamPtrs{}
+		mmGetPartitionParents.defaultExpectation.paramPtrs = &PartitionServiceClientMockGetPartitionParentsParamPtrs{}
 	}
 	mmGetPartitionParents.defaultExpectation.paramPtrs.ctx = &ctx
 	mmGetPartitionParents.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -3438,22 +3438,22 @@ func (mmGetPartitionParents *mPartitionServiceHandlerMockGetPartitionParents) Ex
 	return mmGetPartitionParents
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for PartitionServiceHandler.GetPartitionParents
-func (mmGetPartitionParents *mPartitionServiceHandlerMockGetPartitionParents) ExpectPp1Param2(pp1 *connect.Request[v1.GetPartitionParentsRequest]) *mPartitionServiceHandlerMockGetPartitionParents {
+// ExpectPp1Param2 sets up expected param pp1 for PartitionServiceClient.GetPartitionParents
+func (mmGetPartitionParents *mPartitionServiceClientMockGetPartitionParents) ExpectPp1Param2(pp1 *connect.Request[v1.GetPartitionParentsRequest]) *mPartitionServiceClientMockGetPartitionParents {
 	if mmGetPartitionParents.mock.funcGetPartitionParents != nil {
-		mmGetPartitionParents.mock.t.Fatalf("PartitionServiceHandlerMock.GetPartitionParents mock is already set by Set")
+		mmGetPartitionParents.mock.t.Fatalf("PartitionServiceClientMock.GetPartitionParents mock is already set by Set")
 	}
 
 	if mmGetPartitionParents.defaultExpectation == nil {
-		mmGetPartitionParents.defaultExpectation = &PartitionServiceHandlerMockGetPartitionParentsExpectation{}
+		mmGetPartitionParents.defaultExpectation = &PartitionServiceClientMockGetPartitionParentsExpectation{}
 	}
 
 	if mmGetPartitionParents.defaultExpectation.params != nil {
-		mmGetPartitionParents.mock.t.Fatalf("PartitionServiceHandlerMock.GetPartitionParents mock is already set by Expect")
+		mmGetPartitionParents.mock.t.Fatalf("PartitionServiceClientMock.GetPartitionParents mock is already set by Expect")
 	}
 
 	if mmGetPartitionParents.defaultExpectation.paramPtrs == nil {
-		mmGetPartitionParents.defaultExpectation.paramPtrs = &PartitionServiceHandlerMockGetPartitionParentsParamPtrs{}
+		mmGetPartitionParents.defaultExpectation.paramPtrs = &PartitionServiceClientMockGetPartitionParentsParamPtrs{}
 	}
 	mmGetPartitionParents.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmGetPartitionParents.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -3461,10 +3461,10 @@ func (mmGetPartitionParents *mPartitionServiceHandlerMockGetPartitionParents) Ex
 	return mmGetPartitionParents
 }
 
-// Inspect accepts an inspector function that has same arguments as the PartitionServiceHandler.GetPartitionParents
-func (mmGetPartitionParents *mPartitionServiceHandlerMockGetPartitionParents) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.GetPartitionParentsRequest])) *mPartitionServiceHandlerMockGetPartitionParents {
+// Inspect accepts an inspector function that has same arguments as the PartitionServiceClient.GetPartitionParents
+func (mmGetPartitionParents *mPartitionServiceClientMockGetPartitionParents) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.GetPartitionParentsRequest])) *mPartitionServiceClientMockGetPartitionParents {
 	if mmGetPartitionParents.mock.inspectFuncGetPartitionParents != nil {
-		mmGetPartitionParents.mock.t.Fatalf("Inspect function is already set for PartitionServiceHandlerMock.GetPartitionParents")
+		mmGetPartitionParents.mock.t.Fatalf("Inspect function is already set for PartitionServiceClientMock.GetPartitionParents")
 	}
 
 	mmGetPartitionParents.mock.inspectFuncGetPartitionParents = f
@@ -3472,28 +3472,28 @@ func (mmGetPartitionParents *mPartitionServiceHandlerMockGetPartitionParents) In
 	return mmGetPartitionParents
 }
 
-// Return sets up results that will be returned by PartitionServiceHandler.GetPartitionParents
-func (mmGetPartitionParents *mPartitionServiceHandlerMockGetPartitionParents) Return(pp2 *connect.Response[v1.GetPartitionParentsResponse], err error) *PartitionServiceHandlerMock {
+// Return sets up results that will be returned by PartitionServiceClient.GetPartitionParents
+func (mmGetPartitionParents *mPartitionServiceClientMockGetPartitionParents) Return(pp2 *connect.Response[v1.GetPartitionParentsResponse], err error) *PartitionServiceClientMock {
 	if mmGetPartitionParents.mock.funcGetPartitionParents != nil {
-		mmGetPartitionParents.mock.t.Fatalf("PartitionServiceHandlerMock.GetPartitionParents mock is already set by Set")
+		mmGetPartitionParents.mock.t.Fatalf("PartitionServiceClientMock.GetPartitionParents mock is already set by Set")
 	}
 
 	if mmGetPartitionParents.defaultExpectation == nil {
-		mmGetPartitionParents.defaultExpectation = &PartitionServiceHandlerMockGetPartitionParentsExpectation{mock: mmGetPartitionParents.mock}
+		mmGetPartitionParents.defaultExpectation = &PartitionServiceClientMockGetPartitionParentsExpectation{mock: mmGetPartitionParents.mock}
 	}
-	mmGetPartitionParents.defaultExpectation.results = &PartitionServiceHandlerMockGetPartitionParentsResults{pp2, err}
+	mmGetPartitionParents.defaultExpectation.results = &PartitionServiceClientMockGetPartitionParentsResults{pp2, err}
 	mmGetPartitionParents.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmGetPartitionParents.mock
 }
 
-// Set uses given function f to mock the PartitionServiceHandler.GetPartitionParents method
-func (mmGetPartitionParents *mPartitionServiceHandlerMockGetPartitionParents) Set(f func(ctx context.Context, pp1 *connect.Request[v1.GetPartitionParentsRequest]) (pp2 *connect.Response[v1.GetPartitionParentsResponse], err error)) *PartitionServiceHandlerMock {
+// Set uses given function f to mock the PartitionServiceClient.GetPartitionParents method
+func (mmGetPartitionParents *mPartitionServiceClientMockGetPartitionParents) Set(f func(ctx context.Context, pp1 *connect.Request[v1.GetPartitionParentsRequest]) (pp2 *connect.Response[v1.GetPartitionParentsResponse], err error)) *PartitionServiceClientMock {
 	if mmGetPartitionParents.defaultExpectation != nil {
-		mmGetPartitionParents.mock.t.Fatalf("Default expectation is already set for the PartitionServiceHandler.GetPartitionParents method")
+		mmGetPartitionParents.mock.t.Fatalf("Default expectation is already set for the PartitionServiceClient.GetPartitionParents method")
 	}
 
 	if len(mmGetPartitionParents.expectations) > 0 {
-		mmGetPartitionParents.mock.t.Fatalf("Some expectations are already set for the PartitionServiceHandler.GetPartitionParents method")
+		mmGetPartitionParents.mock.t.Fatalf("Some expectations are already set for the PartitionServiceClient.GetPartitionParents method")
 	}
 
 	mmGetPartitionParents.mock.funcGetPartitionParents = f
@@ -3501,39 +3501,39 @@ func (mmGetPartitionParents *mPartitionServiceHandlerMockGetPartitionParents) Se
 	return mmGetPartitionParents.mock
 }
 
-// When sets expectation for the PartitionServiceHandler.GetPartitionParents which will trigger the result defined by the following
+// When sets expectation for the PartitionServiceClient.GetPartitionParents which will trigger the result defined by the following
 // Then helper
-func (mmGetPartitionParents *mPartitionServiceHandlerMockGetPartitionParents) When(ctx context.Context, pp1 *connect.Request[v1.GetPartitionParentsRequest]) *PartitionServiceHandlerMockGetPartitionParentsExpectation {
+func (mmGetPartitionParents *mPartitionServiceClientMockGetPartitionParents) When(ctx context.Context, pp1 *connect.Request[v1.GetPartitionParentsRequest]) *PartitionServiceClientMockGetPartitionParentsExpectation {
 	if mmGetPartitionParents.mock.funcGetPartitionParents != nil {
-		mmGetPartitionParents.mock.t.Fatalf("PartitionServiceHandlerMock.GetPartitionParents mock is already set by Set")
+		mmGetPartitionParents.mock.t.Fatalf("PartitionServiceClientMock.GetPartitionParents mock is already set by Set")
 	}
 
-	expectation := &PartitionServiceHandlerMockGetPartitionParentsExpectation{
+	expectation := &PartitionServiceClientMockGetPartitionParentsExpectation{
 		mock:               mmGetPartitionParents.mock,
-		params:             &PartitionServiceHandlerMockGetPartitionParentsParams{ctx, pp1},
-		expectationOrigins: PartitionServiceHandlerMockGetPartitionParentsExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &PartitionServiceClientMockGetPartitionParentsParams{ctx, pp1},
+		expectationOrigins: PartitionServiceClientMockGetPartitionParentsExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmGetPartitionParents.expectations = append(mmGetPartitionParents.expectations, expectation)
 	return expectation
 }
 
-// Then sets up PartitionServiceHandler.GetPartitionParents return parameters for the expectation previously defined by the When method
-func (e *PartitionServiceHandlerMockGetPartitionParentsExpectation) Then(pp2 *connect.Response[v1.GetPartitionParentsResponse], err error) *PartitionServiceHandlerMock {
-	e.results = &PartitionServiceHandlerMockGetPartitionParentsResults{pp2, err}
+// Then sets up PartitionServiceClient.GetPartitionParents return parameters for the expectation previously defined by the When method
+func (e *PartitionServiceClientMockGetPartitionParentsExpectation) Then(pp2 *connect.Response[v1.GetPartitionParentsResponse], err error) *PartitionServiceClientMock {
+	e.results = &PartitionServiceClientMockGetPartitionParentsResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times PartitionServiceHandler.GetPartitionParents should be invoked
-func (mmGetPartitionParents *mPartitionServiceHandlerMockGetPartitionParents) Times(n uint64) *mPartitionServiceHandlerMockGetPartitionParents {
+// Times sets number of times PartitionServiceClient.GetPartitionParents should be invoked
+func (mmGetPartitionParents *mPartitionServiceClientMockGetPartitionParents) Times(n uint64) *mPartitionServiceClientMockGetPartitionParents {
 	if n == 0 {
-		mmGetPartitionParents.mock.t.Fatalf("Times of PartitionServiceHandlerMock.GetPartitionParents mock can not be zero")
+		mmGetPartitionParents.mock.t.Fatalf("Times of PartitionServiceClientMock.GetPartitionParents mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmGetPartitionParents.expectedInvocations, n)
 	mmGetPartitionParents.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmGetPartitionParents
 }
 
-func (mmGetPartitionParents *mPartitionServiceHandlerMockGetPartitionParents) invocationsDone() bool {
+func (mmGetPartitionParents *mPartitionServiceClientMockGetPartitionParents) invocationsDone() bool {
 	if len(mmGetPartitionParents.expectations) == 0 && mmGetPartitionParents.defaultExpectation == nil && mmGetPartitionParents.mock.funcGetPartitionParents == nil {
 		return true
 	}
@@ -3544,8 +3544,8 @@ func (mmGetPartitionParents *mPartitionServiceHandlerMockGetPartitionParents) in
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// GetPartitionParents implements mm_partitionv1connect.PartitionServiceHandler
-func (mmGetPartitionParents *PartitionServiceHandlerMock) GetPartitionParents(ctx context.Context, pp1 *connect.Request[v1.GetPartitionParentsRequest]) (pp2 *connect.Response[v1.GetPartitionParentsResponse], err error) {
+// GetPartitionParents implements mm_partitionv1connect.PartitionServiceClient
+func (mmGetPartitionParents *PartitionServiceClientMock) GetPartitionParents(ctx context.Context, pp1 *connect.Request[v1.GetPartitionParentsRequest]) (pp2 *connect.Response[v1.GetPartitionParentsResponse], err error) {
 	mm_atomic.AddUint64(&mmGetPartitionParents.beforeGetPartitionParentsCounter, 1)
 	defer mm_atomic.AddUint64(&mmGetPartitionParents.afterGetPartitionParentsCounter, 1)
 
@@ -3555,7 +3555,7 @@ func (mmGetPartitionParents *PartitionServiceHandlerMock) GetPartitionParents(ct
 		mmGetPartitionParents.inspectFuncGetPartitionParents(ctx, pp1)
 	}
 
-	mm_params := PartitionServiceHandlerMockGetPartitionParentsParams{ctx, pp1}
+	mm_params := PartitionServiceClientMockGetPartitionParentsParams{ctx, pp1}
 
 	// Record call args
 	mmGetPartitionParents.GetPartitionParentsMock.mutex.Lock()
@@ -3574,54 +3574,54 @@ func (mmGetPartitionParents *PartitionServiceHandlerMock) GetPartitionParents(ct
 		mm_want := mmGetPartitionParents.GetPartitionParentsMock.defaultExpectation.params
 		mm_want_ptrs := mmGetPartitionParents.GetPartitionParentsMock.defaultExpectation.paramPtrs
 
-		mm_got := PartitionServiceHandlerMockGetPartitionParentsParams{ctx, pp1}
+		mm_got := PartitionServiceClientMockGetPartitionParentsParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmGetPartitionParents.t.Errorf("PartitionServiceHandlerMock.GetPartitionParents got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmGetPartitionParents.t.Errorf("PartitionServiceClientMock.GetPartitionParents got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmGetPartitionParents.GetPartitionParentsMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmGetPartitionParents.t.Errorf("PartitionServiceHandlerMock.GetPartitionParents got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmGetPartitionParents.t.Errorf("PartitionServiceClientMock.GetPartitionParents got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmGetPartitionParents.GetPartitionParentsMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmGetPartitionParents.t.Errorf("PartitionServiceHandlerMock.GetPartitionParents got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmGetPartitionParents.t.Errorf("PartitionServiceClientMock.GetPartitionParents got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmGetPartitionParents.GetPartitionParentsMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmGetPartitionParents.GetPartitionParentsMock.defaultExpectation.results
 		if mm_results == nil {
-			mmGetPartitionParents.t.Fatal("No results are set for the PartitionServiceHandlerMock.GetPartitionParents")
+			mmGetPartitionParents.t.Fatal("No results are set for the PartitionServiceClientMock.GetPartitionParents")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmGetPartitionParents.funcGetPartitionParents != nil {
 		return mmGetPartitionParents.funcGetPartitionParents(ctx, pp1)
 	}
-	mmGetPartitionParents.t.Fatalf("Unexpected call to PartitionServiceHandlerMock.GetPartitionParents. %v %v", ctx, pp1)
+	mmGetPartitionParents.t.Fatalf("Unexpected call to PartitionServiceClientMock.GetPartitionParents. %v %v", ctx, pp1)
 	return
 }
 
-// GetPartitionParentsAfterCounter returns a count of finished PartitionServiceHandlerMock.GetPartitionParents invocations
-func (mmGetPartitionParents *PartitionServiceHandlerMock) GetPartitionParentsAfterCounter() uint64 {
+// GetPartitionParentsAfterCounter returns a count of finished PartitionServiceClientMock.GetPartitionParents invocations
+func (mmGetPartitionParents *PartitionServiceClientMock) GetPartitionParentsAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmGetPartitionParents.afterGetPartitionParentsCounter)
 }
 
-// GetPartitionParentsBeforeCounter returns a count of PartitionServiceHandlerMock.GetPartitionParents invocations
-func (mmGetPartitionParents *PartitionServiceHandlerMock) GetPartitionParentsBeforeCounter() uint64 {
+// GetPartitionParentsBeforeCounter returns a count of PartitionServiceClientMock.GetPartitionParents invocations
+func (mmGetPartitionParents *PartitionServiceClientMock) GetPartitionParentsBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmGetPartitionParents.beforeGetPartitionParentsCounter)
 }
 
-// Calls returns a list of arguments used in each call to PartitionServiceHandlerMock.GetPartitionParents.
+// Calls returns a list of arguments used in each call to PartitionServiceClientMock.GetPartitionParents.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmGetPartitionParents *mPartitionServiceHandlerMockGetPartitionParents) Calls() []*PartitionServiceHandlerMockGetPartitionParentsParams {
+func (mmGetPartitionParents *mPartitionServiceClientMockGetPartitionParents) Calls() []*PartitionServiceClientMockGetPartitionParentsParams {
 	mmGetPartitionParents.mutex.RLock()
 
-	argCopy := make([]*PartitionServiceHandlerMockGetPartitionParentsParams, len(mmGetPartitionParents.callArgs))
+	argCopy := make([]*PartitionServiceClientMockGetPartitionParentsParams, len(mmGetPartitionParents.callArgs))
 	copy(argCopy, mmGetPartitionParents.callArgs)
 
 	mmGetPartitionParents.mutex.RUnlock()
@@ -3631,7 +3631,7 @@ func (mmGetPartitionParents *mPartitionServiceHandlerMockGetPartitionParents) Ca
 
 // MinimockGetPartitionParentsDone returns true if the count of the GetPartitionParents invocations corresponds
 // the number of defined expectations
-func (m *PartitionServiceHandlerMock) MinimockGetPartitionParentsDone() bool {
+func (m *PartitionServiceClientMock) MinimockGetPartitionParentsDone() bool {
 	if m.GetPartitionParentsMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -3647,10 +3647,10 @@ func (m *PartitionServiceHandlerMock) MinimockGetPartitionParentsDone() bool {
 }
 
 // MinimockGetPartitionParentsInspect logs each unmet expectation
-func (m *PartitionServiceHandlerMock) MinimockGetPartitionParentsInspect() {
+func (m *PartitionServiceClientMock) MinimockGetPartitionParentsInspect() {
 	for _, e := range m.GetPartitionParentsMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.GetPartitionParents at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.GetPartitionParents at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -3658,66 +3658,66 @@ func (m *PartitionServiceHandlerMock) MinimockGetPartitionParentsInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.GetPartitionParentsMock.defaultExpectation != nil && afterGetPartitionParentsCounter < 1 {
 		if m.GetPartitionParentsMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.GetPartitionParents at\n%s", m.GetPartitionParentsMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.GetPartitionParents at\n%s", m.GetPartitionParentsMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.GetPartitionParents at\n%s with params: %#v", m.GetPartitionParentsMock.defaultExpectation.expectationOrigins.origin, *m.GetPartitionParentsMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.GetPartitionParents at\n%s with params: %#v", m.GetPartitionParentsMock.defaultExpectation.expectationOrigins.origin, *m.GetPartitionParentsMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcGetPartitionParents != nil && afterGetPartitionParentsCounter < 1 {
-		m.t.Errorf("Expected call to PartitionServiceHandlerMock.GetPartitionParents at\n%s", m.funcGetPartitionParentsOrigin)
+		m.t.Errorf("Expected call to PartitionServiceClientMock.GetPartitionParents at\n%s", m.funcGetPartitionParentsOrigin)
 	}
 
 	if !m.GetPartitionParentsMock.invocationsDone() && afterGetPartitionParentsCounter > 0 {
-		m.t.Errorf("Expected %d calls to PartitionServiceHandlerMock.GetPartitionParents at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to PartitionServiceClientMock.GetPartitionParents at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.GetPartitionParentsMock.expectedInvocations), m.GetPartitionParentsMock.expectedInvocationsOrigin, afterGetPartitionParentsCounter)
 	}
 }
 
-type mPartitionServiceHandlerMockGetTenant struct {
+type mPartitionServiceClientMockGetTenant struct {
 	optional           bool
-	mock               *PartitionServiceHandlerMock
-	defaultExpectation *PartitionServiceHandlerMockGetTenantExpectation
-	expectations       []*PartitionServiceHandlerMockGetTenantExpectation
+	mock               *PartitionServiceClientMock
+	defaultExpectation *PartitionServiceClientMockGetTenantExpectation
+	expectations       []*PartitionServiceClientMockGetTenantExpectation
 
-	callArgs []*PartitionServiceHandlerMockGetTenantParams
+	callArgs []*PartitionServiceClientMockGetTenantParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// PartitionServiceHandlerMockGetTenantExpectation specifies expectation struct of the PartitionServiceHandler.GetTenant
-type PartitionServiceHandlerMockGetTenantExpectation struct {
-	mock               *PartitionServiceHandlerMock
-	params             *PartitionServiceHandlerMockGetTenantParams
-	paramPtrs          *PartitionServiceHandlerMockGetTenantParamPtrs
-	expectationOrigins PartitionServiceHandlerMockGetTenantExpectationOrigins
-	results            *PartitionServiceHandlerMockGetTenantResults
+// PartitionServiceClientMockGetTenantExpectation specifies expectation struct of the PartitionServiceClient.GetTenant
+type PartitionServiceClientMockGetTenantExpectation struct {
+	mock               *PartitionServiceClientMock
+	params             *PartitionServiceClientMockGetTenantParams
+	paramPtrs          *PartitionServiceClientMockGetTenantParamPtrs
+	expectationOrigins PartitionServiceClientMockGetTenantExpectationOrigins
+	results            *PartitionServiceClientMockGetTenantResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// PartitionServiceHandlerMockGetTenantParams contains parameters of the PartitionServiceHandler.GetTenant
-type PartitionServiceHandlerMockGetTenantParams struct {
+// PartitionServiceClientMockGetTenantParams contains parameters of the PartitionServiceClient.GetTenant
+type PartitionServiceClientMockGetTenantParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.GetTenantRequest]
 }
 
-// PartitionServiceHandlerMockGetTenantParamPtrs contains pointers to parameters of the PartitionServiceHandler.GetTenant
-type PartitionServiceHandlerMockGetTenantParamPtrs struct {
+// PartitionServiceClientMockGetTenantParamPtrs contains pointers to parameters of the PartitionServiceClient.GetTenant
+type PartitionServiceClientMockGetTenantParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.GetTenantRequest]
 }
 
-// PartitionServiceHandlerMockGetTenantResults contains results of the PartitionServiceHandler.GetTenant
-type PartitionServiceHandlerMockGetTenantResults struct {
+// PartitionServiceClientMockGetTenantResults contains results of the PartitionServiceClient.GetTenant
+type PartitionServiceClientMockGetTenantResults struct {
 	pp2 *connect.Response[v1.GetTenantResponse]
 	err error
 }
 
-// PartitionServiceHandlerMockGetTenantOrigins contains origins of expectations of the PartitionServiceHandler.GetTenant
-type PartitionServiceHandlerMockGetTenantExpectationOrigins struct {
+// PartitionServiceClientMockGetTenantOrigins contains origins of expectations of the PartitionServiceClient.GetTenant
+type PartitionServiceClientMockGetTenantExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -3728,26 +3728,26 @@ type PartitionServiceHandlerMockGetTenantExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmGetTenant *mPartitionServiceHandlerMockGetTenant) Optional() *mPartitionServiceHandlerMockGetTenant {
+func (mmGetTenant *mPartitionServiceClientMockGetTenant) Optional() *mPartitionServiceClientMockGetTenant {
 	mmGetTenant.optional = true
 	return mmGetTenant
 }
 
-// Expect sets up expected params for PartitionServiceHandler.GetTenant
-func (mmGetTenant *mPartitionServiceHandlerMockGetTenant) Expect(ctx context.Context, pp1 *connect.Request[v1.GetTenantRequest]) *mPartitionServiceHandlerMockGetTenant {
+// Expect sets up expected params for PartitionServiceClient.GetTenant
+func (mmGetTenant *mPartitionServiceClientMockGetTenant) Expect(ctx context.Context, pp1 *connect.Request[v1.GetTenantRequest]) *mPartitionServiceClientMockGetTenant {
 	if mmGetTenant.mock.funcGetTenant != nil {
-		mmGetTenant.mock.t.Fatalf("PartitionServiceHandlerMock.GetTenant mock is already set by Set")
+		mmGetTenant.mock.t.Fatalf("PartitionServiceClientMock.GetTenant mock is already set by Set")
 	}
 
 	if mmGetTenant.defaultExpectation == nil {
-		mmGetTenant.defaultExpectation = &PartitionServiceHandlerMockGetTenantExpectation{}
+		mmGetTenant.defaultExpectation = &PartitionServiceClientMockGetTenantExpectation{}
 	}
 
 	if mmGetTenant.defaultExpectation.paramPtrs != nil {
-		mmGetTenant.mock.t.Fatalf("PartitionServiceHandlerMock.GetTenant mock is already set by ExpectParams functions")
+		mmGetTenant.mock.t.Fatalf("PartitionServiceClientMock.GetTenant mock is already set by ExpectParams functions")
 	}
 
-	mmGetTenant.defaultExpectation.params = &PartitionServiceHandlerMockGetTenantParams{ctx, pp1}
+	mmGetTenant.defaultExpectation.params = &PartitionServiceClientMockGetTenantParams{ctx, pp1}
 	mmGetTenant.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmGetTenant.expectations {
 		if minimock.Equal(e.params, mmGetTenant.defaultExpectation.params) {
@@ -3758,22 +3758,22 @@ func (mmGetTenant *mPartitionServiceHandlerMockGetTenant) Expect(ctx context.Con
 	return mmGetTenant
 }
 
-// ExpectCtxParam1 sets up expected param ctx for PartitionServiceHandler.GetTenant
-func (mmGetTenant *mPartitionServiceHandlerMockGetTenant) ExpectCtxParam1(ctx context.Context) *mPartitionServiceHandlerMockGetTenant {
+// ExpectCtxParam1 sets up expected param ctx for PartitionServiceClient.GetTenant
+func (mmGetTenant *mPartitionServiceClientMockGetTenant) ExpectCtxParam1(ctx context.Context) *mPartitionServiceClientMockGetTenant {
 	if mmGetTenant.mock.funcGetTenant != nil {
-		mmGetTenant.mock.t.Fatalf("PartitionServiceHandlerMock.GetTenant mock is already set by Set")
+		mmGetTenant.mock.t.Fatalf("PartitionServiceClientMock.GetTenant mock is already set by Set")
 	}
 
 	if mmGetTenant.defaultExpectation == nil {
-		mmGetTenant.defaultExpectation = &PartitionServiceHandlerMockGetTenantExpectation{}
+		mmGetTenant.defaultExpectation = &PartitionServiceClientMockGetTenantExpectation{}
 	}
 
 	if mmGetTenant.defaultExpectation.params != nil {
-		mmGetTenant.mock.t.Fatalf("PartitionServiceHandlerMock.GetTenant mock is already set by Expect")
+		mmGetTenant.mock.t.Fatalf("PartitionServiceClientMock.GetTenant mock is already set by Expect")
 	}
 
 	if mmGetTenant.defaultExpectation.paramPtrs == nil {
-		mmGetTenant.defaultExpectation.paramPtrs = &PartitionServiceHandlerMockGetTenantParamPtrs{}
+		mmGetTenant.defaultExpectation.paramPtrs = &PartitionServiceClientMockGetTenantParamPtrs{}
 	}
 	mmGetTenant.defaultExpectation.paramPtrs.ctx = &ctx
 	mmGetTenant.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -3781,22 +3781,22 @@ func (mmGetTenant *mPartitionServiceHandlerMockGetTenant) ExpectCtxParam1(ctx co
 	return mmGetTenant
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for PartitionServiceHandler.GetTenant
-func (mmGetTenant *mPartitionServiceHandlerMockGetTenant) ExpectPp1Param2(pp1 *connect.Request[v1.GetTenantRequest]) *mPartitionServiceHandlerMockGetTenant {
+// ExpectPp1Param2 sets up expected param pp1 for PartitionServiceClient.GetTenant
+func (mmGetTenant *mPartitionServiceClientMockGetTenant) ExpectPp1Param2(pp1 *connect.Request[v1.GetTenantRequest]) *mPartitionServiceClientMockGetTenant {
 	if mmGetTenant.mock.funcGetTenant != nil {
-		mmGetTenant.mock.t.Fatalf("PartitionServiceHandlerMock.GetTenant mock is already set by Set")
+		mmGetTenant.mock.t.Fatalf("PartitionServiceClientMock.GetTenant mock is already set by Set")
 	}
 
 	if mmGetTenant.defaultExpectation == nil {
-		mmGetTenant.defaultExpectation = &PartitionServiceHandlerMockGetTenantExpectation{}
+		mmGetTenant.defaultExpectation = &PartitionServiceClientMockGetTenantExpectation{}
 	}
 
 	if mmGetTenant.defaultExpectation.params != nil {
-		mmGetTenant.mock.t.Fatalf("PartitionServiceHandlerMock.GetTenant mock is already set by Expect")
+		mmGetTenant.mock.t.Fatalf("PartitionServiceClientMock.GetTenant mock is already set by Expect")
 	}
 
 	if mmGetTenant.defaultExpectation.paramPtrs == nil {
-		mmGetTenant.defaultExpectation.paramPtrs = &PartitionServiceHandlerMockGetTenantParamPtrs{}
+		mmGetTenant.defaultExpectation.paramPtrs = &PartitionServiceClientMockGetTenantParamPtrs{}
 	}
 	mmGetTenant.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmGetTenant.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -3804,10 +3804,10 @@ func (mmGetTenant *mPartitionServiceHandlerMockGetTenant) ExpectPp1Param2(pp1 *c
 	return mmGetTenant
 }
 
-// Inspect accepts an inspector function that has same arguments as the PartitionServiceHandler.GetTenant
-func (mmGetTenant *mPartitionServiceHandlerMockGetTenant) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.GetTenantRequest])) *mPartitionServiceHandlerMockGetTenant {
+// Inspect accepts an inspector function that has same arguments as the PartitionServiceClient.GetTenant
+func (mmGetTenant *mPartitionServiceClientMockGetTenant) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.GetTenantRequest])) *mPartitionServiceClientMockGetTenant {
 	if mmGetTenant.mock.inspectFuncGetTenant != nil {
-		mmGetTenant.mock.t.Fatalf("Inspect function is already set for PartitionServiceHandlerMock.GetTenant")
+		mmGetTenant.mock.t.Fatalf("Inspect function is already set for PartitionServiceClientMock.GetTenant")
 	}
 
 	mmGetTenant.mock.inspectFuncGetTenant = f
@@ -3815,28 +3815,28 @@ func (mmGetTenant *mPartitionServiceHandlerMockGetTenant) Inspect(f func(ctx con
 	return mmGetTenant
 }
 
-// Return sets up results that will be returned by PartitionServiceHandler.GetTenant
-func (mmGetTenant *mPartitionServiceHandlerMockGetTenant) Return(pp2 *connect.Response[v1.GetTenantResponse], err error) *PartitionServiceHandlerMock {
+// Return sets up results that will be returned by PartitionServiceClient.GetTenant
+func (mmGetTenant *mPartitionServiceClientMockGetTenant) Return(pp2 *connect.Response[v1.GetTenantResponse], err error) *PartitionServiceClientMock {
 	if mmGetTenant.mock.funcGetTenant != nil {
-		mmGetTenant.mock.t.Fatalf("PartitionServiceHandlerMock.GetTenant mock is already set by Set")
+		mmGetTenant.mock.t.Fatalf("PartitionServiceClientMock.GetTenant mock is already set by Set")
 	}
 
 	if mmGetTenant.defaultExpectation == nil {
-		mmGetTenant.defaultExpectation = &PartitionServiceHandlerMockGetTenantExpectation{mock: mmGetTenant.mock}
+		mmGetTenant.defaultExpectation = &PartitionServiceClientMockGetTenantExpectation{mock: mmGetTenant.mock}
 	}
-	mmGetTenant.defaultExpectation.results = &PartitionServiceHandlerMockGetTenantResults{pp2, err}
+	mmGetTenant.defaultExpectation.results = &PartitionServiceClientMockGetTenantResults{pp2, err}
 	mmGetTenant.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmGetTenant.mock
 }
 
-// Set uses given function f to mock the PartitionServiceHandler.GetTenant method
-func (mmGetTenant *mPartitionServiceHandlerMockGetTenant) Set(f func(ctx context.Context, pp1 *connect.Request[v1.GetTenantRequest]) (pp2 *connect.Response[v1.GetTenantResponse], err error)) *PartitionServiceHandlerMock {
+// Set uses given function f to mock the PartitionServiceClient.GetTenant method
+func (mmGetTenant *mPartitionServiceClientMockGetTenant) Set(f func(ctx context.Context, pp1 *connect.Request[v1.GetTenantRequest]) (pp2 *connect.Response[v1.GetTenantResponse], err error)) *PartitionServiceClientMock {
 	if mmGetTenant.defaultExpectation != nil {
-		mmGetTenant.mock.t.Fatalf("Default expectation is already set for the PartitionServiceHandler.GetTenant method")
+		mmGetTenant.mock.t.Fatalf("Default expectation is already set for the PartitionServiceClient.GetTenant method")
 	}
 
 	if len(mmGetTenant.expectations) > 0 {
-		mmGetTenant.mock.t.Fatalf("Some expectations are already set for the PartitionServiceHandler.GetTenant method")
+		mmGetTenant.mock.t.Fatalf("Some expectations are already set for the PartitionServiceClient.GetTenant method")
 	}
 
 	mmGetTenant.mock.funcGetTenant = f
@@ -3844,39 +3844,39 @@ func (mmGetTenant *mPartitionServiceHandlerMockGetTenant) Set(f func(ctx context
 	return mmGetTenant.mock
 }
 
-// When sets expectation for the PartitionServiceHandler.GetTenant which will trigger the result defined by the following
+// When sets expectation for the PartitionServiceClient.GetTenant which will trigger the result defined by the following
 // Then helper
-func (mmGetTenant *mPartitionServiceHandlerMockGetTenant) When(ctx context.Context, pp1 *connect.Request[v1.GetTenantRequest]) *PartitionServiceHandlerMockGetTenantExpectation {
+func (mmGetTenant *mPartitionServiceClientMockGetTenant) When(ctx context.Context, pp1 *connect.Request[v1.GetTenantRequest]) *PartitionServiceClientMockGetTenantExpectation {
 	if mmGetTenant.mock.funcGetTenant != nil {
-		mmGetTenant.mock.t.Fatalf("PartitionServiceHandlerMock.GetTenant mock is already set by Set")
+		mmGetTenant.mock.t.Fatalf("PartitionServiceClientMock.GetTenant mock is already set by Set")
 	}
 
-	expectation := &PartitionServiceHandlerMockGetTenantExpectation{
+	expectation := &PartitionServiceClientMockGetTenantExpectation{
 		mock:               mmGetTenant.mock,
-		params:             &PartitionServiceHandlerMockGetTenantParams{ctx, pp1},
-		expectationOrigins: PartitionServiceHandlerMockGetTenantExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &PartitionServiceClientMockGetTenantParams{ctx, pp1},
+		expectationOrigins: PartitionServiceClientMockGetTenantExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmGetTenant.expectations = append(mmGetTenant.expectations, expectation)
 	return expectation
 }
 
-// Then sets up PartitionServiceHandler.GetTenant return parameters for the expectation previously defined by the When method
-func (e *PartitionServiceHandlerMockGetTenantExpectation) Then(pp2 *connect.Response[v1.GetTenantResponse], err error) *PartitionServiceHandlerMock {
-	e.results = &PartitionServiceHandlerMockGetTenantResults{pp2, err}
+// Then sets up PartitionServiceClient.GetTenant return parameters for the expectation previously defined by the When method
+func (e *PartitionServiceClientMockGetTenantExpectation) Then(pp2 *connect.Response[v1.GetTenantResponse], err error) *PartitionServiceClientMock {
+	e.results = &PartitionServiceClientMockGetTenantResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times PartitionServiceHandler.GetTenant should be invoked
-func (mmGetTenant *mPartitionServiceHandlerMockGetTenant) Times(n uint64) *mPartitionServiceHandlerMockGetTenant {
+// Times sets number of times PartitionServiceClient.GetTenant should be invoked
+func (mmGetTenant *mPartitionServiceClientMockGetTenant) Times(n uint64) *mPartitionServiceClientMockGetTenant {
 	if n == 0 {
-		mmGetTenant.mock.t.Fatalf("Times of PartitionServiceHandlerMock.GetTenant mock can not be zero")
+		mmGetTenant.mock.t.Fatalf("Times of PartitionServiceClientMock.GetTenant mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmGetTenant.expectedInvocations, n)
 	mmGetTenant.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmGetTenant
 }
 
-func (mmGetTenant *mPartitionServiceHandlerMockGetTenant) invocationsDone() bool {
+func (mmGetTenant *mPartitionServiceClientMockGetTenant) invocationsDone() bool {
 	if len(mmGetTenant.expectations) == 0 && mmGetTenant.defaultExpectation == nil && mmGetTenant.mock.funcGetTenant == nil {
 		return true
 	}
@@ -3887,8 +3887,8 @@ func (mmGetTenant *mPartitionServiceHandlerMockGetTenant) invocationsDone() bool
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// GetTenant implements mm_partitionv1connect.PartitionServiceHandler
-func (mmGetTenant *PartitionServiceHandlerMock) GetTenant(ctx context.Context, pp1 *connect.Request[v1.GetTenantRequest]) (pp2 *connect.Response[v1.GetTenantResponse], err error) {
+// GetTenant implements mm_partitionv1connect.PartitionServiceClient
+func (mmGetTenant *PartitionServiceClientMock) GetTenant(ctx context.Context, pp1 *connect.Request[v1.GetTenantRequest]) (pp2 *connect.Response[v1.GetTenantResponse], err error) {
 	mm_atomic.AddUint64(&mmGetTenant.beforeGetTenantCounter, 1)
 	defer mm_atomic.AddUint64(&mmGetTenant.afterGetTenantCounter, 1)
 
@@ -3898,7 +3898,7 @@ func (mmGetTenant *PartitionServiceHandlerMock) GetTenant(ctx context.Context, p
 		mmGetTenant.inspectFuncGetTenant(ctx, pp1)
 	}
 
-	mm_params := PartitionServiceHandlerMockGetTenantParams{ctx, pp1}
+	mm_params := PartitionServiceClientMockGetTenantParams{ctx, pp1}
 
 	// Record call args
 	mmGetTenant.GetTenantMock.mutex.Lock()
@@ -3917,54 +3917,54 @@ func (mmGetTenant *PartitionServiceHandlerMock) GetTenant(ctx context.Context, p
 		mm_want := mmGetTenant.GetTenantMock.defaultExpectation.params
 		mm_want_ptrs := mmGetTenant.GetTenantMock.defaultExpectation.paramPtrs
 
-		mm_got := PartitionServiceHandlerMockGetTenantParams{ctx, pp1}
+		mm_got := PartitionServiceClientMockGetTenantParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmGetTenant.t.Errorf("PartitionServiceHandlerMock.GetTenant got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmGetTenant.t.Errorf("PartitionServiceClientMock.GetTenant got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmGetTenant.GetTenantMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmGetTenant.t.Errorf("PartitionServiceHandlerMock.GetTenant got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmGetTenant.t.Errorf("PartitionServiceClientMock.GetTenant got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmGetTenant.GetTenantMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmGetTenant.t.Errorf("PartitionServiceHandlerMock.GetTenant got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmGetTenant.t.Errorf("PartitionServiceClientMock.GetTenant got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmGetTenant.GetTenantMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmGetTenant.GetTenantMock.defaultExpectation.results
 		if mm_results == nil {
-			mmGetTenant.t.Fatal("No results are set for the PartitionServiceHandlerMock.GetTenant")
+			mmGetTenant.t.Fatal("No results are set for the PartitionServiceClientMock.GetTenant")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmGetTenant.funcGetTenant != nil {
 		return mmGetTenant.funcGetTenant(ctx, pp1)
 	}
-	mmGetTenant.t.Fatalf("Unexpected call to PartitionServiceHandlerMock.GetTenant. %v %v", ctx, pp1)
+	mmGetTenant.t.Fatalf("Unexpected call to PartitionServiceClientMock.GetTenant. %v %v", ctx, pp1)
 	return
 }
 
-// GetTenantAfterCounter returns a count of finished PartitionServiceHandlerMock.GetTenant invocations
-func (mmGetTenant *PartitionServiceHandlerMock) GetTenantAfterCounter() uint64 {
+// GetTenantAfterCounter returns a count of finished PartitionServiceClientMock.GetTenant invocations
+func (mmGetTenant *PartitionServiceClientMock) GetTenantAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmGetTenant.afterGetTenantCounter)
 }
 
-// GetTenantBeforeCounter returns a count of PartitionServiceHandlerMock.GetTenant invocations
-func (mmGetTenant *PartitionServiceHandlerMock) GetTenantBeforeCounter() uint64 {
+// GetTenantBeforeCounter returns a count of PartitionServiceClientMock.GetTenant invocations
+func (mmGetTenant *PartitionServiceClientMock) GetTenantBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmGetTenant.beforeGetTenantCounter)
 }
 
-// Calls returns a list of arguments used in each call to PartitionServiceHandlerMock.GetTenant.
+// Calls returns a list of arguments used in each call to PartitionServiceClientMock.GetTenant.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmGetTenant *mPartitionServiceHandlerMockGetTenant) Calls() []*PartitionServiceHandlerMockGetTenantParams {
+func (mmGetTenant *mPartitionServiceClientMockGetTenant) Calls() []*PartitionServiceClientMockGetTenantParams {
 	mmGetTenant.mutex.RLock()
 
-	argCopy := make([]*PartitionServiceHandlerMockGetTenantParams, len(mmGetTenant.callArgs))
+	argCopy := make([]*PartitionServiceClientMockGetTenantParams, len(mmGetTenant.callArgs))
 	copy(argCopy, mmGetTenant.callArgs)
 
 	mmGetTenant.mutex.RUnlock()
@@ -3974,7 +3974,7 @@ func (mmGetTenant *mPartitionServiceHandlerMockGetTenant) Calls() []*PartitionSe
 
 // MinimockGetTenantDone returns true if the count of the GetTenant invocations corresponds
 // the number of defined expectations
-func (m *PartitionServiceHandlerMock) MinimockGetTenantDone() bool {
+func (m *PartitionServiceClientMock) MinimockGetTenantDone() bool {
 	if m.GetTenantMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -3990,10 +3990,10 @@ func (m *PartitionServiceHandlerMock) MinimockGetTenantDone() bool {
 }
 
 // MinimockGetTenantInspect logs each unmet expectation
-func (m *PartitionServiceHandlerMock) MinimockGetTenantInspect() {
+func (m *PartitionServiceClientMock) MinimockGetTenantInspect() {
 	for _, e := range m.GetTenantMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.GetTenant at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.GetTenant at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -4001,71 +4001,69 @@ func (m *PartitionServiceHandlerMock) MinimockGetTenantInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.GetTenantMock.defaultExpectation != nil && afterGetTenantCounter < 1 {
 		if m.GetTenantMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.GetTenant at\n%s", m.GetTenantMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.GetTenant at\n%s", m.GetTenantMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.GetTenant at\n%s with params: %#v", m.GetTenantMock.defaultExpectation.expectationOrigins.origin, *m.GetTenantMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.GetTenant at\n%s with params: %#v", m.GetTenantMock.defaultExpectation.expectationOrigins.origin, *m.GetTenantMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcGetTenant != nil && afterGetTenantCounter < 1 {
-		m.t.Errorf("Expected call to PartitionServiceHandlerMock.GetTenant at\n%s", m.funcGetTenantOrigin)
+		m.t.Errorf("Expected call to PartitionServiceClientMock.GetTenant at\n%s", m.funcGetTenantOrigin)
 	}
 
 	if !m.GetTenantMock.invocationsDone() && afterGetTenantCounter > 0 {
-		m.t.Errorf("Expected %d calls to PartitionServiceHandlerMock.GetTenant at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to PartitionServiceClientMock.GetTenant at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.GetTenantMock.expectedInvocations), m.GetTenantMock.expectedInvocationsOrigin, afterGetTenantCounter)
 	}
 }
 
-type mPartitionServiceHandlerMockListAccessRole struct {
+type mPartitionServiceClientMockListAccessRole struct {
 	optional           bool
-	mock               *PartitionServiceHandlerMock
-	defaultExpectation *PartitionServiceHandlerMockListAccessRoleExpectation
-	expectations       []*PartitionServiceHandlerMockListAccessRoleExpectation
+	mock               *PartitionServiceClientMock
+	defaultExpectation *PartitionServiceClientMockListAccessRoleExpectation
+	expectations       []*PartitionServiceClientMockListAccessRoleExpectation
 
-	callArgs []*PartitionServiceHandlerMockListAccessRoleParams
+	callArgs []*PartitionServiceClientMockListAccessRoleParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// PartitionServiceHandlerMockListAccessRoleExpectation specifies expectation struct of the PartitionServiceHandler.ListAccessRole
-type PartitionServiceHandlerMockListAccessRoleExpectation struct {
-	mock               *PartitionServiceHandlerMock
-	params             *PartitionServiceHandlerMockListAccessRoleParams
-	paramPtrs          *PartitionServiceHandlerMockListAccessRoleParamPtrs
-	expectationOrigins PartitionServiceHandlerMockListAccessRoleExpectationOrigins
-	results            *PartitionServiceHandlerMockListAccessRoleResults
+// PartitionServiceClientMockListAccessRoleExpectation specifies expectation struct of the PartitionServiceClient.ListAccessRole
+type PartitionServiceClientMockListAccessRoleExpectation struct {
+	mock               *PartitionServiceClientMock
+	params             *PartitionServiceClientMockListAccessRoleParams
+	paramPtrs          *PartitionServiceClientMockListAccessRoleParamPtrs
+	expectationOrigins PartitionServiceClientMockListAccessRoleExpectationOrigins
+	results            *PartitionServiceClientMockListAccessRoleResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// PartitionServiceHandlerMockListAccessRoleParams contains parameters of the PartitionServiceHandler.ListAccessRole
-type PartitionServiceHandlerMockListAccessRoleParams struct {
+// PartitionServiceClientMockListAccessRoleParams contains parameters of the PartitionServiceClient.ListAccessRole
+type PartitionServiceClientMockListAccessRoleParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.ListAccessRoleRequest]
-	pp2 *connect.ServerStream[v1.ListAccessRoleResponse]
 }
 
-// PartitionServiceHandlerMockListAccessRoleParamPtrs contains pointers to parameters of the PartitionServiceHandler.ListAccessRole
-type PartitionServiceHandlerMockListAccessRoleParamPtrs struct {
+// PartitionServiceClientMockListAccessRoleParamPtrs contains pointers to parameters of the PartitionServiceClient.ListAccessRole
+type PartitionServiceClientMockListAccessRoleParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.ListAccessRoleRequest]
-	pp2 **connect.ServerStream[v1.ListAccessRoleResponse]
 }
 
-// PartitionServiceHandlerMockListAccessRoleResults contains results of the PartitionServiceHandler.ListAccessRole
-type PartitionServiceHandlerMockListAccessRoleResults struct {
+// PartitionServiceClientMockListAccessRoleResults contains results of the PartitionServiceClient.ListAccessRole
+type PartitionServiceClientMockListAccessRoleResults struct {
+	pp2 *connect.ServerStreamForClient[v1.ListAccessRoleResponse]
 	err error
 }
 
-// PartitionServiceHandlerMockListAccessRoleOrigins contains origins of expectations of the PartitionServiceHandler.ListAccessRole
-type PartitionServiceHandlerMockListAccessRoleExpectationOrigins struct {
+// PartitionServiceClientMockListAccessRoleOrigins contains origins of expectations of the PartitionServiceClient.ListAccessRole
+type PartitionServiceClientMockListAccessRoleExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
-	originPp2 string
 }
 
 // Marks this method to be optional. The default behavior of any method with Return() is '1 or more', meaning
@@ -4073,26 +4071,26 @@ type PartitionServiceHandlerMockListAccessRoleExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmListAccessRole *mPartitionServiceHandlerMockListAccessRole) Optional() *mPartitionServiceHandlerMockListAccessRole {
+func (mmListAccessRole *mPartitionServiceClientMockListAccessRole) Optional() *mPartitionServiceClientMockListAccessRole {
 	mmListAccessRole.optional = true
 	return mmListAccessRole
 }
 
-// Expect sets up expected params for PartitionServiceHandler.ListAccessRole
-func (mmListAccessRole *mPartitionServiceHandlerMockListAccessRole) Expect(ctx context.Context, pp1 *connect.Request[v1.ListAccessRoleRequest], pp2 *connect.ServerStream[v1.ListAccessRoleResponse]) *mPartitionServiceHandlerMockListAccessRole {
+// Expect sets up expected params for PartitionServiceClient.ListAccessRole
+func (mmListAccessRole *mPartitionServiceClientMockListAccessRole) Expect(ctx context.Context, pp1 *connect.Request[v1.ListAccessRoleRequest]) *mPartitionServiceClientMockListAccessRole {
 	if mmListAccessRole.mock.funcListAccessRole != nil {
-		mmListAccessRole.mock.t.Fatalf("PartitionServiceHandlerMock.ListAccessRole mock is already set by Set")
+		mmListAccessRole.mock.t.Fatalf("PartitionServiceClientMock.ListAccessRole mock is already set by Set")
 	}
 
 	if mmListAccessRole.defaultExpectation == nil {
-		mmListAccessRole.defaultExpectation = &PartitionServiceHandlerMockListAccessRoleExpectation{}
+		mmListAccessRole.defaultExpectation = &PartitionServiceClientMockListAccessRoleExpectation{}
 	}
 
 	if mmListAccessRole.defaultExpectation.paramPtrs != nil {
-		mmListAccessRole.mock.t.Fatalf("PartitionServiceHandlerMock.ListAccessRole mock is already set by ExpectParams functions")
+		mmListAccessRole.mock.t.Fatalf("PartitionServiceClientMock.ListAccessRole mock is already set by ExpectParams functions")
 	}
 
-	mmListAccessRole.defaultExpectation.params = &PartitionServiceHandlerMockListAccessRoleParams{ctx, pp1, pp2}
+	mmListAccessRole.defaultExpectation.params = &PartitionServiceClientMockListAccessRoleParams{ctx, pp1}
 	mmListAccessRole.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmListAccessRole.expectations {
 		if minimock.Equal(e.params, mmListAccessRole.defaultExpectation.params) {
@@ -4103,22 +4101,22 @@ func (mmListAccessRole *mPartitionServiceHandlerMockListAccessRole) Expect(ctx c
 	return mmListAccessRole
 }
 
-// ExpectCtxParam1 sets up expected param ctx for PartitionServiceHandler.ListAccessRole
-func (mmListAccessRole *mPartitionServiceHandlerMockListAccessRole) ExpectCtxParam1(ctx context.Context) *mPartitionServiceHandlerMockListAccessRole {
+// ExpectCtxParam1 sets up expected param ctx for PartitionServiceClient.ListAccessRole
+func (mmListAccessRole *mPartitionServiceClientMockListAccessRole) ExpectCtxParam1(ctx context.Context) *mPartitionServiceClientMockListAccessRole {
 	if mmListAccessRole.mock.funcListAccessRole != nil {
-		mmListAccessRole.mock.t.Fatalf("PartitionServiceHandlerMock.ListAccessRole mock is already set by Set")
+		mmListAccessRole.mock.t.Fatalf("PartitionServiceClientMock.ListAccessRole mock is already set by Set")
 	}
 
 	if mmListAccessRole.defaultExpectation == nil {
-		mmListAccessRole.defaultExpectation = &PartitionServiceHandlerMockListAccessRoleExpectation{}
+		mmListAccessRole.defaultExpectation = &PartitionServiceClientMockListAccessRoleExpectation{}
 	}
 
 	if mmListAccessRole.defaultExpectation.params != nil {
-		mmListAccessRole.mock.t.Fatalf("PartitionServiceHandlerMock.ListAccessRole mock is already set by Expect")
+		mmListAccessRole.mock.t.Fatalf("PartitionServiceClientMock.ListAccessRole mock is already set by Expect")
 	}
 
 	if mmListAccessRole.defaultExpectation.paramPtrs == nil {
-		mmListAccessRole.defaultExpectation.paramPtrs = &PartitionServiceHandlerMockListAccessRoleParamPtrs{}
+		mmListAccessRole.defaultExpectation.paramPtrs = &PartitionServiceClientMockListAccessRoleParamPtrs{}
 	}
 	mmListAccessRole.defaultExpectation.paramPtrs.ctx = &ctx
 	mmListAccessRole.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -4126,22 +4124,22 @@ func (mmListAccessRole *mPartitionServiceHandlerMockListAccessRole) ExpectCtxPar
 	return mmListAccessRole
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for PartitionServiceHandler.ListAccessRole
-func (mmListAccessRole *mPartitionServiceHandlerMockListAccessRole) ExpectPp1Param2(pp1 *connect.Request[v1.ListAccessRoleRequest]) *mPartitionServiceHandlerMockListAccessRole {
+// ExpectPp1Param2 sets up expected param pp1 for PartitionServiceClient.ListAccessRole
+func (mmListAccessRole *mPartitionServiceClientMockListAccessRole) ExpectPp1Param2(pp1 *connect.Request[v1.ListAccessRoleRequest]) *mPartitionServiceClientMockListAccessRole {
 	if mmListAccessRole.mock.funcListAccessRole != nil {
-		mmListAccessRole.mock.t.Fatalf("PartitionServiceHandlerMock.ListAccessRole mock is already set by Set")
+		mmListAccessRole.mock.t.Fatalf("PartitionServiceClientMock.ListAccessRole mock is already set by Set")
 	}
 
 	if mmListAccessRole.defaultExpectation == nil {
-		mmListAccessRole.defaultExpectation = &PartitionServiceHandlerMockListAccessRoleExpectation{}
+		mmListAccessRole.defaultExpectation = &PartitionServiceClientMockListAccessRoleExpectation{}
 	}
 
 	if mmListAccessRole.defaultExpectation.params != nil {
-		mmListAccessRole.mock.t.Fatalf("PartitionServiceHandlerMock.ListAccessRole mock is already set by Expect")
+		mmListAccessRole.mock.t.Fatalf("PartitionServiceClientMock.ListAccessRole mock is already set by Expect")
 	}
 
 	if mmListAccessRole.defaultExpectation.paramPtrs == nil {
-		mmListAccessRole.defaultExpectation.paramPtrs = &PartitionServiceHandlerMockListAccessRoleParamPtrs{}
+		mmListAccessRole.defaultExpectation.paramPtrs = &PartitionServiceClientMockListAccessRoleParamPtrs{}
 	}
 	mmListAccessRole.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmListAccessRole.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -4149,33 +4147,10 @@ func (mmListAccessRole *mPartitionServiceHandlerMockListAccessRole) ExpectPp1Par
 	return mmListAccessRole
 }
 
-// ExpectPp2Param3 sets up expected param pp2 for PartitionServiceHandler.ListAccessRole
-func (mmListAccessRole *mPartitionServiceHandlerMockListAccessRole) ExpectPp2Param3(pp2 *connect.ServerStream[v1.ListAccessRoleResponse]) *mPartitionServiceHandlerMockListAccessRole {
-	if mmListAccessRole.mock.funcListAccessRole != nil {
-		mmListAccessRole.mock.t.Fatalf("PartitionServiceHandlerMock.ListAccessRole mock is already set by Set")
-	}
-
-	if mmListAccessRole.defaultExpectation == nil {
-		mmListAccessRole.defaultExpectation = &PartitionServiceHandlerMockListAccessRoleExpectation{}
-	}
-
-	if mmListAccessRole.defaultExpectation.params != nil {
-		mmListAccessRole.mock.t.Fatalf("PartitionServiceHandlerMock.ListAccessRole mock is already set by Expect")
-	}
-
-	if mmListAccessRole.defaultExpectation.paramPtrs == nil {
-		mmListAccessRole.defaultExpectation.paramPtrs = &PartitionServiceHandlerMockListAccessRoleParamPtrs{}
-	}
-	mmListAccessRole.defaultExpectation.paramPtrs.pp2 = &pp2
-	mmListAccessRole.defaultExpectation.expectationOrigins.originPp2 = minimock.CallerInfo(1)
-
-	return mmListAccessRole
-}
-
-// Inspect accepts an inspector function that has same arguments as the PartitionServiceHandler.ListAccessRole
-func (mmListAccessRole *mPartitionServiceHandlerMockListAccessRole) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.ListAccessRoleRequest], pp2 *connect.ServerStream[v1.ListAccessRoleResponse])) *mPartitionServiceHandlerMockListAccessRole {
+// Inspect accepts an inspector function that has same arguments as the PartitionServiceClient.ListAccessRole
+func (mmListAccessRole *mPartitionServiceClientMockListAccessRole) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.ListAccessRoleRequest])) *mPartitionServiceClientMockListAccessRole {
 	if mmListAccessRole.mock.inspectFuncListAccessRole != nil {
-		mmListAccessRole.mock.t.Fatalf("Inspect function is already set for PartitionServiceHandlerMock.ListAccessRole")
+		mmListAccessRole.mock.t.Fatalf("Inspect function is already set for PartitionServiceClientMock.ListAccessRole")
 	}
 
 	mmListAccessRole.mock.inspectFuncListAccessRole = f
@@ -4183,28 +4158,28 @@ func (mmListAccessRole *mPartitionServiceHandlerMockListAccessRole) Inspect(f fu
 	return mmListAccessRole
 }
 
-// Return sets up results that will be returned by PartitionServiceHandler.ListAccessRole
-func (mmListAccessRole *mPartitionServiceHandlerMockListAccessRole) Return(err error) *PartitionServiceHandlerMock {
+// Return sets up results that will be returned by PartitionServiceClient.ListAccessRole
+func (mmListAccessRole *mPartitionServiceClientMockListAccessRole) Return(pp2 *connect.ServerStreamForClient[v1.ListAccessRoleResponse], err error) *PartitionServiceClientMock {
 	if mmListAccessRole.mock.funcListAccessRole != nil {
-		mmListAccessRole.mock.t.Fatalf("PartitionServiceHandlerMock.ListAccessRole mock is already set by Set")
+		mmListAccessRole.mock.t.Fatalf("PartitionServiceClientMock.ListAccessRole mock is already set by Set")
 	}
 
 	if mmListAccessRole.defaultExpectation == nil {
-		mmListAccessRole.defaultExpectation = &PartitionServiceHandlerMockListAccessRoleExpectation{mock: mmListAccessRole.mock}
+		mmListAccessRole.defaultExpectation = &PartitionServiceClientMockListAccessRoleExpectation{mock: mmListAccessRole.mock}
 	}
-	mmListAccessRole.defaultExpectation.results = &PartitionServiceHandlerMockListAccessRoleResults{err}
+	mmListAccessRole.defaultExpectation.results = &PartitionServiceClientMockListAccessRoleResults{pp2, err}
 	mmListAccessRole.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmListAccessRole.mock
 }
 
-// Set uses given function f to mock the PartitionServiceHandler.ListAccessRole method
-func (mmListAccessRole *mPartitionServiceHandlerMockListAccessRole) Set(f func(ctx context.Context, pp1 *connect.Request[v1.ListAccessRoleRequest], pp2 *connect.ServerStream[v1.ListAccessRoleResponse]) (err error)) *PartitionServiceHandlerMock {
+// Set uses given function f to mock the PartitionServiceClient.ListAccessRole method
+func (mmListAccessRole *mPartitionServiceClientMockListAccessRole) Set(f func(ctx context.Context, pp1 *connect.Request[v1.ListAccessRoleRequest]) (pp2 *connect.ServerStreamForClient[v1.ListAccessRoleResponse], err error)) *PartitionServiceClientMock {
 	if mmListAccessRole.defaultExpectation != nil {
-		mmListAccessRole.mock.t.Fatalf("Default expectation is already set for the PartitionServiceHandler.ListAccessRole method")
+		mmListAccessRole.mock.t.Fatalf("Default expectation is already set for the PartitionServiceClient.ListAccessRole method")
 	}
 
 	if len(mmListAccessRole.expectations) > 0 {
-		mmListAccessRole.mock.t.Fatalf("Some expectations are already set for the PartitionServiceHandler.ListAccessRole method")
+		mmListAccessRole.mock.t.Fatalf("Some expectations are already set for the PartitionServiceClient.ListAccessRole method")
 	}
 
 	mmListAccessRole.mock.funcListAccessRole = f
@@ -4212,39 +4187,39 @@ func (mmListAccessRole *mPartitionServiceHandlerMockListAccessRole) Set(f func(c
 	return mmListAccessRole.mock
 }
 
-// When sets expectation for the PartitionServiceHandler.ListAccessRole which will trigger the result defined by the following
+// When sets expectation for the PartitionServiceClient.ListAccessRole which will trigger the result defined by the following
 // Then helper
-func (mmListAccessRole *mPartitionServiceHandlerMockListAccessRole) When(ctx context.Context, pp1 *connect.Request[v1.ListAccessRoleRequest], pp2 *connect.ServerStream[v1.ListAccessRoleResponse]) *PartitionServiceHandlerMockListAccessRoleExpectation {
+func (mmListAccessRole *mPartitionServiceClientMockListAccessRole) When(ctx context.Context, pp1 *connect.Request[v1.ListAccessRoleRequest]) *PartitionServiceClientMockListAccessRoleExpectation {
 	if mmListAccessRole.mock.funcListAccessRole != nil {
-		mmListAccessRole.mock.t.Fatalf("PartitionServiceHandlerMock.ListAccessRole mock is already set by Set")
+		mmListAccessRole.mock.t.Fatalf("PartitionServiceClientMock.ListAccessRole mock is already set by Set")
 	}
 
-	expectation := &PartitionServiceHandlerMockListAccessRoleExpectation{
+	expectation := &PartitionServiceClientMockListAccessRoleExpectation{
 		mock:               mmListAccessRole.mock,
-		params:             &PartitionServiceHandlerMockListAccessRoleParams{ctx, pp1, pp2},
-		expectationOrigins: PartitionServiceHandlerMockListAccessRoleExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &PartitionServiceClientMockListAccessRoleParams{ctx, pp1},
+		expectationOrigins: PartitionServiceClientMockListAccessRoleExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmListAccessRole.expectations = append(mmListAccessRole.expectations, expectation)
 	return expectation
 }
 
-// Then sets up PartitionServiceHandler.ListAccessRole return parameters for the expectation previously defined by the When method
-func (e *PartitionServiceHandlerMockListAccessRoleExpectation) Then(err error) *PartitionServiceHandlerMock {
-	e.results = &PartitionServiceHandlerMockListAccessRoleResults{err}
+// Then sets up PartitionServiceClient.ListAccessRole return parameters for the expectation previously defined by the When method
+func (e *PartitionServiceClientMockListAccessRoleExpectation) Then(pp2 *connect.ServerStreamForClient[v1.ListAccessRoleResponse], err error) *PartitionServiceClientMock {
+	e.results = &PartitionServiceClientMockListAccessRoleResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times PartitionServiceHandler.ListAccessRole should be invoked
-func (mmListAccessRole *mPartitionServiceHandlerMockListAccessRole) Times(n uint64) *mPartitionServiceHandlerMockListAccessRole {
+// Times sets number of times PartitionServiceClient.ListAccessRole should be invoked
+func (mmListAccessRole *mPartitionServiceClientMockListAccessRole) Times(n uint64) *mPartitionServiceClientMockListAccessRole {
 	if n == 0 {
-		mmListAccessRole.mock.t.Fatalf("Times of PartitionServiceHandlerMock.ListAccessRole mock can not be zero")
+		mmListAccessRole.mock.t.Fatalf("Times of PartitionServiceClientMock.ListAccessRole mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmListAccessRole.expectedInvocations, n)
 	mmListAccessRole.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmListAccessRole
 }
 
-func (mmListAccessRole *mPartitionServiceHandlerMockListAccessRole) invocationsDone() bool {
+func (mmListAccessRole *mPartitionServiceClientMockListAccessRole) invocationsDone() bool {
 	if len(mmListAccessRole.expectations) == 0 && mmListAccessRole.defaultExpectation == nil && mmListAccessRole.mock.funcListAccessRole == nil {
 		return true
 	}
@@ -4255,18 +4230,18 @@ func (mmListAccessRole *mPartitionServiceHandlerMockListAccessRole) invocationsD
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// ListAccessRole implements mm_partitionv1connect.PartitionServiceHandler
-func (mmListAccessRole *PartitionServiceHandlerMock) ListAccessRole(ctx context.Context, pp1 *connect.Request[v1.ListAccessRoleRequest], pp2 *connect.ServerStream[v1.ListAccessRoleResponse]) (err error) {
+// ListAccessRole implements mm_partitionv1connect.PartitionServiceClient
+func (mmListAccessRole *PartitionServiceClientMock) ListAccessRole(ctx context.Context, pp1 *connect.Request[v1.ListAccessRoleRequest]) (pp2 *connect.ServerStreamForClient[v1.ListAccessRoleResponse], err error) {
 	mm_atomic.AddUint64(&mmListAccessRole.beforeListAccessRoleCounter, 1)
 	defer mm_atomic.AddUint64(&mmListAccessRole.afterListAccessRoleCounter, 1)
 
 	mmListAccessRole.t.Helper()
 
 	if mmListAccessRole.inspectFuncListAccessRole != nil {
-		mmListAccessRole.inspectFuncListAccessRole(ctx, pp1, pp2)
+		mmListAccessRole.inspectFuncListAccessRole(ctx, pp1)
 	}
 
-	mm_params := PartitionServiceHandlerMockListAccessRoleParams{ctx, pp1, pp2}
+	mm_params := PartitionServiceClientMockListAccessRoleParams{ctx, pp1}
 
 	// Record call args
 	mmListAccessRole.ListAccessRoleMock.mutex.Lock()
@@ -4276,7 +4251,7 @@ func (mmListAccessRole *PartitionServiceHandlerMock) ListAccessRole(ctx context.
 	for _, e := range mmListAccessRole.ListAccessRoleMock.expectations {
 		if minimock.Equal(*e.params, mm_params) {
 			mm_atomic.AddUint64(&e.Counter, 1)
-			return e.results.err
+			return e.results.pp2, e.results.err
 		}
 	}
 
@@ -4285,59 +4260,54 @@ func (mmListAccessRole *PartitionServiceHandlerMock) ListAccessRole(ctx context.
 		mm_want := mmListAccessRole.ListAccessRoleMock.defaultExpectation.params
 		mm_want_ptrs := mmListAccessRole.ListAccessRoleMock.defaultExpectation.paramPtrs
 
-		mm_got := PartitionServiceHandlerMockListAccessRoleParams{ctx, pp1, pp2}
+		mm_got := PartitionServiceClientMockListAccessRoleParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmListAccessRole.t.Errorf("PartitionServiceHandlerMock.ListAccessRole got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmListAccessRole.t.Errorf("PartitionServiceClientMock.ListAccessRole got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmListAccessRole.ListAccessRoleMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmListAccessRole.t.Errorf("PartitionServiceHandlerMock.ListAccessRole got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmListAccessRole.t.Errorf("PartitionServiceClientMock.ListAccessRole got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmListAccessRole.ListAccessRoleMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
-			if mm_want_ptrs.pp2 != nil && !minimock.Equal(*mm_want_ptrs.pp2, mm_got.pp2) {
-				mmListAccessRole.t.Errorf("PartitionServiceHandlerMock.ListAccessRole got unexpected parameter pp2, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
-					mmListAccessRole.ListAccessRoleMock.defaultExpectation.expectationOrigins.originPp2, *mm_want_ptrs.pp2, mm_got.pp2, minimock.Diff(*mm_want_ptrs.pp2, mm_got.pp2))
-			}
-
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmListAccessRole.t.Errorf("PartitionServiceHandlerMock.ListAccessRole got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmListAccessRole.t.Errorf("PartitionServiceClientMock.ListAccessRole got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmListAccessRole.ListAccessRoleMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmListAccessRole.ListAccessRoleMock.defaultExpectation.results
 		if mm_results == nil {
-			mmListAccessRole.t.Fatal("No results are set for the PartitionServiceHandlerMock.ListAccessRole")
+			mmListAccessRole.t.Fatal("No results are set for the PartitionServiceClientMock.ListAccessRole")
 		}
-		return (*mm_results).err
+		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmListAccessRole.funcListAccessRole != nil {
-		return mmListAccessRole.funcListAccessRole(ctx, pp1, pp2)
+		return mmListAccessRole.funcListAccessRole(ctx, pp1)
 	}
-	mmListAccessRole.t.Fatalf("Unexpected call to PartitionServiceHandlerMock.ListAccessRole. %v %v %v", ctx, pp1, pp2)
+	mmListAccessRole.t.Fatalf("Unexpected call to PartitionServiceClientMock.ListAccessRole. %v %v", ctx, pp1)
 	return
 }
 
-// ListAccessRoleAfterCounter returns a count of finished PartitionServiceHandlerMock.ListAccessRole invocations
-func (mmListAccessRole *PartitionServiceHandlerMock) ListAccessRoleAfterCounter() uint64 {
+// ListAccessRoleAfterCounter returns a count of finished PartitionServiceClientMock.ListAccessRole invocations
+func (mmListAccessRole *PartitionServiceClientMock) ListAccessRoleAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmListAccessRole.afterListAccessRoleCounter)
 }
 
-// ListAccessRoleBeforeCounter returns a count of PartitionServiceHandlerMock.ListAccessRole invocations
-func (mmListAccessRole *PartitionServiceHandlerMock) ListAccessRoleBeforeCounter() uint64 {
+// ListAccessRoleBeforeCounter returns a count of PartitionServiceClientMock.ListAccessRole invocations
+func (mmListAccessRole *PartitionServiceClientMock) ListAccessRoleBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmListAccessRole.beforeListAccessRoleCounter)
 }
 
-// Calls returns a list of arguments used in each call to PartitionServiceHandlerMock.ListAccessRole.
+// Calls returns a list of arguments used in each call to PartitionServiceClientMock.ListAccessRole.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmListAccessRole *mPartitionServiceHandlerMockListAccessRole) Calls() []*PartitionServiceHandlerMockListAccessRoleParams {
+func (mmListAccessRole *mPartitionServiceClientMockListAccessRole) Calls() []*PartitionServiceClientMockListAccessRoleParams {
 	mmListAccessRole.mutex.RLock()
 
-	argCopy := make([]*PartitionServiceHandlerMockListAccessRoleParams, len(mmListAccessRole.callArgs))
+	argCopy := make([]*PartitionServiceClientMockListAccessRoleParams, len(mmListAccessRole.callArgs))
 	copy(argCopy, mmListAccessRole.callArgs)
 
 	mmListAccessRole.mutex.RUnlock()
@@ -4347,7 +4317,7 @@ func (mmListAccessRole *mPartitionServiceHandlerMockListAccessRole) Calls() []*P
 
 // MinimockListAccessRoleDone returns true if the count of the ListAccessRole invocations corresponds
 // the number of defined expectations
-func (m *PartitionServiceHandlerMock) MinimockListAccessRoleDone() bool {
+func (m *PartitionServiceClientMock) MinimockListAccessRoleDone() bool {
 	if m.ListAccessRoleMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -4363,10 +4333,10 @@ func (m *PartitionServiceHandlerMock) MinimockListAccessRoleDone() bool {
 }
 
 // MinimockListAccessRoleInspect logs each unmet expectation
-func (m *PartitionServiceHandlerMock) MinimockListAccessRoleInspect() {
+func (m *PartitionServiceClientMock) MinimockListAccessRoleInspect() {
 	for _, e := range m.ListAccessRoleMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.ListAccessRole at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.ListAccessRole at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -4374,71 +4344,69 @@ func (m *PartitionServiceHandlerMock) MinimockListAccessRoleInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.ListAccessRoleMock.defaultExpectation != nil && afterListAccessRoleCounter < 1 {
 		if m.ListAccessRoleMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.ListAccessRole at\n%s", m.ListAccessRoleMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.ListAccessRole at\n%s", m.ListAccessRoleMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.ListAccessRole at\n%s with params: %#v", m.ListAccessRoleMock.defaultExpectation.expectationOrigins.origin, *m.ListAccessRoleMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.ListAccessRole at\n%s with params: %#v", m.ListAccessRoleMock.defaultExpectation.expectationOrigins.origin, *m.ListAccessRoleMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcListAccessRole != nil && afterListAccessRoleCounter < 1 {
-		m.t.Errorf("Expected call to PartitionServiceHandlerMock.ListAccessRole at\n%s", m.funcListAccessRoleOrigin)
+		m.t.Errorf("Expected call to PartitionServiceClientMock.ListAccessRole at\n%s", m.funcListAccessRoleOrigin)
 	}
 
 	if !m.ListAccessRoleMock.invocationsDone() && afterListAccessRoleCounter > 0 {
-		m.t.Errorf("Expected %d calls to PartitionServiceHandlerMock.ListAccessRole at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to PartitionServiceClientMock.ListAccessRole at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.ListAccessRoleMock.expectedInvocations), m.ListAccessRoleMock.expectedInvocationsOrigin, afterListAccessRoleCounter)
 	}
 }
 
-type mPartitionServiceHandlerMockListPartition struct {
+type mPartitionServiceClientMockListPartition struct {
 	optional           bool
-	mock               *PartitionServiceHandlerMock
-	defaultExpectation *PartitionServiceHandlerMockListPartitionExpectation
-	expectations       []*PartitionServiceHandlerMockListPartitionExpectation
+	mock               *PartitionServiceClientMock
+	defaultExpectation *PartitionServiceClientMockListPartitionExpectation
+	expectations       []*PartitionServiceClientMockListPartitionExpectation
 
-	callArgs []*PartitionServiceHandlerMockListPartitionParams
+	callArgs []*PartitionServiceClientMockListPartitionParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// PartitionServiceHandlerMockListPartitionExpectation specifies expectation struct of the PartitionServiceHandler.ListPartition
-type PartitionServiceHandlerMockListPartitionExpectation struct {
-	mock               *PartitionServiceHandlerMock
-	params             *PartitionServiceHandlerMockListPartitionParams
-	paramPtrs          *PartitionServiceHandlerMockListPartitionParamPtrs
-	expectationOrigins PartitionServiceHandlerMockListPartitionExpectationOrigins
-	results            *PartitionServiceHandlerMockListPartitionResults
+// PartitionServiceClientMockListPartitionExpectation specifies expectation struct of the PartitionServiceClient.ListPartition
+type PartitionServiceClientMockListPartitionExpectation struct {
+	mock               *PartitionServiceClientMock
+	params             *PartitionServiceClientMockListPartitionParams
+	paramPtrs          *PartitionServiceClientMockListPartitionParamPtrs
+	expectationOrigins PartitionServiceClientMockListPartitionExpectationOrigins
+	results            *PartitionServiceClientMockListPartitionResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// PartitionServiceHandlerMockListPartitionParams contains parameters of the PartitionServiceHandler.ListPartition
-type PartitionServiceHandlerMockListPartitionParams struct {
+// PartitionServiceClientMockListPartitionParams contains parameters of the PartitionServiceClient.ListPartition
+type PartitionServiceClientMockListPartitionParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.ListPartitionRequest]
-	pp2 *connect.ServerStream[v1.ListPartitionResponse]
 }
 
-// PartitionServiceHandlerMockListPartitionParamPtrs contains pointers to parameters of the PartitionServiceHandler.ListPartition
-type PartitionServiceHandlerMockListPartitionParamPtrs struct {
+// PartitionServiceClientMockListPartitionParamPtrs contains pointers to parameters of the PartitionServiceClient.ListPartition
+type PartitionServiceClientMockListPartitionParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.ListPartitionRequest]
-	pp2 **connect.ServerStream[v1.ListPartitionResponse]
 }
 
-// PartitionServiceHandlerMockListPartitionResults contains results of the PartitionServiceHandler.ListPartition
-type PartitionServiceHandlerMockListPartitionResults struct {
+// PartitionServiceClientMockListPartitionResults contains results of the PartitionServiceClient.ListPartition
+type PartitionServiceClientMockListPartitionResults struct {
+	pp2 *connect.ServerStreamForClient[v1.ListPartitionResponse]
 	err error
 }
 
-// PartitionServiceHandlerMockListPartitionOrigins contains origins of expectations of the PartitionServiceHandler.ListPartition
-type PartitionServiceHandlerMockListPartitionExpectationOrigins struct {
+// PartitionServiceClientMockListPartitionOrigins contains origins of expectations of the PartitionServiceClient.ListPartition
+type PartitionServiceClientMockListPartitionExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
-	originPp2 string
 }
 
 // Marks this method to be optional. The default behavior of any method with Return() is '1 or more', meaning
@@ -4446,26 +4414,26 @@ type PartitionServiceHandlerMockListPartitionExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmListPartition *mPartitionServiceHandlerMockListPartition) Optional() *mPartitionServiceHandlerMockListPartition {
+func (mmListPartition *mPartitionServiceClientMockListPartition) Optional() *mPartitionServiceClientMockListPartition {
 	mmListPartition.optional = true
 	return mmListPartition
 }
 
-// Expect sets up expected params for PartitionServiceHandler.ListPartition
-func (mmListPartition *mPartitionServiceHandlerMockListPartition) Expect(ctx context.Context, pp1 *connect.Request[v1.ListPartitionRequest], pp2 *connect.ServerStream[v1.ListPartitionResponse]) *mPartitionServiceHandlerMockListPartition {
+// Expect sets up expected params for PartitionServiceClient.ListPartition
+func (mmListPartition *mPartitionServiceClientMockListPartition) Expect(ctx context.Context, pp1 *connect.Request[v1.ListPartitionRequest]) *mPartitionServiceClientMockListPartition {
 	if mmListPartition.mock.funcListPartition != nil {
-		mmListPartition.mock.t.Fatalf("PartitionServiceHandlerMock.ListPartition mock is already set by Set")
+		mmListPartition.mock.t.Fatalf("PartitionServiceClientMock.ListPartition mock is already set by Set")
 	}
 
 	if mmListPartition.defaultExpectation == nil {
-		mmListPartition.defaultExpectation = &PartitionServiceHandlerMockListPartitionExpectation{}
+		mmListPartition.defaultExpectation = &PartitionServiceClientMockListPartitionExpectation{}
 	}
 
 	if mmListPartition.defaultExpectation.paramPtrs != nil {
-		mmListPartition.mock.t.Fatalf("PartitionServiceHandlerMock.ListPartition mock is already set by ExpectParams functions")
+		mmListPartition.mock.t.Fatalf("PartitionServiceClientMock.ListPartition mock is already set by ExpectParams functions")
 	}
 
-	mmListPartition.defaultExpectation.params = &PartitionServiceHandlerMockListPartitionParams{ctx, pp1, pp2}
+	mmListPartition.defaultExpectation.params = &PartitionServiceClientMockListPartitionParams{ctx, pp1}
 	mmListPartition.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmListPartition.expectations {
 		if minimock.Equal(e.params, mmListPartition.defaultExpectation.params) {
@@ -4476,22 +4444,22 @@ func (mmListPartition *mPartitionServiceHandlerMockListPartition) Expect(ctx con
 	return mmListPartition
 }
 
-// ExpectCtxParam1 sets up expected param ctx for PartitionServiceHandler.ListPartition
-func (mmListPartition *mPartitionServiceHandlerMockListPartition) ExpectCtxParam1(ctx context.Context) *mPartitionServiceHandlerMockListPartition {
+// ExpectCtxParam1 sets up expected param ctx for PartitionServiceClient.ListPartition
+func (mmListPartition *mPartitionServiceClientMockListPartition) ExpectCtxParam1(ctx context.Context) *mPartitionServiceClientMockListPartition {
 	if mmListPartition.mock.funcListPartition != nil {
-		mmListPartition.mock.t.Fatalf("PartitionServiceHandlerMock.ListPartition mock is already set by Set")
+		mmListPartition.mock.t.Fatalf("PartitionServiceClientMock.ListPartition mock is already set by Set")
 	}
 
 	if mmListPartition.defaultExpectation == nil {
-		mmListPartition.defaultExpectation = &PartitionServiceHandlerMockListPartitionExpectation{}
+		mmListPartition.defaultExpectation = &PartitionServiceClientMockListPartitionExpectation{}
 	}
 
 	if mmListPartition.defaultExpectation.params != nil {
-		mmListPartition.mock.t.Fatalf("PartitionServiceHandlerMock.ListPartition mock is already set by Expect")
+		mmListPartition.mock.t.Fatalf("PartitionServiceClientMock.ListPartition mock is already set by Expect")
 	}
 
 	if mmListPartition.defaultExpectation.paramPtrs == nil {
-		mmListPartition.defaultExpectation.paramPtrs = &PartitionServiceHandlerMockListPartitionParamPtrs{}
+		mmListPartition.defaultExpectation.paramPtrs = &PartitionServiceClientMockListPartitionParamPtrs{}
 	}
 	mmListPartition.defaultExpectation.paramPtrs.ctx = &ctx
 	mmListPartition.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -4499,22 +4467,22 @@ func (mmListPartition *mPartitionServiceHandlerMockListPartition) ExpectCtxParam
 	return mmListPartition
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for PartitionServiceHandler.ListPartition
-func (mmListPartition *mPartitionServiceHandlerMockListPartition) ExpectPp1Param2(pp1 *connect.Request[v1.ListPartitionRequest]) *mPartitionServiceHandlerMockListPartition {
+// ExpectPp1Param2 sets up expected param pp1 for PartitionServiceClient.ListPartition
+func (mmListPartition *mPartitionServiceClientMockListPartition) ExpectPp1Param2(pp1 *connect.Request[v1.ListPartitionRequest]) *mPartitionServiceClientMockListPartition {
 	if mmListPartition.mock.funcListPartition != nil {
-		mmListPartition.mock.t.Fatalf("PartitionServiceHandlerMock.ListPartition mock is already set by Set")
+		mmListPartition.mock.t.Fatalf("PartitionServiceClientMock.ListPartition mock is already set by Set")
 	}
 
 	if mmListPartition.defaultExpectation == nil {
-		mmListPartition.defaultExpectation = &PartitionServiceHandlerMockListPartitionExpectation{}
+		mmListPartition.defaultExpectation = &PartitionServiceClientMockListPartitionExpectation{}
 	}
 
 	if mmListPartition.defaultExpectation.params != nil {
-		mmListPartition.mock.t.Fatalf("PartitionServiceHandlerMock.ListPartition mock is already set by Expect")
+		mmListPartition.mock.t.Fatalf("PartitionServiceClientMock.ListPartition mock is already set by Expect")
 	}
 
 	if mmListPartition.defaultExpectation.paramPtrs == nil {
-		mmListPartition.defaultExpectation.paramPtrs = &PartitionServiceHandlerMockListPartitionParamPtrs{}
+		mmListPartition.defaultExpectation.paramPtrs = &PartitionServiceClientMockListPartitionParamPtrs{}
 	}
 	mmListPartition.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmListPartition.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -4522,33 +4490,10 @@ func (mmListPartition *mPartitionServiceHandlerMockListPartition) ExpectPp1Param
 	return mmListPartition
 }
 
-// ExpectPp2Param3 sets up expected param pp2 for PartitionServiceHandler.ListPartition
-func (mmListPartition *mPartitionServiceHandlerMockListPartition) ExpectPp2Param3(pp2 *connect.ServerStream[v1.ListPartitionResponse]) *mPartitionServiceHandlerMockListPartition {
-	if mmListPartition.mock.funcListPartition != nil {
-		mmListPartition.mock.t.Fatalf("PartitionServiceHandlerMock.ListPartition mock is already set by Set")
-	}
-
-	if mmListPartition.defaultExpectation == nil {
-		mmListPartition.defaultExpectation = &PartitionServiceHandlerMockListPartitionExpectation{}
-	}
-
-	if mmListPartition.defaultExpectation.params != nil {
-		mmListPartition.mock.t.Fatalf("PartitionServiceHandlerMock.ListPartition mock is already set by Expect")
-	}
-
-	if mmListPartition.defaultExpectation.paramPtrs == nil {
-		mmListPartition.defaultExpectation.paramPtrs = &PartitionServiceHandlerMockListPartitionParamPtrs{}
-	}
-	mmListPartition.defaultExpectation.paramPtrs.pp2 = &pp2
-	mmListPartition.defaultExpectation.expectationOrigins.originPp2 = minimock.CallerInfo(1)
-
-	return mmListPartition
-}
-
-// Inspect accepts an inspector function that has same arguments as the PartitionServiceHandler.ListPartition
-func (mmListPartition *mPartitionServiceHandlerMockListPartition) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.ListPartitionRequest], pp2 *connect.ServerStream[v1.ListPartitionResponse])) *mPartitionServiceHandlerMockListPartition {
+// Inspect accepts an inspector function that has same arguments as the PartitionServiceClient.ListPartition
+func (mmListPartition *mPartitionServiceClientMockListPartition) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.ListPartitionRequest])) *mPartitionServiceClientMockListPartition {
 	if mmListPartition.mock.inspectFuncListPartition != nil {
-		mmListPartition.mock.t.Fatalf("Inspect function is already set for PartitionServiceHandlerMock.ListPartition")
+		mmListPartition.mock.t.Fatalf("Inspect function is already set for PartitionServiceClientMock.ListPartition")
 	}
 
 	mmListPartition.mock.inspectFuncListPartition = f
@@ -4556,28 +4501,28 @@ func (mmListPartition *mPartitionServiceHandlerMockListPartition) Inspect(f func
 	return mmListPartition
 }
 
-// Return sets up results that will be returned by PartitionServiceHandler.ListPartition
-func (mmListPartition *mPartitionServiceHandlerMockListPartition) Return(err error) *PartitionServiceHandlerMock {
+// Return sets up results that will be returned by PartitionServiceClient.ListPartition
+func (mmListPartition *mPartitionServiceClientMockListPartition) Return(pp2 *connect.ServerStreamForClient[v1.ListPartitionResponse], err error) *PartitionServiceClientMock {
 	if mmListPartition.mock.funcListPartition != nil {
-		mmListPartition.mock.t.Fatalf("PartitionServiceHandlerMock.ListPartition mock is already set by Set")
+		mmListPartition.mock.t.Fatalf("PartitionServiceClientMock.ListPartition mock is already set by Set")
 	}
 
 	if mmListPartition.defaultExpectation == nil {
-		mmListPartition.defaultExpectation = &PartitionServiceHandlerMockListPartitionExpectation{mock: mmListPartition.mock}
+		mmListPartition.defaultExpectation = &PartitionServiceClientMockListPartitionExpectation{mock: mmListPartition.mock}
 	}
-	mmListPartition.defaultExpectation.results = &PartitionServiceHandlerMockListPartitionResults{err}
+	mmListPartition.defaultExpectation.results = &PartitionServiceClientMockListPartitionResults{pp2, err}
 	mmListPartition.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmListPartition.mock
 }
 
-// Set uses given function f to mock the PartitionServiceHandler.ListPartition method
-func (mmListPartition *mPartitionServiceHandlerMockListPartition) Set(f func(ctx context.Context, pp1 *connect.Request[v1.ListPartitionRequest], pp2 *connect.ServerStream[v1.ListPartitionResponse]) (err error)) *PartitionServiceHandlerMock {
+// Set uses given function f to mock the PartitionServiceClient.ListPartition method
+func (mmListPartition *mPartitionServiceClientMockListPartition) Set(f func(ctx context.Context, pp1 *connect.Request[v1.ListPartitionRequest]) (pp2 *connect.ServerStreamForClient[v1.ListPartitionResponse], err error)) *PartitionServiceClientMock {
 	if mmListPartition.defaultExpectation != nil {
-		mmListPartition.mock.t.Fatalf("Default expectation is already set for the PartitionServiceHandler.ListPartition method")
+		mmListPartition.mock.t.Fatalf("Default expectation is already set for the PartitionServiceClient.ListPartition method")
 	}
 
 	if len(mmListPartition.expectations) > 0 {
-		mmListPartition.mock.t.Fatalf("Some expectations are already set for the PartitionServiceHandler.ListPartition method")
+		mmListPartition.mock.t.Fatalf("Some expectations are already set for the PartitionServiceClient.ListPartition method")
 	}
 
 	mmListPartition.mock.funcListPartition = f
@@ -4585,39 +4530,39 @@ func (mmListPartition *mPartitionServiceHandlerMockListPartition) Set(f func(ctx
 	return mmListPartition.mock
 }
 
-// When sets expectation for the PartitionServiceHandler.ListPartition which will trigger the result defined by the following
+// When sets expectation for the PartitionServiceClient.ListPartition which will trigger the result defined by the following
 // Then helper
-func (mmListPartition *mPartitionServiceHandlerMockListPartition) When(ctx context.Context, pp1 *connect.Request[v1.ListPartitionRequest], pp2 *connect.ServerStream[v1.ListPartitionResponse]) *PartitionServiceHandlerMockListPartitionExpectation {
+func (mmListPartition *mPartitionServiceClientMockListPartition) When(ctx context.Context, pp1 *connect.Request[v1.ListPartitionRequest]) *PartitionServiceClientMockListPartitionExpectation {
 	if mmListPartition.mock.funcListPartition != nil {
-		mmListPartition.mock.t.Fatalf("PartitionServiceHandlerMock.ListPartition mock is already set by Set")
+		mmListPartition.mock.t.Fatalf("PartitionServiceClientMock.ListPartition mock is already set by Set")
 	}
 
-	expectation := &PartitionServiceHandlerMockListPartitionExpectation{
+	expectation := &PartitionServiceClientMockListPartitionExpectation{
 		mock:               mmListPartition.mock,
-		params:             &PartitionServiceHandlerMockListPartitionParams{ctx, pp1, pp2},
-		expectationOrigins: PartitionServiceHandlerMockListPartitionExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &PartitionServiceClientMockListPartitionParams{ctx, pp1},
+		expectationOrigins: PartitionServiceClientMockListPartitionExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmListPartition.expectations = append(mmListPartition.expectations, expectation)
 	return expectation
 }
 
-// Then sets up PartitionServiceHandler.ListPartition return parameters for the expectation previously defined by the When method
-func (e *PartitionServiceHandlerMockListPartitionExpectation) Then(err error) *PartitionServiceHandlerMock {
-	e.results = &PartitionServiceHandlerMockListPartitionResults{err}
+// Then sets up PartitionServiceClient.ListPartition return parameters for the expectation previously defined by the When method
+func (e *PartitionServiceClientMockListPartitionExpectation) Then(pp2 *connect.ServerStreamForClient[v1.ListPartitionResponse], err error) *PartitionServiceClientMock {
+	e.results = &PartitionServiceClientMockListPartitionResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times PartitionServiceHandler.ListPartition should be invoked
-func (mmListPartition *mPartitionServiceHandlerMockListPartition) Times(n uint64) *mPartitionServiceHandlerMockListPartition {
+// Times sets number of times PartitionServiceClient.ListPartition should be invoked
+func (mmListPartition *mPartitionServiceClientMockListPartition) Times(n uint64) *mPartitionServiceClientMockListPartition {
 	if n == 0 {
-		mmListPartition.mock.t.Fatalf("Times of PartitionServiceHandlerMock.ListPartition mock can not be zero")
+		mmListPartition.mock.t.Fatalf("Times of PartitionServiceClientMock.ListPartition mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmListPartition.expectedInvocations, n)
 	mmListPartition.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmListPartition
 }
 
-func (mmListPartition *mPartitionServiceHandlerMockListPartition) invocationsDone() bool {
+func (mmListPartition *mPartitionServiceClientMockListPartition) invocationsDone() bool {
 	if len(mmListPartition.expectations) == 0 && mmListPartition.defaultExpectation == nil && mmListPartition.mock.funcListPartition == nil {
 		return true
 	}
@@ -4628,18 +4573,18 @@ func (mmListPartition *mPartitionServiceHandlerMockListPartition) invocationsDon
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// ListPartition implements mm_partitionv1connect.PartitionServiceHandler
-func (mmListPartition *PartitionServiceHandlerMock) ListPartition(ctx context.Context, pp1 *connect.Request[v1.ListPartitionRequest], pp2 *connect.ServerStream[v1.ListPartitionResponse]) (err error) {
+// ListPartition implements mm_partitionv1connect.PartitionServiceClient
+func (mmListPartition *PartitionServiceClientMock) ListPartition(ctx context.Context, pp1 *connect.Request[v1.ListPartitionRequest]) (pp2 *connect.ServerStreamForClient[v1.ListPartitionResponse], err error) {
 	mm_atomic.AddUint64(&mmListPartition.beforeListPartitionCounter, 1)
 	defer mm_atomic.AddUint64(&mmListPartition.afterListPartitionCounter, 1)
 
 	mmListPartition.t.Helper()
 
 	if mmListPartition.inspectFuncListPartition != nil {
-		mmListPartition.inspectFuncListPartition(ctx, pp1, pp2)
+		mmListPartition.inspectFuncListPartition(ctx, pp1)
 	}
 
-	mm_params := PartitionServiceHandlerMockListPartitionParams{ctx, pp1, pp2}
+	mm_params := PartitionServiceClientMockListPartitionParams{ctx, pp1}
 
 	// Record call args
 	mmListPartition.ListPartitionMock.mutex.Lock()
@@ -4649,7 +4594,7 @@ func (mmListPartition *PartitionServiceHandlerMock) ListPartition(ctx context.Co
 	for _, e := range mmListPartition.ListPartitionMock.expectations {
 		if minimock.Equal(*e.params, mm_params) {
 			mm_atomic.AddUint64(&e.Counter, 1)
-			return e.results.err
+			return e.results.pp2, e.results.err
 		}
 	}
 
@@ -4658,59 +4603,54 @@ func (mmListPartition *PartitionServiceHandlerMock) ListPartition(ctx context.Co
 		mm_want := mmListPartition.ListPartitionMock.defaultExpectation.params
 		mm_want_ptrs := mmListPartition.ListPartitionMock.defaultExpectation.paramPtrs
 
-		mm_got := PartitionServiceHandlerMockListPartitionParams{ctx, pp1, pp2}
+		mm_got := PartitionServiceClientMockListPartitionParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmListPartition.t.Errorf("PartitionServiceHandlerMock.ListPartition got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmListPartition.t.Errorf("PartitionServiceClientMock.ListPartition got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmListPartition.ListPartitionMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmListPartition.t.Errorf("PartitionServiceHandlerMock.ListPartition got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmListPartition.t.Errorf("PartitionServiceClientMock.ListPartition got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmListPartition.ListPartitionMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
-			if mm_want_ptrs.pp2 != nil && !minimock.Equal(*mm_want_ptrs.pp2, mm_got.pp2) {
-				mmListPartition.t.Errorf("PartitionServiceHandlerMock.ListPartition got unexpected parameter pp2, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
-					mmListPartition.ListPartitionMock.defaultExpectation.expectationOrigins.originPp2, *mm_want_ptrs.pp2, mm_got.pp2, minimock.Diff(*mm_want_ptrs.pp2, mm_got.pp2))
-			}
-
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmListPartition.t.Errorf("PartitionServiceHandlerMock.ListPartition got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmListPartition.t.Errorf("PartitionServiceClientMock.ListPartition got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmListPartition.ListPartitionMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmListPartition.ListPartitionMock.defaultExpectation.results
 		if mm_results == nil {
-			mmListPartition.t.Fatal("No results are set for the PartitionServiceHandlerMock.ListPartition")
+			mmListPartition.t.Fatal("No results are set for the PartitionServiceClientMock.ListPartition")
 		}
-		return (*mm_results).err
+		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmListPartition.funcListPartition != nil {
-		return mmListPartition.funcListPartition(ctx, pp1, pp2)
+		return mmListPartition.funcListPartition(ctx, pp1)
 	}
-	mmListPartition.t.Fatalf("Unexpected call to PartitionServiceHandlerMock.ListPartition. %v %v %v", ctx, pp1, pp2)
+	mmListPartition.t.Fatalf("Unexpected call to PartitionServiceClientMock.ListPartition. %v %v", ctx, pp1)
 	return
 }
 
-// ListPartitionAfterCounter returns a count of finished PartitionServiceHandlerMock.ListPartition invocations
-func (mmListPartition *PartitionServiceHandlerMock) ListPartitionAfterCounter() uint64 {
+// ListPartitionAfterCounter returns a count of finished PartitionServiceClientMock.ListPartition invocations
+func (mmListPartition *PartitionServiceClientMock) ListPartitionAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmListPartition.afterListPartitionCounter)
 }
 
-// ListPartitionBeforeCounter returns a count of PartitionServiceHandlerMock.ListPartition invocations
-func (mmListPartition *PartitionServiceHandlerMock) ListPartitionBeforeCounter() uint64 {
+// ListPartitionBeforeCounter returns a count of PartitionServiceClientMock.ListPartition invocations
+func (mmListPartition *PartitionServiceClientMock) ListPartitionBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmListPartition.beforeListPartitionCounter)
 }
 
-// Calls returns a list of arguments used in each call to PartitionServiceHandlerMock.ListPartition.
+// Calls returns a list of arguments used in each call to PartitionServiceClientMock.ListPartition.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmListPartition *mPartitionServiceHandlerMockListPartition) Calls() []*PartitionServiceHandlerMockListPartitionParams {
+func (mmListPartition *mPartitionServiceClientMockListPartition) Calls() []*PartitionServiceClientMockListPartitionParams {
 	mmListPartition.mutex.RLock()
 
-	argCopy := make([]*PartitionServiceHandlerMockListPartitionParams, len(mmListPartition.callArgs))
+	argCopy := make([]*PartitionServiceClientMockListPartitionParams, len(mmListPartition.callArgs))
 	copy(argCopy, mmListPartition.callArgs)
 
 	mmListPartition.mutex.RUnlock()
@@ -4720,7 +4660,7 @@ func (mmListPartition *mPartitionServiceHandlerMockListPartition) Calls() []*Par
 
 // MinimockListPartitionDone returns true if the count of the ListPartition invocations corresponds
 // the number of defined expectations
-func (m *PartitionServiceHandlerMock) MinimockListPartitionDone() bool {
+func (m *PartitionServiceClientMock) MinimockListPartitionDone() bool {
 	if m.ListPartitionMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -4736,10 +4676,10 @@ func (m *PartitionServiceHandlerMock) MinimockListPartitionDone() bool {
 }
 
 // MinimockListPartitionInspect logs each unmet expectation
-func (m *PartitionServiceHandlerMock) MinimockListPartitionInspect() {
+func (m *PartitionServiceClientMock) MinimockListPartitionInspect() {
 	for _, e := range m.ListPartitionMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.ListPartition at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.ListPartition at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -4747,71 +4687,69 @@ func (m *PartitionServiceHandlerMock) MinimockListPartitionInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.ListPartitionMock.defaultExpectation != nil && afterListPartitionCounter < 1 {
 		if m.ListPartitionMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.ListPartition at\n%s", m.ListPartitionMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.ListPartition at\n%s", m.ListPartitionMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.ListPartition at\n%s with params: %#v", m.ListPartitionMock.defaultExpectation.expectationOrigins.origin, *m.ListPartitionMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.ListPartition at\n%s with params: %#v", m.ListPartitionMock.defaultExpectation.expectationOrigins.origin, *m.ListPartitionMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcListPartition != nil && afterListPartitionCounter < 1 {
-		m.t.Errorf("Expected call to PartitionServiceHandlerMock.ListPartition at\n%s", m.funcListPartitionOrigin)
+		m.t.Errorf("Expected call to PartitionServiceClientMock.ListPartition at\n%s", m.funcListPartitionOrigin)
 	}
 
 	if !m.ListPartitionMock.invocationsDone() && afterListPartitionCounter > 0 {
-		m.t.Errorf("Expected %d calls to PartitionServiceHandlerMock.ListPartition at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to PartitionServiceClientMock.ListPartition at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.ListPartitionMock.expectedInvocations), m.ListPartitionMock.expectedInvocationsOrigin, afterListPartitionCounter)
 	}
 }
 
-type mPartitionServiceHandlerMockListPartitionRole struct {
+type mPartitionServiceClientMockListPartitionRole struct {
 	optional           bool
-	mock               *PartitionServiceHandlerMock
-	defaultExpectation *PartitionServiceHandlerMockListPartitionRoleExpectation
-	expectations       []*PartitionServiceHandlerMockListPartitionRoleExpectation
+	mock               *PartitionServiceClientMock
+	defaultExpectation *PartitionServiceClientMockListPartitionRoleExpectation
+	expectations       []*PartitionServiceClientMockListPartitionRoleExpectation
 
-	callArgs []*PartitionServiceHandlerMockListPartitionRoleParams
+	callArgs []*PartitionServiceClientMockListPartitionRoleParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// PartitionServiceHandlerMockListPartitionRoleExpectation specifies expectation struct of the PartitionServiceHandler.ListPartitionRole
-type PartitionServiceHandlerMockListPartitionRoleExpectation struct {
-	mock               *PartitionServiceHandlerMock
-	params             *PartitionServiceHandlerMockListPartitionRoleParams
-	paramPtrs          *PartitionServiceHandlerMockListPartitionRoleParamPtrs
-	expectationOrigins PartitionServiceHandlerMockListPartitionRoleExpectationOrigins
-	results            *PartitionServiceHandlerMockListPartitionRoleResults
+// PartitionServiceClientMockListPartitionRoleExpectation specifies expectation struct of the PartitionServiceClient.ListPartitionRole
+type PartitionServiceClientMockListPartitionRoleExpectation struct {
+	mock               *PartitionServiceClientMock
+	params             *PartitionServiceClientMockListPartitionRoleParams
+	paramPtrs          *PartitionServiceClientMockListPartitionRoleParamPtrs
+	expectationOrigins PartitionServiceClientMockListPartitionRoleExpectationOrigins
+	results            *PartitionServiceClientMockListPartitionRoleResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// PartitionServiceHandlerMockListPartitionRoleParams contains parameters of the PartitionServiceHandler.ListPartitionRole
-type PartitionServiceHandlerMockListPartitionRoleParams struct {
+// PartitionServiceClientMockListPartitionRoleParams contains parameters of the PartitionServiceClient.ListPartitionRole
+type PartitionServiceClientMockListPartitionRoleParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.ListPartitionRoleRequest]
-	pp2 *connect.ServerStream[v1.ListPartitionRoleResponse]
 }
 
-// PartitionServiceHandlerMockListPartitionRoleParamPtrs contains pointers to parameters of the PartitionServiceHandler.ListPartitionRole
-type PartitionServiceHandlerMockListPartitionRoleParamPtrs struct {
+// PartitionServiceClientMockListPartitionRoleParamPtrs contains pointers to parameters of the PartitionServiceClient.ListPartitionRole
+type PartitionServiceClientMockListPartitionRoleParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.ListPartitionRoleRequest]
-	pp2 **connect.ServerStream[v1.ListPartitionRoleResponse]
 }
 
-// PartitionServiceHandlerMockListPartitionRoleResults contains results of the PartitionServiceHandler.ListPartitionRole
-type PartitionServiceHandlerMockListPartitionRoleResults struct {
+// PartitionServiceClientMockListPartitionRoleResults contains results of the PartitionServiceClient.ListPartitionRole
+type PartitionServiceClientMockListPartitionRoleResults struct {
+	pp2 *connect.ServerStreamForClient[v1.ListPartitionRoleResponse]
 	err error
 }
 
-// PartitionServiceHandlerMockListPartitionRoleOrigins contains origins of expectations of the PartitionServiceHandler.ListPartitionRole
-type PartitionServiceHandlerMockListPartitionRoleExpectationOrigins struct {
+// PartitionServiceClientMockListPartitionRoleOrigins contains origins of expectations of the PartitionServiceClient.ListPartitionRole
+type PartitionServiceClientMockListPartitionRoleExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
-	originPp2 string
 }
 
 // Marks this method to be optional. The default behavior of any method with Return() is '1 or more', meaning
@@ -4819,26 +4757,26 @@ type PartitionServiceHandlerMockListPartitionRoleExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmListPartitionRole *mPartitionServiceHandlerMockListPartitionRole) Optional() *mPartitionServiceHandlerMockListPartitionRole {
+func (mmListPartitionRole *mPartitionServiceClientMockListPartitionRole) Optional() *mPartitionServiceClientMockListPartitionRole {
 	mmListPartitionRole.optional = true
 	return mmListPartitionRole
 }
 
-// Expect sets up expected params for PartitionServiceHandler.ListPartitionRole
-func (mmListPartitionRole *mPartitionServiceHandlerMockListPartitionRole) Expect(ctx context.Context, pp1 *connect.Request[v1.ListPartitionRoleRequest], pp2 *connect.ServerStream[v1.ListPartitionRoleResponse]) *mPartitionServiceHandlerMockListPartitionRole {
+// Expect sets up expected params for PartitionServiceClient.ListPartitionRole
+func (mmListPartitionRole *mPartitionServiceClientMockListPartitionRole) Expect(ctx context.Context, pp1 *connect.Request[v1.ListPartitionRoleRequest]) *mPartitionServiceClientMockListPartitionRole {
 	if mmListPartitionRole.mock.funcListPartitionRole != nil {
-		mmListPartitionRole.mock.t.Fatalf("PartitionServiceHandlerMock.ListPartitionRole mock is already set by Set")
+		mmListPartitionRole.mock.t.Fatalf("PartitionServiceClientMock.ListPartitionRole mock is already set by Set")
 	}
 
 	if mmListPartitionRole.defaultExpectation == nil {
-		mmListPartitionRole.defaultExpectation = &PartitionServiceHandlerMockListPartitionRoleExpectation{}
+		mmListPartitionRole.defaultExpectation = &PartitionServiceClientMockListPartitionRoleExpectation{}
 	}
 
 	if mmListPartitionRole.defaultExpectation.paramPtrs != nil {
-		mmListPartitionRole.mock.t.Fatalf("PartitionServiceHandlerMock.ListPartitionRole mock is already set by ExpectParams functions")
+		mmListPartitionRole.mock.t.Fatalf("PartitionServiceClientMock.ListPartitionRole mock is already set by ExpectParams functions")
 	}
 
-	mmListPartitionRole.defaultExpectation.params = &PartitionServiceHandlerMockListPartitionRoleParams{ctx, pp1, pp2}
+	mmListPartitionRole.defaultExpectation.params = &PartitionServiceClientMockListPartitionRoleParams{ctx, pp1}
 	mmListPartitionRole.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmListPartitionRole.expectations {
 		if minimock.Equal(e.params, mmListPartitionRole.defaultExpectation.params) {
@@ -4849,22 +4787,22 @@ func (mmListPartitionRole *mPartitionServiceHandlerMockListPartitionRole) Expect
 	return mmListPartitionRole
 }
 
-// ExpectCtxParam1 sets up expected param ctx for PartitionServiceHandler.ListPartitionRole
-func (mmListPartitionRole *mPartitionServiceHandlerMockListPartitionRole) ExpectCtxParam1(ctx context.Context) *mPartitionServiceHandlerMockListPartitionRole {
+// ExpectCtxParam1 sets up expected param ctx for PartitionServiceClient.ListPartitionRole
+func (mmListPartitionRole *mPartitionServiceClientMockListPartitionRole) ExpectCtxParam1(ctx context.Context) *mPartitionServiceClientMockListPartitionRole {
 	if mmListPartitionRole.mock.funcListPartitionRole != nil {
-		mmListPartitionRole.mock.t.Fatalf("PartitionServiceHandlerMock.ListPartitionRole mock is already set by Set")
+		mmListPartitionRole.mock.t.Fatalf("PartitionServiceClientMock.ListPartitionRole mock is already set by Set")
 	}
 
 	if mmListPartitionRole.defaultExpectation == nil {
-		mmListPartitionRole.defaultExpectation = &PartitionServiceHandlerMockListPartitionRoleExpectation{}
+		mmListPartitionRole.defaultExpectation = &PartitionServiceClientMockListPartitionRoleExpectation{}
 	}
 
 	if mmListPartitionRole.defaultExpectation.params != nil {
-		mmListPartitionRole.mock.t.Fatalf("PartitionServiceHandlerMock.ListPartitionRole mock is already set by Expect")
+		mmListPartitionRole.mock.t.Fatalf("PartitionServiceClientMock.ListPartitionRole mock is already set by Expect")
 	}
 
 	if mmListPartitionRole.defaultExpectation.paramPtrs == nil {
-		mmListPartitionRole.defaultExpectation.paramPtrs = &PartitionServiceHandlerMockListPartitionRoleParamPtrs{}
+		mmListPartitionRole.defaultExpectation.paramPtrs = &PartitionServiceClientMockListPartitionRoleParamPtrs{}
 	}
 	mmListPartitionRole.defaultExpectation.paramPtrs.ctx = &ctx
 	mmListPartitionRole.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -4872,22 +4810,22 @@ func (mmListPartitionRole *mPartitionServiceHandlerMockListPartitionRole) Expect
 	return mmListPartitionRole
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for PartitionServiceHandler.ListPartitionRole
-func (mmListPartitionRole *mPartitionServiceHandlerMockListPartitionRole) ExpectPp1Param2(pp1 *connect.Request[v1.ListPartitionRoleRequest]) *mPartitionServiceHandlerMockListPartitionRole {
+// ExpectPp1Param2 sets up expected param pp1 for PartitionServiceClient.ListPartitionRole
+func (mmListPartitionRole *mPartitionServiceClientMockListPartitionRole) ExpectPp1Param2(pp1 *connect.Request[v1.ListPartitionRoleRequest]) *mPartitionServiceClientMockListPartitionRole {
 	if mmListPartitionRole.mock.funcListPartitionRole != nil {
-		mmListPartitionRole.mock.t.Fatalf("PartitionServiceHandlerMock.ListPartitionRole mock is already set by Set")
+		mmListPartitionRole.mock.t.Fatalf("PartitionServiceClientMock.ListPartitionRole mock is already set by Set")
 	}
 
 	if mmListPartitionRole.defaultExpectation == nil {
-		mmListPartitionRole.defaultExpectation = &PartitionServiceHandlerMockListPartitionRoleExpectation{}
+		mmListPartitionRole.defaultExpectation = &PartitionServiceClientMockListPartitionRoleExpectation{}
 	}
 
 	if mmListPartitionRole.defaultExpectation.params != nil {
-		mmListPartitionRole.mock.t.Fatalf("PartitionServiceHandlerMock.ListPartitionRole mock is already set by Expect")
+		mmListPartitionRole.mock.t.Fatalf("PartitionServiceClientMock.ListPartitionRole mock is already set by Expect")
 	}
 
 	if mmListPartitionRole.defaultExpectation.paramPtrs == nil {
-		mmListPartitionRole.defaultExpectation.paramPtrs = &PartitionServiceHandlerMockListPartitionRoleParamPtrs{}
+		mmListPartitionRole.defaultExpectation.paramPtrs = &PartitionServiceClientMockListPartitionRoleParamPtrs{}
 	}
 	mmListPartitionRole.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmListPartitionRole.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -4895,33 +4833,10 @@ func (mmListPartitionRole *mPartitionServiceHandlerMockListPartitionRole) Expect
 	return mmListPartitionRole
 }
 
-// ExpectPp2Param3 sets up expected param pp2 for PartitionServiceHandler.ListPartitionRole
-func (mmListPartitionRole *mPartitionServiceHandlerMockListPartitionRole) ExpectPp2Param3(pp2 *connect.ServerStream[v1.ListPartitionRoleResponse]) *mPartitionServiceHandlerMockListPartitionRole {
-	if mmListPartitionRole.mock.funcListPartitionRole != nil {
-		mmListPartitionRole.mock.t.Fatalf("PartitionServiceHandlerMock.ListPartitionRole mock is already set by Set")
-	}
-
-	if mmListPartitionRole.defaultExpectation == nil {
-		mmListPartitionRole.defaultExpectation = &PartitionServiceHandlerMockListPartitionRoleExpectation{}
-	}
-
-	if mmListPartitionRole.defaultExpectation.params != nil {
-		mmListPartitionRole.mock.t.Fatalf("PartitionServiceHandlerMock.ListPartitionRole mock is already set by Expect")
-	}
-
-	if mmListPartitionRole.defaultExpectation.paramPtrs == nil {
-		mmListPartitionRole.defaultExpectation.paramPtrs = &PartitionServiceHandlerMockListPartitionRoleParamPtrs{}
-	}
-	mmListPartitionRole.defaultExpectation.paramPtrs.pp2 = &pp2
-	mmListPartitionRole.defaultExpectation.expectationOrigins.originPp2 = minimock.CallerInfo(1)
-
-	return mmListPartitionRole
-}
-
-// Inspect accepts an inspector function that has same arguments as the PartitionServiceHandler.ListPartitionRole
-func (mmListPartitionRole *mPartitionServiceHandlerMockListPartitionRole) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.ListPartitionRoleRequest], pp2 *connect.ServerStream[v1.ListPartitionRoleResponse])) *mPartitionServiceHandlerMockListPartitionRole {
+// Inspect accepts an inspector function that has same arguments as the PartitionServiceClient.ListPartitionRole
+func (mmListPartitionRole *mPartitionServiceClientMockListPartitionRole) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.ListPartitionRoleRequest])) *mPartitionServiceClientMockListPartitionRole {
 	if mmListPartitionRole.mock.inspectFuncListPartitionRole != nil {
-		mmListPartitionRole.mock.t.Fatalf("Inspect function is already set for PartitionServiceHandlerMock.ListPartitionRole")
+		mmListPartitionRole.mock.t.Fatalf("Inspect function is already set for PartitionServiceClientMock.ListPartitionRole")
 	}
 
 	mmListPartitionRole.mock.inspectFuncListPartitionRole = f
@@ -4929,28 +4844,28 @@ func (mmListPartitionRole *mPartitionServiceHandlerMockListPartitionRole) Inspec
 	return mmListPartitionRole
 }
 
-// Return sets up results that will be returned by PartitionServiceHandler.ListPartitionRole
-func (mmListPartitionRole *mPartitionServiceHandlerMockListPartitionRole) Return(err error) *PartitionServiceHandlerMock {
+// Return sets up results that will be returned by PartitionServiceClient.ListPartitionRole
+func (mmListPartitionRole *mPartitionServiceClientMockListPartitionRole) Return(pp2 *connect.ServerStreamForClient[v1.ListPartitionRoleResponse], err error) *PartitionServiceClientMock {
 	if mmListPartitionRole.mock.funcListPartitionRole != nil {
-		mmListPartitionRole.mock.t.Fatalf("PartitionServiceHandlerMock.ListPartitionRole mock is already set by Set")
+		mmListPartitionRole.mock.t.Fatalf("PartitionServiceClientMock.ListPartitionRole mock is already set by Set")
 	}
 
 	if mmListPartitionRole.defaultExpectation == nil {
-		mmListPartitionRole.defaultExpectation = &PartitionServiceHandlerMockListPartitionRoleExpectation{mock: mmListPartitionRole.mock}
+		mmListPartitionRole.defaultExpectation = &PartitionServiceClientMockListPartitionRoleExpectation{mock: mmListPartitionRole.mock}
 	}
-	mmListPartitionRole.defaultExpectation.results = &PartitionServiceHandlerMockListPartitionRoleResults{err}
+	mmListPartitionRole.defaultExpectation.results = &PartitionServiceClientMockListPartitionRoleResults{pp2, err}
 	mmListPartitionRole.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmListPartitionRole.mock
 }
 
-// Set uses given function f to mock the PartitionServiceHandler.ListPartitionRole method
-func (mmListPartitionRole *mPartitionServiceHandlerMockListPartitionRole) Set(f func(ctx context.Context, pp1 *connect.Request[v1.ListPartitionRoleRequest], pp2 *connect.ServerStream[v1.ListPartitionRoleResponse]) (err error)) *PartitionServiceHandlerMock {
+// Set uses given function f to mock the PartitionServiceClient.ListPartitionRole method
+func (mmListPartitionRole *mPartitionServiceClientMockListPartitionRole) Set(f func(ctx context.Context, pp1 *connect.Request[v1.ListPartitionRoleRequest]) (pp2 *connect.ServerStreamForClient[v1.ListPartitionRoleResponse], err error)) *PartitionServiceClientMock {
 	if mmListPartitionRole.defaultExpectation != nil {
-		mmListPartitionRole.mock.t.Fatalf("Default expectation is already set for the PartitionServiceHandler.ListPartitionRole method")
+		mmListPartitionRole.mock.t.Fatalf("Default expectation is already set for the PartitionServiceClient.ListPartitionRole method")
 	}
 
 	if len(mmListPartitionRole.expectations) > 0 {
-		mmListPartitionRole.mock.t.Fatalf("Some expectations are already set for the PartitionServiceHandler.ListPartitionRole method")
+		mmListPartitionRole.mock.t.Fatalf("Some expectations are already set for the PartitionServiceClient.ListPartitionRole method")
 	}
 
 	mmListPartitionRole.mock.funcListPartitionRole = f
@@ -4958,39 +4873,39 @@ func (mmListPartitionRole *mPartitionServiceHandlerMockListPartitionRole) Set(f 
 	return mmListPartitionRole.mock
 }
 
-// When sets expectation for the PartitionServiceHandler.ListPartitionRole which will trigger the result defined by the following
+// When sets expectation for the PartitionServiceClient.ListPartitionRole which will trigger the result defined by the following
 // Then helper
-func (mmListPartitionRole *mPartitionServiceHandlerMockListPartitionRole) When(ctx context.Context, pp1 *connect.Request[v1.ListPartitionRoleRequest], pp2 *connect.ServerStream[v1.ListPartitionRoleResponse]) *PartitionServiceHandlerMockListPartitionRoleExpectation {
+func (mmListPartitionRole *mPartitionServiceClientMockListPartitionRole) When(ctx context.Context, pp1 *connect.Request[v1.ListPartitionRoleRequest]) *PartitionServiceClientMockListPartitionRoleExpectation {
 	if mmListPartitionRole.mock.funcListPartitionRole != nil {
-		mmListPartitionRole.mock.t.Fatalf("PartitionServiceHandlerMock.ListPartitionRole mock is already set by Set")
+		mmListPartitionRole.mock.t.Fatalf("PartitionServiceClientMock.ListPartitionRole mock is already set by Set")
 	}
 
-	expectation := &PartitionServiceHandlerMockListPartitionRoleExpectation{
+	expectation := &PartitionServiceClientMockListPartitionRoleExpectation{
 		mock:               mmListPartitionRole.mock,
-		params:             &PartitionServiceHandlerMockListPartitionRoleParams{ctx, pp1, pp2},
-		expectationOrigins: PartitionServiceHandlerMockListPartitionRoleExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &PartitionServiceClientMockListPartitionRoleParams{ctx, pp1},
+		expectationOrigins: PartitionServiceClientMockListPartitionRoleExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmListPartitionRole.expectations = append(mmListPartitionRole.expectations, expectation)
 	return expectation
 }
 
-// Then sets up PartitionServiceHandler.ListPartitionRole return parameters for the expectation previously defined by the When method
-func (e *PartitionServiceHandlerMockListPartitionRoleExpectation) Then(err error) *PartitionServiceHandlerMock {
-	e.results = &PartitionServiceHandlerMockListPartitionRoleResults{err}
+// Then sets up PartitionServiceClient.ListPartitionRole return parameters for the expectation previously defined by the When method
+func (e *PartitionServiceClientMockListPartitionRoleExpectation) Then(pp2 *connect.ServerStreamForClient[v1.ListPartitionRoleResponse], err error) *PartitionServiceClientMock {
+	e.results = &PartitionServiceClientMockListPartitionRoleResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times PartitionServiceHandler.ListPartitionRole should be invoked
-func (mmListPartitionRole *mPartitionServiceHandlerMockListPartitionRole) Times(n uint64) *mPartitionServiceHandlerMockListPartitionRole {
+// Times sets number of times PartitionServiceClient.ListPartitionRole should be invoked
+func (mmListPartitionRole *mPartitionServiceClientMockListPartitionRole) Times(n uint64) *mPartitionServiceClientMockListPartitionRole {
 	if n == 0 {
-		mmListPartitionRole.mock.t.Fatalf("Times of PartitionServiceHandlerMock.ListPartitionRole mock can not be zero")
+		mmListPartitionRole.mock.t.Fatalf("Times of PartitionServiceClientMock.ListPartitionRole mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmListPartitionRole.expectedInvocations, n)
 	mmListPartitionRole.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmListPartitionRole
 }
 
-func (mmListPartitionRole *mPartitionServiceHandlerMockListPartitionRole) invocationsDone() bool {
+func (mmListPartitionRole *mPartitionServiceClientMockListPartitionRole) invocationsDone() bool {
 	if len(mmListPartitionRole.expectations) == 0 && mmListPartitionRole.defaultExpectation == nil && mmListPartitionRole.mock.funcListPartitionRole == nil {
 		return true
 	}
@@ -5001,18 +4916,18 @@ func (mmListPartitionRole *mPartitionServiceHandlerMockListPartitionRole) invoca
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// ListPartitionRole implements mm_partitionv1connect.PartitionServiceHandler
-func (mmListPartitionRole *PartitionServiceHandlerMock) ListPartitionRole(ctx context.Context, pp1 *connect.Request[v1.ListPartitionRoleRequest], pp2 *connect.ServerStream[v1.ListPartitionRoleResponse]) (err error) {
+// ListPartitionRole implements mm_partitionv1connect.PartitionServiceClient
+func (mmListPartitionRole *PartitionServiceClientMock) ListPartitionRole(ctx context.Context, pp1 *connect.Request[v1.ListPartitionRoleRequest]) (pp2 *connect.ServerStreamForClient[v1.ListPartitionRoleResponse], err error) {
 	mm_atomic.AddUint64(&mmListPartitionRole.beforeListPartitionRoleCounter, 1)
 	defer mm_atomic.AddUint64(&mmListPartitionRole.afterListPartitionRoleCounter, 1)
 
 	mmListPartitionRole.t.Helper()
 
 	if mmListPartitionRole.inspectFuncListPartitionRole != nil {
-		mmListPartitionRole.inspectFuncListPartitionRole(ctx, pp1, pp2)
+		mmListPartitionRole.inspectFuncListPartitionRole(ctx, pp1)
 	}
 
-	mm_params := PartitionServiceHandlerMockListPartitionRoleParams{ctx, pp1, pp2}
+	mm_params := PartitionServiceClientMockListPartitionRoleParams{ctx, pp1}
 
 	// Record call args
 	mmListPartitionRole.ListPartitionRoleMock.mutex.Lock()
@@ -5022,7 +4937,7 @@ func (mmListPartitionRole *PartitionServiceHandlerMock) ListPartitionRole(ctx co
 	for _, e := range mmListPartitionRole.ListPartitionRoleMock.expectations {
 		if minimock.Equal(*e.params, mm_params) {
 			mm_atomic.AddUint64(&e.Counter, 1)
-			return e.results.err
+			return e.results.pp2, e.results.err
 		}
 	}
 
@@ -5031,59 +4946,54 @@ func (mmListPartitionRole *PartitionServiceHandlerMock) ListPartitionRole(ctx co
 		mm_want := mmListPartitionRole.ListPartitionRoleMock.defaultExpectation.params
 		mm_want_ptrs := mmListPartitionRole.ListPartitionRoleMock.defaultExpectation.paramPtrs
 
-		mm_got := PartitionServiceHandlerMockListPartitionRoleParams{ctx, pp1, pp2}
+		mm_got := PartitionServiceClientMockListPartitionRoleParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmListPartitionRole.t.Errorf("PartitionServiceHandlerMock.ListPartitionRole got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmListPartitionRole.t.Errorf("PartitionServiceClientMock.ListPartitionRole got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmListPartitionRole.ListPartitionRoleMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmListPartitionRole.t.Errorf("PartitionServiceHandlerMock.ListPartitionRole got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmListPartitionRole.t.Errorf("PartitionServiceClientMock.ListPartitionRole got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmListPartitionRole.ListPartitionRoleMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
-			if mm_want_ptrs.pp2 != nil && !minimock.Equal(*mm_want_ptrs.pp2, mm_got.pp2) {
-				mmListPartitionRole.t.Errorf("PartitionServiceHandlerMock.ListPartitionRole got unexpected parameter pp2, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
-					mmListPartitionRole.ListPartitionRoleMock.defaultExpectation.expectationOrigins.originPp2, *mm_want_ptrs.pp2, mm_got.pp2, minimock.Diff(*mm_want_ptrs.pp2, mm_got.pp2))
-			}
-
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmListPartitionRole.t.Errorf("PartitionServiceHandlerMock.ListPartitionRole got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmListPartitionRole.t.Errorf("PartitionServiceClientMock.ListPartitionRole got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmListPartitionRole.ListPartitionRoleMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmListPartitionRole.ListPartitionRoleMock.defaultExpectation.results
 		if mm_results == nil {
-			mmListPartitionRole.t.Fatal("No results are set for the PartitionServiceHandlerMock.ListPartitionRole")
+			mmListPartitionRole.t.Fatal("No results are set for the PartitionServiceClientMock.ListPartitionRole")
 		}
-		return (*mm_results).err
+		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmListPartitionRole.funcListPartitionRole != nil {
-		return mmListPartitionRole.funcListPartitionRole(ctx, pp1, pp2)
+		return mmListPartitionRole.funcListPartitionRole(ctx, pp1)
 	}
-	mmListPartitionRole.t.Fatalf("Unexpected call to PartitionServiceHandlerMock.ListPartitionRole. %v %v %v", ctx, pp1, pp2)
+	mmListPartitionRole.t.Fatalf("Unexpected call to PartitionServiceClientMock.ListPartitionRole. %v %v", ctx, pp1)
 	return
 }
 
-// ListPartitionRoleAfterCounter returns a count of finished PartitionServiceHandlerMock.ListPartitionRole invocations
-func (mmListPartitionRole *PartitionServiceHandlerMock) ListPartitionRoleAfterCounter() uint64 {
+// ListPartitionRoleAfterCounter returns a count of finished PartitionServiceClientMock.ListPartitionRole invocations
+func (mmListPartitionRole *PartitionServiceClientMock) ListPartitionRoleAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmListPartitionRole.afterListPartitionRoleCounter)
 }
 
-// ListPartitionRoleBeforeCounter returns a count of PartitionServiceHandlerMock.ListPartitionRole invocations
-func (mmListPartitionRole *PartitionServiceHandlerMock) ListPartitionRoleBeforeCounter() uint64 {
+// ListPartitionRoleBeforeCounter returns a count of PartitionServiceClientMock.ListPartitionRole invocations
+func (mmListPartitionRole *PartitionServiceClientMock) ListPartitionRoleBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmListPartitionRole.beforeListPartitionRoleCounter)
 }
 
-// Calls returns a list of arguments used in each call to PartitionServiceHandlerMock.ListPartitionRole.
+// Calls returns a list of arguments used in each call to PartitionServiceClientMock.ListPartitionRole.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmListPartitionRole *mPartitionServiceHandlerMockListPartitionRole) Calls() []*PartitionServiceHandlerMockListPartitionRoleParams {
+func (mmListPartitionRole *mPartitionServiceClientMockListPartitionRole) Calls() []*PartitionServiceClientMockListPartitionRoleParams {
 	mmListPartitionRole.mutex.RLock()
 
-	argCopy := make([]*PartitionServiceHandlerMockListPartitionRoleParams, len(mmListPartitionRole.callArgs))
+	argCopy := make([]*PartitionServiceClientMockListPartitionRoleParams, len(mmListPartitionRole.callArgs))
 	copy(argCopy, mmListPartitionRole.callArgs)
 
 	mmListPartitionRole.mutex.RUnlock()
@@ -5093,7 +5003,7 @@ func (mmListPartitionRole *mPartitionServiceHandlerMockListPartitionRole) Calls(
 
 // MinimockListPartitionRoleDone returns true if the count of the ListPartitionRole invocations corresponds
 // the number of defined expectations
-func (m *PartitionServiceHandlerMock) MinimockListPartitionRoleDone() bool {
+func (m *PartitionServiceClientMock) MinimockListPartitionRoleDone() bool {
 	if m.ListPartitionRoleMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -5109,10 +5019,10 @@ func (m *PartitionServiceHandlerMock) MinimockListPartitionRoleDone() bool {
 }
 
 // MinimockListPartitionRoleInspect logs each unmet expectation
-func (m *PartitionServiceHandlerMock) MinimockListPartitionRoleInspect() {
+func (m *PartitionServiceClientMock) MinimockListPartitionRoleInspect() {
 	for _, e := range m.ListPartitionRoleMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.ListPartitionRole at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.ListPartitionRole at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -5120,71 +5030,69 @@ func (m *PartitionServiceHandlerMock) MinimockListPartitionRoleInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.ListPartitionRoleMock.defaultExpectation != nil && afterListPartitionRoleCounter < 1 {
 		if m.ListPartitionRoleMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.ListPartitionRole at\n%s", m.ListPartitionRoleMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.ListPartitionRole at\n%s", m.ListPartitionRoleMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.ListPartitionRole at\n%s with params: %#v", m.ListPartitionRoleMock.defaultExpectation.expectationOrigins.origin, *m.ListPartitionRoleMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.ListPartitionRole at\n%s with params: %#v", m.ListPartitionRoleMock.defaultExpectation.expectationOrigins.origin, *m.ListPartitionRoleMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcListPartitionRole != nil && afterListPartitionRoleCounter < 1 {
-		m.t.Errorf("Expected call to PartitionServiceHandlerMock.ListPartitionRole at\n%s", m.funcListPartitionRoleOrigin)
+		m.t.Errorf("Expected call to PartitionServiceClientMock.ListPartitionRole at\n%s", m.funcListPartitionRoleOrigin)
 	}
 
 	if !m.ListPartitionRoleMock.invocationsDone() && afterListPartitionRoleCounter > 0 {
-		m.t.Errorf("Expected %d calls to PartitionServiceHandlerMock.ListPartitionRole at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to PartitionServiceClientMock.ListPartitionRole at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.ListPartitionRoleMock.expectedInvocations), m.ListPartitionRoleMock.expectedInvocationsOrigin, afterListPartitionRoleCounter)
 	}
 }
 
-type mPartitionServiceHandlerMockListTenant struct {
+type mPartitionServiceClientMockListTenant struct {
 	optional           bool
-	mock               *PartitionServiceHandlerMock
-	defaultExpectation *PartitionServiceHandlerMockListTenantExpectation
-	expectations       []*PartitionServiceHandlerMockListTenantExpectation
+	mock               *PartitionServiceClientMock
+	defaultExpectation *PartitionServiceClientMockListTenantExpectation
+	expectations       []*PartitionServiceClientMockListTenantExpectation
 
-	callArgs []*PartitionServiceHandlerMockListTenantParams
+	callArgs []*PartitionServiceClientMockListTenantParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// PartitionServiceHandlerMockListTenantExpectation specifies expectation struct of the PartitionServiceHandler.ListTenant
-type PartitionServiceHandlerMockListTenantExpectation struct {
-	mock               *PartitionServiceHandlerMock
-	params             *PartitionServiceHandlerMockListTenantParams
-	paramPtrs          *PartitionServiceHandlerMockListTenantParamPtrs
-	expectationOrigins PartitionServiceHandlerMockListTenantExpectationOrigins
-	results            *PartitionServiceHandlerMockListTenantResults
+// PartitionServiceClientMockListTenantExpectation specifies expectation struct of the PartitionServiceClient.ListTenant
+type PartitionServiceClientMockListTenantExpectation struct {
+	mock               *PartitionServiceClientMock
+	params             *PartitionServiceClientMockListTenantParams
+	paramPtrs          *PartitionServiceClientMockListTenantParamPtrs
+	expectationOrigins PartitionServiceClientMockListTenantExpectationOrigins
+	results            *PartitionServiceClientMockListTenantResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// PartitionServiceHandlerMockListTenantParams contains parameters of the PartitionServiceHandler.ListTenant
-type PartitionServiceHandlerMockListTenantParams struct {
+// PartitionServiceClientMockListTenantParams contains parameters of the PartitionServiceClient.ListTenant
+type PartitionServiceClientMockListTenantParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.ListTenantRequest]
-	pp2 *connect.ServerStream[v1.ListTenantResponse]
 }
 
-// PartitionServiceHandlerMockListTenantParamPtrs contains pointers to parameters of the PartitionServiceHandler.ListTenant
-type PartitionServiceHandlerMockListTenantParamPtrs struct {
+// PartitionServiceClientMockListTenantParamPtrs contains pointers to parameters of the PartitionServiceClient.ListTenant
+type PartitionServiceClientMockListTenantParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.ListTenantRequest]
-	pp2 **connect.ServerStream[v1.ListTenantResponse]
 }
 
-// PartitionServiceHandlerMockListTenantResults contains results of the PartitionServiceHandler.ListTenant
-type PartitionServiceHandlerMockListTenantResults struct {
+// PartitionServiceClientMockListTenantResults contains results of the PartitionServiceClient.ListTenant
+type PartitionServiceClientMockListTenantResults struct {
+	pp2 *connect.ServerStreamForClient[v1.ListTenantResponse]
 	err error
 }
 
-// PartitionServiceHandlerMockListTenantOrigins contains origins of expectations of the PartitionServiceHandler.ListTenant
-type PartitionServiceHandlerMockListTenantExpectationOrigins struct {
+// PartitionServiceClientMockListTenantOrigins contains origins of expectations of the PartitionServiceClient.ListTenant
+type PartitionServiceClientMockListTenantExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
-	originPp2 string
 }
 
 // Marks this method to be optional. The default behavior of any method with Return() is '1 or more', meaning
@@ -5192,26 +5100,26 @@ type PartitionServiceHandlerMockListTenantExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmListTenant *mPartitionServiceHandlerMockListTenant) Optional() *mPartitionServiceHandlerMockListTenant {
+func (mmListTenant *mPartitionServiceClientMockListTenant) Optional() *mPartitionServiceClientMockListTenant {
 	mmListTenant.optional = true
 	return mmListTenant
 }
 
-// Expect sets up expected params for PartitionServiceHandler.ListTenant
-func (mmListTenant *mPartitionServiceHandlerMockListTenant) Expect(ctx context.Context, pp1 *connect.Request[v1.ListTenantRequest], pp2 *connect.ServerStream[v1.ListTenantResponse]) *mPartitionServiceHandlerMockListTenant {
+// Expect sets up expected params for PartitionServiceClient.ListTenant
+func (mmListTenant *mPartitionServiceClientMockListTenant) Expect(ctx context.Context, pp1 *connect.Request[v1.ListTenantRequest]) *mPartitionServiceClientMockListTenant {
 	if mmListTenant.mock.funcListTenant != nil {
-		mmListTenant.mock.t.Fatalf("PartitionServiceHandlerMock.ListTenant mock is already set by Set")
+		mmListTenant.mock.t.Fatalf("PartitionServiceClientMock.ListTenant mock is already set by Set")
 	}
 
 	if mmListTenant.defaultExpectation == nil {
-		mmListTenant.defaultExpectation = &PartitionServiceHandlerMockListTenantExpectation{}
+		mmListTenant.defaultExpectation = &PartitionServiceClientMockListTenantExpectation{}
 	}
 
 	if mmListTenant.defaultExpectation.paramPtrs != nil {
-		mmListTenant.mock.t.Fatalf("PartitionServiceHandlerMock.ListTenant mock is already set by ExpectParams functions")
+		mmListTenant.mock.t.Fatalf("PartitionServiceClientMock.ListTenant mock is already set by ExpectParams functions")
 	}
 
-	mmListTenant.defaultExpectation.params = &PartitionServiceHandlerMockListTenantParams{ctx, pp1, pp2}
+	mmListTenant.defaultExpectation.params = &PartitionServiceClientMockListTenantParams{ctx, pp1}
 	mmListTenant.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmListTenant.expectations {
 		if minimock.Equal(e.params, mmListTenant.defaultExpectation.params) {
@@ -5222,22 +5130,22 @@ func (mmListTenant *mPartitionServiceHandlerMockListTenant) Expect(ctx context.C
 	return mmListTenant
 }
 
-// ExpectCtxParam1 sets up expected param ctx for PartitionServiceHandler.ListTenant
-func (mmListTenant *mPartitionServiceHandlerMockListTenant) ExpectCtxParam1(ctx context.Context) *mPartitionServiceHandlerMockListTenant {
+// ExpectCtxParam1 sets up expected param ctx for PartitionServiceClient.ListTenant
+func (mmListTenant *mPartitionServiceClientMockListTenant) ExpectCtxParam1(ctx context.Context) *mPartitionServiceClientMockListTenant {
 	if mmListTenant.mock.funcListTenant != nil {
-		mmListTenant.mock.t.Fatalf("PartitionServiceHandlerMock.ListTenant mock is already set by Set")
+		mmListTenant.mock.t.Fatalf("PartitionServiceClientMock.ListTenant mock is already set by Set")
 	}
 
 	if mmListTenant.defaultExpectation == nil {
-		mmListTenant.defaultExpectation = &PartitionServiceHandlerMockListTenantExpectation{}
+		mmListTenant.defaultExpectation = &PartitionServiceClientMockListTenantExpectation{}
 	}
 
 	if mmListTenant.defaultExpectation.params != nil {
-		mmListTenant.mock.t.Fatalf("PartitionServiceHandlerMock.ListTenant mock is already set by Expect")
+		mmListTenant.mock.t.Fatalf("PartitionServiceClientMock.ListTenant mock is already set by Expect")
 	}
 
 	if mmListTenant.defaultExpectation.paramPtrs == nil {
-		mmListTenant.defaultExpectation.paramPtrs = &PartitionServiceHandlerMockListTenantParamPtrs{}
+		mmListTenant.defaultExpectation.paramPtrs = &PartitionServiceClientMockListTenantParamPtrs{}
 	}
 	mmListTenant.defaultExpectation.paramPtrs.ctx = &ctx
 	mmListTenant.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -5245,22 +5153,22 @@ func (mmListTenant *mPartitionServiceHandlerMockListTenant) ExpectCtxParam1(ctx 
 	return mmListTenant
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for PartitionServiceHandler.ListTenant
-func (mmListTenant *mPartitionServiceHandlerMockListTenant) ExpectPp1Param2(pp1 *connect.Request[v1.ListTenantRequest]) *mPartitionServiceHandlerMockListTenant {
+// ExpectPp1Param2 sets up expected param pp1 for PartitionServiceClient.ListTenant
+func (mmListTenant *mPartitionServiceClientMockListTenant) ExpectPp1Param2(pp1 *connect.Request[v1.ListTenantRequest]) *mPartitionServiceClientMockListTenant {
 	if mmListTenant.mock.funcListTenant != nil {
-		mmListTenant.mock.t.Fatalf("PartitionServiceHandlerMock.ListTenant mock is already set by Set")
+		mmListTenant.mock.t.Fatalf("PartitionServiceClientMock.ListTenant mock is already set by Set")
 	}
 
 	if mmListTenant.defaultExpectation == nil {
-		mmListTenant.defaultExpectation = &PartitionServiceHandlerMockListTenantExpectation{}
+		mmListTenant.defaultExpectation = &PartitionServiceClientMockListTenantExpectation{}
 	}
 
 	if mmListTenant.defaultExpectation.params != nil {
-		mmListTenant.mock.t.Fatalf("PartitionServiceHandlerMock.ListTenant mock is already set by Expect")
+		mmListTenant.mock.t.Fatalf("PartitionServiceClientMock.ListTenant mock is already set by Expect")
 	}
 
 	if mmListTenant.defaultExpectation.paramPtrs == nil {
-		mmListTenant.defaultExpectation.paramPtrs = &PartitionServiceHandlerMockListTenantParamPtrs{}
+		mmListTenant.defaultExpectation.paramPtrs = &PartitionServiceClientMockListTenantParamPtrs{}
 	}
 	mmListTenant.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmListTenant.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -5268,33 +5176,10 @@ func (mmListTenant *mPartitionServiceHandlerMockListTenant) ExpectPp1Param2(pp1 
 	return mmListTenant
 }
 
-// ExpectPp2Param3 sets up expected param pp2 for PartitionServiceHandler.ListTenant
-func (mmListTenant *mPartitionServiceHandlerMockListTenant) ExpectPp2Param3(pp2 *connect.ServerStream[v1.ListTenantResponse]) *mPartitionServiceHandlerMockListTenant {
-	if mmListTenant.mock.funcListTenant != nil {
-		mmListTenant.mock.t.Fatalf("PartitionServiceHandlerMock.ListTenant mock is already set by Set")
-	}
-
-	if mmListTenant.defaultExpectation == nil {
-		mmListTenant.defaultExpectation = &PartitionServiceHandlerMockListTenantExpectation{}
-	}
-
-	if mmListTenant.defaultExpectation.params != nil {
-		mmListTenant.mock.t.Fatalf("PartitionServiceHandlerMock.ListTenant mock is already set by Expect")
-	}
-
-	if mmListTenant.defaultExpectation.paramPtrs == nil {
-		mmListTenant.defaultExpectation.paramPtrs = &PartitionServiceHandlerMockListTenantParamPtrs{}
-	}
-	mmListTenant.defaultExpectation.paramPtrs.pp2 = &pp2
-	mmListTenant.defaultExpectation.expectationOrigins.originPp2 = minimock.CallerInfo(1)
-
-	return mmListTenant
-}
-
-// Inspect accepts an inspector function that has same arguments as the PartitionServiceHandler.ListTenant
-func (mmListTenant *mPartitionServiceHandlerMockListTenant) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.ListTenantRequest], pp2 *connect.ServerStream[v1.ListTenantResponse])) *mPartitionServiceHandlerMockListTenant {
+// Inspect accepts an inspector function that has same arguments as the PartitionServiceClient.ListTenant
+func (mmListTenant *mPartitionServiceClientMockListTenant) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.ListTenantRequest])) *mPartitionServiceClientMockListTenant {
 	if mmListTenant.mock.inspectFuncListTenant != nil {
-		mmListTenant.mock.t.Fatalf("Inspect function is already set for PartitionServiceHandlerMock.ListTenant")
+		mmListTenant.mock.t.Fatalf("Inspect function is already set for PartitionServiceClientMock.ListTenant")
 	}
 
 	mmListTenant.mock.inspectFuncListTenant = f
@@ -5302,28 +5187,28 @@ func (mmListTenant *mPartitionServiceHandlerMockListTenant) Inspect(f func(ctx c
 	return mmListTenant
 }
 
-// Return sets up results that will be returned by PartitionServiceHandler.ListTenant
-func (mmListTenant *mPartitionServiceHandlerMockListTenant) Return(err error) *PartitionServiceHandlerMock {
+// Return sets up results that will be returned by PartitionServiceClient.ListTenant
+func (mmListTenant *mPartitionServiceClientMockListTenant) Return(pp2 *connect.ServerStreamForClient[v1.ListTenantResponse], err error) *PartitionServiceClientMock {
 	if mmListTenant.mock.funcListTenant != nil {
-		mmListTenant.mock.t.Fatalf("PartitionServiceHandlerMock.ListTenant mock is already set by Set")
+		mmListTenant.mock.t.Fatalf("PartitionServiceClientMock.ListTenant mock is already set by Set")
 	}
 
 	if mmListTenant.defaultExpectation == nil {
-		mmListTenant.defaultExpectation = &PartitionServiceHandlerMockListTenantExpectation{mock: mmListTenant.mock}
+		mmListTenant.defaultExpectation = &PartitionServiceClientMockListTenantExpectation{mock: mmListTenant.mock}
 	}
-	mmListTenant.defaultExpectation.results = &PartitionServiceHandlerMockListTenantResults{err}
+	mmListTenant.defaultExpectation.results = &PartitionServiceClientMockListTenantResults{pp2, err}
 	mmListTenant.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmListTenant.mock
 }
 
-// Set uses given function f to mock the PartitionServiceHandler.ListTenant method
-func (mmListTenant *mPartitionServiceHandlerMockListTenant) Set(f func(ctx context.Context, pp1 *connect.Request[v1.ListTenantRequest], pp2 *connect.ServerStream[v1.ListTenantResponse]) (err error)) *PartitionServiceHandlerMock {
+// Set uses given function f to mock the PartitionServiceClient.ListTenant method
+func (mmListTenant *mPartitionServiceClientMockListTenant) Set(f func(ctx context.Context, pp1 *connect.Request[v1.ListTenantRequest]) (pp2 *connect.ServerStreamForClient[v1.ListTenantResponse], err error)) *PartitionServiceClientMock {
 	if mmListTenant.defaultExpectation != nil {
-		mmListTenant.mock.t.Fatalf("Default expectation is already set for the PartitionServiceHandler.ListTenant method")
+		mmListTenant.mock.t.Fatalf("Default expectation is already set for the PartitionServiceClient.ListTenant method")
 	}
 
 	if len(mmListTenant.expectations) > 0 {
-		mmListTenant.mock.t.Fatalf("Some expectations are already set for the PartitionServiceHandler.ListTenant method")
+		mmListTenant.mock.t.Fatalf("Some expectations are already set for the PartitionServiceClient.ListTenant method")
 	}
 
 	mmListTenant.mock.funcListTenant = f
@@ -5331,39 +5216,39 @@ func (mmListTenant *mPartitionServiceHandlerMockListTenant) Set(f func(ctx conte
 	return mmListTenant.mock
 }
 
-// When sets expectation for the PartitionServiceHandler.ListTenant which will trigger the result defined by the following
+// When sets expectation for the PartitionServiceClient.ListTenant which will trigger the result defined by the following
 // Then helper
-func (mmListTenant *mPartitionServiceHandlerMockListTenant) When(ctx context.Context, pp1 *connect.Request[v1.ListTenantRequest], pp2 *connect.ServerStream[v1.ListTenantResponse]) *PartitionServiceHandlerMockListTenantExpectation {
+func (mmListTenant *mPartitionServiceClientMockListTenant) When(ctx context.Context, pp1 *connect.Request[v1.ListTenantRequest]) *PartitionServiceClientMockListTenantExpectation {
 	if mmListTenant.mock.funcListTenant != nil {
-		mmListTenant.mock.t.Fatalf("PartitionServiceHandlerMock.ListTenant mock is already set by Set")
+		mmListTenant.mock.t.Fatalf("PartitionServiceClientMock.ListTenant mock is already set by Set")
 	}
 
-	expectation := &PartitionServiceHandlerMockListTenantExpectation{
+	expectation := &PartitionServiceClientMockListTenantExpectation{
 		mock:               mmListTenant.mock,
-		params:             &PartitionServiceHandlerMockListTenantParams{ctx, pp1, pp2},
-		expectationOrigins: PartitionServiceHandlerMockListTenantExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &PartitionServiceClientMockListTenantParams{ctx, pp1},
+		expectationOrigins: PartitionServiceClientMockListTenantExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmListTenant.expectations = append(mmListTenant.expectations, expectation)
 	return expectation
 }
 
-// Then sets up PartitionServiceHandler.ListTenant return parameters for the expectation previously defined by the When method
-func (e *PartitionServiceHandlerMockListTenantExpectation) Then(err error) *PartitionServiceHandlerMock {
-	e.results = &PartitionServiceHandlerMockListTenantResults{err}
+// Then sets up PartitionServiceClient.ListTenant return parameters for the expectation previously defined by the When method
+func (e *PartitionServiceClientMockListTenantExpectation) Then(pp2 *connect.ServerStreamForClient[v1.ListTenantResponse], err error) *PartitionServiceClientMock {
+	e.results = &PartitionServiceClientMockListTenantResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times PartitionServiceHandler.ListTenant should be invoked
-func (mmListTenant *mPartitionServiceHandlerMockListTenant) Times(n uint64) *mPartitionServiceHandlerMockListTenant {
+// Times sets number of times PartitionServiceClient.ListTenant should be invoked
+func (mmListTenant *mPartitionServiceClientMockListTenant) Times(n uint64) *mPartitionServiceClientMockListTenant {
 	if n == 0 {
-		mmListTenant.mock.t.Fatalf("Times of PartitionServiceHandlerMock.ListTenant mock can not be zero")
+		mmListTenant.mock.t.Fatalf("Times of PartitionServiceClientMock.ListTenant mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmListTenant.expectedInvocations, n)
 	mmListTenant.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmListTenant
 }
 
-func (mmListTenant *mPartitionServiceHandlerMockListTenant) invocationsDone() bool {
+func (mmListTenant *mPartitionServiceClientMockListTenant) invocationsDone() bool {
 	if len(mmListTenant.expectations) == 0 && mmListTenant.defaultExpectation == nil && mmListTenant.mock.funcListTenant == nil {
 		return true
 	}
@@ -5374,18 +5259,18 @@ func (mmListTenant *mPartitionServiceHandlerMockListTenant) invocationsDone() bo
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// ListTenant implements mm_partitionv1connect.PartitionServiceHandler
-func (mmListTenant *PartitionServiceHandlerMock) ListTenant(ctx context.Context, pp1 *connect.Request[v1.ListTenantRequest], pp2 *connect.ServerStream[v1.ListTenantResponse]) (err error) {
+// ListTenant implements mm_partitionv1connect.PartitionServiceClient
+func (mmListTenant *PartitionServiceClientMock) ListTenant(ctx context.Context, pp1 *connect.Request[v1.ListTenantRequest]) (pp2 *connect.ServerStreamForClient[v1.ListTenantResponse], err error) {
 	mm_atomic.AddUint64(&mmListTenant.beforeListTenantCounter, 1)
 	defer mm_atomic.AddUint64(&mmListTenant.afterListTenantCounter, 1)
 
 	mmListTenant.t.Helper()
 
 	if mmListTenant.inspectFuncListTenant != nil {
-		mmListTenant.inspectFuncListTenant(ctx, pp1, pp2)
+		mmListTenant.inspectFuncListTenant(ctx, pp1)
 	}
 
-	mm_params := PartitionServiceHandlerMockListTenantParams{ctx, pp1, pp2}
+	mm_params := PartitionServiceClientMockListTenantParams{ctx, pp1}
 
 	// Record call args
 	mmListTenant.ListTenantMock.mutex.Lock()
@@ -5395,7 +5280,7 @@ func (mmListTenant *PartitionServiceHandlerMock) ListTenant(ctx context.Context,
 	for _, e := range mmListTenant.ListTenantMock.expectations {
 		if minimock.Equal(*e.params, mm_params) {
 			mm_atomic.AddUint64(&e.Counter, 1)
-			return e.results.err
+			return e.results.pp2, e.results.err
 		}
 	}
 
@@ -5404,59 +5289,54 @@ func (mmListTenant *PartitionServiceHandlerMock) ListTenant(ctx context.Context,
 		mm_want := mmListTenant.ListTenantMock.defaultExpectation.params
 		mm_want_ptrs := mmListTenant.ListTenantMock.defaultExpectation.paramPtrs
 
-		mm_got := PartitionServiceHandlerMockListTenantParams{ctx, pp1, pp2}
+		mm_got := PartitionServiceClientMockListTenantParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmListTenant.t.Errorf("PartitionServiceHandlerMock.ListTenant got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmListTenant.t.Errorf("PartitionServiceClientMock.ListTenant got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmListTenant.ListTenantMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmListTenant.t.Errorf("PartitionServiceHandlerMock.ListTenant got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmListTenant.t.Errorf("PartitionServiceClientMock.ListTenant got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmListTenant.ListTenantMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
-			if mm_want_ptrs.pp2 != nil && !minimock.Equal(*mm_want_ptrs.pp2, mm_got.pp2) {
-				mmListTenant.t.Errorf("PartitionServiceHandlerMock.ListTenant got unexpected parameter pp2, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
-					mmListTenant.ListTenantMock.defaultExpectation.expectationOrigins.originPp2, *mm_want_ptrs.pp2, mm_got.pp2, minimock.Diff(*mm_want_ptrs.pp2, mm_got.pp2))
-			}
-
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmListTenant.t.Errorf("PartitionServiceHandlerMock.ListTenant got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmListTenant.t.Errorf("PartitionServiceClientMock.ListTenant got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmListTenant.ListTenantMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmListTenant.ListTenantMock.defaultExpectation.results
 		if mm_results == nil {
-			mmListTenant.t.Fatal("No results are set for the PartitionServiceHandlerMock.ListTenant")
+			mmListTenant.t.Fatal("No results are set for the PartitionServiceClientMock.ListTenant")
 		}
-		return (*mm_results).err
+		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmListTenant.funcListTenant != nil {
-		return mmListTenant.funcListTenant(ctx, pp1, pp2)
+		return mmListTenant.funcListTenant(ctx, pp1)
 	}
-	mmListTenant.t.Fatalf("Unexpected call to PartitionServiceHandlerMock.ListTenant. %v %v %v", ctx, pp1, pp2)
+	mmListTenant.t.Fatalf("Unexpected call to PartitionServiceClientMock.ListTenant. %v %v", ctx, pp1)
 	return
 }
 
-// ListTenantAfterCounter returns a count of finished PartitionServiceHandlerMock.ListTenant invocations
-func (mmListTenant *PartitionServiceHandlerMock) ListTenantAfterCounter() uint64 {
+// ListTenantAfterCounter returns a count of finished PartitionServiceClientMock.ListTenant invocations
+func (mmListTenant *PartitionServiceClientMock) ListTenantAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmListTenant.afterListTenantCounter)
 }
 
-// ListTenantBeforeCounter returns a count of PartitionServiceHandlerMock.ListTenant invocations
-func (mmListTenant *PartitionServiceHandlerMock) ListTenantBeforeCounter() uint64 {
+// ListTenantBeforeCounter returns a count of PartitionServiceClientMock.ListTenant invocations
+func (mmListTenant *PartitionServiceClientMock) ListTenantBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmListTenant.beforeListTenantCounter)
 }
 
-// Calls returns a list of arguments used in each call to PartitionServiceHandlerMock.ListTenant.
+// Calls returns a list of arguments used in each call to PartitionServiceClientMock.ListTenant.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmListTenant *mPartitionServiceHandlerMockListTenant) Calls() []*PartitionServiceHandlerMockListTenantParams {
+func (mmListTenant *mPartitionServiceClientMockListTenant) Calls() []*PartitionServiceClientMockListTenantParams {
 	mmListTenant.mutex.RLock()
 
-	argCopy := make([]*PartitionServiceHandlerMockListTenantParams, len(mmListTenant.callArgs))
+	argCopy := make([]*PartitionServiceClientMockListTenantParams, len(mmListTenant.callArgs))
 	copy(argCopy, mmListTenant.callArgs)
 
 	mmListTenant.mutex.RUnlock()
@@ -5466,7 +5346,7 @@ func (mmListTenant *mPartitionServiceHandlerMockListTenant) Calls() []*Partition
 
 // MinimockListTenantDone returns true if the count of the ListTenant invocations corresponds
 // the number of defined expectations
-func (m *PartitionServiceHandlerMock) MinimockListTenantDone() bool {
+func (m *PartitionServiceClientMock) MinimockListTenantDone() bool {
 	if m.ListTenantMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -5482,10 +5362,10 @@ func (m *PartitionServiceHandlerMock) MinimockListTenantDone() bool {
 }
 
 // MinimockListTenantInspect logs each unmet expectation
-func (m *PartitionServiceHandlerMock) MinimockListTenantInspect() {
+func (m *PartitionServiceClientMock) MinimockListTenantInspect() {
 	for _, e := range m.ListTenantMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.ListTenant at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.ListTenant at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -5493,66 +5373,66 @@ func (m *PartitionServiceHandlerMock) MinimockListTenantInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.ListTenantMock.defaultExpectation != nil && afterListTenantCounter < 1 {
 		if m.ListTenantMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.ListTenant at\n%s", m.ListTenantMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.ListTenant at\n%s", m.ListTenantMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.ListTenant at\n%s with params: %#v", m.ListTenantMock.defaultExpectation.expectationOrigins.origin, *m.ListTenantMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.ListTenant at\n%s with params: %#v", m.ListTenantMock.defaultExpectation.expectationOrigins.origin, *m.ListTenantMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcListTenant != nil && afterListTenantCounter < 1 {
-		m.t.Errorf("Expected call to PartitionServiceHandlerMock.ListTenant at\n%s", m.funcListTenantOrigin)
+		m.t.Errorf("Expected call to PartitionServiceClientMock.ListTenant at\n%s", m.funcListTenantOrigin)
 	}
 
 	if !m.ListTenantMock.invocationsDone() && afterListTenantCounter > 0 {
-		m.t.Errorf("Expected %d calls to PartitionServiceHandlerMock.ListTenant at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to PartitionServiceClientMock.ListTenant at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.ListTenantMock.expectedInvocations), m.ListTenantMock.expectedInvocationsOrigin, afterListTenantCounter)
 	}
 }
 
-type mPartitionServiceHandlerMockRemoveAccess struct {
+type mPartitionServiceClientMockRemoveAccess struct {
 	optional           bool
-	mock               *PartitionServiceHandlerMock
-	defaultExpectation *PartitionServiceHandlerMockRemoveAccessExpectation
-	expectations       []*PartitionServiceHandlerMockRemoveAccessExpectation
+	mock               *PartitionServiceClientMock
+	defaultExpectation *PartitionServiceClientMockRemoveAccessExpectation
+	expectations       []*PartitionServiceClientMockRemoveAccessExpectation
 
-	callArgs []*PartitionServiceHandlerMockRemoveAccessParams
+	callArgs []*PartitionServiceClientMockRemoveAccessParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// PartitionServiceHandlerMockRemoveAccessExpectation specifies expectation struct of the PartitionServiceHandler.RemoveAccess
-type PartitionServiceHandlerMockRemoveAccessExpectation struct {
-	mock               *PartitionServiceHandlerMock
-	params             *PartitionServiceHandlerMockRemoveAccessParams
-	paramPtrs          *PartitionServiceHandlerMockRemoveAccessParamPtrs
-	expectationOrigins PartitionServiceHandlerMockRemoveAccessExpectationOrigins
-	results            *PartitionServiceHandlerMockRemoveAccessResults
+// PartitionServiceClientMockRemoveAccessExpectation specifies expectation struct of the PartitionServiceClient.RemoveAccess
+type PartitionServiceClientMockRemoveAccessExpectation struct {
+	mock               *PartitionServiceClientMock
+	params             *PartitionServiceClientMockRemoveAccessParams
+	paramPtrs          *PartitionServiceClientMockRemoveAccessParamPtrs
+	expectationOrigins PartitionServiceClientMockRemoveAccessExpectationOrigins
+	results            *PartitionServiceClientMockRemoveAccessResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// PartitionServiceHandlerMockRemoveAccessParams contains parameters of the PartitionServiceHandler.RemoveAccess
-type PartitionServiceHandlerMockRemoveAccessParams struct {
+// PartitionServiceClientMockRemoveAccessParams contains parameters of the PartitionServiceClient.RemoveAccess
+type PartitionServiceClientMockRemoveAccessParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.RemoveAccessRequest]
 }
 
-// PartitionServiceHandlerMockRemoveAccessParamPtrs contains pointers to parameters of the PartitionServiceHandler.RemoveAccess
-type PartitionServiceHandlerMockRemoveAccessParamPtrs struct {
+// PartitionServiceClientMockRemoveAccessParamPtrs contains pointers to parameters of the PartitionServiceClient.RemoveAccess
+type PartitionServiceClientMockRemoveAccessParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.RemoveAccessRequest]
 }
 
-// PartitionServiceHandlerMockRemoveAccessResults contains results of the PartitionServiceHandler.RemoveAccess
-type PartitionServiceHandlerMockRemoveAccessResults struct {
+// PartitionServiceClientMockRemoveAccessResults contains results of the PartitionServiceClient.RemoveAccess
+type PartitionServiceClientMockRemoveAccessResults struct {
 	pp2 *connect.Response[v1.RemoveAccessResponse]
 	err error
 }
 
-// PartitionServiceHandlerMockRemoveAccessOrigins contains origins of expectations of the PartitionServiceHandler.RemoveAccess
-type PartitionServiceHandlerMockRemoveAccessExpectationOrigins struct {
+// PartitionServiceClientMockRemoveAccessOrigins contains origins of expectations of the PartitionServiceClient.RemoveAccess
+type PartitionServiceClientMockRemoveAccessExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -5563,26 +5443,26 @@ type PartitionServiceHandlerMockRemoveAccessExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmRemoveAccess *mPartitionServiceHandlerMockRemoveAccess) Optional() *mPartitionServiceHandlerMockRemoveAccess {
+func (mmRemoveAccess *mPartitionServiceClientMockRemoveAccess) Optional() *mPartitionServiceClientMockRemoveAccess {
 	mmRemoveAccess.optional = true
 	return mmRemoveAccess
 }
 
-// Expect sets up expected params for PartitionServiceHandler.RemoveAccess
-func (mmRemoveAccess *mPartitionServiceHandlerMockRemoveAccess) Expect(ctx context.Context, pp1 *connect.Request[v1.RemoveAccessRequest]) *mPartitionServiceHandlerMockRemoveAccess {
+// Expect sets up expected params for PartitionServiceClient.RemoveAccess
+func (mmRemoveAccess *mPartitionServiceClientMockRemoveAccess) Expect(ctx context.Context, pp1 *connect.Request[v1.RemoveAccessRequest]) *mPartitionServiceClientMockRemoveAccess {
 	if mmRemoveAccess.mock.funcRemoveAccess != nil {
-		mmRemoveAccess.mock.t.Fatalf("PartitionServiceHandlerMock.RemoveAccess mock is already set by Set")
+		mmRemoveAccess.mock.t.Fatalf("PartitionServiceClientMock.RemoveAccess mock is already set by Set")
 	}
 
 	if mmRemoveAccess.defaultExpectation == nil {
-		mmRemoveAccess.defaultExpectation = &PartitionServiceHandlerMockRemoveAccessExpectation{}
+		mmRemoveAccess.defaultExpectation = &PartitionServiceClientMockRemoveAccessExpectation{}
 	}
 
 	if mmRemoveAccess.defaultExpectation.paramPtrs != nil {
-		mmRemoveAccess.mock.t.Fatalf("PartitionServiceHandlerMock.RemoveAccess mock is already set by ExpectParams functions")
+		mmRemoveAccess.mock.t.Fatalf("PartitionServiceClientMock.RemoveAccess mock is already set by ExpectParams functions")
 	}
 
-	mmRemoveAccess.defaultExpectation.params = &PartitionServiceHandlerMockRemoveAccessParams{ctx, pp1}
+	mmRemoveAccess.defaultExpectation.params = &PartitionServiceClientMockRemoveAccessParams{ctx, pp1}
 	mmRemoveAccess.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmRemoveAccess.expectations {
 		if minimock.Equal(e.params, mmRemoveAccess.defaultExpectation.params) {
@@ -5593,22 +5473,22 @@ func (mmRemoveAccess *mPartitionServiceHandlerMockRemoveAccess) Expect(ctx conte
 	return mmRemoveAccess
 }
 
-// ExpectCtxParam1 sets up expected param ctx for PartitionServiceHandler.RemoveAccess
-func (mmRemoveAccess *mPartitionServiceHandlerMockRemoveAccess) ExpectCtxParam1(ctx context.Context) *mPartitionServiceHandlerMockRemoveAccess {
+// ExpectCtxParam1 sets up expected param ctx for PartitionServiceClient.RemoveAccess
+func (mmRemoveAccess *mPartitionServiceClientMockRemoveAccess) ExpectCtxParam1(ctx context.Context) *mPartitionServiceClientMockRemoveAccess {
 	if mmRemoveAccess.mock.funcRemoveAccess != nil {
-		mmRemoveAccess.mock.t.Fatalf("PartitionServiceHandlerMock.RemoveAccess mock is already set by Set")
+		mmRemoveAccess.mock.t.Fatalf("PartitionServiceClientMock.RemoveAccess mock is already set by Set")
 	}
 
 	if mmRemoveAccess.defaultExpectation == nil {
-		mmRemoveAccess.defaultExpectation = &PartitionServiceHandlerMockRemoveAccessExpectation{}
+		mmRemoveAccess.defaultExpectation = &PartitionServiceClientMockRemoveAccessExpectation{}
 	}
 
 	if mmRemoveAccess.defaultExpectation.params != nil {
-		mmRemoveAccess.mock.t.Fatalf("PartitionServiceHandlerMock.RemoveAccess mock is already set by Expect")
+		mmRemoveAccess.mock.t.Fatalf("PartitionServiceClientMock.RemoveAccess mock is already set by Expect")
 	}
 
 	if mmRemoveAccess.defaultExpectation.paramPtrs == nil {
-		mmRemoveAccess.defaultExpectation.paramPtrs = &PartitionServiceHandlerMockRemoveAccessParamPtrs{}
+		mmRemoveAccess.defaultExpectation.paramPtrs = &PartitionServiceClientMockRemoveAccessParamPtrs{}
 	}
 	mmRemoveAccess.defaultExpectation.paramPtrs.ctx = &ctx
 	mmRemoveAccess.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -5616,22 +5496,22 @@ func (mmRemoveAccess *mPartitionServiceHandlerMockRemoveAccess) ExpectCtxParam1(
 	return mmRemoveAccess
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for PartitionServiceHandler.RemoveAccess
-func (mmRemoveAccess *mPartitionServiceHandlerMockRemoveAccess) ExpectPp1Param2(pp1 *connect.Request[v1.RemoveAccessRequest]) *mPartitionServiceHandlerMockRemoveAccess {
+// ExpectPp1Param2 sets up expected param pp1 for PartitionServiceClient.RemoveAccess
+func (mmRemoveAccess *mPartitionServiceClientMockRemoveAccess) ExpectPp1Param2(pp1 *connect.Request[v1.RemoveAccessRequest]) *mPartitionServiceClientMockRemoveAccess {
 	if mmRemoveAccess.mock.funcRemoveAccess != nil {
-		mmRemoveAccess.mock.t.Fatalf("PartitionServiceHandlerMock.RemoveAccess mock is already set by Set")
+		mmRemoveAccess.mock.t.Fatalf("PartitionServiceClientMock.RemoveAccess mock is already set by Set")
 	}
 
 	if mmRemoveAccess.defaultExpectation == nil {
-		mmRemoveAccess.defaultExpectation = &PartitionServiceHandlerMockRemoveAccessExpectation{}
+		mmRemoveAccess.defaultExpectation = &PartitionServiceClientMockRemoveAccessExpectation{}
 	}
 
 	if mmRemoveAccess.defaultExpectation.params != nil {
-		mmRemoveAccess.mock.t.Fatalf("PartitionServiceHandlerMock.RemoveAccess mock is already set by Expect")
+		mmRemoveAccess.mock.t.Fatalf("PartitionServiceClientMock.RemoveAccess mock is already set by Expect")
 	}
 
 	if mmRemoveAccess.defaultExpectation.paramPtrs == nil {
-		mmRemoveAccess.defaultExpectation.paramPtrs = &PartitionServiceHandlerMockRemoveAccessParamPtrs{}
+		mmRemoveAccess.defaultExpectation.paramPtrs = &PartitionServiceClientMockRemoveAccessParamPtrs{}
 	}
 	mmRemoveAccess.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmRemoveAccess.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -5639,10 +5519,10 @@ func (mmRemoveAccess *mPartitionServiceHandlerMockRemoveAccess) ExpectPp1Param2(
 	return mmRemoveAccess
 }
 
-// Inspect accepts an inspector function that has same arguments as the PartitionServiceHandler.RemoveAccess
-func (mmRemoveAccess *mPartitionServiceHandlerMockRemoveAccess) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.RemoveAccessRequest])) *mPartitionServiceHandlerMockRemoveAccess {
+// Inspect accepts an inspector function that has same arguments as the PartitionServiceClient.RemoveAccess
+func (mmRemoveAccess *mPartitionServiceClientMockRemoveAccess) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.RemoveAccessRequest])) *mPartitionServiceClientMockRemoveAccess {
 	if mmRemoveAccess.mock.inspectFuncRemoveAccess != nil {
-		mmRemoveAccess.mock.t.Fatalf("Inspect function is already set for PartitionServiceHandlerMock.RemoveAccess")
+		mmRemoveAccess.mock.t.Fatalf("Inspect function is already set for PartitionServiceClientMock.RemoveAccess")
 	}
 
 	mmRemoveAccess.mock.inspectFuncRemoveAccess = f
@@ -5650,28 +5530,28 @@ func (mmRemoveAccess *mPartitionServiceHandlerMockRemoveAccess) Inspect(f func(c
 	return mmRemoveAccess
 }
 
-// Return sets up results that will be returned by PartitionServiceHandler.RemoveAccess
-func (mmRemoveAccess *mPartitionServiceHandlerMockRemoveAccess) Return(pp2 *connect.Response[v1.RemoveAccessResponse], err error) *PartitionServiceHandlerMock {
+// Return sets up results that will be returned by PartitionServiceClient.RemoveAccess
+func (mmRemoveAccess *mPartitionServiceClientMockRemoveAccess) Return(pp2 *connect.Response[v1.RemoveAccessResponse], err error) *PartitionServiceClientMock {
 	if mmRemoveAccess.mock.funcRemoveAccess != nil {
-		mmRemoveAccess.mock.t.Fatalf("PartitionServiceHandlerMock.RemoveAccess mock is already set by Set")
+		mmRemoveAccess.mock.t.Fatalf("PartitionServiceClientMock.RemoveAccess mock is already set by Set")
 	}
 
 	if mmRemoveAccess.defaultExpectation == nil {
-		mmRemoveAccess.defaultExpectation = &PartitionServiceHandlerMockRemoveAccessExpectation{mock: mmRemoveAccess.mock}
+		mmRemoveAccess.defaultExpectation = &PartitionServiceClientMockRemoveAccessExpectation{mock: mmRemoveAccess.mock}
 	}
-	mmRemoveAccess.defaultExpectation.results = &PartitionServiceHandlerMockRemoveAccessResults{pp2, err}
+	mmRemoveAccess.defaultExpectation.results = &PartitionServiceClientMockRemoveAccessResults{pp2, err}
 	mmRemoveAccess.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmRemoveAccess.mock
 }
 
-// Set uses given function f to mock the PartitionServiceHandler.RemoveAccess method
-func (mmRemoveAccess *mPartitionServiceHandlerMockRemoveAccess) Set(f func(ctx context.Context, pp1 *connect.Request[v1.RemoveAccessRequest]) (pp2 *connect.Response[v1.RemoveAccessResponse], err error)) *PartitionServiceHandlerMock {
+// Set uses given function f to mock the PartitionServiceClient.RemoveAccess method
+func (mmRemoveAccess *mPartitionServiceClientMockRemoveAccess) Set(f func(ctx context.Context, pp1 *connect.Request[v1.RemoveAccessRequest]) (pp2 *connect.Response[v1.RemoveAccessResponse], err error)) *PartitionServiceClientMock {
 	if mmRemoveAccess.defaultExpectation != nil {
-		mmRemoveAccess.mock.t.Fatalf("Default expectation is already set for the PartitionServiceHandler.RemoveAccess method")
+		mmRemoveAccess.mock.t.Fatalf("Default expectation is already set for the PartitionServiceClient.RemoveAccess method")
 	}
 
 	if len(mmRemoveAccess.expectations) > 0 {
-		mmRemoveAccess.mock.t.Fatalf("Some expectations are already set for the PartitionServiceHandler.RemoveAccess method")
+		mmRemoveAccess.mock.t.Fatalf("Some expectations are already set for the PartitionServiceClient.RemoveAccess method")
 	}
 
 	mmRemoveAccess.mock.funcRemoveAccess = f
@@ -5679,39 +5559,39 @@ func (mmRemoveAccess *mPartitionServiceHandlerMockRemoveAccess) Set(f func(ctx c
 	return mmRemoveAccess.mock
 }
 
-// When sets expectation for the PartitionServiceHandler.RemoveAccess which will trigger the result defined by the following
+// When sets expectation for the PartitionServiceClient.RemoveAccess which will trigger the result defined by the following
 // Then helper
-func (mmRemoveAccess *mPartitionServiceHandlerMockRemoveAccess) When(ctx context.Context, pp1 *connect.Request[v1.RemoveAccessRequest]) *PartitionServiceHandlerMockRemoveAccessExpectation {
+func (mmRemoveAccess *mPartitionServiceClientMockRemoveAccess) When(ctx context.Context, pp1 *connect.Request[v1.RemoveAccessRequest]) *PartitionServiceClientMockRemoveAccessExpectation {
 	if mmRemoveAccess.mock.funcRemoveAccess != nil {
-		mmRemoveAccess.mock.t.Fatalf("PartitionServiceHandlerMock.RemoveAccess mock is already set by Set")
+		mmRemoveAccess.mock.t.Fatalf("PartitionServiceClientMock.RemoveAccess mock is already set by Set")
 	}
 
-	expectation := &PartitionServiceHandlerMockRemoveAccessExpectation{
+	expectation := &PartitionServiceClientMockRemoveAccessExpectation{
 		mock:               mmRemoveAccess.mock,
-		params:             &PartitionServiceHandlerMockRemoveAccessParams{ctx, pp1},
-		expectationOrigins: PartitionServiceHandlerMockRemoveAccessExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &PartitionServiceClientMockRemoveAccessParams{ctx, pp1},
+		expectationOrigins: PartitionServiceClientMockRemoveAccessExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmRemoveAccess.expectations = append(mmRemoveAccess.expectations, expectation)
 	return expectation
 }
 
-// Then sets up PartitionServiceHandler.RemoveAccess return parameters for the expectation previously defined by the When method
-func (e *PartitionServiceHandlerMockRemoveAccessExpectation) Then(pp2 *connect.Response[v1.RemoveAccessResponse], err error) *PartitionServiceHandlerMock {
-	e.results = &PartitionServiceHandlerMockRemoveAccessResults{pp2, err}
+// Then sets up PartitionServiceClient.RemoveAccess return parameters for the expectation previously defined by the When method
+func (e *PartitionServiceClientMockRemoveAccessExpectation) Then(pp2 *connect.Response[v1.RemoveAccessResponse], err error) *PartitionServiceClientMock {
+	e.results = &PartitionServiceClientMockRemoveAccessResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times PartitionServiceHandler.RemoveAccess should be invoked
-func (mmRemoveAccess *mPartitionServiceHandlerMockRemoveAccess) Times(n uint64) *mPartitionServiceHandlerMockRemoveAccess {
+// Times sets number of times PartitionServiceClient.RemoveAccess should be invoked
+func (mmRemoveAccess *mPartitionServiceClientMockRemoveAccess) Times(n uint64) *mPartitionServiceClientMockRemoveAccess {
 	if n == 0 {
-		mmRemoveAccess.mock.t.Fatalf("Times of PartitionServiceHandlerMock.RemoveAccess mock can not be zero")
+		mmRemoveAccess.mock.t.Fatalf("Times of PartitionServiceClientMock.RemoveAccess mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmRemoveAccess.expectedInvocations, n)
 	mmRemoveAccess.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmRemoveAccess
 }
 
-func (mmRemoveAccess *mPartitionServiceHandlerMockRemoveAccess) invocationsDone() bool {
+func (mmRemoveAccess *mPartitionServiceClientMockRemoveAccess) invocationsDone() bool {
 	if len(mmRemoveAccess.expectations) == 0 && mmRemoveAccess.defaultExpectation == nil && mmRemoveAccess.mock.funcRemoveAccess == nil {
 		return true
 	}
@@ -5722,8 +5602,8 @@ func (mmRemoveAccess *mPartitionServiceHandlerMockRemoveAccess) invocationsDone(
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// RemoveAccess implements mm_partitionv1connect.PartitionServiceHandler
-func (mmRemoveAccess *PartitionServiceHandlerMock) RemoveAccess(ctx context.Context, pp1 *connect.Request[v1.RemoveAccessRequest]) (pp2 *connect.Response[v1.RemoveAccessResponse], err error) {
+// RemoveAccess implements mm_partitionv1connect.PartitionServiceClient
+func (mmRemoveAccess *PartitionServiceClientMock) RemoveAccess(ctx context.Context, pp1 *connect.Request[v1.RemoveAccessRequest]) (pp2 *connect.Response[v1.RemoveAccessResponse], err error) {
 	mm_atomic.AddUint64(&mmRemoveAccess.beforeRemoveAccessCounter, 1)
 	defer mm_atomic.AddUint64(&mmRemoveAccess.afterRemoveAccessCounter, 1)
 
@@ -5733,7 +5613,7 @@ func (mmRemoveAccess *PartitionServiceHandlerMock) RemoveAccess(ctx context.Cont
 		mmRemoveAccess.inspectFuncRemoveAccess(ctx, pp1)
 	}
 
-	mm_params := PartitionServiceHandlerMockRemoveAccessParams{ctx, pp1}
+	mm_params := PartitionServiceClientMockRemoveAccessParams{ctx, pp1}
 
 	// Record call args
 	mmRemoveAccess.RemoveAccessMock.mutex.Lock()
@@ -5752,54 +5632,54 @@ func (mmRemoveAccess *PartitionServiceHandlerMock) RemoveAccess(ctx context.Cont
 		mm_want := mmRemoveAccess.RemoveAccessMock.defaultExpectation.params
 		mm_want_ptrs := mmRemoveAccess.RemoveAccessMock.defaultExpectation.paramPtrs
 
-		mm_got := PartitionServiceHandlerMockRemoveAccessParams{ctx, pp1}
+		mm_got := PartitionServiceClientMockRemoveAccessParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmRemoveAccess.t.Errorf("PartitionServiceHandlerMock.RemoveAccess got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmRemoveAccess.t.Errorf("PartitionServiceClientMock.RemoveAccess got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmRemoveAccess.RemoveAccessMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmRemoveAccess.t.Errorf("PartitionServiceHandlerMock.RemoveAccess got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmRemoveAccess.t.Errorf("PartitionServiceClientMock.RemoveAccess got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmRemoveAccess.RemoveAccessMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmRemoveAccess.t.Errorf("PartitionServiceHandlerMock.RemoveAccess got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmRemoveAccess.t.Errorf("PartitionServiceClientMock.RemoveAccess got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmRemoveAccess.RemoveAccessMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmRemoveAccess.RemoveAccessMock.defaultExpectation.results
 		if mm_results == nil {
-			mmRemoveAccess.t.Fatal("No results are set for the PartitionServiceHandlerMock.RemoveAccess")
+			mmRemoveAccess.t.Fatal("No results are set for the PartitionServiceClientMock.RemoveAccess")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmRemoveAccess.funcRemoveAccess != nil {
 		return mmRemoveAccess.funcRemoveAccess(ctx, pp1)
 	}
-	mmRemoveAccess.t.Fatalf("Unexpected call to PartitionServiceHandlerMock.RemoveAccess. %v %v", ctx, pp1)
+	mmRemoveAccess.t.Fatalf("Unexpected call to PartitionServiceClientMock.RemoveAccess. %v %v", ctx, pp1)
 	return
 }
 
-// RemoveAccessAfterCounter returns a count of finished PartitionServiceHandlerMock.RemoveAccess invocations
-func (mmRemoveAccess *PartitionServiceHandlerMock) RemoveAccessAfterCounter() uint64 {
+// RemoveAccessAfterCounter returns a count of finished PartitionServiceClientMock.RemoveAccess invocations
+func (mmRemoveAccess *PartitionServiceClientMock) RemoveAccessAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmRemoveAccess.afterRemoveAccessCounter)
 }
 
-// RemoveAccessBeforeCounter returns a count of PartitionServiceHandlerMock.RemoveAccess invocations
-func (mmRemoveAccess *PartitionServiceHandlerMock) RemoveAccessBeforeCounter() uint64 {
+// RemoveAccessBeforeCounter returns a count of PartitionServiceClientMock.RemoveAccess invocations
+func (mmRemoveAccess *PartitionServiceClientMock) RemoveAccessBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmRemoveAccess.beforeRemoveAccessCounter)
 }
 
-// Calls returns a list of arguments used in each call to PartitionServiceHandlerMock.RemoveAccess.
+// Calls returns a list of arguments used in each call to PartitionServiceClientMock.RemoveAccess.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmRemoveAccess *mPartitionServiceHandlerMockRemoveAccess) Calls() []*PartitionServiceHandlerMockRemoveAccessParams {
+func (mmRemoveAccess *mPartitionServiceClientMockRemoveAccess) Calls() []*PartitionServiceClientMockRemoveAccessParams {
 	mmRemoveAccess.mutex.RLock()
 
-	argCopy := make([]*PartitionServiceHandlerMockRemoveAccessParams, len(mmRemoveAccess.callArgs))
+	argCopy := make([]*PartitionServiceClientMockRemoveAccessParams, len(mmRemoveAccess.callArgs))
 	copy(argCopy, mmRemoveAccess.callArgs)
 
 	mmRemoveAccess.mutex.RUnlock()
@@ -5809,7 +5689,7 @@ func (mmRemoveAccess *mPartitionServiceHandlerMockRemoveAccess) Calls() []*Parti
 
 // MinimockRemoveAccessDone returns true if the count of the RemoveAccess invocations corresponds
 // the number of defined expectations
-func (m *PartitionServiceHandlerMock) MinimockRemoveAccessDone() bool {
+func (m *PartitionServiceClientMock) MinimockRemoveAccessDone() bool {
 	if m.RemoveAccessMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -5825,10 +5705,10 @@ func (m *PartitionServiceHandlerMock) MinimockRemoveAccessDone() bool {
 }
 
 // MinimockRemoveAccessInspect logs each unmet expectation
-func (m *PartitionServiceHandlerMock) MinimockRemoveAccessInspect() {
+func (m *PartitionServiceClientMock) MinimockRemoveAccessInspect() {
 	for _, e := range m.RemoveAccessMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.RemoveAccess at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.RemoveAccess at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -5836,66 +5716,66 @@ func (m *PartitionServiceHandlerMock) MinimockRemoveAccessInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.RemoveAccessMock.defaultExpectation != nil && afterRemoveAccessCounter < 1 {
 		if m.RemoveAccessMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.RemoveAccess at\n%s", m.RemoveAccessMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.RemoveAccess at\n%s", m.RemoveAccessMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.RemoveAccess at\n%s with params: %#v", m.RemoveAccessMock.defaultExpectation.expectationOrigins.origin, *m.RemoveAccessMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.RemoveAccess at\n%s with params: %#v", m.RemoveAccessMock.defaultExpectation.expectationOrigins.origin, *m.RemoveAccessMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcRemoveAccess != nil && afterRemoveAccessCounter < 1 {
-		m.t.Errorf("Expected call to PartitionServiceHandlerMock.RemoveAccess at\n%s", m.funcRemoveAccessOrigin)
+		m.t.Errorf("Expected call to PartitionServiceClientMock.RemoveAccess at\n%s", m.funcRemoveAccessOrigin)
 	}
 
 	if !m.RemoveAccessMock.invocationsDone() && afterRemoveAccessCounter > 0 {
-		m.t.Errorf("Expected %d calls to PartitionServiceHandlerMock.RemoveAccess at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to PartitionServiceClientMock.RemoveAccess at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.RemoveAccessMock.expectedInvocations), m.RemoveAccessMock.expectedInvocationsOrigin, afterRemoveAccessCounter)
 	}
 }
 
-type mPartitionServiceHandlerMockRemoveAccessRole struct {
+type mPartitionServiceClientMockRemoveAccessRole struct {
 	optional           bool
-	mock               *PartitionServiceHandlerMock
-	defaultExpectation *PartitionServiceHandlerMockRemoveAccessRoleExpectation
-	expectations       []*PartitionServiceHandlerMockRemoveAccessRoleExpectation
+	mock               *PartitionServiceClientMock
+	defaultExpectation *PartitionServiceClientMockRemoveAccessRoleExpectation
+	expectations       []*PartitionServiceClientMockRemoveAccessRoleExpectation
 
-	callArgs []*PartitionServiceHandlerMockRemoveAccessRoleParams
+	callArgs []*PartitionServiceClientMockRemoveAccessRoleParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// PartitionServiceHandlerMockRemoveAccessRoleExpectation specifies expectation struct of the PartitionServiceHandler.RemoveAccessRole
-type PartitionServiceHandlerMockRemoveAccessRoleExpectation struct {
-	mock               *PartitionServiceHandlerMock
-	params             *PartitionServiceHandlerMockRemoveAccessRoleParams
-	paramPtrs          *PartitionServiceHandlerMockRemoveAccessRoleParamPtrs
-	expectationOrigins PartitionServiceHandlerMockRemoveAccessRoleExpectationOrigins
-	results            *PartitionServiceHandlerMockRemoveAccessRoleResults
+// PartitionServiceClientMockRemoveAccessRoleExpectation specifies expectation struct of the PartitionServiceClient.RemoveAccessRole
+type PartitionServiceClientMockRemoveAccessRoleExpectation struct {
+	mock               *PartitionServiceClientMock
+	params             *PartitionServiceClientMockRemoveAccessRoleParams
+	paramPtrs          *PartitionServiceClientMockRemoveAccessRoleParamPtrs
+	expectationOrigins PartitionServiceClientMockRemoveAccessRoleExpectationOrigins
+	results            *PartitionServiceClientMockRemoveAccessRoleResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// PartitionServiceHandlerMockRemoveAccessRoleParams contains parameters of the PartitionServiceHandler.RemoveAccessRole
-type PartitionServiceHandlerMockRemoveAccessRoleParams struct {
+// PartitionServiceClientMockRemoveAccessRoleParams contains parameters of the PartitionServiceClient.RemoveAccessRole
+type PartitionServiceClientMockRemoveAccessRoleParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.RemoveAccessRoleRequest]
 }
 
-// PartitionServiceHandlerMockRemoveAccessRoleParamPtrs contains pointers to parameters of the PartitionServiceHandler.RemoveAccessRole
-type PartitionServiceHandlerMockRemoveAccessRoleParamPtrs struct {
+// PartitionServiceClientMockRemoveAccessRoleParamPtrs contains pointers to parameters of the PartitionServiceClient.RemoveAccessRole
+type PartitionServiceClientMockRemoveAccessRoleParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.RemoveAccessRoleRequest]
 }
 
-// PartitionServiceHandlerMockRemoveAccessRoleResults contains results of the PartitionServiceHandler.RemoveAccessRole
-type PartitionServiceHandlerMockRemoveAccessRoleResults struct {
+// PartitionServiceClientMockRemoveAccessRoleResults contains results of the PartitionServiceClient.RemoveAccessRole
+type PartitionServiceClientMockRemoveAccessRoleResults struct {
 	pp2 *connect.Response[v1.RemoveAccessRoleResponse]
 	err error
 }
 
-// PartitionServiceHandlerMockRemoveAccessRoleOrigins contains origins of expectations of the PartitionServiceHandler.RemoveAccessRole
-type PartitionServiceHandlerMockRemoveAccessRoleExpectationOrigins struct {
+// PartitionServiceClientMockRemoveAccessRoleOrigins contains origins of expectations of the PartitionServiceClient.RemoveAccessRole
+type PartitionServiceClientMockRemoveAccessRoleExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -5906,26 +5786,26 @@ type PartitionServiceHandlerMockRemoveAccessRoleExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmRemoveAccessRole *mPartitionServiceHandlerMockRemoveAccessRole) Optional() *mPartitionServiceHandlerMockRemoveAccessRole {
+func (mmRemoveAccessRole *mPartitionServiceClientMockRemoveAccessRole) Optional() *mPartitionServiceClientMockRemoveAccessRole {
 	mmRemoveAccessRole.optional = true
 	return mmRemoveAccessRole
 }
 
-// Expect sets up expected params for PartitionServiceHandler.RemoveAccessRole
-func (mmRemoveAccessRole *mPartitionServiceHandlerMockRemoveAccessRole) Expect(ctx context.Context, pp1 *connect.Request[v1.RemoveAccessRoleRequest]) *mPartitionServiceHandlerMockRemoveAccessRole {
+// Expect sets up expected params for PartitionServiceClient.RemoveAccessRole
+func (mmRemoveAccessRole *mPartitionServiceClientMockRemoveAccessRole) Expect(ctx context.Context, pp1 *connect.Request[v1.RemoveAccessRoleRequest]) *mPartitionServiceClientMockRemoveAccessRole {
 	if mmRemoveAccessRole.mock.funcRemoveAccessRole != nil {
-		mmRemoveAccessRole.mock.t.Fatalf("PartitionServiceHandlerMock.RemoveAccessRole mock is already set by Set")
+		mmRemoveAccessRole.mock.t.Fatalf("PartitionServiceClientMock.RemoveAccessRole mock is already set by Set")
 	}
 
 	if mmRemoveAccessRole.defaultExpectation == nil {
-		mmRemoveAccessRole.defaultExpectation = &PartitionServiceHandlerMockRemoveAccessRoleExpectation{}
+		mmRemoveAccessRole.defaultExpectation = &PartitionServiceClientMockRemoveAccessRoleExpectation{}
 	}
 
 	if mmRemoveAccessRole.defaultExpectation.paramPtrs != nil {
-		mmRemoveAccessRole.mock.t.Fatalf("PartitionServiceHandlerMock.RemoveAccessRole mock is already set by ExpectParams functions")
+		mmRemoveAccessRole.mock.t.Fatalf("PartitionServiceClientMock.RemoveAccessRole mock is already set by ExpectParams functions")
 	}
 
-	mmRemoveAccessRole.defaultExpectation.params = &PartitionServiceHandlerMockRemoveAccessRoleParams{ctx, pp1}
+	mmRemoveAccessRole.defaultExpectation.params = &PartitionServiceClientMockRemoveAccessRoleParams{ctx, pp1}
 	mmRemoveAccessRole.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmRemoveAccessRole.expectations {
 		if minimock.Equal(e.params, mmRemoveAccessRole.defaultExpectation.params) {
@@ -5936,22 +5816,22 @@ func (mmRemoveAccessRole *mPartitionServiceHandlerMockRemoveAccessRole) Expect(c
 	return mmRemoveAccessRole
 }
 
-// ExpectCtxParam1 sets up expected param ctx for PartitionServiceHandler.RemoveAccessRole
-func (mmRemoveAccessRole *mPartitionServiceHandlerMockRemoveAccessRole) ExpectCtxParam1(ctx context.Context) *mPartitionServiceHandlerMockRemoveAccessRole {
+// ExpectCtxParam1 sets up expected param ctx for PartitionServiceClient.RemoveAccessRole
+func (mmRemoveAccessRole *mPartitionServiceClientMockRemoveAccessRole) ExpectCtxParam1(ctx context.Context) *mPartitionServiceClientMockRemoveAccessRole {
 	if mmRemoveAccessRole.mock.funcRemoveAccessRole != nil {
-		mmRemoveAccessRole.mock.t.Fatalf("PartitionServiceHandlerMock.RemoveAccessRole mock is already set by Set")
+		mmRemoveAccessRole.mock.t.Fatalf("PartitionServiceClientMock.RemoveAccessRole mock is already set by Set")
 	}
 
 	if mmRemoveAccessRole.defaultExpectation == nil {
-		mmRemoveAccessRole.defaultExpectation = &PartitionServiceHandlerMockRemoveAccessRoleExpectation{}
+		mmRemoveAccessRole.defaultExpectation = &PartitionServiceClientMockRemoveAccessRoleExpectation{}
 	}
 
 	if mmRemoveAccessRole.defaultExpectation.params != nil {
-		mmRemoveAccessRole.mock.t.Fatalf("PartitionServiceHandlerMock.RemoveAccessRole mock is already set by Expect")
+		mmRemoveAccessRole.mock.t.Fatalf("PartitionServiceClientMock.RemoveAccessRole mock is already set by Expect")
 	}
 
 	if mmRemoveAccessRole.defaultExpectation.paramPtrs == nil {
-		mmRemoveAccessRole.defaultExpectation.paramPtrs = &PartitionServiceHandlerMockRemoveAccessRoleParamPtrs{}
+		mmRemoveAccessRole.defaultExpectation.paramPtrs = &PartitionServiceClientMockRemoveAccessRoleParamPtrs{}
 	}
 	mmRemoveAccessRole.defaultExpectation.paramPtrs.ctx = &ctx
 	mmRemoveAccessRole.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -5959,22 +5839,22 @@ func (mmRemoveAccessRole *mPartitionServiceHandlerMockRemoveAccessRole) ExpectCt
 	return mmRemoveAccessRole
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for PartitionServiceHandler.RemoveAccessRole
-func (mmRemoveAccessRole *mPartitionServiceHandlerMockRemoveAccessRole) ExpectPp1Param2(pp1 *connect.Request[v1.RemoveAccessRoleRequest]) *mPartitionServiceHandlerMockRemoveAccessRole {
+// ExpectPp1Param2 sets up expected param pp1 for PartitionServiceClient.RemoveAccessRole
+func (mmRemoveAccessRole *mPartitionServiceClientMockRemoveAccessRole) ExpectPp1Param2(pp1 *connect.Request[v1.RemoveAccessRoleRequest]) *mPartitionServiceClientMockRemoveAccessRole {
 	if mmRemoveAccessRole.mock.funcRemoveAccessRole != nil {
-		mmRemoveAccessRole.mock.t.Fatalf("PartitionServiceHandlerMock.RemoveAccessRole mock is already set by Set")
+		mmRemoveAccessRole.mock.t.Fatalf("PartitionServiceClientMock.RemoveAccessRole mock is already set by Set")
 	}
 
 	if mmRemoveAccessRole.defaultExpectation == nil {
-		mmRemoveAccessRole.defaultExpectation = &PartitionServiceHandlerMockRemoveAccessRoleExpectation{}
+		mmRemoveAccessRole.defaultExpectation = &PartitionServiceClientMockRemoveAccessRoleExpectation{}
 	}
 
 	if mmRemoveAccessRole.defaultExpectation.params != nil {
-		mmRemoveAccessRole.mock.t.Fatalf("PartitionServiceHandlerMock.RemoveAccessRole mock is already set by Expect")
+		mmRemoveAccessRole.mock.t.Fatalf("PartitionServiceClientMock.RemoveAccessRole mock is already set by Expect")
 	}
 
 	if mmRemoveAccessRole.defaultExpectation.paramPtrs == nil {
-		mmRemoveAccessRole.defaultExpectation.paramPtrs = &PartitionServiceHandlerMockRemoveAccessRoleParamPtrs{}
+		mmRemoveAccessRole.defaultExpectation.paramPtrs = &PartitionServiceClientMockRemoveAccessRoleParamPtrs{}
 	}
 	mmRemoveAccessRole.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmRemoveAccessRole.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -5982,10 +5862,10 @@ func (mmRemoveAccessRole *mPartitionServiceHandlerMockRemoveAccessRole) ExpectPp
 	return mmRemoveAccessRole
 }
 
-// Inspect accepts an inspector function that has same arguments as the PartitionServiceHandler.RemoveAccessRole
-func (mmRemoveAccessRole *mPartitionServiceHandlerMockRemoveAccessRole) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.RemoveAccessRoleRequest])) *mPartitionServiceHandlerMockRemoveAccessRole {
+// Inspect accepts an inspector function that has same arguments as the PartitionServiceClient.RemoveAccessRole
+func (mmRemoveAccessRole *mPartitionServiceClientMockRemoveAccessRole) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.RemoveAccessRoleRequest])) *mPartitionServiceClientMockRemoveAccessRole {
 	if mmRemoveAccessRole.mock.inspectFuncRemoveAccessRole != nil {
-		mmRemoveAccessRole.mock.t.Fatalf("Inspect function is already set for PartitionServiceHandlerMock.RemoveAccessRole")
+		mmRemoveAccessRole.mock.t.Fatalf("Inspect function is already set for PartitionServiceClientMock.RemoveAccessRole")
 	}
 
 	mmRemoveAccessRole.mock.inspectFuncRemoveAccessRole = f
@@ -5993,28 +5873,28 @@ func (mmRemoveAccessRole *mPartitionServiceHandlerMockRemoveAccessRole) Inspect(
 	return mmRemoveAccessRole
 }
 
-// Return sets up results that will be returned by PartitionServiceHandler.RemoveAccessRole
-func (mmRemoveAccessRole *mPartitionServiceHandlerMockRemoveAccessRole) Return(pp2 *connect.Response[v1.RemoveAccessRoleResponse], err error) *PartitionServiceHandlerMock {
+// Return sets up results that will be returned by PartitionServiceClient.RemoveAccessRole
+func (mmRemoveAccessRole *mPartitionServiceClientMockRemoveAccessRole) Return(pp2 *connect.Response[v1.RemoveAccessRoleResponse], err error) *PartitionServiceClientMock {
 	if mmRemoveAccessRole.mock.funcRemoveAccessRole != nil {
-		mmRemoveAccessRole.mock.t.Fatalf("PartitionServiceHandlerMock.RemoveAccessRole mock is already set by Set")
+		mmRemoveAccessRole.mock.t.Fatalf("PartitionServiceClientMock.RemoveAccessRole mock is already set by Set")
 	}
 
 	if mmRemoveAccessRole.defaultExpectation == nil {
-		mmRemoveAccessRole.defaultExpectation = &PartitionServiceHandlerMockRemoveAccessRoleExpectation{mock: mmRemoveAccessRole.mock}
+		mmRemoveAccessRole.defaultExpectation = &PartitionServiceClientMockRemoveAccessRoleExpectation{mock: mmRemoveAccessRole.mock}
 	}
-	mmRemoveAccessRole.defaultExpectation.results = &PartitionServiceHandlerMockRemoveAccessRoleResults{pp2, err}
+	mmRemoveAccessRole.defaultExpectation.results = &PartitionServiceClientMockRemoveAccessRoleResults{pp2, err}
 	mmRemoveAccessRole.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmRemoveAccessRole.mock
 }
 
-// Set uses given function f to mock the PartitionServiceHandler.RemoveAccessRole method
-func (mmRemoveAccessRole *mPartitionServiceHandlerMockRemoveAccessRole) Set(f func(ctx context.Context, pp1 *connect.Request[v1.RemoveAccessRoleRequest]) (pp2 *connect.Response[v1.RemoveAccessRoleResponse], err error)) *PartitionServiceHandlerMock {
+// Set uses given function f to mock the PartitionServiceClient.RemoveAccessRole method
+func (mmRemoveAccessRole *mPartitionServiceClientMockRemoveAccessRole) Set(f func(ctx context.Context, pp1 *connect.Request[v1.RemoveAccessRoleRequest]) (pp2 *connect.Response[v1.RemoveAccessRoleResponse], err error)) *PartitionServiceClientMock {
 	if mmRemoveAccessRole.defaultExpectation != nil {
-		mmRemoveAccessRole.mock.t.Fatalf("Default expectation is already set for the PartitionServiceHandler.RemoveAccessRole method")
+		mmRemoveAccessRole.mock.t.Fatalf("Default expectation is already set for the PartitionServiceClient.RemoveAccessRole method")
 	}
 
 	if len(mmRemoveAccessRole.expectations) > 0 {
-		mmRemoveAccessRole.mock.t.Fatalf("Some expectations are already set for the PartitionServiceHandler.RemoveAccessRole method")
+		mmRemoveAccessRole.mock.t.Fatalf("Some expectations are already set for the PartitionServiceClient.RemoveAccessRole method")
 	}
 
 	mmRemoveAccessRole.mock.funcRemoveAccessRole = f
@@ -6022,39 +5902,39 @@ func (mmRemoveAccessRole *mPartitionServiceHandlerMockRemoveAccessRole) Set(f fu
 	return mmRemoveAccessRole.mock
 }
 
-// When sets expectation for the PartitionServiceHandler.RemoveAccessRole which will trigger the result defined by the following
+// When sets expectation for the PartitionServiceClient.RemoveAccessRole which will trigger the result defined by the following
 // Then helper
-func (mmRemoveAccessRole *mPartitionServiceHandlerMockRemoveAccessRole) When(ctx context.Context, pp1 *connect.Request[v1.RemoveAccessRoleRequest]) *PartitionServiceHandlerMockRemoveAccessRoleExpectation {
+func (mmRemoveAccessRole *mPartitionServiceClientMockRemoveAccessRole) When(ctx context.Context, pp1 *connect.Request[v1.RemoveAccessRoleRequest]) *PartitionServiceClientMockRemoveAccessRoleExpectation {
 	if mmRemoveAccessRole.mock.funcRemoveAccessRole != nil {
-		mmRemoveAccessRole.mock.t.Fatalf("PartitionServiceHandlerMock.RemoveAccessRole mock is already set by Set")
+		mmRemoveAccessRole.mock.t.Fatalf("PartitionServiceClientMock.RemoveAccessRole mock is already set by Set")
 	}
 
-	expectation := &PartitionServiceHandlerMockRemoveAccessRoleExpectation{
+	expectation := &PartitionServiceClientMockRemoveAccessRoleExpectation{
 		mock:               mmRemoveAccessRole.mock,
-		params:             &PartitionServiceHandlerMockRemoveAccessRoleParams{ctx, pp1},
-		expectationOrigins: PartitionServiceHandlerMockRemoveAccessRoleExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &PartitionServiceClientMockRemoveAccessRoleParams{ctx, pp1},
+		expectationOrigins: PartitionServiceClientMockRemoveAccessRoleExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmRemoveAccessRole.expectations = append(mmRemoveAccessRole.expectations, expectation)
 	return expectation
 }
 
-// Then sets up PartitionServiceHandler.RemoveAccessRole return parameters for the expectation previously defined by the When method
-func (e *PartitionServiceHandlerMockRemoveAccessRoleExpectation) Then(pp2 *connect.Response[v1.RemoveAccessRoleResponse], err error) *PartitionServiceHandlerMock {
-	e.results = &PartitionServiceHandlerMockRemoveAccessRoleResults{pp2, err}
+// Then sets up PartitionServiceClient.RemoveAccessRole return parameters for the expectation previously defined by the When method
+func (e *PartitionServiceClientMockRemoveAccessRoleExpectation) Then(pp2 *connect.Response[v1.RemoveAccessRoleResponse], err error) *PartitionServiceClientMock {
+	e.results = &PartitionServiceClientMockRemoveAccessRoleResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times PartitionServiceHandler.RemoveAccessRole should be invoked
-func (mmRemoveAccessRole *mPartitionServiceHandlerMockRemoveAccessRole) Times(n uint64) *mPartitionServiceHandlerMockRemoveAccessRole {
+// Times sets number of times PartitionServiceClient.RemoveAccessRole should be invoked
+func (mmRemoveAccessRole *mPartitionServiceClientMockRemoveAccessRole) Times(n uint64) *mPartitionServiceClientMockRemoveAccessRole {
 	if n == 0 {
-		mmRemoveAccessRole.mock.t.Fatalf("Times of PartitionServiceHandlerMock.RemoveAccessRole mock can not be zero")
+		mmRemoveAccessRole.mock.t.Fatalf("Times of PartitionServiceClientMock.RemoveAccessRole mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmRemoveAccessRole.expectedInvocations, n)
 	mmRemoveAccessRole.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmRemoveAccessRole
 }
 
-func (mmRemoveAccessRole *mPartitionServiceHandlerMockRemoveAccessRole) invocationsDone() bool {
+func (mmRemoveAccessRole *mPartitionServiceClientMockRemoveAccessRole) invocationsDone() bool {
 	if len(mmRemoveAccessRole.expectations) == 0 && mmRemoveAccessRole.defaultExpectation == nil && mmRemoveAccessRole.mock.funcRemoveAccessRole == nil {
 		return true
 	}
@@ -6065,8 +5945,8 @@ func (mmRemoveAccessRole *mPartitionServiceHandlerMockRemoveAccessRole) invocati
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// RemoveAccessRole implements mm_partitionv1connect.PartitionServiceHandler
-func (mmRemoveAccessRole *PartitionServiceHandlerMock) RemoveAccessRole(ctx context.Context, pp1 *connect.Request[v1.RemoveAccessRoleRequest]) (pp2 *connect.Response[v1.RemoveAccessRoleResponse], err error) {
+// RemoveAccessRole implements mm_partitionv1connect.PartitionServiceClient
+func (mmRemoveAccessRole *PartitionServiceClientMock) RemoveAccessRole(ctx context.Context, pp1 *connect.Request[v1.RemoveAccessRoleRequest]) (pp2 *connect.Response[v1.RemoveAccessRoleResponse], err error) {
 	mm_atomic.AddUint64(&mmRemoveAccessRole.beforeRemoveAccessRoleCounter, 1)
 	defer mm_atomic.AddUint64(&mmRemoveAccessRole.afterRemoveAccessRoleCounter, 1)
 
@@ -6076,7 +5956,7 @@ func (mmRemoveAccessRole *PartitionServiceHandlerMock) RemoveAccessRole(ctx cont
 		mmRemoveAccessRole.inspectFuncRemoveAccessRole(ctx, pp1)
 	}
 
-	mm_params := PartitionServiceHandlerMockRemoveAccessRoleParams{ctx, pp1}
+	mm_params := PartitionServiceClientMockRemoveAccessRoleParams{ctx, pp1}
 
 	// Record call args
 	mmRemoveAccessRole.RemoveAccessRoleMock.mutex.Lock()
@@ -6095,54 +5975,54 @@ func (mmRemoveAccessRole *PartitionServiceHandlerMock) RemoveAccessRole(ctx cont
 		mm_want := mmRemoveAccessRole.RemoveAccessRoleMock.defaultExpectation.params
 		mm_want_ptrs := mmRemoveAccessRole.RemoveAccessRoleMock.defaultExpectation.paramPtrs
 
-		mm_got := PartitionServiceHandlerMockRemoveAccessRoleParams{ctx, pp1}
+		mm_got := PartitionServiceClientMockRemoveAccessRoleParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmRemoveAccessRole.t.Errorf("PartitionServiceHandlerMock.RemoveAccessRole got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmRemoveAccessRole.t.Errorf("PartitionServiceClientMock.RemoveAccessRole got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmRemoveAccessRole.RemoveAccessRoleMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmRemoveAccessRole.t.Errorf("PartitionServiceHandlerMock.RemoveAccessRole got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmRemoveAccessRole.t.Errorf("PartitionServiceClientMock.RemoveAccessRole got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmRemoveAccessRole.RemoveAccessRoleMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmRemoveAccessRole.t.Errorf("PartitionServiceHandlerMock.RemoveAccessRole got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmRemoveAccessRole.t.Errorf("PartitionServiceClientMock.RemoveAccessRole got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmRemoveAccessRole.RemoveAccessRoleMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmRemoveAccessRole.RemoveAccessRoleMock.defaultExpectation.results
 		if mm_results == nil {
-			mmRemoveAccessRole.t.Fatal("No results are set for the PartitionServiceHandlerMock.RemoveAccessRole")
+			mmRemoveAccessRole.t.Fatal("No results are set for the PartitionServiceClientMock.RemoveAccessRole")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmRemoveAccessRole.funcRemoveAccessRole != nil {
 		return mmRemoveAccessRole.funcRemoveAccessRole(ctx, pp1)
 	}
-	mmRemoveAccessRole.t.Fatalf("Unexpected call to PartitionServiceHandlerMock.RemoveAccessRole. %v %v", ctx, pp1)
+	mmRemoveAccessRole.t.Fatalf("Unexpected call to PartitionServiceClientMock.RemoveAccessRole. %v %v", ctx, pp1)
 	return
 }
 
-// RemoveAccessRoleAfterCounter returns a count of finished PartitionServiceHandlerMock.RemoveAccessRole invocations
-func (mmRemoveAccessRole *PartitionServiceHandlerMock) RemoveAccessRoleAfterCounter() uint64 {
+// RemoveAccessRoleAfterCounter returns a count of finished PartitionServiceClientMock.RemoveAccessRole invocations
+func (mmRemoveAccessRole *PartitionServiceClientMock) RemoveAccessRoleAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmRemoveAccessRole.afterRemoveAccessRoleCounter)
 }
 
-// RemoveAccessRoleBeforeCounter returns a count of PartitionServiceHandlerMock.RemoveAccessRole invocations
-func (mmRemoveAccessRole *PartitionServiceHandlerMock) RemoveAccessRoleBeforeCounter() uint64 {
+// RemoveAccessRoleBeforeCounter returns a count of PartitionServiceClientMock.RemoveAccessRole invocations
+func (mmRemoveAccessRole *PartitionServiceClientMock) RemoveAccessRoleBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmRemoveAccessRole.beforeRemoveAccessRoleCounter)
 }
 
-// Calls returns a list of arguments used in each call to PartitionServiceHandlerMock.RemoveAccessRole.
+// Calls returns a list of arguments used in each call to PartitionServiceClientMock.RemoveAccessRole.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmRemoveAccessRole *mPartitionServiceHandlerMockRemoveAccessRole) Calls() []*PartitionServiceHandlerMockRemoveAccessRoleParams {
+func (mmRemoveAccessRole *mPartitionServiceClientMockRemoveAccessRole) Calls() []*PartitionServiceClientMockRemoveAccessRoleParams {
 	mmRemoveAccessRole.mutex.RLock()
 
-	argCopy := make([]*PartitionServiceHandlerMockRemoveAccessRoleParams, len(mmRemoveAccessRole.callArgs))
+	argCopy := make([]*PartitionServiceClientMockRemoveAccessRoleParams, len(mmRemoveAccessRole.callArgs))
 	copy(argCopy, mmRemoveAccessRole.callArgs)
 
 	mmRemoveAccessRole.mutex.RUnlock()
@@ -6152,7 +6032,7 @@ func (mmRemoveAccessRole *mPartitionServiceHandlerMockRemoveAccessRole) Calls() 
 
 // MinimockRemoveAccessRoleDone returns true if the count of the RemoveAccessRole invocations corresponds
 // the number of defined expectations
-func (m *PartitionServiceHandlerMock) MinimockRemoveAccessRoleDone() bool {
+func (m *PartitionServiceClientMock) MinimockRemoveAccessRoleDone() bool {
 	if m.RemoveAccessRoleMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -6168,10 +6048,10 @@ func (m *PartitionServiceHandlerMock) MinimockRemoveAccessRoleDone() bool {
 }
 
 // MinimockRemoveAccessRoleInspect logs each unmet expectation
-func (m *PartitionServiceHandlerMock) MinimockRemoveAccessRoleInspect() {
+func (m *PartitionServiceClientMock) MinimockRemoveAccessRoleInspect() {
 	for _, e := range m.RemoveAccessRoleMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.RemoveAccessRole at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.RemoveAccessRole at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -6179,66 +6059,66 @@ func (m *PartitionServiceHandlerMock) MinimockRemoveAccessRoleInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.RemoveAccessRoleMock.defaultExpectation != nil && afterRemoveAccessRoleCounter < 1 {
 		if m.RemoveAccessRoleMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.RemoveAccessRole at\n%s", m.RemoveAccessRoleMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.RemoveAccessRole at\n%s", m.RemoveAccessRoleMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.RemoveAccessRole at\n%s with params: %#v", m.RemoveAccessRoleMock.defaultExpectation.expectationOrigins.origin, *m.RemoveAccessRoleMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.RemoveAccessRole at\n%s with params: %#v", m.RemoveAccessRoleMock.defaultExpectation.expectationOrigins.origin, *m.RemoveAccessRoleMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcRemoveAccessRole != nil && afterRemoveAccessRoleCounter < 1 {
-		m.t.Errorf("Expected call to PartitionServiceHandlerMock.RemoveAccessRole at\n%s", m.funcRemoveAccessRoleOrigin)
+		m.t.Errorf("Expected call to PartitionServiceClientMock.RemoveAccessRole at\n%s", m.funcRemoveAccessRoleOrigin)
 	}
 
 	if !m.RemoveAccessRoleMock.invocationsDone() && afterRemoveAccessRoleCounter > 0 {
-		m.t.Errorf("Expected %d calls to PartitionServiceHandlerMock.RemoveAccessRole at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to PartitionServiceClientMock.RemoveAccessRole at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.RemoveAccessRoleMock.expectedInvocations), m.RemoveAccessRoleMock.expectedInvocationsOrigin, afterRemoveAccessRoleCounter)
 	}
 }
 
-type mPartitionServiceHandlerMockRemovePage struct {
+type mPartitionServiceClientMockRemovePage struct {
 	optional           bool
-	mock               *PartitionServiceHandlerMock
-	defaultExpectation *PartitionServiceHandlerMockRemovePageExpectation
-	expectations       []*PartitionServiceHandlerMockRemovePageExpectation
+	mock               *PartitionServiceClientMock
+	defaultExpectation *PartitionServiceClientMockRemovePageExpectation
+	expectations       []*PartitionServiceClientMockRemovePageExpectation
 
-	callArgs []*PartitionServiceHandlerMockRemovePageParams
+	callArgs []*PartitionServiceClientMockRemovePageParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// PartitionServiceHandlerMockRemovePageExpectation specifies expectation struct of the PartitionServiceHandler.RemovePage
-type PartitionServiceHandlerMockRemovePageExpectation struct {
-	mock               *PartitionServiceHandlerMock
-	params             *PartitionServiceHandlerMockRemovePageParams
-	paramPtrs          *PartitionServiceHandlerMockRemovePageParamPtrs
-	expectationOrigins PartitionServiceHandlerMockRemovePageExpectationOrigins
-	results            *PartitionServiceHandlerMockRemovePageResults
+// PartitionServiceClientMockRemovePageExpectation specifies expectation struct of the PartitionServiceClient.RemovePage
+type PartitionServiceClientMockRemovePageExpectation struct {
+	mock               *PartitionServiceClientMock
+	params             *PartitionServiceClientMockRemovePageParams
+	paramPtrs          *PartitionServiceClientMockRemovePageParamPtrs
+	expectationOrigins PartitionServiceClientMockRemovePageExpectationOrigins
+	results            *PartitionServiceClientMockRemovePageResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// PartitionServiceHandlerMockRemovePageParams contains parameters of the PartitionServiceHandler.RemovePage
-type PartitionServiceHandlerMockRemovePageParams struct {
+// PartitionServiceClientMockRemovePageParams contains parameters of the PartitionServiceClient.RemovePage
+type PartitionServiceClientMockRemovePageParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.RemovePageRequest]
 }
 
-// PartitionServiceHandlerMockRemovePageParamPtrs contains pointers to parameters of the PartitionServiceHandler.RemovePage
-type PartitionServiceHandlerMockRemovePageParamPtrs struct {
+// PartitionServiceClientMockRemovePageParamPtrs contains pointers to parameters of the PartitionServiceClient.RemovePage
+type PartitionServiceClientMockRemovePageParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.RemovePageRequest]
 }
 
-// PartitionServiceHandlerMockRemovePageResults contains results of the PartitionServiceHandler.RemovePage
-type PartitionServiceHandlerMockRemovePageResults struct {
+// PartitionServiceClientMockRemovePageResults contains results of the PartitionServiceClient.RemovePage
+type PartitionServiceClientMockRemovePageResults struct {
 	pp2 *connect.Response[v1.RemovePageResponse]
 	err error
 }
 
-// PartitionServiceHandlerMockRemovePageOrigins contains origins of expectations of the PartitionServiceHandler.RemovePage
-type PartitionServiceHandlerMockRemovePageExpectationOrigins struct {
+// PartitionServiceClientMockRemovePageOrigins contains origins of expectations of the PartitionServiceClient.RemovePage
+type PartitionServiceClientMockRemovePageExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -6249,26 +6129,26 @@ type PartitionServiceHandlerMockRemovePageExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmRemovePage *mPartitionServiceHandlerMockRemovePage) Optional() *mPartitionServiceHandlerMockRemovePage {
+func (mmRemovePage *mPartitionServiceClientMockRemovePage) Optional() *mPartitionServiceClientMockRemovePage {
 	mmRemovePage.optional = true
 	return mmRemovePage
 }
 
-// Expect sets up expected params for PartitionServiceHandler.RemovePage
-func (mmRemovePage *mPartitionServiceHandlerMockRemovePage) Expect(ctx context.Context, pp1 *connect.Request[v1.RemovePageRequest]) *mPartitionServiceHandlerMockRemovePage {
+// Expect sets up expected params for PartitionServiceClient.RemovePage
+func (mmRemovePage *mPartitionServiceClientMockRemovePage) Expect(ctx context.Context, pp1 *connect.Request[v1.RemovePageRequest]) *mPartitionServiceClientMockRemovePage {
 	if mmRemovePage.mock.funcRemovePage != nil {
-		mmRemovePage.mock.t.Fatalf("PartitionServiceHandlerMock.RemovePage mock is already set by Set")
+		mmRemovePage.mock.t.Fatalf("PartitionServiceClientMock.RemovePage mock is already set by Set")
 	}
 
 	if mmRemovePage.defaultExpectation == nil {
-		mmRemovePage.defaultExpectation = &PartitionServiceHandlerMockRemovePageExpectation{}
+		mmRemovePage.defaultExpectation = &PartitionServiceClientMockRemovePageExpectation{}
 	}
 
 	if mmRemovePage.defaultExpectation.paramPtrs != nil {
-		mmRemovePage.mock.t.Fatalf("PartitionServiceHandlerMock.RemovePage mock is already set by ExpectParams functions")
+		mmRemovePage.mock.t.Fatalf("PartitionServiceClientMock.RemovePage mock is already set by ExpectParams functions")
 	}
 
-	mmRemovePage.defaultExpectation.params = &PartitionServiceHandlerMockRemovePageParams{ctx, pp1}
+	mmRemovePage.defaultExpectation.params = &PartitionServiceClientMockRemovePageParams{ctx, pp1}
 	mmRemovePage.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmRemovePage.expectations {
 		if minimock.Equal(e.params, mmRemovePage.defaultExpectation.params) {
@@ -6279,22 +6159,22 @@ func (mmRemovePage *mPartitionServiceHandlerMockRemovePage) Expect(ctx context.C
 	return mmRemovePage
 }
 
-// ExpectCtxParam1 sets up expected param ctx for PartitionServiceHandler.RemovePage
-func (mmRemovePage *mPartitionServiceHandlerMockRemovePage) ExpectCtxParam1(ctx context.Context) *mPartitionServiceHandlerMockRemovePage {
+// ExpectCtxParam1 sets up expected param ctx for PartitionServiceClient.RemovePage
+func (mmRemovePage *mPartitionServiceClientMockRemovePage) ExpectCtxParam1(ctx context.Context) *mPartitionServiceClientMockRemovePage {
 	if mmRemovePage.mock.funcRemovePage != nil {
-		mmRemovePage.mock.t.Fatalf("PartitionServiceHandlerMock.RemovePage mock is already set by Set")
+		mmRemovePage.mock.t.Fatalf("PartitionServiceClientMock.RemovePage mock is already set by Set")
 	}
 
 	if mmRemovePage.defaultExpectation == nil {
-		mmRemovePage.defaultExpectation = &PartitionServiceHandlerMockRemovePageExpectation{}
+		mmRemovePage.defaultExpectation = &PartitionServiceClientMockRemovePageExpectation{}
 	}
 
 	if mmRemovePage.defaultExpectation.params != nil {
-		mmRemovePage.mock.t.Fatalf("PartitionServiceHandlerMock.RemovePage mock is already set by Expect")
+		mmRemovePage.mock.t.Fatalf("PartitionServiceClientMock.RemovePage mock is already set by Expect")
 	}
 
 	if mmRemovePage.defaultExpectation.paramPtrs == nil {
-		mmRemovePage.defaultExpectation.paramPtrs = &PartitionServiceHandlerMockRemovePageParamPtrs{}
+		mmRemovePage.defaultExpectation.paramPtrs = &PartitionServiceClientMockRemovePageParamPtrs{}
 	}
 	mmRemovePage.defaultExpectation.paramPtrs.ctx = &ctx
 	mmRemovePage.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -6302,22 +6182,22 @@ func (mmRemovePage *mPartitionServiceHandlerMockRemovePage) ExpectCtxParam1(ctx 
 	return mmRemovePage
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for PartitionServiceHandler.RemovePage
-func (mmRemovePage *mPartitionServiceHandlerMockRemovePage) ExpectPp1Param2(pp1 *connect.Request[v1.RemovePageRequest]) *mPartitionServiceHandlerMockRemovePage {
+// ExpectPp1Param2 sets up expected param pp1 for PartitionServiceClient.RemovePage
+func (mmRemovePage *mPartitionServiceClientMockRemovePage) ExpectPp1Param2(pp1 *connect.Request[v1.RemovePageRequest]) *mPartitionServiceClientMockRemovePage {
 	if mmRemovePage.mock.funcRemovePage != nil {
-		mmRemovePage.mock.t.Fatalf("PartitionServiceHandlerMock.RemovePage mock is already set by Set")
+		mmRemovePage.mock.t.Fatalf("PartitionServiceClientMock.RemovePage mock is already set by Set")
 	}
 
 	if mmRemovePage.defaultExpectation == nil {
-		mmRemovePage.defaultExpectation = &PartitionServiceHandlerMockRemovePageExpectation{}
+		mmRemovePage.defaultExpectation = &PartitionServiceClientMockRemovePageExpectation{}
 	}
 
 	if mmRemovePage.defaultExpectation.params != nil {
-		mmRemovePage.mock.t.Fatalf("PartitionServiceHandlerMock.RemovePage mock is already set by Expect")
+		mmRemovePage.mock.t.Fatalf("PartitionServiceClientMock.RemovePage mock is already set by Expect")
 	}
 
 	if mmRemovePage.defaultExpectation.paramPtrs == nil {
-		mmRemovePage.defaultExpectation.paramPtrs = &PartitionServiceHandlerMockRemovePageParamPtrs{}
+		mmRemovePage.defaultExpectation.paramPtrs = &PartitionServiceClientMockRemovePageParamPtrs{}
 	}
 	mmRemovePage.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmRemovePage.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -6325,10 +6205,10 @@ func (mmRemovePage *mPartitionServiceHandlerMockRemovePage) ExpectPp1Param2(pp1 
 	return mmRemovePage
 }
 
-// Inspect accepts an inspector function that has same arguments as the PartitionServiceHandler.RemovePage
-func (mmRemovePage *mPartitionServiceHandlerMockRemovePage) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.RemovePageRequest])) *mPartitionServiceHandlerMockRemovePage {
+// Inspect accepts an inspector function that has same arguments as the PartitionServiceClient.RemovePage
+func (mmRemovePage *mPartitionServiceClientMockRemovePage) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.RemovePageRequest])) *mPartitionServiceClientMockRemovePage {
 	if mmRemovePage.mock.inspectFuncRemovePage != nil {
-		mmRemovePage.mock.t.Fatalf("Inspect function is already set for PartitionServiceHandlerMock.RemovePage")
+		mmRemovePage.mock.t.Fatalf("Inspect function is already set for PartitionServiceClientMock.RemovePage")
 	}
 
 	mmRemovePage.mock.inspectFuncRemovePage = f
@@ -6336,28 +6216,28 @@ func (mmRemovePage *mPartitionServiceHandlerMockRemovePage) Inspect(f func(ctx c
 	return mmRemovePage
 }
 
-// Return sets up results that will be returned by PartitionServiceHandler.RemovePage
-func (mmRemovePage *mPartitionServiceHandlerMockRemovePage) Return(pp2 *connect.Response[v1.RemovePageResponse], err error) *PartitionServiceHandlerMock {
+// Return sets up results that will be returned by PartitionServiceClient.RemovePage
+func (mmRemovePage *mPartitionServiceClientMockRemovePage) Return(pp2 *connect.Response[v1.RemovePageResponse], err error) *PartitionServiceClientMock {
 	if mmRemovePage.mock.funcRemovePage != nil {
-		mmRemovePage.mock.t.Fatalf("PartitionServiceHandlerMock.RemovePage mock is already set by Set")
+		mmRemovePage.mock.t.Fatalf("PartitionServiceClientMock.RemovePage mock is already set by Set")
 	}
 
 	if mmRemovePage.defaultExpectation == nil {
-		mmRemovePage.defaultExpectation = &PartitionServiceHandlerMockRemovePageExpectation{mock: mmRemovePage.mock}
+		mmRemovePage.defaultExpectation = &PartitionServiceClientMockRemovePageExpectation{mock: mmRemovePage.mock}
 	}
-	mmRemovePage.defaultExpectation.results = &PartitionServiceHandlerMockRemovePageResults{pp2, err}
+	mmRemovePage.defaultExpectation.results = &PartitionServiceClientMockRemovePageResults{pp2, err}
 	mmRemovePage.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmRemovePage.mock
 }
 
-// Set uses given function f to mock the PartitionServiceHandler.RemovePage method
-func (mmRemovePage *mPartitionServiceHandlerMockRemovePage) Set(f func(ctx context.Context, pp1 *connect.Request[v1.RemovePageRequest]) (pp2 *connect.Response[v1.RemovePageResponse], err error)) *PartitionServiceHandlerMock {
+// Set uses given function f to mock the PartitionServiceClient.RemovePage method
+func (mmRemovePage *mPartitionServiceClientMockRemovePage) Set(f func(ctx context.Context, pp1 *connect.Request[v1.RemovePageRequest]) (pp2 *connect.Response[v1.RemovePageResponse], err error)) *PartitionServiceClientMock {
 	if mmRemovePage.defaultExpectation != nil {
-		mmRemovePage.mock.t.Fatalf("Default expectation is already set for the PartitionServiceHandler.RemovePage method")
+		mmRemovePage.mock.t.Fatalf("Default expectation is already set for the PartitionServiceClient.RemovePage method")
 	}
 
 	if len(mmRemovePage.expectations) > 0 {
-		mmRemovePage.mock.t.Fatalf("Some expectations are already set for the PartitionServiceHandler.RemovePage method")
+		mmRemovePage.mock.t.Fatalf("Some expectations are already set for the PartitionServiceClient.RemovePage method")
 	}
 
 	mmRemovePage.mock.funcRemovePage = f
@@ -6365,39 +6245,39 @@ func (mmRemovePage *mPartitionServiceHandlerMockRemovePage) Set(f func(ctx conte
 	return mmRemovePage.mock
 }
 
-// When sets expectation for the PartitionServiceHandler.RemovePage which will trigger the result defined by the following
+// When sets expectation for the PartitionServiceClient.RemovePage which will trigger the result defined by the following
 // Then helper
-func (mmRemovePage *mPartitionServiceHandlerMockRemovePage) When(ctx context.Context, pp1 *connect.Request[v1.RemovePageRequest]) *PartitionServiceHandlerMockRemovePageExpectation {
+func (mmRemovePage *mPartitionServiceClientMockRemovePage) When(ctx context.Context, pp1 *connect.Request[v1.RemovePageRequest]) *PartitionServiceClientMockRemovePageExpectation {
 	if mmRemovePage.mock.funcRemovePage != nil {
-		mmRemovePage.mock.t.Fatalf("PartitionServiceHandlerMock.RemovePage mock is already set by Set")
+		mmRemovePage.mock.t.Fatalf("PartitionServiceClientMock.RemovePage mock is already set by Set")
 	}
 
-	expectation := &PartitionServiceHandlerMockRemovePageExpectation{
+	expectation := &PartitionServiceClientMockRemovePageExpectation{
 		mock:               mmRemovePage.mock,
-		params:             &PartitionServiceHandlerMockRemovePageParams{ctx, pp1},
-		expectationOrigins: PartitionServiceHandlerMockRemovePageExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &PartitionServiceClientMockRemovePageParams{ctx, pp1},
+		expectationOrigins: PartitionServiceClientMockRemovePageExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmRemovePage.expectations = append(mmRemovePage.expectations, expectation)
 	return expectation
 }
 
-// Then sets up PartitionServiceHandler.RemovePage return parameters for the expectation previously defined by the When method
-func (e *PartitionServiceHandlerMockRemovePageExpectation) Then(pp2 *connect.Response[v1.RemovePageResponse], err error) *PartitionServiceHandlerMock {
-	e.results = &PartitionServiceHandlerMockRemovePageResults{pp2, err}
+// Then sets up PartitionServiceClient.RemovePage return parameters for the expectation previously defined by the When method
+func (e *PartitionServiceClientMockRemovePageExpectation) Then(pp2 *connect.Response[v1.RemovePageResponse], err error) *PartitionServiceClientMock {
+	e.results = &PartitionServiceClientMockRemovePageResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times PartitionServiceHandler.RemovePage should be invoked
-func (mmRemovePage *mPartitionServiceHandlerMockRemovePage) Times(n uint64) *mPartitionServiceHandlerMockRemovePage {
+// Times sets number of times PartitionServiceClient.RemovePage should be invoked
+func (mmRemovePage *mPartitionServiceClientMockRemovePage) Times(n uint64) *mPartitionServiceClientMockRemovePage {
 	if n == 0 {
-		mmRemovePage.mock.t.Fatalf("Times of PartitionServiceHandlerMock.RemovePage mock can not be zero")
+		mmRemovePage.mock.t.Fatalf("Times of PartitionServiceClientMock.RemovePage mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmRemovePage.expectedInvocations, n)
 	mmRemovePage.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmRemovePage
 }
 
-func (mmRemovePage *mPartitionServiceHandlerMockRemovePage) invocationsDone() bool {
+func (mmRemovePage *mPartitionServiceClientMockRemovePage) invocationsDone() bool {
 	if len(mmRemovePage.expectations) == 0 && mmRemovePage.defaultExpectation == nil && mmRemovePage.mock.funcRemovePage == nil {
 		return true
 	}
@@ -6408,8 +6288,8 @@ func (mmRemovePage *mPartitionServiceHandlerMockRemovePage) invocationsDone() bo
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// RemovePage implements mm_partitionv1connect.PartitionServiceHandler
-func (mmRemovePage *PartitionServiceHandlerMock) RemovePage(ctx context.Context, pp1 *connect.Request[v1.RemovePageRequest]) (pp2 *connect.Response[v1.RemovePageResponse], err error) {
+// RemovePage implements mm_partitionv1connect.PartitionServiceClient
+func (mmRemovePage *PartitionServiceClientMock) RemovePage(ctx context.Context, pp1 *connect.Request[v1.RemovePageRequest]) (pp2 *connect.Response[v1.RemovePageResponse], err error) {
 	mm_atomic.AddUint64(&mmRemovePage.beforeRemovePageCounter, 1)
 	defer mm_atomic.AddUint64(&mmRemovePage.afterRemovePageCounter, 1)
 
@@ -6419,7 +6299,7 @@ func (mmRemovePage *PartitionServiceHandlerMock) RemovePage(ctx context.Context,
 		mmRemovePage.inspectFuncRemovePage(ctx, pp1)
 	}
 
-	mm_params := PartitionServiceHandlerMockRemovePageParams{ctx, pp1}
+	mm_params := PartitionServiceClientMockRemovePageParams{ctx, pp1}
 
 	// Record call args
 	mmRemovePage.RemovePageMock.mutex.Lock()
@@ -6438,54 +6318,54 @@ func (mmRemovePage *PartitionServiceHandlerMock) RemovePage(ctx context.Context,
 		mm_want := mmRemovePage.RemovePageMock.defaultExpectation.params
 		mm_want_ptrs := mmRemovePage.RemovePageMock.defaultExpectation.paramPtrs
 
-		mm_got := PartitionServiceHandlerMockRemovePageParams{ctx, pp1}
+		mm_got := PartitionServiceClientMockRemovePageParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmRemovePage.t.Errorf("PartitionServiceHandlerMock.RemovePage got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmRemovePage.t.Errorf("PartitionServiceClientMock.RemovePage got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmRemovePage.RemovePageMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmRemovePage.t.Errorf("PartitionServiceHandlerMock.RemovePage got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmRemovePage.t.Errorf("PartitionServiceClientMock.RemovePage got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmRemovePage.RemovePageMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmRemovePage.t.Errorf("PartitionServiceHandlerMock.RemovePage got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmRemovePage.t.Errorf("PartitionServiceClientMock.RemovePage got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmRemovePage.RemovePageMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmRemovePage.RemovePageMock.defaultExpectation.results
 		if mm_results == nil {
-			mmRemovePage.t.Fatal("No results are set for the PartitionServiceHandlerMock.RemovePage")
+			mmRemovePage.t.Fatal("No results are set for the PartitionServiceClientMock.RemovePage")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmRemovePage.funcRemovePage != nil {
 		return mmRemovePage.funcRemovePage(ctx, pp1)
 	}
-	mmRemovePage.t.Fatalf("Unexpected call to PartitionServiceHandlerMock.RemovePage. %v %v", ctx, pp1)
+	mmRemovePage.t.Fatalf("Unexpected call to PartitionServiceClientMock.RemovePage. %v %v", ctx, pp1)
 	return
 }
 
-// RemovePageAfterCounter returns a count of finished PartitionServiceHandlerMock.RemovePage invocations
-func (mmRemovePage *PartitionServiceHandlerMock) RemovePageAfterCounter() uint64 {
+// RemovePageAfterCounter returns a count of finished PartitionServiceClientMock.RemovePage invocations
+func (mmRemovePage *PartitionServiceClientMock) RemovePageAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmRemovePage.afterRemovePageCounter)
 }
 
-// RemovePageBeforeCounter returns a count of PartitionServiceHandlerMock.RemovePage invocations
-func (mmRemovePage *PartitionServiceHandlerMock) RemovePageBeforeCounter() uint64 {
+// RemovePageBeforeCounter returns a count of PartitionServiceClientMock.RemovePage invocations
+func (mmRemovePage *PartitionServiceClientMock) RemovePageBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmRemovePage.beforeRemovePageCounter)
 }
 
-// Calls returns a list of arguments used in each call to PartitionServiceHandlerMock.RemovePage.
+// Calls returns a list of arguments used in each call to PartitionServiceClientMock.RemovePage.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmRemovePage *mPartitionServiceHandlerMockRemovePage) Calls() []*PartitionServiceHandlerMockRemovePageParams {
+func (mmRemovePage *mPartitionServiceClientMockRemovePage) Calls() []*PartitionServiceClientMockRemovePageParams {
 	mmRemovePage.mutex.RLock()
 
-	argCopy := make([]*PartitionServiceHandlerMockRemovePageParams, len(mmRemovePage.callArgs))
+	argCopy := make([]*PartitionServiceClientMockRemovePageParams, len(mmRemovePage.callArgs))
 	copy(argCopy, mmRemovePage.callArgs)
 
 	mmRemovePage.mutex.RUnlock()
@@ -6495,7 +6375,7 @@ func (mmRemovePage *mPartitionServiceHandlerMockRemovePage) Calls() []*Partition
 
 // MinimockRemovePageDone returns true if the count of the RemovePage invocations corresponds
 // the number of defined expectations
-func (m *PartitionServiceHandlerMock) MinimockRemovePageDone() bool {
+func (m *PartitionServiceClientMock) MinimockRemovePageDone() bool {
 	if m.RemovePageMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -6511,10 +6391,10 @@ func (m *PartitionServiceHandlerMock) MinimockRemovePageDone() bool {
 }
 
 // MinimockRemovePageInspect logs each unmet expectation
-func (m *PartitionServiceHandlerMock) MinimockRemovePageInspect() {
+func (m *PartitionServiceClientMock) MinimockRemovePageInspect() {
 	for _, e := range m.RemovePageMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.RemovePage at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.RemovePage at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -6522,66 +6402,66 @@ func (m *PartitionServiceHandlerMock) MinimockRemovePageInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.RemovePageMock.defaultExpectation != nil && afterRemovePageCounter < 1 {
 		if m.RemovePageMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.RemovePage at\n%s", m.RemovePageMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.RemovePage at\n%s", m.RemovePageMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.RemovePage at\n%s with params: %#v", m.RemovePageMock.defaultExpectation.expectationOrigins.origin, *m.RemovePageMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.RemovePage at\n%s with params: %#v", m.RemovePageMock.defaultExpectation.expectationOrigins.origin, *m.RemovePageMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcRemovePage != nil && afterRemovePageCounter < 1 {
-		m.t.Errorf("Expected call to PartitionServiceHandlerMock.RemovePage at\n%s", m.funcRemovePageOrigin)
+		m.t.Errorf("Expected call to PartitionServiceClientMock.RemovePage at\n%s", m.funcRemovePageOrigin)
 	}
 
 	if !m.RemovePageMock.invocationsDone() && afterRemovePageCounter > 0 {
-		m.t.Errorf("Expected %d calls to PartitionServiceHandlerMock.RemovePage at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to PartitionServiceClientMock.RemovePage at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.RemovePageMock.expectedInvocations), m.RemovePageMock.expectedInvocationsOrigin, afterRemovePageCounter)
 	}
 }
 
-type mPartitionServiceHandlerMockRemovePartitionRole struct {
+type mPartitionServiceClientMockRemovePartitionRole struct {
 	optional           bool
-	mock               *PartitionServiceHandlerMock
-	defaultExpectation *PartitionServiceHandlerMockRemovePartitionRoleExpectation
-	expectations       []*PartitionServiceHandlerMockRemovePartitionRoleExpectation
+	mock               *PartitionServiceClientMock
+	defaultExpectation *PartitionServiceClientMockRemovePartitionRoleExpectation
+	expectations       []*PartitionServiceClientMockRemovePartitionRoleExpectation
 
-	callArgs []*PartitionServiceHandlerMockRemovePartitionRoleParams
+	callArgs []*PartitionServiceClientMockRemovePartitionRoleParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// PartitionServiceHandlerMockRemovePartitionRoleExpectation specifies expectation struct of the PartitionServiceHandler.RemovePartitionRole
-type PartitionServiceHandlerMockRemovePartitionRoleExpectation struct {
-	mock               *PartitionServiceHandlerMock
-	params             *PartitionServiceHandlerMockRemovePartitionRoleParams
-	paramPtrs          *PartitionServiceHandlerMockRemovePartitionRoleParamPtrs
-	expectationOrigins PartitionServiceHandlerMockRemovePartitionRoleExpectationOrigins
-	results            *PartitionServiceHandlerMockRemovePartitionRoleResults
+// PartitionServiceClientMockRemovePartitionRoleExpectation specifies expectation struct of the PartitionServiceClient.RemovePartitionRole
+type PartitionServiceClientMockRemovePartitionRoleExpectation struct {
+	mock               *PartitionServiceClientMock
+	params             *PartitionServiceClientMockRemovePartitionRoleParams
+	paramPtrs          *PartitionServiceClientMockRemovePartitionRoleParamPtrs
+	expectationOrigins PartitionServiceClientMockRemovePartitionRoleExpectationOrigins
+	results            *PartitionServiceClientMockRemovePartitionRoleResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// PartitionServiceHandlerMockRemovePartitionRoleParams contains parameters of the PartitionServiceHandler.RemovePartitionRole
-type PartitionServiceHandlerMockRemovePartitionRoleParams struct {
+// PartitionServiceClientMockRemovePartitionRoleParams contains parameters of the PartitionServiceClient.RemovePartitionRole
+type PartitionServiceClientMockRemovePartitionRoleParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.RemovePartitionRoleRequest]
 }
 
-// PartitionServiceHandlerMockRemovePartitionRoleParamPtrs contains pointers to parameters of the PartitionServiceHandler.RemovePartitionRole
-type PartitionServiceHandlerMockRemovePartitionRoleParamPtrs struct {
+// PartitionServiceClientMockRemovePartitionRoleParamPtrs contains pointers to parameters of the PartitionServiceClient.RemovePartitionRole
+type PartitionServiceClientMockRemovePartitionRoleParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.RemovePartitionRoleRequest]
 }
 
-// PartitionServiceHandlerMockRemovePartitionRoleResults contains results of the PartitionServiceHandler.RemovePartitionRole
-type PartitionServiceHandlerMockRemovePartitionRoleResults struct {
+// PartitionServiceClientMockRemovePartitionRoleResults contains results of the PartitionServiceClient.RemovePartitionRole
+type PartitionServiceClientMockRemovePartitionRoleResults struct {
 	pp2 *connect.Response[v1.RemovePartitionRoleResponse]
 	err error
 }
 
-// PartitionServiceHandlerMockRemovePartitionRoleOrigins contains origins of expectations of the PartitionServiceHandler.RemovePartitionRole
-type PartitionServiceHandlerMockRemovePartitionRoleExpectationOrigins struct {
+// PartitionServiceClientMockRemovePartitionRoleOrigins contains origins of expectations of the PartitionServiceClient.RemovePartitionRole
+type PartitionServiceClientMockRemovePartitionRoleExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -6592,26 +6472,26 @@ type PartitionServiceHandlerMockRemovePartitionRoleExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmRemovePartitionRole *mPartitionServiceHandlerMockRemovePartitionRole) Optional() *mPartitionServiceHandlerMockRemovePartitionRole {
+func (mmRemovePartitionRole *mPartitionServiceClientMockRemovePartitionRole) Optional() *mPartitionServiceClientMockRemovePartitionRole {
 	mmRemovePartitionRole.optional = true
 	return mmRemovePartitionRole
 }
 
-// Expect sets up expected params for PartitionServiceHandler.RemovePartitionRole
-func (mmRemovePartitionRole *mPartitionServiceHandlerMockRemovePartitionRole) Expect(ctx context.Context, pp1 *connect.Request[v1.RemovePartitionRoleRequest]) *mPartitionServiceHandlerMockRemovePartitionRole {
+// Expect sets up expected params for PartitionServiceClient.RemovePartitionRole
+func (mmRemovePartitionRole *mPartitionServiceClientMockRemovePartitionRole) Expect(ctx context.Context, pp1 *connect.Request[v1.RemovePartitionRoleRequest]) *mPartitionServiceClientMockRemovePartitionRole {
 	if mmRemovePartitionRole.mock.funcRemovePartitionRole != nil {
-		mmRemovePartitionRole.mock.t.Fatalf("PartitionServiceHandlerMock.RemovePartitionRole mock is already set by Set")
+		mmRemovePartitionRole.mock.t.Fatalf("PartitionServiceClientMock.RemovePartitionRole mock is already set by Set")
 	}
 
 	if mmRemovePartitionRole.defaultExpectation == nil {
-		mmRemovePartitionRole.defaultExpectation = &PartitionServiceHandlerMockRemovePartitionRoleExpectation{}
+		mmRemovePartitionRole.defaultExpectation = &PartitionServiceClientMockRemovePartitionRoleExpectation{}
 	}
 
 	if mmRemovePartitionRole.defaultExpectation.paramPtrs != nil {
-		mmRemovePartitionRole.mock.t.Fatalf("PartitionServiceHandlerMock.RemovePartitionRole mock is already set by ExpectParams functions")
+		mmRemovePartitionRole.mock.t.Fatalf("PartitionServiceClientMock.RemovePartitionRole mock is already set by ExpectParams functions")
 	}
 
-	mmRemovePartitionRole.defaultExpectation.params = &PartitionServiceHandlerMockRemovePartitionRoleParams{ctx, pp1}
+	mmRemovePartitionRole.defaultExpectation.params = &PartitionServiceClientMockRemovePartitionRoleParams{ctx, pp1}
 	mmRemovePartitionRole.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmRemovePartitionRole.expectations {
 		if minimock.Equal(e.params, mmRemovePartitionRole.defaultExpectation.params) {
@@ -6622,22 +6502,22 @@ func (mmRemovePartitionRole *mPartitionServiceHandlerMockRemovePartitionRole) Ex
 	return mmRemovePartitionRole
 }
 
-// ExpectCtxParam1 sets up expected param ctx for PartitionServiceHandler.RemovePartitionRole
-func (mmRemovePartitionRole *mPartitionServiceHandlerMockRemovePartitionRole) ExpectCtxParam1(ctx context.Context) *mPartitionServiceHandlerMockRemovePartitionRole {
+// ExpectCtxParam1 sets up expected param ctx for PartitionServiceClient.RemovePartitionRole
+func (mmRemovePartitionRole *mPartitionServiceClientMockRemovePartitionRole) ExpectCtxParam1(ctx context.Context) *mPartitionServiceClientMockRemovePartitionRole {
 	if mmRemovePartitionRole.mock.funcRemovePartitionRole != nil {
-		mmRemovePartitionRole.mock.t.Fatalf("PartitionServiceHandlerMock.RemovePartitionRole mock is already set by Set")
+		mmRemovePartitionRole.mock.t.Fatalf("PartitionServiceClientMock.RemovePartitionRole mock is already set by Set")
 	}
 
 	if mmRemovePartitionRole.defaultExpectation == nil {
-		mmRemovePartitionRole.defaultExpectation = &PartitionServiceHandlerMockRemovePartitionRoleExpectation{}
+		mmRemovePartitionRole.defaultExpectation = &PartitionServiceClientMockRemovePartitionRoleExpectation{}
 	}
 
 	if mmRemovePartitionRole.defaultExpectation.params != nil {
-		mmRemovePartitionRole.mock.t.Fatalf("PartitionServiceHandlerMock.RemovePartitionRole mock is already set by Expect")
+		mmRemovePartitionRole.mock.t.Fatalf("PartitionServiceClientMock.RemovePartitionRole mock is already set by Expect")
 	}
 
 	if mmRemovePartitionRole.defaultExpectation.paramPtrs == nil {
-		mmRemovePartitionRole.defaultExpectation.paramPtrs = &PartitionServiceHandlerMockRemovePartitionRoleParamPtrs{}
+		mmRemovePartitionRole.defaultExpectation.paramPtrs = &PartitionServiceClientMockRemovePartitionRoleParamPtrs{}
 	}
 	mmRemovePartitionRole.defaultExpectation.paramPtrs.ctx = &ctx
 	mmRemovePartitionRole.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -6645,22 +6525,22 @@ func (mmRemovePartitionRole *mPartitionServiceHandlerMockRemovePartitionRole) Ex
 	return mmRemovePartitionRole
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for PartitionServiceHandler.RemovePartitionRole
-func (mmRemovePartitionRole *mPartitionServiceHandlerMockRemovePartitionRole) ExpectPp1Param2(pp1 *connect.Request[v1.RemovePartitionRoleRequest]) *mPartitionServiceHandlerMockRemovePartitionRole {
+// ExpectPp1Param2 sets up expected param pp1 for PartitionServiceClient.RemovePartitionRole
+func (mmRemovePartitionRole *mPartitionServiceClientMockRemovePartitionRole) ExpectPp1Param2(pp1 *connect.Request[v1.RemovePartitionRoleRequest]) *mPartitionServiceClientMockRemovePartitionRole {
 	if mmRemovePartitionRole.mock.funcRemovePartitionRole != nil {
-		mmRemovePartitionRole.mock.t.Fatalf("PartitionServiceHandlerMock.RemovePartitionRole mock is already set by Set")
+		mmRemovePartitionRole.mock.t.Fatalf("PartitionServiceClientMock.RemovePartitionRole mock is already set by Set")
 	}
 
 	if mmRemovePartitionRole.defaultExpectation == nil {
-		mmRemovePartitionRole.defaultExpectation = &PartitionServiceHandlerMockRemovePartitionRoleExpectation{}
+		mmRemovePartitionRole.defaultExpectation = &PartitionServiceClientMockRemovePartitionRoleExpectation{}
 	}
 
 	if mmRemovePartitionRole.defaultExpectation.params != nil {
-		mmRemovePartitionRole.mock.t.Fatalf("PartitionServiceHandlerMock.RemovePartitionRole mock is already set by Expect")
+		mmRemovePartitionRole.mock.t.Fatalf("PartitionServiceClientMock.RemovePartitionRole mock is already set by Expect")
 	}
 
 	if mmRemovePartitionRole.defaultExpectation.paramPtrs == nil {
-		mmRemovePartitionRole.defaultExpectation.paramPtrs = &PartitionServiceHandlerMockRemovePartitionRoleParamPtrs{}
+		mmRemovePartitionRole.defaultExpectation.paramPtrs = &PartitionServiceClientMockRemovePartitionRoleParamPtrs{}
 	}
 	mmRemovePartitionRole.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmRemovePartitionRole.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -6668,10 +6548,10 @@ func (mmRemovePartitionRole *mPartitionServiceHandlerMockRemovePartitionRole) Ex
 	return mmRemovePartitionRole
 }
 
-// Inspect accepts an inspector function that has same arguments as the PartitionServiceHandler.RemovePartitionRole
-func (mmRemovePartitionRole *mPartitionServiceHandlerMockRemovePartitionRole) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.RemovePartitionRoleRequest])) *mPartitionServiceHandlerMockRemovePartitionRole {
+// Inspect accepts an inspector function that has same arguments as the PartitionServiceClient.RemovePartitionRole
+func (mmRemovePartitionRole *mPartitionServiceClientMockRemovePartitionRole) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.RemovePartitionRoleRequest])) *mPartitionServiceClientMockRemovePartitionRole {
 	if mmRemovePartitionRole.mock.inspectFuncRemovePartitionRole != nil {
-		mmRemovePartitionRole.mock.t.Fatalf("Inspect function is already set for PartitionServiceHandlerMock.RemovePartitionRole")
+		mmRemovePartitionRole.mock.t.Fatalf("Inspect function is already set for PartitionServiceClientMock.RemovePartitionRole")
 	}
 
 	mmRemovePartitionRole.mock.inspectFuncRemovePartitionRole = f
@@ -6679,28 +6559,28 @@ func (mmRemovePartitionRole *mPartitionServiceHandlerMockRemovePartitionRole) In
 	return mmRemovePartitionRole
 }
 
-// Return sets up results that will be returned by PartitionServiceHandler.RemovePartitionRole
-func (mmRemovePartitionRole *mPartitionServiceHandlerMockRemovePartitionRole) Return(pp2 *connect.Response[v1.RemovePartitionRoleResponse], err error) *PartitionServiceHandlerMock {
+// Return sets up results that will be returned by PartitionServiceClient.RemovePartitionRole
+func (mmRemovePartitionRole *mPartitionServiceClientMockRemovePartitionRole) Return(pp2 *connect.Response[v1.RemovePartitionRoleResponse], err error) *PartitionServiceClientMock {
 	if mmRemovePartitionRole.mock.funcRemovePartitionRole != nil {
-		mmRemovePartitionRole.mock.t.Fatalf("PartitionServiceHandlerMock.RemovePartitionRole mock is already set by Set")
+		mmRemovePartitionRole.mock.t.Fatalf("PartitionServiceClientMock.RemovePartitionRole mock is already set by Set")
 	}
 
 	if mmRemovePartitionRole.defaultExpectation == nil {
-		mmRemovePartitionRole.defaultExpectation = &PartitionServiceHandlerMockRemovePartitionRoleExpectation{mock: mmRemovePartitionRole.mock}
+		mmRemovePartitionRole.defaultExpectation = &PartitionServiceClientMockRemovePartitionRoleExpectation{mock: mmRemovePartitionRole.mock}
 	}
-	mmRemovePartitionRole.defaultExpectation.results = &PartitionServiceHandlerMockRemovePartitionRoleResults{pp2, err}
+	mmRemovePartitionRole.defaultExpectation.results = &PartitionServiceClientMockRemovePartitionRoleResults{pp2, err}
 	mmRemovePartitionRole.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmRemovePartitionRole.mock
 }
 
-// Set uses given function f to mock the PartitionServiceHandler.RemovePartitionRole method
-func (mmRemovePartitionRole *mPartitionServiceHandlerMockRemovePartitionRole) Set(f func(ctx context.Context, pp1 *connect.Request[v1.RemovePartitionRoleRequest]) (pp2 *connect.Response[v1.RemovePartitionRoleResponse], err error)) *PartitionServiceHandlerMock {
+// Set uses given function f to mock the PartitionServiceClient.RemovePartitionRole method
+func (mmRemovePartitionRole *mPartitionServiceClientMockRemovePartitionRole) Set(f func(ctx context.Context, pp1 *connect.Request[v1.RemovePartitionRoleRequest]) (pp2 *connect.Response[v1.RemovePartitionRoleResponse], err error)) *PartitionServiceClientMock {
 	if mmRemovePartitionRole.defaultExpectation != nil {
-		mmRemovePartitionRole.mock.t.Fatalf("Default expectation is already set for the PartitionServiceHandler.RemovePartitionRole method")
+		mmRemovePartitionRole.mock.t.Fatalf("Default expectation is already set for the PartitionServiceClient.RemovePartitionRole method")
 	}
 
 	if len(mmRemovePartitionRole.expectations) > 0 {
-		mmRemovePartitionRole.mock.t.Fatalf("Some expectations are already set for the PartitionServiceHandler.RemovePartitionRole method")
+		mmRemovePartitionRole.mock.t.Fatalf("Some expectations are already set for the PartitionServiceClient.RemovePartitionRole method")
 	}
 
 	mmRemovePartitionRole.mock.funcRemovePartitionRole = f
@@ -6708,39 +6588,39 @@ func (mmRemovePartitionRole *mPartitionServiceHandlerMockRemovePartitionRole) Se
 	return mmRemovePartitionRole.mock
 }
 
-// When sets expectation for the PartitionServiceHandler.RemovePartitionRole which will trigger the result defined by the following
+// When sets expectation for the PartitionServiceClient.RemovePartitionRole which will trigger the result defined by the following
 // Then helper
-func (mmRemovePartitionRole *mPartitionServiceHandlerMockRemovePartitionRole) When(ctx context.Context, pp1 *connect.Request[v1.RemovePartitionRoleRequest]) *PartitionServiceHandlerMockRemovePartitionRoleExpectation {
+func (mmRemovePartitionRole *mPartitionServiceClientMockRemovePartitionRole) When(ctx context.Context, pp1 *connect.Request[v1.RemovePartitionRoleRequest]) *PartitionServiceClientMockRemovePartitionRoleExpectation {
 	if mmRemovePartitionRole.mock.funcRemovePartitionRole != nil {
-		mmRemovePartitionRole.mock.t.Fatalf("PartitionServiceHandlerMock.RemovePartitionRole mock is already set by Set")
+		mmRemovePartitionRole.mock.t.Fatalf("PartitionServiceClientMock.RemovePartitionRole mock is already set by Set")
 	}
 
-	expectation := &PartitionServiceHandlerMockRemovePartitionRoleExpectation{
+	expectation := &PartitionServiceClientMockRemovePartitionRoleExpectation{
 		mock:               mmRemovePartitionRole.mock,
-		params:             &PartitionServiceHandlerMockRemovePartitionRoleParams{ctx, pp1},
-		expectationOrigins: PartitionServiceHandlerMockRemovePartitionRoleExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &PartitionServiceClientMockRemovePartitionRoleParams{ctx, pp1},
+		expectationOrigins: PartitionServiceClientMockRemovePartitionRoleExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmRemovePartitionRole.expectations = append(mmRemovePartitionRole.expectations, expectation)
 	return expectation
 }
 
-// Then sets up PartitionServiceHandler.RemovePartitionRole return parameters for the expectation previously defined by the When method
-func (e *PartitionServiceHandlerMockRemovePartitionRoleExpectation) Then(pp2 *connect.Response[v1.RemovePartitionRoleResponse], err error) *PartitionServiceHandlerMock {
-	e.results = &PartitionServiceHandlerMockRemovePartitionRoleResults{pp2, err}
+// Then sets up PartitionServiceClient.RemovePartitionRole return parameters for the expectation previously defined by the When method
+func (e *PartitionServiceClientMockRemovePartitionRoleExpectation) Then(pp2 *connect.Response[v1.RemovePartitionRoleResponse], err error) *PartitionServiceClientMock {
+	e.results = &PartitionServiceClientMockRemovePartitionRoleResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times PartitionServiceHandler.RemovePartitionRole should be invoked
-func (mmRemovePartitionRole *mPartitionServiceHandlerMockRemovePartitionRole) Times(n uint64) *mPartitionServiceHandlerMockRemovePartitionRole {
+// Times sets number of times PartitionServiceClient.RemovePartitionRole should be invoked
+func (mmRemovePartitionRole *mPartitionServiceClientMockRemovePartitionRole) Times(n uint64) *mPartitionServiceClientMockRemovePartitionRole {
 	if n == 0 {
-		mmRemovePartitionRole.mock.t.Fatalf("Times of PartitionServiceHandlerMock.RemovePartitionRole mock can not be zero")
+		mmRemovePartitionRole.mock.t.Fatalf("Times of PartitionServiceClientMock.RemovePartitionRole mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmRemovePartitionRole.expectedInvocations, n)
 	mmRemovePartitionRole.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmRemovePartitionRole
 }
 
-func (mmRemovePartitionRole *mPartitionServiceHandlerMockRemovePartitionRole) invocationsDone() bool {
+func (mmRemovePartitionRole *mPartitionServiceClientMockRemovePartitionRole) invocationsDone() bool {
 	if len(mmRemovePartitionRole.expectations) == 0 && mmRemovePartitionRole.defaultExpectation == nil && mmRemovePartitionRole.mock.funcRemovePartitionRole == nil {
 		return true
 	}
@@ -6751,8 +6631,8 @@ func (mmRemovePartitionRole *mPartitionServiceHandlerMockRemovePartitionRole) in
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// RemovePartitionRole implements mm_partitionv1connect.PartitionServiceHandler
-func (mmRemovePartitionRole *PartitionServiceHandlerMock) RemovePartitionRole(ctx context.Context, pp1 *connect.Request[v1.RemovePartitionRoleRequest]) (pp2 *connect.Response[v1.RemovePartitionRoleResponse], err error) {
+// RemovePartitionRole implements mm_partitionv1connect.PartitionServiceClient
+func (mmRemovePartitionRole *PartitionServiceClientMock) RemovePartitionRole(ctx context.Context, pp1 *connect.Request[v1.RemovePartitionRoleRequest]) (pp2 *connect.Response[v1.RemovePartitionRoleResponse], err error) {
 	mm_atomic.AddUint64(&mmRemovePartitionRole.beforeRemovePartitionRoleCounter, 1)
 	defer mm_atomic.AddUint64(&mmRemovePartitionRole.afterRemovePartitionRoleCounter, 1)
 
@@ -6762,7 +6642,7 @@ func (mmRemovePartitionRole *PartitionServiceHandlerMock) RemovePartitionRole(ct
 		mmRemovePartitionRole.inspectFuncRemovePartitionRole(ctx, pp1)
 	}
 
-	mm_params := PartitionServiceHandlerMockRemovePartitionRoleParams{ctx, pp1}
+	mm_params := PartitionServiceClientMockRemovePartitionRoleParams{ctx, pp1}
 
 	// Record call args
 	mmRemovePartitionRole.RemovePartitionRoleMock.mutex.Lock()
@@ -6781,54 +6661,54 @@ func (mmRemovePartitionRole *PartitionServiceHandlerMock) RemovePartitionRole(ct
 		mm_want := mmRemovePartitionRole.RemovePartitionRoleMock.defaultExpectation.params
 		mm_want_ptrs := mmRemovePartitionRole.RemovePartitionRoleMock.defaultExpectation.paramPtrs
 
-		mm_got := PartitionServiceHandlerMockRemovePartitionRoleParams{ctx, pp1}
+		mm_got := PartitionServiceClientMockRemovePartitionRoleParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmRemovePartitionRole.t.Errorf("PartitionServiceHandlerMock.RemovePartitionRole got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmRemovePartitionRole.t.Errorf("PartitionServiceClientMock.RemovePartitionRole got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmRemovePartitionRole.RemovePartitionRoleMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmRemovePartitionRole.t.Errorf("PartitionServiceHandlerMock.RemovePartitionRole got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmRemovePartitionRole.t.Errorf("PartitionServiceClientMock.RemovePartitionRole got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmRemovePartitionRole.RemovePartitionRoleMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmRemovePartitionRole.t.Errorf("PartitionServiceHandlerMock.RemovePartitionRole got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmRemovePartitionRole.t.Errorf("PartitionServiceClientMock.RemovePartitionRole got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmRemovePartitionRole.RemovePartitionRoleMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmRemovePartitionRole.RemovePartitionRoleMock.defaultExpectation.results
 		if mm_results == nil {
-			mmRemovePartitionRole.t.Fatal("No results are set for the PartitionServiceHandlerMock.RemovePartitionRole")
+			mmRemovePartitionRole.t.Fatal("No results are set for the PartitionServiceClientMock.RemovePartitionRole")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmRemovePartitionRole.funcRemovePartitionRole != nil {
 		return mmRemovePartitionRole.funcRemovePartitionRole(ctx, pp1)
 	}
-	mmRemovePartitionRole.t.Fatalf("Unexpected call to PartitionServiceHandlerMock.RemovePartitionRole. %v %v", ctx, pp1)
+	mmRemovePartitionRole.t.Fatalf("Unexpected call to PartitionServiceClientMock.RemovePartitionRole. %v %v", ctx, pp1)
 	return
 }
 
-// RemovePartitionRoleAfterCounter returns a count of finished PartitionServiceHandlerMock.RemovePartitionRole invocations
-func (mmRemovePartitionRole *PartitionServiceHandlerMock) RemovePartitionRoleAfterCounter() uint64 {
+// RemovePartitionRoleAfterCounter returns a count of finished PartitionServiceClientMock.RemovePartitionRole invocations
+func (mmRemovePartitionRole *PartitionServiceClientMock) RemovePartitionRoleAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmRemovePartitionRole.afterRemovePartitionRoleCounter)
 }
 
-// RemovePartitionRoleBeforeCounter returns a count of PartitionServiceHandlerMock.RemovePartitionRole invocations
-func (mmRemovePartitionRole *PartitionServiceHandlerMock) RemovePartitionRoleBeforeCounter() uint64 {
+// RemovePartitionRoleBeforeCounter returns a count of PartitionServiceClientMock.RemovePartitionRole invocations
+func (mmRemovePartitionRole *PartitionServiceClientMock) RemovePartitionRoleBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmRemovePartitionRole.beforeRemovePartitionRoleCounter)
 }
 
-// Calls returns a list of arguments used in each call to PartitionServiceHandlerMock.RemovePartitionRole.
+// Calls returns a list of arguments used in each call to PartitionServiceClientMock.RemovePartitionRole.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmRemovePartitionRole *mPartitionServiceHandlerMockRemovePartitionRole) Calls() []*PartitionServiceHandlerMockRemovePartitionRoleParams {
+func (mmRemovePartitionRole *mPartitionServiceClientMockRemovePartitionRole) Calls() []*PartitionServiceClientMockRemovePartitionRoleParams {
 	mmRemovePartitionRole.mutex.RLock()
 
-	argCopy := make([]*PartitionServiceHandlerMockRemovePartitionRoleParams, len(mmRemovePartitionRole.callArgs))
+	argCopy := make([]*PartitionServiceClientMockRemovePartitionRoleParams, len(mmRemovePartitionRole.callArgs))
 	copy(argCopy, mmRemovePartitionRole.callArgs)
 
 	mmRemovePartitionRole.mutex.RUnlock()
@@ -6838,7 +6718,7 @@ func (mmRemovePartitionRole *mPartitionServiceHandlerMockRemovePartitionRole) Ca
 
 // MinimockRemovePartitionRoleDone returns true if the count of the RemovePartitionRole invocations corresponds
 // the number of defined expectations
-func (m *PartitionServiceHandlerMock) MinimockRemovePartitionRoleDone() bool {
+func (m *PartitionServiceClientMock) MinimockRemovePartitionRoleDone() bool {
 	if m.RemovePartitionRoleMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -6854,10 +6734,10 @@ func (m *PartitionServiceHandlerMock) MinimockRemovePartitionRoleDone() bool {
 }
 
 // MinimockRemovePartitionRoleInspect logs each unmet expectation
-func (m *PartitionServiceHandlerMock) MinimockRemovePartitionRoleInspect() {
+func (m *PartitionServiceClientMock) MinimockRemovePartitionRoleInspect() {
 	for _, e := range m.RemovePartitionRoleMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.RemovePartitionRole at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.RemovePartitionRole at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -6865,66 +6745,66 @@ func (m *PartitionServiceHandlerMock) MinimockRemovePartitionRoleInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.RemovePartitionRoleMock.defaultExpectation != nil && afterRemovePartitionRoleCounter < 1 {
 		if m.RemovePartitionRoleMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.RemovePartitionRole at\n%s", m.RemovePartitionRoleMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.RemovePartitionRole at\n%s", m.RemovePartitionRoleMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.RemovePartitionRole at\n%s with params: %#v", m.RemovePartitionRoleMock.defaultExpectation.expectationOrigins.origin, *m.RemovePartitionRoleMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.RemovePartitionRole at\n%s with params: %#v", m.RemovePartitionRoleMock.defaultExpectation.expectationOrigins.origin, *m.RemovePartitionRoleMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcRemovePartitionRole != nil && afterRemovePartitionRoleCounter < 1 {
-		m.t.Errorf("Expected call to PartitionServiceHandlerMock.RemovePartitionRole at\n%s", m.funcRemovePartitionRoleOrigin)
+		m.t.Errorf("Expected call to PartitionServiceClientMock.RemovePartitionRole at\n%s", m.funcRemovePartitionRoleOrigin)
 	}
 
 	if !m.RemovePartitionRoleMock.invocationsDone() && afterRemovePartitionRoleCounter > 0 {
-		m.t.Errorf("Expected %d calls to PartitionServiceHandlerMock.RemovePartitionRole at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to PartitionServiceClientMock.RemovePartitionRole at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.RemovePartitionRoleMock.expectedInvocations), m.RemovePartitionRoleMock.expectedInvocationsOrigin, afterRemovePartitionRoleCounter)
 	}
 }
 
-type mPartitionServiceHandlerMockUpdatePartition struct {
+type mPartitionServiceClientMockUpdatePartition struct {
 	optional           bool
-	mock               *PartitionServiceHandlerMock
-	defaultExpectation *PartitionServiceHandlerMockUpdatePartitionExpectation
-	expectations       []*PartitionServiceHandlerMockUpdatePartitionExpectation
+	mock               *PartitionServiceClientMock
+	defaultExpectation *PartitionServiceClientMockUpdatePartitionExpectation
+	expectations       []*PartitionServiceClientMockUpdatePartitionExpectation
 
-	callArgs []*PartitionServiceHandlerMockUpdatePartitionParams
+	callArgs []*PartitionServiceClientMockUpdatePartitionParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// PartitionServiceHandlerMockUpdatePartitionExpectation specifies expectation struct of the PartitionServiceHandler.UpdatePartition
-type PartitionServiceHandlerMockUpdatePartitionExpectation struct {
-	mock               *PartitionServiceHandlerMock
-	params             *PartitionServiceHandlerMockUpdatePartitionParams
-	paramPtrs          *PartitionServiceHandlerMockUpdatePartitionParamPtrs
-	expectationOrigins PartitionServiceHandlerMockUpdatePartitionExpectationOrigins
-	results            *PartitionServiceHandlerMockUpdatePartitionResults
+// PartitionServiceClientMockUpdatePartitionExpectation specifies expectation struct of the PartitionServiceClient.UpdatePartition
+type PartitionServiceClientMockUpdatePartitionExpectation struct {
+	mock               *PartitionServiceClientMock
+	params             *PartitionServiceClientMockUpdatePartitionParams
+	paramPtrs          *PartitionServiceClientMockUpdatePartitionParamPtrs
+	expectationOrigins PartitionServiceClientMockUpdatePartitionExpectationOrigins
+	results            *PartitionServiceClientMockUpdatePartitionResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// PartitionServiceHandlerMockUpdatePartitionParams contains parameters of the PartitionServiceHandler.UpdatePartition
-type PartitionServiceHandlerMockUpdatePartitionParams struct {
+// PartitionServiceClientMockUpdatePartitionParams contains parameters of the PartitionServiceClient.UpdatePartition
+type PartitionServiceClientMockUpdatePartitionParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.UpdatePartitionRequest]
 }
 
-// PartitionServiceHandlerMockUpdatePartitionParamPtrs contains pointers to parameters of the PartitionServiceHandler.UpdatePartition
-type PartitionServiceHandlerMockUpdatePartitionParamPtrs struct {
+// PartitionServiceClientMockUpdatePartitionParamPtrs contains pointers to parameters of the PartitionServiceClient.UpdatePartition
+type PartitionServiceClientMockUpdatePartitionParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.UpdatePartitionRequest]
 }
 
-// PartitionServiceHandlerMockUpdatePartitionResults contains results of the PartitionServiceHandler.UpdatePartition
-type PartitionServiceHandlerMockUpdatePartitionResults struct {
+// PartitionServiceClientMockUpdatePartitionResults contains results of the PartitionServiceClient.UpdatePartition
+type PartitionServiceClientMockUpdatePartitionResults struct {
 	pp2 *connect.Response[v1.UpdatePartitionResponse]
 	err error
 }
 
-// PartitionServiceHandlerMockUpdatePartitionOrigins contains origins of expectations of the PartitionServiceHandler.UpdatePartition
-type PartitionServiceHandlerMockUpdatePartitionExpectationOrigins struct {
+// PartitionServiceClientMockUpdatePartitionOrigins contains origins of expectations of the PartitionServiceClient.UpdatePartition
+type PartitionServiceClientMockUpdatePartitionExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -6935,26 +6815,26 @@ type PartitionServiceHandlerMockUpdatePartitionExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmUpdatePartition *mPartitionServiceHandlerMockUpdatePartition) Optional() *mPartitionServiceHandlerMockUpdatePartition {
+func (mmUpdatePartition *mPartitionServiceClientMockUpdatePartition) Optional() *mPartitionServiceClientMockUpdatePartition {
 	mmUpdatePartition.optional = true
 	return mmUpdatePartition
 }
 
-// Expect sets up expected params for PartitionServiceHandler.UpdatePartition
-func (mmUpdatePartition *mPartitionServiceHandlerMockUpdatePartition) Expect(ctx context.Context, pp1 *connect.Request[v1.UpdatePartitionRequest]) *mPartitionServiceHandlerMockUpdatePartition {
+// Expect sets up expected params for PartitionServiceClient.UpdatePartition
+func (mmUpdatePartition *mPartitionServiceClientMockUpdatePartition) Expect(ctx context.Context, pp1 *connect.Request[v1.UpdatePartitionRequest]) *mPartitionServiceClientMockUpdatePartition {
 	if mmUpdatePartition.mock.funcUpdatePartition != nil {
-		mmUpdatePartition.mock.t.Fatalf("PartitionServiceHandlerMock.UpdatePartition mock is already set by Set")
+		mmUpdatePartition.mock.t.Fatalf("PartitionServiceClientMock.UpdatePartition mock is already set by Set")
 	}
 
 	if mmUpdatePartition.defaultExpectation == nil {
-		mmUpdatePartition.defaultExpectation = &PartitionServiceHandlerMockUpdatePartitionExpectation{}
+		mmUpdatePartition.defaultExpectation = &PartitionServiceClientMockUpdatePartitionExpectation{}
 	}
 
 	if mmUpdatePartition.defaultExpectation.paramPtrs != nil {
-		mmUpdatePartition.mock.t.Fatalf("PartitionServiceHandlerMock.UpdatePartition mock is already set by ExpectParams functions")
+		mmUpdatePartition.mock.t.Fatalf("PartitionServiceClientMock.UpdatePartition mock is already set by ExpectParams functions")
 	}
 
-	mmUpdatePartition.defaultExpectation.params = &PartitionServiceHandlerMockUpdatePartitionParams{ctx, pp1}
+	mmUpdatePartition.defaultExpectation.params = &PartitionServiceClientMockUpdatePartitionParams{ctx, pp1}
 	mmUpdatePartition.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmUpdatePartition.expectations {
 		if minimock.Equal(e.params, mmUpdatePartition.defaultExpectation.params) {
@@ -6965,22 +6845,22 @@ func (mmUpdatePartition *mPartitionServiceHandlerMockUpdatePartition) Expect(ctx
 	return mmUpdatePartition
 }
 
-// ExpectCtxParam1 sets up expected param ctx for PartitionServiceHandler.UpdatePartition
-func (mmUpdatePartition *mPartitionServiceHandlerMockUpdatePartition) ExpectCtxParam1(ctx context.Context) *mPartitionServiceHandlerMockUpdatePartition {
+// ExpectCtxParam1 sets up expected param ctx for PartitionServiceClient.UpdatePartition
+func (mmUpdatePartition *mPartitionServiceClientMockUpdatePartition) ExpectCtxParam1(ctx context.Context) *mPartitionServiceClientMockUpdatePartition {
 	if mmUpdatePartition.mock.funcUpdatePartition != nil {
-		mmUpdatePartition.mock.t.Fatalf("PartitionServiceHandlerMock.UpdatePartition mock is already set by Set")
+		mmUpdatePartition.mock.t.Fatalf("PartitionServiceClientMock.UpdatePartition mock is already set by Set")
 	}
 
 	if mmUpdatePartition.defaultExpectation == nil {
-		mmUpdatePartition.defaultExpectation = &PartitionServiceHandlerMockUpdatePartitionExpectation{}
+		mmUpdatePartition.defaultExpectation = &PartitionServiceClientMockUpdatePartitionExpectation{}
 	}
 
 	if mmUpdatePartition.defaultExpectation.params != nil {
-		mmUpdatePartition.mock.t.Fatalf("PartitionServiceHandlerMock.UpdatePartition mock is already set by Expect")
+		mmUpdatePartition.mock.t.Fatalf("PartitionServiceClientMock.UpdatePartition mock is already set by Expect")
 	}
 
 	if mmUpdatePartition.defaultExpectation.paramPtrs == nil {
-		mmUpdatePartition.defaultExpectation.paramPtrs = &PartitionServiceHandlerMockUpdatePartitionParamPtrs{}
+		mmUpdatePartition.defaultExpectation.paramPtrs = &PartitionServiceClientMockUpdatePartitionParamPtrs{}
 	}
 	mmUpdatePartition.defaultExpectation.paramPtrs.ctx = &ctx
 	mmUpdatePartition.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -6988,22 +6868,22 @@ func (mmUpdatePartition *mPartitionServiceHandlerMockUpdatePartition) ExpectCtxP
 	return mmUpdatePartition
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for PartitionServiceHandler.UpdatePartition
-func (mmUpdatePartition *mPartitionServiceHandlerMockUpdatePartition) ExpectPp1Param2(pp1 *connect.Request[v1.UpdatePartitionRequest]) *mPartitionServiceHandlerMockUpdatePartition {
+// ExpectPp1Param2 sets up expected param pp1 for PartitionServiceClient.UpdatePartition
+func (mmUpdatePartition *mPartitionServiceClientMockUpdatePartition) ExpectPp1Param2(pp1 *connect.Request[v1.UpdatePartitionRequest]) *mPartitionServiceClientMockUpdatePartition {
 	if mmUpdatePartition.mock.funcUpdatePartition != nil {
-		mmUpdatePartition.mock.t.Fatalf("PartitionServiceHandlerMock.UpdatePartition mock is already set by Set")
+		mmUpdatePartition.mock.t.Fatalf("PartitionServiceClientMock.UpdatePartition mock is already set by Set")
 	}
 
 	if mmUpdatePartition.defaultExpectation == nil {
-		mmUpdatePartition.defaultExpectation = &PartitionServiceHandlerMockUpdatePartitionExpectation{}
+		mmUpdatePartition.defaultExpectation = &PartitionServiceClientMockUpdatePartitionExpectation{}
 	}
 
 	if mmUpdatePartition.defaultExpectation.params != nil {
-		mmUpdatePartition.mock.t.Fatalf("PartitionServiceHandlerMock.UpdatePartition mock is already set by Expect")
+		mmUpdatePartition.mock.t.Fatalf("PartitionServiceClientMock.UpdatePartition mock is already set by Expect")
 	}
 
 	if mmUpdatePartition.defaultExpectation.paramPtrs == nil {
-		mmUpdatePartition.defaultExpectation.paramPtrs = &PartitionServiceHandlerMockUpdatePartitionParamPtrs{}
+		mmUpdatePartition.defaultExpectation.paramPtrs = &PartitionServiceClientMockUpdatePartitionParamPtrs{}
 	}
 	mmUpdatePartition.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmUpdatePartition.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -7011,10 +6891,10 @@ func (mmUpdatePartition *mPartitionServiceHandlerMockUpdatePartition) ExpectPp1P
 	return mmUpdatePartition
 }
 
-// Inspect accepts an inspector function that has same arguments as the PartitionServiceHandler.UpdatePartition
-func (mmUpdatePartition *mPartitionServiceHandlerMockUpdatePartition) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.UpdatePartitionRequest])) *mPartitionServiceHandlerMockUpdatePartition {
+// Inspect accepts an inspector function that has same arguments as the PartitionServiceClient.UpdatePartition
+func (mmUpdatePartition *mPartitionServiceClientMockUpdatePartition) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.UpdatePartitionRequest])) *mPartitionServiceClientMockUpdatePartition {
 	if mmUpdatePartition.mock.inspectFuncUpdatePartition != nil {
-		mmUpdatePartition.mock.t.Fatalf("Inspect function is already set for PartitionServiceHandlerMock.UpdatePartition")
+		mmUpdatePartition.mock.t.Fatalf("Inspect function is already set for PartitionServiceClientMock.UpdatePartition")
 	}
 
 	mmUpdatePartition.mock.inspectFuncUpdatePartition = f
@@ -7022,28 +6902,28 @@ func (mmUpdatePartition *mPartitionServiceHandlerMockUpdatePartition) Inspect(f 
 	return mmUpdatePartition
 }
 
-// Return sets up results that will be returned by PartitionServiceHandler.UpdatePartition
-func (mmUpdatePartition *mPartitionServiceHandlerMockUpdatePartition) Return(pp2 *connect.Response[v1.UpdatePartitionResponse], err error) *PartitionServiceHandlerMock {
+// Return sets up results that will be returned by PartitionServiceClient.UpdatePartition
+func (mmUpdatePartition *mPartitionServiceClientMockUpdatePartition) Return(pp2 *connect.Response[v1.UpdatePartitionResponse], err error) *PartitionServiceClientMock {
 	if mmUpdatePartition.mock.funcUpdatePartition != nil {
-		mmUpdatePartition.mock.t.Fatalf("PartitionServiceHandlerMock.UpdatePartition mock is already set by Set")
+		mmUpdatePartition.mock.t.Fatalf("PartitionServiceClientMock.UpdatePartition mock is already set by Set")
 	}
 
 	if mmUpdatePartition.defaultExpectation == nil {
-		mmUpdatePartition.defaultExpectation = &PartitionServiceHandlerMockUpdatePartitionExpectation{mock: mmUpdatePartition.mock}
+		mmUpdatePartition.defaultExpectation = &PartitionServiceClientMockUpdatePartitionExpectation{mock: mmUpdatePartition.mock}
 	}
-	mmUpdatePartition.defaultExpectation.results = &PartitionServiceHandlerMockUpdatePartitionResults{pp2, err}
+	mmUpdatePartition.defaultExpectation.results = &PartitionServiceClientMockUpdatePartitionResults{pp2, err}
 	mmUpdatePartition.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmUpdatePartition.mock
 }
 
-// Set uses given function f to mock the PartitionServiceHandler.UpdatePartition method
-func (mmUpdatePartition *mPartitionServiceHandlerMockUpdatePartition) Set(f func(ctx context.Context, pp1 *connect.Request[v1.UpdatePartitionRequest]) (pp2 *connect.Response[v1.UpdatePartitionResponse], err error)) *PartitionServiceHandlerMock {
+// Set uses given function f to mock the PartitionServiceClient.UpdatePartition method
+func (mmUpdatePartition *mPartitionServiceClientMockUpdatePartition) Set(f func(ctx context.Context, pp1 *connect.Request[v1.UpdatePartitionRequest]) (pp2 *connect.Response[v1.UpdatePartitionResponse], err error)) *PartitionServiceClientMock {
 	if mmUpdatePartition.defaultExpectation != nil {
-		mmUpdatePartition.mock.t.Fatalf("Default expectation is already set for the PartitionServiceHandler.UpdatePartition method")
+		mmUpdatePartition.mock.t.Fatalf("Default expectation is already set for the PartitionServiceClient.UpdatePartition method")
 	}
 
 	if len(mmUpdatePartition.expectations) > 0 {
-		mmUpdatePartition.mock.t.Fatalf("Some expectations are already set for the PartitionServiceHandler.UpdatePartition method")
+		mmUpdatePartition.mock.t.Fatalf("Some expectations are already set for the PartitionServiceClient.UpdatePartition method")
 	}
 
 	mmUpdatePartition.mock.funcUpdatePartition = f
@@ -7051,39 +6931,39 @@ func (mmUpdatePartition *mPartitionServiceHandlerMockUpdatePartition) Set(f func
 	return mmUpdatePartition.mock
 }
 
-// When sets expectation for the PartitionServiceHandler.UpdatePartition which will trigger the result defined by the following
+// When sets expectation for the PartitionServiceClient.UpdatePartition which will trigger the result defined by the following
 // Then helper
-func (mmUpdatePartition *mPartitionServiceHandlerMockUpdatePartition) When(ctx context.Context, pp1 *connect.Request[v1.UpdatePartitionRequest]) *PartitionServiceHandlerMockUpdatePartitionExpectation {
+func (mmUpdatePartition *mPartitionServiceClientMockUpdatePartition) When(ctx context.Context, pp1 *connect.Request[v1.UpdatePartitionRequest]) *PartitionServiceClientMockUpdatePartitionExpectation {
 	if mmUpdatePartition.mock.funcUpdatePartition != nil {
-		mmUpdatePartition.mock.t.Fatalf("PartitionServiceHandlerMock.UpdatePartition mock is already set by Set")
+		mmUpdatePartition.mock.t.Fatalf("PartitionServiceClientMock.UpdatePartition mock is already set by Set")
 	}
 
-	expectation := &PartitionServiceHandlerMockUpdatePartitionExpectation{
+	expectation := &PartitionServiceClientMockUpdatePartitionExpectation{
 		mock:               mmUpdatePartition.mock,
-		params:             &PartitionServiceHandlerMockUpdatePartitionParams{ctx, pp1},
-		expectationOrigins: PartitionServiceHandlerMockUpdatePartitionExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &PartitionServiceClientMockUpdatePartitionParams{ctx, pp1},
+		expectationOrigins: PartitionServiceClientMockUpdatePartitionExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmUpdatePartition.expectations = append(mmUpdatePartition.expectations, expectation)
 	return expectation
 }
 
-// Then sets up PartitionServiceHandler.UpdatePartition return parameters for the expectation previously defined by the When method
-func (e *PartitionServiceHandlerMockUpdatePartitionExpectation) Then(pp2 *connect.Response[v1.UpdatePartitionResponse], err error) *PartitionServiceHandlerMock {
-	e.results = &PartitionServiceHandlerMockUpdatePartitionResults{pp2, err}
+// Then sets up PartitionServiceClient.UpdatePartition return parameters for the expectation previously defined by the When method
+func (e *PartitionServiceClientMockUpdatePartitionExpectation) Then(pp2 *connect.Response[v1.UpdatePartitionResponse], err error) *PartitionServiceClientMock {
+	e.results = &PartitionServiceClientMockUpdatePartitionResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times PartitionServiceHandler.UpdatePartition should be invoked
-func (mmUpdatePartition *mPartitionServiceHandlerMockUpdatePartition) Times(n uint64) *mPartitionServiceHandlerMockUpdatePartition {
+// Times sets number of times PartitionServiceClient.UpdatePartition should be invoked
+func (mmUpdatePartition *mPartitionServiceClientMockUpdatePartition) Times(n uint64) *mPartitionServiceClientMockUpdatePartition {
 	if n == 0 {
-		mmUpdatePartition.mock.t.Fatalf("Times of PartitionServiceHandlerMock.UpdatePartition mock can not be zero")
+		mmUpdatePartition.mock.t.Fatalf("Times of PartitionServiceClientMock.UpdatePartition mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmUpdatePartition.expectedInvocations, n)
 	mmUpdatePartition.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmUpdatePartition
 }
 
-func (mmUpdatePartition *mPartitionServiceHandlerMockUpdatePartition) invocationsDone() bool {
+func (mmUpdatePartition *mPartitionServiceClientMockUpdatePartition) invocationsDone() bool {
 	if len(mmUpdatePartition.expectations) == 0 && mmUpdatePartition.defaultExpectation == nil && mmUpdatePartition.mock.funcUpdatePartition == nil {
 		return true
 	}
@@ -7094,8 +6974,8 @@ func (mmUpdatePartition *mPartitionServiceHandlerMockUpdatePartition) invocation
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// UpdatePartition implements mm_partitionv1connect.PartitionServiceHandler
-func (mmUpdatePartition *PartitionServiceHandlerMock) UpdatePartition(ctx context.Context, pp1 *connect.Request[v1.UpdatePartitionRequest]) (pp2 *connect.Response[v1.UpdatePartitionResponse], err error) {
+// UpdatePartition implements mm_partitionv1connect.PartitionServiceClient
+func (mmUpdatePartition *PartitionServiceClientMock) UpdatePartition(ctx context.Context, pp1 *connect.Request[v1.UpdatePartitionRequest]) (pp2 *connect.Response[v1.UpdatePartitionResponse], err error) {
 	mm_atomic.AddUint64(&mmUpdatePartition.beforeUpdatePartitionCounter, 1)
 	defer mm_atomic.AddUint64(&mmUpdatePartition.afterUpdatePartitionCounter, 1)
 
@@ -7105,7 +6985,7 @@ func (mmUpdatePartition *PartitionServiceHandlerMock) UpdatePartition(ctx contex
 		mmUpdatePartition.inspectFuncUpdatePartition(ctx, pp1)
 	}
 
-	mm_params := PartitionServiceHandlerMockUpdatePartitionParams{ctx, pp1}
+	mm_params := PartitionServiceClientMockUpdatePartitionParams{ctx, pp1}
 
 	// Record call args
 	mmUpdatePartition.UpdatePartitionMock.mutex.Lock()
@@ -7124,54 +7004,54 @@ func (mmUpdatePartition *PartitionServiceHandlerMock) UpdatePartition(ctx contex
 		mm_want := mmUpdatePartition.UpdatePartitionMock.defaultExpectation.params
 		mm_want_ptrs := mmUpdatePartition.UpdatePartitionMock.defaultExpectation.paramPtrs
 
-		mm_got := PartitionServiceHandlerMockUpdatePartitionParams{ctx, pp1}
+		mm_got := PartitionServiceClientMockUpdatePartitionParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmUpdatePartition.t.Errorf("PartitionServiceHandlerMock.UpdatePartition got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmUpdatePartition.t.Errorf("PartitionServiceClientMock.UpdatePartition got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmUpdatePartition.UpdatePartitionMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmUpdatePartition.t.Errorf("PartitionServiceHandlerMock.UpdatePartition got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmUpdatePartition.t.Errorf("PartitionServiceClientMock.UpdatePartition got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmUpdatePartition.UpdatePartitionMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmUpdatePartition.t.Errorf("PartitionServiceHandlerMock.UpdatePartition got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmUpdatePartition.t.Errorf("PartitionServiceClientMock.UpdatePartition got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmUpdatePartition.UpdatePartitionMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmUpdatePartition.UpdatePartitionMock.defaultExpectation.results
 		if mm_results == nil {
-			mmUpdatePartition.t.Fatal("No results are set for the PartitionServiceHandlerMock.UpdatePartition")
+			mmUpdatePartition.t.Fatal("No results are set for the PartitionServiceClientMock.UpdatePartition")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmUpdatePartition.funcUpdatePartition != nil {
 		return mmUpdatePartition.funcUpdatePartition(ctx, pp1)
 	}
-	mmUpdatePartition.t.Fatalf("Unexpected call to PartitionServiceHandlerMock.UpdatePartition. %v %v", ctx, pp1)
+	mmUpdatePartition.t.Fatalf("Unexpected call to PartitionServiceClientMock.UpdatePartition. %v %v", ctx, pp1)
 	return
 }
 
-// UpdatePartitionAfterCounter returns a count of finished PartitionServiceHandlerMock.UpdatePartition invocations
-func (mmUpdatePartition *PartitionServiceHandlerMock) UpdatePartitionAfterCounter() uint64 {
+// UpdatePartitionAfterCounter returns a count of finished PartitionServiceClientMock.UpdatePartition invocations
+func (mmUpdatePartition *PartitionServiceClientMock) UpdatePartitionAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmUpdatePartition.afterUpdatePartitionCounter)
 }
 
-// UpdatePartitionBeforeCounter returns a count of PartitionServiceHandlerMock.UpdatePartition invocations
-func (mmUpdatePartition *PartitionServiceHandlerMock) UpdatePartitionBeforeCounter() uint64 {
+// UpdatePartitionBeforeCounter returns a count of PartitionServiceClientMock.UpdatePartition invocations
+func (mmUpdatePartition *PartitionServiceClientMock) UpdatePartitionBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmUpdatePartition.beforeUpdatePartitionCounter)
 }
 
-// Calls returns a list of arguments used in each call to PartitionServiceHandlerMock.UpdatePartition.
+// Calls returns a list of arguments used in each call to PartitionServiceClientMock.UpdatePartition.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmUpdatePartition *mPartitionServiceHandlerMockUpdatePartition) Calls() []*PartitionServiceHandlerMockUpdatePartitionParams {
+func (mmUpdatePartition *mPartitionServiceClientMockUpdatePartition) Calls() []*PartitionServiceClientMockUpdatePartitionParams {
 	mmUpdatePartition.mutex.RLock()
 
-	argCopy := make([]*PartitionServiceHandlerMockUpdatePartitionParams, len(mmUpdatePartition.callArgs))
+	argCopy := make([]*PartitionServiceClientMockUpdatePartitionParams, len(mmUpdatePartition.callArgs))
 	copy(argCopy, mmUpdatePartition.callArgs)
 
 	mmUpdatePartition.mutex.RUnlock()
@@ -7181,7 +7061,7 @@ func (mmUpdatePartition *mPartitionServiceHandlerMockUpdatePartition) Calls() []
 
 // MinimockUpdatePartitionDone returns true if the count of the UpdatePartition invocations corresponds
 // the number of defined expectations
-func (m *PartitionServiceHandlerMock) MinimockUpdatePartitionDone() bool {
+func (m *PartitionServiceClientMock) MinimockUpdatePartitionDone() bool {
 	if m.UpdatePartitionMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -7197,10 +7077,10 @@ func (m *PartitionServiceHandlerMock) MinimockUpdatePartitionDone() bool {
 }
 
 // MinimockUpdatePartitionInspect logs each unmet expectation
-func (m *PartitionServiceHandlerMock) MinimockUpdatePartitionInspect() {
+func (m *PartitionServiceClientMock) MinimockUpdatePartitionInspect() {
 	for _, e := range m.UpdatePartitionMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.UpdatePartition at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.UpdatePartition at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -7208,66 +7088,66 @@ func (m *PartitionServiceHandlerMock) MinimockUpdatePartitionInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.UpdatePartitionMock.defaultExpectation != nil && afterUpdatePartitionCounter < 1 {
 		if m.UpdatePartitionMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.UpdatePartition at\n%s", m.UpdatePartitionMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.UpdatePartition at\n%s", m.UpdatePartitionMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.UpdatePartition at\n%s with params: %#v", m.UpdatePartitionMock.defaultExpectation.expectationOrigins.origin, *m.UpdatePartitionMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.UpdatePartition at\n%s with params: %#v", m.UpdatePartitionMock.defaultExpectation.expectationOrigins.origin, *m.UpdatePartitionMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcUpdatePartition != nil && afterUpdatePartitionCounter < 1 {
-		m.t.Errorf("Expected call to PartitionServiceHandlerMock.UpdatePartition at\n%s", m.funcUpdatePartitionOrigin)
+		m.t.Errorf("Expected call to PartitionServiceClientMock.UpdatePartition at\n%s", m.funcUpdatePartitionOrigin)
 	}
 
 	if !m.UpdatePartitionMock.invocationsDone() && afterUpdatePartitionCounter > 0 {
-		m.t.Errorf("Expected %d calls to PartitionServiceHandlerMock.UpdatePartition at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to PartitionServiceClientMock.UpdatePartition at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.UpdatePartitionMock.expectedInvocations), m.UpdatePartitionMock.expectedInvocationsOrigin, afterUpdatePartitionCounter)
 	}
 }
 
-type mPartitionServiceHandlerMockUpdateTenant struct {
+type mPartitionServiceClientMockUpdateTenant struct {
 	optional           bool
-	mock               *PartitionServiceHandlerMock
-	defaultExpectation *PartitionServiceHandlerMockUpdateTenantExpectation
-	expectations       []*PartitionServiceHandlerMockUpdateTenantExpectation
+	mock               *PartitionServiceClientMock
+	defaultExpectation *PartitionServiceClientMockUpdateTenantExpectation
+	expectations       []*PartitionServiceClientMockUpdateTenantExpectation
 
-	callArgs []*PartitionServiceHandlerMockUpdateTenantParams
+	callArgs []*PartitionServiceClientMockUpdateTenantParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// PartitionServiceHandlerMockUpdateTenantExpectation specifies expectation struct of the PartitionServiceHandler.UpdateTenant
-type PartitionServiceHandlerMockUpdateTenantExpectation struct {
-	mock               *PartitionServiceHandlerMock
-	params             *PartitionServiceHandlerMockUpdateTenantParams
-	paramPtrs          *PartitionServiceHandlerMockUpdateTenantParamPtrs
-	expectationOrigins PartitionServiceHandlerMockUpdateTenantExpectationOrigins
-	results            *PartitionServiceHandlerMockUpdateTenantResults
+// PartitionServiceClientMockUpdateTenantExpectation specifies expectation struct of the PartitionServiceClient.UpdateTenant
+type PartitionServiceClientMockUpdateTenantExpectation struct {
+	mock               *PartitionServiceClientMock
+	params             *PartitionServiceClientMockUpdateTenantParams
+	paramPtrs          *PartitionServiceClientMockUpdateTenantParamPtrs
+	expectationOrigins PartitionServiceClientMockUpdateTenantExpectationOrigins
+	results            *PartitionServiceClientMockUpdateTenantResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// PartitionServiceHandlerMockUpdateTenantParams contains parameters of the PartitionServiceHandler.UpdateTenant
-type PartitionServiceHandlerMockUpdateTenantParams struct {
+// PartitionServiceClientMockUpdateTenantParams contains parameters of the PartitionServiceClient.UpdateTenant
+type PartitionServiceClientMockUpdateTenantParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.UpdateTenantRequest]
 }
 
-// PartitionServiceHandlerMockUpdateTenantParamPtrs contains pointers to parameters of the PartitionServiceHandler.UpdateTenant
-type PartitionServiceHandlerMockUpdateTenantParamPtrs struct {
+// PartitionServiceClientMockUpdateTenantParamPtrs contains pointers to parameters of the PartitionServiceClient.UpdateTenant
+type PartitionServiceClientMockUpdateTenantParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.UpdateTenantRequest]
 }
 
-// PartitionServiceHandlerMockUpdateTenantResults contains results of the PartitionServiceHandler.UpdateTenant
-type PartitionServiceHandlerMockUpdateTenantResults struct {
+// PartitionServiceClientMockUpdateTenantResults contains results of the PartitionServiceClient.UpdateTenant
+type PartitionServiceClientMockUpdateTenantResults struct {
 	pp2 *connect.Response[v1.UpdateTenantResponse]
 	err error
 }
 
-// PartitionServiceHandlerMockUpdateTenantOrigins contains origins of expectations of the PartitionServiceHandler.UpdateTenant
-type PartitionServiceHandlerMockUpdateTenantExpectationOrigins struct {
+// PartitionServiceClientMockUpdateTenantOrigins contains origins of expectations of the PartitionServiceClient.UpdateTenant
+type PartitionServiceClientMockUpdateTenantExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -7278,26 +7158,26 @@ type PartitionServiceHandlerMockUpdateTenantExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmUpdateTenant *mPartitionServiceHandlerMockUpdateTenant) Optional() *mPartitionServiceHandlerMockUpdateTenant {
+func (mmUpdateTenant *mPartitionServiceClientMockUpdateTenant) Optional() *mPartitionServiceClientMockUpdateTenant {
 	mmUpdateTenant.optional = true
 	return mmUpdateTenant
 }
 
-// Expect sets up expected params for PartitionServiceHandler.UpdateTenant
-func (mmUpdateTenant *mPartitionServiceHandlerMockUpdateTenant) Expect(ctx context.Context, pp1 *connect.Request[v1.UpdateTenantRequest]) *mPartitionServiceHandlerMockUpdateTenant {
+// Expect sets up expected params for PartitionServiceClient.UpdateTenant
+func (mmUpdateTenant *mPartitionServiceClientMockUpdateTenant) Expect(ctx context.Context, pp1 *connect.Request[v1.UpdateTenantRequest]) *mPartitionServiceClientMockUpdateTenant {
 	if mmUpdateTenant.mock.funcUpdateTenant != nil {
-		mmUpdateTenant.mock.t.Fatalf("PartitionServiceHandlerMock.UpdateTenant mock is already set by Set")
+		mmUpdateTenant.mock.t.Fatalf("PartitionServiceClientMock.UpdateTenant mock is already set by Set")
 	}
 
 	if mmUpdateTenant.defaultExpectation == nil {
-		mmUpdateTenant.defaultExpectation = &PartitionServiceHandlerMockUpdateTenantExpectation{}
+		mmUpdateTenant.defaultExpectation = &PartitionServiceClientMockUpdateTenantExpectation{}
 	}
 
 	if mmUpdateTenant.defaultExpectation.paramPtrs != nil {
-		mmUpdateTenant.mock.t.Fatalf("PartitionServiceHandlerMock.UpdateTenant mock is already set by ExpectParams functions")
+		mmUpdateTenant.mock.t.Fatalf("PartitionServiceClientMock.UpdateTenant mock is already set by ExpectParams functions")
 	}
 
-	mmUpdateTenant.defaultExpectation.params = &PartitionServiceHandlerMockUpdateTenantParams{ctx, pp1}
+	mmUpdateTenant.defaultExpectation.params = &PartitionServiceClientMockUpdateTenantParams{ctx, pp1}
 	mmUpdateTenant.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmUpdateTenant.expectations {
 		if minimock.Equal(e.params, mmUpdateTenant.defaultExpectation.params) {
@@ -7308,22 +7188,22 @@ func (mmUpdateTenant *mPartitionServiceHandlerMockUpdateTenant) Expect(ctx conte
 	return mmUpdateTenant
 }
 
-// ExpectCtxParam1 sets up expected param ctx for PartitionServiceHandler.UpdateTenant
-func (mmUpdateTenant *mPartitionServiceHandlerMockUpdateTenant) ExpectCtxParam1(ctx context.Context) *mPartitionServiceHandlerMockUpdateTenant {
+// ExpectCtxParam1 sets up expected param ctx for PartitionServiceClient.UpdateTenant
+func (mmUpdateTenant *mPartitionServiceClientMockUpdateTenant) ExpectCtxParam1(ctx context.Context) *mPartitionServiceClientMockUpdateTenant {
 	if mmUpdateTenant.mock.funcUpdateTenant != nil {
-		mmUpdateTenant.mock.t.Fatalf("PartitionServiceHandlerMock.UpdateTenant mock is already set by Set")
+		mmUpdateTenant.mock.t.Fatalf("PartitionServiceClientMock.UpdateTenant mock is already set by Set")
 	}
 
 	if mmUpdateTenant.defaultExpectation == nil {
-		mmUpdateTenant.defaultExpectation = &PartitionServiceHandlerMockUpdateTenantExpectation{}
+		mmUpdateTenant.defaultExpectation = &PartitionServiceClientMockUpdateTenantExpectation{}
 	}
 
 	if mmUpdateTenant.defaultExpectation.params != nil {
-		mmUpdateTenant.mock.t.Fatalf("PartitionServiceHandlerMock.UpdateTenant mock is already set by Expect")
+		mmUpdateTenant.mock.t.Fatalf("PartitionServiceClientMock.UpdateTenant mock is already set by Expect")
 	}
 
 	if mmUpdateTenant.defaultExpectation.paramPtrs == nil {
-		mmUpdateTenant.defaultExpectation.paramPtrs = &PartitionServiceHandlerMockUpdateTenantParamPtrs{}
+		mmUpdateTenant.defaultExpectation.paramPtrs = &PartitionServiceClientMockUpdateTenantParamPtrs{}
 	}
 	mmUpdateTenant.defaultExpectation.paramPtrs.ctx = &ctx
 	mmUpdateTenant.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -7331,22 +7211,22 @@ func (mmUpdateTenant *mPartitionServiceHandlerMockUpdateTenant) ExpectCtxParam1(
 	return mmUpdateTenant
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for PartitionServiceHandler.UpdateTenant
-func (mmUpdateTenant *mPartitionServiceHandlerMockUpdateTenant) ExpectPp1Param2(pp1 *connect.Request[v1.UpdateTenantRequest]) *mPartitionServiceHandlerMockUpdateTenant {
+// ExpectPp1Param2 sets up expected param pp1 for PartitionServiceClient.UpdateTenant
+func (mmUpdateTenant *mPartitionServiceClientMockUpdateTenant) ExpectPp1Param2(pp1 *connect.Request[v1.UpdateTenantRequest]) *mPartitionServiceClientMockUpdateTenant {
 	if mmUpdateTenant.mock.funcUpdateTenant != nil {
-		mmUpdateTenant.mock.t.Fatalf("PartitionServiceHandlerMock.UpdateTenant mock is already set by Set")
+		mmUpdateTenant.mock.t.Fatalf("PartitionServiceClientMock.UpdateTenant mock is already set by Set")
 	}
 
 	if mmUpdateTenant.defaultExpectation == nil {
-		mmUpdateTenant.defaultExpectation = &PartitionServiceHandlerMockUpdateTenantExpectation{}
+		mmUpdateTenant.defaultExpectation = &PartitionServiceClientMockUpdateTenantExpectation{}
 	}
 
 	if mmUpdateTenant.defaultExpectation.params != nil {
-		mmUpdateTenant.mock.t.Fatalf("PartitionServiceHandlerMock.UpdateTenant mock is already set by Expect")
+		mmUpdateTenant.mock.t.Fatalf("PartitionServiceClientMock.UpdateTenant mock is already set by Expect")
 	}
 
 	if mmUpdateTenant.defaultExpectation.paramPtrs == nil {
-		mmUpdateTenant.defaultExpectation.paramPtrs = &PartitionServiceHandlerMockUpdateTenantParamPtrs{}
+		mmUpdateTenant.defaultExpectation.paramPtrs = &PartitionServiceClientMockUpdateTenantParamPtrs{}
 	}
 	mmUpdateTenant.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmUpdateTenant.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -7354,10 +7234,10 @@ func (mmUpdateTenant *mPartitionServiceHandlerMockUpdateTenant) ExpectPp1Param2(
 	return mmUpdateTenant
 }
 
-// Inspect accepts an inspector function that has same arguments as the PartitionServiceHandler.UpdateTenant
-func (mmUpdateTenant *mPartitionServiceHandlerMockUpdateTenant) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.UpdateTenantRequest])) *mPartitionServiceHandlerMockUpdateTenant {
+// Inspect accepts an inspector function that has same arguments as the PartitionServiceClient.UpdateTenant
+func (mmUpdateTenant *mPartitionServiceClientMockUpdateTenant) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.UpdateTenantRequest])) *mPartitionServiceClientMockUpdateTenant {
 	if mmUpdateTenant.mock.inspectFuncUpdateTenant != nil {
-		mmUpdateTenant.mock.t.Fatalf("Inspect function is already set for PartitionServiceHandlerMock.UpdateTenant")
+		mmUpdateTenant.mock.t.Fatalf("Inspect function is already set for PartitionServiceClientMock.UpdateTenant")
 	}
 
 	mmUpdateTenant.mock.inspectFuncUpdateTenant = f
@@ -7365,28 +7245,28 @@ func (mmUpdateTenant *mPartitionServiceHandlerMockUpdateTenant) Inspect(f func(c
 	return mmUpdateTenant
 }
 
-// Return sets up results that will be returned by PartitionServiceHandler.UpdateTenant
-func (mmUpdateTenant *mPartitionServiceHandlerMockUpdateTenant) Return(pp2 *connect.Response[v1.UpdateTenantResponse], err error) *PartitionServiceHandlerMock {
+// Return sets up results that will be returned by PartitionServiceClient.UpdateTenant
+func (mmUpdateTenant *mPartitionServiceClientMockUpdateTenant) Return(pp2 *connect.Response[v1.UpdateTenantResponse], err error) *PartitionServiceClientMock {
 	if mmUpdateTenant.mock.funcUpdateTenant != nil {
-		mmUpdateTenant.mock.t.Fatalf("PartitionServiceHandlerMock.UpdateTenant mock is already set by Set")
+		mmUpdateTenant.mock.t.Fatalf("PartitionServiceClientMock.UpdateTenant mock is already set by Set")
 	}
 
 	if mmUpdateTenant.defaultExpectation == nil {
-		mmUpdateTenant.defaultExpectation = &PartitionServiceHandlerMockUpdateTenantExpectation{mock: mmUpdateTenant.mock}
+		mmUpdateTenant.defaultExpectation = &PartitionServiceClientMockUpdateTenantExpectation{mock: mmUpdateTenant.mock}
 	}
-	mmUpdateTenant.defaultExpectation.results = &PartitionServiceHandlerMockUpdateTenantResults{pp2, err}
+	mmUpdateTenant.defaultExpectation.results = &PartitionServiceClientMockUpdateTenantResults{pp2, err}
 	mmUpdateTenant.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmUpdateTenant.mock
 }
 
-// Set uses given function f to mock the PartitionServiceHandler.UpdateTenant method
-func (mmUpdateTenant *mPartitionServiceHandlerMockUpdateTenant) Set(f func(ctx context.Context, pp1 *connect.Request[v1.UpdateTenantRequest]) (pp2 *connect.Response[v1.UpdateTenantResponse], err error)) *PartitionServiceHandlerMock {
+// Set uses given function f to mock the PartitionServiceClient.UpdateTenant method
+func (mmUpdateTenant *mPartitionServiceClientMockUpdateTenant) Set(f func(ctx context.Context, pp1 *connect.Request[v1.UpdateTenantRequest]) (pp2 *connect.Response[v1.UpdateTenantResponse], err error)) *PartitionServiceClientMock {
 	if mmUpdateTenant.defaultExpectation != nil {
-		mmUpdateTenant.mock.t.Fatalf("Default expectation is already set for the PartitionServiceHandler.UpdateTenant method")
+		mmUpdateTenant.mock.t.Fatalf("Default expectation is already set for the PartitionServiceClient.UpdateTenant method")
 	}
 
 	if len(mmUpdateTenant.expectations) > 0 {
-		mmUpdateTenant.mock.t.Fatalf("Some expectations are already set for the PartitionServiceHandler.UpdateTenant method")
+		mmUpdateTenant.mock.t.Fatalf("Some expectations are already set for the PartitionServiceClient.UpdateTenant method")
 	}
 
 	mmUpdateTenant.mock.funcUpdateTenant = f
@@ -7394,39 +7274,39 @@ func (mmUpdateTenant *mPartitionServiceHandlerMockUpdateTenant) Set(f func(ctx c
 	return mmUpdateTenant.mock
 }
 
-// When sets expectation for the PartitionServiceHandler.UpdateTenant which will trigger the result defined by the following
+// When sets expectation for the PartitionServiceClient.UpdateTenant which will trigger the result defined by the following
 // Then helper
-func (mmUpdateTenant *mPartitionServiceHandlerMockUpdateTenant) When(ctx context.Context, pp1 *connect.Request[v1.UpdateTenantRequest]) *PartitionServiceHandlerMockUpdateTenantExpectation {
+func (mmUpdateTenant *mPartitionServiceClientMockUpdateTenant) When(ctx context.Context, pp1 *connect.Request[v1.UpdateTenantRequest]) *PartitionServiceClientMockUpdateTenantExpectation {
 	if mmUpdateTenant.mock.funcUpdateTenant != nil {
-		mmUpdateTenant.mock.t.Fatalf("PartitionServiceHandlerMock.UpdateTenant mock is already set by Set")
+		mmUpdateTenant.mock.t.Fatalf("PartitionServiceClientMock.UpdateTenant mock is already set by Set")
 	}
 
-	expectation := &PartitionServiceHandlerMockUpdateTenantExpectation{
+	expectation := &PartitionServiceClientMockUpdateTenantExpectation{
 		mock:               mmUpdateTenant.mock,
-		params:             &PartitionServiceHandlerMockUpdateTenantParams{ctx, pp1},
-		expectationOrigins: PartitionServiceHandlerMockUpdateTenantExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &PartitionServiceClientMockUpdateTenantParams{ctx, pp1},
+		expectationOrigins: PartitionServiceClientMockUpdateTenantExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmUpdateTenant.expectations = append(mmUpdateTenant.expectations, expectation)
 	return expectation
 }
 
-// Then sets up PartitionServiceHandler.UpdateTenant return parameters for the expectation previously defined by the When method
-func (e *PartitionServiceHandlerMockUpdateTenantExpectation) Then(pp2 *connect.Response[v1.UpdateTenantResponse], err error) *PartitionServiceHandlerMock {
-	e.results = &PartitionServiceHandlerMockUpdateTenantResults{pp2, err}
+// Then sets up PartitionServiceClient.UpdateTenant return parameters for the expectation previously defined by the When method
+func (e *PartitionServiceClientMockUpdateTenantExpectation) Then(pp2 *connect.Response[v1.UpdateTenantResponse], err error) *PartitionServiceClientMock {
+	e.results = &PartitionServiceClientMockUpdateTenantResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times PartitionServiceHandler.UpdateTenant should be invoked
-func (mmUpdateTenant *mPartitionServiceHandlerMockUpdateTenant) Times(n uint64) *mPartitionServiceHandlerMockUpdateTenant {
+// Times sets number of times PartitionServiceClient.UpdateTenant should be invoked
+func (mmUpdateTenant *mPartitionServiceClientMockUpdateTenant) Times(n uint64) *mPartitionServiceClientMockUpdateTenant {
 	if n == 0 {
-		mmUpdateTenant.mock.t.Fatalf("Times of PartitionServiceHandlerMock.UpdateTenant mock can not be zero")
+		mmUpdateTenant.mock.t.Fatalf("Times of PartitionServiceClientMock.UpdateTenant mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmUpdateTenant.expectedInvocations, n)
 	mmUpdateTenant.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmUpdateTenant
 }
 
-func (mmUpdateTenant *mPartitionServiceHandlerMockUpdateTenant) invocationsDone() bool {
+func (mmUpdateTenant *mPartitionServiceClientMockUpdateTenant) invocationsDone() bool {
 	if len(mmUpdateTenant.expectations) == 0 && mmUpdateTenant.defaultExpectation == nil && mmUpdateTenant.mock.funcUpdateTenant == nil {
 		return true
 	}
@@ -7437,8 +7317,8 @@ func (mmUpdateTenant *mPartitionServiceHandlerMockUpdateTenant) invocationsDone(
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// UpdateTenant implements mm_partitionv1connect.PartitionServiceHandler
-func (mmUpdateTenant *PartitionServiceHandlerMock) UpdateTenant(ctx context.Context, pp1 *connect.Request[v1.UpdateTenantRequest]) (pp2 *connect.Response[v1.UpdateTenantResponse], err error) {
+// UpdateTenant implements mm_partitionv1connect.PartitionServiceClient
+func (mmUpdateTenant *PartitionServiceClientMock) UpdateTenant(ctx context.Context, pp1 *connect.Request[v1.UpdateTenantRequest]) (pp2 *connect.Response[v1.UpdateTenantResponse], err error) {
 	mm_atomic.AddUint64(&mmUpdateTenant.beforeUpdateTenantCounter, 1)
 	defer mm_atomic.AddUint64(&mmUpdateTenant.afterUpdateTenantCounter, 1)
 
@@ -7448,7 +7328,7 @@ func (mmUpdateTenant *PartitionServiceHandlerMock) UpdateTenant(ctx context.Cont
 		mmUpdateTenant.inspectFuncUpdateTenant(ctx, pp1)
 	}
 
-	mm_params := PartitionServiceHandlerMockUpdateTenantParams{ctx, pp1}
+	mm_params := PartitionServiceClientMockUpdateTenantParams{ctx, pp1}
 
 	// Record call args
 	mmUpdateTenant.UpdateTenantMock.mutex.Lock()
@@ -7467,54 +7347,54 @@ func (mmUpdateTenant *PartitionServiceHandlerMock) UpdateTenant(ctx context.Cont
 		mm_want := mmUpdateTenant.UpdateTenantMock.defaultExpectation.params
 		mm_want_ptrs := mmUpdateTenant.UpdateTenantMock.defaultExpectation.paramPtrs
 
-		mm_got := PartitionServiceHandlerMockUpdateTenantParams{ctx, pp1}
+		mm_got := PartitionServiceClientMockUpdateTenantParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmUpdateTenant.t.Errorf("PartitionServiceHandlerMock.UpdateTenant got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmUpdateTenant.t.Errorf("PartitionServiceClientMock.UpdateTenant got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmUpdateTenant.UpdateTenantMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmUpdateTenant.t.Errorf("PartitionServiceHandlerMock.UpdateTenant got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmUpdateTenant.t.Errorf("PartitionServiceClientMock.UpdateTenant got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmUpdateTenant.UpdateTenantMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmUpdateTenant.t.Errorf("PartitionServiceHandlerMock.UpdateTenant got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmUpdateTenant.t.Errorf("PartitionServiceClientMock.UpdateTenant got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmUpdateTenant.UpdateTenantMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmUpdateTenant.UpdateTenantMock.defaultExpectation.results
 		if mm_results == nil {
-			mmUpdateTenant.t.Fatal("No results are set for the PartitionServiceHandlerMock.UpdateTenant")
+			mmUpdateTenant.t.Fatal("No results are set for the PartitionServiceClientMock.UpdateTenant")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmUpdateTenant.funcUpdateTenant != nil {
 		return mmUpdateTenant.funcUpdateTenant(ctx, pp1)
 	}
-	mmUpdateTenant.t.Fatalf("Unexpected call to PartitionServiceHandlerMock.UpdateTenant. %v %v", ctx, pp1)
+	mmUpdateTenant.t.Fatalf("Unexpected call to PartitionServiceClientMock.UpdateTenant. %v %v", ctx, pp1)
 	return
 }
 
-// UpdateTenantAfterCounter returns a count of finished PartitionServiceHandlerMock.UpdateTenant invocations
-func (mmUpdateTenant *PartitionServiceHandlerMock) UpdateTenantAfterCounter() uint64 {
+// UpdateTenantAfterCounter returns a count of finished PartitionServiceClientMock.UpdateTenant invocations
+func (mmUpdateTenant *PartitionServiceClientMock) UpdateTenantAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmUpdateTenant.afterUpdateTenantCounter)
 }
 
-// UpdateTenantBeforeCounter returns a count of PartitionServiceHandlerMock.UpdateTenant invocations
-func (mmUpdateTenant *PartitionServiceHandlerMock) UpdateTenantBeforeCounter() uint64 {
+// UpdateTenantBeforeCounter returns a count of PartitionServiceClientMock.UpdateTenant invocations
+func (mmUpdateTenant *PartitionServiceClientMock) UpdateTenantBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmUpdateTenant.beforeUpdateTenantCounter)
 }
 
-// Calls returns a list of arguments used in each call to PartitionServiceHandlerMock.UpdateTenant.
+// Calls returns a list of arguments used in each call to PartitionServiceClientMock.UpdateTenant.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmUpdateTenant *mPartitionServiceHandlerMockUpdateTenant) Calls() []*PartitionServiceHandlerMockUpdateTenantParams {
+func (mmUpdateTenant *mPartitionServiceClientMockUpdateTenant) Calls() []*PartitionServiceClientMockUpdateTenantParams {
 	mmUpdateTenant.mutex.RLock()
 
-	argCopy := make([]*PartitionServiceHandlerMockUpdateTenantParams, len(mmUpdateTenant.callArgs))
+	argCopy := make([]*PartitionServiceClientMockUpdateTenantParams, len(mmUpdateTenant.callArgs))
 	copy(argCopy, mmUpdateTenant.callArgs)
 
 	mmUpdateTenant.mutex.RUnlock()
@@ -7524,7 +7404,7 @@ func (mmUpdateTenant *mPartitionServiceHandlerMockUpdateTenant) Calls() []*Parti
 
 // MinimockUpdateTenantDone returns true if the count of the UpdateTenant invocations corresponds
 // the number of defined expectations
-func (m *PartitionServiceHandlerMock) MinimockUpdateTenantDone() bool {
+func (m *PartitionServiceClientMock) MinimockUpdateTenantDone() bool {
 	if m.UpdateTenantMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -7540,10 +7420,10 @@ func (m *PartitionServiceHandlerMock) MinimockUpdateTenantDone() bool {
 }
 
 // MinimockUpdateTenantInspect logs each unmet expectation
-func (m *PartitionServiceHandlerMock) MinimockUpdateTenantInspect() {
+func (m *PartitionServiceClientMock) MinimockUpdateTenantInspect() {
 	for _, e := range m.UpdateTenantMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.UpdateTenant at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.UpdateTenant at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -7551,24 +7431,24 @@ func (m *PartitionServiceHandlerMock) MinimockUpdateTenantInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.UpdateTenantMock.defaultExpectation != nil && afterUpdateTenantCounter < 1 {
 		if m.UpdateTenantMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.UpdateTenant at\n%s", m.UpdateTenantMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.UpdateTenant at\n%s", m.UpdateTenantMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to PartitionServiceHandlerMock.UpdateTenant at\n%s with params: %#v", m.UpdateTenantMock.defaultExpectation.expectationOrigins.origin, *m.UpdateTenantMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to PartitionServiceClientMock.UpdateTenant at\n%s with params: %#v", m.UpdateTenantMock.defaultExpectation.expectationOrigins.origin, *m.UpdateTenantMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcUpdateTenant != nil && afterUpdateTenantCounter < 1 {
-		m.t.Errorf("Expected call to PartitionServiceHandlerMock.UpdateTenant at\n%s", m.funcUpdateTenantOrigin)
+		m.t.Errorf("Expected call to PartitionServiceClientMock.UpdateTenant at\n%s", m.funcUpdateTenantOrigin)
 	}
 
 	if !m.UpdateTenantMock.invocationsDone() && afterUpdateTenantCounter > 0 {
-		m.t.Errorf("Expected %d calls to PartitionServiceHandlerMock.UpdateTenant at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to PartitionServiceClientMock.UpdateTenant at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.UpdateTenantMock.expectedInvocations), m.UpdateTenantMock.expectedInvocationsOrigin, afterUpdateTenantCounter)
 	}
 }
 
 // MinimockFinish checks that all mocked methods have been called the expected number of times
-func (m *PartitionServiceHandlerMock) MinimockFinish() {
+func (m *PartitionServiceClientMock) MinimockFinish() {
 	m.finishOnce.Do(func() {
 		if !m.minimockDone() {
 			m.MinimockCreateAccessInspect()
@@ -7617,7 +7497,7 @@ func (m *PartitionServiceHandlerMock) MinimockFinish() {
 }
 
 // MinimockWait waits for all mocked methods to be called the expected number of times
-func (m *PartitionServiceHandlerMock) MinimockWait(timeout mm_time.Duration) {
+func (m *PartitionServiceClientMock) MinimockWait(timeout mm_time.Duration) {
 	timeoutCh := mm_time.After(timeout)
 	for {
 		if m.minimockDone() {
@@ -7632,7 +7512,7 @@ func (m *PartitionServiceHandlerMock) MinimockWait(timeout mm_time.Duration) {
 	}
 }
 
-func (m *PartitionServiceHandlerMock) minimockDone() bool {
+func (m *PartitionServiceClientMock) minimockDone() bool {
 	done := true
 	return done &&
 		m.MinimockCreateAccessDone() &&

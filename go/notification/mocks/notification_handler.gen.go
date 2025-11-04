@@ -2,7 +2,7 @@
 
 package mocks
 
-//go:generate minimock -i buf.build/gen/go/antinvestor/notification/connectrpc/go/notification/v1/notificationv1connect.NotificationServiceHandler -o notification_handler.gen.go -n NotificationServiceHandlerMock -p mocks
+//go:generate minimock -i buf.build/gen/go/antinvestor/notification/connectrpc/go/notification/v1/notificationv1connect.NotificationServiceClient -o notification_handler.gen.go -n NotificationServiceClientMock -p mocks
 
 import (
 	context "context"
@@ -16,154 +16,152 @@ import (
 	"github.com/gojuno/minimock/v3"
 )
 
-// NotificationServiceHandlerMock implements mm_notificationv1connect.NotificationServiceHandler
-type NotificationServiceHandlerMock struct {
+// NotificationServiceClientMock implements mm_notificationv1connect.NotificationServiceClient
+type NotificationServiceClientMock struct {
 	t          minimock.Tester
 	finishOnce sync.Once
 
-	funcReceive          func(ctx context.Context, pp1 *connect.Request[v1.ReceiveRequest], pp2 *connect.ServerStream[v1.ReceiveResponse]) (err error)
+	funcReceive          func(ctx context.Context, pp1 *connect.Request[v1.ReceiveRequest]) (pp2 *connect.ServerStreamForClient[v1.ReceiveResponse], err error)
 	funcReceiveOrigin    string
-	inspectFuncReceive   func(ctx context.Context, pp1 *connect.Request[v1.ReceiveRequest], pp2 *connect.ServerStream[v1.ReceiveResponse])
+	inspectFuncReceive   func(ctx context.Context, pp1 *connect.Request[v1.ReceiveRequest])
 	afterReceiveCounter  uint64
 	beforeReceiveCounter uint64
-	ReceiveMock          mNotificationServiceHandlerMockReceive
+	ReceiveMock          mNotificationServiceClientMockReceive
 
-	funcRelease          func(ctx context.Context, pp1 *connect.Request[v1.ReleaseRequest], pp2 *connect.ServerStream[v1.ReleaseResponse]) (err error)
+	funcRelease          func(ctx context.Context, pp1 *connect.Request[v1.ReleaseRequest]) (pp2 *connect.ServerStreamForClient[v1.ReleaseResponse], err error)
 	funcReleaseOrigin    string
-	inspectFuncRelease   func(ctx context.Context, pp1 *connect.Request[v1.ReleaseRequest], pp2 *connect.ServerStream[v1.ReleaseResponse])
+	inspectFuncRelease   func(ctx context.Context, pp1 *connect.Request[v1.ReleaseRequest])
 	afterReleaseCounter  uint64
 	beforeReleaseCounter uint64
-	ReleaseMock          mNotificationServiceHandlerMockRelease
+	ReleaseMock          mNotificationServiceClientMockRelease
 
-	funcSearch          func(ctx context.Context, pp1 *connect.Request[v11.SearchRequest], pp2 *connect.ServerStream[v1.SearchResponse]) (err error)
+	funcSearch          func(ctx context.Context, pp1 *connect.Request[v11.SearchRequest]) (pp2 *connect.ServerStreamForClient[v1.SearchResponse], err error)
 	funcSearchOrigin    string
-	inspectFuncSearch   func(ctx context.Context, pp1 *connect.Request[v11.SearchRequest], pp2 *connect.ServerStream[v1.SearchResponse])
+	inspectFuncSearch   func(ctx context.Context, pp1 *connect.Request[v11.SearchRequest])
 	afterSearchCounter  uint64
 	beforeSearchCounter uint64
-	SearchMock          mNotificationServiceHandlerMockSearch
+	SearchMock          mNotificationServiceClientMockSearch
 
-	funcSend          func(ctx context.Context, pp1 *connect.Request[v1.SendRequest], pp2 *connect.ServerStream[v1.SendResponse]) (err error)
+	funcSend          func(ctx context.Context, pp1 *connect.Request[v1.SendRequest]) (pp2 *connect.ServerStreamForClient[v1.SendResponse], err error)
 	funcSendOrigin    string
-	inspectFuncSend   func(ctx context.Context, pp1 *connect.Request[v1.SendRequest], pp2 *connect.ServerStream[v1.SendResponse])
+	inspectFuncSend   func(ctx context.Context, pp1 *connect.Request[v1.SendRequest])
 	afterSendCounter  uint64
 	beforeSendCounter uint64
-	SendMock          mNotificationServiceHandlerMockSend
+	SendMock          mNotificationServiceClientMockSend
 
 	funcStatus          func(ctx context.Context, pp1 *connect.Request[v11.StatusRequest]) (pp2 *connect.Response[v11.StatusResponse], err error)
 	funcStatusOrigin    string
 	inspectFuncStatus   func(ctx context.Context, pp1 *connect.Request[v11.StatusRequest])
 	afterStatusCounter  uint64
 	beforeStatusCounter uint64
-	StatusMock          mNotificationServiceHandlerMockStatus
+	StatusMock          mNotificationServiceClientMockStatus
 
 	funcStatusUpdate          func(ctx context.Context, pp1 *connect.Request[v11.StatusUpdateRequest]) (pp2 *connect.Response[v11.StatusUpdateResponse], err error)
 	funcStatusUpdateOrigin    string
 	inspectFuncStatusUpdate   func(ctx context.Context, pp1 *connect.Request[v11.StatusUpdateRequest])
 	afterStatusUpdateCounter  uint64
 	beforeStatusUpdateCounter uint64
-	StatusUpdateMock          mNotificationServiceHandlerMockStatusUpdate
+	StatusUpdateMock          mNotificationServiceClientMockStatusUpdate
 
 	funcTemplateSave          func(ctx context.Context, pp1 *connect.Request[v1.TemplateSaveRequest]) (pp2 *connect.Response[v1.TemplateSaveResponse], err error)
 	funcTemplateSaveOrigin    string
 	inspectFuncTemplateSave   func(ctx context.Context, pp1 *connect.Request[v1.TemplateSaveRequest])
 	afterTemplateSaveCounter  uint64
 	beforeTemplateSaveCounter uint64
-	TemplateSaveMock          mNotificationServiceHandlerMockTemplateSave
+	TemplateSaveMock          mNotificationServiceClientMockTemplateSave
 
-	funcTemplateSearch          func(ctx context.Context, pp1 *connect.Request[v1.TemplateSearchRequest], pp2 *connect.ServerStream[v1.TemplateSearchResponse]) (err error)
+	funcTemplateSearch          func(ctx context.Context, pp1 *connect.Request[v1.TemplateSearchRequest]) (pp2 *connect.ServerStreamForClient[v1.TemplateSearchResponse], err error)
 	funcTemplateSearchOrigin    string
-	inspectFuncTemplateSearch   func(ctx context.Context, pp1 *connect.Request[v1.TemplateSearchRequest], pp2 *connect.ServerStream[v1.TemplateSearchResponse])
+	inspectFuncTemplateSearch   func(ctx context.Context, pp1 *connect.Request[v1.TemplateSearchRequest])
 	afterTemplateSearchCounter  uint64
 	beforeTemplateSearchCounter uint64
-	TemplateSearchMock          mNotificationServiceHandlerMockTemplateSearch
+	TemplateSearchMock          mNotificationServiceClientMockTemplateSearch
 }
 
-// NewNotificationServiceHandlerMock returns a mock for mm_notificationv1connect.NotificationServiceHandler
-func NewNotificationServiceHandlerMock(t minimock.Tester) *NotificationServiceHandlerMock {
-	m := &NotificationServiceHandlerMock{t: t}
+// NewNotificationServiceClientMock returns a mock for mm_notificationv1connect.NotificationServiceClient
+func NewNotificationServiceClientMock(t minimock.Tester) *NotificationServiceClientMock {
+	m := &NotificationServiceClientMock{t: t}
 
 	if controller, ok := t.(minimock.MockController); ok {
 		controller.RegisterMocker(m)
 	}
 
-	m.ReceiveMock = mNotificationServiceHandlerMockReceive{mock: m}
-	m.ReceiveMock.callArgs = []*NotificationServiceHandlerMockReceiveParams{}
+	m.ReceiveMock = mNotificationServiceClientMockReceive{mock: m}
+	m.ReceiveMock.callArgs = []*NotificationServiceClientMockReceiveParams{}
 
-	m.ReleaseMock = mNotificationServiceHandlerMockRelease{mock: m}
-	m.ReleaseMock.callArgs = []*NotificationServiceHandlerMockReleaseParams{}
+	m.ReleaseMock = mNotificationServiceClientMockRelease{mock: m}
+	m.ReleaseMock.callArgs = []*NotificationServiceClientMockReleaseParams{}
 
-	m.SearchMock = mNotificationServiceHandlerMockSearch{mock: m}
-	m.SearchMock.callArgs = []*NotificationServiceHandlerMockSearchParams{}
+	m.SearchMock = mNotificationServiceClientMockSearch{mock: m}
+	m.SearchMock.callArgs = []*NotificationServiceClientMockSearchParams{}
 
-	m.SendMock = mNotificationServiceHandlerMockSend{mock: m}
-	m.SendMock.callArgs = []*NotificationServiceHandlerMockSendParams{}
+	m.SendMock = mNotificationServiceClientMockSend{mock: m}
+	m.SendMock.callArgs = []*NotificationServiceClientMockSendParams{}
 
-	m.StatusMock = mNotificationServiceHandlerMockStatus{mock: m}
-	m.StatusMock.callArgs = []*NotificationServiceHandlerMockStatusParams{}
+	m.StatusMock = mNotificationServiceClientMockStatus{mock: m}
+	m.StatusMock.callArgs = []*NotificationServiceClientMockStatusParams{}
 
-	m.StatusUpdateMock = mNotificationServiceHandlerMockStatusUpdate{mock: m}
-	m.StatusUpdateMock.callArgs = []*NotificationServiceHandlerMockStatusUpdateParams{}
+	m.StatusUpdateMock = mNotificationServiceClientMockStatusUpdate{mock: m}
+	m.StatusUpdateMock.callArgs = []*NotificationServiceClientMockStatusUpdateParams{}
 
-	m.TemplateSaveMock = mNotificationServiceHandlerMockTemplateSave{mock: m}
-	m.TemplateSaveMock.callArgs = []*NotificationServiceHandlerMockTemplateSaveParams{}
+	m.TemplateSaveMock = mNotificationServiceClientMockTemplateSave{mock: m}
+	m.TemplateSaveMock.callArgs = []*NotificationServiceClientMockTemplateSaveParams{}
 
-	m.TemplateSearchMock = mNotificationServiceHandlerMockTemplateSearch{mock: m}
-	m.TemplateSearchMock.callArgs = []*NotificationServiceHandlerMockTemplateSearchParams{}
+	m.TemplateSearchMock = mNotificationServiceClientMockTemplateSearch{mock: m}
+	m.TemplateSearchMock.callArgs = []*NotificationServiceClientMockTemplateSearchParams{}
 
 	t.Cleanup(m.MinimockFinish)
 
 	return m
 }
 
-type mNotificationServiceHandlerMockReceive struct {
+type mNotificationServiceClientMockReceive struct {
 	optional           bool
-	mock               *NotificationServiceHandlerMock
-	defaultExpectation *NotificationServiceHandlerMockReceiveExpectation
-	expectations       []*NotificationServiceHandlerMockReceiveExpectation
+	mock               *NotificationServiceClientMock
+	defaultExpectation *NotificationServiceClientMockReceiveExpectation
+	expectations       []*NotificationServiceClientMockReceiveExpectation
 
-	callArgs []*NotificationServiceHandlerMockReceiveParams
+	callArgs []*NotificationServiceClientMockReceiveParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// NotificationServiceHandlerMockReceiveExpectation specifies expectation struct of the NotificationServiceHandler.Receive
-type NotificationServiceHandlerMockReceiveExpectation struct {
-	mock               *NotificationServiceHandlerMock
-	params             *NotificationServiceHandlerMockReceiveParams
-	paramPtrs          *NotificationServiceHandlerMockReceiveParamPtrs
-	expectationOrigins NotificationServiceHandlerMockReceiveExpectationOrigins
-	results            *NotificationServiceHandlerMockReceiveResults
+// NotificationServiceClientMockReceiveExpectation specifies expectation struct of the NotificationServiceClient.Receive
+type NotificationServiceClientMockReceiveExpectation struct {
+	mock               *NotificationServiceClientMock
+	params             *NotificationServiceClientMockReceiveParams
+	paramPtrs          *NotificationServiceClientMockReceiveParamPtrs
+	expectationOrigins NotificationServiceClientMockReceiveExpectationOrigins
+	results            *NotificationServiceClientMockReceiveResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// NotificationServiceHandlerMockReceiveParams contains parameters of the NotificationServiceHandler.Receive
-type NotificationServiceHandlerMockReceiveParams struct {
+// NotificationServiceClientMockReceiveParams contains parameters of the NotificationServiceClient.Receive
+type NotificationServiceClientMockReceiveParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.ReceiveRequest]
-	pp2 *connect.ServerStream[v1.ReceiveResponse]
 }
 
-// NotificationServiceHandlerMockReceiveParamPtrs contains pointers to parameters of the NotificationServiceHandler.Receive
-type NotificationServiceHandlerMockReceiveParamPtrs struct {
+// NotificationServiceClientMockReceiveParamPtrs contains pointers to parameters of the NotificationServiceClient.Receive
+type NotificationServiceClientMockReceiveParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.ReceiveRequest]
-	pp2 **connect.ServerStream[v1.ReceiveResponse]
 }
 
-// NotificationServiceHandlerMockReceiveResults contains results of the NotificationServiceHandler.Receive
-type NotificationServiceHandlerMockReceiveResults struct {
+// NotificationServiceClientMockReceiveResults contains results of the NotificationServiceClient.Receive
+type NotificationServiceClientMockReceiveResults struct {
+	pp2 *connect.ServerStreamForClient[v1.ReceiveResponse]
 	err error
 }
 
-// NotificationServiceHandlerMockReceiveOrigins contains origins of expectations of the NotificationServiceHandler.Receive
-type NotificationServiceHandlerMockReceiveExpectationOrigins struct {
+// NotificationServiceClientMockReceiveOrigins contains origins of expectations of the NotificationServiceClient.Receive
+type NotificationServiceClientMockReceiveExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
-	originPp2 string
 }
 
 // Marks this method to be optional. The default behavior of any method with Return() is '1 or more', meaning
@@ -171,26 +169,26 @@ type NotificationServiceHandlerMockReceiveExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmReceive *mNotificationServiceHandlerMockReceive) Optional() *mNotificationServiceHandlerMockReceive {
+func (mmReceive *mNotificationServiceClientMockReceive) Optional() *mNotificationServiceClientMockReceive {
 	mmReceive.optional = true
 	return mmReceive
 }
 
-// Expect sets up expected params for NotificationServiceHandler.Receive
-func (mmReceive *mNotificationServiceHandlerMockReceive) Expect(ctx context.Context, pp1 *connect.Request[v1.ReceiveRequest], pp2 *connect.ServerStream[v1.ReceiveResponse]) *mNotificationServiceHandlerMockReceive {
+// Expect sets up expected params for NotificationServiceClient.Receive
+func (mmReceive *mNotificationServiceClientMockReceive) Expect(ctx context.Context, pp1 *connect.Request[v1.ReceiveRequest]) *mNotificationServiceClientMockReceive {
 	if mmReceive.mock.funcReceive != nil {
-		mmReceive.mock.t.Fatalf("NotificationServiceHandlerMock.Receive mock is already set by Set")
+		mmReceive.mock.t.Fatalf("NotificationServiceClientMock.Receive mock is already set by Set")
 	}
 
 	if mmReceive.defaultExpectation == nil {
-		mmReceive.defaultExpectation = &NotificationServiceHandlerMockReceiveExpectation{}
+		mmReceive.defaultExpectation = &NotificationServiceClientMockReceiveExpectation{}
 	}
 
 	if mmReceive.defaultExpectation.paramPtrs != nil {
-		mmReceive.mock.t.Fatalf("NotificationServiceHandlerMock.Receive mock is already set by ExpectParams functions")
+		mmReceive.mock.t.Fatalf("NotificationServiceClientMock.Receive mock is already set by ExpectParams functions")
 	}
 
-	mmReceive.defaultExpectation.params = &NotificationServiceHandlerMockReceiveParams{ctx, pp1, pp2}
+	mmReceive.defaultExpectation.params = &NotificationServiceClientMockReceiveParams{ctx, pp1}
 	mmReceive.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmReceive.expectations {
 		if minimock.Equal(e.params, mmReceive.defaultExpectation.params) {
@@ -201,22 +199,22 @@ func (mmReceive *mNotificationServiceHandlerMockReceive) Expect(ctx context.Cont
 	return mmReceive
 }
 
-// ExpectCtxParam1 sets up expected param ctx for NotificationServiceHandler.Receive
-func (mmReceive *mNotificationServiceHandlerMockReceive) ExpectCtxParam1(ctx context.Context) *mNotificationServiceHandlerMockReceive {
+// ExpectCtxParam1 sets up expected param ctx for NotificationServiceClient.Receive
+func (mmReceive *mNotificationServiceClientMockReceive) ExpectCtxParam1(ctx context.Context) *mNotificationServiceClientMockReceive {
 	if mmReceive.mock.funcReceive != nil {
-		mmReceive.mock.t.Fatalf("NotificationServiceHandlerMock.Receive mock is already set by Set")
+		mmReceive.mock.t.Fatalf("NotificationServiceClientMock.Receive mock is already set by Set")
 	}
 
 	if mmReceive.defaultExpectation == nil {
-		mmReceive.defaultExpectation = &NotificationServiceHandlerMockReceiveExpectation{}
+		mmReceive.defaultExpectation = &NotificationServiceClientMockReceiveExpectation{}
 	}
 
 	if mmReceive.defaultExpectation.params != nil {
-		mmReceive.mock.t.Fatalf("NotificationServiceHandlerMock.Receive mock is already set by Expect")
+		mmReceive.mock.t.Fatalf("NotificationServiceClientMock.Receive mock is already set by Expect")
 	}
 
 	if mmReceive.defaultExpectation.paramPtrs == nil {
-		mmReceive.defaultExpectation.paramPtrs = &NotificationServiceHandlerMockReceiveParamPtrs{}
+		mmReceive.defaultExpectation.paramPtrs = &NotificationServiceClientMockReceiveParamPtrs{}
 	}
 	mmReceive.defaultExpectation.paramPtrs.ctx = &ctx
 	mmReceive.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -224,22 +222,22 @@ func (mmReceive *mNotificationServiceHandlerMockReceive) ExpectCtxParam1(ctx con
 	return mmReceive
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for NotificationServiceHandler.Receive
-func (mmReceive *mNotificationServiceHandlerMockReceive) ExpectPp1Param2(pp1 *connect.Request[v1.ReceiveRequest]) *mNotificationServiceHandlerMockReceive {
+// ExpectPp1Param2 sets up expected param pp1 for NotificationServiceClient.Receive
+func (mmReceive *mNotificationServiceClientMockReceive) ExpectPp1Param2(pp1 *connect.Request[v1.ReceiveRequest]) *mNotificationServiceClientMockReceive {
 	if mmReceive.mock.funcReceive != nil {
-		mmReceive.mock.t.Fatalf("NotificationServiceHandlerMock.Receive mock is already set by Set")
+		mmReceive.mock.t.Fatalf("NotificationServiceClientMock.Receive mock is already set by Set")
 	}
 
 	if mmReceive.defaultExpectation == nil {
-		mmReceive.defaultExpectation = &NotificationServiceHandlerMockReceiveExpectation{}
+		mmReceive.defaultExpectation = &NotificationServiceClientMockReceiveExpectation{}
 	}
 
 	if mmReceive.defaultExpectation.params != nil {
-		mmReceive.mock.t.Fatalf("NotificationServiceHandlerMock.Receive mock is already set by Expect")
+		mmReceive.mock.t.Fatalf("NotificationServiceClientMock.Receive mock is already set by Expect")
 	}
 
 	if mmReceive.defaultExpectation.paramPtrs == nil {
-		mmReceive.defaultExpectation.paramPtrs = &NotificationServiceHandlerMockReceiveParamPtrs{}
+		mmReceive.defaultExpectation.paramPtrs = &NotificationServiceClientMockReceiveParamPtrs{}
 	}
 	mmReceive.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmReceive.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -247,33 +245,10 @@ func (mmReceive *mNotificationServiceHandlerMockReceive) ExpectPp1Param2(pp1 *co
 	return mmReceive
 }
 
-// ExpectPp2Param3 sets up expected param pp2 for NotificationServiceHandler.Receive
-func (mmReceive *mNotificationServiceHandlerMockReceive) ExpectPp2Param3(pp2 *connect.ServerStream[v1.ReceiveResponse]) *mNotificationServiceHandlerMockReceive {
-	if mmReceive.mock.funcReceive != nil {
-		mmReceive.mock.t.Fatalf("NotificationServiceHandlerMock.Receive mock is already set by Set")
-	}
-
-	if mmReceive.defaultExpectation == nil {
-		mmReceive.defaultExpectation = &NotificationServiceHandlerMockReceiveExpectation{}
-	}
-
-	if mmReceive.defaultExpectation.params != nil {
-		mmReceive.mock.t.Fatalf("NotificationServiceHandlerMock.Receive mock is already set by Expect")
-	}
-
-	if mmReceive.defaultExpectation.paramPtrs == nil {
-		mmReceive.defaultExpectation.paramPtrs = &NotificationServiceHandlerMockReceiveParamPtrs{}
-	}
-	mmReceive.defaultExpectation.paramPtrs.pp2 = &pp2
-	mmReceive.defaultExpectation.expectationOrigins.originPp2 = minimock.CallerInfo(1)
-
-	return mmReceive
-}
-
-// Inspect accepts an inspector function that has same arguments as the NotificationServiceHandler.Receive
-func (mmReceive *mNotificationServiceHandlerMockReceive) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.ReceiveRequest], pp2 *connect.ServerStream[v1.ReceiveResponse])) *mNotificationServiceHandlerMockReceive {
+// Inspect accepts an inspector function that has same arguments as the NotificationServiceClient.Receive
+func (mmReceive *mNotificationServiceClientMockReceive) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.ReceiveRequest])) *mNotificationServiceClientMockReceive {
 	if mmReceive.mock.inspectFuncReceive != nil {
-		mmReceive.mock.t.Fatalf("Inspect function is already set for NotificationServiceHandlerMock.Receive")
+		mmReceive.mock.t.Fatalf("Inspect function is already set for NotificationServiceClientMock.Receive")
 	}
 
 	mmReceive.mock.inspectFuncReceive = f
@@ -281,28 +256,28 @@ func (mmReceive *mNotificationServiceHandlerMockReceive) Inspect(f func(ctx cont
 	return mmReceive
 }
 
-// Return sets up results that will be returned by NotificationServiceHandler.Receive
-func (mmReceive *mNotificationServiceHandlerMockReceive) Return(err error) *NotificationServiceHandlerMock {
+// Return sets up results that will be returned by NotificationServiceClient.Receive
+func (mmReceive *mNotificationServiceClientMockReceive) Return(pp2 *connect.ServerStreamForClient[v1.ReceiveResponse], err error) *NotificationServiceClientMock {
 	if mmReceive.mock.funcReceive != nil {
-		mmReceive.mock.t.Fatalf("NotificationServiceHandlerMock.Receive mock is already set by Set")
+		mmReceive.mock.t.Fatalf("NotificationServiceClientMock.Receive mock is already set by Set")
 	}
 
 	if mmReceive.defaultExpectation == nil {
-		mmReceive.defaultExpectation = &NotificationServiceHandlerMockReceiveExpectation{mock: mmReceive.mock}
+		mmReceive.defaultExpectation = &NotificationServiceClientMockReceiveExpectation{mock: mmReceive.mock}
 	}
-	mmReceive.defaultExpectation.results = &NotificationServiceHandlerMockReceiveResults{err}
+	mmReceive.defaultExpectation.results = &NotificationServiceClientMockReceiveResults{pp2, err}
 	mmReceive.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmReceive.mock
 }
 
-// Set uses given function f to mock the NotificationServiceHandler.Receive method
-func (mmReceive *mNotificationServiceHandlerMockReceive) Set(f func(ctx context.Context, pp1 *connect.Request[v1.ReceiveRequest], pp2 *connect.ServerStream[v1.ReceiveResponse]) (err error)) *NotificationServiceHandlerMock {
+// Set uses given function f to mock the NotificationServiceClient.Receive method
+func (mmReceive *mNotificationServiceClientMockReceive) Set(f func(ctx context.Context, pp1 *connect.Request[v1.ReceiveRequest]) (pp2 *connect.ServerStreamForClient[v1.ReceiveResponse], err error)) *NotificationServiceClientMock {
 	if mmReceive.defaultExpectation != nil {
-		mmReceive.mock.t.Fatalf("Default expectation is already set for the NotificationServiceHandler.Receive method")
+		mmReceive.mock.t.Fatalf("Default expectation is already set for the NotificationServiceClient.Receive method")
 	}
 
 	if len(mmReceive.expectations) > 0 {
-		mmReceive.mock.t.Fatalf("Some expectations are already set for the NotificationServiceHandler.Receive method")
+		mmReceive.mock.t.Fatalf("Some expectations are already set for the NotificationServiceClient.Receive method")
 	}
 
 	mmReceive.mock.funcReceive = f
@@ -310,39 +285,39 @@ func (mmReceive *mNotificationServiceHandlerMockReceive) Set(f func(ctx context.
 	return mmReceive.mock
 }
 
-// When sets expectation for the NotificationServiceHandler.Receive which will trigger the result defined by the following
+// When sets expectation for the NotificationServiceClient.Receive which will trigger the result defined by the following
 // Then helper
-func (mmReceive *mNotificationServiceHandlerMockReceive) When(ctx context.Context, pp1 *connect.Request[v1.ReceiveRequest], pp2 *connect.ServerStream[v1.ReceiveResponse]) *NotificationServiceHandlerMockReceiveExpectation {
+func (mmReceive *mNotificationServiceClientMockReceive) When(ctx context.Context, pp1 *connect.Request[v1.ReceiveRequest]) *NotificationServiceClientMockReceiveExpectation {
 	if mmReceive.mock.funcReceive != nil {
-		mmReceive.mock.t.Fatalf("NotificationServiceHandlerMock.Receive mock is already set by Set")
+		mmReceive.mock.t.Fatalf("NotificationServiceClientMock.Receive mock is already set by Set")
 	}
 
-	expectation := &NotificationServiceHandlerMockReceiveExpectation{
+	expectation := &NotificationServiceClientMockReceiveExpectation{
 		mock:               mmReceive.mock,
-		params:             &NotificationServiceHandlerMockReceiveParams{ctx, pp1, pp2},
-		expectationOrigins: NotificationServiceHandlerMockReceiveExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &NotificationServiceClientMockReceiveParams{ctx, pp1},
+		expectationOrigins: NotificationServiceClientMockReceiveExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmReceive.expectations = append(mmReceive.expectations, expectation)
 	return expectation
 }
 
-// Then sets up NotificationServiceHandler.Receive return parameters for the expectation previously defined by the When method
-func (e *NotificationServiceHandlerMockReceiveExpectation) Then(err error) *NotificationServiceHandlerMock {
-	e.results = &NotificationServiceHandlerMockReceiveResults{err}
+// Then sets up NotificationServiceClient.Receive return parameters for the expectation previously defined by the When method
+func (e *NotificationServiceClientMockReceiveExpectation) Then(pp2 *connect.ServerStreamForClient[v1.ReceiveResponse], err error) *NotificationServiceClientMock {
+	e.results = &NotificationServiceClientMockReceiveResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times NotificationServiceHandler.Receive should be invoked
-func (mmReceive *mNotificationServiceHandlerMockReceive) Times(n uint64) *mNotificationServiceHandlerMockReceive {
+// Times sets number of times NotificationServiceClient.Receive should be invoked
+func (mmReceive *mNotificationServiceClientMockReceive) Times(n uint64) *mNotificationServiceClientMockReceive {
 	if n == 0 {
-		mmReceive.mock.t.Fatalf("Times of NotificationServiceHandlerMock.Receive mock can not be zero")
+		mmReceive.mock.t.Fatalf("Times of NotificationServiceClientMock.Receive mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmReceive.expectedInvocations, n)
 	mmReceive.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmReceive
 }
 
-func (mmReceive *mNotificationServiceHandlerMockReceive) invocationsDone() bool {
+func (mmReceive *mNotificationServiceClientMockReceive) invocationsDone() bool {
 	if len(mmReceive.expectations) == 0 && mmReceive.defaultExpectation == nil && mmReceive.mock.funcReceive == nil {
 		return true
 	}
@@ -353,18 +328,18 @@ func (mmReceive *mNotificationServiceHandlerMockReceive) invocationsDone() bool 
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// Receive implements mm_notificationv1connect.NotificationServiceHandler
-func (mmReceive *NotificationServiceHandlerMock) Receive(ctx context.Context, pp1 *connect.Request[v1.ReceiveRequest], pp2 *connect.ServerStream[v1.ReceiveResponse]) (err error) {
+// Receive implements mm_notificationv1connect.NotificationServiceClient
+func (mmReceive *NotificationServiceClientMock) Receive(ctx context.Context, pp1 *connect.Request[v1.ReceiveRequest]) (pp2 *connect.ServerStreamForClient[v1.ReceiveResponse], err error) {
 	mm_atomic.AddUint64(&mmReceive.beforeReceiveCounter, 1)
 	defer mm_atomic.AddUint64(&mmReceive.afterReceiveCounter, 1)
 
 	mmReceive.t.Helper()
 
 	if mmReceive.inspectFuncReceive != nil {
-		mmReceive.inspectFuncReceive(ctx, pp1, pp2)
+		mmReceive.inspectFuncReceive(ctx, pp1)
 	}
 
-	mm_params := NotificationServiceHandlerMockReceiveParams{ctx, pp1, pp2}
+	mm_params := NotificationServiceClientMockReceiveParams{ctx, pp1}
 
 	// Record call args
 	mmReceive.ReceiveMock.mutex.Lock()
@@ -374,7 +349,7 @@ func (mmReceive *NotificationServiceHandlerMock) Receive(ctx context.Context, pp
 	for _, e := range mmReceive.ReceiveMock.expectations {
 		if minimock.Equal(*e.params, mm_params) {
 			mm_atomic.AddUint64(&e.Counter, 1)
-			return e.results.err
+			return e.results.pp2, e.results.err
 		}
 	}
 
@@ -383,59 +358,54 @@ func (mmReceive *NotificationServiceHandlerMock) Receive(ctx context.Context, pp
 		mm_want := mmReceive.ReceiveMock.defaultExpectation.params
 		mm_want_ptrs := mmReceive.ReceiveMock.defaultExpectation.paramPtrs
 
-		mm_got := NotificationServiceHandlerMockReceiveParams{ctx, pp1, pp2}
+		mm_got := NotificationServiceClientMockReceiveParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmReceive.t.Errorf("NotificationServiceHandlerMock.Receive got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmReceive.t.Errorf("NotificationServiceClientMock.Receive got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmReceive.ReceiveMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmReceive.t.Errorf("NotificationServiceHandlerMock.Receive got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmReceive.t.Errorf("NotificationServiceClientMock.Receive got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmReceive.ReceiveMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
-			if mm_want_ptrs.pp2 != nil && !minimock.Equal(*mm_want_ptrs.pp2, mm_got.pp2) {
-				mmReceive.t.Errorf("NotificationServiceHandlerMock.Receive got unexpected parameter pp2, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
-					mmReceive.ReceiveMock.defaultExpectation.expectationOrigins.originPp2, *mm_want_ptrs.pp2, mm_got.pp2, minimock.Diff(*mm_want_ptrs.pp2, mm_got.pp2))
-			}
-
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmReceive.t.Errorf("NotificationServiceHandlerMock.Receive got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmReceive.t.Errorf("NotificationServiceClientMock.Receive got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmReceive.ReceiveMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmReceive.ReceiveMock.defaultExpectation.results
 		if mm_results == nil {
-			mmReceive.t.Fatal("No results are set for the NotificationServiceHandlerMock.Receive")
+			mmReceive.t.Fatal("No results are set for the NotificationServiceClientMock.Receive")
 		}
-		return (*mm_results).err
+		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmReceive.funcReceive != nil {
-		return mmReceive.funcReceive(ctx, pp1, pp2)
+		return mmReceive.funcReceive(ctx, pp1)
 	}
-	mmReceive.t.Fatalf("Unexpected call to NotificationServiceHandlerMock.Receive. %v %v %v", ctx, pp1, pp2)
+	mmReceive.t.Fatalf("Unexpected call to NotificationServiceClientMock.Receive. %v %v", ctx, pp1)
 	return
 }
 
-// ReceiveAfterCounter returns a count of finished NotificationServiceHandlerMock.Receive invocations
-func (mmReceive *NotificationServiceHandlerMock) ReceiveAfterCounter() uint64 {
+// ReceiveAfterCounter returns a count of finished NotificationServiceClientMock.Receive invocations
+func (mmReceive *NotificationServiceClientMock) ReceiveAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmReceive.afterReceiveCounter)
 }
 
-// ReceiveBeforeCounter returns a count of NotificationServiceHandlerMock.Receive invocations
-func (mmReceive *NotificationServiceHandlerMock) ReceiveBeforeCounter() uint64 {
+// ReceiveBeforeCounter returns a count of NotificationServiceClientMock.Receive invocations
+func (mmReceive *NotificationServiceClientMock) ReceiveBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmReceive.beforeReceiveCounter)
 }
 
-// Calls returns a list of arguments used in each call to NotificationServiceHandlerMock.Receive.
+// Calls returns a list of arguments used in each call to NotificationServiceClientMock.Receive.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmReceive *mNotificationServiceHandlerMockReceive) Calls() []*NotificationServiceHandlerMockReceiveParams {
+func (mmReceive *mNotificationServiceClientMockReceive) Calls() []*NotificationServiceClientMockReceiveParams {
 	mmReceive.mutex.RLock()
 
-	argCopy := make([]*NotificationServiceHandlerMockReceiveParams, len(mmReceive.callArgs))
+	argCopy := make([]*NotificationServiceClientMockReceiveParams, len(mmReceive.callArgs))
 	copy(argCopy, mmReceive.callArgs)
 
 	mmReceive.mutex.RUnlock()
@@ -445,7 +415,7 @@ func (mmReceive *mNotificationServiceHandlerMockReceive) Calls() []*Notification
 
 // MinimockReceiveDone returns true if the count of the Receive invocations corresponds
 // the number of defined expectations
-func (m *NotificationServiceHandlerMock) MinimockReceiveDone() bool {
+func (m *NotificationServiceClientMock) MinimockReceiveDone() bool {
 	if m.ReceiveMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -461,10 +431,10 @@ func (m *NotificationServiceHandlerMock) MinimockReceiveDone() bool {
 }
 
 // MinimockReceiveInspect logs each unmet expectation
-func (m *NotificationServiceHandlerMock) MinimockReceiveInspect() {
+func (m *NotificationServiceClientMock) MinimockReceiveInspect() {
 	for _, e := range m.ReceiveMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to NotificationServiceHandlerMock.Receive at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to NotificationServiceClientMock.Receive at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -472,71 +442,69 @@ func (m *NotificationServiceHandlerMock) MinimockReceiveInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.ReceiveMock.defaultExpectation != nil && afterReceiveCounter < 1 {
 		if m.ReceiveMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to NotificationServiceHandlerMock.Receive at\n%s", m.ReceiveMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to NotificationServiceClientMock.Receive at\n%s", m.ReceiveMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to NotificationServiceHandlerMock.Receive at\n%s with params: %#v", m.ReceiveMock.defaultExpectation.expectationOrigins.origin, *m.ReceiveMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to NotificationServiceClientMock.Receive at\n%s with params: %#v", m.ReceiveMock.defaultExpectation.expectationOrigins.origin, *m.ReceiveMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcReceive != nil && afterReceiveCounter < 1 {
-		m.t.Errorf("Expected call to NotificationServiceHandlerMock.Receive at\n%s", m.funcReceiveOrigin)
+		m.t.Errorf("Expected call to NotificationServiceClientMock.Receive at\n%s", m.funcReceiveOrigin)
 	}
 
 	if !m.ReceiveMock.invocationsDone() && afterReceiveCounter > 0 {
-		m.t.Errorf("Expected %d calls to NotificationServiceHandlerMock.Receive at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to NotificationServiceClientMock.Receive at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.ReceiveMock.expectedInvocations), m.ReceiveMock.expectedInvocationsOrigin, afterReceiveCounter)
 	}
 }
 
-type mNotificationServiceHandlerMockRelease struct {
+type mNotificationServiceClientMockRelease struct {
 	optional           bool
-	mock               *NotificationServiceHandlerMock
-	defaultExpectation *NotificationServiceHandlerMockReleaseExpectation
-	expectations       []*NotificationServiceHandlerMockReleaseExpectation
+	mock               *NotificationServiceClientMock
+	defaultExpectation *NotificationServiceClientMockReleaseExpectation
+	expectations       []*NotificationServiceClientMockReleaseExpectation
 
-	callArgs []*NotificationServiceHandlerMockReleaseParams
+	callArgs []*NotificationServiceClientMockReleaseParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// NotificationServiceHandlerMockReleaseExpectation specifies expectation struct of the NotificationServiceHandler.Release
-type NotificationServiceHandlerMockReleaseExpectation struct {
-	mock               *NotificationServiceHandlerMock
-	params             *NotificationServiceHandlerMockReleaseParams
-	paramPtrs          *NotificationServiceHandlerMockReleaseParamPtrs
-	expectationOrigins NotificationServiceHandlerMockReleaseExpectationOrigins
-	results            *NotificationServiceHandlerMockReleaseResults
+// NotificationServiceClientMockReleaseExpectation specifies expectation struct of the NotificationServiceClient.Release
+type NotificationServiceClientMockReleaseExpectation struct {
+	mock               *NotificationServiceClientMock
+	params             *NotificationServiceClientMockReleaseParams
+	paramPtrs          *NotificationServiceClientMockReleaseParamPtrs
+	expectationOrigins NotificationServiceClientMockReleaseExpectationOrigins
+	results            *NotificationServiceClientMockReleaseResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// NotificationServiceHandlerMockReleaseParams contains parameters of the NotificationServiceHandler.Release
-type NotificationServiceHandlerMockReleaseParams struct {
+// NotificationServiceClientMockReleaseParams contains parameters of the NotificationServiceClient.Release
+type NotificationServiceClientMockReleaseParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.ReleaseRequest]
-	pp2 *connect.ServerStream[v1.ReleaseResponse]
 }
 
-// NotificationServiceHandlerMockReleaseParamPtrs contains pointers to parameters of the NotificationServiceHandler.Release
-type NotificationServiceHandlerMockReleaseParamPtrs struct {
+// NotificationServiceClientMockReleaseParamPtrs contains pointers to parameters of the NotificationServiceClient.Release
+type NotificationServiceClientMockReleaseParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.ReleaseRequest]
-	pp2 **connect.ServerStream[v1.ReleaseResponse]
 }
 
-// NotificationServiceHandlerMockReleaseResults contains results of the NotificationServiceHandler.Release
-type NotificationServiceHandlerMockReleaseResults struct {
+// NotificationServiceClientMockReleaseResults contains results of the NotificationServiceClient.Release
+type NotificationServiceClientMockReleaseResults struct {
+	pp2 *connect.ServerStreamForClient[v1.ReleaseResponse]
 	err error
 }
 
-// NotificationServiceHandlerMockReleaseOrigins contains origins of expectations of the NotificationServiceHandler.Release
-type NotificationServiceHandlerMockReleaseExpectationOrigins struct {
+// NotificationServiceClientMockReleaseOrigins contains origins of expectations of the NotificationServiceClient.Release
+type NotificationServiceClientMockReleaseExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
-	originPp2 string
 }
 
 // Marks this method to be optional. The default behavior of any method with Return() is '1 or more', meaning
@@ -544,26 +512,26 @@ type NotificationServiceHandlerMockReleaseExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmRelease *mNotificationServiceHandlerMockRelease) Optional() *mNotificationServiceHandlerMockRelease {
+func (mmRelease *mNotificationServiceClientMockRelease) Optional() *mNotificationServiceClientMockRelease {
 	mmRelease.optional = true
 	return mmRelease
 }
 
-// Expect sets up expected params for NotificationServiceHandler.Release
-func (mmRelease *mNotificationServiceHandlerMockRelease) Expect(ctx context.Context, pp1 *connect.Request[v1.ReleaseRequest], pp2 *connect.ServerStream[v1.ReleaseResponse]) *mNotificationServiceHandlerMockRelease {
+// Expect sets up expected params for NotificationServiceClient.Release
+func (mmRelease *mNotificationServiceClientMockRelease) Expect(ctx context.Context, pp1 *connect.Request[v1.ReleaseRequest]) *mNotificationServiceClientMockRelease {
 	if mmRelease.mock.funcRelease != nil {
-		mmRelease.mock.t.Fatalf("NotificationServiceHandlerMock.Release mock is already set by Set")
+		mmRelease.mock.t.Fatalf("NotificationServiceClientMock.Release mock is already set by Set")
 	}
 
 	if mmRelease.defaultExpectation == nil {
-		mmRelease.defaultExpectation = &NotificationServiceHandlerMockReleaseExpectation{}
+		mmRelease.defaultExpectation = &NotificationServiceClientMockReleaseExpectation{}
 	}
 
 	if mmRelease.defaultExpectation.paramPtrs != nil {
-		mmRelease.mock.t.Fatalf("NotificationServiceHandlerMock.Release mock is already set by ExpectParams functions")
+		mmRelease.mock.t.Fatalf("NotificationServiceClientMock.Release mock is already set by ExpectParams functions")
 	}
 
-	mmRelease.defaultExpectation.params = &NotificationServiceHandlerMockReleaseParams{ctx, pp1, pp2}
+	mmRelease.defaultExpectation.params = &NotificationServiceClientMockReleaseParams{ctx, pp1}
 	mmRelease.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmRelease.expectations {
 		if minimock.Equal(e.params, mmRelease.defaultExpectation.params) {
@@ -574,22 +542,22 @@ func (mmRelease *mNotificationServiceHandlerMockRelease) Expect(ctx context.Cont
 	return mmRelease
 }
 
-// ExpectCtxParam1 sets up expected param ctx for NotificationServiceHandler.Release
-func (mmRelease *mNotificationServiceHandlerMockRelease) ExpectCtxParam1(ctx context.Context) *mNotificationServiceHandlerMockRelease {
+// ExpectCtxParam1 sets up expected param ctx for NotificationServiceClient.Release
+func (mmRelease *mNotificationServiceClientMockRelease) ExpectCtxParam1(ctx context.Context) *mNotificationServiceClientMockRelease {
 	if mmRelease.mock.funcRelease != nil {
-		mmRelease.mock.t.Fatalf("NotificationServiceHandlerMock.Release mock is already set by Set")
+		mmRelease.mock.t.Fatalf("NotificationServiceClientMock.Release mock is already set by Set")
 	}
 
 	if mmRelease.defaultExpectation == nil {
-		mmRelease.defaultExpectation = &NotificationServiceHandlerMockReleaseExpectation{}
+		mmRelease.defaultExpectation = &NotificationServiceClientMockReleaseExpectation{}
 	}
 
 	if mmRelease.defaultExpectation.params != nil {
-		mmRelease.mock.t.Fatalf("NotificationServiceHandlerMock.Release mock is already set by Expect")
+		mmRelease.mock.t.Fatalf("NotificationServiceClientMock.Release mock is already set by Expect")
 	}
 
 	if mmRelease.defaultExpectation.paramPtrs == nil {
-		mmRelease.defaultExpectation.paramPtrs = &NotificationServiceHandlerMockReleaseParamPtrs{}
+		mmRelease.defaultExpectation.paramPtrs = &NotificationServiceClientMockReleaseParamPtrs{}
 	}
 	mmRelease.defaultExpectation.paramPtrs.ctx = &ctx
 	mmRelease.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -597,22 +565,22 @@ func (mmRelease *mNotificationServiceHandlerMockRelease) ExpectCtxParam1(ctx con
 	return mmRelease
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for NotificationServiceHandler.Release
-func (mmRelease *mNotificationServiceHandlerMockRelease) ExpectPp1Param2(pp1 *connect.Request[v1.ReleaseRequest]) *mNotificationServiceHandlerMockRelease {
+// ExpectPp1Param2 sets up expected param pp1 for NotificationServiceClient.Release
+func (mmRelease *mNotificationServiceClientMockRelease) ExpectPp1Param2(pp1 *connect.Request[v1.ReleaseRequest]) *mNotificationServiceClientMockRelease {
 	if mmRelease.mock.funcRelease != nil {
-		mmRelease.mock.t.Fatalf("NotificationServiceHandlerMock.Release mock is already set by Set")
+		mmRelease.mock.t.Fatalf("NotificationServiceClientMock.Release mock is already set by Set")
 	}
 
 	if mmRelease.defaultExpectation == nil {
-		mmRelease.defaultExpectation = &NotificationServiceHandlerMockReleaseExpectation{}
+		mmRelease.defaultExpectation = &NotificationServiceClientMockReleaseExpectation{}
 	}
 
 	if mmRelease.defaultExpectation.params != nil {
-		mmRelease.mock.t.Fatalf("NotificationServiceHandlerMock.Release mock is already set by Expect")
+		mmRelease.mock.t.Fatalf("NotificationServiceClientMock.Release mock is already set by Expect")
 	}
 
 	if mmRelease.defaultExpectation.paramPtrs == nil {
-		mmRelease.defaultExpectation.paramPtrs = &NotificationServiceHandlerMockReleaseParamPtrs{}
+		mmRelease.defaultExpectation.paramPtrs = &NotificationServiceClientMockReleaseParamPtrs{}
 	}
 	mmRelease.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmRelease.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -620,33 +588,10 @@ func (mmRelease *mNotificationServiceHandlerMockRelease) ExpectPp1Param2(pp1 *co
 	return mmRelease
 }
 
-// ExpectPp2Param3 sets up expected param pp2 for NotificationServiceHandler.Release
-func (mmRelease *mNotificationServiceHandlerMockRelease) ExpectPp2Param3(pp2 *connect.ServerStream[v1.ReleaseResponse]) *mNotificationServiceHandlerMockRelease {
-	if mmRelease.mock.funcRelease != nil {
-		mmRelease.mock.t.Fatalf("NotificationServiceHandlerMock.Release mock is already set by Set")
-	}
-
-	if mmRelease.defaultExpectation == nil {
-		mmRelease.defaultExpectation = &NotificationServiceHandlerMockReleaseExpectation{}
-	}
-
-	if mmRelease.defaultExpectation.params != nil {
-		mmRelease.mock.t.Fatalf("NotificationServiceHandlerMock.Release mock is already set by Expect")
-	}
-
-	if mmRelease.defaultExpectation.paramPtrs == nil {
-		mmRelease.defaultExpectation.paramPtrs = &NotificationServiceHandlerMockReleaseParamPtrs{}
-	}
-	mmRelease.defaultExpectation.paramPtrs.pp2 = &pp2
-	mmRelease.defaultExpectation.expectationOrigins.originPp2 = minimock.CallerInfo(1)
-
-	return mmRelease
-}
-
-// Inspect accepts an inspector function that has same arguments as the NotificationServiceHandler.Release
-func (mmRelease *mNotificationServiceHandlerMockRelease) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.ReleaseRequest], pp2 *connect.ServerStream[v1.ReleaseResponse])) *mNotificationServiceHandlerMockRelease {
+// Inspect accepts an inspector function that has same arguments as the NotificationServiceClient.Release
+func (mmRelease *mNotificationServiceClientMockRelease) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.ReleaseRequest])) *mNotificationServiceClientMockRelease {
 	if mmRelease.mock.inspectFuncRelease != nil {
-		mmRelease.mock.t.Fatalf("Inspect function is already set for NotificationServiceHandlerMock.Release")
+		mmRelease.mock.t.Fatalf("Inspect function is already set for NotificationServiceClientMock.Release")
 	}
 
 	mmRelease.mock.inspectFuncRelease = f
@@ -654,28 +599,28 @@ func (mmRelease *mNotificationServiceHandlerMockRelease) Inspect(f func(ctx cont
 	return mmRelease
 }
 
-// Return sets up results that will be returned by NotificationServiceHandler.Release
-func (mmRelease *mNotificationServiceHandlerMockRelease) Return(err error) *NotificationServiceHandlerMock {
+// Return sets up results that will be returned by NotificationServiceClient.Release
+func (mmRelease *mNotificationServiceClientMockRelease) Return(pp2 *connect.ServerStreamForClient[v1.ReleaseResponse], err error) *NotificationServiceClientMock {
 	if mmRelease.mock.funcRelease != nil {
-		mmRelease.mock.t.Fatalf("NotificationServiceHandlerMock.Release mock is already set by Set")
+		mmRelease.mock.t.Fatalf("NotificationServiceClientMock.Release mock is already set by Set")
 	}
 
 	if mmRelease.defaultExpectation == nil {
-		mmRelease.defaultExpectation = &NotificationServiceHandlerMockReleaseExpectation{mock: mmRelease.mock}
+		mmRelease.defaultExpectation = &NotificationServiceClientMockReleaseExpectation{mock: mmRelease.mock}
 	}
-	mmRelease.defaultExpectation.results = &NotificationServiceHandlerMockReleaseResults{err}
+	mmRelease.defaultExpectation.results = &NotificationServiceClientMockReleaseResults{pp2, err}
 	mmRelease.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmRelease.mock
 }
 
-// Set uses given function f to mock the NotificationServiceHandler.Release method
-func (mmRelease *mNotificationServiceHandlerMockRelease) Set(f func(ctx context.Context, pp1 *connect.Request[v1.ReleaseRequest], pp2 *connect.ServerStream[v1.ReleaseResponse]) (err error)) *NotificationServiceHandlerMock {
+// Set uses given function f to mock the NotificationServiceClient.Release method
+func (mmRelease *mNotificationServiceClientMockRelease) Set(f func(ctx context.Context, pp1 *connect.Request[v1.ReleaseRequest]) (pp2 *connect.ServerStreamForClient[v1.ReleaseResponse], err error)) *NotificationServiceClientMock {
 	if mmRelease.defaultExpectation != nil {
-		mmRelease.mock.t.Fatalf("Default expectation is already set for the NotificationServiceHandler.Release method")
+		mmRelease.mock.t.Fatalf("Default expectation is already set for the NotificationServiceClient.Release method")
 	}
 
 	if len(mmRelease.expectations) > 0 {
-		mmRelease.mock.t.Fatalf("Some expectations are already set for the NotificationServiceHandler.Release method")
+		mmRelease.mock.t.Fatalf("Some expectations are already set for the NotificationServiceClient.Release method")
 	}
 
 	mmRelease.mock.funcRelease = f
@@ -683,39 +628,39 @@ func (mmRelease *mNotificationServiceHandlerMockRelease) Set(f func(ctx context.
 	return mmRelease.mock
 }
 
-// When sets expectation for the NotificationServiceHandler.Release which will trigger the result defined by the following
+// When sets expectation for the NotificationServiceClient.Release which will trigger the result defined by the following
 // Then helper
-func (mmRelease *mNotificationServiceHandlerMockRelease) When(ctx context.Context, pp1 *connect.Request[v1.ReleaseRequest], pp2 *connect.ServerStream[v1.ReleaseResponse]) *NotificationServiceHandlerMockReleaseExpectation {
+func (mmRelease *mNotificationServiceClientMockRelease) When(ctx context.Context, pp1 *connect.Request[v1.ReleaseRequest]) *NotificationServiceClientMockReleaseExpectation {
 	if mmRelease.mock.funcRelease != nil {
-		mmRelease.mock.t.Fatalf("NotificationServiceHandlerMock.Release mock is already set by Set")
+		mmRelease.mock.t.Fatalf("NotificationServiceClientMock.Release mock is already set by Set")
 	}
 
-	expectation := &NotificationServiceHandlerMockReleaseExpectation{
+	expectation := &NotificationServiceClientMockReleaseExpectation{
 		mock:               mmRelease.mock,
-		params:             &NotificationServiceHandlerMockReleaseParams{ctx, pp1, pp2},
-		expectationOrigins: NotificationServiceHandlerMockReleaseExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &NotificationServiceClientMockReleaseParams{ctx, pp1},
+		expectationOrigins: NotificationServiceClientMockReleaseExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmRelease.expectations = append(mmRelease.expectations, expectation)
 	return expectation
 }
 
-// Then sets up NotificationServiceHandler.Release return parameters for the expectation previously defined by the When method
-func (e *NotificationServiceHandlerMockReleaseExpectation) Then(err error) *NotificationServiceHandlerMock {
-	e.results = &NotificationServiceHandlerMockReleaseResults{err}
+// Then sets up NotificationServiceClient.Release return parameters for the expectation previously defined by the When method
+func (e *NotificationServiceClientMockReleaseExpectation) Then(pp2 *connect.ServerStreamForClient[v1.ReleaseResponse], err error) *NotificationServiceClientMock {
+	e.results = &NotificationServiceClientMockReleaseResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times NotificationServiceHandler.Release should be invoked
-func (mmRelease *mNotificationServiceHandlerMockRelease) Times(n uint64) *mNotificationServiceHandlerMockRelease {
+// Times sets number of times NotificationServiceClient.Release should be invoked
+func (mmRelease *mNotificationServiceClientMockRelease) Times(n uint64) *mNotificationServiceClientMockRelease {
 	if n == 0 {
-		mmRelease.mock.t.Fatalf("Times of NotificationServiceHandlerMock.Release mock can not be zero")
+		mmRelease.mock.t.Fatalf("Times of NotificationServiceClientMock.Release mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmRelease.expectedInvocations, n)
 	mmRelease.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmRelease
 }
 
-func (mmRelease *mNotificationServiceHandlerMockRelease) invocationsDone() bool {
+func (mmRelease *mNotificationServiceClientMockRelease) invocationsDone() bool {
 	if len(mmRelease.expectations) == 0 && mmRelease.defaultExpectation == nil && mmRelease.mock.funcRelease == nil {
 		return true
 	}
@@ -726,18 +671,18 @@ func (mmRelease *mNotificationServiceHandlerMockRelease) invocationsDone() bool 
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// Release implements mm_notificationv1connect.NotificationServiceHandler
-func (mmRelease *NotificationServiceHandlerMock) Release(ctx context.Context, pp1 *connect.Request[v1.ReleaseRequest], pp2 *connect.ServerStream[v1.ReleaseResponse]) (err error) {
+// Release implements mm_notificationv1connect.NotificationServiceClient
+func (mmRelease *NotificationServiceClientMock) Release(ctx context.Context, pp1 *connect.Request[v1.ReleaseRequest]) (pp2 *connect.ServerStreamForClient[v1.ReleaseResponse], err error) {
 	mm_atomic.AddUint64(&mmRelease.beforeReleaseCounter, 1)
 	defer mm_atomic.AddUint64(&mmRelease.afterReleaseCounter, 1)
 
 	mmRelease.t.Helper()
 
 	if mmRelease.inspectFuncRelease != nil {
-		mmRelease.inspectFuncRelease(ctx, pp1, pp2)
+		mmRelease.inspectFuncRelease(ctx, pp1)
 	}
 
-	mm_params := NotificationServiceHandlerMockReleaseParams{ctx, pp1, pp2}
+	mm_params := NotificationServiceClientMockReleaseParams{ctx, pp1}
 
 	// Record call args
 	mmRelease.ReleaseMock.mutex.Lock()
@@ -747,7 +692,7 @@ func (mmRelease *NotificationServiceHandlerMock) Release(ctx context.Context, pp
 	for _, e := range mmRelease.ReleaseMock.expectations {
 		if minimock.Equal(*e.params, mm_params) {
 			mm_atomic.AddUint64(&e.Counter, 1)
-			return e.results.err
+			return e.results.pp2, e.results.err
 		}
 	}
 
@@ -756,59 +701,54 @@ func (mmRelease *NotificationServiceHandlerMock) Release(ctx context.Context, pp
 		mm_want := mmRelease.ReleaseMock.defaultExpectation.params
 		mm_want_ptrs := mmRelease.ReleaseMock.defaultExpectation.paramPtrs
 
-		mm_got := NotificationServiceHandlerMockReleaseParams{ctx, pp1, pp2}
+		mm_got := NotificationServiceClientMockReleaseParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmRelease.t.Errorf("NotificationServiceHandlerMock.Release got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmRelease.t.Errorf("NotificationServiceClientMock.Release got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmRelease.ReleaseMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmRelease.t.Errorf("NotificationServiceHandlerMock.Release got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmRelease.t.Errorf("NotificationServiceClientMock.Release got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmRelease.ReleaseMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
-			if mm_want_ptrs.pp2 != nil && !minimock.Equal(*mm_want_ptrs.pp2, mm_got.pp2) {
-				mmRelease.t.Errorf("NotificationServiceHandlerMock.Release got unexpected parameter pp2, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
-					mmRelease.ReleaseMock.defaultExpectation.expectationOrigins.originPp2, *mm_want_ptrs.pp2, mm_got.pp2, minimock.Diff(*mm_want_ptrs.pp2, mm_got.pp2))
-			}
-
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmRelease.t.Errorf("NotificationServiceHandlerMock.Release got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmRelease.t.Errorf("NotificationServiceClientMock.Release got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmRelease.ReleaseMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmRelease.ReleaseMock.defaultExpectation.results
 		if mm_results == nil {
-			mmRelease.t.Fatal("No results are set for the NotificationServiceHandlerMock.Release")
+			mmRelease.t.Fatal("No results are set for the NotificationServiceClientMock.Release")
 		}
-		return (*mm_results).err
+		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmRelease.funcRelease != nil {
-		return mmRelease.funcRelease(ctx, pp1, pp2)
+		return mmRelease.funcRelease(ctx, pp1)
 	}
-	mmRelease.t.Fatalf("Unexpected call to NotificationServiceHandlerMock.Release. %v %v %v", ctx, pp1, pp2)
+	mmRelease.t.Fatalf("Unexpected call to NotificationServiceClientMock.Release. %v %v", ctx, pp1)
 	return
 }
 
-// ReleaseAfterCounter returns a count of finished NotificationServiceHandlerMock.Release invocations
-func (mmRelease *NotificationServiceHandlerMock) ReleaseAfterCounter() uint64 {
+// ReleaseAfterCounter returns a count of finished NotificationServiceClientMock.Release invocations
+func (mmRelease *NotificationServiceClientMock) ReleaseAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmRelease.afterReleaseCounter)
 }
 
-// ReleaseBeforeCounter returns a count of NotificationServiceHandlerMock.Release invocations
-func (mmRelease *NotificationServiceHandlerMock) ReleaseBeforeCounter() uint64 {
+// ReleaseBeforeCounter returns a count of NotificationServiceClientMock.Release invocations
+func (mmRelease *NotificationServiceClientMock) ReleaseBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmRelease.beforeReleaseCounter)
 }
 
-// Calls returns a list of arguments used in each call to NotificationServiceHandlerMock.Release.
+// Calls returns a list of arguments used in each call to NotificationServiceClientMock.Release.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmRelease *mNotificationServiceHandlerMockRelease) Calls() []*NotificationServiceHandlerMockReleaseParams {
+func (mmRelease *mNotificationServiceClientMockRelease) Calls() []*NotificationServiceClientMockReleaseParams {
 	mmRelease.mutex.RLock()
 
-	argCopy := make([]*NotificationServiceHandlerMockReleaseParams, len(mmRelease.callArgs))
+	argCopy := make([]*NotificationServiceClientMockReleaseParams, len(mmRelease.callArgs))
 	copy(argCopy, mmRelease.callArgs)
 
 	mmRelease.mutex.RUnlock()
@@ -818,7 +758,7 @@ func (mmRelease *mNotificationServiceHandlerMockRelease) Calls() []*Notification
 
 // MinimockReleaseDone returns true if the count of the Release invocations corresponds
 // the number of defined expectations
-func (m *NotificationServiceHandlerMock) MinimockReleaseDone() bool {
+func (m *NotificationServiceClientMock) MinimockReleaseDone() bool {
 	if m.ReleaseMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -834,10 +774,10 @@ func (m *NotificationServiceHandlerMock) MinimockReleaseDone() bool {
 }
 
 // MinimockReleaseInspect logs each unmet expectation
-func (m *NotificationServiceHandlerMock) MinimockReleaseInspect() {
+func (m *NotificationServiceClientMock) MinimockReleaseInspect() {
 	for _, e := range m.ReleaseMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to NotificationServiceHandlerMock.Release at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to NotificationServiceClientMock.Release at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -845,71 +785,69 @@ func (m *NotificationServiceHandlerMock) MinimockReleaseInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.ReleaseMock.defaultExpectation != nil && afterReleaseCounter < 1 {
 		if m.ReleaseMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to NotificationServiceHandlerMock.Release at\n%s", m.ReleaseMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to NotificationServiceClientMock.Release at\n%s", m.ReleaseMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to NotificationServiceHandlerMock.Release at\n%s with params: %#v", m.ReleaseMock.defaultExpectation.expectationOrigins.origin, *m.ReleaseMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to NotificationServiceClientMock.Release at\n%s with params: %#v", m.ReleaseMock.defaultExpectation.expectationOrigins.origin, *m.ReleaseMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcRelease != nil && afterReleaseCounter < 1 {
-		m.t.Errorf("Expected call to NotificationServiceHandlerMock.Release at\n%s", m.funcReleaseOrigin)
+		m.t.Errorf("Expected call to NotificationServiceClientMock.Release at\n%s", m.funcReleaseOrigin)
 	}
 
 	if !m.ReleaseMock.invocationsDone() && afterReleaseCounter > 0 {
-		m.t.Errorf("Expected %d calls to NotificationServiceHandlerMock.Release at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to NotificationServiceClientMock.Release at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.ReleaseMock.expectedInvocations), m.ReleaseMock.expectedInvocationsOrigin, afterReleaseCounter)
 	}
 }
 
-type mNotificationServiceHandlerMockSearch struct {
+type mNotificationServiceClientMockSearch struct {
 	optional           bool
-	mock               *NotificationServiceHandlerMock
-	defaultExpectation *NotificationServiceHandlerMockSearchExpectation
-	expectations       []*NotificationServiceHandlerMockSearchExpectation
+	mock               *NotificationServiceClientMock
+	defaultExpectation *NotificationServiceClientMockSearchExpectation
+	expectations       []*NotificationServiceClientMockSearchExpectation
 
-	callArgs []*NotificationServiceHandlerMockSearchParams
+	callArgs []*NotificationServiceClientMockSearchParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// NotificationServiceHandlerMockSearchExpectation specifies expectation struct of the NotificationServiceHandler.Search
-type NotificationServiceHandlerMockSearchExpectation struct {
-	mock               *NotificationServiceHandlerMock
-	params             *NotificationServiceHandlerMockSearchParams
-	paramPtrs          *NotificationServiceHandlerMockSearchParamPtrs
-	expectationOrigins NotificationServiceHandlerMockSearchExpectationOrigins
-	results            *NotificationServiceHandlerMockSearchResults
+// NotificationServiceClientMockSearchExpectation specifies expectation struct of the NotificationServiceClient.Search
+type NotificationServiceClientMockSearchExpectation struct {
+	mock               *NotificationServiceClientMock
+	params             *NotificationServiceClientMockSearchParams
+	paramPtrs          *NotificationServiceClientMockSearchParamPtrs
+	expectationOrigins NotificationServiceClientMockSearchExpectationOrigins
+	results            *NotificationServiceClientMockSearchResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// NotificationServiceHandlerMockSearchParams contains parameters of the NotificationServiceHandler.Search
-type NotificationServiceHandlerMockSearchParams struct {
+// NotificationServiceClientMockSearchParams contains parameters of the NotificationServiceClient.Search
+type NotificationServiceClientMockSearchParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v11.SearchRequest]
-	pp2 *connect.ServerStream[v1.SearchResponse]
 }
 
-// NotificationServiceHandlerMockSearchParamPtrs contains pointers to parameters of the NotificationServiceHandler.Search
-type NotificationServiceHandlerMockSearchParamPtrs struct {
+// NotificationServiceClientMockSearchParamPtrs contains pointers to parameters of the NotificationServiceClient.Search
+type NotificationServiceClientMockSearchParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v11.SearchRequest]
-	pp2 **connect.ServerStream[v1.SearchResponse]
 }
 
-// NotificationServiceHandlerMockSearchResults contains results of the NotificationServiceHandler.Search
-type NotificationServiceHandlerMockSearchResults struct {
+// NotificationServiceClientMockSearchResults contains results of the NotificationServiceClient.Search
+type NotificationServiceClientMockSearchResults struct {
+	pp2 *connect.ServerStreamForClient[v1.SearchResponse]
 	err error
 }
 
-// NotificationServiceHandlerMockSearchOrigins contains origins of expectations of the NotificationServiceHandler.Search
-type NotificationServiceHandlerMockSearchExpectationOrigins struct {
+// NotificationServiceClientMockSearchOrigins contains origins of expectations of the NotificationServiceClient.Search
+type NotificationServiceClientMockSearchExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
-	originPp2 string
 }
 
 // Marks this method to be optional. The default behavior of any method with Return() is '1 or more', meaning
@@ -917,26 +855,26 @@ type NotificationServiceHandlerMockSearchExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmSearch *mNotificationServiceHandlerMockSearch) Optional() *mNotificationServiceHandlerMockSearch {
+func (mmSearch *mNotificationServiceClientMockSearch) Optional() *mNotificationServiceClientMockSearch {
 	mmSearch.optional = true
 	return mmSearch
 }
 
-// Expect sets up expected params for NotificationServiceHandler.Search
-func (mmSearch *mNotificationServiceHandlerMockSearch) Expect(ctx context.Context, pp1 *connect.Request[v11.SearchRequest], pp2 *connect.ServerStream[v1.SearchResponse]) *mNotificationServiceHandlerMockSearch {
+// Expect sets up expected params for NotificationServiceClient.Search
+func (mmSearch *mNotificationServiceClientMockSearch) Expect(ctx context.Context, pp1 *connect.Request[v11.SearchRequest]) *mNotificationServiceClientMockSearch {
 	if mmSearch.mock.funcSearch != nil {
-		mmSearch.mock.t.Fatalf("NotificationServiceHandlerMock.Search mock is already set by Set")
+		mmSearch.mock.t.Fatalf("NotificationServiceClientMock.Search mock is already set by Set")
 	}
 
 	if mmSearch.defaultExpectation == nil {
-		mmSearch.defaultExpectation = &NotificationServiceHandlerMockSearchExpectation{}
+		mmSearch.defaultExpectation = &NotificationServiceClientMockSearchExpectation{}
 	}
 
 	if mmSearch.defaultExpectation.paramPtrs != nil {
-		mmSearch.mock.t.Fatalf("NotificationServiceHandlerMock.Search mock is already set by ExpectParams functions")
+		mmSearch.mock.t.Fatalf("NotificationServiceClientMock.Search mock is already set by ExpectParams functions")
 	}
 
-	mmSearch.defaultExpectation.params = &NotificationServiceHandlerMockSearchParams{ctx, pp1, pp2}
+	mmSearch.defaultExpectation.params = &NotificationServiceClientMockSearchParams{ctx, pp1}
 	mmSearch.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmSearch.expectations {
 		if minimock.Equal(e.params, mmSearch.defaultExpectation.params) {
@@ -947,22 +885,22 @@ func (mmSearch *mNotificationServiceHandlerMockSearch) Expect(ctx context.Contex
 	return mmSearch
 }
 
-// ExpectCtxParam1 sets up expected param ctx for NotificationServiceHandler.Search
-func (mmSearch *mNotificationServiceHandlerMockSearch) ExpectCtxParam1(ctx context.Context) *mNotificationServiceHandlerMockSearch {
+// ExpectCtxParam1 sets up expected param ctx for NotificationServiceClient.Search
+func (mmSearch *mNotificationServiceClientMockSearch) ExpectCtxParam1(ctx context.Context) *mNotificationServiceClientMockSearch {
 	if mmSearch.mock.funcSearch != nil {
-		mmSearch.mock.t.Fatalf("NotificationServiceHandlerMock.Search mock is already set by Set")
+		mmSearch.mock.t.Fatalf("NotificationServiceClientMock.Search mock is already set by Set")
 	}
 
 	if mmSearch.defaultExpectation == nil {
-		mmSearch.defaultExpectation = &NotificationServiceHandlerMockSearchExpectation{}
+		mmSearch.defaultExpectation = &NotificationServiceClientMockSearchExpectation{}
 	}
 
 	if mmSearch.defaultExpectation.params != nil {
-		mmSearch.mock.t.Fatalf("NotificationServiceHandlerMock.Search mock is already set by Expect")
+		mmSearch.mock.t.Fatalf("NotificationServiceClientMock.Search mock is already set by Expect")
 	}
 
 	if mmSearch.defaultExpectation.paramPtrs == nil {
-		mmSearch.defaultExpectation.paramPtrs = &NotificationServiceHandlerMockSearchParamPtrs{}
+		mmSearch.defaultExpectation.paramPtrs = &NotificationServiceClientMockSearchParamPtrs{}
 	}
 	mmSearch.defaultExpectation.paramPtrs.ctx = &ctx
 	mmSearch.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -970,22 +908,22 @@ func (mmSearch *mNotificationServiceHandlerMockSearch) ExpectCtxParam1(ctx conte
 	return mmSearch
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for NotificationServiceHandler.Search
-func (mmSearch *mNotificationServiceHandlerMockSearch) ExpectPp1Param2(pp1 *connect.Request[v11.SearchRequest]) *mNotificationServiceHandlerMockSearch {
+// ExpectPp1Param2 sets up expected param pp1 for NotificationServiceClient.Search
+func (mmSearch *mNotificationServiceClientMockSearch) ExpectPp1Param2(pp1 *connect.Request[v11.SearchRequest]) *mNotificationServiceClientMockSearch {
 	if mmSearch.mock.funcSearch != nil {
-		mmSearch.mock.t.Fatalf("NotificationServiceHandlerMock.Search mock is already set by Set")
+		mmSearch.mock.t.Fatalf("NotificationServiceClientMock.Search mock is already set by Set")
 	}
 
 	if mmSearch.defaultExpectation == nil {
-		mmSearch.defaultExpectation = &NotificationServiceHandlerMockSearchExpectation{}
+		mmSearch.defaultExpectation = &NotificationServiceClientMockSearchExpectation{}
 	}
 
 	if mmSearch.defaultExpectation.params != nil {
-		mmSearch.mock.t.Fatalf("NotificationServiceHandlerMock.Search mock is already set by Expect")
+		mmSearch.mock.t.Fatalf("NotificationServiceClientMock.Search mock is already set by Expect")
 	}
 
 	if mmSearch.defaultExpectation.paramPtrs == nil {
-		mmSearch.defaultExpectation.paramPtrs = &NotificationServiceHandlerMockSearchParamPtrs{}
+		mmSearch.defaultExpectation.paramPtrs = &NotificationServiceClientMockSearchParamPtrs{}
 	}
 	mmSearch.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmSearch.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -993,33 +931,10 @@ func (mmSearch *mNotificationServiceHandlerMockSearch) ExpectPp1Param2(pp1 *conn
 	return mmSearch
 }
 
-// ExpectPp2Param3 sets up expected param pp2 for NotificationServiceHandler.Search
-func (mmSearch *mNotificationServiceHandlerMockSearch) ExpectPp2Param3(pp2 *connect.ServerStream[v1.SearchResponse]) *mNotificationServiceHandlerMockSearch {
-	if mmSearch.mock.funcSearch != nil {
-		mmSearch.mock.t.Fatalf("NotificationServiceHandlerMock.Search mock is already set by Set")
-	}
-
-	if mmSearch.defaultExpectation == nil {
-		mmSearch.defaultExpectation = &NotificationServiceHandlerMockSearchExpectation{}
-	}
-
-	if mmSearch.defaultExpectation.params != nil {
-		mmSearch.mock.t.Fatalf("NotificationServiceHandlerMock.Search mock is already set by Expect")
-	}
-
-	if mmSearch.defaultExpectation.paramPtrs == nil {
-		mmSearch.defaultExpectation.paramPtrs = &NotificationServiceHandlerMockSearchParamPtrs{}
-	}
-	mmSearch.defaultExpectation.paramPtrs.pp2 = &pp2
-	mmSearch.defaultExpectation.expectationOrigins.originPp2 = minimock.CallerInfo(1)
-
-	return mmSearch
-}
-
-// Inspect accepts an inspector function that has same arguments as the NotificationServiceHandler.Search
-func (mmSearch *mNotificationServiceHandlerMockSearch) Inspect(f func(ctx context.Context, pp1 *connect.Request[v11.SearchRequest], pp2 *connect.ServerStream[v1.SearchResponse])) *mNotificationServiceHandlerMockSearch {
+// Inspect accepts an inspector function that has same arguments as the NotificationServiceClient.Search
+func (mmSearch *mNotificationServiceClientMockSearch) Inspect(f func(ctx context.Context, pp1 *connect.Request[v11.SearchRequest])) *mNotificationServiceClientMockSearch {
 	if mmSearch.mock.inspectFuncSearch != nil {
-		mmSearch.mock.t.Fatalf("Inspect function is already set for NotificationServiceHandlerMock.Search")
+		mmSearch.mock.t.Fatalf("Inspect function is already set for NotificationServiceClientMock.Search")
 	}
 
 	mmSearch.mock.inspectFuncSearch = f
@@ -1027,28 +942,28 @@ func (mmSearch *mNotificationServiceHandlerMockSearch) Inspect(f func(ctx contex
 	return mmSearch
 }
 
-// Return sets up results that will be returned by NotificationServiceHandler.Search
-func (mmSearch *mNotificationServiceHandlerMockSearch) Return(err error) *NotificationServiceHandlerMock {
+// Return sets up results that will be returned by NotificationServiceClient.Search
+func (mmSearch *mNotificationServiceClientMockSearch) Return(pp2 *connect.ServerStreamForClient[v1.SearchResponse], err error) *NotificationServiceClientMock {
 	if mmSearch.mock.funcSearch != nil {
-		mmSearch.mock.t.Fatalf("NotificationServiceHandlerMock.Search mock is already set by Set")
+		mmSearch.mock.t.Fatalf("NotificationServiceClientMock.Search mock is already set by Set")
 	}
 
 	if mmSearch.defaultExpectation == nil {
-		mmSearch.defaultExpectation = &NotificationServiceHandlerMockSearchExpectation{mock: mmSearch.mock}
+		mmSearch.defaultExpectation = &NotificationServiceClientMockSearchExpectation{mock: mmSearch.mock}
 	}
-	mmSearch.defaultExpectation.results = &NotificationServiceHandlerMockSearchResults{err}
+	mmSearch.defaultExpectation.results = &NotificationServiceClientMockSearchResults{pp2, err}
 	mmSearch.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmSearch.mock
 }
 
-// Set uses given function f to mock the NotificationServiceHandler.Search method
-func (mmSearch *mNotificationServiceHandlerMockSearch) Set(f func(ctx context.Context, pp1 *connect.Request[v11.SearchRequest], pp2 *connect.ServerStream[v1.SearchResponse]) (err error)) *NotificationServiceHandlerMock {
+// Set uses given function f to mock the NotificationServiceClient.Search method
+func (mmSearch *mNotificationServiceClientMockSearch) Set(f func(ctx context.Context, pp1 *connect.Request[v11.SearchRequest]) (pp2 *connect.ServerStreamForClient[v1.SearchResponse], err error)) *NotificationServiceClientMock {
 	if mmSearch.defaultExpectation != nil {
-		mmSearch.mock.t.Fatalf("Default expectation is already set for the NotificationServiceHandler.Search method")
+		mmSearch.mock.t.Fatalf("Default expectation is already set for the NotificationServiceClient.Search method")
 	}
 
 	if len(mmSearch.expectations) > 0 {
-		mmSearch.mock.t.Fatalf("Some expectations are already set for the NotificationServiceHandler.Search method")
+		mmSearch.mock.t.Fatalf("Some expectations are already set for the NotificationServiceClient.Search method")
 	}
 
 	mmSearch.mock.funcSearch = f
@@ -1056,39 +971,39 @@ func (mmSearch *mNotificationServiceHandlerMockSearch) Set(f func(ctx context.Co
 	return mmSearch.mock
 }
 
-// When sets expectation for the NotificationServiceHandler.Search which will trigger the result defined by the following
+// When sets expectation for the NotificationServiceClient.Search which will trigger the result defined by the following
 // Then helper
-func (mmSearch *mNotificationServiceHandlerMockSearch) When(ctx context.Context, pp1 *connect.Request[v11.SearchRequest], pp2 *connect.ServerStream[v1.SearchResponse]) *NotificationServiceHandlerMockSearchExpectation {
+func (mmSearch *mNotificationServiceClientMockSearch) When(ctx context.Context, pp1 *connect.Request[v11.SearchRequest]) *NotificationServiceClientMockSearchExpectation {
 	if mmSearch.mock.funcSearch != nil {
-		mmSearch.mock.t.Fatalf("NotificationServiceHandlerMock.Search mock is already set by Set")
+		mmSearch.mock.t.Fatalf("NotificationServiceClientMock.Search mock is already set by Set")
 	}
 
-	expectation := &NotificationServiceHandlerMockSearchExpectation{
+	expectation := &NotificationServiceClientMockSearchExpectation{
 		mock:               mmSearch.mock,
-		params:             &NotificationServiceHandlerMockSearchParams{ctx, pp1, pp2},
-		expectationOrigins: NotificationServiceHandlerMockSearchExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &NotificationServiceClientMockSearchParams{ctx, pp1},
+		expectationOrigins: NotificationServiceClientMockSearchExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmSearch.expectations = append(mmSearch.expectations, expectation)
 	return expectation
 }
 
-// Then sets up NotificationServiceHandler.Search return parameters for the expectation previously defined by the When method
-func (e *NotificationServiceHandlerMockSearchExpectation) Then(err error) *NotificationServiceHandlerMock {
-	e.results = &NotificationServiceHandlerMockSearchResults{err}
+// Then sets up NotificationServiceClient.Search return parameters for the expectation previously defined by the When method
+func (e *NotificationServiceClientMockSearchExpectation) Then(pp2 *connect.ServerStreamForClient[v1.SearchResponse], err error) *NotificationServiceClientMock {
+	e.results = &NotificationServiceClientMockSearchResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times NotificationServiceHandler.Search should be invoked
-func (mmSearch *mNotificationServiceHandlerMockSearch) Times(n uint64) *mNotificationServiceHandlerMockSearch {
+// Times sets number of times NotificationServiceClient.Search should be invoked
+func (mmSearch *mNotificationServiceClientMockSearch) Times(n uint64) *mNotificationServiceClientMockSearch {
 	if n == 0 {
-		mmSearch.mock.t.Fatalf("Times of NotificationServiceHandlerMock.Search mock can not be zero")
+		mmSearch.mock.t.Fatalf("Times of NotificationServiceClientMock.Search mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmSearch.expectedInvocations, n)
 	mmSearch.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmSearch
 }
 
-func (mmSearch *mNotificationServiceHandlerMockSearch) invocationsDone() bool {
+func (mmSearch *mNotificationServiceClientMockSearch) invocationsDone() bool {
 	if len(mmSearch.expectations) == 0 && mmSearch.defaultExpectation == nil && mmSearch.mock.funcSearch == nil {
 		return true
 	}
@@ -1099,18 +1014,18 @@ func (mmSearch *mNotificationServiceHandlerMockSearch) invocationsDone() bool {
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// Search implements mm_notificationv1connect.NotificationServiceHandler
-func (mmSearch *NotificationServiceHandlerMock) Search(ctx context.Context, pp1 *connect.Request[v11.SearchRequest], pp2 *connect.ServerStream[v1.SearchResponse]) (err error) {
+// Search implements mm_notificationv1connect.NotificationServiceClient
+func (mmSearch *NotificationServiceClientMock) Search(ctx context.Context, pp1 *connect.Request[v11.SearchRequest]) (pp2 *connect.ServerStreamForClient[v1.SearchResponse], err error) {
 	mm_atomic.AddUint64(&mmSearch.beforeSearchCounter, 1)
 	defer mm_atomic.AddUint64(&mmSearch.afterSearchCounter, 1)
 
 	mmSearch.t.Helper()
 
 	if mmSearch.inspectFuncSearch != nil {
-		mmSearch.inspectFuncSearch(ctx, pp1, pp2)
+		mmSearch.inspectFuncSearch(ctx, pp1)
 	}
 
-	mm_params := NotificationServiceHandlerMockSearchParams{ctx, pp1, pp2}
+	mm_params := NotificationServiceClientMockSearchParams{ctx, pp1}
 
 	// Record call args
 	mmSearch.SearchMock.mutex.Lock()
@@ -1120,7 +1035,7 @@ func (mmSearch *NotificationServiceHandlerMock) Search(ctx context.Context, pp1 
 	for _, e := range mmSearch.SearchMock.expectations {
 		if minimock.Equal(*e.params, mm_params) {
 			mm_atomic.AddUint64(&e.Counter, 1)
-			return e.results.err
+			return e.results.pp2, e.results.err
 		}
 	}
 
@@ -1129,59 +1044,54 @@ func (mmSearch *NotificationServiceHandlerMock) Search(ctx context.Context, pp1 
 		mm_want := mmSearch.SearchMock.defaultExpectation.params
 		mm_want_ptrs := mmSearch.SearchMock.defaultExpectation.paramPtrs
 
-		mm_got := NotificationServiceHandlerMockSearchParams{ctx, pp1, pp2}
+		mm_got := NotificationServiceClientMockSearchParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmSearch.t.Errorf("NotificationServiceHandlerMock.Search got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmSearch.t.Errorf("NotificationServiceClientMock.Search got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmSearch.SearchMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmSearch.t.Errorf("NotificationServiceHandlerMock.Search got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmSearch.t.Errorf("NotificationServiceClientMock.Search got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmSearch.SearchMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
-			if mm_want_ptrs.pp2 != nil && !minimock.Equal(*mm_want_ptrs.pp2, mm_got.pp2) {
-				mmSearch.t.Errorf("NotificationServiceHandlerMock.Search got unexpected parameter pp2, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
-					mmSearch.SearchMock.defaultExpectation.expectationOrigins.originPp2, *mm_want_ptrs.pp2, mm_got.pp2, minimock.Diff(*mm_want_ptrs.pp2, mm_got.pp2))
-			}
-
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmSearch.t.Errorf("NotificationServiceHandlerMock.Search got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmSearch.t.Errorf("NotificationServiceClientMock.Search got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmSearch.SearchMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmSearch.SearchMock.defaultExpectation.results
 		if mm_results == nil {
-			mmSearch.t.Fatal("No results are set for the NotificationServiceHandlerMock.Search")
+			mmSearch.t.Fatal("No results are set for the NotificationServiceClientMock.Search")
 		}
-		return (*mm_results).err
+		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmSearch.funcSearch != nil {
-		return mmSearch.funcSearch(ctx, pp1, pp2)
+		return mmSearch.funcSearch(ctx, pp1)
 	}
-	mmSearch.t.Fatalf("Unexpected call to NotificationServiceHandlerMock.Search. %v %v %v", ctx, pp1, pp2)
+	mmSearch.t.Fatalf("Unexpected call to NotificationServiceClientMock.Search. %v %v", ctx, pp1)
 	return
 }
 
-// SearchAfterCounter returns a count of finished NotificationServiceHandlerMock.Search invocations
-func (mmSearch *NotificationServiceHandlerMock) SearchAfterCounter() uint64 {
+// SearchAfterCounter returns a count of finished NotificationServiceClientMock.Search invocations
+func (mmSearch *NotificationServiceClientMock) SearchAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmSearch.afterSearchCounter)
 }
 
-// SearchBeforeCounter returns a count of NotificationServiceHandlerMock.Search invocations
-func (mmSearch *NotificationServiceHandlerMock) SearchBeforeCounter() uint64 {
+// SearchBeforeCounter returns a count of NotificationServiceClientMock.Search invocations
+func (mmSearch *NotificationServiceClientMock) SearchBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmSearch.beforeSearchCounter)
 }
 
-// Calls returns a list of arguments used in each call to NotificationServiceHandlerMock.Search.
+// Calls returns a list of arguments used in each call to NotificationServiceClientMock.Search.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmSearch *mNotificationServiceHandlerMockSearch) Calls() []*NotificationServiceHandlerMockSearchParams {
+func (mmSearch *mNotificationServiceClientMockSearch) Calls() []*NotificationServiceClientMockSearchParams {
 	mmSearch.mutex.RLock()
 
-	argCopy := make([]*NotificationServiceHandlerMockSearchParams, len(mmSearch.callArgs))
+	argCopy := make([]*NotificationServiceClientMockSearchParams, len(mmSearch.callArgs))
 	copy(argCopy, mmSearch.callArgs)
 
 	mmSearch.mutex.RUnlock()
@@ -1191,7 +1101,7 @@ func (mmSearch *mNotificationServiceHandlerMockSearch) Calls() []*NotificationSe
 
 // MinimockSearchDone returns true if the count of the Search invocations corresponds
 // the number of defined expectations
-func (m *NotificationServiceHandlerMock) MinimockSearchDone() bool {
+func (m *NotificationServiceClientMock) MinimockSearchDone() bool {
 	if m.SearchMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -1207,10 +1117,10 @@ func (m *NotificationServiceHandlerMock) MinimockSearchDone() bool {
 }
 
 // MinimockSearchInspect logs each unmet expectation
-func (m *NotificationServiceHandlerMock) MinimockSearchInspect() {
+func (m *NotificationServiceClientMock) MinimockSearchInspect() {
 	for _, e := range m.SearchMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to NotificationServiceHandlerMock.Search at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to NotificationServiceClientMock.Search at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -1218,71 +1128,69 @@ func (m *NotificationServiceHandlerMock) MinimockSearchInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.SearchMock.defaultExpectation != nil && afterSearchCounter < 1 {
 		if m.SearchMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to NotificationServiceHandlerMock.Search at\n%s", m.SearchMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to NotificationServiceClientMock.Search at\n%s", m.SearchMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to NotificationServiceHandlerMock.Search at\n%s with params: %#v", m.SearchMock.defaultExpectation.expectationOrigins.origin, *m.SearchMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to NotificationServiceClientMock.Search at\n%s with params: %#v", m.SearchMock.defaultExpectation.expectationOrigins.origin, *m.SearchMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcSearch != nil && afterSearchCounter < 1 {
-		m.t.Errorf("Expected call to NotificationServiceHandlerMock.Search at\n%s", m.funcSearchOrigin)
+		m.t.Errorf("Expected call to NotificationServiceClientMock.Search at\n%s", m.funcSearchOrigin)
 	}
 
 	if !m.SearchMock.invocationsDone() && afterSearchCounter > 0 {
-		m.t.Errorf("Expected %d calls to NotificationServiceHandlerMock.Search at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to NotificationServiceClientMock.Search at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.SearchMock.expectedInvocations), m.SearchMock.expectedInvocationsOrigin, afterSearchCounter)
 	}
 }
 
-type mNotificationServiceHandlerMockSend struct {
+type mNotificationServiceClientMockSend struct {
 	optional           bool
-	mock               *NotificationServiceHandlerMock
-	defaultExpectation *NotificationServiceHandlerMockSendExpectation
-	expectations       []*NotificationServiceHandlerMockSendExpectation
+	mock               *NotificationServiceClientMock
+	defaultExpectation *NotificationServiceClientMockSendExpectation
+	expectations       []*NotificationServiceClientMockSendExpectation
 
-	callArgs []*NotificationServiceHandlerMockSendParams
+	callArgs []*NotificationServiceClientMockSendParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// NotificationServiceHandlerMockSendExpectation specifies expectation struct of the NotificationServiceHandler.Send
-type NotificationServiceHandlerMockSendExpectation struct {
-	mock               *NotificationServiceHandlerMock
-	params             *NotificationServiceHandlerMockSendParams
-	paramPtrs          *NotificationServiceHandlerMockSendParamPtrs
-	expectationOrigins NotificationServiceHandlerMockSendExpectationOrigins
-	results            *NotificationServiceHandlerMockSendResults
+// NotificationServiceClientMockSendExpectation specifies expectation struct of the NotificationServiceClient.Send
+type NotificationServiceClientMockSendExpectation struct {
+	mock               *NotificationServiceClientMock
+	params             *NotificationServiceClientMockSendParams
+	paramPtrs          *NotificationServiceClientMockSendParamPtrs
+	expectationOrigins NotificationServiceClientMockSendExpectationOrigins
+	results            *NotificationServiceClientMockSendResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// NotificationServiceHandlerMockSendParams contains parameters of the NotificationServiceHandler.Send
-type NotificationServiceHandlerMockSendParams struct {
+// NotificationServiceClientMockSendParams contains parameters of the NotificationServiceClient.Send
+type NotificationServiceClientMockSendParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.SendRequest]
-	pp2 *connect.ServerStream[v1.SendResponse]
 }
 
-// NotificationServiceHandlerMockSendParamPtrs contains pointers to parameters of the NotificationServiceHandler.Send
-type NotificationServiceHandlerMockSendParamPtrs struct {
+// NotificationServiceClientMockSendParamPtrs contains pointers to parameters of the NotificationServiceClient.Send
+type NotificationServiceClientMockSendParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.SendRequest]
-	pp2 **connect.ServerStream[v1.SendResponse]
 }
 
-// NotificationServiceHandlerMockSendResults contains results of the NotificationServiceHandler.Send
-type NotificationServiceHandlerMockSendResults struct {
+// NotificationServiceClientMockSendResults contains results of the NotificationServiceClient.Send
+type NotificationServiceClientMockSendResults struct {
+	pp2 *connect.ServerStreamForClient[v1.SendResponse]
 	err error
 }
 
-// NotificationServiceHandlerMockSendOrigins contains origins of expectations of the NotificationServiceHandler.Send
-type NotificationServiceHandlerMockSendExpectationOrigins struct {
+// NotificationServiceClientMockSendOrigins contains origins of expectations of the NotificationServiceClient.Send
+type NotificationServiceClientMockSendExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
-	originPp2 string
 }
 
 // Marks this method to be optional. The default behavior of any method with Return() is '1 or more', meaning
@@ -1290,26 +1198,26 @@ type NotificationServiceHandlerMockSendExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmSend *mNotificationServiceHandlerMockSend) Optional() *mNotificationServiceHandlerMockSend {
+func (mmSend *mNotificationServiceClientMockSend) Optional() *mNotificationServiceClientMockSend {
 	mmSend.optional = true
 	return mmSend
 }
 
-// Expect sets up expected params for NotificationServiceHandler.Send
-func (mmSend *mNotificationServiceHandlerMockSend) Expect(ctx context.Context, pp1 *connect.Request[v1.SendRequest], pp2 *connect.ServerStream[v1.SendResponse]) *mNotificationServiceHandlerMockSend {
+// Expect sets up expected params for NotificationServiceClient.Send
+func (mmSend *mNotificationServiceClientMockSend) Expect(ctx context.Context, pp1 *connect.Request[v1.SendRequest]) *mNotificationServiceClientMockSend {
 	if mmSend.mock.funcSend != nil {
-		mmSend.mock.t.Fatalf("NotificationServiceHandlerMock.Send mock is already set by Set")
+		mmSend.mock.t.Fatalf("NotificationServiceClientMock.Send mock is already set by Set")
 	}
 
 	if mmSend.defaultExpectation == nil {
-		mmSend.defaultExpectation = &NotificationServiceHandlerMockSendExpectation{}
+		mmSend.defaultExpectation = &NotificationServiceClientMockSendExpectation{}
 	}
 
 	if mmSend.defaultExpectation.paramPtrs != nil {
-		mmSend.mock.t.Fatalf("NotificationServiceHandlerMock.Send mock is already set by ExpectParams functions")
+		mmSend.mock.t.Fatalf("NotificationServiceClientMock.Send mock is already set by ExpectParams functions")
 	}
 
-	mmSend.defaultExpectation.params = &NotificationServiceHandlerMockSendParams{ctx, pp1, pp2}
+	mmSend.defaultExpectation.params = &NotificationServiceClientMockSendParams{ctx, pp1}
 	mmSend.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmSend.expectations {
 		if minimock.Equal(e.params, mmSend.defaultExpectation.params) {
@@ -1320,22 +1228,22 @@ func (mmSend *mNotificationServiceHandlerMockSend) Expect(ctx context.Context, p
 	return mmSend
 }
 
-// ExpectCtxParam1 sets up expected param ctx for NotificationServiceHandler.Send
-func (mmSend *mNotificationServiceHandlerMockSend) ExpectCtxParam1(ctx context.Context) *mNotificationServiceHandlerMockSend {
+// ExpectCtxParam1 sets up expected param ctx for NotificationServiceClient.Send
+func (mmSend *mNotificationServiceClientMockSend) ExpectCtxParam1(ctx context.Context) *mNotificationServiceClientMockSend {
 	if mmSend.mock.funcSend != nil {
-		mmSend.mock.t.Fatalf("NotificationServiceHandlerMock.Send mock is already set by Set")
+		mmSend.mock.t.Fatalf("NotificationServiceClientMock.Send mock is already set by Set")
 	}
 
 	if mmSend.defaultExpectation == nil {
-		mmSend.defaultExpectation = &NotificationServiceHandlerMockSendExpectation{}
+		mmSend.defaultExpectation = &NotificationServiceClientMockSendExpectation{}
 	}
 
 	if mmSend.defaultExpectation.params != nil {
-		mmSend.mock.t.Fatalf("NotificationServiceHandlerMock.Send mock is already set by Expect")
+		mmSend.mock.t.Fatalf("NotificationServiceClientMock.Send mock is already set by Expect")
 	}
 
 	if mmSend.defaultExpectation.paramPtrs == nil {
-		mmSend.defaultExpectation.paramPtrs = &NotificationServiceHandlerMockSendParamPtrs{}
+		mmSend.defaultExpectation.paramPtrs = &NotificationServiceClientMockSendParamPtrs{}
 	}
 	mmSend.defaultExpectation.paramPtrs.ctx = &ctx
 	mmSend.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -1343,22 +1251,22 @@ func (mmSend *mNotificationServiceHandlerMockSend) ExpectCtxParam1(ctx context.C
 	return mmSend
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for NotificationServiceHandler.Send
-func (mmSend *mNotificationServiceHandlerMockSend) ExpectPp1Param2(pp1 *connect.Request[v1.SendRequest]) *mNotificationServiceHandlerMockSend {
+// ExpectPp1Param2 sets up expected param pp1 for NotificationServiceClient.Send
+func (mmSend *mNotificationServiceClientMockSend) ExpectPp1Param2(pp1 *connect.Request[v1.SendRequest]) *mNotificationServiceClientMockSend {
 	if mmSend.mock.funcSend != nil {
-		mmSend.mock.t.Fatalf("NotificationServiceHandlerMock.Send mock is already set by Set")
+		mmSend.mock.t.Fatalf("NotificationServiceClientMock.Send mock is already set by Set")
 	}
 
 	if mmSend.defaultExpectation == nil {
-		mmSend.defaultExpectation = &NotificationServiceHandlerMockSendExpectation{}
+		mmSend.defaultExpectation = &NotificationServiceClientMockSendExpectation{}
 	}
 
 	if mmSend.defaultExpectation.params != nil {
-		mmSend.mock.t.Fatalf("NotificationServiceHandlerMock.Send mock is already set by Expect")
+		mmSend.mock.t.Fatalf("NotificationServiceClientMock.Send mock is already set by Expect")
 	}
 
 	if mmSend.defaultExpectation.paramPtrs == nil {
-		mmSend.defaultExpectation.paramPtrs = &NotificationServiceHandlerMockSendParamPtrs{}
+		mmSend.defaultExpectation.paramPtrs = &NotificationServiceClientMockSendParamPtrs{}
 	}
 	mmSend.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmSend.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -1366,33 +1274,10 @@ func (mmSend *mNotificationServiceHandlerMockSend) ExpectPp1Param2(pp1 *connect.
 	return mmSend
 }
 
-// ExpectPp2Param3 sets up expected param pp2 for NotificationServiceHandler.Send
-func (mmSend *mNotificationServiceHandlerMockSend) ExpectPp2Param3(pp2 *connect.ServerStream[v1.SendResponse]) *mNotificationServiceHandlerMockSend {
-	if mmSend.mock.funcSend != nil {
-		mmSend.mock.t.Fatalf("NotificationServiceHandlerMock.Send mock is already set by Set")
-	}
-
-	if mmSend.defaultExpectation == nil {
-		mmSend.defaultExpectation = &NotificationServiceHandlerMockSendExpectation{}
-	}
-
-	if mmSend.defaultExpectation.params != nil {
-		mmSend.mock.t.Fatalf("NotificationServiceHandlerMock.Send mock is already set by Expect")
-	}
-
-	if mmSend.defaultExpectation.paramPtrs == nil {
-		mmSend.defaultExpectation.paramPtrs = &NotificationServiceHandlerMockSendParamPtrs{}
-	}
-	mmSend.defaultExpectation.paramPtrs.pp2 = &pp2
-	mmSend.defaultExpectation.expectationOrigins.originPp2 = minimock.CallerInfo(1)
-
-	return mmSend
-}
-
-// Inspect accepts an inspector function that has same arguments as the NotificationServiceHandler.Send
-func (mmSend *mNotificationServiceHandlerMockSend) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.SendRequest], pp2 *connect.ServerStream[v1.SendResponse])) *mNotificationServiceHandlerMockSend {
+// Inspect accepts an inspector function that has same arguments as the NotificationServiceClient.Send
+func (mmSend *mNotificationServiceClientMockSend) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.SendRequest])) *mNotificationServiceClientMockSend {
 	if mmSend.mock.inspectFuncSend != nil {
-		mmSend.mock.t.Fatalf("Inspect function is already set for NotificationServiceHandlerMock.Send")
+		mmSend.mock.t.Fatalf("Inspect function is already set for NotificationServiceClientMock.Send")
 	}
 
 	mmSend.mock.inspectFuncSend = f
@@ -1400,28 +1285,28 @@ func (mmSend *mNotificationServiceHandlerMockSend) Inspect(f func(ctx context.Co
 	return mmSend
 }
 
-// Return sets up results that will be returned by NotificationServiceHandler.Send
-func (mmSend *mNotificationServiceHandlerMockSend) Return(err error) *NotificationServiceHandlerMock {
+// Return sets up results that will be returned by NotificationServiceClient.Send
+func (mmSend *mNotificationServiceClientMockSend) Return(pp2 *connect.ServerStreamForClient[v1.SendResponse], err error) *NotificationServiceClientMock {
 	if mmSend.mock.funcSend != nil {
-		mmSend.mock.t.Fatalf("NotificationServiceHandlerMock.Send mock is already set by Set")
+		mmSend.mock.t.Fatalf("NotificationServiceClientMock.Send mock is already set by Set")
 	}
 
 	if mmSend.defaultExpectation == nil {
-		mmSend.defaultExpectation = &NotificationServiceHandlerMockSendExpectation{mock: mmSend.mock}
+		mmSend.defaultExpectation = &NotificationServiceClientMockSendExpectation{mock: mmSend.mock}
 	}
-	mmSend.defaultExpectation.results = &NotificationServiceHandlerMockSendResults{err}
+	mmSend.defaultExpectation.results = &NotificationServiceClientMockSendResults{pp2, err}
 	mmSend.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmSend.mock
 }
 
-// Set uses given function f to mock the NotificationServiceHandler.Send method
-func (mmSend *mNotificationServiceHandlerMockSend) Set(f func(ctx context.Context, pp1 *connect.Request[v1.SendRequest], pp2 *connect.ServerStream[v1.SendResponse]) (err error)) *NotificationServiceHandlerMock {
+// Set uses given function f to mock the NotificationServiceClient.Send method
+func (mmSend *mNotificationServiceClientMockSend) Set(f func(ctx context.Context, pp1 *connect.Request[v1.SendRequest]) (pp2 *connect.ServerStreamForClient[v1.SendResponse], err error)) *NotificationServiceClientMock {
 	if mmSend.defaultExpectation != nil {
-		mmSend.mock.t.Fatalf("Default expectation is already set for the NotificationServiceHandler.Send method")
+		mmSend.mock.t.Fatalf("Default expectation is already set for the NotificationServiceClient.Send method")
 	}
 
 	if len(mmSend.expectations) > 0 {
-		mmSend.mock.t.Fatalf("Some expectations are already set for the NotificationServiceHandler.Send method")
+		mmSend.mock.t.Fatalf("Some expectations are already set for the NotificationServiceClient.Send method")
 	}
 
 	mmSend.mock.funcSend = f
@@ -1429,39 +1314,39 @@ func (mmSend *mNotificationServiceHandlerMockSend) Set(f func(ctx context.Contex
 	return mmSend.mock
 }
 
-// When sets expectation for the NotificationServiceHandler.Send which will trigger the result defined by the following
+// When sets expectation for the NotificationServiceClient.Send which will trigger the result defined by the following
 // Then helper
-func (mmSend *mNotificationServiceHandlerMockSend) When(ctx context.Context, pp1 *connect.Request[v1.SendRequest], pp2 *connect.ServerStream[v1.SendResponse]) *NotificationServiceHandlerMockSendExpectation {
+func (mmSend *mNotificationServiceClientMockSend) When(ctx context.Context, pp1 *connect.Request[v1.SendRequest]) *NotificationServiceClientMockSendExpectation {
 	if mmSend.mock.funcSend != nil {
-		mmSend.mock.t.Fatalf("NotificationServiceHandlerMock.Send mock is already set by Set")
+		mmSend.mock.t.Fatalf("NotificationServiceClientMock.Send mock is already set by Set")
 	}
 
-	expectation := &NotificationServiceHandlerMockSendExpectation{
+	expectation := &NotificationServiceClientMockSendExpectation{
 		mock:               mmSend.mock,
-		params:             &NotificationServiceHandlerMockSendParams{ctx, pp1, pp2},
-		expectationOrigins: NotificationServiceHandlerMockSendExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &NotificationServiceClientMockSendParams{ctx, pp1},
+		expectationOrigins: NotificationServiceClientMockSendExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmSend.expectations = append(mmSend.expectations, expectation)
 	return expectation
 }
 
-// Then sets up NotificationServiceHandler.Send return parameters for the expectation previously defined by the When method
-func (e *NotificationServiceHandlerMockSendExpectation) Then(err error) *NotificationServiceHandlerMock {
-	e.results = &NotificationServiceHandlerMockSendResults{err}
+// Then sets up NotificationServiceClient.Send return parameters for the expectation previously defined by the When method
+func (e *NotificationServiceClientMockSendExpectation) Then(pp2 *connect.ServerStreamForClient[v1.SendResponse], err error) *NotificationServiceClientMock {
+	e.results = &NotificationServiceClientMockSendResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times NotificationServiceHandler.Send should be invoked
-func (mmSend *mNotificationServiceHandlerMockSend) Times(n uint64) *mNotificationServiceHandlerMockSend {
+// Times sets number of times NotificationServiceClient.Send should be invoked
+func (mmSend *mNotificationServiceClientMockSend) Times(n uint64) *mNotificationServiceClientMockSend {
 	if n == 0 {
-		mmSend.mock.t.Fatalf("Times of NotificationServiceHandlerMock.Send mock can not be zero")
+		mmSend.mock.t.Fatalf("Times of NotificationServiceClientMock.Send mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmSend.expectedInvocations, n)
 	mmSend.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmSend
 }
 
-func (mmSend *mNotificationServiceHandlerMockSend) invocationsDone() bool {
+func (mmSend *mNotificationServiceClientMockSend) invocationsDone() bool {
 	if len(mmSend.expectations) == 0 && mmSend.defaultExpectation == nil && mmSend.mock.funcSend == nil {
 		return true
 	}
@@ -1472,18 +1357,18 @@ func (mmSend *mNotificationServiceHandlerMockSend) invocationsDone() bool {
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// Send implements mm_notificationv1connect.NotificationServiceHandler
-func (mmSend *NotificationServiceHandlerMock) Send(ctx context.Context, pp1 *connect.Request[v1.SendRequest], pp2 *connect.ServerStream[v1.SendResponse]) (err error) {
+// Send implements mm_notificationv1connect.NotificationServiceClient
+func (mmSend *NotificationServiceClientMock) Send(ctx context.Context, pp1 *connect.Request[v1.SendRequest]) (pp2 *connect.ServerStreamForClient[v1.SendResponse], err error) {
 	mm_atomic.AddUint64(&mmSend.beforeSendCounter, 1)
 	defer mm_atomic.AddUint64(&mmSend.afterSendCounter, 1)
 
 	mmSend.t.Helper()
 
 	if mmSend.inspectFuncSend != nil {
-		mmSend.inspectFuncSend(ctx, pp1, pp2)
+		mmSend.inspectFuncSend(ctx, pp1)
 	}
 
-	mm_params := NotificationServiceHandlerMockSendParams{ctx, pp1, pp2}
+	mm_params := NotificationServiceClientMockSendParams{ctx, pp1}
 
 	// Record call args
 	mmSend.SendMock.mutex.Lock()
@@ -1493,7 +1378,7 @@ func (mmSend *NotificationServiceHandlerMock) Send(ctx context.Context, pp1 *con
 	for _, e := range mmSend.SendMock.expectations {
 		if minimock.Equal(*e.params, mm_params) {
 			mm_atomic.AddUint64(&e.Counter, 1)
-			return e.results.err
+			return e.results.pp2, e.results.err
 		}
 	}
 
@@ -1502,59 +1387,54 @@ func (mmSend *NotificationServiceHandlerMock) Send(ctx context.Context, pp1 *con
 		mm_want := mmSend.SendMock.defaultExpectation.params
 		mm_want_ptrs := mmSend.SendMock.defaultExpectation.paramPtrs
 
-		mm_got := NotificationServiceHandlerMockSendParams{ctx, pp1, pp2}
+		mm_got := NotificationServiceClientMockSendParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmSend.t.Errorf("NotificationServiceHandlerMock.Send got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmSend.t.Errorf("NotificationServiceClientMock.Send got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmSend.SendMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmSend.t.Errorf("NotificationServiceHandlerMock.Send got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmSend.t.Errorf("NotificationServiceClientMock.Send got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmSend.SendMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
-			if mm_want_ptrs.pp2 != nil && !minimock.Equal(*mm_want_ptrs.pp2, mm_got.pp2) {
-				mmSend.t.Errorf("NotificationServiceHandlerMock.Send got unexpected parameter pp2, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
-					mmSend.SendMock.defaultExpectation.expectationOrigins.originPp2, *mm_want_ptrs.pp2, mm_got.pp2, minimock.Diff(*mm_want_ptrs.pp2, mm_got.pp2))
-			}
-
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmSend.t.Errorf("NotificationServiceHandlerMock.Send got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmSend.t.Errorf("NotificationServiceClientMock.Send got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmSend.SendMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmSend.SendMock.defaultExpectation.results
 		if mm_results == nil {
-			mmSend.t.Fatal("No results are set for the NotificationServiceHandlerMock.Send")
+			mmSend.t.Fatal("No results are set for the NotificationServiceClientMock.Send")
 		}
-		return (*mm_results).err
+		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmSend.funcSend != nil {
-		return mmSend.funcSend(ctx, pp1, pp2)
+		return mmSend.funcSend(ctx, pp1)
 	}
-	mmSend.t.Fatalf("Unexpected call to NotificationServiceHandlerMock.Send. %v %v %v", ctx, pp1, pp2)
+	mmSend.t.Fatalf("Unexpected call to NotificationServiceClientMock.Send. %v %v", ctx, pp1)
 	return
 }
 
-// SendAfterCounter returns a count of finished NotificationServiceHandlerMock.Send invocations
-func (mmSend *NotificationServiceHandlerMock) SendAfterCounter() uint64 {
+// SendAfterCounter returns a count of finished NotificationServiceClientMock.Send invocations
+func (mmSend *NotificationServiceClientMock) SendAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmSend.afterSendCounter)
 }
 
-// SendBeforeCounter returns a count of NotificationServiceHandlerMock.Send invocations
-func (mmSend *NotificationServiceHandlerMock) SendBeforeCounter() uint64 {
+// SendBeforeCounter returns a count of NotificationServiceClientMock.Send invocations
+func (mmSend *NotificationServiceClientMock) SendBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmSend.beforeSendCounter)
 }
 
-// Calls returns a list of arguments used in each call to NotificationServiceHandlerMock.Send.
+// Calls returns a list of arguments used in each call to NotificationServiceClientMock.Send.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmSend *mNotificationServiceHandlerMockSend) Calls() []*NotificationServiceHandlerMockSendParams {
+func (mmSend *mNotificationServiceClientMockSend) Calls() []*NotificationServiceClientMockSendParams {
 	mmSend.mutex.RLock()
 
-	argCopy := make([]*NotificationServiceHandlerMockSendParams, len(mmSend.callArgs))
+	argCopy := make([]*NotificationServiceClientMockSendParams, len(mmSend.callArgs))
 	copy(argCopy, mmSend.callArgs)
 
 	mmSend.mutex.RUnlock()
@@ -1564,7 +1444,7 @@ func (mmSend *mNotificationServiceHandlerMockSend) Calls() []*NotificationServic
 
 // MinimockSendDone returns true if the count of the Send invocations corresponds
 // the number of defined expectations
-func (m *NotificationServiceHandlerMock) MinimockSendDone() bool {
+func (m *NotificationServiceClientMock) MinimockSendDone() bool {
 	if m.SendMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -1580,10 +1460,10 @@ func (m *NotificationServiceHandlerMock) MinimockSendDone() bool {
 }
 
 // MinimockSendInspect logs each unmet expectation
-func (m *NotificationServiceHandlerMock) MinimockSendInspect() {
+func (m *NotificationServiceClientMock) MinimockSendInspect() {
 	for _, e := range m.SendMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to NotificationServiceHandlerMock.Send at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to NotificationServiceClientMock.Send at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -1591,66 +1471,66 @@ func (m *NotificationServiceHandlerMock) MinimockSendInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.SendMock.defaultExpectation != nil && afterSendCounter < 1 {
 		if m.SendMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to NotificationServiceHandlerMock.Send at\n%s", m.SendMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to NotificationServiceClientMock.Send at\n%s", m.SendMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to NotificationServiceHandlerMock.Send at\n%s with params: %#v", m.SendMock.defaultExpectation.expectationOrigins.origin, *m.SendMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to NotificationServiceClientMock.Send at\n%s with params: %#v", m.SendMock.defaultExpectation.expectationOrigins.origin, *m.SendMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcSend != nil && afterSendCounter < 1 {
-		m.t.Errorf("Expected call to NotificationServiceHandlerMock.Send at\n%s", m.funcSendOrigin)
+		m.t.Errorf("Expected call to NotificationServiceClientMock.Send at\n%s", m.funcSendOrigin)
 	}
 
 	if !m.SendMock.invocationsDone() && afterSendCounter > 0 {
-		m.t.Errorf("Expected %d calls to NotificationServiceHandlerMock.Send at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to NotificationServiceClientMock.Send at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.SendMock.expectedInvocations), m.SendMock.expectedInvocationsOrigin, afterSendCounter)
 	}
 }
 
-type mNotificationServiceHandlerMockStatus struct {
+type mNotificationServiceClientMockStatus struct {
 	optional           bool
-	mock               *NotificationServiceHandlerMock
-	defaultExpectation *NotificationServiceHandlerMockStatusExpectation
-	expectations       []*NotificationServiceHandlerMockStatusExpectation
+	mock               *NotificationServiceClientMock
+	defaultExpectation *NotificationServiceClientMockStatusExpectation
+	expectations       []*NotificationServiceClientMockStatusExpectation
 
-	callArgs []*NotificationServiceHandlerMockStatusParams
+	callArgs []*NotificationServiceClientMockStatusParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// NotificationServiceHandlerMockStatusExpectation specifies expectation struct of the NotificationServiceHandler.Status
-type NotificationServiceHandlerMockStatusExpectation struct {
-	mock               *NotificationServiceHandlerMock
-	params             *NotificationServiceHandlerMockStatusParams
-	paramPtrs          *NotificationServiceHandlerMockStatusParamPtrs
-	expectationOrigins NotificationServiceHandlerMockStatusExpectationOrigins
-	results            *NotificationServiceHandlerMockStatusResults
+// NotificationServiceClientMockStatusExpectation specifies expectation struct of the NotificationServiceClient.Status
+type NotificationServiceClientMockStatusExpectation struct {
+	mock               *NotificationServiceClientMock
+	params             *NotificationServiceClientMockStatusParams
+	paramPtrs          *NotificationServiceClientMockStatusParamPtrs
+	expectationOrigins NotificationServiceClientMockStatusExpectationOrigins
+	results            *NotificationServiceClientMockStatusResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// NotificationServiceHandlerMockStatusParams contains parameters of the NotificationServiceHandler.Status
-type NotificationServiceHandlerMockStatusParams struct {
+// NotificationServiceClientMockStatusParams contains parameters of the NotificationServiceClient.Status
+type NotificationServiceClientMockStatusParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v11.StatusRequest]
 }
 
-// NotificationServiceHandlerMockStatusParamPtrs contains pointers to parameters of the NotificationServiceHandler.Status
-type NotificationServiceHandlerMockStatusParamPtrs struct {
+// NotificationServiceClientMockStatusParamPtrs contains pointers to parameters of the NotificationServiceClient.Status
+type NotificationServiceClientMockStatusParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v11.StatusRequest]
 }
 
-// NotificationServiceHandlerMockStatusResults contains results of the NotificationServiceHandler.Status
-type NotificationServiceHandlerMockStatusResults struct {
+// NotificationServiceClientMockStatusResults contains results of the NotificationServiceClient.Status
+type NotificationServiceClientMockStatusResults struct {
 	pp2 *connect.Response[v11.StatusResponse]
 	err error
 }
 
-// NotificationServiceHandlerMockStatusOrigins contains origins of expectations of the NotificationServiceHandler.Status
-type NotificationServiceHandlerMockStatusExpectationOrigins struct {
+// NotificationServiceClientMockStatusOrigins contains origins of expectations of the NotificationServiceClient.Status
+type NotificationServiceClientMockStatusExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -1661,26 +1541,26 @@ type NotificationServiceHandlerMockStatusExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmStatus *mNotificationServiceHandlerMockStatus) Optional() *mNotificationServiceHandlerMockStatus {
+func (mmStatus *mNotificationServiceClientMockStatus) Optional() *mNotificationServiceClientMockStatus {
 	mmStatus.optional = true
 	return mmStatus
 }
 
-// Expect sets up expected params for NotificationServiceHandler.Status
-func (mmStatus *mNotificationServiceHandlerMockStatus) Expect(ctx context.Context, pp1 *connect.Request[v11.StatusRequest]) *mNotificationServiceHandlerMockStatus {
+// Expect sets up expected params for NotificationServiceClient.Status
+func (mmStatus *mNotificationServiceClientMockStatus) Expect(ctx context.Context, pp1 *connect.Request[v11.StatusRequest]) *mNotificationServiceClientMockStatus {
 	if mmStatus.mock.funcStatus != nil {
-		mmStatus.mock.t.Fatalf("NotificationServiceHandlerMock.Status mock is already set by Set")
+		mmStatus.mock.t.Fatalf("NotificationServiceClientMock.Status mock is already set by Set")
 	}
 
 	if mmStatus.defaultExpectation == nil {
-		mmStatus.defaultExpectation = &NotificationServiceHandlerMockStatusExpectation{}
+		mmStatus.defaultExpectation = &NotificationServiceClientMockStatusExpectation{}
 	}
 
 	if mmStatus.defaultExpectation.paramPtrs != nil {
-		mmStatus.mock.t.Fatalf("NotificationServiceHandlerMock.Status mock is already set by ExpectParams functions")
+		mmStatus.mock.t.Fatalf("NotificationServiceClientMock.Status mock is already set by ExpectParams functions")
 	}
 
-	mmStatus.defaultExpectation.params = &NotificationServiceHandlerMockStatusParams{ctx, pp1}
+	mmStatus.defaultExpectation.params = &NotificationServiceClientMockStatusParams{ctx, pp1}
 	mmStatus.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmStatus.expectations {
 		if minimock.Equal(e.params, mmStatus.defaultExpectation.params) {
@@ -1691,22 +1571,22 @@ func (mmStatus *mNotificationServiceHandlerMockStatus) Expect(ctx context.Contex
 	return mmStatus
 }
 
-// ExpectCtxParam1 sets up expected param ctx for NotificationServiceHandler.Status
-func (mmStatus *mNotificationServiceHandlerMockStatus) ExpectCtxParam1(ctx context.Context) *mNotificationServiceHandlerMockStatus {
+// ExpectCtxParam1 sets up expected param ctx for NotificationServiceClient.Status
+func (mmStatus *mNotificationServiceClientMockStatus) ExpectCtxParam1(ctx context.Context) *mNotificationServiceClientMockStatus {
 	if mmStatus.mock.funcStatus != nil {
-		mmStatus.mock.t.Fatalf("NotificationServiceHandlerMock.Status mock is already set by Set")
+		mmStatus.mock.t.Fatalf("NotificationServiceClientMock.Status mock is already set by Set")
 	}
 
 	if mmStatus.defaultExpectation == nil {
-		mmStatus.defaultExpectation = &NotificationServiceHandlerMockStatusExpectation{}
+		mmStatus.defaultExpectation = &NotificationServiceClientMockStatusExpectation{}
 	}
 
 	if mmStatus.defaultExpectation.params != nil {
-		mmStatus.mock.t.Fatalf("NotificationServiceHandlerMock.Status mock is already set by Expect")
+		mmStatus.mock.t.Fatalf("NotificationServiceClientMock.Status mock is already set by Expect")
 	}
 
 	if mmStatus.defaultExpectation.paramPtrs == nil {
-		mmStatus.defaultExpectation.paramPtrs = &NotificationServiceHandlerMockStatusParamPtrs{}
+		mmStatus.defaultExpectation.paramPtrs = &NotificationServiceClientMockStatusParamPtrs{}
 	}
 	mmStatus.defaultExpectation.paramPtrs.ctx = &ctx
 	mmStatus.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -1714,22 +1594,22 @@ func (mmStatus *mNotificationServiceHandlerMockStatus) ExpectCtxParam1(ctx conte
 	return mmStatus
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for NotificationServiceHandler.Status
-func (mmStatus *mNotificationServiceHandlerMockStatus) ExpectPp1Param2(pp1 *connect.Request[v11.StatusRequest]) *mNotificationServiceHandlerMockStatus {
+// ExpectPp1Param2 sets up expected param pp1 for NotificationServiceClient.Status
+func (mmStatus *mNotificationServiceClientMockStatus) ExpectPp1Param2(pp1 *connect.Request[v11.StatusRequest]) *mNotificationServiceClientMockStatus {
 	if mmStatus.mock.funcStatus != nil {
-		mmStatus.mock.t.Fatalf("NotificationServiceHandlerMock.Status mock is already set by Set")
+		mmStatus.mock.t.Fatalf("NotificationServiceClientMock.Status mock is already set by Set")
 	}
 
 	if mmStatus.defaultExpectation == nil {
-		mmStatus.defaultExpectation = &NotificationServiceHandlerMockStatusExpectation{}
+		mmStatus.defaultExpectation = &NotificationServiceClientMockStatusExpectation{}
 	}
 
 	if mmStatus.defaultExpectation.params != nil {
-		mmStatus.mock.t.Fatalf("NotificationServiceHandlerMock.Status mock is already set by Expect")
+		mmStatus.mock.t.Fatalf("NotificationServiceClientMock.Status mock is already set by Expect")
 	}
 
 	if mmStatus.defaultExpectation.paramPtrs == nil {
-		mmStatus.defaultExpectation.paramPtrs = &NotificationServiceHandlerMockStatusParamPtrs{}
+		mmStatus.defaultExpectation.paramPtrs = &NotificationServiceClientMockStatusParamPtrs{}
 	}
 	mmStatus.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmStatus.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -1737,10 +1617,10 @@ func (mmStatus *mNotificationServiceHandlerMockStatus) ExpectPp1Param2(pp1 *conn
 	return mmStatus
 }
 
-// Inspect accepts an inspector function that has same arguments as the NotificationServiceHandler.Status
-func (mmStatus *mNotificationServiceHandlerMockStatus) Inspect(f func(ctx context.Context, pp1 *connect.Request[v11.StatusRequest])) *mNotificationServiceHandlerMockStatus {
+// Inspect accepts an inspector function that has same arguments as the NotificationServiceClient.Status
+func (mmStatus *mNotificationServiceClientMockStatus) Inspect(f func(ctx context.Context, pp1 *connect.Request[v11.StatusRequest])) *mNotificationServiceClientMockStatus {
 	if mmStatus.mock.inspectFuncStatus != nil {
-		mmStatus.mock.t.Fatalf("Inspect function is already set for NotificationServiceHandlerMock.Status")
+		mmStatus.mock.t.Fatalf("Inspect function is already set for NotificationServiceClientMock.Status")
 	}
 
 	mmStatus.mock.inspectFuncStatus = f
@@ -1748,28 +1628,28 @@ func (mmStatus *mNotificationServiceHandlerMockStatus) Inspect(f func(ctx contex
 	return mmStatus
 }
 
-// Return sets up results that will be returned by NotificationServiceHandler.Status
-func (mmStatus *mNotificationServiceHandlerMockStatus) Return(pp2 *connect.Response[v11.StatusResponse], err error) *NotificationServiceHandlerMock {
+// Return sets up results that will be returned by NotificationServiceClient.Status
+func (mmStatus *mNotificationServiceClientMockStatus) Return(pp2 *connect.Response[v11.StatusResponse], err error) *NotificationServiceClientMock {
 	if mmStatus.mock.funcStatus != nil {
-		mmStatus.mock.t.Fatalf("NotificationServiceHandlerMock.Status mock is already set by Set")
+		mmStatus.mock.t.Fatalf("NotificationServiceClientMock.Status mock is already set by Set")
 	}
 
 	if mmStatus.defaultExpectation == nil {
-		mmStatus.defaultExpectation = &NotificationServiceHandlerMockStatusExpectation{mock: mmStatus.mock}
+		mmStatus.defaultExpectation = &NotificationServiceClientMockStatusExpectation{mock: mmStatus.mock}
 	}
-	mmStatus.defaultExpectation.results = &NotificationServiceHandlerMockStatusResults{pp2, err}
+	mmStatus.defaultExpectation.results = &NotificationServiceClientMockStatusResults{pp2, err}
 	mmStatus.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmStatus.mock
 }
 
-// Set uses given function f to mock the NotificationServiceHandler.Status method
-func (mmStatus *mNotificationServiceHandlerMockStatus) Set(f func(ctx context.Context, pp1 *connect.Request[v11.StatusRequest]) (pp2 *connect.Response[v11.StatusResponse], err error)) *NotificationServiceHandlerMock {
+// Set uses given function f to mock the NotificationServiceClient.Status method
+func (mmStatus *mNotificationServiceClientMockStatus) Set(f func(ctx context.Context, pp1 *connect.Request[v11.StatusRequest]) (pp2 *connect.Response[v11.StatusResponse], err error)) *NotificationServiceClientMock {
 	if mmStatus.defaultExpectation != nil {
-		mmStatus.mock.t.Fatalf("Default expectation is already set for the NotificationServiceHandler.Status method")
+		mmStatus.mock.t.Fatalf("Default expectation is already set for the NotificationServiceClient.Status method")
 	}
 
 	if len(mmStatus.expectations) > 0 {
-		mmStatus.mock.t.Fatalf("Some expectations are already set for the NotificationServiceHandler.Status method")
+		mmStatus.mock.t.Fatalf("Some expectations are already set for the NotificationServiceClient.Status method")
 	}
 
 	mmStatus.mock.funcStatus = f
@@ -1777,39 +1657,39 @@ func (mmStatus *mNotificationServiceHandlerMockStatus) Set(f func(ctx context.Co
 	return mmStatus.mock
 }
 
-// When sets expectation for the NotificationServiceHandler.Status which will trigger the result defined by the following
+// When sets expectation for the NotificationServiceClient.Status which will trigger the result defined by the following
 // Then helper
-func (mmStatus *mNotificationServiceHandlerMockStatus) When(ctx context.Context, pp1 *connect.Request[v11.StatusRequest]) *NotificationServiceHandlerMockStatusExpectation {
+func (mmStatus *mNotificationServiceClientMockStatus) When(ctx context.Context, pp1 *connect.Request[v11.StatusRequest]) *NotificationServiceClientMockStatusExpectation {
 	if mmStatus.mock.funcStatus != nil {
-		mmStatus.mock.t.Fatalf("NotificationServiceHandlerMock.Status mock is already set by Set")
+		mmStatus.mock.t.Fatalf("NotificationServiceClientMock.Status mock is already set by Set")
 	}
 
-	expectation := &NotificationServiceHandlerMockStatusExpectation{
+	expectation := &NotificationServiceClientMockStatusExpectation{
 		mock:               mmStatus.mock,
-		params:             &NotificationServiceHandlerMockStatusParams{ctx, pp1},
-		expectationOrigins: NotificationServiceHandlerMockStatusExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &NotificationServiceClientMockStatusParams{ctx, pp1},
+		expectationOrigins: NotificationServiceClientMockStatusExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmStatus.expectations = append(mmStatus.expectations, expectation)
 	return expectation
 }
 
-// Then sets up NotificationServiceHandler.Status return parameters for the expectation previously defined by the When method
-func (e *NotificationServiceHandlerMockStatusExpectation) Then(pp2 *connect.Response[v11.StatusResponse], err error) *NotificationServiceHandlerMock {
-	e.results = &NotificationServiceHandlerMockStatusResults{pp2, err}
+// Then sets up NotificationServiceClient.Status return parameters for the expectation previously defined by the When method
+func (e *NotificationServiceClientMockStatusExpectation) Then(pp2 *connect.Response[v11.StatusResponse], err error) *NotificationServiceClientMock {
+	e.results = &NotificationServiceClientMockStatusResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times NotificationServiceHandler.Status should be invoked
-func (mmStatus *mNotificationServiceHandlerMockStatus) Times(n uint64) *mNotificationServiceHandlerMockStatus {
+// Times sets number of times NotificationServiceClient.Status should be invoked
+func (mmStatus *mNotificationServiceClientMockStatus) Times(n uint64) *mNotificationServiceClientMockStatus {
 	if n == 0 {
-		mmStatus.mock.t.Fatalf("Times of NotificationServiceHandlerMock.Status mock can not be zero")
+		mmStatus.mock.t.Fatalf("Times of NotificationServiceClientMock.Status mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmStatus.expectedInvocations, n)
 	mmStatus.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmStatus
 }
 
-func (mmStatus *mNotificationServiceHandlerMockStatus) invocationsDone() bool {
+func (mmStatus *mNotificationServiceClientMockStatus) invocationsDone() bool {
 	if len(mmStatus.expectations) == 0 && mmStatus.defaultExpectation == nil && mmStatus.mock.funcStatus == nil {
 		return true
 	}
@@ -1820,8 +1700,8 @@ func (mmStatus *mNotificationServiceHandlerMockStatus) invocationsDone() bool {
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// Status implements mm_notificationv1connect.NotificationServiceHandler
-func (mmStatus *NotificationServiceHandlerMock) Status(ctx context.Context, pp1 *connect.Request[v11.StatusRequest]) (pp2 *connect.Response[v11.StatusResponse], err error) {
+// Status implements mm_notificationv1connect.NotificationServiceClient
+func (mmStatus *NotificationServiceClientMock) Status(ctx context.Context, pp1 *connect.Request[v11.StatusRequest]) (pp2 *connect.Response[v11.StatusResponse], err error) {
 	mm_atomic.AddUint64(&mmStatus.beforeStatusCounter, 1)
 	defer mm_atomic.AddUint64(&mmStatus.afterStatusCounter, 1)
 
@@ -1831,7 +1711,7 @@ func (mmStatus *NotificationServiceHandlerMock) Status(ctx context.Context, pp1 
 		mmStatus.inspectFuncStatus(ctx, pp1)
 	}
 
-	mm_params := NotificationServiceHandlerMockStatusParams{ctx, pp1}
+	mm_params := NotificationServiceClientMockStatusParams{ctx, pp1}
 
 	// Record call args
 	mmStatus.StatusMock.mutex.Lock()
@@ -1850,54 +1730,54 @@ func (mmStatus *NotificationServiceHandlerMock) Status(ctx context.Context, pp1 
 		mm_want := mmStatus.StatusMock.defaultExpectation.params
 		mm_want_ptrs := mmStatus.StatusMock.defaultExpectation.paramPtrs
 
-		mm_got := NotificationServiceHandlerMockStatusParams{ctx, pp1}
+		mm_got := NotificationServiceClientMockStatusParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmStatus.t.Errorf("NotificationServiceHandlerMock.Status got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmStatus.t.Errorf("NotificationServiceClientMock.Status got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmStatus.StatusMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmStatus.t.Errorf("NotificationServiceHandlerMock.Status got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmStatus.t.Errorf("NotificationServiceClientMock.Status got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmStatus.StatusMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmStatus.t.Errorf("NotificationServiceHandlerMock.Status got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmStatus.t.Errorf("NotificationServiceClientMock.Status got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmStatus.StatusMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmStatus.StatusMock.defaultExpectation.results
 		if mm_results == nil {
-			mmStatus.t.Fatal("No results are set for the NotificationServiceHandlerMock.Status")
+			mmStatus.t.Fatal("No results are set for the NotificationServiceClientMock.Status")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmStatus.funcStatus != nil {
 		return mmStatus.funcStatus(ctx, pp1)
 	}
-	mmStatus.t.Fatalf("Unexpected call to NotificationServiceHandlerMock.Status. %v %v", ctx, pp1)
+	mmStatus.t.Fatalf("Unexpected call to NotificationServiceClientMock.Status. %v %v", ctx, pp1)
 	return
 }
 
-// StatusAfterCounter returns a count of finished NotificationServiceHandlerMock.Status invocations
-func (mmStatus *NotificationServiceHandlerMock) StatusAfterCounter() uint64 {
+// StatusAfterCounter returns a count of finished NotificationServiceClientMock.Status invocations
+func (mmStatus *NotificationServiceClientMock) StatusAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmStatus.afterStatusCounter)
 }
 
-// StatusBeforeCounter returns a count of NotificationServiceHandlerMock.Status invocations
-func (mmStatus *NotificationServiceHandlerMock) StatusBeforeCounter() uint64 {
+// StatusBeforeCounter returns a count of NotificationServiceClientMock.Status invocations
+func (mmStatus *NotificationServiceClientMock) StatusBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmStatus.beforeStatusCounter)
 }
 
-// Calls returns a list of arguments used in each call to NotificationServiceHandlerMock.Status.
+// Calls returns a list of arguments used in each call to NotificationServiceClientMock.Status.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmStatus *mNotificationServiceHandlerMockStatus) Calls() []*NotificationServiceHandlerMockStatusParams {
+func (mmStatus *mNotificationServiceClientMockStatus) Calls() []*NotificationServiceClientMockStatusParams {
 	mmStatus.mutex.RLock()
 
-	argCopy := make([]*NotificationServiceHandlerMockStatusParams, len(mmStatus.callArgs))
+	argCopy := make([]*NotificationServiceClientMockStatusParams, len(mmStatus.callArgs))
 	copy(argCopy, mmStatus.callArgs)
 
 	mmStatus.mutex.RUnlock()
@@ -1907,7 +1787,7 @@ func (mmStatus *mNotificationServiceHandlerMockStatus) Calls() []*NotificationSe
 
 // MinimockStatusDone returns true if the count of the Status invocations corresponds
 // the number of defined expectations
-func (m *NotificationServiceHandlerMock) MinimockStatusDone() bool {
+func (m *NotificationServiceClientMock) MinimockStatusDone() bool {
 	if m.StatusMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -1923,10 +1803,10 @@ func (m *NotificationServiceHandlerMock) MinimockStatusDone() bool {
 }
 
 // MinimockStatusInspect logs each unmet expectation
-func (m *NotificationServiceHandlerMock) MinimockStatusInspect() {
+func (m *NotificationServiceClientMock) MinimockStatusInspect() {
 	for _, e := range m.StatusMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to NotificationServiceHandlerMock.Status at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to NotificationServiceClientMock.Status at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -1934,66 +1814,66 @@ func (m *NotificationServiceHandlerMock) MinimockStatusInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.StatusMock.defaultExpectation != nil && afterStatusCounter < 1 {
 		if m.StatusMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to NotificationServiceHandlerMock.Status at\n%s", m.StatusMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to NotificationServiceClientMock.Status at\n%s", m.StatusMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to NotificationServiceHandlerMock.Status at\n%s with params: %#v", m.StatusMock.defaultExpectation.expectationOrigins.origin, *m.StatusMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to NotificationServiceClientMock.Status at\n%s with params: %#v", m.StatusMock.defaultExpectation.expectationOrigins.origin, *m.StatusMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcStatus != nil && afterStatusCounter < 1 {
-		m.t.Errorf("Expected call to NotificationServiceHandlerMock.Status at\n%s", m.funcStatusOrigin)
+		m.t.Errorf("Expected call to NotificationServiceClientMock.Status at\n%s", m.funcStatusOrigin)
 	}
 
 	if !m.StatusMock.invocationsDone() && afterStatusCounter > 0 {
-		m.t.Errorf("Expected %d calls to NotificationServiceHandlerMock.Status at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to NotificationServiceClientMock.Status at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.StatusMock.expectedInvocations), m.StatusMock.expectedInvocationsOrigin, afterStatusCounter)
 	}
 }
 
-type mNotificationServiceHandlerMockStatusUpdate struct {
+type mNotificationServiceClientMockStatusUpdate struct {
 	optional           bool
-	mock               *NotificationServiceHandlerMock
-	defaultExpectation *NotificationServiceHandlerMockStatusUpdateExpectation
-	expectations       []*NotificationServiceHandlerMockStatusUpdateExpectation
+	mock               *NotificationServiceClientMock
+	defaultExpectation *NotificationServiceClientMockStatusUpdateExpectation
+	expectations       []*NotificationServiceClientMockStatusUpdateExpectation
 
-	callArgs []*NotificationServiceHandlerMockStatusUpdateParams
+	callArgs []*NotificationServiceClientMockStatusUpdateParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// NotificationServiceHandlerMockStatusUpdateExpectation specifies expectation struct of the NotificationServiceHandler.StatusUpdate
-type NotificationServiceHandlerMockStatusUpdateExpectation struct {
-	mock               *NotificationServiceHandlerMock
-	params             *NotificationServiceHandlerMockStatusUpdateParams
-	paramPtrs          *NotificationServiceHandlerMockStatusUpdateParamPtrs
-	expectationOrigins NotificationServiceHandlerMockStatusUpdateExpectationOrigins
-	results            *NotificationServiceHandlerMockStatusUpdateResults
+// NotificationServiceClientMockStatusUpdateExpectation specifies expectation struct of the NotificationServiceClient.StatusUpdate
+type NotificationServiceClientMockStatusUpdateExpectation struct {
+	mock               *NotificationServiceClientMock
+	params             *NotificationServiceClientMockStatusUpdateParams
+	paramPtrs          *NotificationServiceClientMockStatusUpdateParamPtrs
+	expectationOrigins NotificationServiceClientMockStatusUpdateExpectationOrigins
+	results            *NotificationServiceClientMockStatusUpdateResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// NotificationServiceHandlerMockStatusUpdateParams contains parameters of the NotificationServiceHandler.StatusUpdate
-type NotificationServiceHandlerMockStatusUpdateParams struct {
+// NotificationServiceClientMockStatusUpdateParams contains parameters of the NotificationServiceClient.StatusUpdate
+type NotificationServiceClientMockStatusUpdateParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v11.StatusUpdateRequest]
 }
 
-// NotificationServiceHandlerMockStatusUpdateParamPtrs contains pointers to parameters of the NotificationServiceHandler.StatusUpdate
-type NotificationServiceHandlerMockStatusUpdateParamPtrs struct {
+// NotificationServiceClientMockStatusUpdateParamPtrs contains pointers to parameters of the NotificationServiceClient.StatusUpdate
+type NotificationServiceClientMockStatusUpdateParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v11.StatusUpdateRequest]
 }
 
-// NotificationServiceHandlerMockStatusUpdateResults contains results of the NotificationServiceHandler.StatusUpdate
-type NotificationServiceHandlerMockStatusUpdateResults struct {
+// NotificationServiceClientMockStatusUpdateResults contains results of the NotificationServiceClient.StatusUpdate
+type NotificationServiceClientMockStatusUpdateResults struct {
 	pp2 *connect.Response[v11.StatusUpdateResponse]
 	err error
 }
 
-// NotificationServiceHandlerMockStatusUpdateOrigins contains origins of expectations of the NotificationServiceHandler.StatusUpdate
-type NotificationServiceHandlerMockStatusUpdateExpectationOrigins struct {
+// NotificationServiceClientMockStatusUpdateOrigins contains origins of expectations of the NotificationServiceClient.StatusUpdate
+type NotificationServiceClientMockStatusUpdateExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -2004,26 +1884,26 @@ type NotificationServiceHandlerMockStatusUpdateExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmStatusUpdate *mNotificationServiceHandlerMockStatusUpdate) Optional() *mNotificationServiceHandlerMockStatusUpdate {
+func (mmStatusUpdate *mNotificationServiceClientMockStatusUpdate) Optional() *mNotificationServiceClientMockStatusUpdate {
 	mmStatusUpdate.optional = true
 	return mmStatusUpdate
 }
 
-// Expect sets up expected params for NotificationServiceHandler.StatusUpdate
-func (mmStatusUpdate *mNotificationServiceHandlerMockStatusUpdate) Expect(ctx context.Context, pp1 *connect.Request[v11.StatusUpdateRequest]) *mNotificationServiceHandlerMockStatusUpdate {
+// Expect sets up expected params for NotificationServiceClient.StatusUpdate
+func (mmStatusUpdate *mNotificationServiceClientMockStatusUpdate) Expect(ctx context.Context, pp1 *connect.Request[v11.StatusUpdateRequest]) *mNotificationServiceClientMockStatusUpdate {
 	if mmStatusUpdate.mock.funcStatusUpdate != nil {
-		mmStatusUpdate.mock.t.Fatalf("NotificationServiceHandlerMock.StatusUpdate mock is already set by Set")
+		mmStatusUpdate.mock.t.Fatalf("NotificationServiceClientMock.StatusUpdate mock is already set by Set")
 	}
 
 	if mmStatusUpdate.defaultExpectation == nil {
-		mmStatusUpdate.defaultExpectation = &NotificationServiceHandlerMockStatusUpdateExpectation{}
+		mmStatusUpdate.defaultExpectation = &NotificationServiceClientMockStatusUpdateExpectation{}
 	}
 
 	if mmStatusUpdate.defaultExpectation.paramPtrs != nil {
-		mmStatusUpdate.mock.t.Fatalf("NotificationServiceHandlerMock.StatusUpdate mock is already set by ExpectParams functions")
+		mmStatusUpdate.mock.t.Fatalf("NotificationServiceClientMock.StatusUpdate mock is already set by ExpectParams functions")
 	}
 
-	mmStatusUpdate.defaultExpectation.params = &NotificationServiceHandlerMockStatusUpdateParams{ctx, pp1}
+	mmStatusUpdate.defaultExpectation.params = &NotificationServiceClientMockStatusUpdateParams{ctx, pp1}
 	mmStatusUpdate.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmStatusUpdate.expectations {
 		if minimock.Equal(e.params, mmStatusUpdate.defaultExpectation.params) {
@@ -2034,22 +1914,22 @@ func (mmStatusUpdate *mNotificationServiceHandlerMockStatusUpdate) Expect(ctx co
 	return mmStatusUpdate
 }
 
-// ExpectCtxParam1 sets up expected param ctx for NotificationServiceHandler.StatusUpdate
-func (mmStatusUpdate *mNotificationServiceHandlerMockStatusUpdate) ExpectCtxParam1(ctx context.Context) *mNotificationServiceHandlerMockStatusUpdate {
+// ExpectCtxParam1 sets up expected param ctx for NotificationServiceClient.StatusUpdate
+func (mmStatusUpdate *mNotificationServiceClientMockStatusUpdate) ExpectCtxParam1(ctx context.Context) *mNotificationServiceClientMockStatusUpdate {
 	if mmStatusUpdate.mock.funcStatusUpdate != nil {
-		mmStatusUpdate.mock.t.Fatalf("NotificationServiceHandlerMock.StatusUpdate mock is already set by Set")
+		mmStatusUpdate.mock.t.Fatalf("NotificationServiceClientMock.StatusUpdate mock is already set by Set")
 	}
 
 	if mmStatusUpdate.defaultExpectation == nil {
-		mmStatusUpdate.defaultExpectation = &NotificationServiceHandlerMockStatusUpdateExpectation{}
+		mmStatusUpdate.defaultExpectation = &NotificationServiceClientMockStatusUpdateExpectation{}
 	}
 
 	if mmStatusUpdate.defaultExpectation.params != nil {
-		mmStatusUpdate.mock.t.Fatalf("NotificationServiceHandlerMock.StatusUpdate mock is already set by Expect")
+		mmStatusUpdate.mock.t.Fatalf("NotificationServiceClientMock.StatusUpdate mock is already set by Expect")
 	}
 
 	if mmStatusUpdate.defaultExpectation.paramPtrs == nil {
-		mmStatusUpdate.defaultExpectation.paramPtrs = &NotificationServiceHandlerMockStatusUpdateParamPtrs{}
+		mmStatusUpdate.defaultExpectation.paramPtrs = &NotificationServiceClientMockStatusUpdateParamPtrs{}
 	}
 	mmStatusUpdate.defaultExpectation.paramPtrs.ctx = &ctx
 	mmStatusUpdate.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -2057,22 +1937,22 @@ func (mmStatusUpdate *mNotificationServiceHandlerMockStatusUpdate) ExpectCtxPara
 	return mmStatusUpdate
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for NotificationServiceHandler.StatusUpdate
-func (mmStatusUpdate *mNotificationServiceHandlerMockStatusUpdate) ExpectPp1Param2(pp1 *connect.Request[v11.StatusUpdateRequest]) *mNotificationServiceHandlerMockStatusUpdate {
+// ExpectPp1Param2 sets up expected param pp1 for NotificationServiceClient.StatusUpdate
+func (mmStatusUpdate *mNotificationServiceClientMockStatusUpdate) ExpectPp1Param2(pp1 *connect.Request[v11.StatusUpdateRequest]) *mNotificationServiceClientMockStatusUpdate {
 	if mmStatusUpdate.mock.funcStatusUpdate != nil {
-		mmStatusUpdate.mock.t.Fatalf("NotificationServiceHandlerMock.StatusUpdate mock is already set by Set")
+		mmStatusUpdate.mock.t.Fatalf("NotificationServiceClientMock.StatusUpdate mock is already set by Set")
 	}
 
 	if mmStatusUpdate.defaultExpectation == nil {
-		mmStatusUpdate.defaultExpectation = &NotificationServiceHandlerMockStatusUpdateExpectation{}
+		mmStatusUpdate.defaultExpectation = &NotificationServiceClientMockStatusUpdateExpectation{}
 	}
 
 	if mmStatusUpdate.defaultExpectation.params != nil {
-		mmStatusUpdate.mock.t.Fatalf("NotificationServiceHandlerMock.StatusUpdate mock is already set by Expect")
+		mmStatusUpdate.mock.t.Fatalf("NotificationServiceClientMock.StatusUpdate mock is already set by Expect")
 	}
 
 	if mmStatusUpdate.defaultExpectation.paramPtrs == nil {
-		mmStatusUpdate.defaultExpectation.paramPtrs = &NotificationServiceHandlerMockStatusUpdateParamPtrs{}
+		mmStatusUpdate.defaultExpectation.paramPtrs = &NotificationServiceClientMockStatusUpdateParamPtrs{}
 	}
 	mmStatusUpdate.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmStatusUpdate.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -2080,10 +1960,10 @@ func (mmStatusUpdate *mNotificationServiceHandlerMockStatusUpdate) ExpectPp1Para
 	return mmStatusUpdate
 }
 
-// Inspect accepts an inspector function that has same arguments as the NotificationServiceHandler.StatusUpdate
-func (mmStatusUpdate *mNotificationServiceHandlerMockStatusUpdate) Inspect(f func(ctx context.Context, pp1 *connect.Request[v11.StatusUpdateRequest])) *mNotificationServiceHandlerMockStatusUpdate {
+// Inspect accepts an inspector function that has same arguments as the NotificationServiceClient.StatusUpdate
+func (mmStatusUpdate *mNotificationServiceClientMockStatusUpdate) Inspect(f func(ctx context.Context, pp1 *connect.Request[v11.StatusUpdateRequest])) *mNotificationServiceClientMockStatusUpdate {
 	if mmStatusUpdate.mock.inspectFuncStatusUpdate != nil {
-		mmStatusUpdate.mock.t.Fatalf("Inspect function is already set for NotificationServiceHandlerMock.StatusUpdate")
+		mmStatusUpdate.mock.t.Fatalf("Inspect function is already set for NotificationServiceClientMock.StatusUpdate")
 	}
 
 	mmStatusUpdate.mock.inspectFuncStatusUpdate = f
@@ -2091,28 +1971,28 @@ func (mmStatusUpdate *mNotificationServiceHandlerMockStatusUpdate) Inspect(f fun
 	return mmStatusUpdate
 }
 
-// Return sets up results that will be returned by NotificationServiceHandler.StatusUpdate
-func (mmStatusUpdate *mNotificationServiceHandlerMockStatusUpdate) Return(pp2 *connect.Response[v11.StatusUpdateResponse], err error) *NotificationServiceHandlerMock {
+// Return sets up results that will be returned by NotificationServiceClient.StatusUpdate
+func (mmStatusUpdate *mNotificationServiceClientMockStatusUpdate) Return(pp2 *connect.Response[v11.StatusUpdateResponse], err error) *NotificationServiceClientMock {
 	if mmStatusUpdate.mock.funcStatusUpdate != nil {
-		mmStatusUpdate.mock.t.Fatalf("NotificationServiceHandlerMock.StatusUpdate mock is already set by Set")
+		mmStatusUpdate.mock.t.Fatalf("NotificationServiceClientMock.StatusUpdate mock is already set by Set")
 	}
 
 	if mmStatusUpdate.defaultExpectation == nil {
-		mmStatusUpdate.defaultExpectation = &NotificationServiceHandlerMockStatusUpdateExpectation{mock: mmStatusUpdate.mock}
+		mmStatusUpdate.defaultExpectation = &NotificationServiceClientMockStatusUpdateExpectation{mock: mmStatusUpdate.mock}
 	}
-	mmStatusUpdate.defaultExpectation.results = &NotificationServiceHandlerMockStatusUpdateResults{pp2, err}
+	mmStatusUpdate.defaultExpectation.results = &NotificationServiceClientMockStatusUpdateResults{pp2, err}
 	mmStatusUpdate.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmStatusUpdate.mock
 }
 
-// Set uses given function f to mock the NotificationServiceHandler.StatusUpdate method
-func (mmStatusUpdate *mNotificationServiceHandlerMockStatusUpdate) Set(f func(ctx context.Context, pp1 *connect.Request[v11.StatusUpdateRequest]) (pp2 *connect.Response[v11.StatusUpdateResponse], err error)) *NotificationServiceHandlerMock {
+// Set uses given function f to mock the NotificationServiceClient.StatusUpdate method
+func (mmStatusUpdate *mNotificationServiceClientMockStatusUpdate) Set(f func(ctx context.Context, pp1 *connect.Request[v11.StatusUpdateRequest]) (pp2 *connect.Response[v11.StatusUpdateResponse], err error)) *NotificationServiceClientMock {
 	if mmStatusUpdate.defaultExpectation != nil {
-		mmStatusUpdate.mock.t.Fatalf("Default expectation is already set for the NotificationServiceHandler.StatusUpdate method")
+		mmStatusUpdate.mock.t.Fatalf("Default expectation is already set for the NotificationServiceClient.StatusUpdate method")
 	}
 
 	if len(mmStatusUpdate.expectations) > 0 {
-		mmStatusUpdate.mock.t.Fatalf("Some expectations are already set for the NotificationServiceHandler.StatusUpdate method")
+		mmStatusUpdate.mock.t.Fatalf("Some expectations are already set for the NotificationServiceClient.StatusUpdate method")
 	}
 
 	mmStatusUpdate.mock.funcStatusUpdate = f
@@ -2120,39 +2000,39 @@ func (mmStatusUpdate *mNotificationServiceHandlerMockStatusUpdate) Set(f func(ct
 	return mmStatusUpdate.mock
 }
 
-// When sets expectation for the NotificationServiceHandler.StatusUpdate which will trigger the result defined by the following
+// When sets expectation for the NotificationServiceClient.StatusUpdate which will trigger the result defined by the following
 // Then helper
-func (mmStatusUpdate *mNotificationServiceHandlerMockStatusUpdate) When(ctx context.Context, pp1 *connect.Request[v11.StatusUpdateRequest]) *NotificationServiceHandlerMockStatusUpdateExpectation {
+func (mmStatusUpdate *mNotificationServiceClientMockStatusUpdate) When(ctx context.Context, pp1 *connect.Request[v11.StatusUpdateRequest]) *NotificationServiceClientMockStatusUpdateExpectation {
 	if mmStatusUpdate.mock.funcStatusUpdate != nil {
-		mmStatusUpdate.mock.t.Fatalf("NotificationServiceHandlerMock.StatusUpdate mock is already set by Set")
+		mmStatusUpdate.mock.t.Fatalf("NotificationServiceClientMock.StatusUpdate mock is already set by Set")
 	}
 
-	expectation := &NotificationServiceHandlerMockStatusUpdateExpectation{
+	expectation := &NotificationServiceClientMockStatusUpdateExpectation{
 		mock:               mmStatusUpdate.mock,
-		params:             &NotificationServiceHandlerMockStatusUpdateParams{ctx, pp1},
-		expectationOrigins: NotificationServiceHandlerMockStatusUpdateExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &NotificationServiceClientMockStatusUpdateParams{ctx, pp1},
+		expectationOrigins: NotificationServiceClientMockStatusUpdateExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmStatusUpdate.expectations = append(mmStatusUpdate.expectations, expectation)
 	return expectation
 }
 
-// Then sets up NotificationServiceHandler.StatusUpdate return parameters for the expectation previously defined by the When method
-func (e *NotificationServiceHandlerMockStatusUpdateExpectation) Then(pp2 *connect.Response[v11.StatusUpdateResponse], err error) *NotificationServiceHandlerMock {
-	e.results = &NotificationServiceHandlerMockStatusUpdateResults{pp2, err}
+// Then sets up NotificationServiceClient.StatusUpdate return parameters for the expectation previously defined by the When method
+func (e *NotificationServiceClientMockStatusUpdateExpectation) Then(pp2 *connect.Response[v11.StatusUpdateResponse], err error) *NotificationServiceClientMock {
+	e.results = &NotificationServiceClientMockStatusUpdateResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times NotificationServiceHandler.StatusUpdate should be invoked
-func (mmStatusUpdate *mNotificationServiceHandlerMockStatusUpdate) Times(n uint64) *mNotificationServiceHandlerMockStatusUpdate {
+// Times sets number of times NotificationServiceClient.StatusUpdate should be invoked
+func (mmStatusUpdate *mNotificationServiceClientMockStatusUpdate) Times(n uint64) *mNotificationServiceClientMockStatusUpdate {
 	if n == 0 {
-		mmStatusUpdate.mock.t.Fatalf("Times of NotificationServiceHandlerMock.StatusUpdate mock can not be zero")
+		mmStatusUpdate.mock.t.Fatalf("Times of NotificationServiceClientMock.StatusUpdate mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmStatusUpdate.expectedInvocations, n)
 	mmStatusUpdate.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmStatusUpdate
 }
 
-func (mmStatusUpdate *mNotificationServiceHandlerMockStatusUpdate) invocationsDone() bool {
+func (mmStatusUpdate *mNotificationServiceClientMockStatusUpdate) invocationsDone() bool {
 	if len(mmStatusUpdate.expectations) == 0 && mmStatusUpdate.defaultExpectation == nil && mmStatusUpdate.mock.funcStatusUpdate == nil {
 		return true
 	}
@@ -2163,8 +2043,8 @@ func (mmStatusUpdate *mNotificationServiceHandlerMockStatusUpdate) invocationsDo
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// StatusUpdate implements mm_notificationv1connect.NotificationServiceHandler
-func (mmStatusUpdate *NotificationServiceHandlerMock) StatusUpdate(ctx context.Context, pp1 *connect.Request[v11.StatusUpdateRequest]) (pp2 *connect.Response[v11.StatusUpdateResponse], err error) {
+// StatusUpdate implements mm_notificationv1connect.NotificationServiceClient
+func (mmStatusUpdate *NotificationServiceClientMock) StatusUpdate(ctx context.Context, pp1 *connect.Request[v11.StatusUpdateRequest]) (pp2 *connect.Response[v11.StatusUpdateResponse], err error) {
 	mm_atomic.AddUint64(&mmStatusUpdate.beforeStatusUpdateCounter, 1)
 	defer mm_atomic.AddUint64(&mmStatusUpdate.afterStatusUpdateCounter, 1)
 
@@ -2174,7 +2054,7 @@ func (mmStatusUpdate *NotificationServiceHandlerMock) StatusUpdate(ctx context.C
 		mmStatusUpdate.inspectFuncStatusUpdate(ctx, pp1)
 	}
 
-	mm_params := NotificationServiceHandlerMockStatusUpdateParams{ctx, pp1}
+	mm_params := NotificationServiceClientMockStatusUpdateParams{ctx, pp1}
 
 	// Record call args
 	mmStatusUpdate.StatusUpdateMock.mutex.Lock()
@@ -2193,54 +2073,54 @@ func (mmStatusUpdate *NotificationServiceHandlerMock) StatusUpdate(ctx context.C
 		mm_want := mmStatusUpdate.StatusUpdateMock.defaultExpectation.params
 		mm_want_ptrs := mmStatusUpdate.StatusUpdateMock.defaultExpectation.paramPtrs
 
-		mm_got := NotificationServiceHandlerMockStatusUpdateParams{ctx, pp1}
+		mm_got := NotificationServiceClientMockStatusUpdateParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmStatusUpdate.t.Errorf("NotificationServiceHandlerMock.StatusUpdate got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmStatusUpdate.t.Errorf("NotificationServiceClientMock.StatusUpdate got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmStatusUpdate.StatusUpdateMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmStatusUpdate.t.Errorf("NotificationServiceHandlerMock.StatusUpdate got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmStatusUpdate.t.Errorf("NotificationServiceClientMock.StatusUpdate got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmStatusUpdate.StatusUpdateMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmStatusUpdate.t.Errorf("NotificationServiceHandlerMock.StatusUpdate got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmStatusUpdate.t.Errorf("NotificationServiceClientMock.StatusUpdate got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmStatusUpdate.StatusUpdateMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmStatusUpdate.StatusUpdateMock.defaultExpectation.results
 		if mm_results == nil {
-			mmStatusUpdate.t.Fatal("No results are set for the NotificationServiceHandlerMock.StatusUpdate")
+			mmStatusUpdate.t.Fatal("No results are set for the NotificationServiceClientMock.StatusUpdate")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmStatusUpdate.funcStatusUpdate != nil {
 		return mmStatusUpdate.funcStatusUpdate(ctx, pp1)
 	}
-	mmStatusUpdate.t.Fatalf("Unexpected call to NotificationServiceHandlerMock.StatusUpdate. %v %v", ctx, pp1)
+	mmStatusUpdate.t.Fatalf("Unexpected call to NotificationServiceClientMock.StatusUpdate. %v %v", ctx, pp1)
 	return
 }
 
-// StatusUpdateAfterCounter returns a count of finished NotificationServiceHandlerMock.StatusUpdate invocations
-func (mmStatusUpdate *NotificationServiceHandlerMock) StatusUpdateAfterCounter() uint64 {
+// StatusUpdateAfterCounter returns a count of finished NotificationServiceClientMock.StatusUpdate invocations
+func (mmStatusUpdate *NotificationServiceClientMock) StatusUpdateAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmStatusUpdate.afterStatusUpdateCounter)
 }
 
-// StatusUpdateBeforeCounter returns a count of NotificationServiceHandlerMock.StatusUpdate invocations
-func (mmStatusUpdate *NotificationServiceHandlerMock) StatusUpdateBeforeCounter() uint64 {
+// StatusUpdateBeforeCounter returns a count of NotificationServiceClientMock.StatusUpdate invocations
+func (mmStatusUpdate *NotificationServiceClientMock) StatusUpdateBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmStatusUpdate.beforeStatusUpdateCounter)
 }
 
-// Calls returns a list of arguments used in each call to NotificationServiceHandlerMock.StatusUpdate.
+// Calls returns a list of arguments used in each call to NotificationServiceClientMock.StatusUpdate.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmStatusUpdate *mNotificationServiceHandlerMockStatusUpdate) Calls() []*NotificationServiceHandlerMockStatusUpdateParams {
+func (mmStatusUpdate *mNotificationServiceClientMockStatusUpdate) Calls() []*NotificationServiceClientMockStatusUpdateParams {
 	mmStatusUpdate.mutex.RLock()
 
-	argCopy := make([]*NotificationServiceHandlerMockStatusUpdateParams, len(mmStatusUpdate.callArgs))
+	argCopy := make([]*NotificationServiceClientMockStatusUpdateParams, len(mmStatusUpdate.callArgs))
 	copy(argCopy, mmStatusUpdate.callArgs)
 
 	mmStatusUpdate.mutex.RUnlock()
@@ -2250,7 +2130,7 @@ func (mmStatusUpdate *mNotificationServiceHandlerMockStatusUpdate) Calls() []*No
 
 // MinimockStatusUpdateDone returns true if the count of the StatusUpdate invocations corresponds
 // the number of defined expectations
-func (m *NotificationServiceHandlerMock) MinimockStatusUpdateDone() bool {
+func (m *NotificationServiceClientMock) MinimockStatusUpdateDone() bool {
 	if m.StatusUpdateMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -2266,10 +2146,10 @@ func (m *NotificationServiceHandlerMock) MinimockStatusUpdateDone() bool {
 }
 
 // MinimockStatusUpdateInspect logs each unmet expectation
-func (m *NotificationServiceHandlerMock) MinimockStatusUpdateInspect() {
+func (m *NotificationServiceClientMock) MinimockStatusUpdateInspect() {
 	for _, e := range m.StatusUpdateMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to NotificationServiceHandlerMock.StatusUpdate at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to NotificationServiceClientMock.StatusUpdate at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -2277,66 +2157,66 @@ func (m *NotificationServiceHandlerMock) MinimockStatusUpdateInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.StatusUpdateMock.defaultExpectation != nil && afterStatusUpdateCounter < 1 {
 		if m.StatusUpdateMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to NotificationServiceHandlerMock.StatusUpdate at\n%s", m.StatusUpdateMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to NotificationServiceClientMock.StatusUpdate at\n%s", m.StatusUpdateMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to NotificationServiceHandlerMock.StatusUpdate at\n%s with params: %#v", m.StatusUpdateMock.defaultExpectation.expectationOrigins.origin, *m.StatusUpdateMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to NotificationServiceClientMock.StatusUpdate at\n%s with params: %#v", m.StatusUpdateMock.defaultExpectation.expectationOrigins.origin, *m.StatusUpdateMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcStatusUpdate != nil && afterStatusUpdateCounter < 1 {
-		m.t.Errorf("Expected call to NotificationServiceHandlerMock.StatusUpdate at\n%s", m.funcStatusUpdateOrigin)
+		m.t.Errorf("Expected call to NotificationServiceClientMock.StatusUpdate at\n%s", m.funcStatusUpdateOrigin)
 	}
 
 	if !m.StatusUpdateMock.invocationsDone() && afterStatusUpdateCounter > 0 {
-		m.t.Errorf("Expected %d calls to NotificationServiceHandlerMock.StatusUpdate at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to NotificationServiceClientMock.StatusUpdate at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.StatusUpdateMock.expectedInvocations), m.StatusUpdateMock.expectedInvocationsOrigin, afterStatusUpdateCounter)
 	}
 }
 
-type mNotificationServiceHandlerMockTemplateSave struct {
+type mNotificationServiceClientMockTemplateSave struct {
 	optional           bool
-	mock               *NotificationServiceHandlerMock
-	defaultExpectation *NotificationServiceHandlerMockTemplateSaveExpectation
-	expectations       []*NotificationServiceHandlerMockTemplateSaveExpectation
+	mock               *NotificationServiceClientMock
+	defaultExpectation *NotificationServiceClientMockTemplateSaveExpectation
+	expectations       []*NotificationServiceClientMockTemplateSaveExpectation
 
-	callArgs []*NotificationServiceHandlerMockTemplateSaveParams
+	callArgs []*NotificationServiceClientMockTemplateSaveParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// NotificationServiceHandlerMockTemplateSaveExpectation specifies expectation struct of the NotificationServiceHandler.TemplateSave
-type NotificationServiceHandlerMockTemplateSaveExpectation struct {
-	mock               *NotificationServiceHandlerMock
-	params             *NotificationServiceHandlerMockTemplateSaveParams
-	paramPtrs          *NotificationServiceHandlerMockTemplateSaveParamPtrs
-	expectationOrigins NotificationServiceHandlerMockTemplateSaveExpectationOrigins
-	results            *NotificationServiceHandlerMockTemplateSaveResults
+// NotificationServiceClientMockTemplateSaveExpectation specifies expectation struct of the NotificationServiceClient.TemplateSave
+type NotificationServiceClientMockTemplateSaveExpectation struct {
+	mock               *NotificationServiceClientMock
+	params             *NotificationServiceClientMockTemplateSaveParams
+	paramPtrs          *NotificationServiceClientMockTemplateSaveParamPtrs
+	expectationOrigins NotificationServiceClientMockTemplateSaveExpectationOrigins
+	results            *NotificationServiceClientMockTemplateSaveResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// NotificationServiceHandlerMockTemplateSaveParams contains parameters of the NotificationServiceHandler.TemplateSave
-type NotificationServiceHandlerMockTemplateSaveParams struct {
+// NotificationServiceClientMockTemplateSaveParams contains parameters of the NotificationServiceClient.TemplateSave
+type NotificationServiceClientMockTemplateSaveParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.TemplateSaveRequest]
 }
 
-// NotificationServiceHandlerMockTemplateSaveParamPtrs contains pointers to parameters of the NotificationServiceHandler.TemplateSave
-type NotificationServiceHandlerMockTemplateSaveParamPtrs struct {
+// NotificationServiceClientMockTemplateSaveParamPtrs contains pointers to parameters of the NotificationServiceClient.TemplateSave
+type NotificationServiceClientMockTemplateSaveParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.TemplateSaveRequest]
 }
 
-// NotificationServiceHandlerMockTemplateSaveResults contains results of the NotificationServiceHandler.TemplateSave
-type NotificationServiceHandlerMockTemplateSaveResults struct {
+// NotificationServiceClientMockTemplateSaveResults contains results of the NotificationServiceClient.TemplateSave
+type NotificationServiceClientMockTemplateSaveResults struct {
 	pp2 *connect.Response[v1.TemplateSaveResponse]
 	err error
 }
 
-// NotificationServiceHandlerMockTemplateSaveOrigins contains origins of expectations of the NotificationServiceHandler.TemplateSave
-type NotificationServiceHandlerMockTemplateSaveExpectationOrigins struct {
+// NotificationServiceClientMockTemplateSaveOrigins contains origins of expectations of the NotificationServiceClient.TemplateSave
+type NotificationServiceClientMockTemplateSaveExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
@@ -2347,26 +2227,26 @@ type NotificationServiceHandlerMockTemplateSaveExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmTemplateSave *mNotificationServiceHandlerMockTemplateSave) Optional() *mNotificationServiceHandlerMockTemplateSave {
+func (mmTemplateSave *mNotificationServiceClientMockTemplateSave) Optional() *mNotificationServiceClientMockTemplateSave {
 	mmTemplateSave.optional = true
 	return mmTemplateSave
 }
 
-// Expect sets up expected params for NotificationServiceHandler.TemplateSave
-func (mmTemplateSave *mNotificationServiceHandlerMockTemplateSave) Expect(ctx context.Context, pp1 *connect.Request[v1.TemplateSaveRequest]) *mNotificationServiceHandlerMockTemplateSave {
+// Expect sets up expected params for NotificationServiceClient.TemplateSave
+func (mmTemplateSave *mNotificationServiceClientMockTemplateSave) Expect(ctx context.Context, pp1 *connect.Request[v1.TemplateSaveRequest]) *mNotificationServiceClientMockTemplateSave {
 	if mmTemplateSave.mock.funcTemplateSave != nil {
-		mmTemplateSave.mock.t.Fatalf("NotificationServiceHandlerMock.TemplateSave mock is already set by Set")
+		mmTemplateSave.mock.t.Fatalf("NotificationServiceClientMock.TemplateSave mock is already set by Set")
 	}
 
 	if mmTemplateSave.defaultExpectation == nil {
-		mmTemplateSave.defaultExpectation = &NotificationServiceHandlerMockTemplateSaveExpectation{}
+		mmTemplateSave.defaultExpectation = &NotificationServiceClientMockTemplateSaveExpectation{}
 	}
 
 	if mmTemplateSave.defaultExpectation.paramPtrs != nil {
-		mmTemplateSave.mock.t.Fatalf("NotificationServiceHandlerMock.TemplateSave mock is already set by ExpectParams functions")
+		mmTemplateSave.mock.t.Fatalf("NotificationServiceClientMock.TemplateSave mock is already set by ExpectParams functions")
 	}
 
-	mmTemplateSave.defaultExpectation.params = &NotificationServiceHandlerMockTemplateSaveParams{ctx, pp1}
+	mmTemplateSave.defaultExpectation.params = &NotificationServiceClientMockTemplateSaveParams{ctx, pp1}
 	mmTemplateSave.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmTemplateSave.expectations {
 		if minimock.Equal(e.params, mmTemplateSave.defaultExpectation.params) {
@@ -2377,22 +2257,22 @@ func (mmTemplateSave *mNotificationServiceHandlerMockTemplateSave) Expect(ctx co
 	return mmTemplateSave
 }
 
-// ExpectCtxParam1 sets up expected param ctx for NotificationServiceHandler.TemplateSave
-func (mmTemplateSave *mNotificationServiceHandlerMockTemplateSave) ExpectCtxParam1(ctx context.Context) *mNotificationServiceHandlerMockTemplateSave {
+// ExpectCtxParam1 sets up expected param ctx for NotificationServiceClient.TemplateSave
+func (mmTemplateSave *mNotificationServiceClientMockTemplateSave) ExpectCtxParam1(ctx context.Context) *mNotificationServiceClientMockTemplateSave {
 	if mmTemplateSave.mock.funcTemplateSave != nil {
-		mmTemplateSave.mock.t.Fatalf("NotificationServiceHandlerMock.TemplateSave mock is already set by Set")
+		mmTemplateSave.mock.t.Fatalf("NotificationServiceClientMock.TemplateSave mock is already set by Set")
 	}
 
 	if mmTemplateSave.defaultExpectation == nil {
-		mmTemplateSave.defaultExpectation = &NotificationServiceHandlerMockTemplateSaveExpectation{}
+		mmTemplateSave.defaultExpectation = &NotificationServiceClientMockTemplateSaveExpectation{}
 	}
 
 	if mmTemplateSave.defaultExpectation.params != nil {
-		mmTemplateSave.mock.t.Fatalf("NotificationServiceHandlerMock.TemplateSave mock is already set by Expect")
+		mmTemplateSave.mock.t.Fatalf("NotificationServiceClientMock.TemplateSave mock is already set by Expect")
 	}
 
 	if mmTemplateSave.defaultExpectation.paramPtrs == nil {
-		mmTemplateSave.defaultExpectation.paramPtrs = &NotificationServiceHandlerMockTemplateSaveParamPtrs{}
+		mmTemplateSave.defaultExpectation.paramPtrs = &NotificationServiceClientMockTemplateSaveParamPtrs{}
 	}
 	mmTemplateSave.defaultExpectation.paramPtrs.ctx = &ctx
 	mmTemplateSave.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -2400,22 +2280,22 @@ func (mmTemplateSave *mNotificationServiceHandlerMockTemplateSave) ExpectCtxPara
 	return mmTemplateSave
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for NotificationServiceHandler.TemplateSave
-func (mmTemplateSave *mNotificationServiceHandlerMockTemplateSave) ExpectPp1Param2(pp1 *connect.Request[v1.TemplateSaveRequest]) *mNotificationServiceHandlerMockTemplateSave {
+// ExpectPp1Param2 sets up expected param pp1 for NotificationServiceClient.TemplateSave
+func (mmTemplateSave *mNotificationServiceClientMockTemplateSave) ExpectPp1Param2(pp1 *connect.Request[v1.TemplateSaveRequest]) *mNotificationServiceClientMockTemplateSave {
 	if mmTemplateSave.mock.funcTemplateSave != nil {
-		mmTemplateSave.mock.t.Fatalf("NotificationServiceHandlerMock.TemplateSave mock is already set by Set")
+		mmTemplateSave.mock.t.Fatalf("NotificationServiceClientMock.TemplateSave mock is already set by Set")
 	}
 
 	if mmTemplateSave.defaultExpectation == nil {
-		mmTemplateSave.defaultExpectation = &NotificationServiceHandlerMockTemplateSaveExpectation{}
+		mmTemplateSave.defaultExpectation = &NotificationServiceClientMockTemplateSaveExpectation{}
 	}
 
 	if mmTemplateSave.defaultExpectation.params != nil {
-		mmTemplateSave.mock.t.Fatalf("NotificationServiceHandlerMock.TemplateSave mock is already set by Expect")
+		mmTemplateSave.mock.t.Fatalf("NotificationServiceClientMock.TemplateSave mock is already set by Expect")
 	}
 
 	if mmTemplateSave.defaultExpectation.paramPtrs == nil {
-		mmTemplateSave.defaultExpectation.paramPtrs = &NotificationServiceHandlerMockTemplateSaveParamPtrs{}
+		mmTemplateSave.defaultExpectation.paramPtrs = &NotificationServiceClientMockTemplateSaveParamPtrs{}
 	}
 	mmTemplateSave.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmTemplateSave.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -2423,10 +2303,10 @@ func (mmTemplateSave *mNotificationServiceHandlerMockTemplateSave) ExpectPp1Para
 	return mmTemplateSave
 }
 
-// Inspect accepts an inspector function that has same arguments as the NotificationServiceHandler.TemplateSave
-func (mmTemplateSave *mNotificationServiceHandlerMockTemplateSave) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.TemplateSaveRequest])) *mNotificationServiceHandlerMockTemplateSave {
+// Inspect accepts an inspector function that has same arguments as the NotificationServiceClient.TemplateSave
+func (mmTemplateSave *mNotificationServiceClientMockTemplateSave) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.TemplateSaveRequest])) *mNotificationServiceClientMockTemplateSave {
 	if mmTemplateSave.mock.inspectFuncTemplateSave != nil {
-		mmTemplateSave.mock.t.Fatalf("Inspect function is already set for NotificationServiceHandlerMock.TemplateSave")
+		mmTemplateSave.mock.t.Fatalf("Inspect function is already set for NotificationServiceClientMock.TemplateSave")
 	}
 
 	mmTemplateSave.mock.inspectFuncTemplateSave = f
@@ -2434,28 +2314,28 @@ func (mmTemplateSave *mNotificationServiceHandlerMockTemplateSave) Inspect(f fun
 	return mmTemplateSave
 }
 
-// Return sets up results that will be returned by NotificationServiceHandler.TemplateSave
-func (mmTemplateSave *mNotificationServiceHandlerMockTemplateSave) Return(pp2 *connect.Response[v1.TemplateSaveResponse], err error) *NotificationServiceHandlerMock {
+// Return sets up results that will be returned by NotificationServiceClient.TemplateSave
+func (mmTemplateSave *mNotificationServiceClientMockTemplateSave) Return(pp2 *connect.Response[v1.TemplateSaveResponse], err error) *NotificationServiceClientMock {
 	if mmTemplateSave.mock.funcTemplateSave != nil {
-		mmTemplateSave.mock.t.Fatalf("NotificationServiceHandlerMock.TemplateSave mock is already set by Set")
+		mmTemplateSave.mock.t.Fatalf("NotificationServiceClientMock.TemplateSave mock is already set by Set")
 	}
 
 	if mmTemplateSave.defaultExpectation == nil {
-		mmTemplateSave.defaultExpectation = &NotificationServiceHandlerMockTemplateSaveExpectation{mock: mmTemplateSave.mock}
+		mmTemplateSave.defaultExpectation = &NotificationServiceClientMockTemplateSaveExpectation{mock: mmTemplateSave.mock}
 	}
-	mmTemplateSave.defaultExpectation.results = &NotificationServiceHandlerMockTemplateSaveResults{pp2, err}
+	mmTemplateSave.defaultExpectation.results = &NotificationServiceClientMockTemplateSaveResults{pp2, err}
 	mmTemplateSave.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmTemplateSave.mock
 }
 
-// Set uses given function f to mock the NotificationServiceHandler.TemplateSave method
-func (mmTemplateSave *mNotificationServiceHandlerMockTemplateSave) Set(f func(ctx context.Context, pp1 *connect.Request[v1.TemplateSaveRequest]) (pp2 *connect.Response[v1.TemplateSaveResponse], err error)) *NotificationServiceHandlerMock {
+// Set uses given function f to mock the NotificationServiceClient.TemplateSave method
+func (mmTemplateSave *mNotificationServiceClientMockTemplateSave) Set(f func(ctx context.Context, pp1 *connect.Request[v1.TemplateSaveRequest]) (pp2 *connect.Response[v1.TemplateSaveResponse], err error)) *NotificationServiceClientMock {
 	if mmTemplateSave.defaultExpectation != nil {
-		mmTemplateSave.mock.t.Fatalf("Default expectation is already set for the NotificationServiceHandler.TemplateSave method")
+		mmTemplateSave.mock.t.Fatalf("Default expectation is already set for the NotificationServiceClient.TemplateSave method")
 	}
 
 	if len(mmTemplateSave.expectations) > 0 {
-		mmTemplateSave.mock.t.Fatalf("Some expectations are already set for the NotificationServiceHandler.TemplateSave method")
+		mmTemplateSave.mock.t.Fatalf("Some expectations are already set for the NotificationServiceClient.TemplateSave method")
 	}
 
 	mmTemplateSave.mock.funcTemplateSave = f
@@ -2463,39 +2343,39 @@ func (mmTemplateSave *mNotificationServiceHandlerMockTemplateSave) Set(f func(ct
 	return mmTemplateSave.mock
 }
 
-// When sets expectation for the NotificationServiceHandler.TemplateSave which will trigger the result defined by the following
+// When sets expectation for the NotificationServiceClient.TemplateSave which will trigger the result defined by the following
 // Then helper
-func (mmTemplateSave *mNotificationServiceHandlerMockTemplateSave) When(ctx context.Context, pp1 *connect.Request[v1.TemplateSaveRequest]) *NotificationServiceHandlerMockTemplateSaveExpectation {
+func (mmTemplateSave *mNotificationServiceClientMockTemplateSave) When(ctx context.Context, pp1 *connect.Request[v1.TemplateSaveRequest]) *NotificationServiceClientMockTemplateSaveExpectation {
 	if mmTemplateSave.mock.funcTemplateSave != nil {
-		mmTemplateSave.mock.t.Fatalf("NotificationServiceHandlerMock.TemplateSave mock is already set by Set")
+		mmTemplateSave.mock.t.Fatalf("NotificationServiceClientMock.TemplateSave mock is already set by Set")
 	}
 
-	expectation := &NotificationServiceHandlerMockTemplateSaveExpectation{
+	expectation := &NotificationServiceClientMockTemplateSaveExpectation{
 		mock:               mmTemplateSave.mock,
-		params:             &NotificationServiceHandlerMockTemplateSaveParams{ctx, pp1},
-		expectationOrigins: NotificationServiceHandlerMockTemplateSaveExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &NotificationServiceClientMockTemplateSaveParams{ctx, pp1},
+		expectationOrigins: NotificationServiceClientMockTemplateSaveExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmTemplateSave.expectations = append(mmTemplateSave.expectations, expectation)
 	return expectation
 }
 
-// Then sets up NotificationServiceHandler.TemplateSave return parameters for the expectation previously defined by the When method
-func (e *NotificationServiceHandlerMockTemplateSaveExpectation) Then(pp2 *connect.Response[v1.TemplateSaveResponse], err error) *NotificationServiceHandlerMock {
-	e.results = &NotificationServiceHandlerMockTemplateSaveResults{pp2, err}
+// Then sets up NotificationServiceClient.TemplateSave return parameters for the expectation previously defined by the When method
+func (e *NotificationServiceClientMockTemplateSaveExpectation) Then(pp2 *connect.Response[v1.TemplateSaveResponse], err error) *NotificationServiceClientMock {
+	e.results = &NotificationServiceClientMockTemplateSaveResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times NotificationServiceHandler.TemplateSave should be invoked
-func (mmTemplateSave *mNotificationServiceHandlerMockTemplateSave) Times(n uint64) *mNotificationServiceHandlerMockTemplateSave {
+// Times sets number of times NotificationServiceClient.TemplateSave should be invoked
+func (mmTemplateSave *mNotificationServiceClientMockTemplateSave) Times(n uint64) *mNotificationServiceClientMockTemplateSave {
 	if n == 0 {
-		mmTemplateSave.mock.t.Fatalf("Times of NotificationServiceHandlerMock.TemplateSave mock can not be zero")
+		mmTemplateSave.mock.t.Fatalf("Times of NotificationServiceClientMock.TemplateSave mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmTemplateSave.expectedInvocations, n)
 	mmTemplateSave.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmTemplateSave
 }
 
-func (mmTemplateSave *mNotificationServiceHandlerMockTemplateSave) invocationsDone() bool {
+func (mmTemplateSave *mNotificationServiceClientMockTemplateSave) invocationsDone() bool {
 	if len(mmTemplateSave.expectations) == 0 && mmTemplateSave.defaultExpectation == nil && mmTemplateSave.mock.funcTemplateSave == nil {
 		return true
 	}
@@ -2506,8 +2386,8 @@ func (mmTemplateSave *mNotificationServiceHandlerMockTemplateSave) invocationsDo
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// TemplateSave implements mm_notificationv1connect.NotificationServiceHandler
-func (mmTemplateSave *NotificationServiceHandlerMock) TemplateSave(ctx context.Context, pp1 *connect.Request[v1.TemplateSaveRequest]) (pp2 *connect.Response[v1.TemplateSaveResponse], err error) {
+// TemplateSave implements mm_notificationv1connect.NotificationServiceClient
+func (mmTemplateSave *NotificationServiceClientMock) TemplateSave(ctx context.Context, pp1 *connect.Request[v1.TemplateSaveRequest]) (pp2 *connect.Response[v1.TemplateSaveResponse], err error) {
 	mm_atomic.AddUint64(&mmTemplateSave.beforeTemplateSaveCounter, 1)
 	defer mm_atomic.AddUint64(&mmTemplateSave.afterTemplateSaveCounter, 1)
 
@@ -2517,7 +2397,7 @@ func (mmTemplateSave *NotificationServiceHandlerMock) TemplateSave(ctx context.C
 		mmTemplateSave.inspectFuncTemplateSave(ctx, pp1)
 	}
 
-	mm_params := NotificationServiceHandlerMockTemplateSaveParams{ctx, pp1}
+	mm_params := NotificationServiceClientMockTemplateSaveParams{ctx, pp1}
 
 	// Record call args
 	mmTemplateSave.TemplateSaveMock.mutex.Lock()
@@ -2536,54 +2416,54 @@ func (mmTemplateSave *NotificationServiceHandlerMock) TemplateSave(ctx context.C
 		mm_want := mmTemplateSave.TemplateSaveMock.defaultExpectation.params
 		mm_want_ptrs := mmTemplateSave.TemplateSaveMock.defaultExpectation.paramPtrs
 
-		mm_got := NotificationServiceHandlerMockTemplateSaveParams{ctx, pp1}
+		mm_got := NotificationServiceClientMockTemplateSaveParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmTemplateSave.t.Errorf("NotificationServiceHandlerMock.TemplateSave got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmTemplateSave.t.Errorf("NotificationServiceClientMock.TemplateSave got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmTemplateSave.TemplateSaveMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmTemplateSave.t.Errorf("NotificationServiceHandlerMock.TemplateSave got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmTemplateSave.t.Errorf("NotificationServiceClientMock.TemplateSave got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmTemplateSave.TemplateSaveMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmTemplateSave.t.Errorf("NotificationServiceHandlerMock.TemplateSave got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmTemplateSave.t.Errorf("NotificationServiceClientMock.TemplateSave got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmTemplateSave.TemplateSaveMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmTemplateSave.TemplateSaveMock.defaultExpectation.results
 		if mm_results == nil {
-			mmTemplateSave.t.Fatal("No results are set for the NotificationServiceHandlerMock.TemplateSave")
+			mmTemplateSave.t.Fatal("No results are set for the NotificationServiceClientMock.TemplateSave")
 		}
 		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmTemplateSave.funcTemplateSave != nil {
 		return mmTemplateSave.funcTemplateSave(ctx, pp1)
 	}
-	mmTemplateSave.t.Fatalf("Unexpected call to NotificationServiceHandlerMock.TemplateSave. %v %v", ctx, pp1)
+	mmTemplateSave.t.Fatalf("Unexpected call to NotificationServiceClientMock.TemplateSave. %v %v", ctx, pp1)
 	return
 }
 
-// TemplateSaveAfterCounter returns a count of finished NotificationServiceHandlerMock.TemplateSave invocations
-func (mmTemplateSave *NotificationServiceHandlerMock) TemplateSaveAfterCounter() uint64 {
+// TemplateSaveAfterCounter returns a count of finished NotificationServiceClientMock.TemplateSave invocations
+func (mmTemplateSave *NotificationServiceClientMock) TemplateSaveAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmTemplateSave.afterTemplateSaveCounter)
 }
 
-// TemplateSaveBeforeCounter returns a count of NotificationServiceHandlerMock.TemplateSave invocations
-func (mmTemplateSave *NotificationServiceHandlerMock) TemplateSaveBeforeCounter() uint64 {
+// TemplateSaveBeforeCounter returns a count of NotificationServiceClientMock.TemplateSave invocations
+func (mmTemplateSave *NotificationServiceClientMock) TemplateSaveBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmTemplateSave.beforeTemplateSaveCounter)
 }
 
-// Calls returns a list of arguments used in each call to NotificationServiceHandlerMock.TemplateSave.
+// Calls returns a list of arguments used in each call to NotificationServiceClientMock.TemplateSave.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmTemplateSave *mNotificationServiceHandlerMockTemplateSave) Calls() []*NotificationServiceHandlerMockTemplateSaveParams {
+func (mmTemplateSave *mNotificationServiceClientMockTemplateSave) Calls() []*NotificationServiceClientMockTemplateSaveParams {
 	mmTemplateSave.mutex.RLock()
 
-	argCopy := make([]*NotificationServiceHandlerMockTemplateSaveParams, len(mmTemplateSave.callArgs))
+	argCopy := make([]*NotificationServiceClientMockTemplateSaveParams, len(mmTemplateSave.callArgs))
 	copy(argCopy, mmTemplateSave.callArgs)
 
 	mmTemplateSave.mutex.RUnlock()
@@ -2593,7 +2473,7 @@ func (mmTemplateSave *mNotificationServiceHandlerMockTemplateSave) Calls() []*No
 
 // MinimockTemplateSaveDone returns true if the count of the TemplateSave invocations corresponds
 // the number of defined expectations
-func (m *NotificationServiceHandlerMock) MinimockTemplateSaveDone() bool {
+func (m *NotificationServiceClientMock) MinimockTemplateSaveDone() bool {
 	if m.TemplateSaveMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -2609,10 +2489,10 @@ func (m *NotificationServiceHandlerMock) MinimockTemplateSaveDone() bool {
 }
 
 // MinimockTemplateSaveInspect logs each unmet expectation
-func (m *NotificationServiceHandlerMock) MinimockTemplateSaveInspect() {
+func (m *NotificationServiceClientMock) MinimockTemplateSaveInspect() {
 	for _, e := range m.TemplateSaveMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to NotificationServiceHandlerMock.TemplateSave at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to NotificationServiceClientMock.TemplateSave at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -2620,71 +2500,69 @@ func (m *NotificationServiceHandlerMock) MinimockTemplateSaveInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.TemplateSaveMock.defaultExpectation != nil && afterTemplateSaveCounter < 1 {
 		if m.TemplateSaveMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to NotificationServiceHandlerMock.TemplateSave at\n%s", m.TemplateSaveMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to NotificationServiceClientMock.TemplateSave at\n%s", m.TemplateSaveMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to NotificationServiceHandlerMock.TemplateSave at\n%s with params: %#v", m.TemplateSaveMock.defaultExpectation.expectationOrigins.origin, *m.TemplateSaveMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to NotificationServiceClientMock.TemplateSave at\n%s with params: %#v", m.TemplateSaveMock.defaultExpectation.expectationOrigins.origin, *m.TemplateSaveMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcTemplateSave != nil && afterTemplateSaveCounter < 1 {
-		m.t.Errorf("Expected call to NotificationServiceHandlerMock.TemplateSave at\n%s", m.funcTemplateSaveOrigin)
+		m.t.Errorf("Expected call to NotificationServiceClientMock.TemplateSave at\n%s", m.funcTemplateSaveOrigin)
 	}
 
 	if !m.TemplateSaveMock.invocationsDone() && afterTemplateSaveCounter > 0 {
-		m.t.Errorf("Expected %d calls to NotificationServiceHandlerMock.TemplateSave at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to NotificationServiceClientMock.TemplateSave at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.TemplateSaveMock.expectedInvocations), m.TemplateSaveMock.expectedInvocationsOrigin, afterTemplateSaveCounter)
 	}
 }
 
-type mNotificationServiceHandlerMockTemplateSearch struct {
+type mNotificationServiceClientMockTemplateSearch struct {
 	optional           bool
-	mock               *NotificationServiceHandlerMock
-	defaultExpectation *NotificationServiceHandlerMockTemplateSearchExpectation
-	expectations       []*NotificationServiceHandlerMockTemplateSearchExpectation
+	mock               *NotificationServiceClientMock
+	defaultExpectation *NotificationServiceClientMockTemplateSearchExpectation
+	expectations       []*NotificationServiceClientMockTemplateSearchExpectation
 
-	callArgs []*NotificationServiceHandlerMockTemplateSearchParams
+	callArgs []*NotificationServiceClientMockTemplateSearchParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// NotificationServiceHandlerMockTemplateSearchExpectation specifies expectation struct of the NotificationServiceHandler.TemplateSearch
-type NotificationServiceHandlerMockTemplateSearchExpectation struct {
-	mock               *NotificationServiceHandlerMock
-	params             *NotificationServiceHandlerMockTemplateSearchParams
-	paramPtrs          *NotificationServiceHandlerMockTemplateSearchParamPtrs
-	expectationOrigins NotificationServiceHandlerMockTemplateSearchExpectationOrigins
-	results            *NotificationServiceHandlerMockTemplateSearchResults
+// NotificationServiceClientMockTemplateSearchExpectation specifies expectation struct of the NotificationServiceClient.TemplateSearch
+type NotificationServiceClientMockTemplateSearchExpectation struct {
+	mock               *NotificationServiceClientMock
+	params             *NotificationServiceClientMockTemplateSearchParams
+	paramPtrs          *NotificationServiceClientMockTemplateSearchParamPtrs
+	expectationOrigins NotificationServiceClientMockTemplateSearchExpectationOrigins
+	results            *NotificationServiceClientMockTemplateSearchResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// NotificationServiceHandlerMockTemplateSearchParams contains parameters of the NotificationServiceHandler.TemplateSearch
-type NotificationServiceHandlerMockTemplateSearchParams struct {
+// NotificationServiceClientMockTemplateSearchParams contains parameters of the NotificationServiceClient.TemplateSearch
+type NotificationServiceClientMockTemplateSearchParams struct {
 	ctx context.Context
 	pp1 *connect.Request[v1.TemplateSearchRequest]
-	pp2 *connect.ServerStream[v1.TemplateSearchResponse]
 }
 
-// NotificationServiceHandlerMockTemplateSearchParamPtrs contains pointers to parameters of the NotificationServiceHandler.TemplateSearch
-type NotificationServiceHandlerMockTemplateSearchParamPtrs struct {
+// NotificationServiceClientMockTemplateSearchParamPtrs contains pointers to parameters of the NotificationServiceClient.TemplateSearch
+type NotificationServiceClientMockTemplateSearchParamPtrs struct {
 	ctx *context.Context
 	pp1 **connect.Request[v1.TemplateSearchRequest]
-	pp2 **connect.ServerStream[v1.TemplateSearchResponse]
 }
 
-// NotificationServiceHandlerMockTemplateSearchResults contains results of the NotificationServiceHandler.TemplateSearch
-type NotificationServiceHandlerMockTemplateSearchResults struct {
+// NotificationServiceClientMockTemplateSearchResults contains results of the NotificationServiceClient.TemplateSearch
+type NotificationServiceClientMockTemplateSearchResults struct {
+	pp2 *connect.ServerStreamForClient[v1.TemplateSearchResponse]
 	err error
 }
 
-// NotificationServiceHandlerMockTemplateSearchOrigins contains origins of expectations of the NotificationServiceHandler.TemplateSearch
-type NotificationServiceHandlerMockTemplateSearchExpectationOrigins struct {
+// NotificationServiceClientMockTemplateSearchOrigins contains origins of expectations of the NotificationServiceClient.TemplateSearch
+type NotificationServiceClientMockTemplateSearchExpectationOrigins struct {
 	origin    string
 	originCtx string
 	originPp1 string
-	originPp2 string
 }
 
 // Marks this method to be optional. The default behavior of any method with Return() is '1 or more', meaning
@@ -2692,26 +2570,26 @@ type NotificationServiceHandlerMockTemplateSearchExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmTemplateSearch *mNotificationServiceHandlerMockTemplateSearch) Optional() *mNotificationServiceHandlerMockTemplateSearch {
+func (mmTemplateSearch *mNotificationServiceClientMockTemplateSearch) Optional() *mNotificationServiceClientMockTemplateSearch {
 	mmTemplateSearch.optional = true
 	return mmTemplateSearch
 }
 
-// Expect sets up expected params for NotificationServiceHandler.TemplateSearch
-func (mmTemplateSearch *mNotificationServiceHandlerMockTemplateSearch) Expect(ctx context.Context, pp1 *connect.Request[v1.TemplateSearchRequest], pp2 *connect.ServerStream[v1.TemplateSearchResponse]) *mNotificationServiceHandlerMockTemplateSearch {
+// Expect sets up expected params for NotificationServiceClient.TemplateSearch
+func (mmTemplateSearch *mNotificationServiceClientMockTemplateSearch) Expect(ctx context.Context, pp1 *connect.Request[v1.TemplateSearchRequest]) *mNotificationServiceClientMockTemplateSearch {
 	if mmTemplateSearch.mock.funcTemplateSearch != nil {
-		mmTemplateSearch.mock.t.Fatalf("NotificationServiceHandlerMock.TemplateSearch mock is already set by Set")
+		mmTemplateSearch.mock.t.Fatalf("NotificationServiceClientMock.TemplateSearch mock is already set by Set")
 	}
 
 	if mmTemplateSearch.defaultExpectation == nil {
-		mmTemplateSearch.defaultExpectation = &NotificationServiceHandlerMockTemplateSearchExpectation{}
+		mmTemplateSearch.defaultExpectation = &NotificationServiceClientMockTemplateSearchExpectation{}
 	}
 
 	if mmTemplateSearch.defaultExpectation.paramPtrs != nil {
-		mmTemplateSearch.mock.t.Fatalf("NotificationServiceHandlerMock.TemplateSearch mock is already set by ExpectParams functions")
+		mmTemplateSearch.mock.t.Fatalf("NotificationServiceClientMock.TemplateSearch mock is already set by ExpectParams functions")
 	}
 
-	mmTemplateSearch.defaultExpectation.params = &NotificationServiceHandlerMockTemplateSearchParams{ctx, pp1, pp2}
+	mmTemplateSearch.defaultExpectation.params = &NotificationServiceClientMockTemplateSearchParams{ctx, pp1}
 	mmTemplateSearch.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
 	for _, e := range mmTemplateSearch.expectations {
 		if minimock.Equal(e.params, mmTemplateSearch.defaultExpectation.params) {
@@ -2722,22 +2600,22 @@ func (mmTemplateSearch *mNotificationServiceHandlerMockTemplateSearch) Expect(ct
 	return mmTemplateSearch
 }
 
-// ExpectCtxParam1 sets up expected param ctx for NotificationServiceHandler.TemplateSearch
-func (mmTemplateSearch *mNotificationServiceHandlerMockTemplateSearch) ExpectCtxParam1(ctx context.Context) *mNotificationServiceHandlerMockTemplateSearch {
+// ExpectCtxParam1 sets up expected param ctx for NotificationServiceClient.TemplateSearch
+func (mmTemplateSearch *mNotificationServiceClientMockTemplateSearch) ExpectCtxParam1(ctx context.Context) *mNotificationServiceClientMockTemplateSearch {
 	if mmTemplateSearch.mock.funcTemplateSearch != nil {
-		mmTemplateSearch.mock.t.Fatalf("NotificationServiceHandlerMock.TemplateSearch mock is already set by Set")
+		mmTemplateSearch.mock.t.Fatalf("NotificationServiceClientMock.TemplateSearch mock is already set by Set")
 	}
 
 	if mmTemplateSearch.defaultExpectation == nil {
-		mmTemplateSearch.defaultExpectation = &NotificationServiceHandlerMockTemplateSearchExpectation{}
+		mmTemplateSearch.defaultExpectation = &NotificationServiceClientMockTemplateSearchExpectation{}
 	}
 
 	if mmTemplateSearch.defaultExpectation.params != nil {
-		mmTemplateSearch.mock.t.Fatalf("NotificationServiceHandlerMock.TemplateSearch mock is already set by Expect")
+		mmTemplateSearch.mock.t.Fatalf("NotificationServiceClientMock.TemplateSearch mock is already set by Expect")
 	}
 
 	if mmTemplateSearch.defaultExpectation.paramPtrs == nil {
-		mmTemplateSearch.defaultExpectation.paramPtrs = &NotificationServiceHandlerMockTemplateSearchParamPtrs{}
+		mmTemplateSearch.defaultExpectation.paramPtrs = &NotificationServiceClientMockTemplateSearchParamPtrs{}
 	}
 	mmTemplateSearch.defaultExpectation.paramPtrs.ctx = &ctx
 	mmTemplateSearch.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
@@ -2745,22 +2623,22 @@ func (mmTemplateSearch *mNotificationServiceHandlerMockTemplateSearch) ExpectCtx
 	return mmTemplateSearch
 }
 
-// ExpectPp1Param2 sets up expected param pp1 for NotificationServiceHandler.TemplateSearch
-func (mmTemplateSearch *mNotificationServiceHandlerMockTemplateSearch) ExpectPp1Param2(pp1 *connect.Request[v1.TemplateSearchRequest]) *mNotificationServiceHandlerMockTemplateSearch {
+// ExpectPp1Param2 sets up expected param pp1 for NotificationServiceClient.TemplateSearch
+func (mmTemplateSearch *mNotificationServiceClientMockTemplateSearch) ExpectPp1Param2(pp1 *connect.Request[v1.TemplateSearchRequest]) *mNotificationServiceClientMockTemplateSearch {
 	if mmTemplateSearch.mock.funcTemplateSearch != nil {
-		mmTemplateSearch.mock.t.Fatalf("NotificationServiceHandlerMock.TemplateSearch mock is already set by Set")
+		mmTemplateSearch.mock.t.Fatalf("NotificationServiceClientMock.TemplateSearch mock is already set by Set")
 	}
 
 	if mmTemplateSearch.defaultExpectation == nil {
-		mmTemplateSearch.defaultExpectation = &NotificationServiceHandlerMockTemplateSearchExpectation{}
+		mmTemplateSearch.defaultExpectation = &NotificationServiceClientMockTemplateSearchExpectation{}
 	}
 
 	if mmTemplateSearch.defaultExpectation.params != nil {
-		mmTemplateSearch.mock.t.Fatalf("NotificationServiceHandlerMock.TemplateSearch mock is already set by Expect")
+		mmTemplateSearch.mock.t.Fatalf("NotificationServiceClientMock.TemplateSearch mock is already set by Expect")
 	}
 
 	if mmTemplateSearch.defaultExpectation.paramPtrs == nil {
-		mmTemplateSearch.defaultExpectation.paramPtrs = &NotificationServiceHandlerMockTemplateSearchParamPtrs{}
+		mmTemplateSearch.defaultExpectation.paramPtrs = &NotificationServiceClientMockTemplateSearchParamPtrs{}
 	}
 	mmTemplateSearch.defaultExpectation.paramPtrs.pp1 = &pp1
 	mmTemplateSearch.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
@@ -2768,33 +2646,10 @@ func (mmTemplateSearch *mNotificationServiceHandlerMockTemplateSearch) ExpectPp1
 	return mmTemplateSearch
 }
 
-// ExpectPp2Param3 sets up expected param pp2 for NotificationServiceHandler.TemplateSearch
-func (mmTemplateSearch *mNotificationServiceHandlerMockTemplateSearch) ExpectPp2Param3(pp2 *connect.ServerStream[v1.TemplateSearchResponse]) *mNotificationServiceHandlerMockTemplateSearch {
-	if mmTemplateSearch.mock.funcTemplateSearch != nil {
-		mmTemplateSearch.mock.t.Fatalf("NotificationServiceHandlerMock.TemplateSearch mock is already set by Set")
-	}
-
-	if mmTemplateSearch.defaultExpectation == nil {
-		mmTemplateSearch.defaultExpectation = &NotificationServiceHandlerMockTemplateSearchExpectation{}
-	}
-
-	if mmTemplateSearch.defaultExpectation.params != nil {
-		mmTemplateSearch.mock.t.Fatalf("NotificationServiceHandlerMock.TemplateSearch mock is already set by Expect")
-	}
-
-	if mmTemplateSearch.defaultExpectation.paramPtrs == nil {
-		mmTemplateSearch.defaultExpectation.paramPtrs = &NotificationServiceHandlerMockTemplateSearchParamPtrs{}
-	}
-	mmTemplateSearch.defaultExpectation.paramPtrs.pp2 = &pp2
-	mmTemplateSearch.defaultExpectation.expectationOrigins.originPp2 = minimock.CallerInfo(1)
-
-	return mmTemplateSearch
-}
-
-// Inspect accepts an inspector function that has same arguments as the NotificationServiceHandler.TemplateSearch
-func (mmTemplateSearch *mNotificationServiceHandlerMockTemplateSearch) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.TemplateSearchRequest], pp2 *connect.ServerStream[v1.TemplateSearchResponse])) *mNotificationServiceHandlerMockTemplateSearch {
+// Inspect accepts an inspector function that has same arguments as the NotificationServiceClient.TemplateSearch
+func (mmTemplateSearch *mNotificationServiceClientMockTemplateSearch) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.TemplateSearchRequest])) *mNotificationServiceClientMockTemplateSearch {
 	if mmTemplateSearch.mock.inspectFuncTemplateSearch != nil {
-		mmTemplateSearch.mock.t.Fatalf("Inspect function is already set for NotificationServiceHandlerMock.TemplateSearch")
+		mmTemplateSearch.mock.t.Fatalf("Inspect function is already set for NotificationServiceClientMock.TemplateSearch")
 	}
 
 	mmTemplateSearch.mock.inspectFuncTemplateSearch = f
@@ -2802,28 +2657,28 @@ func (mmTemplateSearch *mNotificationServiceHandlerMockTemplateSearch) Inspect(f
 	return mmTemplateSearch
 }
 
-// Return sets up results that will be returned by NotificationServiceHandler.TemplateSearch
-func (mmTemplateSearch *mNotificationServiceHandlerMockTemplateSearch) Return(err error) *NotificationServiceHandlerMock {
+// Return sets up results that will be returned by NotificationServiceClient.TemplateSearch
+func (mmTemplateSearch *mNotificationServiceClientMockTemplateSearch) Return(pp2 *connect.ServerStreamForClient[v1.TemplateSearchResponse], err error) *NotificationServiceClientMock {
 	if mmTemplateSearch.mock.funcTemplateSearch != nil {
-		mmTemplateSearch.mock.t.Fatalf("NotificationServiceHandlerMock.TemplateSearch mock is already set by Set")
+		mmTemplateSearch.mock.t.Fatalf("NotificationServiceClientMock.TemplateSearch mock is already set by Set")
 	}
 
 	if mmTemplateSearch.defaultExpectation == nil {
-		mmTemplateSearch.defaultExpectation = &NotificationServiceHandlerMockTemplateSearchExpectation{mock: mmTemplateSearch.mock}
+		mmTemplateSearch.defaultExpectation = &NotificationServiceClientMockTemplateSearchExpectation{mock: mmTemplateSearch.mock}
 	}
-	mmTemplateSearch.defaultExpectation.results = &NotificationServiceHandlerMockTemplateSearchResults{err}
+	mmTemplateSearch.defaultExpectation.results = &NotificationServiceClientMockTemplateSearchResults{pp2, err}
 	mmTemplateSearch.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
 	return mmTemplateSearch.mock
 }
 
-// Set uses given function f to mock the NotificationServiceHandler.TemplateSearch method
-func (mmTemplateSearch *mNotificationServiceHandlerMockTemplateSearch) Set(f func(ctx context.Context, pp1 *connect.Request[v1.TemplateSearchRequest], pp2 *connect.ServerStream[v1.TemplateSearchResponse]) (err error)) *NotificationServiceHandlerMock {
+// Set uses given function f to mock the NotificationServiceClient.TemplateSearch method
+func (mmTemplateSearch *mNotificationServiceClientMockTemplateSearch) Set(f func(ctx context.Context, pp1 *connect.Request[v1.TemplateSearchRequest]) (pp2 *connect.ServerStreamForClient[v1.TemplateSearchResponse], err error)) *NotificationServiceClientMock {
 	if mmTemplateSearch.defaultExpectation != nil {
-		mmTemplateSearch.mock.t.Fatalf("Default expectation is already set for the NotificationServiceHandler.TemplateSearch method")
+		mmTemplateSearch.mock.t.Fatalf("Default expectation is already set for the NotificationServiceClient.TemplateSearch method")
 	}
 
 	if len(mmTemplateSearch.expectations) > 0 {
-		mmTemplateSearch.mock.t.Fatalf("Some expectations are already set for the NotificationServiceHandler.TemplateSearch method")
+		mmTemplateSearch.mock.t.Fatalf("Some expectations are already set for the NotificationServiceClient.TemplateSearch method")
 	}
 
 	mmTemplateSearch.mock.funcTemplateSearch = f
@@ -2831,39 +2686,39 @@ func (mmTemplateSearch *mNotificationServiceHandlerMockTemplateSearch) Set(f fun
 	return mmTemplateSearch.mock
 }
 
-// When sets expectation for the NotificationServiceHandler.TemplateSearch which will trigger the result defined by the following
+// When sets expectation for the NotificationServiceClient.TemplateSearch which will trigger the result defined by the following
 // Then helper
-func (mmTemplateSearch *mNotificationServiceHandlerMockTemplateSearch) When(ctx context.Context, pp1 *connect.Request[v1.TemplateSearchRequest], pp2 *connect.ServerStream[v1.TemplateSearchResponse]) *NotificationServiceHandlerMockTemplateSearchExpectation {
+func (mmTemplateSearch *mNotificationServiceClientMockTemplateSearch) When(ctx context.Context, pp1 *connect.Request[v1.TemplateSearchRequest]) *NotificationServiceClientMockTemplateSearchExpectation {
 	if mmTemplateSearch.mock.funcTemplateSearch != nil {
-		mmTemplateSearch.mock.t.Fatalf("NotificationServiceHandlerMock.TemplateSearch mock is already set by Set")
+		mmTemplateSearch.mock.t.Fatalf("NotificationServiceClientMock.TemplateSearch mock is already set by Set")
 	}
 
-	expectation := &NotificationServiceHandlerMockTemplateSearchExpectation{
+	expectation := &NotificationServiceClientMockTemplateSearchExpectation{
 		mock:               mmTemplateSearch.mock,
-		params:             &NotificationServiceHandlerMockTemplateSearchParams{ctx, pp1, pp2},
-		expectationOrigins: NotificationServiceHandlerMockTemplateSearchExpectationOrigins{origin: minimock.CallerInfo(1)},
+		params:             &NotificationServiceClientMockTemplateSearchParams{ctx, pp1},
+		expectationOrigins: NotificationServiceClientMockTemplateSearchExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
 	mmTemplateSearch.expectations = append(mmTemplateSearch.expectations, expectation)
 	return expectation
 }
 
-// Then sets up NotificationServiceHandler.TemplateSearch return parameters for the expectation previously defined by the When method
-func (e *NotificationServiceHandlerMockTemplateSearchExpectation) Then(err error) *NotificationServiceHandlerMock {
-	e.results = &NotificationServiceHandlerMockTemplateSearchResults{err}
+// Then sets up NotificationServiceClient.TemplateSearch return parameters for the expectation previously defined by the When method
+func (e *NotificationServiceClientMockTemplateSearchExpectation) Then(pp2 *connect.ServerStreamForClient[v1.TemplateSearchResponse], err error) *NotificationServiceClientMock {
+	e.results = &NotificationServiceClientMockTemplateSearchResults{pp2, err}
 	return e.mock
 }
 
-// Times sets number of times NotificationServiceHandler.TemplateSearch should be invoked
-func (mmTemplateSearch *mNotificationServiceHandlerMockTemplateSearch) Times(n uint64) *mNotificationServiceHandlerMockTemplateSearch {
+// Times sets number of times NotificationServiceClient.TemplateSearch should be invoked
+func (mmTemplateSearch *mNotificationServiceClientMockTemplateSearch) Times(n uint64) *mNotificationServiceClientMockTemplateSearch {
 	if n == 0 {
-		mmTemplateSearch.mock.t.Fatalf("Times of NotificationServiceHandlerMock.TemplateSearch mock can not be zero")
+		mmTemplateSearch.mock.t.Fatalf("Times of NotificationServiceClientMock.TemplateSearch mock can not be zero")
 	}
 	mm_atomic.StoreUint64(&mmTemplateSearch.expectedInvocations, n)
 	mmTemplateSearch.expectedInvocationsOrigin = minimock.CallerInfo(1)
 	return mmTemplateSearch
 }
 
-func (mmTemplateSearch *mNotificationServiceHandlerMockTemplateSearch) invocationsDone() bool {
+func (mmTemplateSearch *mNotificationServiceClientMockTemplateSearch) invocationsDone() bool {
 	if len(mmTemplateSearch.expectations) == 0 && mmTemplateSearch.defaultExpectation == nil && mmTemplateSearch.mock.funcTemplateSearch == nil {
 		return true
 	}
@@ -2874,18 +2729,18 @@ func (mmTemplateSearch *mNotificationServiceHandlerMockTemplateSearch) invocatio
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// TemplateSearch implements mm_notificationv1connect.NotificationServiceHandler
-func (mmTemplateSearch *NotificationServiceHandlerMock) TemplateSearch(ctx context.Context, pp1 *connect.Request[v1.TemplateSearchRequest], pp2 *connect.ServerStream[v1.TemplateSearchResponse]) (err error) {
+// TemplateSearch implements mm_notificationv1connect.NotificationServiceClient
+func (mmTemplateSearch *NotificationServiceClientMock) TemplateSearch(ctx context.Context, pp1 *connect.Request[v1.TemplateSearchRequest]) (pp2 *connect.ServerStreamForClient[v1.TemplateSearchResponse], err error) {
 	mm_atomic.AddUint64(&mmTemplateSearch.beforeTemplateSearchCounter, 1)
 	defer mm_atomic.AddUint64(&mmTemplateSearch.afterTemplateSearchCounter, 1)
 
 	mmTemplateSearch.t.Helper()
 
 	if mmTemplateSearch.inspectFuncTemplateSearch != nil {
-		mmTemplateSearch.inspectFuncTemplateSearch(ctx, pp1, pp2)
+		mmTemplateSearch.inspectFuncTemplateSearch(ctx, pp1)
 	}
 
-	mm_params := NotificationServiceHandlerMockTemplateSearchParams{ctx, pp1, pp2}
+	mm_params := NotificationServiceClientMockTemplateSearchParams{ctx, pp1}
 
 	// Record call args
 	mmTemplateSearch.TemplateSearchMock.mutex.Lock()
@@ -2895,7 +2750,7 @@ func (mmTemplateSearch *NotificationServiceHandlerMock) TemplateSearch(ctx conte
 	for _, e := range mmTemplateSearch.TemplateSearchMock.expectations {
 		if minimock.Equal(*e.params, mm_params) {
 			mm_atomic.AddUint64(&e.Counter, 1)
-			return e.results.err
+			return e.results.pp2, e.results.err
 		}
 	}
 
@@ -2904,59 +2759,54 @@ func (mmTemplateSearch *NotificationServiceHandlerMock) TemplateSearch(ctx conte
 		mm_want := mmTemplateSearch.TemplateSearchMock.defaultExpectation.params
 		mm_want_ptrs := mmTemplateSearch.TemplateSearchMock.defaultExpectation.paramPtrs
 
-		mm_got := NotificationServiceHandlerMockTemplateSearchParams{ctx, pp1, pp2}
+		mm_got := NotificationServiceClientMockTemplateSearchParams{ctx, pp1}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmTemplateSearch.t.Errorf("NotificationServiceHandlerMock.TemplateSearch got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmTemplateSearch.t.Errorf("NotificationServiceClientMock.TemplateSearch got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmTemplateSearch.TemplateSearchMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
-				mmTemplateSearch.t.Errorf("NotificationServiceHandlerMock.TemplateSearch got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmTemplateSearch.t.Errorf("NotificationServiceClientMock.TemplateSearch got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 					mmTemplateSearch.TemplateSearchMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
 			}
 
-			if mm_want_ptrs.pp2 != nil && !minimock.Equal(*mm_want_ptrs.pp2, mm_got.pp2) {
-				mmTemplateSearch.t.Errorf("NotificationServiceHandlerMock.TemplateSearch got unexpected parameter pp2, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
-					mmTemplateSearch.TemplateSearchMock.defaultExpectation.expectationOrigins.originPp2, *mm_want_ptrs.pp2, mm_got.pp2, minimock.Diff(*mm_want_ptrs.pp2, mm_got.pp2))
-			}
-
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmTemplateSearch.t.Errorf("NotificationServiceHandlerMock.TemplateSearch got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+			mmTemplateSearch.t.Errorf("NotificationServiceClientMock.TemplateSearch got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
 				mmTemplateSearch.TemplateSearchMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
 		mm_results := mmTemplateSearch.TemplateSearchMock.defaultExpectation.results
 		if mm_results == nil {
-			mmTemplateSearch.t.Fatal("No results are set for the NotificationServiceHandlerMock.TemplateSearch")
+			mmTemplateSearch.t.Fatal("No results are set for the NotificationServiceClientMock.TemplateSearch")
 		}
-		return (*mm_results).err
+		return (*mm_results).pp2, (*mm_results).err
 	}
 	if mmTemplateSearch.funcTemplateSearch != nil {
-		return mmTemplateSearch.funcTemplateSearch(ctx, pp1, pp2)
+		return mmTemplateSearch.funcTemplateSearch(ctx, pp1)
 	}
-	mmTemplateSearch.t.Fatalf("Unexpected call to NotificationServiceHandlerMock.TemplateSearch. %v %v %v", ctx, pp1, pp2)
+	mmTemplateSearch.t.Fatalf("Unexpected call to NotificationServiceClientMock.TemplateSearch. %v %v", ctx, pp1)
 	return
 }
 
-// TemplateSearchAfterCounter returns a count of finished NotificationServiceHandlerMock.TemplateSearch invocations
-func (mmTemplateSearch *NotificationServiceHandlerMock) TemplateSearchAfterCounter() uint64 {
+// TemplateSearchAfterCounter returns a count of finished NotificationServiceClientMock.TemplateSearch invocations
+func (mmTemplateSearch *NotificationServiceClientMock) TemplateSearchAfterCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmTemplateSearch.afterTemplateSearchCounter)
 }
 
-// TemplateSearchBeforeCounter returns a count of NotificationServiceHandlerMock.TemplateSearch invocations
-func (mmTemplateSearch *NotificationServiceHandlerMock) TemplateSearchBeforeCounter() uint64 {
+// TemplateSearchBeforeCounter returns a count of NotificationServiceClientMock.TemplateSearch invocations
+func (mmTemplateSearch *NotificationServiceClientMock) TemplateSearchBeforeCounter() uint64 {
 	return mm_atomic.LoadUint64(&mmTemplateSearch.beforeTemplateSearchCounter)
 }
 
-// Calls returns a list of arguments used in each call to NotificationServiceHandlerMock.TemplateSearch.
+// Calls returns a list of arguments used in each call to NotificationServiceClientMock.TemplateSearch.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmTemplateSearch *mNotificationServiceHandlerMockTemplateSearch) Calls() []*NotificationServiceHandlerMockTemplateSearchParams {
+func (mmTemplateSearch *mNotificationServiceClientMockTemplateSearch) Calls() []*NotificationServiceClientMockTemplateSearchParams {
 	mmTemplateSearch.mutex.RLock()
 
-	argCopy := make([]*NotificationServiceHandlerMockTemplateSearchParams, len(mmTemplateSearch.callArgs))
+	argCopy := make([]*NotificationServiceClientMockTemplateSearchParams, len(mmTemplateSearch.callArgs))
 	copy(argCopy, mmTemplateSearch.callArgs)
 
 	mmTemplateSearch.mutex.RUnlock()
@@ -2966,7 +2816,7 @@ func (mmTemplateSearch *mNotificationServiceHandlerMockTemplateSearch) Calls() [
 
 // MinimockTemplateSearchDone returns true if the count of the TemplateSearch invocations corresponds
 // the number of defined expectations
-func (m *NotificationServiceHandlerMock) MinimockTemplateSearchDone() bool {
+func (m *NotificationServiceClientMock) MinimockTemplateSearchDone() bool {
 	if m.TemplateSearchMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
@@ -2982,10 +2832,10 @@ func (m *NotificationServiceHandlerMock) MinimockTemplateSearchDone() bool {
 }
 
 // MinimockTemplateSearchInspect logs each unmet expectation
-func (m *NotificationServiceHandlerMock) MinimockTemplateSearchInspect() {
+func (m *NotificationServiceClientMock) MinimockTemplateSearchInspect() {
 	for _, e := range m.TemplateSearchMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to NotificationServiceHandlerMock.TemplateSearch at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to NotificationServiceClientMock.TemplateSearch at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
@@ -2993,24 +2843,24 @@ func (m *NotificationServiceHandlerMock) MinimockTemplateSearchInspect() {
 	// if default expectation was set then invocations count should be greater than zero
 	if m.TemplateSearchMock.defaultExpectation != nil && afterTemplateSearchCounter < 1 {
 		if m.TemplateSearchMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to NotificationServiceHandlerMock.TemplateSearch at\n%s", m.TemplateSearchMock.defaultExpectation.returnOrigin)
+			m.t.Errorf("Expected call to NotificationServiceClientMock.TemplateSearch at\n%s", m.TemplateSearchMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to NotificationServiceHandlerMock.TemplateSearch at\n%s with params: %#v", m.TemplateSearchMock.defaultExpectation.expectationOrigins.origin, *m.TemplateSearchMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to NotificationServiceClientMock.TemplateSearch at\n%s with params: %#v", m.TemplateSearchMock.defaultExpectation.expectationOrigins.origin, *m.TemplateSearchMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
 	if m.funcTemplateSearch != nil && afterTemplateSearchCounter < 1 {
-		m.t.Errorf("Expected call to NotificationServiceHandlerMock.TemplateSearch at\n%s", m.funcTemplateSearchOrigin)
+		m.t.Errorf("Expected call to NotificationServiceClientMock.TemplateSearch at\n%s", m.funcTemplateSearchOrigin)
 	}
 
 	if !m.TemplateSearchMock.invocationsDone() && afterTemplateSearchCounter > 0 {
-		m.t.Errorf("Expected %d calls to NotificationServiceHandlerMock.TemplateSearch at\n%s but found %d calls",
+		m.t.Errorf("Expected %d calls to NotificationServiceClientMock.TemplateSearch at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.TemplateSearchMock.expectedInvocations), m.TemplateSearchMock.expectedInvocationsOrigin, afterTemplateSearchCounter)
 	}
 }
 
 // MinimockFinish checks that all mocked methods have been called the expected number of times
-func (m *NotificationServiceHandlerMock) MinimockFinish() {
+func (m *NotificationServiceClientMock) MinimockFinish() {
 	m.finishOnce.Do(func() {
 		if !m.minimockDone() {
 			m.MinimockReceiveInspect()
@@ -3033,7 +2883,7 @@ func (m *NotificationServiceHandlerMock) MinimockFinish() {
 }
 
 // MinimockWait waits for all mocked methods to be called the expected number of times
-func (m *NotificationServiceHandlerMock) MinimockWait(timeout mm_time.Duration) {
+func (m *NotificationServiceClientMock) MinimockWait(timeout mm_time.Duration) {
 	timeoutCh := mm_time.After(timeout)
 	for {
 		if m.minimockDone() {
@@ -3048,7 +2898,7 @@ func (m *NotificationServiceHandlerMock) MinimockWait(timeout mm_time.Duration) 
 	}
 }
 
-func (m *NotificationServiceHandlerMock) minimockDone() bool {
+func (m *NotificationServiceClientMock) minimockDone() bool {
 	done := true
 	return done &&
 		m.MinimockReceiveDone() &&
