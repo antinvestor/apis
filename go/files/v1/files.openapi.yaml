@@ -1,0 +1,889 @@
+openapi: 3.1.0
+info:
+  title: Files Management API
+  description: The Files Management API provides comprehensive file and media management capabilities including upload, download, thumbnail generation, and search. Files are identified using MXC URIs (mxc://server/media_id) following Matrix content repository patterns. The API supports content type detection, file metadata tracking, thumbnail generation with configurable dimensions, URL preview generation, and efficient search across uploaded media.
+  contact:
+    name: Ant Investor Ltd
+    url: https://github.com/antinvestor/apis
+    email: info@antinvestor.com
+  license:
+    name: Apache License
+    url: https://github.com/antinvestor/apis/blob/master/LICENSE
+  version: v1.0.0
+paths:
+  /files.v1.FilesService/CreateContent:
+    post:
+      tags:
+        - Media
+        - files.v1.FilesService
+      summary: Create MXC URI without content
+      description: Creates a new MXC URI without uploading content. Use the returned server_name and media_id with UploadContent to upload the actual content later. Useful for resumable uploads or when you need the URI before content is ready.
+      operationId: createContent
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/files.v1.CreateContentRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.CreateContentResponse'
+  /files.v1.FilesService/GetConfig:
+    post:
+      tags:
+        - Media
+        - files.v1.FilesService
+      summary: Get repository configuration
+      description: Retrieves the content repository configuration including upload size limits and other parameters.
+      operationId: getConfig
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/files.v1.GetConfigRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.GetConfigResponse'
+  /files.v1.FilesService/GetContent:
+    post:
+      tags:
+        - Media
+        - files.v1.FilesService
+      summary: Download content
+      description: Downloads content from the content repository using its MXC URI.
+      operationId: getContent
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/files.v1.GetContentRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.GetContentResponse'
+  /files.v1.FilesService/GetContentOverrideName:
+    post:
+      tags:
+        - Media
+        - files.v1.FilesService
+      summary: Download content with filename override
+      description: Downloads content from the repository and overrides the filename in Content-Disposition header.
+      operationId: getContentOverrideName
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/files.v1.GetContentOverrideNameRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.GetContentOverrideNameResponse'
+  /files.v1.FilesService/GetContentThumbnail:
+    post:
+      tags:
+        - Media
+        - files.v1.FilesService
+      summary: Get content thumbnail
+      description: Retrieves a thumbnail of content with specified dimensions and resizing method. Supports both static and animated thumbnails.
+      operationId: getContentThumbnail
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/files.v1.GetContentThumbnailRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.GetContentThumbnailResponse'
+  /files.v1.FilesService/GetUrlPreview:
+    post:
+      tags:
+        - Media
+        - files.v1.FilesService
+      summary: Get URL preview
+      description: Retrieves OpenGraph metadata for a URL to render a preview. Returns title, description, image, and other metadata.
+      operationId: getUrlPreview
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/files.v1.GetUrlPreviewRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.GetUrlPreviewResponse'
+  /files.v1.FilesService/SearchMedia:
+    post:
+      tags:
+        - Media
+        - files.v1.FilesService
+      summary: Search media files
+      description: Searches for media files matching specified criteria with support for pagination, owner filtering, and date range filtering.
+      operationId: searchMedia
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/files.v1.SearchMediaRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.SearchMediaResponse'
+  /files.v1.FilesService/UploadContent: {}
+components:
+  schemas:
+    connect-protocol-version:
+      type: number
+      title: Connect-Protocol-Version
+      enum:
+        - 1
+      description: Define the version of the Connect protocol
+      const: 1
+    connect-timeout-header:
+      type: number
+      title: Connect-Timeout-Ms
+      description: Define the timeout, in ms
+    connect.error:
+      type: object
+      properties:
+        code:
+          type: string
+          examples:
+            - not_found
+          enum:
+            - canceled
+            - unknown
+            - invalid_argument
+            - deadline_exceeded
+            - not_found
+            - already_exists
+            - permission_denied
+            - resource_exhausted
+            - failed_precondition
+            - aborted
+            - out_of_range
+            - unimplemented
+            - internal
+            - unavailable
+            - data_loss
+            - unauthenticated
+          description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
+        message:
+          type: string
+          description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/connect.error_details.Any'
+          description: A list of messages that carry the error details. There is no limit on the number of messages.
+      title: Connect Error
+      additionalProperties: true
+      description: 'Error type returned by Connect: https://connectrpc.com/docs/go/errors/#http-representation'
+    connect.error_details.Any:
+      type: object
+      properties:
+        type:
+          type: string
+          description: 'A URL that acts as a globally unique identifier for the type of the serialized message. For example: `type.googleapis.com/google.rpc.ErrorInfo`. This is used to determine the schema of the data in the `value` field and is the discriminator for the `debug` field.'
+        value:
+          type: string
+          format: binary
+          description: The Protobuf message, serialized as bytes and base64-encoded. The specific message type is identified by the `type` field.
+        debug:
+          oneOf:
+            - type: object
+              title: Any
+              additionalProperties: true
+              description: Detailed error information.
+          discriminator:
+            propertyName: type
+          title: Debug
+          description: Deserialized error detail payload. The 'type' field indicates the schema. This field is for easier debugging and should not be relied upon for application logic.
+      additionalProperties: true
+      description: Contains an arbitrary serialized message along with a @type that describes the type of the serialized message, with an additional debug field for ConnectRPC error details.
+    files.v1.CreateContentRequest:
+      type: object
+      properties:
+        contentType:
+          type: string
+          title: content_type
+          description: Expected MIME type of the content
+        filename:
+          type: string
+          title: filename
+          description: Expected filename
+      title: CreateContentRequest
+      additionalProperties: false
+      description: |-
+        CreateContentRequest creates a new MXC URI without uploading content.
+         The returned MXC URI can be used later with UploadContent by setting the
+         server_name and media_id fields in UploadMetadata.
+    files.v1.CreateContentResponse:
+      type: object
+      properties:
+        contentUri:
+          type: string
+          title: content_uri
+          description: The mxc:// URI for future upload
+        unusedExpiresAt:
+          type:
+            - integer
+            - string
+          title: unused_expires_at
+          format: int64
+          description: Timestamp when the URI expires if unused
+        mediaId:
+          type: string
+          title: media_id
+          description: Extracted media ID from the URI
+        serverName:
+          type: string
+          title: server_name
+          description: Extracted server name from the URI
+      title: CreateContentResponse
+      additionalProperties: false
+      description: CreateContentResponse returns the created MXC URI.
+    files.v1.GetConfigRequest:
+      type: object
+      title: GetConfigRequest
+      additionalProperties: false
+      description: GetConfigRequest retrieves content repository configuration. Empty request
+    files.v1.GetConfigResponse:
+      type: object
+      properties:
+        maxUploadSize:
+          type:
+            - integer
+            - string
+          title: max_upload_size
+          format: int64
+          description: Maximum upload size in bytes
+        extra:
+          title: extra
+          description: Additional configuration
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: GetConfigResponse
+      additionalProperties: false
+      description: GetConfigResponse returns repository configuration.
+    files.v1.GetContentOverrideNameRequest:
+      type: object
+      properties:
+        serverName:
+          type: string
+          title: server_name
+          minLength: 1
+          description: Server name from MXC URI
+        mediaId:
+          type: string
+          title: media_id
+          minLength: 1
+          description: Media ID from MXC URI
+        fileName:
+          type: string
+          title: file_name
+          minLength: 1
+          description: Override filename
+        timeoutMs:
+          type:
+            - integer
+            - string
+          title: timeout_ms
+          format: int64
+          description: Timeout in milliseconds (default 20000)
+      title: GetContentOverrideNameRequest
+      additionalProperties: false
+      description: GetContentOverrideNameRequest downloads content with a specific filename.
+    files.v1.GetContentOverrideNameResponse:
+      type: object
+      properties:
+        content:
+          type: string
+          title: content
+          format: byte
+          description: The file content
+        contentType:
+          type: string
+          title: content_type
+          description: MIME type of the content
+        filename:
+          type: string
+          title: filename
+          description: The overridden filename
+      title: GetContentOverrideNameResponse
+      additionalProperties: false
+      description: GetContentOverrideNameResponse returns content with overridden filename.
+    files.v1.GetContentRequest:
+      type: object
+      properties:
+        serverName:
+          type: string
+          title: server_name
+          minLength: 1
+          description: Server name from MXC URI
+        mediaId:
+          type: string
+          title: media_id
+          minLength: 1
+          description: Media ID from MXC URI
+        timeoutMs:
+          type:
+            - integer
+            - string
+          title: timeout_ms
+          format: int64
+          description: Timeout in milliseconds (default 20000)
+      title: GetContentRequest
+      additionalProperties: false
+      description: GetContentRequest downloads content from the repository.
+    files.v1.GetContentResponse:
+      type: object
+      properties:
+        content:
+          type: string
+          title: content
+          format: byte
+          description: The file content
+        contentType:
+          type: string
+          title: content_type
+          description: MIME type of the content
+        filename:
+          type: string
+          title: filename
+          description: Filename from Content-Disposition
+      title: GetContentResponse
+      additionalProperties: false
+      description: GetContentResponse returns the requested content.
+    files.v1.GetContentThumbnailRequest:
+      type: object
+      properties:
+        serverName:
+          type: string
+          title: server_name
+          minLength: 1
+          description: Server name from MXC URI
+        mediaId:
+          type: string
+          title: media_id
+          minLength: 1
+          description: Media ID from MXC URI
+        width:
+          exclusiveMinimum: 0
+          type: integer
+          title: width
+          format: int32
+          description: Desired width in pixels
+        height:
+          exclusiveMinimum: 0
+          type: integer
+          title: height
+          format: int32
+          description: Desired height in pixels
+        method:
+          title: method
+          description: Resizing method (scale or crop)
+          $ref: '#/components/schemas/files.v1.ThumbnailMethod'
+        timeoutMs:
+          type:
+            - integer
+            - string
+          title: timeout_ms
+          format: int64
+          description: Timeout in milliseconds (default 20000)
+        animated:
+          type: boolean
+          title: animated
+          description: Prefer animated thumbnail if available
+      title: GetContentThumbnailRequest
+      additionalProperties: false
+      description: GetContentThumbnailRequest retrieves a thumbnail of content.
+    files.v1.GetContentThumbnailResponse:
+      type: object
+      properties:
+        content:
+          type: string
+          title: content
+          format: byte
+          description: The thumbnail bytes
+        contentType:
+          type: string
+          title: content_type
+          description: MIME type (image/jpeg, image/png, etc.)
+        filename:
+          type: string
+          title: filename
+          description: Filename for the thumbnail
+      title: GetContentThumbnailResponse
+      additionalProperties: false
+      description: GetContentThumbnailResponse returns the thumbnail.
+    files.v1.GetUrlPreviewRequest:
+      type: object
+      properties:
+        url:
+          type: string
+          title: url
+          format: uri
+          description: URL to preview
+        ts:
+          type:
+            - integer
+            - string
+          title: ts
+          format: int64
+          description: Preferred point in time for the preview
+      title: GetUrlPreviewRequest
+      additionalProperties: false
+      description: GetUrlPreviewRequest gets preview information for a URL.
+    files.v1.GetUrlPreviewResponse:
+      type: object
+      properties:
+        ogData:
+          title: og_data
+          description: OpenGraph data (og:title, og:description, etc.)
+          $ref: '#/components/schemas/google.protobuf.Struct'
+        matrixImageSize:
+          type:
+            - integer
+            - string
+          title: matrix_image_size
+          format: int64
+          description: Size of the image in bytes
+        ogImage:
+          type: string
+          title: og_image
+          description: MXC URI of the preview image
+      title: GetUrlPreviewResponse
+      additionalProperties: false
+      description: GetUrlPreviewResponse returns OpenGraph data for the URL.
+    files.v1.MediaMetadata:
+      type: object
+      properties:
+        mediaId:
+          type: string
+          title: media_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+          description: The media ID from the MXC URI
+        serverName:
+          type: string
+          title: server_name
+          description: The server name from the MXC URI
+        contentType:
+          type: string
+          title: content_type
+          description: MIME type of the content
+        fileSizeBytes:
+          type:
+            - integer
+            - string
+          title: file_size_bytes
+          format: int64
+          description: Size of the file in bytes
+        creationTimestamp:
+          type:
+            - integer
+            - string
+          title: creation_timestamp
+          format: int64
+          description: Unix timestamp when file was uploaded
+        uploadName:
+          type: string
+          title: upload_name
+          description: Original filename when uploaded
+        base64Hash:
+          type: string
+          title: base64_hash
+          description: Base64 encoded hash of the file
+        ownerId:
+          type: string
+          title: owner_id
+          description: ID of the user who uploaded the file
+        parentId:
+          type: string
+          title: parent_id
+          description: Optional parent media ID
+        extra:
+          title: extra
+          description: Additional metadata
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: MediaMetadata
+      additionalProperties: false
+      description: MediaMetadata represents metadata about an uploaded file.
+    files.v1.SearchMediaRequest:
+      type: object
+      properties:
+        query:
+          type: string
+          title: query
+          description: Search query string
+        page:
+          type: integer
+          title: page
+          format: int32
+          description: Page number (default 0)
+        limit:
+          type: integer
+          title: limit
+          maximum: 100
+          minimum: 1
+          format: int32
+          description: Results per page (default 20, max 100)
+        ownerId:
+          type: string
+          title: owner_id
+          description: Filter by owner ID
+        parentId:
+          type: string
+          title: parent_id
+          description: Filter by parent media ID
+        startDate:
+          type: string
+          title: start_date
+          description: Filter by creation date (start range, RFC3339)
+        endDate:
+          type: string
+          title: end_date
+          description: Filter by creation date (end range, RFC3339)
+      title: SearchMediaRequest
+      additionalProperties: false
+      description: SearchMediaRequest searches for media files.
+    files.v1.SearchMediaResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/files.v1.MediaMetadata'
+          title: results
+          description: Array of matching media metadata
+        total:
+          type: integer
+          title: total
+          format: int32
+          description: Total number of results in this page
+        page:
+          type: integer
+          title: page
+          format: int32
+          description: Current page number
+        hasMore:
+          type: boolean
+          title: has_more
+          description: Whether there are more results available
+      title: SearchMediaResponse
+      additionalProperties: false
+      description: SearchMediaResponse returns search results.
+    files.v1.ThumbnailMethod:
+      type: string
+      title: ThumbnailMethod
+      enum:
+        - SCALE
+        - CROP
+      description: |-
+        ThumbnailMethod defines how thumbnails should be generated.
+         buf:lint:ignore ENUM_VALUE_PREFIX
+    files.v1.UploadContentRequest:
+      type: object
+      oneOf:
+        - properties:
+            chunk:
+              type: string
+              title: chunk
+              format: byte
+              description: Content chunk (one or more messages)
+          title: chunk
+          required:
+            - chunk
+        - properties:
+            metadata:
+              title: metadata
+              description: Metadata (required as first message)
+              $ref: '#/components/schemas/files.v1.UploadMetadata'
+          title: metadata
+          required:
+            - metadata
+      title: UploadContentRequest
+      additionalProperties: false
+      description: |-
+        UploadContentRequest uploads content to the content repository via streaming.
+         First message must contain metadata, followed by one or more messages with chunks.
+    files.v1.UploadContentResponse:
+      type: object
+      properties:
+        contentUri:
+          type: string
+          title: content_uri
+          description: The mxc:// URI for the uploaded content
+        mediaId:
+          type: string
+          title: media_id
+          description: Extracted media ID from the URI
+        serverName:
+          type: string
+          title: server_name
+          description: Extracted server name from the URI
+      title: UploadContentResponse
+      additionalProperties: false
+      description: UploadContentResponse returns the MXC URI for the uploaded content.
+    files.v1.UploadMetadata:
+      type: object
+      properties:
+        contentType:
+          type: string
+          title: content_type
+          description: MIME type of the content (defaults to application/octet-stream)
+        filename:
+          type: string
+          title: filename
+          description: Original filename
+        totalSize:
+          type:
+            - integer
+            - string
+          title: total_size
+          format: int64
+          description: Total size of the file in bytes (optional)
+        properties:
+          title: properties
+          description: Additional properties
+          $ref: '#/components/schemas/google.protobuf.Struct'
+        serverName:
+          type: string
+          title: server_name
+          description: 'Optional: Set these to upload to a pre-created MXC URI (from CreateContent) Server name from the MXC URI (e.g., "example.com" from "mxc://example.com/abc123")'
+        mediaId:
+          type: string
+          title: media_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+          description: Media ID from the MXC URI (e.g., "abc123" from "mxc://example.com/abc123")
+      title: UploadMetadata
+      additionalProperties: false
+      description: |-
+        UploadMetadata contains metadata for file upload.
+         This must be sent as the first message in the upload stream.
+
+         Usage:
+         - For new uploads: Leave server_name and media_id empty. The service will generate a new MXC URI.
+         - For pre-created MXC URIs: Set server_name and media_id from the URI created via CreateContent.
+           This allows uploading content to a URI that was created earlier, useful for resumable uploads
+           or when you need the URI before the content is ready.
+    google.protobuf.ListValue:
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/google.protobuf.Value'
+          title: values
+          description: Repeated field of dynamically typed values.
+      title: ListValue
+      additionalProperties: false
+      description: |-
+        `ListValue` is a wrapper around a repeated field of values.
+
+         The JSON representation for `ListValue` is JSON array.
+    google.protobuf.NullValue:
+      type: string
+      title: NullValue
+      enum:
+        - NULL_VALUE
+      description: |-
+        `NullValue` is a singleton enumeration to represent the null value for the
+         `Value` type union.
+
+         The JSON representation for `NullValue` is JSON `null`.
+    google.protobuf.Struct:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/google.protobuf.Value'
+      description: |-
+        `Struct` represents a structured data value, consisting of fields
+         which map to dynamically typed values. In some languages, `Struct`
+         might be supported by a native representation. For example, in
+         scripting languages like JS a struct is represented as an
+         object. The details of that representation are described together
+         with the proto support for the language.
+
+         The JSON representation for `Struct` is JSON object.
+    google.protobuf.Struct.FieldsEntry:
+      type: object
+      properties:
+        key:
+          type: string
+          title: key
+        value:
+          title: value
+          $ref: '#/components/schemas/google.protobuf.Value'
+      title: FieldsEntry
+      additionalProperties: false
+    google.protobuf.Value:
+      oneOf:
+        - type: "null"
+        - type: number
+        - type: string
+        - type: boolean
+        - type: array
+        - type: object
+          additionalProperties: true
+      description: |-
+        `Value` represents a dynamically typed value which can be either
+         null, a number, a string, a boolean, a recursive struct value, or a
+         list of values. A producer of value is expected to set one of these
+         variants. Absence of any variant indicates an error.
+
+         The JSON representation for `Value` is JSON value.
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security: []
+tags:
+  - name: files.v1.FilesService
+    description: |-
+      FilesService manages file and media operations including upload, download,
+       thumbnail generation, and search functionality.

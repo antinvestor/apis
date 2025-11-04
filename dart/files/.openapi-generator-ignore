@@ -1,7 +1,0 @@
-# Don't overwrite these files
-pubspec.yaml
-README.md
-CHANGELOG.md
-LICENSE
-analysis_options.yaml
-.gitignore

@@ -31,7 +31,7 @@ endef
 define connect_handler_mock
 cd go/$(1) && \
 	mkdir -p mocks && \
-	$(BIN)/counterfeiter -o mocks/$(6) buf.build/gen/go/antinvestor/$(if $(2),$(2),$(1))/connectrpc/go/$(if $(3),$(3),$(1))/$(4)/$(if $(3),$(3),$(1))$(4)connect.$(5)
+	$(BIN)/minimock -o mocks/$(3)_handler.gen.go -i buf.build/gen/go/antinvestor/$(if $(5),$(5),$(1))/connectrpc/go/$(1)/$(2)/$(1)$(2)connect.$(4)
 
 endef
 
@@ -92,6 +92,7 @@ lintfix: $(BIN)/golangci-lint $(BIN)/buf $(BIN)/gomock ## Automatically fix some
 	$(call lint_fix_module,common)
 	$(call lint_fix_module,chat)
 	$(call lint_fix_module,device)
+	$(call lint_fix_module,files)
 	$(call lint_fix_module,notification)
 	$(call lint_fix_module,ocr)
 	$(call lint_fix_module,partition)
@@ -108,6 +109,7 @@ golang_lint_all: $(BIN)/golangci-lint $(BIN)/buf $(BIN)/gomock ## Lint Go and pr
 	$(call golang_lint,common)
 	$(call golang_lint,chat)
 	$(call golang_lint,device)
+	$(call golang_lint,files)
 	$(call golang_lint,notification)
 	$(call golang_lint,ocr)
 	$(call golang_lint,partition)
@@ -161,20 +163,21 @@ openapi_files_gen_dart: ## Generate the dart open api spec for the files server
 		-i /local/proto/v1/openapi.yaml
 
 
-.PHONY: generate_counterfeiter_mocks
-generate_counterfeiter_mocks: $(BIN)/counterfeiter
-	$(call connect_handler_mock,chat,,chat,v1,ChatServiceHandler,chat_connect_svc_fake.go)
-	$(call connect_handler_mock,chat,,chat,v1,GatewayServiceHandler,gateway_connect_svc_fake.go)
-	$(call connect_handler_mock,device,,device,v1,DeviceServiceHandler,device_connect_svc_fake.go)
-	$(call connect_handler_mock,notification,,notification,v1,NotificationServiceHandler,notification_connect_svc_fake.go)
-	$(call connect_handler_mock,ocr,,ocr,v1,OCRServiceHandler,ocr_connect_svc_fake.go)
-	$(call connect_handler_mock,partition,,partition,v1,PartitionServiceHandler,partition_connect_svc_fake.go)
-	$(call connect_handler_mock,payment,,payment,v1,PaymentServiceHandler,payment_connect_svc_fake.go)
-	$(call connect_handler_mock,profile,,profile,v1,ProfileServiceHandler,profile_connect_svc_fake.go)
-	$(call connect_handler_mock,property,,property,v1,PropertyServiceHandler,property_connect_svc_fake.go)
-	$(call connect_handler_mock,settings,settingz,settings,v1,SettingsServiceHandler,settings_connect_svc_fake.go)
-	$(call connect_handler_mock,ledger,,ledger,v1,LedgerServiceHandler,ledger_connect_svc_fake.go)
-	$(call connect_handler_mock,lostid,,lostid,v1,LostIdServiceHandler,lostid_connect_svc_fake.go)
+.PHONY: generate_minimock_mocks
+generate_minimock_mocks: $(BIN)/minimock
+	$(call connect_handler_mock,chat,v1,chat,ChatServiceHandler,)
+	$(call connect_handler_mock,chat,v1,gateway,GatewayServiceHandler,)
+	$(call connect_handler_mock,device,v1,device,DeviceServiceHandler,)
+	$(call connect_handler_mock,files,v1,files,FilesServiceHandler,)
+	$(call connect_handler_mock,notification,v1,notification,NotificationServiceHandler,)
+	$(call connect_handler_mock,ocr,v1,ocr,OCRServiceHandler,)
+	$(call connect_handler_mock,partition,v1,partition,PartitionServiceHandler,)
+	$(call connect_handler_mock,payment,v1,payment,PaymentServiceHandler,)
+	$(call connect_handler_mock,profile,v1,profile,ProfileServiceHandler,)
+	$(call connect_handler_mock,property,v1,property,PropertyServiceHandler,)
+	$(call connect_handler_mock,settings,v1,settings,SettingsServiceHandler,settingz)
+	$(call connect_handler_mock,ledger,v1,ledger,LedgerServiceHandler,)
+	$(call connect_handler_mock,lostid,v1,lostid,LostIdServiceHandler,)
 
 
 .PHONY: generate_buf_gen
@@ -182,6 +185,7 @@ generate_buf_gen:
 	$(call buf_generate,common)
 	$(call buf_generate,chat)
 	$(call buf_generate,device)
+	$(call buf_generate,files)
 	$(call buf_generate,notification)
 	$(call buf_generate,ledger)
 	$(call buf_generate,lostid)
@@ -199,10 +203,7 @@ generate_buf_gen:
 .PHONY: generate
 generate: $(BIN)/buf $(BIN)/license-header  ## Regenerate code and licenses
 	#$(MAKE) generate_buf_gen
-	$(MAKE) generate_counterfeiter_mocks
-	$(MAKE) openapi_files_gen_go
-	$(MAKE) openapi_files_gen_java
-	$(MAKE) openapi_files_gen_dart
+	$(MAKE) generate_minimock_mocks
 
 .PHONY: upgrade
 upgrade: ## Upgrade dependencies
@@ -225,6 +226,6 @@ $(BIN)/golangci-lint: Makefile
 	@mkdir -p $(@D)
 	$(GO) install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.64.8
 
-$(BIN)/counterfeiter: Makefile
+$(BIN)/minimock: Makefile
 	@mkdir -p $(@D)
-	$(GO) install github.com/maxbrunsfeld/counterfeiter/v6@latest
+	$(GO) install github.com/gojuno/minimock/v3/cmd/minimock@latest

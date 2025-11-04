@@ -2,6 +2,7 @@ version: v1
 directories:
   - common
   - ledger
+  - files
   - lostid
   - notification
   - ocr
