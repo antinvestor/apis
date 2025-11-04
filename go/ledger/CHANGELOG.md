@@ -14,6 +14,10 @@
    - PR: #823
 - Merge pull request #820 from antinvestor/feature/files-service-proto
 - chore(deps): bump buf.build/gen/go/antinvestor/ledger/protocolbuffers/go
+- chore(deps): bump buf.build/gen/go/antinvestor/ledger/connectrpc/go from 1.19.1-20251103165736-4a77a1f3d3a0.2 to 1.19.1-20251104075628-61e6d212b51c.2 in /go/ledger
+   - PR: #821
+- Merge pull request #820 from antinvestor/feature/files-service-proto
+- chore(deps): bump buf.build/gen/go/antinvestor/ledger/connectrpc/go
 
 
 
