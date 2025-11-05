@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.47.14] - 2025-11-05
+
+## Other
+
+- chore(deps): bump buf.build/gen/go/antinvestor/device/protocolbuffers/go from 1.36.10-20251104075601-1b4b2a5749d5.1 to 1.36.10-20251104183704-bebecd3f55c5.1 in /go/device
+   - PR: #834
+- chore(deps): bump buf.build/gen/go/antinvestor/device/protocolbuffers/go
+
+
+
 ## [1.47.12] - 2025-11-04
 
 ## Feature
