@@ -3,8 +3,8 @@ module github.com/antinvestor/apis/go/files
 go 1.25
 
 require (
-	buf.build/gen/go/antinvestor/files/connectrpc/go v1.19.1-20251104075611-a196581bb259.2
-	buf.build/gen/go/antinvestor/files/protocolbuffers/go v1.36.10-20251104075611-a196581bb259.1
+	buf.build/gen/go/antinvestor/files/connectrpc/go v1.19.1-20251104183715-d2644b68c6f4.2
+	buf.build/gen/go/antinvestor/files/protocolbuffers/go v1.36.10-20251104183715-d2644b68c6f4.1
 	connectrpc.com/connect v1.19.1
 	github.com/antinvestor/apis/go/common v1.47.9
 	github.com/gojuno/minimock/v3 v3.4.7
