@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.47.14] - 2025-11-05
+
+## Other
+
+- chore(deps): bump buf.build/gen/go/antinvestor/ledger/protocolbuffers/go from 1.36.10-20251104075628-61e6d212b51c.1 to 1.36.10-20251104183729-764d76fa8813.1 in /go/ledger
+   - PR: #830
+- chore(deps): bump buf.build/gen/go/antinvestor/ledger/protocolbuffers/go
+
+
+
 ## [1.47.12] - 2025-11-04
 
 ## Feature
