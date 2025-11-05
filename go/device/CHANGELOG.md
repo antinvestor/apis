@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.47.14] - 2025-11-05
+
+## Other
+
+- chore(deps): bump buf.build/gen/go/antinvestor/device/connectrpc/go from 1.19.1-20251104075601-1b4b2a5749d5.2 to 1.19.1-20251104183704-bebecd3f55c5.2 in /go/device
+   - PR: #835
+- chore(deps): bump buf.build/gen/go/antinvestor/device/connectrpc/go
+
+
+
 ## [1.47.12] - 2025-11-04
 
 ## Feature
