@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.47.14] - 2025-11-05
+
+## Other
+
+- chore(deps): bump github.com/antinvestor/apis/go/common from 1.47.9 to 1.47.12 in /go/ledger
+   - PR: #829
+- chore(deps): bump github.com/antinvestor/apis/go/common in /go/ledger
+
+
+
 ## [1.47.12] - 2025-11-04
 
 ## Feature
