@@ -1,5 +1,5 @@
-buf.build/gen/go/antinvestor/common/protocolbuffers/go v1.36.10-20251027183628-c4e88473969f.1 h1:o5ACGO7D1S+1sUfNE+6//IV4woX99tDpbWF5ygbsC5w=
-buf.build/gen/go/antinvestor/common/protocolbuffers/go v1.36.10-20251027183628-c4e88473969f.1/go.mod h1:olvEyNvRmvsLZe2Mdmh6o/BM0M+r2Q5k85YSAUj4XKo=
+buf.build/gen/go/antinvestor/common/protocolbuffers/go v1.36.10-20251104075539-aa13b0d20c93.1 h1:g9pjHWALy6XlZUWlYgg9KGRFPcbiUmtpBicBP4Ql/FU=
+buf.build/gen/go/antinvestor/common/protocolbuffers/go v1.36.10-20251104075539-aa13b0d20c93.1/go.mod h1:olvEyNvRmvsLZe2Mdmh6o/BM0M+r2Q5k85YSAUj4XKo=
 buf.build/gen/go/antinvestor/device/connectrpc/go v1.19.1-20251104075601-1b4b2a5749d5.2 h1:KwCbbOgBLYWWTsJ7lujR0MoP+VEsBIZq3KAEctGVuVY=
 buf.build/gen/go/antinvestor/device/connectrpc/go v1.19.1-20251104075601-1b4b2a5749d5.2/go.mod h1:1+nBTMSSoqTPEw1kg9DFTDFY15b309oEHJCneHnupBQ=
 buf.build/gen/go/antinvestor/device/protocolbuffers/go v1.36.10-20251104075601-1b4b2a5749d5.1 h1:9azyRE2HfJ+Z+us+O4uNgmx/i29B396+TheyVpmD2CE=
@@ -10,8 +10,8 @@ buf.build/gen/go/gnostic/gnostic/protocolbuffers/go v1.36.10-20230414000709-087b
 buf.build/gen/go/gnostic/gnostic/protocolbuffers/go v1.36.10-20230414000709-087bc8072ce4.1/go.mod h1:E0if/vOrI4rwufcOKziOMuFXnmpG1t6LhbZ5fVS6HX0=
 connectrpc.com/connect v1.19.1 h1:R5M57z05+90EfEvCY1b7hBxDVOUl45PrtXtAV2fOC14=
 connectrpc.com/connect v1.19.1/go.mod h1:tN20fjdGlewnSFeZxLKb0xwIZ6ozc3OQs2hTXy4du9w=
-github.com/antinvestor/apis/go/common v1.47.9 h1:k17iGrPjjLqErwKxVLFmRCkf+JekMagyfPZlW+TT2y4=
-github.com/antinvestor/apis/go/common v1.47.9/go.mod h1:x7fPM+5X7Er3pcxv7uqXEEt4SDdPkweNHgnw2tu2O6k=
+github.com/antinvestor/apis/go/common v1.47.12 h1:l33Vh/YBaQ+x4drKZ3SIaRSYoevebPmHfqK4K4yb1ns=
+github.com/antinvestor/apis/go/common v1.47.12/go.mod h1:ejosUvXb1ll1sOAqF6YwNjhqmN3nQc0sGU1rwdLMGe4=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/felixge/httpsnoop v1.0.4 h1:NFTV2Zj1bL4mc9sqWACXbQFVBBg2W3GPvqp8/ESS2Wg=
