@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.47.14] - 2025-11-10
+
+## Other
+
+- chore(deps): bump golang.org/x/oauth2 from 0.32.0 to 0.33.0 in /go/common
+   - PR: #845
+- chore(deps): bump golang.org/x/oauth2 in /go/common
+
+
+
 ## [1.47.12] - 2025-11-04
 
 ## Feature
