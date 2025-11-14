@@ -79,7 +79,7 @@ subprojects {
         api("com.connectrpc:connect-kotlin-okhttp:0.1.11")
         // Java specific dependencies.
         api("com.connectrpc:connect-kotlin-google-java-ext:0.1.11")
-        api("com.google.protobuf:protobuf-java:4.33.0")
+        api("com.google.protobuf:protobuf-java:4.33.1")
 
 
 
