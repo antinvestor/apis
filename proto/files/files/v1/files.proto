@@ -25,39 +25,38 @@ package files.v1;
 // -----------------------------------------------------
 
 import "buf/validate/validate.proto";
-import "google/protobuf/struct.proto";
 import "gnostic/openapi/v3/annotations.proto";
+import "google/protobuf/struct.proto";
 
 option cc_enable_arenas = true;
 option go_package = "github.com/antinvestor/apis/go/files/v1;filesv1";
 option java_multiple_files = true;
 option java_package = "filesv1";
-
 option (gnostic.openapi.v3.document) = {
   info: {
-    title: "Files Management API";
-    version: "v1.0.0";
-    description: "The Files Management API provides comprehensive file and media management capabilities including upload, download, thumbnail generation, and search. Files are identified using MXC URIs (mxc://server/media_id) following Matrix content repository patterns. The API supports content type detection, file metadata tracking, thumbnail generation with configurable dimensions, URL preview generation, and efficient search across uploaded media.";
+    title: "Files Management API"
+    version: "v1.0.0"
+    description: "The Files Management API provides comprehensive file and media management capabilities including upload, download, thumbnail generation, and search. Files are identified using MXC URIs (mxc://server/media_id) following Matrix content repository patterns. The API supports content type detection, file metadata tracking, thumbnail generation with configurable dimensions, URL preview generation, and efficient search across uploaded media."
     contact: {
-      name: "Ant Investor Ltd";
-      url: "https://github.com/antinvestor/apis";
-      email: "info@antinvestor.com";
+      name: "Ant Investor Ltd"
+      url: "https://github.com/antinvestor/apis"
+      email: "info@antinvestor.com"
     }
     license: {
-      name: "Apache License";
-      url: "https://github.com/antinvestor/apis/blob/master/LICENSE";
+      name: "Apache License"
+      url: "https://github.com/antinvestor/apis/blob/master/LICENSE"
     }
   }
   components: {
     security_schemes: {
       additional_properties: [
         {
-          name: "BearerAuth";
+          name: "BearerAuth"
           value: {
             security_scheme: {
-              type: "http";
-              scheme: "bearer";
-              bearer_format: "JWT";
+              type: "http"
+              scheme: "bearer"
+              bearer_format: "JWT"
             }
           }
         }
@@ -74,8 +73,8 @@ option (gnostic.openapi.v3.document) = {
 // buf:lint:ignore ENUM_VALUE_PREFIX
 enum ThumbnailMethod {
   // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
-  SCALE = 0;  // Scale the image to fit within dimensions, preserving aspect ratio
-  CROP = 1;   // Crop the image to exactly match dimensions
+  SCALE = 0; // Scale the image to fit within dimensions, preserving aspect ratio
+  CROP = 1; // Crop the image to exactly match dimensions
 }
 
 // -----------------------------------------------------
@@ -87,17 +86,28 @@ message MediaMetadata {
   string media_id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];           // The media ID from the MXC URI
-  string server_name = 2;        // The server name from the MXC URI
-  string content_type = 3;       // MIME type of the content
-  int64 file_size_bytes = 4;     // Size of the file in bytes
-  int64 creation_timestamp = 5;  // Unix timestamp when file was uploaded
-  string upload_name = 6;        // Original filename when uploaded
-  string base64_hash = 7;        // Base64 encoded hash of the file
-  string owner_id = 8;           // ID of the user who uploaded the file
-  string parent_id = 9;          // Optional parent media ID
-  google.protobuf.Struct extra = 10;  // Additional metadata
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // The media ID from the MXC URI
+  string server_name = 2; // The server name from the MXC URI
+  string content_type = 3; // MIME type of the content
+  int64 file_size_bytes = 4; // Size of the file in bytes
+  int64 creation_timestamp = 5; // Unix timestamp when file was uploaded
+  string upload_name = 6; // Original filename when uploaded
+  string base64_hash = 7; // Base64 encoded hash of the file
+  string owner_id = 8; // ID of the user who uploaded the file
+  string parent_id = 9; // Optional parent media ID
+  google.protobuf.Struct extra = 10 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ]; // Additional metadata
 }
 
 // -----------------------------------------------------
@@ -113,50 +123,61 @@ message MediaMetadata {
 //   This allows uploading content to a URI that was created earlier, useful for resumable uploads
 //   or when you need the URI before the content is ready.
 message UploadMetadata {
-  string content_type = 1;  // MIME type of the content (defaults to application/octet-stream)
-  string filename = 2;      // Original filename
-  int64 total_size = 3;     // Total size of the file in bytes (optional)
-  google.protobuf.Struct properties = 4;  // Additional properties
+  string content_type = 1; // MIME type of the content (defaults to application/octet-stream)
+  string filename = 2; // Original filename
+  int64 total_size = 3; // Total size of the file in bytes (optional)
+  google.protobuf.Struct properties = 4 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ]; // Additional properties
   // Optional: Set these to upload to a pre-created MXC URI (from CreateContent)
-  string server_name = 5;   // Server name from the MXC URI (e.g., "example.com" from "mxc://example.com/abc123")
+  string server_name = 5; // Server name from the MXC URI (e.g., "example.com" from "mxc://example.com/abc123")
   string media_id = 6 [
     (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];      // Media ID from the MXC URI (e.g., "abc123" from "mxc://example.com/abc123")
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Media ID from the MXC URI (e.g., "abc123" from "mxc://example.com/abc123")
 }
 
 // UploadContentRequest uploads content to the content repository via streaming.
 // First message must contain metadata, followed by one or more messages with chunks.
 message UploadContentRequest {
   oneof data {
-    UploadMetadata metadata = 1;  // Metadata (required as first message)
-    bytes chunk = 2;               // Content chunk (one or more messages)
+    UploadMetadata metadata = 1; // Metadata (required as first message)
+    bytes chunk = 2; // Content chunk (one or more messages)
   }
 }
 
 // UploadContentResponse returns the MXC URI for the uploaded content.
 message UploadContentResponse {
-  string content_uri = 1;  // The mxc:// URI for the uploaded content
-  string media_id = 2;     // Extracted media ID from the URI
-  string server_name = 3;  // Extracted server name from the URI
+  string content_uri = 1; // The mxc:// URI for the uploaded content
+  string media_id = 2; // Extracted media ID from the URI
+  string server_name = 3; // Extracted server name from the URI
 }
 
 // CreateContentRequest creates a new MXC URI without uploading content.
 // The returned MXC URI can be used later with UploadContent by setting the
 // server_name and media_id fields in UploadMetadata.
 message CreateContentRequest {
-  string content_type = 1;  // Expected MIME type of the content
-  string filename = 2;      // Expected filename
+  string content_type = 1; // Expected MIME type of the content
+  string filename = 2; // Expected filename
 }
 
 // CreateContentResponse returns the created MXC URI.
 message CreateContentResponse {
-  string content_uri = 1;      // The mxc:// URI for future upload
+  string content_uri = 1; // The mxc:// URI for future upload
   int64 unused_expires_at = 2; // Timestamp when the URI expires if unused
-  string media_id = 3;         // Extracted media ID from the URI
-  string server_name = 4;      // Extracted server name from the URI
+  string media_id = 3; // Extracted media ID from the URI
+  string server_name = 4; // Extracted server name from the URI
 }
 
 // -----------------------------------------------------
@@ -165,31 +186,31 @@ message CreateContentResponse {
 
 // GetContentRequest downloads content from the repository.
 message GetContentRequest {
-  string server_name = 1 [(buf.validate.field).string.min_len = 1];  // Server name from MXC URI
-  string media_id = 2 [(buf.validate.field).string.min_len = 1];     // Media ID from MXC URI
-  int64 timeout_ms = 3;  // Timeout in milliseconds (default 20000)
+  string server_name = 1 [(buf.validate.field).string.min_len = 1]; // Server name from MXC URI
+  string media_id = 2 [(buf.validate.field).string.min_len = 1]; // Media ID from MXC URI
+  int64 timeout_ms = 3; // Timeout in milliseconds (default 20000)
 }
 
 // GetContentResponse returns the requested content.
 message GetContentResponse {
-  bytes content = 1;        // The file content
-  string content_type = 2;  // MIME type of the content
-  string filename = 3;      // Filename from Content-Disposition
+  bytes content = 1; // The file content
+  string content_type = 2; // MIME type of the content
+  string filename = 3; // Filename from Content-Disposition
 }
 
 // GetContentOverrideNameRequest downloads content with a specific filename.
 message GetContentOverrideNameRequest {
-  string server_name = 1 [(buf.validate.field).string.min_len = 1];  // Server name from MXC URI
-  string media_id = 2 [(buf.validate.field).string.min_len = 1];     // Media ID from MXC URI
-  string file_name = 3 [(buf.validate.field).string.min_len = 1];    // Override filename
-  int64 timeout_ms = 4;  // Timeout in milliseconds (default 20000)
+  string server_name = 1 [(buf.validate.field).string.min_len = 1]; // Server name from MXC URI
+  string media_id = 2 [(buf.validate.field).string.min_len = 1]; // Media ID from MXC URI
+  string file_name = 3 [(buf.validate.field).string.min_len = 1]; // Override filename
+  int64 timeout_ms = 4; // Timeout in milliseconds (default 20000)
 }
 
 // GetContentOverrideNameResponse returns content with overridden filename.
 message GetContentOverrideNameResponse {
-  bytes content = 1;        // The file content
-  string content_type = 2;  // MIME type of the content
-  string filename = 3;      // The overridden filename
+  bytes content = 1; // The file content
+  string content_type = 2; // MIME type of the content
+  string filename = 3; // The overridden filename
 }
 
 // -----------------------------------------------------
@@ -198,20 +219,20 @@ message GetContentOverrideNameResponse {
 
 // GetContentThumbnailRequest retrieves a thumbnail of content.
 message GetContentThumbnailRequest {
-  string server_name = 1 [(buf.validate.field).string.min_len = 1];  // Server name from MXC URI
-  string media_id = 2 [(buf.validate.field).string.min_len = 1];     // Media ID from MXC URI
-  int32 width = 3 [(buf.validate.field).int32.gt = 0];               // Desired width in pixels
-  int32 height = 4 [(buf.validate.field).int32.gt = 0];              // Desired height in pixels
-  ThumbnailMethod method = 5;  // Resizing method (scale or crop)
-  int64 timeout_ms = 6;        // Timeout in milliseconds (default 20000)
-  bool animated = 7;           // Prefer animated thumbnail if available
+  string server_name = 1 [(buf.validate.field).string.min_len = 1]; // Server name from MXC URI
+  string media_id = 2 [(buf.validate.field).string.min_len = 1]; // Media ID from MXC URI
+  int32 width = 3 [(buf.validate.field).int32.gt = 0]; // Desired width in pixels
+  int32 height = 4 [(buf.validate.field).int32.gt = 0]; // Desired height in pixels
+  ThumbnailMethod method = 5; // Resizing method (scale or crop)
+  int64 timeout_ms = 6; // Timeout in milliseconds (default 20000)
+  bool animated = 7; // Prefer animated thumbnail if available
 }
 
 // GetContentThumbnailResponse returns the thumbnail.
 message GetContentThumbnailResponse {
-  bytes content = 1;        // The thumbnail bytes
-  string content_type = 2;  // MIME type (image/jpeg, image/png, etc.)
-  string filename = 3;      // Filename for the thumbnail
+  bytes content = 1; // The thumbnail bytes
+  string content_type = 2; // MIME type (image/jpeg, image/png, etc.)
+  string filename = 3; // Filename for the thumbnail
 }
 
 // -----------------------------------------------------
@@ -220,15 +241,26 @@ message GetContentThumbnailResponse {
 
 // GetUrlPreviewRequest gets preview information for a URL.
 message GetUrlPreviewRequest {
-  string url = 1 [(buf.validate.field).string.uri = true];  // URL to preview
-  int64 ts = 2;  // Preferred point in time for the preview
+  string url = 1 [(buf.validate.field).string.uri = true]; // URL to preview
+  int64 ts = 2; // Preferred point in time for the preview
 }
 
 // GetUrlPreviewResponse returns OpenGraph data for the URL.
 message GetUrlPreviewResponse {
-  google.protobuf.Struct og_data = 1;  // OpenGraph data (og:title, og:description, etc.)
-  int64 matrix_image_size = 2;         // Size of the image in bytes
-  string og_image = 3;                 // MXC URI of the preview image
+  google.protobuf.Struct og_data = 1 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ]; // OpenGraph data (og:title, og:description, etc.)
+  int64 matrix_image_size = 2; // Size of the image in bytes
+  string og_image = 3; // MXC URI of the preview image
 }
 
 // -----------------------------------------------------
@@ -242,8 +274,19 @@ message GetConfigRequest {
 
 // GetConfigResponse returns repository configuration.
 message GetConfigResponse {
-  int64 max_upload_size = 1;  // Maximum upload size in bytes
-  google.protobuf.Struct extra = 2;  // Additional configuration
+  int64 max_upload_size = 1; // Maximum upload size in bytes
+  google.protobuf.Struct extra = 2 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ]; // Additional configuration
 }
 
 // -----------------------------------------------------
@@ -252,24 +295,24 @@ message GetConfigResponse {
 
 // SearchMediaRequest searches for media files.
 message SearchMediaRequest {
-  string query = 1;       // Search query string
-  int32 page = 2;         // Page number (default 0)
+  string query = 1; // Search query string
+  int32 page = 2; // Page number (default 0)
   int32 limit = 3 [
     (buf.validate.field).int32.gte = 1,
     (buf.validate.field).int32.lte = 100
-  ];  // Results per page (default 20, max 100)
-  string owner_id = 4;    // Filter by owner ID
-  string parent_id = 5;   // Filter by parent media ID
-  string start_date = 6;  // Filter by creation date (start range, RFC3339)
-  string end_date = 7;    // Filter by creation date (end range, RFC3339)
+  ]; // Results per page (default 20, max 100)
+  string owner_id = 4; // Filter by owner ID
+  string parent_id = 5; // Filter by parent media ID
+  string start_date = 6; // Filter by creation date (start range, RFC3339)
+  string end_date = 7; // Filter by creation date (end range, RFC3339)
 }
 
 // SearchMediaResponse returns search results.
 message SearchMediaResponse {
-  repeated MediaMetadata results = 1;  // Array of matching media metadata
-  int32 total = 2;       // Total number of results in this page
-  int32 page = 3;        // Current page number
-  bool has_more = 4;     // Whether there are more results available
+  repeated MediaMetadata results = 1; // Array of matching media metadata
+  int32 total = 2; // Total number of results in this page
+  int32 page = 3; // Current page number
+  bool has_more = 4; // Whether there are more results available
 }
 
 // -----------------------------------------------------

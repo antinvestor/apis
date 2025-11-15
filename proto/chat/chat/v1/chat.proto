@@ -16,50 +16,47 @@ syntax = "proto3";
 
 package chat.v1;
 
+import "buf/validate/validate.proto";
 // -----------------------------------------------------
 // Core notes (normative):
 // - All timestamps are RFC3339 / google.protobuf.Timestamp.
 // - All flows should be idempotent / accept idempotency keys where relevant.
 // - Servers must enforce permission checks for each RPC (see AuthClaims below).
 // -----------------------------------------------------
-
-
 import "common/v1/common.proto";
-import "buf/validate/validate.proto";
+import "gnostic/openapi/v3/annotations.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
-import "gnostic/openapi/v3/annotations.proto";
 
 option go_package = "github.com/antinvestor/apis/go/chat/v1;chatv1";
 option java_multiple_files = true;
 option java_package = "chatv1";
-
 option (gnostic.openapi.v3.document) = {
   info: {
-    title: "Chat Service";
-    version: "v1.0.0";
-    description: "The Chat Service provides endpoints for real-time, secure messaging between users and devices. It supports sending, receiving, and synchronizing messages across rooms, direct chats, and group conversations, with optional end-to-end encryption. The service is designed for mobile, desktop, and web clients, supporting both streaming and standard request-response operations. APIs are consistent, well-structured, and optimized for low-latency delivery, even on limited network connections.";
+    title: "Chat Service"
+    version: "v1.0.0"
+    description: "The Chat Service provides endpoints for real-time, secure messaging between users and devices. It supports sending, receiving, and synchronizing messages across rooms, direct chats, and group conversations, with optional end-to-end encryption. The service is designed for mobile, desktop, and web clients, supporting both streaming and standard request-response operations. APIs are consistent, well-structured, and optimized for low-latency delivery, even on limited network connections."
     contact: {
-      name: "Ant Investor Ltd";
-      url: "https://github.com/antinvestor/service-chat";
-      email: "info@antinvestor.com";
+      name: "Ant Investor Ltd"
+      url: "https://github.com/antinvestor/service-chat"
+      email: "info@antinvestor.com"
     }
     license: {
-      name: "Apache License";
-      url: "https://github.com/antinvestor/apis/blob/master/LICENSE";
+      name: "Apache License"
+      url: "https://github.com/antinvestor/apis/blob/master/LICENSE"
     }
   }
   components: {
     security_schemes: {
       additional_properties: [
         {
-          name: "BearerAuth";
+          name: "BearerAuth"
           value: {
             security_scheme: {
-              type: "http";
-              scheme: "bearer";
-              bearer_format: "JWT";
+              type: "http"
+              scheme: "bearer"
+              bearer_format: "JWT"
             }
           }
         }
@@ -67,9 +64,6 @@ option (gnostic.openapi.v3.document) = {
     }
   }
 };
-
-
-
 
 // -----------------------------------------------------
 // Authentication & Authorization (claims):
@@ -90,7 +84,7 @@ service GatewayService {
   // Bi-directional, long-lived connection. Client sends ConnectRequest (initial auth + acks/commands).
   // Server streams ServerEvent objects in chronological order for rooms the client is subscribed to.
   // Stream resume: client may provide last_received_event_id or resume_token to continue after reconnect.
-  rpc Connect(stream ConnectRequest) returns (stream ServerEvent){
+  rpc Connect(stream ConnectRequest) returns (stream ServerEvent) {
     option (gnostic.openapi.v3.operation) = {
       operation_id: "connect"
       summary: "Establish bi-directional streaming connection"
@@ -109,9 +103,8 @@ service GatewayService {
 // -----------------------------------------------------
 
 service ChatService {
-
   // Send an event (unified message model). Idempotent if idempotency_key is provided.
-  rpc SendEvent(SendEventRequest) returns (SendEventResponse){
+  rpc SendEvent(SendEventRequest) returns (SendEventResponse) {
     option (gnostic.openapi.v3.operation) = {
       operation_id: "sendEvent"
       summary: "Send an event to a room"
@@ -121,7 +114,7 @@ service ChatService {
   }
 
   // Fetch history for a room. Cursor-based paging (cursor = opaque server token).
-  rpc GetHistory(GetHistoryRequest) returns (GetHistoryResponse){
+  rpc GetHistory(GetHistoryRequest) returns (GetHistoryResponse) {
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getHistory"
       summary: "Retrieve message history for a room"
@@ -131,7 +124,7 @@ service ChatService {
   }
 
   // Room lifecycle & management
-  rpc CreateRoom(CreateRoomRequest) returns (CreateRoomResponse){
+  rpc CreateRoom(CreateRoomRequest) returns (CreateRoomResponse) {
     option (gnostic.openapi.v3.operation) = {
       operation_id: "createRoom"
       summary: "Create a new chat room"
@@ -139,7 +132,7 @@ service ChatService {
       tags: "Rooms"
     };
   }
-  rpc SearchRooms(SearchRoomsRequest) returns (stream SearchRoomsResponse){
+  rpc SearchRooms(SearchRoomsRequest) returns (stream SearchRoomsResponse) {
     option (gnostic.openapi.v3.operation) = {
       operation_id: "searchRooms"
       summary: "Search for chat rooms"
@@ -147,7 +140,7 @@ service ChatService {
       tags: "Rooms"
     };
   }
-  rpc UpdateRoom(UpdateRoomRequest) returns (UpdateRoomResponse){
+  rpc UpdateRoom(UpdateRoomRequest) returns (UpdateRoomResponse) {
     option (gnostic.openapi.v3.operation) = {
       operation_id: "updateRoom"
       summary: "Update a chat room"
@@ -155,7 +148,7 @@ service ChatService {
       tags: "Rooms"
     };
   }
-  rpc DeleteRoom(DeleteRoomRequest) returns (DeleteRoomResponse){
+  rpc DeleteRoom(DeleteRoomRequest) returns (DeleteRoomResponse) {
     option (gnostic.openapi.v3.operation) = {
       operation_id: "deleteRoom"
       summary: "Delete a chat room"
@@ -165,7 +158,7 @@ service ChatService {
   }
 
   // Subscriptionship & roles
-  rpc AddRoomSubscriptions(AddRoomSubscriptionsRequest) returns (AddRoomSubscriptionsResponse){
+  rpc AddRoomSubscriptions(AddRoomSubscriptionsRequest) returns (AddRoomSubscriptionsResponse) {
     option (gnostic.openapi.v3.operation) = {
       operation_id: "addRoomSubscriptions"
       summary: "Add members to a room"
@@ -173,7 +166,7 @@ service ChatService {
       tags: "Subscriptions"
     };
   }
-  rpc RemoveRoomSubscriptions(RemoveRoomSubscriptionsRequest) returns (RemoveRoomSubscriptionsResponse){
+  rpc RemoveRoomSubscriptions(RemoveRoomSubscriptionsRequest) returns (RemoveRoomSubscriptionsResponse) {
     option (gnostic.openapi.v3.operation) = {
       operation_id: "removeRoomSubscriptions"
       summary: "Remove members from a room"
@@ -181,7 +174,7 @@ service ChatService {
       tags: "Subscriptions"
     };
   }
-  rpc UpdateSubscriptionRole(UpdateSubscriptionRoleRequest) returns (UpdateSubscriptionRoleResponse){
+  rpc UpdateSubscriptionRole(UpdateSubscriptionRoleRequest) returns (UpdateSubscriptionRoleResponse) {
     option (gnostic.openapi.v3.operation) = {
       operation_id: "updateSubscriptionRole"
       summary: "Update a member's role in a room"
@@ -189,7 +182,7 @@ service ChatService {
       tags: "Subscriptions"
     };
   }
-  rpc SearchRoomSubscriptions(SearchRoomSubscriptionsRequest) returns (SearchRoomSubscriptionsResponse){
+  rpc SearchRoomSubscriptions(SearchRoomSubscriptionsRequest) returns (SearchRoomSubscriptionsResponse) {
     option (gnostic.openapi.v3.operation) = {
       operation_id: "searchRoomSubscriptions"
       summary: "List room members"
@@ -202,7 +195,7 @@ service ChatService {
   // -----------------------------------------------------
 
   // Update different states that the client can be in for room subscriptions awareness
-  rpc UpdateClientState(UpdateClientStateRequest) returns (UpdateClientStateResponse){
+  rpc UpdateClientState(UpdateClientStateRequest) returns (UpdateClientStateResponse) {
     option (gnostic.openapi.v3.operation) = {
       operation_id: "updateClientState"
       summary: "Update state from client"
@@ -212,7 +205,7 @@ service ChatService {
   }
 
   // Get client state for a set of profiles in a room
-  rpc GetClientState(GetClientStateRequest) returns (GetClientStateResponse){
+  rpc GetClientState(GetClientStateRequest) returns (GetClientStateResponse) {
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getClientStates"
       summary: "Get client states for profiles in a room"
@@ -233,7 +226,7 @@ message ServerEvent {
   string id = 3 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   google.protobuf.Timestamp timestamp = 5;
   oneof payload {
@@ -244,32 +237,44 @@ message ServerEvent {
     TypingEvent typing_event = 17;
   }
 }
+
 // Unified message (user / bot / system / signalling)
 message RoomEvent {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];                           // client-supplied or server-generated UUID
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // client-supplied or server-generated UUID
   string room_id = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];         // room_id
-  string sender_id = 3[
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // room_id
+  string sender_id = 3 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];         // profile_id or service/bot id
-  RoomEventType type = 4;         // text, attachment, call_offer, etc.
-  google.protobuf.Struct payload = 6; // e.g. {"format":"markdown","mime":"image/png","attachment_id":"..."}
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // profile_id or service/bot id
+  RoomEventType type = 4; // text, attachment, call_offer, etc.
+  google.protobuf.Struct payload = 6 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ]; // e.g. {"format":"markdown","mime":"image/png","attachment_id":"..."}
   google.protobuf.Timestamp sent_at = 7;
   bool edited = 8;
   bool redacted = 9;
   optional string parent_id = 10 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ]; // if this message is a followup event on an original message
 }
 
@@ -295,10 +300,10 @@ enum RoomEventType {
 
 // Presence event affecting a user (and visible to rooms the user is a member of)
 message PresenceEvent {
-  string profile_id = 1[
+  string profile_id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   PresenceStatus status = 2;
   string status_msg = 3;
@@ -313,52 +318,52 @@ enum PresenceStatus {
 
 // Read receipts
 message ReceiptEvent {
-  string profile_id = 1[
+  string profile_id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
-  string room_id = 2[
+  string room_id = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
-  repeated string event_id = 3[
+  repeated string event_id = 3 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
 }
 
 message ReadMarker {
-  string room_id = 1[
+  string room_id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   string profile_id = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
-  string up_to_event_id = 3[
+  string up_to_event_id = 3 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
 }
 
 // Typing indicator
 message TypingEvent {
-  string profile_id = 1[
+  string profile_id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
-  string room_id = 2[
+  string room_id = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   bool typing = 3;
   google.protobuf.Timestamp since = 5;
@@ -391,18 +396,29 @@ message ConnectRequest {
 // ack_event_id: last event_id client processed (inclusive).
 // If error is set, indicates the event failed to send/process correctly.
 message StreamAck {
-  string room_id = 1[
+  string room_id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
-  string event_id = 2[
+  string event_id = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   google.protobuf.Timestamp ack_at = 3;
-  google.protobuf.Struct metadata = 6;
+  google.protobuf.Struct metadata = 6 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ];
   optional common.v1.ErrorDetail error = 7; // if set, indicates failure reason for this event
 }
 
@@ -412,19 +428,18 @@ message ClientState {
     TypingEvent typing = 4;
     ReceiptEvent receipt = 2; // receipt acknowledgement for message delivery
     ReadMarker read_marker = 3; // marker for "read up to X"
-    RoomEvent room_event = 1;    // send a room event (message) via the stream
-    PresenceEvent presence = 5;    // send a presence message to a room
+    RoomEvent room_event = 1; // send a room event (message) via the stream
+    PresenceEvent presence = 5; // send a presence message to a room
     SendEventRequest send_event = 10; // Similar to room_event but useful for sending messages in bulk
   }
 }
-
 
 // -----------------------------------------------------
 // Message RPCs (unified send + get history)
 // -----------------------------------------------------
 
 message SendEventRequest {
-  repeated RoomEvent event = 4;          // message payload (server will assign final event_id if empty)
+  repeated RoomEvent event = 4; // message payload (server will assign final event_id if empty)
 }
 
 message SendEventResponse {
@@ -454,7 +469,7 @@ message Room {
   string id = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   string name = 3 [
     (buf.validate.field).string.min_len = 2,
@@ -462,7 +477,18 @@ message Room {
   ];
   string description = 4;
   bool is_private = 5;
-  google.protobuf.Struct metadata = 6;
+  google.protobuf.Struct metadata = 6 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ];
   google.protobuf.Timestamp created_at = 7;
   google.protobuf.Timestamp updated_at = 8;
   string creator_id = 9;
@@ -472,7 +498,7 @@ message CreateRoomRequest {
   string id = 3 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ]; // optional client-provided idempotency key
   string name = 4 [
     (buf.validate.field).string.min_len = 2,
@@ -481,7 +507,18 @@ message CreateRoomRequest {
   string description = 5;
   bool is_private = 6;
   repeated string members = 7; // optional
-  google.protobuf.Struct metadata = 8;
+  google.protobuf.Struct metadata = 8 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ];
 }
 
 message CreateRoomResponse {
@@ -496,23 +533,44 @@ message SearchRoomsRequest {
   string start_date = 4;
   string end_date = 5;
   repeated string properties = 6;
-  google.protobuf.Struct extras = 7;
+  google.protobuf.Struct extras = 7 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ];
 }
 
 message SearchRoomsResponse {
   repeated Room data = 1;
 }
 
-
 message UpdateRoomRequest {
-  string room_id = 2[
+  string room_id = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   string name = 3;
   string topic = 4;
-  google.protobuf.Struct metadata = 5;
+  google.protobuf.Struct metadata = 5 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ];
 }
 
 message UpdateRoomResponse {
@@ -521,10 +579,10 @@ message UpdateRoomResponse {
 }
 
 message DeleteRoomRequest {
-  string room_id = 2[
+  string room_id = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
 }
 
@@ -538,15 +596,15 @@ message DeleteRoomResponse {
 // -----------------------------------------------------
 
 message RoomSubscription {
-  string room_id = 2[
+  string room_id = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
-  string profile_id = 3[
+  string profile_id = 3 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   repeated string roles = 4; // e.g. ["owner","moderator","member","guest"]
   google.protobuf.Timestamp joined_at = 5;
@@ -554,74 +612,74 @@ message RoomSubscription {
 }
 
 message AddRoomSubscriptionsRequest {
-  string room_id = 2[
+  string room_id = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   repeated RoomSubscription members = 3; // include roles if desired
 }
 
 message AddRoomSubscriptionsResponse {
-  string room_id = 1[
+  string room_id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   common.v1.ErrorDetail error = 3;
 }
 
 message RemoveRoomSubscriptionsRequest {
-  string room_id = 2[
+  string room_id = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   repeated string profile_ids = 3;
 }
 
 message RemoveRoomSubscriptionsResponse {
-  string room_id = 1[
+  string room_id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   common.v1.ErrorDetail error = 3;
 }
 
 message UpdateSubscriptionRoleRequest {
-  string room_id = 2[
+  string room_id = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   string profile_id = 3;
   repeated string roles = 4;
 }
 
 message UpdateSubscriptionRoleResponse {
-  string room_id = 1[
+  string room_id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   common.v1.ErrorDetail error = 3;
 }
 
 message SearchRoomSubscriptionsRequest {
-  string room_id = 2[
+  string room_id = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   int32 limit = 3;
   string cursor = 4;
 }
 message SearchRoomSubscriptionsResponse {
-  string room_id = 1[
+  string room_id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   repeated RoomSubscription members = 2;
   string next_cursor = 3;
@@ -635,12 +693,12 @@ message UpdateClientStateRequest {
   string room_id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   string profile_id = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   repeated ClientState clientStates = 3;
 }
@@ -649,13 +707,12 @@ message UpdateClientStateResponse {
   common.v1.ErrorDetail error = 1;
 }
 
-
 // GetClientState obtains the state of a set of profiles in a room
 message GetClientStateRequest {
   string room_id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   repeated string profile_ids = 2;
 

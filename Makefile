@@ -35,9 +35,8 @@ cd go/$(1) && \
 
 endef
 
-define buf_generate
-cd proto/${1} && PATH=$(BIN):$$PATH $(BIN)/buf dep update
-cd proto/${1} && PATH=$(BIN):$$PATH $(BIN)/buf generate
+define buf_validate
+cd proto/${1} && PATH=$(BIN):$$PATH $(BIN)/buf validate
 endef
 
 define buf_migrate
@@ -45,6 +44,7 @@ cd proto/${1} && PATH=$(BIN):$$PATH $(BIN)/buf config migrate
 endef
 
 define golang_lint
+cd proto/${1} && PATH=$(BIN):$$PATH $(BIN)/buf format -w
 cd proto/${1} && PATH=$(BIN):$$PATH $(BIN)/buf lint
 cd go/${1} && $(GO) vet ./...
 cd go/${1} && golangci-lint run
@@ -88,7 +88,7 @@ golang_build_all: generate ## Build all packages
 
 
 .PHONY: lintfix
-lintfix: $(BIN)/golangci-lint $(BIN)/buf $(BIN)/gomock ## Automatically fix some lint errors
+lintfix: $(BIN)/golangci-lint $(BIN)/buf ## Automatically fix some lint errors
 	$(call lint_fix_module,common)
 	$(call lint_fix_module,chat)
 	$(call lint_fix_module,device)
@@ -104,7 +104,7 @@ lintfix: $(BIN)/golangci-lint $(BIN)/buf $(BIN)/gomock ## Automatically fix some
 	$(call lint_fix_module,lostid)
 
 .PHONY: golang_lint_all
-golang_lint_all: $(BIN)/golangci-lint $(BIN)/buf $(BIN)/gomock ## Lint Go and protobuf
+golang_lint_all: $(BIN)/golangci-lint $(BIN)/buf ## Lint Go and protobuf
 	test -z "$$($(BIN)/buf format -d . | tee /dev/stderr)"
 	$(call golang_lint,common)
 	$(call golang_lint,chat)
@@ -224,7 +224,7 @@ $(BIN)/license-header: Makefile
 
 $(BIN)/golangci-lint: Makefile
 	@mkdir -p $(@D)
-	$(GO) install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.64.8
+	$(GO) install github.com/golangci/golangci-lint/v2/cmd/golangci-lint@v2.6.2
 
 $(BIN)/minimock: Makefile
 	@mkdir -p $(@D)

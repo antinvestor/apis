@@ -28,38 +28,37 @@ package profile.v1;
 
 import "buf/validate/validate.proto";
 import "common/v1/common.proto";
-import "google/protobuf/struct.proto";
 import "gnostic/openapi/v3/annotations.proto";
+import "google/protobuf/struct.proto";
 
 option go_package = "github.com/antinvestor/apis/go/profile/v1;profilev1";
 option java_multiple_files = true;
 option java_package = "profilev1";
-
 option (gnostic.openapi.v3.document) = {
   info: {
-    title: "Profile Service";
-    version: "v1.0.0";
-    description: "The Profile Service manages user and entity profiles including persons, institutions, and bots. It provides comprehensive profile management with contact verification (email, phone), roster management for user contact lists, relationship tracking between profiles, and address management with geocoding support. The service supports profile merging, communication preferences, and hierarchical relationships.";
+    title: "Profile Service"
+    version: "v1.0.0"
+    description: "The Profile Service manages user and entity profiles including persons, institutions, and bots. It provides comprehensive profile management with contact verification (email, phone), roster management for user contact lists, relationship tracking between profiles, and address management with geocoding support. The service supports profile merging, communication preferences, and hierarchical relationships."
     contact: {
-      name: "Ant Investor Ltd";
-      url: "https://github.com/antinvestor/service-profile";
-      email: "info@antinvestor.com";
+      name: "Ant Investor Ltd"
+      url: "https://github.com/antinvestor/service-profile"
+      email: "info@antinvestor.com"
     }
     license: {
-      name: "Apache License";
-      url: "https://github.com/antinvestor/apis/blob/master/LICENSE";
+      name: "Apache License"
+      url: "https://github.com/antinvestor/apis/blob/master/LICENSE"
     }
   }
   components: {
     security_schemes: {
       additional_properties: [
         {
-          name: "BearerAuth";
+          name: "BearerAuth"
           value: {
             security_scheme: {
-              type: "http";
-              scheme: "bearer";
-              bearer_format: "JWT";
+              type: "http"
+              scheme: "bearer"
+              bearer_format: "JWT"
             }
           }
         }
@@ -76,36 +75,36 @@ option (gnostic.openapi.v3.document) = {
 // buf:lint:ignore ENUM_VALUE_PREFIX
 enum ContactType {
   // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
-  EMAIL = 0;   // Email address
-  MSISDN = 1;  // Mobile phone number (MSISDN format)
+  EMAIL = 0; // Email address
+  MSISDN = 1; // Mobile phone number (MSISDN format)
 }
 
 // CommunicationLevel defines user's communication preferences.
 // buf:lint:ignore ENUM_VALUE_PREFIX
 enum CommunicationLevel {
   // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
-  ALL = 0;                 // All communications including 3rd party marketing
-  INTERNAL_MARKETING = 1;  // Marketing messages from our services only
-  IMPORTANT_ALERTS = 2;    // Important alerts like policy changes
-  SYSTEM_ALERTS = 3;       // System alerts for user actions requiring response
-  NO_CONTACT = 4;          // No communications (opt-out)
+  ALL = 0; // All communications including 3rd party marketing
+  INTERNAL_MARKETING = 1; // Marketing messages from our services only
+  IMPORTANT_ALERTS = 2; // Important alerts like policy changes
+  SYSTEM_ALERTS = 3; // System alerts for user actions requiring response
+  NO_CONTACT = 4; // No communications (opt-out)
 }
 
 // ProfileType defines the type of profile entity.
 // buf:lint:ignore ENUM_VALUE_PREFIX
 enum ProfileType {
   // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
-  PERSON = 0;      // Individual person
+  PERSON = 0; // Individual person
   INSTITUTION = 1; // Organization or institution
-  BOT = 2;         // Automated bot or service account
+  BOT = 2; // Automated bot or service account
 }
 
 // RelationshipType defines how two profiles are linked.
 // buf:lint:ignore ENUM_VALUE_PREFIX
 enum RelationshipType {
   // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
-  MEMBER = 0;       // Member of an organization
-  AFFILIATED = 1;   // Affiliated or associated with
+  MEMBER = 0; // Member of an organization
+  AFFILIATED = 1; // Affiliated or associated with
   BLACK_LISTED = 2; // Blocked or blacklisted
 }
 
@@ -118,14 +117,25 @@ message ContactObject {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];                                       // Unique contact ID
-  ContactType type = 2;                    // Contact type (email or MSISDN)
-  string detail = 3;                       // Contact detail (email address or phone number)
-  bool verified = 4;                       // Whether contact has been verified
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Unique contact ID
+  ContactType type = 2; // Contact type (email or MSISDN)
+  string detail = 3; // Contact detail (email address or phone number)
+  bool verified = 4; // Whether contact has been verified
   CommunicationLevel communication_level = 5; // User's communication preferences
-  common.v1.STATE state = 6;               // Contact state
-  google.protobuf.Struct extra = 7;        // Additional metadata
+  common.v1.STATE state = 6; // Contact state
+  google.protobuf.Struct extra = 7 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ]; // Additional metadata
 }
 
 // RosterObject represents a contact in a user's roster/contact list.
@@ -133,15 +143,26 @@ message RosterObject {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];                    // Unique roster entry ID
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Unique roster entry ID
   string profile_id = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];                    // Profile ID of the contact
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Profile ID of the contact
   ContactObject contact = 3; // Contact information
-  google.protobuf.Struct extra = 4; // Additional metadata
+  google.protobuf.Struct extra = 4 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ]; // Additional metadata
 }
 
 // AddressObject represents a physical address with geocoding.
@@ -149,24 +170,24 @@ message AddressObject {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];                    // Unique address ID
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Unique address ID
   string name = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 100
-  ];                    // Address name/label (e.g., "Home", "Office")
-  string country = 3;   // Country name or code
-  string city = 4;      // City name
-  string area = 5;      // Area/district/neighborhood
-  string street = 6;    // Street name
-  string house = 7;     // House/building number
-  string postcode = 8;  // Postal/ZIP code
-  double latitude = 9;  // Latitude coordinate
+  ]; // Address name/label (e.g., "Home", "Office")
+  string country = 3; // Country name or code
+  string city = 4; // City name
+  string area = 5; // Area/district/neighborhood
+  string street = 6; // Street name
+  string house = 7; // House/building number
+  string postcode = 8; // Postal/ZIP code
+  double latitude = 9; // Latitude coordinate
   double longitude = 10; // Longitude coordinate
   string extra = 11 [
     (buf.validate.field).string.min_len = 10,
     (buf.validate.field).string.max_len = 500
-  ];                    // Additional address details
+  ]; // Additional address details
 }
 
 // ProfileObject represents a complete user or entity profile.
@@ -174,19 +195,30 @@ message ProfileObject {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];                                    // Unique profile ID
-  ProfileType type = 2;                 // Profile type (person, institution, bot)
-  google.protobuf.Struct properties = 3; // Profile properties (name, bio, avatar, etc.)
-  repeated ContactObject contacts = 4;  // Associated contacts
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Unique profile ID
+  ProfileType type = 2; // Profile type (person, institution, bot)
+  google.protobuf.Struct properties = 3 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ]; // Profile properties (name, bio, avatar, etc.)
+  repeated ContactObject contacts = 4; // Associated contacts
   repeated AddressObject addresses = 5; // Associated addresses
-  common.v1.STATE state = 6;            // Profile state
+  common.v1.STATE state = 6; // Profile state
 }
 
 // EntryItem identifies an object in a relationship.
 message EntryItem {
-  string object_name = 1;  // Object type (Contact, Profile, Group)
-  string object_id = 2;    // Object ID
+  string object_name = 1; // Object type (Contact, Profile, Group)
+  string object_id = 2; // Object ID
 }
 
 // RelationshipObject represents a relationship between two profiles.
@@ -194,13 +226,24 @@ message RelationshipObject {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];                                    // Unique relationship ID
-  RelationshipType type = 2;            // Relationship type
-  google.protobuf.Struct properties = 3; // Relationship properties
-  EntryItem child_entry = 4;            // Child entry in relationship
-  EntryItem parent_entry = 5;           // Parent entry in relationship
-  ProfileObject peer_profile = 6;       // Peer profile information
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Unique relationship ID
+  RelationshipType type = 2; // Relationship type
+  google.protobuf.Struct properties = 3 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ]; // Relationship properties
+  EntryItem child_entry = 4; // Child entry in relationship
+  EntryItem parent_entry = 5; // Parent entry in relationship
+  ProfileObject peer_profile = 6; // Peer profile information
 }
 
 // The request message containing the profile's hash
@@ -208,7 +251,7 @@ message GetByIdRequest {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
 }
 
@@ -223,7 +266,18 @@ message SearchRequest {
   string start_date = 4;
   string end_date = 5;
   repeated string properties = 6;
-  google.protobuf.Struct extras = 7;
+  google.protobuf.Struct extras = 7 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ];
 }
 
 message SearchResponse {
@@ -235,12 +289,12 @@ message MergeRequest {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   string mergeid = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
 }
 
@@ -255,7 +309,18 @@ message CreateRequest {
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 255
   ];
-  google.protobuf.Struct properties = 3;
+  google.protobuf.Struct properties = 3 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ];
 }
 
 message CreateResponse {
@@ -267,9 +332,20 @@ message UpdateRequest {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
-  google.protobuf.Struct properties = 2;
+  google.protobuf.Struct properties = 2 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ];
   common.v1.STATE state = 3;
 }
 
@@ -282,10 +358,21 @@ message AddContactRequest {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   string contact = 2;
-  google.protobuf.Struct extras = 3;
+  google.protobuf.Struct extras = 3 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ];
 }
 
 message AddContactResponse {
@@ -299,10 +386,21 @@ message CreateContactRequest {
     (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   string contact = 2;
-  google.protobuf.Struct extras = 3;
+  google.protobuf.Struct extras = 3 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ];
 }
 
 message CreateContactResponse {
@@ -314,12 +412,12 @@ message CreateContactVerificationRequest {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   string contact_id = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   string code = 3;
 
@@ -331,7 +429,7 @@ message CreateContactVerificationResponse {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   bool success = 2;
 }
@@ -340,7 +438,7 @@ message CheckVerificationRequest {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
 
   string code = 2;
@@ -357,7 +455,7 @@ message RemoveContactRequest {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
 }
 
@@ -372,7 +470,18 @@ message SearchRosterRequest {
   string start_date = 4;
   string end_date = 5;
   repeated string properties = 6;
-  google.protobuf.Struct extras = 7;
+  google.protobuf.Struct extras = 7 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ];
   string profile_id = 8 [
     (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3,
@@ -397,7 +506,7 @@ message RemoveRosterRequest {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
 }
 
@@ -410,7 +519,7 @@ message AddAddressRequest {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   AddressObject address = 2;
 }
@@ -440,13 +549,13 @@ message ListRelationshipRequest {
   string peer_id = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   string last_relationship_id = 3 [
     (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   repeated string related_children_id = 4; // Related profile ids to specifically search for.
   int32 count = 5;
@@ -462,7 +571,7 @@ message AddRelationshipRequest {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   string parent = 2 [
     (buf.validate.field).string.min_len = 3,
@@ -474,7 +583,7 @@ message AddRelationshipRequest {
   string parent_id = 3 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   string child = 4 [
     (buf.validate.field).string.min_len = 3,
@@ -486,10 +595,21 @@ message AddRelationshipRequest {
   string child_id = 5 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   RelationshipType type = 6;
-  google.protobuf.Struct properties = 7;
+  google.protobuf.Struct properties = 7 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ];
 }
 
 message AddRelationshipResponse {
@@ -501,13 +621,13 @@ message DeleteRelationshipRequest {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   string parent_id = 2 [
     (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
 }
 

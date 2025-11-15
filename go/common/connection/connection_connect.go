@@ -59,7 +59,6 @@ func (ccb *ConnectClientBase) Endpoint() string {
 
 // Options returns the API client can use to configure itself.
 func (ccb *ConnectClientBase) Options(opts ...connect.ClientOption) []connect.ClientOption {
-
 	if len(ccb.interceptors) > 0 {
 		opts = append(opts, connect.WithInterceptors(ccb.interceptors...))
 	}
@@ -80,12 +79,14 @@ func (ccb *ConnectClientBase) GetInfo() string {
 	return ccb.xMetadata
 }
 
-func (ccb *ConnectClientBase) SetPartitionInfo(ctx context.Context, partitionInfo *common.PartitionInfo) context.Context {
+func (ccb *ConnectClientBase) SetPartitionInfo(
+	ctx context.Context,
+	partitionInfo *common.PartitionInfo,
+) context.Context {
 	return context.WithValue(ctx, common.CtxKeyPartitionInfo, partitionInfo)
 }
 
 func NewConnectClientBase(ctx context.Context, opts ...common.ClientOption) (*ConnectClientBase, error) {
-
 	ds, err := processAndValidateOpts(opts)
 	if err != nil {
 		return nil, err
@@ -111,7 +112,6 @@ func NewConnectClientBase(ctx context.Context, opts ...common.ClientOption) (*Co
 	}
 
 	if ds.TokenEndpoint != "" {
-
 		var endpointValues url.Values
 		if len(ds.Audiences) > 0 {
 			endpointValues = url.Values{}

@@ -26,38 +26,37 @@ package device.v1;
 // -----------------------------------------------------
 
 import "buf/validate/validate.proto";
-import "google/protobuf/struct.proto";
 import "gnostic/openapi/v3/annotations.proto";
+import "google/protobuf/struct.proto";
 
 option go_package = "github.com/antinvestor/apis/go/device/v1;devicev1";
 option java_multiple_files = true;
 option java_package = "devicev1";
-
 option (gnostic.openapi.v3.document) = {
   info: {
-    title: "Device Management API";
-    version: "v1.0.0";
-    description: "The Device Management API provides comprehensive device management capabilities including device registration, session tracking, and unified key/token management. The API uses a unified KeyObject model for all key types including FCM tokens, encryption keys (Curve25519, Ed25519, Pickle), Matrix keys, and notification keys. This enables applications to register and track user devices across platforms (mobile, web, desktop), manage push notification tokens, handle encryption keys for secure communications, and maintain detailed logs of device activity for security and compliance purposes.";
+    title: "Device Management API"
+    version: "v1.0.0"
+    description: "The Device Management API provides comprehensive device management capabilities including device registration, session tracking, and unified key/token management. The API uses a unified KeyObject model for all key types including FCM tokens, encryption keys (Curve25519, Ed25519, Pickle), Matrix keys, and notification keys. This enables applications to register and track user devices across platforms (mobile, web, desktop), manage push notification tokens, handle encryption keys for secure communications, and maintain detailed logs of device activity for security and compliance purposes."
     contact: {
-      name: "Ant Investor Ltd";
-      url: "https://github.com/antinvestor/service-device";
-      email: "info@antinvestor.com";
+      name: "Ant Investor Ltd"
+      url: "https://github.com/antinvestor/service-device"
+      email: "info@antinvestor.com"
     }
     license: {
-      name: "Apache License";
-      url: "https://github.com/antinvestor/apis/blob/master/LICENSE";
+      name: "Apache License"
+      url: "https://github.com/antinvestor/apis/blob/master/LICENSE"
     }
   }
   components: {
     security_schemes: {
       additional_properties: [
         {
-          name: "BearerAuth";
+          name: "BearerAuth"
           value: {
             security_scheme: {
-              type: "http";
-              scheme: "bearer";
-              bearer_format: "JWT";
+              type: "http"
+              scheme: "bearer"
+              bearer_format: "JWT"
             }
           }
         }
@@ -75,23 +74,23 @@ option (gnostic.openapi.v3.document) = {
 // buf:lint:ignore ENUM_VALUE_PREFIX
 enum KeyType {
   // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
-  MATRIX_KEY = 0;        // Encryption key for Matrix protocol end-to-end encryption
-  NOTIFICATION_KEY = 1;  // Key for secure push notification delivery
-  FCM_TOKEN = 2;         // Firebase Cloud Messaging token for push notifications
-  CURVE25519_KEY = 3;    // Curve25519 key for ECDH
-  ED25519_KEY = 4;       // Ed25519 key for signing
-  PICKLE_KEY = 5;        // Pickled key for session storage
+  MATRIX_KEY = 0; // Encryption key for Matrix protocol end-to-end encryption
+  NOTIFICATION_KEY = 1; // Key for secure push notification delivery
+  FCM_TOKEN = 2; // Firebase Cloud Messaging token for push notifications
+  CURVE25519_KEY = 3; // Curve25519 key for ECDH
+  ED25519_KEY = 4; // Ed25519 key for signing
+  PICKLE_KEY = 5; // Pickled key for session storage
 }
 
 // PresenceStatus defines the online/offline status of a device.
 // buf:lint:ignore ENUM_VALUE_PREFIX
 enum PresenceStatus {
   // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
-  OFFLINE = 0;     // Device is offline
-  ONLINE = 1;      // Device is online and active
-  AWAY = 2;        // Device is online but idle/away
-  BUSY = 3;        // Device is online but user is busy
-  INVISIBLE = 4;   // Device is online but appears offline to others
+  OFFLINE = 0; // Device is offline
+  ONLINE = 1; // Device is online and active
+  AWAY = 2; // Device is online but idle/away
+  BUSY = 3; // Device is online but user is busy
+  INVISIBLE = 4; // Device is online but appears offline to others
 }
 
 // -----------------------------------------------------
@@ -101,12 +100,12 @@ enum PresenceStatus {
 // Locale represents the localization settings for a device.
 // Used to provide localized content and format data appropriately for the user.
 message Locale {
-  repeated string language = 1;  // Preferred languages in priority order (e.g., ["en-US", "en"])
-  string timezone = 5;            // IANA timezone identifier (e.g., "America/New_York")
-  string utc_offset = 6;          // UTC offset in format "+HH:MM" or "-HH:MM"
-  string currency = 8;            // ISO 4217 currency code (e.g., "USD", "EUR")
-  string currency_name = 9;       // Human-readable currency name
-  string code = 10;               // ISO 3166-1 alpha-2 country code (e.g., "US", "GB")
+  repeated string language = 1; // Preferred languages in priority order (e.g., ["en-US", "en"])
+  string timezone = 5; // IANA timezone identifier (e.g., "America/New_York")
+  string utc_offset = 6; // UTC offset in format "+HH:MM" or "-HH:MM"
+  string currency = 8; // ISO 4217 currency code (e.g., "USD", "EUR")
+  string currency_name = 9; // Human-readable currency name
+  string code = 10; // ISO 3166-1 alpha-2 country code (e.g., "US", "GB")
 }
 
 // KeyObject represents a key or token associated with a device.
@@ -115,19 +114,40 @@ message KeyObject {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];  // Unique identifier for the key
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Unique identifier for the key
   string device_id = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];  // Device this key belongs to
-  KeyType key_type = 3;               // Type of key (FCM token, encryption key, etc.)
-  bytes key = 4;                      // The actual key material or token (encrypted at rest)
-  string created_at = 5;              // Timestamp when key was created (RFC3339)
-  string expires_at = 6;              // Optional expiration timestamp (RFC3339)
-  bool is_active = 7;                 // Whether the key is currently active
-  google.protobuf.Struct extra = 8;   // Additional key metadata (algorithm, app_id, etc.)
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Device this key belongs to
+  KeyType key_type = 3; // Type of key (FCM token, encryption key, etc.)
+  bytes key = 4; // The actual key material or token (encrypted at rest)
+  string created_at = 5; // Timestamp when key was created (RFC3339)
+  string expires_at = 6; // Optional expiration timestamp (RFC3339)
+  bool is_active = 7; // Whether the key is currently active
+  google.protobuf.Struct extra = 8 [
+    (buf.validate.field).cel = {
+      id: "key.extra.size_limit"
+      message: "Key metadata exceeds maximum size of 1KB"
+      expression: "size(this.toString()) <= 1024"
+    },
+    (buf.validate.field).cel = {
+      id: "key.extra.field_count_limit"
+      message: "Key metadata contains too many fields (max 20)"
+      expression: "this.fields.size() <= 20"
+    },
+    (buf.validate.field).cel = {
+      id: "key.extra.key_validation"
+      message: "Invalid field key in metadata"
+      expression: "this.fields.all(k, size(k) >= 1 && size(k) <= 64 && k.matches('^[a-zA-Z0-9_-]+$'))"
+    },
+    (buf.validate.field).cel = {
+      id: "key.extra.value_size_limit"
+      message: "String values in metadata must be <= 256 characters"
+      expression: "this.fields.all(k, !this[k].has('string_value') || size(this[k].string_value) <= 256)"
+    }
+  ]; // Additional key metadata (algorithm, app_id, etc.)
 }
 
 // DeviceLog represents an activity log entry for a device.
@@ -136,21 +156,43 @@ message DeviceLog {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];  // Unique identifier for this log entry
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Unique identifier for this log entry
   string device_id = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];  // Device this log entry belongs to
-  string session_id = 3;                // Session identifier for this activity
-  string ip = 4;                        // IP address of the device during this session
-  Locale locale = 5;                    // Locale settings during this session
-  string user_agent = 6;                // User agent string (browser/app info)
-  string os = 7;                        // Operating system and version
-  string last_seen = 8;                 // Last activity timestamp (RFC3339)
-  google.protobuf.Struct location = 9;  // Geographic location data (lat/long, city, country)
-  google.protobuf.Struct extra = 10;    // Additional log metadata
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Device this log entry belongs to
+  string session_id = 3; // Session identifier for this activity
+  string ip = 4; // IP address of the device during this session
+  Locale locale = 5; // Locale settings during this session
+  string user_agent = 6; // User agent string (browser/app info)
+  string os = 7; // Operating system and version
+  string last_seen = 8; // Last activity timestamp (RFC3339)
+  google.protobuf.Struct location = 9 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ]; // Geographic location data (lat/long, city, country)
+  google.protobuf.Struct extra = 10 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ]; // Additional log metadata
 }
 
 // DeviceObject represents a registered device in the system.
@@ -159,20 +201,41 @@ message DeviceObject {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];  // Unique identifier for the device
-  string name = 2;                        // User-friendly device name (e.g., "John's iPhone")
-  string session_id = 3;                  // Current active session identifier
-  string ip = 4;                          // Last known IP address
-  string user_agent = 5;                  // User agent string
-  string os = 6;                          // Operating system and version
-  string last_seen = 7;                   // Last activity timestamp (RFC3339)
-  string profile_id = 8;                  // Profile this device is linked to
-  Locale locale = 9;                      // Device locale settings
-  PresenceStatus presence = 10;            // Device presense status
-  google.protobuf.Struct location = 11;   // Last known geographic location
-  google.protobuf.Struct properties = 15; // Additional device properties (model, manufacturer, etc.)
-
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Unique identifier for the device
+  string name = 2; // User-friendly device name (e.g., "John's iPhone")
+  string session_id = 3; // Current active session identifier
+  string ip = 4; // Last known IP address
+  string user_agent = 5; // User agent string
+  string os = 6; // Operating system and version
+  string last_seen = 7; // Last activity timestamp (RFC3339)
+  string profile_id = 8; // Profile this device is linked to
+  Locale locale = 9; // Device locale settings
+  PresenceStatus presence = 10; // Device presense status
+  google.protobuf.Struct location = 11 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ]; // Last known geographic location
+  google.protobuf.Struct properties = 15 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ]; // Additional device properties (model, manufacturer, etc.)
 }
 
 // PresenceObject represents the presence/availability status of a device.
@@ -181,18 +244,29 @@ message PresenceObject {
   string device_id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];  // Device this presence status belongs to
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Device this presence status belongs to
   string profile_id = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];  // Profile this device belongs to
-  PresenceStatus status = 3;              // Current presence status
-  string status_message = 4;              // Optional custom status message
-  string last_active = 5;                 // Timestamp of last activity (RFC3339)
-  string updated_at = 6;                  // Timestamp when presence was last updated (RFC3339)
-  google.protobuf.Struct extras = 7;      // Additional presence metadata (activity type, etc.)
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Profile this device belongs to
+  PresenceStatus status = 3; // Current presence status
+  string status_message = 4; // Optional custom status message
+  string last_active = 5; // Timestamp of last activity (RFC3339)
+  string updated_at = 6; // Timestamp when presence was last updated (RFC3339)
+  google.protobuf.Struct extras = 7 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ]; // Additional presence metadata (activity type, etc.)
 }
 
 // -----------------------------------------------------
@@ -207,13 +281,13 @@ message GetByIdRequest {
       max_len: 40
       pattern: "[0-9a-z_-]{3,20}"
     }
-  }];  // List of device IDs to retrieve
-  bool extensive = 2;  // If true, include additional details (logs, keys count, etc.)
+  }]; // List of device IDs to retrieve
+  bool extensive = 2; // If true, include additional details (logs, keys count, etc.)
 }
 
 // GetByIdResponse returns the requested devices.
 message GetByIdResponse {
-  repeated DeviceObject data = 1;  // List of devices matching the request
+  repeated DeviceObject data = 1; // List of devices matching the request
 }
 
 // GetBySessionIdRequest retrieves a device by its active session identifier.
@@ -222,39 +296,61 @@ message GetBySessionIdRequest {
     min_len: 3
     max_len: 40
     pattern: "[0-9a-z_-]{3,20}"
-  }];  // Session ID to look up
+  }]; // Session ID to look up
 }
 
 // GetBySessionIdResponse returns the device associated with the session.
 message GetBySessionIdResponse {
-  DeviceObject data = 1;  // Device object for the session
+  DeviceObject data = 1; // Device object for the session
 }
 
 // SearchRequest searches for devices matching specified criteria.
 message SearchRequest {
-  string query = 1;                     // Search query (device name, OS, etc.)
-  int32 page = 2;                       // Page number for pagination
-  int32 count = 3;                      // Number of results per page
-  string start_date = 4;                // Filter devices created after this date (RFC3339)
-  string end_date = 5;                  // Filter devices created before this date (RFC3339)
-  repeated string properties = 6;       // Specific properties to include in results
-  google.protobuf.Struct extras = 7;    // Additional search filters
+  string query = 1; // Search query (device name, OS, etc.)
+  int32 page = 2; // Page number for pagination
+  int32 count = 3; // Number of results per page
+  string start_date = 4; // Filter devices created after this date (RFC3339)
+  string end_date = 5; // Filter devices created before this date (RFC3339)
+  repeated string properties = 6; // Specific properties to include in results
+  google.protobuf.Struct extras = 7 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ]; // Additional search filters
 }
 
 // SearchResponse returns devices matching the search criteria.
 message SearchResponse {
-  repeated DeviceObject data = 1;  // List of matching devices
+  repeated DeviceObject data = 1; // List of matching devices
 }
 
 // CreateRequest registers a new device in the system.
 message CreateRequest {
-  string name = 2;                        // User-friendly name for the device
-  google.protobuf.Struct properties = 3;  // Device properties (model, manufacturer, OS version, etc.)
+  string name = 2; // User-friendly name for the device
+  google.protobuf.Struct properties = 3 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ]; // Device properties (model, manufacturer, OS version, etc.)
 }
 
 // CreateResponse returns the newly created device.
 message CreateResponse {
-  DeviceObject data = 1;  // The created device object
+  DeviceObject data = 1; // The created device object
 }
 
 // UpdateRequest updates an existing device's information.
@@ -262,15 +358,26 @@ message UpdateRequest {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];  // Device ID to update
-  string name = 2;                        // New device name (if changing)
-  google.protobuf.Struct properties = 3;  // Updated device properties
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Device ID to update
+  string name = 2; // New device name (if changing)
+  google.protobuf.Struct properties = 3 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ]; // Updated device properties
 }
 
 // UpdateResponse returns the updated device.
 message UpdateResponse {
-  DeviceObject data = 1;  // The updated device object
+  DeviceObject data = 1; // The updated device object
 }
 
 // LinkRequest links a device to a user profile.
@@ -279,19 +386,30 @@ message LinkRequest {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];  // Device ID to link
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Device ID to link
   string profile_id = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];  // Profile ID to link the device to
-  google.protobuf.Struct properties = 3;  // Additional linking properties
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Profile ID to link the device to
+  google.protobuf.Struct properties = 3 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ]; // Additional linking properties
 }
 
 // LinkResponse returns the linked device.
 message LinkResponse {
-  DeviceObject data = 1;  // The linked device object
+  DeviceObject data = 1; // The linked device object
 }
 
 // RemoveRequest removes a device from the system.
@@ -300,13 +418,13 @@ message RemoveRequest {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];  // Device ID to remove
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Device ID to remove
 }
 
 // RemoveResponse returns the removed device.
 message RemoveResponse {
-  DeviceObject data = 1;  // The removed device object
+  DeviceObject data = 1; // The removed device object
 }
 
 // -----------------------------------------------------
@@ -320,26 +438,37 @@ message LogRequest {
     (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];  // Device ID (optional if session_id is provided)
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Device ID (optional if session_id is provided)
 
   string session_id = 3 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];  // Session identifier for this activity
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Session identifier for this activity
 
-  string ip = 4;                        // IP address of the device
-  string locale = 5;                    // Locale settings (JSON string)
-  string user_agent = 6;                // User agent string
-  string os = 7;                        // Operating system and version
-  string last_seen = 8;                 // Timestamp of this activity (RFC3339)
-  google.protobuf.Struct extras = 9;    // Additional log data (location, app version, etc.)
+  string ip = 4; // IP address of the device
+  string locale = 5; // Locale settings (JSON string)
+  string user_agent = 6; // User agent string
+  string os = 7; // Operating system and version
+  string last_seen = 8; // Timestamp of this activity (RFC3339)
+  google.protobuf.Struct extras = 9 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ]; // Additional log data (location, app version, etc.)
 }
 
 // LogResponse returns the created log entry.
 message LogResponse {
-  DeviceLog data = 1;  // The created log entry
+  DeviceLog data = 1; // The created log entry
 }
 
 // ListLogsRequest retrieves activity logs for a device.
@@ -348,14 +477,14 @@ message ListLogsRequest {
   string device_id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];  // Device ID to retrieve logs for
-  int32 count = 2;  // Maximum number of log entries to return
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Device ID to retrieve logs for
+  int32 count = 2; // Maximum number of log entries to return
 }
 
 // ListLogsResponse returns device activity logs.
 message ListLogsResponse {
-  repeated DeviceLog data = 1;  // List of log entries
+  repeated DeviceLog data = 1; // List of log entries
 }
 
 // -----------------------------------------------------
@@ -368,22 +497,33 @@ message AddKeyRequest {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];  // Unique identifier for the key
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Unique identifier for the key
   string device_id = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];  // Device this key belongs to
-  KeyType key_type = 3;                 // Type of key (Matrix, FCM, Encryption, etc.)
-  bytes data = 4;                       // The key material or token (will be encrypted at rest)
-  string expires_at = 5;                // Optional expiration timestamp (RFC3339)
-  google.protobuf.Struct extras = 6;    // Additional key metadata (algorithm, app_id, etc.)
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Device this key belongs to
+  KeyType key_type = 3; // Type of key (Matrix, FCM, Encryption, etc.)
+  bytes data = 4; // The key material or token (will be encrypted at rest)
+  string expires_at = 5; // Optional expiration timestamp (RFC3339)
+  google.protobuf.Struct extras = 6 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ]; // Additional key metadata (algorithm, app_id, etc.)
 }
 
 // AddKeyResponse returns the created key.
 message AddKeyResponse {
-  KeyObject data = 1;  // The created key object
+  KeyObject data = 1; // The created key object
 }
 
 // RemoveKeyRequest removes one or more keys or tokens from a device.
@@ -395,31 +535,31 @@ message RemoveKeyRequest {
       max_len: 40
       pattern: "[0-9a-z_-]{3,20}"
     }
-  }];  // List of key IDs to remove
+  }]; // List of key IDs to remove
 }
 
 // RemoveKeyResponse returns the IDs of removed keys.
 message RemoveKeyResponse {
-  repeated string id = 1;  // List of removed key IDs
+  repeated string id = 1; // List of removed key IDs
 }
 
 // SearchKeyRequest searches for keys or tokens associated with a device.
 message SearchKeyRequest {
-  string query = 1;       // Search query (key ID pattern, etc.)
+  string query = 1; // Search query (key ID pattern, etc.)
   string device_id = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];  // Device ID to search keys for
-  repeated KeyType key_types = 3;  // Filter by key types (if empty, returns all)
-  bool include_expired = 4;        // If true, includes expired keys
-  int32 page = 5;                  // Page number for pagination
-  int32 count = 6;                 // Number of results per page
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Device ID to search keys for
+  repeated KeyType key_types = 3; // Filter by key types (if empty, returns all)
+  bool include_expired = 4; // If true, includes expired keys
+  int32 page = 5; // Page number for pagination
+  int32 count = 6; // Number of results per page
 }
 
 // SearchKeyResponse returns matching keys or tokens.
 message SearchKeyResponse {
-  repeated KeyObject data = 1;  // List of matching keys
+  repeated KeyObject data = 1; // List of matching keys
 }
 
 // -----------------------------------------------------
@@ -434,16 +574,27 @@ message RegisterKeyRequest {
   string device_id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];  // Device to register with the service
-  KeyType key_type = 2;  // Type of service to register with (FCM_TOKEN, etc.)
-  google.protobuf.Struct extras = 3;  // Service-specific metadata (app_id, platform, etc.)
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Device to register with the service
+  KeyType key_type = 2; // Type of service to register with (FCM_TOKEN, etc.)
+  google.protobuf.Struct extras = 3 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ]; // Service-specific metadata (app_id, platform, etc.)
 }
 
 // RegisterKeyResponse returns confirmation of registration.
 // The actual key/token data is managed by the third-party service.
 message RegisterKeyResponse {
-  KeyObject data = 1;  // Registered key object with service metadata
+  KeyObject data = 1; // Registered key object with service metadata
 }
 
 // DeRegisterKeyRequest removes device registration from third-party services.
@@ -452,14 +603,14 @@ message DeRegisterKeyRequest {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];  // Key ID to deregister from external service
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Key ID to deregister from external service
 }
 
 // DeRegisterKeyResponse confirms service deregistration.
 message DeRegisterKeyResponse {
-  bool success = 1;  // True if successfully deregistered from service
-  string message = 2;  // Status message from the external service
+  bool success = 1; // True if successfully deregistered from service
+  string message = 2; // Status message from the external service
 }
 
 // -----------------------------------------------------
@@ -471,16 +622,27 @@ message UpdatePresenceRequest {
   string device_id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];  // Device ID to update presence for
-  PresenceStatus status = 2;              // New presence status
-  string status_message = 3;              // Optional custom status message
-  google.protobuf.Struct extras = 4;      // Additional presence metadata
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Device ID to update presence for
+  PresenceStatus status = 2; // New presence status
+  string status_message = 3; // Optional custom status message
+  google.protobuf.Struct extras = 4 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ]; // Additional presence metadata
 }
 
 // UpdatePresenceResponse returns the updated presence.
 message UpdatePresenceResponse {
-  PresenceObject data = 1;  // Updated presence object
+  PresenceObject data = 1; // Updated presence object
 }
 
 // -----------------------------------------------------
@@ -492,12 +654,34 @@ message NotifyMessage {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
-  string title = 3;  // Notification title
-  string body = 4;  // Notification body/message
-  google.protobuf.Struct data = 5;  // Additional notification data/payload (custom data, actions, etc.)
-  google.protobuf.Struct extras = 6;  // Extra notification options (priority, TTL, badge, sound, etc.)
+  string title = 3; // Notification title
+  string body = 4; // Notification body/message
+  google.protobuf.Struct data = 5 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ]; // Additional notification data/payload (custom data, actions, etc.)
+  google.protobuf.Struct extras = 6 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ]; // Extra notification options (priority, TTL, badge, sound, etc.)
 }
 
 // NotifyRequest sends one or more notifications to a device using its registered keys.
@@ -506,8 +690,8 @@ message NotifyRequest {
   string device_id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];  // Device ID to notify
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Device ID to notify
 
   // The following fields remain for backward compatibility and represent a single notification payload.
   // New integrations should prefer the notifications field for bulk sending.
@@ -515,29 +699,39 @@ message NotifyRequest {
     (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];  // Specific key ID to use (optional - if not provided, uses key_type to select)
-  KeyType key_type = 3;  // Type of key to use for notification (e.g., FCM_TOKEN, NOTIFICATION_KEY)
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Specific key ID to use (optional - if not provided, uses key_type to select)
+  KeyType key_type = 3; // Type of key to use for notification (e.g., FCM_TOKEN, NOTIFICATION_KEY)
 
   repeated NotifyMessage notifications = 8 [
     (buf.validate.field).repeated.min_items = 1,
     (buf.validate.field).repeated.max_items = 500
-  ];  // Collection of notifications to send in bulk.
+  ]; // Collection of notifications to send in bulk.
 }
 
 // NotifyResult details the outcome of sending an individual notification payload.
 message NotifyResult {
-  bool success = 1;  // True if notification was successfully sent
-  string message = 2;  // Status message or error details
-  string notification_id = 3;  // Unique identifier for the sent notification (if provided by service)
-  google.protobuf.Struct extras = 4;  // Additional response metadata from notification service
+  bool success = 1; // True if notification was successfully sent
+  string message = 2; // Status message or error details
+  string notification_id = 3; // Unique identifier for the sent notification (if provided by service)
+  google.protobuf.Struct extras = 4 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ]; // Additional response metadata from notification service
 }
 
 // NotifyResponse confirms the notifications were sent.
 message NotifyResponse {
-  repeated NotifyResult results = 5;  // Per-notification send results when using bulk notifications
+  repeated NotifyResult results = 5; // Per-notification send results when using bulk notifications
 }
-
 
 // -----------------------------------------------------
 // Service Definitions

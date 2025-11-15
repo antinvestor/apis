@@ -28,39 +28,38 @@ package partition.v1;
 
 import "buf/validate/validate.proto";
 import "common/v1/common.proto";
+import "gnostic/openapi/v3/annotations.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
-import "gnostic/openapi/v3/annotations.proto";
 
 option go_package = "github.com/antinvestor/apis/go/partition/v1;partitionv1";
 option java_multiple_files = true;
 option java_package = "partitionv1";
-
 option (gnostic.openapi.v3.document) = {
   info: {
-    title: "Partition Service";
-    version: "v1.0.0";
-    description: "The Partition Service provides multi-tenancy and data isolation capabilities with hierarchical partitions, role-based access control (RBAC), and custom UI pages. Tenants represent top-level organizational units containing hierarchical partitions for departments, projects, or teams. The service supports fine-grained access control through partition roles and access grants, enabling secure multi-tenant applications with customizable user experiences.";
+    title: "Partition Service"
+    version: "v1.0.0"
+    description: "The Partition Service provides multi-tenancy and data isolation capabilities with hierarchical partitions, role-based access control (RBAC), and custom UI pages. Tenants represent top-level organizational units containing hierarchical partitions for departments, projects, or teams. The service supports fine-grained access control through partition roles and access grants, enabling secure multi-tenant applications with customizable user experiences."
     contact: {
-      name: "Ant Investor Ltd";
-      url: "https://github.com/antinvestor/service-partition";
-      email: "info@antinvestor.com";
+      name: "Ant Investor Ltd"
+      url: "https://github.com/antinvestor/service-partition"
+      email: "info@antinvestor.com"
     }
     license: {
-      name: "Apache License";
-      url: "https://github.com/antinvestor/apis/blob/master/LICENSE";
+      name: "Apache License"
+      url: "https://github.com/antinvestor/apis/blob/master/LICENSE"
     }
   }
   components: {
     security_schemes: {
       additional_properties: [
         {
-          name: "BearerAuth";
+          name: "BearerAuth"
           value: {
             security_scheme: {
-              type: "http";
-              scheme: "bearer";
-              bearer_format: "JWT";
+              type: "http"
+              scheme: "bearer"
+              bearer_format: "JWT"
             }
           }
         }
@@ -78,19 +77,30 @@ message TenantObject {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];                    // Unique tenant ID
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Unique tenant ID
   string name = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 100
-  ];                    // Tenant name (organization, company)
+  ]; // Tenant name (organization, company)
   string description = 3 [
     (buf.validate.field).string.min_len = 10,
     (buf.validate.field).string.max_len = 500
-  ];                    // Tenant description
-  google.protobuf.Struct properties = 4;        // Additional tenant metadata
-  google.protobuf.Timestamp created_at = 5;     // Creation timestamp
-  common.v1.STATE state = 6;                    // Tenant state
+  ]; // Tenant description
+  google.protobuf.Struct properties = 4 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ]; // Additional tenant metadata
+  google.protobuf.Timestamp created_at = 5; // Creation timestamp
+  common.v1.STATE state = 6; // Tenant state
 }
 
 //Request to create a new partition
@@ -102,25 +112,36 @@ message PartitionCreateRequest {
   string tenant_id = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   string parent_id = 3 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   string description = 4 [
     (buf.validate.field).string.min_len = 10,
     (buf.validate.field).string.max_len = 250
   ];
-  google.protobuf.Struct properties = 5;
+  google.protobuf.Struct properties = 5 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ];
 }
 
 message GetTenantRequest {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
 }
 
@@ -135,7 +156,18 @@ message ListTenantRequest {
   string start_date = 4;
   string end_date = 5;
   repeated string properties = 6;
-  google.protobuf.Struct extras = 7;
+  google.protobuf.Struct extras = 7 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ];
 }
 
 message ListTenantResponse {
@@ -152,7 +184,18 @@ message CreateTenantRequest {
     (buf.validate.field).string.min_len = 10,
     (buf.validate.field).string.max_len = 500
   ];
-  google.protobuf.Struct properties = 3;
+  google.protobuf.Struct properties = 3 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ];
 }
 
 message CreateTenantResponse {
@@ -163,7 +206,7 @@ message UpdateTenantRequest {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   string name = 2 [
     (buf.validate.field).string.min_len = 3,
@@ -174,7 +217,18 @@ message UpdateTenantRequest {
     (buf.validate.field).string.max_len = 500
   ];
   common.v1.STATE state = 4;
-  google.protobuf.Struct properties = 5;
+  google.protobuf.Struct properties = 5 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ];
 }
 
 message UpdateTenantResponse {
@@ -185,7 +239,7 @@ message GetPartitionRequest {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
 }
 
@@ -197,7 +251,7 @@ message GetPartitionParentsRequest {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
 }
 
@@ -212,7 +266,18 @@ message ListPartitionRequest {
   string start_date = 4;
   string end_date = 5;
   repeated string properties = 6;
-  google.protobuf.Struct extras = 7;
+  google.protobuf.Struct extras = 7 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ];
 }
 
 message ListPartitionResponse {
@@ -224,12 +289,12 @@ message CreatePartitionRequest {
   string tenant_id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   string parent_id = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   string name = 3 [
     (buf.validate.field).string.min_len = 3,
@@ -239,7 +304,18 @@ message CreatePartitionRequest {
     (buf.validate.field).string.min_len = 10,
     (buf.validate.field).string.max_len = 500
   ];
-  google.protobuf.Struct properties = 5;
+  google.protobuf.Struct properties = 5 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ];
 }
 
 message CreatePartitionResponse {
@@ -250,7 +326,7 @@ message UpdatePartitionRequest {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   string name = 2 [
     (buf.validate.field).string.min_len = 3,
@@ -261,7 +337,18 @@ message UpdatePartitionRequest {
     (buf.validate.field).string.max_len = 500
   ];
   common.v1.STATE state = 4;
-  google.protobuf.Struct properties = 5;
+  google.protobuf.Struct properties = 5 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ];
 }
 
 message UpdatePartitionResponse {
@@ -273,29 +360,40 @@ message PartitionObject {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];                    // Unique partition ID
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Unique partition ID
   string name = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 100
-  ];                    // Partition name (department, project, team)
+  ]; // Partition name (department, project, team)
   string tenant_id = 3 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];                    // Parent tenant ID
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Parent tenant ID
   string parent_id = 4 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];                    // Parent partition ID for hierarchical structure
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Parent partition ID for hierarchical structure
   string description = 5 [
     (buf.validate.field).string.min_len = 10,
     (buf.validate.field).string.max_len = 500
-  ];                    // Partition description
-  common.v1.STATE state = 6;                    // Partition state
-  google.protobuf.Struct properties = 7;        // Additional partition metadata
-  google.protobuf.Timestamp created_at = 8;     // Creation timestamp
+  ]; // Partition description
+  common.v1.STATE state = 6; // Partition state
+  google.protobuf.Struct properties = 7 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ]; // Additional partition metadata
+  google.protobuf.Timestamp created_at = 8; // Creation timestamp
 }
 
 // PartitionRoleObject represents a role within a partition.
@@ -303,20 +401,31 @@ message PartitionRoleObject {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];                    // Unique role ID
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Unique role ID
   string partition_id = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];                    // Associated partition ID
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Associated partition ID
   string name = 3 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 100
-  ];                    // Role name (admin, editor, viewer, etc.)
-  google.protobuf.Struct properties = 4;        // Role permissions and metadata
-  google.protobuf.Timestamp created_at = 5;     // Creation timestamp
-  common.v1.STATE state = 6;                    // Role state
+  ]; // Role name (admin, editor, viewer, etc.)
+  google.protobuf.Struct properties = 4 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ]; // Role permissions and metadata
+  google.protobuf.Timestamp created_at = 5; // Creation timestamp
+  common.v1.STATE state = 6; // Role state
 }
 
 // PageObject represents a custom UI page for a partition.
@@ -324,19 +433,30 @@ message PageObject {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];                    // Unique page ID
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Unique page ID
   string name = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 100
-  ];                    // Page name
+  ]; // Page name
   string html = 3 [
     (buf.validate.field).string.min_len = 4,
     (buf.validate.field).string.max_len = 5000
-  ];                    // HTML content for the page
-  common.v1.STATE state = 4;                    // Page state
-  google.protobuf.Timestamp created_at = 5;     // Creation timestamp
-  google.protobuf.Struct properties = 6;        // Additional page metadata
+  ]; // HTML content for the page
+  common.v1.STATE state = 4; // Page state
+  google.protobuf.Timestamp created_at = 5; // Creation timestamp
+  google.protobuf.Struct properties = 6 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ]; // Additional page metadata
 }
 
 // AccessObject represents a profile's access to a partition.
@@ -344,16 +464,16 @@ message AccessObject {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];                    // Unique access ID
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Unique access ID
   string profile_id = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];                    // Profile ID with access
-  PartitionObject partition = 3;                // Partition being accessed
-  common.v1.STATE state = 4;                    // Access state
-  google.protobuf.Timestamp created_at = 5;     // Access grant timestamp
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Profile ID with access
+  PartitionObject partition = 3; // Partition being accessed
+  common.v1.STATE state = 4; // Access state
+  google.protobuf.Timestamp created_at = 5; // Access grant timestamp
 }
 
 // AccessRoleObject links an access grant to a partition role.
@@ -361,14 +481,14 @@ message AccessRoleObject {
   string access_role_id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];                    // Unique access role ID
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Unique access role ID
   string access_id = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];                    // Associated access ID
-  PartitionRoleObject role = 3;                 // Assigned partition role
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Associated access ID
+  PartitionRoleObject role = 3; // Assigned partition role
 }
 
 // -----------------------------------------------------
@@ -379,13 +499,24 @@ message CreatePartitionRoleRequest {
   string partition_id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   string name = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 100
   ];
-  google.protobuf.Struct properties = 3;
+  google.protobuf.Struct properties = 3 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ];
 }
 
 message CreatePartitionRoleResponse {
@@ -396,7 +527,7 @@ message RemovePartitionRoleRequest {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
 }
 
@@ -408,7 +539,7 @@ message ListPartitionRoleRequest {
   string partition_id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
 }
 
@@ -420,7 +551,7 @@ message CreatePageRequest {
   string partition_id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   string name = 2 [
     (buf.validate.field).string.min_len = 3,
@@ -441,13 +572,13 @@ message GetPageRequest {
     (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   string partition_id = 2 [
     (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   string name = 3 [
     (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
@@ -464,7 +595,7 @@ message RemovePageRequest {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
 }
 
@@ -480,21 +611,21 @@ message CreateAccessRequest {
       (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
       (buf.validate.field).string.min_len = 3,
       (buf.validate.field).string.max_len = 40,
-      (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+      (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
     ];
 
     string client_id = 3 [
       (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
       (buf.validate.field).string.min_len = 3,
       (buf.validate.field).string.max_len = 40,
-      (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+      (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
     ];
   }
 
   string profile_id = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
 }
 
@@ -507,7 +638,7 @@ message GetAccessRequest {
     (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
 
   oneof partition {
@@ -517,14 +648,14 @@ message GetAccessRequest {
       (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
       (buf.validate.field).string.min_len = 3,
       (buf.validate.field).string.max_len = 40,
-      (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+      (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
     ];
 
     string client_id = 3 [
       (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
       (buf.validate.field).string.min_len = 3,
       (buf.validate.field).string.max_len = 40,
-      (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+      (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
     ];
   }
 
@@ -532,7 +663,7 @@ message GetAccessRequest {
     (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
 }
 
@@ -544,7 +675,7 @@ message RemoveAccessRequest {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
 }
 
@@ -556,12 +687,12 @@ message CreateAccessRoleRequest {
   string access_id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   string partition_role_id = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
 }
 
@@ -573,7 +704,7 @@ message RemoveAccessRoleRequest {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
 }
 
@@ -585,7 +716,7 @@ message ListAccessRoleRequest {
   string access_id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
 }
 

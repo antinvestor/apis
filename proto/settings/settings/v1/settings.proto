@@ -26,38 +26,37 @@ package settings.v1;
 
 import "buf/validate/validate.proto";
 import "common/v1/common.proto";
-import "google/protobuf/struct.proto";
 import "gnostic/openapi/v3/annotations.proto";
+import "google/protobuf/struct.proto";
 
 option go_package = "github.com/antinvestor/apis/go/settings/v1;settingsv1";
 option java_multiple_files = true;
 option java_package = "settingsv1";
-
 option (gnostic.openapi.v3.document) = {
   info: {
-    title: "Settings Service";
-    version: "v1.0.0";
-    description: "The Settings Service provides hierarchical configuration management for applications and services. It supports multi-level scoping (global, object-level, instance-level), localization, and module-specific settings. Settings can be organized by object type, object ID, language, and module, enabling flexible configuration management for multi-tenant applications with internationalization support.";
+    title: "Settings Service"
+    version: "v1.0.0"
+    description: "The Settings Service provides hierarchical configuration management for applications and services. It supports multi-level scoping (global, object-level, instance-level), localization, and module-specific settings. Settings can be organized by object type, object ID, language, and module, enabling flexible configuration management for multi-tenant applications with internationalization support."
     contact: {
-      name: "Ant Investor Ltd";
-      url: "https://github.com/antinvestor/service-settings";
-      email: "info@antinvestor.com";
+      name: "Ant Investor Ltd"
+      url: "https://github.com/antinvestor/service-settings"
+      email: "info@antinvestor.com"
     }
     license: {
-      name: "Apache License";
-      url: "https://github.com/antinvestor/apis/blob/master/LICENSE";
+      name: "Apache License"
+      url: "https://github.com/antinvestor/apis/blob/master/LICENSE"
     }
   }
   components: {
     security_schemes: {
       additional_properties: [
         {
-          name: "BearerAuth";
+          name: "BearerAuth"
           value: {
             security_scheme: {
-              type: "http";
-              scheme: "bearer";
-              bearer_format: "JWT";
+              type: "http"
+              scheme: "bearer"
+              bearer_format: "JWT"
             }
           }
         }
@@ -69,25 +68,25 @@ option (gnostic.openapi.v3.document) = {
 // Setting represents a hierarchical key for configuration lookup.
 // Supports multi-level scoping for flexible configuration management.
 message Setting {
-  string name = 1 [(buf.validate.field).string.min_len = 2];  // Setting name (e.g., "theme", "max_upload_size")
+  string name = 1 [(buf.validate.field).string.min_len = 2]; // Setting name (e.g., "theme", "max_upload_size")
   string object = 2 [
     (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 2
-  ];  // Object type scope (e.g., "user", "organization", "application")
+  ]; // Object type scope (e.g., "user", "organization", "application")
   string object_id = 3 [
     (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];  // Specific object instance ID (for instance-level settings)
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Specific object instance ID (for instance-level settings)
   string lang = 4 [
     (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 2
-  ];  // Language code for localized settings (ISO 639-1)
+  ]; // Language code for localized settings (ISO 639-1)
   string module = 5 [
     (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3
-  ];  // Module or feature scope (e.g., "billing", "notifications")
+  ]; // Module or feature scope (e.g., "billing", "notifications")
 }
 
 // SettingObject represents a stored setting with its value and metadata.
@@ -95,47 +94,47 @@ message SettingObject {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];  // Unique identifier for this setting instance
-  Setting key = 2;      // Hierarchical key identifying the setting
-  string value = 3;     // Setting value (JSON string for complex values)
-  string updated = 4;   // Last update timestamp (RFC3339)
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Unique identifier for this setting instance
+  Setting key = 2; // Hierarchical key identifying the setting
+  string value = 3; // Setting value (JSON string for complex values)
+  string updated = 4; // Last update timestamp (RFC3339)
 }
 
 // GetRequest retrieves a single setting value.
 message GetRequest {
-  Setting key = 1;  // Setting key to retrieve
+  Setting key = 1; // Setting key to retrieve
 }
 
 // GetResponse returns the requested setting.
 message GetResponse {
-  SettingObject data = 1;  // The requested setting
+  SettingObject data = 1; // The requested setting
 }
 
 // SearchResponse returns settings matching search criteria.
 message SearchResponse {
-  repeated SettingObject data = 1;  // List of matching settings
+  repeated SettingObject data = 1; // List of matching settings
 }
 
 // ListRequest retrieves all settings matching a partial key.
 message ListRequest {
-  Setting key = 1;  // Partial key for filtering (empty fields match all)
+  Setting key = 1; // Partial key for filtering (empty fields match all)
 }
 
 // ListResponse returns matching settings.
 message ListResponse {
-  repeated SettingObject data = 1;  // List of matching settings
+  repeated SettingObject data = 1; // List of matching settings
 }
 
 // SetRequest creates or updates a setting value.
 message SetRequest {
-  Setting key = 1;    // Setting key to set
-  string value = 2;   // New value for the setting
+  Setting key = 1; // Setting key to set
+  string value = 2; // New value for the setting
 }
 
 // SetResponse returns the updated setting.
 message SetResponse {
-  SettingObject data = 1;  // The updated setting
+  SettingObject data = 1; // The updated setting
 }
 
 // -----------------------------------------------------

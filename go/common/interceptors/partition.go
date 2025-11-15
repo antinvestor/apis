@@ -33,7 +33,6 @@ func NewPartitionInfoInterceptor(clientInfo string) connect.Interceptor {
 }
 
 func (ai *partitionInfoSetInterceptor) setPartitionInfo(ctx context.Context, header http.Header) {
-
 	partitionInfo, ok := ctx.Value(common.CtxKeyPartitionInfo).(*common.PartitionInfo)
 	if !ok || partitionInfo == nil {
 		return
@@ -52,26 +51,30 @@ func (ai *partitionInfoSetInterceptor) WrapUnary(next connect.UnaryFunc) connect
 		req connect.AnyRequest,
 	) (connect.AnyResponse, error) {
 		if req.Spec().IsClient {
-			req.Header().Set("x-ai-api-client", ai.clientInfo)
+			req.Header().Set("X-Ai-Api-Client", ai.clientInfo)
 			ai.setPartitionInfo(ctx, req.Header())
 		}
 		return next(ctx, req)
 	}
 }
 
-func (ai *partitionInfoSetInterceptor) WrapStreamingClient(next connect.StreamingClientFunc) connect.StreamingClientFunc {
+func (ai *partitionInfoSetInterceptor) WrapStreamingClient(
+	next connect.StreamingClientFunc,
+) connect.StreamingClientFunc {
 	return func(
 		ctx context.Context,
 		spec connect.Spec,
 	) connect.StreamingClientConn {
 		conn := next(ctx, spec)
-		conn.RequestHeader().Set("x-ai-api-client", ai.clientInfo)
+		conn.RequestHeader().Set("X-Ai-Api-Client", ai.clientInfo)
 		ai.setPartitionInfo(ctx, conn.RequestHeader())
 		return conn
 	}
 }
 
-func (ai *partitionInfoSetInterceptor) WrapStreamingHandler(next connect.StreamingHandlerFunc) connect.StreamingHandlerFunc {
+func (ai *partitionInfoSetInterceptor) WrapStreamingHandler(
+	next connect.StreamingHandlerFunc,
+) connect.StreamingHandlerFunc {
 	return func(
 		ctx context.Context,
 		conn connect.StreamingHandlerConn,

@@ -28,39 +28,38 @@ package payment.v1;
 
 import "buf/validate/validate.proto";
 import "common/v1/common.proto";
+import "gnostic/openapi/v3/annotations.proto";
 import "google/protobuf/struct.proto";
 import "google/type/money.proto";
-import "gnostic/openapi/v3/annotations.proto";
 
 option go_package = "github.com/antinvestor/apis/go/payment/v1;paymentv1";
 option java_multiple_files = true;
 option java_package = "paymentv1";
-
 option (gnostic.openapi.v3.document) = {
   info: {
-    title: "Payment Service";
-    version: "v1.0.0";
-    description: "The Payment Service provides comprehensive payment processing capabilities including inbound and outbound payments, payment link generation, reconciliation, and multi-channel payment routing. It supports various payment methods (mobile money, bank transfers, cards) and follows a queue-and-release pattern for batch processing. The service handles payment lifecycle management from initiation through completion with full audit trails.";
+    title: "Payment Service"
+    version: "v1.0.0"
+    description: "The Payment Service provides comprehensive payment processing capabilities including inbound and outbound payments, payment link generation, reconciliation, and multi-channel payment routing. It supports various payment methods (mobile money, bank transfers, cards) and follows a queue-and-release pattern for batch processing. The service handles payment lifecycle management from initiation through completion with full audit trails."
     contact: {
-      name: "Ant Investor Ltd";
-      url: "https://github.com/antinvestor/service-payment";
-      email: "info@antinvestor.com";
+      name: "Ant Investor Ltd"
+      url: "https://github.com/antinvestor/service-payment"
+      email: "info@antinvestor.com"
     }
     license: {
-      name: "Apache License";
-      url: "https://github.com/antinvestor/apis/blob/master/LICENSE";
+      name: "Apache License"
+      url: "https://github.com/antinvestor/apis/blob/master/LICENSE"
     }
   }
   components: {
     security_schemes: {
       additional_properties: [
         {
-          name: "BearerAuth";
+          name: "BearerAuth"
           value: {
             security_scheme: {
-              type: "http";
-              scheme: "bearer";
-              bearer_format: "JWT";
+              type: "http"
+              scheme: "bearer"
+              bearer_format: "JWT"
             }
           }
         }
@@ -75,9 +74,9 @@ option (gnostic.openapi.v3.document) = {
 
 // NotificationType defines how customers are notified about payment links.
 enum NotificationType {
-  NOTIFICATION_TYPE_UNSPECIFIED = 0;  // No notification preference specified
-  NOTIFICATION_TYPE_EMAIL = 1;        // Send payment link via email
-  NOTIFICATION_TYPE_SMS = 2;          // Send payment link via SMS
+  NOTIFICATION_TYPE_UNSPECIFIED = 0; // No notification preference specified
+  NOTIFICATION_TYPE_EMAIL = 1; // Send payment link via email
+  NOTIFICATION_TYPE_SMS = 2; // Send payment link via SMS
 }
 
 // -----------------------------------------------------
@@ -86,38 +85,49 @@ enum NotificationType {
 
 // Payment represents a payment transaction.
 message Payment {
-  string id = 1;                          // Unique payment ID
-  string transaction_id = 2;              // Associated transaction ID (ledger)
-  string reference_id = 3;                // External reference (invoice, order)
-  string batch_id = 4;                    // Batch ID for grouped payments
-  string external_transaction_id = 5;     // Provider's transaction ID (M-PESA, bank)
-  string route = 6;                       // Payment route (M-PESA, RTGS, CARD, INTERNAL)
-  common.v1.ContactLink source = 7;       // Payment source (payer)
-  common.v1.ContactLink recipient = 8;    // Payment recipient (payee)
-  google.type.Money amount = 9;           // Payment amount
-  google.type.Money cost = 10;            // Transaction cost/fee
-  common.v1.STATE state = 11;             // Processing state
-  common.v1.STATUS status = 12;           // Payment status
-  string date_created = 13;               // Creation timestamp (RFC3339)
-  string date_processed = 14;             // Processing timestamp (RFC3339)
-  bool outbound = 15;                     // True if outbound, false if inbound
-  google.protobuf.Struct extra = 16;      // Additional metadata
+  string id = 1; // Unique payment ID
+  string transaction_id = 2; // Associated transaction ID (ledger)
+  string reference_id = 3; // External reference (invoice, order)
+  string batch_id = 4; // Batch ID for grouped payments
+  string external_transaction_id = 5; // Provider's transaction ID (M-PESA, bank)
+  string route = 6; // Payment route (M-PESA, RTGS, CARD, INTERNAL)
+  common.v1.ContactLink source = 7; // Payment source (payer)
+  common.v1.ContactLink recipient = 8; // Payment recipient (payee)
+  google.type.Money amount = 9; // Payment amount
+  google.type.Money cost = 10; // Transaction cost/fee
+  common.v1.STATE state = 11; // Processing state
+  common.v1.STATUS status = 12; // Payment status
+  string date_created = 13; // Creation timestamp (RFC3339)
+  string date_processed = 14; // Processing timestamp (RFC3339)
+  bool outbound = 15; // True if outbound, false if inbound
+  google.protobuf.Struct extra = 16 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ]; // Additional metadata
 }
 
 // Account represents a merchant or recipient account.
 message Account {
-  string account_number = 1;  // Account number to be credited
-  string country_code = 2;    // Country code (ISO 3166-1 alpha-2)
-  string name = 3;            // Account holder name
+  string account_number = 1; // Account number to be credited
+  string country_code = 2; // Country code (ISO 3166-1 alpha-2)
+  string name = 3; // Account holder name
 }
 
 // Customer represents a payment link customer.
 message Customer {
-  common.v1.ContactLink source = 1;  // Customer contact information
-  string first_address = 2;          // Primary address line
-  string country_code = 3;           // Country code (ISO 3166-1 alpha-2)
-  string postal_or_zip_code = 4;     // Postal/ZIP code
-  string customer_external_ref = 5;  // External customer reference
+  common.v1.ContactLink source = 1; // Customer contact information
+  string first_address = 2; // Primary address line
+  string country_code = 3; // Country code (ISO 3166-1 alpha-2)
+  string postal_or_zip_code = 4; // Postal/ZIP code
+  string customer_external_ref = 5; // External customer reference
 }
 
 // PaymentLink represents a shareable payment link.
@@ -125,20 +135,20 @@ message PaymentLink {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];                                  // Unique payment link ID
-  string expiry_date = 2;             // Link expiration date (RFC3339)
-  string sale_date = 3;               // Sale date (RFC3339)
-  string payment_link_type = 4;       // Link type (invoice, donation, subscription)
-  string sale_type = 5;               // Sale type (goods, services)
-  string name = 6;                    // Payment link name/title
-  string description = 7;             // Payment description
-  string external_ref = 8;            // External reference (invoice number)
-  string payment_link_ref = 9;        // Generated payment link reference
-  string redirect_url = 10;           // Post-payment redirect URL
-  string amount_option = 11;          // Amount option (fixed, variable, minimum)
-  google.type.Money amount = 12;      // Payment amount (if fixed)
-  string currency = 13;               // Currency code (ISO 4217)
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Unique payment link ID
+  string expiry_date = 2; // Link expiration date (RFC3339)
+  string sale_date = 3; // Sale date (RFC3339)
+  string payment_link_type = 4; // Link type (invoice, donation, subscription)
+  string sale_type = 5; // Sale type (goods, services)
+  string name = 6; // Payment link name/title
+  string description = 7; // Payment description
+  string external_ref = 8; // External reference (invoice number)
+  string payment_link_ref = 9; // Generated payment link reference
+  string redirect_url = 10; // Post-payment redirect URL
+  string amount_option = 11; // Amount option (fixed, variable, minimum)
+  google.type.Money amount = 12; // Payment amount (if fixed)
+  string currency = 13; // Currency code (ISO 4217)
 }
 
 // -----------------------------------------------------
@@ -147,42 +157,53 @@ message PaymentLink {
 
 // SendRequest queues an outbound payment.
 message SendRequest {
-  Payment data = 1;  // Payment to send
+  Payment data = 1; // Payment to send
 }
 
 // SendResponse confirms payment queuing.
 message SendResponse {
-  common.v1.StatusResponse data = 1;  // Status response
+  common.v1.StatusResponse data = 1; // Status response
 }
 
 // ReceiveRequest queues an inbound payment.
 message ReceiveRequest {
-  Payment data = 1;  // Payment to receive
+  Payment data = 1; // Payment to receive
 }
 
 // ReceiveResponse confirms payment queuing.
 message ReceiveResponse {
-  common.v1.StatusResponse data = 1;  // Status response
+  common.v1.StatusResponse data = 1; // Status response
 }
 
 // InitiatePromptRequest initiates a payment prompt (e.g., STK push).
 message InitiatePromptRequest {
-  common.v1.ContactLink source = 1;   // Payment source
+  common.v1.ContactLink source = 1; // Payment source
   common.v1.ContactLink recipient = 2; // Payment recipient
-  google.type.Money amount = 3;        // Payment amount
-  string date_created = 4;             // Creation timestamp (RFC3339)
-  string device_id = 5;                // Device ID for prompt
-  string id = 6;                       // Payment ID
-  common.v1.STATE state = 7;           // Processing state
-  common.v1.STATUS status = 8;         // Payment status
-  string route = 9;                    // Payment route hint (M-PESA, RTGS, INTERNAL)
-  Account recipient_account = 10;      // Merchant account information
-  google.protobuf.Struct extra = 11;   // Additional metadata
+  google.type.Money amount = 3; // Payment amount
+  string date_created = 4; // Creation timestamp (RFC3339)
+  string device_id = 5; // Device ID for prompt
+  string id = 6; // Payment ID
+  common.v1.STATE state = 7; // Processing state
+  common.v1.STATUS status = 8; // Payment status
+  string route = 9; // Payment route hint (M-PESA, RTGS, INTERNAL)
+  Account recipient_account = 10; // Merchant account information
+  google.protobuf.Struct extra = 11 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ]; // Additional metadata
 }
 
 // InitiatePromptResponse confirms prompt initiation.
 message InitiatePromptResponse {
-  common.v1.StatusResponse data = 1;  // Status response
+  common.v1.StatusResponse data = 1; // Status response
 }
 
 // ReleaseRequest releases a queued payment for processing.
@@ -190,50 +211,50 @@ message ReleaseRequest {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];                  // Payment ID to release
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Payment ID to release
   string comment = 2; // Release comment/reason
 }
 
 // ReleaseResponse confirms payment release.
 message ReleaseResponse {
-  common.v1.StatusResponse data = 1;  // Status response
+  common.v1.StatusResponse data = 1; // Status response
 }
 
 // ReconcileRequest reconciles an external transaction.
 message ReconcileRequest {
-  string external_transaction_id = 1;  // Provider's transaction ID
-  string route = 2;                    // Payment route
-  bool outbound = 3;                   // Payment direction
-  google.type.Money amount = 4;        // Transaction amount
-  string owner = 5;                    // Account owner
-  string country_code = 6;             // Country code (ISO 3166-1 alpha-2)
+  string external_transaction_id = 1; // Provider's transaction ID
+  string route = 2; // Payment route
+  bool outbound = 3; // Payment direction
+  google.type.Money amount = 4; // Transaction amount
+  string owner = 5; // Account owner
+  string country_code = 6; // Country code (ISO 3166-1 alpha-2)
 }
 
 // ReconcileResponse returns reconciliation result.
 message ReconcileResponse {
-  string id = 1;                  // Internal payment ID
-  string transaction_id = 2;      // Transaction ID
-  string reference_id = 3;        // Reference ID
-  common.v1.STATUS status = 4;    // Reconciliation status
-  string description = 5;         // Status description
+  string id = 1; // Internal payment ID
+  string transaction_id = 2; // Transaction ID
+  string reference_id = 3; // Reference ID
+  common.v1.STATUS status = 4; // Reconciliation status
+  string description = 5; // Status description
 }
 
 // SearchResponse returns payment search results.
 message SearchResponse {
-  repeated Payment data = 1;  // List of matching payments
+  repeated Payment data = 1; // List of matching payments
 }
 
 // CreatePaymentLinkRequest creates a new payment link.
 message CreatePaymentLinkRequest {
-  repeated Customer customers = 1;              // Customers to notify
-  PaymentLink payment_link = 2;                 // Payment link details
-  repeated NotificationType notifications = 3;  // Notification methods
+  repeated Customer customers = 1; // Customers to notify
+  PaymentLink payment_link = 2; // Payment link details
+  repeated NotificationType notifications = 3; // Notification methods
 }
 
 // CreatePaymentLinkResponse returns the created payment link.
 message CreatePaymentLinkResponse {
-  common.v1.StatusResponse data = 1;  // Status response with link
+  common.v1.StatusResponse data = 1; // Status response with link
 }
 
 // -----------------------------------------------------

@@ -20,7 +20,7 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-// InfoOverride allows customizing the OpenAPI info section
+// InfoOverride allows customizing the OpenAPI info section.
 type InfoOverride struct {
 	Title          string       `yaml:"title,omitempty"`
 	Description    string       `yaml:"description,omitempty"`
@@ -41,7 +41,7 @@ type LicenseInfo struct {
 	URL  string `yaml:"url,omitempty"`
 }
 
-// OpenAPIHandler serves a single OpenAPI spec file with optional info customization
+// OpenAPIHandler serves a single OpenAPI spec file with optional info customization.
 type OpenAPIHandler struct {
 	specData     []byte
 	infoOverride *InfoOverride
@@ -70,14 +70,14 @@ func NewOpenAPIHandler(specData []byte, infoOverride *InfoOverride) *OpenAPIHand
 	}
 }
 
-// ServeHTTP implements http.Handler
+// ServeHTTP implements http.Handler.
 func (h *OpenAPIHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	// Enable CORS
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "GET, OPTIONS")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 
-	if r.Method == "OPTIONS" {
+	if r.Method == http.MethodOptions {
 		w.WriteHeader(http.StatusOK)
 		return
 	}

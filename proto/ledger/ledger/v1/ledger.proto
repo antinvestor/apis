@@ -25,40 +25,40 @@ package ledger.v1;
 // - All monetary amounts use google.type.Money for currency safety
 // -----------------------------------------------------
 
+import "buf/validate/validate.proto";
 import "common/v1/common.proto";
+import "gnostic/openapi/v3/annotations.proto";
 import "google/protobuf/struct.proto";
 import "google/type/money.proto";
-import "gnostic/openapi/v3/annotations.proto";
 
 option go_package = "github.com/antinvestor/apis/go/ledger/v1;ledgerv1";
 option java_multiple_files = true;
 option java_package = "ledgerv1";
-
 option (gnostic.openapi.v3.document) = {
   info: {
-    title: "Ledger Service";
-    version: "v1.0.0";
-    description: "The Ledger Service provides double-entry bookkeeping and financial accounting capabilities. It supports hierarchical chart of accounts, multi-currency transactions, transaction reversals, and balance tracking. The service follows standard accounting principles with ledger types (Asset, Liability, Income, Expense, Capital) and ensures all transactions are balanced (debits equal credits). Supports both cleared and uncleared transactions with reservation capabilities for pending operations.";
+    title: "Ledger Service"
+    version: "v1.0.0"
+    description: "The Ledger Service provides double-entry bookkeeping and financial accounting capabilities. It supports hierarchical chart of accounts, multi-currency transactions, transaction reversals, and balance tracking. The service follows standard accounting principles with ledger types (Asset, Liability, Income, Expense, Capital) and ensures all transactions are balanced (debits equal credits). Supports both cleared and uncleared transactions with reservation capabilities for pending operations."
     contact: {
-      name: "Ant Investor Ltd";
-      url: "https://github.com/antinvestor/service-ledger";
-      email: "info@antinvestor.com";
+      name: "Ant Investor Ltd"
+      url: "https://github.com/antinvestor/service-ledger"
+      email: "info@antinvestor.com"
     }
     license: {
-      name: "Apache License";
-      url: "https://github.com/antinvestor/apis/blob/master/LICENSE";
+      name: "Apache License"
+      url: "https://github.com/antinvestor/apis/blob/master/LICENSE"
     }
   }
   components: {
     security_schemes: {
       additional_properties: [
         {
-          name: "BearerAuth";
+          name: "BearerAuth"
           value: {
             security_scheme: {
-              type: "http";
-              scheme: "bearer";
-              bearer_format: "JWT";
+              type: "http"
+              scheme: "bearer"
+              bearer_format: "JWT"
             }
           }
         }
@@ -76,19 +76,19 @@ option (gnostic.openapi.v3.document) = {
 // buf:lint:ignore ENUM_VALUE_PREFIX
 enum LedgerType {
   // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
-  ASSET = 0;      // Resources owned (cash, receivables, inventory, equipment)
-  LIABILITY = 1;  // Obligations owed (payables, loans, accrued expenses)
-  INCOME = 2;     // Revenue and gains (sales, interest income, fees)
-  EXPENSE = 3;    // Costs and losses (salaries, rent, utilities, depreciation)
-  CAPITAL = 4;    // Owner's equity (investments, retained earnings)
+  ASSET = 0; // Resources owned (cash, receivables, inventory, equipment)
+  LIABILITY = 1; // Obligations owed (payables, loans, accrued expenses)
+  INCOME = 2; // Revenue and gains (sales, interest income, fees)
+  EXPENSE = 3; // Costs and losses (salaries, rent, utilities, depreciation)
+  CAPITAL = 4; // Owner's equity (investments, retained earnings)
 }
 
 // TransactionType defines the nature of a transaction.
 // buf:lint:ignore ENUM_VALUE_PREFIX
 enum TransactionType {
   // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
-  NORMAL = 0;      // Standard transaction
-  REVERSAL = 1;    // Reverses a previous transaction (creates offsetting entries)
+  NORMAL = 0; // Standard transaction
+  REVERSAL = 1; // Reverses a previous transaction (creates offsetting entries)
   RESERVATION = 2; // Temporary hold/reservation (e.g., pending payment authorization)
 }
 
@@ -99,45 +99,268 @@ enum TransactionType {
 // Ledger represents a category in the chart of accounts.
 // Ledgers can be hierarchical with parent-child relationships.
 message Ledger {
-  string reference = 1;           // Unique reference/code for the ledger (e.g., "1000", "CASH")
-  LedgerType type = 2;            // Accounting category type
-  string parent = 3;              // Parent ledger reference for hierarchical structure
-  google.protobuf.Struct data = 4; // Additional ledger metadata (name, description, etc.)
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Unique reference/code for the ledger (e.g., "1000", "CASH")
+  LedgerType type = 2; // Accounting category type
+  string parent = 3; // Parent ledger reference for hierarchical structure
+  google.protobuf.Struct data = 4 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576" // Limit serialized size to 1MB
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50" // Limit number of top-level fields
+    }
+  ]; // Additional ledger metadata (name, description, etc.)
 }
 
 // Account represents a specific account within a ledger.
 // Tracks balances and supports multi-currency operations.
 message Account {
-  string reference = 1;                     // Unique account reference/number
-  string ledger = 3;                        // Ledger this account belongs to
-  google.type.Money balance = 4;            // Current cleared balance
-  google.protobuf.Struct data = 5;          // Additional account metadata (owner, description, etc.)
-  google.type.Money uncleared_balance = 6;  // Balance including uncleared transactions
-  google.type.Money reserved_balance = 7;   // Amount held in reservations
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Unique account reference/number
+  string ledger = 3; // Ledger this account belongs to
+  google.type.Money balance = 4; // Current cleared balance
+  google.protobuf.Struct data = 5 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ]; // Additional account metadata (owner, description, etc.)
+  google.type.Money uncleared_balance = 6; // Balance including uncleared transactions
+  google.type.Money reserved_balance = 7; // Amount held in reservations
 }
 
 // TransactionEntry represents one side of a double-entry transaction.
 // Each transaction must have at least two entries with balanced debits and credits.
 message TransactionEntry {
-  string account = 1;              // Account reference for this entry
-  string transaction = 2;          // Transaction reference this entry belongs to
-  string transacted_at = 3;        // Transaction timestamp (RFC3339)
-  google.type.Money amount = 4;    // Amount for this entry
-  bool credit = 5;                 // True if credit, false if debit
-  google.type.Money acc_balance = 6; // Account balance after this entry
-  string cleared_at = 7;           // When this entry was cleared (RFC3339)
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Account reference for this entry
+  string account_id = 3; // Account reference for this entry
+  string transaction_id = 4; // Transaction reference this entry belongs to
+  string transacted_at = 5; // Transaction timestamp (RFC3339)
+  google.type.Money amount = 7; // Amount for this entry
+  bool credit = 8; // True if credit, false if debit
+  google.type.Money acc_balance = 9; // Account balance after this entry
+  string cleared_at = 11; // When this entry was cleared (RFC3339)
 }
 
 // Transaction represents a complete double-entry transaction.
 // Must contain balanced entries (sum of debits = sum of credits).
 message Transaction {
-  string reference = 1;                   // Unique transaction reference/ID
-  string currency = 2;                    // Currency code for all entries (ISO 4217)
-  string transacted_at = 3;               // Transaction timestamp (RFC3339)
-  google.protobuf.Struct data = 4;        // Additional transaction metadata (description, source, etc.)
-  repeated TransactionEntry entries = 5;  // Transaction entries (must be balanced)
-  bool cleared = 6;                       // Whether transaction has been cleared/posted
-  TransactionType type = 7;               // Transaction type (normal, reversal, reservation)
+  string id = 1; // Unique transaction reference/ID
+  // The three-letter currency code defined in ISO 4217.
+  string currency_code = 2; // Currency code for all entries (ISO 4217)
+  string transacted_at = 3; // Transaction timestamp (RFC3339)
+  google.protobuf.Struct data = 4 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ]; // Additional transaction metadata (description, source, etc.)
+  repeated TransactionEntry entries = 5; // Transaction entries (must be balanced)
+  bool cleared = 6; // Whether transaction has been cleared/posted
+  TransactionType type = 7; // Transaction type (normal, reversal, reservation)
+}
+
+// -----------------------------------------------------
+// Request/Response Messages
+// -----------------------------------------------------
+
+// SearchLedgersResponse returns ledgers matching search criteria.
+message SearchLedgersResponse {
+  repeated Ledger data = 1; // List of matching ledgers
+}
+
+// CreateLedgerRequest creates a new ledger in the chart of accounts.
+message CreateLedgerRequest {
+  string id = 1; // Unique reference/code for the ledger (e.g., "1000", "CASH")
+  LedgerType type = 2; // Accounting category type
+  string parent_id = 3; // Parent ledger reference for hierarchical structure
+  google.protobuf.Struct data = 4 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576" // Limit serialized size to 1MB
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50" // Limit number of top-level fields
+    }
+  ]; // Additional ledger metadata (name, description, etc.)
+}
+
+// CreateLedgerResponse returns the newly created ledger.
+message CreateLedgerResponse {
+  Ledger data = 1; // The created ledger
+}
+
+// UpdateLedgerRequest updates an existing ledger's metadata.
+message UpdateLedgerRequest {
+  string id = 1; // Unique reference/code for the ledger (e.g., "1000", "CASH")
+  google.protobuf.Struct data = 4 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576" // Limit serialized size to 1MB
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50" // Limit number of top-level fields
+    }
+  ]; // Additional ledger metadata (name, description, etc.)
+}
+
+// UpdateLedgerResponse returns the updated ledger.
+message UpdateLedgerResponse {
+  Ledger data = 1; // The updated ledger
+}
+
+// SearchAccountsResponse returns accounts matching search criteria.
+message SearchAccountsResponse {
+  repeated Account data = 1; // List of matching accounts
+}
+
+// CreateAccountRequest creates a new account within a ledger.
+message CreateAccountRequest {
+  string id = 1; // Unique account reference/number
+  string ledger_id = 3; // Ledger this account belongs to
+  string currency = 4; // Current cleared balance
+  google.protobuf.Struct data = 5 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ]; // Additional account metadata (owner, description, etc.)
+}
+
+// CreateAccountResponse returns the newly created account.
+message CreateAccountResponse {
+  Account data = 1; // The created account
+}
+
+// UpdateAccountRequest updates an existing account's metadata.
+message UpdateAccountRequest {
+  string id = 1; // Unique reference/code for the account (e.g., "1000", "CASH")
+  google.protobuf.Struct data = 4 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576" // Limit serialized size to 1MB
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50" // Limit number of top-level fields
+    }
+  ]; // Additional ledger metadata (name, description, etc.)
+}
+
+// UpdateAccountResponse returns the updated account.
+message UpdateAccountResponse {
+  Account data = 1; // The updated account
+}
+
+// SearchTransactionsResponse returns transactions matching search criteria.
+message SearchTransactionsResponse {
+  repeated Transaction data = 1; // List of matching transactions
+}
+
+// CreateTransactionRequest creates a new double-entry transaction.
+message CreateTransactionRequest {
+  string id = 1; // Unique transaction reference/ID
+  string currency = 2; // Currency code for all entries (ISO 4217)
+  string transacted_at = 3; // Transaction timestamp (RFC3339)
+  google.protobuf.Struct data = 4 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ]; // Additional transaction metadata (description, source, etc.)
+  repeated TransactionEntry entries = 5; // Transaction entries (must be balanced)
+  bool cleared = 6; // Whether transaction has been cleared/posted
+  TransactionType type = 7; // Transaction type (normal, reversal, reservation)
+}
+
+// CreateTransactionResponse returns the newly created transaction.
+message CreateTransactionResponse {
+  Transaction data = 1; // The created transaction
+}
+
+// ReverseTransactionRequest reverses a transaction by creating offsetting entries.
+message ReverseTransactionRequest {
+  string id = 1; // Unique transaction reference/ID
+}
+
+// ReverseTransactionResponse returns the reversal transaction.
+message ReverseTransactionResponse {
+  Transaction data = 1; // The created reversal transaction
+}
+
+// UpdateTransactionRequest updates a transaction's metadata.
+message UpdateTransactionRequest {
+  string id = 1; // Unique reference/code for the transaction (e.g., "1000", "CASH")
+  string cleared_at = 2; // Transaction timestamp (RFC3339)
+  google.protobuf.Struct data = 4 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576" // Limit serialized size to 1MB
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50" // Limit number of top-level fields
+    }
+  ]; // Additional ledger metadata (name, description, etc.)
+}
+
+// UpdateTransactionResponse returns the updated transaction.
+message UpdateTransactionResponse {
+  Transaction data = 1; // The updated transaction
+}
+
+// SearchTransactionEntriesResponse returns transaction entries matching search criteria.
+message SearchTransactionEntriesResponse {
+  repeated TransactionEntry data = 1; // List of matching transaction entries
 }
 
 // -----------------------------------------------------
@@ -149,7 +372,7 @@ message Transaction {
 service LedgerService {
   // SearchLedgers finds ledgers in the chart of accounts.
   // Supports filtering by type, parent, and custom properties.
-  rpc SearchLedgers(common.v1.SearchRequest) returns (stream Ledger) {
+  rpc SearchLedgers(common.v1.SearchRequest) returns (stream SearchLedgersResponse) {
     option (gnostic.openapi.v3.operation) = {
       operation_id: "searchLedgers"
       summary: "Search ledgers"
@@ -160,7 +383,7 @@ service LedgerService {
 
   // CreateLedger creates a new ledger in the chart of accounts.
   // Ledgers can be hierarchical with parent-child relationships.
-  rpc CreateLedger(Ledger) returns (Ledger) {
+  rpc CreateLedger(CreateLedgerRequest) returns (CreateLedgerResponse) {
     option (gnostic.openapi.v3.operation) = {
       operation_id: "createLedger"
       summary: "Create a new ledger"
@@ -171,7 +394,7 @@ service LedgerService {
 
   // UpdateLedger updates an existing ledger's metadata.
   // The ledger type and reference cannot be changed.
-  rpc UpdateLedger(Ledger) returns (Ledger) {
+  rpc UpdateLedger(UpdateLedgerRequest) returns (UpdateLedgerResponse) {
     option (gnostic.openapi.v3.operation) = {
       operation_id: "updateLedger"
       summary: "Update ledger metadata"
@@ -182,7 +405,7 @@ service LedgerService {
 
   // SearchAccounts finds accounts matching specified criteria.
   // Supports filtering by ledger, balance range, and custom properties.
-  rpc SearchAccounts(common.v1.SearchRequest) returns (stream Account) {
+  rpc SearchAccounts(common.v1.SearchRequest) returns (stream SearchAccountsResponse) {
     option (gnostic.openapi.v3.operation) = {
       operation_id: "searchAccounts"
       summary: "Search accounts"
@@ -193,7 +416,7 @@ service LedgerService {
 
   // CreateAccount creates a new account within a ledger.
   // Each account tracks balances and transaction history.
-  rpc CreateAccount(Account) returns (Account) {
+  rpc CreateAccount(CreateAccountRequest) returns (CreateAccountResponse) {
     option (gnostic.openapi.v3.operation) = {
       operation_id: "createAccount"
       summary: "Create a new account"
@@ -204,7 +427,7 @@ service LedgerService {
 
   // UpdateAccount updates an existing account's metadata.
   // Balances are updated through transactions, not directly.
-  rpc UpdateAccount(Account) returns (Account) {
+  rpc UpdateAccount(UpdateAccountRequest) returns (UpdateAccountResponse) {
     option (gnostic.openapi.v3.operation) = {
       operation_id: "updateAccount"
       summary: "Update account metadata"
@@ -215,7 +438,7 @@ service LedgerService {
 
   // SearchTransactions finds transactions matching specified criteria.
   // Supports filtering by date range, account, currency, and status.
-  rpc SearchTransactions(common.v1.SearchRequest) returns (stream Transaction) {
+  rpc SearchTransactions(common.v1.SearchRequest) returns (stream SearchTransactionsResponse) {
     option (gnostic.openapi.v3.operation) = {
       operation_id: "searchTransactions"
       summary: "Search transactions"
@@ -226,7 +449,7 @@ service LedgerService {
 
   // CreateTransaction creates a new double-entry transaction.
   // All entries must be balanced (sum of debits = sum of credits).
-  rpc CreateTransaction(Transaction) returns (Transaction) {
+  rpc CreateTransaction(CreateTransactionRequest) returns (CreateTransactionResponse) {
     option (gnostic.openapi.v3.operation) = {
       operation_id: "createTransaction"
       summary: "Create a new transaction"
@@ -237,7 +460,7 @@ service LedgerService {
 
   // ReverseTransaction reverses a transaction by creating offsetting entries.
   // Creates a new REVERSAL transaction that negates the original.
-  rpc ReverseTransaction(Transaction) returns (Transaction) {
+  rpc ReverseTransaction(ReverseTransactionRequest) returns (ReverseTransactionResponse) {
     option (gnostic.openapi.v3.operation) = {
       operation_id: "reverseTransaction"
       summary: "Reverse a transaction"
@@ -248,7 +471,7 @@ service LedgerService {
 
   // UpdateTransaction updates a transaction's metadata.
   // Entries and amounts cannot be changed after creation.
-  rpc UpdateTransaction(Transaction) returns (Transaction) {
+  rpc UpdateTransaction(UpdateTransactionRequest) returns (UpdateTransactionResponse) {
     option (gnostic.openapi.v3.operation) = {
       operation_id: "updateTransaction"
       summary: "Update transaction metadata"
@@ -259,7 +482,7 @@ service LedgerService {
 
   // SearchTransactionEntries finds individual transaction entries.
   // Useful for account statement generation and reconciliation.
-  rpc SearchTransactionEntries(common.v1.SearchRequest) returns (stream TransactionEntry) {
+  rpc SearchTransactionEntries(common.v1.SearchRequest) returns (stream SearchTransactionEntriesResponse) {
     option (gnostic.openapi.v3.operation) = {
       operation_id: "searchTransactionEntries"
       summary: "Search transaction entries"

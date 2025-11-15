@@ -36,7 +36,6 @@ type authInterceptor struct {
 }
 
 func NewAuthInterceptor(opts ...AuthInterceptorOption) connect.Interceptor {
-
 	a := &authInterceptor{}
 	for _, opt := range opts {
 		opt(a)
@@ -72,7 +71,6 @@ func (ai *authInterceptor) getTokenStr(ctx context.Context) (string, error) {
 				return "", err
 			}
 			ai.tokenErr = nil
-
 		}
 
 		return ai.token.AccessToken, nil
@@ -91,7 +89,6 @@ func (ai *authInterceptor) WrapUnary(next connect.UnaryFunc) connect.UnaryFunc {
 		req connect.AnyRequest,
 	) (connect.AnyResponse, error) {
 		if req.Spec().IsClient {
-
 			tokenStr, err := ai.getTokenStr(ctx)
 			if err != nil {
 				return nil, connect.NewError(connect.CodeUnauthenticated, err)
@@ -101,7 +98,6 @@ func (ai *authInterceptor) WrapUnary(next connect.UnaryFunc) connect.UnaryFunc {
 				// Create a new context with the token and make the first request
 				req.Header().Set(authTokenHeader, "Bearer "+tokenStr)
 			}
-
 		}
 		return next(ctx, req)
 	}
@@ -112,7 +108,6 @@ func (ai *authInterceptor) WrapStreamingClient(next connect.StreamingClientFunc)
 		ctx context.Context,
 		spec connect.Spec,
 	) connect.StreamingClientConn {
-
 		conn := next(ctx, spec)
 
 		tokenStr, err := ai.getTokenStr(ctx)
@@ -135,7 +130,6 @@ func (ai *authInterceptor) WrapStreamingHandler(next connect.StreamingHandlerFun
 		ctx context.Context,
 		conn connect.StreamingHandlerConn,
 	) error {
-
 		if ai.tokenErr != nil && conn.RequestHeader().Get(authTokenHeader) == "" {
 			return connect.NewError(connect.CodeUnauthenticated, ai.tokenErr)
 		}

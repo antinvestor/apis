@@ -27,40 +27,39 @@ package lostid.v1;
 
 import "buf/validate/validate.proto";
 import "common/v1/common.proto";
+import "gnostic/openapi/v3/annotations.proto";
 import "google/protobuf/struct.proto";
 import "google/type/interval.proto";
 import "google/type/money.proto";
-import "gnostic/openapi/v3/annotations.proto";
 
 option go_package = "github.com/antinvestor/apis/go/lostid/v1;lostidv1";
 option java_multiple_files = true;
 option java_package = "lostidv1";
-
 option (gnostic.openapi.v3.document) = {
   info: {
-    title: "Lost ID Service";
-    version: "v1.0.0";
-    description: "The Lost ID Service provides a platform for managing lost and found identification documents. It enables users to register found items (collectibles) with images, search for lost items, track matching progress, and manage financial transactions related to rewards and service fees. The service facilitates reuniting people with their lost identification documents through a secure, tracked process.";
+    title: "Lost ID Service"
+    version: "v1.0.0"
+    description: "The Lost ID Service provides a platform for managing lost and found identification documents. It enables users to register found items (collectibles) with images, search for lost items, track matching progress, and manage financial transactions related to rewards and service fees. The service facilitates reuniting people with their lost identification documents through a secure, tracked process."
     contact: {
-      name: "Ant Investor Ltd";
-      url: "https://github.com/antinvestor/service-lostid";
-      email: "info@antinvestor.com";
+      name: "Ant Investor Ltd"
+      url: "https://github.com/antinvestor/service-lostid"
+      email: "info@antinvestor.com"
     }
     license: {
-      name: "Apache License";
-      url: "https://github.com/antinvestor/apis/blob/master/LICENSE";
+      name: "Apache License"
+      url: "https://github.com/antinvestor/apis/blob/master/LICENSE"
     }
   }
   components: {
     security_schemes: {
       additional_properties: [
         {
-          name: "BearerAuth";
+          name: "BearerAuth"
           value: {
             security_scheme: {
-              type: "http";
-              scheme: "bearer";
-              bearer_format: "JWT";
+              type: "http"
+              scheme: "bearer"
+              bearer_format: "JWT"
             }
           }
         }
@@ -77,9 +76,9 @@ option (gnostic.openapi.v3.document) = {
 // buf:lint:ignore ENUM_VALUE_PREFIX
 enum ItemType {
   // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
-  COLLECTIBLE = 0;  // Found item registered in the system
-  SEARCH = 1;       // Search request for a lost item
-  TRANSACTION = 2;  // Financial transaction (reward, fee)
+  COLLECTIBLE = 0; // Found item registered in the system
+  SEARCH = 1; // Search request for a lost item
+  TRANSACTION = 2; // Financial transaction (reward, fee)
 }
 
 // -----------------------------------------------------
@@ -99,16 +98,38 @@ message CollectibleRequest {
         pattern: "[0-9a-z_-]{3,20}"
       }
     }
-  ];  // File IDs of uploaded images (1-5 images)
-  google.protobuf.Struct properties = 2;  // Additional item details (type, location found, etc.)
+  ]; // File IDs of uploaded images (1-5 images)
+  google.protobuf.Struct properties = 2 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ]; // Additional item details (type, location found, etc.)
 }
 
 // CollectibleResponse returns the registered collectible item.
 message CollectibleResponse {
-  string id = 1;                          // Unique collectible ID
-  repeated string file_id = 2;            // Associated image file IDs
-  google.protobuf.Struct properties = 3;  // Item properties
-  string state = 4;                       // Current state (registered, matched, claimed, etc.)
+  string id = 1; // Unique collectible ID
+  repeated string file_id = 2; // Associated image file IDs
+  google.protobuf.Struct properties = 3 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ]; // Item properties
+  string state = 4; // Current state (registered, matched, claimed, etc.)
 }
 
 // ListCollectibleRequest retrieves collectibles by pagination or time range.
@@ -117,14 +138,14 @@ message ListCollectibleRequest {
     // either pagination or time interval must be set.
     option (buf.validate.oneof).required = true;
 
-    common.v1.Pagination pagination = 1;  // Offset-based pagination
-    google.type.Interval interval = 2;    // Time range filter
+    common.v1.Pagination pagination = 1; // Offset-based pagination
+    google.type.Interval interval = 2; // Time range filter
   }
 }
 
 // ListCollectibleResponse returns a list of collectibles.
 message ListCollectibleResponse {
-  repeated CollectibleResponse data = 1;  // List of collectibles
+  repeated CollectibleResponse data = 1; // List of collectibles
 }
 
 // -----------------------------------------------------
@@ -133,10 +154,21 @@ message ListCollectibleResponse {
 
 // SearchResponse returns a search request for a lost item.
 message SearchResponse {
-  string id = 1;                          // Unique search ID
-  string query = 2;                       // Search query/description
-  google.protobuf.Struct properties = 3;  // Search criteria
-  string state = 4;                       // Current state (active, matched, closed)
+  string id = 1; // Unique search ID
+  string query = 2; // Search query/description
+  google.protobuf.Struct properties = 3 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ]; // Search criteria
+  string state = 4; // Current state (active, matched, closed)
 }
 
 // ListSearchRequest retrieves searches by pagination or time range.
@@ -145,14 +177,14 @@ message ListSearchRequest {
     // either pagination or time interval must be set.
     option (buf.validate.oneof).required = true;
 
-    common.v1.Pagination pagination = 1;  // Offset-based pagination
-    google.type.Interval interval = 2;    // Time range filter
+    common.v1.Pagination pagination = 1; // Offset-based pagination
+    google.type.Interval interval = 2; // Time range filter
   }
 }
 
 // ListSearchResponse returns a list of searches.
 message ListSearchResponse {
-  repeated SearchResponse data = 1;  // List of search requests
+  repeated SearchResponse data = 1; // List of search requests
 }
 
 // -----------------------------------------------------
@@ -164,35 +196,46 @@ message ProgressRequest {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];  // Item ID (collectible or search)
-  ItemType type = 2 [(buf.validate.field).enum.defined_only = true];  // Item type
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Item ID (collectible or search)
+  ItemType type = 2 [(buf.validate.field).enum.defined_only = true]; // Item type
 }
 
 // ProgressItem represents a status update in the item's lifecycle.
 message ProgressItem {
-  string id = 1;          // Progress entry ID
-  string datetime = 2;    // Timestamp of this update (RFC3339)
-  string state = 3;       // State at this point (registered, matched, claimed, etc.)
+  string id = 1; // Progress entry ID
+  string datetime = 2; // Timestamp of this update (RFC3339)
+  string state = 3; // State at this point (registered, matched, claimed, etc.)
   string description = 4; // Human-readable description of the update
 }
 
 // TransactionItem represents a financial transaction.
 message TransactionItem {
-  string id = 1;                // Transaction ID
-  string datetime = 2;          // Transaction timestamp (RFC3339)
-  bool credit = 3;              // True if credit, false if debit
+  string id = 1; // Transaction ID
+  string datetime = 2; // Transaction timestamp (RFC3339)
+  bool credit = 3; // True if credit, false if debit
   google.type.Money amount = 4; // Transaction amount
-  string description = 5;       // Transaction description (reward, fee, etc.)
+  string description = 5; // Transaction description (reward, fee, etc.)
 }
 
 // ProgressResponse returns the complete progress history for an item.
 message ProgressResponse {
-  string id = 1;                          // Item ID
-  ItemType type = 2;                      // Item type
-  google.protobuf.Struct properties = 3;  // Item properties
-  string state = 4;                       // Current state
-  repeated ProgressItem items = 5;        // Progress history
+  string id = 1; // Item ID
+  ItemType type = 2; // Item type
+  google.protobuf.Struct properties = 3 [
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this.toString()) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
+    }
+  ]; // Item properties
+  string state = 4; // Current state
+  repeated ProgressItem items = 5; // Progress history
   repeated TransactionItem transactions = 6; // Associated financial transactions
 }
 
@@ -206,14 +249,14 @@ message ListTransactionRequest {
     // either pagination or time interval must be set.
     option (buf.validate.oneof).required = true;
 
-    common.v1.Pagination pagination = 1;  // Offset-based pagination
-    google.type.Interval interval = 2;    // Time range filter
+    common.v1.Pagination pagination = 1; // Offset-based pagination
+    google.type.Interval interval = 2; // Time range filter
   }
 }
 
 // ListTransactionResponse returns a list of transactions.
 message ListTransactionResponse {
-  repeated TransactionItem data = 1;  // List of transactions
+  repeated TransactionItem data = 1; // List of transactions
 }
 
 // -----------------------------------------------------
