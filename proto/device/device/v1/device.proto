@@ -128,24 +128,14 @@ message KeyObject {
   bool is_active = 7; // Whether the key is currently active
   google.protobuf.Struct extra = 8 [
     (buf.validate.field).cel = {
-      id: "key.extra.size_limit"
-      message: "Key metadata exceeds maximum size of 1KB"
-      expression: "size(this.toString()) <= 1024"
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this) <= 1048576"
     },
     (buf.validate.field).cel = {
-      id: "key.extra.field_count_limit"
-      message: "Key metadata contains too many fields (max 20)"
-      expression: "this.fields.size() <= 20"
-    },
-    (buf.validate.field).cel = {
-      id: "key.extra.key_validation"
-      message: "Invalid field key in metadata"
-      expression: "this.fields.all(k, size(k) >= 1 && size(k) <= 64 && k.matches('^[a-zA-Z0-9_-]+$'))"
-    },
-    (buf.validate.field).cel = {
-      id: "key.extra.value_size_limit"
-      message: "String values in metadata must be <= 256 characters"
-      expression: "this.fields.all(k, !this[k].has('string_value') || size(this[k].string_value) <= 256)"
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
     }
   ]; // Additional key metadata (algorithm, app_id, etc.)
 }
@@ -173,7 +163,7 @@ message DeviceLog {
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576"
+      expression: "size(this) <= 1048576"
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"
@@ -185,7 +175,7 @@ message DeviceLog {
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576"
+      expression: "size(this) <= 1048576"
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"
@@ -216,7 +206,7 @@ message DeviceObject {
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576"
+      expression: "size(this) <= 1048576"
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"
@@ -228,7 +218,7 @@ message DeviceObject {
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576"
+      expression: "size(this) <= 1048576"
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"
@@ -259,7 +249,7 @@ message PresenceObject {
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576"
+      expression: "size(this) <= 1048576"
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"
@@ -316,7 +306,7 @@ message SearchRequest {
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576"
+      expression: "size(this) <= 1048576"
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"
@@ -338,7 +328,7 @@ message CreateRequest {
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576"
+      expression: "size(this) <= 1048576"
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"
@@ -365,7 +355,7 @@ message UpdateRequest {
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576"
+      expression: "size(this) <= 1048576"
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"
@@ -397,7 +387,7 @@ message LinkRequest {
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576"
+      expression: "size(this) <= 1048576"
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"
@@ -456,7 +446,7 @@ message LogRequest {
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576"
+      expression: "size(this) <= 1048576"
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"
@@ -511,7 +501,7 @@ message AddKeyRequest {
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576"
+      expression: "size(this) <= 1048576"
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"
@@ -581,7 +571,7 @@ message RegisterKeyRequest {
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576"
+      expression: "size(this) <= 1048576"
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"
@@ -630,7 +620,7 @@ message UpdatePresenceRequest {
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576"
+      expression: "size(this) <= 1048576"
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"
@@ -662,7 +652,7 @@ message NotifyMessage {
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576"
+      expression: "size(this) <= 1048576"
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"
@@ -674,7 +664,7 @@ message NotifyMessage {
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576"
+      expression: "size(this) <= 1048576"
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"
@@ -718,7 +708,7 @@ message NotifyResult {
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576"
+      expression: "size(this) <= 1048576"
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"

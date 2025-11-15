@@ -98,7 +98,7 @@ message Locality {
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576"
+      expression: "size(this) <= 1048576"
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"
@@ -152,7 +152,7 @@ message PropertyType {
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576"
+      expression: "size(this) <= 1048576"
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"
@@ -189,7 +189,7 @@ message PropertyState {
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576"
+      expression: "size(this) <= 1048576"
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"
@@ -233,7 +233,7 @@ message Subscription {
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576"
+      expression: "size(this) <= 1048576"
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"
@@ -286,7 +286,7 @@ message Property {
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576"
+      expression: "size(this) <= 1048576"
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"
@@ -314,7 +314,7 @@ message ListPropertyTypeRequest {
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576"
+      expression: "size(this) <= 1048576"
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"
@@ -339,7 +339,7 @@ message SearchPropertyRequest {
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576"
+      expression: "size(this) <= 1048576"
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"

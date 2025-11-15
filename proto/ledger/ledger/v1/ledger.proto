@@ -110,7 +110,7 @@ message Ledger {
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576" // Limit serialized size to 1MB
+      expression: "size(this) <= 1048576" // Limit serialized size to 1MB
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"
@@ -134,7 +134,7 @@ message Account {
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576"
+      expression: "size(this) <= 1048576"
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"
@@ -174,7 +174,7 @@ message Transaction {
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576"
+      expression: "size(this) <= 1048576"
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"
@@ -198,14 +198,19 @@ message SearchLedgersResponse {
 
 // CreateLedgerRequest creates a new ledger in the chart of accounts.
 message CreateLedgerRequest {
-  string id = 1; // Unique reference/code for the ledger (e.g., "1000", "CASH")
+  string id = 1 [
+    (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Optional Unique reference/code for the ledger (e.g., "1000", "CASH")
   LedgerType type = 2; // Accounting category type
   string parent_id = 3; // Parent ledger reference for hierarchical structure
   google.protobuf.Struct data = 4 [
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576" // Limit serialized size to 1MB
+      expression: "size(this) <= 1048576" // Limit serialized size to 1MB
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"
@@ -222,12 +227,16 @@ message CreateLedgerResponse {
 
 // UpdateLedgerRequest updates an existing ledger's metadata.
 message UpdateLedgerRequest {
-  string id = 1; // Unique reference/code for the ledger (e.g., "1000", "CASH")
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Unique reference/code for the ledger (e.g., "1000", "CASH")
   google.protobuf.Struct data = 4 [
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576" // Limit serialized size to 1MB
+      expression: "size(this) <= 1048576" // Limit serialized size to 1MB
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"
@@ -249,14 +258,19 @@ message SearchAccountsResponse {
 
 // CreateAccountRequest creates a new account within a ledger.
 message CreateAccountRequest {
-  string id = 1; // Unique account reference/number
+  string id = 1 [
+    (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Optional Unique account reference/number
   string ledger_id = 3; // Ledger this account belongs to
   string currency = 4; // Current cleared balance
   google.protobuf.Struct data = 5 [
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576"
+      expression: "size(this) <= 1048576"
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"
@@ -273,12 +287,16 @@ message CreateAccountResponse {
 
 // UpdateAccountRequest updates an existing account's metadata.
 message UpdateAccountRequest {
-  string id = 1; // Unique reference/code for the account (e.g., "1000", "CASH")
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Unique reference/code for the account (e.g., "1000", "CASH")
   google.protobuf.Struct data = 4 [
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576" // Limit serialized size to 1MB
+      expression: "size(this) <= 1048576" // Limit serialized size to 1MB
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"
@@ -300,14 +318,19 @@ message SearchTransactionsResponse {
 
 // CreateTransactionRequest creates a new double-entry transaction.
 message CreateTransactionRequest {
-  string id = 1; // Unique transaction reference/ID
+  string id = 1 [
+    (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Unique transaction reference/ID
   string currency = 2; // Currency code for all entries (ISO 4217)
   string transacted_at = 3; // Transaction timestamp (RFC3339)
   google.protobuf.Struct data = 4 [
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576"
+      expression: "size(this) <= 1048576"
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"
@@ -327,7 +350,11 @@ message CreateTransactionResponse {
 
 // ReverseTransactionRequest reverses a transaction by creating offsetting entries.
 message ReverseTransactionRequest {
-  string id = 1; // Unique transaction reference/ID
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Unique transaction reference/ID
 }
 
 // ReverseTransactionResponse returns the reversal transaction.
@@ -337,13 +364,17 @@ message ReverseTransactionResponse {
 
 // UpdateTransactionRequest updates a transaction's metadata.
 message UpdateTransactionRequest {
-  string id = 1; // Unique reference/code for the transaction (e.g., "1000", "CASH")
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Optional Unique reference/code for the transaction (e.g., "1000", "CASH")
   string cleared_at = 2; // Transaction timestamp (RFC3339)
   google.protobuf.Struct data = 4 [
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576" // Limit serialized size to 1MB
+      expression: "size(this) <= 1048576" // Limit serialized size to 1MB
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"

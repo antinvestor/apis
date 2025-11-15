@@ -260,7 +260,7 @@ message RoomEvent {
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576"
+      expression: "size(this) <= 1048576"
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"
@@ -411,7 +411,7 @@ message StreamAck {
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576"
+      expression: "size(this) <= 1048576"
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"
@@ -481,7 +481,7 @@ message Room {
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576"
+      expression: "size(this) <= 1048576"
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"
@@ -511,7 +511,7 @@ message CreateRoomRequest {
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576"
+      expression: "size(this) <= 1048576"
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"
@@ -537,7 +537,7 @@ message SearchRoomsRequest {
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576"
+      expression: "size(this) <= 1048576"
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"
@@ -563,7 +563,7 @@ message UpdateRoomRequest {
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576"
+      expression: "size(this) <= 1048576"
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"

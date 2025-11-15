@@ -1,6 +1,12 @@
 name: Upload to buf.build
 on:
   push:
+    paths:
+      - '**.proto'
+      - '**/buf.yaml'
+      - '**/buf.lock'
+      - '**/buf.md'
+      - '**/README.md'
     branches:
       - main
 permissions:

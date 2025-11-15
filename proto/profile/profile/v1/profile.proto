@@ -128,7 +128,7 @@ message ContactObject {
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576"
+      expression: "size(this) <= 1048576"
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"
@@ -155,7 +155,7 @@ message RosterObject {
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576"
+      expression: "size(this) <= 1048576"
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"
@@ -202,7 +202,7 @@ message ProfileObject {
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576"
+      expression: "size(this) <= 1048576"
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"
@@ -233,7 +233,7 @@ message RelationshipObject {
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576"
+      expression: "size(this) <= 1048576"
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"
@@ -270,7 +270,7 @@ message SearchRequest {
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576"
+      expression: "size(this) <= 1048576"
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"
@@ -313,7 +313,7 @@ message CreateRequest {
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576"
+      expression: "size(this) <= 1048576"
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"
@@ -338,7 +338,7 @@ message UpdateRequest {
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576"
+      expression: "size(this) <= 1048576"
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"
@@ -365,7 +365,7 @@ message AddContactRequest {
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576"
+      expression: "size(this) <= 1048576"
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"
@@ -393,7 +393,7 @@ message CreateContactRequest {
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576"
+      expression: "size(this) <= 1048576"
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"
@@ -474,7 +474,7 @@ message SearchRosterRequest {
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576"
+      expression: "size(this) <= 1048576"
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"
@@ -602,7 +602,7 @@ message AddRelationshipRequest {
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this.toString()) <= 1048576"
+      expression: "size(this) <= 1048576"
     },
     (buf.validate.field).cel = {
       id: "struct.field_count_limit"

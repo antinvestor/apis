@@ -3,11 +3,11 @@ module github.com/antinvestor/apis/go/settings
 go 1.25
 
 require (
-	buf.build/gen/go/antinvestor/common/protocolbuffers/go v1.36.10-20251103151128-9c9b418cbc9a.1
-	buf.build/gen/go/antinvestor/settingz/connectrpc/go v1.19.1-20251103165922-10c0edf20a6d.2
-	buf.build/gen/go/antinvestor/settingz/protocolbuffers/go v1.36.10-20251103165922-10c0edf20a6d.1
+	buf.build/gen/go/antinvestor/common/protocolbuffers/go v1.36.10-20251115132242-ce5fe382b414.1
+	buf.build/gen/go/antinvestor/settingz/connectrpc/go v1.19.1-20251115132507-89ed810cadef.2
+	buf.build/gen/go/antinvestor/settingz/protocolbuffers/go v1.36.10-20251115132507-89ed810cadef.1
 	connectrpc.com/connect v1.19.1
-	github.com/antinvestor/apis/go/common v1.47.9
+	github.com/antinvestor/apis/go/common v1.48.0
 	github.com/gojuno/minimock/v3 v3.4.7
 )
 
@@ -25,11 +25,11 @@ require (
 	go.opentelemetry.io/otel v1.38.0 // indirect
 	go.opentelemetry.io/otel/metric v1.38.0 // indirect
 	go.opentelemetry.io/otel/trace v1.38.0 // indirect
-	golang.org/x/net v0.46.0 // indirect
-	golang.org/x/oauth2 v0.32.0 // indirect
-	golang.org/x/sys v0.37.0 // indirect
-	golang.org/x/text v0.30.0 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20251014184007-4626949a642f // indirect
+	golang.org/x/net v0.47.0 // indirect
+	golang.org/x/oauth2 v0.33.0 // indirect
+	golang.org/x/sys v0.38.0 // indirect
+	golang.org/x/text v0.31.0 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20251111163417-95abcf5c77ba // indirect
 	google.golang.org/grpc v1.76.0 // indirect
 	google.golang.org/protobuf v1.36.10 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
