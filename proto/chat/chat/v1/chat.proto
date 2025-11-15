@@ -280,22 +280,22 @@ message RoomEvent {
 
 // Allowed message types. Extendable via new enum values; clients must ignore unknown values.
 enum RoomEventType {
-  SYSTEM = 0;
-  EVENT = 1;
-  TEXT = 2;
-  ATTACHMENT = 3;
-  REACTION = 7;
-  ENCRYPTED = 6; // opaque ciphertext
-  EDIT = 8; // represents event overriding another
-  REDACTION = 9; // represents event deleting another
-  STATE_DELIVERED = 10;
-  STATE_READ = 11;
-  STATE_TYPING = 12;
-  PRESENCE = 17;
-  CALL_OFFER = 21;
-  CALL_ANSWER = 22;
-  CALL_ICE = 23;
-  CALL_END = 24;
+  ROOM_EVENT_TYPE_SYSTEM = 0;
+  ROOM_EVENT_TYPE_EVENT = 1;
+  ROOM_EVENT_TYPE_TEXT = 2;
+  ROOM_EVENT_TYPE_ATTACHMENT = 3;
+  ROOM_EVENT_TYPE_REACTION = 7;
+  ROOM_EVENT_TYPE_ENCRYPTED = 6; // opaque ciphertext
+  ROOM_EVENT_TYPE_EDIT = 8; // represents event overriding another
+  ROOM_EVENT_TYPE_REDACTION = 9; // represents event deleting another
+  ROOM_EVENT_TYPE_STATE_DELIVERED = 10;
+  ROOM_EVENT_TYPE_STATE_READ = 11;
+  ROOM_EVENT_TYPE_STATE_TYPING = 12;
+  ROOM_EVENT_TYPE_PRESENCE = 17;
+  ROOM_EVENT_TYPE_CALL_OFFER = 21;
+  ROOM_EVENT_TYPE_CALL_ANSWER = 22;
+  ROOM_EVENT_TYPE_ CALL_ICE = 23;
+  ROOM_EVENT_TYPE_CALL_END = 24;
 }
 
 // Presence event affecting a user (and visible to rooms the user is a member of)
