@@ -39,7 +39,7 @@ jobs:
 
       - name: Check for changes since the last tag
         if: steps.get_tags.outputs.not_enough_tags == 'false'
-        id: go_module_changed
+        id: api_module_changed
         run: |
           CHANGES=$(git diff --name-only ${{ env.latest_tag }} HEAD | grep 'api/${{ matrix.api_module }}' || true)
           if [[ -n "$CHANGES" ]]; then
@@ -51,16 +51,23 @@ jobs:
           fi
 
       - uses: bufbuild/buf-action@v1
+        if: steps.get_tags.outputs.not_enough_tags == 'true' || steps.api_module_changed.outputs.changed == 'true'
         with:
           format: true
-          breaking: true
           lint: true
           push: true
           input: "proto/${{ matrix.api_module }}"
           token: ${{ secrets.BUF_TOKEN }}
 
+      - uses: bufbuild/buf-action@v1
+        if: steps.get_tags.outputs.not_enough_tags == 'false' && steps.api_module_changed.outputs.changed == 'true'
+        with:
+          breaking: true
+          input: "proto/${{ matrix.api_module }}"
+          against: "https://github.com/antinvestor/apis.git#format=git,commit=${{ env.latest_tag }},subdir=proto/${{ matrix.api_module }}"
+
       - uses: rickstaa/action-create-tag@v1
-        if: steps.get_tags.outputs.not_enough_tags == 'true' || steps.go_module_changed.outputs.changed == 'true'
+        if: steps.get_tags.outputs.not_enough_tags == 'true' || steps.api_module_changed.outputs.changed == 'true'
         id: "tag_create"
         with:
           tag: api/${{ matrix.api_module }}/${{github.ref_name}}
