@@ -30,6 +30,7 @@ endef
 
 define golang_upgrade
 cd go/${1} && $(GO) get -u ./...
+cd go/${1} && $(GO) mod tidy
 endef
 
 define connect_handler_mock

@@ -19,11 +19,6 @@ package common //nolint:revive,var-namig //just allow as is
 // client options, and other foundational components that are shared between
 // different service implementations.
 
-import (
-	// Import generated protobuf types to ensure they are available for consumers.
-	_ "buf.build/gen/go/antinvestor/common/protocolbuffers/go/common/v1"
-)
-
 const (
 	CtxKeyPartitionInfo = CtxServiceKey("partitionInfoKey")
 )
