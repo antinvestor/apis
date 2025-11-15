@@ -21,79 +21,79 @@ type LedgerServiceClientMock struct {
 	t          minimock.Tester
 	finishOnce sync.Once
 
-	funcCreateAccount          func(ctx context.Context, pp1 *connect.Request[v11.Account]) (pp2 *connect.Response[v11.Account], err error)
+	funcCreateAccount          func(ctx context.Context, pp1 *connect.Request[v11.CreateAccountRequest]) (pp2 *connect.Response[v11.CreateAccountResponse], err error)
 	funcCreateAccountOrigin    string
-	inspectFuncCreateAccount   func(ctx context.Context, pp1 *connect.Request[v11.Account])
+	inspectFuncCreateAccount   func(ctx context.Context, pp1 *connect.Request[v11.CreateAccountRequest])
 	afterCreateAccountCounter  uint64
 	beforeCreateAccountCounter uint64
 	CreateAccountMock          mLedgerServiceClientMockCreateAccount
 
-	funcCreateLedger          func(ctx context.Context, pp1 *connect.Request[v11.Ledger]) (pp2 *connect.Response[v11.Ledger], err error)
+	funcCreateLedger          func(ctx context.Context, pp1 *connect.Request[v11.CreateLedgerRequest]) (pp2 *connect.Response[v11.CreateLedgerResponse], err error)
 	funcCreateLedgerOrigin    string
-	inspectFuncCreateLedger   func(ctx context.Context, pp1 *connect.Request[v11.Ledger])
+	inspectFuncCreateLedger   func(ctx context.Context, pp1 *connect.Request[v11.CreateLedgerRequest])
 	afterCreateLedgerCounter  uint64
 	beforeCreateLedgerCounter uint64
 	CreateLedgerMock          mLedgerServiceClientMockCreateLedger
 
-	funcCreateTransaction          func(ctx context.Context, pp1 *connect.Request[v11.Transaction]) (pp2 *connect.Response[v11.Transaction], err error)
+	funcCreateTransaction          func(ctx context.Context, pp1 *connect.Request[v11.CreateTransactionRequest]) (pp2 *connect.Response[v11.CreateTransactionResponse], err error)
 	funcCreateTransactionOrigin    string
-	inspectFuncCreateTransaction   func(ctx context.Context, pp1 *connect.Request[v11.Transaction])
+	inspectFuncCreateTransaction   func(ctx context.Context, pp1 *connect.Request[v11.CreateTransactionRequest])
 	afterCreateTransactionCounter  uint64
 	beforeCreateTransactionCounter uint64
 	CreateTransactionMock          mLedgerServiceClientMockCreateTransaction
 
-	funcReverseTransaction          func(ctx context.Context, pp1 *connect.Request[v11.Transaction]) (pp2 *connect.Response[v11.Transaction], err error)
+	funcReverseTransaction          func(ctx context.Context, pp1 *connect.Request[v11.ReverseTransactionRequest]) (pp2 *connect.Response[v11.ReverseTransactionResponse], err error)
 	funcReverseTransactionOrigin    string
-	inspectFuncReverseTransaction   func(ctx context.Context, pp1 *connect.Request[v11.Transaction])
+	inspectFuncReverseTransaction   func(ctx context.Context, pp1 *connect.Request[v11.ReverseTransactionRequest])
 	afterReverseTransactionCounter  uint64
 	beforeReverseTransactionCounter uint64
 	ReverseTransactionMock          mLedgerServiceClientMockReverseTransaction
 
-	funcSearchAccounts          func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) (pp2 *connect.ServerStreamForClient[v11.Account], err error)
+	funcSearchAccounts          func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) (pp2 *connect.ServerStreamForClient[v11.SearchAccountsResponse], err error)
 	funcSearchAccountsOrigin    string
 	inspectFuncSearchAccounts   func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest])
 	afterSearchAccountsCounter  uint64
 	beforeSearchAccountsCounter uint64
 	SearchAccountsMock          mLedgerServiceClientMockSearchAccounts
 
-	funcSearchLedgers          func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) (pp2 *connect.ServerStreamForClient[v11.Ledger], err error)
+	funcSearchLedgers          func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) (pp2 *connect.ServerStreamForClient[v11.SearchLedgersResponse], err error)
 	funcSearchLedgersOrigin    string
 	inspectFuncSearchLedgers   func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest])
 	afterSearchLedgersCounter  uint64
 	beforeSearchLedgersCounter uint64
 	SearchLedgersMock          mLedgerServiceClientMockSearchLedgers
 
-	funcSearchTransactionEntries          func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) (pp2 *connect.ServerStreamForClient[v11.TransactionEntry], err error)
+	funcSearchTransactionEntries          func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) (pp2 *connect.ServerStreamForClient[v11.SearchTransactionEntriesResponse], err error)
 	funcSearchTransactionEntriesOrigin    string
 	inspectFuncSearchTransactionEntries   func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest])
 	afterSearchTransactionEntriesCounter  uint64
 	beforeSearchTransactionEntriesCounter uint64
 	SearchTransactionEntriesMock          mLedgerServiceClientMockSearchTransactionEntries
 
-	funcSearchTransactions          func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) (pp2 *connect.ServerStreamForClient[v11.Transaction], err error)
+	funcSearchTransactions          func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) (pp2 *connect.ServerStreamForClient[v11.SearchTransactionsResponse], err error)
 	funcSearchTransactionsOrigin    string
 	inspectFuncSearchTransactions   func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest])
 	afterSearchTransactionsCounter  uint64
 	beforeSearchTransactionsCounter uint64
 	SearchTransactionsMock          mLedgerServiceClientMockSearchTransactions
 
-	funcUpdateAccount          func(ctx context.Context, pp1 *connect.Request[v11.Account]) (pp2 *connect.Response[v11.Account], err error)
+	funcUpdateAccount          func(ctx context.Context, pp1 *connect.Request[v11.UpdateAccountRequest]) (pp2 *connect.Response[v11.UpdateAccountResponse], err error)
 	funcUpdateAccountOrigin    string
-	inspectFuncUpdateAccount   func(ctx context.Context, pp1 *connect.Request[v11.Account])
+	inspectFuncUpdateAccount   func(ctx context.Context, pp1 *connect.Request[v11.UpdateAccountRequest])
 	afterUpdateAccountCounter  uint64
 	beforeUpdateAccountCounter uint64
 	UpdateAccountMock          mLedgerServiceClientMockUpdateAccount
 
-	funcUpdateLedger          func(ctx context.Context, pp1 *connect.Request[v11.Ledger]) (pp2 *connect.Response[v11.Ledger], err error)
+	funcUpdateLedger          func(ctx context.Context, pp1 *connect.Request[v11.UpdateLedgerRequest]) (pp2 *connect.Response[v11.UpdateLedgerResponse], err error)
 	funcUpdateLedgerOrigin    string
-	inspectFuncUpdateLedger   func(ctx context.Context, pp1 *connect.Request[v11.Ledger])
+	inspectFuncUpdateLedger   func(ctx context.Context, pp1 *connect.Request[v11.UpdateLedgerRequest])
 	afterUpdateLedgerCounter  uint64
 	beforeUpdateLedgerCounter uint64
 	UpdateLedgerMock          mLedgerServiceClientMockUpdateLedger
 
-	funcUpdateTransaction          func(ctx context.Context, pp1 *connect.Request[v11.Transaction]) (pp2 *connect.Response[v11.Transaction], err error)
+	funcUpdateTransaction          func(ctx context.Context, pp1 *connect.Request[v11.UpdateTransactionRequest]) (pp2 *connect.Response[v11.UpdateTransactionResponse], err error)
 	funcUpdateTransactionOrigin    string
-	inspectFuncUpdateTransaction   func(ctx context.Context, pp1 *connect.Request[v11.Transaction])
+	inspectFuncUpdateTransaction   func(ctx context.Context, pp1 *connect.Request[v11.UpdateTransactionRequest])
 	afterUpdateTransactionCounter  uint64
 	beforeUpdateTransactionCounter uint64
 	UpdateTransactionMock          mLedgerServiceClientMockUpdateTransaction
@@ -172,18 +172,18 @@ type LedgerServiceClientMockCreateAccountExpectation struct {
 // LedgerServiceClientMockCreateAccountParams contains parameters of the LedgerServiceClient.CreateAccount
 type LedgerServiceClientMockCreateAccountParams struct {
 	ctx context.Context
-	pp1 *connect.Request[v11.Account]
+	pp1 *connect.Request[v11.CreateAccountRequest]
 }
 
 // LedgerServiceClientMockCreateAccountParamPtrs contains pointers to parameters of the LedgerServiceClient.CreateAccount
 type LedgerServiceClientMockCreateAccountParamPtrs struct {
 	ctx *context.Context
-	pp1 **connect.Request[v11.Account]
+	pp1 **connect.Request[v11.CreateAccountRequest]
 }
 
 // LedgerServiceClientMockCreateAccountResults contains results of the LedgerServiceClient.CreateAccount
 type LedgerServiceClientMockCreateAccountResults struct {
-	pp2 *connect.Response[v11.Account]
+	pp2 *connect.Response[v11.CreateAccountResponse]
 	err error
 }
 
@@ -205,7 +205,7 @@ func (mmCreateAccount *mLedgerServiceClientMockCreateAccount) Optional() *mLedge
 }
 
 // Expect sets up expected params for LedgerServiceClient.CreateAccount
-func (mmCreateAccount *mLedgerServiceClientMockCreateAccount) Expect(ctx context.Context, pp1 *connect.Request[v11.Account]) *mLedgerServiceClientMockCreateAccount {
+func (mmCreateAccount *mLedgerServiceClientMockCreateAccount) Expect(ctx context.Context, pp1 *connect.Request[v11.CreateAccountRequest]) *mLedgerServiceClientMockCreateAccount {
 	if mmCreateAccount.mock.funcCreateAccount != nil {
 		mmCreateAccount.mock.t.Fatalf("LedgerServiceClientMock.CreateAccount mock is already set by Set")
 	}
@@ -253,7 +253,7 @@ func (mmCreateAccount *mLedgerServiceClientMockCreateAccount) ExpectCtxParam1(ct
 }
 
 // ExpectPp1Param2 sets up expected param pp1 for LedgerServiceClient.CreateAccount
-func (mmCreateAccount *mLedgerServiceClientMockCreateAccount) ExpectPp1Param2(pp1 *connect.Request[v11.Account]) *mLedgerServiceClientMockCreateAccount {
+func (mmCreateAccount *mLedgerServiceClientMockCreateAccount) ExpectPp1Param2(pp1 *connect.Request[v11.CreateAccountRequest]) *mLedgerServiceClientMockCreateAccount {
 	if mmCreateAccount.mock.funcCreateAccount != nil {
 		mmCreateAccount.mock.t.Fatalf("LedgerServiceClientMock.CreateAccount mock is already set by Set")
 	}
@@ -276,7 +276,7 @@ func (mmCreateAccount *mLedgerServiceClientMockCreateAccount) ExpectPp1Param2(pp
 }
 
 // Inspect accepts an inspector function that has same arguments as the LedgerServiceClient.CreateAccount
-func (mmCreateAccount *mLedgerServiceClientMockCreateAccount) Inspect(f func(ctx context.Context, pp1 *connect.Request[v11.Account])) *mLedgerServiceClientMockCreateAccount {
+func (mmCreateAccount *mLedgerServiceClientMockCreateAccount) Inspect(f func(ctx context.Context, pp1 *connect.Request[v11.CreateAccountRequest])) *mLedgerServiceClientMockCreateAccount {
 	if mmCreateAccount.mock.inspectFuncCreateAccount != nil {
 		mmCreateAccount.mock.t.Fatalf("Inspect function is already set for LedgerServiceClientMock.CreateAccount")
 	}
@@ -287,7 +287,7 @@ func (mmCreateAccount *mLedgerServiceClientMockCreateAccount) Inspect(f func(ctx
 }
 
 // Return sets up results that will be returned by LedgerServiceClient.CreateAccount
-func (mmCreateAccount *mLedgerServiceClientMockCreateAccount) Return(pp2 *connect.Response[v11.Account], err error) *LedgerServiceClientMock {
+func (mmCreateAccount *mLedgerServiceClientMockCreateAccount) Return(pp2 *connect.Response[v11.CreateAccountResponse], err error) *LedgerServiceClientMock {
 	if mmCreateAccount.mock.funcCreateAccount != nil {
 		mmCreateAccount.mock.t.Fatalf("LedgerServiceClientMock.CreateAccount mock is already set by Set")
 	}
@@ -301,7 +301,7 @@ func (mmCreateAccount *mLedgerServiceClientMockCreateAccount) Return(pp2 *connec
 }
 
 // Set uses given function f to mock the LedgerServiceClient.CreateAccount method
-func (mmCreateAccount *mLedgerServiceClientMockCreateAccount) Set(f func(ctx context.Context, pp1 *connect.Request[v11.Account]) (pp2 *connect.Response[v11.Account], err error)) *LedgerServiceClientMock {
+func (mmCreateAccount *mLedgerServiceClientMockCreateAccount) Set(f func(ctx context.Context, pp1 *connect.Request[v11.CreateAccountRequest]) (pp2 *connect.Response[v11.CreateAccountResponse], err error)) *LedgerServiceClientMock {
 	if mmCreateAccount.defaultExpectation != nil {
 		mmCreateAccount.mock.t.Fatalf("Default expectation is already set for the LedgerServiceClient.CreateAccount method")
 	}
@@ -317,7 +317,7 @@ func (mmCreateAccount *mLedgerServiceClientMockCreateAccount) Set(f func(ctx con
 
 // When sets expectation for the LedgerServiceClient.CreateAccount which will trigger the result defined by the following
 // Then helper
-func (mmCreateAccount *mLedgerServiceClientMockCreateAccount) When(ctx context.Context, pp1 *connect.Request[v11.Account]) *LedgerServiceClientMockCreateAccountExpectation {
+func (mmCreateAccount *mLedgerServiceClientMockCreateAccount) When(ctx context.Context, pp1 *connect.Request[v11.CreateAccountRequest]) *LedgerServiceClientMockCreateAccountExpectation {
 	if mmCreateAccount.mock.funcCreateAccount != nil {
 		mmCreateAccount.mock.t.Fatalf("LedgerServiceClientMock.CreateAccount mock is already set by Set")
 	}
@@ -332,7 +332,7 @@ func (mmCreateAccount *mLedgerServiceClientMockCreateAccount) When(ctx context.C
 }
 
 // Then sets up LedgerServiceClient.CreateAccount return parameters for the expectation previously defined by the When method
-func (e *LedgerServiceClientMockCreateAccountExpectation) Then(pp2 *connect.Response[v11.Account], err error) *LedgerServiceClientMock {
+func (e *LedgerServiceClientMockCreateAccountExpectation) Then(pp2 *connect.Response[v11.CreateAccountResponse], err error) *LedgerServiceClientMock {
 	e.results = &LedgerServiceClientMockCreateAccountResults{pp2, err}
 	return e.mock
 }
@@ -359,7 +359,7 @@ func (mmCreateAccount *mLedgerServiceClientMockCreateAccount) invocationsDone() 
 }
 
 // CreateAccount implements mm_ledgerv1connect.LedgerServiceClient
-func (mmCreateAccount *LedgerServiceClientMock) CreateAccount(ctx context.Context, pp1 *connect.Request[v11.Account]) (pp2 *connect.Response[v11.Account], err error) {
+func (mmCreateAccount *LedgerServiceClientMock) CreateAccount(ctx context.Context, pp1 *connect.Request[v11.CreateAccountRequest]) (pp2 *connect.Response[v11.CreateAccountResponse], err error) {
 	mm_atomic.AddUint64(&mmCreateAccount.beforeCreateAccountCounter, 1)
 	defer mm_atomic.AddUint64(&mmCreateAccount.afterCreateAccountCounter, 1)
 
@@ -515,18 +515,18 @@ type LedgerServiceClientMockCreateLedgerExpectation struct {
 // LedgerServiceClientMockCreateLedgerParams contains parameters of the LedgerServiceClient.CreateLedger
 type LedgerServiceClientMockCreateLedgerParams struct {
 	ctx context.Context
-	pp1 *connect.Request[v11.Ledger]
+	pp1 *connect.Request[v11.CreateLedgerRequest]
 }
 
 // LedgerServiceClientMockCreateLedgerParamPtrs contains pointers to parameters of the LedgerServiceClient.CreateLedger
 type LedgerServiceClientMockCreateLedgerParamPtrs struct {
 	ctx *context.Context
-	pp1 **connect.Request[v11.Ledger]
+	pp1 **connect.Request[v11.CreateLedgerRequest]
 }
 
 // LedgerServiceClientMockCreateLedgerResults contains results of the LedgerServiceClient.CreateLedger
 type LedgerServiceClientMockCreateLedgerResults struct {
-	pp2 *connect.Response[v11.Ledger]
+	pp2 *connect.Response[v11.CreateLedgerResponse]
 	err error
 }
 
@@ -548,7 +548,7 @@ func (mmCreateLedger *mLedgerServiceClientMockCreateLedger) Optional() *mLedgerS
 }
 
 // Expect sets up expected params for LedgerServiceClient.CreateLedger
-func (mmCreateLedger *mLedgerServiceClientMockCreateLedger) Expect(ctx context.Context, pp1 *connect.Request[v11.Ledger]) *mLedgerServiceClientMockCreateLedger {
+func (mmCreateLedger *mLedgerServiceClientMockCreateLedger) Expect(ctx context.Context, pp1 *connect.Request[v11.CreateLedgerRequest]) *mLedgerServiceClientMockCreateLedger {
 	if mmCreateLedger.mock.funcCreateLedger != nil {
 		mmCreateLedger.mock.t.Fatalf("LedgerServiceClientMock.CreateLedger mock is already set by Set")
 	}
@@ -596,7 +596,7 @@ func (mmCreateLedger *mLedgerServiceClientMockCreateLedger) ExpectCtxParam1(ctx 
 }
 
 // ExpectPp1Param2 sets up expected param pp1 for LedgerServiceClient.CreateLedger
-func (mmCreateLedger *mLedgerServiceClientMockCreateLedger) ExpectPp1Param2(pp1 *connect.Request[v11.Ledger]) *mLedgerServiceClientMockCreateLedger {
+func (mmCreateLedger *mLedgerServiceClientMockCreateLedger) ExpectPp1Param2(pp1 *connect.Request[v11.CreateLedgerRequest]) *mLedgerServiceClientMockCreateLedger {
 	if mmCreateLedger.mock.funcCreateLedger != nil {
 		mmCreateLedger.mock.t.Fatalf("LedgerServiceClientMock.CreateLedger mock is already set by Set")
 	}
@@ -619,7 +619,7 @@ func (mmCreateLedger *mLedgerServiceClientMockCreateLedger) ExpectPp1Param2(pp1 
 }
 
 // Inspect accepts an inspector function that has same arguments as the LedgerServiceClient.CreateLedger
-func (mmCreateLedger *mLedgerServiceClientMockCreateLedger) Inspect(f func(ctx context.Context, pp1 *connect.Request[v11.Ledger])) *mLedgerServiceClientMockCreateLedger {
+func (mmCreateLedger *mLedgerServiceClientMockCreateLedger) Inspect(f func(ctx context.Context, pp1 *connect.Request[v11.CreateLedgerRequest])) *mLedgerServiceClientMockCreateLedger {
 	if mmCreateLedger.mock.inspectFuncCreateLedger != nil {
 		mmCreateLedger.mock.t.Fatalf("Inspect function is already set for LedgerServiceClientMock.CreateLedger")
 	}
@@ -630,7 +630,7 @@ func (mmCreateLedger *mLedgerServiceClientMockCreateLedger) Inspect(f func(ctx c
 }
 
 // Return sets up results that will be returned by LedgerServiceClient.CreateLedger
-func (mmCreateLedger *mLedgerServiceClientMockCreateLedger) Return(pp2 *connect.Response[v11.Ledger], err error) *LedgerServiceClientMock {
+func (mmCreateLedger *mLedgerServiceClientMockCreateLedger) Return(pp2 *connect.Response[v11.CreateLedgerResponse], err error) *LedgerServiceClientMock {
 	if mmCreateLedger.mock.funcCreateLedger != nil {
 		mmCreateLedger.mock.t.Fatalf("LedgerServiceClientMock.CreateLedger mock is already set by Set")
 	}
@@ -644,7 +644,7 @@ func (mmCreateLedger *mLedgerServiceClientMockCreateLedger) Return(pp2 *connect.
 }
 
 // Set uses given function f to mock the LedgerServiceClient.CreateLedger method
-func (mmCreateLedger *mLedgerServiceClientMockCreateLedger) Set(f func(ctx context.Context, pp1 *connect.Request[v11.Ledger]) (pp2 *connect.Response[v11.Ledger], err error)) *LedgerServiceClientMock {
+func (mmCreateLedger *mLedgerServiceClientMockCreateLedger) Set(f func(ctx context.Context, pp1 *connect.Request[v11.CreateLedgerRequest]) (pp2 *connect.Response[v11.CreateLedgerResponse], err error)) *LedgerServiceClientMock {
 	if mmCreateLedger.defaultExpectation != nil {
 		mmCreateLedger.mock.t.Fatalf("Default expectation is already set for the LedgerServiceClient.CreateLedger method")
 	}
@@ -660,7 +660,7 @@ func (mmCreateLedger *mLedgerServiceClientMockCreateLedger) Set(f func(ctx conte
 
 // When sets expectation for the LedgerServiceClient.CreateLedger which will trigger the result defined by the following
 // Then helper
-func (mmCreateLedger *mLedgerServiceClientMockCreateLedger) When(ctx context.Context, pp1 *connect.Request[v11.Ledger]) *LedgerServiceClientMockCreateLedgerExpectation {
+func (mmCreateLedger *mLedgerServiceClientMockCreateLedger) When(ctx context.Context, pp1 *connect.Request[v11.CreateLedgerRequest]) *LedgerServiceClientMockCreateLedgerExpectation {
 	if mmCreateLedger.mock.funcCreateLedger != nil {
 		mmCreateLedger.mock.t.Fatalf("LedgerServiceClientMock.CreateLedger mock is already set by Set")
 	}
@@ -675,7 +675,7 @@ func (mmCreateLedger *mLedgerServiceClientMockCreateLedger) When(ctx context.Con
 }
 
 // Then sets up LedgerServiceClient.CreateLedger return parameters for the expectation previously defined by the When method
-func (e *LedgerServiceClientMockCreateLedgerExpectation) Then(pp2 *connect.Response[v11.Ledger], err error) *LedgerServiceClientMock {
+func (e *LedgerServiceClientMockCreateLedgerExpectation) Then(pp2 *connect.Response[v11.CreateLedgerResponse], err error) *LedgerServiceClientMock {
 	e.results = &LedgerServiceClientMockCreateLedgerResults{pp2, err}
 	return e.mock
 }
@@ -702,7 +702,7 @@ func (mmCreateLedger *mLedgerServiceClientMockCreateLedger) invocationsDone() bo
 }
 
 // CreateLedger implements mm_ledgerv1connect.LedgerServiceClient
-func (mmCreateLedger *LedgerServiceClientMock) CreateLedger(ctx context.Context, pp1 *connect.Request[v11.Ledger]) (pp2 *connect.Response[v11.Ledger], err error) {
+func (mmCreateLedger *LedgerServiceClientMock) CreateLedger(ctx context.Context, pp1 *connect.Request[v11.CreateLedgerRequest]) (pp2 *connect.Response[v11.CreateLedgerResponse], err error) {
 	mm_atomic.AddUint64(&mmCreateLedger.beforeCreateLedgerCounter, 1)
 	defer mm_atomic.AddUint64(&mmCreateLedger.afterCreateLedgerCounter, 1)
 
@@ -858,18 +858,18 @@ type LedgerServiceClientMockCreateTransactionExpectation struct {
 // LedgerServiceClientMockCreateTransactionParams contains parameters of the LedgerServiceClient.CreateTransaction
 type LedgerServiceClientMockCreateTransactionParams struct {
 	ctx context.Context
-	pp1 *connect.Request[v11.Transaction]
+	pp1 *connect.Request[v11.CreateTransactionRequest]
 }
 
 // LedgerServiceClientMockCreateTransactionParamPtrs contains pointers to parameters of the LedgerServiceClient.CreateTransaction
 type LedgerServiceClientMockCreateTransactionParamPtrs struct {
 	ctx *context.Context
-	pp1 **connect.Request[v11.Transaction]
+	pp1 **connect.Request[v11.CreateTransactionRequest]
 }
 
 // LedgerServiceClientMockCreateTransactionResults contains results of the LedgerServiceClient.CreateTransaction
 type LedgerServiceClientMockCreateTransactionResults struct {
-	pp2 *connect.Response[v11.Transaction]
+	pp2 *connect.Response[v11.CreateTransactionResponse]
 	err error
 }
 
@@ -891,7 +891,7 @@ func (mmCreateTransaction *mLedgerServiceClientMockCreateTransaction) Optional()
 }
 
 // Expect sets up expected params for LedgerServiceClient.CreateTransaction
-func (mmCreateTransaction *mLedgerServiceClientMockCreateTransaction) Expect(ctx context.Context, pp1 *connect.Request[v11.Transaction]) *mLedgerServiceClientMockCreateTransaction {
+func (mmCreateTransaction *mLedgerServiceClientMockCreateTransaction) Expect(ctx context.Context, pp1 *connect.Request[v11.CreateTransactionRequest]) *mLedgerServiceClientMockCreateTransaction {
 	if mmCreateTransaction.mock.funcCreateTransaction != nil {
 		mmCreateTransaction.mock.t.Fatalf("LedgerServiceClientMock.CreateTransaction mock is already set by Set")
 	}
@@ -939,7 +939,7 @@ func (mmCreateTransaction *mLedgerServiceClientMockCreateTransaction) ExpectCtxP
 }
 
 // ExpectPp1Param2 sets up expected param pp1 for LedgerServiceClient.CreateTransaction
-func (mmCreateTransaction *mLedgerServiceClientMockCreateTransaction) ExpectPp1Param2(pp1 *connect.Request[v11.Transaction]) *mLedgerServiceClientMockCreateTransaction {
+func (mmCreateTransaction *mLedgerServiceClientMockCreateTransaction) ExpectPp1Param2(pp1 *connect.Request[v11.CreateTransactionRequest]) *mLedgerServiceClientMockCreateTransaction {
 	if mmCreateTransaction.mock.funcCreateTransaction != nil {
 		mmCreateTransaction.mock.t.Fatalf("LedgerServiceClientMock.CreateTransaction mock is already set by Set")
 	}
@@ -962,7 +962,7 @@ func (mmCreateTransaction *mLedgerServiceClientMockCreateTransaction) ExpectPp1P
 }
 
 // Inspect accepts an inspector function that has same arguments as the LedgerServiceClient.CreateTransaction
-func (mmCreateTransaction *mLedgerServiceClientMockCreateTransaction) Inspect(f func(ctx context.Context, pp1 *connect.Request[v11.Transaction])) *mLedgerServiceClientMockCreateTransaction {
+func (mmCreateTransaction *mLedgerServiceClientMockCreateTransaction) Inspect(f func(ctx context.Context, pp1 *connect.Request[v11.CreateTransactionRequest])) *mLedgerServiceClientMockCreateTransaction {
 	if mmCreateTransaction.mock.inspectFuncCreateTransaction != nil {
 		mmCreateTransaction.mock.t.Fatalf("Inspect function is already set for LedgerServiceClientMock.CreateTransaction")
 	}
@@ -973,7 +973,7 @@ func (mmCreateTransaction *mLedgerServiceClientMockCreateTransaction) Inspect(f 
 }
 
 // Return sets up results that will be returned by LedgerServiceClient.CreateTransaction
-func (mmCreateTransaction *mLedgerServiceClientMockCreateTransaction) Return(pp2 *connect.Response[v11.Transaction], err error) *LedgerServiceClientMock {
+func (mmCreateTransaction *mLedgerServiceClientMockCreateTransaction) Return(pp2 *connect.Response[v11.CreateTransactionResponse], err error) *LedgerServiceClientMock {
 	if mmCreateTransaction.mock.funcCreateTransaction != nil {
 		mmCreateTransaction.mock.t.Fatalf("LedgerServiceClientMock.CreateTransaction mock is already set by Set")
 	}
@@ -987,7 +987,7 @@ func (mmCreateTransaction *mLedgerServiceClientMockCreateTransaction) Return(pp2
 }
 
 // Set uses given function f to mock the LedgerServiceClient.CreateTransaction method
-func (mmCreateTransaction *mLedgerServiceClientMockCreateTransaction) Set(f func(ctx context.Context, pp1 *connect.Request[v11.Transaction]) (pp2 *connect.Response[v11.Transaction], err error)) *LedgerServiceClientMock {
+func (mmCreateTransaction *mLedgerServiceClientMockCreateTransaction) Set(f func(ctx context.Context, pp1 *connect.Request[v11.CreateTransactionRequest]) (pp2 *connect.Response[v11.CreateTransactionResponse], err error)) *LedgerServiceClientMock {
 	if mmCreateTransaction.defaultExpectation != nil {
 		mmCreateTransaction.mock.t.Fatalf("Default expectation is already set for the LedgerServiceClient.CreateTransaction method")
 	}
@@ -1003,7 +1003,7 @@ func (mmCreateTransaction *mLedgerServiceClientMockCreateTransaction) Set(f func
 
 // When sets expectation for the LedgerServiceClient.CreateTransaction which will trigger the result defined by the following
 // Then helper
-func (mmCreateTransaction *mLedgerServiceClientMockCreateTransaction) When(ctx context.Context, pp1 *connect.Request[v11.Transaction]) *LedgerServiceClientMockCreateTransactionExpectation {
+func (mmCreateTransaction *mLedgerServiceClientMockCreateTransaction) When(ctx context.Context, pp1 *connect.Request[v11.CreateTransactionRequest]) *LedgerServiceClientMockCreateTransactionExpectation {
 	if mmCreateTransaction.mock.funcCreateTransaction != nil {
 		mmCreateTransaction.mock.t.Fatalf("LedgerServiceClientMock.CreateTransaction mock is already set by Set")
 	}
@@ -1018,7 +1018,7 @@ func (mmCreateTransaction *mLedgerServiceClientMockCreateTransaction) When(ctx c
 }
 
 // Then sets up LedgerServiceClient.CreateTransaction return parameters for the expectation previously defined by the When method
-func (e *LedgerServiceClientMockCreateTransactionExpectation) Then(pp2 *connect.Response[v11.Transaction], err error) *LedgerServiceClientMock {
+func (e *LedgerServiceClientMockCreateTransactionExpectation) Then(pp2 *connect.Response[v11.CreateTransactionResponse], err error) *LedgerServiceClientMock {
 	e.results = &LedgerServiceClientMockCreateTransactionResults{pp2, err}
 	return e.mock
 }
@@ -1045,7 +1045,7 @@ func (mmCreateTransaction *mLedgerServiceClientMockCreateTransaction) invocation
 }
 
 // CreateTransaction implements mm_ledgerv1connect.LedgerServiceClient
-func (mmCreateTransaction *LedgerServiceClientMock) CreateTransaction(ctx context.Context, pp1 *connect.Request[v11.Transaction]) (pp2 *connect.Response[v11.Transaction], err error) {
+func (mmCreateTransaction *LedgerServiceClientMock) CreateTransaction(ctx context.Context, pp1 *connect.Request[v11.CreateTransactionRequest]) (pp2 *connect.Response[v11.CreateTransactionResponse], err error) {
 	mm_atomic.AddUint64(&mmCreateTransaction.beforeCreateTransactionCounter, 1)
 	defer mm_atomic.AddUint64(&mmCreateTransaction.afterCreateTransactionCounter, 1)
 
@@ -1201,18 +1201,18 @@ type LedgerServiceClientMockReverseTransactionExpectation struct {
 // LedgerServiceClientMockReverseTransactionParams contains parameters of the LedgerServiceClient.ReverseTransaction
 type LedgerServiceClientMockReverseTransactionParams struct {
 	ctx context.Context
-	pp1 *connect.Request[v11.Transaction]
+	pp1 *connect.Request[v11.ReverseTransactionRequest]
 }
 
 // LedgerServiceClientMockReverseTransactionParamPtrs contains pointers to parameters of the LedgerServiceClient.ReverseTransaction
 type LedgerServiceClientMockReverseTransactionParamPtrs struct {
 	ctx *context.Context
-	pp1 **connect.Request[v11.Transaction]
+	pp1 **connect.Request[v11.ReverseTransactionRequest]
 }
 
 // LedgerServiceClientMockReverseTransactionResults contains results of the LedgerServiceClient.ReverseTransaction
 type LedgerServiceClientMockReverseTransactionResults struct {
-	pp2 *connect.Response[v11.Transaction]
+	pp2 *connect.Response[v11.ReverseTransactionResponse]
 	err error
 }
 
@@ -1234,7 +1234,7 @@ func (mmReverseTransaction *mLedgerServiceClientMockReverseTransaction) Optional
 }
 
 // Expect sets up expected params for LedgerServiceClient.ReverseTransaction
-func (mmReverseTransaction *mLedgerServiceClientMockReverseTransaction) Expect(ctx context.Context, pp1 *connect.Request[v11.Transaction]) *mLedgerServiceClientMockReverseTransaction {
+func (mmReverseTransaction *mLedgerServiceClientMockReverseTransaction) Expect(ctx context.Context, pp1 *connect.Request[v11.ReverseTransactionRequest]) *mLedgerServiceClientMockReverseTransaction {
 	if mmReverseTransaction.mock.funcReverseTransaction != nil {
 		mmReverseTransaction.mock.t.Fatalf("LedgerServiceClientMock.ReverseTransaction mock is already set by Set")
 	}
@@ -1282,7 +1282,7 @@ func (mmReverseTransaction *mLedgerServiceClientMockReverseTransaction) ExpectCt
 }
 
 // ExpectPp1Param2 sets up expected param pp1 for LedgerServiceClient.ReverseTransaction
-func (mmReverseTransaction *mLedgerServiceClientMockReverseTransaction) ExpectPp1Param2(pp1 *connect.Request[v11.Transaction]) *mLedgerServiceClientMockReverseTransaction {
+func (mmReverseTransaction *mLedgerServiceClientMockReverseTransaction) ExpectPp1Param2(pp1 *connect.Request[v11.ReverseTransactionRequest]) *mLedgerServiceClientMockReverseTransaction {
 	if mmReverseTransaction.mock.funcReverseTransaction != nil {
 		mmReverseTransaction.mock.t.Fatalf("LedgerServiceClientMock.ReverseTransaction mock is already set by Set")
 	}
@@ -1305,7 +1305,7 @@ func (mmReverseTransaction *mLedgerServiceClientMockReverseTransaction) ExpectPp
 }
 
 // Inspect accepts an inspector function that has same arguments as the LedgerServiceClient.ReverseTransaction
-func (mmReverseTransaction *mLedgerServiceClientMockReverseTransaction) Inspect(f func(ctx context.Context, pp1 *connect.Request[v11.Transaction])) *mLedgerServiceClientMockReverseTransaction {
+func (mmReverseTransaction *mLedgerServiceClientMockReverseTransaction) Inspect(f func(ctx context.Context, pp1 *connect.Request[v11.ReverseTransactionRequest])) *mLedgerServiceClientMockReverseTransaction {
 	if mmReverseTransaction.mock.inspectFuncReverseTransaction != nil {
 		mmReverseTransaction.mock.t.Fatalf("Inspect function is already set for LedgerServiceClientMock.ReverseTransaction")
 	}
@@ -1316,7 +1316,7 @@ func (mmReverseTransaction *mLedgerServiceClientMockReverseTransaction) Inspect(
 }
 
 // Return sets up results that will be returned by LedgerServiceClient.ReverseTransaction
-func (mmReverseTransaction *mLedgerServiceClientMockReverseTransaction) Return(pp2 *connect.Response[v11.Transaction], err error) *LedgerServiceClientMock {
+func (mmReverseTransaction *mLedgerServiceClientMockReverseTransaction) Return(pp2 *connect.Response[v11.ReverseTransactionResponse], err error) *LedgerServiceClientMock {
 	if mmReverseTransaction.mock.funcReverseTransaction != nil {
 		mmReverseTransaction.mock.t.Fatalf("LedgerServiceClientMock.ReverseTransaction mock is already set by Set")
 	}
@@ -1330,7 +1330,7 @@ func (mmReverseTransaction *mLedgerServiceClientMockReverseTransaction) Return(p
 }
 
 // Set uses given function f to mock the LedgerServiceClient.ReverseTransaction method
-func (mmReverseTransaction *mLedgerServiceClientMockReverseTransaction) Set(f func(ctx context.Context, pp1 *connect.Request[v11.Transaction]) (pp2 *connect.Response[v11.Transaction], err error)) *LedgerServiceClientMock {
+func (mmReverseTransaction *mLedgerServiceClientMockReverseTransaction) Set(f func(ctx context.Context, pp1 *connect.Request[v11.ReverseTransactionRequest]) (pp2 *connect.Response[v11.ReverseTransactionResponse], err error)) *LedgerServiceClientMock {
 	if mmReverseTransaction.defaultExpectation != nil {
 		mmReverseTransaction.mock.t.Fatalf("Default expectation is already set for the LedgerServiceClient.ReverseTransaction method")
 	}
@@ -1346,7 +1346,7 @@ func (mmReverseTransaction *mLedgerServiceClientMockReverseTransaction) Set(f fu
 
 // When sets expectation for the LedgerServiceClient.ReverseTransaction which will trigger the result defined by the following
 // Then helper
-func (mmReverseTransaction *mLedgerServiceClientMockReverseTransaction) When(ctx context.Context, pp1 *connect.Request[v11.Transaction]) *LedgerServiceClientMockReverseTransactionExpectation {
+func (mmReverseTransaction *mLedgerServiceClientMockReverseTransaction) When(ctx context.Context, pp1 *connect.Request[v11.ReverseTransactionRequest]) *LedgerServiceClientMockReverseTransactionExpectation {
 	if mmReverseTransaction.mock.funcReverseTransaction != nil {
 		mmReverseTransaction.mock.t.Fatalf("LedgerServiceClientMock.ReverseTransaction mock is already set by Set")
 	}
@@ -1361,7 +1361,7 @@ func (mmReverseTransaction *mLedgerServiceClientMockReverseTransaction) When(ctx
 }
 
 // Then sets up LedgerServiceClient.ReverseTransaction return parameters for the expectation previously defined by the When method
-func (e *LedgerServiceClientMockReverseTransactionExpectation) Then(pp2 *connect.Response[v11.Transaction], err error) *LedgerServiceClientMock {
+func (e *LedgerServiceClientMockReverseTransactionExpectation) Then(pp2 *connect.Response[v11.ReverseTransactionResponse], err error) *LedgerServiceClientMock {
 	e.results = &LedgerServiceClientMockReverseTransactionResults{pp2, err}
 	return e.mock
 }
@@ -1388,7 +1388,7 @@ func (mmReverseTransaction *mLedgerServiceClientMockReverseTransaction) invocati
 }
 
 // ReverseTransaction implements mm_ledgerv1connect.LedgerServiceClient
-func (mmReverseTransaction *LedgerServiceClientMock) ReverseTransaction(ctx context.Context, pp1 *connect.Request[v11.Transaction]) (pp2 *connect.Response[v11.Transaction], err error) {
+func (mmReverseTransaction *LedgerServiceClientMock) ReverseTransaction(ctx context.Context, pp1 *connect.Request[v11.ReverseTransactionRequest]) (pp2 *connect.Response[v11.ReverseTransactionResponse], err error) {
 	mm_atomic.AddUint64(&mmReverseTransaction.beforeReverseTransactionCounter, 1)
 	defer mm_atomic.AddUint64(&mmReverseTransaction.afterReverseTransactionCounter, 1)
 
@@ -1555,7 +1555,7 @@ type LedgerServiceClientMockSearchAccountsParamPtrs struct {
 
 // LedgerServiceClientMockSearchAccountsResults contains results of the LedgerServiceClient.SearchAccounts
 type LedgerServiceClientMockSearchAccountsResults struct {
-	pp2 *connect.ServerStreamForClient[v11.Account]
+	pp2 *connect.ServerStreamForClient[v11.SearchAccountsResponse]
 	err error
 }
 
@@ -1659,7 +1659,7 @@ func (mmSearchAccounts *mLedgerServiceClientMockSearchAccounts) Inspect(f func(c
 }
 
 // Return sets up results that will be returned by LedgerServiceClient.SearchAccounts
-func (mmSearchAccounts *mLedgerServiceClientMockSearchAccounts) Return(pp2 *connect.ServerStreamForClient[v11.Account], err error) *LedgerServiceClientMock {
+func (mmSearchAccounts *mLedgerServiceClientMockSearchAccounts) Return(pp2 *connect.ServerStreamForClient[v11.SearchAccountsResponse], err error) *LedgerServiceClientMock {
 	if mmSearchAccounts.mock.funcSearchAccounts != nil {
 		mmSearchAccounts.mock.t.Fatalf("LedgerServiceClientMock.SearchAccounts mock is already set by Set")
 	}
@@ -1673,7 +1673,7 @@ func (mmSearchAccounts *mLedgerServiceClientMockSearchAccounts) Return(pp2 *conn
 }
 
 // Set uses given function f to mock the LedgerServiceClient.SearchAccounts method
-func (mmSearchAccounts *mLedgerServiceClientMockSearchAccounts) Set(f func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) (pp2 *connect.ServerStreamForClient[v11.Account], err error)) *LedgerServiceClientMock {
+func (mmSearchAccounts *mLedgerServiceClientMockSearchAccounts) Set(f func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) (pp2 *connect.ServerStreamForClient[v11.SearchAccountsResponse], err error)) *LedgerServiceClientMock {
 	if mmSearchAccounts.defaultExpectation != nil {
 		mmSearchAccounts.mock.t.Fatalf("Default expectation is already set for the LedgerServiceClient.SearchAccounts method")
 	}
@@ -1704,7 +1704,7 @@ func (mmSearchAccounts *mLedgerServiceClientMockSearchAccounts) When(ctx context
 }
 
 // Then sets up LedgerServiceClient.SearchAccounts return parameters for the expectation previously defined by the When method
-func (e *LedgerServiceClientMockSearchAccountsExpectation) Then(pp2 *connect.ServerStreamForClient[v11.Account], err error) *LedgerServiceClientMock {
+func (e *LedgerServiceClientMockSearchAccountsExpectation) Then(pp2 *connect.ServerStreamForClient[v11.SearchAccountsResponse], err error) *LedgerServiceClientMock {
 	e.results = &LedgerServiceClientMockSearchAccountsResults{pp2, err}
 	return e.mock
 }
@@ -1731,7 +1731,7 @@ func (mmSearchAccounts *mLedgerServiceClientMockSearchAccounts) invocationsDone(
 }
 
 // SearchAccounts implements mm_ledgerv1connect.LedgerServiceClient
-func (mmSearchAccounts *LedgerServiceClientMock) SearchAccounts(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) (pp2 *connect.ServerStreamForClient[v11.Account], err error) {
+func (mmSearchAccounts *LedgerServiceClientMock) SearchAccounts(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) (pp2 *connect.ServerStreamForClient[v11.SearchAccountsResponse], err error) {
 	mm_atomic.AddUint64(&mmSearchAccounts.beforeSearchAccountsCounter, 1)
 	defer mm_atomic.AddUint64(&mmSearchAccounts.afterSearchAccountsCounter, 1)
 
@@ -1898,7 +1898,7 @@ type LedgerServiceClientMockSearchLedgersParamPtrs struct {
 
 // LedgerServiceClientMockSearchLedgersResults contains results of the LedgerServiceClient.SearchLedgers
 type LedgerServiceClientMockSearchLedgersResults struct {
-	pp2 *connect.ServerStreamForClient[v11.Ledger]
+	pp2 *connect.ServerStreamForClient[v11.SearchLedgersResponse]
 	err error
 }
 
@@ -2002,7 +2002,7 @@ func (mmSearchLedgers *mLedgerServiceClientMockSearchLedgers) Inspect(f func(ctx
 }
 
 // Return sets up results that will be returned by LedgerServiceClient.SearchLedgers
-func (mmSearchLedgers *mLedgerServiceClientMockSearchLedgers) Return(pp2 *connect.ServerStreamForClient[v11.Ledger], err error) *LedgerServiceClientMock {
+func (mmSearchLedgers *mLedgerServiceClientMockSearchLedgers) Return(pp2 *connect.ServerStreamForClient[v11.SearchLedgersResponse], err error) *LedgerServiceClientMock {
 	if mmSearchLedgers.mock.funcSearchLedgers != nil {
 		mmSearchLedgers.mock.t.Fatalf("LedgerServiceClientMock.SearchLedgers mock is already set by Set")
 	}
@@ -2016,7 +2016,7 @@ func (mmSearchLedgers *mLedgerServiceClientMockSearchLedgers) Return(pp2 *connec
 }
 
 // Set uses given function f to mock the LedgerServiceClient.SearchLedgers method
-func (mmSearchLedgers *mLedgerServiceClientMockSearchLedgers) Set(f func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) (pp2 *connect.ServerStreamForClient[v11.Ledger], err error)) *LedgerServiceClientMock {
+func (mmSearchLedgers *mLedgerServiceClientMockSearchLedgers) Set(f func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) (pp2 *connect.ServerStreamForClient[v11.SearchLedgersResponse], err error)) *LedgerServiceClientMock {
 	if mmSearchLedgers.defaultExpectation != nil {
 		mmSearchLedgers.mock.t.Fatalf("Default expectation is already set for the LedgerServiceClient.SearchLedgers method")
 	}
@@ -2047,7 +2047,7 @@ func (mmSearchLedgers *mLedgerServiceClientMockSearchLedgers) When(ctx context.C
 }
 
 // Then sets up LedgerServiceClient.SearchLedgers return parameters for the expectation previously defined by the When method
-func (e *LedgerServiceClientMockSearchLedgersExpectation) Then(pp2 *connect.ServerStreamForClient[v11.Ledger], err error) *LedgerServiceClientMock {
+func (e *LedgerServiceClientMockSearchLedgersExpectation) Then(pp2 *connect.ServerStreamForClient[v11.SearchLedgersResponse], err error) *LedgerServiceClientMock {
 	e.results = &LedgerServiceClientMockSearchLedgersResults{pp2, err}
 	return e.mock
 }
@@ -2074,7 +2074,7 @@ func (mmSearchLedgers *mLedgerServiceClientMockSearchLedgers) invocationsDone() 
 }
 
 // SearchLedgers implements mm_ledgerv1connect.LedgerServiceClient
-func (mmSearchLedgers *LedgerServiceClientMock) SearchLedgers(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) (pp2 *connect.ServerStreamForClient[v11.Ledger], err error) {
+func (mmSearchLedgers *LedgerServiceClientMock) SearchLedgers(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) (pp2 *connect.ServerStreamForClient[v11.SearchLedgersResponse], err error) {
 	mm_atomic.AddUint64(&mmSearchLedgers.beforeSearchLedgersCounter, 1)
 	defer mm_atomic.AddUint64(&mmSearchLedgers.afterSearchLedgersCounter, 1)
 
@@ -2241,7 +2241,7 @@ type LedgerServiceClientMockSearchTransactionEntriesParamPtrs struct {
 
 // LedgerServiceClientMockSearchTransactionEntriesResults contains results of the LedgerServiceClient.SearchTransactionEntries
 type LedgerServiceClientMockSearchTransactionEntriesResults struct {
-	pp2 *connect.ServerStreamForClient[v11.TransactionEntry]
+	pp2 *connect.ServerStreamForClient[v11.SearchTransactionEntriesResponse]
 	err error
 }
 
@@ -2345,7 +2345,7 @@ func (mmSearchTransactionEntries *mLedgerServiceClientMockSearchTransactionEntri
 }
 
 // Return sets up results that will be returned by LedgerServiceClient.SearchTransactionEntries
-func (mmSearchTransactionEntries *mLedgerServiceClientMockSearchTransactionEntries) Return(pp2 *connect.ServerStreamForClient[v11.TransactionEntry], err error) *LedgerServiceClientMock {
+func (mmSearchTransactionEntries *mLedgerServiceClientMockSearchTransactionEntries) Return(pp2 *connect.ServerStreamForClient[v11.SearchTransactionEntriesResponse], err error) *LedgerServiceClientMock {
 	if mmSearchTransactionEntries.mock.funcSearchTransactionEntries != nil {
 		mmSearchTransactionEntries.mock.t.Fatalf("LedgerServiceClientMock.SearchTransactionEntries mock is already set by Set")
 	}
@@ -2359,7 +2359,7 @@ func (mmSearchTransactionEntries *mLedgerServiceClientMockSearchTransactionEntri
 }
 
 // Set uses given function f to mock the LedgerServiceClient.SearchTransactionEntries method
-func (mmSearchTransactionEntries *mLedgerServiceClientMockSearchTransactionEntries) Set(f func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) (pp2 *connect.ServerStreamForClient[v11.TransactionEntry], err error)) *LedgerServiceClientMock {
+func (mmSearchTransactionEntries *mLedgerServiceClientMockSearchTransactionEntries) Set(f func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) (pp2 *connect.ServerStreamForClient[v11.SearchTransactionEntriesResponse], err error)) *LedgerServiceClientMock {
 	if mmSearchTransactionEntries.defaultExpectation != nil {
 		mmSearchTransactionEntries.mock.t.Fatalf("Default expectation is already set for the LedgerServiceClient.SearchTransactionEntries method")
 	}
@@ -2390,7 +2390,7 @@ func (mmSearchTransactionEntries *mLedgerServiceClientMockSearchTransactionEntri
 }
 
 // Then sets up LedgerServiceClient.SearchTransactionEntries return parameters for the expectation previously defined by the When method
-func (e *LedgerServiceClientMockSearchTransactionEntriesExpectation) Then(pp2 *connect.ServerStreamForClient[v11.TransactionEntry], err error) *LedgerServiceClientMock {
+func (e *LedgerServiceClientMockSearchTransactionEntriesExpectation) Then(pp2 *connect.ServerStreamForClient[v11.SearchTransactionEntriesResponse], err error) *LedgerServiceClientMock {
 	e.results = &LedgerServiceClientMockSearchTransactionEntriesResults{pp2, err}
 	return e.mock
 }
@@ -2417,7 +2417,7 @@ func (mmSearchTransactionEntries *mLedgerServiceClientMockSearchTransactionEntri
 }
 
 // SearchTransactionEntries implements mm_ledgerv1connect.LedgerServiceClient
-func (mmSearchTransactionEntries *LedgerServiceClientMock) SearchTransactionEntries(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) (pp2 *connect.ServerStreamForClient[v11.TransactionEntry], err error) {
+func (mmSearchTransactionEntries *LedgerServiceClientMock) SearchTransactionEntries(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) (pp2 *connect.ServerStreamForClient[v11.SearchTransactionEntriesResponse], err error) {
 	mm_atomic.AddUint64(&mmSearchTransactionEntries.beforeSearchTransactionEntriesCounter, 1)
 	defer mm_atomic.AddUint64(&mmSearchTransactionEntries.afterSearchTransactionEntriesCounter, 1)
 
@@ -2584,7 +2584,7 @@ type LedgerServiceClientMockSearchTransactionsParamPtrs struct {
 
 // LedgerServiceClientMockSearchTransactionsResults contains results of the LedgerServiceClient.SearchTransactions
 type LedgerServiceClientMockSearchTransactionsResults struct {
-	pp2 *connect.ServerStreamForClient[v11.Transaction]
+	pp2 *connect.ServerStreamForClient[v11.SearchTransactionsResponse]
 	err error
 }
 
@@ -2688,7 +2688,7 @@ func (mmSearchTransactions *mLedgerServiceClientMockSearchTransactions) Inspect(
 }
 
 // Return sets up results that will be returned by LedgerServiceClient.SearchTransactions
-func (mmSearchTransactions *mLedgerServiceClientMockSearchTransactions) Return(pp2 *connect.ServerStreamForClient[v11.Transaction], err error) *LedgerServiceClientMock {
+func (mmSearchTransactions *mLedgerServiceClientMockSearchTransactions) Return(pp2 *connect.ServerStreamForClient[v11.SearchTransactionsResponse], err error) *LedgerServiceClientMock {
 	if mmSearchTransactions.mock.funcSearchTransactions != nil {
 		mmSearchTransactions.mock.t.Fatalf("LedgerServiceClientMock.SearchTransactions mock is already set by Set")
 	}
@@ -2702,7 +2702,7 @@ func (mmSearchTransactions *mLedgerServiceClientMockSearchTransactions) Return(p
 }
 
 // Set uses given function f to mock the LedgerServiceClient.SearchTransactions method
-func (mmSearchTransactions *mLedgerServiceClientMockSearchTransactions) Set(f func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) (pp2 *connect.ServerStreamForClient[v11.Transaction], err error)) *LedgerServiceClientMock {
+func (mmSearchTransactions *mLedgerServiceClientMockSearchTransactions) Set(f func(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) (pp2 *connect.ServerStreamForClient[v11.SearchTransactionsResponse], err error)) *LedgerServiceClientMock {
 	if mmSearchTransactions.defaultExpectation != nil {
 		mmSearchTransactions.mock.t.Fatalf("Default expectation is already set for the LedgerServiceClient.SearchTransactions method")
 	}
@@ -2733,7 +2733,7 @@ func (mmSearchTransactions *mLedgerServiceClientMockSearchTransactions) When(ctx
 }
 
 // Then sets up LedgerServiceClient.SearchTransactions return parameters for the expectation previously defined by the When method
-func (e *LedgerServiceClientMockSearchTransactionsExpectation) Then(pp2 *connect.ServerStreamForClient[v11.Transaction], err error) *LedgerServiceClientMock {
+func (e *LedgerServiceClientMockSearchTransactionsExpectation) Then(pp2 *connect.ServerStreamForClient[v11.SearchTransactionsResponse], err error) *LedgerServiceClientMock {
 	e.results = &LedgerServiceClientMockSearchTransactionsResults{pp2, err}
 	return e.mock
 }
@@ -2760,7 +2760,7 @@ func (mmSearchTransactions *mLedgerServiceClientMockSearchTransactions) invocati
 }
 
 // SearchTransactions implements mm_ledgerv1connect.LedgerServiceClient
-func (mmSearchTransactions *LedgerServiceClientMock) SearchTransactions(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) (pp2 *connect.ServerStreamForClient[v11.Transaction], err error) {
+func (mmSearchTransactions *LedgerServiceClientMock) SearchTransactions(ctx context.Context, pp1 *connect.Request[v1.SearchRequest]) (pp2 *connect.ServerStreamForClient[v11.SearchTransactionsResponse], err error) {
 	mm_atomic.AddUint64(&mmSearchTransactions.beforeSearchTransactionsCounter, 1)
 	defer mm_atomic.AddUint64(&mmSearchTransactions.afterSearchTransactionsCounter, 1)
 
@@ -2916,18 +2916,18 @@ type LedgerServiceClientMockUpdateAccountExpectation struct {
 // LedgerServiceClientMockUpdateAccountParams contains parameters of the LedgerServiceClient.UpdateAccount
 type LedgerServiceClientMockUpdateAccountParams struct {
 	ctx context.Context
-	pp1 *connect.Request[v11.Account]
+	pp1 *connect.Request[v11.UpdateAccountRequest]
 }
 
 // LedgerServiceClientMockUpdateAccountParamPtrs contains pointers to parameters of the LedgerServiceClient.UpdateAccount
 type LedgerServiceClientMockUpdateAccountParamPtrs struct {
 	ctx *context.Context
-	pp1 **connect.Request[v11.Account]
+	pp1 **connect.Request[v11.UpdateAccountRequest]
 }
 
 // LedgerServiceClientMockUpdateAccountResults contains results of the LedgerServiceClient.UpdateAccount
 type LedgerServiceClientMockUpdateAccountResults struct {
-	pp2 *connect.Response[v11.Account]
+	pp2 *connect.Response[v11.UpdateAccountResponse]
 	err error
 }
 
@@ -2949,7 +2949,7 @@ func (mmUpdateAccount *mLedgerServiceClientMockUpdateAccount) Optional() *mLedge
 }
 
 // Expect sets up expected params for LedgerServiceClient.UpdateAccount
-func (mmUpdateAccount *mLedgerServiceClientMockUpdateAccount) Expect(ctx context.Context, pp1 *connect.Request[v11.Account]) *mLedgerServiceClientMockUpdateAccount {
+func (mmUpdateAccount *mLedgerServiceClientMockUpdateAccount) Expect(ctx context.Context, pp1 *connect.Request[v11.UpdateAccountRequest]) *mLedgerServiceClientMockUpdateAccount {
 	if mmUpdateAccount.mock.funcUpdateAccount != nil {
 		mmUpdateAccount.mock.t.Fatalf("LedgerServiceClientMock.UpdateAccount mock is already set by Set")
 	}
@@ -2997,7 +2997,7 @@ func (mmUpdateAccount *mLedgerServiceClientMockUpdateAccount) ExpectCtxParam1(ct
 }
 
 // ExpectPp1Param2 sets up expected param pp1 for LedgerServiceClient.UpdateAccount
-func (mmUpdateAccount *mLedgerServiceClientMockUpdateAccount) ExpectPp1Param2(pp1 *connect.Request[v11.Account]) *mLedgerServiceClientMockUpdateAccount {
+func (mmUpdateAccount *mLedgerServiceClientMockUpdateAccount) ExpectPp1Param2(pp1 *connect.Request[v11.UpdateAccountRequest]) *mLedgerServiceClientMockUpdateAccount {
 	if mmUpdateAccount.mock.funcUpdateAccount != nil {
 		mmUpdateAccount.mock.t.Fatalf("LedgerServiceClientMock.UpdateAccount mock is already set by Set")
 	}
@@ -3020,7 +3020,7 @@ func (mmUpdateAccount *mLedgerServiceClientMockUpdateAccount) ExpectPp1Param2(pp
 }
 
 // Inspect accepts an inspector function that has same arguments as the LedgerServiceClient.UpdateAccount
-func (mmUpdateAccount *mLedgerServiceClientMockUpdateAccount) Inspect(f func(ctx context.Context, pp1 *connect.Request[v11.Account])) *mLedgerServiceClientMockUpdateAccount {
+func (mmUpdateAccount *mLedgerServiceClientMockUpdateAccount) Inspect(f func(ctx context.Context, pp1 *connect.Request[v11.UpdateAccountRequest])) *mLedgerServiceClientMockUpdateAccount {
 	if mmUpdateAccount.mock.inspectFuncUpdateAccount != nil {
 		mmUpdateAccount.mock.t.Fatalf("Inspect function is already set for LedgerServiceClientMock.UpdateAccount")
 	}
@@ -3031,7 +3031,7 @@ func (mmUpdateAccount *mLedgerServiceClientMockUpdateAccount) Inspect(f func(ctx
 }
 
 // Return sets up results that will be returned by LedgerServiceClient.UpdateAccount
-func (mmUpdateAccount *mLedgerServiceClientMockUpdateAccount) Return(pp2 *connect.Response[v11.Account], err error) *LedgerServiceClientMock {
+func (mmUpdateAccount *mLedgerServiceClientMockUpdateAccount) Return(pp2 *connect.Response[v11.UpdateAccountResponse], err error) *LedgerServiceClientMock {
 	if mmUpdateAccount.mock.funcUpdateAccount != nil {
 		mmUpdateAccount.mock.t.Fatalf("LedgerServiceClientMock.UpdateAccount mock is already set by Set")
 	}
@@ -3045,7 +3045,7 @@ func (mmUpdateAccount *mLedgerServiceClientMockUpdateAccount) Return(pp2 *connec
 }
 
 // Set uses given function f to mock the LedgerServiceClient.UpdateAccount method
-func (mmUpdateAccount *mLedgerServiceClientMockUpdateAccount) Set(f func(ctx context.Context, pp1 *connect.Request[v11.Account]) (pp2 *connect.Response[v11.Account], err error)) *LedgerServiceClientMock {
+func (mmUpdateAccount *mLedgerServiceClientMockUpdateAccount) Set(f func(ctx context.Context, pp1 *connect.Request[v11.UpdateAccountRequest]) (pp2 *connect.Response[v11.UpdateAccountResponse], err error)) *LedgerServiceClientMock {
 	if mmUpdateAccount.defaultExpectation != nil {
 		mmUpdateAccount.mock.t.Fatalf("Default expectation is already set for the LedgerServiceClient.UpdateAccount method")
 	}
@@ -3061,7 +3061,7 @@ func (mmUpdateAccount *mLedgerServiceClientMockUpdateAccount) Set(f func(ctx con
 
 // When sets expectation for the LedgerServiceClient.UpdateAccount which will trigger the result defined by the following
 // Then helper
-func (mmUpdateAccount *mLedgerServiceClientMockUpdateAccount) When(ctx context.Context, pp1 *connect.Request[v11.Account]) *LedgerServiceClientMockUpdateAccountExpectation {
+func (mmUpdateAccount *mLedgerServiceClientMockUpdateAccount) When(ctx context.Context, pp1 *connect.Request[v11.UpdateAccountRequest]) *LedgerServiceClientMockUpdateAccountExpectation {
 	if mmUpdateAccount.mock.funcUpdateAccount != nil {
 		mmUpdateAccount.mock.t.Fatalf("LedgerServiceClientMock.UpdateAccount mock is already set by Set")
 	}
@@ -3076,7 +3076,7 @@ func (mmUpdateAccount *mLedgerServiceClientMockUpdateAccount) When(ctx context.C
 }
 
 // Then sets up LedgerServiceClient.UpdateAccount return parameters for the expectation previously defined by the When method
-func (e *LedgerServiceClientMockUpdateAccountExpectation) Then(pp2 *connect.Response[v11.Account], err error) *LedgerServiceClientMock {
+func (e *LedgerServiceClientMockUpdateAccountExpectation) Then(pp2 *connect.Response[v11.UpdateAccountResponse], err error) *LedgerServiceClientMock {
 	e.results = &LedgerServiceClientMockUpdateAccountResults{pp2, err}
 	return e.mock
 }
@@ -3103,7 +3103,7 @@ func (mmUpdateAccount *mLedgerServiceClientMockUpdateAccount) invocationsDone() 
 }
 
 // UpdateAccount implements mm_ledgerv1connect.LedgerServiceClient
-func (mmUpdateAccount *LedgerServiceClientMock) UpdateAccount(ctx context.Context, pp1 *connect.Request[v11.Account]) (pp2 *connect.Response[v11.Account], err error) {
+func (mmUpdateAccount *LedgerServiceClientMock) UpdateAccount(ctx context.Context, pp1 *connect.Request[v11.UpdateAccountRequest]) (pp2 *connect.Response[v11.UpdateAccountResponse], err error) {
 	mm_atomic.AddUint64(&mmUpdateAccount.beforeUpdateAccountCounter, 1)
 	defer mm_atomic.AddUint64(&mmUpdateAccount.afterUpdateAccountCounter, 1)
 
@@ -3259,18 +3259,18 @@ type LedgerServiceClientMockUpdateLedgerExpectation struct {
 // LedgerServiceClientMockUpdateLedgerParams contains parameters of the LedgerServiceClient.UpdateLedger
 type LedgerServiceClientMockUpdateLedgerParams struct {
 	ctx context.Context
-	pp1 *connect.Request[v11.Ledger]
+	pp1 *connect.Request[v11.UpdateLedgerRequest]
 }
 
 // LedgerServiceClientMockUpdateLedgerParamPtrs contains pointers to parameters of the LedgerServiceClient.UpdateLedger
 type LedgerServiceClientMockUpdateLedgerParamPtrs struct {
 	ctx *context.Context
-	pp1 **connect.Request[v11.Ledger]
+	pp1 **connect.Request[v11.UpdateLedgerRequest]
 }
 
 // LedgerServiceClientMockUpdateLedgerResults contains results of the LedgerServiceClient.UpdateLedger
 type LedgerServiceClientMockUpdateLedgerResults struct {
-	pp2 *connect.Response[v11.Ledger]
+	pp2 *connect.Response[v11.UpdateLedgerResponse]
 	err error
 }
 
@@ -3292,7 +3292,7 @@ func (mmUpdateLedger *mLedgerServiceClientMockUpdateLedger) Optional() *mLedgerS
 }
 
 // Expect sets up expected params for LedgerServiceClient.UpdateLedger
-func (mmUpdateLedger *mLedgerServiceClientMockUpdateLedger) Expect(ctx context.Context, pp1 *connect.Request[v11.Ledger]) *mLedgerServiceClientMockUpdateLedger {
+func (mmUpdateLedger *mLedgerServiceClientMockUpdateLedger) Expect(ctx context.Context, pp1 *connect.Request[v11.UpdateLedgerRequest]) *mLedgerServiceClientMockUpdateLedger {
 	if mmUpdateLedger.mock.funcUpdateLedger != nil {
 		mmUpdateLedger.mock.t.Fatalf("LedgerServiceClientMock.UpdateLedger mock is already set by Set")
 	}
@@ -3340,7 +3340,7 @@ func (mmUpdateLedger *mLedgerServiceClientMockUpdateLedger) ExpectCtxParam1(ctx 
 }
 
 // ExpectPp1Param2 sets up expected param pp1 for LedgerServiceClient.UpdateLedger
-func (mmUpdateLedger *mLedgerServiceClientMockUpdateLedger) ExpectPp1Param2(pp1 *connect.Request[v11.Ledger]) *mLedgerServiceClientMockUpdateLedger {
+func (mmUpdateLedger *mLedgerServiceClientMockUpdateLedger) ExpectPp1Param2(pp1 *connect.Request[v11.UpdateLedgerRequest]) *mLedgerServiceClientMockUpdateLedger {
 	if mmUpdateLedger.mock.funcUpdateLedger != nil {
 		mmUpdateLedger.mock.t.Fatalf("LedgerServiceClientMock.UpdateLedger mock is already set by Set")
 	}
@@ -3363,7 +3363,7 @@ func (mmUpdateLedger *mLedgerServiceClientMockUpdateLedger) ExpectPp1Param2(pp1 
 }
 
 // Inspect accepts an inspector function that has same arguments as the LedgerServiceClient.UpdateLedger
-func (mmUpdateLedger *mLedgerServiceClientMockUpdateLedger) Inspect(f func(ctx context.Context, pp1 *connect.Request[v11.Ledger])) *mLedgerServiceClientMockUpdateLedger {
+func (mmUpdateLedger *mLedgerServiceClientMockUpdateLedger) Inspect(f func(ctx context.Context, pp1 *connect.Request[v11.UpdateLedgerRequest])) *mLedgerServiceClientMockUpdateLedger {
 	if mmUpdateLedger.mock.inspectFuncUpdateLedger != nil {
 		mmUpdateLedger.mock.t.Fatalf("Inspect function is already set for LedgerServiceClientMock.UpdateLedger")
 	}
@@ -3374,7 +3374,7 @@ func (mmUpdateLedger *mLedgerServiceClientMockUpdateLedger) Inspect(f func(ctx c
 }
 
 // Return sets up results that will be returned by LedgerServiceClient.UpdateLedger
-func (mmUpdateLedger *mLedgerServiceClientMockUpdateLedger) Return(pp2 *connect.Response[v11.Ledger], err error) *LedgerServiceClientMock {
+func (mmUpdateLedger *mLedgerServiceClientMockUpdateLedger) Return(pp2 *connect.Response[v11.UpdateLedgerResponse], err error) *LedgerServiceClientMock {
 	if mmUpdateLedger.mock.funcUpdateLedger != nil {
 		mmUpdateLedger.mock.t.Fatalf("LedgerServiceClientMock.UpdateLedger mock is already set by Set")
 	}
@@ -3388,7 +3388,7 @@ func (mmUpdateLedger *mLedgerServiceClientMockUpdateLedger) Return(pp2 *connect.
 }
 
 // Set uses given function f to mock the LedgerServiceClient.UpdateLedger method
-func (mmUpdateLedger *mLedgerServiceClientMockUpdateLedger) Set(f func(ctx context.Context, pp1 *connect.Request[v11.Ledger]) (pp2 *connect.Response[v11.Ledger], err error)) *LedgerServiceClientMock {
+func (mmUpdateLedger *mLedgerServiceClientMockUpdateLedger) Set(f func(ctx context.Context, pp1 *connect.Request[v11.UpdateLedgerRequest]) (pp2 *connect.Response[v11.UpdateLedgerResponse], err error)) *LedgerServiceClientMock {
 	if mmUpdateLedger.defaultExpectation != nil {
 		mmUpdateLedger.mock.t.Fatalf("Default expectation is already set for the LedgerServiceClient.UpdateLedger method")
 	}
@@ -3404,7 +3404,7 @@ func (mmUpdateLedger *mLedgerServiceClientMockUpdateLedger) Set(f func(ctx conte
 
 // When sets expectation for the LedgerServiceClient.UpdateLedger which will trigger the result defined by the following
 // Then helper
-func (mmUpdateLedger *mLedgerServiceClientMockUpdateLedger) When(ctx context.Context, pp1 *connect.Request[v11.Ledger]) *LedgerServiceClientMockUpdateLedgerExpectation {
+func (mmUpdateLedger *mLedgerServiceClientMockUpdateLedger) When(ctx context.Context, pp1 *connect.Request[v11.UpdateLedgerRequest]) *LedgerServiceClientMockUpdateLedgerExpectation {
 	if mmUpdateLedger.mock.funcUpdateLedger != nil {
 		mmUpdateLedger.mock.t.Fatalf("LedgerServiceClientMock.UpdateLedger mock is already set by Set")
 	}
@@ -3419,7 +3419,7 @@ func (mmUpdateLedger *mLedgerServiceClientMockUpdateLedger) When(ctx context.Con
 }
 
 // Then sets up LedgerServiceClient.UpdateLedger return parameters for the expectation previously defined by the When method
-func (e *LedgerServiceClientMockUpdateLedgerExpectation) Then(pp2 *connect.Response[v11.Ledger], err error) *LedgerServiceClientMock {
+func (e *LedgerServiceClientMockUpdateLedgerExpectation) Then(pp2 *connect.Response[v11.UpdateLedgerResponse], err error) *LedgerServiceClientMock {
 	e.results = &LedgerServiceClientMockUpdateLedgerResults{pp2, err}
 	return e.mock
 }
@@ -3446,7 +3446,7 @@ func (mmUpdateLedger *mLedgerServiceClientMockUpdateLedger) invocationsDone() bo
 }
 
 // UpdateLedger implements mm_ledgerv1connect.LedgerServiceClient
-func (mmUpdateLedger *LedgerServiceClientMock) UpdateLedger(ctx context.Context, pp1 *connect.Request[v11.Ledger]) (pp2 *connect.Response[v11.Ledger], err error) {
+func (mmUpdateLedger *LedgerServiceClientMock) UpdateLedger(ctx context.Context, pp1 *connect.Request[v11.UpdateLedgerRequest]) (pp2 *connect.Response[v11.UpdateLedgerResponse], err error) {
 	mm_atomic.AddUint64(&mmUpdateLedger.beforeUpdateLedgerCounter, 1)
 	defer mm_atomic.AddUint64(&mmUpdateLedger.afterUpdateLedgerCounter, 1)
 
@@ -3602,18 +3602,18 @@ type LedgerServiceClientMockUpdateTransactionExpectation struct {
 // LedgerServiceClientMockUpdateTransactionParams contains parameters of the LedgerServiceClient.UpdateTransaction
 type LedgerServiceClientMockUpdateTransactionParams struct {
 	ctx context.Context
-	pp1 *connect.Request[v11.Transaction]
+	pp1 *connect.Request[v11.UpdateTransactionRequest]
 }
 
 // LedgerServiceClientMockUpdateTransactionParamPtrs contains pointers to parameters of the LedgerServiceClient.UpdateTransaction
 type LedgerServiceClientMockUpdateTransactionParamPtrs struct {
 	ctx *context.Context
-	pp1 **connect.Request[v11.Transaction]
+	pp1 **connect.Request[v11.UpdateTransactionRequest]
 }
 
 // LedgerServiceClientMockUpdateTransactionResults contains results of the LedgerServiceClient.UpdateTransaction
 type LedgerServiceClientMockUpdateTransactionResults struct {
-	pp2 *connect.Response[v11.Transaction]
+	pp2 *connect.Response[v11.UpdateTransactionResponse]
 	err error
 }
 
@@ -3635,7 +3635,7 @@ func (mmUpdateTransaction *mLedgerServiceClientMockUpdateTransaction) Optional()
 }
 
 // Expect sets up expected params for LedgerServiceClient.UpdateTransaction
-func (mmUpdateTransaction *mLedgerServiceClientMockUpdateTransaction) Expect(ctx context.Context, pp1 *connect.Request[v11.Transaction]) *mLedgerServiceClientMockUpdateTransaction {
+func (mmUpdateTransaction *mLedgerServiceClientMockUpdateTransaction) Expect(ctx context.Context, pp1 *connect.Request[v11.UpdateTransactionRequest]) *mLedgerServiceClientMockUpdateTransaction {
 	if mmUpdateTransaction.mock.funcUpdateTransaction != nil {
 		mmUpdateTransaction.mock.t.Fatalf("LedgerServiceClientMock.UpdateTransaction mock is already set by Set")
 	}
@@ -3683,7 +3683,7 @@ func (mmUpdateTransaction *mLedgerServiceClientMockUpdateTransaction) ExpectCtxP
 }
 
 // ExpectPp1Param2 sets up expected param pp1 for LedgerServiceClient.UpdateTransaction
-func (mmUpdateTransaction *mLedgerServiceClientMockUpdateTransaction) ExpectPp1Param2(pp1 *connect.Request[v11.Transaction]) *mLedgerServiceClientMockUpdateTransaction {
+func (mmUpdateTransaction *mLedgerServiceClientMockUpdateTransaction) ExpectPp1Param2(pp1 *connect.Request[v11.UpdateTransactionRequest]) *mLedgerServiceClientMockUpdateTransaction {
 	if mmUpdateTransaction.mock.funcUpdateTransaction != nil {
 		mmUpdateTransaction.mock.t.Fatalf("LedgerServiceClientMock.UpdateTransaction mock is already set by Set")
 	}
@@ -3706,7 +3706,7 @@ func (mmUpdateTransaction *mLedgerServiceClientMockUpdateTransaction) ExpectPp1P
 }
 
 // Inspect accepts an inspector function that has same arguments as the LedgerServiceClient.UpdateTransaction
-func (mmUpdateTransaction *mLedgerServiceClientMockUpdateTransaction) Inspect(f func(ctx context.Context, pp1 *connect.Request[v11.Transaction])) *mLedgerServiceClientMockUpdateTransaction {
+func (mmUpdateTransaction *mLedgerServiceClientMockUpdateTransaction) Inspect(f func(ctx context.Context, pp1 *connect.Request[v11.UpdateTransactionRequest])) *mLedgerServiceClientMockUpdateTransaction {
 	if mmUpdateTransaction.mock.inspectFuncUpdateTransaction != nil {
 		mmUpdateTransaction.mock.t.Fatalf("Inspect function is already set for LedgerServiceClientMock.UpdateTransaction")
 	}
@@ -3717,7 +3717,7 @@ func (mmUpdateTransaction *mLedgerServiceClientMockUpdateTransaction) Inspect(f 
 }
 
 // Return sets up results that will be returned by LedgerServiceClient.UpdateTransaction
-func (mmUpdateTransaction *mLedgerServiceClientMockUpdateTransaction) Return(pp2 *connect.Response[v11.Transaction], err error) *LedgerServiceClientMock {
+func (mmUpdateTransaction *mLedgerServiceClientMockUpdateTransaction) Return(pp2 *connect.Response[v11.UpdateTransactionResponse], err error) *LedgerServiceClientMock {
 	if mmUpdateTransaction.mock.funcUpdateTransaction != nil {
 		mmUpdateTransaction.mock.t.Fatalf("LedgerServiceClientMock.UpdateTransaction mock is already set by Set")
 	}
@@ -3731,7 +3731,7 @@ func (mmUpdateTransaction *mLedgerServiceClientMockUpdateTransaction) Return(pp2
 }
 
 // Set uses given function f to mock the LedgerServiceClient.UpdateTransaction method
-func (mmUpdateTransaction *mLedgerServiceClientMockUpdateTransaction) Set(f func(ctx context.Context, pp1 *connect.Request[v11.Transaction]) (pp2 *connect.Response[v11.Transaction], err error)) *LedgerServiceClientMock {
+func (mmUpdateTransaction *mLedgerServiceClientMockUpdateTransaction) Set(f func(ctx context.Context, pp1 *connect.Request[v11.UpdateTransactionRequest]) (pp2 *connect.Response[v11.UpdateTransactionResponse], err error)) *LedgerServiceClientMock {
 	if mmUpdateTransaction.defaultExpectation != nil {
 		mmUpdateTransaction.mock.t.Fatalf("Default expectation is already set for the LedgerServiceClient.UpdateTransaction method")
 	}
@@ -3747,7 +3747,7 @@ func (mmUpdateTransaction *mLedgerServiceClientMockUpdateTransaction) Set(f func
 
 // When sets expectation for the LedgerServiceClient.UpdateTransaction which will trigger the result defined by the following
 // Then helper
-func (mmUpdateTransaction *mLedgerServiceClientMockUpdateTransaction) When(ctx context.Context, pp1 *connect.Request[v11.Transaction]) *LedgerServiceClientMockUpdateTransactionExpectation {
+func (mmUpdateTransaction *mLedgerServiceClientMockUpdateTransaction) When(ctx context.Context, pp1 *connect.Request[v11.UpdateTransactionRequest]) *LedgerServiceClientMockUpdateTransactionExpectation {
 	if mmUpdateTransaction.mock.funcUpdateTransaction != nil {
 		mmUpdateTransaction.mock.t.Fatalf("LedgerServiceClientMock.UpdateTransaction mock is already set by Set")
 	}
@@ -3762,7 +3762,7 @@ func (mmUpdateTransaction *mLedgerServiceClientMockUpdateTransaction) When(ctx c
 }
 
 // Then sets up LedgerServiceClient.UpdateTransaction return parameters for the expectation previously defined by the When method
-func (e *LedgerServiceClientMockUpdateTransactionExpectation) Then(pp2 *connect.Response[v11.Transaction], err error) *LedgerServiceClientMock {
+func (e *LedgerServiceClientMockUpdateTransactionExpectation) Then(pp2 *connect.Response[v11.UpdateTransactionResponse], err error) *LedgerServiceClientMock {
 	e.results = &LedgerServiceClientMockUpdateTransactionResults{pp2, err}
 	return e.mock
 }
@@ -3789,7 +3789,7 @@ func (mmUpdateTransaction *mLedgerServiceClientMockUpdateTransaction) invocation
 }
 
 // UpdateTransaction implements mm_ledgerv1connect.LedgerServiceClient
-func (mmUpdateTransaction *LedgerServiceClientMock) UpdateTransaction(ctx context.Context, pp1 *connect.Request[v11.Transaction]) (pp2 *connect.Response[v11.Transaction], err error) {
+func (mmUpdateTransaction *LedgerServiceClientMock) UpdateTransaction(ctx context.Context, pp1 *connect.Request[v11.UpdateTransactionRequest]) (pp2 *connect.Response[v11.UpdateTransactionResponse], err error) {
 	mm_atomic.AddUint64(&mmUpdateTransaction.beforeUpdateTransactionCounter, 1)
 	defer mm_atomic.AddUint64(&mmUpdateTransaction.afterUpdateTransactionCounter, 1)
 

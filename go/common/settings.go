@@ -1,3 +1,5 @@
+package common
+
 // Copyright 2023-2024 Ant Investor Ltd
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,8 +19,6 @@
 // client options, and other foundational components that are shared between
 // different service implementations.
 //
-
-package common
 
 import (
 	"crypto/tls"

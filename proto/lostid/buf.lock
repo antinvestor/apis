@@ -2,8 +2,8 @@
 version: v2
 deps:
   - name: buf.build/antinvestor/common
-    commit: 95d02ad2fedf4d4089a47b3e3014aee0
-    digest: b5:e442f5bd744c6214406ac681a20290d4f55042ed67e7d1a46f44f18dbb6383fdd051ee6edc6d627a1919ea60a8531a5bf4a2d65bdf2ba86f9122406508b988be
+    commit: 92911204fdef4928a8ef5098afb06ceb
+    digest: b5:c1438d70cc451f9d7ea96b1cc28a20a5bf20708cee44fa100243cb0a6aa710b8d4dc76269b597a2d461ef68c39aee0d04aa897db8b5e22aaa08933c30ae908db
   - name: buf.build/bufbuild/protovalidate
     commit: 52f32327d4b045a79293a6ad4e7e1236
     digest: b5:cbabc98d4b7b7b0447c9b15f68eeb8a7a44ef8516cb386ac5f66e7fd4062cd6723ed3f452ad8c384b851f79e33d26e7f8a94e2b807282b3def1cd966c7eace97

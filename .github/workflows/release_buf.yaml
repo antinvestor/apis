@@ -1,14 +1,11 @@
 name: Upload to buf.build
 on:
   push:
+    tags:
+      - "v*.*.*"
     paths:
-      - '**.proto'
-      - '**/buf.yaml'
-      - '**/buf.lock'
-      - '**/buf.md'
-      - '**/README.md'
-    branches:
-      - main
+      - 'proto/**'
+
 permissions:
   contents: read
   pull-requests: write
@@ -21,6 +18,37 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
+
+      - name: Get the latest tag
+        id: get_tags
+        run: |
+          # Get the most recent tag that matches the module
+          TAGS=$(git tag --sort=-creatordate | grep "^api/${{ matrix.api_module }}/v" | head -n 1)
+          echo "Found tag: $TAGS"
+          if [[ -z "$TAGS" ]]; then
+            echo "not_enough_tags=true" >> $GITHUB_OUTPUT
+            echo "No tags found for api/${{ matrix.api_module }}."
+          else
+            LATEST_TAG=$(echo "$TAGS" | head -n 1)
+            SECOND_LATEST_TAG=$(echo "$TAGS" | sed -n '2p')
+            echo "latest_tag=$LATEST_TAG" >> $GITHUB_ENV
+            echo "second_latest_tag=$SECOND_LATEST_TAG" >> $GITHUB_ENV
+            echo "not_enough_tags=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Check for changes since the last tag
+        if: steps.get_tags.outputs.not_enough_tags == 'false'
+        id: go_module_changed
+        run: |
+          CHANGES=$(git diff --name-only ${{ env.latest_tag }} HEAD | grep 'api/${{ matrix.api_module }}' || true)
+          if [[ -n "$CHANGES" ]]; then
+            echo "Changes found in api/${{ matrix.api_module }}"
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "No changes found in api/${{ matrix.api_module }}"
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
+
       - uses: bufbuild/buf-action@v1
         with:
           format: true
@@ -29,3 +57,11 @@ jobs:
           push: true
           input: "proto/${{ matrix.api_module }}"
           token: ${{ secrets.BUF_TOKEN }}
+
+      - uses: rickstaa/action-create-tag@v1
+        if: steps.get_tags.outputs.not_enough_tags == 'true' || steps.go_module_changed.outputs.changed == 'true'
+        id: "tag_create"
+        with:
+          tag: api/${{ matrix.api_module }}/${{github.ref_name}}
+          tag_exists_error: false
+          message: "release module api/${{ matrix.api_module }}/${{github.ref_name}}"

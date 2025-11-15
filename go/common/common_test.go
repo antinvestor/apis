@@ -32,19 +32,21 @@ func TestStructValidation(t *testing.T) {
 		Extras: largeStruct,
 	}
 
-	if err := validator.Validate(msg); err == nil {
+	err = validator.Validate(msg)
+	if err == nil {
 		t.Fatalf("expected size validation to fail")
 	}
 
 	// Case 2: Too many fields (> 50)
 	fields := map[string]*structpb.Value{}
-	for i := 0; i < 60; i++ {
+	for i := range 60 {
 		fields[fmt.Sprintf("f%d", i)] = structpb.NewStringValue("x")
 	}
 
 	msg.Extras = &structpb.Struct{Fields: fields}
 
-	if err := validator.Validate(msg); err == nil {
+	err = validator.Validate(msg)
+	if err == nil {
 		t.Fatalf("expected field-count validation to fail")
 	}
 }
