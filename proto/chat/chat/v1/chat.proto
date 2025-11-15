@@ -280,7 +280,7 @@ message RoomEvent {
 
 // Allowed message types. Extendable via new enum values; clients must ignore unknown values.
 enum RoomEventType {
-  ROOM_EVENT_TYPE_SYSTEM = 0;
+  ROOM_EVENT_TYPE_UNSPECIFIED = 0;
   ROOM_EVENT_TYPE_EVENT = 1;
   ROOM_EVENT_TYPE_TEXT = 2;
   ROOM_EVENT_TYPE_ATTACHMENT = 3;
@@ -311,9 +311,9 @@ message PresenceEvent {
 }
 
 enum PresenceStatus {
-  UNKNOWN = 0;
-  OFFLINE = 1;
-  ONLINE = 2;
+  PRESENCE_STATUS_UNSPECIFIED = 0;
+  PRESENCE_STATUS_OFFLINE = 1;
+  PRESENCE_STATUS_ONLINE = 2;
 }
 
 // Read receipts
@@ -717,8 +717,9 @@ message GetClientStateRequest {
   repeated string profile_ids = 2;
 
   enum ClientStateType {
-    CLIENT_STATE_TYPE_PRESENCE = 0;
-    CLIENT_STATE_TYPE_READ_MARKER = 1;
+    CLIENT_STATE_TYPE_UNSPECIFIED = 0;
+    CLIENT_STATE_TYPE_PRESENCE = 1;
+    CLIENT_STATE_TYPE_READ_MARKER = 2;
   }
   ClientStateType stateType = 3;
 }
