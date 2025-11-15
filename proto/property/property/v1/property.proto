@@ -113,12 +113,10 @@ message Locality {
     option (buf.validate.oneof).required = true;
 
     string point = 3 [
-      (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
       (buf.validate.field).string.min_len = 10,
       (buf.validate.field).string.max_len = 100
     ]; // Point location (lat,lng format)
     string boundary = 4 [
-      (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
       (buf.validate.field).string.min_len = 10,
       (buf.validate.field).string.max_len = 2048
     ]; // Boundary polygon (GeoJSON or WKT format)
@@ -279,10 +277,6 @@ message Property {
   google.protobuf.Timestamp started_at = 7 [(buf.validate.field).timestamp.lt_now = true]; // Property start date
   google.protobuf.Timestamp created_at = 8; // Creation timestamp
   google.protobuf.Struct extra = 9 [
-    (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
-    (buf.validate.field).map.values = {
-      string: {min_len: 3}
-    },
     (buf.validate.field).cel = {
       id: "struct.size_limit"
       message: "Struct size exceeds maximum allowed limit of 1MB"
@@ -431,9 +425,15 @@ message UpdatePropertyRequest {
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   google.protobuf.Struct extras = 8 [
-    (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
-    (buf.validate.field).map.values = {
-      string: {min_len: 3}
+    (buf.validate.field).cel = {
+      id: "struct.size_limit"
+      message: "Struct size exceeds maximum allowed limit of 1MB"
+      expression: "size(this) <= 1048576"
+    },
+    (buf.validate.field).cel = {
+      id: "struct.field_count_limit"
+      message: "Struct contains too many fields (max 50)"
+      expression: "this.fields.size() <= 50"
     }
   ];
 }

@@ -27,7 +27,6 @@ package settings.v1;
 import "buf/validate/validate.proto";
 import "common/v1/common.proto";
 import "gnostic/openapi/v3/annotations.proto";
-import "google/protobuf/struct.proto";
 
 option go_package = "github.com/antinvestor/apis/go/settings/v1;settingsv1";
 option java_multiple_files = true;

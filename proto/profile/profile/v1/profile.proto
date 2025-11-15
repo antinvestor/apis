@@ -422,7 +422,7 @@ message CreateContactVerificationRequest {
   string code = 3;
 
   // This is the string amount of time before code expires e.g. 3m or 500s
-  string durationToExpire = 4;
+  string duration_to_expire = 4;
 }
 
 message CreateContactVerificationResponse {

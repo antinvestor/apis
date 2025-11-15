@@ -25,7 +25,6 @@ import "buf/validate/validate.proto";
 // -----------------------------------------------------
 import "common/v1/common.proto";
 import "gnostic/openapi/v3/annotations.proto";
-import "google/protobuf/empty.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 
@@ -82,9 +81,9 @@ option (gnostic.openapi.v3.document) = {
 
 service GatewayService {
   // Bi-directional, long-lived connection. Client sends ConnectRequest (initial auth + acks/commands).
-  // Server streams ServerEvent objects in chronological order for rooms the client is subscribed to.
+  // Server streams ConnectResponse objects in chronological order for rooms the client is subscribed to.
   // Stream resume: client may provide last_received_event_id or resume_token to continue after reconnect.
-  rpc Connect(stream ConnectRequest) returns (stream ServerEvent) {
+  rpc Connect(stream ConnectRequest) returns (stream ConnectResponse) {
     option (gnostic.openapi.v3.operation) = {
       operation_id: "connect"
       summary: "Establish bi-directional streaming connection"
@@ -222,7 +221,7 @@ service ChatService {
 // Server -> Client event payload. All events in a room are delivered over Connect stream.
 // event_id: globally unique id (opaque string) assigned by server, strictly monotonically increasing per room.
 // sequence: strictly increasing 64-bit integer per-room sequence number (useful for resume & ordering).
-message ServerEvent {
+message ConnectResponse {
   string id = 3 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
@@ -329,9 +328,14 @@ message ReceiptEvent {
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   repeated string event_id = 3 [
-    (buf.validate.field).string.min_len = 3,
-    (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+    (buf.validate.field).repeated.min_items = 1,
+    (buf.validate.field).repeated.items = {
+      string: {
+        min_len: 3
+        max_len: 40
+        pattern: "[0-9a-z_-]{3,40}"
+      }
+    }
   ];
 }
 
@@ -387,7 +391,7 @@ message ConnectRequest {
   // The client can send various payloads inside the stream after initial auth:
   oneof payload {
     StreamAck ack = 10;
-    ClientState stateUpdate = 12;
+    ClientState state_update = 12;
     SendEventResponse send_event_ack = 15;
   }
 }
@@ -456,7 +460,7 @@ message GetHistoryRequest {
 }
 
 message GetHistoryResponse {
-  repeated ServerEvent events = 1;
+  repeated ConnectResponse events = 1;
   string next_cursor = 2; // opaque; empty when no more pages
   string prev_cursor = 3;
 }
@@ -700,7 +704,7 @@ message UpdateClientStateRequest {
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
-  repeated ClientState clientStates = 3;
+  repeated ClientState client_states = 3;
 }
 
 message UpdateClientStateResponse {
@@ -721,10 +725,10 @@ message GetClientStateRequest {
     CLIENT_STATE_TYPE_PRESENCE = 1;
     CLIENT_STATE_TYPE_READ_MARKER = 2;
   }
-  ClientStateType stateType = 3;
+  ClientStateType state_type = 3;
 }
 
 message GetClientStateResponse {
   string room_id = 1;
-  repeated ClientState clientState = 2;
+  repeated ClientState client_state = 2;
 }
