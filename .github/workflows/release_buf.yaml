@@ -17,5 +17,9 @@ jobs:
       - uses: actions/checkout@v5
       - uses: bufbuild/buf-action@v1
         with:
+          format: true
+          breaking: true
+          lint: true
+          push: true
           input: "proto/${{ matrix.api_module }}"
           token: ${{ secrets.BUF_TOKEN }}
