@@ -3,7 +3,7 @@ module github.com/antinvestor/apis/go/common
 go 1.25
 
 require (
-	buf.build/gen/go/antinvestor/common/protocolbuffers/go v1.36.10-20251115132242-ce5fe382b414.1
+	buf.build/gen/go/antinvestor/common/protocolbuffers/go v1.36.10-20251115165238-92911204fdef.1
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.10-20250912141014-52f32327d4b0.1
 	buf.build/go/protovalidate v1.0.0
 	connectrpc.com/connect v1.19.1

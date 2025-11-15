@@ -20,13 +20,16 @@ MKFILE_DIR := $(abspath $(lastword $(MAKEFILE_LIST)))
 CUR_DIR := $(dir $(MKFILE_DIR))
 
 define golang_build
-cd go/${1} && $(GO) get -u ./...
 cd go/${1} && $(GO) mod tidy
 cd go/${1} && $(GO) fmt ./...
 cd go/${1} && $(GO) vet ./...
 cd go/${1} && $(GO) build ./...
 cd go/${1} && $(GO) test -vet=off -race -cover ./...
 
+endef
+
+define golang_upgrade
+cd go/${1} && $(GO) get -u ./...
 endef
 
 define connect_handler_mock
@@ -86,6 +89,22 @@ golang_build_all: generate ## Build all packages
 	$(call golang_build,lostid)
 	$(call golang_build,device)
 	$(call golang_build,files)
+
+.PHONY: golang_upgrade_all
+golang_upgrade_all: ## Build all packages
+	$(call golang_upgrade,common)
+	$(call golang_upgrade,chat)
+	$(call golang_upgrade,notification)
+	$(call golang_upgrade,ocr)
+	$(call golang_upgrade,partition)
+	$(call golang_upgrade,payment)
+	$(call golang_upgrade,profile)
+	$(call golang_upgrade,property)
+	$(call golang_upgrade,settings)
+	$(call golang_upgrade,ledger)
+	$(call golang_upgrade,lostid)
+	$(call golang_upgrade,device)
+	$(call golang_upgrade,files)
 
 
 .PHONY: lintfix
@@ -207,8 +226,8 @@ generate: $(BIN)/buf $(BIN)/license-header  ## Regenerate code and licenses
 	$(MAKE) generate_minimock_mocks
 
 .PHONY: upgrade
-upgrade: ## Upgrade dependencies
-	$(GO) get -u -t ./... && $(GO) mod tidy -v
+upgrade: golang_upgrade_all ## Upgrade dependencies
+	echo "upgrading dependencies done :D"
 
 .PHONY: checkgenerate
 checkgenerate:
