@@ -23,6 +23,9 @@ import (
 	"github.com/antinvestor/apis/go/common"
 )
 
+// sizeEstimateMultiplier is a heuristic multiplier for estimating buffer size.
+const sizeEstimateMultiplier = 4
+
 func processAndValidateOpts(opts []common.ClientOption) (*common.DialSettings, error) {
 	var o common.DialSettings
 	for _, opt := range opts {
@@ -53,7 +56,7 @@ func XAntHeader(pairs ...string) string {
 
 	// Preallocate buffer capacity to reduce reallocations.
 	// Each pair contributes roughly len(key)+len(val)+2 bytes.
-	estSize := n * 4 // light heuristic
+	estSize := n * sizeEstimateMultiplier // light heuristic
 	buf := bytes.NewBuffer(make([]byte, 0, estSize))
 
 	for i := 0; i < n; i += 2 {

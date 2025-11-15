@@ -138,7 +138,7 @@ func NewConnectClientBase(ctx context.Context, opts ...common.ClientOption) (*Co
 // NewHTTPClient creates a new HTTP client with the provided options.
 // If no transport is specified, it defaults to otelhttp.NewTransport(http.DefaultTransport).
 func NewHTTPClient(ctx context.Context, opts ...options.HTTPOption) *http.Client {
-	cfg := &options.HttpConfig{
+	cfg := &options.HTTPConfig{
 		Timeout:     time.Duration(defaultHTTPTimeoutSeconds) * time.Second,
 		IdleTimeout: time.Duration(defaultHTTPIdleTimeoutSeconds) * time.Second,
 		Transport:   otelhttp.NewTransport(http.DefaultTransport),

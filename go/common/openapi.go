@@ -12,6 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// Package common provides shared types, utilities, and constants used across
+// Ant Investor services. It includes common data structures, context keys,
+// client options, and other foundational components that are shared between
+// different service implementations.
+
 package common
 
 import (
@@ -103,7 +108,9 @@ func (h *OpenAPIHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/yaml")
 	w.Header().Set("Cache-Control", "public, max-age=3600")
-	w.Write(output)
+	if _, writeErr := w.Write(output); writeErr != nil {
+		http.Error(w, "Failed to write response", http.StatusInternalServerError)
+	}
 }
 
 func (h *OpenAPIHandler) applyInfoOverride(spec map[string]interface{}) {
@@ -113,6 +120,12 @@ func (h *OpenAPIHandler) applyInfoOverride(spec map[string]interface{}) {
 		spec["info"] = info
 	}
 
+	h.applyBasicInfoFields(info)
+	h.applyContactInfo(info)
+	h.applyLicenseInfo(info)
+}
+
+func (h *OpenAPIHandler) applyBasicInfoFields(info map[string]interface{}) {
 	if h.infoOverride.Title != "" {
 		info["title"] = h.infoOverride.Title
 	}
@@ -125,33 +138,41 @@ func (h *OpenAPIHandler) applyInfoOverride(spec map[string]interface{}) {
 	if h.infoOverride.TermsOfService != "" {
 		info["termsOfService"] = h.infoOverride.TermsOfService
 	}
+}
 
-	if h.infoOverride.Contact != nil {
-		contact := make(map[string]interface{})
-		if h.infoOverride.Contact.Name != "" {
-			contact["name"] = h.infoOverride.Contact.Name
-		}
-		if h.infoOverride.Contact.URL != "" {
-			contact["url"] = h.infoOverride.Contact.URL
-		}
-		if h.infoOverride.Contact.Email != "" {
-			contact["email"] = h.infoOverride.Contact.Email
-		}
-		if len(contact) > 0 {
-			info["contact"] = contact
-		}
+func (h *OpenAPIHandler) applyContactInfo(info map[string]interface{}) {
+	if h.infoOverride.Contact == nil {
+		return
 	}
 
-	if h.infoOverride.License != nil {
-		license := make(map[string]interface{})
-		if h.infoOverride.License.Name != "" {
-			license["name"] = h.infoOverride.License.Name
-		}
-		if h.infoOverride.License.URL != "" {
-			license["url"] = h.infoOverride.License.URL
-		}
-		if len(license) > 0 {
-			info["license"] = license
-		}
+	contact := make(map[string]interface{})
+	if h.infoOverride.Contact.Name != "" {
+		contact["name"] = h.infoOverride.Contact.Name
+	}
+	if h.infoOverride.Contact.URL != "" {
+		contact["url"] = h.infoOverride.Contact.URL
+	}
+	if h.infoOverride.Contact.Email != "" {
+		contact["email"] = h.infoOverride.Contact.Email
+	}
+	if len(contact) > 0 {
+		info["contact"] = contact
+	}
+}
+
+func (h *OpenAPIHandler) applyLicenseInfo(info map[string]interface{}) {
+	if h.infoOverride.License == nil {
+		return
+	}
+
+	license := make(map[string]interface{})
+	if h.infoOverride.License.Name != "" {
+		license["name"] = h.infoOverride.License.Name
+	}
+	if h.infoOverride.License.URL != "" {
+		license["url"] = h.infoOverride.License.URL
+	}
+	if len(license) > 0 {
+		info["license"] = license
 	}
 }

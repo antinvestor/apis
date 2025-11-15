@@ -12,6 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// Package common provides shared types, utilities, and constants used across
+// Ant Investor services. It includes common data structures, context keys,
+// client options, and other foundational components that are shared between
+// different service implementations.
+
 package common
 
 import (
