@@ -20,7 +20,7 @@ type GatewayServiceClientMock struct {
 	t          minimock.Tester
 	finishOnce sync.Once
 
-	funcConnect          func(ctx context.Context) (pp1 *connect.BidiStreamForClient[v1.ConnectRequest, v1.ServerEvent])
+	funcConnect          func(ctx context.Context) (pp1 *connect.BidiStreamForClient[v1.ConnectRequest, v1.ConnectResponse])
 	funcConnectOrigin    string
 	inspectFuncConnect   func(ctx context.Context)
 	afterConnectCounter  uint64
@@ -80,7 +80,7 @@ type GatewayServiceClientMockConnectParamPtrs struct {
 
 // GatewayServiceClientMockConnectResults contains results of the GatewayServiceClient.Connect
 type GatewayServiceClientMockConnectResults struct {
-	pp1 *connect.BidiStreamForClient[v1.ConnectRequest, v1.ServerEvent]
+	pp1 *connect.BidiStreamForClient[v1.ConnectRequest, v1.ConnectResponse]
 }
 
 // GatewayServiceClientMockConnectOrigins contains origins of expectations of the GatewayServiceClient.Connect
@@ -159,7 +159,7 @@ func (mmConnect *mGatewayServiceClientMockConnect) Inspect(f func(ctx context.Co
 }
 
 // Return sets up results that will be returned by GatewayServiceClient.Connect
-func (mmConnect *mGatewayServiceClientMockConnect) Return(pp1 *connect.BidiStreamForClient[v1.ConnectRequest, v1.ServerEvent]) *GatewayServiceClientMock {
+func (mmConnect *mGatewayServiceClientMockConnect) Return(pp1 *connect.BidiStreamForClient[v1.ConnectRequest, v1.ConnectResponse]) *GatewayServiceClientMock {
 	if mmConnect.mock.funcConnect != nil {
 		mmConnect.mock.t.Fatalf("GatewayServiceClientMock.Connect mock is already set by Set")
 	}
@@ -173,7 +173,7 @@ func (mmConnect *mGatewayServiceClientMockConnect) Return(pp1 *connect.BidiStrea
 }
 
 // Set uses given function f to mock the GatewayServiceClient.Connect method
-func (mmConnect *mGatewayServiceClientMockConnect) Set(f func(ctx context.Context) (pp1 *connect.BidiStreamForClient[v1.ConnectRequest, v1.ServerEvent])) *GatewayServiceClientMock {
+func (mmConnect *mGatewayServiceClientMockConnect) Set(f func(ctx context.Context) (pp1 *connect.BidiStreamForClient[v1.ConnectRequest, v1.ConnectResponse])) *GatewayServiceClientMock {
 	if mmConnect.defaultExpectation != nil {
 		mmConnect.mock.t.Fatalf("Default expectation is already set for the GatewayServiceClient.Connect method")
 	}
@@ -204,7 +204,7 @@ func (mmConnect *mGatewayServiceClientMockConnect) When(ctx context.Context) *Ga
 }
 
 // Then sets up GatewayServiceClient.Connect return parameters for the expectation previously defined by the When method
-func (e *GatewayServiceClientMockConnectExpectation) Then(pp1 *connect.BidiStreamForClient[v1.ConnectRequest, v1.ServerEvent]) *GatewayServiceClientMock {
+func (e *GatewayServiceClientMockConnectExpectation) Then(pp1 *connect.BidiStreamForClient[v1.ConnectRequest, v1.ConnectResponse]) *GatewayServiceClientMock {
 	e.results = &GatewayServiceClientMockConnectResults{pp1}
 	return e.mock
 }
@@ -231,7 +231,7 @@ func (mmConnect *mGatewayServiceClientMockConnect) invocationsDone() bool {
 }
 
 // Connect implements mm_chatv1connect.GatewayServiceClient
-func (mmConnect *GatewayServiceClientMock) Connect(ctx context.Context) (pp1 *connect.BidiStreamForClient[v1.ConnectRequest, v1.ServerEvent]) {
+func (mmConnect *GatewayServiceClientMock) Connect(ctx context.Context) (pp1 *connect.BidiStreamForClient[v1.ConnectRequest, v1.ConnectResponse]) {
 	mm_atomic.AddUint64(&mmConnect.beforeConnectCounter, 1)
 	defer mm_atomic.AddUint64(&mmConnect.afterConnectCounter, 1)
 

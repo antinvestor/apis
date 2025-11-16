@@ -185,7 +185,7 @@ openapi_files_gen_dart: ## Generate the dart open api spec for the files server
 
 
 .PHONY: generate_minimock_mocks
-generate_minimock_mocks: $(BIN)/minimock
+generate_minimock_mocks: upgrade $(BIN)/minimock
 	$(call connect_handler_mock,chat,v1,chat,ChatServiceClient,)
 	$(call connect_handler_mock,chat,v1,gateway,GatewayServiceClient,)
 	$(call connect_handler_mock,device,v1,device,DeviceServiceClient,)

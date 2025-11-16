@@ -4,10 +4,10 @@ go 1.25
 
 require (
 	buf.build/gen/go/antinvestor/common/protocolbuffers/go v1.36.10-20251115174401-cf993dd61681.1
-	buf.build/gen/go/antinvestor/notification/connectrpc/go v1.19.1-20251115132349-19ce77c32b5c.2
-	buf.build/gen/go/antinvestor/notification/protocolbuffers/go v1.36.10-20251115132349-19ce77c32b5c.1
+	buf.build/gen/go/antinvestor/notification/connectrpc/go v1.19.1-20251115181141-8a8c898fd720.2
+	buf.build/gen/go/antinvestor/notification/protocolbuffers/go v1.36.10-20251115181141-8a8c898fd720.1
 	connectrpc.com/connect v1.19.1
-	github.com/antinvestor/apis/go/common v1.48.2
+	github.com/antinvestor/apis/go/common v1.48.6
 	github.com/gojuno/minimock/v3 v3.4.7
 )
 
