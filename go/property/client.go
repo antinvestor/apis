@@ -63,6 +63,6 @@ func NewClient(ctx context.Context, opts ...common.ClientOption) (propertyv1conn
 
 	return &Client{
 		ConnectClientBase:     clientBase,
-		PropertyServiceClient: propertyv1connect.NewPropertyServiceClient(clientBase.Client(), clientBase.Endpoint()),
+		PropertyServiceClient: propertyv1connect.NewPropertyServiceClient(clientBase.Client(), clientBase.Endpoint(), clientBase.Options()...),
 	}, nil
 }

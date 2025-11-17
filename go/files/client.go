@@ -63,6 +63,6 @@ func NewClient(ctx context.Context, opts ...common.ClientOption) (filesv1connect
 
 	return &Client{
 		ConnectClientBase:  clientBase,
-		FilesServiceClient: filesv1connect.NewFilesServiceClient(clientBase.Client(), clientBase.Endpoint()),
+		FilesServiceClient: filesv1connect.NewFilesServiceClient(clientBase.Client(), clientBase.Endpoint(), clientBase.Options()...),
 	}, nil
 }

@@ -63,6 +63,6 @@ func NewClient(ctx context.Context, opts ...common.ClientOption) (settingsv1conn
 
 	return &Client{
 		ConnectClientBase:     clientBase,
-		SettingsServiceClient: settingsv1connect.NewSettingsServiceClient(clientBase.Client(), clientBase.Endpoint()),
+		SettingsServiceClient: settingsv1connect.NewSettingsServiceClient(clientBase.Client(), clientBase.Endpoint(), clientBase.Options()...),
 	}, nil
 }

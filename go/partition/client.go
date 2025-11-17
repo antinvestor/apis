@@ -63,6 +63,6 @@ func NewClient(ctx context.Context, opts ...common.ClientOption) (partitionv1con
 
 	return &Client{
 		ConnectClientBase:      clientBase,
-		PartitionServiceClient: partitionv1connect.NewPartitionServiceClient(clientBase.Client(), clientBase.Endpoint()),
+		PartitionServiceClient: partitionv1connect.NewPartitionServiceClient(clientBase.Client(), clientBase.Endpoint(), clientBase.Options()...),
 	}, nil
 }

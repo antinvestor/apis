@@ -63,6 +63,6 @@ func NewClient(ctx context.Context, opts ...common.ClientOption) (devicev1connec
 
 	return &Client{
 		ConnectClientBase:   clientBase,
-		DeviceServiceClient: devicev1connect.NewDeviceServiceClient(clientBase.Client(), clientBase.Endpoint()),
+		DeviceServiceClient: devicev1connect.NewDeviceServiceClient(clientBase.Client(), clientBase.Endpoint(), clientBase.Options()...),
 	}, nil
 }

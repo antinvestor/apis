@@ -63,6 +63,6 @@ func NewClient(ctx context.Context, opts ...common.ClientOption) (profilev1conne
 
 	return &Client{
 		ConnectClientBase:    clientBase,
-		ProfileServiceClient: profilev1connect.NewProfileServiceClient(clientBase.Client(), clientBase.Endpoint()),
+		ProfileServiceClient: profilev1connect.NewProfileServiceClient(clientBase.Client(), clientBase.Endpoint(), clientBase.Options()...),
 	}, nil
 }

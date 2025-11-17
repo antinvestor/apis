@@ -63,6 +63,6 @@ func NewClient(ctx context.Context, opts ...common.ClientOption) (paymentv1conne
 
 	return &Client{
 		ConnectClientBase:    clientBase,
-		PaymentServiceClient: paymentv1connect.NewPaymentServiceClient(clientBase.Client(), clientBase.Endpoint()),
+		PaymentServiceClient: paymentv1connect.NewPaymentServiceClient(clientBase.Client(), clientBase.Endpoint(), clientBase.Options()...),
 	}, nil
 }

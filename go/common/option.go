@@ -226,3 +226,30 @@ type withClientCertSource struct{ s ClientCertSource }
 func (w withClientCertSource) Apply(o *DialSettings) {
 	o.ClientCertSource = w.s
 }
+
+// WithTraceRequests returns a ClientOption that specifies whether to trace requests.
+func WithTraceRequests() ClientOption {
+	return withTraceRequests(true)
+}
+
+type withTraceRequests bool
+
+func (w withTraceRequests) Apply(o *DialSettings) { o.TraceRequests = bool(w) }
+
+// WithTraceResponses returns a ClientOption that specifies whether to trace responses.
+func WithTraceResponses() ClientOption {
+	return withTraceResponses(true)
+}
+
+type withTraceResponses bool
+
+func (w withTraceResponses) Apply(o *DialSettings) { o.TraceResponses = bool(w) }
+
+// WithTraceHeaders returns a ClientOption that specifies whether to trace headers.
+func WithTraceHeaders() ClientOption {
+	return withTraceHeaders(true)
+}
+
+type withTraceHeaders bool
+
+func (w withTraceHeaders) Apply(o *DialSettings) { o.TraceHeaders = bool(w) }

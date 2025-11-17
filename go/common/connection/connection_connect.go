@@ -87,6 +87,7 @@ func (ccb *ConnectClientBase) SetPartitionInfo(
 }
 
 func NewConnectClientBase(ctx context.Context, opts ...common.ClientOption) (*ConnectClientBase, error) {
+
 	ds, err := processAndValidateOpts(opts)
 	if err != nil {
 		return nil, err
@@ -132,6 +133,15 @@ func NewConnectClientBase(ctx context.Context, opts ...common.ClientOption) (*Co
 	clientBase.interceptors = []connect.Interceptor{
 		interceptors.NewAuthInterceptor(authOpts...),
 		interceptors.NewPartitionInfoInterceptor(clientBase.GetInfo())}
+
+	if ds.TraceRequests || ds.TraceResponses || ds.TraceHeaders {
+		clientBase.interceptors = append(clientBase.interceptors,
+			interceptors.NewLoggingInterceptor(ctx,
+				interceptors.WithLogRequests(ds.TraceRequests),
+				interceptors.WithLogResponses(ds.TraceResponses),
+				interceptors.WithLogHeaders(ds.TraceHeaders)))
+	}
+
 	return &clientBase, nil
 }
 
@@ -145,6 +155,14 @@ func NewHTTPClient(ctx context.Context, opts ...options.HTTPOption) *http.Client
 	}
 	for _, opt := range opts {
 		opt(cfg)
+	}
+
+	if cfg.TraceRequests {
+		cfg.Transport = interceptors.NewLoggingTransport(cfg.Transport,
+			interceptors.WithTransportLogRequests(true),
+			interceptors.WithTransportLogResponses(true),
+			interceptors.WithTransportLogHeaders(cfg.TraceRequestHeaders),
+			interceptors.WithTransportLogBody(true))
 	}
 
 	client := &http.Client{}

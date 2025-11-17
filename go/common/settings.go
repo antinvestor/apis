@@ -53,6 +53,10 @@ type DialSettings struct {
 	CustomClaims     map[string]interface{}
 
 	RequestReason string
+
+	TraceRequests  bool
+	TraceResponses bool
+	TraceHeaders   bool
 }
 
 // GetScopes returns the user-provided scopes, if set, or else falls back to the

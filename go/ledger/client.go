@@ -63,6 +63,6 @@ func NewClient(ctx context.Context, opts ...common.ClientOption) (ledgerv1connec
 
 	return &Client{
 		ConnectClientBase:   clientBase,
-		LedgerServiceClient: ledgerv1connect.NewLedgerServiceClient(clientBase.Client(), clientBase.Endpoint()),
+		LedgerServiceClient: ledgerv1connect.NewLedgerServiceClient(clientBase.Client(), clientBase.Endpoint(), clientBase.Options()...),
 	}, nil
 }

@@ -63,6 +63,6 @@ func NewClient(ctx context.Context, opts ...common.ClientOption) (ocrv1connect.O
 
 	return &Client{
 		ConnectClientBase: clientBase,
-		OCRServiceClient:  ocrv1connect.NewOCRServiceClient(clientBase.Client(), clientBase.Endpoint()),
+		OCRServiceClient:  ocrv1connect.NewOCRServiceClient(clientBase.Client(), clientBase.Endpoint(), clientBase.Options()...),
 	}, nil
 }

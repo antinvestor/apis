@@ -63,6 +63,6 @@ func NewClient(ctx context.Context, opts ...common.ClientOption) (lostidv1connec
 
 	return &Client{
 		ConnectClientBase:   clientBase,
-		LostIdServiceClient: lostidv1connect.NewLostIdServiceClient(clientBase.Client(), clientBase.Endpoint()),
+		LostIdServiceClient: lostidv1connect.NewLostIdServiceClient(clientBase.Client(), clientBase.Endpoint(), clientBase.Options()...),
 	}, nil
 }

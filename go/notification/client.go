@@ -63,6 +63,6 @@ func NewClient(ctx context.Context, opts ...common.ClientOption) (notificationv1
 
 	return &Client{
 		ConnectClientBase:         clientBase,
-		NotificationServiceClient: notificationv1connect.NewNotificationServiceClient(clientBase.Client(), clientBase.Endpoint()),
+		NotificationServiceClient: notificationv1connect.NewNotificationServiceClient(clientBase.Client(), clientBase.Endpoint(), clientBase.Options()...),
 	}, nil
 }

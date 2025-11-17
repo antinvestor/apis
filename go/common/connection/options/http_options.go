@@ -34,6 +34,9 @@ type HTTPConfig struct {
 	IdleTimeout   time.Duration
 
 	CliCredCfg *clientcredentials.Config
+
+	TraceRequests       bool
+	TraceRequestHeaders bool
 }
 
 // WithHTTPTimeout sets the request Timeout.
@@ -75,5 +78,19 @@ func WithHTTPIdleTimeout(timeout time.Duration) HTTPOption {
 func WithHTTPClientCredentials(cfg *clientcredentials.Config) HTTPOption {
 	return func(c *HTTPConfig) {
 		c.CliCredCfg = cfg
+	}
+}
+
+// WithHTTPTraceRequests sets the trace requests.
+func WithHTTPTraceRequests(traceRequests bool) HTTPOption {
+	return func(c *HTTPConfig) {
+		c.TraceRequests = traceRequests
+	}
+}
+
+// WithHTTPTraceRequestHeaders sets the trace request headers.
+func WithHTTPTraceRequestHeaders(traceRequestHeaders bool) HTTPOption {
+	return func(c *HTTPConfig) {
+		c.TraceRequestHeaders = traceRequestHeaders
 	}
 }
