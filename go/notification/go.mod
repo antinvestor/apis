@@ -7,7 +7,7 @@ require (
 	buf.build/gen/go/antinvestor/notification/connectrpc/go v1.19.1-20251115181141-8a8c898fd720.2
 	buf.build/gen/go/antinvestor/notification/protocolbuffers/go v1.36.10-20251115181141-8a8c898fd720.1
 	connectrpc.com/connect v1.19.1
-	github.com/antinvestor/apis/go/common v1.48.7
+	github.com/antinvestor/apis/go/common v1.48.10
 	github.com/gojuno/minimock/v3 v3.4.7
 )
 
@@ -33,7 +33,7 @@ require (
 	golang.org/x/sys v0.38.0 // indirect
 	golang.org/x/text v0.31.0 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20251111163417-95abcf5c77ba // indirect
-	google.golang.org/grpc v1.76.0 // indirect
+	google.golang.org/grpc v1.77.0 // indirect
 	google.golang.org/protobuf v1.36.10 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
