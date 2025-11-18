@@ -33,6 +33,8 @@ import (
 const (
 	defaultHTTPTimeoutSeconds     = 30
 	defaultHTTPIdleTimeoutSeconds = 90
+
+	schemeHTTP = "http"
 )
 
 type ConnectClientBase struct {
@@ -96,7 +98,7 @@ func NewConnectClientBase(ctx context.Context, opts ...common.ClientOption) (*Co
 
 	// automatically switch HTTPDialOpts to enable H2C if we have http:// server
 	u, err := url.Parse(ds.Endpoint)
-	if err == nil && u.Scheme == "http" {
+	if err == nil && u.Scheme == schemeHTTP {
 		ds.HTTPDialOpts = append(ds.HTTPDialOpts, options.WithHTTPEnableH2C())
 	}
 
