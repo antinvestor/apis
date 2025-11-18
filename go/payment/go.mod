@@ -7,7 +7,7 @@ require (
 	buf.build/gen/go/antinvestor/payment/connectrpc/go v1.19.1-20251115181238-898326b59b80.2
 	buf.build/gen/go/antinvestor/payment/protocolbuffers/go v1.36.10-20251115181238-898326b59b80.1
 	connectrpc.com/connect v1.19.1
-	github.com/antinvestor/apis/go/common v1.48.11
+	github.com/antinvestor/apis/go/common v1.48.12
 	github.com/gojuno/minimock/v3 v3.4.7
 )
 
@@ -30,6 +30,7 @@ require (
 	go.opentelemetry.io/otel/trace v1.38.0 // indirect
 	golang.org/x/net v0.47.0 // indirect
 	golang.org/x/oauth2 v0.33.0 // indirect
+	golang.org/x/sync v0.18.0 // indirect
 	golang.org/x/sys v0.38.0 // indirect
 	golang.org/x/text v0.31.0 // indirect
 	google.golang.org/genproto v0.0.0-20251111163417-95abcf5c77ba // indirect
