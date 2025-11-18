@@ -26,6 +26,7 @@ import (
 	"github.com/antinvestor/apis/go/common/connection/options"
 	"github.com/antinvestor/apis/go/common/interceptors"
 	"go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp"
+	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/clientcredentials"
 )
 
@@ -153,7 +154,6 @@ func NewConnectClientBase(ctx context.Context, opts ...common.ClientOption) (*Co
 
 // NewHTTPClient creates a new HTTP client with the provided options.
 // If no transport is specified, it defaults to otelhttp.NewTransport(http.DefaultTransport).
-
 func NewHTTPClient(ctx context.Context, opts ...options.HTTPOption) *http.Client {
 	cfg := &options.HTTPConfig{
 		Timeout:     time.Duration(defaultHTTPTimeoutSeconds) * time.Second,
@@ -198,10 +198,12 @@ func NewHTTPClient(ctx context.Context, opts ...options.HTTPOption) *http.Client
 	}
 
 	if cfg.CliCredCfg != nil {
-		client = cfg.CliCredCfg.Client(ctx)
+		oauth2Ctx := context.WithValue(ctx, oauth2.HTTPClient, client)
+		// Get the OAuth2 client and preserve our transport configuration
+		client = cfg.CliCredCfg.Client(oauth2Ctx)
 	}
 
-	if t, ok := cfg.Transport.(*http.Transport); ok && cfg.IdleTimeout > 0 {
+	if t, ok := base.(*http.Transport); ok && cfg.IdleTimeout > 0 {
 		t.IdleConnTimeout = cfg.IdleTimeout
 	}
 
