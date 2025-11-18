@@ -93,6 +93,12 @@ func NewConnectClientBase(ctx context.Context, opts ...common.ClientOption) (*Co
 		return nil, err
 	}
 
+	// automatically switch HTTPDialOpts to enable H2C if we have http:// server
+	u, err := url.Parse(ds.Endpoint)
+	if err == nil && u.Scheme == "http" {
+		ds.HTTPDialOpts = append(ds.HTTPDialOpts, options.WithHTTPEnableH2C())
+	}
+
 	httpDialOpts := ds.HTTPDialOpts
 
 	httpClient := NewHTTPClient(ctx, httpDialOpts...)
@@ -147,39 +153,56 @@ func NewConnectClientBase(ctx context.Context, opts ...common.ClientOption) (*Co
 
 // NewHTTPClient creates a new HTTP client with the provided options.
 // If no transport is specified, it defaults to otelhttp.NewTransport(http.DefaultTransport).
+
 func NewHTTPClient(ctx context.Context, opts ...options.HTTPOption) *http.Client {
 	cfg := &options.HTTPConfig{
 		Timeout:     time.Duration(defaultHTTPTimeoutSeconds) * time.Second,
 		IdleTimeout: time.Duration(defaultHTTPIdleTimeoutSeconds) * time.Second,
 		Transport:   otelhttp.NewTransport(http.DefaultTransport),
 	}
+
 	for _, opt := range opts {
 		opt(cfg)
 	}
 
+	base := cfg.Transport
+
+	// Enable H2C if desired
+	if cfg.EnableH2C {
+		if t, ok := base.(*http.Transport); ok {
+			protocols := new(http.Protocols)
+			protocols.SetUnencryptedHTTP2(true)
+			t.Protocols = protocols
+		}
+	}
+
+	// Add OpenTelemetry wrapper once
+	if _, ok := base.(*otelhttp.Transport); !ok {
+		base = otelhttp.NewTransport(base)
+	}
+
+	// Optional: request/response logging
 	if cfg.TraceRequests {
-		cfg.Transport = interceptors.NewLoggingTransport(cfg.Transport,
+		base = interceptors.NewLoggingTransport(base,
 			interceptors.WithTransportLogRequests(true),
 			interceptors.WithTransportLogResponses(true),
 			interceptors.WithTransportLogHeaders(cfg.TraceRequestHeaders),
 			interceptors.WithTransportLogBody(true))
 	}
 
-	client := &http.Client{}
+	client := &http.Client{
+		Transport:     base,
+		Timeout:       cfg.Timeout,
+		Jar:           cfg.Jar,
+		CheckRedirect: cfg.CheckRedirect,
+	}
 
 	if cfg.CliCredCfg != nil {
 		client = cfg.CliCredCfg.Client(ctx)
 	}
 
-	client.Transport = cfg.Transport
-	client.Jar = cfg.Jar
-	client.Timeout = cfg.Timeout
-	client.CheckRedirect = cfg.CheckRedirect
-
-	if cfg.IdleTimeout > 0 {
-		if t, ok := client.Transport.(*http.Transport); ok {
-			t.IdleConnTimeout = cfg.IdleTimeout
-		}
+	if t, ok := cfg.Transport.(*http.Transport); ok && cfg.IdleTimeout > 0 {
+		t.IdleConnTimeout = cfg.IdleTimeout
 	}
 
 	return client

@@ -27,8 +27,11 @@ type HTTPOption func(*HTTPConfig)
 
 // HTTPConfig holds HTTP client configuration.
 type HTTPConfig struct {
-	Timeout       time.Duration
-	Transport     http.RoundTripper
+	Timeout   time.Duration
+	Transport http.RoundTripper
+
+	EnableH2C bool
+
 	Jar           http.CookieJar
 	CheckRedirect func(req *http.Request, via []*http.Request) error
 	IdleTimeout   time.Duration
@@ -50,6 +53,13 @@ func WithHTTPTimeout(timeout time.Duration) HTTPOption {
 func WithHTTPTransport(transport http.RoundTripper) HTTPOption {
 	return func(c *HTTPConfig) {
 		c.Transport = transport
+	}
+}
+
+// WithHTTPEnableH2C sets the client to perform HTTP H2C Transport.
+func WithHTTPEnableH2C() HTTPOption {
+	return func(c *HTTPConfig) {
+		c.EnableH2C = true
 	}
 }
 
