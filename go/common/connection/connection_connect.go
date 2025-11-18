@@ -95,7 +95,8 @@ func NewConnectClientBase(ctx context.Context, opts ...common.ClientOption) (*Co
 	httpClient := NewHTTPClient(ctx, httpDialOpts...)
 
 	clientBase := ConnectClientBase{
-		client: httpClient,
+		client:   httpClient,
+		endpoint: ds.Endpoint,
 	}
 	clientBase.SetInfo()
 
@@ -124,7 +125,7 @@ func NewConnectClientBase(ctx context.Context, opts ...common.ClientOption) (*Co
 			EndpointParams: endpointValues,
 		}
 
-		authOpts = append(authOpts, interceptors.WithTokenClient(cfg))
+		authOpts = append(authOpts, interceptors.WithTokenSource(cfg.TokenSource(ctx)))
 	}
 
 	clientBase.interceptors = []connect.Interceptor{
