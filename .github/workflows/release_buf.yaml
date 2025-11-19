@@ -41,12 +41,12 @@ jobs:
         if: steps.get_tags.outputs.not_enough_tags == 'false'
         id: api_module_changed
         run: |
-          CHANGES=$(git diff --name-only ${{ env.latest_tag }} HEAD | grep 'api/${{ matrix.api_module }}' || true)
+          CHANGES=$(git diff --name-only ${{ env.latest_tag }} HEAD | grep 'proto/${{ matrix.api_module }}' || true)
           if [[ -n "$CHANGES" ]]; then
-            echo "Changes found in api/${{ matrix.api_module }}"
+            echo "Changes found in proto/${{ matrix.api_module }}"
             echo "changed=true" >> $GITHUB_OUTPUT
           else
-            echo "No changes found in api/${{ matrix.api_module }}"
+            echo "No changes found in proto/${{ matrix.api_module }}"
             echo "changed=false" >> $GITHUB_OUTPUT
           fi
 
