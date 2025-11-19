@@ -58,7 +58,7 @@ jobs:
           push: true
           breaking: ${{ steps.get_tags.outputs.not_enough_tags == 'false' }}
           input: "proto/${{ matrix.api_module }}"
-          against: "https://github.com/antinvestor/apis.git#format=git,commit=${{ env.latest_tag }},subdir=proto/${{ matrix.api_module }}"
+#          against: "https://github.com/antinvestor/apis.git#format=git,commit=${{ env.latest_tag }},subdir=proto/${{ matrix.api_module }}"
 
       - uses: rickstaa/action-create-tag@v1
         if: steps.get_tags.outputs.not_enough_tags == 'true' || steps.api_module_changed.outputs.changed == 'true'
