@@ -51,7 +51,7 @@ jobs:
           fi
 
       - uses: bufbuild/buf-action@v1
-        if: steps.api_module_changed.outputs.changed == 'true'
+        if: steps.get_tags.outputs.not_enough_tags == 'true' || steps.api_module_changed.outputs.changed == 'true'
         with:
           format: true
           lint: true
