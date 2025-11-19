@@ -84,18 +84,7 @@ message MediaMetadata {
   string base64_hash = 7; // Base64 encoded hash of the file
   string owner_id = 8; // ID of the user who uploaded the file
   string parent_id = 9; // Optional parent media ID
-  google.protobuf.Struct extra = 10 [
-    (buf.validate.field).cel = {
-      id: "struct.size_limit"
-      message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this) <= 1048576"
-    },
-    (buf.validate.field).cel = {
-      id: "struct.field_count_limit"
-      message: "Struct contains too many fields (max 50)"
-      expression: "this.fields.size() <= 50"
-    }
-  ]; // Additional metadata
+  google.protobuf.Struct extra = 10 ; // Additional metadata
 }
 
 // -----------------------------------------------------
@@ -114,18 +103,7 @@ message UploadMetadata {
   string content_type = 1; // MIME type of the content (defaults to application/octet-stream)
   string filename = 2; // Original filename
   int64 total_size = 3; // Total size of the file in bytes (optional)
-  google.protobuf.Struct properties = 4 [
-    (buf.validate.field).cel = {
-      id: "struct.size_limit"
-      message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this) <= 1048576"
-    },
-    (buf.validate.field).cel = {
-      id: "struct.field_count_limit"
-      message: "Struct contains too many fields (max 50)"
-      expression: "this.fields.size() <= 50"
-    }
-  ]; // Additional properties
+  google.protobuf.Struct properties = 4 ; // Additional properties
   // Optional: Set these to upload to a pre-created MXC URI (from CreateContent)
   string server_name = 5; // Server name from the MXC URI (e.g., "example.com" from "mxc://example.com/abc123")
   string media_id = 6 [
@@ -235,18 +213,7 @@ message GetUrlPreviewRequest {
 
 // GetUrlPreviewResponse returns OpenGraph data for the URL.
 message GetUrlPreviewResponse {
-  google.protobuf.Struct og_data = 1 [
-    (buf.validate.field).cel = {
-      id: "struct.size_limit"
-      message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this) <= 1048576"
-    },
-    (buf.validate.field).cel = {
-      id: "struct.field_count_limit"
-      message: "Struct contains too many fields (max 50)"
-      expression: "this.fields.size() <= 50"
-    }
-  ]; // OpenGraph data (og:title, og:description, etc.)
+  google.protobuf.Struct og_data = 1 ; // OpenGraph data (og:title, og:description, etc.)
   int64 matrix_image_size = 2; // Size of the image in bytes
   string og_image = 3; // MXC URI of the preview image
 }
@@ -263,18 +230,7 @@ message GetConfigRequest {
 // GetConfigResponse returns repository configuration.
 message GetConfigResponse {
   int64 max_upload_size = 1; // Maximum upload size in bytes
-  google.protobuf.Struct extra = 2 [
-    (buf.validate.field).cel = {
-      id: "struct.size_limit"
-      message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this) <= 1048576"
-    },
-    (buf.validate.field).cel = {
-      id: "struct.field_count_limit"
-      message: "Struct contains too many fields (max 50)"
-      expression: "this.fields.size() <= 50"
-    }
-  ]; // Additional configuration
+  google.protobuf.Struct extra = 2 ; // Additional configuration
 }
 
 // -----------------------------------------------------

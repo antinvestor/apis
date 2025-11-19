@@ -112,18 +112,7 @@ message ContactObject {
   bool verified = 4; // Whether contact has been verified
   CommunicationLevel communication_level = 5; // User's communication preferences
   common.v1.STATE state = 6; // Contact state
-  google.protobuf.Struct extra = 7 [
-    (buf.validate.field).cel = {
-      id: "struct.size_limit"
-      message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this) <= 1048576"
-    },
-    (buf.validate.field).cel = {
-      id: "struct.field_count_limit"
-      message: "Struct contains too many fields (max 50)"
-      expression: "this.fields.size() <= 50"
-    }
-  ]; // Additional metadata
+  google.protobuf.Struct extra = 7 ; // Additional metadata
 }
 
 // RosterObject represents a contact in a user's roster/contact list.
@@ -139,18 +128,7 @@ message RosterObject {
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ]; // Profile ID of the contact
   ContactObject contact = 3; // Contact information
-  google.protobuf.Struct extra = 4 [
-    (buf.validate.field).cel = {
-      id: "struct.size_limit"
-      message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this) <= 1048576"
-    },
-    (buf.validate.field).cel = {
-      id: "struct.field_count_limit"
-      message: "Struct contains too many fields (max 50)"
-      expression: "this.fields.size() <= 50"
-    }
-  ]; // Additional metadata
+  google.protobuf.Struct extra = 4 ; // Additional metadata
 }
 
 // AddressObject represents a physical address with geocoding.
@@ -186,18 +164,7 @@ message ProfileObject {
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ]; // Unique profile ID
   ProfileType type = 2; // Profile type (person, institution, bot)
-  google.protobuf.Struct properties = 3 [
-    (buf.validate.field).cel = {
-      id: "struct.size_limit"
-      message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this) <= 1048576"
-    },
-    (buf.validate.field).cel = {
-      id: "struct.field_count_limit"
-      message: "Struct contains too many fields (max 50)"
-      expression: "this.fields.size() <= 50"
-    }
-  ]; // Profile properties (name, bio, avatar, etc.)
+  google.protobuf.Struct properties = 3 ; // Profile properties (name, bio, avatar, etc.)
   repeated ContactObject contacts = 4; // Associated contacts
   repeated AddressObject addresses = 5; // Associated addresses
   common.v1.STATE state = 6; // Profile state
@@ -217,18 +184,7 @@ message RelationshipObject {
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ]; // Unique relationship ID
   RelationshipType type = 2; // Relationship type
-  google.protobuf.Struct properties = 3 [
-    (buf.validate.field).cel = {
-      id: "struct.size_limit"
-      message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this) <= 1048576"
-    },
-    (buf.validate.field).cel = {
-      id: "struct.field_count_limit"
-      message: "Struct contains too many fields (max 50)"
-      expression: "this.fields.size() <= 50"
-    }
-  ]; // Relationship properties
+  google.protobuf.Struct properties = 3 ; // Relationship properties
   EntryItem child_entry = 4; // Child entry in relationship
   EntryItem parent_entry = 5; // Parent entry in relationship
   ProfileObject peer_profile = 6; // Peer profile information
@@ -254,18 +210,7 @@ message SearchRequest {
   string start_date = 4;
   string end_date = 5;
   repeated string properties = 6;
-  google.protobuf.Struct extras = 7 [
-    (buf.validate.field).cel = {
-      id: "struct.size_limit"
-      message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this) <= 1048576"
-    },
-    (buf.validate.field).cel = {
-      id: "struct.field_count_limit"
-      message: "Struct contains too many fields (max 50)"
-      expression: "this.fields.size() <= 50"
-    }
-  ];
+  google.protobuf.Struct extras = 7 ;
 }
 
 message SearchResponse {
@@ -297,18 +242,7 @@ message CreateRequest {
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 255
   ];
-  google.protobuf.Struct properties = 3 [
-    (buf.validate.field).cel = {
-      id: "struct.size_limit"
-      message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this) <= 1048576"
-    },
-    (buf.validate.field).cel = {
-      id: "struct.field_count_limit"
-      message: "Struct contains too many fields (max 50)"
-      expression: "this.fields.size() <= 50"
-    }
-  ];
+  google.protobuf.Struct properties = 3 ;
 }
 
 message CreateResponse {
@@ -322,18 +256,7 @@ message UpdateRequest {
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
-  google.protobuf.Struct properties = 2 [
-    (buf.validate.field).cel = {
-      id: "struct.size_limit"
-      message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this) <= 1048576"
-    },
-    (buf.validate.field).cel = {
-      id: "struct.field_count_limit"
-      message: "Struct contains too many fields (max 50)"
-      expression: "this.fields.size() <= 50"
-    }
-  ];
+  google.protobuf.Struct properties = 2 ;
   common.v1.STATE state = 3;
 }
 
@@ -349,18 +272,7 @@ message AddContactRequest {
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   string contact = 2;
-  google.protobuf.Struct extras = 3 [
-    (buf.validate.field).cel = {
-      id: "struct.size_limit"
-      message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this) <= 1048576"
-    },
-    (buf.validate.field).cel = {
-      id: "struct.field_count_limit"
-      message: "Struct contains too many fields (max 50)"
-      expression: "this.fields.size() <= 50"
-    }
-  ];
+  google.protobuf.Struct extras = 3 ;
 }
 
 message AddContactResponse {
@@ -377,18 +289,7 @@ message CreateContactRequest {
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   string contact = 2;
-  google.protobuf.Struct extras = 3 [
-    (buf.validate.field).cel = {
-      id: "struct.size_limit"
-      message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this) <= 1048576"
-    },
-    (buf.validate.field).cel = {
-      id: "struct.field_count_limit"
-      message: "Struct contains too many fields (max 50)"
-      expression: "this.fields.size() <= 50"
-    }
-  ];
+  google.protobuf.Struct extras = 3 ;
 }
 
 message CreateContactResponse {
@@ -458,18 +359,7 @@ message SearchRosterRequest {
   string start_date = 4;
   string end_date = 5;
   repeated string properties = 6;
-  google.protobuf.Struct extras = 7 [
-    (buf.validate.field).cel = {
-      id: "struct.size_limit"
-      message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this) <= 1048576"
-    },
-    (buf.validate.field).cel = {
-      id: "struct.field_count_limit"
-      message: "Struct contains too many fields (max 50)"
-      expression: "this.fields.size() <= 50"
-    }
-  ];
+  google.protobuf.Struct extras = 7 ;
   string profile_id = 8 [
     (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3,
@@ -586,18 +476,7 @@ message AddRelationshipRequest {
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   RelationshipType type = 6;
-  google.protobuf.Struct properties = 7 [
-    (buf.validate.field).cel = {
-      id: "struct.size_limit"
-      message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this) <= 1048576"
-    },
-    (buf.validate.field).cel = {
-      id: "struct.field_count_limit"
-      message: "Struct contains too many fields (max 50)"
-      expression: "this.fields.size() <= 50"
-    }
-  ];
+  google.protobuf.Struct properties = 7 ;
 }
 
 message AddRelationshipResponse {

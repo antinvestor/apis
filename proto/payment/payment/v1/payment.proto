@@ -88,18 +88,7 @@ message Payment {
   string date_created = 13; // Creation timestamp (RFC3339)
   string date_processed = 14; // Processing timestamp (RFC3339)
   bool outbound = 15; // True if outbound, false if inbound
-  google.protobuf.Struct extra = 16 [
-    (buf.validate.field).cel = {
-      id: "struct.size_limit"
-      message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this) <= 1048576"
-    },
-    (buf.validate.field).cel = {
-      id: "struct.field_count_limit"
-      message: "Struct contains too many fields (max 50)"
-      expression: "this.fields.size() <= 50"
-    }
-  ]; // Additional metadata
+  google.protobuf.Struct extra = 16 ; // Additional metadata
 }
 
 // Account represents a merchant or recipient account.
@@ -175,18 +164,7 @@ message InitiatePromptRequest {
   common.v1.STATUS status = 8; // Payment status
   string route = 9; // Payment route hint (M-PESA, RTGS, INTERNAL)
   Account recipient_account = 10; // Merchant account information
-  google.protobuf.Struct extra = 11 [
-    (buf.validate.field).cel = {
-      id: "struct.size_limit"
-      message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this) <= 1048576"
-    },
-    (buf.validate.field).cel = {
-      id: "struct.field_count_limit"
-      message: "Struct contains too many fields (max 50)"
-      expression: "this.fields.size() <= 50"
-    }
-  ]; // Additional metadata
+  google.protobuf.Struct extra = 11 ; // Additional metadata
 }
 
 // InitiatePromptResponse confirms prompt initiation.
