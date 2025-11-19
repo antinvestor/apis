@@ -52,15 +52,14 @@ jobs:
 
       - uses: bufbuild/buf-action@v1
         if: steps.get_tags.outputs.not_enough_tags == 'true' || steps.api_module_changed.outputs.changed == 'true'
-        env:
-          BUF_TOKEN: ${{ secrets.BUF_TOKEN }}
         with:
           format: true
           lint: true
           push: true
           breaking: ${{ steps.get_tags.outputs.not_enough_tags == 'false' }}
-          breaking_against: "https://github.com/antinvestor/apis.git#format=git,commit=${{ env.latest_tag }},subdir=proto/${{ matrix.api_module }}"
+          against: "https://github.com/antinvestor/apis.git#format=git,commit=${{ env.latest_tag }},subdir=proto/${{ matrix.api_module }}"
           input: "proto/${{ matrix.api_module }}"
+          token: ${{ secrets.BUF_TOKEN }}
 
       - uses: rickstaa/action-create-tag@v1
         if: steps.get_tags.outputs.not_enough_tags == 'true' || steps.api_module_changed.outputs.changed == 'true'
