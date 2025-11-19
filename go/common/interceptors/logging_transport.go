@@ -12,6 +12,11 @@ import (
 	"github.com/pitabwire/util"
 )
 
+const (
+	// defaultMaxBodySize is the default maximum body size to log (1KB).
+	defaultMaxBodySize = 1024
+)
+
 // LoggingTransportOption configures the logging HTTP transport.
 type LoggingTransportOption func(*loggingTransport)
 
@@ -36,9 +41,9 @@ func NewLoggingTransport(transport http.RoundTripper, opts ...LoggingTransportOp
 		transport:    transport,
 		logRequests:  true,
 		logResponses: true,
-		logHeaders:   false, // Don't log headers by default for security
-		logBody:      false, // Don't log body by default for security/size
-		maxBodySize:  1024,  // Max body size to log (1KB)
+		logHeaders:   false,              // Don't log headers by default for security
+		logBody:      false,              // Don't log body by default for security/size
+		maxBodySize:  defaultMaxBodySize, // Max body size to log (1KB)
 	}
 
 	for _, opt := range opts {
@@ -155,30 +160,33 @@ func (t *loggingTransport) logResponse(ctx context.Context, resp *http.Response,
 		return
 	}
 
-	if resp != nil {
-		logger = logger.WithFields(map[string]any{
-			"status":     resp.StatusCode,
-			"statusText": http.StatusText(resp.StatusCode),
-		})
+	if resp == nil {
+		logger.Info("HTTP response received")
+		return
+	}
 
-		if t.logHeaders {
-			headers := make(map[string]string)
-			for name, values := range resp.Header {
-				if len(values) > 0 {
-					headers[name] = values[0]
-				}
+	logger = logger.WithFields(map[string]any{
+		"status":     resp.StatusCode,
+		"statusText": http.StatusText(resp.StatusCode),
+	})
+
+	if t.logHeaders {
+		headers := make(map[string]string)
+		for name, values := range resp.Header {
+			if len(values) > 0 {
+				headers[name] = values[0]
 			}
-			logger = logger.WithField("headers", headers)
 		}
+		logger = logger.WithField("headers", headers)
+	}
 
-		if t.logBody && resp.Body != nil {
-			// Read the body to log it
-			bodyBytes, err := io.ReadAll(io.LimitReader(resp.Body, t.maxBodySize))
-			if err == nil && len(bodyBytes) > 0 {
-				logger = logger.WithField("body", string(bodyBytes))
-				// Restore the body for the caller
-				resp.Body = io.NopCloser(bytes.NewReader(bodyBytes))
-			}
+	if t.logBody && resp.Body != nil {
+		// Read the body to log it
+		bodyBytes, readErr := io.ReadAll(io.LimitReader(resp.Body, t.maxBodySize))
+		if readErr == nil && len(bodyBytes) > 0 {
+			logger = logger.WithField("body", string(bodyBytes))
+			// Restore the body for the caller
+			resp.Body = io.NopCloser(bytes.NewReader(bodyBytes))
 		}
 	}
 

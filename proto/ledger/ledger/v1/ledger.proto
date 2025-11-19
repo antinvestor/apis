@@ -94,7 +94,7 @@ message Ledger {
   ]; // Unique reference/code for the ledger (e.g., "1000", "CASH")
   LedgerType type = 2; // Accounting category type
   string parent = 3; // Parent ledger reference for hierarchical structure
-  google.protobuf.Struct data = 4 ; // Additional ledger metadata (name, description, etc.)
+  google.protobuf.Struct data = 4; // Additional ledger metadata (name, description, etc.)
 }
 
 // Account represents a specific account within a ledger.
@@ -107,7 +107,7 @@ message Account {
   ]; // Unique account reference/number
   string ledger = 3; // Ledger this account belongs to
   google.type.Money balance = 4; // Current cleared balance
-  google.protobuf.Struct data = 5 ; // Additional account metadata (owner, description, etc.)
+  google.protobuf.Struct data = 5; // Additional account metadata (owner, description, etc.)
   google.type.Money uncleared_balance = 6; // Balance including uncleared transactions
   google.type.Money reserved_balance = 7; // Amount held in reservations
 }
@@ -136,7 +136,7 @@ message Transaction {
   // The three-letter currency code defined in ISO 4217.
   string currency_code = 2; // Currency code for all entries (ISO 4217)
   string transacted_at = 3; // Transaction timestamp (RFC3339)
-  google.protobuf.Struct data = 4 ; // Additional transaction metadata (description, source, etc.)
+  google.protobuf.Struct data = 4; // Additional transaction metadata (description, source, etc.)
   repeated TransactionEntry entries = 5; // Transaction entries (must be balanced)
   bool cleared = 6; // Whether transaction has been cleared/posted
   TransactionType type = 7; // Transaction type (normal, reversal, reservation)
@@ -161,7 +161,7 @@ message CreateLedgerRequest {
   ]; // Optional Unique reference/code for the ledger (e.g., "1000", "CASH")
   LedgerType type = 2; // Accounting category type
   string parent_id = 3; // Parent ledger reference for hierarchical structure
-  google.protobuf.Struct data = 4 ; // Additional ledger metadata (name, description, etc.)
+  google.protobuf.Struct data = 4; // Additional ledger metadata (name, description, etc.)
 }
 
 // CreateLedgerResponse returns the newly created ledger.
@@ -176,7 +176,7 @@ message UpdateLedgerRequest {
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ]; // Unique reference/code for the ledger (e.g., "1000", "CASH")
-  google.protobuf.Struct data = 4 ; // Additional ledger metadata (name, description, etc.)
+  google.protobuf.Struct data = 4; // Additional ledger metadata (name, description, etc.)
 }
 
 // UpdateLedgerResponse returns the updated ledger.
@@ -199,7 +199,7 @@ message CreateAccountRequest {
   ]; // Optional Unique account reference/number
   string ledger_id = 3; // Ledger this account belongs to
   string currency = 4; // Current cleared balance
-  google.protobuf.Struct data = 5 ; // Additional account metadata (owner, description, etc.)
+  google.protobuf.Struct data = 5; // Additional account metadata (owner, description, etc.)
 }
 
 // CreateAccountResponse returns the newly created account.
@@ -214,7 +214,7 @@ message UpdateAccountRequest {
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ]; // Unique reference/code for the account (e.g., "1000", "CASH")
-  google.protobuf.Struct data = 4 ; // Additional ledger metadata (name, description, etc.)
+  google.protobuf.Struct data = 4; // Additional ledger metadata (name, description, etc.)
 }
 
 // UpdateAccountResponse returns the updated account.
@@ -237,7 +237,7 @@ message CreateTransactionRequest {
   ]; // Unique transaction reference/ID
   string currency = 2; // Currency code for all entries (ISO 4217)
   string transacted_at = 3; // Transaction timestamp (RFC3339)
-  google.protobuf.Struct data = 4 ; // Additional transaction metadata (description, source, etc.)
+  google.protobuf.Struct data = 4; // Additional transaction metadata (description, source, etc.)
   repeated TransactionEntry entries = 5; // Transaction entries (must be balanced)
   bool cleared = 6; // Whether transaction has been cleared/posted
   TransactionType type = 7; // Transaction type (normal, reversal, reservation)

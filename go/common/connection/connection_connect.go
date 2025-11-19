@@ -78,7 +78,6 @@ func (ccb *ConnectClientBase) SetPartitionInfo(
 }
 
 func NewConnectClientBase(ctx context.Context, opts ...common.ClientOption) (*ConnectClientBase, error) {
-
 	ds, err := processAndValidateOpts(opts)
 	if err != nil {
 		return nil, err

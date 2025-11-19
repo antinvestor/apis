@@ -75,7 +75,7 @@ message TenantObject {
     (buf.validate.field).string.min_len = 10,
     (buf.validate.field).string.max_len = 500
   ]; // Tenant description
-  google.protobuf.Struct properties = 4 ; // Additional tenant metadata
+  google.protobuf.Struct properties = 4; // Additional tenant metadata
   google.protobuf.Timestamp created_at = 5; // Creation timestamp
   common.v1.STATE state = 6; // Tenant state
 }
@@ -100,7 +100,7 @@ message PartitionCreateRequest {
     (buf.validate.field).string.min_len = 10,
     (buf.validate.field).string.max_len = 250
   ];
-  google.protobuf.Struct properties = 5 ;
+  google.protobuf.Struct properties = 5;
 }
 
 message GetTenantRequest {
@@ -122,7 +122,7 @@ message ListTenantRequest {
   string start_date = 4;
   string end_date = 5;
   repeated string properties = 6;
-  google.protobuf.Struct extras = 7 ;
+  google.protobuf.Struct extras = 7;
 }
 
 message ListTenantResponse {
@@ -139,7 +139,7 @@ message CreateTenantRequest {
     (buf.validate.field).string.min_len = 10,
     (buf.validate.field).string.max_len = 500
   ];
-  google.protobuf.Struct properties = 3 ;
+  google.protobuf.Struct properties = 3;
 }
 
 message CreateTenantResponse {
@@ -161,7 +161,7 @@ message UpdateTenantRequest {
     (buf.validate.field).string.max_len = 500
   ];
   common.v1.STATE state = 4;
-  google.protobuf.Struct properties = 5 ;
+  google.protobuf.Struct properties = 5;
 }
 
 message UpdateTenantResponse {
@@ -199,7 +199,7 @@ message ListPartitionRequest {
   string start_date = 4;
   string end_date = 5;
   repeated string properties = 6;
-  google.protobuf.Struct extras = 7 ;
+  google.protobuf.Struct extras = 7;
 }
 
 message ListPartitionResponse {
@@ -226,7 +226,7 @@ message CreatePartitionRequest {
     (buf.validate.field).string.min_len = 10,
     (buf.validate.field).string.max_len = 500
   ];
-  google.protobuf.Struct properties = 5 ;
+  google.protobuf.Struct properties = 5;
 }
 
 message CreatePartitionResponse {
@@ -248,7 +248,7 @@ message UpdatePartitionRequest {
     (buf.validate.field).string.max_len = 500
   ];
   common.v1.STATE state = 4;
-  google.protobuf.Struct properties = 5 ;
+  google.protobuf.Struct properties = 5;
 }
 
 message UpdatePartitionResponse {
@@ -281,7 +281,7 @@ message PartitionObject {
     (buf.validate.field).string.max_len = 500
   ]; // Partition description
   common.v1.STATE state = 6; // Partition state
-  google.protobuf.Struct properties = 7 ; // Additional partition metadata
+  google.protobuf.Struct properties = 7; // Additional partition metadata
   google.protobuf.Timestamp created_at = 8; // Creation timestamp
 }
 
@@ -301,7 +301,7 @@ message PartitionRoleObject {
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 100
   ]; // Role name (admin, editor, viewer, etc.)
-  google.protobuf.Struct properties = 4 ; // Role permissions and metadata
+  google.protobuf.Struct properties = 4; // Role permissions and metadata
   google.protobuf.Timestamp created_at = 5; // Creation timestamp
   common.v1.STATE state = 6; // Role state
 }
@@ -323,7 +323,7 @@ message PageObject {
   ]; // HTML content for the page
   common.v1.STATE state = 4; // Page state
   google.protobuf.Timestamp created_at = 5; // Creation timestamp
-  google.protobuf.Struct properties = 6 ; // Additional page metadata
+  google.protobuf.Struct properties = 6; // Additional page metadata
 }
 
 // AccessObject represents a profile's access to a partition.
@@ -372,7 +372,7 @@ message CreatePartitionRoleRequest {
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 100
   ];
-  google.protobuf.Struct properties = 3 ;
+  google.protobuf.Struct properties = 3;
 }
 
 message CreatePartitionRoleResponse {

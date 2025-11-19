@@ -114,7 +114,7 @@ message KeyObject {
   string created_at = 5; // Timestamp when key was created (RFC3339)
   string expires_at = 6; // Optional expiration timestamp (RFC3339)
   bool is_active = 7; // Whether the key is currently active
-  google.protobuf.Struct extra = 8 ; // Additional key metadata (algorithm, app_id, etc.)
+  google.protobuf.Struct extra = 8; // Additional key metadata (algorithm, app_id, etc.)
 }
 
 // DeviceLog represents an activity log entry for a device.
@@ -136,8 +136,8 @@ message DeviceLog {
   string user_agent = 6; // User agent string (browser/app info)
   string os = 7; // Operating system and version
   string last_seen = 8; // Last activity timestamp (RFC3339)
-  google.protobuf.Struct location = 9 ; // Geographic location data (lat/long, city, country)
-  google.protobuf.Struct extra = 10 ; // Additional log metadata
+  google.protobuf.Struct location = 9; // Geographic location data (lat/long, city, country)
+  google.protobuf.Struct extra = 10; // Additional log metadata
 }
 
 // DeviceObject represents a registered device in the system.
@@ -157,8 +157,8 @@ message DeviceObject {
   string profile_id = 8; // Profile this device is linked to
   Locale locale = 9; // Device locale settings
   PresenceStatus presence = 10; // Device presense status
-  google.protobuf.Struct location = 11 ; // Last known geographic location
-  google.protobuf.Struct properties = 15 ; // Additional device properties (model, manufacturer, etc.)
+  google.protobuf.Struct location = 11; // Last known geographic location
+  google.protobuf.Struct properties = 15; // Additional device properties (model, manufacturer, etc.)
 }
 
 // PresenceObject represents the presence/availability status of a device.
@@ -178,7 +178,7 @@ message PresenceObject {
   string status_message = 4; // Optional custom status message
   string last_active = 5; // Timestamp of last activity (RFC3339)
   string updated_at = 6; // Timestamp when presence was last updated (RFC3339)
-  google.protobuf.Struct extras = 7 ; // Additional presence metadata (activity type, etc.)
+  google.protobuf.Struct extras = 7; // Additional presence metadata (activity type, etc.)
 }
 
 // -----------------------------------------------------
@@ -224,7 +224,7 @@ message SearchRequest {
   string start_date = 4; // Filter devices created after this date (RFC3339)
   string end_date = 5; // Filter devices created before this date (RFC3339)
   repeated string properties = 6; // Specific properties to include in results
-  google.protobuf.Struct extras = 7 ; // Additional search filters
+  google.protobuf.Struct extras = 7; // Additional search filters
 }
 
 // SearchResponse returns devices matching the search criteria.
@@ -235,7 +235,7 @@ message SearchResponse {
 // CreateRequest registers a new device in the system.
 message CreateRequest {
   string name = 2; // User-friendly name for the device
-  google.protobuf.Struct properties = 3 ; // Device properties (model, manufacturer, OS version, etc.)
+  google.protobuf.Struct properties = 3; // Device properties (model, manufacturer, OS version, etc.)
 }
 
 // CreateResponse returns the newly created device.
@@ -251,7 +251,7 @@ message UpdateRequest {
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ]; // Device ID to update
   string name = 2; // New device name (if changing)
-  google.protobuf.Struct properties = 3 ; // Updated device properties
+  google.protobuf.Struct properties = 3; // Updated device properties
 }
 
 // UpdateResponse returns the updated device.
@@ -272,7 +272,7 @@ message LinkRequest {
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ]; // Profile ID to link the device to
-  google.protobuf.Struct properties = 3 ; // Additional linking properties
+  google.protobuf.Struct properties = 3; // Additional linking properties
 }
 
 // LinkResponse returns the linked device.
@@ -320,7 +320,7 @@ message LogRequest {
   string user_agent = 6; // User agent string
   string os = 7; // Operating system and version
   string last_seen = 8; // Timestamp of this activity (RFC3339)
-  google.protobuf.Struct extras = 9 ; // Additional log data (location, app version, etc.)
+  google.protobuf.Struct extras = 9; // Additional log data (location, app version, etc.)
 }
 
 // LogResponse returns the created log entry.
@@ -364,7 +364,7 @@ message AddKeyRequest {
   KeyType key_type = 3; // Type of key (Matrix, FCM, Encryption, etc.)
   bytes data = 4; // The key material or token (will be encrypted at rest)
   string expires_at = 5; // Optional expiration timestamp (RFC3339)
-  google.protobuf.Struct extras = 6 ; // Additional key metadata (algorithm, app_id, etc.)
+  google.protobuf.Struct extras = 6; // Additional key metadata (algorithm, app_id, etc.)
 }
 
 // AddKeyResponse returns the created key.
@@ -423,7 +423,7 @@ message RegisterKeyRequest {
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ]; // Device to register with the service
   KeyType key_type = 2; // Type of service to register with (FCM_TOKEN, etc.)
-  google.protobuf.Struct extras = 3 ; // Service-specific metadata (app_id, platform, etc.)
+  google.protobuf.Struct extras = 3; // Service-specific metadata (app_id, platform, etc.)
 }
 
 // RegisterKeyResponse returns confirmation of registration.
@@ -461,7 +461,7 @@ message UpdatePresenceRequest {
   ]; // Device ID to update presence for
   PresenceStatus status = 2; // New presence status
   string status_message = 3; // Optional custom status message
-  google.protobuf.Struct extras = 4 ; // Additional presence metadata
+  google.protobuf.Struct extras = 4; // Additional presence metadata
 }
 
 // UpdatePresenceResponse returns the updated presence.
@@ -482,8 +482,8 @@ message NotifyMessage {
   ];
   string title = 3; // Notification title
   string body = 4; // Notification body/message
-  google.protobuf.Struct data = 5 ; // Additional notification data/payload (custom data, actions, etc.)
-  google.protobuf.Struct extras = 6 ; // Extra notification options (priority, TTL, badge, sound, etc.)
+  google.protobuf.Struct data = 5; // Additional notification data/payload (custom data, actions, etc.)
+  google.protobuf.Struct extras = 6; // Extra notification options (priority, TTL, badge, sound, etc.)
 }
 
 // NotifyRequest sends one or more notifications to a device using its registered keys.
@@ -516,7 +516,7 @@ message NotifyResult {
   bool success = 1; // True if notification was successfully sent
   string message = 2; // Status message or error details
   string notification_id = 3; // Unique identifier for the sent notification (if provided by service)
-  google.protobuf.Struct extras = 4 ; // Additional response metadata from notification service
+  google.protobuf.Struct extras = 4; // Additional response metadata from notification service
 }
 
 // NotifyResponse confirms the notifications were sent.

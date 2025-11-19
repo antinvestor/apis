@@ -85,7 +85,7 @@ message SearchRequest {
   string id_query = 2; // Specific ID or ID pattern to search for
   Pagination limits = 3; // Pagination parameters
   repeated string properties = 7; // Specific properties/fields to include in results
-  google.protobuf.Struct extras = 8 ; // Service-specific additional search parameters
+  google.protobuf.Struct extras = 8; // Service-specific additional search parameters
 }
 
 // -----------------------------------------------------
@@ -127,7 +127,7 @@ message StatusUpdateRequest {
   STATE state = 2; // New lifecycle state (if changing)
   STATUS status = 3; // New processing status (if changing)
   string external_id = 4; // External system identifier to associate
-  google.protobuf.Struct extras = 5 ; // Additional update parameters
+  google.protobuf.Struct extras = 5; // Additional update parameters
 }
 
 // StatusUpdateResponse returns the updated status after a status update operation.
@@ -185,7 +185,7 @@ message ContactLink {
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,250}"
   ]; // Additional contact details (e.g., email, phone, handle)
 
-  google.protobuf.Struct extras = 10 ; // Extended metadata for the contact link
+  google.protobuf.Struct extras = 10; // Extended metadata for the contact link
 }
 
 // Standard error codes used by API responses.

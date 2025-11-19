@@ -4,6 +4,7 @@ package interceptors
 
 import (
 	"context"
+	"fmt"
 	"sync"
 
 	"connectrpc.com/connect"
@@ -46,7 +47,7 @@ func WithAPIKey(key string) AuthInterceptorOption {
 	}
 }
 
-func (ai *authInterceptor) getTokenStr(ctx context.Context) (string, error) {
+func (ai *authInterceptor) getTokenStr(_ context.Context) (string, error) {
 	if ai.tokenSource == nil && ai.apiKey != "" {
 		return ai.apiKey, nil
 	}
@@ -74,7 +75,10 @@ func (ai *authInterceptor) getTokenStr(ctx context.Context) (string, error) {
 		return "", err
 	}
 
-	return v.(string), nil
+	if tokenStr, ok := v.(string); ok {
+		return tokenStr, nil
+	}
+	return "", fmt.Errorf("unexpected token type: %T", v)
 }
 
 func (ai *authInterceptor) WrapUnary(next connect.UnaryFunc) connect.UnaryFunc {

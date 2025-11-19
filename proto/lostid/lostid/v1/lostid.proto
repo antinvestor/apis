@@ -87,14 +87,14 @@ message CollectibleRequest {
       }
     }
   ]; // File IDs of uploaded images (1-5 images)
-  google.protobuf.Struct properties = 2 ; // Additional item details (type, location found, etc.)
+  google.protobuf.Struct properties = 2; // Additional item details (type, location found, etc.)
 }
 
 // CollectibleResponse returns the registered collectible item.
 message CollectibleResponse {
   string id = 1; // Unique collectible ID
   repeated string file_id = 2; // Associated image file IDs
-  google.protobuf.Struct properties = 3 ; // Item properties
+  google.protobuf.Struct properties = 3; // Item properties
   string state = 4; // Current state (registered, matched, claimed, etc.)
 }
 
@@ -122,7 +122,7 @@ message ListCollectibleResponse {
 message SearchResponse {
   string id = 1; // Unique search ID
   string query = 2; // Search query/description
-  google.protobuf.Struct properties = 3 ; // Search criteria
+  google.protobuf.Struct properties = 3; // Search criteria
   string state = 4; // Current state (active, matched, closed)
 }
 
@@ -177,7 +177,7 @@ message TransactionItem {
 message ProgressResponse {
   string id = 1; // Item ID
   ItemType type = 2; // Item type
-  google.protobuf.Struct properties = 3 ; // Item properties
+  google.protobuf.Struct properties = 3; // Item properties
   string state = 4; // Current state
   repeated ProgressItem items = 5; // Progress history
   repeated TransactionItem transactions = 6; // Associated financial transactions

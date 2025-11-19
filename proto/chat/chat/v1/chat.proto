@@ -243,7 +243,7 @@ message RoomEvent {
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ]; // profile_id or service/bot id
   RoomEventType type = 4; // text, attachment, call_offer, etc.
-  google.protobuf.Struct payload = 6 ; // e.g. {"format":"markdown","mime":"image/png","attachment_id":"..."}
+  google.protobuf.Struct payload = 6; // e.g. {"format":"markdown","mime":"image/png","attachment_id":"..."}
   google.protobuf.Timestamp sent_at = 7;
   bool edited = 8;
   bool redacted = 9;
@@ -388,7 +388,7 @@ message StreamAck {
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   google.protobuf.Timestamp ack_at = 3;
-  google.protobuf.Struct metadata = 6 ;
+  google.protobuf.Struct metadata = 6;
   optional common.v1.ErrorDetail error = 7; // if set, indicates failure reason for this event
 }
 
@@ -447,7 +447,7 @@ message Room {
   ];
   string description = 4;
   bool is_private = 5;
-  google.protobuf.Struct metadata = 6 ;
+  google.protobuf.Struct metadata = 6;
   google.protobuf.Timestamp created_at = 7;
   google.protobuf.Timestamp updated_at = 8;
   string creator_id = 9;
@@ -466,7 +466,7 @@ message CreateRoomRequest {
   string description = 5;
   bool is_private = 6;
   repeated string members = 7; // optional
-  google.protobuf.Struct metadata = 8 ;
+  google.protobuf.Struct metadata = 8;
 }
 
 message CreateRoomResponse {
@@ -481,7 +481,7 @@ message SearchRoomsRequest {
   string start_date = 4;
   string end_date = 5;
   repeated string properties = 6;
-  google.protobuf.Struct extras = 7 ;
+  google.protobuf.Struct extras = 7;
 }
 
 message SearchRoomsResponse {
@@ -496,7 +496,7 @@ message UpdateRoomRequest {
   ];
   string name = 3;
   string topic = 4;
-  google.protobuf.Struct metadata = 5 ;
+  google.protobuf.Struct metadata = 5;
 }
 
 message UpdateRoomResponse {

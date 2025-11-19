@@ -82,7 +82,7 @@ message Language {
   ]; // Unique identifier for the language
   string code = 2; // ISO 639-1 language code (e.g., "en", "es", "fr")
   string name = 3; // Human-readable language name
-  google.protobuf.Struct extra = 4 ; // Additional language metadata
+  google.protobuf.Struct extra = 4; // Additional language metadata
 }
 
 // TemplateData represents localized content for a notification template.
@@ -113,7 +113,7 @@ message Template {
   string name = 2; // Template name (e.g., "welcome_email", "password_reset")
 
   repeated TemplateData data = 4; // Localized template content for different languages/channels
-  google.protobuf.Struct extra = 5 ; // Additional template metadata
+  google.protobuf.Struct extra = 5; // Additional template metadata
 }
 
 // -----------------------------------------------------
@@ -143,7 +143,7 @@ message Notification {
 
   string type = 6; // Notification type (e.g., "email", "sms", "push", "in-app")
   string template = 7; // Template ID to use for rendering
-  google.protobuf.Struct payload = 8 ; // Template variables (e.g., {"name": "John", "amount": "$100"})
+  google.protobuf.Struct payload = 8; // Template variables (e.g., {"name": "John", "amount": "$100"})
   string data = 9; // Pre-rendered notification content (if not using template)
   string language = 10; // Preferred language code for the notification
   bool out_bound = 11; // True if outgoing, false if incoming
@@ -155,7 +155,7 @@ message Notification {
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ]; // Routing identifier for delivery channel selection
   common.v1.StatusResponse status = 14 [(buf.validate.field).ignore = IGNORE_ALWAYS]; // Current status
-  google.protobuf.Struct extras = 15 ; // Additional notification metadata
+  google.protobuf.Struct extras = 15; // Additional notification metadata
 
   PRIORITY priority = 16; // Delivery priority
 }
@@ -225,8 +225,8 @@ message TemplateSearchResponse {
 message TemplateSaveRequest {
   string name = 1; // Template name
   string language_code = 2; // Language code for the template
-  google.protobuf.Struct data = 3 ; // Template content and configuration
-  google.protobuf.Struct extra = 4 ; // Additional template metadata
+  google.protobuf.Struct data = 3; // Template content and configuration
+  google.protobuf.Struct extra = 4; // Additional template metadata
 }
 
 // TemplateSaveResponse returns the saved template.
