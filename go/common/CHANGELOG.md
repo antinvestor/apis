@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.48.24] - 2025-11-27
+
+## Other
+
+- chore(deps): bump github.com/pitabwire/util from 0.3.5 to 0.3.6 in /go/common
+   - PR: #860
+- chore(deps): bump github.com/pitabwire/util in /go/common
+
+
+
 ## [1.48.15] - 2025-11-19
 
 ## Other
