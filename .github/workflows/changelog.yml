@@ -37,7 +37,7 @@ jobs:
           
           # Define all packages
           ALL_PACKAGES=("chat" "common" "device" "files" "ledger" "lostid" "notification" "ocr" "partition" "payment" "profile" "property" "settings")
-          LANGUAGES=("dart" "go" "java")
+          LANGUAGES=("dart")
           
           # Check each language/package combination
           for lang in "${LANGUAGES[@]}"; do
