@@ -2,17 +2,16 @@
 
 package com.antinvestor.apis.profile.client;
 
+import build.buf.gen.profile.v1.*;
 import com.antinvestor.apis.common.base.GrpcClientBase;
 import com.antinvestor.apis.common.config.DefaultConfig;
 import com.antinvestor.apis.common.context.Context;
+import com.antinvestor.apis.common.utilities.IteratorUtil;
 import com.antinvestor.apis.common.utilities.ProtoStructUtil;
-import com.antinvestor.apis.profile.v1.*;
 import io.grpc.ManagedChannel;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -39,20 +38,10 @@ public class ProfilesClient extends GrpcClientBase<ProfileServiceGrpc.ProfileSer
         return setupStub(context, stub);
     }
 
-    public Iterator<List<ProfileObject>> search(Context context, String query) {
+    public Iterable<ProfileObject> search(Context context, String query) {
         var searchRequest = SearchRequest.newBuilder().setQuery(query).build();
         var resp = stub(context).search(searchRequest);
-        return new Iterator<>() {
-            @Override
-            public boolean hasNext() {
-                return resp.hasNext();
-            }
-
-            @Override
-            public List<ProfileObject> next() {
-                return resp.next().getDataList();
-            }
-        };
+        return IteratorUtil.flatMapIterable(resp, SearchResponse::getDataList);
     }
 
     public Optional<ProfileObject> merge(Context context, String ID, String mergeID) {
