@@ -277,6 +277,7 @@ service NotificationService {
   // Search finds notifications matching specified criteria.
   // Supports filtering by date range, type, status, and custom properties.
   rpc Search(common.v1.SearchRequest) returns (stream SearchResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "searchNotifications"
       summary: "Search notifications"
@@ -288,6 +289,7 @@ service NotificationService {
   // Status retrieves the current status of a notification.
   // Returns delivery status, timestamps, and error information if applicable.
   rpc Status(common.v1.StatusRequest) returns (common.v1.StatusResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getNotificationStatus"
       summary: "Get notification status"
@@ -310,6 +312,7 @@ service NotificationService {
   // TemplateSearch finds notification templates matching specified criteria.
   // Supports filtering by language and template name.
   rpc TemplateSearch(TemplateSearchRequest) returns (stream TemplateSearchResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "searchTemplates"
       summary: "Search notification templates"

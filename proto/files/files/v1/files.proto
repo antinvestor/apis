@@ -301,6 +301,7 @@ service FilesService {
 
   // GetContent downloads content from the content repository.
   rpc GetContent(GetContentRequest) returns (GetContentResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getContent"
       summary: "Download content"
@@ -311,6 +312,7 @@ service FilesService {
 
   // GetContentOverrideName downloads content with a specified filename override.
   rpc GetContentOverrideName(GetContentOverrideNameRequest) returns (GetContentOverrideNameResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getContentOverrideName"
       summary: "Download content with filename override"
@@ -322,6 +324,7 @@ service FilesService {
   // GetContentThumbnail retrieves a thumbnail of the content.
   // Supports configurable dimensions, resizing methods, and animated thumbnails.
   rpc GetContentThumbnail(GetContentThumbnailRequest) returns (GetContentThumbnailResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getContentThumbnail"
       summary: "Get content thumbnail"
@@ -332,6 +335,7 @@ service FilesService {
 
   // GetUrlPreview gets OpenGraph preview information for a URL.
   rpc GetUrlPreview(GetUrlPreviewRequest) returns (GetUrlPreviewResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getUrlPreview"
       summary: "Get URL preview"
@@ -354,6 +358,7 @@ service FilesService {
   // SearchMedia searches for media files matching specified criteria.
   // Supports full-text search, filtering by owner, date range, and pagination.
   rpc SearchMedia(SearchMediaRequest) returns (SearchMediaResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "searchMedia"
       summary: "Search media files"

@@ -293,6 +293,7 @@ service LedgerService {
   // SearchLedgers finds ledgers in the chart of accounts.
   // Supports filtering by type, parent, and custom properties.
   rpc SearchLedgers(common.v1.SearchRequest) returns (stream SearchLedgersResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "searchLedgers"
       summary: "Search ledgers"
@@ -326,6 +327,7 @@ service LedgerService {
   // SearchAccounts finds accounts matching specified criteria.
   // Supports filtering by ledger, balance range, and custom properties.
   rpc SearchAccounts(common.v1.SearchRequest) returns (stream SearchAccountsResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "searchAccounts"
       summary: "Search accounts"
@@ -359,6 +361,7 @@ service LedgerService {
   // SearchTransactions finds transactions matching specified criteria.
   // Supports filtering by date range, account, currency, and status.
   rpc SearchTransactions(common.v1.SearchRequest) returns (stream SearchTransactionsResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "searchTransactions"
       summary: "Search transactions"
@@ -403,6 +406,7 @@ service LedgerService {
   // SearchTransactionEntries finds individual transaction entries.
   // Useful for account statement generation and reconciliation.
   rpc SearchTransactionEntries(common.v1.SearchRequest) returns (stream SearchTransactionEntriesResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "searchTransactionEntries"
       summary: "Search transaction entries"
