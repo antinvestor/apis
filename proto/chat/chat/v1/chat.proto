@@ -102,6 +102,7 @@ service ChatService {
 
   // Fetch history for a room. Cursor-based paging (cursor = opaque server token).
   rpc GetHistory(GetHistoryRequest) returns (GetHistoryResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getHistory"
       summary: "Retrieve message history for a room"
@@ -120,6 +121,7 @@ service ChatService {
     };
   }
   rpc SearchRooms(SearchRoomsRequest) returns (stream SearchRoomsResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "searchRooms"
       summary: "Search for chat rooms"
@@ -170,6 +172,7 @@ service ChatService {
     };
   }
   rpc SearchRoomSubscriptions(SearchRoomSubscriptionsRequest) returns (SearchRoomSubscriptionsResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "searchRoomSubscriptions"
       summary: "List room members"
@@ -193,6 +196,7 @@ service ChatService {
 
   // Get client state for a set of profiles in a room
   rpc GetClientState(GetClientStateRequest) returns (GetClientStateResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getClientStates"
       summary: "Get client states for profiles in a room"

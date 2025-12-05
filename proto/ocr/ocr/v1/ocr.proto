@@ -122,6 +122,7 @@ service OCRService {
   // Status retrieves the current status of an async OCR request.
   // Returns processing status and results if available.
   rpc Status(common.v1.StatusRequest) returns (StatusResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getOCRStatus"
       summary: "Get OCR request status"

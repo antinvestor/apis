@@ -382,6 +382,7 @@ service PropertyService {
 
   // ListPropertyType retrieves all property types.
   rpc ListPropertyType(ListPropertyTypeRequest) returns (stream ListPropertyTypeResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "listPropertyTypes"
       summary: "List property types"
@@ -442,6 +443,7 @@ service PropertyService {
 
   // StateOfProperty retrieves the current state of a property.
   rpc StateOfProperty(StateOfPropertyRequest) returns (StateOfPropertyResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getPropertyState"
       summary: "Get property state"
@@ -452,6 +454,7 @@ service PropertyService {
 
   // HistoryOfProperty retrieves the complete state history.
   rpc HistoryOfProperty(HistoryOfPropertyRequest) returns (stream HistoryOfPropertyResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getPropertyHistory"
       summary: "Get property history"
@@ -462,6 +465,7 @@ service PropertyService {
 
   // SearchProperty finds properties matching criteria.
   rpc SearchProperty(SearchPropertyRequest) returns (stream SearchPropertyResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "searchProperties"
       summary: "Search properties"
@@ -472,6 +476,7 @@ service PropertyService {
 
   // ListSubscription retrieves subscriptions for a property.
   rpc ListSubscription(ListSubscriptionRequest) returns (stream ListSubscriptionResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "listSubscriptions"
       summary: "List property subscriptions"

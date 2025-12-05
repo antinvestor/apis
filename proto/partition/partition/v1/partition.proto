@@ -585,6 +585,7 @@ message ListAccessRoleResponse {
 service PartitionService {
   // GetTenant retrieves a tenant by ID.
   rpc GetTenant(GetTenantRequest) returns (GetTenantResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getTenant"
       summary: "Get tenant"
@@ -595,6 +596,7 @@ service PartitionService {
 
   // ListTenant retrieves all tenants matching criteria.
   rpc ListTenant(ListTenantRequest) returns (stream ListTenantResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "listTenants"
       summary: "List tenants"
@@ -625,6 +627,7 @@ service PartitionService {
 
   // ListPartition retrieves all partitions matching criteria.
   rpc ListPartition(ListPartitionRequest) returns (stream ListPartitionResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "listPartitions"
       summary: "List partitions"
@@ -645,6 +648,7 @@ service PartitionService {
 
   // GetPartition retrieves a partition by ID.
   rpc GetPartition(GetPartitionRequest) returns (GetPartitionResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getPartition"
       summary: "Get partition"
@@ -655,6 +659,7 @@ service PartitionService {
 
   // GetPartitionParents retrieves the parent hierarchy.
   rpc GetPartitionParents(GetPartitionParentsRequest) returns (GetPartitionParentsResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getPartitionParents"
       summary: "Get partition parents"
@@ -685,6 +690,7 @@ service PartitionService {
 
   // ListPartitionRole retrieves all roles for a partition.
   rpc ListPartitionRole(ListPartitionRoleRequest) returns (stream ListPartitionRoleResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "listPartitionRoles"
       summary: "List partition roles"
@@ -715,6 +721,7 @@ service PartitionService {
 
   // GetPage retrieves a custom page.
   rpc GetPage(GetPageRequest) returns (GetPageResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getPage"
       summary: "Get custom page"
@@ -745,6 +752,7 @@ service PartitionService {
 
   // GetAccess retrieves an access grant.
   rpc GetAccess(GetAccessRequest) returns (GetAccessResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getAccess"
       summary: "Get access grant"
@@ -775,6 +783,7 @@ service PartitionService {
 
   // ListAccessRole retrieves all roles for an access grant.
   rpc ListAccessRole(ListAccessRoleRequest) returns (stream ListAccessRoleResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "listAccessRoles"
       summary: "List access roles"

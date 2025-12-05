@@ -534,6 +534,7 @@ service DeviceService {
   // GetById retrieves one or more devices by their unique identifiers.
   // Supports batch retrieval for efficiency.
   rpc GetById(GetByIdRequest) returns (GetByIdResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getDeviceById"
       summary: "Get devices by ID"
@@ -545,6 +546,7 @@ service DeviceService {
   // GetBySessionId retrieves a device by its active session identifier.
   // Useful for resolving devices from session tokens.
   rpc GetBySessionId(GetBySessionIdRequest) returns (GetBySessionIdResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getDeviceBySessionId"
       summary: "Get device by session ID"
@@ -556,6 +558,7 @@ service DeviceService {
   // Search finds devices matching specified criteria.
   // Supports filtering by date range, properties, and full-text search.
   rpc Search(SearchRequest) returns (stream SearchResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "searchDevices"
       summary: "Search devices"
@@ -622,6 +625,7 @@ service DeviceService {
   // ListLogs retrieves activity logs for a device.
   // Returns a stream of log entries for the specified device.
   rpc ListLogs(ListLogsRequest) returns (stream ListLogsResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "listDeviceLogs"
       summary: "List device activity logs"
@@ -654,6 +658,7 @@ service DeviceService {
 
   // SearchKey searches for keys or tokens associated with a device.
   rpc SearchKey(SearchKeyRequest) returns (SearchKeyResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "searchDeviceKey"
       summary: "Search keys or tokens"
