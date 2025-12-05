@@ -511,6 +511,7 @@ message DeleteRelationshipResponse {
 service ProfileService {
   // GetById retrieves a profile by its unique ID.
   rpc GetById(GetByIdRequest) returns (GetByIdResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getProfileById"
       summary: "Get profile by ID"
@@ -521,6 +522,7 @@ service ProfileService {
 
   // GetByContact retrieves a profile by contact information.
   rpc GetByContact(GetByContactRequest) returns (GetByContactResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getProfileByContact"
       summary: "Get profile by contact"
@@ -531,6 +533,7 @@ service ProfileService {
 
   // Search finds profiles matching specified criteria.
   rpc Search(SearchRequest) returns (stream SearchResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "searchProfiles"
       summary: "Search profiles"
@@ -621,6 +624,7 @@ service ProfileService {
 
   // SearchRoster searches a user's contact roster.
   rpc SearchRoster(SearchRosterRequest) returns (stream SearchRosterResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "searchRoster"
       summary: "Search roster"
@@ -681,6 +685,7 @@ service ProfileService {
 
   // ListRelationship lists all relationships for a profile.
   rpc ListRelationship(ListRelationshipRequest) returns (stream ListRelationshipResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "listRelationships"
       summary: "List relationships"

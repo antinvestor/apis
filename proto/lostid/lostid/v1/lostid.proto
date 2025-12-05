@@ -224,6 +224,7 @@ service LostIdService {
   // ListCollectible retrieves registered collectibles.
   // Supports pagination or time-based filtering.
   rpc ListCollectible(ListCollectibleRequest) returns (stream ListCollectibleResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "listCollectibles"
       summary: "List found items"
@@ -235,6 +236,7 @@ service LostIdService {
   // Search creates a search request for a lost item.
   // The system will attempt to match with registered collectibles.
   rpc Search(common.v1.SearchRequest) returns (SearchResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "searchLostItem"
       summary: "Search for lost item"
@@ -246,6 +248,7 @@ service LostIdService {
   // ListSearch retrieves search requests.
   // Supports pagination or time-based filtering.
   rpc ListSearch(ListSearchRequest) returns (stream ListSearchResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "listSearches"
       summary: "List search requests"
@@ -268,6 +271,7 @@ service LostIdService {
   // ListTransaction retrieves financial transactions.
   // Includes rewards paid and service fees charged.
   rpc ListTransaction(ListTransactionRequest) returns (stream ListTransactionResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "listTransactions"
       summary: "List financial transactions"
