@@ -2,17 +2,14 @@
 
 package com.antinvestor.apis.settings.client;
 
+import build.buf.gen.common.v1.SearchRequest;
+import build.buf.gen.settings.v1.*;
 import com.antinvestor.apis.common.base.GrpcClientBase;
 import com.antinvestor.apis.common.config.DefaultConfig;
 import com.antinvestor.apis.common.context.Context;
-import com.antinvestor.apis.common.context.DefaultContext;
 import com.antinvestor.apis.common.database.BaseModel;
-import com.antinvestor.apis.common.interceptor.ClientSideGrpcInterceptor;
+import com.antinvestor.apis.common.utilities.IteratorUtil;
 import com.antinvestor.apis.common.utilities.TextUtils;
-import com.antinvestor.apis.common.v1.SearchRequest;
-import com.antinvestor.apis.settings.v1.*;
-import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
@@ -20,11 +17,8 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.concurrent.TimeUnit;
 
 @ApplicationScoped
 public class SettingsClient extends GrpcClientBase<SettingsServiceGrpc.SettingsServiceBlockingStub> {
@@ -285,7 +279,7 @@ public class SettingsClient extends GrpcClientBase<SettingsServiceGrpc.SettingsS
 
     }
 
-    public Iterator<List<SettingObject>> listSetting(Context context, String moduleName, String settingNameQuery) {
+    public Iterable<SettingObject> listSetting(Context context, String moduleName, String settingNameQuery) {
 
         Setting setting = Setting.newBuilder()
                 .setModule(moduleName)
@@ -295,7 +289,7 @@ public class SettingsClient extends GrpcClientBase<SettingsServiceGrpc.SettingsS
         return getListIterator(context, setting);
     }
 
-    public Iterator<List<SettingObject>> listObjectSetting(Context context, String moduleName, BaseModel object, String settingNameQuery) {
+    public Iterable<SettingObject> listObjectSetting(Context context, String moduleName, BaseModel object, String settingNameQuery) {
 
         Setting setting = Setting.newBuilder()
                 .setModule(moduleName)
@@ -306,43 +300,23 @@ public class SettingsClient extends GrpcClientBase<SettingsServiceGrpc.SettingsS
         return getListIterator(context, setting);
     }
 
-    private Iterator<List<SettingObject>> getListIterator(Context context, Setting setting) {
+    private Iterable<SettingObject> getListIterator(Context context, Setting setting) {
         ListRequest request = ListRequest.newBuilder()
                 .setKey(setting)
                 .build();
 
         var response = stub(context).list(request);
-        return new Iterator<>() {
-            @Override
-            public boolean hasNext() {
-                return response.hasNext();
-            }
-
-            @Override
-            public List<SettingObject> next() {
-                return response.next().getDataList();
-            }
-        };
+        return IteratorUtil.flatMapIterable(response, ListResponse::getDataList);
     }
 
 
-    private Iterator<List<SettingObject>> search(Context context, String query) {
+    private Iterable<SettingObject> search(Context context, String query) {
         var request = SearchRequest.newBuilder()
                 .setQuery(query)
                 .build();
 
         var response = stub(context).search(request);
-        return new Iterator<>() {
-            @Override
-            public boolean hasNext() {
-                return response.hasNext();
-            }
-
-            @Override
-            public List<SettingObject> next() {
-                return response.next().getDataList();
-            }
-        };
+        return IteratorUtil.flatMapIterable(response, SearchResponse::getDataList);
     }
 
 

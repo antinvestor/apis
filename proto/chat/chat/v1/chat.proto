@@ -102,6 +102,7 @@ service ChatService {
 
   // Fetch history for a room. Cursor-based paging (cursor = opaque server token).
   rpc GetHistory(GetHistoryRequest) returns (GetHistoryResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getHistory"
       summary: "Retrieve message history for a room"
@@ -120,6 +121,7 @@ service ChatService {
     };
   }
   rpc SearchRooms(SearchRoomsRequest) returns (stream SearchRoomsResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "searchRooms"
       summary: "Search for chat rooms"
@@ -170,6 +172,7 @@ service ChatService {
     };
   }
   rpc SearchRoomSubscriptions(SearchRoomSubscriptionsRequest) returns (SearchRoomSubscriptionsResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "searchRoomSubscriptions"
       summary: "List room members"
@@ -193,6 +196,7 @@ service ChatService {
 
   // Get client state for a set of profiles in a room
   rpc GetClientState(GetClientStateRequest) returns (GetClientStateResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getClientStates"
       summary: "Get client states for profiles in a room"
@@ -243,18 +247,7 @@ message RoomEvent {
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ]; // profile_id or service/bot id
   RoomEventType type = 4; // text, attachment, call_offer, etc.
-  google.protobuf.Struct payload = 6 [
-    (buf.validate.field).cel = {
-      id: "struct.size_limit"
-      message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this) <= 1048576"
-    },
-    (buf.validate.field).cel = {
-      id: "struct.field_count_limit"
-      message: "Struct contains too many fields (max 50)"
-      expression: "this.fields.size() <= 50"
-    }
-  ]; // e.g. {"format":"markdown","mime":"image/png","attachment_id":"..."}
+  google.protobuf.Struct payload = 6; // e.g. {"format":"markdown","mime":"image/png","attachment_id":"..."}
   google.protobuf.Timestamp sent_at = 7;
   bool edited = 8;
   bool redacted = 9;
@@ -399,18 +392,7 @@ message StreamAck {
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   google.protobuf.Timestamp ack_at = 3;
-  google.protobuf.Struct metadata = 6 [
-    (buf.validate.field).cel = {
-      id: "struct.size_limit"
-      message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this) <= 1048576"
-    },
-    (buf.validate.field).cel = {
-      id: "struct.field_count_limit"
-      message: "Struct contains too many fields (max 50)"
-      expression: "this.fields.size() <= 50"
-    }
-  ];
+  google.protobuf.Struct metadata = 6;
   optional common.v1.ErrorDetail error = 7; // if set, indicates failure reason for this event
 }
 
@@ -469,18 +451,7 @@ message Room {
   ];
   string description = 4;
   bool is_private = 5;
-  google.protobuf.Struct metadata = 6 [
-    (buf.validate.field).cel = {
-      id: "struct.size_limit"
-      message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this) <= 1048576"
-    },
-    (buf.validate.field).cel = {
-      id: "struct.field_count_limit"
-      message: "Struct contains too many fields (max 50)"
-      expression: "this.fields.size() <= 50"
-    }
-  ];
+  google.protobuf.Struct metadata = 6;
   google.protobuf.Timestamp created_at = 7;
   google.protobuf.Timestamp updated_at = 8;
   string creator_id = 9;
@@ -499,18 +470,7 @@ message CreateRoomRequest {
   string description = 5;
   bool is_private = 6;
   repeated string members = 7; // optional
-  google.protobuf.Struct metadata = 8 [
-    (buf.validate.field).cel = {
-      id: "struct.size_limit"
-      message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this) <= 1048576"
-    },
-    (buf.validate.field).cel = {
-      id: "struct.field_count_limit"
-      message: "Struct contains too many fields (max 50)"
-      expression: "this.fields.size() <= 50"
-    }
-  ];
+  google.protobuf.Struct metadata = 8;
 }
 
 message CreateRoomResponse {
@@ -525,18 +485,7 @@ message SearchRoomsRequest {
   string start_date = 4;
   string end_date = 5;
   repeated string properties = 6;
-  google.protobuf.Struct extras = 7 [
-    (buf.validate.field).cel = {
-      id: "struct.size_limit"
-      message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this) <= 1048576"
-    },
-    (buf.validate.field).cel = {
-      id: "struct.field_count_limit"
-      message: "Struct contains too many fields (max 50)"
-      expression: "this.fields.size() <= 50"
-    }
-  ];
+  google.protobuf.Struct extras = 7;
 }
 
 message SearchRoomsResponse {
@@ -551,18 +500,7 @@ message UpdateRoomRequest {
   ];
   string name = 3;
   string topic = 4;
-  google.protobuf.Struct metadata = 5 [
-    (buf.validate.field).cel = {
-      id: "struct.size_limit"
-      message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this) <= 1048576"
-    },
-    (buf.validate.field).cel = {
-      id: "struct.field_count_limit"
-      message: "Struct contains too many fields (max 50)"
-      expression: "this.fields.size() <= 50"
-    }
-  ];
+  google.protobuf.Struct metadata = 5;
 }
 
 message UpdateRoomResponse {

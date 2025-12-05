@@ -2,14 +2,15 @@
 
 package com.antinvestor.apis.notification.client;
 
+import build.buf.gen.common.v1.*;
+import build.buf.gen.notification.v1.Notification;
+import build.buf.gen.notification.v1.NotificationServiceGrpc;
+import build.buf.gen.notification.v1.SearchResponse;
 import com.antinvestor.apis.common.base.GrpcClientBase;
 import com.antinvestor.apis.common.config.DefaultConfig;
 import com.antinvestor.apis.common.context.Context;
-import com.antinvestor.apis.common.interceptor.ClientSideGrpcInterceptor;
+import com.antinvestor.apis.common.utilities.IteratorUtil;
 import com.antinvestor.apis.common.utilities.TextUtils;
-import com.antinvestor.apis.common.v1.*;
-import com.antinvestor.apis.notification.v1.*;
-import io.grpc.ManagedChannelBuilder;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
@@ -31,7 +32,7 @@ public class NotificationClient extends GrpcClientBase<NotificationServiceGrpc.N
     @Override
     protected ConnectionConfig getConnectionConfig(Context context, DefaultConfig defaultConfig) {
         var cfg = (NotificationConfig) defaultConfig;
-        return  new ConnectionConfig(cfg.notificationsHostUrl(), cfg.notificationsHostPort(), cfg.authInterceptorEnabled() );
+        return new ConnectionConfig(cfg.notificationsHostUrl(), cfg.notificationsHostPort(), cfg.authInterceptorEnabled());
     }
 
     public NotificationServiceGrpc.NotificationServiceBlockingStub stub(Context context) {
@@ -48,16 +49,10 @@ public class NotificationClient extends GrpcClientBase<NotificationServiceGrpc.N
      */
     public Optional<Notification> getById(Context context, String notificationId) {
         SearchRequest searchFilter = SearchRequest.newBuilder().setIdQuery(notificationId).build();
-        Iterator<SearchResponse> notificationIterator = stub(context).search(searchFilter);
-        if (notificationIterator.hasNext()) {
-            var searchResponse = notificationIterator.next();
-            if (searchResponse.getDataCount() > 0) {
-                return Optional.of(searchResponse.getData(0));
-            }
-        }
-        return Optional.empty();
+        var result = stub(context).search(searchFilter);
+        var iterable = IteratorUtil.flatMapIterable(result, SearchResponse::getDataList);
+        return IteratorUtil.firstOf(iterable);
     }
-
 
 
     public StatusResponse update(Context context, STATE state, STATUS status, String externalId) {
@@ -72,12 +67,12 @@ public class NotificationClient extends GrpcClientBase<NotificationServiceGrpc.N
         return stub(context).statusUpdate(statusUpdateRequest).getData();
     }
 
-    public Iterator<List<Notification>> page(Context context, int page, int size) {
+    public Iterable<Notification> page(Context context, int page, int size) {
         return search(context, null, null, null, page, size);
     }
 
 
-    public Iterator<List<Notification>> search(Context context, String query, LocalDateTime startDate, LocalDateTime endDate, int page, int size) {
+    public Iterable<Notification> search(Context context, String query, LocalDateTime startDate, LocalDateTime endDate, int page, int size) {
 
         var filterBuilder = SearchRequest.newBuilder();
 
@@ -102,17 +97,7 @@ public class NotificationClient extends GrpcClientBase<NotificationServiceGrpc.N
 
         var response = stub(context).search(filterBuilder.build());
 
-        return new Iterator<>() {
-            @Override
-            public boolean hasNext() {
-                return response.hasNext();
-            }
-
-            @Override
-            public List<Notification> next() {
-                return response.next().getDataList();
-            }
-        };
+        return IteratorUtil.flatMapIterable(response, SearchResponse::getDataList);
 
     }
 }

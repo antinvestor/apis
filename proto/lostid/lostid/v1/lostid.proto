@@ -87,36 +87,14 @@ message CollectibleRequest {
       }
     }
   ]; // File IDs of uploaded images (1-5 images)
-  google.protobuf.Struct properties = 2 [
-    (buf.validate.field).cel = {
-      id: "struct.size_limit"
-      message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this) <= 1048576"
-    },
-    (buf.validate.field).cel = {
-      id: "struct.field_count_limit"
-      message: "Struct contains too many fields (max 50)"
-      expression: "this.fields.size() <= 50"
-    }
-  ]; // Additional item details (type, location found, etc.)
+  google.protobuf.Struct properties = 2; // Additional item details (type, location found, etc.)
 }
 
 // CollectibleResponse returns the registered collectible item.
 message CollectibleResponse {
   string id = 1; // Unique collectible ID
   repeated string file_id = 2; // Associated image file IDs
-  google.protobuf.Struct properties = 3 [
-    (buf.validate.field).cel = {
-      id: "struct.size_limit"
-      message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this) <= 1048576"
-    },
-    (buf.validate.field).cel = {
-      id: "struct.field_count_limit"
-      message: "Struct contains too many fields (max 50)"
-      expression: "this.fields.size() <= 50"
-    }
-  ]; // Item properties
+  google.protobuf.Struct properties = 3; // Item properties
   string state = 4; // Current state (registered, matched, claimed, etc.)
 }
 
@@ -144,18 +122,7 @@ message ListCollectibleResponse {
 message SearchResponse {
   string id = 1; // Unique search ID
   string query = 2; // Search query/description
-  google.protobuf.Struct properties = 3 [
-    (buf.validate.field).cel = {
-      id: "struct.size_limit"
-      message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this) <= 1048576"
-    },
-    (buf.validate.field).cel = {
-      id: "struct.field_count_limit"
-      message: "Struct contains too many fields (max 50)"
-      expression: "this.fields.size() <= 50"
-    }
-  ]; // Search criteria
+  google.protobuf.Struct properties = 3; // Search criteria
   string state = 4; // Current state (active, matched, closed)
 }
 
@@ -210,18 +177,7 @@ message TransactionItem {
 message ProgressResponse {
   string id = 1; // Item ID
   ItemType type = 2; // Item type
-  google.protobuf.Struct properties = 3 [
-    (buf.validate.field).cel = {
-      id: "struct.size_limit"
-      message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this) <= 1048576"
-    },
-    (buf.validate.field).cel = {
-      id: "struct.field_count_limit"
-      message: "Struct contains too many fields (max 50)"
-      expression: "this.fields.size() <= 50"
-    }
-  ]; // Item properties
+  google.protobuf.Struct properties = 3; // Item properties
   string state = 4; // Current state
   repeated ProgressItem items = 5; // Progress history
   repeated TransactionItem transactions = 6; // Associated financial transactions
@@ -268,6 +224,7 @@ service LostIdService {
   // ListCollectible retrieves registered collectibles.
   // Supports pagination or time-based filtering.
   rpc ListCollectible(ListCollectibleRequest) returns (stream ListCollectibleResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "listCollectibles"
       summary: "List found items"
@@ -279,6 +236,7 @@ service LostIdService {
   // Search creates a search request for a lost item.
   // The system will attempt to match with registered collectibles.
   rpc Search(common.v1.SearchRequest) returns (SearchResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "searchLostItem"
       summary: "Search for lost item"
@@ -290,6 +248,7 @@ service LostIdService {
   // ListSearch retrieves search requests.
   // Supports pagination or time-based filtering.
   rpc ListSearch(ListSearchRequest) returns (stream ListSearchResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "listSearches"
       summary: "List search requests"
@@ -312,6 +271,7 @@ service LostIdService {
   // ListTransaction retrieves financial transactions.
   // Includes rewards paid and service fees charged.
   rpc ListTransaction(ListTransactionRequest) returns (stream ListTransactionResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "listTransactions"
       summary: "List financial transactions"

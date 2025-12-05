@@ -16,7 +16,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("com.diffplug.spotless:spotless-plugin-gradle:8.0.0")
+        classpath("com.diffplug.spotless:spotless-plugin-gradle:8.1.0")
     }
 }
 
@@ -75,7 +75,7 @@ subprojects {
 
     dependencies {
 
-        api("com.squareup.okhttp3:okhttp:4.10.0")
+        api("com.squareup.okhttp3:okhttp:5.3.2")
         api("com.connectrpc:connect-kotlin-okhttp:0.1.11")
         // Java specific dependencies.
         api("com.connectrpc:connect-kotlin-google-java-ext:0.1.11")
@@ -90,7 +90,7 @@ subprojects {
         api("build.buf.gen:gnostic_gnostic_protocolbuffers_java:33.0.0.1.20230414000709.087bc8072ce4")
 
         api("jakarta.enterprise:jakarta.enterprise.cdi-api:4.1.0")
-        api("com.googlecode.libphonenumber:libphonenumber:9.0.17")
+        api("com.googlecode.libphonenumber:libphonenumber:9.0.20")
 
         api("org.slf4j:slf4j-api:2.0.17")
 

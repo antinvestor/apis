@@ -85,18 +85,7 @@ message SearchRequest {
   string id_query = 2; // Specific ID or ID pattern to search for
   Pagination limits = 3; // Pagination parameters
   repeated string properties = 7; // Specific properties/fields to include in results
-  google.protobuf.Struct extras = 8 [
-    (buf.validate.field).cel = {
-      id: "struct.size_limit"
-      message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this) <= 1048576"
-    },
-    (buf.validate.field).cel = {
-      id: "struct.field_count_limit"
-      message: "Struct contains too many fields (max 50)"
-      expression: "this.fields.size() <= 50"
-    }
-  ]; // Service-specific additional search parameters
+  google.protobuf.Struct extras = 8; // Service-specific additional search parameters
 }
 
 // -----------------------------------------------------
@@ -110,18 +99,7 @@ message StatusRequest {
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ]; // Unique identifier of the entity or operation
-  google.protobuf.Struct extras = 2 [
-    (buf.validate.field).cel = {
-      id: "struct.size_limit"
-      message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this) <= 1048576"
-    },
-    (buf.validate.field).cel = {
-      id: "struct.field_count_limit"
-      message: "Struct contains too many fields (max 50)"
-      expression: "this.fields.size() <= 50"
-    }
-  ]; // Additional context or parameters
+  google.protobuf.Struct extras = 2; // Additional context or parameters
 }
 
 // StatusResponse returns the current state and status of an entity or operation.
@@ -135,18 +113,7 @@ message StatusResponse {
   STATUS status = 3; // Current processing status
   string external_id = 4; // External system identifier (if applicable)
   string transient_id = 5; // Temporary identifier for tracking (e.g., session ID)
-  google.protobuf.Struct extras = 6 [
-    (buf.validate.field).cel = {
-      id: "struct.size_limit"
-      message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this) <= 1048576"
-    },
-    (buf.validate.field).cel = {
-      id: "struct.field_count_limit"
-      message: "Struct contains too many fields (max 50)"
-      expression: "this.fields.size() <= 50"
-    }
-  ]; // Additional status information
+  google.protobuf.Struct extras = 6; // Additional status information
 }
 
 // StatusUpdateRequest updates the state and/or status of an entity or operation.
@@ -160,18 +127,7 @@ message StatusUpdateRequest {
   STATE state = 2; // New lifecycle state (if changing)
   STATUS status = 3; // New processing status (if changing)
   string external_id = 4; // External system identifier to associate
-  google.protobuf.Struct extras = 5 [
-    (buf.validate.field).cel = {
-      id: "struct.size_limit"
-      message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this) <= 1048576"
-    },
-    (buf.validate.field).cel = {
-      id: "struct.field_count_limit"
-      message: "Struct contains too many fields (max 50)"
-      expression: "this.fields.size() <= 50"
-    }
-  ]; // Additional update parameters
+  google.protobuf.Struct extras = 5; // Additional update parameters
 }
 
 // StatusUpdateResponse returns the updated status after a status update operation.
@@ -229,18 +185,7 @@ message ContactLink {
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,250}"
   ]; // Additional contact details (e.g., email, phone, handle)
 
-  google.protobuf.Struct extras = 10 [
-    (buf.validate.field).cel = {
-      id: "struct.size_limit"
-      message: "Struct size exceeds maximum allowed limit of 1MB"
-      expression: "size(this) <= 1048576"
-    },
-    (buf.validate.field).cel = {
-      id: "struct.field_count_limit"
-      message: "Struct contains too many fields (max 50)"
-      expression: "this.fields.size() <= 50"
-    }
-  ]; // Extended metadata for the contact link
+  google.protobuf.Struct extras = 10; // Extended metadata for the contact link
 }
 
 // Standard error codes used by API responses.

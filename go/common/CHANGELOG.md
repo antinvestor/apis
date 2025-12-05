@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.48.24] - 2025-12-05
+
+## Other
+
+- fix breaking check
+   - PR: #861
+- fix breaking check
+
+
+
+## [1.48.15] - 2025-11-19
+
+## Other
+
+- chore(deps): bump buf.build/go/protovalidate from 1.0.0 to 1.0.1 in /go/common
+   - PR: #854
+- chore(deps): bump buf.build/go/protovalidate in /go/common
+
+
+
 ## [1.47.12] - 2025-11-04
 
 ## Feature

@@ -2,15 +2,16 @@
 
 package com.antinvestor.apis.ledger.client;
 
+import build.buf.gen.google.type.Money;
+import build.buf.gen.ledger.v1.CreateTransactionRequest;
+import build.buf.gen.ledger.v1.Transaction;
+import build.buf.gen.ledger.v1.TransactionEntry;
+import build.buf.gen.ledger.v1.TransactionType;
 import com.antinvestor.apis.common.context.Context;
 import com.antinvestor.apis.common.exceptions.STATUSCODES;
 import com.antinvestor.apis.common.exceptions.UnRetriableException;
 import com.antinvestor.apis.common.utilities.ProtoStructUtil;
 import com.antinvestor.apis.common.utilities.TextUtils;
-import com.antinvestor.apis.ledger.v1.TransactionType;
-import com.google.type.Money;
-import com.antinvestor.apis.ledger.v1.Transaction;
-import com.antinvestor.apis.ledger.v1.TransactionEntry;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -88,24 +89,24 @@ public class TransactionBuilder {
         return this;
     }
 
-    public Transaction build() throws UnRetriableException {
+    public CreateTransactionRequest build() throws UnRetriableException {
         String currencyCode = null;
 
         if (Objects.isNull(transactionDate)) {
             transactionDate = LocalDateTime.now(ZoneOffset.UTC).format(DateTimeFormatter.ISO_DATE_TIME);
         }
 
-        Transaction.Builder transactionBuilder = Transaction.newBuilder().setTransactedAt(transactionDate).setType(transactionType).setCleared(cleared).setData(ProtoStructUtil.fromMap(data));
+        CreateTransactionRequest.Builder transactionBuilder = CreateTransactionRequest.newBuilder().setTransactedAt(transactionDate).setType(transactionType).setCleared(cleared).setData(ProtoStructUtil.fromMap(data));
 
         if (!TextUtils.isEmpty(reference)) {
-            transactionBuilder.setReference(reference);
+            transactionBuilder.setId(reference);
         }
 
         for (LocalEntry localEntry : debitEntries) {
 
             currencyCode = validateCurrency(currencyCode, localEntry);
 
-            TransactionEntry transactionEntry = TransactionEntry.newBuilder().setAccount(localEntry.accountReference).setAmount(localEntry.amount).setCredit(false).build();
+            TransactionEntry transactionEntry = TransactionEntry.newBuilder().setAccountId(localEntry.accountReference).setAmount(localEntry.amount).setCredit(false).build();
 
             transactionBuilder.addEntries(transactionEntry);
         }
@@ -114,7 +115,7 @@ public class TransactionBuilder {
 
             currencyCode = validateCurrency(currencyCode, localEntry);
 
-            TransactionEntry transactionEntry = TransactionEntry.newBuilder().setAccount(localEntry.accountReference).setAmount(localEntry.amount).setCredit(true).build();
+            TransactionEntry transactionEntry = TransactionEntry.newBuilder().setAccountId(localEntry.accountReference).setAmount(localEntry.amount).setCredit(true).build();
 
             transactionBuilder.addEntries(transactionEntry);
         }
