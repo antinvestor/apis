@@ -1,4 +1,6 @@
 name: Create/update tag
+permissions:
+  contents: write
 on:
   push:
     tags:
