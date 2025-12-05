@@ -1,4 +1,7 @@
 name: Publish New Release
+permissions:
+  contents: read
+  releases: write
 
 on:
   schedule:
