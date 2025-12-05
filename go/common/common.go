@@ -1,4 +1,4 @@
-package common
+package common //nolint:revive //this is a utility package that is reused
 
 // Copyright (c) 2023 Ant Investor Ltd. Licensed under the Apache License 2.0. See https://www.apache.org/licenses/LICENSE-2.0
 
