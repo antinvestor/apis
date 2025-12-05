@@ -277,6 +277,7 @@ service PaymentService {
   // Status retrieves the current status of a payment.
   // Returns processing state and status details.
   rpc Status(common.v1.StatusRequest) returns (common.v1.StatusResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getPaymentStatus"
       summary: "Get payment status"
@@ -310,6 +311,7 @@ service PaymentService {
   // Search finds payments matching specified criteria.
   // Supports filtering by date, amount, status, route, and more.
   rpc Search(common.v1.SearchRequest) returns (stream SearchResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "searchPayments"
       summary: "Search payments"

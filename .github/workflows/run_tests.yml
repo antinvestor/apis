@@ -10,7 +10,7 @@ jobs:
 
     steps:
       - name: Checkout new code for testing
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Setup go testing infrastructure
         uses: actions/setup-go@v6
         with:

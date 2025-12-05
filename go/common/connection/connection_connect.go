@@ -54,6 +54,8 @@ func (ccb *ConnectClientBase) Options(opts ...connect.ClientOption) []connect.Cl
 		opts = append(opts, connect.WithInterceptors(ccb.interceptors...))
 	}
 
+	opts = append(opts, connect.WithHTTPGet())
+
 	return opts
 }
 

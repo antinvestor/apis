@@ -1,12 +1,12 @@
 # Changelog
 
-## [1.48.24] - 2025-11-27
+## [1.48.24] - 2025-12-05
 
 ## Other
 
-- chore(deps): bump github.com/pitabwire/util from 0.3.5 to 0.3.6 in /go/common
-   - PR: #860
-- chore(deps): bump github.com/pitabwire/util in /go/common
+- fix breaking check
+   - PR: #861
+- fix breaking check
 
 
 

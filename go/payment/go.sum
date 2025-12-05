@@ -1,5 +1,5 @@
-buf.build/gen/go/antinvestor/common/protocolbuffers/go v1.36.10-20251115174401-cf993dd61681.1 h1:Q/OehZnW/MAXCe1YSREfCev2To5P5qsybj0IC9Ac7xQ=
-buf.build/gen/go/antinvestor/common/protocolbuffers/go v1.36.10-20251115174401-cf993dd61681.1/go.mod h1:olvEyNvRmvsLZe2Mdmh6o/BM0M+r2Q5k85YSAUj4XKo=
+buf.build/gen/go/antinvestor/common/protocolbuffers/go v1.36.10-20251119161617-faec0015998a.1 h1:AT3+5J1OAYwNmtkoPFBd/TuT5q7tsPp4I0Gew1yquMg=
+buf.build/gen/go/antinvestor/common/protocolbuffers/go v1.36.10-20251119161617-faec0015998a.1/go.mod h1:olvEyNvRmvsLZe2Mdmh6o/BM0M+r2Q5k85YSAUj4XKo=
 buf.build/gen/go/antinvestor/payment/connectrpc/go v1.19.1-20251115181238-898326b59b80.2 h1:+VLqABMCGUNJHmmy5iS6HDLJj0FK7+fyaHRV/cLhkxw=
 buf.build/gen/go/antinvestor/payment/connectrpc/go v1.19.1-20251115181238-898326b59b80.2/go.mod h1:UiTVGvG1kAsj2FkCQhOHMJeFCXZLf2UzaiO87VnKxDI=
 buf.build/gen/go/antinvestor/payment/protocolbuffers/go v1.36.10-20251115181238-898326b59b80.1 h1:3O1u8qFbzIigVhLXkNwR+YAJNLfqTbdDVozrhz1Ef9U=
@@ -10,8 +10,8 @@ buf.build/gen/go/gnostic/gnostic/protocolbuffers/go v1.36.10-20230414000709-087b
 buf.build/gen/go/gnostic/gnostic/protocolbuffers/go v1.36.10-20230414000709-087bc8072ce4.1/go.mod h1:E0if/vOrI4rwufcOKziOMuFXnmpG1t6LhbZ5fVS6HX0=
 connectrpc.com/connect v1.19.1 h1:R5M57z05+90EfEvCY1b7hBxDVOUl45PrtXtAV2fOC14=
 connectrpc.com/connect v1.19.1/go.mod h1:tN20fjdGlewnSFeZxLKb0xwIZ6ozc3OQs2hTXy4du9w=
-github.com/antinvestor/apis/go/common v1.48.15 h1:SDcRx2lidRE1OS2h8oVolLL2QdXWKNh1i/R2RjAU+iA=
-github.com/antinvestor/apis/go/common v1.48.15/go.mod h1:jdPKqZwMcV/V8zTveG10dZrfxndBtVQ1MnXpkYgkb8s=
+github.com/antinvestor/apis/go/common v1.48.24 h1:NY3eJRK+Tij1yIlqrrkCdAyL9V7KF2Yq8PRoUI3UiU4=
+github.com/antinvestor/apis/go/common v1.48.24/go.mod h1:jdPKqZwMcV/V8zTveG10dZrfxndBtVQ1MnXpkYgkb8s=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/felixge/httpsnoop v1.0.4 h1:NFTV2Zj1bL4mc9sqWACXbQFVBBg2W3GPvqp8/ESS2Wg=

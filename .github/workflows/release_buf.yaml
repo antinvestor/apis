@@ -17,7 +17,7 @@ jobs:
       max-parallel: 1 # This ensures sequential execution of matrix jobs
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Get the latest tag
@@ -57,7 +57,7 @@ jobs:
           lint: true
           push: true
           breaking: ${{ steps.get_tags.outputs.not_enough_tags == 'false' }}
-          against: "https://github.com/antinvestor/apis.git#format=git,commit=${{ env.latest_tag }},subdir=proto/${{ matrix.api_module }}"
+          breaking_against: "https://github.com/antinvestor/apis.git#format=git,commit=${{ env.latest_tag }},subdir=proto/${{ matrix.api_module }}"
           input: "proto/${{ matrix.api_module }}"
           token: ${{ secrets.BUF_TOKEN }}
 

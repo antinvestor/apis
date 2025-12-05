@@ -5,7 +5,7 @@ package com.antinvestor.apis.common.base;
 import com.antinvestor.apis.common.config.DefaultConfig;
 import com.antinvestor.apis.common.context.Context;
 import com.antinvestor.apis.common.context.DefaultContext;
-import com.antinvestor.apis.common.interceptor.ClientSideGrpcInterceptor;
+import com.antinvestor.apis.common.interceptor.grpc.ClientAuthenticationInterceptor;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.AbstractBlockingStub;
@@ -48,7 +48,7 @@ public abstract class GrpcClientBase<T extends AbstractBlockingStub<T>> implemen
         }
 
         if (connectionConfig.enableAuthInterceptor()) {
-            channelBuilder = channelBuilder.intercept(ClientSideGrpcInterceptor.from(context));
+            channelBuilder = channelBuilder.intercept(ClientAuthenticationInterceptor.from(context));
         }
 
         this.channel = channelBuilder
@@ -62,8 +62,8 @@ public abstract class GrpcClientBase<T extends AbstractBlockingStub<T>> implemen
 
     protected T setupStub(Context context, T stub) {
 
-        var tenantId = ClientSideGrpcInterceptor.extractTenantId(context);
-        stub = stub.withOption(ClientSideGrpcInterceptor.TENANT_KEY, tenantId);
+        var tenantId = ClientAuthenticationInterceptor.extractTenantId(context);
+        stub = stub.withOption(ClientAuthenticationInterceptor.TENANT_KEY, tenantId);
 
         stub = stub.withDeadlineAfter(10, TimeUnit.SECONDS);
 

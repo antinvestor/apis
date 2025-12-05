@@ -3,15 +3,15 @@ module github.com/antinvestor/apis/go/chat
 go 1.25
 
 require (
-	buf.build/gen/go/antinvestor/chat/connectrpc/go v1.19.1-20251115181013-3114a42af16d.2
-	buf.build/gen/go/antinvestor/chat/protocolbuffers/go v1.36.10-20251115181013-3114a42af16d.1
+	buf.build/gen/go/antinvestor/chat/connectrpc/go v1.19.1-20251119161636-a379cd055409.2
+	buf.build/gen/go/antinvestor/chat/protocolbuffers/go v1.36.10-20251119161636-a379cd055409.1
 	connectrpc.com/connect v1.19.1
-	github.com/antinvestor/apis/go/common v1.48.15
+	github.com/antinvestor/apis/go/common v1.48.24
 	github.com/gojuno/minimock/v3 v3.4.7
 )
 
 require (
-	buf.build/gen/go/antinvestor/common/protocolbuffers/go v1.36.10-20251115174401-cf993dd61681.1 // indirect
+	buf.build/gen/go/antinvestor/common/protocolbuffers/go v1.36.10-20251119161617-faec0015998a.1 // indirect
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.10-20250912141014-52f32327d4b0.1 // indirect
 	buf.build/gen/go/gnostic/gnostic/protocolbuffers/go v1.36.10-20230414000709-087bc8072ce4.1 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
