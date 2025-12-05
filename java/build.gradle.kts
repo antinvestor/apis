@@ -76,9 +76,9 @@ subprojects {
     dependencies {
 
         api("com.squareup.okhttp3:okhttp:5.3.2")
-        api("com.connectrpc:connect-kotlin-okhttp:0.1.11")
+        api("com.connectrpc:connect-kotlin-okhttp:0.7.4")
         // Java specific dependencies.
-        api("com.connectrpc:connect-kotlin-google-java-ext:0.1.11")
+        api("com.connectrpc:connect-kotlin-google-java-ext:0.7.4")
         api("com.google.protobuf:protobuf-java:4.33.1")
 
 
