@@ -83,9 +83,9 @@ subprojects {
 
 
 
-        api("io.grpc:grpc-protobuf:1.76.0")
-        api("io.grpc:grpc-services:1.76.0")
-        api("io.grpc:grpc-stub:1.76.0")
+        api("io.grpc:grpc-protobuf:1.77.0")
+        api("io.grpc:grpc-services:1.77.0")
+        api("io.grpc:grpc-stub:1.77.0")
         api("build.buf:protovalidate:1.0.1")
         api("build.buf.gen:gnostic_gnostic_protocolbuffers_java:33.0.0.1.20230414000709.087bc8072ce4")
 
@@ -96,7 +96,7 @@ subprojects {
 
         compileOnly("org.apache.tomcat:annotations-api:6.0.53")
 
-        runtimeOnly("io.grpc:grpc-netty-shaded:1.76.0")
+        runtimeOnly("io.grpc:grpc-netty-shaded:1.77.0")
     }
 
     testing {
