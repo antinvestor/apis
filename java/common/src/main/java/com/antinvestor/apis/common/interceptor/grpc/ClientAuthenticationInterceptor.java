@@ -1,6 +1,6 @@
 // Copyright (c) 2023 Ant Investor Ltd. Licensed under the Apache License 2.0. See https://www.apache.org/licenses/LICENSE-2.0
 
-package com.antinvestor.apis.common.interceptor;
+package com.antinvestor.apis.common.interceptor.grpc;
 
 import com.antinvestor.apis.common.context.Context;
 import com.antinvestor.apis.common.context.DefaultKeys;
@@ -17,24 +17,24 @@ import java.net.URISyntaxException;
 import java.util.Map;
 import java.util.Objects;
 
-public class ClientSideGrpcInterceptor implements ClientInterceptor {
+public class ClientAuthenticationInterceptor implements ClientInterceptor {
 
 
     public static final CallOptions.Key<String> TENANT_KEY = CallOptions.Key.create("tenant_id");
     public static final String BEARER_TYPE = "Bearer";
 
-    private static final Logger log = LoggerFactory.getLogger(ClientSideGrpcInterceptor.class);
+    private static final Logger log = LoggerFactory.getLogger(ClientAuthenticationInterceptor.class);
     private static final String JWT_HTTP_AUTH_HEADER_KEY = "Authorization";
     private static final Metadata.Key<String> JWT_BEARER_HEADER_KEY =
             Metadata.Key.of(JWT_HTTP_AUTH_HEADER_KEY, Metadata.ASCII_STRING_MARSHALLER);
 
     private final Map<String, Oauth2ClientHandler> clientOauth2HandlerMap;
 
-    private ClientSideGrpcInterceptor(Map<String, Oauth2ClientHandler> clientOauth2HandlerMap) {
+    private ClientAuthenticationInterceptor(Map<String, Oauth2ClientHandler> clientOauth2HandlerMap) {
         this.clientOauth2HandlerMap = clientOauth2HandlerMap;
     }
 
-    public static ClientSideGrpcInterceptor from(Context context) {
+    public static ClientAuthenticationInterceptor from(Context context) {
 
         var authConfigOptional = AuthenticationUtil.from(context);
         if (authConfigOptional.isEmpty()) {
@@ -43,7 +43,7 @@ public class ClientSideGrpcInterceptor implements ClientInterceptor {
 
         var authConfig = authConfigOptional.get();
         var handlersMap = authConfig.getTenantHandlers();
-        return new ClientSideGrpcInterceptor(handlersMap);
+        return new ClientAuthenticationInterceptor(handlersMap);
 
     }
 

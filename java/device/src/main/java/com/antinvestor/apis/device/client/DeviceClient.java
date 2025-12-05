@@ -2,10 +2,10 @@
 
 package com.antinvestor.apis.device.client;
 
+import build.buf.gen.device.v1.DeviceServiceGrpc;
 import com.antinvestor.apis.common.base.GrpcClientBase;
 import com.antinvestor.apis.common.config.DefaultConfig;
 import com.antinvestor.apis.common.context.Context;
-import com.antinvestor.apis.device.v1.DeviceServiceGrpc;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 

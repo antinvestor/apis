@@ -3,22 +3,21 @@
 package com.antinvestor.apis.payment.client;
 
 
+import build.buf.gen.common.v1.Pagination;
+import build.buf.gen.common.v1.SearchRequest;
+import build.buf.gen.common.v1.StatusResponse;
+import build.buf.gen.common.v1.StatusUpdateRequest;
+import build.buf.gen.payment.v1.*;
 import com.antinvestor.apis.common.base.GrpcClientBase;
 import com.antinvestor.apis.common.config.DefaultConfig;
 import com.antinvestor.apis.common.context.Context;
-import com.antinvestor.apis.common.v1.Pagination;
-import com.antinvestor.apis.common.v1.SearchRequest;
-import com.antinvestor.apis.common.v1.StatusResponse;
-import com.antinvestor.apis.common.v1.StatusUpdateRequest;
-import com.antinvestor.apis.payment.v1.*;
+import com.antinvestor.apis.common.utilities.IteratorUtil;
 import io.grpc.ManagedChannel;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -49,18 +48,12 @@ public class PaymentClient extends GrpcClientBase<PaymentServiceGrpc.PaymentServ
 
         SearchRequest filter = SearchRequest.newBuilder().setIdQuery(paymentID).build();
 
-        Iterator<SearchResponse> paymentIterator = stub(context).search(filter);
-        if (paymentIterator.hasNext()) {
-
-            var searchResponse = paymentIterator.next();
-            if (searchResponse.getDataCount() > 0) {
-                return Optional.of(searchResponse.getData(0));
-            }
-        }
-        return Optional.empty();
+        var paymentIterator = stub(context).search(filter);
+        var stream = IteratorUtil.flatMapIterable(paymentIterator, SearchResponse::getDataList);
+        return IteratorUtil.firstOf(stream);
     }
 
-    public Iterator<List<Payment>> search(Context context, Integer stateInt, String query, LocalDateTime startDate, LocalDateTime endDate, int page, int size) {
+    public Iterable<Payment> search(Context context, Integer stateInt, String query, LocalDateTime startDate, LocalDateTime endDate, int page, int size) {
 
         SearchRequest.Builder filterBuilder = SearchRequest.newBuilder();
 
@@ -83,17 +76,7 @@ public class PaymentClient extends GrpcClientBase<PaymentServiceGrpc.PaymentServ
 
         filterBuilder.setLimits(limitsBuilder.build());
         var response = stub(context).search(filterBuilder.build());
-        return new Iterator<>() {
-            @Override
-            public boolean hasNext() {
-                return response.hasNext();
-            }
-
-            @Override
-            public List<Payment> next() {
-                return response.next().getDataList();
-            }
-        };
+        return IteratorUtil.flatMapIterable(response, SearchResponse::getDataList);
     }
 
     public StatusResponse send(Context context, Payment payment) {

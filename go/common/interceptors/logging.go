@@ -24,8 +24,7 @@ type loggingInterceptor struct {
 
 // NewLoggingInterceptor creates a new logging interceptor.
 // By default, it uses a simple funcr logger and logs both requests and responses.
-func NewLoggingInterceptor(ctx context.Context, opts ...LoggingInterceptorOption) connect.Interceptor {
-
+func NewLoggingInterceptor(_ context.Context, opts ...LoggingInterceptorOption) connect.Interceptor {
 	l := &loggingInterceptor{
 		logRequests:  true,
 		logResponses: true,
@@ -90,7 +89,13 @@ func (l *loggingInterceptor) logRequest(ctx context.Context, req connect.AnyRequ
 	}
 }
 
-func (l *loggingInterceptor) logResponse(ctx context.Context, req connect.AnyRequest, resp connect.AnyResponse, err error, duration time.Duration) {
+func (l *loggingInterceptor) logResponse(
+	ctx context.Context,
+	req connect.AnyRequest,
+	resp connect.AnyResponse,
+	err error,
+	duration time.Duration,
+) {
 	if !l.logResponses {
 		return
 	}
@@ -178,7 +183,7 @@ func (l *loggingInterceptor) WrapStreamingHandler(next connect.StreamingHandlerF
 	}
 }
 
-// loggingClientConn wraps StreamingClientConn to add logging
+// loggingClientConn wraps StreamingClientConn to add logging.
 type loggingClientConn struct {
 	connect.StreamingClientConn
 	logger *util.LogEntry

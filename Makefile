@@ -68,7 +68,7 @@ help: ## Describe useful make targets
 
 .PHONY: all
 all: ## Build, test (default)
-	$(MAKE) golang_build_all
+	$(MAKE) golang_build_all lintfix
 
 .PHONY: clean
 clean: ## Delete intermediate build artifacts

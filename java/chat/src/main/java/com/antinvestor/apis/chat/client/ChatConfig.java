@@ -8,11 +8,11 @@ import org.aeonbits.owner.Config;
 public interface ChatConfig extends DefaultConfig {
     @Config.DefaultValue("chat.api.antinvestor.com")
     @Config.Key("${product}.${env}.chat.host.url")
-    String notificationsHostUrl();
+    String chatHostUrl();
 
     @Config.DefaultValue("443")
     @Config.Key("${product}.${env}.chat.host.port")
-    Integer notificationsHostPort();
+    Integer chatHostPort();
 
     @Config.DefaultValue("true")
     @Config.Key("${product}.${env}.chat.auth.interceptor.enabled")

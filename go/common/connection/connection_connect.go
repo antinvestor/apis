@@ -54,6 +54,8 @@ func (ccb *ConnectClientBase) Options(opts ...connect.ClientOption) []connect.Cl
 		opts = append(opts, connect.WithInterceptors(ccb.interceptors...))
 	}
 
+	opts = append(opts, connect.WithHTTPGet())
+
 	return opts
 }
 
@@ -78,7 +80,6 @@ func (ccb *ConnectClientBase) SetPartitionInfo(
 }
 
 func NewConnectClientBase(ctx context.Context, opts ...common.ClientOption) (*ConnectClientBase, error) {
-
 	ds, err := processAndValidateOpts(opts)
 	if err != nil {
 		return nil, err
@@ -95,7 +96,8 @@ func NewConnectClientBase(ctx context.Context, opts ...common.ClientOption) (*Co
 	httpClient := NewHTTPClient(ctx, httpDialOpts...)
 
 	clientBase := ConnectClientBase{
-		client: httpClient,
+		client:   httpClient,
+		endpoint: ds.Endpoint,
 	}
 	clientBase.SetInfo()
 
@@ -124,7 +126,7 @@ func NewConnectClientBase(ctx context.Context, opts ...common.ClientOption) (*Co
 			EndpointParams: endpointValues,
 		}
 
-		authOpts = append(authOpts, interceptors.WithTokenClient(cfg))
+		authOpts = append(authOpts, interceptors.WithTokenSource(cfg.TokenSource(ctx)))
 	}
 
 	clientBase.interceptors = []connect.Interceptor{

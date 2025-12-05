@@ -10,11 +10,12 @@
 
 package com.antinvestor.apis.partition.client;
 
+import build.buf.gen.partition.v1.*;
 import com.antinvestor.apis.common.base.GrpcClientBase;
 import com.antinvestor.apis.common.config.DefaultConfig;
 import com.antinvestor.apis.common.context.Context;
+import com.antinvestor.apis.common.utilities.IteratorUtil;
 import com.antinvestor.apis.common.utilities.ProtoStructUtil;
-import com.antinvestor.apis.partition.v1.*;
 import io.grpc.ManagedChannel;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -36,12 +37,12 @@ public class PartitionClient extends GrpcClientBase<PartitionServiceGrpc.Partiti
     @Override
     protected ConnectionConfig getConnectionConfig(Context context, DefaultConfig defaultConfig) {
         var cfg = (PartitionConfig) defaultConfig;
-        return  new ConnectionConfig(cfg.partitionsHostUrl(), cfg.partitionsHostPort(), cfg.authInterceptorEnabled() );
+        return new ConnectionConfig(cfg.partitionsHostUrl(), cfg.partitionsHostPort(), cfg.authInterceptorEnabled());
     }
 
     public PartitionServiceGrpc.PartitionServiceBlockingStub stub(Context context) {
 
-        var stub =  PartitionServiceGrpc.newBlockingStub(getChannel());
+        var stub = PartitionServiceGrpc.newBlockingStub(getChannel());
         return setupStub(context, stub);
 
     }
@@ -53,24 +54,14 @@ public class PartitionClient extends GrpcClientBase<PartitionServiceGrpc.Partiti
         return stub(context).getTenant(request).getData();
     }
 
-    public Iterator<List<TenantObject>> listTenants(Context context, String query, int count, int page) {
+    public Iterable<TenantObject> listTenants(Context context, String query, int count, int page) {
         var searchRequest = ListTenantRequest.newBuilder()
                 .setQuery(query)
                 .setCount(count)
                 .setPage(page)
                 .build();
         var response = stub(context).listTenant(searchRequest);
-        return new Iterator<>() {
-            @Override
-            public boolean hasNext() {
-                return response.hasNext();
-            }
-
-            @Override
-            public List<TenantObject> next() {
-                return response.next().getDataList();
-            }
-        };
+        return IteratorUtil.flatMapIterable(response, ListTenantResponse::getDataList);
     }
 
     public Optional<TenantObject> createTenant(Context context, String name, String description, Map<String, Object> properties) {
@@ -82,7 +73,7 @@ public class PartitionClient extends GrpcClientBase<PartitionServiceGrpc.Partiti
         return Optional.of(stub(context).createTenant(request).getData());
     }
 
-    public Iterator<List<PartitionObject>> listPartitions(Context context, String query, int count, int page) {
+    public Iterable<PartitionObject> listPartitions(Context context, String query, int count, int page) {
         var request = ListPartitionRequest.newBuilder()
                 .setQuery(query)
                 .setCount(count)
@@ -90,17 +81,7 @@ public class PartitionClient extends GrpcClientBase<PartitionServiceGrpc.Partiti
                 .build();
         var response = stub(context).listPartition(request);
 
-        return new Iterator<>() {
-            @Override
-            public boolean hasNext() {
-                return response.hasNext();
-            }
-
-            @Override
-            public List<PartitionObject> next() {
-                return response.next().getDataList();
-            }
-        };
+        return IteratorUtil.flatMapIterable(response, ListPartitionResponse::getDataList);
     }
 
     public Optional<PartitionRoleObject> createPartitionRole(Context context, String partitionId, String name, Map<String, Object> properties) {
@@ -112,22 +93,12 @@ public class PartitionClient extends GrpcClientBase<PartitionServiceGrpc.Partiti
         return Optional.of(stub(context).createPartitionRole(request).getData());
     }
 
-    public Iterator<List<PartitionRoleObject>> listPartitionRoles(Context context, String partitionId) {
+    public Iterable<PartitionRoleObject> listPartitionRoles(Context context, String partitionId) {
         var request = ListPartitionRoleRequest.newBuilder()
                 .setPartitionId(partitionId)
                 .build();
         var response = stub(context).listPartitionRole(request);
-        return new Iterator<>() {
-            @Override
-            public boolean hasNext() {
-                return response.hasNext();
-            }
-
-            @Override
-            public List<PartitionRoleObject> next() {
-                return response.next().getRoleList();
-            }
-        };
+        return IteratorUtil.flatMapIterable(response, ListPartitionRoleResponse::getRoleList);
     }
 
     public Optional<PageObject> createPage(Context context, String partitionId, String name, String html) {
@@ -173,22 +144,12 @@ public class PartitionClient extends GrpcClientBase<PartitionServiceGrpc.Partiti
         return Optional.of(stub(context).createAccessRole(request).getData());
     }
 
-    public Iterator<List<AccessRoleObject>> listAccessRoles(Context context, String accessId) {
+    public Iterable<AccessRoleObject> listAccessRoles(Context context, String accessId) {
         var request = ListAccessRoleRequest.newBuilder()
                 .setAccessId(accessId)
                 .build();
         var response = stub(context).listAccessRole(request);
-        return new Iterator<>() {
-            @Override
-            public boolean hasNext() {
-                return response.hasNext();
-            }
-
-            @Override
-            public List<AccessRoleObject> next() {
-                return response.next().getRoleList();
-            }
-        };
+        return IteratorUtil.flatMapIterable(response, ListAccessRoleResponse::getRoleList);
     }
 
 }

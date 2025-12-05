@@ -4,23 +4,24 @@ package interceptors
 
 import (
 	"context"
+	"fmt"
 	"sync"
 
 	"connectrpc.com/connect"
 	"golang.org/x/oauth2"
-	"golang.org/x/oauth2/clientcredentials"
+	"golang.org/x/sync/singleflight"
 )
 
 const authTokenHeader = "Authorization"
 
 type AuthInterceptorOption func(*authInterceptor)
 type authInterceptor struct {
-	tokenClient *clientcredentials.Config // An oauth2 client to fetch new server token
-	token       *oauth2.Token             // The JWT token that will be used in every call to the server
-	apiKey      string                    // An api key that never changes for a legacy api
+	tokenSource oauth2.TokenSource // An oauth2 client to fetch new server token
+	token       *oauth2.Token      // The JWT token that will be used in every call to the server
+	apiKey      string             // An api key that never changes for a legacy api
 	mu          sync.Mutex
-
-	tokenErr error
+	sf          singleflight.Group
+	tokenErr    error
 }
 
 func NewAuthInterceptor(opts ...AuthInterceptorOption) connect.Interceptor {
@@ -32,10 +33,10 @@ func NewAuthInterceptor(opts ...AuthInterceptorOption) connect.Interceptor {
 	return a
 }
 
-// WithTokenClient sets the OAuth2 client credentials config.
-func WithTokenClient(cfg *clientcredentials.Config) AuthInterceptorOption {
+// WithTokenSource sets the OAuth2 client credentials config.
+func WithTokenSource(tokenSource oauth2.TokenSource) AuthInterceptorOption {
 	return func(a *authInterceptor) {
-		a.tokenClient = cfg
+		a.tokenSource = tokenSource
 	}
 }
 
@@ -46,28 +47,38 @@ func WithAPIKey(key string) AuthInterceptorOption {
 	}
 }
 
-func (ai *authInterceptor) getTokenStr(ctx context.Context) (string, error) {
-	ai.mu.Lock()
-	defer ai.mu.Unlock()
-
-	var err error
-	if ai.tokenClient != nil {
-		if ai.token == nil || !ai.token.Valid() {
-			ai.token, err = ai.tokenClient.Token(ctx)
-			if err != nil {
-				ai.tokenErr = err
-				return "", err
-			}
-			ai.tokenErr = nil
-		}
-
-		return ai.token.AccessToken, nil
-	}
-
-	if ai.apiKey != "" {
+func (ai *authInterceptor) getTokenStr(_ context.Context) (string, error) {
+	if ai.tokenSource == nil && ai.apiKey != "" {
 		return ai.apiKey, nil
 	}
-	return "", nil
+
+	ai.mu.Lock()
+	if ai.token != nil && ai.token.Valid() {
+		tok := ai.token.AccessToken
+		ai.mu.Unlock()
+		return tok, nil
+	}
+	ai.mu.Unlock()
+
+	v, err, _ := ai.sf.Do("refresh", func() (interface{}, error) {
+		tok, err := ai.tokenSource.Token()
+		if err != nil {
+			return "", err
+		}
+
+		ai.mu.Lock()
+		ai.token = tok
+		ai.mu.Unlock()
+		return tok.AccessToken, nil
+	})
+	if err != nil {
+		return "", err
+	}
+
+	if tokenStr, ok := v.(string); ok {
+		return tokenStr, nil
+	}
+	return "", fmt.Errorf("unexpected token type: %T", v)
 }
 
 func (ai *authInterceptor) WrapUnary(next connect.UnaryFunc) connect.UnaryFunc {

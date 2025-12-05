@@ -17,7 +17,7 @@ jobs:
       max-parallel: 1 # This ensures sequential execution of matrix jobs
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Get the latest tag
@@ -41,12 +41,12 @@ jobs:
         if: steps.get_tags.outputs.not_enough_tags == 'false'
         id: api_module_changed
         run: |
-          CHANGES=$(git diff --name-only ${{ env.latest_tag }} HEAD | grep 'api/${{ matrix.api_module }}' || true)
+          CHANGES=$(git diff --name-only ${{ env.latest_tag }} HEAD | grep 'proto/${{ matrix.api_module }}' || true)
           if [[ -n "$CHANGES" ]]; then
-            echo "Changes found in api/${{ matrix.api_module }}"
+            echo "Changes found in proto/${{ matrix.api_module }}"
             echo "changed=true" >> $GITHUB_OUTPUT
           else
-            echo "No changes found in api/${{ matrix.api_module }}"
+            echo "No changes found in proto/${{ matrix.api_module }}"
             echo "changed=false" >> $GITHUB_OUTPUT
           fi
 
@@ -56,16 +56,10 @@ jobs:
           format: true
           lint: true
           push: true
-          breaking: true
+          breaking: ${{ steps.get_tags.outputs.not_enough_tags == 'false' }}
+          breaking_against: "https://github.com/antinvestor/apis.git#format=git,commit=${{ env.latest_tag }},subdir=proto/${{ matrix.api_module }}"
           input: "proto/${{ matrix.api_module }}"
           token: ${{ secrets.BUF_TOKEN }}
-
-      - uses: bufbuild/buf-action@v1
-        if: steps.get_tags.outputs.not_enough_tags == 'false' && steps.api_module_changed.outputs.changed == 'true'
-        with:
-          breaking: true
-          input: "proto/${{ matrix.api_module }}"
-          against: "https://github.com/antinvestor/apis.git#format=git,commit=${{ env.latest_tag }},subdir=proto/${{ matrix.api_module }}"
 
       - uses: rickstaa/action-create-tag@v1
         if: steps.get_tags.outputs.not_enough_tags == 'true' || steps.api_module_changed.outputs.changed == 'true'

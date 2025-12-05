@@ -134,6 +134,7 @@ service SettingsService {
   // Get retrieves a single setting value by its hierarchical key.
   // Returns the most specific matching setting based on the key hierarchy.
   rpc Get(GetRequest) returns (GetResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getSetting"
       summary: "Get a setting value"
@@ -145,6 +146,7 @@ service SettingsService {
   // List retrieves all settings matching a partial key.
   // Empty fields in the key act as wildcards.
   rpc List(ListRequest) returns (stream ListResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "listSettings"
       summary: "List settings by partial key"
@@ -156,6 +158,7 @@ service SettingsService {
   // Search finds settings matching specified criteria.
   // Supports full-text search and filtering.
   rpc Search(common.v1.SearchRequest) returns (stream SearchResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "searchSettings"
       summary: "Search settings"
