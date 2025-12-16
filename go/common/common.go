@@ -1,4 +1,7 @@
 package common //nolint:revive //this is a utility package that is reused
+import (
+	"context"
+)
 
 // Copyright (c) 2023 Ant Investor Ltd. Licensed under the Apache License 2.0. See https://www.apache.org/licenses/LICENSE-2.0
 
@@ -18,9 +21,17 @@ type MessageOrError[T any] struct {
 	Error   error
 }
 
-type PartitionInfo struct {
-	TenantID    string
-	PartitionID string
-	AccessID    string
-	ProfileID   string
+type PartitionInfo interface {
+	GetTenantID() string
+	GetPartitionID() string
+	GetProfileID() string
+	GetAccessID() string
+	GetContactID() string
+	GetSessionID() string
+	GetDeviceID() string
+	GetRoles() []string
+}
+
+func SetPartitionInfo(ctx context.Context, partitionInfo PartitionInfo) context.Context {
+	return context.WithValue(ctx, CtxKeyPartitionInfo, partitionInfo)
 }

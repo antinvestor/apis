@@ -54,10 +54,6 @@ func (gbc *GrpcClientBase) GetInfo() metadata.MD {
 	return gbc.xMetadata
 }
 
-func (gbc *GrpcClientBase) SetPartitionInfo(ctx context.Context, partitionInfo *common.PartitionInfo) context.Context {
-	return context.WithValue(ctx, common.CtxKeyPartitionInfo, partitionInfo)
-}
-
 func NewGrpcClientBase(ctx context.Context, opts ...common.ClientOption) (*GrpcClientBase, error) {
 	conn, err := DialConnection(ctx, opts...)
 	if err != nil {
@@ -78,8 +74,8 @@ type JWTInterceptor struct {
 	mu          sync.Mutex
 }
 
-func (jwt *JWTInterceptor) fromContext(ctx context.Context, key common.CtxServiceKey) *common.PartitionInfo {
-	val, ok := ctx.Value(key).(*common.PartitionInfo)
+func (jwt *JWTInterceptor) fromContext(ctx context.Context, key common.CtxServiceKey) common.PartitionInfo {
+	val, ok := ctx.Value(key).(common.PartitionInfo)
 	if !ok {
 		return nil
 	}
@@ -93,10 +89,14 @@ func (jwt *JWTInterceptor) setupPartitionData(ctx context.Context) context.Conte
 	if partitionInfo == nil {
 		return ctx
 	}
-	finalCtx := metadata.AppendToOutgoingContext(ctx, "tenant_id", partitionInfo.TenantID)
-	finalCtx = metadata.AppendToOutgoingContext(finalCtx, "partition_id", partitionInfo.PartitionID)
-	finalCtx = metadata.AppendToOutgoingContext(finalCtx, "access_id", partitionInfo.AccessID)
-	return metadata.AppendToOutgoingContext(finalCtx, "profile_id", partitionInfo.ProfileID)
+	finalCtx := metadata.AppendToOutgoingContext(ctx, "tenant-id", partitionInfo.GetTenantID())
+	finalCtx = metadata.AppendToOutgoingContext(finalCtx, "partition-id", partitionInfo.GetPartitionID())
+	finalCtx = metadata.AppendToOutgoingContext(finalCtx, "profile-id", partitionInfo.GetProfileID())
+	finalCtx = metadata.AppendToOutgoingContext(finalCtx, "access-id", partitionInfo.GetAccessID())
+	finalCtx = metadata.AppendToOutgoingContext(finalCtx, "session-id", partitionInfo.GetSessionID())
+	finalCtx = metadata.AppendToOutgoingContext(finalCtx, "device-id", partitionInfo.GetDeviceID())
+	finalCtx = metadata.AppendToOutgoingContext(finalCtx, "contact-id", partitionInfo.GetContactID())
+	return metadata.AppendToOutgoingContext(finalCtx, "roles", strings.Join(partitionInfo.GetRoles(), ","))
 }
 
 func (jwt *JWTInterceptor) getTokenStr(ctx context.Context) (string, error) {
