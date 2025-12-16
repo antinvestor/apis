@@ -4,15 +4,15 @@ go 1.25
 
 require (
 	buf.build/gen/go/antinvestor/device/connectrpc/go v1.19.1-20251119161652-dfdcd18d6df0.2
-	buf.build/gen/go/antinvestor/device/protocolbuffers/go v1.36.10-20251119161652-dfdcd18d6df0.1
+	buf.build/gen/go/antinvestor/device/protocolbuffers/go v1.36.11-20251205175716-147537a63a68.1
 	connectrpc.com/connect v1.19.1
 	github.com/antinvestor/apis/go/common v1.48.24
 	github.com/gojuno/minimock/v3 v3.4.7
 )
 
 require (
-	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.10-20250912141014-52f32327d4b0.1 // indirect
-	buf.build/gen/go/gnostic/gnostic/protocolbuffers/go v1.36.10-20230414000709-087bc8072ce4.1 // indirect
+	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.11-20250912141014-52f32327d4b0.1 // indirect
+	buf.build/gen/go/gnostic/gnostic/protocolbuffers/go v1.36.11-20230414000709-087bc8072ce4.1 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/felixge/httpsnoop v1.0.4 // indirect
 	github.com/go-logr/logr v1.4.3 // indirect
@@ -34,6 +34,6 @@ require (
 	golang.org/x/text v0.31.0 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20251111163417-95abcf5c77ba // indirect
 	google.golang.org/grpc v1.77.0 // indirect
-	google.golang.org/protobuf v1.36.10 // indirect
+	google.golang.org/protobuf v1.36.11 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
