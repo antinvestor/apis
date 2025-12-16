@@ -1,4 +1,9 @@
 package common //nolint:revive //this is a utility package that is reused
+import (
+	"net/http"
+
+	"gopkg.in/yaml.v3"
+)
 
 // Copyright (c) 2023 Ant Investor Ltd. Licensed under the Apache License 2.0. See https://www.apache.org/licenses/LICENSE-2.0
 
@@ -6,12 +11,6 @@ package common //nolint:revive //this is a utility package that is reused
 // Ant Investor services. It includes common data structures, context keys,
 // client options, and other foundational components that are shared between
 // different service implementations.
-
-import (
-	"net/http"
-
-	"gopkg.in/yaml.v3"
-)
 
 // InfoOverride allows customizing the OpenAPI info section.
 type InfoOverride struct {

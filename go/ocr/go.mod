@@ -7,7 +7,7 @@ require (
 	buf.build/gen/go/antinvestor/ocr/connectrpc/go v1.19.1-20251205175852-84ac2d6d1c18.2
 	buf.build/gen/go/antinvestor/ocr/protocolbuffers/go v1.36.11-20251205175852-84ac2d6d1c18.1
 	connectrpc.com/connect v1.19.1
-	github.com/antinvestor/apis/go/common v1.49.3
+	github.com/antinvestor/apis/go/common v1.49.5
 	github.com/gojuno/minimock/v3 v3.4.7
 )
 

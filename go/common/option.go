@@ -1,12 +1,4 @@
 package common //nolint:revive //this is a utility package that is reused
-
-// Copyright (c) 2023 Ant Investor Ltd. Licensed under the Apache License 2.0. See https://www.apache.org/licenses/LICENSE-2.0
-
-// Package common provides shared types, utilities, and constants used across
-// Ant Investor services. It includes common data structures, context keys,
-// client options, and other foundational components that are shared between
-// different service implementations.
-
 import (
 	"crypto/tls"
 	"net/http"
@@ -14,6 +6,13 @@ import (
 	"golang.org/x/oauth2"
 	"google.golang.org/grpc"
 )
+
+// Copyright (c) 2023 Ant Investor Ltd. Licensed under the Apache License 2.0. See https://www.apache.org/licenses/LICENSE-2.0
+
+// Package common provides shared types, utilities, and constants used across
+// Ant Investor services. It includes common data structures, context keys,
+// client options, and other foundational components that are shared between
+// different service implementations.
 
 // A ClientOption is an option for a Google API client.
 type ClientOption interface {
