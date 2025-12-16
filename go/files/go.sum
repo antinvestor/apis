@@ -1,5 +1,5 @@
-buf.build/gen/go/antinvestor/files/connectrpc/go v1.19.1-20251119161711-ea7145a52045.2 h1:irNiuaimi/2PCPXbUE5aGgt5kq/Aatzer9Q9voP0uXU=
-buf.build/gen/go/antinvestor/files/connectrpc/go v1.19.1-20251119161711-ea7145a52045.2/go.mod h1:mjSF+3LgCpHaAlTOpranhyCvquC0ZccGJoZzbj4zFE8=
+buf.build/gen/go/antinvestor/files/connectrpc/go v1.19.1-20251205175737-0459e6e76445.2 h1:dwQDQM0Dk/DbBRMbRj54SmDJ3KX+4m+X+VHx+ZCoTnQ=
+buf.build/gen/go/antinvestor/files/connectrpc/go v1.19.1-20251205175737-0459e6e76445.2/go.mod h1:4jtHMdBcheEH/Qu86KtdwLkal2vcPkdxJbRpnb6uGO4=
 buf.build/gen/go/antinvestor/files/protocolbuffers/go v1.36.11-20251205175737-0459e6e76445.1 h1:ZLbWIj8c9Ri2tZBO/rWOgTQUAC38JjKx+e+fE9yxVO0=
 buf.build/gen/go/antinvestor/files/protocolbuffers/go v1.36.11-20251205175737-0459e6e76445.1/go.mod h1:QOj3hgt7C1cGovM0wdafAPZEtnGJaLurvBsX/6Mm6RU=
 buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.11-20250912141014-52f32327d4b0.1 h1:oKTVB9QIhFBU9y07QCs2lX2EhGkqWKTX3tTOl/ZbU9o=
