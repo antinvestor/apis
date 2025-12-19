@@ -83,12 +83,7 @@ func (jwt *JWTInterceptor) setTenancyInfo(ctx context.Context) context.Context {
 	}
 	finalCtx := metadata.AppendToOutgoingContext(ctx, "tenant-id", partitionInfo.GetTenantID())
 	finalCtx = metadata.AppendToOutgoingContext(finalCtx, "partition-id", partitionInfo.GetPartitionID())
-	finalCtx = metadata.AppendToOutgoingContext(finalCtx, "profile-id", partitionInfo.GetProfileID())
-	finalCtx = metadata.AppendToOutgoingContext(finalCtx, "access-id", partitionInfo.GetAccessID())
-	finalCtx = metadata.AppendToOutgoingContext(finalCtx, "session-id", partitionInfo.GetSessionID())
-	finalCtx = metadata.AppendToOutgoingContext(finalCtx, "device-id", partitionInfo.GetDeviceID())
-	finalCtx = metadata.AppendToOutgoingContext(finalCtx, "contact-id", partitionInfo.GetContactID())
-	return metadata.AppendToOutgoingContext(finalCtx, "roles", strings.Join(partitionInfo.GetRoles(), ","))
+	return metadata.AppendToOutgoingContext(finalCtx, "access-id", partitionInfo.GetAccessID())
 }
 
 func (jwt *JWTInterceptor) getTokenStr(ctx context.Context) (string, error) {

@@ -5,7 +5,6 @@ package interceptors
 import (
 	"context"
 	"net/http"
-	"strings"
 
 	"connectrpc.com/connect"
 	"github.com/pitabwire/util"
@@ -30,11 +29,6 @@ func (ai *partitionInfoSetInterceptor) setTenancyInfo(ctx context.Context, heade
 	header.Set("X-Tenant-Id", tenancyInfo.GetTenantID())
 	header.Set("X-Partition-Id", tenancyInfo.GetPartitionID())
 	header.Set("X-Access-Id", tenancyInfo.GetAccessID())
-	header.Set("X-Profile-Id", tenancyInfo.GetProfileID())
-	header.Set("X-Session-Id", tenancyInfo.GetSessionID())
-	header.Set("X-Device-Id", tenancyInfo.GetDeviceID())
-	header.Set("X-Contact-Id", tenancyInfo.GetContactID())
-	header.Set("X-Roles", strings.Join(tenancyInfo.GetRoles(), ","))
 }
 
 func (ai *partitionInfoSetInterceptor) WrapUnary(next connect.UnaryFunc) connect.UnaryFunc {
