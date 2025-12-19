@@ -10,7 +10,9 @@ import (
 	"github.com/antinvestor/apis/go/common/connection"
 )
 
-const ctxKeyService = common.CtxServiceKey("propertyClientKey")
+type ctxKeyType string
+
+const ctxKeyService = ctxKeyType("propertyClientKey")
 
 func defaultOptions() []common.ClientOption {
 	return []common.ClientOption{

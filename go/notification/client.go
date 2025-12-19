@@ -10,7 +10,9 @@ import (
 	"github.com/antinvestor/apis/go/common/connection"
 )
 
-const ctxKeyService = common.CtxServiceKey("notificationClientKey")
+type ctxKeyType string
+
+const ctxKeyService = ctxKeyType("notificationClientKey")
 
 func defaultOptions() []common.ClientOption {
 	return []common.ClientOption{

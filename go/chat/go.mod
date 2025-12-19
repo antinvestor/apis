@@ -6,7 +6,7 @@ require (
 	buf.build/gen/go/antinvestor/chat/connectrpc/go v1.19.1-20251216063645-36b848c6def7.2
 	buf.build/gen/go/antinvestor/chat/protocolbuffers/go v1.36.11-20251216063645-36b848c6def7.1
 	connectrpc.com/connect v1.19.1
-	github.com/antinvestor/apis/go/common v1.49.5
+	github.com/antinvestor/apis/go/common v1.49.7
 	github.com/gojuno/minimock/v3 v3.4.7
 )
 
