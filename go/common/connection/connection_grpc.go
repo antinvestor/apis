@@ -10,6 +10,7 @@ import (
 	"sync"
 
 	"github.com/antinvestor/apis/go/common"
+	"github.com/pitabwire/util"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/clientcredentials"
 
@@ -74,17 +75,8 @@ type JWTInterceptor struct {
 	mu          sync.Mutex
 }
 
-func (jwt *JWTInterceptor) fromContext(ctx context.Context, key common.CtxServiceKey) common.PartitionInfo {
-	val, ok := ctx.Value(key).(common.PartitionInfo)
-	if !ok {
-		return nil
-	}
-
-	return val
-}
-
-func (jwt *JWTInterceptor) setupPartitionData(ctx context.Context) context.Context {
-	partitionInfo := jwt.fromContext(ctx, common.CtxKeyPartitionInfo)
+func (jwt *JWTInterceptor) setTenancyInfo(ctx context.Context) context.Context {
+	partitionInfo := util.GetTenancy(ctx)
 
 	if partitionInfo == nil {
 		return ctx
@@ -142,7 +134,7 @@ func (jwt *JWTInterceptor) UnaryClientInterceptor(
 		finalCtx = ctx
 	}
 
-	finalCtx = jwt.setupPartitionData(finalCtx)
+	finalCtx = jwt.setTenancyInfo(finalCtx)
 	return invoker(finalCtx, method, req, reply, cc, opts...)
 }
 
@@ -167,7 +159,7 @@ func (jwt *JWTInterceptor) StreamClientInterceptor(
 		finalCtx = ctx
 	}
 
-	finalCtx = jwt.setupPartitionData(finalCtx)
+	finalCtx = jwt.setTenancyInfo(finalCtx)
 	return streamer(finalCtx, desc, cc, method, opts...)
 }
 
