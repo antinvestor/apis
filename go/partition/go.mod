@@ -3,15 +3,15 @@ module github.com/antinvestor/apis/go/partition
 go 1.25
 
 require (
-	buf.build/gen/go/antinvestor/partition/connectrpc/go v1.19.1-20251205175911-72c3819c8e9b.2
-	buf.build/gen/go/antinvestor/partition/protocolbuffers/go v1.36.11-20251205175911-72c3819c8e9b.1
+	buf.build/gen/go/antinvestor/partition/connectrpc/go v1.19.1-20251216063854-8a831e5d0734.2
+	buf.build/gen/go/antinvestor/partition/protocolbuffers/go v1.36.11-20251216063854-8a831e5d0734.1
 	connectrpc.com/connect v1.19.1
 	github.com/antinvestor/apis/go/common v1.49.5
 	github.com/gojuno/minimock/v3 v3.4.7
 )
 
 require (
-	buf.build/gen/go/antinvestor/common/protocolbuffers/go v1.36.11-20251119161617-faec0015998a.1 // indirect
+	buf.build/gen/go/antinvestor/common/protocolbuffers/go v1.36.11-20251216061047-d524d0f6d60c.1 // indirect
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.11-20251209175733-2a1774d88802.1 // indirect
 	buf.build/gen/go/gnostic/gnostic/protocolbuffers/go v1.36.11-20230414000709-087bc8072ce4.1 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
@@ -20,7 +20,7 @@ require (
 	github.com/go-logr/logr v1.4.3 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/lmittmann/tint v1.1.2 // indirect
-	github.com/pitabwire/util v0.3.6 // indirect
+	github.com/pitabwire/util v0.3.7 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/rs/xid v1.6.0 // indirect
 	go.opentelemetry.io/auto/sdk v1.2.1 // indirect
