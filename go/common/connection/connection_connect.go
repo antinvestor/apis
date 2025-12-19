@@ -13,6 +13,7 @@ import (
 	"github.com/antinvestor/apis/go/common"
 	"github.com/antinvestor/apis/go/common/connection/options"
 	"github.com/antinvestor/apis/go/common/interceptors"
+	"github.com/pitabwire/util"
 	"go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/clientcredentials"
@@ -72,11 +73,11 @@ func (ccb *ConnectClientBase) GetInfo() string {
 	return ccb.xMetadata
 }
 
-func (ccb *ConnectClientBase) SetPartitionInfo(
+func (ccb *ConnectClientBase) SetTenancyInfo(
 	ctx context.Context,
-	partitionInfo *common.PartitionInfo,
+	tenancyInfo util.TenancyInfo,
 ) context.Context {
-	return context.WithValue(ctx, common.CtxKeyPartitionInfo, partitionInfo)
+	return util.SetTenancy(ctx, tenancyInfo)
 }
 
 func NewConnectClientBase(ctx context.Context, opts ...common.ClientOption) (*ConnectClientBase, error) {

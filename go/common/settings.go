@@ -1,4 +1,5 @@
-package common //nolint:revive //this is a utility package that is reused
+package common
+
 import (
 	"crypto/tls"
 	"errors"

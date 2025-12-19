@@ -8,7 +8,7 @@ import (
 	"strings"
 
 	"connectrpc.com/connect"
-	"github.com/antinvestor/apis/go/common"
+	"github.com/pitabwire/util"
 )
 
 type partitionInfoSetInterceptor struct {
@@ -21,20 +21,20 @@ func NewPartitionInfoInterceptor(clientInfo string) connect.Interceptor {
 	}
 }
 
-func (ai *partitionInfoSetInterceptor) setPartitionInfo(ctx context.Context, header http.Header) {
-	partitionInfo, ok := ctx.Value(common.CtxKeyPartitionInfo).(common.PartitionInfo)
-	if !ok || partitionInfo == nil {
+func (ai *partitionInfoSetInterceptor) setTenancyInfo(ctx context.Context, header http.Header) {
+	tenancyInfo := util.GetTenancy(ctx)
+	if tenancyInfo == nil {
 		return
 	}
 
-	header.Set("X-Tenant-Id", partitionInfo.GetTenantID())
-	header.Set("X-Partition-Id", partitionInfo.GetPartitionID())
-	header.Set("X-Access-Id", partitionInfo.GetAccessID())
-	header.Set("X-Profile-Id", partitionInfo.GetProfileID())
-	header.Set("X-Session-Id", partitionInfo.GetSessionID())
-	header.Set("X-Device-Id", partitionInfo.GetDeviceID())
-	header.Set("X-Contact-Id", partitionInfo.GetContactID())
-	header.Set("X-Roles", strings.Join(partitionInfo.GetRoles(), ","))
+	header.Set("X-Tenant-Id", tenancyInfo.GetTenantID())
+	header.Set("X-Partition-Id", tenancyInfo.GetPartitionID())
+	header.Set("X-Access-Id", tenancyInfo.GetAccessID())
+	header.Set("X-Profile-Id", tenancyInfo.GetProfileID())
+	header.Set("X-Session-Id", tenancyInfo.GetSessionID())
+	header.Set("X-Device-Id", tenancyInfo.GetDeviceID())
+	header.Set("X-Contact-Id", tenancyInfo.GetContactID())
+	header.Set("X-Roles", strings.Join(tenancyInfo.GetRoles(), ","))
 }
 
 func (ai *partitionInfoSetInterceptor) WrapUnary(next connect.UnaryFunc) connect.UnaryFunc {
@@ -45,7 +45,7 @@ func (ai *partitionInfoSetInterceptor) WrapUnary(next connect.UnaryFunc) connect
 	) (connect.AnyResponse, error) {
 		if req.Spec().IsClient {
 			req.Header().Set("X-Ai-Api-Client", ai.clientInfo)
-			ai.setPartitionInfo(ctx, req.Header())
+			ai.setTenancyInfo(ctx, req.Header())
 		}
 		return next(ctx, req)
 	}
@@ -60,7 +60,7 @@ func (ai *partitionInfoSetInterceptor) WrapStreamingClient(
 	) connect.StreamingClientConn {
 		conn := next(ctx, spec)
 		conn.RequestHeader().Set("X-Ai-Api-Client", ai.clientInfo)
-		ai.setPartitionInfo(ctx, conn.RequestHeader())
+		ai.setTenancyInfo(ctx, conn.RequestHeader())
 		return conn
 	}
 }
