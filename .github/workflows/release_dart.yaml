@@ -79,7 +79,7 @@ jobs:
         if: steps.get_tags.outputs.not_enough_tags == 'true' || steps.dart_module_changed.outputs.changed == 'true'
         run: |
           VERSION_NO="${{github.ref_name}}"
-          PACKAGE="${{ steps.get_module.outputs.module }}"
+          PACKAGE="${{ matrix.package }}"
           PACKAGE_DIR="dart/$PACKAGE"
           
           echo "================================================"
