@@ -9,6 +9,9 @@ environment:
   sdk: ^3.3.0
 
 dependencies:
+  protobuf: ^4.2.0
+  connectrpc: ^1.0.0
+  fixnum: ^1.1.0
   antinvestor_api_common: ^1.50.2
 
 dev_dependencies:
