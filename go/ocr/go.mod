@@ -3,11 +3,11 @@ module github.com/antinvestor/apis/go/ocr
 go 1.25
 
 require (
-	buf.build/gen/go/antinvestor/common/protocolbuffers/go v1.36.11-20251216061047-d524d0f6d60c.1
-	buf.build/gen/go/antinvestor/ocr/connectrpc/go v1.19.1-20251216063833-22b9ff00cf06.2
-	buf.build/gen/go/antinvestor/ocr/protocolbuffers/go v1.36.11-20251216063833-22b9ff00cf06.1
+	buf.build/gen/go/antinvestor/common/protocolbuffers/go v1.36.11-20251222125138-2f8a9a430fbb.1
+	buf.build/gen/go/antinvestor/ocr/connectrpc/go v1.19.1-20251222130636-72f2fda6e4ef.2
+	buf.build/gen/go/antinvestor/ocr/protocolbuffers/go v1.36.11-20251222130636-72f2fda6e4ef.1
 	connectrpc.com/connect v1.19.1
-	github.com/antinvestor/apis/go/common v1.49.9
+	github.com/antinvestor/apis/go/common v1.50.0
 	github.com/gojuno/minimock/v3 v3.4.7
 )
 

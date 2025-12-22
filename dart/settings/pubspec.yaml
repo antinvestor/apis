@@ -1,6 +1,6 @@
 name: antinvestor_api_settings
 description: Dart client library for Ant Investor Settings Service - Application settings and configuration
-version: 1.47.1
+version: 1.50.2
 repository: https://github.com/antinvestor/apis
 homepage: https://github.com/antinvestor/apis/tree/main/dart/settings
 issue_tracker: https://github.com/antinvestor/apis/issues
@@ -9,10 +9,7 @@ environment:
   sdk: ^3.3.0
 
 dependencies:
-  protobuf: ^4.2.0
-  connectrpc: ^1.0.0
-  fixnum: ^1.1.0
-  antinvestor_api_common: ^1.46.0
+  antinvestor_api_common: ^1.50.0
 
 dev_dependencies:
   lints: ^6.0.0

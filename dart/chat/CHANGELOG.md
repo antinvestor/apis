@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.50.2] - 2025-12-22
+
+### Changed
+
+- Refactored client code to use common `ConnectClientBase` pattern
+- Simplified client creation with `newXxxClient()` factory functions
+- Removed redundant `client_factory.dart` files
+- All common client functionality now in `antinvestor_api_common`
+
+### Added
+
+- Type aliases for convenience (e.g., `DeviceClient`, `ChatClient`)
+- `ClientOptions` for flexible client configuration
+- Support for `noAuth` mode for unauthenticated requests
+
 ## [1.47.8] - 2025-11-03
 
 ## Feature
@@ -10,4 +25,3 @@
 
 - refactor: adopt connect clients across Go services
    - PR: #819
-

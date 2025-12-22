@@ -3,10 +3,10 @@ module github.com/antinvestor/apis/go/device
 go 1.25
 
 require (
-	buf.build/gen/go/antinvestor/device/connectrpc/go v1.19.1-20251216061210-6c1f3494376a.2
-	buf.build/gen/go/antinvestor/device/protocolbuffers/go v1.36.11-20251216061210-6c1f3494376a.1
+	buf.build/gen/go/antinvestor/device/connectrpc/go v1.19.1-20251222125222-a0817c8d4ffa.2
+	buf.build/gen/go/antinvestor/device/protocolbuffers/go v1.36.11-20251222125222-a0817c8d4ffa.1
 	connectrpc.com/connect v1.19.1
-	github.com/antinvestor/apis/go/common v1.49.9
+	github.com/antinvestor/apis/go/common v1.50.0
 	github.com/gojuno/minimock/v3 v3.4.7
 )
 

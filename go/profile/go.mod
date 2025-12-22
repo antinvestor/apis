@@ -3,15 +3,15 @@ module github.com/antinvestor/apis/go/profile
 go 1.25
 
 require (
-	buf.build/gen/go/antinvestor/profile/connectrpc/go v1.19.1-20251216063931-513b05dc5e70.2
-	buf.build/gen/go/antinvestor/profile/protocolbuffers/go v1.36.11-20251216063931-513b05dc5e70.1
+	buf.build/gen/go/antinvestor/profile/connectrpc/go v1.19.1-20251222130725-bf7352af27b4.2
+	buf.build/gen/go/antinvestor/profile/protocolbuffers/go v1.36.11-20251222130725-bf7352af27b4.1
 	connectrpc.com/connect v1.19.1
-	github.com/antinvestor/apis/go/common v1.49.9
+	github.com/antinvestor/apis/go/common v1.50.0
 	github.com/gojuno/minimock/v3 v3.4.7
 )
 
 require (
-	buf.build/gen/go/antinvestor/common/protocolbuffers/go v1.36.11-20251216061047-d524d0f6d60c.1 // indirect
+	buf.build/gen/go/antinvestor/common/protocolbuffers/go v1.36.11-20251222125138-2f8a9a430fbb.1 // indirect
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.11-20251209175733-2a1774d88802.1 // indirect
 	buf.build/gen/go/gnostic/gnostic/protocolbuffers/go v1.36.11-20230414000709-087bc8072ce4.1 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect

@@ -59,10 +59,7 @@ export 'src/common/v1/common.pbenum.dart';
 export 'src/common/v1/common.pbjson.dart';
 
 // Re-export commonly used types from dependencies
-export 'package:protobuf/protobuf.dart' show GeneratedMessage;
-export 'package:connectrpc/connect.dart'
-    show
-        Transport,
-        Interceptor,
-        ConnectException,
-        Code;
+// This allows service SDKs to only depend on antinvestor_api_common
+export 'package:protobuf/protobuf.dart';
+export 'package:connectrpc/connect.dart';
+export 'package:fixnum/fixnum.dart';

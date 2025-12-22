@@ -3,11 +3,11 @@ module github.com/antinvestor/apis/go/payment
 go 1.25
 
 require (
-	buf.build/gen/go/antinvestor/common/protocolbuffers/go v1.36.11-20251216061047-d524d0f6d60c.1
-	buf.build/gen/go/antinvestor/payment/connectrpc/go v1.19.1-20251216063912-283191ffc06b.2
-	buf.build/gen/go/antinvestor/payment/protocolbuffers/go v1.36.11-20251216063912-283191ffc06b.1
+	buf.build/gen/go/antinvestor/common/protocolbuffers/go v1.36.11-20251222125138-2f8a9a430fbb.1
+	buf.build/gen/go/antinvestor/payment/connectrpc/go v1.19.1-20251222130707-c231d20670f1.2
+	buf.build/gen/go/antinvestor/payment/protocolbuffers/go v1.36.11-20251222130707-c231d20670f1.1
 	connectrpc.com/connect v1.19.1
-	github.com/antinvestor/apis/go/common v1.49.9
+	github.com/antinvestor/apis/go/common v1.50.0
 	github.com/gojuno/minimock/v3 v3.4.7
 )
 
