@@ -1,6 +1,6 @@
 name: antinvestor_api_ocr
 description: Dart client library for Ant Investor Ocr Service - Optical character recognition and document processing
-version: 1.50.11
+version: 1.50.12
 repository: https://github.com/antinvestor/apis
 homepage: https://github.com/antinvestor/apis/tree/main/dart/ocr
 issue_tracker: https://github.com/antinvestor/apis/issues

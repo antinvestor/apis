@@ -6,14 +6,6 @@ on:
       - "v*.*.*"
     paths:
       - 'dart/**'
-      - 'proto/**'
-  workflow_dispatch:
-    inputs:
-      force:
-        description: 'Force release all packages'
-        required: false
-        type: boolean
-        default: false
 
 jobs:
   release:
@@ -31,7 +23,6 @@ jobs:
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Get the latest tag
         id: get_tags
