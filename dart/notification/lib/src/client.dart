@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import 'package:antinvestor_api_common/antinvestor_api_common.dart';
+import 'package:connectrpc/connect.dart' show Interceptor;
 import '../antinvestor_api_notification.dart';
 
 /// Default endpoint for the Notification service.

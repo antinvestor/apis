@@ -1,10 +1,10 @@
 # Changelog
 
-## [1.50.7] - 2025-12-22
+## [1.50.8] - 2025-12-22
 
 ### Changed
 
-- Updated to latest common code (^1.50.4)
+- Import Interceptor directly from connectrpc package
 
 ## [1.50.2] - 2025-12-22
 
