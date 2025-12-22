@@ -69,6 +69,63 @@ jobs:
         with:
           sdk: stable
 
+      - name: Setup pub credentials
+        if: steps.get_tags.outputs.not_enough_tags == 'true' || steps.dart_module_changed.outputs.changed == 'true'
+        run: |
+          mkdir -p ~/.config/dart
+          echo '${{ secrets.PUB_DEV_CREDENTIALS }}' > ~/.config/dart/pub-credentials.json
+
+      - name: Release package
+        if: steps.get_tags.outputs.not_enough_tags == 'true' || steps.dart_module_changed.outputs.changed == 'true'
+        run: |
+          VERSION_NO="${{ steps.get_module.outputs.version_no }}"
+          PACKAGE="${{ steps.get_module.outputs.module }}"
+          PACKAGE_DIR="dart/$PACKAGE"
+          
+          echo "================================================"
+          echo "Processing package: $PACKAGE"
+          echo "================================================"
+          
+          if [ ! -d "$PACKAGE_DIR" ]; then
+            echo "  Package directory not found: $PACKAGE_DIR"
+            exit 1
+          fi
+          
+          cd "$PACKAGE_DIR"
+          
+          # Get package name
+          PACKAGE_NAME=$(grep '^name:' pubspec.yaml | sed 's/name: //')
+          echo "Package name: $PACKAGE_NAME"
+          
+          # Extract version from global tag (format: vX.Y.Z)
+          TAG_NAME="$VERSION_NO"
+          if [[ "$TAG_NAME" =~ ^v([0-9]+\.[0-9]+\.[0-9]+)$ ]]; then
+            NEW_VERSION="${BASH_REMATCH[1]}"
+            echo "Release version from tag: $NEW_VERSION"
+          else
+            echo "❌ Could not parse version from tag: $TAG_NAME"
+            echo "Expected format: vX.Y.Z (e.g., v1.47.0)"
+            exit 1
+          fi
+          
+          # Install dependencies
+          echo "Installing dependencies..."
+          dart pub get
+          
+          # Run analysis
+          echo "Running dart analyze..."
+          dart analyze
+          
+          # Dry run publish
+          echo "Running dry-run publish..."
+          dart pub publish --dry-run
+          
+          # Publish to pub.dev
+          echo "Publishing to pub.dev..."
+          dart pub publish --force
+          
+          echo "✅ Successfully published $PACKAGE v$NEW_VERSION"
+
       - uses: rickstaa/action-create-tag@v1
         if: steps.get_tags.outputs.not_enough_tags == 'true' || steps.dart_module_changed.outputs.changed == 'true'
         id: "tag_create"
