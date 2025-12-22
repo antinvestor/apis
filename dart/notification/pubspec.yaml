@@ -9,7 +9,7 @@ environment:
   sdk: ^3.3.0
 
 dependencies:
-  antinvestor_api_common: ^1.50.0
+  antinvestor_api_common: ^1.50.2
 
 dev_dependencies:
   lints: ^6.0.0
