@@ -47,6 +47,7 @@ abstract final class NotificationService {
     connect.StreamType.server,
     commonv1common.SearchRequest.new,
     notificationv1notification.SearchResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
   );
 
   /// Status retrieves the current status of a notification.
@@ -56,6 +57,7 @@ abstract final class NotificationService {
     connect.StreamType.unary,
     commonv1common.StatusRequest.new,
     commonv1common.StatusResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
   );
 
   /// StatusUpdate updates the status of a notification.
@@ -74,6 +76,7 @@ abstract final class NotificationService {
     connect.StreamType.server,
     notificationv1notification.TemplateSearchRequest.new,
     notificationv1notification.TemplateSearchResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
   );
 
   /// TemplateSave creates or updates a notification template.

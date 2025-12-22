@@ -123,6 +123,59 @@ paths:
               schema:
                 $ref: '#/components/schemas/chat.v1.DeleteRoomResponse'
   /chat.v1.ChatService/GetClientState:
+    get:
+      tags:
+        - Real-time
+        - chat.v1.ChatService
+      summary: Get client states for profiles in a room
+      description: Retrieves client states for profiles in a room showing either which messages users have read, or presence state of the users in a room.
+      operationId: getClientStates
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+        - name: message
+          in: query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chat.v1.GetClientStateRequest'
+        - name: encoding
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/encoding'
+        - name: base64
+          in: query
+          schema:
+            $ref: '#/components/schemas/base64'
+        - name: compression
+          in: query
+          schema:
+            $ref: '#/components/schemas/compression'
+        - name: connect
+          in: query
+          schema:
+            $ref: '#/components/schemas/connect'
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chat.v1.GetClientStateResponse'
     post:
       tags:
         - Real-time
@@ -160,6 +213,59 @@ paths:
               schema:
                 $ref: '#/components/schemas/chat.v1.GetClientStateResponse'
   /chat.v1.ChatService/GetHistory:
+    get:
+      tags:
+        - Messages
+        - chat.v1.ChatService
+      summary: Retrieve message history for a room
+      description: Fetches paginated message history for a specified room using cursor-based navigation. Supports forward and backward pagination.
+      operationId: getHistory
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+        - name: message
+          in: query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chat.v1.GetHistoryRequest'
+        - name: encoding
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/encoding'
+        - name: base64
+          in: query
+          schema:
+            $ref: '#/components/schemas/base64'
+        - name: compression
+          in: query
+          schema:
+            $ref: '#/components/schemas/compression'
+        - name: connect
+          in: query
+          schema:
+            $ref: '#/components/schemas/connect'
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chat.v1.GetHistoryResponse'
     post:
       tags:
         - Messages
@@ -234,6 +340,59 @@ paths:
               schema:
                 $ref: '#/components/schemas/chat.v1.RemoveRoomSubscriptionsResponse'
   /chat.v1.ChatService/SearchRoomSubscriptions:
+    get:
+      tags:
+        - Subscriptions
+        - chat.v1.ChatService
+      summary: List room members
+      description: Retrieves a paginated list of users subscribed to a room, along with their roles and activity information.
+      operationId: searchRoomSubscriptions
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+        - name: message
+          in: query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chat.v1.SearchRoomSubscriptionsRequest'
+        - name: encoding
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/encoding'
+        - name: base64
+          in: query
+          schema:
+            $ref: '#/components/schemas/base64'
+        - name: compression
+          in: query
+          schema:
+            $ref: '#/components/schemas/compression'
+        - name: connect
+          in: query
+          schema:
+            $ref: '#/components/schemas/connect'
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chat.v1.SearchRoomSubscriptionsResponse'
     post:
       tags:
         - Subscriptions
@@ -422,6 +581,10 @@ paths:
   /chat.v1.GatewayService/Connect: {}
 components:
   schemas:
+    base64:
+      type: boolean
+      title: base64
+      description: Specifies if the message query param is base64 encoded, which may be required for binary data
     chat.v1.AddRoomSubscriptionsRequest:
       type: object
       properties:
@@ -430,7 +593,7 @@ components:
           title: room_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         members:
           type: array
           items:
@@ -447,7 +610,7 @@ components:
           title: room_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         error:
           title: error
           $ref: '#/components/schemas/common.v1.ErrorDetail'
@@ -544,14 +707,70 @@ components:
                 - sendEventAck
             - properties:
                 stateUpdate:
-                  title: stateUpdate
+                  title: state_update
                   $ref: '#/components/schemas/chat.v1.ClientState'
-              title: stateUpdate
+              title: state_update
               required:
                 - stateUpdate
       title: ConnectRequest
       additionalProperties: false
       description: Client message over Connect stream. After initial connect frame, client sends acks/commands.
+    chat.v1.ConnectResponse:
+      type: object
+      allOf:
+        - properties:
+            id:
+              type: string
+              title: id
+              maxLength: 40
+              minLength: 3
+              pattern: '[0-9a-z_-]{3,40}'
+            timestamp:
+              title: timestamp
+              $ref: '#/components/schemas/google.protobuf.Timestamp'
+        - oneOf:
+            - properties:
+                message:
+                  title: message
+                  $ref: '#/components/schemas/chat.v1.RoomEvent'
+              title: message
+              required:
+                - message
+            - properties:
+                presenceEvent:
+                  title: presence_event
+                  description: user presence change affecting the room
+                  $ref: '#/components/schemas/chat.v1.PresenceEvent'
+              title: presence_event
+              required:
+                - presenceEvent
+            - properties:
+                readEvent:
+                  title: read_event
+                  $ref: '#/components/schemas/chat.v1.ReadMarker'
+              title: read_event
+              required:
+                - readEvent
+            - properties:
+                receiptEvent:
+                  title: receipt_event
+                  $ref: '#/components/schemas/chat.v1.ReceiptEvent'
+              title: receipt_event
+              required:
+                - receiptEvent
+            - properties:
+                typingEvent:
+                  title: typing_event
+                  $ref: '#/components/schemas/chat.v1.TypingEvent'
+              title: typing_event
+              required:
+                - typingEvent
+      title: ConnectResponse
+      additionalProperties: false
+      description: |-
+        Server -> Client event payload. All events in a room are delivered over Connect stream.
+         event_id: globally unique id (opaque string) assigned by server, strictly monotonically increasing per room.
+         sequence: strictly increasing 64-bit integer per-room sequence number (useful for resume & ordering).
     chat.v1.CreateRoomRequest:
       type: object
       properties:
@@ -560,7 +779,7 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: optional client-provided idempotency key
         name:
           type: string
@@ -603,7 +822,7 @@ components:
           title: room_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
       title: DeleteRoomRequest
       additionalProperties: false
     chat.v1.DeleteRoomResponse:
@@ -625,14 +844,14 @@ components:
           title: room_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         profileIds:
           type: array
           items:
             type: string
           title: profile_ids
         stateType:
-          title: stateType
+          title: state_type
           $ref: '#/components/schemas/chat.v1.GetClientStateRequest.ClientStateType'
       title: GetClientStateRequest
       additionalProperties: false
@@ -641,6 +860,7 @@ components:
       type: string
       title: ClientStateType
       enum:
+        - CLIENT_STATE_TYPE_UNSPECIFIED
         - CLIENT_STATE_TYPE_PRESENCE
         - CLIENT_STATE_TYPE_READ_MARKER
     chat.v1.GetClientStateResponse:
@@ -653,7 +873,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/chat.v1.ClientState'
-          title: clientState
+          title: client_state
       title: GetClientStateResponse
       additionalProperties: false
     chat.v1.GetHistoryRequest:
@@ -683,7 +903,7 @@ components:
         events:
           type: array
           items:
-            $ref: '#/components/schemas/chat.v1.ServerEvent'
+            $ref: '#/components/schemas/chat.v1.ConnectResponse'
           title: events
         nextCursor:
           type: string
@@ -702,7 +922,7 @@ components:
           title: profile_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         status:
           title: status
           $ref: '#/components/schemas/chat.v1.PresenceStatus'
@@ -719,9 +939,9 @@ components:
       type: string
       title: PresenceStatus
       enum:
-        - UNKNOWN
-        - OFFLINE
-        - ONLINE
+        - PRESENCE_STATUS_UNSPECIFIED
+        - PRESENCE_STATUS_OFFLINE
+        - PRESENCE_STATUS_ONLINE
     chat.v1.ReadMarker:
       type: object
       properties:
@@ -730,19 +950,19 @@ components:
           title: room_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         profileId:
           type: string
           title: profile_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         upToEventId:
           type: string
           title: up_to_event_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
       title: ReadMarker
       additionalProperties: false
     chat.v1.ReceiptEvent:
@@ -753,24 +973,23 @@ components:
           title: profile_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         roomId:
           type: string
           title: room_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         eventId:
           type: array
           items:
             type: string
             maxLength: 40
             minLength: 3
-            pattern: '[0-9a-z_-]{3,20}'
+            pattern: '[0-9a-z_-]{3,40}'
+            minItems: 1
           title: event_id
-          maxLength: 40
-          minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          minItems: 1
       title: ReceiptEvent
       additionalProperties: false
       description: Read receipts
@@ -782,7 +1001,7 @@ components:
           title: room_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         profileIds:
           type: array
           items:
@@ -798,7 +1017,7 @@ components:
           title: room_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         error:
           title: error
           $ref: '#/components/schemas/common.v1.ErrorDetail'
@@ -812,7 +1031,7 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         name:
           type: string
           title: name
@@ -846,21 +1065,21 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: client-supplied or server-generated UUID
         roomId:
           type: string
           title: room_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: room_id
         senderId:
           type: string
           title: sender_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: profile_id or service/bot id
         type:
           title: type
@@ -884,7 +1103,7 @@ components:
           title: parent_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: if this message is a followup event on an original message
           nullable: true
       title: RoomEvent
@@ -894,22 +1113,22 @@ components:
       type: string
       title: RoomEventType
       enum:
-        - SYSTEM
-        - EVENT
-        - TEXT
-        - ATTACHMENT
-        - REACTION
-        - ENCRYPTED
-        - EDIT
-        - REDACTION
-        - STATE_DELIVERED
-        - STATE_READ
-        - STATE_TYPING
-        - PRESENCE
-        - CALL_OFFER
-        - CALL_ANSWER
-        - CALL_ICE
-        - CALL_END
+        - ROOM_EVENT_TYPE_UNSPECIFIED
+        - ROOM_EVENT_TYPE_EVENT
+        - ROOM_EVENT_TYPE_TEXT
+        - ROOM_EVENT_TYPE_ATTACHMENT
+        - ROOM_EVENT_TYPE_REACTION
+        - ROOM_EVENT_TYPE_ENCRYPTED
+        - ROOM_EVENT_TYPE_EDIT
+        - ROOM_EVENT_TYPE_REDACTION
+        - ROOM_EVENT_TYPE_STATE_DELIVERED
+        - ROOM_EVENT_TYPE_STATE_READ
+        - ROOM_EVENT_TYPE_STATE_TYPING
+        - ROOM_EVENT_TYPE_PRESENCE
+        - ROOM_EVENT_TYPE_CALL_OFFER
+        - ROOM_EVENT_TYPE_CALL_ANSWER
+        - ROOM_EVENT_TYPE_CALL_ICE
+        - ROOM_EVENT_TYPE_CALL_END
       description: Allowed message types. Extendable via new enum values; clients must ignore unknown values.
     chat.v1.RoomSubscription:
       type: object
@@ -919,13 +1138,13 @@ components:
           title: room_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         profileId:
           type: string
           title: profile_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         roles:
           type: array
           items:
@@ -948,7 +1167,7 @@ components:
           title: room_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         limit:
           type: integer
           title: limit
@@ -966,7 +1185,7 @@ components:
           title: room_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         members:
           type: array
           items:
@@ -1038,62 +1257,6 @@ components:
           title: ack
       title: SendEventResponse
       additionalProperties: false
-    chat.v1.ServerEvent:
-      type: object
-      allOf:
-        - properties:
-            id:
-              type: string
-              title: id
-              maxLength: 40
-              minLength: 3
-              pattern: '[0-9a-z_-]{3,20}'
-            timestamp:
-              title: timestamp
-              $ref: '#/components/schemas/google.protobuf.Timestamp'
-        - oneOf:
-            - properties:
-                message:
-                  title: message
-                  $ref: '#/components/schemas/chat.v1.RoomEvent'
-              title: message
-              required:
-                - message
-            - properties:
-                presenceEvent:
-                  title: presence_event
-                  description: user presence change affecting the room
-                  $ref: '#/components/schemas/chat.v1.PresenceEvent'
-              title: presence_event
-              required:
-                - presenceEvent
-            - properties:
-                readEvent:
-                  title: read_event
-                  $ref: '#/components/schemas/chat.v1.ReadMarker'
-              title: read_event
-              required:
-                - readEvent
-            - properties:
-                receiptEvent:
-                  title: receipt_event
-                  $ref: '#/components/schemas/chat.v1.ReceiptEvent'
-              title: receipt_event
-              required:
-                - receiptEvent
-            - properties:
-                typingEvent:
-                  title: typing_event
-                  $ref: '#/components/schemas/chat.v1.TypingEvent'
-              title: typing_event
-              required:
-                - typingEvent
-      title: ServerEvent
-      additionalProperties: false
-      description: |-
-        Server -> Client event payload. All events in a room are delivered over Connect stream.
-         event_id: globally unique id (opaque string) assigned by server, strictly monotonically increasing per room.
-         sequence: strictly increasing 64-bit integer per-room sequence number (useful for resume & ordering).
     chat.v1.StreamAck:
       type: object
       properties:
@@ -1102,13 +1265,13 @@ components:
           title: room_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         eventId:
           type: string
           title: event_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         ackAt:
           title: ack_at
           $ref: '#/components/schemas/google.protobuf.Timestamp'
@@ -1134,13 +1297,13 @@ components:
           title: profile_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         roomId:
           type: string
           title: room_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         typing:
           type: boolean
           title: typing
@@ -1158,18 +1321,18 @@ components:
           title: room_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         profileId:
           type: string
           title: profile_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         clientStates:
           type: array
           items:
             $ref: '#/components/schemas/chat.v1.ClientState'
-          title: clientStates
+          title: client_states
       title: UpdateClientStateRequest
       additionalProperties: false
     chat.v1.UpdateClientStateResponse:
@@ -1188,7 +1351,7 @@ components:
           title: room_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         name:
           type: string
           title: name
@@ -1219,7 +1382,7 @@ components:
           title: room_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         profileId:
           type: string
           title: profile_id
@@ -1238,7 +1401,7 @@ components:
           title: room_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         error:
           title: error
           $ref: '#/components/schemas/common.v1.ErrorDetail'
@@ -1279,6 +1442,18 @@ components:
           title: value
       title: MetaEntry
       additionalProperties: false
+    compression:
+      title: compression
+      enum:
+        - identity
+        - gzip
+        - br
+      description: Which compression algorithm to use for this request
+    connect:
+      title: connect
+      enum:
+        - v1
+      description: Define the version of the Connect protocol
     connect-protocol-version:
       type: number
       title: Connect-Protocol-Version
@@ -1348,6 +1523,12 @@ components:
           description: Deserialized error detail payload. The 'type' field indicates the schema. This field is for easier debugging and should not be relied upon for application logic.
       additionalProperties: true
       description: Contains an arbitrary serialized message along with a @type that describes the type of the serialized message, with an additional debug field for ConnectRPC error details.
+    encoding:
+      title: encoding
+      enum:
+        - proto
+        - json
+      description: Define which encoding or 'Message-Codec' to use
     google.protobuf.ListValue:
       type: object
       properties:

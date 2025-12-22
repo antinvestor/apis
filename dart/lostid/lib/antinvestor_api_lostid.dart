@@ -18,8 +18,9 @@
 ///   );
 ///
 ///   // Create your transport with the interceptors
+///   // Use defaultLostidEndpoint or provide your own endpoint
 ///   final transport = YourTransportImplementation(
-///     baseUrl: Uri.parse('https://api.example.com'),
+///     baseUrl: Uri.parse(defaultLostidEndpoint),
 ///     interceptors: interceptors,
 ///   );
 ///
@@ -29,8 +30,8 @@
 /// ```
 library;
 
-// Export client factory
-export 'src/client_factory.dart';
+// Export client wrapper
+export 'src/client.dart';
 
 // Export generated protobuf files
 export 'src/lostid/v1/lostid.pb.dart';

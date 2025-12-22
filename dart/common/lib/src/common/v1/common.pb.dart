@@ -8,13 +8,13 @@
 // ignore_for_file: constant_identifier_names
 // ignore_for_file: curly_braces_in_flow_control_structures
 // ignore_for_file: deprecated_member_use_from_same_package, library_prefixes
-// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names, prefer_relative_imports
 
 import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
+import 'package:protobuf/well_known_types/google/protobuf/struct.pb.dart' as $0;
 
-import '../../google/protobuf/struct.pb.dart' as $0;
 import 'common.pbenum.dart';
 
 export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
@@ -70,7 +70,6 @@ class Pagination extends $pb.GeneratedMessage {
   static Pagination create() => Pagination._();
   @$core.override
   Pagination createEmptyInstance() => create();
-  static $pb.PbList<Pagination> createRepeated() => $pb.PbList<Pagination>();
   @$core.pragma('dart2js:noInline')
   static Pagination getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<Pagination>(create);
@@ -168,8 +167,6 @@ class SearchRequest extends $pb.GeneratedMessage {
   static SearchRequest create() => SearchRequest._();
   @$core.override
   SearchRequest createEmptyInstance() => create();
-  static $pb.PbList<SearchRequest> createRepeated() =>
-      $pb.PbList<SearchRequest>();
   @$core.pragma('dart2js:noInline')
   static SearchRequest getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<SearchRequest>(create);
@@ -263,8 +260,6 @@ class StatusRequest extends $pb.GeneratedMessage {
   static StatusRequest create() => StatusRequest._();
   @$core.override
   StatusRequest createEmptyInstance() => create();
-  static $pb.PbList<StatusRequest> createRepeated() =>
-      $pb.PbList<StatusRequest>();
   @$core.pragma('dart2js:noInline')
   static StatusRequest getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<StatusRequest>(create);
@@ -347,8 +342,6 @@ class StatusResponse extends $pb.GeneratedMessage {
   static StatusResponse create() => StatusResponse._();
   @$core.override
   StatusResponse createEmptyInstance() => create();
-  static $pb.PbList<StatusResponse> createRepeated() =>
-      $pb.PbList<StatusResponse>();
   @$core.pragma('dart2js:noInline')
   static StatusResponse getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<StatusResponse>(create);
@@ -465,8 +458,6 @@ class StatusUpdateRequest extends $pb.GeneratedMessage {
   static StatusUpdateRequest create() => StatusUpdateRequest._();
   @$core.override
   StatusUpdateRequest createEmptyInstance() => create();
-  static $pb.PbList<StatusUpdateRequest> createRepeated() =>
-      $pb.PbList<StatusUpdateRequest>();
   @$core.pragma('dart2js:noInline')
   static StatusUpdateRequest getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<StatusUpdateRequest>(create);
@@ -561,8 +552,6 @@ class StatusUpdateResponse extends $pb.GeneratedMessage {
   static StatusUpdateResponse create() => StatusUpdateResponse._();
   @$core.override
   StatusUpdateResponse createEmptyInstance() => create();
-  static $pb.PbList<StatusUpdateResponse> createRepeated() =>
-      $pb.PbList<StatusUpdateResponse>();
   @$core.pragma('dart2js:noInline')
   static StatusUpdateResponse getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<StatusUpdateResponse>(create);
@@ -641,7 +630,6 @@ class ContactLink extends $pb.GeneratedMessage {
   static ContactLink create() => ContactLink._();
   @$core.override
   ContactLink createEmptyInstance() => create();
-  static $pb.PbList<ContactLink> createRepeated() => $pb.PbList<ContactLink>();
   @$core.pragma('dart2js:noInline')
   static ContactLink getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<ContactLink>(create);
@@ -764,7 +752,6 @@ class ErrorDetail extends $pb.GeneratedMessage {
   static ErrorDetail create() => ErrorDetail._();
   @$core.override
   ErrorDetail createEmptyInstance() => create();
-  static $pb.PbList<ErrorDetail> createRepeated() => $pb.PbList<ErrorDetail>();
   @$core.pragma('dart2js:noInline')
   static ErrorDetail getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<ErrorDetail>(create);

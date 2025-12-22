@@ -8,14 +8,17 @@
 // ignore_for_file: constant_identifier_names
 // ignore_for_file: curly_braces_in_flow_control_structures
 // ignore_for_file: deprecated_member_use_from_same_package, library_prefixes
-// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: non_constant_identifier_names, prefer_relative_imports
+// ignore_for_file: unused_import
 
 import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
+import 'package:protobuf/well_known_types/google/protobuf/struct.pbjson.dart'
+    as $0;
+
 import '../../common/v1/common.pbjson.dart' as $1;
-import '../../google/protobuf/struct.pbjson.dart' as $0;
 
 @$core.Deprecated('Use oCRFileDescriptor instead')
 const OCRFile$json = {
@@ -72,7 +75,7 @@ const RecognizeRequest$json = {
 /// Descriptor for `RecognizeRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List recognizeRequestDescriptor = $convert.base64Decode(
     'ChBSZWNvZ25pemVSZXF1ZXN0Ej4KDHJlZmVyZW5jZV9pZBgBIAEoCUIbukgYchYQAxgoMhBbMC'
-    '05YS16Xy1dezMsMjB9UgtyZWZlcmVuY2VJZBI2CgtsYW5ndWFnZV9pZBgCIAEoCUIVukgSchAQ'
+    '05YS16Xy1dezMsNDB9UgtyZWZlcmVuY2VJZBI2CgtsYW5ndWFnZV9pZBgCIAEoCUIVukgSchAQ'
     'AhgDMgpbYS16XXsyLDN9UgpsYW5ndWFnZUlkEjcKCnByb3BlcnRpZXMYAyABKAsyFy5nb29nbG'
     'UucHJvdG9idWYuU3RydWN0Ugpwcm9wZXJ0aWVzEhQKBWFzeW5jGAQgASgIUgVhc3luYxI9Cgdm'
     'aWxlX2lkGAUgAygJQiS6SCGSAR4IARAFIhhyFhADGCgyEFswLTlhLXpfLV17MywyMH1SBmZpbG'
@@ -132,7 +135,7 @@ const $core.Map<$core.String, $core.dynamic> OCRServiceBase$json = {
       '1': 'Status',
       '2': '.common.v1.StatusRequest',
       '3': '.ocr.v1.StatusResponse',
-      '4': {}
+      '4': {'34': 1},
     },
   ],
 };
@@ -160,9 +163,9 @@ final $typed_data.Uint8List oCRServiceDescriptor = $convert.base64Decode(
     'b2Nlc3NpbmcgKHJldHVybnMgaW1tZWRpYXRlbHkgd2l0aCByZXN1bHRzKSBhbmQgYXN5bmNocm'
     '9ub3VzIHByb2Nlc3NpbmcgKHF1ZXVlcyBmb3IgYmFja2dyb3VuZCBwcm9jZXNzaW5nKS4gQmF0'
     'Y2ggcHJvY2Vzc2luZyBzdXBwb3J0cyB1cCB0byA1IGZpbGVzIHBlciByZXF1ZXN0LioNcmVjb2'
-    'duaXplVGV4dBKcAgoGU3RhdHVzEhguY29tbW9uLnYxLlN0YXR1c1JlcXVlc3QaFi5vY3IudjEu'
-    'U3RhdHVzUmVzcG9uc2Ui3wG6R9sBCgNPQ1ISFkdldCBPQ1IgcmVxdWVzdCBzdGF0dXMarQFSZX'
-    'RyaWV2ZXMgdGhlIGN1cnJlbnQgc3RhdHVzIG9mIGFuIGFzeW5jaHJvbm91cyBPQ1IgcmVxdWVz'
-    'dC4gUmV0dXJucyBwcm9jZXNzaW5nIHN0YXR1cyAocXVldWVkLCBpbi1wcm9jZXNzLCBzdWNjZX'
-    'NzZnVsLCBmYWlsZWQpIGFuZCBleHRyYWN0ZWQgdGV4dCBpZiBwcm9jZXNzaW5nIGlzIGNvbXBs'
-    'ZXRlLioMZ2V0T0NSU3RhdHVz');
+    'duaXplVGV4dBKfAgoGU3RhdHVzEhguY29tbW9uLnYxLlN0YXR1c1JlcXVlc3QaFi5vY3IudjEu'
+    'U3RhdHVzUmVzcG9uc2Ui4gGQAgG6R9sBCgNPQ1ISFkdldCBPQ1IgcmVxdWVzdCBzdGF0dXMarQ'
+    'FSZXRyaWV2ZXMgdGhlIGN1cnJlbnQgc3RhdHVzIG9mIGFuIGFzeW5jaHJvbm91cyBPQ1IgcmVx'
+    'dWVzdC4gUmV0dXJucyBwcm9jZXNzaW5nIHN0YXR1cyAocXVldWVkLCBpbi1wcm9jZXNzLCBzdW'
+    'NjZXNzZnVsLCBmYWlsZWQpIGFuZCBleHRyYWN0ZWQgdGV4dCBpZiBwcm9jZXNzaW5nIGlzIGNv'
+    'bXBsZXRlLioMZ2V0T0NSU3RhdHVz');

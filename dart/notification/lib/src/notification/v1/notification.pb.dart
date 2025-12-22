@@ -8,16 +8,16 @@
 // ignore_for_file: constant_identifier_names
 // ignore_for_file: curly_braces_in_flow_control_structures
 // ignore_for_file: deprecated_member_use_from_same_package, library_prefixes
-// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names, prefer_relative_imports
 
 import 'dart:async' as $async;
 import 'dart:core' as $core;
 
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
+import 'package:protobuf/well_known_types/google/protobuf/struct.pb.dart' as $0;
 
 import '../../common/v1/common.pb.dart' as $1;
-import '../../google/protobuf/struct.pb.dart' as $0;
 import 'notification.pbenum.dart';
 
 export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
@@ -74,7 +74,6 @@ class Language extends $pb.GeneratedMessage {
   static Language create() => Language._();
   @$core.override
   Language createEmptyInstance() => create();
-  static $pb.PbList<Language> createRepeated() => $pb.PbList<Language>();
   @$core.pragma('dart2js:noInline')
   static Language getDefault() =>
       _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Language>(create);
@@ -171,8 +170,6 @@ class TemplateData extends $pb.GeneratedMessage {
   static TemplateData create() => TemplateData._();
   @$core.override
   TemplateData createEmptyInstance() => create();
-  static $pb.PbList<TemplateData> createRepeated() =>
-      $pb.PbList<TemplateData>();
   @$core.pragma('dart2js:noInline')
   static TemplateData getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<TemplateData>(create);
@@ -269,7 +266,6 @@ class Template extends $pb.GeneratedMessage {
   static Template create() => Template._();
   @$core.override
   Template createEmptyInstance() => create();
-  static $pb.PbList<Template> createRepeated() => $pb.PbList<Template>();
   @$core.pragma('dart2js:noInline')
   static Template getDefault() =>
       _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Template>(create);
@@ -398,8 +394,6 @@ class Notification extends $pb.GeneratedMessage {
   static Notification create() => Notification._();
   @$core.override
   Notification createEmptyInstance() => create();
-  static $pb.PbList<Notification> createRepeated() =>
-      $pb.PbList<Notification>();
   @$core.pragma('dart2js:noInline')
   static Notification getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<Notification>(create);
@@ -593,8 +587,6 @@ class SearchResponse extends $pb.GeneratedMessage {
   static SearchResponse create() => SearchResponse._();
   @$core.override
   SearchResponse createEmptyInstance() => create();
-  static $pb.PbList<SearchResponse> createRepeated() =>
-      $pb.PbList<SearchResponse>();
   @$core.pragma('dart2js:noInline')
   static SearchResponse getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<SearchResponse>(create);
@@ -646,7 +638,6 @@ class SendRequest extends $pb.GeneratedMessage {
   static SendRequest create() => SendRequest._();
   @$core.override
   SendRequest createEmptyInstance() => create();
-  static $pb.PbList<SendRequest> createRepeated() => $pb.PbList<SendRequest>();
   @$core.pragma('dart2js:noInline')
   static SendRequest getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<SendRequest>(create);
@@ -698,8 +689,6 @@ class SendResponse extends $pb.GeneratedMessage {
   static SendResponse create() => SendResponse._();
   @$core.override
   SendResponse createEmptyInstance() => create();
-  static $pb.PbList<SendResponse> createRepeated() =>
-      $pb.PbList<SendResponse>();
   @$core.pragma('dart2js:noInline')
   static SendResponse getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<SendResponse>(create);
@@ -754,8 +743,6 @@ class ReleaseRequest extends $pb.GeneratedMessage {
   static ReleaseRequest create() => ReleaseRequest._();
   @$core.override
   ReleaseRequest createEmptyInstance() => create();
-  static $pb.PbList<ReleaseRequest> createRepeated() =>
-      $pb.PbList<ReleaseRequest>();
   @$core.pragma('dart2js:noInline')
   static ReleaseRequest getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<ReleaseRequest>(create);
@@ -816,8 +803,6 @@ class ReleaseResponse extends $pb.GeneratedMessage {
   static ReleaseResponse create() => ReleaseResponse._();
   @$core.override
   ReleaseResponse createEmptyInstance() => create();
-  static $pb.PbList<ReleaseResponse> createRepeated() =>
-      $pb.PbList<ReleaseResponse>();
   @$core.pragma('dart2js:noInline')
   static ReleaseResponse getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<ReleaseResponse>(create);
@@ -870,8 +855,6 @@ class ReceiveRequest extends $pb.GeneratedMessage {
   static ReceiveRequest create() => ReceiveRequest._();
   @$core.override
   ReceiveRequest createEmptyInstance() => create();
-  static $pb.PbList<ReceiveRequest> createRepeated() =>
-      $pb.PbList<ReceiveRequest>();
   @$core.pragma('dart2js:noInline')
   static ReceiveRequest getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<ReceiveRequest>(create);
@@ -923,8 +906,6 @@ class ReceiveResponse extends $pb.GeneratedMessage {
   static ReceiveResponse create() => ReceiveResponse._();
   @$core.override
   ReceiveResponse createEmptyInstance() => create();
-  static $pb.PbList<ReceiveResponse> createRepeated() =>
-      $pb.PbList<ReceiveResponse>();
   @$core.pragma('dart2js:noInline')
   static ReceiveResponse getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<ReceiveResponse>(create);
@@ -985,8 +966,6 @@ class TemplateSearchRequest extends $pb.GeneratedMessage {
   static TemplateSearchRequest create() => TemplateSearchRequest._();
   @$core.override
   TemplateSearchRequest createEmptyInstance() => create();
-  static $pb.PbList<TemplateSearchRequest> createRepeated() =>
-      $pb.PbList<TemplateSearchRequest>();
   @$core.pragma('dart2js:noInline')
   static TemplateSearchRequest getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<TemplateSearchRequest>(create);
@@ -1072,8 +1051,6 @@ class TemplateSearchResponse extends $pb.GeneratedMessage {
   static TemplateSearchResponse create() => TemplateSearchResponse._();
   @$core.override
   TemplateSearchResponse createEmptyInstance() => create();
-  static $pb.PbList<TemplateSearchResponse> createRepeated() =>
-      $pb.PbList<TemplateSearchResponse>();
   @$core.pragma('dart2js:noInline')
   static TemplateSearchResponse getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<TemplateSearchResponse>(create);
@@ -1135,8 +1112,6 @@ class TemplateSaveRequest extends $pb.GeneratedMessage {
   static TemplateSaveRequest create() => TemplateSaveRequest._();
   @$core.override
   TemplateSaveRequest createEmptyInstance() => create();
-  static $pb.PbList<TemplateSaveRequest> createRepeated() =>
-      $pb.PbList<TemplateSaveRequest>();
   @$core.pragma('dart2js:noInline')
   static TemplateSaveRequest getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<TemplateSaveRequest>(create);
@@ -1225,8 +1200,6 @@ class TemplateSaveResponse extends $pb.GeneratedMessage {
   static TemplateSaveResponse create() => TemplateSaveResponse._();
   @$core.override
   TemplateSaveResponse createEmptyInstance() => create();
-  static $pb.PbList<TemplateSaveResponse> createRepeated() =>
-      $pb.PbList<TemplateSaveResponse>();
   @$core.pragma('dart2js:noInline')
   static TemplateSaveResponse getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<TemplateSaveResponse>(create);

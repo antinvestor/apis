@@ -49,6 +49,59 @@ paths:
               schema:
                 $ref: '#/components/schemas/ocr.v1.RecognizeResponse'
   /ocr.v1.OCRService/Status:
+    get:
+      tags:
+        - OCR
+        - ocr.v1.OCRService
+      summary: Get OCR request status
+      description: Retrieves the current status of an asynchronous OCR request. Returns processing status (queued, in-process, successful, failed) and extracted text if processing is complete.
+      operationId: getOCRStatus
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+        - name: message
+          in: query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/common.v1.StatusRequest'
+        - name: encoding
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/encoding'
+        - name: base64
+          in: query
+          schema:
+            $ref: '#/components/schemas/base64'
+        - name: compression
+          in: query
+          schema:
+            $ref: '#/components/schemas/compression'
+        - name: connect
+          in: query
+          schema:
+            $ref: '#/components/schemas/connect'
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ocr.v1.StatusResponse'
     post:
       tags:
         - OCR
@@ -87,6 +140,10 @@ paths:
                 $ref: '#/components/schemas/ocr.v1.StatusResponse'
 components:
   schemas:
+    base64:
+      type: boolean
+      title: base64
+      description: Specifies if the message query param is base64 encoded, which may be required for binary data
     common.v1.STATUS:
       type: string
       title: STATUS
@@ -108,7 +165,7 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Unique identifier of the entity or operation
         extras:
           title: extras
@@ -117,6 +174,18 @@ components:
       title: StatusRequest
       additionalProperties: false
       description: StatusRequest retrieves the current status of an entity or operation.
+    compression:
+      title: compression
+      enum:
+        - identity
+        - gzip
+        - br
+      description: Which compression algorithm to use for this request
+    connect:
+      title: connect
+      enum:
+        - v1
+      description: Define the version of the Connect protocol
     connect-protocol-version:
       type: number
       title: Connect-Protocol-Version
@@ -186,6 +255,12 @@ components:
           description: Deserialized error detail payload. The 'type' field indicates the schema. This field is for easier debugging and should not be relied upon for application logic.
       additionalProperties: true
       description: Contains an arbitrary serialized message along with a @type that describes the type of the serialized message, with an additional debug field for ConnectRPC error details.
+    encoding:
+      title: encoding
+      enum:
+        - proto
+        - json
+      description: Define which encoding or 'Message-Codec' to use
     google.protobuf.ListValue:
       type: object
       properties:
@@ -285,7 +360,7 @@ components:
           title: reference_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Client-provided reference ID for tracking
         languageId:
           type: string

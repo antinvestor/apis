@@ -18,6 +18,7 @@ abstract final class PartitionService {
     connect.StreamType.unary,
     partitionv1partition.GetTenantRequest.new,
     partitionv1partition.GetTenantResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
   );
 
   /// ListTenant retrieves all tenants matching criteria.
@@ -26,6 +27,7 @@ abstract final class PartitionService {
     connect.StreamType.server,
     partitionv1partition.ListTenantRequest.new,
     partitionv1partition.ListTenantResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
   );
 
   /// CreateTenant creates a new tenant.
@@ -50,6 +52,7 @@ abstract final class PartitionService {
     connect.StreamType.server,
     partitionv1partition.ListPartitionRequest.new,
     partitionv1partition.ListPartitionResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
   );
 
   /// CreatePartition creates a new partition.
@@ -66,6 +69,7 @@ abstract final class PartitionService {
     connect.StreamType.unary,
     partitionv1partition.GetPartitionRequest.new,
     partitionv1partition.GetPartitionResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
   );
 
   /// GetPartitionParents retrieves the parent hierarchy.
@@ -74,6 +78,7 @@ abstract final class PartitionService {
     connect.StreamType.unary,
     partitionv1partition.GetPartitionParentsRequest.new,
     partitionv1partition.GetPartitionParentsResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
   );
 
   /// UpdatePartition updates an existing partition.
@@ -98,6 +103,7 @@ abstract final class PartitionService {
     connect.StreamType.server,
     partitionv1partition.ListPartitionRoleRequest.new,
     partitionv1partition.ListPartitionRoleResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
   );
 
   /// RemovePartitionRole deletes a partition role.
@@ -122,6 +128,7 @@ abstract final class PartitionService {
     connect.StreamType.unary,
     partitionv1partition.GetPageRequest.new,
     partitionv1partition.GetPageResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
   );
 
   /// RemovePage deletes a custom page.
@@ -146,6 +153,7 @@ abstract final class PartitionService {
     connect.StreamType.unary,
     partitionv1partition.GetAccessRequest.new,
     partitionv1partition.GetAccessResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
   );
 
   /// RemoveAccess revokes a profile's access to a partition.
@@ -170,6 +178,7 @@ abstract final class PartitionService {
     connect.StreamType.server,
     partitionv1partition.ListAccessRoleRequest.new,
     partitionv1partition.ListAccessRoleResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
   );
 
   /// RemoveAccessRole removes a role from an access grant.

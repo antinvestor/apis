@@ -345,6 +345,59 @@ paths:
               schema:
                 $ref: '#/components/schemas/profile.v1.DeleteRelationshipResponse'
   /profile.v1.ProfileService/GetByContact:
+    get:
+      tags:
+        - Profiles
+        - profile.v1.ProfileService
+      summary: Get profile by contact
+      description: Retrieves a profile associated with a specific contact (email or phone number).
+      operationId: getProfileByContact
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+        - name: message
+          in: query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/profile.v1.GetByContactRequest'
+        - name: encoding
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/encoding'
+        - name: base64
+          in: query
+          schema:
+            $ref: '#/components/schemas/base64'
+        - name: compression
+          in: query
+          schema:
+            $ref: '#/components/schemas/compression'
+        - name: connect
+          in: query
+          schema:
+            $ref: '#/components/schemas/connect'
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/profile.v1.GetByContactResponse'
     post:
       tags:
         - Profiles
@@ -382,6 +435,59 @@ paths:
               schema:
                 $ref: '#/components/schemas/profile.v1.GetByContactResponse'
   /profile.v1.ProfileService/GetById:
+    get:
+      tags:
+        - Profiles
+        - profile.v1.ProfileService
+      summary: Get profile by ID
+      description: Retrieves a complete profile by its unique identifier including contacts, addresses, and properties.
+      operationId: getProfileById
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+        - name: message
+          in: query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/profile.v1.GetByIdRequest'
+        - name: encoding
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/encoding'
+        - name: base64
+          in: query
+          schema:
+            $ref: '#/components/schemas/base64'
+        - name: compression
+          in: query
+          schema:
+            $ref: '#/components/schemas/compression'
+        - name: connect
+          in: query
+          schema:
+            $ref: '#/components/schemas/connect'
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/profile.v1.GetByIdResponse'
     post:
       tags:
         - Profiles
@@ -571,6 +677,10 @@ paths:
                 $ref: '#/components/schemas/profile.v1.UpdateResponse'
 components:
   schemas:
+    base64:
+      type: boolean
+      title: base64
+      description: Specifies if the message query param is base64 encoded, which may be required for binary data
     common.v1.STATE:
       type: string
       title: STATE
@@ -584,6 +694,18 @@ components:
         STATE represents the lifecycle state of an entity across all services.
          This enum provides a consistent way to track entity states from creation to deletion.
          buf:lint:ignore ENUM_VALUE_PREFIX
+    compression:
+      title: compression
+      enum:
+        - identity
+        - gzip
+        - br
+      description: Which compression algorithm to use for this request
+    connect:
+      title: connect
+      enum:
+        - v1
+      description: Define the version of the Connect protocol
     connect-protocol-version:
       type: number
       title: Connect-Protocol-Version
@@ -653,6 +775,12 @@ components:
           description: Deserialized error detail payload. The 'type' field indicates the schema. This field is for easier debugging and should not be relied upon for application logic.
       additionalProperties: true
       description: Contains an arbitrary serialized message along with a @type that describes the type of the serialized message, with an additional debug field for ConnectRPC error details.
+    encoding:
+      title: encoding
+      enum:
+        - proto
+        - json
+      description: Define which encoding or 'Message-Codec' to use
     google.protobuf.ListValue:
       type: object
       properties:
@@ -726,7 +854,7 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         address:
           title: address
           $ref: '#/components/schemas/profile.v1.AddressObject'
@@ -749,7 +877,7 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         contact:
           type: string
           title: contact
@@ -778,7 +906,7 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         parent:
           type: string
           title: parent
@@ -793,7 +921,7 @@ components:
           title: parent_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         child:
           type: string
           title: child
@@ -808,7 +936,7 @@ components:
           title: child_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         type:
           title: type
           $ref: '#/components/schemas/profile.v1.RelationshipType'
@@ -854,7 +982,7 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Unique address ID
         name:
           type: string
@@ -913,7 +1041,7 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         code:
           type: string
           title: code
@@ -954,7 +1082,7 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Unique contact ID
         type:
           title: type
@@ -1000,7 +1128,7 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         contact:
           type: string
           title: contact
@@ -1026,19 +1154,19 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         contactId:
           type: string
           title: contact_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         code:
           type: string
           title: code
         durationToExpire:
           type: string
-          title: durationToExpire
+          title: duration_to_expire
           description: This is the string amount of time before code expires e.g. 3m or 500s
       title: CreateContactVerificationRequest
       additionalProperties: false
@@ -1051,7 +1179,7 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         success:
           type: boolean
           title: success
@@ -1090,13 +1218,13 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         parentId:
           type: string
           title: parent_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
       title: DeleteRelationshipRequest
       additionalProperties: false
       description: The request message containing the information necessary to delete relationship to a profile
@@ -1147,7 +1275,7 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
       title: GetByIdRequest
       additionalProperties: false
       description: The request message containing the profile's hash
@@ -1176,13 +1304,13 @@ components:
           title: peer_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         lastRelationshipId:
           type: string
           title: last_relationship_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         relatedChildrenId:
           type: array
           items:
@@ -1217,13 +1345,13 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         mergeid:
           type: string
           title: mergeid
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
       title: MergeRequest
       additionalProperties: false
       description: The request message containing the profile's hash
@@ -1243,7 +1371,7 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Unique profile ID
         type:
           title: type
@@ -1290,7 +1418,7 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Unique relationship ID
         type:
           title: type
@@ -1333,7 +1461,7 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
       title: RemoveContactRequest
       additionalProperties: false
       description: The request message containing the information necessary to remove a contact
@@ -1353,7 +1481,7 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
       title: RemoveRosterRequest
       additionalProperties: false
     profile.v1.RemoveRosterResponse:
@@ -1372,14 +1500,14 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Unique roster entry ID
         profileId:
           type: string
           title: profile_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Profile ID of the contact
         contact:
           title: contact
@@ -1490,7 +1618,7 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         properties:
           title: properties
           $ref: '#/components/schemas/google.protobuf.Struct'

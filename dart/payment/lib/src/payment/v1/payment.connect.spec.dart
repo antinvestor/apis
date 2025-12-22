@@ -56,6 +56,7 @@ abstract final class PaymentService {
     connect.StreamType.unary,
     commonv1common.StatusRequest.new,
     commonv1common.StatusResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
   );
 
   /// StatusUpdate updates the status of a payment.
@@ -83,6 +84,7 @@ abstract final class PaymentService {
     connect.StreamType.server,
     commonv1common.SearchRequest.new,
     paymentv1payment.SearchResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
   );
 
   /// Reconcile matches external transactions with internal payments.

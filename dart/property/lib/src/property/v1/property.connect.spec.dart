@@ -26,6 +26,7 @@ abstract final class PropertyService {
     connect.StreamType.server,
     propertyv1property.ListPropertyTypeRequest.new,
     propertyv1property.ListPropertyTypeResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
   );
 
   /// AddLocality creates a new geographic locality.
@@ -74,6 +75,7 @@ abstract final class PropertyService {
     connect.StreamType.unary,
     propertyv1property.StateOfPropertyRequest.new,
     propertyv1property.StateOfPropertyResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
   );
 
   /// HistoryOfProperty retrieves the complete state history.
@@ -82,6 +84,7 @@ abstract final class PropertyService {
     connect.StreamType.server,
     propertyv1property.HistoryOfPropertyRequest.new,
     propertyv1property.HistoryOfPropertyResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
   );
 
   /// SearchProperty finds properties matching criteria.
@@ -90,6 +93,7 @@ abstract final class PropertyService {
     connect.StreamType.server,
     propertyv1property.SearchPropertyRequest.new,
     propertyv1property.SearchPropertyResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
   );
 
   /// ListSubscription retrieves subscriptions for a property.
@@ -98,6 +102,7 @@ abstract final class PropertyService {
     connect.StreamType.server,
     propertyv1property.ListSubscriptionRequest.new,
     propertyv1property.ListSubscriptionResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
   );
 
   /// AddSubscription grants a profile access to a property.

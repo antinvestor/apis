@@ -18,6 +18,7 @@ abstract final class ProfileService {
     connect.StreamType.unary,
     profilev1profile.GetByIdRequest.new,
     profilev1profile.GetByIdResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
   );
 
   /// GetByContact retrieves a profile by contact information.
@@ -26,6 +27,7 @@ abstract final class ProfileService {
     connect.StreamType.unary,
     profilev1profile.GetByContactRequest.new,
     profilev1profile.GetByContactResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
   );
 
   /// Search finds profiles matching specified criteria.
@@ -34,6 +36,7 @@ abstract final class ProfileService {
     connect.StreamType.server,
     profilev1profile.SearchRequest.new,
     profilev1profile.SearchResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
   );
 
   /// Merge combines two profiles into one.
@@ -106,6 +109,7 @@ abstract final class ProfileService {
     connect.StreamType.server,
     profilev1profile.SearchRosterRequest.new,
     profilev1profile.SearchRosterResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
   );
 
   /// AddRoster adds multiple contacts to a user's roster.
@@ -154,5 +158,6 @@ abstract final class ProfileService {
     connect.StreamType.server,
     profilev1profile.ListRelationshipRequest.new,
     profilev1profile.ListRelationshipResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
   );
 }

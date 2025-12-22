@@ -10,7 +10,8 @@
 /// import 'package:connectrpc/connect.dart';
 ///
 /// void main() async {
-///   final channel = ClientChannel('https://api.example.com');
+///   // Use defaultChatEndpoint or provide your own endpoint
+///   final channel = ClientChannel(defaultChatEndpoint);
 ///   final client = ChatServiceClient(channel);
 ///
 ///   // Send a message
@@ -27,8 +28,8 @@
 /// ```
 library;
 
-// Export client factory
-export 'src/client_factory.dart';
+// Export client wrapper
+export 'src/client.dart';
 
 // Export generated protobuf files
 export 'src/chat/v1/chat.pb.dart';

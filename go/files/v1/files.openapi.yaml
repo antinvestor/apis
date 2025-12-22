@@ -49,6 +49,59 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.CreateContentResponse'
   /files.v1.FilesService/GetConfig:
+    get:
+      tags:
+        - Media
+        - files.v1.FilesService
+      summary: Get repository configuration
+      description: Retrieves the content repository configuration including upload size limits and other parameters.
+      operationId: getConfig
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+        - name: message
+          in: query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.GetConfigRequest'
+        - name: encoding
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/encoding'
+        - name: base64
+          in: query
+          schema:
+            $ref: '#/components/schemas/base64'
+        - name: compression
+          in: query
+          schema:
+            $ref: '#/components/schemas/compression'
+        - name: connect
+          in: query
+          schema:
+            $ref: '#/components/schemas/connect'
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.GetConfigResponse'
     post:
       tags:
         - Media
@@ -86,6 +139,59 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.GetConfigResponse'
   /files.v1.FilesService/GetContent:
+    get:
+      tags:
+        - Media
+        - files.v1.FilesService
+      summary: Download content
+      description: Downloads content from the content repository using its MXC URI.
+      operationId: getContent
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+        - name: message
+          in: query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.GetContentRequest'
+        - name: encoding
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/encoding'
+        - name: base64
+          in: query
+          schema:
+            $ref: '#/components/schemas/base64'
+        - name: compression
+          in: query
+          schema:
+            $ref: '#/components/schemas/compression'
+        - name: connect
+          in: query
+          schema:
+            $ref: '#/components/schemas/connect'
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.GetContentResponse'
     post:
       tags:
         - Media
@@ -123,6 +229,59 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.GetContentResponse'
   /files.v1.FilesService/GetContentOverrideName:
+    get:
+      tags:
+        - Media
+        - files.v1.FilesService
+      summary: Download content with filename override
+      description: Downloads content from the repository and overrides the filename in Content-Disposition header.
+      operationId: getContentOverrideName
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+        - name: message
+          in: query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.GetContentOverrideNameRequest'
+        - name: encoding
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/encoding'
+        - name: base64
+          in: query
+          schema:
+            $ref: '#/components/schemas/base64'
+        - name: compression
+          in: query
+          schema:
+            $ref: '#/components/schemas/compression'
+        - name: connect
+          in: query
+          schema:
+            $ref: '#/components/schemas/connect'
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.GetContentOverrideNameResponse'
     post:
       tags:
         - Media
@@ -160,6 +319,59 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.GetContentOverrideNameResponse'
   /files.v1.FilesService/GetContentThumbnail:
+    get:
+      tags:
+        - Media
+        - files.v1.FilesService
+      summary: Get content thumbnail
+      description: Retrieves a thumbnail of content with specified dimensions and resizing method. Supports both static and animated thumbnails.
+      operationId: getContentThumbnail
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+        - name: message
+          in: query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.GetContentThumbnailRequest'
+        - name: encoding
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/encoding'
+        - name: base64
+          in: query
+          schema:
+            $ref: '#/components/schemas/base64'
+        - name: compression
+          in: query
+          schema:
+            $ref: '#/components/schemas/compression'
+        - name: connect
+          in: query
+          schema:
+            $ref: '#/components/schemas/connect'
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.GetContentThumbnailResponse'
     post:
       tags:
         - Media
@@ -197,6 +409,59 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.GetContentThumbnailResponse'
   /files.v1.FilesService/GetUrlPreview:
+    get:
+      tags:
+        - Media
+        - files.v1.FilesService
+      summary: Get URL preview
+      description: Retrieves OpenGraph metadata for a URL to render a preview. Returns title, description, image, and other metadata.
+      operationId: getUrlPreview
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+        - name: message
+          in: query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.GetUrlPreviewRequest'
+        - name: encoding
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/encoding'
+        - name: base64
+          in: query
+          schema:
+            $ref: '#/components/schemas/base64'
+        - name: compression
+          in: query
+          schema:
+            $ref: '#/components/schemas/compression'
+        - name: connect
+          in: query
+          schema:
+            $ref: '#/components/schemas/connect'
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.GetUrlPreviewResponse'
     post:
       tags:
         - Media
@@ -234,6 +499,59 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.GetUrlPreviewResponse'
   /files.v1.FilesService/SearchMedia:
+    get:
+      tags:
+        - Media
+        - files.v1.FilesService
+      summary: Search media files
+      description: Searches for media files matching specified criteria with support for pagination, owner filtering, and date range filtering.
+      operationId: searchMedia
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+        - name: message
+          in: query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.SearchMediaRequest'
+        - name: encoding
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/encoding'
+        - name: base64
+          in: query
+          schema:
+            $ref: '#/components/schemas/base64'
+        - name: compression
+          in: query
+          schema:
+            $ref: '#/components/schemas/compression'
+        - name: connect
+          in: query
+          schema:
+            $ref: '#/components/schemas/connect'
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.SearchMediaResponse'
     post:
       tags:
         - Media
@@ -273,6 +591,22 @@ paths:
   /files.v1.FilesService/UploadContent: {}
 components:
   schemas:
+    base64:
+      type: boolean
+      title: base64
+      description: Specifies if the message query param is base64 encoded, which may be required for binary data
+    compression:
+      title: compression
+      enum:
+        - identity
+        - gzip
+        - br
+      description: Which compression algorithm to use for this request
+    connect:
+      title: connect
+      enum:
+        - v1
+      description: Define the version of the Connect protocol
     connect-protocol-version:
       type: number
       title: Connect-Protocol-Version
@@ -342,6 +676,12 @@ components:
           description: Deserialized error detail payload. The 'type' field indicates the schema. This field is for easier debugging and should not be relied upon for application logic.
       additionalProperties: true
       description: Contains an arbitrary serialized message along with a @type that describes the type of the serialized message, with an additional debug field for ConnectRPC error details.
+    encoding:
+      title: encoding
+      enum:
+        - proto
+        - json
+      description: Define which encoding or 'Message-Codec' to use
     files.v1.CreateContentRequest:
       type: object
       properties:
@@ -604,7 +944,7 @@ components:
           title: media_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: The media ID from the MXC URI
         serverName:
           type: string
@@ -798,7 +1138,7 @@ components:
           title: media_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Media ID from the MXC URI (e.g., "abc123" from "mxc://example.com/abc123")
       title: UploadMetadata
       additionalProperties: false

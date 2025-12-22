@@ -8,15 +8,15 @@
 // ignore_for_file: constant_identifier_names
 // ignore_for_file: curly_braces_in_flow_control_structures
 // ignore_for_file: deprecated_member_use_from_same_package, library_prefixes
-// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names, prefer_relative_imports
 
 import 'dart:async' as $async;
 import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
+import 'package:protobuf/well_known_types/google/protobuf/struct.pb.dart' as $0;
 
 import '../../common/v1/common.pb.dart' as $1;
-import '../../google/protobuf/struct.pb.dart' as $0;
 import '../../google/type/interval.pb.dart' as $2;
 import '../../google/type/money.pb.dart' as $3;
 import 'lostid.pbenum.dart';
@@ -70,8 +70,6 @@ class CollectibleRequest extends $pb.GeneratedMessage {
   static CollectibleRequest create() => CollectibleRequest._();
   @$core.override
   CollectibleRequest createEmptyInstance() => create();
-  static $pb.PbList<CollectibleRequest> createRepeated() =>
-      $pb.PbList<CollectibleRequest>();
   @$core.pragma('dart2js:noInline')
   static CollectibleRequest getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<CollectibleRequest>(create);
@@ -142,8 +140,6 @@ class CollectibleResponse extends $pb.GeneratedMessage {
   static CollectibleResponse create() => CollectibleResponse._();
   @$core.override
   CollectibleResponse createEmptyInstance() => create();
-  static $pb.PbList<CollectibleResponse> createRepeated() =>
-      $pb.PbList<CollectibleResponse>();
   @$core.pragma('dart2js:noInline')
   static CollectibleResponse getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<CollectibleResponse>(create);
@@ -237,8 +233,6 @@ class ListCollectibleRequest extends $pb.GeneratedMessage {
   static ListCollectibleRequest create() => ListCollectibleRequest._();
   @$core.override
   ListCollectibleRequest createEmptyInstance() => create();
-  static $pb.PbList<ListCollectibleRequest> createRepeated() =>
-      $pb.PbList<ListCollectibleRequest>();
   @$core.pragma('dart2js:noInline')
   static ListCollectibleRequest getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<ListCollectibleRequest>(create);
@@ -317,8 +311,6 @@ class ListCollectibleResponse extends $pb.GeneratedMessage {
   static ListCollectibleResponse create() => ListCollectibleResponse._();
   @$core.override
   ListCollectibleResponse createEmptyInstance() => create();
-  static $pb.PbList<ListCollectibleResponse> createRepeated() =>
-      $pb.PbList<ListCollectibleResponse>();
   @$core.pragma('dart2js:noInline')
   static ListCollectibleResponse getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<ListCollectibleResponse>(create);
@@ -378,8 +370,6 @@ class SearchResponse extends $pb.GeneratedMessage {
   static SearchResponse create() => SearchResponse._();
   @$core.override
   SearchResponse createEmptyInstance() => create();
-  static $pb.PbList<SearchResponse> createRepeated() =>
-      $pb.PbList<SearchResponse>();
   @$core.pragma('dart2js:noInline')
   static SearchResponse getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<SearchResponse>(create);
@@ -478,8 +468,6 @@ class ListSearchRequest extends $pb.GeneratedMessage {
   static ListSearchRequest create() => ListSearchRequest._();
   @$core.override
   ListSearchRequest createEmptyInstance() => create();
-  static $pb.PbList<ListSearchRequest> createRepeated() =>
-      $pb.PbList<ListSearchRequest>();
   @$core.pragma('dart2js:noInline')
   static ListSearchRequest getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<ListSearchRequest>(create);
@@ -557,8 +545,6 @@ class ListSearchResponse extends $pb.GeneratedMessage {
   static ListSearchResponse create() => ListSearchResponse._();
   @$core.override
   ListSearchResponse createEmptyInstance() => create();
-  static $pb.PbList<ListSearchResponse> createRepeated() =>
-      $pb.PbList<ListSearchResponse>();
   @$core.pragma('dart2js:noInline')
   static ListSearchResponse getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<ListSearchResponse>(create);
@@ -612,8 +598,6 @@ class ProgressRequest extends $pb.GeneratedMessage {
   static ProgressRequest create() => ProgressRequest._();
   @$core.override
   ProgressRequest createEmptyInstance() => create();
-  static $pb.PbList<ProgressRequest> createRepeated() =>
-      $pb.PbList<ProgressRequest>();
   @$core.pragma('dart2js:noInline')
   static ProgressRequest getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<ProgressRequest>(create);
@@ -687,8 +671,6 @@ class ProgressItem extends $pb.GeneratedMessage {
   static ProgressItem create() => ProgressItem._();
   @$core.override
   ProgressItem createEmptyInstance() => create();
-  static $pb.PbList<ProgressItem> createRepeated() =>
-      $pb.PbList<ProgressItem>();
   @$core.pragma('dart2js:noInline')
   static ProgressItem getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<ProgressItem>(create);
@@ -784,8 +766,6 @@ class TransactionItem extends $pb.GeneratedMessage {
   static TransactionItem create() => TransactionItem._();
   @$core.override
   TransactionItem createEmptyInstance() => create();
-  static $pb.PbList<TransactionItem> createRepeated() =>
-      $pb.PbList<TransactionItem>();
   @$core.pragma('dart2js:noInline')
   static TransactionItem getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<TransactionItem>(create);
@@ -898,8 +878,6 @@ class ProgressResponse extends $pb.GeneratedMessage {
   static ProgressResponse create() => ProgressResponse._();
   @$core.override
   ProgressResponse createEmptyInstance() => create();
-  static $pb.PbList<ProgressResponse> createRepeated() =>
-      $pb.PbList<ProgressResponse>();
   @$core.pragma('dart2js:noInline')
   static ProgressResponse getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<ProgressResponse>(create);
@@ -1005,8 +983,6 @@ class ListTransactionRequest extends $pb.GeneratedMessage {
   static ListTransactionRequest create() => ListTransactionRequest._();
   @$core.override
   ListTransactionRequest createEmptyInstance() => create();
-  static $pb.PbList<ListTransactionRequest> createRepeated() =>
-      $pb.PbList<ListTransactionRequest>();
   @$core.pragma('dart2js:noInline')
   static ListTransactionRequest getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<ListTransactionRequest>(create);
@@ -1085,8 +1061,6 @@ class ListTransactionResponse extends $pb.GeneratedMessage {
   static ListTransactionResponse create() => ListTransactionResponse._();
   @$core.override
   ListTransactionResponse createEmptyInstance() => create();
-  static $pb.PbList<ListTransactionResponse> createRepeated() =>
-      $pb.PbList<ListTransactionResponse>();
   @$core.pragma('dart2js:noInline')
   static ListTransactionResponse getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<ListTransactionResponse>(create);

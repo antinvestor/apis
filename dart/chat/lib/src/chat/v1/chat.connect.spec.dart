@@ -11,13 +11,13 @@ abstract final class GatewayService {
   static const name = 'chat.v1.GatewayService';
 
   /// Bi-directional, long-lived connection. Client sends ConnectRequest (initial auth + acks/commands).
-  /// Server streams ServerEvent objects in chronological order for rooms the client is subscribed to.
+  /// Server streams ConnectResponse objects in chronological order for rooms the client is subscribed to.
   /// Stream resume: client may provide last_received_event_id or resume_token to continue after reconnect.
   static const connect = connect.Spec(
     '/$name/Connect',
     connect.StreamType.bidi,
     chatv1chat.ConnectRequest.new,
-    chatv1chat.ServerEvent.new,
+    chatv1chat.ConnectResponse.new,
   );
 }
 abstract final class ChatService {
@@ -38,6 +38,7 @@ abstract final class ChatService {
     connect.StreamType.unary,
     chatv1chat.GetHistoryRequest.new,
     chatv1chat.GetHistoryResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
   );
 
   /// Room lifecycle & management
@@ -53,6 +54,7 @@ abstract final class ChatService {
     connect.StreamType.server,
     chatv1chat.SearchRoomsRequest.new,
     chatv1chat.SearchRoomsResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
   );
 
   static const updateRoom = connect.Spec(
@@ -96,6 +98,7 @@ abstract final class ChatService {
     connect.StreamType.unary,
     chatv1chat.SearchRoomSubscriptionsRequest.new,
     chatv1chat.SearchRoomSubscriptionsResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
   );
 
   /// Update different states that the client can be in for room subscriptions awareness
@@ -112,5 +115,6 @@ abstract final class ChatService {
     connect.StreamType.unary,
     chatv1chat.GetClientStateRequest.new,
     chatv1chat.GetClientStateResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
   );
 }

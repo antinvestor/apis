@@ -8,7 +8,7 @@
 // ignore_for_file: constant_identifier_names
 // ignore_for_file: curly_braces_in_flow_control_structures
 // ignore_for_file: deprecated_member_use_from_same_package, library_prefixes
-// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names, prefer_relative_imports
 
 import 'dart:async' as $async;
 import 'dart:core' as $core;
@@ -22,27 +22,27 @@ import 'ledger.pbjson.dart';
 export 'ledger.pb.dart';
 
 abstract class LedgerServiceBase extends $pb.GeneratedService {
-  $async.Future<$3.Ledger> searchLedgers(
+  $async.Future<$3.SearchLedgersResponse> searchLedgers(
       $pb.ServerContext ctx, $2.SearchRequest request);
-  $async.Future<$3.Ledger> createLedger(
-      $pb.ServerContext ctx, $3.Ledger request);
-  $async.Future<$3.Ledger> updateLedger(
-      $pb.ServerContext ctx, $3.Ledger request);
-  $async.Future<$3.Account> searchAccounts(
+  $async.Future<$3.CreateLedgerResponse> createLedger(
+      $pb.ServerContext ctx, $3.CreateLedgerRequest request);
+  $async.Future<$3.UpdateLedgerResponse> updateLedger(
+      $pb.ServerContext ctx, $3.UpdateLedgerRequest request);
+  $async.Future<$3.SearchAccountsResponse> searchAccounts(
       $pb.ServerContext ctx, $2.SearchRequest request);
-  $async.Future<$3.Account> createAccount(
-      $pb.ServerContext ctx, $3.Account request);
-  $async.Future<$3.Account> updateAccount(
-      $pb.ServerContext ctx, $3.Account request);
-  $async.Future<$3.Transaction> searchTransactions(
+  $async.Future<$3.CreateAccountResponse> createAccount(
+      $pb.ServerContext ctx, $3.CreateAccountRequest request);
+  $async.Future<$3.UpdateAccountResponse> updateAccount(
+      $pb.ServerContext ctx, $3.UpdateAccountRequest request);
+  $async.Future<$3.SearchTransactionsResponse> searchTransactions(
       $pb.ServerContext ctx, $2.SearchRequest request);
-  $async.Future<$3.Transaction> createTransaction(
-      $pb.ServerContext ctx, $3.Transaction request);
-  $async.Future<$3.Transaction> reverseTransaction(
-      $pb.ServerContext ctx, $3.Transaction request);
-  $async.Future<$3.Transaction> updateTransaction(
-      $pb.ServerContext ctx, $3.Transaction request);
-  $async.Future<$3.TransactionEntry> searchTransactionEntries(
+  $async.Future<$3.CreateTransactionResponse> createTransaction(
+      $pb.ServerContext ctx, $3.CreateTransactionRequest request);
+  $async.Future<$3.ReverseTransactionResponse> reverseTransaction(
+      $pb.ServerContext ctx, $3.ReverseTransactionRequest request);
+  $async.Future<$3.UpdateTransactionResponse> updateTransaction(
+      $pb.ServerContext ctx, $3.UpdateTransactionRequest request);
+  $async.Future<$3.SearchTransactionEntriesResponse> searchTransactionEntries(
       $pb.ServerContext ctx, $2.SearchRequest request);
 
   $pb.GeneratedMessage createRequest($core.String methodName) {
@@ -50,23 +50,23 @@ abstract class LedgerServiceBase extends $pb.GeneratedService {
       case 'SearchLedgers':
         return $2.SearchRequest();
       case 'CreateLedger':
-        return $3.Ledger();
+        return $3.CreateLedgerRequest();
       case 'UpdateLedger':
-        return $3.Ledger();
+        return $3.UpdateLedgerRequest();
       case 'SearchAccounts':
         return $2.SearchRequest();
       case 'CreateAccount':
-        return $3.Account();
+        return $3.CreateAccountRequest();
       case 'UpdateAccount':
-        return $3.Account();
+        return $3.UpdateAccountRequest();
       case 'SearchTransactions':
         return $2.SearchRequest();
       case 'CreateTransaction':
-        return $3.Transaction();
+        return $3.CreateTransactionRequest();
       case 'ReverseTransaction':
-        return $3.Transaction();
+        return $3.ReverseTransactionRequest();
       case 'UpdateTransaction':
-        return $3.Transaction();
+        return $3.UpdateTransactionRequest();
       case 'SearchTransactionEntries':
         return $2.SearchRequest();
       default:
@@ -80,23 +80,23 @@ abstract class LedgerServiceBase extends $pb.GeneratedService {
       case 'SearchLedgers':
         return searchLedgers(ctx, request as $2.SearchRequest);
       case 'CreateLedger':
-        return createLedger(ctx, request as $3.Ledger);
+        return createLedger(ctx, request as $3.CreateLedgerRequest);
       case 'UpdateLedger':
-        return updateLedger(ctx, request as $3.Ledger);
+        return updateLedger(ctx, request as $3.UpdateLedgerRequest);
       case 'SearchAccounts':
         return searchAccounts(ctx, request as $2.SearchRequest);
       case 'CreateAccount':
-        return createAccount(ctx, request as $3.Account);
+        return createAccount(ctx, request as $3.CreateAccountRequest);
       case 'UpdateAccount':
-        return updateAccount(ctx, request as $3.Account);
+        return updateAccount(ctx, request as $3.UpdateAccountRequest);
       case 'SearchTransactions':
         return searchTransactions(ctx, request as $2.SearchRequest);
       case 'CreateTransaction':
-        return createTransaction(ctx, request as $3.Transaction);
+        return createTransaction(ctx, request as $3.CreateTransactionRequest);
       case 'ReverseTransaction':
-        return reverseTransaction(ctx, request as $3.Transaction);
+        return reverseTransaction(ctx, request as $3.ReverseTransactionRequest);
       case 'UpdateTransaction':
-        return updateTransaction(ctx, request as $3.Transaction);
+        return updateTransaction(ctx, request as $3.UpdateTransactionRequest);
       case 'SearchTransactionEntries':
         return searchTransactionEntries(ctx, request as $2.SearchRequest);
       default:

@@ -33,7 +33,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ledger.v1.Account'
+              $ref: '#/components/schemas/ledger.v1.CreateAccountRequest'
         required: true
       responses:
         default:
@@ -47,7 +47,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ledger.v1.Account'
+                $ref: '#/components/schemas/ledger.v1.CreateAccountResponse'
   /ledger.v1.LedgerService/CreateLedger:
     post:
       tags:
@@ -70,7 +70,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ledger.v1.Ledger'
+              $ref: '#/components/schemas/ledger.v1.CreateLedgerRequest'
         required: true
       responses:
         default:
@@ -84,7 +84,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ledger.v1.Ledger'
+                $ref: '#/components/schemas/ledger.v1.CreateLedgerResponse'
   /ledger.v1.LedgerService/CreateTransaction:
     post:
       tags:
@@ -107,7 +107,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ledger.v1.Transaction'
+              $ref: '#/components/schemas/ledger.v1.CreateTransactionRequest'
         required: true
       responses:
         default:
@@ -121,7 +121,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ledger.v1.Transaction'
+                $ref: '#/components/schemas/ledger.v1.CreateTransactionResponse'
   /ledger.v1.LedgerService/ReverseTransaction:
     post:
       tags:
@@ -144,7 +144,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ledger.v1.Transaction'
+              $ref: '#/components/schemas/ledger.v1.ReverseTransactionRequest'
         required: true
       responses:
         default:
@@ -158,7 +158,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ledger.v1.Transaction'
+                $ref: '#/components/schemas/ledger.v1.ReverseTransactionResponse'
   /ledger.v1.LedgerService/SearchAccounts: {}
   /ledger.v1.LedgerService/SearchLedgers: {}
   /ledger.v1.LedgerService/SearchTransactionEntries: {}
@@ -185,7 +185,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ledger.v1.Account'
+              $ref: '#/components/schemas/ledger.v1.UpdateAccountRequest'
         required: true
       responses:
         default:
@@ -199,7 +199,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ledger.v1.Account'
+                $ref: '#/components/schemas/ledger.v1.UpdateAccountResponse'
   /ledger.v1.LedgerService/UpdateLedger:
     post:
       tags:
@@ -222,7 +222,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ledger.v1.Ledger'
+              $ref: '#/components/schemas/ledger.v1.UpdateLedgerRequest'
         required: true
       responses:
         default:
@@ -236,7 +236,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ledger.v1.Ledger'
+                $ref: '#/components/schemas/ledger.v1.UpdateLedgerResponse'
   /ledger.v1.LedgerService/UpdateTransaction:
     post:
       tags:
@@ -259,7 +259,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ledger.v1.Transaction'
+              $ref: '#/components/schemas/ledger.v1.UpdateTransactionRequest'
         required: true
       responses:
         default:
@@ -273,7 +273,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ledger.v1.Transaction'
+                $ref: '#/components/schemas/ledger.v1.UpdateTransactionResponse'
 components:
   schemas:
     common.v1.Pagination:
@@ -499,9 +499,12 @@ components:
     ledger.v1.Account:
       type: object
       properties:
-        reference:
+        id:
           type: string
-          title: reference
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
           description: Unique account reference/number
         ledger:
           type: string
@@ -528,12 +531,134 @@ components:
       description: |-
         Account represents a specific account within a ledger.
          Tracks balances and supports multi-currency operations.
+    ledger.v1.CreateAccountRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+          description: Optional Unique account reference/number
+        ledgerId:
+          type: string
+          title: ledger_id
+          description: Ledger this account belongs to
+        currency:
+          type: string
+          title: currency
+          description: Current cleared balance
+        data:
+          title: data
+          description: Additional account metadata (owner, description, etc.)
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: CreateAccountRequest
+      additionalProperties: false
+      description: CreateAccountRequest creates a new account within a ledger.
+    ledger.v1.CreateAccountResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          description: The created account
+          $ref: '#/components/schemas/ledger.v1.Account'
+      title: CreateAccountResponse
+      additionalProperties: false
+      description: CreateAccountResponse returns the newly created account.
+    ledger.v1.CreateLedgerRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+          description: Optional Unique reference/code for the ledger (e.g., "1000", "CASH")
+        type:
+          title: type
+          description: Accounting category type
+          $ref: '#/components/schemas/ledger.v1.LedgerType'
+        parentId:
+          type: string
+          title: parent_id
+          description: Parent ledger reference for hierarchical structure
+        data:
+          title: data
+          description: Additional ledger metadata (name, description, etc.)
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: CreateLedgerRequest
+      additionalProperties: false
+      description: CreateLedgerRequest creates a new ledger in the chart of accounts.
+    ledger.v1.CreateLedgerResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          description: The created ledger
+          $ref: '#/components/schemas/ledger.v1.Ledger'
+      title: CreateLedgerResponse
+      additionalProperties: false
+      description: CreateLedgerResponse returns the newly created ledger.
+    ledger.v1.CreateTransactionRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+          description: Unique transaction reference/ID
+        currency:
+          type: string
+          title: currency
+          description: Currency code for all entries (ISO 4217)
+        transactedAt:
+          type: string
+          title: transacted_at
+          description: Transaction timestamp (RFC3339)
+        data:
+          title: data
+          description: Additional transaction metadata (description, source, etc.)
+          $ref: '#/components/schemas/google.protobuf.Struct'
+        entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/ledger.v1.TransactionEntry'
+          title: entries
+          description: Transaction entries (must be balanced)
+        cleared:
+          type: boolean
+          title: cleared
+          description: Whether transaction has been cleared/posted
+        type:
+          title: type
+          description: Transaction type (normal, reversal, reservation)
+          $ref: '#/components/schemas/ledger.v1.TransactionType'
+      title: CreateTransactionRequest
+      additionalProperties: false
+      description: CreateTransactionRequest creates a new double-entry transaction.
+    ledger.v1.CreateTransactionResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          description: The created transaction
+          $ref: '#/components/schemas/ledger.v1.Transaction'
+      title: CreateTransactionResponse
+      additionalProperties: false
+      description: CreateTransactionResponse returns the newly created transaction.
     ledger.v1.Ledger:
       type: object
       properties:
-        reference:
+        id:
           type: string
-          title: reference
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
           description: Unique reference/code for the ledger (e.g., "1000", "CASH")
         type:
           title: type
@@ -565,17 +690,88 @@ components:
         LedgerType defines the fundamental accounting categories.
          Based on standard accounting equation: Assets = Liabilities + Capital + (Income - Expenses)
          buf:lint:ignore ENUM_VALUE_PREFIX
+    ledger.v1.ReverseTransactionRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+          description: Unique transaction reference/ID
+      title: ReverseTransactionRequest
+      additionalProperties: false
+      description: ReverseTransactionRequest reverses a transaction by creating offsetting entries.
+    ledger.v1.ReverseTransactionResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          description: The created reversal transaction
+          $ref: '#/components/schemas/ledger.v1.Transaction'
+      title: ReverseTransactionResponse
+      additionalProperties: false
+      description: ReverseTransactionResponse returns the reversal transaction.
+    ledger.v1.SearchAccountsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ledger.v1.Account'
+          title: data
+          description: List of matching accounts
+      title: SearchAccountsResponse
+      additionalProperties: false
+      description: SearchAccountsResponse returns accounts matching search criteria.
+    ledger.v1.SearchLedgersResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ledger.v1.Ledger'
+          title: data
+          description: List of matching ledgers
+      title: SearchLedgersResponse
+      additionalProperties: false
+      description: SearchLedgersResponse returns ledgers matching search criteria.
+    ledger.v1.SearchTransactionEntriesResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ledger.v1.TransactionEntry'
+          title: data
+          description: List of matching transaction entries
+      title: SearchTransactionEntriesResponse
+      additionalProperties: false
+      description: SearchTransactionEntriesResponse returns transaction entries matching search criteria.
+    ledger.v1.SearchTransactionsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ledger.v1.Transaction'
+          title: data
+          description: List of matching transactions
+      title: SearchTransactionsResponse
+      additionalProperties: false
+      description: SearchTransactionsResponse returns transactions matching search criteria.
     ledger.v1.Transaction:
       type: object
       properties:
-        reference:
+        id:
           type: string
-          title: reference
+          title: id
           description: Unique transaction reference/ID
-        currency:
+        currencyCode:
           type: string
-          title: currency
-          description: Currency code for all entries (ISO 4217)
+          title: currency_code
+          description: The three-letter currency code defined in ISO 4217. Currency code for all entries (ISO 4217)
         transactedAt:
           type: string
           title: transacted_at
@@ -606,13 +802,20 @@ components:
     ledger.v1.TransactionEntry:
       type: object
       properties:
-        account:
+        id:
           type: string
-          title: account
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
           description: Account reference for this entry
-        transaction:
+        accountId:
           type: string
-          title: transaction
+          title: account_id
+          description: Account reference for this entry
+        transactionId:
+          type: string
+          title: transaction_id
           description: Transaction reference this entry belongs to
         transactedAt:
           type: string
@@ -649,6 +852,91 @@ components:
       description: |-
         TransactionType defines the nature of a transaction.
          buf:lint:ignore ENUM_VALUE_PREFIX
+    ledger.v1.UpdateAccountRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+          description: Unique reference/code for the account (e.g., "1000", "CASH")
+        data:
+          title: data
+          description: Additional ledger metadata (name, description, etc.)
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: UpdateAccountRequest
+      additionalProperties: false
+      description: UpdateAccountRequest updates an existing account's metadata.
+    ledger.v1.UpdateAccountResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          description: The updated account
+          $ref: '#/components/schemas/ledger.v1.Account'
+      title: UpdateAccountResponse
+      additionalProperties: false
+      description: UpdateAccountResponse returns the updated account.
+    ledger.v1.UpdateLedgerRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+          description: Unique reference/code for the ledger (e.g., "1000", "CASH")
+        data:
+          title: data
+          description: Additional ledger metadata (name, description, etc.)
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: UpdateLedgerRequest
+      additionalProperties: false
+      description: UpdateLedgerRequest updates an existing ledger's metadata.
+    ledger.v1.UpdateLedgerResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          description: The updated ledger
+          $ref: '#/components/schemas/ledger.v1.Ledger'
+      title: UpdateLedgerResponse
+      additionalProperties: false
+      description: UpdateLedgerResponse returns the updated ledger.
+    ledger.v1.UpdateTransactionRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+          description: Optional Unique reference/code for the transaction (e.g., "1000", "CASH")
+        clearedAt:
+          type: string
+          title: cleared_at
+          description: Transaction timestamp (RFC3339)
+        data:
+          title: data
+          description: Additional ledger metadata (name, description, etc.)
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: UpdateTransactionRequest
+      additionalProperties: false
+      description: UpdateTransactionRequest updates a transaction's metadata.
+    ledger.v1.UpdateTransactionResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          description: The updated transaction
+          $ref: '#/components/schemas/ledger.v1.Transaction'
+      title: UpdateTransactionResponse
+      additionalProperties: false
+      description: UpdateTransactionResponse returns the updated transaction.
   securitySchemes:
     BearerAuth:
       type: http

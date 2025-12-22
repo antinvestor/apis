@@ -51,6 +51,7 @@ export 'src/common/auth/token_refresh_interceptor.dart';
 
 // Export client helpers
 export 'src/common/client/transport_helper.dart';
+export 'src/common/client/client_base.dart';
 
 // Export generated protobuf files
 export 'src/common/v1/common.pb.dart';

@@ -275,6 +275,59 @@ paths:
   /property.v1.PropertyService/ListSubscription: {}
   /property.v1.PropertyService/SearchProperty: {}
   /property.v1.PropertyService/StateOfProperty:
+    get:
+      tags:
+        - Properties
+        - property.v1.PropertyService
+      summary: Get property state
+      description: Retrieves the current state and status of a property including the latest state transition information.
+      operationId: getPropertyState
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+        - name: message
+          in: query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/property.v1.StateOfPropertyRequest'
+        - name: encoding
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/encoding'
+        - name: base64
+          in: query
+          schema:
+            $ref: '#/components/schemas/base64'
+        - name: compression
+          in: query
+          schema:
+            $ref: '#/components/schemas/compression'
+        - name: connect
+          in: query
+          schema:
+            $ref: '#/components/schemas/connect'
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/property.v1.StateOfPropertyResponse'
     post:
       tags:
         - Properties
@@ -350,6 +403,10 @@ paths:
                 $ref: '#/components/schemas/property.v1.UpdatePropertyResponse'
 components:
   schemas:
+    base64:
+      type: boolean
+      title: base64
+      description: Specifies if the message query param is base64 encoded, which may be required for binary data
     common.v1.STATE:
       type: string
       title: STATE
@@ -376,6 +433,18 @@ components:
         STATUS represents the processing status of an operation or task.
          This enum is used for tracking asynchronous operations, jobs, and workflows.
          buf:lint:ignore ENUM_VALUE_PREFIX
+    compression:
+      title: compression
+      enum:
+        - identity
+        - gzip
+        - br
+      description: Which compression algorithm to use for this request
+    connect:
+      title: connect
+      enum:
+        - v1
+      description: Define the version of the Connect protocol
     connect-protocol-version:
       type: number
       title: Connect-Protocol-Version
@@ -445,6 +514,12 @@ components:
           description: Deserialized error detail payload. The 'type' field indicates the schema. This field is for easier debugging and should not be relied upon for application logic.
       additionalProperties: true
       description: Contains an arbitrary serialized message along with a @type that describes the type of the serialized message, with an additional debug field for ConnectRPC error details.
+    encoding:
+      title: encoding
+      enum:
+        - proto
+        - json
+      description: Define which encoding or 'Message-Codec' to use
     google.protobuf.ListValue:
       type: object
       properties:
@@ -678,7 +753,7 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
       title: DeleteLocalityRequest
       additionalProperties: false
     property.v1.DeleteLocalityResponse:
@@ -697,7 +772,7 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
       title: DeletePropertyRequest
       additionalProperties: false
     property.v1.DeletePropertyResponse:
@@ -716,7 +791,7 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
       title: DeleteSubscriptionRequest
       additionalProperties: false
     property.v1.DeleteSubscriptionResponse:
@@ -735,7 +810,7 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
       title: HistoryOfPropertyRequest
       additionalProperties: false
     property.v1.HistoryOfPropertyResponse:
@@ -820,14 +895,14 @@ components:
               title: id
               maxLength: 40
               minLength: 3
-              pattern: '[0-9a-z_-]{3,20}'
+              pattern: '[0-9a-z_-]{3,40}'
               description: Unique locality ID
             parentId:
               type: string
               title: parent_id
               maxLength: 40
               minLength: 3
-              pattern: '[0-9a-z_-]{3,20}'
+              pattern: '[0-9a-z_-]{3,40}'
               description: Parent locality ID for hierarchical structure
             name:
               type: string
@@ -880,14 +955,14 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Unique property ID
         parentId:
           type: string
           title: parent_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Parent property ID for hierarchical structures
         name:
           type: string
@@ -933,14 +1008,14 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Unique state record ID
         propertyid:
           type: string
           title: propertyid
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Associated property ID
         state:
           title: state
@@ -980,7 +1055,7 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Unique property type ID
         name:
           type: string
@@ -1054,7 +1129,7 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
       title: StateOfPropertyRequest
       additionalProperties: false
     property.v1.StateOfPropertyResponse:
@@ -1073,7 +1148,7 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Unique subscription ID
         propertyId:
           type: string
@@ -1116,7 +1191,7 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         state:
           title: state
           $ref: '#/components/schemas/common.v1.STATE'
@@ -1137,13 +1212,13 @@ components:
           title: guardian_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         localityId:
           type: string
           title: locality_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         extras:
           title: extras
           $ref: '#/components/schemas/google.protobuf.Struct'

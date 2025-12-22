@@ -8,7 +8,8 @@
 // ignore_for_file: constant_identifier_names
 // ignore_for_file: curly_braces_in_flow_control_structures
 // ignore_for_file: deprecated_member_use_from_same_package, library_prefixes
-// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: non_constant_identifier_names, prefer_relative_imports
+// ignore_for_file: unused_import
 
 import 'dart:convert' as $convert;
 import 'dart:core' as $core;
@@ -116,7 +117,7 @@ const StatusRequest$json = {
 
 /// Descriptor for `StatusRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List statusRequestDescriptor = $convert.base64Decode(
-    'Cg1TdGF0dXNSZXF1ZXN0EisKAmlkGAEgASgJQhu6SBhyFhADGCgyEFswLTlhLXpfLV17MywyMH'
+    'Cg1TdGF0dXNSZXF1ZXN0EisKAmlkGAEgASgJQhu6SBhyFhADGCgyEFswLTlhLXpfLV17Myw0MH'
     '1SAmlkEi8KBmV4dHJhcxgCIAEoCzIXLmdvb2dsZS5wcm90b2J1Zi5TdHJ1Y3RSBmV4dHJhcw==');
 
 @$core.Deprecated('Use statusResponseDescriptor instead')
@@ -155,7 +156,7 @@ const StatusResponse$json = {
 
 /// Descriptor for `StatusResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List statusResponseDescriptor = $convert.base64Decode(
-    'Cg5TdGF0dXNSZXNwb25zZRIrCgJpZBgBIAEoCUIbukgYchYQAxgoMhBbMC05YS16Xy1dezMsMj'
+    'Cg5TdGF0dXNSZXNwb25zZRIrCgJpZBgBIAEoCUIbukgYchYQAxgoMhBbMC05YS16Xy1dezMsND'
     'B9UgJpZBImCgVzdGF0ZRgCIAEoDjIQLmNvbW1vbi52MS5TVEFURVIFc3RhdGUSKQoGc3RhdHVz'
     'GAMgASgOMhEuY29tbW9uLnYxLlNUQVRVU1IGc3RhdHVzEh8KC2V4dGVybmFsX2lkGAQgASgJUg'
     'pleHRlcm5hbElkEiEKDHRyYW5zaWVudF9pZBgFIAEoCVILdHJhbnNpZW50SWQSLwoGZXh0cmFz'
@@ -197,7 +198,7 @@ const StatusUpdateRequest$json = {
 /// Descriptor for `StatusUpdateRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List statusUpdateRequestDescriptor = $convert.base64Decode(
     'ChNTdGF0dXNVcGRhdGVSZXF1ZXN0EisKAmlkGAEgASgJQhu6SBhyFhADGCgyEFswLTlhLXpfLV'
-    '17MywyMH1SAmlkEiYKBXN0YXRlGAIgASgOMhAuY29tbW9uLnYxLlNUQVRFUgVzdGF0ZRIpCgZz'
+    '17Myw0MH1SAmlkEiYKBXN0YXRlGAIgASgOMhAuY29tbW9uLnYxLlNUQVRFUgVzdGF0ZRIpCgZz'
     'dGF0dXMYAyABKA4yES5jb21tb24udjEuU1RBVFVTUgZzdGF0dXMSHwoLZXh0ZXJuYWxfaWQYBC'
     'ABKAlSCmV4dGVybmFsSWQSLwoGZXh0cmFzGAUgASgLMhcuZ29vZ2xlLnByb3RvYnVmLlN0cnVj'
     'dFIGZXh0cmFz');

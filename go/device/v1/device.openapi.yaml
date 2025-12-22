@@ -123,6 +123,59 @@ paths:
               schema:
                 $ref: '#/components/schemas/device.v1.DeRegisterKeyResponse'
   /device.v1.DeviceService/GetById:
+    get:
+      tags:
+        - Devices
+        - device.v1.DeviceService
+      summary: Get devices by ID
+      description: Retrieves one or more devices by their unique identifiers. Supports batch retrieval and optional extensive details including logs and key counts.
+      operationId: getDeviceById
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+        - name: message
+          in: query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/device.v1.GetByIdRequest'
+        - name: encoding
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/encoding'
+        - name: base64
+          in: query
+          schema:
+            $ref: '#/components/schemas/base64'
+        - name: compression
+          in: query
+          schema:
+            $ref: '#/components/schemas/compression'
+        - name: connect
+          in: query
+          schema:
+            $ref: '#/components/schemas/connect'
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/device.v1.GetByIdResponse'
     post:
       tags:
         - Devices
@@ -160,6 +213,59 @@ paths:
               schema:
                 $ref: '#/components/schemas/device.v1.GetByIdResponse'
   /device.v1.DeviceService/GetBySessionId:
+    get:
+      tags:
+        - Devices
+        - device.v1.DeviceService
+      summary: Get device by session ID
+      description: Retrieves a device by its active session identifier. Used to resolve device information from session tokens.
+      operationId: getDeviceBySessionId
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+        - name: message
+          in: query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/device.v1.GetBySessionIdRequest'
+        - name: encoding
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/encoding'
+        - name: base64
+          in: query
+          schema:
+            $ref: '#/components/schemas/base64'
+        - name: compression
+          in: query
+          schema:
+            $ref: '#/components/schemas/compression'
+        - name: connect
+          in: query
+          schema:
+            $ref: '#/components/schemas/connect'
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/device.v1.GetBySessionIdResponse'
     post:
       tags:
         - Devices
@@ -421,6 +527,59 @@ paths:
                 $ref: '#/components/schemas/device.v1.RemoveKeyResponse'
   /device.v1.DeviceService/Search: {}
   /device.v1.DeviceService/SearchKey:
+    get:
+      tags:
+        - Device Keys
+        - device.v1.DeviceService
+      summary: Search keys or tokens
+      description: Searches for keys or tokens associated with a device. Supports filtering by key type and expiration.
+      operationId: searchDeviceKey
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+        - name: message
+          in: query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/device.v1.SearchKeyRequest'
+        - name: encoding
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/encoding'
+        - name: base64
+          in: query
+          schema:
+            $ref: '#/components/schemas/base64'
+        - name: compression
+          in: query
+          schema:
+            $ref: '#/components/schemas/compression'
+        - name: connect
+          in: query
+          schema:
+            $ref: '#/components/schemas/connect'
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/device.v1.SearchKeyResponse'
     post:
       tags:
         - Device Keys
@@ -533,6 +692,22 @@ paths:
                 $ref: '#/components/schemas/device.v1.UpdatePresenceResponse'
 components:
   schemas:
+    base64:
+      type: boolean
+      title: base64
+      description: Specifies if the message query param is base64 encoded, which may be required for binary data
+    compression:
+      title: compression
+      enum:
+        - identity
+        - gzip
+        - br
+      description: Which compression algorithm to use for this request
+    connect:
+      title: connect
+      enum:
+        - v1
+      description: Define the version of the Connect protocol
     connect-protocol-version:
       type: number
       title: Connect-Protocol-Version
@@ -610,14 +785,14 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Unique identifier for the key
         deviceId:
           type: string
           title: device_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Device this key belongs to
         keyType:
           title: key_type
@@ -683,7 +858,7 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Key ID to deregister from external service
       title: DeRegisterKeyRequest
       additionalProperties: false
@@ -712,14 +887,14 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Unique identifier for this log entry
         deviceId:
           type: string
           title: device_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Device this log entry belongs to
         sessionId:
           type: string
@@ -766,7 +941,7 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Unique identifier for the device
         name:
           type: string
@@ -879,14 +1054,14 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Unique identifier for the key
         deviceId:
           type: string
           title: device_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Device this key belongs to
         keyType:
           title: key_type
@@ -940,14 +1115,14 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Device ID to link
         profileId:
           type: string
           title: profile_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Profile ID to link the device to
         properties:
           title: properties
@@ -976,7 +1151,7 @@ components:
           title: device_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Device ID to retrieve logs for
         count:
           type: integer
@@ -1042,14 +1217,14 @@ components:
           title: device_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Device ID (optional if session_id is provided)
         sessionId:
           type: string
           title: session_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Session identifier for this activity
         ip:
           type: string
@@ -1098,7 +1273,7 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         title:
           type: string
           title: title
@@ -1126,14 +1301,14 @@ components:
           title: device_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Device ID to notify
         keyId:
           type: string
           title: key_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: |-
             The following fields remain for backward compatibility and represent a single notification payload.
              New integrations should prefer the notifications field for bulk sending. Specific key ID to use (optional - if not provided, uses key_type to select)
@@ -1196,14 +1371,14 @@ components:
           title: device_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Device this presence status belongs to
         profileId:
           type: string
           title: profile_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Profile this device belongs to
         status:
           title: status
@@ -1250,7 +1425,7 @@ components:
           title: device_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Device to register with the service
         keyType:
           title: key_type
@@ -1316,7 +1491,7 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Device ID to remove
       title: RemoveRequest
       additionalProperties: false
@@ -1345,7 +1520,7 @@ components:
           title: device_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Device ID to search keys for
         keyTypes:
           type: array
@@ -1440,7 +1615,7 @@ components:
           title: device_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Device ID to update presence for
         status:
           title: status
@@ -1475,7 +1650,7 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Device ID to update
         name:
           type: string
@@ -1498,6 +1673,12 @@ components:
       title: UpdateResponse
       additionalProperties: false
       description: UpdateResponse returns the updated device.
+    encoding:
+      title: encoding
+      enum:
+        - proto
+        - json
+      description: Define which encoding or 'Message-Codec' to use
     google.protobuf.ListValue:
       type: object
       properties:

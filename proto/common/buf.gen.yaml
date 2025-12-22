@@ -1,3 +1,8 @@
 version: v2
 managed:
   enabled: true
+
+plugins:
+  # Dart protobuf generation
+  - remote: buf.build/protocolbuffers/dart
+    out: ../../dart/common/lib/src

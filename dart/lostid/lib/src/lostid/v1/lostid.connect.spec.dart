@@ -29,6 +29,7 @@ abstract final class LostIdService {
     connect.StreamType.server,
     lostidv1lostid.ListCollectibleRequest.new,
     lostidv1lostid.ListCollectibleResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
   );
 
   /// Search creates a search request for a lost item.
@@ -38,6 +39,7 @@ abstract final class LostIdService {
     connect.StreamType.unary,
     commonv1common.SearchRequest.new,
     lostidv1lostid.SearchResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
   );
 
   /// ListSearch retrieves search requests.
@@ -47,6 +49,7 @@ abstract final class LostIdService {
     connect.StreamType.server,
     lostidv1lostid.ListSearchRequest.new,
     lostidv1lostid.ListSearchResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
   );
 
   /// Progress retrieves the complete history for a collectible or search.
@@ -65,5 +68,6 @@ abstract final class LostIdService {
     connect.StreamType.server,
     lostidv1lostid.ListTransactionRequest.new,
     lostidv1lostid.ListTransactionResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
   );
 }

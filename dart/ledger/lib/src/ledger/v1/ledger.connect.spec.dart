@@ -19,7 +19,8 @@ abstract final class LedgerService {
     '/$name/SearchLedgers',
     connect.StreamType.server,
     commonv1common.SearchRequest.new,
-    ledgerv1ledger.Ledger.new,
+    ledgerv1ledger.SearchLedgersResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
   );
 
   /// CreateLedger creates a new ledger in the chart of accounts.
@@ -27,8 +28,8 @@ abstract final class LedgerService {
   static const createLedger = connect.Spec(
     '/$name/CreateLedger',
     connect.StreamType.unary,
-    ledgerv1ledger.Ledger.new,
-    ledgerv1ledger.Ledger.new,
+    ledgerv1ledger.CreateLedgerRequest.new,
+    ledgerv1ledger.CreateLedgerResponse.new,
   );
 
   /// UpdateLedger updates an existing ledger's metadata.
@@ -36,8 +37,8 @@ abstract final class LedgerService {
   static const updateLedger = connect.Spec(
     '/$name/UpdateLedger',
     connect.StreamType.unary,
-    ledgerv1ledger.Ledger.new,
-    ledgerv1ledger.Ledger.new,
+    ledgerv1ledger.UpdateLedgerRequest.new,
+    ledgerv1ledger.UpdateLedgerResponse.new,
   );
 
   /// SearchAccounts finds accounts matching specified criteria.
@@ -46,7 +47,8 @@ abstract final class LedgerService {
     '/$name/SearchAccounts',
     connect.StreamType.server,
     commonv1common.SearchRequest.new,
-    ledgerv1ledger.Account.new,
+    ledgerv1ledger.SearchAccountsResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
   );
 
   /// CreateAccount creates a new account within a ledger.
@@ -54,8 +56,8 @@ abstract final class LedgerService {
   static const createAccount = connect.Spec(
     '/$name/CreateAccount',
     connect.StreamType.unary,
-    ledgerv1ledger.Account.new,
-    ledgerv1ledger.Account.new,
+    ledgerv1ledger.CreateAccountRequest.new,
+    ledgerv1ledger.CreateAccountResponse.new,
   );
 
   /// UpdateAccount updates an existing account's metadata.
@@ -63,8 +65,8 @@ abstract final class LedgerService {
   static const updateAccount = connect.Spec(
     '/$name/UpdateAccount',
     connect.StreamType.unary,
-    ledgerv1ledger.Account.new,
-    ledgerv1ledger.Account.new,
+    ledgerv1ledger.UpdateAccountRequest.new,
+    ledgerv1ledger.UpdateAccountResponse.new,
   );
 
   /// SearchTransactions finds transactions matching specified criteria.
@@ -73,7 +75,8 @@ abstract final class LedgerService {
     '/$name/SearchTransactions',
     connect.StreamType.server,
     commonv1common.SearchRequest.new,
-    ledgerv1ledger.Transaction.new,
+    ledgerv1ledger.SearchTransactionsResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
   );
 
   /// CreateTransaction creates a new double-entry transaction.
@@ -81,8 +84,8 @@ abstract final class LedgerService {
   static const createTransaction = connect.Spec(
     '/$name/CreateTransaction',
     connect.StreamType.unary,
-    ledgerv1ledger.Transaction.new,
-    ledgerv1ledger.Transaction.new,
+    ledgerv1ledger.CreateTransactionRequest.new,
+    ledgerv1ledger.CreateTransactionResponse.new,
   );
 
   /// ReverseTransaction reverses a transaction by creating offsetting entries.
@@ -90,8 +93,8 @@ abstract final class LedgerService {
   static const reverseTransaction = connect.Spec(
     '/$name/ReverseTransaction',
     connect.StreamType.unary,
-    ledgerv1ledger.Transaction.new,
-    ledgerv1ledger.Transaction.new,
+    ledgerv1ledger.ReverseTransactionRequest.new,
+    ledgerv1ledger.ReverseTransactionResponse.new,
   );
 
   /// UpdateTransaction updates a transaction's metadata.
@@ -99,8 +102,8 @@ abstract final class LedgerService {
   static const updateTransaction = connect.Spec(
     '/$name/UpdateTransaction',
     connect.StreamType.unary,
-    ledgerv1ledger.Transaction.new,
-    ledgerv1ledger.Transaction.new,
+    ledgerv1ledger.UpdateTransactionRequest.new,
+    ledgerv1ledger.UpdateTransactionResponse.new,
   );
 
   /// SearchTransactionEntries finds individual transaction entries.
@@ -109,6 +112,7 @@ abstract final class LedgerService {
     '/$name/SearchTransactionEntries',
     connect.StreamType.server,
     commonv1common.SearchRequest.new,
-    ledgerv1ledger.TransactionEntry.new,
+    ledgerv1ledger.SearchTransactionEntriesResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
   );
 }

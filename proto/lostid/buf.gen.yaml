@@ -10,3 +10,11 @@ plugins:
       - content-types=json
       - allow-get
       - debug
+
+  # Dart protobuf generation
+  - remote: buf.build/protocolbuffers/dart
+    out: ../../dart/lostid/lib/src
+
+  # Dart Connect RPC client generation
+  - remote: buf.build/connectrpc/dart
+    out: ../../dart/lostid/lib/src

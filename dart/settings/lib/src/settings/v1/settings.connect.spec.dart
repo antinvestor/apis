@@ -20,6 +20,7 @@ abstract final class SettingsService {
     connect.StreamType.unary,
     settingsv1settings.GetRequest.new,
     settingsv1settings.GetResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
   );
 
   /// List retrieves all settings matching a partial key.
@@ -29,6 +30,7 @@ abstract final class SettingsService {
     connect.StreamType.server,
     settingsv1settings.ListRequest.new,
     settingsv1settings.ListResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
   );
 
   /// Search finds settings matching specified criteria.
@@ -38,6 +40,7 @@ abstract final class SettingsService {
     connect.StreamType.server,
     commonv1common.SearchRequest.new,
     settingsv1settings.SearchResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
   );
 
   /// Set creates or updates a setting value.

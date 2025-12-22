@@ -1,0 +1,14 @@
+include: package:lints/recommended.yaml
+
+analyzer:
+  exclude:
+    - lib/src/**/*.pb.dart
+    - lib/src/**/*.pbenum.dart
+    - lib/src/**/*.pbjson.dart
+    - lib/src/**/*.pbgrpc.dart
+    - lib/src/**/*.connect.client.dart
+    - lib/src/**/*.connect.spec.dart
+
+linter:
+  rules:
+    - prefer_single_quotes

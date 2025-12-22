@@ -8,15 +8,15 @@
 // ignore_for_file: constant_identifier_names
 // ignore_for_file: curly_braces_in_flow_control_structures
 // ignore_for_file: deprecated_member_use_from_same_package, library_prefixes
-// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names, prefer_relative_imports
 
 import 'dart:async' as $async;
 import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
+import 'package:protobuf/well_known_types/google/protobuf/struct.pb.dart' as $2;
 
 import '../../common/v1/common.pb.dart' as $0;
-import '../../google/protobuf/struct.pb.dart' as $2;
 import '../../google/type/money.pb.dart' as $1;
 import 'payment.pbenum.dart';
 
@@ -116,7 +116,6 @@ class Payment extends $pb.GeneratedMessage {
   static Payment create() => Payment._();
   @$core.override
   Payment createEmptyInstance() => create();
-  static $pb.PbList<Payment> createRepeated() => $pb.PbList<Payment>();
   @$core.pragma('dart2js:noInline')
   static Payment getDefault() =>
       _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Payment>(create);
@@ -322,7 +321,6 @@ class Account extends $pb.GeneratedMessage {
   static Account create() => Account._();
   @$core.override
   Account createEmptyInstance() => create();
-  static $pb.PbList<Account> createRepeated() => $pb.PbList<Account>();
   @$core.pragma('dart2js:noInline')
   static Account getDefault() =>
       _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Account>(create);
@@ -409,7 +407,6 @@ class Customer extends $pb.GeneratedMessage {
   static Customer create() => Customer._();
   @$core.override
   Customer createEmptyInstance() => create();
-  static $pb.PbList<Customer> createRepeated() => $pb.PbList<Customer>();
   @$core.pragma('dart2js:noInline')
   static Customer getDefault() =>
       _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Customer>(create);
@@ -540,7 +537,6 @@ class PaymentLink extends $pb.GeneratedMessage {
   static PaymentLink create() => PaymentLink._();
   @$core.override
   PaymentLink createEmptyInstance() => create();
-  static $pb.PbList<PaymentLink> createRepeated() => $pb.PbList<PaymentLink>();
   @$core.pragma('dart2js:noInline')
   static PaymentLink getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<PaymentLink>(create);
@@ -706,7 +702,6 @@ class SendRequest extends $pb.GeneratedMessage {
   static SendRequest create() => SendRequest._();
   @$core.override
   SendRequest createEmptyInstance() => create();
-  static $pb.PbList<SendRequest> createRepeated() => $pb.PbList<SendRequest>();
   @$core.pragma('dart2js:noInline')
   static SendRequest getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<SendRequest>(create);
@@ -765,8 +760,6 @@ class SendResponse extends $pb.GeneratedMessage {
   static SendResponse create() => SendResponse._();
   @$core.override
   SendResponse createEmptyInstance() => create();
-  static $pb.PbList<SendResponse> createRepeated() =>
-      $pb.PbList<SendResponse>();
   @$core.pragma('dart2js:noInline')
   static SendResponse getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<SendResponse>(create);
@@ -824,8 +817,6 @@ class ReceiveRequest extends $pb.GeneratedMessage {
   static ReceiveRequest create() => ReceiveRequest._();
   @$core.override
   ReceiveRequest createEmptyInstance() => create();
-  static $pb.PbList<ReceiveRequest> createRepeated() =>
-      $pb.PbList<ReceiveRequest>();
   @$core.pragma('dart2js:noInline')
   static ReceiveRequest getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<ReceiveRequest>(create);
@@ -884,8 +875,6 @@ class ReceiveResponse extends $pb.GeneratedMessage {
   static ReceiveResponse create() => ReceiveResponse._();
   @$core.override
   ReceiveResponse createEmptyInstance() => create();
-  static $pb.PbList<ReceiveResponse> createRepeated() =>
-      $pb.PbList<ReceiveResponse>();
   @$core.pragma('dart2js:noInline')
   static ReceiveResponse getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<ReceiveResponse>(create);
@@ -981,8 +970,6 @@ class InitiatePromptRequest extends $pb.GeneratedMessage {
   static InitiatePromptRequest create() => InitiatePromptRequest._();
   @$core.override
   InitiatePromptRequest createEmptyInstance() => create();
-  static $pb.PbList<InitiatePromptRequest> createRepeated() =>
-      $pb.PbList<InitiatePromptRequest>();
   @$core.pragma('dart2js:noInline')
   static InitiatePromptRequest getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<InitiatePromptRequest>(create);
@@ -1140,8 +1127,6 @@ class InitiatePromptResponse extends $pb.GeneratedMessage {
   static InitiatePromptResponse create() => InitiatePromptResponse._();
   @$core.override
   InitiatePromptResponse createEmptyInstance() => create();
-  static $pb.PbList<InitiatePromptResponse> createRepeated() =>
-      $pb.PbList<InitiatePromptResponse>();
   @$core.pragma('dart2js:noInline')
   static InitiatePromptResponse getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<InitiatePromptResponse>(create);
@@ -1202,8 +1187,6 @@ class ReleaseRequest extends $pb.GeneratedMessage {
   static ReleaseRequest create() => ReleaseRequest._();
   @$core.override
   ReleaseRequest createEmptyInstance() => create();
-  static $pb.PbList<ReleaseRequest> createRepeated() =>
-      $pb.PbList<ReleaseRequest>();
   @$core.pragma('dart2js:noInline')
   static ReleaseRequest getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<ReleaseRequest>(create);
@@ -1269,8 +1252,6 @@ class ReleaseResponse extends $pb.GeneratedMessage {
   static ReleaseResponse create() => ReleaseResponse._();
   @$core.override
   ReleaseResponse createEmptyInstance() => create();
-  static $pb.PbList<ReleaseResponse> createRepeated() =>
-      $pb.PbList<ReleaseResponse>();
   @$core.pragma('dart2js:noInline')
   static ReleaseResponse getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<ReleaseResponse>(create);
@@ -1345,8 +1326,6 @@ class ReconcileRequest extends $pb.GeneratedMessage {
   static ReconcileRequest create() => ReconcileRequest._();
   @$core.override
   ReconcileRequest createEmptyInstance() => create();
-  static $pb.PbList<ReconcileRequest> createRepeated() =>
-      $pb.PbList<ReconcileRequest>();
   @$core.pragma('dart2js:noInline')
   static ReconcileRequest getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<ReconcileRequest>(create);
@@ -1462,8 +1441,6 @@ class ReconcileResponse extends $pb.GeneratedMessage {
   static ReconcileResponse create() => ReconcileResponse._();
   @$core.override
   ReconcileResponse createEmptyInstance() => create();
-  static $pb.PbList<ReconcileResponse> createRepeated() =>
-      $pb.PbList<ReconcileResponse>();
   @$core.pragma('dart2js:noInline')
   static ReconcileResponse getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<ReconcileResponse>(create);
@@ -1555,8 +1532,6 @@ class SearchResponse extends $pb.GeneratedMessage {
   static SearchResponse create() => SearchResponse._();
   @$core.override
   SearchResponse createEmptyInstance() => create();
-  static $pb.PbList<SearchResponse> createRepeated() =>
-      $pb.PbList<SearchResponse>();
   @$core.pragma('dart2js:noInline')
   static SearchResponse getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<SearchResponse>(create);
@@ -1619,8 +1594,6 @@ class CreatePaymentLinkRequest extends $pb.GeneratedMessage {
   static CreatePaymentLinkRequest create() => CreatePaymentLinkRequest._();
   @$core.override
   CreatePaymentLinkRequest createEmptyInstance() => create();
-  static $pb.PbList<CreatePaymentLinkRequest> createRepeated() =>
-      $pb.PbList<CreatePaymentLinkRequest>();
   @$core.pragma('dart2js:noInline')
   static CreatePaymentLinkRequest getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<CreatePaymentLinkRequest>(create);
@@ -1686,8 +1659,6 @@ class CreatePaymentLinkResponse extends $pb.GeneratedMessage {
   static CreatePaymentLinkResponse create() => CreatePaymentLinkResponse._();
   @$core.override
   CreatePaymentLinkResponse createEmptyInstance() => create();
-  static $pb.PbList<CreatePaymentLinkResponse> createRepeated() =>
-      $pb.PbList<CreatePaymentLinkResponse>();
   @$core.pragma('dart2js:noInline')
   static CreatePaymentLinkResponse getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<CreatePaymentLinkResponse>(create);

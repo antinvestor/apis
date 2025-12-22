@@ -44,6 +44,14 @@ define buf_validate
 cd proto/${1} && PATH=$(BIN):$$PATH $(BIN)/buf validate
 endef
 
+define buf_generate
+cd proto/${1} && PATH=$(BIN):$$PATH $(BIN)/buf generate
+endef
+
+define dart_format
+cd dart/${1} && dart format lib/
+endef
+
 define buf_migrate
 cd proto/${1} && PATH=$(BIN):$$PATH $(BIN)/buf config migrate
 endef
@@ -223,8 +231,40 @@ generate_buf_gen:
 
 .PHONY: generate
 generate: $(BIN)/buf $(BIN)/license-header  ## Regenerate code and licenses
-	#$(MAKE) generate_buf_gen
+	$(MAKE) generate_buf_gen
 	$(MAKE) generate_minimock_mocks
+
+.PHONY: generate_dart
+generate_dart: $(BIN)/buf ## Generate Dart code from proto files
+	$(call buf_generate,common)
+	$(call buf_generate,chat)
+	$(call buf_generate,device)
+	$(call buf_generate,files)
+	$(call buf_generate,notification)
+	$(call buf_generate,ledger)
+	$(call buf_generate,lostid)
+	$(call buf_generate,ocr)
+	$(call buf_generate,partition)
+	$(call buf_generate,payment)
+	$(call buf_generate,profile)
+	$(call buf_generate,property)
+	$(call buf_generate,settings)
+
+.PHONY: dart_format_all
+dart_format_all: ## Format all Dart code
+	$(call dart_format,common)
+	$(call dart_format,chat)
+	$(call dart_format,device)
+	$(call dart_format,files)
+	$(call dart_format,notification)
+	$(call dart_format,ledger)
+	$(call dart_format,lostid)
+	$(call dart_format,ocr)
+	$(call dart_format,partition)
+	$(call dart_format,payment)
+	$(call dart_format,profile)
+	$(call dart_format,property)
+	$(call dart_format,settings)
 
 .PHONY: upgrade
 upgrade: golang_upgrade_all ## Upgrade dependencies

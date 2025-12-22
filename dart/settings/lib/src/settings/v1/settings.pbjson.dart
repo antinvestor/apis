@@ -8,14 +8,17 @@
 // ignore_for_file: constant_identifier_names
 // ignore_for_file: curly_braces_in_flow_control_structures
 // ignore_for_file: deprecated_member_use_from_same_package, library_prefixes
-// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: non_constant_identifier_names, prefer_relative_imports
+// ignore_for_file: unused_import
 
 import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
+import 'package:protobuf/well_known_types/google/protobuf/struct.pbjson.dart'
+    as $1;
+
 import '../../common/v1/common.pbjson.dart' as $0;
-import '../../google/protobuf/struct.pbjson.dart' as $1;
 
 @$core.Deprecated('Use settingDescriptor instead')
 const Setting$json = {
@@ -33,7 +36,7 @@ const Setting$json = {
 final $typed_data.Uint8List settingDescriptor = $convert.base64Decode(
     'CgdTZXR0aW5nEhsKBG5hbWUYASABKAlCB7pIBHICEAJSBG5hbWUSIgoGb2JqZWN0GAIgASgJQg'
     'q6SAfYAQFyAhACUgZvYmplY3QSOwoJb2JqZWN0X2lkGAMgASgJQh66SBvYAQFyFhADGCgyEFsw'
-    'LTlhLXpfLV17MywyMH1SCG9iamVjdElkEh4KBGxhbmcYBCABKAlCCrpIB9gBAXICEAJSBGxhbm'
+    'LTlhLXpfLV17Myw0MH1SCG9iamVjdElkEh4KBGxhbmcYBCABKAlCCrpIB9gBAXICEAJSBGxhbm'
     'cSIgoGbW9kdWxlGAUgASgJQgq6SAfYAQFyAhADUgZtb2R1bGU=');
 
 @$core.Deprecated('Use settingObjectDescriptor instead')
@@ -56,7 +59,7 @@ const SettingObject$json = {
 
 /// Descriptor for `SettingObject`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List settingObjectDescriptor = $convert.base64Decode(
-    'Cg1TZXR0aW5nT2JqZWN0EisKAmlkGAEgASgJQhu6SBhyFhADGCgyEFswLTlhLXpfLV17MywyMH'
+    'Cg1TZXR0aW5nT2JqZWN0EisKAmlkGAEgASgJQhu6SBhyFhADGCgyEFswLTlhLXpfLV17Myw0MH'
     '1SAmlkEiYKA2tleRgCIAEoCzIULnNldHRpbmdzLnYxLlNldHRpbmdSA2tleRIUCgV2YWx1ZRgD'
     'IAEoCVIFdmFsdWUSGAoHdXBkYXRlZBgEIAEoCVIHdXBkYXRlZA==');
 
@@ -206,21 +209,21 @@ const $core.Map<$core.String, $core.dynamic> SettingsServiceBase$json = {
       '1': 'Get',
       '2': '.settings.v1.GetRequest',
       '3': '.settings.v1.GetResponse',
-      '4': {}
+      '4': {'34': 1},
     },
     {
       '1': 'List',
       '2': '.settings.v1.ListRequest',
       '3': '.settings.v1.ListResponse',
-      '4': {},
-      '6': true
+      '4': {'34': 1},
+      '6': true,
     },
     {
       '1': 'Search',
       '2': '.common.v1.SearchRequest',
       '3': '.settings.v1.SearchResponse',
-      '4': {},
-      '6': true
+      '4': {'34': 1},
+      '6': true,
     },
     {
       '1': 'Set',
@@ -253,24 +256,25 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>>
 
 /// Descriptor for `SettingsService`. Decode as a `google.protobuf.ServiceDescriptorProto`.
 final $typed_data.Uint8List settingsServiceDescriptor = $convert.base64Decode(
-    'Cg9TZXR0aW5nc1NlcnZpY2USogIKA0dldBIXLnNldHRpbmdzLnYxLkdldFJlcXVlc3QaGC5zZX'
-    'R0aW5ncy52MS5HZXRSZXNwb25zZSLnAbpH4wEKCFNldHRpbmdzEhNHZXQgYSBzZXR0aW5nIHZh'
-    'bHVlGrUBUmV0cmlldmVzIGEgc2luZ2xlIHNldHRpbmcgdmFsdWUgYnkgaXRzIGhpZXJhcmNoaW'
-    'NhbCBrZXkuIFRoZSBzZXJ2aWNlIHJldHVybnMgdGhlIG1vc3Qgc3BlY2lmaWMgbWF0Y2hpbmcg'
-    'c2V0dGluZyBiYXNlZCBvbiB0aGUga2V5IGhpZXJhcmNoeSAoaW5zdGFuY2UtbGV2ZWwgPiBvYm'
-    'plY3QtbGV2ZWwgPiBnbG9iYWwpLioKZ2V0U2V0dGluZxK0AgoETGlzdBIYLnNldHRpbmdzLnYx'
-    'Lkxpc3RSZXF1ZXN0Ghkuc2V0dGluZ3MudjEuTGlzdFJlc3BvbnNlIvQBukfwAQoIU2V0dGluZ3'
-    'MSHExpc3Qgc2V0dGluZ3MgYnkgcGFydGlhbCBrZXkatwFSZXRyaWV2ZXMgYWxsIHNldHRpbmdz'
-    'IG1hdGNoaW5nIGEgcGFydGlhbCBrZXkuIEVtcHR5IGZpZWxkcyBpbiB0aGUga2V5IGFjdCBhcy'
-    'B3aWxkY2FyZHMsIGFsbG93aW5nIGZsZXhpYmxlIHF1ZXJpZXMgKGUuZy4sIGFsbCBzZXR0aW5n'
-    'cyBmb3IgYW4gb2JqZWN0IHR5cGUsIGFsbCBzZXR0aW5ncyBpbiBhIGxhbmd1YWdlKS4qDGxpc3'
-    'RTZXR0aW5nczABEoQCCgZTZWFyY2gSGC5jb21tb24udjEuU2VhcmNoUmVxdWVzdBobLnNldHRp'
-    'bmdzLnYxLlNlYXJjaFJlc3BvbnNlIsABuke8AQoIU2V0dGluZ3MSD1NlYXJjaCBzZXR0aW5ncx'
-    'qOAVNlYXJjaGVzIGZvciBzZXR0aW5ncyBtYXRjaGluZyBzcGVjaWZpZWQgY3JpdGVyaWEgaW5j'
-    'bHVkaW5nIGZ1bGwtdGV4dCBzZWFyY2ggb24gbmFtZXMgYW5kIHZhbHVlcywgZGF0ZSByYW5nZS'
-    'BmaWx0ZXJpbmcsIGFuZCBjdXN0b20gcHJvcGVydGllcy4qDnNlYXJjaFNldHRpbmdzMAESjQIK'
-    'A1NldBIXLnNldHRpbmdzLnYxLlNldFJlcXVlc3QaGC5zZXR0aW5ncy52MS5TZXRSZXNwb25zZS'
-    'LSAbpHzgEKCFNldHRpbmdzEhpDcmVhdGUgb3IgdXBkYXRlIGEgc2V0dGluZxqZAUNyZWF0ZXMg'
-    'b3IgdXBkYXRlcyBhIHNldHRpbmcgdmFsdWUuIElmIHRoZSBzZXR0aW5nIGV4aXN0cywgaXQgaX'
-    'MgdXBkYXRlZCB3aXRoIHRoZSBuZXcgdmFsdWUgYW5kIHRpbWVzdGFtcC4gSWYgaXQgZG9lc24n'
-    'dCBleGlzdCwgYSBuZXcgc2V0dGluZyBpcyBjcmVhdGVkLioKc2V0U2V0dGluZw==');
+    'Cg9TZXR0aW5nc1NlcnZpY2USpQIKA0dldBIXLnNldHRpbmdzLnYxLkdldFJlcXVlc3QaGC5zZX'
+    'R0aW5ncy52MS5HZXRSZXNwb25zZSLqAZACAbpH4wEKCFNldHRpbmdzEhNHZXQgYSBzZXR0aW5n'
+    'IHZhbHVlGrUBUmV0cmlldmVzIGEgc2luZ2xlIHNldHRpbmcgdmFsdWUgYnkgaXRzIGhpZXJhcm'
+    'NoaWNhbCBrZXkuIFRoZSBzZXJ2aWNlIHJldHVybnMgdGhlIG1vc3Qgc3BlY2lmaWMgbWF0Y2hp'
+    'bmcgc2V0dGluZyBiYXNlZCBvbiB0aGUga2V5IGhpZXJhcmNoeSAoaW5zdGFuY2UtbGV2ZWwgPi'
+    'BvYmplY3QtbGV2ZWwgPiBnbG9iYWwpLioKZ2V0U2V0dGluZxK3AgoETGlzdBIYLnNldHRpbmdz'
+    'LnYxLkxpc3RSZXF1ZXN0Ghkuc2V0dGluZ3MudjEuTGlzdFJlc3BvbnNlIvcBkAIBukfwAQoIU2'
+    'V0dGluZ3MSHExpc3Qgc2V0dGluZ3MgYnkgcGFydGlhbCBrZXkatwFSZXRyaWV2ZXMgYWxsIHNl'
+    'dHRpbmdzIG1hdGNoaW5nIGEgcGFydGlhbCBrZXkuIEVtcHR5IGZpZWxkcyBpbiB0aGUga2V5IG'
+    'FjdCBhcyB3aWxkY2FyZHMsIGFsbG93aW5nIGZsZXhpYmxlIHF1ZXJpZXMgKGUuZy4sIGFsbCBz'
+    'ZXR0aW5ncyBmb3IgYW4gb2JqZWN0IHR5cGUsIGFsbCBzZXR0aW5ncyBpbiBhIGxhbmd1YWdlKS'
+    '4qDGxpc3RTZXR0aW5nczABEocCCgZTZWFyY2gSGC5jb21tb24udjEuU2VhcmNoUmVxdWVzdBob'
+    'LnNldHRpbmdzLnYxLlNlYXJjaFJlc3BvbnNlIsMBkAIBuke8AQoIU2V0dGluZ3MSD1NlYXJjaC'
+    'BzZXR0aW5ncxqOAVNlYXJjaGVzIGZvciBzZXR0aW5ncyBtYXRjaGluZyBzcGVjaWZpZWQgY3Jp'
+    'dGVyaWEgaW5jbHVkaW5nIGZ1bGwtdGV4dCBzZWFyY2ggb24gbmFtZXMgYW5kIHZhbHVlcywgZG'
+    'F0ZSByYW5nZSBmaWx0ZXJpbmcsIGFuZCBjdXN0b20gcHJvcGVydGllcy4qDnNlYXJjaFNldHRp'
+    'bmdzMAESjQIKA1NldBIXLnNldHRpbmdzLnYxLlNldFJlcXVlc3QaGC5zZXR0aW5ncy52MS5TZX'
+    'RSZXNwb25zZSLSAbpHzgEKCFNldHRpbmdzEhpDcmVhdGUgb3IgdXBkYXRlIGEgc2V0dGluZxqZ'
+    'AUNyZWF0ZXMgb3IgdXBkYXRlcyBhIHNldHRpbmcgdmFsdWUuIElmIHRoZSBzZXR0aW5nIGV4aX'
+    'N0cywgaXQgaXMgdXBkYXRlZCB3aXRoIHRoZSBuZXcgdmFsdWUgYW5kIHRpbWVzdGFtcC4gSWYg'
+    'aXQgZG9lc24ndCBleGlzdCwgYSBuZXcgc2V0dGluZyBpcyBjcmVhdGVkLioKc2V0U2V0dGluZw'
+    '==');

@@ -49,7 +49,7 @@ import 'package:connectrpc/connect.dart';
 void main() async {
   // Create a client channel
   final channel = ClientChannel(
-    'https://api.antinvestor.com',
+    'https://antinvestor.com',
     options: ChannelOptions(
       credentials: ChannelCredentials.secure(),
     ),

@@ -19,6 +19,7 @@ abstract final class DeviceService {
     connect.StreamType.unary,
     devicev1device.GetByIdRequest.new,
     devicev1device.GetByIdResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
   );
 
   /// GetBySessionId retrieves a device by its active session identifier.
@@ -28,6 +29,7 @@ abstract final class DeviceService {
     connect.StreamType.unary,
     devicev1device.GetBySessionIdRequest.new,
     devicev1device.GetBySessionIdResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
   );
 
   /// Search finds devices matching specified criteria.
@@ -37,6 +39,7 @@ abstract final class DeviceService {
     connect.StreamType.server,
     devicev1device.SearchRequest.new,
     devicev1device.SearchResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
   );
 
   /// Create registers a new device in the system.
@@ -91,6 +94,7 @@ abstract final class DeviceService {
     connect.StreamType.server,
     devicev1device.ListLogsRequest.new,
     devicev1device.ListLogsResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
   );
 
   /// AddKey stores a key or token and its material in the local storage for a device.
@@ -117,6 +121,7 @@ abstract final class DeviceService {
     connect.StreamType.unary,
     devicev1device.SearchKeyRequest.new,
     devicev1device.SearchKeyResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
   );
 
   /// RegisterKey registers a key with a third-party service using an externally-generated key or token.

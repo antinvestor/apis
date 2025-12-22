@@ -89,6 +89,59 @@ paths:
               schema:
                 $ref: '#/components/schemas/lostid.v1.ProgressResponse'
   /lostid.v1.LostIdService/Search:
+    get:
+      tags:
+        - Searches
+        - lostid.v1.LostIdService
+      summary: Search for lost item
+      description: Creates a search request for a lost identification document. Provide details like item type, location lost, and description. The system will attempt to match with registered collectibles and notify if a match is found.
+      operationId: searchLostItem
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+        - name: message
+          in: query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/common.v1.SearchRequest'
+        - name: encoding
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/encoding'
+        - name: base64
+          in: query
+          schema:
+            $ref: '#/components/schemas/base64'
+        - name: compression
+          in: query
+          schema:
+            $ref: '#/components/schemas/compression'
+        - name: connect
+          in: query
+          schema:
+            $ref: '#/components/schemas/connect'
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/lostid.v1.SearchResponse'
     post:
       tags:
         - Searches
@@ -127,6 +180,10 @@ paths:
                 $ref: '#/components/schemas/lostid.v1.SearchResponse'
 components:
   schemas:
+    base64:
+      type: boolean
+      title: base64
+      description: Specifies if the message query param is base64 encoded, which may be required for binary data
     common.v1.Pagination:
       type: object
       properties:
@@ -183,6 +240,18 @@ components:
       description: |-
         SearchRequest provides a standard structure for search operations across services.
          Supports text search, ID-based queries, pagination, property filtering, and extensibility.
+    compression:
+      title: compression
+      enum:
+        - identity
+        - gzip
+        - br
+      description: Which compression algorithm to use for this request
+    connect:
+      title: connect
+      enum:
+        - v1
+      description: Define the version of the Connect protocol
     connect-protocol-version:
       type: number
       title: Connect-Protocol-Version
@@ -252,6 +321,12 @@ components:
           description: Deserialized error detail payload. The 'type' field indicates the schema. This field is for easier debugging and should not be relied upon for application logic.
       additionalProperties: true
       description: Contains an arbitrary serialized message along with a @type that describes the type of the serialized message, with an additional debug field for ConnectRPC error details.
+    encoding:
+      title: encoding
+      enum:
+        - proto
+        - json
+      description: Define which encoding or 'Message-Codec' to use
     google.protobuf.ListValue:
       type: object
       properties:
@@ -662,7 +737,7 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Item ID (collectible or search)
         type:
           title: type

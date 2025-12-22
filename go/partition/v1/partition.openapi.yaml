@@ -234,6 +234,59 @@ paths:
               schema:
                 $ref: '#/components/schemas/partition.v1.CreateTenantResponse'
   /partition.v1.PartitionService/GetAccess:
+    get:
+      tags:
+        - Access
+        - partition.v1.PartitionService
+      summary: Get access grant
+      description: Retrieves an access grant by access ID or by partition and profile ID combination.
+      operationId: getAccess
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+        - name: message
+          in: query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partition.v1.GetAccessRequest'
+        - name: encoding
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/encoding'
+        - name: base64
+          in: query
+          schema:
+            $ref: '#/components/schemas/base64'
+        - name: compression
+          in: query
+          schema:
+            $ref: '#/components/schemas/compression'
+        - name: connect
+          in: query
+          schema:
+            $ref: '#/components/schemas/connect'
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partition.v1.GetAccessResponse'
     post:
       tags:
         - Access
@@ -271,6 +324,59 @@ paths:
               schema:
                 $ref: '#/components/schemas/partition.v1.GetAccessResponse'
   /partition.v1.PartitionService/GetPage:
+    get:
+      tags:
+        - Pages
+        - partition.v1.PartitionService
+      summary: Get custom page
+      description: Retrieves a custom page by page ID, partition ID, or page name.
+      operationId: getPage
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+        - name: message
+          in: query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partition.v1.GetPageRequest'
+        - name: encoding
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/encoding'
+        - name: base64
+          in: query
+          schema:
+            $ref: '#/components/schemas/base64'
+        - name: compression
+          in: query
+          schema:
+            $ref: '#/components/schemas/compression'
+        - name: connect
+          in: query
+          schema:
+            $ref: '#/components/schemas/connect'
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partition.v1.GetPageResponse'
     post:
       tags:
         - Pages
@@ -308,6 +414,59 @@ paths:
               schema:
                 $ref: '#/components/schemas/partition.v1.GetPageResponse'
   /partition.v1.PartitionService/GetPartition:
+    get:
+      tags:
+        - Partitions
+        - partition.v1.PartitionService
+      summary: Get partition
+      description: Retrieves a partition by its unique identifier including all partition metadata and properties.
+      operationId: getPartition
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+        - name: message
+          in: query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partition.v1.GetPartitionRequest'
+        - name: encoding
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/encoding'
+        - name: base64
+          in: query
+          schema:
+            $ref: '#/components/schemas/base64'
+        - name: compression
+          in: query
+          schema:
+            $ref: '#/components/schemas/compression'
+        - name: connect
+          in: query
+          schema:
+            $ref: '#/components/schemas/connect'
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partition.v1.GetPartitionResponse'
     post:
       tags:
         - Partitions
@@ -345,6 +504,59 @@ paths:
               schema:
                 $ref: '#/components/schemas/partition.v1.GetPartitionResponse'
   /partition.v1.PartitionService/GetPartitionParents:
+    get:
+      tags:
+        - Partitions
+        - partition.v1.PartitionService
+      summary: Get partition parents
+      description: Retrieves the complete parent hierarchy for a partition from the root tenant down to the partition.
+      operationId: getPartitionParents
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+        - name: message
+          in: query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partition.v1.GetPartitionParentsRequest'
+        - name: encoding
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/encoding'
+        - name: base64
+          in: query
+          schema:
+            $ref: '#/components/schemas/base64'
+        - name: compression
+          in: query
+          schema:
+            $ref: '#/components/schemas/compression'
+        - name: connect
+          in: query
+          schema:
+            $ref: '#/components/schemas/connect'
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partition.v1.GetPartitionParentsResponse'
     post:
       tags:
         - Partitions
@@ -382,6 +594,59 @@ paths:
               schema:
                 $ref: '#/components/schemas/partition.v1.GetPartitionParentsResponse'
   /partition.v1.PartitionService/GetTenant:
+    get:
+      tags:
+        - Tenants
+        - partition.v1.PartitionService
+      summary: Get tenant
+      description: Retrieves a tenant by its unique identifier including all tenant metadata and properties.
+      operationId: getTenant
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+        - name: message
+          in: query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partition.v1.GetTenantRequest'
+        - name: encoding
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/encoding'
+        - name: base64
+          in: query
+          schema:
+            $ref: '#/components/schemas/base64'
+        - name: compression
+          in: query
+          schema:
+            $ref: '#/components/schemas/compression'
+        - name: connect
+          in: query
+          schema:
+            $ref: '#/components/schemas/connect'
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partition.v1.GetTenantResponse'
     post:
       tags:
         - Tenants
@@ -646,6 +911,10 @@ paths:
                 $ref: '#/components/schemas/partition.v1.UpdateTenantResponse'
 components:
   schemas:
+    base64:
+      type: boolean
+      title: base64
+      description: Specifies if the message query param is base64 encoded, which may be required for binary data
     common.v1.STATE:
       type: string
       title: STATE
@@ -659,6 +928,18 @@ components:
         STATE represents the lifecycle state of an entity across all services.
          This enum provides a consistent way to track entity states from creation to deletion.
          buf:lint:ignore ENUM_VALUE_PREFIX
+    compression:
+      title: compression
+      enum:
+        - identity
+        - gzip
+        - br
+      description: Which compression algorithm to use for this request
+    connect:
+      title: connect
+      enum:
+        - v1
+      description: Define the version of the Connect protocol
     connect-protocol-version:
       type: number
       title: Connect-Protocol-Version
@@ -728,6 +1009,12 @@ components:
           description: Deserialized error detail payload. The 'type' field indicates the schema. This field is for easier debugging and should not be relied upon for application logic.
       additionalProperties: true
       description: Contains an arbitrary serialized message along with a @type that describes the type of the serialized message, with an additional debug field for ConnectRPC error details.
+    encoding:
+      title: encoding
+      enum:
+        - proto
+        - json
+      description: Define which encoding or 'Message-Codec' to use
     google.protobuf.ListValue:
       type: object
       properties:
@@ -897,14 +1184,14 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Unique access ID
         profileId:
           type: string
           title: profile_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Profile ID with access
         partition:
           title: partition
@@ -929,14 +1216,14 @@ components:
           title: access_role_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Unique access role ID
         accessId:
           type: string
           title: access_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Associated access ID
         role:
           title: role
@@ -954,7 +1241,7 @@ components:
               title: profile_id
               maxLength: 40
               minLength: 3
-              pattern: '[0-9a-z_-]{3,20}'
+              pattern: '[0-9a-z_-]{3,40}'
         - oneOf:
             - properties:
                 clientId:
@@ -962,7 +1249,7 @@ components:
                   title: client_id
                   maxLength: 40
                   minLength: 3
-                  pattern: '[0-9a-z_-]{3,20}'
+                  pattern: '[0-9a-z_-]{3,40}'
               title: client_id
               required:
                 - clientId
@@ -972,7 +1259,7 @@ components:
                   title: partition_id
                   maxLength: 40
                   minLength: 3
-                  pattern: '[0-9a-z_-]{3,20}'
+                  pattern: '[0-9a-z_-]{3,40}'
               title: partition_id
               required:
                 - partitionId
@@ -994,13 +1281,13 @@ components:
           title: access_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         partitionRoleId:
           type: string
           title: partition_role_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
       title: CreateAccessRoleRequest
       additionalProperties: false
     partition.v1.CreateAccessRoleResponse:
@@ -1019,7 +1306,7 @@ components:
           title: partition_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         name:
           type: string
           title: name
@@ -1048,13 +1335,13 @@ components:
           title: tenant_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         parentId:
           type: string
           title: parent_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         name:
           type: string
           title: name
@@ -1087,7 +1374,7 @@ components:
           title: partition_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         name:
           type: string
           title: name
@@ -1142,13 +1429,13 @@ components:
               title: access_id
               maxLength: 40
               minLength: 3
-              pattern: '[0-9a-z_-]{3,20}'
+              pattern: '[0-9a-z_-]{3,40}'
             profileId:
               type: string
               title: profile_id
               maxLength: 40
               minLength: 3
-              pattern: '[0-9a-z_-]{3,20}'
+              pattern: '[0-9a-z_-]{3,40}'
         - oneOf:
             - properties:
                 clientId:
@@ -1156,7 +1443,7 @@ components:
                   title: client_id
                   maxLength: 40
                   minLength: 3
-                  pattern: '[0-9a-z_-]{3,20}'
+                  pattern: '[0-9a-z_-]{3,40}'
               title: client_id
               required:
                 - clientId
@@ -1166,7 +1453,7 @@ components:
                   title: partition_id
                   maxLength: 40
                   minLength: 3
-                  pattern: '[0-9a-z_-]{3,20}'
+                  pattern: '[0-9a-z_-]{3,40}'
               title: partition_id
               required:
                 - partitionId
@@ -1188,13 +1475,13 @@ components:
           title: page_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         partitionId:
           type: string
           title: partition_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         name:
           type: string
           title: name
@@ -1218,7 +1505,7 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
       title: GetPartitionParentsRequest
       additionalProperties: false
     partition.v1.GetPartitionParentsResponse:
@@ -1239,7 +1526,7 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
       title: GetPartitionRequest
       additionalProperties: false
     partition.v1.GetPartitionResponse:
@@ -1258,7 +1545,7 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
       title: GetTenantRequest
       additionalProperties: false
     partition.v1.GetTenantResponse:
@@ -1277,7 +1564,7 @@ components:
           title: access_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
       title: ListAccessRoleRequest
       additionalProperties: false
     partition.v1.ListAccessRoleResponse:
@@ -1340,7 +1627,7 @@ components:
           title: partition_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
       title: ListPartitionRoleRequest
       additionalProperties: false
     partition.v1.ListPartitionRoleResponse:
@@ -1403,7 +1690,7 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Unique page ID
         name:
           type: string
@@ -1445,13 +1732,13 @@ components:
           title: tenant_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         parentId:
           type: string
           title: parent_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         description:
           type: string
           title: description
@@ -1471,7 +1758,7 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Unique partition ID
         name:
           type: string
@@ -1484,14 +1771,14 @@ components:
           title: tenant_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Parent tenant ID
         parentId:
           type: string
           title: parent_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Parent partition ID for hierarchical structure
         description:
           type: string
@@ -1522,14 +1809,14 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Unique role ID
         partitionId:
           type: string
           title: partition_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Associated partition ID
         name:
           type: string
@@ -1560,7 +1847,7 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
       title: RemoveAccessRequest
       additionalProperties: false
     partition.v1.RemoveAccessResponse:
@@ -1579,7 +1866,7 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
       title: RemoveAccessRoleRequest
       additionalProperties: false
     partition.v1.RemoveAccessRoleResponse:
@@ -1598,7 +1885,7 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
       title: RemovePageRequest
       additionalProperties: false
     partition.v1.RemovePageResponse:
@@ -1617,7 +1904,7 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
       title: RemovePartitionRoleRequest
       additionalProperties: false
     partition.v1.RemovePartitionRoleResponse:
@@ -1636,7 +1923,7 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Unique tenant ID
         name:
           type: string
@@ -1673,7 +1960,7 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         name:
           type: string
           title: name
@@ -1708,7 +1995,7 @@ components:
           title: id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
         name:
           type: string
           title: name

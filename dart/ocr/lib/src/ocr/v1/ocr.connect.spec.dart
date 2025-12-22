@@ -29,5 +29,6 @@ abstract final class OCRService {
     connect.StreamType.unary,
     commonv1common.StatusRequest.new,
     ocrv1ocr.StatusResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
   );
 }

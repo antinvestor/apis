@@ -8,15 +8,15 @@
 // ignore_for_file: constant_identifier_names
 // ignore_for_file: curly_braces_in_flow_control_structures
 // ignore_for_file: deprecated_member_use_from_same_package, library_prefixes
-// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names, prefer_relative_imports
 
 import 'dart:async' as $async;
 import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
+import 'package:protobuf/well_known_types/google/protobuf/struct.pb.dart' as $0;
 
 import '../../common/v1/common.pb.dart' as $1;
-import '../../google/protobuf/struct.pb.dart' as $0;
 
 export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
 
@@ -73,7 +73,6 @@ class OCRFile extends $pb.GeneratedMessage {
   static OCRFile create() => OCRFile._();
   @$core.override
   OCRFile createEmptyInstance() => create();
-  static $pb.PbList<OCRFile> createRepeated() => $pb.PbList<OCRFile>();
   @$core.pragma('dart2js:noInline')
   static OCRFile getDefault() =>
       _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<OCRFile>(create);
@@ -181,8 +180,6 @@ class RecognizeRequest extends $pb.GeneratedMessage {
   static RecognizeRequest create() => RecognizeRequest._();
   @$core.override
   RecognizeRequest createEmptyInstance() => create();
-  static $pb.PbList<RecognizeRequest> createRepeated() =>
-      $pb.PbList<RecognizeRequest>();
   @$core.pragma('dart2js:noInline')
   static RecognizeRequest getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<RecognizeRequest>(create);
@@ -274,8 +271,6 @@ class RecognizeResponse extends $pb.GeneratedMessage {
   static RecognizeResponse create() => RecognizeResponse._();
   @$core.override
   RecognizeResponse createEmptyInstance() => create();
-  static $pb.PbList<RecognizeResponse> createRepeated() =>
-      $pb.PbList<RecognizeResponse>();
   @$core.pragma('dart2js:noInline')
   static RecognizeResponse getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<RecognizeResponse>(create);
@@ -335,8 +330,6 @@ class StatusResponse extends $pb.GeneratedMessage {
   static StatusResponse create() => StatusResponse._();
   @$core.override
   StatusResponse createEmptyInstance() => create();
-  static $pb.PbList<StatusResponse> createRepeated() =>
-      $pb.PbList<StatusResponse>();
   @$core.pragma('dart2js:noInline')
   static StatusResponse getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<StatusResponse>(create);
