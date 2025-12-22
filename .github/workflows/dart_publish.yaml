@@ -7,6 +7,7 @@ on:
 
 jobs:
   release:
+
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -30,8 +31,17 @@ jobs:
 
       - name: Release package
         run: |
-          VERSION_NO="${{github.ref_name}}"
-          PACKAGE="${{ matrix.package }}"
+          TAG_NAME="${{github.ref_name}}"
+          
+          # Extract package and version from tag (format: dart/PACKAGE/vX.Y.Z)
+          if [[ "$TAG_NAME" =~ ^dart/([^/]+)/v([0-9]+\.[0-9]+\.[0-9]+)$ ]]; then
+            PACKAGE="${BASH_REMATCH[1]}"
+            NEW_VERSION="${BASH_REMATCH[2]}"
+          else
+            echo "❌ Could not parse tag: $TAG_NAME"
+            exit 1
+          fi
+          
           PACKAGE_DIR="dart/$PACKAGE"
           
           echo "================================================"
@@ -44,22 +54,7 @@ jobs:
           fi
           
           cd "$PACKAGE_DIR"
-          
-          # Get package name
-          PACKAGE_NAME=$(grep '^name:' pubspec.yaml | sed 's/name: //')
-          echo "Package name: $PACKAGE_NAME"
-          
-          # Extract version from global tag (format: vX.Y.Z)
-          TAG_NAME="$VERSION_NO"
-          if [[ "$TAG_NAME" =~ ^dart/([^/]+)/v([0-9]+\.[0-9]+\.[0-9]+)$ ]]; then
-            NEW_VERSION="${BASH_REMATCH[2]}"
-            echo "Release version from tag: $NEW_VERSION"
-          else
-            echo "❌ Could not parse version from tag: $TAG_NAME"
-            echo "Expected format: vX.Y.Z (e.g., v1.47.0)"
-            exit 1
-          fi
-          
+                    
           # Install dependencies
           echo "Installing dependencies..."
           dart pub get
