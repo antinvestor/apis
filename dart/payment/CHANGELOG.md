@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.50.4] - 2025-12-22
+
+### Changed
+
+- Updated to latest common code (^1.50.4)
+
 ## [1.50.2] - 2025-12-22
 
 ### Changed
