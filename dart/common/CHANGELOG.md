@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.50.3] - 2025-12-22
+
+### Changed
+
+- Removed re-exports of `protobuf`, `connectrpc`, and `fixnum` packages - service SDKs should declare these dependencies directly
+
 ## [1.50.2] - 2025-12-22
 
 ### Changed
