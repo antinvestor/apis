@@ -1,6 +1,6 @@
 name: antinvestor_api_property
 description: Dart client library for Ant Investor Property Service - Property and asset management
-version: 1.50.4
+version: 1.50.5
 repository: https://github.com/antinvestor/apis
 homepage: https://github.com/antinvestor/apis/tree/main/dart/property
 issue_tracker: https://github.com/antinvestor/apis/issues
