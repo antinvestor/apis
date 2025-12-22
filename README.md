@@ -4,13 +4,13 @@ Multi-language SDK library for Ant Investor services using Protocol Buffers and 
 
 ## Build Status
 
-| Workflow | Status |
-|----------|--------|
-| Tests | [![Tests](https://github.com/antinvestor/apis/actions/workflows/run_tests.yml/badge.svg?branch=main)](https://github.com/antinvestor/apis/actions/workflows/run_tests.yml) |
-| Buf (Proto) | [![Buf Build](https://github.com/antinvestor/apis/actions/workflows/release_buf.yaml/badge.svg)](https://github.com/antinvestor/apis/actions/workflows/release_buf.yaml) |
-| Go | [![Go Release](https://github.com/antinvestor/apis/actions/workflows/release_golang.yaml/badge.svg)](https://github.com/antinvestor/apis/actions/workflows/release_golang.yaml) |
-| Dart | [![Dart Release](https://github.com/antinvestor/apis/actions/workflows/release_dart.yaml/badge.svg)](https://github.com/antinvestor/apis/actions/workflows/release_dart.yaml) |
-| Java | [![Java Release](https://github.com/antinvestor/apis/actions/workflows/release_java.yaml/badge.svg)](https://github.com/antinvestor/apis/actions/workflows/release_java.yaml) |
+| Workflow | Status                                                                                                                                                                             |
+|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Tests | [![Tests](https://github.com/antinvestor/apis/actions/workflows/run_tests.yml/badge.svg?branch=main)](https://github.com/antinvestor/apis/actions/workflows/run_tests.yml)         |
+| Buf (Proto) | [![Buf Build](https://github.com/antinvestor/apis/actions/workflows/buf_release.yaml/badge.svg)](https://github.com/antinvestor/apis/actions/workflows/buf_release.yaml)           |
+| Go | [![Go Release](https://github.com/antinvestor/apis/actions/workflows/golang_release.yaml/badge.svg)](https://github.com/antinvestor/apis/actions/workflows/golang_release.yaml)    |
+| Dart | [![Dart Release](https://github.com/antinvestor/apis/actions/workflows/dart_release.yaml/badge.svg)](https://github.com/antinvestor/apis/actions/workflows/dart_release.yaml)      |
+| Java | [![Java Release](https://github.com/antinvestor/apis/actions/workflows/java_release.yaml/badge.svg)](https://github.com/antinvestor/apis/actions/workflows/java_release.yaml) |
 
 ## Services
 
