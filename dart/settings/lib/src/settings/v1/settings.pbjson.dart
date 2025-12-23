@@ -13,8 +13,8 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
-import '../../common/v1/common.pbjson.dart' as $7;
-import '../../google/protobuf/struct.pbjson.dart' as $6;
+import 'package:antinvestor_api_common/common/v1/common.pbjson.dart' as $0;
+import 'package:antinvestor_api_common/google/protobuf/struct.pbjson.dart' as $1;
 
 @$core.Deprecated('Use settingDescriptor instead')
 const Setting$json = {
@@ -177,12 +177,12 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> SettingsSe
   '.settings.v1.SettingObject': SettingObject$json,
   '.settings.v1.ListRequest': ListRequest$json,
   '.settings.v1.ListResponse': ListResponse$json,
-  '.common.v1.SearchRequest': $7.SearchRequest$json,
-  '.common.v1.Pagination': $7.Pagination$json,
-  '.google.protobuf.Struct': $6.Struct$json,
-  '.google.protobuf.Struct.FieldsEntry': $6.Struct_FieldsEntry$json,
-  '.google.protobuf.Value': $6.Value$json,
-  '.google.protobuf.ListValue': $6.ListValue$json,
+  '.common.v1.SearchRequest': $0.SearchRequest$json,
+  '.common.v1.Pagination': $0.Pagination$json,
+  '.google.protobuf.Struct': $1.Struct$json,
+  '.google.protobuf.Struct.FieldsEntry': $1.Struct_FieldsEntry$json,
+  '.google.protobuf.Value': $1.Value$json,
+  '.google.protobuf.ListValue': $1.ListValue$json,
   '.settings.v1.SearchResponse': SearchResponse$json,
   '.settings.v1.SetRequest': SetRequest$json,
   '.settings.v1.SetResponse': SetResponse$json,

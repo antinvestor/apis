@@ -15,9 +15,9 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../common/v1/common.pbenum.dart' as $7;
-import '../../google/protobuf/struct.pb.dart' as $6;
-import '../../google/protobuf/timestamp.pb.dart' as $2;
+import 'package:antinvestor_api_common/common/v1/common.pbenum.dart' as $2;
+import 'package:antinvestor_api_common/google/protobuf/struct.pb.dart' as $0;
+import 'package:antinvestor_api_common/google/protobuf/timestamp.pb.dart' as $1;
 
 /// TenantObject represents a top-level organizational unit.
 class TenantObject extends $pb.GeneratedMessage {
@@ -25,9 +25,9 @@ class TenantObject extends $pb.GeneratedMessage {
     $core.String? id,
     $core.String? name,
     $core.String? description,
-    $6.Struct? properties,
-    $2.Timestamp? createdAt,
-    $7.STATE? state,
+    $0.Struct? properties,
+    $1.Timestamp? createdAt,
+    $2.STATE? state,
   }) {
     final $result = create();
     if (id != null) {
@@ -58,9 +58,9 @@ class TenantObject extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..aOS(3, _omitFieldNames ? '' : 'description')
-    ..aOM<$6.Struct>(4, _omitFieldNames ? '' : 'properties', subBuilder: $6.Struct.create)
-    ..aOM<$2.Timestamp>(5, _omitFieldNames ? '' : 'createdAt', subBuilder: $2.Timestamp.create)
-    ..e<$7.STATE>(6, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: $7.STATE.CREATED, valueOf: $7.STATE.valueOf, enumValues: $7.STATE.values)
+    ..aOM<$0.Struct>(4, _omitFieldNames ? '' : 'properties', subBuilder: $0.Struct.create)
+    ..aOM<$1.Timestamp>(5, _omitFieldNames ? '' : 'createdAt', subBuilder: $1.Timestamp.create)
+    ..e<$2.STATE>(6, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: $2.STATE.CREATED, valueOf: $2.STATE.valueOf, enumValues: $2.STATE.values)
     ..hasRequiredFields = false
   ;
 
@@ -113,31 +113,31 @@ class TenantObject extends $pb.GeneratedMessage {
   void clearDescription() => clearField(3);
 
   @$pb.TagNumber(4)
-  $6.Struct get properties => $_getN(3);
+  $0.Struct get properties => $_getN(3);
   @$pb.TagNumber(4)
-  set properties($6.Struct v) { setField(4, v); }
+  set properties($0.Struct v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasProperties() => $_has(3);
   @$pb.TagNumber(4)
   void clearProperties() => clearField(4);
   @$pb.TagNumber(4)
-  $6.Struct ensureProperties() => $_ensure(3);
+  $0.Struct ensureProperties() => $_ensure(3);
 
   @$pb.TagNumber(5)
-  $2.Timestamp get createdAt => $_getN(4);
+  $1.Timestamp get createdAt => $_getN(4);
   @$pb.TagNumber(5)
-  set createdAt($2.Timestamp v) { setField(5, v); }
+  set createdAt($1.Timestamp v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasCreatedAt() => $_has(4);
   @$pb.TagNumber(5)
   void clearCreatedAt() => clearField(5);
   @$pb.TagNumber(5)
-  $2.Timestamp ensureCreatedAt() => $_ensure(4);
+  $1.Timestamp ensureCreatedAt() => $_ensure(4);
 
   @$pb.TagNumber(6)
-  $7.STATE get state => $_getN(5);
+  $2.STATE get state => $_getN(5);
   @$pb.TagNumber(6)
-  set state($7.STATE v) { setField(6, v); }
+  set state($2.STATE v) { setField(6, v); }
   @$pb.TagNumber(6)
   $core.bool hasState() => $_has(5);
   @$pb.TagNumber(6)
@@ -151,7 +151,7 @@ class PartitionCreateRequest extends $pb.GeneratedMessage {
     $core.String? tenantId,
     $core.String? parentId,
     $core.String? description,
-    $6.Struct? properties,
+    $0.Struct? properties,
   }) {
     final $result = create();
     if (name != null) {
@@ -180,7 +180,7 @@ class PartitionCreateRequest extends $pb.GeneratedMessage {
     ..aOS(2, _omitFieldNames ? '' : 'tenantId')
     ..aOS(3, _omitFieldNames ? '' : 'parentId')
     ..aOS(4, _omitFieldNames ? '' : 'description')
-    ..aOM<$6.Struct>(5, _omitFieldNames ? '' : 'properties', subBuilder: $6.Struct.create)
+    ..aOM<$0.Struct>(5, _omitFieldNames ? '' : 'properties', subBuilder: $0.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -242,15 +242,15 @@ class PartitionCreateRequest extends $pb.GeneratedMessage {
   void clearDescription() => clearField(4);
 
   @$pb.TagNumber(5)
-  $6.Struct get properties => $_getN(4);
+  $0.Struct get properties => $_getN(4);
   @$pb.TagNumber(5)
-  set properties($6.Struct v) { setField(5, v); }
+  set properties($0.Struct v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasProperties() => $_has(4);
   @$pb.TagNumber(5)
   void clearProperties() => clearField(5);
   @$pb.TagNumber(5)
-  $6.Struct ensureProperties() => $_ensure(4);
+  $0.Struct ensureProperties() => $_ensure(4);
 }
 
 class GetTenantRequest extends $pb.GeneratedMessage {
@@ -363,7 +363,7 @@ class ListTenantRequest extends $pb.GeneratedMessage {
     $core.String? startDate,
     $core.String? endDate,
     $core.Iterable<$core.String>? properties,
-    $6.Struct? extras,
+    $0.Struct? extras,
   }) {
     final $result = create();
     if (query != null) {
@@ -400,7 +400,7 @@ class ListTenantRequest extends $pb.GeneratedMessage {
     ..aOS(4, _omitFieldNames ? '' : 'startDate')
     ..aOS(5, _omitFieldNames ? '' : 'endDate')
     ..pPS(6, _omitFieldNames ? '' : 'properties')
-    ..aOM<$6.Struct>(7, _omitFieldNames ? '' : 'extras', subBuilder: $6.Struct.create)
+    ..aOM<$0.Struct>(7, _omitFieldNames ? '' : 'extras', subBuilder: $0.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -474,15 +474,15 @@ class ListTenantRequest extends $pb.GeneratedMessage {
   $core.List<$core.String> get properties => $_getList(5);
 
   @$pb.TagNumber(7)
-  $6.Struct get extras => $_getN(6);
+  $0.Struct get extras => $_getN(6);
   @$pb.TagNumber(7)
-  set extras($6.Struct v) { setField(7, v); }
+  set extras($0.Struct v) { setField(7, v); }
   @$pb.TagNumber(7)
   $core.bool hasExtras() => $_has(6);
   @$pb.TagNumber(7)
   void clearExtras() => clearField(7);
   @$pb.TagNumber(7)
-  $6.Struct ensureExtras() => $_ensure(6);
+  $0.Struct ensureExtras() => $_ensure(6);
 }
 
 class ListTenantResponse extends $pb.GeneratedMessage {
@@ -534,7 +534,7 @@ class CreateTenantRequest extends $pb.GeneratedMessage {
   factory CreateTenantRequest({
     $core.String? name,
     $core.String? description,
-    $6.Struct? properties,
+    $0.Struct? properties,
   }) {
     final $result = create();
     if (name != null) {
@@ -555,7 +555,7 @@ class CreateTenantRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateTenantRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'partition.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'name')
     ..aOS(2, _omitFieldNames ? '' : 'description')
-    ..aOM<$6.Struct>(3, _omitFieldNames ? '' : 'properties', subBuilder: $6.Struct.create)
+    ..aOM<$0.Struct>(3, _omitFieldNames ? '' : 'properties', subBuilder: $0.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -599,15 +599,15 @@ class CreateTenantRequest extends $pb.GeneratedMessage {
   void clearDescription() => clearField(2);
 
   @$pb.TagNumber(3)
-  $6.Struct get properties => $_getN(2);
+  $0.Struct get properties => $_getN(2);
   @$pb.TagNumber(3)
-  set properties($6.Struct v) { setField(3, v); }
+  set properties($0.Struct v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasProperties() => $_has(2);
   @$pb.TagNumber(3)
   void clearProperties() => clearField(3);
   @$pb.TagNumber(3)
-  $6.Struct ensureProperties() => $_ensure(2);
+  $0.Struct ensureProperties() => $_ensure(2);
 }
 
 class CreateTenantResponse extends $pb.GeneratedMessage {
@@ -667,8 +667,8 @@ class UpdateTenantRequest extends $pb.GeneratedMessage {
     $core.String? id,
     $core.String? name,
     $core.String? description,
-    $7.STATE? state,
-    $6.Struct? properties,
+    $2.STATE? state,
+    $0.Struct? properties,
   }) {
     final $result = create();
     if (id != null) {
@@ -696,8 +696,8 @@ class UpdateTenantRequest extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..aOS(3, _omitFieldNames ? '' : 'description')
-    ..e<$7.STATE>(4, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: $7.STATE.CREATED, valueOf: $7.STATE.valueOf, enumValues: $7.STATE.values)
-    ..aOM<$6.Struct>(5, _omitFieldNames ? '' : 'properties', subBuilder: $6.Struct.create)
+    ..e<$2.STATE>(4, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: $2.STATE.CREATED, valueOf: $2.STATE.valueOf, enumValues: $2.STATE.values)
+    ..aOM<$0.Struct>(5, _omitFieldNames ? '' : 'properties', subBuilder: $0.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -750,24 +750,24 @@ class UpdateTenantRequest extends $pb.GeneratedMessage {
   void clearDescription() => clearField(3);
 
   @$pb.TagNumber(4)
-  $7.STATE get state => $_getN(3);
+  $2.STATE get state => $_getN(3);
   @$pb.TagNumber(4)
-  set state($7.STATE v) { setField(4, v); }
+  set state($2.STATE v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasState() => $_has(3);
   @$pb.TagNumber(4)
   void clearState() => clearField(4);
 
   @$pb.TagNumber(5)
-  $6.Struct get properties => $_getN(4);
+  $0.Struct get properties => $_getN(4);
   @$pb.TagNumber(5)
-  set properties($6.Struct v) { setField(5, v); }
+  set properties($0.Struct v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasProperties() => $_has(4);
   @$pb.TagNumber(5)
   void clearProperties() => clearField(5);
   @$pb.TagNumber(5)
-  $6.Struct ensureProperties() => $_ensure(4);
+  $0.Struct ensureProperties() => $_ensure(4);
 }
 
 class UpdateTenantResponse extends $pb.GeneratedMessage {
@@ -1026,7 +1026,7 @@ class ListPartitionRequest extends $pb.GeneratedMessage {
     $core.String? startDate,
     $core.String? endDate,
     $core.Iterable<$core.String>? properties,
-    $6.Struct? extras,
+    $0.Struct? extras,
   }) {
     final $result = create();
     if (query != null) {
@@ -1063,7 +1063,7 @@ class ListPartitionRequest extends $pb.GeneratedMessage {
     ..aOS(4, _omitFieldNames ? '' : 'startDate')
     ..aOS(5, _omitFieldNames ? '' : 'endDate')
     ..pPS(6, _omitFieldNames ? '' : 'properties')
-    ..aOM<$6.Struct>(7, _omitFieldNames ? '' : 'extras', subBuilder: $6.Struct.create)
+    ..aOM<$0.Struct>(7, _omitFieldNames ? '' : 'extras', subBuilder: $0.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -1137,15 +1137,15 @@ class ListPartitionRequest extends $pb.GeneratedMessage {
   $core.List<$core.String> get properties => $_getList(5);
 
   @$pb.TagNumber(7)
-  $6.Struct get extras => $_getN(6);
+  $0.Struct get extras => $_getN(6);
   @$pb.TagNumber(7)
-  set extras($6.Struct v) { setField(7, v); }
+  set extras($0.Struct v) { setField(7, v); }
   @$pb.TagNumber(7)
   $core.bool hasExtras() => $_has(6);
   @$pb.TagNumber(7)
   void clearExtras() => clearField(7);
   @$pb.TagNumber(7)
-  $6.Struct ensureExtras() => $_ensure(6);
+  $0.Struct ensureExtras() => $_ensure(6);
 }
 
 class ListPartitionResponse extends $pb.GeneratedMessage {
@@ -1199,7 +1199,7 @@ class CreatePartitionRequest extends $pb.GeneratedMessage {
     $core.String? parentId,
     $core.String? name,
     $core.String? description,
-    $6.Struct? properties,
+    $0.Struct? properties,
   }) {
     final $result = create();
     if (tenantId != null) {
@@ -1228,7 +1228,7 @@ class CreatePartitionRequest extends $pb.GeneratedMessage {
     ..aOS(2, _omitFieldNames ? '' : 'parentId')
     ..aOS(3, _omitFieldNames ? '' : 'name')
     ..aOS(4, _omitFieldNames ? '' : 'description')
-    ..aOM<$6.Struct>(5, _omitFieldNames ? '' : 'properties', subBuilder: $6.Struct.create)
+    ..aOM<$0.Struct>(5, _omitFieldNames ? '' : 'properties', subBuilder: $0.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -1290,15 +1290,15 @@ class CreatePartitionRequest extends $pb.GeneratedMessage {
   void clearDescription() => clearField(4);
 
   @$pb.TagNumber(5)
-  $6.Struct get properties => $_getN(4);
+  $0.Struct get properties => $_getN(4);
   @$pb.TagNumber(5)
-  set properties($6.Struct v) { setField(5, v); }
+  set properties($0.Struct v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasProperties() => $_has(4);
   @$pb.TagNumber(5)
   void clearProperties() => clearField(5);
   @$pb.TagNumber(5)
-  $6.Struct ensureProperties() => $_ensure(4);
+  $0.Struct ensureProperties() => $_ensure(4);
 }
 
 class CreatePartitionResponse extends $pb.GeneratedMessage {
@@ -1358,8 +1358,8 @@ class UpdatePartitionRequest extends $pb.GeneratedMessage {
     $core.String? id,
     $core.String? name,
     $core.String? description,
-    $7.STATE? state,
-    $6.Struct? properties,
+    $2.STATE? state,
+    $0.Struct? properties,
   }) {
     final $result = create();
     if (id != null) {
@@ -1387,8 +1387,8 @@ class UpdatePartitionRequest extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..aOS(3, _omitFieldNames ? '' : 'description')
-    ..e<$7.STATE>(4, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: $7.STATE.CREATED, valueOf: $7.STATE.valueOf, enumValues: $7.STATE.values)
-    ..aOM<$6.Struct>(5, _omitFieldNames ? '' : 'properties', subBuilder: $6.Struct.create)
+    ..e<$2.STATE>(4, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: $2.STATE.CREATED, valueOf: $2.STATE.valueOf, enumValues: $2.STATE.values)
+    ..aOM<$0.Struct>(5, _omitFieldNames ? '' : 'properties', subBuilder: $0.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -1441,24 +1441,24 @@ class UpdatePartitionRequest extends $pb.GeneratedMessage {
   void clearDescription() => clearField(3);
 
   @$pb.TagNumber(4)
-  $7.STATE get state => $_getN(3);
+  $2.STATE get state => $_getN(3);
   @$pb.TagNumber(4)
-  set state($7.STATE v) { setField(4, v); }
+  set state($2.STATE v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasState() => $_has(3);
   @$pb.TagNumber(4)
   void clearState() => clearField(4);
 
   @$pb.TagNumber(5)
-  $6.Struct get properties => $_getN(4);
+  $0.Struct get properties => $_getN(4);
   @$pb.TagNumber(5)
-  set properties($6.Struct v) { setField(5, v); }
+  set properties($0.Struct v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasProperties() => $_has(4);
   @$pb.TagNumber(5)
   void clearProperties() => clearField(5);
   @$pb.TagNumber(5)
-  $6.Struct ensureProperties() => $_ensure(4);
+  $0.Struct ensureProperties() => $_ensure(4);
 }
 
 class UpdatePartitionResponse extends $pb.GeneratedMessage {
@@ -1521,9 +1521,9 @@ class PartitionObject extends $pb.GeneratedMessage {
     $core.String? tenantId,
     $core.String? parentId,
     $core.String? description,
-    $7.STATE? state,
-    $6.Struct? properties,
-    $2.Timestamp? createdAt,
+    $2.STATE? state,
+    $0.Struct? properties,
+    $1.Timestamp? createdAt,
   }) {
     final $result = create();
     if (id != null) {
@@ -1562,9 +1562,9 @@ class PartitionObject extends $pb.GeneratedMessage {
     ..aOS(3, _omitFieldNames ? '' : 'tenantId')
     ..aOS(4, _omitFieldNames ? '' : 'parentId')
     ..aOS(5, _omitFieldNames ? '' : 'description')
-    ..e<$7.STATE>(6, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: $7.STATE.CREATED, valueOf: $7.STATE.valueOf, enumValues: $7.STATE.values)
-    ..aOM<$6.Struct>(7, _omitFieldNames ? '' : 'properties', subBuilder: $6.Struct.create)
-    ..aOM<$2.Timestamp>(8, _omitFieldNames ? '' : 'createdAt', subBuilder: $2.Timestamp.create)
+    ..e<$2.STATE>(6, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: $2.STATE.CREATED, valueOf: $2.STATE.valueOf, enumValues: $2.STATE.values)
+    ..aOM<$0.Struct>(7, _omitFieldNames ? '' : 'properties', subBuilder: $0.Struct.create)
+    ..aOM<$1.Timestamp>(8, _omitFieldNames ? '' : 'createdAt', subBuilder: $1.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -1635,35 +1635,35 @@ class PartitionObject extends $pb.GeneratedMessage {
   void clearDescription() => clearField(5);
 
   @$pb.TagNumber(6)
-  $7.STATE get state => $_getN(5);
+  $2.STATE get state => $_getN(5);
   @$pb.TagNumber(6)
-  set state($7.STATE v) { setField(6, v); }
+  set state($2.STATE v) { setField(6, v); }
   @$pb.TagNumber(6)
   $core.bool hasState() => $_has(5);
   @$pb.TagNumber(6)
   void clearState() => clearField(6);
 
   @$pb.TagNumber(7)
-  $6.Struct get properties => $_getN(6);
+  $0.Struct get properties => $_getN(6);
   @$pb.TagNumber(7)
-  set properties($6.Struct v) { setField(7, v); }
+  set properties($0.Struct v) { setField(7, v); }
   @$pb.TagNumber(7)
   $core.bool hasProperties() => $_has(6);
   @$pb.TagNumber(7)
   void clearProperties() => clearField(7);
   @$pb.TagNumber(7)
-  $6.Struct ensureProperties() => $_ensure(6);
+  $0.Struct ensureProperties() => $_ensure(6);
 
   @$pb.TagNumber(8)
-  $2.Timestamp get createdAt => $_getN(7);
+  $1.Timestamp get createdAt => $_getN(7);
   @$pb.TagNumber(8)
-  set createdAt($2.Timestamp v) { setField(8, v); }
+  set createdAt($1.Timestamp v) { setField(8, v); }
   @$pb.TagNumber(8)
   $core.bool hasCreatedAt() => $_has(7);
   @$pb.TagNumber(8)
   void clearCreatedAt() => clearField(8);
   @$pb.TagNumber(8)
-  $2.Timestamp ensureCreatedAt() => $_ensure(7);
+  $1.Timestamp ensureCreatedAt() => $_ensure(7);
 }
 
 /// PartitionRoleObject represents a role within a partition.
@@ -1672,9 +1672,9 @@ class PartitionRoleObject extends $pb.GeneratedMessage {
     $core.String? id,
     $core.String? partitionId,
     $core.String? name,
-    $6.Struct? properties,
-    $2.Timestamp? createdAt,
-    $7.STATE? state,
+    $0.Struct? properties,
+    $1.Timestamp? createdAt,
+    $2.STATE? state,
   }) {
     final $result = create();
     if (id != null) {
@@ -1705,9 +1705,9 @@ class PartitionRoleObject extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'partitionId')
     ..aOS(3, _omitFieldNames ? '' : 'name')
-    ..aOM<$6.Struct>(4, _omitFieldNames ? '' : 'properties', subBuilder: $6.Struct.create)
-    ..aOM<$2.Timestamp>(5, _omitFieldNames ? '' : 'createdAt', subBuilder: $2.Timestamp.create)
-    ..e<$7.STATE>(6, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: $7.STATE.CREATED, valueOf: $7.STATE.valueOf, enumValues: $7.STATE.values)
+    ..aOM<$0.Struct>(4, _omitFieldNames ? '' : 'properties', subBuilder: $0.Struct.create)
+    ..aOM<$1.Timestamp>(5, _omitFieldNames ? '' : 'createdAt', subBuilder: $1.Timestamp.create)
+    ..e<$2.STATE>(6, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: $2.STATE.CREATED, valueOf: $2.STATE.valueOf, enumValues: $2.STATE.values)
     ..hasRequiredFields = false
   ;
 
@@ -1760,31 +1760,31 @@ class PartitionRoleObject extends $pb.GeneratedMessage {
   void clearName() => clearField(3);
 
   @$pb.TagNumber(4)
-  $6.Struct get properties => $_getN(3);
+  $0.Struct get properties => $_getN(3);
   @$pb.TagNumber(4)
-  set properties($6.Struct v) { setField(4, v); }
+  set properties($0.Struct v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasProperties() => $_has(3);
   @$pb.TagNumber(4)
   void clearProperties() => clearField(4);
   @$pb.TagNumber(4)
-  $6.Struct ensureProperties() => $_ensure(3);
+  $0.Struct ensureProperties() => $_ensure(3);
 
   @$pb.TagNumber(5)
-  $2.Timestamp get createdAt => $_getN(4);
+  $1.Timestamp get createdAt => $_getN(4);
   @$pb.TagNumber(5)
-  set createdAt($2.Timestamp v) { setField(5, v); }
+  set createdAt($1.Timestamp v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasCreatedAt() => $_has(4);
   @$pb.TagNumber(5)
   void clearCreatedAt() => clearField(5);
   @$pb.TagNumber(5)
-  $2.Timestamp ensureCreatedAt() => $_ensure(4);
+  $1.Timestamp ensureCreatedAt() => $_ensure(4);
 
   @$pb.TagNumber(6)
-  $7.STATE get state => $_getN(5);
+  $2.STATE get state => $_getN(5);
   @$pb.TagNumber(6)
-  set state($7.STATE v) { setField(6, v); }
+  set state($2.STATE v) { setField(6, v); }
   @$pb.TagNumber(6)
   $core.bool hasState() => $_has(5);
   @$pb.TagNumber(6)
@@ -1797,9 +1797,9 @@ class PageObject extends $pb.GeneratedMessage {
     $core.String? id,
     $core.String? name,
     $core.String? html,
-    $7.STATE? state,
-    $2.Timestamp? createdAt,
-    $6.Struct? properties,
+    $2.STATE? state,
+    $1.Timestamp? createdAt,
+    $0.Struct? properties,
   }) {
     final $result = create();
     if (id != null) {
@@ -1830,9 +1830,9 @@ class PageObject extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..aOS(3, _omitFieldNames ? '' : 'html')
-    ..e<$7.STATE>(4, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: $7.STATE.CREATED, valueOf: $7.STATE.valueOf, enumValues: $7.STATE.values)
-    ..aOM<$2.Timestamp>(5, _omitFieldNames ? '' : 'createdAt', subBuilder: $2.Timestamp.create)
-    ..aOM<$6.Struct>(6, _omitFieldNames ? '' : 'properties', subBuilder: $6.Struct.create)
+    ..e<$2.STATE>(4, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: $2.STATE.CREATED, valueOf: $2.STATE.valueOf, enumValues: $2.STATE.values)
+    ..aOM<$1.Timestamp>(5, _omitFieldNames ? '' : 'createdAt', subBuilder: $1.Timestamp.create)
+    ..aOM<$0.Struct>(6, _omitFieldNames ? '' : 'properties', subBuilder: $0.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -1885,35 +1885,35 @@ class PageObject extends $pb.GeneratedMessage {
   void clearHtml() => clearField(3);
 
   @$pb.TagNumber(4)
-  $7.STATE get state => $_getN(3);
+  $2.STATE get state => $_getN(3);
   @$pb.TagNumber(4)
-  set state($7.STATE v) { setField(4, v); }
+  set state($2.STATE v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasState() => $_has(3);
   @$pb.TagNumber(4)
   void clearState() => clearField(4);
 
   @$pb.TagNumber(5)
-  $2.Timestamp get createdAt => $_getN(4);
+  $1.Timestamp get createdAt => $_getN(4);
   @$pb.TagNumber(5)
-  set createdAt($2.Timestamp v) { setField(5, v); }
+  set createdAt($1.Timestamp v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasCreatedAt() => $_has(4);
   @$pb.TagNumber(5)
   void clearCreatedAt() => clearField(5);
   @$pb.TagNumber(5)
-  $2.Timestamp ensureCreatedAt() => $_ensure(4);
+  $1.Timestamp ensureCreatedAt() => $_ensure(4);
 
   @$pb.TagNumber(6)
-  $6.Struct get properties => $_getN(5);
+  $0.Struct get properties => $_getN(5);
   @$pb.TagNumber(6)
-  set properties($6.Struct v) { setField(6, v); }
+  set properties($0.Struct v) { setField(6, v); }
   @$pb.TagNumber(6)
   $core.bool hasProperties() => $_has(5);
   @$pb.TagNumber(6)
   void clearProperties() => clearField(6);
   @$pb.TagNumber(6)
-  $6.Struct ensureProperties() => $_ensure(5);
+  $0.Struct ensureProperties() => $_ensure(5);
 }
 
 /// AccessObject represents a profile's access to a partition.
@@ -1922,8 +1922,8 @@ class AccessObject extends $pb.GeneratedMessage {
     $core.String? id,
     $core.String? profileId,
     PartitionObject? partition,
-    $7.STATE? state,
-    $2.Timestamp? createdAt,
+    $2.STATE? state,
+    $1.Timestamp? createdAt,
   }) {
     final $result = create();
     if (id != null) {
@@ -1951,8 +1951,8 @@ class AccessObject extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'profileId')
     ..aOM<PartitionObject>(3, _omitFieldNames ? '' : 'partition', subBuilder: PartitionObject.create)
-    ..e<$7.STATE>(4, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: $7.STATE.CREATED, valueOf: $7.STATE.valueOf, enumValues: $7.STATE.values)
-    ..aOM<$2.Timestamp>(5, _omitFieldNames ? '' : 'createdAt', subBuilder: $2.Timestamp.create)
+    ..e<$2.STATE>(4, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: $2.STATE.CREATED, valueOf: $2.STATE.valueOf, enumValues: $2.STATE.values)
+    ..aOM<$1.Timestamp>(5, _omitFieldNames ? '' : 'createdAt', subBuilder: $1.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -2007,24 +2007,24 @@ class AccessObject extends $pb.GeneratedMessage {
   PartitionObject ensurePartition() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  $7.STATE get state => $_getN(3);
+  $2.STATE get state => $_getN(3);
   @$pb.TagNumber(4)
-  set state($7.STATE v) { setField(4, v); }
+  set state($2.STATE v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasState() => $_has(3);
   @$pb.TagNumber(4)
   void clearState() => clearField(4);
 
   @$pb.TagNumber(5)
-  $2.Timestamp get createdAt => $_getN(4);
+  $1.Timestamp get createdAt => $_getN(4);
   @$pb.TagNumber(5)
-  set createdAt($2.Timestamp v) { setField(5, v); }
+  set createdAt($1.Timestamp v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasCreatedAt() => $_has(4);
   @$pb.TagNumber(5)
   void clearCreatedAt() => clearField(5);
   @$pb.TagNumber(5)
-  $2.Timestamp ensureCreatedAt() => $_ensure(4);
+  $1.Timestamp ensureCreatedAt() => $_ensure(4);
 }
 
 /// AccessRoleObject links an access grant to a partition role.
@@ -2112,7 +2112,7 @@ class CreatePartitionRoleRequest extends $pb.GeneratedMessage {
   factory CreatePartitionRoleRequest({
     $core.String? partitionId,
     $core.String? name,
-    $6.Struct? properties,
+    $0.Struct? properties,
   }) {
     final $result = create();
     if (partitionId != null) {
@@ -2133,7 +2133,7 @@ class CreatePartitionRoleRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreatePartitionRoleRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'partition.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'partitionId')
     ..aOS(2, _omitFieldNames ? '' : 'name')
-    ..aOM<$6.Struct>(3, _omitFieldNames ? '' : 'properties', subBuilder: $6.Struct.create)
+    ..aOM<$0.Struct>(3, _omitFieldNames ? '' : 'properties', subBuilder: $0.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -2177,15 +2177,15 @@ class CreatePartitionRoleRequest extends $pb.GeneratedMessage {
   void clearName() => clearField(2);
 
   @$pb.TagNumber(3)
-  $6.Struct get properties => $_getN(2);
+  $0.Struct get properties => $_getN(2);
   @$pb.TagNumber(3)
-  set properties($6.Struct v) { setField(3, v); }
+  set properties($0.Struct v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasProperties() => $_has(2);
   @$pb.TagNumber(3)
   void clearProperties() => clearField(3);
   @$pb.TagNumber(3)
-  $6.Struct ensureProperties() => $_ensure(2);
+  $0.Struct ensureProperties() => $_ensure(2);
 }
 
 class CreatePartitionRoleResponse extends $pb.GeneratedMessage {

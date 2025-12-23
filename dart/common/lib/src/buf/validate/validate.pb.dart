@@ -14,10 +14,10 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../google/protobuf/descriptor.pbenum.dart' as $3;
-import '../../google/protobuf/duration.pb.dart' as $0;
-import '../../google/protobuf/field_mask.pb.dart' as $1;
-import '../../google/protobuf/timestamp.pb.dart' as $2;
+import 'package:antinvestor_api_common/google/protobuf/descriptor.pbenum.dart' as $3;
+import 'package:antinvestor_api_common/google/protobuf/duration.pb.dart' as $0;
+import 'package:antinvestor_api_common/google/protobuf/field_mask.pb.dart' as $1;
+import 'package:antinvestor_api_common/google/protobuf/timestamp.pb.dart' as $2;
 import 'validate.pbenum.dart';
 
 export 'validate.pbenum.dart';

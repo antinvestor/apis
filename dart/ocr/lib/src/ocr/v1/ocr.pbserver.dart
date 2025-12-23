@@ -15,28 +15,28 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../common/v1/common.pb.dart' as $7;
-import 'ocr.pb.dart' as $8;
+import 'package:antinvestor_api_common/common/v1/common.pb.dart' as $1;
+import 'ocr.pb.dart' as $2;
 import 'ocr.pbjson.dart';
 
 export 'ocr.pb.dart';
 
 abstract class OCRServiceBase extends $pb.GeneratedService {
-  $async.Future<$8.RecognizeResponse> recognize($pb.ServerContext ctx, $8.RecognizeRequest request);
-  $async.Future<$8.StatusResponse> status($pb.ServerContext ctx, $7.StatusRequest request);
+  $async.Future<$2.RecognizeResponse> recognize($pb.ServerContext ctx, $2.RecognizeRequest request);
+  $async.Future<$2.StatusResponse> status($pb.ServerContext ctx, $1.StatusRequest request);
 
   $pb.GeneratedMessage createRequest($core.String methodName) {
     switch (methodName) {
-      case 'Recognize': return $8.RecognizeRequest();
-      case 'Status': return $7.StatusRequest();
+      case 'Recognize': return $2.RecognizeRequest();
+      case 'Status': return $1.StatusRequest();
       default: throw $core.ArgumentError('Unknown method: $methodName');
     }
   }
 
   $async.Future<$pb.GeneratedMessage> handleCall($pb.ServerContext ctx, $core.String methodName, $pb.GeneratedMessage request) {
     switch (methodName) {
-      case 'Recognize': return this.recognize(ctx, request as $8.RecognizeRequest);
-      case 'Status': return this.status(ctx, request as $7.StatusRequest);
+      case 'Recognize': return this.recognize(ctx, request as $2.RecognizeRequest);
+      case 'Status': return this.status(ctx, request as $1.StatusRequest);
       default: throw $core.ArgumentError('Unknown method: $methodName');
     }
   }

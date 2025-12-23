@@ -14,18 +14,18 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../common/v1/common.pb.dart' as $7;
-import '../../common/v1/common.pbenum.dart' as $7;
-import '../../google/protobuf/struct.pb.dart' as $6;
+import 'package:antinvestor_api_common/common/v1/common.pb.dart' as $1;
+import 'package:antinvestor_api_common/common/v1/common.pbenum.dart' as $1;
+import 'package:antinvestor_api_common/google/protobuf/struct.pb.dart' as $0;
 
 /// OCRFile represents the result of OCR processing for a single file.
 class OCRFile extends $pb.GeneratedMessage {
   factory OCRFile({
     $core.String? fileId,
     $core.String? language,
-    $7.STATUS? status,
+    $1.STATUS? status,
     $core.String? text,
-    $6.Struct? properties,
+    $0.Struct? properties,
   }) {
     final $result = create();
     if (fileId != null) {
@@ -52,9 +52,9 @@ class OCRFile extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'OCRFile', package: const $pb.PackageName(_omitMessageNames ? '' : 'ocr.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'fileId')
     ..aOS(2, _omitFieldNames ? '' : 'language')
-    ..e<$7.STATUS>(3, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: $7.STATUS.UNKNOWN, valueOf: $7.STATUS.valueOf, enumValues: $7.STATUS.values)
+    ..e<$1.STATUS>(3, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: $1.STATUS.UNKNOWN, valueOf: $1.STATUS.valueOf, enumValues: $1.STATUS.values)
     ..aOS(4, _omitFieldNames ? '' : 'text')
-    ..aOM<$6.Struct>(5, _omitFieldNames ? '' : 'properties', subBuilder: $6.Struct.create)
+    ..aOM<$0.Struct>(5, _omitFieldNames ? '' : 'properties', subBuilder: $0.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -98,9 +98,9 @@ class OCRFile extends $pb.GeneratedMessage {
   void clearLanguage() => clearField(2);
 
   @$pb.TagNumber(3)
-  $7.STATUS get status => $_getN(2);
+  $1.STATUS get status => $_getN(2);
   @$pb.TagNumber(3)
-  set status($7.STATUS v) { setField(3, v); }
+  set status($1.STATUS v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasStatus() => $_has(2);
   @$pb.TagNumber(3)
@@ -116,15 +116,15 @@ class OCRFile extends $pb.GeneratedMessage {
   void clearText() => clearField(4);
 
   @$pb.TagNumber(5)
-  $6.Struct get properties => $_getN(4);
+  $0.Struct get properties => $_getN(4);
   @$pb.TagNumber(5)
-  set properties($6.Struct v) { setField(5, v); }
+  set properties($0.Struct v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasProperties() => $_has(4);
   @$pb.TagNumber(5)
   void clearProperties() => clearField(5);
   @$pb.TagNumber(5)
-  $6.Struct ensureProperties() => $_ensure(4);
+  $0.Struct ensureProperties() => $_ensure(4);
 }
 
 /// RecognizeRequest initiates OCR processing for one or more files.
@@ -133,7 +133,7 @@ class RecognizeRequest extends $pb.GeneratedMessage {
   factory RecognizeRequest({
     $core.String? referenceId,
     $core.String? languageId,
-    $6.Struct? properties,
+    $0.Struct? properties,
     $core.bool? async,
     $core.Iterable<$core.String>? fileId,
   }) {
@@ -162,7 +162,7 @@ class RecognizeRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RecognizeRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'ocr.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'referenceId')
     ..aOS(2, _omitFieldNames ? '' : 'languageId')
-    ..aOM<$6.Struct>(3, _omitFieldNames ? '' : 'properties', subBuilder: $6.Struct.create)
+    ..aOM<$0.Struct>(3, _omitFieldNames ? '' : 'properties', subBuilder: $0.Struct.create)
     ..aOB(4, _omitFieldNames ? '' : 'async')
     ..pPS(5, _omitFieldNames ? '' : 'fileId')
     ..hasRequiredFields = false
@@ -208,15 +208,15 @@ class RecognizeRequest extends $pb.GeneratedMessage {
   void clearLanguageId() => clearField(2);
 
   @$pb.TagNumber(3)
-  $6.Struct get properties => $_getN(2);
+  $0.Struct get properties => $_getN(2);
   @$pb.TagNumber(3)
-  set properties($6.Struct v) { setField(3, v); }
+  set properties($0.Struct v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasProperties() => $_has(2);
   @$pb.TagNumber(3)
   void clearProperties() => clearField(3);
   @$pb.TagNumber(3)
-  $6.Struct ensureProperties() => $_ensure(2);
+  $0.Struct ensureProperties() => $_ensure(2);
 
   @$pb.TagNumber(4)
   $core.bool get async => $_getBF(3);
@@ -350,7 +350,7 @@ class OCRServiceApi {
   $async.Future<RecognizeResponse> recognize($pb.ClientContext? ctx, RecognizeRequest request) =>
     _client.invoke<RecognizeResponse>(ctx, 'OCRService', 'Recognize', request, RecognizeResponse())
   ;
-  $async.Future<StatusResponse> status($pb.ClientContext? ctx, $7.StatusRequest request) =>
+  $async.Future<StatusResponse> status($pb.ClientContext? ctx, $1.StatusRequest request) =>
     _client.invoke<StatusResponse>(ctx, 'OCRService', 'Status', request, StatusResponse())
   ;
 }

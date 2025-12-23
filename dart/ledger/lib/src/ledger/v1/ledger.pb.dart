@@ -14,9 +14,9 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../common/v1/common.pb.dart' as $8;
-import '../../google/protobuf/struct.pb.dart' as $6;
-import '../../google/type/money.pb.dart' as $7;
+import 'package:antinvestor_api_common/common/v1/common.pb.dart' as $2;
+import 'package:antinvestor_api_common/google/protobuf/struct.pb.dart' as $0;
+import 'package:antinvestor_api_common/google/type/money.pb.dart' as $1;
 import 'ledger.pbenum.dart';
 
 export 'ledger.pbenum.dart';
@@ -28,7 +28,7 @@ class Ledger extends $pb.GeneratedMessage {
     $core.String? id,
     LedgerType? type,
     $core.String? parent,
-    $6.Struct? data,
+    $0.Struct? data,
   }) {
     final $result = create();
     if (id != null) {
@@ -53,7 +53,7 @@ class Ledger extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..e<LedgerType>(2, _omitFieldNames ? '' : 'type', $pb.PbFieldType.OE, defaultOrMaker: LedgerType.ASSET, valueOf: LedgerType.valueOf, enumValues: LedgerType.values)
     ..aOS(3, _omitFieldNames ? '' : 'parent')
-    ..aOM<$6.Struct>(4, _omitFieldNames ? '' : 'data', subBuilder: $6.Struct.create)
+    ..aOM<$0.Struct>(4, _omitFieldNames ? '' : 'data', subBuilder: $0.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -106,15 +106,15 @@ class Ledger extends $pb.GeneratedMessage {
   void clearParent() => clearField(3);
 
   @$pb.TagNumber(4)
-  $6.Struct get data => $_getN(3);
+  $0.Struct get data => $_getN(3);
   @$pb.TagNumber(4)
-  set data($6.Struct v) { setField(4, v); }
+  set data($0.Struct v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasData() => $_has(3);
   @$pb.TagNumber(4)
   void clearData() => clearField(4);
   @$pb.TagNumber(4)
-  $6.Struct ensureData() => $_ensure(3);
+  $0.Struct ensureData() => $_ensure(3);
 }
 
 /// Account represents a specific account within a ledger.
@@ -123,10 +123,10 @@ class Account extends $pb.GeneratedMessage {
   factory Account({
     $core.String? id,
     $core.String? ledger,
-    $7.Money? balance,
-    $6.Struct? data,
-    $7.Money? unclearedBalance,
-    $7.Money? reservedBalance,
+    $1.Money? balance,
+    $0.Struct? data,
+    $1.Money? unclearedBalance,
+    $1.Money? reservedBalance,
   }) {
     final $result = create();
     if (id != null) {
@@ -156,10 +156,10 @@ class Account extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Account', package: const $pb.PackageName(_omitMessageNames ? '' : 'ledger.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..aOS(3, _omitFieldNames ? '' : 'ledger')
-    ..aOM<$7.Money>(4, _omitFieldNames ? '' : 'balance', subBuilder: $7.Money.create)
-    ..aOM<$6.Struct>(5, _omitFieldNames ? '' : 'data', subBuilder: $6.Struct.create)
-    ..aOM<$7.Money>(6, _omitFieldNames ? '' : 'unclearedBalance', subBuilder: $7.Money.create)
-    ..aOM<$7.Money>(7, _omitFieldNames ? '' : 'reservedBalance', subBuilder: $7.Money.create)
+    ..aOM<$1.Money>(4, _omitFieldNames ? '' : 'balance', subBuilder: $1.Money.create)
+    ..aOM<$0.Struct>(5, _omitFieldNames ? '' : 'data', subBuilder: $0.Struct.create)
+    ..aOM<$1.Money>(6, _omitFieldNames ? '' : 'unclearedBalance', subBuilder: $1.Money.create)
+    ..aOM<$1.Money>(7, _omitFieldNames ? '' : 'reservedBalance', subBuilder: $1.Money.create)
     ..hasRequiredFields = false
   ;
 
@@ -203,48 +203,48 @@ class Account extends $pb.GeneratedMessage {
   void clearLedger() => clearField(3);
 
   @$pb.TagNumber(4)
-  $7.Money get balance => $_getN(2);
+  $1.Money get balance => $_getN(2);
   @$pb.TagNumber(4)
-  set balance($7.Money v) { setField(4, v); }
+  set balance($1.Money v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasBalance() => $_has(2);
   @$pb.TagNumber(4)
   void clearBalance() => clearField(4);
   @$pb.TagNumber(4)
-  $7.Money ensureBalance() => $_ensure(2);
+  $1.Money ensureBalance() => $_ensure(2);
 
   @$pb.TagNumber(5)
-  $6.Struct get data => $_getN(3);
+  $0.Struct get data => $_getN(3);
   @$pb.TagNumber(5)
-  set data($6.Struct v) { setField(5, v); }
+  set data($0.Struct v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasData() => $_has(3);
   @$pb.TagNumber(5)
   void clearData() => clearField(5);
   @$pb.TagNumber(5)
-  $6.Struct ensureData() => $_ensure(3);
+  $0.Struct ensureData() => $_ensure(3);
 
   @$pb.TagNumber(6)
-  $7.Money get unclearedBalance => $_getN(4);
+  $1.Money get unclearedBalance => $_getN(4);
   @$pb.TagNumber(6)
-  set unclearedBalance($7.Money v) { setField(6, v); }
+  set unclearedBalance($1.Money v) { setField(6, v); }
   @$pb.TagNumber(6)
   $core.bool hasUnclearedBalance() => $_has(4);
   @$pb.TagNumber(6)
   void clearUnclearedBalance() => clearField(6);
   @$pb.TagNumber(6)
-  $7.Money ensureUnclearedBalance() => $_ensure(4);
+  $1.Money ensureUnclearedBalance() => $_ensure(4);
 
   @$pb.TagNumber(7)
-  $7.Money get reservedBalance => $_getN(5);
+  $1.Money get reservedBalance => $_getN(5);
   @$pb.TagNumber(7)
-  set reservedBalance($7.Money v) { setField(7, v); }
+  set reservedBalance($1.Money v) { setField(7, v); }
   @$pb.TagNumber(7)
   $core.bool hasReservedBalance() => $_has(5);
   @$pb.TagNumber(7)
   void clearReservedBalance() => clearField(7);
   @$pb.TagNumber(7)
-  $7.Money ensureReservedBalance() => $_ensure(5);
+  $1.Money ensureReservedBalance() => $_ensure(5);
 }
 
 /// TransactionEntry represents one side of a double-entry transaction.
@@ -255,9 +255,9 @@ class TransactionEntry extends $pb.GeneratedMessage {
     $core.String? accountId,
     $core.String? transactionId,
     $core.String? transactedAt,
-    $7.Money? amount,
+    $1.Money? amount,
     $core.bool? credit,
-    $7.Money? accBalance,
+    $1.Money? accBalance,
     $core.String? clearedAt,
   }) {
     final $result = create();
@@ -296,9 +296,9 @@ class TransactionEntry extends $pb.GeneratedMessage {
     ..aOS(3, _omitFieldNames ? '' : 'accountId')
     ..aOS(4, _omitFieldNames ? '' : 'transactionId')
     ..aOS(5, _omitFieldNames ? '' : 'transactedAt')
-    ..aOM<$7.Money>(7, _omitFieldNames ? '' : 'amount', subBuilder: $7.Money.create)
+    ..aOM<$1.Money>(7, _omitFieldNames ? '' : 'amount', subBuilder: $1.Money.create)
     ..aOB(8, _omitFieldNames ? '' : 'credit')
-    ..aOM<$7.Money>(9, _omitFieldNames ? '' : 'accBalance', subBuilder: $7.Money.create)
+    ..aOM<$1.Money>(9, _omitFieldNames ? '' : 'accBalance', subBuilder: $1.Money.create)
     ..aOS(11, _omitFieldNames ? '' : 'clearedAt')
     ..hasRequiredFields = false
   ;
@@ -361,15 +361,15 @@ class TransactionEntry extends $pb.GeneratedMessage {
   void clearTransactedAt() => clearField(5);
 
   @$pb.TagNumber(7)
-  $7.Money get amount => $_getN(4);
+  $1.Money get amount => $_getN(4);
   @$pb.TagNumber(7)
-  set amount($7.Money v) { setField(7, v); }
+  set amount($1.Money v) { setField(7, v); }
   @$pb.TagNumber(7)
   $core.bool hasAmount() => $_has(4);
   @$pb.TagNumber(7)
   void clearAmount() => clearField(7);
   @$pb.TagNumber(7)
-  $7.Money ensureAmount() => $_ensure(4);
+  $1.Money ensureAmount() => $_ensure(4);
 
   @$pb.TagNumber(8)
   $core.bool get credit => $_getBF(5);
@@ -381,15 +381,15 @@ class TransactionEntry extends $pb.GeneratedMessage {
   void clearCredit() => clearField(8);
 
   @$pb.TagNumber(9)
-  $7.Money get accBalance => $_getN(6);
+  $1.Money get accBalance => $_getN(6);
   @$pb.TagNumber(9)
-  set accBalance($7.Money v) { setField(9, v); }
+  set accBalance($1.Money v) { setField(9, v); }
   @$pb.TagNumber(9)
   $core.bool hasAccBalance() => $_has(6);
   @$pb.TagNumber(9)
   void clearAccBalance() => clearField(9);
   @$pb.TagNumber(9)
-  $7.Money ensureAccBalance() => $_ensure(6);
+  $1.Money ensureAccBalance() => $_ensure(6);
 
   @$pb.TagNumber(11)
   $core.String get clearedAt => $_getSZ(7);
@@ -408,7 +408,7 @@ class Transaction extends $pb.GeneratedMessage {
     $core.String? id,
     $core.String? currencyCode,
     $core.String? transactedAt,
-    $6.Struct? data,
+    $0.Struct? data,
     $core.Iterable<TransactionEntry>? entries,
     $core.bool? cleared,
     TransactionType? type,
@@ -445,7 +445,7 @@ class Transaction extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'currencyCode')
     ..aOS(3, _omitFieldNames ? '' : 'transactedAt')
-    ..aOM<$6.Struct>(4, _omitFieldNames ? '' : 'data', subBuilder: $6.Struct.create)
+    ..aOM<$0.Struct>(4, _omitFieldNames ? '' : 'data', subBuilder: $0.Struct.create)
     ..pc<TransactionEntry>(5, _omitFieldNames ? '' : 'entries', $pb.PbFieldType.PM, subBuilder: TransactionEntry.create)
     ..aOB(6, _omitFieldNames ? '' : 'cleared')
     ..e<TransactionType>(7, _omitFieldNames ? '' : 'type', $pb.PbFieldType.OE, defaultOrMaker: TransactionType.NORMAL, valueOf: TransactionType.valueOf, enumValues: TransactionType.values)
@@ -502,15 +502,15 @@ class Transaction extends $pb.GeneratedMessage {
   void clearTransactedAt() => clearField(3);
 
   @$pb.TagNumber(4)
-  $6.Struct get data => $_getN(3);
+  $0.Struct get data => $_getN(3);
   @$pb.TagNumber(4)
-  set data($6.Struct v) { setField(4, v); }
+  set data($0.Struct v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasData() => $_has(3);
   @$pb.TagNumber(4)
   void clearData() => clearField(4);
   @$pb.TagNumber(4)
-  $6.Struct ensureData() => $_ensure(3);
+  $0.Struct ensureData() => $_ensure(3);
 
   @$pb.TagNumber(5)
   $core.List<TransactionEntry> get entries => $_getList(4);
@@ -585,7 +585,7 @@ class CreateLedgerRequest extends $pb.GeneratedMessage {
     $core.String? id,
     LedgerType? type,
     $core.String? parentId,
-    $6.Struct? data,
+    $0.Struct? data,
   }) {
     final $result = create();
     if (id != null) {
@@ -610,7 +610,7 @@ class CreateLedgerRequest extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..e<LedgerType>(2, _omitFieldNames ? '' : 'type', $pb.PbFieldType.OE, defaultOrMaker: LedgerType.ASSET, valueOf: LedgerType.valueOf, enumValues: LedgerType.values)
     ..aOS(3, _omitFieldNames ? '' : 'parentId')
-    ..aOM<$6.Struct>(4, _omitFieldNames ? '' : 'data', subBuilder: $6.Struct.create)
+    ..aOM<$0.Struct>(4, _omitFieldNames ? '' : 'data', subBuilder: $0.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -663,15 +663,15 @@ class CreateLedgerRequest extends $pb.GeneratedMessage {
   void clearParentId() => clearField(3);
 
   @$pb.TagNumber(4)
-  $6.Struct get data => $_getN(3);
+  $0.Struct get data => $_getN(3);
   @$pb.TagNumber(4)
-  set data($6.Struct v) { setField(4, v); }
+  set data($0.Struct v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasData() => $_has(3);
   @$pb.TagNumber(4)
   void clearData() => clearField(4);
   @$pb.TagNumber(4)
-  $6.Struct ensureData() => $_ensure(3);
+  $0.Struct ensureData() => $_ensure(3);
 }
 
 /// CreateLedgerResponse returns the newly created ledger.
@@ -731,7 +731,7 @@ class CreateLedgerResponse extends $pb.GeneratedMessage {
 class UpdateLedgerRequest extends $pb.GeneratedMessage {
   factory UpdateLedgerRequest({
     $core.String? id,
-    $6.Struct? data,
+    $0.Struct? data,
   }) {
     final $result = create();
     if (id != null) {
@@ -748,7 +748,7 @@ class UpdateLedgerRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateLedgerRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'ledger.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'id')
-    ..aOM<$6.Struct>(4, _omitFieldNames ? '' : 'data', subBuilder: $6.Struct.create)
+    ..aOM<$0.Struct>(4, _omitFieldNames ? '' : 'data', subBuilder: $0.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -783,15 +783,15 @@ class UpdateLedgerRequest extends $pb.GeneratedMessage {
   void clearId() => clearField(1);
 
   @$pb.TagNumber(4)
-  $6.Struct get data => $_getN(1);
+  $0.Struct get data => $_getN(1);
   @$pb.TagNumber(4)
-  set data($6.Struct v) { setField(4, v); }
+  set data($0.Struct v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasData() => $_has(1);
   @$pb.TagNumber(4)
   void clearData() => clearField(4);
   @$pb.TagNumber(4)
-  $6.Struct ensureData() => $_ensure(1);
+  $0.Struct ensureData() => $_ensure(1);
 }
 
 /// UpdateLedgerResponse returns the updated ledger.
@@ -898,7 +898,7 @@ class CreateAccountRequest extends $pb.GeneratedMessage {
     $core.String? id,
     $core.String? ledgerId,
     $core.String? currency,
-    $6.Struct? data,
+    $0.Struct? data,
   }) {
     final $result = create();
     if (id != null) {
@@ -923,7 +923,7 @@ class CreateAccountRequest extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..aOS(3, _omitFieldNames ? '' : 'ledgerId')
     ..aOS(4, _omitFieldNames ? '' : 'currency')
-    ..aOM<$6.Struct>(5, _omitFieldNames ? '' : 'data', subBuilder: $6.Struct.create)
+    ..aOM<$0.Struct>(5, _omitFieldNames ? '' : 'data', subBuilder: $0.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -976,15 +976,15 @@ class CreateAccountRequest extends $pb.GeneratedMessage {
   void clearCurrency() => clearField(4);
 
   @$pb.TagNumber(5)
-  $6.Struct get data => $_getN(3);
+  $0.Struct get data => $_getN(3);
   @$pb.TagNumber(5)
-  set data($6.Struct v) { setField(5, v); }
+  set data($0.Struct v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasData() => $_has(3);
   @$pb.TagNumber(5)
   void clearData() => clearField(5);
   @$pb.TagNumber(5)
-  $6.Struct ensureData() => $_ensure(3);
+  $0.Struct ensureData() => $_ensure(3);
 }
 
 /// CreateAccountResponse returns the newly created account.
@@ -1044,7 +1044,7 @@ class CreateAccountResponse extends $pb.GeneratedMessage {
 class UpdateAccountRequest extends $pb.GeneratedMessage {
   factory UpdateAccountRequest({
     $core.String? id,
-    $6.Struct? data,
+    $0.Struct? data,
   }) {
     final $result = create();
     if (id != null) {
@@ -1061,7 +1061,7 @@ class UpdateAccountRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateAccountRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'ledger.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'id')
-    ..aOM<$6.Struct>(4, _omitFieldNames ? '' : 'data', subBuilder: $6.Struct.create)
+    ..aOM<$0.Struct>(4, _omitFieldNames ? '' : 'data', subBuilder: $0.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -1096,15 +1096,15 @@ class UpdateAccountRequest extends $pb.GeneratedMessage {
   void clearId() => clearField(1);
 
   @$pb.TagNumber(4)
-  $6.Struct get data => $_getN(1);
+  $0.Struct get data => $_getN(1);
   @$pb.TagNumber(4)
-  set data($6.Struct v) { setField(4, v); }
+  set data($0.Struct v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasData() => $_has(1);
   @$pb.TagNumber(4)
   void clearData() => clearField(4);
   @$pb.TagNumber(4)
-  $6.Struct ensureData() => $_ensure(1);
+  $0.Struct ensureData() => $_ensure(1);
 }
 
 /// UpdateAccountResponse returns the updated account.
@@ -1211,7 +1211,7 @@ class CreateTransactionRequest extends $pb.GeneratedMessage {
     $core.String? id,
     $core.String? currency,
     $core.String? transactedAt,
-    $6.Struct? data,
+    $0.Struct? data,
     $core.Iterable<TransactionEntry>? entries,
     $core.bool? cleared,
     TransactionType? type,
@@ -1248,7 +1248,7 @@ class CreateTransactionRequest extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'currency')
     ..aOS(3, _omitFieldNames ? '' : 'transactedAt')
-    ..aOM<$6.Struct>(4, _omitFieldNames ? '' : 'data', subBuilder: $6.Struct.create)
+    ..aOM<$0.Struct>(4, _omitFieldNames ? '' : 'data', subBuilder: $0.Struct.create)
     ..pc<TransactionEntry>(5, _omitFieldNames ? '' : 'entries', $pb.PbFieldType.PM, subBuilder: TransactionEntry.create)
     ..aOB(6, _omitFieldNames ? '' : 'cleared')
     ..e<TransactionType>(7, _omitFieldNames ? '' : 'type', $pb.PbFieldType.OE, defaultOrMaker: TransactionType.NORMAL, valueOf: TransactionType.valueOf, enumValues: TransactionType.values)
@@ -1304,15 +1304,15 @@ class CreateTransactionRequest extends $pb.GeneratedMessage {
   void clearTransactedAt() => clearField(3);
 
   @$pb.TagNumber(4)
-  $6.Struct get data => $_getN(3);
+  $0.Struct get data => $_getN(3);
   @$pb.TagNumber(4)
-  set data($6.Struct v) { setField(4, v); }
+  set data($0.Struct v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasData() => $_has(3);
   @$pb.TagNumber(4)
   void clearData() => clearField(4);
   @$pb.TagNumber(4)
-  $6.Struct ensureData() => $_ensure(3);
+  $0.Struct ensureData() => $_ensure(3);
 
   @$pb.TagNumber(5)
   $core.List<TransactionEntry> get entries => $_getList(4);
@@ -1498,7 +1498,7 @@ class UpdateTransactionRequest extends $pb.GeneratedMessage {
   factory UpdateTransactionRequest({
     $core.String? id,
     $core.String? clearedAt,
-    $6.Struct? data,
+    $0.Struct? data,
   }) {
     final $result = create();
     if (id != null) {
@@ -1519,7 +1519,7 @@ class UpdateTransactionRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateTransactionRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'ledger.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'clearedAt')
-    ..aOM<$6.Struct>(4, _omitFieldNames ? '' : 'data', subBuilder: $6.Struct.create)
+    ..aOM<$0.Struct>(4, _omitFieldNames ? '' : 'data', subBuilder: $0.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -1563,15 +1563,15 @@ class UpdateTransactionRequest extends $pb.GeneratedMessage {
   void clearClearedAt() => clearField(2);
 
   @$pb.TagNumber(4)
-  $6.Struct get data => $_getN(2);
+  $0.Struct get data => $_getN(2);
   @$pb.TagNumber(4)
-  set data($6.Struct v) { setField(4, v); }
+  set data($0.Struct v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasData() => $_has(2);
   @$pb.TagNumber(4)
   void clearData() => clearField(4);
   @$pb.TagNumber(4)
-  $6.Struct ensureData() => $_ensure(2);
+  $0.Struct ensureData() => $_ensure(2);
 }
 
 /// UpdateTransactionResponse returns the updated transaction.
@@ -1676,7 +1676,7 @@ class LedgerServiceApi {
   $pb.RpcClient _client;
   LedgerServiceApi(this._client);
 
-  $async.Future<SearchLedgersResponse> searchLedgers($pb.ClientContext? ctx, $8.SearchRequest request) =>
+  $async.Future<SearchLedgersResponse> searchLedgers($pb.ClientContext? ctx, $2.SearchRequest request) =>
     _client.invoke<SearchLedgersResponse>(ctx, 'LedgerService', 'SearchLedgers', request, SearchLedgersResponse())
   ;
   $async.Future<CreateLedgerResponse> createLedger($pb.ClientContext? ctx, CreateLedgerRequest request) =>
@@ -1685,7 +1685,7 @@ class LedgerServiceApi {
   $async.Future<UpdateLedgerResponse> updateLedger($pb.ClientContext? ctx, UpdateLedgerRequest request) =>
     _client.invoke<UpdateLedgerResponse>(ctx, 'LedgerService', 'UpdateLedger', request, UpdateLedgerResponse())
   ;
-  $async.Future<SearchAccountsResponse> searchAccounts($pb.ClientContext? ctx, $8.SearchRequest request) =>
+  $async.Future<SearchAccountsResponse> searchAccounts($pb.ClientContext? ctx, $2.SearchRequest request) =>
     _client.invoke<SearchAccountsResponse>(ctx, 'LedgerService', 'SearchAccounts', request, SearchAccountsResponse())
   ;
   $async.Future<CreateAccountResponse> createAccount($pb.ClientContext? ctx, CreateAccountRequest request) =>
@@ -1694,7 +1694,7 @@ class LedgerServiceApi {
   $async.Future<UpdateAccountResponse> updateAccount($pb.ClientContext? ctx, UpdateAccountRequest request) =>
     _client.invoke<UpdateAccountResponse>(ctx, 'LedgerService', 'UpdateAccount', request, UpdateAccountResponse())
   ;
-  $async.Future<SearchTransactionsResponse> searchTransactions($pb.ClientContext? ctx, $8.SearchRequest request) =>
+  $async.Future<SearchTransactionsResponse> searchTransactions($pb.ClientContext? ctx, $2.SearchRequest request) =>
     _client.invoke<SearchTransactionsResponse>(ctx, 'LedgerService', 'SearchTransactions', request, SearchTransactionsResponse())
   ;
   $async.Future<CreateTransactionResponse> createTransaction($pb.ClientContext? ctx, CreateTransactionRequest request) =>
@@ -1706,7 +1706,7 @@ class LedgerServiceApi {
   $async.Future<UpdateTransactionResponse> updateTransaction($pb.ClientContext? ctx, UpdateTransactionRequest request) =>
     _client.invoke<UpdateTransactionResponse>(ctx, 'LedgerService', 'UpdateTransaction', request, UpdateTransactionResponse())
   ;
-  $async.Future<SearchTransactionEntriesResponse> searchTransactionEntries($pb.ClientContext? ctx, $8.SearchRequest request) =>
+  $async.Future<SearchTransactionEntriesResponse> searchTransactionEntries($pb.ClientContext? ctx, $2.SearchRequest request) =>
     _client.invoke<SearchTransactionEntriesResponse>(ctx, 'LedgerService', 'SearchTransactionEntries', request, SearchTransactionEntriesResponse())
   ;
 }

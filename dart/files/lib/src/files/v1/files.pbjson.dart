@@ -13,7 +13,7 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
-import '../../google/protobuf/struct.pbjson.dart' as $6;
+import 'package:antinvestor_api_common/google/protobuf/struct.pbjson.dart' as $0;
 
 @$core.Deprecated('Use thumbnailMethodDescriptor instead')
 const ThumbnailMethod$json = {
@@ -384,10 +384,10 @@ const $core.Map<$core.String, $core.dynamic> FilesServiceBase$json = {
 const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> FilesServiceBase$messageJson = {
   '.files.v1.UploadContentRequest': UploadContentRequest$json,
   '.files.v1.UploadMetadata': UploadMetadata$json,
-  '.google.protobuf.Struct': $6.Struct$json,
-  '.google.protobuf.Struct.FieldsEntry': $6.Struct_FieldsEntry$json,
-  '.google.protobuf.Value': $6.Value$json,
-  '.google.protobuf.ListValue': $6.ListValue$json,
+  '.google.protobuf.Struct': $0.Struct$json,
+  '.google.protobuf.Struct.FieldsEntry': $0.Struct_FieldsEntry$json,
+  '.google.protobuf.Value': $0.Value$json,
+  '.google.protobuf.ListValue': $0.ListValue$json,
   '.files.v1.UploadContentResponse': UploadContentResponse$json,
   '.files.v1.CreateContentRequest': CreateContentRequest$json,
   '.files.v1.CreateContentResponse': CreateContentResponse$json,

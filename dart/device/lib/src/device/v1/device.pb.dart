@@ -14,7 +14,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../google/protobuf/struct.pb.dart' as $6;
+import 'package:antinvestor_api_common/google/protobuf/struct.pb.dart' as $0;
 import 'device.pbenum.dart';
 
 export 'device.pbenum.dart';
@@ -146,7 +146,7 @@ class KeyObject extends $pb.GeneratedMessage {
     $core.String? createdAt,
     $core.String? expiresAt,
     $core.bool? isActive,
-    $6.Struct? extra,
+    $0.Struct? extra,
   }) {
     final $result = create();
     if (id != null) {
@@ -187,7 +187,7 @@ class KeyObject extends $pb.GeneratedMessage {
     ..aOS(5, _omitFieldNames ? '' : 'createdAt')
     ..aOS(6, _omitFieldNames ? '' : 'expiresAt')
     ..aOB(7, _omitFieldNames ? '' : 'isActive')
-    ..aOM<$6.Struct>(8, _omitFieldNames ? '' : 'extra', subBuilder: $6.Struct.create)
+    ..aOM<$0.Struct>(8, _omitFieldNames ? '' : 'extra', subBuilder: $0.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -276,15 +276,15 @@ class KeyObject extends $pb.GeneratedMessage {
   void clearIsActive() => clearField(7);
 
   @$pb.TagNumber(8)
-  $6.Struct get extra => $_getN(7);
+  $0.Struct get extra => $_getN(7);
   @$pb.TagNumber(8)
-  set extra($6.Struct v) { setField(8, v); }
+  set extra($0.Struct v) { setField(8, v); }
   @$pb.TagNumber(8)
   $core.bool hasExtra() => $_has(7);
   @$pb.TagNumber(8)
   void clearExtra() => clearField(8);
   @$pb.TagNumber(8)
-  $6.Struct ensureExtra() => $_ensure(7);
+  $0.Struct ensureExtra() => $_ensure(7);
 }
 
 /// DeviceLog represents an activity log entry for a device.
@@ -299,8 +299,8 @@ class DeviceLog extends $pb.GeneratedMessage {
     $core.String? userAgent,
     $core.String? os,
     $core.String? lastSeen,
-    $6.Struct? location,
-    $6.Struct? extra,
+    $0.Struct? location,
+    $0.Struct? extra,
   }) {
     final $result = create();
     if (id != null) {
@@ -348,8 +348,8 @@ class DeviceLog extends $pb.GeneratedMessage {
     ..aOS(6, _omitFieldNames ? '' : 'userAgent')
     ..aOS(7, _omitFieldNames ? '' : 'os')
     ..aOS(8, _omitFieldNames ? '' : 'lastSeen')
-    ..aOM<$6.Struct>(9, _omitFieldNames ? '' : 'location', subBuilder: $6.Struct.create)
-    ..aOM<$6.Struct>(10, _omitFieldNames ? '' : 'extra', subBuilder: $6.Struct.create)
+    ..aOM<$0.Struct>(9, _omitFieldNames ? '' : 'location', subBuilder: $0.Struct.create)
+    ..aOM<$0.Struct>(10, _omitFieldNames ? '' : 'extra', subBuilder: $0.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -449,26 +449,26 @@ class DeviceLog extends $pb.GeneratedMessage {
   void clearLastSeen() => clearField(8);
 
   @$pb.TagNumber(9)
-  $6.Struct get location => $_getN(8);
+  $0.Struct get location => $_getN(8);
   @$pb.TagNumber(9)
-  set location($6.Struct v) { setField(9, v); }
+  set location($0.Struct v) { setField(9, v); }
   @$pb.TagNumber(9)
   $core.bool hasLocation() => $_has(8);
   @$pb.TagNumber(9)
   void clearLocation() => clearField(9);
   @$pb.TagNumber(9)
-  $6.Struct ensureLocation() => $_ensure(8);
+  $0.Struct ensureLocation() => $_ensure(8);
 
   @$pb.TagNumber(10)
-  $6.Struct get extra => $_getN(9);
+  $0.Struct get extra => $_getN(9);
   @$pb.TagNumber(10)
-  set extra($6.Struct v) { setField(10, v); }
+  set extra($0.Struct v) { setField(10, v); }
   @$pb.TagNumber(10)
   $core.bool hasExtra() => $_has(9);
   @$pb.TagNumber(10)
   void clearExtra() => clearField(10);
   @$pb.TagNumber(10)
-  $6.Struct ensureExtra() => $_ensure(9);
+  $0.Struct ensureExtra() => $_ensure(9);
 }
 
 /// DeviceObject represents a registered device in the system.
@@ -485,8 +485,8 @@ class DeviceObject extends $pb.GeneratedMessage {
     $core.String? profileId,
     Locale? locale,
     PresenceStatus? presence,
-    $6.Struct? location,
-    $6.Struct? properties,
+    $0.Struct? location,
+    $0.Struct? properties,
   }) {
     final $result = create();
     if (id != null) {
@@ -542,8 +542,8 @@ class DeviceObject extends $pb.GeneratedMessage {
     ..aOS(8, _omitFieldNames ? '' : 'profileId')
     ..aOM<Locale>(9, _omitFieldNames ? '' : 'locale', subBuilder: Locale.create)
     ..e<PresenceStatus>(10, _omitFieldNames ? '' : 'presence', $pb.PbFieldType.OE, defaultOrMaker: PresenceStatus.OFFLINE, valueOf: PresenceStatus.valueOf, enumValues: PresenceStatus.values)
-    ..aOM<$6.Struct>(11, _omitFieldNames ? '' : 'location', subBuilder: $6.Struct.create)
-    ..aOM<$6.Struct>(15, _omitFieldNames ? '' : 'properties', subBuilder: $6.Struct.create)
+    ..aOM<$0.Struct>(11, _omitFieldNames ? '' : 'location', subBuilder: $0.Struct.create)
+    ..aOM<$0.Struct>(15, _omitFieldNames ? '' : 'properties', subBuilder: $0.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -661,26 +661,26 @@ class DeviceObject extends $pb.GeneratedMessage {
   void clearPresence() => clearField(10);
 
   @$pb.TagNumber(11)
-  $6.Struct get location => $_getN(10);
+  $0.Struct get location => $_getN(10);
   @$pb.TagNumber(11)
-  set location($6.Struct v) { setField(11, v); }
+  set location($0.Struct v) { setField(11, v); }
   @$pb.TagNumber(11)
   $core.bool hasLocation() => $_has(10);
   @$pb.TagNumber(11)
   void clearLocation() => clearField(11);
   @$pb.TagNumber(11)
-  $6.Struct ensureLocation() => $_ensure(10);
+  $0.Struct ensureLocation() => $_ensure(10);
 
   @$pb.TagNumber(15)
-  $6.Struct get properties => $_getN(11);
+  $0.Struct get properties => $_getN(11);
   @$pb.TagNumber(15)
-  set properties($6.Struct v) { setField(15, v); }
+  set properties($0.Struct v) { setField(15, v); }
   @$pb.TagNumber(15)
   $core.bool hasProperties() => $_has(11);
   @$pb.TagNumber(15)
   void clearProperties() => clearField(15);
   @$pb.TagNumber(15)
-  $6.Struct ensureProperties() => $_ensure(11);
+  $0.Struct ensureProperties() => $_ensure(11);
 }
 
 /// PresenceObject represents the presence/availability status of a device.
@@ -693,7 +693,7 @@ class PresenceObject extends $pb.GeneratedMessage {
     $core.String? statusMessage,
     $core.String? lastActive,
     $core.String? updatedAt,
-    $6.Struct? extras,
+    $0.Struct? extras,
   }) {
     final $result = create();
     if (deviceId != null) {
@@ -730,7 +730,7 @@ class PresenceObject extends $pb.GeneratedMessage {
     ..aOS(4, _omitFieldNames ? '' : 'statusMessage')
     ..aOS(5, _omitFieldNames ? '' : 'lastActive')
     ..aOS(6, _omitFieldNames ? '' : 'updatedAt')
-    ..aOM<$6.Struct>(7, _omitFieldNames ? '' : 'extras', subBuilder: $6.Struct.create)
+    ..aOM<$0.Struct>(7, _omitFieldNames ? '' : 'extras', subBuilder: $0.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -810,15 +810,15 @@ class PresenceObject extends $pb.GeneratedMessage {
   void clearUpdatedAt() => clearField(6);
 
   @$pb.TagNumber(7)
-  $6.Struct get extras => $_getN(6);
+  $0.Struct get extras => $_getN(6);
   @$pb.TagNumber(7)
-  set extras($6.Struct v) { setField(7, v); }
+  set extras($0.Struct v) { setField(7, v); }
   @$pb.TagNumber(7)
   $core.bool hasExtras() => $_has(6);
   @$pb.TagNumber(7)
   void clearExtras() => clearField(7);
   @$pb.TagNumber(7)
-  $6.Struct ensureExtras() => $_ensure(6);
+  $0.Struct ensureExtras() => $_ensure(6);
 }
 
 /// GetByIdRequest retrieves one or more devices by their unique identifiers.
@@ -1038,7 +1038,7 @@ class SearchRequest extends $pb.GeneratedMessage {
     $core.String? startDate,
     $core.String? endDate,
     $core.Iterable<$core.String>? properties,
-    $6.Struct? extras,
+    $0.Struct? extras,
   }) {
     final $result = create();
     if (query != null) {
@@ -1075,7 +1075,7 @@ class SearchRequest extends $pb.GeneratedMessage {
     ..aOS(4, _omitFieldNames ? '' : 'startDate')
     ..aOS(5, _omitFieldNames ? '' : 'endDate')
     ..pPS(6, _omitFieldNames ? '' : 'properties')
-    ..aOM<$6.Struct>(7, _omitFieldNames ? '' : 'extras', subBuilder: $6.Struct.create)
+    ..aOM<$0.Struct>(7, _omitFieldNames ? '' : 'extras', subBuilder: $0.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -1149,15 +1149,15 @@ class SearchRequest extends $pb.GeneratedMessage {
   $core.List<$core.String> get properties => $_getList(5);
 
   @$pb.TagNumber(7)
-  $6.Struct get extras => $_getN(6);
+  $0.Struct get extras => $_getN(6);
   @$pb.TagNumber(7)
-  set extras($6.Struct v) { setField(7, v); }
+  set extras($0.Struct v) { setField(7, v); }
   @$pb.TagNumber(7)
   $core.bool hasExtras() => $_has(6);
   @$pb.TagNumber(7)
   void clearExtras() => clearField(7);
   @$pb.TagNumber(7)
-  $6.Struct ensureExtras() => $_ensure(6);
+  $0.Struct ensureExtras() => $_ensure(6);
 }
 
 /// SearchResponse returns devices matching the search criteria.
@@ -1209,7 +1209,7 @@ class SearchResponse extends $pb.GeneratedMessage {
 class CreateRequest extends $pb.GeneratedMessage {
   factory CreateRequest({
     $core.String? name,
-    $6.Struct? properties,
+    $0.Struct? properties,
   }) {
     final $result = create();
     if (name != null) {
@@ -1226,7 +1226,7 @@ class CreateRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'device.v1'), createEmptyInstance: create)
     ..aOS(2, _omitFieldNames ? '' : 'name')
-    ..aOM<$6.Struct>(3, _omitFieldNames ? '' : 'properties', subBuilder: $6.Struct.create)
+    ..aOM<$0.Struct>(3, _omitFieldNames ? '' : 'properties', subBuilder: $0.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -1261,15 +1261,15 @@ class CreateRequest extends $pb.GeneratedMessage {
   void clearName() => clearField(2);
 
   @$pb.TagNumber(3)
-  $6.Struct get properties => $_getN(1);
+  $0.Struct get properties => $_getN(1);
   @$pb.TagNumber(3)
-  set properties($6.Struct v) { setField(3, v); }
+  set properties($0.Struct v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasProperties() => $_has(1);
   @$pb.TagNumber(3)
   void clearProperties() => clearField(3);
   @$pb.TagNumber(3)
-  $6.Struct ensureProperties() => $_ensure(1);
+  $0.Struct ensureProperties() => $_ensure(1);
 }
 
 /// CreateResponse returns the newly created device.
@@ -1330,7 +1330,7 @@ class UpdateRequest extends $pb.GeneratedMessage {
   factory UpdateRequest({
     $core.String? id,
     $core.String? name,
-    $6.Struct? properties,
+    $0.Struct? properties,
   }) {
     final $result = create();
     if (id != null) {
@@ -1351,7 +1351,7 @@ class UpdateRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'device.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'name')
-    ..aOM<$6.Struct>(3, _omitFieldNames ? '' : 'properties', subBuilder: $6.Struct.create)
+    ..aOM<$0.Struct>(3, _omitFieldNames ? '' : 'properties', subBuilder: $0.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -1395,15 +1395,15 @@ class UpdateRequest extends $pb.GeneratedMessage {
   void clearName() => clearField(2);
 
   @$pb.TagNumber(3)
-  $6.Struct get properties => $_getN(2);
+  $0.Struct get properties => $_getN(2);
   @$pb.TagNumber(3)
-  set properties($6.Struct v) { setField(3, v); }
+  set properties($0.Struct v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasProperties() => $_has(2);
   @$pb.TagNumber(3)
   void clearProperties() => clearField(3);
   @$pb.TagNumber(3)
-  $6.Struct ensureProperties() => $_ensure(2);
+  $0.Struct ensureProperties() => $_ensure(2);
 }
 
 /// UpdateResponse returns the updated device.
@@ -1465,7 +1465,7 @@ class LinkRequest extends $pb.GeneratedMessage {
   factory LinkRequest({
     $core.String? id,
     $core.String? profileId,
-    $6.Struct? properties,
+    $0.Struct? properties,
   }) {
     final $result = create();
     if (id != null) {
@@ -1486,7 +1486,7 @@ class LinkRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LinkRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'device.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'profileId')
-    ..aOM<$6.Struct>(3, _omitFieldNames ? '' : 'properties', subBuilder: $6.Struct.create)
+    ..aOM<$0.Struct>(3, _omitFieldNames ? '' : 'properties', subBuilder: $0.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -1530,15 +1530,15 @@ class LinkRequest extends $pb.GeneratedMessage {
   void clearProfileId() => clearField(2);
 
   @$pb.TagNumber(3)
-  $6.Struct get properties => $_getN(2);
+  $0.Struct get properties => $_getN(2);
   @$pb.TagNumber(3)
-  set properties($6.Struct v) { setField(3, v); }
+  set properties($0.Struct v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasProperties() => $_has(2);
   @$pb.TagNumber(3)
   void clearProperties() => clearField(3);
   @$pb.TagNumber(3)
-  $6.Struct ensureProperties() => $_ensure(2);
+  $0.Struct ensureProperties() => $_ensure(2);
 }
 
 /// LinkResponse returns the linked device.
@@ -1710,7 +1710,7 @@ class LogRequest extends $pb.GeneratedMessage {
     $core.String? userAgent,
     $core.String? os,
     $core.String? lastSeen,
-    $6.Struct? extras,
+    $0.Struct? extras,
   }) {
     final $result = create();
     if (deviceId != null) {
@@ -1751,7 +1751,7 @@ class LogRequest extends $pb.GeneratedMessage {
     ..aOS(6, _omitFieldNames ? '' : 'userAgent')
     ..aOS(7, _omitFieldNames ? '' : 'os')
     ..aOS(8, _omitFieldNames ? '' : 'lastSeen')
-    ..aOM<$6.Struct>(9, _omitFieldNames ? '' : 'extras', subBuilder: $6.Struct.create)
+    ..aOM<$0.Struct>(9, _omitFieldNames ? '' : 'extras', subBuilder: $0.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -1840,15 +1840,15 @@ class LogRequest extends $pb.GeneratedMessage {
   void clearLastSeen() => clearField(8);
 
   @$pb.TagNumber(9)
-  $6.Struct get extras => $_getN(7);
+  $0.Struct get extras => $_getN(7);
   @$pb.TagNumber(9)
-  set extras($6.Struct v) { setField(9, v); }
+  set extras($0.Struct v) { setField(9, v); }
   @$pb.TagNumber(9)
   $core.bool hasExtras() => $_has(7);
   @$pb.TagNumber(9)
   void clearExtras() => clearField(9);
   @$pb.TagNumber(9)
-  $6.Struct ensureExtras() => $_ensure(7);
+  $0.Struct ensureExtras() => $_ensure(7);
 }
 
 /// LogResponse returns the created log entry.
@@ -2024,7 +2024,7 @@ class AddKeyRequest extends $pb.GeneratedMessage {
     KeyType? keyType,
     $core.List<$core.int>? data,
     $core.String? expiresAt,
-    $6.Struct? extras,
+    $0.Struct? extras,
   }) {
     final $result = create();
     if (id != null) {
@@ -2057,7 +2057,7 @@ class AddKeyRequest extends $pb.GeneratedMessage {
     ..e<KeyType>(3, _omitFieldNames ? '' : 'keyType', $pb.PbFieldType.OE, defaultOrMaker: KeyType.MATRIX_KEY, valueOf: KeyType.valueOf, enumValues: KeyType.values)
     ..a<$core.List<$core.int>>(4, _omitFieldNames ? '' : 'data', $pb.PbFieldType.OY)
     ..aOS(5, _omitFieldNames ? '' : 'expiresAt')
-    ..aOM<$6.Struct>(6, _omitFieldNames ? '' : 'extras', subBuilder: $6.Struct.create)
+    ..aOM<$0.Struct>(6, _omitFieldNames ? '' : 'extras', subBuilder: $0.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -2128,15 +2128,15 @@ class AddKeyRequest extends $pb.GeneratedMessage {
   void clearExpiresAt() => clearField(5);
 
   @$pb.TagNumber(6)
-  $6.Struct get extras => $_getN(5);
+  $0.Struct get extras => $_getN(5);
   @$pb.TagNumber(6)
-  set extras($6.Struct v) { setField(6, v); }
+  set extras($0.Struct v) { setField(6, v); }
   @$pb.TagNumber(6)
   $core.bool hasExtras() => $_has(5);
   @$pb.TagNumber(6)
   void clearExtras() => clearField(6);
   @$pb.TagNumber(6)
-  $6.Struct ensureExtras() => $_ensure(5);
+  $0.Struct ensureExtras() => $_ensure(5);
 }
 
 /// AddKeyResponse returns the created key.
@@ -2451,7 +2451,7 @@ class RegisterKeyRequest extends $pb.GeneratedMessage {
   factory RegisterKeyRequest({
     $core.String? deviceId,
     KeyType? keyType,
-    $6.Struct? extras,
+    $0.Struct? extras,
   }) {
     final $result = create();
     if (deviceId != null) {
@@ -2472,7 +2472,7 @@ class RegisterKeyRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RegisterKeyRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'device.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'deviceId')
     ..e<KeyType>(2, _omitFieldNames ? '' : 'keyType', $pb.PbFieldType.OE, defaultOrMaker: KeyType.MATRIX_KEY, valueOf: KeyType.valueOf, enumValues: KeyType.values)
-    ..aOM<$6.Struct>(3, _omitFieldNames ? '' : 'extras', subBuilder: $6.Struct.create)
+    ..aOM<$0.Struct>(3, _omitFieldNames ? '' : 'extras', subBuilder: $0.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -2516,15 +2516,15 @@ class RegisterKeyRequest extends $pb.GeneratedMessage {
   void clearKeyType() => clearField(2);
 
   @$pb.TagNumber(3)
-  $6.Struct get extras => $_getN(2);
+  $0.Struct get extras => $_getN(2);
   @$pb.TagNumber(3)
-  set extras($6.Struct v) { setField(3, v); }
+  set extras($0.Struct v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasExtras() => $_has(2);
   @$pb.TagNumber(3)
   void clearExtras() => clearField(3);
   @$pb.TagNumber(3)
-  $6.Struct ensureExtras() => $_ensure(2);
+  $0.Struct ensureExtras() => $_ensure(2);
 }
 
 /// RegisterKeyResponse returns confirmation of registration.
@@ -2704,7 +2704,7 @@ class UpdatePresenceRequest extends $pb.GeneratedMessage {
     $core.String? deviceId,
     PresenceStatus? status,
     $core.String? statusMessage,
-    $6.Struct? extras,
+    $0.Struct? extras,
   }) {
     final $result = create();
     if (deviceId != null) {
@@ -2729,7 +2729,7 @@ class UpdatePresenceRequest extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'deviceId')
     ..e<PresenceStatus>(2, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: PresenceStatus.OFFLINE, valueOf: PresenceStatus.valueOf, enumValues: PresenceStatus.values)
     ..aOS(3, _omitFieldNames ? '' : 'statusMessage')
-    ..aOM<$6.Struct>(4, _omitFieldNames ? '' : 'extras', subBuilder: $6.Struct.create)
+    ..aOM<$0.Struct>(4, _omitFieldNames ? '' : 'extras', subBuilder: $0.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -2782,15 +2782,15 @@ class UpdatePresenceRequest extends $pb.GeneratedMessage {
   void clearStatusMessage() => clearField(3);
 
   @$pb.TagNumber(4)
-  $6.Struct get extras => $_getN(3);
+  $0.Struct get extras => $_getN(3);
   @$pb.TagNumber(4)
-  set extras($6.Struct v) { setField(4, v); }
+  set extras($0.Struct v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasExtras() => $_has(3);
   @$pb.TagNumber(4)
   void clearExtras() => clearField(4);
   @$pb.TagNumber(4)
-  $6.Struct ensureExtras() => $_ensure(3);
+  $0.Struct ensureExtras() => $_ensure(3);
 }
 
 /// UpdatePresenceResponse returns the updated presence.
@@ -2852,8 +2852,8 @@ class NotifyMessage extends $pb.GeneratedMessage {
     $core.String? id,
     $core.String? title,
     $core.String? body,
-    $6.Struct? data,
-    $6.Struct? extras,
+    $0.Struct? data,
+    $0.Struct? extras,
   }) {
     final $result = create();
     if (id != null) {
@@ -2881,8 +2881,8 @@ class NotifyMessage extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..aOS(3, _omitFieldNames ? '' : 'title')
     ..aOS(4, _omitFieldNames ? '' : 'body')
-    ..aOM<$6.Struct>(5, _omitFieldNames ? '' : 'data', subBuilder: $6.Struct.create)
-    ..aOM<$6.Struct>(6, _omitFieldNames ? '' : 'extras', subBuilder: $6.Struct.create)
+    ..aOM<$0.Struct>(5, _omitFieldNames ? '' : 'data', subBuilder: $0.Struct.create)
+    ..aOM<$0.Struct>(6, _omitFieldNames ? '' : 'extras', subBuilder: $0.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -2935,26 +2935,26 @@ class NotifyMessage extends $pb.GeneratedMessage {
   void clearBody() => clearField(4);
 
   @$pb.TagNumber(5)
-  $6.Struct get data => $_getN(3);
+  $0.Struct get data => $_getN(3);
   @$pb.TagNumber(5)
-  set data($6.Struct v) { setField(5, v); }
+  set data($0.Struct v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasData() => $_has(3);
   @$pb.TagNumber(5)
   void clearData() => clearField(5);
   @$pb.TagNumber(5)
-  $6.Struct ensureData() => $_ensure(3);
+  $0.Struct ensureData() => $_ensure(3);
 
   @$pb.TagNumber(6)
-  $6.Struct get extras => $_getN(4);
+  $0.Struct get extras => $_getN(4);
   @$pb.TagNumber(6)
-  set extras($6.Struct v) { setField(6, v); }
+  set extras($0.Struct v) { setField(6, v); }
   @$pb.TagNumber(6)
   $core.bool hasExtras() => $_has(4);
   @$pb.TagNumber(6)
   void clearExtras() => clearField(6);
   @$pb.TagNumber(6)
-  $6.Struct ensureExtras() => $_ensure(4);
+  $0.Struct ensureExtras() => $_ensure(4);
 }
 
 /// NotifyRequest sends one or more notifications to a device using its registered keys.
@@ -3053,7 +3053,7 @@ class NotifyResult extends $pb.GeneratedMessage {
     $core.bool? success,
     $core.String? message,
     $core.String? notificationId,
-    $6.Struct? extras,
+    $0.Struct? extras,
   }) {
     final $result = create();
     if (success != null) {
@@ -3078,7 +3078,7 @@ class NotifyResult extends $pb.GeneratedMessage {
     ..aOB(1, _omitFieldNames ? '' : 'success')
     ..aOS(2, _omitFieldNames ? '' : 'message')
     ..aOS(3, _omitFieldNames ? '' : 'notificationId')
-    ..aOM<$6.Struct>(4, _omitFieldNames ? '' : 'extras', subBuilder: $6.Struct.create)
+    ..aOM<$0.Struct>(4, _omitFieldNames ? '' : 'extras', subBuilder: $0.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -3131,15 +3131,15 @@ class NotifyResult extends $pb.GeneratedMessage {
   void clearNotificationId() => clearField(3);
 
   @$pb.TagNumber(4)
-  $6.Struct get extras => $_getN(3);
+  $0.Struct get extras => $_getN(3);
   @$pb.TagNumber(4)
-  set extras($6.Struct v) { setField(4, v); }
+  set extras($0.Struct v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasExtras() => $_has(3);
   @$pb.TagNumber(4)
   void clearExtras() => clearField(4);
   @$pb.TagNumber(4)
-  $6.Struct ensureExtras() => $_ensure(3);
+  $0.Struct ensureExtras() => $_ensure(3);
 }
 
 /// NotifyResponse confirms the notifications were sent.

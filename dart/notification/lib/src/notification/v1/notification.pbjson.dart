@@ -13,8 +13,8 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
-import '../../common/v1/common.pbjson.dart' as $7;
-import '../../google/protobuf/struct.pbjson.dart' as $6;
+import 'package:antinvestor_api_common/common/v1/common.pbjson.dart' as $1;
+import 'package:antinvestor_api_common/google/protobuf/struct.pbjson.dart' as $0;
 
 @$core.Deprecated('Use pRIORITYDescriptor instead')
 const PRIORITY$json = {
@@ -307,23 +307,23 @@ const $core.Map<$core.String, $core.dynamic> NotificationServiceBase$json = {
 const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> NotificationServiceBase$messageJson = {
   '.notification.v1.SendRequest': SendRequest$json,
   '.notification.v1.Notification': Notification$json,
-  '.common.v1.ContactLink': $7.ContactLink$json,
-  '.google.protobuf.Struct': $6.Struct$json,
-  '.google.protobuf.Struct.FieldsEntry': $6.Struct_FieldsEntry$json,
-  '.google.protobuf.Value': $6.Value$json,
-  '.google.protobuf.ListValue': $6.ListValue$json,
-  '.common.v1.StatusResponse': $7.StatusResponse$json,
+  '.common.v1.ContactLink': $1.ContactLink$json,
+  '.google.protobuf.Struct': $0.Struct$json,
+  '.google.protobuf.Struct.FieldsEntry': $0.Struct_FieldsEntry$json,
+  '.google.protobuf.Value': $0.Value$json,
+  '.google.protobuf.ListValue': $0.ListValue$json,
+  '.common.v1.StatusResponse': $1.StatusResponse$json,
   '.notification.v1.SendResponse': SendResponse$json,
   '.notification.v1.ReleaseRequest': ReleaseRequest$json,
   '.notification.v1.ReleaseResponse': ReleaseResponse$json,
   '.notification.v1.ReceiveRequest': ReceiveRequest$json,
   '.notification.v1.ReceiveResponse': ReceiveResponse$json,
-  '.common.v1.SearchRequest': $7.SearchRequest$json,
-  '.common.v1.Pagination': $7.Pagination$json,
+  '.common.v1.SearchRequest': $1.SearchRequest$json,
+  '.common.v1.Pagination': $1.Pagination$json,
   '.notification.v1.SearchResponse': SearchResponse$json,
-  '.common.v1.StatusRequest': $7.StatusRequest$json,
-  '.common.v1.StatusUpdateRequest': $7.StatusUpdateRequest$json,
-  '.common.v1.StatusUpdateResponse': $7.StatusUpdateResponse$json,
+  '.common.v1.StatusRequest': $1.StatusRequest$json,
+  '.common.v1.StatusUpdateRequest': $1.StatusUpdateRequest$json,
+  '.common.v1.StatusUpdateResponse': $1.StatusUpdateResponse$json,
   '.notification.v1.TemplateSearchRequest': TemplateSearchRequest$json,
   '.notification.v1.TemplateSearchResponse': TemplateSearchResponse$json,
   '.notification.v1.Template': Template$json,

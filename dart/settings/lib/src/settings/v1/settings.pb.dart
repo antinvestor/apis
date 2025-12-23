@@ -14,7 +14,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../common/v1/common.pb.dart' as $7;
+import 'package:antinvestor_api_common/common/v1/common.pb.dart' as $0;
 
 /// Setting represents a hierarchical key for configuration lookup.
 /// Supports multi-level scoping for flexible configuration management.
@@ -598,7 +598,7 @@ class SettingsServiceApi {
   $async.Future<ListResponse> list($pb.ClientContext? ctx, ListRequest request) =>
     _client.invoke<ListResponse>(ctx, 'SettingsService', 'List', request, ListResponse())
   ;
-  $async.Future<SearchResponse> search($pb.ClientContext? ctx, $7.SearchRequest request) =>
+  $async.Future<SearchResponse> search($pb.ClientContext? ctx, $0.SearchRequest request) =>
     _client.invoke<SearchResponse>(ctx, 'SettingsService', 'Search', request, SearchResponse())
   ;
   $async.Future<SetResponse> set($pb.ClientContext? ctx, SetRequest request) =>

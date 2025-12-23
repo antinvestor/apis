@@ -67,3 +67,11 @@ export 'src/google/protobuf/duration.pb.dart';
 export 'src/google/protobuf/duration.pbenum.dart';
 export 'src/google/protobuf/any.pb.dart';
 export 'src/google/protobuf/any.pbenum.dart';
+
+// Export Google types (shared across all service packages)
+export 'src/google/type/interval.pb.dart';
+export 'src/google/type/interval.pbenum.dart';
+export 'src/google/type/interval.pbjson.dart';
+export 'src/google/type/money.pb.dart';
+export 'src/google/type/money.pbenum.dart';
+export 'src/google/type/money.pbjson.dart';

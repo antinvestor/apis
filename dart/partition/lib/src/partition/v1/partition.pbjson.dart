@@ -13,8 +13,8 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
-import '../../google/protobuf/struct.pbjson.dart' as $6;
-import '../../google/protobuf/timestamp.pbjson.dart' as $2;
+import 'package:antinvestor_api_common/google/protobuf/struct.pbjson.dart' as $0;
+import 'package:antinvestor_api_common/google/protobuf/timestamp.pbjson.dart' as $1;
 
 @$core.Deprecated('Use tenantObjectDescriptor instead')
 const TenantObject$json = {
@@ -862,11 +862,11 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> PartitionS
   '.partition.v1.GetTenantRequest': GetTenantRequest$json,
   '.partition.v1.GetTenantResponse': GetTenantResponse$json,
   '.partition.v1.TenantObject': TenantObject$json,
-  '.google.protobuf.Struct': $6.Struct$json,
-  '.google.protobuf.Struct.FieldsEntry': $6.Struct_FieldsEntry$json,
-  '.google.protobuf.Value': $6.Value$json,
-  '.google.protobuf.ListValue': $6.ListValue$json,
-  '.google.protobuf.Timestamp': $2.Timestamp$json,
+  '.google.protobuf.Struct': $0.Struct$json,
+  '.google.protobuf.Struct.FieldsEntry': $0.Struct_FieldsEntry$json,
+  '.google.protobuf.Value': $0.Value$json,
+  '.google.protobuf.ListValue': $0.ListValue$json,
+  '.google.protobuf.Timestamp': $1.Timestamp$json,
   '.partition.v1.ListTenantRequest': ListTenantRequest$json,
   '.partition.v1.ListTenantResponse': ListTenantResponse$json,
   '.partition.v1.CreateTenantRequest': CreateTenantRequest$json,

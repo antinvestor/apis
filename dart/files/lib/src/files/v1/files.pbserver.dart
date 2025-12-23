@@ -15,45 +15,45 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'files.pb.dart' as $7;
+import 'files.pb.dart' as $1;
 import 'files.pbjson.dart';
 
 export 'files.pb.dart';
 
 abstract class FilesServiceBase extends $pb.GeneratedService {
-  $async.Future<$7.UploadContentResponse> uploadContent($pb.ServerContext ctx, $7.UploadContentRequest request);
-  $async.Future<$7.CreateContentResponse> createContent($pb.ServerContext ctx, $7.CreateContentRequest request);
-  $async.Future<$7.GetContentResponse> getContent($pb.ServerContext ctx, $7.GetContentRequest request);
-  $async.Future<$7.GetContentOverrideNameResponse> getContentOverrideName($pb.ServerContext ctx, $7.GetContentOverrideNameRequest request);
-  $async.Future<$7.GetContentThumbnailResponse> getContentThumbnail($pb.ServerContext ctx, $7.GetContentThumbnailRequest request);
-  $async.Future<$7.GetUrlPreviewResponse> getUrlPreview($pb.ServerContext ctx, $7.GetUrlPreviewRequest request);
-  $async.Future<$7.GetConfigResponse> getConfig($pb.ServerContext ctx, $7.GetConfigRequest request);
-  $async.Future<$7.SearchMediaResponse> searchMedia($pb.ServerContext ctx, $7.SearchMediaRequest request);
+  $async.Future<$1.UploadContentResponse> uploadContent($pb.ServerContext ctx, $1.UploadContentRequest request);
+  $async.Future<$1.CreateContentResponse> createContent($pb.ServerContext ctx, $1.CreateContentRequest request);
+  $async.Future<$1.GetContentResponse> getContent($pb.ServerContext ctx, $1.GetContentRequest request);
+  $async.Future<$1.GetContentOverrideNameResponse> getContentOverrideName($pb.ServerContext ctx, $1.GetContentOverrideNameRequest request);
+  $async.Future<$1.GetContentThumbnailResponse> getContentThumbnail($pb.ServerContext ctx, $1.GetContentThumbnailRequest request);
+  $async.Future<$1.GetUrlPreviewResponse> getUrlPreview($pb.ServerContext ctx, $1.GetUrlPreviewRequest request);
+  $async.Future<$1.GetConfigResponse> getConfig($pb.ServerContext ctx, $1.GetConfigRequest request);
+  $async.Future<$1.SearchMediaResponse> searchMedia($pb.ServerContext ctx, $1.SearchMediaRequest request);
 
   $pb.GeneratedMessage createRequest($core.String methodName) {
     switch (methodName) {
-      case 'UploadContent': return $7.UploadContentRequest();
-      case 'CreateContent': return $7.CreateContentRequest();
-      case 'GetContent': return $7.GetContentRequest();
-      case 'GetContentOverrideName': return $7.GetContentOverrideNameRequest();
-      case 'GetContentThumbnail': return $7.GetContentThumbnailRequest();
-      case 'GetUrlPreview': return $7.GetUrlPreviewRequest();
-      case 'GetConfig': return $7.GetConfigRequest();
-      case 'SearchMedia': return $7.SearchMediaRequest();
+      case 'UploadContent': return $1.UploadContentRequest();
+      case 'CreateContent': return $1.CreateContentRequest();
+      case 'GetContent': return $1.GetContentRequest();
+      case 'GetContentOverrideName': return $1.GetContentOverrideNameRequest();
+      case 'GetContentThumbnail': return $1.GetContentThumbnailRequest();
+      case 'GetUrlPreview': return $1.GetUrlPreviewRequest();
+      case 'GetConfig': return $1.GetConfigRequest();
+      case 'SearchMedia': return $1.SearchMediaRequest();
       default: throw $core.ArgumentError('Unknown method: $methodName');
     }
   }
 
   $async.Future<$pb.GeneratedMessage> handleCall($pb.ServerContext ctx, $core.String methodName, $pb.GeneratedMessage request) {
     switch (methodName) {
-      case 'UploadContent': return this.uploadContent(ctx, request as $7.UploadContentRequest);
-      case 'CreateContent': return this.createContent(ctx, request as $7.CreateContentRequest);
-      case 'GetContent': return this.getContent(ctx, request as $7.GetContentRequest);
-      case 'GetContentOverrideName': return this.getContentOverrideName(ctx, request as $7.GetContentOverrideNameRequest);
-      case 'GetContentThumbnail': return this.getContentThumbnail(ctx, request as $7.GetContentThumbnailRequest);
-      case 'GetUrlPreview': return this.getUrlPreview(ctx, request as $7.GetUrlPreviewRequest);
-      case 'GetConfig': return this.getConfig(ctx, request as $7.GetConfigRequest);
-      case 'SearchMedia': return this.searchMedia(ctx, request as $7.SearchMediaRequest);
+      case 'UploadContent': return this.uploadContent(ctx, request as $1.UploadContentRequest);
+      case 'CreateContent': return this.createContent(ctx, request as $1.CreateContentRequest);
+      case 'GetContent': return this.getContent(ctx, request as $1.GetContentRequest);
+      case 'GetContentOverrideName': return this.getContentOverrideName(ctx, request as $1.GetContentOverrideNameRequest);
+      case 'GetContentThumbnail': return this.getContentThumbnail(ctx, request as $1.GetContentThumbnailRequest);
+      case 'GetUrlPreview': return this.getUrlPreview(ctx, request as $1.GetUrlPreviewRequest);
+      case 'GetConfig': return this.getConfig(ctx, request as $1.GetConfigRequest);
+      case 'SearchMedia': return this.searchMedia(ctx, request as $1.SearchMediaRequest);
       default: throw $core.ArgumentError('Unknown method: $methodName');
     }
   }

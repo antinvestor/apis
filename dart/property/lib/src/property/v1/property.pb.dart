@@ -15,9 +15,9 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../common/v1/common.pbenum.dart' as $7;
-import '../../google/protobuf/struct.pb.dart' as $6;
-import '../../google/protobuf/timestamp.pb.dart' as $2;
+import 'package:antinvestor_api_common/common/v1/common.pbenum.dart' as $2;
+import 'package:antinvestor_api_common/google/protobuf/struct.pb.dart' as $0;
+import 'package:antinvestor_api_common/google/protobuf/timestamp.pb.dart' as $1;
 
 enum Locality_Feature {
   point, 
@@ -34,8 +34,8 @@ class Locality extends $pb.GeneratedMessage {
     $core.String? boundary,
     $core.String? name,
     $core.String? description,
-    $6.Struct? extras,
-    $2.Timestamp? createdAt,
+    $0.Struct? extras,
+    $1.Timestamp? createdAt,
   }) {
     final $result = create();
     if (id != null) {
@@ -81,8 +81,8 @@ class Locality extends $pb.GeneratedMessage {
     ..aOS(4, _omitFieldNames ? '' : 'boundary')
     ..aOS(5, _omitFieldNames ? '' : 'name')
     ..aOS(6, _omitFieldNames ? '' : 'description')
-    ..aOM<$6.Struct>(7, _omitFieldNames ? '' : 'extras', subBuilder: $6.Struct.create)
-    ..aOM<$2.Timestamp>(8, _omitFieldNames ? '' : 'createdAt', subBuilder: $2.Timestamp.create)
+    ..aOM<$0.Struct>(7, _omitFieldNames ? '' : 'extras', subBuilder: $0.Struct.create)
+    ..aOM<$1.Timestamp>(8, _omitFieldNames ? '' : 'createdAt', subBuilder: $1.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -165,26 +165,26 @@ class Locality extends $pb.GeneratedMessage {
   void clearDescription() => clearField(6);
 
   @$pb.TagNumber(7)
-  $6.Struct get extras => $_getN(6);
+  $0.Struct get extras => $_getN(6);
   @$pb.TagNumber(7)
-  set extras($6.Struct v) { setField(7, v); }
+  set extras($0.Struct v) { setField(7, v); }
   @$pb.TagNumber(7)
   $core.bool hasExtras() => $_has(6);
   @$pb.TagNumber(7)
   void clearExtras() => clearField(7);
   @$pb.TagNumber(7)
-  $6.Struct ensureExtras() => $_ensure(6);
+  $0.Struct ensureExtras() => $_ensure(6);
 
   @$pb.TagNumber(8)
-  $2.Timestamp get createdAt => $_getN(7);
+  $1.Timestamp get createdAt => $_getN(7);
   @$pb.TagNumber(8)
-  set createdAt($2.Timestamp v) { setField(8, v); }
+  set createdAt($1.Timestamp v) { setField(8, v); }
   @$pb.TagNumber(8)
   $core.bool hasCreatedAt() => $_has(7);
   @$pb.TagNumber(8)
   void clearCreatedAt() => clearField(8);
   @$pb.TagNumber(8)
-  $2.Timestamp ensureCreatedAt() => $_ensure(7);
+  $1.Timestamp ensureCreatedAt() => $_ensure(7);
 }
 
 class AddLocalityRequest extends $pb.GeneratedMessage {
@@ -297,8 +297,8 @@ class PropertyType extends $pb.GeneratedMessage {
     $core.String? id,
     $core.String? name,
     $core.String? description,
-    $6.Struct? extra,
-    $2.Timestamp? createdAt,
+    $0.Struct? extra,
+    $1.Timestamp? createdAt,
   }) {
     final $result = create();
     if (id != null) {
@@ -326,8 +326,8 @@ class PropertyType extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..aOS(3, _omitFieldNames ? '' : 'description')
-    ..aOM<$6.Struct>(4, _omitFieldNames ? '' : 'extra', subBuilder: $6.Struct.create)
-    ..aOM<$2.Timestamp>(5, _omitFieldNames ? '' : 'createdAt', subBuilder: $2.Timestamp.create)
+    ..aOM<$0.Struct>(4, _omitFieldNames ? '' : 'extra', subBuilder: $0.Struct.create)
+    ..aOM<$1.Timestamp>(5, _omitFieldNames ? '' : 'createdAt', subBuilder: $1.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -380,26 +380,26 @@ class PropertyType extends $pb.GeneratedMessage {
   void clearDescription() => clearField(3);
 
   @$pb.TagNumber(4)
-  $6.Struct get extra => $_getN(3);
+  $0.Struct get extra => $_getN(3);
   @$pb.TagNumber(4)
-  set extra($6.Struct v) { setField(4, v); }
+  set extra($0.Struct v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasExtra() => $_has(3);
   @$pb.TagNumber(4)
   void clearExtra() => clearField(4);
   @$pb.TagNumber(4)
-  $6.Struct ensureExtra() => $_ensure(3);
+  $0.Struct ensureExtra() => $_ensure(3);
 
   @$pb.TagNumber(5)
-  $2.Timestamp get createdAt => $_getN(4);
+  $1.Timestamp get createdAt => $_getN(4);
   @$pb.TagNumber(5)
-  set createdAt($2.Timestamp v) { setField(5, v); }
+  set createdAt($1.Timestamp v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasCreatedAt() => $_has(4);
   @$pb.TagNumber(5)
   void clearCreatedAt() => clearField(5);
   @$pb.TagNumber(5)
-  $2.Timestamp ensureCreatedAt() => $_ensure(4);
+  $1.Timestamp ensureCreatedAt() => $_ensure(4);
 }
 
 /// PropertyState represents a state snapshot in property history.
@@ -407,12 +407,12 @@ class PropertyState extends $pb.GeneratedMessage {
   factory PropertyState({
     $core.String? id,
     $core.String? propertyid,
-    $7.STATE? state,
-    $7.STATUS? status,
+    $2.STATE? state,
+    $2.STATUS? status,
     $core.String? name,
     $core.String? description,
-    $6.Struct? extras,
-    $2.Timestamp? createdAt,
+    $0.Struct? extras,
+    $1.Timestamp? createdAt,
   }) {
     final $result = create();
     if (id != null) {
@@ -448,12 +448,12 @@ class PropertyState extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PropertyState', package: const $pb.PackageName(_omitMessageNames ? '' : 'property.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'propertyid')
-    ..e<$7.STATE>(3, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: $7.STATE.CREATED, valueOf: $7.STATE.valueOf, enumValues: $7.STATE.values)
-    ..e<$7.STATUS>(4, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: $7.STATUS.UNKNOWN, valueOf: $7.STATUS.valueOf, enumValues: $7.STATUS.values)
+    ..e<$2.STATE>(3, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: $2.STATE.CREATED, valueOf: $2.STATE.valueOf, enumValues: $2.STATE.values)
+    ..e<$2.STATUS>(4, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: $2.STATUS.UNKNOWN, valueOf: $2.STATUS.valueOf, enumValues: $2.STATUS.values)
     ..aOS(5, _omitFieldNames ? '' : 'name')
     ..aOS(6, _omitFieldNames ? '' : 'description')
-    ..aOM<$6.Struct>(7, _omitFieldNames ? '' : 'extras', subBuilder: $6.Struct.create)
-    ..aOM<$2.Timestamp>(8, _omitFieldNames ? '' : 'createdAt', subBuilder: $2.Timestamp.create)
+    ..aOM<$0.Struct>(7, _omitFieldNames ? '' : 'extras', subBuilder: $0.Struct.create)
+    ..aOM<$1.Timestamp>(8, _omitFieldNames ? '' : 'createdAt', subBuilder: $1.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -497,18 +497,18 @@ class PropertyState extends $pb.GeneratedMessage {
   void clearPropertyid() => clearField(2);
 
   @$pb.TagNumber(3)
-  $7.STATE get state => $_getN(2);
+  $2.STATE get state => $_getN(2);
   @$pb.TagNumber(3)
-  set state($7.STATE v) { setField(3, v); }
+  set state($2.STATE v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasState() => $_has(2);
   @$pb.TagNumber(3)
   void clearState() => clearField(3);
 
   @$pb.TagNumber(4)
-  $7.STATUS get status => $_getN(3);
+  $2.STATUS get status => $_getN(3);
   @$pb.TagNumber(4)
-  set status($7.STATUS v) { setField(4, v); }
+  set status($2.STATUS v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasStatus() => $_has(3);
   @$pb.TagNumber(4)
@@ -533,26 +533,26 @@ class PropertyState extends $pb.GeneratedMessage {
   void clearDescription() => clearField(6);
 
   @$pb.TagNumber(7)
-  $6.Struct get extras => $_getN(6);
+  $0.Struct get extras => $_getN(6);
   @$pb.TagNumber(7)
-  set extras($6.Struct v) { setField(7, v); }
+  set extras($0.Struct v) { setField(7, v); }
   @$pb.TagNumber(7)
   $core.bool hasExtras() => $_has(6);
   @$pb.TagNumber(7)
   void clearExtras() => clearField(7);
   @$pb.TagNumber(7)
-  $6.Struct ensureExtras() => $_ensure(6);
+  $0.Struct ensureExtras() => $_ensure(6);
 
   @$pb.TagNumber(8)
-  $2.Timestamp get createdAt => $_getN(7);
+  $1.Timestamp get createdAt => $_getN(7);
   @$pb.TagNumber(8)
-  set createdAt($2.Timestamp v) { setField(8, v); }
+  set createdAt($1.Timestamp v) { setField(8, v); }
   @$pb.TagNumber(8)
   $core.bool hasCreatedAt() => $_has(7);
   @$pb.TagNumber(8)
   void clearCreatedAt() => clearField(8);
   @$pb.TagNumber(8)
-  $2.Timestamp ensureCreatedAt() => $_ensure(7);
+  $1.Timestamp ensureCreatedAt() => $_ensure(7);
 }
 
 class AddPropertyTypeRequest extends $pb.GeneratedMessage {
@@ -666,9 +666,9 @@ class Subscription extends $pb.GeneratedMessage {
     $core.String? propertyId,
     $core.String? profileId,
     $core.String? role,
-    $6.Struct? extra,
-    $2.Timestamp? createdAt,
-    $2.Timestamp? expiresAt,
+    $0.Struct? extra,
+    $1.Timestamp? createdAt,
+    $1.Timestamp? expiresAt,
   }) {
     final $result = create();
     if (id != null) {
@@ -703,9 +703,9 @@ class Subscription extends $pb.GeneratedMessage {
     ..aOS(2, _omitFieldNames ? '' : 'propertyId')
     ..aOS(3, _omitFieldNames ? '' : 'profileId')
     ..aOS(4, _omitFieldNames ? '' : 'role')
-    ..aOM<$6.Struct>(5, _omitFieldNames ? '' : 'extra', subBuilder: $6.Struct.create)
-    ..aOM<$2.Timestamp>(6, _omitFieldNames ? '' : 'createdAt', subBuilder: $2.Timestamp.create)
-    ..aOM<$2.Timestamp>(7, _omitFieldNames ? '' : 'expiresAt', subBuilder: $2.Timestamp.create)
+    ..aOM<$0.Struct>(5, _omitFieldNames ? '' : 'extra', subBuilder: $0.Struct.create)
+    ..aOM<$1.Timestamp>(6, _omitFieldNames ? '' : 'createdAt', subBuilder: $1.Timestamp.create)
+    ..aOM<$1.Timestamp>(7, _omitFieldNames ? '' : 'expiresAt', subBuilder: $1.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -767,37 +767,37 @@ class Subscription extends $pb.GeneratedMessage {
   void clearRole() => clearField(4);
 
   @$pb.TagNumber(5)
-  $6.Struct get extra => $_getN(4);
+  $0.Struct get extra => $_getN(4);
   @$pb.TagNumber(5)
-  set extra($6.Struct v) { setField(5, v); }
+  set extra($0.Struct v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasExtra() => $_has(4);
   @$pb.TagNumber(5)
   void clearExtra() => clearField(5);
   @$pb.TagNumber(5)
-  $6.Struct ensureExtra() => $_ensure(4);
+  $0.Struct ensureExtra() => $_ensure(4);
 
   @$pb.TagNumber(6)
-  $2.Timestamp get createdAt => $_getN(5);
+  $1.Timestamp get createdAt => $_getN(5);
   @$pb.TagNumber(6)
-  set createdAt($2.Timestamp v) { setField(6, v); }
+  set createdAt($1.Timestamp v) { setField(6, v); }
   @$pb.TagNumber(6)
   $core.bool hasCreatedAt() => $_has(5);
   @$pb.TagNumber(6)
   void clearCreatedAt() => clearField(6);
   @$pb.TagNumber(6)
-  $2.Timestamp ensureCreatedAt() => $_ensure(5);
+  $1.Timestamp ensureCreatedAt() => $_ensure(5);
 
   @$pb.TagNumber(7)
-  $2.Timestamp get expiresAt => $_getN(6);
+  $1.Timestamp get expiresAt => $_getN(6);
   @$pb.TagNumber(7)
-  set expiresAt($2.Timestamp v) { setField(7, v); }
+  set expiresAt($1.Timestamp v) { setField(7, v); }
   @$pb.TagNumber(7)
   $core.bool hasExpiresAt() => $_has(6);
   @$pb.TagNumber(7)
   void clearExpiresAt() => clearField(7);
   @$pb.TagNumber(7)
-  $2.Timestamp ensureExpiresAt() => $_ensure(6);
+  $1.Timestamp ensureExpiresAt() => $_ensure(6);
 }
 
 class AddSubscriptionRequest extends $pb.GeneratedMessage {
@@ -913,9 +913,9 @@ class Property extends $pb.GeneratedMessage {
     $core.String? description,
     PropertyType? propertyType,
     Locality? locality,
-    $2.Timestamp? startedAt,
-    $2.Timestamp? createdAt,
-    $6.Struct? extra,
+    $1.Timestamp? startedAt,
+    $1.Timestamp? createdAt,
+    $0.Struct? extra,
   }) {
     final $result = create();
     if (id != null) {
@@ -958,9 +958,9 @@ class Property extends $pb.GeneratedMessage {
     ..aOS(4, _omitFieldNames ? '' : 'description')
     ..aOM<PropertyType>(5, _omitFieldNames ? '' : 'propertyType', subBuilder: PropertyType.create)
     ..aOM<Locality>(6, _omitFieldNames ? '' : 'locality', subBuilder: Locality.create)
-    ..aOM<$2.Timestamp>(7, _omitFieldNames ? '' : 'startedAt', subBuilder: $2.Timestamp.create)
-    ..aOM<$2.Timestamp>(8, _omitFieldNames ? '' : 'createdAt', subBuilder: $2.Timestamp.create)
-    ..aOM<$6.Struct>(9, _omitFieldNames ? '' : 'extra', subBuilder: $6.Struct.create)
+    ..aOM<$1.Timestamp>(7, _omitFieldNames ? '' : 'startedAt', subBuilder: $1.Timestamp.create)
+    ..aOM<$1.Timestamp>(8, _omitFieldNames ? '' : 'createdAt', subBuilder: $1.Timestamp.create)
+    ..aOM<$0.Struct>(9, _omitFieldNames ? '' : 'extra', subBuilder: $0.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -1044,37 +1044,37 @@ class Property extends $pb.GeneratedMessage {
   Locality ensureLocality() => $_ensure(5);
 
   @$pb.TagNumber(7)
-  $2.Timestamp get startedAt => $_getN(6);
+  $1.Timestamp get startedAt => $_getN(6);
   @$pb.TagNumber(7)
-  set startedAt($2.Timestamp v) { setField(7, v); }
+  set startedAt($1.Timestamp v) { setField(7, v); }
   @$pb.TagNumber(7)
   $core.bool hasStartedAt() => $_has(6);
   @$pb.TagNumber(7)
   void clearStartedAt() => clearField(7);
   @$pb.TagNumber(7)
-  $2.Timestamp ensureStartedAt() => $_ensure(6);
+  $1.Timestamp ensureStartedAt() => $_ensure(6);
 
   @$pb.TagNumber(8)
-  $2.Timestamp get createdAt => $_getN(7);
+  $1.Timestamp get createdAt => $_getN(7);
   @$pb.TagNumber(8)
-  set createdAt($2.Timestamp v) { setField(8, v); }
+  set createdAt($1.Timestamp v) { setField(8, v); }
   @$pb.TagNumber(8)
   $core.bool hasCreatedAt() => $_has(7);
   @$pb.TagNumber(8)
   void clearCreatedAt() => clearField(8);
   @$pb.TagNumber(8)
-  $2.Timestamp ensureCreatedAt() => $_ensure(7);
+  $1.Timestamp ensureCreatedAt() => $_ensure(7);
 
   @$pb.TagNumber(9)
-  $6.Struct get extra => $_getN(8);
+  $0.Struct get extra => $_getN(8);
   @$pb.TagNumber(9)
-  set extra($6.Struct v) { setField(9, v); }
+  set extra($0.Struct v) { setField(9, v); }
   @$pb.TagNumber(9)
   $core.bool hasExtra() => $_has(8);
   @$pb.TagNumber(9)
   void clearExtra() => clearField(9);
   @$pb.TagNumber(9)
-  $6.Struct ensureExtra() => $_ensure(8);
+  $0.Struct ensureExtra() => $_ensure(8);
 }
 
 class CreatePropertyRequest extends $pb.GeneratedMessage {
@@ -1189,7 +1189,7 @@ class ListPropertyTypeRequest extends $pb.GeneratedMessage {
     $core.String? startDate,
     $core.String? endDate,
     $core.Iterable<$core.String>? properties,
-    $6.Struct? extras,
+    $0.Struct? extras,
   }) {
     final $result = create();
     if (query != null) {
@@ -1226,7 +1226,7 @@ class ListPropertyTypeRequest extends $pb.GeneratedMessage {
     ..aOS(4, _omitFieldNames ? '' : 'startDate')
     ..aOS(5, _omitFieldNames ? '' : 'endDate')
     ..pPS(6, _omitFieldNames ? '' : 'properties')
-    ..aOM<$6.Struct>(7, _omitFieldNames ? '' : 'extras', subBuilder: $6.Struct.create)
+    ..aOM<$0.Struct>(7, _omitFieldNames ? '' : 'extras', subBuilder: $0.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -1300,15 +1300,15 @@ class ListPropertyTypeRequest extends $pb.GeneratedMessage {
   $core.List<$core.String> get properties => $_getList(5);
 
   @$pb.TagNumber(7)
-  $6.Struct get extras => $_getN(6);
+  $0.Struct get extras => $_getN(6);
   @$pb.TagNumber(7)
-  set extras($6.Struct v) { setField(7, v); }
+  set extras($0.Struct v) { setField(7, v); }
   @$pb.TagNumber(7)
   $core.bool hasExtras() => $_has(6);
   @$pb.TagNumber(7)
   void clearExtras() => clearField(7);
   @$pb.TagNumber(7)
-  $6.Struct ensureExtras() => $_ensure(6);
+  $0.Struct ensureExtras() => $_ensure(6);
 }
 
 class ListPropertyTypeResponse extends $pb.GeneratedMessage {
@@ -1363,7 +1363,7 @@ class SearchPropertyRequest extends $pb.GeneratedMessage {
     $core.String? startDate,
     $core.String? endDate,
     $core.Iterable<$core.String>? properties,
-    $6.Struct? extras,
+    $0.Struct? extras,
   }) {
     final $result = create();
     if (query != null) {
@@ -1400,7 +1400,7 @@ class SearchPropertyRequest extends $pb.GeneratedMessage {
     ..aOS(4, _omitFieldNames ? '' : 'startDate')
     ..aOS(5, _omitFieldNames ? '' : 'endDate')
     ..pPS(6, _omitFieldNames ? '' : 'properties')
-    ..aOM<$6.Struct>(7, _omitFieldNames ? '' : 'extras', subBuilder: $6.Struct.create)
+    ..aOM<$0.Struct>(7, _omitFieldNames ? '' : 'extras', subBuilder: $0.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -1474,15 +1474,15 @@ class SearchPropertyRequest extends $pb.GeneratedMessage {
   $core.List<$core.String> get properties => $_getList(5);
 
   @$pb.TagNumber(7)
-  $6.Struct get extras => $_getN(6);
+  $0.Struct get extras => $_getN(6);
   @$pb.TagNumber(7)
-  set extras($6.Struct v) { setField(7, v); }
+  set extras($0.Struct v) { setField(7, v); }
   @$pb.TagNumber(7)
   $core.bool hasExtras() => $_has(6);
   @$pb.TagNumber(7)
   void clearExtras() => clearField(7);
   @$pb.TagNumber(7)
-  $6.Struct ensureExtras() => $_ensure(6);
+  $0.Struct ensureExtras() => $_ensure(6);
 }
 
 class SearchPropertyResponse extends $pb.GeneratedMessage {
@@ -1928,13 +1928,13 @@ class HistoryOfPropertyResponse extends $pb.GeneratedMessage {
 class UpdatePropertyRequest extends $pb.GeneratedMessage {
   factory UpdatePropertyRequest({
     $core.String? id,
-    $7.STATE? state,
-    $7.STATUS? status,
+    $2.STATE? state,
+    $2.STATUS? status,
     $core.String? name,
     $core.String? description,
     $core.String? guardianId,
     $core.String? localityId,
-    $6.Struct? extras,
+    $0.Struct? extras,
   }) {
     final $result = create();
     if (id != null) {
@@ -1969,13 +1969,13 @@ class UpdatePropertyRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdatePropertyRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'property.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'id')
-    ..e<$7.STATE>(2, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: $7.STATE.CREATED, valueOf: $7.STATE.valueOf, enumValues: $7.STATE.values)
-    ..e<$7.STATUS>(3, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: $7.STATUS.UNKNOWN, valueOf: $7.STATUS.valueOf, enumValues: $7.STATUS.values)
+    ..e<$2.STATE>(2, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: $2.STATE.CREATED, valueOf: $2.STATE.valueOf, enumValues: $2.STATE.values)
+    ..e<$2.STATUS>(3, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: $2.STATUS.UNKNOWN, valueOf: $2.STATUS.valueOf, enumValues: $2.STATUS.values)
     ..aOS(4, _omitFieldNames ? '' : 'name')
     ..aOS(5, _omitFieldNames ? '' : 'description')
     ..aOS(6, _omitFieldNames ? '' : 'guardianId')
     ..aOS(7, _omitFieldNames ? '' : 'localityId')
-    ..aOM<$6.Struct>(8, _omitFieldNames ? '' : 'extras', subBuilder: $6.Struct.create)
+    ..aOM<$0.Struct>(8, _omitFieldNames ? '' : 'extras', subBuilder: $0.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -2010,18 +2010,18 @@ class UpdatePropertyRequest extends $pb.GeneratedMessage {
   void clearId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $7.STATE get state => $_getN(1);
+  $2.STATE get state => $_getN(1);
   @$pb.TagNumber(2)
-  set state($7.STATE v) { setField(2, v); }
+  set state($2.STATE v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasState() => $_has(1);
   @$pb.TagNumber(2)
   void clearState() => clearField(2);
 
   @$pb.TagNumber(3)
-  $7.STATUS get status => $_getN(2);
+  $2.STATUS get status => $_getN(2);
   @$pb.TagNumber(3)
-  set status($7.STATUS v) { setField(3, v); }
+  set status($2.STATUS v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasStatus() => $_has(2);
   @$pb.TagNumber(3)
@@ -2064,15 +2064,15 @@ class UpdatePropertyRequest extends $pb.GeneratedMessage {
   void clearLocalityId() => clearField(7);
 
   @$pb.TagNumber(8)
-  $6.Struct get extras => $_getN(7);
+  $0.Struct get extras => $_getN(7);
   @$pb.TagNumber(8)
-  set extras($6.Struct v) { setField(8, v); }
+  set extras($0.Struct v) { setField(8, v); }
   @$pb.TagNumber(8)
   $core.bool hasExtras() => $_has(7);
   @$pb.TagNumber(8)
   void clearExtras() => clearField(8);
   @$pb.TagNumber(8)
-  $6.Struct ensureExtras() => $_ensure(7);
+  $0.Struct ensureExtras() => $_ensure(7);
 }
 
 class UpdatePropertyResponse extends $pb.GeneratedMessage {

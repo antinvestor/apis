@@ -13,9 +13,9 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
-import '../../common/v1/common.pbjson.dart' as $8;
-import '../../google/protobuf/struct.pbjson.dart' as $6;
-import '../../google/type/money.pbjson.dart' as $7;
+import 'package:antinvestor_api_common/common/v1/common.pbjson.dart' as $2;
+import 'package:antinvestor_api_common/google/protobuf/struct.pbjson.dart' as $0;
+import 'package:antinvestor_api_common/google/type/money.pbjson.dart' as $1;
 
 @$core.Deprecated('Use ledgerTypeDescriptor instead')
 const LedgerType$json = {
@@ -438,12 +438,12 @@ const $core.Map<$core.String, $core.dynamic> LedgerServiceBase$json = {
 
 @$core.Deprecated('Use ledgerServiceDescriptor instead')
 const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> LedgerServiceBase$messageJson = {
-  '.common.v1.SearchRequest': $8.SearchRequest$json,
-  '.common.v1.Pagination': $8.Pagination$json,
-  '.google.protobuf.Struct': $6.Struct$json,
-  '.google.protobuf.Struct.FieldsEntry': $6.Struct_FieldsEntry$json,
-  '.google.protobuf.Value': $6.Value$json,
-  '.google.protobuf.ListValue': $6.ListValue$json,
+  '.common.v1.SearchRequest': $2.SearchRequest$json,
+  '.common.v1.Pagination': $2.Pagination$json,
+  '.google.protobuf.Struct': $0.Struct$json,
+  '.google.protobuf.Struct.FieldsEntry': $0.Struct_FieldsEntry$json,
+  '.google.protobuf.Value': $0.Value$json,
+  '.google.protobuf.ListValue': $0.ListValue$json,
   '.ledger.v1.SearchLedgersResponse': SearchLedgersResponse$json,
   '.ledger.v1.Ledger': Ledger$json,
   '.ledger.v1.CreateLedgerRequest': CreateLedgerRequest$json,
@@ -452,7 +452,7 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> LedgerServ
   '.ledger.v1.UpdateLedgerResponse': UpdateLedgerResponse$json,
   '.ledger.v1.SearchAccountsResponse': SearchAccountsResponse$json,
   '.ledger.v1.Account': Account$json,
-  '.google.type.Money': $7.Money$json,
+  '.google.type.Money': $1.Money$json,
   '.ledger.v1.CreateAccountRequest': CreateAccountRequest$json,
   '.ledger.v1.CreateAccountResponse': CreateAccountResponse$json,
   '.ledger.v1.UpdateAccountRequest': UpdateAccountRequest$json,

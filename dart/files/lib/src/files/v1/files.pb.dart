@@ -15,7 +15,7 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../google/protobuf/struct.pb.dart' as $6;
+import 'package:antinvestor_api_common/google/protobuf/struct.pb.dart' as $0;
 import 'files.pbenum.dart';
 
 export 'files.pbenum.dart';
@@ -32,7 +32,7 @@ class MediaMetadata extends $pb.GeneratedMessage {
     $core.String? base64Hash,
     $core.String? ownerId,
     $core.String? parentId,
-    $6.Struct? extra,
+    $0.Struct? extra,
   }) {
     final $result = create();
     if (mediaId != null) {
@@ -81,7 +81,7 @@ class MediaMetadata extends $pb.GeneratedMessage {
     ..aOS(7, _omitFieldNames ? '' : 'base64Hash')
     ..aOS(8, _omitFieldNames ? '' : 'ownerId')
     ..aOS(9, _omitFieldNames ? '' : 'parentId')
-    ..aOM<$6.Struct>(10, _omitFieldNames ? '' : 'extra', subBuilder: $6.Struct.create)
+    ..aOM<$0.Struct>(10, _omitFieldNames ? '' : 'extra', subBuilder: $0.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -188,15 +188,15 @@ class MediaMetadata extends $pb.GeneratedMessage {
   void clearParentId() => clearField(9);
 
   @$pb.TagNumber(10)
-  $6.Struct get extra => $_getN(9);
+  $0.Struct get extra => $_getN(9);
   @$pb.TagNumber(10)
-  set extra($6.Struct v) { setField(10, v); }
+  set extra($0.Struct v) { setField(10, v); }
   @$pb.TagNumber(10)
   $core.bool hasExtra() => $_has(9);
   @$pb.TagNumber(10)
   void clearExtra() => clearField(10);
   @$pb.TagNumber(10)
-  $6.Struct ensureExtra() => $_ensure(9);
+  $0.Struct ensureExtra() => $_ensure(9);
 }
 
 ///  UploadMetadata contains metadata for file upload.
@@ -212,7 +212,7 @@ class UploadMetadata extends $pb.GeneratedMessage {
     $core.String? contentType,
     $core.String? filename,
     $fixnum.Int64? totalSize,
-    $6.Struct? properties,
+    $0.Struct? properties,
     $core.String? serverName,
     $core.String? mediaId,
   }) {
@@ -245,7 +245,7 @@ class UploadMetadata extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'contentType')
     ..aOS(2, _omitFieldNames ? '' : 'filename')
     ..aInt64(3, _omitFieldNames ? '' : 'totalSize')
-    ..aOM<$6.Struct>(4, _omitFieldNames ? '' : 'properties', subBuilder: $6.Struct.create)
+    ..aOM<$0.Struct>(4, _omitFieldNames ? '' : 'properties', subBuilder: $0.Struct.create)
     ..aOS(5, _omitFieldNames ? '' : 'serverName')
     ..aOS(6, _omitFieldNames ? '' : 'mediaId')
     ..hasRequiredFields = false
@@ -300,15 +300,15 @@ class UploadMetadata extends $pb.GeneratedMessage {
   void clearTotalSize() => clearField(3);
 
   @$pb.TagNumber(4)
-  $6.Struct get properties => $_getN(3);
+  $0.Struct get properties => $_getN(3);
   @$pb.TagNumber(4)
-  set properties($6.Struct v) { setField(4, v); }
+  set properties($0.Struct v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasProperties() => $_has(3);
   @$pb.TagNumber(4)
   void clearProperties() => clearField(4);
   @$pb.TagNumber(4)
-  $6.Struct ensureProperties() => $_ensure(3);
+  $0.Struct ensureProperties() => $_ensure(3);
 
   /// Optional: Set these to upload to a pre-created MXC URI (from CreateContent)
   @$pb.TagNumber(5)
@@ -1264,7 +1264,7 @@ class GetUrlPreviewRequest extends $pb.GeneratedMessage {
 /// GetUrlPreviewResponse returns OpenGraph data for the URL.
 class GetUrlPreviewResponse extends $pb.GeneratedMessage {
   factory GetUrlPreviewResponse({
-    $6.Struct? ogData,
+    $0.Struct? ogData,
     $fixnum.Int64? matrixImageSize,
     $core.String? ogImage,
   }) {
@@ -1285,7 +1285,7 @@ class GetUrlPreviewResponse extends $pb.GeneratedMessage {
   factory GetUrlPreviewResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetUrlPreviewResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
-    ..aOM<$6.Struct>(1, _omitFieldNames ? '' : 'ogData', subBuilder: $6.Struct.create)
+    ..aOM<$0.Struct>(1, _omitFieldNames ? '' : 'ogData', subBuilder: $0.Struct.create)
     ..aInt64(2, _omitFieldNames ? '' : 'matrixImageSize')
     ..aOS(3, _omitFieldNames ? '' : 'ogImage')
     ..hasRequiredFields = false
@@ -1313,15 +1313,15 @@ class GetUrlPreviewResponse extends $pb.GeneratedMessage {
   static GetUrlPreviewResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $6.Struct get ogData => $_getN(0);
+  $0.Struct get ogData => $_getN(0);
   @$pb.TagNumber(1)
-  set ogData($6.Struct v) { setField(1, v); }
+  set ogData($0.Struct v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasOgData() => $_has(0);
   @$pb.TagNumber(1)
   void clearOgData() => clearField(1);
   @$pb.TagNumber(1)
-  $6.Struct ensureOgData() => $_ensure(0);
+  $0.Struct ensureOgData() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $fixnum.Int64 get matrixImageSize => $_getI64(1);
@@ -1379,7 +1379,7 @@ class GetConfigRequest extends $pb.GeneratedMessage {
 class GetConfigResponse extends $pb.GeneratedMessage {
   factory GetConfigResponse({
     $fixnum.Int64? maxUploadSize,
-    $6.Struct? extra,
+    $0.Struct? extra,
   }) {
     final $result = create();
     if (maxUploadSize != null) {
@@ -1396,7 +1396,7 @@ class GetConfigResponse extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetConfigResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'maxUploadSize')
-    ..aOM<$6.Struct>(2, _omitFieldNames ? '' : 'extra', subBuilder: $6.Struct.create)
+    ..aOM<$0.Struct>(2, _omitFieldNames ? '' : 'extra', subBuilder: $0.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -1431,15 +1431,15 @@ class GetConfigResponse extends $pb.GeneratedMessage {
   void clearMaxUploadSize() => clearField(1);
 
   @$pb.TagNumber(2)
-  $6.Struct get extra => $_getN(1);
+  $0.Struct get extra => $_getN(1);
   @$pb.TagNumber(2)
-  set extra($6.Struct v) { setField(2, v); }
+  set extra($0.Struct v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasExtra() => $_has(1);
   @$pb.TagNumber(2)
   void clearExtra() => clearField(2);
   @$pb.TagNumber(2)
-  $6.Struct ensureExtra() => $_ensure(1);
+  $0.Struct ensureExtra() => $_ensure(1);
 }
 
 /// SearchMediaRequest searches for media files.

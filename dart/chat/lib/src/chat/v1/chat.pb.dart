@@ -14,9 +14,9 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../common/v1/common.pb.dart' as $7;
-import '../../google/protobuf/struct.pb.dart' as $6;
-import '../../google/protobuf/timestamp.pb.dart' as $2;
+import 'package:antinvestor_api_common/common/v1/common.pb.dart' as $2;
+import 'package:antinvestor_api_common/google/protobuf/struct.pb.dart' as $1;
+import 'package:antinvestor_api_common/google/protobuf/timestamp.pb.dart' as $0;
 import 'chat.pbenum.dart';
 
 export 'chat.pbenum.dart';
@@ -36,7 +36,7 @@ enum ConnectResponse_Payload {
 class ConnectResponse extends $pb.GeneratedMessage {
   factory ConnectResponse({
     $core.String? id,
-    $2.Timestamp? timestamp,
+    $0.Timestamp? timestamp,
     RoomEvent? message,
     PresenceEvent? presenceEvent,
     ReceiptEvent? receiptEvent,
@@ -82,7 +82,7 @@ class ConnectResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ConnectResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
     ..oo(0, [10, 12, 13, 15, 17])
     ..aOS(3, _omitFieldNames ? '' : 'id')
-    ..aOM<$2.Timestamp>(5, _omitFieldNames ? '' : 'timestamp', subBuilder: $2.Timestamp.create)
+    ..aOM<$0.Timestamp>(5, _omitFieldNames ? '' : 'timestamp', subBuilder: $0.Timestamp.create)
     ..aOM<RoomEvent>(10, _omitFieldNames ? '' : 'message', subBuilder: RoomEvent.create)
     ..aOM<PresenceEvent>(12, _omitFieldNames ? '' : 'presenceEvent', subBuilder: PresenceEvent.create)
     ..aOM<ReceiptEvent>(13, _omitFieldNames ? '' : 'receiptEvent', subBuilder: ReceiptEvent.create)
@@ -125,15 +125,15 @@ class ConnectResponse extends $pb.GeneratedMessage {
   void clearId() => clearField(3);
 
   @$pb.TagNumber(5)
-  $2.Timestamp get timestamp => $_getN(1);
+  $0.Timestamp get timestamp => $_getN(1);
   @$pb.TagNumber(5)
-  set timestamp($2.Timestamp v) { setField(5, v); }
+  set timestamp($0.Timestamp v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasTimestamp() => $_has(1);
   @$pb.TagNumber(5)
   void clearTimestamp() => clearField(5);
   @$pb.TagNumber(5)
-  $2.Timestamp ensureTimestamp() => $_ensure(1);
+  $0.Timestamp ensureTimestamp() => $_ensure(1);
 
   @$pb.TagNumber(10)
   RoomEvent get message => $_getN(2);
@@ -198,8 +198,8 @@ class RoomEvent extends $pb.GeneratedMessage {
     $core.String? roomId,
     $core.String? senderId,
     RoomEventType? type,
-    $6.Struct? payload,
-    $2.Timestamp? sentAt,
+    $1.Struct? payload,
+    $0.Timestamp? sentAt,
     $core.bool? edited,
     $core.bool? redacted,
     $core.String? parentId,
@@ -243,8 +243,8 @@ class RoomEvent extends $pb.GeneratedMessage {
     ..aOS(2, _omitFieldNames ? '' : 'roomId')
     ..aOS(3, _omitFieldNames ? '' : 'senderId')
     ..e<RoomEventType>(4, _omitFieldNames ? '' : 'type', $pb.PbFieldType.OE, defaultOrMaker: RoomEventType.ROOM_EVENT_TYPE_UNSPECIFIED, valueOf: RoomEventType.valueOf, enumValues: RoomEventType.values)
-    ..aOM<$6.Struct>(6, _omitFieldNames ? '' : 'payload', subBuilder: $6.Struct.create)
-    ..aOM<$2.Timestamp>(7, _omitFieldNames ? '' : 'sentAt', subBuilder: $2.Timestamp.create)
+    ..aOM<$1.Struct>(6, _omitFieldNames ? '' : 'payload', subBuilder: $1.Struct.create)
+    ..aOM<$0.Timestamp>(7, _omitFieldNames ? '' : 'sentAt', subBuilder: $0.Timestamp.create)
     ..aOB(8, _omitFieldNames ? '' : 'edited')
     ..aOB(9, _omitFieldNames ? '' : 'redacted')
     ..aOS(10, _omitFieldNames ? '' : 'parentId')
@@ -309,26 +309,26 @@ class RoomEvent extends $pb.GeneratedMessage {
   void clearType() => clearField(4);
 
   @$pb.TagNumber(6)
-  $6.Struct get payload => $_getN(4);
+  $1.Struct get payload => $_getN(4);
   @$pb.TagNumber(6)
-  set payload($6.Struct v) { setField(6, v); }
+  set payload($1.Struct v) { setField(6, v); }
   @$pb.TagNumber(6)
   $core.bool hasPayload() => $_has(4);
   @$pb.TagNumber(6)
   void clearPayload() => clearField(6);
   @$pb.TagNumber(6)
-  $6.Struct ensurePayload() => $_ensure(4);
+  $1.Struct ensurePayload() => $_ensure(4);
 
   @$pb.TagNumber(7)
-  $2.Timestamp get sentAt => $_getN(5);
+  $0.Timestamp get sentAt => $_getN(5);
   @$pb.TagNumber(7)
-  set sentAt($2.Timestamp v) { setField(7, v); }
+  set sentAt($0.Timestamp v) { setField(7, v); }
   @$pb.TagNumber(7)
   $core.bool hasSentAt() => $_has(5);
   @$pb.TagNumber(7)
   void clearSentAt() => clearField(7);
   @$pb.TagNumber(7)
-  $2.Timestamp ensureSentAt() => $_ensure(5);
+  $0.Timestamp ensureSentAt() => $_ensure(5);
 
   @$pb.TagNumber(8)
   $core.bool get edited => $_getBF(6);
@@ -364,7 +364,7 @@ class PresenceEvent extends $pb.GeneratedMessage {
     $core.String? profileId,
     PresenceStatus? status,
     $core.String? statusMsg,
-    $2.Timestamp? lastActive,
+    $0.Timestamp? lastActive,
   }) {
     final $result = create();
     if (profileId != null) {
@@ -389,7 +389,7 @@ class PresenceEvent extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'profileId')
     ..e<PresenceStatus>(2, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: PresenceStatus.PRESENCE_STATUS_UNSPECIFIED, valueOf: PresenceStatus.valueOf, enumValues: PresenceStatus.values)
     ..aOS(3, _omitFieldNames ? '' : 'statusMsg')
-    ..aOM<$2.Timestamp>(4, _omitFieldNames ? '' : 'lastActive', subBuilder: $2.Timestamp.create)
+    ..aOM<$0.Timestamp>(4, _omitFieldNames ? '' : 'lastActive', subBuilder: $0.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -442,15 +442,15 @@ class PresenceEvent extends $pb.GeneratedMessage {
   void clearStatusMsg() => clearField(3);
 
   @$pb.TagNumber(4)
-  $2.Timestamp get lastActive => $_getN(3);
+  $0.Timestamp get lastActive => $_getN(3);
   @$pb.TagNumber(4)
-  set lastActive($2.Timestamp v) { setField(4, v); }
+  set lastActive($0.Timestamp v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasLastActive() => $_has(3);
   @$pb.TagNumber(4)
   void clearLastActive() => clearField(4);
   @$pb.TagNumber(4)
-  $2.Timestamp ensureLastActive() => $_ensure(3);
+  $0.Timestamp ensureLastActive() => $_ensure(3);
 }
 
 /// Read receipts
@@ -610,7 +610,7 @@ class TypingEvent extends $pb.GeneratedMessage {
     $core.String? profileId,
     $core.String? roomId,
     $core.bool? typing,
-    $2.Timestamp? since,
+    $0.Timestamp? since,
   }) {
     final $result = create();
     if (profileId != null) {
@@ -635,7 +635,7 @@ class TypingEvent extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'profileId')
     ..aOS(2, _omitFieldNames ? '' : 'roomId')
     ..aOB(3, _omitFieldNames ? '' : 'typing')
-    ..aOM<$2.Timestamp>(5, _omitFieldNames ? '' : 'since', subBuilder: $2.Timestamp.create)
+    ..aOM<$0.Timestamp>(5, _omitFieldNames ? '' : 'since', subBuilder: $0.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -688,15 +688,15 @@ class TypingEvent extends $pb.GeneratedMessage {
   void clearTyping() => clearField(3);
 
   @$pb.TagNumber(5)
-  $2.Timestamp get since => $_getN(3);
+  $0.Timestamp get since => $_getN(3);
   @$pb.TagNumber(5)
-  set since($2.Timestamp v) { setField(5, v); }
+  set since($0.Timestamp v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasSince() => $_has(3);
   @$pb.TagNumber(5)
   void clearSince() => clearField(5);
   @$pb.TagNumber(5)
-  $2.Timestamp ensureSince() => $_ensure(3);
+  $0.Timestamp ensureSince() => $_ensure(3);
 }
 
 enum ConnectRequest_Payload {
@@ -867,9 +867,9 @@ class StreamAck extends $pb.GeneratedMessage {
   factory StreamAck({
     $core.String? roomId,
     $core.String? eventId,
-    $2.Timestamp? ackAt,
-    $6.Struct? metadata,
-    $7.ErrorDetail? error,
+    $0.Timestamp? ackAt,
+    $1.Struct? metadata,
+    $2.ErrorDetail? error,
   }) {
     final $result = create();
     if (roomId != null) {
@@ -896,9 +896,9 @@ class StreamAck extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamAck', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'roomId')
     ..aOS(2, _omitFieldNames ? '' : 'eventId')
-    ..aOM<$2.Timestamp>(3, _omitFieldNames ? '' : 'ackAt', subBuilder: $2.Timestamp.create)
-    ..aOM<$6.Struct>(6, _omitFieldNames ? '' : 'metadata', subBuilder: $6.Struct.create)
-    ..aOM<$7.ErrorDetail>(7, _omitFieldNames ? '' : 'error', subBuilder: $7.ErrorDetail.create)
+    ..aOM<$0.Timestamp>(3, _omitFieldNames ? '' : 'ackAt', subBuilder: $0.Timestamp.create)
+    ..aOM<$1.Struct>(6, _omitFieldNames ? '' : 'metadata', subBuilder: $1.Struct.create)
+    ..aOM<$2.ErrorDetail>(7, _omitFieldNames ? '' : 'error', subBuilder: $2.ErrorDetail.create)
     ..hasRequiredFields = false
   ;
 
@@ -942,37 +942,37 @@ class StreamAck extends $pb.GeneratedMessage {
   void clearEventId() => clearField(2);
 
   @$pb.TagNumber(3)
-  $2.Timestamp get ackAt => $_getN(2);
+  $0.Timestamp get ackAt => $_getN(2);
   @$pb.TagNumber(3)
-  set ackAt($2.Timestamp v) { setField(3, v); }
+  set ackAt($0.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasAckAt() => $_has(2);
   @$pb.TagNumber(3)
   void clearAckAt() => clearField(3);
   @$pb.TagNumber(3)
-  $2.Timestamp ensureAckAt() => $_ensure(2);
+  $0.Timestamp ensureAckAt() => $_ensure(2);
 
   @$pb.TagNumber(6)
-  $6.Struct get metadata => $_getN(3);
+  $1.Struct get metadata => $_getN(3);
   @$pb.TagNumber(6)
-  set metadata($6.Struct v) { setField(6, v); }
+  set metadata($1.Struct v) { setField(6, v); }
   @$pb.TagNumber(6)
   $core.bool hasMetadata() => $_has(3);
   @$pb.TagNumber(6)
   void clearMetadata() => clearField(6);
   @$pb.TagNumber(6)
-  $6.Struct ensureMetadata() => $_ensure(3);
+  $1.Struct ensureMetadata() => $_ensure(3);
 
   @$pb.TagNumber(7)
-  $7.ErrorDetail get error => $_getN(4);
+  $2.ErrorDetail get error => $_getN(4);
   @$pb.TagNumber(7)
-  set error($7.ErrorDetail v) { setField(7, v); }
+  set error($2.ErrorDetail v) { setField(7, v); }
   @$pb.TagNumber(7)
   $core.bool hasError() => $_has(4);
   @$pb.TagNumber(7)
   void clearError() => clearField(7);
   @$pb.TagNumber(7)
-  $7.ErrorDetail ensureError() => $_ensure(4);
+  $2.ErrorDetail ensureError() => $_ensure(4);
 }
 
 enum ClientState_State {
@@ -1391,9 +1391,9 @@ class Room extends $pb.GeneratedMessage {
     $core.String? name,
     $core.String? description,
     $core.bool? isPrivate,
-    $6.Struct? metadata,
-    $2.Timestamp? createdAt,
-    $2.Timestamp? updatedAt,
+    $1.Struct? metadata,
+    $0.Timestamp? createdAt,
+    $0.Timestamp? updatedAt,
     $core.String? creatorId,
   }) {
     final $result = create();
@@ -1432,9 +1432,9 @@ class Room extends $pb.GeneratedMessage {
     ..aOS(3, _omitFieldNames ? '' : 'name')
     ..aOS(4, _omitFieldNames ? '' : 'description')
     ..aOB(5, _omitFieldNames ? '' : 'isPrivate')
-    ..aOM<$6.Struct>(6, _omitFieldNames ? '' : 'metadata', subBuilder: $6.Struct.create)
-    ..aOM<$2.Timestamp>(7, _omitFieldNames ? '' : 'createdAt', subBuilder: $2.Timestamp.create)
-    ..aOM<$2.Timestamp>(8, _omitFieldNames ? '' : 'updatedAt', subBuilder: $2.Timestamp.create)
+    ..aOM<$1.Struct>(6, _omitFieldNames ? '' : 'metadata', subBuilder: $1.Struct.create)
+    ..aOM<$0.Timestamp>(7, _omitFieldNames ? '' : 'createdAt', subBuilder: $0.Timestamp.create)
+    ..aOM<$0.Timestamp>(8, _omitFieldNames ? '' : 'updatedAt', subBuilder: $0.Timestamp.create)
     ..aOS(9, _omitFieldNames ? '' : 'creatorId')
     ..hasRequiredFields = false
   ;
@@ -1497,37 +1497,37 @@ class Room extends $pb.GeneratedMessage {
   void clearIsPrivate() => clearField(5);
 
   @$pb.TagNumber(6)
-  $6.Struct get metadata => $_getN(4);
+  $1.Struct get metadata => $_getN(4);
   @$pb.TagNumber(6)
-  set metadata($6.Struct v) { setField(6, v); }
+  set metadata($1.Struct v) { setField(6, v); }
   @$pb.TagNumber(6)
   $core.bool hasMetadata() => $_has(4);
   @$pb.TagNumber(6)
   void clearMetadata() => clearField(6);
   @$pb.TagNumber(6)
-  $6.Struct ensureMetadata() => $_ensure(4);
+  $1.Struct ensureMetadata() => $_ensure(4);
 
   @$pb.TagNumber(7)
-  $2.Timestamp get createdAt => $_getN(5);
+  $0.Timestamp get createdAt => $_getN(5);
   @$pb.TagNumber(7)
-  set createdAt($2.Timestamp v) { setField(7, v); }
+  set createdAt($0.Timestamp v) { setField(7, v); }
   @$pb.TagNumber(7)
   $core.bool hasCreatedAt() => $_has(5);
   @$pb.TagNumber(7)
   void clearCreatedAt() => clearField(7);
   @$pb.TagNumber(7)
-  $2.Timestamp ensureCreatedAt() => $_ensure(5);
+  $0.Timestamp ensureCreatedAt() => $_ensure(5);
 
   @$pb.TagNumber(8)
-  $2.Timestamp get updatedAt => $_getN(6);
+  $0.Timestamp get updatedAt => $_getN(6);
   @$pb.TagNumber(8)
-  set updatedAt($2.Timestamp v) { setField(8, v); }
+  set updatedAt($0.Timestamp v) { setField(8, v); }
   @$pb.TagNumber(8)
   $core.bool hasUpdatedAt() => $_has(6);
   @$pb.TagNumber(8)
   void clearUpdatedAt() => clearField(8);
   @$pb.TagNumber(8)
-  $2.Timestamp ensureUpdatedAt() => $_ensure(6);
+  $0.Timestamp ensureUpdatedAt() => $_ensure(6);
 
   @$pb.TagNumber(9)
   $core.String get creatorId => $_getSZ(7);
@@ -1546,7 +1546,7 @@ class CreateRoomRequest extends $pb.GeneratedMessage {
     $core.String? description,
     $core.bool? isPrivate,
     $core.Iterable<$core.String>? members,
-    $6.Struct? metadata,
+    $1.Struct? metadata,
   }) {
     final $result = create();
     if (id != null) {
@@ -1579,7 +1579,7 @@ class CreateRoomRequest extends $pb.GeneratedMessage {
     ..aOS(5, _omitFieldNames ? '' : 'description')
     ..aOB(6, _omitFieldNames ? '' : 'isPrivate')
     ..pPS(7, _omitFieldNames ? '' : 'members')
-    ..aOM<$6.Struct>(8, _omitFieldNames ? '' : 'metadata', subBuilder: $6.Struct.create)
+    ..aOM<$1.Struct>(8, _omitFieldNames ? '' : 'metadata', subBuilder: $1.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -1644,21 +1644,21 @@ class CreateRoomRequest extends $pb.GeneratedMessage {
   $core.List<$core.String> get members => $_getList(4);
 
   @$pb.TagNumber(8)
-  $6.Struct get metadata => $_getN(5);
+  $1.Struct get metadata => $_getN(5);
   @$pb.TagNumber(8)
-  set metadata($6.Struct v) { setField(8, v); }
+  set metadata($1.Struct v) { setField(8, v); }
   @$pb.TagNumber(8)
   $core.bool hasMetadata() => $_has(5);
   @$pb.TagNumber(8)
   void clearMetadata() => clearField(8);
   @$pb.TagNumber(8)
-  $6.Struct ensureMetadata() => $_ensure(5);
+  $1.Struct ensureMetadata() => $_ensure(5);
 }
 
 class CreateRoomResponse extends $pb.GeneratedMessage {
   factory CreateRoomResponse({
     Room? room,
-    $7.ErrorDetail? error,
+    $2.ErrorDetail? error,
   }) {
     final $result = create();
     if (room != null) {
@@ -1675,7 +1675,7 @@ class CreateRoomResponse extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateRoomResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
     ..aOM<Room>(1, _omitFieldNames ? '' : 'room', subBuilder: Room.create)
-    ..aOM<$7.ErrorDetail>(2, _omitFieldNames ? '' : 'error', subBuilder: $7.ErrorDetail.create)
+    ..aOM<$2.ErrorDetail>(2, _omitFieldNames ? '' : 'error', subBuilder: $2.ErrorDetail.create)
     ..hasRequiredFields = false
   ;
 
@@ -1712,15 +1712,15 @@ class CreateRoomResponse extends $pb.GeneratedMessage {
   Room ensureRoom() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $7.ErrorDetail get error => $_getN(1);
+  $2.ErrorDetail get error => $_getN(1);
   @$pb.TagNumber(2)
-  set error($7.ErrorDetail v) { setField(2, v); }
+  set error($2.ErrorDetail v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasError() => $_has(1);
   @$pb.TagNumber(2)
   void clearError() => clearField(2);
   @$pb.TagNumber(2)
-  $7.ErrorDetail ensureError() => $_ensure(1);
+  $2.ErrorDetail ensureError() => $_ensure(1);
 }
 
 class SearchRoomsRequest extends $pb.GeneratedMessage {
@@ -1731,7 +1731,7 @@ class SearchRoomsRequest extends $pb.GeneratedMessage {
     $core.String? startDate,
     $core.String? endDate,
     $core.Iterable<$core.String>? properties,
-    $6.Struct? extras,
+    $1.Struct? extras,
   }) {
     final $result = create();
     if (query != null) {
@@ -1768,7 +1768,7 @@ class SearchRoomsRequest extends $pb.GeneratedMessage {
     ..aOS(4, _omitFieldNames ? '' : 'startDate')
     ..aOS(5, _omitFieldNames ? '' : 'endDate')
     ..pPS(6, _omitFieldNames ? '' : 'properties')
-    ..aOM<$6.Struct>(7, _omitFieldNames ? '' : 'extras', subBuilder: $6.Struct.create)
+    ..aOM<$1.Struct>(7, _omitFieldNames ? '' : 'extras', subBuilder: $1.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -1842,15 +1842,15 @@ class SearchRoomsRequest extends $pb.GeneratedMessage {
   $core.List<$core.String> get properties => $_getList(5);
 
   @$pb.TagNumber(7)
-  $6.Struct get extras => $_getN(6);
+  $1.Struct get extras => $_getN(6);
   @$pb.TagNumber(7)
-  set extras($6.Struct v) { setField(7, v); }
+  set extras($1.Struct v) { setField(7, v); }
   @$pb.TagNumber(7)
   $core.bool hasExtras() => $_has(6);
   @$pb.TagNumber(7)
   void clearExtras() => clearField(7);
   @$pb.TagNumber(7)
-  $6.Struct ensureExtras() => $_ensure(6);
+  $1.Struct ensureExtras() => $_ensure(6);
 }
 
 class SearchRoomsResponse extends $pb.GeneratedMessage {
@@ -1902,7 +1902,7 @@ class UpdateRoomRequest extends $pb.GeneratedMessage {
     $core.String? roomId,
     $core.String? name,
     $core.String? topic,
-    $6.Struct? metadata,
+    $1.Struct? metadata,
   }) {
     final $result = create();
     if (roomId != null) {
@@ -1927,7 +1927,7 @@ class UpdateRoomRequest extends $pb.GeneratedMessage {
     ..aOS(2, _omitFieldNames ? '' : 'roomId')
     ..aOS(3, _omitFieldNames ? '' : 'name')
     ..aOS(4, _omitFieldNames ? '' : 'topic')
-    ..aOM<$6.Struct>(5, _omitFieldNames ? '' : 'metadata', subBuilder: $6.Struct.create)
+    ..aOM<$1.Struct>(5, _omitFieldNames ? '' : 'metadata', subBuilder: $1.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -1980,21 +1980,21 @@ class UpdateRoomRequest extends $pb.GeneratedMessage {
   void clearTopic() => clearField(4);
 
   @$pb.TagNumber(5)
-  $6.Struct get metadata => $_getN(3);
+  $1.Struct get metadata => $_getN(3);
   @$pb.TagNumber(5)
-  set metadata($6.Struct v) { setField(5, v); }
+  set metadata($1.Struct v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasMetadata() => $_has(3);
   @$pb.TagNumber(5)
   void clearMetadata() => clearField(5);
   @$pb.TagNumber(5)
-  $6.Struct ensureMetadata() => $_ensure(3);
+  $1.Struct ensureMetadata() => $_ensure(3);
 }
 
 class UpdateRoomResponse extends $pb.GeneratedMessage {
   factory UpdateRoomResponse({
     Room? room,
-    $7.ErrorDetail? error,
+    $2.ErrorDetail? error,
   }) {
     final $result = create();
     if (room != null) {
@@ -2011,7 +2011,7 @@ class UpdateRoomResponse extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateRoomResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
     ..aOM<Room>(1, _omitFieldNames ? '' : 'room', subBuilder: Room.create)
-    ..aOM<$7.ErrorDetail>(2, _omitFieldNames ? '' : 'error', subBuilder: $7.ErrorDetail.create)
+    ..aOM<$2.ErrorDetail>(2, _omitFieldNames ? '' : 'error', subBuilder: $2.ErrorDetail.create)
     ..hasRequiredFields = false
   ;
 
@@ -2048,15 +2048,15 @@ class UpdateRoomResponse extends $pb.GeneratedMessage {
   Room ensureRoom() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $7.ErrorDetail get error => $_getN(1);
+  $2.ErrorDetail get error => $_getN(1);
   @$pb.TagNumber(2)
-  set error($7.ErrorDetail v) { setField(2, v); }
+  set error($2.ErrorDetail v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasError() => $_has(1);
   @$pb.TagNumber(2)
   void clearError() => clearField(2);
   @$pb.TagNumber(2)
-  $7.ErrorDetail ensureError() => $_ensure(1);
+  $2.ErrorDetail ensureError() => $_ensure(1);
 }
 
 class DeleteRoomRequest extends $pb.GeneratedMessage {
@@ -2112,7 +2112,7 @@ class DeleteRoomRequest extends $pb.GeneratedMessage {
 class DeleteRoomResponse extends $pb.GeneratedMessage {
   factory DeleteRoomResponse({
     $core.String? roomId,
-    $7.ErrorDetail? error,
+    $2.ErrorDetail? error,
   }) {
     final $result = create();
     if (roomId != null) {
@@ -2129,7 +2129,7 @@ class DeleteRoomResponse extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DeleteRoomResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'roomId')
-    ..aOM<$7.ErrorDetail>(2, _omitFieldNames ? '' : 'error', subBuilder: $7.ErrorDetail.create)
+    ..aOM<$2.ErrorDetail>(2, _omitFieldNames ? '' : 'error', subBuilder: $2.ErrorDetail.create)
     ..hasRequiredFields = false
   ;
 
@@ -2164,15 +2164,15 @@ class DeleteRoomResponse extends $pb.GeneratedMessage {
   void clearRoomId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $7.ErrorDetail get error => $_getN(1);
+  $2.ErrorDetail get error => $_getN(1);
   @$pb.TagNumber(2)
-  set error($7.ErrorDetail v) { setField(2, v); }
+  set error($2.ErrorDetail v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasError() => $_has(1);
   @$pb.TagNumber(2)
   void clearError() => clearField(2);
   @$pb.TagNumber(2)
-  $7.ErrorDetail ensureError() => $_ensure(1);
+  $2.ErrorDetail ensureError() => $_ensure(1);
 }
 
 class RoomSubscription extends $pb.GeneratedMessage {
@@ -2180,8 +2180,8 @@ class RoomSubscription extends $pb.GeneratedMessage {
     $core.String? roomId,
     $core.String? profileId,
     $core.Iterable<$core.String>? roles,
-    $2.Timestamp? joinedAt,
-    $2.Timestamp? lastActive,
+    $0.Timestamp? joinedAt,
+    $0.Timestamp? lastActive,
   }) {
     final $result = create();
     if (roomId != null) {
@@ -2209,8 +2209,8 @@ class RoomSubscription extends $pb.GeneratedMessage {
     ..aOS(2, _omitFieldNames ? '' : 'roomId')
     ..aOS(3, _omitFieldNames ? '' : 'profileId')
     ..pPS(4, _omitFieldNames ? '' : 'roles')
-    ..aOM<$2.Timestamp>(5, _omitFieldNames ? '' : 'joinedAt', subBuilder: $2.Timestamp.create)
-    ..aOM<$2.Timestamp>(6, _omitFieldNames ? '' : 'lastActive', subBuilder: $2.Timestamp.create)
+    ..aOM<$0.Timestamp>(5, _omitFieldNames ? '' : 'joinedAt', subBuilder: $0.Timestamp.create)
+    ..aOM<$0.Timestamp>(6, _omitFieldNames ? '' : 'lastActive', subBuilder: $0.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -2257,26 +2257,26 @@ class RoomSubscription extends $pb.GeneratedMessage {
   $core.List<$core.String> get roles => $_getList(2);
 
   @$pb.TagNumber(5)
-  $2.Timestamp get joinedAt => $_getN(3);
+  $0.Timestamp get joinedAt => $_getN(3);
   @$pb.TagNumber(5)
-  set joinedAt($2.Timestamp v) { setField(5, v); }
+  set joinedAt($0.Timestamp v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasJoinedAt() => $_has(3);
   @$pb.TagNumber(5)
   void clearJoinedAt() => clearField(5);
   @$pb.TagNumber(5)
-  $2.Timestamp ensureJoinedAt() => $_ensure(3);
+  $0.Timestamp ensureJoinedAt() => $_ensure(3);
 
   @$pb.TagNumber(6)
-  $2.Timestamp get lastActive => $_getN(4);
+  $0.Timestamp get lastActive => $_getN(4);
   @$pb.TagNumber(6)
-  set lastActive($2.Timestamp v) { setField(6, v); }
+  set lastActive($0.Timestamp v) { setField(6, v); }
   @$pb.TagNumber(6)
   $core.bool hasLastActive() => $_has(4);
   @$pb.TagNumber(6)
   void clearLastActive() => clearField(6);
   @$pb.TagNumber(6)
-  $2.Timestamp ensureLastActive() => $_ensure(4);
+  $0.Timestamp ensureLastActive() => $_ensure(4);
 }
 
 class AddRoomSubscriptionsRequest extends $pb.GeneratedMessage {
@@ -2340,7 +2340,7 @@ class AddRoomSubscriptionsRequest extends $pb.GeneratedMessage {
 class AddRoomSubscriptionsResponse extends $pb.GeneratedMessage {
   factory AddRoomSubscriptionsResponse({
     $core.String? roomId,
-    $7.ErrorDetail? error,
+    $2.ErrorDetail? error,
   }) {
     final $result = create();
     if (roomId != null) {
@@ -2357,7 +2357,7 @@ class AddRoomSubscriptionsResponse extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddRoomSubscriptionsResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'roomId')
-    ..aOM<$7.ErrorDetail>(3, _omitFieldNames ? '' : 'error', subBuilder: $7.ErrorDetail.create)
+    ..aOM<$2.ErrorDetail>(3, _omitFieldNames ? '' : 'error', subBuilder: $2.ErrorDetail.create)
     ..hasRequiredFields = false
   ;
 
@@ -2392,15 +2392,15 @@ class AddRoomSubscriptionsResponse extends $pb.GeneratedMessage {
   void clearRoomId() => clearField(1);
 
   @$pb.TagNumber(3)
-  $7.ErrorDetail get error => $_getN(1);
+  $2.ErrorDetail get error => $_getN(1);
   @$pb.TagNumber(3)
-  set error($7.ErrorDetail v) { setField(3, v); }
+  set error($2.ErrorDetail v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasError() => $_has(1);
   @$pb.TagNumber(3)
   void clearError() => clearField(3);
   @$pb.TagNumber(3)
-  $7.ErrorDetail ensureError() => $_ensure(1);
+  $2.ErrorDetail ensureError() => $_ensure(1);
 }
 
 class RemoveRoomSubscriptionsRequest extends $pb.GeneratedMessage {
@@ -2464,7 +2464,7 @@ class RemoveRoomSubscriptionsRequest extends $pb.GeneratedMessage {
 class RemoveRoomSubscriptionsResponse extends $pb.GeneratedMessage {
   factory RemoveRoomSubscriptionsResponse({
     $core.String? roomId,
-    $7.ErrorDetail? error,
+    $2.ErrorDetail? error,
   }) {
     final $result = create();
     if (roomId != null) {
@@ -2481,7 +2481,7 @@ class RemoveRoomSubscriptionsResponse extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RemoveRoomSubscriptionsResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'roomId')
-    ..aOM<$7.ErrorDetail>(3, _omitFieldNames ? '' : 'error', subBuilder: $7.ErrorDetail.create)
+    ..aOM<$2.ErrorDetail>(3, _omitFieldNames ? '' : 'error', subBuilder: $2.ErrorDetail.create)
     ..hasRequiredFields = false
   ;
 
@@ -2516,15 +2516,15 @@ class RemoveRoomSubscriptionsResponse extends $pb.GeneratedMessage {
   void clearRoomId() => clearField(1);
 
   @$pb.TagNumber(3)
-  $7.ErrorDetail get error => $_getN(1);
+  $2.ErrorDetail get error => $_getN(1);
   @$pb.TagNumber(3)
-  set error($7.ErrorDetail v) { setField(3, v); }
+  set error($2.ErrorDetail v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasError() => $_has(1);
   @$pb.TagNumber(3)
   void clearError() => clearField(3);
   @$pb.TagNumber(3)
-  $7.ErrorDetail ensureError() => $_ensure(1);
+  $2.ErrorDetail ensureError() => $_ensure(1);
 }
 
 class UpdateSubscriptionRoleRequest extends $pb.GeneratedMessage {
@@ -2602,7 +2602,7 @@ class UpdateSubscriptionRoleRequest extends $pb.GeneratedMessage {
 class UpdateSubscriptionRoleResponse extends $pb.GeneratedMessage {
   factory UpdateSubscriptionRoleResponse({
     $core.String? roomId,
-    $7.ErrorDetail? error,
+    $2.ErrorDetail? error,
   }) {
     final $result = create();
     if (roomId != null) {
@@ -2619,7 +2619,7 @@ class UpdateSubscriptionRoleResponse extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSubscriptionRoleResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'roomId')
-    ..aOM<$7.ErrorDetail>(3, _omitFieldNames ? '' : 'error', subBuilder: $7.ErrorDetail.create)
+    ..aOM<$2.ErrorDetail>(3, _omitFieldNames ? '' : 'error', subBuilder: $2.ErrorDetail.create)
     ..hasRequiredFields = false
   ;
 
@@ -2654,15 +2654,15 @@ class UpdateSubscriptionRoleResponse extends $pb.GeneratedMessage {
   void clearRoomId() => clearField(1);
 
   @$pb.TagNumber(3)
-  $7.ErrorDetail get error => $_getN(1);
+  $2.ErrorDetail get error => $_getN(1);
   @$pb.TagNumber(3)
-  set error($7.ErrorDetail v) { setField(3, v); }
+  set error($2.ErrorDetail v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasError() => $_has(1);
   @$pb.TagNumber(3)
   void clearError() => clearField(3);
   @$pb.TagNumber(3)
-  $7.ErrorDetail ensureError() => $_ensure(1);
+  $2.ErrorDetail ensureError() => $_ensure(1);
 }
 
 class SearchRoomSubscriptionsRequest extends $pb.GeneratedMessage {
@@ -2889,7 +2889,7 @@ class UpdateClientStateRequest extends $pb.GeneratedMessage {
 
 class UpdateClientStateResponse extends $pb.GeneratedMessage {
   factory UpdateClientStateResponse({
-    $7.ErrorDetail? error,
+    $2.ErrorDetail? error,
   }) {
     final $result = create();
     if (error != null) {
@@ -2902,7 +2902,7 @@ class UpdateClientStateResponse extends $pb.GeneratedMessage {
   factory UpdateClientStateResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateClientStateResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
-    ..aOM<$7.ErrorDetail>(1, _omitFieldNames ? '' : 'error', subBuilder: $7.ErrorDetail.create)
+    ..aOM<$2.ErrorDetail>(1, _omitFieldNames ? '' : 'error', subBuilder: $2.ErrorDetail.create)
     ..hasRequiredFields = false
   ;
 
@@ -2928,15 +2928,15 @@ class UpdateClientStateResponse extends $pb.GeneratedMessage {
   static UpdateClientStateResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $7.ErrorDetail get error => $_getN(0);
+  $2.ErrorDetail get error => $_getN(0);
   @$pb.TagNumber(1)
-  set error($7.ErrorDetail v) { setField(1, v); }
+  set error($2.ErrorDetail v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasError() => $_has(0);
   @$pb.TagNumber(1)
   void clearError() => clearField(1);
   @$pb.TagNumber(1)
-  $7.ErrorDetail ensureError() => $_ensure(0);
+  $2.ErrorDetail ensureError() => $_ensure(0);
 }
 
 /// GetClientState obtains the state of a set of profiles in a room

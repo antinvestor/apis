@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.50.18] - 2025-12-23
+
+### Changed
+
+- Centralize most dependencies to the latest common code package
+
 ## [1.50.15] - 2025-12-23
 
 ### Changed

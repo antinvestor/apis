@@ -14,10 +14,10 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../common/v1/common.pb.dart' as $7;
-import '../../google/protobuf/struct.pb.dart' as $6;
-import '../../google/type/interval.pb.dart' as $8;
-import '../../google/type/money.pb.dart' as $9;
+import 'package:antinvestor_api_common/common/v1/common.pb.dart' as $1;
+import 'package:antinvestor_api_common/google/protobuf/struct.pb.dart' as $0;
+import 'package:antinvestor_api_common/google/type/interval.pb.dart' as $2;
+import 'package:antinvestor_api_common/google/type/money.pb.dart' as $3;
 import 'lostid.pbenum.dart';
 
 export 'lostid.pbenum.dart';
@@ -27,7 +27,7 @@ export 'lostid.pbenum.dart';
 class CollectibleRequest extends $pb.GeneratedMessage {
   factory CollectibleRequest({
     $core.Iterable<$core.String>? fileId,
-    $6.Struct? properties,
+    $0.Struct? properties,
   }) {
     final $result = create();
     if (fileId != null) {
@@ -44,7 +44,7 @@ class CollectibleRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CollectibleRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'lostid.v1'), createEmptyInstance: create)
     ..pPS(1, _omitFieldNames ? '' : 'fileId')
-    ..aOM<$6.Struct>(2, _omitFieldNames ? '' : 'properties', subBuilder: $6.Struct.create)
+    ..aOM<$0.Struct>(2, _omitFieldNames ? '' : 'properties', subBuilder: $0.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -73,15 +73,15 @@ class CollectibleRequest extends $pb.GeneratedMessage {
   $core.List<$core.String> get fileId => $_getList(0);
 
   @$pb.TagNumber(2)
-  $6.Struct get properties => $_getN(1);
+  $0.Struct get properties => $_getN(1);
   @$pb.TagNumber(2)
-  set properties($6.Struct v) { setField(2, v); }
+  set properties($0.Struct v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasProperties() => $_has(1);
   @$pb.TagNumber(2)
   void clearProperties() => clearField(2);
   @$pb.TagNumber(2)
-  $6.Struct ensureProperties() => $_ensure(1);
+  $0.Struct ensureProperties() => $_ensure(1);
 }
 
 /// CollectibleResponse returns the registered collectible item.
@@ -89,7 +89,7 @@ class CollectibleResponse extends $pb.GeneratedMessage {
   factory CollectibleResponse({
     $core.String? id,
     $core.Iterable<$core.String>? fileId,
-    $6.Struct? properties,
+    $0.Struct? properties,
     $core.String? state,
   }) {
     final $result = create();
@@ -114,7 +114,7 @@ class CollectibleResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CollectibleResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'lostid.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..pPS(2, _omitFieldNames ? '' : 'fileId')
-    ..aOM<$6.Struct>(3, _omitFieldNames ? '' : 'properties', subBuilder: $6.Struct.create)
+    ..aOM<$0.Struct>(3, _omitFieldNames ? '' : 'properties', subBuilder: $0.Struct.create)
     ..aOS(4, _omitFieldNames ? '' : 'state')
     ..hasRequiredFields = false
   ;
@@ -153,15 +153,15 @@ class CollectibleResponse extends $pb.GeneratedMessage {
   $core.List<$core.String> get fileId => $_getList(1);
 
   @$pb.TagNumber(3)
-  $6.Struct get properties => $_getN(2);
+  $0.Struct get properties => $_getN(2);
   @$pb.TagNumber(3)
-  set properties($6.Struct v) { setField(3, v); }
+  set properties($0.Struct v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasProperties() => $_has(2);
   @$pb.TagNumber(3)
   void clearProperties() => clearField(3);
   @$pb.TagNumber(3)
-  $6.Struct ensureProperties() => $_ensure(2);
+  $0.Struct ensureProperties() => $_ensure(2);
 
   @$pb.TagNumber(4)
   $core.String get state => $_getSZ(3);
@@ -182,8 +182,8 @@ enum ListCollectibleRequest_Range {
 /// ListCollectibleRequest retrieves collectibles by pagination or time range.
 class ListCollectibleRequest extends $pb.GeneratedMessage {
   factory ListCollectibleRequest({
-    $7.Pagination? pagination,
-    $8.Interval? interval,
+    $1.Pagination? pagination,
+    $2.Interval? interval,
   }) {
     final $result = create();
     if (pagination != null) {
@@ -205,8 +205,8 @@ class ListCollectibleRequest extends $pb.GeneratedMessage {
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListCollectibleRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'lostid.v1'), createEmptyInstance: create)
     ..oo(0, [1, 2])
-    ..aOM<$7.Pagination>(1, _omitFieldNames ? '' : 'pagination', subBuilder: $7.Pagination.create)
-    ..aOM<$8.Interval>(2, _omitFieldNames ? '' : 'interval', subBuilder: $8.Interval.create)
+    ..aOM<$1.Pagination>(1, _omitFieldNames ? '' : 'pagination', subBuilder: $1.Pagination.create)
+    ..aOM<$2.Interval>(2, _omitFieldNames ? '' : 'interval', subBuilder: $2.Interval.create)
     ..hasRequiredFields = false
   ;
 
@@ -235,26 +235,26 @@ class ListCollectibleRequest extends $pb.GeneratedMessage {
   void clearRange() => clearField($_whichOneof(0));
 
   @$pb.TagNumber(1)
-  $7.Pagination get pagination => $_getN(0);
+  $1.Pagination get pagination => $_getN(0);
   @$pb.TagNumber(1)
-  set pagination($7.Pagination v) { setField(1, v); }
+  set pagination($1.Pagination v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasPagination() => $_has(0);
   @$pb.TagNumber(1)
   void clearPagination() => clearField(1);
   @$pb.TagNumber(1)
-  $7.Pagination ensurePagination() => $_ensure(0);
+  $1.Pagination ensurePagination() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $8.Interval get interval => $_getN(1);
+  $2.Interval get interval => $_getN(1);
   @$pb.TagNumber(2)
-  set interval($8.Interval v) { setField(2, v); }
+  set interval($2.Interval v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasInterval() => $_has(1);
   @$pb.TagNumber(2)
   void clearInterval() => clearField(2);
   @$pb.TagNumber(2)
-  $8.Interval ensureInterval() => $_ensure(1);
+  $2.Interval ensureInterval() => $_ensure(1);
 }
 
 /// ListCollectibleResponse returns a list of collectibles.
@@ -307,7 +307,7 @@ class SearchResponse extends $pb.GeneratedMessage {
   factory SearchResponse({
     $core.String? id,
     $core.String? query,
-    $6.Struct? properties,
+    $0.Struct? properties,
     $core.String? state,
   }) {
     final $result = create();
@@ -332,7 +332,7 @@ class SearchResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SearchResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'lostid.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'query')
-    ..aOM<$6.Struct>(3, _omitFieldNames ? '' : 'properties', subBuilder: $6.Struct.create)
+    ..aOM<$0.Struct>(3, _omitFieldNames ? '' : 'properties', subBuilder: $0.Struct.create)
     ..aOS(4, _omitFieldNames ? '' : 'state')
     ..hasRequiredFields = false
   ;
@@ -377,15 +377,15 @@ class SearchResponse extends $pb.GeneratedMessage {
   void clearQuery() => clearField(2);
 
   @$pb.TagNumber(3)
-  $6.Struct get properties => $_getN(2);
+  $0.Struct get properties => $_getN(2);
   @$pb.TagNumber(3)
-  set properties($6.Struct v) { setField(3, v); }
+  set properties($0.Struct v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasProperties() => $_has(2);
   @$pb.TagNumber(3)
   void clearProperties() => clearField(3);
   @$pb.TagNumber(3)
-  $6.Struct ensureProperties() => $_ensure(2);
+  $0.Struct ensureProperties() => $_ensure(2);
 
   @$pb.TagNumber(4)
   $core.String get state => $_getSZ(3);
@@ -406,8 +406,8 @@ enum ListSearchRequest_Range {
 /// ListSearchRequest retrieves searches by pagination or time range.
 class ListSearchRequest extends $pb.GeneratedMessage {
   factory ListSearchRequest({
-    $7.Pagination? pagination,
-    $8.Interval? interval,
+    $1.Pagination? pagination,
+    $2.Interval? interval,
   }) {
     final $result = create();
     if (pagination != null) {
@@ -429,8 +429,8 @@ class ListSearchRequest extends $pb.GeneratedMessage {
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListSearchRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'lostid.v1'), createEmptyInstance: create)
     ..oo(0, [1, 2])
-    ..aOM<$7.Pagination>(1, _omitFieldNames ? '' : 'pagination', subBuilder: $7.Pagination.create)
-    ..aOM<$8.Interval>(2, _omitFieldNames ? '' : 'interval', subBuilder: $8.Interval.create)
+    ..aOM<$1.Pagination>(1, _omitFieldNames ? '' : 'pagination', subBuilder: $1.Pagination.create)
+    ..aOM<$2.Interval>(2, _omitFieldNames ? '' : 'interval', subBuilder: $2.Interval.create)
     ..hasRequiredFields = false
   ;
 
@@ -459,26 +459,26 @@ class ListSearchRequest extends $pb.GeneratedMessage {
   void clearRange() => clearField($_whichOneof(0));
 
   @$pb.TagNumber(1)
-  $7.Pagination get pagination => $_getN(0);
+  $1.Pagination get pagination => $_getN(0);
   @$pb.TagNumber(1)
-  set pagination($7.Pagination v) { setField(1, v); }
+  set pagination($1.Pagination v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasPagination() => $_has(0);
   @$pb.TagNumber(1)
   void clearPagination() => clearField(1);
   @$pb.TagNumber(1)
-  $7.Pagination ensurePagination() => $_ensure(0);
+  $1.Pagination ensurePagination() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $8.Interval get interval => $_getN(1);
+  $2.Interval get interval => $_getN(1);
   @$pb.TagNumber(2)
-  set interval($8.Interval v) { setField(2, v); }
+  set interval($2.Interval v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasInterval() => $_has(1);
   @$pb.TagNumber(2)
   void clearInterval() => clearField(2);
   @$pb.TagNumber(2)
-  $8.Interval ensureInterval() => $_ensure(1);
+  $2.Interval ensureInterval() => $_ensure(1);
 }
 
 /// ListSearchResponse returns a list of searches.
@@ -690,7 +690,7 @@ class TransactionItem extends $pb.GeneratedMessage {
     $core.String? id,
     $core.String? datetime,
     $core.bool? credit,
-    $9.Money? amount,
+    $3.Money? amount,
     $core.String? description,
   }) {
     final $result = create();
@@ -719,7 +719,7 @@ class TransactionItem extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'datetime')
     ..aOB(3, _omitFieldNames ? '' : 'credit')
-    ..aOM<$9.Money>(4, _omitFieldNames ? '' : 'amount', subBuilder: $9.Money.create)
+    ..aOM<$3.Money>(4, _omitFieldNames ? '' : 'amount', subBuilder: $3.Money.create)
     ..aOS(5, _omitFieldNames ? '' : 'description')
     ..hasRequiredFields = false
   ;
@@ -773,15 +773,15 @@ class TransactionItem extends $pb.GeneratedMessage {
   void clearCredit() => clearField(3);
 
   @$pb.TagNumber(4)
-  $9.Money get amount => $_getN(3);
+  $3.Money get amount => $_getN(3);
   @$pb.TagNumber(4)
-  set amount($9.Money v) { setField(4, v); }
+  set amount($3.Money v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasAmount() => $_has(3);
   @$pb.TagNumber(4)
   void clearAmount() => clearField(4);
   @$pb.TagNumber(4)
-  $9.Money ensureAmount() => $_ensure(3);
+  $3.Money ensureAmount() => $_ensure(3);
 
   @$pb.TagNumber(5)
   $core.String get description => $_getSZ(4);
@@ -798,7 +798,7 @@ class ProgressResponse extends $pb.GeneratedMessage {
   factory ProgressResponse({
     $core.String? id,
     ItemType? type,
-    $6.Struct? properties,
+    $0.Struct? properties,
     $core.String? state,
     $core.Iterable<ProgressItem>? items,
     $core.Iterable<TransactionItem>? transactions,
@@ -831,7 +831,7 @@ class ProgressResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ProgressResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'lostid.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..e<ItemType>(2, _omitFieldNames ? '' : 'type', $pb.PbFieldType.OE, defaultOrMaker: ItemType.COLLECTIBLE, valueOf: ItemType.valueOf, enumValues: ItemType.values)
-    ..aOM<$6.Struct>(3, _omitFieldNames ? '' : 'properties', subBuilder: $6.Struct.create)
+    ..aOM<$0.Struct>(3, _omitFieldNames ? '' : 'properties', subBuilder: $0.Struct.create)
     ..aOS(4, _omitFieldNames ? '' : 'state')
     ..pc<ProgressItem>(5, _omitFieldNames ? '' : 'items', $pb.PbFieldType.PM, subBuilder: ProgressItem.create)
     ..pc<TransactionItem>(6, _omitFieldNames ? '' : 'transactions', $pb.PbFieldType.PM, subBuilder: TransactionItem.create)
@@ -878,15 +878,15 @@ class ProgressResponse extends $pb.GeneratedMessage {
   void clearType() => clearField(2);
 
   @$pb.TagNumber(3)
-  $6.Struct get properties => $_getN(2);
+  $0.Struct get properties => $_getN(2);
   @$pb.TagNumber(3)
-  set properties($6.Struct v) { setField(3, v); }
+  set properties($0.Struct v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasProperties() => $_has(2);
   @$pb.TagNumber(3)
   void clearProperties() => clearField(3);
   @$pb.TagNumber(3)
-  $6.Struct ensureProperties() => $_ensure(2);
+  $0.Struct ensureProperties() => $_ensure(2);
 
   @$pb.TagNumber(4)
   $core.String get state => $_getSZ(3);
@@ -913,8 +913,8 @@ enum ListTransactionRequest_Range {
 /// ListTransactionRequest retrieves transactions by pagination or time range.
 class ListTransactionRequest extends $pb.GeneratedMessage {
   factory ListTransactionRequest({
-    $7.Pagination? pagination,
-    $8.Interval? interval,
+    $1.Pagination? pagination,
+    $2.Interval? interval,
   }) {
     final $result = create();
     if (pagination != null) {
@@ -936,8 +936,8 @@ class ListTransactionRequest extends $pb.GeneratedMessage {
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListTransactionRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'lostid.v1'), createEmptyInstance: create)
     ..oo(0, [1, 2])
-    ..aOM<$7.Pagination>(1, _omitFieldNames ? '' : 'pagination', subBuilder: $7.Pagination.create)
-    ..aOM<$8.Interval>(2, _omitFieldNames ? '' : 'interval', subBuilder: $8.Interval.create)
+    ..aOM<$1.Pagination>(1, _omitFieldNames ? '' : 'pagination', subBuilder: $1.Pagination.create)
+    ..aOM<$2.Interval>(2, _omitFieldNames ? '' : 'interval', subBuilder: $2.Interval.create)
     ..hasRequiredFields = false
   ;
 
@@ -966,26 +966,26 @@ class ListTransactionRequest extends $pb.GeneratedMessage {
   void clearRange() => clearField($_whichOneof(0));
 
   @$pb.TagNumber(1)
-  $7.Pagination get pagination => $_getN(0);
+  $1.Pagination get pagination => $_getN(0);
   @$pb.TagNumber(1)
-  set pagination($7.Pagination v) { setField(1, v); }
+  set pagination($1.Pagination v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasPagination() => $_has(0);
   @$pb.TagNumber(1)
   void clearPagination() => clearField(1);
   @$pb.TagNumber(1)
-  $7.Pagination ensurePagination() => $_ensure(0);
+  $1.Pagination ensurePagination() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $8.Interval get interval => $_getN(1);
+  $2.Interval get interval => $_getN(1);
   @$pb.TagNumber(2)
-  set interval($8.Interval v) { setField(2, v); }
+  set interval($2.Interval v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasInterval() => $_has(1);
   @$pb.TagNumber(2)
   void clearInterval() => clearField(2);
   @$pb.TagNumber(2)
-  $8.Interval ensureInterval() => $_ensure(1);
+  $2.Interval ensureInterval() => $_ensure(1);
 }
 
 /// ListTransactionResponse returns a list of transactions.
@@ -1043,7 +1043,7 @@ class LostIdServiceApi {
   $async.Future<ListCollectibleResponse> listCollectible($pb.ClientContext? ctx, ListCollectibleRequest request) =>
     _client.invoke<ListCollectibleResponse>(ctx, 'LostIdService', 'ListCollectible', request, ListCollectibleResponse())
   ;
-  $async.Future<SearchResponse> search($pb.ClientContext? ctx, $7.SearchRequest request) =>
+  $async.Future<SearchResponse> search($pb.ClientContext? ctx, $1.SearchRequest request) =>
     _client.invoke<SearchResponse>(ctx, 'LostIdService', 'Search', request, SearchResponse())
   ;
   $async.Future<ListSearchResponse> listSearch($pb.ClientContext? ctx, ListSearchRequest request) =>

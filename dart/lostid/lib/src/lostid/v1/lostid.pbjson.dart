@@ -13,11 +13,11 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
-import '../../common/v1/common.pbjson.dart' as $7;
-import '../../google/protobuf/struct.pbjson.dart' as $6;
-import '../../google/protobuf/timestamp.pbjson.dart' as $2;
-import '../../google/type/interval.pbjson.dart' as $8;
-import '../../google/type/money.pbjson.dart' as $9;
+import 'package:antinvestor_api_common/common/v1/common.pbjson.dart' as $1;
+import 'package:antinvestor_api_common/google/protobuf/struct.pbjson.dart' as $0;
+import 'package:antinvestor_api_common/google/protobuf/timestamp.pbjson.dart' as $4;
+import 'package:antinvestor_api_common/google/type/interval.pbjson.dart' as $2;
+import 'package:antinvestor_api_common/google/type/money.pbjson.dart' as $3;
 
 @$core.Deprecated('Use itemTypeDescriptor instead')
 const ItemType$json = {
@@ -285,17 +285,17 @@ const $core.Map<$core.String, $core.dynamic> LostIdServiceBase$json = {
 @$core.Deprecated('Use lostIdServiceDescriptor instead')
 const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> LostIdServiceBase$messageJson = {
   '.lostid.v1.CollectibleRequest': CollectibleRequest$json,
-  '.google.protobuf.Struct': $6.Struct$json,
-  '.google.protobuf.Struct.FieldsEntry': $6.Struct_FieldsEntry$json,
-  '.google.protobuf.Value': $6.Value$json,
-  '.google.protobuf.ListValue': $6.ListValue$json,
+  '.google.protobuf.Struct': $0.Struct$json,
+  '.google.protobuf.Struct.FieldsEntry': $0.Struct_FieldsEntry$json,
+  '.google.protobuf.Value': $0.Value$json,
+  '.google.protobuf.ListValue': $0.ListValue$json,
   '.lostid.v1.CollectibleResponse': CollectibleResponse$json,
   '.lostid.v1.ListCollectibleRequest': ListCollectibleRequest$json,
-  '.common.v1.Pagination': $7.Pagination$json,
-  '.google.type.Interval': $8.Interval$json,
-  '.google.protobuf.Timestamp': $2.Timestamp$json,
+  '.common.v1.Pagination': $1.Pagination$json,
+  '.google.type.Interval': $2.Interval$json,
+  '.google.protobuf.Timestamp': $4.Timestamp$json,
   '.lostid.v1.ListCollectibleResponse': ListCollectibleResponse$json,
-  '.common.v1.SearchRequest': $7.SearchRequest$json,
+  '.common.v1.SearchRequest': $1.SearchRequest$json,
   '.lostid.v1.SearchResponse': SearchResponse$json,
   '.lostid.v1.ListSearchRequest': ListSearchRequest$json,
   '.lostid.v1.ListSearchResponse': ListSearchResponse$json,
@@ -303,7 +303,7 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> LostIdServ
   '.lostid.v1.ProgressResponse': ProgressResponse$json,
   '.lostid.v1.ProgressItem': ProgressItem$json,
   '.lostid.v1.TransactionItem': TransactionItem$json,
-  '.google.type.Money': $9.Money$json,
+  '.google.type.Money': $3.Money$json,
   '.lostid.v1.ListTransactionRequest': ListTransactionRequest$json,
   '.lostid.v1.ListTransactionResponse': ListTransactionResponse$json,
 };

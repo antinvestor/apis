@@ -13,7 +13,7 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
-import '../../google/protobuf/struct.pbjson.dart' as $6;
+import 'package:antinvestor_api_common/google/protobuf/struct.pbjson.dart' as $0;
 
 @$core.Deprecated('Use contactTypeDescriptor instead')
 const ContactType$json = {
@@ -794,10 +794,10 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> ProfileSer
   '.profile.v1.GetByIdRequest': GetByIdRequest$json,
   '.profile.v1.GetByIdResponse': GetByIdResponse$json,
   '.profile.v1.ProfileObject': ProfileObject$json,
-  '.google.protobuf.Struct': $6.Struct$json,
-  '.google.protobuf.Struct.FieldsEntry': $6.Struct_FieldsEntry$json,
-  '.google.protobuf.Value': $6.Value$json,
-  '.google.protobuf.ListValue': $6.ListValue$json,
+  '.google.protobuf.Struct': $0.Struct$json,
+  '.google.protobuf.Struct.FieldsEntry': $0.Struct_FieldsEntry$json,
+  '.google.protobuf.Value': $0.Value$json,
+  '.google.protobuf.ListValue': $0.ListValue$json,
   '.profile.v1.ContactObject': ContactObject$json,
   '.profile.v1.AddressObject': AddressObject$json,
   '.profile.v1.GetByContactRequest': GetByContactRequest$json,

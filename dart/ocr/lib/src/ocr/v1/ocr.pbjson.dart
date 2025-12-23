@@ -13,8 +13,8 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
-import '../../common/v1/common.pbjson.dart' as $7;
-import '../../google/protobuf/struct.pbjson.dart' as $6;
+import 'package:antinvestor_api_common/common/v1/common.pbjson.dart' as $1;
+import 'package:antinvestor_api_common/google/protobuf/struct.pbjson.dart' as $0;
 
 @$core.Deprecated('Use oCRFileDescriptor instead')
 const OCRFile$json = {
@@ -99,13 +99,13 @@ const $core.Map<$core.String, $core.dynamic> OCRServiceBase$json = {
 @$core.Deprecated('Use oCRServiceDescriptor instead')
 const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> OCRServiceBase$messageJson = {
   '.ocr.v1.RecognizeRequest': RecognizeRequest$json,
-  '.google.protobuf.Struct': $6.Struct$json,
-  '.google.protobuf.Struct.FieldsEntry': $6.Struct_FieldsEntry$json,
-  '.google.protobuf.Value': $6.Value$json,
-  '.google.protobuf.ListValue': $6.ListValue$json,
+  '.google.protobuf.Struct': $0.Struct$json,
+  '.google.protobuf.Struct.FieldsEntry': $0.Struct_FieldsEntry$json,
+  '.google.protobuf.Value': $0.Value$json,
+  '.google.protobuf.ListValue': $0.ListValue$json,
   '.ocr.v1.RecognizeResponse': RecognizeResponse$json,
   '.ocr.v1.OCRFile': OCRFile$json,
-  '.common.v1.StatusRequest': $7.StatusRequest$json,
+  '.common.v1.StatusRequest': $1.StatusRequest$json,
   '.ocr.v1.StatusResponse': StatusResponse$json,
 };
 

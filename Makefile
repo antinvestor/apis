@@ -46,6 +46,16 @@ endef
 
 define buf_generate
 cd proto/${1} && PATH=$(BIN):$$PATH $(BIN)/buf generate
+# Fix Dart imports to use package paths for all packages (common, buf, gnostic, google)
+if [ -d "dart/${1}/lib/src" ]; then \
+	find dart/${1}/lib/src -name "*.dart" -type f -exec sed -i \
+		-e "s|import '\.\./\.\./common/|import 'package:antinvestor_api_common/common/|g" \
+		-e "s|import '\.\./\.\./google/|import 'package:antinvestor_api_common/google/|g" \
+		-e "s|import '\.\./\.\./buf/|import 'package:antinvestor_api_common/buf/|g" \
+		-e "s|import '\.\./\.\./gnostic/|import 'package:antinvestor_api_common/gnostic/|g" \
+		-e "s|import '\.\./\.\./\.\./google/protobuf/|import 'package:antinvestor_api_common/google/protobuf/|g" \
+		{} \; ; \
+fi
 endef
 
 define dart_format

@@ -13,9 +13,9 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
-import '../../common/v1/common.pbjson.dart' as $7;
-import '../../google/protobuf/struct.pbjson.dart' as $6;
-import '../../google/protobuf/timestamp.pbjson.dart' as $2;
+import 'package:antinvestor_api_common/common/v1/common.pbjson.dart' as $2;
+import 'package:antinvestor_api_common/google/protobuf/struct.pbjson.dart' as $1;
+import 'package:antinvestor_api_common/google/protobuf/timestamp.pbjson.dart' as $0;
 
 @$core.Deprecated('Use roomEventTypeDescriptor instead')
 const RoomEventType$json = {
@@ -715,13 +715,13 @@ const $core.Map<$core.String, $core.dynamic> GatewayServiceBase$json = {
 const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> GatewayServiceBase$messageJson = {
   '.chat.v1.ConnectRequest': ConnectRequest$json,
   '.chat.v1.StreamAck': StreamAck$json,
-  '.google.protobuf.Timestamp': $2.Timestamp$json,
-  '.google.protobuf.Struct': $6.Struct$json,
-  '.google.protobuf.Struct.FieldsEntry': $6.Struct_FieldsEntry$json,
-  '.google.protobuf.Value': $6.Value$json,
-  '.google.protobuf.ListValue': $6.ListValue$json,
-  '.common.v1.ErrorDetail': $7.ErrorDetail$json,
-  '.common.v1.ErrorDetail.MetaEntry': $7.ErrorDetail_MetaEntry$json,
+  '.google.protobuf.Timestamp': $0.Timestamp$json,
+  '.google.protobuf.Struct': $1.Struct$json,
+  '.google.protobuf.Struct.FieldsEntry': $1.Struct_FieldsEntry$json,
+  '.google.protobuf.Value': $1.Value$json,
+  '.google.protobuf.ListValue': $1.ListValue$json,
+  '.common.v1.ErrorDetail': $2.ErrorDetail$json,
+  '.common.v1.ErrorDetail.MetaEntry': $2.ErrorDetail_MetaEntry$json,
   '.chat.v1.ClientState': ClientState$json,
   '.chat.v1.RoomEvent': RoomEvent$json,
   '.chat.v1.ReceiptEvent': ReceiptEvent$json,
@@ -787,15 +787,15 @@ const $core.Map<$core.String, $core.dynamic> ChatServiceBase$json = {
 const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> ChatServiceBase$messageJson = {
   '.chat.v1.SendEventRequest': SendEventRequest$json,
   '.chat.v1.RoomEvent': RoomEvent$json,
-  '.google.protobuf.Struct': $6.Struct$json,
-  '.google.protobuf.Struct.FieldsEntry': $6.Struct_FieldsEntry$json,
-  '.google.protobuf.Value': $6.Value$json,
-  '.google.protobuf.ListValue': $6.ListValue$json,
-  '.google.protobuf.Timestamp': $2.Timestamp$json,
+  '.google.protobuf.Struct': $1.Struct$json,
+  '.google.protobuf.Struct.FieldsEntry': $1.Struct_FieldsEntry$json,
+  '.google.protobuf.Value': $1.Value$json,
+  '.google.protobuf.ListValue': $1.ListValue$json,
+  '.google.protobuf.Timestamp': $0.Timestamp$json,
   '.chat.v1.SendEventResponse': SendEventResponse$json,
   '.chat.v1.StreamAck': StreamAck$json,
-  '.common.v1.ErrorDetail': $7.ErrorDetail$json,
-  '.common.v1.ErrorDetail.MetaEntry': $7.ErrorDetail_MetaEntry$json,
+  '.common.v1.ErrorDetail': $2.ErrorDetail$json,
+  '.common.v1.ErrorDetail.MetaEntry': $2.ErrorDetail_MetaEntry$json,
   '.chat.v1.GetHistoryRequest': GetHistoryRequest$json,
   '.chat.v1.GetHistoryResponse': GetHistoryResponse$json,
   '.chat.v1.ConnectResponse': ConnectResponse$json,

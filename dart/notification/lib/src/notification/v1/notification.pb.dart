@@ -15,8 +15,8 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../common/v1/common.pb.dart' as $7;
-import '../../google/protobuf/struct.pb.dart' as $6;
+import 'package:antinvestor_api_common/common/v1/common.pb.dart' as $1;
+import 'package:antinvestor_api_common/google/protobuf/struct.pb.dart' as $0;
 import 'notification.pbenum.dart';
 
 export 'notification.pbenum.dart';
@@ -27,7 +27,7 @@ class Language extends $pb.GeneratedMessage {
     $core.String? id,
     $core.String? code,
     $core.String? name,
-    $6.Struct? extra,
+    $0.Struct? extra,
   }) {
     final $result = create();
     if (id != null) {
@@ -52,7 +52,7 @@ class Language extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'code')
     ..aOS(3, _omitFieldNames ? '' : 'name')
-    ..aOM<$6.Struct>(4, _omitFieldNames ? '' : 'extra', subBuilder: $6.Struct.create)
+    ..aOM<$0.Struct>(4, _omitFieldNames ? '' : 'extra', subBuilder: $0.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -105,15 +105,15 @@ class Language extends $pb.GeneratedMessage {
   void clearName() => clearField(3);
 
   @$pb.TagNumber(4)
-  $6.Struct get extra => $_getN(3);
+  $0.Struct get extra => $_getN(3);
   @$pb.TagNumber(4)
-  set extra($6.Struct v) { setField(4, v); }
+  set extra($0.Struct v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasExtra() => $_has(3);
   @$pb.TagNumber(4)
   void clearExtra() => clearField(4);
   @$pb.TagNumber(4)
-  $6.Struct ensureExtra() => $_ensure(3);
+  $0.Struct ensureExtra() => $_ensure(3);
 }
 
 /// TemplateData represents localized content for a notification template.
@@ -219,7 +219,7 @@ class Template extends $pb.GeneratedMessage {
     $core.String? id,
     $core.String? name,
     $core.Iterable<TemplateData>? data,
-    $6.Struct? extra,
+    $0.Struct? extra,
   }) {
     final $result = create();
     if (id != null) {
@@ -244,7 +244,7 @@ class Template extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..pc<TemplateData>(4, _omitFieldNames ? '' : 'data', $pb.PbFieldType.PM, subBuilder: TemplateData.create)
-    ..aOM<$6.Struct>(5, _omitFieldNames ? '' : 'extra', subBuilder: $6.Struct.create)
+    ..aOM<$0.Struct>(5, _omitFieldNames ? '' : 'extra', subBuilder: $0.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -291,15 +291,15 @@ class Template extends $pb.GeneratedMessage {
   $core.List<TemplateData> get data => $_getList(2);
 
   @$pb.TagNumber(5)
-  $6.Struct get extra => $_getN(3);
+  $0.Struct get extra => $_getN(3);
   @$pb.TagNumber(5)
-  set extra($6.Struct v) { setField(5, v); }
+  set extra($0.Struct v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasExtra() => $_has(3);
   @$pb.TagNumber(5)
   void clearExtra() => clearField(5);
   @$pb.TagNumber(5)
-  $6.Struct ensureExtra() => $_ensure(3);
+  $0.Struct ensureExtra() => $_ensure(3);
 }
 
 /// Notification represents a notification to be sent or received.
@@ -308,18 +308,18 @@ class Notification extends $pb.GeneratedMessage {
   factory Notification({
     $core.String? id,
     $core.String? parentId,
-    $7.ContactLink? source,
-    $7.ContactLink? recipient,
+    $1.ContactLink? source,
+    $1.ContactLink? recipient,
     $core.String? type,
     $core.String? template,
-    $6.Struct? payload,
+    $0.Struct? payload,
     $core.String? data,
     $core.String? language,
     $core.bool? outBound,
     $core.bool? autoRelease,
     $core.String? routeId,
-    $7.StatusResponse? status,
-    $6.Struct? extras,
+    $1.StatusResponse? status,
+    $0.Struct? extras,
     PRIORITY? priority,
   }) {
     final $result = create();
@@ -377,18 +377,18 @@ class Notification extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Notification', package: const $pb.PackageName(_omitMessageNames ? '' : 'notification.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'parentId')
-    ..aOM<$7.ContactLink>(3, _omitFieldNames ? '' : 'source', subBuilder: $7.ContactLink.create)
-    ..aOM<$7.ContactLink>(4, _omitFieldNames ? '' : 'recipient', subBuilder: $7.ContactLink.create)
+    ..aOM<$1.ContactLink>(3, _omitFieldNames ? '' : 'source', subBuilder: $1.ContactLink.create)
+    ..aOM<$1.ContactLink>(4, _omitFieldNames ? '' : 'recipient', subBuilder: $1.ContactLink.create)
     ..aOS(6, _omitFieldNames ? '' : 'type')
     ..aOS(7, _omitFieldNames ? '' : 'template')
-    ..aOM<$6.Struct>(8, _omitFieldNames ? '' : 'payload', subBuilder: $6.Struct.create)
+    ..aOM<$0.Struct>(8, _omitFieldNames ? '' : 'payload', subBuilder: $0.Struct.create)
     ..aOS(9, _omitFieldNames ? '' : 'data')
     ..aOS(10, _omitFieldNames ? '' : 'language')
     ..aOB(11, _omitFieldNames ? '' : 'outBound')
     ..aOB(12, _omitFieldNames ? '' : 'autoRelease')
     ..aOS(13, _omitFieldNames ? '' : 'routeId')
-    ..aOM<$7.StatusResponse>(14, _omitFieldNames ? '' : 'status', subBuilder: $7.StatusResponse.create)
-    ..aOM<$6.Struct>(15, _omitFieldNames ? '' : 'extras', subBuilder: $6.Struct.create)
+    ..aOM<$1.StatusResponse>(14, _omitFieldNames ? '' : 'status', subBuilder: $1.StatusResponse.create)
+    ..aOM<$0.Struct>(15, _omitFieldNames ? '' : 'extras', subBuilder: $0.Struct.create)
     ..e<PRIORITY>(16, _omitFieldNames ? '' : 'priority', $pb.PbFieldType.OE, defaultOrMaker: PRIORITY.HIGH, valueOf: PRIORITY.valueOf, enumValues: PRIORITY.values)
     ..hasRequiredFields = false
   ;
@@ -433,26 +433,26 @@ class Notification extends $pb.GeneratedMessage {
   void clearParentId() => clearField(2);
 
   @$pb.TagNumber(3)
-  $7.ContactLink get source => $_getN(2);
+  $1.ContactLink get source => $_getN(2);
   @$pb.TagNumber(3)
-  set source($7.ContactLink v) { setField(3, v); }
+  set source($1.ContactLink v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasSource() => $_has(2);
   @$pb.TagNumber(3)
   void clearSource() => clearField(3);
   @$pb.TagNumber(3)
-  $7.ContactLink ensureSource() => $_ensure(2);
+  $1.ContactLink ensureSource() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  $7.ContactLink get recipient => $_getN(3);
+  $1.ContactLink get recipient => $_getN(3);
   @$pb.TagNumber(4)
-  set recipient($7.ContactLink v) { setField(4, v); }
+  set recipient($1.ContactLink v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasRecipient() => $_has(3);
   @$pb.TagNumber(4)
   void clearRecipient() => clearField(4);
   @$pb.TagNumber(4)
-  $7.ContactLink ensureRecipient() => $_ensure(3);
+  $1.ContactLink ensureRecipient() => $_ensure(3);
 
   @$pb.TagNumber(6)
   $core.String get type => $_getSZ(4);
@@ -473,15 +473,15 @@ class Notification extends $pb.GeneratedMessage {
   void clearTemplate() => clearField(7);
 
   @$pb.TagNumber(8)
-  $6.Struct get payload => $_getN(6);
+  $0.Struct get payload => $_getN(6);
   @$pb.TagNumber(8)
-  set payload($6.Struct v) { setField(8, v); }
+  set payload($0.Struct v) { setField(8, v); }
   @$pb.TagNumber(8)
   $core.bool hasPayload() => $_has(6);
   @$pb.TagNumber(8)
   void clearPayload() => clearField(8);
   @$pb.TagNumber(8)
-  $6.Struct ensurePayload() => $_ensure(6);
+  $0.Struct ensurePayload() => $_ensure(6);
 
   @$pb.TagNumber(9)
   $core.String get data => $_getSZ(7);
@@ -529,26 +529,26 @@ class Notification extends $pb.GeneratedMessage {
   void clearRouteId() => clearField(13);
 
   @$pb.TagNumber(14)
-  $7.StatusResponse get status => $_getN(12);
+  $1.StatusResponse get status => $_getN(12);
   @$pb.TagNumber(14)
-  set status($7.StatusResponse v) { setField(14, v); }
+  set status($1.StatusResponse v) { setField(14, v); }
   @$pb.TagNumber(14)
   $core.bool hasStatus() => $_has(12);
   @$pb.TagNumber(14)
   void clearStatus() => clearField(14);
   @$pb.TagNumber(14)
-  $7.StatusResponse ensureStatus() => $_ensure(12);
+  $1.StatusResponse ensureStatus() => $_ensure(12);
 
   @$pb.TagNumber(15)
-  $6.Struct get extras => $_getN(13);
+  $0.Struct get extras => $_getN(13);
   @$pb.TagNumber(15)
-  set extras($6.Struct v) { setField(15, v); }
+  set extras($0.Struct v) { setField(15, v); }
   @$pb.TagNumber(15)
   $core.bool hasExtras() => $_has(13);
   @$pb.TagNumber(15)
   void clearExtras() => clearField(15);
   @$pb.TagNumber(15)
-  $6.Struct ensureExtras() => $_ensure(13);
+  $0.Struct ensureExtras() => $_ensure(13);
 
   @$pb.TagNumber(16)
   PRIORITY get priority => $_getN(14);
@@ -653,7 +653,7 @@ class SendRequest extends $pb.GeneratedMessage {
 /// SendResponse returns the status of queued notifications.
 class SendResponse extends $pb.GeneratedMessage {
   factory SendResponse({
-    $core.Iterable<$7.StatusResponse>? data,
+    $core.Iterable<$1.StatusResponse>? data,
   }) {
     final $result = create();
     if (data != null) {
@@ -666,7 +666,7 @@ class SendResponse extends $pb.GeneratedMessage {
   factory SendResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SendResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'notification.v1'), createEmptyInstance: create)
-    ..pc<$7.StatusResponse>(1, _omitFieldNames ? '' : 'data', $pb.PbFieldType.PM, subBuilder: $7.StatusResponse.create)
+    ..pc<$1.StatusResponse>(1, _omitFieldNames ? '' : 'data', $pb.PbFieldType.PM, subBuilder: $1.StatusResponse.create)
     ..hasRequiredFields = false
   ;
 
@@ -692,7 +692,7 @@ class SendResponse extends $pb.GeneratedMessage {
   static SendResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$7.StatusResponse> get data => $_getList(0);
+  $core.List<$1.StatusResponse> get data => $_getList(0);
 }
 
 /// ReleaseRequest releases queued notifications for immediate delivery.
@@ -758,7 +758,7 @@ class ReleaseRequest extends $pb.GeneratedMessage {
 /// ReleaseResponse returns the status of released notifications.
 class ReleaseResponse extends $pb.GeneratedMessage {
   factory ReleaseResponse({
-    $core.Iterable<$7.StatusResponse>? data,
+    $core.Iterable<$1.StatusResponse>? data,
   }) {
     final $result = create();
     if (data != null) {
@@ -771,7 +771,7 @@ class ReleaseResponse extends $pb.GeneratedMessage {
   factory ReleaseResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ReleaseResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'notification.v1'), createEmptyInstance: create)
-    ..pc<$7.StatusResponse>(1, _omitFieldNames ? '' : 'data', $pb.PbFieldType.PM, subBuilder: $7.StatusResponse.create)
+    ..pc<$1.StatusResponse>(1, _omitFieldNames ? '' : 'data', $pb.PbFieldType.PM, subBuilder: $1.StatusResponse.create)
     ..hasRequiredFields = false
   ;
 
@@ -797,7 +797,7 @@ class ReleaseResponse extends $pb.GeneratedMessage {
   static ReleaseResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$7.StatusResponse> get data => $_getList(0);
+  $core.List<$1.StatusResponse> get data => $_getList(0);
 }
 
 /// ReceiveRequest acknowledges receipt of notifications by the client.
@@ -849,7 +849,7 @@ class ReceiveRequest extends $pb.GeneratedMessage {
 /// ReceiveResponse returns the status of acknowledged notifications.
 class ReceiveResponse extends $pb.GeneratedMessage {
   factory ReceiveResponse({
-    $core.Iterable<$7.StatusResponse>? data,
+    $core.Iterable<$1.StatusResponse>? data,
   }) {
     final $result = create();
     if (data != null) {
@@ -862,7 +862,7 @@ class ReceiveResponse extends $pb.GeneratedMessage {
   factory ReceiveResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ReceiveResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'notification.v1'), createEmptyInstance: create)
-    ..pc<$7.StatusResponse>(1, _omitFieldNames ? '' : 'data', $pb.PbFieldType.PM, subBuilder: $7.StatusResponse.create)
+    ..pc<$1.StatusResponse>(1, _omitFieldNames ? '' : 'data', $pb.PbFieldType.PM, subBuilder: $1.StatusResponse.create)
     ..hasRequiredFields = false
   ;
 
@@ -888,7 +888,7 @@ class ReceiveResponse extends $pb.GeneratedMessage {
   static ReceiveResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$7.StatusResponse> get data => $_getList(0);
+  $core.List<$1.StatusResponse> get data => $_getList(0);
 }
 
 /// TemplateSearchRequest searches for notification templates.
@@ -1034,8 +1034,8 @@ class TemplateSaveRequest extends $pb.GeneratedMessage {
   factory TemplateSaveRequest({
     $core.String? name,
     $core.String? languageCode,
-    $6.Struct? data,
-    $6.Struct? extra,
+    $0.Struct? data,
+    $0.Struct? extra,
   }) {
     final $result = create();
     if (name != null) {
@@ -1059,8 +1059,8 @@ class TemplateSaveRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TemplateSaveRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'notification.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'name')
     ..aOS(2, _omitFieldNames ? '' : 'languageCode')
-    ..aOM<$6.Struct>(3, _omitFieldNames ? '' : 'data', subBuilder: $6.Struct.create)
-    ..aOM<$6.Struct>(4, _omitFieldNames ? '' : 'extra', subBuilder: $6.Struct.create)
+    ..aOM<$0.Struct>(3, _omitFieldNames ? '' : 'data', subBuilder: $0.Struct.create)
+    ..aOM<$0.Struct>(4, _omitFieldNames ? '' : 'extra', subBuilder: $0.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -1104,26 +1104,26 @@ class TemplateSaveRequest extends $pb.GeneratedMessage {
   void clearLanguageCode() => clearField(2);
 
   @$pb.TagNumber(3)
-  $6.Struct get data => $_getN(2);
+  $0.Struct get data => $_getN(2);
   @$pb.TagNumber(3)
-  set data($6.Struct v) { setField(3, v); }
+  set data($0.Struct v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasData() => $_has(2);
   @$pb.TagNumber(3)
   void clearData() => clearField(3);
   @$pb.TagNumber(3)
-  $6.Struct ensureData() => $_ensure(2);
+  $0.Struct ensureData() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  $6.Struct get extra => $_getN(3);
+  $0.Struct get extra => $_getN(3);
   @$pb.TagNumber(4)
-  set extra($6.Struct v) { setField(4, v); }
+  set extra($0.Struct v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasExtra() => $_has(3);
   @$pb.TagNumber(4)
   void clearExtra() => clearField(4);
   @$pb.TagNumber(4)
-  $6.Struct ensureExtra() => $_ensure(3);
+  $0.Struct ensureExtra() => $_ensure(3);
 }
 
 /// TemplateSaveResponse returns the saved template.
@@ -1192,14 +1192,14 @@ class NotificationServiceApi {
   $async.Future<ReceiveResponse> receive($pb.ClientContext? ctx, ReceiveRequest request) =>
     _client.invoke<ReceiveResponse>(ctx, 'NotificationService', 'Receive', request, ReceiveResponse())
   ;
-  $async.Future<SearchResponse> search($pb.ClientContext? ctx, $7.SearchRequest request) =>
+  $async.Future<SearchResponse> search($pb.ClientContext? ctx, $1.SearchRequest request) =>
     _client.invoke<SearchResponse>(ctx, 'NotificationService', 'Search', request, SearchResponse())
   ;
-  $async.Future<$7.StatusResponse> status($pb.ClientContext? ctx, $7.StatusRequest request) =>
-    _client.invoke<$7.StatusResponse>(ctx, 'NotificationService', 'Status', request, $7.StatusResponse())
+  $async.Future<$1.StatusResponse> status($pb.ClientContext? ctx, $1.StatusRequest request) =>
+    _client.invoke<$1.StatusResponse>(ctx, 'NotificationService', 'Status', request, $1.StatusResponse())
   ;
-  $async.Future<$7.StatusUpdateResponse> statusUpdate($pb.ClientContext? ctx, $7.StatusUpdateRequest request) =>
-    _client.invoke<$7.StatusUpdateResponse>(ctx, 'NotificationService', 'StatusUpdate', request, $7.StatusUpdateResponse())
+  $async.Future<$1.StatusUpdateResponse> statusUpdate($pb.ClientContext? ctx, $1.StatusUpdateRequest request) =>
+    _client.invoke<$1.StatusUpdateResponse>(ctx, 'NotificationService', 'StatusUpdate', request, $1.StatusUpdateResponse())
   ;
   $async.Future<TemplateSearchResponse> templateSearch($pb.ClientContext? ctx, TemplateSearchRequest request) =>
     _client.invoke<TemplateSearchResponse>(ctx, 'NotificationService', 'TemplateSearch', request, TemplateSearchResponse())

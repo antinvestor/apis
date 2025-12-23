@@ -15,55 +15,55 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../common/v1/common.pb.dart' as $8;
-import 'ledger.pb.dart' as $9;
+import 'package:antinvestor_api_common/common/v1/common.pb.dart' as $2;
+import 'ledger.pb.dart' as $3;
 import 'ledger.pbjson.dart';
 
 export 'ledger.pb.dart';
 
 abstract class LedgerServiceBase extends $pb.GeneratedService {
-  $async.Future<$9.SearchLedgersResponse> searchLedgers($pb.ServerContext ctx, $8.SearchRequest request);
-  $async.Future<$9.CreateLedgerResponse> createLedger($pb.ServerContext ctx, $9.CreateLedgerRequest request);
-  $async.Future<$9.UpdateLedgerResponse> updateLedger($pb.ServerContext ctx, $9.UpdateLedgerRequest request);
-  $async.Future<$9.SearchAccountsResponse> searchAccounts($pb.ServerContext ctx, $8.SearchRequest request);
-  $async.Future<$9.CreateAccountResponse> createAccount($pb.ServerContext ctx, $9.CreateAccountRequest request);
-  $async.Future<$9.UpdateAccountResponse> updateAccount($pb.ServerContext ctx, $9.UpdateAccountRequest request);
-  $async.Future<$9.SearchTransactionsResponse> searchTransactions($pb.ServerContext ctx, $8.SearchRequest request);
-  $async.Future<$9.CreateTransactionResponse> createTransaction($pb.ServerContext ctx, $9.CreateTransactionRequest request);
-  $async.Future<$9.ReverseTransactionResponse> reverseTransaction($pb.ServerContext ctx, $9.ReverseTransactionRequest request);
-  $async.Future<$9.UpdateTransactionResponse> updateTransaction($pb.ServerContext ctx, $9.UpdateTransactionRequest request);
-  $async.Future<$9.SearchTransactionEntriesResponse> searchTransactionEntries($pb.ServerContext ctx, $8.SearchRequest request);
+  $async.Future<$3.SearchLedgersResponse> searchLedgers($pb.ServerContext ctx, $2.SearchRequest request);
+  $async.Future<$3.CreateLedgerResponse> createLedger($pb.ServerContext ctx, $3.CreateLedgerRequest request);
+  $async.Future<$3.UpdateLedgerResponse> updateLedger($pb.ServerContext ctx, $3.UpdateLedgerRequest request);
+  $async.Future<$3.SearchAccountsResponse> searchAccounts($pb.ServerContext ctx, $2.SearchRequest request);
+  $async.Future<$3.CreateAccountResponse> createAccount($pb.ServerContext ctx, $3.CreateAccountRequest request);
+  $async.Future<$3.UpdateAccountResponse> updateAccount($pb.ServerContext ctx, $3.UpdateAccountRequest request);
+  $async.Future<$3.SearchTransactionsResponse> searchTransactions($pb.ServerContext ctx, $2.SearchRequest request);
+  $async.Future<$3.CreateTransactionResponse> createTransaction($pb.ServerContext ctx, $3.CreateTransactionRequest request);
+  $async.Future<$3.ReverseTransactionResponse> reverseTransaction($pb.ServerContext ctx, $3.ReverseTransactionRequest request);
+  $async.Future<$3.UpdateTransactionResponse> updateTransaction($pb.ServerContext ctx, $3.UpdateTransactionRequest request);
+  $async.Future<$3.SearchTransactionEntriesResponse> searchTransactionEntries($pb.ServerContext ctx, $2.SearchRequest request);
 
   $pb.GeneratedMessage createRequest($core.String methodName) {
     switch (methodName) {
-      case 'SearchLedgers': return $8.SearchRequest();
-      case 'CreateLedger': return $9.CreateLedgerRequest();
-      case 'UpdateLedger': return $9.UpdateLedgerRequest();
-      case 'SearchAccounts': return $8.SearchRequest();
-      case 'CreateAccount': return $9.CreateAccountRequest();
-      case 'UpdateAccount': return $9.UpdateAccountRequest();
-      case 'SearchTransactions': return $8.SearchRequest();
-      case 'CreateTransaction': return $9.CreateTransactionRequest();
-      case 'ReverseTransaction': return $9.ReverseTransactionRequest();
-      case 'UpdateTransaction': return $9.UpdateTransactionRequest();
-      case 'SearchTransactionEntries': return $8.SearchRequest();
+      case 'SearchLedgers': return $2.SearchRequest();
+      case 'CreateLedger': return $3.CreateLedgerRequest();
+      case 'UpdateLedger': return $3.UpdateLedgerRequest();
+      case 'SearchAccounts': return $2.SearchRequest();
+      case 'CreateAccount': return $3.CreateAccountRequest();
+      case 'UpdateAccount': return $3.UpdateAccountRequest();
+      case 'SearchTransactions': return $2.SearchRequest();
+      case 'CreateTransaction': return $3.CreateTransactionRequest();
+      case 'ReverseTransaction': return $3.ReverseTransactionRequest();
+      case 'UpdateTransaction': return $3.UpdateTransactionRequest();
+      case 'SearchTransactionEntries': return $2.SearchRequest();
       default: throw $core.ArgumentError('Unknown method: $methodName');
     }
   }
 
   $async.Future<$pb.GeneratedMessage> handleCall($pb.ServerContext ctx, $core.String methodName, $pb.GeneratedMessage request) {
     switch (methodName) {
-      case 'SearchLedgers': return this.searchLedgers(ctx, request as $8.SearchRequest);
-      case 'CreateLedger': return this.createLedger(ctx, request as $9.CreateLedgerRequest);
-      case 'UpdateLedger': return this.updateLedger(ctx, request as $9.UpdateLedgerRequest);
-      case 'SearchAccounts': return this.searchAccounts(ctx, request as $8.SearchRequest);
-      case 'CreateAccount': return this.createAccount(ctx, request as $9.CreateAccountRequest);
-      case 'UpdateAccount': return this.updateAccount(ctx, request as $9.UpdateAccountRequest);
-      case 'SearchTransactions': return this.searchTransactions(ctx, request as $8.SearchRequest);
-      case 'CreateTransaction': return this.createTransaction(ctx, request as $9.CreateTransactionRequest);
-      case 'ReverseTransaction': return this.reverseTransaction(ctx, request as $9.ReverseTransactionRequest);
-      case 'UpdateTransaction': return this.updateTransaction(ctx, request as $9.UpdateTransactionRequest);
-      case 'SearchTransactionEntries': return this.searchTransactionEntries(ctx, request as $8.SearchRequest);
+      case 'SearchLedgers': return this.searchLedgers(ctx, request as $2.SearchRequest);
+      case 'CreateLedger': return this.createLedger(ctx, request as $3.CreateLedgerRequest);
+      case 'UpdateLedger': return this.updateLedger(ctx, request as $3.UpdateLedgerRequest);
+      case 'SearchAccounts': return this.searchAccounts(ctx, request as $2.SearchRequest);
+      case 'CreateAccount': return this.createAccount(ctx, request as $3.CreateAccountRequest);
+      case 'UpdateAccount': return this.updateAccount(ctx, request as $3.UpdateAccountRequest);
+      case 'SearchTransactions': return this.searchTransactions(ctx, request as $2.SearchRequest);
+      case 'CreateTransaction': return this.createTransaction(ctx, request as $3.CreateTransactionRequest);
+      case 'ReverseTransaction': return this.reverseTransaction(ctx, request as $3.ReverseTransactionRequest);
+      case 'UpdateTransaction': return this.updateTransaction(ctx, request as $3.UpdateTransactionRequest);
+      case 'SearchTransactionEntries': return this.searchTransactionEntries(ctx, request as $2.SearchRequest);
       default: throw $core.ArgumentError('Unknown method: $methodName');
     }
   }

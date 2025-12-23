@@ -13,9 +13,9 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
-import '../../common/v1/common.pbjson.dart' as $7;
-import '../../google/protobuf/struct.pbjson.dart' as $6;
-import '../../google/type/money.pbjson.dart' as $8;
+import 'package:antinvestor_api_common/common/v1/common.pbjson.dart' as $0;
+import 'package:antinvestor_api_common/google/protobuf/struct.pbjson.dart' as $2;
+import 'package:antinvestor_api_common/google/type/money.pbjson.dart' as $1;
 
 @$core.Deprecated('Use notificationTypeDescriptor instead')
 const NotificationType$json = {
@@ -371,14 +371,14 @@ const $core.Map<$core.String, $core.dynamic> PaymentServiceBase$json = {
 const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> PaymentServiceBase$messageJson = {
   '.payment.v1.SendRequest': SendRequest$json,
   '.payment.v1.Payment': Payment$json,
-  '.common.v1.ContactLink': $7.ContactLink$json,
-  '.google.protobuf.Struct': $6.Struct$json,
-  '.google.protobuf.Struct.FieldsEntry': $6.Struct_FieldsEntry$json,
-  '.google.protobuf.Value': $6.Value$json,
-  '.google.protobuf.ListValue': $6.ListValue$json,
-  '.google.type.Money': $8.Money$json,
+  '.common.v1.ContactLink': $0.ContactLink$json,
+  '.google.protobuf.Struct': $2.Struct$json,
+  '.google.protobuf.Struct.FieldsEntry': $2.Struct_FieldsEntry$json,
+  '.google.protobuf.Value': $2.Value$json,
+  '.google.protobuf.ListValue': $2.ListValue$json,
+  '.google.type.Money': $1.Money$json,
   '.payment.v1.SendResponse': SendResponse$json,
-  '.common.v1.StatusResponse': $7.StatusResponse$json,
+  '.common.v1.StatusResponse': $0.StatusResponse$json,
   '.payment.v1.ReceiveRequest': ReceiveRequest$json,
   '.payment.v1.ReceiveResponse': ReceiveResponse$json,
   '.payment.v1.InitiatePromptRequest': InitiatePromptRequest$json,
@@ -388,13 +388,13 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> PaymentSer
   '.payment.v1.Customer': Customer$json,
   '.payment.v1.PaymentLink': PaymentLink$json,
   '.payment.v1.CreatePaymentLinkResponse': CreatePaymentLinkResponse$json,
-  '.common.v1.StatusRequest': $7.StatusRequest$json,
-  '.common.v1.StatusUpdateRequest': $7.StatusUpdateRequest$json,
-  '.common.v1.StatusUpdateResponse': $7.StatusUpdateResponse$json,
+  '.common.v1.StatusRequest': $0.StatusRequest$json,
+  '.common.v1.StatusUpdateRequest': $0.StatusUpdateRequest$json,
+  '.common.v1.StatusUpdateResponse': $0.StatusUpdateResponse$json,
   '.payment.v1.ReleaseRequest': ReleaseRequest$json,
   '.payment.v1.ReleaseResponse': ReleaseResponse$json,
-  '.common.v1.SearchRequest': $7.SearchRequest$json,
-  '.common.v1.Pagination': $7.Pagination$json,
+  '.common.v1.SearchRequest': $0.SearchRequest$json,
+  '.common.v1.Pagination': $0.Pagination$json,
   '.payment.v1.SearchResponse': SearchResponse$json,
   '.payment.v1.ReconcileRequest': ReconcileRequest$json,
   '.payment.v1.ReconcileResponse': ReconcileResponse$json,

@@ -13,7 +13,7 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
-import '../../google/protobuf/struct.pbjson.dart' as $6;
+import 'package:antinvestor_api_common/google/protobuf/struct.pbjson.dart' as $0;
 
 @$core.Deprecated('Use keyTypeDescriptor instead')
 const KeyType$json = {
@@ -743,10 +743,10 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> DeviceServ
   '.device.v1.GetByIdResponse': GetByIdResponse$json,
   '.device.v1.DeviceObject': DeviceObject$json,
   '.device.v1.Locale': Locale$json,
-  '.google.protobuf.Struct': $6.Struct$json,
-  '.google.protobuf.Struct.FieldsEntry': $6.Struct_FieldsEntry$json,
-  '.google.protobuf.Value': $6.Value$json,
-  '.google.protobuf.ListValue': $6.ListValue$json,
+  '.google.protobuf.Struct': $0.Struct$json,
+  '.google.protobuf.Struct.FieldsEntry': $0.Struct_FieldsEntry$json,
+  '.google.protobuf.Value': $0.Value$json,
+  '.google.protobuf.ListValue': $0.ListValue$json,
   '.device.v1.GetBySessionIdRequest': GetBySessionIdRequest$json,
   '.device.v1.GetBySessionIdResponse': GetBySessionIdResponse$json,
   '.device.v1.SearchRequest': SearchRequest$json,

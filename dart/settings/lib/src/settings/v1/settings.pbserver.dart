@@ -15,34 +15,34 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../common/v1/common.pb.dart' as $7;
-import 'settings.pb.dart' as $8;
+import 'package:antinvestor_api_common/common/v1/common.pb.dart' as $0;
+import 'settings.pb.dart' as $2;
 import 'settings.pbjson.dart';
 
 export 'settings.pb.dart';
 
 abstract class SettingsServiceBase extends $pb.GeneratedService {
-  $async.Future<$8.GetResponse> get($pb.ServerContext ctx, $8.GetRequest request);
-  $async.Future<$8.ListResponse> list($pb.ServerContext ctx, $8.ListRequest request);
-  $async.Future<$8.SearchResponse> search($pb.ServerContext ctx, $7.SearchRequest request);
-  $async.Future<$8.SetResponse> set($pb.ServerContext ctx, $8.SetRequest request);
+  $async.Future<$2.GetResponse> get($pb.ServerContext ctx, $2.GetRequest request);
+  $async.Future<$2.ListResponse> list($pb.ServerContext ctx, $2.ListRequest request);
+  $async.Future<$2.SearchResponse> search($pb.ServerContext ctx, $0.SearchRequest request);
+  $async.Future<$2.SetResponse> set($pb.ServerContext ctx, $2.SetRequest request);
 
   $pb.GeneratedMessage createRequest($core.String methodName) {
     switch (methodName) {
-      case 'Get': return $8.GetRequest();
-      case 'List': return $8.ListRequest();
-      case 'Search': return $7.SearchRequest();
-      case 'Set': return $8.SetRequest();
+      case 'Get': return $2.GetRequest();
+      case 'List': return $2.ListRequest();
+      case 'Search': return $0.SearchRequest();
+      case 'Set': return $2.SetRequest();
       default: throw $core.ArgumentError('Unknown method: $methodName');
     }
   }
 
   $async.Future<$pb.GeneratedMessage> handleCall($pb.ServerContext ctx, $core.String methodName, $pb.GeneratedMessage request) {
     switch (methodName) {
-      case 'Get': return this.get(ctx, request as $8.GetRequest);
-      case 'List': return this.list(ctx, request as $8.ListRequest);
-      case 'Search': return this.search(ctx, request as $7.SearchRequest);
-      case 'Set': return this.set(ctx, request as $8.SetRequest);
+      case 'Get': return this.get(ctx, request as $2.GetRequest);
+      case 'List': return this.list(ctx, request as $2.ListRequest);
+      case 'Search': return this.search(ctx, request as $0.SearchRequest);
+      case 'Set': return this.set(ctx, request as $2.SetRequest);
       default: throw $core.ArgumentError('Unknown method: $methodName');
     }
   }
