@@ -3,7 +3,7 @@ module github.com/antinvestor/apis/go/device
 go 1.25
 
 require (
-	buf.build/gen/go/antinvestor/device/connectrpc/go v1.19.1-20251222125222-a0817c8d4ffa.2
+	buf.build/gen/go/antinvestor/device/connectrpc/go v1.19.1-20251223045211-95d7117a19a0.2
 	buf.build/gen/go/antinvestor/device/protocolbuffers/go v1.36.11-20251222125222-a0817c8d4ffa.1
 	connectrpc.com/connect v1.19.1
 	github.com/antinvestor/apis/go/common v1.50.0
