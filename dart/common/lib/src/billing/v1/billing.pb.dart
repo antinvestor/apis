@@ -40,7 +40,7 @@ class ResourceReference extends $pb.GeneratedMessage {
   factory ResourceReference.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory ResourceReference.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ResourceReference', package: const $pb.PackageName(_omitMessageNames ? '' : 'common.v1'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ResourceReference', package: const $pb.PackageName(_omitMessageNames ? '' : 'billing.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'type')
     ..aOS(2, _omitFieldNames ? '' : 'resourceId')
     ..aOS(3, _omitFieldNames ? '' : 'ownerId')
@@ -125,7 +125,7 @@ class SpendComponent extends $pb.GeneratedMessage {
   factory SpendComponent.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory SpendComponent.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SpendComponent', package: const $pb.PackageName(_omitMessageNames ? '' : 'common.v1'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SpendComponent', package: const $pb.PackageName(_omitMessageNames ? '' : 'billing.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'description')
     ..a<$core.double>(2, _omitFieldNames ? '' : 'quantity', $pb.PbFieldType.OD)
     ..aOS(3, _omitFieldNames ? '' : 'unit')
@@ -236,7 +236,7 @@ class ResourceSpend extends $pb.GeneratedMessage {
   factory ResourceSpend.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory ResourceSpend.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ResourceSpend', package: const $pb.PackageName(_omitMessageNames ? '' : 'common.v1'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ResourceSpend', package: const $pb.PackageName(_omitMessageNames ? '' : 'billing.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'spendId')
     ..aOM<ResourceReference>(2, _omitFieldNames ? '' : 'resource', subBuilder: ResourceReference.create)
     ..aOM<$7.Interval>(3, _omitFieldNames ? '' : 'interval', subBuilder: $7.Interval.create)

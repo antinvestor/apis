@@ -51,10 +51,10 @@ const ResourceSpend$json = {
   '1': 'ResourceSpend',
   '2': [
     {'1': 'spend_id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'spendId'},
-    {'1': 'resource', '3': 2, '4': 1, '5': 11, '6': '.common.v1.ResourceReference', '10': 'resource'},
+    {'1': 'resource', '3': 2, '4': 1, '5': 11, '6': '.billing.v1.ResourceReference', '10': 'resource'},
     {'1': 'interval', '3': 3, '4': 1, '5': 11, '6': '.google.type.Interval', '10': 'interval'},
     {'1': 'amount', '3': 4, '4': 1, '5': 11, '6': '.google.type.Money', '10': 'amount'},
-    {'1': 'components', '3': 5, '4': 3, '5': 11, '6': '.common.v1.SpendComponent', '10': 'components'},
+    {'1': 'components', '3': 5, '4': 3, '5': 11, '6': '.billing.v1.SpendComponent', '10': 'components'},
     {'1': 'calculated_at', '3': 6, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'calculatedAt'},
     {'1': 'labels', '3': 7, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'labels'},
   ],
@@ -63,11 +63,11 @@ const ResourceSpend$json = {
 /// Descriptor for `ResourceSpend`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List resourceSpendDescriptor = $convert.base64Decode(
     'Cg1SZXNvdXJjZVNwZW5kEjYKCHNwZW5kX2lkGAEgASgJQhu6SBhyFhADGCgyEFswLTlhLXpfLV'
-    '17Myw0MH1SB3NwZW5kSWQSOAoIcmVzb3VyY2UYAiABKAsyHC5jb21tb24udjEuUmVzb3VyY2VS'
-    'ZWZlcmVuY2VSCHJlc291cmNlEjEKCGludGVydmFsGAMgASgLMhUuZ29vZ2xlLnR5cGUuSW50ZX'
-    'J2YWxSCGludGVydmFsEioKBmFtb3VudBgEIAEoCzISLmdvb2dsZS50eXBlLk1vbmV5UgZhbW91'
-    'bnQSOQoKY29tcG9uZW50cxgFIAMoCzIZLmNvbW1vbi52MS5TcGVuZENvbXBvbmVudFIKY29tcG'
-    '9uZW50cxI/Cg1jYWxjdWxhdGVkX2F0GAYgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFt'
-    'cFIMY2FsY3VsYXRlZEF0Ei8KBmxhYmVscxgHIAEoCzIXLmdvb2dsZS5wcm90b2J1Zi5TdHJ1Y3'
-    'RSBmxhYmVscw==');
+    '17Myw0MH1SB3NwZW5kSWQSOQoIcmVzb3VyY2UYAiABKAsyHS5iaWxsaW5nLnYxLlJlc291cmNl'
+    'UmVmZXJlbmNlUghyZXNvdXJjZRIxCghpbnRlcnZhbBgDIAEoCzIVLmdvb2dsZS50eXBlLkludG'
+    'VydmFsUghpbnRlcnZhbBIqCgZhbW91bnQYBCABKAsyEi5nb29nbGUudHlwZS5Nb25leVIGYW1v'
+    'dW50EjoKCmNvbXBvbmVudHMYBSADKAsyGi5iaWxsaW5nLnYxLlNwZW5kQ29tcG9uZW50Ugpjb2'
+    '1wb25lbnRzEj8KDWNhbGN1bGF0ZWRfYXQYBiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0'
+    'YW1wUgxjYWxjdWxhdGVkQXQSLwoGbGFiZWxzGAcgASgLMhcuZ29vZ2xlLnByb3RvYnVmLlN0cn'
+    'VjdFIGbGFiZWxz');
 

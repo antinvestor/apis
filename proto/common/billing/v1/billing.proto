@@ -14,7 +14,7 @@
 
 syntax = "proto3";
 
-package common.v1;
+package billing.v1;
 
 import "buf/validate/validate.proto";
 import "gnostic/openapi/v3/annotations.proto";
