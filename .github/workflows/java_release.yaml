@@ -76,6 +76,8 @@ jobs:
           tag: java/${{ matrix.api_module }}/${{github.ref_name}}
           tag_exists_error: false
           message: "release module java/${{ matrix.api_module }}/${{github.ref_name}}"
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          gpg_passphrase: ${{ secrets.GPG_KEY_PASSPHRASE }}
 
       - name: Run publish action
         if: steps.get_tags.outputs.not_enough_tags == 'true' || steps.java_module_changed.outputs.changed == 'true'

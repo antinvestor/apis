@@ -61,3 +61,5 @@ jobs:
           tag: dart/${{ matrix.package }}/${{github.ref_name}}
           tag_exists_error: false
           message: "release module dart/${{ matrix.package }}/${{github.ref_name}}"
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          gpg_passphrase: ${{ secrets.GPG_KEY_PASSPHRASE }}
