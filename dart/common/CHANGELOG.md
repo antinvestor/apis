@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.50.21] - 2025-12-23
+
+### Changed
+
+- Improved the dart common replacement code
+
 ## [1.50.18] - 2025-12-23
 
 ### Changed

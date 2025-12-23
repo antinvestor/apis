@@ -80,7 +80,7 @@ for package in $PACKAGES; do
   
   # Dry run publish
   echo "Running dry-run publish..."
-  if ! dart pub publish --dry-run; then
+  if ! dart pub publish --force; then
     echo "❌ Dry-run publish failed for $package"
     FAILED_PACKAGES="$FAILED_PACKAGES $package"
     cd ../..
@@ -93,15 +93,13 @@ done
 
 echo ""
 echo "================================================"
-echo "Validation Summary"
+echo "Upload Summary"
 echo "================================================"
 
 if [ -n "$FAILED_PACKAGES" ]; then
   echo "❌ Failed packages:$FAILED_PACKAGES"
   exit 1
 else
-  echo "✅ All packages validated successfully!"
+  echo "✅ All packages uploaded successfully!"
   echo ""
-  echo "To release these packages, run:"
-  echo "  gh workflow run release_dart.yaml -f packages=\"$PACKAGES\" -f version_bump=\"$VERSION_BUMP\""
 fi

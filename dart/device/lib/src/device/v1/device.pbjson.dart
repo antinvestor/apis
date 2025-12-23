@@ -13,7 +13,7 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
-import 'package:antinvestor_api_common/common.dart';
+import 'package:antinvestor_api_common/common.dart' as $0;
 
 @$core.Deprecated('Use keyTypeDescriptor instead')
 const KeyType$json = {
