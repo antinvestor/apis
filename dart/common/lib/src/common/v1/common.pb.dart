@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'package:antinvestor_api_common/google/protobuf/struct.pb.dart' as $6;
+import '../../google/protobuf/struct.pb.dart' as $6;
 import 'common.pbenum.dart';
 
 export 'common.pbenum.dart';

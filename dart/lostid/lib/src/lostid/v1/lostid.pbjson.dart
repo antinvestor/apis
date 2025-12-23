@@ -13,11 +13,11 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
-import 'package:antinvestor_api_common/common/v1/common.pbjson.dart' as $1;
-import 'package:antinvestor_api_common/google/protobuf/struct.pbjson.dart' as $0;
-import 'package:antinvestor_api_common/google/protobuf/timestamp.pbjson.dart' as $4;
-import 'package:antinvestor_api_common/google/type/interval.pbjson.dart' as $2;
-import 'package:antinvestor_api_common/google/type/money.pbjson.dart' as $3;
+import 'package:antinvestor_api_common/common.dart';
+import 'package:antinvestor_api_common/common.dart';
+import 'package:antinvestor_api_common/common.dart';
+import 'package:antinvestor_api_common/common.dart';
+import 'package:antinvestor_api_common/common.dart';
 
 @$core.Deprecated('Use itemTypeDescriptor instead')
 const ItemType$json = {

@@ -15,8 +15,8 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'package:antinvestor_api_common/common/v1/common.pb.dart' as $1;
-import 'package:antinvestor_api_common/google/protobuf/struct.pb.dart' as $0;
+import 'package:antinvestor_api_common/common.dart';
+import 'package:antinvestor_api_common/common.dart';
 import 'notification.pbenum.dart';
 
 export 'notification.pbenum.dart';

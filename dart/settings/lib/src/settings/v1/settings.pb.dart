@@ -14,7 +14,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'package:antinvestor_api_common/common/v1/common.pb.dart' as $0;
+import 'package:antinvestor_api_common/common.dart';
 
 /// Setting represents a hierarchical key for configuration lookup.
 /// Supports multi-level scoping for flexible configuration management.

@@ -13,8 +13,8 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
-import 'package:antinvestor_api_common/google/protobuf/struct.pbjson.dart' as $0;
-import 'package:antinvestor_api_common/google/protobuf/timestamp.pbjson.dart' as $1;
+import 'package:antinvestor_api_common/common.dart';
+import 'package:antinvestor_api_common/common.dart';
 
 @$core.Deprecated('Use tenantObjectDescriptor instead')
 const TenantObject$json = {
