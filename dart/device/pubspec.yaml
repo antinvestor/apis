@@ -1,6 +1,6 @@
 name: antinvestor_api_device
 description: Dart client library for Ant Investor Device Service - Device management, registration, and tracking
-version: 1.50.14
+version: 1.50.15
 repository: https://github.com/antinvestor/apis
 homepage: https://github.com/antinvestor/apis/tree/main/dart/device
 issue_tracker: https://github.com/antinvestor/apis/issues
@@ -12,7 +12,7 @@ dependencies:
   protobuf: ^4.2.0
   connectrpc: ^1.0.0
   fixnum: ^1.1.0
-  antinvestor_api_common: ^1.50.13
+  antinvestor_api_common: ^1.50.14
 
 dev_dependencies:
   lints: ^6.0.0
