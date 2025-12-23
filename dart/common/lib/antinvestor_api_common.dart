@@ -9,7 +9,7 @@
 /// ## Token Refresh Interceptor
 ///
 /// ```dart
-/// import 'package:antinvestor_api_common/common.dart';
+/// import 'package:antinvestor_api_common/antinvestor_api_common.dart';
 ///
 /// // Create a token manager
 /// final tokenManager = TokenManager(

@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import 'package:antinvestor_api_common/common.dart';
+import 'package:antinvestor_api_common/antinvestor_api_common.dart';
 import 'package:connectrpc/connect.dart' show Interceptor;
 import '../antinvestor_api_lostid.dart';
 

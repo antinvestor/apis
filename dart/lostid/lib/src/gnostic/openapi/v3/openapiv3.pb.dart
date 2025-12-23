@@ -14,7 +14,7 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'package:antinvestor_api_common/common.dart' as $4;
+import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $4;
 
 enum AdditionalPropertiesItem_Oneof {
   schemaOrReference, 
