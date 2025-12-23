@@ -80,8 +80,14 @@ for package in $PACKAGES; do
   
   # Dry run publish
   echo "Running dry-run publish..."
-  if ! dart pub publish --force; then
-    echo "❌ Dry-run publish failed for $package"
+  PUBLISH_OUTPUT=$(dart pub publish --force 2>&1) || true
+  if echo "$PUBLISH_OUTPUT" | grep -qE "(already uploaded|already exists)"; then
+    echo "ℹ️  Version $CURRENT_VERSION already uploaded for $package, skipping..."
+  elif echo "$PUBLISH_OUTPUT" | grep -qE "(Successfully uploaded|Package .* has been published)"; then
+    echo "✅ Package $package uploaded successfully"
+  elif [ -n "$PUBLISH_OUTPUT" ]; then
+    echo "$PUBLISH_OUTPUT"
+    echo "❌ Publish failed for $package"
     FAILED_PACKAGES="$FAILED_PACKAGES $package"
     cd ../..
     continue

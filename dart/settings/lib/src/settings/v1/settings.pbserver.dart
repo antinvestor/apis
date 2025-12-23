@@ -15,7 +15,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'package:antinvestor_api_common/common.dart' as $0;
+import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $0;
 import 'settings.pb.dart' as $2;
 import 'settings.pbjson.dart';
 

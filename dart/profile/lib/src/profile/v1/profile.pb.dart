@@ -15,8 +15,8 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'package:antinvestor_api_common/common.dart' as $1;
-import 'package:antinvestor_api_common/common.dart' as $0;
+import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $1;
+import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $0;
 import 'profile.pbenum.dart';
 
 export 'profile.pbenum.dart';

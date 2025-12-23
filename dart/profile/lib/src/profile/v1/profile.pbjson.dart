@@ -13,7 +13,7 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
-import 'package:antinvestor_api_common/common.dart' as $0;
+import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $0;
 
 @$core.Deprecated('Use contactTypeDescriptor instead')
 const ContactType$json = {
