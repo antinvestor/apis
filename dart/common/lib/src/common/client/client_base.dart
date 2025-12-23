@@ -15,13 +15,15 @@
 import 'package:connectrpc/connect.dart';
 import 'transport_helper.dart';
 import '../auth/token_manager.dart';
+import '../auth/token_refresh_interceptor.dart';
 
 /// Type definition for a function that creates a service client from a transport.
 typedef ServiceClientFactory<T> = T Function(Transport transport);
 
 /// Type definition for a function that creates a transport.
 typedef TransportFactory = Transport Function(
-    Uri baseUrl, List<Interceptor> interceptors);
+    Uri baseUrl, List<Interceptor> interceptors,
+);
 
 /// Configuration options for creating a client.
 ///

@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.50.14] - 2025-12-23
+
+### Changed
+
+- Increment version for dependency management
+
 ## [1.50.12] - 2025-12-22
 
 ### Changed

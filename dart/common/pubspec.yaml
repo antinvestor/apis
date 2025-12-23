@@ -1,6 +1,6 @@
 name: antinvestor_api_common
 description: Common types and utilities shared across all Ant Investor API services - Token management, authentication interceptors, and JWT utilities
-version: 1.50.13
+version: 1.50.14
 repository: https://github.com/antinvestor/apis
 homepage: https://github.com/antinvestor/apis/tree/main/dart/common
 issue_tracker: https://github.com/antinvestor/apis/issues
