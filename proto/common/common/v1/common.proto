@@ -27,8 +27,6 @@ package common.v1;
 import "buf/validate/validate.proto";
 import "gnostic/openapi/v3/annotations.proto";
 import "google/protobuf/struct.proto";
-import "google/type/interval.proto";
-import "google/type/money.proto";
 
 option cc_enable_arenas = true;
 option go_package = "github.com/antinvestor/apis/go/common/v1;commonv1";
