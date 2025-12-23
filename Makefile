@@ -59,6 +59,11 @@ define dart_format
 cd dart/${1} && dart format lib/
 endef
 
+define dart_upgrade
+cd dart/${1} && dart pub upgrade --major-versions
+cd dart/${1} && dart pub get
+endef
+
 define buf_migrate
 cd proto/${1} && PATH=$(BIN):$$PATH $(BIN)/buf config migrate
 endef
@@ -121,6 +126,22 @@ golang_upgrade_all: ## Build all packages
 	$(call golang_upgrade,lostid)
 	$(call golang_upgrade,device)
 	$(call golang_upgrade,files)
+
+.PHONY: dart_upgrade_all
+dart_upgrade_all: ## Build all packages
+	$(call dart_upgrade,common)
+	$(call dart_upgrade,chat)
+	$(call dart_upgrade,notification)
+	$(call dart_upgrade,ocr)
+	$(call dart_upgrade,partition)
+	$(call dart_upgrade,payment)
+	$(call dart_upgrade,profile)
+	$(call dart_upgrade,property)
+	$(call dart_upgrade,settings)
+	$(call dart_upgrade,ledger)
+	$(call dart_upgrade,lostid)
+	$(call dart_upgrade,device)
+	$(call dart_upgrade,files)
 
 
 .PHONY: lintfix
@@ -259,7 +280,7 @@ generate_dart: $(BIN)/buf ## Generate Dart code from proto files
 
 
 .PHONY: upgrade
-upgrade: golang_upgrade_all ## Upgrade dependencies
+upgrade: golang_upgrade_all dart_upgrade_all ## Upgrade dependencies
 	echo "upgrading dependencies done :D"
 
 .PHONY: checkgenerate

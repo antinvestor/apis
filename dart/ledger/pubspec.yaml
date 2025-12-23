@@ -16,7 +16,7 @@ dependencies:
 
 dev_dependencies:
   lints: ^6.0.0
-  test: ^1.25.0
+  test: ^1.28.0
 
 topics:
   - grpc

@@ -3,9 +3,9 @@ module github.com/antinvestor/apis/go/lostid
 go 1.25
 
 require (
-	buf.build/gen/go/antinvestor/common/protocolbuffers/go v1.36.11-20251223045135-9b26335aa16d.1
-	buf.build/gen/go/antinvestor/lostid/connectrpc/go v1.19.1-20251223045315-d10b4a4b155e.2
-	buf.build/gen/go/antinvestor/lostid/protocolbuffers/go v1.36.11-20251223045315-d10b4a4b155e.1
+	buf.build/gen/go/antinvestor/common/protocolbuffers/go v1.36.11-20251223175359-03d5a4a55277.1
+	buf.build/gen/go/antinvestor/lostid/connectrpc/go v1.19.1-20251223175550-79d47b8646ad.2
+	buf.build/gen/go/antinvestor/lostid/protocolbuffers/go v1.36.11-20251223175550-79d47b8646ad.1
 	connectrpc.com/connect v1.19.1
 	github.com/antinvestor/apis/go/common v1.51.0
 	github.com/gojuno/minimock/v3 v3.4.7

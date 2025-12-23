@@ -1,9 +1,9 @@
-buf.build/gen/go/antinvestor/common/protocolbuffers/go v1.36.11-20251223045135-9b26335aa16d.1 h1:XkYphbnia4KMSj/X9mcIUI1fMAItjGkVv2bbSj+zVDA=
-buf.build/gen/go/antinvestor/common/protocolbuffers/go v1.36.11-20251223045135-9b26335aa16d.1/go.mod h1:qXLyfS+9v9/zjQpmKIVHm/UtpDTqZh1l1hn53sdqTYg=
-buf.build/gen/go/antinvestor/payment/connectrpc/go v1.19.1-20251223045434-86e105897b80.2 h1:eMpPBFc3A+4NkjgF27VZ3lSdO1O9hlMbijRbA0GJHnc=
-buf.build/gen/go/antinvestor/payment/connectrpc/go v1.19.1-20251223045434-86e105897b80.2/go.mod h1:I0rIEdJo1gJzka0q2RpbWV8EgK2BKU1SBSmVWPxEams=
-buf.build/gen/go/antinvestor/payment/protocolbuffers/go v1.36.11-20251223045434-86e105897b80.1 h1:99wnKGV/2H4vC+kWlv+83QNU8+F7CZWjpxlFrsBqCZk=
-buf.build/gen/go/antinvestor/payment/protocolbuffers/go v1.36.11-20251223045434-86e105897b80.1/go.mod h1:tZdG9p3RHbNRVjP25vFrQ6M8SbmTU8kUubqlXiRTR00=
+buf.build/gen/go/antinvestor/common/protocolbuffers/go v1.36.11-20251223175359-03d5a4a55277.1 h1:jJjKRrEw/ufsDPwJ4CeVihbgVovTHBKQHPxRuDjhPf8=
+buf.build/gen/go/antinvestor/common/protocolbuffers/go v1.36.11-20251223175359-03d5a4a55277.1/go.mod h1:qXLyfS+9v9/zjQpmKIVHm/UtpDTqZh1l1hn53sdqTYg=
+buf.build/gen/go/antinvestor/payment/connectrpc/go v1.19.1-20251223175716-90b91d8e47d5.2 h1:o+X2Fwd65mcrBN9tKZWBKASv2S2iYyR8KBWW2PLcT4E=
+buf.build/gen/go/antinvestor/payment/connectrpc/go v1.19.1-20251223175716-90b91d8e47d5.2/go.mod h1:KVCcciBaT3trwl1JPmZpjBDCMXlLSEMW58W78DEWGSU=
+buf.build/gen/go/antinvestor/payment/protocolbuffers/go v1.36.11-20251223175716-90b91d8e47d5.1 h1:uR21ot0kwNIyBX1dMMUEFnA0eW/1N/Svpf+KPEXeTE0=
+buf.build/gen/go/antinvestor/payment/protocolbuffers/go v1.36.11-20251223175716-90b91d8e47d5.1/go.mod h1:iHgAhM4ilHHrSVZ4kXZZZAy/qkZ15mgTuOtHHqi/f+g=
 buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.11-20251209175733-2a1774d88802.1 h1:j9yeqTWEFrtimt8Nng2MIeRrpoCvQzM9/g25XTvqUGg=
 buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.11-20251209175733-2a1774d88802.1/go.mod h1:tvtbpgaVXZX4g6Pn+AnzFycuRK3MOz5HJfEGeEllXYM=
 buf.build/gen/go/gnostic/gnostic/protocolbuffers/go v1.36.11-20230414000709-087bc8072ce4.1 h1:t8f+WWZ5WNrZaP5zrpWD8f1tKU7eelJMbIAT9FRX558=
