@@ -1,11 +1,11 @@
 name: Publish New Release
-permissions:
-  contents: read
-  releases: write
-
 on:
   schedule:
     - cron: "0 0 */5 * *"  # Runs every 3 days at midnight UTC
+
+permissions:
+  contents: read
+  releases: write
 
 jobs:
   check-draft-exists:

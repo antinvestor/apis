@@ -50,7 +50,7 @@ define buf_generate
 	# Rewrite Dart pbjson imports to common package import
 	if [ -d "dart/${1}/lib/src" ]; then \
 		find dart/${1}/lib/src -name "*.dart" -type f ! -path "*/common/*" -exec sed -i -E \
-			"s#import '[^']*/(common|google|gnostic|buf)/[^']*'( as [^;]+)?;#import 'package:antinvestor_api_common/antinvestor_api_common.dart'\2;#g" \
+			"s#import '[^']*/(common|billing|google|gnostic|buf)/[^']*'( as [^;]+)?;#import 'package:antinvestor_api_common/antinvestor_api_common.dart'\2;#g" \
 		{} \; ; \
 	fi
 endef

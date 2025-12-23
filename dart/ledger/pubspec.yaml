@@ -1,6 +1,6 @@
 name: antinvestor_api_ledger
 description: Dart client library for Ant Investor Ledger Service - Financial ledger and accounting
-version: 1.50.22
+version: 1.51.3
 repository: https://github.com/antinvestor/apis
 homepage: https://github.com/antinvestor/apis/tree/main/dart/ledger
 issue_tracker: https://github.com/antinvestor/apis/issues
@@ -12,7 +12,7 @@ dependencies:
   protobuf: ^4.2.0
   connectrpc: ^1.0.0
   fixnum: ^1.1.0
-  antinvestor_api_common: ^1.50.22
+  antinvestor_api_common: ^1.51.2
 
 dev_dependencies:
   lints: ^6.0.0
