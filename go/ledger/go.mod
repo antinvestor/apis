@@ -3,9 +3,9 @@ module github.com/antinvestor/apis/go/ledger
 go 1.25
 
 require (
-	buf.build/gen/go/antinvestor/common/protocolbuffers/go v1.36.11-20251222125138-2f8a9a430fbb.1
-	buf.build/gen/go/antinvestor/ledger/connectrpc/go v1.19.1-20251222130543-3e27bd172855.2
-	buf.build/gen/go/antinvestor/ledger/protocolbuffers/go v1.36.11-20251222130543-3e27bd172855.1
+	buf.build/gen/go/antinvestor/common/protocolbuffers/go v1.36.11-20251223045135-9b26335aa16d.1
+	buf.build/gen/go/antinvestor/ledger/connectrpc/go v1.19.1-20251223045250-2a1d163a8d63.2
+	buf.build/gen/go/antinvestor/ledger/protocolbuffers/go v1.36.11-20251223045250-2a1d163a8d63.1
 	connectrpc.com/connect v1.19.1
 	github.com/antinvestor/apis/go/common v1.50.0
 	github.com/gojuno/minimock/v3 v3.4.7
@@ -34,9 +34,9 @@ require (
 	golang.org/x/sync v0.19.0 // indirect
 	golang.org/x/sys v0.39.0 // indirect
 	golang.org/x/text v0.32.0 // indirect
-	google.golang.org/genproto v0.0.0-20251213004720-97cd9d5aeac2 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20251213004720-97cd9d5aeac2 // indirect
-	google.golang.org/grpc v1.77.0 // indirect
+	google.golang.org/genproto v0.0.0-20251222181119-0a764e51fe1b // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20251222181119-0a764e51fe1b // indirect
+	google.golang.org/grpc v1.78.0 // indirect
 	google.golang.org/protobuf v1.36.11 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )

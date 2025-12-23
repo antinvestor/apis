@@ -3,8 +3,8 @@ module github.com/antinvestor/apis/go/device
 go 1.25
 
 require (
-	buf.build/gen/go/antinvestor/device/connectrpc/go v1.19.1-20251222125222-a0817c8d4ffa.2
-	buf.build/gen/go/antinvestor/device/protocolbuffers/go v1.36.11-20251222125222-a0817c8d4ffa.1
+	buf.build/gen/go/antinvestor/device/connectrpc/go v1.19.1-20251223045211-95d7117a19a0.2
+	buf.build/gen/go/antinvestor/device/protocolbuffers/go v1.36.11-20251223045211-95d7117a19a0.1
 	connectrpc.com/connect v1.19.1
 	github.com/antinvestor/apis/go/common v1.50.0
 	github.com/gojuno/minimock/v3 v3.4.7
@@ -33,8 +33,8 @@ require (
 	golang.org/x/sync v0.19.0 // indirect
 	golang.org/x/sys v0.39.0 // indirect
 	golang.org/x/text v0.32.0 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20251213004720-97cd9d5aeac2 // indirect
-	google.golang.org/grpc v1.77.0 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20251222181119-0a764e51fe1b // indirect
+	google.golang.org/grpc v1.78.0 // indirect
 	google.golang.org/protobuf v1.36.11 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
