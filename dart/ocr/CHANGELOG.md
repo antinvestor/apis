@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.50.16] - 2025-12-23
+
+### Changed
+
+- Minor bugfix on ocr client code
+
 ## [1.50.15] - 2025-12-23
 
 ### Changed

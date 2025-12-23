@@ -22,7 +22,7 @@ const String defaultOcrEndpoint = 'https://ocr.antinvestor.com';
 /// Creates a new OCR service client.
 ///
 /// This is the Dart equivalent of Go's `ocr.NewClient()`.
-Future<ConnectClientBase<OcrServiceClient>> newOcrClient({
+Future<ConnectClientBase<OCRServiceClient>> newOcrClient({
   required TransportFactory createTransport,
   String? endpoint,
   TokenManager? tokenManager,
@@ -30,9 +30,9 @@ Future<ConnectClientBase<OcrServiceClient>> newOcrClient({
   List<Interceptor>? additionalInterceptors,
   bool noAuth = false,
 }) {
-  return newClient<OcrServiceClient>(
+  return newClient<OCRServiceClient>(
     defaultEndpoint: defaultOcrEndpoint,
-    createServiceClient: OcrServiceClient.new,
+    createServiceClient: OCRServiceClient.new,
     createTransport: createTransport,
     endpoint: endpoint,
     tokenManager: tokenManager,
@@ -43,4 +43,4 @@ Future<ConnectClientBase<OcrServiceClient>> newOcrClient({
 }
 
 /// Type alias for OCR client for convenience.
-typedef OcrClient = ConnectClientBase<OcrServiceClient>;
+typedef OcrClient = ConnectClientBase<OCRServiceClient>;
