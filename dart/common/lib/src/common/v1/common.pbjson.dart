@@ -1,15 +1,13 @@
-// This is a generated file - do not edit.
 //
-// Generated from common/v1/common.proto.
-
-// @dart = 3.3
+//  Generated code. Do not modify.
+//  source: common/v1/common.proto
+//
+// @dart = 2.12
 
 // ignore_for_file: annotate_overrides, camel_case_types, comment_references
-// ignore_for_file: constant_identifier_names
-// ignore_for_file: curly_braces_in_flow_control_structures
-// ignore_for_file: deprecated_member_use_from_same_package, library_prefixes
-// ignore_for_file: non_constant_identifier_names, prefer_relative_imports
-// ignore_for_file: unused_import
+// ignore_for_file: constant_identifier_names, library_prefixes
+// ignore_for_file: non_constant_identifier_names, prefer_final_fields
+// ignore_for_file: unnecessary_import, unnecessary_this, unused_import
 
 import 'dart:convert' as $convert;
 import 'dart:core' as $core;
@@ -72,23 +70,9 @@ const SearchRequest$json = {
   '2': [
     {'1': 'query', '3': 1, '4': 1, '5': 9, '10': 'query'},
     {'1': 'id_query', '3': 2, '4': 1, '5': 9, '10': 'idQuery'},
-    {
-      '1': 'limits',
-      '3': 3,
-      '4': 1,
-      '5': 11,
-      '6': '.common.v1.Pagination',
-      '10': 'limits'
-    },
+    {'1': 'limits', '3': 3, '4': 1, '5': 11, '6': '.common.v1.Pagination', '10': 'limits'},
     {'1': 'properties', '3': 7, '4': 3, '5': 9, '10': 'properties'},
-    {
-      '1': 'extras',
-      '3': 8,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'extras'
-    },
+    {'1': 'extras', '3': 8, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'extras'},
   ],
 };
 
@@ -104,14 +88,7 @@ const StatusRequest$json = {
   '1': 'StatusRequest',
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'id'},
-    {
-      '1': 'extras',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'extras'
-    },
+    {'1': 'extras', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'extras'},
   ],
 };
 
@@ -125,32 +102,11 @@ const StatusResponse$json = {
   '1': 'StatusResponse',
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'id'},
-    {
-      '1': 'state',
-      '3': 2,
-      '4': 1,
-      '5': 14,
-      '6': '.common.v1.STATE',
-      '10': 'state'
-    },
-    {
-      '1': 'status',
-      '3': 3,
-      '4': 1,
-      '5': 14,
-      '6': '.common.v1.STATUS',
-      '10': 'status'
-    },
+    {'1': 'state', '3': 2, '4': 1, '5': 14, '6': '.common.v1.STATE', '10': 'state'},
+    {'1': 'status', '3': 3, '4': 1, '5': 14, '6': '.common.v1.STATUS', '10': 'status'},
     {'1': 'external_id', '3': 4, '4': 1, '5': 9, '10': 'externalId'},
     {'1': 'transient_id', '3': 5, '4': 1, '5': 9, '10': 'transientId'},
-    {
-      '1': 'extras',
-      '3': 6,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'extras'
-    },
+    {'1': 'extras', '3': 6, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'extras'},
   ],
 };
 
@@ -167,31 +123,10 @@ const StatusUpdateRequest$json = {
   '1': 'StatusUpdateRequest',
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'id'},
-    {
-      '1': 'state',
-      '3': 2,
-      '4': 1,
-      '5': 14,
-      '6': '.common.v1.STATE',
-      '10': 'state'
-    },
-    {
-      '1': 'status',
-      '3': 3,
-      '4': 1,
-      '5': 14,
-      '6': '.common.v1.STATUS',
-      '10': 'status'
-    },
+    {'1': 'state', '3': 2, '4': 1, '5': 14, '6': '.common.v1.STATE', '10': 'state'},
+    {'1': 'status', '3': 3, '4': 1, '5': 14, '6': '.common.v1.STATUS', '10': 'status'},
     {'1': 'external_id', '3': 4, '4': 1, '5': 9, '10': 'externalId'},
-    {
-      '1': 'extras',
-      '3': 5,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'extras'
-    },
+    {'1': 'extras', '3': 5, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'extras'},
   ],
 };
 
@@ -207,14 +142,7 @@ final $typed_data.Uint8List statusUpdateRequestDescriptor = $convert.base64Decod
 const StatusUpdateResponse$json = {
   '1': 'StatusUpdateResponse',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.common.v1.StatusResponse',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 1, '5': 11, '6': '.common.v1.StatusResponse', '10': 'data'},
   ],
 };
 
@@ -230,24 +158,10 @@ const ContactLink$json = {
     {'1': 'profile_name', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'profileName'},
     {'1': 'profile_type', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'profileType'},
     {'1': 'profile_id', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'profileId'},
-    {
-      '1': 'profile_image_id',
-      '3': 4,
-      '4': 1,
-      '5': 9,
-      '8': {},
-      '10': 'profileImageId'
-    },
+    {'1': 'profile_image_id', '3': 4, '4': 1, '5': 9, '8': {}, '10': 'profileImageId'},
     {'1': 'contact_id', '3': 8, '4': 1, '5': 9, '8': {}, '10': 'contactId'},
     {'1': 'detail', '3': 9, '4': 1, '5': 9, '8': {}, '10': 'detail'},
-    {
-      '1': 'extras',
-      '3': 10,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'extras'
-    },
+    {'1': 'extras', '3': 10, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'extras'},
   ],
 };
 
@@ -269,14 +183,7 @@ const ErrorDetail$json = {
   '2': [
     {'1': 'code', '3': 1, '4': 1, '5': 5, '10': 'code'},
     {'1': 'message', '3': 2, '4': 1, '5': 9, '10': 'message'},
-    {
-      '1': 'meta',
-      '3': 3,
-      '4': 3,
-      '5': 11,
-      '6': '.common.v1.ErrorDetail.MetaEntry',
-      '10': 'meta'
-    },
+    {'1': 'meta', '3': 3, '4': 3, '5': 11, '6': '.common.v1.ErrorDetail.MetaEntry', '10': 'meta'},
   ],
   '3': [ErrorDetail_MetaEntry$json],
 };
@@ -297,3 +204,4 @@ final $typed_data.Uint8List errorDetailDescriptor = $convert.base64Decode(
     'NhZ2USNAoEbWV0YRgDIAMoCzIgLmNvbW1vbi52MS5FcnJvckRldGFpbC5NZXRhRW50cnlSBG1l'
     'dGEaNwoJTWV0YUVudHJ5EhAKA2tleRgBIAEoCVIDa2V5EhQKBXZhbHVlGAIgASgJUgV2YWx1ZT'
     'oCOAE=');
+

@@ -57,3 +57,13 @@ export 'src/common/client/client_base.dart';
 export 'src/common/v1/common.pb.dart';
 export 'src/common/v1/common.pbenum.dart';
 export 'src/common/v1/common.pbjson.dart';
+
+// Export well-known types (shared across all service packages)
+export 'src/google/protobuf/struct.pb.dart';
+export 'src/google/protobuf/struct.pbenum.dart';
+export 'src/google/protobuf/timestamp.pb.dart';
+export 'src/google/protobuf/timestamp.pbenum.dart';
+export 'src/google/protobuf/duration.pb.dart';
+export 'src/google/protobuf/duration.pbenum.dart';
+export 'src/google/protobuf/any.pb.dart';
+export 'src/google/protobuf/any.pbenum.dart';

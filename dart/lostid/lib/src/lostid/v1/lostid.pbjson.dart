@@ -1,28 +1,23 @@
-// This is a generated file - do not edit.
 //
-// Generated from lostid/v1/lostid.proto.
-
-// @dart = 3.3
+//  Generated code. Do not modify.
+//  source: lostid/v1/lostid.proto
+//
+// @dart = 2.12
 
 // ignore_for_file: annotate_overrides, camel_case_types, comment_references
-// ignore_for_file: constant_identifier_names
-// ignore_for_file: curly_braces_in_flow_control_structures
-// ignore_for_file: deprecated_member_use_from_same_package, library_prefixes
-// ignore_for_file: non_constant_identifier_names, prefer_relative_imports
-// ignore_for_file: unused_import
+// ignore_for_file: constant_identifier_names, library_prefixes
+// ignore_for_file: non_constant_identifier_names, prefer_final_fields
+// ignore_for_file: unnecessary_import, unnecessary_this, unused_import
 
 import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
-import 'package:protobuf/well_known_types/google/protobuf/struct.pbjson.dart'
-    as $0;
-import 'package:protobuf/well_known_types/google/protobuf/timestamp.pbjson.dart'
-    as $4;
-
-import '../../common/v1/common.pbjson.dart' as $1;
-import '../../google/type/interval.pbjson.dart' as $2;
-import '../../google/type/money.pbjson.dart' as $3;
+import '../../common/v1/common.pbjson.dart' as $7;
+import '../../google/protobuf/struct.pbjson.dart' as $6;
+import '../../google/protobuf/timestamp.pbjson.dart' as $2;
+import '../../google/type/interval.pbjson.dart' as $8;
+import '../../google/type/money.pbjson.dart' as $9;
 
 @$core.Deprecated('Use itemTypeDescriptor instead')
 const ItemType$json = {
@@ -44,14 +39,7 @@ const CollectibleRequest$json = {
   '1': 'CollectibleRequest',
   '2': [
     {'1': 'file_id', '3': 1, '4': 3, '5': 9, '8': {}, '10': 'fileId'},
-    {
-      '1': 'properties',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'properties'
-    },
+    {'1': 'properties', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'properties'},
   ],
 };
 
@@ -67,14 +55,7 @@ const CollectibleResponse$json = {
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
     {'1': 'file_id', '3': 2, '4': 3, '5': 9, '10': 'fileId'},
-    {
-      '1': 'properties',
-      '3': 3,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'properties'
-    },
+    {'1': 'properties', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'properties'},
     {'1': 'state', '3': 4, '4': 1, '5': 9, '10': 'state'},
   ],
 };
@@ -89,24 +70,8 @@ final $typed_data.Uint8List collectibleResponseDescriptor = $convert.base64Decod
 const ListCollectibleRequest$json = {
   '1': 'ListCollectibleRequest',
   '2': [
-    {
-      '1': 'pagination',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.common.v1.Pagination',
-      '9': 0,
-      '10': 'pagination'
-    },
-    {
-      '1': 'interval',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.google.type.Interval',
-      '9': 0,
-      '10': 'interval'
-    },
+    {'1': 'pagination', '3': 1, '4': 1, '5': 11, '6': '.common.v1.Pagination', '9': 0, '10': 'pagination'},
+    {'1': 'interval', '3': 2, '4': 1, '5': 11, '6': '.google.type.Interval', '9': 0, '10': 'interval'},
   ],
   '8': [
     {'1': 'range', '2': {}},
@@ -123,22 +88,14 @@ final $typed_data.Uint8List listCollectibleRequestDescriptor = $convert.base64De
 const ListCollectibleResponse$json = {
   '1': 'ListCollectibleResponse',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.lostid.v1.CollectibleResponse',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 3, '5': 11, '6': '.lostid.v1.CollectibleResponse', '10': 'data'},
   ],
 };
 
 /// Descriptor for `ListCollectibleResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List listCollectibleResponseDescriptor =
-    $convert.base64Decode(
-        'ChdMaXN0Q29sbGVjdGlibGVSZXNwb25zZRIyCgRkYXRhGAEgAygLMh4ubG9zdGlkLnYxLkNvbG'
-        'xlY3RpYmxlUmVzcG9uc2VSBGRhdGE=');
+final $typed_data.Uint8List listCollectibleResponseDescriptor = $convert.base64Decode(
+    'ChdMaXN0Q29sbGVjdGlibGVSZXNwb25zZRIyCgRkYXRhGAEgAygLMh4ubG9zdGlkLnYxLkNvbG'
+    'xlY3RpYmxlUmVzcG9uc2VSBGRhdGE=');
 
 @$core.Deprecated('Use searchResponseDescriptor instead')
 const SearchResponse$json = {
@@ -146,14 +103,7 @@ const SearchResponse$json = {
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
     {'1': 'query', '3': 2, '4': 1, '5': 9, '10': 'query'},
-    {
-      '1': 'properties',
-      '3': 3,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'properties'
-    },
+    {'1': 'properties', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'properties'},
     {'1': 'state', '3': 4, '4': 1, '5': 9, '10': 'state'},
   ],
 };
@@ -168,24 +118,8 @@ final $typed_data.Uint8List searchResponseDescriptor = $convert.base64Decode(
 const ListSearchRequest$json = {
   '1': 'ListSearchRequest',
   '2': [
-    {
-      '1': 'pagination',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.common.v1.Pagination',
-      '9': 0,
-      '10': 'pagination'
-    },
-    {
-      '1': 'interval',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.google.type.Interval',
-      '9': 0,
-      '10': 'interval'
-    },
+    {'1': 'pagination', '3': 1, '4': 1, '5': 11, '6': '.common.v1.Pagination', '9': 0, '10': 'pagination'},
+    {'1': 'interval', '3': 2, '4': 1, '5': 11, '6': '.google.type.Interval', '9': 0, '10': 'interval'},
   ],
   '8': [
     {'1': 'range', '2': {}},
@@ -202,14 +136,7 @@ final $typed_data.Uint8List listSearchRequestDescriptor = $convert.base64Decode(
 const ListSearchResponse$json = {
   '1': 'ListSearchResponse',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.lostid.v1.SearchResponse',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 3, '5': 11, '6': '.lostid.v1.SearchResponse', '10': 'data'},
   ],
 };
 
@@ -223,15 +150,7 @@ const ProgressRequest$json = {
   '1': 'ProgressRequest',
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'id'},
-    {
-      '1': 'type',
-      '3': 2,
-      '4': 1,
-      '5': 14,
-      '6': '.lostid.v1.ItemType',
-      '8': {},
-      '10': 'type'
-    },
+    {'1': 'type', '3': 2, '4': 1, '5': 14, '6': '.lostid.v1.ItemType', '8': {}, '10': 'type'},
   ],
 };
 
@@ -265,14 +184,7 @@ const TransactionItem$json = {
     {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
     {'1': 'datetime', '3': 2, '4': 1, '5': 9, '10': 'datetime'},
     {'1': 'credit', '3': 3, '4': 1, '5': 8, '10': 'credit'},
-    {
-      '1': 'amount',
-      '3': 4,
-      '4': 1,
-      '5': 11,
-      '6': '.google.type.Money',
-      '10': 'amount'
-    },
+    {'1': 'amount', '3': 4, '4': 1, '5': 11, '6': '.google.type.Money', '10': 'amount'},
     {'1': 'description', '3': 5, '4': 1, '5': 9, '10': 'description'},
   ],
 };
@@ -288,39 +200,11 @@ const ProgressResponse$json = {
   '1': 'ProgressResponse',
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
-    {
-      '1': 'type',
-      '3': 2,
-      '4': 1,
-      '5': 14,
-      '6': '.lostid.v1.ItemType',
-      '10': 'type'
-    },
-    {
-      '1': 'properties',
-      '3': 3,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'properties'
-    },
+    {'1': 'type', '3': 2, '4': 1, '5': 14, '6': '.lostid.v1.ItemType', '10': 'type'},
+    {'1': 'properties', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'properties'},
     {'1': 'state', '3': 4, '4': 1, '5': 9, '10': 'state'},
-    {
-      '1': 'items',
-      '3': 5,
-      '4': 3,
-      '5': 11,
-      '6': '.lostid.v1.ProgressItem',
-      '10': 'items'
-    },
-    {
-      '1': 'transactions',
-      '3': 6,
-      '4': 3,
-      '5': 11,
-      '6': '.lostid.v1.TransactionItem',
-      '10': 'transactions'
-    },
+    {'1': 'items', '3': 5, '4': 3, '5': 11, '6': '.lostid.v1.ProgressItem', '10': 'items'},
+    {'1': 'transactions', '3': 6, '4': 3, '5': 11, '6': '.lostid.v1.TransactionItem', '10': 'transactions'},
   ],
 };
 
@@ -336,24 +220,8 @@ final $typed_data.Uint8List progressResponseDescriptor = $convert.base64Decode(
 const ListTransactionRequest$json = {
   '1': 'ListTransactionRequest',
   '2': [
-    {
-      '1': 'pagination',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.common.v1.Pagination',
-      '9': 0,
-      '10': 'pagination'
-    },
-    {
-      '1': 'interval',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.google.type.Interval',
-      '9': 0,
-      '10': 'interval'
-    },
+    {'1': 'pagination', '3': 1, '4': 1, '5': 11, '6': '.common.v1.Pagination', '9': 0, '10': 'pagination'},
+    {'1': 'interval', '3': 2, '4': 1, '5': 11, '6': '.google.type.Interval', '9': 0, '10': 'interval'},
   ],
   '8': [
     {'1': 'range', '2': {}},
@@ -370,32 +238,19 @@ final $typed_data.Uint8List listTransactionRequestDescriptor = $convert.base64De
 const ListTransactionResponse$json = {
   '1': 'ListTransactionResponse',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.lostid.v1.TransactionItem',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 3, '5': 11, '6': '.lostid.v1.TransactionItem', '10': 'data'},
   ],
 };
 
 /// Descriptor for `ListTransactionResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List listTransactionResponseDescriptor =
-    $convert.base64Decode(
-        'ChdMaXN0VHJhbnNhY3Rpb25SZXNwb25zZRIuCgRkYXRhGAEgAygLMhoubG9zdGlkLnYxLlRyYW'
-        '5zYWN0aW9uSXRlbVIEZGF0YQ==');
+final $typed_data.Uint8List listTransactionResponseDescriptor = $convert.base64Decode(
+    'ChdMaXN0VHJhbnNhY3Rpb25SZXNwb25zZRIuCgRkYXRhGAEgAygLMhoubG9zdGlkLnYxLlRyYW'
+    '5zYWN0aW9uSXRlbVIEZGF0YQ==');
 
 const $core.Map<$core.String, $core.dynamic> LostIdServiceBase$json = {
   '1': 'LostIdService',
   '2': [
-    {
-      '1': 'Collectible',
-      '2': '.lostid.v1.CollectibleRequest',
-      '3': '.lostid.v1.CollectibleResponse',
-      '4': {}
-    },
+    {'1': 'Collectible', '2': '.lostid.v1.CollectibleRequest', '3': '.lostid.v1.CollectibleResponse', '4': {}},
     {
       '1': 'ListCollectible',
       '2': '.lostid.v1.ListCollectibleRequest',
@@ -416,12 +271,7 @@ const $core.Map<$core.String, $core.dynamic> LostIdServiceBase$json = {
       '4': {'34': 1},
       '6': true,
     },
-    {
-      '1': 'Progress',
-      '2': '.lostid.v1.ProgressRequest',
-      '3': '.lostid.v1.ProgressResponse',
-      '4': {}
-    },
+    {'1': 'Progress', '2': '.lostid.v1.ProgressRequest', '3': '.lostid.v1.ProgressResponse', '4': {}},
     {
       '1': 'ListTransaction',
       '2': '.lostid.v1.ListTransactionRequest',
@@ -433,20 +283,19 @@ const $core.Map<$core.String, $core.dynamic> LostIdServiceBase$json = {
 };
 
 @$core.Deprecated('Use lostIdServiceDescriptor instead')
-const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>>
-    LostIdServiceBase$messageJson = {
+const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> LostIdServiceBase$messageJson = {
   '.lostid.v1.CollectibleRequest': CollectibleRequest$json,
-  '.google.protobuf.Struct': $0.Struct$json,
-  '.google.protobuf.Struct.FieldsEntry': $0.Struct_FieldsEntry$json,
-  '.google.protobuf.Value': $0.Value$json,
-  '.google.protobuf.ListValue': $0.ListValue$json,
+  '.google.protobuf.Struct': $6.Struct$json,
+  '.google.protobuf.Struct.FieldsEntry': $6.Struct_FieldsEntry$json,
+  '.google.protobuf.Value': $6.Value$json,
+  '.google.protobuf.ListValue': $6.ListValue$json,
   '.lostid.v1.CollectibleResponse': CollectibleResponse$json,
   '.lostid.v1.ListCollectibleRequest': ListCollectibleRequest$json,
-  '.common.v1.Pagination': $1.Pagination$json,
-  '.google.type.Interval': $2.Interval$json,
-  '.google.protobuf.Timestamp': $4.Timestamp$json,
+  '.common.v1.Pagination': $7.Pagination$json,
+  '.google.type.Interval': $8.Interval$json,
+  '.google.protobuf.Timestamp': $2.Timestamp$json,
   '.lostid.v1.ListCollectibleResponse': ListCollectibleResponse$json,
-  '.common.v1.SearchRequest': $1.SearchRequest$json,
+  '.common.v1.SearchRequest': $7.SearchRequest$json,
   '.lostid.v1.SearchResponse': SearchResponse$json,
   '.lostid.v1.ListSearchRequest': ListSearchRequest$json,
   '.lostid.v1.ListSearchResponse': ListSearchResponse$json,
@@ -454,7 +303,7 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>>
   '.lostid.v1.ProgressResponse': ProgressResponse$json,
   '.lostid.v1.ProgressItem': ProgressItem$json,
   '.lostid.v1.TransactionItem': TransactionItem$json,
-  '.google.type.Money': $3.Money$json,
+  '.google.type.Money': $9.Money$json,
   '.lostid.v1.ListTransactionRequest': ListTransactionRequest$json,
   '.lostid.v1.ListTransactionResponse': ListTransactionResponse$json,
 };
@@ -497,3 +346,4 @@ final $typed_data.Uint8List lostIdServiceDescriptor = $convert.base64Decode(
     'NhY3Rpb25zIGluY2x1ZGluZyByZXdhcmRzIHBhaWQgdG8gZmluZGVycyBhbmQgc2VydmljZSBm'
     'ZWVzIGNoYXJnZWQuIFN1cHBvcnRzIGJvdGggb2Zmc2V0LWJhc2VkIHBhZ2luYXRpb24gYW5kIH'
     'RpbWUgcmFuZ2UgZmlsdGVyaW5nLioQbGlzdFRyYW5zYWN0aW9uczAB');
+

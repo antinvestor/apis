@@ -1,14 +1,13 @@
-// This is a generated file - do not edit.
 //
-// Generated from gnostic/openapi/v3/openapiv3.proto.
-
-// @dart = 3.3
+//  Generated code. Do not modify.
+//  source: gnostic/openapi/v3/openapiv3.proto
+//
+// @dart = 2.12
 
 // ignore_for_file: annotate_overrides, camel_case_types, comment_references
-// ignore_for_file: constant_identifier_names
-// ignore_for_file: curly_braces_in_flow_control_structures
-// ignore_for_file: deprecated_member_use_from_same_package, library_prefixes
-// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: constant_identifier_names, library_prefixes
+// ignore_for_file: non_constant_identifier_names, prefer_final_fields
+// ignore_for_file: unnecessary_import, unnecessary_this, unused_import
 
 import 'dart:convert' as $convert;
 import 'dart:core' as $core;
@@ -18,15 +17,7 @@ import 'dart:typed_data' as $typed_data;
 const AdditionalPropertiesItem$json = {
   '1': 'AdditionalPropertiesItem',
   '2': [
-    {
-      '1': 'schema_or_reference',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.SchemaOrReference',
-      '9': 0,
-      '10': 'schemaOrReference'
-    },
+    {'1': 'schema_or_reference', '3': 1, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.SchemaOrReference', '9': 0, '10': 'schemaOrReference'},
     {'1': 'boolean', '3': 2, '4': 1, '5': 8, '9': 0, '10': 'boolean'},
   ],
   '8': [
@@ -44,14 +35,7 @@ final $typed_data.Uint8List additionalPropertiesItemDescriptor = $convert.base64
 const Any$json = {
   '1': 'Any',
   '2': [
-    {
-      '1': 'value',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Any',
-      '10': 'value'
-    },
+    {'1': 'value', '3': 1, '4': 1, '5': 11, '6': '.google.protobuf.Any', '10': 'value'},
     {'1': 'yaml', '3': 2, '4': 1, '5': 9, '10': 'yaml'},
   ],
 };
@@ -65,24 +49,8 @@ final $typed_data.Uint8List anyDescriptor = $convert.base64Decode(
 const AnyOrExpression$json = {
   '1': 'AnyOrExpression',
   '2': [
-    {
-      '1': 'any',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Any',
-      '9': 0,
-      '10': 'any'
-    },
-    {
-      '1': 'expression',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Expression',
-      '9': 0,
-      '10': 'expression'
-    },
+    {'1': 'any', '3': 1, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.Any', '9': 0, '10': 'any'},
+    {'1': 'expression', '3': 2, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.Expression', '9': 0, '10': 'expression'},
   ],
   '8': [
     {'1': 'oneof'},
@@ -99,22 +67,8 @@ final $typed_data.Uint8List anyOrExpressionDescriptor = $convert.base64Decode(
 const Callback$json = {
   '1': 'Callback',
   '2': [
-    {
-      '1': 'path',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedPathItem',
-      '10': 'path'
-    },
-    {
-      '1': 'specification_extension',
-      '3': 2,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedAny',
-      '10': 'specificationExtension'
-    },
+    {'1': 'path', '3': 1, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedPathItem', '10': 'path'},
+    {'1': 'specification_extension', '3': 2, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedAny', '10': 'specificationExtension'},
   ],
 };
 
@@ -128,24 +82,8 @@ final $typed_data.Uint8List callbackDescriptor = $convert.base64Decode(
 const CallbackOrReference$json = {
   '1': 'CallbackOrReference',
   '2': [
-    {
-      '1': 'callback',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Callback',
-      '9': 0,
-      '10': 'callback'
-    },
-    {
-      '1': 'reference',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Reference',
-      '9': 0,
-      '10': 'reference'
-    },
+    {'1': 'callback', '3': 1, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.Callback', '9': 0, '10': 'callback'},
+    {'1': 'reference', '3': 2, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.Reference', '9': 0, '10': 'reference'},
   ],
   '8': [
     {'1': 'oneof'},
@@ -162,14 +100,7 @@ final $typed_data.Uint8List callbackOrReferenceDescriptor = $convert.base64Decod
 const CallbacksOrReferences$json = {
   '1': 'CallbacksOrReferences',
   '2': [
-    {
-      '1': 'additional_properties',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedCallbackOrReference',
-      '10': 'additionalProperties'
-    },
+    {'1': 'additional_properties', '3': 1, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedCallbackOrReference', '10': 'additionalProperties'},
   ],
 };
 
@@ -183,86 +114,16 @@ final $typed_data.Uint8List callbacksOrReferencesDescriptor = $convert.base64Dec
 const Components$json = {
   '1': 'Components',
   '2': [
-    {
-      '1': 'schemas',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.SchemasOrReferences',
-      '10': 'schemas'
-    },
-    {
-      '1': 'responses',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.ResponsesOrReferences',
-      '10': 'responses'
-    },
-    {
-      '1': 'parameters',
-      '3': 3,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.ParametersOrReferences',
-      '10': 'parameters'
-    },
-    {
-      '1': 'examples',
-      '3': 4,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.ExamplesOrReferences',
-      '10': 'examples'
-    },
-    {
-      '1': 'request_bodies',
-      '3': 5,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.RequestBodiesOrReferences',
-      '10': 'requestBodies'
-    },
-    {
-      '1': 'headers',
-      '3': 6,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.HeadersOrReferences',
-      '10': 'headers'
-    },
-    {
-      '1': 'security_schemes',
-      '3': 7,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.SecuritySchemesOrReferences',
-      '10': 'securitySchemes'
-    },
-    {
-      '1': 'links',
-      '3': 8,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.LinksOrReferences',
-      '10': 'links'
-    },
-    {
-      '1': 'callbacks',
-      '3': 9,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.CallbacksOrReferences',
-      '10': 'callbacks'
-    },
-    {
-      '1': 'specification_extension',
-      '3': 10,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedAny',
-      '10': 'specificationExtension'
-    },
+    {'1': 'schemas', '3': 1, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.SchemasOrReferences', '10': 'schemas'},
+    {'1': 'responses', '3': 2, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.ResponsesOrReferences', '10': 'responses'},
+    {'1': 'parameters', '3': 3, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.ParametersOrReferences', '10': 'parameters'},
+    {'1': 'examples', '3': 4, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.ExamplesOrReferences', '10': 'examples'},
+    {'1': 'request_bodies', '3': 5, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.RequestBodiesOrReferences', '10': 'requestBodies'},
+    {'1': 'headers', '3': 6, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.HeadersOrReferences', '10': 'headers'},
+    {'1': 'security_schemes', '3': 7, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.SecuritySchemesOrReferences', '10': 'securitySchemes'},
+    {'1': 'links', '3': 8, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.LinksOrReferences', '10': 'links'},
+    {'1': 'callbacks', '3': 9, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.CallbacksOrReferences', '10': 'callbacks'},
+    {'1': 'specification_extension', '3': 10, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedAny', '10': 'specificationExtension'},
   ],
 };
 
@@ -290,14 +151,7 @@ const Contact$json = {
     {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
     {'1': 'url', '3': 2, '4': 1, '5': 9, '10': 'url'},
     {'1': 'email', '3': 3, '4': 1, '5': 9, '10': 'email'},
-    {
-      '1': 'specification_extension',
-      '3': 4,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedAny',
-      '10': 'specificationExtension'
-    },
+    {'1': 'specification_extension', '3': 4, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedAny', '10': 'specificationExtension'},
   ],
 };
 
@@ -330,22 +184,8 @@ const Discriminator$json = {
   '1': 'Discriminator',
   '2': [
     {'1': 'property_name', '3': 1, '4': 1, '5': 9, '10': 'propertyName'},
-    {
-      '1': 'mapping',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Strings',
-      '10': 'mapping'
-    },
-    {
-      '1': 'specification_extension',
-      '3': 3,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedAny',
-      '10': 'specificationExtension'
-    },
+    {'1': 'mapping', '3': 2, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.Strings', '10': 'mapping'},
+    {'1': 'specification_extension', '3': 3, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedAny', '10': 'specificationExtension'},
   ],
 };
 
@@ -361,70 +201,14 @@ const Document$json = {
   '1': 'Document',
   '2': [
     {'1': 'openapi', '3': 1, '4': 1, '5': 9, '10': 'openapi'},
-    {
-      '1': 'info',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Info',
-      '10': 'info'
-    },
-    {
-      '1': 'servers',
-      '3': 3,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Server',
-      '10': 'servers'
-    },
-    {
-      '1': 'paths',
-      '3': 4,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Paths',
-      '10': 'paths'
-    },
-    {
-      '1': 'components',
-      '3': 5,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Components',
-      '10': 'components'
-    },
-    {
-      '1': 'security',
-      '3': 6,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.SecurityRequirement',
-      '10': 'security'
-    },
-    {
-      '1': 'tags',
-      '3': 7,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Tag',
-      '10': 'tags'
-    },
-    {
-      '1': 'external_docs',
-      '3': 8,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.ExternalDocs',
-      '10': 'externalDocs'
-    },
-    {
-      '1': 'specification_extension',
-      '3': 9,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedAny',
-      '10': 'specificationExtension'
-    },
+    {'1': 'info', '3': 2, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.Info', '10': 'info'},
+    {'1': 'servers', '3': 3, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.Server', '10': 'servers'},
+    {'1': 'paths', '3': 4, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.Paths', '10': 'paths'},
+    {'1': 'components', '3': 5, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.Components', '10': 'components'},
+    {'1': 'security', '3': 6, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.SecurityRequirement', '10': 'security'},
+    {'1': 'tags', '3': 7, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.Tag', '10': 'tags'},
+    {'1': 'external_docs', '3': 8, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.ExternalDocs', '10': 'externalDocs'},
+    {'1': 'specification_extension', '3': 9, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedAny', '10': 'specificationExtension'},
   ],
 };
 
@@ -446,25 +230,11 @@ const Encoding$json = {
   '1': 'Encoding',
   '2': [
     {'1': 'content_type', '3': 1, '4': 1, '5': 9, '10': 'contentType'},
-    {
-      '1': 'headers',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.HeadersOrReferences',
-      '10': 'headers'
-    },
+    {'1': 'headers', '3': 2, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.HeadersOrReferences', '10': 'headers'},
     {'1': 'style', '3': 3, '4': 1, '5': 9, '10': 'style'},
     {'1': 'explode', '3': 4, '4': 1, '5': 8, '10': 'explode'},
     {'1': 'allow_reserved', '3': 5, '4': 1, '5': 8, '10': 'allowReserved'},
-    {
-      '1': 'specification_extension',
-      '3': 6,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedAny',
-      '10': 'specificationExtension'
-    },
+    {'1': 'specification_extension', '3': 6, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedAny', '10': 'specificationExtension'},
   ],
 };
 
@@ -481,14 +251,7 @@ final $typed_data.Uint8List encodingDescriptor = $convert.base64Decode(
 const Encodings$json = {
   '1': 'Encodings',
   '2': [
-    {
-      '1': 'additional_properties',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedEncoding',
-      '10': 'additionalProperties'
-    },
+    {'1': 'additional_properties', '3': 1, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedEncoding', '10': 'additionalProperties'},
   ],
 };
 
@@ -503,23 +266,9 @@ const Example$json = {
   '2': [
     {'1': 'summary', '3': 1, '4': 1, '5': 9, '10': 'summary'},
     {'1': 'description', '3': 2, '4': 1, '5': 9, '10': 'description'},
-    {
-      '1': 'value',
-      '3': 3,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Any',
-      '10': 'value'
-    },
+    {'1': 'value', '3': 3, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.Any', '10': 'value'},
     {'1': 'external_value', '3': 4, '4': 1, '5': 9, '10': 'externalValue'},
-    {
-      '1': 'specification_extension',
-      '3': 5,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedAny',
-      '10': 'specificationExtension'
-    },
+    {'1': 'specification_extension', '3': 5, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedAny', '10': 'specificationExtension'},
   ],
 };
 
@@ -535,24 +284,8 @@ final $typed_data.Uint8List exampleDescriptor = $convert.base64Decode(
 const ExampleOrReference$json = {
   '1': 'ExampleOrReference',
   '2': [
-    {
-      '1': 'example',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Example',
-      '9': 0,
-      '10': 'example'
-    },
-    {
-      '1': 'reference',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Reference',
-      '9': 0,
-      '10': 'reference'
-    },
+    {'1': 'example', '3': 1, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.Example', '9': 0, '10': 'example'},
+    {'1': 'reference', '3': 2, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.Reference', '9': 0, '10': 'reference'},
   ],
   '8': [
     {'1': 'oneof'},
@@ -569,14 +302,7 @@ final $typed_data.Uint8List exampleOrReferenceDescriptor = $convert.base64Decode
 const ExamplesOrReferences$json = {
   '1': 'ExamplesOrReferences',
   '2': [
-    {
-      '1': 'additional_properties',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedExampleOrReference',
-      '10': 'additionalProperties'
-    },
+    {'1': 'additional_properties', '3': 1, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedExampleOrReference', '10': 'additionalProperties'},
   ],
 };
 
@@ -590,14 +316,7 @@ final $typed_data.Uint8List examplesOrReferencesDescriptor = $convert.base64Deco
 const Expression$json = {
   '1': 'Expression',
   '2': [
-    {
-      '1': 'additional_properties',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedAny',
-      '10': 'additionalProperties'
-    },
+    {'1': 'additional_properties', '3': 1, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedAny', '10': 'additionalProperties'},
   ],
 };
 
@@ -612,14 +331,7 @@ const ExternalDocs$json = {
   '2': [
     {'1': 'description', '3': 1, '4': 1, '5': 9, '10': 'description'},
     {'1': 'url', '3': 2, '4': 1, '5': 9, '10': 'url'},
-    {
-      '1': 'specification_extension',
-      '3': 3,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedAny',
-      '10': 'specificationExtension'
-    },
+    {'1': 'specification_extension', '3': 3, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedAny', '10': 'specificationExtension'},
   ],
 };
 
@@ -640,46 +352,11 @@ const Header$json = {
     {'1': 'style', '3': 5, '4': 1, '5': 9, '10': 'style'},
     {'1': 'explode', '3': 6, '4': 1, '5': 8, '10': 'explode'},
     {'1': 'allow_reserved', '3': 7, '4': 1, '5': 8, '10': 'allowReserved'},
-    {
-      '1': 'schema',
-      '3': 8,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.SchemaOrReference',
-      '10': 'schema'
-    },
-    {
-      '1': 'example',
-      '3': 9,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Any',
-      '10': 'example'
-    },
-    {
-      '1': 'examples',
-      '3': 10,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.ExamplesOrReferences',
-      '10': 'examples'
-    },
-    {
-      '1': 'content',
-      '3': 11,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.MediaTypes',
-      '10': 'content'
-    },
-    {
-      '1': 'specification_extension',
-      '3': 12,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedAny',
-      '10': 'specificationExtension'
-    },
+    {'1': 'schema', '3': 8, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.SchemaOrReference', '10': 'schema'},
+    {'1': 'example', '3': 9, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.Any', '10': 'example'},
+    {'1': 'examples', '3': 10, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.ExamplesOrReferences', '10': 'examples'},
+    {'1': 'content', '3': 11, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.MediaTypes', '10': 'content'},
+    {'1': 'specification_extension', '3': 12, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedAny', '10': 'specificationExtension'},
   ],
 };
 
@@ -701,24 +378,8 @@ final $typed_data.Uint8List headerDescriptor = $convert.base64Decode(
 const HeaderOrReference$json = {
   '1': 'HeaderOrReference',
   '2': [
-    {
-      '1': 'header',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Header',
-      '9': 0,
-      '10': 'header'
-    },
-    {
-      '1': 'reference',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Reference',
-      '9': 0,
-      '10': 'reference'
-    },
+    {'1': 'header', '3': 1, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.Header', '9': 0, '10': 'header'},
+    {'1': 'reference', '3': 2, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.Reference', '9': 0, '10': 'reference'},
   ],
   '8': [
     {'1': 'oneof'},
@@ -735,14 +396,7 @@ final $typed_data.Uint8List headerOrReferenceDescriptor = $convert.base64Decode(
 const HeadersOrReferences$json = {
   '1': 'HeadersOrReferences',
   '2': [
-    {
-      '1': 'additional_properties',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedHeaderOrReference',
-      '10': 'additionalProperties'
-    },
+    {'1': 'additional_properties', '3': 1, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedHeaderOrReference', '10': 'additionalProperties'},
   ],
 };
 
@@ -759,31 +413,10 @@ const Info$json = {
     {'1': 'title', '3': 1, '4': 1, '5': 9, '10': 'title'},
     {'1': 'description', '3': 2, '4': 1, '5': 9, '10': 'description'},
     {'1': 'terms_of_service', '3': 3, '4': 1, '5': 9, '10': 'termsOfService'},
-    {
-      '1': 'contact',
-      '3': 4,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Contact',
-      '10': 'contact'
-    },
-    {
-      '1': 'license',
-      '3': 5,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.License',
-      '10': 'license'
-    },
+    {'1': 'contact', '3': 4, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.Contact', '10': 'contact'},
+    {'1': 'license', '3': 5, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.License', '10': 'license'},
     {'1': 'version', '3': 6, '4': 1, '5': 9, '10': 'version'},
-    {
-      '1': 'specification_extension',
-      '3': 7,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedAny',
-      '10': 'specificationExtension'
-    },
+    {'1': 'specification_extension', '3': 7, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedAny', '10': 'specificationExtension'},
     {'1': 'summary', '3': 8, '4': 1, '5': 9, '10': 'summary'},
   ],
 };
@@ -802,14 +435,7 @@ final $typed_data.Uint8List infoDescriptor = $convert.base64Decode(
 const ItemsItem$json = {
   '1': 'ItemsItem',
   '2': [
-    {
-      '1': 'schema_or_reference',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.SchemaOrReference',
-      '10': 'schemaOrReference'
-    },
+    {'1': 'schema_or_reference', '3': 1, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.SchemaOrReference', '10': 'schemaOrReference'},
   ],
 };
 
@@ -824,14 +450,7 @@ const License$json = {
   '2': [
     {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
     {'1': 'url', '3': 2, '4': 1, '5': 9, '10': 'url'},
-    {
-      '1': 'specification_extension',
-      '3': 3,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedAny',
-      '10': 'specificationExtension'
-    },
+    {'1': 'specification_extension', '3': 3, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedAny', '10': 'specificationExtension'},
   ],
 };
 
@@ -847,39 +466,11 @@ const Link$json = {
   '2': [
     {'1': 'operation_ref', '3': 1, '4': 1, '5': 9, '10': 'operationRef'},
     {'1': 'operation_id', '3': 2, '4': 1, '5': 9, '10': 'operationId'},
-    {
-      '1': 'parameters',
-      '3': 3,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.AnyOrExpression',
-      '10': 'parameters'
-    },
-    {
-      '1': 'request_body',
-      '3': 4,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.AnyOrExpression',
-      '10': 'requestBody'
-    },
+    {'1': 'parameters', '3': 3, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.AnyOrExpression', '10': 'parameters'},
+    {'1': 'request_body', '3': 4, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.AnyOrExpression', '10': 'requestBody'},
     {'1': 'description', '3': 5, '4': 1, '5': 9, '10': 'description'},
-    {
-      '1': 'server',
-      '3': 6,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Server',
-      '10': 'server'
-    },
-    {
-      '1': 'specification_extension',
-      '3': 7,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedAny',
-      '10': 'specificationExtension'
-    },
+    {'1': 'server', '3': 6, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.Server', '10': 'server'},
+    {'1': 'specification_extension', '3': 7, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedAny', '10': 'specificationExtension'},
   ],
 };
 
@@ -898,24 +489,8 @@ final $typed_data.Uint8List linkDescriptor = $convert.base64Decode(
 const LinkOrReference$json = {
   '1': 'LinkOrReference',
   '2': [
-    {
-      '1': 'link',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Link',
-      '9': 0,
-      '10': 'link'
-    },
-    {
-      '1': 'reference',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Reference',
-      '9': 0,
-      '10': 'reference'
-    },
+    {'1': 'link', '3': 1, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.Link', '9': 0, '10': 'link'},
+    {'1': 'reference', '3': 2, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.Reference', '9': 0, '10': 'reference'},
   ],
   '8': [
     {'1': 'oneof'},
@@ -932,14 +507,7 @@ final $typed_data.Uint8List linkOrReferenceDescriptor = $convert.base64Decode(
 const LinksOrReferences$json = {
   '1': 'LinksOrReferences',
   '2': [
-    {
-      '1': 'additional_properties',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedLinkOrReference',
-      '10': 'additionalProperties'
-    },
+    {'1': 'additional_properties', '3': 1, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedLinkOrReference', '10': 'additionalProperties'},
   ],
 };
 
@@ -953,46 +521,11 @@ final $typed_data.Uint8List linksOrReferencesDescriptor = $convert.base64Decode(
 const MediaType$json = {
   '1': 'MediaType',
   '2': [
-    {
-      '1': 'schema',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.SchemaOrReference',
-      '10': 'schema'
-    },
-    {
-      '1': 'example',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Any',
-      '10': 'example'
-    },
-    {
-      '1': 'examples',
-      '3': 3,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.ExamplesOrReferences',
-      '10': 'examples'
-    },
-    {
-      '1': 'encoding',
-      '3': 4,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Encodings',
-      '10': 'encoding'
-    },
-    {
-      '1': 'specification_extension',
-      '3': 5,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedAny',
-      '10': 'specificationExtension'
-    },
+    {'1': 'schema', '3': 1, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.SchemaOrReference', '10': 'schema'},
+    {'1': 'example', '3': 2, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.Any', '10': 'example'},
+    {'1': 'examples', '3': 3, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.ExamplesOrReferences', '10': 'examples'},
+    {'1': 'encoding', '3': 4, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.Encodings', '10': 'encoding'},
+    {'1': 'specification_extension', '3': 5, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedAny', '10': 'specificationExtension'},
   ],
 };
 
@@ -1010,14 +543,7 @@ final $typed_data.Uint8List mediaTypeDescriptor = $convert.base64Decode(
 const MediaTypes$json = {
   '1': 'MediaTypes',
   '2': [
-    {
-      '1': 'additional_properties',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedMediaType',
-      '10': 'additionalProperties'
-    },
+    {'1': 'additional_properties', '3': 1, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedMediaType', '10': 'additionalProperties'},
   ],
 };
 
@@ -1031,14 +557,7 @@ const NamedAny$json = {
   '1': 'NamedAny',
   '2': [
     {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
-    {
-      '1': 'value',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Any',
-      '10': 'value'
-    },
+    {'1': 'value', '3': 2, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.Any', '10': 'value'},
   ],
 };
 
@@ -1052,14 +571,7 @@ const NamedCallbackOrReference$json = {
   '1': 'NamedCallbackOrReference',
   '2': [
     {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
-    {
-      '1': 'value',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.CallbackOrReference',
-      '10': 'value'
-    },
+    {'1': 'value', '3': 2, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.CallbackOrReference', '10': 'value'},
   ],
 };
 
@@ -1073,14 +585,7 @@ const NamedEncoding$json = {
   '1': 'NamedEncoding',
   '2': [
     {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
-    {
-      '1': 'value',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Encoding',
-      '10': 'value'
-    },
+    {'1': 'value', '3': 2, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.Encoding', '10': 'value'},
   ],
 };
 
@@ -1094,14 +599,7 @@ const NamedExampleOrReference$json = {
   '1': 'NamedExampleOrReference',
   '2': [
     {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
-    {
-      '1': 'value',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.ExampleOrReference',
-      '10': 'value'
-    },
+    {'1': 'value', '3': 2, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.ExampleOrReference', '10': 'value'},
   ],
 };
 
@@ -1115,36 +613,21 @@ const NamedHeaderOrReference$json = {
   '1': 'NamedHeaderOrReference',
   '2': [
     {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
-    {
-      '1': 'value',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.HeaderOrReference',
-      '10': 'value'
-    },
+    {'1': 'value', '3': 2, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.HeaderOrReference', '10': 'value'},
   ],
 };
 
 /// Descriptor for `NamedHeaderOrReference`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List namedHeaderOrReferenceDescriptor =
-    $convert.base64Decode(
-        'ChZOYW1lZEhlYWRlck9yUmVmZXJlbmNlEhIKBG5hbWUYASABKAlSBG5hbWUSOwoFdmFsdWUYAi'
-        'ABKAsyJS5nbm9zdGljLm9wZW5hcGkudjMuSGVhZGVyT3JSZWZlcmVuY2VSBXZhbHVl');
+final $typed_data.Uint8List namedHeaderOrReferenceDescriptor = $convert.base64Decode(
+    'ChZOYW1lZEhlYWRlck9yUmVmZXJlbmNlEhIKBG5hbWUYASABKAlSBG5hbWUSOwoFdmFsdWUYAi'
+    'ABKAsyJS5nbm9zdGljLm9wZW5hcGkudjMuSGVhZGVyT3JSZWZlcmVuY2VSBXZhbHVl');
 
 @$core.Deprecated('Use namedLinkOrReferenceDescriptor instead')
 const NamedLinkOrReference$json = {
   '1': 'NamedLinkOrReference',
   '2': [
     {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
-    {
-      '1': 'value',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.LinkOrReference',
-      '10': 'value'
-    },
+    {'1': 'value', '3': 2, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.LinkOrReference', '10': 'value'},
   ],
 };
 
@@ -1158,14 +641,7 @@ const NamedMediaType$json = {
   '1': 'NamedMediaType',
   '2': [
     {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
-    {
-      '1': 'value',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.MediaType',
-      '10': 'value'
-    },
+    {'1': 'value', '3': 2, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.MediaType', '10': 'value'},
   ],
 };
 
@@ -1179,14 +655,7 @@ const NamedParameterOrReference$json = {
   '1': 'NamedParameterOrReference',
   '2': [
     {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
-    {
-      '1': 'value',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.ParameterOrReference',
-      '10': 'value'
-    },
+    {'1': 'value', '3': 2, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.ParameterOrReference', '10': 'value'},
   ],
 };
 
@@ -1200,14 +669,7 @@ const NamedPathItem$json = {
   '1': 'NamedPathItem',
   '2': [
     {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
-    {
-      '1': 'value',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.PathItem',
-      '10': 'value'
-    },
+    {'1': 'value', '3': 2, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.PathItem', '10': 'value'},
   ],
 };
 
@@ -1221,37 +683,22 @@ const NamedRequestBodyOrReference$json = {
   '1': 'NamedRequestBodyOrReference',
   '2': [
     {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
-    {
-      '1': 'value',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.RequestBodyOrReference',
-      '10': 'value'
-    },
+    {'1': 'value', '3': 2, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.RequestBodyOrReference', '10': 'value'},
   ],
 };
 
 /// Descriptor for `NamedRequestBodyOrReference`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List namedRequestBodyOrReferenceDescriptor =
-    $convert.base64Decode(
-        'ChtOYW1lZFJlcXVlc3RCb2R5T3JSZWZlcmVuY2USEgoEbmFtZRgBIAEoCVIEbmFtZRJACgV2YW'
-        'x1ZRgCIAEoCzIqLmdub3N0aWMub3BlbmFwaS52My5SZXF1ZXN0Qm9keU9yUmVmZXJlbmNlUgV2'
-        'YWx1ZQ==');
+final $typed_data.Uint8List namedRequestBodyOrReferenceDescriptor = $convert.base64Decode(
+    'ChtOYW1lZFJlcXVlc3RCb2R5T3JSZWZlcmVuY2USEgoEbmFtZRgBIAEoCVIEbmFtZRJACgV2YW'
+    'x1ZRgCIAEoCzIqLmdub3N0aWMub3BlbmFwaS52My5SZXF1ZXN0Qm9keU9yUmVmZXJlbmNlUgV2'
+    'YWx1ZQ==');
 
 @$core.Deprecated('Use namedResponseOrReferenceDescriptor instead')
 const NamedResponseOrReference$json = {
   '1': 'NamedResponseOrReference',
   '2': [
     {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
-    {
-      '1': 'value',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.ResponseOrReference',
-      '10': 'value'
-    },
+    {'1': 'value', '3': 2, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.ResponseOrReference', '10': 'value'},
   ],
 };
 
@@ -1265,59 +712,36 @@ const NamedSchemaOrReference$json = {
   '1': 'NamedSchemaOrReference',
   '2': [
     {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
-    {
-      '1': 'value',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.SchemaOrReference',
-      '10': 'value'
-    },
+    {'1': 'value', '3': 2, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.SchemaOrReference', '10': 'value'},
   ],
 };
 
 /// Descriptor for `NamedSchemaOrReference`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List namedSchemaOrReferenceDescriptor =
-    $convert.base64Decode(
-        'ChZOYW1lZFNjaGVtYU9yUmVmZXJlbmNlEhIKBG5hbWUYASABKAlSBG5hbWUSOwoFdmFsdWUYAi'
-        'ABKAsyJS5nbm9zdGljLm9wZW5hcGkudjMuU2NoZW1hT3JSZWZlcmVuY2VSBXZhbHVl');
+final $typed_data.Uint8List namedSchemaOrReferenceDescriptor = $convert.base64Decode(
+    'ChZOYW1lZFNjaGVtYU9yUmVmZXJlbmNlEhIKBG5hbWUYASABKAlSBG5hbWUSOwoFdmFsdWUYAi'
+    'ABKAsyJS5nbm9zdGljLm9wZW5hcGkudjMuU2NoZW1hT3JSZWZlcmVuY2VSBXZhbHVl');
 
 @$core.Deprecated('Use namedSecuritySchemeOrReferenceDescriptor instead')
 const NamedSecuritySchemeOrReference$json = {
   '1': 'NamedSecuritySchemeOrReference',
   '2': [
     {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
-    {
-      '1': 'value',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.SecuritySchemeOrReference',
-      '10': 'value'
-    },
+    {'1': 'value', '3': 2, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.SecuritySchemeOrReference', '10': 'value'},
   ],
 };
 
 /// Descriptor for `NamedSecuritySchemeOrReference`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List namedSecuritySchemeOrReferenceDescriptor =
-    $convert.base64Decode(
-        'Ch5OYW1lZFNlY3VyaXR5U2NoZW1lT3JSZWZlcmVuY2USEgoEbmFtZRgBIAEoCVIEbmFtZRJDCg'
-        'V2YWx1ZRgCIAEoCzItLmdub3N0aWMub3BlbmFwaS52My5TZWN1cml0eVNjaGVtZU9yUmVmZXJl'
-        'bmNlUgV2YWx1ZQ==');
+final $typed_data.Uint8List namedSecuritySchemeOrReferenceDescriptor = $convert.base64Decode(
+    'Ch5OYW1lZFNlY3VyaXR5U2NoZW1lT3JSZWZlcmVuY2USEgoEbmFtZRgBIAEoCVIEbmFtZRJDCg'
+    'V2YWx1ZRgCIAEoCzItLmdub3N0aWMub3BlbmFwaS52My5TZWN1cml0eVNjaGVtZU9yUmVmZXJl'
+    'bmNlUgV2YWx1ZQ==');
 
 @$core.Deprecated('Use namedServerVariableDescriptor instead')
 const NamedServerVariable$json = {
   '1': 'NamedServerVariable',
   '2': [
     {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
-    {
-      '1': 'value',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.ServerVariable',
-      '10': 'value'
-    },
+    {'1': 'value', '3': 2, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.ServerVariable', '10': 'value'},
   ],
 };
 
@@ -1345,14 +769,7 @@ const NamedStringArray$json = {
   '1': 'NamedStringArray',
   '2': [
     {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
-    {
-      '1': 'value',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.StringArray',
-      '10': 'value'
-    },
+    {'1': 'value', '3': 2, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.StringArray', '10': 'value'},
   ],
 };
 
@@ -1365,31 +782,11 @@ final $typed_data.Uint8List namedStringArrayDescriptor = $convert.base64Decode(
 const OauthFlow$json = {
   '1': 'OauthFlow',
   '2': [
-    {
-      '1': 'authorization_url',
-      '3': 1,
-      '4': 1,
-      '5': 9,
-      '10': 'authorizationUrl'
-    },
+    {'1': 'authorization_url', '3': 1, '4': 1, '5': 9, '10': 'authorizationUrl'},
     {'1': 'token_url', '3': 2, '4': 1, '5': 9, '10': 'tokenUrl'},
     {'1': 'refresh_url', '3': 3, '4': 1, '5': 9, '10': 'refreshUrl'},
-    {
-      '1': 'scopes',
-      '3': 4,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Strings',
-      '10': 'scopes'
-    },
-    {
-      '1': 'specification_extension',
-      '3': 5,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedAny',
-      '10': 'specificationExtension'
-    },
+    {'1': 'scopes', '3': 4, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.Strings', '10': 'scopes'},
+    {'1': 'specification_extension', '3': 5, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedAny', '10': 'specificationExtension'},
   ],
 };
 
@@ -1405,46 +802,11 @@ final $typed_data.Uint8List oauthFlowDescriptor = $convert.base64Decode(
 const OauthFlows$json = {
   '1': 'OauthFlows',
   '2': [
-    {
-      '1': 'implicit',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.OauthFlow',
-      '10': 'implicit'
-    },
-    {
-      '1': 'password',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.OauthFlow',
-      '10': 'password'
-    },
-    {
-      '1': 'client_credentials',
-      '3': 3,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.OauthFlow',
-      '10': 'clientCredentials'
-    },
-    {
-      '1': 'authorization_code',
-      '3': 4,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.OauthFlow',
-      '10': 'authorizationCode'
-    },
-    {
-      '1': 'specification_extension',
-      '3': 5,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedAny',
-      '10': 'specificationExtension'
-    },
+    {'1': 'implicit', '3': 1, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.OauthFlow', '10': 'implicit'},
+    {'1': 'password', '3': 2, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.OauthFlow', '10': 'password'},
+    {'1': 'client_credentials', '3': 3, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.OauthFlow', '10': 'clientCredentials'},
+    {'1': 'authorization_code', '3': 4, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.OauthFlow', '10': 'authorizationCode'},
+    {'1': 'specification_extension', '3': 5, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedAny', '10': 'specificationExtension'},
   ],
 };
 
@@ -1462,14 +824,7 @@ final $typed_data.Uint8List oauthFlowsDescriptor = $convert.base64Decode(
 const Object$json = {
   '1': 'Object',
   '2': [
-    {
-      '1': 'additional_properties',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedAny',
-      '10': 'additionalProperties'
-    },
+    {'1': 'additional_properties', '3': 1, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedAny', '10': 'additionalProperties'},
   ],
 };
 
@@ -1485,72 +840,16 @@ const Operation$json = {
     {'1': 'tags', '3': 1, '4': 3, '5': 9, '10': 'tags'},
     {'1': 'summary', '3': 2, '4': 1, '5': 9, '10': 'summary'},
     {'1': 'description', '3': 3, '4': 1, '5': 9, '10': 'description'},
-    {
-      '1': 'external_docs',
-      '3': 4,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.ExternalDocs',
-      '10': 'externalDocs'
-    },
+    {'1': 'external_docs', '3': 4, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.ExternalDocs', '10': 'externalDocs'},
     {'1': 'operation_id', '3': 5, '4': 1, '5': 9, '10': 'operationId'},
-    {
-      '1': 'parameters',
-      '3': 6,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.ParameterOrReference',
-      '10': 'parameters'
-    },
-    {
-      '1': 'request_body',
-      '3': 7,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.RequestBodyOrReference',
-      '10': 'requestBody'
-    },
-    {
-      '1': 'responses',
-      '3': 8,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Responses',
-      '10': 'responses'
-    },
-    {
-      '1': 'callbacks',
-      '3': 9,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.CallbacksOrReferences',
-      '10': 'callbacks'
-    },
+    {'1': 'parameters', '3': 6, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.ParameterOrReference', '10': 'parameters'},
+    {'1': 'request_body', '3': 7, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.RequestBodyOrReference', '10': 'requestBody'},
+    {'1': 'responses', '3': 8, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.Responses', '10': 'responses'},
+    {'1': 'callbacks', '3': 9, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.CallbacksOrReferences', '10': 'callbacks'},
     {'1': 'deprecated', '3': 10, '4': 1, '5': 8, '10': 'deprecated'},
-    {
-      '1': 'security',
-      '3': 11,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.SecurityRequirement',
-      '10': 'security'
-    },
-    {
-      '1': 'servers',
-      '3': 12,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Server',
-      '10': 'servers'
-    },
-    {
-      '1': 'specification_extension',
-      '3': 13,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedAny',
-      '10': 'specificationExtension'
-    },
+    {'1': 'security', '3': 11, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.SecurityRequirement', '10': 'security'},
+    {'1': 'servers', '3': 12, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.Server', '10': 'servers'},
+    {'1': 'specification_extension', '3': 13, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedAny', '10': 'specificationExtension'},
   ],
 };
 
@@ -1584,46 +883,11 @@ const Parameter$json = {
     {'1': 'style', '3': 7, '4': 1, '5': 9, '10': 'style'},
     {'1': 'explode', '3': 8, '4': 1, '5': 8, '10': 'explode'},
     {'1': 'allow_reserved', '3': 9, '4': 1, '5': 8, '10': 'allowReserved'},
-    {
-      '1': 'schema',
-      '3': 10,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.SchemaOrReference',
-      '10': 'schema'
-    },
-    {
-      '1': 'example',
-      '3': 11,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Any',
-      '10': 'example'
-    },
-    {
-      '1': 'examples',
-      '3': 12,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.ExamplesOrReferences',
-      '10': 'examples'
-    },
-    {
-      '1': 'content',
-      '3': 13,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.MediaTypes',
-      '10': 'content'
-    },
-    {
-      '1': 'specification_extension',
-      '3': 14,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedAny',
-      '10': 'specificationExtension'
-    },
+    {'1': 'schema', '3': 10, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.SchemaOrReference', '10': 'schema'},
+    {'1': 'example', '3': 11, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.Any', '10': 'example'},
+    {'1': 'examples', '3': 12, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.ExamplesOrReferences', '10': 'examples'},
+    {'1': 'content', '3': 13, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.MediaTypes', '10': 'content'},
+    {'1': 'specification_extension', '3': 14, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedAny', '10': 'specificationExtension'},
   ],
 };
 
@@ -1645,24 +909,8 @@ final $typed_data.Uint8List parameterDescriptor = $convert.base64Decode(
 const ParameterOrReference$json = {
   '1': 'ParameterOrReference',
   '2': [
-    {
-      '1': 'parameter',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Parameter',
-      '9': 0,
-      '10': 'parameter'
-    },
-    {
-      '1': 'reference',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Reference',
-      '9': 0,
-      '10': 'reference'
-    },
+    {'1': 'parameter', '3': 1, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.Parameter', '9': 0, '10': 'parameter'},
+    {'1': 'reference', '3': 2, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.Reference', '9': 0, '10': 'reference'},
   ],
   '8': [
     {'1': 'oneof'},
@@ -1679,14 +927,7 @@ final $typed_data.Uint8List parameterOrReferenceDescriptor = $convert.base64Deco
 const ParametersOrReferences$json = {
   '1': 'ParametersOrReferences',
   '2': [
-    {
-      '1': 'additional_properties',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedParameterOrReference',
-      '10': 'additionalProperties'
-    },
+    {'1': 'additional_properties', '3': 1, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedParameterOrReference', '10': 'additionalProperties'},
   ],
 };
 
@@ -1703,94 +944,17 @@ const PathItem$json = {
     {'1': '_ref', '3': 1, '4': 1, '5': 9, '10': 'Ref'},
     {'1': 'summary', '3': 2, '4': 1, '5': 9, '10': 'summary'},
     {'1': 'description', '3': 3, '4': 1, '5': 9, '10': 'description'},
-    {
-      '1': 'get',
-      '3': 4,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Operation',
-      '10': 'get'
-    },
-    {
-      '1': 'put',
-      '3': 5,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Operation',
-      '10': 'put'
-    },
-    {
-      '1': 'post',
-      '3': 6,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Operation',
-      '10': 'post'
-    },
-    {
-      '1': 'delete',
-      '3': 7,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Operation',
-      '10': 'delete'
-    },
-    {
-      '1': 'options',
-      '3': 8,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Operation',
-      '10': 'options'
-    },
-    {
-      '1': 'head',
-      '3': 9,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Operation',
-      '10': 'head'
-    },
-    {
-      '1': 'patch',
-      '3': 10,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Operation',
-      '10': 'patch'
-    },
-    {
-      '1': 'trace',
-      '3': 11,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Operation',
-      '10': 'trace'
-    },
-    {
-      '1': 'servers',
-      '3': 12,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Server',
-      '10': 'servers'
-    },
-    {
-      '1': 'parameters',
-      '3': 13,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.ParameterOrReference',
-      '10': 'parameters'
-    },
-    {
-      '1': 'specification_extension',
-      '3': 14,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedAny',
-      '10': 'specificationExtension'
-    },
+    {'1': 'get', '3': 4, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.Operation', '10': 'get'},
+    {'1': 'put', '3': 5, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.Operation', '10': 'put'},
+    {'1': 'post', '3': 6, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.Operation', '10': 'post'},
+    {'1': 'delete', '3': 7, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.Operation', '10': 'delete'},
+    {'1': 'options', '3': 8, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.Operation', '10': 'options'},
+    {'1': 'head', '3': 9, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.Operation', '10': 'head'},
+    {'1': 'patch', '3': 10, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.Operation', '10': 'patch'},
+    {'1': 'trace', '3': 11, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.Operation', '10': 'trace'},
+    {'1': 'servers', '3': 12, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.Server', '10': 'servers'},
+    {'1': 'parameters', '3': 13, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.ParameterOrReference', '10': 'parameters'},
+    {'1': 'specification_extension', '3': 14, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedAny', '10': 'specificationExtension'},
   ],
 };
 
@@ -1815,22 +979,8 @@ final $typed_data.Uint8List pathItemDescriptor = $convert.base64Decode(
 const Paths$json = {
   '1': 'Paths',
   '2': [
-    {
-      '1': 'path',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedPathItem',
-      '10': 'path'
-    },
-    {
-      '1': 'specification_extension',
-      '3': 2,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedAny',
-      '10': 'specificationExtension'
-    },
+    {'1': 'path', '3': 1, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedPathItem', '10': 'path'},
+    {'1': 'specification_extension', '3': 2, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedAny', '10': 'specificationExtension'},
   ],
 };
 
@@ -1844,14 +994,7 @@ final $typed_data.Uint8List pathsDescriptor = $convert.base64Decode(
 const Properties$json = {
   '1': 'Properties',
   '2': [
-    {
-      '1': 'additional_properties',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedSchemaOrReference',
-      '10': 'additionalProperties'
-    },
+    {'1': 'additional_properties', '3': 1, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedSchemaOrReference', '10': 'additionalProperties'},
   ],
 };
 
@@ -1879,14 +1022,7 @@ final $typed_data.Uint8List referenceDescriptor = $convert.base64Decode(
 const RequestBodiesOrReferences$json = {
   '1': 'RequestBodiesOrReferences',
   '2': [
-    {
-      '1': 'additional_properties',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedRequestBodyOrReference',
-      '10': 'additionalProperties'
-    },
+    {'1': 'additional_properties', '3': 1, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedRequestBodyOrReference', '10': 'additionalProperties'},
   ],
 };
 
@@ -1901,23 +1037,9 @@ const RequestBody$json = {
   '1': 'RequestBody',
   '2': [
     {'1': 'description', '3': 1, '4': 1, '5': 9, '10': 'description'},
-    {
-      '1': 'content',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.MediaTypes',
-      '10': 'content'
-    },
+    {'1': 'content', '3': 2, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.MediaTypes', '10': 'content'},
     {'1': 'required', '3': 3, '4': 1, '5': 8, '10': 'required'},
-    {
-      '1': 'specification_extension',
-      '3': 4,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedAny',
-      '10': 'specificationExtension'
-    },
+    {'1': 'specification_extension', '3': 4, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedAny', '10': 'specificationExtension'},
   ],
 };
 
@@ -1932,24 +1054,8 @@ final $typed_data.Uint8List requestBodyDescriptor = $convert.base64Decode(
 const RequestBodyOrReference$json = {
   '1': 'RequestBodyOrReference',
   '2': [
-    {
-      '1': 'request_body',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.RequestBody',
-      '9': 0,
-      '10': 'requestBody'
-    },
-    {
-      '1': 'reference',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Reference',
-      '9': 0,
-      '10': 'reference'
-    },
+    {'1': 'request_body', '3': 1, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.RequestBody', '9': 0, '10': 'requestBody'},
+    {'1': 'reference', '3': 2, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.Reference', '9': 0, '10': 'reference'},
   ],
   '8': [
     {'1': 'oneof'},
@@ -1968,38 +1074,10 @@ const Response$json = {
   '1': 'Response',
   '2': [
     {'1': 'description', '3': 1, '4': 1, '5': 9, '10': 'description'},
-    {
-      '1': 'headers',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.HeadersOrReferences',
-      '10': 'headers'
-    },
-    {
-      '1': 'content',
-      '3': 3,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.MediaTypes',
-      '10': 'content'
-    },
-    {
-      '1': 'links',
-      '3': 4,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.LinksOrReferences',
-      '10': 'links'
-    },
-    {
-      '1': 'specification_extension',
-      '3': 5,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedAny',
-      '10': 'specificationExtension'
-    },
+    {'1': 'headers', '3': 2, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.HeadersOrReferences', '10': 'headers'},
+    {'1': 'content', '3': 3, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.MediaTypes', '10': 'content'},
+    {'1': 'links', '3': 4, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.LinksOrReferences', '10': 'links'},
+    {'1': 'specification_extension', '3': 5, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedAny', '10': 'specificationExtension'},
   ],
 };
 
@@ -2016,24 +1094,8 @@ final $typed_data.Uint8List responseDescriptor = $convert.base64Decode(
 const ResponseOrReference$json = {
   '1': 'ResponseOrReference',
   '2': [
-    {
-      '1': 'response',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Response',
-      '9': 0,
-      '10': 'response'
-    },
-    {
-      '1': 'reference',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Reference',
-      '9': 0,
-      '10': 'reference'
-    },
+    {'1': 'response', '3': 1, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.Response', '9': 0, '10': 'response'},
+    {'1': 'reference', '3': 2, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.Reference', '9': 0, '10': 'reference'},
   ],
   '8': [
     {'1': 'oneof'},
@@ -2050,30 +1112,9 @@ final $typed_data.Uint8List responseOrReferenceDescriptor = $convert.base64Decod
 const Responses$json = {
   '1': 'Responses',
   '2': [
-    {
-      '1': 'default',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.ResponseOrReference',
-      '10': 'default'
-    },
-    {
-      '1': 'response_or_reference',
-      '3': 2,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedResponseOrReference',
-      '10': 'responseOrReference'
-    },
-    {
-      '1': 'specification_extension',
-      '3': 3,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedAny',
-      '10': 'specificationExtension'
-    },
+    {'1': 'default', '3': 1, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.ResponseOrReference', '10': 'default'},
+    {'1': 'response_or_reference', '3': 2, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedResponseOrReference', '10': 'responseOrReference'},
+    {'1': 'specification_extension', '3': 3, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedAny', '10': 'specificationExtension'},
   ],
 };
 
@@ -2089,14 +1130,7 @@ final $typed_data.Uint8List responsesDescriptor = $convert.base64Decode(
 const ResponsesOrReferences$json = {
   '1': 'ResponsesOrReferences',
   '2': [
-    {
-      '1': 'additional_properties',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedResponseOrReference',
-      '10': 'additionalProperties'
-    },
+    {'1': 'additional_properties', '3': 1, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedResponseOrReference', '10': 'additionalProperties'},
   ],
 };
 
@@ -2111,59 +1145,19 @@ const Schema$json = {
   '1': 'Schema',
   '2': [
     {'1': 'nullable', '3': 1, '4': 1, '5': 8, '10': 'nullable'},
-    {
-      '1': 'discriminator',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Discriminator',
-      '10': 'discriminator'
-    },
+    {'1': 'discriminator', '3': 2, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.Discriminator', '10': 'discriminator'},
     {'1': 'read_only', '3': 3, '4': 1, '5': 8, '10': 'readOnly'},
     {'1': 'write_only', '3': 4, '4': 1, '5': 8, '10': 'writeOnly'},
-    {
-      '1': 'xml',
-      '3': 5,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Xml',
-      '10': 'xml'
-    },
-    {
-      '1': 'external_docs',
-      '3': 6,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.ExternalDocs',
-      '10': 'externalDocs'
-    },
-    {
-      '1': 'example',
-      '3': 7,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Any',
-      '10': 'example'
-    },
+    {'1': 'xml', '3': 5, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.Xml', '10': 'xml'},
+    {'1': 'external_docs', '3': 6, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.ExternalDocs', '10': 'externalDocs'},
+    {'1': 'example', '3': 7, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.Any', '10': 'example'},
     {'1': 'deprecated', '3': 8, '4': 1, '5': 8, '10': 'deprecated'},
     {'1': 'title', '3': 9, '4': 1, '5': 9, '10': 'title'},
     {'1': 'multiple_of', '3': 10, '4': 1, '5': 1, '10': 'multipleOf'},
     {'1': 'maximum', '3': 11, '4': 1, '5': 1, '10': 'maximum'},
-    {
-      '1': 'exclusive_maximum',
-      '3': 12,
-      '4': 1,
-      '5': 8,
-      '10': 'exclusiveMaximum'
-    },
+    {'1': 'exclusive_maximum', '3': 12, '4': 1, '5': 8, '10': 'exclusiveMaximum'},
     {'1': 'minimum', '3': 13, '4': 1, '5': 1, '10': 'minimum'},
-    {
-      '1': 'exclusive_minimum',
-      '3': 14,
-      '4': 1,
-      '5': 8,
-      '10': 'exclusiveMinimum'
-    },
+    {'1': 'exclusive_minimum', '3': 14, '4': 1, '5': 8, '10': 'exclusiveMinimum'},
     {'1': 'max_length', '3': 15, '4': 1, '5': 3, '10': 'maxLength'},
     {'1': 'min_length', '3': 16, '4': 1, '5': 3, '10': 'minLength'},
     {'1': 'pattern', '3': 17, '4': 1, '5': 9, '10': 'pattern'},
@@ -2173,89 +1167,19 @@ const Schema$json = {
     {'1': 'max_properties', '3': 21, '4': 1, '5': 3, '10': 'maxProperties'},
     {'1': 'min_properties', '3': 22, '4': 1, '5': 3, '10': 'minProperties'},
     {'1': 'required', '3': 23, '4': 3, '5': 9, '10': 'required'},
-    {
-      '1': 'enum',
-      '3': 24,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Any',
-      '10': 'enum'
-    },
+    {'1': 'enum', '3': 24, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.Any', '10': 'enum'},
     {'1': 'type', '3': 25, '4': 1, '5': 9, '10': 'type'},
-    {
-      '1': 'all_of',
-      '3': 26,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.SchemaOrReference',
-      '10': 'allOf'
-    },
-    {
-      '1': 'one_of',
-      '3': 27,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.SchemaOrReference',
-      '10': 'oneOf'
-    },
-    {
-      '1': 'any_of',
-      '3': 28,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.SchemaOrReference',
-      '10': 'anyOf'
-    },
-    {
-      '1': 'not',
-      '3': 29,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Schema',
-      '10': 'not'
-    },
-    {
-      '1': 'items',
-      '3': 30,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.ItemsItem',
-      '10': 'items'
-    },
-    {
-      '1': 'properties',
-      '3': 31,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Properties',
-      '10': 'properties'
-    },
-    {
-      '1': 'additional_properties',
-      '3': 32,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.AdditionalPropertiesItem',
-      '10': 'additionalProperties'
-    },
-    {
-      '1': 'default',
-      '3': 33,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.DefaultType',
-      '10': 'default'
-    },
+    {'1': 'all_of', '3': 26, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.SchemaOrReference', '10': 'allOf'},
+    {'1': 'one_of', '3': 27, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.SchemaOrReference', '10': 'oneOf'},
+    {'1': 'any_of', '3': 28, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.SchemaOrReference', '10': 'anyOf'},
+    {'1': 'not', '3': 29, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.Schema', '10': 'not'},
+    {'1': 'items', '3': 30, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.ItemsItem', '10': 'items'},
+    {'1': 'properties', '3': 31, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.Properties', '10': 'properties'},
+    {'1': 'additional_properties', '3': 32, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.AdditionalPropertiesItem', '10': 'additionalProperties'},
+    {'1': 'default', '3': 33, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.DefaultType', '10': 'default'},
     {'1': 'description', '3': 34, '4': 1, '5': 9, '10': 'description'},
     {'1': 'format', '3': 35, '4': 1, '5': 9, '10': 'format'},
-    {
-      '1': 'specification_extension',
-      '3': 36,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedAny',
-      '10': 'specificationExtension'
-    },
+    {'1': 'specification_extension', '3': 36, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedAny', '10': 'specificationExtension'},
   ],
 };
 
@@ -2295,24 +1219,8 @@ final $typed_data.Uint8List schemaDescriptor = $convert.base64Decode(
 const SchemaOrReference$json = {
   '1': 'SchemaOrReference',
   '2': [
-    {
-      '1': 'schema',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Schema',
-      '9': 0,
-      '10': 'schema'
-    },
-    {
-      '1': 'reference',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Reference',
-      '9': 0,
-      '10': 'reference'
-    },
+    {'1': 'schema', '3': 1, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.Schema', '9': 0, '10': 'schema'},
+    {'1': 'reference', '3': 2, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.Reference', '9': 0, '10': 'reference'},
   ],
   '8': [
     {'1': 'oneof'},
@@ -2329,14 +1237,7 @@ final $typed_data.Uint8List schemaOrReferenceDescriptor = $convert.base64Decode(
 const SchemasOrReferences$json = {
   '1': 'SchemasOrReferences',
   '2': [
-    {
-      '1': 'additional_properties',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedSchemaOrReference',
-      '10': 'additionalProperties'
-    },
+    {'1': 'additional_properties', '3': 1, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedSchemaOrReference', '10': 'additionalProperties'},
   ],
 };
 
@@ -2350,14 +1251,7 @@ final $typed_data.Uint8List schemasOrReferencesDescriptor = $convert.base64Decod
 const SecurityRequirement$json = {
   '1': 'SecurityRequirement',
   '2': [
-    {
-      '1': 'additional_properties',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedStringArray',
-      '10': 'additionalProperties'
-    },
+    {'1': 'additional_properties', '3': 1, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedStringArray', '10': 'additionalProperties'},
   ],
 };
 
@@ -2377,29 +1271,9 @@ const SecurityScheme$json = {
     {'1': 'in', '3': 4, '4': 1, '5': 9, '10': 'in'},
     {'1': 'scheme', '3': 5, '4': 1, '5': 9, '10': 'scheme'},
     {'1': 'bearer_format', '3': 6, '4': 1, '5': 9, '10': 'bearerFormat'},
-    {
-      '1': 'flows',
-      '3': 7,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.OauthFlows',
-      '10': 'flows'
-    },
-    {
-      '1': 'open_id_connect_url',
-      '3': 8,
-      '4': 1,
-      '5': 9,
-      '10': 'openIdConnectUrl'
-    },
-    {
-      '1': 'specification_extension',
-      '3': 9,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedAny',
-      '10': 'specificationExtension'
-    },
+    {'1': 'flows', '3': 7, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.OauthFlows', '10': 'flows'},
+    {'1': 'open_id_connect_url', '3': 8, '4': 1, '5': 9, '10': 'openIdConnectUrl'},
+    {'1': 'specification_extension', '3': 9, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedAny', '10': 'specificationExtension'},
   ],
 };
 
@@ -2417,24 +1291,8 @@ final $typed_data.Uint8List securitySchemeDescriptor = $convert.base64Decode(
 const SecuritySchemeOrReference$json = {
   '1': 'SecuritySchemeOrReference',
   '2': [
-    {
-      '1': 'security_scheme',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.SecurityScheme',
-      '9': 0,
-      '10': 'securityScheme'
-    },
-    {
-      '1': 'reference',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.Reference',
-      '9': 0,
-      '10': 'reference'
-    },
+    {'1': 'security_scheme', '3': 1, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.SecurityScheme', '9': 0, '10': 'securityScheme'},
+    {'1': 'reference', '3': 2, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.Reference', '9': 0, '10': 'reference'},
   ],
   '8': [
     {'1': 'oneof'},
@@ -2452,23 +1310,15 @@ final $typed_data.Uint8List securitySchemeOrReferenceDescriptor = $convert.base6
 const SecuritySchemesOrReferences$json = {
   '1': 'SecuritySchemesOrReferences',
   '2': [
-    {
-      '1': 'additional_properties',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedSecuritySchemeOrReference',
-      '10': 'additionalProperties'
-    },
+    {'1': 'additional_properties', '3': 1, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedSecuritySchemeOrReference', '10': 'additionalProperties'},
   ],
 };
 
 /// Descriptor for `SecuritySchemesOrReferences`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List securitySchemesOrReferencesDescriptor =
-    $convert.base64Decode(
-        'ChtTZWN1cml0eVNjaGVtZXNPclJlZmVyZW5jZXMSZwoVYWRkaXRpb25hbF9wcm9wZXJ0aWVzGA'
-        'EgAygLMjIuZ25vc3RpYy5vcGVuYXBpLnYzLk5hbWVkU2VjdXJpdHlTY2hlbWVPclJlZmVyZW5j'
-        'ZVIUYWRkaXRpb25hbFByb3BlcnRpZXM=');
+final $typed_data.Uint8List securitySchemesOrReferencesDescriptor = $convert.base64Decode(
+    'ChtTZWN1cml0eVNjaGVtZXNPclJlZmVyZW5jZXMSZwoVYWRkaXRpb25hbF9wcm9wZXJ0aWVzGA'
+    'EgAygLMjIuZ25vc3RpYy5vcGVuYXBpLnYzLk5hbWVkU2VjdXJpdHlTY2hlbWVPclJlZmVyZW5j'
+    'ZVIUYWRkaXRpb25hbFByb3BlcnRpZXM=');
 
 @$core.Deprecated('Use serverDescriptor instead')
 const Server$json = {
@@ -2476,22 +1326,8 @@ const Server$json = {
   '2': [
     {'1': 'url', '3': 1, '4': 1, '5': 9, '10': 'url'},
     {'1': 'description', '3': 2, '4': 1, '5': 9, '10': 'description'},
-    {
-      '1': 'variables',
-      '3': 3,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.ServerVariables',
-      '10': 'variables'
-    },
-    {
-      '1': 'specification_extension',
-      '3': 4,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedAny',
-      '10': 'specificationExtension'
-    },
+    {'1': 'variables', '3': 3, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.ServerVariables', '10': 'variables'},
+    {'1': 'specification_extension', '3': 4, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedAny', '10': 'specificationExtension'},
   ],
 };
 
@@ -2509,14 +1345,7 @@ const ServerVariable$json = {
     {'1': 'enum', '3': 1, '4': 3, '5': 9, '10': 'enum'},
     {'1': 'default', '3': 2, '4': 1, '5': 9, '10': 'default'},
     {'1': 'description', '3': 3, '4': 1, '5': 9, '10': 'description'},
-    {
-      '1': 'specification_extension',
-      '3': 4,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedAny',
-      '10': 'specificationExtension'
-    },
+    {'1': 'specification_extension', '3': 4, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedAny', '10': 'specificationExtension'},
   ],
 };
 
@@ -2531,14 +1360,7 @@ final $typed_data.Uint8List serverVariableDescriptor = $convert.base64Decode(
 const ServerVariables$json = {
   '1': 'ServerVariables',
   '2': [
-    {
-      '1': 'additional_properties',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedServerVariable',
-      '10': 'additionalProperties'
-    },
+    {'1': 'additional_properties', '3': 1, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedServerVariable', '10': 'additionalProperties'},
   ],
 };
 
@@ -2575,21 +1397,14 @@ const StringArray$json = {
 };
 
 /// Descriptor for `StringArray`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List stringArrayDescriptor =
-    $convert.base64Decode('CgtTdHJpbmdBcnJheRIUCgV2YWx1ZRgBIAMoCVIFdmFsdWU=');
+final $typed_data.Uint8List stringArrayDescriptor = $convert.base64Decode(
+    'CgtTdHJpbmdBcnJheRIUCgV2YWx1ZRgBIAMoCVIFdmFsdWU=');
 
 @$core.Deprecated('Use stringsDescriptor instead')
 const Strings$json = {
   '1': 'Strings',
   '2': [
-    {
-      '1': 'additional_properties',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedString',
-      '10': 'additionalProperties'
-    },
+    {'1': 'additional_properties', '3': 1, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedString', '10': 'additionalProperties'},
   ],
 };
 
@@ -2604,22 +1419,8 @@ const Tag$json = {
   '2': [
     {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
     {'1': 'description', '3': 2, '4': 1, '5': 9, '10': 'description'},
-    {
-      '1': 'external_docs',
-      '3': 3,
-      '4': 1,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.ExternalDocs',
-      '10': 'externalDocs'
-    },
-    {
-      '1': 'specification_extension',
-      '3': 4,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedAny',
-      '10': 'specificationExtension'
-    },
+    {'1': 'external_docs', '3': 3, '4': 1, '5': 11, '6': '.gnostic.openapi.v3.ExternalDocs', '10': 'externalDocs'},
+    {'1': 'specification_extension', '3': 4, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedAny', '10': 'specificationExtension'},
   ],
 };
 
@@ -2639,14 +1440,7 @@ const Xml$json = {
     {'1': 'prefix', '3': 3, '4': 1, '5': 9, '10': 'prefix'},
     {'1': 'attribute', '3': 4, '4': 1, '5': 8, '10': 'attribute'},
     {'1': 'wrapped', '3': 5, '4': 1, '5': 8, '10': 'wrapped'},
-    {
-      '1': 'specification_extension',
-      '3': 6,
-      '4': 3,
-      '5': 11,
-      '6': '.gnostic.openapi.v3.NamedAny',
-      '10': 'specificationExtension'
-    },
+    {'1': 'specification_extension', '3': 6, '4': 3, '5': 11, '6': '.gnostic.openapi.v3.NamedAny', '10': 'specificationExtension'},
   ],
 };
 
@@ -2656,3 +1450,4 @@ final $typed_data.Uint8List xmlDescriptor = $convert.base64Decode(
     'IWCgZwcmVmaXgYAyABKAlSBnByZWZpeBIcCglhdHRyaWJ1dGUYBCABKAhSCWF0dHJpYnV0ZRIY'
     'Cgd3cmFwcGVkGAUgASgIUgd3cmFwcGVkElUKF3NwZWNpZmljYXRpb25fZXh0ZW5zaW9uGAYgAy'
     'gLMhwuZ25vc3RpYy5vcGVuYXBpLnYzLk5hbWVkQW55UhZzcGVjaWZpY2F0aW9uRXh0ZW5zaW9u');
+

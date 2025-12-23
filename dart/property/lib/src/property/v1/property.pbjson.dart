@@ -1,24 +1,20 @@
-// This is a generated file - do not edit.
 //
-// Generated from property/v1/property.proto.
-
-// @dart = 3.3
+//  Generated code. Do not modify.
+//  source: property/v1/property.proto
+//
+// @dart = 2.12
 
 // ignore_for_file: annotate_overrides, camel_case_types, comment_references
-// ignore_for_file: constant_identifier_names
-// ignore_for_file: curly_braces_in_flow_control_structures
-// ignore_for_file: deprecated_member_use_from_same_package, library_prefixes
-// ignore_for_file: non_constant_identifier_names, prefer_relative_imports
-// ignore_for_file: unused_import
+// ignore_for_file: constant_identifier_names, library_prefixes
+// ignore_for_file: non_constant_identifier_names, prefer_final_fields
+// ignore_for_file: unnecessary_import, unnecessary_this, unused_import
 
 import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
-import 'package:protobuf/well_known_types/google/protobuf/struct.pbjson.dart'
-    as $0;
-import 'package:protobuf/well_known_types/google/protobuf/timestamp.pbjson.dart'
-    as $1;
+import '../../google/protobuf/struct.pbjson.dart' as $6;
+import '../../google/protobuf/timestamp.pbjson.dart' as $2;
 
 @$core.Deprecated('Use localityDescriptor instead')
 const Locality$json = {
@@ -28,32 +24,10 @@ const Locality$json = {
     {'1': 'parent_id', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'parentId'},
     {'1': 'name', '3': 5, '4': 1, '5': 9, '8': {}, '10': 'name'},
     {'1': 'description', '3': 6, '4': 1, '5': 9, '8': {}, '10': 'description'},
-    {
-      '1': 'extras',
-      '3': 7,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'extras'
-    },
-    {
-      '1': 'created_at',
-      '3': 8,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Timestamp',
-      '10': 'createdAt'
-    },
+    {'1': 'extras', '3': 7, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'extras'},
+    {'1': 'created_at', '3': 8, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
     {'1': 'point', '3': 3, '4': 1, '5': 9, '8': {}, '9': 0, '10': 'point'},
-    {
-      '1': 'boundary',
-      '3': 4,
-      '4': 1,
-      '5': 9,
-      '8': {},
-      '9': 0,
-      '10': 'boundary'
-    },
+    {'1': 'boundary', '3': 4, '4': 1, '5': 9, '8': {}, '9': 0, '10': 'boundary'},
   ],
   '8': [
     {'1': 'feature', '2': {}},
@@ -75,14 +49,7 @@ final $typed_data.Uint8List localityDescriptor = $convert.base64Decode(
 const AddLocalityRequest$json = {
   '1': 'AddLocalityRequest',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.property.v1.Locality',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 1, '5': 11, '6': '.property.v1.Locality', '10': 'data'},
   ],
 };
 
@@ -95,14 +62,7 @@ final $typed_data.Uint8List addLocalityRequestDescriptor = $convert.base64Decode
 const AddLocalityResponse$json = {
   '1': 'AddLocalityResponse',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.property.v1.Locality',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 1, '5': 11, '6': '.property.v1.Locality', '10': 'data'},
   ],
 };
 
@@ -118,22 +78,8 @@ const PropertyType$json = {
     {'1': 'id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'id'},
     {'1': 'name', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'name'},
     {'1': 'description', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'description'},
-    {
-      '1': 'extra',
-      '3': 4,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'extra'
-    },
-    {
-      '1': 'created_at',
-      '3': 5,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Timestamp',
-      '10': 'createdAt'
-    },
+    {'1': 'extra', '3': 4, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'extra'},
+    {'1': 'created_at', '3': 5, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
   ],
 };
 
@@ -151,40 +97,12 @@ const PropertyState$json = {
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'id'},
     {'1': 'propertyid', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'propertyid'},
-    {
-      '1': 'state',
-      '3': 3,
-      '4': 1,
-      '5': 14,
-      '6': '.common.v1.STATE',
-      '10': 'state'
-    },
-    {
-      '1': 'status',
-      '3': 4,
-      '4': 1,
-      '5': 14,
-      '6': '.common.v1.STATUS',
-      '10': 'status'
-    },
+    {'1': 'state', '3': 3, '4': 1, '5': 14, '6': '.common.v1.STATE', '10': 'state'},
+    {'1': 'status', '3': 4, '4': 1, '5': 14, '6': '.common.v1.STATUS', '10': 'status'},
     {'1': 'name', '3': 5, '4': 1, '5': 9, '8': {}, '10': 'name'},
     {'1': 'description', '3': 6, '4': 1, '5': 9, '8': {}, '10': 'description'},
-    {
-      '1': 'extras',
-      '3': 7,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'extras'
-    },
-    {
-      '1': 'created_at',
-      '3': 8,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Timestamp',
-      '10': 'createdAt'
-    },
+    {'1': 'extras', '3': 7, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'extras'},
+    {'1': 'created_at', '3': 8, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
   ],
 };
 
@@ -203,43 +121,27 @@ final $typed_data.Uint8List propertyStateDescriptor = $convert.base64Decode(
 const AddPropertyTypeRequest$json = {
   '1': 'AddPropertyTypeRequest',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.property.v1.PropertyType',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 1, '5': 11, '6': '.property.v1.PropertyType', '10': 'data'},
   ],
 };
 
 /// Descriptor for `AddPropertyTypeRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List addPropertyTypeRequestDescriptor =
-    $convert.base64Decode(
-        'ChZBZGRQcm9wZXJ0eVR5cGVSZXF1ZXN0Ei0KBGRhdGEYASABKAsyGS5wcm9wZXJ0eS52MS5Qcm'
-        '9wZXJ0eVR5cGVSBGRhdGE=');
+final $typed_data.Uint8List addPropertyTypeRequestDescriptor = $convert.base64Decode(
+    'ChZBZGRQcm9wZXJ0eVR5cGVSZXF1ZXN0Ei0KBGRhdGEYASABKAsyGS5wcm9wZXJ0eS52MS5Qcm'
+    '9wZXJ0eVR5cGVSBGRhdGE=');
 
 @$core.Deprecated('Use addPropertyTypeResponseDescriptor instead')
 const AddPropertyTypeResponse$json = {
   '1': 'AddPropertyTypeResponse',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.property.v1.PropertyType',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 1, '5': 11, '6': '.property.v1.PropertyType', '10': 'data'},
   ],
 };
 
 /// Descriptor for `AddPropertyTypeResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List addPropertyTypeResponseDescriptor =
-    $convert.base64Decode(
-        'ChdBZGRQcm9wZXJ0eVR5cGVSZXNwb25zZRItCgRkYXRhGAEgASgLMhkucHJvcGVydHkudjEuUH'
-        'JvcGVydHlUeXBlUgRkYXRh');
+final $typed_data.Uint8List addPropertyTypeResponseDescriptor = $convert.base64Decode(
+    'ChdBZGRQcm9wZXJ0eVR5cGVSZXNwb25zZRItCgRkYXRhGAEgASgLMhkucHJvcGVydHkudjEuUH'
+    'JvcGVydHlUeXBlUgRkYXRh');
 
 @$core.Deprecated('Use subscriptionDescriptor instead')
 const Subscription$json = {
@@ -249,30 +151,9 @@ const Subscription$json = {
     {'1': 'property_id', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'propertyId'},
     {'1': 'profile_id', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'profileId'},
     {'1': 'role', '3': 4, '4': 1, '5': 9, '8': {}, '10': 'role'},
-    {
-      '1': 'extra',
-      '3': 5,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'extra'
-    },
-    {
-      '1': 'created_at',
-      '3': 6,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Timestamp',
-      '10': 'createdAt'
-    },
-    {
-      '1': 'expires_at',
-      '3': 7,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Timestamp',
-      '10': 'expiresAt'
-    },
+    {'1': 'extra', '3': 5, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'extra'},
+    {'1': 'created_at', '3': 6, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
+    {'1': 'expires_at', '3': 7, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'expiresAt'},
   ],
 };
 
@@ -290,43 +171,27 @@ final $typed_data.Uint8List subscriptionDescriptor = $convert.base64Decode(
 const AddSubscriptionRequest$json = {
   '1': 'AddSubscriptionRequest',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.property.v1.Subscription',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 1, '5': 11, '6': '.property.v1.Subscription', '10': 'data'},
   ],
 };
 
 /// Descriptor for `AddSubscriptionRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List addSubscriptionRequestDescriptor =
-    $convert.base64Decode(
-        'ChZBZGRTdWJzY3JpcHRpb25SZXF1ZXN0Ei0KBGRhdGEYASABKAsyGS5wcm9wZXJ0eS52MS5TdW'
-        'JzY3JpcHRpb25SBGRhdGE=');
+final $typed_data.Uint8List addSubscriptionRequestDescriptor = $convert.base64Decode(
+    'ChZBZGRTdWJzY3JpcHRpb25SZXF1ZXN0Ei0KBGRhdGEYASABKAsyGS5wcm9wZXJ0eS52MS5TdW'
+    'JzY3JpcHRpb25SBGRhdGE=');
 
 @$core.Deprecated('Use addSubscriptionResponseDescriptor instead')
 const AddSubscriptionResponse$json = {
   '1': 'AddSubscriptionResponse',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.property.v1.Subscription',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 1, '5': 11, '6': '.property.v1.Subscription', '10': 'data'},
   ],
 };
 
 /// Descriptor for `AddSubscriptionResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List addSubscriptionResponseDescriptor =
-    $convert.base64Decode(
-        'ChdBZGRTdWJzY3JpcHRpb25SZXNwb25zZRItCgRkYXRhGAEgASgLMhkucHJvcGVydHkudjEuU3'
-        'Vic2NyaXB0aW9uUgRkYXRh');
+final $typed_data.Uint8List addSubscriptionResponseDescriptor = $convert.base64Decode(
+    'ChdBZGRTdWJzY3JpcHRpb25SZXNwb25zZRItCgRkYXRhGAEgASgLMhkucHJvcGVydHkudjEuU3'
+    'Vic2NyaXB0aW9uUgRkYXRh');
 
 @$core.Deprecated('Use propertyDescriptor instead')
 const Property$json = {
@@ -336,47 +201,11 @@ const Property$json = {
     {'1': 'parent_id', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'parentId'},
     {'1': 'name', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'name'},
     {'1': 'description', '3': 4, '4': 1, '5': 9, '8': {}, '10': 'description'},
-    {
-      '1': 'property_type',
-      '3': 5,
-      '4': 1,
-      '5': 11,
-      '6': '.property.v1.PropertyType',
-      '10': 'propertyType'
-    },
-    {
-      '1': 'locality',
-      '3': 6,
-      '4': 1,
-      '5': 11,
-      '6': '.property.v1.Locality',
-      '10': 'locality'
-    },
-    {
-      '1': 'started_at',
-      '3': 7,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Timestamp',
-      '8': {},
-      '10': 'startedAt'
-    },
-    {
-      '1': 'created_at',
-      '3': 8,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Timestamp',
-      '10': 'createdAt'
-    },
-    {
-      '1': 'extra',
-      '3': 9,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'extra'
-    },
+    {'1': 'property_type', '3': 5, '4': 1, '5': 11, '6': '.property.v1.PropertyType', '10': 'propertyType'},
+    {'1': 'locality', '3': 6, '4': 1, '5': 11, '6': '.property.v1.Locality', '10': 'locality'},
+    {'1': 'started_at', '3': 7, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '10': 'startedAt'},
+    {'1': 'created_at', '3': 8, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
+    {'1': 'extra', '3': 9, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'extra'},
   ],
 };
 
@@ -396,14 +225,7 @@ final $typed_data.Uint8List propertyDescriptor = $convert.base64Decode(
 const CreatePropertyRequest$json = {
   '1': 'CreatePropertyRequest',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.property.v1.Property',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 1, '5': 11, '6': '.property.v1.Property', '10': 'data'},
   ],
 };
 
@@ -416,22 +238,14 @@ final $typed_data.Uint8List createPropertyRequestDescriptor = $convert.base64Dec
 const CreatePropertyResponse$json = {
   '1': 'CreatePropertyResponse',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.property.v1.Property',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 1, '5': 11, '6': '.property.v1.Property', '10': 'data'},
   ],
 };
 
 /// Descriptor for `CreatePropertyResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List createPropertyResponseDescriptor =
-    $convert.base64Decode(
-        'ChZDcmVhdGVQcm9wZXJ0eVJlc3BvbnNlEikKBGRhdGEYASABKAsyFS5wcm9wZXJ0eS52MS5Qcm'
-        '9wZXJ0eVIEZGF0YQ==');
+final $typed_data.Uint8List createPropertyResponseDescriptor = $convert.base64Decode(
+    'ChZDcmVhdGVQcm9wZXJ0eVJlc3BvbnNlEikKBGRhdGEYASABKAsyFS5wcm9wZXJ0eS52MS5Qcm'
+    '9wZXJ0eVIEZGF0YQ==');
 
 @$core.Deprecated('Use listPropertyTypeRequestDescriptor instead')
 const ListPropertyTypeRequest$json = {
@@ -443,14 +257,7 @@ const ListPropertyTypeRequest$json = {
     {'1': 'start_date', '3': 4, '4': 1, '5': 9, '10': 'startDate'},
     {'1': 'end_date', '3': 5, '4': 1, '5': 9, '10': 'endDate'},
     {'1': 'properties', '3': 6, '4': 3, '5': 9, '10': 'properties'},
-    {
-      '1': 'extras',
-      '3': 7,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'extras'
-    },
+    {'1': 'extras', '3': 7, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'extras'},
   ],
 };
 
@@ -466,22 +273,14 @@ final $typed_data.Uint8List listPropertyTypeRequestDescriptor = $convert.base64D
 const ListPropertyTypeResponse$json = {
   '1': 'ListPropertyTypeResponse',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.property.v1.PropertyType',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 3, '5': 11, '6': '.property.v1.PropertyType', '10': 'data'},
   ],
 };
 
 /// Descriptor for `ListPropertyTypeResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List listPropertyTypeResponseDescriptor =
-    $convert.base64Decode(
-        'ChhMaXN0UHJvcGVydHlUeXBlUmVzcG9uc2USLQoEZGF0YRgBIAMoCzIZLnByb3BlcnR5LnYxLl'
-        'Byb3BlcnR5VHlwZVIEZGF0YQ==');
+final $typed_data.Uint8List listPropertyTypeResponseDescriptor = $convert.base64Decode(
+    'ChhMaXN0UHJvcGVydHlUeXBlUmVzcG9uc2USLQoEZGF0YRgBIAMoCzIZLnByb3BlcnR5LnYxLl'
+    'Byb3BlcnR5VHlwZVIEZGF0YQ==');
 
 @$core.Deprecated('Use searchPropertyRequestDescriptor instead')
 const SearchPropertyRequest$json = {
@@ -493,14 +292,7 @@ const SearchPropertyRequest$json = {
     {'1': 'start_date', '3': 4, '4': 1, '5': 9, '10': 'startDate'},
     {'1': 'end_date', '3': 5, '4': 1, '5': 9, '10': 'endDate'},
     {'1': 'properties', '3': 6, '4': 3, '5': 9, '10': 'properties'},
-    {
-      '1': 'extras',
-      '3': 7,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'extras'
-    },
+    {'1': 'extras', '3': 7, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'extras'},
   ],
 };
 
@@ -516,22 +308,14 @@ final $typed_data.Uint8List searchPropertyRequestDescriptor = $convert.base64Dec
 const SearchPropertyResponse$json = {
   '1': 'SearchPropertyResponse',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.property.v1.Property',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 3, '5': 11, '6': '.property.v1.Property', '10': 'data'},
   ],
 };
 
 /// Descriptor for `SearchPropertyResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List searchPropertyResponseDescriptor =
-    $convert.base64Decode(
-        'ChZTZWFyY2hQcm9wZXJ0eVJlc3BvbnNlEikKBGRhdGEYASADKAsyFS5wcm9wZXJ0eS52MS5Qcm'
-        '9wZXJ0eVIEZGF0YQ==');
+final $typed_data.Uint8List searchPropertyResponseDescriptor = $convert.base64Decode(
+    'ChZTZWFyY2hQcm9wZXJ0eVJlc3BvbnNlEikKBGRhdGEYASADKAsyFS5wcm9wZXJ0eS52MS5Qcm'
+    '9wZXJ0eVIEZGF0YQ==');
 
 @$core.Deprecated('Use deleteLocalityRequestDescriptor instead')
 const DeleteLocalityRequest$json = {
@@ -555,9 +339,8 @@ const DeleteLocalityResponse$json = {
 };
 
 /// Descriptor for `DeleteLocalityResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List deleteLocalityResponseDescriptor =
-    $convert.base64Decode(
-        'ChZEZWxldGVMb2NhbGl0eVJlc3BvbnNlEhgKB3N1Y2Nlc3MYASABKAhSB3N1Y2Nlc3M=');
+final $typed_data.Uint8List deleteLocalityResponseDescriptor = $convert.base64Decode(
+    'ChZEZWxldGVMb2NhbGl0eVJlc3BvbnNlEhgKB3N1Y2Nlc3MYASABKAhSB3N1Y2Nlc3M=');
 
 @$core.Deprecated('Use deletePropertyRequestDescriptor instead')
 const DeletePropertyRequest$json = {
@@ -581,9 +364,8 @@ const DeletePropertyResponse$json = {
 };
 
 /// Descriptor for `DeletePropertyResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List deletePropertyResponseDescriptor =
-    $convert.base64Decode(
-        'ChZEZWxldGVQcm9wZXJ0eVJlc3BvbnNlEhgKB3N1Y2Nlc3MYASABKAhSB3N1Y2Nlc3M=');
+final $typed_data.Uint8List deletePropertyResponseDescriptor = $convert.base64Decode(
+    'ChZEZWxldGVQcm9wZXJ0eVJlc3BvbnNlEhgKB3N1Y2Nlc3MYASABKAhSB3N1Y2Nlc3M=');
 
 @$core.Deprecated('Use stateOfPropertyRequestDescriptor instead')
 const StateOfPropertyRequest$json = {
@@ -594,31 +376,22 @@ const StateOfPropertyRequest$json = {
 };
 
 /// Descriptor for `StateOfPropertyRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List stateOfPropertyRequestDescriptor =
-    $convert.base64Decode(
-        'ChZTdGF0ZU9mUHJvcGVydHlSZXF1ZXN0EisKAmlkGAEgASgJQhu6SBhyFhADGCgyEFswLTlhLX'
-        'pfLV17Myw0MH1SAmlk');
+final $typed_data.Uint8List stateOfPropertyRequestDescriptor = $convert.base64Decode(
+    'ChZTdGF0ZU9mUHJvcGVydHlSZXF1ZXN0EisKAmlkGAEgASgJQhu6SBhyFhADGCgyEFswLTlhLX'
+    'pfLV17Myw0MH1SAmlk');
 
 @$core.Deprecated('Use stateOfPropertyResponseDescriptor instead')
 const StateOfPropertyResponse$json = {
   '1': 'StateOfPropertyResponse',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.property.v1.PropertyState',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 1, '5': 11, '6': '.property.v1.PropertyState', '10': 'data'},
   ],
 };
 
 /// Descriptor for `StateOfPropertyResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List stateOfPropertyResponseDescriptor =
-    $convert.base64Decode(
-        'ChdTdGF0ZU9mUHJvcGVydHlSZXNwb25zZRIuCgRkYXRhGAEgASgLMhoucHJvcGVydHkudjEuUH'
-        'JvcGVydHlTdGF0ZVIEZGF0YQ==');
+final $typed_data.Uint8List stateOfPropertyResponseDescriptor = $convert.base64Decode(
+    'ChdTdGF0ZU9mUHJvcGVydHlSZXNwb25zZRIuCgRkYXRhGAEgASgLMhoucHJvcGVydHkudjEuUH'
+    'JvcGVydHlTdGF0ZVIEZGF0YQ==');
 
 @$core.Deprecated('Use historyOfPropertyRequestDescriptor instead')
 const HistoryOfPropertyRequest$json = {
@@ -629,65 +402,35 @@ const HistoryOfPropertyRequest$json = {
 };
 
 /// Descriptor for `HistoryOfPropertyRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List historyOfPropertyRequestDescriptor =
-    $convert.base64Decode(
-        'ChhIaXN0b3J5T2ZQcm9wZXJ0eVJlcXVlc3QSKwoCaWQYASABKAlCG7pIGHIWEAMYKDIQWzAtOW'
-        'Etel8tXXszLDQwfVICaWQ=');
+final $typed_data.Uint8List historyOfPropertyRequestDescriptor = $convert.base64Decode(
+    'ChhIaXN0b3J5T2ZQcm9wZXJ0eVJlcXVlc3QSKwoCaWQYASABKAlCG7pIGHIWEAMYKDIQWzAtOW'
+    'Etel8tXXszLDQwfVICaWQ=');
 
 @$core.Deprecated('Use historyOfPropertyResponseDescriptor instead')
 const HistoryOfPropertyResponse$json = {
   '1': 'HistoryOfPropertyResponse',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.property.v1.PropertyState',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 3, '5': 11, '6': '.property.v1.PropertyState', '10': 'data'},
   ],
 };
 
 /// Descriptor for `HistoryOfPropertyResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List historyOfPropertyResponseDescriptor =
-    $convert.base64Decode(
-        'ChlIaXN0b3J5T2ZQcm9wZXJ0eVJlc3BvbnNlEi4KBGRhdGEYASADKAsyGi5wcm9wZXJ0eS52MS'
-        '5Qcm9wZXJ0eVN0YXRlUgRkYXRh');
+final $typed_data.Uint8List historyOfPropertyResponseDescriptor = $convert.base64Decode(
+    'ChlIaXN0b3J5T2ZQcm9wZXJ0eVJlc3BvbnNlEi4KBGRhdGEYASADKAsyGi5wcm9wZXJ0eS52MS'
+    '5Qcm9wZXJ0eVN0YXRlUgRkYXRh');
 
 @$core.Deprecated('Use updatePropertyRequestDescriptor instead')
 const UpdatePropertyRequest$json = {
   '1': 'UpdatePropertyRequest',
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'id'},
-    {
-      '1': 'state',
-      '3': 2,
-      '4': 1,
-      '5': 14,
-      '6': '.common.v1.STATE',
-      '10': 'state'
-    },
-    {
-      '1': 'status',
-      '3': 3,
-      '4': 1,
-      '5': 14,
-      '6': '.common.v1.STATUS',
-      '10': 'status'
-    },
+    {'1': 'state', '3': 2, '4': 1, '5': 14, '6': '.common.v1.STATE', '10': 'state'},
+    {'1': 'status', '3': 3, '4': 1, '5': 14, '6': '.common.v1.STATUS', '10': 'status'},
     {'1': 'name', '3': 4, '4': 1, '5': 9, '8': {}, '10': 'name'},
     {'1': 'description', '3': 5, '4': 1, '5': 9, '8': {}, '10': 'description'},
     {'1': 'guardian_id', '3': 6, '4': 1, '5': 9, '8': {}, '10': 'guardianId'},
     {'1': 'locality_id', '3': 7, '4': 1, '5': 9, '8': {}, '10': 'localityId'},
-    {
-      '1': 'extras',
-      '3': 8,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'extras'
-    },
+    {'1': 'extras', '3': 8, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'extras'},
   ],
 };
 
@@ -706,22 +449,14 @@ final $typed_data.Uint8List updatePropertyRequestDescriptor = $convert.base64Dec
 const UpdatePropertyResponse$json = {
   '1': 'UpdatePropertyResponse',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.property.v1.Property',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 1, '5': 11, '6': '.property.v1.Property', '10': 'data'},
   ],
 };
 
 /// Descriptor for `UpdatePropertyResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List updatePropertyResponseDescriptor =
-    $convert.base64Decode(
-        'ChZVcGRhdGVQcm9wZXJ0eVJlc3BvbnNlEikKBGRhdGEYASABKAsyFS5wcm9wZXJ0eS52MS5Qcm'
-        '9wZXJ0eVIEZGF0YQ==');
+final $typed_data.Uint8List updatePropertyResponseDescriptor = $convert.base64Decode(
+    'ChZVcGRhdGVQcm9wZXJ0eVJlc3BvbnNlEikKBGRhdGEYASABKAsyFS5wcm9wZXJ0eS52MS5Qcm'
+    '9wZXJ0eVIEZGF0YQ==');
 
 @$core.Deprecated('Use listSubscriptionRequestDescriptor instead')
 const ListSubscriptionRequest$json = {
@@ -733,31 +468,22 @@ const ListSubscriptionRequest$json = {
 };
 
 /// Descriptor for `ListSubscriptionRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List listSubscriptionRequestDescriptor =
-    $convert.base64Decode(
-        'ChdMaXN0U3Vic2NyaXB0aW9uUmVxdWVzdBIfCgtwcm9wZXJ0eV9pZBgBIAEoCVIKcHJvcGVydH'
-        'lJZBIUCgVxdWVyeRgCIAEoCVIFcXVlcnk=');
+final $typed_data.Uint8List listSubscriptionRequestDescriptor = $convert.base64Decode(
+    'ChdMaXN0U3Vic2NyaXB0aW9uUmVxdWVzdBIfCgtwcm9wZXJ0eV9pZBgBIAEoCVIKcHJvcGVydH'
+    'lJZBIUCgVxdWVyeRgCIAEoCVIFcXVlcnk=');
 
 @$core.Deprecated('Use listSubscriptionResponseDescriptor instead')
 const ListSubscriptionResponse$json = {
   '1': 'ListSubscriptionResponse',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.property.v1.Subscription',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 3, '5': 11, '6': '.property.v1.Subscription', '10': 'data'},
   ],
 };
 
 /// Descriptor for `ListSubscriptionResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List listSubscriptionResponseDescriptor =
-    $convert.base64Decode(
-        'ChhMaXN0U3Vic2NyaXB0aW9uUmVzcG9uc2USLQoEZGF0YRgBIAMoCzIZLnByb3BlcnR5LnYxLl'
-        'N1YnNjcmlwdGlvblIEZGF0YQ==');
+final $typed_data.Uint8List listSubscriptionResponseDescriptor = $convert.base64Decode(
+    'ChhMaXN0U3Vic2NyaXB0aW9uUmVzcG9uc2USLQoEZGF0YRgBIAMoCzIZLnByb3BlcnR5LnYxLl'
+    'N1YnNjcmlwdGlvblIEZGF0YQ==');
 
 @$core.Deprecated('Use deleteSubscriptionRequestDescriptor instead')
 const DeleteSubscriptionRequest$json = {
@@ -768,10 +494,9 @@ const DeleteSubscriptionRequest$json = {
 };
 
 /// Descriptor for `DeleteSubscriptionRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List deleteSubscriptionRequestDescriptor =
-    $convert.base64Decode(
-        'ChlEZWxldGVTdWJzY3JpcHRpb25SZXF1ZXN0EisKAmlkGAEgASgJQhu6SBhyFhADGCgyEFswLT'
-        'lhLXpfLV17Myw0MH1SAmlk');
+final $typed_data.Uint8List deleteSubscriptionRequestDescriptor = $convert.base64Decode(
+    'ChlEZWxldGVTdWJzY3JpcHRpb25SZXF1ZXN0EisKAmlkGAEgASgJQhu6SBhyFhADGCgyEFswLT'
+    'lhLXpfLV17Myw0MH1SAmlk');
 
 @$core.Deprecated('Use deleteSubscriptionResponseDescriptor instead')
 const DeleteSubscriptionResponse$json = {
@@ -782,19 +507,13 @@ const DeleteSubscriptionResponse$json = {
 };
 
 /// Descriptor for `DeleteSubscriptionResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List deleteSubscriptionResponseDescriptor =
-    $convert.base64Decode(
-        'ChpEZWxldGVTdWJzY3JpcHRpb25SZXNwb25zZRIYCgdzdWNjZXNzGAEgASgIUgdzdWNjZXNz');
+final $typed_data.Uint8List deleteSubscriptionResponseDescriptor = $convert.base64Decode(
+    'ChpEZWxldGVTdWJzY3JpcHRpb25SZXNwb25zZRIYCgdzdWNjZXNzGAEgASgIUgdzdWNjZXNz');
 
 const $core.Map<$core.String, $core.dynamic> PropertyServiceBase$json = {
   '1': 'PropertyService',
   '2': [
-    {
-      '1': 'AddPropertyType',
-      '2': '.property.v1.AddPropertyTypeRequest',
-      '3': '.property.v1.AddPropertyTypeResponse',
-      '4': {}
-    },
+    {'1': 'AddPropertyType', '2': '.property.v1.AddPropertyTypeRequest', '3': '.property.v1.AddPropertyTypeResponse', '4': {}},
     {
       '1': 'ListPropertyType',
       '2': '.property.v1.ListPropertyTypeRequest',
@@ -802,36 +521,11 @@ const $core.Map<$core.String, $core.dynamic> PropertyServiceBase$json = {
       '4': {'34': 1},
       '6': true,
     },
-    {
-      '1': 'AddLocality',
-      '2': '.property.v1.AddLocalityRequest',
-      '3': '.property.v1.AddLocalityResponse',
-      '4': {}
-    },
-    {
-      '1': 'DeleteLocality',
-      '2': '.property.v1.DeleteLocalityRequest',
-      '3': '.property.v1.DeleteLocalityResponse',
-      '4': {}
-    },
-    {
-      '1': 'CreateProperty',
-      '2': '.property.v1.CreatePropertyRequest',
-      '3': '.property.v1.CreatePropertyResponse',
-      '4': {}
-    },
-    {
-      '1': 'UpdateProperty',
-      '2': '.property.v1.UpdatePropertyRequest',
-      '3': '.property.v1.UpdatePropertyResponse',
-      '4': {}
-    },
-    {
-      '1': 'DeleteProperty',
-      '2': '.property.v1.DeletePropertyRequest',
-      '3': '.property.v1.DeletePropertyResponse',
-      '4': {}
-    },
+    {'1': 'AddLocality', '2': '.property.v1.AddLocalityRequest', '3': '.property.v1.AddLocalityResponse', '4': {}},
+    {'1': 'DeleteLocality', '2': '.property.v1.DeleteLocalityRequest', '3': '.property.v1.DeleteLocalityResponse', '4': {}},
+    {'1': 'CreateProperty', '2': '.property.v1.CreatePropertyRequest', '3': '.property.v1.CreatePropertyResponse', '4': {}},
+    {'1': 'UpdateProperty', '2': '.property.v1.UpdatePropertyRequest', '3': '.property.v1.UpdatePropertyResponse', '4': {}},
+    {'1': 'DeleteProperty', '2': '.property.v1.DeletePropertyRequest', '3': '.property.v1.DeletePropertyResponse', '4': {}},
     {
       '1': 'StateOfProperty',
       '2': '.property.v1.StateOfPropertyRequest',
@@ -859,31 +553,20 @@ const $core.Map<$core.String, $core.dynamic> PropertyServiceBase$json = {
       '4': {'34': 1},
       '6': true,
     },
-    {
-      '1': 'AddSubscription',
-      '2': '.property.v1.AddSubscriptionRequest',
-      '3': '.property.v1.AddSubscriptionResponse',
-      '4': {}
-    },
-    {
-      '1': 'DeleteSubscription',
-      '2': '.property.v1.DeleteSubscriptionRequest',
-      '3': '.property.v1.DeleteSubscriptionResponse',
-      '4': {}
-    },
+    {'1': 'AddSubscription', '2': '.property.v1.AddSubscriptionRequest', '3': '.property.v1.AddSubscriptionResponse', '4': {}},
+    {'1': 'DeleteSubscription', '2': '.property.v1.DeleteSubscriptionRequest', '3': '.property.v1.DeleteSubscriptionResponse', '4': {}},
   ],
 };
 
 @$core.Deprecated('Use propertyServiceDescriptor instead')
-const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>>
-    PropertyServiceBase$messageJson = {
+const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> PropertyServiceBase$messageJson = {
   '.property.v1.AddPropertyTypeRequest': AddPropertyTypeRequest$json,
   '.property.v1.PropertyType': PropertyType$json,
-  '.google.protobuf.Struct': $0.Struct$json,
-  '.google.protobuf.Struct.FieldsEntry': $0.Struct_FieldsEntry$json,
-  '.google.protobuf.Value': $0.Value$json,
-  '.google.protobuf.ListValue': $0.ListValue$json,
-  '.google.protobuf.Timestamp': $1.Timestamp$json,
+  '.google.protobuf.Struct': $6.Struct$json,
+  '.google.protobuf.Struct.FieldsEntry': $6.Struct_FieldsEntry$json,
+  '.google.protobuf.Value': $6.Value$json,
+  '.google.protobuf.ListValue': $6.ListValue$json,
+  '.google.protobuf.Timestamp': $2.Timestamp$json,
   '.property.v1.AddPropertyTypeResponse': AddPropertyTypeResponse$json,
   '.property.v1.ListPropertyTypeRequest': ListPropertyTypeRequest$json,
   '.property.v1.ListPropertyTypeResponse': ListPropertyTypeResponse$json,
@@ -984,3 +667,4 @@ final $typed_data.Uint8List propertyServiceDescriptor = $convert.base64Decode(
     'b2tlcyBhIHByb2ZpbGUncyBhY2Nlc3MgdG8gYSBwcm9wZXJ0eSBieSByZW1vdmluZyB0aGVpci'
     'BzdWJzY3JpcHRpb24uIFRoZSBwcm9maWxlIHdpbGwgbm8gbG9uZ2VyIGhhdmUgYWNjZXNzIHRv'
     'IHRoZSBwcm9wZXJ0eS4qEmRlbGV0ZVN1YnNjcmlwdGlvbg==');
+

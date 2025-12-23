@@ -1,24 +1,20 @@
-// This is a generated file - do not edit.
 //
-// Generated from notification/v1/notification.proto.
-
-// @dart = 3.3
+//  Generated code. Do not modify.
+//  source: notification/v1/notification.proto
+//
+// @dart = 2.12
 
 // ignore_for_file: annotate_overrides, camel_case_types, comment_references
-// ignore_for_file: constant_identifier_names
-// ignore_for_file: curly_braces_in_flow_control_structures
-// ignore_for_file: deprecated_member_use_from_same_package, library_prefixes
-// ignore_for_file: non_constant_identifier_names, prefer_relative_imports
-// ignore_for_file: unused_import
+// ignore_for_file: constant_identifier_names, library_prefixes
+// ignore_for_file: non_constant_identifier_names, prefer_final_fields
+// ignore_for_file: unnecessary_import, unnecessary_this, unused_import
 
 import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
-import 'package:protobuf/well_known_types/google/protobuf/struct.pbjson.dart'
-    as $0;
-
-import '../../common/v1/common.pbjson.dart' as $1;
+import '../../common/v1/common.pbjson.dart' as $7;
+import '../../google/protobuf/struct.pbjson.dart' as $6;
 
 @$core.Deprecated('Use pRIORITYDescriptor instead')
 const PRIORITY$json = {
@@ -41,14 +37,7 @@ const Language$json = {
     {'1': 'id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'id'},
     {'1': 'code', '3': 2, '4': 1, '5': 9, '10': 'code'},
     {'1': 'name', '3': 3, '4': 1, '5': 9, '10': 'name'},
-    {
-      '1': 'extra',
-      '3': 4,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'extra'
-    },
+    {'1': 'extra', '3': 4, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'extra'},
   ],
 };
 
@@ -65,14 +54,7 @@ const TemplateData$json = {
     {'1': 'id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'id'},
     {'1': 'type', '3': 2, '4': 1, '5': 9, '10': 'type'},
     {'1': 'detail', '3': 3, '4': 1, '5': 9, '10': 'detail'},
-    {
-      '1': 'language',
-      '3': 4,
-      '4': 1,
-      '5': 11,
-      '6': '.notification.v1.Language',
-      '10': 'language'
-    },
+    {'1': 'language', '3': 4, '4': 1, '5': 11, '6': '.notification.v1.Language', '10': 'language'},
   ],
 };
 
@@ -88,22 +70,8 @@ const Template$json = {
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'id'},
     {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
-    {
-      '1': 'data',
-      '3': 4,
-      '4': 3,
-      '5': 11,
-      '6': '.notification.v1.TemplateData',
-      '10': 'data'
-    },
-    {
-      '1': 'extra',
-      '3': 5,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'extra'
-    },
+    {'1': 'data', '3': 4, '4': 3, '5': 11, '6': '.notification.v1.TemplateData', '10': 'data'},
+    {'1': 'extra', '3': 5, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'extra'},
   ],
 };
 
@@ -120,62 +88,19 @@ const Notification$json = {
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'id'},
     {'1': 'parent_id', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'parentId'},
-    {
-      '1': 'source',
-      '3': 3,
-      '4': 1,
-      '5': 11,
-      '6': '.common.v1.ContactLink',
-      '10': 'source'
-    },
-    {
-      '1': 'recipient',
-      '3': 4,
-      '4': 1,
-      '5': 11,
-      '6': '.common.v1.ContactLink',
-      '10': 'recipient'
-    },
+    {'1': 'source', '3': 3, '4': 1, '5': 11, '6': '.common.v1.ContactLink', '10': 'source'},
+    {'1': 'recipient', '3': 4, '4': 1, '5': 11, '6': '.common.v1.ContactLink', '10': 'recipient'},
     {'1': 'type', '3': 6, '4': 1, '5': 9, '10': 'type'},
     {'1': 'template', '3': 7, '4': 1, '5': 9, '10': 'template'},
-    {
-      '1': 'payload',
-      '3': 8,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'payload'
-    },
+    {'1': 'payload', '3': 8, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'payload'},
     {'1': 'data', '3': 9, '4': 1, '5': 9, '10': 'data'},
     {'1': 'language', '3': 10, '4': 1, '5': 9, '10': 'language'},
     {'1': 'out_bound', '3': 11, '4': 1, '5': 8, '10': 'outBound'},
     {'1': 'auto_release', '3': 12, '4': 1, '5': 8, '10': 'autoRelease'},
     {'1': 'route_id', '3': 13, '4': 1, '5': 9, '8': {}, '10': 'routeId'},
-    {
-      '1': 'status',
-      '3': 14,
-      '4': 1,
-      '5': 11,
-      '6': '.common.v1.StatusResponse',
-      '8': {},
-      '10': 'status'
-    },
-    {
-      '1': 'extras',
-      '3': 15,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'extras'
-    },
-    {
-      '1': 'priority',
-      '3': 16,
-      '4': 1,
-      '5': 14,
-      '6': '.notification.v1.PRIORITY',
-      '10': 'priority'
-    },
+    {'1': 'status', '3': 14, '4': 1, '5': 11, '6': '.common.v1.StatusResponse', '8': {}, '10': 'status'},
+    {'1': 'extras', '3': 15, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'extras'},
+    {'1': 'priority', '3': 16, '4': 1, '5': 14, '6': '.notification.v1.PRIORITY', '10': 'priority'},
   ],
 };
 
@@ -198,14 +123,7 @@ final $typed_data.Uint8List notificationDescriptor = $convert.base64Decode(
 const SearchResponse$json = {
   '1': 'SearchResponse',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.notification.v1.Notification',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 3, '5': 11, '6': '.notification.v1.Notification', '10': 'data'},
   ],
 };
 
@@ -218,14 +136,7 @@ final $typed_data.Uint8List searchResponseDescriptor = $convert.base64Decode(
 const SendRequest$json = {
   '1': 'SendRequest',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.notification.v1.Notification',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 3, '5': 11, '6': '.notification.v1.Notification', '10': 'data'},
   ],
 };
 
@@ -238,14 +149,7 @@ final $typed_data.Uint8List sendRequestDescriptor = $convert.base64Decode(
 const SendResponse$json = {
   '1': 'SendResponse',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.common.v1.StatusResponse',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 3, '5': 11, '6': '.common.v1.StatusResponse', '10': 'data'},
   ],
 };
 
@@ -272,14 +176,7 @@ final $typed_data.Uint8List releaseRequestDescriptor = $convert.base64Decode(
 const ReleaseResponse$json = {
   '1': 'ReleaseResponse',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.common.v1.StatusResponse',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 3, '5': 11, '6': '.common.v1.StatusResponse', '10': 'data'},
   ],
 };
 
@@ -292,14 +189,7 @@ final $typed_data.Uint8List releaseResponseDescriptor = $convert.base64Decode(
 const ReceiveRequest$json = {
   '1': 'ReceiveRequest',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.notification.v1.Notification',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 3, '5': 11, '6': '.notification.v1.Notification', '10': 'data'},
   ],
 };
 
@@ -312,14 +202,7 @@ final $typed_data.Uint8List receiveRequestDescriptor = $convert.base64Decode(
 const ReceiveResponse$json = {
   '1': 'ReceiveResponse',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.common.v1.StatusResponse',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 3, '5': 11, '6': '.common.v1.StatusResponse', '10': 'data'},
   ],
 };
 
@@ -349,22 +232,14 @@ final $typed_data.Uint8List templateSearchRequestDescriptor = $convert.base64Dec
 const TemplateSearchResponse$json = {
   '1': 'TemplateSearchResponse',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.notification.v1.Template',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 3, '5': 11, '6': '.notification.v1.Template', '10': 'data'},
   ],
 };
 
 /// Descriptor for `TemplateSearchResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List templateSearchResponseDescriptor =
-    $convert.base64Decode(
-        'ChZUZW1wbGF0ZVNlYXJjaFJlc3BvbnNlEi0KBGRhdGEYASADKAsyGS5ub3RpZmljYXRpb24udj'
-        'EuVGVtcGxhdGVSBGRhdGE=');
+final $typed_data.Uint8List templateSearchResponseDescriptor = $convert.base64Decode(
+    'ChZUZW1wbGF0ZVNlYXJjaFJlc3BvbnNlEi0KBGRhdGEYASADKAsyGS5ub3RpZmljYXRpb24udj'
+    'EuVGVtcGxhdGVSBGRhdGE=');
 
 @$core.Deprecated('Use templateSaveRequestDescriptor instead')
 const TemplateSaveRequest$json = {
@@ -372,22 +247,8 @@ const TemplateSaveRequest$json = {
   '2': [
     {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
     {'1': 'language_code', '3': 2, '4': 1, '5': 9, '10': 'languageCode'},
-    {
-      '1': 'data',
-      '3': 3,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'data'
-    },
-    {
-      '1': 'extra',
-      '3': 4,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'extra'
-    },
+    {'1': 'data', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'data'},
+    {'1': 'extra', '3': 4, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'extra'},
   ],
 };
 
@@ -402,14 +263,7 @@ final $typed_data.Uint8List templateSaveRequestDescriptor = $convert.base64Decod
 const TemplateSaveResponse$json = {
   '1': 'TemplateSaveResponse',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.notification.v1.Template',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 1, '5': 11, '6': '.notification.v1.Template', '10': 'data'},
   ],
 };
 
@@ -421,27 +275,9 @@ final $typed_data.Uint8List templateSaveResponseDescriptor = $convert.base64Deco
 const $core.Map<$core.String, $core.dynamic> NotificationServiceBase$json = {
   '1': 'NotificationService',
   '2': [
-    {
-      '1': 'Send',
-      '2': '.notification.v1.SendRequest',
-      '3': '.notification.v1.SendResponse',
-      '4': {},
-      '6': true
-    },
-    {
-      '1': 'Release',
-      '2': '.notification.v1.ReleaseRequest',
-      '3': '.notification.v1.ReleaseResponse',
-      '4': {},
-      '6': true
-    },
-    {
-      '1': 'Receive',
-      '2': '.notification.v1.ReceiveRequest',
-      '3': '.notification.v1.ReceiveResponse',
-      '4': {},
-      '6': true
-    },
+    {'1': 'Send', '2': '.notification.v1.SendRequest', '3': '.notification.v1.SendResponse', '4': {}, '6': true},
+    {'1': 'Release', '2': '.notification.v1.ReleaseRequest', '3': '.notification.v1.ReleaseResponse', '4': {}, '6': true},
+    {'1': 'Receive', '2': '.notification.v1.ReceiveRequest', '3': '.notification.v1.ReceiveResponse', '4': {}, '6': true},
     {
       '1': 'Search',
       '2': '.common.v1.SearchRequest',
@@ -455,12 +291,7 @@ const $core.Map<$core.String, $core.dynamic> NotificationServiceBase$json = {
       '3': '.common.v1.StatusResponse',
       '4': {'34': 1},
     },
-    {
-      '1': 'StatusUpdate',
-      '2': '.common.v1.StatusUpdateRequest',
-      '3': '.common.v1.StatusUpdateResponse',
-      '4': {}
-    },
+    {'1': 'StatusUpdate', '2': '.common.v1.StatusUpdateRequest', '3': '.common.v1.StatusUpdateResponse', '4': {}},
     {
       '1': 'TemplateSearch',
       '2': '.notification.v1.TemplateSearchRequest',
@@ -468,37 +299,31 @@ const $core.Map<$core.String, $core.dynamic> NotificationServiceBase$json = {
       '4': {'34': 1},
       '6': true,
     },
-    {
-      '1': 'TemplateSave',
-      '2': '.notification.v1.TemplateSaveRequest',
-      '3': '.notification.v1.TemplateSaveResponse',
-      '4': {}
-    },
+    {'1': 'TemplateSave', '2': '.notification.v1.TemplateSaveRequest', '3': '.notification.v1.TemplateSaveResponse', '4': {}},
   ],
 };
 
 @$core.Deprecated('Use notificationServiceDescriptor instead')
-const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>>
-    NotificationServiceBase$messageJson = {
+const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> NotificationServiceBase$messageJson = {
   '.notification.v1.SendRequest': SendRequest$json,
   '.notification.v1.Notification': Notification$json,
-  '.common.v1.ContactLink': $1.ContactLink$json,
-  '.google.protobuf.Struct': $0.Struct$json,
-  '.google.protobuf.Struct.FieldsEntry': $0.Struct_FieldsEntry$json,
-  '.google.protobuf.Value': $0.Value$json,
-  '.google.protobuf.ListValue': $0.ListValue$json,
-  '.common.v1.StatusResponse': $1.StatusResponse$json,
+  '.common.v1.ContactLink': $7.ContactLink$json,
+  '.google.protobuf.Struct': $6.Struct$json,
+  '.google.protobuf.Struct.FieldsEntry': $6.Struct_FieldsEntry$json,
+  '.google.protobuf.Value': $6.Value$json,
+  '.google.protobuf.ListValue': $6.ListValue$json,
+  '.common.v1.StatusResponse': $7.StatusResponse$json,
   '.notification.v1.SendResponse': SendResponse$json,
   '.notification.v1.ReleaseRequest': ReleaseRequest$json,
   '.notification.v1.ReleaseResponse': ReleaseResponse$json,
   '.notification.v1.ReceiveRequest': ReceiveRequest$json,
   '.notification.v1.ReceiveResponse': ReceiveResponse$json,
-  '.common.v1.SearchRequest': $1.SearchRequest$json,
-  '.common.v1.Pagination': $1.Pagination$json,
+  '.common.v1.SearchRequest': $7.SearchRequest$json,
+  '.common.v1.Pagination': $7.Pagination$json,
   '.notification.v1.SearchResponse': SearchResponse$json,
-  '.common.v1.StatusRequest': $1.StatusRequest$json,
-  '.common.v1.StatusUpdateRequest': $1.StatusUpdateRequest$json,
-  '.common.v1.StatusUpdateResponse': $1.StatusUpdateResponse$json,
+  '.common.v1.StatusRequest': $7.StatusRequest$json,
+  '.common.v1.StatusUpdateRequest': $7.StatusUpdateRequest$json,
+  '.common.v1.StatusUpdateResponse': $7.StatusUpdateResponse$json,
   '.notification.v1.TemplateSearchRequest': TemplateSearchRequest$json,
   '.notification.v1.TemplateSearchResponse': TemplateSearchResponse$json,
   '.notification.v1.Template': Template$json,
@@ -557,3 +382,4 @@ final $typed_data.Uint8List notificationServiceDescriptor = $convert.base64Decod
     'bmFibGUgY29uc2lzdGVudCwgcmV1c2FibGUgbm90aWZpY2F0aW9uIGZvcm1hdHRpbmcgd2l0aC'
     'BzdXBwb3J0IGZvciBtdWx0aXBsZSBsYW5ndWFnZXMgYW5kIGNoYW5uZWxzIChlbWFpbCwgU01T'
     'LCBwdXNoLCBpbi1hcHApLioMc2F2ZVRlbXBsYXRl');
+

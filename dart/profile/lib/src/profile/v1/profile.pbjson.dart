@@ -1,22 +1,19 @@
-// This is a generated file - do not edit.
 //
-// Generated from profile/v1/profile.proto.
-
-// @dart = 3.3
+//  Generated code. Do not modify.
+//  source: profile/v1/profile.proto
+//
+// @dart = 2.12
 
 // ignore_for_file: annotate_overrides, camel_case_types, comment_references
-// ignore_for_file: constant_identifier_names
-// ignore_for_file: curly_braces_in_flow_control_structures
-// ignore_for_file: deprecated_member_use_from_same_package, library_prefixes
-// ignore_for_file: non_constant_identifier_names, prefer_relative_imports
-// ignore_for_file: unused_import
+// ignore_for_file: constant_identifier_names, library_prefixes
+// ignore_for_file: non_constant_identifier_names, prefer_final_fields
+// ignore_for_file: unnecessary_import, unnecessary_this, unused_import
 
 import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
-import 'package:protobuf/well_known_types/google/protobuf/struct.pbjson.dart'
-    as $0;
+import '../../google/protobuf/struct.pbjson.dart' as $6;
 
 @$core.Deprecated('Use contactTypeDescriptor instead')
 const ContactType$json = {
@@ -28,8 +25,8 @@ const ContactType$json = {
 };
 
 /// Descriptor for `ContactType`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List contactTypeDescriptor =
-    $convert.base64Decode('CgtDb250YWN0VHlwZRIJCgVFTUFJTBAAEgoKBk1TSVNEThAB');
+final $typed_data.Uint8List contactTypeDescriptor = $convert.base64Decode(
+    'CgtDb250YWN0VHlwZRIJCgVFTUFJTBAAEgoKBk1TSVNEThAB');
 
 @$core.Deprecated('Use communicationLevelDescriptor instead')
 const CommunicationLevel$json = {
@@ -82,40 +79,12 @@ const ContactObject$json = {
   '1': 'ContactObject',
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'id'},
-    {
-      '1': 'type',
-      '3': 2,
-      '4': 1,
-      '5': 14,
-      '6': '.profile.v1.ContactType',
-      '10': 'type'
-    },
+    {'1': 'type', '3': 2, '4': 1, '5': 14, '6': '.profile.v1.ContactType', '10': 'type'},
     {'1': 'detail', '3': 3, '4': 1, '5': 9, '10': 'detail'},
     {'1': 'verified', '3': 4, '4': 1, '5': 8, '10': 'verified'},
-    {
-      '1': 'communication_level',
-      '3': 5,
-      '4': 1,
-      '5': 14,
-      '6': '.profile.v1.CommunicationLevel',
-      '10': 'communicationLevel'
-    },
-    {
-      '1': 'state',
-      '3': 6,
-      '4': 1,
-      '5': 14,
-      '6': '.common.v1.STATE',
-      '10': 'state'
-    },
-    {
-      '1': 'extra',
-      '3': 7,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'extra'
-    },
+    {'1': 'communication_level', '3': 5, '4': 1, '5': 14, '6': '.profile.v1.CommunicationLevel', '10': 'communicationLevel'},
+    {'1': 'state', '3': 6, '4': 1, '5': 14, '6': '.common.v1.STATE', '10': 'state'},
+    {'1': 'extra', '3': 7, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'extra'},
   ],
 };
 
@@ -134,22 +103,8 @@ const RosterObject$json = {
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'id'},
     {'1': 'profile_id', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'profileId'},
-    {
-      '1': 'contact',
-      '3': 3,
-      '4': 1,
-      '5': 11,
-      '6': '.profile.v1.ContactObject',
-      '10': 'contact'
-    },
-    {
-      '1': 'extra',
-      '3': 4,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'extra'
-    },
+    {'1': 'contact', '3': 3, '4': 1, '5': 11, '6': '.profile.v1.ContactObject', '10': 'contact'},
+    {'1': 'extra', '3': 4, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'extra'},
   ],
 };
 
@@ -192,46 +147,11 @@ const ProfileObject$json = {
   '1': 'ProfileObject',
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'id'},
-    {
-      '1': 'type',
-      '3': 2,
-      '4': 1,
-      '5': 14,
-      '6': '.profile.v1.ProfileType',
-      '10': 'type'
-    },
-    {
-      '1': 'properties',
-      '3': 3,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'properties'
-    },
-    {
-      '1': 'contacts',
-      '3': 4,
-      '4': 3,
-      '5': 11,
-      '6': '.profile.v1.ContactObject',
-      '10': 'contacts'
-    },
-    {
-      '1': 'addresses',
-      '3': 5,
-      '4': 3,
-      '5': 11,
-      '6': '.profile.v1.AddressObject',
-      '10': 'addresses'
-    },
-    {
-      '1': 'state',
-      '3': 6,
-      '4': 1,
-      '5': 14,
-      '6': '.common.v1.STATE',
-      '10': 'state'
-    },
+    {'1': 'type', '3': 2, '4': 1, '5': 14, '6': '.profile.v1.ProfileType', '10': 'type'},
+    {'1': 'properties', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'properties'},
+    {'1': 'contacts', '3': 4, '4': 3, '5': 11, '6': '.profile.v1.ContactObject', '10': 'contacts'},
+    {'1': 'addresses', '3': 5, '4': 3, '5': 11, '6': '.profile.v1.AddressObject', '10': 'addresses'},
+    {'1': 'state', '3': 6, '4': 1, '5': 14, '6': '.common.v1.STATE', '10': 'state'},
   ],
 };
 
@@ -263,46 +183,11 @@ const RelationshipObject$json = {
   '1': 'RelationshipObject',
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'id'},
-    {
-      '1': 'type',
-      '3': 2,
-      '4': 1,
-      '5': 14,
-      '6': '.profile.v1.RelationshipType',
-      '10': 'type'
-    },
-    {
-      '1': 'properties',
-      '3': 3,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'properties'
-    },
-    {
-      '1': 'child_entry',
-      '3': 4,
-      '4': 1,
-      '5': 11,
-      '6': '.profile.v1.EntryItem',
-      '10': 'childEntry'
-    },
-    {
-      '1': 'parent_entry',
-      '3': 5,
-      '4': 1,
-      '5': 11,
-      '6': '.profile.v1.EntryItem',
-      '10': 'parentEntry'
-    },
-    {
-      '1': 'peer_profile',
-      '3': 6,
-      '4': 1,
-      '5': 11,
-      '6': '.profile.v1.ProfileObject',
-      '10': 'peerProfile'
-    },
+    {'1': 'type', '3': 2, '4': 1, '5': 14, '6': '.profile.v1.RelationshipType', '10': 'type'},
+    {'1': 'properties', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'properties'},
+    {'1': 'child_entry', '3': 4, '4': 1, '5': 11, '6': '.profile.v1.EntryItem', '10': 'childEntry'},
+    {'1': 'parent_entry', '3': 5, '4': 1, '5': 11, '6': '.profile.v1.EntryItem', '10': 'parentEntry'},
+    {'1': 'peer_profile', '3': 6, '4': 1, '5': 11, '6': '.profile.v1.ProfileObject', '10': 'peerProfile'},
   ],
 };
 
@@ -333,14 +218,7 @@ final $typed_data.Uint8List getByIdRequestDescriptor = $convert.base64Decode(
 const GetByIdResponse$json = {
   '1': 'GetByIdResponse',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.profile.v1.ProfileObject',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 1, '5': 11, '6': '.profile.v1.ProfileObject', '10': 'data'},
   ],
 };
 
@@ -359,14 +237,7 @@ const SearchRequest$json = {
     {'1': 'start_date', '3': 4, '4': 1, '5': 9, '10': 'startDate'},
     {'1': 'end_date', '3': 5, '4': 1, '5': 9, '10': 'endDate'},
     {'1': 'properties', '3': 6, '4': 3, '5': 9, '10': 'properties'},
-    {
-      '1': 'extras',
-      '3': 7,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'extras'
-    },
+    {'1': 'extras', '3': 7, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'extras'},
   ],
 };
 
@@ -381,14 +252,7 @@ final $typed_data.Uint8List searchRequestDescriptor = $convert.base64Decode(
 const SearchResponse$json = {
   '1': 'SearchResponse',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.profile.v1.ProfileObject',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 3, '5': 11, '6': '.profile.v1.ProfileObject', '10': 'data'},
   ],
 };
 
@@ -416,14 +280,7 @@ final $typed_data.Uint8List mergeRequestDescriptor = $convert.base64Decode(
 const MergeResponse$json = {
   '1': 'MergeResponse',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.profile.v1.ProfileObject',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 1, '5': 11, '6': '.profile.v1.ProfileObject', '10': 'data'},
   ],
 };
 
@@ -436,24 +293,9 @@ final $typed_data.Uint8List mergeResponseDescriptor = $convert.base64Decode(
 const CreateRequest$json = {
   '1': 'CreateRequest',
   '2': [
-    {
-      '1': 'type',
-      '3': 1,
-      '4': 1,
-      '5': 14,
-      '6': '.profile.v1.ProfileType',
-      '8': {},
-      '10': 'type'
-    },
+    {'1': 'type', '3': 1, '4': 1, '5': 14, '6': '.profile.v1.ProfileType', '8': {}, '10': 'type'},
     {'1': 'contact', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'contact'},
-    {
-      '1': 'properties',
-      '3': 3,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'properties'
-    },
+    {'1': 'properties', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'properties'},
   ],
 };
 
@@ -467,14 +309,7 @@ final $typed_data.Uint8List createRequestDescriptor = $convert.base64Decode(
 const CreateResponse$json = {
   '1': 'CreateResponse',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.profile.v1.ProfileObject',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 1, '5': 11, '6': '.profile.v1.ProfileObject', '10': 'data'},
   ],
 };
 
@@ -488,22 +323,8 @@ const UpdateRequest$json = {
   '1': 'UpdateRequest',
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'id'},
-    {
-      '1': 'properties',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'properties'
-    },
-    {
-      '1': 'state',
-      '3': 3,
-      '4': 1,
-      '5': 14,
-      '6': '.common.v1.STATE',
-      '10': 'state'
-    },
+    {'1': 'properties', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'properties'},
+    {'1': 'state', '3': 3, '4': 1, '5': 14, '6': '.common.v1.STATE', '10': 'state'},
   ],
 };
 
@@ -517,14 +338,7 @@ final $typed_data.Uint8List updateRequestDescriptor = $convert.base64Decode(
 const UpdateResponse$json = {
   '1': 'UpdateResponse',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.profile.v1.ProfileObject',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 1, '5': 11, '6': '.profile.v1.ProfileObject', '10': 'data'},
   ],
 };
 
@@ -539,14 +353,7 @@ const AddContactRequest$json = {
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'id'},
     {'1': 'contact', '3': 2, '4': 1, '5': 9, '10': 'contact'},
-    {
-      '1': 'extras',
-      '3': 3,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'extras'
-    },
+    {'1': 'extras', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'extras'},
   ],
 };
 
@@ -560,14 +367,7 @@ final $typed_data.Uint8List addContactRequestDescriptor = $convert.base64Decode(
 const AddContactResponse$json = {
   '1': 'AddContactResponse',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.profile.v1.ProfileObject',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 1, '5': 11, '6': '.profile.v1.ProfileObject', '10': 'data'},
     {'1': 'verification_id', '3': 2, '4': 1, '5': 9, '10': 'verificationId'},
   ],
 };
@@ -583,14 +383,7 @@ const CreateContactRequest$json = {
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'id'},
     {'1': 'contact', '3': 2, '4': 1, '5': 9, '10': 'contact'},
-    {
-      '1': 'extras',
-      '3': 3,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'extras'
-    },
+    {'1': 'extras', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'extras'},
   ],
 };
 
@@ -604,14 +397,7 @@ final $typed_data.Uint8List createContactRequestDescriptor = $convert.base64Deco
 const CreateContactResponse$json = {
   '1': 'CreateContactResponse',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.profile.v1.ContactObject',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 1, '5': 11, '6': '.profile.v1.ContactObject', '10': 'data'},
   ],
 };
 
@@ -627,23 +413,16 @@ const CreateContactVerificationRequest$json = {
     {'1': 'id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'id'},
     {'1': 'contact_id', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'contactId'},
     {'1': 'code', '3': 3, '4': 1, '5': 9, '10': 'code'},
-    {
-      '1': 'duration_to_expire',
-      '3': 4,
-      '4': 1,
-      '5': 9,
-      '10': 'durationToExpire'
-    },
+    {'1': 'duration_to_expire', '3': 4, '4': 1, '5': 9, '10': 'durationToExpire'},
   ],
 };
 
 /// Descriptor for `CreateContactVerificationRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List createContactVerificationRequestDescriptor =
-    $convert.base64Decode(
-        'CiBDcmVhdGVDb250YWN0VmVyaWZpY2F0aW9uUmVxdWVzdBIrCgJpZBgBIAEoCUIbukgYchYQAx'
-        'goMhBbMC05YS16Xy1dezMsNDB9UgJpZBI6Cgpjb250YWN0X2lkGAIgASgJQhu6SBhyFhADGCgy'
-        'EFswLTlhLXpfLV17Myw0MH1SCWNvbnRhY3RJZBISCgRjb2RlGAMgASgJUgRjb2RlEiwKEmR1cm'
-        'F0aW9uX3RvX2V4cGlyZRgEIAEoCVIQZHVyYXRpb25Ub0V4cGlyZQ==');
+final $typed_data.Uint8List createContactVerificationRequestDescriptor = $convert.base64Decode(
+    'CiBDcmVhdGVDb250YWN0VmVyaWZpY2F0aW9uUmVxdWVzdBIrCgJpZBgBIAEoCUIbukgYchYQAx'
+    'goMhBbMC05YS16Xy1dezMsNDB9UgJpZBI6Cgpjb250YWN0X2lkGAIgASgJQhu6SBhyFhADGCgy'
+    'EFswLTlhLXpfLV17Myw0MH1SCWNvbnRhY3RJZBISCgRjb2RlGAMgASgJUgRjb2RlEiwKEmR1cm'
+    'F0aW9uX3RvX2V4cGlyZRgEIAEoCVIQZHVyYXRpb25Ub0V4cGlyZQ==');
 
 @$core.Deprecated('Use createContactVerificationResponseDescriptor instead')
 const CreateContactVerificationResponse$json = {
@@ -655,10 +434,9 @@ const CreateContactVerificationResponse$json = {
 };
 
 /// Descriptor for `CreateContactVerificationResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List createContactVerificationResponseDescriptor =
-    $convert.base64Decode(
-        'CiFDcmVhdGVDb250YWN0VmVyaWZpY2F0aW9uUmVzcG9uc2USKwoCaWQYASABKAlCG7pIGHIWEA'
-        'MYKDIQWzAtOWEtel8tXXszLDQwfVICaWQSGAoHc3VjY2VzcxgCIAEoCFIHc3VjY2Vzcw==');
+final $typed_data.Uint8List createContactVerificationResponseDescriptor = $convert.base64Decode(
+    'CiFDcmVhdGVDb250YWN0VmVyaWZpY2F0aW9uUmVzcG9uc2USKwoCaWQYASABKAlCG7pIGHIWEA'
+    'MYKDIQWzAtOWEtel8tXXszLDQwfVICaWQSGAoHc3VjY2VzcxgCIAEoCFIHc3VjY2Vzcw==');
 
 @$core.Deprecated('Use checkVerificationRequestDescriptor instead')
 const CheckVerificationRequest$json = {
@@ -670,10 +448,9 @@ const CheckVerificationRequest$json = {
 };
 
 /// Descriptor for `CheckVerificationRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List checkVerificationRequestDescriptor =
-    $convert.base64Decode(
-        'ChhDaGVja1ZlcmlmaWNhdGlvblJlcXVlc3QSKwoCaWQYASABKAlCG7pIGHIWEAMYKDIQWzAtOW'
-        'Etel8tXXszLDQwfVICaWQSEgoEY29kZRgCIAEoCVIEY29kZQ==');
+final $typed_data.Uint8List checkVerificationRequestDescriptor = $convert.base64Decode(
+    'ChhDaGVja1ZlcmlmaWNhdGlvblJlcXVlc3QSKwoCaWQYASABKAlCG7pIGHIWEAMYKDIQWzAtOW'
+    'Etel8tXXszLDQwfVICaWQSEgoEY29kZRgCIAEoCVIEY29kZQ==');
 
 @$core.Deprecated('Use checkVerificationResponseDescriptor instead')
 const CheckVerificationResponse$json = {
@@ -686,10 +463,9 @@ const CheckVerificationResponse$json = {
 };
 
 /// Descriptor for `CheckVerificationResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List checkVerificationResponseDescriptor =
-    $convert.base64Decode(
-        'ChlDaGVja1ZlcmlmaWNhdGlvblJlc3BvbnNlEg4KAmlkGAEgASgJUgJpZBIlCg5jaGVja19hdH'
-        'RlbXB0cxgCIAEoBVINY2hlY2tBdHRlbXB0cxIYCgdzdWNjZXNzGAMgASgIUgdzdWNjZXNz');
+final $typed_data.Uint8List checkVerificationResponseDescriptor = $convert.base64Decode(
+    'ChlDaGVja1ZlcmlmaWNhdGlvblJlc3BvbnNlEg4KAmlkGAEgASgJUgJpZBIlCg5jaGVja19hdH'
+    'RlbXB0cxgCIAEoBVINY2hlY2tBdHRlbXB0cxIYCgdzdWNjZXNzGAMgASgIUgdzdWNjZXNz');
 
 @$core.Deprecated('Use removeContactRequestDescriptor instead')
 const RemoveContactRequest$json = {
@@ -708,14 +484,7 @@ final $typed_data.Uint8List removeContactRequestDescriptor = $convert.base64Deco
 const RemoveContactResponse$json = {
   '1': 'RemoveContactResponse',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.profile.v1.ProfileObject',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 1, '5': 11, '6': '.profile.v1.ProfileObject', '10': 'data'},
   ],
 };
 
@@ -734,14 +503,7 @@ const SearchRosterRequest$json = {
     {'1': 'start_date', '3': 4, '4': 1, '5': 9, '10': 'startDate'},
     {'1': 'end_date', '3': 5, '4': 1, '5': 9, '10': 'endDate'},
     {'1': 'properties', '3': 6, '4': 3, '5': 9, '10': 'properties'},
-    {
-      '1': 'extras',
-      '3': 7,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'extras'
-    },
+    {'1': 'extras', '3': 7, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'extras'},
     {'1': 'profile_id', '3': 8, '4': 1, '5': 9, '8': {}, '10': 'profileId'},
   ],
 };
@@ -759,14 +521,7 @@ final $typed_data.Uint8List searchRosterRequestDescriptor = $convert.base64Decod
 const SearchRosterResponse$json = {
   '1': 'SearchRosterResponse',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.profile.v1.RosterObject',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 3, '5': 11, '6': '.profile.v1.RosterObject', '10': 'data'},
   ],
 };
 
@@ -779,14 +534,7 @@ final $typed_data.Uint8List searchRosterResponseDescriptor = $convert.base64Deco
 const AddRosterRequest$json = {
   '1': 'AddRosterRequest',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.profile.v1.AddContactRequest',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 3, '5': 11, '6': '.profile.v1.AddContactRequest', '10': 'data'},
   ],
 };
 
@@ -799,14 +547,7 @@ final $typed_data.Uint8List addRosterRequestDescriptor = $convert.base64Decode(
 const AddRosterResponse$json = {
   '1': 'AddRosterResponse',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.profile.v1.RosterObject',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 3, '5': 11, '6': '.profile.v1.RosterObject', '10': 'data'},
   ],
 };
 
@@ -832,14 +573,7 @@ final $typed_data.Uint8List removeRosterRequestDescriptor = $convert.base64Decod
 const RemoveRosterResponse$json = {
   '1': 'RemoveRosterResponse',
   '2': [
-    {
-      '1': 'roster',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.profile.v1.RosterObject',
-      '10': 'roster'
-    },
+    {'1': 'roster', '3': 1, '4': 1, '5': 11, '6': '.profile.v1.RosterObject', '10': 'roster'},
   ],
 };
 
@@ -853,14 +587,7 @@ const AddAddressRequest$json = {
   '1': 'AddAddressRequest',
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'id'},
-    {
-      '1': 'address',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.profile.v1.AddressObject',
-      '10': 'address'
-    },
+    {'1': 'address', '3': 2, '4': 1, '5': 11, '6': '.profile.v1.AddressObject', '10': 'address'},
   ],
 };
 
@@ -874,14 +601,7 @@ final $typed_data.Uint8List addAddressRequestDescriptor = $convert.base64Decode(
 const AddAddressResponse$json = {
   '1': 'AddAddressResponse',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.profile.v1.ProfileObject',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 1, '5': 11, '6': '.profile.v1.ProfileObject', '10': 'data'},
   ],
 };
 
@@ -899,22 +619,14 @@ const GetByContactRequest$json = {
 };
 
 /// Descriptor for `GetByContactRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List getByContactRequestDescriptor =
-    $convert.base64Decode(
-        'ChNHZXRCeUNvbnRhY3RSZXF1ZXN0EhgKB2NvbnRhY3QYASABKAlSB2NvbnRhY3Q=');
+final $typed_data.Uint8List getByContactRequestDescriptor = $convert.base64Decode(
+    'ChNHZXRCeUNvbnRhY3RSZXF1ZXN0EhgKB2NvbnRhY3QYASABKAlSB2NvbnRhY3Q=');
 
 @$core.Deprecated('Use getByContactResponseDescriptor instead')
 const GetByContactResponse$json = {
   '1': 'GetByContactResponse',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.profile.v1.ProfileObject',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 1, '5': 11, '6': '.profile.v1.ProfileObject', '10': 'data'},
   ],
 };
 
@@ -929,21 +641,8 @@ const ListRelationshipRequest$json = {
   '2': [
     {'1': 'peer_name', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'peerName'},
     {'1': 'peer_id', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'peerId'},
-    {
-      '1': 'last_relationship_id',
-      '3': 3,
-      '4': 1,
-      '5': 9,
-      '8': {},
-      '10': 'lastRelationshipId'
-    },
-    {
-      '1': 'related_children_id',
-      '3': 4,
-      '4': 3,
-      '5': 9,
-      '10': 'relatedChildrenId'
-    },
+    {'1': 'last_relationship_id', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'lastRelationshipId'},
+    {'1': 'related_children_id', '3': 4, '4': 3, '5': 9, '10': 'relatedChildrenId'},
     {'1': 'count', '3': 5, '4': 1, '5': 5, '10': 'count'},
     {'1': 'invert_relation', '3': 6, '4': 1, '5': 8, '10': 'invertRelation'},
   ],
@@ -963,22 +662,14 @@ final $typed_data.Uint8List listRelationshipRequestDescriptor = $convert.base64D
 const ListRelationshipResponse$json = {
   '1': 'ListRelationshipResponse',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.profile.v1.RelationshipObject',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 3, '5': 11, '6': '.profile.v1.RelationshipObject', '10': 'data'},
   ],
 };
 
 /// Descriptor for `ListRelationshipResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List listRelationshipResponseDescriptor =
-    $convert.base64Decode(
-        'ChhMaXN0UmVsYXRpb25zaGlwUmVzcG9uc2USMgoEZGF0YRgBIAMoCzIeLnByb2ZpbGUudjEuUm'
-        'VsYXRpb25zaGlwT2JqZWN0UgRkYXRh');
+final $typed_data.Uint8List listRelationshipResponseDescriptor = $convert.base64Decode(
+    'ChhMaXN0UmVsYXRpb25zaGlwUmVzcG9uc2USMgoEZGF0YRgBIAMoCzIeLnByb2ZpbGUudjEuUm'
+    'VsYXRpb25zaGlwT2JqZWN0UgRkYXRh');
 
 @$core.Deprecated('Use addRelationshipRequestDescriptor instead')
 const AddRelationshipRequest$json = {
@@ -989,22 +680,8 @@ const AddRelationshipRequest$json = {
     {'1': 'parent_id', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'parentId'},
     {'1': 'child', '3': 4, '4': 1, '5': 9, '8': {}, '10': 'child'},
     {'1': 'child_id', '3': 5, '4': 1, '5': 9, '8': {}, '10': 'childId'},
-    {
-      '1': 'type',
-      '3': 6,
-      '4': 1,
-      '5': 14,
-      '6': '.profile.v1.RelationshipType',
-      '10': 'type'
-    },
-    {
-      '1': 'properties',
-      '3': 7,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'properties'
-    },
+    {'1': 'type', '3': 6, '4': 1, '5': 14, '6': '.profile.v1.RelationshipType', '10': 'type'},
+    {'1': 'properties', '3': 7, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'properties'},
   ],
 };
 
@@ -1023,22 +700,14 @@ final $typed_data.Uint8List addRelationshipRequestDescriptor = $convert.base64De
 const AddRelationshipResponse$json = {
   '1': 'AddRelationshipResponse',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.profile.v1.RelationshipObject',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 1, '5': 11, '6': '.profile.v1.RelationshipObject', '10': 'data'},
   ],
 };
 
 /// Descriptor for `AddRelationshipResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List addRelationshipResponseDescriptor =
-    $convert.base64Decode(
-        'ChdBZGRSZWxhdGlvbnNoaXBSZXNwb25zZRIyCgRkYXRhGAEgASgLMh4ucHJvZmlsZS52MS5SZW'
-        'xhdGlvbnNoaXBPYmplY3RSBGRhdGE=');
+final $typed_data.Uint8List addRelationshipResponseDescriptor = $convert.base64Decode(
+    'ChdBZGRSZWxhdGlvbnNoaXBSZXNwb25zZRIyCgRkYXRhGAEgASgLMh4ucHJvZmlsZS52MS5SZW'
+    'xhdGlvbnNoaXBPYmplY3RSBGRhdGE=');
 
 @$core.Deprecated('Use deleteRelationshipRequestDescriptor instead')
 const DeleteRelationshipRequest$json = {
@@ -1059,22 +728,14 @@ final $typed_data.Uint8List deleteRelationshipRequestDescriptor = $convert.base6
 const DeleteRelationshipResponse$json = {
   '1': 'DeleteRelationshipResponse',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.profile.v1.RelationshipObject',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 1, '5': 11, '6': '.profile.v1.RelationshipObject', '10': 'data'},
   ],
 };
 
 /// Descriptor for `DeleteRelationshipResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List deleteRelationshipResponseDescriptor =
-    $convert.base64Decode(
-        'ChpEZWxldGVSZWxhdGlvbnNoaXBSZXNwb25zZRIyCgRkYXRhGAEgASgLMh4ucHJvZmlsZS52MS'
-        '5SZWxhdGlvbnNoaXBPYmplY3RSBGRhdGE=');
+final $typed_data.Uint8List deleteRelationshipResponseDescriptor = $convert.base64Decode(
+    'ChpEZWxldGVSZWxhdGlvbnNoaXBSZXNwb25zZRIyCgRkYXRhGAEgASgLMh4ucHJvZmlsZS52MS'
+    '5SZWxhdGlvbnNoaXBPYmplY3RSBGRhdGE=');
 
 const $core.Map<$core.String, $core.dynamic> ProfileServiceBase$json = {
   '1': 'ProfileService',
@@ -1098,54 +759,14 @@ const $core.Map<$core.String, $core.dynamic> ProfileServiceBase$json = {
       '4': {'34': 1},
       '6': true,
     },
-    {
-      '1': 'Merge',
-      '2': '.profile.v1.MergeRequest',
-      '3': '.profile.v1.MergeResponse',
-      '4': {}
-    },
-    {
-      '1': 'Create',
-      '2': '.profile.v1.CreateRequest',
-      '3': '.profile.v1.CreateResponse',
-      '4': {}
-    },
-    {
-      '1': 'Update',
-      '2': '.profile.v1.UpdateRequest',
-      '3': '.profile.v1.UpdateResponse',
-      '4': {}
-    },
-    {
-      '1': 'AddContact',
-      '2': '.profile.v1.AddContactRequest',
-      '3': '.profile.v1.AddContactResponse',
-      '4': {}
-    },
-    {
-      '1': 'CreateContact',
-      '2': '.profile.v1.CreateContactRequest',
-      '3': '.profile.v1.CreateContactResponse',
-      '4': {}
-    },
-    {
-      '1': 'CreateContactVerification',
-      '2': '.profile.v1.CreateContactVerificationRequest',
-      '3': '.profile.v1.CreateContactVerificationResponse',
-      '4': {}
-    },
-    {
-      '1': 'CheckVerification',
-      '2': '.profile.v1.CheckVerificationRequest',
-      '3': '.profile.v1.CheckVerificationResponse',
-      '4': {}
-    },
-    {
-      '1': 'RemoveContact',
-      '2': '.profile.v1.RemoveContactRequest',
-      '3': '.profile.v1.RemoveContactResponse',
-      '4': {}
-    },
+    {'1': 'Merge', '2': '.profile.v1.MergeRequest', '3': '.profile.v1.MergeResponse', '4': {}},
+    {'1': 'Create', '2': '.profile.v1.CreateRequest', '3': '.profile.v1.CreateResponse', '4': {}},
+    {'1': 'Update', '2': '.profile.v1.UpdateRequest', '3': '.profile.v1.UpdateResponse', '4': {}},
+    {'1': 'AddContact', '2': '.profile.v1.AddContactRequest', '3': '.profile.v1.AddContactResponse', '4': {}},
+    {'1': 'CreateContact', '2': '.profile.v1.CreateContactRequest', '3': '.profile.v1.CreateContactResponse', '4': {}},
+    {'1': 'CreateContactVerification', '2': '.profile.v1.CreateContactVerificationRequest', '3': '.profile.v1.CreateContactVerificationResponse', '4': {}},
+    {'1': 'CheckVerification', '2': '.profile.v1.CheckVerificationRequest', '3': '.profile.v1.CheckVerificationResponse', '4': {}},
+    {'1': 'RemoveContact', '2': '.profile.v1.RemoveContactRequest', '3': '.profile.v1.RemoveContactResponse', '4': {}},
     {
       '1': 'SearchRoster',
       '2': '.profile.v1.SearchRosterRequest',
@@ -1153,36 +774,11 @@ const $core.Map<$core.String, $core.dynamic> ProfileServiceBase$json = {
       '4': {'34': 1},
       '6': true,
     },
-    {
-      '1': 'AddRoster',
-      '2': '.profile.v1.AddRosterRequest',
-      '3': '.profile.v1.AddRosterResponse',
-      '4': {}
-    },
-    {
-      '1': 'RemoveRoster',
-      '2': '.profile.v1.RemoveRosterRequest',
-      '3': '.profile.v1.RemoveRosterResponse',
-      '4': {}
-    },
-    {
-      '1': 'AddAddress',
-      '2': '.profile.v1.AddAddressRequest',
-      '3': '.profile.v1.AddAddressResponse',
-      '4': {}
-    },
-    {
-      '1': 'AddRelationship',
-      '2': '.profile.v1.AddRelationshipRequest',
-      '3': '.profile.v1.AddRelationshipResponse',
-      '4': {}
-    },
-    {
-      '1': 'DeleteRelationship',
-      '2': '.profile.v1.DeleteRelationshipRequest',
-      '3': '.profile.v1.DeleteRelationshipResponse',
-      '4': {}
-    },
+    {'1': 'AddRoster', '2': '.profile.v1.AddRosterRequest', '3': '.profile.v1.AddRosterResponse', '4': {}},
+    {'1': 'RemoveRoster', '2': '.profile.v1.RemoveRosterRequest', '3': '.profile.v1.RemoveRosterResponse', '4': {}},
+    {'1': 'AddAddress', '2': '.profile.v1.AddAddressRequest', '3': '.profile.v1.AddAddressResponse', '4': {}},
+    {'1': 'AddRelationship', '2': '.profile.v1.AddRelationshipRequest', '3': '.profile.v1.AddRelationshipResponse', '4': {}},
+    {'1': 'DeleteRelationship', '2': '.profile.v1.DeleteRelationshipRequest', '3': '.profile.v1.DeleteRelationshipResponse', '4': {}},
     {
       '1': 'ListRelationship',
       '2': '.profile.v1.ListRelationshipRequest',
@@ -1194,15 +790,14 @@ const $core.Map<$core.String, $core.dynamic> ProfileServiceBase$json = {
 };
 
 @$core.Deprecated('Use profileServiceDescriptor instead')
-const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>>
-    ProfileServiceBase$messageJson = {
+const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> ProfileServiceBase$messageJson = {
   '.profile.v1.GetByIdRequest': GetByIdRequest$json,
   '.profile.v1.GetByIdResponse': GetByIdResponse$json,
   '.profile.v1.ProfileObject': ProfileObject$json,
-  '.google.protobuf.Struct': $0.Struct$json,
-  '.google.protobuf.Struct.FieldsEntry': $0.Struct_FieldsEntry$json,
-  '.google.protobuf.Value': $0.Value$json,
-  '.google.protobuf.ListValue': $0.ListValue$json,
+  '.google.protobuf.Struct': $6.Struct$json,
+  '.google.protobuf.Struct.FieldsEntry': $6.Struct_FieldsEntry$json,
+  '.google.protobuf.Value': $6.Value$json,
+  '.google.protobuf.ListValue': $6.ListValue$json,
   '.profile.v1.ContactObject': ContactObject$json,
   '.profile.v1.AddressObject': AddressObject$json,
   '.profile.v1.GetByContactRequest': GetByContactRequest$json,
@@ -1219,10 +814,8 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>>
   '.profile.v1.AddContactResponse': AddContactResponse$json,
   '.profile.v1.CreateContactRequest': CreateContactRequest$json,
   '.profile.v1.CreateContactResponse': CreateContactResponse$json,
-  '.profile.v1.CreateContactVerificationRequest':
-      CreateContactVerificationRequest$json,
-  '.profile.v1.CreateContactVerificationResponse':
-      CreateContactVerificationResponse$json,
+  '.profile.v1.CreateContactVerificationRequest': CreateContactVerificationRequest$json,
+  '.profile.v1.CreateContactVerificationResponse': CreateContactVerificationResponse$json,
   '.profile.v1.CheckVerificationRequest': CheckVerificationRequest$json,
   '.profile.v1.CheckVerificationResponse': CheckVerificationResponse$json,
   '.profile.v1.RemoveContactRequest': RemoveContactRequest$json,
@@ -1331,3 +924,4 @@ final $typed_data.Uint8List profileServiceDescriptor = $convert.base64Decode(
     'bGUgd2l0aCBvcHRpb25hbCBmaWx0ZXJpbmcgYnkgdHlwZSBhbmQgcmVsYXRlZCBwcm9maWxlcy'
     '4gU3VwcG9ydHMgcGFnaW5hdGlvbiBhbmQgcmVsYXRpb25zaGlwIGludmVyc2lvbi4qEWxpc3RS'
     'ZWxhdGlvbnNoaXBzMAE=');
+

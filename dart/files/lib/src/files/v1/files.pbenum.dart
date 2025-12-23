@@ -1,14 +1,13 @@
-// This is a generated file - do not edit.
 //
-// Generated from files/v1/files.proto.
-
-// @dart = 3.3
+//  Generated code. Do not modify.
+//  source: files/v1/files.proto
+//
+// @dart = 2.12
 
 // ignore_for_file: annotate_overrides, camel_case_types, comment_references
-// ignore_for_file: constant_identifier_names
-// ignore_for_file: curly_braces_in_flow_control_structures
-// ignore_for_file: deprecated_member_use_from_same_package, library_prefixes
-// ignore_for_file: non_constant_identifier_names, prefer_relative_imports
+// ignore_for_file: constant_identifier_names, library_prefixes
+// ignore_for_file: non_constant_identifier_names, prefer_final_fields
+// ignore_for_file: unnecessary_import, unnecessary_this, unused_import
 
 import 'dart:core' as $core;
 
@@ -17,24 +16,19 @@ import 'package:protobuf/protobuf.dart' as $pb;
 /// ThumbnailMethod defines how thumbnails should be generated.
 /// buf:lint:ignore ENUM_VALUE_PREFIX
 class ThumbnailMethod extends $pb.ProtobufEnum {
-  /// buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
-  static const ThumbnailMethod SCALE =
-      ThumbnailMethod._(0, _omitEnumNames ? '' : 'SCALE');
-  static const ThumbnailMethod CROP =
-      ThumbnailMethod._(1, _omitEnumNames ? '' : 'CROP');
+  static const ThumbnailMethod SCALE = ThumbnailMethod._(0, _omitEnumNames ? '' : 'SCALE');
+  static const ThumbnailMethod CROP = ThumbnailMethod._(1, _omitEnumNames ? '' : 'CROP');
 
-  static const $core.List<ThumbnailMethod> values = <ThumbnailMethod>[
+  static const $core.List<ThumbnailMethod> values = <ThumbnailMethod> [
     SCALE,
     CROP,
   ];
 
-  static final $core.List<ThumbnailMethod?> _byValue =
-      $pb.ProtobufEnum.$_initByValueList(values, 1);
-  static ThumbnailMethod? valueOf($core.int value) =>
-      value < 0 || value >= _byValue.length ? null : _byValue[value];
+  static final $core.Map<$core.int, ThumbnailMethod> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static ThumbnailMethod? valueOf($core.int value) => _byValue[value];
 
-  const ThumbnailMethod._(super.value, super.name);
+  const ThumbnailMethod._($core.int v, $core.String n) : super(v, n);
 }
 
-const $core.bool _omitEnumNames =
-    $core.bool.fromEnvironment('protobuf.omit_enum_names');
+
+const _omitEnumNames = $core.bool.fromEnvironment('protobuf.omit_enum_names');

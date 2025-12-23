@@ -156,7 +156,7 @@ plugins:
     out: ../../java/<service>/src/main/java/
   - remote: buf.build/protocolbuffers/java
     out: ../../java/<service>/src/main/java/
-  - remote: buf.build/protocolbuffers/dart
+  - remote: buf.build/protocolbuffers/dart:v21.1.2
     out: ../../dart/<service>/lib/src
     include_wkt: true
     include_imports: true

@@ -1,26 +1,21 @@
-// This is a generated file - do not edit.
 //
-// Generated from chat/v1/chat.proto.
-
-// @dart = 3.3
+//  Generated code. Do not modify.
+//  source: chat/v1/chat.proto
+//
+// @dart = 2.12
 
 // ignore_for_file: annotate_overrides, camel_case_types, comment_references
-// ignore_for_file: constant_identifier_names
-// ignore_for_file: curly_braces_in_flow_control_structures
-// ignore_for_file: deprecated_member_use_from_same_package, library_prefixes
-// ignore_for_file: non_constant_identifier_names, prefer_relative_imports
-// ignore_for_file: unused_import
+// ignore_for_file: constant_identifier_names, library_prefixes
+// ignore_for_file: non_constant_identifier_names, prefer_final_fields
+// ignore_for_file: unnecessary_import, unnecessary_this, unused_import
 
 import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
-import 'package:protobuf/well_known_types/google/protobuf/struct.pbjson.dart'
-    as $1;
-import 'package:protobuf/well_known_types/google/protobuf/timestamp.pbjson.dart'
-    as $0;
-
-import '../../common/v1/common.pbjson.dart' as $2;
+import '../../common/v1/common.pbjson.dart' as $7;
+import '../../google/protobuf/struct.pbjson.dart' as $6;
+import '../../google/protobuf/timestamp.pbjson.dart' as $2;
 
 @$core.Deprecated('Use roomEventTypeDescriptor instead')
 const RoomEventType$json = {
@@ -78,59 +73,12 @@ const ConnectResponse$json = {
   '1': 'ConnectResponse',
   '2': [
     {'1': 'id', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'id'},
-    {
-      '1': 'timestamp',
-      '3': 5,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Timestamp',
-      '10': 'timestamp'
-    },
-    {
-      '1': 'message',
-      '3': 10,
-      '4': 1,
-      '5': 11,
-      '6': '.chat.v1.RoomEvent',
-      '9': 0,
-      '10': 'message'
-    },
-    {
-      '1': 'presence_event',
-      '3': 12,
-      '4': 1,
-      '5': 11,
-      '6': '.chat.v1.PresenceEvent',
-      '9': 0,
-      '10': 'presenceEvent'
-    },
-    {
-      '1': 'receipt_event',
-      '3': 13,
-      '4': 1,
-      '5': 11,
-      '6': '.chat.v1.ReceiptEvent',
-      '9': 0,
-      '10': 'receiptEvent'
-    },
-    {
-      '1': 'read_event',
-      '3': 15,
-      '4': 1,
-      '5': 11,
-      '6': '.chat.v1.ReadMarker',
-      '9': 0,
-      '10': 'readEvent'
-    },
-    {
-      '1': 'typing_event',
-      '3': 17,
-      '4': 1,
-      '5': 11,
-      '6': '.chat.v1.TypingEvent',
-      '9': 0,
-      '10': 'typingEvent'
-    },
+    {'1': 'timestamp', '3': 5, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'timestamp'},
+    {'1': 'message', '3': 10, '4': 1, '5': 11, '6': '.chat.v1.RoomEvent', '9': 0, '10': 'message'},
+    {'1': 'presence_event', '3': 12, '4': 1, '5': 11, '6': '.chat.v1.PresenceEvent', '9': 0, '10': 'presenceEvent'},
+    {'1': 'receipt_event', '3': 13, '4': 1, '5': 11, '6': '.chat.v1.ReceiptEvent', '9': 0, '10': 'receiptEvent'},
+    {'1': 'read_event', '3': 15, '4': 1, '5': 11, '6': '.chat.v1.ReadMarker', '9': 0, '10': 'readEvent'},
+    {'1': 'typing_event', '3': 17, '4': 1, '5': 11, '6': '.chat.v1.TypingEvent', '9': 0, '10': 'typingEvent'},
   ],
   '8': [
     {'1': 'payload'},
@@ -155,42 +103,12 @@ const RoomEvent$json = {
     {'1': 'id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'id'},
     {'1': 'room_id', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'roomId'},
     {'1': 'sender_id', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'senderId'},
-    {
-      '1': 'type',
-      '3': 4,
-      '4': 1,
-      '5': 14,
-      '6': '.chat.v1.RoomEventType',
-      '10': 'type'
-    },
-    {
-      '1': 'payload',
-      '3': 6,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'payload'
-    },
-    {
-      '1': 'sent_at',
-      '3': 7,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Timestamp',
-      '10': 'sentAt'
-    },
+    {'1': 'type', '3': 4, '4': 1, '5': 14, '6': '.chat.v1.RoomEventType', '10': 'type'},
+    {'1': 'payload', '3': 6, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'payload'},
+    {'1': 'sent_at', '3': 7, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'sentAt'},
     {'1': 'edited', '3': 8, '4': 1, '5': 8, '10': 'edited'},
     {'1': 'redacted', '3': 9, '4': 1, '5': 8, '10': 'redacted'},
-    {
-      '1': 'parent_id',
-      '3': 10,
-      '4': 1,
-      '5': 9,
-      '8': {},
-      '9': 0,
-      '10': 'parentId',
-      '17': true
-    },
+    {'1': 'parent_id', '3': 10, '4': 1, '5': 9, '8': {}, '9': 0, '10': 'parentId', '17': true},
   ],
   '8': [
     {'1': '_parent_id'},
@@ -214,23 +132,9 @@ const PresenceEvent$json = {
   '1': 'PresenceEvent',
   '2': [
     {'1': 'profile_id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'profileId'},
-    {
-      '1': 'status',
-      '3': 2,
-      '4': 1,
-      '5': 14,
-      '6': '.chat.v1.PresenceStatus',
-      '10': 'status'
-    },
+    {'1': 'status', '3': 2, '4': 1, '5': 14, '6': '.chat.v1.PresenceStatus', '10': 'status'},
     {'1': 'status_msg', '3': 3, '4': 1, '5': 9, '10': 'statusMsg'},
-    {
-      '1': 'last_active',
-      '3': 4,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Timestamp',
-      '10': 'lastActive'
-    },
+    {'1': 'last_active', '3': 4, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'lastActive'},
   ],
 };
 
@@ -264,14 +168,7 @@ const ReadMarker$json = {
   '2': [
     {'1': 'room_id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'roomId'},
     {'1': 'profile_id', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'profileId'},
-    {
-      '1': 'up_to_event_id',
-      '3': 3,
-      '4': 1,
-      '5': 9,
-      '8': {},
-      '10': 'upToEventId'
-    },
+    {'1': 'up_to_event_id', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'upToEventId'},
   ],
 };
 
@@ -289,14 +186,7 @@ const TypingEvent$json = {
     {'1': 'profile_id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'profileId'},
     {'1': 'room_id', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'roomId'},
     {'1': 'typing', '3': 3, '4': 1, '5': 8, '10': 'typing'},
-    {
-      '1': 'since',
-      '3': 5,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Timestamp',
-      '10': 'since'
-    },
+    {'1': 'since', '3': 5, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'since'},
   ],
 };
 
@@ -315,33 +205,9 @@ const ConnectRequest$json = {
     {'1': 'device_id', '3': 3, '4': 1, '5': 9, '10': 'deviceId'},
     {'1': 'auth_token', '3': 4, '4': 1, '5': 9, '10': 'authToken'},
     {'1': 'resume_token', '3': 5, '4': 1, '5': 9, '10': 'resumeToken'},
-    {
-      '1': 'ack',
-      '3': 10,
-      '4': 1,
-      '5': 11,
-      '6': '.chat.v1.StreamAck',
-      '9': 0,
-      '10': 'ack'
-    },
-    {
-      '1': 'state_update',
-      '3': 12,
-      '4': 1,
-      '5': 11,
-      '6': '.chat.v1.ClientState',
-      '9': 0,
-      '10': 'stateUpdate'
-    },
-    {
-      '1': 'send_event_ack',
-      '3': 15,
-      '4': 1,
-      '5': 11,
-      '6': '.chat.v1.SendEventResponse',
-      '9': 0,
-      '10': 'sendEventAck'
-    },
+    {'1': 'ack', '3': 10, '4': 1, '5': 11, '6': '.chat.v1.StreamAck', '9': 0, '10': 'ack'},
+    {'1': 'state_update', '3': 12, '4': 1, '5': 11, '6': '.chat.v1.ClientState', '9': 0, '10': 'stateUpdate'},
+    {'1': 'send_event_ack', '3': 15, '4': 1, '5': 11, '6': '.chat.v1.SendEventResponse', '9': 0, '10': 'sendEventAck'},
   ],
   '8': [
     {'1': 'payload'},
@@ -363,32 +229,9 @@ const StreamAck$json = {
   '2': [
     {'1': 'room_id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'roomId'},
     {'1': 'event_id', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'eventId'},
-    {
-      '1': 'ack_at',
-      '3': 3,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Timestamp',
-      '10': 'ackAt'
-    },
-    {
-      '1': 'metadata',
-      '3': 6,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'metadata'
-    },
-    {
-      '1': 'error',
-      '3': 7,
-      '4': 1,
-      '5': 11,
-      '6': '.common.v1.ErrorDetail',
-      '9': 0,
-      '10': 'error',
-      '17': true
-    },
+    {'1': 'ack_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'ackAt'},
+    {'1': 'metadata', '3': 6, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'metadata'},
+    {'1': 'error', '3': 7, '4': 1, '5': 11, '6': '.common.v1.ErrorDetail', '9': 0, '10': 'error', '17': true},
   ],
   '8': [
     {'1': '_error'},
@@ -408,60 +251,12 @@ final $typed_data.Uint8List streamAckDescriptor = $convert.base64Decode(
 const ClientState$json = {
   '1': 'ClientState',
   '2': [
-    {
-      '1': 'typing',
-      '3': 4,
-      '4': 1,
-      '5': 11,
-      '6': '.chat.v1.TypingEvent',
-      '9': 0,
-      '10': 'typing'
-    },
-    {
-      '1': 'receipt',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.chat.v1.ReceiptEvent',
-      '9': 0,
-      '10': 'receipt'
-    },
-    {
-      '1': 'read_marker',
-      '3': 3,
-      '4': 1,
-      '5': 11,
-      '6': '.chat.v1.ReadMarker',
-      '9': 0,
-      '10': 'readMarker'
-    },
-    {
-      '1': 'room_event',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.chat.v1.RoomEvent',
-      '9': 0,
-      '10': 'roomEvent'
-    },
-    {
-      '1': 'presence',
-      '3': 5,
-      '4': 1,
-      '5': 11,
-      '6': '.chat.v1.PresenceEvent',
-      '9': 0,
-      '10': 'presence'
-    },
-    {
-      '1': 'send_event',
-      '3': 10,
-      '4': 1,
-      '5': 11,
-      '6': '.chat.v1.SendEventRequest',
-      '9': 0,
-      '10': 'sendEvent'
-    },
+    {'1': 'typing', '3': 4, '4': 1, '5': 11, '6': '.chat.v1.TypingEvent', '9': 0, '10': 'typing'},
+    {'1': 'receipt', '3': 2, '4': 1, '5': 11, '6': '.chat.v1.ReceiptEvent', '9': 0, '10': 'receipt'},
+    {'1': 'read_marker', '3': 3, '4': 1, '5': 11, '6': '.chat.v1.ReadMarker', '9': 0, '10': 'readMarker'},
+    {'1': 'room_event', '3': 1, '4': 1, '5': 11, '6': '.chat.v1.RoomEvent', '9': 0, '10': 'roomEvent'},
+    {'1': 'presence', '3': 5, '4': 1, '5': 11, '6': '.chat.v1.PresenceEvent', '9': 0, '10': 'presence'},
+    {'1': 'send_event', '3': 10, '4': 1, '5': 11, '6': '.chat.v1.SendEventRequest', '9': 0, '10': 'sendEvent'},
   ],
   '8': [
     {'1': 'state'},
@@ -482,14 +277,7 @@ final $typed_data.Uint8List clientStateDescriptor = $convert.base64Decode(
 const SendEventRequest$json = {
   '1': 'SendEventRequest',
   '2': [
-    {
-      '1': 'event',
-      '3': 4,
-      '4': 3,
-      '5': 11,
-      '6': '.chat.v1.RoomEvent',
-      '10': 'event'
-    },
+    {'1': 'event', '3': 4, '4': 3, '5': 11, '6': '.chat.v1.RoomEvent', '10': 'event'},
   ],
 };
 
@@ -502,14 +290,7 @@ final $typed_data.Uint8List sendEventRequestDescriptor = $convert.base64Decode(
 const SendEventResponse$json = {
   '1': 'SendEventResponse',
   '2': [
-    {
-      '1': 'ack',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.chat.v1.StreamAck',
-      '10': 'ack'
-    },
+    {'1': 'ack', '3': 1, '4': 3, '5': 11, '6': '.chat.v1.StreamAck', '10': 'ack'},
   ],
 };
 
@@ -539,14 +320,7 @@ final $typed_data.Uint8List getHistoryRequestDescriptor = $convert.base64Decode(
 const GetHistoryResponse$json = {
   '1': 'GetHistoryResponse',
   '2': [
-    {
-      '1': 'events',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.chat.v1.ConnectResponse',
-      '10': 'events'
-    },
+    {'1': 'events', '3': 1, '4': 3, '5': 11, '6': '.chat.v1.ConnectResponse', '10': 'events'},
     {'1': 'next_cursor', '3': 2, '4': 1, '5': 9, '10': 'nextCursor'},
     {'1': 'prev_cursor', '3': 3, '4': 1, '5': 9, '10': 'prevCursor'},
   ],
@@ -566,30 +340,9 @@ const Room$json = {
     {'1': 'name', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'name'},
     {'1': 'description', '3': 4, '4': 1, '5': 9, '10': 'description'},
     {'1': 'is_private', '3': 5, '4': 1, '5': 8, '10': 'isPrivate'},
-    {
-      '1': 'metadata',
-      '3': 6,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'metadata'
-    },
-    {
-      '1': 'created_at',
-      '3': 7,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Timestamp',
-      '10': 'createdAt'
-    },
-    {
-      '1': 'updated_at',
-      '3': 8,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Timestamp',
-      '10': 'updatedAt'
-    },
+    {'1': 'metadata', '3': 6, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'metadata'},
+    {'1': 'created_at', '3': 7, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
+    {'1': 'updated_at', '3': 8, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
     {'1': 'creator_id', '3': 9, '4': 1, '5': 9, '10': 'creatorId'},
   ],
 };
@@ -613,14 +366,7 @@ const CreateRoomRequest$json = {
     {'1': 'description', '3': 5, '4': 1, '5': 9, '10': 'description'},
     {'1': 'is_private', '3': 6, '4': 1, '5': 8, '10': 'isPrivate'},
     {'1': 'members', '3': 7, '4': 3, '5': 9, '10': 'members'},
-    {
-      '1': 'metadata',
-      '3': 8,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'metadata'
-    },
+    {'1': 'metadata', '3': 8, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'metadata'},
   ],
 };
 
@@ -637,14 +383,7 @@ const CreateRoomResponse$json = {
   '1': 'CreateRoomResponse',
   '2': [
     {'1': 'room', '3': 1, '4': 1, '5': 11, '6': '.chat.v1.Room', '10': 'room'},
-    {
-      '1': 'error',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.common.v1.ErrorDetail',
-      '10': 'error'
-    },
+    {'1': 'error', '3': 2, '4': 1, '5': 11, '6': '.common.v1.ErrorDetail', '10': 'error'},
   ],
 };
 
@@ -663,14 +402,7 @@ const SearchRoomsRequest$json = {
     {'1': 'start_date', '3': 4, '4': 1, '5': 9, '10': 'startDate'},
     {'1': 'end_date', '3': 5, '4': 1, '5': 9, '10': 'endDate'},
     {'1': 'properties', '3': 6, '4': 3, '5': 9, '10': 'properties'},
-    {
-      '1': 'extras',
-      '3': 7,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'extras'
-    },
+    {'1': 'extras', '3': 7, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'extras'},
   ],
 };
 
@@ -702,14 +434,7 @@ const UpdateRoomRequest$json = {
     {'1': 'room_id', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'roomId'},
     {'1': 'name', '3': 3, '4': 1, '5': 9, '10': 'name'},
     {'1': 'topic', '3': 4, '4': 1, '5': 9, '10': 'topic'},
-    {
-      '1': 'metadata',
-      '3': 5,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'metadata'
-    },
+    {'1': 'metadata', '3': 5, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'metadata'},
   ],
 };
 
@@ -725,14 +450,7 @@ const UpdateRoomResponse$json = {
   '1': 'UpdateRoomResponse',
   '2': [
     {'1': 'room', '3': 1, '4': 1, '5': 11, '6': '.chat.v1.Room', '10': 'room'},
-    {
-      '1': 'error',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.common.v1.ErrorDetail',
-      '10': 'error'
-    },
+    {'1': 'error', '3': 2, '4': 1, '5': 11, '6': '.common.v1.ErrorDetail', '10': 'error'},
   ],
 };
 
@@ -759,14 +477,7 @@ const DeleteRoomResponse$json = {
   '1': 'DeleteRoomResponse',
   '2': [
     {'1': 'room_id', '3': 1, '4': 1, '5': 9, '10': 'roomId'},
-    {
-      '1': 'error',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.common.v1.ErrorDetail',
-      '10': 'error'
-    },
+    {'1': 'error', '3': 2, '4': 1, '5': 11, '6': '.common.v1.ErrorDetail', '10': 'error'},
   ],
 };
 
@@ -782,22 +493,8 @@ const RoomSubscription$json = {
     {'1': 'room_id', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'roomId'},
     {'1': 'profile_id', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'profileId'},
     {'1': 'roles', '3': 4, '4': 3, '5': 9, '10': 'roles'},
-    {
-      '1': 'joined_at',
-      '3': 5,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Timestamp',
-      '10': 'joinedAt'
-    },
-    {
-      '1': 'last_active',
-      '3': 6,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Timestamp',
-      '10': 'lastActive'
-    },
+    {'1': 'joined_at', '3': 5, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'joinedAt'},
+    {'1': 'last_active', '3': 6, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'lastActive'},
   ],
 };
 
@@ -814,46 +511,30 @@ const AddRoomSubscriptionsRequest$json = {
   '1': 'AddRoomSubscriptionsRequest',
   '2': [
     {'1': 'room_id', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'roomId'},
-    {
-      '1': 'members',
-      '3': 3,
-      '4': 3,
-      '5': 11,
-      '6': '.chat.v1.RoomSubscription',
-      '10': 'members'
-    },
+    {'1': 'members', '3': 3, '4': 3, '5': 11, '6': '.chat.v1.RoomSubscription', '10': 'members'},
   ],
 };
 
 /// Descriptor for `AddRoomSubscriptionsRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List addRoomSubscriptionsRequestDescriptor =
-    $convert.base64Decode(
-        'ChtBZGRSb29tU3Vic2NyaXB0aW9uc1JlcXVlc3QSNAoHcm9vbV9pZBgCIAEoCUIbukgYchYQAx'
-        'goMhBbMC05YS16Xy1dezMsNDB9UgZyb29tSWQSMwoHbWVtYmVycxgDIAMoCzIZLmNoYXQudjEu'
-        'Um9vbVN1YnNjcmlwdGlvblIHbWVtYmVycw==');
+final $typed_data.Uint8List addRoomSubscriptionsRequestDescriptor = $convert.base64Decode(
+    'ChtBZGRSb29tU3Vic2NyaXB0aW9uc1JlcXVlc3QSNAoHcm9vbV9pZBgCIAEoCUIbukgYchYQAx'
+    'goMhBbMC05YS16Xy1dezMsNDB9UgZyb29tSWQSMwoHbWVtYmVycxgDIAMoCzIZLmNoYXQudjEu'
+    'Um9vbVN1YnNjcmlwdGlvblIHbWVtYmVycw==');
 
 @$core.Deprecated('Use addRoomSubscriptionsResponseDescriptor instead')
 const AddRoomSubscriptionsResponse$json = {
   '1': 'AddRoomSubscriptionsResponse',
   '2': [
     {'1': 'room_id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'roomId'},
-    {
-      '1': 'error',
-      '3': 3,
-      '4': 1,
-      '5': 11,
-      '6': '.common.v1.ErrorDetail',
-      '10': 'error'
-    },
+    {'1': 'error', '3': 3, '4': 1, '5': 11, '6': '.common.v1.ErrorDetail', '10': 'error'},
   ],
 };
 
 /// Descriptor for `AddRoomSubscriptionsResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List addRoomSubscriptionsResponseDescriptor =
-    $convert.base64Decode(
-        'ChxBZGRSb29tU3Vic2NyaXB0aW9uc1Jlc3BvbnNlEjQKB3Jvb21faWQYASABKAlCG7pIGHIWEA'
-        'MYKDIQWzAtOWEtel8tXXszLDQwfVIGcm9vbUlkEiwKBWVycm9yGAMgASgLMhYuY29tbW9uLnYx'
-        'LkVycm9yRGV0YWlsUgVlcnJvcg==');
+final $typed_data.Uint8List addRoomSubscriptionsResponseDescriptor = $convert.base64Decode(
+    'ChxBZGRSb29tU3Vic2NyaXB0aW9uc1Jlc3BvbnNlEjQKB3Jvb21faWQYASABKAlCG7pIGHIWEA'
+    'MYKDIQWzAtOWEtel8tXXszLDQwfVIGcm9vbUlkEiwKBWVycm9yGAMgASgLMhYuY29tbW9uLnYx'
+    'LkVycm9yRGV0YWlsUgVlcnJvcg==');
 
 @$core.Deprecated('Use removeRoomSubscriptionsRequestDescriptor instead')
 const RemoveRoomSubscriptionsRequest$json = {
@@ -865,34 +546,25 @@ const RemoveRoomSubscriptionsRequest$json = {
 };
 
 /// Descriptor for `RemoveRoomSubscriptionsRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List removeRoomSubscriptionsRequestDescriptor =
-    $convert.base64Decode(
-        'Ch5SZW1vdmVSb29tU3Vic2NyaXB0aW9uc1JlcXVlc3QSNAoHcm9vbV9pZBgCIAEoCUIbukgYch'
-        'YQAxgoMhBbMC05YS16Xy1dezMsNDB9UgZyb29tSWQSHwoLcHJvZmlsZV9pZHMYAyADKAlSCnBy'
-        'b2ZpbGVJZHM=');
+final $typed_data.Uint8List removeRoomSubscriptionsRequestDescriptor = $convert.base64Decode(
+    'Ch5SZW1vdmVSb29tU3Vic2NyaXB0aW9uc1JlcXVlc3QSNAoHcm9vbV9pZBgCIAEoCUIbukgYch'
+    'YQAxgoMhBbMC05YS16Xy1dezMsNDB9UgZyb29tSWQSHwoLcHJvZmlsZV9pZHMYAyADKAlSCnBy'
+    'b2ZpbGVJZHM=');
 
 @$core.Deprecated('Use removeRoomSubscriptionsResponseDescriptor instead')
 const RemoveRoomSubscriptionsResponse$json = {
   '1': 'RemoveRoomSubscriptionsResponse',
   '2': [
     {'1': 'room_id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'roomId'},
-    {
-      '1': 'error',
-      '3': 3,
-      '4': 1,
-      '5': 11,
-      '6': '.common.v1.ErrorDetail',
-      '10': 'error'
-    },
+    {'1': 'error', '3': 3, '4': 1, '5': 11, '6': '.common.v1.ErrorDetail', '10': 'error'},
   ],
 };
 
 /// Descriptor for `RemoveRoomSubscriptionsResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List removeRoomSubscriptionsResponseDescriptor =
-    $convert.base64Decode(
-        'Ch9SZW1vdmVSb29tU3Vic2NyaXB0aW9uc1Jlc3BvbnNlEjQKB3Jvb21faWQYASABKAlCG7pIGH'
-        'IWEAMYKDIQWzAtOWEtel8tXXszLDQwfVIGcm9vbUlkEiwKBWVycm9yGAMgASgLMhYuY29tbW9u'
-        'LnYxLkVycm9yRGV0YWlsUgVlcnJvcg==');
+final $typed_data.Uint8List removeRoomSubscriptionsResponseDescriptor = $convert.base64Decode(
+    'Ch9SZW1vdmVSb29tU3Vic2NyaXB0aW9uc1Jlc3BvbnNlEjQKB3Jvb21faWQYASABKAlCG7pIGH'
+    'IWEAMYKDIQWzAtOWEtel8tXXszLDQwfVIGcm9vbUlkEiwKBWVycm9yGAMgASgLMhYuY29tbW9u'
+    'LnYxLkVycm9yRGV0YWlsUgVlcnJvcg==');
 
 @$core.Deprecated('Use updateSubscriptionRoleRequestDescriptor instead')
 const UpdateSubscriptionRoleRequest$json = {
@@ -905,34 +577,25 @@ const UpdateSubscriptionRoleRequest$json = {
 };
 
 /// Descriptor for `UpdateSubscriptionRoleRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List updateSubscriptionRoleRequestDescriptor =
-    $convert.base64Decode(
-        'Ch1VcGRhdGVTdWJzY3JpcHRpb25Sb2xlUmVxdWVzdBI0Cgdyb29tX2lkGAIgASgJQhu6SBhyFh'
-        'ADGCgyEFswLTlhLXpfLV17Myw0MH1SBnJvb21JZBIdCgpwcm9maWxlX2lkGAMgASgJUglwcm9m'
-        'aWxlSWQSFAoFcm9sZXMYBCADKAlSBXJvbGVz');
+final $typed_data.Uint8List updateSubscriptionRoleRequestDescriptor = $convert.base64Decode(
+    'Ch1VcGRhdGVTdWJzY3JpcHRpb25Sb2xlUmVxdWVzdBI0Cgdyb29tX2lkGAIgASgJQhu6SBhyFh'
+    'ADGCgyEFswLTlhLXpfLV17Myw0MH1SBnJvb21JZBIdCgpwcm9maWxlX2lkGAMgASgJUglwcm9m'
+    'aWxlSWQSFAoFcm9sZXMYBCADKAlSBXJvbGVz');
 
 @$core.Deprecated('Use updateSubscriptionRoleResponseDescriptor instead')
 const UpdateSubscriptionRoleResponse$json = {
   '1': 'UpdateSubscriptionRoleResponse',
   '2': [
     {'1': 'room_id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'roomId'},
-    {
-      '1': 'error',
-      '3': 3,
-      '4': 1,
-      '5': 11,
-      '6': '.common.v1.ErrorDetail',
-      '10': 'error'
-    },
+    {'1': 'error', '3': 3, '4': 1, '5': 11, '6': '.common.v1.ErrorDetail', '10': 'error'},
   ],
 };
 
 /// Descriptor for `UpdateSubscriptionRoleResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List updateSubscriptionRoleResponseDescriptor =
-    $convert.base64Decode(
-        'Ch5VcGRhdGVTdWJzY3JpcHRpb25Sb2xlUmVzcG9uc2USNAoHcm9vbV9pZBgBIAEoCUIbukgYch'
-        'YQAxgoMhBbMC05YS16Xy1dezMsNDB9UgZyb29tSWQSLAoFZXJyb3IYAyABKAsyFi5jb21tb24u'
-        'djEuRXJyb3JEZXRhaWxSBWVycm9y');
+final $typed_data.Uint8List updateSubscriptionRoleResponseDescriptor = $convert.base64Decode(
+    'Ch5VcGRhdGVTdWJzY3JpcHRpb25Sb2xlUmVzcG9uc2USNAoHcm9vbV9pZBgBIAEoCUIbukgYch'
+    'YQAxgoMhBbMC05YS16Xy1dezMsNDB9UgZyb29tSWQSLAoFZXJyb3IYAyABKAsyFi5jb21tb24u'
+    'djEuRXJyb3JEZXRhaWxSBWVycm9y');
 
 @$core.Deprecated('Use searchRoomSubscriptionsRequestDescriptor instead')
 const SearchRoomSubscriptionsRequest$json = {
@@ -945,36 +608,27 @@ const SearchRoomSubscriptionsRequest$json = {
 };
 
 /// Descriptor for `SearchRoomSubscriptionsRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List searchRoomSubscriptionsRequestDescriptor =
-    $convert.base64Decode(
-        'Ch5TZWFyY2hSb29tU3Vic2NyaXB0aW9uc1JlcXVlc3QSNAoHcm9vbV9pZBgCIAEoCUIbukgYch'
-        'YQAxgoMhBbMC05YS16Xy1dezMsNDB9UgZyb29tSWQSFAoFbGltaXQYAyABKAVSBWxpbWl0EhYK'
-        'BmN1cnNvchgEIAEoCVIGY3Vyc29y');
+final $typed_data.Uint8List searchRoomSubscriptionsRequestDescriptor = $convert.base64Decode(
+    'Ch5TZWFyY2hSb29tU3Vic2NyaXB0aW9uc1JlcXVlc3QSNAoHcm9vbV9pZBgCIAEoCUIbukgYch'
+    'YQAxgoMhBbMC05YS16Xy1dezMsNDB9UgZyb29tSWQSFAoFbGltaXQYAyABKAVSBWxpbWl0EhYK'
+    'BmN1cnNvchgEIAEoCVIGY3Vyc29y');
 
 @$core.Deprecated('Use searchRoomSubscriptionsResponseDescriptor instead')
 const SearchRoomSubscriptionsResponse$json = {
   '1': 'SearchRoomSubscriptionsResponse',
   '2': [
     {'1': 'room_id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'roomId'},
-    {
-      '1': 'members',
-      '3': 2,
-      '4': 3,
-      '5': 11,
-      '6': '.chat.v1.RoomSubscription',
-      '10': 'members'
-    },
+    {'1': 'members', '3': 2, '4': 3, '5': 11, '6': '.chat.v1.RoomSubscription', '10': 'members'},
     {'1': 'next_cursor', '3': 3, '4': 1, '5': 9, '10': 'nextCursor'},
   ],
 };
 
 /// Descriptor for `SearchRoomSubscriptionsResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List searchRoomSubscriptionsResponseDescriptor =
-    $convert.base64Decode(
-        'Ch9TZWFyY2hSb29tU3Vic2NyaXB0aW9uc1Jlc3BvbnNlEjQKB3Jvb21faWQYASABKAlCG7pIGH'
-        'IWEAMYKDIQWzAtOWEtel8tXXszLDQwfVIGcm9vbUlkEjMKB21lbWJlcnMYAiADKAsyGS5jaGF0'
-        'LnYxLlJvb21TdWJzY3JpcHRpb25SB21lbWJlcnMSHwoLbmV4dF9jdXJzb3IYAyABKAlSCm5leH'
-        'RDdXJzb3I=');
+final $typed_data.Uint8List searchRoomSubscriptionsResponseDescriptor = $convert.base64Decode(
+    'Ch9TZWFyY2hSb29tU3Vic2NyaXB0aW9uc1Jlc3BvbnNlEjQKB3Jvb21faWQYASABKAlCG7pIGH'
+    'IWEAMYKDIQWzAtOWEtel8tXXszLDQwfVIGcm9vbUlkEjMKB21lbWJlcnMYAiADKAsyGS5jaGF0'
+    'LnYxLlJvb21TdWJzY3JpcHRpb25SB21lbWJlcnMSHwoLbmV4dF9jdXJzb3IYAyABKAlSCm5leH'
+    'RDdXJzb3I=');
 
 @$core.Deprecated('Use updateClientStateRequestDescriptor instead')
 const UpdateClientStateRequest$json = {
@@ -982,14 +636,7 @@ const UpdateClientStateRequest$json = {
   '2': [
     {'1': 'room_id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'roomId'},
     {'1': 'profile_id', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'profileId'},
-    {
-      '1': 'client_states',
-      '3': 3,
-      '4': 3,
-      '5': 11,
-      '6': '.chat.v1.ClientState',
-      '10': 'clientStates'
-    },
+    {'1': 'client_states', '3': 3, '4': 3, '5': 11, '6': '.chat.v1.ClientState', '10': 'clientStates'},
   ],
 };
 
@@ -1004,22 +651,14 @@ final $typed_data.Uint8List updateClientStateRequestDescriptor = $convert.base64
 const UpdateClientStateResponse$json = {
   '1': 'UpdateClientStateResponse',
   '2': [
-    {
-      '1': 'error',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.common.v1.ErrorDetail',
-      '10': 'error'
-    },
+    {'1': 'error', '3': 1, '4': 1, '5': 11, '6': '.common.v1.ErrorDetail', '10': 'error'},
   ],
 };
 
 /// Descriptor for `UpdateClientStateResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List updateClientStateResponseDescriptor =
-    $convert.base64Decode(
-        'ChlVcGRhdGVDbGllbnRTdGF0ZVJlc3BvbnNlEiwKBWVycm9yGAEgASgLMhYuY29tbW9uLnYxLk'
-        'Vycm9yRGV0YWlsUgVlcnJvcg==');
+final $typed_data.Uint8List updateClientStateResponseDescriptor = $convert.base64Decode(
+    'ChlVcGRhdGVDbGllbnRTdGF0ZVJlc3BvbnNlEiwKBWVycm9yGAEgASgLMhYuY29tbW9uLnYxLk'
+    'Vycm9yRGV0YWlsUgVlcnJvcg==');
 
 @$core.Deprecated('Use getClientStateRequestDescriptor instead')
 const GetClientStateRequest$json = {
@@ -1027,14 +666,7 @@ const GetClientStateRequest$json = {
   '2': [
     {'1': 'room_id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'roomId'},
     {'1': 'profile_ids', '3': 2, '4': 3, '5': 9, '10': 'profileIds'},
-    {
-      '1': 'state_type',
-      '3': 3,
-      '4': 1,
-      '5': 14,
-      '6': '.chat.v1.GetClientStateRequest.ClientStateType',
-      '10': 'stateType'
-    },
+    {'1': 'state_type', '3': 3, '4': 1, '5': 14, '6': '.chat.v1.GetClientStateRequest.ClientStateType', '10': 'stateType'},
   ],
   '4': [GetClientStateRequest_ClientStateType$json],
 };
@@ -1063,14 +695,7 @@ const GetClientStateResponse$json = {
   '1': 'GetClientStateResponse',
   '2': [
     {'1': 'room_id', '3': 1, '4': 1, '5': 9, '10': 'roomId'},
-    {
-      '1': 'client_state',
-      '3': 2,
-      '4': 3,
-      '5': 11,
-      '6': '.chat.v1.ClientState',
-      '10': 'clientState'
-    },
+    {'1': 'client_state', '3': 2, '4': 3, '5': 11, '6': '.chat.v1.ClientState', '10': 'clientState'},
   ],
 };
 
@@ -1082,29 +707,21 @@ final $typed_data.Uint8List getClientStateResponseDescriptor = $convert.base64De
 const $core.Map<$core.String, $core.dynamic> GatewayServiceBase$json = {
   '1': 'GatewayService',
   '2': [
-    {
-      '1': 'Connect',
-      '2': '.chat.v1.ConnectRequest',
-      '3': '.chat.v1.ConnectResponse',
-      '4': {},
-      '5': true,
-      '6': true
-    },
+    {'1': 'Connect', '2': '.chat.v1.ConnectRequest', '3': '.chat.v1.ConnectResponse', '4': {}, '5': true, '6': true},
   ],
 };
 
 @$core.Deprecated('Use gatewayServiceDescriptor instead')
-const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>>
-    GatewayServiceBase$messageJson = {
+const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> GatewayServiceBase$messageJson = {
   '.chat.v1.ConnectRequest': ConnectRequest$json,
   '.chat.v1.StreamAck': StreamAck$json,
-  '.google.protobuf.Timestamp': $0.Timestamp$json,
-  '.google.protobuf.Struct': $1.Struct$json,
-  '.google.protobuf.Struct.FieldsEntry': $1.Struct_FieldsEntry$json,
-  '.google.protobuf.Value': $1.Value$json,
-  '.google.protobuf.ListValue': $1.ListValue$json,
-  '.common.v1.ErrorDetail': $2.ErrorDetail$json,
-  '.common.v1.ErrorDetail.MetaEntry': $2.ErrorDetail_MetaEntry$json,
+  '.google.protobuf.Timestamp': $2.Timestamp$json,
+  '.google.protobuf.Struct': $6.Struct$json,
+  '.google.protobuf.Struct.FieldsEntry': $6.Struct_FieldsEntry$json,
+  '.google.protobuf.Value': $6.Value$json,
+  '.google.protobuf.ListValue': $6.ListValue$json,
+  '.common.v1.ErrorDetail': $7.ErrorDetail$json,
+  '.common.v1.ErrorDetail.MetaEntry': $7.ErrorDetail_MetaEntry$json,
   '.chat.v1.ClientState': ClientState$json,
   '.chat.v1.RoomEvent': RoomEvent$json,
   '.chat.v1.ReceiptEvent': ReceiptEvent$json,
@@ -1130,24 +747,14 @@ final $typed_data.Uint8List gatewayServiceDescriptor = $convert.base64Decode(
 const $core.Map<$core.String, $core.dynamic> ChatServiceBase$json = {
   '1': 'ChatService',
   '2': [
-    {
-      '1': 'SendEvent',
-      '2': '.chat.v1.SendEventRequest',
-      '3': '.chat.v1.SendEventResponse',
-      '4': {}
-    },
+    {'1': 'SendEvent', '2': '.chat.v1.SendEventRequest', '3': '.chat.v1.SendEventResponse', '4': {}},
     {
       '1': 'GetHistory',
       '2': '.chat.v1.GetHistoryRequest',
       '3': '.chat.v1.GetHistoryResponse',
       '4': {'34': 1},
     },
-    {
-      '1': 'CreateRoom',
-      '2': '.chat.v1.CreateRoomRequest',
-      '3': '.chat.v1.CreateRoomResponse',
-      '4': {}
-    },
+    {'1': 'CreateRoom', '2': '.chat.v1.CreateRoomRequest', '3': '.chat.v1.CreateRoomResponse', '4': {}},
     {
       '1': 'SearchRooms',
       '2': '.chat.v1.SearchRoomsRequest',
@@ -1155,48 +762,18 @@ const $core.Map<$core.String, $core.dynamic> ChatServiceBase$json = {
       '4': {'34': 1},
       '6': true,
     },
-    {
-      '1': 'UpdateRoom',
-      '2': '.chat.v1.UpdateRoomRequest',
-      '3': '.chat.v1.UpdateRoomResponse',
-      '4': {}
-    },
-    {
-      '1': 'DeleteRoom',
-      '2': '.chat.v1.DeleteRoomRequest',
-      '3': '.chat.v1.DeleteRoomResponse',
-      '4': {}
-    },
-    {
-      '1': 'AddRoomSubscriptions',
-      '2': '.chat.v1.AddRoomSubscriptionsRequest',
-      '3': '.chat.v1.AddRoomSubscriptionsResponse',
-      '4': {}
-    },
-    {
-      '1': 'RemoveRoomSubscriptions',
-      '2': '.chat.v1.RemoveRoomSubscriptionsRequest',
-      '3': '.chat.v1.RemoveRoomSubscriptionsResponse',
-      '4': {}
-    },
-    {
-      '1': 'UpdateSubscriptionRole',
-      '2': '.chat.v1.UpdateSubscriptionRoleRequest',
-      '3': '.chat.v1.UpdateSubscriptionRoleResponse',
-      '4': {}
-    },
+    {'1': 'UpdateRoom', '2': '.chat.v1.UpdateRoomRequest', '3': '.chat.v1.UpdateRoomResponse', '4': {}},
+    {'1': 'DeleteRoom', '2': '.chat.v1.DeleteRoomRequest', '3': '.chat.v1.DeleteRoomResponse', '4': {}},
+    {'1': 'AddRoomSubscriptions', '2': '.chat.v1.AddRoomSubscriptionsRequest', '3': '.chat.v1.AddRoomSubscriptionsResponse', '4': {}},
+    {'1': 'RemoveRoomSubscriptions', '2': '.chat.v1.RemoveRoomSubscriptionsRequest', '3': '.chat.v1.RemoveRoomSubscriptionsResponse', '4': {}},
+    {'1': 'UpdateSubscriptionRole', '2': '.chat.v1.UpdateSubscriptionRoleRequest', '3': '.chat.v1.UpdateSubscriptionRoleResponse', '4': {}},
     {
       '1': 'SearchRoomSubscriptions',
       '2': '.chat.v1.SearchRoomSubscriptionsRequest',
       '3': '.chat.v1.SearchRoomSubscriptionsResponse',
       '4': {'34': 1},
     },
-    {
-      '1': 'UpdateClientState',
-      '2': '.chat.v1.UpdateClientStateRequest',
-      '3': '.chat.v1.UpdateClientStateResponse',
-      '4': {}
-    },
+    {'1': 'UpdateClientState', '2': '.chat.v1.UpdateClientStateRequest', '3': '.chat.v1.UpdateClientStateResponse', '4': {}},
     {
       '1': 'GetClientState',
       '2': '.chat.v1.GetClientStateRequest',
@@ -1207,19 +784,18 @@ const $core.Map<$core.String, $core.dynamic> ChatServiceBase$json = {
 };
 
 @$core.Deprecated('Use chatServiceDescriptor instead')
-const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>>
-    ChatServiceBase$messageJson = {
+const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> ChatServiceBase$messageJson = {
   '.chat.v1.SendEventRequest': SendEventRequest$json,
   '.chat.v1.RoomEvent': RoomEvent$json,
-  '.google.protobuf.Struct': $1.Struct$json,
-  '.google.protobuf.Struct.FieldsEntry': $1.Struct_FieldsEntry$json,
-  '.google.protobuf.Value': $1.Value$json,
-  '.google.protobuf.ListValue': $1.ListValue$json,
-  '.google.protobuf.Timestamp': $0.Timestamp$json,
+  '.google.protobuf.Struct': $6.Struct$json,
+  '.google.protobuf.Struct.FieldsEntry': $6.Struct_FieldsEntry$json,
+  '.google.protobuf.Value': $6.Value$json,
+  '.google.protobuf.ListValue': $6.ListValue$json,
+  '.google.protobuf.Timestamp': $2.Timestamp$json,
   '.chat.v1.SendEventResponse': SendEventResponse$json,
   '.chat.v1.StreamAck': StreamAck$json,
-  '.common.v1.ErrorDetail': $2.ErrorDetail$json,
-  '.common.v1.ErrorDetail.MetaEntry': $2.ErrorDetail_MetaEntry$json,
+  '.common.v1.ErrorDetail': $7.ErrorDetail$json,
+  '.common.v1.ErrorDetail.MetaEntry': $7.ErrorDetail_MetaEntry$json,
   '.chat.v1.GetHistoryRequest': GetHistoryRequest$json,
   '.chat.v1.GetHistoryResponse': GetHistoryResponse$json,
   '.chat.v1.ConnectResponse': ConnectResponse$json,
@@ -1239,17 +815,12 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>>
   '.chat.v1.AddRoomSubscriptionsRequest': AddRoomSubscriptionsRequest$json,
   '.chat.v1.RoomSubscription': RoomSubscription$json,
   '.chat.v1.AddRoomSubscriptionsResponse': AddRoomSubscriptionsResponse$json,
-  '.chat.v1.RemoveRoomSubscriptionsRequest':
-      RemoveRoomSubscriptionsRequest$json,
-  '.chat.v1.RemoveRoomSubscriptionsResponse':
-      RemoveRoomSubscriptionsResponse$json,
+  '.chat.v1.RemoveRoomSubscriptionsRequest': RemoveRoomSubscriptionsRequest$json,
+  '.chat.v1.RemoveRoomSubscriptionsResponse': RemoveRoomSubscriptionsResponse$json,
   '.chat.v1.UpdateSubscriptionRoleRequest': UpdateSubscriptionRoleRequest$json,
-  '.chat.v1.UpdateSubscriptionRoleResponse':
-      UpdateSubscriptionRoleResponse$json,
-  '.chat.v1.SearchRoomSubscriptionsRequest':
-      SearchRoomSubscriptionsRequest$json,
-  '.chat.v1.SearchRoomSubscriptionsResponse':
-      SearchRoomSubscriptionsResponse$json,
+  '.chat.v1.UpdateSubscriptionRoleResponse': UpdateSubscriptionRoleResponse$json,
+  '.chat.v1.SearchRoomSubscriptionsRequest': SearchRoomSubscriptionsRequest$json,
+  '.chat.v1.SearchRoomSubscriptionsResponse': SearchRoomSubscriptionsResponse$json,
   '.chat.v1.UpdateClientStateRequest': UpdateClientStateRequest$json,
   '.chat.v1.ClientState': ClientState$json,
   '.chat.v1.UpdateClientStateResponse': UpdateClientStateResponse$json,
@@ -1321,3 +892,4 @@ final $typed_data.Uint8List chatServiceDescriptor = $convert.base64Decode(
     'Egcm9vbRqHAVJldHJpZXZlcyBjbGllbnQgc3RhdGVzIGZvciBwcm9maWxlcyBpbiBhIHJvb20g'
     'c2hvd2luZyBlaXRoZXIgd2hpY2ggbWVzc2FnZXMgdXNlcnMgaGF2ZSByZWFkLCBvciBwcmVzZW'
     '5jZSBzdGF0ZSBvZiB0aGUgdXNlcnMgaW4gYSByb29tLioPZ2V0Q2xpZW50U3RhdGVz');
+

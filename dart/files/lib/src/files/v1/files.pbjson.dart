@@ -1,22 +1,19 @@
-// This is a generated file - do not edit.
 //
-// Generated from files/v1/files.proto.
-
-// @dart = 3.3
+//  Generated code. Do not modify.
+//  source: files/v1/files.proto
+//
+// @dart = 2.12
 
 // ignore_for_file: annotate_overrides, camel_case_types, comment_references
-// ignore_for_file: constant_identifier_names
-// ignore_for_file: curly_braces_in_flow_control_structures
-// ignore_for_file: deprecated_member_use_from_same_package, library_prefixes
-// ignore_for_file: non_constant_identifier_names, prefer_relative_imports
-// ignore_for_file: unused_import
+// ignore_for_file: constant_identifier_names, library_prefixes
+// ignore_for_file: non_constant_identifier_names, prefer_final_fields
+// ignore_for_file: unnecessary_import, unnecessary_this, unused_import
 
 import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
-import 'package:protobuf/well_known_types/google/protobuf/struct.pbjson.dart'
-    as $0;
+import '../../google/protobuf/struct.pbjson.dart' as $6;
 
 @$core.Deprecated('Use thumbnailMethodDescriptor instead')
 const ThumbnailMethod$json = {
@@ -28,8 +25,8 @@ const ThumbnailMethod$json = {
 };
 
 /// Descriptor for `ThumbnailMethod`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List thumbnailMethodDescriptor = $convert
-    .base64Decode('Cg9UaHVtYm5haWxNZXRob2QSCQoFU0NBTEUQABIICgRDUk9QEAE=');
+final $typed_data.Uint8List thumbnailMethodDescriptor = $convert.base64Decode(
+    'Cg9UaHVtYm5haWxNZXRob2QSCQoFU0NBTEUQABIICgRDUk9QEAE=');
 
 @$core.Deprecated('Use mediaMetadataDescriptor instead')
 const MediaMetadata$json = {
@@ -39,25 +36,12 @@ const MediaMetadata$json = {
     {'1': 'server_name', '3': 2, '4': 1, '5': 9, '10': 'serverName'},
     {'1': 'content_type', '3': 3, '4': 1, '5': 9, '10': 'contentType'},
     {'1': 'file_size_bytes', '3': 4, '4': 1, '5': 3, '10': 'fileSizeBytes'},
-    {
-      '1': 'creation_timestamp',
-      '3': 5,
-      '4': 1,
-      '5': 3,
-      '10': 'creationTimestamp'
-    },
+    {'1': 'creation_timestamp', '3': 5, '4': 1, '5': 3, '10': 'creationTimestamp'},
     {'1': 'upload_name', '3': 6, '4': 1, '5': 9, '10': 'uploadName'},
     {'1': 'base64_hash', '3': 7, '4': 1, '5': 9, '10': 'base64Hash'},
     {'1': 'owner_id', '3': 8, '4': 1, '5': 9, '10': 'ownerId'},
     {'1': 'parent_id', '3': 9, '4': 1, '5': 9, '10': 'parentId'},
-    {
-      '1': 'extra',
-      '3': 10,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'extra'
-    },
+    {'1': 'extra', '3': 10, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'extra'},
   ],
 };
 
@@ -79,14 +63,7 @@ const UploadMetadata$json = {
     {'1': 'content_type', '3': 1, '4': 1, '5': 9, '10': 'contentType'},
     {'1': 'filename', '3': 2, '4': 1, '5': 9, '10': 'filename'},
     {'1': 'total_size', '3': 3, '4': 1, '5': 3, '10': 'totalSize'},
-    {
-      '1': 'properties',
-      '3': 4,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'properties'
-    },
+    {'1': 'properties', '3': 4, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'properties'},
     {'1': 'server_name', '3': 5, '4': 1, '5': 9, '10': 'serverName'},
     {'1': 'media_id', '3': 6, '4': 1, '5': 9, '8': {}, '10': 'mediaId'},
   ],
@@ -104,15 +81,7 @@ final $typed_data.Uint8List uploadMetadataDescriptor = $convert.base64Decode(
 const UploadContentRequest$json = {
   '1': 'UploadContentRequest',
   '2': [
-    {
-      '1': 'metadata',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.files.v1.UploadMetadata',
-      '9': 0,
-      '10': 'metadata'
-    },
+    {'1': 'metadata', '3': 1, '4': 1, '5': 11, '6': '.files.v1.UploadMetadata', '9': 0, '10': 'metadata'},
     {'1': 'chunk', '3': 2, '4': 1, '5': 12, '9': 0, '10': 'chunk'},
   ],
   '8': [
@@ -232,11 +201,10 @@ const GetContentOverrideNameResponse$json = {
 };
 
 /// Descriptor for `GetContentOverrideNameResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List getContentOverrideNameResponseDescriptor =
-    $convert.base64Decode(
-        'Ch5HZXRDb250ZW50T3ZlcnJpZGVOYW1lUmVzcG9uc2USGAoHY29udGVudBgBIAEoDFIHY29udG'
-        'VudBIhCgxjb250ZW50X3R5cGUYAiABKAlSC2NvbnRlbnRUeXBlEhoKCGZpbGVuYW1lGAMgASgJ'
-        'UghmaWxlbmFtZQ==');
+final $typed_data.Uint8List getContentOverrideNameResponseDescriptor = $convert.base64Decode(
+    'Ch5HZXRDb250ZW50T3ZlcnJpZGVOYW1lUmVzcG9uc2USGAoHY29udGVudBgBIAEoDFIHY29udG'
+    'VudBIhCgxjb250ZW50X3R5cGUYAiABKAlSC2NvbnRlbnRUeXBlEhoKCGZpbGVuYW1lGAMgASgJ'
+    'UghmaWxlbmFtZQ==');
 
 @$core.Deprecated('Use getContentThumbnailRequestDescriptor instead')
 const GetContentThumbnailRequest$json = {
@@ -246,14 +214,7 @@ const GetContentThumbnailRequest$json = {
     {'1': 'media_id', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'mediaId'},
     {'1': 'width', '3': 3, '4': 1, '5': 5, '8': {}, '10': 'width'},
     {'1': 'height', '3': 4, '4': 1, '5': 5, '8': {}, '10': 'height'},
-    {
-      '1': 'method',
-      '3': 5,
-      '4': 1,
-      '5': 14,
-      '6': '.files.v1.ThumbnailMethod',
-      '10': 'method'
-    },
+    {'1': 'method', '3': 5, '4': 1, '5': 14, '6': '.files.v1.ThumbnailMethod', '10': 'method'},
     {'1': 'timeout_ms', '3': 6, '4': 1, '5': 3, '10': 'timeoutMs'},
     {'1': 'animated', '3': 7, '4': 1, '5': 8, '10': 'animated'},
   ],
@@ -279,11 +240,10 @@ const GetContentThumbnailResponse$json = {
 };
 
 /// Descriptor for `GetContentThumbnailResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List getContentThumbnailResponseDescriptor =
-    $convert.base64Decode(
-        'ChtHZXRDb250ZW50VGh1bWJuYWlsUmVzcG9uc2USGAoHY29udGVudBgBIAEoDFIHY29udGVudB'
-        'IhCgxjb250ZW50X3R5cGUYAiABKAlSC2NvbnRlbnRUeXBlEhoKCGZpbGVuYW1lGAMgASgJUghm'
-        'aWxlbmFtZQ==');
+final $typed_data.Uint8List getContentThumbnailResponseDescriptor = $convert.base64Decode(
+    'ChtHZXRDb250ZW50VGh1bWJuYWlsUmVzcG9uc2USGAoHY29udGVudBgBIAEoDFIHY29udGVudB'
+    'IhCgxjb250ZW50X3R5cGUYAiABKAlSC2NvbnRlbnRUeXBlEhoKCGZpbGVuYW1lGAMgASgJUghm'
+    'aWxlbmFtZQ==');
 
 @$core.Deprecated('Use getUrlPreviewRequestDescriptor instead')
 const GetUrlPreviewRequest$json = {
@@ -303,14 +263,7 @@ final $typed_data.Uint8List getUrlPreviewRequestDescriptor = $convert.base64Deco
 const GetUrlPreviewResponse$json = {
   '1': 'GetUrlPreviewResponse',
   '2': [
-    {
-      '1': 'og_data',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'ogData'
-    },
+    {'1': 'og_data', '3': 1, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'ogData'},
     {'1': 'matrix_image_size', '3': 2, '4': 1, '5': 3, '10': 'matrixImageSize'},
     {'1': 'og_image', '3': 3, '4': 1, '5': 9, '10': 'ogImage'},
   ],
@@ -328,22 +281,15 @@ const GetConfigRequest$json = {
 };
 
 /// Descriptor for `GetConfigRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List getConfigRequestDescriptor =
-    $convert.base64Decode('ChBHZXRDb25maWdSZXF1ZXN0');
+final $typed_data.Uint8List getConfigRequestDescriptor = $convert.base64Decode(
+    'ChBHZXRDb25maWdSZXF1ZXN0');
 
 @$core.Deprecated('Use getConfigResponseDescriptor instead')
 const GetConfigResponse$json = {
   '1': 'GetConfigResponse',
   '2': [
     {'1': 'max_upload_size', '3': 1, '4': 1, '5': 3, '10': 'maxUploadSize'},
-    {
-      '1': 'extra',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'extra'
-    },
+    {'1': 'extra', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'extra'},
   ],
 };
 
@@ -377,14 +323,7 @@ final $typed_data.Uint8List searchMediaRequestDescriptor = $convert.base64Decode
 const SearchMediaResponse$json = {
   '1': 'SearchMediaResponse',
   '2': [
-    {
-      '1': 'results',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.files.v1.MediaMetadata',
-      '10': 'results'
-    },
+    {'1': 'results', '3': 1, '4': 3, '5': 11, '6': '.files.v1.MediaMetadata', '10': 'results'},
     {'1': 'total', '3': 2, '4': 1, '5': 5, '10': 'total'},
     {'1': 'page', '3': 3, '4': 1, '5': 5, '10': 'page'},
     {'1': 'has_more', '3': 4, '4': 1, '5': 8, '10': 'hasMore'},
@@ -400,19 +339,8 @@ final $typed_data.Uint8List searchMediaResponseDescriptor = $convert.base64Decod
 const $core.Map<$core.String, $core.dynamic> FilesServiceBase$json = {
   '1': 'FilesService',
   '2': [
-    {
-      '1': 'UploadContent',
-      '2': '.files.v1.UploadContentRequest',
-      '3': '.files.v1.UploadContentResponse',
-      '4': {},
-      '5': true
-    },
-    {
-      '1': 'CreateContent',
-      '2': '.files.v1.CreateContentRequest',
-      '3': '.files.v1.CreateContentResponse',
-      '4': {}
-    },
+    {'1': 'UploadContent', '2': '.files.v1.UploadContentRequest', '3': '.files.v1.UploadContentResponse', '4': {}, '5': true},
+    {'1': 'CreateContent', '2': '.files.v1.CreateContentRequest', '3': '.files.v1.CreateContentResponse', '4': {}},
     {
       '1': 'GetContent',
       '2': '.files.v1.GetContentRequest',
@@ -453,22 +381,20 @@ const $core.Map<$core.String, $core.dynamic> FilesServiceBase$json = {
 };
 
 @$core.Deprecated('Use filesServiceDescriptor instead')
-const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>>
-    FilesServiceBase$messageJson = {
+const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> FilesServiceBase$messageJson = {
   '.files.v1.UploadContentRequest': UploadContentRequest$json,
   '.files.v1.UploadMetadata': UploadMetadata$json,
-  '.google.protobuf.Struct': $0.Struct$json,
-  '.google.protobuf.Struct.FieldsEntry': $0.Struct_FieldsEntry$json,
-  '.google.protobuf.Value': $0.Value$json,
-  '.google.protobuf.ListValue': $0.ListValue$json,
+  '.google.protobuf.Struct': $6.Struct$json,
+  '.google.protobuf.Struct.FieldsEntry': $6.Struct_FieldsEntry$json,
+  '.google.protobuf.Value': $6.Value$json,
+  '.google.protobuf.ListValue': $6.ListValue$json,
   '.files.v1.UploadContentResponse': UploadContentResponse$json,
   '.files.v1.CreateContentRequest': CreateContentRequest$json,
   '.files.v1.CreateContentResponse': CreateContentResponse$json,
   '.files.v1.GetContentRequest': GetContentRequest$json,
   '.files.v1.GetContentResponse': GetContentResponse$json,
   '.files.v1.GetContentOverrideNameRequest': GetContentOverrideNameRequest$json,
-  '.files.v1.GetContentOverrideNameResponse':
-      GetContentOverrideNameResponse$json,
+  '.files.v1.GetContentOverrideNameResponse': GetContentOverrideNameResponse$json,
   '.files.v1.GetContentThumbnailRequest': GetContentThumbnailRequest$json,
   '.files.v1.GetContentThumbnailResponse': GetContentThumbnailResponse$json,
   '.files.v1.GetUrlPreviewRequest': GetUrlPreviewRequest$json,
@@ -523,3 +449,4 @@ final $typed_data.Uint8List filesServiceDescriptor = $convert.base64Decode(
     'ZmlsZXMafFNlYXJjaGVzIGZvciBtZWRpYSBmaWxlcyBtYXRjaGluZyBzcGVjaWZpZWQgY3JpdG'
     'VyaWEgd2l0aCBzdXBwb3J0IGZvciBwYWdpbmF0aW9uLCBvd25lciBmaWx0ZXJpbmcsIGFuZCBk'
     'YXRlIHJhbmdlIGZpbHRlcmluZy4qC3NlYXJjaE1lZGlh');
+

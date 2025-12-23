@@ -1,25 +1,21 @@
-// This is a generated file - do not edit.
 //
-// Generated from payment/v1/payment.proto.
-
-// @dart = 3.3
+//  Generated code. Do not modify.
+//  source: payment/v1/payment.proto
+//
+// @dart = 2.12
 
 // ignore_for_file: annotate_overrides, camel_case_types, comment_references
-// ignore_for_file: constant_identifier_names
-// ignore_for_file: curly_braces_in_flow_control_structures
-// ignore_for_file: deprecated_member_use_from_same_package, library_prefixes
-// ignore_for_file: non_constant_identifier_names, prefer_relative_imports
-// ignore_for_file: unused_import
+// ignore_for_file: constant_identifier_names, library_prefixes
+// ignore_for_file: non_constant_identifier_names, prefer_final_fields
+// ignore_for_file: unnecessary_import, unnecessary_this, unused_import
 
 import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
-import 'package:protobuf/well_known_types/google/protobuf/struct.pbjson.dart'
-    as $2;
-
-import '../../common/v1/common.pbjson.dart' as $0;
-import '../../google/type/money.pbjson.dart' as $1;
+import '../../common/v1/common.pbjson.dart' as $7;
+import '../../google/protobuf/struct.pbjson.dart' as $6;
+import '../../google/type/money.pbjson.dart' as $8;
 
 @$core.Deprecated('Use notificationTypeDescriptor instead')
 const NotificationType$json = {
@@ -44,73 +40,18 @@ const Payment$json = {
     {'1': 'transaction_id', '3': 2, '4': 1, '5': 9, '10': 'transactionId'},
     {'1': 'reference_id', '3': 3, '4': 1, '5': 9, '10': 'referenceId'},
     {'1': 'batch_id', '3': 4, '4': 1, '5': 9, '10': 'batchId'},
-    {
-      '1': 'external_transaction_id',
-      '3': 5,
-      '4': 1,
-      '5': 9,
-      '10': 'externalTransactionId'
-    },
+    {'1': 'external_transaction_id', '3': 5, '4': 1, '5': 9, '10': 'externalTransactionId'},
     {'1': 'route', '3': 6, '4': 1, '5': 9, '10': 'route'},
-    {
-      '1': 'source',
-      '3': 7,
-      '4': 1,
-      '5': 11,
-      '6': '.common.v1.ContactLink',
-      '10': 'source'
-    },
-    {
-      '1': 'recipient',
-      '3': 8,
-      '4': 1,
-      '5': 11,
-      '6': '.common.v1.ContactLink',
-      '10': 'recipient'
-    },
-    {
-      '1': 'amount',
-      '3': 9,
-      '4': 1,
-      '5': 11,
-      '6': '.google.type.Money',
-      '10': 'amount'
-    },
-    {
-      '1': 'cost',
-      '3': 10,
-      '4': 1,
-      '5': 11,
-      '6': '.google.type.Money',
-      '10': 'cost'
-    },
-    {
-      '1': 'state',
-      '3': 11,
-      '4': 1,
-      '5': 14,
-      '6': '.common.v1.STATE',
-      '10': 'state'
-    },
-    {
-      '1': 'status',
-      '3': 12,
-      '4': 1,
-      '5': 14,
-      '6': '.common.v1.STATUS',
-      '10': 'status'
-    },
+    {'1': 'source', '3': 7, '4': 1, '5': 11, '6': '.common.v1.ContactLink', '10': 'source'},
+    {'1': 'recipient', '3': 8, '4': 1, '5': 11, '6': '.common.v1.ContactLink', '10': 'recipient'},
+    {'1': 'amount', '3': 9, '4': 1, '5': 11, '6': '.google.type.Money', '10': 'amount'},
+    {'1': 'cost', '3': 10, '4': 1, '5': 11, '6': '.google.type.Money', '10': 'cost'},
+    {'1': 'state', '3': 11, '4': 1, '5': 14, '6': '.common.v1.STATE', '10': 'state'},
+    {'1': 'status', '3': 12, '4': 1, '5': 14, '6': '.common.v1.STATUS', '10': 'status'},
     {'1': 'date_created', '3': 13, '4': 1, '5': 9, '10': 'dateCreated'},
     {'1': 'date_processed', '3': 14, '4': 1, '5': 9, '10': 'dateProcessed'},
     {'1': 'outbound', '3': 15, '4': 1, '5': 8, '10': 'outbound'},
-    {
-      '1': 'extra',
-      '3': 16,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'extra'
-    },
+    {'1': 'extra', '3': 16, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'extra'},
   ],
 };
 
@@ -148,30 +89,11 @@ final $typed_data.Uint8List accountDescriptor = $convert.base64Decode(
 const Customer$json = {
   '1': 'Customer',
   '2': [
-    {
-      '1': 'source',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.common.v1.ContactLink',
-      '10': 'source'
-    },
+    {'1': 'source', '3': 1, '4': 1, '5': 11, '6': '.common.v1.ContactLink', '10': 'source'},
     {'1': 'first_address', '3': 2, '4': 1, '5': 9, '10': 'firstAddress'},
     {'1': 'country_code', '3': 3, '4': 1, '5': 9, '10': 'countryCode'},
-    {
-      '1': 'postal_or_zip_code',
-      '3': 4,
-      '4': 1,
-      '5': 9,
-      '10': 'postalOrZipCode'
-    },
-    {
-      '1': 'customer_external_ref',
-      '3': 5,
-      '4': 1,
-      '5': 9,
-      '10': 'customerExternalRef'
-    },
+    {'1': 'postal_or_zip_code', '3': 4, '4': 1, '5': 9, '10': 'postalOrZipCode'},
+    {'1': 'customer_external_ref', '3': 5, '4': 1, '5': 9, '10': 'customerExternalRef'},
   ],
 };
 
@@ -198,14 +120,7 @@ const PaymentLink$json = {
     {'1': 'payment_link_ref', '3': 9, '4': 1, '5': 9, '10': 'paymentLinkRef'},
     {'1': 'redirect_url', '3': 10, '4': 1, '5': 9, '10': 'redirectUrl'},
     {'1': 'amount_option', '3': 11, '4': 1, '5': 9, '10': 'amountOption'},
-    {
-      '1': 'amount',
-      '3': 12,
-      '4': 1,
-      '5': 11,
-      '6': '.google.type.Money',
-      '10': 'amount'
-    },
+    {'1': 'amount', '3': 12, '4': 1, '5': 11, '6': '.google.type.Money', '10': 'amount'},
     {'1': 'currency', '3': 13, '4': 1, '5': 9, '10': 'currency'},
   ],
 };
@@ -226,14 +141,7 @@ final $typed_data.Uint8List paymentLinkDescriptor = $convert.base64Decode(
 const SendRequest$json = {
   '1': 'SendRequest',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.payment.v1.Payment',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 1, '5': 11, '6': '.payment.v1.Payment', '10': 'data'},
   ],
 };
 
@@ -245,14 +153,7 @@ final $typed_data.Uint8List sendRequestDescriptor = $convert.base64Decode(
 const SendResponse$json = {
   '1': 'SendResponse',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.common.v1.StatusResponse',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 1, '5': 11, '6': '.common.v1.StatusResponse', '10': 'data'},
   ],
 };
 
@@ -265,14 +166,7 @@ final $typed_data.Uint8List sendResponseDescriptor = $convert.base64Decode(
 const ReceiveRequest$json = {
   '1': 'ReceiveRequest',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.payment.v1.Payment',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 1, '5': 11, '6': '.payment.v1.Payment', '10': 'data'},
   ],
 };
 
@@ -285,14 +179,7 @@ final $typed_data.Uint8List receiveRequestDescriptor = $convert.base64Decode(
 const ReceiveResponse$json = {
   '1': 'ReceiveResponse',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.common.v1.StatusResponse',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 1, '5': 11, '6': '.common.v1.StatusResponse', '10': 'data'},
   ],
 };
 
@@ -305,66 +192,17 @@ final $typed_data.Uint8List receiveResponseDescriptor = $convert.base64Decode(
 const InitiatePromptRequest$json = {
   '1': 'InitiatePromptRequest',
   '2': [
-    {
-      '1': 'source',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.common.v1.ContactLink',
-      '10': 'source'
-    },
-    {
-      '1': 'recipient',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.common.v1.ContactLink',
-      '10': 'recipient'
-    },
-    {
-      '1': 'amount',
-      '3': 3,
-      '4': 1,
-      '5': 11,
-      '6': '.google.type.Money',
-      '10': 'amount'
-    },
+    {'1': 'source', '3': 1, '4': 1, '5': 11, '6': '.common.v1.ContactLink', '10': 'source'},
+    {'1': 'recipient', '3': 2, '4': 1, '5': 11, '6': '.common.v1.ContactLink', '10': 'recipient'},
+    {'1': 'amount', '3': 3, '4': 1, '5': 11, '6': '.google.type.Money', '10': 'amount'},
     {'1': 'date_created', '3': 4, '4': 1, '5': 9, '10': 'dateCreated'},
     {'1': 'device_id', '3': 5, '4': 1, '5': 9, '10': 'deviceId'},
     {'1': 'id', '3': 6, '4': 1, '5': 9, '10': 'id'},
-    {
-      '1': 'state',
-      '3': 7,
-      '4': 1,
-      '5': 14,
-      '6': '.common.v1.STATE',
-      '10': 'state'
-    },
-    {
-      '1': 'status',
-      '3': 8,
-      '4': 1,
-      '5': 14,
-      '6': '.common.v1.STATUS',
-      '10': 'status'
-    },
+    {'1': 'state', '3': 7, '4': 1, '5': 14, '6': '.common.v1.STATE', '10': 'state'},
+    {'1': 'status', '3': 8, '4': 1, '5': 14, '6': '.common.v1.STATUS', '10': 'status'},
     {'1': 'route', '3': 9, '4': 1, '5': 9, '10': 'route'},
-    {
-      '1': 'recipient_account',
-      '3': 10,
-      '4': 1,
-      '5': 11,
-      '6': '.payment.v1.Account',
-      '10': 'recipientAccount'
-    },
-    {
-      '1': 'extra',
-      '3': 11,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'extra'
-    },
+    {'1': 'recipient_account', '3': 10, '4': 1, '5': 11, '6': '.payment.v1.Account', '10': 'recipientAccount'},
+    {'1': 'extra', '3': 11, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'extra'},
   ],
 };
 
@@ -384,22 +222,14 @@ final $typed_data.Uint8List initiatePromptRequestDescriptor = $convert.base64Dec
 const InitiatePromptResponse$json = {
   '1': 'InitiatePromptResponse',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.common.v1.StatusResponse',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 1, '5': 11, '6': '.common.v1.StatusResponse', '10': 'data'},
   ],
 };
 
 /// Descriptor for `InitiatePromptResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List initiatePromptResponseDescriptor =
-    $convert.base64Decode(
-        'ChZJbml0aWF0ZVByb21wdFJlc3BvbnNlEi0KBGRhdGEYASABKAsyGS5jb21tb24udjEuU3RhdH'
-        'VzUmVzcG9uc2VSBGRhdGE=');
+final $typed_data.Uint8List initiatePromptResponseDescriptor = $convert.base64Decode(
+    'ChZJbml0aWF0ZVByb21wdFJlc3BvbnNlEi0KBGRhdGEYASABKAsyGS5jb21tb24udjEuU3RhdH'
+    'VzUmVzcG9uc2VSBGRhdGE=');
 
 @$core.Deprecated('Use releaseRequestDescriptor instead')
 const ReleaseRequest$json = {
@@ -419,14 +249,7 @@ final $typed_data.Uint8List releaseRequestDescriptor = $convert.base64Decode(
 const ReleaseResponse$json = {
   '1': 'ReleaseResponse',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.common.v1.StatusResponse',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 1, '5': 11, '6': '.common.v1.StatusResponse', '10': 'data'},
   ],
 };
 
@@ -439,23 +262,10 @@ final $typed_data.Uint8List releaseResponseDescriptor = $convert.base64Decode(
 const ReconcileRequest$json = {
   '1': 'ReconcileRequest',
   '2': [
-    {
-      '1': 'external_transaction_id',
-      '3': 1,
-      '4': 1,
-      '5': 9,
-      '10': 'externalTransactionId'
-    },
+    {'1': 'external_transaction_id', '3': 1, '4': 1, '5': 9, '10': 'externalTransactionId'},
     {'1': 'route', '3': 2, '4': 1, '5': 9, '10': 'route'},
     {'1': 'outbound', '3': 3, '4': 1, '5': 8, '10': 'outbound'},
-    {
-      '1': 'amount',
-      '3': 4,
-      '4': 1,
-      '5': 11,
-      '6': '.google.type.Money',
-      '10': 'amount'
-    },
+    {'1': 'amount', '3': 4, '4': 1, '5': 11, '6': '.google.type.Money', '10': 'amount'},
     {'1': 'owner', '3': 5, '4': 1, '5': 9, '10': 'owner'},
     {'1': 'country_code', '3': 6, '4': 1, '5': 9, '10': 'countryCode'},
   ],
@@ -476,14 +286,7 @@ const ReconcileResponse$json = {
     {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
     {'1': 'transaction_id', '3': 2, '4': 1, '5': 9, '10': 'transactionId'},
     {'1': 'reference_id', '3': 3, '4': 1, '5': 9, '10': 'referenceId'},
-    {
-      '1': 'status',
-      '3': 4,
-      '4': 1,
-      '5': 14,
-      '6': '.common.v1.STATUS',
-      '10': 'status'
-    },
+    {'1': 'status', '3': 4, '4': 1, '5': 14, '6': '.common.v1.STATUS', '10': 'status'},
     {'1': 'description', '3': 5, '4': 1, '5': 9, '10': 'description'},
   ],
 };
@@ -499,14 +302,7 @@ final $typed_data.Uint8List reconcileResponseDescriptor = $convert.base64Decode(
 const SearchResponse$json = {
   '1': 'SearchResponse',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.payment.v1.Payment',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 3, '5': 11, '6': '.payment.v1.Payment', '10': 'data'},
   ],
 };
 
@@ -519,30 +315,9 @@ final $typed_data.Uint8List searchResponseDescriptor = $convert.base64Decode(
 const CreatePaymentLinkRequest$json = {
   '1': 'CreatePaymentLinkRequest',
   '2': [
-    {
-      '1': 'customers',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.payment.v1.Customer',
-      '10': 'customers'
-    },
-    {
-      '1': 'payment_link',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.payment.v1.PaymentLink',
-      '10': 'paymentLink'
-    },
-    {
-      '1': 'notifications',
-      '3': 3,
-      '4': 3,
-      '5': 14,
-      '6': '.payment.v1.NotificationType',
-      '10': 'notifications'
-    },
+    {'1': 'customers', '3': 1, '4': 3, '5': 11, '6': '.payment.v1.Customer', '10': 'customers'},
+    {'1': 'payment_link', '3': 2, '4': 1, '5': 11, '6': '.payment.v1.PaymentLink', '10': 'paymentLink'},
+    {'1': 'notifications', '3': 3, '4': 3, '5': 14, '6': '.payment.v1.NotificationType', '10': 'notifications'},
   ],
 };
 
@@ -557,68 +332,30 @@ final $typed_data.Uint8List createPaymentLinkRequestDescriptor = $convert.base64
 const CreatePaymentLinkResponse$json = {
   '1': 'CreatePaymentLinkResponse',
   '2': [
-    {
-      '1': 'data',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.common.v1.StatusResponse',
-      '10': 'data'
-    },
+    {'1': 'data', '3': 1, '4': 1, '5': 11, '6': '.common.v1.StatusResponse', '10': 'data'},
   ],
 };
 
 /// Descriptor for `CreatePaymentLinkResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List createPaymentLinkResponseDescriptor =
-    $convert.base64Decode(
-        'ChlDcmVhdGVQYXltZW50TGlua1Jlc3BvbnNlEi0KBGRhdGEYASABKAsyGS5jb21tb24udjEuU3'
-        'RhdHVzUmVzcG9uc2VSBGRhdGE=');
+final $typed_data.Uint8List createPaymentLinkResponseDescriptor = $convert.base64Decode(
+    'ChlDcmVhdGVQYXltZW50TGlua1Jlc3BvbnNlEi0KBGRhdGEYASABKAsyGS5jb21tb24udjEuU3'
+    'RhdHVzUmVzcG9uc2VSBGRhdGE=');
 
 const $core.Map<$core.String, $core.dynamic> PaymentServiceBase$json = {
   '1': 'PaymentService',
   '2': [
-    {
-      '1': 'Send',
-      '2': '.payment.v1.SendRequest',
-      '3': '.payment.v1.SendResponse',
-      '4': {}
-    },
-    {
-      '1': 'Receive',
-      '2': '.payment.v1.ReceiveRequest',
-      '3': '.payment.v1.ReceiveResponse',
-      '4': {}
-    },
-    {
-      '1': 'InitiatePrompt',
-      '2': '.payment.v1.InitiatePromptRequest',
-      '3': '.payment.v1.InitiatePromptResponse',
-      '4': {}
-    },
-    {
-      '1': 'CreatePaymentLink',
-      '2': '.payment.v1.CreatePaymentLinkRequest',
-      '3': '.payment.v1.CreatePaymentLinkResponse',
-      '4': {}
-    },
+    {'1': 'Send', '2': '.payment.v1.SendRequest', '3': '.payment.v1.SendResponse', '4': {}},
+    {'1': 'Receive', '2': '.payment.v1.ReceiveRequest', '3': '.payment.v1.ReceiveResponse', '4': {}},
+    {'1': 'InitiatePrompt', '2': '.payment.v1.InitiatePromptRequest', '3': '.payment.v1.InitiatePromptResponse', '4': {}},
+    {'1': 'CreatePaymentLink', '2': '.payment.v1.CreatePaymentLinkRequest', '3': '.payment.v1.CreatePaymentLinkResponse', '4': {}},
     {
       '1': 'Status',
       '2': '.common.v1.StatusRequest',
       '3': '.common.v1.StatusResponse',
       '4': {'34': 1},
     },
-    {
-      '1': 'StatusUpdate',
-      '2': '.common.v1.StatusUpdateRequest',
-      '3': '.common.v1.StatusUpdateResponse',
-      '4': {}
-    },
-    {
-      '1': 'Release',
-      '2': '.payment.v1.ReleaseRequest',
-      '3': '.payment.v1.ReleaseResponse',
-      '4': {}
-    },
+    {'1': 'StatusUpdate', '2': '.common.v1.StatusUpdateRequest', '3': '.common.v1.StatusUpdateResponse', '4': {}},
+    {'1': 'Release', '2': '.payment.v1.ReleaseRequest', '3': '.payment.v1.ReleaseResponse', '4': {}},
     {
       '1': 'Search',
       '2': '.common.v1.SearchRequest',
@@ -626,28 +363,22 @@ const $core.Map<$core.String, $core.dynamic> PaymentServiceBase$json = {
       '4': {'34': 1},
       '6': true,
     },
-    {
-      '1': 'Reconcile',
-      '2': '.payment.v1.ReconcileRequest',
-      '3': '.payment.v1.ReconcileResponse',
-      '4': {}
-    },
+    {'1': 'Reconcile', '2': '.payment.v1.ReconcileRequest', '3': '.payment.v1.ReconcileResponse', '4': {}},
   ],
 };
 
 @$core.Deprecated('Use paymentServiceDescriptor instead')
-const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>>
-    PaymentServiceBase$messageJson = {
+const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> PaymentServiceBase$messageJson = {
   '.payment.v1.SendRequest': SendRequest$json,
   '.payment.v1.Payment': Payment$json,
-  '.common.v1.ContactLink': $0.ContactLink$json,
-  '.google.protobuf.Struct': $2.Struct$json,
-  '.google.protobuf.Struct.FieldsEntry': $2.Struct_FieldsEntry$json,
-  '.google.protobuf.Value': $2.Value$json,
-  '.google.protobuf.ListValue': $2.ListValue$json,
-  '.google.type.Money': $1.Money$json,
+  '.common.v1.ContactLink': $7.ContactLink$json,
+  '.google.protobuf.Struct': $6.Struct$json,
+  '.google.protobuf.Struct.FieldsEntry': $6.Struct_FieldsEntry$json,
+  '.google.protobuf.Value': $6.Value$json,
+  '.google.protobuf.ListValue': $6.ListValue$json,
+  '.google.type.Money': $8.Money$json,
   '.payment.v1.SendResponse': SendResponse$json,
-  '.common.v1.StatusResponse': $0.StatusResponse$json,
+  '.common.v1.StatusResponse': $7.StatusResponse$json,
   '.payment.v1.ReceiveRequest': ReceiveRequest$json,
   '.payment.v1.ReceiveResponse': ReceiveResponse$json,
   '.payment.v1.InitiatePromptRequest': InitiatePromptRequest$json,
@@ -657,13 +388,13 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>>
   '.payment.v1.Customer': Customer$json,
   '.payment.v1.PaymentLink': PaymentLink$json,
   '.payment.v1.CreatePaymentLinkResponse': CreatePaymentLinkResponse$json,
-  '.common.v1.StatusRequest': $0.StatusRequest$json,
-  '.common.v1.StatusUpdateRequest': $0.StatusUpdateRequest$json,
-  '.common.v1.StatusUpdateResponse': $0.StatusUpdateResponse$json,
+  '.common.v1.StatusRequest': $7.StatusRequest$json,
+  '.common.v1.StatusUpdateRequest': $7.StatusUpdateRequest$json,
+  '.common.v1.StatusUpdateResponse': $7.StatusUpdateResponse$json,
   '.payment.v1.ReleaseRequest': ReleaseRequest$json,
   '.payment.v1.ReleaseResponse': ReleaseResponse$json,
-  '.common.v1.SearchRequest': $0.SearchRequest$json,
-  '.common.v1.Pagination': $0.Pagination$json,
+  '.common.v1.SearchRequest': $7.SearchRequest$json,
+  '.common.v1.Pagination': $7.Pagination$json,
   '.payment.v1.SearchResponse': SearchResponse$json,
   '.payment.v1.ReconcileRequest': ReconcileRequest$json,
   '.payment.v1.ReconcileResponse': ReconcileResponse$json,
@@ -723,3 +454,4 @@ final $typed_data.Uint8List paymentServiceDescriptor = $convert.base64Decode(
     '9uZXkgcHJvdmlkZXIsIGJhbmsgc3RhdGVtZW50KSB3aXRoIGludGVybmFsIHBheW1lbnQgcmVj'
     'b3Jkcy4gTWF0Y2hlcyBiYXNlZCBvbiBleHRlcm5hbCB0cmFuc2FjdGlvbiBJRCwgYW1vdW50LC'
     'BhbmQgcm91dGUuKhByZWNvbmNpbGVQYXltZW50');
+

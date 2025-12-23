@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.50.13] - 2025-12-23
+
+### Changed
+
+- Increment version of common code for dependency management
+
+
 ## [1.50.3] - 2025-12-22
 
 ### Changed
