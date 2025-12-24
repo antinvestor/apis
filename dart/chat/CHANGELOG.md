@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.51.7] - 2025-12-23
+
+### Changed
+
+- Bugfix minor lint errors related to StreamRequest/StreamResponse
+
 ## [1.51.6] - 2025-12-23
 
 ### Changed
