@@ -61,12 +61,16 @@ export 'src/common/v1/common.pbjson.dart';
 // Export well-known types (shared across all service packages)
 export 'src/google/protobuf/struct.pb.dart';
 export 'src/google/protobuf/struct.pbenum.dart';
+export 'src/google/protobuf/struct.pbjson.dart';
 export 'src/google/protobuf/timestamp.pb.dart';
 export 'src/google/protobuf/timestamp.pbenum.dart';
+export 'src/google/protobuf/timestamp.pbjson.dart';
 export 'src/google/protobuf/duration.pb.dart';
 export 'src/google/protobuf/duration.pbenum.dart';
+export 'src/google/protobuf/duration.pbjson.dart';
 export 'src/google/protobuf/any.pb.dart';
 export 'src/google/protobuf/any.pbenum.dart';
+export 'src/google/protobuf/any.pbjson.dart';
 
 // Export Google types (shared across all service packages)
 export 'src/google/type/interval.pb.dart';

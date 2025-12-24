@@ -13,7 +13,7 @@ abstract final class GatewayService {
   /// Bi-directional, long-lived connection. Client sends ConnectRequest (initial auth + acks/commands).
   /// Server streams ConnectResponse objects in chronological order for rooms the client is subscribed to.
   /// Stream resume: client may provide last_received_event_id or resume_token to continue after reconnect.
-  static const connect = connect.Spec(
+  static const connectSpec = connect.Spec(
     '/$name/Connect',
     connect.StreamType.bidi,
     chatv1chat.ConnectRequest.new,

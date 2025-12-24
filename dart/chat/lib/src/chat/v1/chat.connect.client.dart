@@ -19,7 +19,7 @@ extension type GatewayServiceClient (connect.Transport _transport) {
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).bidi(
-      specs.GatewayService.connect,
+      specs.GatewayService.connectSpec,
       input,
       signal: signal,
       headers: headers,
