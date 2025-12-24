@@ -578,7 +578,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/chat.v1.UpdateSubscriptionRoleResponse'
-  /chat.v1.GatewayService/Connect: {}
+  /chat.v1.GatewayService/Stream: {}
 components:
   schemas:
     base64:

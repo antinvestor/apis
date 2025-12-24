@@ -53,17 +53,6 @@ define buf_generate
 			"s#import '[^']*/(common|billing|google|gnostic|buf)/[^']*'( as [^;]+)?;#import 'package:antinvestor_api_common/antinvestor_api_common.dart'\2;#g" \
 		{} \; ; \
 	fi
-
-	# Fix connectrpc/dart generator bug: rename 'static const connect' to 'connectSpec' 
-	# when it shadows the 'connect' import prefix (occurs when a service has a method named 'Connect')
-	if [ -f "dart/${1}/lib/src/${1}/v1/${1}.connect.spec.dart" ]; then \
-		sed -i 's/static const connect = connect\.Spec/static const connectSpec = connect.Spec/g' \
-			dart/${1}/lib/src/${1}/v1/${1}.connect.spec.dart; \
-	fi
-	if [ -f "dart/${1}/lib/src/${1}/v1/${1}.connect.client.dart" ]; then \
-		sed -i 's/specs\.GatewayService\.connect,/specs.GatewayService.connectSpec,/g' \
-			dart/${1}/lib/src/${1}/v1/${1}.connect.client.dart; \
-	fi
 endef
 
 define dart_format

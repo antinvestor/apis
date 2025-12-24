@@ -83,9 +83,9 @@ service GatewayService {
   // Bi-directional, long-lived connection. Client sends ConnectRequest (initial auth + acks/commands).
   // Server streams ConnectResponse objects in chronological order for rooms the client is subscribed to.
   // Stream resume: client may provide last_received_event_id or resume_token to continue after reconnect.
-  rpc Connect(stream ConnectRequest) returns (stream ConnectResponse) {
+  rpc Stream(stream ConnectRequest) returns (stream ConnectResponse) {
     option (gnostic.openapi.v3.operation) = {
-      operation_id: "connect"
+      operation_id: "stream"
       summary: "Establish bi-directional streaming connection"
       description: "Opens a persistent bi-directional stream for real-time chat events. Clients send ConnectRequest messages (auth, acks, commands) and receive ServerEvent messages in chronological order. Supports session resumption via resume_token."
       tags: "Real-time"

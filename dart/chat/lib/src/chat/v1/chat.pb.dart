@@ -3074,8 +3074,8 @@ class GatewayServiceApi {
   $pb.RpcClient _client;
   GatewayServiceApi(this._client);
 
-  $async.Future<ConnectResponse> connect($pb.ClientContext? ctx, ConnectRequest request) =>
-    _client.invoke<ConnectResponse>(ctx, 'GatewayService', 'Connect', request, ConnectResponse())
+  $async.Future<ConnectResponse> stream($pb.ClientContext? ctx, ConnectRequest request) =>
+    _client.invoke<ConnectResponse>(ctx, 'GatewayService', 'Stream', request, ConnectResponse())
   ;
 }
 

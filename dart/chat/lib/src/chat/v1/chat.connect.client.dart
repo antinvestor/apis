@@ -11,7 +11,7 @@ extension type GatewayServiceClient (connect.Transport _transport) {
   /// Bi-directional, long-lived connection. Client sends ConnectRequest (initial auth + acks/commands).
   /// Server streams ConnectResponse objects in chronological order for rooms the client is subscribed to.
   /// Stream resume: client may provide last_received_event_id or resume_token to continue after reconnect.
-  Stream<chatv1chat.ConnectResponse> connect(
+  Stream<chatv1chat.ConnectResponse> stream(
     Stream<chatv1chat.ConnectRequest> input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
@@ -19,7 +19,7 @@ extension type GatewayServiceClient (connect.Transport _transport) {
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).bidi(
-      specs.GatewayService.connectSpec,
+      specs.GatewayService.stream,
       input,
       signal: signal,
       headers: headers,

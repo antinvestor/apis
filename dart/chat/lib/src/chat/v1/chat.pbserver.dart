@@ -21,18 +21,18 @@ import 'chat.pbjson.dart';
 export 'chat.pb.dart';
 
 abstract class GatewayServiceBase extends $pb.GeneratedService {
-  $async.Future<$3.ConnectResponse> connect($pb.ServerContext ctx, $3.ConnectRequest request);
+  $async.Future<$3.ConnectResponse> stream($pb.ServerContext ctx, $3.ConnectRequest request);
 
   $pb.GeneratedMessage createRequest($core.String methodName) {
     switch (methodName) {
-      case 'Connect': return $3.ConnectRequest();
+      case 'Stream': return $3.ConnectRequest();
       default: throw $core.ArgumentError('Unknown method: $methodName');
     }
   }
 
   $async.Future<$pb.GeneratedMessage> handleCall($pb.ServerContext ctx, $core.String methodName, $pb.GeneratedMessage request) {
     switch (methodName) {
-      case 'Connect': return this.connect(ctx, request as $3.ConnectRequest);
+      case 'Stream': return this.stream(ctx, request as $3.ConnectRequest);
       default: throw $core.ArgumentError('Unknown method: $methodName');
     }
   }
