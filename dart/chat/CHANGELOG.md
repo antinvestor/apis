@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.51.6] - 2025-12-23
+
+### Changed
+
+- Rename gateway connect method to stream
+
 ## [1.51.5] - 2025-12-23
 
 ### Changed
