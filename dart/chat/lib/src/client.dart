@@ -21,8 +21,35 @@ const String defaultChatEndpoint = 'https://chat.antinvestor.com';
 
 /// Creates a new Chat service client.
 ///
-/// This is the Dart equivalent of Go's `chat.NewClient()` .
-Future<ConnectClientBase<GatewayServiceClient>> newChatClient({
+Future<ConnectClientBase<ChatServiceClient>> newChatClient({
+  required TransportFactory createTransport,
+  String? endpoint,
+  TokenManager? tokenManager,
+  TokenRefreshCallback? onTokenRefresh,
+  List<Interceptor>? additionalInterceptors,
+  bool noAuth = false,
+}) {
+  return newClient<ChatServiceClient>(
+    defaultEndpoint: defaultChatEndpoint,
+    createServiceClient: ChatServiceClient.new,
+    createTransport: createTransport,
+    endpoint: endpoint,
+    tokenManager: tokenManager,
+    onTokenRefresh: onTokenRefresh,
+    additionalInterceptors: additionalInterceptors,
+    noAuth: noAuth,
+  );
+}
+
+/// Type alias for Chat client for convenience.
+typedef ChatClient = ConnectClientBase<ChatServiceClient>;
+
+/// Default endpoint for the Gateway service.
+const String defaultGatewayEndpoint = 'https://gateway.antinvestor.com';
+
+/// Creates a new Gateway service client.
+///
+Future<ConnectClientBase<GatewayServiceClient>> newGatewayClient({
   required TransportFactory createTransport,
   String? endpoint,
   TokenManager? tokenManager,
@@ -31,7 +58,7 @@ Future<ConnectClientBase<GatewayServiceClient>> newChatClient({
   bool noAuth = false,
 }) {
   return newClient<GatewayServiceClient>(
-    defaultEndpoint: defaultChatEndpoint,
+    defaultEndpoint: defaultGatewayEndpoint,
     createServiceClient: GatewayServiceClient.new,
     createTransport: createTransport,
     endpoint: endpoint,
@@ -43,4 +70,4 @@ Future<ConnectClientBase<GatewayServiceClient>> newChatClient({
 }
 
 /// Type alias for Chat client for convenience.
-typedef ChatClient = ConnectClientBase<GatewayServiceClient>;
+typedef GatewayClient = ConnectClientBase<GatewayServiceClient>;

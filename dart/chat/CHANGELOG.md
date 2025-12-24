@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.51.8] - 2025-12-23
+
+### Changed
+
+- Create the required client for gateway service
+
 ## [1.51.7] - 2025-12-23
 
 ### Changed
