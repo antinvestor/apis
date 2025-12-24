@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.51.4] - 2025-12-23
+
+### Changed
+
+- Bugfix missing json.dart exports from antinvestor_api_common.dart
+
+
 ## [1.51.2] - 2025-12-23
 
 ### Changed
