@@ -21,7 +21,7 @@ import 'chat.pbenum.dart';
 
 export 'chat.pbenum.dart';
 
-enum ConnectResponse_Payload {
+enum StreamResponse_Payload {
   message, 
   presenceEvent, 
   receiptEvent, 
@@ -33,8 +33,8 @@ enum ConnectResponse_Payload {
 /// Server -> Client event payload. All events in a room are delivered over Connect stream.
 /// event_id: globally unique id (opaque string) assigned by server, strictly monotonically increasing per room.
 /// sequence: strictly increasing 64-bit integer per-room sequence number (useful for resume & ordering).
-class ConnectResponse extends $pb.GeneratedMessage {
-  factory ConnectResponse({
+class StreamResponse extends $pb.GeneratedMessage {
+  factory StreamResponse({
     $core.String? id,
     $0.Timestamp? timestamp,
     RoomEvent? message,
@@ -67,19 +67,19 @@ class ConnectResponse extends $pb.GeneratedMessage {
     }
     return $result;
   }
-  ConnectResponse._() : super();
-  factory ConnectResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory ConnectResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  StreamResponse._() : super();
+  factory StreamResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory StreamResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static const $core.Map<$core.int, ConnectResponse_Payload> _ConnectResponse_PayloadByTag = {
-    10 : ConnectResponse_Payload.message,
-    12 : ConnectResponse_Payload.presenceEvent,
-    13 : ConnectResponse_Payload.receiptEvent,
-    15 : ConnectResponse_Payload.readEvent,
-    17 : ConnectResponse_Payload.typingEvent,
-    0 : ConnectResponse_Payload.notSet
+  static const $core.Map<$core.int, StreamResponse_Payload> _StreamResponse_PayloadByTag = {
+    10 : StreamResponse_Payload.message,
+    12 : StreamResponse_Payload.presenceEvent,
+    13 : StreamResponse_Payload.receiptEvent,
+    15 : StreamResponse_Payload.readEvent,
+    17 : StreamResponse_Payload.typingEvent,
+    0 : StreamResponse_Payload.notSet
   };
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ConnectResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
     ..oo(0, [10, 12, 13, 15, 17])
     ..aOS(3, _omitFieldNames ? '' : 'id')
     ..aOM<$0.Timestamp>(5, _omitFieldNames ? '' : 'timestamp', subBuilder: $0.Timestamp.create)
@@ -95,24 +95,24 @@ class ConnectResponse extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  ConnectResponse clone() => ConnectResponse()..mergeFromMessage(this);
+  StreamResponse clone() => StreamResponse()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  ConnectResponse copyWith(void Function(ConnectResponse) updates) => super.copyWith((message) => updates(message as ConnectResponse)) as ConnectResponse;
+  StreamResponse copyWith(void Function(StreamResponse) updates) => super.copyWith((message) => updates(message as StreamResponse)) as StreamResponse;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static ConnectResponse create() => ConnectResponse._();
-  ConnectResponse createEmptyInstance() => create();
-  static $pb.PbList<ConnectResponse> createRepeated() => $pb.PbList<ConnectResponse>();
+  static StreamResponse create() => StreamResponse._();
+  StreamResponse createEmptyInstance() => create();
+  static $pb.PbList<StreamResponse> createRepeated() => $pb.PbList<StreamResponse>();
   @$core.pragma('dart2js:noInline')
-  static ConnectResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ConnectResponse>(create);
-  static ConnectResponse? _defaultInstance;
+  static StreamResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StreamResponse>(create);
+  static StreamResponse? _defaultInstance;
 
-  ConnectResponse_Payload whichPayload() => _ConnectResponse_PayloadByTag[$_whichOneof(0)]!;
+  StreamResponse_Payload whichPayload() => _StreamResponse_PayloadByTag[$_whichOneof(0)]!;
   void clearPayload() => clearField($_whichOneof(0));
 
   @$pb.TagNumber(3)
@@ -699,7 +699,7 @@ class TypingEvent extends $pb.GeneratedMessage {
   $0.Timestamp ensureSince() => $_ensure(3);
 }
 
-enum ConnectRequest_Payload {
+enum StreamRequest_Payload {
   ack, 
   stateUpdate, 
   sendEventAck, 
@@ -707,8 +707,8 @@ enum ConnectRequest_Payload {
 }
 
 /// Client message over Connect stream. After initial connect frame, client sends acks/commands.
-class ConnectRequest extends $pb.GeneratedMessage {
-  factory ConnectRequest({
+class StreamRequest extends $pb.GeneratedMessage {
+  factory StreamRequest({
     $core.String? sessionId,
     $core.String? deviceId,
     $core.String? authToken,
@@ -741,17 +741,17 @@ class ConnectRequest extends $pb.GeneratedMessage {
     }
     return $result;
   }
-  ConnectRequest._() : super();
-  factory ConnectRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory ConnectRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  StreamRequest._() : super();
+  factory StreamRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory StreamRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static const $core.Map<$core.int, ConnectRequest_Payload> _ConnectRequest_PayloadByTag = {
-    10 : ConnectRequest_Payload.ack,
-    12 : ConnectRequest_Payload.stateUpdate,
-    15 : ConnectRequest_Payload.sendEventAck,
-    0 : ConnectRequest_Payload.notSet
+  static const $core.Map<$core.int, StreamRequest_Payload> _StreamRequest_PayloadByTag = {
+    10 : StreamRequest_Payload.ack,
+    12 : StreamRequest_Payload.stateUpdate,
+    15 : StreamRequest_Payload.sendEventAck,
+    0 : StreamRequest_Payload.notSet
   };
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ConnectRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
     ..oo(0, [10, 12, 15])
     ..aOS(2, _omitFieldNames ? '' : 'sessionId')
     ..aOS(3, _omitFieldNames ? '' : 'deviceId')
@@ -767,24 +767,24 @@ class ConnectRequest extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  ConnectRequest clone() => ConnectRequest()..mergeFromMessage(this);
+  StreamRequest clone() => StreamRequest()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  ConnectRequest copyWith(void Function(ConnectRequest) updates) => super.copyWith((message) => updates(message as ConnectRequest)) as ConnectRequest;
+  StreamRequest copyWith(void Function(StreamRequest) updates) => super.copyWith((message) => updates(message as StreamRequest)) as StreamRequest;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static ConnectRequest create() => ConnectRequest._();
-  ConnectRequest createEmptyInstance() => create();
-  static $pb.PbList<ConnectRequest> createRepeated() => $pb.PbList<ConnectRequest>();
+  static StreamRequest create() => StreamRequest._();
+  StreamRequest createEmptyInstance() => create();
+  static $pb.PbList<StreamRequest> createRepeated() => $pb.PbList<StreamRequest>();
   @$core.pragma('dart2js:noInline')
-  static ConnectRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ConnectRequest>(create);
-  static ConnectRequest? _defaultInstance;
+  static StreamRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StreamRequest>(create);
+  static StreamRequest? _defaultInstance;
 
-  ConnectRequest_Payload whichPayload() => _ConnectRequest_PayloadByTag[$_whichOneof(0)]!;
+  StreamRequest_Payload whichPayload() => _StreamRequest_PayloadByTag[$_whichOneof(0)]!;
   void clearPayload() => clearField($_whichOneof(0));
 
   /// Servers should validate auth token before accepting further payload.
@@ -1315,7 +1315,7 @@ class GetHistoryRequest extends $pb.GeneratedMessage {
 
 class GetHistoryResponse extends $pb.GeneratedMessage {
   factory GetHistoryResponse({
-    $core.Iterable<ConnectResponse>? events,
+    $core.Iterable<StreamResponse>? events,
     $core.String? nextCursor,
     $core.String? prevCursor,
   }) {
@@ -1336,7 +1336,7 @@ class GetHistoryResponse extends $pb.GeneratedMessage {
   factory GetHistoryResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetHistoryResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
-    ..pc<ConnectResponse>(1, _omitFieldNames ? '' : 'events', $pb.PbFieldType.PM, subBuilder: ConnectResponse.create)
+    ..pc<StreamResponse>(1, _omitFieldNames ? '' : 'events', $pb.PbFieldType.PM, subBuilder: StreamResponse.create)
     ..aOS(2, _omitFieldNames ? '' : 'nextCursor')
     ..aOS(3, _omitFieldNames ? '' : 'prevCursor')
     ..hasRequiredFields = false
@@ -1364,7 +1364,7 @@ class GetHistoryResponse extends $pb.GeneratedMessage {
   static GetHistoryResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<ConnectResponse> get events => $_getList(0);
+  $core.List<StreamResponse> get events => $_getList(0);
 
   @$pb.TagNumber(2)
   $core.String get nextCursor => $_getSZ(1);
@@ -3074,8 +3074,8 @@ class GatewayServiceApi {
   $pb.RpcClient _client;
   GatewayServiceApi(this._client);
 
-  $async.Future<ConnectResponse> stream($pb.ClientContext? ctx, ConnectRequest request) =>
-    _client.invoke<ConnectResponse>(ctx, 'GatewayService', 'Stream', request, ConnectResponse())
+  $async.Future<StreamResponse> stream($pb.ClientContext? ctx, StreamRequest request) =>
+    _client.invoke<StreamResponse>(ctx, 'GatewayService', 'Stream', request, StreamResponse())
   ;
 }
 

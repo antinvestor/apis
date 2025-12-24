@@ -68,9 +68,9 @@ final $typed_data.Uint8List presenceStatusDescriptor = $convert.base64Decode(
     'Cg5QcmVzZW5jZVN0YXR1cxIfChtQUkVTRU5DRV9TVEFUVVNfVU5TUEVDSUZJRUQQABIbChdQUk'
     'VTRU5DRV9TVEFUVVNfT0ZGTElORRABEhoKFlBSRVNFTkNFX1NUQVRVU19PTkxJTkUQAg==');
 
-@$core.Deprecated('Use connectResponseDescriptor instead')
-const ConnectResponse$json = {
-  '1': 'ConnectResponse',
+@$core.Deprecated('Use streamResponseDescriptor instead')
+const StreamResponse$json = {
+  '1': 'StreamResponse',
   '2': [
     {'1': 'id', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'id'},
     {'1': 'timestamp', '3': 5, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'timestamp'},
@@ -85,16 +85,16 @@ const ConnectResponse$json = {
   ],
 };
 
-/// Descriptor for `ConnectResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List connectResponseDescriptor = $convert.base64Decode(
-    'Cg9Db25uZWN0UmVzcG9uc2USKwoCaWQYAyABKAlCG7pIGHIWEAMYKDIQWzAtOWEtel8tXXszLD'
-    'QwfVICaWQSOAoJdGltZXN0YW1wGAUgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcFIJ'
-    'dGltZXN0YW1wEi4KB21lc3NhZ2UYCiABKAsyEi5jaGF0LnYxLlJvb21FdmVudEgAUgdtZXNzYW'
-    'dlEj8KDnByZXNlbmNlX2V2ZW50GAwgASgLMhYuY2hhdC52MS5QcmVzZW5jZUV2ZW50SABSDXBy'
-    'ZXNlbmNlRXZlbnQSPAoNcmVjZWlwdF9ldmVudBgNIAEoCzIVLmNoYXQudjEuUmVjZWlwdEV2ZW'
-    '50SABSDHJlY2VpcHRFdmVudBI0CgpyZWFkX2V2ZW50GA8gASgLMhMuY2hhdC52MS5SZWFkTWFy'
-    'a2VySABSCXJlYWRFdmVudBI5Cgx0eXBpbmdfZXZlbnQYESABKAsyFC5jaGF0LnYxLlR5cGluZ0'
-    'V2ZW50SABSC3R5cGluZ0V2ZW50QgkKB3BheWxvYWQ=');
+/// Descriptor for `StreamResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List streamResponseDescriptor = $convert.base64Decode(
+    'Cg5TdHJlYW1SZXNwb25zZRIrCgJpZBgDIAEoCUIbukgYchYQAxgoMhBbMC05YS16Xy1dezMsND'
+    'B9UgJpZBI4Cgl0aW1lc3RhbXAYBSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wUgl0'
+    'aW1lc3RhbXASLgoHbWVzc2FnZRgKIAEoCzISLmNoYXQudjEuUm9vbUV2ZW50SABSB21lc3NhZ2'
+    'USPwoOcHJlc2VuY2VfZXZlbnQYDCABKAsyFi5jaGF0LnYxLlByZXNlbmNlRXZlbnRIAFINcHJl'
+    'c2VuY2VFdmVudBI8Cg1yZWNlaXB0X2V2ZW50GA0gASgLMhUuY2hhdC52MS5SZWNlaXB0RXZlbn'
+    'RIAFIMcmVjZWlwdEV2ZW50EjQKCnJlYWRfZXZlbnQYDyABKAsyEy5jaGF0LnYxLlJlYWRNYXJr'
+    'ZXJIAFIJcmVhZEV2ZW50EjkKDHR5cGluZ19ldmVudBgRIAEoCzIULmNoYXQudjEuVHlwaW5nRX'
+    'ZlbnRIAFILdHlwaW5nRXZlbnRCCQoHcGF5bG9hZA==');
 
 @$core.Deprecated('Use roomEventDescriptor instead')
 const RoomEvent$json = {
@@ -197,9 +197,9 @@ final $typed_data.Uint8List typingEventDescriptor = $convert.base64Decode(
     'LV17Myw0MH1SBnJvb21JZBIWCgZ0eXBpbmcYAyABKAhSBnR5cGluZxIwCgVzaW5jZRgFIAEoCz'
     'IaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSBXNpbmNl');
 
-@$core.Deprecated('Use connectRequestDescriptor instead')
-const ConnectRequest$json = {
-  '1': 'ConnectRequest',
+@$core.Deprecated('Use streamRequestDescriptor instead')
+const StreamRequest$json = {
+  '1': 'StreamRequest',
   '2': [
     {'1': 'session_id', '3': 2, '4': 1, '5': 9, '10': 'sessionId'},
     {'1': 'device_id', '3': 3, '4': 1, '5': 9, '10': 'deviceId'},
@@ -214,14 +214,14 @@ const ConnectRequest$json = {
   ],
 };
 
-/// Descriptor for `ConnectRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List connectRequestDescriptor = $convert.base64Decode(
-    'Cg5Db25uZWN0UmVxdWVzdBIdCgpzZXNzaW9uX2lkGAIgASgJUglzZXNzaW9uSWQSGwoJZGV2aW'
-    'NlX2lkGAMgASgJUghkZXZpY2VJZBIdCgphdXRoX3Rva2VuGAQgASgJUglhdXRoVG9rZW4SIQoM'
-    'cmVzdW1lX3Rva2VuGAUgASgJUgtyZXN1bWVUb2tlbhImCgNhY2sYCiABKAsyEi5jaGF0LnYxLl'
-    'N0cmVhbUFja0gAUgNhY2sSOQoMc3RhdGVfdXBkYXRlGAwgASgLMhQuY2hhdC52MS5DbGllbnRT'
-    'dGF0ZUgAUgtzdGF0ZVVwZGF0ZRJCCg5zZW5kX2V2ZW50X2FjaxgPIAEoCzIaLmNoYXQudjEuU2'
-    'VuZEV2ZW50UmVzcG9uc2VIAFIMc2VuZEV2ZW50QWNrQgkKB3BheWxvYWQ=');
+/// Descriptor for `StreamRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List streamRequestDescriptor = $convert.base64Decode(
+    'Cg1TdHJlYW1SZXF1ZXN0Eh0KCnNlc3Npb25faWQYAiABKAlSCXNlc3Npb25JZBIbCglkZXZpY2'
+    'VfaWQYAyABKAlSCGRldmljZUlkEh0KCmF1dGhfdG9rZW4YBCABKAlSCWF1dGhUb2tlbhIhCgxy'
+    'ZXN1bWVfdG9rZW4YBSABKAlSC3Jlc3VtZVRva2VuEiYKA2FjaxgKIAEoCzISLmNoYXQudjEuU3'
+    'RyZWFtQWNrSABSA2FjaxI5CgxzdGF0ZV91cGRhdGUYDCABKAsyFC5jaGF0LnYxLkNsaWVudFN0'
+    'YXRlSABSC3N0YXRlVXBkYXRlEkIKDnNlbmRfZXZlbnRfYWNrGA8gASgLMhouY2hhdC52MS5TZW'
+    '5kRXZlbnRSZXNwb25zZUgAUgxzZW5kRXZlbnRBY2tCCQoHcGF5bG9hZA==');
 
 @$core.Deprecated('Use streamAckDescriptor instead')
 const StreamAck$json = {
@@ -320,7 +320,7 @@ final $typed_data.Uint8List getHistoryRequestDescriptor = $convert.base64Decode(
 const GetHistoryResponse$json = {
   '1': 'GetHistoryResponse',
   '2': [
-    {'1': 'events', '3': 1, '4': 3, '5': 11, '6': '.chat.v1.ConnectResponse', '10': 'events'},
+    {'1': 'events', '3': 1, '4': 3, '5': 11, '6': '.chat.v1.StreamResponse', '10': 'events'},
     {'1': 'next_cursor', '3': 2, '4': 1, '5': 9, '10': 'nextCursor'},
     {'1': 'prev_cursor', '3': 3, '4': 1, '5': 9, '10': 'prevCursor'},
   ],
@@ -328,9 +328,9 @@ const GetHistoryResponse$json = {
 
 /// Descriptor for `GetHistoryResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getHistoryResponseDescriptor = $convert.base64Decode(
-    'ChJHZXRIaXN0b3J5UmVzcG9uc2USMAoGZXZlbnRzGAEgAygLMhguY2hhdC52MS5Db25uZWN0Um'
-    'VzcG9uc2VSBmV2ZW50cxIfCgtuZXh0X2N1cnNvchgCIAEoCVIKbmV4dEN1cnNvchIfCgtwcmV2'
-    'X2N1cnNvchgDIAEoCVIKcHJldkN1cnNvcg==');
+    'ChJHZXRIaXN0b3J5UmVzcG9uc2USLwoGZXZlbnRzGAEgAygLMhcuY2hhdC52MS5TdHJlYW1SZX'
+    'Nwb25zZVIGZXZlbnRzEh8KC25leHRfY3Vyc29yGAIgASgJUgpuZXh0Q3Vyc29yEh8KC3ByZXZf'
+    'Y3Vyc29yGAMgASgJUgpwcmV2Q3Vyc29y');
 
 @$core.Deprecated('Use roomDescriptor instead')
 const Room$json = {
@@ -707,13 +707,13 @@ final $typed_data.Uint8List getClientStateResponseDescriptor = $convert.base64De
 const $core.Map<$core.String, $core.dynamic> GatewayServiceBase$json = {
   '1': 'GatewayService',
   '2': [
-    {'1': 'Stream', '2': '.chat.v1.ConnectRequest', '3': '.chat.v1.ConnectResponse', '4': {}, '5': true, '6': true},
+    {'1': 'Stream', '2': '.chat.v1.StreamRequest', '3': '.chat.v1.StreamResponse', '4': {}, '5': true, '6': true},
   ],
 };
 
 @$core.Deprecated('Use gatewayServiceDescriptor instead')
 const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> GatewayServiceBase$messageJson = {
-  '.chat.v1.ConnectRequest': ConnectRequest$json,
+  '.chat.v1.StreamRequest': StreamRequest$json,
   '.chat.v1.StreamAck': StreamAck$json,
   '.google.protobuf.Timestamp': $0.Timestamp$json,
   '.google.protobuf.Struct': $1.Struct$json,
@@ -730,19 +730,18 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> GatewaySer
   '.chat.v1.PresenceEvent': PresenceEvent$json,
   '.chat.v1.SendEventRequest': SendEventRequest$json,
   '.chat.v1.SendEventResponse': SendEventResponse$json,
-  '.chat.v1.ConnectResponse': ConnectResponse$json,
+  '.chat.v1.StreamResponse': StreamResponse$json,
 };
 
 /// Descriptor for `GatewayService`. Decode as a `google.protobuf.ServiceDescriptorProto`.
 final $typed_data.Uint8List gatewayServiceDescriptor = $convert.base64Decode(
-    'Cg5HYXRld2F5U2VydmljZRLxAgoGU3RyZWFtEhcuY2hhdC52MS5Db25uZWN0UmVxdWVzdBoYLm'
-    'NoYXQudjEuQ29ubmVjdFJlc3BvbnNlIq8CukerAgoJUmVhbC10aW1lEi1Fc3RhYmxpc2ggYmkt'
-    'ZGlyZWN0aW9uYWwgc3RyZWFtaW5nIGNvbm5lY3Rpb24a5gFPcGVucyBhIHBlcnNpc3RlbnQgYm'
-    'ktZGlyZWN0aW9uYWwgc3RyZWFtIGZvciByZWFsLXRpbWUgY2hhdCBldmVudHMuIENsaWVudHMg'
-    'c2VuZCBDb25uZWN0UmVxdWVzdCBtZXNzYWdlcyAoYXV0aCwgYWNrcywgY29tbWFuZHMpIGFuZC'
-    'ByZWNlaXZlIFNlcnZlckV2ZW50IG1lc3NhZ2VzIGluIGNocm9ub2xvZ2ljYWwgb3JkZXIuIFN1'
-    'cHBvcnRzIHNlc3Npb24gcmVzdW1wdGlvbiB2aWEgcmVzdW1lX3Rva2VuLioGc3RyZWFtKAEwAQ'
-    '==');
+    'Cg5HYXRld2F5U2VydmljZRLuAgoGU3RyZWFtEhYuY2hhdC52MS5TdHJlYW1SZXF1ZXN0GhcuY2'
+    'hhdC52MS5TdHJlYW1SZXNwb25zZSKuArpHqgIKCVJlYWwtdGltZRItRXN0YWJsaXNoIGJpLWRp'
+    'cmVjdGlvbmFsIHN0cmVhbWluZyBjb25uZWN0aW9uGuUBT3BlbnMgYSBwZXJzaXN0ZW50IGJpLW'
+    'RpcmVjdGlvbmFsIHN0cmVhbSBmb3IgcmVhbC10aW1lIGNoYXQgZXZlbnRzLiBDbGllbnRzIHNl'
+    'bmQgU3RyZWFtUmVxdWVzdCBtZXNzYWdlcyAoYXV0aCwgYWNrcywgY29tbWFuZHMpIGFuZCByZW'
+    'NlaXZlIFNlcnZlckV2ZW50IG1lc3NhZ2VzIGluIGNocm9ub2xvZ2ljYWwgb3JkZXIuIFN1cHBv'
+    'cnRzIHNlc3Npb24gcmVzdW1wdGlvbiB2aWEgcmVzdW1lX3Rva2VuLioGc3RyZWFtKAEwAQ==');
 
 const $core.Map<$core.String, $core.dynamic> ChatServiceBase$json = {
   '1': 'ChatService',
@@ -798,7 +797,7 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> ChatServic
   '.common.v1.ErrorDetail.MetaEntry': $2.ErrorDetail_MetaEntry$json,
   '.chat.v1.GetHistoryRequest': GetHistoryRequest$json,
   '.chat.v1.GetHistoryResponse': GetHistoryResponse$json,
-  '.chat.v1.ConnectResponse': ConnectResponse$json,
+  '.chat.v1.StreamResponse': StreamResponse$json,
   '.chat.v1.PresenceEvent': PresenceEvent$json,
   '.chat.v1.ReceiptEvent': ReceiptEvent$json,
   '.chat.v1.ReadMarker': ReadMarker$json,

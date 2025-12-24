@@ -669,108 +669,6 @@ components:
       title: ClientState
       additionalProperties: false
       description: Generic client state (typing, read markers that aren't receipts, and room events)
-    chat.v1.ConnectRequest:
-      type: object
-      allOf:
-        - properties:
-            sessionId:
-              type: string
-              title: session_id
-              description: Servers should validate auth token before accepting further payload.
-            deviceId:
-              type: string
-              title: device_id
-            authToken:
-              type: string
-              title: auth_token
-              description: JWT or short-lived token; also accepted via metadata at the transport layer
-            resumeToken:
-              type: string
-              title: resume_token
-              description: |-
-                Optional resume token: server-supplied resume_token from previous session.
-                 Server will validate and accept resume only if resume window allows it.
-        - oneOf:
-            - properties:
-                ack:
-                  title: ack
-                  $ref: '#/components/schemas/chat.v1.StreamAck'
-              title: ack
-              required:
-                - ack
-            - properties:
-                sendEventAck:
-                  title: send_event_ack
-                  $ref: '#/components/schemas/chat.v1.SendEventResponse'
-              title: send_event_ack
-              required:
-                - sendEventAck
-            - properties:
-                stateUpdate:
-                  title: state_update
-                  $ref: '#/components/schemas/chat.v1.ClientState'
-              title: state_update
-              required:
-                - stateUpdate
-      title: ConnectRequest
-      additionalProperties: false
-      description: Client message over Connect stream. After initial connect frame, client sends acks/commands.
-    chat.v1.ConnectResponse:
-      type: object
-      allOf:
-        - properties:
-            id:
-              type: string
-              title: id
-              maxLength: 40
-              minLength: 3
-              pattern: '[0-9a-z_-]{3,40}'
-            timestamp:
-              title: timestamp
-              $ref: '#/components/schemas/google.protobuf.Timestamp'
-        - oneOf:
-            - properties:
-                message:
-                  title: message
-                  $ref: '#/components/schemas/chat.v1.RoomEvent'
-              title: message
-              required:
-                - message
-            - properties:
-                presenceEvent:
-                  title: presence_event
-                  description: user presence change affecting the room
-                  $ref: '#/components/schemas/chat.v1.PresenceEvent'
-              title: presence_event
-              required:
-                - presenceEvent
-            - properties:
-                readEvent:
-                  title: read_event
-                  $ref: '#/components/schemas/chat.v1.ReadMarker'
-              title: read_event
-              required:
-                - readEvent
-            - properties:
-                receiptEvent:
-                  title: receipt_event
-                  $ref: '#/components/schemas/chat.v1.ReceiptEvent'
-              title: receipt_event
-              required:
-                - receiptEvent
-            - properties:
-                typingEvent:
-                  title: typing_event
-                  $ref: '#/components/schemas/chat.v1.TypingEvent'
-              title: typing_event
-              required:
-                - typingEvent
-      title: ConnectResponse
-      additionalProperties: false
-      description: |-
-        Server -> Client event payload. All events in a room are delivered over Connect stream.
-         event_id: globally unique id (opaque string) assigned by server, strictly monotonically increasing per room.
-         sequence: strictly increasing 64-bit integer per-room sequence number (useful for resume & ordering).
     chat.v1.CreateRoomRequest:
       type: object
       properties:
@@ -903,7 +801,7 @@ components:
         events:
           type: array
           items:
-            $ref: '#/components/schemas/chat.v1.ConnectResponse'
+            $ref: '#/components/schemas/chat.v1.StreamResponse'
           title: events
         nextCursor:
           type: string
@@ -1289,6 +1187,108 @@ components:
         Acknowledgement for event(s) received; server uses it to free ephemeral delivery buffers.
          ack_event_id: last event_id client processed (inclusive).
          If error is set, indicates the event failed to send/process correctly.
+    chat.v1.StreamRequest:
+      type: object
+      allOf:
+        - properties:
+            sessionId:
+              type: string
+              title: session_id
+              description: Servers should validate auth token before accepting further payload.
+            deviceId:
+              type: string
+              title: device_id
+            authToken:
+              type: string
+              title: auth_token
+              description: JWT or short-lived token; also accepted via metadata at the transport layer
+            resumeToken:
+              type: string
+              title: resume_token
+              description: |-
+                Optional resume token: server-supplied resume_token from previous session.
+                 Server will validate and accept resume only if resume window allows it.
+        - oneOf:
+            - properties:
+                ack:
+                  title: ack
+                  $ref: '#/components/schemas/chat.v1.StreamAck'
+              title: ack
+              required:
+                - ack
+            - properties:
+                sendEventAck:
+                  title: send_event_ack
+                  $ref: '#/components/schemas/chat.v1.SendEventResponse'
+              title: send_event_ack
+              required:
+                - sendEventAck
+            - properties:
+                stateUpdate:
+                  title: state_update
+                  $ref: '#/components/schemas/chat.v1.ClientState'
+              title: state_update
+              required:
+                - stateUpdate
+      title: StreamRequest
+      additionalProperties: false
+      description: Client message over Connect stream. After initial connect frame, client sends acks/commands.
+    chat.v1.StreamResponse:
+      type: object
+      allOf:
+        - properties:
+            id:
+              type: string
+              title: id
+              maxLength: 40
+              minLength: 3
+              pattern: '[0-9a-z_-]{3,40}'
+            timestamp:
+              title: timestamp
+              $ref: '#/components/schemas/google.protobuf.Timestamp'
+        - oneOf:
+            - properties:
+                message:
+                  title: message
+                  $ref: '#/components/schemas/chat.v1.RoomEvent'
+              title: message
+              required:
+                - message
+            - properties:
+                presenceEvent:
+                  title: presence_event
+                  description: user presence change affecting the room
+                  $ref: '#/components/schemas/chat.v1.PresenceEvent'
+              title: presence_event
+              required:
+                - presenceEvent
+            - properties:
+                readEvent:
+                  title: read_event
+                  $ref: '#/components/schemas/chat.v1.ReadMarker'
+              title: read_event
+              required:
+                - readEvent
+            - properties:
+                receiptEvent:
+                  title: receipt_event
+                  $ref: '#/components/schemas/chat.v1.ReceiptEvent'
+              title: receipt_event
+              required:
+                - receiptEvent
+            - properties:
+                typingEvent:
+                  title: typing_event
+                  $ref: '#/components/schemas/chat.v1.TypingEvent'
+              title: typing_event
+              required:
+                - typingEvent
+      title: StreamResponse
+      additionalProperties: false
+      description: |-
+        Server -> Client event payload. All events in a room are delivered over Connect stream.
+         event_id: globally unique id (opaque string) assigned by server, strictly monotonically increasing per room.
+         sequence: strictly increasing 64-bit integer per-room sequence number (useful for resume & ordering).
     chat.v1.TypingEvent:
       type: object
       properties:
