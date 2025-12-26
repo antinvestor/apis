@@ -2282,9 +2282,75 @@ class SearchRosterResponse extends $pb.GeneratedMessage {
   $core.List<RosterObject> get data => $_getList(0);
 }
 
+class RawContact extends $pb.GeneratedMessage {
+  factory RawContact({
+    $core.String? contact,
+    $0.Struct? extras,
+  }) {
+    final $result = create();
+    if (contact != null) {
+      $result.contact = contact;
+    }
+    if (extras != null) {
+      $result.extras = extras;
+    }
+    return $result;
+  }
+  RawContact._() : super();
+  factory RawContact.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory RawContact.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RawContact', package: const $pb.PackageName(_omitMessageNames ? '' : 'profile.v1'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'contact')
+    ..aOM<$0.Struct>(2, _omitFieldNames ? '' : 'extras', subBuilder: $0.Struct.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  RawContact clone() => RawContact()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  RawContact copyWith(void Function(RawContact) updates) => super.copyWith((message) => updates(message as RawContact)) as RawContact;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static RawContact create() => RawContact._();
+  RawContact createEmptyInstance() => create();
+  static $pb.PbList<RawContact> createRepeated() => $pb.PbList<RawContact>();
+  @$core.pragma('dart2js:noInline')
+  static RawContact getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RawContact>(create);
+  static RawContact? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get contact => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set contact($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasContact() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearContact() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $0.Struct get extras => $_getN(1);
+  @$pb.TagNumber(2)
+  set extras($0.Struct v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasExtras() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearExtras() => clearField(2);
+  @$pb.TagNumber(2)
+  $0.Struct ensureExtras() => $_ensure(1);
+}
+
 class AddRosterRequest extends $pb.GeneratedMessage {
   factory AddRosterRequest({
-    $core.Iterable<AddContactRequest>? data,
+    $core.Iterable<RawContact>? data,
   }) {
     final $result = create();
     if (data != null) {
@@ -2297,7 +2363,7 @@ class AddRosterRequest extends $pb.GeneratedMessage {
   factory AddRosterRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddRosterRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'profile.v1'), createEmptyInstance: create)
-    ..pc<AddContactRequest>(1, _omitFieldNames ? '' : 'data', $pb.PbFieldType.PM, subBuilder: AddContactRequest.create)
+    ..pc<RawContact>(1, _omitFieldNames ? '' : 'data', $pb.PbFieldType.PM, subBuilder: RawContact.create)
     ..hasRequiredFields = false
   ;
 
@@ -2323,7 +2389,7 @@ class AddRosterRequest extends $pb.GeneratedMessage {
   static AddRosterRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<AddContactRequest> get data => $_getList(0);
+  $core.List<RawContact> get data => $_getList(0);
 }
 
 class AddRosterResponse extends $pb.GeneratedMessage {

@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.51.9] - 2025-12-23
+
+### Changed
+
+- Introduce raw contact for roster upload without issues
+
 ## [1.51.8] - 2025-12-23
 
 ### Changed

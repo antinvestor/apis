@@ -530,18 +530,32 @@ final $typed_data.Uint8List searchRosterResponseDescriptor = $convert.base64Deco
     'ChRTZWFyY2hSb3N0ZXJSZXNwb25zZRIsCgRkYXRhGAEgAygLMhgucHJvZmlsZS52MS5Sb3N0ZX'
     'JPYmplY3RSBGRhdGE=');
 
+@$core.Deprecated('Use rawContactDescriptor instead')
+const RawContact$json = {
+  '1': 'RawContact',
+  '2': [
+    {'1': 'contact', '3': 1, '4': 1, '5': 9, '10': 'contact'},
+    {'1': 'extras', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'extras'},
+  ],
+};
+
+/// Descriptor for `RawContact`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List rawContactDescriptor = $convert.base64Decode(
+    'CgpSYXdDb250YWN0EhgKB2NvbnRhY3QYASABKAlSB2NvbnRhY3QSLwoGZXh0cmFzGAIgASgLMh'
+    'cuZ29vZ2xlLnByb3RvYnVmLlN0cnVjdFIGZXh0cmFz');
+
 @$core.Deprecated('Use addRosterRequestDescriptor instead')
 const AddRosterRequest$json = {
   '1': 'AddRosterRequest',
   '2': [
-    {'1': 'data', '3': 1, '4': 3, '5': 11, '6': '.profile.v1.AddContactRequest', '10': 'data'},
+    {'1': 'data', '3': 1, '4': 3, '5': 11, '6': '.profile.v1.RawContact', '10': 'data'},
   ],
 };
 
 /// Descriptor for `AddRosterRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List addRosterRequestDescriptor = $convert.base64Decode(
-    'ChBBZGRSb3N0ZXJSZXF1ZXN0EjEKBGRhdGEYASADKAsyHS5wcm9maWxlLnYxLkFkZENvbnRhY3'
-    'RSZXF1ZXN0UgRkYXRh');
+    'ChBBZGRSb3N0ZXJSZXF1ZXN0EioKBGRhdGEYASADKAsyFi5wcm9maWxlLnYxLlJhd0NvbnRhY3'
+    'RSBGRhdGE=');
 
 @$core.Deprecated('Use addRosterResponseDescriptor instead')
 const AddRosterResponse$json = {
@@ -824,6 +838,7 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> ProfileSer
   '.profile.v1.SearchRosterResponse': SearchRosterResponse$json,
   '.profile.v1.RosterObject': RosterObject$json,
   '.profile.v1.AddRosterRequest': AddRosterRequest$json,
+  '.profile.v1.RawContact': RawContact$json,
   '.profile.v1.AddRosterResponse': AddRosterResponse$json,
   '.profile.v1.RemoveRosterRequest': RemoveRosterRequest$json,
   '.profile.v1.RemoveRosterResponse': RemoveRosterResponse$json,

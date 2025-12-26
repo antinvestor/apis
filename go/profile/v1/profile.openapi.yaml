@@ -960,7 +960,7 @@ components:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/profile.v1.AddContactRequest'
+            $ref: '#/components/schemas/profile.v1.RawContact'
           title: data
       title: AddRosterRequest
       additionalProperties: false
@@ -1410,6 +1410,17 @@ components:
       description: |-
         ProfileType defines the type of profile entity.
          buf:lint:ignore ENUM_VALUE_PREFIX
+    profile.v1.RawContact:
+      type: object
+      properties:
+        contact:
+          type: string
+          title: contact
+        extras:
+          title: extras
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: RawContact
+      additionalProperties: false
     profile.v1.RelationshipObject:
       type: object
       properties:

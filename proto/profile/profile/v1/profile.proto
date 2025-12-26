@@ -385,8 +385,13 @@ message SearchRosterResponse {
   repeated RosterObject data = 1;
 }
 
+message RawContact {
+  string contact = 1;
+  google.protobuf.Struct extras = 2;
+}
+
 message AddRosterRequest {
-  repeated AddContactRequest data = 1;
+  repeated RawContact data = 1;
 }
 
 message AddRosterResponse {
