@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.51.6] - 2025-12-23
+
+### Changed
+
+- Make roster add contact id optional
+
 ## [1.51.5] - 2025-12-23
 
 ### Changed

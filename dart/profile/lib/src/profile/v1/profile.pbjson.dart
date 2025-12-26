@@ -359,9 +359,9 @@ const AddContactRequest$json = {
 
 /// Descriptor for `AddContactRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List addContactRequestDescriptor = $convert.base64Decode(
-    'ChFBZGRDb250YWN0UmVxdWVzdBIrCgJpZBgBIAEoCUIbukgYchYQAxgoMhBbMC05YS16Xy1dez'
-    'MsNDB9UgJpZBIYCgdjb250YWN0GAIgASgJUgdjb250YWN0Ei8KBmV4dHJhcxgDIAEoCzIXLmdv'
-    'b2dsZS5wcm90b2J1Zi5TdHJ1Y3RSBmV4dHJhcw==');
+    'ChFBZGRDb250YWN0UmVxdWVzdBIuCgJpZBgBIAEoCUIeukgb2AEBchYQAxgoMhBbMC05YS16Xy'
+    '1dezMsNDB9UgJpZBIYCgdjb250YWN0GAIgASgJUgdjb250YWN0Ei8KBmV4dHJhcxgDIAEoCzIX'
+    'Lmdvb2dsZS5wcm90b2J1Zi5TdHJ1Y3RSBmV4dHJhcw==');
 
 @$core.Deprecated('Use addContactResponseDescriptor instead')
 const AddContactResponse$json = {
