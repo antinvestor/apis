@@ -5,7 +5,7 @@ go 1.25
 require (
 	buf.build/gen/go/antinvestor/common/protocolbuffers/go v1.36.11-20251223175359-03d5a4a55277.1
 	buf.build/gen/go/antinvestor/ledger/connectrpc/go v1.19.1-20251224115459-e3ded5327e08.2
-	buf.build/gen/go/antinvestor/ledger/protocolbuffers/go v1.36.11-20251223175528-25282bf4a209.1
+	buf.build/gen/go/antinvestor/ledger/protocolbuffers/go v1.36.11-20251224115459-e3ded5327e08.1
 	connectrpc.com/connect v1.19.1
 	github.com/antinvestor/apis/go/common v1.51.0
 	github.com/gojuno/minimock/v3 v3.4.7
