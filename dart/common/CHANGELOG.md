@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.51.10] - 2025-12-31
+
+### Changed
+
+- Improve token manager error handling
+
 ## [1.51.4] - 2025-12-23
 
 ### Changed

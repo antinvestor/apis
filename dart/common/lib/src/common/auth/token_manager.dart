@@ -10,6 +10,23 @@ typedef TokenPersistCallback = Future<void> Function(
 /// Callback type for loading tokens from storage.
 typedef TokenLoadCallback = Future<TokenPair?> Function();
 
+/// Callback type for refreshing tokens.
+/// Should return a new access token or throw an exception if refresh fails.
+typedef TokenRefreshCallback = Future<String> Function(String? refreshToken);
+
+/// Callback type for handling logout (e.g., when refresh token is invalid).
+typedef LogoutCallback = Future<void> Function();
+
+/// Result of a token refresh operation.
+enum TokenRefreshResult {
+  /// Token was refreshed successfully.
+  success,
+  /// Transient error (network, timeout) - can retry.
+  transientError,
+  /// Permanent error (invalid token, revoked) - need to re-authenticate.
+  permanentError,
+}
+
 /// A pair of access and refresh tokens.
 class TokenPair {
   final String accessToken;
@@ -21,14 +38,25 @@ class TokenPair {
   });
 
   @override
-  String toString() => 'TokenPair(accessToken: ${accessToken.substring(0, 10)}..., '
-      'refreshToken: ${refreshToken?.substring(0, 10)}...)';
+  String toString() {
+    final accessPreview = accessToken.length > 10 
+        ? '${accessToken.substring(0, 10)}...' 
+        : '***';
+    final refreshPreview = refreshToken != null && refreshToken!.length > 10
+        ? '${refreshToken!.substring(0, 10)}...'
+        : '***';
+    return 'TokenPair(accessToken: $accessPreview, refreshToken: $refreshPreview)';
+  }
 }
 
 /// Manages access and refresh tokens with automatic persistence.
 ///
-/// This class provides a centralized way to manage authentication tokens,
-/// including automatic persistence to storage and expiry checking.
+/// This class provides a centralized way to manage authentication tokens:
+/// - Automatic persistence to storage
+/// - Expiry checking with configurable buffer
+/// - Reactive refresh on 401 (triggered by interceptor)
+/// - Concurrent refresh prevention (multiple 401s wait for single refresh)
+/// - Permanent error detection for re-authentication
 ///
 /// ## Usage
 ///
@@ -42,28 +70,27 @@ class TokenPair {
 ///     final accessToken = await secureStorage.read(key: 'access_token');
 ///     final refreshToken = await secureStorage.read(key: 'refresh_token');
 ///     if (accessToken != null) {
-///       return TokenPair(
-///         accessToken: accessToken,
-///         refreshToken: refreshToken,
-///       );
+///       return TokenPair(accessToken: accessToken, refreshToken: refreshToken);
 ///     }
 ///     return null;
+///   },
+///   onRefreshToken: (refreshToken) async {
+///     final response = await authClient.refreshToken(refreshToken);
+///     return response.accessToken;
+///   },
+///   onLogout: () async {
+///     // Handle logout - navigate to login screen
 ///   },
 /// );
 ///
 /// // Initialize from storage
 /// await tokenManager.initialize();
 ///
-/// // Set tokens
+/// // Set tokens after login
 /// await tokenManager.setTokens(
 ///   accessToken: 'new_access_token',
 ///   refreshToken: 'new_refresh_token',
 /// );
-///
-/// // Check if token is valid
-/// if (tokenManager.isAccessTokenExpired()) {
-///   // Refresh token...
-/// }
 /// ```
 class TokenManager {
   String? _accessToken;
@@ -71,6 +98,8 @@ class TokenManager {
   
   final TokenPersistCallback? persistTokens;
   final TokenLoadCallback? loadTokens;
+  final TokenRefreshCallback? onRefreshToken;
+  final LogoutCallback? onLogout;
   
   /// Duration before expiry to consider a token expired.
   /// Default is 5 minutes to prevent race conditions.
@@ -78,10 +107,15 @@ class TokenManager {
 
   /// Stream controller for token changes
   final _tokenChangedController = StreamController<TokenPair?>.broadcast();
+  
+  /// Completer for concurrent refresh prevention - all callers wait on same refresh
+  Completer<TokenRefreshResult>? _refreshCompleter;
 
   TokenManager({
     this.persistTokens,
     this.loadTokens,
+    this.onRefreshToken,
+    this.onLogout,
     this.expiryBuffer = const Duration(minutes: 5),
   });
 
@@ -93,7 +127,7 @@ class TokenManager {
   String? get accessToken => _accessToken;
 
   /// Gets the current refresh token.
-  String? get refreshToken => _refreshToken;
+  String? get currentRefreshToken => _refreshToken;
 
   /// Gets both tokens as a pair.
   TokenPair? get tokens {
@@ -203,6 +237,110 @@ class TokenManager {
     if (persistTokens != null) {
       await persistTokens!(null, null);
     }
+  }
+
+  // ============================================================================
+  // Token Refresh (triggered by 401 from interceptor)
+  // ============================================================================
+
+  /// Refreshes the access token.
+  /// 
+  /// This method:
+  /// - Prevents concurrent refresh attempts (all callers wait for same refresh)
+  /// - Triggers logout on permanent errors (invalid/expired refresh token)
+  /// 
+  /// Returns the result of the refresh operation.
+  Future<TokenRefreshResult> performRefresh() async {
+    // Prevent concurrent refresh attempts - all callers wait on the same refresh
+    if (_refreshCompleter != null && !_refreshCompleter!.isCompleted) {
+      return await _refreshCompleter!.future;
+    }
+    
+    _refreshCompleter = Completer<TokenRefreshResult>();
+    
+    try {
+      final result = await _doRefresh();
+      _refreshCompleter!.complete(result);
+      return result;
+    } catch (e) {
+      final result = TokenRefreshResult.transientError;
+      _refreshCompleter!.complete(result);
+      return result;
+    }
+  }
+
+  /// Performs the actual token refresh with error handling.
+  Future<TokenRefreshResult> _doRefresh() async {
+    if (onRefreshToken == null) {
+      return TokenRefreshResult.transientError;
+    }
+    
+    if (_refreshToken == null) {
+      await _handlePermanentError('No refresh token available');
+      return TokenRefreshResult.permanentError;
+    }
+    
+    try {
+      final newAccessToken = await onRefreshToken!(_refreshToken);
+      
+      if (newAccessToken.isEmpty) {
+        await _handlePermanentError('Refresh returned empty token');
+        return TokenRefreshResult.permanentError;
+      }
+      
+      // Success - update token
+      await setAccessToken(newAccessToken);
+      return TokenRefreshResult.success;
+      
+    } on TimeoutException {
+      return TokenRefreshResult.transientError;
+    } catch (e) {
+      final errorStr = e.toString().toLowerCase();
+      
+      if (_isPermanentError(errorStr)) {
+        await _handlePermanentError(e.toString());
+        return TokenRefreshResult.permanentError;
+      }
+      return TokenRefreshResult.transientError;
+    }
+  }
+
+  /// Checks if an error is permanent (requires re-authentication).
+  bool _isPermanentError(String errorStr) {
+    return errorStr.contains('invalid_grant') ||
+        errorStr.contains('invalid_token') ||
+        errorStr.contains('expired') ||
+        errorStr.contains('revoked') ||
+        errorStr.contains('invalid_client') ||
+        errorStr.contains('unauthorized_client') ||
+        errorStr.contains('access_denied') ||
+        errorStr.contains('invalid refresh token') ||
+        errorStr.contains('refresh token expired');
+  }
+
+  /// Handles permanent errors by clearing tokens and triggering logout.
+  Future<void> _handlePermanentError(String error) async {
+    await clearTokens();
+    
+    if (onLogout != null) {
+      await onLogout!();
+    }
+  }
+
+  /// Ensures a valid token is available, refreshing if needed.
+  /// 
+  /// Returns the access token if valid, null if refresh failed.
+  Future<String?> ensureValidToken() async {
+    if (!isAccessTokenExpired()) {
+      return _accessToken;
+    }
+    
+    final result = await performRefresh();
+    if (result == TokenRefreshResult.success) {
+      return _accessToken;
+    }
+    
+    return null;
   }
 
   /// Disposes of the token manager and closes streams.
