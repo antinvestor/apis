@@ -1,9 +1,7 @@
 import 'dart:async';
 import 'package:connectrpc/connect.dart';
 
-/// Callback type for refreshing tokens.
-/// Should return a new access token or throw an exception if refresh fails.
-typedef TokenRefreshCallback = Future<String> Function(String? refreshToken);
+import 'token_manager.dart';
 
 /// Callback type for checking if a token is expired.
 /// Returns true if the token is expired or about to expire.

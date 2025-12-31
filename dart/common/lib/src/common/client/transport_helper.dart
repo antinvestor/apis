@@ -106,7 +106,7 @@ class TransportHelper {
   }) {
     final tokenRefreshInterceptor = createTokenRefreshInterceptor(
       getAccessToken: () => tokenManager.accessToken,
-      getRefreshToken: () => tokenManager.refreshToken,
+      getRefreshToken: () => tokenManager.currentRefreshToken,
       setAccessToken: (token) => tokenManager.setAccessToken(token),
       isTokenExpired: (token) => JwtUtils.isTokenExpired(token),
       refreshToken: onTokenRefresh,
