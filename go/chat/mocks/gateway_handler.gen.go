@@ -20,12 +20,12 @@ type GatewayServiceClientMock struct {
 	t          minimock.Tester
 	finishOnce sync.Once
 
-	funcConnect          func(ctx context.Context) (pp1 *connect.BidiStreamForClient[v1.ConnectRequest, v1.ConnectResponse])
-	funcConnectOrigin    string
-	inspectFuncConnect   func(ctx context.Context)
-	afterConnectCounter  uint64
-	beforeConnectCounter uint64
-	ConnectMock          mGatewayServiceClientMockConnect
+	funcStream          func(ctx context.Context) (pp1 *connect.BidiStreamForClient[v1.StreamRequest, v1.StreamResponse])
+	funcStreamOrigin    string
+	inspectFuncStream   func(ctx context.Context)
+	afterStreamCounter  uint64
+	beforeStreamCounter uint64
+	StreamMock          mGatewayServiceClientMockStream
 }
 
 // NewGatewayServiceClientMock returns a mock for mm_chatv1connect.GatewayServiceClient
@@ -36,55 +36,55 @@ func NewGatewayServiceClientMock(t minimock.Tester) *GatewayServiceClientMock {
 		controller.RegisterMocker(m)
 	}
 
-	m.ConnectMock = mGatewayServiceClientMockConnect{mock: m}
-	m.ConnectMock.callArgs = []*GatewayServiceClientMockConnectParams{}
+	m.StreamMock = mGatewayServiceClientMockStream{mock: m}
+	m.StreamMock.callArgs = []*GatewayServiceClientMockStreamParams{}
 
 	t.Cleanup(m.MinimockFinish)
 
 	return m
 }
 
-type mGatewayServiceClientMockConnect struct {
+type mGatewayServiceClientMockStream struct {
 	optional           bool
 	mock               *GatewayServiceClientMock
-	defaultExpectation *GatewayServiceClientMockConnectExpectation
-	expectations       []*GatewayServiceClientMockConnectExpectation
+	defaultExpectation *GatewayServiceClientMockStreamExpectation
+	expectations       []*GatewayServiceClientMockStreamExpectation
 
-	callArgs []*GatewayServiceClientMockConnectParams
+	callArgs []*GatewayServiceClientMockStreamParams
 	mutex    sync.RWMutex
 
 	expectedInvocations       uint64
 	expectedInvocationsOrigin string
 }
 
-// GatewayServiceClientMockConnectExpectation specifies expectation struct of the GatewayServiceClient.Connect
-type GatewayServiceClientMockConnectExpectation struct {
+// GatewayServiceClientMockStreamExpectation specifies expectation struct of the GatewayServiceClient.Stream
+type GatewayServiceClientMockStreamExpectation struct {
 	mock               *GatewayServiceClientMock
-	params             *GatewayServiceClientMockConnectParams
-	paramPtrs          *GatewayServiceClientMockConnectParamPtrs
-	expectationOrigins GatewayServiceClientMockConnectExpectationOrigins
-	results            *GatewayServiceClientMockConnectResults
+	params             *GatewayServiceClientMockStreamParams
+	paramPtrs          *GatewayServiceClientMockStreamParamPtrs
+	expectationOrigins GatewayServiceClientMockStreamExpectationOrigins
+	results            *GatewayServiceClientMockStreamResults
 	returnOrigin       string
 	Counter            uint64
 }
 
-// GatewayServiceClientMockConnectParams contains parameters of the GatewayServiceClient.Connect
-type GatewayServiceClientMockConnectParams struct {
+// GatewayServiceClientMockStreamParams contains parameters of the GatewayServiceClient.Stream
+type GatewayServiceClientMockStreamParams struct {
 	ctx context.Context
 }
 
-// GatewayServiceClientMockConnectParamPtrs contains pointers to parameters of the GatewayServiceClient.Connect
-type GatewayServiceClientMockConnectParamPtrs struct {
+// GatewayServiceClientMockStreamParamPtrs contains pointers to parameters of the GatewayServiceClient.Stream
+type GatewayServiceClientMockStreamParamPtrs struct {
 	ctx *context.Context
 }
 
-// GatewayServiceClientMockConnectResults contains results of the GatewayServiceClient.Connect
-type GatewayServiceClientMockConnectResults struct {
-	pp1 *connect.BidiStreamForClient[v1.ConnectRequest, v1.ConnectResponse]
+// GatewayServiceClientMockStreamResults contains results of the GatewayServiceClient.Stream
+type GatewayServiceClientMockStreamResults struct {
+	pp1 *connect.BidiStreamForClient[v1.StreamRequest, v1.StreamResponse]
 }
 
-// GatewayServiceClientMockConnectOrigins contains origins of expectations of the GatewayServiceClient.Connect
-type GatewayServiceClientMockConnectExpectationOrigins struct {
+// GatewayServiceClientMockStreamOrigins contains origins of expectations of the GatewayServiceClient.Stream
+type GatewayServiceClientMockStreamExpectationOrigins struct {
 	origin    string
 	originCtx string
 }
@@ -94,264 +94,264 @@ type GatewayServiceClientMockConnectExpectationOrigins struct {
 // Optional() makes method check to work in '0 or more' mode.
 // It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
 // catch the problems when the expected method call is totally skipped during test run.
-func (mmConnect *mGatewayServiceClientMockConnect) Optional() *mGatewayServiceClientMockConnect {
-	mmConnect.optional = true
-	return mmConnect
+func (mmStream *mGatewayServiceClientMockStream) Optional() *mGatewayServiceClientMockStream {
+	mmStream.optional = true
+	return mmStream
 }
 
-// Expect sets up expected params for GatewayServiceClient.Connect
-func (mmConnect *mGatewayServiceClientMockConnect) Expect(ctx context.Context) *mGatewayServiceClientMockConnect {
-	if mmConnect.mock.funcConnect != nil {
-		mmConnect.mock.t.Fatalf("GatewayServiceClientMock.Connect mock is already set by Set")
+// Expect sets up expected params for GatewayServiceClient.Stream
+func (mmStream *mGatewayServiceClientMockStream) Expect(ctx context.Context) *mGatewayServiceClientMockStream {
+	if mmStream.mock.funcStream != nil {
+		mmStream.mock.t.Fatalf("GatewayServiceClientMock.Stream mock is already set by Set")
 	}
 
-	if mmConnect.defaultExpectation == nil {
-		mmConnect.defaultExpectation = &GatewayServiceClientMockConnectExpectation{}
+	if mmStream.defaultExpectation == nil {
+		mmStream.defaultExpectation = &GatewayServiceClientMockStreamExpectation{}
 	}
 
-	if mmConnect.defaultExpectation.paramPtrs != nil {
-		mmConnect.mock.t.Fatalf("GatewayServiceClientMock.Connect mock is already set by ExpectParams functions")
+	if mmStream.defaultExpectation.paramPtrs != nil {
+		mmStream.mock.t.Fatalf("GatewayServiceClientMock.Stream mock is already set by ExpectParams functions")
 	}
 
-	mmConnect.defaultExpectation.params = &GatewayServiceClientMockConnectParams{ctx}
-	mmConnect.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
-	for _, e := range mmConnect.expectations {
-		if minimock.Equal(e.params, mmConnect.defaultExpectation.params) {
-			mmConnect.mock.t.Fatalf("Expectation set by When has same params: %#v", *mmConnect.defaultExpectation.params)
+	mmStream.defaultExpectation.params = &GatewayServiceClientMockStreamParams{ctx}
+	mmStream.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
+	for _, e := range mmStream.expectations {
+		if minimock.Equal(e.params, mmStream.defaultExpectation.params) {
+			mmStream.mock.t.Fatalf("Expectation set by When has same params: %#v", *mmStream.defaultExpectation.params)
 		}
 	}
 
-	return mmConnect
+	return mmStream
 }
 
-// ExpectCtxParam1 sets up expected param ctx for GatewayServiceClient.Connect
-func (mmConnect *mGatewayServiceClientMockConnect) ExpectCtxParam1(ctx context.Context) *mGatewayServiceClientMockConnect {
-	if mmConnect.mock.funcConnect != nil {
-		mmConnect.mock.t.Fatalf("GatewayServiceClientMock.Connect mock is already set by Set")
+// ExpectCtxParam1 sets up expected param ctx for GatewayServiceClient.Stream
+func (mmStream *mGatewayServiceClientMockStream) ExpectCtxParam1(ctx context.Context) *mGatewayServiceClientMockStream {
+	if mmStream.mock.funcStream != nil {
+		mmStream.mock.t.Fatalf("GatewayServiceClientMock.Stream mock is already set by Set")
 	}
 
-	if mmConnect.defaultExpectation == nil {
-		mmConnect.defaultExpectation = &GatewayServiceClientMockConnectExpectation{}
+	if mmStream.defaultExpectation == nil {
+		mmStream.defaultExpectation = &GatewayServiceClientMockStreamExpectation{}
 	}
 
-	if mmConnect.defaultExpectation.params != nil {
-		mmConnect.mock.t.Fatalf("GatewayServiceClientMock.Connect mock is already set by Expect")
+	if mmStream.defaultExpectation.params != nil {
+		mmStream.mock.t.Fatalf("GatewayServiceClientMock.Stream mock is already set by Expect")
 	}
 
-	if mmConnect.defaultExpectation.paramPtrs == nil {
-		mmConnect.defaultExpectation.paramPtrs = &GatewayServiceClientMockConnectParamPtrs{}
+	if mmStream.defaultExpectation.paramPtrs == nil {
+		mmStream.defaultExpectation.paramPtrs = &GatewayServiceClientMockStreamParamPtrs{}
 	}
-	mmConnect.defaultExpectation.paramPtrs.ctx = &ctx
-	mmConnect.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
+	mmStream.defaultExpectation.paramPtrs.ctx = &ctx
+	mmStream.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
 
-	return mmConnect
+	return mmStream
 }
 
-// Inspect accepts an inspector function that has same arguments as the GatewayServiceClient.Connect
-func (mmConnect *mGatewayServiceClientMockConnect) Inspect(f func(ctx context.Context)) *mGatewayServiceClientMockConnect {
-	if mmConnect.mock.inspectFuncConnect != nil {
-		mmConnect.mock.t.Fatalf("Inspect function is already set for GatewayServiceClientMock.Connect")
+// Inspect accepts an inspector function that has same arguments as the GatewayServiceClient.Stream
+func (mmStream *mGatewayServiceClientMockStream) Inspect(f func(ctx context.Context)) *mGatewayServiceClientMockStream {
+	if mmStream.mock.inspectFuncStream != nil {
+		mmStream.mock.t.Fatalf("Inspect function is already set for GatewayServiceClientMock.Stream")
 	}
 
-	mmConnect.mock.inspectFuncConnect = f
+	mmStream.mock.inspectFuncStream = f
 
-	return mmConnect
+	return mmStream
 }
 
-// Return sets up results that will be returned by GatewayServiceClient.Connect
-func (mmConnect *mGatewayServiceClientMockConnect) Return(pp1 *connect.BidiStreamForClient[v1.ConnectRequest, v1.ConnectResponse]) *GatewayServiceClientMock {
-	if mmConnect.mock.funcConnect != nil {
-		mmConnect.mock.t.Fatalf("GatewayServiceClientMock.Connect mock is already set by Set")
+// Return sets up results that will be returned by GatewayServiceClient.Stream
+func (mmStream *mGatewayServiceClientMockStream) Return(pp1 *connect.BidiStreamForClient[v1.StreamRequest, v1.StreamResponse]) *GatewayServiceClientMock {
+	if mmStream.mock.funcStream != nil {
+		mmStream.mock.t.Fatalf("GatewayServiceClientMock.Stream mock is already set by Set")
 	}
 
-	if mmConnect.defaultExpectation == nil {
-		mmConnect.defaultExpectation = &GatewayServiceClientMockConnectExpectation{mock: mmConnect.mock}
+	if mmStream.defaultExpectation == nil {
+		mmStream.defaultExpectation = &GatewayServiceClientMockStreamExpectation{mock: mmStream.mock}
 	}
-	mmConnect.defaultExpectation.results = &GatewayServiceClientMockConnectResults{pp1}
-	mmConnect.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
-	return mmConnect.mock
+	mmStream.defaultExpectation.results = &GatewayServiceClientMockStreamResults{pp1}
+	mmStream.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
+	return mmStream.mock
 }
 
-// Set uses given function f to mock the GatewayServiceClient.Connect method
-func (mmConnect *mGatewayServiceClientMockConnect) Set(f func(ctx context.Context) (pp1 *connect.BidiStreamForClient[v1.ConnectRequest, v1.ConnectResponse])) *GatewayServiceClientMock {
-	if mmConnect.defaultExpectation != nil {
-		mmConnect.mock.t.Fatalf("Default expectation is already set for the GatewayServiceClient.Connect method")
+// Set uses given function f to mock the GatewayServiceClient.Stream method
+func (mmStream *mGatewayServiceClientMockStream) Set(f func(ctx context.Context) (pp1 *connect.BidiStreamForClient[v1.StreamRequest, v1.StreamResponse])) *GatewayServiceClientMock {
+	if mmStream.defaultExpectation != nil {
+		mmStream.mock.t.Fatalf("Default expectation is already set for the GatewayServiceClient.Stream method")
 	}
 
-	if len(mmConnect.expectations) > 0 {
-		mmConnect.mock.t.Fatalf("Some expectations are already set for the GatewayServiceClient.Connect method")
+	if len(mmStream.expectations) > 0 {
+		mmStream.mock.t.Fatalf("Some expectations are already set for the GatewayServiceClient.Stream method")
 	}
 
-	mmConnect.mock.funcConnect = f
-	mmConnect.mock.funcConnectOrigin = minimock.CallerInfo(1)
-	return mmConnect.mock
+	mmStream.mock.funcStream = f
+	mmStream.mock.funcStreamOrigin = minimock.CallerInfo(1)
+	return mmStream.mock
 }
 
-// When sets expectation for the GatewayServiceClient.Connect which will trigger the result defined by the following
+// When sets expectation for the GatewayServiceClient.Stream which will trigger the result defined by the following
 // Then helper
-func (mmConnect *mGatewayServiceClientMockConnect) When(ctx context.Context) *GatewayServiceClientMockConnectExpectation {
-	if mmConnect.mock.funcConnect != nil {
-		mmConnect.mock.t.Fatalf("GatewayServiceClientMock.Connect mock is already set by Set")
+func (mmStream *mGatewayServiceClientMockStream) When(ctx context.Context) *GatewayServiceClientMockStreamExpectation {
+	if mmStream.mock.funcStream != nil {
+		mmStream.mock.t.Fatalf("GatewayServiceClientMock.Stream mock is already set by Set")
 	}
 
-	expectation := &GatewayServiceClientMockConnectExpectation{
-		mock:               mmConnect.mock,
-		params:             &GatewayServiceClientMockConnectParams{ctx},
-		expectationOrigins: GatewayServiceClientMockConnectExpectationOrigins{origin: minimock.CallerInfo(1)},
+	expectation := &GatewayServiceClientMockStreamExpectation{
+		mock:               mmStream.mock,
+		params:             &GatewayServiceClientMockStreamParams{ctx},
+		expectationOrigins: GatewayServiceClientMockStreamExpectationOrigins{origin: minimock.CallerInfo(1)},
 	}
-	mmConnect.expectations = append(mmConnect.expectations, expectation)
+	mmStream.expectations = append(mmStream.expectations, expectation)
 	return expectation
 }
 
-// Then sets up GatewayServiceClient.Connect return parameters for the expectation previously defined by the When method
-func (e *GatewayServiceClientMockConnectExpectation) Then(pp1 *connect.BidiStreamForClient[v1.ConnectRequest, v1.ConnectResponse]) *GatewayServiceClientMock {
-	e.results = &GatewayServiceClientMockConnectResults{pp1}
+// Then sets up GatewayServiceClient.Stream return parameters for the expectation previously defined by the When method
+func (e *GatewayServiceClientMockStreamExpectation) Then(pp1 *connect.BidiStreamForClient[v1.StreamRequest, v1.StreamResponse]) *GatewayServiceClientMock {
+	e.results = &GatewayServiceClientMockStreamResults{pp1}
 	return e.mock
 }
 
-// Times sets number of times GatewayServiceClient.Connect should be invoked
-func (mmConnect *mGatewayServiceClientMockConnect) Times(n uint64) *mGatewayServiceClientMockConnect {
+// Times sets number of times GatewayServiceClient.Stream should be invoked
+func (mmStream *mGatewayServiceClientMockStream) Times(n uint64) *mGatewayServiceClientMockStream {
 	if n == 0 {
-		mmConnect.mock.t.Fatalf("Times of GatewayServiceClientMock.Connect mock can not be zero")
+		mmStream.mock.t.Fatalf("Times of GatewayServiceClientMock.Stream mock can not be zero")
 	}
-	mm_atomic.StoreUint64(&mmConnect.expectedInvocations, n)
-	mmConnect.expectedInvocationsOrigin = minimock.CallerInfo(1)
-	return mmConnect
+	mm_atomic.StoreUint64(&mmStream.expectedInvocations, n)
+	mmStream.expectedInvocationsOrigin = minimock.CallerInfo(1)
+	return mmStream
 }
 
-func (mmConnect *mGatewayServiceClientMockConnect) invocationsDone() bool {
-	if len(mmConnect.expectations) == 0 && mmConnect.defaultExpectation == nil && mmConnect.mock.funcConnect == nil {
+func (mmStream *mGatewayServiceClientMockStream) invocationsDone() bool {
+	if len(mmStream.expectations) == 0 && mmStream.defaultExpectation == nil && mmStream.mock.funcStream == nil {
 		return true
 	}
 
-	totalInvocations := mm_atomic.LoadUint64(&mmConnect.mock.afterConnectCounter)
-	expectedInvocations := mm_atomic.LoadUint64(&mmConnect.expectedInvocations)
+	totalInvocations := mm_atomic.LoadUint64(&mmStream.mock.afterStreamCounter)
+	expectedInvocations := mm_atomic.LoadUint64(&mmStream.expectedInvocations)
 
 	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
 }
 
-// Connect implements mm_chatv1connect.GatewayServiceClient
-func (mmConnect *GatewayServiceClientMock) Connect(ctx context.Context) (pp1 *connect.BidiStreamForClient[v1.ConnectRequest, v1.ConnectResponse]) {
-	mm_atomic.AddUint64(&mmConnect.beforeConnectCounter, 1)
-	defer mm_atomic.AddUint64(&mmConnect.afterConnectCounter, 1)
+// Stream implements mm_chatv1connect.GatewayServiceClient
+func (mmStream *GatewayServiceClientMock) Stream(ctx context.Context) (pp1 *connect.BidiStreamForClient[v1.StreamRequest, v1.StreamResponse]) {
+	mm_atomic.AddUint64(&mmStream.beforeStreamCounter, 1)
+	defer mm_atomic.AddUint64(&mmStream.afterStreamCounter, 1)
 
-	mmConnect.t.Helper()
+	mmStream.t.Helper()
 
-	if mmConnect.inspectFuncConnect != nil {
-		mmConnect.inspectFuncConnect(ctx)
+	if mmStream.inspectFuncStream != nil {
+		mmStream.inspectFuncStream(ctx)
 	}
 
-	mm_params := GatewayServiceClientMockConnectParams{ctx}
+	mm_params := GatewayServiceClientMockStreamParams{ctx}
 
 	// Record call args
-	mmConnect.ConnectMock.mutex.Lock()
-	mmConnect.ConnectMock.callArgs = append(mmConnect.ConnectMock.callArgs, &mm_params)
-	mmConnect.ConnectMock.mutex.Unlock()
+	mmStream.StreamMock.mutex.Lock()
+	mmStream.StreamMock.callArgs = append(mmStream.StreamMock.callArgs, &mm_params)
+	mmStream.StreamMock.mutex.Unlock()
 
-	for _, e := range mmConnect.ConnectMock.expectations {
+	for _, e := range mmStream.StreamMock.expectations {
 		if minimock.Equal(*e.params, mm_params) {
 			mm_atomic.AddUint64(&e.Counter, 1)
 			return e.results.pp1
 		}
 	}
 
-	if mmConnect.ConnectMock.defaultExpectation != nil {
-		mm_atomic.AddUint64(&mmConnect.ConnectMock.defaultExpectation.Counter, 1)
-		mm_want := mmConnect.ConnectMock.defaultExpectation.params
-		mm_want_ptrs := mmConnect.ConnectMock.defaultExpectation.paramPtrs
+	if mmStream.StreamMock.defaultExpectation != nil {
+		mm_atomic.AddUint64(&mmStream.StreamMock.defaultExpectation.Counter, 1)
+		mm_want := mmStream.StreamMock.defaultExpectation.params
+		mm_want_ptrs := mmStream.StreamMock.defaultExpectation.paramPtrs
 
-		mm_got := GatewayServiceClientMockConnectParams{ctx}
+		mm_got := GatewayServiceClientMockStreamParams{ctx}
 
 		if mm_want_ptrs != nil {
 
 			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
-				mmConnect.t.Errorf("GatewayServiceClientMock.Connect got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
-					mmConnect.ConnectMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
+				mmStream.t.Errorf("GatewayServiceClientMock.Stream got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+					mmStream.StreamMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
 			}
 
 		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
-			mmConnect.t.Errorf("GatewayServiceClientMock.Connect got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
-				mmConnect.ConnectMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
+			mmStream.t.Errorf("GatewayServiceClientMock.Stream got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmStream.StreamMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
 		}
 
-		mm_results := mmConnect.ConnectMock.defaultExpectation.results
+		mm_results := mmStream.StreamMock.defaultExpectation.results
 		if mm_results == nil {
-			mmConnect.t.Fatal("No results are set for the GatewayServiceClientMock.Connect")
+			mmStream.t.Fatal("No results are set for the GatewayServiceClientMock.Stream")
 		}
 		return (*mm_results).pp1
 	}
-	if mmConnect.funcConnect != nil {
-		return mmConnect.funcConnect(ctx)
+	if mmStream.funcStream != nil {
+		return mmStream.funcStream(ctx)
 	}
-	mmConnect.t.Fatalf("Unexpected call to GatewayServiceClientMock.Connect. %v", ctx)
+	mmStream.t.Fatalf("Unexpected call to GatewayServiceClientMock.Stream. %v", ctx)
 	return
 }
 
-// ConnectAfterCounter returns a count of finished GatewayServiceClientMock.Connect invocations
-func (mmConnect *GatewayServiceClientMock) ConnectAfterCounter() uint64 {
-	return mm_atomic.LoadUint64(&mmConnect.afterConnectCounter)
+// StreamAfterCounter returns a count of finished GatewayServiceClientMock.Stream invocations
+func (mmStream *GatewayServiceClientMock) StreamAfterCounter() uint64 {
+	return mm_atomic.LoadUint64(&mmStream.afterStreamCounter)
 }
 
-// ConnectBeforeCounter returns a count of GatewayServiceClientMock.Connect invocations
-func (mmConnect *GatewayServiceClientMock) ConnectBeforeCounter() uint64 {
-	return mm_atomic.LoadUint64(&mmConnect.beforeConnectCounter)
+// StreamBeforeCounter returns a count of GatewayServiceClientMock.Stream invocations
+func (mmStream *GatewayServiceClientMock) StreamBeforeCounter() uint64 {
+	return mm_atomic.LoadUint64(&mmStream.beforeStreamCounter)
 }
 
-// Calls returns a list of arguments used in each call to GatewayServiceClientMock.Connect.
+// Calls returns a list of arguments used in each call to GatewayServiceClientMock.Stream.
 // The list is in the same order as the calls were made (i.e. recent calls have a higher index)
-func (mmConnect *mGatewayServiceClientMockConnect) Calls() []*GatewayServiceClientMockConnectParams {
-	mmConnect.mutex.RLock()
+func (mmStream *mGatewayServiceClientMockStream) Calls() []*GatewayServiceClientMockStreamParams {
+	mmStream.mutex.RLock()
 
-	argCopy := make([]*GatewayServiceClientMockConnectParams, len(mmConnect.callArgs))
-	copy(argCopy, mmConnect.callArgs)
+	argCopy := make([]*GatewayServiceClientMockStreamParams, len(mmStream.callArgs))
+	copy(argCopy, mmStream.callArgs)
 
-	mmConnect.mutex.RUnlock()
+	mmStream.mutex.RUnlock()
 
 	return argCopy
 }
 
-// MinimockConnectDone returns true if the count of the Connect invocations corresponds
+// MinimockStreamDone returns true if the count of the Stream invocations corresponds
 // the number of defined expectations
-func (m *GatewayServiceClientMock) MinimockConnectDone() bool {
-	if m.ConnectMock.optional {
+func (m *GatewayServiceClientMock) MinimockStreamDone() bool {
+	if m.StreamMock.optional {
 		// Optional methods provide '0 or more' call count restriction.
 		return true
 	}
 
-	for _, e := range m.ConnectMock.expectations {
+	for _, e := range m.StreamMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
 			return false
 		}
 	}
 
-	return m.ConnectMock.invocationsDone()
+	return m.StreamMock.invocationsDone()
 }
 
-// MinimockConnectInspect logs each unmet expectation
-func (m *GatewayServiceClientMock) MinimockConnectInspect() {
-	for _, e := range m.ConnectMock.expectations {
+// MinimockStreamInspect logs each unmet expectation
+func (m *GatewayServiceClientMock) MinimockStreamInspect() {
+	for _, e := range m.StreamMock.expectations {
 		if mm_atomic.LoadUint64(&e.Counter) < 1 {
-			m.t.Errorf("Expected call to GatewayServiceClientMock.Connect at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+			m.t.Errorf("Expected call to GatewayServiceClientMock.Stream at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
 		}
 	}
 
-	afterConnectCounter := mm_atomic.LoadUint64(&m.afterConnectCounter)
+	afterStreamCounter := mm_atomic.LoadUint64(&m.afterStreamCounter)
 	// if default expectation was set then invocations count should be greater than zero
-	if m.ConnectMock.defaultExpectation != nil && afterConnectCounter < 1 {
-		if m.ConnectMock.defaultExpectation.params == nil {
-			m.t.Errorf("Expected call to GatewayServiceClientMock.Connect at\n%s", m.ConnectMock.defaultExpectation.returnOrigin)
+	if m.StreamMock.defaultExpectation != nil && afterStreamCounter < 1 {
+		if m.StreamMock.defaultExpectation.params == nil {
+			m.t.Errorf("Expected call to GatewayServiceClientMock.Stream at\n%s", m.StreamMock.defaultExpectation.returnOrigin)
 		} else {
-			m.t.Errorf("Expected call to GatewayServiceClientMock.Connect at\n%s with params: %#v", m.ConnectMock.defaultExpectation.expectationOrigins.origin, *m.ConnectMock.defaultExpectation.params)
+			m.t.Errorf("Expected call to GatewayServiceClientMock.Stream at\n%s with params: %#v", m.StreamMock.defaultExpectation.expectationOrigins.origin, *m.StreamMock.defaultExpectation.params)
 		}
 	}
 	// if func was set then invocations count should be greater than zero
-	if m.funcConnect != nil && afterConnectCounter < 1 {
-		m.t.Errorf("Expected call to GatewayServiceClientMock.Connect at\n%s", m.funcConnectOrigin)
+	if m.funcStream != nil && afterStreamCounter < 1 {
+		m.t.Errorf("Expected call to GatewayServiceClientMock.Stream at\n%s", m.funcStreamOrigin)
 	}
 
-	if !m.ConnectMock.invocationsDone() && afterConnectCounter > 0 {
-		m.t.Errorf("Expected %d calls to GatewayServiceClientMock.Connect at\n%s but found %d calls",
-			mm_atomic.LoadUint64(&m.ConnectMock.expectedInvocations), m.ConnectMock.expectedInvocationsOrigin, afterConnectCounter)
+	if !m.StreamMock.invocationsDone() && afterStreamCounter > 0 {
+		m.t.Errorf("Expected %d calls to GatewayServiceClientMock.Stream at\n%s but found %d calls",
+			mm_atomic.LoadUint64(&m.StreamMock.expectedInvocations), m.StreamMock.expectedInvocationsOrigin, afterStreamCounter)
 	}
 }
 
@@ -359,7 +359,7 @@ func (m *GatewayServiceClientMock) MinimockConnectInspect() {
 func (m *GatewayServiceClientMock) MinimockFinish() {
 	m.finishOnce.Do(func() {
 		if !m.minimockDone() {
-			m.MinimockConnectInspect()
+			m.MinimockStreamInspect()
 		}
 	})
 }
@@ -383,5 +383,5 @@ func (m *GatewayServiceClientMock) MinimockWait(timeout mm_time.Duration) {
 func (m *GatewayServiceClientMock) minimockDone() bool {
 	done := true
 	return done &&
-		m.MinimockConnectDone()
+		m.MinimockStreamDone()
 }

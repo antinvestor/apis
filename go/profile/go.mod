@@ -3,10 +3,10 @@ module github.com/antinvestor/apis/go/profile
 go 1.25
 
 require (
-	buf.build/gen/go/antinvestor/profile/connectrpc/go v1.19.1-20251223175732-871950e3974b.2
-	buf.build/gen/go/antinvestor/profile/protocolbuffers/go v1.36.11-20251223175732-871950e3974b.1
+	buf.build/gen/go/antinvestor/profile/connectrpc/go v1.19.1-20251226160839-4d56a3006d66.2
+	buf.build/gen/go/antinvestor/profile/protocolbuffers/go v1.36.11-20251226160839-4d56a3006d66.1
 	connectrpc.com/connect v1.19.1
-	github.com/antinvestor/apis/go/common v1.51.0
+	github.com/antinvestor/apis/go/common v1.51.10
 	github.com/gojuno/minimock/v3 v3.4.7
 )
 
@@ -20,7 +20,7 @@ require (
 	github.com/go-logr/logr v1.4.3 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/lmittmann/tint v1.1.2 // indirect
-	github.com/pitabwire/util v0.3.8 // indirect
+	github.com/pitabwire/util v0.3.9 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/rs/xid v1.6.0 // indirect
 	go.opentelemetry.io/auto/sdk v1.2.1 // indirect
