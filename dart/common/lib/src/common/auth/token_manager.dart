@@ -306,16 +306,21 @@ class TokenManager {
   }
 
   /// Checks if an error is permanent (requires re-authentication).
+  /// Note: We must be careful not to flag access token expiry as permanent.
+  /// Only refresh token issues should be considered permanent.
   bool _isPermanentError(String errorStr) {
+    // These indicate the refresh token itself is invalid/expired
     return errorStr.contains('invalid_grant') ||
-        errorStr.contains('invalid_token') ||
-        errorStr.contains('expired') ||
-        errorStr.contains('revoked') ||
         errorStr.contains('invalid_client') ||
         errorStr.contains('unauthorized_client') ||
         errorStr.contains('access_denied') ||
         errorStr.contains('invalid refresh token') ||
-        errorStr.contains('refresh token expired');
+        errorStr.contains('refresh token expired') ||
+        errorStr.contains('refresh token is invalid') ||
+        errorStr.contains('refresh token has been revoked') ||
+        errorStr.contains('token has been revoked');
+    // Note: Removed 'expired', 'invalid_token', 'revoked' as standalone
+    // because these can refer to the access token, not the refresh token
   }
 
   /// Handles permanent errors by clearing tokens and triggering logout.
