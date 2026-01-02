@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.51.13] - 2025-1-2
+
+### Changed
+
+- Improve the members object used in the room model
+
 ## [1.51.12] - 2025-12-31
 
 ### Changed

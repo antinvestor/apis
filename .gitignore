@@ -197,3 +197,9 @@ java/files/.github
 
 
 gen/go
+
+java/*/bin/
+java/*/lib/
+java/*/target/
+java/*/build/
+java/*/out/

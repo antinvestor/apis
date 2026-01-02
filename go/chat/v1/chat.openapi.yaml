@@ -693,7 +693,7 @@ components:
         members:
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/common.v1.ContactLink'
           title: members
           description: optional
         metadata:
@@ -885,7 +885,6 @@ components:
             maxLength: 40
             minLength: 3
             pattern: '[0-9a-z_-]{3,40}'
-            minItems: 1
           title: event_id
           minItems: 1
       title: ReceiptEvent
@@ -997,7 +996,9 @@ components:
           type: boolean
           title: redacted
         parentId:
-          type: string
+          type:
+            - string
+            - "null"
           title: parent_id
           maxLength: 40
           minLength: 3
@@ -1407,6 +1408,61 @@ components:
           $ref: '#/components/schemas/common.v1.ErrorDetail'
       title: UpdateSubscriptionRoleResponse
       additionalProperties: false
+    common.v1.ContactLink:
+      type: object
+      properties:
+        profileName:
+          type: string
+          title: profile_name
+          maxLength: 250
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,250}'
+          description: Display name of the profile
+        profileType:
+          type: string
+          title: profile_type
+          maxLength: 250
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,250}'
+          description: Type of profile (e.g., "user", "organization", "service")
+        profileId:
+          type: string
+          title: profile_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+          description: Unique identifier of the profile
+        profileImageId:
+          type: string
+          title: profile_image_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+          description: Identifier of the profile's image/avatar
+        contactId:
+          type: string
+          title: contact_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+          description: Unique identifier of the contact
+        detail:
+          type: string
+          title: detail
+          maxLength: 250
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,250}'
+          description: Additional contact details (e.g., email, phone, handle)
+        extras:
+          title: extras
+          description: Extended metadata for the contact link
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: ContactLink
+      additionalProperties: false
+      description: |-
+        ContactLink represents a link between a contact and a profile in the system.
+         Used for associating external contacts with internal profiles across services.
+         This enables unified identity management and contact resolution.
     common.v1.ErrorDetail:
       type: object
       properties:

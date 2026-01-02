@@ -481,7 +481,7 @@ message CreateRoomRequest {
   ];
   string description = 5;
   bool is_private = 6;
-  repeated string members = 7; // optional
+  repeated common.v1.ContactLink members = 7; // optional
   google.protobuf.Struct metadata = 8;
 }
 

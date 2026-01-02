@@ -1545,7 +1545,7 @@ class CreateRoomRequest extends $pb.GeneratedMessage {
     $core.String? name,
     $core.String? description,
     $core.bool? isPrivate,
-    $core.Iterable<$core.String>? members,
+    $core.Iterable<$2.ContactLink>? members,
     $1.Struct? metadata,
   }) {
     final $result = create();
@@ -1578,7 +1578,7 @@ class CreateRoomRequest extends $pb.GeneratedMessage {
     ..aOS(4, _omitFieldNames ? '' : 'name')
     ..aOS(5, _omitFieldNames ? '' : 'description')
     ..aOB(6, _omitFieldNames ? '' : 'isPrivate')
-    ..pPS(7, _omitFieldNames ? '' : 'members')
+    ..pc<$2.ContactLink>(7, _omitFieldNames ? '' : 'members', $pb.PbFieldType.PM, subBuilder: $2.ContactLink.create)
     ..aOM<$1.Struct>(8, _omitFieldNames ? '' : 'metadata', subBuilder: $1.Struct.create)
     ..hasRequiredFields = false
   ;
@@ -1641,7 +1641,7 @@ class CreateRoomRequest extends $pb.GeneratedMessage {
   void clearIsPrivate() => clearField(6);
 
   @$pb.TagNumber(7)
-  $core.List<$core.String> get members => $_getList(4);
+  $core.List<$2.ContactLink> get members => $_getList(4);
 
   @$pb.TagNumber(8)
   $1.Struct get metadata => $_getN(5);

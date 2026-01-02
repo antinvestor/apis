@@ -365,7 +365,7 @@ const CreateRoomRequest$json = {
     {'1': 'name', '3': 4, '4': 1, '5': 9, '8': {}, '10': 'name'},
     {'1': 'description', '3': 5, '4': 1, '5': 9, '10': 'description'},
     {'1': 'is_private', '3': 6, '4': 1, '5': 8, '10': 'isPrivate'},
-    {'1': 'members', '3': 7, '4': 3, '5': 9, '10': 'members'},
+    {'1': 'members', '3': 7, '4': 3, '5': 11, '6': '.common.v1.ContactLink', '10': 'members'},
     {'1': 'metadata', '3': 8, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'metadata'},
   ],
 };
@@ -374,9 +374,9 @@ const CreateRoomRequest$json = {
 final $typed_data.Uint8List createRoomRequestDescriptor = $convert.base64Decode(
     'ChFDcmVhdGVSb29tUmVxdWVzdBIrCgJpZBgDIAEoCUIbukgYchYQAxgoMhBbMC05YS16Xy1dez'
     'MsNDB9UgJpZBIeCgRuYW1lGAQgASgJQgq6SAdyBRACGMgBUgRuYW1lEiAKC2Rlc2NyaXB0aW9u'
-    'GAUgASgJUgtkZXNjcmlwdGlvbhIdCgppc19wcml2YXRlGAYgASgIUglpc1ByaXZhdGUSGAoHbW'
-    'VtYmVycxgHIAMoCVIHbWVtYmVycxIzCghtZXRhZGF0YRgIIAEoCzIXLmdvb2dsZS5wcm90b2J1'
-    'Zi5TdHJ1Y3RSCG1ldGFkYXRh');
+    'GAUgASgJUgtkZXNjcmlwdGlvbhIdCgppc19wcml2YXRlGAYgASgIUglpc1ByaXZhdGUSMAoHbW'
+    'VtYmVycxgHIAMoCzIWLmNvbW1vbi52MS5Db250YWN0TGlua1IHbWVtYmVycxIzCghtZXRhZGF0'
+    'YRgIIAEoCzIXLmdvb2dsZS5wcm90b2J1Zi5TdHJ1Y3RSCG1ldGFkYXRh');
 
 @$core.Deprecated('Use createRoomResponseDescriptor instead')
 const CreateRoomResponse$json = {
@@ -803,6 +803,7 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> ChatServic
   '.chat.v1.ReadMarker': ReadMarker$json,
   '.chat.v1.TypingEvent': TypingEvent$json,
   '.chat.v1.CreateRoomRequest': CreateRoomRequest$json,
+  '.common.v1.ContactLink': $2.ContactLink$json,
   '.chat.v1.CreateRoomResponse': CreateRoomResponse$json,
   '.chat.v1.Room': Room$json,
   '.chat.v1.SearchRoomsRequest': SearchRoomsRequest$json,

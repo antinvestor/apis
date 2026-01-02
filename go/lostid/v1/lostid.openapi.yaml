@@ -556,8 +556,6 @@ components:
             maxLength: 40
             minLength: 3
             pattern: '[0-9a-z_-]{3,20}'
-            maxItems: 5
-            minItems: 1
           title: file_id
           maxItems: 5
           minItems: 1
