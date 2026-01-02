@@ -2308,6 +2308,7 @@ class DeleteRoomResponse extends $pb.GeneratedMessage {
 
 class RoomSubscription extends $pb.GeneratedMessage {
   factory RoomSubscription({
+    $core.String? id,
     $core.String? roomId,
     $2.ContactLink? member,
     $core.Iterable<$core.String>? roles,
@@ -2315,6 +2316,9 @@ class RoomSubscription extends $pb.GeneratedMessage {
     $0.Timestamp? lastActive,
   }) {
     final $result = create();
+    if (id != null) {
+      $result.id = id;
+    }
     if (roomId != null) {
       $result.roomId = roomId;
     }
@@ -2337,6 +2341,7 @@ class RoomSubscription extends $pb.GeneratedMessage {
   factory RoomSubscription.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RoomSubscription', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'roomId')
     ..aOM<$2.ContactLink>(3, _omitFieldNames ? '' : 'member', subBuilder: $2.ContactLink.create)
     ..pPS(4, _omitFieldNames ? '' : 'roles')
@@ -2366,50 +2371,59 @@ class RoomSubscription extends $pb.GeneratedMessage {
   static RoomSubscription getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RoomSubscription>(create);
   static RoomSubscription? _defaultInstance;
 
+  @$pb.TagNumber(1)
+  $core.String get id => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set id($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+
   @$pb.TagNumber(2)
-  $core.String get roomId => $_getSZ(0);
+  $core.String get roomId => $_getSZ(1);
   @$pb.TagNumber(2)
-  set roomId($core.String v) { $_setString(0, v); }
+  set roomId($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasRoomId() => $_has(0);
+  $core.bool hasRoomId() => $_has(1);
   @$pb.TagNumber(2)
   void clearRoomId() => clearField(2);
 
   @$pb.TagNumber(3)
-  $2.ContactLink get member => $_getN(1);
+  $2.ContactLink get member => $_getN(2);
   @$pb.TagNumber(3)
   set member($2.ContactLink v) { setField(3, v); }
   @$pb.TagNumber(3)
-  $core.bool hasMember() => $_has(1);
+  $core.bool hasMember() => $_has(2);
   @$pb.TagNumber(3)
   void clearMember() => clearField(3);
   @$pb.TagNumber(3)
-  $2.ContactLink ensureMember() => $_ensure(1);
+  $2.ContactLink ensureMember() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  $core.List<$core.String> get roles => $_getList(2);
+  $core.List<$core.String> get roles => $_getList(3);
 
   @$pb.TagNumber(5)
-  $0.Timestamp get joinedAt => $_getN(3);
+  $0.Timestamp get joinedAt => $_getN(4);
   @$pb.TagNumber(5)
   set joinedAt($0.Timestamp v) { setField(5, v); }
   @$pb.TagNumber(5)
-  $core.bool hasJoinedAt() => $_has(3);
+  $core.bool hasJoinedAt() => $_has(4);
   @$pb.TagNumber(5)
   void clearJoinedAt() => clearField(5);
   @$pb.TagNumber(5)
-  $0.Timestamp ensureJoinedAt() => $_ensure(3);
+  $0.Timestamp ensureJoinedAt() => $_ensure(4);
 
   @$pb.TagNumber(6)
-  $0.Timestamp get lastActive => $_getN(4);
+  $0.Timestamp get lastActive => $_getN(5);
   @$pb.TagNumber(6)
   set lastActive($0.Timestamp v) { setField(6, v); }
   @$pb.TagNumber(6)
-  $core.bool hasLastActive() => $_has(4);
+  $core.bool hasLastActive() => $_has(5);
   @$pb.TagNumber(6)
   void clearLastActive() => clearField(6);
   @$pb.TagNumber(6)
-  $0.Timestamp ensureLastActive() => $_ensure(4);
+  $0.Timestamp ensureLastActive() => $_ensure(5);
 }
 
 class AddRoomSubscriptionsRequest extends $pb.GeneratedMessage {
@@ -2539,14 +2553,14 @@ class AddRoomSubscriptionsResponse extends $pb.GeneratedMessage {
 class RemoveRoomSubscriptionsRequest extends $pb.GeneratedMessage {
   factory RemoveRoomSubscriptionsRequest({
     $core.String? roomId,
-    $core.Iterable<$core.String>? profileIds,
+    $core.Iterable<$core.String>? subscriptionId,
   }) {
     final $result = create();
     if (roomId != null) {
       $result.roomId = roomId;
     }
-    if (profileIds != null) {
-      $result.profileIds.addAll(profileIds);
+    if (subscriptionId != null) {
+      $result.subscriptionId.addAll(subscriptionId);
     }
     return $result;
   }
@@ -2556,7 +2570,7 @@ class RemoveRoomSubscriptionsRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RemoveRoomSubscriptionsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
     ..aOS(2, _omitFieldNames ? '' : 'roomId')
-    ..pPS(3, _omitFieldNames ? '' : 'profileIds')
+    ..pPS(3, _omitFieldNames ? '' : 'subscriptionId')
     ..hasRequiredFields = false
   ;
 
@@ -2591,7 +2605,7 @@ class RemoveRoomSubscriptionsRequest extends $pb.GeneratedMessage {
   void clearRoomId() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.List<$core.String> get profileIds => $_getList(1);
+  $core.List<$core.String> get subscriptionId => $_getList(1);
 }
 
 class RemoveRoomSubscriptionsResponse extends $pb.GeneratedMessage {
@@ -2663,15 +2677,15 @@ class RemoveRoomSubscriptionsResponse extends $pb.GeneratedMessage {
 class UpdateSubscriptionRoleRequest extends $pb.GeneratedMessage {
   factory UpdateSubscriptionRoleRequest({
     $core.String? roomId,
-    $core.String? profileId,
+    $core.String? subscriptionId,
     $core.Iterable<$core.String>? roles,
   }) {
     final $result = create();
     if (roomId != null) {
       $result.roomId = roomId;
     }
-    if (profileId != null) {
-      $result.profileId = profileId;
+    if (subscriptionId != null) {
+      $result.subscriptionId = subscriptionId;
     }
     if (roles != null) {
       $result.roles.addAll(roles);
@@ -2684,7 +2698,7 @@ class UpdateSubscriptionRoleRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSubscriptionRoleRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
     ..aOS(2, _omitFieldNames ? '' : 'roomId')
-    ..aOS(3, _omitFieldNames ? '' : 'profileId')
+    ..aOS(3, _omitFieldNames ? '' : 'subscriptionId')
     ..pPS(4, _omitFieldNames ? '' : 'roles')
     ..hasRequiredFields = false
   ;
@@ -2720,13 +2734,13 @@ class UpdateSubscriptionRoleRequest extends $pb.GeneratedMessage {
   void clearRoomId() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.String get profileId => $_getSZ(1);
+  $core.String get subscriptionId => $_getSZ(1);
   @$pb.TagNumber(3)
-  set profileId($core.String v) { $_setString(1, v); }
+  set subscriptionId($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(3)
-  $core.bool hasProfileId() => $_has(1);
+  $core.bool hasSubscriptionId() => $_has(1);
   @$pb.TagNumber(3)
-  void clearProfileId() => clearField(3);
+  void clearSubscriptionId() => clearField(3);
 
   @$pb.TagNumber(4)
   $core.List<$core.String> get roles => $_getList(2);
@@ -2801,15 +2815,11 @@ class UpdateSubscriptionRoleResponse extends $pb.GeneratedMessage {
 class SearchRoomSubscriptionsRequest extends $pb.GeneratedMessage {
   factory SearchRoomSubscriptionsRequest({
     $core.String? roomId,
-    $core.int? limit,
-    $core.String? cursor,
+    $2.PageCursor? cursor,
   }) {
     final $result = create();
     if (roomId != null) {
       $result.roomId = roomId;
-    }
-    if (limit != null) {
-      $result.limit = limit;
     }
     if (cursor != null) {
       $result.cursor = cursor;
@@ -2822,8 +2832,7 @@ class SearchRoomSubscriptionsRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SearchRoomSubscriptionsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
     ..aOS(2, _omitFieldNames ? '' : 'roomId')
-    ..a<$core.int>(3, _omitFieldNames ? '' : 'limit', $pb.PbFieldType.O3)
-    ..aOS(4, _omitFieldNames ? '' : 'cursor')
+    ..aOM<$2.PageCursor>(4, _omitFieldNames ? '' : 'cursor', subBuilder: $2.PageCursor.create)
     ..hasRequiredFields = false
   ;
 
@@ -2857,23 +2866,16 @@ class SearchRoomSubscriptionsRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearRoomId() => clearField(2);
 
-  @$pb.TagNumber(3)
-  $core.int get limit => $_getIZ(1);
-  @$pb.TagNumber(3)
-  set limit($core.int v) { $_setSignedInt32(1, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasLimit() => $_has(1);
-  @$pb.TagNumber(3)
-  void clearLimit() => clearField(3);
-
   @$pb.TagNumber(4)
-  $core.String get cursor => $_getSZ(2);
+  $2.PageCursor get cursor => $_getN(1);
   @$pb.TagNumber(4)
-  set cursor($core.String v) { $_setString(2, v); }
+  set cursor($2.PageCursor v) { setField(4, v); }
   @$pb.TagNumber(4)
-  $core.bool hasCursor() => $_has(2);
+  $core.bool hasCursor() => $_has(1);
   @$pb.TagNumber(4)
   void clearCursor() => clearField(4);
+  @$pb.TagNumber(4)
+  $2.PageCursor ensureCursor() => $_ensure(1);
 }
 
 class SearchRoomSubscriptionsResponse extends $pb.GeneratedMessage {
@@ -3076,15 +3078,15 @@ class UpdateClientStateResponse extends $pb.GeneratedMessage {
 class GetClientStateRequest extends $pb.GeneratedMessage {
   factory GetClientStateRequest({
     $core.String? roomId,
-    $core.Iterable<$core.String>? profileIds,
+    $core.Iterable<$core.String>? subscriptionId,
     GetClientStateRequest_ClientStateType? stateType,
   }) {
     final $result = create();
     if (roomId != null) {
       $result.roomId = roomId;
     }
-    if (profileIds != null) {
-      $result.profileIds.addAll(profileIds);
+    if (subscriptionId != null) {
+      $result.subscriptionId.addAll(subscriptionId);
     }
     if (stateType != null) {
       $result.stateType = stateType;
@@ -3097,7 +3099,7 @@ class GetClientStateRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetClientStateRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'roomId')
-    ..pPS(2, _omitFieldNames ? '' : 'profileIds')
+    ..pPS(2, _omitFieldNames ? '' : 'subscriptionId')
     ..e<GetClientStateRequest_ClientStateType>(3, _omitFieldNames ? '' : 'stateType', $pb.PbFieldType.OE, defaultOrMaker: GetClientStateRequest_ClientStateType.CLIENT_STATE_TYPE_UNSPECIFIED, valueOf: GetClientStateRequest_ClientStateType.valueOf, enumValues: GetClientStateRequest_ClientStateType.values)
     ..hasRequiredFields = false
   ;
@@ -3133,7 +3135,7 @@ class GetClientStateRequest extends $pb.GeneratedMessage {
   void clearRoomId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.List<$core.String> get profileIds => $_getList(1);
+  $core.List<$core.String> get subscriptionId => $_getList(1);
 
   @$pb.TagNumber(3)
   GetClientStateRequest_ClientStateType get stateType => $_getN(2);

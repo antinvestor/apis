@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.52.5] - 2025-1-2
+
+### Changed
+
+- utilize subscription id more
+
 ## [1.52.1] - 2025-1-2
 
 ### Changed

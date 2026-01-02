@@ -519,6 +519,7 @@ final $typed_data.Uint8List deleteRoomResponseDescriptor = $convert.base64Decode
 const RoomSubscription$json = {
   '1': 'RoomSubscription',
   '2': [
+    {'1': 'id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'id'},
     {'1': 'room_id', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'roomId'},
     {'1': 'member', '3': 3, '4': 1, '5': 11, '6': '.common.v1.ContactLink', '10': 'member'},
     {'1': 'roles', '3': 4, '4': 3, '5': 9, '10': 'roles'},
@@ -529,11 +530,12 @@ const RoomSubscription$json = {
 
 /// Descriptor for `RoomSubscription`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List roomSubscriptionDescriptor = $convert.base64Decode(
-    'ChBSb29tU3Vic2NyaXB0aW9uEjQKB3Jvb21faWQYAiABKAlCG7pIGHIWEAMYKDIQWzAtOWEtel'
-    '8tXXszLDQwfVIGcm9vbUlkEi4KBm1lbWJlchgDIAEoCzIWLmNvbW1vbi52MS5Db250YWN0TGlu'
-    'a1IGbWVtYmVyEhQKBXJvbGVzGAQgAygJUgVyb2xlcxI3Cglqb2luZWRfYXQYBSABKAsyGi5nb2'
-    '9nbGUucHJvdG9idWYuVGltZXN0YW1wUghqb2luZWRBdBI7CgtsYXN0X2FjdGl2ZRgGIAEoCzIa'
-    'Lmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCmxhc3RBY3RpdmU=');
+    'ChBSb29tU3Vic2NyaXB0aW9uEisKAmlkGAEgASgJQhu6SBhyFhADGCgyEFswLTlhLXpfLV17My'
+    'w0MH1SAmlkEjQKB3Jvb21faWQYAiABKAlCG7pIGHIWEAMYKDIQWzAtOWEtel8tXXszLDQwfVIG'
+    'cm9vbUlkEi4KBm1lbWJlchgDIAEoCzIWLmNvbW1vbi52MS5Db250YWN0TGlua1IGbWVtYmVyEh'
+    'QKBXJvbGVzGAQgAygJUgVyb2xlcxI3Cglqb2luZWRfYXQYBSABKAsyGi5nb29nbGUucHJvdG9i'
+    'dWYuVGltZXN0YW1wUghqb2luZWRBdBI7CgtsYXN0X2FjdGl2ZRgGIAEoCzIaLmdvb2dsZS5wcm'
+    '90b2J1Zi5UaW1lc3RhbXBSCmxhc3RBY3RpdmU=');
 
 @$core.Deprecated('Use addRoomSubscriptionsRequestDescriptor instead')
 const AddRoomSubscriptionsRequest$json = {
@@ -570,15 +572,15 @@ const RemoveRoomSubscriptionsRequest$json = {
   '1': 'RemoveRoomSubscriptionsRequest',
   '2': [
     {'1': 'room_id', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'roomId'},
-    {'1': 'profile_ids', '3': 3, '4': 3, '5': 9, '10': 'profileIds'},
+    {'1': 'subscription_id', '3': 3, '4': 3, '5': 9, '10': 'subscriptionId'},
   ],
 };
 
 /// Descriptor for `RemoveRoomSubscriptionsRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List removeRoomSubscriptionsRequestDescriptor = $convert.base64Decode(
     'Ch5SZW1vdmVSb29tU3Vic2NyaXB0aW9uc1JlcXVlc3QSNAoHcm9vbV9pZBgCIAEoCUIbukgYch'
-    'YQAxgoMhBbMC05YS16Xy1dezMsNDB9UgZyb29tSWQSHwoLcHJvZmlsZV9pZHMYAyADKAlSCnBy'
-    'b2ZpbGVJZHM=');
+    'YQAxgoMhBbMC05YS16Xy1dezMsNDB9UgZyb29tSWQSJwoPc3Vic2NyaXB0aW9uX2lkGAMgAygJ'
+    'Ug5zdWJzY3JpcHRpb25JZA==');
 
 @$core.Deprecated('Use removeRoomSubscriptionsResponseDescriptor instead')
 const RemoveRoomSubscriptionsResponse$json = {
@@ -600,7 +602,7 @@ const UpdateSubscriptionRoleRequest$json = {
   '1': 'UpdateSubscriptionRoleRequest',
   '2': [
     {'1': 'room_id', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'roomId'},
-    {'1': 'profile_id', '3': 3, '4': 1, '5': 9, '10': 'profileId'},
+    {'1': 'subscription_id', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'subscriptionId'},
     {'1': 'roles', '3': 4, '4': 3, '5': 9, '10': 'roles'},
   ],
 };
@@ -608,8 +610,9 @@ const UpdateSubscriptionRoleRequest$json = {
 /// Descriptor for `UpdateSubscriptionRoleRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateSubscriptionRoleRequestDescriptor = $convert.base64Decode(
     'Ch1VcGRhdGVTdWJzY3JpcHRpb25Sb2xlUmVxdWVzdBI0Cgdyb29tX2lkGAIgASgJQhu6SBhyFh'
-    'ADGCgyEFswLTlhLXpfLV17Myw0MH1SBnJvb21JZBIdCgpwcm9maWxlX2lkGAMgASgJUglwcm9m'
-    'aWxlSWQSFAoFcm9sZXMYBCADKAlSBXJvbGVz');
+    'ADGCgyEFswLTlhLXpfLV17Myw0MH1SBnJvb21JZBJECg9zdWJzY3JpcHRpb25faWQYAyABKAlC'
+    'G7pIGHIWEAMYKDIQWzAtOWEtel8tXXszLDQwfVIOc3Vic2NyaXB0aW9uSWQSFAoFcm9sZXMYBC'
+    'ADKAlSBXJvbGVz');
 
 @$core.Deprecated('Use updateSubscriptionRoleResponseDescriptor instead')
 const UpdateSubscriptionRoleResponse$json = {
@@ -631,16 +634,15 @@ const SearchRoomSubscriptionsRequest$json = {
   '1': 'SearchRoomSubscriptionsRequest',
   '2': [
     {'1': 'room_id', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'roomId'},
-    {'1': 'limit', '3': 3, '4': 1, '5': 5, '10': 'limit'},
-    {'1': 'cursor', '3': 4, '4': 1, '5': 9, '10': 'cursor'},
+    {'1': 'cursor', '3': 4, '4': 1, '5': 11, '6': '.common.v1.PageCursor', '10': 'cursor'},
   ],
 };
 
 /// Descriptor for `SearchRoomSubscriptionsRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List searchRoomSubscriptionsRequestDescriptor = $convert.base64Decode(
     'Ch5TZWFyY2hSb29tU3Vic2NyaXB0aW9uc1JlcXVlc3QSNAoHcm9vbV9pZBgCIAEoCUIbukgYch'
-    'YQAxgoMhBbMC05YS16Xy1dezMsNDB9UgZyb29tSWQSFAoFbGltaXQYAyABKAVSBWxpbWl0EhYK'
-    'BmN1cnNvchgEIAEoCVIGY3Vyc29y');
+    'YQAxgoMhBbMC05YS16Xy1dezMsNDB9UgZyb29tSWQSLQoGY3Vyc29yGAQgASgLMhUuY29tbW9u'
+    'LnYxLlBhZ2VDdXJzb3JSBmN1cnNvcg==');
 
 @$core.Deprecated('Use searchRoomSubscriptionsResponseDescriptor instead')
 const SearchRoomSubscriptionsResponse$json = {
@@ -694,7 +696,7 @@ const GetClientStateRequest$json = {
   '1': 'GetClientStateRequest',
   '2': [
     {'1': 'room_id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'roomId'},
-    {'1': 'profile_ids', '3': 2, '4': 3, '5': 9, '10': 'profileIds'},
+    {'1': 'subscription_id', '3': 2, '4': 3, '5': 9, '10': 'subscriptionId'},
     {'1': 'state_type', '3': 3, '4': 1, '5': 14, '6': '.chat.v1.GetClientStateRequest.ClientStateType', '10': 'stateType'},
   ],
   '4': [GetClientStateRequest_ClientStateType$json],
@@ -713,11 +715,11 @@ const GetClientStateRequest_ClientStateType$json = {
 /// Descriptor for `GetClientStateRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getClientStateRequestDescriptor = $convert.base64Decode(
     'ChVHZXRDbGllbnRTdGF0ZVJlcXVlc3QSNAoHcm9vbV9pZBgBIAEoCUIbukgYchYQAxgoMhBbMC'
-    '05YS16Xy1dezMsNDB9UgZyb29tSWQSHwoLcHJvZmlsZV9pZHMYAiADKAlSCnByb2ZpbGVJZHMS'
-    'TQoKc3RhdGVfdHlwZRgDIAEoDjIuLmNoYXQudjEuR2V0Q2xpZW50U3RhdGVSZXF1ZXN0LkNsaW'
-    'VudFN0YXRlVHlwZVIJc3RhdGVUeXBlIncKD0NsaWVudFN0YXRlVHlwZRIhCh1DTElFTlRfU1RB'
-    'VEVfVFlQRV9VTlNQRUNJRklFRBAAEh4KGkNMSUVOVF9TVEFURV9UWVBFX1BSRVNFTkNFEAESIQ'
-    'odQ0xJRU5UX1NUQVRFX1RZUEVfUkVBRF9NQVJLRVIQAg==');
+    '05YS16Xy1dezMsNDB9UgZyb29tSWQSJwoPc3Vic2NyaXB0aW9uX2lkGAIgAygJUg5zdWJzY3Jp'
+    'cHRpb25JZBJNCgpzdGF0ZV90eXBlGAMgASgOMi4uY2hhdC52MS5HZXRDbGllbnRTdGF0ZVJlcX'
+    'Vlc3QuQ2xpZW50U3RhdGVUeXBlUglzdGF0ZVR5cGUidwoPQ2xpZW50U3RhdGVUeXBlEiEKHUNM'
+    'SUVOVF9TVEFURV9UWVBFX1VOU1BFQ0lGSUVEEAASHgoaQ0xJRU5UX1NUQVRFX1RZUEVfUFJFU0'
+    'VOQ0UQARIhCh1DTElFTlRfU1RBVEVfVFlQRV9SRUFEX01BUktFUhAC');
 
 @$core.Deprecated('Use getClientStateResponseDescriptor instead')
 const GetClientStateResponse$json = {

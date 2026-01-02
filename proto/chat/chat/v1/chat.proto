@@ -570,6 +570,11 @@ message DeleteRoomResponse {
 // -----------------------------------------------------
 
 message RoomSubscription {
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
   string room_id = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
@@ -605,7 +610,7 @@ message RemoveRoomSubscriptionsRequest {
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
-  repeated string profile_ids = 3;
+  repeated string subscription_id = 3;
 }
 
 message RemoveRoomSubscriptionsResponse {
@@ -623,7 +628,11 @@ message UpdateSubscriptionRoleRequest {
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
-  string profile_id = 3;
+  string subscription_id = 3 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
   repeated string roles = 4;
 }
 
@@ -642,9 +651,9 @@ message SearchRoomSubscriptionsRequest {
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
-  int32 limit = 3;
-  string cursor = 4;
+  common.v1.PageCursor cursor = 4;
 }
+
 message SearchRoomSubscriptionsResponse {
   string room_id = 1 [
     (buf.validate.field).string.min_len = 3,
@@ -684,7 +693,7 @@ message GetClientStateRequest {
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
-  repeated string profile_ids = 2;
+  repeated string subscription_id = 2;
 
   enum ClientStateType {
     CLIENT_STATE_TYPE_UNSPECIFIED = 0;

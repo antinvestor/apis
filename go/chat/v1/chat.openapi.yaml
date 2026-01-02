@@ -929,11 +929,11 @@ components:
           maxLength: 40
           minLength: 3
           pattern: '[0-9a-z_-]{3,40}'
-        profileIds:
+        subscriptionId:
           type: array
           items:
             type: string
-          title: profile_ids
+          title: subscription_id
         stateType:
           title: state_type
           $ref: '#/components/schemas/chat.v1.GetClientStateRequest.ClientStateType'
@@ -1110,11 +1110,11 @@ components:
           maxLength: 40
           minLength: 3
           pattern: '[0-9a-z_-]{3,40}'
-        profileIds:
+        subscriptionId:
           type: array
           items:
             type: string
-          title: profile_ids
+          title: subscription_id
       title: RemoveRoomSubscriptionsRequest
       additionalProperties: false
     chat.v1.RemoveRoomSubscriptionsResponse:
@@ -1279,6 +1279,12 @@ components:
     chat.v1.RoomSubscription:
       type: object
       properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
         roomId:
           type: string
           title: room_id
@@ -1311,13 +1317,9 @@ components:
           maxLength: 40
           minLength: 3
           pattern: '[0-9a-z_-]{3,40}'
-        limit:
-          type: integer
-          title: limit
-          format: int32
         cursor:
-          type: string
           title: cursor
+          $ref: '#/components/schemas/common.v1.PageCursor'
       title: SearchRoomSubscriptionsRequest
       additionalProperties: false
     chat.v1.SearchRoomSubscriptionsResponse:
@@ -1705,9 +1707,12 @@ components:
           maxLength: 40
           minLength: 3
           pattern: '[0-9a-z_-]{3,40}'
-        profileId:
+        subscriptionId:
           type: string
-          title: profile_id
+          title: subscription_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
         roles:
           type: array
           items:
