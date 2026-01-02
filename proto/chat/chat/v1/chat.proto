@@ -224,7 +224,6 @@ service ChatService {
 
 // Unified message (user / bot / system / signalling)
 message RoomEvent {
-
   // NOTE:
   // Event IDs are XIDs and MUST be lexicographically sortable by creation time.
   // Clients MUST NOT assume any other ordering mechanism.
@@ -419,7 +418,6 @@ message ClientCommand {
 
 // Client message over Connect stream. After initial connect frame, client sends acks/commands.
 message StreamRequest {
-
   // The client can send various payloads inside the stream after initial auth:
   oneof payload {
     StreamHello hello = 1;
@@ -428,12 +426,10 @@ message StreamRequest {
   }
 }
 
-
 // Server -> Client event payload. All events in a room are delivered over Connect stream.
 // event_id: globally unique id (opaque string) assigned by server, strictly monotonically increasing per room.
 // sequence: strictly increasing 64-bit integer per-room sequence number (useful for resume & ordering).
 message StreamResponse {
-
   // NOTE:
   // Stream IDs are XIDs and MUST be lexicographically sortable by creation time.
   // Clients MUST NOT assume any other ordering mechanism.
@@ -457,8 +453,6 @@ message StreamResponse {
     common.v1.ErrorDetail error = 20;
   }
 }
-
-
 
 // -----------------------------------------------------
 // Message RPCs (unified send + get history)
