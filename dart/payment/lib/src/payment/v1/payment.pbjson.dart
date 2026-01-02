@@ -394,7 +394,7 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> PaymentSer
   '.payment.v1.ReleaseRequest': ReleaseRequest$json,
   '.payment.v1.ReleaseResponse': ReleaseResponse$json,
   '.common.v1.SearchRequest': $0.SearchRequest$json,
-  '.common.v1.Pagination': $0.Pagination$json,
+  '.common.v1.PageCursor': $0.PageCursor$json,
   '.payment.v1.SearchResponse': SearchResponse$json,
   '.payment.v1.ReconcileRequest': ReconcileRequest$json,
   '.payment.v1.ReconcileResponse': ReconcileResponse$json,

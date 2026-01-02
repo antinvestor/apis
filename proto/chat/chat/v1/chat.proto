@@ -535,7 +535,6 @@ message SearchRoomsRequest {
   string query = 1;
   repeated string properties = 6;
   google.protobuf.Struct extras = 7;
-
   common.v1.PageCursor cursor = 10;
 }
 

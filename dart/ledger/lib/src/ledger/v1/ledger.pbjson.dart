@@ -439,7 +439,7 @@ const $core.Map<$core.String, $core.dynamic> LedgerServiceBase$json = {
 @$core.Deprecated('Use ledgerServiceDescriptor instead')
 const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> LedgerServiceBase$messageJson = {
   '.common.v1.SearchRequest': $2.SearchRequest$json,
-  '.common.v1.Pagination': $2.Pagination$json,
+  '.common.v1.PageCursor': $2.PageCursor$json,
   '.google.protobuf.Struct': $0.Struct$json,
   '.google.protobuf.Struct.FieldsEntry': $0.Struct_FieldsEntry$json,
   '.google.protobuf.Value': $0.Value$json,

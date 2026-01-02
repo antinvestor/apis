@@ -422,31 +422,22 @@ components:
         ContactLink represents a link between a contact and a profile in the system.
          Used for associating external contacts with internal profiles across services.
          This enables unified identity management and contact resolution.
-    common.v1.Pagination:
+    common.v1.PageCursor:
       type: object
       properties:
-        count:
+        limit:
           type: integer
-          title: count
+          title: limit
           format: int32
-          description: Number of items per page (limit)
+          description: Number of items per cursor (limit)
         page:
-          type: integer
+          type: string
           title: page
-          format: int32
-          description: Page number (0-indexed or 1-indexed depending on service)
-        startDate:
-          type: string
-          title: start_date
-          description: 'Optional: Filter results from this date (RFC3339 format)'
-        endDate:
-          type: string
-          title: end_date
-          description: 'Optional: Filter results until this date (RFC3339 format)'
-      title: Pagination
+          description: Page number/ cursor representing last id from result
+      title: PageCursor
       additionalProperties: false
       description: |-
-        Pagination provides standard offset-based pagination parameters.
+        PageCursor provides standard offset-based pagination/cursor stream parameters.
          Used for list operations that return large result sets.
     common.v1.STATE:
       type: string
@@ -485,10 +476,10 @@ components:
           type: string
           title: id_query
           description: Specific ID or ID pattern to search for
-        limits:
-          title: limits
+        cursor:
+          title: cursor
           description: Pagination parameters
-          $ref: '#/components/schemas/common.v1.Pagination'
+          $ref: '#/components/schemas/common.v1.PageCursor'
         properties:
           type: array
           items:

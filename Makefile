@@ -45,6 +45,7 @@ cd proto/${1} && PATH=$(BIN):$$PATH $(BIN)/buf validate
 endef
 
 define buf_generate
+	cd proto/${1} && PATH=$(BIN):$$PATH $(BIN)/buf dep update
 	cd proto/${1} && PATH=$(BIN):$$PATH $(BIN)/buf generate
 
 	# Rewrite Dart pbjson imports to common package import

@@ -174,7 +174,7 @@ class CollectibleResponse extends $pb.GeneratedMessage {
 }
 
 enum ListCollectibleRequest_Range {
-  pagination, 
+  cursor, 
   interval, 
   notSet
 }
@@ -182,12 +182,12 @@ enum ListCollectibleRequest_Range {
 /// ListCollectibleRequest retrieves collectibles by pagination or time range.
 class ListCollectibleRequest extends $pb.GeneratedMessage {
   factory ListCollectibleRequest({
-    $1.Pagination? pagination,
+    $1.PageCursor? cursor,
     $2.Interval? interval,
   }) {
     final $result = create();
-    if (pagination != null) {
-      $result.pagination = pagination;
+    if (cursor != null) {
+      $result.cursor = cursor;
     }
     if (interval != null) {
       $result.interval = interval;
@@ -199,13 +199,13 @@ class ListCollectibleRequest extends $pb.GeneratedMessage {
   factory ListCollectibleRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static const $core.Map<$core.int, ListCollectibleRequest_Range> _ListCollectibleRequest_RangeByTag = {
-    1 : ListCollectibleRequest_Range.pagination,
+    1 : ListCollectibleRequest_Range.cursor,
     2 : ListCollectibleRequest_Range.interval,
     0 : ListCollectibleRequest_Range.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListCollectibleRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'lostid.v1'), createEmptyInstance: create)
     ..oo(0, [1, 2])
-    ..aOM<$1.Pagination>(1, _omitFieldNames ? '' : 'pagination', subBuilder: $1.Pagination.create)
+    ..aOM<$1.PageCursor>(1, _omitFieldNames ? '' : 'cursor', subBuilder: $1.PageCursor.create)
     ..aOM<$2.Interval>(2, _omitFieldNames ? '' : 'interval', subBuilder: $2.Interval.create)
     ..hasRequiredFields = false
   ;
@@ -235,15 +235,15 @@ class ListCollectibleRequest extends $pb.GeneratedMessage {
   void clearRange() => clearField($_whichOneof(0));
 
   @$pb.TagNumber(1)
-  $1.Pagination get pagination => $_getN(0);
+  $1.PageCursor get cursor => $_getN(0);
   @$pb.TagNumber(1)
-  set pagination($1.Pagination v) { setField(1, v); }
+  set cursor($1.PageCursor v) { setField(1, v); }
   @$pb.TagNumber(1)
-  $core.bool hasPagination() => $_has(0);
+  $core.bool hasCursor() => $_has(0);
   @$pb.TagNumber(1)
-  void clearPagination() => clearField(1);
+  void clearCursor() => clearField(1);
   @$pb.TagNumber(1)
-  $1.Pagination ensurePagination() => $_ensure(0);
+  $1.PageCursor ensureCursor() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $2.Interval get interval => $_getN(1);
@@ -398,7 +398,7 @@ class SearchResponse extends $pb.GeneratedMessage {
 }
 
 enum ListSearchRequest_Range {
-  pagination, 
+  cursor, 
   interval, 
   notSet
 }
@@ -406,12 +406,12 @@ enum ListSearchRequest_Range {
 /// ListSearchRequest retrieves searches by pagination or time range.
 class ListSearchRequest extends $pb.GeneratedMessage {
   factory ListSearchRequest({
-    $1.Pagination? pagination,
+    $1.PageCursor? cursor,
     $2.Interval? interval,
   }) {
     final $result = create();
-    if (pagination != null) {
-      $result.pagination = pagination;
+    if (cursor != null) {
+      $result.cursor = cursor;
     }
     if (interval != null) {
       $result.interval = interval;
@@ -423,13 +423,13 @@ class ListSearchRequest extends $pb.GeneratedMessage {
   factory ListSearchRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static const $core.Map<$core.int, ListSearchRequest_Range> _ListSearchRequest_RangeByTag = {
-    1 : ListSearchRequest_Range.pagination,
+    1 : ListSearchRequest_Range.cursor,
     2 : ListSearchRequest_Range.interval,
     0 : ListSearchRequest_Range.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListSearchRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'lostid.v1'), createEmptyInstance: create)
     ..oo(0, [1, 2])
-    ..aOM<$1.Pagination>(1, _omitFieldNames ? '' : 'pagination', subBuilder: $1.Pagination.create)
+    ..aOM<$1.PageCursor>(1, _omitFieldNames ? '' : 'cursor', subBuilder: $1.PageCursor.create)
     ..aOM<$2.Interval>(2, _omitFieldNames ? '' : 'interval', subBuilder: $2.Interval.create)
     ..hasRequiredFields = false
   ;
@@ -459,15 +459,15 @@ class ListSearchRequest extends $pb.GeneratedMessage {
   void clearRange() => clearField($_whichOneof(0));
 
   @$pb.TagNumber(1)
-  $1.Pagination get pagination => $_getN(0);
+  $1.PageCursor get cursor => $_getN(0);
   @$pb.TagNumber(1)
-  set pagination($1.Pagination v) { setField(1, v); }
+  set cursor($1.PageCursor v) { setField(1, v); }
   @$pb.TagNumber(1)
-  $core.bool hasPagination() => $_has(0);
+  $core.bool hasCursor() => $_has(0);
   @$pb.TagNumber(1)
-  void clearPagination() => clearField(1);
+  void clearCursor() => clearField(1);
   @$pb.TagNumber(1)
-  $1.Pagination ensurePagination() => $_ensure(0);
+  $1.PageCursor ensureCursor() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $2.Interval get interval => $_getN(1);
@@ -905,7 +905,7 @@ class ProgressResponse extends $pb.GeneratedMessage {
 }
 
 enum ListTransactionRequest_Range {
-  pagination, 
+  cursor, 
   interval, 
   notSet
 }
@@ -913,12 +913,12 @@ enum ListTransactionRequest_Range {
 /// ListTransactionRequest retrieves transactions by pagination or time range.
 class ListTransactionRequest extends $pb.GeneratedMessage {
   factory ListTransactionRequest({
-    $1.Pagination? pagination,
+    $1.PageCursor? cursor,
     $2.Interval? interval,
   }) {
     final $result = create();
-    if (pagination != null) {
-      $result.pagination = pagination;
+    if (cursor != null) {
+      $result.cursor = cursor;
     }
     if (interval != null) {
       $result.interval = interval;
@@ -930,13 +930,13 @@ class ListTransactionRequest extends $pb.GeneratedMessage {
   factory ListTransactionRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static const $core.Map<$core.int, ListTransactionRequest_Range> _ListTransactionRequest_RangeByTag = {
-    1 : ListTransactionRequest_Range.pagination,
+    1 : ListTransactionRequest_Range.cursor,
     2 : ListTransactionRequest_Range.interval,
     0 : ListTransactionRequest_Range.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListTransactionRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'lostid.v1'), createEmptyInstance: create)
     ..oo(0, [1, 2])
-    ..aOM<$1.Pagination>(1, _omitFieldNames ? '' : 'pagination', subBuilder: $1.Pagination.create)
+    ..aOM<$1.PageCursor>(1, _omitFieldNames ? '' : 'cursor', subBuilder: $1.PageCursor.create)
     ..aOM<$2.Interval>(2, _omitFieldNames ? '' : 'interval', subBuilder: $2.Interval.create)
     ..hasRequiredFields = false
   ;
@@ -966,15 +966,15 @@ class ListTransactionRequest extends $pb.GeneratedMessage {
   void clearRange() => clearField($_whichOneof(0));
 
   @$pb.TagNumber(1)
-  $1.Pagination get pagination => $_getN(0);
+  $1.PageCursor get cursor => $_getN(0);
   @$pb.TagNumber(1)
-  set pagination($1.Pagination v) { setField(1, v); }
+  set cursor($1.PageCursor v) { setField(1, v); }
   @$pb.TagNumber(1)
-  $core.bool hasPagination() => $_has(0);
+  $core.bool hasCursor() => $_has(0);
   @$pb.TagNumber(1)
-  void clearPagination() => clearField(1);
+  void clearCursor() => clearField(1);
   @$pb.TagNumber(1)
-  $1.Pagination ensurePagination() => $_ensure(0);
+  $1.PageCursor ensureCursor() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $2.Interval get interval => $_getN(1);

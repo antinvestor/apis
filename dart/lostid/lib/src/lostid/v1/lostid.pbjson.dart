@@ -70,7 +70,7 @@ final $typed_data.Uint8List collectibleResponseDescriptor = $convert.base64Decod
 const ListCollectibleRequest$json = {
   '1': 'ListCollectibleRequest',
   '2': [
-    {'1': 'pagination', '3': 1, '4': 1, '5': 11, '6': '.common.v1.Pagination', '9': 0, '10': 'pagination'},
+    {'1': 'cursor', '3': 1, '4': 1, '5': 11, '6': '.common.v1.PageCursor', '9': 0, '10': 'cursor'},
     {'1': 'interval', '3': 2, '4': 1, '5': 11, '6': '.google.type.Interval', '9': 0, '10': 'interval'},
   ],
   '8': [
@@ -80,9 +80,9 @@ const ListCollectibleRequest$json = {
 
 /// Descriptor for `ListCollectibleRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List listCollectibleRequestDescriptor = $convert.base64Decode(
-    'ChZMaXN0Q29sbGVjdGlibGVSZXF1ZXN0EjcKCnBhZ2luYXRpb24YASABKAsyFS5jb21tb24udj'
-    'EuUGFnaW5hdGlvbkgAUgpwYWdpbmF0aW9uEjMKCGludGVydmFsGAIgASgLMhUuZ29vZ2xlLnR5'
-    'cGUuSW50ZXJ2YWxIAFIIaW50ZXJ2YWxCDgoFcmFuZ2USBbpIAggB');
+    'ChZMaXN0Q29sbGVjdGlibGVSZXF1ZXN0Ei8KBmN1cnNvchgBIAEoCzIVLmNvbW1vbi52MS5QYW'
+    'dlQ3Vyc29ySABSBmN1cnNvchIzCghpbnRlcnZhbBgCIAEoCzIVLmdvb2dsZS50eXBlLkludGVy'
+    'dmFsSABSCGludGVydmFsQg4KBXJhbmdlEgW6SAIIAQ==');
 
 @$core.Deprecated('Use listCollectibleResponseDescriptor instead')
 const ListCollectibleResponse$json = {
@@ -118,7 +118,7 @@ final $typed_data.Uint8List searchResponseDescriptor = $convert.base64Decode(
 const ListSearchRequest$json = {
   '1': 'ListSearchRequest',
   '2': [
-    {'1': 'pagination', '3': 1, '4': 1, '5': 11, '6': '.common.v1.Pagination', '9': 0, '10': 'pagination'},
+    {'1': 'cursor', '3': 1, '4': 1, '5': 11, '6': '.common.v1.PageCursor', '9': 0, '10': 'cursor'},
     {'1': 'interval', '3': 2, '4': 1, '5': 11, '6': '.google.type.Interval', '9': 0, '10': 'interval'},
   ],
   '8': [
@@ -128,9 +128,9 @@ const ListSearchRequest$json = {
 
 /// Descriptor for `ListSearchRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List listSearchRequestDescriptor = $convert.base64Decode(
-    'ChFMaXN0U2VhcmNoUmVxdWVzdBI3CgpwYWdpbmF0aW9uGAEgASgLMhUuY29tbW9uLnYxLlBhZ2'
-    'luYXRpb25IAFIKcGFnaW5hdGlvbhIzCghpbnRlcnZhbBgCIAEoCzIVLmdvb2dsZS50eXBlLklu'
-    'dGVydmFsSABSCGludGVydmFsQg4KBXJhbmdlEgW6SAIIAQ==');
+    'ChFMaXN0U2VhcmNoUmVxdWVzdBIvCgZjdXJzb3IYASABKAsyFS5jb21tb24udjEuUGFnZUN1cn'
+    'NvckgAUgZjdXJzb3ISMwoIaW50ZXJ2YWwYAiABKAsyFS5nb29nbGUudHlwZS5JbnRlcnZhbEgA'
+    'UghpbnRlcnZhbEIOCgVyYW5nZRIFukgCCAE=');
 
 @$core.Deprecated('Use listSearchResponseDescriptor instead')
 const ListSearchResponse$json = {
@@ -220,7 +220,7 @@ final $typed_data.Uint8List progressResponseDescriptor = $convert.base64Decode(
 const ListTransactionRequest$json = {
   '1': 'ListTransactionRequest',
   '2': [
-    {'1': 'pagination', '3': 1, '4': 1, '5': 11, '6': '.common.v1.Pagination', '9': 0, '10': 'pagination'},
+    {'1': 'cursor', '3': 1, '4': 1, '5': 11, '6': '.common.v1.PageCursor', '9': 0, '10': 'cursor'},
     {'1': 'interval', '3': 2, '4': 1, '5': 11, '6': '.google.type.Interval', '9': 0, '10': 'interval'},
   ],
   '8': [
@@ -230,9 +230,9 @@ const ListTransactionRequest$json = {
 
 /// Descriptor for `ListTransactionRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List listTransactionRequestDescriptor = $convert.base64Decode(
-    'ChZMaXN0VHJhbnNhY3Rpb25SZXF1ZXN0EjcKCnBhZ2luYXRpb24YASABKAsyFS5jb21tb24udj'
-    'EuUGFnaW5hdGlvbkgAUgpwYWdpbmF0aW9uEjMKCGludGVydmFsGAIgASgLMhUuZ29vZ2xlLnR5'
-    'cGUuSW50ZXJ2YWxIAFIIaW50ZXJ2YWxCDgoFcmFuZ2USBbpIAggB');
+    'ChZMaXN0VHJhbnNhY3Rpb25SZXF1ZXN0Ei8KBmN1cnNvchgBIAEoCzIVLmNvbW1vbi52MS5QYW'
+    'dlQ3Vyc29ySABSBmN1cnNvchIzCghpbnRlcnZhbBgCIAEoCzIVLmdvb2dsZS50eXBlLkludGVy'
+    'dmFsSABSCGludGVydmFsQg4KBXJhbmdlEgW6SAIIAQ==');
 
 @$core.Deprecated('Use listTransactionResponseDescriptor instead')
 const ListTransactionResponse$json = {
@@ -291,7 +291,7 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> LostIdServ
   '.google.protobuf.ListValue': $0.ListValue$json,
   '.lostid.v1.CollectibleResponse': CollectibleResponse$json,
   '.lostid.v1.ListCollectibleRequest': ListCollectibleRequest$json,
-  '.common.v1.Pagination': $1.Pagination$json,
+  '.common.v1.PageCursor': $1.PageCursor$json,
   '.google.type.Interval': $2.Interval$json,
   '.google.protobuf.Timestamp': $4.Timestamp$json,
   '.lostid.v1.ListCollectibleResponse': ListCollectibleResponse$json,

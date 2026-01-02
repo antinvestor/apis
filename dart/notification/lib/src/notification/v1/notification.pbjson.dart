@@ -319,7 +319,7 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> Notificati
   '.notification.v1.ReceiveRequest': ReceiveRequest$json,
   '.notification.v1.ReceiveResponse': ReceiveResponse$json,
   '.common.v1.SearchRequest': $1.SearchRequest$json,
-  '.common.v1.Pagination': $1.Pagination$json,
+  '.common.v1.PageCursor': $1.PageCursor$json,
   '.notification.v1.SearchResponse': SearchResponse$json,
   '.common.v1.StatusRequest': $1.StatusRequest$json,
   '.common.v1.StatusUpdateRequest': $1.StatusUpdateRequest$json,

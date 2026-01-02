@@ -116,7 +116,7 @@ message ListCollectibleRequest {
     // either pagination or time interval must be set.
     option (buf.validate.oneof).required = true;
 
-    common.v1.Pagination pagination = 1; // Offset-based pagination
+    common.v1.PageCursor cursor = 1; // Offset-based pagination
     google.type.Interval interval = 2; // Time range filter
   }
 }
@@ -144,7 +144,7 @@ message ListSearchRequest {
     // either pagination or time interval must be set.
     option (buf.validate.oneof).required = true;
 
-    common.v1.Pagination pagination = 1; // Offset-based pagination
+    common.v1.PageCursor cursor = 1; // Offset-based pagination
     google.type.Interval interval = 2; // Time range filter
   }
 }
@@ -205,7 +205,7 @@ message ListTransactionRequest {
     // either pagination or time interval must be set.
     option (buf.validate.oneof).required = true;
 
-    common.v1.Pagination pagination = 1; // Offset-based pagination
+    common.v1.PageCursor cursor = 1; // Offset-based pagination
     google.type.Interval interval = 2; // Time range filter
   }
 }

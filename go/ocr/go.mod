@@ -3,7 +3,7 @@ module github.com/antinvestor/apis/go/ocr
 go 1.25
 
 require (
-	buf.build/gen/go/antinvestor/common/protocolbuffers/go v1.36.11-20251223175359-03d5a4a55277.1
+	buf.build/gen/go/antinvestor/common/protocolbuffers/go v1.36.11-20260102104630-5c57561a771f.1
 	buf.build/gen/go/antinvestor/ocr/connectrpc/go v1.19.1-20251223175629-90769c966e8a.2
 	buf.build/gen/go/antinvestor/ocr/protocolbuffers/go v1.36.11-20251223175629-90769c966e8a.1
 	connectrpc.com/connect v1.19.1

@@ -178,7 +178,7 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> SettingsSe
   '.settings.v1.ListRequest': ListRequest$json,
   '.settings.v1.ListResponse': ListResponse$json,
   '.common.v1.SearchRequest': $0.SearchRequest$json,
-  '.common.v1.Pagination': $0.Pagination$json,
+  '.common.v1.PageCursor': $0.PageCursor$json,
   '.google.protobuf.Struct': $1.Struct$json,
   '.google.protobuf.Struct.FieldsEntry': $1.Struct_FieldsEntry$json,
   '.google.protobuf.Value': $1.Value$json,

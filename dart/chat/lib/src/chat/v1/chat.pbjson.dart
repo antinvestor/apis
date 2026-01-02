@@ -57,34 +57,6 @@ final $typed_data.Uint8List presenceStatusDescriptor = $convert.base64Decode(
     'Cg5QcmVzZW5jZVN0YXR1cxIfChtQUkVTRU5DRV9TVEFUVVNfVU5TUEVDSUZJRUQQABIbChdQUk'
     'VTRU5DRV9TVEFUVVNfT0ZGTElORRABEhoKFlBSRVNFTkNFX1NUQVRVU19PTkxJTkUQAg==');
 
-@$core.Deprecated('Use streamResponseDescriptor instead')
-const StreamResponse$json = {
-  '1': 'StreamResponse',
-  '2': [
-    {'1': 'id', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'id'},
-    {'1': 'timestamp', '3': 5, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'timestamp'},
-    {'1': 'message', '3': 10, '4': 1, '5': 11, '6': '.chat.v1.RoomEvent', '9': 0, '10': 'message'},
-    {'1': 'presence_event', '3': 12, '4': 1, '5': 11, '6': '.chat.v1.PresenceEvent', '9': 0, '10': 'presenceEvent'},
-    {'1': 'receipt_event', '3': 13, '4': 1, '5': 11, '6': '.chat.v1.ReceiptEvent', '9': 0, '10': 'receiptEvent'},
-    {'1': 'read_event', '3': 15, '4': 1, '5': 11, '6': '.chat.v1.ReadMarker', '9': 0, '10': 'readEvent'},
-    {'1': 'typing_event', '3': 17, '4': 1, '5': 11, '6': '.chat.v1.TypingEvent', '9': 0, '10': 'typingEvent'},
-  ],
-  '8': [
-    {'1': 'payload'},
-  ],
-};
-
-/// Descriptor for `StreamResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List streamResponseDescriptor = $convert.base64Decode(
-    'Cg5TdHJlYW1SZXNwb25zZRIrCgJpZBgDIAEoCUIbukgYchYQAxgoMhBbMC05YS16Xy1dezMsND'
-    'B9UgJpZBI4Cgl0aW1lc3RhbXAYBSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wUgl0'
-    'aW1lc3RhbXASLgoHbWVzc2FnZRgKIAEoCzISLmNoYXQudjEuUm9vbUV2ZW50SABSB21lc3NhZ2'
-    'USPwoOcHJlc2VuY2VfZXZlbnQYDCABKAsyFi5jaGF0LnYxLlByZXNlbmNlRXZlbnRIAFINcHJl'
-    'c2VuY2VFdmVudBI8Cg1yZWNlaXB0X2V2ZW50GA0gASgLMhUuY2hhdC52MS5SZWNlaXB0RXZlbn'
-    'RIAFIMcmVjZWlwdEV2ZW50EjQKCnJlYWRfZXZlbnQYDyABKAsyEy5jaGF0LnYxLlJlYWRNYXJr'
-    'ZXJIAFIJcmVhZEV2ZW50EjkKDHR5cGluZ19ldmVudBgRIAEoCzIULmNoYXQudjEuVHlwaW5nRX'
-    'ZlbnRIAFILdHlwaW5nRXZlbnRCCQoHcGF5bG9hZA==');
-
 @$core.Deprecated('Use roomEventDescriptor instead')
 const RoomEvent$json = {
   '1': 'RoomEvent',
@@ -100,7 +72,7 @@ const RoomEvent$json = {
     {'1': 'text', '3': 15, '4': 1, '5': 11, '6': '.chat.v1.TextContent', '9': 0, '10': 'text'},
     {'1': 'attachment', '3': 16, '4': 1, '5': 11, '6': '.chat.v1.AttachmentContent', '9': 0, '10': 'attachment'},
     {'1': 'reaction', '3': 17, '4': 1, '5': 11, '6': '.chat.v1.ReactionContent', '9': 0, '10': 'reaction'},
-    {'1': 'encryptedText', '3': 18, '4': 1, '5': 11, '6': '.chat.v1.EncryptedTextContent', '9': 0, '10': 'encryptedText'},
+    {'1': 'encrypted', '3': 18, '4': 1, '5': 11, '6': '.chat.v1.EncryptedContent', '9': 0, '10': 'encrypted'},
     {'1': 'call', '3': 19, '4': 1, '5': 11, '6': '.chat.v1.CallContent', '9': 0, '10': 'call'},
   ],
   '8': [
@@ -120,10 +92,10 @@ final $typed_data.Uint8List roomEventDescriptor = $convert.base64Decode(
     'ASgJQhu6SBhyFhADGCgyEFswLTlhLXpfLV17Myw0MH1IAVIIcGFyZW50SWSIAQESKgoEdGV4dB'
     'gPIAEoCzIULmNoYXQudjEuVGV4dENvbnRlbnRIAFIEdGV4dBI8CgphdHRhY2htZW50GBAgASgL'
     'MhouY2hhdC52MS5BdHRhY2htZW50Q29udGVudEgAUgphdHRhY2htZW50EjYKCHJlYWN0aW9uGB'
-    'EgASgLMhguY2hhdC52MS5SZWFjdGlvbkNvbnRlbnRIAFIIcmVhY3Rpb24SRQoNZW5jcnlwdGVk'
-    'VGV4dBgSIAEoCzIdLmNoYXQudjEuRW5jcnlwdGVkVGV4dENvbnRlbnRIAFINZW5jcnlwdGVkVG'
-    'V4dBIqCgRjYWxsGBMgASgLMhQuY2hhdC52MS5DYWxsQ29udGVudEgAUgRjYWxsQgkKB3BheWxv'
-    'YWRCDAoKX3BhcmVudF9pZA==');
+    'EgASgLMhguY2hhdC52MS5SZWFjdGlvbkNvbnRlbnRIAFIIcmVhY3Rpb24SOQoJZW5jcnlwdGVk'
+    'GBIgASgLMhkuY2hhdC52MS5FbmNyeXB0ZWRDb250ZW50SABSCWVuY3J5cHRlZBIqCgRjYWxsGB'
+    'MgASgLMhQuY2hhdC52MS5DYWxsQ29udGVudEgAUgRjYWxsQgkKB3BheWxvYWRCDAoKX3BhcmVu'
+    'dF9pZA==');
 
 @$core.Deprecated('Use presenceEventDescriptor instead')
 const PresenceEvent$json = {
@@ -195,26 +167,6 @@ final $typed_data.Uint8List typingEventDescriptor = $convert.base64Decode(
     'LV17Myw0MH1SBnJvb21JZBIWCgZ0eXBpbmcYAyABKAhSBnR5cGluZxIwCgVzaW5jZRgFIAEoCz'
     'IaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSBXNpbmNl');
 
-@$core.Deprecated('Use streamRequestDescriptor instead')
-const StreamRequest$json = {
-  '1': 'StreamRequest',
-  '2': [
-    {'1': 'resume_token', '3': 5, '4': 1, '5': 9, '10': 'resumeToken'},
-    {'1': 'signal_update', '3': 11, '4': 1, '5': 11, '6': '.chat.v1.ClientSignal', '9': 0, '10': 'signalUpdate'},
-    {'1': 'state_update', '3': 12, '4': 1, '5': 11, '6': '.chat.v1.ClientCommand', '9': 0, '10': 'stateUpdate'},
-  ],
-  '8': [
-    {'1': 'payload'},
-  ],
-};
-
-/// Descriptor for `StreamRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List streamRequestDescriptor = $convert.base64Decode(
-    'Cg1TdHJlYW1SZXF1ZXN0EiEKDHJlc3VtZV90b2tlbhgFIAEoCVILcmVzdW1lVG9rZW4SPAoNc2'
-    'lnbmFsX3VwZGF0ZRgLIAEoCzIVLmNoYXQudjEuQ2xpZW50U2lnbmFsSABSDHNpZ25hbFVwZGF0'
-    'ZRI7CgxzdGF0ZV91cGRhdGUYDCABKAsyFi5jaGF0LnYxLkNsaWVudENvbW1hbmRIAFILc3RhdG'
-    'VVcGRhdGVCCQoHcGF5bG9hZA==');
-
 @$core.Deprecated('Use streamAckDescriptor instead')
 const StreamAck$json = {
   '1': 'StreamAck',
@@ -236,6 +188,35 @@ final $typed_data.Uint8List streamAckDescriptor = $convert.base64Decode(
     'UgVhY2tBdBIzCghtZXRhZGF0YRgGIAEoCzIXLmdvb2dsZS5wcm90b2J1Zi5TdHJ1Y3RSCG1ldG'
     'FkYXRhEjEKBWVycm9yGAcgASgLMhYuY29tbW9uLnYxLkVycm9yRGV0YWlsSABSBWVycm9yiAEB'
     'QggKBl9lcnJvcg==');
+
+@$core.Deprecated('Use streamHelloDescriptor instead')
+const StreamHello$json = {
+  '1': 'StreamHello',
+  '2': [
+    {'1': 'resume_token', '3': 1, '4': 1, '5': 9, '10': 'resumeToken'},
+    {'1': 'capabilities', '3': 2, '4': 3, '5': 11, '6': '.chat.v1.StreamHello.CapabilitiesEntry', '10': 'capabilities'},
+    {'1': 'client_time', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'clientTime'},
+  ],
+  '3': [StreamHello_CapabilitiesEntry$json],
+};
+
+@$core.Deprecated('Use streamHelloDescriptor instead')
+const StreamHello_CapabilitiesEntry$json = {
+  '1': 'CapabilitiesEntry',
+  '2': [
+    {'1': 'key', '3': 1, '4': 1, '5': 9, '10': 'key'},
+    {'1': 'value', '3': 2, '4': 1, '5': 9, '10': 'value'},
+  ],
+  '7': {'7': true},
+};
+
+/// Descriptor for `StreamHello`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List streamHelloDescriptor = $convert.base64Decode(
+    'CgtTdHJlYW1IZWxsbxIhCgxyZXN1bWVfdG9rZW4YASABKAlSC3Jlc3VtZVRva2VuEkoKDGNhcG'
+    'FiaWxpdGllcxgCIAMoCzImLmNoYXQudjEuU3RyZWFtSGVsbG8uQ2FwYWJpbGl0aWVzRW50cnlS'
+    'DGNhcGFiaWxpdGllcxI7CgtjbGllbnRfdGltZRgDIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW'
+    '1lc3RhbXBSCmNsaWVudFRpbWUaPwoRQ2FwYWJpbGl0aWVzRW50cnkSEAoDa2V5GAEgASgJUgNr'
+    'ZXkSFAoFdmFsdWUYAiABKAlSBXZhbHVlOgI4AQ==');
 
 @$core.Deprecated('Use clientSignalDescriptor instead')
 const ClientSignal$json = {
@@ -276,6 +257,56 @@ final $typed_data.Uint8List clientCommandDescriptor = $convert.base64Decode(
     'VySABSCnJlYWRNYXJrZXISKgoFZXZlbnQYCiABKAsyEi5jaGF0LnYxLlJvb21FdmVudEgAUgVl'
     'dmVudEIHCgVzdGF0ZQ==');
 
+@$core.Deprecated('Use streamRequestDescriptor instead')
+const StreamRequest$json = {
+  '1': 'StreamRequest',
+  '2': [
+    {'1': 'hello', '3': 1, '4': 1, '5': 11, '6': '.chat.v1.StreamHello', '9': 0, '10': 'hello'},
+    {'1': 'signal_update', '3': 11, '4': 1, '5': 11, '6': '.chat.v1.ClientSignal', '9': 0, '10': 'signalUpdate'},
+    {'1': 'command', '3': 12, '4': 1, '5': 11, '6': '.chat.v1.ClientCommand', '9': 0, '10': 'command'},
+  ],
+  '8': [
+    {'1': 'payload'},
+  ],
+};
+
+/// Descriptor for `StreamRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List streamRequestDescriptor = $convert.base64Decode(
+    'Cg1TdHJlYW1SZXF1ZXN0EiwKBWhlbGxvGAEgASgLMhQuY2hhdC52MS5TdHJlYW1IZWxsb0gAUg'
+    'VoZWxsbxI8Cg1zaWduYWxfdXBkYXRlGAsgASgLMhUuY2hhdC52MS5DbGllbnRTaWduYWxIAFIM'
+    'c2lnbmFsVXBkYXRlEjIKB2NvbW1hbmQYDCABKAsyFi5jaGF0LnYxLkNsaWVudENvbW1hbmRIAF'
+    'IHY29tbWFuZEIJCgdwYXlsb2Fk');
+
+@$core.Deprecated('Use streamResponseDescriptor instead')
+const StreamResponse$json = {
+  '1': 'StreamResponse',
+  '2': [
+    {'1': 'id', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'id'},
+    {'1': 'timestamp', '3': 5, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'timestamp'},
+    {'1': 'message', '3': 10, '4': 1, '5': 11, '6': '.chat.v1.RoomEvent', '9': 0, '10': 'message'},
+    {'1': 'presence_event', '3': 12, '4': 1, '5': 11, '6': '.chat.v1.PresenceEvent', '9': 0, '10': 'presenceEvent'},
+    {'1': 'receipt_event', '3': 13, '4': 1, '5': 11, '6': '.chat.v1.ReceiptEvent', '9': 0, '10': 'receiptEvent'},
+    {'1': 'read_event', '3': 15, '4': 1, '5': 11, '6': '.chat.v1.ReadMarker', '9': 0, '10': 'readEvent'},
+    {'1': 'typing_event', '3': 17, '4': 1, '5': 11, '6': '.chat.v1.TypingEvent', '9': 0, '10': 'typingEvent'},
+    {'1': 'error', '3': 20, '4': 1, '5': 11, '6': '.common.v1.ErrorDetail', '9': 0, '10': 'error'},
+  ],
+  '8': [
+    {'1': 'payload'},
+  ],
+};
+
+/// Descriptor for `StreamResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List streamResponseDescriptor = $convert.base64Decode(
+    'Cg5TdHJlYW1SZXNwb25zZRIrCgJpZBgDIAEoCUIbukgYchYQAxgoMhBbMC05YS16Xy1dezMsND'
+    'B9UgJpZBI4Cgl0aW1lc3RhbXAYBSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wUgl0'
+    'aW1lc3RhbXASLgoHbWVzc2FnZRgKIAEoCzISLmNoYXQudjEuUm9vbUV2ZW50SABSB21lc3NhZ2'
+    'USPwoOcHJlc2VuY2VfZXZlbnQYDCABKAsyFi5jaGF0LnYxLlByZXNlbmNlRXZlbnRIAFINcHJl'
+    'c2VuY2VFdmVudBI8Cg1yZWNlaXB0X2V2ZW50GA0gASgLMhUuY2hhdC52MS5SZWNlaXB0RXZlbn'
+    'RIAFIMcmVjZWlwdEV2ZW50EjQKCnJlYWRfZXZlbnQYDyABKAsyEy5jaGF0LnYxLlJlYWRNYXJr'
+    'ZXJIAFIJcmVhZEV2ZW50EjkKDHR5cGluZ19ldmVudBgRIAEoCzIULmNoYXQudjEuVHlwaW5nRX'
+    'ZlbnRIAFILdHlwaW5nRXZlbnQSLgoFZXJyb3IYFCABKAsyFi5jb21tb24udjEuRXJyb3JEZXRh'
+    'aWxIAFIFZXJyb3JCCQoHcGF5bG9hZA==');
+
 @$core.Deprecated('Use sendEventRequestDescriptor instead')
 const SendEventRequest$json = {
   '1': 'SendEventRequest',
@@ -307,17 +338,16 @@ const GetHistoryRequest$json = {
   '1': 'GetHistoryRequest',
   '2': [
     {'1': 'room_id', '3': 2, '4': 1, '5': 9, '10': 'roomId'},
-    {'1': 'cursor', '3': 3, '4': 1, '5': 9, '10': 'cursor'},
-    {'1': 'limit', '3': 4, '4': 1, '5': 5, '10': 'limit'},
+    {'1': 'cursor', '3': 3, '4': 1, '5': 11, '6': '.common.v1.PageCursor', '10': 'cursor'},
     {'1': 'forward', '3': 5, '4': 1, '5': 8, '10': 'forward'},
   ],
 };
 
 /// Descriptor for `GetHistoryRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getHistoryRequestDescriptor = $convert.base64Decode(
-    'ChFHZXRIaXN0b3J5UmVxdWVzdBIXCgdyb29tX2lkGAIgASgJUgZyb29tSWQSFgoGY3Vyc29yGA'
-    'MgASgJUgZjdXJzb3ISFAoFbGltaXQYBCABKAVSBWxpbWl0EhgKB2ZvcndhcmQYBSABKAhSB2Zv'
-    'cndhcmQ=');
+    'ChFHZXRIaXN0b3J5UmVxdWVzdBIXCgdyb29tX2lkGAIgASgJUgZyb29tSWQSLQoGY3Vyc29yGA'
+    'MgASgLMhUuY29tbW9uLnYxLlBhZ2VDdXJzb3JSBmN1cnNvchIYCgdmb3J3YXJkGAUgASgIUgdm'
+    'b3J3YXJk');
 
 @$core.Deprecated('Use getHistoryResponseDescriptor instead')
 const GetHistoryResponse$json = {
@@ -400,22 +430,18 @@ const SearchRoomsRequest$json = {
   '1': 'SearchRoomsRequest',
   '2': [
     {'1': 'query', '3': 1, '4': 1, '5': 9, '10': 'query'},
-    {'1': 'page', '3': 2, '4': 1, '5': 5, '10': 'page'},
-    {'1': 'count', '3': 3, '4': 1, '5': 5, '10': 'count'},
-    {'1': 'start_date', '3': 4, '4': 1, '5': 9, '10': 'startDate'},
-    {'1': 'end_date', '3': 5, '4': 1, '5': 9, '10': 'endDate'},
     {'1': 'properties', '3': 6, '4': 3, '5': 9, '10': 'properties'},
     {'1': 'extras', '3': 7, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'extras'},
+    {'1': 'cursor', '3': 10, '4': 1, '5': 11, '6': '.common.v1.PageCursor', '10': 'cursor'},
   ],
 };
 
 /// Descriptor for `SearchRoomsRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List searchRoomsRequestDescriptor = $convert.base64Decode(
-    'ChJTZWFyY2hSb29tc1JlcXVlc3QSFAoFcXVlcnkYASABKAlSBXF1ZXJ5EhIKBHBhZ2UYAiABKA'
-    'VSBHBhZ2USFAoFY291bnQYAyABKAVSBWNvdW50Eh0KCnN0YXJ0X2RhdGUYBCABKAlSCXN0YXJ0'
-    'RGF0ZRIZCghlbmRfZGF0ZRgFIAEoCVIHZW5kRGF0ZRIeCgpwcm9wZXJ0aWVzGAYgAygJUgpwcm'
-    '9wZXJ0aWVzEi8KBmV4dHJhcxgHIAEoCzIXLmdvb2dsZS5wcm90b2J1Zi5TdHJ1Y3RSBmV4dHJh'
-    'cw==');
+    'ChJTZWFyY2hSb29tc1JlcXVlc3QSFAoFcXVlcnkYASABKAlSBXF1ZXJ5Eh4KCnByb3BlcnRpZX'
+    'MYBiADKAlSCnByb3BlcnRpZXMSLwoGZXh0cmFzGAcgASgLMhcuZ29vZ2xlLnByb3RvYnVmLlN0'
+    'cnVjdFIGZXh0cmFzEi0KBmN1cnNvchgKIAEoCzIVLmNvbW1vbi52MS5QYWdlQ3Vyc29yUgZjdX'
+    'Jzb3I=');
 
 @$core.Deprecated('Use searchRoomsResponseDescriptor instead')
 const SearchRoomsResponse$json = {
@@ -714,6 +740,10 @@ const TextContent$json = {
     {'1': 'body', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'body'},
     {'1': 'format', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'format'},
     {'1': 'annotations', '3': 3, '4': 3, '5': 11, '6': '.chat.v1.TextAnnotation', '10': 'annotations'},
+    {'1': 'lang', '3': 4, '4': 1, '5': 9, '9': 0, '10': 'lang', '17': true},
+  ],
+  '8': [
+    {'1': '_lang'},
   ],
 };
 
@@ -721,7 +751,8 @@ const TextContent$json = {
 final $typed_data.Uint8List textContentDescriptor = $convert.base64Decode(
     'CgtUZXh0Q29udGVudBIeCgRib2R5GAEgASgJQgq6SAdyBRABGJBOUgRib2R5EiEKBmZvcm1hdB'
     'gCIAEoCUIJukgGcgQQARggUgZmb3JtYXQSOQoLYW5ub3RhdGlvbnMYAyADKAsyFy5jaGF0LnYx'
-    'LlRleHRBbm5vdGF0aW9uUgthbm5vdGF0aW9ucw==');
+    'LlRleHRBbm5vdGF0aW9uUgthbm5vdGF0aW9ucxIXCgRsYW5nGAQgASgJSABSBGxhbmeIAQFCBw'
+    'oFX2xhbmc=');
 
 @$core.Deprecated('Use textAnnotationDescriptor instead')
 const TextAnnotation$json = {
@@ -768,9 +799,11 @@ const AttachmentContent$json = {
     {'1': 'previews', '3': 6, '4': 3, '5': 11, '6': '.chat.v1.AttachmentPreview', '10': 'previews'},
     {'1': 'caption', '3': 7, '4': 1, '5': 11, '6': '.chat.v1.TextContent', '9': 0, '10': 'caption', '17': true},
     {'1': 'encrypted', '3': 8, '4': 1, '5': 8, '10': 'encrypted'},
+    {'1': 'checksum', '3': 9, '4': 1, '5': 9, '9': 1, '10': 'checksum', '17': true},
   ],
   '8': [
     {'1': '_caption'},
+    {'1': '_checksum'},
   ],
 };
 
@@ -781,7 +814,8 @@ final $typed_data.Uint8List attachmentContentDescriptor = $convert.base64Decode(
     'cGUSHQoKc2l6ZV9ieXRlcxgEIAEoA1IJc2l6ZUJ5dGVzEhAKA3VyaRgFIAEoCVIDdXJpEjYKCH'
     'ByZXZpZXdzGAYgAygLMhouY2hhdC52MS5BdHRhY2htZW50UHJldmlld1IIcHJldmlld3MSMwoH'
     'Y2FwdGlvbhgHIAEoCzIULmNoYXQudjEuVGV4dENvbnRlbnRIAFIHY2FwdGlvbogBARIcCgllbm'
-    'NyeXB0ZWQYCCABKAhSCWVuY3J5cHRlZEIKCghfY2FwdGlvbg==');
+    'NyeXB0ZWQYCCABKAhSCWVuY3J5cHRlZBIfCghjaGVja3N1bRgJIAEoCUgBUghjaGVja3N1bYgB'
+    'AUIKCghfY2FwdGlvbkILCglfY2hlY2tzdW0=');
 
 @$core.Deprecated('Use attachmentPreviewDescriptor instead')
 const AttachmentPreview$json = {
@@ -817,9 +851,9 @@ final $typed_data.Uint8List reactionContentDescriptor = $convert.base64Decode(
     'JnZXRFdmVudElkEiUKCHJlYWN0aW9uGAIgASgJQgm6SAZyBBABGEBSCHJlYWN0aW9uEhAKA2Fk'
     'ZBgDIAEoCFIDYWRk');
 
-@$core.Deprecated('Use encryptedTextContentDescriptor instead')
-const EncryptedTextContent$json = {
-  '1': 'EncryptedTextContent',
+@$core.Deprecated('Use encryptedContentDescriptor instead')
+const EncryptedContent$json = {
+  '1': 'EncryptedContent',
   '2': [
     {'1': 'algorithm', '3': 1, '4': 1, '5': 9, '10': 'algorithm'},
     {'1': 'ciphertext', '3': 2, '4': 1, '5': 12, '10': 'ciphertext'},
@@ -827,21 +861,24 @@ const EncryptedTextContent$json = {
     {'1': 'sender_key_id', '3': 4, '4': 1, '5': 9, '9': 1, '10': 'senderKeyId', '17': true},
     {'1': 'recipient_key_ids', '3': 5, '4': 3, '5': 9, '10': 'recipientKeyIds'},
     {'1': 'aad', '3': 6, '4': 1, '5': 12, '9': 2, '10': 'aad', '17': true},
+    {'1': 'session_id', '3': 7, '4': 1, '5': 9, '9': 3, '10': 'sessionId', '17': true},
   ],
   '8': [
     {'1': '_nonce'},
     {'1': '_sender_key_id'},
     {'1': '_aad'},
+    {'1': '_session_id'},
   ],
 };
 
-/// Descriptor for `EncryptedTextContent`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List encryptedTextContentDescriptor = $convert.base64Decode(
-    'ChRFbmNyeXB0ZWRUZXh0Q29udGVudBIcCglhbGdvcml0aG0YASABKAlSCWFsZ29yaXRobRIeCg'
-    'pjaXBoZXJ0ZXh0GAIgASgMUgpjaXBoZXJ0ZXh0EhkKBW5vbmNlGAMgASgMSABSBW5vbmNliAEB'
-    'EicKDXNlbmRlcl9rZXlfaWQYBCABKAlIAVILc2VuZGVyS2V5SWSIAQESKgoRcmVjaXBpZW50X2'
-    'tleV9pZHMYBSADKAlSD3JlY2lwaWVudEtleUlkcxIVCgNhYWQYBiABKAxIAlIDYWFkiAEBQggK'
-    'Bl9ub25jZUIQCg5fc2VuZGVyX2tleV9pZEIGCgRfYWFk');
+/// Descriptor for `EncryptedContent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List encryptedContentDescriptor = $convert.base64Decode(
+    'ChBFbmNyeXB0ZWRDb250ZW50EhwKCWFsZ29yaXRobRgBIAEoCVIJYWxnb3JpdGhtEh4KCmNpcG'
+    'hlcnRleHQYAiABKAxSCmNpcGhlcnRleHQSGQoFbm9uY2UYAyABKAxIAFIFbm9uY2WIAQESJwoN'
+    'c2VuZGVyX2tleV9pZBgEIAEoCUgBUgtzZW5kZXJLZXlJZIgBARIqChFyZWNpcGllbnRfa2V5X2'
+    'lkcxgFIAMoCVIPcmVjaXBpZW50S2V5SWRzEhUKA2FhZBgGIAEoDEgCUgNhYWSIAQESIgoKc2Vz'
+    'c2lvbl9pZBgHIAEoCUgDUglzZXNzaW9uSWSIAQFCCAoGX25vbmNlQhAKDl9zZW5kZXJfa2V5X2'
+    'lkQgYKBF9hYWRCDQoLX3Nlc3Npb25faWQ=');
 
 @$core.Deprecated('Use callContentDescriptor instead')
 const CallContent$json = {
@@ -850,12 +887,13 @@ const CallContent$json = {
     {'1': 'call_id', '3': 1, '4': 1, '5': 9, '10': 'callId'},
     {'1': 'type', '3': 2, '4': 1, '5': 14, '6': '.chat.v1.CallContent.CallType', '10': 'type'},
     {'1': 'action', '3': 3, '4': 1, '5': 14, '6': '.chat.v1.CallContent.CallAction', '10': 'action'},
-    {'1': 'sdp', '3': 4, '4': 1, '5': 9, '10': 'sdp'},
-    {'1': 'ice_candidate', '3': 5, '4': 1, '5': 9, '9': 0, '10': 'iceCandidate', '17': true},
+    {'1': 'sdp', '3': 4, '4': 1, '5': 9, '9': 0, '10': 'sdp', '17': true},
+    {'1': 'ice_candidate', '3': 5, '4': 1, '5': 9, '9': 1, '10': 'iceCandidate', '17': true},
     {'1': 'metadata', '3': 8, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'metadata'},
   ],
   '4': [CallContent_CallType$json, CallContent_CallAction$json],
   '8': [
+    {'1': '_sdp'},
     {'1': '_ice_candidate'},
   ],
 };
@@ -887,14 +925,14 @@ const CallContent_CallAction$json = {
 final $typed_data.Uint8List callContentDescriptor = $convert.base64Decode(
     'CgtDYWxsQ29udGVudBIXCgdjYWxsX2lkGAEgASgJUgZjYWxsSWQSMQoEdHlwZRgCIAEoDjIdLm'
     'NoYXQudjEuQ2FsbENvbnRlbnQuQ2FsbFR5cGVSBHR5cGUSNwoGYWN0aW9uGAMgASgOMh8uY2hh'
-    'dC52MS5DYWxsQ29udGVudC5DYWxsQWN0aW9uUgZhY3Rpb24SEAoDc2RwGAQgASgJUgNzZHASKA'
-    'oNaWNlX2NhbmRpZGF0ZRgFIAEoCUgAUgxpY2VDYW5kaWRhdGWIAQESMwoIbWV0YWRhdGEYCCAB'
-    'KAsyFy5nb29nbGUucHJvdG9idWYuU3RydWN0UghtZXRhZGF0YSJrCghDYWxsVHlwZRIZChVDQU'
-    'xMX1RZUEVfVU5TUEVDSUZJRUQQABITCg9DQUxMX1RZUEVfQVVESU8QARITCg9DQUxMX1RZUEVf'
-    'VklERU8QAhIaChZDQUxMX1RZUEVfU0NSRUVOX1NIQVJFEAMijAEKCkNhbGxBY3Rpb24SGwoXQ0'
-    'FMTF9BQ1RJT05fVU5TUEVDSUZJRUQQABIVChFDQUxMX0FDVElPTl9PRkZFUhABEhYKEkNBTExf'
-    'QUNUSU9OX0FOU1dFUhACEh0KGUNBTExfQUNUSU9OX0lDRV9DQU5ESURBVEUQAxITCg9DQUxMX0'
-    'FDVElPTl9FTkQQBEIQCg5faWNlX2NhbmRpZGF0ZQ==');
+    'dC52MS5DYWxsQ29udGVudC5DYWxsQWN0aW9uUgZhY3Rpb24SFQoDc2RwGAQgASgJSABSA3NkcI'
+    'gBARIoCg1pY2VfY2FuZGlkYXRlGAUgASgJSAFSDGljZUNhbmRpZGF0ZYgBARIzCghtZXRhZGF0'
+    'YRgIIAEoCzIXLmdvb2dsZS5wcm90b2J1Zi5TdHJ1Y3RSCG1ldGFkYXRhImsKCENhbGxUeXBlEh'
+    'kKFUNBTExfVFlQRV9VTlNQRUNJRklFRBAAEhMKD0NBTExfVFlQRV9BVURJTxABEhMKD0NBTExf'
+    'VFlQRV9WSURFTxACEhoKFkNBTExfVFlQRV9TQ1JFRU5fU0hBUkUQAyKMAQoKQ2FsbEFjdGlvbh'
+    'IbChdDQUxMX0FDVElPTl9VTlNQRUNJRklFRBAAEhUKEUNBTExfQUNUSU9OX09GRkVSEAESFgoS'
+    'Q0FMTF9BQ1RJT05fQU5TV0VSEAISHQoZQ0FMTF9BQ1RJT05fSUNFX0NBTkRJREFURRADEhMKD0'
+    'NBTExfQUNUSU9OX0VORBAEQgYKBF9zZHBCEAoOX2ljZV9jYW5kaWRhdGU=');
 
 const $core.Map<$core.String, $core.dynamic> GatewayServiceBase$json = {
   '1': 'GatewayService',
@@ -906,10 +944,12 @@ const $core.Map<$core.String, $core.dynamic> GatewayServiceBase$json = {
 @$core.Deprecated('Use gatewayServiceDescriptor instead')
 const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> GatewayServiceBase$messageJson = {
   '.chat.v1.StreamRequest': StreamRequest$json,
+  '.chat.v1.StreamHello': StreamHello$json,
+  '.chat.v1.StreamHello.CapabilitiesEntry': StreamHello_CapabilitiesEntry$json,
+  '.google.protobuf.Timestamp': $0.Timestamp$json,
   '.chat.v1.ClientSignal': ClientSignal$json,
   '.chat.v1.ReceiptEvent': ReceiptEvent$json,
   '.chat.v1.StreamAck': StreamAck$json,
-  '.google.protobuf.Timestamp': $0.Timestamp$json,
   '.google.protobuf.Struct': $1.Struct$json,
   '.google.protobuf.Struct.FieldsEntry': $1.Struct_FieldsEntry$json,
   '.google.protobuf.Value': $1.Value$json,
@@ -926,7 +966,7 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> GatewaySer
   '.chat.v1.AttachmentContent': AttachmentContent$json,
   '.chat.v1.AttachmentPreview': AttachmentPreview$json,
   '.chat.v1.ReactionContent': ReactionContent$json,
-  '.chat.v1.EncryptedTextContent': EncryptedTextContent$json,
+  '.chat.v1.EncryptedContent': EncryptedContent$json,
   '.chat.v1.CallContent': CallContent$json,
   '.chat.v1.StreamResponse': StreamResponse$json,
 };
@@ -990,7 +1030,7 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> ChatServic
   '.chat.v1.AttachmentContent': AttachmentContent$json,
   '.chat.v1.AttachmentPreview': AttachmentPreview$json,
   '.chat.v1.ReactionContent': ReactionContent$json,
-  '.chat.v1.EncryptedTextContent': EncryptedTextContent$json,
+  '.chat.v1.EncryptedContent': EncryptedContent$json,
   '.chat.v1.CallContent': CallContent$json,
   '.google.protobuf.Struct': $1.Struct$json,
   '.google.protobuf.Struct.FieldsEntry': $1.Struct_FieldsEntry$json,
@@ -1001,6 +1041,7 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> ChatServic
   '.common.v1.ErrorDetail': $2.ErrorDetail$json,
   '.common.v1.ErrorDetail.MetaEntry': $2.ErrorDetail_MetaEntry$json,
   '.chat.v1.GetHistoryRequest': GetHistoryRequest$json,
+  '.common.v1.PageCursor': $2.PageCursor$json,
   '.chat.v1.GetHistoryResponse': GetHistoryResponse$json,
   '.chat.v1.StreamResponse': StreamResponse$json,
   '.chat.v1.PresenceEvent': PresenceEvent$json,

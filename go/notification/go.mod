@@ -3,7 +3,7 @@ module github.com/antinvestor/apis/go/notification
 go 1.25
 
 require (
-	buf.build/gen/go/antinvestor/common/protocolbuffers/go v1.36.11-20251223175359-03d5a4a55277.1
+	buf.build/gen/go/antinvestor/common/protocolbuffers/go v1.36.11-20260102104630-5c57561a771f.1
 	buf.build/gen/go/antinvestor/notification/connectrpc/go v1.19.1-20251223175610-ae615b4be923.2
 	buf.build/gen/go/antinvestor/notification/protocolbuffers/go v1.36.11-20251223175610-ae615b4be923.1
 	connectrpc.com/connect v1.19.1

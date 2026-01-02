@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.52.1] - 2025-1-2
+
+### Changed
+
+- Upgrade common code to the latest version v1.52.0
+
 ## [1.51.13] - 2025-1-2
 
 ### Changed

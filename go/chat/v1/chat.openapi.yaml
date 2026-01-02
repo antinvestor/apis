@@ -657,6 +657,13 @@ components:
           type: boolean
           title: encrypted
           description: Indicates whether attachment is end-to-end encrypted
+        checksum:
+          type:
+            - string
+            - "null"
+          title: checksum
+          description: Optional content hash (e.g. sha256:base64)
+          nullable: true
       title: AttachmentContent
       additionalProperties: false
     chat.v1.AttachmentPreview:
@@ -695,11 +702,18 @@ components:
           $ref: '#/components/schemas/chat.v1.CallContent.CallType'
         action:
           title: action
+          description: |-
+            OFFER, ANSWER → sdp required
+             ICE_CANDIDATE → ice_candidate required
+             END → no payload required
           $ref: '#/components/schemas/chat.v1.CallContent.CallAction'
         sdp:
-          type: string
+          type:
+            - string
+            - "null"
           title: sdp
           description: WebRTC payload (SDP or ICE candidate)
+          nullable: true
         iceCandidate:
           type:
             - string
@@ -736,7 +750,6 @@ components:
         - properties:
             event:
               title: event
-              description: Similar to room_event but useful for sending messages
               $ref: '#/components/schemas/chat.v1.RoomEvent'
           title: event
           required:
@@ -744,14 +757,16 @@ components:
         - properties:
             readMarker:
               title: read_marker
-              description: marker for "read up to X"
               $ref: '#/components/schemas/chat.v1.ReadMarker'
           title: read_marker
           required:
             - readMarker
       title: ClientCommand
       additionalProperties: false
-      description: Generic client commands that modify state ( room events and read markers)
+      description: |-
+        ClientCommand represents durable state changes initiated by the client.
+         Commands are validated, persisted, and broadcast as needed.
+         ClientCommand results in at least one RoomEvent being emitted.
     chat.v1.ClientSignal:
       type: object
       oneOf:
@@ -853,7 +868,7 @@ components:
           $ref: '#/components/schemas/common.v1.ErrorDetail'
       title: DeleteRoomResponse
       additionalProperties: false
-    chat.v1.EncryptedTextContent:
+    chat.v1.EncryptedContent:
       type: object
       properties:
         algorithm:
@@ -896,7 +911,14 @@ components:
           format: byte
           description: Additional authenticated data (AAD)
           nullable: true
-      title: EncryptedTextContent
+        sessionId:
+          type:
+            - string
+            - "null"
+          title: session_id
+          description: Optional key agreement context identifier
+          nullable: true
+      title: EncryptedContent
       additionalProperties: false
     chat.v1.GetClientStateRequest:
       type: object
@@ -945,20 +967,18 @@ components:
           type: string
           title: room_id
         cursor:
-          type: string
           title: cursor
-          description: opaque token from prior GetHistoryResponse
-        limit:
-          type: integer
-          title: limit
-          format: int32
+          $ref: '#/components/schemas/common.v1.PageCursor'
         forward:
           type: boolean
           title: forward
           description: 'direction: FORWARD means older -> newer; BACKWARD newer -> older (default BACKWARD).'
       title: GetHistoryRequest
       additionalProperties: false
-      description: 'History request: paging via opaque cursor. ''limit'' is capped by server (e.g. 100).'
+      description: |-
+        History request: paging via opaque cursor. 'limit' is capped by server (e.g. 100).
+         Ordering is determined by XID lexicographic order.
+         Cursor encapsulates last seen event ID.
     chat.v1.GetHistoryResponse:
       type: object
       properties:
@@ -1021,7 +1041,9 @@ components:
         add:
           type: boolean
           title: add
-          description: True = add reaction, False = remove reaction
+          description: |-
+            add=true → ensure reaction exists
+             add=false → ensure reaction does not exist
       title: ReactionContent
       additionalProperties: false
     chat.v1.ReadMarker:
@@ -1073,7 +1095,12 @@ components:
           minItems: 1
       title: ReceiptEvent
       additionalProperties: false
-      description: Read receipts
+      description: |-
+        ReceiptEvent is OPTIONAL and ephemeral.
+         Servers MAY ignore it.
+         Clients SHOULD prefer ReadMarker for durable state.
+         Servers MUST NOT persist ReceiptEvent.
+         Servers MAY drop ReceiptEvent without acknowledgment.
     chat.v1.RemoveRoomSubscriptionsRequest:
       type: object
       properties:
@@ -1148,7 +1175,10 @@ components:
               maxLength: 40
               minLength: 3
               pattern: '[0-9a-z_-]{3,40}'
-              description: client-supplied or server-generated UUID
+              description: |-
+                NOTE:
+                 Event IDs are XIDs and MUST be lexicographically sortable by creation time.
+                 Clients MUST NOT assume any other ordering mechanism. client-supplied or server-generated UUID
             roomId:
               type: string
               title: room_id
@@ -1165,7 +1195,9 @@ components:
               description: profile_id or service/bot id
             type:
               title: type
-              description: text, attachment, call_offer, etc.
+              description: |-
+                The `type` MUST correspond to the populated payload.
+                 Servers MUST reject mismatches. text, attachment, call_offer, etc.
               $ref: '#/components/schemas/chat.v1.RoomEventType'
             sentAt:
               title: sent_at
@@ -1190,6 +1222,7 @@ components:
             - properties:
                 attachment:
                   title: attachment
+                  description: type = ROOM_EVENT_TYPE_ATTACHMENT
                   $ref: '#/components/schemas/chat.v1.AttachmentContent'
               title: attachment
               required:
@@ -1197,20 +1230,23 @@ components:
             - properties:
                 call:
                   title: call
+                  description: type = ROOM_EVENT_TYPE_CALL
                   $ref: '#/components/schemas/chat.v1.CallContent'
               title: call
               required:
                 - call
             - properties:
-                encryptedText:
-                  title: encryptedText
-                  $ref: '#/components/schemas/chat.v1.EncryptedTextContent'
-              title: encryptedText
+                encrypted:
+                  title: encrypted
+                  description: type = ROOM_EVENT_TYPE_ENCRYPTED
+                  $ref: '#/components/schemas/chat.v1.EncryptedContent'
+              title: encrypted
               required:
-                - encryptedText
+                - encrypted
             - properties:
                 reaction:
                   title: reaction
+                  description: type = ROOM_EVENT_TYPE_REACTION
                   $ref: '#/components/schemas/chat.v1.ReactionContent'
               title: reaction
               required:
@@ -1218,6 +1254,7 @@ components:
             - properties:
                 text:
                   title: text
+                  description: type = ROOM_EVENT_TYPE_TEXT
                   $ref: '#/components/schemas/chat.v1.TextContent'
               title: text
               required:
@@ -1308,20 +1345,6 @@ components:
         query:
           type: string
           title: query
-        page:
-          type: integer
-          title: page
-          format: int32
-        count:
-          type: integer
-          title: count
-          format: int32
-        startDate:
-          type: string
-          title: start_date
-        endDate:
-          type: string
-          title: end_date
         properties:
           type: array
           items:
@@ -1330,6 +1353,9 @@ components:
         extras:
           title: extras
           $ref: '#/components/schemas/google.protobuf.Struct'
+        cursor:
+          title: cursor
+          $ref: '#/components/schemas/common.v1.PageCursor'
       title: SearchRoomsRequest
       additionalProperties: false
     chat.v1.SearchRoomsResponse:
@@ -1389,31 +1415,64 @@ components:
         Acknowledgement for event(s) received; server uses it to free ephemeral delivery buffers.
          ack_event_id: last event_id client processed (inclusive).
          If error is set, indicates the event failed to send/process correctly.
+    chat.v1.StreamHello:
+      type: object
+      properties:
+        resumeToken:
+          type: string
+          title: resume_token
+        capabilities:
+          type: object
+          title: capabilities
+          additionalProperties:
+            type: string
+            title: value
+        clientTime:
+          title: client_time
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+      title: StreamHello
+      additionalProperties: false
+      description: |-
+        StreamHello message sent by client to server to initiate a connection.
+         resume_token: server-supplied resume_token from previous session.
+         capabilities: list of capabilities supported by the client.
+         StreamHello MUST be the first message sent by the client.
+         Servers MUST reject any other message types before StreamHello.
+    chat.v1.StreamHello.CapabilitiesEntry:
+      type: object
+      properties:
+        key:
+          type: string
+          title: key
+        value:
+          type: string
+          title: value
+      title: CapabilitiesEntry
+      additionalProperties: false
     chat.v1.StreamRequest:
       type: object
-      allOf:
+      oneOf:
         - properties:
-            resumeToken:
-              type: string
-              title: resume_token
-              description: |-
-                Optional resume token: server-supplied resume_token from previous session.
-                 Server will validate and accept resume only if resume window allows it.
-        - oneOf:
-            - properties:
-                signalUpdate:
-                  title: signal_update
-                  $ref: '#/components/schemas/chat.v1.ClientSignal'
+            command:
+              title: command
+              $ref: '#/components/schemas/chat.v1.ClientCommand'
+          title: command
+          required:
+            - command
+        - properties:
+            hello:
+              title: hello
+              $ref: '#/components/schemas/chat.v1.StreamHello'
+          title: hello
+          required:
+            - hello
+        - properties:
+            signalUpdate:
               title: signal_update
-              required:
-                - signalUpdate
-            - properties:
-                stateUpdate:
-                  title: state_update
-                  $ref: '#/components/schemas/chat.v1.ClientCommand'
-              title: state_update
-              required:
-                - stateUpdate
+              $ref: '#/components/schemas/chat.v1.ClientSignal'
+          title: signal_update
+          required:
+            - signalUpdate
       title: StreamRequest
       additionalProperties: false
       description: Client message over Connect stream. After initial connect frame, client sends acks/commands.
@@ -1427,10 +1486,26 @@ components:
               maxLength: 40
               minLength: 3
               pattern: '[0-9a-z_-]{3,40}'
+              description: |-
+                NOTE:
+                 Stream IDs are XIDs and MUST be lexicographically sortable by creation time.
+                 Clients MUST NOT assume any other ordering mechanism.
             timestamp:
               title: timestamp
               $ref: '#/components/schemas/google.protobuf.Timestamp'
         - oneOf:
+            - properties:
+                error:
+                  title: error
+                  description: |-
+                    error:
+                     - If present, represents a server-side error related to the stream or event.
+                     - MAY be recoverable (client should continue stream) or fatal.
+                     - Fatal errors MUST be followed by stream termination.
+                  $ref: '#/components/schemas/common.v1.ErrorDetail'
+              title: error
+              required:
+                - error
             - properties:
                 message:
                   title: message
@@ -1527,6 +1602,13 @@ components:
             $ref: '#/components/schemas/chat.v1.TextAnnotation'
           title: annotations
           description: Structured annotations for clients (mentions, links, emojis)
+        lang:
+          type:
+            - string
+            - "null"
+          title: lang
+          description: Optional language hint (BCP-47), e.g. "en", "fr-CA"
+          nullable: true
       title: TextContent
       additionalProperties: false
     chat.v1.TypingEvent:
@@ -1737,6 +1819,23 @@ components:
           title: value
       title: MetaEntry
       additionalProperties: false
+    common.v1.PageCursor:
+      type: object
+      properties:
+        limit:
+          type: integer
+          title: limit
+          format: int32
+          description: Number of items per cursor (limit)
+        page:
+          type: string
+          title: page
+          description: Page number/ cursor representing last id from result
+      title: PageCursor
+      additionalProperties: false
+      description: |-
+        PageCursor provides standard offset-based pagination/cursor stream parameters.
+         Used for list operations that return large result sets.
     compression:
       title: compression
       enum:
