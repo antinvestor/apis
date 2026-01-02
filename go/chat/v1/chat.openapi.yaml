@@ -616,9 +616,152 @@ components:
           $ref: '#/components/schemas/common.v1.ErrorDetail'
       title: AddRoomSubscriptionsResponse
       additionalProperties: false
-    chat.v1.ClientState:
+    chat.v1.AttachmentContent:
+      type: object
+      properties:
+        attachmentId:
+          type: string
+          title: attachment_id
+          description: Logical identifier of the attachment
+        filename:
+          type: string
+          title: filename
+          description: Original filename (optional, user-facing)
+        mimeType:
+          type: string
+          title: mime_type
+          description: MIME type (e.g. image/png, application/pdf)
+        sizeBytes:
+          type:
+            - integer
+            - string
+          title: size_bytes
+          format: int64
+          description: Size in bytes (for quota enforcement & UX)
+        uri:
+          type: string
+          title: uri
+          description: Content location (signed URL or opaque locator)
+        previews:
+          type: array
+          items:
+            $ref: '#/components/schemas/chat.v1.AttachmentPreview'
+          title: previews
+          description: Optional previews / thumbnails
+        caption:
+          title: caption
+          description: Optional caption text
+          nullable: true
+          $ref: '#/components/schemas/chat.v1.TextContent'
+        encrypted:
+          type: boolean
+          title: encrypted
+          description: Indicates whether attachment is end-to-end encrypted
+      title: AttachmentContent
+      additionalProperties: false
+    chat.v1.AttachmentPreview:
+      type: object
+      properties:
+        mimeType:
+          type: string
+          title: mime_type
+        width:
+          type: integer
+          title: width
+          format: int32
+        height:
+          type: integer
+          title: height
+          format: int32
+        uri:
+          type: string
+          title: uri
+        sizeBytes:
+          type:
+            - integer
+            - string
+          title: size_bytes
+          format: int64
+      title: AttachmentPreview
+      additionalProperties: false
+    chat.v1.CallContent:
+      type: object
+      properties:
+        callId:
+          type: string
+          title: call_id
+        type:
+          title: type
+          $ref: '#/components/schemas/chat.v1.CallContent.CallType'
+        action:
+          title: action
+          $ref: '#/components/schemas/chat.v1.CallContent.CallAction'
+        sdp:
+          type: string
+          title: sdp
+          description: WebRTC payload (SDP or ICE candidate)
+        iceCandidate:
+          type:
+            - string
+            - "null"
+          title: ice_candidate
+          description: Optional ICE candidate (when action = ICE_CANDIDATE)
+          nullable: true
+        metadata:
+          title: metadata
+          description: Optional metadata (bitrate, codecs, device hints)
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: CallContent
+      additionalProperties: false
+    chat.v1.CallContent.CallAction:
+      type: string
+      title: CallAction
+      enum:
+        - CALL_ACTION_UNSPECIFIED
+        - CALL_ACTION_OFFER
+        - CALL_ACTION_ANSWER
+        - CALL_ACTION_ICE_CANDIDATE
+        - CALL_ACTION_END
+    chat.v1.CallContent.CallType:
+      type: string
+      title: CallType
+      enum:
+        - CALL_TYPE_UNSPECIFIED
+        - CALL_TYPE_AUDIO
+        - CALL_TYPE_VIDEO
+        - CALL_TYPE_SCREEN_SHARE
+    chat.v1.ClientCommand:
       type: object
       oneOf:
+        - properties:
+            event:
+              title: event
+              description: Similar to room_event but useful for sending messages
+              $ref: '#/components/schemas/chat.v1.RoomEvent'
+          title: event
+          required:
+            - event
+        - properties:
+            readMarker:
+              title: read_marker
+              description: marker for "read up to X"
+              $ref: '#/components/schemas/chat.v1.ReadMarker'
+          title: read_marker
+          required:
+            - readMarker
+      title: ClientCommand
+      additionalProperties: false
+      description: Generic client commands that modify state ( room events and read markers)
+    chat.v1.ClientSignal:
+      type: object
+      oneOf:
+        - properties:
+            ack:
+              title: ack
+              $ref: '#/components/schemas/chat.v1.StreamAck'
+          title: ack
+          required:
+            - ack
         - properties:
             presence:
               title: presence
@@ -628,14 +771,6 @@ components:
           required:
             - presence
         - properties:
-            readMarker:
-              title: read_marker
-              description: marker for "read up to X"
-              $ref: '#/components/schemas/chat.v1.ReadMarker'
-          title: read_marker
-          required:
-            - readMarker
-        - properties:
             receipt:
               title: receipt
               description: receipt acknowledgement for message delivery
@@ -644,31 +779,15 @@ components:
           required:
             - receipt
         - properties:
-            roomEvent:
-              title: room_event
-              description: send a room event (message) via the stream
-              $ref: '#/components/schemas/chat.v1.RoomEvent'
-          title: room_event
-          required:
-            - roomEvent
-        - properties:
-            sendEvent:
-              title: send_event
-              description: Similar to room_event but useful for sending messages in bulk
-              $ref: '#/components/schemas/chat.v1.SendEventRequest'
-          title: send_event
-          required:
-            - sendEvent
-        - properties:
             typing:
               title: typing
               $ref: '#/components/schemas/chat.v1.TypingEvent'
           title: typing
           required:
             - typing
-      title: ClientState
+      title: ClientSignal
       additionalProperties: false
-      description: Generic client state (typing, read markers that aren't receipts, and room events)
+      description: Generic client signal (typing, read markers that aren't receipts)
     chat.v1.CreateRoomRequest:
       type: object
       properties:
@@ -734,6 +853,51 @@ components:
           $ref: '#/components/schemas/common.v1.ErrorDetail'
       title: DeleteRoomResponse
       additionalProperties: false
+    chat.v1.EncryptedTextContent:
+      type: object
+      properties:
+        algorithm:
+          type: string
+          title: algorithm
+          description: |-
+            Encryption scheme identifier
+             Examples: "olm.v2", "megolm.v1", "x25519-aesgcm"
+        ciphertext:
+          type: string
+          title: ciphertext
+          format: byte
+          description: Base64 or binary-safe encoded ciphertext
+        nonce:
+          type:
+            - string
+            - "null"
+          title: nonce
+          format: byte
+          description: Optional per-message nonce / IV
+          nullable: true
+        senderKeyId:
+          type:
+            - string
+            - "null"
+          title: sender_key_id
+          description: Optional sender key identifier
+          nullable: true
+        recipientKeyIds:
+          type: array
+          items:
+            type: string
+          title: recipient_key_ids
+          description: Optional recipient key references (for fan-out)
+        aad:
+          type:
+            - string
+            - "null"
+          title: aad
+          format: byte
+          description: Additional authenticated data (AAD)
+          nullable: true
+      title: EncryptedTextContent
+      additionalProperties: false
     chat.v1.GetClientStateRequest:
       type: object
       properties:
@@ -770,7 +934,7 @@ components:
         clientState:
           type: array
           items:
-            $ref: '#/components/schemas/chat.v1.ClientState'
+            $ref: '#/components/schemas/chat.v1.ClientCommand'
           title: client_state
       title: GetClientStateResponse
       additionalProperties: false
@@ -840,6 +1004,26 @@ components:
         - PRESENCE_STATUS_UNSPECIFIED
         - PRESENCE_STATUS_OFFLINE
         - PRESENCE_STATUS_ONLINE
+    chat.v1.ReactionContent:
+      type: object
+      properties:
+        targetEventId:
+          type: string
+          title: target_event_id
+          minLength: 3
+          description: Target message being reacted to
+        reaction:
+          type: string
+          title: reaction
+          maxLength: 64
+          minLength: 1
+          description: "Reaction key (e.g. \U0001F44D, ❤️, :custom_emoji:)"
+        add:
+          type: boolean
+          title: add
+          description: True = add reaction, False = remove reaction
+      title: ReactionContent
+      additionalProperties: false
     chat.v1.ReadMarker:
       type: object
       properties:
@@ -956,55 +1140,88 @@ components:
       additionalProperties: false
     chat.v1.RoomEvent:
       type: object
-      properties:
-        id:
-          type: string
-          title: id
-          maxLength: 40
-          minLength: 3
-          pattern: '[0-9a-z_-]{3,40}'
-          description: client-supplied or server-generated UUID
-        roomId:
-          type: string
-          title: room_id
-          maxLength: 40
-          minLength: 3
-          pattern: '[0-9a-z_-]{3,40}'
-          description: room_id
-        senderId:
-          type: string
-          title: sender_id
-          maxLength: 40
-          minLength: 3
-          pattern: '[0-9a-z_-]{3,40}'
-          description: profile_id or service/bot id
-        type:
-          title: type
-          description: text, attachment, call_offer, etc.
-          $ref: '#/components/schemas/chat.v1.RoomEventType'
-        payload:
-          title: payload
-          description: e.g. {"format":"markdown","mime":"image/png","attachment_id":"..."}
-          $ref: '#/components/schemas/google.protobuf.Struct'
-        sentAt:
-          title: sent_at
-          $ref: '#/components/schemas/google.protobuf.Timestamp'
-        edited:
-          type: boolean
-          title: edited
-        redacted:
-          type: boolean
-          title: redacted
-        parentId:
-          type:
-            - string
-            - "null"
-          title: parent_id
-          maxLength: 40
-          minLength: 3
-          pattern: '[0-9a-z_-]{3,40}'
-          description: if this message is a followup event on an original message
-          nullable: true
+      allOf:
+        - properties:
+            id:
+              type: string
+              title: id
+              maxLength: 40
+              minLength: 3
+              pattern: '[0-9a-z_-]{3,40}'
+              description: client-supplied or server-generated UUID
+            roomId:
+              type: string
+              title: room_id
+              maxLength: 40
+              minLength: 3
+              pattern: '[0-9a-z_-]{3,40}'
+              description: room_id
+            senderId:
+              type: string
+              title: sender_id
+              maxLength: 40
+              minLength: 3
+              pattern: '[0-9a-z_-]{3,40}'
+              description: profile_id or service/bot id
+            type:
+              title: type
+              description: text, attachment, call_offer, etc.
+              $ref: '#/components/schemas/chat.v1.RoomEventType'
+            sentAt:
+              title: sent_at
+              $ref: '#/components/schemas/google.protobuf.Timestamp'
+            edited:
+              type: boolean
+              title: edited
+            redacted:
+              type: boolean
+              title: redacted
+            parentId:
+              type:
+                - string
+                - "null"
+              title: parent_id
+              maxLength: 40
+              minLength: 3
+              pattern: '[0-9a-z_-]{3,40}'
+              description: if this message is a followup event on an original message
+              nullable: true
+        - oneOf:
+            - properties:
+                attachment:
+                  title: attachment
+                  $ref: '#/components/schemas/chat.v1.AttachmentContent'
+              title: attachment
+              required:
+                - attachment
+            - properties:
+                call:
+                  title: call
+                  $ref: '#/components/schemas/chat.v1.CallContent'
+              title: call
+              required:
+                - call
+            - properties:
+                encryptedText:
+                  title: encryptedText
+                  $ref: '#/components/schemas/chat.v1.EncryptedTextContent'
+              title: encryptedText
+              required:
+                - encryptedText
+            - properties:
+                reaction:
+                  title: reaction
+                  $ref: '#/components/schemas/chat.v1.ReactionContent'
+              title: reaction
+              required:
+                - reaction
+            - properties:
+                text:
+                  title: text
+                  $ref: '#/components/schemas/chat.v1.TextContent'
+              title: text
+              required:
+                - text
       title: RoomEvent
       additionalProperties: false
       description: Unified message (user / bot / system / signalling)
@@ -1020,14 +1237,7 @@ components:
         - ROOM_EVENT_TYPE_ENCRYPTED
         - ROOM_EVENT_TYPE_EDIT
         - ROOM_EVENT_TYPE_REDACTION
-        - ROOM_EVENT_TYPE_STATE_DELIVERED
-        - ROOM_EVENT_TYPE_STATE_READ
-        - ROOM_EVENT_TYPE_STATE_TYPING
-        - ROOM_EVENT_TYPE_PRESENCE
-        - ROOM_EVENT_TYPE_CALL_OFFER
-        - ROOM_EVENT_TYPE_CALL_ANSWER
-        - ROOM_EVENT_TYPE_CALL_ICE
-        - ROOM_EVENT_TYPE_CALL_END
+        - ROOM_EVENT_TYPE_CALL
       description: Allowed message types. Extendable via new enum values; clients must ignore unknown values.
     chat.v1.RoomSubscription:
       type: object
@@ -1038,12 +1248,9 @@ components:
           maxLength: 40
           minLength: 3
           pattern: '[0-9a-z_-]{3,40}'
-        profileId:
-          type: string
-          title: profile_id
-          maxLength: 40
-          minLength: 3
-          pattern: '[0-9a-z_-]{3,40}'
+        member:
+          title: member
+          $ref: '#/components/schemas/common.v1.ContactLink'
         roles:
           type: array
           items:
@@ -1159,12 +1366,6 @@ components:
     chat.v1.StreamAck:
       type: object
       properties:
-        roomId:
-          type: string
-          title: room_id
-          maxLength: 40
-          minLength: 3
-          pattern: '[0-9a-z_-]{3,40}'
         eventId:
           type: string
           title: event_id
@@ -1192,17 +1393,6 @@ components:
       type: object
       allOf:
         - properties:
-            sessionId:
-              type: string
-              title: session_id
-              description: Servers should validate auth token before accepting further payload.
-            deviceId:
-              type: string
-              title: device_id
-            authToken:
-              type: string
-              title: auth_token
-              description: JWT or short-lived token; also accepted via metadata at the transport layer
             resumeToken:
               type: string
               title: resume_token
@@ -1211,23 +1401,16 @@ components:
                  Server will validate and accept resume only if resume window allows it.
         - oneOf:
             - properties:
-                ack:
-                  title: ack
-                  $ref: '#/components/schemas/chat.v1.StreamAck'
-              title: ack
+                signalUpdate:
+                  title: signal_update
+                  $ref: '#/components/schemas/chat.v1.ClientSignal'
+              title: signal_update
               required:
-                - ack
-            - properties:
-                sendEventAck:
-                  title: send_event_ack
-                  $ref: '#/components/schemas/chat.v1.SendEventResponse'
-              title: send_event_ack
-              required:
-                - sendEventAck
+                - signalUpdate
             - properties:
                 stateUpdate:
                   title: state_update
-                  $ref: '#/components/schemas/chat.v1.ClientState'
+                  $ref: '#/components/schemas/chat.v1.ClientCommand'
               title: state_update
               required:
                 - stateUpdate
@@ -1290,6 +1473,62 @@ components:
         Server -> Client event payload. All events in a room are delivered over Connect stream.
          event_id: globally unique id (opaque string) assigned by server, strictly monotonically increasing per room.
          sequence: strictly increasing 64-bit integer per-room sequence number (useful for resume & ordering).
+    chat.v1.TextAnnotation:
+      type: object
+      properties:
+        type:
+          title: type
+          $ref: '#/components/schemas/chat.v1.TextAnnotation.Type'
+        offset:
+          type: integer
+          title: offset
+          format: int32
+          description: UTF-16 offset & length for cross-platform compatibility
+        length:
+          type: integer
+          title: length
+          format: int32
+        value:
+          type: string
+          title: value
+          description: Target identifier (e.g., profile_id, room_id, URL)
+      title: TextAnnotation
+      additionalProperties: false
+    chat.v1.TextAnnotation.Type:
+      type: string
+      title: Type
+      enum:
+        - TYPE_UNSPECIFIED
+        - TYPE_MENTION_USER
+        - TYPE_MENTION_ROOM
+        - TYPE_LINK
+        - TYPE_EMOJI
+        - TYPE_HASHTAG
+    chat.v1.TextContent:
+      type: object
+      properties:
+        body:
+          type: string
+          title: body
+          maxLength: 10000
+          minLength: 1
+          description: Required human-readable message body
+        format:
+          type: string
+          title: format
+          maxLength: 32
+          minLength: 1
+          description: |-
+            Content format identifier (NOT MIME type)
+             Examples: "plain", "markdown", "html-lite"
+        annotations:
+          type: array
+          items:
+            $ref: '#/components/schemas/chat.v1.TextAnnotation'
+          title: annotations
+          description: Structured annotations for clients (mentions, links, emojis)
+      title: TextContent
+      additionalProperties: false
     chat.v1.TypingEvent:
       type: object
       properties:
@@ -1332,7 +1571,7 @@ components:
         clientStates:
           type: array
           items:
-            $ref: '#/components/schemas/chat.v1.ClientState'
+            $ref: '#/components/schemas/chat.v1.ClientCommand'
           title: client_states
       title: UpdateClientStateRequest
       additionalProperties: false

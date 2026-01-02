@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.52.0] - 2026-1-2
+
+### Changed
+
+- Switch to page cursor away from pagination
+
 ## [1.51.10] - 2025-12-31
 
 ### Changed

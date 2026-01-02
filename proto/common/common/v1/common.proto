@@ -81,13 +81,11 @@ enum STATUS {
 // Pagination & Search
 // -----------------------------------------------------
 
-// Pagination provides standard offset-based pagination parameters.
+// PageCursor provides standard offset-based pagination/cursor stream parameters.
 // Used for list operations that return large result sets.
-message Pagination {
-  int32 count = 1; // Number of items per page (limit)
-  int32 page = 2; // Page number (0-indexed or 1-indexed depending on service)
-  string start_date = 3; // Optional: Filter results from this date (RFC3339 format)
-  string end_date = 4; // Optional: Filter results until this date (RFC3339 format)
+message PageCursor {
+  int32 limit = 1; // Number of items per cursor (limit)
+  string page = 2; // Page number/ cursor representing last id from result
 }
 
 // SearchRequest provides a standard structure for search operations across services.
@@ -95,7 +93,7 @@ message Pagination {
 message SearchRequest {
   string query = 1; // Full-text search query string
   string id_query = 2; // Specific ID or ID pattern to search for
-  Pagination limits = 3; // Pagination parameters
+  PageCursor cursor = 3; // Pagination parameters
   repeated string properties = 7; // Specific properties/fields to include in results
   google.protobuf.Struct extras = 8; // Service-specific additional search parameters
 }

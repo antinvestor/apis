@@ -222,27 +222,12 @@ service ChatService {
 // Events & Payloads
 // -----------------------------------------------------
 
-// Server -> Client event payload. All events in a room are delivered over Connect stream.
-// event_id: globally unique id (opaque string) assigned by server, strictly monotonically increasing per room.
-// sequence: strictly increasing 64-bit integer per-room sequence number (useful for resume & ordering).
-message StreamResponse {
-  string id = 3 [
-    (buf.validate.field).string.min_len = 3,
-    (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
-  ];
-  google.protobuf.Timestamp timestamp = 5;
-  oneof payload {
-    RoomEvent message = 10;
-    PresenceEvent presence_event = 12; // user presence change affecting the room
-    ReceiptEvent receipt_event = 13;
-    ReadMarker read_event = 15;
-    TypingEvent typing_event = 17;
-  }
-}
-
 // Unified message (user / bot / system / signalling)
 message RoomEvent {
+
+  // NOTE:
+  // Event IDs are XIDs and MUST be lexicographically sortable by creation time.
+  // Clients MUST NOT assume any other ordering mechanism.
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
@@ -258,8 +243,11 @@ message RoomEvent {
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ]; // profile_id or service/bot id
+
+  // The `type` MUST correspond to the populated payload.
+  // Servers MUST reject mismatches.
   RoomEventType type = 4; // text, attachment, call_offer, etc.
-  google.protobuf.Struct payload = 6; // e.g. {"format":"markdown","mime":"image/png","attachment_id":"..."}
+
   google.protobuf.Timestamp sent_at = 7;
   bool edited = 8;
   bool redacted = 9;
@@ -268,6 +256,23 @@ message RoomEvent {
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ]; // if this message is a followup event on an original message
+
+  oneof payload {
+    // type = ROOM_EVENT_TYPE_TEXT
+    TextContent text = 15;
+
+    // type = ROOM_EVENT_TYPE_ATTACHMENT
+    AttachmentContent attachment = 16;
+
+    // type = ROOM_EVENT_TYPE_REACTION
+    ReactionContent reaction = 17;
+
+    // type = ROOM_EVENT_TYPE_ENCRYPTED
+    EncryptedContent encrypted = 18;
+
+    // type = ROOM_EVENT_TYPE_CALL
+    CallContent call = 19;
+  }
 }
 
 // Allowed message types. Extendable via new enum values; clients must ignore unknown values.
@@ -280,14 +285,7 @@ enum RoomEventType {
   ROOM_EVENT_TYPE_ENCRYPTED = 6; // opaque ciphertext
   ROOM_EVENT_TYPE_EDIT = 8; // represents event overriding another
   ROOM_EVENT_TYPE_REDACTION = 9; // represents event deleting another
-  ROOM_EVENT_TYPE_STATE_DELIVERED = 10;
-  ROOM_EVENT_TYPE_STATE_READ = 11;
-  ROOM_EVENT_TYPE_STATE_TYPING = 12;
-  ROOM_EVENT_TYPE_PRESENCE = 17;
-  ROOM_EVENT_TYPE_CALL_OFFER = 21;
-  ROOM_EVENT_TYPE_CALL_ANSWER = 22;
-  ROOM_EVENT_TYPE_CALL_ICE = 23;
-  ROOM_EVENT_TYPE_CALL_END = 24;
+  ROOM_EVENT_TYPE_CALL = 21;
 }
 
 // Presence event affecting a user (and visible to rooms the user is a member of)
@@ -308,7 +306,11 @@ enum PresenceStatus {
   PRESENCE_STATUS_ONLINE = 2;
 }
 
-// Read receipts
+// ReceiptEvent is OPTIONAL and ephemeral.
+// Servers MAY ignore it.
+// Clients SHOULD prefer ReadMarker for durable state.
+// Servers MUST NOT persist ReceiptEvent.
+// Servers MAY drop ReceiptEvent without acknowledgment.
 message ReceiptEvent {
   string profile_id = 1 [
     (buf.validate.field).string.min_len = 3,
@@ -370,34 +372,10 @@ message TypingEvent {
 // Connect stream: client -> server low-level requests inside stream
 // -----------------------------------------------------
 
-// Client message over Connect stream. After initial connect frame, client sends acks/commands.
-message StreamRequest {
-  // Servers should validate auth token before accepting further payload.
-  string session_id = 2;
-  string device_id = 3;
-  string auth_token = 4; // JWT or short-lived token; also accepted via metadata at the transport layer
-
-  // Optional resume token: server-supplied resume_token from previous session.
-  // Server will validate and accept resume only if resume window allows it.
-  string resume_token = 5;
-
-  // The client can send various payloads inside the stream after initial auth:
-  oneof payload {
-    StreamAck ack = 10;
-    ClientState state_update = 12;
-    SendEventResponse send_event_ack = 15;
-  }
-}
-
 // Acknowledgement for event(s) received; server uses it to free ephemeral delivery buffers.
 // ack_event_id: last event_id client processed (inclusive).
 // If error is set, indicates the event failed to send/process correctly.
 message StreamAck {
-  string room_id = 1 [
-    (buf.validate.field).string.min_len = 3,
-    (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
-  ];
   string event_id = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
@@ -408,17 +386,79 @@ message StreamAck {
   optional common.v1.ErrorDetail error = 7; // if set, indicates failure reason for this event
 }
 
-// Generic client state (typing, read markers that aren't receipts, and room events)
-message ClientState {
-  oneof state {
+// StreamHello message sent by client to server to initiate a connection.
+// resume_token: server-supplied resume_token from previous session.
+// capabilities: list of capabilities supported by the client.
+// StreamHello MUST be the first message sent by the client.
+// Servers MUST reject any other message types before StreamHello.
+message StreamHello {
+  string resume_token = 1;
+  map<string, string> capabilities = 2;
+  google.protobuf.Timestamp client_time = 3;
+}
+
+// Generic client signal (typing, read markers that aren't receipts)
+message ClientSignal {
+  oneof signal {
+    StreamAck ack = 3;
     TypingEvent typing = 4;
     ReceiptEvent receipt = 2; // receipt acknowledgement for message delivery
-    ReadMarker read_marker = 3; // marker for "read up to X"
-    RoomEvent room_event = 1; // send a room event (message) via the stream
     PresenceEvent presence = 5; // send a presence message to a room
-    SendEventRequest send_event = 10; // Similar to room_event but useful for sending messages in bulk
   }
 }
+
+// ClientCommand represents durable state changes initiated by the client.
+// Commands are validated, persisted, and broadcast as needed.
+// ClientCommand results in at least one RoomEvent being emitted.
+message ClientCommand {
+  oneof state {
+    ReadMarker read_marker = 3;
+    RoomEvent event = 10;
+  }
+}
+
+// Client message over Connect stream. After initial connect frame, client sends acks/commands.
+message StreamRequest {
+
+  // The client can send various payloads inside the stream after initial auth:
+  oneof payload {
+    StreamHello hello = 1;
+    ClientSignal signal_update = 11;
+    ClientCommand command = 12;
+  }
+}
+
+
+// Server -> Client event payload. All events in a room are delivered over Connect stream.
+// event_id: globally unique id (opaque string) assigned by server, strictly monotonically increasing per room.
+// sequence: strictly increasing 64-bit integer per-room sequence number (useful for resume & ordering).
+message StreamResponse {
+
+  // NOTE:
+  // Stream IDs are XIDs and MUST be lexicographically sortable by creation time.
+  // Clients MUST NOT assume any other ordering mechanism.
+  string id = 3 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+  google.protobuf.Timestamp timestamp = 5;
+  oneof payload {
+    RoomEvent message = 10;
+    PresenceEvent presence_event = 12; // user presence change affecting the room
+    ReceiptEvent receipt_event = 13;
+    ReadMarker read_event = 15;
+    TypingEvent typing_event = 17;
+
+    // error:
+    // - If present, represents a server-side error related to the stream or event.
+    // - MAY be recoverable (client should continue stream) or fatal.
+    // - Fatal errors MUST be followed by stream termination.
+    common.v1.ErrorDetail error = 20;
+  }
+}
+
+
 
 // -----------------------------------------------------
 // Message RPCs (unified send + get history)
@@ -433,10 +473,11 @@ message SendEventResponse {
 }
 
 // History request: paging via opaque cursor. 'limit' is capped by server (e.g. 100).
+// Ordering is determined by XID lexicographic order.
+// Cursor encapsulates last seen event ID.
 message GetHistoryRequest {
   string room_id = 2;
-  string cursor = 3; // opaque token from prior GetHistoryResponse
-  int32 limit = 4;
+  common.v1.PageCursor cursor = 3;
   // direction: FORWARD means older -> newer; BACKWARD newer -> older (default BACKWARD).
   bool forward = 5;
 }
@@ -492,12 +533,10 @@ message CreateRoomResponse {
 
 message SearchRoomsRequest {
   string query = 1;
-  int32 page = 2;
-  int32 count = 3;
-  string start_date = 4;
-  string end_date = 5;
   repeated string properties = 6;
   google.protobuf.Struct extras = 7;
+
+  common.v1.PageCursor cursor = 10;
 }
 
 message SearchRoomsResponse {
@@ -543,11 +582,7 @@ message RoomSubscription {
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
-  string profile_id = 3 [
-    (buf.validate.field).string.min_len = 3,
-    (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
-  ];
+  common.v1.ContactLink member = 3;
   repeated string roles = 4; // e.g. ["owner","moderator","member","guest"]
   google.protobuf.Timestamp joined_at = 5;
   google.protobuf.Timestamp last_active = 6;
@@ -642,7 +677,7 @@ message UpdateClientStateRequest {
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
-  repeated ClientState client_states = 3;
+  repeated ClientCommand client_states = 3;
 }
 
 message UpdateClientStateResponse {
@@ -668,5 +703,156 @@ message GetClientStateRequest {
 
 message GetClientStateResponse {
   string room_id = 1;
-  repeated ClientState client_state = 2;
+  repeated ClientCommand client_state = 2;
+}
+
+message TextContent {
+  // Required human-readable message body
+  string body = 1 [
+    (buf.validate.field).string.min_len = 1,
+    (buf.validate.field).string.max_len = 10000
+  ];
+
+  // Content format identifier (NOT MIME type)
+  // Examples: "plain", "markdown", "html-lite"
+  string format = 2 [
+    (buf.validate.field).string.min_len = 1,
+    (buf.validate.field).string.max_len = 32
+  ];
+
+  // Structured annotations for clients (mentions, links, emojis)
+  repeated TextAnnotation annotations = 3;
+
+  // Optional language hint (BCP-47), e.g. "en", "fr-CA"
+  optional string lang = 4;
+}
+
+message TextAnnotation {
+  enum Type {
+    TYPE_UNSPECIFIED = 0;
+    TYPE_MENTION_USER = 1;
+    TYPE_MENTION_ROOM = 2;
+    TYPE_LINK = 3;
+    TYPE_EMOJI = 4;
+    TYPE_HASHTAG = 5;
+  }
+
+  Type type = 1;
+
+  // UTF-16 offset & length for cross-platform compatibility
+  int32 offset = 2;
+  int32 length = 3;
+
+  // Target identifier (e.g., profile_id, room_id, URL)
+  string value = 4;
+}
+
+message AttachmentContent {
+  // Logical identifier of the attachment
+  string attachment_id = 1;
+
+  // Original filename (optional, user-facing)
+  string filename = 2;
+
+  // MIME type (e.g. image/png, application/pdf)
+  string mime_type = 3;
+
+  // Size in bytes (for quota enforcement & UX)
+  int64 size_bytes = 4;
+
+  // Content location (signed URL or opaque locator)
+  string uri = 5;
+
+  // Optional previews / thumbnails
+  repeated AttachmentPreview previews = 6;
+
+  // Optional caption text
+  optional TextContent caption = 7;
+
+  // Indicates whether attachment is end-to-end encrypted
+  bool encrypted = 8;
+
+  // Optional content hash (e.g. sha256:base64)
+  optional string checksum = 9;
+}
+
+message AttachmentPreview {
+  string mime_type = 1;
+  int32 width = 2;
+  int32 height = 3;
+  string uri = 4;
+  int64 size_bytes = 5;
+}
+
+message ReactionContent {
+  // Target message being reacted to
+  string target_event_id = 1 [(buf.validate.field).string.min_len = 3];
+
+  // Reaction key (e.g. 👍, ❤️, :custom_emoji:)
+  string reaction = 2 [
+    (buf.validate.field).string.min_len = 1,
+    (buf.validate.field).string.max_len = 64
+  ];
+
+  // add=true → ensure reaction exists
+  // add=false → ensure reaction does not exist
+  bool add = 3;
+}
+
+message EncryptedContent {
+  // Encryption scheme identifier
+  // Examples: "olm.v2", "megolm.v1", "x25519-aesgcm"
+  string algorithm = 1;
+
+  // Base64 or binary-safe encoded ciphertext
+  bytes ciphertext = 2;
+
+  // Optional per-message nonce / IV
+  optional bytes nonce = 3;
+
+  // Optional sender key identifier
+  optional string sender_key_id = 4;
+
+  // Optional recipient key references (for fan-out)
+  repeated string recipient_key_ids = 5;
+
+  // Additional authenticated data (AAD)
+  optional bytes aad = 6;
+
+  // Optional key agreement context identifier
+  optional string session_id = 7;
+}
+
+message CallContent {
+  enum CallType {
+    CALL_TYPE_UNSPECIFIED = 0;
+    CALL_TYPE_AUDIO = 1;
+    CALL_TYPE_VIDEO = 2;
+    CALL_TYPE_SCREEN_SHARE = 3;
+  }
+
+  enum CallAction {
+    CALL_ACTION_UNSPECIFIED = 0;
+    CALL_ACTION_OFFER = 1;
+    CALL_ACTION_ANSWER = 2;
+    CALL_ACTION_ICE_CANDIDATE = 3;
+    CALL_ACTION_END = 4;
+  }
+
+  string call_id = 1;
+  CallType type = 2;
+
+  // OFFER, ANSWER → sdp required
+  // ICE_CANDIDATE → ice_candidate required
+  // END → no payload required
+  CallAction action = 3;
+
+  // WebRTC payload (SDP or ICE candidate)
+  optional string sdp = 4;
+
+  // Optional ICE candidate (when action = ICE_CANDIDATE)
+  optional string ice_candidate = 5;
+
+  // Optional metadata (bitrate, codecs, device hints)
+  google.protobuf.Struct metadata = 8;
 }

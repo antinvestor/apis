@@ -47,22 +47,18 @@ final $typed_data.Uint8List sTATUSDescriptor = $convert.base64Decode(
     'CgZTVEFUVVMSCwoHVU5LTk9XThAAEgoKBlFVRVVFRBABEg4KCklOX1BST0NFU1MQAhIKCgZGQU'
     'lMRUQQAxIOCgpTVUNDRVNTRlVMEAQ=');
 
-@$core.Deprecated('Use paginationDescriptor instead')
-const Pagination$json = {
-  '1': 'Pagination',
+@$core.Deprecated('Use pageCursorDescriptor instead')
+const PageCursor$json = {
+  '1': 'PageCursor',
   '2': [
-    {'1': 'count', '3': 1, '4': 1, '5': 5, '10': 'count'},
-    {'1': 'page', '3': 2, '4': 1, '5': 5, '10': 'page'},
-    {'1': 'start_date', '3': 3, '4': 1, '5': 9, '10': 'startDate'},
-    {'1': 'end_date', '3': 4, '4': 1, '5': 9, '10': 'endDate'},
+    {'1': 'limit', '3': 1, '4': 1, '5': 5, '10': 'limit'},
+    {'1': 'page', '3': 2, '4': 1, '5': 9, '10': 'page'},
   ],
 };
 
-/// Descriptor for `Pagination`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List paginationDescriptor = $convert.base64Decode(
-    'CgpQYWdpbmF0aW9uEhQKBWNvdW50GAEgASgFUgVjb3VudBISCgRwYWdlGAIgASgFUgRwYWdlEh'
-    '0KCnN0YXJ0X2RhdGUYAyABKAlSCXN0YXJ0RGF0ZRIZCghlbmRfZGF0ZRgEIAEoCVIHZW5kRGF0'
-    'ZQ==');
+/// Descriptor for `PageCursor`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List pageCursorDescriptor = $convert.base64Decode(
+    'CgpQYWdlQ3Vyc29yEhQKBWxpbWl0GAEgASgFUgVsaW1pdBISCgRwYWdlGAIgASgJUgRwYWdl');
 
 @$core.Deprecated('Use searchRequestDescriptor instead')
 const SearchRequest$json = {
@@ -70,7 +66,7 @@ const SearchRequest$json = {
   '2': [
     {'1': 'query', '3': 1, '4': 1, '5': 9, '10': 'query'},
     {'1': 'id_query', '3': 2, '4': 1, '5': 9, '10': 'idQuery'},
-    {'1': 'limits', '3': 3, '4': 1, '5': 11, '6': '.common.v1.Pagination', '10': 'limits'},
+    {'1': 'cursor', '3': 3, '4': 1, '5': 11, '6': '.common.v1.PageCursor', '10': 'cursor'},
     {'1': 'properties', '3': 7, '4': 3, '5': 9, '10': 'properties'},
     {'1': 'extras', '3': 8, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'extras'},
   ],
@@ -79,7 +75,7 @@ const SearchRequest$json = {
 /// Descriptor for `SearchRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List searchRequestDescriptor = $convert.base64Decode(
     'Cg1TZWFyY2hSZXF1ZXN0EhQKBXF1ZXJ5GAEgASgJUgVxdWVyeRIZCghpZF9xdWVyeRgCIAEoCV'
-    'IHaWRRdWVyeRItCgZsaW1pdHMYAyABKAsyFS5jb21tb24udjEuUGFnaW5hdGlvblIGbGltaXRz'
+    'IHaWRRdWVyeRItCgZjdXJzb3IYAyABKAsyFS5jb21tb24udjEuUGFnZUN1cnNvclIGY3Vyc29y'
     'Eh4KCnByb3BlcnRpZXMYByADKAlSCnByb3BlcnRpZXMSLwoGZXh0cmFzGAggASgLMhcuZ29vZ2'
     'xlLnByb3RvYnVmLlN0cnVjdFIGZXh0cmFz');
 

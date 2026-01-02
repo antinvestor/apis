@@ -12,6 +12,7 @@
 import 'dart:async' as $async;
 import 'dart:core' as $core;
 
+import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $2;
@@ -191,6 +192,15 @@ class StreamResponse extends $pb.GeneratedMessage {
   TypingEvent ensureTypingEvent() => $_ensure(6);
 }
 
+enum RoomEvent_Payload {
+  text, 
+  attachment, 
+  reaction, 
+  encryptedText, 
+  call, 
+  notSet
+}
+
 /// Unified message (user / bot / system / signalling)
 class RoomEvent extends $pb.GeneratedMessage {
   factory RoomEvent({
@@ -198,11 +208,15 @@ class RoomEvent extends $pb.GeneratedMessage {
     $core.String? roomId,
     $core.String? senderId,
     RoomEventType? type,
-    $1.Struct? payload,
     $0.Timestamp? sentAt,
     $core.bool? edited,
     $core.bool? redacted,
     $core.String? parentId,
+    TextContent? text,
+    AttachmentContent? attachment,
+    ReactionContent? reaction,
+    EncryptedTextContent? encryptedText,
+    CallContent? call,
   }) {
     final $result = create();
     if (id != null) {
@@ -217,9 +231,6 @@ class RoomEvent extends $pb.GeneratedMessage {
     if (type != null) {
       $result.type = type;
     }
-    if (payload != null) {
-      $result.payload = payload;
-    }
     if (sentAt != null) {
       $result.sentAt = sentAt;
     }
@@ -232,22 +243,50 @@ class RoomEvent extends $pb.GeneratedMessage {
     if (parentId != null) {
       $result.parentId = parentId;
     }
+    if (text != null) {
+      $result.text = text;
+    }
+    if (attachment != null) {
+      $result.attachment = attachment;
+    }
+    if (reaction != null) {
+      $result.reaction = reaction;
+    }
+    if (encryptedText != null) {
+      $result.encryptedText = encryptedText;
+    }
+    if (call != null) {
+      $result.call = call;
+    }
     return $result;
   }
   RoomEvent._() : super();
   factory RoomEvent.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory RoomEvent.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
+  static const $core.Map<$core.int, RoomEvent_Payload> _RoomEvent_PayloadByTag = {
+    15 : RoomEvent_Payload.text,
+    16 : RoomEvent_Payload.attachment,
+    17 : RoomEvent_Payload.reaction,
+    18 : RoomEvent_Payload.encryptedText,
+    19 : RoomEvent_Payload.call,
+    0 : RoomEvent_Payload.notSet
+  };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RoomEvent', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
+    ..oo(0, [15, 16, 17, 18, 19])
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'roomId')
     ..aOS(3, _omitFieldNames ? '' : 'senderId')
     ..e<RoomEventType>(4, _omitFieldNames ? '' : 'type', $pb.PbFieldType.OE, defaultOrMaker: RoomEventType.ROOM_EVENT_TYPE_UNSPECIFIED, valueOf: RoomEventType.valueOf, enumValues: RoomEventType.values)
-    ..aOM<$1.Struct>(6, _omitFieldNames ? '' : 'payload', subBuilder: $1.Struct.create)
     ..aOM<$0.Timestamp>(7, _omitFieldNames ? '' : 'sentAt', subBuilder: $0.Timestamp.create)
     ..aOB(8, _omitFieldNames ? '' : 'edited')
     ..aOB(9, _omitFieldNames ? '' : 'redacted')
     ..aOS(10, _omitFieldNames ? '' : 'parentId')
+    ..aOM<TextContent>(15, _omitFieldNames ? '' : 'text', subBuilder: TextContent.create)
+    ..aOM<AttachmentContent>(16, _omitFieldNames ? '' : 'attachment', subBuilder: AttachmentContent.create)
+    ..aOM<ReactionContent>(17, _omitFieldNames ? '' : 'reaction', subBuilder: ReactionContent.create)
+    ..aOM<EncryptedTextContent>(18, _omitFieldNames ? '' : 'encryptedText', protoName: 'encryptedText', subBuilder: EncryptedTextContent.create)
+    ..aOM<CallContent>(19, _omitFieldNames ? '' : 'call', subBuilder: CallContent.create)
     ..hasRequiredFields = false
   ;
 
@@ -271,6 +310,9 @@ class RoomEvent extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static RoomEvent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RoomEvent>(create);
   static RoomEvent? _defaultInstance;
+
+  RoomEvent_Payload whichPayload() => _RoomEvent_PayloadByTag[$_whichOneof(0)]!;
+  void clearPayload() => clearField($_whichOneof(0));
 
   @$pb.TagNumber(1)
   $core.String get id => $_getSZ(0);
@@ -308,54 +350,98 @@ class RoomEvent extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   void clearType() => clearField(4);
 
-  @$pb.TagNumber(6)
-  $1.Struct get payload => $_getN(4);
-  @$pb.TagNumber(6)
-  set payload($1.Struct v) { setField(6, v); }
-  @$pb.TagNumber(6)
-  $core.bool hasPayload() => $_has(4);
-  @$pb.TagNumber(6)
-  void clearPayload() => clearField(6);
-  @$pb.TagNumber(6)
-  $1.Struct ensurePayload() => $_ensure(4);
-
   @$pb.TagNumber(7)
-  $0.Timestamp get sentAt => $_getN(5);
+  $0.Timestamp get sentAt => $_getN(4);
   @$pb.TagNumber(7)
   set sentAt($0.Timestamp v) { setField(7, v); }
   @$pb.TagNumber(7)
-  $core.bool hasSentAt() => $_has(5);
+  $core.bool hasSentAt() => $_has(4);
   @$pb.TagNumber(7)
   void clearSentAt() => clearField(7);
   @$pb.TagNumber(7)
-  $0.Timestamp ensureSentAt() => $_ensure(5);
+  $0.Timestamp ensureSentAt() => $_ensure(4);
 
   @$pb.TagNumber(8)
-  $core.bool get edited => $_getBF(6);
+  $core.bool get edited => $_getBF(5);
   @$pb.TagNumber(8)
-  set edited($core.bool v) { $_setBool(6, v); }
+  set edited($core.bool v) { $_setBool(5, v); }
   @$pb.TagNumber(8)
-  $core.bool hasEdited() => $_has(6);
+  $core.bool hasEdited() => $_has(5);
   @$pb.TagNumber(8)
   void clearEdited() => clearField(8);
 
   @$pb.TagNumber(9)
-  $core.bool get redacted => $_getBF(7);
+  $core.bool get redacted => $_getBF(6);
   @$pb.TagNumber(9)
-  set redacted($core.bool v) { $_setBool(7, v); }
+  set redacted($core.bool v) { $_setBool(6, v); }
   @$pb.TagNumber(9)
-  $core.bool hasRedacted() => $_has(7);
+  $core.bool hasRedacted() => $_has(6);
   @$pb.TagNumber(9)
   void clearRedacted() => clearField(9);
 
   @$pb.TagNumber(10)
-  $core.String get parentId => $_getSZ(8);
+  $core.String get parentId => $_getSZ(7);
   @$pb.TagNumber(10)
-  set parentId($core.String v) { $_setString(8, v); }
+  set parentId($core.String v) { $_setString(7, v); }
   @$pb.TagNumber(10)
-  $core.bool hasParentId() => $_has(8);
+  $core.bool hasParentId() => $_has(7);
   @$pb.TagNumber(10)
   void clearParentId() => clearField(10);
+
+  @$pb.TagNumber(15)
+  TextContent get text => $_getN(8);
+  @$pb.TagNumber(15)
+  set text(TextContent v) { setField(15, v); }
+  @$pb.TagNumber(15)
+  $core.bool hasText() => $_has(8);
+  @$pb.TagNumber(15)
+  void clearText() => clearField(15);
+  @$pb.TagNumber(15)
+  TextContent ensureText() => $_ensure(8);
+
+  @$pb.TagNumber(16)
+  AttachmentContent get attachment => $_getN(9);
+  @$pb.TagNumber(16)
+  set attachment(AttachmentContent v) { setField(16, v); }
+  @$pb.TagNumber(16)
+  $core.bool hasAttachment() => $_has(9);
+  @$pb.TagNumber(16)
+  void clearAttachment() => clearField(16);
+  @$pb.TagNumber(16)
+  AttachmentContent ensureAttachment() => $_ensure(9);
+
+  @$pb.TagNumber(17)
+  ReactionContent get reaction => $_getN(10);
+  @$pb.TagNumber(17)
+  set reaction(ReactionContent v) { setField(17, v); }
+  @$pb.TagNumber(17)
+  $core.bool hasReaction() => $_has(10);
+  @$pb.TagNumber(17)
+  void clearReaction() => clearField(17);
+  @$pb.TagNumber(17)
+  ReactionContent ensureReaction() => $_ensure(10);
+
+  @$pb.TagNumber(18)
+  EncryptedTextContent get encryptedText => $_getN(11);
+  @$pb.TagNumber(18)
+  set encryptedText(EncryptedTextContent v) { setField(18, v); }
+  @$pb.TagNumber(18)
+  $core.bool hasEncryptedText() => $_has(11);
+  @$pb.TagNumber(18)
+  void clearEncryptedText() => clearField(18);
+  @$pb.TagNumber(18)
+  EncryptedTextContent ensureEncryptedText() => $_ensure(11);
+
+  @$pb.TagNumber(19)
+  CallContent get call => $_getN(12);
+  @$pb.TagNumber(19)
+  set call(CallContent v) { setField(19, v); }
+  @$pb.TagNumber(19)
+  $core.bool hasCall() => $_has(12);
+  @$pb.TagNumber(19)
+  void clearCall() => clearField(19);
+  @$pb.TagNumber(19)
+  CallContent ensureCall() => $_ensure(12);
 }
 
 /// Presence event affecting a user (and visible to rooms the user is a member of)
@@ -700,44 +786,27 @@ class TypingEvent extends $pb.GeneratedMessage {
 }
 
 enum StreamRequest_Payload {
-  ack, 
+  signalUpdate, 
   stateUpdate, 
-  sendEventAck, 
   notSet
 }
 
 /// Client message over Connect stream. After initial connect frame, client sends acks/commands.
 class StreamRequest extends $pb.GeneratedMessage {
   factory StreamRequest({
-    $core.String? sessionId,
-    $core.String? deviceId,
-    $core.String? authToken,
     $core.String? resumeToken,
-    StreamAck? ack,
-    ClientState? stateUpdate,
-    SendEventResponse? sendEventAck,
+    ClientSignal? signalUpdate,
+    ClientCommand? stateUpdate,
   }) {
     final $result = create();
-    if (sessionId != null) {
-      $result.sessionId = sessionId;
-    }
-    if (deviceId != null) {
-      $result.deviceId = deviceId;
-    }
-    if (authToken != null) {
-      $result.authToken = authToken;
-    }
     if (resumeToken != null) {
       $result.resumeToken = resumeToken;
     }
-    if (ack != null) {
-      $result.ack = ack;
+    if (signalUpdate != null) {
+      $result.signalUpdate = signalUpdate;
     }
     if (stateUpdate != null) {
       $result.stateUpdate = stateUpdate;
-    }
-    if (sendEventAck != null) {
-      $result.sendEventAck = sendEventAck;
     }
     return $result;
   }
@@ -746,20 +815,15 @@ class StreamRequest extends $pb.GeneratedMessage {
   factory StreamRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static const $core.Map<$core.int, StreamRequest_Payload> _StreamRequest_PayloadByTag = {
-    10 : StreamRequest_Payload.ack,
+    11 : StreamRequest_Payload.signalUpdate,
     12 : StreamRequest_Payload.stateUpdate,
-    15 : StreamRequest_Payload.sendEventAck,
     0 : StreamRequest_Payload.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
-    ..oo(0, [10, 12, 15])
-    ..aOS(2, _omitFieldNames ? '' : 'sessionId')
-    ..aOS(3, _omitFieldNames ? '' : 'deviceId')
-    ..aOS(4, _omitFieldNames ? '' : 'authToken')
+    ..oo(0, [11, 12])
     ..aOS(5, _omitFieldNames ? '' : 'resumeToken')
-    ..aOM<StreamAck>(10, _omitFieldNames ? '' : 'ack', subBuilder: StreamAck.create)
-    ..aOM<ClientState>(12, _omitFieldNames ? '' : 'stateUpdate', subBuilder: ClientState.create)
-    ..aOM<SendEventResponse>(15, _omitFieldNames ? '' : 'sendEventAck', subBuilder: SendEventResponse.create)
+    ..aOM<ClientSignal>(11, _omitFieldNames ? '' : 'signalUpdate', subBuilder: ClientSignal.create)
+    ..aOM<ClientCommand>(12, _omitFieldNames ? '' : 'stateUpdate', subBuilder: ClientCommand.create)
     ..hasRequiredFields = false
   ;
 
@@ -787,77 +851,38 @@ class StreamRequest extends $pb.GeneratedMessage {
   StreamRequest_Payload whichPayload() => _StreamRequest_PayloadByTag[$_whichOneof(0)]!;
   void clearPayload() => clearField($_whichOneof(0));
 
-  /// Servers should validate auth token before accepting further payload.
-  @$pb.TagNumber(2)
-  $core.String get sessionId => $_getSZ(0);
-  @$pb.TagNumber(2)
-  set sessionId($core.String v) { $_setString(0, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasSessionId() => $_has(0);
-  @$pb.TagNumber(2)
-  void clearSessionId() => clearField(2);
-
-  @$pb.TagNumber(3)
-  $core.String get deviceId => $_getSZ(1);
-  @$pb.TagNumber(3)
-  set deviceId($core.String v) { $_setString(1, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasDeviceId() => $_has(1);
-  @$pb.TagNumber(3)
-  void clearDeviceId() => clearField(3);
-
-  @$pb.TagNumber(4)
-  $core.String get authToken => $_getSZ(2);
-  @$pb.TagNumber(4)
-  set authToken($core.String v) { $_setString(2, v); }
-  @$pb.TagNumber(4)
-  $core.bool hasAuthToken() => $_has(2);
-  @$pb.TagNumber(4)
-  void clearAuthToken() => clearField(4);
-
   /// Optional resume token: server-supplied resume_token from previous session.
   /// Server will validate and accept resume only if resume window allows it.
   @$pb.TagNumber(5)
-  $core.String get resumeToken => $_getSZ(3);
+  $core.String get resumeToken => $_getSZ(0);
   @$pb.TagNumber(5)
-  set resumeToken($core.String v) { $_setString(3, v); }
+  set resumeToken($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(5)
-  $core.bool hasResumeToken() => $_has(3);
+  $core.bool hasResumeToken() => $_has(0);
   @$pb.TagNumber(5)
   void clearResumeToken() => clearField(5);
 
-  @$pb.TagNumber(10)
-  StreamAck get ack => $_getN(4);
-  @$pb.TagNumber(10)
-  set ack(StreamAck v) { setField(10, v); }
-  @$pb.TagNumber(10)
-  $core.bool hasAck() => $_has(4);
-  @$pb.TagNumber(10)
-  void clearAck() => clearField(10);
-  @$pb.TagNumber(10)
-  StreamAck ensureAck() => $_ensure(4);
+  @$pb.TagNumber(11)
+  ClientSignal get signalUpdate => $_getN(1);
+  @$pb.TagNumber(11)
+  set signalUpdate(ClientSignal v) { setField(11, v); }
+  @$pb.TagNumber(11)
+  $core.bool hasSignalUpdate() => $_has(1);
+  @$pb.TagNumber(11)
+  void clearSignalUpdate() => clearField(11);
+  @$pb.TagNumber(11)
+  ClientSignal ensureSignalUpdate() => $_ensure(1);
 
   @$pb.TagNumber(12)
-  ClientState get stateUpdate => $_getN(5);
+  ClientCommand get stateUpdate => $_getN(2);
   @$pb.TagNumber(12)
-  set stateUpdate(ClientState v) { setField(12, v); }
+  set stateUpdate(ClientCommand v) { setField(12, v); }
   @$pb.TagNumber(12)
-  $core.bool hasStateUpdate() => $_has(5);
+  $core.bool hasStateUpdate() => $_has(2);
   @$pb.TagNumber(12)
   void clearStateUpdate() => clearField(12);
   @$pb.TagNumber(12)
-  ClientState ensureStateUpdate() => $_ensure(5);
-
-  @$pb.TagNumber(15)
-  SendEventResponse get sendEventAck => $_getN(6);
-  @$pb.TagNumber(15)
-  set sendEventAck(SendEventResponse v) { setField(15, v); }
-  @$pb.TagNumber(15)
-  $core.bool hasSendEventAck() => $_has(6);
-  @$pb.TagNumber(15)
-  void clearSendEventAck() => clearField(15);
-  @$pb.TagNumber(15)
-  SendEventResponse ensureSendEventAck() => $_ensure(6);
+  ClientCommand ensureStateUpdate() => $_ensure(2);
 }
 
 /// Acknowledgement for event(s) received; server uses it to free ephemeral delivery buffers.
@@ -865,16 +890,12 @@ class StreamRequest extends $pb.GeneratedMessage {
 /// If error is set, indicates the event failed to send/process correctly.
 class StreamAck extends $pb.GeneratedMessage {
   factory StreamAck({
-    $core.String? roomId,
     $core.String? eventId,
     $0.Timestamp? ackAt,
     $1.Struct? metadata,
     $2.ErrorDetail? error,
   }) {
     final $result = create();
-    if (roomId != null) {
-      $result.roomId = roomId;
-    }
     if (eventId != null) {
       $result.eventId = eventId;
     }
@@ -894,7 +915,6 @@ class StreamAck extends $pb.GeneratedMessage {
   factory StreamAck.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamAck', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'roomId')
     ..aOS(2, _omitFieldNames ? '' : 'eventId')
     ..aOM<$0.Timestamp>(3, _omitFieldNames ? '' : 'ackAt', subBuilder: $0.Timestamp.create)
     ..aOM<$1.Struct>(6, _omitFieldNames ? '' : 'metadata', subBuilder: $1.Struct.create)
@@ -923,87 +943,71 @@ class StreamAck extends $pb.GeneratedMessage {
   static StreamAck getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StreamAck>(create);
   static StreamAck? _defaultInstance;
 
-  @$pb.TagNumber(1)
-  $core.String get roomId => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set roomId($core.String v) { $_setString(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasRoomId() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearRoomId() => clearField(1);
-
   @$pb.TagNumber(2)
-  $core.String get eventId => $_getSZ(1);
+  $core.String get eventId => $_getSZ(0);
   @$pb.TagNumber(2)
-  set eventId($core.String v) { $_setString(1, v); }
+  set eventId($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(2)
-  $core.bool hasEventId() => $_has(1);
+  $core.bool hasEventId() => $_has(0);
   @$pb.TagNumber(2)
   void clearEventId() => clearField(2);
 
   @$pb.TagNumber(3)
-  $0.Timestamp get ackAt => $_getN(2);
+  $0.Timestamp get ackAt => $_getN(1);
   @$pb.TagNumber(3)
   set ackAt($0.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
-  $core.bool hasAckAt() => $_has(2);
+  $core.bool hasAckAt() => $_has(1);
   @$pb.TagNumber(3)
   void clearAckAt() => clearField(3);
   @$pb.TagNumber(3)
-  $0.Timestamp ensureAckAt() => $_ensure(2);
+  $0.Timestamp ensureAckAt() => $_ensure(1);
 
   @$pb.TagNumber(6)
-  $1.Struct get metadata => $_getN(3);
+  $1.Struct get metadata => $_getN(2);
   @$pb.TagNumber(6)
   set metadata($1.Struct v) { setField(6, v); }
   @$pb.TagNumber(6)
-  $core.bool hasMetadata() => $_has(3);
+  $core.bool hasMetadata() => $_has(2);
   @$pb.TagNumber(6)
   void clearMetadata() => clearField(6);
   @$pb.TagNumber(6)
-  $1.Struct ensureMetadata() => $_ensure(3);
+  $1.Struct ensureMetadata() => $_ensure(2);
 
   @$pb.TagNumber(7)
-  $2.ErrorDetail get error => $_getN(4);
+  $2.ErrorDetail get error => $_getN(3);
   @$pb.TagNumber(7)
   set error($2.ErrorDetail v) { setField(7, v); }
   @$pb.TagNumber(7)
-  $core.bool hasError() => $_has(4);
+  $core.bool hasError() => $_has(3);
   @$pb.TagNumber(7)
   void clearError() => clearField(7);
   @$pb.TagNumber(7)
-  $2.ErrorDetail ensureError() => $_ensure(4);
+  $2.ErrorDetail ensureError() => $_ensure(3);
 }
 
-enum ClientState_State {
-  roomEvent, 
+enum ClientSignal_Signal {
   receipt, 
-  readMarker, 
+  ack, 
   typing, 
   presence, 
-  sendEvent, 
   notSet
 }
 
-/// Generic client state (typing, read markers that aren't receipts, and room events)
-class ClientState extends $pb.GeneratedMessage {
-  factory ClientState({
-    RoomEvent? roomEvent,
+/// Generic client signal (typing, read markers that aren't receipts)
+class ClientSignal extends $pb.GeneratedMessage {
+  factory ClientSignal({
     ReceiptEvent? receipt,
-    ReadMarker? readMarker,
+    StreamAck? ack,
     TypingEvent? typing,
     PresenceEvent? presence,
-    SendEventRequest? sendEvent,
   }) {
     final $result = create();
-    if (roomEvent != null) {
-      $result.roomEvent = roomEvent;
-    }
     if (receipt != null) {
       $result.receipt = receipt;
     }
-    if (readMarker != null) {
-      $result.readMarker = readMarker;
+    if (ack != null) {
+      $result.ack = ack;
     }
     if (typing != null) {
       $result.typing = typing;
@@ -1011,32 +1015,25 @@ class ClientState extends $pb.GeneratedMessage {
     if (presence != null) {
       $result.presence = presence;
     }
-    if (sendEvent != null) {
-      $result.sendEvent = sendEvent;
-    }
     return $result;
   }
-  ClientState._() : super();
-  factory ClientState.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory ClientState.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  ClientSignal._() : super();
+  factory ClientSignal.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ClientSignal.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static const $core.Map<$core.int, ClientState_State> _ClientState_StateByTag = {
-    1 : ClientState_State.roomEvent,
-    2 : ClientState_State.receipt,
-    3 : ClientState_State.readMarker,
-    4 : ClientState_State.typing,
-    5 : ClientState_State.presence,
-    10 : ClientState_State.sendEvent,
-    0 : ClientState_State.notSet
+  static const $core.Map<$core.int, ClientSignal_Signal> _ClientSignal_SignalByTag = {
+    2 : ClientSignal_Signal.receipt,
+    3 : ClientSignal_Signal.ack,
+    4 : ClientSignal_Signal.typing,
+    5 : ClientSignal_Signal.presence,
+    0 : ClientSignal_Signal.notSet
   };
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ClientState', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
-    ..oo(0, [1, 2, 3, 4, 5, 10])
-    ..aOM<RoomEvent>(1, _omitFieldNames ? '' : 'roomEvent', subBuilder: RoomEvent.create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ClientSignal', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
+    ..oo(0, [2, 3, 4, 5])
     ..aOM<ReceiptEvent>(2, _omitFieldNames ? '' : 'receipt', subBuilder: ReceiptEvent.create)
-    ..aOM<ReadMarker>(3, _omitFieldNames ? '' : 'readMarker', subBuilder: ReadMarker.create)
+    ..aOM<StreamAck>(3, _omitFieldNames ? '' : 'ack', subBuilder: StreamAck.create)
     ..aOM<TypingEvent>(4, _omitFieldNames ? '' : 'typing', subBuilder: TypingEvent.create)
     ..aOM<PresenceEvent>(5, _omitFieldNames ? '' : 'presence', subBuilder: PresenceEvent.create)
-    ..aOM<SendEventRequest>(10, _omitFieldNames ? '' : 'sendEvent', subBuilder: SendEventRequest.create)
     ..hasRequiredFields = false
   ;
 
@@ -1044,91 +1041,153 @@ class ClientState extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  ClientState clone() => ClientState()..mergeFromMessage(this);
+  ClientSignal clone() => ClientSignal()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  ClientState copyWith(void Function(ClientState) updates) => super.copyWith((message) => updates(message as ClientState)) as ClientState;
+  ClientSignal copyWith(void Function(ClientSignal) updates) => super.copyWith((message) => updates(message as ClientSignal)) as ClientSignal;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static ClientState create() => ClientState._();
-  ClientState createEmptyInstance() => create();
-  static $pb.PbList<ClientState> createRepeated() => $pb.PbList<ClientState>();
+  static ClientSignal create() => ClientSignal._();
+  ClientSignal createEmptyInstance() => create();
+  static $pb.PbList<ClientSignal> createRepeated() => $pb.PbList<ClientSignal>();
   @$core.pragma('dart2js:noInline')
-  static ClientState getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ClientState>(create);
-  static ClientState? _defaultInstance;
+  static ClientSignal getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ClientSignal>(create);
+  static ClientSignal? _defaultInstance;
 
-  ClientState_State whichState() => _ClientState_StateByTag[$_whichOneof(0)]!;
-  void clearState() => clearField($_whichOneof(0));
-
-  @$pb.TagNumber(1)
-  RoomEvent get roomEvent => $_getN(0);
-  @$pb.TagNumber(1)
-  set roomEvent(RoomEvent v) { setField(1, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasRoomEvent() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearRoomEvent() => clearField(1);
-  @$pb.TagNumber(1)
-  RoomEvent ensureRoomEvent() => $_ensure(0);
+  ClientSignal_Signal whichSignal() => _ClientSignal_SignalByTag[$_whichOneof(0)]!;
+  void clearSignal() => clearField($_whichOneof(0));
 
   @$pb.TagNumber(2)
-  ReceiptEvent get receipt => $_getN(1);
+  ReceiptEvent get receipt => $_getN(0);
   @$pb.TagNumber(2)
   set receipt(ReceiptEvent v) { setField(2, v); }
   @$pb.TagNumber(2)
-  $core.bool hasReceipt() => $_has(1);
+  $core.bool hasReceipt() => $_has(0);
   @$pb.TagNumber(2)
   void clearReceipt() => clearField(2);
   @$pb.TagNumber(2)
-  ReceiptEvent ensureReceipt() => $_ensure(1);
+  ReceiptEvent ensureReceipt() => $_ensure(0);
 
   @$pb.TagNumber(3)
-  ReadMarker get readMarker => $_getN(2);
+  StreamAck get ack => $_getN(1);
   @$pb.TagNumber(3)
-  set readMarker(ReadMarker v) { setField(3, v); }
+  set ack(StreamAck v) { setField(3, v); }
   @$pb.TagNumber(3)
-  $core.bool hasReadMarker() => $_has(2);
+  $core.bool hasAck() => $_has(1);
   @$pb.TagNumber(3)
-  void clearReadMarker() => clearField(3);
+  void clearAck() => clearField(3);
   @$pb.TagNumber(3)
-  ReadMarker ensureReadMarker() => $_ensure(2);
+  StreamAck ensureAck() => $_ensure(1);
 
   @$pb.TagNumber(4)
-  TypingEvent get typing => $_getN(3);
+  TypingEvent get typing => $_getN(2);
   @$pb.TagNumber(4)
   set typing(TypingEvent v) { setField(4, v); }
   @$pb.TagNumber(4)
-  $core.bool hasTyping() => $_has(3);
+  $core.bool hasTyping() => $_has(2);
   @$pb.TagNumber(4)
   void clearTyping() => clearField(4);
   @$pb.TagNumber(4)
-  TypingEvent ensureTyping() => $_ensure(3);
+  TypingEvent ensureTyping() => $_ensure(2);
 
   @$pb.TagNumber(5)
-  PresenceEvent get presence => $_getN(4);
+  PresenceEvent get presence => $_getN(3);
   @$pb.TagNumber(5)
   set presence(PresenceEvent v) { setField(5, v); }
   @$pb.TagNumber(5)
-  $core.bool hasPresence() => $_has(4);
+  $core.bool hasPresence() => $_has(3);
   @$pb.TagNumber(5)
   void clearPresence() => clearField(5);
   @$pb.TagNumber(5)
-  PresenceEvent ensurePresence() => $_ensure(4);
+  PresenceEvent ensurePresence() => $_ensure(3);
+}
+
+enum ClientCommand_State {
+  readMarker, 
+  event, 
+  notSet
+}
+
+/// Generic client commands that modify state ( room events and read markers)
+class ClientCommand extends $pb.GeneratedMessage {
+  factory ClientCommand({
+    ReadMarker? readMarker,
+    RoomEvent? event,
+  }) {
+    final $result = create();
+    if (readMarker != null) {
+      $result.readMarker = readMarker;
+    }
+    if (event != null) {
+      $result.event = event;
+    }
+    return $result;
+  }
+  ClientCommand._() : super();
+  factory ClientCommand.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ClientCommand.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static const $core.Map<$core.int, ClientCommand_State> _ClientCommand_StateByTag = {
+    3 : ClientCommand_State.readMarker,
+    10 : ClientCommand_State.event,
+    0 : ClientCommand_State.notSet
+  };
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ClientCommand', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
+    ..oo(0, [3, 10])
+    ..aOM<ReadMarker>(3, _omitFieldNames ? '' : 'readMarker', subBuilder: ReadMarker.create)
+    ..aOM<RoomEvent>(10, _omitFieldNames ? '' : 'event', subBuilder: RoomEvent.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ClientCommand clone() => ClientCommand()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ClientCommand copyWith(void Function(ClientCommand) updates) => super.copyWith((message) => updates(message as ClientCommand)) as ClientCommand;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ClientCommand create() => ClientCommand._();
+  ClientCommand createEmptyInstance() => create();
+  static $pb.PbList<ClientCommand> createRepeated() => $pb.PbList<ClientCommand>();
+  @$core.pragma('dart2js:noInline')
+  static ClientCommand getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ClientCommand>(create);
+  static ClientCommand? _defaultInstance;
+
+  ClientCommand_State whichState() => _ClientCommand_StateByTag[$_whichOneof(0)]!;
+  void clearState() => clearField($_whichOneof(0));
+
+  @$pb.TagNumber(3)
+  ReadMarker get readMarker => $_getN(0);
+  @$pb.TagNumber(3)
+  set readMarker(ReadMarker v) { setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasReadMarker() => $_has(0);
+  @$pb.TagNumber(3)
+  void clearReadMarker() => clearField(3);
+  @$pb.TagNumber(3)
+  ReadMarker ensureReadMarker() => $_ensure(0);
 
   @$pb.TagNumber(10)
-  SendEventRequest get sendEvent => $_getN(5);
+  RoomEvent get event => $_getN(1);
   @$pb.TagNumber(10)
-  set sendEvent(SendEventRequest v) { setField(10, v); }
+  set event(RoomEvent v) { setField(10, v); }
   @$pb.TagNumber(10)
-  $core.bool hasSendEvent() => $_has(5);
+  $core.bool hasEvent() => $_has(1);
   @$pb.TagNumber(10)
-  void clearSendEvent() => clearField(10);
+  void clearEvent() => clearField(10);
   @$pb.TagNumber(10)
-  SendEventRequest ensureSendEvent() => $_ensure(5);
+  RoomEvent ensureEvent() => $_ensure(1);
 }
 
 class SendEventRequest extends $pb.GeneratedMessage {
@@ -2178,7 +2237,7 @@ class DeleteRoomResponse extends $pb.GeneratedMessage {
 class RoomSubscription extends $pb.GeneratedMessage {
   factory RoomSubscription({
     $core.String? roomId,
-    $core.String? profileId,
+    $2.ContactLink? member,
     $core.Iterable<$core.String>? roles,
     $0.Timestamp? joinedAt,
     $0.Timestamp? lastActive,
@@ -2187,8 +2246,8 @@ class RoomSubscription extends $pb.GeneratedMessage {
     if (roomId != null) {
       $result.roomId = roomId;
     }
-    if (profileId != null) {
-      $result.profileId = profileId;
+    if (member != null) {
+      $result.member = member;
     }
     if (roles != null) {
       $result.roles.addAll(roles);
@@ -2207,7 +2266,7 @@ class RoomSubscription extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RoomSubscription', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
     ..aOS(2, _omitFieldNames ? '' : 'roomId')
-    ..aOS(3, _omitFieldNames ? '' : 'profileId')
+    ..aOM<$2.ContactLink>(3, _omitFieldNames ? '' : 'member', subBuilder: $2.ContactLink.create)
     ..pPS(4, _omitFieldNames ? '' : 'roles')
     ..aOM<$0.Timestamp>(5, _omitFieldNames ? '' : 'joinedAt', subBuilder: $0.Timestamp.create)
     ..aOM<$0.Timestamp>(6, _omitFieldNames ? '' : 'lastActive', subBuilder: $0.Timestamp.create)
@@ -2245,13 +2304,15 @@ class RoomSubscription extends $pb.GeneratedMessage {
   void clearRoomId() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.String get profileId => $_getSZ(1);
+  $2.ContactLink get member => $_getN(1);
   @$pb.TagNumber(3)
-  set profileId($core.String v) { $_setString(1, v); }
+  set member($2.ContactLink v) { setField(3, v); }
   @$pb.TagNumber(3)
-  $core.bool hasProfileId() => $_has(1);
+  $core.bool hasMember() => $_has(1);
   @$pb.TagNumber(3)
-  void clearProfileId() => clearField(3);
+  void clearMember() => clearField(3);
+  @$pb.TagNumber(3)
+  $2.ContactLink ensureMember() => $_ensure(1);
 
   @$pb.TagNumber(4)
   $core.List<$core.String> get roles => $_getList(2);
@@ -2819,7 +2880,7 @@ class UpdateClientStateRequest extends $pb.GeneratedMessage {
   factory UpdateClientStateRequest({
     $core.String? roomId,
     $core.String? profileId,
-    $core.Iterable<ClientState>? clientStates,
+    $core.Iterable<ClientCommand>? clientStates,
   }) {
     final $result = create();
     if (roomId != null) {
@@ -2840,7 +2901,7 @@ class UpdateClientStateRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateClientStateRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'roomId')
     ..aOS(2, _omitFieldNames ? '' : 'profileId')
-    ..pc<ClientState>(3, _omitFieldNames ? '' : 'clientStates', $pb.PbFieldType.PM, subBuilder: ClientState.create)
+    ..pc<ClientCommand>(3, _omitFieldNames ? '' : 'clientStates', $pb.PbFieldType.PM, subBuilder: ClientCommand.create)
     ..hasRequiredFields = false
   ;
 
@@ -2884,7 +2945,7 @@ class UpdateClientStateRequest extends $pb.GeneratedMessage {
   void clearProfileId() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.List<ClientState> get clientStates => $_getList(2);
+  $core.List<ClientCommand> get clientStates => $_getList(2);
 }
 
 class UpdateClientStateResponse extends $pb.GeneratedMessage {
@@ -3015,7 +3076,7 @@ class GetClientStateRequest extends $pb.GeneratedMessage {
 class GetClientStateResponse extends $pb.GeneratedMessage {
   factory GetClientStateResponse({
     $core.String? roomId,
-    $core.Iterable<ClientState>? clientState,
+    $core.Iterable<ClientCommand>? clientState,
   }) {
     final $result = create();
     if (roomId != null) {
@@ -3032,7 +3093,7 @@ class GetClientStateResponse extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetClientStateResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'roomId')
-    ..pc<ClientState>(2, _omitFieldNames ? '' : 'clientState', $pb.PbFieldType.PM, subBuilder: ClientState.create)
+    ..pc<ClientCommand>(2, _omitFieldNames ? '' : 'clientState', $pb.PbFieldType.PM, subBuilder: ClientCommand.create)
     ..hasRequiredFields = false
   ;
 
@@ -3067,7 +3128,762 @@ class GetClientStateResponse extends $pb.GeneratedMessage {
   void clearRoomId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.List<ClientState> get clientState => $_getList(1);
+  $core.List<ClientCommand> get clientState => $_getList(1);
+}
+
+class TextContent extends $pb.GeneratedMessage {
+  factory TextContent({
+    $core.String? body,
+    $core.String? format,
+    $core.Iterable<TextAnnotation>? annotations,
+  }) {
+    final $result = create();
+    if (body != null) {
+      $result.body = body;
+    }
+    if (format != null) {
+      $result.format = format;
+    }
+    if (annotations != null) {
+      $result.annotations.addAll(annotations);
+    }
+    return $result;
+  }
+  TextContent._() : super();
+  factory TextContent.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory TextContent.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TextContent', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'body')
+    ..aOS(2, _omitFieldNames ? '' : 'format')
+    ..pc<TextAnnotation>(3, _omitFieldNames ? '' : 'annotations', $pb.PbFieldType.PM, subBuilder: TextAnnotation.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  TextContent clone() => TextContent()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  TextContent copyWith(void Function(TextContent) updates) => super.copyWith((message) => updates(message as TextContent)) as TextContent;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static TextContent create() => TextContent._();
+  TextContent createEmptyInstance() => create();
+  static $pb.PbList<TextContent> createRepeated() => $pb.PbList<TextContent>();
+  @$core.pragma('dart2js:noInline')
+  static TextContent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TextContent>(create);
+  static TextContent? _defaultInstance;
+
+  /// Required human-readable message body
+  @$pb.TagNumber(1)
+  $core.String get body => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set body($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasBody() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearBody() => clearField(1);
+
+  /// Content format identifier (NOT MIME type)
+  /// Examples: "plain", "markdown", "html-lite"
+  @$pb.TagNumber(2)
+  $core.String get format => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set format($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasFormat() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFormat() => clearField(2);
+
+  /// Structured annotations for clients (mentions, links, emojis)
+  @$pb.TagNumber(3)
+  $core.List<TextAnnotation> get annotations => $_getList(2);
+}
+
+class TextAnnotation extends $pb.GeneratedMessage {
+  factory TextAnnotation({
+    TextAnnotation_Type? type,
+    $core.int? offset,
+    $core.int? length,
+    $core.String? value,
+  }) {
+    final $result = create();
+    if (type != null) {
+      $result.type = type;
+    }
+    if (offset != null) {
+      $result.offset = offset;
+    }
+    if (length != null) {
+      $result.length = length;
+    }
+    if (value != null) {
+      $result.value = value;
+    }
+    return $result;
+  }
+  TextAnnotation._() : super();
+  factory TextAnnotation.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory TextAnnotation.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TextAnnotation', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
+    ..e<TextAnnotation_Type>(1, _omitFieldNames ? '' : 'type', $pb.PbFieldType.OE, defaultOrMaker: TextAnnotation_Type.TYPE_UNSPECIFIED, valueOf: TextAnnotation_Type.valueOf, enumValues: TextAnnotation_Type.values)
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'offset', $pb.PbFieldType.O3)
+    ..a<$core.int>(3, _omitFieldNames ? '' : 'length', $pb.PbFieldType.O3)
+    ..aOS(4, _omitFieldNames ? '' : 'value')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  TextAnnotation clone() => TextAnnotation()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  TextAnnotation copyWith(void Function(TextAnnotation) updates) => super.copyWith((message) => updates(message as TextAnnotation)) as TextAnnotation;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static TextAnnotation create() => TextAnnotation._();
+  TextAnnotation createEmptyInstance() => create();
+  static $pb.PbList<TextAnnotation> createRepeated() => $pb.PbList<TextAnnotation>();
+  @$core.pragma('dart2js:noInline')
+  static TextAnnotation getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TextAnnotation>(create);
+  static TextAnnotation? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  TextAnnotation_Type get type => $_getN(0);
+  @$pb.TagNumber(1)
+  set type(TextAnnotation_Type v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasType() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearType() => clearField(1);
+
+  /// UTF-16 offset & length for cross-platform compatibility
+  @$pb.TagNumber(2)
+  $core.int get offset => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set offset($core.int v) { $_setSignedInt32(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasOffset() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearOffset() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.int get length => $_getIZ(2);
+  @$pb.TagNumber(3)
+  set length($core.int v) { $_setSignedInt32(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasLength() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearLength() => clearField(3);
+
+  /// Target identifier (e.g., profile_id, room_id, URL)
+  @$pb.TagNumber(4)
+  $core.String get value => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set value($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasValue() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearValue() => clearField(4);
+}
+
+class AttachmentContent extends $pb.GeneratedMessage {
+  factory AttachmentContent({
+    $core.String? attachmentId,
+    $core.String? filename,
+    $core.String? mimeType,
+    $fixnum.Int64? sizeBytes,
+    $core.String? uri,
+    $core.Iterable<AttachmentPreview>? previews,
+    TextContent? caption,
+    $core.bool? encrypted,
+  }) {
+    final $result = create();
+    if (attachmentId != null) {
+      $result.attachmentId = attachmentId;
+    }
+    if (filename != null) {
+      $result.filename = filename;
+    }
+    if (mimeType != null) {
+      $result.mimeType = mimeType;
+    }
+    if (sizeBytes != null) {
+      $result.sizeBytes = sizeBytes;
+    }
+    if (uri != null) {
+      $result.uri = uri;
+    }
+    if (previews != null) {
+      $result.previews.addAll(previews);
+    }
+    if (caption != null) {
+      $result.caption = caption;
+    }
+    if (encrypted != null) {
+      $result.encrypted = encrypted;
+    }
+    return $result;
+  }
+  AttachmentContent._() : super();
+  factory AttachmentContent.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory AttachmentContent.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AttachmentContent', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'attachmentId')
+    ..aOS(2, _omitFieldNames ? '' : 'filename')
+    ..aOS(3, _omitFieldNames ? '' : 'mimeType')
+    ..aInt64(4, _omitFieldNames ? '' : 'sizeBytes')
+    ..aOS(5, _omitFieldNames ? '' : 'uri')
+    ..pc<AttachmentPreview>(6, _omitFieldNames ? '' : 'previews', $pb.PbFieldType.PM, subBuilder: AttachmentPreview.create)
+    ..aOM<TextContent>(7, _omitFieldNames ? '' : 'caption', subBuilder: TextContent.create)
+    ..aOB(8, _omitFieldNames ? '' : 'encrypted')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  AttachmentContent clone() => AttachmentContent()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  AttachmentContent copyWith(void Function(AttachmentContent) updates) => super.copyWith((message) => updates(message as AttachmentContent)) as AttachmentContent;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static AttachmentContent create() => AttachmentContent._();
+  AttachmentContent createEmptyInstance() => create();
+  static $pb.PbList<AttachmentContent> createRepeated() => $pb.PbList<AttachmentContent>();
+  @$core.pragma('dart2js:noInline')
+  static AttachmentContent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AttachmentContent>(create);
+  static AttachmentContent? _defaultInstance;
+
+  /// Logical identifier of the attachment
+  @$pb.TagNumber(1)
+  $core.String get attachmentId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set attachmentId($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasAttachmentId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAttachmentId() => clearField(1);
+
+  /// Original filename (optional, user-facing)
+  @$pb.TagNumber(2)
+  $core.String get filename => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set filename($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasFilename() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFilename() => clearField(2);
+
+  /// MIME type (e.g. image/png, application/pdf)
+  @$pb.TagNumber(3)
+  $core.String get mimeType => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set mimeType($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasMimeType() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearMimeType() => clearField(3);
+
+  /// Size in bytes (for quota enforcement & UX)
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get sizeBytes => $_getI64(3);
+  @$pb.TagNumber(4)
+  set sizeBytes($fixnum.Int64 v) { $_setInt64(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasSizeBytes() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearSizeBytes() => clearField(4);
+
+  /// Content location (signed URL or opaque locator)
+  @$pb.TagNumber(5)
+  $core.String get uri => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set uri($core.String v) { $_setString(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasUri() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearUri() => clearField(5);
+
+  /// Optional previews / thumbnails
+  @$pb.TagNumber(6)
+  $core.List<AttachmentPreview> get previews => $_getList(5);
+
+  /// Optional caption text
+  @$pb.TagNumber(7)
+  TextContent get caption => $_getN(6);
+  @$pb.TagNumber(7)
+  set caption(TextContent v) { setField(7, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasCaption() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearCaption() => clearField(7);
+  @$pb.TagNumber(7)
+  TextContent ensureCaption() => $_ensure(6);
+
+  /// Indicates whether attachment is end-to-end encrypted
+  @$pb.TagNumber(8)
+  $core.bool get encrypted => $_getBF(7);
+  @$pb.TagNumber(8)
+  set encrypted($core.bool v) { $_setBool(7, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasEncrypted() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearEncrypted() => clearField(8);
+}
+
+class AttachmentPreview extends $pb.GeneratedMessage {
+  factory AttachmentPreview({
+    $core.String? mimeType,
+    $core.int? width,
+    $core.int? height,
+    $core.String? uri,
+    $fixnum.Int64? sizeBytes,
+  }) {
+    final $result = create();
+    if (mimeType != null) {
+      $result.mimeType = mimeType;
+    }
+    if (width != null) {
+      $result.width = width;
+    }
+    if (height != null) {
+      $result.height = height;
+    }
+    if (uri != null) {
+      $result.uri = uri;
+    }
+    if (sizeBytes != null) {
+      $result.sizeBytes = sizeBytes;
+    }
+    return $result;
+  }
+  AttachmentPreview._() : super();
+  factory AttachmentPreview.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory AttachmentPreview.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AttachmentPreview', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'mimeType')
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'width', $pb.PbFieldType.O3)
+    ..a<$core.int>(3, _omitFieldNames ? '' : 'height', $pb.PbFieldType.O3)
+    ..aOS(4, _omitFieldNames ? '' : 'uri')
+    ..aInt64(5, _omitFieldNames ? '' : 'sizeBytes')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  AttachmentPreview clone() => AttachmentPreview()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  AttachmentPreview copyWith(void Function(AttachmentPreview) updates) => super.copyWith((message) => updates(message as AttachmentPreview)) as AttachmentPreview;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static AttachmentPreview create() => AttachmentPreview._();
+  AttachmentPreview createEmptyInstance() => create();
+  static $pb.PbList<AttachmentPreview> createRepeated() => $pb.PbList<AttachmentPreview>();
+  @$core.pragma('dart2js:noInline')
+  static AttachmentPreview getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AttachmentPreview>(create);
+  static AttachmentPreview? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get mimeType => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set mimeType($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasMimeType() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearMimeType() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.int get width => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set width($core.int v) { $_setSignedInt32(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasWidth() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearWidth() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.int get height => $_getIZ(2);
+  @$pb.TagNumber(3)
+  set height($core.int v) { $_setSignedInt32(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasHeight() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearHeight() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get uri => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set uri($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasUri() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearUri() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get sizeBytes => $_getI64(4);
+  @$pb.TagNumber(5)
+  set sizeBytes($fixnum.Int64 v) { $_setInt64(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasSizeBytes() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearSizeBytes() => clearField(5);
+}
+
+class ReactionContent extends $pb.GeneratedMessage {
+  factory ReactionContent({
+    $core.String? targetEventId,
+    $core.String? reaction,
+    $core.bool? add,
+  }) {
+    final $result = create();
+    if (targetEventId != null) {
+      $result.targetEventId = targetEventId;
+    }
+    if (reaction != null) {
+      $result.reaction = reaction;
+    }
+    if (add != null) {
+      $result.add = add;
+    }
+    return $result;
+  }
+  ReactionContent._() : super();
+  factory ReactionContent.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ReactionContent.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ReactionContent', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'targetEventId')
+    ..aOS(2, _omitFieldNames ? '' : 'reaction')
+    ..aOB(3, _omitFieldNames ? '' : 'add')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ReactionContent clone() => ReactionContent()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ReactionContent copyWith(void Function(ReactionContent) updates) => super.copyWith((message) => updates(message as ReactionContent)) as ReactionContent;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ReactionContent create() => ReactionContent._();
+  ReactionContent createEmptyInstance() => create();
+  static $pb.PbList<ReactionContent> createRepeated() => $pb.PbList<ReactionContent>();
+  @$core.pragma('dart2js:noInline')
+  static ReactionContent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ReactionContent>(create);
+  static ReactionContent? _defaultInstance;
+
+  /// Target message being reacted to
+  @$pb.TagNumber(1)
+  $core.String get targetEventId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set targetEventId($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasTargetEventId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearTargetEventId() => clearField(1);
+
+  /// Reaction key (e.g. 👍, ❤️, :custom_emoji:)
+  @$pb.TagNumber(2)
+  $core.String get reaction => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set reaction($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasReaction() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearReaction() => clearField(2);
+
+  /// True = add reaction, False = remove reaction
+  @$pb.TagNumber(3)
+  $core.bool get add => $_getBF(2);
+  @$pb.TagNumber(3)
+  set add($core.bool v) { $_setBool(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasAdd() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearAdd() => clearField(3);
+}
+
+class EncryptedTextContent extends $pb.GeneratedMessage {
+  factory EncryptedTextContent({
+    $core.String? algorithm,
+    $core.List<$core.int>? ciphertext,
+    $core.List<$core.int>? nonce,
+    $core.String? senderKeyId,
+    $core.Iterable<$core.String>? recipientKeyIds,
+    $core.List<$core.int>? aad,
+  }) {
+    final $result = create();
+    if (algorithm != null) {
+      $result.algorithm = algorithm;
+    }
+    if (ciphertext != null) {
+      $result.ciphertext = ciphertext;
+    }
+    if (nonce != null) {
+      $result.nonce = nonce;
+    }
+    if (senderKeyId != null) {
+      $result.senderKeyId = senderKeyId;
+    }
+    if (recipientKeyIds != null) {
+      $result.recipientKeyIds.addAll(recipientKeyIds);
+    }
+    if (aad != null) {
+      $result.aad = aad;
+    }
+    return $result;
+  }
+  EncryptedTextContent._() : super();
+  factory EncryptedTextContent.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory EncryptedTextContent.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EncryptedTextContent', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'algorithm')
+    ..a<$core.List<$core.int>>(2, _omitFieldNames ? '' : 'ciphertext', $pb.PbFieldType.OY)
+    ..a<$core.List<$core.int>>(3, _omitFieldNames ? '' : 'nonce', $pb.PbFieldType.OY)
+    ..aOS(4, _omitFieldNames ? '' : 'senderKeyId')
+    ..pPS(5, _omitFieldNames ? '' : 'recipientKeyIds')
+    ..a<$core.List<$core.int>>(6, _omitFieldNames ? '' : 'aad', $pb.PbFieldType.OY)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  EncryptedTextContent clone() => EncryptedTextContent()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  EncryptedTextContent copyWith(void Function(EncryptedTextContent) updates) => super.copyWith((message) => updates(message as EncryptedTextContent)) as EncryptedTextContent;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static EncryptedTextContent create() => EncryptedTextContent._();
+  EncryptedTextContent createEmptyInstance() => create();
+  static $pb.PbList<EncryptedTextContent> createRepeated() => $pb.PbList<EncryptedTextContent>();
+  @$core.pragma('dart2js:noInline')
+  static EncryptedTextContent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EncryptedTextContent>(create);
+  static EncryptedTextContent? _defaultInstance;
+
+  /// Encryption scheme identifier
+  /// Examples: "olm.v2", "megolm.v1", "x25519-aesgcm"
+  @$pb.TagNumber(1)
+  $core.String get algorithm => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set algorithm($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasAlgorithm() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAlgorithm() => clearField(1);
+
+  /// Base64 or binary-safe encoded ciphertext
+  @$pb.TagNumber(2)
+  $core.List<$core.int> get ciphertext => $_getN(1);
+  @$pb.TagNumber(2)
+  set ciphertext($core.List<$core.int> v) { $_setBytes(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasCiphertext() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearCiphertext() => clearField(2);
+
+  /// Optional per-message nonce / IV
+  @$pb.TagNumber(3)
+  $core.List<$core.int> get nonce => $_getN(2);
+  @$pb.TagNumber(3)
+  set nonce($core.List<$core.int> v) { $_setBytes(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasNonce() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearNonce() => clearField(3);
+
+  /// Optional sender key identifier
+  @$pb.TagNumber(4)
+  $core.String get senderKeyId => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set senderKeyId($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasSenderKeyId() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearSenderKeyId() => clearField(4);
+
+  /// Optional recipient key references (for fan-out)
+  @$pb.TagNumber(5)
+  $core.List<$core.String> get recipientKeyIds => $_getList(4);
+
+  /// Additional authenticated data (AAD)
+  @$pb.TagNumber(6)
+  $core.List<$core.int> get aad => $_getN(5);
+  @$pb.TagNumber(6)
+  set aad($core.List<$core.int> v) { $_setBytes(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasAad() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearAad() => clearField(6);
+}
+
+class CallContent extends $pb.GeneratedMessage {
+  factory CallContent({
+    $core.String? callId,
+    CallContent_CallType? type,
+    CallContent_CallAction? action,
+    $core.String? sdp,
+    $core.String? iceCandidate,
+    $1.Struct? metadata,
+  }) {
+    final $result = create();
+    if (callId != null) {
+      $result.callId = callId;
+    }
+    if (type != null) {
+      $result.type = type;
+    }
+    if (action != null) {
+      $result.action = action;
+    }
+    if (sdp != null) {
+      $result.sdp = sdp;
+    }
+    if (iceCandidate != null) {
+      $result.iceCandidate = iceCandidate;
+    }
+    if (metadata != null) {
+      $result.metadata = metadata;
+    }
+    return $result;
+  }
+  CallContent._() : super();
+  factory CallContent.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory CallContent.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CallContent', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'callId')
+    ..e<CallContent_CallType>(2, _omitFieldNames ? '' : 'type', $pb.PbFieldType.OE, defaultOrMaker: CallContent_CallType.CALL_TYPE_UNSPECIFIED, valueOf: CallContent_CallType.valueOf, enumValues: CallContent_CallType.values)
+    ..e<CallContent_CallAction>(3, _omitFieldNames ? '' : 'action', $pb.PbFieldType.OE, defaultOrMaker: CallContent_CallAction.CALL_ACTION_UNSPECIFIED, valueOf: CallContent_CallAction.valueOf, enumValues: CallContent_CallAction.values)
+    ..aOS(4, _omitFieldNames ? '' : 'sdp')
+    ..aOS(5, _omitFieldNames ? '' : 'iceCandidate')
+    ..aOM<$1.Struct>(8, _omitFieldNames ? '' : 'metadata', subBuilder: $1.Struct.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  CallContent clone() => CallContent()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  CallContent copyWith(void Function(CallContent) updates) => super.copyWith((message) => updates(message as CallContent)) as CallContent;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CallContent create() => CallContent._();
+  CallContent createEmptyInstance() => create();
+  static $pb.PbList<CallContent> createRepeated() => $pb.PbList<CallContent>();
+  @$core.pragma('dart2js:noInline')
+  static CallContent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CallContent>(create);
+  static CallContent? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get callId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set callId($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasCallId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearCallId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  CallContent_CallType get type => $_getN(1);
+  @$pb.TagNumber(2)
+  set type(CallContent_CallType v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasType() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearType() => clearField(2);
+
+  @$pb.TagNumber(3)
+  CallContent_CallAction get action => $_getN(2);
+  @$pb.TagNumber(3)
+  set action(CallContent_CallAction v) { setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasAction() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearAction() => clearField(3);
+
+  /// WebRTC payload (SDP or ICE candidate)
+  @$pb.TagNumber(4)
+  $core.String get sdp => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set sdp($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasSdp() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearSdp() => clearField(4);
+
+  /// Optional ICE candidate (when action = ICE_CANDIDATE)
+  @$pb.TagNumber(5)
+  $core.String get iceCandidate => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set iceCandidate($core.String v) { $_setString(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasIceCandidate() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearIceCandidate() => clearField(5);
+
+  /// Optional metadata (bitrate, codecs, device hints)
+  @$pb.TagNumber(8)
+  $1.Struct get metadata => $_getN(5);
+  @$pb.TagNumber(8)
+  set metadata($1.Struct v) { setField(8, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasMetadata() => $_has(5);
+  @$pb.TagNumber(8)
+  void clearMetadata() => clearField(8);
+  @$pb.TagNumber(8)
+  $1.Struct ensureMetadata() => $_ensure(5);
 }
 
 class GatewayServiceApi {

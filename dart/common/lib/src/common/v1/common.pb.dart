@@ -18,39 +18,29 @@ import 'common.pbenum.dart';
 
 export 'common.pbenum.dart';
 
-/// Pagination provides standard offset-based pagination parameters.
+/// PageCursor provides standard offset-based pagination/cursor stream parameters.
 /// Used for list operations that return large result sets.
-class Pagination extends $pb.GeneratedMessage {
-  factory Pagination({
-    $core.int? count,
-    $core.int? page,
-    $core.String? startDate,
-    $core.String? endDate,
+class PageCursor extends $pb.GeneratedMessage {
+  factory PageCursor({
+    $core.int? limit,
+    $core.String? page,
   }) {
     final $result = create();
-    if (count != null) {
-      $result.count = count;
+    if (limit != null) {
+      $result.limit = limit;
     }
     if (page != null) {
       $result.page = page;
     }
-    if (startDate != null) {
-      $result.startDate = startDate;
-    }
-    if (endDate != null) {
-      $result.endDate = endDate;
-    }
     return $result;
   }
-  Pagination._() : super();
-  factory Pagination.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory Pagination.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  PageCursor._() : super();
+  factory PageCursor.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory PageCursor.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Pagination', package: const $pb.PackageName(_omitMessageNames ? '' : 'common.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'count', $pb.PbFieldType.O3)
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'page', $pb.PbFieldType.O3)
-    ..aOS(3, _omitFieldNames ? '' : 'startDate')
-    ..aOS(4, _omitFieldNames ? '' : 'endDate')
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PageCursor', package: const $pb.PackageName(_omitMessageNames ? '' : 'common.v1'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'limit', $pb.PbFieldType.O3)
+    ..aOS(2, _omitFieldNames ? '' : 'page')
     ..hasRequiredFields = false
   ;
 
@@ -58,58 +48,40 @@ class Pagination extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  Pagination clone() => Pagination()..mergeFromMessage(this);
+  PageCursor clone() => PageCursor()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  Pagination copyWith(void Function(Pagination) updates) => super.copyWith((message) => updates(message as Pagination)) as Pagination;
+  PageCursor copyWith(void Function(PageCursor) updates) => super.copyWith((message) => updates(message as PageCursor)) as PageCursor;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static Pagination create() => Pagination._();
-  Pagination createEmptyInstance() => create();
-  static $pb.PbList<Pagination> createRepeated() => $pb.PbList<Pagination>();
+  static PageCursor create() => PageCursor._();
+  PageCursor createEmptyInstance() => create();
+  static $pb.PbList<PageCursor> createRepeated() => $pb.PbList<PageCursor>();
   @$core.pragma('dart2js:noInline')
-  static Pagination getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Pagination>(create);
-  static Pagination? _defaultInstance;
+  static PageCursor getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PageCursor>(create);
+  static PageCursor? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.int get count => $_getIZ(0);
+  $core.int get limit => $_getIZ(0);
   @$pb.TagNumber(1)
-  set count($core.int v) { $_setSignedInt32(0, v); }
+  set limit($core.int v) { $_setSignedInt32(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasCount() => $_has(0);
+  $core.bool hasLimit() => $_has(0);
   @$pb.TagNumber(1)
-  void clearCount() => clearField(1);
+  void clearLimit() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.int get page => $_getIZ(1);
+  $core.String get page => $_getSZ(1);
   @$pb.TagNumber(2)
-  set page($core.int v) { $_setSignedInt32(1, v); }
+  set page($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
   $core.bool hasPage() => $_has(1);
   @$pb.TagNumber(2)
   void clearPage() => clearField(2);
-
-  @$pb.TagNumber(3)
-  $core.String get startDate => $_getSZ(2);
-  @$pb.TagNumber(3)
-  set startDate($core.String v) { $_setString(2, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasStartDate() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearStartDate() => clearField(3);
-
-  @$pb.TagNumber(4)
-  $core.String get endDate => $_getSZ(3);
-  @$pb.TagNumber(4)
-  set endDate($core.String v) { $_setString(3, v); }
-  @$pb.TagNumber(4)
-  $core.bool hasEndDate() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearEndDate() => clearField(4);
 }
 
 /// SearchRequest provides a standard structure for search operations across services.
@@ -118,7 +90,7 @@ class SearchRequest extends $pb.GeneratedMessage {
   factory SearchRequest({
     $core.String? query,
     $core.String? idQuery,
-    Pagination? limits,
+    PageCursor? cursor,
     $core.Iterable<$core.String>? properties,
     $8.Struct? extras,
   }) {
@@ -129,8 +101,8 @@ class SearchRequest extends $pb.GeneratedMessage {
     if (idQuery != null) {
       $result.idQuery = idQuery;
     }
-    if (limits != null) {
-      $result.limits = limits;
+    if (cursor != null) {
+      $result.cursor = cursor;
     }
     if (properties != null) {
       $result.properties.addAll(properties);
@@ -147,7 +119,7 @@ class SearchRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SearchRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'common.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'query')
     ..aOS(2, _omitFieldNames ? '' : 'idQuery')
-    ..aOM<Pagination>(3, _omitFieldNames ? '' : 'limits', subBuilder: Pagination.create)
+    ..aOM<PageCursor>(3, _omitFieldNames ? '' : 'cursor', subBuilder: PageCursor.create)
     ..pPS(7, _omitFieldNames ? '' : 'properties')
     ..aOM<$8.Struct>(8, _omitFieldNames ? '' : 'extras', subBuilder: $8.Struct.create)
     ..hasRequiredFields = false
@@ -193,15 +165,15 @@ class SearchRequest extends $pb.GeneratedMessage {
   void clearIdQuery() => clearField(2);
 
   @$pb.TagNumber(3)
-  Pagination get limits => $_getN(2);
+  PageCursor get cursor => $_getN(2);
   @$pb.TagNumber(3)
-  set limits(Pagination v) { setField(3, v); }
+  set cursor(PageCursor v) { setField(3, v); }
   @$pb.TagNumber(3)
-  $core.bool hasLimits() => $_has(2);
+  $core.bool hasCursor() => $_has(2);
   @$pb.TagNumber(3)
-  void clearLimits() => clearField(3);
+  void clearCursor() => clearField(3);
   @$pb.TagNumber(3)
-  Pagination ensureLimits() => $_ensure(2);
+  PageCursor ensureCursor() => $_ensure(2);
 
   @$pb.TagNumber(7)
   $core.List<$core.String> get properties => $_getList(3);
