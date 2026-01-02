@@ -863,6 +863,9 @@ components:
         roomId:
           type: string
           title: room_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
         error:
           title: error
           $ref: '#/components/schemas/common.v1.ErrorDetail'
@@ -999,12 +1002,9 @@ components:
     chat.v1.PresenceEvent:
       type: object
       properties:
-        profileId:
-          type: string
-          title: profile_id
-          maxLength: 40
-          minLength: 3
-          pattern: '[0-9a-z_-]{3,40}'
+        source:
+          title: source
+          $ref: '#/components/schemas/common.v1.ContactLink'
         status:
           title: status
           $ref: '#/components/schemas/chat.v1.PresenceStatus'
@@ -1055,12 +1055,9 @@ components:
           maxLength: 40
           minLength: 3
           pattern: '[0-9a-z_-]{3,40}'
-        profileId:
-          type: string
-          title: profile_id
-          maxLength: 40
-          minLength: 3
-          pattern: '[0-9a-z_-]{3,40}'
+        source:
+          title: source
+          $ref: '#/components/schemas/common.v1.ContactLink'
         upToEventId:
           type: string
           title: up_to_event_id
@@ -1072,12 +1069,9 @@ components:
     chat.v1.ReceiptEvent:
       type: object
       properties:
-        profileId:
-          type: string
-          title: profile_id
-          maxLength: 40
-          minLength: 3
-          pattern: '[0-9a-z_-]{3,40}'
+        source:
+          title: source
+          $ref: '#/components/schemas/common.v1.ContactLink'
         roomId:
           type: string
           title: room_id
@@ -1186,13 +1180,10 @@ components:
               minLength: 3
               pattern: '[0-9a-z_-]{3,40}'
               description: room_id
-            senderId:
-              type: string
-              title: sender_id
-              maxLength: 40
-              minLength: 3
-              pattern: '[0-9a-z_-]{3,40}'
+            source:
+              title: source
               description: profile_id or service/bot id
+              $ref: '#/components/schemas/common.v1.ContactLink'
             type:
               title: type
               description: |-
@@ -1285,6 +1276,10 @@ components:
           maxLength: 40
           minLength: 3
           pattern: '[0-9a-z_-]{3,40}'
+          description: |-
+            NOTE:
+             Event IDs are XIDs and MUST be lexicographically sortable by creation time.
+             Clients MUST NOT assume any other ordering mechanism.
         roomId:
           type: string
           title: room_id
@@ -1616,12 +1611,9 @@ components:
     chat.v1.TypingEvent:
       type: object
       properties:
-        profileId:
-          type: string
-          title: profile_id
-          maxLength: 40
-          minLength: 3
-          pattern: '[0-9a-z_-]{3,40}'
+        source:
+          title: source
+          $ref: '#/components/schemas/common.v1.ContactLink'
         roomId:
           type: string
           title: room_id
@@ -1646,12 +1638,9 @@ components:
           maxLength: 40
           minLength: 3
           pattern: '[0-9a-z_-]{3,40}'
-        profileId:
-          type: string
-          title: profile_id
-          maxLength: 40
-          minLength: 3
-          pattern: '[0-9a-z_-]{3,40}'
+        source:
+          title: source
+          $ref: '#/components/schemas/common.v1.ContactLink'
         clientStates:
           type: array
           items:
@@ -1692,6 +1681,9 @@ components:
       properties:
         room:
           title: room
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
           $ref: '#/components/schemas/chat.v1.Room'
         error:
           title: error
@@ -1701,15 +1693,15 @@ components:
     chat.v1.UpdateSubscriptionRoleRequest:
       type: object
       properties:
-        roomId:
-          type: string
-          title: room_id
-          maxLength: 40
-          minLength: 3
-          pattern: '[0-9a-z_-]{3,40}'
         subscriptionId:
           type: string
           title: subscription_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        roomId:
+          type: string
+          title: room_id
           maxLength: 40
           minLength: 3
           pattern: '[0-9a-z_-]{3,40}'

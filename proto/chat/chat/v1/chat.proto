@@ -237,11 +237,8 @@ message RoomEvent {
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ]; // room_id
-  string sender_id = 3 [
-    (buf.validate.field).string.min_len = 3,
-    (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
-  ]; // profile_id or service/bot id
+
+  common.v1.ContactLink source = 3; // profile_id or service/bot id
 
   // The `type` MUST correspond to the populated payload.
   // Servers MUST reject mismatches.
@@ -289,11 +286,7 @@ enum RoomEventType {
 
 // Presence event affecting a user (and visible to rooms the user is a member of)
 message PresenceEvent {
-  string profile_id = 1 [
-    (buf.validate.field).string.min_len = 3,
-    (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
-  ];
+  common.v1.ContactLink source = 1;
   PresenceStatus status = 2;
   string status_msg = 3;
   google.protobuf.Timestamp last_active = 4;
@@ -311,11 +304,7 @@ enum PresenceStatus {
 // Servers MUST NOT persist ReceiptEvent.
 // Servers MAY drop ReceiptEvent without acknowledgment.
 message ReceiptEvent {
-  string profile_id = 1 [
-    (buf.validate.field).string.min_len = 3,
-    (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
-  ];
+  common.v1.ContactLink source = 1;
   string room_id = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
@@ -339,11 +328,7 @@ message ReadMarker {
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
-  string profile_id = 2 [
-    (buf.validate.field).string.min_len = 3,
-    (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
-  ];
+  common.v1.ContactLink source = 2;
   string up_to_event_id = 3 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
@@ -353,11 +338,7 @@ message ReadMarker {
 
 // Typing indicator
 message TypingEvent {
-  string profile_id = 1 [
-    (buf.validate.field).string.min_len = 3,
-    (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
-  ];
+  common.v1.ContactLink source = 1;
   string room_id = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
@@ -548,7 +529,11 @@ message UpdateRoomRequest {
 }
 
 message UpdateRoomResponse {
-  Room room = 1;
+  Room room = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
   common.v1.ErrorDetail error = 2;
 }
 
@@ -561,7 +546,11 @@ message DeleteRoomRequest {
 }
 
 message DeleteRoomResponse {
-  string room_id = 1;
+  string room_id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
   common.v1.ErrorDetail error = 2;
 }
 
@@ -570,7 +559,11 @@ message DeleteRoomResponse {
 // -----------------------------------------------------
 
 message RoomSubscription {
+  // NOTE:
+  // Event IDs are XIDs and MUST be lexicographically sortable by creation time.
+  // Clients MUST NOT assume any other ordering mechanism.
   string id = 1 [
+    (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
@@ -623,16 +616,17 @@ message RemoveRoomSubscriptionsResponse {
 }
 
 message UpdateSubscriptionRoleRequest {
-  string room_id = 2 [
-    (buf.validate.field).string.min_len = 3,
-    (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
-  ];
   string subscription_id = 3 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
+  string room_id = 2 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+
   repeated string roles = 4;
 }
 
@@ -674,11 +668,7 @@ message UpdateClientStateRequest {
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
-  string profile_id = 2 [
-    (buf.validate.field).string.min_len = 3,
-    (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
-  ];
+  common.v1.ContactLink source = 2;
   repeated ClientCommand client_states = 3;
 }
 
