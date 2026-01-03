@@ -32,8 +32,24 @@ library;
 export 'src/client.dart';
 
 // Export generated protobuf files
+export 'src/chat/v1/payload_type.pb.dart';
+export 'src/chat/v1/payload_type.pbenum.dart';
+export 'src/chat/v1/payload_type.pbjson.dart';
+export 'src/chat/v1/definitions.pb.dart';
+export 'src/chat/v1/definitions.pbenum.dart';
+export 'src/chat/v1/definitions.pbjson.dart';
 export 'src/chat/v1/chat.pb.dart';
 export 'src/chat/v1/chat.pbenum.dart';
 export 'src/chat/v1/chat.pbjson.dart';
 export 'src/chat/v1/chat.connect.client.dart';
 export 'src/chat/v1/chat.connect.spec.dart';
+export 'src/chat/v1/gateway.pb.dart';
+export 'src/chat/v1/gateway.pbenum.dart';
+export 'src/chat/v1/gateway.pbjson.dart';
+export 'src/chat/v1/gateway.connect.client.dart';
+export 'src/chat/v1/gateway.connect.spec.dart';
+
+// Export events protobuf files
+export 'src/events/v1/events.pb.dart';
+export 'src/events/v1/events.pbenum.dart';
+export 'src/events/v1/events.pbjson.dart';
