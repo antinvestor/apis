@@ -18,7 +18,6 @@ package chat.v1;
 
 import "buf/validate/validate.proto";
 import "chat/v1/definitions.proto";
-import "chat/v1/payload_type.proto";
 // -----------------------------------------------------
 // Core notes (normative):
 // - All timestamps are RFC3339 / google.protobuf.Timestamp.

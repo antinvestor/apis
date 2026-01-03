@@ -19,7 +19,7 @@ const Link$json = {
   '2': [
     {'1': 'event_id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'eventId'},
     {'1': 'room_id', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'roomId'},
-    {'1': 'source', '3': 3, '4': 1, '5': 11, '6': '.common.v1.ContactLink', '8': {}, '9': 0, '10': 'source', '17': true},
+    {'1': 'source', '3': 3, '4': 1, '5': 11, '6': '.common.v1.ContactLink', '9': 0, '10': 'source', '17': true},
     {'1': 'parent_id', '3': 5, '4': 1, '5': 9, '8': {}, '10': 'parentId'},
     {'1': 'event_type', '3': 7, '4': 1, '5': 14, '6': '.chat.v1.RoomEventType', '10': 'eventType'},
     {'1': 'created_at', '3': 10, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
@@ -33,11 +33,11 @@ const Link$json = {
 final $typed_data.Uint8List linkDescriptor = $convert.base64Decode(
     'CgRMaW5rEjYKCGV2ZW50X2lkGAEgASgJQhu6SBhyFhADGCgyEFswLTlhLXpfLV17MywyMH1SB2'
     'V2ZW50SWQSNAoHcm9vbV9pZBgCIAEoCUIbukgYchYQAxgoMhBbMC05YS16Xy1dezMsMjB9UgZy'
-    'b29tSWQSUAoGc291cmNlGAMgASgLMhYuY29tbW9uLnYxLkNvbnRhY3RMaW5rQhu6SBhyFhADGC'
-    'gyEFswLTlhLXpfLV17MywyMH1IAFIGc291cmNliAEBEjgKCXBhcmVudF9pZBgFIAEoCUIbukgY'
-    'chYQAxgoMhBbMC05YS16Xy1dezMsMjB9UghwYXJlbnRJZBI1CgpldmVudF90eXBlGAcgASgOMh'
-    'YuY2hhdC52MS5Sb29tRXZlbnRUeXBlUglldmVudFR5cGUSOQoKY3JlYXRlZF9hdBgKIAEoCzIa'
-    'Lmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCWNyZWF0ZWRBdEIJCgdfc291cmNl');
+    'b29tSWQSMwoGc291cmNlGAMgASgLMhYuY29tbW9uLnYxLkNvbnRhY3RMaW5rSABSBnNvdXJjZY'
+    'gBARI4CglwYXJlbnRfaWQYBSABKAlCG7pIGHIWEAMYKDIQWzAtOWEtel8tXXszLDIwfVIIcGFy'
+    'ZW50SWQSNQoKZXZlbnRfdHlwZRgHIAEoDjIWLmNoYXQudjEuUm9vbUV2ZW50VHlwZVIJZXZlbn'
+    'RUeXBlEjkKCmNyZWF0ZWRfYXQYCiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wUglj'
+    'cmVhdGVkQXRCCQoHX3NvdXJjZQ==');
 
 @$core.Deprecated('Use broadcastDescriptor instead')
 const Broadcast$json = {
@@ -54,8 +54,8 @@ const Broadcast$json = {
 const Broadcast_Priority$json = {
   '1': 'Priority',
   '2': [
-    {'1': 'NORMAL', '2': 0},
-    {'1': 'HIGH', '2': 1},
+    {'1': 'PRIORITY_NORMAL', '2': 0},
+    {'1': 'PRIORITY_HIGH', '2': 1},
   ],
 };
 
@@ -64,7 +64,7 @@ final $typed_data.Uint8List broadcastDescriptor = $convert.base64Decode(
     'CglCcm9hZGNhc3QSJQoFZXZlbnQYASABKAsyDy5ldmVudHMudjEuTGlua1IFZXZlbnQSOgoMZG'
     'VzdGluYXRpb25zGAIgAygLMhYuY29tbW9uLnYxLkNvbnRhY3RMaW5rUgxkZXN0aW5hdGlvbnMS'
     'OQoIcHJpb3JpdHkYAyABKA4yHS5ldmVudHMudjEuQnJvYWRjYXN0LlByaW9yaXR5Ughwcmlvcm'
-    'l0eSIgCghQcmlvcml0eRIKCgZOT1JNQUwQABIICgRISUdIEAE=');
+    'l0eSIyCghQcmlvcml0eRITCg9QUklPUklUWV9OT1JNQUwQABIRCg1QUklPUklUWV9ISUdIEAE=');
 
 @$core.Deprecated('Use deliveryDescriptor instead')
 const Delivery$json = {

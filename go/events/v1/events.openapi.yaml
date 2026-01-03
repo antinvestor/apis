@@ -408,8 +408,8 @@ components:
       type: string
       title: Priority
       enum:
-        - NORMAL
-        - HIGH
+        - PRIORITY_NORMAL
+        - PRIORITY_HIGH
       description: Indicates priority of delivery to prioritize critical events (e.g., CALL_OFFER).
     events.v1.Delivery:
       type: object
@@ -461,9 +461,6 @@ components:
           description: Identifies the chat room or context, ensuring data is routed to the correct group.
         source:
           title: source
-          maxLength: 40
-          minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
           description: |-
             Identifies the originator of the event, crucial for attribution and security.
              Marked optional as it may not be required for system messages.

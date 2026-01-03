@@ -17,10 +17,7 @@ syntax = "proto3";
 package chat.v1;
 
 import "buf/validate/validate.proto";
-import "common/v1/common.proto";
-import "gnostic/openapi/v3/annotations.proto";
 import "google/protobuf/struct.proto";
-import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/antinvestor/apis/go/chat/v1;chatv1";
 option java_multiple_files = true;

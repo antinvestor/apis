@@ -20,8 +20,6 @@ import "buf/validate/validate.proto";
 import "chat/v1/definitions.proto";
 import "chat/v1/payload_type.proto";
 import "common/v1/common.proto";
-import "gnostic/openapi/v3/annotations.proto";
-import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/antinvestor/apis/go/events/v1;eventsv1";
@@ -46,11 +44,7 @@ message Link {
   ];
   // Identifies the originator of the event, crucial for attribution and security.
   // Marked optional as it may not be required for system messages.
-  optional common.v1.ContactLink source = 3 [
-    (buf.validate.field).string.min_len = 3,
-    (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
+  optional common.v1.ContactLink source = 3;
 
   // Unique identifier for a parent event related to this event, constrained for quick parsing and validation.
   string parent_id = 5 [
@@ -74,8 +68,8 @@ message Broadcast {
   repeated common.v1.ContactLink destinations = 2;
   // Indicates priority of delivery to prioritize critical events (e.g., CALL_OFFER).
   enum Priority {
-    NORMAL = 0;
-    HIGH = 1;
+    PRIORITY_NORMAL = 0;
+    PRIORITY_HIGH = 1;
   }
   Priority priority = 3;
 }
