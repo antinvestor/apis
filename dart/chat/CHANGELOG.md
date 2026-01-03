@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.52.8] - 2025-1-3
+
+### Changed
+
+- resolve lint fixes related to events proto
+
 ## [1.52.7] - 2025-1-3
 
 ### Changed
