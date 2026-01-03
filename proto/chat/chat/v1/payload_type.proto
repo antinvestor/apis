@@ -23,6 +23,20 @@ option go_package = "github.com/antinvestor/apis/go/chat/v1;chatv1";
 option java_multiple_files = true;
 option java_package = "chatv1";
 
+// Allowed message types. Extendable via new enum values; clients must ignore unknown values.
+enum PayloadType {
+  PAYLOAD_TYPE_UNSPECIFIED = 0;
+  PAYLOAD_TYPE_TEXT = 2;
+  PAYLOAD_TYPE_ATTACHMENT = 3;
+  PAYLOAD_TYPE_REACTION = 7;
+  PAYLOAD_TYPE_ENCRYPTED = 6; // opaque ciphertext
+  PAYLOAD_TYPE_CALL = 21;
+  PAYLOAD_TYPE_MOTION = 22;
+  PAYLOAD_TYPE_VOTE = 23;
+  PAYLOAD_TYPE_MOTION_TALLY = 24;
+  PAYLOAD_TYPE_VOTE_TALLY = 25;
+}
+
 message TextContent {
   // Required human-readable message body
   string body = 1 [
@@ -174,21 +188,121 @@ message CallContent {
   google.protobuf.Struct metadata = 8;
 }
 
+message MotionContent {
+  string id = 1;
+
+  // Human-readable description
+  string title = 2;
+  string description = 3;
+
+  // Roles allowed to vote; eligible_votes is derived
+  repeated string eligible_roles = 13;
+
+  // Snapshot of eligible voters at creation time (optional, cached)
+  optional uint32 eligible_votes = 4;
+
+  // Number of votes required to pass
+  // Can represent absolute count or percentage thresholds
+  // Passing rule
+  PassingRule passing_rule = 7;
+
+  // Available choices (YES / NO / ABSTAIN, etc)
+  repeated VoteChoice choices = 8;
+
+  // Optional deadline (unix seconds)
+  optional int64 closes_at = 12;
+}
+
+message VoteChoice {
+  string id = 1;
+  string name = 2;
+  optional string description = 3;
+}
+
+message PassingRule {
+  oneof rule {
+    // Absolute number of votes required
+    uint32 absolute = 1;
+
+    // Percentage required to pass (0–100)
+    uint32 percentage = 2;
+  }
+
+  // Which choice constitutes "passing" (usually YES)
+  string passing_choice_id = 3;
+}
+
+//    total_votes_cast = sum(choice counts excluding invalid if configured)
+//    remaining_votes  = eligible_votes - total_votes_cast
+//    dead_votes       = tally(choice_id == "invalid")
+//    target_votes     = derived from PassingRule
+//    passed           = tally(passing_choice_id) >= target_votes
+message VoteCast {
+  string motion_id = 1;
+
+  // Selected choice
+  string choice_id = 2;
+}
+
+message VoteTally {
+  string choice_id = 1;
+  uint32 count = 2;
+}
+
+message MotionTally {
+  string motion_id = 1;
+
+  // Total eligible voters
+  uint32 eligible_votes = 2;
+
+  // Votes per choice
+  repeated VoteTally tallies = 3;
+
+  // Derived counts
+  uint32 total_votes_cast = 4;
+
+  // Dead votes (invalid, expired, disqualified)
+  uint32 dead_votes = 6;
+
+  // Passing evaluation
+  uint32 target_votes = 7;
+  bool passed = 8;
+  bool closed = 9;
+}
+
 message Payload {
+  // The `type` MUST correspond to the populated payload.
+  // Servers MUST reject mismatches.
+  PayloadType type = 1;
+
   oneof data {
-    // type = ROOM_EVENT_TYPE_TEXT
+    // type = PAYLOAD_TYPE_UNSPECIFIED
+    google.protobuf.Struct default = 7;
+
+    // type = PAYLOAD_TYPE_TEXT
     TextContent text = 15;
 
-    // type = ROOM_EVENT_TYPE_ATTACHMENT
+    // type = PAYLOAD_TYPE_ATTACHMENT
     AttachmentContent attachment = 16;
 
-    // type = ROOM_EVENT_TYPE_REACTION
+    // type = PAYLOAD_TYPE_REACTION
     ReactionContent reaction = 17;
 
-    // type = ROOM_EVENT_TYPE_ENCRYPTED
+    // type = PAYLOAD_TYPE_ENCRYPTED
     EncryptedContent encrypted = 18;
 
-    // type = ROOM_EVENT_TYPE_CALL
+    // type = PAYLOAD_TYPE_CALL
     CallContent call = 19;
+
+    // type = PAYLOAD_TYPE_MOTION
+    MotionContent motion = 25;
+
+    // type = PAYLOAD_TYPE_MOTION_TALLY
+    MotionTally motion_tally = 28;
+
+    // type = PAYLOAD_TYPE_VOTE
+    VoteCast vote = 26;
+    // type = PAYLOAD_TYPE_VOTE_TALLY
+    VoteTally vote_tally = 29;
   }
 }

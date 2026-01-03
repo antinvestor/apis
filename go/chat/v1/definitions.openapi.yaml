@@ -233,51 +233,227 @@ components:
         Acknowledgement for event(s) received; server uses it to free ephemeral delivery buffers.
          ack_event_id: last event_id client processed (inclusive).
          If error is set, indicates the event failed to send/process correctly.
+    chat.v1.MotionContent:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+        title:
+          type: string
+          title: title
+          description: Human-readable description
+        description:
+          type: string
+          title: description
+        eligibleRoles:
+          type: array
+          items:
+            type: string
+          title: eligible_roles
+          description: Roles allowed to vote; eligible_votes is derived
+        eligibleVotes:
+          type:
+            - integer
+            - "null"
+          title: eligible_votes
+          description: Snapshot of eligible voters at creation time (optional, cached)
+          nullable: true
+        passingRule:
+          title: passing_rule
+          description: |-
+            Number of votes required to pass
+             Can represent absolute count or percentage thresholds
+             Passing rule
+          $ref: '#/components/schemas/chat.v1.PassingRule'
+        choices:
+          type: array
+          items:
+            $ref: '#/components/schemas/chat.v1.VoteChoice'
+          title: choices
+          description: Available choices (YES / NO / ABSTAIN, etc)
+        closesAt:
+          type:
+            - integer
+            - string
+            - "null"
+          title: closes_at
+          format: int64
+          description: Optional deadline (unix seconds)
+          nullable: true
+      title: MotionContent
+      additionalProperties: false
+    chat.v1.MotionTally:
+      type: object
+      properties:
+        motionId:
+          type: string
+          title: motion_id
+        eligibleVotes:
+          type: integer
+          title: eligible_votes
+          description: Total eligible voters
+        tallies:
+          type: array
+          items:
+            $ref: '#/components/schemas/chat.v1.VoteTally'
+          title: tallies
+          description: Votes per choice
+        totalVotesCast:
+          type: integer
+          title: total_votes_cast
+          description: Derived counts
+        deadVotes:
+          type: integer
+          title: dead_votes
+          description: Dead votes (invalid, expired, disqualified)
+        targetVotes:
+          type: integer
+          title: target_votes
+          description: Passing evaluation
+        passed:
+          type: boolean
+          title: passed
+        closed:
+          type: boolean
+          title: closed
+      title: MotionTally
+      additionalProperties: false
+    chat.v1.PassingRule:
+      type: object
+      allOf:
+        - properties:
+            passingChoiceId:
+              type: string
+              title: passing_choice_id
+              description: Which choice constitutes "passing" (usually YES)
+        - oneOf:
+            - properties:
+                absolute:
+                  type: integer
+                  title: absolute
+                  description: Absolute number of votes required
+              title: absolute
+              required:
+                - absolute
+            - properties:
+                percentage:
+                  type: integer
+                  title: percentage
+                  description: Percentage required to pass (0–100)
+              title: percentage
+              required:
+                - percentage
+      title: PassingRule
+      additionalProperties: false
     chat.v1.Payload:
       type: object
-      oneOf:
+      allOf:
         - properties:
-            attachment:
+            type:
+              title: type
+              description: |-
+                The `type` MUST correspond to the populated payload.
+                 Servers MUST reject mismatches.
+              $ref: '#/components/schemas/chat.v1.PayloadType'
+        - oneOf:
+            - properties:
+                attachment:
+                  title: attachment
+                  description: type = PAYLOAD_TYPE_ATTACHMENT
+                  $ref: '#/components/schemas/chat.v1.AttachmentContent'
               title: attachment
-              description: type = ROOM_EVENT_TYPE_ATTACHMENT
-              $ref: '#/components/schemas/chat.v1.AttachmentContent'
-          title: attachment
-          required:
-            - attachment
-        - properties:
-            call:
+              required:
+                - attachment
+            - properties:
+                call:
+                  title: call
+                  description: type = PAYLOAD_TYPE_CALL
+                  $ref: '#/components/schemas/chat.v1.CallContent'
               title: call
-              description: type = ROOM_EVENT_TYPE_CALL
-              $ref: '#/components/schemas/chat.v1.CallContent'
-          title: call
-          required:
-            - call
-        - properties:
-            encrypted:
+              required:
+                - call
+            - properties:
+                default:
+                  title: default
+                  description: type = PAYLOAD_TYPE_UNSPECIFIED
+                  $ref: '#/components/schemas/google.protobuf.Struct'
+              title: default
+              required:
+                - default
+            - properties:
+                encrypted:
+                  title: encrypted
+                  description: type = PAYLOAD_TYPE_ENCRYPTED
+                  $ref: '#/components/schemas/chat.v1.EncryptedContent'
               title: encrypted
-              description: type = ROOM_EVENT_TYPE_ENCRYPTED
-              $ref: '#/components/schemas/chat.v1.EncryptedContent'
-          title: encrypted
-          required:
-            - encrypted
-        - properties:
-            reaction:
+              required:
+                - encrypted
+            - properties:
+                motion:
+                  title: motion
+                  description: type = PAYLOAD_TYPE_MOTION
+                  $ref: '#/components/schemas/chat.v1.MotionContent'
+              title: motion
+              required:
+                - motion
+            - properties:
+                motionTally:
+                  title: motion_tally
+                  description: type = PAYLOAD_TYPE_MOTION_TALLY
+                  $ref: '#/components/schemas/chat.v1.MotionTally'
+              title: motion_tally
+              required:
+                - motionTally
+            - properties:
+                reaction:
+                  title: reaction
+                  description: type = PAYLOAD_TYPE_REACTION
+                  $ref: '#/components/schemas/chat.v1.ReactionContent'
               title: reaction
-              description: type = ROOM_EVENT_TYPE_REACTION
-              $ref: '#/components/schemas/chat.v1.ReactionContent'
-          title: reaction
-          required:
-            - reaction
-        - properties:
-            text:
+              required:
+                - reaction
+            - properties:
+                text:
+                  title: text
+                  description: type = PAYLOAD_TYPE_TEXT
+                  $ref: '#/components/schemas/chat.v1.TextContent'
               title: text
-              description: type = ROOM_EVENT_TYPE_TEXT
-              $ref: '#/components/schemas/chat.v1.TextContent'
-          title: text
-          required:
-            - text
+              required:
+                - text
+            - properties:
+                vote:
+                  title: vote
+                  description: type = PAYLOAD_TYPE_VOTE
+                  $ref: '#/components/schemas/chat.v1.VoteCast'
+              title: vote
+              required:
+                - vote
+            - properties:
+                voteTally:
+                  title: vote_tally
+                  description: type = PAYLOAD_TYPE_VOTE_TALLY
+                  $ref: '#/components/schemas/chat.v1.VoteTally'
+              title: vote_tally
+              required:
+                - voteTally
       title: Payload
       additionalProperties: false
+    chat.v1.PayloadType:
+      type: string
+      title: PayloadType
+      enum:
+        - PAYLOAD_TYPE_UNSPECIFIED
+        - PAYLOAD_TYPE_TEXT
+        - PAYLOAD_TYPE_ATTACHMENT
+        - PAYLOAD_TYPE_REACTION
+        - PAYLOAD_TYPE_ENCRYPTED
+        - PAYLOAD_TYPE_CALL
+        - PAYLOAD_TYPE_MOTION
+        - PAYLOAD_TYPE_VOTE
+        - PAYLOAD_TYPE_MOTION_TALLY
+        - PAYLOAD_TYPE_VOTE_TALLY
+      description: Allowed message types. Extendable via new enum values; clients must ignore unknown values.
     chat.v1.PresenceEvent:
       type: object
       properties:
@@ -400,9 +576,6 @@ components:
           $ref: '#/components/schemas/common.v1.ContactLink'
         type:
           title: type
-          description: |-
-            The `type` MUST correspond to the populated payload.
-             Servers MUST reject mismatches. text, attachment, call_offer, etc.
           $ref: '#/components/schemas/chat.v1.RoomEventType'
         sentAt:
           title: sent_at
@@ -434,14 +607,11 @@ components:
       title: RoomEventType
       enum:
         - ROOM_EVENT_TYPE_UNSPECIFIED
-        - ROOM_EVENT_TYPE_EVENT
-        - ROOM_EVENT_TYPE_TEXT
-        - ROOM_EVENT_TYPE_ATTACHMENT
+        - ROOM_EVENT_TYPE_SYSTEM
+        - ROOM_EVENT_TYPE_MESSAGE
         - ROOM_EVENT_TYPE_REACTION
-        - ROOM_EVENT_TYPE_ENCRYPTED
-        - ROOM_EVENT_TYPE_EDIT
-        - ROOM_EVENT_TYPE_REDACTION
         - ROOM_EVENT_TYPE_CALL
+        - ROOM_EVENT_TYPE_ADVERT
       description: Allowed message types. Extendable via new enum values; clients must ignore unknown values.
     chat.v1.TextAnnotation:
       type: object
@@ -527,6 +697,52 @@ components:
       title: TypingEvent
       additionalProperties: false
       description: Typing indicator
+    chat.v1.VoteCast:
+      type: object
+      properties:
+        motionId:
+          type: string
+          title: motion_id
+        choiceId:
+          type: string
+          title: choice_id
+          description: Selected choice
+      title: VoteCast
+      additionalProperties: false
+      description: |-
+        total_votes_cast = sum(choice counts excluding invalid if configured)
+            remaining_votes  = eligible_votes - total_votes_cast
+            dead_votes       = tally(choice_id == "invalid")
+            target_votes     = derived from PassingRule
+            passed           = tally(passing_choice_id) >= target_votes
+    chat.v1.VoteChoice:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+        name:
+          type: string
+          title: name
+        description:
+          type:
+            - string
+            - "null"
+          title: description
+          nullable: true
+      title: VoteChoice
+      additionalProperties: false
+    chat.v1.VoteTally:
+      type: object
+      properties:
+        choiceId:
+          type: string
+          title: choice_id
+        count:
+          type: integer
+          title: count
+      title: VoteTally
+      additionalProperties: false
     common.v1.ContactLink:
       type: object
       properties:

@@ -39,14 +39,11 @@ option java_package = "chatv1";
 // Allowed message types. Extendable via new enum values; clients must ignore unknown values.
 enum RoomEventType {
   ROOM_EVENT_TYPE_UNSPECIFIED = 0;
-  ROOM_EVENT_TYPE_EVENT = 1;
-  ROOM_EVENT_TYPE_TEXT = 2;
-  ROOM_EVENT_TYPE_ATTACHMENT = 3;
-  ROOM_EVENT_TYPE_REACTION = 7;
-  ROOM_EVENT_TYPE_ENCRYPTED = 6; // opaque ciphertext
-  ROOM_EVENT_TYPE_EDIT = 8; // represents event overriding another
-  ROOM_EVENT_TYPE_REDACTION = 9; // represents event deleting another
-  ROOM_EVENT_TYPE_CALL = 21;
+  ROOM_EVENT_TYPE_SYSTEM = 1;
+  ROOM_EVENT_TYPE_MESSAGE = 2;
+  ROOM_EVENT_TYPE_REACTION = 3;
+  ROOM_EVENT_TYPE_CALL = 5;
+  ROOM_EVENT_TYPE_ADVERT = 6;
 }
 
 // Unified message (user / bot / system / signalling)
@@ -67,9 +64,7 @@ message RoomEvent {
 
   common.v1.ContactLink source = 3; // profile_id or service/bot id
 
-  // The `type` MUST correspond to the populated payload.
-  // Servers MUST reject mismatches.
-  RoomEventType type = 4; // text, attachment, call_offer, etc.
+  RoomEventType type = 4;
 
   google.protobuf.Timestamp sent_at = 7;
   bool edited = 8;

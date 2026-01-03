@@ -134,8 +134,6 @@ class RoomEvent extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $1.ContactLink ensureSource() => $_ensure(2);
 
-  /// The `type` MUST correspond to the populated payload.
-  /// Servers MUST reject mismatches.
   @$pb.TagNumber(4)
   RoomEventType get type => $_getN(3);
   @$pb.TagNumber(4)

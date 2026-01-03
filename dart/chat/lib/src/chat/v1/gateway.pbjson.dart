@@ -155,6 +155,12 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> GatewaySer
   '.chat.v1.ReactionContent': $3.ReactionContent$json,
   '.chat.v1.EncryptedContent': $3.EncryptedContent$json,
   '.chat.v1.CallContent': $3.CallContent$json,
+  '.chat.v1.MotionContent': $3.MotionContent$json,
+  '.chat.v1.PassingRule': $3.PassingRule$json,
+  '.chat.v1.VoteChoice': $3.VoteChoice$json,
+  '.chat.v1.VoteCast': $3.VoteCast$json,
+  '.chat.v1.MotionTally': $3.MotionTally$json,
+  '.chat.v1.VoteTally': $3.VoteTally$json,
   '.chat.v1.StreamResponse': StreamResponse$json,
 };
 

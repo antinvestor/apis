@@ -13,6 +13,32 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
+@$core.Deprecated('Use payloadTypeDescriptor instead')
+const PayloadType$json = {
+  '1': 'PayloadType',
+  '2': [
+    {'1': 'PAYLOAD_TYPE_UNSPECIFIED', '2': 0},
+    {'1': 'PAYLOAD_TYPE_TEXT', '2': 2},
+    {'1': 'PAYLOAD_TYPE_ATTACHMENT', '2': 3},
+    {'1': 'PAYLOAD_TYPE_REACTION', '2': 7},
+    {'1': 'PAYLOAD_TYPE_ENCRYPTED', '2': 6},
+    {'1': 'PAYLOAD_TYPE_CALL', '2': 21},
+    {'1': 'PAYLOAD_TYPE_MOTION', '2': 22},
+    {'1': 'PAYLOAD_TYPE_VOTE', '2': 23},
+    {'1': 'PAYLOAD_TYPE_MOTION_TALLY', '2': 24},
+    {'1': 'PAYLOAD_TYPE_VOTE_TALLY', '2': 25},
+  ],
+};
+
+/// Descriptor for `PayloadType`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List payloadTypeDescriptor = $convert.base64Decode(
+    'CgtQYXlsb2FkVHlwZRIcChhQQVlMT0FEX1RZUEVfVU5TUEVDSUZJRUQQABIVChFQQVlMT0FEX1'
+    'RZUEVfVEVYVBACEhsKF1BBWUxPQURfVFlQRV9BVFRBQ0hNRU5UEAMSGQoVUEFZTE9BRF9UWVBF'
+    'X1JFQUNUSU9OEAcSGgoWUEFZTE9BRF9UWVBFX0VOQ1JZUFRFRBAGEhUKEVBBWUxPQURfVFlQRV'
+    '9DQUxMEBUSFwoTUEFZTE9BRF9UWVBFX01PVElPThAWEhUKEVBBWUxPQURfVFlQRV9WT1RFEBcS'
+    'HQoZUEFZTE9BRF9UWVBFX01PVElPTl9UQUxMWRAYEhsKF1BBWUxPQURfVFlQRV9WT1RFX1RBTE'
+    'xZEBk=');
+
 @$core.Deprecated('Use textContentDescriptor instead')
 const TextContent$json = {
   '1': 'TextContent',
@@ -214,15 +240,139 @@ final $typed_data.Uint8List callContentDescriptor = $convert.base64Decode(
     'Q0FMTF9BQ1RJT05fQU5TV0VSEAISHQoZQ0FMTF9BQ1RJT05fSUNFX0NBTkRJREFURRADEhMKD0'
     'NBTExfQUNUSU9OX0VORBAEQgYKBF9zZHBCEAoOX2ljZV9jYW5kaWRhdGU=');
 
+@$core.Deprecated('Use motionContentDescriptor instead')
+const MotionContent$json = {
+  '1': 'MotionContent',
+  '2': [
+    {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
+    {'1': 'title', '3': 2, '4': 1, '5': 9, '10': 'title'},
+    {'1': 'description', '3': 3, '4': 1, '5': 9, '10': 'description'},
+    {'1': 'eligible_roles', '3': 13, '4': 3, '5': 9, '10': 'eligibleRoles'},
+    {'1': 'eligible_votes', '3': 4, '4': 1, '5': 13, '9': 0, '10': 'eligibleVotes', '17': true},
+    {'1': 'passing_rule', '3': 7, '4': 1, '5': 11, '6': '.chat.v1.PassingRule', '10': 'passingRule'},
+    {'1': 'choices', '3': 8, '4': 3, '5': 11, '6': '.chat.v1.VoteChoice', '10': 'choices'},
+    {'1': 'closes_at', '3': 12, '4': 1, '5': 3, '9': 1, '10': 'closesAt', '17': true},
+  ],
+  '8': [
+    {'1': '_eligible_votes'},
+    {'1': '_closes_at'},
+  ],
+};
+
+/// Descriptor for `MotionContent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List motionContentDescriptor = $convert.base64Decode(
+    'Cg1Nb3Rpb25Db250ZW50Eg4KAmlkGAEgASgJUgJpZBIUCgV0aXRsZRgCIAEoCVIFdGl0bGUSIA'
+    'oLZGVzY3JpcHRpb24YAyABKAlSC2Rlc2NyaXB0aW9uEiUKDmVsaWdpYmxlX3JvbGVzGA0gAygJ'
+    'Ug1lbGlnaWJsZVJvbGVzEioKDmVsaWdpYmxlX3ZvdGVzGAQgASgNSABSDWVsaWdpYmxlVm90ZX'
+    'OIAQESNwoMcGFzc2luZ19ydWxlGAcgASgLMhQuY2hhdC52MS5QYXNzaW5nUnVsZVILcGFzc2lu'
+    'Z1J1bGUSLQoHY2hvaWNlcxgIIAMoCzITLmNoYXQudjEuVm90ZUNob2ljZVIHY2hvaWNlcxIgCg'
+    'ljbG9zZXNfYXQYDCABKANIAVIIY2xvc2VzQXSIAQFCEQoPX2VsaWdpYmxlX3ZvdGVzQgwKCl9j'
+    'bG9zZXNfYXQ=');
+
+@$core.Deprecated('Use voteChoiceDescriptor instead')
+const VoteChoice$json = {
+  '1': 'VoteChoice',
+  '2': [
+    {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
+    {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
+    {'1': 'description', '3': 3, '4': 1, '5': 9, '9': 0, '10': 'description', '17': true},
+  ],
+  '8': [
+    {'1': '_description'},
+  ],
+};
+
+/// Descriptor for `VoteChoice`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List voteChoiceDescriptor = $convert.base64Decode(
+    'CgpWb3RlQ2hvaWNlEg4KAmlkGAEgASgJUgJpZBISCgRuYW1lGAIgASgJUgRuYW1lEiUKC2Rlc2'
+    'NyaXB0aW9uGAMgASgJSABSC2Rlc2NyaXB0aW9uiAEBQg4KDF9kZXNjcmlwdGlvbg==');
+
+@$core.Deprecated('Use passingRuleDescriptor instead')
+const PassingRule$json = {
+  '1': 'PassingRule',
+  '2': [
+    {'1': 'absolute', '3': 1, '4': 1, '5': 13, '9': 0, '10': 'absolute'},
+    {'1': 'percentage', '3': 2, '4': 1, '5': 13, '9': 0, '10': 'percentage'},
+    {'1': 'passing_choice_id', '3': 3, '4': 1, '5': 9, '10': 'passingChoiceId'},
+  ],
+  '8': [
+    {'1': 'rule'},
+  ],
+};
+
+/// Descriptor for `PassingRule`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List passingRuleDescriptor = $convert.base64Decode(
+    'CgtQYXNzaW5nUnVsZRIcCghhYnNvbHV0ZRgBIAEoDUgAUghhYnNvbHV0ZRIgCgpwZXJjZW50YW'
+    'dlGAIgASgNSABSCnBlcmNlbnRhZ2USKgoRcGFzc2luZ19jaG9pY2VfaWQYAyABKAlSD3Bhc3Np'
+    'bmdDaG9pY2VJZEIGCgRydWxl');
+
+@$core.Deprecated('Use voteCastDescriptor instead')
+const VoteCast$json = {
+  '1': 'VoteCast',
+  '2': [
+    {'1': 'motion_id', '3': 1, '4': 1, '5': 9, '10': 'motionId'},
+    {'1': 'choice_id', '3': 2, '4': 1, '5': 9, '10': 'choiceId'},
+  ],
+};
+
+/// Descriptor for `VoteCast`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List voteCastDescriptor = $convert.base64Decode(
+    'CghWb3RlQ2FzdBIbCgltb3Rpb25faWQYASABKAlSCG1vdGlvbklkEhsKCWNob2ljZV9pZBgCIA'
+    'EoCVIIY2hvaWNlSWQ=');
+
+@$core.Deprecated('Use voteTallyDescriptor instead')
+const VoteTally$json = {
+  '1': 'VoteTally',
+  '2': [
+    {'1': 'choice_id', '3': 1, '4': 1, '5': 9, '10': 'choiceId'},
+    {'1': 'count', '3': 2, '4': 1, '5': 13, '10': 'count'},
+  ],
+};
+
+/// Descriptor for `VoteTally`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List voteTallyDescriptor = $convert.base64Decode(
+    'CglWb3RlVGFsbHkSGwoJY2hvaWNlX2lkGAEgASgJUghjaG9pY2VJZBIUCgVjb3VudBgCIAEoDV'
+    'IFY291bnQ=');
+
+@$core.Deprecated('Use motionTallyDescriptor instead')
+const MotionTally$json = {
+  '1': 'MotionTally',
+  '2': [
+    {'1': 'motion_id', '3': 1, '4': 1, '5': 9, '10': 'motionId'},
+    {'1': 'eligible_votes', '3': 2, '4': 1, '5': 13, '10': 'eligibleVotes'},
+    {'1': 'tallies', '3': 3, '4': 3, '5': 11, '6': '.chat.v1.VoteTally', '10': 'tallies'},
+    {'1': 'total_votes_cast', '3': 4, '4': 1, '5': 13, '10': 'totalVotesCast'},
+    {'1': 'dead_votes', '3': 6, '4': 1, '5': 13, '10': 'deadVotes'},
+    {'1': 'target_votes', '3': 7, '4': 1, '5': 13, '10': 'targetVotes'},
+    {'1': 'passed', '3': 8, '4': 1, '5': 8, '10': 'passed'},
+    {'1': 'closed', '3': 9, '4': 1, '5': 8, '10': 'closed'},
+  ],
+};
+
+/// Descriptor for `MotionTally`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List motionTallyDescriptor = $convert.base64Decode(
+    'CgtNb3Rpb25UYWxseRIbCgltb3Rpb25faWQYASABKAlSCG1vdGlvbklkEiUKDmVsaWdpYmxlX3'
+    'ZvdGVzGAIgASgNUg1lbGlnaWJsZVZvdGVzEiwKB3RhbGxpZXMYAyADKAsyEi5jaGF0LnYxLlZv'
+    'dGVUYWxseVIHdGFsbGllcxIoChB0b3RhbF92b3Rlc19jYXN0GAQgASgNUg50b3RhbFZvdGVzQ2'
+    'FzdBIdCgpkZWFkX3ZvdGVzGAYgASgNUglkZWFkVm90ZXMSIQoMdGFyZ2V0X3ZvdGVzGAcgASgN'
+    'Ugt0YXJnZXRWb3RlcxIWCgZwYXNzZWQYCCABKAhSBnBhc3NlZBIWCgZjbG9zZWQYCSABKAhSBm'
+    'Nsb3NlZA==');
+
 @$core.Deprecated('Use payloadDescriptor instead')
 const Payload$json = {
   '1': 'Payload',
   '2': [
+    {'1': 'type', '3': 1, '4': 1, '5': 14, '6': '.chat.v1.PayloadType', '10': 'type'},
+    {'1': 'default', '3': 7, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '9': 0, '10': 'default'},
     {'1': 'text', '3': 15, '4': 1, '5': 11, '6': '.chat.v1.TextContent', '9': 0, '10': 'text'},
     {'1': 'attachment', '3': 16, '4': 1, '5': 11, '6': '.chat.v1.AttachmentContent', '9': 0, '10': 'attachment'},
     {'1': 'reaction', '3': 17, '4': 1, '5': 11, '6': '.chat.v1.ReactionContent', '9': 0, '10': 'reaction'},
     {'1': 'encrypted', '3': 18, '4': 1, '5': 11, '6': '.chat.v1.EncryptedContent', '9': 0, '10': 'encrypted'},
     {'1': 'call', '3': 19, '4': 1, '5': 11, '6': '.chat.v1.CallContent', '9': 0, '10': 'call'},
+    {'1': 'motion', '3': 25, '4': 1, '5': 11, '6': '.chat.v1.MotionContent', '9': 0, '10': 'motion'},
+    {'1': 'motion_tally', '3': 28, '4': 1, '5': 11, '6': '.chat.v1.MotionTally', '9': 0, '10': 'motionTally'},
+    {'1': 'vote', '3': 26, '4': 1, '5': 11, '6': '.chat.v1.VoteCast', '9': 0, '10': 'vote'},
+    {'1': 'vote_tally', '3': 29, '4': 1, '5': 11, '6': '.chat.v1.VoteTally', '9': 0, '10': 'voteTally'},
   ],
   '8': [
     {'1': 'data'},
@@ -231,10 +381,15 @@ const Payload$json = {
 
 /// Descriptor for `Payload`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List payloadDescriptor = $convert.base64Decode(
-    'CgdQYXlsb2FkEioKBHRleHQYDyABKAsyFC5jaGF0LnYxLlRleHRDb250ZW50SABSBHRleHQSPA'
-    'oKYXR0YWNobWVudBgQIAEoCzIaLmNoYXQudjEuQXR0YWNobWVudENvbnRlbnRIAFIKYXR0YWNo'
-    'bWVudBI2CghyZWFjdGlvbhgRIAEoCzIYLmNoYXQudjEuUmVhY3Rpb25Db250ZW50SABSCHJlYW'
-    'N0aW9uEjkKCWVuY3J5cHRlZBgSIAEoCzIZLmNoYXQudjEuRW5jcnlwdGVkQ29udGVudEgAUgll'
-    'bmNyeXB0ZWQSKgoEY2FsbBgTIAEoCzIULmNoYXQudjEuQ2FsbENvbnRlbnRIAFIEY2FsbEIGCg'
-    'RkYXRh');
+    'CgdQYXlsb2FkEigKBHR5cGUYASABKA4yFC5jaGF0LnYxLlBheWxvYWRUeXBlUgR0eXBlEjMKB2'
+    'RlZmF1bHQYByABKAsyFy5nb29nbGUucHJvdG9idWYuU3RydWN0SABSB2RlZmF1bHQSKgoEdGV4'
+    'dBgPIAEoCzIULmNoYXQudjEuVGV4dENvbnRlbnRIAFIEdGV4dBI8CgphdHRhY2htZW50GBAgAS'
+    'gLMhouY2hhdC52MS5BdHRhY2htZW50Q29udGVudEgAUgphdHRhY2htZW50EjYKCHJlYWN0aW9u'
+    'GBEgASgLMhguY2hhdC52MS5SZWFjdGlvbkNvbnRlbnRIAFIIcmVhY3Rpb24SOQoJZW5jcnlwdG'
+    'VkGBIgASgLMhkuY2hhdC52MS5FbmNyeXB0ZWRDb250ZW50SABSCWVuY3J5cHRlZBIqCgRjYWxs'
+    'GBMgASgLMhQuY2hhdC52MS5DYWxsQ29udGVudEgAUgRjYWxsEjAKBm1vdGlvbhgZIAEoCzIWLm'
+    'NoYXQudjEuTW90aW9uQ29udGVudEgAUgZtb3Rpb24SOQoMbW90aW9uX3RhbGx5GBwgASgLMhQu'
+    'Y2hhdC52MS5Nb3Rpb25UYWxseUgAUgttb3Rpb25UYWxseRInCgR2b3RlGBogASgLMhEuY2hhdC'
+    '52MS5Wb3RlQ2FzdEgAUgR2b3RlEjMKCnZvdGVfdGFsbHkYHSABKAsyEi5jaGF0LnYxLlZvdGVU'
+    'YWxseUgAUgl2b3RlVGFsbHlCBgoEZGF0YQ==');
 

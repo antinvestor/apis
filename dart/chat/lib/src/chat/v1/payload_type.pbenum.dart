@@ -13,6 +13,38 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
+/// Allowed message types. Extendable via new enum values; clients must ignore unknown values.
+class PayloadType extends $pb.ProtobufEnum {
+  static const PayloadType PAYLOAD_TYPE_UNSPECIFIED = PayloadType._(0, _omitEnumNames ? '' : 'PAYLOAD_TYPE_UNSPECIFIED');
+  static const PayloadType PAYLOAD_TYPE_TEXT = PayloadType._(2, _omitEnumNames ? '' : 'PAYLOAD_TYPE_TEXT');
+  static const PayloadType PAYLOAD_TYPE_ATTACHMENT = PayloadType._(3, _omitEnumNames ? '' : 'PAYLOAD_TYPE_ATTACHMENT');
+  static const PayloadType PAYLOAD_TYPE_REACTION = PayloadType._(7, _omitEnumNames ? '' : 'PAYLOAD_TYPE_REACTION');
+  static const PayloadType PAYLOAD_TYPE_ENCRYPTED = PayloadType._(6, _omitEnumNames ? '' : 'PAYLOAD_TYPE_ENCRYPTED');
+  static const PayloadType PAYLOAD_TYPE_CALL = PayloadType._(21, _omitEnumNames ? '' : 'PAYLOAD_TYPE_CALL');
+  static const PayloadType PAYLOAD_TYPE_MOTION = PayloadType._(22, _omitEnumNames ? '' : 'PAYLOAD_TYPE_MOTION');
+  static const PayloadType PAYLOAD_TYPE_VOTE = PayloadType._(23, _omitEnumNames ? '' : 'PAYLOAD_TYPE_VOTE');
+  static const PayloadType PAYLOAD_TYPE_MOTION_TALLY = PayloadType._(24, _omitEnumNames ? '' : 'PAYLOAD_TYPE_MOTION_TALLY');
+  static const PayloadType PAYLOAD_TYPE_VOTE_TALLY = PayloadType._(25, _omitEnumNames ? '' : 'PAYLOAD_TYPE_VOTE_TALLY');
+
+  static const $core.List<PayloadType> values = <PayloadType> [
+    PAYLOAD_TYPE_UNSPECIFIED,
+    PAYLOAD_TYPE_TEXT,
+    PAYLOAD_TYPE_ATTACHMENT,
+    PAYLOAD_TYPE_REACTION,
+    PAYLOAD_TYPE_ENCRYPTED,
+    PAYLOAD_TYPE_CALL,
+    PAYLOAD_TYPE_MOTION,
+    PAYLOAD_TYPE_VOTE,
+    PAYLOAD_TYPE_MOTION_TALLY,
+    PAYLOAD_TYPE_VOTE_TALLY,
+  ];
+
+  static final $core.Map<$core.int, PayloadType> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static PayloadType? valueOf($core.int value) => _byValue[value];
+
+  const PayloadType._($core.int v, $core.String n) : super(v, n);
+}
+
 class TextAnnotation_Type extends $pb.ProtobufEnum {
   static const TextAnnotation_Type TYPE_UNSPECIFIED = TextAnnotation_Type._(0, _omitEnumNames ? '' : 'TYPE_UNSPECIFIED');
   static const TextAnnotation_Type TYPE_MENTION_USER = TextAnnotation_Type._(1, _omitEnumNames ? '' : 'TYPE_MENTION_USER');

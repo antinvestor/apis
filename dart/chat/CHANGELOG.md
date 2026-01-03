@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.52.9] - 2025-1-3
+
+### Changed
+
+- encapsulate payload type correctly and Introduce motion content type
+
 ## [1.52.8] - 2025-1-3
 
 ### Changed

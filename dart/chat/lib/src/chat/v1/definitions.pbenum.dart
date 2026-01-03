@@ -16,25 +16,19 @@ import 'package:protobuf/protobuf.dart' as $pb;
 /// Allowed message types. Extendable via new enum values; clients must ignore unknown values.
 class RoomEventType extends $pb.ProtobufEnum {
   static const RoomEventType ROOM_EVENT_TYPE_UNSPECIFIED = RoomEventType._(0, _omitEnumNames ? '' : 'ROOM_EVENT_TYPE_UNSPECIFIED');
-  static const RoomEventType ROOM_EVENT_TYPE_EVENT = RoomEventType._(1, _omitEnumNames ? '' : 'ROOM_EVENT_TYPE_EVENT');
-  static const RoomEventType ROOM_EVENT_TYPE_TEXT = RoomEventType._(2, _omitEnumNames ? '' : 'ROOM_EVENT_TYPE_TEXT');
-  static const RoomEventType ROOM_EVENT_TYPE_ATTACHMENT = RoomEventType._(3, _omitEnumNames ? '' : 'ROOM_EVENT_TYPE_ATTACHMENT');
-  static const RoomEventType ROOM_EVENT_TYPE_REACTION = RoomEventType._(7, _omitEnumNames ? '' : 'ROOM_EVENT_TYPE_REACTION');
-  static const RoomEventType ROOM_EVENT_TYPE_ENCRYPTED = RoomEventType._(6, _omitEnumNames ? '' : 'ROOM_EVENT_TYPE_ENCRYPTED');
-  static const RoomEventType ROOM_EVENT_TYPE_EDIT = RoomEventType._(8, _omitEnumNames ? '' : 'ROOM_EVENT_TYPE_EDIT');
-  static const RoomEventType ROOM_EVENT_TYPE_REDACTION = RoomEventType._(9, _omitEnumNames ? '' : 'ROOM_EVENT_TYPE_REDACTION');
-  static const RoomEventType ROOM_EVENT_TYPE_CALL = RoomEventType._(21, _omitEnumNames ? '' : 'ROOM_EVENT_TYPE_CALL');
+  static const RoomEventType ROOM_EVENT_TYPE_SYSTEM = RoomEventType._(1, _omitEnumNames ? '' : 'ROOM_EVENT_TYPE_SYSTEM');
+  static const RoomEventType ROOM_EVENT_TYPE_MESSAGE = RoomEventType._(2, _omitEnumNames ? '' : 'ROOM_EVENT_TYPE_MESSAGE');
+  static const RoomEventType ROOM_EVENT_TYPE_REACTION = RoomEventType._(3, _omitEnumNames ? '' : 'ROOM_EVENT_TYPE_REACTION');
+  static const RoomEventType ROOM_EVENT_TYPE_CALL = RoomEventType._(5, _omitEnumNames ? '' : 'ROOM_EVENT_TYPE_CALL');
+  static const RoomEventType ROOM_EVENT_TYPE_ADVERT = RoomEventType._(6, _omitEnumNames ? '' : 'ROOM_EVENT_TYPE_ADVERT');
 
   static const $core.List<RoomEventType> values = <RoomEventType> [
     ROOM_EVENT_TYPE_UNSPECIFIED,
-    ROOM_EVENT_TYPE_EVENT,
-    ROOM_EVENT_TYPE_TEXT,
-    ROOM_EVENT_TYPE_ATTACHMENT,
+    ROOM_EVENT_TYPE_SYSTEM,
+    ROOM_EVENT_TYPE_MESSAGE,
     ROOM_EVENT_TYPE_REACTION,
-    ROOM_EVENT_TYPE_ENCRYPTED,
-    ROOM_EVENT_TYPE_EDIT,
-    ROOM_EVENT_TYPE_REDACTION,
     ROOM_EVENT_TYPE_CALL,
+    ROOM_EVENT_TYPE_ADVERT,
   ];
 
   static final $core.Map<$core.int, RoomEventType> _byValue = $pb.ProtobufEnum.initByValue(values);
