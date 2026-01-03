@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.52.10] - 2025-1-3
+
+### Changed
+
+- add room event types that were missing
+ 
 ## [1.52.9] - 2025-1-3
 
 ### Changed

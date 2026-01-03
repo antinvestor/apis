@@ -433,8 +433,12 @@ components:
       enum:
         - ROOM_EVENT_TYPE_UNSPECIFIED
         - ROOM_EVENT_TYPE_SYSTEM
+        - ROOM_EVENT_TYPE_EVENT
         - ROOM_EVENT_TYPE_MESSAGE
         - ROOM_EVENT_TYPE_REACTION
+        - ROOM_EVENT_TYPE_TYPING
+        - ROOM_EVENT_TYPE_READ
+        - ROOM_EVENT_TYPE_MOTION
         - ROOM_EVENT_TYPE_CALL
         - ROOM_EVENT_TYPE_ADVERT
       description: Allowed message types. Extendable via new enum values; clients must ignore unknown values.

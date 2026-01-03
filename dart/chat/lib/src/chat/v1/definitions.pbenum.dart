@@ -17,16 +17,24 @@ import 'package:protobuf/protobuf.dart' as $pb;
 class RoomEventType extends $pb.ProtobufEnum {
   static const RoomEventType ROOM_EVENT_TYPE_UNSPECIFIED = RoomEventType._(0, _omitEnumNames ? '' : 'ROOM_EVENT_TYPE_UNSPECIFIED');
   static const RoomEventType ROOM_EVENT_TYPE_SYSTEM = RoomEventType._(1, _omitEnumNames ? '' : 'ROOM_EVENT_TYPE_SYSTEM');
-  static const RoomEventType ROOM_EVENT_TYPE_MESSAGE = RoomEventType._(2, _omitEnumNames ? '' : 'ROOM_EVENT_TYPE_MESSAGE');
-  static const RoomEventType ROOM_EVENT_TYPE_REACTION = RoomEventType._(3, _omitEnumNames ? '' : 'ROOM_EVENT_TYPE_REACTION');
-  static const RoomEventType ROOM_EVENT_TYPE_CALL = RoomEventType._(5, _omitEnumNames ? '' : 'ROOM_EVENT_TYPE_CALL');
-  static const RoomEventType ROOM_EVENT_TYPE_ADVERT = RoomEventType._(6, _omitEnumNames ? '' : 'ROOM_EVENT_TYPE_ADVERT');
+  static const RoomEventType ROOM_EVENT_TYPE_EVENT = RoomEventType._(2, _omitEnumNames ? '' : 'ROOM_EVENT_TYPE_EVENT');
+  static const RoomEventType ROOM_EVENT_TYPE_MESSAGE = RoomEventType._(3, _omitEnumNames ? '' : 'ROOM_EVENT_TYPE_MESSAGE');
+  static const RoomEventType ROOM_EVENT_TYPE_REACTION = RoomEventType._(4, _omitEnumNames ? '' : 'ROOM_EVENT_TYPE_REACTION');
+  static const RoomEventType ROOM_EVENT_TYPE_TYPING = RoomEventType._(5, _omitEnumNames ? '' : 'ROOM_EVENT_TYPE_TYPING');
+  static const RoomEventType ROOM_EVENT_TYPE_READ = RoomEventType._(6, _omitEnumNames ? '' : 'ROOM_EVENT_TYPE_READ');
+  static const RoomEventType ROOM_EVENT_TYPE_MOTION = RoomEventType._(7, _omitEnumNames ? '' : 'ROOM_EVENT_TYPE_MOTION');
+  static const RoomEventType ROOM_EVENT_TYPE_CALL = RoomEventType._(10, _omitEnumNames ? '' : 'ROOM_EVENT_TYPE_CALL');
+  static const RoomEventType ROOM_EVENT_TYPE_ADVERT = RoomEventType._(20, _omitEnumNames ? '' : 'ROOM_EVENT_TYPE_ADVERT');
 
   static const $core.List<RoomEventType> values = <RoomEventType> [
     ROOM_EVENT_TYPE_UNSPECIFIED,
     ROOM_EVENT_TYPE_SYSTEM,
+    ROOM_EVENT_TYPE_EVENT,
     ROOM_EVENT_TYPE_MESSAGE,
     ROOM_EVENT_TYPE_REACTION,
+    ROOM_EVENT_TYPE_TYPING,
+    ROOM_EVENT_TYPE_READ,
+    ROOM_EVENT_TYPE_MOTION,
     ROOM_EVENT_TYPE_CALL,
     ROOM_EVENT_TYPE_ADVERT,
   ];
