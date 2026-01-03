@@ -1442,9 +1442,6 @@ components:
       properties:
         room:
           title: room
-          maxLength: 40
-          minLength: 3
-          pattern: '[0-9a-z_-]{3,40}'
           $ref: '#/components/schemas/chat.v1.Room'
         error:
           title: error

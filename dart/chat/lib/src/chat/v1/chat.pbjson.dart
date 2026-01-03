@@ -190,16 +190,15 @@ final $typed_data.Uint8List updateRoomRequestDescriptor = $convert.base64Decode(
 const UpdateRoomResponse$json = {
   '1': 'UpdateRoomResponse',
   '2': [
-    {'1': 'room', '3': 1, '4': 1, '5': 11, '6': '.chat.v1.Room', '8': {}, '10': 'room'},
+    {'1': 'room', '3': 1, '4': 1, '5': 11, '6': '.chat.v1.Room', '10': 'room'},
     {'1': 'error', '3': 2, '4': 1, '5': 11, '6': '.common.v1.ErrorDetail', '10': 'error'},
   ],
 };
 
 /// Descriptor for `UpdateRoomResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateRoomResponseDescriptor = $convert.base64Decode(
-    'ChJVcGRhdGVSb29tUmVzcG9uc2USPgoEcm9vbRgBIAEoCzINLmNoYXQudjEuUm9vbUIbukgYch'
-    'YQAxgoMhBbMC05YS16Xy1dezMsNDB9UgRyb29tEiwKBWVycm9yGAIgASgLMhYuY29tbW9uLnYx'
-    'LkVycm9yRGV0YWlsUgVlcnJvcg==');
+    'ChJVcGRhdGVSb29tUmVzcG9uc2USIQoEcm9vbRgBIAEoCzINLmNoYXQudjEuUm9vbVIEcm9vbR'
+    'IsCgVlcnJvchgCIAEoCzIWLmNvbW1vbi52MS5FcnJvckRldGFpbFIFZXJyb3I=');
 
 @$core.Deprecated('Use deleteRoomRequestDescriptor instead')
 const DeleteRoomRequest$json = {
