@@ -21,8 +21,9 @@ class RoomEventType extends $pb.ProtobufEnum {
   static const RoomEventType ROOM_EVENT_TYPE_MESSAGE = RoomEventType._(3, _omitEnumNames ? '' : 'ROOM_EVENT_TYPE_MESSAGE');
   static const RoomEventType ROOM_EVENT_TYPE_REACTION = RoomEventType._(4, _omitEnumNames ? '' : 'ROOM_EVENT_TYPE_REACTION');
   static const RoomEventType ROOM_EVENT_TYPE_TYPING = RoomEventType._(5, _omitEnumNames ? '' : 'ROOM_EVENT_TYPE_TYPING');
-  static const RoomEventType ROOM_EVENT_TYPE_READ = RoomEventType._(6, _omitEnumNames ? '' : 'ROOM_EVENT_TYPE_READ');
-  static const RoomEventType ROOM_EVENT_TYPE_MOTION = RoomEventType._(7, _omitEnumNames ? '' : 'ROOM_EVENT_TYPE_MOTION');
+  static const RoomEventType ROOM_EVENT_TYPE_DELIVERED = RoomEventType._(6, _omitEnumNames ? '' : 'ROOM_EVENT_TYPE_DELIVERED');
+  static const RoomEventType ROOM_EVENT_TYPE_READ = RoomEventType._(7, _omitEnumNames ? '' : 'ROOM_EVENT_TYPE_READ');
+  static const RoomEventType ROOM_EVENT_TYPE_MOTION = RoomEventType._(8, _omitEnumNames ? '' : 'ROOM_EVENT_TYPE_MOTION');
   static const RoomEventType ROOM_EVENT_TYPE_CALL = RoomEventType._(10, _omitEnumNames ? '' : 'ROOM_EVENT_TYPE_CALL');
   static const RoomEventType ROOM_EVENT_TYPE_ADVERT = RoomEventType._(20, _omitEnumNames ? '' : 'ROOM_EVENT_TYPE_ADVERT');
 
@@ -33,6 +34,7 @@ class RoomEventType extends $pb.ProtobufEnum {
     ROOM_EVENT_TYPE_MESSAGE,
     ROOM_EVENT_TYPE_REACTION,
     ROOM_EVENT_TYPE_TYPING,
+    ROOM_EVENT_TYPE_DELIVERED,
     ROOM_EVENT_TYPE_READ,
     ROOM_EVENT_TYPE_MOTION,
     ROOM_EVENT_TYPE_CALL,
