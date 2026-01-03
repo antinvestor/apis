@@ -1,0 +1,653 @@
+openapi: 3.1.0
+info:
+  title: events.v1
+paths: {}
+components:
+  schemas:
+    chat.v1.AttachmentContent:
+      type: object
+      properties:
+        attachmentId:
+          type: string
+          title: attachment_id
+          description: Logical identifier of the attachment
+        filename:
+          type: string
+          title: filename
+          description: Original filename (optional, user-facing)
+        mimeType:
+          type: string
+          title: mime_type
+          description: MIME type (e.g. image/png, application/pdf)
+        sizeBytes:
+          type:
+            - integer
+            - string
+          title: size_bytes
+          format: int64
+          description: Size in bytes (for quota enforcement & UX)
+        uri:
+          type: string
+          title: uri
+          description: Content location (signed URL or opaque locator)
+        previews:
+          type: array
+          items:
+            $ref: '#/components/schemas/chat.v1.AttachmentPreview'
+          title: previews
+          description: Optional previews / thumbnails
+        caption:
+          title: caption
+          description: Optional caption text
+          nullable: true
+          $ref: '#/components/schemas/chat.v1.TextContent'
+        encrypted:
+          type: boolean
+          title: encrypted
+          description: Indicates whether attachment is end-to-end encrypted
+        checksum:
+          type:
+            - string
+            - "null"
+          title: checksum
+          description: Optional content hash (e.g. sha256:base64)
+          nullable: true
+      title: AttachmentContent
+      additionalProperties: false
+    chat.v1.AttachmentPreview:
+      type: object
+      properties:
+        mimeType:
+          type: string
+          title: mime_type
+        width:
+          type: integer
+          title: width
+          format: int32
+        height:
+          type: integer
+          title: height
+          format: int32
+        uri:
+          type: string
+          title: uri
+        sizeBytes:
+          type:
+            - integer
+            - string
+          title: size_bytes
+          format: int64
+      title: AttachmentPreview
+      additionalProperties: false
+    chat.v1.CallContent:
+      type: object
+      properties:
+        callId:
+          type: string
+          title: call_id
+        type:
+          title: type
+          $ref: '#/components/schemas/chat.v1.CallContent.CallType'
+        action:
+          title: action
+          description: |-
+            OFFER, ANSWER → sdp required
+             ICE_CANDIDATE → ice_candidate required
+             END → no payload required
+          $ref: '#/components/schemas/chat.v1.CallContent.CallAction'
+        sdp:
+          type:
+            - string
+            - "null"
+          title: sdp
+          description: WebRTC payload (SDP or ICE candidate)
+          nullable: true
+        iceCandidate:
+          type:
+            - string
+            - "null"
+          title: ice_candidate
+          description: Optional ICE candidate (when action = ICE_CANDIDATE)
+          nullable: true
+        metadata:
+          title: metadata
+          description: Optional metadata (bitrate, codecs, device hints)
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: CallContent
+      additionalProperties: false
+    chat.v1.CallContent.CallAction:
+      type: string
+      title: CallAction
+      enum:
+        - CALL_ACTION_UNSPECIFIED
+        - CALL_ACTION_OFFER
+        - CALL_ACTION_ANSWER
+        - CALL_ACTION_ICE_CANDIDATE
+        - CALL_ACTION_END
+    chat.v1.CallContent.CallType:
+      type: string
+      title: CallType
+      enum:
+        - CALL_TYPE_UNSPECIFIED
+        - CALL_TYPE_AUDIO
+        - CALL_TYPE_VIDEO
+        - CALL_TYPE_SCREEN_SHARE
+    chat.v1.EncryptedContent:
+      type: object
+      properties:
+        algorithm:
+          type: string
+          title: algorithm
+          description: |-
+            Encryption scheme identifier
+             Examples: "olm.v2", "megolm.v1", "x25519-aesgcm"
+        ciphertext:
+          type: string
+          title: ciphertext
+          format: byte
+          description: Base64 or binary-safe encoded ciphertext
+        nonce:
+          type:
+            - string
+            - "null"
+          title: nonce
+          format: byte
+          description: Optional per-message nonce / IV
+          nullable: true
+        senderKeyId:
+          type:
+            - string
+            - "null"
+          title: sender_key_id
+          description: Optional sender key identifier
+          nullable: true
+        recipientKeyIds:
+          type: array
+          items:
+            type: string
+          title: recipient_key_ids
+          description: Optional recipient key references (for fan-out)
+        aad:
+          type:
+            - string
+            - "null"
+          title: aad
+          format: byte
+          description: Additional authenticated data (AAD)
+          nullable: true
+        sessionId:
+          type:
+            - string
+            - "null"
+          title: session_id
+          description: Optional key agreement context identifier
+          nullable: true
+      title: EncryptedContent
+      additionalProperties: false
+    chat.v1.Payload:
+      type: object
+      oneOf:
+        - properties:
+            attachment:
+              title: attachment
+              description: type = ROOM_EVENT_TYPE_ATTACHMENT
+              $ref: '#/components/schemas/chat.v1.AttachmentContent'
+          title: attachment
+          required:
+            - attachment
+        - properties:
+            call:
+              title: call
+              description: type = ROOM_EVENT_TYPE_CALL
+              $ref: '#/components/schemas/chat.v1.CallContent'
+          title: call
+          required:
+            - call
+        - properties:
+            encrypted:
+              title: encrypted
+              description: type = ROOM_EVENT_TYPE_ENCRYPTED
+              $ref: '#/components/schemas/chat.v1.EncryptedContent'
+          title: encrypted
+          required:
+            - encrypted
+        - properties:
+            reaction:
+              title: reaction
+              description: type = ROOM_EVENT_TYPE_REACTION
+              $ref: '#/components/schemas/chat.v1.ReactionContent'
+          title: reaction
+          required:
+            - reaction
+        - properties:
+            text:
+              title: text
+              description: type = ROOM_EVENT_TYPE_TEXT
+              $ref: '#/components/schemas/chat.v1.TextContent'
+          title: text
+          required:
+            - text
+      title: Payload
+      additionalProperties: false
+    chat.v1.ReactionContent:
+      type: object
+      properties:
+        targetEventId:
+          type: string
+          title: target_event_id
+          minLength: 3
+          description: Target message being reacted to
+        reaction:
+          type: string
+          title: reaction
+          maxLength: 64
+          minLength: 1
+          description: "Reaction key (e.g. \U0001F44D, ❤️, :custom_emoji:)"
+        add:
+          type: boolean
+          title: add
+          description: |-
+            add=true → ensure reaction exists
+             add=false → ensure reaction does not exist
+      title: ReactionContent
+      additionalProperties: false
+    chat.v1.RoomEventType:
+      type: string
+      title: RoomEventType
+      enum:
+        - ROOM_EVENT_TYPE_UNSPECIFIED
+        - ROOM_EVENT_TYPE_EVENT
+        - ROOM_EVENT_TYPE_TEXT
+        - ROOM_EVENT_TYPE_ATTACHMENT
+        - ROOM_EVENT_TYPE_REACTION
+        - ROOM_EVENT_TYPE_ENCRYPTED
+        - ROOM_EVENT_TYPE_EDIT
+        - ROOM_EVENT_TYPE_REDACTION
+        - ROOM_EVENT_TYPE_CALL
+      description: Allowed message types. Extendable via new enum values; clients must ignore unknown values.
+    chat.v1.TextAnnotation:
+      type: object
+      properties:
+        type:
+          title: type
+          $ref: '#/components/schemas/chat.v1.TextAnnotation.Type'
+        offset:
+          type: integer
+          title: offset
+          format: int32
+          description: UTF-16 offset & length for cross-platform compatibility
+        length:
+          type: integer
+          title: length
+          format: int32
+        value:
+          type: string
+          title: value
+          description: Target identifier (e.g., profile_id, room_id, URL)
+      title: TextAnnotation
+      additionalProperties: false
+    chat.v1.TextAnnotation.Type:
+      type: string
+      title: Type
+      enum:
+        - TYPE_UNSPECIFIED
+        - TYPE_MENTION_USER
+        - TYPE_MENTION_ROOM
+        - TYPE_LINK
+        - TYPE_EMOJI
+        - TYPE_HASHTAG
+    chat.v1.TextContent:
+      type: object
+      properties:
+        body:
+          type: string
+          title: body
+          maxLength: 10000
+          minLength: 1
+          description: Required human-readable message body
+        format:
+          type: string
+          title: format
+          maxLength: 32
+          minLength: 1
+          description: |-
+            Content format identifier (NOT MIME type)
+             Examples: "plain", "markdown", "html-lite"
+        annotations:
+          type: array
+          items:
+            $ref: '#/components/schemas/chat.v1.TextAnnotation'
+          title: annotations
+          description: Structured annotations for clients (mentions, links, emojis)
+        lang:
+          type:
+            - string
+            - "null"
+          title: lang
+          description: Optional language hint (BCP-47), e.g. "en", "fr-CA"
+          nullable: true
+      title: TextContent
+      additionalProperties: false
+    common.v1.ContactLink:
+      type: object
+      properties:
+        profileName:
+          type: string
+          title: profile_name
+          maxLength: 250
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,250}'
+          description: Display name of the profile
+        profileType:
+          type: string
+          title: profile_type
+          maxLength: 250
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,250}'
+          description: Type of profile (e.g., "user", "organization", "service")
+        profileId:
+          type: string
+          title: profile_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+          description: Unique identifier of the profile
+        profileImageId:
+          type: string
+          title: profile_image_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+          description: Identifier of the profile's image/avatar
+        contactId:
+          type: string
+          title: contact_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+          description: Unique identifier of the contact
+        detail:
+          type: string
+          title: detail
+          maxLength: 250
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,250}'
+          description: Additional contact details (e.g., email, phone, handle)
+        extras:
+          title: extras
+          description: Extended metadata for the contact link
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: ContactLink
+      additionalProperties: false
+      description: |-
+        ContactLink represents a link between a contact and a profile in the system.
+         Used for associating external contacts with internal profiles across services.
+         This enables unified identity management and contact resolution.
+    events.v1.Broadcast:
+      type: object
+      properties:
+        event:
+          title: event
+          description: The event to be distributed.
+          $ref: '#/components/schemas/events.v1.Link'
+        destinations:
+          type: array
+          items:
+            $ref: '#/components/schemas/common.v1.ContactLink'
+          title: destinations
+          description: List of delivery targets specifying recipients for batch processing efficiency.
+        priority:
+          title: priority
+          $ref: '#/components/schemas/events.v1.Broadcast.Priority'
+      title: Broadcast
+      additionalProperties: false
+      description: |-
+        Broadcast encapsulates an event and its delivery targets for bulk distribution
+         to multiple recipients, optimizing the initial broadcast phase.
+    events.v1.Broadcast.Priority:
+      type: string
+      title: Priority
+      enum:
+        - NORMAL
+        - HIGH
+      description: Indicates priority of delivery to prioritize critical events (e.g., CALL_OFFER).
+    events.v1.Delivery:
+      type: object
+      properties:
+        event:
+          title: event
+          description: The event data being delivered.
+          $ref: '#/components/schemas/events.v1.Link'
+        destination:
+          title: destination
+          description: Specific delivery target for this delivery.
+          $ref: '#/components/schemas/common.v1.ContactLink'
+        payload:
+          title: payload
+          $ref: '#/components/schemas/chat.v1.Payload'
+        isCompressed:
+          type: boolean
+          title: is_compressed
+          description: Indicates if payload data is compressed to save bandwidth for large messages.
+        retryCount:
+          type: integer
+          title: retry_count
+          format: int32
+          description: Metadata for retry logic to ensure robust delivery to end-user devices.
+        deviceId:
+          type: string
+          title: device_id
+      title: Delivery
+      additionalProperties: false
+      description: |-
+        Delivery represents the final payload delivered to an end-user device,
+         containing the event, specific delivery target, and detailed typed data.
+    events.v1.Link:
+      type: object
+      properties:
+        eventId:
+          type: string
+          title: event_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+          description: Unique identifier for the event, constrained for quick parsing and validation.
+        roomId:
+          type: string
+          title: room_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+          description: Identifies the chat room or context, ensuring data is routed to the correct group.
+        source:
+          title: source
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+          description: |-
+            Identifies the originator of the event, crucial for attribution and security.
+             Marked optional as it may not be required for system messages.
+          nullable: true
+          $ref: '#/components/schemas/common.v1.ContactLink'
+        parentId:
+          type: string
+          title: parent_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+          description: Unique identifier for a parent event related to this event, constrained for quick parsing and validation.
+        eventType:
+          title: event_type
+          description: Categorizes the event (e.g., TEXT, ATTACHMENT) for efficient handling.
+          $ref: '#/components/schemas/chat.v1.RoomEventType'
+        createdAt:
+          title: created_at
+          description: Timestamp for event creation, aiding in ordering and latency debugging.
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+      title: Link
+      additionalProperties: false
+      description: |-
+        Link represents an event in the chat system, the core unit of data flowing
+         through the system in real-time to end-user devices.
+    google.protobuf.ListValue:
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/google.protobuf.Value'
+          title: values
+          description: Repeated field of dynamically typed values.
+      title: ListValue
+      additionalProperties: false
+      description: |-
+        `ListValue` is a wrapper around a repeated field of values.
+
+         The JSON representation for `ListValue` is JSON array.
+    google.protobuf.NullValue:
+      type: string
+      title: NullValue
+      enum:
+        - NULL_VALUE
+      description: |-
+        `NullValue` is a singleton enumeration to represent the null value for the
+         `Value` type union.
+
+         The JSON representation for `NullValue` is JSON `null`.
+    google.protobuf.Struct:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/google.protobuf.Value'
+      description: |-
+        `Struct` represents a structured data value, consisting of fields
+         which map to dynamically typed values. In some languages, `Struct`
+         might be supported by a native representation. For example, in
+         scripting languages like JS a struct is represented as an
+         object. The details of that representation are described together
+         with the proto support for the language.
+
+         The JSON representation for `Struct` is JSON object.
+    google.protobuf.Struct.FieldsEntry:
+      type: object
+      properties:
+        key:
+          type: string
+          title: key
+        value:
+          title: value
+          $ref: '#/components/schemas/google.protobuf.Value'
+      title: FieldsEntry
+      additionalProperties: false
+    google.protobuf.Timestamp:
+      type: string
+      examples:
+        - "2023-01-15T01:30:15.01Z"
+        - "2024-12-25T12:00:00Z"
+      format: date-time
+      description: |-
+        A Timestamp represents a point in time independent of any time zone or local
+         calendar, encoded as a count of seconds and fractions of seconds at
+         nanosecond resolution. The count is relative to an epoch at UTC midnight on
+         January 1, 1970, in the proleptic Gregorian calendar which extends the
+         Gregorian calendar backwards to year one.
+
+         All minutes are 60 seconds long. Leap seconds are "smeared" so that no leap
+         second table is needed for interpretation, using a [24-hour linear
+         smear](https://developers.google.com/time/smear).
+
+         The range is from 0001-01-01T00:00:00Z to 9999-12-31T23:59:59.999999999Z. By
+         restricting to that range, we ensure that we can convert to and from [RFC
+         3339](https://www.ietf.org/rfc/rfc3339.txt) date strings.
+
+         # Examples
+
+         Example 1: Compute Timestamp from POSIX `time()`.
+
+             Timestamp timestamp;
+             timestamp.set_seconds(time(NULL));
+             timestamp.set_nanos(0);
+
+         Example 2: Compute Timestamp from POSIX `gettimeofday()`.
+
+             struct timeval tv;
+             gettimeofday(&tv, NULL);
+
+             Timestamp timestamp;
+             timestamp.set_seconds(tv.tv_sec);
+             timestamp.set_nanos(tv.tv_usec * 1000);
+
+         Example 3: Compute Timestamp from Win32 `GetSystemTimeAsFileTime()`.
+
+             FILETIME ft;
+             GetSystemTimeAsFileTime(&ft);
+             UINT64 ticks = (((UINT64)ft.dwHighDateTime) << 32) | ft.dwLowDateTime;
+
+             // A Windows tick is 100 nanoseconds. Windows epoch 1601-01-01T00:00:00Z
+             // is 11644473600 seconds before Unix epoch 1970-01-01T00:00:00Z.
+             Timestamp timestamp;
+             timestamp.set_seconds((INT64) ((ticks / 10000000) - 11644473600LL));
+             timestamp.set_nanos((INT32) ((ticks % 10000000) * 100));
+
+         Example 4: Compute Timestamp from Java `System.currentTimeMillis()`.
+
+             long millis = System.currentTimeMillis();
+
+             Timestamp timestamp = Timestamp.newBuilder().setSeconds(millis / 1000)
+                 .setNanos((int) ((millis % 1000) * 1000000)).build();
+
+         Example 5: Compute Timestamp from Java `Instant.now()`.
+
+             Instant now = Instant.now();
+
+             Timestamp timestamp =
+                 Timestamp.newBuilder().setSeconds(now.getEpochSecond())
+                     .setNanos(now.getNano()).build();
+
+         Example 6: Compute Timestamp from current time in Python.
+
+             timestamp = Timestamp()
+             timestamp.GetCurrentTime()
+
+         # JSON Mapping
+
+         In JSON format, the Timestamp type is encoded as a string in the
+         [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format. That is, the
+         format is "{year}-{month}-{day}T{hour}:{min}:{sec}[.{frac_sec}]Z"
+         where {year} is always expressed using four digits while {month}, {day},
+         {hour}, {min}, and {sec} are zero-padded to two digits each. The fractional
+         seconds, which can go up to 9 digits (i.e. up to 1 nanosecond resolution),
+         are optional. The "Z" suffix indicates the timezone ("UTC"); the timezone
+         is required. A proto3 JSON serializer should always use UTC (as indicated by
+         "Z") when printing the Timestamp type and a proto3 JSON parser should be
+         able to accept both UTC and other timezones (as indicated by an offset).
+
+         For example, "2017-01-15T01:30:15.01Z" encodes 15.01 seconds past
+         01:30 UTC on January 15, 2017.
+
+         In JavaScript, one can convert a Date object to this format using the
+         standard
+         [toISOString()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString)
+         method. In Python, a standard `datetime.datetime` object can be converted
+         to this format using
+         [`strftime`](https://docs.python.org/2/library/time.html#time.strftime) with
+         the time format spec '%Y-%m-%dT%H:%M:%S.%fZ'. Likewise, in Java, one can use
+         the Joda Time's [`ISODateTimeFormat.dateTime()`](
+         http://joda-time.sourceforge.net/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime()
+         ) to obtain a formatter capable of generating timestamps in this format.
+    google.protobuf.Value:
+      oneOf:
+        - type: "null"
+        - type: number
+        - type: string
+        - type: boolean
+        - type: array
+        - type: object
+          additionalProperties: true
+      description: |-
+        `Value` represents a dynamically typed value which can be either
+         null, a number, a string, a boolean, a recursive struct value, or a
+         list of values. A producer of value is expected to set one of these
+         variants. Absence of any variant indicates an error.
+
+         The JSON representation for `Value` is JSON value.
+security: []

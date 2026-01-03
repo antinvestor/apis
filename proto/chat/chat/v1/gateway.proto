@@ -1,0 +1,159 @@
+// Copyright 2023-2024 Ant Investor Ltd
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package chat.v1;
+
+import "buf/validate/validate.proto";
+import "chat/v1/definitions.proto";
+import "chat/v1/payload_type.proto";
+// -----------------------------------------------------
+// Core notes (normative):
+// - All timestamps are RFC3339 / google.protobuf.Timestamp.
+// - All flows should be idempotent / accept idempotency keys where relevant.
+// - Servers must enforce permission checks for each RPC (see AuthClaims below).
+// -----------------------------------------------------
+import "common/v1/common.proto";
+import "gnostic/openapi/v3/annotations.proto";
+import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/antinvestor/apis/go/chat/v1;chatv1";
+option java_multiple_files = true;
+option java_package = "chatv1";
+option (gnostic.openapi.v3.document) = {
+  info: {
+    title: "Chat Service"
+    version: "v1.0.0"
+    description: "The Chat Service provides endpoints for real-time, secure messaging between users and devices. It supports sending, receiving, and synchronizing messages across rooms, direct chats, and group conversations, with optional end-to-end encryption. The service is designed for mobile, desktop, and web clients, supporting both streaming and standard request-response operations. APIs are consistent, well-structured, and optimized for low-latency delivery, even on limited network connections."
+    contact: {
+      name: "Ant Investor Ltd"
+      url: "https://github.com/antinvestor/service-chat"
+      email: "info@antinvestor.com"
+    }
+    license: {
+      name: "Apache License"
+      url: "https://github.com/antinvestor/apis/blob/master/LICENSE"
+    }
+  }
+  components: {
+    security_schemes: {
+      additional_properties: [
+        {
+          name: "BearerAuth"
+          value: {
+            security_scheme: {
+              type: "http"
+              scheme: "bearer"
+              bearer_format: "JWT"
+            }
+          }
+        }
+      ]
+    }
+  }
+};
+
+// -----------------------------------------------------
+// Authentication & Authorization (claims):
+// - Clients authenticate using JWT from OIDC provider (short TTL).
+// - Server-side/machine clients use mTLS + service account token or OAuth2 client creds.
+// - Required claims in JWT: tenant_id, sub (profile_id), scope (space-separated or array).
+// - Role-based scopes: "room.send", "room.manage", "room.read", "presence.write", "device.manage", "bot.*"
+// - Servers MUST reject tokens missing tenant_id or sub.
+// -----------------------------------------------------
+
+// -----------------------------------------------------
+// STREAM SERVICE: StreamService
+// - Connect: BiDi streaming for a unified event timeline.
+// - Handles real-time bidirectional communication.
+// -----------------------------------------------------
+
+service GatewayService {
+  // Bi-directional, long-lived connection. Client sends StreamRequest (initial auth + acks/commands).
+  // Server streams StreamResponse objects in chronological order for rooms the client is subscribed to.
+  // Stream resume: client may provide last_received_event_id or resume_token to continue after reconnect.
+  rpc Stream(stream StreamRequest) returns (stream StreamResponse) {
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "stream"
+      summary: "Establish bi-directional streaming connection"
+      description: "Opens a persistent bi-directional stream for real-time chat events. Clients send StreamRequest messages (auth, acks, commands) and receive ServerEvent messages in chronological order. Supports session resumption via resume_token."
+      tags: "Real-time"
+    };
+  }
+}
+
+// -----------------------------------------------------
+// Connect stream: client -> server low-level requests inside stream
+// -----------------------------------------------------
+
+// StreamHello message sent by client to server to initiate a connection.
+// resume_token: server-supplied resume_token from previous session.
+// capabilities: list of capabilities supported by the client.
+// StreamHello MUST be the first message sent by the client.
+// Servers MUST reject any other message types before StreamHello.
+message StreamHello {
+  string resume_token = 1;
+  map<string, string> capabilities = 2;
+  google.protobuf.Timestamp client_time = 3;
+}
+
+// Client message over Connect stream. After initial connect frame, client sends acks/commands.
+message StreamRequest {
+  // The client can send various payloads inside the stream after initial auth:
+  oneof payload {
+    StreamHello hello = 1;
+    ClientSignal signal_update = 11;
+    ClientCommand command = 12;
+  }
+}
+
+// Server -> Client event payload. All events in a room are delivered over Connect stream.
+// event_id: globally unique id (opaque string) assigned by server, strictly monotonically increasing per room.
+// sequence: strictly increasing 64-bit integer per-room sequence number (useful for resume & ordering).
+message StreamResponse {
+  // NOTE:
+  // Stream IDs are XIDs and MUST be lexicographically sortable by creation time.
+  // Clients MUST NOT assume any other ordering mechanism.
+  string id = 3 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+  google.protobuf.Timestamp timestamp = 5;
+  oneof payload {
+    RoomEvent message = 10;
+    PresenceEvent presence_event = 12; // user presence change affecting the room
+    ReceiptEvent receipt_event = 13;
+    ReadMarker read_event = 15;
+    TypingEvent typing_event = 17;
+
+    // error:
+    // - If present, represents a server-side error related to the stream or event.
+    // - MAY be recoverable (client should continue stream) or fatal.
+    // - Fatal errors MUST be followed by stream termination.
+    common.v1.ErrorDetail error = 20;
+  }
+}
+
+// Generic client signal (typing, read markers that aren't receipts)
+message ClientSignal {
+  oneof signal {
+    EventAck ack = 3;
+    TypingEvent typing = 4;
+    ReceiptEvent receipt = 2; // receipt acknowledgement for message delivery
+    PresenceEvent presence = 5; // send a presence message to a room
+  }
+}

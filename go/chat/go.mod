@@ -3,8 +3,8 @@ module github.com/antinvestor/apis/go/chat
 go 1.25
 
 require (
-	buf.build/gen/go/antinvestor/chat/connectrpc/go v1.19.1-20260102123205-6514fa038971.2
-	buf.build/gen/go/antinvestor/chat/protocolbuffers/go v1.36.11-20260102123205-6514fa038971.1
+	buf.build/gen/go/antinvestor/chat/connectrpc/go v1.19.1-20260102205700-dd038dcc85ff.2
+	buf.build/gen/go/antinvestor/chat/protocolbuffers/go v1.36.11-20260102205700-dd038dcc85ff.1
 	connectrpc.com/connect v1.19.1
 	github.com/antinvestor/apis/go/common v1.51.10
 	github.com/gojuno/minimock/v3 v3.4.7

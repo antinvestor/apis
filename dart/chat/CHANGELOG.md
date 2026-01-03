@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.52.6] - 2025-1-3
+
+### Changed
+
+- move the internal events to protobuf definition t0 api
+
 ## [1.52.5] - 2025-1-2
 
 ### Changed
