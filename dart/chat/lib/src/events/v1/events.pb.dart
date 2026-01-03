@@ -181,7 +181,7 @@ class Broadcast extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Broadcast', package: const $pb.PackageName(_omitMessageNames ? '' : 'events.v1'), createEmptyInstance: create)
     ..aOM<Link>(1, _omitFieldNames ? '' : 'event', subBuilder: Link.create)
     ..pc<$1.ContactLink>(2, _omitFieldNames ? '' : 'destinations', $pb.PbFieldType.PM, subBuilder: $1.ContactLink.create)
-    ..e<Broadcast_Priority>(3, _omitFieldNames ? '' : 'priority', $pb.PbFieldType.OE, defaultOrMaker: Broadcast_Priority.PRIORITY_NORMAL, valueOf: Broadcast_Priority.valueOf, enumValues: Broadcast_Priority.values)
+    ..e<Broadcast_Priority>(3, _omitFieldNames ? '' : 'priority', $pb.PbFieldType.OE, defaultOrMaker: Broadcast_Priority.PRIORITY_UNSPECIFIED, valueOf: Broadcast_Priority.valueOf, enumValues: Broadcast_Priority.values)
     ..hasRequiredFields = false
   ;
 

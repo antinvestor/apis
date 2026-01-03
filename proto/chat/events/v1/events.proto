@@ -68,8 +68,9 @@ message Broadcast {
   repeated common.v1.ContactLink destinations = 2;
   // Indicates priority of delivery to prioritize critical events (e.g., CALL_OFFER).
   enum Priority {
-    PRIORITY_NORMAL = 0;
-    PRIORITY_HIGH = 1;
+    PRIORITY_UNSPECIFIED = 0;
+    PRIORITY_NORMAL = 1;
+    PRIORITY_HIGH = 2;
   }
   Priority priority = 3;
 }

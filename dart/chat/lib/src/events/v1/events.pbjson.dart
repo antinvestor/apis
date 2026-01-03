@@ -54,8 +54,9 @@ const Broadcast$json = {
 const Broadcast_Priority$json = {
   '1': 'Priority',
   '2': [
-    {'1': 'PRIORITY_NORMAL', '2': 0},
-    {'1': 'PRIORITY_HIGH', '2': 1},
+    {'1': 'PRIORITY_UNSPECIFIED', '2': 0},
+    {'1': 'PRIORITY_NORMAL', '2': 1},
+    {'1': 'PRIORITY_HIGH', '2': 2},
   ],
 };
 
@@ -64,7 +65,8 @@ final $typed_data.Uint8List broadcastDescriptor = $convert.base64Decode(
     'CglCcm9hZGNhc3QSJQoFZXZlbnQYASABKAsyDy5ldmVudHMudjEuTGlua1IFZXZlbnQSOgoMZG'
     'VzdGluYXRpb25zGAIgAygLMhYuY29tbW9uLnYxLkNvbnRhY3RMaW5rUgxkZXN0aW5hdGlvbnMS'
     'OQoIcHJpb3JpdHkYAyABKA4yHS5ldmVudHMudjEuQnJvYWRjYXN0LlByaW9yaXR5Ughwcmlvcm'
-    'l0eSIyCghQcmlvcml0eRITCg9QUklPUklUWV9OT1JNQUwQABIRCg1QUklPUklUWV9ISUdIEAE=');
+    'l0eSJMCghQcmlvcml0eRIYChRQUklPUklUWV9VTlNQRUNJRklFRBAAEhMKD1BSSU9SSVRZX05P'
+    'Uk1BTBABEhEKDVBSSU9SSVRZX0hJR0gQAg==');
 
 @$core.Deprecated('Use deliveryDescriptor instead')
 const Delivery$json = {
