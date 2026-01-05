@@ -73,6 +73,7 @@ const Delivery$json = {
   '2': [
     {'1': 'event', '3': 1, '4': 1, '5': 11, '6': '.events.v1.Link', '10': 'event'},
     {'1': 'destination', '3': 2, '4': 1, '5': 11, '6': '.common.v1.ContactLink', '10': 'destination'},
+    {'1': 'source', '3': 3, '4': 1, '5': 11, '6': '.common.v1.ContactLink', '10': 'source'},
     {'1': 'payload', '3': 5, '4': 1, '5': 11, '6': '.chat.v1.Payload', '10': 'payload'},
     {'1': 'is_compressed', '3': 10, '4': 1, '5': 8, '10': 'isCompressed'},
     {'1': 'retry_count', '3': 11, '4': 1, '5': 5, '10': 'retryCount'},
@@ -83,8 +84,9 @@ const Delivery$json = {
 /// Descriptor for `Delivery`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List deliveryDescriptor = $convert.base64Decode(
     'CghEZWxpdmVyeRIlCgVldmVudBgBIAEoCzIPLmV2ZW50cy52MS5MaW5rUgVldmVudBI4CgtkZX'
-    'N0aW5hdGlvbhgCIAEoCzIWLmNvbW1vbi52MS5Db250YWN0TGlua1ILZGVzdGluYXRpb24SKgoH'
-    'cGF5bG9hZBgFIAEoCzIQLmNoYXQudjEuUGF5bG9hZFIHcGF5bG9hZBIjCg1pc19jb21wcmVzc2'
-    'VkGAogASgIUgxpc0NvbXByZXNzZWQSHwoLcmV0cnlfY291bnQYCyABKAVSCnJldHJ5Q291bnQS'
-    'GwoJZGV2aWNlX2lkGAwgASgJUghkZXZpY2VJZA==');
+    'N0aW5hdGlvbhgCIAEoCzIWLmNvbW1vbi52MS5Db250YWN0TGlua1ILZGVzdGluYXRpb24SLgoG'
+    'c291cmNlGAMgASgLMhYuY29tbW9uLnYxLkNvbnRhY3RMaW5rUgZzb3VyY2USKgoHcGF5bG9hZB'
+    'gFIAEoCzIQLmNoYXQudjEuUGF5bG9hZFIHcGF5bG9hZBIjCg1pc19jb21wcmVzc2VkGAogASgI'
+    'Ugxpc0NvbXByZXNzZWQSHwoLcmV0cnlfY291bnQYCyABKAVSCnJldHJ5Q291bnQSGwoJZGV2aW'
+    'NlX2lkGAwgASgJUghkZXZpY2VJZA==');
 

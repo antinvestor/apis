@@ -252,6 +252,7 @@ class Delivery extends $pb.GeneratedMessage {
   factory Delivery({
     Link? event,
     $1.ContactLink? destination,
+    $1.ContactLink? source,
     $3.Payload? payload,
     $core.bool? isCompressed,
     $core.int? retryCount,
@@ -263,6 +264,9 @@ class Delivery extends $pb.GeneratedMessage {
     }
     if (destination != null) {
       $result.destination = destination;
+    }
+    if (source != null) {
+      $result.source = source;
     }
     if (payload != null) {
       $result.payload = payload;
@@ -285,6 +289,7 @@ class Delivery extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Delivery', package: const $pb.PackageName(_omitMessageNames ? '' : 'events.v1'), createEmptyInstance: create)
     ..aOM<Link>(1, _omitFieldNames ? '' : 'event', subBuilder: Link.create)
     ..aOM<$1.ContactLink>(2, _omitFieldNames ? '' : 'destination', subBuilder: $1.ContactLink.create)
+    ..aOM<$1.ContactLink>(3, _omitFieldNames ? '' : 'source', subBuilder: $1.ContactLink.create)
     ..aOM<$3.Payload>(5, _omitFieldNames ? '' : 'payload', subBuilder: $3.Payload.create)
     ..aOB(10, _omitFieldNames ? '' : 'isCompressed')
     ..a<$core.int>(11, _omitFieldNames ? '' : 'retryCount', $pb.PbFieldType.O3)
@@ -337,43 +342,54 @@ class Delivery extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $1.ContactLink ensureDestination() => $_ensure(1);
 
+  @$pb.TagNumber(3)
+  $1.ContactLink get source => $_getN(2);
+  @$pb.TagNumber(3)
+  set source($1.ContactLink v) { setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasSource() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearSource() => clearField(3);
+  @$pb.TagNumber(3)
+  $1.ContactLink ensureSource() => $_ensure(2);
+
   @$pb.TagNumber(5)
-  $3.Payload get payload => $_getN(2);
+  $3.Payload get payload => $_getN(3);
   @$pb.TagNumber(5)
   set payload($3.Payload v) { setField(5, v); }
   @$pb.TagNumber(5)
-  $core.bool hasPayload() => $_has(2);
+  $core.bool hasPayload() => $_has(3);
   @$pb.TagNumber(5)
   void clearPayload() => clearField(5);
   @$pb.TagNumber(5)
-  $3.Payload ensurePayload() => $_ensure(2);
+  $3.Payload ensurePayload() => $_ensure(3);
 
   /// Indicates if payload data is compressed to save bandwidth for large messages.
   @$pb.TagNumber(10)
-  $core.bool get isCompressed => $_getBF(3);
+  $core.bool get isCompressed => $_getBF(4);
   @$pb.TagNumber(10)
-  set isCompressed($core.bool v) { $_setBool(3, v); }
+  set isCompressed($core.bool v) { $_setBool(4, v); }
   @$pb.TagNumber(10)
-  $core.bool hasIsCompressed() => $_has(3);
+  $core.bool hasIsCompressed() => $_has(4);
   @$pb.TagNumber(10)
   void clearIsCompressed() => clearField(10);
 
   /// Metadata for retry logic to ensure robust delivery to end-user devices.
   @$pb.TagNumber(11)
-  $core.int get retryCount => $_getIZ(4);
+  $core.int get retryCount => $_getIZ(5);
   @$pb.TagNumber(11)
-  set retryCount($core.int v) { $_setSignedInt32(4, v); }
+  set retryCount($core.int v) { $_setSignedInt32(5, v); }
   @$pb.TagNumber(11)
-  $core.bool hasRetryCount() => $_has(4);
+  $core.bool hasRetryCount() => $_has(5);
   @$pb.TagNumber(11)
   void clearRetryCount() => clearField(11);
 
   @$pb.TagNumber(12)
-  $core.String get deviceId => $_getSZ(5);
+  $core.String get deviceId => $_getSZ(6);
   @$pb.TagNumber(12)
-  set deviceId($core.String v) { $_setString(5, v); }
+  set deviceId($core.String v) { $_setString(6, v); }
   @$pb.TagNumber(12)
-  $core.bool hasDeviceId() => $_has(5);
+  $core.bool hasDeviceId() => $_has(6);
   @$pb.TagNumber(12)
   void clearDeviceId() => clearField(12);
 }

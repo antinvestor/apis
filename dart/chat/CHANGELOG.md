@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.52.14] - 2025-1-5
+
+### Changed
+
+- simplify specification of delivery target source in event broadcast
+ 
 ## [1.52.13] - 2025-1-5
 
 ### Changed

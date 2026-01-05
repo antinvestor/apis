@@ -84,6 +84,7 @@ message Delivery {
   Link event = 1;
   // Specific delivery target for this delivery.
   common.v1.ContactLink destination = 2;
+  common.v1.ContactLink source = 3;
 
   chat.v1.Payload payload = 5;
 

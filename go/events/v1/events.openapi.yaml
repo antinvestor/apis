@@ -664,6 +664,9 @@ components:
           title: destination
           description: Specific delivery target for this delivery.
           $ref: '#/components/schemas/common.v1.ContactLink'
+        source:
+          title: source
+          $ref: '#/components/schemas/common.v1.ContactLink'
         payload:
           title: payload
           $ref: '#/components/schemas/chat.v1.Payload'
