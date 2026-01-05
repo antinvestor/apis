@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.52.13] - 2025-1-5
+
+### Changed
+
+- extend chat events to support paginating distribution
+ 
 ## [1.52.11] - 2025-1-3
 
 ### Changed

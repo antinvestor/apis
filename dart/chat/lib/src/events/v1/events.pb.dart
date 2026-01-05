@@ -27,10 +27,11 @@ class Link extends $pb.GeneratedMessage {
   factory Link({
     $core.String? eventId,
     $core.String? roomId,
-    $1.ContactLink? source,
+    $core.String? sourceSubscriptionId,
     $core.String? parentId,
     $4.RoomEventType? eventType,
     $2.Timestamp? createdAt,
+    $1.PageCursor? cursor,
   }) {
     final $result = create();
     if (eventId != null) {
@@ -39,8 +40,8 @@ class Link extends $pb.GeneratedMessage {
     if (roomId != null) {
       $result.roomId = roomId;
     }
-    if (source != null) {
-      $result.source = source;
+    if (sourceSubscriptionId != null) {
+      $result.sourceSubscriptionId = sourceSubscriptionId;
     }
     if (parentId != null) {
       $result.parentId = parentId;
@@ -51,6 +52,9 @@ class Link extends $pb.GeneratedMessage {
     if (createdAt != null) {
       $result.createdAt = createdAt;
     }
+    if (cursor != null) {
+      $result.cursor = cursor;
+    }
     return $result;
   }
   Link._() : super();
@@ -60,10 +64,11 @@ class Link extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Link', package: const $pb.PackageName(_omitMessageNames ? '' : 'events.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'eventId')
     ..aOS(2, _omitFieldNames ? '' : 'roomId')
-    ..aOM<$1.ContactLink>(3, _omitFieldNames ? '' : 'source', subBuilder: $1.ContactLink.create)
+    ..aOS(3, _omitFieldNames ? '' : 'sourceSubscriptionId')
     ..aOS(5, _omitFieldNames ? '' : 'parentId')
     ..e<$4.RoomEventType>(7, _omitFieldNames ? '' : 'eventType', $pb.PbFieldType.OE, defaultOrMaker: $4.RoomEventType.ROOM_EVENT_TYPE_UNSPECIFIED, valueOf: $4.RoomEventType.valueOf, enumValues: $4.RoomEventType.values)
     ..aOM<$2.Timestamp>(10, _omitFieldNames ? '' : 'createdAt', subBuilder: $2.Timestamp.create)
+    ..aOM<$1.PageCursor>(15, _omitFieldNames ? '' : 'cursor', subBuilder: $1.PageCursor.create)
     ..hasRequiredFields = false
   ;
 
@@ -108,18 +113,15 @@ class Link extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearRoomId() => clearField(2);
 
-  /// Identifies the originator of the event, crucial for attribution and security.
-  /// Marked optional as it may not be required for system messages.
+  /// Identifies the originator subscription of the event, crucial for attribution and security.
   @$pb.TagNumber(3)
-  $1.ContactLink get source => $_getN(2);
+  $core.String get sourceSubscriptionId => $_getSZ(2);
   @$pb.TagNumber(3)
-  set source($1.ContactLink v) { setField(3, v); }
+  set sourceSubscriptionId($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasSource() => $_has(2);
+  $core.bool hasSourceSubscriptionId() => $_has(2);
   @$pb.TagNumber(3)
-  void clearSource() => clearField(3);
-  @$pb.TagNumber(3)
-  $1.ContactLink ensureSource() => $_ensure(2);
+  void clearSourceSubscriptionId() => clearField(3);
 
   /// Unique identifier for a parent event related to this event, constrained for quick parsing and validation.
   @$pb.TagNumber(5)
@@ -152,6 +154,18 @@ class Link extends $pb.GeneratedMessage {
   void clearCreatedAt() => clearField(10);
   @$pb.TagNumber(10)
   $2.Timestamp ensureCreatedAt() => $_ensure(5);
+
+  /// pagination cursor for distributing event to large groups
+  @$pb.TagNumber(15)
+  $1.PageCursor get cursor => $_getN(6);
+  @$pb.TagNumber(15)
+  set cursor($1.PageCursor v) { setField(15, v); }
+  @$pb.TagNumber(15)
+  $core.bool hasCursor() => $_has(6);
+  @$pb.TagNumber(15)
+  void clearCursor() => clearField(15);
+  @$pb.TagNumber(15)
+  $1.PageCursor ensureCursor() => $_ensure(6);
 }
 
 /// Broadcast encapsulates an event and its delivery targets for bulk distribution

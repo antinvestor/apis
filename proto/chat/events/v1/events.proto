@@ -42,9 +42,8 @@ message Link {
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
   ];
-  // Identifies the originator of the event, crucial for attribution and security.
-  // Marked optional as it may not be required for system messages.
-  optional common.v1.ContactLink source = 3;
+  // Identifies the originator subscription of the event, crucial for attribution and security.
+  string source_subscription_id = 3;
 
   // Unique identifier for a parent event related to this event, constrained for quick parsing and validation.
   string parent_id = 5 [
@@ -57,6 +56,9 @@ message Link {
   chat.v1.RoomEventType event_type = 7;
   // Timestamp for event creation, aiding in ordering and latency debugging.
   google.protobuf.Timestamp created_at = 10;
+
+  // pagination cursor for distributing event to large groups
+  common.v1.PageCursor cursor = 15;
 }
 
 // Broadcast encapsulates an event and its delivery targets for bulk distribution

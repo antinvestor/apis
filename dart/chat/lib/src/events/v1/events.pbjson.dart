@@ -19,13 +19,11 @@ const Link$json = {
   '2': [
     {'1': 'event_id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'eventId'},
     {'1': 'room_id', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'roomId'},
-    {'1': 'source', '3': 3, '4': 1, '5': 11, '6': '.common.v1.ContactLink', '9': 0, '10': 'source', '17': true},
+    {'1': 'source_subscription_id', '3': 3, '4': 1, '5': 9, '10': 'sourceSubscriptionId'},
     {'1': 'parent_id', '3': 5, '4': 1, '5': 9, '8': {}, '10': 'parentId'},
     {'1': 'event_type', '3': 7, '4': 1, '5': 14, '6': '.chat.v1.RoomEventType', '10': 'eventType'},
     {'1': 'created_at', '3': 10, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
-  ],
-  '8': [
-    {'1': '_source'},
+    {'1': 'cursor', '3': 15, '4': 1, '5': 11, '6': '.common.v1.PageCursor', '10': 'cursor'},
   ],
 };
 
@@ -33,11 +31,12 @@ const Link$json = {
 final $typed_data.Uint8List linkDescriptor = $convert.base64Decode(
     'CgRMaW5rEjYKCGV2ZW50X2lkGAEgASgJQhu6SBhyFhADGCgyEFswLTlhLXpfLV17MywyMH1SB2'
     'V2ZW50SWQSNAoHcm9vbV9pZBgCIAEoCUIbukgYchYQAxgoMhBbMC05YS16Xy1dezMsMjB9UgZy'
-    'b29tSWQSMwoGc291cmNlGAMgASgLMhYuY29tbW9uLnYxLkNvbnRhY3RMaW5rSABSBnNvdXJjZY'
-    'gBARI4CglwYXJlbnRfaWQYBSABKAlCG7pIGHIWEAMYKDIQWzAtOWEtel8tXXszLDIwfVIIcGFy'
-    'ZW50SWQSNQoKZXZlbnRfdHlwZRgHIAEoDjIWLmNoYXQudjEuUm9vbUV2ZW50VHlwZVIJZXZlbn'
-    'RUeXBlEjkKCmNyZWF0ZWRfYXQYCiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wUglj'
-    'cmVhdGVkQXRCCQoHX3NvdXJjZQ==');
+    'b29tSWQSNAoWc291cmNlX3N1YnNjcmlwdGlvbl9pZBgDIAEoCVIUc291cmNlU3Vic2NyaXB0aW'
+    '9uSWQSOAoJcGFyZW50X2lkGAUgASgJQhu6SBhyFhADGCgyEFswLTlhLXpfLV17MywyMH1SCHBh'
+    'cmVudElkEjUKCmV2ZW50X3R5cGUYByABKA4yFi5jaGF0LnYxLlJvb21FdmVudFR5cGVSCWV2ZW'
+    '50VHlwZRI5CgpjcmVhdGVkX2F0GAogASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcFIJ'
+    'Y3JlYXRlZEF0Ei0KBmN1cnNvchgPIAEoCzIVLmNvbW1vbi52MS5QYWdlQ3Vyc29yUgZjdXJzb3'
+    'I=');
 
 @$core.Deprecated('Use broadcastDescriptor instead')
 const Broadcast$json = {

@@ -607,6 +607,23 @@ components:
         ContactLink represents a link between a contact and a profile in the system.
          Used for associating external contacts with internal profiles across services.
          This enables unified identity management and contact resolution.
+    common.v1.PageCursor:
+      type: object
+      properties:
+        limit:
+          type: integer
+          title: limit
+          format: int32
+          description: Number of items per cursor (limit)
+        page:
+          type: string
+          title: page
+          description: Page number/ cursor representing last id from result
+      title: PageCursor
+      additionalProperties: false
+      description: |-
+        PageCursor provides standard offset-based pagination/cursor stream parameters.
+         Used for list operations that return large result sets.
     events.v1.Broadcast:
       type: object
       properties:
@@ -684,13 +701,10 @@ components:
           minLength: 3
           pattern: '[0-9a-z_-]{3,20}'
           description: Identifies the chat room or context, ensuring data is routed to the correct group.
-        source:
-          title: source
-          description: |-
-            Identifies the originator of the event, crucial for attribution and security.
-             Marked optional as it may not be required for system messages.
-          nullable: true
-          $ref: '#/components/schemas/common.v1.ContactLink'
+        sourceSubscriptionId:
+          type: string
+          title: source_subscription_id
+          description: Identifies the originator subscription of the event, crucial for attribution and security.
         parentId:
           type: string
           title: parent_id
@@ -706,6 +720,10 @@ components:
           title: created_at
           description: Timestamp for event creation, aiding in ordering and latency debugging.
           $ref: '#/components/schemas/google.protobuf.Timestamp'
+        cursor:
+          title: cursor
+          description: pagination cursor for distributing event to large groups
+          $ref: '#/components/schemas/common.v1.PageCursor'
       title: Link
       additionalProperties: false
       description: |-
