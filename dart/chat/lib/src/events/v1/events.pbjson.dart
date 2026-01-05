@@ -45,6 +45,7 @@ const Broadcast$json = {
     {'1': 'event', '3': 1, '4': 1, '5': 11, '6': '.events.v1.Link', '10': 'event'},
     {'1': 'destinations', '3': 2, '4': 3, '5': 11, '6': '.common.v1.ContactLink', '10': 'destinations'},
     {'1': 'priority', '3': 3, '4': 1, '5': 14, '6': '.events.v1.Broadcast.Priority', '10': 'priority'},
+    {'1': 'source', '3': 7, '4': 1, '5': 11, '6': '.common.v1.ContactLink', '10': 'source'},
   ],
   '4': [Broadcast_Priority$json],
 };
@@ -64,8 +65,9 @@ final $typed_data.Uint8List broadcastDescriptor = $convert.base64Decode(
     'CglCcm9hZGNhc3QSJQoFZXZlbnQYASABKAsyDy5ldmVudHMudjEuTGlua1IFZXZlbnQSOgoMZG'
     'VzdGluYXRpb25zGAIgAygLMhYuY29tbW9uLnYxLkNvbnRhY3RMaW5rUgxkZXN0aW5hdGlvbnMS'
     'OQoIcHJpb3JpdHkYAyABKA4yHS5ldmVudHMudjEuQnJvYWRjYXN0LlByaW9yaXR5Ughwcmlvcm'
-    'l0eSJMCghQcmlvcml0eRIYChRQUklPUklUWV9VTlNQRUNJRklFRBAAEhMKD1BSSU9SSVRZX05P'
-    'Uk1BTBABEhEKDVBSSU9SSVRZX0hJR0gQAg==');
+    'l0eRIuCgZzb3VyY2UYByABKAsyFi5jb21tb24udjEuQ29udGFjdExpbmtSBnNvdXJjZSJMCghQ'
+    'cmlvcml0eRIYChRQUklPUklUWV9VTlNQRUNJRklFRBAAEhMKD1BSSU9SSVRZX05PUk1BTBABEh'
+    'EKDVBSSU9SSVRZX0hJR0gQAg==');
 
 @$core.Deprecated('Use deliveryDescriptor instead')
 const Delivery$json = {

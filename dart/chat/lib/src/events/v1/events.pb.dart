@@ -175,6 +175,7 @@ class Broadcast extends $pb.GeneratedMessage {
     Link? event,
     $core.Iterable<$1.ContactLink>? destinations,
     Broadcast_Priority? priority,
+    $1.ContactLink? source,
   }) {
     final $result = create();
     if (event != null) {
@@ -186,6 +187,9 @@ class Broadcast extends $pb.GeneratedMessage {
     if (priority != null) {
       $result.priority = priority;
     }
+    if (source != null) {
+      $result.source = source;
+    }
     return $result;
   }
   Broadcast._() : super();
@@ -196,6 +200,7 @@ class Broadcast extends $pb.GeneratedMessage {
     ..aOM<Link>(1, _omitFieldNames ? '' : 'event', subBuilder: Link.create)
     ..pc<$1.ContactLink>(2, _omitFieldNames ? '' : 'destinations', $pb.PbFieldType.PM, subBuilder: $1.ContactLink.create)
     ..e<Broadcast_Priority>(3, _omitFieldNames ? '' : 'priority', $pb.PbFieldType.OE, defaultOrMaker: Broadcast_Priority.PRIORITY_UNSPECIFIED, valueOf: Broadcast_Priority.valueOf, enumValues: Broadcast_Priority.values)
+    ..aOM<$1.ContactLink>(7, _omitFieldNames ? '' : 'source', subBuilder: $1.ContactLink.create)
     ..hasRequiredFields = false
   ;
 
@@ -244,6 +249,18 @@ class Broadcast extends $pb.GeneratedMessage {
   $core.bool hasPriority() => $_has(2);
   @$pb.TagNumber(3)
   void clearPriority() => clearField(3);
+
+  /// source contact details
+  @$pb.TagNumber(7)
+  $1.ContactLink get source => $_getN(3);
+  @$pb.TagNumber(7)
+  set source($1.ContactLink v) { setField(7, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasSource() => $_has(3);
+  @$pb.TagNumber(7)
+  void clearSource() => clearField(7);
+  @$pb.TagNumber(7)
+  $1.ContactLink ensureSource() => $_ensure(3);
 }
 
 /// Delivery represents the final payload delivered to an end-user device,

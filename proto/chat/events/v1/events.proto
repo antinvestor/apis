@@ -68,6 +68,7 @@ message Broadcast {
   Link event = 1;
   // List of delivery targets specifying recipients for batch processing efficiency.
   repeated common.v1.ContactLink destinations = 2;
+
   // Indicates priority of delivery to prioritize critical events (e.g., CALL_OFFER).
   enum Priority {
     PRIORITY_UNSPECIFIED = 0;
@@ -75,6 +76,9 @@ message Broadcast {
     PRIORITY_HIGH = 2;
   }
   Priority priority = 3;
+
+  // source contact details
+  common.v1.ContactLink source = 7;
 }
 
 // Delivery represents the final payload delivered to an end-user device,
