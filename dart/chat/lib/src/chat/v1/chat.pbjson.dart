@@ -13,11 +13,11 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
-import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $1;
+import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $3;
 import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $0;
-import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $2;
+import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $1;
 import 'definitions.pbjson.dart' as $4;
-import 'payload_type.pbjson.dart' as $3;
+import 'payload_type.pbjson.dart' as $2;
 
 @$core.Deprecated('Use sendEventRequestDescriptor instead')
 const SendEventRequest$json = {
@@ -36,13 +36,13 @@ final $typed_data.Uint8List sendEventRequestDescriptor = $convert.base64Decode(
 const SendEventResponse$json = {
   '1': 'SendEventResponse',
   '2': [
-    {'1': 'ack', '3': 1, '4': 3, '5': 11, '6': '.chat.v1.EventAck', '10': 'ack'},
+    {'1': 'ack', '3': 1, '4': 3, '5': 11, '6': '.chat.v1.AckEvent', '10': 'ack'},
   ],
 };
 
 /// Descriptor for `SendEventResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List sendEventResponseDescriptor = $convert.base64Decode(
-    'ChFTZW5kRXZlbnRSZXNwb25zZRIjCgNhY2sYASADKAsyES5jaGF0LnYxLkV2ZW50QWNrUgNhY2'
+    'ChFTZW5kRXZlbnRSZXNwb25zZRIjCgNhY2sYASADKAsyES5jaGF0LnYxLkFja0V2ZW50UgNhY2'
     's=');
 
 @$core.Deprecated('Use getHistoryRequestDescriptor instead')
@@ -491,34 +491,34 @@ const $core.Map<$core.String, $core.dynamic> ChatServiceBase$json = {
 const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> ChatServiceBase$messageJson = {
   '.chat.v1.SendEventRequest': SendEventRequest$json,
   '.chat.v1.RoomEvent': $4.RoomEvent$json,
-  '.common.v1.ContactLink': $1.ContactLink$json,
+  '.google.protobuf.Timestamp': $1.Timestamp$json,
+  '.chat.v1.Payload': $2.Payload$json,
   '.google.protobuf.Struct': $0.Struct$json,
   '.google.protobuf.Struct.FieldsEntry': $0.Struct_FieldsEntry$json,
   '.google.protobuf.Value': $0.Value$json,
   '.google.protobuf.ListValue': $0.ListValue$json,
-  '.google.protobuf.Timestamp': $2.Timestamp$json,
-  '.chat.v1.Payload': $3.Payload$json,
-  '.chat.v1.TextContent': $3.TextContent$json,
-  '.chat.v1.TextAnnotation': $3.TextAnnotation$json,
-  '.chat.v1.AttachmentContent': $3.AttachmentContent$json,
-  '.chat.v1.AttachmentPreview': $3.AttachmentPreview$json,
-  '.chat.v1.ReactionContent': $3.ReactionContent$json,
-  '.chat.v1.EncryptedContent': $3.EncryptedContent$json,
-  '.chat.v1.CallContent': $3.CallContent$json,
-  '.chat.v1.MotionContent': $3.MotionContent$json,
-  '.chat.v1.PassingRule': $3.PassingRule$json,
-  '.chat.v1.VoteChoice': $3.VoteChoice$json,
-  '.chat.v1.VoteCast': $3.VoteCast$json,
-  '.chat.v1.MotionTally': $3.MotionTally$json,
-  '.chat.v1.VoteTally': $3.VoteTally$json,
+  '.chat.v1.TextContent': $2.TextContent$json,
+  '.chat.v1.TextAnnotation': $2.TextAnnotation$json,
+  '.chat.v1.AttachmentContent': $2.AttachmentContent$json,
+  '.chat.v1.AttachmentPreview': $2.AttachmentPreview$json,
+  '.chat.v1.ReactionContent': $2.ReactionContent$json,
+  '.chat.v1.EncryptedContent': $2.EncryptedContent$json,
+  '.chat.v1.CallContent': $2.CallContent$json,
+  '.chat.v1.MotionContent': $2.MotionContent$json,
+  '.chat.v1.PassingRule': $2.PassingRule$json,
+  '.chat.v1.VoteChoice': $2.VoteChoice$json,
+  '.chat.v1.VoteCast': $2.VoteCast$json,
+  '.chat.v1.MotionTally': $2.MotionTally$json,
+  '.chat.v1.VoteTally': $2.VoteTally$json,
   '.chat.v1.SendEventResponse': SendEventResponse$json,
-  '.chat.v1.EventAck': $4.EventAck$json,
-  '.common.v1.ErrorDetail': $1.ErrorDetail$json,
-  '.common.v1.ErrorDetail.MetaEntry': $1.ErrorDetail_MetaEntry$json,
+  '.chat.v1.AckEvent': $4.AckEvent$json,
+  '.common.v1.ErrorDetail': $3.ErrorDetail$json,
+  '.common.v1.ErrorDetail.MetaEntry': $3.ErrorDetail_MetaEntry$json,
   '.chat.v1.GetHistoryRequest': GetHistoryRequest$json,
-  '.common.v1.PageCursor': $1.PageCursor$json,
+  '.common.v1.PageCursor': $3.PageCursor$json,
   '.chat.v1.GetHistoryResponse': GetHistoryResponse$json,
   '.chat.v1.CreateRoomRequest': CreateRoomRequest$json,
+  '.common.v1.ContactLink': $3.ContactLink$json,
   '.chat.v1.CreateRoomResponse': CreateRoomResponse$json,
   '.chat.v1.Room': Room$json,
   '.chat.v1.SearchRoomsRequest': SearchRoomsRequest$json,

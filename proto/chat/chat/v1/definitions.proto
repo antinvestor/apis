@@ -67,7 +67,7 @@ message RoomEvent {
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ]; // room_id
 
-  common.v1.ContactLink source = 3; // profile_id or service/bot id
+  string subscription_id = 3; // profile_id or service/bot id
 
   RoomEventType type = 4;
 
@@ -86,7 +86,7 @@ message RoomEvent {
 // Acknowledgement for event(s) received; server uses it to free ephemeral delivery buffers.
 // ack_event_id: last event_id client processed (inclusive).
 // If error is set, indicates the event failed to send/process correctly.
-message EventAck {
+message AckEvent {
   string event_id = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
@@ -103,7 +103,6 @@ message EventAck {
 // Servers MUST NOT persist ReceiptEvent.
 // Servers MAY drop ReceiptEvent without acknowledgment.
 message ReceiptEvent {
-  common.v1.ContactLink source = 1;
   string room_id = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
@@ -119,6 +118,7 @@ message ReceiptEvent {
       }
     }
   ];
+  string subscription_id = 5;
 }
 
 message ReadMarker {
@@ -127,12 +127,14 @@ message ReadMarker {
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
-  common.v1.ContactLink source = 2;
+
   string up_to_event_id = 3 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
+
+  string subscription_id = 5;
 }
 
 // Presence event affecting a user (and visible to rooms the user is a member of)

@@ -14,9 +14,9 @@ import 'dart:core' as $core;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import '../../chat/v1/definitions.pbenum.dart' as $4;
-import '../../chat/v1/payload_type.pb.dart' as $3;
+import '../../chat/v1/payload_type.pb.dart' as $2;
+import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $3;
 import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $1;
-import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $2;
 import 'events.pbenum.dart';
 
 export 'events.pbenum.dart';
@@ -30,8 +30,8 @@ class Link extends $pb.GeneratedMessage {
     $core.String? sourceSubscriptionId,
     $core.String? parentId,
     $4.RoomEventType? eventType,
-    $2.Timestamp? createdAt,
-    $1.PageCursor? cursor,
+    $1.Timestamp? createdAt,
+    $3.PageCursor? cursor,
   }) {
     final $result = create();
     if (eventId != null) {
@@ -67,8 +67,8 @@ class Link extends $pb.GeneratedMessage {
     ..aOS(3, _omitFieldNames ? '' : 'sourceSubscriptionId')
     ..aOS(5, _omitFieldNames ? '' : 'parentId')
     ..e<$4.RoomEventType>(7, _omitFieldNames ? '' : 'eventType', $pb.PbFieldType.OE, defaultOrMaker: $4.RoomEventType.ROOM_EVENT_TYPE_UNSPECIFIED, valueOf: $4.RoomEventType.valueOf, enumValues: $4.RoomEventType.values)
-    ..aOM<$2.Timestamp>(10, _omitFieldNames ? '' : 'createdAt', subBuilder: $2.Timestamp.create)
-    ..aOM<$1.PageCursor>(15, _omitFieldNames ? '' : 'cursor', subBuilder: $1.PageCursor.create)
+    ..aOM<$1.Timestamp>(10, _omitFieldNames ? '' : 'createdAt', subBuilder: $1.Timestamp.create)
+    ..aOM<$3.PageCursor>(15, _omitFieldNames ? '' : 'cursor', subBuilder: $3.PageCursor.create)
     ..hasRequiredFields = false
   ;
 
@@ -145,27 +145,27 @@ class Link extends $pb.GeneratedMessage {
 
   /// Timestamp for event creation, aiding in ordering and latency debugging.
   @$pb.TagNumber(10)
-  $2.Timestamp get createdAt => $_getN(5);
+  $1.Timestamp get createdAt => $_getN(5);
   @$pb.TagNumber(10)
-  set createdAt($2.Timestamp v) { setField(10, v); }
+  set createdAt($1.Timestamp v) { setField(10, v); }
   @$pb.TagNumber(10)
   $core.bool hasCreatedAt() => $_has(5);
   @$pb.TagNumber(10)
   void clearCreatedAt() => clearField(10);
   @$pb.TagNumber(10)
-  $2.Timestamp ensureCreatedAt() => $_ensure(5);
+  $1.Timestamp ensureCreatedAt() => $_ensure(5);
 
   /// pagination cursor for distributing event to large groups
   @$pb.TagNumber(15)
-  $1.PageCursor get cursor => $_getN(6);
+  $3.PageCursor get cursor => $_getN(6);
   @$pb.TagNumber(15)
-  set cursor($1.PageCursor v) { setField(15, v); }
+  set cursor($3.PageCursor v) { setField(15, v); }
   @$pb.TagNumber(15)
   $core.bool hasCursor() => $_has(6);
   @$pb.TagNumber(15)
   void clearCursor() => clearField(15);
   @$pb.TagNumber(15)
-  $1.PageCursor ensureCursor() => $_ensure(6);
+  $3.PageCursor ensureCursor() => $_ensure(6);
 }
 
 /// Broadcast encapsulates an event and its delivery targets for bulk distribution
@@ -173,9 +173,9 @@ class Link extends $pb.GeneratedMessage {
 class Broadcast extends $pb.GeneratedMessage {
   factory Broadcast({
     Link? event,
-    $core.Iterable<$1.ContactLink>? destinations,
+    $core.Iterable<$3.ContactLink>? destinations,
     Broadcast_Priority? priority,
-    $1.ContactLink? source,
+    $3.ContactLink? source,
   }) {
     final $result = create();
     if (event != null) {
@@ -198,9 +198,9 @@ class Broadcast extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Broadcast', package: const $pb.PackageName(_omitMessageNames ? '' : 'events.v1'), createEmptyInstance: create)
     ..aOM<Link>(1, _omitFieldNames ? '' : 'event', subBuilder: Link.create)
-    ..pc<$1.ContactLink>(2, _omitFieldNames ? '' : 'destinations', $pb.PbFieldType.PM, subBuilder: $1.ContactLink.create)
+    ..pc<$3.ContactLink>(2, _omitFieldNames ? '' : 'destinations', $pb.PbFieldType.PM, subBuilder: $3.ContactLink.create)
     ..e<Broadcast_Priority>(3, _omitFieldNames ? '' : 'priority', $pb.PbFieldType.OE, defaultOrMaker: Broadcast_Priority.PRIORITY_UNSPECIFIED, valueOf: Broadcast_Priority.valueOf, enumValues: Broadcast_Priority.values)
-    ..aOM<$1.ContactLink>(7, _omitFieldNames ? '' : 'source', subBuilder: $1.ContactLink.create)
+    ..aOM<$3.ContactLink>(7, _omitFieldNames ? '' : 'source', subBuilder: $3.ContactLink.create)
     ..hasRequiredFields = false
   ;
 
@@ -239,7 +239,7 @@ class Broadcast extends $pb.GeneratedMessage {
 
   /// List of delivery targets specifying recipients for batch processing efficiency.
   @$pb.TagNumber(2)
-  $core.List<$1.ContactLink> get destinations => $_getList(1);
+  $core.List<$3.ContactLink> get destinations => $_getList(1);
 
   @$pb.TagNumber(3)
   Broadcast_Priority get priority => $_getN(2);
@@ -252,15 +252,15 @@ class Broadcast extends $pb.GeneratedMessage {
 
   /// source contact details
   @$pb.TagNumber(7)
-  $1.ContactLink get source => $_getN(3);
+  $3.ContactLink get source => $_getN(3);
   @$pb.TagNumber(7)
-  set source($1.ContactLink v) { setField(7, v); }
+  set source($3.ContactLink v) { setField(7, v); }
   @$pb.TagNumber(7)
   $core.bool hasSource() => $_has(3);
   @$pb.TagNumber(7)
   void clearSource() => clearField(7);
   @$pb.TagNumber(7)
-  $1.ContactLink ensureSource() => $_ensure(3);
+  $3.ContactLink ensureSource() => $_ensure(3);
 }
 
 /// Delivery represents the final payload delivered to an end-user device,
@@ -268,9 +268,9 @@ class Broadcast extends $pb.GeneratedMessage {
 class Delivery extends $pb.GeneratedMessage {
   factory Delivery({
     Link? event,
-    $1.ContactLink? destination,
-    $1.ContactLink? source,
-    $3.Payload? payload,
+    $3.ContactLink? destination,
+    $3.ContactLink? source,
+    $2.Payload? payload,
     $core.bool? isCompressed,
     $core.int? retryCount,
     $core.String? deviceId,
@@ -305,9 +305,9 @@ class Delivery extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Delivery', package: const $pb.PackageName(_omitMessageNames ? '' : 'events.v1'), createEmptyInstance: create)
     ..aOM<Link>(1, _omitFieldNames ? '' : 'event', subBuilder: Link.create)
-    ..aOM<$1.ContactLink>(2, _omitFieldNames ? '' : 'destination', subBuilder: $1.ContactLink.create)
-    ..aOM<$1.ContactLink>(3, _omitFieldNames ? '' : 'source', subBuilder: $1.ContactLink.create)
-    ..aOM<$3.Payload>(5, _omitFieldNames ? '' : 'payload', subBuilder: $3.Payload.create)
+    ..aOM<$3.ContactLink>(2, _omitFieldNames ? '' : 'destination', subBuilder: $3.ContactLink.create)
+    ..aOM<$3.ContactLink>(3, _omitFieldNames ? '' : 'source', subBuilder: $3.ContactLink.create)
+    ..aOM<$2.Payload>(5, _omitFieldNames ? '' : 'payload', subBuilder: $2.Payload.create)
     ..aOB(10, _omitFieldNames ? '' : 'isCompressed')
     ..a<$core.int>(11, _omitFieldNames ? '' : 'retryCount', $pb.PbFieldType.O3)
     ..aOS(12, _omitFieldNames ? '' : 'deviceId')
@@ -349,37 +349,37 @@ class Delivery extends $pb.GeneratedMessage {
 
   /// Specific delivery target for this delivery.
   @$pb.TagNumber(2)
-  $1.ContactLink get destination => $_getN(1);
+  $3.ContactLink get destination => $_getN(1);
   @$pb.TagNumber(2)
-  set destination($1.ContactLink v) { setField(2, v); }
+  set destination($3.ContactLink v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasDestination() => $_has(1);
   @$pb.TagNumber(2)
   void clearDestination() => clearField(2);
   @$pb.TagNumber(2)
-  $1.ContactLink ensureDestination() => $_ensure(1);
+  $3.ContactLink ensureDestination() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $1.ContactLink get source => $_getN(2);
+  $3.ContactLink get source => $_getN(2);
   @$pb.TagNumber(3)
-  set source($1.ContactLink v) { setField(3, v); }
+  set source($3.ContactLink v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasSource() => $_has(2);
   @$pb.TagNumber(3)
   void clearSource() => clearField(3);
   @$pb.TagNumber(3)
-  $1.ContactLink ensureSource() => $_ensure(2);
+  $3.ContactLink ensureSource() => $_ensure(2);
 
   @$pb.TagNumber(5)
-  $3.Payload get payload => $_getN(3);
+  $2.Payload get payload => $_getN(3);
   @$pb.TagNumber(5)
-  set payload($3.Payload v) { setField(5, v); }
+  set payload($2.Payload v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasPayload() => $_has(3);
   @$pb.TagNumber(5)
   void clearPayload() => clearField(5);
   @$pb.TagNumber(5)
-  $3.Payload ensurePayload() => $_ensure(3);
+  $2.Payload ensurePayload() => $_ensure(3);
 
   /// Indicates if payload data is compressed to save bandwidth for large messages.
   @$pb.TagNumber(10)

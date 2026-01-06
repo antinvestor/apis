@@ -14,8 +14,8 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
+import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $3;
 import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $1;
-import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $2;
 import 'definitions.pb.dart' as $4;
 
 /// StreamHello message sent by client to server to initiate a connection.
@@ -27,7 +27,7 @@ class StreamHello extends $pb.GeneratedMessage {
   factory StreamHello({
     $core.String? resumeToken,
     $core.Map<$core.String, $core.String>? capabilities,
-    $2.Timestamp? clientTime,
+    $1.Timestamp? clientTime,
   }) {
     final $result = create();
     if (resumeToken != null) {
@@ -48,7 +48,7 @@ class StreamHello extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamHello', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'resumeToken')
     ..m<$core.String, $core.String>(2, _omitFieldNames ? '' : 'capabilities', entryClassName: 'StreamHello.CapabilitiesEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OS, packageName: const $pb.PackageName('chat.v1'))
-    ..aOM<$2.Timestamp>(3, _omitFieldNames ? '' : 'clientTime', subBuilder: $2.Timestamp.create)
+    ..aOM<$1.Timestamp>(3, _omitFieldNames ? '' : 'clientTime', subBuilder: $1.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -86,15 +86,15 @@ class StreamHello extends $pb.GeneratedMessage {
   $core.Map<$core.String, $core.String> get capabilities => $_getMap(1);
 
   @$pb.TagNumber(3)
-  $2.Timestamp get clientTime => $_getN(2);
+  $1.Timestamp get clientTime => $_getN(2);
   @$pb.TagNumber(3)
-  set clientTime($2.Timestamp v) { setField(3, v); }
+  set clientTime($1.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasClientTime() => $_has(2);
   @$pb.TagNumber(3)
   void clearClientTime() => clearField(3);
   @$pb.TagNumber(3)
-  $2.Timestamp ensureClientTime() => $_ensure(2);
+  $1.Timestamp ensureClientTime() => $_ensure(2);
 }
 
 enum StreamRequest_Payload {
@@ -215,13 +215,13 @@ enum StreamResponse_Payload {
 class StreamResponse extends $pb.GeneratedMessage {
   factory StreamResponse({
     $core.String? id,
-    $2.Timestamp? timestamp,
+    $1.Timestamp? timestamp,
     $4.RoomEvent? message,
     $4.PresenceEvent? presenceEvent,
     $4.ReceiptEvent? receiptEvent,
     $4.ReadMarker? readEvent,
     $4.TypingEvent? typingEvent,
-    $1.ErrorDetail? error,
+    $3.ErrorDetail? error,
   }) {
     final $result = create();
     if (id != null) {
@@ -266,13 +266,13 @@ class StreamResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
     ..oo(0, [10, 12, 13, 15, 17, 20])
     ..aOS(3, _omitFieldNames ? '' : 'id')
-    ..aOM<$2.Timestamp>(5, _omitFieldNames ? '' : 'timestamp', subBuilder: $2.Timestamp.create)
+    ..aOM<$1.Timestamp>(5, _omitFieldNames ? '' : 'timestamp', subBuilder: $1.Timestamp.create)
     ..aOM<$4.RoomEvent>(10, _omitFieldNames ? '' : 'message', subBuilder: $4.RoomEvent.create)
     ..aOM<$4.PresenceEvent>(12, _omitFieldNames ? '' : 'presenceEvent', subBuilder: $4.PresenceEvent.create)
     ..aOM<$4.ReceiptEvent>(13, _omitFieldNames ? '' : 'receiptEvent', subBuilder: $4.ReceiptEvent.create)
     ..aOM<$4.ReadMarker>(15, _omitFieldNames ? '' : 'readEvent', subBuilder: $4.ReadMarker.create)
     ..aOM<$4.TypingEvent>(17, _omitFieldNames ? '' : 'typingEvent', subBuilder: $4.TypingEvent.create)
-    ..aOM<$1.ErrorDetail>(20, _omitFieldNames ? '' : 'error', subBuilder: $1.ErrorDetail.create)
+    ..aOM<$3.ErrorDetail>(20, _omitFieldNames ? '' : 'error', subBuilder: $3.ErrorDetail.create)
     ..hasRequiredFields = false
   ;
 
@@ -313,15 +313,15 @@ class StreamResponse extends $pb.GeneratedMessage {
   void clearId() => clearField(3);
 
   @$pb.TagNumber(5)
-  $2.Timestamp get timestamp => $_getN(1);
+  $1.Timestamp get timestamp => $_getN(1);
   @$pb.TagNumber(5)
-  set timestamp($2.Timestamp v) { setField(5, v); }
+  set timestamp($1.Timestamp v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasTimestamp() => $_has(1);
   @$pb.TagNumber(5)
   void clearTimestamp() => clearField(5);
   @$pb.TagNumber(5)
-  $2.Timestamp ensureTimestamp() => $_ensure(1);
+  $1.Timestamp ensureTimestamp() => $_ensure(1);
 
   @$pb.TagNumber(10)
   $4.RoomEvent get message => $_getN(2);
@@ -383,15 +383,15 @@ class StreamResponse extends $pb.GeneratedMessage {
   /// - MAY be recoverable (client should continue stream) or fatal.
   /// - Fatal errors MUST be followed by stream termination.
   @$pb.TagNumber(20)
-  $1.ErrorDetail get error => $_getN(7);
+  $3.ErrorDetail get error => $_getN(7);
   @$pb.TagNumber(20)
-  set error($1.ErrorDetail v) { setField(20, v); }
+  set error($3.ErrorDetail v) { setField(20, v); }
   @$pb.TagNumber(20)
   $core.bool hasError() => $_has(7);
   @$pb.TagNumber(20)
   void clearError() => clearField(20);
   @$pb.TagNumber(20)
-  $1.ErrorDetail ensureError() => $_ensure(7);
+  $3.ErrorDetail ensureError() => $_ensure(7);
 }
 
 enum ClientSignal_Signal {
@@ -406,7 +406,7 @@ enum ClientSignal_Signal {
 class ClientSignal extends $pb.GeneratedMessage {
   factory ClientSignal({
     $4.ReceiptEvent? receipt,
-    $4.EventAck? ack,
+    $4.AckEvent? ack,
     $4.TypingEvent? typing,
     $4.PresenceEvent? presence,
   }) {
@@ -439,7 +439,7 @@ class ClientSignal extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ClientSignal', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
     ..oo(0, [2, 3, 4, 5])
     ..aOM<$4.ReceiptEvent>(2, _omitFieldNames ? '' : 'receipt', subBuilder: $4.ReceiptEvent.create)
-    ..aOM<$4.EventAck>(3, _omitFieldNames ? '' : 'ack', subBuilder: $4.EventAck.create)
+    ..aOM<$4.AckEvent>(3, _omitFieldNames ? '' : 'ack', subBuilder: $4.AckEvent.create)
     ..aOM<$4.TypingEvent>(4, _omitFieldNames ? '' : 'typing', subBuilder: $4.TypingEvent.create)
     ..aOM<$4.PresenceEvent>(5, _omitFieldNames ? '' : 'presence', subBuilder: $4.PresenceEvent.create)
     ..hasRequiredFields = false
@@ -481,15 +481,15 @@ class ClientSignal extends $pb.GeneratedMessage {
   $4.ReceiptEvent ensureReceipt() => $_ensure(0);
 
   @$pb.TagNumber(3)
-  $4.EventAck get ack => $_getN(1);
+  $4.AckEvent get ack => $_getN(1);
   @$pb.TagNumber(3)
-  set ack($4.EventAck v) { setField(3, v); }
+  set ack($4.AckEvent v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasAck() => $_has(1);
   @$pb.TagNumber(3)
   void clearAck() => clearField(3);
   @$pb.TagNumber(3)
-  $4.EventAck ensureAck() => $_ensure(1);
+  $4.AckEvent ensureAck() => $_ensure(1);
 
   @$pb.TagNumber(4)
   $4.TypingEvent get typing => $_getN(2);

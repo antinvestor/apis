@@ -61,7 +61,7 @@ const RoomEvent$json = {
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'id'},
     {'1': 'room_id', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'roomId'},
-    {'1': 'source', '3': 3, '4': 1, '5': 11, '6': '.common.v1.ContactLink', '10': 'source'},
+    {'1': 'subscription_id', '3': 3, '4': 1, '5': 9, '10': 'subscriptionId'},
     {'1': 'type', '3': 4, '4': 1, '5': 14, '6': '.chat.v1.RoomEventType', '10': 'type'},
     {'1': 'sent_at', '3': 7, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'sentAt'},
     {'1': 'edited', '3': 8, '4': 1, '5': 8, '10': 'edited'},
@@ -78,16 +78,16 @@ const RoomEvent$json = {
 final $typed_data.Uint8List roomEventDescriptor = $convert.base64Decode(
     'CglSb29tRXZlbnQSKwoCaWQYASABKAlCG7pIGHIWEAMYKDIQWzAtOWEtel8tXXszLDQwfVICaW'
     'QSNAoHcm9vbV9pZBgCIAEoCUIbukgYchYQAxgoMhBbMC05YS16Xy1dezMsNDB9UgZyb29tSWQS'
-    'LgoGc291cmNlGAMgASgLMhYuY29tbW9uLnYxLkNvbnRhY3RMaW5rUgZzb3VyY2USKgoEdHlwZR'
-    'gEIAEoDjIWLmNoYXQudjEuUm9vbUV2ZW50VHlwZVIEdHlwZRIzCgdzZW50X2F0GAcgASgLMhou'
-    'Z29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcFIGc2VudEF0EhYKBmVkaXRlZBgIIAEoCFIGZWRpdG'
-    'VkEhoKCHJlZGFjdGVkGAkgASgIUghyZWRhY3RlZBI9CglwYXJlbnRfaWQYCiABKAlCG7pIGHIW'
-    'EAMYKDIQWzAtOWEtel8tXXszLDQwfUgAUghwYXJlbnRJZIgBARIqCgdwYXlsb2FkGA8gASgLMh'
-    'AuY2hhdC52MS5QYXlsb2FkUgdwYXlsb2FkQgwKCl9wYXJlbnRfaWQ=');
+    'JwoPc3Vic2NyaXB0aW9uX2lkGAMgASgJUg5zdWJzY3JpcHRpb25JZBIqCgR0eXBlGAQgASgOMh'
+    'YuY2hhdC52MS5Sb29tRXZlbnRUeXBlUgR0eXBlEjMKB3NlbnRfYXQYByABKAsyGi5nb29nbGUu'
+    'cHJvdG9idWYuVGltZXN0YW1wUgZzZW50QXQSFgoGZWRpdGVkGAggASgIUgZlZGl0ZWQSGgoIcm'
+    'VkYWN0ZWQYCSABKAhSCHJlZGFjdGVkEj0KCXBhcmVudF9pZBgKIAEoCUIbukgYchYQAxgoMhBb'
+    'MC05YS16Xy1dezMsNDB9SABSCHBhcmVudElkiAEBEioKB3BheWxvYWQYDyABKAsyEC5jaGF0Ln'
+    'YxLlBheWxvYWRSB3BheWxvYWRCDAoKX3BhcmVudF9pZA==');
 
-@$core.Deprecated('Use eventAckDescriptor instead')
-const EventAck$json = {
-  '1': 'EventAck',
+@$core.Deprecated('Use ackEventDescriptor instead')
+const AckEvent$json = {
+  '1': 'AckEvent',
   '2': [
     {'1': 'event_id', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'eventId'},
     {'1': 'ack_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'ackAt'},
@@ -99,9 +99,9 @@ const EventAck$json = {
   ],
 };
 
-/// Descriptor for `EventAck`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List eventAckDescriptor = $convert.base64Decode(
-    'CghFdmVudEFjaxI2CghldmVudF9pZBgCIAEoCUIbukgYchYQAxgoMhBbMC05YS16Xy1dezMsND'
+/// Descriptor for `AckEvent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List ackEventDescriptor = $convert.base64Decode(
+    'CghBY2tFdmVudBI2CghldmVudF9pZBgCIAEoCUIbukgYchYQAxgoMhBbMC05YS16Xy1dezMsND'
     'B9UgdldmVudElkEjEKBmFja19hdBgDIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBS'
     'BWFja0F0EjMKCG1ldGFkYXRhGAYgASgLMhcuZ29vZ2xlLnByb3RvYnVmLlN0cnVjdFIIbWV0YW'
     'RhdGESMQoFZXJyb3IYByABKAsyFi5jb21tb24udjEuRXJyb3JEZXRhaWxIAFIFZXJyb3KIAQFC'
@@ -111,35 +111,35 @@ final $typed_data.Uint8List eventAckDescriptor = $convert.base64Decode(
 const ReceiptEvent$json = {
   '1': 'ReceiptEvent',
   '2': [
-    {'1': 'source', '3': 1, '4': 1, '5': 11, '6': '.common.v1.ContactLink', '10': 'source'},
     {'1': 'room_id', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'roomId'},
     {'1': 'event_id', '3': 3, '4': 3, '5': 9, '8': {}, '10': 'eventId'},
+    {'1': 'subscription_id', '3': 5, '4': 1, '5': 9, '10': 'subscriptionId'},
   ],
 };
 
 /// Descriptor for `ReceiptEvent`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List receiptEventDescriptor = $convert.base64Decode(
-    'CgxSZWNlaXB0RXZlbnQSLgoGc291cmNlGAEgASgLMhYuY29tbW9uLnYxLkNvbnRhY3RMaW5rUg'
-    'Zzb3VyY2USNAoHcm9vbV9pZBgCIAEoCUIbukgYchYQAxgoMhBbMC05YS16Xy1dezMsNDB9UgZy'
-    'b29tSWQSPQoIZXZlbnRfaWQYAyADKAlCIrpIH5IBHAgBIhhyFhADGCgyEFswLTlhLXpfLV17My'
-    'w0MH1SB2V2ZW50SWQ=');
+    'CgxSZWNlaXB0RXZlbnQSNAoHcm9vbV9pZBgCIAEoCUIbukgYchYQAxgoMhBbMC05YS16Xy1dez'
+    'MsNDB9UgZyb29tSWQSPQoIZXZlbnRfaWQYAyADKAlCIrpIH5IBHAgBIhhyFhADGCgyEFswLTlh'
+    'LXpfLV17Myw0MH1SB2V2ZW50SWQSJwoPc3Vic2NyaXB0aW9uX2lkGAUgASgJUg5zdWJzY3JpcH'
+    'Rpb25JZA==');
 
 @$core.Deprecated('Use readMarkerDescriptor instead')
 const ReadMarker$json = {
   '1': 'ReadMarker',
   '2': [
     {'1': 'room_id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'roomId'},
-    {'1': 'source', '3': 2, '4': 1, '5': 11, '6': '.common.v1.ContactLink', '10': 'source'},
     {'1': 'up_to_event_id', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'upToEventId'},
+    {'1': 'subscription_id', '3': 5, '4': 1, '5': 9, '10': 'subscriptionId'},
   ],
 };
 
 /// Descriptor for `ReadMarker`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List readMarkerDescriptor = $convert.base64Decode(
     'CgpSZWFkTWFya2VyEjQKB3Jvb21faWQYASABKAlCG7pIGHIWEAMYKDIQWzAtOWEtel8tXXszLD'
-    'QwfVIGcm9vbUlkEi4KBnNvdXJjZRgCIAEoCzIWLmNvbW1vbi52MS5Db250YWN0TGlua1IGc291'
-    'cmNlEkAKDnVwX3RvX2V2ZW50X2lkGAMgASgJQhu6SBhyFhADGCgyEFswLTlhLXpfLV17Myw0MH'
-    '1SC3VwVG9FdmVudElk');
+    'QwfVIGcm9vbUlkEkAKDnVwX3RvX2V2ZW50X2lkGAMgASgJQhu6SBhyFhADGCgyEFswLTlhLXpf'
+    'LV17Myw0MH1SC3VwVG9FdmVudElkEicKD3N1YnNjcmlwdGlvbl9pZBgFIAEoCVIOc3Vic2NyaX'
+    'B0aW9uSWQ=');
 
 @$core.Deprecated('Use presenceEventDescriptor instead')
 const PresenceEvent$json = {

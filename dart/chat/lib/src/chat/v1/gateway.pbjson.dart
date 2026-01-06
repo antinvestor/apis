@@ -13,11 +13,11 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
-import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $1;
+import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $3;
 import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $0;
-import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $2;
+import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $1;
 import 'definitions.pbjson.dart' as $4;
-import 'payload_type.pbjson.dart' as $3;
+import 'payload_type.pbjson.dart' as $2;
 
 @$core.Deprecated('Use streamHelloDescriptor instead')
 const StreamHello$json = {
@@ -102,7 +102,7 @@ final $typed_data.Uint8List streamResponseDescriptor = $convert.base64Decode(
 const ClientSignal$json = {
   '1': 'ClientSignal',
   '2': [
-    {'1': 'ack', '3': 3, '4': 1, '5': 11, '6': '.chat.v1.EventAck', '9': 0, '10': 'ack'},
+    {'1': 'ack', '3': 3, '4': 1, '5': 11, '6': '.chat.v1.AckEvent', '9': 0, '10': 'ack'},
     {'1': 'typing', '3': 4, '4': 1, '5': 11, '6': '.chat.v1.TypingEvent', '9': 0, '10': 'typing'},
     {'1': 'receipt', '3': 2, '4': 1, '5': 11, '6': '.chat.v1.ReceiptEvent', '9': 0, '10': 'receipt'},
     {'1': 'presence', '3': 5, '4': 1, '5': 11, '6': '.chat.v1.PresenceEvent', '9': 0, '10': 'presence'},
@@ -114,7 +114,7 @@ const ClientSignal$json = {
 
 /// Descriptor for `ClientSignal`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List clientSignalDescriptor = $convert.base64Decode(
-    'CgxDbGllbnRTaWduYWwSJQoDYWNrGAMgASgLMhEuY2hhdC52MS5FdmVudEFja0gAUgNhY2sSLg'
+    'CgxDbGllbnRTaWduYWwSJQoDYWNrGAMgASgLMhEuY2hhdC52MS5BY2tFdmVudEgAUgNhY2sSLg'
     'oGdHlwaW5nGAQgASgLMhQuY2hhdC52MS5UeXBpbmdFdmVudEgAUgZ0eXBpbmcSMQoHcmVjZWlw'
     'dBgCIAEoCzIVLmNoYXQudjEuUmVjZWlwdEV2ZW50SABSB3JlY2VpcHQSNAoIcHJlc2VuY2UYBS'
     'ABKAsyFi5jaGF0LnYxLlByZXNlbmNlRXZlbnRIAFIIcHJlc2VuY2VCCAoGc2lnbmFs');
@@ -131,36 +131,36 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> GatewaySer
   '.chat.v1.StreamRequest': StreamRequest$json,
   '.chat.v1.StreamHello': StreamHello$json,
   '.chat.v1.StreamHello.CapabilitiesEntry': StreamHello_CapabilitiesEntry$json,
-  '.google.protobuf.Timestamp': $2.Timestamp$json,
+  '.google.protobuf.Timestamp': $1.Timestamp$json,
   '.chat.v1.ClientSignal': ClientSignal$json,
   '.chat.v1.ReceiptEvent': $4.ReceiptEvent$json,
-  '.common.v1.ContactLink': $1.ContactLink$json,
+  '.chat.v1.AckEvent': $4.AckEvent$json,
   '.google.protobuf.Struct': $0.Struct$json,
   '.google.protobuf.Struct.FieldsEntry': $0.Struct_FieldsEntry$json,
   '.google.protobuf.Value': $0.Value$json,
   '.google.protobuf.ListValue': $0.ListValue$json,
-  '.chat.v1.EventAck': $4.EventAck$json,
-  '.common.v1.ErrorDetail': $1.ErrorDetail$json,
-  '.common.v1.ErrorDetail.MetaEntry': $1.ErrorDetail_MetaEntry$json,
+  '.common.v1.ErrorDetail': $3.ErrorDetail$json,
+  '.common.v1.ErrorDetail.MetaEntry': $3.ErrorDetail_MetaEntry$json,
   '.chat.v1.TypingEvent': $4.TypingEvent$json,
+  '.common.v1.ContactLink': $3.ContactLink$json,
   '.chat.v1.PresenceEvent': $4.PresenceEvent$json,
   '.chat.v1.ClientCommand': $4.ClientCommand$json,
   '.chat.v1.ReadMarker': $4.ReadMarker$json,
   '.chat.v1.RoomEvent': $4.RoomEvent$json,
-  '.chat.v1.Payload': $3.Payload$json,
-  '.chat.v1.TextContent': $3.TextContent$json,
-  '.chat.v1.TextAnnotation': $3.TextAnnotation$json,
-  '.chat.v1.AttachmentContent': $3.AttachmentContent$json,
-  '.chat.v1.AttachmentPreview': $3.AttachmentPreview$json,
-  '.chat.v1.ReactionContent': $3.ReactionContent$json,
-  '.chat.v1.EncryptedContent': $3.EncryptedContent$json,
-  '.chat.v1.CallContent': $3.CallContent$json,
-  '.chat.v1.MotionContent': $3.MotionContent$json,
-  '.chat.v1.PassingRule': $3.PassingRule$json,
-  '.chat.v1.VoteChoice': $3.VoteChoice$json,
-  '.chat.v1.VoteCast': $3.VoteCast$json,
-  '.chat.v1.MotionTally': $3.MotionTally$json,
-  '.chat.v1.VoteTally': $3.VoteTally$json,
+  '.chat.v1.Payload': $2.Payload$json,
+  '.chat.v1.TextContent': $2.TextContent$json,
+  '.chat.v1.TextAnnotation': $2.TextAnnotation$json,
+  '.chat.v1.AttachmentContent': $2.AttachmentContent$json,
+  '.chat.v1.AttachmentPreview': $2.AttachmentPreview$json,
+  '.chat.v1.ReactionContent': $2.ReactionContent$json,
+  '.chat.v1.EncryptedContent': $2.EncryptedContent$json,
+  '.chat.v1.CallContent': $2.CallContent$json,
+  '.chat.v1.MotionContent': $2.MotionContent$json,
+  '.chat.v1.PassingRule': $2.PassingRule$json,
+  '.chat.v1.VoteChoice': $2.VoteChoice$json,
+  '.chat.v1.VoteCast': $2.VoteCast$json,
+  '.chat.v1.MotionTally': $2.MotionTally$json,
+  '.chat.v1.VoteTally': $2.VoteTally$json,
   '.chat.v1.StreamResponse': StreamResponse$json,
 };
 

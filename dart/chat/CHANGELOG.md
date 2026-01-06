@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.52.16] - 2025-1-5
+
+### Changed
+
+- events are tracked by subscription id not contacts. So a proper sync should happen prior to receiving messages correctly. 
+ 
 ## [1.52.14] - 2025-1-5
 
 ### Changed

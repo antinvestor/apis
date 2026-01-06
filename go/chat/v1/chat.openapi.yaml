@@ -584,6 +584,32 @@ components:
       type: boolean
       title: base64
       description: Specifies if the message query param is base64 encoded, which may be required for binary data
+    chat.v1.AckEvent:
+      type: object
+      properties:
+        eventId:
+          type: string
+          title: event_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        ackAt:
+          title: ack_at
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        metadata:
+          title: metadata
+          $ref: '#/components/schemas/google.protobuf.Struct'
+        error:
+          title: error
+          description: if set, indicates failure reason for this event
+          nullable: true
+          $ref: '#/components/schemas/common.v1.ErrorDetail'
+      title: AckEvent
+      additionalProperties: false
+      description: |-
+        Acknowledgement for event(s) received; server uses it to free ephemeral delivery buffers.
+         ack_event_id: last event_id client processed (inclusive).
+         If error is set, indicates the event failed to send/process correctly.
     chat.v1.AddRoomSubscriptionsRequest:
       type: object
       properties:
@@ -886,32 +912,6 @@ components:
           nullable: true
       title: EncryptedContent
       additionalProperties: false
-    chat.v1.EventAck:
-      type: object
-      properties:
-        eventId:
-          type: string
-          title: event_id
-          maxLength: 40
-          minLength: 3
-          pattern: '[0-9a-z_-]{3,40}'
-        ackAt:
-          title: ack_at
-          $ref: '#/components/schemas/google.protobuf.Timestamp'
-        metadata:
-          title: metadata
-          $ref: '#/components/schemas/google.protobuf.Struct'
-        error:
-          title: error
-          description: if set, indicates failure reason for this event
-          nullable: true
-          $ref: '#/components/schemas/common.v1.ErrorDetail'
-      title: EventAck
-      additionalProperties: false
-      description: |-
-        Acknowledgement for event(s) received; server uses it to free ephemeral delivery buffers.
-         ack_event_id: last event_id client processed (inclusive).
-         If error is set, indicates the event failed to send/process correctly.
     chat.v1.GetClientStateRequest:
       type: object
       properties:
@@ -1240,15 +1240,15 @@ components:
           maxLength: 40
           minLength: 3
           pattern: '[0-9a-z_-]{3,40}'
-        source:
-          title: source
-          $ref: '#/components/schemas/common.v1.ContactLink'
         upToEventId:
           type: string
           title: up_to_event_id
           maxLength: 40
           minLength: 3
           pattern: '[0-9a-z_-]{3,40}'
+        subscriptionId:
+          type: string
+          title: subscription_id
       title: ReadMarker
       additionalProperties: false
     chat.v1.RemoveRoomSubscriptionsRequest:
@@ -1335,10 +1335,10 @@ components:
           minLength: 3
           pattern: '[0-9a-z_-]{3,40}'
           description: room_id
-        source:
-          title: source
+        subscriptionId:
+          type: string
+          title: subscription_id
           description: profile_id or service/bot id
-          $ref: '#/components/schemas/common.v1.ContactLink'
         type:
           title: type
           $ref: '#/components/schemas/chat.v1.RoomEventType'
@@ -1498,7 +1498,7 @@ components:
         ack:
           type: array
           items:
-            $ref: '#/components/schemas/chat.v1.EventAck'
+            $ref: '#/components/schemas/chat.v1.AckEvent'
           title: ack
       title: SendEventResponse
       additionalProperties: false

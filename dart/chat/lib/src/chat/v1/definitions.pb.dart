@@ -13,11 +13,11 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $1;
+import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $3;
 import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $0;
-import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $2;
+import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $1;
 import 'definitions.pbenum.dart';
-import 'payload_type.pb.dart' as $3;
+import 'payload_type.pb.dart' as $2;
 
 export 'definitions.pbenum.dart';
 
@@ -26,13 +26,13 @@ class RoomEvent extends $pb.GeneratedMessage {
   factory RoomEvent({
     $core.String? id,
     $core.String? roomId,
-    $1.ContactLink? source,
+    $core.String? subscriptionId,
     RoomEventType? type,
-    $2.Timestamp? sentAt,
+    $1.Timestamp? sentAt,
     $core.bool? edited,
     $core.bool? redacted,
     $core.String? parentId,
-    $3.Payload? payload,
+    $2.Payload? payload,
   }) {
     final $result = create();
     if (id != null) {
@@ -41,8 +41,8 @@ class RoomEvent extends $pb.GeneratedMessage {
     if (roomId != null) {
       $result.roomId = roomId;
     }
-    if (source != null) {
-      $result.source = source;
+    if (subscriptionId != null) {
+      $result.subscriptionId = subscriptionId;
     }
     if (type != null) {
       $result.type = type;
@@ -71,13 +71,13 @@ class RoomEvent extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RoomEvent', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'roomId')
-    ..aOM<$1.ContactLink>(3, _omitFieldNames ? '' : 'source', subBuilder: $1.ContactLink.create)
+    ..aOS(3, _omitFieldNames ? '' : 'subscriptionId')
     ..e<RoomEventType>(4, _omitFieldNames ? '' : 'type', $pb.PbFieldType.OE, defaultOrMaker: RoomEventType.ROOM_EVENT_TYPE_UNSPECIFIED, valueOf: RoomEventType.valueOf, enumValues: RoomEventType.values)
-    ..aOM<$2.Timestamp>(7, _omitFieldNames ? '' : 'sentAt', subBuilder: $2.Timestamp.create)
+    ..aOM<$1.Timestamp>(7, _omitFieldNames ? '' : 'sentAt', subBuilder: $1.Timestamp.create)
     ..aOB(8, _omitFieldNames ? '' : 'edited')
     ..aOB(9, _omitFieldNames ? '' : 'redacted')
     ..aOS(10, _omitFieldNames ? '' : 'parentId')
-    ..aOM<$3.Payload>(15, _omitFieldNames ? '' : 'payload', subBuilder: $3.Payload.create)
+    ..aOM<$2.Payload>(15, _omitFieldNames ? '' : 'payload', subBuilder: $2.Payload.create)
     ..hasRequiredFields = false
   ;
 
@@ -124,15 +124,13 @@ class RoomEvent extends $pb.GeneratedMessage {
   void clearRoomId() => clearField(2);
 
   @$pb.TagNumber(3)
-  $1.ContactLink get source => $_getN(2);
+  $core.String get subscriptionId => $_getSZ(2);
   @$pb.TagNumber(3)
-  set source($1.ContactLink v) { setField(3, v); }
+  set subscriptionId($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasSource() => $_has(2);
+  $core.bool hasSubscriptionId() => $_has(2);
   @$pb.TagNumber(3)
-  void clearSource() => clearField(3);
-  @$pb.TagNumber(3)
-  $1.ContactLink ensureSource() => $_ensure(2);
+  void clearSubscriptionId() => clearField(3);
 
   @$pb.TagNumber(4)
   RoomEventType get type => $_getN(3);
@@ -144,15 +142,15 @@ class RoomEvent extends $pb.GeneratedMessage {
   void clearType() => clearField(4);
 
   @$pb.TagNumber(7)
-  $2.Timestamp get sentAt => $_getN(4);
+  $1.Timestamp get sentAt => $_getN(4);
   @$pb.TagNumber(7)
-  set sentAt($2.Timestamp v) { setField(7, v); }
+  set sentAt($1.Timestamp v) { setField(7, v); }
   @$pb.TagNumber(7)
   $core.bool hasSentAt() => $_has(4);
   @$pb.TagNumber(7)
   void clearSentAt() => clearField(7);
   @$pb.TagNumber(7)
-  $2.Timestamp ensureSentAt() => $_ensure(4);
+  $1.Timestamp ensureSentAt() => $_ensure(4);
 
   @$pb.TagNumber(8)
   $core.bool get edited => $_getBF(5);
@@ -182,26 +180,26 @@ class RoomEvent extends $pb.GeneratedMessage {
   void clearParentId() => clearField(10);
 
   @$pb.TagNumber(15)
-  $3.Payload get payload => $_getN(8);
+  $2.Payload get payload => $_getN(8);
   @$pb.TagNumber(15)
-  set payload($3.Payload v) { setField(15, v); }
+  set payload($2.Payload v) { setField(15, v); }
   @$pb.TagNumber(15)
   $core.bool hasPayload() => $_has(8);
   @$pb.TagNumber(15)
   void clearPayload() => clearField(15);
   @$pb.TagNumber(15)
-  $3.Payload ensurePayload() => $_ensure(8);
+  $2.Payload ensurePayload() => $_ensure(8);
 }
 
 /// Acknowledgement for event(s) received; server uses it to free ephemeral delivery buffers.
 /// ack_event_id: last event_id client processed (inclusive).
 /// If error is set, indicates the event failed to send/process correctly.
-class EventAck extends $pb.GeneratedMessage {
-  factory EventAck({
+class AckEvent extends $pb.GeneratedMessage {
+  factory AckEvent({
     $core.String? eventId,
-    $2.Timestamp? ackAt,
+    $1.Timestamp? ackAt,
     $0.Struct? metadata,
-    $1.ErrorDetail? error,
+    $3.ErrorDetail? error,
   }) {
     final $result = create();
     if (eventId != null) {
@@ -218,15 +216,15 @@ class EventAck extends $pb.GeneratedMessage {
     }
     return $result;
   }
-  EventAck._() : super();
-  factory EventAck.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory EventAck.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  AckEvent._() : super();
+  factory AckEvent.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory AckEvent.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EventAck', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AckEvent', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
     ..aOS(2, _omitFieldNames ? '' : 'eventId')
-    ..aOM<$2.Timestamp>(3, _omitFieldNames ? '' : 'ackAt', subBuilder: $2.Timestamp.create)
+    ..aOM<$1.Timestamp>(3, _omitFieldNames ? '' : 'ackAt', subBuilder: $1.Timestamp.create)
     ..aOM<$0.Struct>(6, _omitFieldNames ? '' : 'metadata', subBuilder: $0.Struct.create)
-    ..aOM<$1.ErrorDetail>(7, _omitFieldNames ? '' : 'error', subBuilder: $1.ErrorDetail.create)
+    ..aOM<$3.ErrorDetail>(7, _omitFieldNames ? '' : 'error', subBuilder: $3.ErrorDetail.create)
     ..hasRequiredFields = false
   ;
 
@@ -234,22 +232,22 @@ class EventAck extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  EventAck clone() => EventAck()..mergeFromMessage(this);
+  AckEvent clone() => AckEvent()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  EventAck copyWith(void Function(EventAck) updates) => super.copyWith((message) => updates(message as EventAck)) as EventAck;
+  AckEvent copyWith(void Function(AckEvent) updates) => super.copyWith((message) => updates(message as AckEvent)) as AckEvent;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static EventAck create() => EventAck._();
-  EventAck createEmptyInstance() => create();
-  static $pb.PbList<EventAck> createRepeated() => $pb.PbList<EventAck>();
+  static AckEvent create() => AckEvent._();
+  AckEvent createEmptyInstance() => create();
+  static $pb.PbList<AckEvent> createRepeated() => $pb.PbList<AckEvent>();
   @$core.pragma('dart2js:noInline')
-  static EventAck getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EventAck>(create);
-  static EventAck? _defaultInstance;
+  static AckEvent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AckEvent>(create);
+  static AckEvent? _defaultInstance;
 
   @$pb.TagNumber(2)
   $core.String get eventId => $_getSZ(0);
@@ -261,15 +259,15 @@ class EventAck extends $pb.GeneratedMessage {
   void clearEventId() => clearField(2);
 
   @$pb.TagNumber(3)
-  $2.Timestamp get ackAt => $_getN(1);
+  $1.Timestamp get ackAt => $_getN(1);
   @$pb.TagNumber(3)
-  set ackAt($2.Timestamp v) { setField(3, v); }
+  set ackAt($1.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasAckAt() => $_has(1);
   @$pb.TagNumber(3)
   void clearAckAt() => clearField(3);
   @$pb.TagNumber(3)
-  $2.Timestamp ensureAckAt() => $_ensure(1);
+  $1.Timestamp ensureAckAt() => $_ensure(1);
 
   @$pb.TagNumber(6)
   $0.Struct get metadata => $_getN(2);
@@ -283,15 +281,15 @@ class EventAck extends $pb.GeneratedMessage {
   $0.Struct ensureMetadata() => $_ensure(2);
 
   @$pb.TagNumber(7)
-  $1.ErrorDetail get error => $_getN(3);
+  $3.ErrorDetail get error => $_getN(3);
   @$pb.TagNumber(7)
-  set error($1.ErrorDetail v) { setField(7, v); }
+  set error($3.ErrorDetail v) { setField(7, v); }
   @$pb.TagNumber(7)
   $core.bool hasError() => $_has(3);
   @$pb.TagNumber(7)
   void clearError() => clearField(7);
   @$pb.TagNumber(7)
-  $1.ErrorDetail ensureError() => $_ensure(3);
+  $3.ErrorDetail ensureError() => $_ensure(3);
 }
 
 /// ReceiptEvent is OPTIONAL and ephemeral.
@@ -301,19 +299,19 @@ class EventAck extends $pb.GeneratedMessage {
 /// Servers MAY drop ReceiptEvent without acknowledgment.
 class ReceiptEvent extends $pb.GeneratedMessage {
   factory ReceiptEvent({
-    $1.ContactLink? source,
     $core.String? roomId,
     $core.Iterable<$core.String>? eventId,
+    $core.String? subscriptionId,
   }) {
     final $result = create();
-    if (source != null) {
-      $result.source = source;
-    }
     if (roomId != null) {
       $result.roomId = roomId;
     }
     if (eventId != null) {
       $result.eventId.addAll(eventId);
+    }
+    if (subscriptionId != null) {
+      $result.subscriptionId = subscriptionId;
     }
     return $result;
   }
@@ -322,9 +320,9 @@ class ReceiptEvent extends $pb.GeneratedMessage {
   factory ReceiptEvent.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ReceiptEvent', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
-    ..aOM<$1.ContactLink>(1, _omitFieldNames ? '' : 'source', subBuilder: $1.ContactLink.create)
     ..aOS(2, _omitFieldNames ? '' : 'roomId')
     ..pPS(3, _omitFieldNames ? '' : 'eventId')
+    ..aOS(5, _omitFieldNames ? '' : 'subscriptionId')
     ..hasRequiredFields = false
   ;
 
@@ -349,45 +347,43 @@ class ReceiptEvent extends $pb.GeneratedMessage {
   static ReceiptEvent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ReceiptEvent>(create);
   static ReceiptEvent? _defaultInstance;
 
-  @$pb.TagNumber(1)
-  $1.ContactLink get source => $_getN(0);
-  @$pb.TagNumber(1)
-  set source($1.ContactLink v) { setField(1, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasSource() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearSource() => clearField(1);
-  @$pb.TagNumber(1)
-  $1.ContactLink ensureSource() => $_ensure(0);
-
   @$pb.TagNumber(2)
-  $core.String get roomId => $_getSZ(1);
+  $core.String get roomId => $_getSZ(0);
   @$pb.TagNumber(2)
-  set roomId($core.String v) { $_setString(1, v); }
+  set roomId($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(2)
-  $core.bool hasRoomId() => $_has(1);
+  $core.bool hasRoomId() => $_has(0);
   @$pb.TagNumber(2)
   void clearRoomId() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.List<$core.String> get eventId => $_getList(2);
+  $core.List<$core.String> get eventId => $_getList(1);
+
+  @$pb.TagNumber(5)
+  $core.String get subscriptionId => $_getSZ(2);
+  @$pb.TagNumber(5)
+  set subscriptionId($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasSubscriptionId() => $_has(2);
+  @$pb.TagNumber(5)
+  void clearSubscriptionId() => clearField(5);
 }
 
 class ReadMarker extends $pb.GeneratedMessage {
   factory ReadMarker({
     $core.String? roomId,
-    $1.ContactLink? source,
     $core.String? upToEventId,
+    $core.String? subscriptionId,
   }) {
     final $result = create();
     if (roomId != null) {
       $result.roomId = roomId;
     }
-    if (source != null) {
-      $result.source = source;
-    }
     if (upToEventId != null) {
       $result.upToEventId = upToEventId;
+    }
+    if (subscriptionId != null) {
+      $result.subscriptionId = subscriptionId;
     }
     return $result;
   }
@@ -397,8 +393,8 @@ class ReadMarker extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ReadMarker', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'roomId')
-    ..aOM<$1.ContactLink>(2, _omitFieldNames ? '' : 'source', subBuilder: $1.ContactLink.create)
     ..aOS(3, _omitFieldNames ? '' : 'upToEventId')
+    ..aOS(5, _omitFieldNames ? '' : 'subscriptionId')
     ..hasRequiredFields = false
   ;
 
@@ -432,34 +428,32 @@ class ReadMarker extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearRoomId() => clearField(1);
 
-  @$pb.TagNumber(2)
-  $1.ContactLink get source => $_getN(1);
-  @$pb.TagNumber(2)
-  set source($1.ContactLink v) { setField(2, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasSource() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearSource() => clearField(2);
-  @$pb.TagNumber(2)
-  $1.ContactLink ensureSource() => $_ensure(1);
-
   @$pb.TagNumber(3)
-  $core.String get upToEventId => $_getSZ(2);
+  $core.String get upToEventId => $_getSZ(1);
   @$pb.TagNumber(3)
-  set upToEventId($core.String v) { $_setString(2, v); }
+  set upToEventId($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(3)
-  $core.bool hasUpToEventId() => $_has(2);
+  $core.bool hasUpToEventId() => $_has(1);
   @$pb.TagNumber(3)
   void clearUpToEventId() => clearField(3);
+
+  @$pb.TagNumber(5)
+  $core.String get subscriptionId => $_getSZ(2);
+  @$pb.TagNumber(5)
+  set subscriptionId($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasSubscriptionId() => $_has(2);
+  @$pb.TagNumber(5)
+  void clearSubscriptionId() => clearField(5);
 }
 
 /// Presence event affecting a user (and visible to rooms the user is a member of)
 class PresenceEvent extends $pb.GeneratedMessage {
   factory PresenceEvent({
-    $1.ContactLink? source,
+    $3.ContactLink? source,
     PresenceStatus? status,
     $core.String? statusMsg,
-    $2.Timestamp? lastActive,
+    $1.Timestamp? lastActive,
   }) {
     final $result = create();
     if (source != null) {
@@ -481,10 +475,10 @@ class PresenceEvent extends $pb.GeneratedMessage {
   factory PresenceEvent.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PresenceEvent', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
-    ..aOM<$1.ContactLink>(1, _omitFieldNames ? '' : 'source', subBuilder: $1.ContactLink.create)
+    ..aOM<$3.ContactLink>(1, _omitFieldNames ? '' : 'source', subBuilder: $3.ContactLink.create)
     ..e<PresenceStatus>(2, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: PresenceStatus.PRESENCE_STATUS_UNSPECIFIED, valueOf: PresenceStatus.valueOf, enumValues: PresenceStatus.values)
     ..aOS(3, _omitFieldNames ? '' : 'statusMsg')
-    ..aOM<$2.Timestamp>(4, _omitFieldNames ? '' : 'lastActive', subBuilder: $2.Timestamp.create)
+    ..aOM<$1.Timestamp>(4, _omitFieldNames ? '' : 'lastActive', subBuilder: $1.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -510,15 +504,15 @@ class PresenceEvent extends $pb.GeneratedMessage {
   static PresenceEvent? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $1.ContactLink get source => $_getN(0);
+  $3.ContactLink get source => $_getN(0);
   @$pb.TagNumber(1)
-  set source($1.ContactLink v) { setField(1, v); }
+  set source($3.ContactLink v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasSource() => $_has(0);
   @$pb.TagNumber(1)
   void clearSource() => clearField(1);
   @$pb.TagNumber(1)
-  $1.ContactLink ensureSource() => $_ensure(0);
+  $3.ContactLink ensureSource() => $_ensure(0);
 
   @$pb.TagNumber(2)
   PresenceStatus get status => $_getN(1);
@@ -539,24 +533,24 @@ class PresenceEvent extends $pb.GeneratedMessage {
   void clearStatusMsg() => clearField(3);
 
   @$pb.TagNumber(4)
-  $2.Timestamp get lastActive => $_getN(3);
+  $1.Timestamp get lastActive => $_getN(3);
   @$pb.TagNumber(4)
-  set lastActive($2.Timestamp v) { setField(4, v); }
+  set lastActive($1.Timestamp v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasLastActive() => $_has(3);
   @$pb.TagNumber(4)
   void clearLastActive() => clearField(4);
   @$pb.TagNumber(4)
-  $2.Timestamp ensureLastActive() => $_ensure(3);
+  $1.Timestamp ensureLastActive() => $_ensure(3);
 }
 
 /// Typing indicator
 class TypingEvent extends $pb.GeneratedMessage {
   factory TypingEvent({
-    $1.ContactLink? source,
+    $3.ContactLink? source,
     $core.String? roomId,
     $core.bool? typing,
-    $2.Timestamp? since,
+    $1.Timestamp? since,
   }) {
     final $result = create();
     if (source != null) {
@@ -578,10 +572,10 @@ class TypingEvent extends $pb.GeneratedMessage {
   factory TypingEvent.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TypingEvent', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
-    ..aOM<$1.ContactLink>(1, _omitFieldNames ? '' : 'source', subBuilder: $1.ContactLink.create)
+    ..aOM<$3.ContactLink>(1, _omitFieldNames ? '' : 'source', subBuilder: $3.ContactLink.create)
     ..aOS(2, _omitFieldNames ? '' : 'roomId')
     ..aOB(3, _omitFieldNames ? '' : 'typing')
-    ..aOM<$2.Timestamp>(5, _omitFieldNames ? '' : 'since', subBuilder: $2.Timestamp.create)
+    ..aOM<$1.Timestamp>(5, _omitFieldNames ? '' : 'since', subBuilder: $1.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -607,15 +601,15 @@ class TypingEvent extends $pb.GeneratedMessage {
   static TypingEvent? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $1.ContactLink get source => $_getN(0);
+  $3.ContactLink get source => $_getN(0);
   @$pb.TagNumber(1)
-  set source($1.ContactLink v) { setField(1, v); }
+  set source($3.ContactLink v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasSource() => $_has(0);
   @$pb.TagNumber(1)
   void clearSource() => clearField(1);
   @$pb.TagNumber(1)
-  $1.ContactLink ensureSource() => $_ensure(0);
+  $3.ContactLink ensureSource() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.String get roomId => $_getSZ(1);
@@ -636,15 +630,15 @@ class TypingEvent extends $pb.GeneratedMessage {
   void clearTyping() => clearField(3);
 
   @$pb.TagNumber(5)
-  $2.Timestamp get since => $_getN(3);
+  $1.Timestamp get since => $_getN(3);
   @$pb.TagNumber(5)
-  set since($2.Timestamp v) { setField(5, v); }
+  set since($1.Timestamp v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasSince() => $_has(3);
   @$pb.TagNumber(5)
   void clearSince() => clearField(5);
   @$pb.TagNumber(5)
-  $2.Timestamp ensureSince() => $_ensure(3);
+  $1.Timestamp ensureSince() => $_ensure(3);
 }
 
 enum ClientCommand_State {

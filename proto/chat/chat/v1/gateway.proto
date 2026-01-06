@@ -149,7 +149,7 @@ message StreamResponse {
 // Generic client signal (typing, read markers that aren't receipts)
 message ClientSignal {
   oneof signal {
-    EventAck ack = 3;
+    AckEvent ack = 3;
     TypingEvent typing = 4;
     ReceiptEvent receipt = 2; // receipt acknowledgement for message delivery
     PresenceEvent presence = 5; // send a presence message to a room

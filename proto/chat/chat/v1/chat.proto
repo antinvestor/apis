@@ -199,7 +199,7 @@ message SendEventRequest {
 }
 
 message SendEventResponse {
-  repeated EventAck ack = 1;
+  repeated AckEvent ack = 1;
 }
 
 // History request: paging via opaque cursor. 'limit' is capped by server (e.g. 100).
