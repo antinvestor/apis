@@ -21,13 +21,81 @@ import 'events.pbenum.dart';
 
 export 'events.pbenum.dart';
 
+class Subscription extends $pb.GeneratedMessage {
+  factory Subscription({
+    $core.String? subscriptionId,
+    $3.ContactLink? contactLink,
+  }) {
+    final $result = create();
+    if (subscriptionId != null) {
+      $result.subscriptionId = subscriptionId;
+    }
+    if (contactLink != null) {
+      $result.contactLink = contactLink;
+    }
+    return $result;
+  }
+  Subscription._() : super();
+  factory Subscription.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory Subscription.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Subscription', package: const $pb.PackageName(_omitMessageNames ? '' : 'events.v1'), createEmptyInstance: create)
+    ..aOS(3, _omitFieldNames ? '' : 'subscriptionId')
+    ..aOM<$3.ContactLink>(5, _omitFieldNames ? '' : 'contactLink', subBuilder: $3.ContactLink.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  Subscription clone() => Subscription()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  Subscription copyWith(void Function(Subscription) updates) => super.copyWith((message) => updates(message as Subscription)) as Subscription;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static Subscription create() => Subscription._();
+  Subscription createEmptyInstance() => create();
+  static $pb.PbList<Subscription> createRepeated() => $pb.PbList<Subscription>();
+  @$core.pragma('dart2js:noInline')
+  static Subscription getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Subscription>(create);
+  static Subscription? _defaultInstance;
+
+  /// Identifies the subscription by id in transit.
+  @$pb.TagNumber(3)
+  $core.String get subscriptionId => $_getSZ(0);
+  @$pb.TagNumber(3)
+  set subscriptionId($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasSubscriptionId() => $_has(0);
+  @$pb.TagNumber(3)
+  void clearSubscriptionId() => clearField(3);
+
+  /// contact details tied to the subscription receiving the event
+  @$pb.TagNumber(5)
+  $3.ContactLink get contactLink => $_getN(1);
+  @$pb.TagNumber(5)
+  set contactLink($3.ContactLink v) { setField(5, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasContactLink() => $_has(1);
+  @$pb.TagNumber(5)
+  void clearContactLink() => clearField(5);
+  @$pb.TagNumber(5)
+  $3.ContactLink ensureContactLink() => $_ensure(1);
+}
+
 /// Link represents an event in the chat system, the core unit of data flowing
 /// through the system in real-time to end-user devices.
 class Link extends $pb.GeneratedMessage {
   factory Link({
     $core.String? eventId,
     $core.String? roomId,
-    $core.String? sourceSubscriptionId,
+    Subscription? source,
     $core.String? parentId,
     $4.RoomEventType? eventType,
     $1.Timestamp? createdAt,
@@ -40,8 +108,8 @@ class Link extends $pb.GeneratedMessage {
     if (roomId != null) {
       $result.roomId = roomId;
     }
-    if (sourceSubscriptionId != null) {
-      $result.sourceSubscriptionId = sourceSubscriptionId;
+    if (source != null) {
+      $result.source = source;
     }
     if (parentId != null) {
       $result.parentId = parentId;
@@ -64,7 +132,7 @@ class Link extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Link', package: const $pb.PackageName(_omitMessageNames ? '' : 'events.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'eventId')
     ..aOS(2, _omitFieldNames ? '' : 'roomId')
-    ..aOS(3, _omitFieldNames ? '' : 'sourceSubscriptionId')
+    ..aOM<Subscription>(3, _omitFieldNames ? '' : 'source', subBuilder: Subscription.create)
     ..aOS(5, _omitFieldNames ? '' : 'parentId')
     ..e<$4.RoomEventType>(7, _omitFieldNames ? '' : 'eventType', $pb.PbFieldType.OE, defaultOrMaker: $4.RoomEventType.ROOM_EVENT_TYPE_UNSPECIFIED, valueOf: $4.RoomEventType.valueOf, enumValues: $4.RoomEventType.values)
     ..aOM<$1.Timestamp>(10, _omitFieldNames ? '' : 'createdAt', subBuilder: $1.Timestamp.create)
@@ -115,13 +183,15 @@ class Link extends $pb.GeneratedMessage {
 
   /// Identifies the originator subscription of the event, crucial for attribution and security.
   @$pb.TagNumber(3)
-  $core.String get sourceSubscriptionId => $_getSZ(2);
+  Subscription get source => $_getN(2);
   @$pb.TagNumber(3)
-  set sourceSubscriptionId($core.String v) { $_setString(2, v); }
+  set source(Subscription v) { setField(3, v); }
   @$pb.TagNumber(3)
-  $core.bool hasSourceSubscriptionId() => $_has(2);
+  $core.bool hasSource() => $_has(2);
   @$pb.TagNumber(3)
-  void clearSourceSubscriptionId() => clearField(3);
+  void clearSource() => clearField(3);
+  @$pb.TagNumber(3)
+  Subscription ensureSource() => $_ensure(2);
 
   /// Unique identifier for a parent event related to this event, constrained for quick parsing and validation.
   @$pb.TagNumber(5)
@@ -168,74 +238,6 @@ class Link extends $pb.GeneratedMessage {
   $3.PageCursor ensureCursor() => $_ensure(6);
 }
 
-class Subscription extends $pb.GeneratedMessage {
-  factory Subscription({
-    $core.String? subscriptionId,
-    $3.ContactLink? destinations,
-  }) {
-    final $result = create();
-    if (subscriptionId != null) {
-      $result.subscriptionId = subscriptionId;
-    }
-    if (destinations != null) {
-      $result.destinations = destinations;
-    }
-    return $result;
-  }
-  Subscription._() : super();
-  factory Subscription.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory Subscription.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Subscription', package: const $pb.PackageName(_omitMessageNames ? '' : 'events.v1'), createEmptyInstance: create)
-    ..aOS(3, _omitFieldNames ? '' : 'subscriptionId')
-    ..aOM<$3.ContactLink>(5, _omitFieldNames ? '' : 'destinations', subBuilder: $3.ContactLink.create)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  Subscription clone() => Subscription()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  Subscription copyWith(void Function(Subscription) updates) => super.copyWith((message) => updates(message as Subscription)) as Subscription;
-
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static Subscription create() => Subscription._();
-  Subscription createEmptyInstance() => create();
-  static $pb.PbList<Subscription> createRepeated() => $pb.PbList<Subscription>();
-  @$core.pragma('dart2js:noInline')
-  static Subscription getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Subscription>(create);
-  static Subscription? _defaultInstance;
-
-  /// Identifies the subscription by id in transit.
-  @$pb.TagNumber(3)
-  $core.String get subscriptionId => $_getSZ(0);
-  @$pb.TagNumber(3)
-  set subscriptionId($core.String v) { $_setString(0, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasSubscriptionId() => $_has(0);
-  @$pb.TagNumber(3)
-  void clearSubscriptionId() => clearField(3);
-
-  /// contact details tied to the subscription receiving the event
-  @$pb.TagNumber(5)
-  $3.ContactLink get destinations => $_getN(1);
-  @$pb.TagNumber(5)
-  set destinations($3.ContactLink v) { setField(5, v); }
-  @$pb.TagNumber(5)
-  $core.bool hasDestinations() => $_has(1);
-  @$pb.TagNumber(5)
-  void clearDestinations() => clearField(5);
-  @$pb.TagNumber(5)
-  $3.ContactLink ensureDestinations() => $_ensure(1);
-}
-
 /// Broadcast encapsulates an event and its delivery targets for bulk distribution
 /// to multiple recipients, optimizing the initial broadcast phase.
 class Broadcast extends $pb.GeneratedMessage {
@@ -243,7 +245,6 @@ class Broadcast extends $pb.GeneratedMessage {
     Link? event,
     $core.Iterable<Subscription>? destinations,
     Broadcast_Priority? priority,
-    $3.ContactLink? source,
   }) {
     final $result = create();
     if (event != null) {
@@ -255,9 +256,6 @@ class Broadcast extends $pb.GeneratedMessage {
     if (priority != null) {
       $result.priority = priority;
     }
-    if (source != null) {
-      $result.source = source;
-    }
     return $result;
   }
   Broadcast._() : super();
@@ -268,7 +266,6 @@ class Broadcast extends $pb.GeneratedMessage {
     ..aOM<Link>(1, _omitFieldNames ? '' : 'event', subBuilder: Link.create)
     ..pc<Subscription>(2, _omitFieldNames ? '' : 'destinations', $pb.PbFieldType.PM, subBuilder: Subscription.create)
     ..e<Broadcast_Priority>(3, _omitFieldNames ? '' : 'priority', $pb.PbFieldType.OE, defaultOrMaker: Broadcast_Priority.PRIORITY_UNSPECIFIED, valueOf: Broadcast_Priority.valueOf, enumValues: Broadcast_Priority.values)
-    ..aOM<$3.ContactLink>(7, _omitFieldNames ? '' : 'source', subBuilder: $3.ContactLink.create)
     ..hasRequiredFields = false
   ;
 
@@ -317,18 +314,6 @@ class Broadcast extends $pb.GeneratedMessage {
   $core.bool hasPriority() => $_has(2);
   @$pb.TagNumber(3)
   void clearPriority() => clearField(3);
-
-  /// source contact details
-  @$pb.TagNumber(7)
-  $3.ContactLink get source => $_getN(3);
-  @$pb.TagNumber(7)
-  set source($3.ContactLink v) { setField(7, v); }
-  @$pb.TagNumber(7)
-  $core.bool hasSource() => $_has(3);
-  @$pb.TagNumber(7)
-  void clearSource() => clearField(7);
-  @$pb.TagNumber(7)
-  $3.ContactLink ensureSource() => $_ensure(3);
 }
 
 /// Delivery represents the final payload delivered to an end-user device,

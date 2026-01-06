@@ -26,6 +26,14 @@ option go_package = "github.com/antinvestor/apis/go/events/v1;eventsv1";
 option java_multiple_files = true;
 option java_package = "eventsv1";
 
+message Subscription {
+  // Identifies the subscription by id in transit.
+  string subscription_id = 3;
+
+  // contact details tied to the subscription receiving the event
+  common.v1.ContactLink contact_link = 5;
+}
+
 // Link represents an event in the chat system, the core unit of data flowing
 // through the system in real-time to end-user devices.
 message Link {
@@ -43,7 +51,7 @@ message Link {
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
   ];
   // Identifies the originator subscription of the event, crucial for attribution and security.
-  string source_subscription_id = 3;
+  Subscription source = 3;
 
   // Unique identifier for a parent event related to this event, constrained for quick parsing and validation.
   string parent_id = 5 [
@@ -59,14 +67,6 @@ message Link {
 
   // pagination cursor for distributing event to large groups
   common.v1.PageCursor cursor = 15;
-}
-
-message Subscription {
-  // Identifies the subscription by id in transit.
-  string subscription_id = 3;
-
-  // contact details tied to the subscription receiving the event
-  common.v1.ContactLink destinations = 5;
 }
 
 // Broadcast encapsulates an event and its delivery targets for bulk distribution
@@ -85,9 +85,6 @@ message Broadcast {
     PRIORITY_HIGH = 2;
   }
   Priority priority = 3;
-
-  // source contact details
-  common.v1.ContactLink source = 7;
 }
 
 // Delivery represents the final payload delivered to an end-user device,

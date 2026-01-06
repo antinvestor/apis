@@ -640,10 +640,6 @@ components:
         priority:
           title: priority
           $ref: '#/components/schemas/events.v1.Broadcast.Priority'
-        source:
-          title: source
-          description: source contact details
-          $ref: '#/components/schemas/common.v1.ContactLink'
       title: Broadcast
       additionalProperties: false
       description: |-
@@ -708,10 +704,10 @@ components:
           minLength: 3
           pattern: '[0-9a-z_-]{3,20}'
           description: Identifies the chat room or context, ensuring data is routed to the correct group.
-        sourceSubscriptionId:
-          type: string
-          title: source_subscription_id
+        source:
+          title: source
           description: Identifies the originator subscription of the event, crucial for attribution and security.
+          $ref: '#/components/schemas/events.v1.Subscription'
         parentId:
           type: string
           title: parent_id
@@ -743,8 +739,8 @@ components:
           type: string
           title: subscription_id
           description: Identifies the subscription by id in transit.
-        destinations:
-          title: destinations
+        contactLink:
+          title: contact_link
           description: contact details tied to the subscription receiving the event
           $ref: '#/components/schemas/common.v1.ContactLink'
       title: Subscription

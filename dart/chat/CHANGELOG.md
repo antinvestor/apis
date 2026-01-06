@@ -4,6 +4,12 @@
 
 ### Changed
 
+- further improvements to correctly handle subscription id propagation 
+
+## [1.52.17] - 2025-1-5
+
+### Changed
+
 - adapt events api to easily propagate subscription id & contact links appropriately. 
 
 ## [1.52.16] - 2025-1-5
