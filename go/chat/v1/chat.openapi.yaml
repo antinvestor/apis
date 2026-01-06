@@ -498,11 +498,14 @@ components:
       type: object
       properties:
         roomId:
-          type: string
+          type:
+            - string
+            - "null"
           title: room_id
           maxLength: 40
           minLength: 3
           pattern: '[0-9a-z_-]{3,40}'
+          nullable: true
         eventId:
           type: array
           items:
@@ -511,9 +514,7 @@ components:
             minLength: 3
             pattern: '[0-9a-z_-]{3,40}'
           title: event_id
-          maxLength: 40
-          minLength: 3
-          pattern: '[0-9a-z_-]{3,40}'
+          minItems: 1
         subscriptionId:
           type: string
           title: subscription_id

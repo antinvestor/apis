@@ -89,24 +89,26 @@ final $typed_data.Uint8List roomEventDescriptor = $convert.base64Decode(
 const AckEvent$json = {
   '1': 'AckEvent',
   '2': [
-    {'1': 'room_id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'roomId'},
+    {'1': 'room_id', '3': 1, '4': 1, '5': 9, '8': {}, '9': 0, '10': 'roomId', '17': true},
     {'1': 'event_id', '3': 2, '4': 3, '5': 9, '8': {}, '10': 'eventId'},
     {'1': 'subscription_id', '3': 3, '4': 1, '5': 9, '10': 'subscriptionId'},
     {'1': 'ack_at', '3': 4, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'ackAt'},
-    {'1': 'error', '3': 7, '4': 1, '5': 11, '6': '.common.v1.ErrorDetail', '9': 0, '10': 'error', '17': true},
+    {'1': 'error', '3': 7, '4': 1, '5': 11, '6': '.common.v1.ErrorDetail', '9': 1, '10': 'error', '17': true},
   ],
   '8': [
+    {'1': '_room_id'},
     {'1': '_error'},
   ],
 };
 
 /// Descriptor for `AckEvent`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List ackEventDescriptor = $convert.base64Decode(
-    'CghBY2tFdmVudBI0Cgdyb29tX2lkGAEgASgJQhu6SBhyFhADGCgyEFswLTlhLXpfLV17Myw0MH'
-    '1SBnJvb21JZBI2CghldmVudF9pZBgCIAMoCUIbukgYchYQAxgoMhBbMC05YS16Xy1dezMsNDB9'
-    'UgdldmVudElkEicKD3N1YnNjcmlwdGlvbl9pZBgDIAEoCVIOc3Vic2NyaXB0aW9uSWQSMQoGYW'
-    'NrX2F0GAQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcFIFYWNrQXQSMQoFZXJyb3IY'
-    'ByABKAsyFi5jb21tb24udjEuRXJyb3JEZXRhaWxIAFIFZXJyb3KIAQFCCAoGX2Vycm9y');
+    'CghBY2tFdmVudBI8Cgdyb29tX2lkGAEgASgJQh66SBvYAQFyFhADGCgyEFswLTlhLXpfLV17My'
+    'w0MH1IAFIGcm9vbUlkiAEBEj0KCGV2ZW50X2lkGAIgAygJQiK6SB+SARwIASIYchYQAxgoMhBb'
+    'MC05YS16Xy1dezMsNDB9UgdldmVudElkEicKD3N1YnNjcmlwdGlvbl9pZBgDIAEoCVIOc3Vic2'
+    'NyaXB0aW9uSWQSMQoGYWNrX2F0GAQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcFIF'
+    'YWNrQXQSMQoFZXJyb3IYByABKAsyFi5jb21tb24udjEuRXJyb3JEZXRhaWxIAVIFZXJyb3KIAQ'
+    'FCCgoIX3Jvb21faWRCCAoGX2Vycm9y');
 
 @$core.Deprecated('Use receiptEventDescriptor instead')
 const ReceiptEvent$json = {
