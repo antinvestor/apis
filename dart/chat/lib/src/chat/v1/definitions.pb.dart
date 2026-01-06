@@ -14,7 +14,6 @@ import 'dart:core' as $core;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $3;
-import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $0;
 import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $1;
 import 'definitions.pbenum.dart';
 import 'payload_type.pb.dart' as $2;
@@ -196,24 +195,24 @@ class RoomEvent extends $pb.GeneratedMessage {
 /// If error is set, indicates the event failed to send/process correctly.
 class AckEvent extends $pb.GeneratedMessage {
   factory AckEvent({
-    $core.String? eventId,
+    $core.String? roomId,
+    $core.Iterable<$core.String>? eventId,
     $core.String? subscriptionId,
     $1.Timestamp? ackAt,
-    $0.Struct? metadata,
     $3.ErrorDetail? error,
   }) {
     final $result = create();
+    if (roomId != null) {
+      $result.roomId = roomId;
+    }
     if (eventId != null) {
-      $result.eventId = eventId;
+      $result.eventId.addAll(eventId);
     }
     if (subscriptionId != null) {
       $result.subscriptionId = subscriptionId;
     }
     if (ackAt != null) {
       $result.ackAt = ackAt;
-    }
-    if (metadata != null) {
-      $result.metadata = metadata;
     }
     if (error != null) {
       $result.error = error;
@@ -225,10 +224,10 @@ class AckEvent extends $pb.GeneratedMessage {
   factory AckEvent.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AckEvent', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
-    ..aOS(2, _omitFieldNames ? '' : 'eventId')
+    ..aOS(1, _omitFieldNames ? '' : 'roomId')
+    ..pPS(2, _omitFieldNames ? '' : 'eventId')
     ..aOS(3, _omitFieldNames ? '' : 'subscriptionId')
     ..aOM<$1.Timestamp>(4, _omitFieldNames ? '' : 'ackAt', subBuilder: $1.Timestamp.create)
-    ..aOM<$0.Struct>(6, _omitFieldNames ? '' : 'metadata', subBuilder: $0.Struct.create)
     ..aOM<$3.ErrorDetail>(7, _omitFieldNames ? '' : 'error', subBuilder: $3.ErrorDetail.create)
     ..hasRequiredFields = false
   ;
@@ -254,45 +253,37 @@ class AckEvent extends $pb.GeneratedMessage {
   static AckEvent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AckEvent>(create);
   static AckEvent? _defaultInstance;
 
+  @$pb.TagNumber(1)
+  $core.String get roomId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set roomId($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasRoomId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearRoomId() => clearField(1);
+
   @$pb.TagNumber(2)
-  $core.String get eventId => $_getSZ(0);
-  @$pb.TagNumber(2)
-  set eventId($core.String v) { $_setString(0, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasEventId() => $_has(0);
-  @$pb.TagNumber(2)
-  void clearEventId() => clearField(2);
+  $core.List<$core.String> get eventId => $_getList(1);
 
   @$pb.TagNumber(3)
-  $core.String get subscriptionId => $_getSZ(1);
+  $core.String get subscriptionId => $_getSZ(2);
   @$pb.TagNumber(3)
-  set subscriptionId($core.String v) { $_setString(1, v); }
+  set subscriptionId($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasSubscriptionId() => $_has(1);
+  $core.bool hasSubscriptionId() => $_has(2);
   @$pb.TagNumber(3)
   void clearSubscriptionId() => clearField(3);
 
   @$pb.TagNumber(4)
-  $1.Timestamp get ackAt => $_getN(2);
+  $1.Timestamp get ackAt => $_getN(3);
   @$pb.TagNumber(4)
   set ackAt($1.Timestamp v) { setField(4, v); }
   @$pb.TagNumber(4)
-  $core.bool hasAckAt() => $_has(2);
+  $core.bool hasAckAt() => $_has(3);
   @$pb.TagNumber(4)
   void clearAckAt() => clearField(4);
   @$pb.TagNumber(4)
-  $1.Timestamp ensureAckAt() => $_ensure(2);
-
-  @$pb.TagNumber(6)
-  $0.Struct get metadata => $_getN(3);
-  @$pb.TagNumber(6)
-  set metadata($0.Struct v) { setField(6, v); }
-  @$pb.TagNumber(6)
-  $core.bool hasMetadata() => $_has(3);
-  @$pb.TagNumber(6)
-  void clearMetadata() => clearField(6);
-  @$pb.TagNumber(6)
-  $0.Struct ensureMetadata() => $_ensure(3);
+  $1.Timestamp ensureAckAt() => $_ensure(3);
 
   @$pb.TagNumber(7)
   $3.ErrorDetail get error => $_getN(4);

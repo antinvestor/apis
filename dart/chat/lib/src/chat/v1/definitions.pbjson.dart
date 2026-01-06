@@ -89,10 +89,10 @@ final $typed_data.Uint8List roomEventDescriptor = $convert.base64Decode(
 const AckEvent$json = {
   '1': 'AckEvent',
   '2': [
-    {'1': 'event_id', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'eventId'},
+    {'1': 'room_id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'roomId'},
+    {'1': 'event_id', '3': 2, '4': 3, '5': 9, '8': {}, '10': 'eventId'},
     {'1': 'subscription_id', '3': 3, '4': 1, '5': 9, '10': 'subscriptionId'},
     {'1': 'ack_at', '3': 4, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'ackAt'},
-    {'1': 'metadata', '3': 6, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'metadata'},
     {'1': 'error', '3': 7, '4': 1, '5': 11, '6': '.common.v1.ErrorDetail', '9': 0, '10': 'error', '17': true},
   ],
   '8': [
@@ -102,11 +102,11 @@ const AckEvent$json = {
 
 /// Descriptor for `AckEvent`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List ackEventDescriptor = $convert.base64Decode(
-    'CghBY2tFdmVudBI2CghldmVudF9pZBgCIAEoCUIbukgYchYQAxgoMhBbMC05YS16Xy1dezMsND'
-    'B9UgdldmVudElkEicKD3N1YnNjcmlwdGlvbl9pZBgDIAEoCVIOc3Vic2NyaXB0aW9uSWQSMQoG'
-    'YWNrX2F0GAQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcFIFYWNrQXQSMwoIbWV0YW'
-    'RhdGEYBiABKAsyFy5nb29nbGUucHJvdG9idWYuU3RydWN0UghtZXRhZGF0YRIxCgVlcnJvchgH'
-    'IAEoCzIWLmNvbW1vbi52MS5FcnJvckRldGFpbEgAUgVlcnJvcogBAUIICgZfZXJyb3I=');
+    'CghBY2tFdmVudBI0Cgdyb29tX2lkGAEgASgJQhu6SBhyFhADGCgyEFswLTlhLXpfLV17Myw0MH'
+    '1SBnJvb21JZBI2CghldmVudF9pZBgCIAMoCUIbukgYchYQAxgoMhBbMC05YS16Xy1dezMsNDB9'
+    'UgdldmVudElkEicKD3N1YnNjcmlwdGlvbl9pZBgDIAEoCVIOc3Vic2NyaXB0aW9uSWQSMQoGYW'
+    'NrX2F0GAQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcFIFYWNrQXQSMQoFZXJyb3IY'
+    'ByABKAsyFi5jb21tb24udjEuRXJyb3JEZXRhaWxIAFIFZXJyb3KIAQFCCAoGX2Vycm9y');
 
 @$core.Deprecated('Use receiptEventDescriptor instead')
 const ReceiptEvent$json = {
@@ -129,18 +129,21 @@ final $typed_data.Uint8List receiptEventDescriptor = $convert.base64Decode(
 const ReadMarker$json = {
   '1': 'ReadMarker',
   '2': [
-    {'1': 'room_id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'roomId'},
+    {'1': 'room_id', '3': 1, '4': 1, '5': 9, '8': {}, '9': 0, '10': 'roomId', '17': true},
     {'1': 'up_to_event_id', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'upToEventId'},
     {'1': 'subscription_id', '3': 5, '4': 1, '5': 9, '10': 'subscriptionId'},
+  ],
+  '8': [
+    {'1': '_room_id'},
   ],
 };
 
 /// Descriptor for `ReadMarker`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List readMarkerDescriptor = $convert.base64Decode(
-    'CgpSZWFkTWFya2VyEjQKB3Jvb21faWQYASABKAlCG7pIGHIWEAMYKDIQWzAtOWEtel8tXXszLD'
-    'QwfVIGcm9vbUlkEkAKDnVwX3RvX2V2ZW50X2lkGAMgASgJQhu6SBhyFhADGCgyEFswLTlhLXpf'
-    'LV17Myw0MH1SC3VwVG9FdmVudElkEicKD3N1YnNjcmlwdGlvbl9pZBgFIAEoCVIOc3Vic2NyaX'
-    'B0aW9uSWQ=');
+    'CgpSZWFkTWFya2VyEjkKB3Jvb21faWQYASABKAlCG7pIGHIWEAMYKDIQWzAtOWEtel8tXXszLD'
+    'QwfUgAUgZyb29tSWSIAQESQAoOdXBfdG9fZXZlbnRfaWQYAyABKAlCG7pIGHIWEAMYKDIQWzAt'
+    'OWEtel8tXXszLDQwfVILdXBUb0V2ZW50SWQSJwoPc3Vic2NyaXB0aW9uX2lkGAUgASgJUg5zdW'
+    'JzY3JpcHRpb25JZEIKCghfcm9vbV9pZA==');
 
 @$core.Deprecated('Use presenceEventDescriptor instead')
 const PresenceEvent$json = {

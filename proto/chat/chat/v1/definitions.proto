@@ -88,14 +88,18 @@ message RoomEvent {
 // ack_event_id: last event_id client processed (inclusive).
 // If error is set, indicates the event failed to send/process correctly.
 message AckEvent {
-  string event_id = 2 [
+  string room_id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+  repeated string event_id = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   string subscription_id = 3;
   google.protobuf.Timestamp ack_at = 4;
-  google.protobuf.Struct metadata = 6;
   optional common.v1.ErrorDetail error = 7; // if set, indicates failure reason for this event
 }
 
@@ -124,7 +128,7 @@ message ReceiptEvent {
 }
 
 message ReadMarker {
-  string room_id = 1 [
+  optional string room_id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"

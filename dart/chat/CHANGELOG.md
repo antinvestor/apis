@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.52.20] - 2025-1-5
+
+### Changed
+
+- improve live updates of members in a room
+
 ## [1.52.19] - 2025-1-5
 
 ### Changed

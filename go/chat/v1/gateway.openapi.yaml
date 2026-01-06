@@ -17,8 +17,19 @@ components:
     chat.v1.AckEvent:
       type: object
       properties:
-        eventId:
+        roomId:
           type: string
+          title: room_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        eventId:
+          type: array
+          items:
+            type: string
+            maxLength: 40
+            minLength: 3
+            pattern: '[0-9a-z_-]{3,40}'
           title: event_id
           maxLength: 40
           minLength: 3
@@ -29,9 +40,6 @@ components:
         ackAt:
           title: ack_at
           $ref: '#/components/schemas/google.protobuf.Timestamp'
-        metadata:
-          title: metadata
-          $ref: '#/components/schemas/google.protobuf.Struct'
         error:
           title: error
           description: if set, indicates failure reason for this event
@@ -548,11 +556,14 @@ components:
       type: object
       properties:
         roomId:
-          type: string
+          type:
+            - string
+            - "null"
           title: room_id
           maxLength: 40
           minLength: 3
           pattern: '[0-9a-z_-]{3,40}'
+          nullable: true
         upToEventId:
           type: string
           title: up_to_event_id
