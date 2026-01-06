@@ -498,14 +498,11 @@ components:
       type: object
       properties:
         roomId:
-          type:
-            - string
-            - "null"
+          type: string
           title: room_id
           maxLength: 40
           minLength: 3
           pattern: '[0-9a-z_-]{3,40}'
-          nullable: true
         eventId:
           type: array
           items:
