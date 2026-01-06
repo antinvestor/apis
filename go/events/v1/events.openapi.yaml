@@ -634,7 +634,7 @@ components:
         destinations:
           type: array
           items:
-            $ref: '#/components/schemas/common.v1.ContactLink'
+            $ref: '#/components/schemas/events.v1.Subscription'
           title: destinations
           description: List of delivery targets specifying recipients for batch processing efficiency.
         priority:
@@ -667,10 +667,10 @@ components:
         destination:
           title: destination
           description: Specific delivery target for this delivery.
-          $ref: '#/components/schemas/common.v1.ContactLink'
+          $ref: '#/components/schemas/events.v1.Subscription'
         source:
           title: source
-          $ref: '#/components/schemas/common.v1.ContactLink'
+          $ref: '#/components/schemas/events.v1.Subscription'
         payload:
           title: payload
           $ref: '#/components/schemas/chat.v1.Payload'
@@ -736,6 +736,19 @@ components:
       description: |-
         Link represents an event in the chat system, the core unit of data flowing
          through the system in real-time to end-user devices.
+    events.v1.Subscription:
+      type: object
+      properties:
+        subscriptionId:
+          type: string
+          title: subscription_id
+          description: Identifies the subscription by id in transit.
+        destinations:
+          title: destinations
+          description: contact details tied to the subscription receiving the event
+          $ref: '#/components/schemas/common.v1.ContactLink'
+      title: Subscription
+      additionalProperties: false
     google.protobuf.ListValue:
       type: object
       properties:

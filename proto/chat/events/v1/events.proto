@@ -61,13 +61,22 @@ message Link {
   common.v1.PageCursor cursor = 15;
 }
 
+message Subscription {
+  // Identifies the subscription by id in transit.
+  string subscription_id = 3;
+
+  // contact details tied to the subscription receiving the event
+  common.v1.ContactLink destinations = 5;
+}
+
 // Broadcast encapsulates an event and its delivery targets for bulk distribution
 // to multiple recipients, optimizing the initial broadcast phase.
 message Broadcast {
   // The event to be distributed.
   Link event = 1;
+
   // List of delivery targets specifying recipients for batch processing efficiency.
-  repeated common.v1.ContactLink destinations = 2;
+  repeated Subscription destinations = 2;
 
   // Indicates priority of delivery to prioritize critical events (e.g., CALL_OFFER).
   enum Priority {
@@ -87,8 +96,8 @@ message Delivery {
   // The event data being delivered.
   Link event = 1;
   // Specific delivery target for this delivery.
-  common.v1.ContactLink destination = 2;
-  common.v1.ContactLink source = 3;
+  Subscription destination = 2;
+  Subscription source = 3;
 
   chat.v1.Payload payload = 5;
 

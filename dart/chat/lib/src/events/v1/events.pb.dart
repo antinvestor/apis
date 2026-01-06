@@ -168,12 +168,80 @@ class Link extends $pb.GeneratedMessage {
   $3.PageCursor ensureCursor() => $_ensure(6);
 }
 
+class Subscription extends $pb.GeneratedMessage {
+  factory Subscription({
+    $core.String? subscriptionId,
+    $3.ContactLink? destinations,
+  }) {
+    final $result = create();
+    if (subscriptionId != null) {
+      $result.subscriptionId = subscriptionId;
+    }
+    if (destinations != null) {
+      $result.destinations = destinations;
+    }
+    return $result;
+  }
+  Subscription._() : super();
+  factory Subscription.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory Subscription.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Subscription', package: const $pb.PackageName(_omitMessageNames ? '' : 'events.v1'), createEmptyInstance: create)
+    ..aOS(3, _omitFieldNames ? '' : 'subscriptionId')
+    ..aOM<$3.ContactLink>(5, _omitFieldNames ? '' : 'destinations', subBuilder: $3.ContactLink.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  Subscription clone() => Subscription()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  Subscription copyWith(void Function(Subscription) updates) => super.copyWith((message) => updates(message as Subscription)) as Subscription;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static Subscription create() => Subscription._();
+  Subscription createEmptyInstance() => create();
+  static $pb.PbList<Subscription> createRepeated() => $pb.PbList<Subscription>();
+  @$core.pragma('dart2js:noInline')
+  static Subscription getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Subscription>(create);
+  static Subscription? _defaultInstance;
+
+  /// Identifies the subscription by id in transit.
+  @$pb.TagNumber(3)
+  $core.String get subscriptionId => $_getSZ(0);
+  @$pb.TagNumber(3)
+  set subscriptionId($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasSubscriptionId() => $_has(0);
+  @$pb.TagNumber(3)
+  void clearSubscriptionId() => clearField(3);
+
+  /// contact details tied to the subscription receiving the event
+  @$pb.TagNumber(5)
+  $3.ContactLink get destinations => $_getN(1);
+  @$pb.TagNumber(5)
+  set destinations($3.ContactLink v) { setField(5, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasDestinations() => $_has(1);
+  @$pb.TagNumber(5)
+  void clearDestinations() => clearField(5);
+  @$pb.TagNumber(5)
+  $3.ContactLink ensureDestinations() => $_ensure(1);
+}
+
 /// Broadcast encapsulates an event and its delivery targets for bulk distribution
 /// to multiple recipients, optimizing the initial broadcast phase.
 class Broadcast extends $pb.GeneratedMessage {
   factory Broadcast({
     Link? event,
-    $core.Iterable<$3.ContactLink>? destinations,
+    $core.Iterable<Subscription>? destinations,
     Broadcast_Priority? priority,
     $3.ContactLink? source,
   }) {
@@ -198,7 +266,7 @@ class Broadcast extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Broadcast', package: const $pb.PackageName(_omitMessageNames ? '' : 'events.v1'), createEmptyInstance: create)
     ..aOM<Link>(1, _omitFieldNames ? '' : 'event', subBuilder: Link.create)
-    ..pc<$3.ContactLink>(2, _omitFieldNames ? '' : 'destinations', $pb.PbFieldType.PM, subBuilder: $3.ContactLink.create)
+    ..pc<Subscription>(2, _omitFieldNames ? '' : 'destinations', $pb.PbFieldType.PM, subBuilder: Subscription.create)
     ..e<Broadcast_Priority>(3, _omitFieldNames ? '' : 'priority', $pb.PbFieldType.OE, defaultOrMaker: Broadcast_Priority.PRIORITY_UNSPECIFIED, valueOf: Broadcast_Priority.valueOf, enumValues: Broadcast_Priority.values)
     ..aOM<$3.ContactLink>(7, _omitFieldNames ? '' : 'source', subBuilder: $3.ContactLink.create)
     ..hasRequiredFields = false
@@ -239,7 +307,7 @@ class Broadcast extends $pb.GeneratedMessage {
 
   /// List of delivery targets specifying recipients for batch processing efficiency.
   @$pb.TagNumber(2)
-  $core.List<$3.ContactLink> get destinations => $_getList(1);
+  $core.List<Subscription> get destinations => $_getList(1);
 
   @$pb.TagNumber(3)
   Broadcast_Priority get priority => $_getN(2);
@@ -268,8 +336,8 @@ class Broadcast extends $pb.GeneratedMessage {
 class Delivery extends $pb.GeneratedMessage {
   factory Delivery({
     Link? event,
-    $3.ContactLink? destination,
-    $3.ContactLink? source,
+    Subscription? destination,
+    Subscription? source,
     $2.Payload? payload,
     $core.bool? isCompressed,
     $core.int? retryCount,
@@ -305,8 +373,8 @@ class Delivery extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Delivery', package: const $pb.PackageName(_omitMessageNames ? '' : 'events.v1'), createEmptyInstance: create)
     ..aOM<Link>(1, _omitFieldNames ? '' : 'event', subBuilder: Link.create)
-    ..aOM<$3.ContactLink>(2, _omitFieldNames ? '' : 'destination', subBuilder: $3.ContactLink.create)
-    ..aOM<$3.ContactLink>(3, _omitFieldNames ? '' : 'source', subBuilder: $3.ContactLink.create)
+    ..aOM<Subscription>(2, _omitFieldNames ? '' : 'destination', subBuilder: Subscription.create)
+    ..aOM<Subscription>(3, _omitFieldNames ? '' : 'source', subBuilder: Subscription.create)
     ..aOM<$2.Payload>(5, _omitFieldNames ? '' : 'payload', subBuilder: $2.Payload.create)
     ..aOB(10, _omitFieldNames ? '' : 'isCompressed')
     ..a<$core.int>(11, _omitFieldNames ? '' : 'retryCount', $pb.PbFieldType.O3)
@@ -349,26 +417,26 @@ class Delivery extends $pb.GeneratedMessage {
 
   /// Specific delivery target for this delivery.
   @$pb.TagNumber(2)
-  $3.ContactLink get destination => $_getN(1);
+  Subscription get destination => $_getN(1);
   @$pb.TagNumber(2)
-  set destination($3.ContactLink v) { setField(2, v); }
+  set destination(Subscription v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasDestination() => $_has(1);
   @$pb.TagNumber(2)
   void clearDestination() => clearField(2);
   @$pb.TagNumber(2)
-  $3.ContactLink ensureDestination() => $_ensure(1);
+  Subscription ensureDestination() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $3.ContactLink get source => $_getN(2);
+  Subscription get source => $_getN(2);
   @$pb.TagNumber(3)
-  set source($3.ContactLink v) { setField(3, v); }
+  set source(Subscription v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasSource() => $_has(2);
   @$pb.TagNumber(3)
   void clearSource() => clearField(3);
   @$pb.TagNumber(3)
-  $3.ContactLink ensureSource() => $_ensure(2);
+  Subscription ensureSource() => $_ensure(2);
 
   @$pb.TagNumber(5)
   $2.Payload get payload => $_getN(3);
