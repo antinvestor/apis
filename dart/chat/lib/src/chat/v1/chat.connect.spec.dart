@@ -88,19 +88,10 @@ abstract final class ChatService {
   );
 
   /// Update different states that the client can be in for room subscriptions awareness
-  static const updateClientState = connect.Spec(
-    '/$name/UpdateClientState',
+  static const live = connect.Spec(
+    '/$name/Live',
     connect.StreamType.unary,
-    chatv1chat.UpdateClientStateRequest.new,
-    chatv1chat.UpdateClientStateResponse.new,
-  );
-
-  /// Get client state for a set of profiles in a room
-  static const getClientState = connect.Spec(
-    '/$name/GetClientState',
-    connect.StreamType.unary,
-    chatv1chat.GetClientStateRequest.new,
-    chatv1chat.GetClientStateResponse.new,
-    idempotency: connect.Idempotency.noSideEffects,
+    chatv1chat.LiveRequest.new,
+    chatv1chat.LiveResponse.new,
   );
 }

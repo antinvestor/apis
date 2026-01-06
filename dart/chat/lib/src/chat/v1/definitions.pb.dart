@@ -197,6 +197,7 @@ class RoomEvent extends $pb.GeneratedMessage {
 class AckEvent extends $pb.GeneratedMessage {
   factory AckEvent({
     $core.String? eventId,
+    $core.String? subscriptionId,
     $1.Timestamp? ackAt,
     $0.Struct? metadata,
     $3.ErrorDetail? error,
@@ -204,6 +205,9 @@ class AckEvent extends $pb.GeneratedMessage {
     final $result = create();
     if (eventId != null) {
       $result.eventId = eventId;
+    }
+    if (subscriptionId != null) {
+      $result.subscriptionId = subscriptionId;
     }
     if (ackAt != null) {
       $result.ackAt = ackAt;
@@ -222,7 +226,8 @@ class AckEvent extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AckEvent', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
     ..aOS(2, _omitFieldNames ? '' : 'eventId')
-    ..aOM<$1.Timestamp>(3, _omitFieldNames ? '' : 'ackAt', subBuilder: $1.Timestamp.create)
+    ..aOS(3, _omitFieldNames ? '' : 'subscriptionId')
+    ..aOM<$1.Timestamp>(4, _omitFieldNames ? '' : 'ackAt', subBuilder: $1.Timestamp.create)
     ..aOM<$0.Struct>(6, _omitFieldNames ? '' : 'metadata', subBuilder: $0.Struct.create)
     ..aOM<$3.ErrorDetail>(7, _omitFieldNames ? '' : 'error', subBuilder: $3.ErrorDetail.create)
     ..hasRequiredFields = false
@@ -259,37 +264,46 @@ class AckEvent extends $pb.GeneratedMessage {
   void clearEventId() => clearField(2);
 
   @$pb.TagNumber(3)
-  $1.Timestamp get ackAt => $_getN(1);
+  $core.String get subscriptionId => $_getSZ(1);
   @$pb.TagNumber(3)
-  set ackAt($1.Timestamp v) { setField(3, v); }
+  set subscriptionId($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(3)
-  $core.bool hasAckAt() => $_has(1);
+  $core.bool hasSubscriptionId() => $_has(1);
   @$pb.TagNumber(3)
-  void clearAckAt() => clearField(3);
-  @$pb.TagNumber(3)
-  $1.Timestamp ensureAckAt() => $_ensure(1);
+  void clearSubscriptionId() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $1.Timestamp get ackAt => $_getN(2);
+  @$pb.TagNumber(4)
+  set ackAt($1.Timestamp v) { setField(4, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasAckAt() => $_has(2);
+  @$pb.TagNumber(4)
+  void clearAckAt() => clearField(4);
+  @$pb.TagNumber(4)
+  $1.Timestamp ensureAckAt() => $_ensure(2);
 
   @$pb.TagNumber(6)
-  $0.Struct get metadata => $_getN(2);
+  $0.Struct get metadata => $_getN(3);
   @$pb.TagNumber(6)
   set metadata($0.Struct v) { setField(6, v); }
   @$pb.TagNumber(6)
-  $core.bool hasMetadata() => $_has(2);
+  $core.bool hasMetadata() => $_has(3);
   @$pb.TagNumber(6)
   void clearMetadata() => clearField(6);
   @$pb.TagNumber(6)
-  $0.Struct ensureMetadata() => $_ensure(2);
+  $0.Struct ensureMetadata() => $_ensure(3);
 
   @$pb.TagNumber(7)
-  $3.ErrorDetail get error => $_getN(3);
+  $3.ErrorDetail get error => $_getN(4);
   @$pb.TagNumber(7)
   set error($3.ErrorDetail v) { setField(7, v); }
   @$pb.TagNumber(7)
-  $core.bool hasError() => $_has(3);
+  $core.bool hasError() => $_has(4);
   @$pb.TagNumber(7)
   void clearError() => clearField(7);
   @$pb.TagNumber(7)
-  $3.ErrorDetail ensureError() => $_ensure(3);
+  $3.ErrorDetail ensureError() => $_ensure(4);
 }
 
 /// ReceiptEvent is OPTIONAL and ephemeral.
@@ -547,14 +561,14 @@ class PresenceEvent extends $pb.GeneratedMessage {
 /// Typing indicator
 class TypingEvent extends $pb.GeneratedMessage {
   factory TypingEvent({
-    $3.ContactLink? source,
+    $core.String? subscriptionId,
     $core.String? roomId,
     $core.bool? typing,
     $1.Timestamp? since,
   }) {
     final $result = create();
-    if (source != null) {
-      $result.source = source;
+    if (subscriptionId != null) {
+      $result.subscriptionId = subscriptionId;
     }
     if (roomId != null) {
       $result.roomId = roomId;
@@ -572,7 +586,7 @@ class TypingEvent extends $pb.GeneratedMessage {
   factory TypingEvent.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TypingEvent', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
-    ..aOM<$3.ContactLink>(1, _omitFieldNames ? '' : 'source', subBuilder: $3.ContactLink.create)
+    ..aOS(1, _omitFieldNames ? '' : 'subscriptionId')
     ..aOS(2, _omitFieldNames ? '' : 'roomId')
     ..aOB(3, _omitFieldNames ? '' : 'typing')
     ..aOM<$1.Timestamp>(5, _omitFieldNames ? '' : 'since', subBuilder: $1.Timestamp.create)
@@ -601,15 +615,13 @@ class TypingEvent extends $pb.GeneratedMessage {
   static TypingEvent? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $3.ContactLink get source => $_getN(0);
+  $core.String get subscriptionId => $_getSZ(0);
   @$pb.TagNumber(1)
-  set source($3.ContactLink v) { setField(1, v); }
+  set subscriptionId($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasSource() => $_has(0);
+  $core.bool hasSubscriptionId() => $_has(0);
   @$pb.TagNumber(1)
-  void clearSource() => clearField(1);
-  @$pb.TagNumber(1)
-  $3.ContactLink ensureSource() => $_ensure(0);
+  void clearSubscriptionId() => clearField(1);
 
   @$pb.TagNumber(2)
   $core.String get roomId => $_getSZ(1);
@@ -642,6 +654,10 @@ class TypingEvent extends $pb.GeneratedMessage {
 }
 
 enum ClientCommand_State {
+  receipt, 
+  ack, 
+  typing, 
+  presence, 
   readMarker, 
   event, 
   notSet
@@ -652,10 +668,26 @@ enum ClientCommand_State {
 /// ClientCommand results in at least one RoomEvent being emitted.
 class ClientCommand extends $pb.GeneratedMessage {
   factory ClientCommand({
+    ReceiptEvent? receipt,
+    AckEvent? ack,
+    TypingEvent? typing,
+    PresenceEvent? presence,
     ReadMarker? readMarker,
     RoomEvent? event,
   }) {
     final $result = create();
+    if (receipt != null) {
+      $result.receipt = receipt;
+    }
+    if (ack != null) {
+      $result.ack = ack;
+    }
+    if (typing != null) {
+      $result.typing = typing;
+    }
+    if (presence != null) {
+      $result.presence = presence;
+    }
     if (readMarker != null) {
       $result.readMarker = readMarker;
     }
@@ -669,13 +701,21 @@ class ClientCommand extends $pb.GeneratedMessage {
   factory ClientCommand.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static const $core.Map<$core.int, ClientCommand_State> _ClientCommand_StateByTag = {
-    3 : ClientCommand_State.readMarker,
+    2 : ClientCommand_State.receipt,
+    3 : ClientCommand_State.ack,
+    4 : ClientCommand_State.typing,
+    5 : ClientCommand_State.presence,
+    8 : ClientCommand_State.readMarker,
     10 : ClientCommand_State.event,
     0 : ClientCommand_State.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ClientCommand', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
-    ..oo(0, [3, 10])
-    ..aOM<ReadMarker>(3, _omitFieldNames ? '' : 'readMarker', subBuilder: ReadMarker.create)
+    ..oo(0, [2, 3, 4, 5, 8, 10])
+    ..aOM<ReceiptEvent>(2, _omitFieldNames ? '' : 'receipt', subBuilder: ReceiptEvent.create)
+    ..aOM<AckEvent>(3, _omitFieldNames ? '' : 'ack', subBuilder: AckEvent.create)
+    ..aOM<TypingEvent>(4, _omitFieldNames ? '' : 'typing', subBuilder: TypingEvent.create)
+    ..aOM<PresenceEvent>(5, _omitFieldNames ? '' : 'presence', subBuilder: PresenceEvent.create)
+    ..aOM<ReadMarker>(8, _omitFieldNames ? '' : 'readMarker', subBuilder: ReadMarker.create)
     ..aOM<RoomEvent>(10, _omitFieldNames ? '' : 'event', subBuilder: RoomEvent.create)
     ..hasRequiredFields = false
   ;
@@ -704,27 +744,71 @@ class ClientCommand extends $pb.GeneratedMessage {
   ClientCommand_State whichState() => _ClientCommand_StateByTag[$_whichOneof(0)]!;
   void clearState() => clearField($_whichOneof(0));
 
+  @$pb.TagNumber(2)
+  ReceiptEvent get receipt => $_getN(0);
+  @$pb.TagNumber(2)
+  set receipt(ReceiptEvent v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasReceipt() => $_has(0);
+  @$pb.TagNumber(2)
+  void clearReceipt() => clearField(2);
+  @$pb.TagNumber(2)
+  ReceiptEvent ensureReceipt() => $_ensure(0);
+
   @$pb.TagNumber(3)
-  ReadMarker get readMarker => $_getN(0);
+  AckEvent get ack => $_getN(1);
   @$pb.TagNumber(3)
-  set readMarker(ReadMarker v) { setField(3, v); }
+  set ack(AckEvent v) { setField(3, v); }
   @$pb.TagNumber(3)
-  $core.bool hasReadMarker() => $_has(0);
+  $core.bool hasAck() => $_has(1);
   @$pb.TagNumber(3)
-  void clearReadMarker() => clearField(3);
+  void clearAck() => clearField(3);
   @$pb.TagNumber(3)
-  ReadMarker ensureReadMarker() => $_ensure(0);
+  AckEvent ensureAck() => $_ensure(1);
+
+  @$pb.TagNumber(4)
+  TypingEvent get typing => $_getN(2);
+  @$pb.TagNumber(4)
+  set typing(TypingEvent v) { setField(4, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasTyping() => $_has(2);
+  @$pb.TagNumber(4)
+  void clearTyping() => clearField(4);
+  @$pb.TagNumber(4)
+  TypingEvent ensureTyping() => $_ensure(2);
+
+  @$pb.TagNumber(5)
+  PresenceEvent get presence => $_getN(3);
+  @$pb.TagNumber(5)
+  set presence(PresenceEvent v) { setField(5, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasPresence() => $_has(3);
+  @$pb.TagNumber(5)
+  void clearPresence() => clearField(5);
+  @$pb.TagNumber(5)
+  PresenceEvent ensurePresence() => $_ensure(3);
+
+  @$pb.TagNumber(8)
+  ReadMarker get readMarker => $_getN(4);
+  @$pb.TagNumber(8)
+  set readMarker(ReadMarker v) { setField(8, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasReadMarker() => $_has(4);
+  @$pb.TagNumber(8)
+  void clearReadMarker() => clearField(8);
+  @$pb.TagNumber(8)
+  ReadMarker ensureReadMarker() => $_ensure(4);
 
   @$pb.TagNumber(10)
-  RoomEvent get event => $_getN(1);
+  RoomEvent get event => $_getN(5);
   @$pb.TagNumber(10)
   set event(RoomEvent v) { setField(10, v); }
   @$pb.TagNumber(10)
-  $core.bool hasEvent() => $_has(1);
+  $core.bool hasEvent() => $_has(5);
   @$pb.TagNumber(10)
   void clearEvent() => clearField(10);
   @$pb.TagNumber(10)
-  RoomEvent ensureEvent() => $_ensure(1);
+  RoomEvent ensureEvent() => $_ensure(5);
 }
 
 

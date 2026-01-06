@@ -183,33 +183,15 @@ extension type ChatServiceClient (connect.Transport _transport) {
   }
 
   /// Update different states that the client can be in for room subscriptions awareness
-  Future<chatv1chat.UpdateClientStateResponse> updateClientState(
-    chatv1chat.UpdateClientStateRequest input, {
+  Future<chatv1chat.LiveResponse> live(
+    chatv1chat.LiveRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).unary(
-      specs.ChatService.updateClientState,
-      input,
-      signal: signal,
-      headers: headers,
-      onHeader: onHeader,
-      onTrailer: onTrailer,
-    );
-  }
-
-  /// Get client state for a set of profiles in a room
-  Future<chatv1chat.GetClientStateResponse> getClientState(
-    chatv1chat.GetClientStateRequest input, {
-    connect.Headers? headers,
-    connect.AbortSignal? signal,
-    Function(connect.Headers)? onHeader,
-    Function(connect.Headers)? onTrailer,
-  }) {
-    return connect.Client(_transport).unary(
-      specs.ChatService.getClientState,
+      specs.ChatService.live,
       input,
       signal: signal,
       headers: headers,

@@ -17,10 +17,7 @@ import 'package:protobuf/protobuf.dart' as $pb;
 import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $3;
 import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $0;
 import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $1;
-import 'chat.pbenum.dart';
 import 'definitions.pb.dart' as $4;
-
-export 'chat.pbenum.dart';
 
 class SendEventRequest extends $pb.GeneratedMessage {
   factory SendEventRequest({
@@ -1595,7 +1592,7 @@ class SearchRoomSubscriptionsResponse extends $pb.GeneratedMessage {
   factory SearchRoomSubscriptionsResponse({
     $core.String? roomId,
     $core.Iterable<RoomSubscription>? members,
-    $core.String? nextCursor,
+    $3.PageCursor? cursor,
   }) {
     final $result = create();
     if (roomId != null) {
@@ -1604,8 +1601,8 @@ class SearchRoomSubscriptionsResponse extends $pb.GeneratedMessage {
     if (members != null) {
       $result.members.addAll(members);
     }
-    if (nextCursor != null) {
-      $result.nextCursor = nextCursor;
+    if (cursor != null) {
+      $result.cursor = cursor;
     }
     return $result;
   }
@@ -1616,7 +1613,7 @@ class SearchRoomSubscriptionsResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SearchRoomSubscriptionsResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'roomId')
     ..pc<RoomSubscription>(2, _omitFieldNames ? '' : 'members', $pb.PbFieldType.PM, subBuilder: RoomSubscription.create)
-    ..aOS(3, _omitFieldNames ? '' : 'nextCursor')
+    ..aOM<$3.PageCursor>(4, _omitFieldNames ? '' : 'cursor', subBuilder: $3.PageCursor.create)
     ..hasRequiredFields = false
   ;
 
@@ -1653,26 +1650,24 @@ class SearchRoomSubscriptionsResponse extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.List<RoomSubscription> get members => $_getList(1);
 
-  @$pb.TagNumber(3)
-  $core.String get nextCursor => $_getSZ(2);
-  @$pb.TagNumber(3)
-  set nextCursor($core.String v) { $_setString(2, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasNextCursor() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearNextCursor() => clearField(3);
+  @$pb.TagNumber(4)
+  $3.PageCursor get cursor => $_getN(2);
+  @$pb.TagNumber(4)
+  set cursor($3.PageCursor v) { setField(4, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasCursor() => $_has(2);
+  @$pb.TagNumber(4)
+  void clearCursor() => clearField(4);
+  @$pb.TagNumber(4)
+  $3.PageCursor ensureCursor() => $_ensure(2);
 }
 
-class UpdateClientStateRequest extends $pb.GeneratedMessage {
-  factory UpdateClientStateRequest({
-    $core.String? roomId,
+class LiveRequest extends $pb.GeneratedMessage {
+  factory LiveRequest({
     $3.ContactLink? source,
     $core.Iterable<$4.ClientCommand>? clientStates,
   }) {
     final $result = create();
-    if (roomId != null) {
-      $result.roomId = roomId;
-    }
     if (source != null) {
       $result.source = source;
     }
@@ -1681,12 +1676,11 @@ class UpdateClientStateRequest extends $pb.GeneratedMessage {
     }
     return $result;
   }
-  UpdateClientStateRequest._() : super();
-  factory UpdateClientStateRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory UpdateClientStateRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  LiveRequest._() : super();
+  factory LiveRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory LiveRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateClientStateRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'roomId')
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LiveRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
     ..aOM<$3.ContactLink>(2, _omitFieldNames ? '' : 'source', subBuilder: $3.ContactLink.create)
     ..pc<$4.ClientCommand>(3, _omitFieldNames ? '' : 'clientStates', $pb.PbFieldType.PM, subBuilder: $4.ClientCommand.create)
     ..hasRequiredFields = false
@@ -1696,49 +1690,40 @@ class UpdateClientStateRequest extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  UpdateClientStateRequest clone() => UpdateClientStateRequest()..mergeFromMessage(this);
+  LiveRequest clone() => LiveRequest()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  UpdateClientStateRequest copyWith(void Function(UpdateClientStateRequest) updates) => super.copyWith((message) => updates(message as UpdateClientStateRequest)) as UpdateClientStateRequest;
+  LiveRequest copyWith(void Function(LiveRequest) updates) => super.copyWith((message) => updates(message as LiveRequest)) as LiveRequest;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static UpdateClientStateRequest create() => UpdateClientStateRequest._();
-  UpdateClientStateRequest createEmptyInstance() => create();
-  static $pb.PbList<UpdateClientStateRequest> createRepeated() => $pb.PbList<UpdateClientStateRequest>();
+  static LiveRequest create() => LiveRequest._();
+  LiveRequest createEmptyInstance() => create();
+  static $pb.PbList<LiveRequest> createRepeated() => $pb.PbList<LiveRequest>();
   @$core.pragma('dart2js:noInline')
-  static UpdateClientStateRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateClientStateRequest>(create);
-  static UpdateClientStateRequest? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.String get roomId => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set roomId($core.String v) { $_setString(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasRoomId() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearRoomId() => clearField(1);
+  static LiveRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LiveRequest>(create);
+  static LiveRequest? _defaultInstance;
 
   @$pb.TagNumber(2)
-  $3.ContactLink get source => $_getN(1);
+  $3.ContactLink get source => $_getN(0);
   @$pb.TagNumber(2)
   set source($3.ContactLink v) { setField(2, v); }
   @$pb.TagNumber(2)
-  $core.bool hasSource() => $_has(1);
+  $core.bool hasSource() => $_has(0);
   @$pb.TagNumber(2)
   void clearSource() => clearField(2);
   @$pb.TagNumber(2)
-  $3.ContactLink ensureSource() => $_ensure(1);
+  $3.ContactLink ensureSource() => $_ensure(0);
 
   @$pb.TagNumber(3)
-  $core.List<$4.ClientCommand> get clientStates => $_getList(2);
+  $core.List<$4.ClientCommand> get clientStates => $_getList(1);
 }
 
-class UpdateClientStateResponse extends $pb.GeneratedMessage {
-  factory UpdateClientStateResponse({
+class LiveResponse extends $pb.GeneratedMessage {
+  factory LiveResponse({
     $3.ErrorDetail? error,
   }) {
     final $result = create();
@@ -1747,11 +1732,11 @@ class UpdateClientStateResponse extends $pb.GeneratedMessage {
     }
     return $result;
   }
-  UpdateClientStateResponse._() : super();
-  factory UpdateClientStateResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory UpdateClientStateResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  LiveResponse._() : super();
+  factory LiveResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory LiveResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateClientStateResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LiveResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
     ..aOM<$3.ErrorDetail>(1, _omitFieldNames ? '' : 'error', subBuilder: $3.ErrorDetail.create)
     ..hasRequiredFields = false
   ;
@@ -1760,22 +1745,22 @@ class UpdateClientStateResponse extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  UpdateClientStateResponse clone() => UpdateClientStateResponse()..mergeFromMessage(this);
+  LiveResponse clone() => LiveResponse()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  UpdateClientStateResponse copyWith(void Function(UpdateClientStateResponse) updates) => super.copyWith((message) => updates(message as UpdateClientStateResponse)) as UpdateClientStateResponse;
+  LiveResponse copyWith(void Function(LiveResponse) updates) => super.copyWith((message) => updates(message as LiveResponse)) as LiveResponse;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static UpdateClientStateResponse create() => UpdateClientStateResponse._();
-  UpdateClientStateResponse createEmptyInstance() => create();
-  static $pb.PbList<UpdateClientStateResponse> createRepeated() => $pb.PbList<UpdateClientStateResponse>();
+  static LiveResponse create() => LiveResponse._();
+  LiveResponse createEmptyInstance() => create();
+  static $pb.PbList<LiveResponse> createRepeated() => $pb.PbList<LiveResponse>();
   @$core.pragma('dart2js:noInline')
-  static UpdateClientStateResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateClientStateResponse>(create);
-  static UpdateClientStateResponse? _defaultInstance;
+  static LiveResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LiveResponse>(create);
+  static LiveResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
   $3.ErrorDetail get error => $_getN(0);
@@ -1787,137 +1772,6 @@ class UpdateClientStateResponse extends $pb.GeneratedMessage {
   void clearError() => clearField(1);
   @$pb.TagNumber(1)
   $3.ErrorDetail ensureError() => $_ensure(0);
-}
-
-/// GetClientState obtains the state of a set of profiles in a room
-class GetClientStateRequest extends $pb.GeneratedMessage {
-  factory GetClientStateRequest({
-    $core.String? roomId,
-    $core.Iterable<$core.String>? subscriptionId,
-    GetClientStateRequest_ClientStateType? stateType,
-  }) {
-    final $result = create();
-    if (roomId != null) {
-      $result.roomId = roomId;
-    }
-    if (subscriptionId != null) {
-      $result.subscriptionId.addAll(subscriptionId);
-    }
-    if (stateType != null) {
-      $result.stateType = stateType;
-    }
-    return $result;
-  }
-  GetClientStateRequest._() : super();
-  factory GetClientStateRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory GetClientStateRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetClientStateRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'roomId')
-    ..pPS(2, _omitFieldNames ? '' : 'subscriptionId')
-    ..e<GetClientStateRequest_ClientStateType>(3, _omitFieldNames ? '' : 'stateType', $pb.PbFieldType.OE, defaultOrMaker: GetClientStateRequest_ClientStateType.CLIENT_STATE_TYPE_UNSPECIFIED, valueOf: GetClientStateRequest_ClientStateType.valueOf, enumValues: GetClientStateRequest_ClientStateType.values)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  GetClientStateRequest clone() => GetClientStateRequest()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  GetClientStateRequest copyWith(void Function(GetClientStateRequest) updates) => super.copyWith((message) => updates(message as GetClientStateRequest)) as GetClientStateRequest;
-
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static GetClientStateRequest create() => GetClientStateRequest._();
-  GetClientStateRequest createEmptyInstance() => create();
-  static $pb.PbList<GetClientStateRequest> createRepeated() => $pb.PbList<GetClientStateRequest>();
-  @$core.pragma('dart2js:noInline')
-  static GetClientStateRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetClientStateRequest>(create);
-  static GetClientStateRequest? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.String get roomId => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set roomId($core.String v) { $_setString(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasRoomId() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearRoomId() => clearField(1);
-
-  @$pb.TagNumber(2)
-  $core.List<$core.String> get subscriptionId => $_getList(1);
-
-  @$pb.TagNumber(3)
-  GetClientStateRequest_ClientStateType get stateType => $_getN(2);
-  @$pb.TagNumber(3)
-  set stateType(GetClientStateRequest_ClientStateType v) { setField(3, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasStateType() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearStateType() => clearField(3);
-}
-
-class GetClientStateResponse extends $pb.GeneratedMessage {
-  factory GetClientStateResponse({
-    $core.String? roomId,
-    $core.Iterable<$4.ClientCommand>? clientState,
-  }) {
-    final $result = create();
-    if (roomId != null) {
-      $result.roomId = roomId;
-    }
-    if (clientState != null) {
-      $result.clientState.addAll(clientState);
-    }
-    return $result;
-  }
-  GetClientStateResponse._() : super();
-  factory GetClientStateResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory GetClientStateResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetClientStateResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'roomId')
-    ..pc<$4.ClientCommand>(2, _omitFieldNames ? '' : 'clientState', $pb.PbFieldType.PM, subBuilder: $4.ClientCommand.create)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  GetClientStateResponse clone() => GetClientStateResponse()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  GetClientStateResponse copyWith(void Function(GetClientStateResponse) updates) => super.copyWith((message) => updates(message as GetClientStateResponse)) as GetClientStateResponse;
-
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static GetClientStateResponse create() => GetClientStateResponse._();
-  GetClientStateResponse createEmptyInstance() => create();
-  static $pb.PbList<GetClientStateResponse> createRepeated() => $pb.PbList<GetClientStateResponse>();
-  @$core.pragma('dart2js:noInline')
-  static GetClientStateResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetClientStateResponse>(create);
-  static GetClientStateResponse? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.String get roomId => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set roomId($core.String v) { $_setString(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasRoomId() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearRoomId() => clearField(1);
-
-  @$pb.TagNumber(2)
-  $core.List<$4.ClientCommand> get clientState => $_getList(1);
 }
 
 class ChatServiceApi {
@@ -1954,11 +1808,8 @@ class ChatServiceApi {
   $async.Future<SearchRoomSubscriptionsResponse> searchRoomSubscriptions($pb.ClientContext? ctx, SearchRoomSubscriptionsRequest request) =>
     _client.invoke<SearchRoomSubscriptionsResponse>(ctx, 'ChatService', 'SearchRoomSubscriptions', request, SearchRoomSubscriptionsResponse())
   ;
-  $async.Future<UpdateClientStateResponse> updateClientState($pb.ClientContext? ctx, UpdateClientStateRequest request) =>
-    _client.invoke<UpdateClientStateResponse>(ctx, 'ChatService', 'UpdateClientState', request, UpdateClientStateResponse())
-  ;
-  $async.Future<GetClientStateResponse> getClientState($pb.ClientContext? ctx, GetClientStateRequest request) =>
-    _client.invoke<GetClientStateResponse>(ctx, 'ChatService', 'GetClientState', request, GetClientStateResponse())
+  $async.Future<LiveResponse> live($pb.ClientContext? ctx, LiveRequest request) =>
+    _client.invoke<LiveResponse>(ctx, 'ChatService', 'Live', request, LiveResponse())
   ;
 }
 

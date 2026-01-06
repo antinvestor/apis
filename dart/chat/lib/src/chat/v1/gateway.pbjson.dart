@@ -53,7 +53,6 @@ const StreamRequest$json = {
   '1': 'StreamRequest',
   '2': [
     {'1': 'hello', '3': 1, '4': 1, '5': 11, '6': '.chat.v1.StreamHello', '9': 0, '10': 'hello'},
-    {'1': 'signal_update', '3': 11, '4': 1, '5': 11, '6': '.chat.v1.ClientSignal', '9': 0, '10': 'signalUpdate'},
     {'1': 'command', '3': 12, '4': 1, '5': 11, '6': '.chat.v1.ClientCommand', '9': 0, '10': 'command'},
   ],
   '8': [
@@ -64,9 +63,8 @@ const StreamRequest$json = {
 /// Descriptor for `StreamRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List streamRequestDescriptor = $convert.base64Decode(
     'Cg1TdHJlYW1SZXF1ZXN0EiwKBWhlbGxvGAEgASgLMhQuY2hhdC52MS5TdHJlYW1IZWxsb0gAUg'
-    'VoZWxsbxI8Cg1zaWduYWxfdXBkYXRlGAsgASgLMhUuY2hhdC52MS5DbGllbnRTaWduYWxIAFIM'
-    'c2lnbmFsVXBkYXRlEjIKB2NvbW1hbmQYDCABKAsyFi5jaGF0LnYxLkNsaWVudENvbW1hbmRIAF'
-    'IHY29tbWFuZEIJCgdwYXlsb2Fk');
+    'VoZWxsbxIyCgdjb21tYW5kGAwgASgLMhYuY2hhdC52MS5DbGllbnRDb21tYW5kSABSB2NvbW1h'
+    'bmRCCQoHcGF5bG9hZA==');
 
 @$core.Deprecated('Use streamResponseDescriptor instead')
 const StreamResponse$json = {
@@ -98,27 +96,6 @@ final $typed_data.Uint8List streamResponseDescriptor = $convert.base64Decode(
     'ZlbnRIAFILdHlwaW5nRXZlbnQSLgoFZXJyb3IYFCABKAsyFi5jb21tb24udjEuRXJyb3JEZXRh'
     'aWxIAFIFZXJyb3JCCQoHcGF5bG9hZA==');
 
-@$core.Deprecated('Use clientSignalDescriptor instead')
-const ClientSignal$json = {
-  '1': 'ClientSignal',
-  '2': [
-    {'1': 'ack', '3': 3, '4': 1, '5': 11, '6': '.chat.v1.AckEvent', '9': 0, '10': 'ack'},
-    {'1': 'typing', '3': 4, '4': 1, '5': 11, '6': '.chat.v1.TypingEvent', '9': 0, '10': 'typing'},
-    {'1': 'receipt', '3': 2, '4': 1, '5': 11, '6': '.chat.v1.ReceiptEvent', '9': 0, '10': 'receipt'},
-    {'1': 'presence', '3': 5, '4': 1, '5': 11, '6': '.chat.v1.PresenceEvent', '9': 0, '10': 'presence'},
-  ],
-  '8': [
-    {'1': 'signal'},
-  ],
-};
-
-/// Descriptor for `ClientSignal`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List clientSignalDescriptor = $convert.base64Decode(
-    'CgxDbGllbnRTaWduYWwSJQoDYWNrGAMgASgLMhEuY2hhdC52MS5BY2tFdmVudEgAUgNhY2sSLg'
-    'oGdHlwaW5nGAQgASgLMhQuY2hhdC52MS5UeXBpbmdFdmVudEgAUgZ0eXBpbmcSMQoHcmVjZWlw'
-    'dBgCIAEoCzIVLmNoYXQudjEuUmVjZWlwdEV2ZW50SABSB3JlY2VpcHQSNAoIcHJlc2VuY2UYBS'
-    'ABKAsyFi5jaGF0LnYxLlByZXNlbmNlRXZlbnRIAFIIcHJlc2VuY2VCCAoGc2lnbmFs');
-
 const $core.Map<$core.String, $core.dynamic> GatewayServiceBase$json = {
   '1': 'GatewayService',
   '2': [
@@ -132,7 +109,7 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> GatewaySer
   '.chat.v1.StreamHello': StreamHello$json,
   '.chat.v1.StreamHello.CapabilitiesEntry': StreamHello_CapabilitiesEntry$json,
   '.google.protobuf.Timestamp': $1.Timestamp$json,
-  '.chat.v1.ClientSignal': ClientSignal$json,
+  '.chat.v1.ClientCommand': $4.ClientCommand$json,
   '.chat.v1.ReceiptEvent': $4.ReceiptEvent$json,
   '.chat.v1.AckEvent': $4.AckEvent$json,
   '.google.protobuf.Struct': $0.Struct$json,
@@ -142,9 +119,8 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> GatewaySer
   '.common.v1.ErrorDetail': $3.ErrorDetail$json,
   '.common.v1.ErrorDetail.MetaEntry': $3.ErrorDetail_MetaEntry$json,
   '.chat.v1.TypingEvent': $4.TypingEvent$json,
-  '.common.v1.ContactLink': $3.ContactLink$json,
   '.chat.v1.PresenceEvent': $4.PresenceEvent$json,
-  '.chat.v1.ClientCommand': $4.ClientCommand$json,
+  '.common.v1.ContactLink': $3.ContactLink$json,
   '.chat.v1.ReadMarker': $4.ReadMarker$json,
   '.chat.v1.RoomEvent': $4.RoomEvent$json,
   '.chat.v1.Payload': $2.Payload$json,

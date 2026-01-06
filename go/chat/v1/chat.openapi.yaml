@@ -122,96 +122,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/chat.v1.DeleteRoomResponse'
-  /chat.v1.ChatService/GetClientState:
-    get:
-      tags:
-        - Real-time
-        - chat.v1.ChatService
-      summary: Get client states for profiles in a room
-      description: Retrieves client states for profiles in a room showing either which messages users have read, or presence state of the users in a room.
-      operationId: getClientStates
-      parameters:
-        - name: Connect-Protocol-Version
-          in: header
-          required: true
-          schema:
-            $ref: '#/components/schemas/connect-protocol-version'
-        - name: Connect-Timeout-Ms
-          in: header
-          schema:
-            $ref: '#/components/schemas/connect-timeout-header'
-        - name: message
-          in: query
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/chat.v1.GetClientStateRequest'
-        - name: encoding
-          in: query
-          required: true
-          schema:
-            $ref: '#/components/schemas/encoding'
-        - name: base64
-          in: query
-          schema:
-            $ref: '#/components/schemas/base64'
-        - name: compression
-          in: query
-          schema:
-            $ref: '#/components/schemas/compression'
-        - name: connect
-          in: query
-          schema:
-            $ref: '#/components/schemas/connect'
-      responses:
-        default:
-          description: Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/connect.error'
-        "200":
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/chat.v1.GetClientStateResponse'
-    post:
-      tags:
-        - Real-time
-        - chat.v1.ChatService
-      summary: Get client states for profiles in a room
-      description: Retrieves client states for profiles in a room showing either which messages users have read, or presence state of the users in a room.
-      operationId: getClientStates
-      parameters:
-        - name: Connect-Protocol-Version
-          in: header
-          required: true
-          schema:
-            $ref: '#/components/schemas/connect-protocol-version'
-        - name: Connect-Timeout-Ms
-          in: header
-          schema:
-            $ref: '#/components/schemas/connect-timeout-header'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/chat.v1.GetClientStateRequest'
-        required: true
-      responses:
-        default:
-          description: Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/connect.error'
-        "200":
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/chat.v1.GetClientStateResponse'
   /chat.v1.ChatService/GetHistory:
     get:
       tags:
@@ -302,6 +212,43 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/chat.v1.GetHistoryResponse'
+  /chat.v1.ChatService/Live:
+    post:
+      tags:
+        - Real-time
+        - chat.v1.ChatService
+      summary: Executes realtime connection updates
+      description: Executes realtime updates for events from a user and optionally Broadcasts to affiliated active participants.
+      operationId: Live
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/chat.v1.LiveRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chat.v1.LiveResponse'
   /chat.v1.ChatService/RemoveRoomSubscriptions:
     post:
       tags:
@@ -467,43 +414,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/chat.v1.SendEventResponse'
-  /chat.v1.ChatService/UpdateClientState:
-    post:
-      tags:
-        - Real-time
-        - chat.v1.ChatService
-      summary: Update state from client
-      description: Updates the state of an event in a specific room and optionally Broadcasts to all active participants.
-      operationId: updateClientState
-      parameters:
-        - name: Connect-Protocol-Version
-          in: header
-          required: true
-          schema:
-            $ref: '#/components/schemas/connect-protocol-version'
-        - name: Connect-Timeout-Ms
-          in: header
-          schema:
-            $ref: '#/components/schemas/connect-timeout-header'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/chat.v1.UpdateClientStateRequest'
-        required: true
-      responses:
-        default:
-          description: Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/connect.error'
-        "200":
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/chat.v1.UpdateClientStateResponse'
   /chat.v1.ChatService/UpdateRoom:
     post:
       tags:
@@ -593,6 +503,9 @@ components:
           maxLength: 40
           minLength: 3
           pattern: '[0-9a-z_-]{3,40}'
+        subscriptionId:
+          type: string
+          title: subscription_id
         ackAt:
           title: ack_at
           $ref: '#/components/schemas/google.protobuf.Timestamp'
@@ -773,6 +686,13 @@ components:
       type: object
       oneOf:
         - properties:
+            ack:
+              title: ack
+              $ref: '#/components/schemas/chat.v1.AckEvent'
+          title: ack
+          required:
+            - ack
+        - properties:
             event:
               title: event
               $ref: '#/components/schemas/chat.v1.RoomEvent'
@@ -780,12 +700,35 @@ components:
           required:
             - event
         - properties:
+            presence:
+              title: presence
+              description: send a presence message to a room
+              $ref: '#/components/schemas/chat.v1.PresenceEvent'
+          title: presence
+          required:
+            - presence
+        - properties:
             readMarker:
               title: read_marker
               $ref: '#/components/schemas/chat.v1.ReadMarker'
           title: read_marker
           required:
             - readMarker
+        - properties:
+            receipt:
+              title: receipt
+              description: receipt acknowledgement for message delivery
+              $ref: '#/components/schemas/chat.v1.ReceiptEvent'
+          title: receipt
+          required:
+            - receipt
+        - properties:
+            typing:
+              title: typing
+              $ref: '#/components/schemas/chat.v1.TypingEvent'
+          title: typing
+          required:
+            - typing
       title: ClientCommand
       additionalProperties: false
       description: |-
@@ -912,46 +855,6 @@ components:
           nullable: true
       title: EncryptedContent
       additionalProperties: false
-    chat.v1.GetClientStateRequest:
-      type: object
-      properties:
-        roomId:
-          type: string
-          title: room_id
-          maxLength: 40
-          minLength: 3
-          pattern: '[0-9a-z_-]{3,40}'
-        subscriptionId:
-          type: array
-          items:
-            type: string
-          title: subscription_id
-        stateType:
-          title: state_type
-          $ref: '#/components/schemas/chat.v1.GetClientStateRequest.ClientStateType'
-      title: GetClientStateRequest
-      additionalProperties: false
-      description: GetClientState obtains the state of a set of profiles in a room
-    chat.v1.GetClientStateRequest.ClientStateType:
-      type: string
-      title: ClientStateType
-      enum:
-        - CLIENT_STATE_TYPE_UNSPECIFIED
-        - CLIENT_STATE_TYPE_PRESENCE
-        - CLIENT_STATE_TYPE_READ_MARKER
-    chat.v1.GetClientStateResponse:
-      type: object
-      properties:
-        roomId:
-          type: string
-          title: room_id
-        clientState:
-          type: array
-          items:
-            $ref: '#/components/schemas/chat.v1.ClientCommand'
-          title: client_state
-      title: GetClientStateResponse
-      additionalProperties: false
     chat.v1.GetHistoryRequest:
       type: object
       properties:
@@ -987,6 +890,27 @@ components:
           type: string
           title: prev_cursor
       title: GetHistoryResponse
+      additionalProperties: false
+    chat.v1.LiveRequest:
+      type: object
+      properties:
+        source:
+          title: source
+          $ref: '#/components/schemas/common.v1.ContactLink'
+        clientStates:
+          type: array
+          items:
+            $ref: '#/components/schemas/chat.v1.ClientCommand'
+          title: client_states
+      title: LiveRequest
+      additionalProperties: false
+    chat.v1.LiveResponse:
+      type: object
+      properties:
+        error:
+          title: error
+          $ref: '#/components/schemas/common.v1.ErrorDetail'
+      title: LiveResponse
       additionalProperties: false
     chat.v1.MotionContent:
       type: object
@@ -1209,6 +1133,31 @@ components:
         - PAYLOAD_TYPE_MOTION_TALLY
         - PAYLOAD_TYPE_VOTE_TALLY
       description: Allowed message types. Extendable via new enum values; clients must ignore unknown values.
+    chat.v1.PresenceEvent:
+      type: object
+      properties:
+        source:
+          title: source
+          $ref: '#/components/schemas/common.v1.ContactLink'
+        status:
+          title: status
+          $ref: '#/components/schemas/chat.v1.PresenceStatus'
+        statusMsg:
+          type: string
+          title: status_msg
+        lastActive:
+          title: last_active
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+      title: PresenceEvent
+      additionalProperties: false
+      description: Presence event affecting a user (and visible to rooms the user is a member of)
+    chat.v1.PresenceStatus:
+      type: string
+      title: PresenceStatus
+      enum:
+        - PRESENCE_STATUS_UNSPECIFIED
+        - PRESENCE_STATUS_OFFLINE
+        - PRESENCE_STATUS_ONLINE
     chat.v1.ReactionContent:
       type: object
       properties:
@@ -1251,6 +1200,35 @@ components:
           title: subscription_id
       title: ReadMarker
       additionalProperties: false
+    chat.v1.ReceiptEvent:
+      type: object
+      properties:
+        roomId:
+          type: string
+          title: room_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        eventId:
+          type: array
+          items:
+            type: string
+            maxLength: 40
+            minLength: 3
+            pattern: '[0-9a-z_-]{3,40}'
+          title: event_id
+          minItems: 1
+        subscriptionId:
+          type: string
+          title: subscription_id
+      title: ReceiptEvent
+      additionalProperties: false
+      description: |-
+        ReceiptEvent is OPTIONAL and ephemeral.
+         Servers MAY ignore it.
+         Clients SHOULD prefer ReadMarker for durable state.
+         Servers MUST NOT persist ReceiptEvent.
+         Servers MAY drop ReceiptEvent without acknowledgment.
     chat.v1.RemoveRoomSubscriptionsRequest:
       type: object
       properties:
@@ -1447,9 +1425,9 @@ components:
           items:
             $ref: '#/components/schemas/chat.v1.RoomSubscription'
           title: members
-        nextCursor:
-          type: string
-          title: next_cursor
+        cursor:
+          title: cursor
+          $ref: '#/components/schemas/common.v1.PageCursor'
       title: SearchRoomSubscriptionsResponse
       additionalProperties: false
     chat.v1.SearchRoomsRequest:
@@ -1565,7 +1543,7 @@ components:
           nullable: true
       title: TextContent
       additionalProperties: false
-    chat.v1.UpdateClientStateRequest:
+    chat.v1.TypingEvent:
       type: object
       properties:
         roomId:
@@ -1574,24 +1552,18 @@ components:
           maxLength: 40
           minLength: 3
           pattern: '[0-9a-z_-]{3,40}'
-        source:
-          title: source
-          $ref: '#/components/schemas/common.v1.ContactLink'
-        clientStates:
-          type: array
-          items:
-            $ref: '#/components/schemas/chat.v1.ClientCommand'
-          title: client_states
-      title: UpdateClientStateRequest
+        subscriptionId:
+          type: string
+          title: subscription_id
+        typing:
+          type: boolean
+          title: typing
+        since:
+          title: since
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+      title: TypingEvent
       additionalProperties: false
-    chat.v1.UpdateClientStateResponse:
-      type: object
-      properties:
-        error:
-          title: error
-          $ref: '#/components/schemas/common.v1.ErrorDetail'
-      title: UpdateClientStateResponse
-      additionalProperties: false
+      description: Typing indicator
     chat.v1.UpdateRoomRequest:
       type: object
       properties:

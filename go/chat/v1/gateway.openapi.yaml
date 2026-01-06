@@ -23,6 +23,9 @@ components:
           maxLength: 40
           minLength: 3
           pattern: '[0-9a-z_-]{3,40}'
+        subscriptionId:
+          type: string
+          title: subscription_id
         ackAt:
           title: ack_at
           $ref: '#/components/schemas/google.protobuf.Timestamp'
@@ -172,35 +175,19 @@ components:
       type: object
       oneOf:
         - properties:
-            event:
-              title: event
-              $ref: '#/components/schemas/chat.v1.RoomEvent'
-          title: event
-          required:
-            - event
-        - properties:
-            readMarker:
-              title: read_marker
-              $ref: '#/components/schemas/chat.v1.ReadMarker'
-          title: read_marker
-          required:
-            - readMarker
-      title: ClientCommand
-      additionalProperties: false
-      description: |-
-        ClientCommand represents durable state changes initiated by the client.
-         Commands are validated, persisted, and broadcast as needed.
-         ClientCommand results in at least one RoomEvent being emitted.
-    chat.v1.ClientSignal:
-      type: object
-      oneOf:
-        - properties:
             ack:
               title: ack
               $ref: '#/components/schemas/chat.v1.AckEvent'
           title: ack
           required:
             - ack
+        - properties:
+            event:
+              title: event
+              $ref: '#/components/schemas/chat.v1.RoomEvent'
+          title: event
+          required:
+            - event
         - properties:
             presence:
               title: presence
@@ -209,6 +196,13 @@ components:
           title: presence
           required:
             - presence
+        - properties:
+            readMarker:
+              title: read_marker
+              $ref: '#/components/schemas/chat.v1.ReadMarker'
+          title: read_marker
+          required:
+            - readMarker
         - properties:
             receipt:
               title: receipt
@@ -224,9 +218,12 @@ components:
           title: typing
           required:
             - typing
-      title: ClientSignal
+      title: ClientCommand
       additionalProperties: false
-      description: Generic client signal (typing, read markers that aren't receipts)
+      description: |-
+        ClientCommand represents durable state changes initiated by the client.
+         Commands are validated, persisted, and broadcast as needed.
+         ClientCommand results in at least one RoomEvent being emitted.
     chat.v1.EncryptedContent:
       type: object
       properties:
@@ -715,13 +712,6 @@ components:
           title: hello
           required:
             - hello
-        - properties:
-            signalUpdate:
-              title: signal_update
-              $ref: '#/components/schemas/chat.v1.ClientSignal'
-          title: signal_update
-          required:
-            - signalUpdate
       title: StreamRequest
       additionalProperties: false
       description: Client message over Connect stream. After initial connect frame, client sends acks/commands.
@@ -863,15 +853,15 @@ components:
     chat.v1.TypingEvent:
       type: object
       properties:
-        source:
-          title: source
-          $ref: '#/components/schemas/common.v1.ContactLink'
         roomId:
           type: string
           title: room_id
           maxLength: 40
           minLength: 3
           pattern: '[0-9a-z_-]{3,40}'
+        subscriptionId:
+          type: string
+          title: subscription_id
         typing:
           type: boolean
           title: typing

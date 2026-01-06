@@ -113,7 +113,6 @@ message StreamRequest {
   // The client can send various payloads inside the stream after initial auth:
   oneof payload {
     StreamHello hello = 1;
-    ClientSignal signal_update = 11;
     ClientCommand command = 12;
   }
 }
@@ -143,15 +142,5 @@ message StreamResponse {
     // - MAY be recoverable (client should continue stream) or fatal.
     // - Fatal errors MUST be followed by stream termination.
     common.v1.ErrorDetail error = 20;
-  }
-}
-
-// Generic client signal (typing, read markers that aren't receipts)
-message ClientSignal {
-  oneof signal {
-    AckEvent ack = 3;
-    TypingEvent typing = 4;
-    ReceiptEvent receipt = 2; // receipt acknowledgement for message delivery
-    PresenceEvent presence = 5; // send a presence message to a room
   }
 }

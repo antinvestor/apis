@@ -13,6 +13,9 @@ components:
           maxLength: 40
           minLength: 3
           pattern: '[0-9a-z_-]{3,40}'
+        subscriptionId:
+          type: string
+          title: subscription_id
         ackAt:
           title: ack_at
           $ref: '#/components/schemas/google.protobuf.Timestamp'
@@ -162,6 +165,13 @@ components:
       type: object
       oneOf:
         - properties:
+            ack:
+              title: ack
+              $ref: '#/components/schemas/chat.v1.AckEvent'
+          title: ack
+          required:
+            - ack
+        - properties:
             event:
               title: event
               $ref: '#/components/schemas/chat.v1.RoomEvent'
@@ -169,12 +179,35 @@ components:
           required:
             - event
         - properties:
+            presence:
+              title: presence
+              description: send a presence message to a room
+              $ref: '#/components/schemas/chat.v1.PresenceEvent'
+          title: presence
+          required:
+            - presence
+        - properties:
             readMarker:
               title: read_marker
               $ref: '#/components/schemas/chat.v1.ReadMarker'
           title: read_marker
           required:
             - readMarker
+        - properties:
+            receipt:
+              title: receipt
+              description: receipt acknowledgement for message delivery
+              $ref: '#/components/schemas/chat.v1.ReceiptEvent'
+          title: receipt
+          required:
+            - receipt
+        - properties:
+            typing:
+              title: typing
+              $ref: '#/components/schemas/chat.v1.TypingEvent'
+          title: typing
+          required:
+            - typing
       title: ClientCommand
       additionalProperties: false
       description: |-
@@ -684,15 +717,15 @@ components:
     chat.v1.TypingEvent:
       type: object
       properties:
-        source:
-          title: source
-          $ref: '#/components/schemas/common.v1.ContactLink'
         roomId:
           type: string
           title: room_id
           maxLength: 40
           minLength: 3
           pattern: '[0-9a-z_-]{3,40}'
+        subscriptionId:
+          type: string
+          title: subscription_id
         typing:
           type: boolean
           title: typing

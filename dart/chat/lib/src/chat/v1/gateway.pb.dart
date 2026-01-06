@@ -99,7 +99,6 @@ class StreamHello extends $pb.GeneratedMessage {
 
 enum StreamRequest_Payload {
   hello, 
-  signalUpdate, 
   command, 
   notSet
 }
@@ -108,15 +107,11 @@ enum StreamRequest_Payload {
 class StreamRequest extends $pb.GeneratedMessage {
   factory StreamRequest({
     StreamHello? hello,
-    ClientSignal? signalUpdate,
     $4.ClientCommand? command,
   }) {
     final $result = create();
     if (hello != null) {
       $result.hello = hello;
-    }
-    if (signalUpdate != null) {
-      $result.signalUpdate = signalUpdate;
     }
     if (command != null) {
       $result.command = command;
@@ -129,14 +124,12 @@ class StreamRequest extends $pb.GeneratedMessage {
 
   static const $core.Map<$core.int, StreamRequest_Payload> _StreamRequest_PayloadByTag = {
     1 : StreamRequest_Payload.hello,
-    11 : StreamRequest_Payload.signalUpdate,
     12 : StreamRequest_Payload.command,
     0 : StreamRequest_Payload.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
-    ..oo(0, [1, 11, 12])
+    ..oo(0, [1, 12])
     ..aOM<StreamHello>(1, _omitFieldNames ? '' : 'hello', subBuilder: StreamHello.create)
-    ..aOM<ClientSignal>(11, _omitFieldNames ? '' : 'signalUpdate', subBuilder: ClientSignal.create)
     ..aOM<$4.ClientCommand>(12, _omitFieldNames ? '' : 'command', subBuilder: $4.ClientCommand.create)
     ..hasRequiredFields = false
   ;
@@ -176,27 +169,16 @@ class StreamRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   StreamHello ensureHello() => $_ensure(0);
 
-  @$pb.TagNumber(11)
-  ClientSignal get signalUpdate => $_getN(1);
-  @$pb.TagNumber(11)
-  set signalUpdate(ClientSignal v) { setField(11, v); }
-  @$pb.TagNumber(11)
-  $core.bool hasSignalUpdate() => $_has(1);
-  @$pb.TagNumber(11)
-  void clearSignalUpdate() => clearField(11);
-  @$pb.TagNumber(11)
-  ClientSignal ensureSignalUpdate() => $_ensure(1);
-
   @$pb.TagNumber(12)
-  $4.ClientCommand get command => $_getN(2);
+  $4.ClientCommand get command => $_getN(1);
   @$pb.TagNumber(12)
   set command($4.ClientCommand v) { setField(12, v); }
   @$pb.TagNumber(12)
-  $core.bool hasCommand() => $_has(2);
+  $core.bool hasCommand() => $_has(1);
   @$pb.TagNumber(12)
   void clearCommand() => clearField(12);
   @$pb.TagNumber(12)
-  $4.ClientCommand ensureCommand() => $_ensure(2);
+  $4.ClientCommand ensureCommand() => $_ensure(1);
 }
 
 enum StreamResponse_Payload {
@@ -392,126 +374,6 @@ class StreamResponse extends $pb.GeneratedMessage {
   void clearError() => clearField(20);
   @$pb.TagNumber(20)
   $3.ErrorDetail ensureError() => $_ensure(7);
-}
-
-enum ClientSignal_Signal {
-  receipt, 
-  ack, 
-  typing, 
-  presence, 
-  notSet
-}
-
-/// Generic client signal (typing, read markers that aren't receipts)
-class ClientSignal extends $pb.GeneratedMessage {
-  factory ClientSignal({
-    $4.ReceiptEvent? receipt,
-    $4.AckEvent? ack,
-    $4.TypingEvent? typing,
-    $4.PresenceEvent? presence,
-  }) {
-    final $result = create();
-    if (receipt != null) {
-      $result.receipt = receipt;
-    }
-    if (ack != null) {
-      $result.ack = ack;
-    }
-    if (typing != null) {
-      $result.typing = typing;
-    }
-    if (presence != null) {
-      $result.presence = presence;
-    }
-    return $result;
-  }
-  ClientSignal._() : super();
-  factory ClientSignal.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory ClientSignal.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-
-  static const $core.Map<$core.int, ClientSignal_Signal> _ClientSignal_SignalByTag = {
-    2 : ClientSignal_Signal.receipt,
-    3 : ClientSignal_Signal.ack,
-    4 : ClientSignal_Signal.typing,
-    5 : ClientSignal_Signal.presence,
-    0 : ClientSignal_Signal.notSet
-  };
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ClientSignal', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
-    ..oo(0, [2, 3, 4, 5])
-    ..aOM<$4.ReceiptEvent>(2, _omitFieldNames ? '' : 'receipt', subBuilder: $4.ReceiptEvent.create)
-    ..aOM<$4.AckEvent>(3, _omitFieldNames ? '' : 'ack', subBuilder: $4.AckEvent.create)
-    ..aOM<$4.TypingEvent>(4, _omitFieldNames ? '' : 'typing', subBuilder: $4.TypingEvent.create)
-    ..aOM<$4.PresenceEvent>(5, _omitFieldNames ? '' : 'presence', subBuilder: $4.PresenceEvent.create)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  ClientSignal clone() => ClientSignal()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  ClientSignal copyWith(void Function(ClientSignal) updates) => super.copyWith((message) => updates(message as ClientSignal)) as ClientSignal;
-
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static ClientSignal create() => ClientSignal._();
-  ClientSignal createEmptyInstance() => create();
-  static $pb.PbList<ClientSignal> createRepeated() => $pb.PbList<ClientSignal>();
-  @$core.pragma('dart2js:noInline')
-  static ClientSignal getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ClientSignal>(create);
-  static ClientSignal? _defaultInstance;
-
-  ClientSignal_Signal whichSignal() => _ClientSignal_SignalByTag[$_whichOneof(0)]!;
-  void clearSignal() => clearField($_whichOneof(0));
-
-  @$pb.TagNumber(2)
-  $4.ReceiptEvent get receipt => $_getN(0);
-  @$pb.TagNumber(2)
-  set receipt($4.ReceiptEvent v) { setField(2, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasReceipt() => $_has(0);
-  @$pb.TagNumber(2)
-  void clearReceipt() => clearField(2);
-  @$pb.TagNumber(2)
-  $4.ReceiptEvent ensureReceipt() => $_ensure(0);
-
-  @$pb.TagNumber(3)
-  $4.AckEvent get ack => $_getN(1);
-  @$pb.TagNumber(3)
-  set ack($4.AckEvent v) { setField(3, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasAck() => $_has(1);
-  @$pb.TagNumber(3)
-  void clearAck() => clearField(3);
-  @$pb.TagNumber(3)
-  $4.AckEvent ensureAck() => $_ensure(1);
-
-  @$pb.TagNumber(4)
-  $4.TypingEvent get typing => $_getN(2);
-  @$pb.TagNumber(4)
-  set typing($4.TypingEvent v) { setField(4, v); }
-  @$pb.TagNumber(4)
-  $core.bool hasTyping() => $_has(2);
-  @$pb.TagNumber(4)
-  void clearTyping() => clearField(4);
-  @$pb.TagNumber(4)
-  $4.TypingEvent ensureTyping() => $_ensure(2);
-
-  @$pb.TagNumber(5)
-  $4.PresenceEvent get presence => $_getN(3);
-  @$pb.TagNumber(5)
-  set presence($4.PresenceEvent v) { setField(5, v); }
-  @$pb.TagNumber(5)
-  $core.bool hasPresence() => $_has(3);
-  @$pb.TagNumber(5)
-  void clearPresence() => clearField(5);
-  @$pb.TagNumber(5)
-  $4.PresenceEvent ensurePresence() => $_ensure(3);
 }
 
 class GatewayServiceApi {

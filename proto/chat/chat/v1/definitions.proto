@@ -74,6 +74,7 @@ message RoomEvent {
   google.protobuf.Timestamp sent_at = 7;
   bool edited = 8;
   bool redacted = 9;
+
   optional string parent_id = 10 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
@@ -92,7 +93,8 @@ message AckEvent {
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
-  google.protobuf.Timestamp ack_at = 3;
+  string subscription_id = 3;
+  google.protobuf.Timestamp ack_at = 4;
   google.protobuf.Struct metadata = 6;
   optional common.v1.ErrorDetail error = 7; // if set, indicates failure reason for this event
 }
@@ -153,12 +155,12 @@ enum PresenceStatus {
 
 // Typing indicator
 message TypingEvent {
-  common.v1.ContactLink source = 1;
   string room_id = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
+  string subscription_id = 1;
   bool typing = 3;
   google.protobuf.Timestamp since = 5;
 }
@@ -168,7 +170,11 @@ message TypingEvent {
 // ClientCommand results in at least one RoomEvent being emitted.
 message ClientCommand {
   oneof state {
-    ReadMarker read_marker = 3;
+    AckEvent ack = 3;
+    TypingEvent typing = 4;
+    ReceiptEvent receipt = 2; // receipt acknowledgement for message delivery
+    PresenceEvent presence = 5; // send a presence message to a room
+    ReadMarker read_marker = 8;
     RoomEvent event = 10;
   }
 }

@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.52.19] - 2025-1-5
+
+### Changed
+
+- resolve inefficiencies in event handling
+
 ## [1.52.17] - 2025-1-5
 
 ### Changed

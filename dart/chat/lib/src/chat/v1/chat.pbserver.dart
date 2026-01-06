@@ -31,8 +31,7 @@ abstract class ChatServiceBase extends $pb.GeneratedService {
   $async.Future<$5.RemoveRoomSubscriptionsResponse> removeRoomSubscriptions($pb.ServerContext ctx, $5.RemoveRoomSubscriptionsRequest request);
   $async.Future<$5.UpdateSubscriptionRoleResponse> updateSubscriptionRole($pb.ServerContext ctx, $5.UpdateSubscriptionRoleRequest request);
   $async.Future<$5.SearchRoomSubscriptionsResponse> searchRoomSubscriptions($pb.ServerContext ctx, $5.SearchRoomSubscriptionsRequest request);
-  $async.Future<$5.UpdateClientStateResponse> updateClientState($pb.ServerContext ctx, $5.UpdateClientStateRequest request);
-  $async.Future<$5.GetClientStateResponse> getClientState($pb.ServerContext ctx, $5.GetClientStateRequest request);
+  $async.Future<$5.LiveResponse> live($pb.ServerContext ctx, $5.LiveRequest request);
 
   $pb.GeneratedMessage createRequest($core.String methodName) {
     switch (methodName) {
@@ -46,8 +45,7 @@ abstract class ChatServiceBase extends $pb.GeneratedService {
       case 'RemoveRoomSubscriptions': return $5.RemoveRoomSubscriptionsRequest();
       case 'UpdateSubscriptionRole': return $5.UpdateSubscriptionRoleRequest();
       case 'SearchRoomSubscriptions': return $5.SearchRoomSubscriptionsRequest();
-      case 'UpdateClientState': return $5.UpdateClientStateRequest();
-      case 'GetClientState': return $5.GetClientStateRequest();
+      case 'Live': return $5.LiveRequest();
       default: throw $core.ArgumentError('Unknown method: $methodName');
     }
   }
@@ -64,8 +62,7 @@ abstract class ChatServiceBase extends $pb.GeneratedService {
       case 'RemoveRoomSubscriptions': return this.removeRoomSubscriptions(ctx, request as $5.RemoveRoomSubscriptionsRequest);
       case 'UpdateSubscriptionRole': return this.updateSubscriptionRole(ctx, request as $5.UpdateSubscriptionRoleRequest);
       case 'SearchRoomSubscriptions': return this.searchRoomSubscriptions(ctx, request as $5.SearchRoomSubscriptionsRequest);
-      case 'UpdateClientState': return this.updateClientState(ctx, request as $5.UpdateClientStateRequest);
-      case 'GetClientState': return this.getClientState(ctx, request as $5.GetClientStateRequest);
+      case 'Live': return this.live(ctx, request as $5.LiveRequest);
       default: throw $core.ArgumentError('Unknown method: $methodName');
     }
   }

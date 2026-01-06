@@ -90,7 +90,8 @@ const AckEvent$json = {
   '1': 'AckEvent',
   '2': [
     {'1': 'event_id', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'eventId'},
-    {'1': 'ack_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'ackAt'},
+    {'1': 'subscription_id', '3': 3, '4': 1, '5': 9, '10': 'subscriptionId'},
+    {'1': 'ack_at', '3': 4, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'ackAt'},
     {'1': 'metadata', '3': 6, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'metadata'},
     {'1': 'error', '3': 7, '4': 1, '5': 11, '6': '.common.v1.ErrorDetail', '9': 0, '10': 'error', '17': true},
   ],
@@ -102,10 +103,10 @@ const AckEvent$json = {
 /// Descriptor for `AckEvent`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List ackEventDescriptor = $convert.base64Decode(
     'CghBY2tFdmVudBI2CghldmVudF9pZBgCIAEoCUIbukgYchYQAxgoMhBbMC05YS16Xy1dezMsND'
-    'B9UgdldmVudElkEjEKBmFja19hdBgDIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBS'
-    'BWFja0F0EjMKCG1ldGFkYXRhGAYgASgLMhcuZ29vZ2xlLnByb3RvYnVmLlN0cnVjdFIIbWV0YW'
-    'RhdGESMQoFZXJyb3IYByABKAsyFi5jb21tb24udjEuRXJyb3JEZXRhaWxIAFIFZXJyb3KIAQFC'
-    'CAoGX2Vycm9y');
+    'B9UgdldmVudElkEicKD3N1YnNjcmlwdGlvbl9pZBgDIAEoCVIOc3Vic2NyaXB0aW9uSWQSMQoG'
+    'YWNrX2F0GAQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcFIFYWNrQXQSMwoIbWV0YW'
+    'RhdGEYBiABKAsyFy5nb29nbGUucHJvdG9idWYuU3RydWN0UghtZXRhZGF0YRIxCgVlcnJvchgH'
+    'IAEoCzIWLmNvbW1vbi52MS5FcnJvckRldGFpbEgAUgVlcnJvcogBAUIICgZfZXJyb3I=');
 
 @$core.Deprecated('Use receiptEventDescriptor instead')
 const ReceiptEvent$json = {
@@ -163,8 +164,8 @@ final $typed_data.Uint8List presenceEventDescriptor = $convert.base64Decode(
 const TypingEvent$json = {
   '1': 'TypingEvent',
   '2': [
-    {'1': 'source', '3': 1, '4': 1, '5': 11, '6': '.common.v1.ContactLink', '10': 'source'},
     {'1': 'room_id', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'roomId'},
+    {'1': 'subscription_id', '3': 1, '4': 1, '5': 9, '10': 'subscriptionId'},
     {'1': 'typing', '3': 3, '4': 1, '5': 8, '10': 'typing'},
     {'1': 'since', '3': 5, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'since'},
   ],
@@ -172,16 +173,20 @@ const TypingEvent$json = {
 
 /// Descriptor for `TypingEvent`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List typingEventDescriptor = $convert.base64Decode(
-    'CgtUeXBpbmdFdmVudBIuCgZzb3VyY2UYASABKAsyFi5jb21tb24udjEuQ29udGFjdExpbmtSBn'
-    'NvdXJjZRI0Cgdyb29tX2lkGAIgASgJQhu6SBhyFhADGCgyEFswLTlhLXpfLV17Myw0MH1SBnJv'
-    'b21JZBIWCgZ0eXBpbmcYAyABKAhSBnR5cGluZxIwCgVzaW5jZRgFIAEoCzIaLmdvb2dsZS5wcm'
-    '90b2J1Zi5UaW1lc3RhbXBSBXNpbmNl');
+    'CgtUeXBpbmdFdmVudBI0Cgdyb29tX2lkGAIgASgJQhu6SBhyFhADGCgyEFswLTlhLXpfLV17My'
+    'w0MH1SBnJvb21JZBInCg9zdWJzY3JpcHRpb25faWQYASABKAlSDnN1YnNjcmlwdGlvbklkEhYK'
+    'BnR5cGluZxgDIAEoCFIGdHlwaW5nEjAKBXNpbmNlGAUgASgLMhouZ29vZ2xlLnByb3RvYnVmLl'
+    'RpbWVzdGFtcFIFc2luY2U=');
 
 @$core.Deprecated('Use clientCommandDescriptor instead')
 const ClientCommand$json = {
   '1': 'ClientCommand',
   '2': [
-    {'1': 'read_marker', '3': 3, '4': 1, '5': 11, '6': '.chat.v1.ReadMarker', '9': 0, '10': 'readMarker'},
+    {'1': 'ack', '3': 3, '4': 1, '5': 11, '6': '.chat.v1.AckEvent', '9': 0, '10': 'ack'},
+    {'1': 'typing', '3': 4, '4': 1, '5': 11, '6': '.chat.v1.TypingEvent', '9': 0, '10': 'typing'},
+    {'1': 'receipt', '3': 2, '4': 1, '5': 11, '6': '.chat.v1.ReceiptEvent', '9': 0, '10': 'receipt'},
+    {'1': 'presence', '3': 5, '4': 1, '5': 11, '6': '.chat.v1.PresenceEvent', '9': 0, '10': 'presence'},
+    {'1': 'read_marker', '3': 8, '4': 1, '5': 11, '6': '.chat.v1.ReadMarker', '9': 0, '10': 'readMarker'},
     {'1': 'event', '3': 10, '4': 1, '5': 11, '6': '.chat.v1.RoomEvent', '9': 0, '10': 'event'},
   ],
   '8': [
@@ -191,7 +196,10 @@ const ClientCommand$json = {
 
 /// Descriptor for `ClientCommand`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List clientCommandDescriptor = $convert.base64Decode(
-    'Cg1DbGllbnRDb21tYW5kEjYKC3JlYWRfbWFya2VyGAMgASgLMhMuY2hhdC52MS5SZWFkTWFya2'
-    'VySABSCnJlYWRNYXJrZXISKgoFZXZlbnQYCiABKAsyEi5jaGF0LnYxLlJvb21FdmVudEgAUgVl'
-    'dmVudEIHCgVzdGF0ZQ==');
+    'Cg1DbGllbnRDb21tYW5kEiUKA2FjaxgDIAEoCzIRLmNoYXQudjEuQWNrRXZlbnRIAFIDYWNrEi'
+    '4KBnR5cGluZxgEIAEoCzIULmNoYXQudjEuVHlwaW5nRXZlbnRIAFIGdHlwaW5nEjEKB3JlY2Vp'
+    'cHQYAiABKAsyFS5jaGF0LnYxLlJlY2VpcHRFdmVudEgAUgdyZWNlaXB0EjQKCHByZXNlbmNlGA'
+    'UgASgLMhYuY2hhdC52MS5QcmVzZW5jZUV2ZW50SABSCHByZXNlbmNlEjYKC3JlYWRfbWFya2Vy'
+    'GAggASgLMhMuY2hhdC52MS5SZWFkTWFya2VySABSCnJlYWRNYXJrZXISKgoFZXZlbnQYCiABKA'
+    'syEi5jaGF0LnYxLlJvb21FdmVudEgAUgVldmVudEIHCgVzdGF0ZQ==');
 
