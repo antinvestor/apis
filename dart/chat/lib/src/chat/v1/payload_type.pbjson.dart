@@ -18,7 +18,7 @@ const PayloadType$json = {
   '1': 'PayloadType',
   '2': [
     {'1': 'PAYLOAD_TYPE_UNSPECIFIED', '2': 0},
-    {'1': 'PAYLOAD_TYPE_ACTION', '2': 1},
+    {'1': 'PAYLOAD_TYPE_MODERATION', '2': 1},
     {'1': 'PAYLOAD_TYPE_TEXT', '2': 2},
     {'1': 'PAYLOAD_TYPE_ATTACHMENT', '2': 3},
     {'1': 'PAYLOAD_TYPE_REACTION', '2': 7},
@@ -33,20 +33,20 @@ const PayloadType$json = {
 
 /// Descriptor for `PayloadType`. Decode as a `google.protobuf.EnumDescriptorProto`.
 final $typed_data.Uint8List payloadTypeDescriptor = $convert.base64Decode(
-    'CgtQYXlsb2FkVHlwZRIcChhQQVlMT0FEX1RZUEVfVU5TUEVDSUZJRUQQABIXChNQQVlMT0FEX1'
-    'RZUEVfQUNUSU9OEAESFQoRUEFZTE9BRF9UWVBFX1RFWFQQAhIbChdQQVlMT0FEX1RZUEVfQVRU'
-    'QUNITUVOVBADEhkKFVBBWUxPQURfVFlQRV9SRUFDVElPThAHEhoKFlBBWUxPQURfVFlQRV9FTk'
-    'NSWVBURUQQBhIVChFQQVlMT0FEX1RZUEVfQ0FMTBAVEhcKE1BBWUxPQURfVFlQRV9NT1RJT04Q'
-    'FhIVChFQQVlMT0FEX1RZUEVfVk9URRAXEh0KGVBBWUxPQURfVFlQRV9NT1RJT05fVEFMTFkQGB'
-    'IbChdQQVlMT0FEX1RZUEVfVk9URV9UQUxMWRAZ');
+    'CgtQYXlsb2FkVHlwZRIcChhQQVlMT0FEX1RZUEVfVU5TUEVDSUZJRUQQABIbChdQQVlMT0FEX1'
+    'RZUEVfTU9ERVJBVElPThABEhUKEVBBWUxPQURfVFlQRV9URVhUEAISGwoXUEFZTE9BRF9UWVBF'
+    'X0FUVEFDSE1FTlQQAxIZChVQQVlMT0FEX1RZUEVfUkVBQ1RJT04QBxIaChZQQVlMT0FEX1RZUE'
+    'VfRU5DUllQVEVEEAYSFQoRUEFZTE9BRF9UWVBFX0NBTEwQFRIXChNQQVlMT0FEX1RZUEVfTU9U'
+    'SU9OEBYSFQoRUEFZTE9BRF9UWVBFX1ZPVEUQFxIdChlQQVlMT0FEX1RZUEVfTU9USU9OX1RBTE'
+    'xZEBgSGwoXUEFZTE9BRF9UWVBFX1ZPVEVfVEFMTFkQGQ==');
 
-@$core.Deprecated('Use actionContentDescriptor instead')
-const ActionContent$json = {
-  '1': 'ActionContent',
+@$core.Deprecated('Use moderationContentDescriptor instead')
+const ModerationContent$json = {
+  '1': 'ModerationContent',
   '2': [
     {'1': 'body', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'body'},
     {'1': 'actor_subscription_id', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'actorSubscriptionId'},
-    {'1': 'affected_subscription_ids', '3': 3, '4': 3, '5': 9, '8': {}, '10': 'affectedSubscriptionIds'},
+    {'1': 'target_subscription_ids', '3': 3, '4': 3, '5': 9, '8': {}, '10': 'targetSubscriptionIds'},
     {'1': 'metadata', '3': 8, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'metadata'},
     {'1': 'language', '3': 4, '4': 1, '5': 9, '8': {}, '9': 0, '10': 'language', '17': true},
   ],
@@ -55,12 +55,12 @@ const ActionContent$json = {
   ],
 };
 
-/// Descriptor for `ActionContent`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List actionContentDescriptor = $convert.base64Decode(
-    'Cg1BY3Rpb25Db250ZW50Eh4KBGJvZHkYASABKAlCCrpIB3IFEAEYkE5SBGJvZHkSPQoVYWN0b3'
-    'Jfc3Vic2NyaXB0aW9uX2lkGAIgASgJQgm6SAZyBBABGCBSE2FjdG9yU3Vic2NyaXB0aW9uSWQS'
-    'XgoZYWZmZWN0ZWRfc3Vic2NyaXB0aW9uX2lkcxgDIAMoCUIiukgfkgEcGAEiGHIWEAMYKDIQWz'
-    'AtOWEtel8tXXszLDQwfVIXYWZmZWN0ZWRTdWJzY3JpcHRpb25JZHMSMwoIbWV0YWRhdGEYCCAB'
+/// Descriptor for `ModerationContent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List moderationContentDescriptor = $convert.base64Decode(
+    'ChFNb2RlcmF0aW9uQ29udGVudBIeCgRib2R5GAEgASgJQgq6SAdyBRABGJBOUgRib2R5Ej0KFW'
+    'FjdG9yX3N1YnNjcmlwdGlvbl9pZBgCIAEoCUIJukgGcgQQARggUhNhY3RvclN1YnNjcmlwdGlv'
+    'bklkEloKF3RhcmdldF9zdWJzY3JpcHRpb25faWRzGAMgAygJQiK6SB+SARwYASIYchYQAxgoMh'
+    'BbMC05YS16Xy1dezMsNDB9UhV0YXJnZXRTdWJzY3JpcHRpb25JZHMSMwoIbWV0YWRhdGEYCCAB'
     'KAsyFy5nb29nbGUucHJvdG9idWYuU3RydWN0UghtZXRhZGF0YRJLCghsYW5ndWFnZRgEIAEoCU'
     'IqukgnciUyI15bYS16QS1aXXsyLDN9KC1bYS16QS1aMC05XXsyLDh9KSokSABSCGxhbmd1YWdl'
     'iAEBQgsKCV9sYW5ndWFnZQ==');

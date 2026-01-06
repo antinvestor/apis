@@ -19,11 +19,11 @@ import 'payload_type.pbenum.dart';
 
 export 'payload_type.pbenum.dart';
 
-class ActionContent extends $pb.GeneratedMessage {
-  factory ActionContent({
+class ModerationContent extends $pb.GeneratedMessage {
+  factory ModerationContent({
     $core.String? body,
     $core.String? actorSubscriptionId,
-    $core.Iterable<$core.String>? affectedSubscriptionIds,
+    $core.Iterable<$core.String>? targetSubscriptionIds,
     $core.String? language,
     $0.Struct? metadata,
   }) {
@@ -34,8 +34,8 @@ class ActionContent extends $pb.GeneratedMessage {
     if (actorSubscriptionId != null) {
       $result.actorSubscriptionId = actorSubscriptionId;
     }
-    if (affectedSubscriptionIds != null) {
-      $result.affectedSubscriptionIds.addAll(affectedSubscriptionIds);
+    if (targetSubscriptionIds != null) {
+      $result.targetSubscriptionIds.addAll(targetSubscriptionIds);
     }
     if (language != null) {
       $result.language = language;
@@ -45,14 +45,14 @@ class ActionContent extends $pb.GeneratedMessage {
     }
     return $result;
   }
-  ActionContent._() : super();
-  factory ActionContent.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory ActionContent.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  ModerationContent._() : super();
+  factory ModerationContent.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ModerationContent.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ActionContent', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ModerationContent', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'body')
     ..aOS(2, _omitFieldNames ? '' : 'actorSubscriptionId')
-    ..pPS(3, _omitFieldNames ? '' : 'affectedSubscriptionIds')
+    ..pPS(3, _omitFieldNames ? '' : 'targetSubscriptionIds')
     ..aOS(4, _omitFieldNames ? '' : 'language')
     ..aOM<$0.Struct>(8, _omitFieldNames ? '' : 'metadata', subBuilder: $0.Struct.create)
     ..hasRequiredFields = false
@@ -62,22 +62,22 @@ class ActionContent extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  ActionContent clone() => ActionContent()..mergeFromMessage(this);
+  ModerationContent clone() => ModerationContent()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  ActionContent copyWith(void Function(ActionContent) updates) => super.copyWith((message) => updates(message as ActionContent)) as ActionContent;
+  ModerationContent copyWith(void Function(ModerationContent) updates) => super.copyWith((message) => updates(message as ModerationContent)) as ModerationContent;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static ActionContent create() => ActionContent._();
-  ActionContent createEmptyInstance() => create();
-  static $pb.PbList<ActionContent> createRepeated() => $pb.PbList<ActionContent>();
+  static ModerationContent create() => ModerationContent._();
+  ModerationContent createEmptyInstance() => create();
+  static $pb.PbList<ModerationContent> createRepeated() => $pb.PbList<ModerationContent>();
   @$core.pragma('dart2js:noInline')
-  static ActionContent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ActionContent>(create);
-  static ActionContent? _defaultInstance;
+  static ModerationContent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ModerationContent>(create);
+  static ModerationContent? _defaultInstance;
 
   /// Human-readable message body describing the action.
   /// Intended for display to end users.
@@ -100,10 +100,10 @@ class ActionContent extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearActorSubscriptionId() => clearField(2);
 
-  /// Subscription IDs of entities affected by the action.
+  /// Subscription IDs of entities targeted by the action.
   /// Must not contain duplicates and must not include the actor.
   @$pb.TagNumber(3)
-  $core.List<$core.String> get affectedSubscriptionIds => $_getList(2);
+  $core.List<$core.String> get targetSubscriptionIds => $_getList(2);
 
   /// Optional language tag for the body, using BCP-47 (e.g. "en", "fr-CA").
   @$pb.TagNumber(4)
