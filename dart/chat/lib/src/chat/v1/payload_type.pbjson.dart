@@ -18,6 +18,7 @@ const PayloadType$json = {
   '1': 'PayloadType',
   '2': [
     {'1': 'PAYLOAD_TYPE_UNSPECIFIED', '2': 0},
+    {'1': 'PAYLOAD_TYPE_ACTION', '2': 1},
     {'1': 'PAYLOAD_TYPE_TEXT', '2': 2},
     {'1': 'PAYLOAD_TYPE_ATTACHMENT', '2': 3},
     {'1': 'PAYLOAD_TYPE_REACTION', '2': 7},
@@ -32,12 +33,37 @@ const PayloadType$json = {
 
 /// Descriptor for `PayloadType`. Decode as a `google.protobuf.EnumDescriptorProto`.
 final $typed_data.Uint8List payloadTypeDescriptor = $convert.base64Decode(
-    'CgtQYXlsb2FkVHlwZRIcChhQQVlMT0FEX1RZUEVfVU5TUEVDSUZJRUQQABIVChFQQVlMT0FEX1'
-    'RZUEVfVEVYVBACEhsKF1BBWUxPQURfVFlQRV9BVFRBQ0hNRU5UEAMSGQoVUEFZTE9BRF9UWVBF'
-    'X1JFQUNUSU9OEAcSGgoWUEFZTE9BRF9UWVBFX0VOQ1JZUFRFRBAGEhUKEVBBWUxPQURfVFlQRV'
-    '9DQUxMEBUSFwoTUEFZTE9BRF9UWVBFX01PVElPThAWEhUKEVBBWUxPQURfVFlQRV9WT1RFEBcS'
-    'HQoZUEFZTE9BRF9UWVBFX01PVElPTl9UQUxMWRAYEhsKF1BBWUxPQURfVFlQRV9WT1RFX1RBTE'
-    'xZEBk=');
+    'CgtQYXlsb2FkVHlwZRIcChhQQVlMT0FEX1RZUEVfVU5TUEVDSUZJRUQQABIXChNQQVlMT0FEX1'
+    'RZUEVfQUNUSU9OEAESFQoRUEFZTE9BRF9UWVBFX1RFWFQQAhIbChdQQVlMT0FEX1RZUEVfQVRU'
+    'QUNITUVOVBADEhkKFVBBWUxPQURfVFlQRV9SRUFDVElPThAHEhoKFlBBWUxPQURfVFlQRV9FTk'
+    'NSWVBURUQQBhIVChFQQVlMT0FEX1RZUEVfQ0FMTBAVEhcKE1BBWUxPQURfVFlQRV9NT1RJT04Q'
+    'FhIVChFQQVlMT0FEX1RZUEVfVk9URRAXEh0KGVBBWUxPQURfVFlQRV9NT1RJT05fVEFMTFkQGB'
+    'IbChdQQVlMT0FEX1RZUEVfVk9URV9UQUxMWRAZ');
+
+@$core.Deprecated('Use actionContentDescriptor instead')
+const ActionContent$json = {
+  '1': 'ActionContent',
+  '2': [
+    {'1': 'body', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'body'},
+    {'1': 'actor_subscription_id', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'actorSubscriptionId'},
+    {'1': 'affected_subscription_ids', '3': 3, '4': 3, '5': 9, '8': {}, '10': 'affectedSubscriptionIds'},
+    {'1': 'metadata', '3': 8, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'metadata'},
+    {'1': 'language', '3': 4, '4': 1, '5': 9, '8': {}, '9': 0, '10': 'language', '17': true},
+  ],
+  '8': [
+    {'1': '_language'},
+  ],
+};
+
+/// Descriptor for `ActionContent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List actionContentDescriptor = $convert.base64Decode(
+    'Cg1BY3Rpb25Db250ZW50Eh4KBGJvZHkYASABKAlCCrpIB3IFEAEYkE5SBGJvZHkSPQoVYWN0b3'
+    'Jfc3Vic2NyaXB0aW9uX2lkGAIgASgJQgm6SAZyBBABGCBSE2FjdG9yU3Vic2NyaXB0aW9uSWQS'
+    'XgoZYWZmZWN0ZWRfc3Vic2NyaXB0aW9uX2lkcxgDIAMoCUIiukgfkgEcGAEiGHIWEAMYKDIQWz'
+    'AtOWEtel8tXXszLDQwfVIXYWZmZWN0ZWRTdWJzY3JpcHRpb25JZHMSMwoIbWV0YWRhdGEYCCAB'
+    'KAsyFy5nb29nbGUucHJvdG9idWYuU3RydWN0UghtZXRhZGF0YRJLCghsYW5ndWFnZRgEIAEoCU'
+    'IqukgnciUyI15bYS16QS1aXXsyLDN9KC1bYS16QS1aMC05XXsyLDh9KSokSABSCGxhbmd1YWdl'
+    'iAEBQgsKCV9sYW5ndWFnZQ==');
 
 @$core.Deprecated('Use textContentDescriptor instead')
 const TextContent$json = {

@@ -19,6 +19,116 @@ import 'payload_type.pbenum.dart';
 
 export 'payload_type.pbenum.dart';
 
+class ActionContent extends $pb.GeneratedMessage {
+  factory ActionContent({
+    $core.String? body,
+    $core.String? actorSubscriptionId,
+    $core.Iterable<$core.String>? affectedSubscriptionIds,
+    $core.String? language,
+    $0.Struct? metadata,
+  }) {
+    final $result = create();
+    if (body != null) {
+      $result.body = body;
+    }
+    if (actorSubscriptionId != null) {
+      $result.actorSubscriptionId = actorSubscriptionId;
+    }
+    if (affectedSubscriptionIds != null) {
+      $result.affectedSubscriptionIds.addAll(affectedSubscriptionIds);
+    }
+    if (language != null) {
+      $result.language = language;
+    }
+    if (metadata != null) {
+      $result.metadata = metadata;
+    }
+    return $result;
+  }
+  ActionContent._() : super();
+  factory ActionContent.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ActionContent.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ActionContent', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'body')
+    ..aOS(2, _omitFieldNames ? '' : 'actorSubscriptionId')
+    ..pPS(3, _omitFieldNames ? '' : 'affectedSubscriptionIds')
+    ..aOS(4, _omitFieldNames ? '' : 'language')
+    ..aOM<$0.Struct>(8, _omitFieldNames ? '' : 'metadata', subBuilder: $0.Struct.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ActionContent clone() => ActionContent()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ActionContent copyWith(void Function(ActionContent) updates) => super.copyWith((message) => updates(message as ActionContent)) as ActionContent;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ActionContent create() => ActionContent._();
+  ActionContent createEmptyInstance() => create();
+  static $pb.PbList<ActionContent> createRepeated() => $pb.PbList<ActionContent>();
+  @$core.pragma('dart2js:noInline')
+  static ActionContent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ActionContent>(create);
+  static ActionContent? _defaultInstance;
+
+  /// Human-readable message body describing the action.
+  /// Intended for display to end users.
+  @$pb.TagNumber(1)
+  $core.String get body => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set body($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasBody() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearBody() => clearField(1);
+
+  /// Subscription ID of the actor who initiated the action.
+  @$pb.TagNumber(2)
+  $core.String get actorSubscriptionId => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set actorSubscriptionId($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasActorSubscriptionId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearActorSubscriptionId() => clearField(2);
+
+  /// Subscription IDs of entities affected by the action.
+  /// Must not contain duplicates and must not include the actor.
+  @$pb.TagNumber(3)
+  $core.List<$core.String> get affectedSubscriptionIds => $_getList(2);
+
+  /// Optional language tag for the body, using BCP-47 (e.g. "en", "fr-CA").
+  @$pb.TagNumber(4)
+  $core.String get language => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set language($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasLanguage() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearLanguage() => clearField(4);
+
+  /// Optional structured metadata associated with the action.
+  /// Use only for non-indexed, auxiliary data.
+  @$pb.TagNumber(8)
+  $0.Struct get metadata => $_getN(4);
+  @$pb.TagNumber(8)
+  set metadata($0.Struct v) { setField(8, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasMetadata() => $_has(4);
+  @$pb.TagNumber(8)
+  void clearMetadata() => clearField(8);
+  @$pb.TagNumber(8)
+  $0.Struct ensureMetadata() => $_ensure(4);
+}
+
 class TextContent extends $pb.GeneratedMessage {
   factory TextContent({
     $core.String? body,

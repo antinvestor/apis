@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.52.23] - 2025-1-5
+
+### Changed
+
+- Introduce a new payload type called action
+
+
 ## [1.52.22] - 2025-1-5
 
 ### Changed

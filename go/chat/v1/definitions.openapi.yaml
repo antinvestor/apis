@@ -483,6 +483,7 @@ components:
       title: PayloadType
       enum:
         - PAYLOAD_TYPE_UNSPECIFIED
+        - PAYLOAD_TYPE_ACTION
         - PAYLOAD_TYPE_TEXT
         - PAYLOAD_TYPE_ATTACHMENT
         - PAYLOAD_TYPE_REACTION

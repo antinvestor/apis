@@ -16,6 +16,7 @@ import 'package:protobuf/protobuf.dart' as $pb;
 /// Allowed message types. Extendable via new enum values; clients must ignore unknown values.
 class PayloadType extends $pb.ProtobufEnum {
   static const PayloadType PAYLOAD_TYPE_UNSPECIFIED = PayloadType._(0, _omitEnumNames ? '' : 'PAYLOAD_TYPE_UNSPECIFIED');
+  static const PayloadType PAYLOAD_TYPE_ACTION = PayloadType._(1, _omitEnumNames ? '' : 'PAYLOAD_TYPE_ACTION');
   static const PayloadType PAYLOAD_TYPE_TEXT = PayloadType._(2, _omitEnumNames ? '' : 'PAYLOAD_TYPE_TEXT');
   static const PayloadType PAYLOAD_TYPE_ATTACHMENT = PayloadType._(3, _omitEnumNames ? '' : 'PAYLOAD_TYPE_ATTACHMENT');
   static const PayloadType PAYLOAD_TYPE_REACTION = PayloadType._(7, _omitEnumNames ? '' : 'PAYLOAD_TYPE_REACTION');
@@ -28,6 +29,7 @@ class PayloadType extends $pb.ProtobufEnum {
 
   static const $core.List<PayloadType> values = <PayloadType> [
     PAYLOAD_TYPE_UNSPECIFIED,
+    PAYLOAD_TYPE_ACTION,
     PAYLOAD_TYPE_TEXT,
     PAYLOAD_TYPE_ATTACHMENT,
     PAYLOAD_TYPE_REACTION,
