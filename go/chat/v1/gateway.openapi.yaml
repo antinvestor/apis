@@ -282,6 +282,51 @@ components:
           nullable: true
       title: EncryptedContent
       additionalProperties: false
+    chat.v1.ModerationContent:
+      type: object
+      properties:
+        body:
+          type: string
+          title: body
+          maxLength: 10000
+          minLength: 1
+          description: |-
+            Human-readable message body describing the action.
+             Intended for display to end users.
+        actorSubscriptionId:
+          type: string
+          title: actor_subscription_id
+          maxLength: 32
+          minLength: 1
+          description: Subscription ID of the actor who initiated the action.
+        targetSubscriptionIds:
+          type: array
+          items:
+            type: string
+            maxLength: 40
+            minLength: 3
+            pattern: '[0-9a-z_-]{3,40}'
+          title: target_subscription_ids
+          uniqueItems: true
+          description: |-
+            Subscription IDs of entities targeted by the action.
+             Must not contain duplicates and must not include the actor.
+        metadata:
+          title: metadata
+          description: |-
+            Optional structured metadata associated with the action.
+             Use only for non-indexed, auxiliary data.
+          $ref: '#/components/schemas/google.protobuf.Struct'
+        language:
+          type:
+            - string
+            - "null"
+          title: language
+          pattern: ^[a-zA-Z]{2,3}(-[a-zA-Z0-9]{2,8})*$
+          description: Optional language tag for the body, using BCP-47 (e.g. "en", "fr-CA").
+          nullable: true
+      title: ModerationContent
+      additionalProperties: false
     chat.v1.MotionContent:
       type: object
       properties:
@@ -438,6 +483,14 @@ components:
               title: encrypted
               required:
                 - encrypted
+            - properties:
+                moderation:
+                  title: moderation
+                  description: type = PAYLOAD_TYPE_MODERATION
+                  $ref: '#/components/schemas/chat.v1.ModerationContent'
+              title: moderation
+              required:
+                - moderation
             - properties:
                 motion:
                   title: motion

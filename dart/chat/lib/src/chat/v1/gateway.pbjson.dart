@@ -124,6 +124,7 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> GatewaySer
   '.chat.v1.ReadMarker': $4.ReadMarker$json,
   '.chat.v1.RoomEvent': $4.RoomEvent$json,
   '.chat.v1.Payload': $2.Payload$json,
+  '.chat.v1.ModerationContent': $2.ModerationContent$json,
   '.chat.v1.TextContent': $2.TextContent$json,
   '.chat.v1.TextAnnotation': $2.TextAnnotation$json,
   '.chat.v1.AttachmentContent': $2.AttachmentContent$json,

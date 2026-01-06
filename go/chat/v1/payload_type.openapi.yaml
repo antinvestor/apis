@@ -386,6 +386,14 @@ components:
               required:
                 - encrypted
             - properties:
+                moderation:
+                  title: moderation
+                  description: type = PAYLOAD_TYPE_MODERATION
+                  $ref: '#/components/schemas/chat.v1.ModerationContent'
+              title: moderation
+              required:
+                - moderation
+            - properties:
                 motion:
                   title: motion
                   description: type = PAYLOAD_TYPE_MOTION

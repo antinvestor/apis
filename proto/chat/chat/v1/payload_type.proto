@@ -315,6 +315,9 @@ message Payload {
     // type = PAYLOAD_TYPE_UNSPECIFIED
     google.protobuf.Struct default = 7;
 
+    // type = PAYLOAD_TYPE_MODERATION
+    ModerationContent moderation = 10;
+
     // type = PAYLOAD_TYPE_TEXT
     TextContent text = 15;
 

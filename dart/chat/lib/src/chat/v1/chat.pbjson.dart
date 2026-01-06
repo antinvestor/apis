@@ -445,6 +445,7 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> ChatServic
   '.google.protobuf.Struct.FieldsEntry': $0.Struct_FieldsEntry$json,
   '.google.protobuf.Value': $0.Value$json,
   '.google.protobuf.ListValue': $0.ListValue$json,
+  '.chat.v1.ModerationContent': $2.ModerationContent$json,
   '.chat.v1.TextContent': $2.TextContent$json,
   '.chat.v1.TextAnnotation': $2.TextAnnotation$json,
   '.chat.v1.AttachmentContent': $2.AttachmentContent$json,
