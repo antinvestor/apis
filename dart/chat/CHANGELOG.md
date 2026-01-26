@@ -1,91 +1,97 @@
 # Changelog
 
-## [1.52.24] - 2025-1-5
+## [1.53.0] - 2026-1-26
+
+### Changed
+
+- Introduce the room change content payload type
+
+## [1.52.24] - 2026-1-5
 
 ### Changed
 
 - Introduce a new payload type called action
 
 
-## [1.52.22] - 2025-1-5
+## [1.52.22] - 2026-1-5
 
 ### Changed
 
 - improve live updates of members in a room
 
-## [1.52.19] - 2025-1-5
+## [1.52.19] - 2026-1-5
 
 ### Changed
 
 - resolve inefficiencies in event handling
 
-## [1.52.17] - 2025-1-5
+## [1.52.17] - 2026-1-5
 
 ### Changed
 
 - further improvements to correctly handle subscription id propagation 
 
-## [1.52.17] - 2025-1-5
+## [1.52.17] - 2026-1-5
 
 ### Changed
 
 - adapt events api to easily propagate subscription id & contact links appropriately. 
 
-## [1.52.16] - 2025-1-5
+## [1.52.16] - 2026-1-5
 
 ### Changed
 
 - events are tracked by subscription id not contacts. So a proper sync should happen prior to receiving messages correctly. 
  
-## [1.52.14] - 2025-1-5
+## [1.52.14] - 2026-1-5
 
 ### Changed
 
 - simplify specification of delivery target source in event broadcast
  
-## [1.52.13] - 2025-1-5
+## [1.52.13] - 2026-1-5
 
 ### Changed
 
 - extend chat events to support paginating distribution
  
-## [1.52.11] - 2025-1-3
+## [1.52.11] - 2026-1-3
 
 ### Changed
 
 - add room event types that were missing
  
-## [1.52.9] - 2025-1-3
+## [1.52.9] - 2026-1-3
 
 ### Changed
 
 - encapsulate payload type correctly and Introduce motion content type
 
-## [1.52.8] - 2025-1-3
+## [1.52.8] - 2026-1-3
 
 ### Changed
 
 - resolve lint fixes related to events proto
 
-## [1.52.7] - 2025-1-3
+## [1.52.7] - 2026-1-3
 
 ### Changed
 
 - move the internal events to protobuf definition t0 api
 
-## [1.52.5] - 2025-1-2
+## [1.52.5] - 2026-1-2
 
 ### Changed
 
 - utilize subscription id more
 
-## [1.52.1] - 2025-1-2
+## [1.52.1] - 2026-1-2
 
 ### Changed
 
 - Upgrade common code to the latest version v1.52.0
 
-## [1.51.13] - 2025-1-2
+## [1.51.13] - 2026-1-2
 
 ### Changed
 
