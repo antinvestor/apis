@@ -18,12 +18,13 @@ const PayloadType$json = {
   '1': 'PayloadType',
   '2': [
     {'1': 'PAYLOAD_TYPE_UNSPECIFIED', '2': 0},
-    {'1': 'PAYLOAD_TYPE_MODERATION', '2': 1},
+    {'1': 'PAYLOAD_TYPE_ROOM_CHANGE', '2': 1},
     {'1': 'PAYLOAD_TYPE_TEXT', '2': 2},
     {'1': 'PAYLOAD_TYPE_ATTACHMENT', '2': 3},
     {'1': 'PAYLOAD_TYPE_REACTION', '2': 7},
     {'1': 'PAYLOAD_TYPE_ENCRYPTED', '2': 6},
-    {'1': 'PAYLOAD_TYPE_CALL', '2': 21},
+    {'1': 'PAYLOAD_TYPE_CALL', '2': 20},
+    {'1': 'PAYLOAD_TYPE_MODERATION', '2': 21},
     {'1': 'PAYLOAD_TYPE_MOTION', '2': 22},
     {'1': 'PAYLOAD_TYPE_VOTE', '2': 23},
     {'1': 'PAYLOAD_TYPE_MOTION_TALLY', '2': 24},
@@ -33,12 +34,55 @@ const PayloadType$json = {
 
 /// Descriptor for `PayloadType`. Decode as a `google.protobuf.EnumDescriptorProto`.
 final $typed_data.Uint8List payloadTypeDescriptor = $convert.base64Decode(
-    'CgtQYXlsb2FkVHlwZRIcChhQQVlMT0FEX1RZUEVfVU5TUEVDSUZJRUQQABIbChdQQVlMT0FEX1'
-    'RZUEVfTU9ERVJBVElPThABEhUKEVBBWUxPQURfVFlQRV9URVhUEAISGwoXUEFZTE9BRF9UWVBF'
-    'X0FUVEFDSE1FTlQQAxIZChVQQVlMT0FEX1RZUEVfUkVBQ1RJT04QBxIaChZQQVlMT0FEX1RZUE'
-    'VfRU5DUllQVEVEEAYSFQoRUEFZTE9BRF9UWVBFX0NBTEwQFRIXChNQQVlMT0FEX1RZUEVfTU9U'
-    'SU9OEBYSFQoRUEFZTE9BRF9UWVBFX1ZPVEUQFxIdChlQQVlMT0FEX1RZUEVfTU9USU9OX1RBTE'
-    'xZEBgSGwoXUEFZTE9BRF9UWVBFX1ZPVEVfVEFMTFkQGQ==');
+    'CgtQYXlsb2FkVHlwZRIcChhQQVlMT0FEX1RZUEVfVU5TUEVDSUZJRUQQABIcChhQQVlMT0FEX1'
+    'RZUEVfUk9PTV9DSEFOR0UQARIVChFQQVlMT0FEX1RZUEVfVEVYVBACEhsKF1BBWUxPQURfVFlQ'
+    'RV9BVFRBQ0hNRU5UEAMSGQoVUEFZTE9BRF9UWVBFX1JFQUNUSU9OEAcSGgoWUEFZTE9BRF9UWV'
+    'BFX0VOQ1JZUFRFRBAGEhUKEVBBWUxPQURfVFlQRV9DQUxMEBQSGwoXUEFZTE9BRF9UWVBFX01P'
+    'REVSQVRJT04QFRIXChNQQVlMT0FEX1RZUEVfTU9USU9OEBYSFQoRUEFZTE9BRF9UWVBFX1ZPVE'
+    'UQFxIdChlQQVlMT0FEX1RZUEVfTU9USU9OX1RBTExZEBgSGwoXUEFZTE9BRF9UWVBFX1ZPVEVf'
+    'VEFMTFkQGQ==');
+
+@$core.Deprecated('Use roomChangeActionDescriptor instead')
+const RoomChangeAction$json = {
+  '1': 'RoomChangeAction',
+  '2': [
+    {'1': 'ROOM_CHANGE_ACTION_UNSPECIFIED', '2': 0},
+    {'1': 'ROOM_CHANGE_ACTION_CREATED', '2': 1},
+    {'1': 'ROOM_CHANGE_ACTION_UPDATED', '2': 2},
+    {'1': 'ROOM_CHANGE_ACTION_DELETED', '2': 3},
+    {'1': 'ROOM_CHANGE_ACTION_MEMBER_ADDED', '2': 4},
+    {'1': 'ROOM_CHANGE_ACTION_MEMBER_REMOVED', '2': 5},
+    {'1': 'ROOM_CHANGE_ACTION_ROLE_CHANGED', '2': 6},
+  ],
+};
+
+/// Descriptor for `RoomChangeAction`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List roomChangeActionDescriptor = $convert.base64Decode(
+    'ChBSb29tQ2hhbmdlQWN0aW9uEiIKHlJPT01fQ0hBTkdFX0FDVElPTl9VTlNQRUNJRklFRBAAEh'
+    '4KGlJPT01fQ0hBTkdFX0FDVElPTl9DUkVBVEVEEAESHgoaUk9PTV9DSEFOR0VfQUNUSU9OX1VQ'
+    'REFURUQQAhIeChpST09NX0NIQU5HRV9BQ1RJT05fREVMRVRFRBADEiMKH1JPT01fQ0hBTkdFX0'
+    'FDVElPTl9NRU1CRVJfQURERUQQBBIlCiFST09NX0NIQU5HRV9BQ1RJT05fTUVNQkVSX1JFTU9W'
+    'RUQQBRIjCh9ST09NX0NIQU5HRV9BQ1RJT05fUk9MRV9DSEFOR0VEEAY=');
+
+@$core.Deprecated('Use roomChangeContentDescriptor instead')
+const RoomChangeContent$json = {
+  '1': 'RoomChangeContent',
+  '2': [
+    {'1': 'action', '3': 1, '4': 1, '5': 14, '6': '.chat.v1.RoomChangeAction', '10': 'action'},
+    {'1': 'actor_subscription_id', '3': 2, '4': 1, '5': 9, '10': 'actorSubscriptionId'},
+    {'1': 'target_subscription_ids', '3': 3, '4': 3, '5': 9, '10': 'targetSubscriptionIds'},
+    {'1': 'body', '3': 4, '4': 1, '5': 9, '10': 'body'},
+    {'1': 'details', '3': 5, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'details'},
+  ],
+};
+
+/// Descriptor for `RoomChangeContent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List roomChangeContentDescriptor = $convert.base64Decode(
+    'ChFSb29tQ2hhbmdlQ29udGVudBIxCgZhY3Rpb24YASABKA4yGS5jaGF0LnYxLlJvb21DaGFuZ2'
+    'VBY3Rpb25SBmFjdGlvbhIyChVhY3Rvcl9zdWJzY3JpcHRpb25faWQYAiABKAlSE2FjdG9yU3Vi'
+    'c2NyaXB0aW9uSWQSNgoXdGFyZ2V0X3N1YnNjcmlwdGlvbl9pZHMYAyADKAlSFXRhcmdldFN1Yn'
+    'NjcmlwdGlvbklkcxISCgRib2R5GAQgASgJUgRib2R5EjEKB2RldGFpbHMYBSABKAsyFy5nb29n'
+    'bGUucHJvdG9idWYuU3RydWN0UgdkZXRhaWxz');
 
 @$core.Deprecated('Use moderationContentDescriptor instead')
 const ModerationContent$json = {
@@ -390,6 +434,7 @@ const Payload$json = {
   '2': [
     {'1': 'type', '3': 1, '4': 1, '5': 14, '6': '.chat.v1.PayloadType', '10': 'type'},
     {'1': 'default', '3': 7, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '9': 0, '10': 'default'},
+    {'1': 'room_change', '3': 8, '4': 1, '5': 11, '6': '.chat.v1.RoomChangeContent', '9': 0, '10': 'roomChange'},
     {'1': 'moderation', '3': 10, '4': 1, '5': 11, '6': '.chat.v1.ModerationContent', '9': 0, '10': 'moderation'},
     {'1': 'text', '3': 15, '4': 1, '5': 11, '6': '.chat.v1.TextContent', '9': 0, '10': 'text'},
     {'1': 'attachment', '3': 16, '4': 1, '5': 11, '6': '.chat.v1.AttachmentContent', '9': 0, '10': 'attachment'},
@@ -409,15 +454,16 @@ const Payload$json = {
 /// Descriptor for `Payload`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List payloadDescriptor = $convert.base64Decode(
     'CgdQYXlsb2FkEigKBHR5cGUYASABKA4yFC5jaGF0LnYxLlBheWxvYWRUeXBlUgR0eXBlEjMKB2'
-    'RlZmF1bHQYByABKAsyFy5nb29nbGUucHJvdG9idWYuU3RydWN0SABSB2RlZmF1bHQSPAoKbW9k'
-    'ZXJhdGlvbhgKIAEoCzIaLmNoYXQudjEuTW9kZXJhdGlvbkNvbnRlbnRIAFIKbW9kZXJhdGlvbh'
-    'IqCgR0ZXh0GA8gASgLMhQuY2hhdC52MS5UZXh0Q29udGVudEgAUgR0ZXh0EjwKCmF0dGFjaG1l'
-    'bnQYECABKAsyGi5jaGF0LnYxLkF0dGFjaG1lbnRDb250ZW50SABSCmF0dGFjaG1lbnQSNgoIcm'
-    'VhY3Rpb24YESABKAsyGC5jaGF0LnYxLlJlYWN0aW9uQ29udGVudEgAUghyZWFjdGlvbhI5Cgll'
-    'bmNyeXB0ZWQYEiABKAsyGS5jaGF0LnYxLkVuY3J5cHRlZENvbnRlbnRIAFIJZW5jcnlwdGVkEi'
-    'oKBGNhbGwYEyABKAsyFC5jaGF0LnYxLkNhbGxDb250ZW50SABSBGNhbGwSMAoGbW90aW9uGBkg'
-    'ASgLMhYuY2hhdC52MS5Nb3Rpb25Db250ZW50SABSBm1vdGlvbhI5Cgxtb3Rpb25fdGFsbHkYHC'
-    'ABKAsyFC5jaGF0LnYxLk1vdGlvblRhbGx5SABSC21vdGlvblRhbGx5EicKBHZvdGUYGiABKAsy'
-    'ES5jaGF0LnYxLlZvdGVDYXN0SABSBHZvdGUSMwoKdm90ZV90YWxseRgdIAEoCzISLmNoYXQudj'
-    'EuVm90ZVRhbGx5SABSCXZvdGVUYWxseUIGCgRkYXRh');
+    'RlZmF1bHQYByABKAsyFy5nb29nbGUucHJvdG9idWYuU3RydWN0SABSB2RlZmF1bHQSPQoLcm9v'
+    'bV9jaGFuZ2UYCCABKAsyGi5jaGF0LnYxLlJvb21DaGFuZ2VDb250ZW50SABSCnJvb21DaGFuZ2'
+    'USPAoKbW9kZXJhdGlvbhgKIAEoCzIaLmNoYXQudjEuTW9kZXJhdGlvbkNvbnRlbnRIAFIKbW9k'
+    'ZXJhdGlvbhIqCgR0ZXh0GA8gASgLMhQuY2hhdC52MS5UZXh0Q29udGVudEgAUgR0ZXh0EjwKCm'
+    'F0dGFjaG1lbnQYECABKAsyGi5jaGF0LnYxLkF0dGFjaG1lbnRDb250ZW50SABSCmF0dGFjaG1l'
+    'bnQSNgoIcmVhY3Rpb24YESABKAsyGC5jaGF0LnYxLlJlYWN0aW9uQ29udGVudEgAUghyZWFjdG'
+    'lvbhI5CgllbmNyeXB0ZWQYEiABKAsyGS5jaGF0LnYxLkVuY3J5cHRlZENvbnRlbnRIAFIJZW5j'
+    'cnlwdGVkEioKBGNhbGwYEyABKAsyFC5jaGF0LnYxLkNhbGxDb250ZW50SABSBGNhbGwSMAoGbW'
+    '90aW9uGBkgASgLMhYuY2hhdC52MS5Nb3Rpb25Db250ZW50SABSBm1vdGlvbhI5Cgxtb3Rpb25f'
+    'dGFsbHkYHCABKAsyFC5jaGF0LnYxLk1vdGlvblRhbGx5SABSC21vdGlvblRhbGx5EicKBHZvdG'
+    'UYGiABKAsyES5jaGF0LnYxLlZvdGVDYXN0SABSBHZvdGUSMwoKdm90ZV90YWxseRgdIAEoCzIS'
+    'LmNoYXQudjEuVm90ZVRhbGx5SABSCXZvdGVUYWxseUIGCgRkYXRh');
 

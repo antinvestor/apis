@@ -31,7 +31,6 @@ components:
         error:
           title: error
           description: if set, indicates failure reason for this event
-          nullable: true
           $ref: '#/components/schemas/common.v1.ErrorDetail'
       title: AckEvent
       additionalProperties: false
@@ -74,7 +73,6 @@ components:
         caption:
           title: caption
           description: Optional caption text
-          nullable: true
           $ref: '#/components/schemas/chat.v1.TextContent'
         encrypted:
           type: boolean
@@ -86,7 +84,6 @@ components:
             - "null"
           title: checksum
           description: Optional content hash (e.g. sha256:base64)
-          nullable: true
       title: AttachmentContent
       additionalProperties: false
     chat.v1.AttachmentPreview:
@@ -136,14 +133,12 @@ components:
             - "null"
           title: sdp
           description: WebRTC payload (SDP or ICE candidate)
-          nullable: true
         iceCandidate:
           type:
             - string
             - "null"
           title: ice_candidate
           description: Optional ICE candidate (when action = ICE_CANDIDATE)
-          nullable: true
         metadata:
           title: metadata
           description: Optional metadata (bitrate, codecs, device hints)
@@ -241,14 +236,12 @@ components:
           title: nonce
           format: byte
           description: Optional per-message nonce / IV
-          nullable: true
         senderKeyId:
           type:
             - string
             - "null"
           title: sender_key_id
           description: Optional sender key identifier
-          nullable: true
         recipientKeyIds:
           type: array
           items:
@@ -262,14 +255,12 @@ components:
           title: aad
           format: byte
           description: Additional authenticated data (AAD)
-          nullable: true
         sessionId:
           type:
             - string
             - "null"
           title: session_id
           description: Optional key agreement context identifier
-          nullable: true
       title: EncryptedContent
       additionalProperties: false
     chat.v1.ModerationContent:
@@ -314,7 +305,6 @@ components:
           title: language
           pattern: ^[a-zA-Z]{2,3}(-[a-zA-Z0-9]{2,8})*$
           description: Optional language tag for the body, using BCP-47 (e.g. "en", "fr-CA").
-          nullable: true
       title: ModerationContent
       additionalProperties: false
     chat.v1.MotionContent:
@@ -342,7 +332,6 @@ components:
             - "null"
           title: eligible_votes
           description: Snapshot of eligible voters at creation time (optional, cached)
-          nullable: true
         passingRule:
           title: passing_rule
           description: |-
@@ -364,7 +353,6 @@ components:
           title: closes_at
           format: int64
           description: Optional deadline (unix seconds)
-          nullable: true
       title: MotionContent
       additionalProperties: false
     chat.v1.MotionTally:
@@ -506,6 +494,14 @@ components:
               required:
                 - reaction
             - properties:
+                roomChange:
+                  title: room_change
+                  description: type = PAYLOAD_TYPE_ROOM_CHANGE
+                  $ref: '#/components/schemas/chat.v1.RoomChangeContent'
+              title: room_change
+              required:
+                - roomChange
+            - properties:
                 text:
                   title: text
                   description: type = PAYLOAD_TYPE_TEXT
@@ -536,12 +532,13 @@ components:
       title: PayloadType
       enum:
         - PAYLOAD_TYPE_UNSPECIFIED
-        - PAYLOAD_TYPE_MODERATION
+        - PAYLOAD_TYPE_ROOM_CHANGE
         - PAYLOAD_TYPE_TEXT
         - PAYLOAD_TYPE_ATTACHMENT
         - PAYLOAD_TYPE_REACTION
         - PAYLOAD_TYPE_ENCRYPTED
         - PAYLOAD_TYPE_CALL
+        - PAYLOAD_TYPE_MODERATION
         - PAYLOAD_TYPE_MOTION
         - PAYLOAD_TYPE_VOTE
         - PAYLOAD_TYPE_MOTION_TALLY
@@ -605,7 +602,6 @@ components:
           maxLength: 40
           minLength: 3
           pattern: '[0-9a-z_-]{3,40}'
-          nullable: true
         upToEventId:
           type: string
           title: up_to_event_id
@@ -646,6 +642,41 @@ components:
          Clients SHOULD prefer ReadMarker for durable state.
          Servers MUST NOT persist ReceiptEvent.
          Servers MAY drop ReceiptEvent without acknowledgment.
+    chat.v1.RoomChangeAction:
+      type: string
+      title: RoomChangeAction
+      enum:
+        - ROOM_CHANGE_ACTION_UNSPECIFIED
+        - ROOM_CHANGE_ACTION_CREATED
+        - ROOM_CHANGE_ACTION_UPDATED
+        - ROOM_CHANGE_ACTION_DELETED
+        - ROOM_CHANGE_ACTION_MEMBER_ADDED
+        - ROOM_CHANGE_ACTION_MEMBER_REMOVED
+        - ROOM_CHANGE_ACTION_ROLE_CHANGED
+    chat.v1.RoomChangeContent:
+      type: object
+      properties:
+        action:
+          title: action
+          $ref: '#/components/schemas/chat.v1.RoomChangeAction'
+        actorSubscriptionId:
+          type: string
+          title: actor_subscription_id
+        targetSubscriptionIds:
+          type: array
+          items:
+            type: string
+          title: target_subscription_ids
+        body:
+          type: string
+          title: body
+          description: Human-readable summary (server-generated, for display)
+        details:
+          title: details
+          description: Optional structured detail (depends on action)
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: RoomChangeContent
+      additionalProperties: false
     chat.v1.RoomEvent:
       type: object
       properties:
@@ -691,7 +722,6 @@ components:
           minLength: 3
           pattern: '[0-9a-z_-]{3,40}'
           description: if this message is a followup event on an original message
-          nullable: true
         payload:
           title: payload
           $ref: '#/components/schemas/chat.v1.Payload'
@@ -774,7 +804,6 @@ components:
             - "null"
           title: lang
           description: Optional language hint (BCP-47), e.g. "en", "fr-CA"
-          nullable: true
       title: TextContent
       additionalProperties: false
     chat.v1.TypingEvent:
@@ -830,7 +859,6 @@ components:
             - string
             - "null"
           title: description
-          nullable: true
       title: VoteChoice
       additionalProperties: false
     chat.v1.VoteTally:

@@ -19,6 +19,110 @@ import 'payload_type.pbenum.dart';
 
 export 'payload_type.pbenum.dart';
 
+class RoomChangeContent extends $pb.GeneratedMessage {
+  factory RoomChangeContent({
+    RoomChangeAction? action,
+    $core.String? actorSubscriptionId,
+    $core.Iterable<$core.String>? targetSubscriptionIds,
+    $core.String? body,
+    $0.Struct? details,
+  }) {
+    final $result = create();
+    if (action != null) {
+      $result.action = action;
+    }
+    if (actorSubscriptionId != null) {
+      $result.actorSubscriptionId = actorSubscriptionId;
+    }
+    if (targetSubscriptionIds != null) {
+      $result.targetSubscriptionIds.addAll(targetSubscriptionIds);
+    }
+    if (body != null) {
+      $result.body = body;
+    }
+    if (details != null) {
+      $result.details = details;
+    }
+    return $result;
+  }
+  RoomChangeContent._() : super();
+  factory RoomChangeContent.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory RoomChangeContent.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RoomChangeContent', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
+    ..e<RoomChangeAction>(1, _omitFieldNames ? '' : 'action', $pb.PbFieldType.OE, defaultOrMaker: RoomChangeAction.ROOM_CHANGE_ACTION_UNSPECIFIED, valueOf: RoomChangeAction.valueOf, enumValues: RoomChangeAction.values)
+    ..aOS(2, _omitFieldNames ? '' : 'actorSubscriptionId')
+    ..pPS(3, _omitFieldNames ? '' : 'targetSubscriptionIds')
+    ..aOS(4, _omitFieldNames ? '' : 'body')
+    ..aOM<$0.Struct>(5, _omitFieldNames ? '' : 'details', subBuilder: $0.Struct.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  RoomChangeContent clone() => RoomChangeContent()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  RoomChangeContent copyWith(void Function(RoomChangeContent) updates) => super.copyWith((message) => updates(message as RoomChangeContent)) as RoomChangeContent;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static RoomChangeContent create() => RoomChangeContent._();
+  RoomChangeContent createEmptyInstance() => create();
+  static $pb.PbList<RoomChangeContent> createRepeated() => $pb.PbList<RoomChangeContent>();
+  @$core.pragma('dart2js:noInline')
+  static RoomChangeContent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RoomChangeContent>(create);
+  static RoomChangeContent? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  RoomChangeAction get action => $_getN(0);
+  @$pb.TagNumber(1)
+  set action(RoomChangeAction v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasAction() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAction() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get actorSubscriptionId => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set actorSubscriptionId($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasActorSubscriptionId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearActorSubscriptionId() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.List<$core.String> get targetSubscriptionIds => $_getList(2);
+
+  /// Human-readable summary (server-generated, for display)
+  @$pb.TagNumber(4)
+  $core.String get body => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set body($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasBody() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearBody() => clearField(4);
+
+  /// Optional structured detail (depends on action)
+  @$pb.TagNumber(5)
+  $0.Struct get details => $_getN(4);
+  @$pb.TagNumber(5)
+  set details($0.Struct v) { setField(5, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasDetails() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearDetails() => clearField(5);
+  @$pb.TagNumber(5)
+  $0.Struct ensureDetails() => $_ensure(4);
+}
+
 class ModerationContent extends $pb.GeneratedMessage {
   factory ModerationContent({
     $core.String? body,
@@ -1536,6 +1640,7 @@ class MotionTally extends $pb.GeneratedMessage {
 
 enum Payload_Data {
   default_7, 
+  roomChange, 
   moderation, 
   text, 
   attachment, 
@@ -1553,6 +1658,7 @@ class Payload extends $pb.GeneratedMessage {
   factory Payload({
     PayloadType? type,
     $0.Struct? default_7,
+    RoomChangeContent? roomChange,
     ModerationContent? moderation,
     TextContent? text,
     AttachmentContent? attachment,
@@ -1570,6 +1676,9 @@ class Payload extends $pb.GeneratedMessage {
     }
     if (default_7 != null) {
       $result.default_7 = default_7;
+    }
+    if (roomChange != null) {
+      $result.roomChange = roomChange;
     }
     if (moderation != null) {
       $result.moderation = moderation;
@@ -1609,6 +1718,7 @@ class Payload extends $pb.GeneratedMessage {
 
   static const $core.Map<$core.int, Payload_Data> _Payload_DataByTag = {
     7 : Payload_Data.default_7,
+    8 : Payload_Data.roomChange,
     10 : Payload_Data.moderation,
     15 : Payload_Data.text,
     16 : Payload_Data.attachment,
@@ -1622,9 +1732,10 @@ class Payload extends $pb.GeneratedMessage {
     0 : Payload_Data.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Payload', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
-    ..oo(0, [7, 10, 15, 16, 17, 18, 19, 25, 26, 28, 29])
+    ..oo(0, [7, 8, 10, 15, 16, 17, 18, 19, 25, 26, 28, 29])
     ..e<PayloadType>(1, _omitFieldNames ? '' : 'type', $pb.PbFieldType.OE, defaultOrMaker: PayloadType.PAYLOAD_TYPE_UNSPECIFIED, valueOf: PayloadType.valueOf, enumValues: PayloadType.values)
     ..aOM<$0.Struct>(7, _omitFieldNames ? '' : 'default', subBuilder: $0.Struct.create)
+    ..aOM<RoomChangeContent>(8, _omitFieldNames ? '' : 'roomChange', subBuilder: RoomChangeContent.create)
     ..aOM<ModerationContent>(10, _omitFieldNames ? '' : 'moderation', subBuilder: ModerationContent.create)
     ..aOM<TextContent>(15, _omitFieldNames ? '' : 'text', subBuilder: TextContent.create)
     ..aOM<AttachmentContent>(16, _omitFieldNames ? '' : 'attachment', subBuilder: AttachmentContent.create)
@@ -1685,125 +1796,137 @@ class Payload extends $pb.GeneratedMessage {
   @$pb.TagNumber(7)
   $0.Struct ensureDefault_7() => $_ensure(1);
 
+  /// type = PAYLOAD_TYPE_ROOM_CHANGE
+  @$pb.TagNumber(8)
+  RoomChangeContent get roomChange => $_getN(2);
+  @$pb.TagNumber(8)
+  set roomChange(RoomChangeContent v) { setField(8, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasRoomChange() => $_has(2);
+  @$pb.TagNumber(8)
+  void clearRoomChange() => clearField(8);
+  @$pb.TagNumber(8)
+  RoomChangeContent ensureRoomChange() => $_ensure(2);
+
   /// type = PAYLOAD_TYPE_MODERATION
   @$pb.TagNumber(10)
-  ModerationContent get moderation => $_getN(2);
+  ModerationContent get moderation => $_getN(3);
   @$pb.TagNumber(10)
   set moderation(ModerationContent v) { setField(10, v); }
   @$pb.TagNumber(10)
-  $core.bool hasModeration() => $_has(2);
+  $core.bool hasModeration() => $_has(3);
   @$pb.TagNumber(10)
   void clearModeration() => clearField(10);
   @$pb.TagNumber(10)
-  ModerationContent ensureModeration() => $_ensure(2);
+  ModerationContent ensureModeration() => $_ensure(3);
 
   /// type = PAYLOAD_TYPE_TEXT
   @$pb.TagNumber(15)
-  TextContent get text => $_getN(3);
+  TextContent get text => $_getN(4);
   @$pb.TagNumber(15)
   set text(TextContent v) { setField(15, v); }
   @$pb.TagNumber(15)
-  $core.bool hasText() => $_has(3);
+  $core.bool hasText() => $_has(4);
   @$pb.TagNumber(15)
   void clearText() => clearField(15);
   @$pb.TagNumber(15)
-  TextContent ensureText() => $_ensure(3);
+  TextContent ensureText() => $_ensure(4);
 
   /// type = PAYLOAD_TYPE_ATTACHMENT
   @$pb.TagNumber(16)
-  AttachmentContent get attachment => $_getN(4);
+  AttachmentContent get attachment => $_getN(5);
   @$pb.TagNumber(16)
   set attachment(AttachmentContent v) { setField(16, v); }
   @$pb.TagNumber(16)
-  $core.bool hasAttachment() => $_has(4);
+  $core.bool hasAttachment() => $_has(5);
   @$pb.TagNumber(16)
   void clearAttachment() => clearField(16);
   @$pb.TagNumber(16)
-  AttachmentContent ensureAttachment() => $_ensure(4);
+  AttachmentContent ensureAttachment() => $_ensure(5);
 
   /// type = PAYLOAD_TYPE_REACTION
   @$pb.TagNumber(17)
-  ReactionContent get reaction => $_getN(5);
+  ReactionContent get reaction => $_getN(6);
   @$pb.TagNumber(17)
   set reaction(ReactionContent v) { setField(17, v); }
   @$pb.TagNumber(17)
-  $core.bool hasReaction() => $_has(5);
+  $core.bool hasReaction() => $_has(6);
   @$pb.TagNumber(17)
   void clearReaction() => clearField(17);
   @$pb.TagNumber(17)
-  ReactionContent ensureReaction() => $_ensure(5);
+  ReactionContent ensureReaction() => $_ensure(6);
 
   /// type = PAYLOAD_TYPE_ENCRYPTED
   @$pb.TagNumber(18)
-  EncryptedContent get encrypted => $_getN(6);
+  EncryptedContent get encrypted => $_getN(7);
   @$pb.TagNumber(18)
   set encrypted(EncryptedContent v) { setField(18, v); }
   @$pb.TagNumber(18)
-  $core.bool hasEncrypted() => $_has(6);
+  $core.bool hasEncrypted() => $_has(7);
   @$pb.TagNumber(18)
   void clearEncrypted() => clearField(18);
   @$pb.TagNumber(18)
-  EncryptedContent ensureEncrypted() => $_ensure(6);
+  EncryptedContent ensureEncrypted() => $_ensure(7);
 
   /// type = PAYLOAD_TYPE_CALL
   @$pb.TagNumber(19)
-  CallContent get call => $_getN(7);
+  CallContent get call => $_getN(8);
   @$pb.TagNumber(19)
   set call(CallContent v) { setField(19, v); }
   @$pb.TagNumber(19)
-  $core.bool hasCall() => $_has(7);
+  $core.bool hasCall() => $_has(8);
   @$pb.TagNumber(19)
   void clearCall() => clearField(19);
   @$pb.TagNumber(19)
-  CallContent ensureCall() => $_ensure(7);
+  CallContent ensureCall() => $_ensure(8);
 
   /// type = PAYLOAD_TYPE_MOTION
   @$pb.TagNumber(25)
-  MotionContent get motion => $_getN(8);
+  MotionContent get motion => $_getN(9);
   @$pb.TagNumber(25)
   set motion(MotionContent v) { setField(25, v); }
   @$pb.TagNumber(25)
-  $core.bool hasMotion() => $_has(8);
+  $core.bool hasMotion() => $_has(9);
   @$pb.TagNumber(25)
   void clearMotion() => clearField(25);
   @$pb.TagNumber(25)
-  MotionContent ensureMotion() => $_ensure(8);
+  MotionContent ensureMotion() => $_ensure(9);
 
   /// type = PAYLOAD_TYPE_VOTE
   @$pb.TagNumber(26)
-  VoteCast get vote => $_getN(9);
+  VoteCast get vote => $_getN(10);
   @$pb.TagNumber(26)
   set vote(VoteCast v) { setField(26, v); }
   @$pb.TagNumber(26)
-  $core.bool hasVote() => $_has(9);
+  $core.bool hasVote() => $_has(10);
   @$pb.TagNumber(26)
   void clearVote() => clearField(26);
   @$pb.TagNumber(26)
-  VoteCast ensureVote() => $_ensure(9);
+  VoteCast ensureVote() => $_ensure(10);
 
   /// type = PAYLOAD_TYPE_MOTION_TALLY
   @$pb.TagNumber(28)
-  MotionTally get motionTally => $_getN(10);
+  MotionTally get motionTally => $_getN(11);
   @$pb.TagNumber(28)
   set motionTally(MotionTally v) { setField(28, v); }
   @$pb.TagNumber(28)
-  $core.bool hasMotionTally() => $_has(10);
+  $core.bool hasMotionTally() => $_has(11);
   @$pb.TagNumber(28)
   void clearMotionTally() => clearField(28);
   @$pb.TagNumber(28)
-  MotionTally ensureMotionTally() => $_ensure(10);
+  MotionTally ensureMotionTally() => $_ensure(11);
 
   /// type = PAYLOAD_TYPE_VOTE_TALLY
   @$pb.TagNumber(29)
-  VoteTally get voteTally => $_getN(11);
+  VoteTally get voteTally => $_getN(12);
   @$pb.TagNumber(29)
   set voteTally(VoteTally v) { setField(29, v); }
   @$pb.TagNumber(29)
-  $core.bool hasVoteTally() => $_has(11);
+  $core.bool hasVoteTally() => $_has(12);
   @$pb.TagNumber(29)
   void clearVoteTally() => clearField(29);
   @$pb.TagNumber(29)
-  VoteTally ensureVoteTally() => $_ensure(11);
+  VoteTally ensureVoteTally() => $_ensure(12);
 }
 
 

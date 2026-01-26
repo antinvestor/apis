@@ -26,16 +26,39 @@ option java_package = "chatv1";
 // Allowed message types. Extendable via new enum values; clients must ignore unknown values.
 enum PayloadType {
   PAYLOAD_TYPE_UNSPECIFIED = 0;
-  PAYLOAD_TYPE_MODERATION = 1;
+  PAYLOAD_TYPE_ROOM_CHANGE = 1;
   PAYLOAD_TYPE_TEXT = 2;
   PAYLOAD_TYPE_ATTACHMENT = 3;
   PAYLOAD_TYPE_REACTION = 7;
   PAYLOAD_TYPE_ENCRYPTED = 6; // opaque ciphertext
-  PAYLOAD_TYPE_CALL = 21;
+  PAYLOAD_TYPE_CALL = 20;
+  PAYLOAD_TYPE_MODERATION = 21;
   PAYLOAD_TYPE_MOTION = 22;
   PAYLOAD_TYPE_VOTE = 23;
   PAYLOAD_TYPE_MOTION_TALLY = 24;
   PAYLOAD_TYPE_VOTE_TALLY = 25;
+}
+
+enum RoomChangeAction {
+  ROOM_CHANGE_ACTION_UNSPECIFIED = 0;
+  ROOM_CHANGE_ACTION_CREATED = 1;
+  ROOM_CHANGE_ACTION_UPDATED = 2;
+  ROOM_CHANGE_ACTION_DELETED = 3;
+  ROOM_CHANGE_ACTION_MEMBER_ADDED = 4;
+  ROOM_CHANGE_ACTION_MEMBER_REMOVED = 5;
+  ROOM_CHANGE_ACTION_ROLE_CHANGED = 6;
+}
+
+message RoomChangeContent {
+  RoomChangeAction action = 1;
+  string actor_subscription_id = 2;
+  repeated string target_subscription_ids = 3;
+
+  // Human-readable summary (server-generated, for display)
+  string body = 4;
+
+  // Optional structured detail (depends on action)
+  google.protobuf.Struct details = 5;
 }
 
 message ModerationContent {
@@ -314,6 +337,9 @@ message Payload {
   oneof data {
     // type = PAYLOAD_TYPE_UNSPECIFIED
     google.protobuf.Struct default = 7;
+
+    // type = PAYLOAD_TYPE_ROOM_CHANGE
+    RoomChangeContent room_change = 8;
 
     // type = PAYLOAD_TYPE_MODERATION
     ModerationContent moderation = 10;

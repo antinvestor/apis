@@ -16,12 +16,13 @@ import 'package:protobuf/protobuf.dart' as $pb;
 /// Allowed message types. Extendable via new enum values; clients must ignore unknown values.
 class PayloadType extends $pb.ProtobufEnum {
   static const PayloadType PAYLOAD_TYPE_UNSPECIFIED = PayloadType._(0, _omitEnumNames ? '' : 'PAYLOAD_TYPE_UNSPECIFIED');
-  static const PayloadType PAYLOAD_TYPE_MODERATION = PayloadType._(1, _omitEnumNames ? '' : 'PAYLOAD_TYPE_MODERATION');
+  static const PayloadType PAYLOAD_TYPE_ROOM_CHANGE = PayloadType._(1, _omitEnumNames ? '' : 'PAYLOAD_TYPE_ROOM_CHANGE');
   static const PayloadType PAYLOAD_TYPE_TEXT = PayloadType._(2, _omitEnumNames ? '' : 'PAYLOAD_TYPE_TEXT');
   static const PayloadType PAYLOAD_TYPE_ATTACHMENT = PayloadType._(3, _omitEnumNames ? '' : 'PAYLOAD_TYPE_ATTACHMENT');
   static const PayloadType PAYLOAD_TYPE_REACTION = PayloadType._(7, _omitEnumNames ? '' : 'PAYLOAD_TYPE_REACTION');
   static const PayloadType PAYLOAD_TYPE_ENCRYPTED = PayloadType._(6, _omitEnumNames ? '' : 'PAYLOAD_TYPE_ENCRYPTED');
-  static const PayloadType PAYLOAD_TYPE_CALL = PayloadType._(21, _omitEnumNames ? '' : 'PAYLOAD_TYPE_CALL');
+  static const PayloadType PAYLOAD_TYPE_CALL = PayloadType._(20, _omitEnumNames ? '' : 'PAYLOAD_TYPE_CALL');
+  static const PayloadType PAYLOAD_TYPE_MODERATION = PayloadType._(21, _omitEnumNames ? '' : 'PAYLOAD_TYPE_MODERATION');
   static const PayloadType PAYLOAD_TYPE_MOTION = PayloadType._(22, _omitEnumNames ? '' : 'PAYLOAD_TYPE_MOTION');
   static const PayloadType PAYLOAD_TYPE_VOTE = PayloadType._(23, _omitEnumNames ? '' : 'PAYLOAD_TYPE_VOTE');
   static const PayloadType PAYLOAD_TYPE_MOTION_TALLY = PayloadType._(24, _omitEnumNames ? '' : 'PAYLOAD_TYPE_MOTION_TALLY');
@@ -29,12 +30,13 @@ class PayloadType extends $pb.ProtobufEnum {
 
   static const $core.List<PayloadType> values = <PayloadType> [
     PAYLOAD_TYPE_UNSPECIFIED,
-    PAYLOAD_TYPE_MODERATION,
+    PAYLOAD_TYPE_ROOM_CHANGE,
     PAYLOAD_TYPE_TEXT,
     PAYLOAD_TYPE_ATTACHMENT,
     PAYLOAD_TYPE_REACTION,
     PAYLOAD_TYPE_ENCRYPTED,
     PAYLOAD_TYPE_CALL,
+    PAYLOAD_TYPE_MODERATION,
     PAYLOAD_TYPE_MOTION,
     PAYLOAD_TYPE_VOTE,
     PAYLOAD_TYPE_MOTION_TALLY,
@@ -45,6 +47,31 @@ class PayloadType extends $pb.ProtobufEnum {
   static PayloadType? valueOf($core.int value) => _byValue[value];
 
   const PayloadType._($core.int v, $core.String n) : super(v, n);
+}
+
+class RoomChangeAction extends $pb.ProtobufEnum {
+  static const RoomChangeAction ROOM_CHANGE_ACTION_UNSPECIFIED = RoomChangeAction._(0, _omitEnumNames ? '' : 'ROOM_CHANGE_ACTION_UNSPECIFIED');
+  static const RoomChangeAction ROOM_CHANGE_ACTION_CREATED = RoomChangeAction._(1, _omitEnumNames ? '' : 'ROOM_CHANGE_ACTION_CREATED');
+  static const RoomChangeAction ROOM_CHANGE_ACTION_UPDATED = RoomChangeAction._(2, _omitEnumNames ? '' : 'ROOM_CHANGE_ACTION_UPDATED');
+  static const RoomChangeAction ROOM_CHANGE_ACTION_DELETED = RoomChangeAction._(3, _omitEnumNames ? '' : 'ROOM_CHANGE_ACTION_DELETED');
+  static const RoomChangeAction ROOM_CHANGE_ACTION_MEMBER_ADDED = RoomChangeAction._(4, _omitEnumNames ? '' : 'ROOM_CHANGE_ACTION_MEMBER_ADDED');
+  static const RoomChangeAction ROOM_CHANGE_ACTION_MEMBER_REMOVED = RoomChangeAction._(5, _omitEnumNames ? '' : 'ROOM_CHANGE_ACTION_MEMBER_REMOVED');
+  static const RoomChangeAction ROOM_CHANGE_ACTION_ROLE_CHANGED = RoomChangeAction._(6, _omitEnumNames ? '' : 'ROOM_CHANGE_ACTION_ROLE_CHANGED');
+
+  static const $core.List<RoomChangeAction> values = <RoomChangeAction> [
+    ROOM_CHANGE_ACTION_UNSPECIFIED,
+    ROOM_CHANGE_ACTION_CREATED,
+    ROOM_CHANGE_ACTION_UPDATED,
+    ROOM_CHANGE_ACTION_DELETED,
+    ROOM_CHANGE_ACTION_MEMBER_ADDED,
+    ROOM_CHANGE_ACTION_MEMBER_REMOVED,
+    ROOM_CHANGE_ACTION_ROLE_CHANGED,
+  ];
+
+  static final $core.Map<$core.int, RoomChangeAction> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static RoomChangeAction? valueOf($core.int value) => _byValue[value];
+
+  const RoomChangeAction._($core.int v, $core.String n) : super(v, n);
 }
 
 class TextAnnotation_Type extends $pb.ProtobufEnum {
