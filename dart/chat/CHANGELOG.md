@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.53.1] - 2026-1-26
+
+### Changed
+
+- Introduce the proposals api
+
 ## [1.53.0] - 2026-1-26
 
 ### Changed
