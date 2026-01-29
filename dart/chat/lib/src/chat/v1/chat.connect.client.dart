@@ -199,4 +199,40 @@ extension type ChatServiceClient (connect.Transport _transport) {
       onTrailer: onTrailer,
     );
   }
+
+  /// List pending proposals for a room
+  Future<chatv1chat.ListProposalsResponse> listProposals(
+    chatv1chat.ListProposalsRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.ChatService.listProposals,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// Submit a decision on a pending proposal (approve or reject)
+  Future<chatv1chat.SubmitProposalResponse> submitProposal(
+    chatv1chat.SubmitProposalRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.ChatService.submitProposal,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
 }

@@ -177,6 +177,32 @@ service ChatService {
       tags: "Real-time"
     };
   }
+
+  // Proposal APIs for approval workflows
+  // -----------------------------------------------------
+  // Proposals are pending changes that require approval before execution.
+  // They are used for rooms with RequiresApproval=true.
+
+  // List pending proposals for a room
+  rpc ListProposals(ListProposalsRequest) returns (ListProposalsResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "listProposals"
+      summary: "List pending proposals for a room"
+      description: "Retrieves all pending proposals for a room that require approval. Only room members can view proposals."
+      tags: "Proposals"
+    };
+  }
+
+  // Submit a decision on a pending proposal (approve or reject)
+  rpc SubmitProposal(SubmitProposalRequest) returns (SubmitProposalResponse) {
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "submitProposal"
+      summary: "Submit a decision on a pending proposal"
+      description: "Approves or rejects a pending proposal. If approved, the proposed change is executed. Only room owners can submit proposal decisions."
+      tags: "Proposals"
+    };
+  }
 }
 
 // -----------------------------------------------------
@@ -227,6 +253,8 @@ message Room {
   google.protobuf.Timestamp created_at = 7;
   google.protobuf.Timestamp updated_at = 8;
   string creator_id = 9;
+  // If true, changes to this room require approval from owners before execution
+  bool requires_approval = 10;
 }
 
 message CreateRoomRequest {
@@ -243,6 +271,8 @@ message CreateRoomRequest {
   bool is_private = 6;
   repeated common.v1.ContactLink members = 7; // optional
   google.protobuf.Struct metadata = 8;
+  // If true, changes to this room require approval from owners before execution
+  bool requires_approval = 9;
 }
 
 message CreateRoomResponse {
@@ -409,4 +439,93 @@ message LiveRequest {
 
 message LiveResponse {
   common.v1.ErrorDetail error = 1;
+}
+
+// -----------------------------------------------------
+// Proposal APIs for approval workflows
+// -----------------------------------------------------
+
+// ProposalType represents the kind of change being proposed.
+enum ProposalType {
+  PROPOSAL_TYPE_UNSPECIFIED = 0;
+  PROPOSAL_TYPE_UPDATE_ROOM = 1;
+  PROPOSAL_TYPE_DELETE_ROOM = 2;
+  PROPOSAL_TYPE_ADD_SUBSCRIPTIONS = 3;
+  PROPOSAL_TYPE_REMOVE_SUBSCRIPTIONS = 4;
+  PROPOSAL_TYPE_UPDATE_SUBSCRIPTION_ROLE = 5;
+}
+
+// ProposalState represents the current state of a proposal.
+enum ProposalState {
+  PROPOSAL_STATE_UNSPECIFIED = 0;
+  PROPOSAL_STATE_PENDING = 1;
+  PROPOSAL_STATE_APPROVED = 2;
+  PROPOSAL_STATE_REJECTED = 3;
+  PROPOSAL_STATE_EXPIRED = 4;
+}
+
+// Proposal represents a pending change that requires approval before execution.
+message Proposal {
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+  string room_id = 2 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+  ProposalType type = 3;
+  ProposalState state = 4;
+  string requested_by = 5; // profile_id of the requester
+  google.protobuf.Struct payload = 6; // the proposed change payload
+  google.protobuf.Timestamp created_at = 7;
+  google.protobuf.Timestamp expires_at = 8;
+  optional string resolved_by = 9; // profile_id of approver/rejector
+  optional google.protobuf.Timestamp resolved_at = 10;
+  optional string reason = 11; // rejection reason if rejected
+}
+
+message ListProposalsRequest {
+  string room_id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+  // Optional: filter by state (default: only PENDING)
+  optional ProposalState state = 2;
+  common.v1.PageCursor cursor = 3;
+}
+
+message ListProposalsResponse {
+  repeated Proposal proposals = 1;
+  string next_cursor = 2;
+}
+
+// Action to take on a proposal
+enum ProposalAction {
+  PROPOSAL_ACTION_UNSPECIFIED = 0;
+  PROPOSAL_ACTION_APPROVE = 1;
+  PROPOSAL_ACTION_REJECT = 2;
+}
+
+message SubmitProposalRequest {
+  string room_id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+  string proposal_id = 2 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+  ProposalAction action = 3 [(buf.validate.field).enum.defined_only = true];
+  optional string reason = 4; // optional reason (typically for rejection)
+}
+
+message SubmitProposalResponse {
+  Proposal proposal = 1;
+  common.v1.ErrorDetail error = 2;
 }

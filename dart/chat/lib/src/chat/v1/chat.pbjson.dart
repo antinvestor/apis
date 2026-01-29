@@ -19,6 +19,60 @@ import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $1;
 import 'definitions.pbjson.dart' as $4;
 import 'payload_type.pbjson.dart' as $2;
 
+@$core.Deprecated('Use proposalTypeDescriptor instead')
+const ProposalType$json = {
+  '1': 'ProposalType',
+  '2': [
+    {'1': 'PROPOSAL_TYPE_UNSPECIFIED', '2': 0},
+    {'1': 'PROPOSAL_TYPE_UPDATE_ROOM', '2': 1},
+    {'1': 'PROPOSAL_TYPE_DELETE_ROOM', '2': 2},
+    {'1': 'PROPOSAL_TYPE_ADD_SUBSCRIPTIONS', '2': 3},
+    {'1': 'PROPOSAL_TYPE_REMOVE_SUBSCRIPTIONS', '2': 4},
+    {'1': 'PROPOSAL_TYPE_UPDATE_SUBSCRIPTION_ROLE', '2': 5},
+  ],
+};
+
+/// Descriptor for `ProposalType`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List proposalTypeDescriptor = $convert.base64Decode(
+    'CgxQcm9wb3NhbFR5cGUSHQoZUFJPUE9TQUxfVFlQRV9VTlNQRUNJRklFRBAAEh0KGVBST1BPU0'
+    'FMX1RZUEVfVVBEQVRFX1JPT00QARIdChlQUk9QT1NBTF9UWVBFX0RFTEVURV9ST09NEAISIwof'
+    'UFJPUE9TQUxfVFlQRV9BRERfU1VCU0NSSVBUSU9OUxADEiYKIlBST1BPU0FMX1RZUEVfUkVNT1'
+    'ZFX1NVQlNDUklQVElPTlMQBBIqCiZQUk9QT1NBTF9UWVBFX1VQREFURV9TVUJTQ1JJUFRJT05f'
+    'Uk9MRRAF');
+
+@$core.Deprecated('Use proposalStateDescriptor instead')
+const ProposalState$json = {
+  '1': 'ProposalState',
+  '2': [
+    {'1': 'PROPOSAL_STATE_UNSPECIFIED', '2': 0},
+    {'1': 'PROPOSAL_STATE_PENDING', '2': 1},
+    {'1': 'PROPOSAL_STATE_APPROVED', '2': 2},
+    {'1': 'PROPOSAL_STATE_REJECTED', '2': 3},
+    {'1': 'PROPOSAL_STATE_EXPIRED', '2': 4},
+  ],
+};
+
+/// Descriptor for `ProposalState`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List proposalStateDescriptor = $convert.base64Decode(
+    'Cg1Qcm9wb3NhbFN0YXRlEh4KGlBST1BPU0FMX1NUQVRFX1VOU1BFQ0lGSUVEEAASGgoWUFJPUE'
+    '9TQUxfU1RBVEVfUEVORElORxABEhsKF1BST1BPU0FMX1NUQVRFX0FQUFJPVkVEEAISGwoXUFJP'
+    'UE9TQUxfU1RBVEVfUkVKRUNURUQQAxIaChZQUk9QT1NBTF9TVEFURV9FWFBJUkVEEAQ=');
+
+@$core.Deprecated('Use proposalActionDescriptor instead')
+const ProposalAction$json = {
+  '1': 'ProposalAction',
+  '2': [
+    {'1': 'PROPOSAL_ACTION_UNSPECIFIED', '2': 0},
+    {'1': 'PROPOSAL_ACTION_APPROVE', '2': 1},
+    {'1': 'PROPOSAL_ACTION_REJECT', '2': 2},
+  ],
+};
+
+/// Descriptor for `ProposalAction`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List proposalActionDescriptor = $convert.base64Decode(
+    'Cg5Qcm9wb3NhbEFjdGlvbhIfChtQUk9QT1NBTF9BQ1RJT05fVU5TUEVDSUZJRUQQABIbChdQUk'
+    '9QT1NBTF9BQ1RJT05fQVBQUk9WRRABEhoKFlBST1BPU0FMX0FDVElPTl9SRUpFQ1QQAg==');
+
 @$core.Deprecated('Use sendEventRequestDescriptor instead')
 const SendEventRequest$json = {
   '1': 'SendEventRequest',
@@ -89,6 +143,7 @@ const Room$json = {
     {'1': 'created_at', '3': 7, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
     {'1': 'updated_at', '3': 8, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
     {'1': 'creator_id', '3': 9, '4': 1, '5': 9, '10': 'creatorId'},
+    {'1': 'requires_approval', '3': 10, '4': 1, '5': 8, '10': 'requiresApproval'},
   ],
 };
 
@@ -100,7 +155,8 @@ final $typed_data.Uint8List roomDescriptor = $convert.base64Decode(
     'IXLmdvb2dsZS5wcm90b2J1Zi5TdHJ1Y3RSCG1ldGFkYXRhEjkKCmNyZWF0ZWRfYXQYByABKAsy'
     'Gi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wUgljcmVhdGVkQXQSOQoKdXBkYXRlZF9hdBgIIA'
     'EoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCXVwZGF0ZWRBdBIdCgpjcmVhdG9yX2lk'
-    'GAkgASgJUgljcmVhdG9ySWQ=');
+    'GAkgASgJUgljcmVhdG9ySWQSKwoRcmVxdWlyZXNfYXBwcm92YWwYCiABKAhSEHJlcXVpcmVzQX'
+    'Bwcm92YWw=');
 
 @$core.Deprecated('Use createRoomRequestDescriptor instead')
 const CreateRoomRequest$json = {
@@ -112,6 +168,7 @@ const CreateRoomRequest$json = {
     {'1': 'is_private', '3': 6, '4': 1, '5': 8, '10': 'isPrivate'},
     {'1': 'members', '3': 7, '4': 3, '5': 11, '6': '.common.v1.ContactLink', '10': 'members'},
     {'1': 'metadata', '3': 8, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'metadata'},
+    {'1': 'requires_approval', '3': 9, '4': 1, '5': 8, '10': 'requiresApproval'},
   ],
 };
 
@@ -121,7 +178,8 @@ final $typed_data.Uint8List createRoomRequestDescriptor = $convert.base64Decode(
     'MsNDB9UgJpZBIeCgRuYW1lGAQgASgJQgq6SAdyBRACGMgBUgRuYW1lEiAKC2Rlc2NyaXB0aW9u'
     'GAUgASgJUgtkZXNjcmlwdGlvbhIdCgppc19wcml2YXRlGAYgASgIUglpc1ByaXZhdGUSMAoHbW'
     'VtYmVycxgHIAMoCzIWLmNvbW1vbi52MS5Db250YWN0TGlua1IHbWVtYmVycxIzCghtZXRhZGF0'
-    'YRgIIAEoCzIXLmdvb2dsZS5wcm90b2J1Zi5TdHJ1Y3RSCG1ldGFkYXRh');
+    'YRgIIAEoCzIXLmdvb2dsZS5wcm90b2J1Zi5TdHJ1Y3RSCG1ldGFkYXRhEisKEXJlcXVpcmVzX2'
+    'FwcHJvdmFsGAkgASgIUhByZXF1aXJlc0FwcHJvdmFs');
 
 @$core.Deprecated('Use createRoomResponseDescriptor instead')
 const CreateRoomResponse$json = {
@@ -402,6 +460,114 @@ final $typed_data.Uint8List liveResponseDescriptor = $convert.base64Decode(
     'CgxMaXZlUmVzcG9uc2USLAoFZXJyb3IYASABKAsyFi5jb21tb24udjEuRXJyb3JEZXRhaWxSBW'
     'Vycm9y');
 
+@$core.Deprecated('Use proposalDescriptor instead')
+const Proposal$json = {
+  '1': 'Proposal',
+  '2': [
+    {'1': 'id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'id'},
+    {'1': 'room_id', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'roomId'},
+    {'1': 'type', '3': 3, '4': 1, '5': 14, '6': '.chat.v1.ProposalType', '10': 'type'},
+    {'1': 'state', '3': 4, '4': 1, '5': 14, '6': '.chat.v1.ProposalState', '10': 'state'},
+    {'1': 'requested_by', '3': 5, '4': 1, '5': 9, '10': 'requestedBy'},
+    {'1': 'payload', '3': 6, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'payload'},
+    {'1': 'created_at', '3': 7, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
+    {'1': 'expires_at', '3': 8, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'expiresAt'},
+    {'1': 'resolved_by', '3': 9, '4': 1, '5': 9, '9': 0, '10': 'resolvedBy', '17': true},
+    {'1': 'resolved_at', '3': 10, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '9': 1, '10': 'resolvedAt', '17': true},
+    {'1': 'reason', '3': 11, '4': 1, '5': 9, '9': 2, '10': 'reason', '17': true},
+  ],
+  '8': [
+    {'1': '_resolved_by'},
+    {'1': '_resolved_at'},
+    {'1': '_reason'},
+  ],
+};
+
+/// Descriptor for `Proposal`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List proposalDescriptor = $convert.base64Decode(
+    'CghQcm9wb3NhbBIrCgJpZBgBIAEoCUIbukgYchYQAxgoMhBbMC05YS16Xy1dezMsNDB9UgJpZB'
+    'I0Cgdyb29tX2lkGAIgASgJQhu6SBhyFhADGCgyEFswLTlhLXpfLV17Myw0MH1SBnJvb21JZBIp'
+    'CgR0eXBlGAMgASgOMhUuY2hhdC52MS5Qcm9wb3NhbFR5cGVSBHR5cGUSLAoFc3RhdGUYBCABKA'
+    '4yFi5jaGF0LnYxLlByb3Bvc2FsU3RhdGVSBXN0YXRlEiEKDHJlcXVlc3RlZF9ieRgFIAEoCVIL'
+    'cmVxdWVzdGVkQnkSMQoHcGF5bG9hZBgGIAEoCzIXLmdvb2dsZS5wcm90b2J1Zi5TdHJ1Y3RSB3'
+    'BheWxvYWQSOQoKY3JlYXRlZF9hdBgHIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBS'
+    'CWNyZWF0ZWRBdBI5CgpleHBpcmVzX2F0GAggASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdG'
+    'FtcFIJZXhwaXJlc0F0EiQKC3Jlc29sdmVkX2J5GAkgASgJSABSCnJlc29sdmVkQnmIAQESQAoL'
+    'cmVzb2x2ZWRfYXQYCiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wSAFSCnJlc29sdm'
+    'VkQXSIAQESGwoGcmVhc29uGAsgASgJSAJSBnJlYXNvbogBAUIOCgxfcmVzb2x2ZWRfYnlCDgoM'
+    'X3Jlc29sdmVkX2F0QgkKB19yZWFzb24=');
+
+@$core.Deprecated('Use listProposalsRequestDescriptor instead')
+const ListProposalsRequest$json = {
+  '1': 'ListProposalsRequest',
+  '2': [
+    {'1': 'room_id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'roomId'},
+    {'1': 'state', '3': 2, '4': 1, '5': 14, '6': '.chat.v1.ProposalState', '9': 0, '10': 'state', '17': true},
+    {'1': 'cursor', '3': 3, '4': 1, '5': 11, '6': '.common.v1.PageCursor', '10': 'cursor'},
+  ],
+  '8': [
+    {'1': '_state'},
+  ],
+};
+
+/// Descriptor for `ListProposalsRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listProposalsRequestDescriptor = $convert.base64Decode(
+    'ChRMaXN0UHJvcG9zYWxzUmVxdWVzdBI0Cgdyb29tX2lkGAEgASgJQhu6SBhyFhADGCgyEFswLT'
+    'lhLXpfLV17Myw0MH1SBnJvb21JZBIxCgVzdGF0ZRgCIAEoDjIWLmNoYXQudjEuUHJvcG9zYWxT'
+    'dGF0ZUgAUgVzdGF0ZYgBARItCgZjdXJzb3IYAyABKAsyFS5jb21tb24udjEuUGFnZUN1cnNvcl'
+    'IGY3Vyc29yQggKBl9zdGF0ZQ==');
+
+@$core.Deprecated('Use listProposalsResponseDescriptor instead')
+const ListProposalsResponse$json = {
+  '1': 'ListProposalsResponse',
+  '2': [
+    {'1': 'proposals', '3': 1, '4': 3, '5': 11, '6': '.chat.v1.Proposal', '10': 'proposals'},
+    {'1': 'next_cursor', '3': 2, '4': 1, '5': 9, '10': 'nextCursor'},
+  ],
+};
+
+/// Descriptor for `ListProposalsResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listProposalsResponseDescriptor = $convert.base64Decode(
+    'ChVMaXN0UHJvcG9zYWxzUmVzcG9uc2USLwoJcHJvcG9zYWxzGAEgAygLMhEuY2hhdC52MS5Qcm'
+    '9wb3NhbFIJcHJvcG9zYWxzEh8KC25leHRfY3Vyc29yGAIgASgJUgpuZXh0Q3Vyc29y');
+
+@$core.Deprecated('Use submitProposalRequestDescriptor instead')
+const SubmitProposalRequest$json = {
+  '1': 'SubmitProposalRequest',
+  '2': [
+    {'1': 'room_id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'roomId'},
+    {'1': 'proposal_id', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'proposalId'},
+    {'1': 'action', '3': 3, '4': 1, '5': 14, '6': '.chat.v1.ProposalAction', '8': {}, '10': 'action'},
+    {'1': 'reason', '3': 4, '4': 1, '5': 9, '9': 0, '10': 'reason', '17': true},
+  ],
+  '8': [
+    {'1': '_reason'},
+  ],
+};
+
+/// Descriptor for `SubmitProposalRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List submitProposalRequestDescriptor = $convert.base64Decode(
+    'ChVTdWJtaXRQcm9wb3NhbFJlcXVlc3QSNAoHcm9vbV9pZBgBIAEoCUIbukgYchYQAxgoMhBbMC'
+    '05YS16Xy1dezMsNDB9UgZyb29tSWQSPAoLcHJvcG9zYWxfaWQYAiABKAlCG7pIGHIWEAMYKDIQ'
+    'WzAtOWEtel8tXXszLDQwfVIKcHJvcG9zYWxJZBI5CgZhY3Rpb24YAyABKA4yFy5jaGF0LnYxLl'
+    'Byb3Bvc2FsQWN0aW9uQgi6SAWCAQIQAVIGYWN0aW9uEhsKBnJlYXNvbhgEIAEoCUgAUgZyZWFz'
+    'b26IAQFCCQoHX3JlYXNvbg==');
+
+@$core.Deprecated('Use submitProposalResponseDescriptor instead')
+const SubmitProposalResponse$json = {
+  '1': 'SubmitProposalResponse',
+  '2': [
+    {'1': 'proposal', '3': 1, '4': 1, '5': 11, '6': '.chat.v1.Proposal', '10': 'proposal'},
+    {'1': 'error', '3': 2, '4': 1, '5': 11, '6': '.common.v1.ErrorDetail', '10': 'error'},
+  ],
+};
+
+/// Descriptor for `SubmitProposalResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List submitProposalResponseDescriptor = $convert.base64Decode(
+    'ChZTdWJtaXRQcm9wb3NhbFJlc3BvbnNlEi0KCHByb3Bvc2FsGAEgASgLMhEuY2hhdC52MS5Qcm'
+    '9wb3NhbFIIcHJvcG9zYWwSLAoFZXJyb3IYAiABKAsyFi5jb21tb24udjEuRXJyb3JEZXRhaWxS'
+    'BWVycm9y');
+
 const $core.Map<$core.String, $core.dynamic> ChatServiceBase$json = {
   '1': 'ChatService',
   '2': [
@@ -432,6 +598,13 @@ const $core.Map<$core.String, $core.dynamic> ChatServiceBase$json = {
       '4': {'34': 1},
     },
     {'1': 'Live', '2': '.chat.v1.LiveRequest', '3': '.chat.v1.LiveResponse', '4': {}},
+    {
+      '1': 'ListProposals',
+      '2': '.chat.v1.ListProposalsRequest',
+      '3': '.chat.v1.ListProposalsResponse',
+      '4': {'34': 1},
+    },
+    {'1': 'SubmitProposal', '2': '.chat.v1.SubmitProposalRequest', '3': '.chat.v1.SubmitProposalResponse', '4': {}},
   ],
 };
 
@@ -493,6 +666,11 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> ChatServic
   '.chat.v1.PresenceEvent': $4.PresenceEvent$json,
   '.chat.v1.ReadMarker': $4.ReadMarker$json,
   '.chat.v1.LiveResponse': LiveResponse$json,
+  '.chat.v1.ListProposalsRequest': ListProposalsRequest$json,
+  '.chat.v1.ListProposalsResponse': ListProposalsResponse$json,
+  '.chat.v1.Proposal': Proposal$json,
+  '.chat.v1.SubmitProposalRequest': SubmitProposalRequest$json,
+  '.chat.v1.SubmitProposalResponse': SubmitProposalResponse$json,
 };
 
 /// Descriptor for `ChatService`. Decode as a `google.protobuf.ServiceDescriptorProto`.
@@ -552,5 +730,15 @@ final $typed_data.Uint8List chatServiceDescriptor = $convert.base64Decode(
     'aGF0LnYxLkxpdmVSZXF1ZXN0GhUuY2hhdC52MS5MaXZlUmVzcG9uc2UiqgG6R6YBCglSZWFsLX'
     'RpbWUSJEV4ZWN1dGVzIHJlYWx0aW1lIGNvbm5lY3Rpb24gdXBkYXRlcxptRXhlY3V0ZXMgcmVh'
     'bHRpbWUgdXBkYXRlcyBmb3IgZXZlbnRzIGZyb20gYSB1c2VyIGFuZCBvcHRpb25hbGx5IEJyb2'
-    'FkY2FzdHMgdG8gYWZmaWxpYXRlZCBhY3RpdmUgcGFydGljaXBhbnRzLioETGl2ZQ==');
+    'FkY2FzdHMgdG8gYWZmaWxpYXRlZCBhY3RpdmUgcGFydGljaXBhbnRzLioETGl2ZRL+AQoNTGlz'
+    'dFByb3Bvc2FscxIdLmNoYXQudjEuTGlzdFByb3Bvc2Fsc1JlcXVlc3QaHi5jaGF0LnYxLkxpc3'
+    'RQcm9wb3NhbHNSZXNwb25zZSKtAZACAbpHpgEKCVByb3Bvc2FscxIhTGlzdCBwZW5kaW5nIHBy'
+    'b3Bvc2FscyBmb3IgYSByb29tGmdSZXRyaWV2ZXMgYWxsIHBlbmRpbmcgcHJvcG9zYWxzIGZvci'
+    'BhIHJvb20gdGhhdCByZXF1aXJlIGFwcHJvdmFsLiBPbmx5IHJvb20gbWVtYmVycyBjYW4gdmll'
+    'dyBwcm9wb3NhbHMuKg1saXN0UHJvcG9zYWxzEqQCCg5TdWJtaXRQcm9wb3NhbBIeLmNoYXQudj'
+    'EuU3VibWl0UHJvcG9zYWxSZXF1ZXN0Gh8uY2hhdC52MS5TdWJtaXRQcm9wb3NhbFJlc3BvbnNl'
+    'ItABukfMAQoJUHJvcG9zYWxzEidTdWJtaXQgYSBkZWNpc2lvbiBvbiBhIHBlbmRpbmcgcHJvcG'
+    '9zYWwahQFBcHByb3ZlcyBvciByZWplY3RzIGEgcGVuZGluZyBwcm9wb3NhbC4gSWYgYXBwcm92'
+    'ZWQsIHRoZSBwcm9wb3NlZCBjaGFuZ2UgaXMgZXhlY3V0ZWQuIE9ubHkgcm9vbSBvd25lcnMgY2'
+    'FuIHN1Ym1pdCBwcm9wb3NhbCBkZWNpc2lvbnMuKg5zdWJtaXRQcm9wb3NhbA==');
 

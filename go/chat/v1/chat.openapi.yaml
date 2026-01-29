@@ -212,6 +212,96 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/chat.v1.GetHistoryResponse'
+  /chat.v1.ChatService/ListProposals:
+    get:
+      tags:
+        - Proposals
+        - chat.v1.ChatService
+      summary: List pending proposals for a room
+      description: Retrieves all pending proposals for a room that require approval. Only room members can view proposals.
+      operationId: listProposals
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+        - name: message
+          in: query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chat.v1.ListProposalsRequest'
+        - name: encoding
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/encoding'
+        - name: base64
+          in: query
+          schema:
+            $ref: '#/components/schemas/base64'
+        - name: compression
+          in: query
+          schema:
+            $ref: '#/components/schemas/compression'
+        - name: connect
+          in: query
+          schema:
+            $ref: '#/components/schemas/connect'
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chat.v1.ListProposalsResponse'
+    post:
+      tags:
+        - Proposals
+        - chat.v1.ChatService
+      summary: List pending proposals for a room
+      description: Retrieves all pending proposals for a room that require approval. Only room members can view proposals.
+      operationId: listProposals
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/chat.v1.ListProposalsRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chat.v1.ListProposalsResponse'
   /chat.v1.ChatService/Live:
     post:
       tags:
@@ -414,6 +504,43 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/chat.v1.SendEventResponse'
+  /chat.v1.ChatService/SubmitProposal:
+    post:
+      tags:
+        - Proposals
+        - chat.v1.ChatService
+      summary: Submit a decision on a pending proposal
+      description: Approves or rejects a pending proposal. If approved, the proposed change is executed. Only room owners can submit proposal decisions.
+      operationId: submitProposal
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/chat.v1.SubmitProposalRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chat.v1.SubmitProposalResponse'
   /chat.v1.ChatService/UpdateRoom:
     post:
       tags:
@@ -519,9 +646,11 @@ components:
           title: ack_at
           $ref: '#/components/schemas/google.protobuf.Timestamp'
         error:
+          oneOf:
+            - $ref: '#/components/schemas/common.v1.ErrorDetail'
+            - type: "null"
           title: error
           description: if set, indicates failure reason for this event
-          $ref: '#/components/schemas/common.v1.ErrorDetail'
       title: AckEvent
       additionalProperties: false
       description: |-
@@ -592,9 +721,11 @@ components:
           title: previews
           description: Optional previews / thumbnails
         caption:
+          oneOf:
+            - $ref: '#/components/schemas/chat.v1.TextContent'
+            - type: "null"
           title: caption
           description: Optional caption text
-          $ref: '#/components/schemas/chat.v1.TextContent'
         encrypted:
           type: boolean
           title: encrypted
@@ -766,6 +897,10 @@ components:
         metadata:
           title: metadata
           $ref: '#/components/schemas/google.protobuf.Struct'
+        requiresApproval:
+          type: boolean
+          title: requires_approval
+          description: If true, changes to this room require approval from owners before execution
       title: CreateRoomRequest
       additionalProperties: false
     chat.v1.CreateRoomResponse:
@@ -887,6 +1022,39 @@ components:
           type: string
           title: prev_cursor
       title: GetHistoryResponse
+      additionalProperties: false
+    chat.v1.ListProposalsRequest:
+      type: object
+      properties:
+        roomId:
+          type: string
+          title: room_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        state:
+          oneOf:
+            - $ref: '#/components/schemas/chat.v1.ProposalState'
+            - type: "null"
+          title: state
+          description: 'Optional: filter by state (default: only PENDING)'
+        cursor:
+          title: cursor
+          $ref: '#/components/schemas/common.v1.PageCursor'
+      title: ListProposalsRequest
+      additionalProperties: false
+    chat.v1.ListProposalsResponse:
+      type: object
+      properties:
+        proposals:
+          type: array
+          items:
+            $ref: '#/components/schemas/chat.v1.Proposal'
+          title: proposals
+        nextCursor:
+          type: string
+          title: next_cursor
+      title: ListProposalsResponse
       additionalProperties: false
     chat.v1.LiveRequest:
       type: object
@@ -1215,6 +1383,90 @@ components:
         - PRESENCE_STATUS_UNSPECIFIED
         - PRESENCE_STATUS_OFFLINE
         - PRESENCE_STATUS_ONLINE
+    chat.v1.Proposal:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        roomId:
+          type: string
+          title: room_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        type:
+          title: type
+          $ref: '#/components/schemas/chat.v1.ProposalType'
+        state:
+          title: state
+          $ref: '#/components/schemas/chat.v1.ProposalState'
+        requestedBy:
+          type: string
+          title: requested_by
+          description: profile_id of the requester
+        payload:
+          title: payload
+          description: the proposed change payload
+          $ref: '#/components/schemas/google.protobuf.Struct'
+        createdAt:
+          title: created_at
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        expiresAt:
+          title: expires_at
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        resolvedBy:
+          type:
+            - string
+            - "null"
+          title: resolved_by
+          description: profile_id of approver/rejector
+        resolvedAt:
+          oneOf:
+            - $ref: '#/components/schemas/google.protobuf.Timestamp'
+            - type: "null"
+          title: resolved_at
+        reason:
+          type:
+            - string
+            - "null"
+          title: reason
+          description: rejection reason if rejected
+      title: Proposal
+      additionalProperties: false
+      description: Proposal represents a pending change that requires approval before execution.
+    chat.v1.ProposalAction:
+      type: string
+      title: ProposalAction
+      enum:
+        - PROPOSAL_ACTION_UNSPECIFIED
+        - PROPOSAL_ACTION_APPROVE
+        - PROPOSAL_ACTION_REJECT
+      description: Action to take on a proposal
+    chat.v1.ProposalState:
+      type: string
+      title: ProposalState
+      enum:
+        - PROPOSAL_STATE_UNSPECIFIED
+        - PROPOSAL_STATE_PENDING
+        - PROPOSAL_STATE_APPROVED
+        - PROPOSAL_STATE_REJECTED
+        - PROPOSAL_STATE_EXPIRED
+      description: ProposalState represents the current state of a proposal.
+    chat.v1.ProposalType:
+      type: string
+      title: ProposalType
+      enum:
+        - PROPOSAL_TYPE_UNSPECIFIED
+        - PROPOSAL_TYPE_UPDATE_ROOM
+        - PROPOSAL_TYPE_DELETE_ROOM
+        - PROPOSAL_TYPE_ADD_SUBSCRIPTIONS
+        - PROPOSAL_TYPE_REMOVE_SUBSCRIPTIONS
+        - PROPOSAL_TYPE_UPDATE_SUBSCRIPTION_ROLE
+      description: ProposalType represents the kind of change being proposed.
     chat.v1.ReactionContent:
       type: object
       properties:
@@ -1350,6 +1602,10 @@ components:
         creatorId:
           type: string
           title: creator_id
+        requiresApproval:
+          type: boolean
+          title: requires_approval
+          description: If true, changes to this room require approval from owners before execution
       title: Room
       additionalProperties: false
     chat.v1.RoomChangeAction:
@@ -1572,6 +1828,43 @@ components:
             $ref: '#/components/schemas/chat.v1.AckEvent'
           title: ack
       title: SendEventResponse
+      additionalProperties: false
+    chat.v1.SubmitProposalRequest:
+      type: object
+      properties:
+        roomId:
+          type: string
+          title: room_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        proposalId:
+          type: string
+          title: proposal_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        action:
+          title: action
+          $ref: '#/components/schemas/chat.v1.ProposalAction'
+        reason:
+          type:
+            - string
+            - "null"
+          title: reason
+          description: optional reason (typically for rejection)
+      title: SubmitProposalRequest
+      additionalProperties: false
+    chat.v1.SubmitProposalResponse:
+      type: object
+      properties:
+        proposal:
+          title: proposal
+          $ref: '#/components/schemas/chat.v1.Proposal'
+        error:
+          title: error
+          $ref: '#/components/schemas/common.v1.ErrorDetail'
+      title: SubmitProposalResponse
       additionalProperties: false
     chat.v1.TextAnnotation:
       type: object

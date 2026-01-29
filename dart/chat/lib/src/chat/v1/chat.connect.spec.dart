@@ -94,4 +94,21 @@ abstract final class ChatService {
     chatv1chat.LiveRequest.new,
     chatv1chat.LiveResponse.new,
   );
+
+  /// List pending proposals for a room
+  static const listProposals = connect.Spec(
+    '/$name/ListProposals',
+    connect.StreamType.unary,
+    chatv1chat.ListProposalsRequest.new,
+    chatv1chat.ListProposalsResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
+  );
+
+  /// Submit a decision on a pending proposal (approve or reject)
+  static const submitProposal = connect.Spec(
+    '/$name/SubmitProposal',
+    connect.StreamType.unary,
+    chatv1chat.SubmitProposalRequest.new,
+    chatv1chat.SubmitProposalResponse.new,
+  );
 }

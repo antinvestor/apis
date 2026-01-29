@@ -17,7 +17,10 @@ import 'package:protobuf/protobuf.dart' as $pb;
 import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $3;
 import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $0;
 import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $1;
+import 'chat.pbenum.dart';
 import 'definitions.pb.dart' as $4;
+
+export 'chat.pbenum.dart';
 
 class SendEventRequest extends $pb.GeneratedMessage {
   factory SendEventRequest({
@@ -273,6 +276,7 @@ class Room extends $pb.GeneratedMessage {
     $1.Timestamp? createdAt,
     $1.Timestamp? updatedAt,
     $core.String? creatorId,
+    $core.bool? requiresApproval,
   }) {
     final $result = create();
     if (id != null) {
@@ -299,6 +303,9 @@ class Room extends $pb.GeneratedMessage {
     if (creatorId != null) {
       $result.creatorId = creatorId;
     }
+    if (requiresApproval != null) {
+      $result.requiresApproval = requiresApproval;
+    }
     return $result;
   }
   Room._() : super();
@@ -314,6 +321,7 @@ class Room extends $pb.GeneratedMessage {
     ..aOM<$1.Timestamp>(7, _omitFieldNames ? '' : 'createdAt', subBuilder: $1.Timestamp.create)
     ..aOM<$1.Timestamp>(8, _omitFieldNames ? '' : 'updatedAt', subBuilder: $1.Timestamp.create)
     ..aOS(9, _omitFieldNames ? '' : 'creatorId')
+    ..aOB(10, _omitFieldNames ? '' : 'requiresApproval')
     ..hasRequiredFields = false
   ;
 
@@ -415,6 +423,16 @@ class Room extends $pb.GeneratedMessage {
   $core.bool hasCreatorId() => $_has(7);
   @$pb.TagNumber(9)
   void clearCreatorId() => clearField(9);
+
+  /// If true, changes to this room require approval from owners before execution
+  @$pb.TagNumber(10)
+  $core.bool get requiresApproval => $_getBF(8);
+  @$pb.TagNumber(10)
+  set requiresApproval($core.bool v) { $_setBool(8, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasRequiresApproval() => $_has(8);
+  @$pb.TagNumber(10)
+  void clearRequiresApproval() => clearField(10);
 }
 
 class CreateRoomRequest extends $pb.GeneratedMessage {
@@ -425,6 +443,7 @@ class CreateRoomRequest extends $pb.GeneratedMessage {
     $core.bool? isPrivate,
     $core.Iterable<$3.ContactLink>? members,
     $0.Struct? metadata,
+    $core.bool? requiresApproval,
   }) {
     final $result = create();
     if (id != null) {
@@ -445,6 +464,9 @@ class CreateRoomRequest extends $pb.GeneratedMessage {
     if (metadata != null) {
       $result.metadata = metadata;
     }
+    if (requiresApproval != null) {
+      $result.requiresApproval = requiresApproval;
+    }
     return $result;
   }
   CreateRoomRequest._() : super();
@@ -458,6 +480,7 @@ class CreateRoomRequest extends $pb.GeneratedMessage {
     ..aOB(6, _omitFieldNames ? '' : 'isPrivate')
     ..pc<$3.ContactLink>(7, _omitFieldNames ? '' : 'members', $pb.PbFieldType.PM, subBuilder: $3.ContactLink.create)
     ..aOM<$0.Struct>(8, _omitFieldNames ? '' : 'metadata', subBuilder: $0.Struct.create)
+    ..aOB(9, _omitFieldNames ? '' : 'requiresApproval')
     ..hasRequiredFields = false
   ;
 
@@ -531,6 +554,16 @@ class CreateRoomRequest extends $pb.GeneratedMessage {
   void clearMetadata() => clearField(8);
   @$pb.TagNumber(8)
   $0.Struct ensureMetadata() => $_ensure(5);
+
+  /// If true, changes to this room require approval from owners before execution
+  @$pb.TagNumber(9)
+  $core.bool get requiresApproval => $_getBF(6);
+  @$pb.TagNumber(9)
+  set requiresApproval($core.bool v) { $_setBool(6, v); }
+  @$pb.TagNumber(9)
+  $core.bool hasRequiresApproval() => $_has(6);
+  @$pb.TagNumber(9)
+  void clearRequiresApproval() => clearField(9);
 }
 
 class CreateRoomResponse extends $pb.GeneratedMessage {
@@ -1774,6 +1807,504 @@ class LiveResponse extends $pb.GeneratedMessage {
   $3.ErrorDetail ensureError() => $_ensure(0);
 }
 
+/// Proposal represents a pending change that requires approval before execution.
+class Proposal extends $pb.GeneratedMessage {
+  factory Proposal({
+    $core.String? id,
+    $core.String? roomId,
+    ProposalType? type,
+    ProposalState? state,
+    $core.String? requestedBy,
+    $0.Struct? payload,
+    $1.Timestamp? createdAt,
+    $1.Timestamp? expiresAt,
+    $core.String? resolvedBy,
+    $1.Timestamp? resolvedAt,
+    $core.String? reason,
+  }) {
+    final $result = create();
+    if (id != null) {
+      $result.id = id;
+    }
+    if (roomId != null) {
+      $result.roomId = roomId;
+    }
+    if (type != null) {
+      $result.type = type;
+    }
+    if (state != null) {
+      $result.state = state;
+    }
+    if (requestedBy != null) {
+      $result.requestedBy = requestedBy;
+    }
+    if (payload != null) {
+      $result.payload = payload;
+    }
+    if (createdAt != null) {
+      $result.createdAt = createdAt;
+    }
+    if (expiresAt != null) {
+      $result.expiresAt = expiresAt;
+    }
+    if (resolvedBy != null) {
+      $result.resolvedBy = resolvedBy;
+    }
+    if (resolvedAt != null) {
+      $result.resolvedAt = resolvedAt;
+    }
+    if (reason != null) {
+      $result.reason = reason;
+    }
+    return $result;
+  }
+  Proposal._() : super();
+  factory Proposal.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory Proposal.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Proposal', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'id')
+    ..aOS(2, _omitFieldNames ? '' : 'roomId')
+    ..e<ProposalType>(3, _omitFieldNames ? '' : 'type', $pb.PbFieldType.OE, defaultOrMaker: ProposalType.PROPOSAL_TYPE_UNSPECIFIED, valueOf: ProposalType.valueOf, enumValues: ProposalType.values)
+    ..e<ProposalState>(4, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: ProposalState.PROPOSAL_STATE_UNSPECIFIED, valueOf: ProposalState.valueOf, enumValues: ProposalState.values)
+    ..aOS(5, _omitFieldNames ? '' : 'requestedBy')
+    ..aOM<$0.Struct>(6, _omitFieldNames ? '' : 'payload', subBuilder: $0.Struct.create)
+    ..aOM<$1.Timestamp>(7, _omitFieldNames ? '' : 'createdAt', subBuilder: $1.Timestamp.create)
+    ..aOM<$1.Timestamp>(8, _omitFieldNames ? '' : 'expiresAt', subBuilder: $1.Timestamp.create)
+    ..aOS(9, _omitFieldNames ? '' : 'resolvedBy')
+    ..aOM<$1.Timestamp>(10, _omitFieldNames ? '' : 'resolvedAt', subBuilder: $1.Timestamp.create)
+    ..aOS(11, _omitFieldNames ? '' : 'reason')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  Proposal clone() => Proposal()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  Proposal copyWith(void Function(Proposal) updates) => super.copyWith((message) => updates(message as Proposal)) as Proposal;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static Proposal create() => Proposal._();
+  Proposal createEmptyInstance() => create();
+  static $pb.PbList<Proposal> createRepeated() => $pb.PbList<Proposal>();
+  @$core.pragma('dart2js:noInline')
+  static Proposal getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Proposal>(create);
+  static Proposal? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get id => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set id($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get roomId => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set roomId($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasRoomId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearRoomId() => clearField(2);
+
+  @$pb.TagNumber(3)
+  ProposalType get type => $_getN(2);
+  @$pb.TagNumber(3)
+  set type(ProposalType v) { setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasType() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearType() => clearField(3);
+
+  @$pb.TagNumber(4)
+  ProposalState get state => $_getN(3);
+  @$pb.TagNumber(4)
+  set state(ProposalState v) { setField(4, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasState() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearState() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get requestedBy => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set requestedBy($core.String v) { $_setString(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasRequestedBy() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearRequestedBy() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $0.Struct get payload => $_getN(5);
+  @$pb.TagNumber(6)
+  set payload($0.Struct v) { setField(6, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasPayload() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearPayload() => clearField(6);
+  @$pb.TagNumber(6)
+  $0.Struct ensurePayload() => $_ensure(5);
+
+  @$pb.TagNumber(7)
+  $1.Timestamp get createdAt => $_getN(6);
+  @$pb.TagNumber(7)
+  set createdAt($1.Timestamp v) { setField(7, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasCreatedAt() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearCreatedAt() => clearField(7);
+  @$pb.TagNumber(7)
+  $1.Timestamp ensureCreatedAt() => $_ensure(6);
+
+  @$pb.TagNumber(8)
+  $1.Timestamp get expiresAt => $_getN(7);
+  @$pb.TagNumber(8)
+  set expiresAt($1.Timestamp v) { setField(8, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasExpiresAt() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearExpiresAt() => clearField(8);
+  @$pb.TagNumber(8)
+  $1.Timestamp ensureExpiresAt() => $_ensure(7);
+
+  @$pb.TagNumber(9)
+  $core.String get resolvedBy => $_getSZ(8);
+  @$pb.TagNumber(9)
+  set resolvedBy($core.String v) { $_setString(8, v); }
+  @$pb.TagNumber(9)
+  $core.bool hasResolvedBy() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearResolvedBy() => clearField(9);
+
+  @$pb.TagNumber(10)
+  $1.Timestamp get resolvedAt => $_getN(9);
+  @$pb.TagNumber(10)
+  set resolvedAt($1.Timestamp v) { setField(10, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasResolvedAt() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearResolvedAt() => clearField(10);
+  @$pb.TagNumber(10)
+  $1.Timestamp ensureResolvedAt() => $_ensure(9);
+
+  @$pb.TagNumber(11)
+  $core.String get reason => $_getSZ(10);
+  @$pb.TagNumber(11)
+  set reason($core.String v) { $_setString(10, v); }
+  @$pb.TagNumber(11)
+  $core.bool hasReason() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearReason() => clearField(11);
+}
+
+class ListProposalsRequest extends $pb.GeneratedMessage {
+  factory ListProposalsRequest({
+    $core.String? roomId,
+    ProposalState? state,
+    $3.PageCursor? cursor,
+  }) {
+    final $result = create();
+    if (roomId != null) {
+      $result.roomId = roomId;
+    }
+    if (state != null) {
+      $result.state = state;
+    }
+    if (cursor != null) {
+      $result.cursor = cursor;
+    }
+    return $result;
+  }
+  ListProposalsRequest._() : super();
+  factory ListProposalsRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListProposalsRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListProposalsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'roomId')
+    ..e<ProposalState>(2, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: ProposalState.PROPOSAL_STATE_UNSPECIFIED, valueOf: ProposalState.valueOf, enumValues: ProposalState.values)
+    ..aOM<$3.PageCursor>(3, _omitFieldNames ? '' : 'cursor', subBuilder: $3.PageCursor.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListProposalsRequest clone() => ListProposalsRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListProposalsRequest copyWith(void Function(ListProposalsRequest) updates) => super.copyWith((message) => updates(message as ListProposalsRequest)) as ListProposalsRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListProposalsRequest create() => ListProposalsRequest._();
+  ListProposalsRequest createEmptyInstance() => create();
+  static $pb.PbList<ListProposalsRequest> createRepeated() => $pb.PbList<ListProposalsRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListProposalsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListProposalsRequest>(create);
+  static ListProposalsRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get roomId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set roomId($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasRoomId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearRoomId() => clearField(1);
+
+  /// Optional: filter by state (default: only PENDING)
+  @$pb.TagNumber(2)
+  ProposalState get state => $_getN(1);
+  @$pb.TagNumber(2)
+  set state(ProposalState v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasState() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearState() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $3.PageCursor get cursor => $_getN(2);
+  @$pb.TagNumber(3)
+  set cursor($3.PageCursor v) { setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasCursor() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearCursor() => clearField(3);
+  @$pb.TagNumber(3)
+  $3.PageCursor ensureCursor() => $_ensure(2);
+}
+
+class ListProposalsResponse extends $pb.GeneratedMessage {
+  factory ListProposalsResponse({
+    $core.Iterable<Proposal>? proposals,
+    $core.String? nextCursor,
+  }) {
+    final $result = create();
+    if (proposals != null) {
+      $result.proposals.addAll(proposals);
+    }
+    if (nextCursor != null) {
+      $result.nextCursor = nextCursor;
+    }
+    return $result;
+  }
+  ListProposalsResponse._() : super();
+  factory ListProposalsResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListProposalsResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListProposalsResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
+    ..pc<Proposal>(1, _omitFieldNames ? '' : 'proposals', $pb.PbFieldType.PM, subBuilder: Proposal.create)
+    ..aOS(2, _omitFieldNames ? '' : 'nextCursor')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListProposalsResponse clone() => ListProposalsResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListProposalsResponse copyWith(void Function(ListProposalsResponse) updates) => super.copyWith((message) => updates(message as ListProposalsResponse)) as ListProposalsResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListProposalsResponse create() => ListProposalsResponse._();
+  ListProposalsResponse createEmptyInstance() => create();
+  static $pb.PbList<ListProposalsResponse> createRepeated() => $pb.PbList<ListProposalsResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListProposalsResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListProposalsResponse>(create);
+  static ListProposalsResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<Proposal> get proposals => $_getList(0);
+
+  @$pb.TagNumber(2)
+  $core.String get nextCursor => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set nextCursor($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasNextCursor() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearNextCursor() => clearField(2);
+}
+
+class SubmitProposalRequest extends $pb.GeneratedMessage {
+  factory SubmitProposalRequest({
+    $core.String? roomId,
+    $core.String? proposalId,
+    ProposalAction? action,
+    $core.String? reason,
+  }) {
+    final $result = create();
+    if (roomId != null) {
+      $result.roomId = roomId;
+    }
+    if (proposalId != null) {
+      $result.proposalId = proposalId;
+    }
+    if (action != null) {
+      $result.action = action;
+    }
+    if (reason != null) {
+      $result.reason = reason;
+    }
+    return $result;
+  }
+  SubmitProposalRequest._() : super();
+  factory SubmitProposalRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory SubmitProposalRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SubmitProposalRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'roomId')
+    ..aOS(2, _omitFieldNames ? '' : 'proposalId')
+    ..e<ProposalAction>(3, _omitFieldNames ? '' : 'action', $pb.PbFieldType.OE, defaultOrMaker: ProposalAction.PROPOSAL_ACTION_UNSPECIFIED, valueOf: ProposalAction.valueOf, enumValues: ProposalAction.values)
+    ..aOS(4, _omitFieldNames ? '' : 'reason')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  SubmitProposalRequest clone() => SubmitProposalRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  SubmitProposalRequest copyWith(void Function(SubmitProposalRequest) updates) => super.copyWith((message) => updates(message as SubmitProposalRequest)) as SubmitProposalRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SubmitProposalRequest create() => SubmitProposalRequest._();
+  SubmitProposalRequest createEmptyInstance() => create();
+  static $pb.PbList<SubmitProposalRequest> createRepeated() => $pb.PbList<SubmitProposalRequest>();
+  @$core.pragma('dart2js:noInline')
+  static SubmitProposalRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SubmitProposalRequest>(create);
+  static SubmitProposalRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get roomId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set roomId($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasRoomId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearRoomId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get proposalId => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set proposalId($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasProposalId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearProposalId() => clearField(2);
+
+  @$pb.TagNumber(3)
+  ProposalAction get action => $_getN(2);
+  @$pb.TagNumber(3)
+  set action(ProposalAction v) { setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasAction() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearAction() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get reason => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set reason($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasReason() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearReason() => clearField(4);
+}
+
+class SubmitProposalResponse extends $pb.GeneratedMessage {
+  factory SubmitProposalResponse({
+    Proposal? proposal,
+    $3.ErrorDetail? error,
+  }) {
+    final $result = create();
+    if (proposal != null) {
+      $result.proposal = proposal;
+    }
+    if (error != null) {
+      $result.error = error;
+    }
+    return $result;
+  }
+  SubmitProposalResponse._() : super();
+  factory SubmitProposalResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory SubmitProposalResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SubmitProposalResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
+    ..aOM<Proposal>(1, _omitFieldNames ? '' : 'proposal', subBuilder: Proposal.create)
+    ..aOM<$3.ErrorDetail>(2, _omitFieldNames ? '' : 'error', subBuilder: $3.ErrorDetail.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  SubmitProposalResponse clone() => SubmitProposalResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  SubmitProposalResponse copyWith(void Function(SubmitProposalResponse) updates) => super.copyWith((message) => updates(message as SubmitProposalResponse)) as SubmitProposalResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SubmitProposalResponse create() => SubmitProposalResponse._();
+  SubmitProposalResponse createEmptyInstance() => create();
+  static $pb.PbList<SubmitProposalResponse> createRepeated() => $pb.PbList<SubmitProposalResponse>();
+  @$core.pragma('dart2js:noInline')
+  static SubmitProposalResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SubmitProposalResponse>(create);
+  static SubmitProposalResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  Proposal get proposal => $_getN(0);
+  @$pb.TagNumber(1)
+  set proposal(Proposal v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasProposal() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearProposal() => clearField(1);
+  @$pb.TagNumber(1)
+  Proposal ensureProposal() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $3.ErrorDetail get error => $_getN(1);
+  @$pb.TagNumber(2)
+  set error($3.ErrorDetail v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasError() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearError() => clearField(2);
+  @$pb.TagNumber(2)
+  $3.ErrorDetail ensureError() => $_ensure(1);
+}
+
 class ChatServiceApi {
   $pb.RpcClient _client;
   ChatServiceApi(this._client);
@@ -1810,6 +2341,12 @@ class ChatServiceApi {
   ;
   $async.Future<LiveResponse> live($pb.ClientContext? ctx, LiveRequest request) =>
     _client.invoke<LiveResponse>(ctx, 'ChatService', 'Live', request, LiveResponse())
+  ;
+  $async.Future<ListProposalsResponse> listProposals($pb.ClientContext? ctx, ListProposalsRequest request) =>
+    _client.invoke<ListProposalsResponse>(ctx, 'ChatService', 'ListProposals', request, ListProposalsResponse())
+  ;
+  $async.Future<SubmitProposalResponse> submitProposal($pb.ClientContext? ctx, SubmitProposalRequest request) =>
+    _client.invoke<SubmitProposalResponse>(ctx, 'ChatService', 'SubmitProposal', request, SubmitProposalResponse())
   ;
 }
 

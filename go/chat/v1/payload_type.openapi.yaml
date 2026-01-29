@@ -37,9 +37,11 @@ components:
           title: previews
           description: Optional previews / thumbnails
         caption:
+          oneOf:
+            - $ref: '#/components/schemas/chat.v1.TextContent'
+            - type: "null"
           title: caption
           description: Optional caption text
-          $ref: '#/components/schemas/chat.v1.TextContent'
         encrypted:
           type: boolean
           title: encrypted

@@ -32,6 +32,8 @@ abstract class ChatServiceBase extends $pb.GeneratedService {
   $async.Future<$5.UpdateSubscriptionRoleResponse> updateSubscriptionRole($pb.ServerContext ctx, $5.UpdateSubscriptionRoleRequest request);
   $async.Future<$5.SearchRoomSubscriptionsResponse> searchRoomSubscriptions($pb.ServerContext ctx, $5.SearchRoomSubscriptionsRequest request);
   $async.Future<$5.LiveResponse> live($pb.ServerContext ctx, $5.LiveRequest request);
+  $async.Future<$5.ListProposalsResponse> listProposals($pb.ServerContext ctx, $5.ListProposalsRequest request);
+  $async.Future<$5.SubmitProposalResponse> submitProposal($pb.ServerContext ctx, $5.SubmitProposalRequest request);
 
   $pb.GeneratedMessage createRequest($core.String methodName) {
     switch (methodName) {
@@ -46,6 +48,8 @@ abstract class ChatServiceBase extends $pb.GeneratedService {
       case 'UpdateSubscriptionRole': return $5.UpdateSubscriptionRoleRequest();
       case 'SearchRoomSubscriptions': return $5.SearchRoomSubscriptionsRequest();
       case 'Live': return $5.LiveRequest();
+      case 'ListProposals': return $5.ListProposalsRequest();
+      case 'SubmitProposal': return $5.SubmitProposalRequest();
       default: throw $core.ArgumentError('Unknown method: $methodName');
     }
   }
@@ -63,6 +67,8 @@ abstract class ChatServiceBase extends $pb.GeneratedService {
       case 'UpdateSubscriptionRole': return this.updateSubscriptionRole(ctx, request as $5.UpdateSubscriptionRoleRequest);
       case 'SearchRoomSubscriptions': return this.searchRoomSubscriptions(ctx, request as $5.SearchRoomSubscriptionsRequest);
       case 'Live': return this.live(ctx, request as $5.LiveRequest);
+      case 'ListProposals': return this.listProposals(ctx, request as $5.ListProposalsRequest);
+      case 'SubmitProposal': return this.submitProposal(ctx, request as $5.SubmitProposalRequest);
       default: throw $core.ArgumentError('Unknown method: $methodName');
     }
   }
