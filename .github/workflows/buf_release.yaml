@@ -13,7 +13,7 @@ jobs:
   buf:
     strategy:
       matrix:
-        api_module: [ common,chat,device,files,ledger,lostid,notification,ocr,partition,payment,profile,property,settings ]
+        api_module: [ common,chat,device,files,ledger,lostid,notification,ocr,partition,payment,profile,property,settings,commerce ]
       max-parallel: 1 # This ensures sequential execution of matrix jobs
     runs-on: ubuntu-latest
     steps:
