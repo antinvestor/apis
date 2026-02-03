@@ -33,11 +33,13 @@ class ShopStatus extends $pb.ProtobufEnum {
 class ProductStatus extends $pb.ProtobufEnum {
   static const ProductStatus PRODUCT_STATUS_UNSPECIFIED = ProductStatus._(0, _omitEnumNames ? '' : 'PRODUCT_STATUS_UNSPECIFIED');
   static const ProductStatus PRODUCT_STATUS_ACTIVE = ProductStatus._(1, _omitEnumNames ? '' : 'PRODUCT_STATUS_ACTIVE');
-  static const ProductStatus PRODUCT_STATUS_ARCHIVED = ProductStatus._(2, _omitEnumNames ? '' : 'PRODUCT_STATUS_ARCHIVED');
+  static const ProductStatus PRODUCT_STATUS_INACTIVE = ProductStatus._(2, _omitEnumNames ? '' : 'PRODUCT_STATUS_INACTIVE');
+  static const ProductStatus PRODUCT_STATUS_ARCHIVED = ProductStatus._(3, _omitEnumNames ? '' : 'PRODUCT_STATUS_ARCHIVED');
 
   static const $core.List<ProductStatus> values = <ProductStatus> [
     PRODUCT_STATUS_UNSPECIFIED,
     PRODUCT_STATUS_ACTIVE,
+    PRODUCT_STATUS_INACTIVE,
     PRODUCT_STATUS_ARCHIVED,
   ];
 
@@ -121,6 +123,27 @@ class OrderStatus extends $pb.ProtobufEnum {
   static OrderStatus? valueOf($core.int value) => _byValue[value];
 
   const OrderStatus._($core.int v, $core.String n) : super(v, n);
+}
+
+class PaymentStatus extends $pb.ProtobufEnum {
+  static const PaymentStatus PAYMENT_STATUS_UNSPECIFIED = PaymentStatus._(0, _omitEnumNames ? '' : 'PAYMENT_STATUS_UNSPECIFIED');
+  static const PaymentStatus PAYMENT_STATUS_PENDING = PaymentStatus._(1, _omitEnumNames ? '' : 'PAYMENT_STATUS_PENDING');
+  static const PaymentStatus PAYMENT_STATUS_PAID = PaymentStatus._(2, _omitEnumNames ? '' : 'PAYMENT_STATUS_PAID');
+  static const PaymentStatus PAYMENT_STATUS_FAILED = PaymentStatus._(3, _omitEnumNames ? '' : 'PAYMENT_STATUS_FAILED');
+  static const PaymentStatus PAYMENT_STATUS_REFUNDED = PaymentStatus._(4, _omitEnumNames ? '' : 'PAYMENT_STATUS_REFUNDED');
+
+  static const $core.List<PaymentStatus> values = <PaymentStatus> [
+    PAYMENT_STATUS_UNSPECIFIED,
+    PAYMENT_STATUS_PENDING,
+    PAYMENT_STATUS_PAID,
+    PAYMENT_STATUS_FAILED,
+    PAYMENT_STATUS_REFUNDED,
+  ];
+
+  static final $core.Map<$core.int, PaymentStatus> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static PaymentStatus? valueOf($core.int value) => _byValue[value];
+
+  const PaymentStatus._($core.int v, $core.String n) : super(v, n);
 }
 
 class FulfilmentStatus extends $pb.ProtobufEnum {

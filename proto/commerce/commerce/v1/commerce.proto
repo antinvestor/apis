@@ -28,9 +28,9 @@ package commerce.v1;
 import "buf/validate/validate.proto";
 import "common/v1/common.proto";
 import "gnostic/openapi/v3/annotations.proto";
+import "google/protobuf/field_mask.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
-import "google/protobuf/field_mask.proto";
 import "google/type/money.proto";
 
 option go_package = "github.com/antinvestor/apis/go/commerce/v1;commercev1";
@@ -69,86 +69,83 @@ option (gnostic.openapi.v3.document) = {
   }
 };
 
-
 /*
- Headless commerce API.
+   Headless commerce API.
 
- Scope:
-   - shop
-   - products + variants
-   - orders
-   - fulfilment
+   Scope:
+     - shop
+     - products + variants
+     - orders
+     - fulfilment
 
- No payments.
- No carts.
- No settlement.
+   No payments.
+   No carts.
+   No settlement.
 
- This API is designed to be stable when a payment/ledger layer is added later.
+   This API is designed to be stable when a payment/ledger layer is added later.
 */
 
 service CommerceService {
-
   // ----------------------
   // Shop
   // ----------------------
 
   // Creates a new shop. The authenticated user becomes the admin.
-  rpc CreateShop(CreateShopRequest) returns (Shop);
+  rpc CreateShop(CreateShopRequest) returns (CreateShopResponse);
   // Retrieves shop details by ID.
-  rpc GetShop(GetShopRequest) returns (Shop);
+  rpc GetShop(GetShopRequest) returns (GetShopResponse);
   // Updates shop details.
-  rpc UpdateShop(UpdateShopRequest) returns (Shop);
+  rpc UpdateShop(UpdateShopRequest) returns (UpdateShopResponse);
 
   // ----------------------
   // Catalog
   // ----------------------
 
   // Creates a new product in the catalog.
-  rpc CreateProduct(CreateProductRequest) returns (Product);
+  rpc CreateProduct(CreateProductRequest) returns (CreateProductResponse);
   // Retrieves a product by its ID.
-  rpc GetProduct(GetProductRequest) returns (Product);
+  rpc GetProduct(GetProductRequest) returns (GetProductResponse);
   // Lists products belonging to a shop, with optional search and filtering.
   rpc ListProducts(ListProductsRequest) returns (ListProductsResponse);
 
   // Creates a new variant for a product.
-  rpc CreateProductVariant(CreateProductVariantRequest) returns (ProductVariant);
+  rpc CreateProductVariant(CreateProductVariantRequest) returns (CreateProductVariantResponse);
   // Updates an existing product variant.
-  rpc UpdateProductVariant(UpdateProductVariantRequest) returns (ProductVariant);
+  rpc UpdateProductVariant(UpdateProductVariantRequest) returns (UpdateProductVariantResponse);
 
   // ----------------------
   // Orders
   // ----------------------
 
-  rpc CreateCart(CreateCartRequest) returns (Cart);
-  rpc GetCart(GetCartRequest) returns (Cart);
+  rpc CreateCart(CreateCartRequest) returns (CreateCartResponse);
+  rpc GetCart(GetCartRequest) returns (GetCartResponse);
 
-  rpc AddCartLine(AddCartLineRequest) returns (Cart);
-  rpc RemoveCartLine(RemoveCartLineRequest) returns (Cart);
+  rpc AddCartLine(AddCartLineRequest) returns (AddCartLineResponse);
+  rpc RemoveCartLine(RemoveCartLineRequest) returns (RemoveCartLineResponse);
 
-  rpc CreateOrderFromCart(CreateOrderFromCartRequest) returns (Order);
-
+  rpc CreateOrderFromCart(CreateOrderFromCartRequest) returns (CreateOrderFromCartResponse);
 
   // ----------------------
   // Orders
   // ----------------------
 
   /*
-   Creates an order and reserves stock atomically.
+     Creates an order and reserves stock atomically.
 
-   The server MUST:
-     - validate all variants belong to the shop
-     - validate sufficient stock
-     - decrement stock
-     - snapshot price and name
-     - compute totals
+     The server MUST:
+       - validate all variants belong to the shop
+       - validate sufficient stock
+       - decrement stock
+       - snapshot price and name
+       - compute totals
 
-   The order is created in CONFIRMED state
-   (since this API does not handle payments).
+     The order is created in CONFIRMED state
+     (since this API does not handle payments).
   */
-  rpc CreateOrder(CreateOrderRequest) returns (Order);
+  rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse);
 
   // Retrieves an order by ID.
-  rpc GetOrder(GetOrderRequest) returns (Order);
+  rpc GetOrder(GetOrderRequest) returns (GetOrderResponse);
   // Lists orders for a shop, with optional search and filtering.
   rpc ListOrders(ListOrdersRequest) returns (ListOrdersResponse);
 
@@ -157,18 +154,17 @@ service CommerceService {
   // ----------------------
 
   /*
-   Creates a fulfilment for an order.
+     Creates a fulfilment for an order.
 
-   A fulfilment may contain a subset of order lines.
-   Quantity per line MUST NOT exceed remaining unfulfilled quantity.
+     A fulfilment may contain a subset of order lines.
+     Quantity per line MUST NOT exceed remaining unfulfilled quantity.
   */
-  rpc CreateFulfilment(CreateFulfilmentRequest) returns (Fulfilment);
-
+  rpc CreateFulfilment(CreateFulfilmentRequest) returns (CreateFulfilmentResponse);
 
   // Updates a fulfilment (e.g. adding tracking number, marking as shipped).
-  rpc UpdateFulfilment(UpdateFulfilmentRequest) returns (Fulfilment);
+  rpc UpdateFulfilment(UpdateFulfilmentRequest) returns (UpdateFulfilmentResponse);
   // Retrieves a fulfilment by ID.
-  rpc GetFulfilment(GetFulfilmentRequest) returns (Fulfilment);
+  rpc GetFulfilment(GetFulfilmentRequest) returns (GetFulfilmentResponse);
 }
 
 //
@@ -192,8 +188,8 @@ message Shop {
   ShopStatus status = 5;
 
   /*
-   Media assets associated with the shop (logo, banner, etc.).
-   References files in the Files Service.
+     Media assets associated with the shop (logo, banner, etc.).
+     References files in the Files Service.
   */
   repeated string media_ids = 6;
 
@@ -214,6 +210,10 @@ message CreateShopRequest {
   repeated string media_ids = 6;
 }
 
+message CreateShopResponse {
+  Shop shop = 1;
+}
+
 message UpdateShopRequest {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
@@ -229,6 +229,10 @@ message UpdateShopRequest {
   google.protobuf.Struct extra = 7;
 }
 
+message UpdateShopResponse {
+  Shop shop = 1;
+}
+
 message GetShopRequest {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
@@ -237,13 +241,16 @@ message GetShopRequest {
   ];
 }
 
+message GetShopResponse {
+  Shop shop = 1;
+}
+
 //
 // ----------------------
 // Catalog
 // ----------------------
 
 message Product {
-
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
@@ -264,8 +271,8 @@ message Product {
   ProductStatus status = 15;
 
   /*
-   Media assets (images, videos) for the product.
-   References files in the Files Service.
+     Media assets (images, videos) for the product.
+     References files in the Files Service.
   */
   repeated string media_ids = 16;
 
@@ -293,7 +300,6 @@ enum FulfilmentType {
 }
 
 message ProductVariant {
-
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
@@ -309,7 +315,7 @@ message ProductVariant {
   string name = 4;
 
   /*
-   Price in minor units (for example cents).
+     Price in minor units (for example cents).
   */
   google.type.Money price = 5;
 
@@ -340,12 +346,20 @@ message CreateProductRequest {
   map<string, string> attributes = 5;
 }
 
+message CreateProductResponse {
+  Product product = 1;
+}
+
 message GetProductRequest {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
+}
+
+message GetProductResponse {
+  Product product = 1;
 }
 
 message ListProductsRequest {
@@ -379,8 +393,11 @@ message CreateProductVariantRequest {
   repeated string media_ids = 7;
 }
 
-message UpdateProductVariantRequest {
+message CreateProductVariantResponse {
+  ProductVariant product_variant = 1;
+}
 
+message UpdateProductVariantRequest {
   string variant_id = 1;
 
   google.protobuf.FieldMask update_mask = 2;
@@ -394,13 +411,16 @@ message UpdateProductVariantRequest {
   repeated string media_ids = 9;
 }
 
+message UpdateProductVariantResponse {
+  ProductVariant product_variant = 1;
+}
+
 //
 // ----------------------
 // Carts
 // ----------------------
 
 message Cart {
-
   string id = 1;
   string shop_id = 2;
 
@@ -450,12 +470,20 @@ message CreateCartRequest {
   string contact_id = 3;
 }
 
+message CreateCartResponse {
+  Cart cart = 1;
+}
+
 message GetCartRequest {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
+}
+
+message GetCartResponse {
+  Cart cart = 1;
 }
 
 message AddCartLineRequest {
@@ -466,6 +494,10 @@ message AddCartLineRequest {
   ];
   string product_variant_id = 2;
   int64 quantity = 3;
+}
+
+message AddCartLineResponse {
+  Cart cart = 1;
 }
 
 message RemoveCartLineRequest {
@@ -481,8 +513,11 @@ message RemoveCartLineRequest {
   ];
 }
 
-message CreateOrderFromCartRequest {
+message RemoveCartLineResponse {
+  Cart cart = 1;
+}
 
+message CreateOrderFromCartRequest {
   string cart_id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
@@ -506,13 +541,16 @@ message CreateOrderFromCartRequest {
   ];
 }
 
+message CreateOrderFromCartResponse {
+  Order order = 1;
+}
+
 //
 // ----------------------
 // Orders
 // ----------------------
 
 message Order {
-
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
@@ -574,7 +612,6 @@ enum PaymentStatus {
 }
 
 message OrderLine {
-
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
@@ -620,6 +657,10 @@ message CreateOrderRequest {
   repeated CreateOrderLine lines = 10;
 }
 
+message CreateOrderResponse {
+  Order order = 1;
+}
+
 message CreateOrderLine {
   string variant_id = 1 [
     (buf.validate.field).string.min_len = 3,
@@ -637,8 +678,11 @@ message GetOrderRequest {
   ];
 }
 
-message ListOrdersRequest {
+message GetOrderResponse {
+  Order order = 1;
+}
 
+message ListOrdersRequest {
   string shop_id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
@@ -662,7 +706,6 @@ message ListOrdersResponse {
 // ----------------------
 
 message Fulfilment {
-
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
@@ -686,7 +729,6 @@ message Fulfilment {
 }
 
 enum FulfilmentStatus {
-
   FULFILMENT_STATUS_UNSPECIFIED = 0;
 
   FULFILMENT_STATUS_PENDING = 1;
@@ -698,7 +740,6 @@ enum FulfilmentStatus {
 }
 
 message FulfilmentLine {
-
   string order_line_id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
@@ -708,7 +749,6 @@ message FulfilmentLine {
 }
 
 message CreateFulfilmentRequest {
-
   string order_id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
@@ -718,8 +758,11 @@ message CreateFulfilmentRequest {
   repeated FulfilmentLine lines = 2;
 }
 
-message UpdateFulfilmentRequest {
+message CreateFulfilmentResponse {
+  Fulfilment fulfilment = 1;
+}
 
+message UpdateFulfilmentRequest {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
@@ -734,10 +777,18 @@ message UpdateFulfilmentRequest {
   google.protobuf.Timestamp shipped_at = 6;
 }
 
+message UpdateFulfilmentResponse {
+  Fulfilment fulfilment = 1;
+}
+
 message GetFulfilmentRequest {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
+}
+
+message GetFulfilmentResponse {
+  Fulfilment fulfilment = 1;
 }

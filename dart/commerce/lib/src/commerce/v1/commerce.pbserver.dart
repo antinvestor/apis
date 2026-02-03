@@ -21,29 +21,31 @@ import 'commerce.pbjson.dart';
 export 'commerce.pb.dart';
 
 abstract class CommerceServiceBase extends $pb.GeneratedService {
-  $async.Future<$5.Shop> createShop($pb.ServerContext ctx, $5.CreateShopRequest request);
-  $async.Future<$5.Shop> getShop($pb.ServerContext ctx, $5.GetShopRequest request);
-  $async.Future<$5.Product> createProduct($pb.ServerContext ctx, $5.CreateProductRequest request);
-  $async.Future<$5.Product> getProduct($pb.ServerContext ctx, $5.GetProductRequest request);
+  $async.Future<$5.CreateShopResponse> createShop($pb.ServerContext ctx, $5.CreateShopRequest request);
+  $async.Future<$5.GetShopResponse> getShop($pb.ServerContext ctx, $5.GetShopRequest request);
+  $async.Future<$5.UpdateShopResponse> updateShop($pb.ServerContext ctx, $5.UpdateShopRequest request);
+  $async.Future<$5.CreateProductResponse> createProduct($pb.ServerContext ctx, $5.CreateProductRequest request);
+  $async.Future<$5.GetProductResponse> getProduct($pb.ServerContext ctx, $5.GetProductRequest request);
   $async.Future<$5.ListProductsResponse> listProducts($pb.ServerContext ctx, $5.ListProductsRequest request);
-  $async.Future<$5.ProductVariant> createProductVariant($pb.ServerContext ctx, $5.CreateProductVariantRequest request);
-  $async.Future<$5.ProductVariant> updateProductVariant($pb.ServerContext ctx, $5.UpdateProductVariantRequest request);
-  $async.Future<$5.Cart> createCart($pb.ServerContext ctx, $5.CreateCartRequest request);
-  $async.Future<$5.Cart> getCart($pb.ServerContext ctx, $5.GetCartRequest request);
-  $async.Future<$5.Cart> addCartLine($pb.ServerContext ctx, $5.AddCartLineRequest request);
-  $async.Future<$5.Cart> removeCartLine($pb.ServerContext ctx, $5.RemoveCartLineRequest request);
-  $async.Future<$5.Order> createOrderFromCart($pb.ServerContext ctx, $5.CreateOrderFromCartRequest request);
-  $async.Future<$5.Order> createOrder($pb.ServerContext ctx, $5.CreateOrderRequest request);
-  $async.Future<$5.Order> getOrder($pb.ServerContext ctx, $5.GetOrderRequest request);
+  $async.Future<$5.CreateProductVariantResponse> createProductVariant($pb.ServerContext ctx, $5.CreateProductVariantRequest request);
+  $async.Future<$5.UpdateProductVariantResponse> updateProductVariant($pb.ServerContext ctx, $5.UpdateProductVariantRequest request);
+  $async.Future<$5.CreateCartResponse> createCart($pb.ServerContext ctx, $5.CreateCartRequest request);
+  $async.Future<$5.GetCartResponse> getCart($pb.ServerContext ctx, $5.GetCartRequest request);
+  $async.Future<$5.AddCartLineResponse> addCartLine($pb.ServerContext ctx, $5.AddCartLineRequest request);
+  $async.Future<$5.RemoveCartLineResponse> removeCartLine($pb.ServerContext ctx, $5.RemoveCartLineRequest request);
+  $async.Future<$5.CreateOrderFromCartResponse> createOrderFromCart($pb.ServerContext ctx, $5.CreateOrderFromCartRequest request);
+  $async.Future<$5.CreateOrderResponse> createOrder($pb.ServerContext ctx, $5.CreateOrderRequest request);
+  $async.Future<$5.GetOrderResponse> getOrder($pb.ServerContext ctx, $5.GetOrderRequest request);
   $async.Future<$5.ListOrdersResponse> listOrders($pb.ServerContext ctx, $5.ListOrdersRequest request);
-  $async.Future<$5.Fulfilment> createFulfilment($pb.ServerContext ctx, $5.CreateFulfilmentRequest request);
-  $async.Future<$5.Fulfilment> updateFulfilment($pb.ServerContext ctx, $5.UpdateFulfilmentRequest request);
-  $async.Future<$5.Fulfilment> getFulfilment($pb.ServerContext ctx, $5.GetFulfilmentRequest request);
+  $async.Future<$5.CreateFulfilmentResponse> createFulfilment($pb.ServerContext ctx, $5.CreateFulfilmentRequest request);
+  $async.Future<$5.UpdateFulfilmentResponse> updateFulfilment($pb.ServerContext ctx, $5.UpdateFulfilmentRequest request);
+  $async.Future<$5.GetFulfilmentResponse> getFulfilment($pb.ServerContext ctx, $5.GetFulfilmentRequest request);
 
   $pb.GeneratedMessage createRequest($core.String methodName) {
     switch (methodName) {
       case 'CreateShop': return $5.CreateShopRequest();
       case 'GetShop': return $5.GetShopRequest();
+      case 'UpdateShop': return $5.UpdateShopRequest();
       case 'CreateProduct': return $5.CreateProductRequest();
       case 'GetProduct': return $5.GetProductRequest();
       case 'ListProducts': return $5.ListProductsRequest();
@@ -68,6 +70,7 @@ abstract class CommerceServiceBase extends $pb.GeneratedService {
     switch (methodName) {
       case 'CreateShop': return this.createShop(ctx, request as $5.CreateShopRequest);
       case 'GetShop': return this.getShop(ctx, request as $5.GetShopRequest);
+      case 'UpdateShop': return this.updateShop(ctx, request as $5.UpdateShopRequest);
       case 'CreateProduct': return this.createProduct(ctx, request as $5.CreateProductRequest);
       case 'GetProduct': return this.getProduct(ctx, request as $5.GetProductRequest);
       case 'ListProducts': return this.listProducts(ctx, request as $5.ListProductsRequest);
