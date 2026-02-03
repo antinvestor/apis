@@ -19,7 +19,7 @@ jobs:
   publish:
     strategy:
       matrix:
-        api_module: [ common,chat,device,ledger,lostid,notification,ocr,partition,payment,profile,property,settings,files ]
+        api_module: [ common,chat,device,ledger,lostid,notification,ocr,partition,payment,profile,property,settings,files,commerce ]
 
     runs-on: ubuntu-latest
     permissions:

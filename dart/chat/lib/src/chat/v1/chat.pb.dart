@@ -727,10 +727,18 @@ class SearchRoomsRequest extends $pb.GeneratedMessage {
 class SearchRoomsResponse extends $pb.GeneratedMessage {
   factory SearchRoomsResponse({
     $core.Iterable<Room>? data,
+    $core.String? nextCursor,
+    $core.String? prevCursor,
   }) {
     final $result = create();
     if (data != null) {
       $result.data.addAll(data);
+    }
+    if (nextCursor != null) {
+      $result.nextCursor = nextCursor;
+    }
+    if (prevCursor != null) {
+      $result.prevCursor = prevCursor;
     }
     return $result;
   }
@@ -740,6 +748,8 @@ class SearchRoomsResponse extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SearchRoomsResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
     ..pc<Room>(1, _omitFieldNames ? '' : 'data', $pb.PbFieldType.PM, subBuilder: Room.create)
+    ..aOS(2, _omitFieldNames ? '' : 'nextCursor')
+    ..aOS(3, _omitFieldNames ? '' : 'prevCursor')
     ..hasRequiredFields = false
   ;
 
@@ -766,6 +776,24 @@ class SearchRoomsResponse extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(1)
   $core.List<Room> get data => $_getList(0);
+
+  @$pb.TagNumber(2)
+  $core.String get nextCursor => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set nextCursor($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasNextCursor() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearNextCursor() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get prevCursor => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set prevCursor($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasPrevCursor() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearPrevCursor() => clearField(3);
 }
 
 class UpdateRoomRequest extends $pb.GeneratedMessage {
@@ -1625,7 +1653,8 @@ class SearchRoomSubscriptionsResponse extends $pb.GeneratedMessage {
   factory SearchRoomSubscriptionsResponse({
     $core.String? roomId,
     $core.Iterable<RoomSubscription>? members,
-    $3.PageCursor? cursor,
+    $core.String? nextCursor,
+    $core.String? prevCursor,
   }) {
     final $result = create();
     if (roomId != null) {
@@ -1634,8 +1663,11 @@ class SearchRoomSubscriptionsResponse extends $pb.GeneratedMessage {
     if (members != null) {
       $result.members.addAll(members);
     }
-    if (cursor != null) {
-      $result.cursor = cursor;
+    if (nextCursor != null) {
+      $result.nextCursor = nextCursor;
+    }
+    if (prevCursor != null) {
+      $result.prevCursor = prevCursor;
     }
     return $result;
   }
@@ -1646,7 +1678,8 @@ class SearchRoomSubscriptionsResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SearchRoomSubscriptionsResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'roomId')
     ..pc<RoomSubscription>(2, _omitFieldNames ? '' : 'members', $pb.PbFieldType.PM, subBuilder: RoomSubscription.create)
-    ..aOM<$3.PageCursor>(4, _omitFieldNames ? '' : 'cursor', subBuilder: $3.PageCursor.create)
+    ..aOS(4, _omitFieldNames ? '' : 'nextCursor')
+    ..aOS(5, _omitFieldNames ? '' : 'prevCursor')
     ..hasRequiredFields = false
   ;
 
@@ -1684,15 +1717,22 @@ class SearchRoomSubscriptionsResponse extends $pb.GeneratedMessage {
   $core.List<RoomSubscription> get members => $_getList(1);
 
   @$pb.TagNumber(4)
-  $3.PageCursor get cursor => $_getN(2);
+  $core.String get nextCursor => $_getSZ(2);
   @$pb.TagNumber(4)
-  set cursor($3.PageCursor v) { setField(4, v); }
+  set nextCursor($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(4)
-  $core.bool hasCursor() => $_has(2);
+  $core.bool hasNextCursor() => $_has(2);
   @$pb.TagNumber(4)
-  void clearCursor() => clearField(4);
-  @$pb.TagNumber(4)
-  $3.PageCursor ensureCursor() => $_ensure(2);
+  void clearNextCursor() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get prevCursor => $_getSZ(3);
+  @$pb.TagNumber(5)
+  set prevCursor($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasPrevCursor() => $_has(3);
+  @$pb.TagNumber(5)
+  void clearPrevCursor() => clearField(5);
 }
 
 class LiveRequest extends $pb.GeneratedMessage {
@@ -2091,6 +2131,7 @@ class ListProposalsResponse extends $pb.GeneratedMessage {
   factory ListProposalsResponse({
     $core.Iterable<Proposal>? proposals,
     $core.String? nextCursor,
+    $core.String? prevCursor,
   }) {
     final $result = create();
     if (proposals != null) {
@@ -2098,6 +2139,9 @@ class ListProposalsResponse extends $pb.GeneratedMessage {
     }
     if (nextCursor != null) {
       $result.nextCursor = nextCursor;
+    }
+    if (prevCursor != null) {
+      $result.prevCursor = prevCursor;
     }
     return $result;
   }
@@ -2108,6 +2152,7 @@ class ListProposalsResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListProposalsResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
     ..pc<Proposal>(1, _omitFieldNames ? '' : 'proposals', $pb.PbFieldType.PM, subBuilder: Proposal.create)
     ..aOS(2, _omitFieldNames ? '' : 'nextCursor')
+    ..aOS(3, _omitFieldNames ? '' : 'prevCursor')
     ..hasRequiredFields = false
   ;
 
@@ -2143,6 +2188,15 @@ class ListProposalsResponse extends $pb.GeneratedMessage {
   $core.bool hasNextCursor() => $_has(1);
   @$pb.TagNumber(2)
   void clearNextCursor() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get prevCursor => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set prevCursor($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasPrevCursor() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearPrevCursor() => clearField(3);
 }
 
 class SubmitProposalRequest extends $pb.GeneratedMessage {

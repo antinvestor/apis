@@ -1,0 +1,743 @@
+// Copyright 2023-2024 Ant Investor Ltd
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package commerce.v1;
+
+// -----------------------------------------------------
+// Core notes (normative):
+// - Device Service manages device registration, tracking, and key/token management
+// - All devices must be registered before use and linked to a profile
+// - Supports device logs for session tracking and security auditing
+// - KeyObject is used for all key types (FCM tokens, encryption keys, etc.)
+// - All timestamps are RFC3339 / google.protobuf.Timestamp
+// -----------------------------------------------------
+
+import "buf/validate/validate.proto";
+import "common/v1/common.proto";
+import "gnostic/openapi/v3/annotations.proto";
+import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/field_mask.proto";
+import "google/type/money.proto";
+
+option go_package = "github.com/antinvestor/apis/go/commerce/v1;commercev1";
+option java_multiple_files = true;
+option java_package = "commercev1";
+option (gnostic.openapi.v3.document) = {
+  info: {
+    title: "Commerce API"
+    version: "v1.0.0"
+    description: "The Commerce API provides comprehensive management capabilities to enable trading."
+    contact: {
+      name: "Ant Investor Ltd"
+      url: "https://github.com/antinvestor/service-commerce"
+      email: "info@antinvestor.com"
+    }
+    license: {
+      name: "Apache License"
+      url: "https://github.com/antinvestor/apis/blob/master/LICENSE"
+    }
+  }
+  components: {
+    security_schemes: {
+      additional_properties: [
+        {
+          name: "BearerAuth"
+          value: {
+            security_scheme: {
+              type: "http"
+              scheme: "bearer"
+              bearer_format: "JWT"
+            }
+          }
+        }
+      ]
+    }
+  }
+};
+
+
+/*
+ Headless commerce API.
+
+ Scope:
+   - shop
+   - products + variants
+   - orders
+   - fulfilment
+
+ No payments.
+ No carts.
+ No settlement.
+
+ This API is designed to be stable when a payment/ledger layer is added later.
+*/
+
+service CommerceService {
+
+  // ----------------------
+  // Shop
+  // ----------------------
+
+  // Creates a new shop. The authenticated user becomes the admin.
+  rpc CreateShop(CreateShopRequest) returns (Shop);
+  // Retrieves shop details by ID.
+  rpc GetShop(GetShopRequest) returns (Shop);
+  // Updates shop details.
+  rpc UpdateShop(UpdateShopRequest) returns (Shop);
+
+  // ----------------------
+  // Catalog
+  // ----------------------
+
+  // Creates a new product in the catalog.
+  rpc CreateProduct(CreateProductRequest) returns (Product);
+  // Retrieves a product by its ID.
+  rpc GetProduct(GetProductRequest) returns (Product);
+  // Lists products belonging to a shop, with optional search and filtering.
+  rpc ListProducts(ListProductsRequest) returns (ListProductsResponse);
+
+  // Creates a new variant for a product.
+  rpc CreateProductVariant(CreateProductVariantRequest) returns (ProductVariant);
+  // Updates an existing product variant.
+  rpc UpdateProductVariant(UpdateProductVariantRequest) returns (ProductVariant);
+
+  // ----------------------
+  // Orders
+  // ----------------------
+
+  rpc CreateCart(CreateCartRequest) returns (Cart);
+  rpc GetCart(GetCartRequest) returns (Cart);
+
+  rpc AddCartLine(AddCartLineRequest) returns (Cart);
+  rpc RemoveCartLine(RemoveCartLineRequest) returns (Cart);
+
+  rpc CreateOrderFromCart(CreateOrderFromCartRequest) returns (Order);
+
+
+  // ----------------------
+  // Orders
+  // ----------------------
+
+  /*
+   Creates an order and reserves stock atomically.
+
+   The server MUST:
+     - validate all variants belong to the shop
+     - validate sufficient stock
+     - decrement stock
+     - snapshot price and name
+     - compute totals
+
+   The order is created in CONFIRMED state
+   (since this API does not handle payments).
+  */
+  rpc CreateOrder(CreateOrderRequest) returns (Order);
+
+  // Retrieves an order by ID.
+  rpc GetOrder(GetOrderRequest) returns (Order);
+  // Lists orders for a shop, with optional search and filtering.
+  rpc ListOrders(ListOrdersRequest) returns (ListOrdersResponse);
+
+  // ----------------------
+  // Fulfilment
+  // ----------------------
+
+  /*
+   Creates a fulfilment for an order.
+
+   A fulfilment may contain a subset of order lines.
+   Quantity per line MUST NOT exceed remaining unfulfilled quantity.
+  */
+  rpc CreateFulfilment(CreateFulfilmentRequest) returns (Fulfilment);
+
+
+  // Updates a fulfilment (e.g. adding tracking number, marking as shipped).
+  rpc UpdateFulfilment(UpdateFulfilmentRequest) returns (Fulfilment);
+  // Retrieves a fulfilment by ID.
+  rpc GetFulfilment(GetFulfilmentRequest) returns (Fulfilment);
+}
+
+//
+// ----------------------
+// Shared
+// ----------------------
+
+// ----------------------
+// Shop
+// ----------------------
+
+message Shop {
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+  string name = 2;
+  string slug = 3;
+  string description = 4;
+  ShopStatus status = 5;
+
+  /*
+   Media assets associated with the shop (logo, banner, etc.).
+   References files in the Files Service.
+  */
+  repeated string media_ids = 6;
+
+  google.protobuf.Timestamp created_at = 10;
+  google.protobuf.Struct extra = 15; // Additional key metadata (algorithm, app_id, etc.)
+}
+
+enum ShopStatus {
+  SHOP_STATUS_UNSPECIFIED = 0;
+  SHOP_STATUS_ACTIVE = 1;
+  SHOP_STATUS_DISABLED = 2;
+}
+
+message CreateShopRequest {
+  string name = 1;
+  string slug = 2;
+  string description = 3;
+  repeated string media_ids = 6;
+}
+
+message UpdateShopRequest {
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+  google.protobuf.FieldMask update_mask = 2;
+
+  string name = 3;
+  string description = 4;
+  repeated string media_ids = 5;
+  ShopStatus status = 6;
+  google.protobuf.Struct extra = 7;
+}
+
+message GetShopRequest {
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+}
+
+//
+// ----------------------
+// Catalog
+// ----------------------
+
+message Product {
+
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+  string shop_id = 2 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+
+  string name = 3;
+  string description = 4;
+  map<string, string> attributes = 5; // Shared attributes (e.g. "Material": "Cotton")
+
+  FulfilmentType fulfilment_type = 10;
+
+  ProductStatus status = 15;
+
+  /*
+   Media assets (images, videos) for the product.
+   References files in the Files Service.
+  */
+  repeated string media_ids = 16;
+
+  google.protobuf.Timestamp created_at = 17;
+}
+
+enum ProductStatus {
+  PRODUCT_STATUS_UNSPECIFIED = 0;
+  PRODUCT_STATUS_ACTIVE = 1;
+  PRODUCT_STATUS_INACTIVE = 2;
+  PRODUCT_STATUS_ARCHIVED = 3;
+}
+
+enum FulfilmentType {
+  FULFILMENT_TYPE_UNSPECIFIED = 0;
+
+  // Requires shipping / physical handling
+  FULFILMENT_TYPE_PHYSICAL = 1;
+
+  // Delivered digitally (license, download, access, etc)
+  FULFILMENT_TYPE_DIGITAL = 2;
+
+  // No fulfilment at all (donations, subscriptions started elsewhere, etc)
+  FULFILMENT_TYPE_NONE = 3;
+}
+
+message ProductVariant {
+
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+  string product_id = 2 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+
+  string sku = 3;
+  string name = 4;
+
+  /*
+   Price in minor units (for example cents).
+  */
+  google.type.Money price = 5;
+
+  int64 stock_quantity = 7;
+  map<string, string> attributes = 6; // Variant-specific attributes (e.g. "Size": "L", "Color": "Blue")
+  repeated string media_ids = 10;
+
+  ProductVariantStatus status = 8;
+
+  google.protobuf.Timestamp created_at = 9;
+}
+
+enum ProductVariantStatus {
+  PRODUCT_VARIANT_STATUS_UNSPECIFIED = 0;
+  PRODUCT_VARIANT_STATUS_ACTIVE = 1;
+  PRODUCT_VARIANT_STATUS_DISABLED = 2;
+}
+
+message CreateProductRequest {
+  string shop_id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+  string name = 2;
+  string description = 3;
+  repeated string media_ids = 4;
+  map<string, string> attributes = 5;
+}
+
+message GetProductRequest {
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+}
+
+message ListProductsRequest {
+  string shop_id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+
+  // Optional search parameters (query, cursor, etc.)
+  common.v1.SearchRequest search = 2;
+}
+
+message ListProductsResponse {
+  repeated Product products = 1;
+  string next_page = 2;
+  string prev_cursor = 3;
+}
+
+message CreateProductVariantRequest {
+  string product_id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+  string sku = 2;
+  string name = 3;
+  google.type.Money price = 4;
+  int64 stock_quantity = 6;
+  map<string, string> attributes = 5;
+  repeated string media_ids = 7;
+}
+
+message UpdateProductVariantRequest {
+
+  string variant_id = 1;
+
+  google.protobuf.FieldMask update_mask = 2;
+
+  string sku = 3;
+  string name = 4;
+  google.type.Money price = 5;
+  int64 stock_quantity = 7;
+  ProductVariantStatus status = 8;
+  map<string, string> attributes = 6;
+  repeated string media_ids = 9;
+}
+
+//
+// ----------------------
+// Carts
+// ----------------------
+
+message Cart {
+
+  string id = 1;
+  string shop_id = 2;
+
+  CartStatus status = 3;
+
+  string profile_id = 4;
+  string contact_id = 5;
+
+  repeated CartLine lines = 10;
+
+  google.protobuf.Timestamp expires_at = 16;
+  google.protobuf.Timestamp created_at = 17;
+  google.protobuf.Timestamp updated_at = 18;
+}
+
+enum CartStatus {
+  CART_STATUS_UNSPECIFIED = 0;
+  CART_STATUS_ACTIVE = 1;
+  CART_STATUS_CONVERTED = 2;
+  CART_STATUS_ABANDONED = 3;
+  CART_STATUS_EXPIRED = 4;
+}
+
+message CartLine {
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+  string product_variant_id = 2 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+  int64 quantity = 3;
+}
+
+message CreateCartRequest {
+  string shop_id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+
+  // Optional – used for abandoned cart reminders
+  string profile_id = 2;
+  string contact_id = 3;
+}
+
+message GetCartRequest {
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+}
+
+message AddCartLineRequest {
+  string cart_id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+  string product_variant_id = 2;
+  int64 quantity = 3;
+}
+
+message RemoveCartLineRequest {
+  string cart_id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+  string cart_line_id = 2 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+}
+
+message CreateOrderFromCartRequest {
+
+  string cart_id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+
+  string profile_id = 5 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+  string contact_id = 6 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+  string address_id = 7 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+}
+
+//
+// ----------------------
+// Orders
+// ----------------------
+
+message Order {
+
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+  string shop_id = 2 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+  string order_number = 3;
+
+  OrderStatus status = 4;
+  PaymentStatus payment_status = 15;
+  FulfilmentStatus fulfilment_status = 16;
+
+  string profile_id = 5 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+  string contact_id = 6 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+  string address_id = 7 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+
+  google.type.Money subtotal = 8;
+  google.type.Money total = 9;
+
+  repeated OrderLine lines = 10;
+
+  google.protobuf.Timestamp created_at = 11;
+}
+
+enum OrderStatus {
+  ORDER_STATUS_UNSPECIFIED = 0;
+
+  // Stock has been reserved and the order is ready for fulfilment.
+  ORDER_STATUS_CONFIRMED = 1;
+
+  ORDER_STATUS_CANCELLED = 2;
+
+  // All quantities across all order lines have been fulfilled.
+  ORDER_STATUS_FULFILLED = 3;
+}
+
+enum PaymentStatus {
+  PAYMENT_STATUS_UNSPECIFIED = 0;
+  PAYMENT_STATUS_PENDING = 1;
+  PAYMENT_STATUS_PAID = 2;
+  PAYMENT_STATUS_FAILED = 3;
+  PAYMENT_STATUS_REFUNDED = 4;
+}
+
+message OrderLine {
+
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+
+  string product_variant_id = 2 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+
+  // Snapshot fields
+  string sku_snapshot = 3;
+  string name_snapshot = 4;
+
+  google.type.Money unit_price = 5;
+  int64 quantity = 6;
+
+  google.type.Money total_price = 7;
+}
+
+message CreateOrderRequest {
+  string idempotency_key = 2; // Unique key to prevent duplicate orders
+  string shop_id = 1;
+
+  string profile_id = 5 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+  string contact_id = 6 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+  string address_id = 7 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+
+  repeated CreateOrderLine lines = 10;
+}
+
+message CreateOrderLine {
+  string variant_id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+  int64 quantity = 2;
+}
+
+message GetOrderRequest {
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+}
+
+message ListOrdersRequest {
+
+  string shop_id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+
+  // Optional search parameters (query, cursor, etc.)
+  common.v1.SearchRequest search = 2;
+}
+
+message ListOrdersResponse {
+  repeated Order orders = 1;
+
+  string next_page = 2;
+  string prev_cursor = 3;
+}
+
+//
+// ----------------------
+// Fulfilment
+// ----------------------
+
+message Fulfilment {
+
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+  string order_id = 2 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+
+  FulfilmentStatus status = 3;
+
+  string carrier = 4;
+  string tracking_number = 5;
+
+  repeated FulfilmentLine lines = 6;
+
+  google.protobuf.Timestamp created_at = 7;
+  google.protobuf.Timestamp shipped_at = 8;
+}
+
+enum FulfilmentStatus {
+
+  FULFILMENT_STATUS_UNSPECIFIED = 0;
+
+  FULFILMENT_STATUS_PENDING = 1;
+  FULFILMENT_STATUS_PREPARING = 2;
+  FULFILMENT_STATUS_PACKED = 3;
+  FULFILMENT_STATUS_SHIPPED = 4;
+  FULFILMENT_STATUS_DELIVERED = 5;
+  FULFILMENT_STATUS_CANCELLED = 6;
+}
+
+message FulfilmentLine {
+
+  string order_line_id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+  int64 quantity = 2;
+}
+
+message CreateFulfilmentRequest {
+
+  string order_id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+
+  repeated FulfilmentLine lines = 2;
+}
+
+message UpdateFulfilmentRequest {
+
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+
+  google.protobuf.FieldMask update_mask = 2;
+
+  FulfilmentStatus status = 3;
+  string carrier = 4;
+  string tracking_number = 5;
+  google.protobuf.Timestamp shipped_at = 6;
+}
+
+message GetFulfilmentRequest {
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+}

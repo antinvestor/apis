@@ -218,13 +218,16 @@ const SearchRoomsResponse$json = {
   '1': 'SearchRoomsResponse',
   '2': [
     {'1': 'data', '3': 1, '4': 3, '5': 11, '6': '.chat.v1.Room', '10': 'data'},
+    {'1': 'next_cursor', '3': 2, '4': 1, '5': 9, '10': 'nextCursor'},
+    {'1': 'prev_cursor', '3': 3, '4': 1, '5': 9, '10': 'prevCursor'},
   ],
 };
 
 /// Descriptor for `SearchRoomsResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List searchRoomsResponseDescriptor = $convert.base64Decode(
     'ChNTZWFyY2hSb29tc1Jlc3BvbnNlEiEKBGRhdGEYASADKAsyDS5jaGF0LnYxLlJvb21SBGRhdG'
-    'E=');
+    'ESHwoLbmV4dF9jdXJzb3IYAiABKAlSCm5leHRDdXJzb3ISHwoLcHJldl9jdXJzb3IYAyABKAlS'
+    'CnByZXZDdXJzb3I=');
 
 @$core.Deprecated('Use updateRoomRequestDescriptor instead')
 const UpdateRoomRequest$json = {
@@ -421,7 +424,8 @@ const SearchRoomSubscriptionsResponse$json = {
   '2': [
     {'1': 'room_id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'roomId'},
     {'1': 'members', '3': 2, '4': 3, '5': 11, '6': '.chat.v1.RoomSubscription', '10': 'members'},
-    {'1': 'cursor', '3': 4, '4': 1, '5': 11, '6': '.common.v1.PageCursor', '10': 'cursor'},
+    {'1': 'next_cursor', '3': 4, '4': 1, '5': 9, '10': 'nextCursor'},
+    {'1': 'prev_cursor', '3': 5, '4': 1, '5': 9, '10': 'prevCursor'},
   ],
 };
 
@@ -429,8 +433,8 @@ const SearchRoomSubscriptionsResponse$json = {
 final $typed_data.Uint8List searchRoomSubscriptionsResponseDescriptor = $convert.base64Decode(
     'Ch9TZWFyY2hSb29tU3Vic2NyaXB0aW9uc1Jlc3BvbnNlEjQKB3Jvb21faWQYASABKAlCG7pIGH'
     'IWEAMYKDIQWzAtOWEtel8tXXszLDQwfVIGcm9vbUlkEjMKB21lbWJlcnMYAiADKAsyGS5jaGF0'
-    'LnYxLlJvb21TdWJzY3JpcHRpb25SB21lbWJlcnMSLQoGY3Vyc29yGAQgASgLMhUuY29tbW9uLn'
-    'YxLlBhZ2VDdXJzb3JSBmN1cnNvcg==');
+    'LnYxLlJvb21TdWJzY3JpcHRpb25SB21lbWJlcnMSHwoLbmV4dF9jdXJzb3IYBCABKAlSCm5leH'
+    'RDdXJzb3ISHwoLcHJldl9jdXJzb3IYBSABKAlSCnByZXZDdXJzb3I=');
 
 @$core.Deprecated('Use liveRequestDescriptor instead')
 const LiveRequest$json = {
@@ -523,13 +527,15 @@ const ListProposalsResponse$json = {
   '2': [
     {'1': 'proposals', '3': 1, '4': 3, '5': 11, '6': '.chat.v1.Proposal', '10': 'proposals'},
     {'1': 'next_cursor', '3': 2, '4': 1, '5': 9, '10': 'nextCursor'},
+    {'1': 'prev_cursor', '3': 3, '4': 1, '5': 9, '10': 'prevCursor'},
   ],
 };
 
 /// Descriptor for `ListProposalsResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List listProposalsResponseDescriptor = $convert.base64Decode(
     'ChVMaXN0UHJvcG9zYWxzUmVzcG9uc2USLwoJcHJvcG9zYWxzGAEgAygLMhEuY2hhdC52MS5Qcm'
-    '9wb3NhbFIJcHJvcG9zYWxzEh8KC25leHRfY3Vyc29yGAIgASgJUgpuZXh0Q3Vyc29y');
+    '9wb3NhbFIJcHJvcG9zYWxzEh8KC25leHRfY3Vyc29yGAIgASgJUgpuZXh0Q3Vyc29yEh8KC3By'
+    'ZXZfY3Vyc29yGAMgASgJUgpwcmV2Q3Vyc29y');
 
 @$core.Deprecated('Use submitProposalRequestDescriptor instead')
 const SubmitProposalRequest$json = {

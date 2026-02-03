@@ -1,0 +1,1912 @@
+openapi: 3.1.0
+info:
+  title: Commerce API
+  description: The Commerce API provides comprehensive management capabilities to enable trading.
+  contact:
+    name: Ant Investor Ltd
+    url: https://github.com/antinvestor/service-commerce
+    email: info@antinvestor.com
+  license:
+    name: Apache License
+    url: https://github.com/antinvestor/apis/blob/master/LICENSE
+  version: v1.0.0
+paths:
+  /commerce.v1.CommerceService/AddCartLine:
+    post:
+      tags:
+        - commerce.v1.CommerceService
+      summary: AddCartLine
+      operationId: commerce.v1.CommerceService.AddCartLine
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/commerce.v1.AddCartLineRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/commerce.v1.Cart'
+  /commerce.v1.CommerceService/CreateCart:
+    post:
+      tags:
+        - commerce.v1.CommerceService
+      summary: CreateCart
+      operationId: commerce.v1.CommerceService.CreateCart
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/commerce.v1.CreateCartRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/commerce.v1.Cart'
+  /commerce.v1.CommerceService/CreateFulfilment:
+    post:
+      tags:
+        - commerce.v1.CommerceService
+      summary: Creates a fulfilment for an order.
+      description: |-
+        A fulfilment may contain a subset of order lines.
+        Quantity per line MUST NOT exceed remaining unfulfilled quantity.
+      operationId: commerce.v1.CommerceService.CreateFulfilment
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/commerce.v1.CreateFulfilmentRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/commerce.v1.Fulfilment'
+  /commerce.v1.CommerceService/CreateOrder:
+    post:
+      tags:
+        - commerce.v1.CommerceService
+      summary: Creates an order and reserves stock atomically.
+      description: |-
+        The server MUST:
+        - validate all variants belong to the shop
+        - validate sufficient stock
+        - decrement stock
+        - snapshot price and name
+        - compute totals
+
+        The order is created in CONFIRMED state
+        (since this API does not handle payments).
+      operationId: commerce.v1.CommerceService.CreateOrder
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/commerce.v1.CreateOrderRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/commerce.v1.Order'
+  /commerce.v1.CommerceService/CreateOrderFromCart:
+    post:
+      tags:
+        - commerce.v1.CommerceService
+      summary: CreateOrderFromCart
+      operationId: commerce.v1.CommerceService.CreateOrderFromCart
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/commerce.v1.CreateOrderFromCartRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/commerce.v1.Order'
+  /commerce.v1.CommerceService/CreateProduct:
+    post:
+      tags:
+        - commerce.v1.CommerceService
+      summary: CreateProduct
+      operationId: commerce.v1.CommerceService.CreateProduct
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/commerce.v1.CreateProductRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/commerce.v1.Product'
+  /commerce.v1.CommerceService/CreateProductVariant:
+    post:
+      tags:
+        - commerce.v1.CommerceService
+      summary: CreateProductVariant
+      operationId: commerce.v1.CommerceService.CreateProductVariant
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/commerce.v1.CreateProductVariantRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/commerce.v1.ProductVariant'
+  /commerce.v1.CommerceService/CreateShop:
+    post:
+      tags:
+        - commerce.v1.CommerceService
+      summary: CreateShop
+      operationId: commerce.v1.CommerceService.CreateShop
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/commerce.v1.CreateShopRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/commerce.v1.Shop'
+  /commerce.v1.CommerceService/GetCart:
+    post:
+      tags:
+        - commerce.v1.CommerceService
+      summary: GetCart
+      operationId: commerce.v1.CommerceService.GetCart
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/commerce.v1.GetCartRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/commerce.v1.Cart'
+  /commerce.v1.CommerceService/GetFulfilment:
+    post:
+      tags:
+        - commerce.v1.CommerceService
+      summary: GetFulfilment
+      operationId: commerce.v1.CommerceService.GetFulfilment
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/commerce.v1.GetFulfilmentRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/commerce.v1.Fulfilment'
+  /commerce.v1.CommerceService/GetOrder:
+    post:
+      tags:
+        - commerce.v1.CommerceService
+      summary: GetOrder
+      operationId: commerce.v1.CommerceService.GetOrder
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/commerce.v1.GetOrderRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/commerce.v1.Order'
+  /commerce.v1.CommerceService/GetProduct:
+    post:
+      tags:
+        - commerce.v1.CommerceService
+      summary: GetProduct
+      operationId: commerce.v1.CommerceService.GetProduct
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/commerce.v1.GetProductRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/commerce.v1.Product'
+  /commerce.v1.CommerceService/GetShop:
+    post:
+      tags:
+        - commerce.v1.CommerceService
+      summary: GetShop
+      operationId: commerce.v1.CommerceService.GetShop
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/commerce.v1.GetShopRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/commerce.v1.Shop'
+  /commerce.v1.CommerceService/ListOrders:
+    post:
+      tags:
+        - commerce.v1.CommerceService
+      summary: ListOrders
+      operationId: commerce.v1.CommerceService.ListOrders
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/commerce.v1.ListOrdersRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/commerce.v1.ListOrdersResponse'
+  /commerce.v1.CommerceService/ListProducts:
+    post:
+      tags:
+        - commerce.v1.CommerceService
+      summary: ListProducts
+      operationId: commerce.v1.CommerceService.ListProducts
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/commerce.v1.ListProductsRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/commerce.v1.ListProductsResponse'
+  /commerce.v1.CommerceService/RemoveCartLine:
+    post:
+      tags:
+        - commerce.v1.CommerceService
+      summary: RemoveCartLine
+      operationId: commerce.v1.CommerceService.RemoveCartLine
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/commerce.v1.RemoveCartLineRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/commerce.v1.Cart'
+  /commerce.v1.CommerceService/UpdateFulfilment:
+    post:
+      tags:
+        - commerce.v1.CommerceService
+      summary: UpdateFulfilment
+      operationId: commerce.v1.CommerceService.UpdateFulfilment
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/commerce.v1.UpdateFulfilmentRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/commerce.v1.Fulfilment'
+  /commerce.v1.CommerceService/UpdateProductVariant:
+    post:
+      tags:
+        - commerce.v1.CommerceService
+      summary: UpdateProductVariant
+      operationId: commerce.v1.CommerceService.UpdateProductVariant
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/commerce.v1.UpdateProductVariantRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/commerce.v1.ProductVariant'
+components:
+  schemas:
+    commerce.v1.AddCartLineRequest:
+      type: object
+      properties:
+        cartId:
+          type: string
+          title: cart_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        productVariantId:
+          type: string
+          title: product_variant_id
+        quantity:
+          type:
+            - integer
+            - string
+          title: quantity
+          format: int64
+      title: AddCartLineRequest
+      additionalProperties: false
+    commerce.v1.Cart:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+        shopId:
+          type: string
+          title: shop_id
+        status:
+          title: status
+          $ref: '#/components/schemas/commerce.v1.CartStatus'
+        profileId:
+          type: string
+          title: profile_id
+        contactId:
+          type: string
+          title: contact_id
+        lines:
+          type: array
+          items:
+            $ref: '#/components/schemas/commerce.v1.CartLine'
+          title: lines
+        expiresAt:
+          title: expires_at
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        createdAt:
+          title: created_at
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        updatedAt:
+          title: updated_at
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+      title: Cart
+      additionalProperties: false
+    commerce.v1.CartLine:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        productVariantId:
+          type: string
+          title: product_variant_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        quantity:
+          type:
+            - integer
+            - string
+          title: quantity
+          format: int64
+      title: CartLine
+      additionalProperties: false
+    commerce.v1.CartStatus:
+      type: string
+      title: CartStatus
+      enum:
+        - CART_STATUS_UNSPECIFIED
+        - CART_STATUS_ACTIVE
+        - CART_STATUS_CONVERTED
+        - CART_STATUS_ABANDONED
+        - CART_STATUS_EXPIRED
+    commerce.v1.CreateCartRequest:
+      type: object
+      properties:
+        shopId:
+          type: string
+          title: shop_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        profileId:
+          type: string
+          title: profile_id
+          description: Optional – used for abandoned cart reminders
+        contactId:
+          type: string
+          title: contact_id
+      title: CreateCartRequest
+      additionalProperties: false
+    commerce.v1.CreateFulfilmentRequest:
+      type: object
+      properties:
+        orderId:
+          type: string
+          title: order_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        lines:
+          type: array
+          items:
+            $ref: '#/components/schemas/commerce.v1.FulfilmentLine'
+          title: lines
+      title: CreateFulfilmentRequest
+      additionalProperties: false
+    commerce.v1.CreateOrderFromCartRequest:
+      type: object
+      properties:
+        cartId:
+          type: string
+          title: cart_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        profileId:
+          type: string
+          title: profile_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        contactId:
+          type: string
+          title: contact_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        addressId:
+          type: string
+          title: address_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+      title: CreateOrderFromCartRequest
+      additionalProperties: false
+    commerce.v1.CreateOrderLine:
+      type: object
+      properties:
+        variantId:
+          type: string
+          title: variant_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        quantity:
+          type:
+            - integer
+            - string
+          title: quantity
+          format: int64
+      title: CreateOrderLine
+      additionalProperties: false
+    commerce.v1.CreateOrderRequest:
+      type: object
+      properties:
+        shopId:
+          type: string
+          title: shop_id
+        profileId:
+          type: string
+          title: profile_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        contactId:
+          type: string
+          title: contact_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        addressId:
+          type: string
+          title: address_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        lines:
+          type: array
+          items:
+            $ref: '#/components/schemas/commerce.v1.CreateOrderLine'
+          title: lines
+      title: CreateOrderRequest
+      additionalProperties: false
+    commerce.v1.CreateProductRequest:
+      type: object
+      properties:
+        shopId:
+          type: string
+          title: shop_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        name:
+          type: string
+          title: name
+        description:
+          type: string
+          title: description
+        imageIds:
+          type: array
+          items:
+            type: string
+          title: image_ids
+      title: CreateProductRequest
+      additionalProperties: false
+    commerce.v1.CreateProductVariantRequest:
+      type: object
+      properties:
+        productId:
+          type: string
+          title: product_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        sku:
+          type: string
+          title: sku
+        name:
+          type: string
+          title: name
+        price:
+          title: price
+          $ref: '#/components/schemas/google.type.Money'
+        stockQuantity:
+          type:
+            - integer
+            - string
+          title: stock_quantity
+          format: int64
+      title: CreateProductVariantRequest
+      additionalProperties: false
+    commerce.v1.CreateShopRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          title: name
+        slug:
+          type: string
+          title: slug
+        description:
+          type: string
+          title: description
+        imageIds:
+          type: array
+          items:
+            type: string
+          title: image_ids
+      title: CreateShopRequest
+      additionalProperties: false
+    commerce.v1.Fulfilment:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        orderId:
+          type: string
+          title: order_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        status:
+          title: status
+          $ref: '#/components/schemas/commerce.v1.FulfilmentStatus'
+        carrier:
+          type: string
+          title: carrier
+        trackingNumber:
+          type: string
+          title: tracking_number
+        lines:
+          type: array
+          items:
+            $ref: '#/components/schemas/commerce.v1.FulfilmentLine'
+          title: lines
+        createdAt:
+          title: created_at
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        shippedAt:
+          title: shipped_at
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+      title: Fulfilment
+      additionalProperties: false
+    commerce.v1.FulfilmentLine:
+      type: object
+      properties:
+        orderLineId:
+          type: string
+          title: order_line_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        quantity:
+          type:
+            - integer
+            - string
+          title: quantity
+          format: int64
+      title: FulfilmentLine
+      additionalProperties: false
+    commerce.v1.FulfilmentStatus:
+      type: string
+      title: FulfilmentStatus
+      enum:
+        - FULFILMENT_STATUS_UNSPECIFIED
+        - FULFILMENT_STATUS_PENDING
+        - FULFILMENT_STATUS_PREPARING
+        - FULFILMENT_STATUS_PACKED
+        - FULFILMENT_STATUS_SHIPPED
+        - FULFILMENT_STATUS_DELIVERED
+        - FULFILMENT_STATUS_CANCELLED
+    commerce.v1.FulfilmentType:
+      type: string
+      title: FulfilmentType
+      enum:
+        - FULFILMENT_TYPE_UNSPECIFIED
+        - FULFILMENT_TYPE_PHYSICAL
+        - FULFILMENT_TYPE_DIGITAL
+        - FULFILMENT_TYPE_NONE
+    commerce.v1.GetCartRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+      title: GetCartRequest
+      additionalProperties: false
+    commerce.v1.GetFulfilmentRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+      title: GetFulfilmentRequest
+      additionalProperties: false
+    commerce.v1.GetOrderRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+      title: GetOrderRequest
+      additionalProperties: false
+    commerce.v1.GetProductRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+      title: GetProductRequest
+      additionalProperties: false
+    commerce.v1.GetShopRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+      title: GetShopRequest
+      additionalProperties: false
+    commerce.v1.ListOrdersRequest:
+      type: object
+      properties:
+        shopId:
+          type: string
+          title: shop_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        cursor:
+          title: cursor
+          $ref: '#/components/schemas/common.v1.PageCursor'
+      title: ListOrdersRequest
+      additionalProperties: false
+    commerce.v1.ListOrdersResponse:
+      type: object
+      properties:
+        orders:
+          type: array
+          items:
+            $ref: '#/components/schemas/commerce.v1.Order'
+          title: orders
+        nextPage:
+          type: string
+          title: next_page
+        prevCursor:
+          type: string
+          title: prev_cursor
+      title: ListOrdersResponse
+      additionalProperties: false
+    commerce.v1.ListProductsRequest:
+      type: object
+      properties:
+        shopId:
+          type: string
+          title: shop_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        cursor:
+          title: cursor
+          $ref: '#/components/schemas/common.v1.PageCursor'
+      title: ListProductsRequest
+      additionalProperties: false
+    commerce.v1.ListProductsResponse:
+      type: object
+      properties:
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/commerce.v1.Product'
+          title: products
+        nextPage:
+          type: string
+          title: next_page
+        prevCursor:
+          type: string
+          title: prev_cursor
+      title: ListProductsResponse
+      additionalProperties: false
+    commerce.v1.Order:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        shopId:
+          type: string
+          title: shop_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        orderNumber:
+          type: string
+          title: order_number
+        status:
+          title: status
+          $ref: '#/components/schemas/commerce.v1.OrderStatus'
+        profileId:
+          type: string
+          title: profile_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        contactId:
+          type: string
+          title: contact_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        addressId:
+          type: string
+          title: address_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        subtotal:
+          title: subtotal
+          $ref: '#/components/schemas/google.type.Money'
+        total:
+          title: total
+          $ref: '#/components/schemas/google.type.Money'
+        lines:
+          type: array
+          items:
+            $ref: '#/components/schemas/commerce.v1.OrderLine'
+          title: lines
+        createdAt:
+          title: created_at
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+      title: Order
+      additionalProperties: false
+    commerce.v1.OrderLine:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        productVariantId:
+          type: string
+          title: product_variant_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        skuSnapshot:
+          type: string
+          title: sku_snapshot
+          description: Snapshot fields
+        nameSnapshot:
+          type: string
+          title: name_snapshot
+        unitPrice:
+          title: unit_price
+          $ref: '#/components/schemas/google.type.Money'
+        quantity:
+          type:
+            - integer
+            - string
+          title: quantity
+          format: int64
+        totalPrice:
+          title: total_price
+          $ref: '#/components/schemas/google.type.Money'
+      title: OrderLine
+      additionalProperties: false
+    commerce.v1.OrderStatus:
+      type: string
+      title: OrderStatus
+      enum:
+        - ORDER_STATUS_UNSPECIFIED
+        - ORDER_STATUS_CONFIRMED
+        - ORDER_STATUS_CANCELLED
+        - ORDER_STATUS_FULFILLED
+    commerce.v1.Product:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        shopId:
+          type: string
+          title: shop_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        name:
+          type: string
+          title: name
+        description:
+          type: string
+          title: description
+        fulfilmentType:
+          title: fulfilment_type
+          $ref: '#/components/schemas/commerce.v1.FulfilmentType'
+        status:
+          title: status
+          $ref: '#/components/schemas/commerce.v1.ProductStatus'
+        imageIds:
+          type: array
+          items:
+            type: string
+          title: image_ids
+          description: |-
+            Image identifiers.
+            These are references to an external media service / object store.
+
+            Example:
+            ["img_abc", "img_def"]
+        createdAt:
+          title: created_at
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+      title: Product
+      additionalProperties: false
+    commerce.v1.ProductStatus:
+      type: string
+      title: ProductStatus
+      enum:
+        - PRODUCT_STATUS_UNSPECIFIED
+        - PRODUCT_STATUS_ACTIVE
+        - PRODUCT_STATUS_ARCHIVED
+    commerce.v1.ProductVariant:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        productId:
+          type: string
+          title: product_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        sku:
+          type: string
+          title: sku
+        name:
+          type: string
+          title: name
+        price:
+          title: price
+          description: Price in minor units (for example cents).
+          $ref: '#/components/schemas/google.type.Money'
+        stockQuantity:
+          type:
+            - integer
+            - string
+          title: stock_quantity
+          format: int64
+        status:
+          title: status
+          $ref: '#/components/schemas/commerce.v1.ProductVariantStatus'
+        createdAt:
+          title: created_at
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+      title: ProductVariant
+      additionalProperties: false
+    commerce.v1.ProductVariantStatus:
+      type: string
+      title: ProductVariantStatus
+      enum:
+        - PRODUCT_VARIANT_STATUS_UNSPECIFIED
+        - PRODUCT_VARIANT_STATUS_ACTIVE
+        - PRODUCT_VARIANT_STATUS_DISABLED
+    commerce.v1.RemoveCartLineRequest:
+      type: object
+      properties:
+        cartId:
+          type: string
+          title: cart_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        cartLineId:
+          type: string
+          title: cart_line_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+      title: RemoveCartLineRequest
+      additionalProperties: false
+    commerce.v1.Shop:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        name:
+          type: string
+          title: name
+        slug:
+          type: string
+          title: slug
+        description:
+          type: string
+          title: description
+        status:
+          title: status
+          $ref: '#/components/schemas/commerce.v1.ShopStatus'
+        imageIds:
+          type: array
+          items:
+            type: string
+          title: image_ids
+          description: |-
+            Image identifiers.
+            These are references to an external media service / object store.
+
+            Example:
+            ["img_abc", "img_def"]
+        createdAt:
+          title: created_at
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        extra:
+          title: extra
+          description: Additional key metadata (algorithm, app_id, etc.)
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: Shop
+      additionalProperties: false
+    commerce.v1.ShopStatus:
+      type: string
+      title: ShopStatus
+      enum:
+        - SHOP_STATUS_UNSPECIFIED
+        - SHOP_STATUS_ACTIVE
+        - SHOP_STATUS_DISABLED
+    commerce.v1.UpdateFulfilmentRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        updateMask:
+          title: update_mask
+          $ref: '#/components/schemas/google.protobuf.FieldMask'
+        status:
+          title: status
+          $ref: '#/components/schemas/commerce.v1.FulfilmentStatus'
+        carrier:
+          type: string
+          title: carrier
+        trackingNumber:
+          type: string
+          title: tracking_number
+        shippedAt:
+          title: shipped_at
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+      title: UpdateFulfilmentRequest
+      additionalProperties: false
+    commerce.v1.UpdateProductVariantRequest:
+      type: object
+      properties:
+        variantId:
+          type: string
+          title: variant_id
+        updateMask:
+          title: update_mask
+          $ref: '#/components/schemas/google.protobuf.FieldMask'
+        sku:
+          type: string
+          title: sku
+        name:
+          type: string
+          title: name
+        price:
+          title: price
+          $ref: '#/components/schemas/google.type.Money'
+        stockQuantity:
+          type:
+            - integer
+            - string
+          title: stock_quantity
+          format: int64
+        status:
+          title: status
+          $ref: '#/components/schemas/commerce.v1.ProductVariantStatus'
+      title: UpdateProductVariantRequest
+      additionalProperties: false
+    common.v1.PageCursor:
+      type: object
+      properties:
+        limit:
+          type: integer
+          title: limit
+          format: int32
+          description: Number of items per cursor (limit)
+        page:
+          type: string
+          title: page
+          description: Page number/ cursor representing last id from result
+      title: PageCursor
+      additionalProperties: false
+      description: |-
+        PageCursor provides standard offset-based pagination/cursor stream parameters.
+         Used for list operations that return large result sets.
+    connect-protocol-version:
+      type: number
+      title: Connect-Protocol-Version
+      enum:
+        - 1
+      description: Define the version of the Connect protocol
+      const: 1
+    connect-timeout-header:
+      type: number
+      title: Connect-Timeout-Ms
+      description: Define the timeout, in ms
+    connect.error:
+      type: object
+      properties:
+        code:
+          type: string
+          examples:
+            - not_found
+          enum:
+            - canceled
+            - unknown
+            - invalid_argument
+            - deadline_exceeded
+            - not_found
+            - already_exists
+            - permission_denied
+            - resource_exhausted
+            - failed_precondition
+            - aborted
+            - out_of_range
+            - unimplemented
+            - internal
+            - unavailable
+            - data_loss
+            - unauthenticated
+          description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
+        message:
+          type: string
+          description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/connect.error_details.Any'
+          description: A list of messages that carry the error details. There is no limit on the number of messages.
+      title: Connect Error
+      additionalProperties: true
+      description: 'Error type returned by Connect: https://connectrpc.com/docs/go/errors/#http-representation'
+    connect.error_details.Any:
+      type: object
+      properties:
+        type:
+          type: string
+          description: 'A URL that acts as a globally unique identifier for the type of the serialized message. For example: `type.googleapis.com/google.rpc.ErrorInfo`. This is used to determine the schema of the data in the `value` field and is the discriminator for the `debug` field.'
+        value:
+          type: string
+          format: binary
+          description: The Protobuf message, serialized as bytes and base64-encoded. The specific message type is identified by the `type` field.
+        debug:
+          oneOf:
+            - type: object
+              title: Any
+              additionalProperties: true
+              description: Detailed error information.
+          discriminator:
+            propertyName: type
+          title: Debug
+          description: Deserialized error detail payload. The 'type' field indicates the schema. This field is for easier debugging and should not be relied upon for application logic.
+      additionalProperties: true
+      description: Contains an arbitrary serialized message along with a @type that describes the type of the serialized message, with an additional debug field for ConnectRPC error details.
+    google.protobuf.FieldMask:
+      type: string
+      description: |-
+        `FieldMask` represents a set of symbolic field paths, for example:
+
+             paths: "f.a"
+             paths: "f.b.d"
+
+         Here `f` represents a field in some root message, `a` and `b`
+         fields in the message found in `f`, and `d` a field found in the
+         message in `f.b`.
+
+         Field masks are used to specify a subset of fields that should be
+         returned by a get operation or modified by an update operation.
+         Field masks also have a custom JSON encoding (see below).
+
+         # Field Masks in Projections
+
+         When used in the context of a projection, a response message or
+         sub-message is filtered by the API to only contain those fields as
+         specified in the mask. For example, if the mask in the previous
+         example is applied to a response message as follows:
+
+             f {
+               a : 22
+               b {
+                 d : 1
+                 x : 2
+               }
+               y : 13
+             }
+             z: 8
+
+         The result will not contain specific values for fields x,y and z
+         (their value will be set to the default, and omitted in proto text
+         output):
+
+
+             f {
+               a : 22
+               b {
+                 d : 1
+               }
+             }
+
+         A repeated field is not allowed except at the last position of a
+         paths string.
+
+         If a FieldMask object is not present in a get operation, the
+         operation applies to all fields (as if a FieldMask of all fields
+         had been specified).
+
+         Note that a field mask does not necessarily apply to the
+         top-level response message. In case of a REST get operation, the
+         field mask applies directly to the response, but in case of a REST
+         list operation, the mask instead applies to each individual message
+         in the returned resource list. In case of a REST custom method,
+         other definitions may be used. Where the mask applies will be
+         clearly documented together with its declaration in the API.  In
+         any case, the effect on the returned resource/resources is required
+         behavior for APIs.
+
+         # Field Masks in Update Operations
+
+         A field mask in update operations specifies which fields of the
+         targeted resource are going to be updated. The API is required
+         to only change the values of the fields as specified in the mask
+         and leave the others untouched. If a resource is passed in to
+         describe the updated values, the API ignores the values of all
+         fields not covered by the mask.
+
+         If a repeated field is specified for an update operation, new values will
+         be appended to the existing repeated field in the target resource. Note that
+         a repeated field is only allowed in the last position of a `paths` string.
+
+         If a sub-message is specified in the last position of the field mask for an
+         update operation, then new value will be merged into the existing sub-message
+         in the target resource.
+
+         For example, given the target message:
+
+             f {
+               b {
+                 d: 1
+                 x: 2
+               }
+               c: [1]
+             }
+
+         And an update message:
+
+             f {
+               b {
+                 d: 10
+               }
+               c: [2]
+             }
+
+         then if the field mask is:
+
+          paths: ["f.b", "f.c"]
+
+         then the result will be:
+
+             f {
+               b {
+                 d: 10
+                 x: 2
+               }
+               c: [1, 2]
+             }
+
+         An implementation may provide options to override this default behavior for
+         repeated and message fields.
+
+         In order to reset a field's value to the default, the field must
+         be in the mask and set to the default value in the provided resource.
+         Hence, in order to reset all fields of a resource, provide a default
+         instance of the resource and set all fields in the mask, or do
+         not provide a mask as described below.
+
+         If a field mask is not present on update, the operation applies to
+         all fields (as if a field mask of all fields has been specified).
+         Note that in the presence of schema evolution, this may mean that
+         fields the client does not know and has therefore not filled into
+         the request will be reset to their default. If this is unwanted
+         behavior, a specific service may require a client to always specify
+         a field mask, producing an error if not.
+
+         As with get operations, the location of the resource which
+         describes the updated values in the request message depends on the
+         operation kind. In any case, the effect of the field mask is
+         required to be honored by the API.
+
+         ## Considerations for HTTP REST
+
+         The HTTP kind of an update operation which uses a field mask must
+         be set to PATCH instead of PUT in order to satisfy HTTP semantics
+         (PUT must only be used for full updates).
+
+         # JSON Encoding of Field Masks
+
+         In JSON, a field mask is encoded as a single string where paths are
+         separated by a comma. Fields name in each path are converted
+         to/from lower-camel naming conventions.
+
+         As an example, consider the following message declarations:
+
+             message Profile {
+               User user = 1;
+               Photo photo = 2;
+             }
+             message User {
+               string display_name = 1;
+               string address = 2;
+             }
+
+         In proto a field mask for `Profile` may look as such:
+
+             mask {
+               paths: "user.display_name"
+               paths: "photo"
+             }
+
+         In JSON, the same mask is represented as below:
+
+             {
+               mask: "user.displayName,photo"
+             }
+
+         # Field Masks and Oneof Fields
+
+         Field masks treat fields in oneofs just as regular fields. Consider the
+         following message:
+
+             message SampleMessage {
+               oneof test_oneof {
+                 string name = 4;
+                 SubMessage sub_message = 9;
+               }
+             }
+
+         The field mask can be:
+
+             mask {
+               paths: "name"
+             }
+
+         Or:
+
+             mask {
+               paths: "sub_message"
+             }
+
+         Note that oneof type names ("test_oneof" in this case) cannot be used in
+         paths.
+
+         ## Field Mask Verification
+
+         The implementation of any API method which has a FieldMask type field in the
+         request should verify the included field paths, and return an
+         `INVALID_ARGUMENT` error if any path is unmappable.
+    google.protobuf.ListValue:
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/google.protobuf.Value'
+          title: values
+          description: Repeated field of dynamically typed values.
+      title: ListValue
+      additionalProperties: false
+      description: |-
+        `ListValue` is a wrapper around a repeated field of values.
+
+         The JSON representation for `ListValue` is JSON array.
+    google.protobuf.NullValue:
+      type: string
+      title: NullValue
+      enum:
+        - NULL_VALUE
+      description: |-
+        `NullValue` is a singleton enumeration to represent the null value for the
+         `Value` type union.
+
+         The JSON representation for `NullValue` is JSON `null`.
+    google.protobuf.Struct:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/google.protobuf.Value'
+      description: |-
+        `Struct` represents a structured data value, consisting of fields
+         which map to dynamically typed values. In some languages, `Struct`
+         might be supported by a native representation. For example, in
+         scripting languages like JS a struct is represented as an
+         object. The details of that representation are described together
+         with the proto support for the language.
+
+         The JSON representation for `Struct` is JSON object.
+    google.protobuf.Struct.FieldsEntry:
+      type: object
+      properties:
+        key:
+          type: string
+          title: key
+        value:
+          title: value
+          $ref: '#/components/schemas/google.protobuf.Value'
+      title: FieldsEntry
+      additionalProperties: false
+    google.protobuf.Timestamp:
+      type: string
+      examples:
+        - "2023-01-15T01:30:15.01Z"
+        - "2024-12-25T12:00:00Z"
+      format: date-time
+      description: |-
+        A Timestamp represents a point in time independent of any time zone or local
+         calendar, encoded as a count of seconds and fractions of seconds at
+         nanosecond resolution. The count is relative to an epoch at UTC midnight on
+         January 1, 1970, in the proleptic Gregorian calendar which extends the
+         Gregorian calendar backwards to year one.
+
+         All minutes are 60 seconds long. Leap seconds are "smeared" so that no leap
+         second table is needed for interpretation, using a [24-hour linear
+         smear](https://developers.google.com/time/smear).
+
+         The range is from 0001-01-01T00:00:00Z to 9999-12-31T23:59:59.999999999Z. By
+         restricting to that range, we ensure that we can convert to and from [RFC
+         3339](https://www.ietf.org/rfc/rfc3339.txt) date strings.
+
+         # Examples
+
+         Example 1: Compute Timestamp from POSIX `time()`.
+
+             Timestamp timestamp;
+             timestamp.set_seconds(time(NULL));
+             timestamp.set_nanos(0);
+
+         Example 2: Compute Timestamp from POSIX `gettimeofday()`.
+
+             struct timeval tv;
+             gettimeofday(&tv, NULL);
+
+             Timestamp timestamp;
+             timestamp.set_seconds(tv.tv_sec);
+             timestamp.set_nanos(tv.tv_usec * 1000);
+
+         Example 3: Compute Timestamp from Win32 `GetSystemTimeAsFileTime()`.
+
+             FILETIME ft;
+             GetSystemTimeAsFileTime(&ft);
+             UINT64 ticks = (((UINT64)ft.dwHighDateTime) << 32) | ft.dwLowDateTime;
+
+             // A Windows tick is 100 nanoseconds. Windows epoch 1601-01-01T00:00:00Z
+             // is 11644473600 seconds before Unix epoch 1970-01-01T00:00:00Z.
+             Timestamp timestamp;
+             timestamp.set_seconds((INT64) ((ticks / 10000000) - 11644473600LL));
+             timestamp.set_nanos((INT32) ((ticks % 10000000) * 100));
+
+         Example 4: Compute Timestamp from Java `System.currentTimeMillis()`.
+
+             long millis = System.currentTimeMillis();
+
+             Timestamp timestamp = Timestamp.newBuilder().setSeconds(millis / 1000)
+                 .setNanos((int) ((millis % 1000) * 1000000)).build();
+
+         Example 5: Compute Timestamp from Java `Instant.now()`.
+
+             Instant now = Instant.now();
+
+             Timestamp timestamp =
+                 Timestamp.newBuilder().setSeconds(now.getEpochSecond())
+                     .setNanos(now.getNano()).build();
+
+         Example 6: Compute Timestamp from current time in Python.
+
+             timestamp = Timestamp()
+             timestamp.GetCurrentTime()
+
+         # JSON Mapping
+
+         In JSON format, the Timestamp type is encoded as a string in the
+         [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format. That is, the
+         format is "{year}-{month}-{day}T{hour}:{min}:{sec}[.{frac_sec}]Z"
+         where {year} is always expressed using four digits while {month}, {day},
+         {hour}, {min}, and {sec} are zero-padded to two digits each. The fractional
+         seconds, which can go up to 9 digits (i.e. up to 1 nanosecond resolution),
+         are optional. The "Z" suffix indicates the timezone ("UTC"); the timezone
+         is required. A proto3 JSON serializer should always use UTC (as indicated by
+         "Z") when printing the Timestamp type and a proto3 JSON parser should be
+         able to accept both UTC and other timezones (as indicated by an offset).
+
+         For example, "2017-01-15T01:30:15.01Z" encodes 15.01 seconds past
+         01:30 UTC on January 15, 2017.
+
+         In JavaScript, one can convert a Date object to this format using the
+         standard
+         [toISOString()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString)
+         method. In Python, a standard `datetime.datetime` object can be converted
+         to this format using
+         [`strftime`](https://docs.python.org/2/library/time.html#time.strftime) with
+         the time format spec '%Y-%m-%dT%H:%M:%S.%fZ'. Likewise, in Java, one can use
+         the Joda Time's [`ISODateTimeFormat.dateTime()`](
+         http://joda-time.sourceforge.net/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime()
+         ) to obtain a formatter capable of generating timestamps in this format.
+    google.protobuf.Value:
+      oneOf:
+        - type: "null"
+        - type: number
+        - type: string
+        - type: boolean
+        - type: array
+        - type: object
+          additionalProperties: true
+      description: |-
+        `Value` represents a dynamically typed value which can be either
+         null, a number, a string, a boolean, a recursive struct value, or a
+         list of values. A producer of value is expected to set one of these
+         variants. Absence of any variant indicates an error.
+
+         The JSON representation for `Value` is JSON value.
+    google.type.Money:
+      type: object
+      properties:
+        currencyCode:
+          type: string
+          title: currency_code
+          description: The three-letter currency code defined in ISO 4217.
+        units:
+          type:
+            - integer
+            - string
+          title: units
+          format: int64
+          description: |-
+            The whole units of the amount.
+             For example if `currencyCode` is `"USD"`, then 1 unit is one US dollar.
+        nanos:
+          type: integer
+          title: nanos
+          format: int32
+          description: |-
+            Number of nano (10^-9) units of the amount.
+             The value must be between -999,999,999 and +999,999,999 inclusive.
+             If `units` is positive, `nanos` must be positive or zero.
+             If `units` is zero, `nanos` can be positive, zero, or negative.
+             If `units` is negative, `nanos` must be negative or zero.
+             For example $-1.75 is represented as `units`=-1 and `nanos`=-750,000,000.
+      title: Money
+      additionalProperties: false
+      description: Represents an amount of money with its currency type.
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security: []
+tags:
+  - name: commerce.v1.CommerceService

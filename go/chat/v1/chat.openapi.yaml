@@ -1054,6 +1054,9 @@ components:
         nextCursor:
           type: string
           title: next_cursor
+        prevCursor:
+          type: string
+          title: prev_cursor
       title: ListProposalsResponse
       additionalProperties: false
     chat.v1.LiveRequest:
@@ -1774,9 +1777,12 @@ components:
           items:
             $ref: '#/components/schemas/chat.v1.RoomSubscription'
           title: members
-        cursor:
-          title: cursor
-          $ref: '#/components/schemas/common.v1.PageCursor'
+        nextCursor:
+          type: string
+          title: next_cursor
+        prevCursor:
+          type: string
+          title: prev_cursor
       title: SearchRoomSubscriptionsResponse
       additionalProperties: false
     chat.v1.SearchRoomsRequest:
@@ -1806,6 +1812,12 @@ components:
           items:
             $ref: '#/components/schemas/chat.v1.Room'
           title: data
+        nextCursor:
+          type: string
+          title: next_cursor
+        prevCursor:
+          type: string
+          title: prev_cursor
       title: SearchRoomsResponse
       additionalProperties: false
     chat.v1.SendEventRequest:
