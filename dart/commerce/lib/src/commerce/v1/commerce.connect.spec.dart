@@ -6,6 +6,9 @@
 import "package:connectrpc/connect.dart" as connect;
 import "commerce.pb.dart" as commercev1commerce;
 
+/// ----------------------
+/// Shop
+/// ----------------------
 abstract final class CommerceService {
   /// Fully-qualified name of the CommerceService service.
   static const name = 'commerce.v1.CommerceService';

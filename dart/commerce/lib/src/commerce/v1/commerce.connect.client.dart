@@ -7,6 +7,9 @@ import "package:connectrpc/connect.dart" as connect;
 import "commerce.pb.dart" as commercev1commerce;
 import "commerce.connect.spec.dart" as specs;
 
+/// ----------------------
+/// Shop
+/// ----------------------
 extension type CommerceServiceClient (connect.Transport _transport) {
   /// Creates a new shop. The authenticated user becomes the admin.
   Future<commercev1commerce.CreateShopResponse> createShop(

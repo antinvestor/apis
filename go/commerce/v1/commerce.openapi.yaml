@@ -2272,3 +2272,7 @@ components:
 security: []
 tags:
   - name: commerce.v1.CommerceService
+    description: |-
+      ----------------------
+       Shop
+       ----------------------
