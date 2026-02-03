@@ -1,0 +1,22 @@
+include: package:lints/recommended.yaml
+
+analyzer:
+  exclude:
+    - lib/src/**/*.pb.dart
+    - lib/src/**/*.pbenum.dart
+    - lib/src/**/*.pbjson.dart
+    - lib/src/**/*.pbconnect.dart
+    - lib/src/**/*.connect.client.dart
+    - lib/src/**/*.connect.spec.dart
+    - lib/src/**/*.pbserver.dart
+  language:
+    strict-casts: true
+    strict-inference: true
+    strict-raw-types: true
+
+linter:
+  rules:
+    - always_declare_return_types
+    - avoid_print
+    - prefer_single_quotes
+    - require_trailing_commas
