@@ -47,20 +47,24 @@ endef
 # ------------------------------------------------------------------------------
 
 define golang_build
-	$(call require_dir,go/$(1))
-	cd go/$(1)
-	$(GO) mod tidy
-	$(GO) fmt ./...
-	$(GO) vet ./...
-	$(GO) build ./...
-	$(GO) test -vet=off -race -cover ./...
+	( \
+	$(call require_dir,go/$(1)); \
+	cd go/$(1); \
+	$(GO) mod tidy; \
+	$(GO) fmt ./...; \
+	$(GO) vet ./...; \
+	$(GO) build ./...; \
+	$(GO) test -vet=off -race -cover ./...; \
+	)
 endef
 
 define golang_upgrade
-	$(call require_dir,go/$(1))
-	cd go/$(1)
-	$(GO) get -u ./...
-	$(GO) mod tidy
+	( \
+	$(call require_dir,go/$(1)); \
+	cd go/$(1); \
+	$(GO) get -u ./...; \
+	$(GO) mod tidy; \
+	)
 endef
 
 # ------------------------------------------------------------------------------
@@ -68,9 +72,11 @@ endef
 # ------------------------------------------------------------------------------
 
 define buf_validate
-	$(call require_dir,proto/$(1))
-	cd proto/$(1)
-	buf validate
+	( \
+	$(call require_dir,proto/$(1)); \
+	cd proto/$(1); \
+	buf validate; \
+	)
 endef
 
 define buf_generate
@@ -93,9 +99,11 @@ define buf_generate
 endef
 
 define buf_migrate
-	$(call require_dir,proto/$(1))
-	cd proto/$(1)
-	buf config migrate
+	( \
+	$(call require_dir,proto/$(1)); \
+	cd proto/$(1); \
+	buf config migrate; \
+	)
 endef
 
 # ------------------------------------------------------------------------------
@@ -103,26 +111,32 @@ endef
 # ------------------------------------------------------------------------------
 
 define golang_lint
-	$(call require_dir,proto/$(1))
-	cd proto/$(1)
-	buf format -w
-	buf lint
-
-	$(call require_dir,go/$(1))
-	cd go/$(1)
-	$(GO) vet ./...
-	golangci-lint run
+	( \
+	$(call require_dir,proto/$(1)); \
+	cd proto/$(1); \
+	buf format -w; \
+	buf lint; \
+	); \
+	( \
+	$(call require_dir,go/$(1)); \
+	cd go/$(1); \
+	$(GO) vet ./...; \
+	golangci-lint run; \
+	)
 endef
 
 define lint_fix_module
-	$(call require_dir,proto/$(1))
-	cd proto/$(1)
-	buf dep update
-	buf format -w .
-
-	$(call require_dir,go/$(1))
-	cd go/$(1)
-	golangci-lint run --fix
+	( \
+	$(call require_dir,proto/$(1)); \
+	cd proto/$(1); \
+	buf dep update; \
+	buf format -w .; \
+	); \
+	( \
+	$(call require_dir,go/$(1)); \
+	cd go/$(1); \
+	golangci-lint run --fix; \
+	)
 endef
 
 # ------------------------------------------------------------------------------
@@ -130,12 +144,14 @@ endef
 # ------------------------------------------------------------------------------
 
 define connect_handler_mock
-	$(call require_dir,go/$(1))
-	cd go/$(1)
-	mkdir -p mocks
+	( \
+	$(call require_dir,go/$(1)); \
+	cd go/$(1); \
+	mkdir -p mocks; \
 	minimock \
 		-o mocks/$(3)_handler.gen.go \
-		-i buf.build/gen/go/antinvestor/$(if $(5),$(5),$(1))/connectrpc/go/$(1)/$(2)/$(1)$(2)connect.$(4)
+		-i buf.build/gen/go/antinvestor/$(if $(5),$(5),$(1))/connectrpc/go/$(1)/$(2)/$(1)$(2)connect.$(4); \
+	)
 endef
 
 # ------------------------------------------------------------------------------
@@ -143,10 +159,12 @@ endef
 # ------------------------------------------------------------------------------
 
 define dart_upgrade
-	$(call require_dir,dart/$(1))
-	cd dart/$(1)
-	dart pub upgrade --major-versions
-	dart pub get
+	( \
+	$(call require_dir,dart/$(1)); \
+	cd dart/$(1); \
+	dart pub upgrade --major-versions; \
+	dart pub get; \
+	)
 endef
 
 # ------------------------------------------------------------------------------
