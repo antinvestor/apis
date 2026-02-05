@@ -28,6 +28,23 @@ final $typed_data.Uint8List subscriptionDescriptor = $convert.base64Decode(
     'I5Cgxjb250YWN0X2xpbmsYBSABKAsyFi5jb21tb24udjEuQ29udGFjdExpbmtSC2NvbnRhY3RM'
     'aW5r');
 
+@$core.Deprecated('Use roomActionDescriptor instead')
+const RoomAction$json = {
+  '1': 'RoomAction',
+  '2': [
+    {'1': 'room_id', '3': 1, '4': 1, '5': 9, '10': 'roomId'},
+    {'1': 'actor', '3': 5, '4': 1, '5': 11, '6': '.events.v1.Subscription', '10': 'actor'},
+    {'1': 'targets', '3': 10, '4': 3, '5': 11, '6': '.events.v1.Subscription', '10': 'targets'},
+    {'1': 'details', '3': 15, '4': 1, '5': 9, '10': 'details'},
+  ],
+};
+
+/// Descriptor for `RoomAction`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List roomActionDescriptor = $convert.base64Decode(
+    'CgpSb29tQWN0aW9uEhcKB3Jvb21faWQYASABKAlSBnJvb21JZBItCgVhY3RvchgFIAEoCzIXLm'
+    'V2ZW50cy52MS5TdWJzY3JpcHRpb25SBWFjdG9yEjEKB3RhcmdldHMYCiADKAsyFy5ldmVudHMu'
+    'djEuU3Vic2NyaXB0aW9uUgd0YXJnZXRzEhgKB2RldGFpbHMYDyABKAlSB2RldGFpbHM=');
+
 @$core.Deprecated('Use linkDescriptor instead')
 const Link$json = {
   '1': 'Link',
