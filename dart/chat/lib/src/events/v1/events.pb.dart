@@ -97,7 +97,7 @@ class RoomAction extends $pb.GeneratedMessage {
     Subscription? actor,
     $core.Iterable<Subscription>? targets,
     $core.String? details,
-    $core.String? roles,
+    $core.Iterable<$core.String>? roles,
   }) {
     final $result = create();
     if (roomId != null) {
@@ -116,7 +116,7 @@ class RoomAction extends $pb.GeneratedMessage {
       $result.details = details;
     }
     if (roles != null) {
-      $result.roles = roles;
+      $result.roles.addAll(roles);
     }
     return $result;
   }
@@ -130,7 +130,7 @@ class RoomAction extends $pb.GeneratedMessage {
     ..aOM<Subscription>(5, _omitFieldNames ? '' : 'actor', subBuilder: Subscription.create)
     ..pc<Subscription>(10, _omitFieldNames ? '' : 'targets', $pb.PbFieldType.PM, subBuilder: Subscription.create)
     ..aOS(15, _omitFieldNames ? '' : 'details')
-    ..aOS(20, _omitFieldNames ? '' : 'roles')
+    ..pPS(20, _omitFieldNames ? '' : 'roles')
     ..hasRequiredFields = false
   ;
 
@@ -203,13 +203,7 @@ class RoomAction extends $pb.GeneratedMessage {
 
   /// roles of the actor
   @$pb.TagNumber(20)
-  $core.String get roles => $_getSZ(5);
-  @$pb.TagNumber(20)
-  set roles($core.String v) { $_setString(5, v); }
-  @$pb.TagNumber(20)
-  $core.bool hasRoles() => $_has(5);
-  @$pb.TagNumber(20)
-  void clearRoles() => clearField(20);
+  $core.List<$core.String> get roles => $_getList(5);
 }
 
 /// Link represents an event in the chat system, the core unit of data flowing

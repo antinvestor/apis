@@ -769,6 +769,9 @@ components:
         deviceId:
           type: string
           title: device_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
       title: Delivery
       additionalProperties: false
       description: |-
@@ -825,6 +828,9 @@ components:
         roomId:
           type: string
           title: room_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
           description: Identifies the room being acted on
         action:
           title: action
@@ -845,7 +851,9 @@ components:
           title: details
           description: details of the action
         roles:
-          type: string
+          type: array
+          items:
+            type: string
           title: roles
           description: roles of the actor
       title: RoomAction
@@ -856,6 +864,9 @@ components:
         subscriptionId:
           type: string
           title: subscription_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
           description: Identifies the subscription by id in transit.
         contactLink:
           title: contact_link

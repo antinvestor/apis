@@ -56,7 +56,7 @@ message RoomAction {
   string details = 15;
 
   // roles of the actor
-  string roles = 20;
+  repeated string roles = 20;
 }
 
 // Link represents an event in the chat system, the core unit of data flowing
