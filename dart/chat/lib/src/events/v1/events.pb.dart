@@ -15,6 +15,7 @@ import 'package:protobuf/protobuf.dart' as $pb;
 
 import '../../chat/v1/definitions.pbenum.dart' as $4;
 import '../../chat/v1/payload_type.pb.dart' as $2;
+import '../../chat/v1/payload_type.pbenum.dart' as $2;
 import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $3;
 import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $1;
 import 'events.pbenum.dart';
@@ -92,13 +93,18 @@ class Subscription extends $pb.GeneratedMessage {
 class RoomAction extends $pb.GeneratedMessage {
   factory RoomAction({
     $core.String? roomId,
+    $2.RoomChangeAction? action,
     Subscription? actor,
     $core.Iterable<Subscription>? targets,
     $core.String? details,
+    $core.String? roles,
   }) {
     final $result = create();
     if (roomId != null) {
       $result.roomId = roomId;
+    }
+    if (action != null) {
+      $result.action = action;
     }
     if (actor != null) {
       $result.actor = actor;
@@ -109,6 +115,9 @@ class RoomAction extends $pb.GeneratedMessage {
     if (details != null) {
       $result.details = details;
     }
+    if (roles != null) {
+      $result.roles = roles;
+    }
     return $result;
   }
   RoomAction._() : super();
@@ -117,9 +126,11 @@ class RoomAction extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RoomAction', package: const $pb.PackageName(_omitMessageNames ? '' : 'events.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'roomId')
+    ..e<$2.RoomChangeAction>(2, _omitFieldNames ? '' : 'action', $pb.PbFieldType.OE, defaultOrMaker: $2.RoomChangeAction.ROOM_CHANGE_ACTION_UNSPECIFIED, valueOf: $2.RoomChangeAction.valueOf, enumValues: $2.RoomChangeAction.values)
     ..aOM<Subscription>(5, _omitFieldNames ? '' : 'actor', subBuilder: Subscription.create)
     ..pc<Subscription>(10, _omitFieldNames ? '' : 'targets', $pb.PbFieldType.PM, subBuilder: Subscription.create)
     ..aOS(15, _omitFieldNames ? '' : 'details')
+    ..aOS(20, _omitFieldNames ? '' : 'roles')
     ..hasRequiredFields = false
   ;
 
@@ -154,31 +165,51 @@ class RoomAction extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearRoomId() => clearField(1);
 
+  /// action type
+  @$pb.TagNumber(2)
+  $2.RoomChangeAction get action => $_getN(1);
+  @$pb.TagNumber(2)
+  set action($2.RoomChangeAction v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasAction() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearAction() => clearField(2);
+
   /// Subscription details of the person performing an action
   @$pb.TagNumber(5)
-  Subscription get actor => $_getN(1);
+  Subscription get actor => $_getN(2);
   @$pb.TagNumber(5)
   set actor(Subscription v) { setField(5, v); }
   @$pb.TagNumber(5)
-  $core.bool hasActor() => $_has(1);
+  $core.bool hasActor() => $_has(2);
   @$pb.TagNumber(5)
   void clearActor() => clearField(5);
   @$pb.TagNumber(5)
-  Subscription ensureActor() => $_ensure(1);
+  Subscription ensureActor() => $_ensure(2);
 
   /// details of affected people based on action
   @$pb.TagNumber(10)
-  $core.List<Subscription> get targets => $_getList(2);
+  $core.List<Subscription> get targets => $_getList(3);
 
   /// details of the action
   @$pb.TagNumber(15)
-  $core.String get details => $_getSZ(3);
+  $core.String get details => $_getSZ(4);
   @$pb.TagNumber(15)
-  set details($core.String v) { $_setString(3, v); }
+  set details($core.String v) { $_setString(4, v); }
   @$pb.TagNumber(15)
-  $core.bool hasDetails() => $_has(3);
+  $core.bool hasDetails() => $_has(4);
   @$pb.TagNumber(15)
   void clearDetails() => clearField(15);
+
+  /// roles of the actor
+  @$pb.TagNumber(20)
+  $core.String get roles => $_getSZ(5);
+  @$pb.TagNumber(20)
+  set roles($core.String v) { $_setString(5, v); }
+  @$pb.TagNumber(20)
+  $core.bool hasRoles() => $_has(5);
+  @$pb.TagNumber(20)
+  void clearRoles() => clearField(20);
 }
 
 /// Link represents an event in the chat system, the core unit of data flowing

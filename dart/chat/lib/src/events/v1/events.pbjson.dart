@@ -33,17 +33,21 @@ const RoomAction$json = {
   '1': 'RoomAction',
   '2': [
     {'1': 'room_id', '3': 1, '4': 1, '5': 9, '10': 'roomId'},
+    {'1': 'action', '3': 2, '4': 1, '5': 14, '6': '.chat.v1.RoomChangeAction', '10': 'action'},
     {'1': 'actor', '3': 5, '4': 1, '5': 11, '6': '.events.v1.Subscription', '10': 'actor'},
     {'1': 'targets', '3': 10, '4': 3, '5': 11, '6': '.events.v1.Subscription', '10': 'targets'},
     {'1': 'details', '3': 15, '4': 1, '5': 9, '10': 'details'},
+    {'1': 'roles', '3': 20, '4': 1, '5': 9, '10': 'roles'},
   ],
 };
 
 /// Descriptor for `RoomAction`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List roomActionDescriptor = $convert.base64Decode(
-    'CgpSb29tQWN0aW9uEhcKB3Jvb21faWQYASABKAlSBnJvb21JZBItCgVhY3RvchgFIAEoCzIXLm'
-    'V2ZW50cy52MS5TdWJzY3JpcHRpb25SBWFjdG9yEjEKB3RhcmdldHMYCiADKAsyFy5ldmVudHMu'
-    'djEuU3Vic2NyaXB0aW9uUgd0YXJnZXRzEhgKB2RldGFpbHMYDyABKAlSB2RldGFpbHM=');
+    'CgpSb29tQWN0aW9uEhcKB3Jvb21faWQYASABKAlSBnJvb21JZBIxCgZhY3Rpb24YAiABKA4yGS'
+    '5jaGF0LnYxLlJvb21DaGFuZ2VBY3Rpb25SBmFjdGlvbhItCgVhY3RvchgFIAEoCzIXLmV2ZW50'
+    'cy52MS5TdWJzY3JpcHRpb25SBWFjdG9yEjEKB3RhcmdldHMYCiADKAsyFy5ldmVudHMudjEuU3'
+    'Vic2NyaXB0aW9uUgd0YXJnZXRzEhgKB2RldGFpbHMYDyABKAlSB2RldGFpbHMSFAoFcm9sZXMY'
+    'FCABKAlSBXJvbGVz');
 
 @$core.Deprecated('Use linkDescriptor instead')
 const Link$json = {

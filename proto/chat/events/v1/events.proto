@@ -37,6 +37,8 @@ message Subscription {
 message RoomAction {
   // Identifies the room being acted on
   string room_id = 1;
+  // action type
+  chat.v1.RoomChangeAction action = 2;
   // Subscription details of the person performing an action
   Subscription actor = 5;
   // details of affected people based on action
@@ -44,6 +46,9 @@ message RoomAction {
 
   // details of the action
   string details = 15;
+
+  // roles of the actor
+  string roles = 20;
 }
 
 // Link represents an event in the chat system, the core unit of data flowing

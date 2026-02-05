@@ -826,6 +826,10 @@ components:
           type: string
           title: room_id
           description: Identifies the room being acted on
+        action:
+          title: action
+          description: action type
+          $ref: '#/components/schemas/chat.v1.RoomChangeAction'
         actor:
           title: actor
           description: Subscription details of the person performing an action
@@ -840,6 +844,10 @@ components:
           type: string
           title: details
           description: details of the action
+        roles:
+          type: string
+          title: roles
+          description: roles of the actor
       title: RoomAction
       additionalProperties: false
     events.v1.Subscription:
