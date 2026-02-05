@@ -819,6 +819,29 @@ components:
       description: |-
         Link represents an event in the chat system, the core unit of data flowing
          through the system in real-time to end-user devices.
+    events.v1.RoomAction:
+      type: object
+      properties:
+        roomId:
+          type: string
+          title: room_id
+          description: Identifies the room being acted on
+        actor:
+          title: actor
+          description: Subscription details of the person performing an action
+          $ref: '#/components/schemas/events.v1.Subscription'
+        targets:
+          type: array
+          items:
+            $ref: '#/components/schemas/events.v1.Subscription'
+          title: targets
+          description: details of affected people based on action
+        details:
+          type: string
+          title: details
+          description: details of the action
+      title: RoomAction
+      additionalProperties: false
     events.v1.Subscription:
       type: object
       properties:

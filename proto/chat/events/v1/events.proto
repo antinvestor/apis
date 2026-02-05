@@ -34,6 +34,18 @@ message Subscription {
   common.v1.ContactLink contact_link = 5;
 }
 
+message RoomAction {
+  // Identifies the room being acted on
+  string room_id = 1;
+  // Subscription details of the person performing an action
+  Subscription actor = 5;
+  // details of affected people based on action
+  repeated Subscription targets = 10;
+
+  // details of the action
+  string details = 15;
+}
+
 // Link represents an event in the chat system, the core unit of data flowing
 // through the system in real-time to end-user devices.
 message Link {

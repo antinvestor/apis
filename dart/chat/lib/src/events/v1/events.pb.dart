@@ -89,6 +89,98 @@ class Subscription extends $pb.GeneratedMessage {
   $3.ContactLink ensureContactLink() => $_ensure(1);
 }
 
+class RoomAction extends $pb.GeneratedMessage {
+  factory RoomAction({
+    $core.String? roomId,
+    Subscription? actor,
+    $core.Iterable<Subscription>? targets,
+    $core.String? details,
+  }) {
+    final $result = create();
+    if (roomId != null) {
+      $result.roomId = roomId;
+    }
+    if (actor != null) {
+      $result.actor = actor;
+    }
+    if (targets != null) {
+      $result.targets.addAll(targets);
+    }
+    if (details != null) {
+      $result.details = details;
+    }
+    return $result;
+  }
+  RoomAction._() : super();
+  factory RoomAction.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory RoomAction.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RoomAction', package: const $pb.PackageName(_omitMessageNames ? '' : 'events.v1'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'roomId')
+    ..aOM<Subscription>(5, _omitFieldNames ? '' : 'actor', subBuilder: Subscription.create)
+    ..pc<Subscription>(10, _omitFieldNames ? '' : 'targets', $pb.PbFieldType.PM, subBuilder: Subscription.create)
+    ..aOS(15, _omitFieldNames ? '' : 'details')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  RoomAction clone() => RoomAction()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  RoomAction copyWith(void Function(RoomAction) updates) => super.copyWith((message) => updates(message as RoomAction)) as RoomAction;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static RoomAction create() => RoomAction._();
+  RoomAction createEmptyInstance() => create();
+  static $pb.PbList<RoomAction> createRepeated() => $pb.PbList<RoomAction>();
+  @$core.pragma('dart2js:noInline')
+  static RoomAction getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RoomAction>(create);
+  static RoomAction? _defaultInstance;
+
+  /// Identifies the room being acted on
+  @$pb.TagNumber(1)
+  $core.String get roomId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set roomId($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasRoomId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearRoomId() => clearField(1);
+
+  /// Subscription details of the person performing an action
+  @$pb.TagNumber(5)
+  Subscription get actor => $_getN(1);
+  @$pb.TagNumber(5)
+  set actor(Subscription v) { setField(5, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasActor() => $_has(1);
+  @$pb.TagNumber(5)
+  void clearActor() => clearField(5);
+  @$pb.TagNumber(5)
+  Subscription ensureActor() => $_ensure(1);
+
+  /// details of affected people based on action
+  @$pb.TagNumber(10)
+  $core.List<Subscription> get targets => $_getList(2);
+
+  /// details of the action
+  @$pb.TagNumber(15)
+  $core.String get details => $_getSZ(3);
+  @$pb.TagNumber(15)
+  set details($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(15)
+  $core.bool hasDetails() => $_has(3);
+  @$pb.TagNumber(15)
+  void clearDetails() => clearField(15);
+}
+
 /// Link represents an event in the chat system, the core unit of data flowing
 /// through the system in real-time to end-user devices.
 class Link extends $pb.GeneratedMessage {
