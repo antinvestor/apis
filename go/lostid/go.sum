@@ -10,8 +10,8 @@ buf.build/gen/go/gnostic/gnostic/protocolbuffers/go v1.36.11-20230414000709-087b
 buf.build/gen/go/gnostic/gnostic/protocolbuffers/go v1.36.11-20230414000709-087bc8072ce4.1/go.mod h1:/t9AeRQQp2iNkiGHDLfHLW3SzNpYpNPGRZ+Ih8+SOUs=
 connectrpc.com/connect v1.19.1 h1:R5M57z05+90EfEvCY1b7hBxDVOUl45PrtXtAV2fOC14=
 connectrpc.com/connect v1.19.1/go.mod h1:tN20fjdGlewnSFeZxLKb0xwIZ6ozc3OQs2hTXy4du9w=
-github.com/antinvestor/apis/go/common v1.53.1 h1:M6a9kvS41Rzg05A64+X60QUqVssPOIKsRfaPqOLw6x0=
-github.com/antinvestor/apis/go/common v1.53.1/go.mod h1:waVIpdXbNjIacN0tnxC7IhKzKPW+nj31vhlSr9Yx9VA=
+github.com/antinvestor/apis/go/common v1.53.5 h1:9EkBXV3yylGZYq5oat4iOhTKUwnC8HBjRQM5/UguwoA=
+github.com/antinvestor/apis/go/common v1.53.5/go.mod h1:Sy3WcCUxQxRUx6oBfE2cA9CA2BQFFth58RBkNbAv98Y=
 github.com/cespare/xxhash/v2 v2.3.0 h1:UL815xU9SqsFlibzuggzjXhog7bL6oX9BbNZnL2UFvs=
 github.com/cespare/xxhash/v2 v2.3.0/go.mod h1:VGX0DQ3Q6kWi7AoAeZDth3/j3BFtOZR5XLFGgcrjCOs=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
