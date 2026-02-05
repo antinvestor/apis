@@ -858,6 +858,17 @@ components:
           description: roles of the actor
       title: RoomAction
       additionalProperties: false
+    events.v1.RoomActionList:
+      type: object
+      properties:
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/events.v1.RoomAction'
+          title: actions
+      title: RoomActionList
+      additionalProperties: false
+      description: RoomActionList represents a list of room actions
     events.v1.Subscription:
       type: object
       properties:

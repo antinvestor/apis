@@ -206,6 +206,51 @@ class RoomAction extends $pb.GeneratedMessage {
   $core.List<$core.String> get roles => $_getList(5);
 }
 
+/// RoomActionList represents a list of room actions
+class RoomActionList extends $pb.GeneratedMessage {
+  factory RoomActionList({
+    $core.Iterable<RoomAction>? actions,
+  }) {
+    final $result = create();
+    if (actions != null) {
+      $result.actions.addAll(actions);
+    }
+    return $result;
+  }
+  RoomActionList._() : super();
+  factory RoomActionList.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory RoomActionList.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RoomActionList', package: const $pb.PackageName(_omitMessageNames ? '' : 'events.v1'), createEmptyInstance: create)
+    ..pc<RoomAction>(1, _omitFieldNames ? '' : 'actions', $pb.PbFieldType.PM, subBuilder: RoomAction.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  RoomActionList clone() => RoomActionList()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  RoomActionList copyWith(void Function(RoomActionList) updates) => super.copyWith((message) => updates(message as RoomActionList)) as RoomActionList;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static RoomActionList create() => RoomActionList._();
+  RoomActionList createEmptyInstance() => create();
+  static $pb.PbList<RoomActionList> createRepeated() => $pb.PbList<RoomActionList>();
+  @$core.pragma('dart2js:noInline')
+  static RoomActionList getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RoomActionList>(create);
+  static RoomActionList? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<RoomAction> get actions => $_getList(0);
+}
+
 /// Link represents an event in the chat system, the core unit of data flowing
 /// through the system in real-time to end-user devices.
 class Link extends $pb.GeneratedMessage {

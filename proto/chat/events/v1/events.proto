@@ -59,6 +59,11 @@ message RoomAction {
   repeated string roles = 20;
 }
 
+// RoomActionList represents a list of room actions
+message RoomActionList {
+  repeated RoomAction actions = 1;
+}
+
 // Link represents an event in the chat system, the core unit of data flowing
 // through the system in real-time to end-user devices.
 message Link {
