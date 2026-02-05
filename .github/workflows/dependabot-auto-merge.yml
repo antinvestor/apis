@@ -8,6 +8,7 @@ permissions:
   contents: write
   pull-requests: write
   checks: read
+  workflows: write
 
 jobs:
   auto-merge:
