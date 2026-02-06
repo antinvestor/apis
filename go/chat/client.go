@@ -65,6 +65,6 @@ func NewClient(ctx context.Context, opts ...common.ClientOption) (chatv1connect.
 
 	return &Client{
 		ConnectClientBase: clientBase,
-		ChatServiceClient: chatv1connect.NewChatServiceClient(clientBase.Client(), clientBase.Endpoint()),
+		ChatServiceClient: chatv1connect.NewChatServiceClient(clientBase.Client(), clientBase.Endpoint(), clientBase.Options()...),
 	}, nil
 }
