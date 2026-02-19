@@ -1,0 +1,2793 @@
+openapi: 3.1.0
+info:
+  title: Billing Service
+  description: The Billing Service provides usage-based billing, subscription management, and invoicing capabilities. It supports catalog versioning with plans and tiered pricing components, usage event ingestion with idempotent processing, automated billing runs with metering/rating/discounting/crediting pipeline, prepaid credit management, and invoice lifecycle management. Integrates with the Ledger Service for financial posting.
+  contact:
+    name: Ant Investor Ltd
+    url: https://github.com/antinvestor/service-payment
+    email: info@antinvestor.com
+  license:
+    name: Apache License
+    url: https://github.com/antinvestor/apis/blob/master/LICENSE
+  version: v1.0.0
+paths:
+  /billing.v1.BillingService/CancelSubscription:
+    post:
+      tags:
+        - Subscriptions
+        - billing.v1.BillingService
+      summary: Cancel a subscription
+      description: Cancels an active subscription. The subscription remains active until the current billing period ends.
+      operationId: cancelSubscription
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/billing.v1.CancelSubscriptionRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/billing.v1.CancelSubscriptionResponse'
+  /billing.v1.BillingService/CreateCatalogVersion:
+    post:
+      tags:
+        - Catalog
+        - billing.v1.BillingService
+      summary: Create a new catalog version
+      description: Creates a new immutable catalog version containing plans, components, and pricing tiers. Catalogs must be published before they can be used for billing.
+      operationId: createCatalogVersion
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/billing.v1.CreateCatalogVersionRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/billing.v1.CreateCatalogVersionResponse'
+  /billing.v1.BillingService/CreateComponent:
+    post:
+      tags:
+        - Catalog
+        - billing.v1.BillingService
+      summary: Create a new component
+      description: Creates a new billable component within a plan. Components define the pricing model, aggregation type, and free tier/minimum charge settings.
+      operationId: createComponent
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/billing.v1.CreateComponentRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/billing.v1.CreateComponentResponse'
+  /billing.v1.BillingService/CreateDiscount:
+    post:
+      tags:
+        - Discounts
+        - billing.v1.BillingService
+      summary: Create a discount
+      description: Creates a new discount rule that can be applied during billing runs. Supports percentage and fixed amount discounts with time-bounded validity.
+      operationId: createDiscount
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/billing.v1.CreateDiscountRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/billing.v1.CreateDiscountResponse'
+  /billing.v1.BillingService/CreatePlan:
+    post:
+      tags:
+        - Catalog
+        - billing.v1.BillingService
+      summary: Create a new plan
+      description: Creates a new billing plan within a catalog version. Plans contain billable components with pricing.
+      operationId: createPlan
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/billing.v1.CreatePlanRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/billing.v1.CreatePlanResponse'
+  /billing.v1.BillingService/CreateSubscription:
+    post:
+      tags:
+        - Subscriptions
+        - billing.v1.BillingService
+      summary: Create a new subscription
+      description: Creates a new subscription linking a customer to a plan within a published catalog version.
+      operationId: createSubscription
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/billing.v1.CreateSubscriptionRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/billing.v1.CreateSubscriptionResponse'
+  /billing.v1.BillingService/CreateTier:
+    post:
+      tags:
+        - Catalog
+        - billing.v1.BillingService
+      summary: Create a new pricing tier
+      description: Creates a new pricing tier within a component. Tiers define price brackets for tiered, volume, and stairstep pricing models.
+      operationId: createTier
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/billing.v1.CreateTierRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/billing.v1.CreateTierResponse'
+  /billing.v1.BillingService/GetBillingRun:
+    get:
+      tags:
+        - Billing
+        - billing.v1.BillingService
+      summary: Get a billing run
+      description: Retrieves a billing run by ID including its current state, associated invoice, and any error information.
+      operationId: getBillingRun
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+        - name: message
+          in: query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/billing.v1.GetBillingRunRequest'
+        - name: encoding
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/encoding'
+        - name: base64
+          in: query
+          schema:
+            $ref: '#/components/schemas/base64'
+        - name: compression
+          in: query
+          schema:
+            $ref: '#/components/schemas/compression'
+        - name: connect
+          in: query
+          schema:
+            $ref: '#/components/schemas/connect'
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/billing.v1.GetBillingRunResponse'
+    post:
+      tags:
+        - Billing
+        - billing.v1.BillingService
+      summary: Get a billing run
+      description: Retrieves a billing run by ID including its current state, associated invoice, and any error information.
+      operationId: getBillingRun
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/billing.v1.GetBillingRunRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/billing.v1.GetBillingRunResponse'
+  /billing.v1.BillingService/GetCatalogVersion:
+    get:
+      tags:
+        - Catalog
+        - billing.v1.BillingService
+      summary: Get a catalog version
+      description: Retrieves a specific catalog version by ID, including its plans, components, and pricing tiers.
+      operationId: getCatalogVersion
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+        - name: message
+          in: query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/billing.v1.GetCatalogVersionRequest'
+        - name: encoding
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/encoding'
+        - name: base64
+          in: query
+          schema:
+            $ref: '#/components/schemas/base64'
+        - name: compression
+          in: query
+          schema:
+            $ref: '#/components/schemas/compression'
+        - name: connect
+          in: query
+          schema:
+            $ref: '#/components/schemas/connect'
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/billing.v1.GetCatalogVersionResponse'
+    post:
+      tags:
+        - Catalog
+        - billing.v1.BillingService
+      summary: Get a catalog version
+      description: Retrieves a specific catalog version by ID, including its plans, components, and pricing tiers.
+      operationId: getCatalogVersion
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/billing.v1.GetCatalogVersionRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/billing.v1.GetCatalogVersionResponse'
+  /billing.v1.BillingService/GetCreditBalance:
+    get:
+      tags:
+        - Credits
+        - billing.v1.BillingService
+      summary: Get credit balance
+      description: Retrieves the total remaining credit balance for a customer in a specific currency.
+      operationId: getCreditBalance
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+        - name: message
+          in: query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/billing.v1.GetCreditBalanceRequest'
+        - name: encoding
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/encoding'
+        - name: base64
+          in: query
+          schema:
+            $ref: '#/components/schemas/base64'
+        - name: compression
+          in: query
+          schema:
+            $ref: '#/components/schemas/compression'
+        - name: connect
+          in: query
+          schema:
+            $ref: '#/components/schemas/connect'
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/billing.v1.GetCreditBalanceResponse'
+    post:
+      tags:
+        - Credits
+        - billing.v1.BillingService
+      summary: Get credit balance
+      description: Retrieves the total remaining credit balance for a customer in a specific currency.
+      operationId: getCreditBalance
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/billing.v1.GetCreditBalanceRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/billing.v1.GetCreditBalanceResponse'
+  /billing.v1.BillingService/GetInvoice:
+    get:
+      tags:
+        - Invoices
+        - billing.v1.BillingService
+      summary: Get an invoice
+      description: Retrieves an invoice by ID including all line items, amounts, and payment status.
+      operationId: getInvoice
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+        - name: message
+          in: query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/billing.v1.GetInvoiceRequest'
+        - name: encoding
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/encoding'
+        - name: base64
+          in: query
+          schema:
+            $ref: '#/components/schemas/base64'
+        - name: compression
+          in: query
+          schema:
+            $ref: '#/components/schemas/compression'
+        - name: connect
+          in: query
+          schema:
+            $ref: '#/components/schemas/connect'
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/billing.v1.GetInvoiceResponse'
+    post:
+      tags:
+        - Invoices
+        - billing.v1.BillingService
+      summary: Get an invoice
+      description: Retrieves an invoice by ID including all line items, amounts, and payment status.
+      operationId: getInvoice
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/billing.v1.GetInvoiceRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/billing.v1.GetInvoiceResponse'
+  /billing.v1.BillingService/GetSubscription:
+    get:
+      tags:
+        - Subscriptions
+        - billing.v1.BillingService
+      summary: Get a subscription
+      description: Retrieves a specific subscription by ID including its current state.
+      operationId: getSubscription
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+        - name: message
+          in: query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/billing.v1.GetSubscriptionRequest'
+        - name: encoding
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/encoding'
+        - name: base64
+          in: query
+          schema:
+            $ref: '#/components/schemas/base64'
+        - name: compression
+          in: query
+          schema:
+            $ref: '#/components/schemas/compression'
+        - name: connect
+          in: query
+          schema:
+            $ref: '#/components/schemas/connect'
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/billing.v1.GetSubscriptionResponse'
+    post:
+      tags:
+        - Subscriptions
+        - billing.v1.BillingService
+      summary: Get a subscription
+      description: Retrieves a specific subscription by ID including its current state.
+      operationId: getSubscription
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/billing.v1.GetSubscriptionRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/billing.v1.GetSubscriptionResponse'
+  /billing.v1.BillingService/GrantCredit:
+    post:
+      tags:
+        - Credits
+        - billing.v1.BillingService
+      summary: Grant prepaid credit
+      description: Creates a prepaid credit grant for a customer. Credits are automatically applied during billing runs based on priority and expiration.
+      operationId: grantCredit
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/billing.v1.GrantCreditRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/billing.v1.GrantCreditResponse'
+  /billing.v1.BillingService/IngestUsageBatch:
+    post:
+      tags:
+        - Usage
+        - billing.v1.BillingService
+      summary: Ingest usage events in batch
+      description: Ingests multiple usage events in a single batch. Each event is processed idempotently based on its event_id.
+      operationId: ingestUsageBatch
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/billing.v1.IngestUsageBatchRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/billing.v1.IngestUsageBatchResponse'
+  /billing.v1.BillingService/IngestUsageEvent:
+    post:
+      tags:
+        - Usage
+        - billing.v1.BillingService
+      summary: Ingest a usage event
+      description: Ingests a single usage event for metering. Events are idempotent based on event_id - duplicate events are safely ignored.
+      operationId: ingestUsageEvent
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/billing.v1.IngestUsageEventRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/billing.v1.IngestUsageEventResponse'
+  /billing.v1.BillingService/IssueInvoice:
+    post:
+      tags:
+        - Invoices
+        - billing.v1.BillingService
+      summary: Issue an invoice
+      description: Issues a draft invoice, making it visible to the customer. Invoices are immutable after issuance.
+      operationId: issueInvoice
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/billing.v1.IssueInvoiceRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/billing.v1.IssueInvoiceResponse'
+  /billing.v1.BillingService/ListSubscriptions:
+    get:
+      tags:
+        - Subscriptions
+        - billing.v1.BillingService
+      summary: List customer subscriptions
+      description: Lists all active subscriptions for a customer.
+      operationId: listSubscriptions
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+        - name: message
+          in: query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/billing.v1.ListSubscriptionsRequest'
+        - name: encoding
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/encoding'
+        - name: base64
+          in: query
+          schema:
+            $ref: '#/components/schemas/base64'
+        - name: compression
+          in: query
+          schema:
+            $ref: '#/components/schemas/compression'
+        - name: connect
+          in: query
+          schema:
+            $ref: '#/components/schemas/connect'
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/billing.v1.ListSubscriptionsResponse'
+    post:
+      tags:
+        - Subscriptions
+        - billing.v1.BillingService
+      summary: List customer subscriptions
+      description: Lists all active subscriptions for a customer.
+      operationId: listSubscriptions
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/billing.v1.ListSubscriptionsRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/billing.v1.ListSubscriptionsResponse'
+  /billing.v1.BillingService/PublishCatalogVersion:
+    post:
+      tags:
+        - Catalog
+        - billing.v1.BillingService
+      summary: Publish a catalog version
+      description: Publishes a catalog version with an effective date. Published catalogs become available for new subscriptions.
+      operationId: publishCatalogVersion
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/billing.v1.PublishCatalogVersionRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/billing.v1.PublishCatalogVersionResponse'
+  /billing.v1.BillingService/RecordPayment:
+    post:
+      tags:
+        - Invoices
+        - billing.v1.BillingService
+      summary: Record invoice payment
+      description: Records payment against an issued invoice. Updates the invoice state to paid and posts to the ledger.
+      operationId: recordPayment
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/billing.v1.RecordPaymentRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/billing.v1.RecordPaymentResponse'
+  /billing.v1.BillingService/RunBilling:
+    post:
+      tags:
+        - Billing
+        - billing.v1.BillingService
+      summary: Execute billing run
+      description: 'Executes the full billing pipeline for a subscription: metering, rating, discounting, crediting, invoicing. Idempotent per subscription+period combination.'
+      operationId: runBilling
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/billing.v1.RunBillingRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/billing.v1.RunBillingResponse'
+  /billing.v1.BillingService/SearchCatalogVersions: {}
+  /billing.v1.BillingService/SearchDiscounts: {}
+  /billing.v1.BillingService/SearchInvoices: {}
+  /billing.v1.BillingService/SearchUsageEvents: {}
+  /billing.v1.BillingService/VoidInvoice:
+    post:
+      tags:
+        - Invoices
+        - billing.v1.BillingService
+      summary: Void an invoice
+      description: Voids an invoice, cancelling any outstanding charges. Cannot void already-paid invoices.
+      operationId: voidInvoice
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/billing.v1.VoidInvoiceRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/billing.v1.VoidInvoiceResponse'
+components:
+  schemas:
+    base64:
+      type: boolean
+      title: base64
+      description: Specifies if the message query param is base64 encoded, which may be required for binary data
+    billing.v1.AggregationType:
+      type: string
+      title: AggregationType
+      enum:
+        - SUM
+        - COUNT
+        - MAX
+        - MIN
+        - AVG
+        - LAST
+      description: |-
+        AggregationType defines how usage events are aggregated within a window.
+         buf:lint:ignore ENUM_VALUE_PREFIX
+    billing.v1.BillingRun:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          description: Unique billing run ID
+        subscriptionId:
+          type: string
+          title: subscription_id
+          description: Target subscription
+        customerId:
+          type: string
+          title: customer_id
+          description: Customer identifier
+        catalogVersionId:
+          type: string
+          title: catalog_version_id
+          description: Catalog version used
+        state:
+          title: state
+          description: Current pipeline state
+          $ref: '#/components/schemas/billing.v1.BillingRunState'
+        periodStart:
+          title: period_start
+          description: Billing period start
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        periodEnd:
+          title: period_end
+          description: Billing period end
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        startedAt:
+          title: started_at
+          description: When the run started
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        completedAt:
+          title: completed_at
+          description: When the run completed
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        failedAt:
+          title: failed_at
+          description: When the run failed
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        errorMessage:
+          type: string
+          title: error_message
+          description: Error message if failed
+        invoiceId:
+          type: string
+          title: invoice_id
+          description: Generated invoice ID
+        data:
+          title: data
+          description: Additional metadata
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: BillingRun
+      additionalProperties: false
+      description: BillingRun represents a billing workflow execution.
+    billing.v1.BillingRunState:
+      type: string
+      title: BillingRunState
+      enum:
+        - BILLING_RUN_PENDING
+        - BILLING_RUN_METERING
+        - BILLING_RUN_RATING
+        - BILLING_RUN_DISCOUNTING
+        - BILLING_RUN_CREDITING
+        - BILLING_RUN_INVOICING
+        - BILLING_RUN_POSTING
+        - BILLING_RUN_COMPLETED
+        - BILLING_RUN_FAILED
+      description: |-
+        BillingRunState defines the state machine for billing run execution.
+         buf:lint:ignore ENUM_VALUE_PREFIX
+    billing.v1.CancelSubscriptionRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+      title: CancelSubscriptionRequest
+      additionalProperties: false
+      description: CancelSubscriptionRequest cancels a subscription.
+    billing.v1.CancelSubscriptionResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/billing.v1.Subscription'
+      title: CancelSubscriptionResponse
+      additionalProperties: false
+      description: CancelSubscriptionResponse returns the cancelled subscription.
+    billing.v1.CatalogVersion:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          description: Unique catalog version ID
+        catalogId:
+          type: string
+          title: catalog_id
+          description: Logical catalog identifier
+        version:
+          type: integer
+          title: version
+          format: int32
+          description: Version number within the catalog
+        name:
+          type: string
+          title: name
+          description: Human-readable name
+        currency:
+          type: string
+          title: currency
+          description: Default currency (ISO 4217)
+        publishedAt:
+          title: published_at
+          description: When this version was published
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        effectiveAt:
+          title: effective_at
+          description: When this version becomes effective
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        retiredAt:
+          title: retired_at
+          description: When this version was retired
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        data:
+          title: data
+          description: Additional metadata
+          $ref: '#/components/schemas/google.protobuf.Struct'
+        plans:
+          type: array
+          items:
+            $ref: '#/components/schemas/billing.v1.Plan'
+          title: plans
+          description: Plans in this catalog version
+      title: CatalogVersion
+      additionalProperties: false
+      description: CatalogVersion represents an immutable, versioned catalog of plans and pricing.
+    billing.v1.Component:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          description: Unique component ID
+        planId:
+          type: string
+          title: plan_id
+          description: Parent plan
+        externalId:
+          type: string
+          title: external_id
+          description: External reference ID
+        name:
+          type: string
+          title: name
+          description: Component name
+        metricKey:
+          type: string
+          title: metric_key
+          description: Usage metric key to match events
+        pricingModel:
+          title: pricing_model
+          description: How this component is priced
+          $ref: '#/components/schemas/billing.v1.PricingModel'
+        aggregationType:
+          title: aggregation_type
+          description: How usage events are aggregated
+          $ref: '#/components/schemas/billing.v1.AggregationType'
+        unitName:
+          type: string
+          title: unit_name
+          description: Unit of measurement (e.g., "requests", "GB")
+        freeQuantity:
+          title: free_quantity
+          description: Free tier quantity (0 if none)
+          $ref: '#/components/schemas/google.type.Money'
+        minimumCharge:
+          title: minimum_charge
+          description: Minimum charge amount
+          $ref: '#/components/schemas/google.type.Money'
+        data:
+          title: data
+          description: Additional metadata
+          $ref: '#/components/schemas/google.protobuf.Struct'
+        tiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/billing.v1.Tier'
+          title: tiers
+          description: Pricing tiers
+      title: Component
+      additionalProperties: false
+      description: Component represents a billable component within a plan.
+    billing.v1.CreateCatalogVersionRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+          description: Optional unique ID
+        catalogId:
+          type: string
+          title: catalog_id
+          minLength: 1
+          description: Logical catalog identifier
+        name:
+          type: string
+          title: name
+          minLength: 1
+          description: Human-readable name
+        currency:
+          type: string
+          title: currency
+          minLength: 3
+          description: Default currency (ISO 4217)
+        data:
+          title: data
+          description: Additional metadata
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: CreateCatalogVersionRequest
+      additionalProperties: false
+      description: CreateCatalogVersionRequest creates a new catalog version.
+    billing.v1.CreateCatalogVersionResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/billing.v1.CatalogVersion'
+      title: CreateCatalogVersionResponse
+      additionalProperties: false
+      description: CreateCatalogVersionResponse returns the created catalog version.
+    billing.v1.CreateComponentRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        planId:
+          type: string
+          title: plan_id
+          minLength: 1
+        externalId:
+          type: string
+          title: external_id
+        name:
+          type: string
+          title: name
+          minLength: 1
+        metricKey:
+          type: string
+          title: metric_key
+          minLength: 1
+        pricingModel:
+          title: pricing_model
+          $ref: '#/components/schemas/billing.v1.PricingModel'
+        aggregationType:
+          title: aggregation_type
+          $ref: '#/components/schemas/billing.v1.AggregationType'
+        unitName:
+          type: string
+          title: unit_name
+        freeQuantity:
+          title: free_quantity
+          $ref: '#/components/schemas/google.type.Money'
+        minimumCharge:
+          title: minimum_charge
+          $ref: '#/components/schemas/google.type.Money'
+        data:
+          title: data
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: CreateComponentRequest
+      additionalProperties: false
+      description: CreateComponentRequest creates a new billable component within a plan.
+    billing.v1.CreateComponentResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/billing.v1.Component'
+      title: CreateComponentResponse
+      additionalProperties: false
+      description: CreateComponentResponse returns the created component.
+    billing.v1.CreateDiscountRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        name:
+          type: string
+          title: name
+          minLength: 1
+        discountType:
+          title: discount_type
+          $ref: '#/components/schemas/billing.v1.DiscountType'
+        value:
+          type: number
+          title: value
+          format: double
+        currency:
+          type: string
+          title: currency
+        applicableTo:
+          title: applicable_to
+          $ref: '#/components/schemas/google.protobuf.Struct'
+        startAt:
+          title: start_at
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        endAt:
+          title: end_at
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        maxApplications:
+          type: integer
+          title: max_applications
+          format: int32
+        data:
+          title: data
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: CreateDiscountRequest
+      additionalProperties: false
+      description: CreateDiscountRequest creates a new discount rule.
+    billing.v1.CreateDiscountResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/billing.v1.Discount'
+      title: CreateDiscountResponse
+      additionalProperties: false
+      description: CreateDiscountResponse returns the created discount.
+    billing.v1.CreatePlanRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        catalogVersionId:
+          type: string
+          title: catalog_version_id
+          minLength: 1
+        externalId:
+          type: string
+          title: external_id
+        name:
+          type: string
+          title: name
+          minLength: 1
+        description:
+          type: string
+          title: description
+        data:
+          title: data
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: CreatePlanRequest
+      additionalProperties: false
+      description: CreatePlanRequest creates a new plan within a catalog version.
+    billing.v1.CreatePlanResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/billing.v1.Plan'
+      title: CreatePlanResponse
+      additionalProperties: false
+      description: CreatePlanResponse returns the created plan.
+    billing.v1.CreateSubscriptionRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        customerId:
+          type: string
+          title: customer_id
+          minLength: 1
+        catalogVersionId:
+          type: string
+          title: catalog_version_id
+          minLength: 1
+        planId:
+          type: string
+          title: plan_id
+          minLength: 1
+        startAt:
+          title: start_at
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        billingAnchor:
+          title: billing_anchor
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        currency:
+          type: string
+          title: currency
+          minLength: 3
+        data:
+          title: data
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: CreateSubscriptionRequest
+      additionalProperties: false
+      description: CreateSubscriptionRequest creates a new subscription.
+    billing.v1.CreateSubscriptionResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/billing.v1.Subscription'
+      title: CreateSubscriptionResponse
+      additionalProperties: false
+      description: CreateSubscriptionResponse returns the created subscription.
+    billing.v1.CreateTierRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        componentId:
+          type: string
+          title: component_id
+          minLength: 1
+        sortOrder:
+          type: integer
+          title: sort_order
+          format: int32
+        lowerBound:
+          title: lower_bound
+          $ref: '#/components/schemas/google.type.Money'
+        upperBound:
+          title: upper_bound
+          $ref: '#/components/schemas/google.type.Money'
+        unitPrice:
+          title: unit_price
+          $ref: '#/components/schemas/google.type.Money'
+        flatFee:
+          title: flat_fee
+          $ref: '#/components/schemas/google.type.Money'
+      title: CreateTierRequest
+      additionalProperties: false
+      description: CreateTierRequest creates a new pricing tier within a component.
+    billing.v1.CreateTierResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/billing.v1.Tier'
+      title: CreateTierResponse
+      additionalProperties: false
+      description: CreateTierResponse returns the created tier.
+    billing.v1.CreditEntryType:
+      type: string
+      title: CreditEntryType
+      enum:
+        - CREDIT_GRANT
+        - CREDIT_CONSUME
+        - CREDIT_EXPIRE
+        - CREDIT_REFUND
+      description: |-
+        CreditEntryType defines the type of credit ledger entry.
+         buf:lint:ignore ENUM_VALUE_PREFIX
+    billing.v1.CreditGrant:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          description: Unique credit grant ID
+        customerId:
+          type: string
+          title: customer_id
+          description: Customer identifier
+        name:
+          type: string
+          title: name
+          description: Grant name/description
+        originalAmount:
+          title: original_amount
+          description: Original grant amount
+          $ref: '#/components/schemas/google.type.Money'
+        remainingAmount:
+          title: remaining_amount
+          description: Remaining balance
+          $ref: '#/components/schemas/google.type.Money'
+        currency:
+          type: string
+          title: currency
+          description: Grant currency (ISO 4217)
+        expiresAt:
+          title: expires_at
+          description: Expiration date (optional)
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        priority:
+          type: integer
+          title: priority
+          format: int32
+          description: Consumption priority (lower = consumed first)
+        data:
+          title: data
+          description: Additional metadata
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: CreditGrant
+      additionalProperties: false
+      description: CreditGrant represents a prepaid credit grant to a customer.
+    billing.v1.Discount:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          description: Unique discount ID
+        name:
+          type: string
+          title: name
+          description: Discount name
+        discountType:
+          title: discount_type
+          description: Percentage or fixed
+          $ref: '#/components/schemas/billing.v1.DiscountType'
+        value:
+          type: number
+          title: value
+          format: double
+          description: Discount value (percentage 0-100 or fixed amount)
+        currency:
+          type: string
+          title: currency
+          description: Currency for fixed discounts
+        applicableTo:
+          title: applicable_to
+          description: Applicability rules (JSONB)
+          $ref: '#/components/schemas/google.protobuf.Struct'
+        startAt:
+          title: start_at
+          description: Discount validity start
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        endAt:
+          title: end_at
+          description: Discount validity end
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        maxApplications:
+          type: integer
+          title: max_applications
+          format: int32
+          description: Maximum times this discount can be applied
+        data:
+          title: data
+          description: Additional metadata
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: Discount
+      additionalProperties: false
+      description: Discount represents a discount rule.
+    billing.v1.DiscountType:
+      type: string
+      title: DiscountType
+      enum:
+        - DISCOUNT_PERCENTAGE
+        - DISCOUNT_FIXED
+      description: |-
+        DiscountType defines the type of discount applied.
+         buf:lint:ignore ENUM_VALUE_PREFIX
+    billing.v1.GetBillingRunRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+      title: GetBillingRunRequest
+      additionalProperties: false
+      description: GetBillingRunRequest retrieves a billing run by ID.
+    billing.v1.GetBillingRunResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/billing.v1.BillingRun'
+      title: GetBillingRunResponse
+      additionalProperties: false
+      description: GetBillingRunResponse returns the requested billing run.
+    billing.v1.GetCatalogVersionRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+      title: GetCatalogVersionRequest
+      additionalProperties: false
+      description: GetCatalogVersionRequest retrieves a catalog version by ID.
+    billing.v1.GetCatalogVersionResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/billing.v1.CatalogVersion'
+      title: GetCatalogVersionResponse
+      additionalProperties: false
+      description: GetCatalogVersionResponse returns the requested catalog version.
+    billing.v1.GetCreditBalanceRequest:
+      type: object
+      properties:
+        customerId:
+          type: string
+          title: customer_id
+          minLength: 1
+        currency:
+          type: string
+          title: currency
+          minLength: 3
+      title: GetCreditBalanceRequest
+      additionalProperties: false
+      description: GetCreditBalanceRequest retrieves a customer's credit balance.
+    billing.v1.GetCreditBalanceResponse:
+      type: object
+      properties:
+        balance:
+          title: balance
+          $ref: '#/components/schemas/google.type.Money'
+      title: GetCreditBalanceResponse
+      additionalProperties: false
+      description: GetCreditBalanceResponse returns the credit balance.
+    billing.v1.GetInvoiceRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+      title: GetInvoiceRequest
+      additionalProperties: false
+      description: GetInvoiceRequest retrieves an invoice by ID.
+    billing.v1.GetInvoiceResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/billing.v1.Invoice'
+      title: GetInvoiceResponse
+      additionalProperties: false
+      description: GetInvoiceResponse returns the requested invoice with lines.
+    billing.v1.GetSubscriptionRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+      title: GetSubscriptionRequest
+      additionalProperties: false
+      description: GetSubscriptionRequest retrieves a subscription by ID.
+    billing.v1.GetSubscriptionResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/billing.v1.Subscription'
+      title: GetSubscriptionResponse
+      additionalProperties: false
+      description: GetSubscriptionResponse returns the requested subscription.
+    billing.v1.GrantCreditRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        customerId:
+          type: string
+          title: customer_id
+          minLength: 1
+        name:
+          type: string
+          title: name
+          minLength: 1
+        amount:
+          title: amount
+          $ref: '#/components/schemas/google.type.Money'
+        currency:
+          type: string
+          title: currency
+          minLength: 3
+        expiresAt:
+          title: expires_at
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        priority:
+          type: integer
+          title: priority
+          format: int32
+        data:
+          title: data
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: GrantCreditRequest
+      additionalProperties: false
+      description: GrantCreditRequest creates a prepaid credit grant.
+    billing.v1.GrantCreditResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/billing.v1.CreditGrant'
+      title: GrantCreditResponse
+      additionalProperties: false
+      description: GrantCreditResponse returns the created credit grant.
+    billing.v1.IngestUsageBatchRequest:
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/billing.v1.IngestUsageEventRequest'
+          title: events
+      title: IngestUsageBatchRequest
+      additionalProperties: false
+      description: IngestUsageBatchRequest ingests multiple usage events.
+    billing.v1.IngestUsageBatchResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/billing.v1.UsageEvent'
+          title: data
+      title: IngestUsageBatchResponse
+      additionalProperties: false
+      description: IngestUsageBatchResponse returns the ingested usage events.
+    billing.v1.IngestUsageEventRequest:
+      type: object
+      properties:
+        eventId:
+          type: string
+          title: event_id
+          minLength: 1
+          description: Client idempotency key
+        subscriptionId:
+          type: string
+          title: subscription_id
+          minLength: 1
+        customerId:
+          type: string
+          title: customer_id
+          minLength: 1
+        metricKey:
+          type: string
+          title: metric_key
+          minLength: 1
+        quantity:
+          type: number
+          title: quantity
+          format: double
+        timestamp:
+          title: timestamp
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        properties:
+          title: properties
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: IngestUsageEventRequest
+      additionalProperties: false
+      description: IngestUsageEventRequest ingests a single usage event.
+    billing.v1.IngestUsageEventResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/billing.v1.UsageEvent'
+      title: IngestUsageEventResponse
+      additionalProperties: false
+      description: IngestUsageEventResponse returns the ingested usage event.
+    billing.v1.Invoice:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          description: Unique invoice ID
+        billingRunId:
+          type: string
+          title: billing_run_id
+          description: Associated billing run
+        customerId:
+          type: string
+          title: customer_id
+          description: Customer identifier
+        subscriptionId:
+          type: string
+          title: subscription_id
+          description: Associated subscription
+        invoiceNumber:
+          type: string
+          title: invoice_number
+          description: Unique invoice number
+        state:
+          title: state
+          description: Current lifecycle state
+          $ref: '#/components/schemas/billing.v1.InvoiceState'
+        currency:
+          type: string
+          title: currency
+          description: Invoice currency (ISO 4217)
+        subtotalAmount:
+          title: subtotal_amount
+          description: Subtotal before discounts/credits
+          $ref: '#/components/schemas/google.type.Money'
+        discountAmount:
+          title: discount_amount
+          description: Total discount amount
+          $ref: '#/components/schemas/google.type.Money'
+        creditAmount:
+          title: credit_amount
+          description: Total credit applied
+          $ref: '#/components/schemas/google.type.Money'
+        totalAmount:
+          title: total_amount
+          description: Final total (subtotal - discount - credit)
+          $ref: '#/components/schemas/google.type.Money'
+        periodStart:
+          title: period_start
+          description: Billing period start
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        periodEnd:
+          title: period_end
+          description: Billing period end
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        issuedAt:
+          title: issued_at
+          description: When issued to customer
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        dueAt:
+          title: due_at
+          description: Payment due date
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        paidAt:
+          title: paid_at
+          description: When payment was received
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        ledgerTxnId:
+          type: string
+          title: ledger_txn_id
+          description: Associated ledger transaction
+        data:
+          title: data
+          description: Additional metadata
+          $ref: '#/components/schemas/google.protobuf.Struct'
+        lines:
+          type: array
+          items:
+            $ref: '#/components/schemas/billing.v1.InvoiceLine'
+          title: lines
+          description: Invoice line items
+      title: Invoice
+      additionalProperties: false
+      description: Invoice represents a billing invoice.
+    billing.v1.InvoiceLine:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          description: Unique line ID
+        invoiceId:
+          type: string
+          title: invoice_id
+          description: Parent invoice
+        componentId:
+          type: string
+          title: component_id
+          description: Associated component
+        description:
+          type: string
+          title: description
+          description: Line description
+        quantity:
+          type: number
+          title: quantity
+          format: double
+          description: Usage quantity
+        unitPrice:
+          title: unit_price
+          description: Price per unit
+          $ref: '#/components/schemas/google.type.Money'
+        amount:
+          title: amount
+          description: Line amount
+          $ref: '#/components/schemas/google.type.Money'
+        discountAmount:
+          title: discount_amount
+          description: Discount on this line
+          $ref: '#/components/schemas/google.type.Money'
+        creditAmount:
+          title: credit_amount
+          description: Credit applied to this line
+          $ref: '#/components/schemas/google.type.Money'
+        netAmount:
+          title: net_amount
+          description: Net amount (amount - discount - credit)
+          $ref: '#/components/schemas/google.type.Money'
+        currency:
+          type: string
+          title: currency
+          description: Line currency
+        lineType:
+          title: line_type
+          description: Type of line item
+          $ref: '#/components/schemas/billing.v1.InvoiceLineType'
+        data:
+          title: data
+          description: Additional metadata
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: InvoiceLine
+      additionalProperties: false
+      description: InvoiceLine represents a line item on an invoice.
+    billing.v1.InvoiceLineType:
+      type: string
+      title: InvoiceLineType
+      enum:
+        - LINE_USAGE
+        - LINE_FLAT
+        - LINE_DISCOUNT
+        - LINE_CREDIT
+      description: |-
+        InvoiceLineType defines the type of invoice line item.
+         buf:lint:ignore ENUM_VALUE_PREFIX
+    billing.v1.InvoiceState:
+      type: string
+      title: InvoiceState
+      enum:
+        - INVOICE_DRAFT
+        - INVOICE_ISSUED
+        - INVOICE_PAID
+        - INVOICE_VOIDED
+        - INVOICE_OVERDUE
+      description: |-
+        InvoiceState defines the lifecycle state of an invoice.
+         buf:lint:ignore ENUM_VALUE_PREFIX
+    billing.v1.IssueInvoiceRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+      title: IssueInvoiceRequest
+      additionalProperties: false
+      description: IssueInvoiceRequest issues a draft invoice.
+    billing.v1.IssueInvoiceResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/billing.v1.Invoice'
+      title: IssueInvoiceResponse
+      additionalProperties: false
+      description: IssueInvoiceResponse returns the issued invoice.
+    billing.v1.ListSubscriptionsRequest:
+      type: object
+      properties:
+        customerId:
+          type: string
+          title: customer_id
+          minLength: 1
+      title: ListSubscriptionsRequest
+      additionalProperties: false
+      description: ListSubscriptionsRequest lists active subscriptions for a customer.
+    billing.v1.ListSubscriptionsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/billing.v1.Subscription'
+          title: data
+      title: ListSubscriptionsResponse
+      additionalProperties: false
+      description: ListSubscriptionsResponse returns the matching subscriptions.
+    billing.v1.Plan:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          description: Unique plan ID
+        catalogVersionId:
+          type: string
+          title: catalog_version_id
+          description: Parent catalog version
+        externalId:
+          type: string
+          title: external_id
+          description: External reference ID
+        name:
+          type: string
+          title: name
+          description: Plan name
+        description:
+          type: string
+          title: description
+          description: Plan description
+        data:
+          title: data
+          description: Additional metadata
+          $ref: '#/components/schemas/google.protobuf.Struct'
+        components:
+          type: array
+          items:
+            $ref: '#/components/schemas/billing.v1.Component'
+          title: components
+          description: Billable components in this plan
+      title: Plan
+      additionalProperties: false
+      description: Plan represents a billing plan within a catalog version.
+    billing.v1.PricingModel:
+      type: string
+      title: PricingModel
+      enum:
+        - FLAT
+        - PER_UNIT
+        - TIERED
+        - VOLUME
+        - STAIRSTEP
+      description: |-
+        PricingModel defines how a component is priced.
+         buf:lint:ignore ENUM_VALUE_PREFIX
+    billing.v1.PublishCatalogVersionRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        effectiveAt:
+          title: effective_at
+          description: When the version becomes effective
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+      title: PublishCatalogVersionRequest
+      additionalProperties: false
+      description: PublishCatalogVersionRequest publishes a catalog version, making it effective.
+    billing.v1.PublishCatalogVersionResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/billing.v1.CatalogVersion'
+      title: PublishCatalogVersionResponse
+      additionalProperties: false
+      description: PublishCatalogVersionResponse returns the published catalog version.
+    billing.v1.RecordPaymentRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+      title: RecordPaymentRequest
+      additionalProperties: false
+      description: RecordPaymentRequest records payment on an invoice.
+    billing.v1.RecordPaymentResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/billing.v1.Invoice'
+      title: RecordPaymentResponse
+      additionalProperties: false
+      description: RecordPaymentResponse returns the paid invoice.
+    billing.v1.RunBillingRequest:
+      type: object
+      properties:
+        subscriptionId:
+          type: string
+          title: subscription_id
+          minLength: 1
+        periodStart:
+          title: period_start
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        periodEnd:
+          title: period_end
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+      title: RunBillingRequest
+      additionalProperties: false
+      description: RunBillingRequest starts a billing run for a subscription and period.
+    billing.v1.RunBillingResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/billing.v1.BillingRun'
+      title: RunBillingResponse
+      additionalProperties: false
+      description: RunBillingResponse returns the billing run result.
+    billing.v1.SearchCatalogVersionsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/billing.v1.CatalogVersion'
+          title: data
+      title: SearchCatalogVersionsResponse
+      additionalProperties: false
+      description: SearchCatalogVersionsResponse returns catalog versions matching search criteria.
+    billing.v1.SearchDiscountsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/billing.v1.Discount'
+          title: data
+      title: SearchDiscountsResponse
+      additionalProperties: false
+      description: SearchDiscountsResponse returns discounts matching search criteria.
+    billing.v1.SearchInvoicesResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/billing.v1.Invoice'
+          title: data
+      title: SearchInvoicesResponse
+      additionalProperties: false
+      description: SearchInvoicesResponse returns invoices matching search criteria.
+    billing.v1.SearchUsageEventsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/billing.v1.UsageEvent'
+          title: data
+      title: SearchUsageEventsResponse
+      additionalProperties: false
+      description: SearchUsageEventsResponse returns usage events matching search criteria.
+    billing.v1.Subscription:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          description: Unique subscription ID
+        customerId:
+          type: string
+          title: customer_id
+          description: Customer identifier
+        catalogVersionId:
+          type: string
+          title: catalog_version_id
+          description: Catalog version this subscription uses
+        planId:
+          type: string
+          title: plan_id
+          description: Plan within the catalog
+        state:
+          title: state
+          description: Current lifecycle state
+          $ref: '#/components/schemas/billing.v1.SubscriptionState'
+        startAt:
+          title: start_at
+          description: Subscription start time
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        endAt:
+          title: end_at
+          description: Subscription end time (optional)
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        cancelledAt:
+          title: cancelled_at
+          description: Cancellation time (if cancelled)
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        billingAnchor:
+          title: billing_anchor
+          description: Billing cycle anchor date
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        currency:
+          type: string
+          title: currency
+          description: Billing currency (ISO 4217)
+        data:
+          title: data
+          description: Additional metadata
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: Subscription
+      additionalProperties: false
+      description: Subscription represents a customer's subscription to a plan.
+    billing.v1.SubscriptionState:
+      type: string
+      title: SubscriptionState
+      enum:
+        - SUBSCRIPTION_ACTIVE
+        - SUBSCRIPTION_CANCELLED
+        - SUBSCRIPTION_EXPIRED
+        - SUBSCRIPTION_PENDING
+      description: |-
+        SubscriptionState defines the lifecycle state of a subscription.
+         buf:lint:ignore ENUM_VALUE_PREFIX
+    billing.v1.Tier:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          description: Unique tier ID
+        componentId:
+          type: string
+          title: component_id
+          description: Parent component
+        sortOrder:
+          type: integer
+          title: sort_order
+          format: int32
+          description: Sort order (ascending)
+        lowerBound:
+          title: lower_bound
+          description: Lower bound (inclusive)
+          $ref: '#/components/schemas/google.type.Money'
+        upperBound:
+          title: upper_bound
+          description: Upper bound (exclusive), empty for unbounded
+          $ref: '#/components/schemas/google.type.Money'
+        unitPrice:
+          title: unit_price
+          description: Price per unit in this tier
+          $ref: '#/components/schemas/google.type.Money'
+        flatFee:
+          title: flat_fee
+          description: Flat fee for this tier
+          $ref: '#/components/schemas/google.type.Money'
+      title: Tier
+      additionalProperties: false
+      description: Tier represents a pricing tier within a component.
+    billing.v1.UsageEvent:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          description: Internal ID
+        eventId:
+          type: string
+          title: event_id
+          description: Client-provided idempotency key
+        subscriptionId:
+          type: string
+          title: subscription_id
+          description: Associated subscription
+        customerId:
+          type: string
+          title: customer_id
+          description: Customer identifier
+        metricKey:
+          type: string
+          title: metric_key
+          description: Metric to track (matches component.metric_key)
+        quantity:
+          type: number
+          title: quantity
+          format: double
+          description: Usage quantity
+        timestamp:
+          title: timestamp
+          description: When the usage occurred
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        properties:
+          title: properties
+          description: Additional event properties
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: UsageEvent
+      additionalProperties: false
+      description: UsageEvent represents a raw usage event for metering.
+    billing.v1.VoidInvoiceRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+      title: VoidInvoiceRequest
+      additionalProperties: false
+      description: VoidInvoiceRequest voids an invoice.
+    billing.v1.VoidInvoiceResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/billing.v1.Invoice'
+      title: VoidInvoiceResponse
+      additionalProperties: false
+      description: VoidInvoiceResponse returns the voided invoice.
+    common.v1.PageCursor:
+      type: object
+      properties:
+        limit:
+          type: integer
+          title: limit
+          format: int32
+          description: Number of items per cursor (limit)
+        page:
+          type: string
+          title: page
+          description: Page number/ cursor representing last id from result
+      title: PageCursor
+      additionalProperties: false
+      description: |-
+        PageCursor provides standard offset-based pagination/cursor stream parameters.
+         Used for list operations that return large result sets.
+    common.v1.SearchRequest:
+      type: object
+      properties:
+        query:
+          type: string
+          title: query
+          description: Full-text search query string
+        idQuery:
+          type: string
+          title: id_query
+          description: Specific ID or ID pattern to search for
+        cursor:
+          title: cursor
+          description: Pagination parameters
+          $ref: '#/components/schemas/common.v1.PageCursor'
+        properties:
+          type: array
+          items:
+            type: string
+          title: properties
+          description: Specific properties/fields to include in results
+        extras:
+          title: extras
+          description: Service-specific additional search parameters
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: SearchRequest
+      additionalProperties: false
+      description: |-
+        SearchRequest provides a standard structure for search operations across services.
+         Supports text search, ID-based queries, pagination, property filtering, and extensibility.
+    compression:
+      title: compression
+      enum:
+        - identity
+        - gzip
+        - br
+      description: Which compression algorithm to use for this request
+    connect:
+      title: connect
+      enum:
+        - v1
+      description: Define the version of the Connect protocol
+    connect-protocol-version:
+      type: number
+      title: Connect-Protocol-Version
+      enum:
+        - 1
+      description: Define the version of the Connect protocol
+      const: 1
+    connect-timeout-header:
+      type: number
+      title: Connect-Timeout-Ms
+      description: Define the timeout, in ms
+    connect.error:
+      type: object
+      properties:
+        code:
+          type: string
+          examples:
+            - not_found
+          enum:
+            - canceled
+            - unknown
+            - invalid_argument
+            - deadline_exceeded
+            - not_found
+            - already_exists
+            - permission_denied
+            - resource_exhausted
+            - failed_precondition
+            - aborted
+            - out_of_range
+            - unimplemented
+            - internal
+            - unavailable
+            - data_loss
+            - unauthenticated
+          description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
+        message:
+          type: string
+          description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/connect.error_details.Any'
+          description: A list of messages that carry the error details. There is no limit on the number of messages.
+      title: Connect Error
+      additionalProperties: true
+      description: 'Error type returned by Connect: https://connectrpc.com/docs/go/errors/#http-representation'
+    connect.error_details.Any:
+      type: object
+      properties:
+        type:
+          type: string
+          description: 'A URL that acts as a globally unique identifier for the type of the serialized message. For example: `type.googleapis.com/google.rpc.ErrorInfo`. This is used to determine the schema of the data in the `value` field and is the discriminator for the `debug` field.'
+        value:
+          type: string
+          format: binary
+          description: The Protobuf message, serialized as bytes and base64-encoded. The specific message type is identified by the `type` field.
+        debug:
+          oneOf:
+            - type: object
+              title: Any
+              additionalProperties: true
+              description: Detailed error information.
+          discriminator:
+            propertyName: type
+          title: Debug
+          description: Deserialized error detail payload. The 'type' field indicates the schema. This field is for easier debugging and should not be relied upon for application logic.
+      additionalProperties: true
+      description: Contains an arbitrary serialized message along with a @type that describes the type of the serialized message, with an additional debug field for ConnectRPC error details.
+    encoding:
+      title: encoding
+      enum:
+        - proto
+        - json
+      description: Define which encoding or 'Message-Codec' to use
+    google.protobuf.ListValue:
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/google.protobuf.Value'
+          title: values
+          description: Repeated field of dynamically typed values.
+      title: ListValue
+      additionalProperties: false
+      description: |-
+        `ListValue` is a wrapper around a repeated field of values.
+
+         The JSON representation for `ListValue` is JSON array.
+    google.protobuf.NullValue:
+      type: string
+      title: NullValue
+      enum:
+        - NULL_VALUE
+      description: |-
+        `NullValue` is a singleton enumeration to represent the null value for the
+         `Value` type union.
+
+         The JSON representation for `NullValue` is JSON `null`.
+    google.protobuf.Struct:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/google.protobuf.Value'
+      description: |-
+        `Struct` represents a structured data value, consisting of fields
+         which map to dynamically typed values. In some languages, `Struct`
+         might be supported by a native representation. For example, in
+         scripting languages like JS a struct is represented as an
+         object. The details of that representation are described together
+         with the proto support for the language.
+
+         The JSON representation for `Struct` is JSON object.
+    google.protobuf.Struct.FieldsEntry:
+      type: object
+      properties:
+        key:
+          type: string
+          title: key
+        value:
+          title: value
+          $ref: '#/components/schemas/google.protobuf.Value'
+      title: FieldsEntry
+      additionalProperties: false
+    google.protobuf.Timestamp:
+      type: string
+      examples:
+        - "2023-01-15T01:30:15.01Z"
+        - "2024-12-25T12:00:00Z"
+      format: date-time
+      description: |-
+        A Timestamp represents a point in time independent of any time zone or local
+         calendar, encoded as a count of seconds and fractions of seconds at
+         nanosecond resolution. The count is relative to an epoch at UTC midnight on
+         January 1, 1970, in the proleptic Gregorian calendar which extends the
+         Gregorian calendar backwards to year one.
+
+         All minutes are 60 seconds long. Leap seconds are "smeared" so that no leap
+         second table is needed for interpretation, using a [24-hour linear
+         smear](https://developers.google.com/time/smear).
+
+         The range is from 0001-01-01T00:00:00Z to 9999-12-31T23:59:59.999999999Z. By
+         restricting to that range, we ensure that we can convert to and from [RFC
+         3339](https://www.ietf.org/rfc/rfc3339.txt) date strings.
+
+         # Examples
+
+         Example 1: Compute Timestamp from POSIX `time()`.
+
+             Timestamp timestamp;
+             timestamp.set_seconds(time(NULL));
+             timestamp.set_nanos(0);
+
+         Example 2: Compute Timestamp from POSIX `gettimeofday()`.
+
+             struct timeval tv;
+             gettimeofday(&tv, NULL);
+
+             Timestamp timestamp;
+             timestamp.set_seconds(tv.tv_sec);
+             timestamp.set_nanos(tv.tv_usec * 1000);
+
+         Example 3: Compute Timestamp from Win32 `GetSystemTimeAsFileTime()`.
+
+             FILETIME ft;
+             GetSystemTimeAsFileTime(&ft);
+             UINT64 ticks = (((UINT64)ft.dwHighDateTime) << 32) | ft.dwLowDateTime;
+
+             // A Windows tick is 100 nanoseconds. Windows epoch 1601-01-01T00:00:00Z
+             // is 11644473600 seconds before Unix epoch 1970-01-01T00:00:00Z.
+             Timestamp timestamp;
+             timestamp.set_seconds((INT64) ((ticks / 10000000) - 11644473600LL));
+             timestamp.set_nanos((INT32) ((ticks % 10000000) * 100));
+
+         Example 4: Compute Timestamp from Java `System.currentTimeMillis()`.
+
+             long millis = System.currentTimeMillis();
+
+             Timestamp timestamp = Timestamp.newBuilder().setSeconds(millis / 1000)
+                 .setNanos((int) ((millis % 1000) * 1000000)).build();
+
+         Example 5: Compute Timestamp from Java `Instant.now()`.
+
+             Instant now = Instant.now();
+
+             Timestamp timestamp =
+                 Timestamp.newBuilder().setSeconds(now.getEpochSecond())
+                     .setNanos(now.getNano()).build();
+
+         Example 6: Compute Timestamp from current time in Python.
+
+             timestamp = Timestamp()
+             timestamp.GetCurrentTime()
+
+         # JSON Mapping
+
+         In JSON format, the Timestamp type is encoded as a string in the
+         [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format. That is, the
+         format is "{year}-{month}-{day}T{hour}:{min}:{sec}[.{frac_sec}]Z"
+         where {year} is always expressed using four digits while {month}, {day},
+         {hour}, {min}, and {sec} are zero-padded to two digits each. The fractional
+         seconds, which can go up to 9 digits (i.e. up to 1 nanosecond resolution),
+         are optional. The "Z" suffix indicates the timezone ("UTC"); the timezone
+         is required. A proto3 JSON serializer should always use UTC (as indicated by
+         "Z") when printing the Timestamp type and a proto3 JSON parser should be
+         able to accept both UTC and other timezones (as indicated by an offset).
+
+         For example, "2017-01-15T01:30:15.01Z" encodes 15.01 seconds past
+         01:30 UTC on January 15, 2017.
+
+         In JavaScript, one can convert a Date object to this format using the
+         standard
+         [toISOString()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString)
+         method. In Python, a standard `datetime.datetime` object can be converted
+         to this format using
+         [`strftime`](https://docs.python.org/2/library/time.html#time.strftime) with
+         the time format spec '%Y-%m-%dT%H:%M:%S.%fZ'. Likewise, in Java, one can use
+         the Joda Time's [`ISODateTimeFormat.dateTime()`](
+         http://joda-time.sourceforge.net/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime()
+         ) to obtain a formatter capable of generating timestamps in this format.
+    google.protobuf.Value:
+      oneOf:
+        - type: "null"
+        - type: number
+        - type: string
+        - type: boolean
+        - type: array
+        - type: object
+          additionalProperties: true
+      description: |-
+        `Value` represents a dynamically typed value which can be either
+         null, a number, a string, a boolean, a recursive struct value, or a
+         list of values. A producer of value is expected to set one of these
+         variants. Absence of any variant indicates an error.
+
+         The JSON representation for `Value` is JSON value.
+    google.type.Money:
+      type: object
+      properties:
+        currencyCode:
+          type: string
+          title: currency_code
+          description: The three-letter currency code defined in ISO 4217.
+        units:
+          type:
+            - integer
+            - string
+          title: units
+          format: int64
+          description: |-
+            The whole units of the amount.
+             For example if `currencyCode` is `"USD"`, then 1 unit is one US dollar.
+        nanos:
+          type: integer
+          title: nanos
+          format: int32
+          description: |-
+            Number of nano (10^-9) units of the amount.
+             The value must be between -999,999,999 and +999,999,999 inclusive.
+             If `units` is positive, `nanos` must be positive or zero.
+             If `units` is zero, `nanos` can be positive, zero, or negative.
+             If `units` is negative, `nanos` must be negative or zero.
+             For example $-1.75 is represented as `units`=-1 and `nanos`=-750,000,000.
+      title: Money
+      additionalProperties: false
+      description: Represents an amount of money with its currency type.
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security: []
+tags:
+  - name: billing.v1.BillingService
+    description: |-
+      BillingService provides usage-based billing, subscription management, and invoicing.
+       All RPCs require authentication via Bearer token. -- Catalog Management --
