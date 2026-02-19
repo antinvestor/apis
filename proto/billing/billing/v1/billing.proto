@@ -1,0 +1,988 @@
+// Copyright 2023-2026 Ant Investor Ltd
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package billing.v1;
+
+// -----------------------------------------------------
+// Core notes (normative):
+// - Billing Service provides usage-based billing, subscriptions, and invoicing
+// - Supports catalog versioning with plans, components, and tiered pricing
+// - Usage events are append-only and idempotent (via event_id)
+// - Billing runs follow a state machine: PENDING -> METERING -> RATING -> DISCOUNTING -> CREDITING -> INVOICING -> COMPLETED
+// - Invoices are immutable after issuance
+// - All monetary amounts use google.type.Money for currency safety
+// -----------------------------------------------------
+
+import "buf/validate/validate.proto";
+import "common/v1/common.proto";
+import "gnostic/openapi/v3/annotations.proto";
+import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
+import "google/type/interval.proto";
+import "google/type/money.proto";
+
+option go_package = "github.com/antinvestor/apis/go/billing/v1;billingv1";
+option java_multiple_files = true;
+option java_package = "billingv1";
+option (gnostic.openapi.v3.document) = {
+  info: {
+    title: "Billing Service"
+    version: "v1.0.0"
+    description: "The Billing Service provides usage-based billing, subscription management, and invoicing capabilities. It supports catalog versioning with plans and tiered pricing components, usage event ingestion with idempotent processing, automated billing runs with metering/rating/discounting/crediting pipeline, prepaid credit management, and invoice lifecycle management. Integrates with the Ledger Service for financial posting."
+    contact: {
+      name: "Ant Investor Ltd"
+      url: "https://github.com/antinvestor/service-payment"
+      email: "info@antinvestor.com"
+    }
+    license: {
+      name: "Apache License"
+      url: "https://github.com/antinvestor/apis/blob/master/LICENSE"
+    }
+  }
+  components: {
+    security_schemes: {
+      additional_properties: [
+        {
+          name: "BearerAuth"
+          value: {
+            security_scheme: {
+              type: "http"
+              scheme: "bearer"
+              bearer_format: "JWT"
+            }
+          }
+        }
+      ]
+    }
+  }
+};
+
+// -----------------------------------------------------
+// Enumerations
+// -----------------------------------------------------
+
+// PricingModel defines how a component is priced.
+// buf:lint:ignore ENUM_VALUE_PREFIX
+enum PricingModel {
+  // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
+  FLAT = 0; // Fixed flat fee regardless of usage
+  PER_UNIT = 1; // Price per unit of usage
+  TIERED = 2; // Different prices at different usage tiers (graduated)
+  VOLUME = 3; // Single price based on total volume tier
+  STAIRSTEP = 4; // Flat fee based on which tier the quantity falls into
+}
+
+// AggregationType defines how usage events are aggregated within a window.
+// buf:lint:ignore ENUM_VALUE_PREFIX
+enum AggregationType {
+  // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
+  SUM = 0; // Sum of all quantities
+  COUNT = 1; // Count of events
+  MAX = 2; // Maximum quantity
+  MIN = 3; // Minimum quantity
+  AVG = 4; // Average quantity
+  LAST = 5; // Last observed quantity
+}
+
+// SubscriptionState defines the lifecycle state of a subscription.
+// buf:lint:ignore ENUM_VALUE_PREFIX
+enum SubscriptionState {
+  // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
+  SUBSCRIPTION_ACTIVE = 0; // Active subscription
+  SUBSCRIPTION_CANCELLED = 1; // Cancelled by customer or system
+  SUBSCRIPTION_EXPIRED = 2; // Expired past end date
+  SUBSCRIPTION_PENDING = 3; // Awaiting activation
+}
+
+// InvoiceState defines the lifecycle state of an invoice.
+// buf:lint:ignore ENUM_VALUE_PREFIX
+enum InvoiceState {
+  // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
+  INVOICE_DRAFT = 0; // Draft, not yet issued
+  INVOICE_ISSUED = 1; // Issued to customer
+  INVOICE_PAID = 2; // Payment received
+  INVOICE_VOIDED = 3; // Voided/cancelled
+  INVOICE_OVERDUE = 4; // Past due date, unpaid
+}
+
+// BillingRunState defines the state machine for billing run execution.
+// buf:lint:ignore ENUM_VALUE_PREFIX
+enum BillingRunState {
+  // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
+  BILLING_RUN_PENDING = 0; // Created, not yet started
+  BILLING_RUN_METERING = 1; // Aggregating usage events
+  BILLING_RUN_RATING = 2; // Applying pricing models
+  BILLING_RUN_DISCOUNTING = 3; // Applying discounts
+  BILLING_RUN_CREDITING = 4; // Applying prepaid credits
+  BILLING_RUN_INVOICING = 5; // Generating invoice
+  BILLING_RUN_POSTING = 6; // Posting to ledger
+  BILLING_RUN_COMPLETED = 7; // Successfully completed
+  BILLING_RUN_FAILED = 8; // Failed with error
+}
+
+// DiscountType defines the type of discount applied.
+// buf:lint:ignore ENUM_VALUE_PREFIX
+enum DiscountType {
+  // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
+  DISCOUNT_PERCENTAGE = 0; // Percentage-based discount
+  DISCOUNT_FIXED = 1; // Fixed amount discount
+}
+
+// CreditEntryType defines the type of credit ledger entry.
+// buf:lint:ignore ENUM_VALUE_PREFIX
+enum CreditEntryType {
+  // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
+  CREDIT_GRANT = 0; // Initial credit grant
+  CREDIT_CONSUME = 1; // Credit consumed against invoice
+  CREDIT_EXPIRE = 2; // Credit expired
+  CREDIT_REFUND = 3; // Credit refunded
+}
+
+// InvoiceLineType defines the type of invoice line item.
+// buf:lint:ignore ENUM_VALUE_PREFIX
+enum InvoiceLineType {
+  // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
+  LINE_USAGE = 0; // Usage-based charge
+  LINE_FLAT = 1; // Flat fee charge
+  LINE_DISCOUNT = 2; // Discount line
+  LINE_CREDIT = 3; // Credit application line
+}
+
+// -----------------------------------------------------
+// Core Data Types
+// -----------------------------------------------------
+
+// CatalogVersion represents an immutable, versioned catalog of plans and pricing.
+message CatalogVersion {
+  string id = 1; // Unique catalog version ID
+  string catalog_id = 2; // Logical catalog identifier
+  int32 version = 3; // Version number within the catalog
+  string name = 4; // Human-readable name
+  string currency = 5; // Default currency (ISO 4217)
+  google.protobuf.Timestamp published_at = 6; // When this version was published
+  google.protobuf.Timestamp effective_at = 7; // When this version becomes effective
+  google.protobuf.Timestamp retired_at = 8; // When this version was retired
+  google.protobuf.Struct data = 9; // Additional metadata
+  repeated Plan plans = 10; // Plans in this catalog version
+}
+
+// Plan represents a billing plan within a catalog version.
+message Plan {
+  string id = 1; // Unique plan ID
+  string catalog_version_id = 2; // Parent catalog version
+  string external_id = 3; // External reference ID
+  string name = 4; // Plan name
+  string description = 5; // Plan description
+  google.protobuf.Struct data = 6; // Additional metadata
+  repeated Component components = 7; // Billable components in this plan
+}
+
+// Component represents a billable component within a plan.
+message Component {
+  string id = 1; // Unique component ID
+  string plan_id = 2; // Parent plan
+  string external_id = 3; // External reference ID
+  string name = 4; // Component name
+  string metric_key = 5; // Usage metric key to match events
+  PricingModel pricing_model = 6; // How this component is priced
+  AggregationType aggregation_type = 7; // How usage events are aggregated
+  string unit_name = 8; // Unit of measurement (e.g., "requests", "GB")
+  google.type.Money free_quantity = 9; // Free tier quantity (0 if none)
+  google.type.Money minimum_charge = 10; // Minimum charge amount
+  google.protobuf.Struct data = 11; // Additional metadata
+  repeated Tier tiers = 12; // Pricing tiers
+}
+
+// Tier represents a pricing tier within a component.
+message Tier {
+  string id = 1; // Unique tier ID
+  string component_id = 2; // Parent component
+  int32 sort_order = 3; // Sort order (ascending)
+  google.type.Money lower_bound = 4; // Lower bound (inclusive)
+  google.type.Money upper_bound = 5; // Upper bound (exclusive), empty for unbounded
+  google.type.Money unit_price = 6; // Price per unit in this tier
+  google.type.Money flat_fee = 7; // Flat fee for this tier
+}
+
+// Subscription represents a customer's subscription to a plan.
+message Subscription {
+  string id = 1; // Unique subscription ID
+  string profile_id = 2; // Customer identifier
+  string catalog_version_id = 3; // Catalog version this subscription uses
+  string plan_id = 4; // Plan within the catalog
+  SubscriptionState state = 5; // Current lifecycle state
+  google.protobuf.Timestamp start_at = 6; // Subscription start time
+  google.protobuf.Timestamp end_at = 7; // Subscription end time (optional)
+  google.protobuf.Timestamp cancelled_at = 8; // Cancellation time (if cancelled)
+  google.protobuf.Timestamp billing_anchor = 9; // Billing cycle anchor date
+  string currency = 10; // Billing currency (ISO 4217)
+  google.protobuf.Struct data = 11; // Additional metadata
+}
+
+// UsageEvent represents a usage event for metering.
+// Fields 1-8 support simple metering (metric + quantity).
+// Fields 9-14 support resource spend context (resource identity, intervals, pre-calculated cost).
+message UsageEvent {
+  string id = 1; // Internal ID (server-assigned)
+  string subscription_id = 3; // Associated subscription
+  string metric_key = 5; // Metric to track (matches component.metric_key)
+
+  string description = 2; // Human-readable description
+
+  double quantity = 6; // Usage quantity
+  string unit = 12; // Unit of measurement (e.g. "hours", "gb", "requests")
+
+  google.protobuf.Timestamp timestamp = 7; // When the usage occurred
+  google.type.Interval interval = 11; // Time window for interval-based metering
+
+  google.type.Money amount = 13; // Pre-calculated cost (if set, billing run may use directly)
+
+  google.protobuf.Struct properties = 8; // Additional event properties
+
+  string group_id = 14; // Groups related events from the same spend record
+}
+
+// Invoice represents a billing invoice.
+message Invoice {
+  string id = 1; // Unique invoice ID
+  string billing_run_id = 2; // Associated billing run
+  string profile_id = 3; // Customer profile identifier
+  string subscription_id = 4; // Associated subscription
+  string invoice_number = 5; // Unique invoice number
+  InvoiceState state = 6; // Current lifecycle state
+  string currency = 7; // Invoice currency (ISO 4217)
+  google.type.Money subtotal_amount = 8; // Subtotal before discounts/credits
+  google.type.Money discount_amount = 9; // Total discount amount
+  google.type.Money credit_amount = 10; // Total credit applied
+  google.type.Money total_amount = 11; // Final total (subtotal - discount - credit)
+  google.protobuf.Timestamp period_start = 12; // Billing period start
+  google.protobuf.Timestamp period_end = 13; // Billing period end
+  google.protobuf.Timestamp issued_at = 14; // When issued to customer
+  google.protobuf.Timestamp due_at = 15; // Payment due date
+  google.protobuf.Timestamp paid_at = 16; // When payment was received
+  string ledger_txn_id = 17; // Associated ledger transaction
+  google.protobuf.Struct data = 18; // Additional metadata
+  repeated InvoiceLine lines = 19; // Invoice line items
+}
+
+// InvoiceLine represents a line item on an invoice.
+message InvoiceLine {
+  string id = 1; // Unique line ID
+  string invoice_id = 2; // Parent invoice
+  string component_id = 3; // Associated component
+  string description = 4; // Line description
+  double quantity = 5; // Usage quantity
+  google.type.Money unit_price = 6; // Price per unit
+  google.type.Money amount = 7; // Line amount
+  google.type.Money discount_amount = 8; // Discount on this line
+  google.type.Money credit_amount = 9; // Credit applied to this line
+  google.type.Money net_amount = 10; // Net amount (amount - discount - credit)
+  string currency = 11; // Line currency
+  InvoiceLineType line_type = 12; // Type of line item
+  google.protobuf.Struct data = 13; // Additional metadata
+}
+
+// CreditGrant represents a prepaid credit grant to a customer.
+message CreditGrant {
+  string id = 1; // Unique credit grant ID
+  string profile_id = 2; // Customer identifier
+  string name = 3; // Grant name/description
+  google.type.Money original_amount = 4; // Original grant amount
+  google.type.Money remaining_amount = 5; // Remaining balance
+  string currency = 6; // Grant currency (ISO 4217)
+  google.protobuf.Timestamp expires_at = 7; // Expiration date (optional)
+  int32 priority = 8; // Consumption priority (lower = consumed first)
+  google.protobuf.Struct data = 9; // Additional metadata
+}
+
+// BillingRun represents a billing workflow execution.
+message BillingRun {
+  string id = 1; // Unique billing run ID
+  string subscription_id = 2; // Target subscription
+  string profile_id = 3; // Customer identifier
+  string catalog_version_id = 4; // Catalog version used
+  BillingRunState state = 5; // Current pipeline state
+  google.protobuf.Timestamp period_start = 6; // Billing period start
+  google.protobuf.Timestamp period_end = 7; // Billing period end
+  google.protobuf.Timestamp started_at = 8; // When the run started
+  google.protobuf.Timestamp completed_at = 9; // When the run completed
+  google.protobuf.Timestamp failed_at = 10; // When the run failed
+  string error_message = 11; // Error message if failed
+  string invoice_id = 12; // Generated invoice ID
+  google.protobuf.Struct data = 13; // Additional metadata
+}
+
+// Discount represents a discount rule.
+message Discount {
+  string id = 1; // Unique discount ID
+  string name = 2; // Discount name
+  DiscountType discount_type = 3; // Percentage or fixed
+  double value = 4; // Discount value (percentage 0-100 or fixed amount)
+  string currency = 5; // Currency for fixed discounts
+  google.protobuf.Struct applicable_to = 6; // Applicability rules (JSONB)
+  google.protobuf.Timestamp start_at = 7; // Discount validity start
+  google.protobuf.Timestamp end_at = 8; // Discount validity end
+  int32 max_applications = 9; // Maximum times this discount can be applied
+  google.protobuf.Struct data = 10; // Additional metadata
+}
+
+// -----------------------------------------------------
+// Request/Response Messages
+// -----------------------------------------------------
+
+// -- Catalog --
+
+// CreateCatalogVersionRequest creates a new catalog version.
+message CreateCatalogVersionRequest {
+  string id = 1 [
+    (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Optional unique ID
+  string catalog_id = 2 [(buf.validate.field).string.min_len = 1]; // Logical catalog identifier
+  string name = 3 [(buf.validate.field).string.min_len = 1]; // Human-readable name
+  string currency = 4 [(buf.validate.field).string.min_len = 3]; // Default currency (ISO 4217)
+  google.protobuf.Struct data = 5; // Additional metadata
+}
+
+// CreateCatalogVersionResponse returns the created catalog version.
+message CreateCatalogVersionResponse {
+  CatalogVersion data = 1;
+}
+
+// GetCatalogVersionRequest retrieves a catalog version by ID.
+message GetCatalogVersionRequest {
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+}
+
+// GetCatalogVersionResponse returns the requested catalog version.
+message GetCatalogVersionResponse {
+  CatalogVersion data = 1;
+}
+
+// PublishCatalogVersionRequest publishes a catalog version, making it effective.
+message PublishCatalogVersionRequest {
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+  google.protobuf.Timestamp effective_at = 2; // When the version becomes effective
+}
+
+// PublishCatalogVersionResponse returns the published catalog version.
+message PublishCatalogVersionResponse {
+  CatalogVersion data = 1;
+}
+
+// SearchCatalogVersionsResponse returns catalog versions matching search criteria.
+message SearchCatalogVersionsResponse {
+  repeated CatalogVersion data = 1;
+}
+
+// -- Plan --
+
+// CreatePlanRequest creates a new plan within a catalog version.
+message CreatePlanRequest {
+  string id = 1 [
+    (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+  string catalog_version_id = 2 [(buf.validate.field).string.min_len = 1];
+  string external_id = 3;
+  string name = 4 [(buf.validate.field).string.min_len = 1];
+  string description = 5;
+  google.protobuf.Struct data = 6;
+}
+
+// CreatePlanResponse returns the created plan.
+message CreatePlanResponse {
+  Plan data = 1;
+}
+
+// -- Component --
+
+// CreateComponentRequest creates a new billable component within a plan.
+message CreateComponentRequest {
+  string id = 1 [
+    (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+  string plan_id = 2 [(buf.validate.field).string.min_len = 1];
+  string external_id = 3;
+  string name = 4 [(buf.validate.field).string.min_len = 1];
+  string metric_key = 5 [(buf.validate.field).string.min_len = 1];
+  PricingModel pricing_model = 6;
+  AggregationType aggregation_type = 7;
+  string unit_name = 8;
+  google.type.Money free_quantity = 9;
+  google.type.Money minimum_charge = 10;
+  google.protobuf.Struct data = 11;
+}
+
+// CreateComponentResponse returns the created component.
+message CreateComponentResponse {
+  Component data = 1;
+}
+
+// -- Tier --
+
+// CreateTierRequest creates a new pricing tier within a component.
+message CreateTierRequest {
+  string id = 1 [
+    (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+  string component_id = 2 [(buf.validate.field).string.min_len = 1];
+  int32 sort_order = 3;
+  google.type.Money lower_bound = 4;
+  google.type.Money upper_bound = 5;
+  google.type.Money unit_price = 6;
+  google.type.Money flat_fee = 7;
+}
+
+// CreateTierResponse returns the created tier.
+message CreateTierResponse {
+  Tier data = 1;
+}
+
+// -- Subscription --
+
+// CreateSubscriptionRequest creates a new subscription.
+message CreateSubscriptionRequest {
+  string id = 1 [
+    (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+  string profile_id = 2 [(buf.validate.field).string.min_len = 1];
+  string catalog_version_id = 3 [(buf.validate.field).string.min_len = 1];
+  string plan_id = 4 [(buf.validate.field).string.min_len = 1];
+  google.protobuf.Timestamp start_at = 5;
+  google.protobuf.Timestamp billing_anchor = 6;
+  string currency = 7 [(buf.validate.field).string.min_len = 3];
+  google.protobuf.Struct data = 8;
+}
+
+// CreateSubscriptionResponse returns the created subscription.
+message CreateSubscriptionResponse {
+  Subscription data = 1;
+}
+
+// GetSubscriptionRequest retrieves a subscription by ID.
+message GetSubscriptionRequest {
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+}
+
+// GetSubscriptionResponse returns the requested subscription.
+message GetSubscriptionResponse {
+  Subscription data = 1;
+}
+
+// CancelSubscriptionRequest cancels a subscription.
+message CancelSubscriptionRequest {
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+}
+
+// CancelSubscriptionResponse returns the cancelled subscription.
+message CancelSubscriptionResponse {
+  Subscription data = 1;
+}
+
+// ListSubscriptionsRequest lists active subscriptions for a customer.
+message ListSubscriptionsRequest {
+  string profile_id = 1 [(buf.validate.field).string.min_len = 1];
+}
+
+// ListSubscriptionsResponse returns the matching subscriptions.
+message ListSubscriptionsResponse {
+  repeated Subscription data = 1;
+}
+
+// -- Usage --
+
+// IngestUsageEventRequest ingests a single usage event.
+message IngestUsageEventRequest {
+    repeated UsageEvent data = 1;
+}
+
+// IngestUsageEventResponse returns the ingested usage event.
+message IngestUsageEventResponse {
+  repeated string data = 1;
+}
+
+// SearchUsageEventsResponse returns usage events matching search criteria.
+message SearchUsageEventsResponse {
+  repeated UsageEvent data = 1;
+}
+
+// -- Billing Run --
+// RunBillingRequest starts a billing run for a subscription and period.
+message RunBillingRequest {
+  string subscription_id = 1 [(buf.validate.field).string.min_len = 1];
+  google.protobuf.Timestamp period_start = 2;
+  google.protobuf.Timestamp period_end = 3;
+}
+
+// RunBillingResponse returns the billing run result.
+message RunBillingResponse {
+  BillingRun data = 1;
+}
+
+// GetBillingRunRequest retrieves a billing run by ID.
+message GetBillingRunRequest {
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+}
+
+// GetBillingRunResponse returns the requested billing run.
+message GetBillingRunResponse {
+  BillingRun data = 1;
+}
+
+// -- Invoice --
+
+// GetInvoiceRequest retrieves an invoice by ID.
+message GetInvoiceRequest {
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+}
+
+// GetInvoiceResponse returns the requested invoice with lines.
+message GetInvoiceResponse {
+  Invoice data = 1;
+}
+
+// IssueInvoiceRequest issues a draft invoice.
+message IssueInvoiceRequest {
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+}
+
+// IssueInvoiceResponse returns the issued invoice.
+message IssueInvoiceResponse {
+  Invoice data = 1;
+}
+
+// VoidInvoiceRequest voids an invoice.
+message VoidInvoiceRequest {
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+}
+
+// VoidInvoiceResponse returns the voided invoice.
+message VoidInvoiceResponse {
+  Invoice data = 1;
+}
+
+// RecordPaymentRequest records payment on an invoice.
+message RecordPaymentRequest {
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+}
+
+// RecordPaymentResponse returns the paid invoice.
+message RecordPaymentResponse {
+  Invoice data = 1;
+}
+
+// SearchInvoicesResponse returns invoices matching search criteria.
+message SearchInvoicesResponse {
+  repeated Invoice data = 1;
+}
+
+// -- Credit --
+
+// GrantCreditRequest creates a prepaid credit grant.
+message GrantCreditRequest {
+  string id = 1 [
+    (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+  string profile_id = 2 [(buf.validate.field).string.min_len = 1];
+  string name = 3 [(buf.validate.field).string.min_len = 1];
+  google.type.Money amount = 4;
+  string currency = 5 [(buf.validate.field).string.min_len = 3];
+  google.protobuf.Timestamp expires_at = 6;
+  int32 priority = 7;
+  google.protobuf.Struct data = 8;
+}
+
+// GrantCreditResponse returns the created credit grant.
+message GrantCreditResponse {
+  CreditGrant data = 1;
+}
+
+// GetCreditBalanceRequest retrieves a customer's credit balance.
+message GetCreditBalanceRequest {
+  string profile_id = 1 [(buf.validate.field).string.min_len = 1];
+  string currency = 2 [(buf.validate.field).string.min_len = 3];
+}
+
+// GetCreditBalanceResponse returns the credit balance.
+message GetCreditBalanceResponse {
+  google.type.Money balance = 1;
+}
+
+// -- Discount --
+
+// CreateDiscountRequest creates a new discount rule.
+message CreateDiscountRequest {
+  string id = 1 [
+    (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+  string name = 2 [(buf.validate.field).string.min_len = 1];
+  DiscountType discount_type = 3;
+  double value = 4;
+  string currency = 5;
+  google.protobuf.Struct applicable_to = 6;
+  google.protobuf.Timestamp start_at = 7;
+  google.protobuf.Timestamp end_at = 8;
+  int32 max_applications = 9;
+  google.protobuf.Struct data = 10;
+}
+
+// CreateDiscountResponse returns the created discount.
+message CreateDiscountResponse {
+  Discount data = 1;
+}
+
+// SearchDiscountsResponse returns discounts matching search criteria.
+message SearchDiscountsResponse {
+  repeated Discount data = 1;
+}
+
+// -----------------------------------------------------
+// Billing Service
+// -----------------------------------------------------
+
+// BillingService provides usage-based billing, subscription management, and invoicing.
+// All RPCs require authentication via Bearer token.
+service BillingService {
+  // -- Catalog Management --
+
+  // CreateCatalogVersion creates a new catalog version with plans and pricing.
+  rpc CreateCatalogVersion(CreateCatalogVersionRequest) returns (CreateCatalogVersionResponse) {
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "createCatalogVersion"
+      summary: "Create a new catalog version"
+      description: "Creates a new immutable catalog version containing plans, components, and pricing tiers. Catalogs must be published before they can be used for billing."
+      tags: "Catalog"
+    };
+  }
+
+  // GetCatalogVersion retrieves a specific catalog version by ID.
+  rpc GetCatalogVersion(GetCatalogVersionRequest) returns (GetCatalogVersionResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "getCatalogVersion"
+      summary: "Get a catalog version"
+      description: "Retrieves a specific catalog version by ID, including its plans, components, and pricing tiers."
+      tags: "Catalog"
+    };
+  }
+
+  // PublishCatalogVersion publishes a catalog version, making it available for subscriptions.
+  rpc PublishCatalogVersion(PublishCatalogVersionRequest) returns (PublishCatalogVersionResponse) {
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "publishCatalogVersion"
+      summary: "Publish a catalog version"
+      description: "Publishes a catalog version with an effective date. Published catalogs become available for new subscriptions."
+      tags: "Catalog"
+    };
+  }
+
+  // SearchCatalogVersions searches for catalog versions.
+  rpc SearchCatalogVersions(common.v1.SearchRequest) returns (stream SearchCatalogVersionsResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "searchCatalogVersions"
+      summary: "Search catalog versions"
+      description: "Searches for catalog versions matching specified criteria. Returns a stream of matching catalog versions."
+      tags: "Catalog"
+    };
+  }
+
+  // CreatePlan creates a new plan within a catalog version.
+  rpc CreatePlan(CreatePlanRequest) returns (CreatePlanResponse) {
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "createPlan"
+      summary: "Create a new plan"
+      description: "Creates a new billing plan within a catalog version. Plans contain billable components with pricing."
+      tags: "Catalog"
+    };
+  }
+
+  // CreateComponent creates a new billable component within a plan.
+  rpc CreateComponent(CreateComponentRequest) returns (CreateComponentResponse) {
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "createComponent"
+      summary: "Create a new component"
+      description: "Creates a new billable component within a plan. Components define the pricing model, aggregation type, and free tier/minimum charge settings."
+      tags: "Catalog"
+    };
+  }
+
+  // CreateTier creates a new pricing tier within a component.
+  rpc CreateTier(CreateTierRequest) returns (CreateTierResponse) {
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "createTier"
+      summary: "Create a new pricing tier"
+      description: "Creates a new pricing tier within a component. Tiers define price brackets for tiered, volume, and stairstep pricing models."
+      tags: "Catalog"
+    };
+  }
+
+  // -- Subscription Management --
+
+  // CreateSubscription creates a new subscription for a customer.
+  rpc CreateSubscription(CreateSubscriptionRequest) returns (CreateSubscriptionResponse) {
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "createSubscription"
+      summary: "Create a new subscription"
+      description: "Creates a new subscription linking a customer to a plan within a published catalog version."
+      tags: "Subscriptions"
+    };
+  }
+
+  // GetSubscription retrieves a subscription by ID.
+  rpc GetSubscription(GetSubscriptionRequest) returns (GetSubscriptionResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "getSubscription"
+      summary: "Get a subscription"
+      description: "Retrieves a specific subscription by ID including its current state."
+      tags: "Subscriptions"
+    };
+  }
+
+  // CancelSubscription cancels an active subscription.
+  rpc CancelSubscription(CancelSubscriptionRequest) returns (CancelSubscriptionResponse) {
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "cancelSubscription"
+      summary: "Cancel a subscription"
+      description: "Cancels an active subscription. The subscription remains active until the current billing period ends."
+      tags: "Subscriptions"
+    };
+  }
+
+  // ListSubscriptions lists active subscriptions for a customer.
+  rpc ListSubscriptions(ListSubscriptionsRequest) returns (ListSubscriptionsResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "listSubscriptions"
+      summary: "List customer subscriptions"
+      description: "Lists all active subscriptions for a customer."
+      tags: "Subscriptions"
+    };
+  }
+
+  // -- Usage Ingestion --
+
+  // IngestUsageEvent ingests a single usage event for metering.
+  rpc IngestUsageEvent(IngestUsageEventRequest) returns (IngestUsageEventResponse) {
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "ingestUsageEvent"
+      summary: "Ingest a usage event"
+      description: "Ingests a single usage event for metering. Events are idempotent based on event_id - duplicate events are safely ignored."
+      tags: "Usage"
+    };
+  }
+
+  // IngestUsageBatch ingests multiple usage events in a batch.
+  rpc IngestUsageBatch(IngestUsageBatchRequest) returns (IngestUsageBatchResponse) {
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "ingestUsageBatch"
+      summary: "Ingest usage events in batch"
+      description: "Ingests multiple usage events in a single batch. Each event is processed idempotently based on its event_id."
+      tags: "Usage"
+    };
+  }
+
+  // SearchUsageEvents searches for usage events.
+  rpc SearchUsageEvents(common.v1.SearchRequest) returns (stream SearchUsageEventsResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "searchUsageEvents"
+      summary: "Search usage events"
+      description: "Searches for usage events matching specified criteria. Supports filtering by subscription, customer, metric key, and time range."
+      tags: "Usage"
+    };
+  }
+
+  // -- Billing Runs --
+
+  // RunBilling executes the billing pipeline for a subscription and period.
+  rpc RunBilling(RunBillingRequest) returns (RunBillingResponse) {
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "runBilling"
+      summary: "Execute billing run"
+      description: "Executes the full billing pipeline for a subscription: metering, rating, discounting, crediting, invoicing. Idempotent per subscription+period combination."
+      tags: "Billing"
+    };
+  }
+
+  // GetBillingRun retrieves a billing run by ID.
+  rpc GetBillingRun(GetBillingRunRequest) returns (GetBillingRunResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "getBillingRun"
+      summary: "Get a billing run"
+      description: "Retrieves a billing run by ID including its current state, associated invoice, and any error information."
+      tags: "Billing"
+    };
+  }
+
+  // -- Invoice Management --
+
+  // GetInvoice retrieves an invoice by ID with all line items.
+  rpc GetInvoice(GetInvoiceRequest) returns (GetInvoiceResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "getInvoice"
+      summary: "Get an invoice"
+      description: "Retrieves an invoice by ID including all line items, amounts, and payment status."
+      tags: "Invoices"
+    };
+  }
+
+  // IssueInvoice issues a draft invoice to the customer.
+  rpc IssueInvoice(IssueInvoiceRequest) returns (IssueInvoiceResponse) {
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "issueInvoice"
+      summary: "Issue an invoice"
+      description: "Issues a draft invoice, making it visible to the customer. Invoices are immutable after issuance."
+      tags: "Invoices"
+    };
+  }
+
+  // VoidInvoice voids an invoice.
+  rpc VoidInvoice(VoidInvoiceRequest) returns (VoidInvoiceResponse) {
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "voidInvoice"
+      summary: "Void an invoice"
+      description: "Voids an invoice, cancelling any outstanding charges. Cannot void already-paid invoices."
+      tags: "Invoices"
+    };
+  }
+
+  // RecordPayment records payment against an invoice.
+  rpc RecordPayment(RecordPaymentRequest) returns (RecordPaymentResponse) {
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "recordPayment"
+      summary: "Record invoice payment"
+      description: "Records payment against an issued invoice. Updates the invoice state to paid and posts to the ledger."
+      tags: "Invoices"
+    };
+  }
+
+  // SearchInvoices searches for invoices.
+  rpc SearchInvoices(common.v1.SearchRequest) returns (stream SearchInvoicesResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "searchInvoices"
+      summary: "Search invoices"
+      description: "Searches for invoices matching specified criteria. Supports filtering by customer, subscription, state, date range, and amount."
+      tags: "Invoices"
+    };
+  }
+
+  // -- Credit Management --
+
+  // GrantCredit creates a prepaid credit grant for a customer.
+  rpc GrantCredit(GrantCreditRequest) returns (GrantCreditResponse) {
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "grantCredit"
+      summary: "Grant prepaid credit"
+      description: "Creates a prepaid credit grant for a customer. Credits are automatically applied during billing runs based on priority and expiration."
+      tags: "Credits"
+    };
+  }
+
+  // GetCreditBalance retrieves a customer's credit balance.
+  rpc GetCreditBalance(GetCreditBalanceRequest) returns (GetCreditBalanceResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "getCreditBalance"
+      summary: "Get credit balance"
+      description: "Retrieves the total remaining credit balance for a customer in a specific currency."
+      tags: "Credits"
+    };
+  }
+
+  // -- Discount Management --
+
+  // CreateDiscount creates a new discount rule.
+  rpc CreateDiscount(CreateDiscountRequest) returns (CreateDiscountResponse) {
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "createDiscount"
+      summary: "Create a discount"
+      description: "Creates a new discount rule that can be applied during billing runs. Supports percentage and fixed amount discounts with time-bounded validity."
+      tags: "Discounts"
+    };
+  }
+
+  // SearchDiscounts searches for discount rules.
+  rpc SearchDiscounts(common.v1.SearchRequest) returns (stream SearchDiscountsResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "searchDiscounts"
+      summary: "Search discounts"
+      description: "Searches for discount rules matching specified criteria."
+      tags: "Discounts"
+    };
+  }
+}

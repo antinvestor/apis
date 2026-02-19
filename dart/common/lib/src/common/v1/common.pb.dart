@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../google/protobuf/struct.pb.dart' as $8;
+import '../../google/protobuf/struct.pb.dart' as $6;
 import 'common.pbenum.dart';
 
 export 'common.pbenum.dart';
@@ -92,7 +92,7 @@ class SearchRequest extends $pb.GeneratedMessage {
     $core.String? idQuery,
     PageCursor? cursor,
     $core.Iterable<$core.String>? properties,
-    $8.Struct? extras,
+    $6.Struct? extras,
   }) {
     final $result = create();
     if (query != null) {
@@ -121,7 +121,7 @@ class SearchRequest extends $pb.GeneratedMessage {
     ..aOS(2, _omitFieldNames ? '' : 'idQuery')
     ..aOM<PageCursor>(3, _omitFieldNames ? '' : 'cursor', subBuilder: PageCursor.create)
     ..pPS(7, _omitFieldNames ? '' : 'properties')
-    ..aOM<$8.Struct>(8, _omitFieldNames ? '' : 'extras', subBuilder: $8.Struct.create)
+    ..aOM<$6.Struct>(8, _omitFieldNames ? '' : 'extras', subBuilder: $6.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -179,22 +179,22 @@ class SearchRequest extends $pb.GeneratedMessage {
   $core.List<$core.String> get properties => $_getList(3);
 
   @$pb.TagNumber(8)
-  $8.Struct get extras => $_getN(4);
+  $6.Struct get extras => $_getN(4);
   @$pb.TagNumber(8)
-  set extras($8.Struct v) { setField(8, v); }
+  set extras($6.Struct v) { setField(8, v); }
   @$pb.TagNumber(8)
   $core.bool hasExtras() => $_has(4);
   @$pb.TagNumber(8)
   void clearExtras() => clearField(8);
   @$pb.TagNumber(8)
-  $8.Struct ensureExtras() => $_ensure(4);
+  $6.Struct ensureExtras() => $_ensure(4);
 }
 
 /// StatusRequest retrieves the current status of an entity or operation.
 class StatusRequest extends $pb.GeneratedMessage {
   factory StatusRequest({
     $core.String? id,
-    $8.Struct? extras,
+    $6.Struct? extras,
   }) {
     final $result = create();
     if (id != null) {
@@ -211,7 +211,7 @@ class StatusRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StatusRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'common.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'id')
-    ..aOM<$8.Struct>(2, _omitFieldNames ? '' : 'extras', subBuilder: $8.Struct.create)
+    ..aOM<$6.Struct>(2, _omitFieldNames ? '' : 'extras', subBuilder: $6.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -246,15 +246,15 @@ class StatusRequest extends $pb.GeneratedMessage {
   void clearId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $8.Struct get extras => $_getN(1);
+  $6.Struct get extras => $_getN(1);
   @$pb.TagNumber(2)
-  set extras($8.Struct v) { setField(2, v); }
+  set extras($6.Struct v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasExtras() => $_has(1);
   @$pb.TagNumber(2)
   void clearExtras() => clearField(2);
   @$pb.TagNumber(2)
-  $8.Struct ensureExtras() => $_ensure(1);
+  $6.Struct ensureExtras() => $_ensure(1);
 }
 
 /// StatusResponse returns the current state and status of an entity or operation.
@@ -265,7 +265,7 @@ class StatusResponse extends $pb.GeneratedMessage {
     STATUS? status,
     $core.String? externalId,
     $core.String? transientId,
-    $8.Struct? extras,
+    $6.Struct? extras,
   }) {
     final $result = create();
     if (id != null) {
@@ -298,7 +298,7 @@ class StatusResponse extends $pb.GeneratedMessage {
     ..e<STATUS>(3, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: STATUS.UNKNOWN, valueOf: STATUS.valueOf, enumValues: STATUS.values)
     ..aOS(4, _omitFieldNames ? '' : 'externalId')
     ..aOS(5, _omitFieldNames ? '' : 'transientId')
-    ..aOM<$8.Struct>(6, _omitFieldNames ? '' : 'extras', subBuilder: $8.Struct.create)
+    ..aOM<$6.Struct>(6, _omitFieldNames ? '' : 'extras', subBuilder: $6.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -369,15 +369,15 @@ class StatusResponse extends $pb.GeneratedMessage {
   void clearTransientId() => clearField(5);
 
   @$pb.TagNumber(6)
-  $8.Struct get extras => $_getN(5);
+  $6.Struct get extras => $_getN(5);
   @$pb.TagNumber(6)
-  set extras($8.Struct v) { setField(6, v); }
+  set extras($6.Struct v) { setField(6, v); }
   @$pb.TagNumber(6)
   $core.bool hasExtras() => $_has(5);
   @$pb.TagNumber(6)
   void clearExtras() => clearField(6);
   @$pb.TagNumber(6)
-  $8.Struct ensureExtras() => $_ensure(5);
+  $6.Struct ensureExtras() => $_ensure(5);
 }
 
 /// StatusUpdateRequest updates the state and/or status of an entity or operation.
@@ -388,7 +388,7 @@ class StatusUpdateRequest extends $pb.GeneratedMessage {
     STATE? state,
     STATUS? status,
     $core.String? externalId,
-    $8.Struct? extras,
+    $6.Struct? extras,
   }) {
     final $result = create();
     if (id != null) {
@@ -417,7 +417,7 @@ class StatusUpdateRequest extends $pb.GeneratedMessage {
     ..e<STATE>(2, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: STATE.CREATED, valueOf: STATE.valueOf, enumValues: STATE.values)
     ..e<STATUS>(3, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: STATUS.UNKNOWN, valueOf: STATUS.valueOf, enumValues: STATUS.values)
     ..aOS(4, _omitFieldNames ? '' : 'externalId')
-    ..aOM<$8.Struct>(5, _omitFieldNames ? '' : 'extras', subBuilder: $8.Struct.create)
+    ..aOM<$6.Struct>(5, _omitFieldNames ? '' : 'extras', subBuilder: $6.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -479,15 +479,15 @@ class StatusUpdateRequest extends $pb.GeneratedMessage {
   void clearExternalId() => clearField(4);
 
   @$pb.TagNumber(5)
-  $8.Struct get extras => $_getN(4);
+  $6.Struct get extras => $_getN(4);
   @$pb.TagNumber(5)
-  set extras($8.Struct v) { setField(5, v); }
+  set extras($6.Struct v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasExtras() => $_has(4);
   @$pb.TagNumber(5)
   void clearExtras() => clearField(5);
   @$pb.TagNumber(5)
-  $8.Struct ensureExtras() => $_ensure(4);
+  $6.Struct ensureExtras() => $_ensure(4);
 }
 
 /// StatusUpdateResponse returns the updated status after a status update operation.
@@ -554,7 +554,7 @@ class ContactLink extends $pb.GeneratedMessage {
     $core.String? profileImageId,
     $core.String? contactId,
     $core.String? detail,
-    $8.Struct? extras,
+    $6.Struct? extras,
   }) {
     final $result = create();
     if (profileName != null) {
@@ -591,7 +591,7 @@ class ContactLink extends $pb.GeneratedMessage {
     ..aOS(4, _omitFieldNames ? '' : 'profileImageId')
     ..aOS(8, _omitFieldNames ? '' : 'contactId')
     ..aOS(9, _omitFieldNames ? '' : 'detail')
-    ..aOM<$8.Struct>(10, _omitFieldNames ? '' : 'extras', subBuilder: $8.Struct.create)
+    ..aOM<$6.Struct>(10, _omitFieldNames ? '' : 'extras', subBuilder: $6.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -671,15 +671,15 @@ class ContactLink extends $pb.GeneratedMessage {
   void clearDetail() => clearField(9);
 
   @$pb.TagNumber(10)
-  $8.Struct get extras => $_getN(6);
+  $6.Struct get extras => $_getN(6);
   @$pb.TagNumber(10)
-  set extras($8.Struct v) { setField(10, v); }
+  set extras($6.Struct v) { setField(10, v); }
   @$pb.TagNumber(10)
   $core.bool hasExtras() => $_has(6);
   @$pb.TagNumber(10)
   void clearExtras() => clearField(10);
   @$pb.TagNumber(10)
-  $8.Struct ensureExtras() => $_ensure(6);
+  $6.Struct ensureExtras() => $_ensure(6);
 }
 
 /// Standard error codes used by API responses.
