@@ -38,7 +38,7 @@ jobs:
           declare -A packages
           
           # Define all packages
-          ALL_PACKAGES=("chat" "common" "device" "files" "ledger" "lostid" "notification" "ocr" "partition" "payment" "profile" "property" "settings")
+          ALL_PACKAGES=("chat" "common" "device" "files" "ledger" "lostid" "notification" "ocr" "partition" "payment" "profile" "property" "settings" "commerce" "billing")
           LANGUAGES=("dart")
           
           # Check each language/package combination

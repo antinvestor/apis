@@ -757,50 +757,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/billing.v1.GrantCreditResponse'
-  /billing.v1.BillingService/IngestUsageBatch:
-    post:
-      tags:
-        - Usage
-        - billing.v1.BillingService
-      summary: Ingest usage events in batch
-      description: Ingests multiple usage events in a single batch. Each event is processed idempotently based on its event_id.
-      operationId: ingestUsageBatch
-      parameters:
-        - name: Connect-Protocol-Version
-          in: header
-          required: true
-          schema:
-            $ref: '#/components/schemas/connect-protocol-version'
-        - name: Connect-Timeout-Ms
-          in: header
-          schema:
-            $ref: '#/components/schemas/connect-timeout-header'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/billing.v1.IngestUsageBatchRequest'
-        required: true
-      responses:
-        default:
-          description: Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/connect.error'
-        "200":
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/billing.v1.IngestUsageBatchResponse'
   /billing.v1.BillingService/IngestUsageEvent:
     post:
       tags:
         - Usage
         - billing.v1.BillingService
       summary: Ingest a usage event
-      description: Ingests a single usage event for metering. Events are idempotent based on event_id - duplicate events are safely ignored.
+      description: Ingests usage events for metering. Events are idempotent based on event_id - duplicate events are safely ignored.
       operationId: ingestUsageEvent
       parameters:
         - name: Connect-Protocol-Version
@@ -1140,9 +1103,9 @@ components:
           type: string
           title: subscription_id
           description: Target subscription
-        customerId:
+        profileId:
           type: string
-          title: customer_id
+          title: profile_id
           description: Customer identifier
         catalogVersionId:
           type: string
@@ -1522,9 +1485,9 @@ components:
           maxLength: 40
           minLength: 3
           pattern: '[0-9a-z_-]{3,40}'
-        customerId:
+        profileId:
           type: string
-          title: customer_id
+          title: profile_id
           minLength: 1
         catalogVersionId:
           type: string
@@ -1618,9 +1581,9 @@ components:
           type: string
           title: id
           description: Unique credit grant ID
-        customerId:
+        profileId:
           type: string
-          title: customer_id
+          title: profile_id
           description: Customer identifier
         name:
           type: string
@@ -1756,9 +1719,9 @@ components:
     billing.v1.GetCreditBalanceRequest:
       type: object
       properties:
-        customerId:
+        profileId:
           type: string
-          title: customer_id
+          title: profile_id
           minLength: 1
         currency:
           type: string
@@ -1827,9 +1790,9 @@ components:
           maxLength: 40
           minLength: 3
           pattern: '[0-9a-z_-]{3,40}'
-        customerId:
+        profileId:
           type: string
-          title: customer_id
+          title: profile_id
           minLength: 1
         name:
           type: string
@@ -1864,18 +1827,7 @@ components:
       title: GrantCreditResponse
       additionalProperties: false
       description: GrantCreditResponse returns the created credit grant.
-    billing.v1.IngestUsageBatchRequest:
-      type: object
-      properties:
-        events:
-          type: array
-          items:
-            $ref: '#/components/schemas/billing.v1.IngestUsageEventRequest'
-          title: events
-      title: IngestUsageBatchRequest
-      additionalProperties: false
-      description: IngestUsageBatchRequest ingests multiple usage events.
-    billing.v1.IngestUsageBatchResponse:
+    billing.v1.IngestUsageEventRequest:
       type: object
       properties:
         data:
@@ -1883,39 +1835,6 @@ components:
           items:
             $ref: '#/components/schemas/billing.v1.UsageEvent'
           title: data
-      title: IngestUsageBatchResponse
-      additionalProperties: false
-      description: IngestUsageBatchResponse returns the ingested usage events.
-    billing.v1.IngestUsageEventRequest:
-      type: object
-      properties:
-        eventId:
-          type: string
-          title: event_id
-          minLength: 1
-          description: Client idempotency key
-        subscriptionId:
-          type: string
-          title: subscription_id
-          minLength: 1
-        customerId:
-          type: string
-          title: customer_id
-          minLength: 1
-        metricKey:
-          type: string
-          title: metric_key
-          minLength: 1
-        quantity:
-          type: number
-          title: quantity
-          format: double
-        timestamp:
-          title: timestamp
-          $ref: '#/components/schemas/google.protobuf.Timestamp'
-        properties:
-          title: properties
-          $ref: '#/components/schemas/google.protobuf.Struct'
       title: IngestUsageEventRequest
       additionalProperties: false
       description: IngestUsageEventRequest ingests a single usage event.
@@ -1923,8 +1842,10 @@ components:
       type: object
       properties:
         data:
+          type: array
+          items:
+            type: string
           title: data
-          $ref: '#/components/schemas/billing.v1.UsageEvent'
       title: IngestUsageEventResponse
       additionalProperties: false
       description: IngestUsageEventResponse returns the ingested usage event.
@@ -1939,10 +1860,10 @@ components:
           type: string
           title: billing_run_id
           description: Associated billing run
-        customerId:
+        profileId:
           type: string
-          title: customer_id
-          description: Customer identifier
+          title: profile_id
+          description: Customer profile identifier
         subscriptionId:
           type: string
           title: subscription_id
@@ -2118,9 +2039,9 @@ components:
     billing.v1.ListSubscriptionsRequest:
       type: object
       properties:
-        customerId:
+        profileId:
           type: string
-          title: customer_id
+          title: profile_id
           minLength: 1
       title: ListSubscriptionsRequest
       additionalProperties: false
@@ -2245,7 +2166,9 @@ components:
           $ref: '#/components/schemas/google.protobuf.Timestamp'
       title: RunBillingRequest
       additionalProperties: false
-      description: RunBillingRequest starts a billing run for a subscription and period.
+      description: |-
+        -- Billing Run --
+         RunBillingRequest starts a billing run for a subscription and period.
     billing.v1.RunBillingResponse:
       type: object
       properties:
@@ -2306,9 +2229,9 @@ components:
           type: string
           title: id
           description: Unique subscription ID
-        customerId:
+        profileId:
           type: string
-          title: customer_id
+          title: profile_id
           description: Customer identifier
         catalogVersionId:
           type: string
@@ -2401,39 +2324,54 @@ components:
         id:
           type: string
           title: id
-          description: Internal ID
-        eventId:
-          type: string
-          title: event_id
-          description: Client-provided idempotency key
+          description: Internal ID (server-assigned)
         subscriptionId:
           type: string
           title: subscription_id
           description: Associated subscription
-        customerId:
-          type: string
-          title: customer_id
-          description: Customer identifier
         metricKey:
           type: string
           title: metric_key
           description: Metric to track (matches component.metric_key)
+        description:
+          type: string
+          title: description
+          description: Human-readable description
         quantity:
           type: number
           title: quantity
           format: double
           description: Usage quantity
+        unit:
+          type: string
+          title: unit
+          description: Unit of measurement (e.g. "hours", "gb", "requests")
         timestamp:
           title: timestamp
           description: When the usage occurred
           $ref: '#/components/schemas/google.protobuf.Timestamp'
+        interval:
+          title: interval
+          description: Time window for interval-based metering
+          $ref: '#/components/schemas/google.type.Interval'
+        amount:
+          title: amount
+          description: Pre-calculated cost (if set, billing run may use directly)
+          $ref: '#/components/schemas/google.type.Money'
         properties:
           title: properties
           description: Additional event properties
           $ref: '#/components/schemas/google.protobuf.Struct'
+        groupId:
+          type: string
+          title: group_id
+          description: Groups related events from the same spend record
       title: UsageEvent
       additionalProperties: false
-      description: UsageEvent represents a raw usage event for metering.
+      description: |-
+        UsageEvent represents a usage event for metering.
+         Fields 1-8 support simple metering (metric + quantity).
+         Fields 9-14 support resource spend context (resource identity, intervals, pre-calculated cost).
     billing.v1.VoidInvoiceRequest:
       type: object
       properties:
@@ -2750,6 +2688,34 @@ components:
          variants. Absence of any variant indicates an error.
 
          The JSON representation for `Value` is JSON value.
+    google.type.Interval:
+      type: object
+      properties:
+        startTime:
+          title: start_time
+          description: |-
+            Optional. Inclusive start of the interval.
+
+             If specified, a Timestamp matching this interval will have to be the same
+             or after the start.
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        endTime:
+          title: end_time
+          description: |-
+            Optional. Exclusive end of the interval.
+
+             If specified, a Timestamp matching this interval will have to be before the
+             end.
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+      title: Interval
+      additionalProperties: false
+      description: |-
+        Represents a time interval, encoded as a Timestamp start (inclusive) and a
+         Timestamp end (exclusive).
+
+         The start must be less than or equal to the end.
+         When the start equals the end, the interval is empty (matches no time).
+         When both start and end are unspecified, the interval matches any time.
     google.type.Money:
       type: object
       properties:

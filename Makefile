@@ -29,7 +29,7 @@ DOCKER   ?= docker
 
 MODULES := \
 	common chat notification partition payment profile settings ledger \
-	device files commerce ocr property
+	device files commerce ocr property billing
 
 COPYRIGHT_YEARS := 2023-2026
 LICENSE_IGNORE  := --ignore /testdata/

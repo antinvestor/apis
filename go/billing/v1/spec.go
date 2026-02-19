@@ -18,5 +18,5 @@ import (
 	_ "embed"
 )
 
-//go:embed billing_service.openapi.yaml
+//go:embed billing.openapi.yaml
 var ApiSpecFile []byte

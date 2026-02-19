@@ -536,7 +536,7 @@ message ListSubscriptionsResponse {
 
 // IngestUsageEventRequest ingests a single usage event.
 message IngestUsageEventRequest {
-    repeated UsageEvent data = 1;
+  repeated UsageEvent data = 1;
 }
 
 // IngestUsageEventResponse returns the ingested usage event.
@@ -837,17 +837,7 @@ service BillingService {
     option (gnostic.openapi.v3.operation) = {
       operation_id: "ingestUsageEvent"
       summary: "Ingest a usage event"
-      description: "Ingests a single usage event for metering. Events are idempotent based on event_id - duplicate events are safely ignored."
-      tags: "Usage"
-    };
-  }
-
-  // IngestUsageBatch ingests multiple usage events in a batch.
-  rpc IngestUsageBatch(IngestUsageBatchRequest) returns (IngestUsageBatchResponse) {
-    option (gnostic.openapi.v3.operation) = {
-      operation_id: "ingestUsageBatch"
-      summary: "Ingest usage events in batch"
-      description: "Ingests multiple usage events in a single batch. Each event is processed idempotently based on its event_id."
+      description: "Ingests usage events for metering. Events are idempotent based on event_id - duplicate events are safely ignored."
       tags: "Usage"
     };
   }
