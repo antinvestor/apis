@@ -29,9 +29,9 @@ DOCKER   ?= docker
 
 MODULES := \
 	common chat notification partition payment profile settings ledger \
-	device files commerce ocr property lostid
+	device files commerce ocr property billing
 
-COPYRIGHT_YEARS := 2023-2024
+COPYRIGHT_YEARS := 2023-2026
 LICENSE_IGNORE  := --ignore /testdata/
 
 # ------------------------------------------------------------------------------
@@ -267,6 +267,7 @@ generate_minimock_mocks: $(BIN)/minimock
 	$(call connect_handler_mock,ledger,v1,ledger,LedgerServiceClient,)
 	$(call connect_handler_mock,lostid,v1,lostid,LostIdServiceClient,)
 	$(call connect_handler_mock,commerce,v1,commerce,CommerceServiceClient,)
+	$(call connect_handler_mock,billing,v1,billing,BillingServiceClient,)
 
 .PHONY: generate
 generate: $(BIN)/buf $(BIN)/license-header ## Regenerate all code
