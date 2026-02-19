@@ -1,4 +1,4 @@
-  # This workflow uses actions that are not certified by GitHub.
+# This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
 # separate terms of service, privacy policy, and support
 # documentation.
@@ -13,13 +13,28 @@ on:
     tags:
       - "v*.*.*"
     paths:
-      - 'java/**'
+      - "java/**"
 
 jobs:
   publish:
     strategy:
       matrix:
-        api_module: [ common,chat,device,ledger,lostid,notification,ocr,partition,payment,profile,property,settings,files,commerce,billing ]
+        api_module:
+          [
+            common,
+            chat,
+            device,
+            ledger,
+            lostid,
+            notification,
+            ocr,
+            partition,
+            payment,
+            profile,
+            property,
+            settings,
+            files,
+          ]
 
     runs-on: ubuntu-latest
     permissions:
@@ -32,8 +47,8 @@ jobs:
 
       - uses: actions/setup-java@v5
         with:
-          java-version: '21'
-          distribution: 'temurin'
+          java-version: "21"
+          distribution: "temurin"
       - name: Setup gradlew action
         uses: gradle/actions/setup-gradle@v5
         with:
