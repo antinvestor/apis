@@ -3,7 +3,7 @@ module github.com/antinvestor/apis/go/ledger
 go 1.25.0
 
 require (
-	buf.build/gen/go/antinvestor/common/protocolbuffers/go v1.36.11-20260102104630-5c57561a771f.1
+	buf.build/gen/go/antinvestor/common/protocolbuffers/go v1.36.11-20260219054105-fe125014d75c.1
 	buf.build/gen/go/antinvestor/ledger/connectrpc/go v1.19.1-20260102123250-5570a5267fab.2
 	buf.build/gen/go/antinvestor/ledger/protocolbuffers/go v1.36.11-20260102123250-5570a5267fab.1
 	connectrpc.com/connect v1.19.1
