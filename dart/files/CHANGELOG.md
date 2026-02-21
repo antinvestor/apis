@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.53.14] - 2026-2-21
+
+### Changed
+
+- Improve file upload and download api for feature completeness sake
+
 ## [1.52.1] - 2025-1-2
 
 ### Changed

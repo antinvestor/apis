@@ -11,6 +11,207 @@ info:
     url: https://github.com/antinvestor/apis/blob/master/LICENSE
   version: v1.0.0
 paths:
+  /files.v1.FilesService/AbortMultipartUpload:
+    post:
+      tags:
+        - Media
+        - files.v1.FilesService
+      summary: Abort multipart upload
+      description: Aborts a multipart upload, discarding all uploaded parts.
+      operationId: abortMultipartUpload
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/files.v1.AbortMultipartUploadRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.AbortMultipartUploadResponse'
+  /files.v1.FilesService/BatchDeleteContent:
+    post:
+      tags:
+        - Media
+        - files.v1.FilesService
+      summary: Batch delete content
+      description: Deletes multiple files in a single request.
+      operationId: batchDeleteContent
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/files.v1.BatchDeleteContentRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.BatchDeleteContentResponse'
+  /files.v1.FilesService/BatchGetContent:
+    get:
+      tags:
+        - Media
+        - files.v1.FilesService
+      summary: Batch get content
+      description: Retrieves multiple files in a single request.
+      operationId: batchGetContent
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+        - name: message
+          in: query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.BatchGetContentRequest'
+        - name: encoding
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/encoding'
+        - name: base64
+          in: query
+          schema:
+            $ref: '#/components/schemas/base64'
+        - name: compression
+          in: query
+          schema:
+            $ref: '#/components/schemas/compression'
+        - name: connect
+          in: query
+          schema:
+            $ref: '#/components/schemas/connect'
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.BatchGetContentResponse'
+    post:
+      tags:
+        - Media
+        - files.v1.FilesService
+      summary: Batch get content
+      description: Retrieves multiple files in a single request.
+      operationId: batchGetContent
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/files.v1.BatchGetContentRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.BatchGetContentResponse'
+  /files.v1.FilesService/CompleteMultipartUpload:
+    post:
+      tags:
+        - Media
+        - files.v1.FilesService
+      summary: Complete multipart upload
+      description: Completes a multipart upload and returns the final media metadata.
+      operationId: completeMultipartUpload
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/files.v1.CompleteMultipartUploadRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.CompleteMultipartUploadResponse'
   /files.v1.FilesService/CreateContent:
     post:
       tags:
@@ -48,6 +249,80 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/files.v1.CreateContentResponse'
+  /files.v1.FilesService/CreateMultipartUpload:
+    post:
+      tags:
+        - Media
+        - files.v1.FilesService
+      summary: Create multipart upload
+      description: Creates a new multipart upload and returns an upload ID.
+      operationId: createMultipartUpload
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/files.v1.CreateMultipartUploadRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.CreateMultipartUploadResponse'
+  /files.v1.FilesService/DeleteContent:
+    post:
+      tags:
+        - Media
+        - files.v1.FilesService
+      summary: Delete content
+      description: Deletes content from the repository. Supports both soft and hard delete.
+      operationId: deleteContent
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/files.v1.DeleteContentRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.DeleteContentResponse'
   /files.v1.FilesService/GetConfig:
     get:
       tags:
@@ -408,6 +683,313 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/files.v1.GetContentThumbnailResponse'
+  /files.v1.FilesService/GetRetentionPolicy:
+    get:
+      tags:
+        - Retention
+        - files.v1.FilesService
+      summary: Get retention policy
+      description: Gets retention policy for a file.
+      operationId: getRetentionPolicy
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+        - name: message
+          in: query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.GetRetentionPolicyRequest'
+        - name: encoding
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/encoding'
+        - name: base64
+          in: query
+          schema:
+            $ref: '#/components/schemas/base64'
+        - name: compression
+          in: query
+          schema:
+            $ref: '#/components/schemas/compression'
+        - name: connect
+          in: query
+          schema:
+            $ref: '#/components/schemas/connect'
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.GetRetentionPolicyResponse'
+    post:
+      tags:
+        - Retention
+        - files.v1.FilesService
+      summary: Get retention policy
+      description: Gets retention policy for a file.
+      operationId: getRetentionPolicy
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/files.v1.GetRetentionPolicyRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.GetRetentionPolicyResponse'
+  /files.v1.FilesService/GetSignedDownloadUrl:
+    get:
+      tags:
+        - Media
+        - files.v1.FilesService
+      summary: Get signed download URL
+      description: Gets a signed URL for direct download from storage.
+      operationId: getSignedDownloadUrl
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+        - name: message
+          in: query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.GetSignedDownloadUrlRequest'
+        - name: encoding
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/encoding'
+        - name: base64
+          in: query
+          schema:
+            $ref: '#/components/schemas/base64'
+        - name: compression
+          in: query
+          schema:
+            $ref: '#/components/schemas/compression'
+        - name: connect
+          in: query
+          schema:
+            $ref: '#/components/schemas/connect'
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.GetSignedDownloadUrlResponse'
+    post:
+      tags:
+        - Media
+        - files.v1.FilesService
+      summary: Get signed download URL
+      description: Gets a signed URL for direct download from storage.
+      operationId: getSignedDownloadUrl
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/files.v1.GetSignedDownloadUrlRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.GetSignedDownloadUrlResponse'
+  /files.v1.FilesService/GetSignedUploadUrl:
+    post:
+      tags:
+        - Media
+        - files.v1.FilesService
+      summary: Get signed upload URL
+      description: Gets a signed URL for direct upload to storage.
+      operationId: getSignedUploadUrl
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/files.v1.GetSignedUploadUrlRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.GetSignedUploadUrlResponse'
+  /files.v1.FilesService/GetStorageStats:
+    get:
+      tags:
+        - Analytics
+        - files.v1.FilesService
+      summary: Get storage stats
+      description: Retrieves global storage statistics.
+      operationId: getStorageStats
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+        - name: message
+          in: query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.GetStorageStatsRequest'
+        - name: encoding
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/encoding'
+        - name: base64
+          in: query
+          schema:
+            $ref: '#/components/schemas/base64'
+        - name: compression
+          in: query
+          schema:
+            $ref: '#/components/schemas/compression'
+        - name: connect
+          in: query
+          schema:
+            $ref: '#/components/schemas/connect'
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.GetStorageStatsResponse'
+    post:
+      tags:
+        - Analytics
+        - files.v1.FilesService
+      summary: Get storage stats
+      description: Retrieves global storage statistics.
+      operationId: getStorageStats
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/files.v1.GetStorageStatsRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.GetStorageStatsResponse'
   /files.v1.FilesService/GetUrlPreview:
     get:
       tags:
@@ -498,6 +1080,493 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/files.v1.GetUrlPreviewResponse'
+  /files.v1.FilesService/GetUserUsage:
+    get:
+      tags:
+        - Analytics
+        - files.v1.FilesService
+      summary: Get user usage
+      description: Retrieves usage statistics for a user.
+      operationId: getUserUsage
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+        - name: message
+          in: query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.GetUserUsageRequest'
+        - name: encoding
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/encoding'
+        - name: base64
+          in: query
+          schema:
+            $ref: '#/components/schemas/base64'
+        - name: compression
+          in: query
+          schema:
+            $ref: '#/components/schemas/compression'
+        - name: connect
+          in: query
+          schema:
+            $ref: '#/components/schemas/connect'
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.GetUserUsageResponse'
+    post:
+      tags:
+        - Analytics
+        - files.v1.FilesService
+      summary: Get user usage
+      description: Retrieves usage statistics for a user.
+      operationId: getUserUsage
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/files.v1.GetUserUsageRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.GetUserUsageResponse'
+  /files.v1.FilesService/GetVersions:
+    get:
+      tags:
+        - Media
+        - files.v1.FilesService
+      summary: Get file versions
+      description: Retrieves all versions of a file.
+      operationId: getVersions
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+        - name: message
+          in: query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.GetVersionsRequest'
+        - name: encoding
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/encoding'
+        - name: base64
+          in: query
+          schema:
+            $ref: '#/components/schemas/base64'
+        - name: compression
+          in: query
+          schema:
+            $ref: '#/components/schemas/compression'
+        - name: connect
+          in: query
+          schema:
+            $ref: '#/components/schemas/connect'
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.GetVersionsResponse'
+    post:
+      tags:
+        - Media
+        - files.v1.FilesService
+      summary: Get file versions
+      description: Retrieves all versions of a file.
+      operationId: getVersions
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/files.v1.GetVersionsRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.GetVersionsResponse'
+  /files.v1.FilesService/HeadContent:
+    get:
+      tags:
+        - Media
+        - files.v1.FilesService
+      summary: Get content metadata
+      description: Retrieves metadata for content without downloading the content itself.
+      operationId: headContent
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+        - name: message
+          in: query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.HeadContentRequest'
+        - name: encoding
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/encoding'
+        - name: base64
+          in: query
+          schema:
+            $ref: '#/components/schemas/base64'
+        - name: compression
+          in: query
+          schema:
+            $ref: '#/components/schemas/compression'
+        - name: connect
+          in: query
+          schema:
+            $ref: '#/components/schemas/connect'
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.HeadContentResponse'
+    post:
+      tags:
+        - Media
+        - files.v1.FilesService
+      summary: Get content metadata
+      description: Retrieves metadata for content without downloading the content itself.
+      operationId: headContent
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/files.v1.HeadContentRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.HeadContentResponse'
+  /files.v1.FilesService/ListMultipartParts:
+    get:
+      tags:
+        - Media
+        - files.v1.FilesService
+      summary: List multipart parts
+      description: Lists all uploaded parts of a multipart upload.
+      operationId: listMultipartParts
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+        - name: message
+          in: query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.ListMultipartPartsRequest'
+        - name: encoding
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/encoding'
+        - name: base64
+          in: query
+          schema:
+            $ref: '#/components/schemas/base64'
+        - name: compression
+          in: query
+          schema:
+            $ref: '#/components/schemas/compression'
+        - name: connect
+          in: query
+          schema:
+            $ref: '#/components/schemas/connect'
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.ListMultipartPartsResponse'
+    post:
+      tags:
+        - Media
+        - files.v1.FilesService
+      summary: List multipart parts
+      description: Lists all uploaded parts of a multipart upload.
+      operationId: listMultipartParts
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/files.v1.ListMultipartPartsRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.ListMultipartPartsResponse'
+  /files.v1.FilesService/ListRetentionPolicies:
+    get:
+      tags:
+        - Retention
+        - files.v1.FilesService
+      summary: List retention policies
+      description: Lists available retention policies.
+      operationId: listRetentionPolicies
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+        - name: message
+          in: query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.ListRetentionPoliciesRequest'
+        - name: encoding
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/encoding'
+        - name: base64
+          in: query
+          schema:
+            $ref: '#/components/schemas/base64'
+        - name: compression
+          in: query
+          schema:
+            $ref: '#/components/schemas/compression'
+        - name: connect
+          in: query
+          schema:
+            $ref: '#/components/schemas/connect'
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.ListRetentionPoliciesResponse'
+    post:
+      tags:
+        - Retention
+        - files.v1.FilesService
+      summary: List retention policies
+      description: Lists available retention policies.
+      operationId: listRetentionPolicies
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/files.v1.ListRetentionPoliciesRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.ListRetentionPoliciesResponse'
+  /files.v1.FilesService/RestoreVersion:
+    post:
+      tags:
+        - Media
+        - files.v1.FilesService
+      summary: Restore version
+      description: Restores a specific version of a file as the current version.
+      operationId: restoreVersion
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/files.v1.RestoreVersionRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.RestoreVersionResponse'
   /files.v1.FilesService/SearchMedia:
     get:
       tags:
@@ -588,7 +1657,81 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/files.v1.SearchMediaResponse'
+  /files.v1.FilesService/SetRetentionPolicy:
+    post:
+      tags:
+        - Retention
+        - files.v1.FilesService
+      summary: Set retention policy
+      description: Sets retention policy for a file.
+      operationId: setRetentionPolicy
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/files.v1.SetRetentionPolicyRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.SetRetentionPolicyResponse'
   /files.v1.FilesService/UploadContent: {}
+  /files.v1.FilesService/UploadMultipartPart:
+    post:
+      tags:
+        - Media
+        - files.v1.FilesService
+      summary: Upload multipart part
+      description: Uploads a part of a multipart upload and returns the ETag.
+      operationId: uploadMultipartPart
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/files.v1.UploadMultipartPartRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.UploadMultipartPartResponse'
 components:
   schemas:
     base64:
@@ -682,6 +1825,154 @@ components:
         - proto
         - json
       description: Define which encoding or 'Message-Codec' to use
+    files.v1.AbortMultipartUploadRequest:
+      type: object
+      properties:
+        uploadId:
+          type: string
+          title: upload_id
+          description: Upload ID to abort
+      title: AbortMultipartUploadRequest
+      additionalProperties: false
+    files.v1.AbortMultipartUploadResponse:
+      type: object
+      properties:
+        aborted:
+          type: boolean
+          title: aborted
+          description: Whether the upload was aborted
+      title: AbortMultipartUploadResponse
+      additionalProperties: false
+    files.v1.BatchDeleteContentRequest:
+      type: object
+      properties:
+        mediaIds:
+          type: array
+          items:
+            type: string
+          title: media_ids
+          description: List of media IDs to delete
+        hardDelete:
+          type: boolean
+          title: hard_delete
+          description: Hard or soft delete
+      title: BatchDeleteContentRequest
+      additionalProperties: false
+    files.v1.BatchDeleteContentResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/files.v1.BatchDeleteContentResponse.DeleteResult'
+          title: results
+          description: Results for each requested ID
+      title: BatchDeleteContentResponse
+      additionalProperties: false
+    files.v1.BatchDeleteContentResponse.DeleteResult:
+      type: object
+      properties:
+        mediaId:
+          type: string
+          title: media_id
+          description: Media ID
+        success:
+          type: boolean
+          title: success
+          description: Whether deletion succeeded
+        error:
+          type: string
+          title: error
+          description: Error message if failed
+      title: DeleteResult
+      additionalProperties: false
+    files.v1.BatchGetContentRequest:
+      type: object
+      properties:
+        mediaIds:
+          type: array
+          items:
+            type: string
+          title: media_ids
+          description: List of media IDs to retrieve
+      title: BatchGetContentRequest
+      additionalProperties: false
+    files.v1.BatchGetContentResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/files.v1.BatchGetContentResponse.ContentResult'
+          title: results
+          description: Results for each requested ID
+      title: BatchGetContentResponse
+      additionalProperties: false
+    files.v1.BatchGetContentResponse.ContentResult:
+      type: object
+      allOf:
+        - properties:
+            mediaId:
+              type: string
+              title: media_id
+              description: Media ID
+        - oneOf:
+            - properties:
+                content:
+                  title: content
+                  description: Content if successful
+                  $ref: '#/components/schemas/files.v1.GetContentResponse'
+              title: content
+              required:
+                - content
+            - properties:
+                error:
+                  type: string
+                  title: error
+                  description: Error message if failed
+              title: error
+              required:
+                - error
+      title: ContentResult
+      additionalProperties: false
+    files.v1.CompleteMultipartUploadRequest:
+      type: object
+      properties:
+        uploadId:
+          type: string
+          title: upload_id
+          description: Upload ID from CreateMultipartUpload
+        parts:
+          type: array
+          items:
+            $ref: '#/components/schemas/files.v1.CompleteMultipartUploadRequest.Part'
+          title: parts
+          description: List of uploaded parts
+      title: CompleteMultipartUploadRequest
+      additionalProperties: false
+    files.v1.CompleteMultipartUploadRequest.Part:
+      type: object
+      properties:
+        partNumber:
+          type: integer
+          title: part_number
+          format: int32
+          description: Part number
+        etag:
+          type: string
+          title: etag
+          description: ETag from UploadMultipartPart
+      title: Part
+      additionalProperties: false
+    files.v1.CompleteMultipartUploadResponse:
+      type: object
+      properties:
+        metadata:
+          title: metadata
+          description: Final media metadata
+          $ref: '#/components/schemas/files.v1.MediaMetadata'
+      title: CompleteMultipartUploadResponse
+      additionalProperties: false
     files.v1.CreateContentRequest:
       type: object
       properties:
@@ -693,6 +1984,14 @@ components:
           type: string
           title: filename
           description: Expected filename
+        visibility:
+          title: visibility
+          description: Initial visibility
+          $ref: '#/components/schemas/files.v1.MediaMetadata.Visibility'
+        expiresAt:
+          title: expires_at
+          description: Expiration timestamp
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
       title: CreateContentRequest
       additionalProperties: false
       description: |-
@@ -706,13 +2005,10 @@ components:
           type: string
           title: content_uri
           description: The mxc:// URI for future upload
-        unusedExpiresAt:
-          type:
-            - integer
-            - string
-          title: unused_expires_at
-          format: int64
+        expiresAt:
+          title: expires_at
           description: Timestamp when the URI expires if unused
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
         mediaId:
           type: string
           title: media_id
@@ -724,6 +2020,100 @@ components:
       title: CreateContentResponse
       additionalProperties: false
       description: CreateContentResponse returns the created MXC URI.
+    files.v1.CreateMultipartUploadRequest:
+      type: object
+      properties:
+        filename:
+          type: string
+          title: filename
+          description: Original filename
+        contentType:
+          type: string
+          title: content_type
+          description: Expected MIME type
+        totalSize:
+          type:
+            - integer
+            - string
+          title: total_size
+          format: int64
+          description: Total size of the file
+        ownerId:
+          type: string
+          title: owner_id
+          description: Owner ID
+        visibility:
+          title: visibility
+          description: Initial visibility
+          $ref: '#/components/schemas/files.v1.MediaMetadata.Visibility'
+        expiresAt:
+          title: expires_at
+          description: Expiration timestamp
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+      title: CreateMultipartUploadRequest
+      additionalProperties: false
+    files.v1.CreateMultipartUploadResponse:
+      type: object
+      properties:
+        uploadId:
+          type: string
+          title: upload_id
+          description: Upload ID for the multipart upload
+      title: CreateMultipartUploadResponse
+      additionalProperties: false
+    files.v1.DeleteContentRequest:
+      type: object
+      properties:
+        mediaId:
+          type: string
+          title: media_id
+          description: Media ID to delete
+        hardDelete:
+          type: boolean
+          title: hard_delete
+          description: True for hard delete, false for soft delete
+      title: DeleteContentRequest
+      additionalProperties: false
+    files.v1.DeleteContentResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          title: success
+          description: Whether the deletion was successful
+      title: DeleteContentResponse
+      additionalProperties: false
+    files.v1.FileVersion:
+      type: object
+      properties:
+        version:
+          type:
+            - integer
+            - string
+          title: version
+          format: int64
+          description: Version number
+        mediaId:
+          type: string
+          title: media_id
+          description: Media ID for this version
+        createdAt:
+          title: created_at
+          description: When this version was created
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        createdBy:
+          type: string
+          title: created_by
+          description: Who created this version
+        sizeBytes:
+          type:
+            - integer
+            - string
+          title: size_bytes
+          format: int64
+          description: Size of this version
+      title: FileVersion
+      additionalProperties: false
     files.v1.GetConfigRequest:
       type: object
       title: GetConfigRequest
@@ -732,13 +2122,17 @@ components:
     files.v1.GetConfigResponse:
       type: object
       properties:
-        maxUploadSize:
+        maxUploadBytes:
           type:
             - integer
             - string
-          title: max_upload_size
+          title: max_upload_bytes
           format: int64
           description: Maximum upload size in bytes
+        directClientUploadEnabled:
+          type: boolean
+          title: direct_client_upload_enabled
+          description: Whether direct client upload is enabled
         extra:
           title: extra
           description: Additional configuration
@@ -749,11 +2143,6 @@ components:
     files.v1.GetContentOverrideNameRequest:
       type: object
       properties:
-        serverName:
-          type: string
-          title: server_name
-          minLength: 1
-          description: Server name from MXC URI
         mediaId:
           type: string
           title: media_id
@@ -782,25 +2171,16 @@ components:
           title: content
           format: byte
           description: The file content
-        contentType:
-          type: string
-          title: content_type
-          description: MIME type of the content
-        filename:
-          type: string
-          title: filename
-          description: The overridden filename
+        metadata:
+          title: metadata
+          description: Media metadata
+          $ref: '#/components/schemas/files.v1.MediaMetadata'
       title: GetContentOverrideNameResponse
       additionalProperties: false
       description: GetContentOverrideNameResponse returns content with overridden filename.
     files.v1.GetContentRequest:
       type: object
       properties:
-        serverName:
-          type: string
-          title: server_name
-          minLength: 1
-          description: Server name from MXC URI
         mediaId:
           type: string
           title: media_id
@@ -824,25 +2204,16 @@ components:
           title: content
           format: byte
           description: The file content
-        contentType:
-          type: string
-          title: content_type
-          description: MIME type of the content
-        filename:
-          type: string
-          title: filename
-          description: Filename from Content-Disposition
+        metadata:
+          title: metadata
+          description: Media metadata
+          $ref: '#/components/schemas/files.v1.MediaMetadata'
       title: GetContentResponse
       additionalProperties: false
       description: GetContentResponse returns the requested content.
     files.v1.GetContentThumbnailRequest:
       type: object
       properties:
-        serverName:
-          type: string
-          title: server_name
-          minLength: 1
-          description: Server name from MXC URI
         mediaId:
           type: string
           title: media_id
@@ -886,17 +2257,115 @@ components:
           title: content
           format: byte
           description: The thumbnail bytes
-        contentType:
-          type: string
-          title: content_type
-          description: MIME type (image/jpeg, image/png, etc.)
-        filename:
-          type: string
-          title: filename
-          description: Filename for the thumbnail
+        metadata:
+          title: metadata
+          description: Media metadata
+          $ref: '#/components/schemas/files.v1.MediaMetadata'
       title: GetContentThumbnailResponse
       additionalProperties: false
       description: GetContentThumbnailResponse returns the thumbnail.
+    files.v1.GetRetentionPolicyRequest:
+      type: object
+      properties:
+        mediaId:
+          type: string
+          title: media_id
+          description: Media ID
+      title: GetRetentionPolicyRequest
+      additionalProperties: false
+    files.v1.GetRetentionPolicyResponse:
+      type: object
+      properties:
+        policy:
+          title: policy
+          description: Applied retention policy
+          $ref: '#/components/schemas/files.v1.RetentionPolicy'
+        expiresAt:
+          title: expires_at
+          description: Calculated expiration time
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+      title: GetRetentionPolicyResponse
+      additionalProperties: false
+    files.v1.GetSignedDownloadUrlRequest:
+      type: object
+      properties:
+        mediaId:
+          type: string
+          title: media_id
+          description: Media ID to get signed download URL for
+        expiresSeconds:
+          type:
+            - integer
+            - string
+          title: expires_seconds
+          format: int64
+          description: URL expiration in seconds
+      title: GetSignedDownloadUrlRequest
+      additionalProperties: false
+    files.v1.GetSignedDownloadUrlResponse:
+      type: object
+      properties:
+        downloadUrl:
+          type: string
+          title: download_url
+          description: Signed download URL
+      title: GetSignedDownloadUrlResponse
+      additionalProperties: false
+    files.v1.GetSignedUploadUrlRequest:
+      type: object
+      properties:
+        mediaId:
+          type: string
+          title: media_id
+          description: Media ID to get signed upload URL for
+        expiresSeconds:
+          type:
+            - integer
+            - string
+          title: expires_seconds
+          format: int64
+          description: URL expiration in seconds
+      title: GetSignedUploadUrlRequest
+      additionalProperties: false
+    files.v1.GetSignedUploadUrlResponse:
+      type: object
+      properties:
+        uploadUrl:
+          type: string
+          title: upload_url
+          description: Signed upload URL
+      title: GetSignedUploadUrlResponse
+      additionalProperties: false
+    files.v1.GetStorageStatsRequest:
+      type: object
+      title: GetStorageStatsRequest
+      additionalProperties: false
+    files.v1.GetStorageStatsResponse:
+      type: object
+      properties:
+        totalBytes:
+          type:
+            - integer
+            - string
+          title: total_bytes
+          format: int64
+          description: Total storage across all users
+        totalFiles:
+          type:
+            - integer
+            - string
+          title: total_files
+          format: int64
+          description: Total files
+        totalUsers:
+          type:
+            - integer
+            - string
+          title: total_users
+          format: int64
+          description: Total users with files
+      title: GetStorageStatsResponse
+      additionalProperties: false
     files.v1.GetUrlPreviewRequest:
       type: object
       properties:
@@ -905,13 +2374,6 @@ components:
           title: url
           format: uri
           description: URL to preview
-        ts:
-          type:
-            - integer
-            - string
-          title: ts
-          format: int64
-          description: Preferred point in time for the preview
       title: GetUrlPreviewRequest
       additionalProperties: false
       description: GetUrlPreviewRequest gets preview information for a URL.
@@ -922,20 +2384,151 @@ components:
           title: og_data
           description: OpenGraph data (og:title, og:description, etc.)
           $ref: '#/components/schemas/google.protobuf.Struct'
-        matrixImageSize:
-          type:
-            - integer
-            - string
-          title: matrix_image_size
-          format: int64
-          description: Size of the image in bytes
-        ogImage:
+        ogImageMediaId:
           type: string
-          title: og_image
-          description: MXC URI of the preview image
+          title: og_image_media_id
+          description: Media ID of the preview image
       title: GetUrlPreviewResponse
       additionalProperties: false
       description: GetUrlPreviewResponse returns OpenGraph data for the URL.
+    files.v1.GetUserUsageRequest:
+      type: object
+      properties:
+        userId:
+          type: string
+          title: user_id
+          description: User ID to get usage for
+      title: GetUserUsageRequest
+      additionalProperties: false
+    files.v1.GetUserUsageResponse:
+      type: object
+      properties:
+        usage:
+          title: usage
+          description: Usage statistics
+          $ref: '#/components/schemas/files.v1.UsageStats'
+        periodStart:
+          title: period_start
+          description: Start of billing period
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        periodEnd:
+          title: period_end
+          description: End of billing period
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+      title: GetUserUsageResponse
+      additionalProperties: false
+    files.v1.GetVersionsRequest:
+      type: object
+      properties:
+        mediaId:
+          type: string
+          title: media_id
+          description: Media ID to get versions for
+        limit:
+          type: integer
+          title: limit
+          format: int32
+          description: Max versions to return
+        beforeVersion:
+          type: integer
+          title: before_version
+          format: int32
+          description: Get versions before this version
+      title: GetVersionsRequest
+      additionalProperties: false
+    files.v1.GetVersionsResponse:
+      type: object
+      properties:
+        versions:
+          type: array
+          items:
+            $ref: '#/components/schemas/files.v1.FileVersion'
+          title: versions
+          description: List of versions
+        latestVersion:
+          type:
+            - integer
+            - string
+          title: latest_version
+          format: int64
+          description: Latest version number
+      title: GetVersionsResponse
+      additionalProperties: false
+    files.v1.HeadContentRequest:
+      type: object
+      properties:
+        mediaId:
+          type: string
+          title: media_id
+          minLength: 1
+          description: Media ID from MXC URI
+      title: HeadContentRequest
+      additionalProperties: false
+    files.v1.HeadContentResponse:
+      type: object
+      properties:
+        metadata:
+          title: metadata
+          description: Media metadata
+          $ref: '#/components/schemas/files.v1.MediaMetadata'
+      title: HeadContentResponse
+      additionalProperties: false
+    files.v1.ListMultipartPartsRequest:
+      type: object
+      properties:
+        uploadId:
+          type: string
+          title: upload_id
+          description: Upload ID
+      title: ListMultipartPartsRequest
+      additionalProperties: false
+    files.v1.ListMultipartPartsResponse:
+      type: object
+      properties:
+        parts:
+          type: array
+          items:
+            $ref: '#/components/schemas/files.v1.ListMultipartPartsResponse.Part'
+          title: parts
+          description: List of parts
+      title: ListMultipartPartsResponse
+      additionalProperties: false
+    files.v1.ListMultipartPartsResponse.Part:
+      type: object
+      properties:
+        partNumber:
+          type: integer
+          title: part_number
+          format: int32
+          description: Part number
+        etag:
+          type: string
+          title: etag
+          description: ETag
+        size:
+          type:
+            - integer
+            - string
+          title: size
+          format: int64
+          description: Part size
+      title: Part
+      additionalProperties: false
+    files.v1.ListRetentionPoliciesRequest:
+      type: object
+      title: ListRetentionPoliciesRequest
+      additionalProperties: false
+    files.v1.ListRetentionPoliciesResponse:
+      type: object
+      properties:
+        policies:
+          type: array
+          items:
+            $ref: '#/components/schemas/files.v1.RetentionPolicy'
+          title: policies
+          description: Available policies
+      title: ListRetentionPoliciesResponse
+      additionalProperties: false
     files.v1.MediaMetadata:
       type: object
       properties:
@@ -946,10 +2539,6 @@ components:
           minLength: 3
           pattern: '[0-9a-z_-]{3,40}'
           description: The media ID from the MXC URI
-        serverName:
-          type: string
-          title: server_name
-          description: The server name from the MXC URI
         contentType:
           type: string
           title: content_type
@@ -961,36 +2550,114 @@ components:
           title: file_size_bytes
           format: int64
           description: Size of the file in bytes
-        creationTimestamp:
-          type:
-            - integer
-            - string
-          title: creation_timestamp
-          format: int64
-          description: Unix timestamp when file was uploaded
-        uploadName:
+        createdAt:
+          title: created_at
+          description: Creation timestamp
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        updatedAt:
+          title: updated_at
+          description: Last update timestamp
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        filename:
           type: string
-          title: upload_name
+          title: filename
           description: Original filename when uploaded
-        base64Hash:
+        checksumSha256:
           type: string
-          title: base64_hash
-          description: Base64 encoded hash of the file
+          title: checksum_sha256
+          description: SHA256 checksum of the file
         ownerId:
           type: string
           title: owner_id
           description: ID of the user who uploaded the file
-        parentId:
-          type: string
-          title: parent_id
-          description: Optional parent media ID
+        visibility:
+          title: visibility
+          description: Visibility of the content
+          $ref: '#/components/schemas/files.v1.MediaMetadata.Visibility'
         extra:
           title: extra
           description: Additional metadata
           $ref: '#/components/schemas/google.protobuf.Struct'
+        expiresAt:
+          title: expires_at
+          description: Expiration timestamp
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        version:
+          type:
+            - integer
+            - string
+          title: version
+          format: int64
+          description: Current version number (for versioning)
+        isLatest:
+          type: boolean
+          title: is_latest
+          description: Whether this is the latest version
       title: MediaMetadata
       additionalProperties: false
       description: MediaMetadata represents metadata about an uploaded file.
+    files.v1.MediaMetadata.Visibility:
+      type: string
+      title: Visibility
+      enum:
+        - VISIBILITY_UNSPECIFIED
+        - PUBLIC
+        - PRIVATE
+    files.v1.RestoreVersionRequest:
+      type: object
+      properties:
+        mediaId:
+          type: string
+          title: media_id
+          description: Media ID
+        version:
+          type:
+            - integer
+            - string
+          title: version
+          format: int64
+          description: Version to restore
+      title: RestoreVersionRequest
+      additionalProperties: false
+    files.v1.RestoreVersionResponse:
+      type: object
+      properties:
+        metadata:
+          title: metadata
+          description: Metadata of restored file
+          $ref: '#/components/schemas/files.v1.MediaMetadata'
+      title: RestoreVersionResponse
+      additionalProperties: false
+    files.v1.RetentionPolicy:
+      type: object
+      properties:
+        policyId:
+          type: string
+          title: policy_id
+          description: Unique policy ID
+        name:
+          type: string
+          title: name
+          description: Policy name
+        retentionDays:
+          type:
+            - integer
+            - string
+          title: retention_days
+          format: int64
+          description: Retention period in days (-1 for permanent)
+        mode:
+          title: mode
+          $ref: '#/components/schemas/files.v1.RetentionPolicy.Mode'
+      title: RetentionPolicy
+      additionalProperties: false
+    files.v1.RetentionPolicy.Mode:
+      type: string
+      title: Mode
+      enum:
+        - MODE_UNSPECIFIED
+        - DELETE
+        - ARCHIVE
     files.v1.SearchMediaRequest:
       type: object
       properties:
@@ -998,11 +2665,6 @@ components:
           type: string
           title: query
           description: Search query string
-        page:
-          type: integer
-          title: page
-          format: int32
-          description: Page number (default 0)
         limit:
           type: integer
           title: limit
@@ -1010,25 +2672,50 @@ components:
           minimum: 1
           format: int32
           description: Results per page (default 20, max 100)
+        afterCursor:
+          type: string
+          title: after_cursor
+          description: Cursor for pagination
         ownerId:
           type: string
           title: owner_id
           description: Filter by owner ID
-        parentId:
+        createdAfter:
+          title: created_after
+          description: Filter by creation date (after)
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        createdBefore:
+          title: created_before
+          description: Filter by creation date (before)
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        visibility:
+          title: visibility
+          description: Filter by visibility
+          $ref: '#/components/schemas/files.v1.MediaMetadata.Visibility'
+        contentType:
           type: string
-          title: parent_id
-          description: Filter by parent media ID
-        startDate:
-          type: string
-          title: start_date
-          description: Filter by creation date (start range, RFC3339)
-        endDate:
-          type: string
-          title: end_date
-          description: Filter by creation date (end range, RFC3339)
+          title: content_type
+          description: Filter by MIME type prefix (e.g., "image/")
+        sortBy:
+          title: sort_by
+          description: Sort field
+          $ref: '#/components/schemas/files.v1.SearchMediaRequest.SortBy'
+        sortDesc:
+          type: boolean
+          title: sort_desc
+          description: Sort descending (default false)
       title: SearchMediaRequest
       additionalProperties: false
       description: SearchMediaRequest searches for media files.
+    files.v1.SearchMediaRequest.SortBy:
+      type: string
+      title: SortBy
+      enum:
+        - SORT_BY_UNSPECIFIED
+        - CREATED_AT
+        - UPDATED_AT
+        - FILENAME
+        - FILE_SIZE
     files.v1.SearchMediaResponse:
       type: object
       properties:
@@ -1038,23 +2725,34 @@ components:
             $ref: '#/components/schemas/files.v1.MediaMetadata'
           title: results
           description: Array of matching media metadata
-        total:
-          type: integer
-          title: total
-          format: int32
-          description: Total number of results in this page
-        page:
-          type: integer
-          title: page
-          format: int32
-          description: Current page number
-        hasMore:
-          type: boolean
-          title: has_more
-          description: Whether there are more results available
+        nextCursor:
+          type: string
+          title: next_cursor
+          description: Cursor for next page
       title: SearchMediaResponse
       additionalProperties: false
       description: SearchMediaResponse returns search results.
+    files.v1.SetRetentionPolicyRequest:
+      type: object
+      properties:
+        mediaId:
+          type: string
+          title: media_id
+          description: Media ID
+        policyId:
+          type: string
+          title: policy_id
+          description: Policy ID to apply
+      title: SetRetentionPolicyRequest
+      additionalProperties: false
+    files.v1.SetRetentionPolicyResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          title: success
+      title: SetRetentionPolicyResponse
+      additionalProperties: false
     files.v1.ThumbnailMethod:
       type: string
       title: ThumbnailMethod
@@ -1104,6 +2802,10 @@ components:
           type: string
           title: server_name
           description: Extracted server name from the URI
+        metadata:
+          title: metadata
+          description: Full media metadata
+          $ref: '#/components/schemas/files.v1.MediaMetadata'
       title: UploadContentResponse
       additionalProperties: false
       description: UploadContentResponse returns the MXC URI for the uploaded content.
@@ -1129,6 +2831,18 @@ components:
           title: properties
           description: Additional properties
           $ref: '#/components/schemas/google.protobuf.Struct'
+        ownerId:
+          type: string
+          title: owner_id
+          description: Owner ID (for service-side uploads)
+        visibility:
+          title: visibility
+          description: Initial visibility (defaults to PRIVATE)
+          $ref: '#/components/schemas/files.v1.MediaMetadata.Visibility'
+        expiresAt:
+          title: expires_at
+          description: Expiration timestamp
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
         serverName:
           type: string
           title: server_name
@@ -1151,6 +2865,79 @@ components:
          - For pre-created MXC URIs: Set server_name and media_id from the URI created via CreateContent.
            This allows uploading content to a URI that was created earlier, useful for resumable uploads
            or when you need the URI before the content is ready.
+    files.v1.UploadMultipartPartRequest:
+      type: object
+      properties:
+        uploadId:
+          type: string
+          title: upload_id
+          description: Upload ID from CreateMultipartUpload
+        partNumber:
+          type: integer
+          title: part_number
+          format: int32
+          description: Part number (starts from 1)
+        content:
+          type: string
+          title: content
+          format: byte
+          description: Part content
+      title: UploadMultipartPartRequest
+      additionalProperties: false
+    files.v1.UploadMultipartPartResponse:
+      type: object
+      properties:
+        etag:
+          type: string
+          title: etag
+          description: ETag for the uploaded part
+        partNumber:
+          type: integer
+          title: part_number
+          format: int32
+          description: Part number
+        size:
+          type:
+            - integer
+            - string
+          title: size
+          format: int64
+          description: Size of the uploaded part
+      title: UploadMultipartPartResponse
+      additionalProperties: false
+    files.v1.UsageStats:
+      type: object
+      properties:
+        totalFiles:
+          type:
+            - integer
+            - string
+          title: total_files
+          format: int64
+          description: Total number of files
+        totalBytes:
+          type:
+            - integer
+            - string
+          title: total_bytes
+          format: int64
+          description: Total storage used
+        publicFiles:
+          type:
+            - integer
+            - string
+          title: public_files
+          format: int64
+          description: Number of public files
+        privateFiles:
+          type:
+            - integer
+            - string
+          title: private_files
+          format: int64
+          description: Number of private files
+      title: UsageStats
+      additionalProperties: false
     google.protobuf.ListValue:
       type: object
       properties:
@@ -1200,6 +2987,102 @@ components:
           $ref: '#/components/schemas/google.protobuf.Value'
       title: FieldsEntry
       additionalProperties: false
+    google.protobuf.Timestamp:
+      type: string
+      examples:
+        - "2023-01-15T01:30:15.01Z"
+        - "2024-12-25T12:00:00Z"
+      format: date-time
+      description: |-
+        A Timestamp represents a point in time independent of any time zone or local
+         calendar, encoded as a count of seconds and fractions of seconds at
+         nanosecond resolution. The count is relative to an epoch at UTC midnight on
+         January 1, 1970, in the proleptic Gregorian calendar which extends the
+         Gregorian calendar backwards to year one.
+
+         All minutes are 60 seconds long. Leap seconds are "smeared" so that no leap
+         second table is needed for interpretation, using a [24-hour linear
+         smear](https://developers.google.com/time/smear).
+
+         The range is from 0001-01-01T00:00:00Z to 9999-12-31T23:59:59.999999999Z. By
+         restricting to that range, we ensure that we can convert to and from [RFC
+         3339](https://www.ietf.org/rfc/rfc3339.txt) date strings.
+
+         # Examples
+
+         Example 1: Compute Timestamp from POSIX `time()`.
+
+             Timestamp timestamp;
+             timestamp.set_seconds(time(NULL));
+             timestamp.set_nanos(0);
+
+         Example 2: Compute Timestamp from POSIX `gettimeofday()`.
+
+             struct timeval tv;
+             gettimeofday(&tv, NULL);
+
+             Timestamp timestamp;
+             timestamp.set_seconds(tv.tv_sec);
+             timestamp.set_nanos(tv.tv_usec * 1000);
+
+         Example 3: Compute Timestamp from Win32 `GetSystemTimeAsFileTime()`.
+
+             FILETIME ft;
+             GetSystemTimeAsFileTime(&ft);
+             UINT64 ticks = (((UINT64)ft.dwHighDateTime) << 32) | ft.dwLowDateTime;
+
+             // A Windows tick is 100 nanoseconds. Windows epoch 1601-01-01T00:00:00Z
+             // is 11644473600 seconds before Unix epoch 1970-01-01T00:00:00Z.
+             Timestamp timestamp;
+             timestamp.set_seconds((INT64) ((ticks / 10000000) - 11644473600LL));
+             timestamp.set_nanos((INT32) ((ticks % 10000000) * 100));
+
+         Example 4: Compute Timestamp from Java `System.currentTimeMillis()`.
+
+             long millis = System.currentTimeMillis();
+
+             Timestamp timestamp = Timestamp.newBuilder().setSeconds(millis / 1000)
+                 .setNanos((int) ((millis % 1000) * 1000000)).build();
+
+         Example 5: Compute Timestamp from Java `Instant.now()`.
+
+             Instant now = Instant.now();
+
+             Timestamp timestamp =
+                 Timestamp.newBuilder().setSeconds(now.getEpochSecond())
+                     .setNanos(now.getNano()).build();
+
+         Example 6: Compute Timestamp from current time in Python.
+
+             timestamp = Timestamp()
+             timestamp.GetCurrentTime()
+
+         # JSON Mapping
+
+         In JSON format, the Timestamp type is encoded as a string in the
+         [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format. That is, the
+         format is "{year}-{month}-{day}T{hour}:{min}:{sec}[.{frac_sec}]Z"
+         where {year} is always expressed using four digits while {month}, {day},
+         {hour}, {min}, and {sec} are zero-padded to two digits each. The fractional
+         seconds, which can go up to 9 digits (i.e. up to 1 nanosecond resolution),
+         are optional. The "Z" suffix indicates the timezone ("UTC"); the timezone
+         is required. A proto3 JSON serializer should always use UTC (as indicated by
+         "Z") when printing the Timestamp type and a proto3 JSON parser should be
+         able to accept both UTC and other timezones (as indicated by an offset).
+
+         For example, "2017-01-15T01:30:15.01Z" encodes 15.01 seconds past
+         01:30 UTC on January 15, 2017.
+
+         In JavaScript, one can convert a Date object to this format using the
+         standard
+         [toISOString()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString)
+         method. In Python, a standard `datetime.datetime` object can be converted
+         to this format using
+         [`strftime`](https://docs.python.org/2/library/time.html#time.strftime) with
+         the time format spec '%Y-%m-%dT%H:%M:%S.%fZ'. Likewise, in Java, one can use
+         the Joda Time's [`ISODateTimeFormat.dateTime()`](
+         http://joda-time.sourceforge.net/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime()
+         ) to obtain a formatter capable of generating timestamps in this format.
     google.protobuf.Value:
       oneOf:
         - type: "null"

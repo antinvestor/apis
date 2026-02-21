@@ -56,6 +56,168 @@ extension type FilesServiceClient (connect.Transport _transport) {
     );
   }
 
+  /// CreateMultipartUpload creates a new multipart upload.
+  Future<filesv1files.CreateMultipartUploadResponse> createMultipartUpload(
+    filesv1files.CreateMultipartUploadRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.FilesService.createMultipartUpload,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// UploadMultipartPart uploads a part of a multipart upload.
+  Future<filesv1files.UploadMultipartPartResponse> uploadMultipartPart(
+    filesv1files.UploadMultipartPartRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.FilesService.uploadMultipartPart,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// CompleteMultipartUpload completes a multipart upload.
+  Future<filesv1files.CompleteMultipartUploadResponse> completeMultipartUpload(
+    filesv1files.CompleteMultipartUploadRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.FilesService.completeMultipartUpload,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// AbortMultipartUpload aborts a multipart upload.
+  Future<filesv1files.AbortMultipartUploadResponse> abortMultipartUpload(
+    filesv1files.AbortMultipartUploadRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.FilesService.abortMultipartUpload,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// ListMultipartParts lists all uploaded parts of a multipart upload.
+  Future<filesv1files.ListMultipartPartsResponse> listMultipartParts(
+    filesv1files.ListMultipartPartsRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.FilesService.listMultipartParts,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// HeadContent retrieves metadata for content without downloading the content itself.
+  Future<filesv1files.HeadContentResponse> headContent(
+    filesv1files.HeadContentRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.FilesService.headContent,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// GetSignedUploadUrl gets a signed URL for direct upload to storage.
+  Future<filesv1files.GetSignedUploadUrlResponse> getSignedUploadUrl(
+    filesv1files.GetSignedUploadUrlRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.FilesService.getSignedUploadUrl,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// GetSignedDownloadUrl gets a signed URL for direct download from storage.
+  Future<filesv1files.GetSignedDownloadUrlResponse> getSignedDownloadUrl(
+    filesv1files.GetSignedDownloadUrlRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.FilesService.getSignedDownloadUrl,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// DeleteContent deletes content from the repository.
+  Future<filesv1files.DeleteContentResponse> deleteContent(
+    filesv1files.DeleteContentRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.FilesService.deleteContent,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
   /// GetContent downloads content from the content repository.
   Future<filesv1files.GetContentResponse> getContent(
     filesv1files.GetContentRequest input, {
@@ -159,6 +321,168 @@ extension type FilesServiceClient (connect.Transport _transport) {
   }) {
     return connect.Client(_transport).unary(
       specs.FilesService.searchMedia,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// BatchGetContent retrieves multiple files in a single request.
+  Future<filesv1files.BatchGetContentResponse> batchGetContent(
+    filesv1files.BatchGetContentRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.FilesService.batchGetContent,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// BatchDeleteContent deletes multiple files in a single request.
+  Future<filesv1files.BatchDeleteContentResponse> batchDeleteContent(
+    filesv1files.BatchDeleteContentRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.FilesService.batchDeleteContent,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// GetVersions retrieves all versions of a file.
+  Future<filesv1files.GetVersionsResponse> getVersions(
+    filesv1files.GetVersionsRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.FilesService.getVersions,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// RestoreVersion restores a specific version of a file.
+  Future<filesv1files.RestoreVersionResponse> restoreVersion(
+    filesv1files.RestoreVersionRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.FilesService.restoreVersion,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// SetRetentionPolicy sets retention policy for a file.
+  Future<filesv1files.SetRetentionPolicyResponse> setRetentionPolicy(
+    filesv1files.SetRetentionPolicyRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.FilesService.setRetentionPolicy,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// GetRetentionPolicy gets retention policy for a file.
+  Future<filesv1files.GetRetentionPolicyResponse> getRetentionPolicy(
+    filesv1files.GetRetentionPolicyRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.FilesService.getRetentionPolicy,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// ListRetentionPolicies lists available retention policies.
+  Future<filesv1files.ListRetentionPoliciesResponse> listRetentionPolicies(
+    filesv1files.ListRetentionPoliciesRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.FilesService.listRetentionPolicies,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// GetUserUsage retrieves usage statistics for a user.
+  Future<filesv1files.GetUserUsageResponse> getUserUsage(
+    filesv1files.GetUserUsageRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.FilesService.getUserUsage,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// GetStorageStats retrieves global storage statistics.
+  Future<filesv1files.GetStorageStatsResponse> getStorageStats(
+    filesv1files.GetStorageStatsRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.FilesService.getStorageStats,
       input,
       signal: signal,
       headers: headers,

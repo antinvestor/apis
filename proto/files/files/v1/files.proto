@@ -27,6 +27,7 @@ package files.v1;
 import "buf/validate/validate.proto";
 import "gnostic/openapi/v3/annotations.proto";
 import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
 
 option cc_enable_arenas = true;
 option go_package = "github.com/antinvestor/apis/go/files/v1;filesv1";
@@ -88,15 +89,24 @@ message MediaMetadata {
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ]; // The media ID from the MXC URI
-  string server_name = 2; // The server name from the MXC URI
-  string content_type = 3; // MIME type of the content
-  int64 file_size_bytes = 4; // Size of the file in bytes
-  int64 creation_timestamp = 5; // Unix timestamp when file was uploaded
-  string upload_name = 6; // Original filename when uploaded
-  string base64_hash = 7; // Base64 encoded hash of the file
+  string content_type = 2; // MIME type of the content
+  int64 file_size_bytes = 3; // Size of the file in bytes
+  google.protobuf.Timestamp created_at = 4; // Creation timestamp
+  google.protobuf.Timestamp updated_at = 5; // Last update timestamp
+  string filename = 6; // Original filename when uploaded
+  string checksum_sha256 = 7; // SHA256 checksum of the file
   string owner_id = 8; // ID of the user who uploaded the file
-  string parent_id = 9; // Optional parent media ID
+  Visibility visibility = 9; // Visibility of the content
   google.protobuf.Struct extra = 10; // Additional metadata
+  google.protobuf.Timestamp expires_at = 11; // Expiration timestamp
+  int64 version = 12; // Current version number (for versioning)
+  bool is_latest = 13; // Whether this is the latest version
+
+  enum Visibility {
+    VISIBILITY_UNSPECIFIED = 0;
+    PUBLIC = 1;
+    PRIVATE = 2;
+  }
 }
 
 // -----------------------------------------------------
@@ -116,9 +126,12 @@ message UploadMetadata {
   string filename = 2; // Original filename
   int64 total_size = 3; // Total size of the file in bytes (optional)
   google.protobuf.Struct properties = 4; // Additional properties
+  string owner_id = 5; // Owner ID (for service-side uploads)
+  MediaMetadata.Visibility visibility = 6; // Initial visibility (defaults to PRIVATE)
+  google.protobuf.Timestamp expires_at = 7; // Expiration timestamp
   // Optional: Set these to upload to a pre-created MXC URI (from CreateContent)
-  string server_name = 5; // Server name from the MXC URI (e.g., "example.com" from "mxc://example.com/abc123")
-  string media_id = 6 [
+  string server_name = 8; // Server name from the MXC URI (e.g., "example.com" from "mxc://example.com/abc123")
+  string media_id = 9 [
     (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
@@ -140,6 +153,7 @@ message UploadContentResponse {
   string content_uri = 1; // The mxc:// URI for the uploaded content
   string media_id = 2; // Extracted media ID from the URI
   string server_name = 3; // Extracted server name from the URI
+  MediaMetadata metadata = 4; // Full media metadata
 }
 
 // CreateContentRequest creates a new MXC URI without uploading content.
@@ -148,14 +162,82 @@ message UploadContentResponse {
 message CreateContentRequest {
   string content_type = 1; // Expected MIME type of the content
   string filename = 2; // Expected filename
+  MediaMetadata.Visibility visibility = 3; // Initial visibility
+  google.protobuf.Timestamp expires_at = 4; // Expiration timestamp
 }
 
 // CreateContentResponse returns the created MXC URI.
 message CreateContentResponse {
   string content_uri = 1; // The mxc:// URI for future upload
-  int64 unused_expires_at = 2; // Timestamp when the URI expires if unused
+  google.protobuf.Timestamp expires_at = 2; // Timestamp when the URI expires if unused
   string media_id = 3; // Extracted media ID from the URI
   string server_name = 4; // Extracted server name from the URI
+}
+
+// -----------------------------------------------------
+// Multipart Upload
+// -----------------------------------------------------
+
+message CreateMultipartUploadRequest {
+  string filename = 1; // Original filename
+  string content_type = 2; // Expected MIME type
+  int64 total_size = 3; // Total size of the file
+  string owner_id = 4; // Owner ID
+  MediaMetadata.Visibility visibility = 5; // Initial visibility
+  google.protobuf.Timestamp expires_at = 6; // Expiration timestamp
+}
+
+message CreateMultipartUploadResponse {
+  string upload_id = 1; // Upload ID for the multipart upload
+}
+
+message UploadMultipartPartRequest {
+  string upload_id = 1; // Upload ID from CreateMultipartUpload
+  int32 part_number = 2; // Part number (starts from 1)
+  bytes content = 3; // Part content
+}
+
+message UploadMultipartPartResponse {
+  string etag = 1; // ETag for the uploaded part
+  int32 part_number = 2; // Part number
+  int64 size = 3; // Size of the uploaded part
+}
+
+message CompleteMultipartUploadRequest {
+  string upload_id = 1; // Upload ID from CreateMultipartUpload
+
+  message Part {
+    int32 part_number = 1; // Part number
+    string etag = 2; // ETag from UploadMultipartPart
+  }
+
+  repeated Part parts = 2; // List of uploaded parts
+}
+
+message CompleteMultipartUploadResponse {
+  MediaMetadata metadata = 1; // Final media metadata
+}
+
+message AbortMultipartUploadRequest {
+  string upload_id = 1; // Upload ID to abort
+}
+
+message AbortMultipartUploadResponse {
+  bool aborted = 1; // Whether the upload was aborted
+}
+
+message ListMultipartPartsRequest {
+  string upload_id = 1; // Upload ID
+}
+
+message ListMultipartPartsResponse {
+  message Part {
+    int32 part_number = 1; // Part number
+    string etag = 2; // ETag
+    int64 size = 3; // Part size
+  }
+
+  repeated Part parts = 1; // List of parts
 }
 
 // -----------------------------------------------------
@@ -164,31 +246,74 @@ message CreateContentResponse {
 
 // GetContentRequest downloads content from the repository.
 message GetContentRequest {
-  string server_name = 1 [(buf.validate.field).string.min_len = 1]; // Server name from MXC URI
-  string media_id = 2 [(buf.validate.field).string.min_len = 1]; // Media ID from MXC URI
-  int64 timeout_ms = 3; // Timeout in milliseconds (default 20000)
+  string media_id = 1 [(buf.validate.field).string.min_len = 1]; // Media ID from MXC URI
+  int64 timeout_ms = 2; // Timeout in milliseconds (default 20000)
 }
 
 // GetContentResponse returns the requested content.
 message GetContentResponse {
   bytes content = 1; // The file content
-  string content_type = 2; // MIME type of the content
-  string filename = 3; // Filename from Content-Disposition
+  MediaMetadata metadata = 2; // Media metadata
 }
 
 // GetContentOverrideNameRequest downloads content with a specific filename.
 message GetContentOverrideNameRequest {
-  string server_name = 1 [(buf.validate.field).string.min_len = 1]; // Server name from MXC URI
-  string media_id = 2 [(buf.validate.field).string.min_len = 1]; // Media ID from MXC URI
-  string file_name = 3 [(buf.validate.field).string.min_len = 1]; // Override filename
-  int64 timeout_ms = 4; // Timeout in milliseconds (default 20000)
+  string media_id = 1 [(buf.validate.field).string.min_len = 1]; // Media ID from MXC URI
+  string file_name = 2 [(buf.validate.field).string.min_len = 1]; // Override filename
+  int64 timeout_ms = 3; // Timeout in milliseconds (default 20000)
 }
 
 // GetContentOverrideNameResponse returns content with overridden filename.
 message GetContentOverrideNameResponse {
   bytes content = 1; // The file content
-  string content_type = 2; // MIME type of the content
-  string filename = 3; // The overridden filename
+  MediaMetadata metadata = 2; // Media metadata
+}
+
+// -----------------------------------------------------
+// HEAD Request
+// -----------------------------------------------------
+
+message HeadContentRequest {
+  string media_id = 1 [(buf.validate.field).string.min_len = 1]; // Media ID from MXC URI
+}
+
+message HeadContentResponse {
+  MediaMetadata metadata = 1; // Media metadata
+}
+
+// -----------------------------------------------------
+// Signed URLs
+// -----------------------------------------------------
+
+message GetSignedUploadUrlRequest {
+  string media_id = 1; // Media ID to get signed upload URL for
+  int64 expires_seconds = 2; // URL expiration in seconds
+}
+
+message GetSignedUploadUrlResponse {
+  string upload_url = 1; // Signed upload URL
+}
+
+message GetSignedDownloadUrlRequest {
+  string media_id = 1; // Media ID to get signed download URL for
+  int64 expires_seconds = 2; // URL expiration in seconds
+}
+
+message GetSignedDownloadUrlResponse {
+  string download_url = 1; // Signed download URL
+}
+
+// -----------------------------------------------------
+// Delete
+// -----------------------------------------------------
+
+message DeleteContentRequest {
+  string media_id = 1; // Media ID to delete
+  bool hard_delete = 2; // True for hard delete, false for soft delete
+}
+
+message DeleteContentResponse {
+  bool success = 1; // Whether the deletion was successful
 }
 
 // -----------------------------------------------------
@@ -197,20 +322,18 @@ message GetContentOverrideNameResponse {
 
 // GetContentThumbnailRequest retrieves a thumbnail of content.
 message GetContentThumbnailRequest {
-  string server_name = 1 [(buf.validate.field).string.min_len = 1]; // Server name from MXC URI
-  string media_id = 2 [(buf.validate.field).string.min_len = 1]; // Media ID from MXC URI
-  int32 width = 3 [(buf.validate.field).int32.gt = 0]; // Desired width in pixels
-  int32 height = 4 [(buf.validate.field).int32.gt = 0]; // Desired height in pixels
-  ThumbnailMethod method = 5; // Resizing method (scale or crop)
-  int64 timeout_ms = 6; // Timeout in milliseconds (default 20000)
-  bool animated = 7; // Prefer animated thumbnail if available
+  string media_id = 1 [(buf.validate.field).string.min_len = 1]; // Media ID from MXC URI
+  int32 width = 2 [(buf.validate.field).int32.gt = 0]; // Desired width in pixels
+  int32 height = 3 [(buf.validate.field).int32.gt = 0]; // Desired height in pixels
+  ThumbnailMethod method = 4; // Resizing method (scale or crop)
+  int64 timeout_ms = 5; // Timeout in milliseconds (default 20000)
+  bool animated = 6; // Prefer animated thumbnail if available
 }
 
 // GetContentThumbnailResponse returns the thumbnail.
 message GetContentThumbnailResponse {
   bytes content = 1; // The thumbnail bytes
-  string content_type = 2; // MIME type (image/jpeg, image/png, etc.)
-  string filename = 3; // Filename for the thumbnail
+  MediaMetadata metadata = 2; // Media metadata
 }
 
 // -----------------------------------------------------
@@ -220,14 +343,12 @@ message GetContentThumbnailResponse {
 // GetUrlPreviewRequest gets preview information for a URL.
 message GetUrlPreviewRequest {
   string url = 1 [(buf.validate.field).string.uri = true]; // URL to preview
-  int64 ts = 2; // Preferred point in time for the preview
 }
 
 // GetUrlPreviewResponse returns OpenGraph data for the URL.
 message GetUrlPreviewResponse {
   google.protobuf.Struct og_data = 1; // OpenGraph data (og:title, og:description, etc.)
-  int64 matrix_image_size = 2; // Size of the image in bytes
-  string og_image = 3; // MXC URI of the preview image
+  string og_image_media_id = 2; // Media ID of the preview image
 }
 
 // -----------------------------------------------------
@@ -241,8 +362,9 @@ message GetConfigRequest {
 
 // GetConfigResponse returns repository configuration.
 message GetConfigResponse {
-  int64 max_upload_size = 1; // Maximum upload size in bytes
-  google.protobuf.Struct extra = 2; // Additional configuration
+  int64 max_upload_bytes = 1; // Maximum upload size in bytes
+  bool direct_client_upload_enabled = 2; // Whether direct client upload is enabled
+  google.protobuf.Struct extra = 3; // Additional configuration
 }
 
 // -----------------------------------------------------
@@ -252,23 +374,165 @@ message GetConfigResponse {
 // SearchMediaRequest searches for media files.
 message SearchMediaRequest {
   string query = 1; // Search query string
-  int32 page = 2; // Page number (default 0)
-  int32 limit = 3 [
+  int32 limit = 2 [
     (buf.validate.field).int32.gte = 1,
     (buf.validate.field).int32.lte = 100
   ]; // Results per page (default 20, max 100)
+  string after_cursor = 3; // Cursor for pagination
   string owner_id = 4; // Filter by owner ID
-  string parent_id = 5; // Filter by parent media ID
-  string start_date = 6; // Filter by creation date (start range, RFC3339)
-  string end_date = 7; // Filter by creation date (end range, RFC3339)
+  google.protobuf.Timestamp created_after = 5; // Filter by creation date (after)
+  google.protobuf.Timestamp created_before = 6; // Filter by creation date (before)
+  MediaMetadata.Visibility visibility = 7; // Filter by visibility
+  string content_type = 8; // Filter by MIME type prefix (e.g., "image/")
+  enum SortBy {
+    SORT_BY_UNSPECIFIED = 0;
+    CREATED_AT = 1;
+    UPDATED_AT = 2;
+    FILENAME = 3;
+    FILE_SIZE = 4;
+  }
+  SortBy sort_by = 9; // Sort field
+  bool sort_desc = 10; // Sort descending (default false)
 }
 
 // SearchMediaResponse returns search results.
 message SearchMediaResponse {
   repeated MediaMetadata results = 1; // Array of matching media metadata
-  int32 total = 2; // Total number of results in this page
-  int32 page = 3; // Current page number
-  bool has_more = 4; // Whether there are more results available
+  string next_cursor = 2; // Cursor for next page
+}
+
+// -----------------------------------------------------
+// Batch Operations
+// -----------------------------------------------------
+
+message BatchGetContentRequest {
+  repeated string media_ids = 1; // List of media IDs to retrieve
+}
+
+message BatchGetContentResponse {
+  message ContentResult {
+    string media_id = 1; // Media ID
+    oneof result {
+      GetContentResponse content = 2; // Content if successful
+      string error = 3; // Error message if failed
+    }
+  }
+  repeated ContentResult results = 1; // Results for each requested ID
+}
+
+message BatchDeleteContentRequest {
+  repeated string media_ids = 1; // List of media IDs to delete
+  bool hard_delete = 2; // Hard or soft delete
+}
+
+message BatchDeleteContentResponse {
+  message DeleteResult {
+    string media_id = 1; // Media ID
+    bool success = 2; // Whether deletion succeeded
+    string error = 3; // Error message if failed
+  }
+  repeated DeleteResult results = 1; // Results for each requested ID
+}
+
+// -----------------------------------------------------
+// Versioning Messages
+// -----------------------------------------------------
+
+message FileVersion {
+  int64 version = 1; // Version number
+  string media_id = 2; // Media ID for this version
+  google.protobuf.Timestamp created_at = 3; // When this version was created
+  string created_by = 4; // Who created this version
+  int64 size_bytes = 5; // Size of this version
+}
+
+message GetVersionsRequest {
+  string media_id = 1; // Media ID to get versions for
+  int32 limit = 2; // Max versions to return
+  int32 before_version = 3; // Get versions before this version
+}
+
+message GetVersionsResponse {
+  repeated FileVersion versions = 1; // List of versions
+  int64 latest_version = 2; // Latest version number
+}
+
+message RestoreVersionRequest {
+  string media_id = 1; // Media ID
+  int64 version = 2; // Version to restore
+}
+
+message RestoreVersionResponse {
+  MediaMetadata metadata = 1; // Metadata of restored file
+}
+
+// -----------------------------------------------------
+// Retention Messages
+// -----------------------------------------------------
+
+message RetentionPolicy {
+  string policy_id = 1; // Unique policy ID
+  string name = 2; // Policy name
+  int64 retention_days = 3; // Retention period in days (-1 for permanent)
+  enum Mode {
+    MODE_UNSPECIFIED = 0;
+    DELETE = 1; // Delete after retention period
+    ARCHIVE = 2; // Archive after retention period
+  }
+  Mode mode = 4;
+}
+
+message SetRetentionPolicyRequest {
+  string media_id = 1; // Media ID
+  string policy_id = 2; // Policy ID to apply
+}
+
+message SetRetentionPolicyResponse {
+  bool success = 1;
+}
+
+message GetRetentionPolicyRequest {
+  string media_id = 1; // Media ID
+}
+
+message GetRetentionPolicyResponse {
+  RetentionPolicy policy = 1; // Applied retention policy
+  google.protobuf.Timestamp expires_at = 2; // Calculated expiration time
+}
+
+message ListRetentionPoliciesRequest {}
+
+message ListRetentionPoliciesResponse {
+  repeated RetentionPolicy policies = 1; // Available policies
+}
+
+// -----------------------------------------------------
+// Analytics/Usage Messages
+// -----------------------------------------------------
+
+message UsageStats {
+  int64 total_files = 1; // Total number of files
+  int64 total_bytes = 2; // Total storage used
+  int64 public_files = 3; // Number of public files
+  int64 private_files = 4; // Number of private files
+}
+
+message GetUserUsageRequest {
+  string user_id = 1; // User ID to get usage for
+}
+
+message GetUserUsageResponse {
+  UsageStats usage = 1; // Usage statistics
+  google.protobuf.Timestamp period_start = 2; // Start of billing period
+  google.protobuf.Timestamp period_end = 3; // End of billing period
+}
+
+message GetStorageStatsRequest {}
+
+message GetStorageStatsResponse {
+  int64 total_bytes = 1; // Total storage across all users
+  int64 total_files = 2; // Total files
+  int64 total_users = 3; // Total users with files
 }
 
 // -----------------------------------------------------
@@ -307,6 +571,99 @@ service FilesService {
       operation_id: "createContent"
       summary: "Create MXC URI without content"
       description: "Creates a new MXC URI without uploading content. Use the returned server_name and media_id with UploadContent to upload the actual content later. Useful for resumable uploads or when you need the URI before content is ready."
+      tags: "Media"
+    };
+  }
+
+  // CreateMultipartUpload creates a new multipart upload.
+  rpc CreateMultipartUpload(CreateMultipartUploadRequest) returns (CreateMultipartUploadResponse) {
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "createMultipartUpload"
+      summary: "Create multipart upload"
+      description: "Creates a new multipart upload and returns an upload ID."
+      tags: "Media"
+    };
+  }
+
+  // UploadMultipartPart uploads a part of a multipart upload.
+  rpc UploadMultipartPart(UploadMultipartPartRequest) returns (UploadMultipartPartResponse) {
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "uploadMultipartPart"
+      summary: "Upload multipart part"
+      description: "Uploads a part of a multipart upload and returns the ETag."
+      tags: "Media"
+    };
+  }
+
+  // CompleteMultipartUpload completes a multipart upload.
+  rpc CompleteMultipartUpload(CompleteMultipartUploadRequest) returns (CompleteMultipartUploadResponse) {
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "completeMultipartUpload"
+      summary: "Complete multipart upload"
+      description: "Completes a multipart upload and returns the final media metadata."
+      tags: "Media"
+    };
+  }
+
+  // AbortMultipartUpload aborts a multipart upload.
+  rpc AbortMultipartUpload(AbortMultipartUploadRequest) returns (AbortMultipartUploadResponse) {
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "abortMultipartUpload"
+      summary: "Abort multipart upload"
+      description: "Aborts a multipart upload, discarding all uploaded parts."
+      tags: "Media"
+    };
+  }
+
+  // ListMultipartParts lists all uploaded parts of a multipart upload.
+  rpc ListMultipartParts(ListMultipartPartsRequest) returns (ListMultipartPartsResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "listMultipartParts"
+      summary: "List multipart parts"
+      description: "Lists all uploaded parts of a multipart upload."
+      tags: "Media"
+    };
+  }
+
+  // HeadContent retrieves metadata for content without downloading the content itself.
+  rpc HeadContent(HeadContentRequest) returns (HeadContentResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "headContent"
+      summary: "Get content metadata"
+      description: "Retrieves metadata for content without downloading the content itself."
+      tags: "Media"
+    };
+  }
+
+  // GetSignedUploadUrl gets a signed URL for direct upload to storage.
+  rpc GetSignedUploadUrl(GetSignedUploadUrlRequest) returns (GetSignedUploadUrlResponse) {
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "getSignedUploadUrl"
+      summary: "Get signed upload URL"
+      description: "Gets a signed URL for direct upload to storage."
+      tags: "Media"
+    };
+  }
+
+  // GetSignedDownloadUrl gets a signed URL for direct download from storage.
+  rpc GetSignedDownloadUrl(GetSignedDownloadUrlRequest) returns (GetSignedDownloadUrlResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "getSignedDownloadUrl"
+      summary: "Get signed download URL"
+      description: "Gets a signed URL for direct download from storage."
+      tags: "Media"
+    };
+  }
+
+  // DeleteContent deletes content from the repository.
+  rpc DeleteContent(DeleteContentRequest) returns (DeleteContentResponse) {
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "deleteContent"
+      summary: "Delete content"
+      description: "Deletes content from the repository. Supports both soft and hard delete."
       tags: "Media"
     };
   }
@@ -377,6 +734,118 @@ service FilesService {
       summary: "Search media files"
       description: "Searches for media files matching specified criteria with support for pagination, owner filtering, and date range filtering."
       tags: "Media"
+    };
+  }
+
+  // -----------------------------------------------------
+  // Batch Operations
+  // -----------------------------------------------------
+
+  // BatchGetContent retrieves multiple files in a single request.
+  rpc BatchGetContent(BatchGetContentRequest) returns (BatchGetContentResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "batchGetContent"
+      summary: "Batch get content"
+      description: "Retrieves multiple files in a single request."
+      tags: "Media"
+    };
+  }
+
+  // BatchDeleteContent deletes multiple files in a single request.
+  rpc BatchDeleteContent(BatchDeleteContentRequest) returns (BatchDeleteContentResponse) {
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "batchDeleteContent"
+      summary: "Batch delete content"
+      description: "Deletes multiple files in a single request."
+      tags: "Media"
+    };
+  }
+
+  // -----------------------------------------------------
+  // Versioning Operations
+  // -----------------------------------------------------
+
+  // GetVersions retrieves all versions of a file.
+  rpc GetVersions(GetVersionsRequest) returns (GetVersionsResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "getVersions"
+      summary: "Get file versions"
+      description: "Retrieves all versions of a file."
+      tags: "Media"
+    };
+  }
+
+  // RestoreVersion restores a specific version of a file.
+  rpc RestoreVersion(RestoreVersionRequest) returns (RestoreVersionResponse) {
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "restoreVersion"
+      summary: "Restore version"
+      description: "Restores a specific version of a file as the current version."
+      tags: "Media"
+    };
+  }
+
+  // -----------------------------------------------------
+  // Retention Operations
+  // -----------------------------------------------------
+
+  // SetRetentionPolicy sets retention policy for a file.
+  rpc SetRetentionPolicy(SetRetentionPolicyRequest) returns (SetRetentionPolicyResponse) {
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "setRetentionPolicy"
+      summary: "Set retention policy"
+      description: "Sets retention policy for a file."
+      tags: "Retention"
+    };
+  }
+
+  // GetRetentionPolicy gets retention policy for a file.
+  rpc GetRetentionPolicy(GetRetentionPolicyRequest) returns (GetRetentionPolicyResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "getRetentionPolicy"
+      summary: "Get retention policy"
+      description: "Gets retention policy for a file."
+      tags: "Retention"
+    };
+  }
+
+  // ListRetentionPolicies lists available retention policies.
+  rpc ListRetentionPolicies(ListRetentionPoliciesRequest) returns (ListRetentionPoliciesResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "listRetentionPolicies"
+      summary: "List retention policies"
+      description: "Lists available retention policies."
+      tags: "Retention"
+    };
+  }
+
+  // -----------------------------------------------------
+  // Analytics Operations
+  // -----------------------------------------------------
+
+  // GetUserUsage retrieves usage statistics for a user.
+  rpc GetUserUsage(GetUserUsageRequest) returns (GetUserUsageResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "getUserUsage"
+      summary: "Get user usage"
+      description: "Retrieves usage statistics for a user."
+      tags: "Analytics"
+    };
+  }
+
+  // GetStorageStats retrieves global storage statistics.
+  rpc GetStorageStats(GetStorageStatsRequest) returns (GetStorageStatsResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "getStorageStats"
+      summary: "Get storage stats"
+      description: "Retrieves global storage statistics."
+      tags: "Analytics"
     };
   }
 }
