@@ -688,6 +688,50 @@ final $typed_data.Uint8List notifyResponseDescriptor = $convert.base64Decode(
     'Cg5Ob3RpZnlSZXNwb25zZRIxCgdyZXN1bHRzGAUgAygLMhcuZGV2aWNlLnYxLk5vdGlmeVJlc3'
     'VsdFIHcmVzdWx0cw==');
 
+@$core.Deprecated('Use getTurnCredentialsRequestDescriptor instead')
+const GetTurnCredentialsRequest$json = {
+  '1': 'GetTurnCredentialsRequest',
+  '2': [
+    {'1': 'device_id', '3': 1, '4': 1, '5': 9, '10': 'deviceId'},
+  ],
+};
+
+/// Descriptor for `GetTurnCredentialsRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getTurnCredentialsRequestDescriptor = $convert.base64Decode(
+    'ChlHZXRUdXJuQ3JlZGVudGlhbHNSZXF1ZXN0EhsKCWRldmljZV9pZBgBIAEoCVIIZGV2aWNlSW'
+    'Q=');
+
+@$core.Deprecated('Use turnServerDescriptor instead')
+const TurnServer$json = {
+  '1': 'TurnServer',
+  '2': [
+    {'1': 'url', '3': 1, '4': 1, '5': 9, '10': 'url'},
+    {'1': 'username', '3': 2, '4': 1, '5': 9, '10': 'username'},
+    {'1': 'credential', '3': 3, '4': 1, '5': 9, '10': 'credential'},
+    {'1': 'expires_at', '3': 4, '4': 1, '5': 3, '10': 'expiresAt'},
+  ],
+};
+
+/// Descriptor for `TurnServer`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List turnServerDescriptor = $convert.base64Decode(
+    'CgpUdXJuU2VydmVyEhAKA3VybBgBIAEoCVIDdXJsEhoKCHVzZXJuYW1lGAIgASgJUgh1c2Vybm'
+    'FtZRIeCgpjcmVkZW50aWFsGAMgASgJUgpjcmVkZW50aWFsEh0KCmV4cGlyZXNfYXQYBCABKANS'
+    'CWV4cGlyZXNBdA==');
+
+@$core.Deprecated('Use getTurnCredentialsResponseDescriptor instead')
+const GetTurnCredentialsResponse$json = {
+  '1': 'GetTurnCredentialsResponse',
+  '2': [
+    {'1': 'servers', '3': 1, '4': 3, '5': 11, '6': '.device.v1.TurnServer', '10': 'servers'},
+    {'1': 'ttl_seconds', '3': 2, '4': 1, '5': 5, '10': 'ttlSeconds'},
+  ],
+};
+
+/// Descriptor for `GetTurnCredentialsResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getTurnCredentialsResponseDescriptor = $convert.base64Decode(
+    'ChpHZXRUdXJuQ3JlZGVudGlhbHNSZXNwb25zZRIvCgdzZXJ2ZXJzGAEgAygLMhUuZGV2aWNlLn'
+    'YxLlR1cm5TZXJ2ZXJSB3NlcnZlcnMSHwoLdHRsX3NlY29uZHMYAiABKAVSCnR0bFNlY29uZHM=');
+
 const $core.Map<$core.String, $core.dynamic> DeviceServiceBase$json = {
   '1': 'DeviceService',
   '2': [
@@ -732,6 +776,7 @@ const $core.Map<$core.String, $core.dynamic> DeviceServiceBase$json = {
     },
     {'1': 'RegisterKey', '2': '.device.v1.RegisterKeyRequest', '3': '.device.v1.RegisterKeyResponse', '4': {}},
     {'1': 'DeRegisterKey', '2': '.device.v1.DeRegisterKeyRequest', '3': '.device.v1.DeRegisterKeyResponse', '4': {}},
+    {'1': 'GetTurnCredentials', '2': '.device.v1.GetTurnCredentialsRequest', '3': '.device.v1.GetTurnCredentialsResponse', '4': {}},
     {'1': 'Notify', '2': '.device.v1.NotifyRequest', '3': '.device.v1.NotifyResponse', '4': {}},
     {'1': 'UpdatePresence', '2': '.device.v1.UpdatePresenceRequest', '3': '.device.v1.UpdatePresenceResponse', '4': {}},
   ],
@@ -775,6 +820,9 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> DeviceServ
   '.device.v1.RegisterKeyResponse': RegisterKeyResponse$json,
   '.device.v1.DeRegisterKeyRequest': DeRegisterKeyRequest$json,
   '.device.v1.DeRegisterKeyResponse': DeRegisterKeyResponse$json,
+  '.device.v1.GetTurnCredentialsRequest': GetTurnCredentialsRequest$json,
+  '.device.v1.GetTurnCredentialsResponse': GetTurnCredentialsResponse$json,
+  '.device.v1.TurnServer': TurnServer$json,
   '.device.v1.NotifyRequest': NotifyRequest$json,
   '.device.v1.NotifyMessage': NotifyMessage$json,
   '.device.v1.NotifyResponse': NotifyResponse$json,
@@ -853,17 +901,21 @@ final $typed_data.Uint8List deviceServiceDescriptor = $convert.base64Decode(
     'cyBhIGtleSBvciB0b2tlbiBmcm9tIHRoaXJkLXBhcnR5IHNlcnZpY2VzIChsaWtlIEZDTSkgYW'
     '5kIHJlbW92ZXMgaXQgZnJvbSBzdG9yYWdlLiBUaGlzIG1ldGhvZCBoYW5kbGVzIGJvdGggdGhl'
     'IGV4dGVybmFsIHNlcnZpY2UgY2xlYW51cCBhbmQgbG9jYWwgZGVsZXRpb24uKg1kZVJlZ2lzdG'
-    'VyS2V5EvYCCgZOb3RpZnkSGC5kZXZpY2UudjEuTm90aWZ5UmVxdWVzdBoZLmRldmljZS52MS5O'
-    'b3RpZnlSZXNwb25zZSK2ArpHsgIKFERldmljZSBOb3RpZmljYXRpb25zEiJOb3RpZnkgZGV2aW'
-    'NlIHVzaW5nIHJlZ2lzdGVyZWQga2V5GucBU2VuZHMgYSBub3RpZmljYXRpb24gdG8gYSBkZXZp'
-    'Y2UgdXNpbmcgb25lIG9mIGl0cyByZWdpc3RlcmVkIGtleXMgKEZDTSB0b2tlbiwgbm90aWZpY2'
-    'F0aW9uIGtleSwgZXRjLikuIFRoZSBzZXJ2aWNlIGF1dG9tYXRpY2FsbHkgc2VsZWN0cyBhbiBh'
-    'cHByb3ByaWF0ZSBhY3RpdmUga2V5IGJhc2VkIG9uIHRoZSBrZXlfdHlwZSwgb3IgdXNlcyBhIH'
-    'NwZWNpZmljIGtleSBpZiBrZXlfaWQgaXMgcHJvdmlkZWQuKgxub3RpZnlEZXZpY2USrwIKDlVw'
-    'ZGF0ZVByZXNlbmNlEiAuZGV2aWNlLnYxLlVwZGF0ZVByZXNlbmNlUmVxdWVzdBohLmRldmljZS'
-    '52MS5VcGRhdGVQcmVzZW5jZVJlc3BvbnNlItcBukfTAQoPRGV2aWNlIFByZXNlbmNlEhZVcGRh'
-    'dGUgZGV2aWNlIHByZXNlbmNlGpcBVXBkYXRlcyB0aGUgcHJlc2VuY2Ugc3RhdHVzIG9mIGEgZG'
-    'V2aWNlLiBVc2VkIHRvIGluZGljYXRlIG9ubGluZS9vZmZsaW5lL2F3YXkvYnVzeSBzdGF0dXMg'
-    'YW5kIHRyYWNrIGxhc3QgYWN0aXZpdHkgZm9yIHJlYWwtdGltZSBjb21tdW5pY2F0aW9uIGZlYX'
-    'R1cmVzLioOdXBkYXRlUHJlc2VuY2U=');
+    'VyS2V5EuQBChJHZXRUdXJuQ3JlZGVudGlhbHMSJC5kZXZpY2UudjEuR2V0VHVybkNyZWRlbnRp'
+    'YWxzUmVxdWVzdBolLmRldmljZS52MS5HZXRUdXJuQ3JlZGVudGlhbHNSZXNwb25zZSKAAbpHfQ'
+    'oFTWVkaWESG0dldCBUVVJOIHNlcnZlciBjcmVkZW50aWFscxpDUmV0dXJucyBzaG9ydC1saXZl'
+    'ZCBUVVJOIHNlcnZlciBjcmVkZW50aWFscyBmb3IgV2ViUlRDIG1lZGlhIHJlbGF5LioSZ2V0VH'
+    'VybkNyZWRlbnRpYWxzEvYCCgZOb3RpZnkSGC5kZXZpY2UudjEuTm90aWZ5UmVxdWVzdBoZLmRl'
+    'dmljZS52MS5Ob3RpZnlSZXNwb25zZSK2ArpHsgIKFERldmljZSBOb3RpZmljYXRpb25zEiJOb3'
+    'RpZnkgZGV2aWNlIHVzaW5nIHJlZ2lzdGVyZWQga2V5GucBU2VuZHMgYSBub3RpZmljYXRpb24g'
+    'dG8gYSBkZXZpY2UgdXNpbmcgb25lIG9mIGl0cyByZWdpc3RlcmVkIGtleXMgKEZDTSB0b2tlbi'
+    'wgbm90aWZpY2F0aW9uIGtleSwgZXRjLikuIFRoZSBzZXJ2aWNlIGF1dG9tYXRpY2FsbHkgc2Vs'
+    'ZWN0cyBhbiBhcHByb3ByaWF0ZSBhY3RpdmUga2V5IGJhc2VkIG9uIHRoZSBrZXlfdHlwZSwgb3'
+    'IgdXNlcyBhIHNwZWNpZmljIGtleSBpZiBrZXlfaWQgaXMgcHJvdmlkZWQuKgxub3RpZnlEZXZp'
+    'Y2USrwIKDlVwZGF0ZVByZXNlbmNlEiAuZGV2aWNlLnYxLlVwZGF0ZVByZXNlbmNlUmVxdWVzdB'
+    'ohLmRldmljZS52MS5VcGRhdGVQcmVzZW5jZVJlc3BvbnNlItcBukfTAQoPRGV2aWNlIFByZXNl'
+    'bmNlEhZVcGRhdGUgZGV2aWNlIHByZXNlbmNlGpcBVXBkYXRlcyB0aGUgcHJlc2VuY2Ugc3RhdH'
+    'VzIG9mIGEgZGV2aWNlLiBVc2VkIHRvIGluZGljYXRlIG9ubGluZS9vZmZsaW5lL2F3YXkvYnVz'
+    'eSBzdGF0dXMgYW5kIHRyYWNrIGxhc3QgYWN0aXZpdHkgZm9yIHJlYWwtdGltZSBjb21tdW5pY2'
+    'F0aW9uIGZlYXR1cmVzLioOdXBkYXRlUHJlc2VuY2U=');
 

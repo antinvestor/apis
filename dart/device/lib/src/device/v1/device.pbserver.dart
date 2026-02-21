@@ -35,6 +35,7 @@ abstract class DeviceServiceBase extends $pb.GeneratedService {
   $async.Future<$1.SearchKeyResponse> searchKey($pb.ServerContext ctx, $1.SearchKeyRequest request);
   $async.Future<$1.RegisterKeyResponse> registerKey($pb.ServerContext ctx, $1.RegisterKeyRequest request);
   $async.Future<$1.DeRegisterKeyResponse> deRegisterKey($pb.ServerContext ctx, $1.DeRegisterKeyRequest request);
+  $async.Future<$1.GetTurnCredentialsResponse> getTurnCredentials($pb.ServerContext ctx, $1.GetTurnCredentialsRequest request);
   $async.Future<$1.NotifyResponse> notify($pb.ServerContext ctx, $1.NotifyRequest request);
   $async.Future<$1.UpdatePresenceResponse> updatePresence($pb.ServerContext ctx, $1.UpdatePresenceRequest request);
 
@@ -54,6 +55,7 @@ abstract class DeviceServiceBase extends $pb.GeneratedService {
       case 'SearchKey': return $1.SearchKeyRequest();
       case 'RegisterKey': return $1.RegisterKeyRequest();
       case 'DeRegisterKey': return $1.DeRegisterKeyRequest();
+      case 'GetTurnCredentials': return $1.GetTurnCredentialsRequest();
       case 'Notify': return $1.NotifyRequest();
       case 'UpdatePresence': return $1.UpdatePresenceRequest();
       default: throw $core.ArgumentError('Unknown method: $methodName');
@@ -76,6 +78,7 @@ abstract class DeviceServiceBase extends $pb.GeneratedService {
       case 'SearchKey': return this.searchKey(ctx, request as $1.SearchKeyRequest);
       case 'RegisterKey': return this.registerKey(ctx, request as $1.RegisterKeyRequest);
       case 'DeRegisterKey': return this.deRegisterKey(ctx, request as $1.DeRegisterKeyRequest);
+      case 'GetTurnCredentials': return this.getTurnCredentials(ctx, request as $1.GetTurnCredentialsRequest);
       case 'Notify': return this.notify(ctx, request as $1.NotifyRequest);
       case 'UpdatePresence': return this.updatePresence(ctx, request as $1.UpdatePresenceRequest);
       default: throw $core.ArgumentError('Unknown method: $methodName');

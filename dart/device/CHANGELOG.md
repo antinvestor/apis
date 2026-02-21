@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.53.13] - 2026-2-21
+
+### Changed
+
+- Introduce get turn credentials apis
+
+
 ## [1.52.1] - 2025-1-2
 
 ### Changed

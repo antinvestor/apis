@@ -536,6 +536,33 @@ message NotifyResponse {
   repeated NotifyResult results = 5; // Per-notification send results when using bulk notifications
 }
 
+message GetTurnCredentialsRequest {
+  // Device making the request (for audit/rate-limiting)
+  string device_id = 1;
+}
+
+message TurnServer {
+  // TURN URI, e.g. "turn:turn.example.com:443?transport=tcp"
+  string url = 1;
+
+  // Temporary username (typically: unix_expiry_timestamp:device_id)
+  string username = 2;
+
+  // HMAC-SHA1(username, shared_secret) — base64-encoded
+  string credential = 3;
+
+  // Unix timestamp (seconds) when this credential expires
+  int64 expires_at = 4;
+}
+
+message GetTurnCredentialsResponse {
+  // One or more TURN servers with credentials
+  repeated TurnServer servers = 1;
+
+  // Suggested TTL in seconds — client should re-fetch before this
+  int32 ttl_seconds = 2;
+}
+
 // -----------------------------------------------------
 // Service Definitions
 // -----------------------------------------------------
@@ -699,6 +726,19 @@ service DeviceService {
       summary: "DeRegister key from third-party service"
       description: "DeRegisters a key or token from third-party services (like FCM) and removes it from storage. This method handles both the external service cleanup and local deletion."
       tags: "Key Registration"
+    };
+  }
+
+  // Returns short-lived TURN server credentials for WebRTC media relay.
+  // Credentials are generated per-request with a configurable TTL.
+  // The server should generate HMAC-based credentials using a shared
+  // secret with the TURN server (RFC 5766 long-term credentials).
+  rpc GetTurnCredentials(GetTurnCredentialsRequest) returns (GetTurnCredentialsResponse) {
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "getTurnCredentials"
+      summary: "Get TURN server credentials"
+      description: "Returns short-lived TURN server credentials for WebRTC media relay."
+      tags: "Media"
     };
   }
 

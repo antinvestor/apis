@@ -302,6 +302,43 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/device.v1.GetBySessionIdResponse'
+  /device.v1.DeviceService/GetTurnCredentials:
+    post:
+      tags:
+        - Media
+        - device.v1.DeviceService
+      summary: Get TURN server credentials
+      description: Returns short-lived TURN server credentials for WebRTC media relay.
+      operationId: getTurnCredentials
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/device.v1.GetTurnCredentialsRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/device.v1.GetTurnCredentialsResponse'
   /device.v1.DeviceService/Link:
     post:
       tags:
@@ -1046,6 +1083,31 @@ components:
       title: GetBySessionIdResponse
       additionalProperties: false
       description: GetBySessionIdResponse returns the device associated with the session.
+    device.v1.GetTurnCredentialsRequest:
+      type: object
+      properties:
+        deviceId:
+          type: string
+          title: device_id
+          description: Device making the request (for audit/rate-limiting)
+      title: GetTurnCredentialsRequest
+      additionalProperties: false
+    device.v1.GetTurnCredentialsResponse:
+      type: object
+      properties:
+        servers:
+          type: array
+          items:
+            $ref: '#/components/schemas/device.v1.TurnServer'
+          title: servers
+          description: One or more TURN servers with credentials
+        ttlSeconds:
+          type: integer
+          title: ttl_seconds
+          format: int32
+          description: Suggested TTL in seconds — client should re-fetch before this
+      title: GetTurnCredentialsResponse
+      additionalProperties: false
     device.v1.KeyObject:
       type: object
       properties:
@@ -1607,6 +1669,30 @@ components:
       title: SearchResponse
       additionalProperties: false
       description: SearchResponse returns devices matching the search criteria.
+    device.v1.TurnServer:
+      type: object
+      properties:
+        url:
+          type: string
+          title: url
+          description: TURN URI, e.g. "turn:turn.example.com:443?transport=tcp"
+        username:
+          type: string
+          title: username
+          description: 'Temporary username (typically: unix_expiry_timestamp:device_id)'
+        credential:
+          type: string
+          title: credential
+          description: HMAC-SHA1(username, shared_secret) — base64-encoded
+        expiresAt:
+          type:
+            - integer
+            - string
+          title: expires_at
+          format: int64
+          description: Unix timestamp (seconds) when this credential expires
+      title: TurnServer
+      additionalProperties: false
     device.v1.UpdatePresenceRequest:
       type: object
       properties:

@@ -3,15 +3,15 @@ module github.com/antinvestor/apis/go/chat
 go 1.25.0
 
 require (
-	buf.build/gen/go/antinvestor/chat/connectrpc/go v1.19.1-20260205181813-d590f909d3f7.2
-	buf.build/gen/go/antinvestor/chat/protocolbuffers/go v1.36.11-20260205181813-d590f909d3f7.1
+	buf.build/gen/go/antinvestor/chat/connectrpc/go v1.19.1-20260219061800-1773ee53215d.2
+	buf.build/gen/go/antinvestor/chat/protocolbuffers/go v1.36.11-20260219061800-1773ee53215d.1
 	connectrpc.com/connect v1.19.1
 	github.com/antinvestor/apis/go/common v1.53.11
 	github.com/gojuno/minimock/v3 v3.4.7
 )
 
 require (
-	buf.build/gen/go/antinvestor/common/protocolbuffers/go v1.36.11-20260102104630-5c57561a771f.1 // indirect
+	buf.build/gen/go/antinvestor/common/protocolbuffers/go v1.36.11-20260219054105-fe125014d75c.1 // indirect
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.11-20260209202127-80ab13bee0bf.1 // indirect
 	buf.build/gen/go/gnostic/gnostic/protocolbuffers/go v1.36.11-20230414000709-087bc8072ce4.1 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect

@@ -3,9 +3,9 @@ module github.com/antinvestor/apis/go/billing
 go 1.25.0
 
 require (
-	buf.build/gen/go/antinvestor/billing/connectrpc/go v1.19.1-20260219024106-9088414762cf.2
-	buf.build/gen/go/antinvestor/billing/protocolbuffers/go v1.36.11-20260219024106-9088414762cf.1
-	buf.build/gen/go/antinvestor/common/protocolbuffers/go v1.36.11-20260102104630-5c57561a771f.1
+	buf.build/gen/go/antinvestor/billing/connectrpc/go v1.19.1-20260219062210-a6718d69ea9b.2
+	buf.build/gen/go/antinvestor/billing/protocolbuffers/go v1.36.11-20260219062210-a6718d69ea9b.1
+	buf.build/gen/go/antinvestor/common/protocolbuffers/go v1.36.11-20260219054105-fe125014d75c.1
 	connectrpc.com/connect v1.19.1
 	github.com/antinvestor/apis/go/common v1.53.11
 	github.com/gojuno/minimock/v3 v3.4.7
@@ -34,7 +34,7 @@ require (
 	golang.org/x/sync v0.19.0 // indirect
 	golang.org/x/sys v0.41.0 // indirect
 	golang.org/x/text v0.34.0 // indirect
-	google.golang.org/genproto v0.0.0-20260203192932-546029d2fa20 // indirect
+	google.golang.org/genproto v0.0.0-20260217215200-42d3e9bedb6d // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20260217215200-42d3e9bedb6d // indirect
 	google.golang.org/grpc v1.79.1 // indirect
 	google.golang.org/protobuf v1.36.11 // indirect

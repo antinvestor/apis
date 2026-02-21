@@ -276,6 +276,27 @@ extension type DeviceServiceClient (connect.Transport _transport) {
     );
   }
 
+  /// Returns short-lived TURN server credentials for WebRTC media relay.
+  /// Credentials are generated per-request with a configurable TTL.
+  /// The server should generate HMAC-based credentials using a shared
+  /// secret with the TURN server (RFC 5766 long-term credentials).
+  Future<devicev1device.GetTurnCredentialsResponse> getTurnCredentials(
+    devicev1device.GetTurnCredentialsRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.DeviceService.getTurnCredentials,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
   /// Notify sends a notification to a device using one of its registered keys.
   /// The service selects an appropriate key based on key_type (e.g., FCM_TOKEN for push notifications).
   /// If key_id is provided, that specific key will be used; otherwise the service selects the best available key.

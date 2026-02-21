@@ -12,6 +12,7 @@
 import 'dart:async' as $async;
 import 'dart:core' as $core;
 
+import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $0;
@@ -3187,6 +3188,213 @@ class NotifyResponse extends $pb.GeneratedMessage {
   $core.List<NotifyResult> get results => $_getList(0);
 }
 
+class GetTurnCredentialsRequest extends $pb.GeneratedMessage {
+  factory GetTurnCredentialsRequest({
+    $core.String? deviceId,
+  }) {
+    final $result = create();
+    if (deviceId != null) {
+      $result.deviceId = deviceId;
+    }
+    return $result;
+  }
+  GetTurnCredentialsRequest._() : super();
+  factory GetTurnCredentialsRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetTurnCredentialsRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetTurnCredentialsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'device.v1'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'deviceId')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetTurnCredentialsRequest clone() => GetTurnCredentialsRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetTurnCredentialsRequest copyWith(void Function(GetTurnCredentialsRequest) updates) => super.copyWith((message) => updates(message as GetTurnCredentialsRequest)) as GetTurnCredentialsRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetTurnCredentialsRequest create() => GetTurnCredentialsRequest._();
+  GetTurnCredentialsRequest createEmptyInstance() => create();
+  static $pb.PbList<GetTurnCredentialsRequest> createRepeated() => $pb.PbList<GetTurnCredentialsRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetTurnCredentialsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetTurnCredentialsRequest>(create);
+  static GetTurnCredentialsRequest? _defaultInstance;
+
+  /// Device making the request (for audit/rate-limiting)
+  @$pb.TagNumber(1)
+  $core.String get deviceId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set deviceId($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasDeviceId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearDeviceId() => clearField(1);
+}
+
+class TurnServer extends $pb.GeneratedMessage {
+  factory TurnServer({
+    $core.String? url,
+    $core.String? username,
+    $core.String? credential,
+    $fixnum.Int64? expiresAt,
+  }) {
+    final $result = create();
+    if (url != null) {
+      $result.url = url;
+    }
+    if (username != null) {
+      $result.username = username;
+    }
+    if (credential != null) {
+      $result.credential = credential;
+    }
+    if (expiresAt != null) {
+      $result.expiresAt = expiresAt;
+    }
+    return $result;
+  }
+  TurnServer._() : super();
+  factory TurnServer.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory TurnServer.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TurnServer', package: const $pb.PackageName(_omitMessageNames ? '' : 'device.v1'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'url')
+    ..aOS(2, _omitFieldNames ? '' : 'username')
+    ..aOS(3, _omitFieldNames ? '' : 'credential')
+    ..aInt64(4, _omitFieldNames ? '' : 'expiresAt')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  TurnServer clone() => TurnServer()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  TurnServer copyWith(void Function(TurnServer) updates) => super.copyWith((message) => updates(message as TurnServer)) as TurnServer;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static TurnServer create() => TurnServer._();
+  TurnServer createEmptyInstance() => create();
+  static $pb.PbList<TurnServer> createRepeated() => $pb.PbList<TurnServer>();
+  @$core.pragma('dart2js:noInline')
+  static TurnServer getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TurnServer>(create);
+  static TurnServer? _defaultInstance;
+
+  /// TURN URI, e.g. "turn:turn.example.com:443?transport=tcp"
+  @$pb.TagNumber(1)
+  $core.String get url => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set url($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasUrl() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearUrl() => clearField(1);
+
+  /// Temporary username (typically: unix_expiry_timestamp:device_id)
+  @$pb.TagNumber(2)
+  $core.String get username => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set username($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasUsername() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearUsername() => clearField(2);
+
+  /// HMAC-SHA1(username, shared_secret) — base64-encoded
+  @$pb.TagNumber(3)
+  $core.String get credential => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set credential($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasCredential() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearCredential() => clearField(3);
+
+  /// Unix timestamp (seconds) when this credential expires
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get expiresAt => $_getI64(3);
+  @$pb.TagNumber(4)
+  set expiresAt($fixnum.Int64 v) { $_setInt64(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasExpiresAt() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearExpiresAt() => clearField(4);
+}
+
+class GetTurnCredentialsResponse extends $pb.GeneratedMessage {
+  factory GetTurnCredentialsResponse({
+    $core.Iterable<TurnServer>? servers,
+    $core.int? ttlSeconds,
+  }) {
+    final $result = create();
+    if (servers != null) {
+      $result.servers.addAll(servers);
+    }
+    if (ttlSeconds != null) {
+      $result.ttlSeconds = ttlSeconds;
+    }
+    return $result;
+  }
+  GetTurnCredentialsResponse._() : super();
+  factory GetTurnCredentialsResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetTurnCredentialsResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetTurnCredentialsResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'device.v1'), createEmptyInstance: create)
+    ..pc<TurnServer>(1, _omitFieldNames ? '' : 'servers', $pb.PbFieldType.PM, subBuilder: TurnServer.create)
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'ttlSeconds', $pb.PbFieldType.O3)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetTurnCredentialsResponse clone() => GetTurnCredentialsResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetTurnCredentialsResponse copyWith(void Function(GetTurnCredentialsResponse) updates) => super.copyWith((message) => updates(message as GetTurnCredentialsResponse)) as GetTurnCredentialsResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetTurnCredentialsResponse create() => GetTurnCredentialsResponse._();
+  GetTurnCredentialsResponse createEmptyInstance() => create();
+  static $pb.PbList<GetTurnCredentialsResponse> createRepeated() => $pb.PbList<GetTurnCredentialsResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetTurnCredentialsResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetTurnCredentialsResponse>(create);
+  static GetTurnCredentialsResponse? _defaultInstance;
+
+  /// One or more TURN servers with credentials
+  @$pb.TagNumber(1)
+  $core.List<TurnServer> get servers => $_getList(0);
+
+  /// Suggested TTL in seconds — client should re-fetch before this
+  @$pb.TagNumber(2)
+  $core.int get ttlSeconds => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set ttlSeconds($core.int v) { $_setSignedInt32(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasTtlSeconds() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTtlSeconds() => clearField(2);
+}
+
 class DeviceServiceApi {
   $pb.RpcClient _client;
   DeviceServiceApi(this._client);
@@ -3232,6 +3440,9 @@ class DeviceServiceApi {
   ;
   $async.Future<DeRegisterKeyResponse> deRegisterKey($pb.ClientContext? ctx, DeRegisterKeyRequest request) =>
     _client.invoke<DeRegisterKeyResponse>(ctx, 'DeviceService', 'DeRegisterKey', request, DeRegisterKeyResponse())
+  ;
+  $async.Future<GetTurnCredentialsResponse> getTurnCredentials($pb.ClientContext? ctx, GetTurnCredentialsRequest request) =>
+    _client.invoke<GetTurnCredentialsResponse>(ctx, 'DeviceService', 'GetTurnCredentials', request, GetTurnCredentialsResponse())
   ;
   $async.Future<NotifyResponse> notify($pb.ClientContext? ctx, NotifyRequest request) =>
     _client.invoke<NotifyResponse>(ctx, 'DeviceService', 'Notify', request, NotifyResponse())
