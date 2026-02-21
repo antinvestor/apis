@@ -55,6 +55,13 @@ type DeviceServiceClientMock struct {
 	beforeGetBySessionIdCounter uint64
 	GetBySessionIdMock          mDeviceServiceClientMockGetBySessionId
 
+	funcGetTurnCredentials          func(ctx context.Context, pp1 *connect.Request[v1.GetTurnCredentialsRequest]) (pp2 *connect.Response[v1.GetTurnCredentialsResponse], err error)
+	funcGetTurnCredentialsOrigin    string
+	inspectFuncGetTurnCredentials   func(ctx context.Context, pp1 *connect.Request[v1.GetTurnCredentialsRequest])
+	afterGetTurnCredentialsCounter  uint64
+	beforeGetTurnCredentialsCounter uint64
+	GetTurnCredentialsMock          mDeviceServiceClientMockGetTurnCredentials
+
 	funcLink          func(ctx context.Context, pp1 *connect.Request[v1.LinkRequest]) (pp2 *connect.Response[v1.LinkResponse], err error)
 	funcLinkOrigin    string
 	inspectFuncLink   func(ctx context.Context, pp1 *connect.Request[v1.LinkRequest])
@@ -155,6 +162,9 @@ func NewDeviceServiceClientMock(t minimock.Tester) *DeviceServiceClientMock {
 
 	m.GetBySessionIdMock = mDeviceServiceClientMockGetBySessionId{mock: m}
 	m.GetBySessionIdMock.callArgs = []*DeviceServiceClientMockGetBySessionIdParams{}
+
+	m.GetTurnCredentialsMock = mDeviceServiceClientMockGetTurnCredentials{mock: m}
+	m.GetTurnCredentialsMock.callArgs = []*DeviceServiceClientMockGetTurnCredentialsParams{}
 
 	m.LinkMock = mDeviceServiceClientMockLink{mock: m}
 	m.LinkMock.callArgs = []*DeviceServiceClientMockLinkParams{}
@@ -1906,6 +1916,349 @@ func (m *DeviceServiceClientMock) MinimockGetBySessionIdInspect() {
 	if !m.GetBySessionIdMock.invocationsDone() && afterGetBySessionIdCounter > 0 {
 		m.t.Errorf("Expected %d calls to DeviceServiceClientMock.GetBySessionId at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.GetBySessionIdMock.expectedInvocations), m.GetBySessionIdMock.expectedInvocationsOrigin, afterGetBySessionIdCounter)
+	}
+}
+
+type mDeviceServiceClientMockGetTurnCredentials struct {
+	optional           bool
+	mock               *DeviceServiceClientMock
+	defaultExpectation *DeviceServiceClientMockGetTurnCredentialsExpectation
+	expectations       []*DeviceServiceClientMockGetTurnCredentialsExpectation
+
+	callArgs []*DeviceServiceClientMockGetTurnCredentialsParams
+	mutex    sync.RWMutex
+
+	expectedInvocations       uint64
+	expectedInvocationsOrigin string
+}
+
+// DeviceServiceClientMockGetTurnCredentialsExpectation specifies expectation struct of the DeviceServiceClient.GetTurnCredentials
+type DeviceServiceClientMockGetTurnCredentialsExpectation struct {
+	mock               *DeviceServiceClientMock
+	params             *DeviceServiceClientMockGetTurnCredentialsParams
+	paramPtrs          *DeviceServiceClientMockGetTurnCredentialsParamPtrs
+	expectationOrigins DeviceServiceClientMockGetTurnCredentialsExpectationOrigins
+	results            *DeviceServiceClientMockGetTurnCredentialsResults
+	returnOrigin       string
+	Counter            uint64
+}
+
+// DeviceServiceClientMockGetTurnCredentialsParams contains parameters of the DeviceServiceClient.GetTurnCredentials
+type DeviceServiceClientMockGetTurnCredentialsParams struct {
+	ctx context.Context
+	pp1 *connect.Request[v1.GetTurnCredentialsRequest]
+}
+
+// DeviceServiceClientMockGetTurnCredentialsParamPtrs contains pointers to parameters of the DeviceServiceClient.GetTurnCredentials
+type DeviceServiceClientMockGetTurnCredentialsParamPtrs struct {
+	ctx *context.Context
+	pp1 **connect.Request[v1.GetTurnCredentialsRequest]
+}
+
+// DeviceServiceClientMockGetTurnCredentialsResults contains results of the DeviceServiceClient.GetTurnCredentials
+type DeviceServiceClientMockGetTurnCredentialsResults struct {
+	pp2 *connect.Response[v1.GetTurnCredentialsResponse]
+	err error
+}
+
+// DeviceServiceClientMockGetTurnCredentialsOrigins contains origins of expectations of the DeviceServiceClient.GetTurnCredentials
+type DeviceServiceClientMockGetTurnCredentialsExpectationOrigins struct {
+	origin    string
+	originCtx string
+	originPp1 string
+}
+
+// Marks this method to be optional. The default behavior of any method with Return() is '1 or more', meaning
+// the test will fail minimock's automatic final call check if the mocked method was not called at least once.
+// Optional() makes method check to work in '0 or more' mode.
+// It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
+// catch the problems when the expected method call is totally skipped during test run.
+func (mmGetTurnCredentials *mDeviceServiceClientMockGetTurnCredentials) Optional() *mDeviceServiceClientMockGetTurnCredentials {
+	mmGetTurnCredentials.optional = true
+	return mmGetTurnCredentials
+}
+
+// Expect sets up expected params for DeviceServiceClient.GetTurnCredentials
+func (mmGetTurnCredentials *mDeviceServiceClientMockGetTurnCredentials) Expect(ctx context.Context, pp1 *connect.Request[v1.GetTurnCredentialsRequest]) *mDeviceServiceClientMockGetTurnCredentials {
+	if mmGetTurnCredentials.mock.funcGetTurnCredentials != nil {
+		mmGetTurnCredentials.mock.t.Fatalf("DeviceServiceClientMock.GetTurnCredentials mock is already set by Set")
+	}
+
+	if mmGetTurnCredentials.defaultExpectation == nil {
+		mmGetTurnCredentials.defaultExpectation = &DeviceServiceClientMockGetTurnCredentialsExpectation{}
+	}
+
+	if mmGetTurnCredentials.defaultExpectation.paramPtrs != nil {
+		mmGetTurnCredentials.mock.t.Fatalf("DeviceServiceClientMock.GetTurnCredentials mock is already set by ExpectParams functions")
+	}
+
+	mmGetTurnCredentials.defaultExpectation.params = &DeviceServiceClientMockGetTurnCredentialsParams{ctx, pp1}
+	mmGetTurnCredentials.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
+	for _, e := range mmGetTurnCredentials.expectations {
+		if minimock.Equal(e.params, mmGetTurnCredentials.defaultExpectation.params) {
+			mmGetTurnCredentials.mock.t.Fatalf("Expectation set by When has same params: %#v", *mmGetTurnCredentials.defaultExpectation.params)
+		}
+	}
+
+	return mmGetTurnCredentials
+}
+
+// ExpectCtxParam1 sets up expected param ctx for DeviceServiceClient.GetTurnCredentials
+func (mmGetTurnCredentials *mDeviceServiceClientMockGetTurnCredentials) ExpectCtxParam1(ctx context.Context) *mDeviceServiceClientMockGetTurnCredentials {
+	if mmGetTurnCredentials.mock.funcGetTurnCredentials != nil {
+		mmGetTurnCredentials.mock.t.Fatalf("DeviceServiceClientMock.GetTurnCredentials mock is already set by Set")
+	}
+
+	if mmGetTurnCredentials.defaultExpectation == nil {
+		mmGetTurnCredentials.defaultExpectation = &DeviceServiceClientMockGetTurnCredentialsExpectation{}
+	}
+
+	if mmGetTurnCredentials.defaultExpectation.params != nil {
+		mmGetTurnCredentials.mock.t.Fatalf("DeviceServiceClientMock.GetTurnCredentials mock is already set by Expect")
+	}
+
+	if mmGetTurnCredentials.defaultExpectation.paramPtrs == nil {
+		mmGetTurnCredentials.defaultExpectation.paramPtrs = &DeviceServiceClientMockGetTurnCredentialsParamPtrs{}
+	}
+	mmGetTurnCredentials.defaultExpectation.paramPtrs.ctx = &ctx
+	mmGetTurnCredentials.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
+
+	return mmGetTurnCredentials
+}
+
+// ExpectPp1Param2 sets up expected param pp1 for DeviceServiceClient.GetTurnCredentials
+func (mmGetTurnCredentials *mDeviceServiceClientMockGetTurnCredentials) ExpectPp1Param2(pp1 *connect.Request[v1.GetTurnCredentialsRequest]) *mDeviceServiceClientMockGetTurnCredentials {
+	if mmGetTurnCredentials.mock.funcGetTurnCredentials != nil {
+		mmGetTurnCredentials.mock.t.Fatalf("DeviceServiceClientMock.GetTurnCredentials mock is already set by Set")
+	}
+
+	if mmGetTurnCredentials.defaultExpectation == nil {
+		mmGetTurnCredentials.defaultExpectation = &DeviceServiceClientMockGetTurnCredentialsExpectation{}
+	}
+
+	if mmGetTurnCredentials.defaultExpectation.params != nil {
+		mmGetTurnCredentials.mock.t.Fatalf("DeviceServiceClientMock.GetTurnCredentials mock is already set by Expect")
+	}
+
+	if mmGetTurnCredentials.defaultExpectation.paramPtrs == nil {
+		mmGetTurnCredentials.defaultExpectation.paramPtrs = &DeviceServiceClientMockGetTurnCredentialsParamPtrs{}
+	}
+	mmGetTurnCredentials.defaultExpectation.paramPtrs.pp1 = &pp1
+	mmGetTurnCredentials.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
+
+	return mmGetTurnCredentials
+}
+
+// Inspect accepts an inspector function that has same arguments as the DeviceServiceClient.GetTurnCredentials
+func (mmGetTurnCredentials *mDeviceServiceClientMockGetTurnCredentials) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.GetTurnCredentialsRequest])) *mDeviceServiceClientMockGetTurnCredentials {
+	if mmGetTurnCredentials.mock.inspectFuncGetTurnCredentials != nil {
+		mmGetTurnCredentials.mock.t.Fatalf("Inspect function is already set for DeviceServiceClientMock.GetTurnCredentials")
+	}
+
+	mmGetTurnCredentials.mock.inspectFuncGetTurnCredentials = f
+
+	return mmGetTurnCredentials
+}
+
+// Return sets up results that will be returned by DeviceServiceClient.GetTurnCredentials
+func (mmGetTurnCredentials *mDeviceServiceClientMockGetTurnCredentials) Return(pp2 *connect.Response[v1.GetTurnCredentialsResponse], err error) *DeviceServiceClientMock {
+	if mmGetTurnCredentials.mock.funcGetTurnCredentials != nil {
+		mmGetTurnCredentials.mock.t.Fatalf("DeviceServiceClientMock.GetTurnCredentials mock is already set by Set")
+	}
+
+	if mmGetTurnCredentials.defaultExpectation == nil {
+		mmGetTurnCredentials.defaultExpectation = &DeviceServiceClientMockGetTurnCredentialsExpectation{mock: mmGetTurnCredentials.mock}
+	}
+	mmGetTurnCredentials.defaultExpectation.results = &DeviceServiceClientMockGetTurnCredentialsResults{pp2, err}
+	mmGetTurnCredentials.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
+	return mmGetTurnCredentials.mock
+}
+
+// Set uses given function f to mock the DeviceServiceClient.GetTurnCredentials method
+func (mmGetTurnCredentials *mDeviceServiceClientMockGetTurnCredentials) Set(f func(ctx context.Context, pp1 *connect.Request[v1.GetTurnCredentialsRequest]) (pp2 *connect.Response[v1.GetTurnCredentialsResponse], err error)) *DeviceServiceClientMock {
+	if mmGetTurnCredentials.defaultExpectation != nil {
+		mmGetTurnCredentials.mock.t.Fatalf("Default expectation is already set for the DeviceServiceClient.GetTurnCredentials method")
+	}
+
+	if len(mmGetTurnCredentials.expectations) > 0 {
+		mmGetTurnCredentials.mock.t.Fatalf("Some expectations are already set for the DeviceServiceClient.GetTurnCredentials method")
+	}
+
+	mmGetTurnCredentials.mock.funcGetTurnCredentials = f
+	mmGetTurnCredentials.mock.funcGetTurnCredentialsOrigin = minimock.CallerInfo(1)
+	return mmGetTurnCredentials.mock
+}
+
+// When sets expectation for the DeviceServiceClient.GetTurnCredentials which will trigger the result defined by the following
+// Then helper
+func (mmGetTurnCredentials *mDeviceServiceClientMockGetTurnCredentials) When(ctx context.Context, pp1 *connect.Request[v1.GetTurnCredentialsRequest]) *DeviceServiceClientMockGetTurnCredentialsExpectation {
+	if mmGetTurnCredentials.mock.funcGetTurnCredentials != nil {
+		mmGetTurnCredentials.mock.t.Fatalf("DeviceServiceClientMock.GetTurnCredentials mock is already set by Set")
+	}
+
+	expectation := &DeviceServiceClientMockGetTurnCredentialsExpectation{
+		mock:               mmGetTurnCredentials.mock,
+		params:             &DeviceServiceClientMockGetTurnCredentialsParams{ctx, pp1},
+		expectationOrigins: DeviceServiceClientMockGetTurnCredentialsExpectationOrigins{origin: minimock.CallerInfo(1)},
+	}
+	mmGetTurnCredentials.expectations = append(mmGetTurnCredentials.expectations, expectation)
+	return expectation
+}
+
+// Then sets up DeviceServiceClient.GetTurnCredentials return parameters for the expectation previously defined by the When method
+func (e *DeviceServiceClientMockGetTurnCredentialsExpectation) Then(pp2 *connect.Response[v1.GetTurnCredentialsResponse], err error) *DeviceServiceClientMock {
+	e.results = &DeviceServiceClientMockGetTurnCredentialsResults{pp2, err}
+	return e.mock
+}
+
+// Times sets number of times DeviceServiceClient.GetTurnCredentials should be invoked
+func (mmGetTurnCredentials *mDeviceServiceClientMockGetTurnCredentials) Times(n uint64) *mDeviceServiceClientMockGetTurnCredentials {
+	if n == 0 {
+		mmGetTurnCredentials.mock.t.Fatalf("Times of DeviceServiceClientMock.GetTurnCredentials mock can not be zero")
+	}
+	mm_atomic.StoreUint64(&mmGetTurnCredentials.expectedInvocations, n)
+	mmGetTurnCredentials.expectedInvocationsOrigin = minimock.CallerInfo(1)
+	return mmGetTurnCredentials
+}
+
+func (mmGetTurnCredentials *mDeviceServiceClientMockGetTurnCredentials) invocationsDone() bool {
+	if len(mmGetTurnCredentials.expectations) == 0 && mmGetTurnCredentials.defaultExpectation == nil && mmGetTurnCredentials.mock.funcGetTurnCredentials == nil {
+		return true
+	}
+
+	totalInvocations := mm_atomic.LoadUint64(&mmGetTurnCredentials.mock.afterGetTurnCredentialsCounter)
+	expectedInvocations := mm_atomic.LoadUint64(&mmGetTurnCredentials.expectedInvocations)
+
+	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
+}
+
+// GetTurnCredentials implements mm_devicev1connect.DeviceServiceClient
+func (mmGetTurnCredentials *DeviceServiceClientMock) GetTurnCredentials(ctx context.Context, pp1 *connect.Request[v1.GetTurnCredentialsRequest]) (pp2 *connect.Response[v1.GetTurnCredentialsResponse], err error) {
+	mm_atomic.AddUint64(&mmGetTurnCredentials.beforeGetTurnCredentialsCounter, 1)
+	defer mm_atomic.AddUint64(&mmGetTurnCredentials.afterGetTurnCredentialsCounter, 1)
+
+	mmGetTurnCredentials.t.Helper()
+
+	if mmGetTurnCredentials.inspectFuncGetTurnCredentials != nil {
+		mmGetTurnCredentials.inspectFuncGetTurnCredentials(ctx, pp1)
+	}
+
+	mm_params := DeviceServiceClientMockGetTurnCredentialsParams{ctx, pp1}
+
+	// Record call args
+	mmGetTurnCredentials.GetTurnCredentialsMock.mutex.Lock()
+	mmGetTurnCredentials.GetTurnCredentialsMock.callArgs = append(mmGetTurnCredentials.GetTurnCredentialsMock.callArgs, &mm_params)
+	mmGetTurnCredentials.GetTurnCredentialsMock.mutex.Unlock()
+
+	for _, e := range mmGetTurnCredentials.GetTurnCredentialsMock.expectations {
+		if minimock.Equal(*e.params, mm_params) {
+			mm_atomic.AddUint64(&e.Counter, 1)
+			return e.results.pp2, e.results.err
+		}
+	}
+
+	if mmGetTurnCredentials.GetTurnCredentialsMock.defaultExpectation != nil {
+		mm_atomic.AddUint64(&mmGetTurnCredentials.GetTurnCredentialsMock.defaultExpectation.Counter, 1)
+		mm_want := mmGetTurnCredentials.GetTurnCredentialsMock.defaultExpectation.params
+		mm_want_ptrs := mmGetTurnCredentials.GetTurnCredentialsMock.defaultExpectation.paramPtrs
+
+		mm_got := DeviceServiceClientMockGetTurnCredentialsParams{ctx, pp1}
+
+		if mm_want_ptrs != nil {
+
+			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
+				mmGetTurnCredentials.t.Errorf("DeviceServiceClientMock.GetTurnCredentials got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+					mmGetTurnCredentials.GetTurnCredentialsMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
+			}
+
+			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
+				mmGetTurnCredentials.t.Errorf("DeviceServiceClientMock.GetTurnCredentials got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+					mmGetTurnCredentials.GetTurnCredentialsMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
+			}
+
+		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
+			mmGetTurnCredentials.t.Errorf("DeviceServiceClientMock.GetTurnCredentials got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmGetTurnCredentials.GetTurnCredentialsMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
+		}
+
+		mm_results := mmGetTurnCredentials.GetTurnCredentialsMock.defaultExpectation.results
+		if mm_results == nil {
+			mmGetTurnCredentials.t.Fatal("No results are set for the DeviceServiceClientMock.GetTurnCredentials")
+		}
+		return (*mm_results).pp2, (*mm_results).err
+	}
+	if mmGetTurnCredentials.funcGetTurnCredentials != nil {
+		return mmGetTurnCredentials.funcGetTurnCredentials(ctx, pp1)
+	}
+	mmGetTurnCredentials.t.Fatalf("Unexpected call to DeviceServiceClientMock.GetTurnCredentials. %v %v", ctx, pp1)
+	return
+}
+
+// GetTurnCredentialsAfterCounter returns a count of finished DeviceServiceClientMock.GetTurnCredentials invocations
+func (mmGetTurnCredentials *DeviceServiceClientMock) GetTurnCredentialsAfterCounter() uint64 {
+	return mm_atomic.LoadUint64(&mmGetTurnCredentials.afterGetTurnCredentialsCounter)
+}
+
+// GetTurnCredentialsBeforeCounter returns a count of DeviceServiceClientMock.GetTurnCredentials invocations
+func (mmGetTurnCredentials *DeviceServiceClientMock) GetTurnCredentialsBeforeCounter() uint64 {
+	return mm_atomic.LoadUint64(&mmGetTurnCredentials.beforeGetTurnCredentialsCounter)
+}
+
+// Calls returns a list of arguments used in each call to DeviceServiceClientMock.GetTurnCredentials.
+// The list is in the same order as the calls were made (i.e. recent calls have a higher index)
+func (mmGetTurnCredentials *mDeviceServiceClientMockGetTurnCredentials) Calls() []*DeviceServiceClientMockGetTurnCredentialsParams {
+	mmGetTurnCredentials.mutex.RLock()
+
+	argCopy := make([]*DeviceServiceClientMockGetTurnCredentialsParams, len(mmGetTurnCredentials.callArgs))
+	copy(argCopy, mmGetTurnCredentials.callArgs)
+
+	mmGetTurnCredentials.mutex.RUnlock()
+
+	return argCopy
+}
+
+// MinimockGetTurnCredentialsDone returns true if the count of the GetTurnCredentials invocations corresponds
+// the number of defined expectations
+func (m *DeviceServiceClientMock) MinimockGetTurnCredentialsDone() bool {
+	if m.GetTurnCredentialsMock.optional {
+		// Optional methods provide '0 or more' call count restriction.
+		return true
+	}
+
+	for _, e := range m.GetTurnCredentialsMock.expectations {
+		if mm_atomic.LoadUint64(&e.Counter) < 1 {
+			return false
+		}
+	}
+
+	return m.GetTurnCredentialsMock.invocationsDone()
+}
+
+// MinimockGetTurnCredentialsInspect logs each unmet expectation
+func (m *DeviceServiceClientMock) MinimockGetTurnCredentialsInspect() {
+	for _, e := range m.GetTurnCredentialsMock.expectations {
+		if mm_atomic.LoadUint64(&e.Counter) < 1 {
+			m.t.Errorf("Expected call to DeviceServiceClientMock.GetTurnCredentials at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+		}
+	}
+
+	afterGetTurnCredentialsCounter := mm_atomic.LoadUint64(&m.afterGetTurnCredentialsCounter)
+	// if default expectation was set then invocations count should be greater than zero
+	if m.GetTurnCredentialsMock.defaultExpectation != nil && afterGetTurnCredentialsCounter < 1 {
+		if m.GetTurnCredentialsMock.defaultExpectation.params == nil {
+			m.t.Errorf("Expected call to DeviceServiceClientMock.GetTurnCredentials at\n%s", m.GetTurnCredentialsMock.defaultExpectation.returnOrigin)
+		} else {
+			m.t.Errorf("Expected call to DeviceServiceClientMock.GetTurnCredentials at\n%s with params: %#v", m.GetTurnCredentialsMock.defaultExpectation.expectationOrigins.origin, *m.GetTurnCredentialsMock.defaultExpectation.params)
+		}
+	}
+	// if func was set then invocations count should be greater than zero
+	if m.funcGetTurnCredentials != nil && afterGetTurnCredentialsCounter < 1 {
+		m.t.Errorf("Expected call to DeviceServiceClientMock.GetTurnCredentials at\n%s", m.funcGetTurnCredentialsOrigin)
+	}
+
+	if !m.GetTurnCredentialsMock.invocationsDone() && afterGetTurnCredentialsCounter > 0 {
+		m.t.Errorf("Expected %d calls to DeviceServiceClientMock.GetTurnCredentials at\n%s but found %d calls",
+			mm_atomic.LoadUint64(&m.GetTurnCredentialsMock.expectedInvocations), m.GetTurnCredentialsMock.expectedInvocationsOrigin, afterGetTurnCredentialsCounter)
 	}
 }
 
@@ -5696,6 +6049,8 @@ func (m *DeviceServiceClientMock) MinimockFinish() {
 
 			m.MinimockGetBySessionIdInspect()
 
+			m.MinimockGetTurnCredentialsInspect()
+
 			m.MinimockLinkInspect()
 
 			m.MinimockListLogsInspect()
@@ -5745,6 +6100,7 @@ func (m *DeviceServiceClientMock) minimockDone() bool {
 		m.MinimockDeRegisterKeyDone() &&
 		m.MinimockGetByIdDone() &&
 		m.MinimockGetBySessionIdDone() &&
+		m.MinimockGetTurnCredentialsDone() &&
 		m.MinimockLinkDone() &&
 		m.MinimockListLogsDone() &&
 		m.MinimockLogDone() &&

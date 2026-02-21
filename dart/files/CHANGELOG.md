@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.53.15] - 2026-2-21
+
+### Changed
+
+- Minor bugfix in file api
+
 ## [1.53.14] - 2026-2-21
 
 ### Changed

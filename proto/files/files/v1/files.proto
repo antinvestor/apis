@@ -104,8 +104,8 @@ message MediaMetadata {
 
   enum Visibility {
     VISIBILITY_UNSPECIFIED = 0;
-    PUBLIC = 1;
-    PRIVATE = 2;
+    VISIBILITY_PUBLIC = 1;
+    VISIBILITY_PRIVATE = 2;
   }
 }
 
@@ -284,6 +284,25 @@ message HeadContentResponse {
 // -----------------------------------------------------
 // Signed URLs
 // -----------------------------------------------------
+//
+// RESTful API endpoints for direct client access via curl:
+//
+// Get signed upload URL:
+//   GET /v1/files/{media_id}/upload-url?expires_seconds=3600
+//   -> { "upload_url": "https://storage.example.com/..." }
+//
+// Direct upload using signed URL:
+//   PUT {upload_url}
+//   Content-Type: {content_type}
+//   Body: {raw file bytes}
+//
+// Get signed download URL:
+//   GET /v1/files/{media_id}/download-url?expires_seconds=3600
+//   -> { "download_url": "https://storage.example.com/..." }
+//
+// Direct download using signed URL:
+//   GET {download_url}
+//   -> {raw file bytes}
 
 message GetSignedUploadUrlRequest {
   string media_id = 1; // Media ID to get signed upload URL for
@@ -386,10 +405,10 @@ message SearchMediaRequest {
   string content_type = 8; // Filter by MIME type prefix (e.g., "image/")
   enum SortBy {
     SORT_BY_UNSPECIFIED = 0;
-    CREATED_AT = 1;
-    UPDATED_AT = 2;
-    FILENAME = 3;
-    FILE_SIZE = 4;
+    SORT_BY_CREATED_AT = 1;
+    SORT_BY_UPDATED_AT = 2;
+    SORT_BY_FILENAME = 3;
+    SORT_BY_FILE_SIZE = 4;
   }
   SortBy sort_by = 9; // Sort field
   bool sort_desc = 10; // Sort descending (default false)
@@ -476,8 +495,8 @@ message RetentionPolicy {
   int64 retention_days = 3; // Retention period in days (-1 for permanent)
   enum Mode {
     MODE_UNSPECIFIED = 0;
-    DELETE = 1; // Delete after retention period
-    ARCHIVE = 2; // Archive after retention period
+    MODE_DELETE = 1; // Delete after retention period
+    MODE_ARCHIVE = 2; // Archive after retention period
   }
   Mode mode = 4;
 }

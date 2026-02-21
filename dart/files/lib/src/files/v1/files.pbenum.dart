@@ -32,13 +32,13 @@ class ThumbnailMethod extends $pb.ProtobufEnum {
 
 class MediaMetadata_Visibility extends $pb.ProtobufEnum {
   static const MediaMetadata_Visibility VISIBILITY_UNSPECIFIED = MediaMetadata_Visibility._(0, _omitEnumNames ? '' : 'VISIBILITY_UNSPECIFIED');
-  static const MediaMetadata_Visibility PUBLIC = MediaMetadata_Visibility._(1, _omitEnumNames ? '' : 'PUBLIC');
-  static const MediaMetadata_Visibility PRIVATE = MediaMetadata_Visibility._(2, _omitEnumNames ? '' : 'PRIVATE');
+  static const MediaMetadata_Visibility VISIBILITY_PUBLIC = MediaMetadata_Visibility._(1, _omitEnumNames ? '' : 'VISIBILITY_PUBLIC');
+  static const MediaMetadata_Visibility VISIBILITY_PRIVATE = MediaMetadata_Visibility._(2, _omitEnumNames ? '' : 'VISIBILITY_PRIVATE');
 
   static const $core.List<MediaMetadata_Visibility> values = <MediaMetadata_Visibility> [
     VISIBILITY_UNSPECIFIED,
-    PUBLIC,
-    PRIVATE,
+    VISIBILITY_PUBLIC,
+    VISIBILITY_PRIVATE,
   ];
 
   static final $core.Map<$core.int, MediaMetadata_Visibility> _byValue = $pb.ProtobufEnum.initByValue(values);
@@ -49,17 +49,17 @@ class MediaMetadata_Visibility extends $pb.ProtobufEnum {
 
 class SearchMediaRequest_SortBy extends $pb.ProtobufEnum {
   static const SearchMediaRequest_SortBy SORT_BY_UNSPECIFIED = SearchMediaRequest_SortBy._(0, _omitEnumNames ? '' : 'SORT_BY_UNSPECIFIED');
-  static const SearchMediaRequest_SortBy CREATED_AT = SearchMediaRequest_SortBy._(1, _omitEnumNames ? '' : 'CREATED_AT');
-  static const SearchMediaRequest_SortBy UPDATED_AT = SearchMediaRequest_SortBy._(2, _omitEnumNames ? '' : 'UPDATED_AT');
-  static const SearchMediaRequest_SortBy FILENAME = SearchMediaRequest_SortBy._(3, _omitEnumNames ? '' : 'FILENAME');
-  static const SearchMediaRequest_SortBy FILE_SIZE = SearchMediaRequest_SortBy._(4, _omitEnumNames ? '' : 'FILE_SIZE');
+  static const SearchMediaRequest_SortBy SORT_BY_CREATED_AT = SearchMediaRequest_SortBy._(1, _omitEnumNames ? '' : 'SORT_BY_CREATED_AT');
+  static const SearchMediaRequest_SortBy SORT_BY_UPDATED_AT = SearchMediaRequest_SortBy._(2, _omitEnumNames ? '' : 'SORT_BY_UPDATED_AT');
+  static const SearchMediaRequest_SortBy SORT_BY_FILENAME = SearchMediaRequest_SortBy._(3, _omitEnumNames ? '' : 'SORT_BY_FILENAME');
+  static const SearchMediaRequest_SortBy SORT_BY_FILE_SIZE = SearchMediaRequest_SortBy._(4, _omitEnumNames ? '' : 'SORT_BY_FILE_SIZE');
 
   static const $core.List<SearchMediaRequest_SortBy> values = <SearchMediaRequest_SortBy> [
     SORT_BY_UNSPECIFIED,
-    CREATED_AT,
-    UPDATED_AT,
-    FILENAME,
-    FILE_SIZE,
+    SORT_BY_CREATED_AT,
+    SORT_BY_UPDATED_AT,
+    SORT_BY_FILENAME,
+    SORT_BY_FILE_SIZE,
   ];
 
   static final $core.Map<$core.int, SearchMediaRequest_SortBy> _byValue = $pb.ProtobufEnum.initByValue(values);
@@ -70,13 +70,13 @@ class SearchMediaRequest_SortBy extends $pb.ProtobufEnum {
 
 class RetentionPolicy_Mode extends $pb.ProtobufEnum {
   static const RetentionPolicy_Mode MODE_UNSPECIFIED = RetentionPolicy_Mode._(0, _omitEnumNames ? '' : 'MODE_UNSPECIFIED');
-  static const RetentionPolicy_Mode DELETE = RetentionPolicy_Mode._(1, _omitEnumNames ? '' : 'DELETE');
-  static const RetentionPolicy_Mode ARCHIVE = RetentionPolicy_Mode._(2, _omitEnumNames ? '' : 'ARCHIVE');
+  static const RetentionPolicy_Mode MODE_DELETE = RetentionPolicy_Mode._(1, _omitEnumNames ? '' : 'MODE_DELETE');
+  static const RetentionPolicy_Mode MODE_ARCHIVE = RetentionPolicy_Mode._(2, _omitEnumNames ? '' : 'MODE_ARCHIVE');
 
   static const $core.List<RetentionPolicy_Mode> values = <RetentionPolicy_Mode> [
     MODE_UNSPECIFIED,
-    DELETE,
-    ARCHIVE,
+    MODE_DELETE,
+    MODE_ARCHIVE,
   ];
 
   static final $core.Map<$core.int, RetentionPolicy_Mode> _byValue = $pb.ProtobufEnum.initByValue(values);

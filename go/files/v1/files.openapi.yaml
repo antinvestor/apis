@@ -2601,8 +2601,8 @@ components:
       title: Visibility
       enum:
         - VISIBILITY_UNSPECIFIED
-        - PUBLIC
-        - PRIVATE
+        - VISIBILITY_PUBLIC
+        - VISIBILITY_PRIVATE
     files.v1.RestoreVersionRequest:
       type: object
       properties:
@@ -2656,8 +2656,8 @@ components:
       title: Mode
       enum:
         - MODE_UNSPECIFIED
-        - DELETE
-        - ARCHIVE
+        - MODE_DELETE
+        - MODE_ARCHIVE
     files.v1.SearchMediaRequest:
       type: object
       properties:
@@ -2712,10 +2712,10 @@ components:
       title: SortBy
       enum:
         - SORT_BY_UNSPECIFIED
-        - CREATED_AT
-        - UPDATED_AT
-        - FILENAME
-        - FILE_SIZE
+        - SORT_BY_CREATED_AT
+        - SORT_BY_UPDATED_AT
+        - SORT_BY_FILENAME
+        - SORT_BY_FILE_SIZE
     files.v1.SearchMediaResponse:
       type: object
       properties:

@@ -234,6 +234,14 @@ lintfix: $(BIN)/golangci-lint $(BIN)/buf ## Auto-fix lint
 		$(call lint_fix_module,$$m); \
 	done
 
+.PHONY: lint-files
+lint-files: $(BIN)/buf ## Lint files proto only
+	cd proto/files && buf lint
+
+.PHONY: format-files
+format-files: $(BIN)/buf ## Format files proto only
+	cd proto/files && buf format -w .
+
 # ------------------------------------------------------------------------------
 # Generation
 # ------------------------------------------------------------------------------

@@ -55,8 +55,8 @@ const MediaMetadata_Visibility$json = {
   '1': 'Visibility',
   '2': [
     {'1': 'VISIBILITY_UNSPECIFIED', '2': 0},
-    {'1': 'PUBLIC', '2': 1},
-    {'1': 'PRIVATE', '2': 2},
+    {'1': 'VISIBILITY_PUBLIC', '2': 1},
+    {'1': 'VISIBILITY_PRIVATE', '2': 2},
   ],
 };
 
@@ -72,8 +72,9 @@ final $typed_data.Uint8List mediaMetadataDescriptor = $convert.base64Decode(
     '52MS5NZWRpYU1ldGFkYXRhLlZpc2liaWxpdHlSCnZpc2liaWxpdHkSLQoFZXh0cmEYCiABKAsy'
     'Fy5nb29nbGUucHJvdG9idWYuU3RydWN0UgVleHRyYRI5CgpleHBpcmVzX2F0GAsgASgLMhouZ2'
     '9vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcFIJZXhwaXJlc0F0EhgKB3ZlcnNpb24YDCABKANSB3Zl'
-    'cnNpb24SGwoJaXNfbGF0ZXN0GA0gASgIUghpc0xhdGVzdCJBCgpWaXNpYmlsaXR5EhoKFlZJU0'
-    'lCSUxJVFlfVU5TUEVDSUZJRUQQABIKCgZQVUJMSUMQARILCgdQUklWQVRFEAI=');
+    'cnNpb24SGwoJaXNfbGF0ZXN0GA0gASgIUghpc0xhdGVzdCJXCgpWaXNpYmlsaXR5EhoKFlZJU0'
+    'lCSUxJVFlfVU5TUEVDSUZJRUQQABIVChFWSVNJQklMSVRZX1BVQkxJQxABEhYKElZJU0lCSUxJ'
+    'VFlfUFJJVkFURRAC');
 
 @$core.Deprecated('Use uploadMetadataDescriptor instead')
 const UploadMetadata$json = {
@@ -618,10 +619,10 @@ const SearchMediaRequest_SortBy$json = {
   '1': 'SortBy',
   '2': [
     {'1': 'SORT_BY_UNSPECIFIED', '2': 0},
-    {'1': 'CREATED_AT', '2': 1},
-    {'1': 'UPDATED_AT', '2': 2},
-    {'1': 'FILENAME', '2': 3},
-    {'1': 'FILE_SIZE', '2': 4},
+    {'1': 'SORT_BY_CREATED_AT', '2': 1},
+    {'1': 'SORT_BY_UPDATED_AT', '2': 2},
+    {'1': 'SORT_BY_FILENAME', '2': 3},
+    {'1': 'SORT_BY_FILE_SIZE', '2': 4},
   ],
 };
 
@@ -635,9 +636,9 @@ final $typed_data.Uint8List searchMediaRequestDescriptor = $convert.base64Decode
     'JpbGl0eRgHIAEoDjIiLmZpbGVzLnYxLk1lZGlhTWV0YWRhdGEuVmlzaWJpbGl0eVIKdmlzaWJp'
     'bGl0eRIhCgxjb250ZW50X3R5cGUYCCABKAlSC2NvbnRlbnRUeXBlEjwKB3NvcnRfYnkYCSABKA'
     '4yIy5maWxlcy52MS5TZWFyY2hNZWRpYVJlcXVlc3QuU29ydEJ5UgZzb3J0QnkSGwoJc29ydF9k'
-    'ZXNjGAogASgIUghzb3J0RGVzYyJeCgZTb3J0QnkSFwoTU09SVF9CWV9VTlNQRUNJRklFRBAAEg'
-    '4KCkNSRUFURURfQVQQARIOCgpVUERBVEVEX0FUEAISDAoIRklMRU5BTUUQAxINCglGSUxFX1NJ'
-    'WkUQBA==');
+    'ZXNjGAogASgIUghzb3J0RGVzYyJ+CgZTb3J0QnkSFwoTU09SVF9CWV9VTlNQRUNJRklFRBAAEh'
+    'YKElNPUlRfQllfQ1JFQVRFRF9BVBABEhYKElNPUlRfQllfVVBEQVRFRF9BVBACEhQKEFNPUlRf'
+    'QllfRklMRU5BTUUQAxIVChFTT1JUX0JZX0ZJTEVfU0laRRAE');
 
 @$core.Deprecated('Use searchMediaResponseDescriptor instead')
 const SearchMediaResponse$json = {
@@ -827,8 +828,8 @@ const RetentionPolicy_Mode$json = {
   '1': 'Mode',
   '2': [
     {'1': 'MODE_UNSPECIFIED', '2': 0},
-    {'1': 'DELETE', '2': 1},
-    {'1': 'ARCHIVE', '2': 2},
+    {'1': 'MODE_DELETE', '2': 1},
+    {'1': 'MODE_ARCHIVE', '2': 2},
   ],
 };
 
@@ -836,8 +837,8 @@ const RetentionPolicy_Mode$json = {
 final $typed_data.Uint8List retentionPolicyDescriptor = $convert.base64Decode(
     'Cg9SZXRlbnRpb25Qb2xpY3kSGwoJcG9saWN5X2lkGAEgASgJUghwb2xpY3lJZBISCgRuYW1lGA'
     'IgASgJUgRuYW1lEiUKDnJldGVudGlvbl9kYXlzGAMgASgDUg1yZXRlbnRpb25EYXlzEjIKBG1v'
-    'ZGUYBCABKA4yHi5maWxlcy52MS5SZXRlbnRpb25Qb2xpY3kuTW9kZVIEbW9kZSI1CgRNb2RlEh'
-    'QKEE1PREVfVU5TUEVDSUZJRUQQABIKCgZERUxFVEUQARILCgdBUkNISVZFEAI=');
+    'ZGUYBCABKA4yHi5maWxlcy52MS5SZXRlbnRpb25Qb2xpY3kuTW9kZVIEbW9kZSI/CgRNb2RlEh'
+    'QKEE1PREVfVU5TUEVDSUZJRUQQABIPCgtNT0RFX0RFTEVURRABEhAKDE1PREVfQVJDSElWRRAC');
 
 @$core.Deprecated('Use setRetentionPolicyRequestDescriptor instead')
 const SetRetentionPolicyRequest$json = {
