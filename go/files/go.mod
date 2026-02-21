@@ -4,7 +4,7 @@ go 1.25.0
 
 require (
 	buf.build/gen/go/antinvestor/files/connectrpc/go v1.19.1-20260219054225-5c4ee9d8c7bf.2
-	buf.build/gen/go/antinvestor/files/protocolbuffers/go v1.36.11-20251223175512-7a3fcba332ca.1
+	buf.build/gen/go/antinvestor/files/protocolbuffers/go v1.36.11-20260219054225-5c4ee9d8c7bf.1
 	connectrpc.com/connect v1.19.1
 	github.com/antinvestor/apis/go/common v1.53.11
 	github.com/gojuno/minimock/v3 v3.4.7
