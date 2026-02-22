@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Files Management API
-  description: The Files Management API provides comprehensive file and media management capabilities including upload, download, thumbnail generation, and search. Files are identified using MXC URIs (mxc://server/media_id) following Matrix content repository patterns. The API supports content type detection, file metadata tracking, thumbnail generation with configurable dimensions, URL preview generation, and efficient search across uploaded media.
+  description: Comprehensive file and media management API supporting upload, download, thumbnails, versioning, retention, and search. Files are identified via MXC URIs (mxc://server/media_id) following Matrix patterns.
   contact:
     name: Ant Investor Ltd
     url: https://github.com/antinvestor/apis
@@ -91,7 +91,7 @@ paths:
         - Media
         - files.v1.FilesService
       summary: Batch get content
-      description: Retrieves multiple files in a single request.
+      description: Retrieves multiple files in a single request. Supports partial failure.
       operationId: batchGetContent
       parameters:
         - name: Connect-Protocol-Version
@@ -144,7 +144,7 @@ paths:
         - Media
         - files.v1.FilesService
       summary: Batch get content
-      description: Retrieves multiple files in a single request.
+      description: Retrieves multiple files in a single request. Supports partial failure.
       operationId: batchGetContent
       parameters:
         - name: Connect-Protocol-Version
@@ -181,7 +181,7 @@ paths:
         - Media
         - files.v1.FilesService
       summary: Complete multipart upload
-      description: Completes a multipart upload and returns the final media metadata.
+      description: Completes a multipart upload by verifying all parts and creating the final media. Requires checksum of complete file.
       operationId: completeMultipartUpload
       parameters:
         - name: Connect-Protocol-Version
@@ -217,8 +217,8 @@ paths:
       tags:
         - Media
         - files.v1.FilesService
-      summary: Create MXC URI without content
-      description: Creates a new MXC URI without uploading content. Use the returned server_name and media_id with UploadContent to upload the actual content later. Useful for resumable uploads or when you need the URI before content is ready.
+      summary: Create pre-allocated MXC URI
+      description: Creates an MXC URI without uploading content. Use returned server_name and media_id with UploadContent to complete the upload later.
       operationId: createContent
       parameters:
         - name: Connect-Protocol-Version
@@ -254,8 +254,8 @@ paths:
       tags:
         - Media
         - files.v1.FilesService
-      summary: Create multipart upload
-      description: Creates a new multipart upload and returns an upload ID.
+      summary: Create multipart upload session
+      description: Creates a new multipart upload session and returns an upload_id for managing the upload.
       operationId: createMultipartUpload
       parameters:
         - name: Connect-Protocol-Version
@@ -292,7 +292,7 @@ paths:
         - Media
         - files.v1.FilesService
       summary: Delete content
-      description: Deletes content from the repository. Supports both soft and hard delete.
+      description: Deletes content. Supports soft delete (recoverable) and hard delete (permanent).
       operationId: deleteContent
       parameters:
         - name: Connect-Protocol-Version
@@ -323,13 +323,52 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/files.v1.DeleteContentResponse'
+  /files.v1.FilesService/DownloadContent: {}
+  /files.v1.FilesService/DownloadContentRange: {}
+  /files.v1.FilesService/FinalizeSignedUpload:
+    post:
+      tags:
+        - Media
+        - files.v1.FilesService
+      summary: Finalize signed upload
+      description: Finalizes a signed upload, verifying checksum and size, transitioning state from CREATING to AVAILABLE.
+      operationId: finalizeSignedUpload
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/files.v1.FinalizeSignedUploadRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.FinalizeSignedUploadResponse'
   /files.v1.FilesService/GetConfig:
     get:
       tags:
         - Media
         - files.v1.FilesService
-      summary: Get repository configuration
-      description: Retrieves the content repository configuration including upload size limits and other parameters.
+      summary: Get server configuration
+      description: Retrieves server configuration including limits and capabilities.
       operationId: getConfig
       parameters:
         - name: Connect-Protocol-Version
@@ -381,8 +420,8 @@ paths:
       tags:
         - Media
         - files.v1.FilesService
-      summary: Get repository configuration
-      description: Retrieves the content repository configuration including upload size limits and other parameters.
+      summary: Get server configuration
+      description: Retrieves server configuration including limits and capabilities.
       operationId: getConfig
       parameters:
         - name: Connect-Protocol-Version
@@ -419,7 +458,7 @@ paths:
         - Media
         - files.v1.FilesService
       summary: Download content
-      description: Downloads content from the content repository using its MXC URI.
+      description: Downloads complete content from the repository.
       operationId: getContent
       parameters:
         - name: Connect-Protocol-Version
@@ -472,7 +511,7 @@ paths:
         - Media
         - files.v1.FilesService
       summary: Download content
-      description: Downloads content from the content repository using its MXC URI.
+      description: Downloads complete content from the repository.
       operationId: getContent
       parameters:
         - name: Connect-Protocol-Version
@@ -509,7 +548,7 @@ paths:
         - Media
         - files.v1.FilesService
       summary: Download content with filename override
-      description: Downloads content from the repository and overrides the filename in Content-Disposition header.
+      description: Downloads content and overrides the filename in Content-Disposition header.
       operationId: getContentOverrideName
       parameters:
         - name: Connect-Protocol-Version
@@ -562,7 +601,7 @@ paths:
         - Media
         - files.v1.FilesService
       summary: Download content with filename override
-      description: Downloads content from the repository and overrides the filename in Content-Disposition header.
+      description: Downloads content and overrides the filename in Content-Disposition header.
       operationId: getContentOverrideName
       parameters:
         - name: Connect-Protocol-Version
@@ -599,7 +638,7 @@ paths:
         - Media
         - files.v1.FilesService
       summary: Get content thumbnail
-      description: Retrieves a thumbnail of content with specified dimensions and resizing method. Supports both static and animated thumbnails.
+      description: Generates a thumbnail with specified dimensions and method. Supports static and animated thumbnails.
       operationId: getContentThumbnail
       parameters:
         - name: Connect-Protocol-Version
@@ -652,7 +691,7 @@ paths:
         - Media
         - files.v1.FilesService
       summary: Get content thumbnail
-      description: Retrieves a thumbnail of content with specified dimensions and resizing method. Supports both static and animated thumbnails.
+      description: Generates a thumbnail with specified dimensions and method. Supports static and animated thumbnails.
       operationId: getContentThumbnail
       parameters:
         - name: Connect-Protocol-Version
@@ -683,13 +722,103 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/files.v1.GetContentThumbnailResponse'
+  /files.v1.FilesService/GetMultipartUpload:
+    get:
+      tags:
+        - Media
+        - files.v1.FilesService
+      summary: Get multipart upload status
+      description: Retrieves the current status and progress of a multipart upload session.
+      operationId: getMultipartUpload
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+        - name: message
+          in: query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.GetMultipartUploadRequest'
+        - name: encoding
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/encoding'
+        - name: base64
+          in: query
+          schema:
+            $ref: '#/components/schemas/base64'
+        - name: compression
+          in: query
+          schema:
+            $ref: '#/components/schemas/compression'
+        - name: connect
+          in: query
+          schema:
+            $ref: '#/components/schemas/connect'
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.GetMultipartUploadResponse'
+    post:
+      tags:
+        - Media
+        - files.v1.FilesService
+      summary: Get multipart upload status
+      description: Retrieves the current status and progress of a multipart upload session.
+      operationId: getMultipartUpload
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/files.v1.GetMultipartUploadRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.GetMultipartUploadResponse'
   /files.v1.FilesService/GetRetentionPolicy:
     get:
       tags:
         - Retention
         - files.v1.FilesService
       summary: Get retention policy
-      description: Gets retention policy for a file.
+      description: Gets the retention policy applied to a media object.
       operationId: getRetentionPolicy
       parameters:
         - name: Connect-Protocol-Version
@@ -742,7 +871,7 @@ paths:
         - Retention
         - files.v1.FilesService
       summary: Get retention policy
-      description: Gets retention policy for a file.
+      description: Gets the retention policy applied to a media object.
       operationId: getRetentionPolicy
       parameters:
         - name: Connect-Protocol-Version
@@ -869,7 +998,7 @@ paths:
         - Media
         - files.v1.FilesService
       summary: Get signed upload URL
-      description: Gets a signed URL for direct upload to storage.
+      description: Gets a signed URL for direct upload to storage. Media must be in CREATING state.
       operationId: getSignedUploadUrl
       parameters:
         - name: Connect-Protocol-Version
@@ -905,7 +1034,7 @@ paths:
       tags:
         - Analytics
         - files.v1.FilesService
-      summary: Get storage stats
+      summary: Get storage statistics
       description: Retrieves global storage statistics.
       operationId: getStorageStats
       parameters:
@@ -958,7 +1087,7 @@ paths:
       tags:
         - Analytics
         - files.v1.FilesService
-      summary: Get storage stats
+      summary: Get storage statistics
       description: Retrieves global storage statistics.
       operationId: getStorageStats
       parameters:
@@ -996,7 +1125,7 @@ paths:
         - Media
         - files.v1.FilesService
       summary: Get URL preview
-      description: Retrieves OpenGraph metadata for a URL to render a preview. Returns title, description, image, and other metadata.
+      description: Retrieves OpenGraph metadata for a URL to generate link previews.
       operationId: getUrlPreview
       parameters:
         - name: Connect-Protocol-Version
@@ -1049,7 +1178,7 @@ paths:
         - Media
         - files.v1.FilesService
       summary: Get URL preview
-      description: Retrieves OpenGraph metadata for a URL to render a preview. Returns title, description, image, and other metadata.
+      description: Retrieves OpenGraph metadata for a URL to generate link previews.
       operationId: getUrlPreview
       parameters:
         - name: Connect-Protocol-Version
@@ -1086,7 +1215,7 @@ paths:
         - Analytics
         - files.v1.FilesService
       summary: Get user usage
-      description: Retrieves usage statistics for a user.
+      description: Retrieves storage usage statistics for a user.
       operationId: getUserUsage
       parameters:
         - name: Connect-Protocol-Version
@@ -1139,7 +1268,7 @@ paths:
         - Analytics
         - files.v1.FilesService
       summary: Get user usage
-      description: Retrieves usage statistics for a user.
+      description: Retrieves storage usage statistics for a user.
       operationId: getUserUsage
       parameters:
         - name: Connect-Protocol-Version
@@ -1176,7 +1305,7 @@ paths:
         - Media
         - files.v1.FilesService
       summary: Get file versions
-      description: Retrieves all versions of a file.
+      description: Retrieves all versions of a file with pagination.
       operationId: getVersions
       parameters:
         - name: Connect-Protocol-Version
@@ -1229,7 +1358,7 @@ paths:
         - Media
         - files.v1.FilesService
       summary: Get file versions
-      description: Retrieves all versions of a file.
+      description: Retrieves all versions of a file with pagination.
       operationId: getVersions
       parameters:
         - name: Connect-Protocol-Version
@@ -1260,6 +1389,43 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/files.v1.GetVersionsResponse'
+  /files.v1.FilesService/GrantAccess:
+    post:
+      tags:
+        - Access
+        - files.v1.FilesService
+      summary: Grant access
+      description: Grants a principal access to a media object with specified role.
+      operationId: grantAccess
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/files.v1.GrantAccessRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.GrantAccessResponse'
   /files.v1.FilesService/HeadContent:
     get:
       tags:
@@ -1350,13 +1516,103 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/files.v1.HeadContentResponse'
+  /files.v1.FilesService/ListAccess:
+    get:
+      tags:
+        - Access
+        - files.v1.FilesService
+      summary: List access grants
+      description: Lists all access grants for a media object with pagination.
+      operationId: listAccess
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+        - name: message
+          in: query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.ListAccessRequest'
+        - name: encoding
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/encoding'
+        - name: base64
+          in: query
+          schema:
+            $ref: '#/components/schemas/base64'
+        - name: compression
+          in: query
+          schema:
+            $ref: '#/components/schemas/compression'
+        - name: connect
+          in: query
+          schema:
+            $ref: '#/components/schemas/connect'
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.ListAccessResponse'
+    post:
+      tags:
+        - Access
+        - files.v1.FilesService
+      summary: List access grants
+      description: Lists all access grants for a media object with pagination.
+      operationId: listAccess
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/files.v1.ListAccessRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.ListAccessResponse'
   /files.v1.FilesService/ListMultipartParts:
     get:
       tags:
         - Media
         - files.v1.FilesService
       summary: List multipart parts
-      description: Lists all uploaded parts of a multipart upload.
+      description: Lists all uploaded parts of a multipart upload session with pagination.
       operationId: listMultipartParts
       parameters:
         - name: Connect-Protocol-Version
@@ -1409,7 +1665,7 @@ paths:
         - Media
         - files.v1.FilesService
       summary: List multipart parts
-      description: Lists all uploaded parts of a multipart upload.
+      description: Lists all uploaded parts of a multipart upload session with pagination.
       operationId: listMultipartParts
       parameters:
         - name: Connect-Protocol-Version
@@ -1446,7 +1702,7 @@ paths:
         - Retention
         - files.v1.FilesService
       summary: List retention policies
-      description: Lists available retention policies.
+      description: Lists all available retention policies with pagination.
       operationId: listRetentionPolicies
       parameters:
         - name: Connect-Protocol-Version
@@ -1499,7 +1755,7 @@ paths:
         - Retention
         - files.v1.FilesService
       summary: List retention policies
-      description: Lists available retention policies.
+      description: Lists all available retention policies with pagination.
       operationId: listRetentionPolicies
       parameters:
         - name: Connect-Protocol-Version
@@ -1530,13 +1786,50 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/files.v1.ListRetentionPoliciesResponse'
+  /files.v1.FilesService/PatchContent:
+    post:
+      tags:
+        - Media
+        - files.v1.FilesService
+      summary: Patch content metadata
+      description: Updates metadata for existing content. Supports filename, visibility, labels, and extra metadata updates.
+      operationId: patchContent
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/files.v1.PatchContentRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.PatchContentResponse'
   /files.v1.FilesService/RestoreVersion:
     post:
       tags:
         - Media
         - files.v1.FilesService
       summary: Restore version
-      description: Restores a specific version of a file as the current version.
+      description: Restores a specific version as the current version.
       operationId: restoreVersion
       parameters:
         - name: Connect-Protocol-Version
@@ -1567,13 +1860,50 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/files.v1.RestoreVersionResponse'
+  /files.v1.FilesService/RevokeAccess:
+    post:
+      tags:
+        - Access
+        - files.v1.FilesService
+      summary: Revoke access
+      description: Revokes a principal's access to a media object.
+      operationId: revokeAccess
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/files.v1.RevokeAccessRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/files.v1.RevokeAccessResponse'
   /files.v1.FilesService/SearchMedia:
     get:
       tags:
         - Media
         - files.v1.FilesService
       summary: Search media files
-      description: Searches for media files matching specified criteria with support for pagination, owner filtering, and date range filtering.
+      description: Searches for media matching specified criteria with pagination support. Uses common.SearchRequest for standard pagination.
       operationId: searchMedia
       parameters:
         - name: Connect-Protocol-Version
@@ -1626,7 +1956,7 @@ paths:
         - Media
         - files.v1.FilesService
       summary: Search media files
-      description: Searches for media files matching specified criteria with support for pagination, owner filtering, and date range filtering.
+      description: Searches for media matching specified criteria with pagination support. Uses common.SearchRequest for standard pagination.
       operationId: searchMedia
       parameters:
         - name: Connect-Protocol-Version
@@ -1663,7 +1993,7 @@ paths:
         - Retention
         - files.v1.FilesService
       summary: Set retention policy
-      description: Sets retention policy for a file.
+      description: Applies a retention policy to a media object.
       operationId: setRetentionPolicy
       parameters:
         - name: Connect-Protocol-Version
@@ -1701,7 +2031,7 @@ paths:
         - Media
         - files.v1.FilesService
       summary: Upload multipart part
-      description: Uploads a part of a multipart upload and returns the ETag.
+      description: Uploads a single part of a multipart upload. Parts can be uploaded in parallel.
       operationId: uploadMultipartPart
       parameters:
         - name: Connect-Protocol-Version
@@ -1738,6 +2068,23 @@ components:
       type: boolean
       title: base64
       description: Specifies if the message query param is base64 encoded, which may be required for binary data
+    common.v1.PageCursor:
+      type: object
+      properties:
+        limit:
+          type: integer
+          title: limit
+          format: int32
+          description: Number of items per cursor (limit)
+        page:
+          type: string
+          title: page
+          description: Page number/ cursor representing last id from result
+      title: PageCursor
+      additionalProperties: false
+      description: |-
+        PageCursor provides standard offset-based pagination/cursor stream parameters.
+         Used for list operations that return large result sets.
     compression:
       title: compression
       enum:
@@ -1831,7 +2178,11 @@ components:
         uploadId:
           type: string
           title: upload_id
-          description: Upload ID to abort
+          description: Upload ID to abort.
+        idempotencyKey:
+          type: string
+          title: idempotency_key
+          description: Idempotency key.
       title: AbortMultipartUploadRequest
       additionalProperties: false
     files.v1.AbortMultipartUploadResponse:
@@ -1840,9 +2191,99 @@ components:
         aborted:
           type: boolean
           title: aborted
-          description: Whether the upload was aborted
+          description: |-
+            Whether the abort was successful.
+             False if upload already completed or not found.
       title: AbortMultipartUploadResponse
       additionalProperties: false
+    files.v1.AccessGrant:
+      type: object
+      properties:
+        principalId:
+          type: string
+          title: principal_id
+          description: |-
+            Principal ID receiving access.
+             Format depends on principal_type:
+               - User: "user:<user_id>" or just "<user_id>"
+               - Service: "service:<service_name>"
+               - Organization: "org:<org_id>" or "org:<org_id>/<unit>"
+               - Chat Group: "room:<room_id>" or "chat:<chat_id>"
+        principalType:
+          title: principal_type
+          description: |-
+            Type of principal. Helps the system resolve membership correctly.
+             If not specified, the server infers from principal_id format.
+          $ref: '#/components/schemas/files.v1.PrincipalType'
+        role:
+          title: role
+          description: |-
+            Role to assign to the principal.
+             See AccessRole for permission matrix.
+          $ref: '#/components/schemas/files.v1.AccessRole'
+        grantedAt:
+          title: granted_at
+          description: Timestamp when this grant was created.
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        grantedBy:
+          type: string
+          title: granted_by
+          description: |-
+            ID of the principal who created this grant.
+             Null if created by system (e.g., owner upload).
+        expiresAt:
+          title: expires_at
+          description: |-
+            Optional expiry for time-limited access.
+             Null means permanent grant until manually revoked.
+             Useful for temporary access sharing.
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+      title: AccessGrant
+      additionalProperties: false
+      description: |-
+        AccessGrant represents a grant of access to a principal for media.
+
+         Access grants are media-scoped. Each grant defines
+         WHO (principal_id) gets WHAT role (role) for specific content.
+
+         The principal type determines how membership is resolved:
+           - USER: Direct user access
+           - SERVICE: Service account access
+           - ORGANIZATION: All members of the organization get access
+           - CHAT_GROUP: All members of the chat group get access
+
+         Ownership: The original uploader automatically receives OWNER role
+         and cannot be revoked. This ensures content always has an owner.
+
+         Best Practices:
+           - Use service accounts for application access (WRITER role)
+           - Use organizations/chat groups for team access management
+           - Audit grants periodically for stale access
+    files.v1.AccessRole:
+      type: string
+      title: AccessRole
+      enum:
+        - ACCESS_ROLE_UNSPECIFIED
+        - ACCESS_ROLE_READER
+        - ACCESS_ROLE_WRITER
+        - ACCESS_ROLE_OWNER
+      description: |-
+        AccessRole defines the role granted to a principal for accessing media.
+
+         Permission Matrix:
+           | Operation          | READER | WRITER | OWNER |
+           |-------------------|--------|--------|-------|
+           | GetContent        |   Y    |   Y    |   Y   |
+           | GetThumbnail      |   Y    |   Y    |   Y   |
+           | PatchContent      |   N    |   Y    |   Y   |
+           | DeleteContent     |   N    |   N    |   Y   |
+           | GrantAccess       |   N    |   N    |   Y   |
+           | RevokeAccess      |   N    |   N    |   Y   |
+           | SetRetention      |   N    |   N    |   Y   |
+           | RestoreVersion    |   N    |   Y    |   Y   |
+
+         OWNER role also includes ability to transfer ownership to another
+         principal and permanently delete (hard delete) content.
     files.v1.BatchDeleteContentRequest:
       type: object
       properties:
@@ -1851,11 +2292,17 @@ components:
           items:
             type: string
           title: media_ids
-          description: List of media IDs to delete
+          maxItems: 100
+          minItems: 1
+          description: Media IDs to delete.
         hardDelete:
           type: boolean
           title: hard_delete
-          description: Hard or soft delete
+          description: True for hard delete, false for soft delete.
+        idempotencyKey:
+          type: string
+          title: idempotency_key
+          description: Idempotency key (applies to entire batch).
       title: BatchDeleteContentRequest
       additionalProperties: false
     files.v1.BatchDeleteContentResponse:
@@ -1866,7 +2313,6 @@ components:
           items:
             $ref: '#/components/schemas/files.v1.BatchDeleteContentResponse.DeleteResult'
           title: results
-          description: Results for each requested ID
       title: BatchDeleteContentResponse
       additionalProperties: false
     files.v1.BatchDeleteContentResponse.DeleteResult:
@@ -1875,15 +2321,12 @@ components:
         mediaId:
           type: string
           title: media_id
-          description: Media ID
         success:
           type: boolean
           title: success
-          description: Whether deletion succeeded
         error:
           type: string
           title: error
-          description: Error message if failed
       title: DeleteResult
       additionalProperties: false
     files.v1.BatchGetContentRequest:
@@ -1894,9 +2337,20 @@ components:
           items:
             type: string
           title: media_ids
-          description: List of media IDs to retrieve
+          maxItems: 100
+          minItems: 1
+          description: Media IDs to retrieve.
       title: BatchGetContentRequest
       additionalProperties: false
+      description: |-
+        BatchGetContentRequest retrieves multiple files.
+
+         Limits:
+           - Maximum items per request determined by server config
+           - Partial success supported (some items may fail)
+
+         Performance:
+           For large batches, use pagination or multiple requests.
     files.v1.BatchGetContentResponse:
       type: object
       properties:
@@ -1905,7 +2359,6 @@ components:
           items:
             $ref: '#/components/schemas/files.v1.BatchGetContentResponse.ContentResult'
           title: results
-          description: Results for each requested ID
       title: BatchGetContentResponse
       additionalProperties: false
     files.v1.BatchGetContentResponse.ContentResult:
@@ -1915,12 +2368,10 @@ components:
             mediaId:
               type: string
               title: media_id
-              description: Media ID
         - oneOf:
             - properties:
                 content:
                   title: content
-                  description: Content if successful
                   $ref: '#/components/schemas/files.v1.GetContentResponse'
               title: content
               required:
@@ -1929,7 +2380,6 @@ components:
                 error:
                   type: string
                   title: error
-                  description: Error message if failed
               title: error
               required:
                 - error
@@ -1941,13 +2391,22 @@ components:
         uploadId:
           type: string
           title: upload_id
-          description: Upload ID from CreateMultipartUpload
+          description: Upload ID from CreateMultipartUploadResponse.
+        checksumSha256:
+          type: string
+          title: checksum_sha256
+          description: |-
+            SHA-256 checksum of the COMPLETE file (all parts combined).
+             Required for integrity verification.
         parts:
           type: array
           items:
             $ref: '#/components/schemas/files.v1.CompleteMultipartUploadRequest.Part'
           title: parts
-          description: List of uploaded parts
+        idempotencyKey:
+          type: string
+          title: idempotency_key
+          description: Idempotency key for completion.
       title: CompleteMultipartUploadRequest
       additionalProperties: false
     files.v1.CompleteMultipartUploadRequest.Part:
@@ -1957,19 +2416,21 @@ components:
           type: integer
           title: part_number
           format: int32
-          description: Part number
         etag:
           type: string
           title: etag
-          description: ETag from UploadMultipartPart
       title: Part
       additionalProperties: false
+      description: |-
+        Parts that make up the complete file.
+         Must include all parts in order.
+         Server verifies each part's etag matches.
     files.v1.CompleteMultipartUploadResponse:
       type: object
       properties:
         metadata:
           title: metadata
-          description: Final media metadata
+          description: Final metadata for the uploaded media.
           $ref: '#/components/schemas/files.v1.MediaMetadata'
       title: CompleteMultipartUploadResponse
       additionalProperties: false
@@ -1979,78 +2440,167 @@ components:
         contentType:
           type: string
           title: content_type
-          description: Expected MIME type of the content
+          description: |-
+            Expected MIME type of content to be uploaded.
+             Helps with content-type detection validation.
         filename:
           type: string
           title: filename
-          description: Expected filename
+          description: |-
+            Expected filename for the content.
+             Used for Content-Disposition header.
         visibility:
           title: visibility
-          description: Initial visibility
+          description: |-
+            Initial visibility setting.
+             Defaults to PRIVATE.
           $ref: '#/components/schemas/files.v1.MediaMetadata.Visibility'
         expiresAt:
           title: expires_at
-          description: Expiration timestamp
+          description: |-
+            Optional expiration for the pre-created URI.
+             If unused until this time, URI becomes invalid.
+             Server enforces max expiration (e.g., 7 days).
           $ref: '#/components/schemas/google.protobuf.Timestamp'
+        labels:
+          type: object
+          title: labels
+          additionalProperties:
+            type: string
+            title: value
+          description: User-defined labels for organization.
+        accessorId:
+          type: array
+          items:
+            type: string
+          title: accessor_id
+          description: Principals to grant initial READER access.
+        organizationId:
+          type: string
+          title: organization_id
+          description: |-
+            Organization or group ID for metadata purposes.
+             Optional - for organization/filtering, not access control.
+        idempotencyKey:
+          type: string
+          title: idempotency_key
+          description: |-
+            Idempotency key for URI creation.
+             Same key always returns same URI within TTL.
       title: CreateContentRequest
       additionalProperties: false
       description: |-
         CreateContentRequest creates a new MXC URI without uploading content.
-         The returned MXC URI can be used later with UploadContent by setting the
-         server_name and media_id fields in UploadMetadata.
+
+         This reserves a URI that can be used later for actual upload.
+         The URI remains reserved until content is uploaded or expires.
+
+         Use Cases:
+           1. Pre-allocation: Get URI before upload (e.g., for database records)
+           2. Deferred upload: Get URI now, upload later
+           3. Resumable: Store URI, allow client to resume interrupted upload
+
+         Expiration:
+           Unused URIs expire after configurable period (default: 24 hours).
+           After expiration, the media_id is no longer valid for upload.
+    files.v1.CreateContentRequest.LabelsEntry:
+      type: object
+      properties:
+        key:
+          type: string
+          title: key
+        value:
+          type: string
+          title: value
+      title: LabelsEntry
+      additionalProperties: false
     files.v1.CreateContentResponse:
       type: object
       properties:
         contentUri:
           type: string
           title: content_uri
-          description: The mxc:// URI for future upload
+          description: |-
+            Full MXC URI for future upload.
+             Use server_name + media_id in UploadMetadata to upload.
         expiresAt:
           title: expires_at
-          description: Timestamp when the URI expires if unused
+          description: Timestamp when this URI expires if unused.
           $ref: '#/components/schemas/google.protobuf.Timestamp'
         mediaId:
           type: string
           title: media_id
-          description: Extracted media ID from the URI
+          description: Media ID component of the URI.
         serverName:
           type: string
           title: server_name
-          description: Extracted server name from the URI
+          description: Server name component of the URI.
       title: CreateContentResponse
       additionalProperties: false
-      description: CreateContentResponse returns the created MXC URI.
+      description: CreateContentResponse contains the pre-created MXC URI.
     files.v1.CreateMultipartUploadRequest:
       type: object
       properties:
         filename:
           type: string
           title: filename
-          description: Original filename
+          description: Original filename for the final file.
         contentType:
           type: string
           title: content_type
-          description: Expected MIME type
+          description: Expected MIME type.
         totalSize:
           type:
             - integer
             - string
           title: total_size
           format: int64
-          description: Total size of the file
-        ownerId:
-          type: string
-          title: owner_id
-          description: Owner ID
+          description: |-
+            Total size of the complete file in bytes.
+             Used for progress tracking and validation.
         visibility:
           title: visibility
-          description: Initial visibility
+          description: Initial visibility.
           $ref: '#/components/schemas/files.v1.MediaMetadata.Visibility'
         expiresAt:
           title: expires_at
-          description: Expiration timestamp
+          description: Expiration timestamp for the media after upload completes.
           $ref: '#/components/schemas/google.protobuf.Timestamp'
+        labels:
+          type: object
+          title: labels
+          additionalProperties:
+            type: string
+            title: value
+          description: User-defined labels for organization.
+        accessorId:
+          type: array
+          items:
+            type: string
+          title: accessor_id
+          description: Principals to grant initial READER access.
+        organizationId:
+          type: string
+          title: organization_id
+          description: |-
+            Organization or group ID for metadata purposes.
+             Optional - for organization/filtering, not access control.
+        idempotencyKey:
+          type: string
+          title: idempotency_key
+          description: Idempotency key for the entire multipart operation.
       title: CreateMultipartUploadRequest
+      additionalProperties: false
+    files.v1.CreateMultipartUploadRequest.LabelsEntry:
+      type: object
+      properties:
+        key:
+          type: string
+          title: key
+        value:
+          type: string
+          title: value
+      title: LabelsEntry
       additionalProperties: false
     files.v1.CreateMultipartUploadResponse:
       type: object
@@ -2058,7 +2608,9 @@ components:
         uploadId:
           type: string
           title: upload_id
-          description: Upload ID for the multipart upload
+          description: |-
+            Opaque upload ID for this multipart session.
+             Required for all subsequent operations on this upload.
       title: CreateMultipartUploadResponse
       additionalProperties: false
     files.v1.DeleteContentRequest:
@@ -2067,21 +2619,124 @@ components:
         mediaId:
           type: string
           title: media_id
-          description: Media ID to delete
+          description: Media ID to delete.
         hardDelete:
           type: boolean
           title: hard_delete
-          description: True for hard delete, false for soft delete
+          description: |-
+            True for permanent deletion, false for soft delete.
+             Default: false (soft delete)
+        idempotencyKey:
+          type: string
+          title: idempotency_key
+          description: Idempotency key.
       title: DeleteContentRequest
       additionalProperties: false
+      description: |-
+        DeleteContentRequest deletes content from the repository.
+
+         Soft Delete (default):
+           - Content marked as DELETED
+           - Data retained for retention period
+           - Can be restored via RestoreVersion
+           - Storage not reclaimed until hard delete or expiration
+
+         Hard Delete:
+           - Content permanently removed
+           - Cannot be restored
+           - Storage reclaimed immediately
+           - Requires OWNER role
+
+         Retention Policy:
+           If content is under retention policy, hard delete may be denied.
+           Use DELETE_OUTCOME_DENIED_BY_RETENTION in response.
     files.v1.DeleteContentResponse:
       type: object
       properties:
         success:
           type: boolean
           title: success
-          description: Whether the deletion was successful
+          description: |-
+            Whether the delete was successful.
+             False if media not found or permission denied.
+        outcome:
+          title: outcome
+          description: Detailed outcome of the delete operation.
+          $ref: '#/components/schemas/files.v1.DeleteOutcome'
       title: DeleteContentResponse
+      additionalProperties: false
+    files.v1.DeleteOutcome:
+      type: string
+      title: DeleteOutcome
+      enum:
+        - DELETE_OUTCOME_UNSPECIFIED
+        - DELETE_OUTCOME_SOFT
+        - DELETE_OUTCOME_HARD
+        - DELETE_OUTCOME_DENIED_BY_RETENTION
+      description: |-
+        DeleteOutcome represents the outcome of a delete operation.
+
+         This field clarifies what happened during deletion, which is important
+         for client logic and audit trails.
+    files.v1.DownloadChunk:
+      type: object
+      properties:
+        data:
+          type: string
+          title: data
+          format: byte
+          description: |-
+            Chunk data.
+             Chunk size varies based on server configuration.
+      title: DownloadChunk
+      additionalProperties: false
+      description: |-
+        DownloadChunk carries a portion of streamed content.
+
+         Server streams chunks as they're read from storage.
+         Client assembles chunks in order received.
+    files.v1.DownloadContentRequest:
+      type: object
+      properties:
+        mediaId:
+          type: string
+          title: media_id
+          maxLength: 40
+          minLength: 1
+          pattern: '[0-9a-z_-]{3,40}'
+          description: Media ID to download.
+      title: DownloadContentRequest
+      additionalProperties: false
+    files.v1.DownloadRangeRequest:
+      type: object
+      properties:
+        mediaId:
+          type: string
+          title: media_id
+          maxLength: 40
+          minLength: 1
+          pattern: '[0-9a-z_-]{3,40}'
+          description: Media ID to download.
+        start:
+          type:
+            - integer
+            - string
+          title: start
+          format: int64
+          description: |-
+            Start byte offset (inclusive).
+             Must be >= 0 and < file size.
+        end:
+          type:
+            - integer
+            - string
+          title: end
+          format: int64
+          description: |-
+            End byte offset (exclusive).
+             Must be > start and <= file size.
+             Omit or set to -1 for remainder of file.
+      title: DownloadRangeRequest
       additionalProperties: false
     files.v1.FileVersion:
       type: object
@@ -2092,33 +2747,81 @@ components:
             - string
           title: version
           format: int64
-          description: Version number
+          description: Version number (1-based, ascending).
         mediaId:
           type: string
           title: media_id
-          description: Media ID for this version
+          description: Media ID for this version (same across versions).
         createdAt:
           title: created_at
-          description: When this version was created
+          description: When this version was created.
           $ref: '#/components/schemas/google.protobuf.Timestamp'
         createdBy:
           type: string
           title: created_by
-          description: Who created this version
+          description: ID of principal who created this version.
         sizeBytes:
           type:
             - integer
             - string
           title: size_bytes
           format: int64
-          description: Size of this version
+          description: Size of this version's content in bytes.
+        checksumSha256:
+          type: string
+          title: checksum_sha256
+          description: SHA-256 checksum of this version.
       title: FileVersion
+      additionalProperties: false
+      description: FileVersion represents a historical version of media.
+    files.v1.FinalizeSignedUploadRequest:
+      type: object
+      properties:
+        mediaId:
+          type: string
+          title: media_id
+          description: Media ID to finalize.
+        checksumSha256:
+          type: string
+          title: checksum_sha256
+          description: |-
+            SHA-256 checksum of the uploaded content.
+             Must match what was actually uploaded.
+        sizeBytes:
+          type:
+            - integer
+            - string
+          title: size_bytes
+          format: int64
+          description: |-
+            Size of the uploaded content in bytes.
+             Must match actual uploaded size.
+        idempotencyKey:
+          type: string
+          title: idempotency_key
+          description: Idempotency key.
+      title: FinalizeSignedUploadRequest
+      additionalProperties: false
+    files.v1.FinalizeSignedUploadResponse:
+      type: object
+      properties:
+        metadata:
+          title: metadata
+          description: |-
+            Final media metadata.
+             State should now be AVAILABLE.
+          $ref: '#/components/schemas/files.v1.MediaMetadata'
+      title: FinalizeSignedUploadResponse
       additionalProperties: false
     files.v1.GetConfigRequest:
       type: object
       title: GetConfigRequest
       additionalProperties: false
-      description: GetConfigRequest retrieves content repository configuration. Empty request
+      description: |-
+        GetConfigRequest retrieves server configuration.
+
+         This allows clients to discover server capabilities and limits
+         without hardcoding values.
     files.v1.GetConfigResponse:
       type: object
       properties:
@@ -2128,41 +2831,91 @@ components:
             - string
           title: max_upload_bytes
           format: int64
-          description: Maximum upload size in bytes
+          description: |-
+            Maximum upload size in bytes.
+             Clients should enforce this before upload.
         directClientUploadEnabled:
           type: boolean
           title: direct_client_upload_enabled
-          description: Whether direct client upload is enabled
+          description: |-
+            Whether direct client upload is enabled.
+             If false, clients must use signed URLs.
+        maxSignedUrlExpireSeconds:
+          type:
+            - integer
+            - string
+          title: max_signed_url_expire_seconds
+          format: int64
+          description: Maximum expiration time for signed URLs (seconds).
+        minSignedUrlExpireSeconds:
+          type:
+            - integer
+            - string
+          title: min_signed_url_expire_seconds
+          format: int64
+          description: Minimum expiration time for signed URLs (seconds).
+        supportedThumbnailMethods:
+          type: array
+          items:
+            $ref: '#/components/schemas/files.v1.ThumbnailMethod'
+          title: supported_thumbnail_methods
+          description: Supported thumbnail methods.
+        maxThumbnailWidth:
+          type: integer
+          title: max_thumbnail_width
+          format: int32
+          description: Maximum thumbnail dimensions.
+        maxThumbnailHeight:
+          type: integer
+          title: max_thumbnail_height
+          format: int32
+        maxLabelsPerMedia:
+          type: integer
+          title: max_labels_per_media
+          format: int32
+          description: Maximum number of labels per media.
+        maxLabelKeyLength:
+          type: integer
+          title: max_label_key_length
+          format: int32
+          description: Maximum label key length.
+        maxLabelValueLength:
+          type: integer
+          title: max_label_value_length
+          format: int32
+          description: Maximum label value length.
         extra:
           title: extra
-          description: Additional configuration
+          description: Additional server configuration.
           $ref: '#/components/schemas/google.protobuf.Struct'
       title: GetConfigResponse
       additionalProperties: false
-      description: GetConfigResponse returns repository configuration.
     files.v1.GetContentOverrideNameRequest:
       type: object
       properties:
         mediaId:
           type: string
           title: media_id
+          maxLength: 40
           minLength: 1
-          description: Media ID from MXC URI
+          pattern: '[0-9a-z_-]{3,40}'
+          description: Media ID to download.
         fileName:
           type: string
           title: file_name
           minLength: 1
-          description: Override filename
+          description: |-
+            Filename to override in Content-Disposition header.
+             Useful for API downloads where original name may be unsafe.
         timeoutMs:
           type:
             - integer
             - string
           title: timeout_ms
           format: int64
-          description: Timeout in milliseconds (default 20000)
+          description: Timeout in milliseconds.
       title: GetContentOverrideNameRequest
       additionalProperties: false
-      description: GetContentOverrideNameRequest downloads content with a specific filename.
     files.v1.GetContentOverrideNameResponse:
       type: object
       properties:
@@ -2170,32 +2923,46 @@ components:
           type: string
           title: content
           format: byte
-          description: The file content
         metadata:
           title: metadata
-          description: Media metadata
           $ref: '#/components/schemas/files.v1.MediaMetadata'
       title: GetContentOverrideNameResponse
       additionalProperties: false
-      description: GetContentOverrideNameResponse returns content with overridden filename.
     files.v1.GetContentRequest:
       type: object
       properties:
         mediaId:
           type: string
           title: media_id
+          maxLength: 40
           minLength: 1
-          description: Media ID from MXC URI
+          pattern: '[0-9a-z_-]{3,40}'
+          description: Media ID to download.
         timeoutMs:
           type:
             - integer
             - string
           title: timeout_ms
           format: int64
-          description: Timeout in milliseconds (default 20000)
+          description: |-
+            Timeout in milliseconds.
+             Default: 20000 (20 seconds)
+             For very large files, use streaming API.
       title: GetContentRequest
       additionalProperties: false
-      description: GetContentRequest downloads content from the repository.
+      description: |-
+        GetContentRequest downloads complete content.
+
+         This is the standard download method for most use cases.
+         For large files or streaming needs, use DownloadContent.
+
+         Cache Headers:
+           Server respects If-None-Match and If-Modified-Since.
+           Include etag from metadata for efficient caching.
+
+         Timeouts:
+           Default: 20 seconds
+           For large files, use DownloadContent (streaming).
     files.v1.GetContentResponse:
       type: object
       properties:
@@ -2203,37 +2970,45 @@ components:
           type: string
           title: content
           format: byte
-          description: The file content
+          description: Binary content of the file.
         metadata:
           title: metadata
-          description: Media metadata
+          description: |-
+            Current metadata at time of download.
+             Always fetch fresh before using for decisions.
           $ref: '#/components/schemas/files.v1.MediaMetadata'
       title: GetContentResponse
       additionalProperties: false
-      description: GetContentResponse returns the requested content.
     files.v1.GetContentThumbnailRequest:
       type: object
       properties:
         mediaId:
           type: string
           title: media_id
+          maxLength: 40
           minLength: 1
-          description: Media ID from MXC URI
+          pattern: '[0-9a-z_-]{3,40}'
+          description: Media ID to generate thumbnail from.
         width:
           exclusiveMinimum: 0
           type: integer
           title: width
           format: int32
-          description: Desired width in pixels
+          description: |-
+            Desired width in pixels.
+             Actual size may differ based on aspect ratio and method.
         height:
           exclusiveMinimum: 0
           type: integer
           title: height
           format: int32
-          description: Desired height in pixels
+          description: Desired height in pixels.
         method:
           title: method
-          description: Resizing method (scale or crop)
+          description: |-
+            Resizing method.
+             SCALE: fit within dimensions, preserve ratio
+             CROP: exact dimensions, may lose edge content
           $ref: '#/components/schemas/files.v1.ThumbnailMethod'
         timeoutMs:
           type:
@@ -2241,14 +3016,29 @@ components:
             - string
           title: timeout_ms
           format: int64
-          description: Timeout in milliseconds (default 20000)
+          description: Timeout in milliseconds.
         animated:
           type: boolean
           title: animated
-          description: Prefer animated thumbnail if available
+          description: |-
+            Prefer animated thumbnail if available.
+             Applies to GIF, WebP, video keyframes.
       title: GetContentThumbnailRequest
       additionalProperties: false
-      description: GetContentThumbnailRequest retrieves a thumbnail of content.
+      description: |-
+        GetContentThumbnailRequest generates a thumbnail from media.
+
+         Requirements:
+           - Media must be an image or video
+           - For videos, keyframe extraction is used
+
+         Animated Thumbnails:
+           Set animated=true to prefer animated versions (GIF, WebP).
+           Falls back to static if unavailable.
+
+         Caching:
+           Thumbnails are cached server-side.
+           Same parameters return cached result.
     files.v1.GetContentThumbnailResponse:
       type: object
       properties:
@@ -2256,21 +3046,93 @@ components:
           type: string
           title: content
           format: byte
-          description: The thumbnail bytes
+          description: Thumbnail image data.
         metadata:
           title: metadata
-          description: Media metadata
+          description: Metadata of the source media.
           $ref: '#/components/schemas/files.v1.MediaMetadata'
       title: GetContentThumbnailResponse
       additionalProperties: false
-      description: GetContentThumbnailResponse returns the thumbnail.
+    files.v1.GetMultipartUploadRequest:
+      type: object
+      properties:
+        uploadId:
+          type: string
+          title: upload_id
+          description: Upload ID to inspect.
+      title: GetMultipartUploadRequest
+      additionalProperties: false
+    files.v1.GetMultipartUploadResponse:
+      type: object
+      properties:
+        mediaId:
+          type: string
+          title: media_id
+          description: |-
+            Media ID being uploaded to (once completed).
+             Empty if upload not yet associated with specific media_id.
+        filename:
+          type: string
+          title: filename
+          description: Original filename.
+        totalSize:
+          type:
+            - integer
+            - string
+          title: total_size
+          format: int64
+          description: Total expected size (from CreateMultipartUpload).
+        uploadedSize:
+          type:
+            - integer
+            - string
+          title: uploaded_size
+          format: int64
+          description: Total bytes uploaded so far.
+        visibility:
+          title: visibility
+          description: Visibility setting.
+          $ref: '#/components/schemas/files.v1.MediaMetadata.Visibility'
+        createdAt:
+          title: created_at
+          description: When the multipart upload was created.
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        labels:
+          type: object
+          title: labels
+          additionalProperties:
+            type: string
+            title: value
+          description: Labels for the eventual media.
+        partsUploaded:
+          type: integer
+          title: parts_uploaded
+          format: int32
+          description: Number of parts uploaded so far.
+        uploadState:
+          title: upload_state
+          description: Current state of the upload.
+          $ref: '#/components/schemas/files.v1.MultipartUploadState'
+      title: GetMultipartUploadResponse
+      additionalProperties: false
+    files.v1.GetMultipartUploadResponse.LabelsEntry:
+      type: object
+      properties:
+        key:
+          type: string
+          title: key
+        value:
+          type: string
+          title: value
+      title: LabelsEntry
+      additionalProperties: false
     files.v1.GetRetentionPolicyRequest:
       type: object
       properties:
         mediaId:
           type: string
           title: media_id
-          description: Media ID
+          description: Media ID to get policy for.
       title: GetRetentionPolicyRequest
       additionalProperties: false
     files.v1.GetRetentionPolicyResponse:
@@ -2278,11 +3140,13 @@ components:
       properties:
         policy:
           title: policy
-          description: Applied retention policy
+          description: |-
+            Applied retention policy.
+             Null if no policy assigned.
           $ref: '#/components/schemas/files.v1.RetentionPolicy'
         expiresAt:
           title: expires_at
-          description: Calculated expiration time
+          description: Calculated expiration time based on policy.
           $ref: '#/components/schemas/google.protobuf.Timestamp'
       title: GetRetentionPolicyResponse
       additionalProperties: false
@@ -2292,14 +3156,24 @@ components:
         mediaId:
           type: string
           title: media_id
-          description: Media ID to get signed download URL for
+          description: Media ID to get download URL for.
         expiresSeconds:
           type:
             - integer
             - string
           title: expires_seconds
           format: int64
-          description: URL expiration in seconds
+          description: URL expiration in seconds.
+        download:
+          type: boolean
+          title: download
+          description: |-
+            Optional: Force download (Content-Disposition: attachment).
+             Default: false (inline for images, etc.)
+        filename:
+          type: string
+          title: filename
+          description: 'Optional: Override filename in Content-Disposition.'
       title: GetSignedDownloadUrlRequest
       additionalProperties: false
     files.v1.GetSignedDownloadUrlResponse:
@@ -2308,7 +3182,7 @@ components:
         downloadUrl:
           type: string
           title: download_url
-          description: Signed download URL
+          description: Signed URL for direct download from storage.
       title: GetSignedDownloadUrlResponse
       additionalProperties: false
     files.v1.GetSignedUploadUrlRequest:
@@ -2317,14 +3191,20 @@ components:
         mediaId:
           type: string
           title: media_id
-          description: Media ID to get signed upload URL for
+          description: |-
+            Media ID to get signed upload URL for.
+             Media must be in CREATING state (from CreateContent).
         expiresSeconds:
           type:
             - integer
             - string
           title: expires_seconds
           format: int64
-          description: URL expiration in seconds
+          description: |-
+            URL expiration in seconds.
+             Minimum: 60 (1 minute)
+             Maximum: 3600 (1 hour) - configurable by admin
+             Shorter = more secure
       title: GetSignedUploadUrlRequest
       additionalProperties: false
     files.v1.GetSignedUploadUrlResponse:
@@ -2333,7 +3213,9 @@ components:
         uploadUrl:
           type: string
           title: upload_url
-          description: Signed upload URL
+          description: |-
+            Signed URL for direct upload to storage.
+             HTTP PUT with binary content.
       title: GetSignedUploadUrlResponse
       additionalProperties: false
     files.v1.GetStorageStatsRequest:
@@ -2349,21 +3231,21 @@ components:
             - string
           title: total_bytes
           format: int64
-          description: Total storage across all users
+          description: Total bytes stored.
         totalFiles:
           type:
             - integer
             - string
           title: total_files
           format: int64
-          description: Total files
+          description: Total file count.
         totalUsers:
           type:
             - integer
             - string
           title: total_users
           format: int64
-          description: Total users with files
+          description: Total users with files.
       title: GetStorageStatsResponse
       additionalProperties: false
     files.v1.GetUrlPreviewRequest:
@@ -2373,31 +3255,50 @@ components:
           type: string
           title: url
           format: uri
-          description: URL to preview
+          description: |-
+            URL to fetch preview for.
+             Must be a valid, publicly accessible URL.
       title: GetUrlPreviewRequest
       additionalProperties: false
-      description: GetUrlPreviewRequest gets preview information for a URL.
+      description: |-
+        GetUrlPreviewRequest fetches OpenGraph metadata for a URL.
+
+         This enables link previews in chat/messaging applications.
+         Server fetches the URL, extracts og: meta tags, and returns them.
+
+         Rate Limiting:
+           Preview requests may be rate limited per domain.
+
+         Caching:
+           Previews are cached server-side (configurable TTL).
+           Subsequent requests for same URL return cached result.
     files.v1.GetUrlPreviewResponse:
       type: object
       properties:
         ogData:
           title: og_data
-          description: OpenGraph data (og:title, og:description, etc.)
+          description: |-
+            OpenGraph metadata as key-value pairs.
+             Includes: og:title, og:description, og:image, og:type, etc.
+             Keys may vary based on page metadata.
           $ref: '#/components/schemas/google.protobuf.Struct'
         ogImageMediaId:
           type: string
           title: og_image_media_id
-          description: Media ID of the preview image
+          description: |-
+            Media ID of the preview image, if any.
+             Can be used to fetch the image via GetContent.
       title: GetUrlPreviewResponse
       additionalProperties: false
-      description: GetUrlPreviewResponse returns OpenGraph data for the URL.
     files.v1.GetUserUsageRequest:
       type: object
       properties:
         userId:
           type: string
           title: user_id
-          description: User ID to get usage for
+          description: |-
+            User ID to get usage for.
+             If empty, returns usage for authenticated user.
       title: GetUserUsageRequest
       additionalProperties: false
     files.v1.GetUserUsageResponse:
@@ -2405,15 +3306,15 @@ components:
       properties:
         usage:
           title: usage
-          description: Usage statistics
+          description: Usage statistics.
           $ref: '#/components/schemas/files.v1.UsageStats'
         periodStart:
           title: period_start
-          description: Start of billing period
+          description: Start of the billing/usage period.
           $ref: '#/components/schemas/google.protobuf.Timestamp'
         periodEnd:
           title: period_end
-          description: End of billing period
+          description: End of the billing/usage period.
           $ref: '#/components/schemas/google.protobuf.Timestamp'
       title: GetUserUsageResponse
       additionalProperties: false
@@ -2423,17 +3324,18 @@ components:
         mediaId:
           type: string
           title: media_id
-          description: Media ID to get versions for
-        limit:
-          type: integer
-          title: limit
-          format: int32
-          description: Max versions to return
-        beforeVersion:
-          type: integer
-          title: before_version
-          format: int32
-          description: Get versions before this version
+          description: Media ID to get versions for.
+        cursor:
+          title: cursor
+          description: Pagination using common PageCursor.
+          $ref: '#/components/schemas/common.v1.PageCursor'
+        timeoutMs:
+          type:
+            - integer
+            - string
+          title: timeout_ms
+          format: int64
+          description: Timeout in milliseconds.
       title: GetVersionsRequest
       additionalProperties: false
     files.v1.GetVersionsResponse:
@@ -2444,15 +3346,55 @@ components:
           items:
             $ref: '#/components/schemas/files.v1.FileVersion'
           title: versions
-          description: List of versions
+          description: Versions in descending order (newest first).
         latestVersion:
           type:
             - integer
             - string
           title: latest_version
           format: int64
-          description: Latest version number
+          description: Latest version number.
+        nextCursor:
+          title: next_cursor
+          description: Pagination cursor for next page.
+          $ref: '#/components/schemas/common.v1.PageCursor'
       title: GetVersionsResponse
+      additionalProperties: false
+    files.v1.GrantAccessRequest:
+      type: object
+      properties:
+        mediaId:
+          type: string
+          title: media_id
+          description: Media ID to grant access to.
+        grant:
+          title: grant
+          description: The access grant to apply.
+          $ref: '#/components/schemas/files.v1.AccessGrant'
+        idempotencyKey:
+          type: string
+          title: idempotency_key
+          description: Idempotency key.
+      title: GrantAccessRequest
+      additionalProperties: false
+      description: |-
+        GrantAccessRequest grants access to a principal for media.
+
+         Who can grant:
+           - OWNER: can grant any role
+           - WRITER: can grant READER only
+
+         Duplicate grants:
+           Granting to principal with existing role updates their role.
+           No error returned; grant is simply updated.
+    files.v1.GrantAccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          title: success
+          description: Whether the grant was applied.
+      title: GrantAccessResponse
       additionalProperties: false
     files.v1.HeadContentRequest:
       type: object
@@ -2460,18 +3402,60 @@ components:
         mediaId:
           type: string
           title: media_id
+          maxLength: 40
           minLength: 1
-          description: Media ID from MXC URI
+          pattern: '[0-9a-z_-]{3,40}'
+          description: Media ID to get metadata for.
       title: HeadContentRequest
       additionalProperties: false
+      description: |-
+        HeadContentRequest retrieves metadata without downloading content.
+
+         Use for:
+           - Checking if content exists
+           - Getting metadata before download
+           - Checking content length for range requests
+           - Verifying etag for cache validation
     files.v1.HeadContentResponse:
       type: object
       properties:
         metadata:
           title: metadata
-          description: Media metadata
+          description: Current metadata.
           $ref: '#/components/schemas/files.v1.MediaMetadata'
       title: HeadContentResponse
+      additionalProperties: false
+    files.v1.ListAccessRequest:
+      type: object
+      properties:
+        mediaId:
+          type: string
+          title: media_id
+          description: Media ID to list grants for.
+        filterRole:
+          title: filter_role
+          description: Filter by role (optional).
+          $ref: '#/components/schemas/files.v1.AccessRole'
+        cursor:
+          title: cursor
+          description: Pagination using common PageCursor.
+          $ref: '#/components/schemas/common.v1.PageCursor'
+      title: ListAccessRequest
+      additionalProperties: false
+    files.v1.ListAccessResponse:
+      type: object
+      properties:
+        grants:
+          type: array
+          items:
+            $ref: '#/components/schemas/files.v1.AccessGrant'
+          title: grants
+          description: Access grants for this media.
+        nextCursor:
+          title: next_cursor
+          description: Pagination cursor for next page.
+          $ref: '#/components/schemas/common.v1.PageCursor'
+      title: ListAccessResponse
       additionalProperties: false
     files.v1.ListMultipartPartsRequest:
       type: object
@@ -2479,7 +3463,11 @@ components:
         uploadId:
           type: string
           title: upload_id
-          description: Upload ID
+          description: Upload ID to list parts for.
+        cursor:
+          title: cursor
+          description: Pagination using common PageCursor.
+          $ref: '#/components/schemas/common.v1.PageCursor'
       title: ListMultipartPartsRequest
       additionalProperties: false
     files.v1.ListMultipartPartsResponse:
@@ -2490,7 +3478,12 @@ components:
           items:
             $ref: '#/components/schemas/files.v1.ListMultipartPartsResponse.Part'
           title: parts
-          description: List of parts
+        nextCursor:
+          title: next_cursor
+          description: |-
+            Pagination cursor for next page.
+             Use in next request's PageCursor.page.
+          $ref: '#/components/schemas/common.v1.PageCursor'
       title: ListMultipartPartsResponse
       additionalProperties: false
     files.v1.ListMultipartPartsResponse.Part:
@@ -2500,22 +3493,28 @@ components:
           type: integer
           title: part_number
           format: int32
-          description: Part number
         etag:
           type: string
           title: etag
-          description: ETag
         size:
           type:
             - integer
             - string
           title: size
           format: int64
-          description: Part size
+        uploadedAt:
+          title: uploaded_at
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
       title: Part
       additionalProperties: false
+      description: Uploaded parts in ascending part_number order.
     files.v1.ListRetentionPoliciesRequest:
       type: object
+      properties:
+        cursor:
+          title: cursor
+          description: Pagination using common PageCursor.
+          $ref: '#/components/schemas/common.v1.PageCursor'
       title: ListRetentionPoliciesRequest
       additionalProperties: false
     files.v1.ListRetentionPoliciesResponse:
@@ -2526,7 +3525,10 @@ components:
           items:
             $ref: '#/components/schemas/files.v1.RetentionPolicy'
           title: policies
-          description: Available policies
+        nextCursor:
+          title: next_cursor
+          description: Pagination cursor for next page.
+          $ref: '#/components/schemas/common.v1.PageCursor'
       title: ListRetentionPoliciesResponse
       additionalProperties: false
     files.v1.MediaMetadata:
@@ -2538,49 +3540,78 @@ components:
           maxLength: 40
           minLength: 3
           pattern: '[0-9a-z_-]{3,40}'
-          description: The media ID from the MXC URI
+          description: |-
+            Unique identifier for this media.
+             Format: alphanumeric with hyphens/underscores, 3-40 characters.
+             Example: "abc123xyz" from mxc://server.com/abc123xyz
         contentType:
           type: string
           title: content_type
-          description: MIME type of the content
+          description: |-
+            MIME type of the content.
+             Examples: "image/png", "application/pdf", "video/mp4"
+             Detected from file content during upload; may be overridden.
         fileSizeBytes:
           type:
             - integer
             - string
           title: file_size_bytes
           format: int64
-          description: Size of the file in bytes
+          description: |-
+            Size of the file in bytes.
+             For available content, this is the actual stored size.
+             For creating state, this may be the expected size from upload metadata.
         createdAt:
           title: created_at
-          description: Creation timestamp
+          description: |-
+            Timestamp when the media was first created (upload initiated).
+             Set by server; cannot be modified by clients.
           $ref: '#/components/schemas/google.protobuf.Timestamp'
         updatedAt:
           title: updated_at
-          description: Last update timestamp
+          description: |-
+            Timestamp when metadata was last modified.
+             Updated on any metadata change (rename, visibility change, etc.)
           $ref: '#/components/schemas/google.protobuf.Timestamp'
         filename:
           type: string
           title: filename
-          description: Original filename when uploaded
+          description: |-
+            Original filename as uploaded by the client.
+             May contain Unicode characters. Used for Content-Disposition headers.
+             Maximum recommended length: 255 bytes (filesystem compatibility).
         checksumSha256:
           type: string
           title: checksum_sha256
-          description: SHA256 checksum of the file
-        ownerId:
-          type: string
-          title: owner_id
-          description: ID of the user who uploaded the file
+          description: |-
+            SHA-256 checksum of the file content.
+             Format: 64 lowercase hexadecimal characters.
+             Computed server-side from stored content; clients can verify
+             during upload using UploadMetadata.checksum_sha256.
         visibility:
           title: visibility
-          description: Visibility of the content
+          description: |-
+            Visibility determines who can access this content without explicit grant.
+
+             - PUBLIC: Accessible to any authenticated user within the namespace.
+                       No access grant required.
+             - PRIVATE: Only accessible to owner and principals with explicit grants.
+                        Default for all uploads.
           $ref: '#/components/schemas/files.v1.MediaMetadata.Visibility'
         extra:
           title: extra
-          description: Additional metadata
+          description: |-
+            Additional metadata as key-value pairs.
+             This is for system-level metadata (e.g., image dimensions, video duration).
+             For user-defined metadata, use labels instead.
+             Maximum size: 64KB when serialized as JSON.
           $ref: '#/components/schemas/google.protobuf.Struct'
         expiresAt:
           title: expires_at
-          description: Expiration timestamp
+          description: |-
+            Expiration timestamp after which content may be automatically deleted.
+             Null/empty means no expiration. Set by owner or by retention policy.
+             After expiration, content enters DELETED state.
           $ref: '#/components/schemas/google.protobuf.Timestamp'
         version:
           type:
@@ -2588,14 +3619,120 @@ components:
             - string
           title: version
           format: int64
-          description: Current version number (for versioning)
+          description: |-
+            Current version number for versioned content.
+             Starts at 1 and increments on each new version upload.
+             Use GetVersions to retrieve version history.
         isLatest:
           type: boolean
           title: is_latest
-          description: Whether this is the latest version
+          description: |-
+            Whether this metadata entry represents the latest version.
+             True for the current version; false for historical versions.
+             When listing versions, only the latest entry has is_latest=true.
+        state:
+          title: state
+          description: |-
+            Current lifecycle state of the media.
+             Controls whether content is available for download.
+             See MediaState enum for valid transitions.
+          $ref: '#/components/schemas/files.v1.MediaState'
+        etag:
+          type: string
+          title: etag
+          description: |-
+            ETag for optimistic concurrency control.
+             Send this value in If-Match header for conditional operations.
+             Changes on every metadata modification.
+        scanStatus:
+          title: scan_status
+          description: |-
+            Antivirus/antimalware scan status.
+             Content may be blocked from download if scan is not CLEAN.
+             See ScanStatus for details.
+          $ref: '#/components/schemas/files.v1.ScanStatus'
+        archivedAt:
+          title: archived_at
+          description: Timestamp when content was archived (null if not archived).
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        deletedAt:
+          title: deleted_at
+          description: Timestamp when content was soft-deleted (null if not deleted).
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        labels:
+          type: object
+          title: labels
+          additionalProperties:
+            type: string
+            title: value
+          description: |-
+            User-defined labels for organization and search.
+             These are MUTABLE and user-controlled.
+
+             IMPORTANT: Labels are NOT security boundaries. They are for:
+               - Project organization (e.g., project_id, department)
+               - Categorization (e.g., document_type, tags)
+               - Search/filtering (e.g., status, year)
+
+             Example usage:
+               labels["project"] = "billing-service"
+               labels["room_id"] = "matrix:!abc123"
+               labels["folder"] = "invoices/2026"
+
+             Constraints:
+               - Maximum 50 labels per media
+               - Key length: 1-128 characters
+               - Value length: 0-1024 characters
+               - Keys must be valid UTF-8 strings
+        contentUri:
+          type: string
+          title: content_uri
+          description: |-
+            Full MXC URI for this content.
+             Format: mxc://<server_name>/<media_id>
+             Example: mxc://cdn.example.com/abc123xyz
+        organizationId:
+          type: string
+          title: organization_id
+          description: |-
+            Organization or group ID this media is associated with.
+
+             This is metadata for organization/filtering purposes only.
+             It does NOT control access - use AccessGrant for access control.
+
+             Format:
+               - Organization: "org:<org_id>" (e.g., "org:acme-corp")
+               - Chat Group: "room:<room_id>" (e.g., "room:!abc123:matrix.org")
+                              "chat:<chat_id>" (e.g., "chat:C1234567890")
+
+             Use this for:
+               - Search/filtering by organization or chat group
+               - UI organization display
+               - Audit trails
+
+             For access control, use GrantAccess with principal_type ORGANIZATION or CHAT_GROUP.
       title: MediaMetadata
       additionalProperties: false
-      description: MediaMetadata represents metadata about an uploaded file.
+      description: |-
+        MediaMetadata represents the complete metadata for an uploaded file.
+
+         This is the authoritative source of truth for file attributes. Clients
+         should always fetch fresh metadata before performing operations that
+         depend on current state (e.g., checking visibility before download).
+
+         Thread Safety: Metadata may be updated concurrently. Use etag for
+         optimistic locking when patching.
+    files.v1.MediaMetadata.LabelsEntry:
+      type: object
+      properties:
+        key:
+          type: string
+          title: key
+        value:
+          type: string
+          title: value
+      title: LabelsEntry
+      additionalProperties: false
     files.v1.MediaMetadata.Visibility:
       type: string
       title: Visibility
@@ -2603,20 +3740,171 @@ components:
         - VISIBILITY_UNSPECIFIED
         - VISIBILITY_PUBLIC
         - VISIBILITY_PRIVATE
+    files.v1.MediaState:
+      type: string
+      title: MediaState
+      enum:
+        - MEDIA_STATE_UNSPECIFIED
+        - MEDIA_STATE_CREATING
+        - MEDIA_STATE_AVAILABLE
+        - MEDIA_STATE_ARCHIVED
+        - MEDIA_STATE_DELETED
+        - MEDIA_STATE_FAILED
+      description: |-
+        MediaState represents the lifecycle state of a media object.
+
+         State Transitions:
+           CREATING -> AVAILABLE (normal upload complete or finalize signed upload)
+           CREATING -> FAILED (upload failed or was aborted)
+           AVAILABLE -> ARCHIVED (retention policy or manual archive)
+           AVAILABLE -> DELETED (soft delete)
+           AVAILABLE -> CREATING (re-upload to same media_id)
+           ARCHIVED -> AVAILABLE (restore from archive)
+           DELETED -> AVAILABLE (restore from soft delete)
+           DELETED -> (hard delete after retention period expires)
+
+         IMPORTANT: Content in CREATING state cannot be downloaded. Clients must
+         poll or wait for AVAILABLE state before serving content.
+    files.v1.MultipartUploadState:
+      type: string
+      title: MultipartUploadState
+      enum:
+        - MULTIPART_UPLOAD_STATE_UNSPECIFIED
+        - MULTIPART_UPLOAD_STATE_UPLOADING
+        - MULTIPART_UPLOAD_STATE_COMPLETING
+        - MULTIPART_UPLOAD_STATE_COMPLETED
+        - MULTIPART_UPLOAD_STATE_ABORTED
+        - MULTIPART_UPLOAD_STATE_EXPIRED
+      description: MultipartUploadState represents the state of a multipart upload session.
+    files.v1.PatchContentRequest:
+      type: object
+      properties:
+        mediaId:
+          type: string
+          title: media_id
+          description: Media ID to patch.
+        setExtra:
+          title: set_extra
+          description: |-
+            Set/update extra metadata.
+             Merge with existing extra (not replace).
+             To remove a key, set value to null in the struct.
+          $ref: '#/components/schemas/google.protobuf.Struct'
+        setLabels:
+          type: object
+          title: set_labels
+          additionalProperties:
+            type: string
+            title: value
+          description: |-
+            Set/update labels.
+             Merge with existing labels.
+        removeLabels:
+          type: array
+          items:
+            type: string
+          title: remove_labels
+          description: Labels to remove entirely.
+        filename:
+          type: string
+          title: filename
+          description: |-
+            New filename.
+             If empty, filename is unchanged.
+        visibility:
+          title: visibility
+          description: |-
+            New visibility.
+             If VISIBILITY_UNSPECIFIED, visibility is unchanged.
+          $ref: '#/components/schemas/files.v1.MediaMetadata.Visibility'
+        expiresAt:
+          title: expires_at
+          description: |-
+            New expiration timestamp.
+             If empty, expires_at is unchanged.
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        idempotencyKey:
+          type: string
+          title: idempotency_key
+          description: Idempotency key.
+      title: PatchContentRequest
+      additionalProperties: false
+      description: |-
+        PatchContentRequest updates metadata for existing content.
+
+         This is a PATCH (partial update) operation.
+         Fields not specified are left unchanged.
+
+         Optimistic Concurrency:
+           Include etag from current metadata in If-Match header.
+           Server returns PRECONDITION_FAILED if etag doesn't match.
+
+         What can be patched:
+           - filename: Rename the file
+           - visibility: Change access level
+           - expires_at: Update expiration
+           - set_labels: Add/update labels
+           - remove_labels: Remove specific labels
+           - set_extra: Add/update extra metadata
+
+         What cannot be patched (requires new version):
+           - content_type
+           - file_size_bytes
+           - checksum_sha256
+    files.v1.PatchContentRequest.SetLabelsEntry:
+      type: object
+      properties:
+        key:
+          type: string
+          title: key
+        value:
+          type: string
+          title: value
+      title: SetLabelsEntry
+      additionalProperties: false
+    files.v1.PatchContentResponse:
+      type: object
+      properties:
+        metadata:
+          title: metadata
+          description: Updated metadata reflecting changes.
+          $ref: '#/components/schemas/files.v1.MediaMetadata'
+      title: PatchContentResponse
+      additionalProperties: false
+    files.v1.PrincipalType:
+      type: string
+      title: PrincipalType
+      enum:
+        - PRINCIPAL_TYPE_UNSPECIFIED
+        - PRINCIPAL_TYPE_USER
+        - PRINCIPAL_TYPE_SERVICE
+        - PRINCIPAL_TYPE_ORGANIZATION
+        - PRINCIPAL_TYPE_CHAT_GROUP
+      description: |-
+        PrincipalType defines the type of principal in an access grant.
+
+         This helps the system understand how to resolve group membership
+         when checking access permissions.
     files.v1.RestoreVersionRequest:
       type: object
       properties:
         mediaId:
           type: string
           title: media_id
-          description: Media ID
+          description: Media ID to restore version for.
         version:
           type:
             - integer
             - string
           title: version
           format: int64
-          description: Version to restore
+          description: |-
+            Version number to restore.
+             Must be an existing version.
+        idempotencyKey:
+          type: string
+          title: idempotency_key
+          description: Idempotency key.
       title: RestoreVersionRequest
       additionalProperties: false
     files.v1.RestoreVersionResponse:
@@ -2624,7 +3912,9 @@ components:
       properties:
         metadata:
           title: metadata
-          description: Metadata of restored file
+          description: |-
+            Metadata of the restored file.
+             Version is now the latest.
           $ref: '#/components/schemas/files.v1.MediaMetadata'
       title: RestoreVersionResponse
       additionalProperties: false
@@ -2634,23 +3924,34 @@ components:
         policyId:
           type: string
           title: policy_id
-          description: Unique policy ID
+          description: Unique policy ID within the system.
         name:
           type: string
           title: name
-          description: Policy name
+          description: Human-readable policy name.
+        description:
+          type: string
+          title: description
+          description: Description of this policy.
         retentionDays:
           type:
             - integer
             - string
           title: retention_days
           format: int64
-          description: Retention period in days (-1 for permanent)
+          description: |-
+            Retention period in days.
+             -1 means permanent retention (never auto-delete).
+             0 means delete immediately after some event.
         mode:
           title: mode
           $ref: '#/components/schemas/files.v1.RetentionPolicy.Mode'
       title: RetentionPolicy
       additionalProperties: false
+      description: |-
+        RetentionPolicy defines how long content is retained.
+
+         Policies can be applied to individual media or configured as default.
     files.v1.RetentionPolicy.Mode:
       type: string
       title: Mode
@@ -2658,55 +3959,196 @@ components:
         - MODE_UNSPECIFIED
         - MODE_DELETE
         - MODE_ARCHIVE
+      description: |-
+        Retention mode.
+         DELETE: remove after retention period
+         ARCHIVE: move to cold storage after period
+    files.v1.RevokeAccessRequest:
+      type: object
+      properties:
+        mediaId:
+          type: string
+          title: media_id
+          description: Media ID to revoke access from.
+        principalId:
+          type: string
+          title: principal_id
+          description: |-
+            Principal ID to revoke.
+             Cannot revoke owner (returns error).
+        idempotencyKey:
+          type: string
+          title: idempotency_key
+          description: Idempotency key.
+      title: RevokeAccessRequest
+      additionalProperties: false
+    files.v1.RevokeAccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          title: success
+          description: |-
+            Whether the revocation was applied.
+             False if grant not found or cannot revoke owner.
+      title: RevokeAccessResponse
+      additionalProperties: false
+    files.v1.ScanStatus:
+      type: string
+      title: ScanStatus
+      enum:
+        - SCAN_STATUS_UNSPECIFIED
+        - SCAN_STATUS_PENDING
+        - SCAN_STATUS_CLEAN
+        - SCAN_STATUS_INFECTED
+        - SCAN_STATUS_FAILED
+      description: |-
+        ScanStatus represents the antivirus/antimalware scan status of media.
+
+         Security Note: Download should be blocked for INFECTED content unless
+         the organization policy explicitly allows it. PENDING content should
+         also be blocked until scan completes with CLEAN status.
     files.v1.SearchMediaRequest:
       type: object
       properties:
+        cursor:
+          title: cursor
+          description: Pagination using common PageCursor.
+          $ref: '#/components/schemas/common.v1.PageCursor'
         query:
           type: string
           title: query
-          description: Search query string
-        limit:
-          type: integer
-          title: limit
-          maximum: 100
-          minimum: 1
-          format: int32
-          description: Results per page (default 20, max 100)
-        afterCursor:
+          description: Full-text search query string.
+        idQuery:
           type: string
-          title: after_cursor
-          description: Cursor for pagination
+          title: id_query
+          description: Specific ID or ID pattern to search for.
         ownerId:
           type: string
           title: owner_id
-          description: Filter by owner ID
+          description: Filter by owner ID.
         createdAfter:
           title: created_after
-          description: Filter by creation date (after)
+          description: 'Filter: created after this time.'
           $ref: '#/components/schemas/google.protobuf.Timestamp'
         createdBefore:
           title: created_before
-          description: Filter by creation date (before)
+          description: 'Filter: created before this time.'
           $ref: '#/components/schemas/google.protobuf.Timestamp'
         visibility:
           title: visibility
-          description: Filter by visibility
+          description: Filter by visibility.
           $ref: '#/components/schemas/files.v1.MediaMetadata.Visibility'
         contentType:
           type: string
           title: content_type
-          description: Filter by MIME type prefix (e.g., "image/")
+          description: |-
+            Filter by content type prefix.
+             Example: "image/" matches all image types.
+        labels:
+          type: object
+          title: labels
+          additionalProperties:
+            type: string
+            title: value
+          description: |-
+            Filter by labels (AND match).
+             All specified labels must be present.
+        sizeGte:
+          type:
+            - integer
+            - string
+          title: size_gte
+          format: int64
+          description: 'Filter: size >= this value (bytes).'
+        sizeLte:
+          type:
+            - integer
+            - string
+          title: size_lte
+          format: int64
+          description: 'Filter: size <= this value (bytes).'
+        state:
+          title: state
+          description: |-
+            Filter by media state.
+             If unspecified, returns all states.
+          $ref: '#/components/schemas/files.v1.MediaState'
+        scanStatus:
+          title: scan_status
+          description: Filter by scan status.
+          $ref: '#/components/schemas/files.v1.ScanStatus'
+        visibilities:
+          type: array
+          items:
+            $ref: '#/components/schemas/files.v1.MediaMetadata.Visibility'
+          title: visibilities
+          description: Filter by visibility (multiple values).
+        accessibleViaRole:
+          title: accessible_via_role
+          description: Filter by access role (media user has access to).
+          $ref: '#/components/schemas/files.v1.AccessRole'
+        timeoutMs:
+          type:
+            - integer
+            - string
+          title: timeout_ms
+          format: int64
+          description: |-
+            Timeout for search operation in milliseconds.
+             Default: server-determined timeout.
+        organizationId:
+          type: string
+          title: organization_id
+          description: |-
+            Filter by organization ID.
+             Returns media where organization_id matches.
         sortBy:
           title: sort_by
-          description: Sort field
+          description: Sort field.
           $ref: '#/components/schemas/files.v1.SearchMediaRequest.SortBy'
         sortDesc:
           type: boolean
           title: sort_desc
-          description: Sort descending (default false)
+          description: |-
+            Sort in descending order.
+             Default: false (ascending).
       title: SearchMediaRequest
       additionalProperties: false
-      description: SearchMediaRequest searches for media files.
+      description: |-
+        SearchMediaRequest searches for media matching criteria.
+
+         Uses common.SearchRequest from common package for pagination and
+         standard search parameters.
+
+         Search Scope:
+           - Includes all states (AVAILABLE, ARCHIVED, DELETED) by default
+           - Use state filter to limit
+
+         Full-Text Search:
+           The query string is matched against:
+           - filename
+           - labels (keys and values)
+           - extra metadata (if indexed)
+
+         Fuzzy Matching:
+           Search is prefix-based for performance.
+           "doc" matches "document.pdf" but not "udocument.pdf".
+
+         Performance:
+           Use specific filters instead of broad queries.
+           Limit results when possible.
+    files.v1.SearchMediaRequest.LabelsEntry:
+      type: object
+      properties:
+        key:
+          type: string
+          title: key
+        value:
+          type: string
+          title: value
+      title: LabelsEntry
+      additionalProperties: false
     files.v1.SearchMediaRequest.SortBy:
       type: string
       title: SortBy
@@ -2724,25 +4166,30 @@ components:
           items:
             $ref: '#/components/schemas/files.v1.MediaMetadata'
           title: results
-          description: Array of matching media metadata
+          description: Matching media metadata.
         nextCursor:
-          type: string
           title: next_cursor
-          description: Cursor for next page
+          description: Pagination cursor for next page.
+          $ref: '#/components/schemas/common.v1.PageCursor'
       title: SearchMediaResponse
       additionalProperties: false
-      description: SearchMediaResponse returns search results.
     files.v1.SetRetentionPolicyRequest:
       type: object
       properties:
         mediaId:
           type: string
           title: media_id
-          description: Media ID
+          description: Media ID to apply policy to.
         policyId:
           type: string
           title: policy_id
-          description: Policy ID to apply
+          description: |-
+            Policy ID to apply.
+             Empty string removes policy.
+        idempotencyKey:
+          type: string
+          title: idempotency_key
+          description: Idempotency key.
       title: SetRetentionPolicyRequest
       additionalProperties: false
     files.v1.SetRetentionPolicyResponse:
@@ -2751,6 +4198,7 @@ components:
         success:
           type: boolean
           title: success
+          description: Whether the policy was set.
       title: SetRetentionPolicyResponse
       additionalProperties: false
     files.v1.ThumbnailMethod:
@@ -2760,128 +4208,268 @@ components:
         - SCALE
         - CROP
       description: |-
-        ThumbnailMethod defines how thumbnails should be generated.
+        ThumbnailMethod defines how thumbnails should be generated from source media.
+
+         - SCALE: Scales the image to fit within the target dimensions while
+           preserving the original aspect ratio. The result may have dimensions
+           smaller than or equal to the requested size.
+         - CROP: Crops the image to exactly match the target dimensions. This
+           may result in losing some of the original image content.
+
+         Choosing between methods:
+           - Use SCALE for: photographs, images where all content matters
+           - Use CROP: avatars, preview tiles where exact dimensions are critical
          buf:lint:ignore ENUM_VALUE_PREFIX
     files.v1.UploadContentRequest:
       type: object
-      oneOf:
+      allOf:
         - properties:
-            chunk:
+            idempotencyKey:
               type: string
+              title: idempotency_key
+              description: "Idempotency key for this upload operation.\n \n If provided, allows safe retry on network failure.\n Same key with same metadata creates same media_id.\n \n Recommended: Use UUID or similar high-entropy key.\n Key is scoped to the owner.\n \n TTL: 24 hours from first request."
+        - oneOf:
+            - properties:
+                chunk:
+                  type: string
+                  title: chunk
+                  format: byte
+                  description: |-
+                    Chunk: binary content data.
+                     Can be repeated multiple times.
+                     Server concatenates chunks in order received.
               title: chunk
-              format: byte
-              description: Content chunk (one or more messages)
-          title: chunk
-          required:
-            - chunk
-        - properties:
-            metadata:
+              required:
+                - chunk
+            - properties:
+                metadata:
+                  title: metadata
+                  description: |-
+                    Metadata: MUST be the first message in the stream.
+                     Contains file properties, labels, access settings.
+                  $ref: '#/components/schemas/files.v1.UploadMetadata'
               title: metadata
-              description: Metadata (required as first message)
-              $ref: '#/components/schemas/files.v1.UploadMetadata'
-          title: metadata
-          required:
-            - metadata
+              required:
+                - metadata
       title: UploadContentRequest
       additionalProperties: false
       description: |-
-        UploadContentRequest uploads content to the content repository via streaming.
-         First message must contain metadata, followed by one or more messages with chunks.
+        UploadContentRequest uploads content via streaming.
+
+         Stream Format:
+           1. First message: data with metadata field populated
+           2. Subsequent messages: data with chunk field populated
+           3. Client sends end-of-stream (closes stream)
+
+         Chunk Size:
+           Recommended: 64KB - 1MB per chunk
+           Maximum: 4MB per chunk
+           Server buffers chunks in memory; very large chunks may cause OOM.
+
+         Timeouts:
+           - Overall upload: configurable via metadata.timeout_ms
+           - Per-chunk: TCP keepalive handles this
+
+         Idempotency:
+           If network fails mid-upload, client can retry with same idempotency_key.
+           Server stores upload state and allows resume.
     files.v1.UploadContentResponse:
       type: object
       properties:
         contentUri:
           type: string
           title: content_uri
-          description: The mxc:// URI for the uploaded content
+          description: |-
+            Full MXC URI for the uploaded content.
+             Format: mxc://<server>/<media_id>
+             Example: mxc://cdn.example.com/abc123xyz
         mediaId:
           type: string
           title: media_id
-          description: Extracted media ID from the URI
+          description: |-
+            Extracted media ID from the URI.
+             Shortcut for parsing content_uri.
         serverName:
           type: string
           title: server_name
-          description: Extracted server name from the URI
+          description: |-
+            Extracted server name from the URI.
+             Shortcut for parsing content_uri.
         metadata:
           title: metadata
-          description: Full media metadata
+          description: |-
+            Complete metadata for the uploaded content.
+             Includes all server-generated fields (created_at, etag, etc.)
           $ref: '#/components/schemas/files.v1.MediaMetadata'
       title: UploadContentResponse
       additionalProperties: false
-      description: UploadContentResponse returns the MXC URI for the uploaded content.
+      description: UploadContentResponse contains the result of a successful upload.
     files.v1.UploadMetadata:
       type: object
       properties:
         contentType:
           type: string
           title: content_type
-          description: MIME type of the content (defaults to application/octet-stream)
+          description: |-
+            MIME type of the content.
+             Defaults to "application/octet-stream" if not specified.
+             Server may override based on content detection.
         filename:
           type: string
           title: filename
-          description: Original filename
+          description: |-
+            Original filename.
+             Used for Content-Disposition header on download.
+             Maximum recommended: 255 bytes.
         totalSize:
           type:
             - integer
             - string
           title: total_size
           format: int64
-          description: Total size of the file in bytes (optional)
+          description: |-
+            Total size of the file in bytes.
+             Optional but recommended for:
+               - Progress tracking on client
+               - Storage quota validation
+               - Multipart upload chunking
         properties:
           title: properties
-          description: Additional properties
+          description: |-
+            Additional properties for the upload.
+             Use for file-specific metadata (e.g., image dimensions).
+             System fields like "width", "height" are recognized.
           $ref: '#/components/schemas/google.protobuf.Struct'
-        ownerId:
-          type: string
-          title: owner_id
-          description: Owner ID (for service-side uploads)
         visibility:
           title: visibility
-          description: Initial visibility (defaults to PRIVATE)
+          description: |-
+            Initial visibility setting for the content.
+             Defaults to PRIVATE if not specified.
+             See MediaMetadata.Visibility for details.
           $ref: '#/components/schemas/files.v1.MediaMetadata.Visibility'
+        organizationId:
+          type: string
+          title: organization_id
+          description: |-
+            Organization or group ID for metadata purposes.
+
+             This is optional metadata for organization/filtering.
+             For access control, use GrantAccess after upload.
+
+             Format:
+               - Organization: "org:<org_id>" (e.g., "org:acme-corp")
+               - Chat Group: "room:<room_id>" or "chat:<chat_id>"
         expiresAt:
           title: expires_at
-          description: Expiration timestamp
+          description: |-
+            Expiration timestamp for the content.
+             After expiration, content may be automatically deleted.
+             Null/empty means no expiration.
           $ref: '#/components/schemas/google.protobuf.Timestamp'
         serverName:
           type: string
           title: server_name
-          description: 'Optional: Set these to upload to a pre-created MXC URI (from CreateContent) Server name from the MXC URI (e.g., "example.com" from "mxc://example.com/abc123")'
+          description: |-
+            Server name from pre-created MXC URI.
+             Format: "cdn.example.com" from "mxc://cdn.example.com/abc123"
+             Required for Pattern 2 (upload to pre-created URI).
         mediaId:
           type: string
           title: media_id
           maxLength: 40
           minLength: 3
           pattern: '[0-9a-z_-]{3,40}'
-          description: Media ID from the MXC URI (e.g., "abc123" from "mxc://example.com/abc123")
+          description: |-
+            Media ID from pre-created MXC URI.
+             Format: "abc123" from "mxc://cdn.example.com/abc123"
+             Must match pattern [0-9a-z_-]{3,40}
+             Required for Pattern 2 (upload to pre-created URI).
+        checksumSha256:
+          type: string
+          title: checksum_sha256
+          description: "SHA-256 checksum for integrity verification.\n Format: 64 lowercase hexadecimal characters.\n \n If provided, server verifies uploaded content matches this checksum.\n Mismatch causes upload failure.\n \n Recommended for:\n   - Large files where re-upload is expensive\n   - Integrity-critical content\n   - Multipart uploads (required at completion)"
+        baseVersion:
+          type:
+            - integer
+            - string
+          title: base_version
+          format: int64
+          description: "Base version for optimistic concurrency.\n \n If provided and media_id exists:\n   - Creates new version if latest_version == base_version\n   - Returns ALREADY_EXISTS error if versions differ\n \n This prevents lost updates when multiple clients upload\n to the same media_id concurrently.\n \n Example:\n   Current version: 3\n   base_version: 3 -> Creates version 4\n   base_version: 2 -> Returns error (conflict)\n   base_version: (empty) -> Creates version 4 (no check)"
+        labels:
+          type: object
+          title: labels
+          additionalProperties:
+            type: string
+            title: value
+          description: "User-defined labels for organization.\n See MediaMetadata.labels for constraints.\n \n Can be updated later via PatchContent."
+        accessorId:
+          type: array
+          items:
+            type: string
+            maxLength: 40
+            minLength: 3
+            pattern: '[0-9a-z_-]{3,40}'
+          title: accessor_id
+          minItems: 1
+          description: "Convenience field: principals to grant initial access.\n \n These are converted to AccessGrant entries during upload.\n Each accessor_id is granted READER role by default.\n \n This is a convenience for common use cases. For fine-grained\n access control, use GrantAccess after upload.\n \n Format: same as AccessGrant.principal_id"
       title: UploadMetadata
       additionalProperties: false
       description: |-
         UploadMetadata contains metadata for file upload.
          This must be sent as the first message in the upload stream.
 
-         Usage:
-         - For new uploads: Leave server_name and media_id empty. The service will generate a new MXC URI.
-         - For pre-created MXC URIs: Set server_name and media_id from the URI created via CreateContent.
-           This allows uploading content to a URI that was created earlier, useful for resumable uploads
-           or when you need the URI before the content is ready.
+         Usage Patterns:
+
+         Pattern 1: New Upload
+           Send metadata (without server_name/media_id), then chunks.
+           Server generates new media_id and returns complete MXC URI.
+
+         Pattern 2: Upload to Pre-created URI
+           First call CreateContent to reserve a URI, then:
+           - Set server_name and media_id from the created URI
+           - Send chunks to that specific URI
+           This is useful for:
+           - Resumable uploads (persist URI across sessions)
+           - Deferred uploads (get URI early, upload later)
+           - Client-side parallel uploads
+
+         Pattern 3: Version Creation
+           Set base_version to the current version number.
+           Server creates new version if latest_version == base_version.
+           Returns conflict error if versions don't match.
+    files.v1.UploadMetadata.LabelsEntry:
+      type: object
+      properties:
+        key:
+          type: string
+          title: key
+        value:
+          type: string
+          title: value
+      title: LabelsEntry
+      additionalProperties: false
     files.v1.UploadMultipartPartRequest:
       type: object
       properties:
         uploadId:
           type: string
           title: upload_id
-          description: Upload ID from CreateMultipartUpload
+          description: Upload ID from CreateMultipartUploadResponse.
         partNumber:
           type: integer
           title: part_number
           format: int32
-          description: Part number (starts from 1)
+          description: |-
+            Part number (1-based).
+             Must be unique within the upload.
+             Can be uploaded in any order (server assembles).
         content:
           type: string
           title: content
           format: byte
-          description: Part content
+          description: |-
+            Content of this part.
+             Recommended size: 5MB - 100MB for efficiency.
       title: UploadMultipartPartRequest
       additionalProperties: false
     files.v1.UploadMultipartPartResponse:
@@ -2890,19 +4478,22 @@ components:
         etag:
           type: string
           title: etag
-          description: ETag for the uploaded part
+          description: |-
+            ETag for this uploaded part.
+             Required when completing the upload.
+             Format: "<md5>:<part_number>" or opaque string.
         partNumber:
           type: integer
           title: part_number
           format: int32
-          description: Part number
+          description: Part number (echoed from request).
         size:
           type:
             - integer
             - string
           title: size
           format: int64
-          description: Size of the uploaded part
+          description: Size of the uploaded part in bytes.
       title: UploadMultipartPartResponse
       additionalProperties: false
     files.v1.UsageStats:
@@ -2914,28 +4505,28 @@ components:
             - string
           title: total_files
           format: int64
-          description: Total number of files
+          description: Total files accessible to this user.
         totalBytes:
           type:
             - integer
             - string
           title: total_bytes
           format: int64
-          description: Total storage used
+          description: Total bytes used.
         publicFiles:
           type:
             - integer
             - string
           title: public_files
           format: int64
-          description: Number of public files
+          description: Number of public files.
         privateFiles:
           type:
             - integer
             - string
           title: private_files
           format: int64
-          description: Number of private files
+          description: Number of private files.
       title: UsageStats
       additionalProperties: false
     google.protobuf.ListValue:
@@ -3108,5 +4699,15 @@ security: []
 tags:
   - name: files.v1.FilesService
     description: |-
-      FilesService manages file and media operations including upload, download,
-       thumbnail generation, and search functionality.
+      FilesService provides comprehensive file and media management.
+
+       This service handles:
+         - Upload: streaming, multipart, signed URLs
+         - Download: direct, streaming, ranged, thumbnails
+         - Metadata: viewing, patching, searching
+         - Access: granting, revoking, listing
+         - Versioning: listing, restoring
+         - Retention: policies, expiration
+         - Analytics: usage, storage stats =================================================================
+       Upload Operations
+       =================================================================

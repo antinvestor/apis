@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.53.16] - 2026-2-22
+
+### Changed
+
+- Make api feature complete with access management
+
 ## [1.53.15] - 2026-2-21
 
 ### Changed

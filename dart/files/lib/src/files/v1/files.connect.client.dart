@@ -7,16 +7,31 @@ import "package:connectrpc/connect.dart" as connect;
 import "files.pb.dart" as filesv1files;
 import "files.connect.spec.dart" as specs;
 
-/// FilesService manages file and media operations including upload, download,
-/// thumbnail generation, and search functionality.
+/// FilesService provides comprehensive file and media management.
+/// This service handles:
+///   - Upload: streaming, multipart, signed URLs
+///   - Download: direct, streaming, ranged, thumbnails
+///   - Metadata: viewing, patching, searching
+///   - Access: granting, revoking, listing
+///   - Versioning: listing, restoring
+///   - Retention: policies, expiration
+///   - Analytics: usage, storage stats
+/// =================================================================
+/// Upload Operations
+/// =================================================================
 extension type FilesServiceClient (connect.Transport _transport) {
-  /// UploadContent uploads content to the content repository via streaming.
-  /// Returns an MXC URI that can be used to reference the content.
-  /// Two usage patterns:
-  /// 1. New upload: Send metadata (without server_name/media_id), then chunks. Returns a new MXC URI.
-  /// 2. Upload to pre-created URI: First call CreateContent to get an MXC URI, then send metadata
-  ///    (with server_name/media_id from that URI), followed by chunks. Returns the same MXC URI.
-  /// Stream format: metadata message first, then one or more chunk messages with file data.
+  /// UploadContent uploads content via streaming.
+  /// Usage Patterns:
+  ///   1. New upload: metadata (no server_name/media_id) -> chunks
+  ///   2. Pre-created URI: CreateContent -> metadata + server_name/media_id -> chunks
+  /// Streaming:
+  ///   Send metadata first, then one or more chunk messages.
+  ///   Server returns response when upload complete.
+  /// Errors:
+  ///   - INVALID_ARGUMENT: metadata missing or chunk after close
+  ///   - NOT_FOUND: pre-created media_id not found
+  ///   - ALREADY_EXISTS: media_id conflict (with idempotency)
+  ///   - FAILED_PRECONDITION: quota exceeded
   Future<filesv1files.UploadContentResponse> uploadContent(
     Stream<filesv1files.UploadContentRequest> input, {
     connect.Headers? headers,
@@ -34,11 +49,9 @@ extension type FilesServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// CreateContent creates a new MXC URI without uploading content.
-  /// The returned MXC URI (server_name and media_id) can be used with UploadContent
-  /// by setting those fields in the UploadMetadata message.
-  /// Use case: When you need the MXC URI before the content is ready, or for
-  /// implementing resumable uploads where the URI persists across upload attempts.
+  /// CreateContent pre-allocates an MXC URI for future upload.
+  /// Use when you need the URI before content is ready,
+  /// or for implementing resumable uploads.
   Future<filesv1files.CreateContentResponse> createContent(
     filesv1files.CreateContentRequest input, {
     connect.Headers? headers,
@@ -56,7 +69,7 @@ extension type FilesServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// CreateMultipartUpload creates a new multipart upload.
+  /// CreateMultipartUpload initiates a multipart upload session.
   Future<filesv1files.CreateMultipartUploadResponse> createMultipartUpload(
     filesv1files.CreateMultipartUploadRequest input, {
     connect.Headers? headers,
@@ -74,7 +87,25 @@ extension type FilesServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// UploadMultipartPart uploads a part of a multipart upload.
+  /// GetMultipartUpload gets status of a multipart upload.
+  Future<filesv1files.GetMultipartUploadResponse> getMultipartUpload(
+    filesv1files.GetMultipartUploadRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.FilesService.getMultipartUpload,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// UploadMultipartPart uploads a single part.
   Future<filesv1files.UploadMultipartPartResponse> uploadMultipartPart(
     filesv1files.UploadMultipartPartRequest input, {
     connect.Headers? headers,
@@ -92,7 +123,7 @@ extension type FilesServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// CompleteMultipartUpload completes a multipart upload.
+  /// CompleteMultipartUpload completes the upload.
   Future<filesv1files.CompleteMultipartUploadResponse> completeMultipartUpload(
     filesv1files.CompleteMultipartUploadRequest input, {
     connect.Headers? headers,
@@ -110,7 +141,7 @@ extension type FilesServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// AbortMultipartUpload aborts a multipart upload.
+  /// AbortMultipartUpload cancels the upload.
   Future<filesv1files.AbortMultipartUploadResponse> abortMultipartUpload(
     filesv1files.AbortMultipartUploadRequest input, {
     connect.Headers? headers,
@@ -128,7 +159,7 @@ extension type FilesServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// ListMultipartParts lists all uploaded parts of a multipart upload.
+  /// ListMultipartParts lists uploaded parts.
   Future<filesv1files.ListMultipartPartsResponse> listMultipartParts(
     filesv1files.ListMultipartPartsRequest input, {
     connect.Headers? headers,
@@ -146,7 +177,7 @@ extension type FilesServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// HeadContent retrieves metadata for content without downloading the content itself.
+  /// HeadContent gets metadata without content.
   Future<filesv1files.HeadContentResponse> headContent(
     filesv1files.HeadContentRequest input, {
     connect.Headers? headers,
@@ -164,7 +195,25 @@ extension type FilesServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// GetSignedUploadUrl gets a signed URL for direct upload to storage.
+  /// PatchContent updates metadata.
+  Future<filesv1files.PatchContentResponse> patchContent(
+    filesv1files.PatchContentRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.FilesService.patchContent,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// GetSignedUploadUrl gets URL for direct storage upload.
   Future<filesv1files.GetSignedUploadUrlResponse> getSignedUploadUrl(
     filesv1files.GetSignedUploadUrlRequest input, {
     connect.Headers? headers,
@@ -182,7 +231,25 @@ extension type FilesServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// GetSignedDownloadUrl gets a signed URL for direct download from storage.
+  /// FinalizeSignedUpload completes a signed upload.
+  Future<filesv1files.FinalizeSignedUploadResponse> finalizeSignedUpload(
+    filesv1files.FinalizeSignedUploadRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.FilesService.finalizeSignedUpload,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// GetSignedDownloadUrl gets URL for direct download.
   Future<filesv1files.GetSignedDownloadUrlResponse> getSignedDownloadUrl(
     filesv1files.GetSignedDownloadUrlRequest input, {
     connect.Headers? headers,
@@ -200,7 +267,7 @@ extension type FilesServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// DeleteContent deletes content from the repository.
+  /// DeleteContent deletes content.
   Future<filesv1files.DeleteContentResponse> deleteContent(
     filesv1files.DeleteContentRequest input, {
     connect.Headers? headers,
@@ -218,7 +285,7 @@ extension type FilesServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// GetContent downloads content from the content repository.
+  /// GetContent downloads complete content.
   Future<filesv1files.GetContentResponse> getContent(
     filesv1files.GetContentRequest input, {
     connect.Headers? headers,
@@ -236,7 +303,7 @@ extension type FilesServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// GetContentOverrideName downloads content with a specified filename override.
+  /// GetContentOverrideName downloads with filename override.
   Future<filesv1files.GetContentOverrideNameResponse> getContentOverrideName(
     filesv1files.GetContentOverrideNameRequest input, {
     connect.Headers? headers,
@@ -254,8 +321,43 @@ extension type FilesServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// GetContentThumbnail retrieves a thumbnail of the content.
-  /// Supports configurable dimensions, resizing methods, and animated thumbnails.
+  /// DownloadContent streams content.
+  Stream<filesv1files.DownloadChunk> downloadContent(
+    filesv1files.DownloadContentRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).server(
+      specs.FilesService.downloadContent,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// DownloadContentRange streams a byte range.
+  Stream<filesv1files.DownloadChunk> downloadContentRange(
+    filesv1files.DownloadRangeRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).server(
+      specs.FilesService.downloadContentRange,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// GetContentThumbnail generates a thumbnail.
   Future<filesv1files.GetContentThumbnailResponse> getContentThumbnail(
     filesv1files.GetContentThumbnailRequest input, {
     connect.Headers? headers,
@@ -273,7 +375,7 @@ extension type FilesServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// GetUrlPreview gets OpenGraph preview information for a URL.
+  /// GetUrlPreview gets OpenGraph preview data.
   Future<filesv1files.GetUrlPreviewResponse> getUrlPreview(
     filesv1files.GetUrlPreviewRequest input, {
     connect.Headers? headers,
@@ -291,8 +393,7 @@ extension type FilesServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// GetConfig retrieves the content repository configuration.
-  /// Returns upload size limits and other configuration parameters.
+  /// GetConfig returns server configuration.
   Future<filesv1files.GetConfigResponse> getConfig(
     filesv1files.GetConfigRequest input, {
     connect.Headers? headers,
@@ -310,8 +411,7 @@ extension type FilesServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// SearchMedia searches for media files matching specified criteria.
-  /// Supports full-text search, filtering by owner, date range, and pagination.
+  /// SearchMedia searches for media.
   Future<filesv1files.SearchMediaResponse> searchMedia(
     filesv1files.SearchMediaRequest input, {
     connect.Headers? headers,
@@ -329,7 +429,7 @@ extension type FilesServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// BatchGetContent retrieves multiple files in a single request.
+  /// BatchGetContent retrieves multiple files.
   Future<filesv1files.BatchGetContentResponse> batchGetContent(
     filesv1files.BatchGetContentRequest input, {
     connect.Headers? headers,
@@ -347,7 +447,7 @@ extension type FilesServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// BatchDeleteContent deletes multiple files in a single request.
+  /// BatchDeleteContent deletes multiple files.
   Future<filesv1files.BatchDeleteContentResponse> batchDeleteContent(
     filesv1files.BatchDeleteContentRequest input, {
     connect.Headers? headers,
@@ -365,7 +465,61 @@ extension type FilesServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// GetVersions retrieves all versions of a file.
+  /// GrantAccess grants access to media.
+  Future<filesv1files.GrantAccessResponse> grantAccess(
+    filesv1files.GrantAccessRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.FilesService.grantAccess,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// RevokeAccess revokes access from media.
+  Future<filesv1files.RevokeAccessResponse> revokeAccess(
+    filesv1files.RevokeAccessRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.FilesService.revokeAccess,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// ListAccess lists all grants for media.
+  Future<filesv1files.ListAccessResponse> listAccess(
+    filesv1files.ListAccessRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.FilesService.listAccess,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// GetVersions lists all versions.
   Future<filesv1files.GetVersionsResponse> getVersions(
     filesv1files.GetVersionsRequest input, {
     connect.Headers? headers,
@@ -383,7 +537,7 @@ extension type FilesServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// RestoreVersion restores a specific version of a file.
+  /// RestoreVersion restores a previous version.
   Future<filesv1files.RestoreVersionResponse> restoreVersion(
     filesv1files.RestoreVersionRequest input, {
     connect.Headers? headers,
@@ -401,7 +555,7 @@ extension type FilesServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// SetRetentionPolicy sets retention policy for a file.
+  /// SetRetentionPolicy applies retention to media.
   Future<filesv1files.SetRetentionPolicyResponse> setRetentionPolicy(
     filesv1files.SetRetentionPolicyRequest input, {
     connect.Headers? headers,
@@ -419,7 +573,7 @@ extension type FilesServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// GetRetentionPolicy gets retention policy for a file.
+  /// GetRetentionPolicy gets retention for media.
   Future<filesv1files.GetRetentionPolicyResponse> getRetentionPolicy(
     filesv1files.GetRetentionPolicyRequest input, {
     connect.Headers? headers,
@@ -437,7 +591,7 @@ extension type FilesServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// ListRetentionPolicies lists available retention policies.
+  /// ListRetentionPolicies lists available policies.
   Future<filesv1files.ListRetentionPoliciesResponse> listRetentionPolicies(
     filesv1files.ListRetentionPoliciesRequest input, {
     connect.Headers? headers,
@@ -455,7 +609,7 @@ extension type FilesServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// GetUserUsage retrieves usage statistics for a user.
+  /// GetUserUsage gets usage for a user.
   Future<filesv1files.GetUserUsageResponse> getUserUsage(
     filesv1files.GetUserUsageRequest input, {
     connect.Headers? headers,
@@ -473,7 +627,7 @@ extension type FilesServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// GetStorageStats retrieves global storage statistics.
+  /// GetStorageStats gets global storage stats.
   Future<filesv1files.GetStorageStatsResponse> getStorageStats(
     filesv1files.GetStorageStatsRequest input, {
     connect.Headers? headers,

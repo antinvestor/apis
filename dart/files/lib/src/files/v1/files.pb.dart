@@ -15,13 +15,21 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
+import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $2;
 import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $1;
 import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $0;
 import 'files.pbenum.dart';
 
 export 'files.pbenum.dart';
 
-/// MediaMetadata represents metadata about an uploaded file.
+///  MediaMetadata represents the complete metadata for an uploaded file.
+///
+///  This is the authoritative source of truth for file attributes. Clients
+///  should always fetch fresh metadata before performing operations that
+///  depend on current state (e.g., checking visibility before download).
+///
+///  Thread Safety: Metadata may be updated concurrently. Use etag for
+///  optimistic locking when patching.
 class MediaMetadata extends $pb.GeneratedMessage {
   factory MediaMetadata({
     $core.String? mediaId,
@@ -31,12 +39,19 @@ class MediaMetadata extends $pb.GeneratedMessage {
     $0.Timestamp? updatedAt,
     $core.String? filename,
     $core.String? checksumSha256,
-    $core.String? ownerId,
     MediaMetadata_Visibility? visibility,
     $1.Struct? extra,
     $0.Timestamp? expiresAt,
     $fixnum.Int64? version,
     $core.bool? isLatest,
+    MediaState? state,
+    $core.String? etag,
+    $core.Map<$core.String, $core.String>? labels,
+    $core.String? contentUri,
+    $core.String? organizationId,
+    ScanStatus? scanStatus,
+    $0.Timestamp? archivedAt,
+    $0.Timestamp? deletedAt,
   }) {
     final $result = create();
     if (mediaId != null) {
@@ -60,9 +75,6 @@ class MediaMetadata extends $pb.GeneratedMessage {
     if (checksumSha256 != null) {
       $result.checksumSha256 = checksumSha256;
     }
-    if (ownerId != null) {
-      $result.ownerId = ownerId;
-    }
     if (visibility != null) {
       $result.visibility = visibility;
     }
@@ -78,6 +90,30 @@ class MediaMetadata extends $pb.GeneratedMessage {
     if (isLatest != null) {
       $result.isLatest = isLatest;
     }
+    if (state != null) {
+      $result.state = state;
+    }
+    if (etag != null) {
+      $result.etag = etag;
+    }
+    if (labels != null) {
+      $result.labels.addAll(labels);
+    }
+    if (contentUri != null) {
+      $result.contentUri = contentUri;
+    }
+    if (organizationId != null) {
+      $result.organizationId = organizationId;
+    }
+    if (scanStatus != null) {
+      $result.scanStatus = scanStatus;
+    }
+    if (archivedAt != null) {
+      $result.archivedAt = archivedAt;
+    }
+    if (deletedAt != null) {
+      $result.deletedAt = deletedAt;
+    }
     return $result;
   }
   MediaMetadata._() : super();
@@ -92,12 +128,19 @@ class MediaMetadata extends $pb.GeneratedMessage {
     ..aOM<$0.Timestamp>(5, _omitFieldNames ? '' : 'updatedAt', subBuilder: $0.Timestamp.create)
     ..aOS(6, _omitFieldNames ? '' : 'filename')
     ..aOS(7, _omitFieldNames ? '' : 'checksumSha256')
-    ..aOS(8, _omitFieldNames ? '' : 'ownerId')
     ..e<MediaMetadata_Visibility>(9, _omitFieldNames ? '' : 'visibility', $pb.PbFieldType.OE, defaultOrMaker: MediaMetadata_Visibility.VISIBILITY_UNSPECIFIED, valueOf: MediaMetadata_Visibility.valueOf, enumValues: MediaMetadata_Visibility.values)
     ..aOM<$1.Struct>(10, _omitFieldNames ? '' : 'extra', subBuilder: $1.Struct.create)
     ..aOM<$0.Timestamp>(11, _omitFieldNames ? '' : 'expiresAt', subBuilder: $0.Timestamp.create)
     ..aInt64(12, _omitFieldNames ? '' : 'version')
     ..aOB(13, _omitFieldNames ? '' : 'isLatest')
+    ..e<MediaState>(14, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: MediaState.MEDIA_STATE_UNSPECIFIED, valueOf: MediaState.valueOf, enumValues: MediaState.values)
+    ..aOS(15, _omitFieldNames ? '' : 'etag')
+    ..m<$core.String, $core.String>(20, _omitFieldNames ? '' : 'labels', entryClassName: 'MediaMetadata.LabelsEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OS, packageName: const $pb.PackageName('files.v1'))
+    ..aOS(21, _omitFieldNames ? '' : 'contentUri')
+    ..aOS(22, _omitFieldNames ? '' : 'organizationId')
+    ..e<ScanStatus>(30, _omitFieldNames ? '' : 'scanStatus', $pb.PbFieldType.OE, defaultOrMaker: ScanStatus.SCAN_STATUS_UNSPECIFIED, valueOf: ScanStatus.valueOf, enumValues: ScanStatus.values)
+    ..aOM<$0.Timestamp>(31, _omitFieldNames ? '' : 'archivedAt', subBuilder: $0.Timestamp.create)
+    ..aOM<$0.Timestamp>(32, _omitFieldNames ? '' : 'deletedAt', subBuilder: $0.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -122,6 +165,9 @@ class MediaMetadata extends $pb.GeneratedMessage {
   static MediaMetadata getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MediaMetadata>(create);
   static MediaMetadata? _defaultInstance;
 
+  /// Unique identifier for this media.
+  /// Format: alphanumeric with hyphens/underscores, 3-40 characters.
+  /// Example: "abc123xyz" from mxc://server.com/abc123xyz
   @$pb.TagNumber(1)
   $core.String get mediaId => $_getSZ(0);
   @$pb.TagNumber(1)
@@ -131,6 +177,9 @@ class MediaMetadata extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearMediaId() => clearField(1);
 
+  /// MIME type of the content.
+  /// Examples: "image/png", "application/pdf", "video/mp4"
+  /// Detected from file content during upload; may be overridden.
   @$pb.TagNumber(2)
   $core.String get contentType => $_getSZ(1);
   @$pb.TagNumber(2)
@@ -140,6 +189,9 @@ class MediaMetadata extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearContentType() => clearField(2);
 
+  /// Size of the file in bytes.
+  /// For available content, this is the actual stored size.
+  /// For creating state, this may be the expected size from upload metadata.
   @$pb.TagNumber(3)
   $fixnum.Int64 get fileSizeBytes => $_getI64(2);
   @$pb.TagNumber(3)
@@ -149,6 +201,8 @@ class MediaMetadata extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   void clearFileSizeBytes() => clearField(3);
 
+  /// Timestamp when the media was first created (upload initiated).
+  /// Set by server; cannot be modified by clients.
   @$pb.TagNumber(4)
   $0.Timestamp get createdAt => $_getN(3);
   @$pb.TagNumber(4)
@@ -160,6 +214,8 @@ class MediaMetadata extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   $0.Timestamp ensureCreatedAt() => $_ensure(3);
 
+  /// Timestamp when metadata was last modified.
+  /// Updated on any metadata change (rename, visibility change, etc.)
   @$pb.TagNumber(5)
   $0.Timestamp get updatedAt => $_getN(4);
   @$pb.TagNumber(5)
@@ -171,6 +227,9 @@ class MediaMetadata extends $pb.GeneratedMessage {
   @$pb.TagNumber(5)
   $0.Timestamp ensureUpdatedAt() => $_ensure(4);
 
+  /// Original filename as uploaded by the client.
+  /// May contain Unicode characters. Used for Content-Disposition headers.
+  /// Maximum recommended length: 255 bytes (filesystem compatibility).
   @$pb.TagNumber(6)
   $core.String get filename => $_getSZ(5);
   @$pb.TagNumber(6)
@@ -180,6 +239,10 @@ class MediaMetadata extends $pb.GeneratedMessage {
   @$pb.TagNumber(6)
   void clearFilename() => clearField(6);
 
+  /// SHA-256 checksum of the file content.
+  /// Format: 64 lowercase hexadecimal characters.
+  /// Computed server-side from stored content; clients can verify
+  /// during upload using UploadMetadata.checksum_sha256.
   @$pb.TagNumber(7)
   $core.String get checksumSha256 => $_getSZ(6);
   @$pb.TagNumber(7)
@@ -189,84 +252,388 @@ class MediaMetadata extends $pb.GeneratedMessage {
   @$pb.TagNumber(7)
   void clearChecksumSha256() => clearField(7);
 
-  @$pb.TagNumber(8)
-  $core.String get ownerId => $_getSZ(7);
-  @$pb.TagNumber(8)
-  set ownerId($core.String v) { $_setString(7, v); }
-  @$pb.TagNumber(8)
-  $core.bool hasOwnerId() => $_has(7);
-  @$pb.TagNumber(8)
-  void clearOwnerId() => clearField(8);
-
+  ///  Visibility determines who can access this content without explicit grant.
+  ///
+  ///  - PUBLIC: Accessible to any authenticated user within the namespace.
+  ///            No access grant required.
+  ///  - PRIVATE: Only accessible to owner and principals with explicit grants.
+  ///             Default for all uploads.
   @$pb.TagNumber(9)
-  MediaMetadata_Visibility get visibility => $_getN(8);
+  MediaMetadata_Visibility get visibility => $_getN(7);
   @$pb.TagNumber(9)
   set visibility(MediaMetadata_Visibility v) { setField(9, v); }
   @$pb.TagNumber(9)
-  $core.bool hasVisibility() => $_has(8);
+  $core.bool hasVisibility() => $_has(7);
   @$pb.TagNumber(9)
   void clearVisibility() => clearField(9);
 
+  /// Additional metadata as key-value pairs.
+  /// This is for system-level metadata (e.g., image dimensions, video duration).
+  /// For user-defined metadata, use labels instead.
+  /// Maximum size: 64KB when serialized as JSON.
   @$pb.TagNumber(10)
-  $1.Struct get extra => $_getN(9);
+  $1.Struct get extra => $_getN(8);
   @$pb.TagNumber(10)
   set extra($1.Struct v) { setField(10, v); }
   @$pb.TagNumber(10)
-  $core.bool hasExtra() => $_has(9);
+  $core.bool hasExtra() => $_has(8);
   @$pb.TagNumber(10)
   void clearExtra() => clearField(10);
   @$pb.TagNumber(10)
-  $1.Struct ensureExtra() => $_ensure(9);
+  $1.Struct ensureExtra() => $_ensure(8);
 
+  /// Expiration timestamp after which content may be automatically deleted.
+  /// Null/empty means no expiration. Set by owner or by retention policy.
+  /// After expiration, content enters DELETED state.
   @$pb.TagNumber(11)
-  $0.Timestamp get expiresAt => $_getN(10);
+  $0.Timestamp get expiresAt => $_getN(9);
   @$pb.TagNumber(11)
   set expiresAt($0.Timestamp v) { setField(11, v); }
   @$pb.TagNumber(11)
-  $core.bool hasExpiresAt() => $_has(10);
+  $core.bool hasExpiresAt() => $_has(9);
   @$pb.TagNumber(11)
   void clearExpiresAt() => clearField(11);
   @$pb.TagNumber(11)
-  $0.Timestamp ensureExpiresAt() => $_ensure(10);
+  $0.Timestamp ensureExpiresAt() => $_ensure(9);
 
+  /// Current version number for versioned content.
+  /// Starts at 1 and increments on each new version upload.
+  /// Use GetVersions to retrieve version history.
   @$pb.TagNumber(12)
-  $fixnum.Int64 get version => $_getI64(11);
+  $fixnum.Int64 get version => $_getI64(10);
   @$pb.TagNumber(12)
-  set version($fixnum.Int64 v) { $_setInt64(11, v); }
+  set version($fixnum.Int64 v) { $_setInt64(10, v); }
   @$pb.TagNumber(12)
-  $core.bool hasVersion() => $_has(11);
+  $core.bool hasVersion() => $_has(10);
   @$pb.TagNumber(12)
   void clearVersion() => clearField(12);
 
+  /// Whether this metadata entry represents the latest version.
+  /// True for the current version; false for historical versions.
+  /// When listing versions, only the latest entry has is_latest=true.
   @$pb.TagNumber(13)
-  $core.bool get isLatest => $_getBF(12);
+  $core.bool get isLatest => $_getBF(11);
   @$pb.TagNumber(13)
-  set isLatest($core.bool v) { $_setBool(12, v); }
+  set isLatest($core.bool v) { $_setBool(11, v); }
   @$pb.TagNumber(13)
-  $core.bool hasIsLatest() => $_has(12);
+  $core.bool hasIsLatest() => $_has(11);
   @$pb.TagNumber(13)
   void clearIsLatest() => clearField(13);
+
+  /// Current lifecycle state of the media.
+  /// Controls whether content is available for download.
+  /// See MediaState enum for valid transitions.
+  @$pb.TagNumber(14)
+  MediaState get state => $_getN(12);
+  @$pb.TagNumber(14)
+  set state(MediaState v) { setField(14, v); }
+  @$pb.TagNumber(14)
+  $core.bool hasState() => $_has(12);
+  @$pb.TagNumber(14)
+  void clearState() => clearField(14);
+
+  /// ETag for optimistic concurrency control.
+  /// Send this value in If-Match header for conditional operations.
+  /// Changes on every metadata modification.
+  @$pb.TagNumber(15)
+  $core.String get etag => $_getSZ(13);
+  @$pb.TagNumber(15)
+  set etag($core.String v) { $_setString(13, v); }
+  @$pb.TagNumber(15)
+  $core.bool hasEtag() => $_has(13);
+  @$pb.TagNumber(15)
+  void clearEtag() => clearField(15);
+
+  ///  User-defined labels for organization and search.
+  ///  These are MUTABLE and user-controlled.
+  ///
+  ///  IMPORTANT: Labels are NOT security boundaries. They are for:
+  ///    - Project organization (e.g., project_id, department)
+  ///    - Categorization (e.g., document_type, tags)
+  ///    - Search/filtering (e.g., status, year)
+  ///
+  ///  Example usage:
+  ///    labels["project"] = "billing-service"
+  ///    labels["room_id"] = "matrix:!abc123"
+  ///    labels["folder"] = "invoices/2026"
+  ///
+  ///  Constraints:
+  ///    - Maximum 50 labels per media
+  ///    - Key length: 1-128 characters
+  ///    - Value length: 0-1024 characters
+  ///    - Keys must be valid UTF-8 strings
+  @$pb.TagNumber(20)
+  $core.Map<$core.String, $core.String> get labels => $_getMap(14);
+
+  /// Full MXC URI for this content.
+  /// Format: mxc://<server_name>/<media_id>
+  /// Example: mxc://cdn.example.com/abc123xyz
+  @$pb.TagNumber(21)
+  $core.String get contentUri => $_getSZ(15);
+  @$pb.TagNumber(21)
+  set contentUri($core.String v) { $_setString(15, v); }
+  @$pb.TagNumber(21)
+  $core.bool hasContentUri() => $_has(15);
+  @$pb.TagNumber(21)
+  void clearContentUri() => clearField(21);
+
+  ///  Organization or group ID this media is associated with.
+  ///
+  ///  This is metadata for organization/filtering purposes only.
+  ///  It does NOT control access - use AccessGrant for access control.
+  ///
+  ///  Format:
+  ///    - Organization: "org:<org_id>" (e.g., "org:acme-corp")
+  ///    - Chat Group: "room:<room_id>" (e.g., "room:!abc123:matrix.org")
+  ///                   "chat:<chat_id>" (e.g., "chat:C1234567890")
+  ///
+  ///  Use this for:
+  ///    - Search/filtering by organization or chat group
+  ///    - UI organization display
+  ///    - Audit trails
+  ///
+  ///  For access control, use GrantAccess with principal_type ORGANIZATION or CHAT_GROUP.
+  @$pb.TagNumber(22)
+  $core.String get organizationId => $_getSZ(16);
+  @$pb.TagNumber(22)
+  set organizationId($core.String v) { $_setString(16, v); }
+  @$pb.TagNumber(22)
+  $core.bool hasOrganizationId() => $_has(16);
+  @$pb.TagNumber(22)
+  void clearOrganizationId() => clearField(22);
+
+  /// Antivirus/antimalware scan status.
+  /// Content may be blocked from download if scan is not CLEAN.
+  /// See ScanStatus for details.
+  @$pb.TagNumber(30)
+  ScanStatus get scanStatus => $_getN(17);
+  @$pb.TagNumber(30)
+  set scanStatus(ScanStatus v) { setField(30, v); }
+  @$pb.TagNumber(30)
+  $core.bool hasScanStatus() => $_has(17);
+  @$pb.TagNumber(30)
+  void clearScanStatus() => clearField(30);
+
+  /// Timestamp when content was archived (null if not archived).
+  @$pb.TagNumber(31)
+  $0.Timestamp get archivedAt => $_getN(18);
+  @$pb.TagNumber(31)
+  set archivedAt($0.Timestamp v) { setField(31, v); }
+  @$pb.TagNumber(31)
+  $core.bool hasArchivedAt() => $_has(18);
+  @$pb.TagNumber(31)
+  void clearArchivedAt() => clearField(31);
+  @$pb.TagNumber(31)
+  $0.Timestamp ensureArchivedAt() => $_ensure(18);
+
+  /// Timestamp when content was soft-deleted (null if not deleted).
+  @$pb.TagNumber(32)
+  $0.Timestamp get deletedAt => $_getN(19);
+  @$pb.TagNumber(32)
+  set deletedAt($0.Timestamp v) { setField(32, v); }
+  @$pb.TagNumber(32)
+  $core.bool hasDeletedAt() => $_has(19);
+  @$pb.TagNumber(32)
+  void clearDeletedAt() => clearField(32);
+  @$pb.TagNumber(32)
+  $0.Timestamp ensureDeletedAt() => $_ensure(19);
+}
+
+///  AccessGrant represents a grant of access to a principal for media.
+///
+///  Access grants are media-scoped. Each grant defines
+///  WHO (principal_id) gets WHAT role (role) for specific content.
+///
+///  The principal type determines how membership is resolved:
+///    - USER: Direct user access
+///    - SERVICE: Service account access
+///    - ORGANIZATION: All members of the organization get access
+///    - CHAT_GROUP: All members of the chat group get access
+///
+///  Ownership: The original uploader automatically receives OWNER role
+///  and cannot be revoked. This ensures content always has an owner.
+///
+///  Best Practices:
+///    - Use service accounts for application access (WRITER role)
+///    - Use organizations/chat groups for team access management
+///    - Audit grants periodically for stale access
+class AccessGrant extends $pb.GeneratedMessage {
+  factory AccessGrant({
+    $core.String? principalId,
+    AccessRole? role,
+    $0.Timestamp? grantedAt,
+    $core.String? grantedBy,
+    $0.Timestamp? expiresAt,
+    PrincipalType? principalType,
+  }) {
+    final $result = create();
+    if (principalId != null) {
+      $result.principalId = principalId;
+    }
+    if (role != null) {
+      $result.role = role;
+    }
+    if (grantedAt != null) {
+      $result.grantedAt = grantedAt;
+    }
+    if (grantedBy != null) {
+      $result.grantedBy = grantedBy;
+    }
+    if (expiresAt != null) {
+      $result.expiresAt = expiresAt;
+    }
+    if (principalType != null) {
+      $result.principalType = principalType;
+    }
+    return $result;
+  }
+  AccessGrant._() : super();
+  factory AccessGrant.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory AccessGrant.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AccessGrant', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'principalId')
+    ..e<AccessRole>(2, _omitFieldNames ? '' : 'role', $pb.PbFieldType.OE, defaultOrMaker: AccessRole.ACCESS_ROLE_UNSPECIFIED, valueOf: AccessRole.valueOf, enumValues: AccessRole.values)
+    ..aOM<$0.Timestamp>(3, _omitFieldNames ? '' : 'grantedAt', subBuilder: $0.Timestamp.create)
+    ..aOS(4, _omitFieldNames ? '' : 'grantedBy')
+    ..aOM<$0.Timestamp>(5, _omitFieldNames ? '' : 'expiresAt', subBuilder: $0.Timestamp.create)
+    ..e<PrincipalType>(6, _omitFieldNames ? '' : 'principalType', $pb.PbFieldType.OE, defaultOrMaker: PrincipalType.PRINCIPAL_TYPE_UNSPECIFIED, valueOf: PrincipalType.valueOf, enumValues: PrincipalType.values)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  AccessGrant clone() => AccessGrant()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  AccessGrant copyWith(void Function(AccessGrant) updates) => super.copyWith((message) => updates(message as AccessGrant)) as AccessGrant;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static AccessGrant create() => AccessGrant._();
+  AccessGrant createEmptyInstance() => create();
+  static $pb.PbList<AccessGrant> createRepeated() => $pb.PbList<AccessGrant>();
+  @$core.pragma('dart2js:noInline')
+  static AccessGrant getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AccessGrant>(create);
+  static AccessGrant? _defaultInstance;
+
+  /// Principal ID receiving access.
+  /// Format depends on principal_type:
+  ///   - User: "user:<user_id>" or just "<user_id>"
+  ///   - Service: "service:<service_name>"
+  ///   - Organization: "org:<org_id>" or "org:<org_id>/<unit>"
+  ///   - Chat Group: "room:<room_id>" or "chat:<chat_id>"
+  @$pb.TagNumber(1)
+  $core.String get principalId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set principalId($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasPrincipalId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPrincipalId() => clearField(1);
+
+  /// Role to assign to the principal.
+  /// See AccessRole for permission matrix.
+  @$pb.TagNumber(2)
+  AccessRole get role => $_getN(1);
+  @$pb.TagNumber(2)
+  set role(AccessRole v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasRole() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearRole() => clearField(2);
+
+  /// Timestamp when this grant was created.
+  @$pb.TagNumber(3)
+  $0.Timestamp get grantedAt => $_getN(2);
+  @$pb.TagNumber(3)
+  set grantedAt($0.Timestamp v) { setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasGrantedAt() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearGrantedAt() => clearField(3);
+  @$pb.TagNumber(3)
+  $0.Timestamp ensureGrantedAt() => $_ensure(2);
+
+  /// ID of the principal who created this grant.
+  /// Null if created by system (e.g., owner upload).
+  @$pb.TagNumber(4)
+  $core.String get grantedBy => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set grantedBy($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasGrantedBy() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearGrantedBy() => clearField(4);
+
+  /// Optional expiry for time-limited access.
+  /// Null means permanent grant until manually revoked.
+  /// Useful for temporary access sharing.
+  @$pb.TagNumber(5)
+  $0.Timestamp get expiresAt => $_getN(4);
+  @$pb.TagNumber(5)
+  set expiresAt($0.Timestamp v) { setField(5, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasExpiresAt() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearExpiresAt() => clearField(5);
+  @$pb.TagNumber(5)
+  $0.Timestamp ensureExpiresAt() => $_ensure(4);
+
+  /// Type of principal. Helps the system resolve membership correctly.
+  /// If not specified, the server infers from principal_id format.
+  @$pb.TagNumber(6)
+  PrincipalType get principalType => $_getN(5);
+  @$pb.TagNumber(6)
+  set principalType(PrincipalType v) { setField(6, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasPrincipalType() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearPrincipalType() => clearField(6);
 }
 
 ///  UploadMetadata contains metadata for file upload.
 ///  This must be sent as the first message in the upload stream.
 ///
-///  Usage:
-///  - For new uploads: Leave server_name and media_id empty. The service will generate a new MXC URI.
-///  - For pre-created MXC URIs: Set server_name and media_id from the URI created via CreateContent.
-///    This allows uploading content to a URI that was created earlier, useful for resumable uploads
-///    or when you need the URI before the content is ready.
+///  Usage Patterns:
+///
+///  Pattern 1: New Upload
+///    Send metadata (without server_name/media_id), then chunks.
+///    Server generates new media_id and returns complete MXC URI.
+///
+///  Pattern 2: Upload to Pre-created URI
+///    First call CreateContent to reserve a URI, then:
+///    - Set server_name and media_id from the created URI
+///    - Send chunks to that specific URI
+///    This is useful for:
+///    - Resumable uploads (persist URI across sessions)
+///    - Deferred uploads (get URI early, upload later)
+///    - Client-side parallel uploads
+///
+///  Pattern 3: Version Creation
+///    Set base_version to the current version number.
+///    Server creates new version if latest_version == base_version.
+///    Returns conflict error if versions don't match.
 class UploadMetadata extends $pb.GeneratedMessage {
   factory UploadMetadata({
     $core.String? contentType,
     $core.String? filename,
     $fixnum.Int64? totalSize,
     $1.Struct? properties,
-    $core.String? ownerId,
     MediaMetadata_Visibility? visibility,
     $0.Timestamp? expiresAt,
     $core.String? serverName,
     $core.String? mediaId,
+    $core.Iterable<$core.String>? accessorId,
+    $core.String? checksumSha256,
+    $fixnum.Int64? baseVersion,
+    $core.Map<$core.String, $core.String>? labels,
+    $core.String? organizationId,
   }) {
     final $result = create();
     if (contentType != null) {
@@ -281,9 +648,6 @@ class UploadMetadata extends $pb.GeneratedMessage {
     if (properties != null) {
       $result.properties = properties;
     }
-    if (ownerId != null) {
-      $result.ownerId = ownerId;
-    }
     if (visibility != null) {
       $result.visibility = visibility;
     }
@@ -296,6 +660,21 @@ class UploadMetadata extends $pb.GeneratedMessage {
     if (mediaId != null) {
       $result.mediaId = mediaId;
     }
+    if (accessorId != null) {
+      $result.accessorId.addAll(accessorId);
+    }
+    if (checksumSha256 != null) {
+      $result.checksumSha256 = checksumSha256;
+    }
+    if (baseVersion != null) {
+      $result.baseVersion = baseVersion;
+    }
+    if (labels != null) {
+      $result.labels.addAll(labels);
+    }
+    if (organizationId != null) {
+      $result.organizationId = organizationId;
+    }
     return $result;
   }
   UploadMetadata._() : super();
@@ -307,11 +686,15 @@ class UploadMetadata extends $pb.GeneratedMessage {
     ..aOS(2, _omitFieldNames ? '' : 'filename')
     ..aInt64(3, _omitFieldNames ? '' : 'totalSize')
     ..aOM<$1.Struct>(4, _omitFieldNames ? '' : 'properties', subBuilder: $1.Struct.create)
-    ..aOS(5, _omitFieldNames ? '' : 'ownerId')
     ..e<MediaMetadata_Visibility>(6, _omitFieldNames ? '' : 'visibility', $pb.PbFieldType.OE, defaultOrMaker: MediaMetadata_Visibility.VISIBILITY_UNSPECIFIED, valueOf: MediaMetadata_Visibility.valueOf, enumValues: MediaMetadata_Visibility.values)
     ..aOM<$0.Timestamp>(7, _omitFieldNames ? '' : 'expiresAt', subBuilder: $0.Timestamp.create)
     ..aOS(8, _omitFieldNames ? '' : 'serverName')
     ..aOS(9, _omitFieldNames ? '' : 'mediaId')
+    ..pPS(15, _omitFieldNames ? '' : 'accessorId')
+    ..aOS(16, _omitFieldNames ? '' : 'checksumSha256')
+    ..aInt64(17, _omitFieldNames ? '' : 'baseVersion')
+    ..m<$core.String, $core.String>(20, _omitFieldNames ? '' : 'labels', entryClassName: 'UploadMetadata.LabelsEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OS, packageName: const $pb.PackageName('files.v1'))
+    ..aOS(23, _omitFieldNames ? '' : 'organizationId')
     ..hasRequiredFields = false
   ;
 
@@ -336,6 +719,9 @@ class UploadMetadata extends $pb.GeneratedMessage {
   static UploadMetadata getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UploadMetadata>(create);
   static UploadMetadata? _defaultInstance;
 
+  /// MIME type of the content.
+  /// Defaults to "application/octet-stream" if not specified.
+  /// Server may override based on content detection.
   @$pb.TagNumber(1)
   $core.String get contentType => $_getSZ(0);
   @$pb.TagNumber(1)
@@ -345,6 +731,9 @@ class UploadMetadata extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearContentType() => clearField(1);
 
+  /// Original filename.
+  /// Used for Content-Disposition header on download.
+  /// Maximum recommended: 255 bytes.
   @$pb.TagNumber(2)
   $core.String get filename => $_getSZ(1);
   @$pb.TagNumber(2)
@@ -354,6 +743,11 @@ class UploadMetadata extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearFilename() => clearField(2);
 
+  /// Total size of the file in bytes.
+  /// Optional but recommended for:
+  ///   - Progress tracking on client
+  ///   - Storage quota validation
+  ///   - Multipart upload chunking
   @$pb.TagNumber(3)
   $fixnum.Int64 get totalSize => $_getI64(2);
   @$pb.TagNumber(3)
@@ -363,6 +757,9 @@ class UploadMetadata extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   void clearTotalSize() => clearField(3);
 
+  /// Additional properties for the upload.
+  /// Use for file-specific metadata (e.g., image dimensions).
+  /// System fields like "width", "height" are recognized.
   @$pb.TagNumber(4)
   $1.Struct get properties => $_getN(3);
   @$pb.TagNumber(4)
@@ -374,53 +771,134 @@ class UploadMetadata extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   $1.Struct ensureProperties() => $_ensure(3);
 
-  @$pb.TagNumber(5)
-  $core.String get ownerId => $_getSZ(4);
-  @$pb.TagNumber(5)
-  set ownerId($core.String v) { $_setString(4, v); }
-  @$pb.TagNumber(5)
-  $core.bool hasOwnerId() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearOwnerId() => clearField(5);
-
+  /// Initial visibility setting for the content.
+  /// Defaults to PRIVATE if not specified.
+  /// See MediaMetadata.Visibility for details.
   @$pb.TagNumber(6)
-  MediaMetadata_Visibility get visibility => $_getN(5);
+  MediaMetadata_Visibility get visibility => $_getN(4);
   @$pb.TagNumber(6)
   set visibility(MediaMetadata_Visibility v) { setField(6, v); }
   @$pb.TagNumber(6)
-  $core.bool hasVisibility() => $_has(5);
+  $core.bool hasVisibility() => $_has(4);
   @$pb.TagNumber(6)
   void clearVisibility() => clearField(6);
 
+  /// Expiration timestamp for the content.
+  /// After expiration, content may be automatically deleted.
+  /// Null/empty means no expiration.
   @$pb.TagNumber(7)
-  $0.Timestamp get expiresAt => $_getN(6);
+  $0.Timestamp get expiresAt => $_getN(5);
   @$pb.TagNumber(7)
   set expiresAt($0.Timestamp v) { setField(7, v); }
   @$pb.TagNumber(7)
-  $core.bool hasExpiresAt() => $_has(6);
+  $core.bool hasExpiresAt() => $_has(5);
   @$pb.TagNumber(7)
   void clearExpiresAt() => clearField(7);
   @$pb.TagNumber(7)
-  $0.Timestamp ensureExpiresAt() => $_ensure(6);
+  $0.Timestamp ensureExpiresAt() => $_ensure(5);
 
-  /// Optional: Set these to upload to a pre-created MXC URI (from CreateContent)
+  /// Server name from pre-created MXC URI.
+  /// Format: "cdn.example.com" from "mxc://cdn.example.com/abc123"
+  /// Required for Pattern 2 (upload to pre-created URI).
   @$pb.TagNumber(8)
-  $core.String get serverName => $_getSZ(7);
+  $core.String get serverName => $_getSZ(6);
   @$pb.TagNumber(8)
-  set serverName($core.String v) { $_setString(7, v); }
+  set serverName($core.String v) { $_setString(6, v); }
   @$pb.TagNumber(8)
-  $core.bool hasServerName() => $_has(7);
+  $core.bool hasServerName() => $_has(6);
   @$pb.TagNumber(8)
   void clearServerName() => clearField(8);
 
+  /// Media ID from pre-created MXC URI.
+  /// Format: "abc123" from "mxc://cdn.example.com/abc123"
+  /// Must match pattern [0-9a-z_-]{3,40}
+  /// Required for Pattern 2 (upload to pre-created URI).
   @$pb.TagNumber(9)
-  $core.String get mediaId => $_getSZ(8);
+  $core.String get mediaId => $_getSZ(7);
   @$pb.TagNumber(9)
-  set mediaId($core.String v) { $_setString(8, v); }
+  set mediaId($core.String v) { $_setString(7, v); }
   @$pb.TagNumber(9)
-  $core.bool hasMediaId() => $_has(8);
+  $core.bool hasMediaId() => $_has(7);
   @$pb.TagNumber(9)
   void clearMediaId() => clearField(9);
+
+  /// Convenience field: principals to grant initial access.
+  ///
+  /// These are converted to AccessGrant entries during upload.
+  /// Each accessor_id is granted READER role by default.
+  ///
+  /// This is a convenience for common use cases. For fine-grained
+  /// access control, use GrantAccess after upload.
+  ///
+  /// Format: same as AccessGrant.principal_id
+  @$pb.TagNumber(15)
+  $core.List<$core.String> get accessorId => $_getList(8);
+
+  /// SHA-256 checksum for integrity verification.
+  /// Format: 64 lowercase hexadecimal characters.
+  ///
+  /// If provided, server verifies uploaded content matches this checksum.
+  /// Mismatch causes upload failure.
+  ///
+  /// Recommended for:
+  ///   - Large files where re-upload is expensive
+  ///   - Integrity-critical content
+  ///   - Multipart uploads (required at completion)
+  @$pb.TagNumber(16)
+  $core.String get checksumSha256 => $_getSZ(9);
+  @$pb.TagNumber(16)
+  set checksumSha256($core.String v) { $_setString(9, v); }
+  @$pb.TagNumber(16)
+  $core.bool hasChecksumSha256() => $_has(9);
+  @$pb.TagNumber(16)
+  void clearChecksumSha256() => clearField(16);
+
+  /// Base version for optimistic concurrency.
+  ///
+  /// If provided and media_id exists:
+  ///   - Creates new version if latest_version == base_version
+  ///   - Returns ALREADY_EXISTS error if versions differ
+  ///
+  /// This prevents lost updates when multiple clients upload
+  /// to the same media_id concurrently.
+  ///
+  /// Example:
+  ///   Current version: 3
+  ///   base_version: 3 -> Creates version 4
+  ///   base_version: 2 -> Returns error (conflict)
+  ///   base_version: (empty) -> Creates version 4 (no check)
+  @$pb.TagNumber(17)
+  $fixnum.Int64 get baseVersion => $_getI64(10);
+  @$pb.TagNumber(17)
+  set baseVersion($fixnum.Int64 v) { $_setInt64(10, v); }
+  @$pb.TagNumber(17)
+  $core.bool hasBaseVersion() => $_has(10);
+  @$pb.TagNumber(17)
+  void clearBaseVersion() => clearField(17);
+
+  /// User-defined labels for organization.
+  /// See MediaMetadata.labels for constraints.
+  ///
+  /// Can be updated later via PatchContent.
+  @$pb.TagNumber(20)
+  $core.Map<$core.String, $core.String> get labels => $_getMap(11);
+
+  ///  Organization or group ID for metadata purposes.
+  ///
+  ///  This is optional metadata for organization/filtering.
+  ///  For access control, use GrantAccess after upload.
+  ///
+  ///  Format:
+  ///    - Organization: "org:<org_id>" (e.g., "org:acme-corp")
+  ///    - Chat Group: "room:<room_id>" or "chat:<chat_id>"
+  @$pb.TagNumber(23)
+  $core.String get organizationId => $_getSZ(12);
+  @$pb.TagNumber(23)
+  set organizationId($core.String v) { $_setString(12, v); }
+  @$pb.TagNumber(23)
+  $core.bool hasOrganizationId() => $_has(12);
+  @$pb.TagNumber(23)
+  void clearOrganizationId() => clearField(23);
 }
 
 enum UploadContentRequest_Data {
@@ -429,12 +907,30 @@ enum UploadContentRequest_Data {
   notSet
 }
 
-/// UploadContentRequest uploads content to the content repository via streaming.
-/// First message must contain metadata, followed by one or more messages with chunks.
+///  UploadContentRequest uploads content via streaming.
+///
+///  Stream Format:
+///    1. First message: data with metadata field populated
+///    2. Subsequent messages: data with chunk field populated
+///    3. Client sends end-of-stream (closes stream)
+///
+///  Chunk Size:
+///    Recommended: 64KB - 1MB per chunk
+///    Maximum: 4MB per chunk
+///    Server buffers chunks in memory; very large chunks may cause OOM.
+///
+///  Timeouts:
+///    - Overall upload: configurable via metadata.timeout_ms
+///    - Per-chunk: TCP keepalive handles this
+///
+///  Idempotency:
+///    If network fails mid-upload, client can retry with same idempotency_key.
+///    Server stores upload state and allows resume.
 class UploadContentRequest extends $pb.GeneratedMessage {
   factory UploadContentRequest({
     UploadMetadata? metadata,
     $core.List<$core.int>? chunk,
+    $core.String? idempotencyKey,
   }) {
     final $result = create();
     if (metadata != null) {
@@ -442,6 +938,9 @@ class UploadContentRequest extends $pb.GeneratedMessage {
     }
     if (chunk != null) {
       $result.chunk = chunk;
+    }
+    if (idempotencyKey != null) {
+      $result.idempotencyKey = idempotencyKey;
     }
     return $result;
   }
@@ -458,6 +957,7 @@ class UploadContentRequest extends $pb.GeneratedMessage {
     ..oo(0, [1, 2])
     ..aOM<UploadMetadata>(1, _omitFieldNames ? '' : 'metadata', subBuilder: UploadMetadata.create)
     ..a<$core.List<$core.int>>(2, _omitFieldNames ? '' : 'chunk', $pb.PbFieldType.OY)
+    ..aOS(100, _omitFieldNames ? '' : 'idempotencyKey')
     ..hasRequiredFields = false
   ;
 
@@ -485,6 +985,8 @@ class UploadContentRequest extends $pb.GeneratedMessage {
   UploadContentRequest_Data whichData() => _UploadContentRequest_DataByTag[$_whichOneof(0)]!;
   void clearData() => clearField($_whichOneof(0));
 
+  /// Metadata: MUST be the first message in the stream.
+  /// Contains file properties, labels, access settings.
   @$pb.TagNumber(1)
   UploadMetadata get metadata => $_getN(0);
   @$pb.TagNumber(1)
@@ -496,6 +998,9 @@ class UploadContentRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   UploadMetadata ensureMetadata() => $_ensure(0);
 
+  /// Chunk: binary content data.
+  /// Can be repeated multiple times.
+  /// Server concatenates chunks in order received.
   @$pb.TagNumber(2)
   $core.List<$core.int> get chunk => $_getN(1);
   @$pb.TagNumber(2)
@@ -504,9 +1009,27 @@ class UploadContentRequest extends $pb.GeneratedMessage {
   $core.bool hasChunk() => $_has(1);
   @$pb.TagNumber(2)
   void clearChunk() => clearField(2);
+
+  /// Idempotency key for this upload operation.
+  ///
+  /// If provided, allows safe retry on network failure.
+  /// Same key with same metadata creates same media_id.
+  ///
+  /// Recommended: Use UUID or similar high-entropy key.
+  /// Key is scoped to the owner.
+  ///
+  /// TTL: 24 hours from first request.
+  @$pb.TagNumber(100)
+  $core.String get idempotencyKey => $_getSZ(2);
+  @$pb.TagNumber(100)
+  set idempotencyKey($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(100)
+  $core.bool hasIdempotencyKey() => $_has(2);
+  @$pb.TagNumber(100)
+  void clearIdempotencyKey() => clearField(100);
 }
 
-/// UploadContentResponse returns the MXC URI for the uploaded content.
+/// UploadContentResponse contains the result of a successful upload.
 class UploadContentResponse extends $pb.GeneratedMessage {
   factory UploadContentResponse({
     $core.String? contentUri,
@@ -562,6 +1085,9 @@ class UploadContentResponse extends $pb.GeneratedMessage {
   static UploadContentResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UploadContentResponse>(create);
   static UploadContentResponse? _defaultInstance;
 
+  /// Full MXC URI for the uploaded content.
+  /// Format: mxc://<server>/<media_id>
+  /// Example: mxc://cdn.example.com/abc123xyz
   @$pb.TagNumber(1)
   $core.String get contentUri => $_getSZ(0);
   @$pb.TagNumber(1)
@@ -571,6 +1097,8 @@ class UploadContentResponse extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearContentUri() => clearField(1);
 
+  /// Extracted media ID from the URI.
+  /// Shortcut for parsing content_uri.
   @$pb.TagNumber(2)
   $core.String get mediaId => $_getSZ(1);
   @$pb.TagNumber(2)
@@ -580,6 +1108,8 @@ class UploadContentResponse extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearMediaId() => clearField(2);
 
+  /// Extracted server name from the URI.
+  /// Shortcut for parsing content_uri.
   @$pb.TagNumber(3)
   $core.String get serverName => $_getSZ(2);
   @$pb.TagNumber(3)
@@ -589,6 +1119,8 @@ class UploadContentResponse extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   void clearServerName() => clearField(3);
 
+  /// Complete metadata for the uploaded content.
+  /// Includes all server-generated fields (created_at, etag, etc.)
   @$pb.TagNumber(4)
   MediaMetadata get metadata => $_getN(3);
   @$pb.TagNumber(4)
@@ -601,15 +1133,29 @@ class UploadContentResponse extends $pb.GeneratedMessage {
   MediaMetadata ensureMetadata() => $_ensure(3);
 }
 
-/// CreateContentRequest creates a new MXC URI without uploading content.
-/// The returned MXC URI can be used later with UploadContent by setting the
-/// server_name and media_id fields in UploadMetadata.
+///  CreateContentRequest creates a new MXC URI without uploading content.
+///
+///  This reserves a URI that can be used later for actual upload.
+///  The URI remains reserved until content is uploaded or expires.
+///
+///  Use Cases:
+///    1. Pre-allocation: Get URI before upload (e.g., for database records)
+///    2. Deferred upload: Get URI now, upload later
+///    3. Resumable: Store URI, allow client to resume interrupted upload
+///
+///  Expiration:
+///    Unused URIs expire after configurable period (default: 24 hours).
+///    After expiration, the media_id is no longer valid for upload.
 class CreateContentRequest extends $pb.GeneratedMessage {
   factory CreateContentRequest({
     $core.String? contentType,
     $core.String? filename,
     MediaMetadata_Visibility? visibility,
     $0.Timestamp? expiresAt,
+    $core.Map<$core.String, $core.String>? labels,
+    $core.Iterable<$core.String>? accessorId,
+    $core.String? organizationId,
+    $core.String? idempotencyKey,
   }) {
     final $result = create();
     if (contentType != null) {
@@ -624,6 +1170,18 @@ class CreateContentRequest extends $pb.GeneratedMessage {
     if (expiresAt != null) {
       $result.expiresAt = expiresAt;
     }
+    if (labels != null) {
+      $result.labels.addAll(labels);
+    }
+    if (accessorId != null) {
+      $result.accessorId.addAll(accessorId);
+    }
+    if (organizationId != null) {
+      $result.organizationId = organizationId;
+    }
+    if (idempotencyKey != null) {
+      $result.idempotencyKey = idempotencyKey;
+    }
     return $result;
   }
   CreateContentRequest._() : super();
@@ -635,6 +1193,10 @@ class CreateContentRequest extends $pb.GeneratedMessage {
     ..aOS(2, _omitFieldNames ? '' : 'filename')
     ..e<MediaMetadata_Visibility>(3, _omitFieldNames ? '' : 'visibility', $pb.PbFieldType.OE, defaultOrMaker: MediaMetadata_Visibility.VISIBILITY_UNSPECIFIED, valueOf: MediaMetadata_Visibility.valueOf, enumValues: MediaMetadata_Visibility.values)
     ..aOM<$0.Timestamp>(4, _omitFieldNames ? '' : 'expiresAt', subBuilder: $0.Timestamp.create)
+    ..m<$core.String, $core.String>(5, _omitFieldNames ? '' : 'labels', entryClassName: 'CreateContentRequest.LabelsEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OS, packageName: const $pb.PackageName('files.v1'))
+    ..pPS(6, _omitFieldNames ? '' : 'accessorId')
+    ..aOS(7, _omitFieldNames ? '' : 'organizationId')
+    ..aOS(100, _omitFieldNames ? '' : 'idempotencyKey')
     ..hasRequiredFields = false
   ;
 
@@ -659,6 +1221,8 @@ class CreateContentRequest extends $pb.GeneratedMessage {
   static CreateContentRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateContentRequest>(create);
   static CreateContentRequest? _defaultInstance;
 
+  /// Expected MIME type of content to be uploaded.
+  /// Helps with content-type detection validation.
   @$pb.TagNumber(1)
   $core.String get contentType => $_getSZ(0);
   @$pb.TagNumber(1)
@@ -668,6 +1232,8 @@ class CreateContentRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearContentType() => clearField(1);
 
+  /// Expected filename for the content.
+  /// Used for Content-Disposition header.
   @$pb.TagNumber(2)
   $core.String get filename => $_getSZ(1);
   @$pb.TagNumber(2)
@@ -677,6 +1243,8 @@ class CreateContentRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearFilename() => clearField(2);
 
+  /// Initial visibility setting.
+  /// Defaults to PRIVATE.
   @$pb.TagNumber(3)
   MediaMetadata_Visibility get visibility => $_getN(2);
   @$pb.TagNumber(3)
@@ -686,6 +1254,9 @@ class CreateContentRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   void clearVisibility() => clearField(3);
 
+  /// Optional expiration for the pre-created URI.
+  /// If unused until this time, URI becomes invalid.
+  /// Server enforces max expiration (e.g., 7 days).
   @$pb.TagNumber(4)
   $0.Timestamp get expiresAt => $_getN(3);
   @$pb.TagNumber(4)
@@ -696,9 +1267,39 @@ class CreateContentRequest extends $pb.GeneratedMessage {
   void clearExpiresAt() => clearField(4);
   @$pb.TagNumber(4)
   $0.Timestamp ensureExpiresAt() => $_ensure(3);
+
+  /// User-defined labels for organization.
+  @$pb.TagNumber(5)
+  $core.Map<$core.String, $core.String> get labels => $_getMap(4);
+
+  /// Principals to grant initial READER access.
+  @$pb.TagNumber(6)
+  $core.List<$core.String> get accessorId => $_getList(5);
+
+  /// Organization or group ID for metadata purposes.
+  /// Optional - for organization/filtering, not access control.
+  @$pb.TagNumber(7)
+  $core.String get organizationId => $_getSZ(6);
+  @$pb.TagNumber(7)
+  set organizationId($core.String v) { $_setString(6, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasOrganizationId() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearOrganizationId() => clearField(7);
+
+  /// Idempotency key for URI creation.
+  /// Same key always returns same URI within TTL.
+  @$pb.TagNumber(100)
+  $core.String get idempotencyKey => $_getSZ(7);
+  @$pb.TagNumber(100)
+  set idempotencyKey($core.String v) { $_setString(7, v); }
+  @$pb.TagNumber(100)
+  $core.bool hasIdempotencyKey() => $_has(7);
+  @$pb.TagNumber(100)
+  void clearIdempotencyKey() => clearField(100);
 }
 
-/// CreateContentResponse returns the created MXC URI.
+/// CreateContentResponse contains the pre-created MXC URI.
 class CreateContentResponse extends $pb.GeneratedMessage {
   factory CreateContentResponse({
     $core.String? contentUri,
@@ -754,6 +1355,8 @@ class CreateContentResponse extends $pb.GeneratedMessage {
   static CreateContentResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateContentResponse>(create);
   static CreateContentResponse? _defaultInstance;
 
+  /// Full MXC URI for future upload.
+  /// Use server_name + media_id in UploadMetadata to upload.
   @$pb.TagNumber(1)
   $core.String get contentUri => $_getSZ(0);
   @$pb.TagNumber(1)
@@ -763,6 +1366,7 @@ class CreateContentResponse extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearContentUri() => clearField(1);
 
+  /// Timestamp when this URI expires if unused.
   @$pb.TagNumber(2)
   $0.Timestamp get expiresAt => $_getN(1);
   @$pb.TagNumber(2)
@@ -774,6 +1378,7 @@ class CreateContentResponse extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $0.Timestamp ensureExpiresAt() => $_ensure(1);
 
+  /// Media ID component of the URI.
   @$pb.TagNumber(3)
   $core.String get mediaId => $_getSZ(2);
   @$pb.TagNumber(3)
@@ -783,6 +1388,7 @@ class CreateContentResponse extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   void clearMediaId() => clearField(3);
 
+  /// Server name component of the URI.
   @$pb.TagNumber(4)
   $core.String get serverName => $_getSZ(3);
   @$pb.TagNumber(4)
@@ -798,9 +1404,12 @@ class CreateMultipartUploadRequest extends $pb.GeneratedMessage {
     $core.String? filename,
     $core.String? contentType,
     $fixnum.Int64? totalSize,
-    $core.String? ownerId,
     MediaMetadata_Visibility? visibility,
     $0.Timestamp? expiresAt,
+    $core.Map<$core.String, $core.String>? labels,
+    $core.Iterable<$core.String>? accessorId,
+    $core.String? organizationId,
+    $core.String? idempotencyKey,
   }) {
     final $result = create();
     if (filename != null) {
@@ -812,14 +1421,23 @@ class CreateMultipartUploadRequest extends $pb.GeneratedMessage {
     if (totalSize != null) {
       $result.totalSize = totalSize;
     }
-    if (ownerId != null) {
-      $result.ownerId = ownerId;
-    }
     if (visibility != null) {
       $result.visibility = visibility;
     }
     if (expiresAt != null) {
       $result.expiresAt = expiresAt;
+    }
+    if (labels != null) {
+      $result.labels.addAll(labels);
+    }
+    if (accessorId != null) {
+      $result.accessorId.addAll(accessorId);
+    }
+    if (organizationId != null) {
+      $result.organizationId = organizationId;
+    }
+    if (idempotencyKey != null) {
+      $result.idempotencyKey = idempotencyKey;
     }
     return $result;
   }
@@ -831,9 +1449,12 @@ class CreateMultipartUploadRequest extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'filename')
     ..aOS(2, _omitFieldNames ? '' : 'contentType')
     ..aInt64(3, _omitFieldNames ? '' : 'totalSize')
-    ..aOS(4, _omitFieldNames ? '' : 'ownerId')
-    ..e<MediaMetadata_Visibility>(5, _omitFieldNames ? '' : 'visibility', $pb.PbFieldType.OE, defaultOrMaker: MediaMetadata_Visibility.VISIBILITY_UNSPECIFIED, valueOf: MediaMetadata_Visibility.valueOf, enumValues: MediaMetadata_Visibility.values)
-    ..aOM<$0.Timestamp>(6, _omitFieldNames ? '' : 'expiresAt', subBuilder: $0.Timestamp.create)
+    ..e<MediaMetadata_Visibility>(4, _omitFieldNames ? '' : 'visibility', $pb.PbFieldType.OE, defaultOrMaker: MediaMetadata_Visibility.VISIBILITY_UNSPECIFIED, valueOf: MediaMetadata_Visibility.valueOf, enumValues: MediaMetadata_Visibility.values)
+    ..aOM<$0.Timestamp>(5, _omitFieldNames ? '' : 'expiresAt', subBuilder: $0.Timestamp.create)
+    ..m<$core.String, $core.String>(6, _omitFieldNames ? '' : 'labels', entryClassName: 'CreateMultipartUploadRequest.LabelsEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OS, packageName: const $pb.PackageName('files.v1'))
+    ..pPS(7, _omitFieldNames ? '' : 'accessorId')
+    ..aOS(8, _omitFieldNames ? '' : 'organizationId')
+    ..aOS(100, _omitFieldNames ? '' : 'idempotencyKey')
     ..hasRequiredFields = false
   ;
 
@@ -858,6 +1479,7 @@ class CreateMultipartUploadRequest extends $pb.GeneratedMessage {
   static CreateMultipartUploadRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateMultipartUploadRequest>(create);
   static CreateMultipartUploadRequest? _defaultInstance;
 
+  /// Original filename for the final file.
   @$pb.TagNumber(1)
   $core.String get filename => $_getSZ(0);
   @$pb.TagNumber(1)
@@ -867,6 +1489,7 @@ class CreateMultipartUploadRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearFilename() => clearField(1);
 
+  /// Expected MIME type.
   @$pb.TagNumber(2)
   $core.String get contentType => $_getSZ(1);
   @$pb.TagNumber(2)
@@ -876,6 +1499,8 @@ class CreateMultipartUploadRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearContentType() => clearField(2);
 
+  /// Total size of the complete file in bytes.
+  /// Used for progress tracking and validation.
   @$pb.TagNumber(3)
   $fixnum.Int64 get totalSize => $_getI64(2);
   @$pb.TagNumber(3)
@@ -885,34 +1510,56 @@ class CreateMultipartUploadRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   void clearTotalSize() => clearField(3);
 
+  /// Initial visibility.
   @$pb.TagNumber(4)
-  $core.String get ownerId => $_getSZ(3);
+  MediaMetadata_Visibility get visibility => $_getN(3);
   @$pb.TagNumber(4)
-  set ownerId($core.String v) { $_setString(3, v); }
+  set visibility(MediaMetadata_Visibility v) { setField(4, v); }
   @$pb.TagNumber(4)
-  $core.bool hasOwnerId() => $_has(3);
+  $core.bool hasVisibility() => $_has(3);
   @$pb.TagNumber(4)
-  void clearOwnerId() => clearField(4);
+  void clearVisibility() => clearField(4);
 
+  /// Expiration timestamp for the media after upload completes.
   @$pb.TagNumber(5)
-  MediaMetadata_Visibility get visibility => $_getN(4);
+  $0.Timestamp get expiresAt => $_getN(4);
   @$pb.TagNumber(5)
-  set visibility(MediaMetadata_Visibility v) { setField(5, v); }
+  set expiresAt($0.Timestamp v) { setField(5, v); }
   @$pb.TagNumber(5)
-  $core.bool hasVisibility() => $_has(4);
+  $core.bool hasExpiresAt() => $_has(4);
   @$pb.TagNumber(5)
-  void clearVisibility() => clearField(5);
+  void clearExpiresAt() => clearField(5);
+  @$pb.TagNumber(5)
+  $0.Timestamp ensureExpiresAt() => $_ensure(4);
 
+  /// User-defined labels for organization.
   @$pb.TagNumber(6)
-  $0.Timestamp get expiresAt => $_getN(5);
-  @$pb.TagNumber(6)
-  set expiresAt($0.Timestamp v) { setField(6, v); }
-  @$pb.TagNumber(6)
-  $core.bool hasExpiresAt() => $_has(5);
-  @$pb.TagNumber(6)
-  void clearExpiresAt() => clearField(6);
-  @$pb.TagNumber(6)
-  $0.Timestamp ensureExpiresAt() => $_ensure(5);
+  $core.Map<$core.String, $core.String> get labels => $_getMap(5);
+
+  /// Principals to grant initial READER access.
+  @$pb.TagNumber(7)
+  $core.List<$core.String> get accessorId => $_getList(6);
+
+  /// Organization or group ID for metadata purposes.
+  /// Optional - for organization/filtering, not access control.
+  @$pb.TagNumber(8)
+  $core.String get organizationId => $_getSZ(7);
+  @$pb.TagNumber(8)
+  set organizationId($core.String v) { $_setString(7, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasOrganizationId() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearOrganizationId() => clearField(8);
+
+  /// Idempotency key for the entire multipart operation.
+  @$pb.TagNumber(100)
+  $core.String get idempotencyKey => $_getSZ(8);
+  @$pb.TagNumber(100)
+  set idempotencyKey($core.String v) { $_setString(8, v); }
+  @$pb.TagNumber(100)
+  $core.bool hasIdempotencyKey() => $_has(8);
+  @$pb.TagNumber(100)
+  void clearIdempotencyKey() => clearField(100);
 }
 
 class CreateMultipartUploadResponse extends $pb.GeneratedMessage {
@@ -955,6 +1602,8 @@ class CreateMultipartUploadResponse extends $pb.GeneratedMessage {
   static CreateMultipartUploadResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateMultipartUploadResponse>(create);
   static CreateMultipartUploadResponse? _defaultInstance;
 
+  /// Opaque upload ID for this multipart session.
+  /// Required for all subsequent operations on this upload.
   @$pb.TagNumber(1)
   $core.String get uploadId => $_getSZ(0);
   @$pb.TagNumber(1)
@@ -1015,6 +1664,7 @@ class UploadMultipartPartRequest extends $pb.GeneratedMessage {
   static UploadMultipartPartRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UploadMultipartPartRequest>(create);
   static UploadMultipartPartRequest? _defaultInstance;
 
+  /// Upload ID from CreateMultipartUploadResponse.
   @$pb.TagNumber(1)
   $core.String get uploadId => $_getSZ(0);
   @$pb.TagNumber(1)
@@ -1024,6 +1674,9 @@ class UploadMultipartPartRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearUploadId() => clearField(1);
 
+  /// Part number (1-based).
+  /// Must be unique within the upload.
+  /// Can be uploaded in any order (server assembles).
   @$pb.TagNumber(2)
   $core.int get partNumber => $_getIZ(1);
   @$pb.TagNumber(2)
@@ -1033,6 +1686,8 @@ class UploadMultipartPartRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearPartNumber() => clearField(2);
 
+  /// Content of this part.
+  /// Recommended size: 5MB - 100MB for efficiency.
   @$pb.TagNumber(3)
   $core.List<$core.int> get content => $_getN(2);
   @$pb.TagNumber(3)
@@ -1093,6 +1748,9 @@ class UploadMultipartPartResponse extends $pb.GeneratedMessage {
   static UploadMultipartPartResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UploadMultipartPartResponse>(create);
   static UploadMultipartPartResponse? _defaultInstance;
 
+  /// ETag for this uploaded part.
+  /// Required when completing the upload.
+  /// Format: "<md5>:<part_number>" or opaque string.
   @$pb.TagNumber(1)
   $core.String get etag => $_getSZ(0);
   @$pb.TagNumber(1)
@@ -1102,6 +1760,7 @@ class UploadMultipartPartResponse extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearEtag() => clearField(1);
 
+  /// Part number (echoed from request).
   @$pb.TagNumber(2)
   $core.int get partNumber => $_getIZ(1);
   @$pb.TagNumber(2)
@@ -1111,6 +1770,7 @@ class UploadMultipartPartResponse extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearPartNumber() => clearField(2);
 
+  /// Size of the uploaded part in bytes.
   @$pb.TagNumber(3)
   $fixnum.Int64 get size => $_getI64(2);
   @$pb.TagNumber(3)
@@ -1121,6 +1781,9 @@ class UploadMultipartPartResponse extends $pb.GeneratedMessage {
   void clearSize() => clearField(3);
 }
 
+/// Parts that make up the complete file.
+/// Must include all parts in order.
+/// Server verifies each part's etag matches.
 class CompleteMultipartUploadRequest_Part extends $pb.GeneratedMessage {
   factory CompleteMultipartUploadRequest_Part({
     $core.int? partNumber,
@@ -1188,14 +1851,22 @@ class CompleteMultipartUploadRequest_Part extends $pb.GeneratedMessage {
 class CompleteMultipartUploadRequest extends $pb.GeneratedMessage {
   factory CompleteMultipartUploadRequest({
     $core.String? uploadId,
+    $core.String? checksumSha256,
     $core.Iterable<CompleteMultipartUploadRequest_Part>? parts,
+    $core.String? idempotencyKey,
   }) {
     final $result = create();
     if (uploadId != null) {
       $result.uploadId = uploadId;
     }
+    if (checksumSha256 != null) {
+      $result.checksumSha256 = checksumSha256;
+    }
     if (parts != null) {
       $result.parts.addAll(parts);
+    }
+    if (idempotencyKey != null) {
+      $result.idempotencyKey = idempotencyKey;
     }
     return $result;
   }
@@ -1205,7 +1876,9 @@ class CompleteMultipartUploadRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CompleteMultipartUploadRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'uploadId')
-    ..pc<CompleteMultipartUploadRequest_Part>(2, _omitFieldNames ? '' : 'parts', $pb.PbFieldType.PM, subBuilder: CompleteMultipartUploadRequest_Part.create)
+    ..aOS(2, _omitFieldNames ? '' : 'checksumSha256')
+    ..pc<CompleteMultipartUploadRequest_Part>(3, _omitFieldNames ? '' : 'parts', $pb.PbFieldType.PM, subBuilder: CompleteMultipartUploadRequest_Part.create)
+    ..aOS(100, _omitFieldNames ? '' : 'idempotencyKey')
     ..hasRequiredFields = false
   ;
 
@@ -1230,6 +1903,7 @@ class CompleteMultipartUploadRequest extends $pb.GeneratedMessage {
   static CompleteMultipartUploadRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CompleteMultipartUploadRequest>(create);
   static CompleteMultipartUploadRequest? _defaultInstance;
 
+  /// Upload ID from CreateMultipartUploadResponse.
   @$pb.TagNumber(1)
   $core.String get uploadId => $_getSZ(0);
   @$pb.TagNumber(1)
@@ -1239,8 +1913,29 @@ class CompleteMultipartUploadRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearUploadId() => clearField(1);
 
+  /// SHA-256 checksum of the COMPLETE file (all parts combined).
+  /// Required for integrity verification.
   @$pb.TagNumber(2)
-  $core.List<CompleteMultipartUploadRequest_Part> get parts => $_getList(1);
+  $core.String get checksumSha256 => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set checksumSha256($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasChecksumSha256() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearChecksumSha256() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.List<CompleteMultipartUploadRequest_Part> get parts => $_getList(2);
+
+  /// Idempotency key for completion.
+  @$pb.TagNumber(100)
+  $core.String get idempotencyKey => $_getSZ(3);
+  @$pb.TagNumber(100)
+  set idempotencyKey($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(100)
+  $core.bool hasIdempotencyKey() => $_has(3);
+  @$pb.TagNumber(100)
+  void clearIdempotencyKey() => clearField(100);
 }
 
 class CompleteMultipartUploadResponse extends $pb.GeneratedMessage {
@@ -1283,6 +1978,7 @@ class CompleteMultipartUploadResponse extends $pb.GeneratedMessage {
   static CompleteMultipartUploadResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CompleteMultipartUploadResponse>(create);
   static CompleteMultipartUploadResponse? _defaultInstance;
 
+  /// Final metadata for the uploaded media.
   @$pb.TagNumber(1)
   MediaMetadata get metadata => $_getN(0);
   @$pb.TagNumber(1)
@@ -1298,10 +1994,14 @@ class CompleteMultipartUploadResponse extends $pb.GeneratedMessage {
 class AbortMultipartUploadRequest extends $pb.GeneratedMessage {
   factory AbortMultipartUploadRequest({
     $core.String? uploadId,
+    $core.String? idempotencyKey,
   }) {
     final $result = create();
     if (uploadId != null) {
       $result.uploadId = uploadId;
+    }
+    if (idempotencyKey != null) {
+      $result.idempotencyKey = idempotencyKey;
     }
     return $result;
   }
@@ -1311,6 +2011,7 @@ class AbortMultipartUploadRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AbortMultipartUploadRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'uploadId')
+    ..aOS(100, _omitFieldNames ? '' : 'idempotencyKey')
     ..hasRequiredFields = false
   ;
 
@@ -1335,6 +2036,7 @@ class AbortMultipartUploadRequest extends $pb.GeneratedMessage {
   static AbortMultipartUploadRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AbortMultipartUploadRequest>(create);
   static AbortMultipartUploadRequest? _defaultInstance;
 
+  /// Upload ID to abort.
   @$pb.TagNumber(1)
   $core.String get uploadId => $_getSZ(0);
   @$pb.TagNumber(1)
@@ -1343,6 +2045,16 @@ class AbortMultipartUploadRequest extends $pb.GeneratedMessage {
   $core.bool hasUploadId() => $_has(0);
   @$pb.TagNumber(1)
   void clearUploadId() => clearField(1);
+
+  /// Idempotency key.
+  @$pb.TagNumber(100)
+  $core.String get idempotencyKey => $_getSZ(1);
+  @$pb.TagNumber(100)
+  set idempotencyKey($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(100)
+  $core.bool hasIdempotencyKey() => $_has(1);
+  @$pb.TagNumber(100)
+  void clearIdempotencyKey() => clearField(100);
 }
 
 class AbortMultipartUploadResponse extends $pb.GeneratedMessage {
@@ -1385,6 +2097,8 @@ class AbortMultipartUploadResponse extends $pb.GeneratedMessage {
   static AbortMultipartUploadResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AbortMultipartUploadResponse>(create);
   static AbortMultipartUploadResponse? _defaultInstance;
 
+  /// Whether the abort was successful.
+  /// False if upload already completed or not found.
   @$pb.TagNumber(1)
   $core.bool get aborted => $_getBF(0);
   @$pb.TagNumber(1)
@@ -1398,10 +2112,14 @@ class AbortMultipartUploadResponse extends $pb.GeneratedMessage {
 class ListMultipartPartsRequest extends $pb.GeneratedMessage {
   factory ListMultipartPartsRequest({
     $core.String? uploadId,
+    $2.PageCursor? cursor,
   }) {
     final $result = create();
     if (uploadId != null) {
       $result.uploadId = uploadId;
+    }
+    if (cursor != null) {
+      $result.cursor = cursor;
     }
     return $result;
   }
@@ -1411,6 +2129,7 @@ class ListMultipartPartsRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListMultipartPartsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'uploadId')
+    ..aOM<$2.PageCursor>(2, _omitFieldNames ? '' : 'cursor', subBuilder: $2.PageCursor.create)
     ..hasRequiredFields = false
   ;
 
@@ -1435,6 +2154,7 @@ class ListMultipartPartsRequest extends $pb.GeneratedMessage {
   static ListMultipartPartsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListMultipartPartsRequest>(create);
   static ListMultipartPartsRequest? _defaultInstance;
 
+  /// Upload ID to list parts for.
   @$pb.TagNumber(1)
   $core.String get uploadId => $_getSZ(0);
   @$pb.TagNumber(1)
@@ -1443,13 +2163,27 @@ class ListMultipartPartsRequest extends $pb.GeneratedMessage {
   $core.bool hasUploadId() => $_has(0);
   @$pb.TagNumber(1)
   void clearUploadId() => clearField(1);
+
+  /// Pagination using common PageCursor.
+  @$pb.TagNumber(2)
+  $2.PageCursor get cursor => $_getN(1);
+  @$pb.TagNumber(2)
+  set cursor($2.PageCursor v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasCursor() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearCursor() => clearField(2);
+  @$pb.TagNumber(2)
+  $2.PageCursor ensureCursor() => $_ensure(1);
 }
 
+/// Uploaded parts in ascending part_number order.
 class ListMultipartPartsResponse_Part extends $pb.GeneratedMessage {
   factory ListMultipartPartsResponse_Part({
     $core.int? partNumber,
     $core.String? etag,
     $fixnum.Int64? size,
+    $0.Timestamp? uploadedAt,
   }) {
     final $result = create();
     if (partNumber != null) {
@@ -1461,6 +2195,9 @@ class ListMultipartPartsResponse_Part extends $pb.GeneratedMessage {
     if (size != null) {
       $result.size = size;
     }
+    if (uploadedAt != null) {
+      $result.uploadedAt = uploadedAt;
+    }
     return $result;
   }
   ListMultipartPartsResponse_Part._() : super();
@@ -1471,6 +2208,7 @@ class ListMultipartPartsResponse_Part extends $pb.GeneratedMessage {
     ..a<$core.int>(1, _omitFieldNames ? '' : 'partNumber', $pb.PbFieldType.O3)
     ..aOS(2, _omitFieldNames ? '' : 'etag')
     ..aInt64(3, _omitFieldNames ? '' : 'size')
+    ..aOM<$0.Timestamp>(4, _omitFieldNames ? '' : 'uploadedAt', subBuilder: $0.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -1521,15 +2259,30 @@ class ListMultipartPartsResponse_Part extends $pb.GeneratedMessage {
   $core.bool hasSize() => $_has(2);
   @$pb.TagNumber(3)
   void clearSize() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $0.Timestamp get uploadedAt => $_getN(3);
+  @$pb.TagNumber(4)
+  set uploadedAt($0.Timestamp v) { setField(4, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasUploadedAt() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearUploadedAt() => clearField(4);
+  @$pb.TagNumber(4)
+  $0.Timestamp ensureUploadedAt() => $_ensure(3);
 }
 
 class ListMultipartPartsResponse extends $pb.GeneratedMessage {
   factory ListMultipartPartsResponse({
     $core.Iterable<ListMultipartPartsResponse_Part>? parts,
+    $2.PageCursor? nextCursor,
   }) {
     final $result = create();
     if (parts != null) {
       $result.parts.addAll(parts);
+    }
+    if (nextCursor != null) {
+      $result.nextCursor = nextCursor;
     }
     return $result;
   }
@@ -1539,6 +2292,7 @@ class ListMultipartPartsResponse extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListMultipartPartsResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
     ..pc<ListMultipartPartsResponse_Part>(1, _omitFieldNames ? '' : 'parts', $pb.PbFieldType.PM, subBuilder: ListMultipartPartsResponse_Part.create)
+    ..aOM<$2.PageCursor>(2, _omitFieldNames ? '' : 'nextCursor', subBuilder: $2.PageCursor.create)
     ..hasRequiredFields = false
   ;
 
@@ -1565,9 +2319,674 @@ class ListMultipartPartsResponse extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(1)
   $core.List<ListMultipartPartsResponse_Part> get parts => $_getList(0);
+
+  /// Pagination cursor for next page.
+  /// Use in next request's PageCursor.page.
+  @$pb.TagNumber(2)
+  $2.PageCursor get nextCursor => $_getN(1);
+  @$pb.TagNumber(2)
+  set nextCursor($2.PageCursor v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasNextCursor() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearNextCursor() => clearField(2);
+  @$pb.TagNumber(2)
+  $2.PageCursor ensureNextCursor() => $_ensure(1);
 }
 
-/// GetContentRequest downloads content from the repository.
+class GetMultipartUploadRequest extends $pb.GeneratedMessage {
+  factory GetMultipartUploadRequest({
+    $core.String? uploadId,
+  }) {
+    final $result = create();
+    if (uploadId != null) {
+      $result.uploadId = uploadId;
+    }
+    return $result;
+  }
+  GetMultipartUploadRequest._() : super();
+  factory GetMultipartUploadRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetMultipartUploadRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetMultipartUploadRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'uploadId')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetMultipartUploadRequest clone() => GetMultipartUploadRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetMultipartUploadRequest copyWith(void Function(GetMultipartUploadRequest) updates) => super.copyWith((message) => updates(message as GetMultipartUploadRequest)) as GetMultipartUploadRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetMultipartUploadRequest create() => GetMultipartUploadRequest._();
+  GetMultipartUploadRequest createEmptyInstance() => create();
+  static $pb.PbList<GetMultipartUploadRequest> createRepeated() => $pb.PbList<GetMultipartUploadRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetMultipartUploadRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetMultipartUploadRequest>(create);
+  static GetMultipartUploadRequest? _defaultInstance;
+
+  /// Upload ID to inspect.
+  @$pb.TagNumber(1)
+  $core.String get uploadId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set uploadId($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasUploadId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearUploadId() => clearField(1);
+}
+
+class GetMultipartUploadResponse extends $pb.GeneratedMessage {
+  factory GetMultipartUploadResponse({
+    $core.String? mediaId,
+    $core.String? filename,
+    $fixnum.Int64? totalSize,
+    $fixnum.Int64? uploadedSize,
+    MediaMetadata_Visibility? visibility,
+    $0.Timestamp? createdAt,
+    $core.Map<$core.String, $core.String>? labels,
+    $core.int? partsUploaded,
+    MultipartUploadState? uploadState,
+  }) {
+    final $result = create();
+    if (mediaId != null) {
+      $result.mediaId = mediaId;
+    }
+    if (filename != null) {
+      $result.filename = filename;
+    }
+    if (totalSize != null) {
+      $result.totalSize = totalSize;
+    }
+    if (uploadedSize != null) {
+      $result.uploadedSize = uploadedSize;
+    }
+    if (visibility != null) {
+      $result.visibility = visibility;
+    }
+    if (createdAt != null) {
+      $result.createdAt = createdAt;
+    }
+    if (labels != null) {
+      $result.labels.addAll(labels);
+    }
+    if (partsUploaded != null) {
+      $result.partsUploaded = partsUploaded;
+    }
+    if (uploadState != null) {
+      $result.uploadState = uploadState;
+    }
+    return $result;
+  }
+  GetMultipartUploadResponse._() : super();
+  factory GetMultipartUploadResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetMultipartUploadResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetMultipartUploadResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'mediaId')
+    ..aOS(2, _omitFieldNames ? '' : 'filename')
+    ..aInt64(3, _omitFieldNames ? '' : 'totalSize')
+    ..aInt64(4, _omitFieldNames ? '' : 'uploadedSize')
+    ..e<MediaMetadata_Visibility>(5, _omitFieldNames ? '' : 'visibility', $pb.PbFieldType.OE, defaultOrMaker: MediaMetadata_Visibility.VISIBILITY_UNSPECIFIED, valueOf: MediaMetadata_Visibility.valueOf, enumValues: MediaMetadata_Visibility.values)
+    ..aOM<$0.Timestamp>(6, _omitFieldNames ? '' : 'createdAt', subBuilder: $0.Timestamp.create)
+    ..m<$core.String, $core.String>(7, _omitFieldNames ? '' : 'labels', entryClassName: 'GetMultipartUploadResponse.LabelsEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OS, packageName: const $pb.PackageName('files.v1'))
+    ..a<$core.int>(8, _omitFieldNames ? '' : 'partsUploaded', $pb.PbFieldType.O3)
+    ..e<MultipartUploadState>(9, _omitFieldNames ? '' : 'uploadState', $pb.PbFieldType.OE, defaultOrMaker: MultipartUploadState.MULTIPART_UPLOAD_STATE_UNSPECIFIED, valueOf: MultipartUploadState.valueOf, enumValues: MultipartUploadState.values)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetMultipartUploadResponse clone() => GetMultipartUploadResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetMultipartUploadResponse copyWith(void Function(GetMultipartUploadResponse) updates) => super.copyWith((message) => updates(message as GetMultipartUploadResponse)) as GetMultipartUploadResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetMultipartUploadResponse create() => GetMultipartUploadResponse._();
+  GetMultipartUploadResponse createEmptyInstance() => create();
+  static $pb.PbList<GetMultipartUploadResponse> createRepeated() => $pb.PbList<GetMultipartUploadResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetMultipartUploadResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetMultipartUploadResponse>(create);
+  static GetMultipartUploadResponse? _defaultInstance;
+
+  /// Media ID being uploaded to (once completed).
+  /// Empty if upload not yet associated with specific media_id.
+  @$pb.TagNumber(1)
+  $core.String get mediaId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set mediaId($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasMediaId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearMediaId() => clearField(1);
+
+  /// Original filename.
+  @$pb.TagNumber(2)
+  $core.String get filename => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set filename($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasFilename() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFilename() => clearField(2);
+
+  /// Total expected size (from CreateMultipartUpload).
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get totalSize => $_getI64(2);
+  @$pb.TagNumber(3)
+  set totalSize($fixnum.Int64 v) { $_setInt64(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasTotalSize() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearTotalSize() => clearField(3);
+
+  /// Total bytes uploaded so far.
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get uploadedSize => $_getI64(3);
+  @$pb.TagNumber(4)
+  set uploadedSize($fixnum.Int64 v) { $_setInt64(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasUploadedSize() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearUploadedSize() => clearField(4);
+
+  /// Visibility setting.
+  @$pb.TagNumber(5)
+  MediaMetadata_Visibility get visibility => $_getN(4);
+  @$pb.TagNumber(5)
+  set visibility(MediaMetadata_Visibility v) { setField(5, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasVisibility() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearVisibility() => clearField(5);
+
+  /// When the multipart upload was created.
+  @$pb.TagNumber(6)
+  $0.Timestamp get createdAt => $_getN(5);
+  @$pb.TagNumber(6)
+  set createdAt($0.Timestamp v) { setField(6, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasCreatedAt() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearCreatedAt() => clearField(6);
+  @$pb.TagNumber(6)
+  $0.Timestamp ensureCreatedAt() => $_ensure(5);
+
+  /// Labels for the eventual media.
+  @$pb.TagNumber(7)
+  $core.Map<$core.String, $core.String> get labels => $_getMap(6);
+
+  /// Number of parts uploaded so far.
+  @$pb.TagNumber(8)
+  $core.int get partsUploaded => $_getIZ(7);
+  @$pb.TagNumber(8)
+  set partsUploaded($core.int v) { $_setSignedInt32(7, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasPartsUploaded() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearPartsUploaded() => clearField(8);
+
+  /// Current state of the upload.
+  @$pb.TagNumber(9)
+  MultipartUploadState get uploadState => $_getN(8);
+  @$pb.TagNumber(9)
+  set uploadState(MultipartUploadState v) { setField(9, v); }
+  @$pb.TagNumber(9)
+  $core.bool hasUploadState() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearUploadState() => clearField(9);
+}
+
+class GetSignedUploadUrlRequest extends $pb.GeneratedMessage {
+  factory GetSignedUploadUrlRequest({
+    $core.String? mediaId,
+    $fixnum.Int64? expiresSeconds,
+  }) {
+    final $result = create();
+    if (mediaId != null) {
+      $result.mediaId = mediaId;
+    }
+    if (expiresSeconds != null) {
+      $result.expiresSeconds = expiresSeconds;
+    }
+    return $result;
+  }
+  GetSignedUploadUrlRequest._() : super();
+  factory GetSignedUploadUrlRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetSignedUploadUrlRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetSignedUploadUrlRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'mediaId')
+    ..aInt64(2, _omitFieldNames ? '' : 'expiresSeconds')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetSignedUploadUrlRequest clone() => GetSignedUploadUrlRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetSignedUploadUrlRequest copyWith(void Function(GetSignedUploadUrlRequest) updates) => super.copyWith((message) => updates(message as GetSignedUploadUrlRequest)) as GetSignedUploadUrlRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetSignedUploadUrlRequest create() => GetSignedUploadUrlRequest._();
+  GetSignedUploadUrlRequest createEmptyInstance() => create();
+  static $pb.PbList<GetSignedUploadUrlRequest> createRepeated() => $pb.PbList<GetSignedUploadUrlRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetSignedUploadUrlRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetSignedUploadUrlRequest>(create);
+  static GetSignedUploadUrlRequest? _defaultInstance;
+
+  /// Media ID to get signed upload URL for.
+  /// Media must be in CREATING state (from CreateContent).
+  @$pb.TagNumber(1)
+  $core.String get mediaId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set mediaId($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasMediaId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearMediaId() => clearField(1);
+
+  /// URL expiration in seconds.
+  /// Minimum: 60 (1 minute)
+  /// Maximum: 3600 (1 hour) - configurable by admin
+  /// Shorter = more secure
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get expiresSeconds => $_getI64(1);
+  @$pb.TagNumber(2)
+  set expiresSeconds($fixnum.Int64 v) { $_setInt64(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasExpiresSeconds() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearExpiresSeconds() => clearField(2);
+}
+
+class GetSignedUploadUrlResponse extends $pb.GeneratedMessage {
+  factory GetSignedUploadUrlResponse({
+    $core.String? uploadUrl,
+  }) {
+    final $result = create();
+    if (uploadUrl != null) {
+      $result.uploadUrl = uploadUrl;
+    }
+    return $result;
+  }
+  GetSignedUploadUrlResponse._() : super();
+  factory GetSignedUploadUrlResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetSignedUploadUrlResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetSignedUploadUrlResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'uploadUrl')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetSignedUploadUrlResponse clone() => GetSignedUploadUrlResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetSignedUploadUrlResponse copyWith(void Function(GetSignedUploadUrlResponse) updates) => super.copyWith((message) => updates(message as GetSignedUploadUrlResponse)) as GetSignedUploadUrlResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetSignedUploadUrlResponse create() => GetSignedUploadUrlResponse._();
+  GetSignedUploadUrlResponse createEmptyInstance() => create();
+  static $pb.PbList<GetSignedUploadUrlResponse> createRepeated() => $pb.PbList<GetSignedUploadUrlResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetSignedUploadUrlResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetSignedUploadUrlResponse>(create);
+  static GetSignedUploadUrlResponse? _defaultInstance;
+
+  /// Signed URL for direct upload to storage.
+  /// HTTP PUT with binary content.
+  @$pb.TagNumber(1)
+  $core.String get uploadUrl => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set uploadUrl($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasUploadUrl() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearUploadUrl() => clearField(1);
+}
+
+class FinalizeSignedUploadRequest extends $pb.GeneratedMessage {
+  factory FinalizeSignedUploadRequest({
+    $core.String? mediaId,
+    $core.String? checksumSha256,
+    $fixnum.Int64? sizeBytes,
+    $core.String? idempotencyKey,
+  }) {
+    final $result = create();
+    if (mediaId != null) {
+      $result.mediaId = mediaId;
+    }
+    if (checksumSha256 != null) {
+      $result.checksumSha256 = checksumSha256;
+    }
+    if (sizeBytes != null) {
+      $result.sizeBytes = sizeBytes;
+    }
+    if (idempotencyKey != null) {
+      $result.idempotencyKey = idempotencyKey;
+    }
+    return $result;
+  }
+  FinalizeSignedUploadRequest._() : super();
+  factory FinalizeSignedUploadRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory FinalizeSignedUploadRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FinalizeSignedUploadRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'mediaId')
+    ..aOS(2, _omitFieldNames ? '' : 'checksumSha256')
+    ..aInt64(3, _omitFieldNames ? '' : 'sizeBytes')
+    ..aOS(100, _omitFieldNames ? '' : 'idempotencyKey')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  FinalizeSignedUploadRequest clone() => FinalizeSignedUploadRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  FinalizeSignedUploadRequest copyWith(void Function(FinalizeSignedUploadRequest) updates) => super.copyWith((message) => updates(message as FinalizeSignedUploadRequest)) as FinalizeSignedUploadRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static FinalizeSignedUploadRequest create() => FinalizeSignedUploadRequest._();
+  FinalizeSignedUploadRequest createEmptyInstance() => create();
+  static $pb.PbList<FinalizeSignedUploadRequest> createRepeated() => $pb.PbList<FinalizeSignedUploadRequest>();
+  @$core.pragma('dart2js:noInline')
+  static FinalizeSignedUploadRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FinalizeSignedUploadRequest>(create);
+  static FinalizeSignedUploadRequest? _defaultInstance;
+
+  /// Media ID to finalize.
+  @$pb.TagNumber(1)
+  $core.String get mediaId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set mediaId($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasMediaId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearMediaId() => clearField(1);
+
+  /// SHA-256 checksum of the uploaded content.
+  /// Must match what was actually uploaded.
+  @$pb.TagNumber(2)
+  $core.String get checksumSha256 => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set checksumSha256($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasChecksumSha256() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearChecksumSha256() => clearField(2);
+
+  /// Size of the uploaded content in bytes.
+  /// Must match actual uploaded size.
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get sizeBytes => $_getI64(2);
+  @$pb.TagNumber(3)
+  set sizeBytes($fixnum.Int64 v) { $_setInt64(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasSizeBytes() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearSizeBytes() => clearField(3);
+
+  /// Idempotency key.
+  @$pb.TagNumber(100)
+  $core.String get idempotencyKey => $_getSZ(3);
+  @$pb.TagNumber(100)
+  set idempotencyKey($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(100)
+  $core.bool hasIdempotencyKey() => $_has(3);
+  @$pb.TagNumber(100)
+  void clearIdempotencyKey() => clearField(100);
+}
+
+class FinalizeSignedUploadResponse extends $pb.GeneratedMessage {
+  factory FinalizeSignedUploadResponse({
+    MediaMetadata? metadata,
+  }) {
+    final $result = create();
+    if (metadata != null) {
+      $result.metadata = metadata;
+    }
+    return $result;
+  }
+  FinalizeSignedUploadResponse._() : super();
+  factory FinalizeSignedUploadResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory FinalizeSignedUploadResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FinalizeSignedUploadResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
+    ..aOM<MediaMetadata>(1, _omitFieldNames ? '' : 'metadata', subBuilder: MediaMetadata.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  FinalizeSignedUploadResponse clone() => FinalizeSignedUploadResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  FinalizeSignedUploadResponse copyWith(void Function(FinalizeSignedUploadResponse) updates) => super.copyWith((message) => updates(message as FinalizeSignedUploadResponse)) as FinalizeSignedUploadResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static FinalizeSignedUploadResponse create() => FinalizeSignedUploadResponse._();
+  FinalizeSignedUploadResponse createEmptyInstance() => create();
+  static $pb.PbList<FinalizeSignedUploadResponse> createRepeated() => $pb.PbList<FinalizeSignedUploadResponse>();
+  @$core.pragma('dart2js:noInline')
+  static FinalizeSignedUploadResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FinalizeSignedUploadResponse>(create);
+  static FinalizeSignedUploadResponse? _defaultInstance;
+
+  /// Final media metadata.
+  /// State should now be AVAILABLE.
+  @$pb.TagNumber(1)
+  MediaMetadata get metadata => $_getN(0);
+  @$pb.TagNumber(1)
+  set metadata(MediaMetadata v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasMetadata() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearMetadata() => clearField(1);
+  @$pb.TagNumber(1)
+  MediaMetadata ensureMetadata() => $_ensure(0);
+}
+
+class GetSignedDownloadUrlRequest extends $pb.GeneratedMessage {
+  factory GetSignedDownloadUrlRequest({
+    $core.String? mediaId,
+    $fixnum.Int64? expiresSeconds,
+    $core.bool? download,
+    $core.String? filename,
+  }) {
+    final $result = create();
+    if (mediaId != null) {
+      $result.mediaId = mediaId;
+    }
+    if (expiresSeconds != null) {
+      $result.expiresSeconds = expiresSeconds;
+    }
+    if (download != null) {
+      $result.download = download;
+    }
+    if (filename != null) {
+      $result.filename = filename;
+    }
+    return $result;
+  }
+  GetSignedDownloadUrlRequest._() : super();
+  factory GetSignedDownloadUrlRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetSignedDownloadUrlRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetSignedDownloadUrlRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'mediaId')
+    ..aInt64(2, _omitFieldNames ? '' : 'expiresSeconds')
+    ..aOB(3, _omitFieldNames ? '' : 'download')
+    ..aOS(4, _omitFieldNames ? '' : 'filename')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetSignedDownloadUrlRequest clone() => GetSignedDownloadUrlRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetSignedDownloadUrlRequest copyWith(void Function(GetSignedDownloadUrlRequest) updates) => super.copyWith((message) => updates(message as GetSignedDownloadUrlRequest)) as GetSignedDownloadUrlRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetSignedDownloadUrlRequest create() => GetSignedDownloadUrlRequest._();
+  GetSignedDownloadUrlRequest createEmptyInstance() => create();
+  static $pb.PbList<GetSignedDownloadUrlRequest> createRepeated() => $pb.PbList<GetSignedDownloadUrlRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetSignedDownloadUrlRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetSignedDownloadUrlRequest>(create);
+  static GetSignedDownloadUrlRequest? _defaultInstance;
+
+  /// Media ID to get download URL for.
+  @$pb.TagNumber(1)
+  $core.String get mediaId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set mediaId($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasMediaId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearMediaId() => clearField(1);
+
+  /// URL expiration in seconds.
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get expiresSeconds => $_getI64(1);
+  @$pb.TagNumber(2)
+  set expiresSeconds($fixnum.Int64 v) { $_setInt64(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasExpiresSeconds() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearExpiresSeconds() => clearField(2);
+
+  /// Optional: Force download (Content-Disposition: attachment).
+  /// Default: false (inline for images, etc.)
+  @$pb.TagNumber(3)
+  $core.bool get download => $_getBF(2);
+  @$pb.TagNumber(3)
+  set download($core.bool v) { $_setBool(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasDownload() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearDownload() => clearField(3);
+
+  /// Optional: Override filename in Content-Disposition.
+  @$pb.TagNumber(4)
+  $core.String get filename => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set filename($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasFilename() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearFilename() => clearField(4);
+}
+
+class GetSignedDownloadUrlResponse extends $pb.GeneratedMessage {
+  factory GetSignedDownloadUrlResponse({
+    $core.String? downloadUrl,
+  }) {
+    final $result = create();
+    if (downloadUrl != null) {
+      $result.downloadUrl = downloadUrl;
+    }
+    return $result;
+  }
+  GetSignedDownloadUrlResponse._() : super();
+  factory GetSignedDownloadUrlResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetSignedDownloadUrlResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetSignedDownloadUrlResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'downloadUrl')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetSignedDownloadUrlResponse clone() => GetSignedDownloadUrlResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetSignedDownloadUrlResponse copyWith(void Function(GetSignedDownloadUrlResponse) updates) => super.copyWith((message) => updates(message as GetSignedDownloadUrlResponse)) as GetSignedDownloadUrlResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetSignedDownloadUrlResponse create() => GetSignedDownloadUrlResponse._();
+  GetSignedDownloadUrlResponse createEmptyInstance() => create();
+  static $pb.PbList<GetSignedDownloadUrlResponse> createRepeated() => $pb.PbList<GetSignedDownloadUrlResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetSignedDownloadUrlResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetSignedDownloadUrlResponse>(create);
+  static GetSignedDownloadUrlResponse? _defaultInstance;
+
+  /// Signed URL for direct download from storage.
+  @$pb.TagNumber(1)
+  $core.String get downloadUrl => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set downloadUrl($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasDownloadUrl() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearDownloadUrl() => clearField(1);
+}
+
+///  GetContentRequest downloads complete content.
+///
+///  This is the standard download method for most use cases.
+///  For large files or streaming needs, use DownloadContent.
+///
+///  Cache Headers:
+///    Server respects If-None-Match and If-Modified-Since.
+///    Include etag from metadata for efficient caching.
+///
+///  Timeouts:
+///    Default: 20 seconds
+///    For large files, use DownloadContent (streaming).
 class GetContentRequest extends $pb.GeneratedMessage {
   factory GetContentRequest({
     $core.String? mediaId,
@@ -1613,6 +3032,7 @@ class GetContentRequest extends $pb.GeneratedMessage {
   static GetContentRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetContentRequest>(create);
   static GetContentRequest? _defaultInstance;
 
+  /// Media ID to download.
   @$pb.TagNumber(1)
   $core.String get mediaId => $_getSZ(0);
   @$pb.TagNumber(1)
@@ -1622,6 +3042,9 @@ class GetContentRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearMediaId() => clearField(1);
 
+  /// Timeout in milliseconds.
+  /// Default: 20000 (20 seconds)
+  /// For very large files, use streaming API.
   @$pb.TagNumber(2)
   $fixnum.Int64 get timeoutMs => $_getI64(1);
   @$pb.TagNumber(2)
@@ -1632,7 +3055,6 @@ class GetContentRequest extends $pb.GeneratedMessage {
   void clearTimeoutMs() => clearField(2);
 }
 
-/// GetContentResponse returns the requested content.
 class GetContentResponse extends $pb.GeneratedMessage {
   factory GetContentResponse({
     $core.List<$core.int>? content,
@@ -1678,6 +3100,7 @@ class GetContentResponse extends $pb.GeneratedMessage {
   static GetContentResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetContentResponse>(create);
   static GetContentResponse? _defaultInstance;
 
+  /// Binary content of the file.
   @$pb.TagNumber(1)
   $core.List<$core.int> get content => $_getN(0);
   @$pb.TagNumber(1)
@@ -1687,6 +3110,8 @@ class GetContentResponse extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearContent() => clearField(1);
 
+  /// Current metadata at time of download.
+  /// Always fetch fresh before using for decisions.
   @$pb.TagNumber(2)
   MediaMetadata get metadata => $_getN(1);
   @$pb.TagNumber(2)
@@ -1699,7 +3124,6 @@ class GetContentResponse extends $pb.GeneratedMessage {
   MediaMetadata ensureMetadata() => $_ensure(1);
 }
 
-/// GetContentOverrideNameRequest downloads content with a specific filename.
 class GetContentOverrideNameRequest extends $pb.GeneratedMessage {
   factory GetContentOverrideNameRequest({
     $core.String? mediaId,
@@ -1750,6 +3174,7 @@ class GetContentOverrideNameRequest extends $pb.GeneratedMessage {
   static GetContentOverrideNameRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetContentOverrideNameRequest>(create);
   static GetContentOverrideNameRequest? _defaultInstance;
 
+  /// Media ID to download.
   @$pb.TagNumber(1)
   $core.String get mediaId => $_getSZ(0);
   @$pb.TagNumber(1)
@@ -1759,6 +3184,8 @@ class GetContentOverrideNameRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearMediaId() => clearField(1);
 
+  /// Filename to override in Content-Disposition header.
+  /// Useful for API downloads where original name may be unsafe.
   @$pb.TagNumber(2)
   $core.String get fileName => $_getSZ(1);
   @$pb.TagNumber(2)
@@ -1768,6 +3195,7 @@ class GetContentOverrideNameRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearFileName() => clearField(2);
 
+  /// Timeout in milliseconds.
   @$pb.TagNumber(3)
   $fixnum.Int64 get timeoutMs => $_getI64(2);
   @$pb.TagNumber(3)
@@ -1778,7 +3206,6 @@ class GetContentOverrideNameRequest extends $pb.GeneratedMessage {
   void clearTimeoutMs() => clearField(3);
 }
 
-/// GetContentOverrideNameResponse returns content with overridden filename.
 class GetContentOverrideNameResponse extends $pb.GeneratedMessage {
   factory GetContentOverrideNameResponse({
     $core.List<$core.int>? content,
@@ -1845,6 +3272,204 @@ class GetContentOverrideNameResponse extends $pb.GeneratedMessage {
   MediaMetadata ensureMetadata() => $_ensure(1);
 }
 
+///  DownloadChunk carries a portion of streamed content.
+///
+///  Server streams chunks as they're read from storage.
+///  Client assembles chunks in order received.
+class DownloadChunk extends $pb.GeneratedMessage {
+  factory DownloadChunk({
+    $core.List<$core.int>? data,
+  }) {
+    final $result = create();
+    if (data != null) {
+      $result.data = data;
+    }
+    return $result;
+  }
+  DownloadChunk._() : super();
+  factory DownloadChunk.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory DownloadChunk.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DownloadChunk', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
+    ..a<$core.List<$core.int>>(1, _omitFieldNames ? '' : 'data', $pb.PbFieldType.OY)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  DownloadChunk clone() => DownloadChunk()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  DownloadChunk copyWith(void Function(DownloadChunk) updates) => super.copyWith((message) => updates(message as DownloadChunk)) as DownloadChunk;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static DownloadChunk create() => DownloadChunk._();
+  DownloadChunk createEmptyInstance() => create();
+  static $pb.PbList<DownloadChunk> createRepeated() => $pb.PbList<DownloadChunk>();
+  @$core.pragma('dart2js:noInline')
+  static DownloadChunk getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DownloadChunk>(create);
+  static DownloadChunk? _defaultInstance;
+
+  /// Chunk data.
+  /// Chunk size varies based on server configuration.
+  @$pb.TagNumber(1)
+  $core.List<$core.int> get data => $_getN(0);
+  @$pb.TagNumber(1)
+  set data($core.List<$core.int> v) { $_setBytes(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasData() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearData() => clearField(1);
+}
+
+class DownloadContentRequest extends $pb.GeneratedMessage {
+  factory DownloadContentRequest({
+    $core.String? mediaId,
+  }) {
+    final $result = create();
+    if (mediaId != null) {
+      $result.mediaId = mediaId;
+    }
+    return $result;
+  }
+  DownloadContentRequest._() : super();
+  factory DownloadContentRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory DownloadContentRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DownloadContentRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'mediaId')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  DownloadContentRequest clone() => DownloadContentRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  DownloadContentRequest copyWith(void Function(DownloadContentRequest) updates) => super.copyWith((message) => updates(message as DownloadContentRequest)) as DownloadContentRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static DownloadContentRequest create() => DownloadContentRequest._();
+  DownloadContentRequest createEmptyInstance() => create();
+  static $pb.PbList<DownloadContentRequest> createRepeated() => $pb.PbList<DownloadContentRequest>();
+  @$core.pragma('dart2js:noInline')
+  static DownloadContentRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DownloadContentRequest>(create);
+  static DownloadContentRequest? _defaultInstance;
+
+  /// Media ID to download.
+  @$pb.TagNumber(1)
+  $core.String get mediaId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set mediaId($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasMediaId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearMediaId() => clearField(1);
+}
+
+class DownloadRangeRequest extends $pb.GeneratedMessage {
+  factory DownloadRangeRequest({
+    $core.String? mediaId,
+    $fixnum.Int64? start,
+    $fixnum.Int64? end,
+  }) {
+    final $result = create();
+    if (mediaId != null) {
+      $result.mediaId = mediaId;
+    }
+    if (start != null) {
+      $result.start = start;
+    }
+    if (end != null) {
+      $result.end = end;
+    }
+    return $result;
+  }
+  DownloadRangeRequest._() : super();
+  factory DownloadRangeRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory DownloadRangeRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DownloadRangeRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'mediaId')
+    ..aInt64(2, _omitFieldNames ? '' : 'start')
+    ..aInt64(3, _omitFieldNames ? '' : 'end')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  DownloadRangeRequest clone() => DownloadRangeRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  DownloadRangeRequest copyWith(void Function(DownloadRangeRequest) updates) => super.copyWith((message) => updates(message as DownloadRangeRequest)) as DownloadRangeRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static DownloadRangeRequest create() => DownloadRangeRequest._();
+  DownloadRangeRequest createEmptyInstance() => create();
+  static $pb.PbList<DownloadRangeRequest> createRepeated() => $pb.PbList<DownloadRangeRequest>();
+  @$core.pragma('dart2js:noInline')
+  static DownloadRangeRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DownloadRangeRequest>(create);
+  static DownloadRangeRequest? _defaultInstance;
+
+  /// Media ID to download.
+  @$pb.TagNumber(1)
+  $core.String get mediaId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set mediaId($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasMediaId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearMediaId() => clearField(1);
+
+  /// Start byte offset (inclusive).
+  /// Must be >= 0 and < file size.
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get start => $_getI64(1);
+  @$pb.TagNumber(2)
+  set start($fixnum.Int64 v) { $_setInt64(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasStart() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearStart() => clearField(2);
+
+  /// End byte offset (exclusive).
+  /// Must be > start and <= file size.
+  /// Omit or set to -1 for remainder of file.
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get end => $_getI64(2);
+  @$pb.TagNumber(3)
+  set end($fixnum.Int64 v) { $_setInt64(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasEnd() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearEnd() => clearField(3);
+}
+
+///  HeadContentRequest retrieves metadata without downloading content.
+///
+///  Use for:
+///    - Checking if content exists
+///    - Getting metadata before download
+///    - Checking content length for range requests
+///    - Verifying etag for cache validation
 class HeadContentRequest extends $pb.GeneratedMessage {
   factory HeadContentRequest({
     $core.String? mediaId,
@@ -1885,6 +3510,7 @@ class HeadContentRequest extends $pb.GeneratedMessage {
   static HeadContentRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<HeadContentRequest>(create);
   static HeadContentRequest? _defaultInstance;
 
+  /// Media ID to get metadata for.
   @$pb.TagNumber(1)
   $core.String get mediaId => $_getSZ(0);
   @$pb.TagNumber(1)
@@ -1935,6 +3561,7 @@ class HeadContentResponse extends $pb.GeneratedMessage {
   static HeadContentResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<HeadContentResponse>(create);
   static HeadContentResponse? _defaultInstance;
 
+  /// Current metadata.
   @$pb.TagNumber(1)
   MediaMetadata get metadata => $_getN(0);
   @$pb.TagNumber(1)
@@ -1947,238 +3574,28 @@ class HeadContentResponse extends $pb.GeneratedMessage {
   MediaMetadata ensureMetadata() => $_ensure(0);
 }
 
-class GetSignedUploadUrlRequest extends $pb.GeneratedMessage {
-  factory GetSignedUploadUrlRequest({
-    $core.String? mediaId,
-    $fixnum.Int64? expiresSeconds,
-  }) {
-    final $result = create();
-    if (mediaId != null) {
-      $result.mediaId = mediaId;
-    }
-    if (expiresSeconds != null) {
-      $result.expiresSeconds = expiresSeconds;
-    }
-    return $result;
-  }
-  GetSignedUploadUrlRequest._() : super();
-  factory GetSignedUploadUrlRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory GetSignedUploadUrlRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetSignedUploadUrlRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'mediaId')
-    ..aInt64(2, _omitFieldNames ? '' : 'expiresSeconds')
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  GetSignedUploadUrlRequest clone() => GetSignedUploadUrlRequest()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  GetSignedUploadUrlRequest copyWith(void Function(GetSignedUploadUrlRequest) updates) => super.copyWith((message) => updates(message as GetSignedUploadUrlRequest)) as GetSignedUploadUrlRequest;
-
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static GetSignedUploadUrlRequest create() => GetSignedUploadUrlRequest._();
-  GetSignedUploadUrlRequest createEmptyInstance() => create();
-  static $pb.PbList<GetSignedUploadUrlRequest> createRepeated() => $pb.PbList<GetSignedUploadUrlRequest>();
-  @$core.pragma('dart2js:noInline')
-  static GetSignedUploadUrlRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetSignedUploadUrlRequest>(create);
-  static GetSignedUploadUrlRequest? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.String get mediaId => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set mediaId($core.String v) { $_setString(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasMediaId() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearMediaId() => clearField(1);
-
-  @$pb.TagNumber(2)
-  $fixnum.Int64 get expiresSeconds => $_getI64(1);
-  @$pb.TagNumber(2)
-  set expiresSeconds($fixnum.Int64 v) { $_setInt64(1, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasExpiresSeconds() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearExpiresSeconds() => clearField(2);
-}
-
-class GetSignedUploadUrlResponse extends $pb.GeneratedMessage {
-  factory GetSignedUploadUrlResponse({
-    $core.String? uploadUrl,
-  }) {
-    final $result = create();
-    if (uploadUrl != null) {
-      $result.uploadUrl = uploadUrl;
-    }
-    return $result;
-  }
-  GetSignedUploadUrlResponse._() : super();
-  factory GetSignedUploadUrlResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory GetSignedUploadUrlResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetSignedUploadUrlResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'uploadUrl')
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  GetSignedUploadUrlResponse clone() => GetSignedUploadUrlResponse()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  GetSignedUploadUrlResponse copyWith(void Function(GetSignedUploadUrlResponse) updates) => super.copyWith((message) => updates(message as GetSignedUploadUrlResponse)) as GetSignedUploadUrlResponse;
-
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static GetSignedUploadUrlResponse create() => GetSignedUploadUrlResponse._();
-  GetSignedUploadUrlResponse createEmptyInstance() => create();
-  static $pb.PbList<GetSignedUploadUrlResponse> createRepeated() => $pb.PbList<GetSignedUploadUrlResponse>();
-  @$core.pragma('dart2js:noInline')
-  static GetSignedUploadUrlResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetSignedUploadUrlResponse>(create);
-  static GetSignedUploadUrlResponse? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.String get uploadUrl => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set uploadUrl($core.String v) { $_setString(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasUploadUrl() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearUploadUrl() => clearField(1);
-}
-
-class GetSignedDownloadUrlRequest extends $pb.GeneratedMessage {
-  factory GetSignedDownloadUrlRequest({
-    $core.String? mediaId,
-    $fixnum.Int64? expiresSeconds,
-  }) {
-    final $result = create();
-    if (mediaId != null) {
-      $result.mediaId = mediaId;
-    }
-    if (expiresSeconds != null) {
-      $result.expiresSeconds = expiresSeconds;
-    }
-    return $result;
-  }
-  GetSignedDownloadUrlRequest._() : super();
-  factory GetSignedDownloadUrlRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory GetSignedDownloadUrlRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetSignedDownloadUrlRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'mediaId')
-    ..aInt64(2, _omitFieldNames ? '' : 'expiresSeconds')
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  GetSignedDownloadUrlRequest clone() => GetSignedDownloadUrlRequest()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  GetSignedDownloadUrlRequest copyWith(void Function(GetSignedDownloadUrlRequest) updates) => super.copyWith((message) => updates(message as GetSignedDownloadUrlRequest)) as GetSignedDownloadUrlRequest;
-
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static GetSignedDownloadUrlRequest create() => GetSignedDownloadUrlRequest._();
-  GetSignedDownloadUrlRequest createEmptyInstance() => create();
-  static $pb.PbList<GetSignedDownloadUrlRequest> createRepeated() => $pb.PbList<GetSignedDownloadUrlRequest>();
-  @$core.pragma('dart2js:noInline')
-  static GetSignedDownloadUrlRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetSignedDownloadUrlRequest>(create);
-  static GetSignedDownloadUrlRequest? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.String get mediaId => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set mediaId($core.String v) { $_setString(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasMediaId() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearMediaId() => clearField(1);
-
-  @$pb.TagNumber(2)
-  $fixnum.Int64 get expiresSeconds => $_getI64(1);
-  @$pb.TagNumber(2)
-  set expiresSeconds($fixnum.Int64 v) { $_setInt64(1, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasExpiresSeconds() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearExpiresSeconds() => clearField(2);
-}
-
-class GetSignedDownloadUrlResponse extends $pb.GeneratedMessage {
-  factory GetSignedDownloadUrlResponse({
-    $core.String? downloadUrl,
-  }) {
-    final $result = create();
-    if (downloadUrl != null) {
-      $result.downloadUrl = downloadUrl;
-    }
-    return $result;
-  }
-  GetSignedDownloadUrlResponse._() : super();
-  factory GetSignedDownloadUrlResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory GetSignedDownloadUrlResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetSignedDownloadUrlResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'downloadUrl')
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  GetSignedDownloadUrlResponse clone() => GetSignedDownloadUrlResponse()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  GetSignedDownloadUrlResponse copyWith(void Function(GetSignedDownloadUrlResponse) updates) => super.copyWith((message) => updates(message as GetSignedDownloadUrlResponse)) as GetSignedDownloadUrlResponse;
-
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static GetSignedDownloadUrlResponse create() => GetSignedDownloadUrlResponse._();
-  GetSignedDownloadUrlResponse createEmptyInstance() => create();
-  static $pb.PbList<GetSignedDownloadUrlResponse> createRepeated() => $pb.PbList<GetSignedDownloadUrlResponse>();
-  @$core.pragma('dart2js:noInline')
-  static GetSignedDownloadUrlResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetSignedDownloadUrlResponse>(create);
-  static GetSignedDownloadUrlResponse? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.String get downloadUrl => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set downloadUrl($core.String v) { $_setString(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasDownloadUrl() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearDownloadUrl() => clearField(1);
-}
-
+///  DeleteContentRequest deletes content from the repository.
+///
+///  Soft Delete (default):
+///    - Content marked as DELETED
+///    - Data retained for retention period
+///    - Can be restored via RestoreVersion
+///    - Storage not reclaimed until hard delete or expiration
+///
+///  Hard Delete:
+///    - Content permanently removed
+///    - Cannot be restored
+///    - Storage reclaimed immediately
+///    - Requires OWNER role
+///
+///  Retention Policy:
+///    If content is under retention policy, hard delete may be denied.
+///    Use DELETE_OUTCOME_DENIED_BY_RETENTION in response.
 class DeleteContentRequest extends $pb.GeneratedMessage {
   factory DeleteContentRequest({
     $core.String? mediaId,
     $core.bool? hardDelete,
+    $core.String? idempotencyKey,
   }) {
     final $result = create();
     if (mediaId != null) {
@@ -2186,6 +3603,9 @@ class DeleteContentRequest extends $pb.GeneratedMessage {
     }
     if (hardDelete != null) {
       $result.hardDelete = hardDelete;
+    }
+    if (idempotencyKey != null) {
+      $result.idempotencyKey = idempotencyKey;
     }
     return $result;
   }
@@ -2196,6 +3616,7 @@ class DeleteContentRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DeleteContentRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'mediaId')
     ..aOB(2, _omitFieldNames ? '' : 'hardDelete')
+    ..aOS(100, _omitFieldNames ? '' : 'idempotencyKey')
     ..hasRequiredFields = false
   ;
 
@@ -2220,6 +3641,7 @@ class DeleteContentRequest extends $pb.GeneratedMessage {
   static DeleteContentRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeleteContentRequest>(create);
   static DeleteContentRequest? _defaultInstance;
 
+  /// Media ID to delete.
   @$pb.TagNumber(1)
   $core.String get mediaId => $_getSZ(0);
   @$pb.TagNumber(1)
@@ -2229,6 +3651,8 @@ class DeleteContentRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearMediaId() => clearField(1);
 
+  /// True for permanent deletion, false for soft delete.
+  /// Default: false (soft delete)
   @$pb.TagNumber(2)
   $core.bool get hardDelete => $_getBF(1);
   @$pb.TagNumber(2)
@@ -2237,15 +3661,29 @@ class DeleteContentRequest extends $pb.GeneratedMessage {
   $core.bool hasHardDelete() => $_has(1);
   @$pb.TagNumber(2)
   void clearHardDelete() => clearField(2);
+
+  /// Idempotency key.
+  @$pb.TagNumber(100)
+  $core.String get idempotencyKey => $_getSZ(2);
+  @$pb.TagNumber(100)
+  set idempotencyKey($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(100)
+  $core.bool hasIdempotencyKey() => $_has(2);
+  @$pb.TagNumber(100)
+  void clearIdempotencyKey() => clearField(100);
 }
 
 class DeleteContentResponse extends $pb.GeneratedMessage {
   factory DeleteContentResponse({
     $core.bool? success,
+    DeleteOutcome? outcome,
   }) {
     final $result = create();
     if (success != null) {
       $result.success = success;
+    }
+    if (outcome != null) {
+      $result.outcome = outcome;
     }
     return $result;
   }
@@ -2255,6 +3693,7 @@ class DeleteContentResponse extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DeleteContentResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
     ..aOB(1, _omitFieldNames ? '' : 'success')
+    ..e<DeleteOutcome>(2, _omitFieldNames ? '' : 'outcome', $pb.PbFieldType.OE, defaultOrMaker: DeleteOutcome.DELETE_OUTCOME_UNSPECIFIED, valueOf: DeleteOutcome.valueOf, enumValues: DeleteOutcome.values)
     ..hasRequiredFields = false
   ;
 
@@ -2279,6 +3718,389 @@ class DeleteContentResponse extends $pb.GeneratedMessage {
   static DeleteContentResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeleteContentResponse>(create);
   static DeleteContentResponse? _defaultInstance;
 
+  /// Whether the delete was successful.
+  /// False if media not found or permission denied.
+  @$pb.TagNumber(1)
+  $core.bool get success => $_getBF(0);
+  @$pb.TagNumber(1)
+  set success($core.bool v) { $_setBool(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasSuccess() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSuccess() => clearField(1);
+
+  /// Detailed outcome of the delete operation.
+  @$pb.TagNumber(2)
+  DeleteOutcome get outcome => $_getN(1);
+  @$pb.TagNumber(2)
+  set outcome(DeleteOutcome v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasOutcome() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearOutcome() => clearField(2);
+}
+
+///  PatchContentRequest updates metadata for existing content.
+///
+///  This is a PATCH (partial update) operation.
+///  Fields not specified are left unchanged.
+///
+///  Optimistic Concurrency:
+///    Include etag from current metadata in If-Match header.
+///    Server returns PRECONDITION_FAILED if etag doesn't match.
+///
+///  What can be patched:
+///    - filename: Rename the file
+///    - visibility: Change access level
+///    - expires_at: Update expiration
+///    - set_labels: Add/update labels
+///    - remove_labels: Remove specific labels
+///    - set_extra: Add/update extra metadata
+///
+///  What cannot be patched (requires new version):
+///    - content_type
+///    - file_size_bytes
+///    - checksum_sha256
+class PatchContentRequest extends $pb.GeneratedMessage {
+  factory PatchContentRequest({
+    $core.String? mediaId,
+    $1.Struct? setExtra,
+    $core.Map<$core.String, $core.String>? setLabels,
+    $core.Iterable<$core.String>? removeLabels,
+    $core.String? filename,
+    MediaMetadata_Visibility? visibility,
+    $0.Timestamp? expiresAt,
+    $core.String? idempotencyKey,
+  }) {
+    final $result = create();
+    if (mediaId != null) {
+      $result.mediaId = mediaId;
+    }
+    if (setExtra != null) {
+      $result.setExtra = setExtra;
+    }
+    if (setLabels != null) {
+      $result.setLabels.addAll(setLabels);
+    }
+    if (removeLabels != null) {
+      $result.removeLabels.addAll(removeLabels);
+    }
+    if (filename != null) {
+      $result.filename = filename;
+    }
+    if (visibility != null) {
+      $result.visibility = visibility;
+    }
+    if (expiresAt != null) {
+      $result.expiresAt = expiresAt;
+    }
+    if (idempotencyKey != null) {
+      $result.idempotencyKey = idempotencyKey;
+    }
+    return $result;
+  }
+  PatchContentRequest._() : super();
+  factory PatchContentRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory PatchContentRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PatchContentRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'mediaId')
+    ..aOM<$1.Struct>(2, _omitFieldNames ? '' : 'setExtra', subBuilder: $1.Struct.create)
+    ..m<$core.String, $core.String>(3, _omitFieldNames ? '' : 'setLabels', entryClassName: 'PatchContentRequest.SetLabelsEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OS, packageName: const $pb.PackageName('files.v1'))
+    ..pPS(4, _omitFieldNames ? '' : 'removeLabels')
+    ..aOS(5, _omitFieldNames ? '' : 'filename')
+    ..e<MediaMetadata_Visibility>(6, _omitFieldNames ? '' : 'visibility', $pb.PbFieldType.OE, defaultOrMaker: MediaMetadata_Visibility.VISIBILITY_UNSPECIFIED, valueOf: MediaMetadata_Visibility.valueOf, enumValues: MediaMetadata_Visibility.values)
+    ..aOM<$0.Timestamp>(7, _omitFieldNames ? '' : 'expiresAt', subBuilder: $0.Timestamp.create)
+    ..aOS(100, _omitFieldNames ? '' : 'idempotencyKey')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  PatchContentRequest clone() => PatchContentRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  PatchContentRequest copyWith(void Function(PatchContentRequest) updates) => super.copyWith((message) => updates(message as PatchContentRequest)) as PatchContentRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static PatchContentRequest create() => PatchContentRequest._();
+  PatchContentRequest createEmptyInstance() => create();
+  static $pb.PbList<PatchContentRequest> createRepeated() => $pb.PbList<PatchContentRequest>();
+  @$core.pragma('dart2js:noInline')
+  static PatchContentRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PatchContentRequest>(create);
+  static PatchContentRequest? _defaultInstance;
+
+  /// Media ID to patch.
+  @$pb.TagNumber(1)
+  $core.String get mediaId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set mediaId($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasMediaId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearMediaId() => clearField(1);
+
+  /// Set/update extra metadata.
+  /// Merge with existing extra (not replace).
+  /// To remove a key, set value to null in the struct.
+  @$pb.TagNumber(2)
+  $1.Struct get setExtra => $_getN(1);
+  @$pb.TagNumber(2)
+  set setExtra($1.Struct v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasSetExtra() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSetExtra() => clearField(2);
+  @$pb.TagNumber(2)
+  $1.Struct ensureSetExtra() => $_ensure(1);
+
+  /// Set/update labels.
+  /// Merge with existing labels.
+  @$pb.TagNumber(3)
+  $core.Map<$core.String, $core.String> get setLabels => $_getMap(2);
+
+  /// Labels to remove entirely.
+  @$pb.TagNumber(4)
+  $core.List<$core.String> get removeLabels => $_getList(3);
+
+  /// New filename.
+  /// If empty, filename is unchanged.
+  @$pb.TagNumber(5)
+  $core.String get filename => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set filename($core.String v) { $_setString(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasFilename() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearFilename() => clearField(5);
+
+  /// New visibility.
+  /// If VISIBILITY_UNSPECIFIED, visibility is unchanged.
+  @$pb.TagNumber(6)
+  MediaMetadata_Visibility get visibility => $_getN(5);
+  @$pb.TagNumber(6)
+  set visibility(MediaMetadata_Visibility v) { setField(6, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasVisibility() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearVisibility() => clearField(6);
+
+  /// New expiration timestamp.
+  /// If empty, expires_at is unchanged.
+  @$pb.TagNumber(7)
+  $0.Timestamp get expiresAt => $_getN(6);
+  @$pb.TagNumber(7)
+  set expiresAt($0.Timestamp v) { setField(7, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasExpiresAt() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearExpiresAt() => clearField(7);
+  @$pb.TagNumber(7)
+  $0.Timestamp ensureExpiresAt() => $_ensure(6);
+
+  /// Idempotency key.
+  @$pb.TagNumber(100)
+  $core.String get idempotencyKey => $_getSZ(7);
+  @$pb.TagNumber(100)
+  set idempotencyKey($core.String v) { $_setString(7, v); }
+  @$pb.TagNumber(100)
+  $core.bool hasIdempotencyKey() => $_has(7);
+  @$pb.TagNumber(100)
+  void clearIdempotencyKey() => clearField(100);
+}
+
+class PatchContentResponse extends $pb.GeneratedMessage {
+  factory PatchContentResponse({
+    MediaMetadata? metadata,
+  }) {
+    final $result = create();
+    if (metadata != null) {
+      $result.metadata = metadata;
+    }
+    return $result;
+  }
+  PatchContentResponse._() : super();
+  factory PatchContentResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory PatchContentResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PatchContentResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
+    ..aOM<MediaMetadata>(1, _omitFieldNames ? '' : 'metadata', subBuilder: MediaMetadata.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  PatchContentResponse clone() => PatchContentResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  PatchContentResponse copyWith(void Function(PatchContentResponse) updates) => super.copyWith((message) => updates(message as PatchContentResponse)) as PatchContentResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static PatchContentResponse create() => PatchContentResponse._();
+  PatchContentResponse createEmptyInstance() => create();
+  static $pb.PbList<PatchContentResponse> createRepeated() => $pb.PbList<PatchContentResponse>();
+  @$core.pragma('dart2js:noInline')
+  static PatchContentResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PatchContentResponse>(create);
+  static PatchContentResponse? _defaultInstance;
+
+  /// Updated metadata reflecting changes.
+  @$pb.TagNumber(1)
+  MediaMetadata get metadata => $_getN(0);
+  @$pb.TagNumber(1)
+  set metadata(MediaMetadata v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasMetadata() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearMetadata() => clearField(1);
+  @$pb.TagNumber(1)
+  MediaMetadata ensureMetadata() => $_ensure(0);
+}
+
+///  GrantAccessRequest grants access to a principal for media.
+///
+///  Who can grant:
+///    - OWNER: can grant any role
+///    - WRITER: can grant READER only
+///
+///  Duplicate grants:
+///    Granting to principal with existing role updates their role.
+///    No error returned; grant is simply updated.
+class GrantAccessRequest extends $pb.GeneratedMessage {
+  factory GrantAccessRequest({
+    $core.String? mediaId,
+    AccessGrant? grant,
+    $core.String? idempotencyKey,
+  }) {
+    final $result = create();
+    if (mediaId != null) {
+      $result.mediaId = mediaId;
+    }
+    if (grant != null) {
+      $result.grant = grant;
+    }
+    if (idempotencyKey != null) {
+      $result.idempotencyKey = idempotencyKey;
+    }
+    return $result;
+  }
+  GrantAccessRequest._() : super();
+  factory GrantAccessRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GrantAccessRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GrantAccessRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'mediaId')
+    ..aOM<AccessGrant>(2, _omitFieldNames ? '' : 'grant', subBuilder: AccessGrant.create)
+    ..aOS(100, _omitFieldNames ? '' : 'idempotencyKey')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GrantAccessRequest clone() => GrantAccessRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GrantAccessRequest copyWith(void Function(GrantAccessRequest) updates) => super.copyWith((message) => updates(message as GrantAccessRequest)) as GrantAccessRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GrantAccessRequest create() => GrantAccessRequest._();
+  GrantAccessRequest createEmptyInstance() => create();
+  static $pb.PbList<GrantAccessRequest> createRepeated() => $pb.PbList<GrantAccessRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GrantAccessRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GrantAccessRequest>(create);
+  static GrantAccessRequest? _defaultInstance;
+
+  /// Media ID to grant access to.
+  @$pb.TagNumber(1)
+  $core.String get mediaId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set mediaId($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasMediaId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearMediaId() => clearField(1);
+
+  /// The access grant to apply.
+  @$pb.TagNumber(2)
+  AccessGrant get grant => $_getN(1);
+  @$pb.TagNumber(2)
+  set grant(AccessGrant v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasGrant() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearGrant() => clearField(2);
+  @$pb.TagNumber(2)
+  AccessGrant ensureGrant() => $_ensure(1);
+
+  /// Idempotency key.
+  @$pb.TagNumber(100)
+  $core.String get idempotencyKey => $_getSZ(2);
+  @$pb.TagNumber(100)
+  set idempotencyKey($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(100)
+  $core.bool hasIdempotencyKey() => $_has(2);
+  @$pb.TagNumber(100)
+  void clearIdempotencyKey() => clearField(100);
+}
+
+class GrantAccessResponse extends $pb.GeneratedMessage {
+  factory GrantAccessResponse({
+    $core.bool? success,
+  }) {
+    final $result = create();
+    if (success != null) {
+      $result.success = success;
+    }
+    return $result;
+  }
+  GrantAccessResponse._() : super();
+  factory GrantAccessResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GrantAccessResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GrantAccessResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
+    ..aOB(1, _omitFieldNames ? '' : 'success')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GrantAccessResponse clone() => GrantAccessResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GrantAccessResponse copyWith(void Function(GrantAccessResponse) updates) => super.copyWith((message) => updates(message as GrantAccessResponse)) as GrantAccessResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GrantAccessResponse create() => GrantAccessResponse._();
+  GrantAccessResponse createEmptyInstance() => create();
+  static $pb.PbList<GrantAccessResponse> createRepeated() => $pb.PbList<GrantAccessResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GrantAccessResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GrantAccessResponse>(create);
+  static GrantAccessResponse? _defaultInstance;
+
+  /// Whether the grant was applied.
   @$pb.TagNumber(1)
   $core.bool get success => $_getBF(0);
   @$pb.TagNumber(1)
@@ -2289,7 +4111,298 @@ class DeleteContentResponse extends $pb.GeneratedMessage {
   void clearSuccess() => clearField(1);
 }
 
-/// GetContentThumbnailRequest retrieves a thumbnail of content.
+class RevokeAccessRequest extends $pb.GeneratedMessage {
+  factory RevokeAccessRequest({
+    $core.String? mediaId,
+    $core.String? principalId,
+    $core.String? idempotencyKey,
+  }) {
+    final $result = create();
+    if (mediaId != null) {
+      $result.mediaId = mediaId;
+    }
+    if (principalId != null) {
+      $result.principalId = principalId;
+    }
+    if (idempotencyKey != null) {
+      $result.idempotencyKey = idempotencyKey;
+    }
+    return $result;
+  }
+  RevokeAccessRequest._() : super();
+  factory RevokeAccessRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory RevokeAccessRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RevokeAccessRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'mediaId')
+    ..aOS(2, _omitFieldNames ? '' : 'principalId')
+    ..aOS(100, _omitFieldNames ? '' : 'idempotencyKey')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  RevokeAccessRequest clone() => RevokeAccessRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  RevokeAccessRequest copyWith(void Function(RevokeAccessRequest) updates) => super.copyWith((message) => updates(message as RevokeAccessRequest)) as RevokeAccessRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static RevokeAccessRequest create() => RevokeAccessRequest._();
+  RevokeAccessRequest createEmptyInstance() => create();
+  static $pb.PbList<RevokeAccessRequest> createRepeated() => $pb.PbList<RevokeAccessRequest>();
+  @$core.pragma('dart2js:noInline')
+  static RevokeAccessRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RevokeAccessRequest>(create);
+  static RevokeAccessRequest? _defaultInstance;
+
+  /// Media ID to revoke access from.
+  @$pb.TagNumber(1)
+  $core.String get mediaId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set mediaId($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasMediaId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearMediaId() => clearField(1);
+
+  /// Principal ID to revoke.
+  /// Cannot revoke owner (returns error).
+  @$pb.TagNumber(2)
+  $core.String get principalId => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set principalId($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasPrincipalId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearPrincipalId() => clearField(2);
+
+  /// Idempotency key.
+  @$pb.TagNumber(100)
+  $core.String get idempotencyKey => $_getSZ(2);
+  @$pb.TagNumber(100)
+  set idempotencyKey($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(100)
+  $core.bool hasIdempotencyKey() => $_has(2);
+  @$pb.TagNumber(100)
+  void clearIdempotencyKey() => clearField(100);
+}
+
+class RevokeAccessResponse extends $pb.GeneratedMessage {
+  factory RevokeAccessResponse({
+    $core.bool? success,
+  }) {
+    final $result = create();
+    if (success != null) {
+      $result.success = success;
+    }
+    return $result;
+  }
+  RevokeAccessResponse._() : super();
+  factory RevokeAccessResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory RevokeAccessResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RevokeAccessResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
+    ..aOB(1, _omitFieldNames ? '' : 'success')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  RevokeAccessResponse clone() => RevokeAccessResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  RevokeAccessResponse copyWith(void Function(RevokeAccessResponse) updates) => super.copyWith((message) => updates(message as RevokeAccessResponse)) as RevokeAccessResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static RevokeAccessResponse create() => RevokeAccessResponse._();
+  RevokeAccessResponse createEmptyInstance() => create();
+  static $pb.PbList<RevokeAccessResponse> createRepeated() => $pb.PbList<RevokeAccessResponse>();
+  @$core.pragma('dart2js:noInline')
+  static RevokeAccessResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RevokeAccessResponse>(create);
+  static RevokeAccessResponse? _defaultInstance;
+
+  /// Whether the revocation was applied.
+  /// False if grant not found or cannot revoke owner.
+  @$pb.TagNumber(1)
+  $core.bool get success => $_getBF(0);
+  @$pb.TagNumber(1)
+  set success($core.bool v) { $_setBool(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasSuccess() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSuccess() => clearField(1);
+}
+
+class ListAccessRequest extends $pb.GeneratedMessage {
+  factory ListAccessRequest({
+    $core.String? mediaId,
+    AccessRole? filterRole,
+    $2.PageCursor? cursor,
+  }) {
+    final $result = create();
+    if (mediaId != null) {
+      $result.mediaId = mediaId;
+    }
+    if (filterRole != null) {
+      $result.filterRole = filterRole;
+    }
+    if (cursor != null) {
+      $result.cursor = cursor;
+    }
+    return $result;
+  }
+  ListAccessRequest._() : super();
+  factory ListAccessRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListAccessRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListAccessRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'mediaId')
+    ..e<AccessRole>(2, _omitFieldNames ? '' : 'filterRole', $pb.PbFieldType.OE, defaultOrMaker: AccessRole.ACCESS_ROLE_UNSPECIFIED, valueOf: AccessRole.valueOf, enumValues: AccessRole.values)
+    ..aOM<$2.PageCursor>(3, _omitFieldNames ? '' : 'cursor', subBuilder: $2.PageCursor.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListAccessRequest clone() => ListAccessRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListAccessRequest copyWith(void Function(ListAccessRequest) updates) => super.copyWith((message) => updates(message as ListAccessRequest)) as ListAccessRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListAccessRequest create() => ListAccessRequest._();
+  ListAccessRequest createEmptyInstance() => create();
+  static $pb.PbList<ListAccessRequest> createRepeated() => $pb.PbList<ListAccessRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListAccessRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListAccessRequest>(create);
+  static ListAccessRequest? _defaultInstance;
+
+  /// Media ID to list grants for.
+  @$pb.TagNumber(1)
+  $core.String get mediaId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set mediaId($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasMediaId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearMediaId() => clearField(1);
+
+  /// Filter by role (optional).
+  @$pb.TagNumber(2)
+  AccessRole get filterRole => $_getN(1);
+  @$pb.TagNumber(2)
+  set filterRole(AccessRole v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasFilterRole() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFilterRole() => clearField(2);
+
+  /// Pagination using common PageCursor.
+  @$pb.TagNumber(3)
+  $2.PageCursor get cursor => $_getN(2);
+  @$pb.TagNumber(3)
+  set cursor($2.PageCursor v) { setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasCursor() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearCursor() => clearField(3);
+  @$pb.TagNumber(3)
+  $2.PageCursor ensureCursor() => $_ensure(2);
+}
+
+class ListAccessResponse extends $pb.GeneratedMessage {
+  factory ListAccessResponse({
+    $core.Iterable<AccessGrant>? grants,
+    $2.PageCursor? nextCursor,
+  }) {
+    final $result = create();
+    if (grants != null) {
+      $result.grants.addAll(grants);
+    }
+    if (nextCursor != null) {
+      $result.nextCursor = nextCursor;
+    }
+    return $result;
+  }
+  ListAccessResponse._() : super();
+  factory ListAccessResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListAccessResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListAccessResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
+    ..pc<AccessGrant>(1, _omitFieldNames ? '' : 'grants', $pb.PbFieldType.PM, subBuilder: AccessGrant.create)
+    ..aOM<$2.PageCursor>(2, _omitFieldNames ? '' : 'nextCursor', subBuilder: $2.PageCursor.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListAccessResponse clone() => ListAccessResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListAccessResponse copyWith(void Function(ListAccessResponse) updates) => super.copyWith((message) => updates(message as ListAccessResponse)) as ListAccessResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListAccessResponse create() => ListAccessResponse._();
+  ListAccessResponse createEmptyInstance() => create();
+  static $pb.PbList<ListAccessResponse> createRepeated() => $pb.PbList<ListAccessResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListAccessResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListAccessResponse>(create);
+  static ListAccessResponse? _defaultInstance;
+
+  /// Access grants for this media.
+  @$pb.TagNumber(1)
+  $core.List<AccessGrant> get grants => $_getList(0);
+
+  /// Pagination cursor for next page.
+  @$pb.TagNumber(2)
+  $2.PageCursor get nextCursor => $_getN(1);
+  @$pb.TagNumber(2)
+  set nextCursor($2.PageCursor v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasNextCursor() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearNextCursor() => clearField(2);
+  @$pb.TagNumber(2)
+  $2.PageCursor ensureNextCursor() => $_ensure(1);
+}
+
+///  GetContentThumbnailRequest generates a thumbnail from media.
+///
+///  Requirements:
+///    - Media must be an image or video
+///    - For videos, keyframe extraction is used
+///
+///  Animated Thumbnails:
+///    Set animated=true to prefer animated versions (GIF, WebP).
+///    Falls back to static if unavailable.
+///
+///  Caching:
+///    Thumbnails are cached server-side.
+///    Same parameters return cached result.
 class GetContentThumbnailRequest extends $pb.GeneratedMessage {
   factory GetContentThumbnailRequest({
     $core.String? mediaId,
@@ -2355,6 +4468,7 @@ class GetContentThumbnailRequest extends $pb.GeneratedMessage {
   static GetContentThumbnailRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetContentThumbnailRequest>(create);
   static GetContentThumbnailRequest? _defaultInstance;
 
+  /// Media ID to generate thumbnail from.
   @$pb.TagNumber(1)
   $core.String get mediaId => $_getSZ(0);
   @$pb.TagNumber(1)
@@ -2364,6 +4478,8 @@ class GetContentThumbnailRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearMediaId() => clearField(1);
 
+  /// Desired width in pixels.
+  /// Actual size may differ based on aspect ratio and method.
   @$pb.TagNumber(2)
   $core.int get width => $_getIZ(1);
   @$pb.TagNumber(2)
@@ -2373,6 +4489,7 @@ class GetContentThumbnailRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearWidth() => clearField(2);
 
+  /// Desired height in pixels.
   @$pb.TagNumber(3)
   $core.int get height => $_getIZ(2);
   @$pb.TagNumber(3)
@@ -2382,6 +4499,9 @@ class GetContentThumbnailRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   void clearHeight() => clearField(3);
 
+  /// Resizing method.
+  /// SCALE: fit within dimensions, preserve ratio
+  /// CROP: exact dimensions, may lose edge content
   @$pb.TagNumber(4)
   ThumbnailMethod get method => $_getN(3);
   @$pb.TagNumber(4)
@@ -2391,6 +4511,7 @@ class GetContentThumbnailRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   void clearMethod() => clearField(4);
 
+  /// Timeout in milliseconds.
   @$pb.TagNumber(5)
   $fixnum.Int64 get timeoutMs => $_getI64(4);
   @$pb.TagNumber(5)
@@ -2400,6 +4521,8 @@ class GetContentThumbnailRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(5)
   void clearTimeoutMs() => clearField(5);
 
+  /// Prefer animated thumbnail if available.
+  /// Applies to GIF, WebP, video keyframes.
   @$pb.TagNumber(6)
   $core.bool get animated => $_getBF(5);
   @$pb.TagNumber(6)
@@ -2410,7 +4533,6 @@ class GetContentThumbnailRequest extends $pb.GeneratedMessage {
   void clearAnimated() => clearField(6);
 }
 
-/// GetContentThumbnailResponse returns the thumbnail.
 class GetContentThumbnailResponse extends $pb.GeneratedMessage {
   factory GetContentThumbnailResponse({
     $core.List<$core.int>? content,
@@ -2456,6 +4578,7 @@ class GetContentThumbnailResponse extends $pb.GeneratedMessage {
   static GetContentThumbnailResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetContentThumbnailResponse>(create);
   static GetContentThumbnailResponse? _defaultInstance;
 
+  /// Thumbnail image data.
   @$pb.TagNumber(1)
   $core.List<$core.int> get content => $_getN(0);
   @$pb.TagNumber(1)
@@ -2465,6 +4588,7 @@ class GetContentThumbnailResponse extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearContent() => clearField(1);
 
+  /// Metadata of the source media.
   @$pb.TagNumber(2)
   MediaMetadata get metadata => $_getN(1);
   @$pb.TagNumber(2)
@@ -2477,7 +4601,17 @@ class GetContentThumbnailResponse extends $pb.GeneratedMessage {
   MediaMetadata ensureMetadata() => $_ensure(1);
 }
 
-/// GetUrlPreviewRequest gets preview information for a URL.
+///  GetUrlPreviewRequest fetches OpenGraph metadata for a URL.
+///
+///  This enables link previews in chat/messaging applications.
+///  Server fetches the URL, extracts og: meta tags, and returns them.
+///
+///  Rate Limiting:
+///    Preview requests may be rate limited per domain.
+///
+///  Caching:
+///    Previews are cached server-side (configurable TTL).
+///    Subsequent requests for same URL return cached result.
 class GetUrlPreviewRequest extends $pb.GeneratedMessage {
   factory GetUrlPreviewRequest({
     $core.String? url,
@@ -2518,6 +4652,8 @@ class GetUrlPreviewRequest extends $pb.GeneratedMessage {
   static GetUrlPreviewRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetUrlPreviewRequest>(create);
   static GetUrlPreviewRequest? _defaultInstance;
 
+  /// URL to fetch preview for.
+  /// Must be a valid, publicly accessible URL.
   @$pb.TagNumber(1)
   $core.String get url => $_getSZ(0);
   @$pb.TagNumber(1)
@@ -2528,7 +4664,6 @@ class GetUrlPreviewRequest extends $pb.GeneratedMessage {
   void clearUrl() => clearField(1);
 }
 
-/// GetUrlPreviewResponse returns OpenGraph data for the URL.
 class GetUrlPreviewResponse extends $pb.GeneratedMessage {
   factory GetUrlPreviewResponse({
     $1.Struct? ogData,
@@ -2574,6 +4709,9 @@ class GetUrlPreviewResponse extends $pb.GeneratedMessage {
   static GetUrlPreviewResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetUrlPreviewResponse>(create);
   static GetUrlPreviewResponse? _defaultInstance;
 
+  /// OpenGraph metadata as key-value pairs.
+  /// Includes: og:title, og:description, og:image, og:type, etc.
+  /// Keys may vary based on page metadata.
   @$pb.TagNumber(1)
   $1.Struct get ogData => $_getN(0);
   @$pb.TagNumber(1)
@@ -2585,6 +4723,8 @@ class GetUrlPreviewResponse extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $1.Struct ensureOgData() => $_ensure(0);
 
+  /// Media ID of the preview image, if any.
+  /// Can be used to fetch the image via GetContent.
   @$pb.TagNumber(2)
   $core.String get ogImageMediaId => $_getSZ(1);
   @$pb.TagNumber(2)
@@ -2595,7 +4735,10 @@ class GetUrlPreviewResponse extends $pb.GeneratedMessage {
   void clearOgImageMediaId() => clearField(2);
 }
 
-/// GetConfigRequest retrieves content repository configuration.
+///  GetConfigRequest retrieves server configuration.
+///
+///  This allows clients to discover server capabilities and limits
+///  without hardcoding values.
 class GetConfigRequest extends $pb.GeneratedMessage {
   factory GetConfigRequest() => create();
   GetConfigRequest._() : super();
@@ -2628,11 +4771,18 @@ class GetConfigRequest extends $pb.GeneratedMessage {
   static GetConfigRequest? _defaultInstance;
 }
 
-/// GetConfigResponse returns repository configuration.
 class GetConfigResponse extends $pb.GeneratedMessage {
   factory GetConfigResponse({
     $fixnum.Int64? maxUploadBytes,
     $core.bool? directClientUploadEnabled,
+    $fixnum.Int64? maxSignedUrlExpireSeconds,
+    $fixnum.Int64? minSignedUrlExpireSeconds,
+    $core.Iterable<ThumbnailMethod>? supportedThumbnailMethods,
+    $core.int? maxThumbnailWidth,
+    $core.int? maxThumbnailHeight,
+    $core.int? maxLabelsPerMedia,
+    $core.int? maxLabelKeyLength,
+    $core.int? maxLabelValueLength,
     $1.Struct? extra,
   }) {
     final $result = create();
@@ -2641,6 +4791,30 @@ class GetConfigResponse extends $pb.GeneratedMessage {
     }
     if (directClientUploadEnabled != null) {
       $result.directClientUploadEnabled = directClientUploadEnabled;
+    }
+    if (maxSignedUrlExpireSeconds != null) {
+      $result.maxSignedUrlExpireSeconds = maxSignedUrlExpireSeconds;
+    }
+    if (minSignedUrlExpireSeconds != null) {
+      $result.minSignedUrlExpireSeconds = minSignedUrlExpireSeconds;
+    }
+    if (supportedThumbnailMethods != null) {
+      $result.supportedThumbnailMethods.addAll(supportedThumbnailMethods);
+    }
+    if (maxThumbnailWidth != null) {
+      $result.maxThumbnailWidth = maxThumbnailWidth;
+    }
+    if (maxThumbnailHeight != null) {
+      $result.maxThumbnailHeight = maxThumbnailHeight;
+    }
+    if (maxLabelsPerMedia != null) {
+      $result.maxLabelsPerMedia = maxLabelsPerMedia;
+    }
+    if (maxLabelKeyLength != null) {
+      $result.maxLabelKeyLength = maxLabelKeyLength;
+    }
+    if (maxLabelValueLength != null) {
+      $result.maxLabelValueLength = maxLabelValueLength;
     }
     if (extra != null) {
       $result.extra = extra;
@@ -2654,7 +4828,15 @@ class GetConfigResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetConfigResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'maxUploadBytes')
     ..aOB(2, _omitFieldNames ? '' : 'directClientUploadEnabled')
-    ..aOM<$1.Struct>(3, _omitFieldNames ? '' : 'extra', subBuilder: $1.Struct.create)
+    ..aInt64(3, _omitFieldNames ? '' : 'maxSignedUrlExpireSeconds')
+    ..aInt64(4, _omitFieldNames ? '' : 'minSignedUrlExpireSeconds')
+    ..pc<ThumbnailMethod>(5, _omitFieldNames ? '' : 'supportedThumbnailMethods', $pb.PbFieldType.KE, valueOf: ThumbnailMethod.valueOf, enumValues: ThumbnailMethod.values, defaultEnumValue: ThumbnailMethod.SCALE)
+    ..a<$core.int>(6, _omitFieldNames ? '' : 'maxThumbnailWidth', $pb.PbFieldType.O3)
+    ..a<$core.int>(7, _omitFieldNames ? '' : 'maxThumbnailHeight', $pb.PbFieldType.O3)
+    ..a<$core.int>(8, _omitFieldNames ? '' : 'maxLabelsPerMedia', $pb.PbFieldType.O3)
+    ..a<$core.int>(9, _omitFieldNames ? '' : 'maxLabelKeyLength', $pb.PbFieldType.O3)
+    ..a<$core.int>(10, _omitFieldNames ? '' : 'maxLabelValueLength', $pb.PbFieldType.O3)
+    ..aOM<$1.Struct>(11, _omitFieldNames ? '' : 'extra', subBuilder: $1.Struct.create)
     ..hasRequiredFields = false
   ;
 
@@ -2679,6 +4861,8 @@ class GetConfigResponse extends $pb.GeneratedMessage {
   static GetConfigResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetConfigResponse>(create);
   static GetConfigResponse? _defaultInstance;
 
+  /// Maximum upload size in bytes.
+  /// Clients should enforce this before upload.
   @$pb.TagNumber(1)
   $fixnum.Int64 get maxUploadBytes => $_getI64(0);
   @$pb.TagNumber(1)
@@ -2688,6 +4872,8 @@ class GetConfigResponse extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearMaxUploadBytes() => clearField(1);
 
+  /// Whether direct client upload is enabled.
+  /// If false, clients must use signed URLs.
   @$pb.TagNumber(2)
   $core.bool get directClientUploadEnabled => $_getBF(1);
   @$pb.TagNumber(2)
@@ -2697,41 +4883,145 @@ class GetConfigResponse extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearDirectClientUploadEnabled() => clearField(2);
 
+  /// Maximum expiration time for signed URLs (seconds).
   @$pb.TagNumber(3)
-  $1.Struct get extra => $_getN(2);
+  $fixnum.Int64 get maxSignedUrlExpireSeconds => $_getI64(2);
   @$pb.TagNumber(3)
-  set extra($1.Struct v) { setField(3, v); }
+  set maxSignedUrlExpireSeconds($fixnum.Int64 v) { $_setInt64(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasExtra() => $_has(2);
+  $core.bool hasMaxSignedUrlExpireSeconds() => $_has(2);
   @$pb.TagNumber(3)
-  void clearExtra() => clearField(3);
-  @$pb.TagNumber(3)
-  $1.Struct ensureExtra() => $_ensure(2);
+  void clearMaxSignedUrlExpireSeconds() => clearField(3);
+
+  /// Minimum expiration time for signed URLs (seconds).
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get minSignedUrlExpireSeconds => $_getI64(3);
+  @$pb.TagNumber(4)
+  set minSignedUrlExpireSeconds($fixnum.Int64 v) { $_setInt64(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasMinSignedUrlExpireSeconds() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearMinSignedUrlExpireSeconds() => clearField(4);
+
+  /// Supported thumbnail methods.
+  @$pb.TagNumber(5)
+  $core.List<ThumbnailMethod> get supportedThumbnailMethods => $_getList(4);
+
+  /// Maximum thumbnail dimensions.
+  @$pb.TagNumber(6)
+  $core.int get maxThumbnailWidth => $_getIZ(5);
+  @$pb.TagNumber(6)
+  set maxThumbnailWidth($core.int v) { $_setSignedInt32(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasMaxThumbnailWidth() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearMaxThumbnailWidth() => clearField(6);
+
+  @$pb.TagNumber(7)
+  $core.int get maxThumbnailHeight => $_getIZ(6);
+  @$pb.TagNumber(7)
+  set maxThumbnailHeight($core.int v) { $_setSignedInt32(6, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasMaxThumbnailHeight() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearMaxThumbnailHeight() => clearField(7);
+
+  /// Maximum number of labels per media.
+  @$pb.TagNumber(8)
+  $core.int get maxLabelsPerMedia => $_getIZ(7);
+  @$pb.TagNumber(8)
+  set maxLabelsPerMedia($core.int v) { $_setSignedInt32(7, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasMaxLabelsPerMedia() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearMaxLabelsPerMedia() => clearField(8);
+
+  /// Maximum label key length.
+  @$pb.TagNumber(9)
+  $core.int get maxLabelKeyLength => $_getIZ(8);
+  @$pb.TagNumber(9)
+  set maxLabelKeyLength($core.int v) { $_setSignedInt32(8, v); }
+  @$pb.TagNumber(9)
+  $core.bool hasMaxLabelKeyLength() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearMaxLabelKeyLength() => clearField(9);
+
+  /// Maximum label value length.
+  @$pb.TagNumber(10)
+  $core.int get maxLabelValueLength => $_getIZ(9);
+  @$pb.TagNumber(10)
+  set maxLabelValueLength($core.int v) { $_setSignedInt32(9, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasMaxLabelValueLength() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearMaxLabelValueLength() => clearField(10);
+
+  /// Additional server configuration.
+  @$pb.TagNumber(11)
+  $1.Struct get extra => $_getN(10);
+  @$pb.TagNumber(11)
+  set extra($1.Struct v) { setField(11, v); }
+  @$pb.TagNumber(11)
+  $core.bool hasExtra() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearExtra() => clearField(11);
+  @$pb.TagNumber(11)
+  $1.Struct ensureExtra() => $_ensure(10);
 }
 
-/// SearchMediaRequest searches for media files.
+///  SearchMediaRequest searches for media matching criteria.
+///
+///  Uses common.SearchRequest from common package for pagination and
+///  standard search parameters.
+///
+///  Search Scope:
+///    - Includes all states (AVAILABLE, ARCHIVED, DELETED) by default
+///    - Use state filter to limit
+///
+///  Full-Text Search:
+///    The query string is matched against:
+///    - filename
+///    - labels (keys and values)
+///    - extra metadata (if indexed)
+///
+///  Fuzzy Matching:
+///    Search is prefix-based for performance.
+///    "doc" matches "document.pdf" but not "udocument.pdf".
+///
+///  Performance:
+///    Use specific filters instead of broad queries.
+///    Limit results when possible.
 class SearchMediaRequest extends $pb.GeneratedMessage {
   factory SearchMediaRequest({
+    $2.PageCursor? cursor,
     $core.String? query,
-    $core.int? limit,
-    $core.String? afterCursor,
+    $core.String? idQuery,
     $core.String? ownerId,
     $0.Timestamp? createdAfter,
     $0.Timestamp? createdBefore,
     MediaMetadata_Visibility? visibility,
     $core.String? contentType,
+    $core.Map<$core.String, $core.String>? labels,
+    $fixnum.Int64? sizeGte,
+    $fixnum.Int64? sizeLte,
+    MediaState? state,
+    ScanStatus? scanStatus,
+    $core.Iterable<MediaMetadata_Visibility>? visibilities,
+    AccessRole? accessibleViaRole,
+    $fixnum.Int64? timeoutMs,
+    $core.String? organizationId,
     SearchMediaRequest_SortBy? sortBy,
     $core.bool? sortDesc,
   }) {
     final $result = create();
+    if (cursor != null) {
+      $result.cursor = cursor;
+    }
     if (query != null) {
       $result.query = query;
     }
-    if (limit != null) {
-      $result.limit = limit;
-    }
-    if (afterCursor != null) {
-      $result.afterCursor = afterCursor;
+    if (idQuery != null) {
+      $result.idQuery = idQuery;
     }
     if (ownerId != null) {
       $result.ownerId = ownerId;
@@ -2748,6 +5038,33 @@ class SearchMediaRequest extends $pb.GeneratedMessage {
     if (contentType != null) {
       $result.contentType = contentType;
     }
+    if (labels != null) {
+      $result.labels.addAll(labels);
+    }
+    if (sizeGte != null) {
+      $result.sizeGte = sizeGte;
+    }
+    if (sizeLte != null) {
+      $result.sizeLte = sizeLte;
+    }
+    if (state != null) {
+      $result.state = state;
+    }
+    if (scanStatus != null) {
+      $result.scanStatus = scanStatus;
+    }
+    if (visibilities != null) {
+      $result.visibilities.addAll(visibilities);
+    }
+    if (accessibleViaRole != null) {
+      $result.accessibleViaRole = accessibleViaRole;
+    }
+    if (timeoutMs != null) {
+      $result.timeoutMs = timeoutMs;
+    }
+    if (organizationId != null) {
+      $result.organizationId = organizationId;
+    }
     if (sortBy != null) {
       $result.sortBy = sortBy;
     }
@@ -2761,16 +5078,25 @@ class SearchMediaRequest extends $pb.GeneratedMessage {
   factory SearchMediaRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SearchMediaRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'query')
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'limit', $pb.PbFieldType.O3)
-    ..aOS(3, _omitFieldNames ? '' : 'afterCursor')
+    ..aOM<$2.PageCursor>(1, _omitFieldNames ? '' : 'cursor', subBuilder: $2.PageCursor.create)
+    ..aOS(2, _omitFieldNames ? '' : 'query')
+    ..aOS(3, _omitFieldNames ? '' : 'idQuery')
     ..aOS(4, _omitFieldNames ? '' : 'ownerId')
     ..aOM<$0.Timestamp>(5, _omitFieldNames ? '' : 'createdAfter', subBuilder: $0.Timestamp.create)
     ..aOM<$0.Timestamp>(6, _omitFieldNames ? '' : 'createdBefore', subBuilder: $0.Timestamp.create)
     ..e<MediaMetadata_Visibility>(7, _omitFieldNames ? '' : 'visibility', $pb.PbFieldType.OE, defaultOrMaker: MediaMetadata_Visibility.VISIBILITY_UNSPECIFIED, valueOf: MediaMetadata_Visibility.valueOf, enumValues: MediaMetadata_Visibility.values)
     ..aOS(8, _omitFieldNames ? '' : 'contentType')
-    ..e<SearchMediaRequest_SortBy>(9, _omitFieldNames ? '' : 'sortBy', $pb.PbFieldType.OE, defaultOrMaker: SearchMediaRequest_SortBy.SORT_BY_UNSPECIFIED, valueOf: SearchMediaRequest_SortBy.valueOf, enumValues: SearchMediaRequest_SortBy.values)
-    ..aOB(10, _omitFieldNames ? '' : 'sortDesc')
+    ..m<$core.String, $core.String>(9, _omitFieldNames ? '' : 'labels', entryClassName: 'SearchMediaRequest.LabelsEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OS, packageName: const $pb.PackageName('files.v1'))
+    ..aInt64(10, _omitFieldNames ? '' : 'sizeGte')
+    ..aInt64(11, _omitFieldNames ? '' : 'sizeLte')
+    ..e<MediaState>(12, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: MediaState.MEDIA_STATE_UNSPECIFIED, valueOf: MediaState.valueOf, enumValues: MediaState.values)
+    ..e<ScanStatus>(13, _omitFieldNames ? '' : 'scanStatus', $pb.PbFieldType.OE, defaultOrMaker: ScanStatus.SCAN_STATUS_UNSPECIFIED, valueOf: ScanStatus.valueOf, enumValues: ScanStatus.values)
+    ..pc<MediaMetadata_Visibility>(14, _omitFieldNames ? '' : 'visibilities', $pb.PbFieldType.KE, valueOf: MediaMetadata_Visibility.valueOf, enumValues: MediaMetadata_Visibility.values, defaultEnumValue: MediaMetadata_Visibility.VISIBILITY_UNSPECIFIED)
+    ..e<AccessRole>(15, _omitFieldNames ? '' : 'accessibleViaRole', $pb.PbFieldType.OE, defaultOrMaker: AccessRole.ACCESS_ROLE_UNSPECIFIED, valueOf: AccessRole.valueOf, enumValues: AccessRole.values)
+    ..aInt64(16, _omitFieldNames ? '' : 'timeoutMs')
+    ..aOS(17, _omitFieldNames ? '' : 'organizationId')
+    ..e<SearchMediaRequest_SortBy>(20, _omitFieldNames ? '' : 'sortBy', $pb.PbFieldType.OE, defaultOrMaker: SearchMediaRequest_SortBy.SORT_BY_UNSPECIFIED, valueOf: SearchMediaRequest_SortBy.valueOf, enumValues: SearchMediaRequest_SortBy.values)
+    ..aOB(21, _omitFieldNames ? '' : 'sortDesc')
     ..hasRequiredFields = false
   ;
 
@@ -2795,33 +5121,39 @@ class SearchMediaRequest extends $pb.GeneratedMessage {
   static SearchMediaRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SearchMediaRequest>(create);
   static SearchMediaRequest? _defaultInstance;
 
+  /// Pagination using common PageCursor.
   @$pb.TagNumber(1)
-  $core.String get query => $_getSZ(0);
+  $2.PageCursor get cursor => $_getN(0);
   @$pb.TagNumber(1)
-  set query($core.String v) { $_setString(0, v); }
+  set cursor($2.PageCursor v) { setField(1, v); }
   @$pb.TagNumber(1)
-  $core.bool hasQuery() => $_has(0);
+  $core.bool hasCursor() => $_has(0);
   @$pb.TagNumber(1)
-  void clearQuery() => clearField(1);
+  void clearCursor() => clearField(1);
+  @$pb.TagNumber(1)
+  $2.PageCursor ensureCursor() => $_ensure(0);
 
+  /// Full-text search query string.
   @$pb.TagNumber(2)
-  $core.int get limit => $_getIZ(1);
+  $core.String get query => $_getSZ(1);
   @$pb.TagNumber(2)
-  set limit($core.int v) { $_setSignedInt32(1, v); }
+  set query($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasLimit() => $_has(1);
+  $core.bool hasQuery() => $_has(1);
   @$pb.TagNumber(2)
-  void clearLimit() => clearField(2);
+  void clearQuery() => clearField(2);
 
+  /// Specific ID or ID pattern to search for.
   @$pb.TagNumber(3)
-  $core.String get afterCursor => $_getSZ(2);
+  $core.String get idQuery => $_getSZ(2);
   @$pb.TagNumber(3)
-  set afterCursor($core.String v) { $_setString(2, v); }
+  set idQuery($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasAfterCursor() => $_has(2);
+  $core.bool hasIdQuery() => $_has(2);
   @$pb.TagNumber(3)
-  void clearAfterCursor() => clearField(3);
+  void clearIdQuery() => clearField(3);
 
+  /// Filter by owner ID.
   @$pb.TagNumber(4)
   $core.String get ownerId => $_getSZ(3);
   @$pb.TagNumber(4)
@@ -2831,6 +5163,7 @@ class SearchMediaRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   void clearOwnerId() => clearField(4);
 
+  /// Filter: created after this time.
   @$pb.TagNumber(5)
   $0.Timestamp get createdAfter => $_getN(4);
   @$pb.TagNumber(5)
@@ -2842,6 +5175,7 @@ class SearchMediaRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(5)
   $0.Timestamp ensureCreatedAfter() => $_ensure(4);
 
+  /// Filter: created before this time.
   @$pb.TagNumber(6)
   $0.Timestamp get createdBefore => $_getN(5);
   @$pb.TagNumber(6)
@@ -2853,6 +5187,7 @@ class SearchMediaRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(6)
   $0.Timestamp ensureCreatedBefore() => $_ensure(5);
 
+  /// Filter by visibility.
   @$pb.TagNumber(7)
   MediaMetadata_Visibility get visibility => $_getN(6);
   @$pb.TagNumber(7)
@@ -2862,6 +5197,8 @@ class SearchMediaRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(7)
   void clearVisibility() => clearField(7);
 
+  /// Filter by content type prefix.
+  /// Example: "image/" matches all image types.
   @$pb.TagNumber(8)
   $core.String get contentType => $_getSZ(7);
   @$pb.TagNumber(8)
@@ -2871,30 +5208,114 @@ class SearchMediaRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(8)
   void clearContentType() => clearField(8);
 
+  /// Filter by labels (AND match).
+  /// All specified labels must be present.
   @$pb.TagNumber(9)
-  SearchMediaRequest_SortBy get sortBy => $_getN(8);
-  @$pb.TagNumber(9)
-  set sortBy(SearchMediaRequest_SortBy v) { setField(9, v); }
-  @$pb.TagNumber(9)
-  $core.bool hasSortBy() => $_has(8);
-  @$pb.TagNumber(9)
-  void clearSortBy() => clearField(9);
+  $core.Map<$core.String, $core.String> get labels => $_getMap(8);
 
+  /// Filter: size >= this value (bytes).
   @$pb.TagNumber(10)
-  $core.bool get sortDesc => $_getBF(9);
+  $fixnum.Int64 get sizeGte => $_getI64(9);
   @$pb.TagNumber(10)
-  set sortDesc($core.bool v) { $_setBool(9, v); }
+  set sizeGte($fixnum.Int64 v) { $_setInt64(9, v); }
   @$pb.TagNumber(10)
-  $core.bool hasSortDesc() => $_has(9);
+  $core.bool hasSizeGte() => $_has(9);
   @$pb.TagNumber(10)
-  void clearSortDesc() => clearField(10);
+  void clearSizeGte() => clearField(10);
+
+  /// Filter: size <= this value (bytes).
+  @$pb.TagNumber(11)
+  $fixnum.Int64 get sizeLte => $_getI64(10);
+  @$pb.TagNumber(11)
+  set sizeLte($fixnum.Int64 v) { $_setInt64(10, v); }
+  @$pb.TagNumber(11)
+  $core.bool hasSizeLte() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearSizeLte() => clearField(11);
+
+  /// Filter by media state.
+  /// If unspecified, returns all states.
+  @$pb.TagNumber(12)
+  MediaState get state => $_getN(11);
+  @$pb.TagNumber(12)
+  set state(MediaState v) { setField(12, v); }
+  @$pb.TagNumber(12)
+  $core.bool hasState() => $_has(11);
+  @$pb.TagNumber(12)
+  void clearState() => clearField(12);
+
+  /// Filter by scan status.
+  @$pb.TagNumber(13)
+  ScanStatus get scanStatus => $_getN(12);
+  @$pb.TagNumber(13)
+  set scanStatus(ScanStatus v) { setField(13, v); }
+  @$pb.TagNumber(13)
+  $core.bool hasScanStatus() => $_has(12);
+  @$pb.TagNumber(13)
+  void clearScanStatus() => clearField(13);
+
+  /// Filter by visibility (multiple values).
+  @$pb.TagNumber(14)
+  $core.List<MediaMetadata_Visibility> get visibilities => $_getList(13);
+
+  /// Filter by access role (media user has access to).
+  @$pb.TagNumber(15)
+  AccessRole get accessibleViaRole => $_getN(14);
+  @$pb.TagNumber(15)
+  set accessibleViaRole(AccessRole v) { setField(15, v); }
+  @$pb.TagNumber(15)
+  $core.bool hasAccessibleViaRole() => $_has(14);
+  @$pb.TagNumber(15)
+  void clearAccessibleViaRole() => clearField(15);
+
+  /// Timeout for search operation in milliseconds.
+  /// Default: server-determined timeout.
+  @$pb.TagNumber(16)
+  $fixnum.Int64 get timeoutMs => $_getI64(15);
+  @$pb.TagNumber(16)
+  set timeoutMs($fixnum.Int64 v) { $_setInt64(15, v); }
+  @$pb.TagNumber(16)
+  $core.bool hasTimeoutMs() => $_has(15);
+  @$pb.TagNumber(16)
+  void clearTimeoutMs() => clearField(16);
+
+  /// Filter by organization ID.
+  /// Returns media where organization_id matches.
+  @$pb.TagNumber(17)
+  $core.String get organizationId => $_getSZ(16);
+  @$pb.TagNumber(17)
+  set organizationId($core.String v) { $_setString(16, v); }
+  @$pb.TagNumber(17)
+  $core.bool hasOrganizationId() => $_has(16);
+  @$pb.TagNumber(17)
+  void clearOrganizationId() => clearField(17);
+
+  /// Sort field.
+  @$pb.TagNumber(20)
+  SearchMediaRequest_SortBy get sortBy => $_getN(17);
+  @$pb.TagNumber(20)
+  set sortBy(SearchMediaRequest_SortBy v) { setField(20, v); }
+  @$pb.TagNumber(20)
+  $core.bool hasSortBy() => $_has(17);
+  @$pb.TagNumber(20)
+  void clearSortBy() => clearField(20);
+
+  /// Sort in descending order.
+  /// Default: false (ascending).
+  @$pb.TagNumber(21)
+  $core.bool get sortDesc => $_getBF(18);
+  @$pb.TagNumber(21)
+  set sortDesc($core.bool v) { $_setBool(18, v); }
+  @$pb.TagNumber(21)
+  $core.bool hasSortDesc() => $_has(18);
+  @$pb.TagNumber(21)
+  void clearSortDesc() => clearField(21);
 }
 
-/// SearchMediaResponse returns search results.
 class SearchMediaResponse extends $pb.GeneratedMessage {
   factory SearchMediaResponse({
     $core.Iterable<MediaMetadata>? results,
-    $core.String? nextCursor,
+    $2.PageCursor? nextCursor,
   }) {
     final $result = create();
     if (results != null) {
@@ -2911,7 +5332,7 @@ class SearchMediaResponse extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SearchMediaResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
     ..pc<MediaMetadata>(1, _omitFieldNames ? '' : 'results', $pb.PbFieldType.PM, subBuilder: MediaMetadata.create)
-    ..aOS(2, _omitFieldNames ? '' : 'nextCursor')
+    ..aOM<$2.PageCursor>(2, _omitFieldNames ? '' : 'nextCursor', subBuilder: $2.PageCursor.create)
     ..hasRequiredFields = false
   ;
 
@@ -2936,19 +5357,31 @@ class SearchMediaResponse extends $pb.GeneratedMessage {
   static SearchMediaResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SearchMediaResponse>(create);
   static SearchMediaResponse? _defaultInstance;
 
+  /// Matching media metadata.
   @$pb.TagNumber(1)
   $core.List<MediaMetadata> get results => $_getList(0);
 
+  /// Pagination cursor for next page.
   @$pb.TagNumber(2)
-  $core.String get nextCursor => $_getSZ(1);
+  $2.PageCursor get nextCursor => $_getN(1);
   @$pb.TagNumber(2)
-  set nextCursor($core.String v) { $_setString(1, v); }
+  set nextCursor($2.PageCursor v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasNextCursor() => $_has(1);
   @$pb.TagNumber(2)
   void clearNextCursor() => clearField(2);
+  @$pb.TagNumber(2)
+  $2.PageCursor ensureNextCursor() => $_ensure(1);
 }
 
+///  BatchGetContentRequest retrieves multiple files.
+///
+///  Limits:
+///    - Maximum items per request determined by server config
+///    - Partial success supported (some items may fail)
+///
+///  Performance:
+///    For large batches, use pagination or multiple requests.
 class BatchGetContentRequest extends $pb.GeneratedMessage {
   factory BatchGetContentRequest({
     $core.Iterable<$core.String>? mediaIds,
@@ -2989,6 +5422,7 @@ class BatchGetContentRequest extends $pb.GeneratedMessage {
   static BatchGetContentRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<BatchGetContentRequest>(create);
   static BatchGetContentRequest? _defaultInstance;
 
+  /// Media IDs to retrieve.
   @$pb.TagNumber(1)
   $core.List<$core.String> get mediaIds => $_getList(0);
 }
@@ -3136,6 +5570,7 @@ class BatchDeleteContentRequest extends $pb.GeneratedMessage {
   factory BatchDeleteContentRequest({
     $core.Iterable<$core.String>? mediaIds,
     $core.bool? hardDelete,
+    $core.String? idempotencyKey,
   }) {
     final $result = create();
     if (mediaIds != null) {
@@ -3143,6 +5578,9 @@ class BatchDeleteContentRequest extends $pb.GeneratedMessage {
     }
     if (hardDelete != null) {
       $result.hardDelete = hardDelete;
+    }
+    if (idempotencyKey != null) {
+      $result.idempotencyKey = idempotencyKey;
     }
     return $result;
   }
@@ -3153,6 +5591,7 @@ class BatchDeleteContentRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BatchDeleteContentRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
     ..pPS(1, _omitFieldNames ? '' : 'mediaIds')
     ..aOB(2, _omitFieldNames ? '' : 'hardDelete')
+    ..aOS(100, _omitFieldNames ? '' : 'idempotencyKey')
     ..hasRequiredFields = false
   ;
 
@@ -3177,9 +5616,11 @@ class BatchDeleteContentRequest extends $pb.GeneratedMessage {
   static BatchDeleteContentRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<BatchDeleteContentRequest>(create);
   static BatchDeleteContentRequest? _defaultInstance;
 
+  /// Media IDs to delete.
   @$pb.TagNumber(1)
   $core.List<$core.String> get mediaIds => $_getList(0);
 
+  /// True for hard delete, false for soft delete.
   @$pb.TagNumber(2)
   $core.bool get hardDelete => $_getBF(1);
   @$pb.TagNumber(2)
@@ -3188,6 +5629,16 @@ class BatchDeleteContentRequest extends $pb.GeneratedMessage {
   $core.bool hasHardDelete() => $_has(1);
   @$pb.TagNumber(2)
   void clearHardDelete() => clearField(2);
+
+  /// Idempotency key (applies to entire batch).
+  @$pb.TagNumber(100)
+  $core.String get idempotencyKey => $_getSZ(2);
+  @$pb.TagNumber(100)
+  set idempotencyKey($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(100)
+  $core.bool hasIdempotencyKey() => $_has(2);
+  @$pb.TagNumber(100)
+  void clearIdempotencyKey() => clearField(100);
 }
 
 class BatchDeleteContentResponse_DeleteResult extends $pb.GeneratedMessage {
@@ -3312,6 +5763,7 @@ class BatchDeleteContentResponse extends $pb.GeneratedMessage {
   $core.List<BatchDeleteContentResponse_DeleteResult> get results => $_getList(0);
 }
 
+/// FileVersion represents a historical version of media.
 class FileVersion extends $pb.GeneratedMessage {
   factory FileVersion({
     $fixnum.Int64? version,
@@ -3319,6 +5771,7 @@ class FileVersion extends $pb.GeneratedMessage {
     $0.Timestamp? createdAt,
     $core.String? createdBy,
     $fixnum.Int64? sizeBytes,
+    $core.String? checksumSha256,
   }) {
     final $result = create();
     if (version != null) {
@@ -3336,6 +5789,9 @@ class FileVersion extends $pb.GeneratedMessage {
     if (sizeBytes != null) {
       $result.sizeBytes = sizeBytes;
     }
+    if (checksumSha256 != null) {
+      $result.checksumSha256 = checksumSha256;
+    }
     return $result;
   }
   FileVersion._() : super();
@@ -3348,6 +5804,7 @@ class FileVersion extends $pb.GeneratedMessage {
     ..aOM<$0.Timestamp>(3, _omitFieldNames ? '' : 'createdAt', subBuilder: $0.Timestamp.create)
     ..aOS(4, _omitFieldNames ? '' : 'createdBy')
     ..aInt64(5, _omitFieldNames ? '' : 'sizeBytes')
+    ..aOS(6, _omitFieldNames ? '' : 'checksumSha256')
     ..hasRequiredFields = false
   ;
 
@@ -3372,6 +5829,7 @@ class FileVersion extends $pb.GeneratedMessage {
   static FileVersion getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FileVersion>(create);
   static FileVersion? _defaultInstance;
 
+  /// Version number (1-based, ascending).
   @$pb.TagNumber(1)
   $fixnum.Int64 get version => $_getI64(0);
   @$pb.TagNumber(1)
@@ -3381,6 +5839,7 @@ class FileVersion extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearVersion() => clearField(1);
 
+  /// Media ID for this version (same across versions).
   @$pb.TagNumber(2)
   $core.String get mediaId => $_getSZ(1);
   @$pb.TagNumber(2)
@@ -3390,6 +5849,7 @@ class FileVersion extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearMediaId() => clearField(2);
 
+  /// When this version was created.
   @$pb.TagNumber(3)
   $0.Timestamp get createdAt => $_getN(2);
   @$pb.TagNumber(3)
@@ -3401,6 +5861,7 @@ class FileVersion extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $0.Timestamp ensureCreatedAt() => $_ensure(2);
 
+  /// ID of principal who created this version.
   @$pb.TagNumber(4)
   $core.String get createdBy => $_getSZ(3);
   @$pb.TagNumber(4)
@@ -3410,6 +5871,7 @@ class FileVersion extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   void clearCreatedBy() => clearField(4);
 
+  /// Size of this version's content in bytes.
   @$pb.TagNumber(5)
   $fixnum.Int64 get sizeBytes => $_getI64(4);
   @$pb.TagNumber(5)
@@ -3418,23 +5880,33 @@ class FileVersion extends $pb.GeneratedMessage {
   $core.bool hasSizeBytes() => $_has(4);
   @$pb.TagNumber(5)
   void clearSizeBytes() => clearField(5);
+
+  /// SHA-256 checksum of this version.
+  @$pb.TagNumber(6)
+  $core.String get checksumSha256 => $_getSZ(5);
+  @$pb.TagNumber(6)
+  set checksumSha256($core.String v) { $_setString(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasChecksumSha256() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearChecksumSha256() => clearField(6);
 }
 
 class GetVersionsRequest extends $pb.GeneratedMessage {
   factory GetVersionsRequest({
     $core.String? mediaId,
-    $core.int? limit,
-    $core.int? beforeVersion,
+    $2.PageCursor? cursor,
+    $fixnum.Int64? timeoutMs,
   }) {
     final $result = create();
     if (mediaId != null) {
       $result.mediaId = mediaId;
     }
-    if (limit != null) {
-      $result.limit = limit;
+    if (cursor != null) {
+      $result.cursor = cursor;
     }
-    if (beforeVersion != null) {
-      $result.beforeVersion = beforeVersion;
+    if (timeoutMs != null) {
+      $result.timeoutMs = timeoutMs;
     }
     return $result;
   }
@@ -3444,8 +5916,8 @@ class GetVersionsRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetVersionsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'mediaId')
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'limit', $pb.PbFieldType.O3)
-    ..a<$core.int>(3, _omitFieldNames ? '' : 'beforeVersion', $pb.PbFieldType.O3)
+    ..aOM<$2.PageCursor>(2, _omitFieldNames ? '' : 'cursor', subBuilder: $2.PageCursor.create)
+    ..aInt64(3, _omitFieldNames ? '' : 'timeoutMs')
     ..hasRequiredFields = false
   ;
 
@@ -3470,6 +5942,7 @@ class GetVersionsRequest extends $pb.GeneratedMessage {
   static GetVersionsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetVersionsRequest>(create);
   static GetVersionsRequest? _defaultInstance;
 
+  /// Media ID to get versions for.
   @$pb.TagNumber(1)
   $core.String get mediaId => $_getSZ(0);
   @$pb.TagNumber(1)
@@ -3479,29 +5952,34 @@ class GetVersionsRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearMediaId() => clearField(1);
 
+  /// Pagination using common PageCursor.
   @$pb.TagNumber(2)
-  $core.int get limit => $_getIZ(1);
+  $2.PageCursor get cursor => $_getN(1);
   @$pb.TagNumber(2)
-  set limit($core.int v) { $_setSignedInt32(1, v); }
+  set cursor($2.PageCursor v) { setField(2, v); }
   @$pb.TagNumber(2)
-  $core.bool hasLimit() => $_has(1);
+  $core.bool hasCursor() => $_has(1);
   @$pb.TagNumber(2)
-  void clearLimit() => clearField(2);
+  void clearCursor() => clearField(2);
+  @$pb.TagNumber(2)
+  $2.PageCursor ensureCursor() => $_ensure(1);
 
+  /// Timeout in milliseconds.
   @$pb.TagNumber(3)
-  $core.int get beforeVersion => $_getIZ(2);
+  $fixnum.Int64 get timeoutMs => $_getI64(2);
   @$pb.TagNumber(3)
-  set beforeVersion($core.int v) { $_setSignedInt32(2, v); }
+  set timeoutMs($fixnum.Int64 v) { $_setInt64(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasBeforeVersion() => $_has(2);
+  $core.bool hasTimeoutMs() => $_has(2);
   @$pb.TagNumber(3)
-  void clearBeforeVersion() => clearField(3);
+  void clearTimeoutMs() => clearField(3);
 }
 
 class GetVersionsResponse extends $pb.GeneratedMessage {
   factory GetVersionsResponse({
     $core.Iterable<FileVersion>? versions,
     $fixnum.Int64? latestVersion,
+    $2.PageCursor? nextCursor,
   }) {
     final $result = create();
     if (versions != null) {
@@ -3509,6 +5987,9 @@ class GetVersionsResponse extends $pb.GeneratedMessage {
     }
     if (latestVersion != null) {
       $result.latestVersion = latestVersion;
+    }
+    if (nextCursor != null) {
+      $result.nextCursor = nextCursor;
     }
     return $result;
   }
@@ -3519,6 +6000,7 @@ class GetVersionsResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetVersionsResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
     ..pc<FileVersion>(1, _omitFieldNames ? '' : 'versions', $pb.PbFieldType.PM, subBuilder: FileVersion.create)
     ..aInt64(2, _omitFieldNames ? '' : 'latestVersion')
+    ..aOM<$2.PageCursor>(3, _omitFieldNames ? '' : 'nextCursor', subBuilder: $2.PageCursor.create)
     ..hasRequiredFields = false
   ;
 
@@ -3543,9 +6025,11 @@ class GetVersionsResponse extends $pb.GeneratedMessage {
   static GetVersionsResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetVersionsResponse>(create);
   static GetVersionsResponse? _defaultInstance;
 
+  /// Versions in descending order (newest first).
   @$pb.TagNumber(1)
   $core.List<FileVersion> get versions => $_getList(0);
 
+  /// Latest version number.
   @$pb.TagNumber(2)
   $fixnum.Int64 get latestVersion => $_getI64(1);
   @$pb.TagNumber(2)
@@ -3554,12 +6038,25 @@ class GetVersionsResponse extends $pb.GeneratedMessage {
   $core.bool hasLatestVersion() => $_has(1);
   @$pb.TagNumber(2)
   void clearLatestVersion() => clearField(2);
+
+  /// Pagination cursor for next page.
+  @$pb.TagNumber(3)
+  $2.PageCursor get nextCursor => $_getN(2);
+  @$pb.TagNumber(3)
+  set nextCursor($2.PageCursor v) { setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasNextCursor() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearNextCursor() => clearField(3);
+  @$pb.TagNumber(3)
+  $2.PageCursor ensureNextCursor() => $_ensure(2);
 }
 
 class RestoreVersionRequest extends $pb.GeneratedMessage {
   factory RestoreVersionRequest({
     $core.String? mediaId,
     $fixnum.Int64? version,
+    $core.String? idempotencyKey,
   }) {
     final $result = create();
     if (mediaId != null) {
@@ -3567,6 +6064,9 @@ class RestoreVersionRequest extends $pb.GeneratedMessage {
     }
     if (version != null) {
       $result.version = version;
+    }
+    if (idempotencyKey != null) {
+      $result.idempotencyKey = idempotencyKey;
     }
     return $result;
   }
@@ -3577,6 +6077,7 @@ class RestoreVersionRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RestoreVersionRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'mediaId')
     ..aInt64(2, _omitFieldNames ? '' : 'version')
+    ..aOS(100, _omitFieldNames ? '' : 'idempotencyKey')
     ..hasRequiredFields = false
   ;
 
@@ -3601,6 +6102,7 @@ class RestoreVersionRequest extends $pb.GeneratedMessage {
   static RestoreVersionRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RestoreVersionRequest>(create);
   static RestoreVersionRequest? _defaultInstance;
 
+  /// Media ID to restore version for.
   @$pb.TagNumber(1)
   $core.String get mediaId => $_getSZ(0);
   @$pb.TagNumber(1)
@@ -3610,6 +6112,8 @@ class RestoreVersionRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearMediaId() => clearField(1);
 
+  /// Version number to restore.
+  /// Must be an existing version.
   @$pb.TagNumber(2)
   $fixnum.Int64 get version => $_getI64(1);
   @$pb.TagNumber(2)
@@ -3618,6 +6122,16 @@ class RestoreVersionRequest extends $pb.GeneratedMessage {
   $core.bool hasVersion() => $_has(1);
   @$pb.TagNumber(2)
   void clearVersion() => clearField(2);
+
+  /// Idempotency key.
+  @$pb.TagNumber(100)
+  $core.String get idempotencyKey => $_getSZ(2);
+  @$pb.TagNumber(100)
+  set idempotencyKey($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(100)
+  $core.bool hasIdempotencyKey() => $_has(2);
+  @$pb.TagNumber(100)
+  void clearIdempotencyKey() => clearField(100);
 }
 
 class RestoreVersionResponse extends $pb.GeneratedMessage {
@@ -3660,6 +6174,8 @@ class RestoreVersionResponse extends $pb.GeneratedMessage {
   static RestoreVersionResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RestoreVersionResponse>(create);
   static RestoreVersionResponse? _defaultInstance;
 
+  /// Metadata of the restored file.
+  /// Version is now the latest.
   @$pb.TagNumber(1)
   MediaMetadata get metadata => $_getN(0);
   @$pb.TagNumber(1)
@@ -3672,10 +6188,14 @@ class RestoreVersionResponse extends $pb.GeneratedMessage {
   MediaMetadata ensureMetadata() => $_ensure(0);
 }
 
+///  RetentionPolicy defines how long content is retained.
+///
+///  Policies can be applied to individual media or configured as default.
 class RetentionPolicy extends $pb.GeneratedMessage {
   factory RetentionPolicy({
     $core.String? policyId,
     $core.String? name,
+    $core.String? description,
     $fixnum.Int64? retentionDays,
     RetentionPolicy_Mode? mode,
   }) {
@@ -3685,6 +6205,9 @@ class RetentionPolicy extends $pb.GeneratedMessage {
     }
     if (name != null) {
       $result.name = name;
+    }
+    if (description != null) {
+      $result.description = description;
     }
     if (retentionDays != null) {
       $result.retentionDays = retentionDays;
@@ -3701,8 +6224,9 @@ class RetentionPolicy extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RetentionPolicy', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'policyId')
     ..aOS(2, _omitFieldNames ? '' : 'name')
-    ..aInt64(3, _omitFieldNames ? '' : 'retentionDays')
-    ..e<RetentionPolicy_Mode>(4, _omitFieldNames ? '' : 'mode', $pb.PbFieldType.OE, defaultOrMaker: RetentionPolicy_Mode.MODE_UNSPECIFIED, valueOf: RetentionPolicy_Mode.valueOf, enumValues: RetentionPolicy_Mode.values)
+    ..aOS(3, _omitFieldNames ? '' : 'description')
+    ..aInt64(4, _omitFieldNames ? '' : 'retentionDays')
+    ..e<RetentionPolicy_Mode>(5, _omitFieldNames ? '' : 'mode', $pb.PbFieldType.OE, defaultOrMaker: RetentionPolicy_Mode.MODE_UNSPECIFIED, valueOf: RetentionPolicy_Mode.valueOf, enumValues: RetentionPolicy_Mode.values)
     ..hasRequiredFields = false
   ;
 
@@ -3727,6 +6251,7 @@ class RetentionPolicy extends $pb.GeneratedMessage {
   static RetentionPolicy getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RetentionPolicy>(create);
   static RetentionPolicy? _defaultInstance;
 
+  /// Unique policy ID within the system.
   @$pb.TagNumber(1)
   $core.String get policyId => $_getSZ(0);
   @$pb.TagNumber(1)
@@ -3736,6 +6261,7 @@ class RetentionPolicy extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearPolicyId() => clearField(1);
 
+  /// Human-readable policy name.
   @$pb.TagNumber(2)
   $core.String get name => $_getSZ(1);
   @$pb.TagNumber(2)
@@ -3745,29 +6271,43 @@ class RetentionPolicy extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearName() => clearField(2);
 
+  /// Description of this policy.
   @$pb.TagNumber(3)
-  $fixnum.Int64 get retentionDays => $_getI64(2);
+  $core.String get description => $_getSZ(2);
   @$pb.TagNumber(3)
-  set retentionDays($fixnum.Int64 v) { $_setInt64(2, v); }
+  set description($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasRetentionDays() => $_has(2);
+  $core.bool hasDescription() => $_has(2);
   @$pb.TagNumber(3)
-  void clearRetentionDays() => clearField(3);
+  void clearDescription() => clearField(3);
 
+  /// Retention period in days.
+  /// -1 means permanent retention (never auto-delete).
+  /// 0 means delete immediately after some event.
   @$pb.TagNumber(4)
-  RetentionPolicy_Mode get mode => $_getN(3);
+  $fixnum.Int64 get retentionDays => $_getI64(3);
   @$pb.TagNumber(4)
-  set mode(RetentionPolicy_Mode v) { setField(4, v); }
+  set retentionDays($fixnum.Int64 v) { $_setInt64(3, v); }
   @$pb.TagNumber(4)
-  $core.bool hasMode() => $_has(3);
+  $core.bool hasRetentionDays() => $_has(3);
   @$pb.TagNumber(4)
-  void clearMode() => clearField(4);
+  void clearRetentionDays() => clearField(4);
+
+  @$pb.TagNumber(5)
+  RetentionPolicy_Mode get mode => $_getN(4);
+  @$pb.TagNumber(5)
+  set mode(RetentionPolicy_Mode v) { setField(5, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasMode() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearMode() => clearField(5);
 }
 
 class SetRetentionPolicyRequest extends $pb.GeneratedMessage {
   factory SetRetentionPolicyRequest({
     $core.String? mediaId,
     $core.String? policyId,
+    $core.String? idempotencyKey,
   }) {
     final $result = create();
     if (mediaId != null) {
@@ -3775,6 +6315,9 @@ class SetRetentionPolicyRequest extends $pb.GeneratedMessage {
     }
     if (policyId != null) {
       $result.policyId = policyId;
+    }
+    if (idempotencyKey != null) {
+      $result.idempotencyKey = idempotencyKey;
     }
     return $result;
   }
@@ -3785,6 +6328,7 @@ class SetRetentionPolicyRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SetRetentionPolicyRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'mediaId')
     ..aOS(2, _omitFieldNames ? '' : 'policyId')
+    ..aOS(100, _omitFieldNames ? '' : 'idempotencyKey')
     ..hasRequiredFields = false
   ;
 
@@ -3809,6 +6353,7 @@ class SetRetentionPolicyRequest extends $pb.GeneratedMessage {
   static SetRetentionPolicyRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SetRetentionPolicyRequest>(create);
   static SetRetentionPolicyRequest? _defaultInstance;
 
+  /// Media ID to apply policy to.
   @$pb.TagNumber(1)
   $core.String get mediaId => $_getSZ(0);
   @$pb.TagNumber(1)
@@ -3818,6 +6363,8 @@ class SetRetentionPolicyRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearMediaId() => clearField(1);
 
+  /// Policy ID to apply.
+  /// Empty string removes policy.
   @$pb.TagNumber(2)
   $core.String get policyId => $_getSZ(1);
   @$pb.TagNumber(2)
@@ -3826,6 +6373,16 @@ class SetRetentionPolicyRequest extends $pb.GeneratedMessage {
   $core.bool hasPolicyId() => $_has(1);
   @$pb.TagNumber(2)
   void clearPolicyId() => clearField(2);
+
+  /// Idempotency key.
+  @$pb.TagNumber(100)
+  $core.String get idempotencyKey => $_getSZ(2);
+  @$pb.TagNumber(100)
+  set idempotencyKey($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(100)
+  $core.bool hasIdempotencyKey() => $_has(2);
+  @$pb.TagNumber(100)
+  void clearIdempotencyKey() => clearField(100);
 }
 
 class SetRetentionPolicyResponse extends $pb.GeneratedMessage {
@@ -3868,6 +6425,7 @@ class SetRetentionPolicyResponse extends $pb.GeneratedMessage {
   static SetRetentionPolicyResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SetRetentionPolicyResponse>(create);
   static SetRetentionPolicyResponse? _defaultInstance;
 
+  /// Whether the policy was set.
   @$pb.TagNumber(1)
   $core.bool get success => $_getBF(0);
   @$pb.TagNumber(1)
@@ -3918,6 +6476,7 @@ class GetRetentionPolicyRequest extends $pb.GeneratedMessage {
   static GetRetentionPolicyRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetRetentionPolicyRequest>(create);
   static GetRetentionPolicyRequest? _defaultInstance;
 
+  /// Media ID to get policy for.
   @$pb.TagNumber(1)
   $core.String get mediaId => $_getSZ(0);
   @$pb.TagNumber(1)
@@ -3973,6 +6532,8 @@ class GetRetentionPolicyResponse extends $pb.GeneratedMessage {
   static GetRetentionPolicyResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetRetentionPolicyResponse>(create);
   static GetRetentionPolicyResponse? _defaultInstance;
 
+  /// Applied retention policy.
+  /// Null if no policy assigned.
   @$pb.TagNumber(1)
   RetentionPolicy get policy => $_getN(0);
   @$pb.TagNumber(1)
@@ -3984,6 +6545,7 @@ class GetRetentionPolicyResponse extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   RetentionPolicy ensurePolicy() => $_ensure(0);
 
+  /// Calculated expiration time based on policy.
   @$pb.TagNumber(2)
   $0.Timestamp get expiresAt => $_getN(1);
   @$pb.TagNumber(2)
@@ -3997,12 +6559,21 @@ class GetRetentionPolicyResponse extends $pb.GeneratedMessage {
 }
 
 class ListRetentionPoliciesRequest extends $pb.GeneratedMessage {
-  factory ListRetentionPoliciesRequest() => create();
+  factory ListRetentionPoliciesRequest({
+    $2.PageCursor? cursor,
+  }) {
+    final $result = create();
+    if (cursor != null) {
+      $result.cursor = cursor;
+    }
+    return $result;
+  }
   ListRetentionPoliciesRequest._() : super();
   factory ListRetentionPoliciesRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory ListRetentionPoliciesRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListRetentionPoliciesRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
+    ..aOM<$2.PageCursor>(1, _omitFieldNames ? '' : 'cursor', subBuilder: $2.PageCursor.create)
     ..hasRequiredFields = false
   ;
 
@@ -4026,15 +6597,31 @@ class ListRetentionPoliciesRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static ListRetentionPoliciesRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListRetentionPoliciesRequest>(create);
   static ListRetentionPoliciesRequest? _defaultInstance;
+
+  /// Pagination using common PageCursor.
+  @$pb.TagNumber(1)
+  $2.PageCursor get cursor => $_getN(0);
+  @$pb.TagNumber(1)
+  set cursor($2.PageCursor v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasCursor() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearCursor() => clearField(1);
+  @$pb.TagNumber(1)
+  $2.PageCursor ensureCursor() => $_ensure(0);
 }
 
 class ListRetentionPoliciesResponse extends $pb.GeneratedMessage {
   factory ListRetentionPoliciesResponse({
     $core.Iterable<RetentionPolicy>? policies,
+    $2.PageCursor? nextCursor,
   }) {
     final $result = create();
     if (policies != null) {
       $result.policies.addAll(policies);
+    }
+    if (nextCursor != null) {
+      $result.nextCursor = nextCursor;
     }
     return $result;
   }
@@ -4044,6 +6631,7 @@ class ListRetentionPoliciesResponse extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListRetentionPoliciesResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
     ..pc<RetentionPolicy>(1, _omitFieldNames ? '' : 'policies', $pb.PbFieldType.PM, subBuilder: RetentionPolicy.create)
+    ..aOM<$2.PageCursor>(2, _omitFieldNames ? '' : 'nextCursor', subBuilder: $2.PageCursor.create)
     ..hasRequiredFields = false
   ;
 
@@ -4070,6 +6658,18 @@ class ListRetentionPoliciesResponse extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(1)
   $core.List<RetentionPolicy> get policies => $_getList(0);
+
+  /// Pagination cursor for next page.
+  @$pb.TagNumber(2)
+  $2.PageCursor get nextCursor => $_getN(1);
+  @$pb.TagNumber(2)
+  set nextCursor($2.PageCursor v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasNextCursor() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearNextCursor() => clearField(2);
+  @$pb.TagNumber(2)
+  $2.PageCursor ensureNextCursor() => $_ensure(1);
 }
 
 class UsageStats extends $pb.GeneratedMessage {
@@ -4127,6 +6727,7 @@ class UsageStats extends $pb.GeneratedMessage {
   static UsageStats getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UsageStats>(create);
   static UsageStats? _defaultInstance;
 
+  /// Total files accessible to this user.
   @$pb.TagNumber(1)
   $fixnum.Int64 get totalFiles => $_getI64(0);
   @$pb.TagNumber(1)
@@ -4136,6 +6737,7 @@ class UsageStats extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearTotalFiles() => clearField(1);
 
+  /// Total bytes used.
   @$pb.TagNumber(2)
   $fixnum.Int64 get totalBytes => $_getI64(1);
   @$pb.TagNumber(2)
@@ -4145,6 +6747,7 @@ class UsageStats extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearTotalBytes() => clearField(2);
 
+  /// Number of public files.
   @$pb.TagNumber(3)
   $fixnum.Int64 get publicFiles => $_getI64(2);
   @$pb.TagNumber(3)
@@ -4154,6 +6757,7 @@ class UsageStats extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   void clearPublicFiles() => clearField(3);
 
+  /// Number of private files.
   @$pb.TagNumber(4)
   $fixnum.Int64 get privateFiles => $_getI64(3);
   @$pb.TagNumber(4)
@@ -4204,6 +6808,8 @@ class GetUserUsageRequest extends $pb.GeneratedMessage {
   static GetUserUsageRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetUserUsageRequest>(create);
   static GetUserUsageRequest? _defaultInstance;
 
+  /// User ID to get usage for.
+  /// If empty, returns usage for authenticated user.
   @$pb.TagNumber(1)
   $core.String get userId => $_getSZ(0);
   @$pb.TagNumber(1)
@@ -4264,6 +6870,7 @@ class GetUserUsageResponse extends $pb.GeneratedMessage {
   static GetUserUsageResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetUserUsageResponse>(create);
   static GetUserUsageResponse? _defaultInstance;
 
+  /// Usage statistics.
   @$pb.TagNumber(1)
   UsageStats get usage => $_getN(0);
   @$pb.TagNumber(1)
@@ -4275,6 +6882,7 @@ class GetUserUsageResponse extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   UsageStats ensureUsage() => $_ensure(0);
 
+  /// Start of the billing/usage period.
   @$pb.TagNumber(2)
   $0.Timestamp get periodStart => $_getN(1);
   @$pb.TagNumber(2)
@@ -4286,6 +6894,7 @@ class GetUserUsageResponse extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $0.Timestamp ensurePeriodStart() => $_ensure(1);
 
+  /// End of the billing/usage period.
   @$pb.TagNumber(3)
   $0.Timestamp get periodEnd => $_getN(2);
   @$pb.TagNumber(3)
@@ -4380,6 +6989,7 @@ class GetStorageStatsResponse extends $pb.GeneratedMessage {
   static GetStorageStatsResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetStorageStatsResponse>(create);
   static GetStorageStatsResponse? _defaultInstance;
 
+  /// Total bytes stored.
   @$pb.TagNumber(1)
   $fixnum.Int64 get totalBytes => $_getI64(0);
   @$pb.TagNumber(1)
@@ -4389,6 +6999,7 @@ class GetStorageStatsResponse extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearTotalBytes() => clearField(1);
 
+  /// Total file count.
   @$pb.TagNumber(2)
   $fixnum.Int64 get totalFiles => $_getI64(1);
   @$pb.TagNumber(2)
@@ -4398,6 +7009,7 @@ class GetStorageStatsResponse extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearTotalFiles() => clearField(2);
 
+  /// Total users with files.
   @$pb.TagNumber(3)
   $fixnum.Int64 get totalUsers => $_getI64(2);
   @$pb.TagNumber(3)
@@ -4421,6 +7033,9 @@ class FilesServiceApi {
   $async.Future<CreateMultipartUploadResponse> createMultipartUpload($pb.ClientContext? ctx, CreateMultipartUploadRequest request) =>
     _client.invoke<CreateMultipartUploadResponse>(ctx, 'FilesService', 'CreateMultipartUpload', request, CreateMultipartUploadResponse())
   ;
+  $async.Future<GetMultipartUploadResponse> getMultipartUpload($pb.ClientContext? ctx, GetMultipartUploadRequest request) =>
+    _client.invoke<GetMultipartUploadResponse>(ctx, 'FilesService', 'GetMultipartUpload', request, GetMultipartUploadResponse())
+  ;
   $async.Future<UploadMultipartPartResponse> uploadMultipartPart($pb.ClientContext? ctx, UploadMultipartPartRequest request) =>
     _client.invoke<UploadMultipartPartResponse>(ctx, 'FilesService', 'UploadMultipartPart', request, UploadMultipartPartResponse())
   ;
@@ -4436,8 +7051,14 @@ class FilesServiceApi {
   $async.Future<HeadContentResponse> headContent($pb.ClientContext? ctx, HeadContentRequest request) =>
     _client.invoke<HeadContentResponse>(ctx, 'FilesService', 'HeadContent', request, HeadContentResponse())
   ;
+  $async.Future<PatchContentResponse> patchContent($pb.ClientContext? ctx, PatchContentRequest request) =>
+    _client.invoke<PatchContentResponse>(ctx, 'FilesService', 'PatchContent', request, PatchContentResponse())
+  ;
   $async.Future<GetSignedUploadUrlResponse> getSignedUploadUrl($pb.ClientContext? ctx, GetSignedUploadUrlRequest request) =>
     _client.invoke<GetSignedUploadUrlResponse>(ctx, 'FilesService', 'GetSignedUploadUrl', request, GetSignedUploadUrlResponse())
+  ;
+  $async.Future<FinalizeSignedUploadResponse> finalizeSignedUpload($pb.ClientContext? ctx, FinalizeSignedUploadRequest request) =>
+    _client.invoke<FinalizeSignedUploadResponse>(ctx, 'FilesService', 'FinalizeSignedUpload', request, FinalizeSignedUploadResponse())
   ;
   $async.Future<GetSignedDownloadUrlResponse> getSignedDownloadUrl($pb.ClientContext? ctx, GetSignedDownloadUrlRequest request) =>
     _client.invoke<GetSignedDownloadUrlResponse>(ctx, 'FilesService', 'GetSignedDownloadUrl', request, GetSignedDownloadUrlResponse())
@@ -4450,6 +7071,12 @@ class FilesServiceApi {
   ;
   $async.Future<GetContentOverrideNameResponse> getContentOverrideName($pb.ClientContext? ctx, GetContentOverrideNameRequest request) =>
     _client.invoke<GetContentOverrideNameResponse>(ctx, 'FilesService', 'GetContentOverrideName', request, GetContentOverrideNameResponse())
+  ;
+  $async.Future<DownloadChunk> downloadContent($pb.ClientContext? ctx, DownloadContentRequest request) =>
+    _client.invoke<DownloadChunk>(ctx, 'FilesService', 'DownloadContent', request, DownloadChunk())
+  ;
+  $async.Future<DownloadChunk> downloadContentRange($pb.ClientContext? ctx, DownloadRangeRequest request) =>
+    _client.invoke<DownloadChunk>(ctx, 'FilesService', 'DownloadContentRange', request, DownloadChunk())
   ;
   $async.Future<GetContentThumbnailResponse> getContentThumbnail($pb.ClientContext? ctx, GetContentThumbnailRequest request) =>
     _client.invoke<GetContentThumbnailResponse>(ctx, 'FilesService', 'GetContentThumbnail', request, GetContentThumbnailResponse())
@@ -4468,6 +7095,15 @@ class FilesServiceApi {
   ;
   $async.Future<BatchDeleteContentResponse> batchDeleteContent($pb.ClientContext? ctx, BatchDeleteContentRequest request) =>
     _client.invoke<BatchDeleteContentResponse>(ctx, 'FilesService', 'BatchDeleteContent', request, BatchDeleteContentResponse())
+  ;
+  $async.Future<GrantAccessResponse> grantAccess($pb.ClientContext? ctx, GrantAccessRequest request) =>
+    _client.invoke<GrantAccessResponse>(ctx, 'FilesService', 'GrantAccess', request, GrantAccessResponse())
+  ;
+  $async.Future<RevokeAccessResponse> revokeAccess($pb.ClientContext? ctx, RevokeAccessRequest request) =>
+    _client.invoke<RevokeAccessResponse>(ctx, 'FilesService', 'RevokeAccess', request, RevokeAccessResponse())
+  ;
+  $async.Future<ListAccessResponse> listAccess($pb.ClientContext? ctx, ListAccessRequest request) =>
+    _client.invoke<ListAccessResponse>(ctx, 'FilesService', 'ListAccess', request, ListAccessResponse())
   ;
   $async.Future<GetVersionsResponse> getVersions($pb.ClientContext? ctx, GetVersionsRequest request) =>
     _client.invoke<GetVersionsResponse>(ctx, 'FilesService', 'GetVersions', request, GetVersionsResponse())

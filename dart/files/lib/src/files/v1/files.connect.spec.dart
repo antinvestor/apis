@@ -6,19 +6,34 @@
 import "package:connectrpc/connect.dart" as connect;
 import "files.pb.dart" as filesv1files;
 
-/// FilesService manages file and media operations including upload, download,
-/// thumbnail generation, and search functionality.
+/// FilesService provides comprehensive file and media management.
+/// This service handles:
+///   - Upload: streaming, multipart, signed URLs
+///   - Download: direct, streaming, ranged, thumbnails
+///   - Metadata: viewing, patching, searching
+///   - Access: granting, revoking, listing
+///   - Versioning: listing, restoring
+///   - Retention: policies, expiration
+///   - Analytics: usage, storage stats
+/// =================================================================
+/// Upload Operations
+/// =================================================================
 abstract final class FilesService {
   /// Fully-qualified name of the FilesService service.
   static const name = 'files.v1.FilesService';
 
-  /// UploadContent uploads content to the content repository via streaming.
-  /// Returns an MXC URI that can be used to reference the content.
-  /// Two usage patterns:
-  /// 1. New upload: Send metadata (without server_name/media_id), then chunks. Returns a new MXC URI.
-  /// 2. Upload to pre-created URI: First call CreateContent to get an MXC URI, then send metadata
-  ///    (with server_name/media_id from that URI), followed by chunks. Returns the same MXC URI.
-  /// Stream format: metadata message first, then one or more chunk messages with file data.
+  /// UploadContent uploads content via streaming.
+  /// Usage Patterns:
+  ///   1. New upload: metadata (no server_name/media_id) -> chunks
+  ///   2. Pre-created URI: CreateContent -> metadata + server_name/media_id -> chunks
+  /// Streaming:
+  ///   Send metadata first, then one or more chunk messages.
+  ///   Server returns response when upload complete.
+  /// Errors:
+  ///   - INVALID_ARGUMENT: metadata missing or chunk after close
+  ///   - NOT_FOUND: pre-created media_id not found
+  ///   - ALREADY_EXISTS: media_id conflict (with idempotency)
+  ///   - FAILED_PRECONDITION: quota exceeded
   static const uploadContent = connect.Spec(
     '/$name/UploadContent',
     connect.StreamType.client,
@@ -26,11 +41,9 @@ abstract final class FilesService {
     filesv1files.UploadContentResponse.new,
   );
 
-  /// CreateContent creates a new MXC URI without uploading content.
-  /// The returned MXC URI (server_name and media_id) can be used with UploadContent
-  /// by setting those fields in the UploadMetadata message.
-  /// Use case: When you need the MXC URI before the content is ready, or for
-  /// implementing resumable uploads where the URI persists across upload attempts.
+  /// CreateContent pre-allocates an MXC URI for future upload.
+  /// Use when you need the URI before content is ready,
+  /// or for implementing resumable uploads.
   static const createContent = connect.Spec(
     '/$name/CreateContent',
     connect.StreamType.unary,
@@ -38,7 +51,7 @@ abstract final class FilesService {
     filesv1files.CreateContentResponse.new,
   );
 
-  /// CreateMultipartUpload creates a new multipart upload.
+  /// CreateMultipartUpload initiates a multipart upload session.
   static const createMultipartUpload = connect.Spec(
     '/$name/CreateMultipartUpload',
     connect.StreamType.unary,
@@ -46,7 +59,16 @@ abstract final class FilesService {
     filesv1files.CreateMultipartUploadResponse.new,
   );
 
-  /// UploadMultipartPart uploads a part of a multipart upload.
+  /// GetMultipartUpload gets status of a multipart upload.
+  static const getMultipartUpload = connect.Spec(
+    '/$name/GetMultipartUpload',
+    connect.StreamType.unary,
+    filesv1files.GetMultipartUploadRequest.new,
+    filesv1files.GetMultipartUploadResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
+  );
+
+  /// UploadMultipartPart uploads a single part.
   static const uploadMultipartPart = connect.Spec(
     '/$name/UploadMultipartPart',
     connect.StreamType.unary,
@@ -54,7 +76,7 @@ abstract final class FilesService {
     filesv1files.UploadMultipartPartResponse.new,
   );
 
-  /// CompleteMultipartUpload completes a multipart upload.
+  /// CompleteMultipartUpload completes the upload.
   static const completeMultipartUpload = connect.Spec(
     '/$name/CompleteMultipartUpload',
     connect.StreamType.unary,
@@ -62,7 +84,7 @@ abstract final class FilesService {
     filesv1files.CompleteMultipartUploadResponse.new,
   );
 
-  /// AbortMultipartUpload aborts a multipart upload.
+  /// AbortMultipartUpload cancels the upload.
   static const abortMultipartUpload = connect.Spec(
     '/$name/AbortMultipartUpload',
     connect.StreamType.unary,
@@ -70,7 +92,7 @@ abstract final class FilesService {
     filesv1files.AbortMultipartUploadResponse.new,
   );
 
-  /// ListMultipartParts lists all uploaded parts of a multipart upload.
+  /// ListMultipartParts lists uploaded parts.
   static const listMultipartParts = connect.Spec(
     '/$name/ListMultipartParts',
     connect.StreamType.unary,
@@ -79,7 +101,7 @@ abstract final class FilesService {
     idempotency: connect.Idempotency.noSideEffects,
   );
 
-  /// HeadContent retrieves metadata for content without downloading the content itself.
+  /// HeadContent gets metadata without content.
   static const headContent = connect.Spec(
     '/$name/HeadContent',
     connect.StreamType.unary,
@@ -88,7 +110,15 @@ abstract final class FilesService {
     idempotency: connect.Idempotency.noSideEffects,
   );
 
-  /// GetSignedUploadUrl gets a signed URL for direct upload to storage.
+  /// PatchContent updates metadata.
+  static const patchContent = connect.Spec(
+    '/$name/PatchContent',
+    connect.StreamType.unary,
+    filesv1files.PatchContentRequest.new,
+    filesv1files.PatchContentResponse.new,
+  );
+
+  /// GetSignedUploadUrl gets URL for direct storage upload.
   static const getSignedUploadUrl = connect.Spec(
     '/$name/GetSignedUploadUrl',
     connect.StreamType.unary,
@@ -96,7 +126,15 @@ abstract final class FilesService {
     filesv1files.GetSignedUploadUrlResponse.new,
   );
 
-  /// GetSignedDownloadUrl gets a signed URL for direct download from storage.
+  /// FinalizeSignedUpload completes a signed upload.
+  static const finalizeSignedUpload = connect.Spec(
+    '/$name/FinalizeSignedUpload',
+    connect.StreamType.unary,
+    filesv1files.FinalizeSignedUploadRequest.new,
+    filesv1files.FinalizeSignedUploadResponse.new,
+  );
+
+  /// GetSignedDownloadUrl gets URL for direct download.
   static const getSignedDownloadUrl = connect.Spec(
     '/$name/GetSignedDownloadUrl',
     connect.StreamType.unary,
@@ -105,7 +143,7 @@ abstract final class FilesService {
     idempotency: connect.Idempotency.noSideEffects,
   );
 
-  /// DeleteContent deletes content from the repository.
+  /// DeleteContent deletes content.
   static const deleteContent = connect.Spec(
     '/$name/DeleteContent',
     connect.StreamType.unary,
@@ -113,7 +151,7 @@ abstract final class FilesService {
     filesv1files.DeleteContentResponse.new,
   );
 
-  /// GetContent downloads content from the content repository.
+  /// GetContent downloads complete content.
   static const getContent = connect.Spec(
     '/$name/GetContent',
     connect.StreamType.unary,
@@ -122,7 +160,7 @@ abstract final class FilesService {
     idempotency: connect.Idempotency.noSideEffects,
   );
 
-  /// GetContentOverrideName downloads content with a specified filename override.
+  /// GetContentOverrideName downloads with filename override.
   static const getContentOverrideName = connect.Spec(
     '/$name/GetContentOverrideName',
     connect.StreamType.unary,
@@ -131,8 +169,25 @@ abstract final class FilesService {
     idempotency: connect.Idempotency.noSideEffects,
   );
 
-  /// GetContentThumbnail retrieves a thumbnail of the content.
-  /// Supports configurable dimensions, resizing methods, and animated thumbnails.
+  /// DownloadContent streams content.
+  static const downloadContent = connect.Spec(
+    '/$name/DownloadContent',
+    connect.StreamType.server,
+    filesv1files.DownloadContentRequest.new,
+    filesv1files.DownloadChunk.new,
+    idempotency: connect.Idempotency.noSideEffects,
+  );
+
+  /// DownloadContentRange streams a byte range.
+  static const downloadContentRange = connect.Spec(
+    '/$name/DownloadContentRange',
+    connect.StreamType.server,
+    filesv1files.DownloadRangeRequest.new,
+    filesv1files.DownloadChunk.new,
+    idempotency: connect.Idempotency.noSideEffects,
+  );
+
+  /// GetContentThumbnail generates a thumbnail.
   static const getContentThumbnail = connect.Spec(
     '/$name/GetContentThumbnail',
     connect.StreamType.unary,
@@ -141,7 +196,7 @@ abstract final class FilesService {
     idempotency: connect.Idempotency.noSideEffects,
   );
 
-  /// GetUrlPreview gets OpenGraph preview information for a URL.
+  /// GetUrlPreview gets OpenGraph preview data.
   static const getUrlPreview = connect.Spec(
     '/$name/GetUrlPreview',
     connect.StreamType.unary,
@@ -150,8 +205,7 @@ abstract final class FilesService {
     idempotency: connect.Idempotency.noSideEffects,
   );
 
-  /// GetConfig retrieves the content repository configuration.
-  /// Returns upload size limits and other configuration parameters.
+  /// GetConfig returns server configuration.
   static const getConfig = connect.Spec(
     '/$name/GetConfig',
     connect.StreamType.unary,
@@ -160,8 +214,7 @@ abstract final class FilesService {
     idempotency: connect.Idempotency.noSideEffects,
   );
 
-  /// SearchMedia searches for media files matching specified criteria.
-  /// Supports full-text search, filtering by owner, date range, and pagination.
+  /// SearchMedia searches for media.
   static const searchMedia = connect.Spec(
     '/$name/SearchMedia',
     connect.StreamType.unary,
@@ -170,7 +223,7 @@ abstract final class FilesService {
     idempotency: connect.Idempotency.noSideEffects,
   );
 
-  /// BatchGetContent retrieves multiple files in a single request.
+  /// BatchGetContent retrieves multiple files.
   static const batchGetContent = connect.Spec(
     '/$name/BatchGetContent',
     connect.StreamType.unary,
@@ -179,7 +232,7 @@ abstract final class FilesService {
     idempotency: connect.Idempotency.noSideEffects,
   );
 
-  /// BatchDeleteContent deletes multiple files in a single request.
+  /// BatchDeleteContent deletes multiple files.
   static const batchDeleteContent = connect.Spec(
     '/$name/BatchDeleteContent',
     connect.StreamType.unary,
@@ -187,7 +240,32 @@ abstract final class FilesService {
     filesv1files.BatchDeleteContentResponse.new,
   );
 
-  /// GetVersions retrieves all versions of a file.
+  /// GrantAccess grants access to media.
+  static const grantAccess = connect.Spec(
+    '/$name/GrantAccess',
+    connect.StreamType.unary,
+    filesv1files.GrantAccessRequest.new,
+    filesv1files.GrantAccessResponse.new,
+  );
+
+  /// RevokeAccess revokes access from media.
+  static const revokeAccess = connect.Spec(
+    '/$name/RevokeAccess',
+    connect.StreamType.unary,
+    filesv1files.RevokeAccessRequest.new,
+    filesv1files.RevokeAccessResponse.new,
+  );
+
+  /// ListAccess lists all grants for media.
+  static const listAccess = connect.Spec(
+    '/$name/ListAccess',
+    connect.StreamType.unary,
+    filesv1files.ListAccessRequest.new,
+    filesv1files.ListAccessResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
+  );
+
+  /// GetVersions lists all versions.
   static const getVersions = connect.Spec(
     '/$name/GetVersions',
     connect.StreamType.unary,
@@ -196,7 +274,7 @@ abstract final class FilesService {
     idempotency: connect.Idempotency.noSideEffects,
   );
 
-  /// RestoreVersion restores a specific version of a file.
+  /// RestoreVersion restores a previous version.
   static const restoreVersion = connect.Spec(
     '/$name/RestoreVersion',
     connect.StreamType.unary,
@@ -204,7 +282,7 @@ abstract final class FilesService {
     filesv1files.RestoreVersionResponse.new,
   );
 
-  /// SetRetentionPolicy sets retention policy for a file.
+  /// SetRetentionPolicy applies retention to media.
   static const setRetentionPolicy = connect.Spec(
     '/$name/SetRetentionPolicy',
     connect.StreamType.unary,
@@ -212,7 +290,7 @@ abstract final class FilesService {
     filesv1files.SetRetentionPolicyResponse.new,
   );
 
-  /// GetRetentionPolicy gets retention policy for a file.
+  /// GetRetentionPolicy gets retention for media.
   static const getRetentionPolicy = connect.Spec(
     '/$name/GetRetentionPolicy',
     connect.StreamType.unary,
@@ -221,7 +299,7 @@ abstract final class FilesService {
     idempotency: connect.Idempotency.noSideEffects,
   );
 
-  /// ListRetentionPolicies lists available retention policies.
+  /// ListRetentionPolicies lists available policies.
   static const listRetentionPolicies = connect.Spec(
     '/$name/ListRetentionPolicies',
     connect.StreamType.unary,
@@ -230,7 +308,7 @@ abstract final class FilesService {
     idempotency: connect.Idempotency.noSideEffects,
   );
 
-  /// GetUserUsage retrieves usage statistics for a user.
+  /// GetUserUsage gets usage for a user.
   static const getUserUsage = connect.Spec(
     '/$name/GetUserUsage',
     connect.StreamType.unary,
@@ -239,7 +317,7 @@ abstract final class FilesService {
     idempotency: connect.Idempotency.noSideEffects,
   );
 
-  /// GetStorageStats retrieves global storage statistics.
+  /// GetStorageStats gets global storage stats.
   static const getStorageStats = connect.Spec(
     '/$name/GetStorageStats',
     connect.StreamType.unary,
