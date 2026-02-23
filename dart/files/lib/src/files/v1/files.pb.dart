@@ -822,28 +822,28 @@ class UploadMetadata extends $pb.GeneratedMessage {
   @$pb.TagNumber(9)
   void clearMediaId() => clearField(9);
 
-  /// Convenience field: principals to grant initial access.
+  ///  Convenience field: principals to grant initial access.
   ///
-  /// These are converted to AccessGrant entries during upload.
-  /// Each accessor_id is granted READER role by default.
+  ///  These are converted to AccessGrant entries during upload.
+  ///  Each accessor_id is granted READER role by default.
   ///
-  /// This is a convenience for common use cases. For fine-grained
-  /// access control, use GrantAccess after upload.
+  ///  This is a convenience for common use cases. For fine-grained
+  ///  access control, use GrantAccess after upload.
   ///
-  /// Format: same as AccessGrant.principal_id
+  ///  Format: same as AccessGrant.principal_id
   @$pb.TagNumber(15)
   $core.List<$core.String> get accessorId => $_getList(8);
 
-  /// SHA-256 checksum for integrity verification.
-  /// Format: 64 lowercase hexadecimal characters.
+  ///  SHA-256 checksum for integrity verification.
+  ///  Format: 64 lowercase hexadecimal characters.
   ///
-  /// If provided, server verifies uploaded content matches this checksum.
-  /// Mismatch causes upload failure.
+  ///  If provided, server verifies uploaded content matches this checksum.
+  ///  Mismatch causes upload failure.
   ///
-  /// Recommended for:
-  ///   - Large files where re-upload is expensive
-  ///   - Integrity-critical content
-  ///   - Multipart uploads (required at completion)
+  ///  Recommended for:
+  ///    - Large files where re-upload is expensive
+  ///    - Integrity-critical content
+  ///    - Multipart uploads (required at completion)
   @$pb.TagNumber(16)
   $core.String get checksumSha256 => $_getSZ(9);
   @$pb.TagNumber(16)
@@ -853,20 +853,20 @@ class UploadMetadata extends $pb.GeneratedMessage {
   @$pb.TagNumber(16)
   void clearChecksumSha256() => clearField(16);
 
-  /// Base version for optimistic concurrency.
+  ///  Base version for optimistic concurrency.
   ///
-  /// If provided and media_id exists:
-  ///   - Creates new version if latest_version == base_version
-  ///   - Returns ALREADY_EXISTS error if versions differ
+  ///  If provided and media_id exists:
+  ///    - Creates new version if latest_version == base_version
+  ///    - Returns ALREADY_EXISTS error if versions differ
   ///
-  /// This prevents lost updates when multiple clients upload
-  /// to the same media_id concurrently.
+  ///  This prevents lost updates when multiple clients upload
+  ///  to the same media_id concurrently.
   ///
-  /// Example:
-  ///   Current version: 3
-  ///   base_version: 3 -> Creates version 4
-  ///   base_version: 2 -> Returns error (conflict)
-  ///   base_version: (empty) -> Creates version 4 (no check)
+  ///  Example:
+  ///    Current version: 3
+  ///    base_version: 3 -> Creates version 4
+  ///    base_version: 2 -> Returns error (conflict)
+  ///    base_version: (empty) -> Creates version 4 (no check)
   @$pb.TagNumber(17)
   $fixnum.Int64 get baseVersion => $_getI64(10);
   @$pb.TagNumber(17)
@@ -876,10 +876,10 @@ class UploadMetadata extends $pb.GeneratedMessage {
   @$pb.TagNumber(17)
   void clearBaseVersion() => clearField(17);
 
-  /// User-defined labels for organization.
-  /// See MediaMetadata.labels for constraints.
+  ///  User-defined labels for organization.
+  ///  See MediaMetadata.labels for constraints.
   ///
-  /// Can be updated later via PatchContent.
+  ///  Can be updated later via PatchContent.
   @$pb.TagNumber(20)
   $core.Map<$core.String, $core.String> get labels => $_getMap(11);
 
@@ -1010,15 +1010,15 @@ class UploadContentRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearChunk() => clearField(2);
 
-  /// Idempotency key for this upload operation.
+  ///  Idempotency key for this upload operation.
   ///
-  /// If provided, allows safe retry on network failure.
-  /// Same key with same metadata creates same media_id.
+  ///  If provided, allows safe retry on network failure.
+  ///  Same key with same metadata creates same media_id.
   ///
-  /// Recommended: Use UUID or similar high-entropy key.
-  /// Key is scoped to the owner.
+  ///  Recommended: Use UUID or similar high-entropy key.
+  ///  Key is scoped to the owner.
   ///
-  /// TTL: 24 hours from first request.
+  ///  TTL: 24 hours from first request.
   @$pb.TagNumber(100)
   $core.String get idempotencyKey => $_getSZ(2);
   @$pb.TagNumber(100)
