@@ -6,7 +6,7 @@ require (
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.11-20260209202127-80ab13bee0bf.1
 	connectrpc.com/connect v1.19.1
 	github.com/google/gnostic v0.7.1
-	github.com/pitabwire/util v0.4.0
+	github.com/pitabwire/util v0.5.0
 	go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc v0.65.0
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.65.0
 	golang.org/x/oauth2 v0.35.0
