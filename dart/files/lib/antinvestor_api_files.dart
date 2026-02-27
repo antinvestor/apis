@@ -28,6 +28,9 @@ library;
 // Export client wrapper
 export 'src/client.dart';
 
+// Export URL builder utilities
+export 'src/url.dart';
+
 // Export generated protobuf files
 export 'src/files/v1/files.pb.dart';
 export 'src/files/v1/files.pbenum.dart';

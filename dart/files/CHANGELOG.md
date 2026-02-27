@@ -1,5 +1,12 @@
 # Changelog
 
+
+## [1.53.19] - 2026-2-27
+
+### Changed
+
+- Introduce utility functions to build content and thumbnail urls
+
 ## [1.53.17] - 2026-2-27
 
 ### Changed
