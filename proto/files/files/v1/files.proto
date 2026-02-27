@@ -19,8 +19,42 @@
 // Overview:
 //   The Files API provides comprehensive file and media management capabilities
 //   including upload, download, thumbnail generation, versioning, retention,
-//   access control, and search. All content is identified by MXC URIs following
-//   the Matrix Content Repository specification (mxc://<server>/<media_id>).
+//   access control, and search. All content is identified by content URIs
+//   via HTTPS API paths (e.g. https://<server>/v1/media/download/<server_name>/<media_id>).
+//
+// Quick Start (common workflows):
+//
+//   Simple Upload:
+//     1. Call UploadContent (stream metadata + chunks)
+//     2. Receive content_uri, media_id, server_name in response
+//     3. Use media_id for all subsequent operations (download, thumbnail, etc.)
+//
+//   Pre-allocated Upload (get URI before content is ready):
+//     1. Call CreateContent -> receive content_uri, media_id, server_name
+//     2. Later, call UploadContent with server_name + media_id in metadata
+//
+//   Download:
+//     - Small files: GetContent(media_id) -> bytes + metadata
+//     - Large files: DownloadContent(media_id) -> stream of chunks
+//     - Partial: DownloadContentRange(media_id, start, end) -> stream
+//     - Thumbnail: GetContentThumbnail(media_id, width, height)
+//
+//   Share with others:
+//     1. Upload content
+//     2. Call GrantAccess(media_id, principal_id, role)
+//
+//   Large file upload (multipart):
+//     1. CreateMultipartUpload -> upload_id
+//     2. UploadMultipartPart (repeat, can be parallel)
+//     3. CompleteMultipartUpload(upload_id, checksum, parts)
+//
+// API Paths (HTTPS):
+//   POST   /v1/media/upload                                        - Upload content
+//   GET    /v1/media/config                                        - Get server config
+//   GET    /v1/media/download/{serverName}/{mediaId}               - Download content
+//   GET    /v1/media/download/{serverName}/{mediaId}/{downloadName} - Download with filename
+//   GET    /v1/media/thumbnail/{serverName}/{mediaId}              - Get thumbnail
+//   GET    /v1/media/search                                        - Search media
 //
 // Architecture Principles:
 //   1. Labels for Organization - User-defined labels (map<string,string>) are for
@@ -99,7 +133,7 @@ option (gnostic.openapi.v3.document) = {
   info: {
     title: "Files Management API"
     version: "v1.0.0"
-    description: "Comprehensive file and media management API supporting upload, download, thumbnails, versioning, retention, and search. Files are identified via MXC URIs (mxc://server/media_id) following Matrix patterns."
+    description: "Comprehensive file and media management API supporting upload, download, thumbnails, versioning, retention, and search. Files are identified via content URIs using HTTPS API paths (e.g. /v1/media/download/{serverName}/{mediaId})."
     contact: {
       name: "Ant Investor Ltd"
       url: "https://github.com/antinvestor/apis"
@@ -329,7 +363,7 @@ enum PrincipalType {
 message MediaMetadata {
   // Unique identifier for this media.
   // Format: alphanumeric with hyphens/underscores, 3-40 characters.
-  // Example: "abc123xyz" from mxc://server.com/abc123xyz
+  // Example: "abc123xyz"
   string media_id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
@@ -435,9 +469,9 @@ message MediaMetadata {
   //   - Keys must be valid UTF-8 strings
   map<string, string> labels = 20;
 
-  // Full MXC URI for this content.
-  // Format: mxc://<server_name>/<media_id>
-  // Example: mxc://cdn.example.com/abc123xyz
+  // Full content URI for this content.
+  // Format: https://<server_name>/v1/media/download/<server_name>/<media_id>
+  // Example: https://cdn.example.com/v1/media/download/cdn.example.com/abc123xyz
   string content_uri = 21;
 
   // Organization or group ID this media is associated with.
@@ -532,7 +566,7 @@ message AccessGrant {
 //
 // Pattern 1: New Upload
 //   Send metadata (without server_name/media_id), then chunks.
-//   Server generates new media_id and returns complete MXC URI.
+//   Server generates new media_id and returns complete content URI.
 //
 // Pattern 2: Upload to Pre-created URI
 //   First call CreateContent to reserve a URI, then:
@@ -590,13 +624,13 @@ message UploadMetadata {
   // Null/empty means no expiration.
   google.protobuf.Timestamp expires_at = 7;
 
-  // Server name from pre-created MXC URI.
-  // Format: "cdn.example.com" from "mxc://cdn.example.com/abc123"
+  // Server name from pre-created content URI.
+  // Format: "cdn.example.com"
   // Required for Pattern 2 (upload to pre-created URI).
   string server_name = 8;
 
-  // Media ID from pre-created MXC URI.
-  // Format: "abc123" from "mxc://cdn.example.com/abc123"
+  // Media ID from pre-created content URI.
+  // Format: "abc123"
   // Must match pattern [0-9a-z_-]{3,40}
   // Required for Pattern 2 (upload to pre-created URI).
   string media_id = 9 [
@@ -706,9 +740,9 @@ message UploadContentRequest {
 
 // UploadContentResponse contains the result of a successful upload.
 message UploadContentResponse {
-  // Full MXC URI for the uploaded content.
-  // Format: mxc://<server>/<media_id>
-  // Example: mxc://cdn.example.com/abc123xyz
+  // Full content URI for the uploaded content.
+  // Format: https://<server>/v1/media/download/<server_name>/<media_id>
+  // Example: https://cdn.example.com/v1/media/download/cdn.example.com/abc123xyz
   string content_uri = 1;
 
   // Extracted media ID from the URI.
@@ -724,7 +758,7 @@ message UploadContentResponse {
   MediaMetadata metadata = 4;
 }
 
-// CreateContentRequest creates a new MXC URI without uploading content.
+// CreateContentRequest creates a new content URI without uploading content.
 //
 // This reserves a URI that can be used later for actual upload.
 // The URI remains reserved until content is uploaded or expires.
@@ -770,9 +804,9 @@ message CreateContentRequest {
   string idempotency_key = 100;
 }
 
-// CreateContentResponse contains the pre-created MXC URI.
+// CreateContentResponse contains the pre-created content URI.
 message CreateContentResponse {
-  // Full MXC URI for future upload.
+  // Full content URI for future upload.
   // Use server_name + media_id in UploadMetadata to upload.
   string content_uri = 1;
 
@@ -1865,15 +1899,15 @@ service FilesService {
     };
   }
 
-  // CreateContent pre-allocates an MXC URI for future upload.
+  // CreateContent pre-allocates a content URI for future upload.
   //
   // Use when you need the URI before content is ready,
   // or for implementing resumable uploads.
   rpc CreateContent(CreateContentRequest) returns (CreateContentResponse) {
     option (gnostic.openapi.v3.operation) = {
       operation_id: "createContent"
-      summary: "Create pre-allocated MXC URI"
-      description: "Creates an MXC URI without uploading content. Use returned server_name and media_id with UploadContent to complete the upload later."
+      summary: "Create pre-allocated content URI"
+      description: "Creates a content URI without uploading content. Use returned server_name and media_id with UploadContent to complete the upload later."
       tags: "Media"
     };
   }

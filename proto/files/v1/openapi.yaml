@@ -5,15 +5,37 @@ info:
     email: info@antinvestor.com
     name: Ant Investor Team
     url: https://antinvestor.com
-  description: An openAPI 3.0 specification that defines how files are stored and
-    accessed on ant investor products
+  description: |-
+    Files Management API for Ant Investor products. Provides file upload, download,
+    thumbnail generation, URL previews, and media search.
+
+    ## Authentication
+    All endpoints require a Bearer JWT token via the `Authorization` header.
+
+    ## Common Workflows
+
+    **Upload a file:**
+    1. `POST /v1/media/upload` with file bytes → returns `content_uri`
+
+    **Download a file:**
+    1. `GET /v1/media/download/{serverName}/{mediaId}` → returns file bytes
+
+    **Get a thumbnail:**
+    1. `GET /v1/media/thumbnail/{serverName}/{mediaId}?width=64&height=64`
+
+    **Pre-allocate a URI (for deferred upload):**
+    1. `POST /v1/media/create` → returns `content_uri`, `media_id`, `server_name`
+    2. `PUT /v1/media/upload/{serverName}/{mediaId}` with file bytes
+
+    **Search media:**
+    1. `GET /v1/media/search?q=keyword`
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://antinvestor/terms/
   title: Ant Investor Files
 paths:
-  /media/v3/upload:
+  /media/upload:
     post:
       summary: Upload some content to the content repository.
       operationId: uploadContent
@@ -26,8 +48,7 @@ paths:
         $ref: '#/components/requestBodies/bytes'
       responses:
         "200":
-          description: The [`mxc://` URI](/client-server-api/#matrix-content-mxc-uris) for
-            the uploaded content.
+          description: The content URI for the uploaded content.
           content:
             application/json:
               schema:
@@ -37,14 +58,12 @@ paths:
                 properties:
                   content_uri:
                     type: string
-                    format: mx-mxc-uri
-                    pattern: "^mxc:\\/\\/"
-                    description: The [`mxc://` URI](/client-server-api/#matrix-content-mxc-uris) to
-                      the uploaded content.
+                    format: uri
+                    description: The content URI for the uploaded content.
               examples:
                 response:
                   value: {
-                    "content_uri": "mxc://example.com/AQwafuaFswefuhsfAFAgsw"
+                    "content_uri": "https://example.com/v1/media/download/example.com/AQwafuaFswefuhsfAFAgsw"
                   }
         "403":
           description: |-
@@ -68,22 +87,22 @@ paths:
           $ref: '#/components/responses/rateLimited'
       tags:
         - Media
-  /media/v3/upload/{serverName}/{mediaId}:
+  /media/upload/{serverName}/{mediaId}:
     put:
-      summary: Upload content to an `mxc://` URI that was created earlier.
+      summary: Upload content to a content URI that was created earlier.
       description: |-
-        This endpoint permits uploading content to an `mxc://` URI that was created
-        earlier via [POST /_matrix/media/v1/create](/client-server-api/#post_matrixmediav1create).
-      operationId: uploadContentToMXC
+        This endpoint permits uploading content to a content URI that was created
+        earlier via [POST /v1/media/create].
+      operationId: uploadContentToURI
       security:
         - accessTokenBearer: [ ]
       parameters:
         - $ref: '#/components/parameters/serverName'
           description: |
-            The server name from the `mxc://` URI returned by `POST /_matrix/media/v1/create` (the authority component).
+            The server name from the content URI returned by `POST /v1/media/create` (the authority component).
         - $ref: '#/components/parameters/mediaId'
           description: |
-            The media ID from the `mxc://` URI returned by `POST /_matrix/media/v1/create` (the path component).
+            The media ID from the content URI returned by `POST /v1/media/create` (the path component).
         - $ref: '#/components/parameters/contentType'
         - $ref: '#/components/parameters/filename'
       requestBody:
@@ -105,10 +124,9 @@ paths:
             - The server does not permit the file type.
             - The user has reached a quota for uploaded content.
             - The request comes from a different user than the one that called
-              [POST /_matrix/media/v1/create](/client-server-api/#post_matrixmediav1create).
+              [POST /v1/media/create].
 
-            A [standard error response](/client-server-api/#standard-error-response)
-            will be returned with the `code` `M_FORBIDDEN`.
+            A standard error response will be returned with the `code` `M_FORBIDDEN`.
           content:
             application/json:
               schema:
@@ -121,13 +139,12 @@ paths:
                   }
         "404":
           description: |-
-            The user has provided an invalid MXC ID. Some reasons for this error include:
+            The user has provided an invalid media ID. Some reasons for this error include:
 
-            - The MXC ID was not created with [POST /_matrix/media/v1/create](/client-server-api/#post_matrixmediav1create).
-            - The MXC ID has expired.
+            - The media ID was not created with [POST /v1/media/create].
+            - The media ID has expired.
 
-            A [standard error response](/client-server-api/#standard-error-response)
-            will be returned with the `code` `M_NOT_FOUND`.
+            A standard error response will be returned with the `code` `M_NOT_FOUND`.
           content:
             application/json:
               schema:
@@ -141,8 +158,7 @@ paths:
         "409":
           description: |-
             The endpoint was called with a media ID that already has content. A
-            [standard error response](/client-server-api/#standard-error-response)
-            will be returned with the `code` `M_CANNOT_OVERWRITE_MEDIA`.
+            standard error response will be returned with the `code` `M_CANNOT_OVERWRITE_MEDIA`.
           content:
             application/json:
               schema:
@@ -161,10 +177,10 @@ paths:
         - Media
   /media/v1/create:
     post:
-      summary: Create a new `mxc://` URI without uploading the content.
+      summary: Create a new content URI without uploading the content.
       description: |-
-        Creates a new `mxc://` URI, independently of the content being uploaded. The content must be provided later
-        via [`PUT /_matrix/media/v3/upload/{serverName}/{mediaId}`](/client-server-api/#put_matrixmediav3uploadservernamemediaid).
+        Creates a new content URI, independently of the content being uploaded. The content must be provided later
+        via [`PUT /v1/media/upload/{serverName}/{mediaId}`].
 
         The server may optionally enforce a maximum age for unused IDs,
         and delete media IDs when the client doesn't start the upload in time,
@@ -175,9 +191,9 @@ paths:
         to accommodate users on poor connection who find a better connection to
         complete the upload.
 
-        As well as limiting the rate of requests to create `mxc://` URIs, the server
+        As well as limiting the rate of requests to create content URIs, the server
         should limit the number of concurrent *pending media uploads* a given
-        user can have. A pending media upload is a created `mxc://` URI where (a)
+        user can have. A pending media upload is a created content URI where (a)
         the media has not yet been uploaded, and (b) has not yet expired (the
         `unused_expires_at` timestamp has not yet passed). In both cases, the
         server should respond with an HTTP 429 error with an code of
@@ -188,7 +204,7 @@ paths:
       # empty json object
       responses:
         "200":
-          description: The [`mxc://` URI](/client-server-api/#matrix-content-mxc-uris) for the uploaded content.
+          description: The content URI for the uploaded content.
           content:
             application/json:
               schema:
@@ -198,12 +214,10 @@ paths:
                 properties:
                   content_uri:
                     type: string
-                    format: mx-mxc-uri
-                    pattern: "^mxc:\\/\\/"
+                    format: uri
                     description: |-
-                      The [`mxc://` URI](/client-server-api/#matrix-content-mxc-uris) at
-                      which the content will be available, once it is uploaded.
-                    example: mxc://example.com/AQwafuaFswefuhsfAFAgsw
+                      The content URI at which the content will be available, once it is uploaded.
+                    example: https://example.com/v1/media/download/example.com/AQwafuaFswefuhsfAFAgsw
                   unused_expires_at:
                     type: integer
                     format: int64
@@ -585,14 +599,13 @@ paths:
                   og:image:
                     type: string
                     format: uri
-                    description: An [`mxc://` URI](/client-server-api/#matrix-content-mxc-uris) to
-                      the image. Omitted if there is no image.
+                    description: A content URI to the image. Omitted if there is no image.
               examples:
                 response:
                   value: {
-                    "og:title": "Matrix Blog Post",
-                    "og:description": "This is a really cool blog post from matrix.org",
-                    "og:image": "mxc://example.com/ascERGshawAWawugaAcauga",
+                    "og:title": "Blog Post",
+                    "og:description": "This is a really cool blog post",
+                    "og:image": "https://example.com/v1/media/download/example.com/ascERGshawAWawugaAcauga",
                     "og:image:type": "image/png",
                     "og:image:height": 48,
                     "og:image:width": 48,
@@ -777,7 +790,7 @@ servers:
       hostname:
         default: media.antinvestor.com
       basePath:
-        default: /_matrix/client/v1
+        default: /v1
 components:
   securitySchemes:
     accessTokenBearer:
@@ -818,17 +831,16 @@ components:
       name: serverName
       required: true
       description: |
-        The server name from the `mxc://` URI (the authority component).
-      example: matrix.org
+        The server name from the content URI (the authority component).
+      example: cdn.example.com
       schema:
         type: string
-        format: mx-server-name
     mediaId:
       in: path
       name: mediaId
       required: true
       description: |
-        The media ID from the `mxc://` URI (the path component).
+        The media ID from the content URI.
       example: ascERGshawAWawugaAcauga
       schema:
         type: string
@@ -875,7 +887,7 @@ components:
             $ref: definitions/errors/rate_limited.yaml
     notYetUploaded:
       description: |-
-        The content is not yet available. A [standard error response](/client-server-api/#standard-error-response)
+        The content is not yet available. A standard error response
         will be returned with the `code` `M_NOT_YET_UPLOADED`.
       content:
         application/json:

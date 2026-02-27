@@ -167,7 +167,7 @@ class MediaMetadata extends $pb.GeneratedMessage {
 
   /// Unique identifier for this media.
   /// Format: alphanumeric with hyphens/underscores, 3-40 characters.
-  /// Example: "abc123xyz" from mxc://server.com/abc123xyz
+  /// Example: "abc123xyz"
   @$pb.TagNumber(1)
   $core.String get mediaId => $_getSZ(0);
   @$pb.TagNumber(1)
@@ -365,9 +365,9 @@ class MediaMetadata extends $pb.GeneratedMessage {
   @$pb.TagNumber(20)
   $core.Map<$core.String, $core.String> get labels => $_getMap(14);
 
-  /// Full MXC URI for this content.
-  /// Format: mxc://<server_name>/<media_id>
-  /// Example: mxc://cdn.example.com/abc123xyz
+  /// Full content URI for this content.
+  /// Format: https://<server_name>/v1/media/download/<server_name>/<media_id>
+  /// Example: https://cdn.example.com/v1/media/download/cdn.example.com/abc123xyz
   @$pb.TagNumber(21)
   $core.String get contentUri => $_getSZ(15);
   @$pb.TagNumber(21)
@@ -604,7 +604,7 @@ class AccessGrant extends $pb.GeneratedMessage {
 ///
 ///  Pattern 1: New Upload
 ///    Send metadata (without server_name/media_id), then chunks.
-///    Server generates new media_id and returns complete MXC URI.
+///    Server generates new media_id and returns complete content URI.
 ///
 ///  Pattern 2: Upload to Pre-created URI
 ///    First call CreateContent to reserve a URI, then:
@@ -797,8 +797,8 @@ class UploadMetadata extends $pb.GeneratedMessage {
   @$pb.TagNumber(7)
   $0.Timestamp ensureExpiresAt() => $_ensure(5);
 
-  /// Server name from pre-created MXC URI.
-  /// Format: "cdn.example.com" from "mxc://cdn.example.com/abc123"
+  /// Server name from pre-created content URI.
+  /// Format: "cdn.example.com"
   /// Required for Pattern 2 (upload to pre-created URI).
   @$pb.TagNumber(8)
   $core.String get serverName => $_getSZ(6);
@@ -809,8 +809,8 @@ class UploadMetadata extends $pb.GeneratedMessage {
   @$pb.TagNumber(8)
   void clearServerName() => clearField(8);
 
-  /// Media ID from pre-created MXC URI.
-  /// Format: "abc123" from "mxc://cdn.example.com/abc123"
+  /// Media ID from pre-created content URI.
+  /// Format: "abc123"
   /// Must match pattern [0-9a-z_-]{3,40}
   /// Required for Pattern 2 (upload to pre-created URI).
   @$pb.TagNumber(9)
@@ -1085,9 +1085,9 @@ class UploadContentResponse extends $pb.GeneratedMessage {
   static UploadContentResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UploadContentResponse>(create);
   static UploadContentResponse? _defaultInstance;
 
-  /// Full MXC URI for the uploaded content.
-  /// Format: mxc://<server>/<media_id>
-  /// Example: mxc://cdn.example.com/abc123xyz
+  /// Full content URI for the uploaded content.
+  /// Format: https://<server>/v1/media/download/<server_name>/<media_id>
+  /// Example: https://cdn.example.com/v1/media/download/cdn.example.com/abc123xyz
   @$pb.TagNumber(1)
   $core.String get contentUri => $_getSZ(0);
   @$pb.TagNumber(1)
@@ -1133,7 +1133,7 @@ class UploadContentResponse extends $pb.GeneratedMessage {
   MediaMetadata ensureMetadata() => $_ensure(3);
 }
 
-///  CreateContentRequest creates a new MXC URI without uploading content.
+///  CreateContentRequest creates a new content URI without uploading content.
 ///
 ///  This reserves a URI that can be used later for actual upload.
 ///  The URI remains reserved until content is uploaded or expires.
@@ -1299,7 +1299,7 @@ class CreateContentRequest extends $pb.GeneratedMessage {
   void clearIdempotencyKey() => clearField(100);
 }
 
-/// CreateContentResponse contains the pre-created MXC URI.
+/// CreateContentResponse contains the pre-created content URI.
 class CreateContentResponse extends $pb.GeneratedMessage {
   factory CreateContentResponse({
     $core.String? contentUri,
@@ -1355,7 +1355,7 @@ class CreateContentResponse extends $pb.GeneratedMessage {
   static CreateContentResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateContentResponse>(create);
   static CreateContentResponse? _defaultInstance;
 
-  /// Full MXC URI for future upload.
+  /// Full content URI for future upload.
   /// Use server_name + media_id in UploadMetadata to upload.
   @$pb.TagNumber(1)
   $core.String get contentUri => $_getSZ(0);

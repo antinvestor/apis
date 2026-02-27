@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.53.17] - 2026-2-27
+
+### Changed
+
+- Better document api feature for easier usage
+
 ## [1.53.16] - 2026-2-22
 
 ### Changed
@@ -91,6 +97,6 @@
 
 - Initial release of Files SDK for Dart
 - File upload and download support
-- Media management with MXC URIs
+- Media management with content URIs
 - Thumbnail generation
 - URL preview support

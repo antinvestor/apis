@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Files Management API
-  description: Comprehensive file and media management API supporting upload, download, thumbnails, versioning, retention, and search. Files are identified via MXC URIs (mxc://server/media_id) following Matrix patterns.
+  description: Comprehensive file and media management API supporting upload, download, thumbnails, versioning, retention, and search. Files are identified via content URIs using HTTPS API paths (e.g. /v1/media/download/{serverName}/{mediaId}).
   contact:
     name: Ant Investor Ltd
     url: https://github.com/antinvestor/apis
@@ -217,8 +217,8 @@ paths:
       tags:
         - Media
         - files.v1.FilesService
-      summary: Create pre-allocated MXC URI
-      description: Creates an MXC URI without uploading content. Use returned server_name and media_id with UploadContent to complete the upload later.
+      summary: Create pre-allocated content URI
+      description: Creates a content URI without uploading content. Use returned server_name and media_id with UploadContent to complete the upload later.
       operationId: createContent
       parameters:
         - name: Connect-Protocol-Version
@@ -2490,7 +2490,7 @@ components:
       title: CreateContentRequest
       additionalProperties: false
       description: |-
-        CreateContentRequest creates a new MXC URI without uploading content.
+        CreateContentRequest creates a new content URI without uploading content.
 
          This reserves a URI that can be used later for actual upload.
          The URI remains reserved until content is uploaded or expires.
@@ -2521,7 +2521,7 @@ components:
           type: string
           title: content_uri
           description: |-
-            Full MXC URI for future upload.
+            Full content URI for future upload.
              Use server_name + media_id in UploadMetadata to upload.
         expiresAt:
           title: expires_at
@@ -2537,7 +2537,7 @@ components:
           description: Server name component of the URI.
       title: CreateContentResponse
       additionalProperties: false
-      description: CreateContentResponse contains the pre-created MXC URI.
+      description: CreateContentResponse contains the pre-created content URI.
     files.v1.CreateMultipartUploadRequest:
       type: object
       properties:
@@ -3543,7 +3543,7 @@ components:
           description: |-
             Unique identifier for this media.
              Format: alphanumeric with hyphens/underscores, 3-40 characters.
-             Example: "abc123xyz" from mxc://server.com/abc123xyz
+             Example: "abc123xyz"
         contentType:
           type: string
           title: content_type
@@ -3688,9 +3688,9 @@ components:
           type: string
           title: content_uri
           description: |-
-            Full MXC URI for this content.
-             Format: mxc://<server_name>/<media_id>
-             Example: mxc://cdn.example.com/abc123xyz
+            Full content URI for this content.
+             Format: https://<server_name>/v1/media/download/<server_name>/<media_id>
+             Example: https://cdn.example.com/v1/media/download/cdn.example.com/abc123xyz
         organizationId:
           type: string
           title: organization_id
@@ -4289,9 +4289,9 @@ components:
           type: string
           title: content_uri
           description: |-
-            Full MXC URI for the uploaded content.
-             Format: mxc://<server>/<media_id>
-             Example: mxc://cdn.example.com/abc123xyz
+            Full content URI for the uploaded content.
+             Format: https://<server>/v1/media/download/<server_name>/<media_id>
+             Example: https://cdn.example.com/v1/media/download/cdn.example.com/abc123xyz
         mediaId:
           type: string
           title: media_id
@@ -4379,8 +4379,8 @@ components:
           type: string
           title: server_name
           description: |-
-            Server name from pre-created MXC URI.
-             Format: "cdn.example.com" from "mxc://cdn.example.com/abc123"
+            Server name from pre-created content URI.
+             Format: "cdn.example.com"
              Required for Pattern 2 (upload to pre-created URI).
         mediaId:
           type: string
@@ -4389,8 +4389,8 @@ components:
           minLength: 3
           pattern: '[0-9a-z_-]{3,40}'
           description: |-
-            Media ID from pre-created MXC URI.
-             Format: "abc123" from "mxc://cdn.example.com/abc123"
+            Media ID from pre-created content URI.
+             Format: "abc123"
              Must match pattern [0-9a-z_-]{3,40}
              Required for Pattern 2 (upload to pre-created URI).
         checksumSha256:
@@ -4468,7 +4468,7 @@ components:
 
          Pattern 1: New Upload
            Send metadata (without server_name/media_id), then chunks.
-           Server generates new media_id and returns complete MXC URI.
+           Server generates new media_id and returns complete content URI.
 
          Pattern 2: Upload to Pre-created URI
            First call CreateContent to reserve a URI, then:

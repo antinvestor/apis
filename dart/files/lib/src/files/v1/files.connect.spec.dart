@@ -41,7 +41,7 @@ abstract final class FilesService {
     filesv1files.UploadContentResponse.new,
   );
 
-  /// CreateContent pre-allocates an MXC URI for future upload.
+  /// CreateContent pre-allocates a content URI for future upload.
   /// Use when you need the URI before content is ready,
   /// or for implementing resumable uploads.
   static const createContent = connect.Spec(

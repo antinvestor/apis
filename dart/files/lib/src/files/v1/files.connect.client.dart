@@ -49,7 +49,7 @@ extension type FilesServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// CreateContent pre-allocates an MXC URI for future upload.
+  /// CreateContent pre-allocates a content URI for future upload.
   /// Use when you need the URI before content is ready,
   /// or for implementing resumable uploads.
   Future<filesv1files.CreateContentResponse> createContent(
