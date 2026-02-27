@@ -1,11 +1,9 @@
 name: Test Api
 
-on: [ push ]
+on: [push]
 
 jobs:
-
   build:
-
     permissions:
       contents: read
     runs-on: ubuntu-latest
@@ -16,10 +14,9 @@ jobs:
       - name: Setup go testing infrastructure
         uses: actions/setup-go@v6
         with:
-          go-version: 'stable'
+          go-version: "stable"
 
       - name: Run build setup
         env:
-          GOTOOLCHAIN: go1.25.0+auto
           BUF_TOKEN: ${{ secrets.BUF_TOKEN }}
         run: make
