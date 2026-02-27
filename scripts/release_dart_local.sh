@@ -16,7 +16,7 @@ echo ""
 
 if [ "$PACKAGES" = "all" ]; then
   # Release all packages in dependency order
-  PACKAGES="common chat device notification ocr partition payment profile property settings ledger lostid files commerce"
+  PACKAGES="common chat device notification ocr partition payment profile property settings ledger files commerce"
 fi
 
 FAILED_PACKAGES=""

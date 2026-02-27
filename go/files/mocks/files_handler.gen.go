@@ -69,6 +69,27 @@ type FilesServiceClientMock struct {
 	beforeDeleteContentCounter uint64
 	DeleteContentMock          mFilesServiceClientMockDeleteContent
 
+	funcDownloadContent          func(ctx context.Context, pp1 *connect.Request[v1.DownloadContentRequest]) (pp2 *connect.ServerStreamForClient[v1.DownloadContentResponse], err error)
+	funcDownloadContentOrigin    string
+	inspectFuncDownloadContent   func(ctx context.Context, pp1 *connect.Request[v1.DownloadContentRequest])
+	afterDownloadContentCounter  uint64
+	beforeDownloadContentCounter uint64
+	DownloadContentMock          mFilesServiceClientMockDownloadContent
+
+	funcDownloadContentRange          func(ctx context.Context, pp1 *connect.Request[v1.DownloadContentRangeRequest]) (pp2 *connect.ServerStreamForClient[v1.DownloadContentRangeResponse], err error)
+	funcDownloadContentRangeOrigin    string
+	inspectFuncDownloadContentRange   func(ctx context.Context, pp1 *connect.Request[v1.DownloadContentRangeRequest])
+	afterDownloadContentRangeCounter  uint64
+	beforeDownloadContentRangeCounter uint64
+	DownloadContentRangeMock          mFilesServiceClientMockDownloadContentRange
+
+	funcFinalizeSignedUpload          func(ctx context.Context, pp1 *connect.Request[v1.FinalizeSignedUploadRequest]) (pp2 *connect.Response[v1.FinalizeSignedUploadResponse], err error)
+	funcFinalizeSignedUploadOrigin    string
+	inspectFuncFinalizeSignedUpload   func(ctx context.Context, pp1 *connect.Request[v1.FinalizeSignedUploadRequest])
+	afterFinalizeSignedUploadCounter  uint64
+	beforeFinalizeSignedUploadCounter uint64
+	FinalizeSignedUploadMock          mFilesServiceClientMockFinalizeSignedUpload
+
 	funcGetConfig          func(ctx context.Context, pp1 *connect.Request[v1.GetConfigRequest]) (pp2 *connect.Response[v1.GetConfigResponse], err error)
 	funcGetConfigOrigin    string
 	inspectFuncGetConfig   func(ctx context.Context, pp1 *connect.Request[v1.GetConfigRequest])
@@ -96,6 +117,13 @@ type FilesServiceClientMock struct {
 	afterGetContentThumbnailCounter  uint64
 	beforeGetContentThumbnailCounter uint64
 	GetContentThumbnailMock          mFilesServiceClientMockGetContentThumbnail
+
+	funcGetMultipartUpload          func(ctx context.Context, pp1 *connect.Request[v1.GetMultipartUploadRequest]) (pp2 *connect.Response[v1.GetMultipartUploadResponse], err error)
+	funcGetMultipartUploadOrigin    string
+	inspectFuncGetMultipartUpload   func(ctx context.Context, pp1 *connect.Request[v1.GetMultipartUploadRequest])
+	afterGetMultipartUploadCounter  uint64
+	beforeGetMultipartUploadCounter uint64
+	GetMultipartUploadMock          mFilesServiceClientMockGetMultipartUpload
 
 	funcGetRetentionPolicy          func(ctx context.Context, pp1 *connect.Request[v1.GetRetentionPolicyRequest]) (pp2 *connect.Response[v1.GetRetentionPolicyResponse], err error)
 	funcGetRetentionPolicyOrigin    string
@@ -146,12 +174,26 @@ type FilesServiceClientMock struct {
 	beforeGetVersionsCounter uint64
 	GetVersionsMock          mFilesServiceClientMockGetVersions
 
+	funcGrantAccess          func(ctx context.Context, pp1 *connect.Request[v1.GrantAccessRequest]) (pp2 *connect.Response[v1.GrantAccessResponse], err error)
+	funcGrantAccessOrigin    string
+	inspectFuncGrantAccess   func(ctx context.Context, pp1 *connect.Request[v1.GrantAccessRequest])
+	afterGrantAccessCounter  uint64
+	beforeGrantAccessCounter uint64
+	GrantAccessMock          mFilesServiceClientMockGrantAccess
+
 	funcHeadContent          func(ctx context.Context, pp1 *connect.Request[v1.HeadContentRequest]) (pp2 *connect.Response[v1.HeadContentResponse], err error)
 	funcHeadContentOrigin    string
 	inspectFuncHeadContent   func(ctx context.Context, pp1 *connect.Request[v1.HeadContentRequest])
 	afterHeadContentCounter  uint64
 	beforeHeadContentCounter uint64
 	HeadContentMock          mFilesServiceClientMockHeadContent
+
+	funcListAccess          func(ctx context.Context, pp1 *connect.Request[v1.ListAccessRequest]) (pp2 *connect.Response[v1.ListAccessResponse], err error)
+	funcListAccessOrigin    string
+	inspectFuncListAccess   func(ctx context.Context, pp1 *connect.Request[v1.ListAccessRequest])
+	afterListAccessCounter  uint64
+	beforeListAccessCounter uint64
+	ListAccessMock          mFilesServiceClientMockListAccess
 
 	funcListMultipartParts          func(ctx context.Context, pp1 *connect.Request[v1.ListMultipartPartsRequest]) (pp2 *connect.Response[v1.ListMultipartPartsResponse], err error)
 	funcListMultipartPartsOrigin    string
@@ -167,12 +209,26 @@ type FilesServiceClientMock struct {
 	beforeListRetentionPoliciesCounter uint64
 	ListRetentionPoliciesMock          mFilesServiceClientMockListRetentionPolicies
 
+	funcPatchContent          func(ctx context.Context, pp1 *connect.Request[v1.PatchContentRequest]) (pp2 *connect.Response[v1.PatchContentResponse], err error)
+	funcPatchContentOrigin    string
+	inspectFuncPatchContent   func(ctx context.Context, pp1 *connect.Request[v1.PatchContentRequest])
+	afterPatchContentCounter  uint64
+	beforePatchContentCounter uint64
+	PatchContentMock          mFilesServiceClientMockPatchContent
+
 	funcRestoreVersion          func(ctx context.Context, pp1 *connect.Request[v1.RestoreVersionRequest]) (pp2 *connect.Response[v1.RestoreVersionResponse], err error)
 	funcRestoreVersionOrigin    string
 	inspectFuncRestoreVersion   func(ctx context.Context, pp1 *connect.Request[v1.RestoreVersionRequest])
 	afterRestoreVersionCounter  uint64
 	beforeRestoreVersionCounter uint64
 	RestoreVersionMock          mFilesServiceClientMockRestoreVersion
+
+	funcRevokeAccess          func(ctx context.Context, pp1 *connect.Request[v1.RevokeAccessRequest]) (pp2 *connect.Response[v1.RevokeAccessResponse], err error)
+	funcRevokeAccessOrigin    string
+	inspectFuncRevokeAccess   func(ctx context.Context, pp1 *connect.Request[v1.RevokeAccessRequest])
+	afterRevokeAccessCounter  uint64
+	beforeRevokeAccessCounter uint64
+	RevokeAccessMock          mFilesServiceClientMockRevokeAccess
 
 	funcSearchMedia          func(ctx context.Context, pp1 *connect.Request[v1.SearchMediaRequest]) (pp2 *connect.Response[v1.SearchMediaResponse], err error)
 	funcSearchMediaOrigin    string
@@ -232,6 +288,15 @@ func NewFilesServiceClientMock(t minimock.Tester) *FilesServiceClientMock {
 	m.DeleteContentMock = mFilesServiceClientMockDeleteContent{mock: m}
 	m.DeleteContentMock.callArgs = []*FilesServiceClientMockDeleteContentParams{}
 
+	m.DownloadContentMock = mFilesServiceClientMockDownloadContent{mock: m}
+	m.DownloadContentMock.callArgs = []*FilesServiceClientMockDownloadContentParams{}
+
+	m.DownloadContentRangeMock = mFilesServiceClientMockDownloadContentRange{mock: m}
+	m.DownloadContentRangeMock.callArgs = []*FilesServiceClientMockDownloadContentRangeParams{}
+
+	m.FinalizeSignedUploadMock = mFilesServiceClientMockFinalizeSignedUpload{mock: m}
+	m.FinalizeSignedUploadMock.callArgs = []*FilesServiceClientMockFinalizeSignedUploadParams{}
+
 	m.GetConfigMock = mFilesServiceClientMockGetConfig{mock: m}
 	m.GetConfigMock.callArgs = []*FilesServiceClientMockGetConfigParams{}
 
@@ -243,6 +308,9 @@ func NewFilesServiceClientMock(t minimock.Tester) *FilesServiceClientMock {
 
 	m.GetContentThumbnailMock = mFilesServiceClientMockGetContentThumbnail{mock: m}
 	m.GetContentThumbnailMock.callArgs = []*FilesServiceClientMockGetContentThumbnailParams{}
+
+	m.GetMultipartUploadMock = mFilesServiceClientMockGetMultipartUpload{mock: m}
+	m.GetMultipartUploadMock.callArgs = []*FilesServiceClientMockGetMultipartUploadParams{}
 
 	m.GetRetentionPolicyMock = mFilesServiceClientMockGetRetentionPolicy{mock: m}
 	m.GetRetentionPolicyMock.callArgs = []*FilesServiceClientMockGetRetentionPolicyParams{}
@@ -265,8 +333,14 @@ func NewFilesServiceClientMock(t minimock.Tester) *FilesServiceClientMock {
 	m.GetVersionsMock = mFilesServiceClientMockGetVersions{mock: m}
 	m.GetVersionsMock.callArgs = []*FilesServiceClientMockGetVersionsParams{}
 
+	m.GrantAccessMock = mFilesServiceClientMockGrantAccess{mock: m}
+	m.GrantAccessMock.callArgs = []*FilesServiceClientMockGrantAccessParams{}
+
 	m.HeadContentMock = mFilesServiceClientMockHeadContent{mock: m}
 	m.HeadContentMock.callArgs = []*FilesServiceClientMockHeadContentParams{}
+
+	m.ListAccessMock = mFilesServiceClientMockListAccess{mock: m}
+	m.ListAccessMock.callArgs = []*FilesServiceClientMockListAccessParams{}
 
 	m.ListMultipartPartsMock = mFilesServiceClientMockListMultipartParts{mock: m}
 	m.ListMultipartPartsMock.callArgs = []*FilesServiceClientMockListMultipartPartsParams{}
@@ -274,8 +348,14 @@ func NewFilesServiceClientMock(t minimock.Tester) *FilesServiceClientMock {
 	m.ListRetentionPoliciesMock = mFilesServiceClientMockListRetentionPolicies{mock: m}
 	m.ListRetentionPoliciesMock.callArgs = []*FilesServiceClientMockListRetentionPoliciesParams{}
 
+	m.PatchContentMock = mFilesServiceClientMockPatchContent{mock: m}
+	m.PatchContentMock.callArgs = []*FilesServiceClientMockPatchContentParams{}
+
 	m.RestoreVersionMock = mFilesServiceClientMockRestoreVersion{mock: m}
 	m.RestoreVersionMock.callArgs = []*FilesServiceClientMockRestoreVersionParams{}
+
+	m.RevokeAccessMock = mFilesServiceClientMockRevokeAccess{mock: m}
+	m.RevokeAccessMock.callArgs = []*FilesServiceClientMockRevokeAccessParams{}
 
 	m.SearchMediaMock = mFilesServiceClientMockSearchMedia{mock: m}
 	m.SearchMediaMock.callArgs = []*FilesServiceClientMockSearchMediaParams{}
@@ -2695,6 +2775,1035 @@ func (m *FilesServiceClientMock) MinimockDeleteContentInspect() {
 	}
 }
 
+type mFilesServiceClientMockDownloadContent struct {
+	optional           bool
+	mock               *FilesServiceClientMock
+	defaultExpectation *FilesServiceClientMockDownloadContentExpectation
+	expectations       []*FilesServiceClientMockDownloadContentExpectation
+
+	callArgs []*FilesServiceClientMockDownloadContentParams
+	mutex    sync.RWMutex
+
+	expectedInvocations       uint64
+	expectedInvocationsOrigin string
+}
+
+// FilesServiceClientMockDownloadContentExpectation specifies expectation struct of the FilesServiceClient.DownloadContent
+type FilesServiceClientMockDownloadContentExpectation struct {
+	mock               *FilesServiceClientMock
+	params             *FilesServiceClientMockDownloadContentParams
+	paramPtrs          *FilesServiceClientMockDownloadContentParamPtrs
+	expectationOrigins FilesServiceClientMockDownloadContentExpectationOrigins
+	results            *FilesServiceClientMockDownloadContentResults
+	returnOrigin       string
+	Counter            uint64
+}
+
+// FilesServiceClientMockDownloadContentParams contains parameters of the FilesServiceClient.DownloadContent
+type FilesServiceClientMockDownloadContentParams struct {
+	ctx context.Context
+	pp1 *connect.Request[v1.DownloadContentRequest]
+}
+
+// FilesServiceClientMockDownloadContentParamPtrs contains pointers to parameters of the FilesServiceClient.DownloadContent
+type FilesServiceClientMockDownloadContentParamPtrs struct {
+	ctx *context.Context
+	pp1 **connect.Request[v1.DownloadContentRequest]
+}
+
+// FilesServiceClientMockDownloadContentResults contains results of the FilesServiceClient.DownloadContent
+type FilesServiceClientMockDownloadContentResults struct {
+	pp2 *connect.ServerStreamForClient[v1.DownloadContentResponse]
+	err error
+}
+
+// FilesServiceClientMockDownloadContentOrigins contains origins of expectations of the FilesServiceClient.DownloadContent
+type FilesServiceClientMockDownloadContentExpectationOrigins struct {
+	origin    string
+	originCtx string
+	originPp1 string
+}
+
+// Marks this method to be optional. The default behavior of any method with Return() is '1 or more', meaning
+// the test will fail minimock's automatic final call check if the mocked method was not called at least once.
+// Optional() makes method check to work in '0 or more' mode.
+// It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
+// catch the problems when the expected method call is totally skipped during test run.
+func (mmDownloadContent *mFilesServiceClientMockDownloadContent) Optional() *mFilesServiceClientMockDownloadContent {
+	mmDownloadContent.optional = true
+	return mmDownloadContent
+}
+
+// Expect sets up expected params for FilesServiceClient.DownloadContent
+func (mmDownloadContent *mFilesServiceClientMockDownloadContent) Expect(ctx context.Context, pp1 *connect.Request[v1.DownloadContentRequest]) *mFilesServiceClientMockDownloadContent {
+	if mmDownloadContent.mock.funcDownloadContent != nil {
+		mmDownloadContent.mock.t.Fatalf("FilesServiceClientMock.DownloadContent mock is already set by Set")
+	}
+
+	if mmDownloadContent.defaultExpectation == nil {
+		mmDownloadContent.defaultExpectation = &FilesServiceClientMockDownloadContentExpectation{}
+	}
+
+	if mmDownloadContent.defaultExpectation.paramPtrs != nil {
+		mmDownloadContent.mock.t.Fatalf("FilesServiceClientMock.DownloadContent mock is already set by ExpectParams functions")
+	}
+
+	mmDownloadContent.defaultExpectation.params = &FilesServiceClientMockDownloadContentParams{ctx, pp1}
+	mmDownloadContent.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
+	for _, e := range mmDownloadContent.expectations {
+		if minimock.Equal(e.params, mmDownloadContent.defaultExpectation.params) {
+			mmDownloadContent.mock.t.Fatalf("Expectation set by When has same params: %#v", *mmDownloadContent.defaultExpectation.params)
+		}
+	}
+
+	return mmDownloadContent
+}
+
+// ExpectCtxParam1 sets up expected param ctx for FilesServiceClient.DownloadContent
+func (mmDownloadContent *mFilesServiceClientMockDownloadContent) ExpectCtxParam1(ctx context.Context) *mFilesServiceClientMockDownloadContent {
+	if mmDownloadContent.mock.funcDownloadContent != nil {
+		mmDownloadContent.mock.t.Fatalf("FilesServiceClientMock.DownloadContent mock is already set by Set")
+	}
+
+	if mmDownloadContent.defaultExpectation == nil {
+		mmDownloadContent.defaultExpectation = &FilesServiceClientMockDownloadContentExpectation{}
+	}
+
+	if mmDownloadContent.defaultExpectation.params != nil {
+		mmDownloadContent.mock.t.Fatalf("FilesServiceClientMock.DownloadContent mock is already set by Expect")
+	}
+
+	if mmDownloadContent.defaultExpectation.paramPtrs == nil {
+		mmDownloadContent.defaultExpectation.paramPtrs = &FilesServiceClientMockDownloadContentParamPtrs{}
+	}
+	mmDownloadContent.defaultExpectation.paramPtrs.ctx = &ctx
+	mmDownloadContent.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
+
+	return mmDownloadContent
+}
+
+// ExpectPp1Param2 sets up expected param pp1 for FilesServiceClient.DownloadContent
+func (mmDownloadContent *mFilesServiceClientMockDownloadContent) ExpectPp1Param2(pp1 *connect.Request[v1.DownloadContentRequest]) *mFilesServiceClientMockDownloadContent {
+	if mmDownloadContent.mock.funcDownloadContent != nil {
+		mmDownloadContent.mock.t.Fatalf("FilesServiceClientMock.DownloadContent mock is already set by Set")
+	}
+
+	if mmDownloadContent.defaultExpectation == nil {
+		mmDownloadContent.defaultExpectation = &FilesServiceClientMockDownloadContentExpectation{}
+	}
+
+	if mmDownloadContent.defaultExpectation.params != nil {
+		mmDownloadContent.mock.t.Fatalf("FilesServiceClientMock.DownloadContent mock is already set by Expect")
+	}
+
+	if mmDownloadContent.defaultExpectation.paramPtrs == nil {
+		mmDownloadContent.defaultExpectation.paramPtrs = &FilesServiceClientMockDownloadContentParamPtrs{}
+	}
+	mmDownloadContent.defaultExpectation.paramPtrs.pp1 = &pp1
+	mmDownloadContent.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
+
+	return mmDownloadContent
+}
+
+// Inspect accepts an inspector function that has same arguments as the FilesServiceClient.DownloadContent
+func (mmDownloadContent *mFilesServiceClientMockDownloadContent) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.DownloadContentRequest])) *mFilesServiceClientMockDownloadContent {
+	if mmDownloadContent.mock.inspectFuncDownloadContent != nil {
+		mmDownloadContent.mock.t.Fatalf("Inspect function is already set for FilesServiceClientMock.DownloadContent")
+	}
+
+	mmDownloadContent.mock.inspectFuncDownloadContent = f
+
+	return mmDownloadContent
+}
+
+// Return sets up results that will be returned by FilesServiceClient.DownloadContent
+func (mmDownloadContent *mFilesServiceClientMockDownloadContent) Return(pp2 *connect.ServerStreamForClient[v1.DownloadContentResponse], err error) *FilesServiceClientMock {
+	if mmDownloadContent.mock.funcDownloadContent != nil {
+		mmDownloadContent.mock.t.Fatalf("FilesServiceClientMock.DownloadContent mock is already set by Set")
+	}
+
+	if mmDownloadContent.defaultExpectation == nil {
+		mmDownloadContent.defaultExpectation = &FilesServiceClientMockDownloadContentExpectation{mock: mmDownloadContent.mock}
+	}
+	mmDownloadContent.defaultExpectation.results = &FilesServiceClientMockDownloadContentResults{pp2, err}
+	mmDownloadContent.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
+	return mmDownloadContent.mock
+}
+
+// Set uses given function f to mock the FilesServiceClient.DownloadContent method
+func (mmDownloadContent *mFilesServiceClientMockDownloadContent) Set(f func(ctx context.Context, pp1 *connect.Request[v1.DownloadContentRequest]) (pp2 *connect.ServerStreamForClient[v1.DownloadContentResponse], err error)) *FilesServiceClientMock {
+	if mmDownloadContent.defaultExpectation != nil {
+		mmDownloadContent.mock.t.Fatalf("Default expectation is already set for the FilesServiceClient.DownloadContent method")
+	}
+
+	if len(mmDownloadContent.expectations) > 0 {
+		mmDownloadContent.mock.t.Fatalf("Some expectations are already set for the FilesServiceClient.DownloadContent method")
+	}
+
+	mmDownloadContent.mock.funcDownloadContent = f
+	mmDownloadContent.mock.funcDownloadContentOrigin = minimock.CallerInfo(1)
+	return mmDownloadContent.mock
+}
+
+// When sets expectation for the FilesServiceClient.DownloadContent which will trigger the result defined by the following
+// Then helper
+func (mmDownloadContent *mFilesServiceClientMockDownloadContent) When(ctx context.Context, pp1 *connect.Request[v1.DownloadContentRequest]) *FilesServiceClientMockDownloadContentExpectation {
+	if mmDownloadContent.mock.funcDownloadContent != nil {
+		mmDownloadContent.mock.t.Fatalf("FilesServiceClientMock.DownloadContent mock is already set by Set")
+	}
+
+	expectation := &FilesServiceClientMockDownloadContentExpectation{
+		mock:               mmDownloadContent.mock,
+		params:             &FilesServiceClientMockDownloadContentParams{ctx, pp1},
+		expectationOrigins: FilesServiceClientMockDownloadContentExpectationOrigins{origin: minimock.CallerInfo(1)},
+	}
+	mmDownloadContent.expectations = append(mmDownloadContent.expectations, expectation)
+	return expectation
+}
+
+// Then sets up FilesServiceClient.DownloadContent return parameters for the expectation previously defined by the When method
+func (e *FilesServiceClientMockDownloadContentExpectation) Then(pp2 *connect.ServerStreamForClient[v1.DownloadContentResponse], err error) *FilesServiceClientMock {
+	e.results = &FilesServiceClientMockDownloadContentResults{pp2, err}
+	return e.mock
+}
+
+// Times sets number of times FilesServiceClient.DownloadContent should be invoked
+func (mmDownloadContent *mFilesServiceClientMockDownloadContent) Times(n uint64) *mFilesServiceClientMockDownloadContent {
+	if n == 0 {
+		mmDownloadContent.mock.t.Fatalf("Times of FilesServiceClientMock.DownloadContent mock can not be zero")
+	}
+	mm_atomic.StoreUint64(&mmDownloadContent.expectedInvocations, n)
+	mmDownloadContent.expectedInvocationsOrigin = minimock.CallerInfo(1)
+	return mmDownloadContent
+}
+
+func (mmDownloadContent *mFilesServiceClientMockDownloadContent) invocationsDone() bool {
+	if len(mmDownloadContent.expectations) == 0 && mmDownloadContent.defaultExpectation == nil && mmDownloadContent.mock.funcDownloadContent == nil {
+		return true
+	}
+
+	totalInvocations := mm_atomic.LoadUint64(&mmDownloadContent.mock.afterDownloadContentCounter)
+	expectedInvocations := mm_atomic.LoadUint64(&mmDownloadContent.expectedInvocations)
+
+	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
+}
+
+// DownloadContent implements mm_filesv1connect.FilesServiceClient
+func (mmDownloadContent *FilesServiceClientMock) DownloadContent(ctx context.Context, pp1 *connect.Request[v1.DownloadContentRequest]) (pp2 *connect.ServerStreamForClient[v1.DownloadContentResponse], err error) {
+	mm_atomic.AddUint64(&mmDownloadContent.beforeDownloadContentCounter, 1)
+	defer mm_atomic.AddUint64(&mmDownloadContent.afterDownloadContentCounter, 1)
+
+	mmDownloadContent.t.Helper()
+
+	if mmDownloadContent.inspectFuncDownloadContent != nil {
+		mmDownloadContent.inspectFuncDownloadContent(ctx, pp1)
+	}
+
+	mm_params := FilesServiceClientMockDownloadContentParams{ctx, pp1}
+
+	// Record call args
+	mmDownloadContent.DownloadContentMock.mutex.Lock()
+	mmDownloadContent.DownloadContentMock.callArgs = append(mmDownloadContent.DownloadContentMock.callArgs, &mm_params)
+	mmDownloadContent.DownloadContentMock.mutex.Unlock()
+
+	for _, e := range mmDownloadContent.DownloadContentMock.expectations {
+		if minimock.Equal(*e.params, mm_params) {
+			mm_atomic.AddUint64(&e.Counter, 1)
+			return e.results.pp2, e.results.err
+		}
+	}
+
+	if mmDownloadContent.DownloadContentMock.defaultExpectation != nil {
+		mm_atomic.AddUint64(&mmDownloadContent.DownloadContentMock.defaultExpectation.Counter, 1)
+		mm_want := mmDownloadContent.DownloadContentMock.defaultExpectation.params
+		mm_want_ptrs := mmDownloadContent.DownloadContentMock.defaultExpectation.paramPtrs
+
+		mm_got := FilesServiceClientMockDownloadContentParams{ctx, pp1}
+
+		if mm_want_ptrs != nil {
+
+			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
+				mmDownloadContent.t.Errorf("FilesServiceClientMock.DownloadContent got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+					mmDownloadContent.DownloadContentMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
+			}
+
+			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
+				mmDownloadContent.t.Errorf("FilesServiceClientMock.DownloadContent got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+					mmDownloadContent.DownloadContentMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
+			}
+
+		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
+			mmDownloadContent.t.Errorf("FilesServiceClientMock.DownloadContent got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmDownloadContent.DownloadContentMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
+		}
+
+		mm_results := mmDownloadContent.DownloadContentMock.defaultExpectation.results
+		if mm_results == nil {
+			mmDownloadContent.t.Fatal("No results are set for the FilesServiceClientMock.DownloadContent")
+		}
+		return (*mm_results).pp2, (*mm_results).err
+	}
+	if mmDownloadContent.funcDownloadContent != nil {
+		return mmDownloadContent.funcDownloadContent(ctx, pp1)
+	}
+	mmDownloadContent.t.Fatalf("Unexpected call to FilesServiceClientMock.DownloadContent. %v %v", ctx, pp1)
+	return
+}
+
+// DownloadContentAfterCounter returns a count of finished FilesServiceClientMock.DownloadContent invocations
+func (mmDownloadContent *FilesServiceClientMock) DownloadContentAfterCounter() uint64 {
+	return mm_atomic.LoadUint64(&mmDownloadContent.afterDownloadContentCounter)
+}
+
+// DownloadContentBeforeCounter returns a count of FilesServiceClientMock.DownloadContent invocations
+func (mmDownloadContent *FilesServiceClientMock) DownloadContentBeforeCounter() uint64 {
+	return mm_atomic.LoadUint64(&mmDownloadContent.beforeDownloadContentCounter)
+}
+
+// Calls returns a list of arguments used in each call to FilesServiceClientMock.DownloadContent.
+// The list is in the same order as the calls were made (i.e. recent calls have a higher index)
+func (mmDownloadContent *mFilesServiceClientMockDownloadContent) Calls() []*FilesServiceClientMockDownloadContentParams {
+	mmDownloadContent.mutex.RLock()
+
+	argCopy := make([]*FilesServiceClientMockDownloadContentParams, len(mmDownloadContent.callArgs))
+	copy(argCopy, mmDownloadContent.callArgs)
+
+	mmDownloadContent.mutex.RUnlock()
+
+	return argCopy
+}
+
+// MinimockDownloadContentDone returns true if the count of the DownloadContent invocations corresponds
+// the number of defined expectations
+func (m *FilesServiceClientMock) MinimockDownloadContentDone() bool {
+	if m.DownloadContentMock.optional {
+		// Optional methods provide '0 or more' call count restriction.
+		return true
+	}
+
+	for _, e := range m.DownloadContentMock.expectations {
+		if mm_atomic.LoadUint64(&e.Counter) < 1 {
+			return false
+		}
+	}
+
+	return m.DownloadContentMock.invocationsDone()
+}
+
+// MinimockDownloadContentInspect logs each unmet expectation
+func (m *FilesServiceClientMock) MinimockDownloadContentInspect() {
+	for _, e := range m.DownloadContentMock.expectations {
+		if mm_atomic.LoadUint64(&e.Counter) < 1 {
+			m.t.Errorf("Expected call to FilesServiceClientMock.DownloadContent at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+		}
+	}
+
+	afterDownloadContentCounter := mm_atomic.LoadUint64(&m.afterDownloadContentCounter)
+	// if default expectation was set then invocations count should be greater than zero
+	if m.DownloadContentMock.defaultExpectation != nil && afterDownloadContentCounter < 1 {
+		if m.DownloadContentMock.defaultExpectation.params == nil {
+			m.t.Errorf("Expected call to FilesServiceClientMock.DownloadContent at\n%s", m.DownloadContentMock.defaultExpectation.returnOrigin)
+		} else {
+			m.t.Errorf("Expected call to FilesServiceClientMock.DownloadContent at\n%s with params: %#v", m.DownloadContentMock.defaultExpectation.expectationOrigins.origin, *m.DownloadContentMock.defaultExpectation.params)
+		}
+	}
+	// if func was set then invocations count should be greater than zero
+	if m.funcDownloadContent != nil && afterDownloadContentCounter < 1 {
+		m.t.Errorf("Expected call to FilesServiceClientMock.DownloadContent at\n%s", m.funcDownloadContentOrigin)
+	}
+
+	if !m.DownloadContentMock.invocationsDone() && afterDownloadContentCounter > 0 {
+		m.t.Errorf("Expected %d calls to FilesServiceClientMock.DownloadContent at\n%s but found %d calls",
+			mm_atomic.LoadUint64(&m.DownloadContentMock.expectedInvocations), m.DownloadContentMock.expectedInvocationsOrigin, afterDownloadContentCounter)
+	}
+}
+
+type mFilesServiceClientMockDownloadContentRange struct {
+	optional           bool
+	mock               *FilesServiceClientMock
+	defaultExpectation *FilesServiceClientMockDownloadContentRangeExpectation
+	expectations       []*FilesServiceClientMockDownloadContentRangeExpectation
+
+	callArgs []*FilesServiceClientMockDownloadContentRangeParams
+	mutex    sync.RWMutex
+
+	expectedInvocations       uint64
+	expectedInvocationsOrigin string
+}
+
+// FilesServiceClientMockDownloadContentRangeExpectation specifies expectation struct of the FilesServiceClient.DownloadContentRange
+type FilesServiceClientMockDownloadContentRangeExpectation struct {
+	mock               *FilesServiceClientMock
+	params             *FilesServiceClientMockDownloadContentRangeParams
+	paramPtrs          *FilesServiceClientMockDownloadContentRangeParamPtrs
+	expectationOrigins FilesServiceClientMockDownloadContentRangeExpectationOrigins
+	results            *FilesServiceClientMockDownloadContentRangeResults
+	returnOrigin       string
+	Counter            uint64
+}
+
+// FilesServiceClientMockDownloadContentRangeParams contains parameters of the FilesServiceClient.DownloadContentRange
+type FilesServiceClientMockDownloadContentRangeParams struct {
+	ctx context.Context
+	pp1 *connect.Request[v1.DownloadContentRangeRequest]
+}
+
+// FilesServiceClientMockDownloadContentRangeParamPtrs contains pointers to parameters of the FilesServiceClient.DownloadContentRange
+type FilesServiceClientMockDownloadContentRangeParamPtrs struct {
+	ctx *context.Context
+	pp1 **connect.Request[v1.DownloadContentRangeRequest]
+}
+
+// FilesServiceClientMockDownloadContentRangeResults contains results of the FilesServiceClient.DownloadContentRange
+type FilesServiceClientMockDownloadContentRangeResults struct {
+	pp2 *connect.ServerStreamForClient[v1.DownloadContentRangeResponse]
+	err error
+}
+
+// FilesServiceClientMockDownloadContentRangeOrigins contains origins of expectations of the FilesServiceClient.DownloadContentRange
+type FilesServiceClientMockDownloadContentRangeExpectationOrigins struct {
+	origin    string
+	originCtx string
+	originPp1 string
+}
+
+// Marks this method to be optional. The default behavior of any method with Return() is '1 or more', meaning
+// the test will fail minimock's automatic final call check if the mocked method was not called at least once.
+// Optional() makes method check to work in '0 or more' mode.
+// It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
+// catch the problems when the expected method call is totally skipped during test run.
+func (mmDownloadContentRange *mFilesServiceClientMockDownloadContentRange) Optional() *mFilesServiceClientMockDownloadContentRange {
+	mmDownloadContentRange.optional = true
+	return mmDownloadContentRange
+}
+
+// Expect sets up expected params for FilesServiceClient.DownloadContentRange
+func (mmDownloadContentRange *mFilesServiceClientMockDownloadContentRange) Expect(ctx context.Context, pp1 *connect.Request[v1.DownloadContentRangeRequest]) *mFilesServiceClientMockDownloadContentRange {
+	if mmDownloadContentRange.mock.funcDownloadContentRange != nil {
+		mmDownloadContentRange.mock.t.Fatalf("FilesServiceClientMock.DownloadContentRange mock is already set by Set")
+	}
+
+	if mmDownloadContentRange.defaultExpectation == nil {
+		mmDownloadContentRange.defaultExpectation = &FilesServiceClientMockDownloadContentRangeExpectation{}
+	}
+
+	if mmDownloadContentRange.defaultExpectation.paramPtrs != nil {
+		mmDownloadContentRange.mock.t.Fatalf("FilesServiceClientMock.DownloadContentRange mock is already set by ExpectParams functions")
+	}
+
+	mmDownloadContentRange.defaultExpectation.params = &FilesServiceClientMockDownloadContentRangeParams{ctx, pp1}
+	mmDownloadContentRange.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
+	for _, e := range mmDownloadContentRange.expectations {
+		if minimock.Equal(e.params, mmDownloadContentRange.defaultExpectation.params) {
+			mmDownloadContentRange.mock.t.Fatalf("Expectation set by When has same params: %#v", *mmDownloadContentRange.defaultExpectation.params)
+		}
+	}
+
+	return mmDownloadContentRange
+}
+
+// ExpectCtxParam1 sets up expected param ctx for FilesServiceClient.DownloadContentRange
+func (mmDownloadContentRange *mFilesServiceClientMockDownloadContentRange) ExpectCtxParam1(ctx context.Context) *mFilesServiceClientMockDownloadContentRange {
+	if mmDownloadContentRange.mock.funcDownloadContentRange != nil {
+		mmDownloadContentRange.mock.t.Fatalf("FilesServiceClientMock.DownloadContentRange mock is already set by Set")
+	}
+
+	if mmDownloadContentRange.defaultExpectation == nil {
+		mmDownloadContentRange.defaultExpectation = &FilesServiceClientMockDownloadContentRangeExpectation{}
+	}
+
+	if mmDownloadContentRange.defaultExpectation.params != nil {
+		mmDownloadContentRange.mock.t.Fatalf("FilesServiceClientMock.DownloadContentRange mock is already set by Expect")
+	}
+
+	if mmDownloadContentRange.defaultExpectation.paramPtrs == nil {
+		mmDownloadContentRange.defaultExpectation.paramPtrs = &FilesServiceClientMockDownloadContentRangeParamPtrs{}
+	}
+	mmDownloadContentRange.defaultExpectation.paramPtrs.ctx = &ctx
+	mmDownloadContentRange.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
+
+	return mmDownloadContentRange
+}
+
+// ExpectPp1Param2 sets up expected param pp1 for FilesServiceClient.DownloadContentRange
+func (mmDownloadContentRange *mFilesServiceClientMockDownloadContentRange) ExpectPp1Param2(pp1 *connect.Request[v1.DownloadContentRangeRequest]) *mFilesServiceClientMockDownloadContentRange {
+	if mmDownloadContentRange.mock.funcDownloadContentRange != nil {
+		mmDownloadContentRange.mock.t.Fatalf("FilesServiceClientMock.DownloadContentRange mock is already set by Set")
+	}
+
+	if mmDownloadContentRange.defaultExpectation == nil {
+		mmDownloadContentRange.defaultExpectation = &FilesServiceClientMockDownloadContentRangeExpectation{}
+	}
+
+	if mmDownloadContentRange.defaultExpectation.params != nil {
+		mmDownloadContentRange.mock.t.Fatalf("FilesServiceClientMock.DownloadContentRange mock is already set by Expect")
+	}
+
+	if mmDownloadContentRange.defaultExpectation.paramPtrs == nil {
+		mmDownloadContentRange.defaultExpectation.paramPtrs = &FilesServiceClientMockDownloadContentRangeParamPtrs{}
+	}
+	mmDownloadContentRange.defaultExpectation.paramPtrs.pp1 = &pp1
+	mmDownloadContentRange.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
+
+	return mmDownloadContentRange
+}
+
+// Inspect accepts an inspector function that has same arguments as the FilesServiceClient.DownloadContentRange
+func (mmDownloadContentRange *mFilesServiceClientMockDownloadContentRange) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.DownloadContentRangeRequest])) *mFilesServiceClientMockDownloadContentRange {
+	if mmDownloadContentRange.mock.inspectFuncDownloadContentRange != nil {
+		mmDownloadContentRange.mock.t.Fatalf("Inspect function is already set for FilesServiceClientMock.DownloadContentRange")
+	}
+
+	mmDownloadContentRange.mock.inspectFuncDownloadContentRange = f
+
+	return mmDownloadContentRange
+}
+
+// Return sets up results that will be returned by FilesServiceClient.DownloadContentRange
+func (mmDownloadContentRange *mFilesServiceClientMockDownloadContentRange) Return(pp2 *connect.ServerStreamForClient[v1.DownloadContentRangeResponse], err error) *FilesServiceClientMock {
+	if mmDownloadContentRange.mock.funcDownloadContentRange != nil {
+		mmDownloadContentRange.mock.t.Fatalf("FilesServiceClientMock.DownloadContentRange mock is already set by Set")
+	}
+
+	if mmDownloadContentRange.defaultExpectation == nil {
+		mmDownloadContentRange.defaultExpectation = &FilesServiceClientMockDownloadContentRangeExpectation{mock: mmDownloadContentRange.mock}
+	}
+	mmDownloadContentRange.defaultExpectation.results = &FilesServiceClientMockDownloadContentRangeResults{pp2, err}
+	mmDownloadContentRange.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
+	return mmDownloadContentRange.mock
+}
+
+// Set uses given function f to mock the FilesServiceClient.DownloadContentRange method
+func (mmDownloadContentRange *mFilesServiceClientMockDownloadContentRange) Set(f func(ctx context.Context, pp1 *connect.Request[v1.DownloadContentRangeRequest]) (pp2 *connect.ServerStreamForClient[v1.DownloadContentRangeResponse], err error)) *FilesServiceClientMock {
+	if mmDownloadContentRange.defaultExpectation != nil {
+		mmDownloadContentRange.mock.t.Fatalf("Default expectation is already set for the FilesServiceClient.DownloadContentRange method")
+	}
+
+	if len(mmDownloadContentRange.expectations) > 0 {
+		mmDownloadContentRange.mock.t.Fatalf("Some expectations are already set for the FilesServiceClient.DownloadContentRange method")
+	}
+
+	mmDownloadContentRange.mock.funcDownloadContentRange = f
+	mmDownloadContentRange.mock.funcDownloadContentRangeOrigin = minimock.CallerInfo(1)
+	return mmDownloadContentRange.mock
+}
+
+// When sets expectation for the FilesServiceClient.DownloadContentRange which will trigger the result defined by the following
+// Then helper
+func (mmDownloadContentRange *mFilesServiceClientMockDownloadContentRange) When(ctx context.Context, pp1 *connect.Request[v1.DownloadContentRangeRequest]) *FilesServiceClientMockDownloadContentRangeExpectation {
+	if mmDownloadContentRange.mock.funcDownloadContentRange != nil {
+		mmDownloadContentRange.mock.t.Fatalf("FilesServiceClientMock.DownloadContentRange mock is already set by Set")
+	}
+
+	expectation := &FilesServiceClientMockDownloadContentRangeExpectation{
+		mock:               mmDownloadContentRange.mock,
+		params:             &FilesServiceClientMockDownloadContentRangeParams{ctx, pp1},
+		expectationOrigins: FilesServiceClientMockDownloadContentRangeExpectationOrigins{origin: minimock.CallerInfo(1)},
+	}
+	mmDownloadContentRange.expectations = append(mmDownloadContentRange.expectations, expectation)
+	return expectation
+}
+
+// Then sets up FilesServiceClient.DownloadContentRange return parameters for the expectation previously defined by the When method
+func (e *FilesServiceClientMockDownloadContentRangeExpectation) Then(pp2 *connect.ServerStreamForClient[v1.DownloadContentRangeResponse], err error) *FilesServiceClientMock {
+	e.results = &FilesServiceClientMockDownloadContentRangeResults{pp2, err}
+	return e.mock
+}
+
+// Times sets number of times FilesServiceClient.DownloadContentRange should be invoked
+func (mmDownloadContentRange *mFilesServiceClientMockDownloadContentRange) Times(n uint64) *mFilesServiceClientMockDownloadContentRange {
+	if n == 0 {
+		mmDownloadContentRange.mock.t.Fatalf("Times of FilesServiceClientMock.DownloadContentRange mock can not be zero")
+	}
+	mm_atomic.StoreUint64(&mmDownloadContentRange.expectedInvocations, n)
+	mmDownloadContentRange.expectedInvocationsOrigin = minimock.CallerInfo(1)
+	return mmDownloadContentRange
+}
+
+func (mmDownloadContentRange *mFilesServiceClientMockDownloadContentRange) invocationsDone() bool {
+	if len(mmDownloadContentRange.expectations) == 0 && mmDownloadContentRange.defaultExpectation == nil && mmDownloadContentRange.mock.funcDownloadContentRange == nil {
+		return true
+	}
+
+	totalInvocations := mm_atomic.LoadUint64(&mmDownloadContentRange.mock.afterDownloadContentRangeCounter)
+	expectedInvocations := mm_atomic.LoadUint64(&mmDownloadContentRange.expectedInvocations)
+
+	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
+}
+
+// DownloadContentRange implements mm_filesv1connect.FilesServiceClient
+func (mmDownloadContentRange *FilesServiceClientMock) DownloadContentRange(ctx context.Context, pp1 *connect.Request[v1.DownloadContentRangeRequest]) (pp2 *connect.ServerStreamForClient[v1.DownloadContentRangeResponse], err error) {
+	mm_atomic.AddUint64(&mmDownloadContentRange.beforeDownloadContentRangeCounter, 1)
+	defer mm_atomic.AddUint64(&mmDownloadContentRange.afterDownloadContentRangeCounter, 1)
+
+	mmDownloadContentRange.t.Helper()
+
+	if mmDownloadContentRange.inspectFuncDownloadContentRange != nil {
+		mmDownloadContentRange.inspectFuncDownloadContentRange(ctx, pp1)
+	}
+
+	mm_params := FilesServiceClientMockDownloadContentRangeParams{ctx, pp1}
+
+	// Record call args
+	mmDownloadContentRange.DownloadContentRangeMock.mutex.Lock()
+	mmDownloadContentRange.DownloadContentRangeMock.callArgs = append(mmDownloadContentRange.DownloadContentRangeMock.callArgs, &mm_params)
+	mmDownloadContentRange.DownloadContentRangeMock.mutex.Unlock()
+
+	for _, e := range mmDownloadContentRange.DownloadContentRangeMock.expectations {
+		if minimock.Equal(*e.params, mm_params) {
+			mm_atomic.AddUint64(&e.Counter, 1)
+			return e.results.pp2, e.results.err
+		}
+	}
+
+	if mmDownloadContentRange.DownloadContentRangeMock.defaultExpectation != nil {
+		mm_atomic.AddUint64(&mmDownloadContentRange.DownloadContentRangeMock.defaultExpectation.Counter, 1)
+		mm_want := mmDownloadContentRange.DownloadContentRangeMock.defaultExpectation.params
+		mm_want_ptrs := mmDownloadContentRange.DownloadContentRangeMock.defaultExpectation.paramPtrs
+
+		mm_got := FilesServiceClientMockDownloadContentRangeParams{ctx, pp1}
+
+		if mm_want_ptrs != nil {
+
+			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
+				mmDownloadContentRange.t.Errorf("FilesServiceClientMock.DownloadContentRange got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+					mmDownloadContentRange.DownloadContentRangeMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
+			}
+
+			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
+				mmDownloadContentRange.t.Errorf("FilesServiceClientMock.DownloadContentRange got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+					mmDownloadContentRange.DownloadContentRangeMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
+			}
+
+		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
+			mmDownloadContentRange.t.Errorf("FilesServiceClientMock.DownloadContentRange got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmDownloadContentRange.DownloadContentRangeMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
+		}
+
+		mm_results := mmDownloadContentRange.DownloadContentRangeMock.defaultExpectation.results
+		if mm_results == nil {
+			mmDownloadContentRange.t.Fatal("No results are set for the FilesServiceClientMock.DownloadContentRange")
+		}
+		return (*mm_results).pp2, (*mm_results).err
+	}
+	if mmDownloadContentRange.funcDownloadContentRange != nil {
+		return mmDownloadContentRange.funcDownloadContentRange(ctx, pp1)
+	}
+	mmDownloadContentRange.t.Fatalf("Unexpected call to FilesServiceClientMock.DownloadContentRange. %v %v", ctx, pp1)
+	return
+}
+
+// DownloadContentRangeAfterCounter returns a count of finished FilesServiceClientMock.DownloadContentRange invocations
+func (mmDownloadContentRange *FilesServiceClientMock) DownloadContentRangeAfterCounter() uint64 {
+	return mm_atomic.LoadUint64(&mmDownloadContentRange.afterDownloadContentRangeCounter)
+}
+
+// DownloadContentRangeBeforeCounter returns a count of FilesServiceClientMock.DownloadContentRange invocations
+func (mmDownloadContentRange *FilesServiceClientMock) DownloadContentRangeBeforeCounter() uint64 {
+	return mm_atomic.LoadUint64(&mmDownloadContentRange.beforeDownloadContentRangeCounter)
+}
+
+// Calls returns a list of arguments used in each call to FilesServiceClientMock.DownloadContentRange.
+// The list is in the same order as the calls were made (i.e. recent calls have a higher index)
+func (mmDownloadContentRange *mFilesServiceClientMockDownloadContentRange) Calls() []*FilesServiceClientMockDownloadContentRangeParams {
+	mmDownloadContentRange.mutex.RLock()
+
+	argCopy := make([]*FilesServiceClientMockDownloadContentRangeParams, len(mmDownloadContentRange.callArgs))
+	copy(argCopy, mmDownloadContentRange.callArgs)
+
+	mmDownloadContentRange.mutex.RUnlock()
+
+	return argCopy
+}
+
+// MinimockDownloadContentRangeDone returns true if the count of the DownloadContentRange invocations corresponds
+// the number of defined expectations
+func (m *FilesServiceClientMock) MinimockDownloadContentRangeDone() bool {
+	if m.DownloadContentRangeMock.optional {
+		// Optional methods provide '0 or more' call count restriction.
+		return true
+	}
+
+	for _, e := range m.DownloadContentRangeMock.expectations {
+		if mm_atomic.LoadUint64(&e.Counter) < 1 {
+			return false
+		}
+	}
+
+	return m.DownloadContentRangeMock.invocationsDone()
+}
+
+// MinimockDownloadContentRangeInspect logs each unmet expectation
+func (m *FilesServiceClientMock) MinimockDownloadContentRangeInspect() {
+	for _, e := range m.DownloadContentRangeMock.expectations {
+		if mm_atomic.LoadUint64(&e.Counter) < 1 {
+			m.t.Errorf("Expected call to FilesServiceClientMock.DownloadContentRange at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+		}
+	}
+
+	afterDownloadContentRangeCounter := mm_atomic.LoadUint64(&m.afterDownloadContentRangeCounter)
+	// if default expectation was set then invocations count should be greater than zero
+	if m.DownloadContentRangeMock.defaultExpectation != nil && afterDownloadContentRangeCounter < 1 {
+		if m.DownloadContentRangeMock.defaultExpectation.params == nil {
+			m.t.Errorf("Expected call to FilesServiceClientMock.DownloadContentRange at\n%s", m.DownloadContentRangeMock.defaultExpectation.returnOrigin)
+		} else {
+			m.t.Errorf("Expected call to FilesServiceClientMock.DownloadContentRange at\n%s with params: %#v", m.DownloadContentRangeMock.defaultExpectation.expectationOrigins.origin, *m.DownloadContentRangeMock.defaultExpectation.params)
+		}
+	}
+	// if func was set then invocations count should be greater than zero
+	if m.funcDownloadContentRange != nil && afterDownloadContentRangeCounter < 1 {
+		m.t.Errorf("Expected call to FilesServiceClientMock.DownloadContentRange at\n%s", m.funcDownloadContentRangeOrigin)
+	}
+
+	if !m.DownloadContentRangeMock.invocationsDone() && afterDownloadContentRangeCounter > 0 {
+		m.t.Errorf("Expected %d calls to FilesServiceClientMock.DownloadContentRange at\n%s but found %d calls",
+			mm_atomic.LoadUint64(&m.DownloadContentRangeMock.expectedInvocations), m.DownloadContentRangeMock.expectedInvocationsOrigin, afterDownloadContentRangeCounter)
+	}
+}
+
+type mFilesServiceClientMockFinalizeSignedUpload struct {
+	optional           bool
+	mock               *FilesServiceClientMock
+	defaultExpectation *FilesServiceClientMockFinalizeSignedUploadExpectation
+	expectations       []*FilesServiceClientMockFinalizeSignedUploadExpectation
+
+	callArgs []*FilesServiceClientMockFinalizeSignedUploadParams
+	mutex    sync.RWMutex
+
+	expectedInvocations       uint64
+	expectedInvocationsOrigin string
+}
+
+// FilesServiceClientMockFinalizeSignedUploadExpectation specifies expectation struct of the FilesServiceClient.FinalizeSignedUpload
+type FilesServiceClientMockFinalizeSignedUploadExpectation struct {
+	mock               *FilesServiceClientMock
+	params             *FilesServiceClientMockFinalizeSignedUploadParams
+	paramPtrs          *FilesServiceClientMockFinalizeSignedUploadParamPtrs
+	expectationOrigins FilesServiceClientMockFinalizeSignedUploadExpectationOrigins
+	results            *FilesServiceClientMockFinalizeSignedUploadResults
+	returnOrigin       string
+	Counter            uint64
+}
+
+// FilesServiceClientMockFinalizeSignedUploadParams contains parameters of the FilesServiceClient.FinalizeSignedUpload
+type FilesServiceClientMockFinalizeSignedUploadParams struct {
+	ctx context.Context
+	pp1 *connect.Request[v1.FinalizeSignedUploadRequest]
+}
+
+// FilesServiceClientMockFinalizeSignedUploadParamPtrs contains pointers to parameters of the FilesServiceClient.FinalizeSignedUpload
+type FilesServiceClientMockFinalizeSignedUploadParamPtrs struct {
+	ctx *context.Context
+	pp1 **connect.Request[v1.FinalizeSignedUploadRequest]
+}
+
+// FilesServiceClientMockFinalizeSignedUploadResults contains results of the FilesServiceClient.FinalizeSignedUpload
+type FilesServiceClientMockFinalizeSignedUploadResults struct {
+	pp2 *connect.Response[v1.FinalizeSignedUploadResponse]
+	err error
+}
+
+// FilesServiceClientMockFinalizeSignedUploadOrigins contains origins of expectations of the FilesServiceClient.FinalizeSignedUpload
+type FilesServiceClientMockFinalizeSignedUploadExpectationOrigins struct {
+	origin    string
+	originCtx string
+	originPp1 string
+}
+
+// Marks this method to be optional. The default behavior of any method with Return() is '1 or more', meaning
+// the test will fail minimock's automatic final call check if the mocked method was not called at least once.
+// Optional() makes method check to work in '0 or more' mode.
+// It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
+// catch the problems when the expected method call is totally skipped during test run.
+func (mmFinalizeSignedUpload *mFilesServiceClientMockFinalizeSignedUpload) Optional() *mFilesServiceClientMockFinalizeSignedUpload {
+	mmFinalizeSignedUpload.optional = true
+	return mmFinalizeSignedUpload
+}
+
+// Expect sets up expected params for FilesServiceClient.FinalizeSignedUpload
+func (mmFinalizeSignedUpload *mFilesServiceClientMockFinalizeSignedUpload) Expect(ctx context.Context, pp1 *connect.Request[v1.FinalizeSignedUploadRequest]) *mFilesServiceClientMockFinalizeSignedUpload {
+	if mmFinalizeSignedUpload.mock.funcFinalizeSignedUpload != nil {
+		mmFinalizeSignedUpload.mock.t.Fatalf("FilesServiceClientMock.FinalizeSignedUpload mock is already set by Set")
+	}
+
+	if mmFinalizeSignedUpload.defaultExpectation == nil {
+		mmFinalizeSignedUpload.defaultExpectation = &FilesServiceClientMockFinalizeSignedUploadExpectation{}
+	}
+
+	if mmFinalizeSignedUpload.defaultExpectation.paramPtrs != nil {
+		mmFinalizeSignedUpload.mock.t.Fatalf("FilesServiceClientMock.FinalizeSignedUpload mock is already set by ExpectParams functions")
+	}
+
+	mmFinalizeSignedUpload.defaultExpectation.params = &FilesServiceClientMockFinalizeSignedUploadParams{ctx, pp1}
+	mmFinalizeSignedUpload.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
+	for _, e := range mmFinalizeSignedUpload.expectations {
+		if minimock.Equal(e.params, mmFinalizeSignedUpload.defaultExpectation.params) {
+			mmFinalizeSignedUpload.mock.t.Fatalf("Expectation set by When has same params: %#v", *mmFinalizeSignedUpload.defaultExpectation.params)
+		}
+	}
+
+	return mmFinalizeSignedUpload
+}
+
+// ExpectCtxParam1 sets up expected param ctx for FilesServiceClient.FinalizeSignedUpload
+func (mmFinalizeSignedUpload *mFilesServiceClientMockFinalizeSignedUpload) ExpectCtxParam1(ctx context.Context) *mFilesServiceClientMockFinalizeSignedUpload {
+	if mmFinalizeSignedUpload.mock.funcFinalizeSignedUpload != nil {
+		mmFinalizeSignedUpload.mock.t.Fatalf("FilesServiceClientMock.FinalizeSignedUpload mock is already set by Set")
+	}
+
+	if mmFinalizeSignedUpload.defaultExpectation == nil {
+		mmFinalizeSignedUpload.defaultExpectation = &FilesServiceClientMockFinalizeSignedUploadExpectation{}
+	}
+
+	if mmFinalizeSignedUpload.defaultExpectation.params != nil {
+		mmFinalizeSignedUpload.mock.t.Fatalf("FilesServiceClientMock.FinalizeSignedUpload mock is already set by Expect")
+	}
+
+	if mmFinalizeSignedUpload.defaultExpectation.paramPtrs == nil {
+		mmFinalizeSignedUpload.defaultExpectation.paramPtrs = &FilesServiceClientMockFinalizeSignedUploadParamPtrs{}
+	}
+	mmFinalizeSignedUpload.defaultExpectation.paramPtrs.ctx = &ctx
+	mmFinalizeSignedUpload.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
+
+	return mmFinalizeSignedUpload
+}
+
+// ExpectPp1Param2 sets up expected param pp1 for FilesServiceClient.FinalizeSignedUpload
+func (mmFinalizeSignedUpload *mFilesServiceClientMockFinalizeSignedUpload) ExpectPp1Param2(pp1 *connect.Request[v1.FinalizeSignedUploadRequest]) *mFilesServiceClientMockFinalizeSignedUpload {
+	if mmFinalizeSignedUpload.mock.funcFinalizeSignedUpload != nil {
+		mmFinalizeSignedUpload.mock.t.Fatalf("FilesServiceClientMock.FinalizeSignedUpload mock is already set by Set")
+	}
+
+	if mmFinalizeSignedUpload.defaultExpectation == nil {
+		mmFinalizeSignedUpload.defaultExpectation = &FilesServiceClientMockFinalizeSignedUploadExpectation{}
+	}
+
+	if mmFinalizeSignedUpload.defaultExpectation.params != nil {
+		mmFinalizeSignedUpload.mock.t.Fatalf("FilesServiceClientMock.FinalizeSignedUpload mock is already set by Expect")
+	}
+
+	if mmFinalizeSignedUpload.defaultExpectation.paramPtrs == nil {
+		mmFinalizeSignedUpload.defaultExpectation.paramPtrs = &FilesServiceClientMockFinalizeSignedUploadParamPtrs{}
+	}
+	mmFinalizeSignedUpload.defaultExpectation.paramPtrs.pp1 = &pp1
+	mmFinalizeSignedUpload.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
+
+	return mmFinalizeSignedUpload
+}
+
+// Inspect accepts an inspector function that has same arguments as the FilesServiceClient.FinalizeSignedUpload
+func (mmFinalizeSignedUpload *mFilesServiceClientMockFinalizeSignedUpload) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.FinalizeSignedUploadRequest])) *mFilesServiceClientMockFinalizeSignedUpload {
+	if mmFinalizeSignedUpload.mock.inspectFuncFinalizeSignedUpload != nil {
+		mmFinalizeSignedUpload.mock.t.Fatalf("Inspect function is already set for FilesServiceClientMock.FinalizeSignedUpload")
+	}
+
+	mmFinalizeSignedUpload.mock.inspectFuncFinalizeSignedUpload = f
+
+	return mmFinalizeSignedUpload
+}
+
+// Return sets up results that will be returned by FilesServiceClient.FinalizeSignedUpload
+func (mmFinalizeSignedUpload *mFilesServiceClientMockFinalizeSignedUpload) Return(pp2 *connect.Response[v1.FinalizeSignedUploadResponse], err error) *FilesServiceClientMock {
+	if mmFinalizeSignedUpload.mock.funcFinalizeSignedUpload != nil {
+		mmFinalizeSignedUpload.mock.t.Fatalf("FilesServiceClientMock.FinalizeSignedUpload mock is already set by Set")
+	}
+
+	if mmFinalizeSignedUpload.defaultExpectation == nil {
+		mmFinalizeSignedUpload.defaultExpectation = &FilesServiceClientMockFinalizeSignedUploadExpectation{mock: mmFinalizeSignedUpload.mock}
+	}
+	mmFinalizeSignedUpload.defaultExpectation.results = &FilesServiceClientMockFinalizeSignedUploadResults{pp2, err}
+	mmFinalizeSignedUpload.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
+	return mmFinalizeSignedUpload.mock
+}
+
+// Set uses given function f to mock the FilesServiceClient.FinalizeSignedUpload method
+func (mmFinalizeSignedUpload *mFilesServiceClientMockFinalizeSignedUpload) Set(f func(ctx context.Context, pp1 *connect.Request[v1.FinalizeSignedUploadRequest]) (pp2 *connect.Response[v1.FinalizeSignedUploadResponse], err error)) *FilesServiceClientMock {
+	if mmFinalizeSignedUpload.defaultExpectation != nil {
+		mmFinalizeSignedUpload.mock.t.Fatalf("Default expectation is already set for the FilesServiceClient.FinalizeSignedUpload method")
+	}
+
+	if len(mmFinalizeSignedUpload.expectations) > 0 {
+		mmFinalizeSignedUpload.mock.t.Fatalf("Some expectations are already set for the FilesServiceClient.FinalizeSignedUpload method")
+	}
+
+	mmFinalizeSignedUpload.mock.funcFinalizeSignedUpload = f
+	mmFinalizeSignedUpload.mock.funcFinalizeSignedUploadOrigin = minimock.CallerInfo(1)
+	return mmFinalizeSignedUpload.mock
+}
+
+// When sets expectation for the FilesServiceClient.FinalizeSignedUpload which will trigger the result defined by the following
+// Then helper
+func (mmFinalizeSignedUpload *mFilesServiceClientMockFinalizeSignedUpload) When(ctx context.Context, pp1 *connect.Request[v1.FinalizeSignedUploadRequest]) *FilesServiceClientMockFinalizeSignedUploadExpectation {
+	if mmFinalizeSignedUpload.mock.funcFinalizeSignedUpload != nil {
+		mmFinalizeSignedUpload.mock.t.Fatalf("FilesServiceClientMock.FinalizeSignedUpload mock is already set by Set")
+	}
+
+	expectation := &FilesServiceClientMockFinalizeSignedUploadExpectation{
+		mock:               mmFinalizeSignedUpload.mock,
+		params:             &FilesServiceClientMockFinalizeSignedUploadParams{ctx, pp1},
+		expectationOrigins: FilesServiceClientMockFinalizeSignedUploadExpectationOrigins{origin: minimock.CallerInfo(1)},
+	}
+	mmFinalizeSignedUpload.expectations = append(mmFinalizeSignedUpload.expectations, expectation)
+	return expectation
+}
+
+// Then sets up FilesServiceClient.FinalizeSignedUpload return parameters for the expectation previously defined by the When method
+func (e *FilesServiceClientMockFinalizeSignedUploadExpectation) Then(pp2 *connect.Response[v1.FinalizeSignedUploadResponse], err error) *FilesServiceClientMock {
+	e.results = &FilesServiceClientMockFinalizeSignedUploadResults{pp2, err}
+	return e.mock
+}
+
+// Times sets number of times FilesServiceClient.FinalizeSignedUpload should be invoked
+func (mmFinalizeSignedUpload *mFilesServiceClientMockFinalizeSignedUpload) Times(n uint64) *mFilesServiceClientMockFinalizeSignedUpload {
+	if n == 0 {
+		mmFinalizeSignedUpload.mock.t.Fatalf("Times of FilesServiceClientMock.FinalizeSignedUpload mock can not be zero")
+	}
+	mm_atomic.StoreUint64(&mmFinalizeSignedUpload.expectedInvocations, n)
+	mmFinalizeSignedUpload.expectedInvocationsOrigin = minimock.CallerInfo(1)
+	return mmFinalizeSignedUpload
+}
+
+func (mmFinalizeSignedUpload *mFilesServiceClientMockFinalizeSignedUpload) invocationsDone() bool {
+	if len(mmFinalizeSignedUpload.expectations) == 0 && mmFinalizeSignedUpload.defaultExpectation == nil && mmFinalizeSignedUpload.mock.funcFinalizeSignedUpload == nil {
+		return true
+	}
+
+	totalInvocations := mm_atomic.LoadUint64(&mmFinalizeSignedUpload.mock.afterFinalizeSignedUploadCounter)
+	expectedInvocations := mm_atomic.LoadUint64(&mmFinalizeSignedUpload.expectedInvocations)
+
+	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
+}
+
+// FinalizeSignedUpload implements mm_filesv1connect.FilesServiceClient
+func (mmFinalizeSignedUpload *FilesServiceClientMock) FinalizeSignedUpload(ctx context.Context, pp1 *connect.Request[v1.FinalizeSignedUploadRequest]) (pp2 *connect.Response[v1.FinalizeSignedUploadResponse], err error) {
+	mm_atomic.AddUint64(&mmFinalizeSignedUpload.beforeFinalizeSignedUploadCounter, 1)
+	defer mm_atomic.AddUint64(&mmFinalizeSignedUpload.afterFinalizeSignedUploadCounter, 1)
+
+	mmFinalizeSignedUpload.t.Helper()
+
+	if mmFinalizeSignedUpload.inspectFuncFinalizeSignedUpload != nil {
+		mmFinalizeSignedUpload.inspectFuncFinalizeSignedUpload(ctx, pp1)
+	}
+
+	mm_params := FilesServiceClientMockFinalizeSignedUploadParams{ctx, pp1}
+
+	// Record call args
+	mmFinalizeSignedUpload.FinalizeSignedUploadMock.mutex.Lock()
+	mmFinalizeSignedUpload.FinalizeSignedUploadMock.callArgs = append(mmFinalizeSignedUpload.FinalizeSignedUploadMock.callArgs, &mm_params)
+	mmFinalizeSignedUpload.FinalizeSignedUploadMock.mutex.Unlock()
+
+	for _, e := range mmFinalizeSignedUpload.FinalizeSignedUploadMock.expectations {
+		if minimock.Equal(*e.params, mm_params) {
+			mm_atomic.AddUint64(&e.Counter, 1)
+			return e.results.pp2, e.results.err
+		}
+	}
+
+	if mmFinalizeSignedUpload.FinalizeSignedUploadMock.defaultExpectation != nil {
+		mm_atomic.AddUint64(&mmFinalizeSignedUpload.FinalizeSignedUploadMock.defaultExpectation.Counter, 1)
+		mm_want := mmFinalizeSignedUpload.FinalizeSignedUploadMock.defaultExpectation.params
+		mm_want_ptrs := mmFinalizeSignedUpload.FinalizeSignedUploadMock.defaultExpectation.paramPtrs
+
+		mm_got := FilesServiceClientMockFinalizeSignedUploadParams{ctx, pp1}
+
+		if mm_want_ptrs != nil {
+
+			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
+				mmFinalizeSignedUpload.t.Errorf("FilesServiceClientMock.FinalizeSignedUpload got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+					mmFinalizeSignedUpload.FinalizeSignedUploadMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
+			}
+
+			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
+				mmFinalizeSignedUpload.t.Errorf("FilesServiceClientMock.FinalizeSignedUpload got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+					mmFinalizeSignedUpload.FinalizeSignedUploadMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
+			}
+
+		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
+			mmFinalizeSignedUpload.t.Errorf("FilesServiceClientMock.FinalizeSignedUpload got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmFinalizeSignedUpload.FinalizeSignedUploadMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
+		}
+
+		mm_results := mmFinalizeSignedUpload.FinalizeSignedUploadMock.defaultExpectation.results
+		if mm_results == nil {
+			mmFinalizeSignedUpload.t.Fatal("No results are set for the FilesServiceClientMock.FinalizeSignedUpload")
+		}
+		return (*mm_results).pp2, (*mm_results).err
+	}
+	if mmFinalizeSignedUpload.funcFinalizeSignedUpload != nil {
+		return mmFinalizeSignedUpload.funcFinalizeSignedUpload(ctx, pp1)
+	}
+	mmFinalizeSignedUpload.t.Fatalf("Unexpected call to FilesServiceClientMock.FinalizeSignedUpload. %v %v", ctx, pp1)
+	return
+}
+
+// FinalizeSignedUploadAfterCounter returns a count of finished FilesServiceClientMock.FinalizeSignedUpload invocations
+func (mmFinalizeSignedUpload *FilesServiceClientMock) FinalizeSignedUploadAfterCounter() uint64 {
+	return mm_atomic.LoadUint64(&mmFinalizeSignedUpload.afterFinalizeSignedUploadCounter)
+}
+
+// FinalizeSignedUploadBeforeCounter returns a count of FilesServiceClientMock.FinalizeSignedUpload invocations
+func (mmFinalizeSignedUpload *FilesServiceClientMock) FinalizeSignedUploadBeforeCounter() uint64 {
+	return mm_atomic.LoadUint64(&mmFinalizeSignedUpload.beforeFinalizeSignedUploadCounter)
+}
+
+// Calls returns a list of arguments used in each call to FilesServiceClientMock.FinalizeSignedUpload.
+// The list is in the same order as the calls were made (i.e. recent calls have a higher index)
+func (mmFinalizeSignedUpload *mFilesServiceClientMockFinalizeSignedUpload) Calls() []*FilesServiceClientMockFinalizeSignedUploadParams {
+	mmFinalizeSignedUpload.mutex.RLock()
+
+	argCopy := make([]*FilesServiceClientMockFinalizeSignedUploadParams, len(mmFinalizeSignedUpload.callArgs))
+	copy(argCopy, mmFinalizeSignedUpload.callArgs)
+
+	mmFinalizeSignedUpload.mutex.RUnlock()
+
+	return argCopy
+}
+
+// MinimockFinalizeSignedUploadDone returns true if the count of the FinalizeSignedUpload invocations corresponds
+// the number of defined expectations
+func (m *FilesServiceClientMock) MinimockFinalizeSignedUploadDone() bool {
+	if m.FinalizeSignedUploadMock.optional {
+		// Optional methods provide '0 or more' call count restriction.
+		return true
+	}
+
+	for _, e := range m.FinalizeSignedUploadMock.expectations {
+		if mm_atomic.LoadUint64(&e.Counter) < 1 {
+			return false
+		}
+	}
+
+	return m.FinalizeSignedUploadMock.invocationsDone()
+}
+
+// MinimockFinalizeSignedUploadInspect logs each unmet expectation
+func (m *FilesServiceClientMock) MinimockFinalizeSignedUploadInspect() {
+	for _, e := range m.FinalizeSignedUploadMock.expectations {
+		if mm_atomic.LoadUint64(&e.Counter) < 1 {
+			m.t.Errorf("Expected call to FilesServiceClientMock.FinalizeSignedUpload at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+		}
+	}
+
+	afterFinalizeSignedUploadCounter := mm_atomic.LoadUint64(&m.afterFinalizeSignedUploadCounter)
+	// if default expectation was set then invocations count should be greater than zero
+	if m.FinalizeSignedUploadMock.defaultExpectation != nil && afterFinalizeSignedUploadCounter < 1 {
+		if m.FinalizeSignedUploadMock.defaultExpectation.params == nil {
+			m.t.Errorf("Expected call to FilesServiceClientMock.FinalizeSignedUpload at\n%s", m.FinalizeSignedUploadMock.defaultExpectation.returnOrigin)
+		} else {
+			m.t.Errorf("Expected call to FilesServiceClientMock.FinalizeSignedUpload at\n%s with params: %#v", m.FinalizeSignedUploadMock.defaultExpectation.expectationOrigins.origin, *m.FinalizeSignedUploadMock.defaultExpectation.params)
+		}
+	}
+	// if func was set then invocations count should be greater than zero
+	if m.funcFinalizeSignedUpload != nil && afterFinalizeSignedUploadCounter < 1 {
+		m.t.Errorf("Expected call to FilesServiceClientMock.FinalizeSignedUpload at\n%s", m.funcFinalizeSignedUploadOrigin)
+	}
+
+	if !m.FinalizeSignedUploadMock.invocationsDone() && afterFinalizeSignedUploadCounter > 0 {
+		m.t.Errorf("Expected %d calls to FilesServiceClientMock.FinalizeSignedUpload at\n%s but found %d calls",
+			mm_atomic.LoadUint64(&m.FinalizeSignedUploadMock.expectedInvocations), m.FinalizeSignedUploadMock.expectedInvocationsOrigin, afterFinalizeSignedUploadCounter)
+	}
+}
+
 type mFilesServiceClientMockGetConfig struct {
 	optional           bool
 	mock               *FilesServiceClientMock
@@ -4064,6 +5173,349 @@ func (m *FilesServiceClientMock) MinimockGetContentThumbnailInspect() {
 	if !m.GetContentThumbnailMock.invocationsDone() && afterGetContentThumbnailCounter > 0 {
 		m.t.Errorf("Expected %d calls to FilesServiceClientMock.GetContentThumbnail at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.GetContentThumbnailMock.expectedInvocations), m.GetContentThumbnailMock.expectedInvocationsOrigin, afterGetContentThumbnailCounter)
+	}
+}
+
+type mFilesServiceClientMockGetMultipartUpload struct {
+	optional           bool
+	mock               *FilesServiceClientMock
+	defaultExpectation *FilesServiceClientMockGetMultipartUploadExpectation
+	expectations       []*FilesServiceClientMockGetMultipartUploadExpectation
+
+	callArgs []*FilesServiceClientMockGetMultipartUploadParams
+	mutex    sync.RWMutex
+
+	expectedInvocations       uint64
+	expectedInvocationsOrigin string
+}
+
+// FilesServiceClientMockGetMultipartUploadExpectation specifies expectation struct of the FilesServiceClient.GetMultipartUpload
+type FilesServiceClientMockGetMultipartUploadExpectation struct {
+	mock               *FilesServiceClientMock
+	params             *FilesServiceClientMockGetMultipartUploadParams
+	paramPtrs          *FilesServiceClientMockGetMultipartUploadParamPtrs
+	expectationOrigins FilesServiceClientMockGetMultipartUploadExpectationOrigins
+	results            *FilesServiceClientMockGetMultipartUploadResults
+	returnOrigin       string
+	Counter            uint64
+}
+
+// FilesServiceClientMockGetMultipartUploadParams contains parameters of the FilesServiceClient.GetMultipartUpload
+type FilesServiceClientMockGetMultipartUploadParams struct {
+	ctx context.Context
+	pp1 *connect.Request[v1.GetMultipartUploadRequest]
+}
+
+// FilesServiceClientMockGetMultipartUploadParamPtrs contains pointers to parameters of the FilesServiceClient.GetMultipartUpload
+type FilesServiceClientMockGetMultipartUploadParamPtrs struct {
+	ctx *context.Context
+	pp1 **connect.Request[v1.GetMultipartUploadRequest]
+}
+
+// FilesServiceClientMockGetMultipartUploadResults contains results of the FilesServiceClient.GetMultipartUpload
+type FilesServiceClientMockGetMultipartUploadResults struct {
+	pp2 *connect.Response[v1.GetMultipartUploadResponse]
+	err error
+}
+
+// FilesServiceClientMockGetMultipartUploadOrigins contains origins of expectations of the FilesServiceClient.GetMultipartUpload
+type FilesServiceClientMockGetMultipartUploadExpectationOrigins struct {
+	origin    string
+	originCtx string
+	originPp1 string
+}
+
+// Marks this method to be optional. The default behavior of any method with Return() is '1 or more', meaning
+// the test will fail minimock's automatic final call check if the mocked method was not called at least once.
+// Optional() makes method check to work in '0 or more' mode.
+// It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
+// catch the problems when the expected method call is totally skipped during test run.
+func (mmGetMultipartUpload *mFilesServiceClientMockGetMultipartUpload) Optional() *mFilesServiceClientMockGetMultipartUpload {
+	mmGetMultipartUpload.optional = true
+	return mmGetMultipartUpload
+}
+
+// Expect sets up expected params for FilesServiceClient.GetMultipartUpload
+func (mmGetMultipartUpload *mFilesServiceClientMockGetMultipartUpload) Expect(ctx context.Context, pp1 *connect.Request[v1.GetMultipartUploadRequest]) *mFilesServiceClientMockGetMultipartUpload {
+	if mmGetMultipartUpload.mock.funcGetMultipartUpload != nil {
+		mmGetMultipartUpload.mock.t.Fatalf("FilesServiceClientMock.GetMultipartUpload mock is already set by Set")
+	}
+
+	if mmGetMultipartUpload.defaultExpectation == nil {
+		mmGetMultipartUpload.defaultExpectation = &FilesServiceClientMockGetMultipartUploadExpectation{}
+	}
+
+	if mmGetMultipartUpload.defaultExpectation.paramPtrs != nil {
+		mmGetMultipartUpload.mock.t.Fatalf("FilesServiceClientMock.GetMultipartUpload mock is already set by ExpectParams functions")
+	}
+
+	mmGetMultipartUpload.defaultExpectation.params = &FilesServiceClientMockGetMultipartUploadParams{ctx, pp1}
+	mmGetMultipartUpload.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
+	for _, e := range mmGetMultipartUpload.expectations {
+		if minimock.Equal(e.params, mmGetMultipartUpload.defaultExpectation.params) {
+			mmGetMultipartUpload.mock.t.Fatalf("Expectation set by When has same params: %#v", *mmGetMultipartUpload.defaultExpectation.params)
+		}
+	}
+
+	return mmGetMultipartUpload
+}
+
+// ExpectCtxParam1 sets up expected param ctx for FilesServiceClient.GetMultipartUpload
+func (mmGetMultipartUpload *mFilesServiceClientMockGetMultipartUpload) ExpectCtxParam1(ctx context.Context) *mFilesServiceClientMockGetMultipartUpload {
+	if mmGetMultipartUpload.mock.funcGetMultipartUpload != nil {
+		mmGetMultipartUpload.mock.t.Fatalf("FilesServiceClientMock.GetMultipartUpload mock is already set by Set")
+	}
+
+	if mmGetMultipartUpload.defaultExpectation == nil {
+		mmGetMultipartUpload.defaultExpectation = &FilesServiceClientMockGetMultipartUploadExpectation{}
+	}
+
+	if mmGetMultipartUpload.defaultExpectation.params != nil {
+		mmGetMultipartUpload.mock.t.Fatalf("FilesServiceClientMock.GetMultipartUpload mock is already set by Expect")
+	}
+
+	if mmGetMultipartUpload.defaultExpectation.paramPtrs == nil {
+		mmGetMultipartUpload.defaultExpectation.paramPtrs = &FilesServiceClientMockGetMultipartUploadParamPtrs{}
+	}
+	mmGetMultipartUpload.defaultExpectation.paramPtrs.ctx = &ctx
+	mmGetMultipartUpload.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
+
+	return mmGetMultipartUpload
+}
+
+// ExpectPp1Param2 sets up expected param pp1 for FilesServiceClient.GetMultipartUpload
+func (mmGetMultipartUpload *mFilesServiceClientMockGetMultipartUpload) ExpectPp1Param2(pp1 *connect.Request[v1.GetMultipartUploadRequest]) *mFilesServiceClientMockGetMultipartUpload {
+	if mmGetMultipartUpload.mock.funcGetMultipartUpload != nil {
+		mmGetMultipartUpload.mock.t.Fatalf("FilesServiceClientMock.GetMultipartUpload mock is already set by Set")
+	}
+
+	if mmGetMultipartUpload.defaultExpectation == nil {
+		mmGetMultipartUpload.defaultExpectation = &FilesServiceClientMockGetMultipartUploadExpectation{}
+	}
+
+	if mmGetMultipartUpload.defaultExpectation.params != nil {
+		mmGetMultipartUpload.mock.t.Fatalf("FilesServiceClientMock.GetMultipartUpload mock is already set by Expect")
+	}
+
+	if mmGetMultipartUpload.defaultExpectation.paramPtrs == nil {
+		mmGetMultipartUpload.defaultExpectation.paramPtrs = &FilesServiceClientMockGetMultipartUploadParamPtrs{}
+	}
+	mmGetMultipartUpload.defaultExpectation.paramPtrs.pp1 = &pp1
+	mmGetMultipartUpload.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
+
+	return mmGetMultipartUpload
+}
+
+// Inspect accepts an inspector function that has same arguments as the FilesServiceClient.GetMultipartUpload
+func (mmGetMultipartUpload *mFilesServiceClientMockGetMultipartUpload) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.GetMultipartUploadRequest])) *mFilesServiceClientMockGetMultipartUpload {
+	if mmGetMultipartUpload.mock.inspectFuncGetMultipartUpload != nil {
+		mmGetMultipartUpload.mock.t.Fatalf("Inspect function is already set for FilesServiceClientMock.GetMultipartUpload")
+	}
+
+	mmGetMultipartUpload.mock.inspectFuncGetMultipartUpload = f
+
+	return mmGetMultipartUpload
+}
+
+// Return sets up results that will be returned by FilesServiceClient.GetMultipartUpload
+func (mmGetMultipartUpload *mFilesServiceClientMockGetMultipartUpload) Return(pp2 *connect.Response[v1.GetMultipartUploadResponse], err error) *FilesServiceClientMock {
+	if mmGetMultipartUpload.mock.funcGetMultipartUpload != nil {
+		mmGetMultipartUpload.mock.t.Fatalf("FilesServiceClientMock.GetMultipartUpload mock is already set by Set")
+	}
+
+	if mmGetMultipartUpload.defaultExpectation == nil {
+		mmGetMultipartUpload.defaultExpectation = &FilesServiceClientMockGetMultipartUploadExpectation{mock: mmGetMultipartUpload.mock}
+	}
+	mmGetMultipartUpload.defaultExpectation.results = &FilesServiceClientMockGetMultipartUploadResults{pp2, err}
+	mmGetMultipartUpload.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
+	return mmGetMultipartUpload.mock
+}
+
+// Set uses given function f to mock the FilesServiceClient.GetMultipartUpload method
+func (mmGetMultipartUpload *mFilesServiceClientMockGetMultipartUpload) Set(f func(ctx context.Context, pp1 *connect.Request[v1.GetMultipartUploadRequest]) (pp2 *connect.Response[v1.GetMultipartUploadResponse], err error)) *FilesServiceClientMock {
+	if mmGetMultipartUpload.defaultExpectation != nil {
+		mmGetMultipartUpload.mock.t.Fatalf("Default expectation is already set for the FilesServiceClient.GetMultipartUpload method")
+	}
+
+	if len(mmGetMultipartUpload.expectations) > 0 {
+		mmGetMultipartUpload.mock.t.Fatalf("Some expectations are already set for the FilesServiceClient.GetMultipartUpload method")
+	}
+
+	mmGetMultipartUpload.mock.funcGetMultipartUpload = f
+	mmGetMultipartUpload.mock.funcGetMultipartUploadOrigin = minimock.CallerInfo(1)
+	return mmGetMultipartUpload.mock
+}
+
+// When sets expectation for the FilesServiceClient.GetMultipartUpload which will trigger the result defined by the following
+// Then helper
+func (mmGetMultipartUpload *mFilesServiceClientMockGetMultipartUpload) When(ctx context.Context, pp1 *connect.Request[v1.GetMultipartUploadRequest]) *FilesServiceClientMockGetMultipartUploadExpectation {
+	if mmGetMultipartUpload.mock.funcGetMultipartUpload != nil {
+		mmGetMultipartUpload.mock.t.Fatalf("FilesServiceClientMock.GetMultipartUpload mock is already set by Set")
+	}
+
+	expectation := &FilesServiceClientMockGetMultipartUploadExpectation{
+		mock:               mmGetMultipartUpload.mock,
+		params:             &FilesServiceClientMockGetMultipartUploadParams{ctx, pp1},
+		expectationOrigins: FilesServiceClientMockGetMultipartUploadExpectationOrigins{origin: minimock.CallerInfo(1)},
+	}
+	mmGetMultipartUpload.expectations = append(mmGetMultipartUpload.expectations, expectation)
+	return expectation
+}
+
+// Then sets up FilesServiceClient.GetMultipartUpload return parameters for the expectation previously defined by the When method
+func (e *FilesServiceClientMockGetMultipartUploadExpectation) Then(pp2 *connect.Response[v1.GetMultipartUploadResponse], err error) *FilesServiceClientMock {
+	e.results = &FilesServiceClientMockGetMultipartUploadResults{pp2, err}
+	return e.mock
+}
+
+// Times sets number of times FilesServiceClient.GetMultipartUpload should be invoked
+func (mmGetMultipartUpload *mFilesServiceClientMockGetMultipartUpload) Times(n uint64) *mFilesServiceClientMockGetMultipartUpload {
+	if n == 0 {
+		mmGetMultipartUpload.mock.t.Fatalf("Times of FilesServiceClientMock.GetMultipartUpload mock can not be zero")
+	}
+	mm_atomic.StoreUint64(&mmGetMultipartUpload.expectedInvocations, n)
+	mmGetMultipartUpload.expectedInvocationsOrigin = minimock.CallerInfo(1)
+	return mmGetMultipartUpload
+}
+
+func (mmGetMultipartUpload *mFilesServiceClientMockGetMultipartUpload) invocationsDone() bool {
+	if len(mmGetMultipartUpload.expectations) == 0 && mmGetMultipartUpload.defaultExpectation == nil && mmGetMultipartUpload.mock.funcGetMultipartUpload == nil {
+		return true
+	}
+
+	totalInvocations := mm_atomic.LoadUint64(&mmGetMultipartUpload.mock.afterGetMultipartUploadCounter)
+	expectedInvocations := mm_atomic.LoadUint64(&mmGetMultipartUpload.expectedInvocations)
+
+	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
+}
+
+// GetMultipartUpload implements mm_filesv1connect.FilesServiceClient
+func (mmGetMultipartUpload *FilesServiceClientMock) GetMultipartUpload(ctx context.Context, pp1 *connect.Request[v1.GetMultipartUploadRequest]) (pp2 *connect.Response[v1.GetMultipartUploadResponse], err error) {
+	mm_atomic.AddUint64(&mmGetMultipartUpload.beforeGetMultipartUploadCounter, 1)
+	defer mm_atomic.AddUint64(&mmGetMultipartUpload.afterGetMultipartUploadCounter, 1)
+
+	mmGetMultipartUpload.t.Helper()
+
+	if mmGetMultipartUpload.inspectFuncGetMultipartUpload != nil {
+		mmGetMultipartUpload.inspectFuncGetMultipartUpload(ctx, pp1)
+	}
+
+	mm_params := FilesServiceClientMockGetMultipartUploadParams{ctx, pp1}
+
+	// Record call args
+	mmGetMultipartUpload.GetMultipartUploadMock.mutex.Lock()
+	mmGetMultipartUpload.GetMultipartUploadMock.callArgs = append(mmGetMultipartUpload.GetMultipartUploadMock.callArgs, &mm_params)
+	mmGetMultipartUpload.GetMultipartUploadMock.mutex.Unlock()
+
+	for _, e := range mmGetMultipartUpload.GetMultipartUploadMock.expectations {
+		if minimock.Equal(*e.params, mm_params) {
+			mm_atomic.AddUint64(&e.Counter, 1)
+			return e.results.pp2, e.results.err
+		}
+	}
+
+	if mmGetMultipartUpload.GetMultipartUploadMock.defaultExpectation != nil {
+		mm_atomic.AddUint64(&mmGetMultipartUpload.GetMultipartUploadMock.defaultExpectation.Counter, 1)
+		mm_want := mmGetMultipartUpload.GetMultipartUploadMock.defaultExpectation.params
+		mm_want_ptrs := mmGetMultipartUpload.GetMultipartUploadMock.defaultExpectation.paramPtrs
+
+		mm_got := FilesServiceClientMockGetMultipartUploadParams{ctx, pp1}
+
+		if mm_want_ptrs != nil {
+
+			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
+				mmGetMultipartUpload.t.Errorf("FilesServiceClientMock.GetMultipartUpload got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+					mmGetMultipartUpload.GetMultipartUploadMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
+			}
+
+			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
+				mmGetMultipartUpload.t.Errorf("FilesServiceClientMock.GetMultipartUpload got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+					mmGetMultipartUpload.GetMultipartUploadMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
+			}
+
+		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
+			mmGetMultipartUpload.t.Errorf("FilesServiceClientMock.GetMultipartUpload got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmGetMultipartUpload.GetMultipartUploadMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
+		}
+
+		mm_results := mmGetMultipartUpload.GetMultipartUploadMock.defaultExpectation.results
+		if mm_results == nil {
+			mmGetMultipartUpload.t.Fatal("No results are set for the FilesServiceClientMock.GetMultipartUpload")
+		}
+		return (*mm_results).pp2, (*mm_results).err
+	}
+	if mmGetMultipartUpload.funcGetMultipartUpload != nil {
+		return mmGetMultipartUpload.funcGetMultipartUpload(ctx, pp1)
+	}
+	mmGetMultipartUpload.t.Fatalf("Unexpected call to FilesServiceClientMock.GetMultipartUpload. %v %v", ctx, pp1)
+	return
+}
+
+// GetMultipartUploadAfterCounter returns a count of finished FilesServiceClientMock.GetMultipartUpload invocations
+func (mmGetMultipartUpload *FilesServiceClientMock) GetMultipartUploadAfterCounter() uint64 {
+	return mm_atomic.LoadUint64(&mmGetMultipartUpload.afterGetMultipartUploadCounter)
+}
+
+// GetMultipartUploadBeforeCounter returns a count of FilesServiceClientMock.GetMultipartUpload invocations
+func (mmGetMultipartUpload *FilesServiceClientMock) GetMultipartUploadBeforeCounter() uint64 {
+	return mm_atomic.LoadUint64(&mmGetMultipartUpload.beforeGetMultipartUploadCounter)
+}
+
+// Calls returns a list of arguments used in each call to FilesServiceClientMock.GetMultipartUpload.
+// The list is in the same order as the calls were made (i.e. recent calls have a higher index)
+func (mmGetMultipartUpload *mFilesServiceClientMockGetMultipartUpload) Calls() []*FilesServiceClientMockGetMultipartUploadParams {
+	mmGetMultipartUpload.mutex.RLock()
+
+	argCopy := make([]*FilesServiceClientMockGetMultipartUploadParams, len(mmGetMultipartUpload.callArgs))
+	copy(argCopy, mmGetMultipartUpload.callArgs)
+
+	mmGetMultipartUpload.mutex.RUnlock()
+
+	return argCopy
+}
+
+// MinimockGetMultipartUploadDone returns true if the count of the GetMultipartUpload invocations corresponds
+// the number of defined expectations
+func (m *FilesServiceClientMock) MinimockGetMultipartUploadDone() bool {
+	if m.GetMultipartUploadMock.optional {
+		// Optional methods provide '0 or more' call count restriction.
+		return true
+	}
+
+	for _, e := range m.GetMultipartUploadMock.expectations {
+		if mm_atomic.LoadUint64(&e.Counter) < 1 {
+			return false
+		}
+	}
+
+	return m.GetMultipartUploadMock.invocationsDone()
+}
+
+// MinimockGetMultipartUploadInspect logs each unmet expectation
+func (m *FilesServiceClientMock) MinimockGetMultipartUploadInspect() {
+	for _, e := range m.GetMultipartUploadMock.expectations {
+		if mm_atomic.LoadUint64(&e.Counter) < 1 {
+			m.t.Errorf("Expected call to FilesServiceClientMock.GetMultipartUpload at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+		}
+	}
+
+	afterGetMultipartUploadCounter := mm_atomic.LoadUint64(&m.afterGetMultipartUploadCounter)
+	// if default expectation was set then invocations count should be greater than zero
+	if m.GetMultipartUploadMock.defaultExpectation != nil && afterGetMultipartUploadCounter < 1 {
+		if m.GetMultipartUploadMock.defaultExpectation.params == nil {
+			m.t.Errorf("Expected call to FilesServiceClientMock.GetMultipartUpload at\n%s", m.GetMultipartUploadMock.defaultExpectation.returnOrigin)
+		} else {
+			m.t.Errorf("Expected call to FilesServiceClientMock.GetMultipartUpload at\n%s with params: %#v", m.GetMultipartUploadMock.defaultExpectation.expectationOrigins.origin, *m.GetMultipartUploadMock.defaultExpectation.params)
+		}
+	}
+	// if func was set then invocations count should be greater than zero
+	if m.funcGetMultipartUpload != nil && afterGetMultipartUploadCounter < 1 {
+		m.t.Errorf("Expected call to FilesServiceClientMock.GetMultipartUpload at\n%s", m.funcGetMultipartUploadOrigin)
+	}
+
+	if !m.GetMultipartUploadMock.invocationsDone() && afterGetMultipartUploadCounter > 0 {
+		m.t.Errorf("Expected %d calls to FilesServiceClientMock.GetMultipartUpload at\n%s but found %d calls",
+			mm_atomic.LoadUint64(&m.GetMultipartUploadMock.expectedInvocations), m.GetMultipartUploadMock.expectedInvocationsOrigin, afterGetMultipartUploadCounter)
 	}
 }
 
@@ -6468,6 +7920,349 @@ func (m *FilesServiceClientMock) MinimockGetVersionsInspect() {
 	}
 }
 
+type mFilesServiceClientMockGrantAccess struct {
+	optional           bool
+	mock               *FilesServiceClientMock
+	defaultExpectation *FilesServiceClientMockGrantAccessExpectation
+	expectations       []*FilesServiceClientMockGrantAccessExpectation
+
+	callArgs []*FilesServiceClientMockGrantAccessParams
+	mutex    sync.RWMutex
+
+	expectedInvocations       uint64
+	expectedInvocationsOrigin string
+}
+
+// FilesServiceClientMockGrantAccessExpectation specifies expectation struct of the FilesServiceClient.GrantAccess
+type FilesServiceClientMockGrantAccessExpectation struct {
+	mock               *FilesServiceClientMock
+	params             *FilesServiceClientMockGrantAccessParams
+	paramPtrs          *FilesServiceClientMockGrantAccessParamPtrs
+	expectationOrigins FilesServiceClientMockGrantAccessExpectationOrigins
+	results            *FilesServiceClientMockGrantAccessResults
+	returnOrigin       string
+	Counter            uint64
+}
+
+// FilesServiceClientMockGrantAccessParams contains parameters of the FilesServiceClient.GrantAccess
+type FilesServiceClientMockGrantAccessParams struct {
+	ctx context.Context
+	pp1 *connect.Request[v1.GrantAccessRequest]
+}
+
+// FilesServiceClientMockGrantAccessParamPtrs contains pointers to parameters of the FilesServiceClient.GrantAccess
+type FilesServiceClientMockGrantAccessParamPtrs struct {
+	ctx *context.Context
+	pp1 **connect.Request[v1.GrantAccessRequest]
+}
+
+// FilesServiceClientMockGrantAccessResults contains results of the FilesServiceClient.GrantAccess
+type FilesServiceClientMockGrantAccessResults struct {
+	pp2 *connect.Response[v1.GrantAccessResponse]
+	err error
+}
+
+// FilesServiceClientMockGrantAccessOrigins contains origins of expectations of the FilesServiceClient.GrantAccess
+type FilesServiceClientMockGrantAccessExpectationOrigins struct {
+	origin    string
+	originCtx string
+	originPp1 string
+}
+
+// Marks this method to be optional. The default behavior of any method with Return() is '1 or more', meaning
+// the test will fail minimock's automatic final call check if the mocked method was not called at least once.
+// Optional() makes method check to work in '0 or more' mode.
+// It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
+// catch the problems when the expected method call is totally skipped during test run.
+func (mmGrantAccess *mFilesServiceClientMockGrantAccess) Optional() *mFilesServiceClientMockGrantAccess {
+	mmGrantAccess.optional = true
+	return mmGrantAccess
+}
+
+// Expect sets up expected params for FilesServiceClient.GrantAccess
+func (mmGrantAccess *mFilesServiceClientMockGrantAccess) Expect(ctx context.Context, pp1 *connect.Request[v1.GrantAccessRequest]) *mFilesServiceClientMockGrantAccess {
+	if mmGrantAccess.mock.funcGrantAccess != nil {
+		mmGrantAccess.mock.t.Fatalf("FilesServiceClientMock.GrantAccess mock is already set by Set")
+	}
+
+	if mmGrantAccess.defaultExpectation == nil {
+		mmGrantAccess.defaultExpectation = &FilesServiceClientMockGrantAccessExpectation{}
+	}
+
+	if mmGrantAccess.defaultExpectation.paramPtrs != nil {
+		mmGrantAccess.mock.t.Fatalf("FilesServiceClientMock.GrantAccess mock is already set by ExpectParams functions")
+	}
+
+	mmGrantAccess.defaultExpectation.params = &FilesServiceClientMockGrantAccessParams{ctx, pp1}
+	mmGrantAccess.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
+	for _, e := range mmGrantAccess.expectations {
+		if minimock.Equal(e.params, mmGrantAccess.defaultExpectation.params) {
+			mmGrantAccess.mock.t.Fatalf("Expectation set by When has same params: %#v", *mmGrantAccess.defaultExpectation.params)
+		}
+	}
+
+	return mmGrantAccess
+}
+
+// ExpectCtxParam1 sets up expected param ctx for FilesServiceClient.GrantAccess
+func (mmGrantAccess *mFilesServiceClientMockGrantAccess) ExpectCtxParam1(ctx context.Context) *mFilesServiceClientMockGrantAccess {
+	if mmGrantAccess.mock.funcGrantAccess != nil {
+		mmGrantAccess.mock.t.Fatalf("FilesServiceClientMock.GrantAccess mock is already set by Set")
+	}
+
+	if mmGrantAccess.defaultExpectation == nil {
+		mmGrantAccess.defaultExpectation = &FilesServiceClientMockGrantAccessExpectation{}
+	}
+
+	if mmGrantAccess.defaultExpectation.params != nil {
+		mmGrantAccess.mock.t.Fatalf("FilesServiceClientMock.GrantAccess mock is already set by Expect")
+	}
+
+	if mmGrantAccess.defaultExpectation.paramPtrs == nil {
+		mmGrantAccess.defaultExpectation.paramPtrs = &FilesServiceClientMockGrantAccessParamPtrs{}
+	}
+	mmGrantAccess.defaultExpectation.paramPtrs.ctx = &ctx
+	mmGrantAccess.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
+
+	return mmGrantAccess
+}
+
+// ExpectPp1Param2 sets up expected param pp1 for FilesServiceClient.GrantAccess
+func (mmGrantAccess *mFilesServiceClientMockGrantAccess) ExpectPp1Param2(pp1 *connect.Request[v1.GrantAccessRequest]) *mFilesServiceClientMockGrantAccess {
+	if mmGrantAccess.mock.funcGrantAccess != nil {
+		mmGrantAccess.mock.t.Fatalf("FilesServiceClientMock.GrantAccess mock is already set by Set")
+	}
+
+	if mmGrantAccess.defaultExpectation == nil {
+		mmGrantAccess.defaultExpectation = &FilesServiceClientMockGrantAccessExpectation{}
+	}
+
+	if mmGrantAccess.defaultExpectation.params != nil {
+		mmGrantAccess.mock.t.Fatalf("FilesServiceClientMock.GrantAccess mock is already set by Expect")
+	}
+
+	if mmGrantAccess.defaultExpectation.paramPtrs == nil {
+		mmGrantAccess.defaultExpectation.paramPtrs = &FilesServiceClientMockGrantAccessParamPtrs{}
+	}
+	mmGrantAccess.defaultExpectation.paramPtrs.pp1 = &pp1
+	mmGrantAccess.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
+
+	return mmGrantAccess
+}
+
+// Inspect accepts an inspector function that has same arguments as the FilesServiceClient.GrantAccess
+func (mmGrantAccess *mFilesServiceClientMockGrantAccess) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.GrantAccessRequest])) *mFilesServiceClientMockGrantAccess {
+	if mmGrantAccess.mock.inspectFuncGrantAccess != nil {
+		mmGrantAccess.mock.t.Fatalf("Inspect function is already set for FilesServiceClientMock.GrantAccess")
+	}
+
+	mmGrantAccess.mock.inspectFuncGrantAccess = f
+
+	return mmGrantAccess
+}
+
+// Return sets up results that will be returned by FilesServiceClient.GrantAccess
+func (mmGrantAccess *mFilesServiceClientMockGrantAccess) Return(pp2 *connect.Response[v1.GrantAccessResponse], err error) *FilesServiceClientMock {
+	if mmGrantAccess.mock.funcGrantAccess != nil {
+		mmGrantAccess.mock.t.Fatalf("FilesServiceClientMock.GrantAccess mock is already set by Set")
+	}
+
+	if mmGrantAccess.defaultExpectation == nil {
+		mmGrantAccess.defaultExpectation = &FilesServiceClientMockGrantAccessExpectation{mock: mmGrantAccess.mock}
+	}
+	mmGrantAccess.defaultExpectation.results = &FilesServiceClientMockGrantAccessResults{pp2, err}
+	mmGrantAccess.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
+	return mmGrantAccess.mock
+}
+
+// Set uses given function f to mock the FilesServiceClient.GrantAccess method
+func (mmGrantAccess *mFilesServiceClientMockGrantAccess) Set(f func(ctx context.Context, pp1 *connect.Request[v1.GrantAccessRequest]) (pp2 *connect.Response[v1.GrantAccessResponse], err error)) *FilesServiceClientMock {
+	if mmGrantAccess.defaultExpectation != nil {
+		mmGrantAccess.mock.t.Fatalf("Default expectation is already set for the FilesServiceClient.GrantAccess method")
+	}
+
+	if len(mmGrantAccess.expectations) > 0 {
+		mmGrantAccess.mock.t.Fatalf("Some expectations are already set for the FilesServiceClient.GrantAccess method")
+	}
+
+	mmGrantAccess.mock.funcGrantAccess = f
+	mmGrantAccess.mock.funcGrantAccessOrigin = minimock.CallerInfo(1)
+	return mmGrantAccess.mock
+}
+
+// When sets expectation for the FilesServiceClient.GrantAccess which will trigger the result defined by the following
+// Then helper
+func (mmGrantAccess *mFilesServiceClientMockGrantAccess) When(ctx context.Context, pp1 *connect.Request[v1.GrantAccessRequest]) *FilesServiceClientMockGrantAccessExpectation {
+	if mmGrantAccess.mock.funcGrantAccess != nil {
+		mmGrantAccess.mock.t.Fatalf("FilesServiceClientMock.GrantAccess mock is already set by Set")
+	}
+
+	expectation := &FilesServiceClientMockGrantAccessExpectation{
+		mock:               mmGrantAccess.mock,
+		params:             &FilesServiceClientMockGrantAccessParams{ctx, pp1},
+		expectationOrigins: FilesServiceClientMockGrantAccessExpectationOrigins{origin: minimock.CallerInfo(1)},
+	}
+	mmGrantAccess.expectations = append(mmGrantAccess.expectations, expectation)
+	return expectation
+}
+
+// Then sets up FilesServiceClient.GrantAccess return parameters for the expectation previously defined by the When method
+func (e *FilesServiceClientMockGrantAccessExpectation) Then(pp2 *connect.Response[v1.GrantAccessResponse], err error) *FilesServiceClientMock {
+	e.results = &FilesServiceClientMockGrantAccessResults{pp2, err}
+	return e.mock
+}
+
+// Times sets number of times FilesServiceClient.GrantAccess should be invoked
+func (mmGrantAccess *mFilesServiceClientMockGrantAccess) Times(n uint64) *mFilesServiceClientMockGrantAccess {
+	if n == 0 {
+		mmGrantAccess.mock.t.Fatalf("Times of FilesServiceClientMock.GrantAccess mock can not be zero")
+	}
+	mm_atomic.StoreUint64(&mmGrantAccess.expectedInvocations, n)
+	mmGrantAccess.expectedInvocationsOrigin = minimock.CallerInfo(1)
+	return mmGrantAccess
+}
+
+func (mmGrantAccess *mFilesServiceClientMockGrantAccess) invocationsDone() bool {
+	if len(mmGrantAccess.expectations) == 0 && mmGrantAccess.defaultExpectation == nil && mmGrantAccess.mock.funcGrantAccess == nil {
+		return true
+	}
+
+	totalInvocations := mm_atomic.LoadUint64(&mmGrantAccess.mock.afterGrantAccessCounter)
+	expectedInvocations := mm_atomic.LoadUint64(&mmGrantAccess.expectedInvocations)
+
+	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
+}
+
+// GrantAccess implements mm_filesv1connect.FilesServiceClient
+func (mmGrantAccess *FilesServiceClientMock) GrantAccess(ctx context.Context, pp1 *connect.Request[v1.GrantAccessRequest]) (pp2 *connect.Response[v1.GrantAccessResponse], err error) {
+	mm_atomic.AddUint64(&mmGrantAccess.beforeGrantAccessCounter, 1)
+	defer mm_atomic.AddUint64(&mmGrantAccess.afterGrantAccessCounter, 1)
+
+	mmGrantAccess.t.Helper()
+
+	if mmGrantAccess.inspectFuncGrantAccess != nil {
+		mmGrantAccess.inspectFuncGrantAccess(ctx, pp1)
+	}
+
+	mm_params := FilesServiceClientMockGrantAccessParams{ctx, pp1}
+
+	// Record call args
+	mmGrantAccess.GrantAccessMock.mutex.Lock()
+	mmGrantAccess.GrantAccessMock.callArgs = append(mmGrantAccess.GrantAccessMock.callArgs, &mm_params)
+	mmGrantAccess.GrantAccessMock.mutex.Unlock()
+
+	for _, e := range mmGrantAccess.GrantAccessMock.expectations {
+		if minimock.Equal(*e.params, mm_params) {
+			mm_atomic.AddUint64(&e.Counter, 1)
+			return e.results.pp2, e.results.err
+		}
+	}
+
+	if mmGrantAccess.GrantAccessMock.defaultExpectation != nil {
+		mm_atomic.AddUint64(&mmGrantAccess.GrantAccessMock.defaultExpectation.Counter, 1)
+		mm_want := mmGrantAccess.GrantAccessMock.defaultExpectation.params
+		mm_want_ptrs := mmGrantAccess.GrantAccessMock.defaultExpectation.paramPtrs
+
+		mm_got := FilesServiceClientMockGrantAccessParams{ctx, pp1}
+
+		if mm_want_ptrs != nil {
+
+			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
+				mmGrantAccess.t.Errorf("FilesServiceClientMock.GrantAccess got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+					mmGrantAccess.GrantAccessMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
+			}
+
+			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
+				mmGrantAccess.t.Errorf("FilesServiceClientMock.GrantAccess got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+					mmGrantAccess.GrantAccessMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
+			}
+
+		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
+			mmGrantAccess.t.Errorf("FilesServiceClientMock.GrantAccess got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmGrantAccess.GrantAccessMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
+		}
+
+		mm_results := mmGrantAccess.GrantAccessMock.defaultExpectation.results
+		if mm_results == nil {
+			mmGrantAccess.t.Fatal("No results are set for the FilesServiceClientMock.GrantAccess")
+		}
+		return (*mm_results).pp2, (*mm_results).err
+	}
+	if mmGrantAccess.funcGrantAccess != nil {
+		return mmGrantAccess.funcGrantAccess(ctx, pp1)
+	}
+	mmGrantAccess.t.Fatalf("Unexpected call to FilesServiceClientMock.GrantAccess. %v %v", ctx, pp1)
+	return
+}
+
+// GrantAccessAfterCounter returns a count of finished FilesServiceClientMock.GrantAccess invocations
+func (mmGrantAccess *FilesServiceClientMock) GrantAccessAfterCounter() uint64 {
+	return mm_atomic.LoadUint64(&mmGrantAccess.afterGrantAccessCounter)
+}
+
+// GrantAccessBeforeCounter returns a count of FilesServiceClientMock.GrantAccess invocations
+func (mmGrantAccess *FilesServiceClientMock) GrantAccessBeforeCounter() uint64 {
+	return mm_atomic.LoadUint64(&mmGrantAccess.beforeGrantAccessCounter)
+}
+
+// Calls returns a list of arguments used in each call to FilesServiceClientMock.GrantAccess.
+// The list is in the same order as the calls were made (i.e. recent calls have a higher index)
+func (mmGrantAccess *mFilesServiceClientMockGrantAccess) Calls() []*FilesServiceClientMockGrantAccessParams {
+	mmGrantAccess.mutex.RLock()
+
+	argCopy := make([]*FilesServiceClientMockGrantAccessParams, len(mmGrantAccess.callArgs))
+	copy(argCopy, mmGrantAccess.callArgs)
+
+	mmGrantAccess.mutex.RUnlock()
+
+	return argCopy
+}
+
+// MinimockGrantAccessDone returns true if the count of the GrantAccess invocations corresponds
+// the number of defined expectations
+func (m *FilesServiceClientMock) MinimockGrantAccessDone() bool {
+	if m.GrantAccessMock.optional {
+		// Optional methods provide '0 or more' call count restriction.
+		return true
+	}
+
+	for _, e := range m.GrantAccessMock.expectations {
+		if mm_atomic.LoadUint64(&e.Counter) < 1 {
+			return false
+		}
+	}
+
+	return m.GrantAccessMock.invocationsDone()
+}
+
+// MinimockGrantAccessInspect logs each unmet expectation
+func (m *FilesServiceClientMock) MinimockGrantAccessInspect() {
+	for _, e := range m.GrantAccessMock.expectations {
+		if mm_atomic.LoadUint64(&e.Counter) < 1 {
+			m.t.Errorf("Expected call to FilesServiceClientMock.GrantAccess at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+		}
+	}
+
+	afterGrantAccessCounter := mm_atomic.LoadUint64(&m.afterGrantAccessCounter)
+	// if default expectation was set then invocations count should be greater than zero
+	if m.GrantAccessMock.defaultExpectation != nil && afterGrantAccessCounter < 1 {
+		if m.GrantAccessMock.defaultExpectation.params == nil {
+			m.t.Errorf("Expected call to FilesServiceClientMock.GrantAccess at\n%s", m.GrantAccessMock.defaultExpectation.returnOrigin)
+		} else {
+			m.t.Errorf("Expected call to FilesServiceClientMock.GrantAccess at\n%s with params: %#v", m.GrantAccessMock.defaultExpectation.expectationOrigins.origin, *m.GrantAccessMock.defaultExpectation.params)
+		}
+	}
+	// if func was set then invocations count should be greater than zero
+	if m.funcGrantAccess != nil && afterGrantAccessCounter < 1 {
+		m.t.Errorf("Expected call to FilesServiceClientMock.GrantAccess at\n%s", m.funcGrantAccessOrigin)
+	}
+
+	if !m.GrantAccessMock.invocationsDone() && afterGrantAccessCounter > 0 {
+		m.t.Errorf("Expected %d calls to FilesServiceClientMock.GrantAccess at\n%s but found %d calls",
+			mm_atomic.LoadUint64(&m.GrantAccessMock.expectedInvocations), m.GrantAccessMock.expectedInvocationsOrigin, afterGrantAccessCounter)
+	}
+}
+
 type mFilesServiceClientMockHeadContent struct {
 	optional           bool
 	mock               *FilesServiceClientMock
@@ -6808,6 +8603,349 @@ func (m *FilesServiceClientMock) MinimockHeadContentInspect() {
 	if !m.HeadContentMock.invocationsDone() && afterHeadContentCounter > 0 {
 		m.t.Errorf("Expected %d calls to FilesServiceClientMock.HeadContent at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.HeadContentMock.expectedInvocations), m.HeadContentMock.expectedInvocationsOrigin, afterHeadContentCounter)
+	}
+}
+
+type mFilesServiceClientMockListAccess struct {
+	optional           bool
+	mock               *FilesServiceClientMock
+	defaultExpectation *FilesServiceClientMockListAccessExpectation
+	expectations       []*FilesServiceClientMockListAccessExpectation
+
+	callArgs []*FilesServiceClientMockListAccessParams
+	mutex    sync.RWMutex
+
+	expectedInvocations       uint64
+	expectedInvocationsOrigin string
+}
+
+// FilesServiceClientMockListAccessExpectation specifies expectation struct of the FilesServiceClient.ListAccess
+type FilesServiceClientMockListAccessExpectation struct {
+	mock               *FilesServiceClientMock
+	params             *FilesServiceClientMockListAccessParams
+	paramPtrs          *FilesServiceClientMockListAccessParamPtrs
+	expectationOrigins FilesServiceClientMockListAccessExpectationOrigins
+	results            *FilesServiceClientMockListAccessResults
+	returnOrigin       string
+	Counter            uint64
+}
+
+// FilesServiceClientMockListAccessParams contains parameters of the FilesServiceClient.ListAccess
+type FilesServiceClientMockListAccessParams struct {
+	ctx context.Context
+	pp1 *connect.Request[v1.ListAccessRequest]
+}
+
+// FilesServiceClientMockListAccessParamPtrs contains pointers to parameters of the FilesServiceClient.ListAccess
+type FilesServiceClientMockListAccessParamPtrs struct {
+	ctx *context.Context
+	pp1 **connect.Request[v1.ListAccessRequest]
+}
+
+// FilesServiceClientMockListAccessResults contains results of the FilesServiceClient.ListAccess
+type FilesServiceClientMockListAccessResults struct {
+	pp2 *connect.Response[v1.ListAccessResponse]
+	err error
+}
+
+// FilesServiceClientMockListAccessOrigins contains origins of expectations of the FilesServiceClient.ListAccess
+type FilesServiceClientMockListAccessExpectationOrigins struct {
+	origin    string
+	originCtx string
+	originPp1 string
+}
+
+// Marks this method to be optional. The default behavior of any method with Return() is '1 or more', meaning
+// the test will fail minimock's automatic final call check if the mocked method was not called at least once.
+// Optional() makes method check to work in '0 or more' mode.
+// It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
+// catch the problems when the expected method call is totally skipped during test run.
+func (mmListAccess *mFilesServiceClientMockListAccess) Optional() *mFilesServiceClientMockListAccess {
+	mmListAccess.optional = true
+	return mmListAccess
+}
+
+// Expect sets up expected params for FilesServiceClient.ListAccess
+func (mmListAccess *mFilesServiceClientMockListAccess) Expect(ctx context.Context, pp1 *connect.Request[v1.ListAccessRequest]) *mFilesServiceClientMockListAccess {
+	if mmListAccess.mock.funcListAccess != nil {
+		mmListAccess.mock.t.Fatalf("FilesServiceClientMock.ListAccess mock is already set by Set")
+	}
+
+	if mmListAccess.defaultExpectation == nil {
+		mmListAccess.defaultExpectation = &FilesServiceClientMockListAccessExpectation{}
+	}
+
+	if mmListAccess.defaultExpectation.paramPtrs != nil {
+		mmListAccess.mock.t.Fatalf("FilesServiceClientMock.ListAccess mock is already set by ExpectParams functions")
+	}
+
+	mmListAccess.defaultExpectation.params = &FilesServiceClientMockListAccessParams{ctx, pp1}
+	mmListAccess.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
+	for _, e := range mmListAccess.expectations {
+		if minimock.Equal(e.params, mmListAccess.defaultExpectation.params) {
+			mmListAccess.mock.t.Fatalf("Expectation set by When has same params: %#v", *mmListAccess.defaultExpectation.params)
+		}
+	}
+
+	return mmListAccess
+}
+
+// ExpectCtxParam1 sets up expected param ctx for FilesServiceClient.ListAccess
+func (mmListAccess *mFilesServiceClientMockListAccess) ExpectCtxParam1(ctx context.Context) *mFilesServiceClientMockListAccess {
+	if mmListAccess.mock.funcListAccess != nil {
+		mmListAccess.mock.t.Fatalf("FilesServiceClientMock.ListAccess mock is already set by Set")
+	}
+
+	if mmListAccess.defaultExpectation == nil {
+		mmListAccess.defaultExpectation = &FilesServiceClientMockListAccessExpectation{}
+	}
+
+	if mmListAccess.defaultExpectation.params != nil {
+		mmListAccess.mock.t.Fatalf("FilesServiceClientMock.ListAccess mock is already set by Expect")
+	}
+
+	if mmListAccess.defaultExpectation.paramPtrs == nil {
+		mmListAccess.defaultExpectation.paramPtrs = &FilesServiceClientMockListAccessParamPtrs{}
+	}
+	mmListAccess.defaultExpectation.paramPtrs.ctx = &ctx
+	mmListAccess.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
+
+	return mmListAccess
+}
+
+// ExpectPp1Param2 sets up expected param pp1 for FilesServiceClient.ListAccess
+func (mmListAccess *mFilesServiceClientMockListAccess) ExpectPp1Param2(pp1 *connect.Request[v1.ListAccessRequest]) *mFilesServiceClientMockListAccess {
+	if mmListAccess.mock.funcListAccess != nil {
+		mmListAccess.mock.t.Fatalf("FilesServiceClientMock.ListAccess mock is already set by Set")
+	}
+
+	if mmListAccess.defaultExpectation == nil {
+		mmListAccess.defaultExpectation = &FilesServiceClientMockListAccessExpectation{}
+	}
+
+	if mmListAccess.defaultExpectation.params != nil {
+		mmListAccess.mock.t.Fatalf("FilesServiceClientMock.ListAccess mock is already set by Expect")
+	}
+
+	if mmListAccess.defaultExpectation.paramPtrs == nil {
+		mmListAccess.defaultExpectation.paramPtrs = &FilesServiceClientMockListAccessParamPtrs{}
+	}
+	mmListAccess.defaultExpectation.paramPtrs.pp1 = &pp1
+	mmListAccess.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
+
+	return mmListAccess
+}
+
+// Inspect accepts an inspector function that has same arguments as the FilesServiceClient.ListAccess
+func (mmListAccess *mFilesServiceClientMockListAccess) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.ListAccessRequest])) *mFilesServiceClientMockListAccess {
+	if mmListAccess.mock.inspectFuncListAccess != nil {
+		mmListAccess.mock.t.Fatalf("Inspect function is already set for FilesServiceClientMock.ListAccess")
+	}
+
+	mmListAccess.mock.inspectFuncListAccess = f
+
+	return mmListAccess
+}
+
+// Return sets up results that will be returned by FilesServiceClient.ListAccess
+func (mmListAccess *mFilesServiceClientMockListAccess) Return(pp2 *connect.Response[v1.ListAccessResponse], err error) *FilesServiceClientMock {
+	if mmListAccess.mock.funcListAccess != nil {
+		mmListAccess.mock.t.Fatalf("FilesServiceClientMock.ListAccess mock is already set by Set")
+	}
+
+	if mmListAccess.defaultExpectation == nil {
+		mmListAccess.defaultExpectation = &FilesServiceClientMockListAccessExpectation{mock: mmListAccess.mock}
+	}
+	mmListAccess.defaultExpectation.results = &FilesServiceClientMockListAccessResults{pp2, err}
+	mmListAccess.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
+	return mmListAccess.mock
+}
+
+// Set uses given function f to mock the FilesServiceClient.ListAccess method
+func (mmListAccess *mFilesServiceClientMockListAccess) Set(f func(ctx context.Context, pp1 *connect.Request[v1.ListAccessRequest]) (pp2 *connect.Response[v1.ListAccessResponse], err error)) *FilesServiceClientMock {
+	if mmListAccess.defaultExpectation != nil {
+		mmListAccess.mock.t.Fatalf("Default expectation is already set for the FilesServiceClient.ListAccess method")
+	}
+
+	if len(mmListAccess.expectations) > 0 {
+		mmListAccess.mock.t.Fatalf("Some expectations are already set for the FilesServiceClient.ListAccess method")
+	}
+
+	mmListAccess.mock.funcListAccess = f
+	mmListAccess.mock.funcListAccessOrigin = minimock.CallerInfo(1)
+	return mmListAccess.mock
+}
+
+// When sets expectation for the FilesServiceClient.ListAccess which will trigger the result defined by the following
+// Then helper
+func (mmListAccess *mFilesServiceClientMockListAccess) When(ctx context.Context, pp1 *connect.Request[v1.ListAccessRequest]) *FilesServiceClientMockListAccessExpectation {
+	if mmListAccess.mock.funcListAccess != nil {
+		mmListAccess.mock.t.Fatalf("FilesServiceClientMock.ListAccess mock is already set by Set")
+	}
+
+	expectation := &FilesServiceClientMockListAccessExpectation{
+		mock:               mmListAccess.mock,
+		params:             &FilesServiceClientMockListAccessParams{ctx, pp1},
+		expectationOrigins: FilesServiceClientMockListAccessExpectationOrigins{origin: minimock.CallerInfo(1)},
+	}
+	mmListAccess.expectations = append(mmListAccess.expectations, expectation)
+	return expectation
+}
+
+// Then sets up FilesServiceClient.ListAccess return parameters for the expectation previously defined by the When method
+func (e *FilesServiceClientMockListAccessExpectation) Then(pp2 *connect.Response[v1.ListAccessResponse], err error) *FilesServiceClientMock {
+	e.results = &FilesServiceClientMockListAccessResults{pp2, err}
+	return e.mock
+}
+
+// Times sets number of times FilesServiceClient.ListAccess should be invoked
+func (mmListAccess *mFilesServiceClientMockListAccess) Times(n uint64) *mFilesServiceClientMockListAccess {
+	if n == 0 {
+		mmListAccess.mock.t.Fatalf("Times of FilesServiceClientMock.ListAccess mock can not be zero")
+	}
+	mm_atomic.StoreUint64(&mmListAccess.expectedInvocations, n)
+	mmListAccess.expectedInvocationsOrigin = minimock.CallerInfo(1)
+	return mmListAccess
+}
+
+func (mmListAccess *mFilesServiceClientMockListAccess) invocationsDone() bool {
+	if len(mmListAccess.expectations) == 0 && mmListAccess.defaultExpectation == nil && mmListAccess.mock.funcListAccess == nil {
+		return true
+	}
+
+	totalInvocations := mm_atomic.LoadUint64(&mmListAccess.mock.afterListAccessCounter)
+	expectedInvocations := mm_atomic.LoadUint64(&mmListAccess.expectedInvocations)
+
+	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
+}
+
+// ListAccess implements mm_filesv1connect.FilesServiceClient
+func (mmListAccess *FilesServiceClientMock) ListAccess(ctx context.Context, pp1 *connect.Request[v1.ListAccessRequest]) (pp2 *connect.Response[v1.ListAccessResponse], err error) {
+	mm_atomic.AddUint64(&mmListAccess.beforeListAccessCounter, 1)
+	defer mm_atomic.AddUint64(&mmListAccess.afterListAccessCounter, 1)
+
+	mmListAccess.t.Helper()
+
+	if mmListAccess.inspectFuncListAccess != nil {
+		mmListAccess.inspectFuncListAccess(ctx, pp1)
+	}
+
+	mm_params := FilesServiceClientMockListAccessParams{ctx, pp1}
+
+	// Record call args
+	mmListAccess.ListAccessMock.mutex.Lock()
+	mmListAccess.ListAccessMock.callArgs = append(mmListAccess.ListAccessMock.callArgs, &mm_params)
+	mmListAccess.ListAccessMock.mutex.Unlock()
+
+	for _, e := range mmListAccess.ListAccessMock.expectations {
+		if minimock.Equal(*e.params, mm_params) {
+			mm_atomic.AddUint64(&e.Counter, 1)
+			return e.results.pp2, e.results.err
+		}
+	}
+
+	if mmListAccess.ListAccessMock.defaultExpectation != nil {
+		mm_atomic.AddUint64(&mmListAccess.ListAccessMock.defaultExpectation.Counter, 1)
+		mm_want := mmListAccess.ListAccessMock.defaultExpectation.params
+		mm_want_ptrs := mmListAccess.ListAccessMock.defaultExpectation.paramPtrs
+
+		mm_got := FilesServiceClientMockListAccessParams{ctx, pp1}
+
+		if mm_want_ptrs != nil {
+
+			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
+				mmListAccess.t.Errorf("FilesServiceClientMock.ListAccess got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+					mmListAccess.ListAccessMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
+			}
+
+			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
+				mmListAccess.t.Errorf("FilesServiceClientMock.ListAccess got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+					mmListAccess.ListAccessMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
+			}
+
+		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
+			mmListAccess.t.Errorf("FilesServiceClientMock.ListAccess got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmListAccess.ListAccessMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
+		}
+
+		mm_results := mmListAccess.ListAccessMock.defaultExpectation.results
+		if mm_results == nil {
+			mmListAccess.t.Fatal("No results are set for the FilesServiceClientMock.ListAccess")
+		}
+		return (*mm_results).pp2, (*mm_results).err
+	}
+	if mmListAccess.funcListAccess != nil {
+		return mmListAccess.funcListAccess(ctx, pp1)
+	}
+	mmListAccess.t.Fatalf("Unexpected call to FilesServiceClientMock.ListAccess. %v %v", ctx, pp1)
+	return
+}
+
+// ListAccessAfterCounter returns a count of finished FilesServiceClientMock.ListAccess invocations
+func (mmListAccess *FilesServiceClientMock) ListAccessAfterCounter() uint64 {
+	return mm_atomic.LoadUint64(&mmListAccess.afterListAccessCounter)
+}
+
+// ListAccessBeforeCounter returns a count of FilesServiceClientMock.ListAccess invocations
+func (mmListAccess *FilesServiceClientMock) ListAccessBeforeCounter() uint64 {
+	return mm_atomic.LoadUint64(&mmListAccess.beforeListAccessCounter)
+}
+
+// Calls returns a list of arguments used in each call to FilesServiceClientMock.ListAccess.
+// The list is in the same order as the calls were made (i.e. recent calls have a higher index)
+func (mmListAccess *mFilesServiceClientMockListAccess) Calls() []*FilesServiceClientMockListAccessParams {
+	mmListAccess.mutex.RLock()
+
+	argCopy := make([]*FilesServiceClientMockListAccessParams, len(mmListAccess.callArgs))
+	copy(argCopy, mmListAccess.callArgs)
+
+	mmListAccess.mutex.RUnlock()
+
+	return argCopy
+}
+
+// MinimockListAccessDone returns true if the count of the ListAccess invocations corresponds
+// the number of defined expectations
+func (m *FilesServiceClientMock) MinimockListAccessDone() bool {
+	if m.ListAccessMock.optional {
+		// Optional methods provide '0 or more' call count restriction.
+		return true
+	}
+
+	for _, e := range m.ListAccessMock.expectations {
+		if mm_atomic.LoadUint64(&e.Counter) < 1 {
+			return false
+		}
+	}
+
+	return m.ListAccessMock.invocationsDone()
+}
+
+// MinimockListAccessInspect logs each unmet expectation
+func (m *FilesServiceClientMock) MinimockListAccessInspect() {
+	for _, e := range m.ListAccessMock.expectations {
+		if mm_atomic.LoadUint64(&e.Counter) < 1 {
+			m.t.Errorf("Expected call to FilesServiceClientMock.ListAccess at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+		}
+	}
+
+	afterListAccessCounter := mm_atomic.LoadUint64(&m.afterListAccessCounter)
+	// if default expectation was set then invocations count should be greater than zero
+	if m.ListAccessMock.defaultExpectation != nil && afterListAccessCounter < 1 {
+		if m.ListAccessMock.defaultExpectation.params == nil {
+			m.t.Errorf("Expected call to FilesServiceClientMock.ListAccess at\n%s", m.ListAccessMock.defaultExpectation.returnOrigin)
+		} else {
+			m.t.Errorf("Expected call to FilesServiceClientMock.ListAccess at\n%s with params: %#v", m.ListAccessMock.defaultExpectation.expectationOrigins.origin, *m.ListAccessMock.defaultExpectation.params)
+		}
+	}
+	// if func was set then invocations count should be greater than zero
+	if m.funcListAccess != nil && afterListAccessCounter < 1 {
+		m.t.Errorf("Expected call to FilesServiceClientMock.ListAccess at\n%s", m.funcListAccessOrigin)
+	}
+
+	if !m.ListAccessMock.invocationsDone() && afterListAccessCounter > 0 {
+		m.t.Errorf("Expected %d calls to FilesServiceClientMock.ListAccess at\n%s but found %d calls",
+			mm_atomic.LoadUint64(&m.ListAccessMock.expectedInvocations), m.ListAccessMock.expectedInvocationsOrigin, afterListAccessCounter)
 	}
 }
 
@@ -7497,6 +9635,349 @@ func (m *FilesServiceClientMock) MinimockListRetentionPoliciesInspect() {
 	}
 }
 
+type mFilesServiceClientMockPatchContent struct {
+	optional           bool
+	mock               *FilesServiceClientMock
+	defaultExpectation *FilesServiceClientMockPatchContentExpectation
+	expectations       []*FilesServiceClientMockPatchContentExpectation
+
+	callArgs []*FilesServiceClientMockPatchContentParams
+	mutex    sync.RWMutex
+
+	expectedInvocations       uint64
+	expectedInvocationsOrigin string
+}
+
+// FilesServiceClientMockPatchContentExpectation specifies expectation struct of the FilesServiceClient.PatchContent
+type FilesServiceClientMockPatchContentExpectation struct {
+	mock               *FilesServiceClientMock
+	params             *FilesServiceClientMockPatchContentParams
+	paramPtrs          *FilesServiceClientMockPatchContentParamPtrs
+	expectationOrigins FilesServiceClientMockPatchContentExpectationOrigins
+	results            *FilesServiceClientMockPatchContentResults
+	returnOrigin       string
+	Counter            uint64
+}
+
+// FilesServiceClientMockPatchContentParams contains parameters of the FilesServiceClient.PatchContent
+type FilesServiceClientMockPatchContentParams struct {
+	ctx context.Context
+	pp1 *connect.Request[v1.PatchContentRequest]
+}
+
+// FilesServiceClientMockPatchContentParamPtrs contains pointers to parameters of the FilesServiceClient.PatchContent
+type FilesServiceClientMockPatchContentParamPtrs struct {
+	ctx *context.Context
+	pp1 **connect.Request[v1.PatchContentRequest]
+}
+
+// FilesServiceClientMockPatchContentResults contains results of the FilesServiceClient.PatchContent
+type FilesServiceClientMockPatchContentResults struct {
+	pp2 *connect.Response[v1.PatchContentResponse]
+	err error
+}
+
+// FilesServiceClientMockPatchContentOrigins contains origins of expectations of the FilesServiceClient.PatchContent
+type FilesServiceClientMockPatchContentExpectationOrigins struct {
+	origin    string
+	originCtx string
+	originPp1 string
+}
+
+// Marks this method to be optional. The default behavior of any method with Return() is '1 or more', meaning
+// the test will fail minimock's automatic final call check if the mocked method was not called at least once.
+// Optional() makes method check to work in '0 or more' mode.
+// It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
+// catch the problems when the expected method call is totally skipped during test run.
+func (mmPatchContent *mFilesServiceClientMockPatchContent) Optional() *mFilesServiceClientMockPatchContent {
+	mmPatchContent.optional = true
+	return mmPatchContent
+}
+
+// Expect sets up expected params for FilesServiceClient.PatchContent
+func (mmPatchContent *mFilesServiceClientMockPatchContent) Expect(ctx context.Context, pp1 *connect.Request[v1.PatchContentRequest]) *mFilesServiceClientMockPatchContent {
+	if mmPatchContent.mock.funcPatchContent != nil {
+		mmPatchContent.mock.t.Fatalf("FilesServiceClientMock.PatchContent mock is already set by Set")
+	}
+
+	if mmPatchContent.defaultExpectation == nil {
+		mmPatchContent.defaultExpectation = &FilesServiceClientMockPatchContentExpectation{}
+	}
+
+	if mmPatchContent.defaultExpectation.paramPtrs != nil {
+		mmPatchContent.mock.t.Fatalf("FilesServiceClientMock.PatchContent mock is already set by ExpectParams functions")
+	}
+
+	mmPatchContent.defaultExpectation.params = &FilesServiceClientMockPatchContentParams{ctx, pp1}
+	mmPatchContent.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
+	for _, e := range mmPatchContent.expectations {
+		if minimock.Equal(e.params, mmPatchContent.defaultExpectation.params) {
+			mmPatchContent.mock.t.Fatalf("Expectation set by When has same params: %#v", *mmPatchContent.defaultExpectation.params)
+		}
+	}
+
+	return mmPatchContent
+}
+
+// ExpectCtxParam1 sets up expected param ctx for FilesServiceClient.PatchContent
+func (mmPatchContent *mFilesServiceClientMockPatchContent) ExpectCtxParam1(ctx context.Context) *mFilesServiceClientMockPatchContent {
+	if mmPatchContent.mock.funcPatchContent != nil {
+		mmPatchContent.mock.t.Fatalf("FilesServiceClientMock.PatchContent mock is already set by Set")
+	}
+
+	if mmPatchContent.defaultExpectation == nil {
+		mmPatchContent.defaultExpectation = &FilesServiceClientMockPatchContentExpectation{}
+	}
+
+	if mmPatchContent.defaultExpectation.params != nil {
+		mmPatchContent.mock.t.Fatalf("FilesServiceClientMock.PatchContent mock is already set by Expect")
+	}
+
+	if mmPatchContent.defaultExpectation.paramPtrs == nil {
+		mmPatchContent.defaultExpectation.paramPtrs = &FilesServiceClientMockPatchContentParamPtrs{}
+	}
+	mmPatchContent.defaultExpectation.paramPtrs.ctx = &ctx
+	mmPatchContent.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
+
+	return mmPatchContent
+}
+
+// ExpectPp1Param2 sets up expected param pp1 for FilesServiceClient.PatchContent
+func (mmPatchContent *mFilesServiceClientMockPatchContent) ExpectPp1Param2(pp1 *connect.Request[v1.PatchContentRequest]) *mFilesServiceClientMockPatchContent {
+	if mmPatchContent.mock.funcPatchContent != nil {
+		mmPatchContent.mock.t.Fatalf("FilesServiceClientMock.PatchContent mock is already set by Set")
+	}
+
+	if mmPatchContent.defaultExpectation == nil {
+		mmPatchContent.defaultExpectation = &FilesServiceClientMockPatchContentExpectation{}
+	}
+
+	if mmPatchContent.defaultExpectation.params != nil {
+		mmPatchContent.mock.t.Fatalf("FilesServiceClientMock.PatchContent mock is already set by Expect")
+	}
+
+	if mmPatchContent.defaultExpectation.paramPtrs == nil {
+		mmPatchContent.defaultExpectation.paramPtrs = &FilesServiceClientMockPatchContentParamPtrs{}
+	}
+	mmPatchContent.defaultExpectation.paramPtrs.pp1 = &pp1
+	mmPatchContent.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
+
+	return mmPatchContent
+}
+
+// Inspect accepts an inspector function that has same arguments as the FilesServiceClient.PatchContent
+func (mmPatchContent *mFilesServiceClientMockPatchContent) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.PatchContentRequest])) *mFilesServiceClientMockPatchContent {
+	if mmPatchContent.mock.inspectFuncPatchContent != nil {
+		mmPatchContent.mock.t.Fatalf("Inspect function is already set for FilesServiceClientMock.PatchContent")
+	}
+
+	mmPatchContent.mock.inspectFuncPatchContent = f
+
+	return mmPatchContent
+}
+
+// Return sets up results that will be returned by FilesServiceClient.PatchContent
+func (mmPatchContent *mFilesServiceClientMockPatchContent) Return(pp2 *connect.Response[v1.PatchContentResponse], err error) *FilesServiceClientMock {
+	if mmPatchContent.mock.funcPatchContent != nil {
+		mmPatchContent.mock.t.Fatalf("FilesServiceClientMock.PatchContent mock is already set by Set")
+	}
+
+	if mmPatchContent.defaultExpectation == nil {
+		mmPatchContent.defaultExpectation = &FilesServiceClientMockPatchContentExpectation{mock: mmPatchContent.mock}
+	}
+	mmPatchContent.defaultExpectation.results = &FilesServiceClientMockPatchContentResults{pp2, err}
+	mmPatchContent.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
+	return mmPatchContent.mock
+}
+
+// Set uses given function f to mock the FilesServiceClient.PatchContent method
+func (mmPatchContent *mFilesServiceClientMockPatchContent) Set(f func(ctx context.Context, pp1 *connect.Request[v1.PatchContentRequest]) (pp2 *connect.Response[v1.PatchContentResponse], err error)) *FilesServiceClientMock {
+	if mmPatchContent.defaultExpectation != nil {
+		mmPatchContent.mock.t.Fatalf("Default expectation is already set for the FilesServiceClient.PatchContent method")
+	}
+
+	if len(mmPatchContent.expectations) > 0 {
+		mmPatchContent.mock.t.Fatalf("Some expectations are already set for the FilesServiceClient.PatchContent method")
+	}
+
+	mmPatchContent.mock.funcPatchContent = f
+	mmPatchContent.mock.funcPatchContentOrigin = minimock.CallerInfo(1)
+	return mmPatchContent.mock
+}
+
+// When sets expectation for the FilesServiceClient.PatchContent which will trigger the result defined by the following
+// Then helper
+func (mmPatchContent *mFilesServiceClientMockPatchContent) When(ctx context.Context, pp1 *connect.Request[v1.PatchContentRequest]) *FilesServiceClientMockPatchContentExpectation {
+	if mmPatchContent.mock.funcPatchContent != nil {
+		mmPatchContent.mock.t.Fatalf("FilesServiceClientMock.PatchContent mock is already set by Set")
+	}
+
+	expectation := &FilesServiceClientMockPatchContentExpectation{
+		mock:               mmPatchContent.mock,
+		params:             &FilesServiceClientMockPatchContentParams{ctx, pp1},
+		expectationOrigins: FilesServiceClientMockPatchContentExpectationOrigins{origin: minimock.CallerInfo(1)},
+	}
+	mmPatchContent.expectations = append(mmPatchContent.expectations, expectation)
+	return expectation
+}
+
+// Then sets up FilesServiceClient.PatchContent return parameters for the expectation previously defined by the When method
+func (e *FilesServiceClientMockPatchContentExpectation) Then(pp2 *connect.Response[v1.PatchContentResponse], err error) *FilesServiceClientMock {
+	e.results = &FilesServiceClientMockPatchContentResults{pp2, err}
+	return e.mock
+}
+
+// Times sets number of times FilesServiceClient.PatchContent should be invoked
+func (mmPatchContent *mFilesServiceClientMockPatchContent) Times(n uint64) *mFilesServiceClientMockPatchContent {
+	if n == 0 {
+		mmPatchContent.mock.t.Fatalf("Times of FilesServiceClientMock.PatchContent mock can not be zero")
+	}
+	mm_atomic.StoreUint64(&mmPatchContent.expectedInvocations, n)
+	mmPatchContent.expectedInvocationsOrigin = minimock.CallerInfo(1)
+	return mmPatchContent
+}
+
+func (mmPatchContent *mFilesServiceClientMockPatchContent) invocationsDone() bool {
+	if len(mmPatchContent.expectations) == 0 && mmPatchContent.defaultExpectation == nil && mmPatchContent.mock.funcPatchContent == nil {
+		return true
+	}
+
+	totalInvocations := mm_atomic.LoadUint64(&mmPatchContent.mock.afterPatchContentCounter)
+	expectedInvocations := mm_atomic.LoadUint64(&mmPatchContent.expectedInvocations)
+
+	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
+}
+
+// PatchContent implements mm_filesv1connect.FilesServiceClient
+func (mmPatchContent *FilesServiceClientMock) PatchContent(ctx context.Context, pp1 *connect.Request[v1.PatchContentRequest]) (pp2 *connect.Response[v1.PatchContentResponse], err error) {
+	mm_atomic.AddUint64(&mmPatchContent.beforePatchContentCounter, 1)
+	defer mm_atomic.AddUint64(&mmPatchContent.afterPatchContentCounter, 1)
+
+	mmPatchContent.t.Helper()
+
+	if mmPatchContent.inspectFuncPatchContent != nil {
+		mmPatchContent.inspectFuncPatchContent(ctx, pp1)
+	}
+
+	mm_params := FilesServiceClientMockPatchContentParams{ctx, pp1}
+
+	// Record call args
+	mmPatchContent.PatchContentMock.mutex.Lock()
+	mmPatchContent.PatchContentMock.callArgs = append(mmPatchContent.PatchContentMock.callArgs, &mm_params)
+	mmPatchContent.PatchContentMock.mutex.Unlock()
+
+	for _, e := range mmPatchContent.PatchContentMock.expectations {
+		if minimock.Equal(*e.params, mm_params) {
+			mm_atomic.AddUint64(&e.Counter, 1)
+			return e.results.pp2, e.results.err
+		}
+	}
+
+	if mmPatchContent.PatchContentMock.defaultExpectation != nil {
+		mm_atomic.AddUint64(&mmPatchContent.PatchContentMock.defaultExpectation.Counter, 1)
+		mm_want := mmPatchContent.PatchContentMock.defaultExpectation.params
+		mm_want_ptrs := mmPatchContent.PatchContentMock.defaultExpectation.paramPtrs
+
+		mm_got := FilesServiceClientMockPatchContentParams{ctx, pp1}
+
+		if mm_want_ptrs != nil {
+
+			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
+				mmPatchContent.t.Errorf("FilesServiceClientMock.PatchContent got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+					mmPatchContent.PatchContentMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
+			}
+
+			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
+				mmPatchContent.t.Errorf("FilesServiceClientMock.PatchContent got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+					mmPatchContent.PatchContentMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
+			}
+
+		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
+			mmPatchContent.t.Errorf("FilesServiceClientMock.PatchContent got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmPatchContent.PatchContentMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
+		}
+
+		mm_results := mmPatchContent.PatchContentMock.defaultExpectation.results
+		if mm_results == nil {
+			mmPatchContent.t.Fatal("No results are set for the FilesServiceClientMock.PatchContent")
+		}
+		return (*mm_results).pp2, (*mm_results).err
+	}
+	if mmPatchContent.funcPatchContent != nil {
+		return mmPatchContent.funcPatchContent(ctx, pp1)
+	}
+	mmPatchContent.t.Fatalf("Unexpected call to FilesServiceClientMock.PatchContent. %v %v", ctx, pp1)
+	return
+}
+
+// PatchContentAfterCounter returns a count of finished FilesServiceClientMock.PatchContent invocations
+func (mmPatchContent *FilesServiceClientMock) PatchContentAfterCounter() uint64 {
+	return mm_atomic.LoadUint64(&mmPatchContent.afterPatchContentCounter)
+}
+
+// PatchContentBeforeCounter returns a count of FilesServiceClientMock.PatchContent invocations
+func (mmPatchContent *FilesServiceClientMock) PatchContentBeforeCounter() uint64 {
+	return mm_atomic.LoadUint64(&mmPatchContent.beforePatchContentCounter)
+}
+
+// Calls returns a list of arguments used in each call to FilesServiceClientMock.PatchContent.
+// The list is in the same order as the calls were made (i.e. recent calls have a higher index)
+func (mmPatchContent *mFilesServiceClientMockPatchContent) Calls() []*FilesServiceClientMockPatchContentParams {
+	mmPatchContent.mutex.RLock()
+
+	argCopy := make([]*FilesServiceClientMockPatchContentParams, len(mmPatchContent.callArgs))
+	copy(argCopy, mmPatchContent.callArgs)
+
+	mmPatchContent.mutex.RUnlock()
+
+	return argCopy
+}
+
+// MinimockPatchContentDone returns true if the count of the PatchContent invocations corresponds
+// the number of defined expectations
+func (m *FilesServiceClientMock) MinimockPatchContentDone() bool {
+	if m.PatchContentMock.optional {
+		// Optional methods provide '0 or more' call count restriction.
+		return true
+	}
+
+	for _, e := range m.PatchContentMock.expectations {
+		if mm_atomic.LoadUint64(&e.Counter) < 1 {
+			return false
+		}
+	}
+
+	return m.PatchContentMock.invocationsDone()
+}
+
+// MinimockPatchContentInspect logs each unmet expectation
+func (m *FilesServiceClientMock) MinimockPatchContentInspect() {
+	for _, e := range m.PatchContentMock.expectations {
+		if mm_atomic.LoadUint64(&e.Counter) < 1 {
+			m.t.Errorf("Expected call to FilesServiceClientMock.PatchContent at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+		}
+	}
+
+	afterPatchContentCounter := mm_atomic.LoadUint64(&m.afterPatchContentCounter)
+	// if default expectation was set then invocations count should be greater than zero
+	if m.PatchContentMock.defaultExpectation != nil && afterPatchContentCounter < 1 {
+		if m.PatchContentMock.defaultExpectation.params == nil {
+			m.t.Errorf("Expected call to FilesServiceClientMock.PatchContent at\n%s", m.PatchContentMock.defaultExpectation.returnOrigin)
+		} else {
+			m.t.Errorf("Expected call to FilesServiceClientMock.PatchContent at\n%s with params: %#v", m.PatchContentMock.defaultExpectation.expectationOrigins.origin, *m.PatchContentMock.defaultExpectation.params)
+		}
+	}
+	// if func was set then invocations count should be greater than zero
+	if m.funcPatchContent != nil && afterPatchContentCounter < 1 {
+		m.t.Errorf("Expected call to FilesServiceClientMock.PatchContent at\n%s", m.funcPatchContentOrigin)
+	}
+
+	if !m.PatchContentMock.invocationsDone() && afterPatchContentCounter > 0 {
+		m.t.Errorf("Expected %d calls to FilesServiceClientMock.PatchContent at\n%s but found %d calls",
+			mm_atomic.LoadUint64(&m.PatchContentMock.expectedInvocations), m.PatchContentMock.expectedInvocationsOrigin, afterPatchContentCounter)
+	}
+}
+
 type mFilesServiceClientMockRestoreVersion struct {
 	optional           bool
 	mock               *FilesServiceClientMock
@@ -7837,6 +10318,349 @@ func (m *FilesServiceClientMock) MinimockRestoreVersionInspect() {
 	if !m.RestoreVersionMock.invocationsDone() && afterRestoreVersionCounter > 0 {
 		m.t.Errorf("Expected %d calls to FilesServiceClientMock.RestoreVersion at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.RestoreVersionMock.expectedInvocations), m.RestoreVersionMock.expectedInvocationsOrigin, afterRestoreVersionCounter)
+	}
+}
+
+type mFilesServiceClientMockRevokeAccess struct {
+	optional           bool
+	mock               *FilesServiceClientMock
+	defaultExpectation *FilesServiceClientMockRevokeAccessExpectation
+	expectations       []*FilesServiceClientMockRevokeAccessExpectation
+
+	callArgs []*FilesServiceClientMockRevokeAccessParams
+	mutex    sync.RWMutex
+
+	expectedInvocations       uint64
+	expectedInvocationsOrigin string
+}
+
+// FilesServiceClientMockRevokeAccessExpectation specifies expectation struct of the FilesServiceClient.RevokeAccess
+type FilesServiceClientMockRevokeAccessExpectation struct {
+	mock               *FilesServiceClientMock
+	params             *FilesServiceClientMockRevokeAccessParams
+	paramPtrs          *FilesServiceClientMockRevokeAccessParamPtrs
+	expectationOrigins FilesServiceClientMockRevokeAccessExpectationOrigins
+	results            *FilesServiceClientMockRevokeAccessResults
+	returnOrigin       string
+	Counter            uint64
+}
+
+// FilesServiceClientMockRevokeAccessParams contains parameters of the FilesServiceClient.RevokeAccess
+type FilesServiceClientMockRevokeAccessParams struct {
+	ctx context.Context
+	pp1 *connect.Request[v1.RevokeAccessRequest]
+}
+
+// FilesServiceClientMockRevokeAccessParamPtrs contains pointers to parameters of the FilesServiceClient.RevokeAccess
+type FilesServiceClientMockRevokeAccessParamPtrs struct {
+	ctx *context.Context
+	pp1 **connect.Request[v1.RevokeAccessRequest]
+}
+
+// FilesServiceClientMockRevokeAccessResults contains results of the FilesServiceClient.RevokeAccess
+type FilesServiceClientMockRevokeAccessResults struct {
+	pp2 *connect.Response[v1.RevokeAccessResponse]
+	err error
+}
+
+// FilesServiceClientMockRevokeAccessOrigins contains origins of expectations of the FilesServiceClient.RevokeAccess
+type FilesServiceClientMockRevokeAccessExpectationOrigins struct {
+	origin    string
+	originCtx string
+	originPp1 string
+}
+
+// Marks this method to be optional. The default behavior of any method with Return() is '1 or more', meaning
+// the test will fail minimock's automatic final call check if the mocked method was not called at least once.
+// Optional() makes method check to work in '0 or more' mode.
+// It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
+// catch the problems when the expected method call is totally skipped during test run.
+func (mmRevokeAccess *mFilesServiceClientMockRevokeAccess) Optional() *mFilesServiceClientMockRevokeAccess {
+	mmRevokeAccess.optional = true
+	return mmRevokeAccess
+}
+
+// Expect sets up expected params for FilesServiceClient.RevokeAccess
+func (mmRevokeAccess *mFilesServiceClientMockRevokeAccess) Expect(ctx context.Context, pp1 *connect.Request[v1.RevokeAccessRequest]) *mFilesServiceClientMockRevokeAccess {
+	if mmRevokeAccess.mock.funcRevokeAccess != nil {
+		mmRevokeAccess.mock.t.Fatalf("FilesServiceClientMock.RevokeAccess mock is already set by Set")
+	}
+
+	if mmRevokeAccess.defaultExpectation == nil {
+		mmRevokeAccess.defaultExpectation = &FilesServiceClientMockRevokeAccessExpectation{}
+	}
+
+	if mmRevokeAccess.defaultExpectation.paramPtrs != nil {
+		mmRevokeAccess.mock.t.Fatalf("FilesServiceClientMock.RevokeAccess mock is already set by ExpectParams functions")
+	}
+
+	mmRevokeAccess.defaultExpectation.params = &FilesServiceClientMockRevokeAccessParams{ctx, pp1}
+	mmRevokeAccess.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
+	for _, e := range mmRevokeAccess.expectations {
+		if minimock.Equal(e.params, mmRevokeAccess.defaultExpectation.params) {
+			mmRevokeAccess.mock.t.Fatalf("Expectation set by When has same params: %#v", *mmRevokeAccess.defaultExpectation.params)
+		}
+	}
+
+	return mmRevokeAccess
+}
+
+// ExpectCtxParam1 sets up expected param ctx for FilesServiceClient.RevokeAccess
+func (mmRevokeAccess *mFilesServiceClientMockRevokeAccess) ExpectCtxParam1(ctx context.Context) *mFilesServiceClientMockRevokeAccess {
+	if mmRevokeAccess.mock.funcRevokeAccess != nil {
+		mmRevokeAccess.mock.t.Fatalf("FilesServiceClientMock.RevokeAccess mock is already set by Set")
+	}
+
+	if mmRevokeAccess.defaultExpectation == nil {
+		mmRevokeAccess.defaultExpectation = &FilesServiceClientMockRevokeAccessExpectation{}
+	}
+
+	if mmRevokeAccess.defaultExpectation.params != nil {
+		mmRevokeAccess.mock.t.Fatalf("FilesServiceClientMock.RevokeAccess mock is already set by Expect")
+	}
+
+	if mmRevokeAccess.defaultExpectation.paramPtrs == nil {
+		mmRevokeAccess.defaultExpectation.paramPtrs = &FilesServiceClientMockRevokeAccessParamPtrs{}
+	}
+	mmRevokeAccess.defaultExpectation.paramPtrs.ctx = &ctx
+	mmRevokeAccess.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
+
+	return mmRevokeAccess
+}
+
+// ExpectPp1Param2 sets up expected param pp1 for FilesServiceClient.RevokeAccess
+func (mmRevokeAccess *mFilesServiceClientMockRevokeAccess) ExpectPp1Param2(pp1 *connect.Request[v1.RevokeAccessRequest]) *mFilesServiceClientMockRevokeAccess {
+	if mmRevokeAccess.mock.funcRevokeAccess != nil {
+		mmRevokeAccess.mock.t.Fatalf("FilesServiceClientMock.RevokeAccess mock is already set by Set")
+	}
+
+	if mmRevokeAccess.defaultExpectation == nil {
+		mmRevokeAccess.defaultExpectation = &FilesServiceClientMockRevokeAccessExpectation{}
+	}
+
+	if mmRevokeAccess.defaultExpectation.params != nil {
+		mmRevokeAccess.mock.t.Fatalf("FilesServiceClientMock.RevokeAccess mock is already set by Expect")
+	}
+
+	if mmRevokeAccess.defaultExpectation.paramPtrs == nil {
+		mmRevokeAccess.defaultExpectation.paramPtrs = &FilesServiceClientMockRevokeAccessParamPtrs{}
+	}
+	mmRevokeAccess.defaultExpectation.paramPtrs.pp1 = &pp1
+	mmRevokeAccess.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
+
+	return mmRevokeAccess
+}
+
+// Inspect accepts an inspector function that has same arguments as the FilesServiceClient.RevokeAccess
+func (mmRevokeAccess *mFilesServiceClientMockRevokeAccess) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.RevokeAccessRequest])) *mFilesServiceClientMockRevokeAccess {
+	if mmRevokeAccess.mock.inspectFuncRevokeAccess != nil {
+		mmRevokeAccess.mock.t.Fatalf("Inspect function is already set for FilesServiceClientMock.RevokeAccess")
+	}
+
+	mmRevokeAccess.mock.inspectFuncRevokeAccess = f
+
+	return mmRevokeAccess
+}
+
+// Return sets up results that will be returned by FilesServiceClient.RevokeAccess
+func (mmRevokeAccess *mFilesServiceClientMockRevokeAccess) Return(pp2 *connect.Response[v1.RevokeAccessResponse], err error) *FilesServiceClientMock {
+	if mmRevokeAccess.mock.funcRevokeAccess != nil {
+		mmRevokeAccess.mock.t.Fatalf("FilesServiceClientMock.RevokeAccess mock is already set by Set")
+	}
+
+	if mmRevokeAccess.defaultExpectation == nil {
+		mmRevokeAccess.defaultExpectation = &FilesServiceClientMockRevokeAccessExpectation{mock: mmRevokeAccess.mock}
+	}
+	mmRevokeAccess.defaultExpectation.results = &FilesServiceClientMockRevokeAccessResults{pp2, err}
+	mmRevokeAccess.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
+	return mmRevokeAccess.mock
+}
+
+// Set uses given function f to mock the FilesServiceClient.RevokeAccess method
+func (mmRevokeAccess *mFilesServiceClientMockRevokeAccess) Set(f func(ctx context.Context, pp1 *connect.Request[v1.RevokeAccessRequest]) (pp2 *connect.Response[v1.RevokeAccessResponse], err error)) *FilesServiceClientMock {
+	if mmRevokeAccess.defaultExpectation != nil {
+		mmRevokeAccess.mock.t.Fatalf("Default expectation is already set for the FilesServiceClient.RevokeAccess method")
+	}
+
+	if len(mmRevokeAccess.expectations) > 0 {
+		mmRevokeAccess.mock.t.Fatalf("Some expectations are already set for the FilesServiceClient.RevokeAccess method")
+	}
+
+	mmRevokeAccess.mock.funcRevokeAccess = f
+	mmRevokeAccess.mock.funcRevokeAccessOrigin = minimock.CallerInfo(1)
+	return mmRevokeAccess.mock
+}
+
+// When sets expectation for the FilesServiceClient.RevokeAccess which will trigger the result defined by the following
+// Then helper
+func (mmRevokeAccess *mFilesServiceClientMockRevokeAccess) When(ctx context.Context, pp1 *connect.Request[v1.RevokeAccessRequest]) *FilesServiceClientMockRevokeAccessExpectation {
+	if mmRevokeAccess.mock.funcRevokeAccess != nil {
+		mmRevokeAccess.mock.t.Fatalf("FilesServiceClientMock.RevokeAccess mock is already set by Set")
+	}
+
+	expectation := &FilesServiceClientMockRevokeAccessExpectation{
+		mock:               mmRevokeAccess.mock,
+		params:             &FilesServiceClientMockRevokeAccessParams{ctx, pp1},
+		expectationOrigins: FilesServiceClientMockRevokeAccessExpectationOrigins{origin: minimock.CallerInfo(1)},
+	}
+	mmRevokeAccess.expectations = append(mmRevokeAccess.expectations, expectation)
+	return expectation
+}
+
+// Then sets up FilesServiceClient.RevokeAccess return parameters for the expectation previously defined by the When method
+func (e *FilesServiceClientMockRevokeAccessExpectation) Then(pp2 *connect.Response[v1.RevokeAccessResponse], err error) *FilesServiceClientMock {
+	e.results = &FilesServiceClientMockRevokeAccessResults{pp2, err}
+	return e.mock
+}
+
+// Times sets number of times FilesServiceClient.RevokeAccess should be invoked
+func (mmRevokeAccess *mFilesServiceClientMockRevokeAccess) Times(n uint64) *mFilesServiceClientMockRevokeAccess {
+	if n == 0 {
+		mmRevokeAccess.mock.t.Fatalf("Times of FilesServiceClientMock.RevokeAccess mock can not be zero")
+	}
+	mm_atomic.StoreUint64(&mmRevokeAccess.expectedInvocations, n)
+	mmRevokeAccess.expectedInvocationsOrigin = minimock.CallerInfo(1)
+	return mmRevokeAccess
+}
+
+func (mmRevokeAccess *mFilesServiceClientMockRevokeAccess) invocationsDone() bool {
+	if len(mmRevokeAccess.expectations) == 0 && mmRevokeAccess.defaultExpectation == nil && mmRevokeAccess.mock.funcRevokeAccess == nil {
+		return true
+	}
+
+	totalInvocations := mm_atomic.LoadUint64(&mmRevokeAccess.mock.afterRevokeAccessCounter)
+	expectedInvocations := mm_atomic.LoadUint64(&mmRevokeAccess.expectedInvocations)
+
+	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
+}
+
+// RevokeAccess implements mm_filesv1connect.FilesServiceClient
+func (mmRevokeAccess *FilesServiceClientMock) RevokeAccess(ctx context.Context, pp1 *connect.Request[v1.RevokeAccessRequest]) (pp2 *connect.Response[v1.RevokeAccessResponse], err error) {
+	mm_atomic.AddUint64(&mmRevokeAccess.beforeRevokeAccessCounter, 1)
+	defer mm_atomic.AddUint64(&mmRevokeAccess.afterRevokeAccessCounter, 1)
+
+	mmRevokeAccess.t.Helper()
+
+	if mmRevokeAccess.inspectFuncRevokeAccess != nil {
+		mmRevokeAccess.inspectFuncRevokeAccess(ctx, pp1)
+	}
+
+	mm_params := FilesServiceClientMockRevokeAccessParams{ctx, pp1}
+
+	// Record call args
+	mmRevokeAccess.RevokeAccessMock.mutex.Lock()
+	mmRevokeAccess.RevokeAccessMock.callArgs = append(mmRevokeAccess.RevokeAccessMock.callArgs, &mm_params)
+	mmRevokeAccess.RevokeAccessMock.mutex.Unlock()
+
+	for _, e := range mmRevokeAccess.RevokeAccessMock.expectations {
+		if minimock.Equal(*e.params, mm_params) {
+			mm_atomic.AddUint64(&e.Counter, 1)
+			return e.results.pp2, e.results.err
+		}
+	}
+
+	if mmRevokeAccess.RevokeAccessMock.defaultExpectation != nil {
+		mm_atomic.AddUint64(&mmRevokeAccess.RevokeAccessMock.defaultExpectation.Counter, 1)
+		mm_want := mmRevokeAccess.RevokeAccessMock.defaultExpectation.params
+		mm_want_ptrs := mmRevokeAccess.RevokeAccessMock.defaultExpectation.paramPtrs
+
+		mm_got := FilesServiceClientMockRevokeAccessParams{ctx, pp1}
+
+		if mm_want_ptrs != nil {
+
+			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
+				mmRevokeAccess.t.Errorf("FilesServiceClientMock.RevokeAccess got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+					mmRevokeAccess.RevokeAccessMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
+			}
+
+			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
+				mmRevokeAccess.t.Errorf("FilesServiceClientMock.RevokeAccess got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+					mmRevokeAccess.RevokeAccessMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
+			}
+
+		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
+			mmRevokeAccess.t.Errorf("FilesServiceClientMock.RevokeAccess got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmRevokeAccess.RevokeAccessMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
+		}
+
+		mm_results := mmRevokeAccess.RevokeAccessMock.defaultExpectation.results
+		if mm_results == nil {
+			mmRevokeAccess.t.Fatal("No results are set for the FilesServiceClientMock.RevokeAccess")
+		}
+		return (*mm_results).pp2, (*mm_results).err
+	}
+	if mmRevokeAccess.funcRevokeAccess != nil {
+		return mmRevokeAccess.funcRevokeAccess(ctx, pp1)
+	}
+	mmRevokeAccess.t.Fatalf("Unexpected call to FilesServiceClientMock.RevokeAccess. %v %v", ctx, pp1)
+	return
+}
+
+// RevokeAccessAfterCounter returns a count of finished FilesServiceClientMock.RevokeAccess invocations
+func (mmRevokeAccess *FilesServiceClientMock) RevokeAccessAfterCounter() uint64 {
+	return mm_atomic.LoadUint64(&mmRevokeAccess.afterRevokeAccessCounter)
+}
+
+// RevokeAccessBeforeCounter returns a count of FilesServiceClientMock.RevokeAccess invocations
+func (mmRevokeAccess *FilesServiceClientMock) RevokeAccessBeforeCounter() uint64 {
+	return mm_atomic.LoadUint64(&mmRevokeAccess.beforeRevokeAccessCounter)
+}
+
+// Calls returns a list of arguments used in each call to FilesServiceClientMock.RevokeAccess.
+// The list is in the same order as the calls were made (i.e. recent calls have a higher index)
+func (mmRevokeAccess *mFilesServiceClientMockRevokeAccess) Calls() []*FilesServiceClientMockRevokeAccessParams {
+	mmRevokeAccess.mutex.RLock()
+
+	argCopy := make([]*FilesServiceClientMockRevokeAccessParams, len(mmRevokeAccess.callArgs))
+	copy(argCopy, mmRevokeAccess.callArgs)
+
+	mmRevokeAccess.mutex.RUnlock()
+
+	return argCopy
+}
+
+// MinimockRevokeAccessDone returns true if the count of the RevokeAccess invocations corresponds
+// the number of defined expectations
+func (m *FilesServiceClientMock) MinimockRevokeAccessDone() bool {
+	if m.RevokeAccessMock.optional {
+		// Optional methods provide '0 or more' call count restriction.
+		return true
+	}
+
+	for _, e := range m.RevokeAccessMock.expectations {
+		if mm_atomic.LoadUint64(&e.Counter) < 1 {
+			return false
+		}
+	}
+
+	return m.RevokeAccessMock.invocationsDone()
+}
+
+// MinimockRevokeAccessInspect logs each unmet expectation
+func (m *FilesServiceClientMock) MinimockRevokeAccessInspect() {
+	for _, e := range m.RevokeAccessMock.expectations {
+		if mm_atomic.LoadUint64(&e.Counter) < 1 {
+			m.t.Errorf("Expected call to FilesServiceClientMock.RevokeAccess at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+		}
+	}
+
+	afterRevokeAccessCounter := mm_atomic.LoadUint64(&m.afterRevokeAccessCounter)
+	// if default expectation was set then invocations count should be greater than zero
+	if m.RevokeAccessMock.defaultExpectation != nil && afterRevokeAccessCounter < 1 {
+		if m.RevokeAccessMock.defaultExpectation.params == nil {
+			m.t.Errorf("Expected call to FilesServiceClientMock.RevokeAccess at\n%s", m.RevokeAccessMock.defaultExpectation.returnOrigin)
+		} else {
+			m.t.Errorf("Expected call to FilesServiceClientMock.RevokeAccess at\n%s with params: %#v", m.RevokeAccessMock.defaultExpectation.expectationOrigins.origin, *m.RevokeAccessMock.defaultExpectation.params)
+		}
+	}
+	// if func was set then invocations count should be greater than zero
+	if m.funcRevokeAccess != nil && afterRevokeAccessCounter < 1 {
+		m.t.Errorf("Expected call to FilesServiceClientMock.RevokeAccess at\n%s", m.funcRevokeAccessOrigin)
+	}
+
+	if !m.RevokeAccessMock.invocationsDone() && afterRevokeAccessCounter > 0 {
+		m.t.Errorf("Expected %d calls to FilesServiceClientMock.RevokeAccess at\n%s but found %d calls",
+			mm_atomic.LoadUint64(&m.RevokeAccessMock.expectedInvocations), m.RevokeAccessMock.expectedInvocationsOrigin, afterRevokeAccessCounter)
 	}
 }
 
@@ -9198,6 +12022,12 @@ func (m *FilesServiceClientMock) MinimockFinish() {
 
 			m.MinimockDeleteContentInspect()
 
+			m.MinimockDownloadContentInspect()
+
+			m.MinimockDownloadContentRangeInspect()
+
+			m.MinimockFinalizeSignedUploadInspect()
+
 			m.MinimockGetConfigInspect()
 
 			m.MinimockGetContentInspect()
@@ -9205,6 +12035,8 @@ func (m *FilesServiceClientMock) MinimockFinish() {
 			m.MinimockGetContentOverrideNameInspect()
 
 			m.MinimockGetContentThumbnailInspect()
+
+			m.MinimockGetMultipartUploadInspect()
 
 			m.MinimockGetRetentionPolicyInspect()
 
@@ -9220,13 +12052,21 @@ func (m *FilesServiceClientMock) MinimockFinish() {
 
 			m.MinimockGetVersionsInspect()
 
+			m.MinimockGrantAccessInspect()
+
 			m.MinimockHeadContentInspect()
+
+			m.MinimockListAccessInspect()
 
 			m.MinimockListMultipartPartsInspect()
 
 			m.MinimockListRetentionPoliciesInspect()
 
+			m.MinimockPatchContentInspect()
+
 			m.MinimockRestoreVersionInspect()
+
+			m.MinimockRevokeAccessInspect()
 
 			m.MinimockSearchMediaInspect()
 
@@ -9265,10 +12105,14 @@ func (m *FilesServiceClientMock) minimockDone() bool {
 		m.MinimockCreateContentDone() &&
 		m.MinimockCreateMultipartUploadDone() &&
 		m.MinimockDeleteContentDone() &&
+		m.MinimockDownloadContentDone() &&
+		m.MinimockDownloadContentRangeDone() &&
+		m.MinimockFinalizeSignedUploadDone() &&
 		m.MinimockGetConfigDone() &&
 		m.MinimockGetContentDone() &&
 		m.MinimockGetContentOverrideNameDone() &&
 		m.MinimockGetContentThumbnailDone() &&
+		m.MinimockGetMultipartUploadDone() &&
 		m.MinimockGetRetentionPolicyDone() &&
 		m.MinimockGetSignedDownloadUrlDone() &&
 		m.MinimockGetSignedUploadUrlDone() &&
@@ -9276,10 +12120,14 @@ func (m *FilesServiceClientMock) minimockDone() bool {
 		m.MinimockGetUrlPreviewDone() &&
 		m.MinimockGetUserUsageDone() &&
 		m.MinimockGetVersionsDone() &&
+		m.MinimockGrantAccessDone() &&
 		m.MinimockHeadContentDone() &&
+		m.MinimockListAccessDone() &&
 		m.MinimockListMultipartPartsDone() &&
 		m.MinimockListRetentionPoliciesDone() &&
+		m.MinimockPatchContentDone() &&
 		m.MinimockRestoreVersionDone() &&
+		m.MinimockRevokeAccessDone() &&
 		m.MinimockSearchMediaDone() &&
 		m.MinimockSetRetentionPolicyDone() &&
 		m.MinimockUploadContentDone() &&

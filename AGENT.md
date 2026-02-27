@@ -37,8 +37,7 @@ All services are available in three languages (Dart, Go, Java):
 3. **device** - Device management and registration
 4. **files** - Media upload and file management (OpenAPI-based)
 5. **ledger** - Financial ledger and accounting
-6. **lostid** - Lost ID recovery
-7. **notification** - Push notifications and messaging
+6. **notification** - Push notifications and messaging
 8. **ocr** - OCR and document processing
 9. **partition** - Data partitioning and multi-tenancy
 10. **payment** - Payment processing

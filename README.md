@@ -21,7 +21,6 @@ Multi-language SDK library for Ant Investor services using Protocol Buffers and 
 | [Device](#device) | [docs](https://buf.build/antinvestor/device/docs/main:device.v1)             | [![Go](https://img.shields.io/github/v/tag/antinvestor/apis?filter=go/device/*&label=)](https://pkg.go.dev/github.com/antinvestor/apis/go/device) | [![Pub](https://img.shields.io/pub/v/antinvestor_api_device?label=)](https://pub.dev/packages/antinvestor_api_device) | [![GitHub](https://img.shields.io/github/v/tag/antinvestor/apis?filter=java/*&label=)](https://github.com/antinvestor/apis/packages) |
 | [Files](#files) | [docs](https://buf.build/antinvestor/files/docs/main:files.v1)               | [![Go](https://img.shields.io/github/v/tag/antinvestor/apis?filter=go/files/*&label=)](https://pkg.go.dev/github.com/antinvestor/apis/go/files) | [![Pub](https://img.shields.io/pub/v/antinvestor_api_files?label=)](https://pub.dev/packages/antinvestor_api_files) | [![GitHub](https://img.shields.io/github/v/tag/antinvestor/apis?filter=java/*&label=)](https://github.com/antinvestor/apis/packages) |
 | [Ledger](#ledger) | [docs](https://buf.build/antinvestor/ledger/docs/main:ledger.v1)             | [![Go](https://img.shields.io/github/v/tag/antinvestor/apis?filter=go/ledger/*&label=)](https://pkg.go.dev/github.com/antinvestor/apis/go/ledger) | [![Pub](https://img.shields.io/pub/v/antinvestor_api_ledger?label=)](https://pub.dev/packages/antinvestor_api_ledger) | [![GitHub](https://img.shields.io/github/v/tag/antinvestor/apis?filter=java/*&label=)](https://github.com/antinvestor/apis/packages) |
-| [LostID](#lostid) | [docs](https://buf.build/antinvestor/lostid/docs/main:lostid.v1)             | [![Go](https://img.shields.io/github/v/tag/antinvestor/apis?filter=go/lostid/*&label=)](https://pkg.go.dev/github.com/antinvestor/apis/go/lostid) | [![Pub](https://img.shields.io/pub/v/antinvestor_api_lostid?label=)](https://pub.dev/packages/antinvestor_api_lostid) | [![GitHub](https://img.shields.io/github/v/tag/antinvestor/apis?filter=java/*&label=)](https://github.com/antinvestor/apis/packages) |
 | [Notification](#notification) | [docs](https://buf.build/antinvestor/notification/docs/main:notification.v1) | [![Go](https://img.shields.io/github/v/tag/antinvestor/apis?filter=go/notification/*&label=)](https://pkg.go.dev/github.com/antinvestor/apis/go/notification) | [![Pub](https://img.shields.io/pub/v/antinvestor_api_notification?label=)](https://pub.dev/packages/antinvestor_api_notification) | [![GitHub](https://img.shields.io/github/v/tag/antinvestor/apis?filter=java/*&label=)](https://github.com/antinvestor/apis/packages) |
 | [OCR](#ocr) | [docs](https://buf.build/antinvestor/ocr/docs/main:ocr.v1)                   | [![Go](https://img.shields.io/github/v/tag/antinvestor/apis?filter=go/ocr/*&label=)](https://pkg.go.dev/github.com/antinvestor/apis/go/ocr) | [![Pub](https://img.shields.io/pub/v/antinvestor_api_ocr?label=)](https://pub.dev/packages/antinvestor_api_ocr) | [![GitHub](https://img.shields.io/github/v/tag/antinvestor/apis?filter=java/*&label=)](https://github.com/antinvestor/apis/packages) |
 | [Partition](#partition) | [docs](https://buf.build/antinvestor/partition/docs/main:partition.v1)       | [![Go](https://img.shields.io/github/v/tag/antinvestor/apis?filter=go/partition/*&label=)](https://pkg.go.dev/github.com/antinvestor/apis/go/partition) | [![Pub](https://img.shields.io/pub/v/antinvestor_api_partition?label=)](https://pub.dev/packages/antinvestor_api_partition) | [![GitHub](https://img.shields.io/github/v/tag/antinvestor/apis?filter=java/*&label=)](https://github.com/antinvestor/apis/packages) |
@@ -139,19 +138,6 @@ Double-entry accounting ledger for financial transaction management. Provides a 
 - Journal entries with detailed line items
 - Multi-currency support with exchange rate tracking
 - Audit trail and transaction reversal capabilities
-
-### LostID
-
-Lost and found identification document service. Helps users report and search for lost identification documents.
-
-**Key Features:**
-- Report lost identification documents
-- Search for found documents by various criteria
-- Document type classification (ID cards, passports, licenses)
-- Location-based search and matching
-- Notification when potential matches are found
-- Secure document verification workflow
-- Contact facilitation between finder and owner
 
 ### Notification
 

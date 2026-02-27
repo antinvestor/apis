@@ -18,7 +18,6 @@ This directory contains Dart client libraries for all Ant Investor API services.
 | [antinvestor_property](./property) | Property and asset management | [![pub](https://img.shields.io/pub/v/antinvestor_property.svg)](https://pub.dev/packages/antinvestor_property) |
 | [antinvestor_settings](./settings) | Application settings | [![pub](https://img.shields.io/pub/v/antinvestor_settings.svg)](https://pub.dev/packages/antinvestor_settings) |
 | [antinvestor_ledger](./ledger) | Financial ledger and accounting | [![pub](https://img.shields.io/pub/v/antinvestor_ledger.svg)](https://pub.dev/packages/antinvestor_ledger) |
-| [antinvestor_lostid](./lostid) | Lost ID recovery | [![pub](https://img.shields.io/pub/v/antinvestor_lostid.svg)](https://pub.dev/packages/antinvestor_lostid) |
 | [antinvestor_files](./files) | Media upload and file management | [![pub](https://img.shields.io/pub/v/antinvestor_files.svg)](https://pub.dev/packages/antinvestor_files) |
 
 ### Shared Libraries
