@@ -79,6 +79,15 @@ define buf_validate
 	)
 endef
 
+define buf_lint
+	( \
+	$(call require_dir,proto/$(1)); \
+	cd proto/$(1); \
+	buf format -w; \
+	buf lint; \
+	)
+endef
+
 define buf_generate
 	( \
 	$(call require_dir,proto/$(1)); \
@@ -178,7 +187,11 @@ help:
 
 .PHONY: all
 all: ## Build, test and auto-fix
-	$(MAKE) golang_build_all lintfix
+	$(MAKE) buf_lint_all golang_build_all lintfix
+
+.PHONY: build
+build: ## Auto-fix protobuf, lint, generate, and build Go
+	$(MAKE) buf_lint_all generate golang_build_all
 
 .PHONY: clean
 clean: ## Delete generated / ignored files
@@ -218,6 +231,13 @@ dart_upgrade_all: ## Upgrade all Dart modules
 # ------------------------------------------------------------------------------
 # Linting
 # ------------------------------------------------------------------------------
+
+.PHONY: buf_lint_all
+buf_lint_all: $(BIN)/buf ## Auto-format and lint all protobuf (fails on unfixable errors)
+	@for m in $(MODULES); do \
+		echo "==> buf lint $$m"; \
+		$(call buf_lint,$$m); \
+	done
 
 .PHONY: golang_lint_all
 golang_lint_all: $(BIN)/golangci-lint $(BIN)/buf ## Lint Go and protobuf
@@ -273,7 +293,6 @@ generate_minimock_mocks: $(BIN)/minimock
 	$(call connect_handler_mock,property,v1,property,PropertyServiceClient,)
 	$(call connect_handler_mock,settings,v1,settings,SettingsServiceClient,settingz)
 	$(call connect_handler_mock,ledger,v1,ledger,LedgerServiceClient,)
-	$(call connect_handler_mock,lostid,v1,lostid,LostIdServiceClient,)
 	$(call connect_handler_mock,commerce,v1,commerce,CommerceServiceClient,)
 	$(call connect_handler_mock,billing,v1,billing,BillingServiceClient,)
 
@@ -290,56 +309,6 @@ generate_dart: $(BIN)/buf ## Generate Dart from proto
 			$(call buf_generate,$$m); \
 		fi \
 	done
-
-# ------------------------------------------------------------------------------
-# OpenAPI
-# ------------------------------------------------------------------------------
-
-.PHONY: openapi_files_gen_go
-openapi_files_gen_go: ## Generate Go OpenAPI for files
-	$(DOCKER) run --rm \
-		-v "$(ROOT_DIR)/proto/files:/local/proto" \
-		-v "$(ROOT_DIR)/go/files:/local/golang" \
-		openapitools/openapi-generator-cli:latest generate \
-		-g go \
-		-o /local/golang/ \
-		-p packageName=file_v1 \
-		--git-repo-id apis/go/files \
-		--git-user-id antinvestor \
-		-i /local/proto/v1/openapi.yaml
-
-.PHONY: openapi_files_gen_java
-openapi_files_gen_java: ## Generate Java OpenAPI for files
-	$(DOCKER) run --rm \
-		-v "$(ROOT_DIR)/proto/files:/local/proto" \
-		-v "$(ROOT_DIR)/java/files:/local/java" \
-		-v "$(ROOT_DIR)/java/files/.openapi-generator/templates:/local/templates" \
-		openapitools/openapi-generator-cli:latest generate \
-		-g java \
-		-o /local/java/ \
-		-t /local/templates \
-		--git-repo-id apis/java/files \
-		--git-user-id antinvestor \
-		--additional-properties artifactId=files,hideGenerationTimestamp=true,groupId=com.antinvestor.apis,library=native \
-		--package-name com.antinvestor.apis.files \
-		--api-package com.antinvestor.apis.files.api \
-		--invoker-package com.antinvestor.apis.files.invoker \
-		--model-package com.antinvestor.apis.files.model \
-		--artifact-id files \
-		-i /local/proto/v1/openapi.yaml
-
-.PHONY: openapi_files_gen_dart
-openapi_files_gen_dart: ## Generate Dart OpenAPI for files
-	$(DOCKER) run --rm \
-		-v "$(ROOT_DIR)/proto/files:/local/proto" \
-		-v "$(ROOT_DIR)/dart/files:/local/dart" \
-		openapitools/openapi-generator-cli:latest generate \
-		-g dart-dio \
-		-o /local/dart/ \
-		--git-repo-id apis/dart/files \
-		--git-user-id antinvestor \
-		--additional-properties pubName=antinvestor_files,pubLibrary=antinvestor_files,pubVersion=1.0.0 \
-		-i /local/proto/v1/openapi.yaml
 
 # ------------------------------------------------------------------------------
 # CI helpers
@@ -367,7 +336,7 @@ $(BIN)/license-header:
 
 $(BIN)/golangci-lint:
 	mkdir -p $(BIN)
-	$(GO) install github.com/golangci/golangci-lint/v2/cmd/golangci-lint@v2.6.2
+	$(GO) install github.com/golangci/golangci-lint/v2/cmd/golangci-lint@latest
 
 $(BIN)/minimock:
 	mkdir -p $(BIN)

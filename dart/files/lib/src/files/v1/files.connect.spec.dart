@@ -174,7 +174,7 @@ abstract final class FilesService {
     '/$name/DownloadContent',
     connect.StreamType.server,
     filesv1files.DownloadContentRequest.new,
-    filesv1files.DownloadChunk.new,
+    filesv1files.DownloadContentResponse.new,
     idempotency: connect.Idempotency.noSideEffects,
   );
 
@@ -182,8 +182,8 @@ abstract final class FilesService {
   static const downloadContentRange = connect.Spec(
     '/$name/DownloadContentRange',
     connect.StreamType.server,
-    filesv1files.DownloadRangeRequest.new,
-    filesv1files.DownloadChunk.new,
+    filesv1files.DownloadContentRangeRequest.new,
+    filesv1files.DownloadContentRangeResponse.new,
     idempotency: connect.Idempotency.noSideEffects,
   );
 

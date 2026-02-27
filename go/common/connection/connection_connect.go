@@ -120,8 +120,8 @@ func NewConnectClientBase(ctx context.Context, opts ...common.ClientOption) (*Co
 
 	var authOpts []interceptors.AuthInterceptorOption
 
-	if ds.APIKey != "" {
-		authOpts = append(authOpts, interceptors.WithAPIKey(ds.APIKey))
+	if ds.APICredential != "" {
+		authOpts = append(authOpts, interceptors.WithAPIKey(ds.APICredential))
 	}
 
 	if ds.TokenEndpoint != "" {

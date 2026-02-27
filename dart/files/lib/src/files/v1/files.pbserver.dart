@@ -37,8 +37,8 @@ abstract class FilesServiceBase extends $pb.GeneratedService {
   $async.Future<$3.DeleteContentResponse> deleteContent($pb.ServerContext ctx, $3.DeleteContentRequest request);
   $async.Future<$3.GetContentResponse> getContent($pb.ServerContext ctx, $3.GetContentRequest request);
   $async.Future<$3.GetContentOverrideNameResponse> getContentOverrideName($pb.ServerContext ctx, $3.GetContentOverrideNameRequest request);
-  $async.Future<$3.DownloadChunk> downloadContent($pb.ServerContext ctx, $3.DownloadContentRequest request);
-  $async.Future<$3.DownloadChunk> downloadContentRange($pb.ServerContext ctx, $3.DownloadRangeRequest request);
+  $async.Future<$3.DownloadContentResponse> downloadContent($pb.ServerContext ctx, $3.DownloadContentRequest request);
+  $async.Future<$3.DownloadContentRangeResponse> downloadContentRange($pb.ServerContext ctx, $3.DownloadContentRangeRequest request);
   $async.Future<$3.GetContentThumbnailResponse> getContentThumbnail($pb.ServerContext ctx, $3.GetContentThumbnailRequest request);
   $async.Future<$3.GetUrlPreviewResponse> getUrlPreview($pb.ServerContext ctx, $3.GetUrlPreviewRequest request);
   $async.Future<$3.GetConfigResponse> getConfig($pb.ServerContext ctx, $3.GetConfigRequest request);
@@ -75,7 +75,7 @@ abstract class FilesServiceBase extends $pb.GeneratedService {
       case 'GetContent': return $3.GetContentRequest();
       case 'GetContentOverrideName': return $3.GetContentOverrideNameRequest();
       case 'DownloadContent': return $3.DownloadContentRequest();
-      case 'DownloadContentRange': return $3.DownloadRangeRequest();
+      case 'DownloadContentRange': return $3.DownloadContentRangeRequest();
       case 'GetContentThumbnail': return $3.GetContentThumbnailRequest();
       case 'GetUrlPreview': return $3.GetUrlPreviewRequest();
       case 'GetConfig': return $3.GetConfigRequest();
@@ -115,7 +115,7 @@ abstract class FilesServiceBase extends $pb.GeneratedService {
       case 'GetContent': return this.getContent(ctx, request as $3.GetContentRequest);
       case 'GetContentOverrideName': return this.getContentOverrideName(ctx, request as $3.GetContentOverrideNameRequest);
       case 'DownloadContent': return this.downloadContent(ctx, request as $3.DownloadContentRequest);
-      case 'DownloadContentRange': return this.downloadContentRange(ctx, request as $3.DownloadRangeRequest);
+      case 'DownloadContentRange': return this.downloadContentRange(ctx, request as $3.DownloadContentRangeRequest);
       case 'GetContentThumbnail': return this.getContentThumbnail(ctx, request as $3.GetContentThumbnailRequest);
       case 'GetUrlPreview': return this.getUrlPreview(ctx, request as $3.GetUrlPreviewRequest);
       case 'GetConfig': return this.getConfig(ctx, request as $3.GetConfigRequest);

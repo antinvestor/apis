@@ -195,8 +195,8 @@ func DialConnection(_ context.Context, opts ...common.ClientOption) (*grpc.Clien
 	if !ds.NoAuth { // Create a new interceptor
 		jwt := &JWTInterceptor{}
 
-		if ds.APIKey != "" {
-			jwt.apiKey = ds.APIKey
+		if ds.APICredential != "" {
+			jwt.apiKey = ds.APICredential
 		} else {
 			var endpointValues url.Values
 			if len(ds.Audiences) > 0 {

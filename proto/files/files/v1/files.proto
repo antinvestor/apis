@@ -1144,11 +1144,11 @@ message GetContentOverrideNameResponse {
   MediaMetadata metadata = 2;
 }
 
-// DownloadChunk carries a portion of streamed content.
+// DownloadContentResponse carries a portion of streamed content.
 //
 // Server streams chunks as they're read from storage.
 // Client assembles chunks in order received.
-message DownloadChunk {
+message DownloadContentResponse {
   // Chunk data.
   // Chunk size varies based on server configuration.
   bytes data = 1;
@@ -1163,7 +1163,17 @@ message DownloadContentRequest {
   ];
 }
 
-message DownloadRangeRequest {
+// DownloadContentRangeResponse carries a portion of streamed range content.
+//
+// Server streams chunks as they're read from storage.
+// Client assembles chunks in order received.
+message DownloadContentRangeResponse {
+  // Chunk data.
+  // Chunk size varies based on server configuration.
+  bytes data = 1;
+}
+
+message DownloadContentRangeRequest {
   // Media ID to download.
   string media_id = 1 [
     (buf.validate.field).string.min_len = 1,
@@ -2075,7 +2085,7 @@ service FilesService {
   }
 
   // DownloadContent streams content.
-  rpc DownloadContent(DownloadContentRequest) returns (stream DownloadChunk) {
+  rpc DownloadContent(DownloadContentRequest) returns (stream DownloadContentResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "downloadContent"
@@ -2086,7 +2096,7 @@ service FilesService {
   }
 
   // DownloadContentRange streams a byte range.
-  rpc DownloadContentRange(DownloadRangeRequest) returns (stream DownloadChunk) {
+  rpc DownloadContentRange(DownloadContentRangeRequest) returns (stream DownloadContentRangeResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
     option (gnostic.openapi.v3.operation) = {
       operation_id: "downloadContentRange"

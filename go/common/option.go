@@ -121,15 +121,15 @@ func (w withGRPCDialOption) Apply(o *DialSettings) {
 	o.GRPCDialOpts = append(o.GRPCDialOpts, w.opt)
 }
 
-// WithTokenAPIKey sets the API key to be used for token-based authentication.
-func WithTokenAPIKey(apiKey string) ClientOption {
-	return withTokenAPIKey(apiKey)
+// WithAPICredential sets the API credential to be used for token-based authentication.
+func WithAPICredential(credential string) ClientOption {
+	return withAPICredential(credential)
 }
 
-type withTokenAPIKey string
+type withAPICredential string
 
-func (w withTokenAPIKey) Apply(o *DialSettings) {
-	o.APIKey = string(w)
+func (w withAPICredential) Apply(o *DialSettings) {
+	o.APICredential = string(w)
 }
 
 // WithTokenUsername returns a ClientOption that specifies an API Username to be used
@@ -178,7 +178,7 @@ func (w withAudiences) Apply(o *DialSettings) {
 // WithoutAuthentication returns a ClientOption that specifies that no
 // authentication should be used. It is suitable only for testing and for
 // accessing public resources, like public Google Cloud Storage buckets.
-// It is an error to provide both WithoutAuthentication and any of WithTokenAPIKey,
+// It is an error to provide both WithoutAuthentication and any of WithAPICredential,
 // WithTokenSource, WithCredentialsFile or WithServiceAccountFile.
 func WithoutAuthentication() ClientOption {
 	return withoutAuthentication{}

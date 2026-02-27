@@ -322,7 +322,7 @@ extension type FilesServiceClient (connect.Transport _transport) {
   }
 
   /// DownloadContent streams content.
-  Stream<filesv1files.DownloadChunk> downloadContent(
+  Stream<filesv1files.DownloadContentResponse> downloadContent(
     filesv1files.DownloadContentRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
@@ -340,8 +340,8 @@ extension type FilesServiceClient (connect.Transport _transport) {
   }
 
   /// DownloadContentRange streams a byte range.
-  Stream<filesv1files.DownloadChunk> downloadContentRange(
-    filesv1files.DownloadRangeRequest input, {
+  Stream<filesv1files.DownloadContentRangeResponse> downloadContentRange(
+    filesv1files.DownloadContentRangeRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,

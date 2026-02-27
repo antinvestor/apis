@@ -734,7 +734,7 @@ dart pub publish            # Publish to pub.dev
 // go.mod
 module github.com/antinvestor/apis/go/chat
 
-go 1.23
+go 1.26
 
 require (
     connectrpc.com/connect v1.17.0

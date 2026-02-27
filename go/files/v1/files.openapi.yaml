@@ -2678,36 +2678,7 @@ components:
 
          This field clarifies what happened during deletion, which is important
          for client logic and audit trails.
-    files.v1.DownloadChunk:
-      type: object
-      properties:
-        data:
-          type: string
-          title: data
-          format: byte
-          description: |-
-            Chunk data.
-             Chunk size varies based on server configuration.
-      title: DownloadChunk
-      additionalProperties: false
-      description: |-
-        DownloadChunk carries a portion of streamed content.
-
-         Server streams chunks as they're read from storage.
-         Client assembles chunks in order received.
-    files.v1.DownloadContentRequest:
-      type: object
-      properties:
-        mediaId:
-          type: string
-          title: media_id
-          maxLength: 40
-          minLength: 1
-          pattern: '[0-9a-z_-]{3,40}'
-          description: Media ID to download.
-      title: DownloadContentRequest
-      additionalProperties: false
-    files.v1.DownloadRangeRequest:
+    files.v1.DownloadContentRangeRequest:
       type: object
       properties:
         mediaId:
@@ -2736,8 +2707,54 @@ components:
             End byte offset (exclusive).
              Must be > start and <= file size.
              Omit or set to -1 for remainder of file.
-      title: DownloadRangeRequest
+      title: DownloadContentRangeRequest
       additionalProperties: false
+    files.v1.DownloadContentRangeResponse:
+      type: object
+      properties:
+        data:
+          type: string
+          title: data
+          format: byte
+          description: |-
+            Chunk data.
+             Chunk size varies based on server configuration.
+      title: DownloadContentRangeResponse
+      additionalProperties: false
+      description: |-
+        DownloadContentRangeResponse carries a portion of streamed range content.
+
+         Server streams chunks as they're read from storage.
+         Client assembles chunks in order received.
+    files.v1.DownloadContentRequest:
+      type: object
+      properties:
+        mediaId:
+          type: string
+          title: media_id
+          maxLength: 40
+          minLength: 1
+          pattern: '[0-9a-z_-]{3,40}'
+          description: Media ID to download.
+      title: DownloadContentRequest
+      additionalProperties: false
+    files.v1.DownloadContentResponse:
+      type: object
+      properties:
+        data:
+          type: string
+          title: data
+          format: byte
+          description: |-
+            Chunk data.
+             Chunk size varies based on server configuration.
+      title: DownloadContentResponse
+      additionalProperties: false
+      description: |-
+        DownloadContentResponse carries a portion of streamed content.
+
+         Server streams chunks as they're read from storage.
+         Client assembles chunks in order received.
     files.v1.FileVersion:
       type: object
       properties:

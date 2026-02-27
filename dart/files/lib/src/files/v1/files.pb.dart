@@ -3272,12 +3272,12 @@ class GetContentOverrideNameResponse extends $pb.GeneratedMessage {
   MediaMetadata ensureMetadata() => $_ensure(1);
 }
 
-///  DownloadChunk carries a portion of streamed content.
+///  DownloadContentResponse carries a portion of streamed content.
 ///
 ///  Server streams chunks as they're read from storage.
 ///  Client assembles chunks in order received.
-class DownloadChunk extends $pb.GeneratedMessage {
-  factory DownloadChunk({
+class DownloadContentResponse extends $pb.GeneratedMessage {
+  factory DownloadContentResponse({
     $core.List<$core.int>? data,
   }) {
     final $result = create();
@@ -3286,11 +3286,11 @@ class DownloadChunk extends $pb.GeneratedMessage {
     }
     return $result;
   }
-  DownloadChunk._() : super();
-  factory DownloadChunk.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory DownloadChunk.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  DownloadContentResponse._() : super();
+  factory DownloadContentResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory DownloadContentResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DownloadChunk', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DownloadContentResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
     ..a<$core.List<$core.int>>(1, _omitFieldNames ? '' : 'data', $pb.PbFieldType.OY)
     ..hasRequiredFields = false
   ;
@@ -3299,22 +3299,22 @@ class DownloadChunk extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  DownloadChunk clone() => DownloadChunk()..mergeFromMessage(this);
+  DownloadContentResponse clone() => DownloadContentResponse()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  DownloadChunk copyWith(void Function(DownloadChunk) updates) => super.copyWith((message) => updates(message as DownloadChunk)) as DownloadChunk;
+  DownloadContentResponse copyWith(void Function(DownloadContentResponse) updates) => super.copyWith((message) => updates(message as DownloadContentResponse)) as DownloadContentResponse;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static DownloadChunk create() => DownloadChunk._();
-  DownloadChunk createEmptyInstance() => create();
-  static $pb.PbList<DownloadChunk> createRepeated() => $pb.PbList<DownloadChunk>();
+  static DownloadContentResponse create() => DownloadContentResponse._();
+  DownloadContentResponse createEmptyInstance() => create();
+  static $pb.PbList<DownloadContentResponse> createRepeated() => $pb.PbList<DownloadContentResponse>();
   @$core.pragma('dart2js:noInline')
-  static DownloadChunk getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DownloadChunk>(create);
-  static DownloadChunk? _defaultInstance;
+  static DownloadContentResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DownloadContentResponse>(create);
+  static DownloadContentResponse? _defaultInstance;
 
   /// Chunk data.
   /// Chunk size varies based on server configuration.
@@ -3379,8 +3379,64 @@ class DownloadContentRequest extends $pb.GeneratedMessage {
   void clearMediaId() => clearField(1);
 }
 
-class DownloadRangeRequest extends $pb.GeneratedMessage {
-  factory DownloadRangeRequest({
+///  DownloadContentRangeResponse carries a portion of streamed range content.
+///
+///  Server streams chunks as they're read from storage.
+///  Client assembles chunks in order received.
+class DownloadContentRangeResponse extends $pb.GeneratedMessage {
+  factory DownloadContentRangeResponse({
+    $core.List<$core.int>? data,
+  }) {
+    final $result = create();
+    if (data != null) {
+      $result.data = data;
+    }
+    return $result;
+  }
+  DownloadContentRangeResponse._() : super();
+  factory DownloadContentRangeResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory DownloadContentRangeResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DownloadContentRangeResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
+    ..a<$core.List<$core.int>>(1, _omitFieldNames ? '' : 'data', $pb.PbFieldType.OY)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  DownloadContentRangeResponse clone() => DownloadContentRangeResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  DownloadContentRangeResponse copyWith(void Function(DownloadContentRangeResponse) updates) => super.copyWith((message) => updates(message as DownloadContentRangeResponse)) as DownloadContentRangeResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static DownloadContentRangeResponse create() => DownloadContentRangeResponse._();
+  DownloadContentRangeResponse createEmptyInstance() => create();
+  static $pb.PbList<DownloadContentRangeResponse> createRepeated() => $pb.PbList<DownloadContentRangeResponse>();
+  @$core.pragma('dart2js:noInline')
+  static DownloadContentRangeResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DownloadContentRangeResponse>(create);
+  static DownloadContentRangeResponse? _defaultInstance;
+
+  /// Chunk data.
+  /// Chunk size varies based on server configuration.
+  @$pb.TagNumber(1)
+  $core.List<$core.int> get data => $_getN(0);
+  @$pb.TagNumber(1)
+  set data($core.List<$core.int> v) { $_setBytes(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasData() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearData() => clearField(1);
+}
+
+class DownloadContentRangeRequest extends $pb.GeneratedMessage {
+  factory DownloadContentRangeRequest({
     $core.String? mediaId,
     $fixnum.Int64? start,
     $fixnum.Int64? end,
@@ -3397,11 +3453,11 @@ class DownloadRangeRequest extends $pb.GeneratedMessage {
     }
     return $result;
   }
-  DownloadRangeRequest._() : super();
-  factory DownloadRangeRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory DownloadRangeRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  DownloadContentRangeRequest._() : super();
+  factory DownloadContentRangeRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory DownloadContentRangeRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DownloadRangeRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DownloadContentRangeRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'files.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'mediaId')
     ..aInt64(2, _omitFieldNames ? '' : 'start')
     ..aInt64(3, _omitFieldNames ? '' : 'end')
@@ -3412,22 +3468,22 @@ class DownloadRangeRequest extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  DownloadRangeRequest clone() => DownloadRangeRequest()..mergeFromMessage(this);
+  DownloadContentRangeRequest clone() => DownloadContentRangeRequest()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  DownloadRangeRequest copyWith(void Function(DownloadRangeRequest) updates) => super.copyWith((message) => updates(message as DownloadRangeRequest)) as DownloadRangeRequest;
+  DownloadContentRangeRequest copyWith(void Function(DownloadContentRangeRequest) updates) => super.copyWith((message) => updates(message as DownloadContentRangeRequest)) as DownloadContentRangeRequest;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static DownloadRangeRequest create() => DownloadRangeRequest._();
-  DownloadRangeRequest createEmptyInstance() => create();
-  static $pb.PbList<DownloadRangeRequest> createRepeated() => $pb.PbList<DownloadRangeRequest>();
+  static DownloadContentRangeRequest create() => DownloadContentRangeRequest._();
+  DownloadContentRangeRequest createEmptyInstance() => create();
+  static $pb.PbList<DownloadContentRangeRequest> createRepeated() => $pb.PbList<DownloadContentRangeRequest>();
   @$core.pragma('dart2js:noInline')
-  static DownloadRangeRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DownloadRangeRequest>(create);
-  static DownloadRangeRequest? _defaultInstance;
+  static DownloadContentRangeRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DownloadContentRangeRequest>(create);
+  static DownloadContentRangeRequest? _defaultInstance;
 
   /// Media ID to download.
   @$pb.TagNumber(1)
@@ -7072,11 +7128,11 @@ class FilesServiceApi {
   $async.Future<GetContentOverrideNameResponse> getContentOverrideName($pb.ClientContext? ctx, GetContentOverrideNameRequest request) =>
     _client.invoke<GetContentOverrideNameResponse>(ctx, 'FilesService', 'GetContentOverrideName', request, GetContentOverrideNameResponse())
   ;
-  $async.Future<DownloadChunk> downloadContent($pb.ClientContext? ctx, DownloadContentRequest request) =>
-    _client.invoke<DownloadChunk>(ctx, 'FilesService', 'DownloadContent', request, DownloadChunk())
+  $async.Future<DownloadContentResponse> downloadContent($pb.ClientContext? ctx, DownloadContentRequest request) =>
+    _client.invoke<DownloadContentResponse>(ctx, 'FilesService', 'DownloadContent', request, DownloadContentResponse())
   ;
-  $async.Future<DownloadChunk> downloadContentRange($pb.ClientContext? ctx, DownloadRangeRequest request) =>
-    _client.invoke<DownloadChunk>(ctx, 'FilesService', 'DownloadContentRange', request, DownloadChunk())
+  $async.Future<DownloadContentRangeResponse> downloadContentRange($pb.ClientContext? ctx, DownloadContentRangeRequest request) =>
+    _client.invoke<DownloadContentRangeResponse>(ctx, 'FilesService', 'DownloadContentRange', request, DownloadContentRangeResponse())
   ;
   $async.Future<GetContentThumbnailResponse> getContentThumbnail($pb.ClientContext? ctx, GetContentThumbnailRequest request) =>
     _client.invoke<GetContentThumbnailResponse>(ctx, 'FilesService', 'GetContentThumbnail', request, GetContentThumbnailResponse())
