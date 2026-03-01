@@ -771,7 +771,7 @@ components:
           title: device_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
       title: Delivery
       additionalProperties: false
       description: |-
@@ -785,14 +785,14 @@ components:
           title: event_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Unique identifier for the event, constrained for quick parsing and validation.
         roomId:
           type: string
           title: room_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Identifies the chat room or context, ensuring data is routed to the correct group.
         source:
           title: source
@@ -803,7 +803,7 @@ components:
           title: parent_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Unique identifier for a parent event related to this event, constrained for quick parsing and validation.
         eventType:
           title: event_type
@@ -830,7 +830,7 @@ components:
           title: room_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Identifies the room being acted on
         action:
           title: action
@@ -877,7 +877,7 @@ components:
           title: subscription_id
           maxLength: 40
           minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: '[0-9a-z_-]{3,40}'
           description: Identifies the subscription by id in transit.
         contactLink:
           title: contact_link

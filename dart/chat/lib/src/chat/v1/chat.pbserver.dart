@@ -22,7 +22,9 @@ export 'chat.pb.dart';
 
 abstract class ChatServiceBase extends $pb.GeneratedService {
   $async.Future<$5.SendEventResponse> sendEvent($pb.ServerContext ctx, $5.SendEventRequest request);
+  $async.Future<$5.GetEventResponse> getEvent($pb.ServerContext ctx, $5.GetEventRequest request);
   $async.Future<$5.GetHistoryResponse> getHistory($pb.ServerContext ctx, $5.GetHistoryRequest request);
+  $async.Future<$5.GetRoomResponse> getRoom($pb.ServerContext ctx, $5.GetRoomRequest request);
   $async.Future<$5.CreateRoomResponse> createRoom($pb.ServerContext ctx, $5.CreateRoomRequest request);
   $async.Future<$5.SearchRoomsResponse> searchRooms($pb.ServerContext ctx, $5.SearchRoomsRequest request);
   $async.Future<$5.UpdateRoomResponse> updateRoom($pb.ServerContext ctx, $5.UpdateRoomRequest request);
@@ -31,6 +33,8 @@ abstract class ChatServiceBase extends $pb.GeneratedService {
   $async.Future<$5.RemoveRoomSubscriptionsResponse> removeRoomSubscriptions($pb.ServerContext ctx, $5.RemoveRoomSubscriptionsRequest request);
   $async.Future<$5.UpdateSubscriptionRoleResponse> updateSubscriptionRole($pb.ServerContext ctx, $5.UpdateSubscriptionRoleRequest request);
   $async.Future<$5.SearchRoomSubscriptionsResponse> searchRoomSubscriptions($pb.ServerContext ctx, $5.SearchRoomSubscriptionsRequest request);
+  $async.Future<$5.GetSubscriptionSettingsResponse> getSubscriptionSettings($pb.ServerContext ctx, $5.GetSubscriptionSettingsRequest request);
+  $async.Future<$5.UpdateSubscriptionSettingsResponse> updateSubscriptionSettings($pb.ServerContext ctx, $5.UpdateSubscriptionSettingsRequest request);
   $async.Future<$5.LiveResponse> live($pb.ServerContext ctx, $5.LiveRequest request);
   $async.Future<$5.ListProposalsResponse> listProposals($pb.ServerContext ctx, $5.ListProposalsRequest request);
   $async.Future<$5.SubmitProposalResponse> submitProposal($pb.ServerContext ctx, $5.SubmitProposalRequest request);
@@ -38,7 +42,9 @@ abstract class ChatServiceBase extends $pb.GeneratedService {
   $pb.GeneratedMessage createRequest($core.String methodName) {
     switch (methodName) {
       case 'SendEvent': return $5.SendEventRequest();
+      case 'GetEvent': return $5.GetEventRequest();
       case 'GetHistory': return $5.GetHistoryRequest();
+      case 'GetRoom': return $5.GetRoomRequest();
       case 'CreateRoom': return $5.CreateRoomRequest();
       case 'SearchRooms': return $5.SearchRoomsRequest();
       case 'UpdateRoom': return $5.UpdateRoomRequest();
@@ -47,6 +53,8 @@ abstract class ChatServiceBase extends $pb.GeneratedService {
       case 'RemoveRoomSubscriptions': return $5.RemoveRoomSubscriptionsRequest();
       case 'UpdateSubscriptionRole': return $5.UpdateSubscriptionRoleRequest();
       case 'SearchRoomSubscriptions': return $5.SearchRoomSubscriptionsRequest();
+      case 'GetSubscriptionSettings': return $5.GetSubscriptionSettingsRequest();
+      case 'UpdateSubscriptionSettings': return $5.UpdateSubscriptionSettingsRequest();
       case 'Live': return $5.LiveRequest();
       case 'ListProposals': return $5.ListProposalsRequest();
       case 'SubmitProposal': return $5.SubmitProposalRequest();
@@ -57,7 +65,9 @@ abstract class ChatServiceBase extends $pb.GeneratedService {
   $async.Future<$pb.GeneratedMessage> handleCall($pb.ServerContext ctx, $core.String methodName, $pb.GeneratedMessage request) {
     switch (methodName) {
       case 'SendEvent': return this.sendEvent(ctx, request as $5.SendEventRequest);
+      case 'GetEvent': return this.getEvent(ctx, request as $5.GetEventRequest);
       case 'GetHistory': return this.getHistory(ctx, request as $5.GetHistoryRequest);
+      case 'GetRoom': return this.getRoom(ctx, request as $5.GetRoomRequest);
       case 'CreateRoom': return this.createRoom(ctx, request as $5.CreateRoomRequest);
       case 'SearchRooms': return this.searchRooms(ctx, request as $5.SearchRoomsRequest);
       case 'UpdateRoom': return this.updateRoom(ctx, request as $5.UpdateRoomRequest);
@@ -66,6 +76,8 @@ abstract class ChatServiceBase extends $pb.GeneratedService {
       case 'RemoveRoomSubscriptions': return this.removeRoomSubscriptions(ctx, request as $5.RemoveRoomSubscriptionsRequest);
       case 'UpdateSubscriptionRole': return this.updateSubscriptionRole(ctx, request as $5.UpdateSubscriptionRoleRequest);
       case 'SearchRoomSubscriptions': return this.searchRoomSubscriptions(ctx, request as $5.SearchRoomSubscriptionsRequest);
+      case 'GetSubscriptionSettings': return this.getSubscriptionSettings(ctx, request as $5.GetSubscriptionSettingsRequest);
+      case 'UpdateSubscriptionSettings': return this.updateSubscriptionSettings(ctx, request as $5.UpdateSubscriptionSettingsRequest);
       case 'Live': return this.live(ctx, request as $5.LiveRequest);
       case 'ListProposals': return this.listProposals(ctx, request as $5.ListProposalsRequest);
       case 'SubmitProposal': return this.submitProposal(ctx, request as $5.SubmitProposalRequest);

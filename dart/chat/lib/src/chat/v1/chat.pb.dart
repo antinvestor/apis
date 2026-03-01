@@ -110,6 +110,138 @@ class SendEventResponse extends $pb.GeneratedMessage {
   $core.List<$4.AckEvent> get ack => $_getList(0);
 }
 
+class GetEventRequest extends $pb.GeneratedMessage {
+  factory GetEventRequest({
+    $core.String? roomId,
+    $core.String? eventId,
+  }) {
+    final $result = create();
+    if (roomId != null) {
+      $result.roomId = roomId;
+    }
+    if (eventId != null) {
+      $result.eventId = eventId;
+    }
+    return $result;
+  }
+  GetEventRequest._() : super();
+  factory GetEventRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetEventRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetEventRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'roomId')
+    ..aOS(2, _omitFieldNames ? '' : 'eventId')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetEventRequest clone() => GetEventRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetEventRequest copyWith(void Function(GetEventRequest) updates) => super.copyWith((message) => updates(message as GetEventRequest)) as GetEventRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetEventRequest create() => GetEventRequest._();
+  GetEventRequest createEmptyInstance() => create();
+  static $pb.PbList<GetEventRequest> createRepeated() => $pb.PbList<GetEventRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetEventRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetEventRequest>(create);
+  static GetEventRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get roomId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set roomId($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasRoomId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearRoomId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get eventId => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set eventId($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasEventId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearEventId() => clearField(2);
+}
+
+class GetEventResponse extends $pb.GeneratedMessage {
+  factory GetEventResponse({
+    $4.RoomEvent? event,
+    $3.ErrorDetail? error,
+  }) {
+    final $result = create();
+    if (event != null) {
+      $result.event = event;
+    }
+    if (error != null) {
+      $result.error = error;
+    }
+    return $result;
+  }
+  GetEventResponse._() : super();
+  factory GetEventResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetEventResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetEventResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
+    ..aOM<$4.RoomEvent>(1, _omitFieldNames ? '' : 'event', subBuilder: $4.RoomEvent.create)
+    ..aOM<$3.ErrorDetail>(2, _omitFieldNames ? '' : 'error', subBuilder: $3.ErrorDetail.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetEventResponse clone() => GetEventResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetEventResponse copyWith(void Function(GetEventResponse) updates) => super.copyWith((message) => updates(message as GetEventResponse)) as GetEventResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetEventResponse create() => GetEventResponse._();
+  GetEventResponse createEmptyInstance() => create();
+  static $pb.PbList<GetEventResponse> createRepeated() => $pb.PbList<GetEventResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetEventResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetEventResponse>(create);
+  static GetEventResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $4.RoomEvent get event => $_getN(0);
+  @$pb.TagNumber(1)
+  set event($4.RoomEvent v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasEvent() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEvent() => clearField(1);
+  @$pb.TagNumber(1)
+  $4.RoomEvent ensureEvent() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $3.ErrorDetail get error => $_getN(1);
+  @$pb.TagNumber(2)
+  set error($3.ErrorDetail v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasError() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearError() => clearField(2);
+  @$pb.TagNumber(2)
+  $3.ErrorDetail ensureError() => $_ensure(1);
+}
+
 /// History request: paging via opaque cursor. 'limit' is capped by server (e.g. 100).
 /// Ordering is determined by XID lexicographic order.
 /// Cursor encapsulates last seen event ID.
@@ -266,6 +398,124 @@ class GetHistoryResponse extends $pb.GeneratedMessage {
   void clearPrevCursor() => clearField(3);
 }
 
+class GetRoomRequest extends $pb.GeneratedMessage {
+  factory GetRoomRequest({
+    $core.String? roomId,
+  }) {
+    final $result = create();
+    if (roomId != null) {
+      $result.roomId = roomId;
+    }
+    return $result;
+  }
+  GetRoomRequest._() : super();
+  factory GetRoomRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetRoomRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetRoomRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'roomId')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetRoomRequest clone() => GetRoomRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetRoomRequest copyWith(void Function(GetRoomRequest) updates) => super.copyWith((message) => updates(message as GetRoomRequest)) as GetRoomRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetRoomRequest create() => GetRoomRequest._();
+  GetRoomRequest createEmptyInstance() => create();
+  static $pb.PbList<GetRoomRequest> createRepeated() => $pb.PbList<GetRoomRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetRoomRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetRoomRequest>(create);
+  static GetRoomRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get roomId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set roomId($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasRoomId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearRoomId() => clearField(1);
+}
+
+class GetRoomResponse extends $pb.GeneratedMessage {
+  factory GetRoomResponse({
+    Room? room,
+    $3.ErrorDetail? error,
+  }) {
+    final $result = create();
+    if (room != null) {
+      $result.room = room;
+    }
+    if (error != null) {
+      $result.error = error;
+    }
+    return $result;
+  }
+  GetRoomResponse._() : super();
+  factory GetRoomResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetRoomResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetRoomResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
+    ..aOM<Room>(1, _omitFieldNames ? '' : 'room', subBuilder: Room.create)
+    ..aOM<$3.ErrorDetail>(2, _omitFieldNames ? '' : 'error', subBuilder: $3.ErrorDetail.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetRoomResponse clone() => GetRoomResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetRoomResponse copyWith(void Function(GetRoomResponse) updates) => super.copyWith((message) => updates(message as GetRoomResponse)) as GetRoomResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetRoomResponse create() => GetRoomResponse._();
+  GetRoomResponse createEmptyInstance() => create();
+  static $pb.PbList<GetRoomResponse> createRepeated() => $pb.PbList<GetRoomResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetRoomResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetRoomResponse>(create);
+  static GetRoomResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  Room get room => $_getN(0);
+  @$pb.TagNumber(1)
+  set room(Room v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasRoom() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearRoom() => clearField(1);
+  @$pb.TagNumber(1)
+  Room ensureRoom() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $3.ErrorDetail get error => $_getN(1);
+  @$pb.TagNumber(2)
+  set error($3.ErrorDetail v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasError() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearError() => clearField(2);
+  @$pb.TagNumber(2)
+  $3.ErrorDetail ensureError() => $_ensure(1);
+}
+
 class Room extends $pb.GeneratedMessage {
   factory Room({
     $core.String? id,
@@ -277,6 +527,7 @@ class Room extends $pb.GeneratedMessage {
     $1.Timestamp? updatedAt,
     $core.String? creatorId,
     $core.bool? requiresApproval,
+    RoomType? type,
   }) {
     final $result = create();
     if (id != null) {
@@ -306,6 +557,9 @@ class Room extends $pb.GeneratedMessage {
     if (requiresApproval != null) {
       $result.requiresApproval = requiresApproval;
     }
+    if (type != null) {
+      $result.type = type;
+    }
     return $result;
   }
   Room._() : super();
@@ -322,6 +576,7 @@ class Room extends $pb.GeneratedMessage {
     ..aOM<$1.Timestamp>(8, _omitFieldNames ? '' : 'updatedAt', subBuilder: $1.Timestamp.create)
     ..aOS(9, _omitFieldNames ? '' : 'creatorId')
     ..aOB(10, _omitFieldNames ? '' : 'requiresApproval')
+    ..e<RoomType>(11, _omitFieldNames ? '' : 'type', $pb.PbFieldType.OE, defaultOrMaker: RoomType.ROOM_TYPE_UNSPECIFIED, valueOf: RoomType.valueOf, enumValues: RoomType.values)
     ..hasRequiredFields = false
   ;
 
@@ -433,6 +688,15 @@ class Room extends $pb.GeneratedMessage {
   $core.bool hasRequiresApproval() => $_has(8);
   @$pb.TagNumber(10)
   void clearRequiresApproval() => clearField(10);
+
+  @$pb.TagNumber(11)
+  RoomType get type => $_getN(9);
+  @$pb.TagNumber(11)
+  set type(RoomType v) { setField(11, v); }
+  @$pb.TagNumber(11)
+  $core.bool hasType() => $_has(9);
+  @$pb.TagNumber(11)
+  void clearType() => clearField(11);
 }
 
 class CreateRoomRequest extends $pb.GeneratedMessage {
@@ -444,6 +708,7 @@ class CreateRoomRequest extends $pb.GeneratedMessage {
     $core.Iterable<$3.ContactLink>? members,
     $0.Struct? metadata,
     $core.bool? requiresApproval,
+    RoomType? type,
   }) {
     final $result = create();
     if (id != null) {
@@ -467,6 +732,9 @@ class CreateRoomRequest extends $pb.GeneratedMessage {
     if (requiresApproval != null) {
       $result.requiresApproval = requiresApproval;
     }
+    if (type != null) {
+      $result.type = type;
+    }
     return $result;
   }
   CreateRoomRequest._() : super();
@@ -481,6 +749,7 @@ class CreateRoomRequest extends $pb.GeneratedMessage {
     ..pc<$3.ContactLink>(7, _omitFieldNames ? '' : 'members', $pb.PbFieldType.PM, subBuilder: $3.ContactLink.create)
     ..aOM<$0.Struct>(8, _omitFieldNames ? '' : 'metadata', subBuilder: $0.Struct.create)
     ..aOB(9, _omitFieldNames ? '' : 'requiresApproval')
+    ..e<RoomType>(10, _omitFieldNames ? '' : 'type', $pb.PbFieldType.OE, defaultOrMaker: RoomType.ROOM_TYPE_UNSPECIFIED, valueOf: RoomType.valueOf, enumValues: RoomType.values)
     ..hasRequiredFields = false
   ;
 
@@ -564,6 +833,15 @@ class CreateRoomRequest extends $pb.GeneratedMessage {
   $core.bool hasRequiresApproval() => $_has(6);
   @$pb.TagNumber(9)
   void clearRequiresApproval() => clearField(9);
+
+  @$pb.TagNumber(10)
+  RoomType get type => $_getN(7);
+  @$pb.TagNumber(10)
+  set type(RoomType v) { setField(10, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasType() => $_has(7);
+  @$pb.TagNumber(10)
+  void clearType() => clearField(10);
 }
 
 class CreateRoomResponse extends $pb.GeneratedMessage {
@@ -800,7 +1078,7 @@ class UpdateRoomRequest extends $pb.GeneratedMessage {
   factory UpdateRoomRequest({
     $core.String? roomId,
     $core.String? name,
-    $core.String? topic,
+    $core.String? description,
     $0.Struct? metadata,
   }) {
     final $result = create();
@@ -810,8 +1088,8 @@ class UpdateRoomRequest extends $pb.GeneratedMessage {
     if (name != null) {
       $result.name = name;
     }
-    if (topic != null) {
-      $result.topic = topic;
+    if (description != null) {
+      $result.description = description;
     }
     if (metadata != null) {
       $result.metadata = metadata;
@@ -825,7 +1103,7 @@ class UpdateRoomRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateRoomRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
     ..aOS(2, _omitFieldNames ? '' : 'roomId')
     ..aOS(3, _omitFieldNames ? '' : 'name')
-    ..aOS(4, _omitFieldNames ? '' : 'topic')
+    ..aOS(4, _omitFieldNames ? '' : 'description')
     ..aOM<$0.Struct>(5, _omitFieldNames ? '' : 'metadata', subBuilder: $0.Struct.create)
     ..hasRequiredFields = false
   ;
@@ -870,13 +1148,13 @@ class UpdateRoomRequest extends $pb.GeneratedMessage {
   void clearName() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.String get topic => $_getSZ(2);
+  $core.String get description => $_getSZ(2);
   @$pb.TagNumber(4)
-  set topic($core.String v) { $_setString(2, v); }
+  set description($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(4)
-  $core.bool hasTopic() => $_has(2);
+  $core.bool hasDescription() => $_has(2);
   @$pb.TagNumber(4)
-  void clearTopic() => clearField(4);
+  void clearDescription() => clearField(4);
 
   @$pb.TagNumber(5)
   $0.Struct get metadata => $_getN(3);
@@ -1735,6 +2013,447 @@ class SearchRoomSubscriptionsResponse extends $pb.GeneratedMessage {
   void clearPrevCursor() => clearField(5);
 }
 
+/// SubscriptionSettings holds per-room preferences for a member.
+class SubscriptionSettings extends $pb.GeneratedMessage {
+  factory SubscriptionSettings({
+    $core.String? subscriptionId,
+    $core.String? roomId,
+    NotificationLevel? notificationLevel,
+    $core.bool? muted,
+    $core.bool? archived,
+    $core.bool? pinned,
+  }) {
+    final $result = create();
+    if (subscriptionId != null) {
+      $result.subscriptionId = subscriptionId;
+    }
+    if (roomId != null) {
+      $result.roomId = roomId;
+    }
+    if (notificationLevel != null) {
+      $result.notificationLevel = notificationLevel;
+    }
+    if (muted != null) {
+      $result.muted = muted;
+    }
+    if (archived != null) {
+      $result.archived = archived;
+    }
+    if (pinned != null) {
+      $result.pinned = pinned;
+    }
+    return $result;
+  }
+  SubscriptionSettings._() : super();
+  factory SubscriptionSettings.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory SubscriptionSettings.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SubscriptionSettings', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'subscriptionId')
+    ..aOS(2, _omitFieldNames ? '' : 'roomId')
+    ..e<NotificationLevel>(3, _omitFieldNames ? '' : 'notificationLevel', $pb.PbFieldType.OE, defaultOrMaker: NotificationLevel.NOTIFICATION_LEVEL_UNSPECIFIED, valueOf: NotificationLevel.valueOf, enumValues: NotificationLevel.values)
+    ..aOB(4, _omitFieldNames ? '' : 'muted')
+    ..aOB(5, _omitFieldNames ? '' : 'archived')
+    ..aOB(6, _omitFieldNames ? '' : 'pinned')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  SubscriptionSettings clone() => SubscriptionSettings()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  SubscriptionSettings copyWith(void Function(SubscriptionSettings) updates) => super.copyWith((message) => updates(message as SubscriptionSettings)) as SubscriptionSettings;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SubscriptionSettings create() => SubscriptionSettings._();
+  SubscriptionSettings createEmptyInstance() => create();
+  static $pb.PbList<SubscriptionSettings> createRepeated() => $pb.PbList<SubscriptionSettings>();
+  @$core.pragma('dart2js:noInline')
+  static SubscriptionSettings getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SubscriptionSettings>(create);
+  static SubscriptionSettings? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get subscriptionId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set subscriptionId($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasSubscriptionId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSubscriptionId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get roomId => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set roomId($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasRoomId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearRoomId() => clearField(2);
+
+  @$pb.TagNumber(3)
+  NotificationLevel get notificationLevel => $_getN(2);
+  @$pb.TagNumber(3)
+  set notificationLevel(NotificationLevel v) { setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasNotificationLevel() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearNotificationLevel() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.bool get muted => $_getBF(3);
+  @$pb.TagNumber(4)
+  set muted($core.bool v) { $_setBool(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasMuted() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearMuted() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.bool get archived => $_getBF(4);
+  @$pb.TagNumber(5)
+  set archived($core.bool v) { $_setBool(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasArchived() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearArchived() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.bool get pinned => $_getBF(5);
+  @$pb.TagNumber(6)
+  set pinned($core.bool v) { $_setBool(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasPinned() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearPinned() => clearField(6);
+}
+
+class GetSubscriptionSettingsRequest extends $pb.GeneratedMessage {
+  factory GetSubscriptionSettingsRequest({
+    $core.String? roomId,
+    $core.String? subscriptionId,
+  }) {
+    final $result = create();
+    if (roomId != null) {
+      $result.roomId = roomId;
+    }
+    if (subscriptionId != null) {
+      $result.subscriptionId = subscriptionId;
+    }
+    return $result;
+  }
+  GetSubscriptionSettingsRequest._() : super();
+  factory GetSubscriptionSettingsRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetSubscriptionSettingsRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetSubscriptionSettingsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'roomId')
+    ..aOS(2, _omitFieldNames ? '' : 'subscriptionId')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetSubscriptionSettingsRequest clone() => GetSubscriptionSettingsRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetSubscriptionSettingsRequest copyWith(void Function(GetSubscriptionSettingsRequest) updates) => super.copyWith((message) => updates(message as GetSubscriptionSettingsRequest)) as GetSubscriptionSettingsRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetSubscriptionSettingsRequest create() => GetSubscriptionSettingsRequest._();
+  GetSubscriptionSettingsRequest createEmptyInstance() => create();
+  static $pb.PbList<GetSubscriptionSettingsRequest> createRepeated() => $pb.PbList<GetSubscriptionSettingsRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetSubscriptionSettingsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetSubscriptionSettingsRequest>(create);
+  static GetSubscriptionSettingsRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get roomId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set roomId($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasRoomId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearRoomId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get subscriptionId => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set subscriptionId($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasSubscriptionId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSubscriptionId() => clearField(2);
+}
+
+class GetSubscriptionSettingsResponse extends $pb.GeneratedMessage {
+  factory GetSubscriptionSettingsResponse({
+    SubscriptionSettings? settings,
+    $3.ErrorDetail? error,
+  }) {
+    final $result = create();
+    if (settings != null) {
+      $result.settings = settings;
+    }
+    if (error != null) {
+      $result.error = error;
+    }
+    return $result;
+  }
+  GetSubscriptionSettingsResponse._() : super();
+  factory GetSubscriptionSettingsResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetSubscriptionSettingsResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetSubscriptionSettingsResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
+    ..aOM<SubscriptionSettings>(1, _omitFieldNames ? '' : 'settings', subBuilder: SubscriptionSettings.create)
+    ..aOM<$3.ErrorDetail>(2, _omitFieldNames ? '' : 'error', subBuilder: $3.ErrorDetail.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetSubscriptionSettingsResponse clone() => GetSubscriptionSettingsResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetSubscriptionSettingsResponse copyWith(void Function(GetSubscriptionSettingsResponse) updates) => super.copyWith((message) => updates(message as GetSubscriptionSettingsResponse)) as GetSubscriptionSettingsResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetSubscriptionSettingsResponse create() => GetSubscriptionSettingsResponse._();
+  GetSubscriptionSettingsResponse createEmptyInstance() => create();
+  static $pb.PbList<GetSubscriptionSettingsResponse> createRepeated() => $pb.PbList<GetSubscriptionSettingsResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetSubscriptionSettingsResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetSubscriptionSettingsResponse>(create);
+  static GetSubscriptionSettingsResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  SubscriptionSettings get settings => $_getN(0);
+  @$pb.TagNumber(1)
+  set settings(SubscriptionSettings v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasSettings() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSettings() => clearField(1);
+  @$pb.TagNumber(1)
+  SubscriptionSettings ensureSettings() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $3.ErrorDetail get error => $_getN(1);
+  @$pb.TagNumber(2)
+  set error($3.ErrorDetail v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasError() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearError() => clearField(2);
+  @$pb.TagNumber(2)
+  $3.ErrorDetail ensureError() => $_ensure(1);
+}
+
+class UpdateSubscriptionSettingsRequest extends $pb.GeneratedMessage {
+  factory UpdateSubscriptionSettingsRequest({
+    $core.String? roomId,
+    $core.String? subscriptionId,
+    NotificationLevel? notificationLevel,
+    $core.bool? muted,
+    $core.bool? archived,
+    $core.bool? pinned,
+  }) {
+    final $result = create();
+    if (roomId != null) {
+      $result.roomId = roomId;
+    }
+    if (subscriptionId != null) {
+      $result.subscriptionId = subscriptionId;
+    }
+    if (notificationLevel != null) {
+      $result.notificationLevel = notificationLevel;
+    }
+    if (muted != null) {
+      $result.muted = muted;
+    }
+    if (archived != null) {
+      $result.archived = archived;
+    }
+    if (pinned != null) {
+      $result.pinned = pinned;
+    }
+    return $result;
+  }
+  UpdateSubscriptionSettingsRequest._() : super();
+  factory UpdateSubscriptionSettingsRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UpdateSubscriptionSettingsRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSubscriptionSettingsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'roomId')
+    ..aOS(2, _omitFieldNames ? '' : 'subscriptionId')
+    ..e<NotificationLevel>(3, _omitFieldNames ? '' : 'notificationLevel', $pb.PbFieldType.OE, defaultOrMaker: NotificationLevel.NOTIFICATION_LEVEL_UNSPECIFIED, valueOf: NotificationLevel.valueOf, enumValues: NotificationLevel.values)
+    ..aOB(4, _omitFieldNames ? '' : 'muted')
+    ..aOB(5, _omitFieldNames ? '' : 'archived')
+    ..aOB(6, _omitFieldNames ? '' : 'pinned')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  UpdateSubscriptionSettingsRequest clone() => UpdateSubscriptionSettingsRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  UpdateSubscriptionSettingsRequest copyWith(void Function(UpdateSubscriptionSettingsRequest) updates) => super.copyWith((message) => updates(message as UpdateSubscriptionSettingsRequest)) as UpdateSubscriptionSettingsRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UpdateSubscriptionSettingsRequest create() => UpdateSubscriptionSettingsRequest._();
+  UpdateSubscriptionSettingsRequest createEmptyInstance() => create();
+  static $pb.PbList<UpdateSubscriptionSettingsRequest> createRepeated() => $pb.PbList<UpdateSubscriptionSettingsRequest>();
+  @$core.pragma('dart2js:noInline')
+  static UpdateSubscriptionSettingsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateSubscriptionSettingsRequest>(create);
+  static UpdateSubscriptionSettingsRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get roomId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set roomId($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasRoomId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearRoomId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get subscriptionId => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set subscriptionId($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasSubscriptionId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSubscriptionId() => clearField(2);
+
+  @$pb.TagNumber(3)
+  NotificationLevel get notificationLevel => $_getN(2);
+  @$pb.TagNumber(3)
+  set notificationLevel(NotificationLevel v) { setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasNotificationLevel() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearNotificationLevel() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.bool get muted => $_getBF(3);
+  @$pb.TagNumber(4)
+  set muted($core.bool v) { $_setBool(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasMuted() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearMuted() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.bool get archived => $_getBF(4);
+  @$pb.TagNumber(5)
+  set archived($core.bool v) { $_setBool(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasArchived() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearArchived() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.bool get pinned => $_getBF(5);
+  @$pb.TagNumber(6)
+  set pinned($core.bool v) { $_setBool(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasPinned() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearPinned() => clearField(6);
+}
+
+class UpdateSubscriptionSettingsResponse extends $pb.GeneratedMessage {
+  factory UpdateSubscriptionSettingsResponse({
+    SubscriptionSettings? settings,
+    $3.ErrorDetail? error,
+  }) {
+    final $result = create();
+    if (settings != null) {
+      $result.settings = settings;
+    }
+    if (error != null) {
+      $result.error = error;
+    }
+    return $result;
+  }
+  UpdateSubscriptionSettingsResponse._() : super();
+  factory UpdateSubscriptionSettingsResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UpdateSubscriptionSettingsResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSubscriptionSettingsResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'), createEmptyInstance: create)
+    ..aOM<SubscriptionSettings>(1, _omitFieldNames ? '' : 'settings', subBuilder: SubscriptionSettings.create)
+    ..aOM<$3.ErrorDetail>(2, _omitFieldNames ? '' : 'error', subBuilder: $3.ErrorDetail.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  UpdateSubscriptionSettingsResponse clone() => UpdateSubscriptionSettingsResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  UpdateSubscriptionSettingsResponse copyWith(void Function(UpdateSubscriptionSettingsResponse) updates) => super.copyWith((message) => updates(message as UpdateSubscriptionSettingsResponse)) as UpdateSubscriptionSettingsResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UpdateSubscriptionSettingsResponse create() => UpdateSubscriptionSettingsResponse._();
+  UpdateSubscriptionSettingsResponse createEmptyInstance() => create();
+  static $pb.PbList<UpdateSubscriptionSettingsResponse> createRepeated() => $pb.PbList<UpdateSubscriptionSettingsResponse>();
+  @$core.pragma('dart2js:noInline')
+  static UpdateSubscriptionSettingsResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateSubscriptionSettingsResponse>(create);
+  static UpdateSubscriptionSettingsResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  SubscriptionSettings get settings => $_getN(0);
+  @$pb.TagNumber(1)
+  set settings(SubscriptionSettings v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasSettings() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSettings() => clearField(1);
+  @$pb.TagNumber(1)
+  SubscriptionSettings ensureSettings() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $3.ErrorDetail get error => $_getN(1);
+  @$pb.TagNumber(2)
+  set error($3.ErrorDetail v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasError() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearError() => clearField(2);
+  @$pb.TagNumber(2)
+  $3.ErrorDetail ensureError() => $_ensure(1);
+}
+
 class LiveRequest extends $pb.GeneratedMessage {
   factory LiveRequest({
     $3.ContactLink? source,
@@ -2366,8 +3085,14 @@ class ChatServiceApi {
   $async.Future<SendEventResponse> sendEvent($pb.ClientContext? ctx, SendEventRequest request) =>
     _client.invoke<SendEventResponse>(ctx, 'ChatService', 'SendEvent', request, SendEventResponse())
   ;
+  $async.Future<GetEventResponse> getEvent($pb.ClientContext? ctx, GetEventRequest request) =>
+    _client.invoke<GetEventResponse>(ctx, 'ChatService', 'GetEvent', request, GetEventResponse())
+  ;
   $async.Future<GetHistoryResponse> getHistory($pb.ClientContext? ctx, GetHistoryRequest request) =>
     _client.invoke<GetHistoryResponse>(ctx, 'ChatService', 'GetHistory', request, GetHistoryResponse())
+  ;
+  $async.Future<GetRoomResponse> getRoom($pb.ClientContext? ctx, GetRoomRequest request) =>
+    _client.invoke<GetRoomResponse>(ctx, 'ChatService', 'GetRoom', request, GetRoomResponse())
   ;
   $async.Future<CreateRoomResponse> createRoom($pb.ClientContext? ctx, CreateRoomRequest request) =>
     _client.invoke<CreateRoomResponse>(ctx, 'ChatService', 'CreateRoom', request, CreateRoomResponse())
@@ -2392,6 +3117,12 @@ class ChatServiceApi {
   ;
   $async.Future<SearchRoomSubscriptionsResponse> searchRoomSubscriptions($pb.ClientContext? ctx, SearchRoomSubscriptionsRequest request) =>
     _client.invoke<SearchRoomSubscriptionsResponse>(ctx, 'ChatService', 'SearchRoomSubscriptions', request, SearchRoomSubscriptionsResponse())
+  ;
+  $async.Future<GetSubscriptionSettingsResponse> getSubscriptionSettings($pb.ClientContext? ctx, GetSubscriptionSettingsRequest request) =>
+    _client.invoke<GetSubscriptionSettingsResponse>(ctx, 'ChatService', 'GetSubscriptionSettings', request, GetSubscriptionSettingsResponse())
+  ;
+  $async.Future<UpdateSubscriptionSettingsResponse> updateSubscriptionSettings($pb.ClientContext? ctx, UpdateSubscriptionSettingsRequest request) =>
+    _client.invoke<UpdateSubscriptionSettingsResponse>(ctx, 'ChatService', 'UpdateSubscriptionSettings', request, UpdateSubscriptionSettingsResponse())
   ;
   $async.Future<LiveResponse> live($pb.ClientContext? ctx, LiveRequest request) =>
     _client.invoke<LiveResponse>(ctx, 'ChatService', 'Live', request, LiveResponse())

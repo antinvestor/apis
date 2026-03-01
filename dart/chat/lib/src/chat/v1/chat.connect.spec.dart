@@ -18,6 +18,15 @@ abstract final class ChatService {
     chatv1chat.SendEventResponse.new,
   );
 
+  /// Fetch a single event by ID. Used for deep-linking, thread rendering, and verification.
+  static const getEvent = connect.Spec(
+    '/$name/GetEvent',
+    connect.StreamType.unary,
+    chatv1chat.GetEventRequest.new,
+    chatv1chat.GetEventResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
+  );
+
   /// Fetch history for a room. Cursor-based paging (cursor = opaque server token).
   static const getHistory = connect.Spec(
     '/$name/GetHistory',
@@ -27,7 +36,15 @@ abstract final class ChatService {
     idempotency: connect.Idempotency.noSideEffects,
   );
 
-  /// Room lifecycle & management
+  /// Fetch a single room by ID.
+  static const getRoom = connect.Spec(
+    '/$name/GetRoom',
+    connect.StreamType.unary,
+    chatv1chat.GetRoomRequest.new,
+    chatv1chat.GetRoomResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
+  );
+
   static const createRoom = connect.Spec(
     '/$name/CreateRoom',
     connect.StreamType.unary,
@@ -85,6 +102,23 @@ abstract final class ChatService {
     chatv1chat.SearchRoomSubscriptionsRequest.new,
     chatv1chat.SearchRoomSubscriptionsResponse.new,
     idempotency: connect.Idempotency.noSideEffects,
+  );
+
+  /// Get per-room subscription settings for a member (notification preferences, mute, archive)
+  static const getSubscriptionSettings = connect.Spec(
+    '/$name/GetSubscriptionSettings',
+    connect.StreamType.unary,
+    chatv1chat.GetSubscriptionSettingsRequest.new,
+    chatv1chat.GetSubscriptionSettingsResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
+  );
+
+  /// Update per-room subscription settings for a member
+  static const updateSubscriptionSettings = connect.Spec(
+    '/$name/UpdateSubscriptionSettings',
+    connect.StreamType.unary,
+    chatv1chat.UpdateSubscriptionSettingsRequest.new,
+    chatv1chat.UpdateSubscriptionSettingsResponse.new,
   );
 
   /// Update different states that the client can be in for room subscriptions awareness

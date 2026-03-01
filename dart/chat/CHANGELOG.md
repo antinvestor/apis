@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.53.20] - 2026-3-1
+
+### Changed
+
+- Api improvements for better usability
+
 ## [1.53.1] - 2026-1-26
 
 ### Changed

@@ -122,6 +122,96 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/chat.v1.DeleteRoomResponse'
+  /chat.v1.ChatService/GetEvent:
+    get:
+      tags:
+        - Messages
+        - chat.v1.ChatService
+      summary: Retrieve a single event by ID
+      description: Fetches a single event by its unique identifier. Useful for deep-linking to messages, rendering reply threads, and verifying event existence.
+      operationId: getEvent
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+        - name: message
+          in: query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chat.v1.GetEventRequest'
+        - name: encoding
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/encoding'
+        - name: base64
+          in: query
+          schema:
+            $ref: '#/components/schemas/base64'
+        - name: compression
+          in: query
+          schema:
+            $ref: '#/components/schemas/compression'
+        - name: connect
+          in: query
+          schema:
+            $ref: '#/components/schemas/connect'
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chat.v1.GetEventResponse'
+    post:
+      tags:
+        - Messages
+        - chat.v1.ChatService
+      summary: Retrieve a single event by ID
+      description: Fetches a single event by its unique identifier. Useful for deep-linking to messages, rendering reply threads, and verifying event existence.
+      operationId: getEvent
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/chat.v1.GetEventRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chat.v1.GetEventResponse'
   /chat.v1.ChatService/GetHistory:
     get:
       tags:
@@ -212,6 +302,186 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/chat.v1.GetHistoryResponse'
+  /chat.v1.ChatService/GetRoom:
+    get:
+      tags:
+        - Rooms
+        - chat.v1.ChatService
+      summary: Retrieve a single room by ID
+      description: Fetches a single chat room by its unique identifier. Returns room details including name, description, type, and metadata.
+      operationId: getRoom
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+        - name: message
+          in: query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chat.v1.GetRoomRequest'
+        - name: encoding
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/encoding'
+        - name: base64
+          in: query
+          schema:
+            $ref: '#/components/schemas/base64'
+        - name: compression
+          in: query
+          schema:
+            $ref: '#/components/schemas/compression'
+        - name: connect
+          in: query
+          schema:
+            $ref: '#/components/schemas/connect'
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chat.v1.GetRoomResponse'
+    post:
+      tags:
+        - Rooms
+        - chat.v1.ChatService
+      summary: Retrieve a single room by ID
+      description: Fetches a single chat room by its unique identifier. Returns room details including name, description, type, and metadata.
+      operationId: getRoom
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/chat.v1.GetRoomRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chat.v1.GetRoomResponse'
+  /chat.v1.ChatService/GetSubscriptionSettings:
+    get:
+      tags:
+        - Subscriptions
+        - chat.v1.ChatService
+      summary: Get subscription settings for a room
+      description: Retrieves per-room notification and display settings for the requesting user's subscription.
+      operationId: getSubscriptionSettings
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+        - name: message
+          in: query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chat.v1.GetSubscriptionSettingsRequest'
+        - name: encoding
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/encoding'
+        - name: base64
+          in: query
+          schema:
+            $ref: '#/components/schemas/base64'
+        - name: compression
+          in: query
+          schema:
+            $ref: '#/components/schemas/compression'
+        - name: connect
+          in: query
+          schema:
+            $ref: '#/components/schemas/connect'
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chat.v1.GetSubscriptionSettingsResponse'
+    post:
+      tags:
+        - Subscriptions
+        - chat.v1.ChatService
+      summary: Get subscription settings for a room
+      description: Retrieves per-room notification and display settings for the requesting user's subscription.
+      operationId: getSubscriptionSettings
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/chat.v1.GetSubscriptionSettingsRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chat.v1.GetSubscriptionSettingsResponse'
   /chat.v1.ChatService/ListProposals:
     get:
       tags:
@@ -615,6 +885,43 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/chat.v1.UpdateSubscriptionRoleResponse'
+  /chat.v1.ChatService/UpdateSubscriptionSettings:
+    post:
+      tags:
+        - Subscriptions
+        - chat.v1.ChatService
+      summary: Update subscription settings for a room
+      description: Updates per-room notification and display settings for the requesting user's subscription. Supports muting, archiving, and notification level changes.
+      operationId: updateSubscriptionSettings
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/chat.v1.UpdateSubscriptionSettingsRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chat.v1.UpdateSubscriptionSettingsResponse'
 components:
   schemas:
     base64:
@@ -885,6 +1192,9 @@ components:
         description:
           type: string
           title: description
+        type:
+          title: type
+          $ref: '#/components/schemas/chat.v1.RoomType'
         isPrivate:
           type: boolean
           title: is_private
@@ -987,6 +1297,34 @@ components:
           description: Optional key agreement context identifier
       title: EncryptedContent
       additionalProperties: false
+    chat.v1.GetEventRequest:
+      type: object
+      properties:
+        roomId:
+          type: string
+          title: room_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        eventId:
+          type: string
+          title: event_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+      title: GetEventRequest
+      additionalProperties: false
+    chat.v1.GetEventResponse:
+      type: object
+      properties:
+        event:
+          title: event
+          $ref: '#/components/schemas/chat.v1.RoomEvent'
+        error:
+          title: error
+          $ref: '#/components/schemas/common.v1.ErrorDetail'
+      title: GetEventResponse
+      additionalProperties: false
     chat.v1.GetHistoryRequest:
       type: object
       properties:
@@ -1022,6 +1360,56 @@ components:
           type: string
           title: prev_cursor
       title: GetHistoryResponse
+      additionalProperties: false
+    chat.v1.GetRoomRequest:
+      type: object
+      properties:
+        roomId:
+          type: string
+          title: room_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+      title: GetRoomRequest
+      additionalProperties: false
+    chat.v1.GetRoomResponse:
+      type: object
+      properties:
+        room:
+          title: room
+          $ref: '#/components/schemas/chat.v1.Room'
+        error:
+          title: error
+          $ref: '#/components/schemas/common.v1.ErrorDetail'
+      title: GetRoomResponse
+      additionalProperties: false
+    chat.v1.GetSubscriptionSettingsRequest:
+      type: object
+      properties:
+        roomId:
+          type: string
+          title: room_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        subscriptionId:
+          type: string
+          title: subscription_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+      title: GetSubscriptionSettingsRequest
+      additionalProperties: false
+    chat.v1.GetSubscriptionSettingsResponse:
+      type: object
+      properties:
+        settings:
+          title: settings
+          $ref: '#/components/schemas/chat.v1.SubscriptionSettings'
+        error:
+          title: error
+          $ref: '#/components/schemas/common.v1.ErrorDetail'
+      title: GetSubscriptionSettingsResponse
       additionalProperties: false
     chat.v1.ListProposalsRequest:
       type: object
@@ -1208,6 +1596,15 @@ components:
           title: closed
       title: MotionTally
       additionalProperties: false
+    chat.v1.NotificationLevel:
+      type: string
+      title: NotificationLevel
+      enum:
+        - NOTIFICATION_LEVEL_UNSPECIFIED
+        - NOTIFICATION_LEVEL_ALL
+        - NOTIFICATION_LEVEL_MENTIONS
+        - NOTIFICATION_LEVEL_NONE
+      description: NotificationLevel controls how notifications are delivered for a room subscription.
     chat.v1.PassingRule:
       type: object
       allOf:
@@ -1590,6 +1987,9 @@ components:
         description:
           type: string
           title: description
+        type:
+          title: type
+          $ref: '#/components/schemas/chat.v1.RoomType'
         isPrivate:
           type: boolean
           title: is_private
@@ -1749,6 +2149,16 @@ components:
           $ref: '#/components/schemas/google.protobuf.Timestamp'
       title: RoomSubscription
       additionalProperties: false
+    chat.v1.RoomType:
+      type: string
+      title: RoomType
+      enum:
+        - ROOM_TYPE_UNSPECIFIED
+        - ROOM_TYPE_DIRECT
+        - ROOM_TYPE_GROUP
+        - ROOM_TYPE_CHANNEL
+        - ROOM_TYPE_BOT
+      description: RoomType distinguishes between different room semantics.
     chat.v1.SearchRoomSubscriptionsRequest:
       type: object
       properties:
@@ -1878,6 +2288,36 @@ components:
           $ref: '#/components/schemas/common.v1.ErrorDetail'
       title: SubmitProposalResponse
       additionalProperties: false
+    chat.v1.SubscriptionSettings:
+      type: object
+      properties:
+        subscriptionId:
+          type: string
+          title: subscription_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        roomId:
+          type: string
+          title: room_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        notificationLevel:
+          title: notification_level
+          $ref: '#/components/schemas/chat.v1.NotificationLevel'
+        muted:
+          type: boolean
+          title: muted
+        archived:
+          type: boolean
+          title: archived
+        pinned:
+          type: boolean
+          title: pinned
+      title: SubscriptionSettings
+      additionalProperties: false
+      description: SubscriptionSettings holds per-room preferences for a member.
     chat.v1.TextAnnotation:
       type: object
       properties:
@@ -1973,9 +2413,9 @@ components:
         name:
           type: string
           title: name
-        topic:
+        description:
           type: string
-          title: topic
+          title: description
         metadata:
           title: metadata
           $ref: '#/components/schemas/google.protobuf.Struct'
@@ -2027,6 +2467,54 @@ components:
           title: error
           $ref: '#/components/schemas/common.v1.ErrorDetail'
       title: UpdateSubscriptionRoleResponse
+      additionalProperties: false
+    chat.v1.UpdateSubscriptionSettingsRequest:
+      type: object
+      properties:
+        roomId:
+          type: string
+          title: room_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        subscriptionId:
+          type: string
+          title: subscription_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        notificationLevel:
+          oneOf:
+            - $ref: '#/components/schemas/chat.v1.NotificationLevel'
+            - type: "null"
+          title: notification_level
+        muted:
+          type:
+            - boolean
+            - "null"
+          title: muted
+        archived:
+          type:
+            - boolean
+            - "null"
+          title: archived
+        pinned:
+          type:
+            - boolean
+            - "null"
+          title: pinned
+      title: UpdateSubscriptionSettingsRequest
+      additionalProperties: false
+    chat.v1.UpdateSubscriptionSettingsResponse:
+      type: object
+      properties:
+        settings:
+          title: settings
+          $ref: '#/components/schemas/chat.v1.SubscriptionSettings'
+        error:
+          title: error
+          $ref: '#/components/schemas/common.v1.ErrorDetail'
+      title: UpdateSubscriptionSettingsResponse
       additionalProperties: false
     chat.v1.VoteCast:
       type: object

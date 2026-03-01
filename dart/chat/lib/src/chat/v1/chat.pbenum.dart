@@ -13,6 +13,48 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
+/// RoomType distinguishes between different room semantics.
+class RoomType extends $pb.ProtobufEnum {
+  static const RoomType ROOM_TYPE_UNSPECIFIED = RoomType._(0, _omitEnumNames ? '' : 'ROOM_TYPE_UNSPECIFIED');
+  static const RoomType ROOM_TYPE_DIRECT = RoomType._(1, _omitEnumNames ? '' : 'ROOM_TYPE_DIRECT');
+  static const RoomType ROOM_TYPE_GROUP = RoomType._(2, _omitEnumNames ? '' : 'ROOM_TYPE_GROUP');
+  static const RoomType ROOM_TYPE_CHANNEL = RoomType._(3, _omitEnumNames ? '' : 'ROOM_TYPE_CHANNEL');
+  static const RoomType ROOM_TYPE_BOT = RoomType._(4, _omitEnumNames ? '' : 'ROOM_TYPE_BOT');
+
+  static const $core.List<RoomType> values = <RoomType> [
+    ROOM_TYPE_UNSPECIFIED,
+    ROOM_TYPE_DIRECT,
+    ROOM_TYPE_GROUP,
+    ROOM_TYPE_CHANNEL,
+    ROOM_TYPE_BOT,
+  ];
+
+  static final $core.Map<$core.int, RoomType> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static RoomType? valueOf($core.int value) => _byValue[value];
+
+  const RoomType._($core.int v, $core.String n) : super(v, n);
+}
+
+/// NotificationLevel controls how notifications are delivered for a room subscription.
+class NotificationLevel extends $pb.ProtobufEnum {
+  static const NotificationLevel NOTIFICATION_LEVEL_UNSPECIFIED = NotificationLevel._(0, _omitEnumNames ? '' : 'NOTIFICATION_LEVEL_UNSPECIFIED');
+  static const NotificationLevel NOTIFICATION_LEVEL_ALL = NotificationLevel._(1, _omitEnumNames ? '' : 'NOTIFICATION_LEVEL_ALL');
+  static const NotificationLevel NOTIFICATION_LEVEL_MENTIONS = NotificationLevel._(2, _omitEnumNames ? '' : 'NOTIFICATION_LEVEL_MENTIONS');
+  static const NotificationLevel NOTIFICATION_LEVEL_NONE = NotificationLevel._(3, _omitEnumNames ? '' : 'NOTIFICATION_LEVEL_NONE');
+
+  static const $core.List<NotificationLevel> values = <NotificationLevel> [
+    NOTIFICATION_LEVEL_UNSPECIFIED,
+    NOTIFICATION_LEVEL_ALL,
+    NOTIFICATION_LEVEL_MENTIONS,
+    NOTIFICATION_LEVEL_NONE,
+  ];
+
+  static final $core.Map<$core.int, NotificationLevel> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static NotificationLevel? valueOf($core.int value) => _byValue[value];
+
+  const NotificationLevel._($core.int v, $core.String n) : super(v, n);
+}
+
 /// ProposalType represents the kind of change being proposed.
 class ProposalType extends $pb.ProtobufEnum {
   static const ProposalType PROPOSAL_TYPE_UNSPECIFIED = ProposalType._(0, _omitEnumNames ? '' : 'PROPOSAL_TYPE_UNSPECIFIED');

@@ -26,6 +26,24 @@ extension type ChatServiceClient (connect.Transport _transport) {
     );
   }
 
+  /// Fetch a single event by ID. Used for deep-linking, thread rendering, and verification.
+  Future<chatv1chat.GetEventResponse> getEvent(
+    chatv1chat.GetEventRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.ChatService.getEvent,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
   /// Fetch history for a room. Cursor-based paging (cursor = opaque server token).
   Future<chatv1chat.GetHistoryResponse> getHistory(
     chatv1chat.GetHistoryRequest input, {
@@ -44,7 +62,24 @@ extension type ChatServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Room lifecycle & management
+  /// Fetch a single room by ID.
+  Future<chatv1chat.GetRoomResponse> getRoom(
+    chatv1chat.GetRoomRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.ChatService.getRoom,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
   Future<chatv1chat.CreateRoomResponse> createRoom(
     chatv1chat.CreateRoomRequest input, {
     connect.Headers? headers,
@@ -174,6 +209,42 @@ extension type ChatServiceClient (connect.Transport _transport) {
   }) {
     return connect.Client(_transport).unary(
       specs.ChatService.searchRoomSubscriptions,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// Get per-room subscription settings for a member (notification preferences, mute, archive)
+  Future<chatv1chat.GetSubscriptionSettingsResponse> getSubscriptionSettings(
+    chatv1chat.GetSubscriptionSettingsRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.ChatService.getSubscriptionSettings,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// Update per-room subscription settings for a member
+  Future<chatv1chat.UpdateSubscriptionSettingsResponse> updateSubscriptionSettings(
+    chatv1chat.UpdateSubscriptionSettingsRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.ChatService.updateSubscriptionSettings,
       input,
       signal: signal,
       headers: headers,

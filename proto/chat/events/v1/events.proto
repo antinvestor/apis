@@ -31,7 +31,7 @@ message Subscription {
   string subscription_id = 3 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
 
   // contact details tied to the subscription receiving the event
@@ -43,7 +43,7 @@ message RoomAction {
   string room_id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   // action type
   chat.v1.RoomChangeAction action = 2;
@@ -71,14 +71,14 @@ message Link {
   string event_id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
 
   // Identifies the chat room or context, ensuring data is routed to the correct group.
   string room_id = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   // Identifies the originator subscription of the event, crucial for attribution and security.
   Subscription source = 3;
@@ -87,7 +87,7 @@ message Link {
   string parent_id = 5 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
 
   // Categorizes the event (e.g., TEXT, ATTACHMENT) for efficient handling.
@@ -136,6 +136,6 @@ message Delivery {
   string device_id = 12 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
 }

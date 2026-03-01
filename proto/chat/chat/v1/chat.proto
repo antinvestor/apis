@@ -84,6 +84,17 @@ service ChatService {
     };
   }
 
+  // Fetch a single event by ID. Used for deep-linking, thread rendering, and verification.
+  rpc GetEvent(GetEventRequest) returns (GetEventResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "getEvent"
+      summary: "Retrieve a single event by ID"
+      description: "Fetches a single event by its unique identifier. Useful for deep-linking to messages, rendering reply threads, and verifying event existence."
+      tags: "Messages"
+    };
+  }
+
   // Fetch history for a room. Cursor-based paging (cursor = opaque server token).
   rpc GetHistory(GetHistoryRequest) returns (GetHistoryResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
@@ -96,6 +107,18 @@ service ChatService {
   }
 
   // Room lifecycle & management
+
+  // Fetch a single room by ID.
+  rpc GetRoom(GetRoomRequest) returns (GetRoomResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "getRoom"
+      summary: "Retrieve a single room by ID"
+      description: "Fetches a single chat room by its unique identifier. Returns room details including name, description, type, and metadata."
+      tags: "Rooms"
+    };
+  }
+
   rpc CreateRoom(CreateRoomRequest) returns (CreateRoomResponse) {
     option (gnostic.openapi.v3.operation) = {
       operation_id: "createRoom"
@@ -165,6 +188,27 @@ service ChatService {
     };
   }
 
+  // Get per-room subscription settings for a member (notification preferences, mute, archive)
+  rpc GetSubscriptionSettings(GetSubscriptionSettingsRequest) returns (GetSubscriptionSettingsResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "getSubscriptionSettings"
+      summary: "Get subscription settings for a room"
+      description: "Retrieves per-room notification and display settings for the requesting user's subscription."
+      tags: "Subscriptions"
+    };
+  }
+
+  // Update per-room subscription settings for a member
+  rpc UpdateSubscriptionSettings(UpdateSubscriptionSettingsRequest) returns (UpdateSubscriptionSettingsResponse) {
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "updateSubscriptionSettings"
+      summary: "Update subscription settings for a room"
+      description: "Updates per-room notification and display settings for the requesting user's subscription. Supports muting, archiving, and notification level changes."
+      tags: "Subscriptions"
+    };
+  }
+
   // Real-time Activity APIs
   // -----------------------------------------------------
 
@@ -217,6 +261,24 @@ message SendEventResponse {
   repeated AckEvent ack = 1;
 }
 
+message GetEventRequest {
+  string room_id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+  string event_id = 2 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+}
+
+message GetEventResponse {
+  RoomEvent event = 1;
+  common.v1.ErrorDetail error = 2;
+}
+
 // History request: paging via opaque cursor. 'limit' is capped by server (e.g. 100).
 // Ordering is determined by XID lexicographic order.
 // Cursor encapsulates last seen event ID.
@@ -237,6 +299,28 @@ message GetHistoryResponse {
 // Room APIs
 // -----------------------------------------------------
 
+// RoomType distinguishes between different room semantics.
+enum RoomType {
+  ROOM_TYPE_UNSPECIFIED = 0;
+  ROOM_TYPE_DIRECT = 1; // 1:1 direct message between two users
+  ROOM_TYPE_GROUP = 2; // Multi-user group conversation
+  ROOM_TYPE_CHANNEL = 3; // Broadcast channel (one-to-many)
+  ROOM_TYPE_BOT = 4; // Conversation with a bot or service account
+}
+
+message GetRoomRequest {
+  string room_id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+}
+
+message GetRoomResponse {
+  Room room = 1;
+  common.v1.ErrorDetail error = 2;
+}
+
 message Room {
   string id = 2 [
     (buf.validate.field).string.min_len = 3,
@@ -248,6 +332,7 @@ message Room {
     (buf.validate.field).string.max_len = 200
   ];
   string description = 4;
+  RoomType type = 11;
   bool is_private = 5;
   google.protobuf.Struct metadata = 6;
   google.protobuf.Timestamp created_at = 7;
@@ -268,6 +353,7 @@ message CreateRoomRequest {
     (buf.validate.field).string.max_len = 200
   ];
   string description = 5;
+  RoomType type = 10;
   bool is_private = 6;
   repeated common.v1.ContactLink members = 7; // optional
   google.protobuf.Struct metadata = 8;
@@ -300,7 +386,7 @@ message UpdateRoomRequest {
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   string name = 3;
-  string topic = 4;
+  string description = 4;
   google.protobuf.Struct metadata = 5;
 }
 
@@ -429,6 +515,76 @@ message SearchRoomSubscriptionsResponse {
   repeated RoomSubscription members = 2;
   string next_cursor = 4;
   string prev_cursor = 5;
+}
+
+// -----------------------------------------------------
+// Subscription Settings
+// -----------------------------------------------------
+
+// NotificationLevel controls how notifications are delivered for a room subscription.
+enum NotificationLevel {
+  NOTIFICATION_LEVEL_UNSPECIFIED = 0; // use account default
+  NOTIFICATION_LEVEL_ALL = 1; // notify on all messages
+  NOTIFICATION_LEVEL_MENTIONS = 2; // notify only on mentions and direct replies
+  NOTIFICATION_LEVEL_NONE = 3; // suppress all notifications
+}
+
+// SubscriptionSettings holds per-room preferences for a member.
+message SubscriptionSettings {
+  string subscription_id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+  string room_id = 2 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+  NotificationLevel notification_level = 3;
+  bool muted = 4;
+  bool archived = 5;
+  bool pinned = 6;
+}
+
+message GetSubscriptionSettingsRequest {
+  string room_id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+  string subscription_id = 2 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+}
+
+message GetSubscriptionSettingsResponse {
+  SubscriptionSettings settings = 1;
+  common.v1.ErrorDetail error = 2;
+}
+
+message UpdateSubscriptionSettingsRequest {
+  string room_id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+  string subscription_id = 2 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+  optional NotificationLevel notification_level = 3;
+  optional bool muted = 4;
+  optional bool archived = 5;
+  optional bool pinned = 6;
+}
+
+message UpdateSubscriptionSettingsResponse {
+  SubscriptionSettings settings = 1;
+  common.v1.ErrorDetail error = 2;
 }
 
 // -----------------------------------------------------
