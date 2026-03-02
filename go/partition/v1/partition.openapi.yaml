@@ -196,6 +196,43 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/partition.v1.CreatePartitionRoleResponse'
+  /partition.v1.PartitionService/CreateServiceAccount:
+    post:
+      tags:
+        - ServiceAccounts
+        - partition.v1.PartitionService
+      summary: Create service account
+      description: Registers a pre-authorized service account for machine-to-machine authentication. Creates a dedicated child partition with client_credentials grant type and writes authorization tuples.
+      operationId: createServiceAccount
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/partition.v1.CreateServiceAccountRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partition.v1.CreateServiceAccountResponse'
   /partition.v1.PartitionService/CreateTenant:
     post:
       tags:
@@ -593,6 +630,96 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/partition.v1.GetPartitionParentsResponse'
+  /partition.v1.PartitionService/GetServiceAccount:
+    get:
+      tags:
+        - ServiceAccounts
+        - partition.v1.PartitionService
+      summary: Get service account
+      description: Retrieves a service account by ID, client ID, or profile ID.
+      operationId: getServiceAccount
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+        - name: message
+          in: query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partition.v1.GetServiceAccountRequest'
+        - name: encoding
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/encoding'
+        - name: base64
+          in: query
+          schema:
+            $ref: '#/components/schemas/base64'
+        - name: compression
+          in: query
+          schema:
+            $ref: '#/components/schemas/compression'
+        - name: connect
+          in: query
+          schema:
+            $ref: '#/components/schemas/connect'
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partition.v1.GetServiceAccountResponse'
+    post:
+      tags:
+        - ServiceAccounts
+        - partition.v1.PartitionService
+      summary: Get service account
+      description: Retrieves a service account by ID, client ID, or profile ID.
+      operationId: getServiceAccount
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/partition.v1.GetServiceAccountRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partition.v1.GetServiceAccountResponse'
   /partition.v1.PartitionService/GetTenant:
     get:
       tags:
@@ -686,6 +813,7 @@ paths:
   /partition.v1.PartitionService/ListAccessRole: {}
   /partition.v1.PartitionService/ListPartition: {}
   /partition.v1.PartitionService/ListPartitionRole: {}
+  /partition.v1.PartitionService/ListServiceAccount: {}
   /partition.v1.PartitionService/ListTenant: {}
   /partition.v1.PartitionService/RemoveAccess:
     post:
@@ -835,6 +963,43 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/partition.v1.RemovePartitionRoleResponse'
+  /partition.v1.PartitionService/RemoveServiceAccount:
+    post:
+      tags:
+        - ServiceAccounts
+        - partition.v1.PartitionService
+      summary: Remove service account
+      description: Deregisters a service account, deleting its child partition and revoking authorization tuples.
+      operationId: removeServiceAccount
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/partition.v1.RemoveServiceAccountRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partition.v1.RemoveServiceAccountResponse'
   /partition.v1.PartitionService/UpdatePartition:
     post:
       tags:
@@ -1393,6 +1558,54 @@ components:
           $ref: '#/components/schemas/partition.v1.PartitionRoleObject'
       title: CreatePartitionRoleResponse
       additionalProperties: false
+    partition.v1.CreateServiceAccountRequest:
+      type: object
+      properties:
+        partitionId:
+          type: string
+          title: partition_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+          description: Target partition the bot operates on
+        profileId:
+          type: string
+          title: profile_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+          description: Identity/subject of the service bot
+        name:
+          type: string
+          title: name
+          maxLength: 100
+          minLength: 3
+          description: Display name for the service account
+        audiences:
+          type: array
+          items:
+            type: string
+          title: audiences
+          description: Service namespaces the bot needs access to
+        properties:
+          title: properties
+          description: Additional metadata
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: CreateServiceAccountRequest
+      additionalProperties: false
+      description: Service Account Messages
+    partition.v1.CreateServiceAccountResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/partition.v1.ServiceAccountObject'
+        clientSecret:
+          type: string
+          title: client_secret
+          description: Only returned on creation
+      title: CreateServiceAccountResponse
+      additionalProperties: false
     partition.v1.CreateTenantRequest:
       type: object
       properties:
@@ -1537,6 +1750,40 @@ components:
           $ref: '#/components/schemas/partition.v1.PartitionObject'
       title: GetPartitionResponse
       additionalProperties: false
+    partition.v1.GetServiceAccountRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+          description: Service account ID
+        clientId:
+          type: string
+          title: client_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+          description: Child partition ID (= Hydra client_id)
+        profileId:
+          type: string
+          title: profile_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+          description: Identity/subject of the service bot
+      title: GetServiceAccountRequest
+      additionalProperties: false
+    partition.v1.GetServiceAccountResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/partition.v1.ServiceAccountObject'
+      title: GetServiceAccountResponse
+      additionalProperties: false
     partition.v1.GetTenantRequest:
       type: object
       properties:
@@ -1639,6 +1886,37 @@ components:
             $ref: '#/components/schemas/partition.v1.PartitionRoleObject'
           title: role
       title: ListPartitionRoleResponse
+      additionalProperties: false
+    partition.v1.ListServiceAccountRequest:
+      type: object
+      properties:
+        partitionId:
+          type: string
+          title: partition_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        count:
+          type: integer
+          title: count
+          format: int32
+        page:
+          type:
+            - integer
+            - string
+          title: page
+          format: int64
+      title: ListServiceAccountRequest
+      additionalProperties: false
+    partition.v1.ListServiceAccountResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/partition.v1.ServiceAccountObject'
+          title: data
+      title: ListServiceAccountResponse
       additionalProperties: false
     partition.v1.ListTenantRequest:
       type: object
@@ -1915,6 +2193,84 @@ components:
           title: succeeded
       title: RemovePartitionRoleResponse
       additionalProperties: false
+    partition.v1.RemoveServiceAccountRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+      title: RemoveServiceAccountRequest
+      additionalProperties: false
+    partition.v1.RemoveServiceAccountResponse:
+      type: object
+      properties:
+        succeeded:
+          type: boolean
+          title: succeeded
+      title: RemoveServiceAccountResponse
+      additionalProperties: false
+    partition.v1.ServiceAccountObject:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+          description: Unique service account ID
+        tenantId:
+          type: string
+          title: tenant_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+          description: Tenant ID
+        partitionId:
+          type: string
+          title: partition_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+          description: Target partition ID the bot operates on
+        profileId:
+          type: string
+          title: profile_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+          description: Identity/subject of the service bot
+        clientId:
+          type: string
+          title: client_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+          description: Dedicated child partition ID (= Hydra client_id)
+        state:
+          title: state
+          description: Service account state
+          $ref: '#/components/schemas/common.v1.STATE'
+        audiences:
+          title: audiences
+          description: Service namespaces the bot can access
+          $ref: '#/components/schemas/google.protobuf.Struct'
+        properties:
+          title: properties
+          description: Additional metadata
+          $ref: '#/components/schemas/google.protobuf.Struct'
+        createdAt:
+          title: created_at
+          description: Creation timestamp
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+      title: ServiceAccountObject
+      additionalProperties: false
+      description: |-
+        ServiceAccountObject represents a pre-registered service account (bot) for a partition.
+         Service accounts get a dedicated child partition with client_credentials grant type.
     partition.v1.TenantObject:
       type: object
       properties:

@@ -188,4 +188,38 @@ abstract final class PartitionService {
     partitionv1partition.RemoveAccessRoleRequest.new,
     partitionv1partition.RemoveAccessRoleResponse.new,
   );
+
+  /// CreateServiceAccount registers a service account (bot) for a partition.
+  static const createServiceAccount = connect.Spec(
+    '/$name/CreateServiceAccount',
+    connect.StreamType.unary,
+    partitionv1partition.CreateServiceAccountRequest.new,
+    partitionv1partition.CreateServiceAccountResponse.new,
+  );
+
+  /// GetServiceAccount retrieves a service account.
+  static const getServiceAccount = connect.Spec(
+    '/$name/GetServiceAccount',
+    connect.StreamType.unary,
+    partitionv1partition.GetServiceAccountRequest.new,
+    partitionv1partition.GetServiceAccountResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
+  );
+
+  /// ListServiceAccount retrieves all service accounts for a partition.
+  static const listServiceAccount = connect.Spec(
+    '/$name/ListServiceAccount',
+    connect.StreamType.server,
+    partitionv1partition.ListServiceAccountRequest.new,
+    partitionv1partition.ListServiceAccountResponse.new,
+    idempotency: connect.Idempotency.noSideEffects,
+  );
+
+  /// RemoveServiceAccount deregisters a service account.
+  static const removeServiceAccount = connect.Spec(
+    '/$name/RemoveServiceAccount',
+    connect.StreamType.unary,
+    partitionv1partition.RemoveServiceAccountRequest.new,
+    partitionv1partition.RemoveServiceAccountResponse.new,
+  );
 }

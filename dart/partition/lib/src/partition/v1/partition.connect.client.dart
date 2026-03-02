@@ -387,4 +387,76 @@ extension type PartitionServiceClient (connect.Transport _transport) {
       onTrailer: onTrailer,
     );
   }
+
+  /// CreateServiceAccount registers a service account (bot) for a partition.
+  Future<partitionv1partition.CreateServiceAccountResponse> createServiceAccount(
+    partitionv1partition.CreateServiceAccountRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.PartitionService.createServiceAccount,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// GetServiceAccount retrieves a service account.
+  Future<partitionv1partition.GetServiceAccountResponse> getServiceAccount(
+    partitionv1partition.GetServiceAccountRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.PartitionService.getServiceAccount,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// ListServiceAccount retrieves all service accounts for a partition.
+  Stream<partitionv1partition.ListServiceAccountResponse> listServiceAccount(
+    partitionv1partition.ListServiceAccountRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).server(
+      specs.PartitionService.listServiceAccount,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// RemoveServiceAccount deregisters a service account.
+  Future<partitionv1partition.RemoveServiceAccountResponse> removeServiceAccount(
+    partitionv1partition.RemoveServiceAccountRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.PartitionService.removeServiceAccount,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
 }
