@@ -440,6 +440,35 @@ final $typed_data.Uint8List accessRoleObjectDescriptor = $convert.base64Decode(
     'EAMYKDIQWzAtOWEtel8tXXszLDQwfVIIYWNjZXNzSWQSNQoEcm9sZRgDIAEoCzIhLnBhcnRpdG'
     'lvbi52MS5QYXJ0aXRpb25Sb2xlT2JqZWN0UgRyb2xl');
 
+@$core.Deprecated('Use serviceAccountObjectDescriptor instead')
+const ServiceAccountObject$json = {
+  '1': 'ServiceAccountObject',
+  '2': [
+    {'1': 'id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'id'},
+    {'1': 'tenant_id', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'tenantId'},
+    {'1': 'partition_id', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'partitionId'},
+    {'1': 'profile_id', '3': 4, '4': 1, '5': 9, '8': {}, '10': 'profileId'},
+    {'1': 'client_id', '3': 5, '4': 1, '5': 9, '8': {}, '10': 'clientId'},
+    {'1': 'state', '3': 6, '4': 1, '5': 14, '6': '.common.v1.STATE', '10': 'state'},
+    {'1': 'audiences', '3': 7, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'audiences'},
+    {'1': 'properties', '3': 8, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'properties'},
+    {'1': 'created_at', '3': 9, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
+  ],
+};
+
+/// Descriptor for `ServiceAccountObject`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List serviceAccountObjectDescriptor = $convert.base64Decode(
+    'ChRTZXJ2aWNlQWNjb3VudE9iamVjdBIrCgJpZBgBIAEoCUIbukgYchYQAxgoMhBbMC05YS16Xy'
+    '1dezMsNDB9UgJpZBI4Cgl0ZW5hbnRfaWQYAiABKAlCG7pIGHIWEAMYKDIQWzAtOWEtel8tXXsz'
+    'LDQwfVIIdGVuYW50SWQSPgoMcGFydGl0aW9uX2lkGAMgASgJQhu6SBhyFhADGCgyEFswLTlhLX'
+    'pfLV17Myw0MH1SC3BhcnRpdGlvbklkEjoKCnByb2ZpbGVfaWQYBCABKAlCG7pIGHIWEAMYKDIQ'
+    'WzAtOWEtel8tXXszLDQwfVIJcHJvZmlsZUlkEjgKCWNsaWVudF9pZBgFIAEoCUIbukgYchYQAx'
+    'goMhBbMC05YS16Xy1dezMsNDB9UghjbGllbnRJZBImCgVzdGF0ZRgGIAEoDjIQLmNvbW1vbi52'
+    'MS5TVEFURVIFc3RhdGUSNQoJYXVkaWVuY2VzGAcgASgLMhcuZ29vZ2xlLnByb3RvYnVmLlN0cn'
+    'VjdFIJYXVkaWVuY2VzEjcKCnByb3BlcnRpZXMYCCABKAsyFy5nb29nbGUucHJvdG9idWYuU3Ry'
+    'dWN0Ugpwcm9wZXJ0aWVzEjkKCmNyZWF0ZWRfYXQYCSABKAsyGi5nb29nbGUucHJvdG9idWYuVG'
+    'ltZXN0YW1wUgljcmVhdGVkQXQ=');
+
 @$core.Deprecated('Use createPartitionRoleRequestDescriptor instead')
 const CreatePartitionRoleRequest$json = {
   '1': 'CreatePartitionRoleRequest',
@@ -781,6 +810,126 @@ final $typed_data.Uint8List listAccessRoleResponseDescriptor = $convert.base64De
     'ChZMaXN0QWNjZXNzUm9sZVJlc3BvbnNlEjIKBHJvbGUYASADKAsyHi5wYXJ0aXRpb24udjEuQW'
     'NjZXNzUm9sZU9iamVjdFIEcm9sZQ==');
 
+@$core.Deprecated('Use createServiceAccountRequestDescriptor instead')
+const CreateServiceAccountRequest$json = {
+  '1': 'CreateServiceAccountRequest',
+  '2': [
+    {'1': 'partition_id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'partitionId'},
+    {'1': 'profile_id', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'profileId'},
+    {'1': 'name', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'name'},
+    {'1': 'audiences', '3': 4, '4': 3, '5': 9, '10': 'audiences'},
+    {'1': 'properties', '3': 5, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'properties'},
+  ],
+};
+
+/// Descriptor for `CreateServiceAccountRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List createServiceAccountRequestDescriptor = $convert.base64Decode(
+    'ChtDcmVhdGVTZXJ2aWNlQWNjb3VudFJlcXVlc3QSPgoMcGFydGl0aW9uX2lkGAEgASgJQhu6SB'
+    'hyFhADGCgyEFswLTlhLXpfLV17Myw0MH1SC3BhcnRpdGlvbklkEjoKCnByb2ZpbGVfaWQYAiAB'
+    'KAlCG7pIGHIWEAMYKDIQWzAtOWEtel8tXXszLDQwfVIJcHJvZmlsZUlkEh0KBG5hbWUYAyABKA'
+    'lCCbpIBnIEEAMYZFIEbmFtZRIcCglhdWRpZW5jZXMYBCADKAlSCWF1ZGllbmNlcxI3Cgpwcm9w'
+    'ZXJ0aWVzGAUgASgLMhcuZ29vZ2xlLnByb3RvYnVmLlN0cnVjdFIKcHJvcGVydGllcw==');
+
+@$core.Deprecated('Use createServiceAccountResponseDescriptor instead')
+const CreateServiceAccountResponse$json = {
+  '1': 'CreateServiceAccountResponse',
+  '2': [
+    {'1': 'data', '3': 1, '4': 1, '5': 11, '6': '.partition.v1.ServiceAccountObject', '10': 'data'},
+    {'1': 'client_secret', '3': 2, '4': 1, '5': 9, '10': 'clientSecret'},
+  ],
+};
+
+/// Descriptor for `CreateServiceAccountResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List createServiceAccountResponseDescriptor = $convert.base64Decode(
+    'ChxDcmVhdGVTZXJ2aWNlQWNjb3VudFJlc3BvbnNlEjYKBGRhdGEYASABKAsyIi5wYXJ0aXRpb2'
+    '4udjEuU2VydmljZUFjY291bnRPYmplY3RSBGRhdGESIwoNY2xpZW50X3NlY3JldBgCIAEoCVIM'
+    'Y2xpZW50U2VjcmV0');
+
+@$core.Deprecated('Use getServiceAccountRequestDescriptor instead')
+const GetServiceAccountRequest$json = {
+  '1': 'GetServiceAccountRequest',
+  '2': [
+    {'1': 'id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'id'},
+    {'1': 'client_id', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'clientId'},
+    {'1': 'profile_id', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'profileId'},
+  ],
+};
+
+/// Descriptor for `GetServiceAccountRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getServiceAccountRequestDescriptor = $convert.base64Decode(
+    'ChhHZXRTZXJ2aWNlQWNjb3VudFJlcXVlc3QSLgoCaWQYASABKAlCHrpIG9gBAXIWEAMYKDIQWz'
+    'AtOWEtel8tXXszLDQwfVICaWQSOwoJY2xpZW50X2lkGAIgASgJQh66SBvYAQFyFhADGCgyEFsw'
+    'LTlhLXpfLV17Myw0MH1SCGNsaWVudElkEj0KCnByb2ZpbGVfaWQYAyABKAlCHrpIG9gBAXIWEA'
+    'MYKDIQWzAtOWEtel8tXXszLDQwfVIJcHJvZmlsZUlk');
+
+@$core.Deprecated('Use getServiceAccountResponseDescriptor instead')
+const GetServiceAccountResponse$json = {
+  '1': 'GetServiceAccountResponse',
+  '2': [
+    {'1': 'data', '3': 1, '4': 1, '5': 11, '6': '.partition.v1.ServiceAccountObject', '10': 'data'},
+  ],
+};
+
+/// Descriptor for `GetServiceAccountResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getServiceAccountResponseDescriptor = $convert.base64Decode(
+    'ChlHZXRTZXJ2aWNlQWNjb3VudFJlc3BvbnNlEjYKBGRhdGEYASABKAsyIi5wYXJ0aXRpb24udj'
+    'EuU2VydmljZUFjY291bnRPYmplY3RSBGRhdGE=');
+
+@$core.Deprecated('Use listServiceAccountRequestDescriptor instead')
+const ListServiceAccountRequest$json = {
+  '1': 'ListServiceAccountRequest',
+  '2': [
+    {'1': 'partition_id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'partitionId'},
+    {'1': 'count', '3': 2, '4': 1, '5': 5, '10': 'count'},
+    {'1': 'page', '3': 3, '4': 1, '5': 3, '10': 'page'},
+  ],
+};
+
+/// Descriptor for `ListServiceAccountRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listServiceAccountRequestDescriptor = $convert.base64Decode(
+    'ChlMaXN0U2VydmljZUFjY291bnRSZXF1ZXN0Ej4KDHBhcnRpdGlvbl9pZBgBIAEoCUIbukgYch'
+    'YQAxgoMhBbMC05YS16Xy1dezMsNDB9UgtwYXJ0aXRpb25JZBIUCgVjb3VudBgCIAEoBVIFY291'
+    'bnQSEgoEcGFnZRgDIAEoA1IEcGFnZQ==');
+
+@$core.Deprecated('Use listServiceAccountResponseDescriptor instead')
+const ListServiceAccountResponse$json = {
+  '1': 'ListServiceAccountResponse',
+  '2': [
+    {'1': 'data', '3': 1, '4': 3, '5': 11, '6': '.partition.v1.ServiceAccountObject', '10': 'data'},
+  ],
+};
+
+/// Descriptor for `ListServiceAccountResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listServiceAccountResponseDescriptor = $convert.base64Decode(
+    'ChpMaXN0U2VydmljZUFjY291bnRSZXNwb25zZRI2CgRkYXRhGAEgAygLMiIucGFydGl0aW9uLn'
+    'YxLlNlcnZpY2VBY2NvdW50T2JqZWN0UgRkYXRh');
+
+@$core.Deprecated('Use removeServiceAccountRequestDescriptor instead')
+const RemoveServiceAccountRequest$json = {
+  '1': 'RemoveServiceAccountRequest',
+  '2': [
+    {'1': 'id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'id'},
+  ],
+};
+
+/// Descriptor for `RemoveServiceAccountRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List removeServiceAccountRequestDescriptor = $convert.base64Decode(
+    'ChtSZW1vdmVTZXJ2aWNlQWNjb3VudFJlcXVlc3QSKwoCaWQYASABKAlCG7pIGHIWEAMYKDIQWz'
+    'AtOWEtel8tXXszLDQwfVICaWQ=');
+
+@$core.Deprecated('Use removeServiceAccountResponseDescriptor instead')
+const RemoveServiceAccountResponse$json = {
+  '1': 'RemoveServiceAccountResponse',
+  '2': [
+    {'1': 'succeeded', '3': 1, '4': 1, '5': 8, '10': 'succeeded'},
+  ],
+};
+
+/// Descriptor for `RemoveServiceAccountResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List removeServiceAccountResponseDescriptor = $convert.base64Decode(
+    'ChxSZW1vdmVTZXJ2aWNlQWNjb3VudFJlc3BvbnNlEhwKCXN1Y2NlZWRlZBgBIAEoCFIJc3VjY2'
+    'VlZGVk');
+
 const $core.Map<$core.String, $core.dynamic> PartitionServiceBase$json = {
   '1': 'PartitionService',
   '2': [
@@ -854,6 +1003,21 @@ const $core.Map<$core.String, $core.dynamic> PartitionServiceBase$json = {
       '6': true,
     },
     {'1': 'RemoveAccessRole', '2': '.partition.v1.RemoveAccessRoleRequest', '3': '.partition.v1.RemoveAccessRoleResponse', '4': {}},
+    {'1': 'CreateServiceAccount', '2': '.partition.v1.CreateServiceAccountRequest', '3': '.partition.v1.CreateServiceAccountResponse', '4': {}},
+    {
+      '1': 'GetServiceAccount',
+      '2': '.partition.v1.GetServiceAccountRequest',
+      '3': '.partition.v1.GetServiceAccountResponse',
+      '4': {'34': 1},
+    },
+    {
+      '1': 'ListServiceAccount',
+      '2': '.partition.v1.ListServiceAccountRequest',
+      '3': '.partition.v1.ListServiceAccountResponse',
+      '4': {'34': 1},
+      '6': true,
+    },
+    {'1': 'RemoveServiceAccount', '2': '.partition.v1.RemoveServiceAccountRequest', '3': '.partition.v1.RemoveServiceAccountResponse', '4': {}},
   ],
 };
 
@@ -912,6 +1076,15 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> PartitionS
   '.partition.v1.ListAccessRoleResponse': ListAccessRoleResponse$json,
   '.partition.v1.RemoveAccessRoleRequest': RemoveAccessRoleRequest$json,
   '.partition.v1.RemoveAccessRoleResponse': RemoveAccessRoleResponse$json,
+  '.partition.v1.CreateServiceAccountRequest': CreateServiceAccountRequest$json,
+  '.partition.v1.CreateServiceAccountResponse': CreateServiceAccountResponse$json,
+  '.partition.v1.ServiceAccountObject': ServiceAccountObject$json,
+  '.partition.v1.GetServiceAccountRequest': GetServiceAccountRequest$json,
+  '.partition.v1.GetServiceAccountResponse': GetServiceAccountResponse$json,
+  '.partition.v1.ListServiceAccountRequest': ListServiceAccountRequest$json,
+  '.partition.v1.ListServiceAccountResponse': ListServiceAccountResponse$json,
+  '.partition.v1.RemoveServiceAccountRequest': RemoveServiceAccountRequest$json,
+  '.partition.v1.RemoveServiceAccountResponse': RemoveServiceAccountResponse$json,
 };
 
 /// Descriptor for `PartitionService`. Decode as a `google.protobuf.ServiceDescriptorProto`.
@@ -1005,5 +1178,25 @@ final $typed_data.Uint8List partitionServiceDescriptor = $convert.base64Decode(
     'dGl0aW9uLnYxLlJlbW92ZUFjY2Vzc1JvbGVSZXNwb25zZSKkAbpHoAEKBkFjY2VzcxISUmVtb3'
     'ZlIGFjY2VzcyByb2xlGnBSZW1vdmVzIGEgc3BlY2lmaWMgcm9sZSBmcm9tIGFuIGFjY2VzcyBn'
     'cmFudC4gVGhlIHByb2ZpbGUgcmV0YWlucyBhY2Nlc3MgYnV0IGxvc2VzIHRoZSBwZXJtaXNzaW'
-    '9ucyBvZiB0aGlzIHJvbGUuKhByZW1vdmVBY2Nlc3NSb2xl');
+    '9ucyBvZiB0aGlzIHJvbGUuKhByZW1vdmVBY2Nlc3NSb2xlEu8CChRDcmVhdGVTZXJ2aWNlQWNj'
+    'b3VudBIpLnBhcnRpdGlvbi52MS5DcmVhdGVTZXJ2aWNlQWNjb3VudFJlcXVlc3QaKi5wYXJ0aX'
+    'Rpb24udjEuQ3JlYXRlU2VydmljZUFjY291bnRSZXNwb25zZSL/AbpH+wEKD1NlcnZpY2VBY2Nv'
+    'dW50cxIWQ3JlYXRlIHNlcnZpY2UgYWNjb3VudBq5AVJlZ2lzdGVycyBhIHByZS1hdXRob3Jpem'
+    'VkIHNlcnZpY2UgYWNjb3VudCBmb3IgbWFjaGluZS10by1tYWNoaW5lIGF1dGhlbnRpY2F0aW9u'
+    'LiBDcmVhdGVzIGEgZGVkaWNhdGVkIGNoaWxkIHBhcnRpdGlvbiB3aXRoIGNsaWVudF9jcmVkZW'
+    '50aWFscyBncmFudCB0eXBlIGFuZCB3cml0ZXMgYXV0aG9yaXphdGlvbiB0dXBsZXMuKhRjcmVh'
+    'dGVTZXJ2aWNlQWNjb3VudBLjAQoRR2V0U2VydmljZUFjY291bnQSJi5wYXJ0aXRpb24udjEuR2'
+    'V0U2VydmljZUFjY291bnRSZXF1ZXN0GicucGFydGl0aW9uLnYxLkdldFNlcnZpY2VBY2NvdW50'
+    'UmVzcG9uc2UifZACAbpHdwoPU2VydmljZUFjY291bnRzEhNHZXQgc2VydmljZSBhY2NvdW50Gj'
+    'xSZXRyaWV2ZXMgYSBzZXJ2aWNlIGFjY291bnQgYnkgSUQsIGNsaWVudCBJRCwgb3IgcHJvZmls'
+    'ZSBJRC4qEWdldFNlcnZpY2VBY2NvdW50EuYBChJMaXN0U2VydmljZUFjY291bnQSJy5wYXJ0aX'
+    'Rpb24udjEuTGlzdFNlcnZpY2VBY2NvdW50UmVxdWVzdBooLnBhcnRpdGlvbi52MS5MaXN0U2Vy'
+    'dmljZUFjY291bnRSZXNwb25zZSJ7kAIBukd1Cg9TZXJ2aWNlQWNjb3VudHMSFUxpc3Qgc2Vydm'
+    'ljZSBhY2NvdW50cxo2TGlzdHMgYWxsIHNlcnZpY2UgYWNjb3VudHMgcmVnaXN0ZXJlZCBmb3Ig'
+    'YSBwYXJ0aXRpb24uKhNsaXN0U2VydmljZUFjY291bnRzMAESkwIKFFJlbW92ZVNlcnZpY2VBY2'
+    'NvdW50EikucGFydGl0aW9uLnYxLlJlbW92ZVNlcnZpY2VBY2NvdW50UmVxdWVzdBoqLnBhcnRp'
+    'dGlvbi52MS5SZW1vdmVTZXJ2aWNlQWNjb3VudFJlc3BvbnNlIqMBukefAQoPU2VydmljZUFjY2'
+    '91bnRzEhZSZW1vdmUgc2VydmljZSBhY2NvdW50Gl5EZXJlZ2lzdGVycyBhIHNlcnZpY2UgYWNj'
+    'b3VudCwgZGVsZXRpbmcgaXRzIGNoaWxkIHBhcnRpdGlvbiBhbmQgcmV2b2tpbmcgYXV0aG9yaX'
+    'phdGlvbiB0dXBsZXMuKhRyZW1vdmVTZXJ2aWNlQWNjb3VudA==');
 

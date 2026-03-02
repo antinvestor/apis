@@ -370,6 +370,40 @@ message AccessRoleObject {
   PartitionRoleObject role = 3; // Assigned partition role
 }
 
+// ServiceAccountObject represents a pre-registered service account (bot) for a partition.
+// Service accounts get a dedicated child partition with client_credentials grant type.
+message ServiceAccountObject {
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Unique service account ID
+  string tenant_id = 2 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Tenant ID
+  string partition_id = 3 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Target partition ID the bot operates on
+  string profile_id = 4 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Identity/subject of the service bot
+  string client_id = 5 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Dedicated child partition ID (= Hydra client_id)
+  common.v1.STATE state = 6; // Service account state
+  google.protobuf.Struct audiences = 7; // Service namespaces the bot can access
+  google.protobuf.Struct properties = 8; // Additional metadata
+  google.protobuf.Timestamp created_at = 9; // Creation timestamp
+}
+
 // -----------------------------------------------------
 // Request/Response Messages
 // -----------------------------------------------------
@@ -586,6 +620,82 @@ message ListAccessRoleRequest {
 
 message ListAccessRoleResponse {
   repeated AccessRoleObject role = 1;
+}
+
+// Service Account Messages
+message CreateServiceAccountRequest {
+  string partition_id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Target partition the bot operates on
+  string profile_id = 2 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Identity/subject of the service bot
+  string name = 3 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 100
+  ]; // Display name for the service account
+  repeated string audiences = 4; // Service namespaces the bot needs access to
+  google.protobuf.Struct properties = 5; // Additional metadata
+}
+
+message CreateServiceAccountResponse {
+  ServiceAccountObject data = 1;
+  string client_secret = 2; // Only returned on creation
+}
+
+message GetServiceAccountRequest {
+  string id = 1 [
+    (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Service account ID
+  string client_id = 2 [
+    (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Child partition ID (= Hydra client_id)
+  string profile_id = 3 [
+    (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ]; // Identity/subject of the service bot
+}
+
+message GetServiceAccountResponse {
+  ServiceAccountObject data = 1;
+}
+
+message ListServiceAccountRequest {
+  string partition_id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+  int32 count = 2;
+  int64 page = 3;
+}
+
+message ListServiceAccountResponse {
+  repeated ServiceAccountObject data = 1;
+}
+
+message RemoveServiceAccountRequest {
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
+}
+
+message RemoveServiceAccountResponse {
+  bool succeeded = 1;
 }
 
 // -----------------------------------------------------
@@ -811,6 +921,48 @@ service PartitionService {
       summary: "Remove access role"
       description: "Removes a specific role from an access grant. The profile retains access but loses the permissions of this role."
       tags: "Access"
+    };
+  }
+
+  // CreateServiceAccount registers a service account (bot) for a partition.
+  rpc CreateServiceAccount(CreateServiceAccountRequest) returns (CreateServiceAccountResponse) {
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "createServiceAccount"
+      summary: "Create service account"
+      description: "Registers a pre-authorized service account for machine-to-machine authentication. Creates a dedicated child partition with client_credentials grant type and writes authorization tuples."
+      tags: "ServiceAccounts"
+    };
+  }
+
+  // GetServiceAccount retrieves a service account.
+  rpc GetServiceAccount(GetServiceAccountRequest) returns (GetServiceAccountResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "getServiceAccount"
+      summary: "Get service account"
+      description: "Retrieves a service account by ID, client ID, or profile ID."
+      tags: "ServiceAccounts"
+    };
+  }
+
+  // ListServiceAccount retrieves all service accounts for a partition.
+  rpc ListServiceAccount(ListServiceAccountRequest) returns (stream ListServiceAccountResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "listServiceAccounts"
+      summary: "List service accounts"
+      description: "Lists all service accounts registered for a partition."
+      tags: "ServiceAccounts"
+    };
+  }
+
+  // RemoveServiceAccount deregisters a service account.
+  rpc RemoveServiceAccount(RemoveServiceAccountRequest) returns (RemoveServiceAccountResponse) {
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "removeServiceAccount"
+      summary: "Remove service account"
+      description: "Deregisters a service account, deleting its child partition and revoking authorization tuples."
+      tags: "ServiceAccounts"
     };
   }
 }

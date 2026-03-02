@@ -2108,6 +2108,176 @@ class AccessRoleObject extends $pb.GeneratedMessage {
   PartitionRoleObject ensureRole() => $_ensure(2);
 }
 
+/// ServiceAccountObject represents a pre-registered service account (bot) for a partition.
+/// Service accounts get a dedicated child partition with client_credentials grant type.
+class ServiceAccountObject extends $pb.GeneratedMessage {
+  factory ServiceAccountObject({
+    $core.String? id,
+    $core.String? tenantId,
+    $core.String? partitionId,
+    $core.String? profileId,
+    $core.String? clientId,
+    $2.STATE? state,
+    $0.Struct? audiences,
+    $0.Struct? properties,
+    $1.Timestamp? createdAt,
+  }) {
+    final $result = create();
+    if (id != null) {
+      $result.id = id;
+    }
+    if (tenantId != null) {
+      $result.tenantId = tenantId;
+    }
+    if (partitionId != null) {
+      $result.partitionId = partitionId;
+    }
+    if (profileId != null) {
+      $result.profileId = profileId;
+    }
+    if (clientId != null) {
+      $result.clientId = clientId;
+    }
+    if (state != null) {
+      $result.state = state;
+    }
+    if (audiences != null) {
+      $result.audiences = audiences;
+    }
+    if (properties != null) {
+      $result.properties = properties;
+    }
+    if (createdAt != null) {
+      $result.createdAt = createdAt;
+    }
+    return $result;
+  }
+  ServiceAccountObject._() : super();
+  factory ServiceAccountObject.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ServiceAccountObject.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ServiceAccountObject', package: const $pb.PackageName(_omitMessageNames ? '' : 'partition.v1'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'id')
+    ..aOS(2, _omitFieldNames ? '' : 'tenantId')
+    ..aOS(3, _omitFieldNames ? '' : 'partitionId')
+    ..aOS(4, _omitFieldNames ? '' : 'profileId')
+    ..aOS(5, _omitFieldNames ? '' : 'clientId')
+    ..e<$2.STATE>(6, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: $2.STATE.CREATED, valueOf: $2.STATE.valueOf, enumValues: $2.STATE.values)
+    ..aOM<$0.Struct>(7, _omitFieldNames ? '' : 'audiences', subBuilder: $0.Struct.create)
+    ..aOM<$0.Struct>(8, _omitFieldNames ? '' : 'properties', subBuilder: $0.Struct.create)
+    ..aOM<$1.Timestamp>(9, _omitFieldNames ? '' : 'createdAt', subBuilder: $1.Timestamp.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ServiceAccountObject clone() => ServiceAccountObject()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ServiceAccountObject copyWith(void Function(ServiceAccountObject) updates) => super.copyWith((message) => updates(message as ServiceAccountObject)) as ServiceAccountObject;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ServiceAccountObject create() => ServiceAccountObject._();
+  ServiceAccountObject createEmptyInstance() => create();
+  static $pb.PbList<ServiceAccountObject> createRepeated() => $pb.PbList<ServiceAccountObject>();
+  @$core.pragma('dart2js:noInline')
+  static ServiceAccountObject getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ServiceAccountObject>(create);
+  static ServiceAccountObject? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get id => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set id($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get tenantId => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set tenantId($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasTenantId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTenantId() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get partitionId => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set partitionId($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasPartitionId() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearPartitionId() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get profileId => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set profileId($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasProfileId() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearProfileId() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get clientId => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set clientId($core.String v) { $_setString(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasClientId() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearClientId() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $2.STATE get state => $_getN(5);
+  @$pb.TagNumber(6)
+  set state($2.STATE v) { setField(6, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasState() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearState() => clearField(6);
+
+  @$pb.TagNumber(7)
+  $0.Struct get audiences => $_getN(6);
+  @$pb.TagNumber(7)
+  set audiences($0.Struct v) { setField(7, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasAudiences() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearAudiences() => clearField(7);
+  @$pb.TagNumber(7)
+  $0.Struct ensureAudiences() => $_ensure(6);
+
+  @$pb.TagNumber(8)
+  $0.Struct get properties => $_getN(7);
+  @$pb.TagNumber(8)
+  set properties($0.Struct v) { setField(8, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasProperties() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearProperties() => clearField(8);
+  @$pb.TagNumber(8)
+  $0.Struct ensureProperties() => $_ensure(7);
+
+  @$pb.TagNumber(9)
+  $1.Timestamp get createdAt => $_getN(8);
+  @$pb.TagNumber(9)
+  set createdAt($1.Timestamp v) { setField(9, v); }
+  @$pb.TagNumber(9)
+  $core.bool hasCreatedAt() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearCreatedAt() => clearField(9);
+  @$pb.TagNumber(9)
+  $1.Timestamp ensureCreatedAt() => $_ensure(8);
+}
+
 class CreatePartitionRoleRequest extends $pb.GeneratedMessage {
   factory CreatePartitionRoleRequest({
     $core.String? partitionId,
@@ -3508,6 +3678,527 @@ class ListAccessRoleResponse extends $pb.GeneratedMessage {
   $core.List<AccessRoleObject> get role => $_getList(0);
 }
 
+/// Service Account Messages
+class CreateServiceAccountRequest extends $pb.GeneratedMessage {
+  factory CreateServiceAccountRequest({
+    $core.String? partitionId,
+    $core.String? profileId,
+    $core.String? name,
+    $core.Iterable<$core.String>? audiences,
+    $0.Struct? properties,
+  }) {
+    final $result = create();
+    if (partitionId != null) {
+      $result.partitionId = partitionId;
+    }
+    if (profileId != null) {
+      $result.profileId = profileId;
+    }
+    if (name != null) {
+      $result.name = name;
+    }
+    if (audiences != null) {
+      $result.audiences.addAll(audiences);
+    }
+    if (properties != null) {
+      $result.properties = properties;
+    }
+    return $result;
+  }
+  CreateServiceAccountRequest._() : super();
+  factory CreateServiceAccountRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory CreateServiceAccountRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateServiceAccountRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'partition.v1'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'partitionId')
+    ..aOS(2, _omitFieldNames ? '' : 'profileId')
+    ..aOS(3, _omitFieldNames ? '' : 'name')
+    ..pPS(4, _omitFieldNames ? '' : 'audiences')
+    ..aOM<$0.Struct>(5, _omitFieldNames ? '' : 'properties', subBuilder: $0.Struct.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  CreateServiceAccountRequest clone() => CreateServiceAccountRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  CreateServiceAccountRequest copyWith(void Function(CreateServiceAccountRequest) updates) => super.copyWith((message) => updates(message as CreateServiceAccountRequest)) as CreateServiceAccountRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CreateServiceAccountRequest create() => CreateServiceAccountRequest._();
+  CreateServiceAccountRequest createEmptyInstance() => create();
+  static $pb.PbList<CreateServiceAccountRequest> createRepeated() => $pb.PbList<CreateServiceAccountRequest>();
+  @$core.pragma('dart2js:noInline')
+  static CreateServiceAccountRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateServiceAccountRequest>(create);
+  static CreateServiceAccountRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get partitionId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set partitionId($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasPartitionId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPartitionId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get profileId => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set profileId($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasProfileId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearProfileId() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get name => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set name($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasName() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearName() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.List<$core.String> get audiences => $_getList(3);
+
+  @$pb.TagNumber(5)
+  $0.Struct get properties => $_getN(4);
+  @$pb.TagNumber(5)
+  set properties($0.Struct v) { setField(5, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasProperties() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearProperties() => clearField(5);
+  @$pb.TagNumber(5)
+  $0.Struct ensureProperties() => $_ensure(4);
+}
+
+class CreateServiceAccountResponse extends $pb.GeneratedMessage {
+  factory CreateServiceAccountResponse({
+    ServiceAccountObject? data,
+    $core.String? clientSecret,
+  }) {
+    final $result = create();
+    if (data != null) {
+      $result.data = data;
+    }
+    if (clientSecret != null) {
+      $result.clientSecret = clientSecret;
+    }
+    return $result;
+  }
+  CreateServiceAccountResponse._() : super();
+  factory CreateServiceAccountResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory CreateServiceAccountResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateServiceAccountResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'partition.v1'), createEmptyInstance: create)
+    ..aOM<ServiceAccountObject>(1, _omitFieldNames ? '' : 'data', subBuilder: ServiceAccountObject.create)
+    ..aOS(2, _omitFieldNames ? '' : 'clientSecret')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  CreateServiceAccountResponse clone() => CreateServiceAccountResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  CreateServiceAccountResponse copyWith(void Function(CreateServiceAccountResponse) updates) => super.copyWith((message) => updates(message as CreateServiceAccountResponse)) as CreateServiceAccountResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CreateServiceAccountResponse create() => CreateServiceAccountResponse._();
+  CreateServiceAccountResponse createEmptyInstance() => create();
+  static $pb.PbList<CreateServiceAccountResponse> createRepeated() => $pb.PbList<CreateServiceAccountResponse>();
+  @$core.pragma('dart2js:noInline')
+  static CreateServiceAccountResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateServiceAccountResponse>(create);
+  static CreateServiceAccountResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  ServiceAccountObject get data => $_getN(0);
+  @$pb.TagNumber(1)
+  set data(ServiceAccountObject v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasData() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearData() => clearField(1);
+  @$pb.TagNumber(1)
+  ServiceAccountObject ensureData() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.String get clientSecret => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set clientSecret($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasClientSecret() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearClientSecret() => clearField(2);
+}
+
+class GetServiceAccountRequest extends $pb.GeneratedMessage {
+  factory GetServiceAccountRequest({
+    $core.String? id,
+    $core.String? clientId,
+    $core.String? profileId,
+  }) {
+    final $result = create();
+    if (id != null) {
+      $result.id = id;
+    }
+    if (clientId != null) {
+      $result.clientId = clientId;
+    }
+    if (profileId != null) {
+      $result.profileId = profileId;
+    }
+    return $result;
+  }
+  GetServiceAccountRequest._() : super();
+  factory GetServiceAccountRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetServiceAccountRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetServiceAccountRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'partition.v1'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'id')
+    ..aOS(2, _omitFieldNames ? '' : 'clientId')
+    ..aOS(3, _omitFieldNames ? '' : 'profileId')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetServiceAccountRequest clone() => GetServiceAccountRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetServiceAccountRequest copyWith(void Function(GetServiceAccountRequest) updates) => super.copyWith((message) => updates(message as GetServiceAccountRequest)) as GetServiceAccountRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetServiceAccountRequest create() => GetServiceAccountRequest._();
+  GetServiceAccountRequest createEmptyInstance() => create();
+  static $pb.PbList<GetServiceAccountRequest> createRepeated() => $pb.PbList<GetServiceAccountRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetServiceAccountRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetServiceAccountRequest>(create);
+  static GetServiceAccountRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get id => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set id($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get clientId => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set clientId($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasClientId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearClientId() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get profileId => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set profileId($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasProfileId() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearProfileId() => clearField(3);
+}
+
+class GetServiceAccountResponse extends $pb.GeneratedMessage {
+  factory GetServiceAccountResponse({
+    ServiceAccountObject? data,
+  }) {
+    final $result = create();
+    if (data != null) {
+      $result.data = data;
+    }
+    return $result;
+  }
+  GetServiceAccountResponse._() : super();
+  factory GetServiceAccountResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetServiceAccountResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetServiceAccountResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'partition.v1'), createEmptyInstance: create)
+    ..aOM<ServiceAccountObject>(1, _omitFieldNames ? '' : 'data', subBuilder: ServiceAccountObject.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetServiceAccountResponse clone() => GetServiceAccountResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetServiceAccountResponse copyWith(void Function(GetServiceAccountResponse) updates) => super.copyWith((message) => updates(message as GetServiceAccountResponse)) as GetServiceAccountResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetServiceAccountResponse create() => GetServiceAccountResponse._();
+  GetServiceAccountResponse createEmptyInstance() => create();
+  static $pb.PbList<GetServiceAccountResponse> createRepeated() => $pb.PbList<GetServiceAccountResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetServiceAccountResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetServiceAccountResponse>(create);
+  static GetServiceAccountResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  ServiceAccountObject get data => $_getN(0);
+  @$pb.TagNumber(1)
+  set data(ServiceAccountObject v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasData() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearData() => clearField(1);
+  @$pb.TagNumber(1)
+  ServiceAccountObject ensureData() => $_ensure(0);
+}
+
+class ListServiceAccountRequest extends $pb.GeneratedMessage {
+  factory ListServiceAccountRequest({
+    $core.String? partitionId,
+    $core.int? count,
+    $fixnum.Int64? page,
+  }) {
+    final $result = create();
+    if (partitionId != null) {
+      $result.partitionId = partitionId;
+    }
+    if (count != null) {
+      $result.count = count;
+    }
+    if (page != null) {
+      $result.page = page;
+    }
+    return $result;
+  }
+  ListServiceAccountRequest._() : super();
+  factory ListServiceAccountRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListServiceAccountRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListServiceAccountRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'partition.v1'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'partitionId')
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'count', $pb.PbFieldType.O3)
+    ..aInt64(3, _omitFieldNames ? '' : 'page')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListServiceAccountRequest clone() => ListServiceAccountRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListServiceAccountRequest copyWith(void Function(ListServiceAccountRequest) updates) => super.copyWith((message) => updates(message as ListServiceAccountRequest)) as ListServiceAccountRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListServiceAccountRequest create() => ListServiceAccountRequest._();
+  ListServiceAccountRequest createEmptyInstance() => create();
+  static $pb.PbList<ListServiceAccountRequest> createRepeated() => $pb.PbList<ListServiceAccountRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListServiceAccountRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListServiceAccountRequest>(create);
+  static ListServiceAccountRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get partitionId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set partitionId($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasPartitionId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPartitionId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.int get count => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set count($core.int v) { $_setSignedInt32(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasCount() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearCount() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get page => $_getI64(2);
+  @$pb.TagNumber(3)
+  set page($fixnum.Int64 v) { $_setInt64(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasPage() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearPage() => clearField(3);
+}
+
+class ListServiceAccountResponse extends $pb.GeneratedMessage {
+  factory ListServiceAccountResponse({
+    $core.Iterable<ServiceAccountObject>? data,
+  }) {
+    final $result = create();
+    if (data != null) {
+      $result.data.addAll(data);
+    }
+    return $result;
+  }
+  ListServiceAccountResponse._() : super();
+  factory ListServiceAccountResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListServiceAccountResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListServiceAccountResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'partition.v1'), createEmptyInstance: create)
+    ..pc<ServiceAccountObject>(1, _omitFieldNames ? '' : 'data', $pb.PbFieldType.PM, subBuilder: ServiceAccountObject.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListServiceAccountResponse clone() => ListServiceAccountResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListServiceAccountResponse copyWith(void Function(ListServiceAccountResponse) updates) => super.copyWith((message) => updates(message as ListServiceAccountResponse)) as ListServiceAccountResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListServiceAccountResponse create() => ListServiceAccountResponse._();
+  ListServiceAccountResponse createEmptyInstance() => create();
+  static $pb.PbList<ListServiceAccountResponse> createRepeated() => $pb.PbList<ListServiceAccountResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListServiceAccountResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListServiceAccountResponse>(create);
+  static ListServiceAccountResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<ServiceAccountObject> get data => $_getList(0);
+}
+
+class RemoveServiceAccountRequest extends $pb.GeneratedMessage {
+  factory RemoveServiceAccountRequest({
+    $core.String? id,
+  }) {
+    final $result = create();
+    if (id != null) {
+      $result.id = id;
+    }
+    return $result;
+  }
+  RemoveServiceAccountRequest._() : super();
+  factory RemoveServiceAccountRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory RemoveServiceAccountRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RemoveServiceAccountRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'partition.v1'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'id')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  RemoveServiceAccountRequest clone() => RemoveServiceAccountRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  RemoveServiceAccountRequest copyWith(void Function(RemoveServiceAccountRequest) updates) => super.copyWith((message) => updates(message as RemoveServiceAccountRequest)) as RemoveServiceAccountRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static RemoveServiceAccountRequest create() => RemoveServiceAccountRequest._();
+  RemoveServiceAccountRequest createEmptyInstance() => create();
+  static $pb.PbList<RemoveServiceAccountRequest> createRepeated() => $pb.PbList<RemoveServiceAccountRequest>();
+  @$core.pragma('dart2js:noInline')
+  static RemoveServiceAccountRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RemoveServiceAccountRequest>(create);
+  static RemoveServiceAccountRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get id => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set id($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+}
+
+class RemoveServiceAccountResponse extends $pb.GeneratedMessage {
+  factory RemoveServiceAccountResponse({
+    $core.bool? succeeded,
+  }) {
+    final $result = create();
+    if (succeeded != null) {
+      $result.succeeded = succeeded;
+    }
+    return $result;
+  }
+  RemoveServiceAccountResponse._() : super();
+  factory RemoveServiceAccountResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory RemoveServiceAccountResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RemoveServiceAccountResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'partition.v1'), createEmptyInstance: create)
+    ..aOB(1, _omitFieldNames ? '' : 'succeeded')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  RemoveServiceAccountResponse clone() => RemoveServiceAccountResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  RemoveServiceAccountResponse copyWith(void Function(RemoveServiceAccountResponse) updates) => super.copyWith((message) => updates(message as RemoveServiceAccountResponse)) as RemoveServiceAccountResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static RemoveServiceAccountResponse create() => RemoveServiceAccountResponse._();
+  RemoveServiceAccountResponse createEmptyInstance() => create();
+  static $pb.PbList<RemoveServiceAccountResponse> createRepeated() => $pb.PbList<RemoveServiceAccountResponse>();
+  @$core.pragma('dart2js:noInline')
+  static RemoveServiceAccountResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RemoveServiceAccountResponse>(create);
+  static RemoveServiceAccountResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.bool get succeeded => $_getBF(0);
+  @$pb.TagNumber(1)
+  set succeeded($core.bool v) { $_setBool(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasSucceeded() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSucceeded() => clearField(1);
+}
+
 class PartitionServiceApi {
   $pb.RpcClient _client;
   PartitionServiceApi(this._client);
@@ -3574,6 +4265,18 @@ class PartitionServiceApi {
   ;
   $async.Future<RemoveAccessRoleResponse> removeAccessRole($pb.ClientContext? ctx, RemoveAccessRoleRequest request) =>
     _client.invoke<RemoveAccessRoleResponse>(ctx, 'PartitionService', 'RemoveAccessRole', request, RemoveAccessRoleResponse())
+  ;
+  $async.Future<CreateServiceAccountResponse> createServiceAccount($pb.ClientContext? ctx, CreateServiceAccountRequest request) =>
+    _client.invoke<CreateServiceAccountResponse>(ctx, 'PartitionService', 'CreateServiceAccount', request, CreateServiceAccountResponse())
+  ;
+  $async.Future<GetServiceAccountResponse> getServiceAccount($pb.ClientContext? ctx, GetServiceAccountRequest request) =>
+    _client.invoke<GetServiceAccountResponse>(ctx, 'PartitionService', 'GetServiceAccount', request, GetServiceAccountResponse())
+  ;
+  $async.Future<ListServiceAccountResponse> listServiceAccount($pb.ClientContext? ctx, ListServiceAccountRequest request) =>
+    _client.invoke<ListServiceAccountResponse>(ctx, 'PartitionService', 'ListServiceAccount', request, ListServiceAccountResponse())
+  ;
+  $async.Future<RemoveServiceAccountResponse> removeServiceAccount($pb.ClientContext? ctx, RemoveServiceAccountRequest request) =>
+    _client.invoke<RemoveServiceAccountResponse>(ctx, 'PartitionService', 'RemoveServiceAccount', request, RemoveServiceAccountResponse())
   ;
 }
 

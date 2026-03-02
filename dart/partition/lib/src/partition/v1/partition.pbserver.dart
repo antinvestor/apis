@@ -42,6 +42,10 @@ abstract class PartitionServiceBase extends $pb.GeneratedService {
   $async.Future<$3.CreateAccessRoleResponse> createAccessRole($pb.ServerContext ctx, $3.CreateAccessRoleRequest request);
   $async.Future<$3.ListAccessRoleResponse> listAccessRole($pb.ServerContext ctx, $3.ListAccessRoleRequest request);
   $async.Future<$3.RemoveAccessRoleResponse> removeAccessRole($pb.ServerContext ctx, $3.RemoveAccessRoleRequest request);
+  $async.Future<$3.CreateServiceAccountResponse> createServiceAccount($pb.ServerContext ctx, $3.CreateServiceAccountRequest request);
+  $async.Future<$3.GetServiceAccountResponse> getServiceAccount($pb.ServerContext ctx, $3.GetServiceAccountRequest request);
+  $async.Future<$3.ListServiceAccountResponse> listServiceAccount($pb.ServerContext ctx, $3.ListServiceAccountRequest request);
+  $async.Future<$3.RemoveServiceAccountResponse> removeServiceAccount($pb.ServerContext ctx, $3.RemoveServiceAccountRequest request);
 
   $pb.GeneratedMessage createRequest($core.String methodName) {
     switch (methodName) {
@@ -66,6 +70,10 @@ abstract class PartitionServiceBase extends $pb.GeneratedService {
       case 'CreateAccessRole': return $3.CreateAccessRoleRequest();
       case 'ListAccessRole': return $3.ListAccessRoleRequest();
       case 'RemoveAccessRole': return $3.RemoveAccessRoleRequest();
+      case 'CreateServiceAccount': return $3.CreateServiceAccountRequest();
+      case 'GetServiceAccount': return $3.GetServiceAccountRequest();
+      case 'ListServiceAccount': return $3.ListServiceAccountRequest();
+      case 'RemoveServiceAccount': return $3.RemoveServiceAccountRequest();
       default: throw $core.ArgumentError('Unknown method: $methodName');
     }
   }
@@ -93,6 +101,10 @@ abstract class PartitionServiceBase extends $pb.GeneratedService {
       case 'CreateAccessRole': return this.createAccessRole(ctx, request as $3.CreateAccessRoleRequest);
       case 'ListAccessRole': return this.listAccessRole(ctx, request as $3.ListAccessRoleRequest);
       case 'RemoveAccessRole': return this.removeAccessRole(ctx, request as $3.RemoveAccessRoleRequest);
+      case 'CreateServiceAccount': return this.createServiceAccount(ctx, request as $3.CreateServiceAccountRequest);
+      case 'GetServiceAccount': return this.getServiceAccount(ctx, request as $3.GetServiceAccountRequest);
+      case 'ListServiceAccount': return this.listServiceAccount(ctx, request as $3.ListServiceAccountRequest);
+      case 'RemoveServiceAccount': return this.removeServiceAccount(ctx, request as $3.RemoveServiceAccountRequest);
       default: throw $core.ArgumentError('Unknown method: $methodName');
     }
   }
