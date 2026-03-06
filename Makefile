@@ -177,6 +177,18 @@ define dart_upgrade
 endef
 
 # ------------------------------------------------------------------------------
+# Java helpers
+# ------------------------------------------------------------------------------
+
+define java_upgrade
+	( \
+	cd java; \
+	./gradlew useLatestVersions; \
+	./gradlew build; \
+	)
+endef
+
+# ------------------------------------------------------------------------------
 # Public targets
 # ------------------------------------------------------------------------------
 
@@ -311,11 +323,19 @@ generate_dart: $(BIN)/buf ## Generate Dart from proto
 	done
 
 # ------------------------------------------------------------------------------
+# Java
+# ------------------------------------------------------------------------------
+
+.PHONY: java_upgrade_all
+java_upgrade_all: ## Upgrade all Java dependencies
+	$(call java_upgrade)
+
+# ------------------------------------------------------------------------------
 # CI helpers
 # ------------------------------------------------------------------------------
 
 .PHONY: upgrade
-upgrade: golang_upgrade_all dart_upgrade_all ## Upgrade all deps
+upgrade: golang_upgrade_all dart_upgrade_all java_upgrade_all ## Upgrade all deps
 	@echo "dependency upgrade complete"
 
 .PHONY: checkgenerate

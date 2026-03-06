@@ -3,8 +3,8 @@ module github.com/antinvestor/apis/go/partition
 go 1.26
 
 require (
-	buf.build/gen/go/antinvestor/partition/connectrpc/go v1.19.1-20260302135159-869c278b660c.2
-	buf.build/gen/go/antinvestor/partition/protocolbuffers/go v1.36.11-20260302135159-869c278b660c.1
+	buf.build/gen/go/antinvestor/partition/connectrpc/go v1.19.1-20260306034803-bec59545427a.2
+	buf.build/gen/go/antinvestor/partition/protocolbuffers/go v1.36.11-20260306034803-bec59545427a.1
 	connectrpc.com/connect v1.19.1
 	github.com/antinvestor/apis/go/common v1.55.0
 	github.com/gojuno/minimock/v3 v3.4.7
