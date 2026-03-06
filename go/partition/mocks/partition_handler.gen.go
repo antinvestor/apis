@@ -55,6 +55,13 @@ type PartitionServiceClientMock struct {
 	beforeCreatePartitionRoleCounter uint64
 	CreatePartitionRoleMock          mPartitionServiceClientMockCreatePartitionRole
 
+	funcCreateServiceAccount          func(ctx context.Context, pp1 *connect.Request[v1.CreateServiceAccountRequest]) (pp2 *connect.Response[v1.CreateServiceAccountResponse], err error)
+	funcCreateServiceAccountOrigin    string
+	inspectFuncCreateServiceAccount   func(ctx context.Context, pp1 *connect.Request[v1.CreateServiceAccountRequest])
+	afterCreateServiceAccountCounter  uint64
+	beforeCreateServiceAccountCounter uint64
+	CreateServiceAccountMock          mPartitionServiceClientMockCreateServiceAccount
+
 	funcCreateTenant          func(ctx context.Context, pp1 *connect.Request[v1.CreateTenantRequest]) (pp2 *connect.Response[v1.CreateTenantResponse], err error)
 	funcCreateTenantOrigin    string
 	inspectFuncCreateTenant   func(ctx context.Context, pp1 *connect.Request[v1.CreateTenantRequest])
@@ -90,6 +97,13 @@ type PartitionServiceClientMock struct {
 	beforeGetPartitionParentsCounter uint64
 	GetPartitionParentsMock          mPartitionServiceClientMockGetPartitionParents
 
+	funcGetServiceAccount          func(ctx context.Context, pp1 *connect.Request[v1.GetServiceAccountRequest]) (pp2 *connect.Response[v1.GetServiceAccountResponse], err error)
+	funcGetServiceAccountOrigin    string
+	inspectFuncGetServiceAccount   func(ctx context.Context, pp1 *connect.Request[v1.GetServiceAccountRequest])
+	afterGetServiceAccountCounter  uint64
+	beforeGetServiceAccountCounter uint64
+	GetServiceAccountMock          mPartitionServiceClientMockGetServiceAccount
+
 	funcGetTenant          func(ctx context.Context, pp1 *connect.Request[v1.GetTenantRequest]) (pp2 *connect.Response[v1.GetTenantResponse], err error)
 	funcGetTenantOrigin    string
 	inspectFuncGetTenant   func(ctx context.Context, pp1 *connect.Request[v1.GetTenantRequest])
@@ -117,6 +131,13 @@ type PartitionServiceClientMock struct {
 	afterListPartitionRoleCounter  uint64
 	beforeListPartitionRoleCounter uint64
 	ListPartitionRoleMock          mPartitionServiceClientMockListPartitionRole
+
+	funcListServiceAccount          func(ctx context.Context, pp1 *connect.Request[v1.ListServiceAccountRequest]) (pp2 *connect.ServerStreamForClient[v1.ListServiceAccountResponse], err error)
+	funcListServiceAccountOrigin    string
+	inspectFuncListServiceAccount   func(ctx context.Context, pp1 *connect.Request[v1.ListServiceAccountRequest])
+	afterListServiceAccountCounter  uint64
+	beforeListServiceAccountCounter uint64
+	ListServiceAccountMock          mPartitionServiceClientMockListServiceAccount
 
 	funcListTenant          func(ctx context.Context, pp1 *connect.Request[v1.ListTenantRequest]) (pp2 *connect.ServerStreamForClient[v1.ListTenantResponse], err error)
 	funcListTenantOrigin    string
@@ -152,6 +173,13 @@ type PartitionServiceClientMock struct {
 	afterRemovePartitionRoleCounter  uint64
 	beforeRemovePartitionRoleCounter uint64
 	RemovePartitionRoleMock          mPartitionServiceClientMockRemovePartitionRole
+
+	funcRemoveServiceAccount          func(ctx context.Context, pp1 *connect.Request[v1.RemoveServiceAccountRequest]) (pp2 *connect.Response[v1.RemoveServiceAccountResponse], err error)
+	funcRemoveServiceAccountOrigin    string
+	inspectFuncRemoveServiceAccount   func(ctx context.Context, pp1 *connect.Request[v1.RemoveServiceAccountRequest])
+	afterRemoveServiceAccountCounter  uint64
+	beforeRemoveServiceAccountCounter uint64
+	RemoveServiceAccountMock          mPartitionServiceClientMockRemoveServiceAccount
 
 	funcUpdatePartition          func(ctx context.Context, pp1 *connect.Request[v1.UpdatePartitionRequest]) (pp2 *connect.Response[v1.UpdatePartitionResponse], err error)
 	funcUpdatePartitionOrigin    string
@@ -191,6 +219,9 @@ func NewPartitionServiceClientMock(t minimock.Tester) *PartitionServiceClientMoc
 	m.CreatePartitionRoleMock = mPartitionServiceClientMockCreatePartitionRole{mock: m}
 	m.CreatePartitionRoleMock.callArgs = []*PartitionServiceClientMockCreatePartitionRoleParams{}
 
+	m.CreateServiceAccountMock = mPartitionServiceClientMockCreateServiceAccount{mock: m}
+	m.CreateServiceAccountMock.callArgs = []*PartitionServiceClientMockCreateServiceAccountParams{}
+
 	m.CreateTenantMock = mPartitionServiceClientMockCreateTenant{mock: m}
 	m.CreateTenantMock.callArgs = []*PartitionServiceClientMockCreateTenantParams{}
 
@@ -206,6 +237,9 @@ func NewPartitionServiceClientMock(t minimock.Tester) *PartitionServiceClientMoc
 	m.GetPartitionParentsMock = mPartitionServiceClientMockGetPartitionParents{mock: m}
 	m.GetPartitionParentsMock.callArgs = []*PartitionServiceClientMockGetPartitionParentsParams{}
 
+	m.GetServiceAccountMock = mPartitionServiceClientMockGetServiceAccount{mock: m}
+	m.GetServiceAccountMock.callArgs = []*PartitionServiceClientMockGetServiceAccountParams{}
+
 	m.GetTenantMock = mPartitionServiceClientMockGetTenant{mock: m}
 	m.GetTenantMock.callArgs = []*PartitionServiceClientMockGetTenantParams{}
 
@@ -217,6 +251,9 @@ func NewPartitionServiceClientMock(t minimock.Tester) *PartitionServiceClientMoc
 
 	m.ListPartitionRoleMock = mPartitionServiceClientMockListPartitionRole{mock: m}
 	m.ListPartitionRoleMock.callArgs = []*PartitionServiceClientMockListPartitionRoleParams{}
+
+	m.ListServiceAccountMock = mPartitionServiceClientMockListServiceAccount{mock: m}
+	m.ListServiceAccountMock.callArgs = []*PartitionServiceClientMockListServiceAccountParams{}
 
 	m.ListTenantMock = mPartitionServiceClientMockListTenant{mock: m}
 	m.ListTenantMock.callArgs = []*PartitionServiceClientMockListTenantParams{}
@@ -232,6 +269,9 @@ func NewPartitionServiceClientMock(t minimock.Tester) *PartitionServiceClientMoc
 
 	m.RemovePartitionRoleMock = mPartitionServiceClientMockRemovePartitionRole{mock: m}
 	m.RemovePartitionRoleMock.callArgs = []*PartitionServiceClientMockRemovePartitionRoleParams{}
+
+	m.RemoveServiceAccountMock = mPartitionServiceClientMockRemoveServiceAccount{mock: m}
+	m.RemoveServiceAccountMock.callArgs = []*PartitionServiceClientMockRemoveServiceAccountParams{}
 
 	m.UpdatePartitionMock = mPartitionServiceClientMockUpdatePartition{mock: m}
 	m.UpdatePartitionMock.callArgs = []*PartitionServiceClientMockUpdatePartitionParams{}
@@ -1959,6 +1999,349 @@ func (m *PartitionServiceClientMock) MinimockCreatePartitionRoleInspect() {
 	}
 }
 
+type mPartitionServiceClientMockCreateServiceAccount struct {
+	optional           bool
+	mock               *PartitionServiceClientMock
+	defaultExpectation *PartitionServiceClientMockCreateServiceAccountExpectation
+	expectations       []*PartitionServiceClientMockCreateServiceAccountExpectation
+
+	callArgs []*PartitionServiceClientMockCreateServiceAccountParams
+	mutex    sync.RWMutex
+
+	expectedInvocations       uint64
+	expectedInvocationsOrigin string
+}
+
+// PartitionServiceClientMockCreateServiceAccountExpectation specifies expectation struct of the PartitionServiceClient.CreateServiceAccount
+type PartitionServiceClientMockCreateServiceAccountExpectation struct {
+	mock               *PartitionServiceClientMock
+	params             *PartitionServiceClientMockCreateServiceAccountParams
+	paramPtrs          *PartitionServiceClientMockCreateServiceAccountParamPtrs
+	expectationOrigins PartitionServiceClientMockCreateServiceAccountExpectationOrigins
+	results            *PartitionServiceClientMockCreateServiceAccountResults
+	returnOrigin       string
+	Counter            uint64
+}
+
+// PartitionServiceClientMockCreateServiceAccountParams contains parameters of the PartitionServiceClient.CreateServiceAccount
+type PartitionServiceClientMockCreateServiceAccountParams struct {
+	ctx context.Context
+	pp1 *connect.Request[v1.CreateServiceAccountRequest]
+}
+
+// PartitionServiceClientMockCreateServiceAccountParamPtrs contains pointers to parameters of the PartitionServiceClient.CreateServiceAccount
+type PartitionServiceClientMockCreateServiceAccountParamPtrs struct {
+	ctx *context.Context
+	pp1 **connect.Request[v1.CreateServiceAccountRequest]
+}
+
+// PartitionServiceClientMockCreateServiceAccountResults contains results of the PartitionServiceClient.CreateServiceAccount
+type PartitionServiceClientMockCreateServiceAccountResults struct {
+	pp2 *connect.Response[v1.CreateServiceAccountResponse]
+	err error
+}
+
+// PartitionServiceClientMockCreateServiceAccountOrigins contains origins of expectations of the PartitionServiceClient.CreateServiceAccount
+type PartitionServiceClientMockCreateServiceAccountExpectationOrigins struct {
+	origin    string
+	originCtx string
+	originPp1 string
+}
+
+// Marks this method to be optional. The default behavior of any method with Return() is '1 or more', meaning
+// the test will fail minimock's automatic final call check if the mocked method was not called at least once.
+// Optional() makes method check to work in '0 or more' mode.
+// It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
+// catch the problems when the expected method call is totally skipped during test run.
+func (mmCreateServiceAccount *mPartitionServiceClientMockCreateServiceAccount) Optional() *mPartitionServiceClientMockCreateServiceAccount {
+	mmCreateServiceAccount.optional = true
+	return mmCreateServiceAccount
+}
+
+// Expect sets up expected params for PartitionServiceClient.CreateServiceAccount
+func (mmCreateServiceAccount *mPartitionServiceClientMockCreateServiceAccount) Expect(ctx context.Context, pp1 *connect.Request[v1.CreateServiceAccountRequest]) *mPartitionServiceClientMockCreateServiceAccount {
+	if mmCreateServiceAccount.mock.funcCreateServiceAccount != nil {
+		mmCreateServiceAccount.mock.t.Fatalf("PartitionServiceClientMock.CreateServiceAccount mock is already set by Set")
+	}
+
+	if mmCreateServiceAccount.defaultExpectation == nil {
+		mmCreateServiceAccount.defaultExpectation = &PartitionServiceClientMockCreateServiceAccountExpectation{}
+	}
+
+	if mmCreateServiceAccount.defaultExpectation.paramPtrs != nil {
+		mmCreateServiceAccount.mock.t.Fatalf("PartitionServiceClientMock.CreateServiceAccount mock is already set by ExpectParams functions")
+	}
+
+	mmCreateServiceAccount.defaultExpectation.params = &PartitionServiceClientMockCreateServiceAccountParams{ctx, pp1}
+	mmCreateServiceAccount.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
+	for _, e := range mmCreateServiceAccount.expectations {
+		if minimock.Equal(e.params, mmCreateServiceAccount.defaultExpectation.params) {
+			mmCreateServiceAccount.mock.t.Fatalf("Expectation set by When has same params: %#v", *mmCreateServiceAccount.defaultExpectation.params)
+		}
+	}
+
+	return mmCreateServiceAccount
+}
+
+// ExpectCtxParam1 sets up expected param ctx for PartitionServiceClient.CreateServiceAccount
+func (mmCreateServiceAccount *mPartitionServiceClientMockCreateServiceAccount) ExpectCtxParam1(ctx context.Context) *mPartitionServiceClientMockCreateServiceAccount {
+	if mmCreateServiceAccount.mock.funcCreateServiceAccount != nil {
+		mmCreateServiceAccount.mock.t.Fatalf("PartitionServiceClientMock.CreateServiceAccount mock is already set by Set")
+	}
+
+	if mmCreateServiceAccount.defaultExpectation == nil {
+		mmCreateServiceAccount.defaultExpectation = &PartitionServiceClientMockCreateServiceAccountExpectation{}
+	}
+
+	if mmCreateServiceAccount.defaultExpectation.params != nil {
+		mmCreateServiceAccount.mock.t.Fatalf("PartitionServiceClientMock.CreateServiceAccount mock is already set by Expect")
+	}
+
+	if mmCreateServiceAccount.defaultExpectation.paramPtrs == nil {
+		mmCreateServiceAccount.defaultExpectation.paramPtrs = &PartitionServiceClientMockCreateServiceAccountParamPtrs{}
+	}
+	mmCreateServiceAccount.defaultExpectation.paramPtrs.ctx = &ctx
+	mmCreateServiceAccount.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
+
+	return mmCreateServiceAccount
+}
+
+// ExpectPp1Param2 sets up expected param pp1 for PartitionServiceClient.CreateServiceAccount
+func (mmCreateServiceAccount *mPartitionServiceClientMockCreateServiceAccount) ExpectPp1Param2(pp1 *connect.Request[v1.CreateServiceAccountRequest]) *mPartitionServiceClientMockCreateServiceAccount {
+	if mmCreateServiceAccount.mock.funcCreateServiceAccount != nil {
+		mmCreateServiceAccount.mock.t.Fatalf("PartitionServiceClientMock.CreateServiceAccount mock is already set by Set")
+	}
+
+	if mmCreateServiceAccount.defaultExpectation == nil {
+		mmCreateServiceAccount.defaultExpectation = &PartitionServiceClientMockCreateServiceAccountExpectation{}
+	}
+
+	if mmCreateServiceAccount.defaultExpectation.params != nil {
+		mmCreateServiceAccount.mock.t.Fatalf("PartitionServiceClientMock.CreateServiceAccount mock is already set by Expect")
+	}
+
+	if mmCreateServiceAccount.defaultExpectation.paramPtrs == nil {
+		mmCreateServiceAccount.defaultExpectation.paramPtrs = &PartitionServiceClientMockCreateServiceAccountParamPtrs{}
+	}
+	mmCreateServiceAccount.defaultExpectation.paramPtrs.pp1 = &pp1
+	mmCreateServiceAccount.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
+
+	return mmCreateServiceAccount
+}
+
+// Inspect accepts an inspector function that has same arguments as the PartitionServiceClient.CreateServiceAccount
+func (mmCreateServiceAccount *mPartitionServiceClientMockCreateServiceAccount) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.CreateServiceAccountRequest])) *mPartitionServiceClientMockCreateServiceAccount {
+	if mmCreateServiceAccount.mock.inspectFuncCreateServiceAccount != nil {
+		mmCreateServiceAccount.mock.t.Fatalf("Inspect function is already set for PartitionServiceClientMock.CreateServiceAccount")
+	}
+
+	mmCreateServiceAccount.mock.inspectFuncCreateServiceAccount = f
+
+	return mmCreateServiceAccount
+}
+
+// Return sets up results that will be returned by PartitionServiceClient.CreateServiceAccount
+func (mmCreateServiceAccount *mPartitionServiceClientMockCreateServiceAccount) Return(pp2 *connect.Response[v1.CreateServiceAccountResponse], err error) *PartitionServiceClientMock {
+	if mmCreateServiceAccount.mock.funcCreateServiceAccount != nil {
+		mmCreateServiceAccount.mock.t.Fatalf("PartitionServiceClientMock.CreateServiceAccount mock is already set by Set")
+	}
+
+	if mmCreateServiceAccount.defaultExpectation == nil {
+		mmCreateServiceAccount.defaultExpectation = &PartitionServiceClientMockCreateServiceAccountExpectation{mock: mmCreateServiceAccount.mock}
+	}
+	mmCreateServiceAccount.defaultExpectation.results = &PartitionServiceClientMockCreateServiceAccountResults{pp2, err}
+	mmCreateServiceAccount.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
+	return mmCreateServiceAccount.mock
+}
+
+// Set uses given function f to mock the PartitionServiceClient.CreateServiceAccount method
+func (mmCreateServiceAccount *mPartitionServiceClientMockCreateServiceAccount) Set(f func(ctx context.Context, pp1 *connect.Request[v1.CreateServiceAccountRequest]) (pp2 *connect.Response[v1.CreateServiceAccountResponse], err error)) *PartitionServiceClientMock {
+	if mmCreateServiceAccount.defaultExpectation != nil {
+		mmCreateServiceAccount.mock.t.Fatalf("Default expectation is already set for the PartitionServiceClient.CreateServiceAccount method")
+	}
+
+	if len(mmCreateServiceAccount.expectations) > 0 {
+		mmCreateServiceAccount.mock.t.Fatalf("Some expectations are already set for the PartitionServiceClient.CreateServiceAccount method")
+	}
+
+	mmCreateServiceAccount.mock.funcCreateServiceAccount = f
+	mmCreateServiceAccount.mock.funcCreateServiceAccountOrigin = minimock.CallerInfo(1)
+	return mmCreateServiceAccount.mock
+}
+
+// When sets expectation for the PartitionServiceClient.CreateServiceAccount which will trigger the result defined by the following
+// Then helper
+func (mmCreateServiceAccount *mPartitionServiceClientMockCreateServiceAccount) When(ctx context.Context, pp1 *connect.Request[v1.CreateServiceAccountRequest]) *PartitionServiceClientMockCreateServiceAccountExpectation {
+	if mmCreateServiceAccount.mock.funcCreateServiceAccount != nil {
+		mmCreateServiceAccount.mock.t.Fatalf("PartitionServiceClientMock.CreateServiceAccount mock is already set by Set")
+	}
+
+	expectation := &PartitionServiceClientMockCreateServiceAccountExpectation{
+		mock:               mmCreateServiceAccount.mock,
+		params:             &PartitionServiceClientMockCreateServiceAccountParams{ctx, pp1},
+		expectationOrigins: PartitionServiceClientMockCreateServiceAccountExpectationOrigins{origin: minimock.CallerInfo(1)},
+	}
+	mmCreateServiceAccount.expectations = append(mmCreateServiceAccount.expectations, expectation)
+	return expectation
+}
+
+// Then sets up PartitionServiceClient.CreateServiceAccount return parameters for the expectation previously defined by the When method
+func (e *PartitionServiceClientMockCreateServiceAccountExpectation) Then(pp2 *connect.Response[v1.CreateServiceAccountResponse], err error) *PartitionServiceClientMock {
+	e.results = &PartitionServiceClientMockCreateServiceAccountResults{pp2, err}
+	return e.mock
+}
+
+// Times sets number of times PartitionServiceClient.CreateServiceAccount should be invoked
+func (mmCreateServiceAccount *mPartitionServiceClientMockCreateServiceAccount) Times(n uint64) *mPartitionServiceClientMockCreateServiceAccount {
+	if n == 0 {
+		mmCreateServiceAccount.mock.t.Fatalf("Times of PartitionServiceClientMock.CreateServiceAccount mock can not be zero")
+	}
+	mm_atomic.StoreUint64(&mmCreateServiceAccount.expectedInvocations, n)
+	mmCreateServiceAccount.expectedInvocationsOrigin = minimock.CallerInfo(1)
+	return mmCreateServiceAccount
+}
+
+func (mmCreateServiceAccount *mPartitionServiceClientMockCreateServiceAccount) invocationsDone() bool {
+	if len(mmCreateServiceAccount.expectations) == 0 && mmCreateServiceAccount.defaultExpectation == nil && mmCreateServiceAccount.mock.funcCreateServiceAccount == nil {
+		return true
+	}
+
+	totalInvocations := mm_atomic.LoadUint64(&mmCreateServiceAccount.mock.afterCreateServiceAccountCounter)
+	expectedInvocations := mm_atomic.LoadUint64(&mmCreateServiceAccount.expectedInvocations)
+
+	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
+}
+
+// CreateServiceAccount implements mm_partitionv1connect.PartitionServiceClient
+func (mmCreateServiceAccount *PartitionServiceClientMock) CreateServiceAccount(ctx context.Context, pp1 *connect.Request[v1.CreateServiceAccountRequest]) (pp2 *connect.Response[v1.CreateServiceAccountResponse], err error) {
+	mm_atomic.AddUint64(&mmCreateServiceAccount.beforeCreateServiceAccountCounter, 1)
+	defer mm_atomic.AddUint64(&mmCreateServiceAccount.afterCreateServiceAccountCounter, 1)
+
+	mmCreateServiceAccount.t.Helper()
+
+	if mmCreateServiceAccount.inspectFuncCreateServiceAccount != nil {
+		mmCreateServiceAccount.inspectFuncCreateServiceAccount(ctx, pp1)
+	}
+
+	mm_params := PartitionServiceClientMockCreateServiceAccountParams{ctx, pp1}
+
+	// Record call args
+	mmCreateServiceAccount.CreateServiceAccountMock.mutex.Lock()
+	mmCreateServiceAccount.CreateServiceAccountMock.callArgs = append(mmCreateServiceAccount.CreateServiceAccountMock.callArgs, &mm_params)
+	mmCreateServiceAccount.CreateServiceAccountMock.mutex.Unlock()
+
+	for _, e := range mmCreateServiceAccount.CreateServiceAccountMock.expectations {
+		if minimock.Equal(*e.params, mm_params) {
+			mm_atomic.AddUint64(&e.Counter, 1)
+			return e.results.pp2, e.results.err
+		}
+	}
+
+	if mmCreateServiceAccount.CreateServiceAccountMock.defaultExpectation != nil {
+		mm_atomic.AddUint64(&mmCreateServiceAccount.CreateServiceAccountMock.defaultExpectation.Counter, 1)
+		mm_want := mmCreateServiceAccount.CreateServiceAccountMock.defaultExpectation.params
+		mm_want_ptrs := mmCreateServiceAccount.CreateServiceAccountMock.defaultExpectation.paramPtrs
+
+		mm_got := PartitionServiceClientMockCreateServiceAccountParams{ctx, pp1}
+
+		if mm_want_ptrs != nil {
+
+			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
+				mmCreateServiceAccount.t.Errorf("PartitionServiceClientMock.CreateServiceAccount got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+					mmCreateServiceAccount.CreateServiceAccountMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
+			}
+
+			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
+				mmCreateServiceAccount.t.Errorf("PartitionServiceClientMock.CreateServiceAccount got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+					mmCreateServiceAccount.CreateServiceAccountMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
+			}
+
+		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
+			mmCreateServiceAccount.t.Errorf("PartitionServiceClientMock.CreateServiceAccount got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmCreateServiceAccount.CreateServiceAccountMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
+		}
+
+		mm_results := mmCreateServiceAccount.CreateServiceAccountMock.defaultExpectation.results
+		if mm_results == nil {
+			mmCreateServiceAccount.t.Fatal("No results are set for the PartitionServiceClientMock.CreateServiceAccount")
+		}
+		return (*mm_results).pp2, (*mm_results).err
+	}
+	if mmCreateServiceAccount.funcCreateServiceAccount != nil {
+		return mmCreateServiceAccount.funcCreateServiceAccount(ctx, pp1)
+	}
+	mmCreateServiceAccount.t.Fatalf("Unexpected call to PartitionServiceClientMock.CreateServiceAccount. %v %v", ctx, pp1)
+	return
+}
+
+// CreateServiceAccountAfterCounter returns a count of finished PartitionServiceClientMock.CreateServiceAccount invocations
+func (mmCreateServiceAccount *PartitionServiceClientMock) CreateServiceAccountAfterCounter() uint64 {
+	return mm_atomic.LoadUint64(&mmCreateServiceAccount.afterCreateServiceAccountCounter)
+}
+
+// CreateServiceAccountBeforeCounter returns a count of PartitionServiceClientMock.CreateServiceAccount invocations
+func (mmCreateServiceAccount *PartitionServiceClientMock) CreateServiceAccountBeforeCounter() uint64 {
+	return mm_atomic.LoadUint64(&mmCreateServiceAccount.beforeCreateServiceAccountCounter)
+}
+
+// Calls returns a list of arguments used in each call to PartitionServiceClientMock.CreateServiceAccount.
+// The list is in the same order as the calls were made (i.e. recent calls have a higher index)
+func (mmCreateServiceAccount *mPartitionServiceClientMockCreateServiceAccount) Calls() []*PartitionServiceClientMockCreateServiceAccountParams {
+	mmCreateServiceAccount.mutex.RLock()
+
+	argCopy := make([]*PartitionServiceClientMockCreateServiceAccountParams, len(mmCreateServiceAccount.callArgs))
+	copy(argCopy, mmCreateServiceAccount.callArgs)
+
+	mmCreateServiceAccount.mutex.RUnlock()
+
+	return argCopy
+}
+
+// MinimockCreateServiceAccountDone returns true if the count of the CreateServiceAccount invocations corresponds
+// the number of defined expectations
+func (m *PartitionServiceClientMock) MinimockCreateServiceAccountDone() bool {
+	if m.CreateServiceAccountMock.optional {
+		// Optional methods provide '0 or more' call count restriction.
+		return true
+	}
+
+	for _, e := range m.CreateServiceAccountMock.expectations {
+		if mm_atomic.LoadUint64(&e.Counter) < 1 {
+			return false
+		}
+	}
+
+	return m.CreateServiceAccountMock.invocationsDone()
+}
+
+// MinimockCreateServiceAccountInspect logs each unmet expectation
+func (m *PartitionServiceClientMock) MinimockCreateServiceAccountInspect() {
+	for _, e := range m.CreateServiceAccountMock.expectations {
+		if mm_atomic.LoadUint64(&e.Counter) < 1 {
+			m.t.Errorf("Expected call to PartitionServiceClientMock.CreateServiceAccount at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+		}
+	}
+
+	afterCreateServiceAccountCounter := mm_atomic.LoadUint64(&m.afterCreateServiceAccountCounter)
+	// if default expectation was set then invocations count should be greater than zero
+	if m.CreateServiceAccountMock.defaultExpectation != nil && afterCreateServiceAccountCounter < 1 {
+		if m.CreateServiceAccountMock.defaultExpectation.params == nil {
+			m.t.Errorf("Expected call to PartitionServiceClientMock.CreateServiceAccount at\n%s", m.CreateServiceAccountMock.defaultExpectation.returnOrigin)
+		} else {
+			m.t.Errorf("Expected call to PartitionServiceClientMock.CreateServiceAccount at\n%s with params: %#v", m.CreateServiceAccountMock.defaultExpectation.expectationOrigins.origin, *m.CreateServiceAccountMock.defaultExpectation.params)
+		}
+	}
+	// if func was set then invocations count should be greater than zero
+	if m.funcCreateServiceAccount != nil && afterCreateServiceAccountCounter < 1 {
+		m.t.Errorf("Expected call to PartitionServiceClientMock.CreateServiceAccount at\n%s", m.funcCreateServiceAccountOrigin)
+	}
+
+	if !m.CreateServiceAccountMock.invocationsDone() && afterCreateServiceAccountCounter > 0 {
+		m.t.Errorf("Expected %d calls to PartitionServiceClientMock.CreateServiceAccount at\n%s but found %d calls",
+			mm_atomic.LoadUint64(&m.CreateServiceAccountMock.expectedInvocations), m.CreateServiceAccountMock.expectedInvocationsOrigin, afterCreateServiceAccountCounter)
+	}
+}
+
 type mPartitionServiceClientMockCreateTenant struct {
 	optional           bool
 	mock               *PartitionServiceClientMock
@@ -3674,6 +4057,349 @@ func (m *PartitionServiceClientMock) MinimockGetPartitionParentsInspect() {
 	}
 }
 
+type mPartitionServiceClientMockGetServiceAccount struct {
+	optional           bool
+	mock               *PartitionServiceClientMock
+	defaultExpectation *PartitionServiceClientMockGetServiceAccountExpectation
+	expectations       []*PartitionServiceClientMockGetServiceAccountExpectation
+
+	callArgs []*PartitionServiceClientMockGetServiceAccountParams
+	mutex    sync.RWMutex
+
+	expectedInvocations       uint64
+	expectedInvocationsOrigin string
+}
+
+// PartitionServiceClientMockGetServiceAccountExpectation specifies expectation struct of the PartitionServiceClient.GetServiceAccount
+type PartitionServiceClientMockGetServiceAccountExpectation struct {
+	mock               *PartitionServiceClientMock
+	params             *PartitionServiceClientMockGetServiceAccountParams
+	paramPtrs          *PartitionServiceClientMockGetServiceAccountParamPtrs
+	expectationOrigins PartitionServiceClientMockGetServiceAccountExpectationOrigins
+	results            *PartitionServiceClientMockGetServiceAccountResults
+	returnOrigin       string
+	Counter            uint64
+}
+
+// PartitionServiceClientMockGetServiceAccountParams contains parameters of the PartitionServiceClient.GetServiceAccount
+type PartitionServiceClientMockGetServiceAccountParams struct {
+	ctx context.Context
+	pp1 *connect.Request[v1.GetServiceAccountRequest]
+}
+
+// PartitionServiceClientMockGetServiceAccountParamPtrs contains pointers to parameters of the PartitionServiceClient.GetServiceAccount
+type PartitionServiceClientMockGetServiceAccountParamPtrs struct {
+	ctx *context.Context
+	pp1 **connect.Request[v1.GetServiceAccountRequest]
+}
+
+// PartitionServiceClientMockGetServiceAccountResults contains results of the PartitionServiceClient.GetServiceAccount
+type PartitionServiceClientMockGetServiceAccountResults struct {
+	pp2 *connect.Response[v1.GetServiceAccountResponse]
+	err error
+}
+
+// PartitionServiceClientMockGetServiceAccountOrigins contains origins of expectations of the PartitionServiceClient.GetServiceAccount
+type PartitionServiceClientMockGetServiceAccountExpectationOrigins struct {
+	origin    string
+	originCtx string
+	originPp1 string
+}
+
+// Marks this method to be optional. The default behavior of any method with Return() is '1 or more', meaning
+// the test will fail minimock's automatic final call check if the mocked method was not called at least once.
+// Optional() makes method check to work in '0 or more' mode.
+// It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
+// catch the problems when the expected method call is totally skipped during test run.
+func (mmGetServiceAccount *mPartitionServiceClientMockGetServiceAccount) Optional() *mPartitionServiceClientMockGetServiceAccount {
+	mmGetServiceAccount.optional = true
+	return mmGetServiceAccount
+}
+
+// Expect sets up expected params for PartitionServiceClient.GetServiceAccount
+func (mmGetServiceAccount *mPartitionServiceClientMockGetServiceAccount) Expect(ctx context.Context, pp1 *connect.Request[v1.GetServiceAccountRequest]) *mPartitionServiceClientMockGetServiceAccount {
+	if mmGetServiceAccount.mock.funcGetServiceAccount != nil {
+		mmGetServiceAccount.mock.t.Fatalf("PartitionServiceClientMock.GetServiceAccount mock is already set by Set")
+	}
+
+	if mmGetServiceAccount.defaultExpectation == nil {
+		mmGetServiceAccount.defaultExpectation = &PartitionServiceClientMockGetServiceAccountExpectation{}
+	}
+
+	if mmGetServiceAccount.defaultExpectation.paramPtrs != nil {
+		mmGetServiceAccount.mock.t.Fatalf("PartitionServiceClientMock.GetServiceAccount mock is already set by ExpectParams functions")
+	}
+
+	mmGetServiceAccount.defaultExpectation.params = &PartitionServiceClientMockGetServiceAccountParams{ctx, pp1}
+	mmGetServiceAccount.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
+	for _, e := range mmGetServiceAccount.expectations {
+		if minimock.Equal(e.params, mmGetServiceAccount.defaultExpectation.params) {
+			mmGetServiceAccount.mock.t.Fatalf("Expectation set by When has same params: %#v", *mmGetServiceAccount.defaultExpectation.params)
+		}
+	}
+
+	return mmGetServiceAccount
+}
+
+// ExpectCtxParam1 sets up expected param ctx for PartitionServiceClient.GetServiceAccount
+func (mmGetServiceAccount *mPartitionServiceClientMockGetServiceAccount) ExpectCtxParam1(ctx context.Context) *mPartitionServiceClientMockGetServiceAccount {
+	if mmGetServiceAccount.mock.funcGetServiceAccount != nil {
+		mmGetServiceAccount.mock.t.Fatalf("PartitionServiceClientMock.GetServiceAccount mock is already set by Set")
+	}
+
+	if mmGetServiceAccount.defaultExpectation == nil {
+		mmGetServiceAccount.defaultExpectation = &PartitionServiceClientMockGetServiceAccountExpectation{}
+	}
+
+	if mmGetServiceAccount.defaultExpectation.params != nil {
+		mmGetServiceAccount.mock.t.Fatalf("PartitionServiceClientMock.GetServiceAccount mock is already set by Expect")
+	}
+
+	if mmGetServiceAccount.defaultExpectation.paramPtrs == nil {
+		mmGetServiceAccount.defaultExpectation.paramPtrs = &PartitionServiceClientMockGetServiceAccountParamPtrs{}
+	}
+	mmGetServiceAccount.defaultExpectation.paramPtrs.ctx = &ctx
+	mmGetServiceAccount.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
+
+	return mmGetServiceAccount
+}
+
+// ExpectPp1Param2 sets up expected param pp1 for PartitionServiceClient.GetServiceAccount
+func (mmGetServiceAccount *mPartitionServiceClientMockGetServiceAccount) ExpectPp1Param2(pp1 *connect.Request[v1.GetServiceAccountRequest]) *mPartitionServiceClientMockGetServiceAccount {
+	if mmGetServiceAccount.mock.funcGetServiceAccount != nil {
+		mmGetServiceAccount.mock.t.Fatalf("PartitionServiceClientMock.GetServiceAccount mock is already set by Set")
+	}
+
+	if mmGetServiceAccount.defaultExpectation == nil {
+		mmGetServiceAccount.defaultExpectation = &PartitionServiceClientMockGetServiceAccountExpectation{}
+	}
+
+	if mmGetServiceAccount.defaultExpectation.params != nil {
+		mmGetServiceAccount.mock.t.Fatalf("PartitionServiceClientMock.GetServiceAccount mock is already set by Expect")
+	}
+
+	if mmGetServiceAccount.defaultExpectation.paramPtrs == nil {
+		mmGetServiceAccount.defaultExpectation.paramPtrs = &PartitionServiceClientMockGetServiceAccountParamPtrs{}
+	}
+	mmGetServiceAccount.defaultExpectation.paramPtrs.pp1 = &pp1
+	mmGetServiceAccount.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
+
+	return mmGetServiceAccount
+}
+
+// Inspect accepts an inspector function that has same arguments as the PartitionServiceClient.GetServiceAccount
+func (mmGetServiceAccount *mPartitionServiceClientMockGetServiceAccount) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.GetServiceAccountRequest])) *mPartitionServiceClientMockGetServiceAccount {
+	if mmGetServiceAccount.mock.inspectFuncGetServiceAccount != nil {
+		mmGetServiceAccount.mock.t.Fatalf("Inspect function is already set for PartitionServiceClientMock.GetServiceAccount")
+	}
+
+	mmGetServiceAccount.mock.inspectFuncGetServiceAccount = f
+
+	return mmGetServiceAccount
+}
+
+// Return sets up results that will be returned by PartitionServiceClient.GetServiceAccount
+func (mmGetServiceAccount *mPartitionServiceClientMockGetServiceAccount) Return(pp2 *connect.Response[v1.GetServiceAccountResponse], err error) *PartitionServiceClientMock {
+	if mmGetServiceAccount.mock.funcGetServiceAccount != nil {
+		mmGetServiceAccount.mock.t.Fatalf("PartitionServiceClientMock.GetServiceAccount mock is already set by Set")
+	}
+
+	if mmGetServiceAccount.defaultExpectation == nil {
+		mmGetServiceAccount.defaultExpectation = &PartitionServiceClientMockGetServiceAccountExpectation{mock: mmGetServiceAccount.mock}
+	}
+	mmGetServiceAccount.defaultExpectation.results = &PartitionServiceClientMockGetServiceAccountResults{pp2, err}
+	mmGetServiceAccount.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
+	return mmGetServiceAccount.mock
+}
+
+// Set uses given function f to mock the PartitionServiceClient.GetServiceAccount method
+func (mmGetServiceAccount *mPartitionServiceClientMockGetServiceAccount) Set(f func(ctx context.Context, pp1 *connect.Request[v1.GetServiceAccountRequest]) (pp2 *connect.Response[v1.GetServiceAccountResponse], err error)) *PartitionServiceClientMock {
+	if mmGetServiceAccount.defaultExpectation != nil {
+		mmGetServiceAccount.mock.t.Fatalf("Default expectation is already set for the PartitionServiceClient.GetServiceAccount method")
+	}
+
+	if len(mmGetServiceAccount.expectations) > 0 {
+		mmGetServiceAccount.mock.t.Fatalf("Some expectations are already set for the PartitionServiceClient.GetServiceAccount method")
+	}
+
+	mmGetServiceAccount.mock.funcGetServiceAccount = f
+	mmGetServiceAccount.mock.funcGetServiceAccountOrigin = minimock.CallerInfo(1)
+	return mmGetServiceAccount.mock
+}
+
+// When sets expectation for the PartitionServiceClient.GetServiceAccount which will trigger the result defined by the following
+// Then helper
+func (mmGetServiceAccount *mPartitionServiceClientMockGetServiceAccount) When(ctx context.Context, pp1 *connect.Request[v1.GetServiceAccountRequest]) *PartitionServiceClientMockGetServiceAccountExpectation {
+	if mmGetServiceAccount.mock.funcGetServiceAccount != nil {
+		mmGetServiceAccount.mock.t.Fatalf("PartitionServiceClientMock.GetServiceAccount mock is already set by Set")
+	}
+
+	expectation := &PartitionServiceClientMockGetServiceAccountExpectation{
+		mock:               mmGetServiceAccount.mock,
+		params:             &PartitionServiceClientMockGetServiceAccountParams{ctx, pp1},
+		expectationOrigins: PartitionServiceClientMockGetServiceAccountExpectationOrigins{origin: minimock.CallerInfo(1)},
+	}
+	mmGetServiceAccount.expectations = append(mmGetServiceAccount.expectations, expectation)
+	return expectation
+}
+
+// Then sets up PartitionServiceClient.GetServiceAccount return parameters for the expectation previously defined by the When method
+func (e *PartitionServiceClientMockGetServiceAccountExpectation) Then(pp2 *connect.Response[v1.GetServiceAccountResponse], err error) *PartitionServiceClientMock {
+	e.results = &PartitionServiceClientMockGetServiceAccountResults{pp2, err}
+	return e.mock
+}
+
+// Times sets number of times PartitionServiceClient.GetServiceAccount should be invoked
+func (mmGetServiceAccount *mPartitionServiceClientMockGetServiceAccount) Times(n uint64) *mPartitionServiceClientMockGetServiceAccount {
+	if n == 0 {
+		mmGetServiceAccount.mock.t.Fatalf("Times of PartitionServiceClientMock.GetServiceAccount mock can not be zero")
+	}
+	mm_atomic.StoreUint64(&mmGetServiceAccount.expectedInvocations, n)
+	mmGetServiceAccount.expectedInvocationsOrigin = minimock.CallerInfo(1)
+	return mmGetServiceAccount
+}
+
+func (mmGetServiceAccount *mPartitionServiceClientMockGetServiceAccount) invocationsDone() bool {
+	if len(mmGetServiceAccount.expectations) == 0 && mmGetServiceAccount.defaultExpectation == nil && mmGetServiceAccount.mock.funcGetServiceAccount == nil {
+		return true
+	}
+
+	totalInvocations := mm_atomic.LoadUint64(&mmGetServiceAccount.mock.afterGetServiceAccountCounter)
+	expectedInvocations := mm_atomic.LoadUint64(&mmGetServiceAccount.expectedInvocations)
+
+	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
+}
+
+// GetServiceAccount implements mm_partitionv1connect.PartitionServiceClient
+func (mmGetServiceAccount *PartitionServiceClientMock) GetServiceAccount(ctx context.Context, pp1 *connect.Request[v1.GetServiceAccountRequest]) (pp2 *connect.Response[v1.GetServiceAccountResponse], err error) {
+	mm_atomic.AddUint64(&mmGetServiceAccount.beforeGetServiceAccountCounter, 1)
+	defer mm_atomic.AddUint64(&mmGetServiceAccount.afterGetServiceAccountCounter, 1)
+
+	mmGetServiceAccount.t.Helper()
+
+	if mmGetServiceAccount.inspectFuncGetServiceAccount != nil {
+		mmGetServiceAccount.inspectFuncGetServiceAccount(ctx, pp1)
+	}
+
+	mm_params := PartitionServiceClientMockGetServiceAccountParams{ctx, pp1}
+
+	// Record call args
+	mmGetServiceAccount.GetServiceAccountMock.mutex.Lock()
+	mmGetServiceAccount.GetServiceAccountMock.callArgs = append(mmGetServiceAccount.GetServiceAccountMock.callArgs, &mm_params)
+	mmGetServiceAccount.GetServiceAccountMock.mutex.Unlock()
+
+	for _, e := range mmGetServiceAccount.GetServiceAccountMock.expectations {
+		if minimock.Equal(*e.params, mm_params) {
+			mm_atomic.AddUint64(&e.Counter, 1)
+			return e.results.pp2, e.results.err
+		}
+	}
+
+	if mmGetServiceAccount.GetServiceAccountMock.defaultExpectation != nil {
+		mm_atomic.AddUint64(&mmGetServiceAccount.GetServiceAccountMock.defaultExpectation.Counter, 1)
+		mm_want := mmGetServiceAccount.GetServiceAccountMock.defaultExpectation.params
+		mm_want_ptrs := mmGetServiceAccount.GetServiceAccountMock.defaultExpectation.paramPtrs
+
+		mm_got := PartitionServiceClientMockGetServiceAccountParams{ctx, pp1}
+
+		if mm_want_ptrs != nil {
+
+			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
+				mmGetServiceAccount.t.Errorf("PartitionServiceClientMock.GetServiceAccount got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+					mmGetServiceAccount.GetServiceAccountMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
+			}
+
+			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
+				mmGetServiceAccount.t.Errorf("PartitionServiceClientMock.GetServiceAccount got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+					mmGetServiceAccount.GetServiceAccountMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
+			}
+
+		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
+			mmGetServiceAccount.t.Errorf("PartitionServiceClientMock.GetServiceAccount got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmGetServiceAccount.GetServiceAccountMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
+		}
+
+		mm_results := mmGetServiceAccount.GetServiceAccountMock.defaultExpectation.results
+		if mm_results == nil {
+			mmGetServiceAccount.t.Fatal("No results are set for the PartitionServiceClientMock.GetServiceAccount")
+		}
+		return (*mm_results).pp2, (*mm_results).err
+	}
+	if mmGetServiceAccount.funcGetServiceAccount != nil {
+		return mmGetServiceAccount.funcGetServiceAccount(ctx, pp1)
+	}
+	mmGetServiceAccount.t.Fatalf("Unexpected call to PartitionServiceClientMock.GetServiceAccount. %v %v", ctx, pp1)
+	return
+}
+
+// GetServiceAccountAfterCounter returns a count of finished PartitionServiceClientMock.GetServiceAccount invocations
+func (mmGetServiceAccount *PartitionServiceClientMock) GetServiceAccountAfterCounter() uint64 {
+	return mm_atomic.LoadUint64(&mmGetServiceAccount.afterGetServiceAccountCounter)
+}
+
+// GetServiceAccountBeforeCounter returns a count of PartitionServiceClientMock.GetServiceAccount invocations
+func (mmGetServiceAccount *PartitionServiceClientMock) GetServiceAccountBeforeCounter() uint64 {
+	return mm_atomic.LoadUint64(&mmGetServiceAccount.beforeGetServiceAccountCounter)
+}
+
+// Calls returns a list of arguments used in each call to PartitionServiceClientMock.GetServiceAccount.
+// The list is in the same order as the calls were made (i.e. recent calls have a higher index)
+func (mmGetServiceAccount *mPartitionServiceClientMockGetServiceAccount) Calls() []*PartitionServiceClientMockGetServiceAccountParams {
+	mmGetServiceAccount.mutex.RLock()
+
+	argCopy := make([]*PartitionServiceClientMockGetServiceAccountParams, len(mmGetServiceAccount.callArgs))
+	copy(argCopy, mmGetServiceAccount.callArgs)
+
+	mmGetServiceAccount.mutex.RUnlock()
+
+	return argCopy
+}
+
+// MinimockGetServiceAccountDone returns true if the count of the GetServiceAccount invocations corresponds
+// the number of defined expectations
+func (m *PartitionServiceClientMock) MinimockGetServiceAccountDone() bool {
+	if m.GetServiceAccountMock.optional {
+		// Optional methods provide '0 or more' call count restriction.
+		return true
+	}
+
+	for _, e := range m.GetServiceAccountMock.expectations {
+		if mm_atomic.LoadUint64(&e.Counter) < 1 {
+			return false
+		}
+	}
+
+	return m.GetServiceAccountMock.invocationsDone()
+}
+
+// MinimockGetServiceAccountInspect logs each unmet expectation
+func (m *PartitionServiceClientMock) MinimockGetServiceAccountInspect() {
+	for _, e := range m.GetServiceAccountMock.expectations {
+		if mm_atomic.LoadUint64(&e.Counter) < 1 {
+			m.t.Errorf("Expected call to PartitionServiceClientMock.GetServiceAccount at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+		}
+	}
+
+	afterGetServiceAccountCounter := mm_atomic.LoadUint64(&m.afterGetServiceAccountCounter)
+	// if default expectation was set then invocations count should be greater than zero
+	if m.GetServiceAccountMock.defaultExpectation != nil && afterGetServiceAccountCounter < 1 {
+		if m.GetServiceAccountMock.defaultExpectation.params == nil {
+			m.t.Errorf("Expected call to PartitionServiceClientMock.GetServiceAccount at\n%s", m.GetServiceAccountMock.defaultExpectation.returnOrigin)
+		} else {
+			m.t.Errorf("Expected call to PartitionServiceClientMock.GetServiceAccount at\n%s with params: %#v", m.GetServiceAccountMock.defaultExpectation.expectationOrigins.origin, *m.GetServiceAccountMock.defaultExpectation.params)
+		}
+	}
+	// if func was set then invocations count should be greater than zero
+	if m.funcGetServiceAccount != nil && afterGetServiceAccountCounter < 1 {
+		m.t.Errorf("Expected call to PartitionServiceClientMock.GetServiceAccount at\n%s", m.funcGetServiceAccountOrigin)
+	}
+
+	if !m.GetServiceAccountMock.invocationsDone() && afterGetServiceAccountCounter > 0 {
+		m.t.Errorf("Expected %d calls to PartitionServiceClientMock.GetServiceAccount at\n%s but found %d calls",
+			mm_atomic.LoadUint64(&m.GetServiceAccountMock.expectedInvocations), m.GetServiceAccountMock.expectedInvocationsOrigin, afterGetServiceAccountCounter)
+	}
+}
+
 type mPartitionServiceClientMockGetTenant struct {
 	optional           bool
 	mock               *PartitionServiceClientMock
@@ -5043,6 +5769,349 @@ func (m *PartitionServiceClientMock) MinimockListPartitionRoleInspect() {
 	if !m.ListPartitionRoleMock.invocationsDone() && afterListPartitionRoleCounter > 0 {
 		m.t.Errorf("Expected %d calls to PartitionServiceClientMock.ListPartitionRole at\n%s but found %d calls",
 			mm_atomic.LoadUint64(&m.ListPartitionRoleMock.expectedInvocations), m.ListPartitionRoleMock.expectedInvocationsOrigin, afterListPartitionRoleCounter)
+	}
+}
+
+type mPartitionServiceClientMockListServiceAccount struct {
+	optional           bool
+	mock               *PartitionServiceClientMock
+	defaultExpectation *PartitionServiceClientMockListServiceAccountExpectation
+	expectations       []*PartitionServiceClientMockListServiceAccountExpectation
+
+	callArgs []*PartitionServiceClientMockListServiceAccountParams
+	mutex    sync.RWMutex
+
+	expectedInvocations       uint64
+	expectedInvocationsOrigin string
+}
+
+// PartitionServiceClientMockListServiceAccountExpectation specifies expectation struct of the PartitionServiceClient.ListServiceAccount
+type PartitionServiceClientMockListServiceAccountExpectation struct {
+	mock               *PartitionServiceClientMock
+	params             *PartitionServiceClientMockListServiceAccountParams
+	paramPtrs          *PartitionServiceClientMockListServiceAccountParamPtrs
+	expectationOrigins PartitionServiceClientMockListServiceAccountExpectationOrigins
+	results            *PartitionServiceClientMockListServiceAccountResults
+	returnOrigin       string
+	Counter            uint64
+}
+
+// PartitionServiceClientMockListServiceAccountParams contains parameters of the PartitionServiceClient.ListServiceAccount
+type PartitionServiceClientMockListServiceAccountParams struct {
+	ctx context.Context
+	pp1 *connect.Request[v1.ListServiceAccountRequest]
+}
+
+// PartitionServiceClientMockListServiceAccountParamPtrs contains pointers to parameters of the PartitionServiceClient.ListServiceAccount
+type PartitionServiceClientMockListServiceAccountParamPtrs struct {
+	ctx *context.Context
+	pp1 **connect.Request[v1.ListServiceAccountRequest]
+}
+
+// PartitionServiceClientMockListServiceAccountResults contains results of the PartitionServiceClient.ListServiceAccount
+type PartitionServiceClientMockListServiceAccountResults struct {
+	pp2 *connect.ServerStreamForClient[v1.ListServiceAccountResponse]
+	err error
+}
+
+// PartitionServiceClientMockListServiceAccountOrigins contains origins of expectations of the PartitionServiceClient.ListServiceAccount
+type PartitionServiceClientMockListServiceAccountExpectationOrigins struct {
+	origin    string
+	originCtx string
+	originPp1 string
+}
+
+// Marks this method to be optional. The default behavior of any method with Return() is '1 or more', meaning
+// the test will fail minimock's automatic final call check if the mocked method was not called at least once.
+// Optional() makes method check to work in '0 or more' mode.
+// It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
+// catch the problems when the expected method call is totally skipped during test run.
+func (mmListServiceAccount *mPartitionServiceClientMockListServiceAccount) Optional() *mPartitionServiceClientMockListServiceAccount {
+	mmListServiceAccount.optional = true
+	return mmListServiceAccount
+}
+
+// Expect sets up expected params for PartitionServiceClient.ListServiceAccount
+func (mmListServiceAccount *mPartitionServiceClientMockListServiceAccount) Expect(ctx context.Context, pp1 *connect.Request[v1.ListServiceAccountRequest]) *mPartitionServiceClientMockListServiceAccount {
+	if mmListServiceAccount.mock.funcListServiceAccount != nil {
+		mmListServiceAccount.mock.t.Fatalf("PartitionServiceClientMock.ListServiceAccount mock is already set by Set")
+	}
+
+	if mmListServiceAccount.defaultExpectation == nil {
+		mmListServiceAccount.defaultExpectation = &PartitionServiceClientMockListServiceAccountExpectation{}
+	}
+
+	if mmListServiceAccount.defaultExpectation.paramPtrs != nil {
+		mmListServiceAccount.mock.t.Fatalf("PartitionServiceClientMock.ListServiceAccount mock is already set by ExpectParams functions")
+	}
+
+	mmListServiceAccount.defaultExpectation.params = &PartitionServiceClientMockListServiceAccountParams{ctx, pp1}
+	mmListServiceAccount.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
+	for _, e := range mmListServiceAccount.expectations {
+		if minimock.Equal(e.params, mmListServiceAccount.defaultExpectation.params) {
+			mmListServiceAccount.mock.t.Fatalf("Expectation set by When has same params: %#v", *mmListServiceAccount.defaultExpectation.params)
+		}
+	}
+
+	return mmListServiceAccount
+}
+
+// ExpectCtxParam1 sets up expected param ctx for PartitionServiceClient.ListServiceAccount
+func (mmListServiceAccount *mPartitionServiceClientMockListServiceAccount) ExpectCtxParam1(ctx context.Context) *mPartitionServiceClientMockListServiceAccount {
+	if mmListServiceAccount.mock.funcListServiceAccount != nil {
+		mmListServiceAccount.mock.t.Fatalf("PartitionServiceClientMock.ListServiceAccount mock is already set by Set")
+	}
+
+	if mmListServiceAccount.defaultExpectation == nil {
+		mmListServiceAccount.defaultExpectation = &PartitionServiceClientMockListServiceAccountExpectation{}
+	}
+
+	if mmListServiceAccount.defaultExpectation.params != nil {
+		mmListServiceAccount.mock.t.Fatalf("PartitionServiceClientMock.ListServiceAccount mock is already set by Expect")
+	}
+
+	if mmListServiceAccount.defaultExpectation.paramPtrs == nil {
+		mmListServiceAccount.defaultExpectation.paramPtrs = &PartitionServiceClientMockListServiceAccountParamPtrs{}
+	}
+	mmListServiceAccount.defaultExpectation.paramPtrs.ctx = &ctx
+	mmListServiceAccount.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
+
+	return mmListServiceAccount
+}
+
+// ExpectPp1Param2 sets up expected param pp1 for PartitionServiceClient.ListServiceAccount
+func (mmListServiceAccount *mPartitionServiceClientMockListServiceAccount) ExpectPp1Param2(pp1 *connect.Request[v1.ListServiceAccountRequest]) *mPartitionServiceClientMockListServiceAccount {
+	if mmListServiceAccount.mock.funcListServiceAccount != nil {
+		mmListServiceAccount.mock.t.Fatalf("PartitionServiceClientMock.ListServiceAccount mock is already set by Set")
+	}
+
+	if mmListServiceAccount.defaultExpectation == nil {
+		mmListServiceAccount.defaultExpectation = &PartitionServiceClientMockListServiceAccountExpectation{}
+	}
+
+	if mmListServiceAccount.defaultExpectation.params != nil {
+		mmListServiceAccount.mock.t.Fatalf("PartitionServiceClientMock.ListServiceAccount mock is already set by Expect")
+	}
+
+	if mmListServiceAccount.defaultExpectation.paramPtrs == nil {
+		mmListServiceAccount.defaultExpectation.paramPtrs = &PartitionServiceClientMockListServiceAccountParamPtrs{}
+	}
+	mmListServiceAccount.defaultExpectation.paramPtrs.pp1 = &pp1
+	mmListServiceAccount.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
+
+	return mmListServiceAccount
+}
+
+// Inspect accepts an inspector function that has same arguments as the PartitionServiceClient.ListServiceAccount
+func (mmListServiceAccount *mPartitionServiceClientMockListServiceAccount) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.ListServiceAccountRequest])) *mPartitionServiceClientMockListServiceAccount {
+	if mmListServiceAccount.mock.inspectFuncListServiceAccount != nil {
+		mmListServiceAccount.mock.t.Fatalf("Inspect function is already set for PartitionServiceClientMock.ListServiceAccount")
+	}
+
+	mmListServiceAccount.mock.inspectFuncListServiceAccount = f
+
+	return mmListServiceAccount
+}
+
+// Return sets up results that will be returned by PartitionServiceClient.ListServiceAccount
+func (mmListServiceAccount *mPartitionServiceClientMockListServiceAccount) Return(pp2 *connect.ServerStreamForClient[v1.ListServiceAccountResponse], err error) *PartitionServiceClientMock {
+	if mmListServiceAccount.mock.funcListServiceAccount != nil {
+		mmListServiceAccount.mock.t.Fatalf("PartitionServiceClientMock.ListServiceAccount mock is already set by Set")
+	}
+
+	if mmListServiceAccount.defaultExpectation == nil {
+		mmListServiceAccount.defaultExpectation = &PartitionServiceClientMockListServiceAccountExpectation{mock: mmListServiceAccount.mock}
+	}
+	mmListServiceAccount.defaultExpectation.results = &PartitionServiceClientMockListServiceAccountResults{pp2, err}
+	mmListServiceAccount.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
+	return mmListServiceAccount.mock
+}
+
+// Set uses given function f to mock the PartitionServiceClient.ListServiceAccount method
+func (mmListServiceAccount *mPartitionServiceClientMockListServiceAccount) Set(f func(ctx context.Context, pp1 *connect.Request[v1.ListServiceAccountRequest]) (pp2 *connect.ServerStreamForClient[v1.ListServiceAccountResponse], err error)) *PartitionServiceClientMock {
+	if mmListServiceAccount.defaultExpectation != nil {
+		mmListServiceAccount.mock.t.Fatalf("Default expectation is already set for the PartitionServiceClient.ListServiceAccount method")
+	}
+
+	if len(mmListServiceAccount.expectations) > 0 {
+		mmListServiceAccount.mock.t.Fatalf("Some expectations are already set for the PartitionServiceClient.ListServiceAccount method")
+	}
+
+	mmListServiceAccount.mock.funcListServiceAccount = f
+	mmListServiceAccount.mock.funcListServiceAccountOrigin = minimock.CallerInfo(1)
+	return mmListServiceAccount.mock
+}
+
+// When sets expectation for the PartitionServiceClient.ListServiceAccount which will trigger the result defined by the following
+// Then helper
+func (mmListServiceAccount *mPartitionServiceClientMockListServiceAccount) When(ctx context.Context, pp1 *connect.Request[v1.ListServiceAccountRequest]) *PartitionServiceClientMockListServiceAccountExpectation {
+	if mmListServiceAccount.mock.funcListServiceAccount != nil {
+		mmListServiceAccount.mock.t.Fatalf("PartitionServiceClientMock.ListServiceAccount mock is already set by Set")
+	}
+
+	expectation := &PartitionServiceClientMockListServiceAccountExpectation{
+		mock:               mmListServiceAccount.mock,
+		params:             &PartitionServiceClientMockListServiceAccountParams{ctx, pp1},
+		expectationOrigins: PartitionServiceClientMockListServiceAccountExpectationOrigins{origin: minimock.CallerInfo(1)},
+	}
+	mmListServiceAccount.expectations = append(mmListServiceAccount.expectations, expectation)
+	return expectation
+}
+
+// Then sets up PartitionServiceClient.ListServiceAccount return parameters for the expectation previously defined by the When method
+func (e *PartitionServiceClientMockListServiceAccountExpectation) Then(pp2 *connect.ServerStreamForClient[v1.ListServiceAccountResponse], err error) *PartitionServiceClientMock {
+	e.results = &PartitionServiceClientMockListServiceAccountResults{pp2, err}
+	return e.mock
+}
+
+// Times sets number of times PartitionServiceClient.ListServiceAccount should be invoked
+func (mmListServiceAccount *mPartitionServiceClientMockListServiceAccount) Times(n uint64) *mPartitionServiceClientMockListServiceAccount {
+	if n == 0 {
+		mmListServiceAccount.mock.t.Fatalf("Times of PartitionServiceClientMock.ListServiceAccount mock can not be zero")
+	}
+	mm_atomic.StoreUint64(&mmListServiceAccount.expectedInvocations, n)
+	mmListServiceAccount.expectedInvocationsOrigin = minimock.CallerInfo(1)
+	return mmListServiceAccount
+}
+
+func (mmListServiceAccount *mPartitionServiceClientMockListServiceAccount) invocationsDone() bool {
+	if len(mmListServiceAccount.expectations) == 0 && mmListServiceAccount.defaultExpectation == nil && mmListServiceAccount.mock.funcListServiceAccount == nil {
+		return true
+	}
+
+	totalInvocations := mm_atomic.LoadUint64(&mmListServiceAccount.mock.afterListServiceAccountCounter)
+	expectedInvocations := mm_atomic.LoadUint64(&mmListServiceAccount.expectedInvocations)
+
+	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
+}
+
+// ListServiceAccount implements mm_partitionv1connect.PartitionServiceClient
+func (mmListServiceAccount *PartitionServiceClientMock) ListServiceAccount(ctx context.Context, pp1 *connect.Request[v1.ListServiceAccountRequest]) (pp2 *connect.ServerStreamForClient[v1.ListServiceAccountResponse], err error) {
+	mm_atomic.AddUint64(&mmListServiceAccount.beforeListServiceAccountCounter, 1)
+	defer mm_atomic.AddUint64(&mmListServiceAccount.afterListServiceAccountCounter, 1)
+
+	mmListServiceAccount.t.Helper()
+
+	if mmListServiceAccount.inspectFuncListServiceAccount != nil {
+		mmListServiceAccount.inspectFuncListServiceAccount(ctx, pp1)
+	}
+
+	mm_params := PartitionServiceClientMockListServiceAccountParams{ctx, pp1}
+
+	// Record call args
+	mmListServiceAccount.ListServiceAccountMock.mutex.Lock()
+	mmListServiceAccount.ListServiceAccountMock.callArgs = append(mmListServiceAccount.ListServiceAccountMock.callArgs, &mm_params)
+	mmListServiceAccount.ListServiceAccountMock.mutex.Unlock()
+
+	for _, e := range mmListServiceAccount.ListServiceAccountMock.expectations {
+		if minimock.Equal(*e.params, mm_params) {
+			mm_atomic.AddUint64(&e.Counter, 1)
+			return e.results.pp2, e.results.err
+		}
+	}
+
+	if mmListServiceAccount.ListServiceAccountMock.defaultExpectation != nil {
+		mm_atomic.AddUint64(&mmListServiceAccount.ListServiceAccountMock.defaultExpectation.Counter, 1)
+		mm_want := mmListServiceAccount.ListServiceAccountMock.defaultExpectation.params
+		mm_want_ptrs := mmListServiceAccount.ListServiceAccountMock.defaultExpectation.paramPtrs
+
+		mm_got := PartitionServiceClientMockListServiceAccountParams{ctx, pp1}
+
+		if mm_want_ptrs != nil {
+
+			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
+				mmListServiceAccount.t.Errorf("PartitionServiceClientMock.ListServiceAccount got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+					mmListServiceAccount.ListServiceAccountMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
+			}
+
+			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
+				mmListServiceAccount.t.Errorf("PartitionServiceClientMock.ListServiceAccount got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+					mmListServiceAccount.ListServiceAccountMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
+			}
+
+		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
+			mmListServiceAccount.t.Errorf("PartitionServiceClientMock.ListServiceAccount got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmListServiceAccount.ListServiceAccountMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
+		}
+
+		mm_results := mmListServiceAccount.ListServiceAccountMock.defaultExpectation.results
+		if mm_results == nil {
+			mmListServiceAccount.t.Fatal("No results are set for the PartitionServiceClientMock.ListServiceAccount")
+		}
+		return (*mm_results).pp2, (*mm_results).err
+	}
+	if mmListServiceAccount.funcListServiceAccount != nil {
+		return mmListServiceAccount.funcListServiceAccount(ctx, pp1)
+	}
+	mmListServiceAccount.t.Fatalf("Unexpected call to PartitionServiceClientMock.ListServiceAccount. %v %v", ctx, pp1)
+	return
+}
+
+// ListServiceAccountAfterCounter returns a count of finished PartitionServiceClientMock.ListServiceAccount invocations
+func (mmListServiceAccount *PartitionServiceClientMock) ListServiceAccountAfterCounter() uint64 {
+	return mm_atomic.LoadUint64(&mmListServiceAccount.afterListServiceAccountCounter)
+}
+
+// ListServiceAccountBeforeCounter returns a count of PartitionServiceClientMock.ListServiceAccount invocations
+func (mmListServiceAccount *PartitionServiceClientMock) ListServiceAccountBeforeCounter() uint64 {
+	return mm_atomic.LoadUint64(&mmListServiceAccount.beforeListServiceAccountCounter)
+}
+
+// Calls returns a list of arguments used in each call to PartitionServiceClientMock.ListServiceAccount.
+// The list is in the same order as the calls were made (i.e. recent calls have a higher index)
+func (mmListServiceAccount *mPartitionServiceClientMockListServiceAccount) Calls() []*PartitionServiceClientMockListServiceAccountParams {
+	mmListServiceAccount.mutex.RLock()
+
+	argCopy := make([]*PartitionServiceClientMockListServiceAccountParams, len(mmListServiceAccount.callArgs))
+	copy(argCopy, mmListServiceAccount.callArgs)
+
+	mmListServiceAccount.mutex.RUnlock()
+
+	return argCopy
+}
+
+// MinimockListServiceAccountDone returns true if the count of the ListServiceAccount invocations corresponds
+// the number of defined expectations
+func (m *PartitionServiceClientMock) MinimockListServiceAccountDone() bool {
+	if m.ListServiceAccountMock.optional {
+		// Optional methods provide '0 or more' call count restriction.
+		return true
+	}
+
+	for _, e := range m.ListServiceAccountMock.expectations {
+		if mm_atomic.LoadUint64(&e.Counter) < 1 {
+			return false
+		}
+	}
+
+	return m.ListServiceAccountMock.invocationsDone()
+}
+
+// MinimockListServiceAccountInspect logs each unmet expectation
+func (m *PartitionServiceClientMock) MinimockListServiceAccountInspect() {
+	for _, e := range m.ListServiceAccountMock.expectations {
+		if mm_atomic.LoadUint64(&e.Counter) < 1 {
+			m.t.Errorf("Expected call to PartitionServiceClientMock.ListServiceAccount at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+		}
+	}
+
+	afterListServiceAccountCounter := mm_atomic.LoadUint64(&m.afterListServiceAccountCounter)
+	// if default expectation was set then invocations count should be greater than zero
+	if m.ListServiceAccountMock.defaultExpectation != nil && afterListServiceAccountCounter < 1 {
+		if m.ListServiceAccountMock.defaultExpectation.params == nil {
+			m.t.Errorf("Expected call to PartitionServiceClientMock.ListServiceAccount at\n%s", m.ListServiceAccountMock.defaultExpectation.returnOrigin)
+		} else {
+			m.t.Errorf("Expected call to PartitionServiceClientMock.ListServiceAccount at\n%s with params: %#v", m.ListServiceAccountMock.defaultExpectation.expectationOrigins.origin, *m.ListServiceAccountMock.defaultExpectation.params)
+		}
+	}
+	// if func was set then invocations count should be greater than zero
+	if m.funcListServiceAccount != nil && afterListServiceAccountCounter < 1 {
+		m.t.Errorf("Expected call to PartitionServiceClientMock.ListServiceAccount at\n%s", m.funcListServiceAccountOrigin)
+	}
+
+	if !m.ListServiceAccountMock.invocationsDone() && afterListServiceAccountCounter > 0 {
+		m.t.Errorf("Expected %d calls to PartitionServiceClientMock.ListServiceAccount at\n%s but found %d calls",
+			mm_atomic.LoadUint64(&m.ListServiceAccountMock.expectedInvocations), m.ListServiceAccountMock.expectedInvocationsOrigin, afterListServiceAccountCounter)
 	}
 }
 
@@ -6761,6 +7830,349 @@ func (m *PartitionServiceClientMock) MinimockRemovePartitionRoleInspect() {
 	}
 }
 
+type mPartitionServiceClientMockRemoveServiceAccount struct {
+	optional           bool
+	mock               *PartitionServiceClientMock
+	defaultExpectation *PartitionServiceClientMockRemoveServiceAccountExpectation
+	expectations       []*PartitionServiceClientMockRemoveServiceAccountExpectation
+
+	callArgs []*PartitionServiceClientMockRemoveServiceAccountParams
+	mutex    sync.RWMutex
+
+	expectedInvocations       uint64
+	expectedInvocationsOrigin string
+}
+
+// PartitionServiceClientMockRemoveServiceAccountExpectation specifies expectation struct of the PartitionServiceClient.RemoveServiceAccount
+type PartitionServiceClientMockRemoveServiceAccountExpectation struct {
+	mock               *PartitionServiceClientMock
+	params             *PartitionServiceClientMockRemoveServiceAccountParams
+	paramPtrs          *PartitionServiceClientMockRemoveServiceAccountParamPtrs
+	expectationOrigins PartitionServiceClientMockRemoveServiceAccountExpectationOrigins
+	results            *PartitionServiceClientMockRemoveServiceAccountResults
+	returnOrigin       string
+	Counter            uint64
+}
+
+// PartitionServiceClientMockRemoveServiceAccountParams contains parameters of the PartitionServiceClient.RemoveServiceAccount
+type PartitionServiceClientMockRemoveServiceAccountParams struct {
+	ctx context.Context
+	pp1 *connect.Request[v1.RemoveServiceAccountRequest]
+}
+
+// PartitionServiceClientMockRemoveServiceAccountParamPtrs contains pointers to parameters of the PartitionServiceClient.RemoveServiceAccount
+type PartitionServiceClientMockRemoveServiceAccountParamPtrs struct {
+	ctx *context.Context
+	pp1 **connect.Request[v1.RemoveServiceAccountRequest]
+}
+
+// PartitionServiceClientMockRemoveServiceAccountResults contains results of the PartitionServiceClient.RemoveServiceAccount
+type PartitionServiceClientMockRemoveServiceAccountResults struct {
+	pp2 *connect.Response[v1.RemoveServiceAccountResponse]
+	err error
+}
+
+// PartitionServiceClientMockRemoveServiceAccountOrigins contains origins of expectations of the PartitionServiceClient.RemoveServiceAccount
+type PartitionServiceClientMockRemoveServiceAccountExpectationOrigins struct {
+	origin    string
+	originCtx string
+	originPp1 string
+}
+
+// Marks this method to be optional. The default behavior of any method with Return() is '1 or more', meaning
+// the test will fail minimock's automatic final call check if the mocked method was not called at least once.
+// Optional() makes method check to work in '0 or more' mode.
+// It is NOT RECOMMENDED to use this option unless you really need it, as default behaviour helps to
+// catch the problems when the expected method call is totally skipped during test run.
+func (mmRemoveServiceAccount *mPartitionServiceClientMockRemoveServiceAccount) Optional() *mPartitionServiceClientMockRemoveServiceAccount {
+	mmRemoveServiceAccount.optional = true
+	return mmRemoveServiceAccount
+}
+
+// Expect sets up expected params for PartitionServiceClient.RemoveServiceAccount
+func (mmRemoveServiceAccount *mPartitionServiceClientMockRemoveServiceAccount) Expect(ctx context.Context, pp1 *connect.Request[v1.RemoveServiceAccountRequest]) *mPartitionServiceClientMockRemoveServiceAccount {
+	if mmRemoveServiceAccount.mock.funcRemoveServiceAccount != nil {
+		mmRemoveServiceAccount.mock.t.Fatalf("PartitionServiceClientMock.RemoveServiceAccount mock is already set by Set")
+	}
+
+	if mmRemoveServiceAccount.defaultExpectation == nil {
+		mmRemoveServiceAccount.defaultExpectation = &PartitionServiceClientMockRemoveServiceAccountExpectation{}
+	}
+
+	if mmRemoveServiceAccount.defaultExpectation.paramPtrs != nil {
+		mmRemoveServiceAccount.mock.t.Fatalf("PartitionServiceClientMock.RemoveServiceAccount mock is already set by ExpectParams functions")
+	}
+
+	mmRemoveServiceAccount.defaultExpectation.params = &PartitionServiceClientMockRemoveServiceAccountParams{ctx, pp1}
+	mmRemoveServiceAccount.defaultExpectation.expectationOrigins.origin = minimock.CallerInfo(1)
+	for _, e := range mmRemoveServiceAccount.expectations {
+		if minimock.Equal(e.params, mmRemoveServiceAccount.defaultExpectation.params) {
+			mmRemoveServiceAccount.mock.t.Fatalf("Expectation set by When has same params: %#v", *mmRemoveServiceAccount.defaultExpectation.params)
+		}
+	}
+
+	return mmRemoveServiceAccount
+}
+
+// ExpectCtxParam1 sets up expected param ctx for PartitionServiceClient.RemoveServiceAccount
+func (mmRemoveServiceAccount *mPartitionServiceClientMockRemoveServiceAccount) ExpectCtxParam1(ctx context.Context) *mPartitionServiceClientMockRemoveServiceAccount {
+	if mmRemoveServiceAccount.mock.funcRemoveServiceAccount != nil {
+		mmRemoveServiceAccount.mock.t.Fatalf("PartitionServiceClientMock.RemoveServiceAccount mock is already set by Set")
+	}
+
+	if mmRemoveServiceAccount.defaultExpectation == nil {
+		mmRemoveServiceAccount.defaultExpectation = &PartitionServiceClientMockRemoveServiceAccountExpectation{}
+	}
+
+	if mmRemoveServiceAccount.defaultExpectation.params != nil {
+		mmRemoveServiceAccount.mock.t.Fatalf("PartitionServiceClientMock.RemoveServiceAccount mock is already set by Expect")
+	}
+
+	if mmRemoveServiceAccount.defaultExpectation.paramPtrs == nil {
+		mmRemoveServiceAccount.defaultExpectation.paramPtrs = &PartitionServiceClientMockRemoveServiceAccountParamPtrs{}
+	}
+	mmRemoveServiceAccount.defaultExpectation.paramPtrs.ctx = &ctx
+	mmRemoveServiceAccount.defaultExpectation.expectationOrigins.originCtx = minimock.CallerInfo(1)
+
+	return mmRemoveServiceAccount
+}
+
+// ExpectPp1Param2 sets up expected param pp1 for PartitionServiceClient.RemoveServiceAccount
+func (mmRemoveServiceAccount *mPartitionServiceClientMockRemoveServiceAccount) ExpectPp1Param2(pp1 *connect.Request[v1.RemoveServiceAccountRequest]) *mPartitionServiceClientMockRemoveServiceAccount {
+	if mmRemoveServiceAccount.mock.funcRemoveServiceAccount != nil {
+		mmRemoveServiceAccount.mock.t.Fatalf("PartitionServiceClientMock.RemoveServiceAccount mock is already set by Set")
+	}
+
+	if mmRemoveServiceAccount.defaultExpectation == nil {
+		mmRemoveServiceAccount.defaultExpectation = &PartitionServiceClientMockRemoveServiceAccountExpectation{}
+	}
+
+	if mmRemoveServiceAccount.defaultExpectation.params != nil {
+		mmRemoveServiceAccount.mock.t.Fatalf("PartitionServiceClientMock.RemoveServiceAccount mock is already set by Expect")
+	}
+
+	if mmRemoveServiceAccount.defaultExpectation.paramPtrs == nil {
+		mmRemoveServiceAccount.defaultExpectation.paramPtrs = &PartitionServiceClientMockRemoveServiceAccountParamPtrs{}
+	}
+	mmRemoveServiceAccount.defaultExpectation.paramPtrs.pp1 = &pp1
+	mmRemoveServiceAccount.defaultExpectation.expectationOrigins.originPp1 = minimock.CallerInfo(1)
+
+	return mmRemoveServiceAccount
+}
+
+// Inspect accepts an inspector function that has same arguments as the PartitionServiceClient.RemoveServiceAccount
+func (mmRemoveServiceAccount *mPartitionServiceClientMockRemoveServiceAccount) Inspect(f func(ctx context.Context, pp1 *connect.Request[v1.RemoveServiceAccountRequest])) *mPartitionServiceClientMockRemoveServiceAccount {
+	if mmRemoveServiceAccount.mock.inspectFuncRemoveServiceAccount != nil {
+		mmRemoveServiceAccount.mock.t.Fatalf("Inspect function is already set for PartitionServiceClientMock.RemoveServiceAccount")
+	}
+
+	mmRemoveServiceAccount.mock.inspectFuncRemoveServiceAccount = f
+
+	return mmRemoveServiceAccount
+}
+
+// Return sets up results that will be returned by PartitionServiceClient.RemoveServiceAccount
+func (mmRemoveServiceAccount *mPartitionServiceClientMockRemoveServiceAccount) Return(pp2 *connect.Response[v1.RemoveServiceAccountResponse], err error) *PartitionServiceClientMock {
+	if mmRemoveServiceAccount.mock.funcRemoveServiceAccount != nil {
+		mmRemoveServiceAccount.mock.t.Fatalf("PartitionServiceClientMock.RemoveServiceAccount mock is already set by Set")
+	}
+
+	if mmRemoveServiceAccount.defaultExpectation == nil {
+		mmRemoveServiceAccount.defaultExpectation = &PartitionServiceClientMockRemoveServiceAccountExpectation{mock: mmRemoveServiceAccount.mock}
+	}
+	mmRemoveServiceAccount.defaultExpectation.results = &PartitionServiceClientMockRemoveServiceAccountResults{pp2, err}
+	mmRemoveServiceAccount.defaultExpectation.returnOrigin = minimock.CallerInfo(1)
+	return mmRemoveServiceAccount.mock
+}
+
+// Set uses given function f to mock the PartitionServiceClient.RemoveServiceAccount method
+func (mmRemoveServiceAccount *mPartitionServiceClientMockRemoveServiceAccount) Set(f func(ctx context.Context, pp1 *connect.Request[v1.RemoveServiceAccountRequest]) (pp2 *connect.Response[v1.RemoveServiceAccountResponse], err error)) *PartitionServiceClientMock {
+	if mmRemoveServiceAccount.defaultExpectation != nil {
+		mmRemoveServiceAccount.mock.t.Fatalf("Default expectation is already set for the PartitionServiceClient.RemoveServiceAccount method")
+	}
+
+	if len(mmRemoveServiceAccount.expectations) > 0 {
+		mmRemoveServiceAccount.mock.t.Fatalf("Some expectations are already set for the PartitionServiceClient.RemoveServiceAccount method")
+	}
+
+	mmRemoveServiceAccount.mock.funcRemoveServiceAccount = f
+	mmRemoveServiceAccount.mock.funcRemoveServiceAccountOrigin = minimock.CallerInfo(1)
+	return mmRemoveServiceAccount.mock
+}
+
+// When sets expectation for the PartitionServiceClient.RemoveServiceAccount which will trigger the result defined by the following
+// Then helper
+func (mmRemoveServiceAccount *mPartitionServiceClientMockRemoveServiceAccount) When(ctx context.Context, pp1 *connect.Request[v1.RemoveServiceAccountRequest]) *PartitionServiceClientMockRemoveServiceAccountExpectation {
+	if mmRemoveServiceAccount.mock.funcRemoveServiceAccount != nil {
+		mmRemoveServiceAccount.mock.t.Fatalf("PartitionServiceClientMock.RemoveServiceAccount mock is already set by Set")
+	}
+
+	expectation := &PartitionServiceClientMockRemoveServiceAccountExpectation{
+		mock:               mmRemoveServiceAccount.mock,
+		params:             &PartitionServiceClientMockRemoveServiceAccountParams{ctx, pp1},
+		expectationOrigins: PartitionServiceClientMockRemoveServiceAccountExpectationOrigins{origin: minimock.CallerInfo(1)},
+	}
+	mmRemoveServiceAccount.expectations = append(mmRemoveServiceAccount.expectations, expectation)
+	return expectation
+}
+
+// Then sets up PartitionServiceClient.RemoveServiceAccount return parameters for the expectation previously defined by the When method
+func (e *PartitionServiceClientMockRemoveServiceAccountExpectation) Then(pp2 *connect.Response[v1.RemoveServiceAccountResponse], err error) *PartitionServiceClientMock {
+	e.results = &PartitionServiceClientMockRemoveServiceAccountResults{pp2, err}
+	return e.mock
+}
+
+// Times sets number of times PartitionServiceClient.RemoveServiceAccount should be invoked
+func (mmRemoveServiceAccount *mPartitionServiceClientMockRemoveServiceAccount) Times(n uint64) *mPartitionServiceClientMockRemoveServiceAccount {
+	if n == 0 {
+		mmRemoveServiceAccount.mock.t.Fatalf("Times of PartitionServiceClientMock.RemoveServiceAccount mock can not be zero")
+	}
+	mm_atomic.StoreUint64(&mmRemoveServiceAccount.expectedInvocations, n)
+	mmRemoveServiceAccount.expectedInvocationsOrigin = minimock.CallerInfo(1)
+	return mmRemoveServiceAccount
+}
+
+func (mmRemoveServiceAccount *mPartitionServiceClientMockRemoveServiceAccount) invocationsDone() bool {
+	if len(mmRemoveServiceAccount.expectations) == 0 && mmRemoveServiceAccount.defaultExpectation == nil && mmRemoveServiceAccount.mock.funcRemoveServiceAccount == nil {
+		return true
+	}
+
+	totalInvocations := mm_atomic.LoadUint64(&mmRemoveServiceAccount.mock.afterRemoveServiceAccountCounter)
+	expectedInvocations := mm_atomic.LoadUint64(&mmRemoveServiceAccount.expectedInvocations)
+
+	return totalInvocations > 0 && (expectedInvocations == 0 || expectedInvocations == totalInvocations)
+}
+
+// RemoveServiceAccount implements mm_partitionv1connect.PartitionServiceClient
+func (mmRemoveServiceAccount *PartitionServiceClientMock) RemoveServiceAccount(ctx context.Context, pp1 *connect.Request[v1.RemoveServiceAccountRequest]) (pp2 *connect.Response[v1.RemoveServiceAccountResponse], err error) {
+	mm_atomic.AddUint64(&mmRemoveServiceAccount.beforeRemoveServiceAccountCounter, 1)
+	defer mm_atomic.AddUint64(&mmRemoveServiceAccount.afterRemoveServiceAccountCounter, 1)
+
+	mmRemoveServiceAccount.t.Helper()
+
+	if mmRemoveServiceAccount.inspectFuncRemoveServiceAccount != nil {
+		mmRemoveServiceAccount.inspectFuncRemoveServiceAccount(ctx, pp1)
+	}
+
+	mm_params := PartitionServiceClientMockRemoveServiceAccountParams{ctx, pp1}
+
+	// Record call args
+	mmRemoveServiceAccount.RemoveServiceAccountMock.mutex.Lock()
+	mmRemoveServiceAccount.RemoveServiceAccountMock.callArgs = append(mmRemoveServiceAccount.RemoveServiceAccountMock.callArgs, &mm_params)
+	mmRemoveServiceAccount.RemoveServiceAccountMock.mutex.Unlock()
+
+	for _, e := range mmRemoveServiceAccount.RemoveServiceAccountMock.expectations {
+		if minimock.Equal(*e.params, mm_params) {
+			mm_atomic.AddUint64(&e.Counter, 1)
+			return e.results.pp2, e.results.err
+		}
+	}
+
+	if mmRemoveServiceAccount.RemoveServiceAccountMock.defaultExpectation != nil {
+		mm_atomic.AddUint64(&mmRemoveServiceAccount.RemoveServiceAccountMock.defaultExpectation.Counter, 1)
+		mm_want := mmRemoveServiceAccount.RemoveServiceAccountMock.defaultExpectation.params
+		mm_want_ptrs := mmRemoveServiceAccount.RemoveServiceAccountMock.defaultExpectation.paramPtrs
+
+		mm_got := PartitionServiceClientMockRemoveServiceAccountParams{ctx, pp1}
+
+		if mm_want_ptrs != nil {
+
+			if mm_want_ptrs.ctx != nil && !minimock.Equal(*mm_want_ptrs.ctx, mm_got.ctx) {
+				mmRemoveServiceAccount.t.Errorf("PartitionServiceClientMock.RemoveServiceAccount got unexpected parameter ctx, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+					mmRemoveServiceAccount.RemoveServiceAccountMock.defaultExpectation.expectationOrigins.originCtx, *mm_want_ptrs.ctx, mm_got.ctx, minimock.Diff(*mm_want_ptrs.ctx, mm_got.ctx))
+			}
+
+			if mm_want_ptrs.pp1 != nil && !minimock.Equal(*mm_want_ptrs.pp1, mm_got.pp1) {
+				mmRemoveServiceAccount.t.Errorf("PartitionServiceClientMock.RemoveServiceAccount got unexpected parameter pp1, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+					mmRemoveServiceAccount.RemoveServiceAccountMock.defaultExpectation.expectationOrigins.originPp1, *mm_want_ptrs.pp1, mm_got.pp1, minimock.Diff(*mm_want_ptrs.pp1, mm_got.pp1))
+			}
+
+		} else if mm_want != nil && !minimock.Equal(*mm_want, mm_got) {
+			mmRemoveServiceAccount.t.Errorf("PartitionServiceClientMock.RemoveServiceAccount got unexpected parameters, expected at\n%s:\nwant: %#v\n got: %#v%s\n",
+				mmRemoveServiceAccount.RemoveServiceAccountMock.defaultExpectation.expectationOrigins.origin, *mm_want, mm_got, minimock.Diff(*mm_want, mm_got))
+		}
+
+		mm_results := mmRemoveServiceAccount.RemoveServiceAccountMock.defaultExpectation.results
+		if mm_results == nil {
+			mmRemoveServiceAccount.t.Fatal("No results are set for the PartitionServiceClientMock.RemoveServiceAccount")
+		}
+		return (*mm_results).pp2, (*mm_results).err
+	}
+	if mmRemoveServiceAccount.funcRemoveServiceAccount != nil {
+		return mmRemoveServiceAccount.funcRemoveServiceAccount(ctx, pp1)
+	}
+	mmRemoveServiceAccount.t.Fatalf("Unexpected call to PartitionServiceClientMock.RemoveServiceAccount. %v %v", ctx, pp1)
+	return
+}
+
+// RemoveServiceAccountAfterCounter returns a count of finished PartitionServiceClientMock.RemoveServiceAccount invocations
+func (mmRemoveServiceAccount *PartitionServiceClientMock) RemoveServiceAccountAfterCounter() uint64 {
+	return mm_atomic.LoadUint64(&mmRemoveServiceAccount.afterRemoveServiceAccountCounter)
+}
+
+// RemoveServiceAccountBeforeCounter returns a count of PartitionServiceClientMock.RemoveServiceAccount invocations
+func (mmRemoveServiceAccount *PartitionServiceClientMock) RemoveServiceAccountBeforeCounter() uint64 {
+	return mm_atomic.LoadUint64(&mmRemoveServiceAccount.beforeRemoveServiceAccountCounter)
+}
+
+// Calls returns a list of arguments used in each call to PartitionServiceClientMock.RemoveServiceAccount.
+// The list is in the same order as the calls were made (i.e. recent calls have a higher index)
+func (mmRemoveServiceAccount *mPartitionServiceClientMockRemoveServiceAccount) Calls() []*PartitionServiceClientMockRemoveServiceAccountParams {
+	mmRemoveServiceAccount.mutex.RLock()
+
+	argCopy := make([]*PartitionServiceClientMockRemoveServiceAccountParams, len(mmRemoveServiceAccount.callArgs))
+	copy(argCopy, mmRemoveServiceAccount.callArgs)
+
+	mmRemoveServiceAccount.mutex.RUnlock()
+
+	return argCopy
+}
+
+// MinimockRemoveServiceAccountDone returns true if the count of the RemoveServiceAccount invocations corresponds
+// the number of defined expectations
+func (m *PartitionServiceClientMock) MinimockRemoveServiceAccountDone() bool {
+	if m.RemoveServiceAccountMock.optional {
+		// Optional methods provide '0 or more' call count restriction.
+		return true
+	}
+
+	for _, e := range m.RemoveServiceAccountMock.expectations {
+		if mm_atomic.LoadUint64(&e.Counter) < 1 {
+			return false
+		}
+	}
+
+	return m.RemoveServiceAccountMock.invocationsDone()
+}
+
+// MinimockRemoveServiceAccountInspect logs each unmet expectation
+func (m *PartitionServiceClientMock) MinimockRemoveServiceAccountInspect() {
+	for _, e := range m.RemoveServiceAccountMock.expectations {
+		if mm_atomic.LoadUint64(&e.Counter) < 1 {
+			m.t.Errorf("Expected call to PartitionServiceClientMock.RemoveServiceAccount at\n%s with params: %#v", e.expectationOrigins.origin, *e.params)
+		}
+	}
+
+	afterRemoveServiceAccountCounter := mm_atomic.LoadUint64(&m.afterRemoveServiceAccountCounter)
+	// if default expectation was set then invocations count should be greater than zero
+	if m.RemoveServiceAccountMock.defaultExpectation != nil && afterRemoveServiceAccountCounter < 1 {
+		if m.RemoveServiceAccountMock.defaultExpectation.params == nil {
+			m.t.Errorf("Expected call to PartitionServiceClientMock.RemoveServiceAccount at\n%s", m.RemoveServiceAccountMock.defaultExpectation.returnOrigin)
+		} else {
+			m.t.Errorf("Expected call to PartitionServiceClientMock.RemoveServiceAccount at\n%s with params: %#v", m.RemoveServiceAccountMock.defaultExpectation.expectationOrigins.origin, *m.RemoveServiceAccountMock.defaultExpectation.params)
+		}
+	}
+	// if func was set then invocations count should be greater than zero
+	if m.funcRemoveServiceAccount != nil && afterRemoveServiceAccountCounter < 1 {
+		m.t.Errorf("Expected call to PartitionServiceClientMock.RemoveServiceAccount at\n%s", m.funcRemoveServiceAccountOrigin)
+	}
+
+	if !m.RemoveServiceAccountMock.invocationsDone() && afterRemoveServiceAccountCounter > 0 {
+		m.t.Errorf("Expected %d calls to PartitionServiceClientMock.RemoveServiceAccount at\n%s but found %d calls",
+			mm_atomic.LoadUint64(&m.RemoveServiceAccountMock.expectedInvocations), m.RemoveServiceAccountMock.expectedInvocationsOrigin, afterRemoveServiceAccountCounter)
+	}
+}
+
 type mPartitionServiceClientMockUpdatePartition struct {
 	optional           bool
 	mock               *PartitionServiceClientMock
@@ -7461,6 +8873,8 @@ func (m *PartitionServiceClientMock) MinimockFinish() {
 
 			m.MinimockCreatePartitionRoleInspect()
 
+			m.MinimockCreateServiceAccountInspect()
+
 			m.MinimockCreateTenantInspect()
 
 			m.MinimockGetAccessInspect()
@@ -7471,6 +8885,8 @@ func (m *PartitionServiceClientMock) MinimockFinish() {
 
 			m.MinimockGetPartitionParentsInspect()
 
+			m.MinimockGetServiceAccountInspect()
+
 			m.MinimockGetTenantInspect()
 
 			m.MinimockListAccessRoleInspect()
@@ -7478,6 +8894,8 @@ func (m *PartitionServiceClientMock) MinimockFinish() {
 			m.MinimockListPartitionInspect()
 
 			m.MinimockListPartitionRoleInspect()
+
+			m.MinimockListServiceAccountInspect()
 
 			m.MinimockListTenantInspect()
 
@@ -7488,6 +8906,8 @@ func (m *PartitionServiceClientMock) MinimockFinish() {
 			m.MinimockRemovePageInspect()
 
 			m.MinimockRemovePartitionRoleInspect()
+
+			m.MinimockRemoveServiceAccountInspect()
 
 			m.MinimockUpdatePartitionInspect()
 
@@ -7520,20 +8940,24 @@ func (m *PartitionServiceClientMock) minimockDone() bool {
 		m.MinimockCreatePageDone() &&
 		m.MinimockCreatePartitionDone() &&
 		m.MinimockCreatePartitionRoleDone() &&
+		m.MinimockCreateServiceAccountDone() &&
 		m.MinimockCreateTenantDone() &&
 		m.MinimockGetAccessDone() &&
 		m.MinimockGetPageDone() &&
 		m.MinimockGetPartitionDone() &&
 		m.MinimockGetPartitionParentsDone() &&
+		m.MinimockGetServiceAccountDone() &&
 		m.MinimockGetTenantDone() &&
 		m.MinimockListAccessRoleDone() &&
 		m.MinimockListPartitionDone() &&
 		m.MinimockListPartitionRoleDone() &&
+		m.MinimockListServiceAccountDone() &&
 		m.MinimockListTenantDone() &&
 		m.MinimockRemoveAccessDone() &&
 		m.MinimockRemoveAccessRoleDone() &&
 		m.MinimockRemovePageDone() &&
 		m.MinimockRemovePartitionRoleDone() &&
+		m.MinimockRemoveServiceAccountDone() &&
 		m.MinimockUpdatePartitionDone() &&
 		m.MinimockUpdateTenantDone()
 }

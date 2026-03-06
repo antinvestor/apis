@@ -82,6 +82,24 @@ extension type PartitionServiceClient (connect.Transport _transport) {
     );
   }
 
+  /// RemoveTenant soft-deletes a tenant and all its partitions.
+  Future<partitionv1partition.RemoveTenantResponse> removeTenant(
+    partitionv1partition.RemoveTenantRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.PartitionService.removeTenant,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
   /// ListPartition retrieves all partitions matching criteria.
   Stream<partitionv1partition.ListPartitionResponse> listPartition(
     partitionv1partition.ListPartitionRequest input, {
@@ -118,7 +136,7 @@ extension type PartitionServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// GetPartition retrieves a partition by ID.
+  /// GetPartition retrieves a partition by ID or domain.
   Future<partitionv1partition.GetPartitionResponse> getPartition(
     partitionv1partition.GetPartitionRequest input, {
     connect.Headers? headers,
@@ -146,6 +164,24 @@ extension type PartitionServiceClient (connect.Transport _transport) {
   }) {
     return connect.Client(_transport).unary(
       specs.PartitionService.getPartitionParents,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// RemovePartition soft-deletes a partition.
+  Future<partitionv1partition.RemovePartitionResponse> removePartition(
+    partitionv1partition.RemovePartitionRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.PartitionService.removePartition,
       input,
       signal: signal,
       headers: headers,
@@ -208,6 +244,24 @@ extension type PartitionServiceClient (connect.Transport _transport) {
     );
   }
 
+  /// UpdatePartitionRole updates an existing partition role.
+  Future<partitionv1partition.UpdatePartitionRoleResponse> updatePartitionRole(
+    partitionv1partition.UpdatePartitionRoleRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.PartitionService.updatePartitionRole,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
   /// RemovePartitionRole deletes a partition role.
   Future<partitionv1partition.RemovePartitionRoleResponse> removePartitionRole(
     partitionv1partition.RemovePartitionRoleRequest input, {
@@ -244,6 +298,24 @@ extension type PartitionServiceClient (connect.Transport _transport) {
     );
   }
 
+  /// ListPage retrieves all custom pages for a partition.
+  Stream<partitionv1partition.ListPageResponse> listPage(
+    partitionv1partition.ListPageRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).server(
+      specs.PartitionService.listPage,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
   /// GetPage retrieves a custom page.
   Future<partitionv1partition.GetPageResponse> getPage(
     partitionv1partition.GetPageRequest input, {
@@ -254,6 +326,24 @@ extension type PartitionServiceClient (connect.Transport _transport) {
   }) {
     return connect.Client(_transport).unary(
       specs.PartitionService.getPage,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// UpdatePage updates an existing custom page.
+  Future<partitionv1partition.UpdatePageResponse> updatePage(
+    partitionv1partition.UpdatePageRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.PartitionService.updatePage,
       input,
       signal: signal,
       headers: headers,
@@ -308,6 +398,24 @@ extension type PartitionServiceClient (connect.Transport _transport) {
   }) {
     return connect.Client(_transport).unary(
       specs.PartitionService.getAccess,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// ListAccess retrieves all access grants for a partition or profile.
+  Stream<partitionv1partition.ListAccessResponse> listAccess(
+    partitionv1partition.ListAccessRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).server(
+      specs.PartitionService.listAccess,
       input,
       signal: signal,
       headers: headers,
@@ -424,6 +532,24 @@ extension type PartitionServiceClient (connect.Transport _transport) {
     );
   }
 
+  /// UpdateServiceAccount updates an existing service account.
+  Future<partitionv1partition.UpdateServiceAccountResponse> updateServiceAccount(
+    partitionv1partition.UpdateServiceAccountRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.PartitionService.updateServiceAccount,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
   /// ListServiceAccount retrieves all service accounts for a partition.
   Stream<partitionv1partition.ListServiceAccountResponse> listServiceAccount(
     partitionv1partition.ListServiceAccountRequest input, {
@@ -452,6 +578,96 @@ extension type PartitionServiceClient (connect.Transport _transport) {
   }) {
     return connect.Client(_transport).unary(
       specs.PartitionService.removeServiceAccount,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// CreateClient registers an OAuth2 client for a partition or service account.
+  Future<partitionv1partition.CreateClientResponse> createClient(
+    partitionv1partition.CreateClientRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.PartitionService.createClient,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// GetClient retrieves an OAuth2 client by ID or client_id.
+  Future<partitionv1partition.GetClientResponse> getClient(
+    partitionv1partition.GetClientRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.PartitionService.getClient,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// ListClient retrieves all OAuth2 clients for a partition or service account.
+  Stream<partitionv1partition.ListClientResponse> listClient(
+    partitionv1partition.ListClientRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).server(
+      specs.PartitionService.listClient,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// UpdateClient updates an existing OAuth2 client.
+  Future<partitionv1partition.UpdateClientResponse> updateClient(
+    partitionv1partition.UpdateClientRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.PartitionService.updateClient,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// RemoveClient deletes an OAuth2 client.
+  Future<partitionv1partition.RemoveClientResponse> removeClient(
+    partitionv1partition.RemoveClientRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.PartitionService.removeClient,
       input,
       signal: signal,
       headers: headers,

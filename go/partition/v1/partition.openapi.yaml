@@ -85,6 +85,43 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/partition.v1.CreateAccessRoleResponse'
+  /partition.v1.PartitionService/CreateClient:
+    post:
+      tags:
+        - Clients
+        - partition.v1.PartitionService
+      summary: Create OAuth2 client
+      description: Creates a new OAuth2 client attached to either a partition (for user auth flows) or a service account (for client_credentials flows). Returns the client secret on creation.
+      operationId: createClient
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/partition.v1.CreateClientRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partition.v1.CreateClientResponse'
   /partition.v1.PartitionService/CreatePage:
     post:
       tags:
@@ -360,6 +397,96 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/partition.v1.GetAccessResponse'
+  /partition.v1.PartitionService/GetClient:
+    get:
+      tags:
+        - Clients
+        - partition.v1.PartitionService
+      summary: Get OAuth2 client
+      description: Retrieves an OAuth2 client by its record ID or OAuth2 client_id.
+      operationId: getClient
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+        - name: message
+          in: query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partition.v1.GetClientRequest'
+        - name: encoding
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/encoding'
+        - name: base64
+          in: query
+          schema:
+            $ref: '#/components/schemas/base64'
+        - name: compression
+          in: query
+          schema:
+            $ref: '#/components/schemas/compression'
+        - name: connect
+          in: query
+          schema:
+            $ref: '#/components/schemas/connect'
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partition.v1.GetClientResponse'
+    post:
+      tags:
+        - Clients
+        - partition.v1.PartitionService
+      summary: Get OAuth2 client
+      description: Retrieves an OAuth2 client by its record ID or OAuth2 client_id.
+      operationId: getClient
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/partition.v1.GetClientRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partition.v1.GetClientResponse'
   /partition.v1.PartitionService/GetPage:
     get:
       tags:
@@ -456,7 +583,7 @@ paths:
         - Partitions
         - partition.v1.PartitionService
       summary: Get partition
-      description: Retrieves a partition by its unique identifier including all partition metadata and properties.
+      description: Retrieves a partition by its unique identifier or domain, including all partition metadata and properties.
       operationId: getPartition
       parameters:
         - name: Connect-Protocol-Version
@@ -509,7 +636,7 @@ paths:
         - Partitions
         - partition.v1.PartitionService
       summary: Get partition
-      description: Retrieves a partition by its unique identifier including all partition metadata and properties.
+      description: Retrieves a partition by its unique identifier or domain, including all partition metadata and properties.
       operationId: getPartition
       parameters:
         - name: Connect-Protocol-Version
@@ -810,7 +937,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/partition.v1.GetTenantResponse'
+  /partition.v1.PartitionService/ListAccess: {}
   /partition.v1.PartitionService/ListAccessRole: {}
+  /partition.v1.PartitionService/ListClient: {}
+  /partition.v1.PartitionService/ListPage: {}
   /partition.v1.PartitionService/ListPartition: {}
   /partition.v1.PartitionService/ListPartitionRole: {}
   /partition.v1.PartitionService/ListServiceAccount: {}
@@ -889,6 +1019,43 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/partition.v1.RemoveAccessRoleResponse'
+  /partition.v1.PartitionService/RemoveClient:
+    post:
+      tags:
+        - Clients
+        - partition.v1.PartitionService
+      summary: Remove OAuth2 client
+      description: Removes an OAuth2 client and its Hydra registration.
+      operationId: removeClient
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/partition.v1.RemoveClientRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partition.v1.RemoveClientResponse'
   /partition.v1.PartitionService/RemovePage:
     post:
       tags:
@@ -926,6 +1093,43 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/partition.v1.RemovePageResponse'
+  /partition.v1.PartitionService/RemovePartition:
+    post:
+      tags:
+        - Partitions
+        - partition.v1.PartitionService
+      summary: Remove partition
+      description: Soft-deletes a partition. All access grants, roles, pages, and service accounts within the partition are also marked as deleted.
+      operationId: removePartition
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/partition.v1.RemovePartitionRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partition.v1.RemovePartitionResponse'
   /partition.v1.PartitionService/RemovePartitionRole:
     post:
       tags:
@@ -1000,13 +1204,124 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/partition.v1.RemoveServiceAccountResponse'
+  /partition.v1.PartitionService/RemoveTenant:
+    post:
+      tags:
+        - Tenants
+        - partition.v1.PartitionService
+      summary: Remove tenant
+      description: Soft-deletes a tenant. All partitions, access grants, and roles within the tenant are also marked as deleted.
+      operationId: removeTenant
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/partition.v1.RemoveTenantRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partition.v1.RemoveTenantResponse'
+  /partition.v1.PartitionService/UpdateClient:
+    post:
+      tags:
+        - Clients
+        - partition.v1.PartitionService
+      summary: Update OAuth2 client
+      description: Updates an existing OAuth2 client's name, redirect URIs, scopes, audiences, roles, and properties.
+      operationId: updateClient
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/partition.v1.UpdateClientRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partition.v1.UpdateClientResponse'
+  /partition.v1.PartitionService/UpdatePage:
+    post:
+      tags:
+        - Pages
+        - partition.v1.PartitionService
+      summary: Update custom page
+      description: Updates a custom page's name, HTML content, state, and properties.
+      operationId: updatePage
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/partition.v1.UpdatePageRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partition.v1.UpdatePageResponse'
   /partition.v1.PartitionService/UpdatePartition:
     post:
       tags:
         - Partitions
         - partition.v1.PartitionService
       summary: Update partition
-      description: Updates an existing partition's name, description, state, and properties.
+      description: Updates an existing partition's name, description, domain, state, and properties.
       operationId: updatePartition
       parameters:
         - name: Connect-Protocol-Version
@@ -1037,6 +1352,80 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/partition.v1.UpdatePartitionResponse'
+  /partition.v1.PartitionService/UpdatePartitionRole:
+    post:
+      tags:
+        - Roles
+        - partition.v1.PartitionService
+      summary: Update partition role
+      description: Updates a partition role's name, properties, and state.
+      operationId: updatePartitionRole
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/partition.v1.UpdatePartitionRoleRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partition.v1.UpdatePartitionRoleResponse'
+  /partition.v1.PartitionService/UpdateServiceAccount:
+    post:
+      tags:
+        - ServiceAccounts
+        - partition.v1.PartitionService
+      summary: Update service account
+      description: Updates a service account's name, audiences, type, roles, public keys, and properties.
+      operationId: updateServiceAccount
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/partition.v1.UpdateServiceAccountRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partition.v1.UpdateServiceAccountResponse'
   /partition.v1.PartitionService/UpdateTenant:
     post:
       tags:
@@ -1080,6 +1469,23 @@ components:
       type: boolean
       title: base64
       description: Specifies if the message query param is base64 encoded, which may be required for binary data
+    common.v1.PageCursor:
+      type: object
+      properties:
+        limit:
+          type: integer
+          title: limit
+          format: int32
+          description: Number of items per cursor (limit)
+        page:
+          type: string
+          title: page
+          description: Page number/ cursor representing last id from result
+      title: PageCursor
+      additionalProperties: false
+      description: |-
+        PageCursor provides standard offset-based pagination/cursor stream parameters.
+         Used for list operations that return large result sets.
     common.v1.STATE:
       type: string
       title: STATE
@@ -1376,9 +1782,9 @@ components:
     partition.v1.AccessRoleObject:
       type: object
       properties:
-        accessRoleId:
+        id:
           type: string
-          title: access_role_id
+          title: id
           maxLength: 40
           minLength: 3
           pattern: '[0-9a-z_-]{3,40}'
@@ -1397,6 +1803,107 @@ components:
       title: AccessRoleObject
       additionalProperties: false
       description: AccessRoleObject links an access grant to a partition role.
+    partition.v1.ClientObject:
+      type: object
+      allOf:
+        - properties:
+            id:
+              type: string
+              title: id
+              maxLength: 40
+              minLength: 3
+              pattern: '[0-9a-z_-]{3,40}'
+              description: Unique client record ID
+            name:
+              type: string
+              title: name
+              maxLength: 100
+              minLength: 3
+              description: Display name
+            clientId:
+              type: string
+              title: client_id
+              maxLength: 100
+              minLength: 3
+              description: OAuth2 client_id (= Hydra client identifier)
+            type:
+              type: string
+              title: type
+              enum:
+                - public
+                - confidential
+                - internal
+                - external
+              description: 'Client type: public, confidential, internal, external'
+            grantTypes:
+              type: array
+              items:
+                type: string
+              title: grant_types
+              description: OAuth2 grant types (authorization_code, refresh_token, client_credentials)
+            responseTypes:
+              type: array
+              items:
+                type: string
+              title: response_types
+              description: OAuth2 response types (code, token)
+            redirectUris:
+              type: array
+              items:
+                type: string
+              title: redirect_uris
+              description: Allowed redirect URIs
+            scopes:
+              type: string
+              title: scopes
+              description: Space-separated OAuth2 scopes
+            audiences:
+              type: array
+              items:
+                type: string
+              title: audiences
+              description: Service namespaces the client can access
+            roles:
+              type: array
+              items:
+                type: string
+              title: roles
+              description: Permission role names for SA tokens
+            properties:
+              title: properties
+              description: Additional metadata
+              $ref: '#/components/schemas/google.protobuf.Struct'
+            state:
+              title: state
+              description: Client state
+              $ref: '#/components/schemas/common.v1.STATE'
+            createdAt:
+              title: created_at
+              description: Creation timestamp
+              $ref: '#/components/schemas/google.protobuf.Timestamp'
+        - oneOf:
+            - properties:
+                partition:
+                  title: partition
+                  description: Partition that owns this client (user auth flows)
+                  $ref: '#/components/schemas/partition.v1.PartitionObject'
+              title: partition
+              required:
+                - partition
+            - properties:
+                serviceAccount:
+                  title: service_account
+                  description: Service account that owns this client (client_credentials flows)
+                  $ref: '#/components/schemas/partition.v1.ServiceAccountObject'
+              title: service_account
+              required:
+                - serviceAccount
+      title: ClientObject
+      additionalProperties: false
+      description: |-
+        ClientObject represents an OAuth2 client configuration.
+         A client can be owned by either a partition (for user auth flows like PKCE)
+         or a service account (for client_credentials machine-to-machine flows).
     partition.v1.CreateAccessRequest:
       type: object
       allOf:
@@ -1463,6 +1970,89 @@ components:
           $ref: '#/components/schemas/partition.v1.AccessRoleObject'
       title: CreateAccessRoleResponse
       additionalProperties: false
+    partition.v1.CreateClientRequest:
+      type: object
+      allOf:
+        - properties:
+            name:
+              type: string
+              title: name
+              maxLength: 100
+              minLength: 3
+            type:
+              type: string
+              title: type
+              enum:
+                - public
+                - confidential
+                - internal
+                - external
+            grantTypes:
+              type: array
+              items:
+                type: string
+              title: grant_types
+            responseTypes:
+              type: array
+              items:
+                type: string
+              title: response_types
+            redirectUris:
+              type: array
+              items:
+                type: string
+              title: redirect_uris
+            scopes:
+              type: string
+              title: scopes
+            audiences:
+              type: array
+              items:
+                type: string
+              title: audiences
+            roles:
+              type: array
+              items:
+                type: string
+              title: roles
+            properties:
+              title: properties
+              $ref: '#/components/schemas/google.protobuf.Struct'
+        - oneOf:
+            - properties:
+                partitionId:
+                  type: string
+                  title: partition_id
+                  maxLength: 40
+                  minLength: 3
+                  pattern: '[0-9a-z_-]{3,40}'
+              title: partition_id
+              required:
+                - partitionId
+            - properties:
+                serviceAccountId:
+                  type: string
+                  title: service_account_id
+                  maxLength: 40
+                  minLength: 3
+                  pattern: '[0-9a-z_-]{3,40}'
+              title: service_account_id
+              required:
+                - serviceAccountId
+      title: CreateClientRequest
+      additionalProperties: false
+    partition.v1.CreateClientResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/partition.v1.ClientObject'
+        clientSecret:
+          type: string
+          title: client_secret
+          description: Only returned on creation
+      title: CreateClientResponse
+      additionalProperties: false
     partition.v1.CreatePageRequest:
       type: object
       properties:
@@ -1482,6 +2072,9 @@ components:
           title: html
           maxLength: 5000
           minLength: 4
+        properties:
+          title: properties
+          $ref: '#/components/schemas/google.protobuf.Struct'
       title: CreatePageRequest
       additionalProperties: false
     partition.v1.CreatePageResponse:
@@ -1520,9 +2113,12 @@ components:
         properties:
           title: properties
           $ref: '#/components/schemas/google.protobuf.Struct'
+        domain:
+          type: string
+          title: domain
+          maxLength: 255
       title: CreatePartitionRequest
       additionalProperties: false
-      description: Request to create new partition
     partition.v1.CreatePartitionResponse:
       type: object
       properties:
@@ -1591,9 +2187,25 @@ components:
           title: properties
           description: Additional metadata
           $ref: '#/components/schemas/google.protobuf.Struct'
+        type:
+          type: string
+          title: type
+          enum:
+            - internal
+            - external
+          description: Service account type (defaults to "internal")
+        roles:
+          type: array
+          items:
+            type: string
+          title: roles
+          description: Partition role names to assign to the service account
+        publicKeys:
+          title: public_keys
+          description: 'Public keys for JWT-based authentication (e.g. {"keys": [{"kid":"k1","kty":"EC",...}]})'
+          $ref: '#/components/schemas/google.protobuf.Struct'
       title: CreateServiceAccountRequest
       additionalProperties: false
-      description: Service Account Messages
     partition.v1.CreateServiceAccountResponse:
       type: object
       properties:
@@ -1624,7 +2236,6 @@ components:
           $ref: '#/components/schemas/google.protobuf.Struct'
       title: CreateTenantRequest
       additionalProperties: false
-      description: Request to create new tenancy
     partition.v1.CreateTenantResponse:
       type: object
       properties:
@@ -1679,6 +2290,32 @@ components:
           title: data
           $ref: '#/components/schemas/partition.v1.AccessObject'
       title: GetAccessResponse
+      additionalProperties: false
+    partition.v1.GetClientRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+          description: Client record ID
+        clientId:
+          type: string
+          title: client_id
+          maxLength: 100
+          minLength: 3
+          description: OAuth2 client_id
+      title: GetClientRequest
+      additionalProperties: false
+    partition.v1.GetClientResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/partition.v1.ClientObject'
+      title: GetClientResponse
       additionalProperties: false
     partition.v1.GetPageRequest:
       type: object
@@ -1740,6 +2377,12 @@ components:
           maxLength: 40
           minLength: 3
           pattern: '[0-9a-z_-]{3,40}'
+          description: Partition ID
+        domain:
+          type: string
+          title: domain
+          maxLength: 255
+          description: Partition domain (unique)
       title: GetPartitionRequest
       additionalProperties: false
     partition.v1.GetPartitionResponse:
@@ -1803,6 +2446,48 @@ components:
           $ref: '#/components/schemas/partition.v1.TenantObject'
       title: GetTenantResponse
       additionalProperties: false
+    partition.v1.ListAccessRequest:
+      type: object
+      allOf:
+        - properties:
+            cursor:
+              title: cursor
+              $ref: '#/components/schemas/common.v1.PageCursor'
+        - oneOf:
+            - properties:
+                partitionId:
+                  type: string
+                  title: partition_id
+                  maxLength: 40
+                  minLength: 3
+                  pattern: '[0-9a-z_-]{3,40}'
+                  description: List all access grants for a partition
+              title: partition_id
+              required:
+                - partitionId
+            - properties:
+                profileId:
+                  type: string
+                  title: profile_id
+                  maxLength: 40
+                  minLength: 3
+                  pattern: '[0-9a-z_-]{3,40}'
+                  description: List all access grants for a profile
+              title: profile_id
+              required:
+                - profileId
+      title: ListAccessRequest
+      additionalProperties: false
+    partition.v1.ListAccessResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/partition.v1.AccessObject'
+          title: data
+      title: ListAccessResponse
+      additionalProperties: false
     partition.v1.ListAccessRoleRequest:
       type: object
       properties:
@@ -1812,17 +2497,84 @@ components:
           maxLength: 40
           minLength: 3
           pattern: '[0-9a-z_-]{3,40}'
+        cursor:
+          title: cursor
+          $ref: '#/components/schemas/common.v1.PageCursor'
       title: ListAccessRoleRequest
       additionalProperties: false
     partition.v1.ListAccessRoleResponse:
       type: object
       properties:
-        role:
+        data:
           type: array
           items:
             $ref: '#/components/schemas/partition.v1.AccessRoleObject'
-          title: role
+          title: data
       title: ListAccessRoleResponse
+      additionalProperties: false
+    partition.v1.ListClientRequest:
+      type: object
+      allOf:
+        - properties:
+            cursor:
+              title: cursor
+              $ref: '#/components/schemas/common.v1.PageCursor'
+        - oneOf:
+            - properties:
+                partitionId:
+                  type: string
+                  title: partition_id
+                  maxLength: 40
+                  minLength: 3
+                  pattern: '[0-9a-z_-]{3,40}'
+              title: partition_id
+              required:
+                - partitionId
+            - properties:
+                serviceAccountId:
+                  type: string
+                  title: service_account_id
+                  maxLength: 40
+                  minLength: 3
+                  pattern: '[0-9a-z_-]{3,40}'
+              title: service_account_id
+              required:
+                - serviceAccountId
+      title: ListClientRequest
+      additionalProperties: false
+    partition.v1.ListClientResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/partition.v1.ClientObject'
+          title: data
+      title: ListClientResponse
+      additionalProperties: false
+    partition.v1.ListPageRequest:
+      type: object
+      properties:
+        partitionId:
+          type: string
+          title: partition_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        cursor:
+          title: cursor
+          $ref: '#/components/schemas/common.v1.PageCursor'
+      title: ListPageRequest
+      additionalProperties: false
+    partition.v1.ListPageResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/partition.v1.PageObject'
+          title: data
+      title: ListPageResponse
       additionalProperties: false
     partition.v1.ListPartitionRequest:
       type: object
@@ -1830,16 +2582,9 @@ components:
         query:
           type: string
           title: query
-        page:
-          type:
-            - integer
-            - string
-          title: page
-          format: int64
-        count:
-          type: integer
-          title: count
-          format: int32
+        cursor:
+          title: cursor
+          $ref: '#/components/schemas/common.v1.PageCursor'
         startDate:
           type: string
           title: start_date
@@ -1875,16 +2620,19 @@ components:
           maxLength: 40
           minLength: 3
           pattern: '[0-9a-z_-]{3,40}'
+        cursor:
+          title: cursor
+          $ref: '#/components/schemas/common.v1.PageCursor'
       title: ListPartitionRoleRequest
       additionalProperties: false
     partition.v1.ListPartitionRoleResponse:
       type: object
       properties:
-        role:
+        data:
           type: array
           items:
             $ref: '#/components/schemas/partition.v1.PartitionRoleObject'
-          title: role
+          title: data
       title: ListPartitionRoleResponse
       additionalProperties: false
     partition.v1.ListServiceAccountRequest:
@@ -1896,16 +2644,9 @@ components:
           maxLength: 40
           minLength: 3
           pattern: '[0-9a-z_-]{3,40}'
-        count:
-          type: integer
-          title: count
-          format: int32
-        page:
-          type:
-            - integer
-            - string
-          title: page
-          format: int64
+        cursor:
+          title: cursor
+          $ref: '#/components/schemas/common.v1.PageCursor'
       title: ListServiceAccountRequest
       additionalProperties: false
     partition.v1.ListServiceAccountResponse:
@@ -1924,16 +2665,9 @@ components:
         query:
           type: string
           title: query
-        page:
-          type:
-            - integer
-            - string
-          title: page
-          format: int64
-        count:
-          type: integer
-          title: count
-          format: int32
+        cursor:
+          title: cursor
+          $ref: '#/components/schemas/common.v1.PageCursor'
         startDate:
           type: string
           title: start_date
@@ -1994,40 +2728,16 @@ components:
           title: properties
           description: Additional page metadata
           $ref: '#/components/schemas/google.protobuf.Struct'
+        partitionId:
+          type: string
+          title: partition_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+          description: Associated partition ID
       title: PageObject
       additionalProperties: false
       description: PageObject represents a custom UI page for a partition.
-    partition.v1.PartitionCreateRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          title: name
-          maxLength: 100
-          minLength: 3
-        tenantId:
-          type: string
-          title: tenant_id
-          maxLength: 40
-          minLength: 3
-          pattern: '[0-9a-z_-]{3,40}'
-        parentId:
-          type: string
-          title: parent_id
-          maxLength: 40
-          minLength: 3
-          pattern: '[0-9a-z_-]{3,40}'
-        description:
-          type: string
-          title: description
-          maxLength: 250
-          minLength: 10
-        properties:
-          title: properties
-          $ref: '#/components/schemas/google.protobuf.Struct'
-      title: PartitionCreateRequest
-      additionalProperties: false
-      description: Request to create a new partition
     partition.v1.PartitionObject:
       type: object
       properties:
@@ -2057,12 +2767,11 @@ components:
           maxLength: 40
           minLength: 3
           pattern: '[0-9a-z_-]{3,40}'
-          description: Parent partition ID for hierarchical structure
+          description: Parent partition ID for hierarchical structure (empty for root partitions)
         description:
           type: string
           title: description
           maxLength: 500
-          minLength: 10
           description: Partition description
         state:
           title: state
@@ -2076,6 +2785,11 @@ components:
           title: created_at
           description: Creation timestamp
           $ref: '#/components/schemas/google.protobuf.Timestamp'
+        domain:
+          type: string
+          title: domain
+          maxLength: 255
+          description: Custom domain for the partition (unique across all partitions)
       title: PartitionObject
       additionalProperties: false
       description: PartitionObject represents a data partition within a tenant.
@@ -2155,6 +2869,25 @@ components:
           title: succeeded
       title: RemoveAccessRoleResponse
       additionalProperties: false
+    partition.v1.RemoveClientRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+      title: RemoveClientRequest
+      additionalProperties: false
+    partition.v1.RemoveClientResponse:
+      type: object
+      properties:
+        succeeded:
+          type: boolean
+          title: succeeded
+      title: RemoveClientResponse
+      additionalProperties: false
     partition.v1.RemovePageRequest:
       type: object
       properties:
@@ -2173,6 +2906,25 @@ components:
           type: boolean
           title: succeeded
       title: RemovePageResponse
+      additionalProperties: false
+    partition.v1.RemovePartitionRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+      title: RemovePartitionRequest
+      additionalProperties: false
+    partition.v1.RemovePartitionResponse:
+      type: object
+      properties:
+        succeeded:
+          type: boolean
+          title: succeeded
+      title: RemovePartitionResponse
       additionalProperties: false
     partition.v1.RemovePartitionRoleRequest:
       type: object
@@ -2211,6 +2963,25 @@ components:
           type: boolean
           title: succeeded
       title: RemoveServiceAccountResponse
+      additionalProperties: false
+    partition.v1.RemoveTenantRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+      title: RemoveTenantRequest
+      additionalProperties: false
+    partition.v1.RemoveTenantResponse:
+      type: object
+      properties:
+        succeeded:
+          type: boolean
+          title: succeeded
+      title: RemoveTenantResponse
       additionalProperties: false
     partition.v1.ServiceAccountObject:
       type: object
@@ -2255,9 +3026,11 @@ components:
           description: Service account state
           $ref: '#/components/schemas/common.v1.STATE'
         audiences:
+          type: array
+          items:
+            type: string
           title: audiences
           description: Service namespaces the bot can access
-          $ref: '#/components/schemas/google.protobuf.Struct'
         properties:
           title: properties
           description: Additional metadata
@@ -2266,6 +3039,13 @@ components:
           title: created_at
           description: Creation timestamp
           $ref: '#/components/schemas/google.protobuf.Timestamp'
+        type:
+          type: string
+          title: type
+          enum:
+            - internal
+            - external
+          description: 'Service account type: internal (service-to-service) or external (API consumers)'
       title: ServiceAccountObject
       additionalProperties: false
       description: |-
@@ -2291,7 +3071,6 @@ components:
           type: string
           title: description
           maxLength: 500
-          minLength: 10
           description: Tenant description
         properties:
           title: properties
@@ -2308,6 +3087,99 @@ components:
       title: TenantObject
       additionalProperties: false
       description: TenantObject represents a top-level organizational unit.
+    partition.v1.UpdateClientRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        name:
+          type: string
+          title: name
+          maxLength: 100
+          minLength: 3
+        grantTypes:
+          type: array
+          items:
+            type: string
+          title: grant_types
+        responseTypes:
+          type: array
+          items:
+            type: string
+          title: response_types
+        redirectUris:
+          type: array
+          items:
+            type: string
+          title: redirect_uris
+        scopes:
+          type: string
+          title: scopes
+        audiences:
+          type: array
+          items:
+            type: string
+          title: audiences
+        roles:
+          type: array
+          items:
+            type: string
+          title: roles
+        properties:
+          title: properties
+          $ref: '#/components/schemas/google.protobuf.Struct'
+        state:
+          title: state
+          $ref: '#/components/schemas/common.v1.STATE'
+      title: UpdateClientRequest
+      additionalProperties: false
+    partition.v1.UpdateClientResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/partition.v1.ClientObject'
+      title: UpdateClientResponse
+      additionalProperties: false
+    partition.v1.UpdatePageRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        name:
+          type: string
+          title: name
+          maxLength: 100
+          minLength: 3
+        html:
+          type: string
+          title: html
+          maxLength: 5000
+          minLength: 4
+        state:
+          title: state
+          $ref: '#/components/schemas/common.v1.STATE'
+        properties:
+          title: properties
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: UpdatePageRequest
+      additionalProperties: false
+    partition.v1.UpdatePageResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/partition.v1.PageObject'
+      title: UpdatePageResponse
+      additionalProperties: false
     partition.v1.UpdatePartitionRequest:
       type: object
       properties:
@@ -2333,6 +3205,10 @@ components:
         properties:
           title: properties
           $ref: '#/components/schemas/google.protobuf.Struct'
+        domain:
+          type: string
+          title: domain
+          maxLength: 255
       title: UpdatePartitionRequest
       additionalProperties: false
     partition.v1.UpdatePartitionResponse:
@@ -2342,6 +3218,87 @@ components:
           title: data
           $ref: '#/components/schemas/partition.v1.PartitionObject'
       title: UpdatePartitionResponse
+      additionalProperties: false
+    partition.v1.UpdatePartitionRoleRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        name:
+          type: string
+          title: name
+          maxLength: 100
+          minLength: 3
+        properties:
+          title: properties
+          $ref: '#/components/schemas/google.protobuf.Struct'
+        state:
+          title: state
+          $ref: '#/components/schemas/common.v1.STATE'
+      title: UpdatePartitionRoleRequest
+      additionalProperties: false
+    partition.v1.UpdatePartitionRoleResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/partition.v1.PartitionRoleObject'
+      title: UpdatePartitionRoleResponse
+      additionalProperties: false
+    partition.v1.UpdateServiceAccountRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        name:
+          type: string
+          title: name
+          maxLength: 100
+          minLength: 3
+        audiences:
+          type: array
+          items:
+            type: string
+          title: audiences
+          description: Updated service namespaces
+        properties:
+          title: properties
+          $ref: '#/components/schemas/google.protobuf.Struct'
+        type:
+          type: string
+          title: type
+          enum:
+            - internal
+            - external
+        roles:
+          type: array
+          items:
+            type: string
+          title: roles
+          description: Updated partition role names
+        publicKeys:
+          title: public_keys
+          $ref: '#/components/schemas/google.protobuf.Struct'
+        state:
+          title: state
+          $ref: '#/components/schemas/common.v1.STATE'
+      title: UpdateServiceAccountRequest
+      additionalProperties: false
+    partition.v1.UpdateServiceAccountResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/partition.v1.ServiceAccountObject'
+      title: UpdateServiceAccountResponse
       additionalProperties: false
     partition.v1.UpdateTenantRequest:
       type: object
