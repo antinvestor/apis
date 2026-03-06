@@ -7,7 +7,7 @@ require (
 	buf.build/gen/go/antinvestor/payment/connectrpc/go v1.19.1-20260219062017-c412eb160de6.2
 	buf.build/gen/go/antinvestor/payment/protocolbuffers/go v1.36.11-20260219062017-c412eb160de6.1
 	connectrpc.com/connect v1.19.1
-	github.com/antinvestor/apis/go/common v1.53.17
+	github.com/antinvestor/apis/go/common v1.55.0
 	github.com/gojuno/minimock/v3 v3.4.7
 )
 
@@ -20,7 +20,7 @@ require (
 	github.com/go-logr/logr v1.4.3 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/lmittmann/tint v1.1.3 // indirect
-	github.com/pitabwire/util v0.6.0 // indirect
+	github.com/pitabwire/util v0.6.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/rs/xid v1.6.0 // indirect
 	go.opentelemetry.io/auto/sdk v1.2.1 // indirect
