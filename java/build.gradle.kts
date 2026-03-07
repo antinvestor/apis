@@ -89,6 +89,7 @@ subprojects {
     }
 
     dependencies {
+        api(enforcedPlatform("com.fasterxml.jackson:jackson-bom:2.18.6"))
 
         api("com.squareup.okhttp3:okhttp:5.3.2")
         api("com.connectrpc:connect-kotlin-okhttp:0.7.4")
