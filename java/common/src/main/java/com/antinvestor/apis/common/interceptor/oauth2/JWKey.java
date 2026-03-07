@@ -20,5 +20,4 @@ public class JWKey {
     public String kid;
     public String alg;
     public String n;
-
 }

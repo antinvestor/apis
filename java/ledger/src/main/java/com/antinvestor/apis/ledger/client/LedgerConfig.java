@@ -28,6 +28,4 @@ public interface LedgerConfig {
     @Config.DefaultValue("true")
     @Config.Key("${product}.${env}.ledger.auth.interceptor.enabled")
     Boolean authInterceptorEnabled();
-
-
 }

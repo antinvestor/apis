@@ -41,14 +41,11 @@
 
 package com.antinvestor.apis.common.utilities;
 
-
 import java.util.Objects;
 
 public class TextUtils {
 
-    /**
-     * Returns true if the parameter is null or of zero length
-     */
+    /** Returns true if the parameter is null or of zero length */
     public static boolean isEmpty(final CharSequence s) {
         if (s == null) {
             return true;
@@ -56,9 +53,7 @@ public class TextUtils {
         return s.isEmpty();
     }
 
-    /**
-     * Returns true if the parameter is null or contains only whitespace
-     */
+    /** Returns true if the parameter is null or contains only whitespace */
     public static boolean isBlank(final CharSequence s) {
         if (s == null) {
             return true;
@@ -100,7 +95,7 @@ public class TextUtils {
 
     public static String camelToSnake(String camelCaseStr) {
 
-        if(Objects.isNull(camelCaseStr)){
+        if (Objects.isNull(camelCaseStr)) {
             return null;
         }
         // Regular Expression
@@ -112,19 +107,17 @@ public class TextUtils {
         // Replace the given regex
         // with replacement string
         // and convert it to lower case.
-        return camelCaseStr.replaceAll(regex, replacement)
-                .toLowerCase();
+        return camelCaseStr.replaceAll(regex, replacement).toLowerCase();
     }
 
     // Function to convert the string
     // from snake case to camel case
     public static String snakeToCamel(String snakeCaseStr) {
-        if(TextUtils.isEmpty(snakeCaseStr)){
+        if (TextUtils.isEmpty(snakeCaseStr)) {
             return snakeCaseStr;
         }
         // Capitalize first letter of string
-        snakeCaseStr = snakeCaseStr.substring(0, 1).toUpperCase()
-                + snakeCaseStr.substring(1);
+        snakeCaseStr = snakeCaseStr.substring(0, 1).toUpperCase() + snakeCaseStr.substring(1);
 
         // Run a loop till string
         // string contains underscore
@@ -134,18 +127,15 @@ public class TextUtils {
             // of letter that present after
             // the underscore, to capitalize
             // form of next letter of underscore
-            snakeCaseStr = snakeCaseStr
-                    .replaceFirst(
+            snakeCaseStr =
+                    snakeCaseStr.replaceFirst(
                             "_[a-z]",
                             String.valueOf(
                                     Character.toUpperCase(
-                                            snakeCaseStr.charAt(
-                                                    snakeCaseStr.indexOf("_") + 1))));
+                                            snakeCaseStr.charAt(snakeCaseStr.indexOf("_") + 1))));
         }
 
         // Return string
         return snakeCaseStr;
     }
-
-
 }

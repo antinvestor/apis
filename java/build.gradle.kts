@@ -138,7 +138,7 @@ subprojects {
         java {
             // don't need to set target, it is inferred from java
             // apply a specific flavor of google-java-format
-            googleJavaFormat("1.8").aosp().reflowLongStrings()
+            googleJavaFormat("1.35.0").aosp().reflowLongStrings()
             removeUnusedImports()
             importOrder()
         }

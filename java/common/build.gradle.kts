@@ -8,5 +8,5 @@ dependencies {
     runtimeOnly("io.jsonwebtoken:jjwt-impl:0.13.0")
     runtimeOnly("io.jsonwebtoken:jjwt-gson:0.13.0")
 
-    implementation("build.buf.gen:antinvestor_common_protocolbuffers_java:33.1.0.1.20251119161617.faec0015998a")
+    implementation("build.buf.gen:antinvestor_common_protocolbuffers_kotlin:34.0.0.1.20260219054105.fe125014d75c")
 }

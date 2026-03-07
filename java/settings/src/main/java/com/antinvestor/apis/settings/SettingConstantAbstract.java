@@ -87,23 +87,26 @@ public abstract class SettingConstantAbstract {
                 .filter(field -> field.isAnnotationPresent(SettingDescriptor.class))
                 .filter(field -> Modifier.isStatic(field.getModifiers()))
                 .filter(field -> field.getType() == String.class)
-                .collect(Collectors.toMap(
-                        Field::getName,
-                        field -> {
-                            try {
-                                return new DescriptorHolder(
-                                        (String) field.get(null),
-                                        List.of(field.getAnnotationsByType(SettingDescriptor.class))
-                                );
-                            } catch (IllegalAccessException e) {
-                                throw new RuntimeException(e);
-                            }
-                        },
-                        (existing, replacement) -> existing, // If there are duplicate keys, keep the existing one
-                        HashMap::new // Use HashMap as the target map
-                ));
+                .collect(
+                        Collectors.toMap(
+                                Field::getName,
+                                field -> {
+                                    try {
+                                        return new DescriptorHolder(
+                                                (String) field.get(null),
+                                                List.of(
+                                                        field.getAnnotationsByType(
+                                                                SettingDescriptor.class)));
+                                    } catch (IllegalAccessException e) {
+                                        throw new RuntimeException(e);
+                                    }
+                                },
+                                (existing, replacement) ->
+                                        existing, // If there are duplicate keys, keep the existing
+                                // one
+                                HashMap::new // Use HashMap as the target map
+                                ));
     }
 
     public record DescriptorHolder(String settingKey, List<SettingDescriptor> descriptors) {}
-
 }

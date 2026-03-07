@@ -16,11 +16,10 @@ package com.antinvestor.apis.common.interceptor.http;
 
 import com.antinvestor.apis.common.context.Context;
 import com.antinvestor.apis.common.context.DefaultKeys;
+import java.io.IOException;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
-
-import java.io.IOException;
 
 public class ClientMetadataInterceptor implements Interceptor {
 

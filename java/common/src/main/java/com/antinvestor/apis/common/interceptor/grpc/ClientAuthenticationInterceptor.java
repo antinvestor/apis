@@ -21,28 +21,28 @@ import com.antinvestor.apis.common.exceptions.UnRetriableException;
 import com.antinvestor.apis.common.interceptor.oauth2.Oauth2ClientHandler;
 import com.antinvestor.apis.common.utilities.AuthenticationUtil;
 import io.grpc.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Map;
 import java.util.Objects;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ClientAuthenticationInterceptor implements ClientInterceptor {
-
 
     public static final CallOptions.Key<String> TENANT_KEY = CallOptions.Key.create("tenant_id");
     public static final String BEARER_TYPE = "Bearer";
 
-    private static final Logger log = LoggerFactory.getLogger(ClientAuthenticationInterceptor.class);
+    private static final Logger log =
+            LoggerFactory.getLogger(ClientAuthenticationInterceptor.class);
     private static final String JWT_HTTP_AUTH_HEADER_KEY = "Authorization";
     private static final Metadata.Key<String> JWT_BEARER_HEADER_KEY =
             Metadata.Key.of(JWT_HTTP_AUTH_HEADER_KEY, Metadata.ASCII_STRING_MARSHALLER);
 
     private final Map<String, Oauth2ClientHandler> clientOauth2HandlerMap;
 
-    private ClientAuthenticationInterceptor(Map<String, Oauth2ClientHandler> clientOauth2HandlerMap) {
+    private ClientAuthenticationInterceptor(
+            Map<String, Oauth2ClientHandler> clientOauth2HandlerMap) {
         this.clientOauth2HandlerMap = clientOauth2HandlerMap;
     }
 
@@ -56,7 +56,6 @@ public class ClientAuthenticationInterceptor implements ClientInterceptor {
         var authConfig = authConfigOptional.get();
         var handlersMap = authConfig.getTenantHandlers();
         return new ClientAuthenticationInterceptor(handlersMap);
-
     }
 
     public static String extractTenantId(Context context) {
@@ -69,13 +68,11 @@ public class ClientAuthenticationInterceptor implements ClientInterceptor {
         return optionalTenantId.get();
     }
 
-
     @Override
     public <ReqT, RespT> ClientCall<ReqT, RespT> interceptCall(
             MethodDescriptor<ReqT, RespT> methodDescriptor,
             CallOptions callOptions,
             Channel channel) {
-
 
         return new ForwardingClientCall.SimpleForwardingClientCall<>(
                 channel.newCall(methodDescriptor, callOptions)) {
@@ -87,15 +84,22 @@ public class ClientAuthenticationInterceptor implements ClientInterceptor {
                     var tenantId = callOptions.getOption(TENANT_KEY);
                     var clientHandler = clientOauth2HandlerMap.get(tenantId);
                     if (Objects.isNull(clientHandler)) {
-                        throw new RuntimeException(String.format(" client handler for tenant : %s is missing", tenantId));
+                        throw new RuntimeException(
+                                String.format(
+                                        " client handler for tenant : %s is missing", tenantId));
                     }
 
                     var jwtBearerToken = clientHandler.getValidBearerToken();
                     /* put custom header */
-                    headers.put(JWT_BEARER_HEADER_KEY, String.format("%s %s", BEARER_TYPE, jwtBearerToken));
+                    headers.put(
+                            JWT_BEARER_HEADER_KEY,
+                            String.format("%s %s", BEARER_TYPE, jwtBearerToken));
 
-                } catch (IOException | InterruptedException | URISyntaxException |
-                         UnRetriableException | RetriableException e) {
+                } catch (IOException
+                        | InterruptedException
+                        | URISyntaxException
+                        | UnRetriableException
+                        | RetriableException e) {
                     throw new RuntimeException(e);
                 }
 

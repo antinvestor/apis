@@ -14,11 +14,10 @@
 
 package com.antinvestor.apis.common.interceptor.oauth2;
 
+import static com.google.gson.FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -31,8 +30,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-
-import static com.google.gson.FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Oauth2Client {
 
@@ -50,8 +49,7 @@ public class Oauth2Client {
     private HttpClient httpClient;
 
     public Oauth2Client() {
-        gson = new GsonBuilder().setFieldNamingPolicy(LOWER_CASE_WITH_UNDERSCORES)
-                .create();
+        gson = new GsonBuilder().setFieldNamingPolicy(LOWER_CASE_WITH_UNDERSCORES).create();
         httpClient = HttpClient.newHttpClient();
     }
 
@@ -110,7 +108,6 @@ public class Oauth2Client {
                 continue;
             }
 
-
             var encodedName = URLEncoder.encode(e.getKey(), StandardCharsets.UTF_8);
             result.append(encodedName);
 
@@ -133,24 +130,29 @@ public class Oauth2Client {
         }
         parameters.put(OAuthConstants.GRANT_TYPE, OAuthConstants.CLIENT_CREDENTIALS);
 
-
         var form = getParamsUrlEncoded(parameters);
 
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(oauth2ServiceTokenUri)
-                .POST(form)
-                .header(OAuthConstants.USER_AGENT_HEADER_NAME, userAgent)
-                .headers("Content-Type", "application/x-www-form-urlencoded")
-                .build();
-        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        HttpRequest request =
+                HttpRequest.newBuilder()
+                        .uri(oauth2ServiceTokenUri)
+                        .POST(form)
+                        .header(OAuthConstants.USER_AGENT_HEADER_NAME, userAgent)
+                        .headers("Content-Type", "application/x-www-form-urlencoded")
+                        .build();
+        HttpResponse<String> response =
+                httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
         if (response.statusCode() < 200 || response.statusCode() >= 300) {
-            log.atWarn().addKeyValue("status code", response.statusCode()).addKeyValue("body", response.body()).log("failed to get credentials");
-            throw new RuntimeException(String.format("Could not get access token : [%d]  %s ", response.statusCode(), response.body()));
+            log.atWarn()
+                    .addKeyValue("status code", response.statusCode())
+                    .addKeyValue("body", response.body())
+                    .log("failed to get credentials");
+            throw new RuntimeException(
+                    String.format(
+                            "Could not get access token : [%d]  %s ",
+                            response.statusCode(), response.body()));
         }
 
         return gson.fromJson(response.body(), AccessToken.class);
     }
-
-
 }

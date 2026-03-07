@@ -14,35 +14,33 @@
 
 package com.antinvestor.apis.common.context;
 
-import javax.annotation.concurrent.Immutable;
 import java.util.Optional;
+import javax.annotation.concurrent.Immutable;
 
 /**
  * @author Brian Barasa
  */
 public interface Context {
-   Context add(Key<?> key, Object value);
-   <T> Optional<T> get(Key<T> key);
+    Context add(Key<?> key, Object value);
 
-   @Immutable
-   public static class Key<T> {
+    <T> Optional<T> get(Key<T> key);
 
-      private final String name;
+    @Immutable
+    public static class Key<T> {
 
-      private Key(String name) {
-         this.name = name;
-      }
+        private final String name;
 
-      /**
-       * Returns the normalized name for this key.
-       */
-      public final String name() {
-         return name;
-      }
+        private Key(String name) {
+            this.name = name;
+        }
 
-      public static <T> Key<T> of(String name){
-         return new Key<>(name);
-      }
+        /** Returns the normalized name for this key. */
+        public final String name() {
+            return name;
+        }
 
-   }
+        public static <T> Key<T> of(String name) {
+            return new Key<>(name);
+        }
+    }
 }

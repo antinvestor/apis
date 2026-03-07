@@ -17,12 +17,9 @@ package com.antinvestor.apis.common.utilities;
 import com.google.protobuf.ListValue;
 import com.google.protobuf.Struct;
 import com.google.protobuf.Value;
-
 import java.util.*;
 
-/**
- * Utility class to convert google.protobuf.Struct into Java Map and vice versa.
- */
+/** Utility class to convert google.protobuf.Struct into Java Map and vice versa. */
 public final class ProtoStructUtil {
 
     private ProtoStructUtil() {
@@ -58,9 +55,7 @@ public final class ProtoStructUtil {
         return builder.build();
     }
 
-    /**
-     * Recursively converts a protobuf Value to a Java Object.
-     */
+    /** Recursively converts a protobuf Value to a Java Object. */
     private static Object convertValue(Value value) {
         switch (value.getKindCase()) {
             case NULL_VALUE:
@@ -82,9 +77,7 @@ public final class ProtoStructUtil {
         }
     }
 
-    /**
-     * Recursively converts a ListValue to a Java List<Object>.
-     */
+    /** Recursively converts a ListValue to a Java List<Object>. */
     private static List<Object> convertList(ListValue listValue) {
         List<Object> result = new ArrayList<>();
         for (Value v : listValue.getValuesList()) {
@@ -93,9 +86,7 @@ public final class ProtoStructUtil {
         return result;
     }
 
-    /**
-     * Converts a Java Object to a protobuf Value.
-     */
+    /** Converts a Java Object to a protobuf Value. */
     private static Value toValue(Object obj) {
         Value.Builder builder = Value.newBuilder();
 
@@ -121,9 +112,7 @@ public final class ProtoStructUtil {
         return builder.build();
     }
 
-    /**
-     * Converts a Java List<Object> to a protobuf ListValue.
-     */
+    /** Converts a Java List<Object> to a protobuf ListValue. */
     private static ListValue toListValue(List<?> list) {
         ListValue.Builder builder = ListValue.newBuilder();
         for (Object element : list) {

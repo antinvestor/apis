@@ -14,34 +14,30 @@
 
 package com.antinvestor.apis.device.client;
 
-import build.buf.gen.device.v1.DeviceServiceGrpc;
-import com.antinvestor.apis.common.base.GrpcClientBase;
+import build.buf.gen.device.v1.DeviceServiceClient;
+import com.antinvestor.apis.common.base.ConnectClientBase;
 import com.antinvestor.apis.common.config.DefaultConfig;
 import com.antinvestor.apis.common.context.Context;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
-
-/**
- * The DeviceClient class represents a client for accessing device services.
- */
+/** The DeviceClient class represents a client for accessing device services. */
 @ApplicationScoped
-public class DeviceClient extends GrpcClientBase<DeviceServiceGrpc.DeviceServiceBlockingStub> {
+public class DeviceClient extends ConnectClientBase<DeviceServiceClient> {
 
     @Inject
     public DeviceClient(Context context) {
-        setupChannelBuilder(context);
+        setupClient(context);
     }
 
     @Override
     protected ConnectionConfig getConnectionConfig(Context context, DefaultConfig defaultConfig) {
         var cfg = (DeviceConfig) defaultConfig;
-        return new ConnectionConfig(cfg.devicesHostUrl(), cfg.devicesHostPort(), cfg.authInterceptorEnabled());
+        return new ConnectionConfig(
+                cfg.devicesHostUrl(), cfg.devicesHostPort(), cfg.authInterceptorEnabled());
     }
 
-    public DeviceServiceGrpc.DeviceServiceBlockingStub stub(Context context) {
-
-        var stub = DeviceServiceGrpc.newBlockingStub(getChannel());
-        return setupStub(context, stub);
+    public DeviceServiceClient stub(Context context) {
+        return new DeviceServiceClient(getProtocolClient());
     }
 }

@@ -14,7 +14,6 @@
 
 package com.antinvestor.apis.common.interceptor.grpc;
 
-
 import com.antinvestor.apis.common.context.Context;
 import com.antinvestor.apis.common.context.DefaultKeys;
 import io.grpc.*;
@@ -29,16 +28,13 @@ public class ClientMetadataInterceptor implements ClientInterceptor {
             Metadata.Key.of("access_id", Metadata.ASCII_STRING_MARSHALLER);
     private final Context context;
 
-
     public ClientMetadataInterceptor(Context context) {
         this.context = context;
     }
 
     @Override
     public <ReqT, RespT> ClientCall<ReqT, RespT> interceptCall(
-            MethodDescriptor<ReqT, RespT> method,
-            CallOptions callOptions,
-            Channel next) {
+            MethodDescriptor<ReqT, RespT> method, CallOptions callOptions, Channel next) {
 
         return new ForwardingClientCall.SimpleForwardingClientCall<ReqT, RespT>(
                 next.newCall(method, callOptions)) {
@@ -47,7 +43,7 @@ public class ClientMetadataInterceptor implements ClientInterceptor {
             public void start(Listener<RespT> responseListener, Metadata headers) {
                 // Retrieve metadata from the context
                 Metadata metadata = extractMetadataFromContext();
-                headers.merge(metadata);  // Add your custom metadata to headers
+                headers.merge(metadata); // Add your custom metadata to headers
                 super.start(responseListener, headers);
             }
         };

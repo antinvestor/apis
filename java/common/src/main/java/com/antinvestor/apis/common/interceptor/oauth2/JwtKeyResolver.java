@@ -21,11 +21,10 @@ import com.auth0.jwk.JwkException;
 import com.auth0.jwk.JwkProvider;
 import com.auth0.jwk.JwkProviderBuilder;
 import io.jsonwebtoken.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.security.Key;
 import java.util.concurrent.TimeUnit;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class JwtKeyResolver extends LocatorAdapter<Key> {
 
@@ -33,19 +32,19 @@ public class JwtKeyResolver extends LocatorAdapter<Key> {
     private final JwkProvider jwkProvider;
 
     public JwtKeyResolver(String oauth2ServiceUrl) throws UnRetriableException, RetriableException {
-        jwkProvider = new JwkProviderBuilder(oauth2ServiceUrl)
-                // up to 10 JWKs will be cached for up to 24 hours
-                .cached(10, 24, TimeUnit.HOURS)
-                // up to 10 JWKs can be retrieved within one minute
-                .rateLimited(10, 1, TimeUnit.MINUTES)
-                .build();
-
+        jwkProvider =
+                new JwkProviderBuilder(oauth2ServiceUrl)
+                        // up to 10 JWKs will be cached for up to 24 hours
+                        .cached(10, 24, TimeUnit.HOURS)
+                        // up to 10 JWKs can be retrieved within one minute
+                        .rateLimited(10, 1, TimeUnit.MINUTES)
+                        .build();
     }
 
     @Override
     protected Key locate(ProtectedHeader header) {
 
-        //inspect the header, lookup and return the verification key
+        // inspect the header, lookup and return the verification key
         String keyId = header.getKeyId();
         try {
             Jwk jwk = jwkProvider.get(keyId);
@@ -56,5 +55,4 @@ public class JwtKeyResolver extends LocatorAdapter<Key> {
             throw new RuntimeException(e);
         }
     }
-
 }

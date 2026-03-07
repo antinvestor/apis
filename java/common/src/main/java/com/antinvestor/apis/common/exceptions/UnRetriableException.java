@@ -81,7 +81,6 @@ public class UnRetriableException extends RuntimeException {
         this.status = status;
     }
 
-
     /**
      * @param status
      * @param message
@@ -100,7 +99,6 @@ public class UnRetriableException extends RuntimeException {
 
         this.status = status;
     }
-
 
     /**
      * @param status

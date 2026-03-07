@@ -16,7 +16,7 @@ package com.antinvestor.apis.settings.client;
 
 import build.buf.gen.common.v1.SearchRequest;
 import build.buf.gen.settings.v1.*;
-import com.antinvestor.apis.common.base.GrpcClientBase;
+import com.antinvestor.apis.common.base.ConnectClientBase;
 import com.antinvestor.apis.common.config.DefaultConfig;
 import com.antinvestor.apis.common.context.Context;
 import com.antinvestor.apis.common.database.BaseModel;
@@ -24,7 +24,6 @@ import com.antinvestor.apis.common.utilities.IteratorUtil;
 import com.antinvestor.apis.common.utilities.TextUtils;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -33,25 +32,23 @@ import java.util.Objects;
 import java.util.Optional;
 
 @ApplicationScoped
-public class SettingsClient extends GrpcClientBase<SettingsServiceGrpc.SettingsServiceBlockingStub> {
+public class SettingsClient extends ConnectClientBase<SettingsServiceClient> {
 
     @Inject
     public SettingsClient(Context context) {
-        setupChannelBuilder(context);
+        setupClient(context);
     }
 
     @Override
     protected ConnectionConfig getConnectionConfig(Context context, DefaultConfig defaultConfig) {
         var cfg = (SettingsConfig) defaultConfig;
-        return  new ConnectionConfig(cfg.settingsHostUrl(), cfg.settingsHostPort(), cfg.authInterceptorEnabled() );
+        return new ConnectionConfig(
+                cfg.settingsHostUrl(), cfg.settingsHostPort(), cfg.authInterceptorEnabled());
     }
 
-    public SettingsServiceGrpc.SettingsServiceBlockingStub stub(Context context) {
-
-        var stub = SettingsServiceGrpc.newBlockingStub(getChannel());
-        return setupStub(context, stub);
+    public SettingsServiceClient stub(Context context) {
+        return new SettingsServiceClient(getProtocolClient());
     }
-
 
     public static Optional<LocalDateTime> asLocalDateTime(String settingValue) {
         try {
@@ -66,7 +63,6 @@ public class SettingsClient extends GrpcClientBase<SettingsServiceGrpc.SettingsS
             return null;
         }
         return Double.parseDouble(settingValue);
-
     }
 
     public static BigDecimal asBigDecimal(String settingValue) {
@@ -84,7 +80,6 @@ public class SettingsClient extends GrpcClientBase<SettingsServiceGrpc.SettingsS
         return Integer.parseInt(settingValue);
     }
 
-
     public static Long asLong(String settingValue) {
 
         if (TextUtils.isBlank(settingValue)) {
@@ -99,18 +94,20 @@ public class SettingsClient extends GrpcClientBase<SettingsServiceGrpc.SettingsS
 
     public String getSetting(Context context, String moduleName, String settingName) {
 
-        Setting setting = Setting.newBuilder()
-                .setModule(moduleName)
-                .setName(settingName)
-                .build();
-        GetRequest request = GetRequest.newBuilder()
-                .setKey(setting)
-                .build();
-        GetResponse settingValue = stub(context).get(request);
+        Setting setting = Setting.newBuilder().setModule(moduleName).setName(settingName).build();
+        GetRequest request = GetRequest.newBuilder().setKey(setting).build();
+        GetResponse settingValue =
+                this.<GetRequest, GetResponse>executeUnary(
+                        context,
+                        stub(context),
+                        request,
+                        (client, req, headers, continuation) ->
+                                client.get(req, headers, continuation));
         return settingValue.getData().getValue();
     }
 
-    public Double getSettingAsDouble(Context context, String moduleName, String settingName, double defaultValue) {
+    public Double getSettingAsDouble(
+            Context context, String moduleName, String settingName, double defaultValue) {
         var result = getSettingAsDouble(context, moduleName, settingName);
         if (Objects.isNull(result)) {
             return defaultValue;
@@ -123,12 +120,14 @@ public class SettingsClient extends GrpcClientBase<SettingsServiceGrpc.SettingsS
         return asDouble(setting);
     }
 
-    public BigDecimal getSettingAsBigDecimal(Context context, String moduleName, String settingName) {
+    public BigDecimal getSettingAsBigDecimal(
+            Context context, String moduleName, String settingName) {
         String setting = getSetting(context, moduleName, settingName);
         return asBigDecimal(setting);
     }
 
-    public BigDecimal getSettingAsBigDecimal(Context context, String moduleName, String settingName, BigDecimal defaultValue) {
+    public BigDecimal getSettingAsBigDecimal(
+            Context context, String moduleName, String settingName, BigDecimal defaultValue) {
         var result = getSettingAsBigDecimal(context, moduleName, settingName);
         if (Objects.isNull(result)) {
             return defaultValue;
@@ -141,7 +140,8 @@ public class SettingsClient extends GrpcClientBase<SettingsServiceGrpc.SettingsS
         return asInt(setting);
     }
 
-    public Integer getSettingAsInt(Context context, String moduleName, String settingName, int defaultValue) {
+    public Integer getSettingAsInt(
+            Context context, String moduleName, String settingName, int defaultValue) {
         var result = getSettingAsInt(context, moduleName, settingName);
         if (Objects.isNull(result)) {
             return defaultValue;
@@ -154,7 +154,8 @@ public class SettingsClient extends GrpcClientBase<SettingsServiceGrpc.SettingsS
         return asLong(setting);
     }
 
-    public Long getSettingAsLong(Context context, String moduleName, String settingName, long defaultValue) {
+    public Long getSettingAsLong(
+            Context context, String moduleName, String settingName, long defaultValue) {
         var result = getSettingAsLong(context, moduleName, settingName);
         if (Objects.isNull(result)) {
             return defaultValue;
@@ -167,182 +168,231 @@ public class SettingsClient extends GrpcClientBase<SettingsServiceGrpc.SettingsS
         return asBoolean(setting);
     }
 
-    public String getLocalizedSetting(Context context, String moduleName, String language, String settingName) {
+    public String getLocalizedSetting(
+            Context context, String moduleName, String language, String settingName) {
 
-        Setting setting = Setting.newBuilder()
-                .setModule(moduleName)
-                .setLang(language)
-                .setName(settingName)
-                .build();
+        Setting setting =
+                Setting.newBuilder()
+                        .setModule(moduleName)
+                        .setLang(language)
+                        .setName(settingName)
+                        .build();
 
-        GetRequest request = GetRequest.newBuilder()
-                .setKey(setting)
-                .build();
+        GetRequest request = GetRequest.newBuilder().setKey(setting).build();
 
-        GetResponse settingValue = stub(context).get(request);
+        GetResponse settingValue =
+                this.<GetRequest, GetResponse>executeUnary(
+                        context,
+                        stub(context),
+                        request,
+                        (client, req, headers, continuation) ->
+                                client.get(req, headers, continuation));
         return settingValue.getData().getValue();
     }
 
     public String getSystemSetting(Context context, String settingName) {
 
-        Setting setting = Setting.newBuilder()
-                .setName(settingName)
-                .build();
+        Setting setting = Setting.newBuilder().setName(settingName).build();
 
-        GetRequest request = GetRequest.newBuilder()
-                .setKey(setting)
-                .build();
+        GetRequest request = GetRequest.newBuilder().setKey(setting).build();
 
-        GetResponse settingValue = stub(context).get(request);
+        GetResponse settingValue =
+                this.<GetRequest, GetResponse>executeUnary(
+                        context,
+                        stub(context),
+                        request,
+                        (client, req, headers, continuation) ->
+                                client.get(req, headers, continuation));
         return settingValue.getData().getValue();
     }
 
-    public String getObjectSetting(Context context, String moduleName, BaseModel object, String settingName) {
-        Setting setting = Setting.newBuilder()
-                .setModule(moduleName)
-                .setName(settingName)
-                .setObject(object.getClass().getSimpleName())
-                .setObjectId(String.valueOf(object.getId()))
-                .build();
+    public String getObjectSetting(
+            Context context, String moduleName, BaseModel object, String settingName) {
+        Setting setting =
+                Setting.newBuilder()
+                        .setModule(moduleName)
+                        .setName(settingName)
+                        .setObject(object.getClass().getSimpleName())
+                        .setObjectId(String.valueOf(object.getId()))
+                        .build();
 
-        GetRequest request = GetRequest.newBuilder()
-                .setKey(setting)
-                .build();
+        GetRequest request = GetRequest.newBuilder().setKey(setting).build();
 
-        GetResponse settingValue = stub(context).get(request);
+        GetResponse settingValue =
+                this.<GetRequest, GetResponse>executeUnary(
+                        context,
+                        stub(context),
+                        request,
+                        (client, req, headers, continuation) ->
+                                client.get(req, headers, continuation));
         return settingValue.getData().getValue();
     }
 
-    public String getObjectSettingWithUpdateFallBack(Context context, String moduleName, BaseModel object, String settingName, String globalSettingName) {
+    public String getObjectSettingWithUpdateFallBack(
+            Context context,
+            String moduleName,
+            BaseModel object,
+            String settingName,
+            String globalSettingName) {
         String result = getObjectSetting(context, moduleName, object, settingName);
-        if(TextUtils.isBlank(result)){
+        if (TextUtils.isBlank(result)) {
             result = getSetting(context, moduleName, globalSettingName);
-            if(!TextUtils.isBlank(result)){
+            if (!TextUtils.isBlank(result)) {
                 setObjectSetting(context, moduleName, object, settingName, result);
             }
         }
         return result;
     }
 
-    public String getObjectSettingWithUpdateFallBackFromOtherObject(Context context, String moduleName, BaseModel object, String settingName,  BaseModel fallBackUpdateObject, String fallBackUpdateObjectSettingName) {
+    public String getObjectSettingWithUpdateFallBackFromOtherObject(
+            Context context,
+            String moduleName,
+            BaseModel object,
+            String settingName,
+            BaseModel fallBackUpdateObject,
+            String fallBackUpdateObjectSettingName) {
         String result = getObjectSetting(context, moduleName, object, settingName);
-        if(TextUtils.isBlank(result)){
-            result = getObjectSetting(context, moduleName, fallBackUpdateObject, fallBackUpdateObjectSettingName);
-            if(!TextUtils.isBlank(result)){
+        if (TextUtils.isBlank(result)) {
+            result =
+                    getObjectSetting(
+                            context,
+                            moduleName,
+                            fallBackUpdateObject,
+                            fallBackUpdateObjectSettingName);
+            if (!TextUtils.isBlank(result)) {
                 setObjectSetting(context, moduleName, object, settingName, result);
             }
         }
         return result;
     }
 
-    public String setSetting(Context context, String moduleName, String settingName, Object settingValue) {
+    public String setSetting(
+            Context context, String moduleName, String settingName, Object settingValue) {
         return setSetting(context, moduleName, "", settingName, settingValue);
     }
 
-    public String setSetting(Context context, String moduleName, String settingLang, String settingName, Object settingValue) {
+    public String setSetting(
+            Context context,
+            String moduleName,
+            String settingLang,
+            String settingName,
+            Object settingValue) {
         String stringSettingValue;
         if (settingValue instanceof LocalDateTime dateSettingValue) {
-            stringSettingValue = dateSettingValue.
-                    format(DateTimeFormatter.ISO_DATE_TIME);
+            stringSettingValue = dateSettingValue.format(DateTimeFormatter.ISO_DATE_TIME);
         } else {
             stringSettingValue = String.valueOf(settingValue);
         }
 
-        Setting setting = Setting.newBuilder()
-                .setName(settingName)
-                .setModule(moduleName)
-                .setLang(settingLang)
-                .setObject(settingValue.getClass().getSimpleName())
-                .build();
+        Setting setting =
+                Setting.newBuilder()
+                        .setName(settingName)
+                        .setModule(moduleName)
+                        .setLang(settingLang)
+                        .setObject(settingValue.getClass().getSimpleName())
+                        .build();
 
-        SetRequest request = SetRequest.newBuilder()
-                .setKey(setting)
-                .setValue(stringSettingValue)
-                .build();
+        SetRequest request =
+                SetRequest.newBuilder().setKey(setting).setValue(stringSettingValue).build();
 
-        SetResponse response = stub(context).set(request);
+        SetResponse response =
+                this.<SetRequest, SetResponse>executeUnary(
+                        context,
+                        stub(context),
+                        request,
+                        (client, req, headers, continuation) ->
+                                client.set(req, headers, continuation));
         return response.getData().getValue();
-
     }
 
-    public String setObjectSetting(Context context, String moduleName, BaseModel object, String settingName, Object settingValue) {
+    public String setObjectSetting(
+            Context context,
+            String moduleName,
+            BaseModel object,
+            String settingName,
+            Object settingValue) {
         String stringSettingValue;
         if (settingValue instanceof LocalDateTime dateSettingValue) {
-            stringSettingValue = dateSettingValue.
-                    format(DateTimeFormatter.ISO_DATE_TIME);
+            stringSettingValue = dateSettingValue.format(DateTimeFormatter.ISO_DATE_TIME);
         } else {
             stringSettingValue = String.valueOf(settingValue);
         }
 
-        Setting setting = Setting.newBuilder()
-                .setName(settingName)
-                .setModule(moduleName)
-                .setObject(object.getClass().getSimpleName())
-                .setObjectId(String.valueOf(object.getId()))
-                .build();
+        Setting setting =
+                Setting.newBuilder()
+                        .setName(settingName)
+                        .setModule(moduleName)
+                        .setObject(object.getClass().getSimpleName())
+                        .setObjectId(String.valueOf(object.getId()))
+                        .build();
 
-        SetRequest request = SetRequest.newBuilder()
-                .setKey(setting)
-                .setValue(stringSettingValue)
-                .build();
+        SetRequest request =
+                SetRequest.newBuilder().setKey(setting).setValue(stringSettingValue).build();
 
-        SetResponse response = stub(context).set(request);
+        SetResponse response =
+                this.<SetRequest, SetResponse>executeUnary(
+                        context,
+                        stub(context),
+                        request,
+                        (client, req, headers, continuation) ->
+                                client.set(req, headers, continuation));
         return response.getData().getValue();
-
     }
 
-    public Iterable<SettingObject> listSetting(Context context, String moduleName, String settingNameQuery) {
+    public Iterable<SettingObject> listSetting(
+            Context context, String moduleName, String settingNameQuery) {
 
-        Setting setting = Setting.newBuilder()
-                .setModule(moduleName)
-                .setName(settingNameQuery)
-                .build();
+        Setting setting =
+                Setting.newBuilder().setModule(moduleName).setName(settingNameQuery).build();
 
         return getListIterator(context, setting);
     }
 
-    public Iterable<SettingObject> listObjectSetting(Context context, String moduleName, BaseModel object, String settingNameQuery) {
+    public Iterable<SettingObject> listObjectSetting(
+            Context context, String moduleName, BaseModel object, String settingNameQuery) {
 
-        Setting setting = Setting.newBuilder()
-                .setModule(moduleName)
-                .setName(settingNameQuery)
-                .setObject(object.getClass().getSimpleName())
-                .setObjectId(String.valueOf(object.getId()))
-                .build();
+        Setting setting =
+                Setting.newBuilder()
+                        .setModule(moduleName)
+                        .setName(settingNameQuery)
+                        .setObject(object.getClass().getSimpleName())
+                        .setObjectId(String.valueOf(object.getId()))
+                        .build();
         return getListIterator(context, setting);
     }
 
     private Iterable<SettingObject> getListIterator(Context context, Setting setting) {
-        ListRequest request = ListRequest.newBuilder()
-                .setKey(setting)
-                .build();
+        ListRequest request = ListRequest.newBuilder().setKey(setting).build();
 
-        var response = stub(context).list(request);
+        var response =
+                this.<ListRequest, ListResponse>executeServerStream(
+                        context,
+                        stub(context),
+                        request,
+                        (client, headers, continuation) -> client.list(headers, continuation));
         return IteratorUtil.flatMapIterable(response, ListResponse::getDataList);
     }
 
-
     private Iterable<SettingObject> search(Context context, String query) {
-        var request = SearchRequest.newBuilder()
-                .setQuery(query)
-                .build();
+        var request = SearchRequest.newBuilder().setQuery(query).build();
 
-        var response = stub(context).search(request);
+        var response =
+                this.<SearchRequest, SearchResponse>executeServerStream(
+                        context,
+                        stub(context),
+                        request,
+                        (client, headers, continuation) -> client.search(headers, continuation));
         return IteratorUtil.flatMapIterable(response, SearchResponse::getDataList);
     }
 
-
     public void deleteObjectSetting(Context context, String moduleName, BaseModel object) {
 
-        Setting setting = Setting.newBuilder()
-                .setModule(moduleName)
-                .setName("")
-                .setObject(object.getClass().getSimpleName())
-                .setObjectId(String.valueOf(object.getId()))
-                .build();
-
+        Setting setting =
+                Setting.newBuilder()
+                        .setModule(moduleName)
+                        .setName("")
+                        .setObject(object.getClass().getSimpleName())
+                        .setObjectId(String.valueOf(object.getId()))
+                        .build();
     }
-
-
-
 }

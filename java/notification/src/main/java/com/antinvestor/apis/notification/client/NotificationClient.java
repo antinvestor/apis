@@ -16,41 +16,40 @@ package com.antinvestor.apis.notification.client;
 
 import build.buf.gen.common.v1.*;
 import build.buf.gen.notification.v1.Notification;
-import build.buf.gen.notification.v1.NotificationServiceGrpc;
+import build.buf.gen.notification.v1.NotificationServiceClient;
 import build.buf.gen.notification.v1.SearchResponse;
-import com.antinvestor.apis.common.base.GrpcClientBase;
+import com.antinvestor.apis.common.base.ConnectClientBase;
 import com.antinvestor.apis.common.config.DefaultConfig;
 import com.antinvestor.apis.common.context.Context;
 import com.antinvestor.apis.common.utilities.IteratorUtil;
+import com.antinvestor.apis.common.utilities.ProtoStructUtil;
 import com.antinvestor.apis.common.utilities.TextUtils;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-/**
- * The NotificationClient class represents a client for accessing notification services.
- */
+/** The NotificationClient class represents a client for accessing notification services. */
 @ApplicationScoped
-public class NotificationClient extends GrpcClientBase<NotificationServiceGrpc.NotificationServiceBlockingStub> {
+public class NotificationClient extends ConnectClientBase<NotificationServiceClient> {
 
     @Inject
     public NotificationClient(Context context) {
-        setupChannelBuilder(context);
+        setupClient(context);
     }
 
     @Override
     protected ConnectionConfig getConnectionConfig(Context context, DefaultConfig defaultConfig) {
         var cfg = (NotificationConfig) defaultConfig;
-        return new ConnectionConfig(cfg.notificationsHostUrl(), cfg.notificationsHostPort(), cfg.authInterceptorEnabled());
+        return new ConnectionConfig(
+                cfg.notificationsHostUrl(),
+                cfg.notificationsHostPort(),
+                cfg.authInterceptorEnabled());
     }
 
-    public NotificationServiceGrpc.NotificationServiceBlockingStub stub(Context context) {
-
-        var stub = NotificationServiceGrpc.newBlockingStub(getChannel());
-        return setupStub(context, stub);
+    public NotificationServiceClient stub(Context context) {
+        return new NotificationServiceClient(getProtocolClient());
     }
 
     /**
@@ -61,30 +60,45 @@ public class NotificationClient extends GrpcClientBase<NotificationServiceGrpc.N
      */
     public Optional<Notification> getById(Context context, String notificationId) {
         SearchRequest searchFilter = SearchRequest.newBuilder().setIdQuery(notificationId).build();
-        var result = stub(context).search(searchFilter);
+        var result =
+                this.<SearchRequest, SearchResponse>executeServerStream(
+                        context,
+                        stub(context),
+                        searchFilter,
+                        (client, headers, continuation) -> client.search(headers, continuation));
         var iterable = IteratorUtil.flatMapIterable(result, SearchResponse::getDataList);
         return IteratorUtil.firstOf(iterable);
     }
 
-
     public StatusResponse update(Context context, STATE state, STATUS status, String externalId) {
 
-        StatusUpdateRequest statusUpdateRequest = StatusUpdateRequest
-                .newBuilder()
-                .setState(state)
-                .setStatus(status)
-                .setExternalId(externalId)
-                .build();
+        StatusUpdateRequest statusUpdateRequest =
+                StatusUpdateRequest.newBuilder()
+                        .setState(state)
+                        .setStatus(status)
+                        .setExternalId(externalId)
+                        .build();
 
-        return stub(context).statusUpdate(statusUpdateRequest).getData();
+        return this.<StatusUpdateRequest, StatusUpdateResponse>executeUnary(
+                        context,
+                        stub(context),
+                        statusUpdateRequest,
+                        (client, request, headers, continuation) ->
+                                client.statusUpdate(request, headers, continuation))
+                .getData();
     }
 
     public Iterable<Notification> page(Context context, int page, int size) {
         return search(context, null, null, null, page, size);
     }
 
-
-    public Iterable<Notification> search(Context context, String query, LocalDateTime startDate, LocalDateTime endDate, int page, int size) {
+    public Iterable<Notification> search(
+            Context context,
+            String query,
+            LocalDateTime startDate,
+            LocalDateTime endDate,
+            int page,
+            int size) {
 
         var filterBuilder = SearchRequest.newBuilder();
 
@@ -92,24 +106,27 @@ public class NotificationClient extends GrpcClientBase<NotificationServiceGrpc.N
             filterBuilder = filterBuilder.setQuery(query);
         }
 
-        var limitsBuilder = Pagination.newBuilder();
-        limitsBuilder.setCount(size)
-                .setPage(page);
+        filterBuilder.setCursor(
+                PageCursor.newBuilder().setLimit(size).setPage(String.valueOf(page)).build());
 
-
+        Map<String, Object> extras = new LinkedHashMap<>();
         if (Objects.nonNull(startDate)) {
-            limitsBuilder = limitsBuilder.setStartDate(startDate.format(DateTimeFormatter.ISO_DATE_TIME));
+            extras.put("start_date", startDate.format(DateTimeFormatter.ISO_DATE_TIME));
         }
-
         if (Objects.nonNull(endDate)) {
-            limitsBuilder = limitsBuilder.setEndDate(endDate.format(DateTimeFormatter.ISO_DATE_TIME));
+            extras.put("end_date", endDate.format(DateTimeFormatter.ISO_DATE_TIME));
+        }
+        if (!extras.isEmpty()) {
+            filterBuilder.setExtras(ProtoStructUtil.fromMap(extras));
         }
 
-        filterBuilder.setLimits(limitsBuilder.build());
-
-        var response = stub(context).search(filterBuilder.build());
+        var response =
+                this.<SearchRequest, SearchResponse>executeServerStream(
+                        context,
+                        stub(context),
+                        filterBuilder.build(),
+                        (client, headers, continuation) -> client.search(headers, continuation));
 
         return IteratorUtil.flatMapIterable(response, SearchResponse::getDataList);
-
     }
 }

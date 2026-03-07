@@ -21,15 +21,15 @@ import com.antinvestor.apis.common.exceptions.UnRetriableException;
 import com.antinvestor.apis.common.interceptor.oauth2.JwtKeyResolver;
 import io.grpc.*;
 import io.jsonwebtoken.*;
+import java.security.Key;
+import java.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.security.Key;
-import java.util.Objects;
-
 public class ServerSideInterceptor implements ServerInterceptor {
 
-    public static final Context.Key<com.antinvestor.apis.common.context.Context> CONTEXT_HEADER_KEY = Context.key("context");
+    public static final Context.Key<com.antinvestor.apis.common.context.Context>
+            CONTEXT_HEADER_KEY = Context.key("context");
     private static final Logger log = LoggerFactory.getLogger(ServerSideInterceptor.class);
     private static final Metadata.Key<String> JWT_BEARER_HEADER_KEY =
             Metadata.Key.of("authorization", Metadata.ASCII_STRING_MARSHALLER);
@@ -43,15 +43,12 @@ public class ServerSideInterceptor implements ServerInterceptor {
         this.context = (DefaultContext) context;
 
         var optionalConfig = this.context.getConfig();
-        if (optionalConfig.isEmpty())
-            throw new RuntimeException("config is not set");
+        if (optionalConfig.isEmpty()) throw new RuntimeException("config is not set");
         var config = optionalConfig.get();
 
         this.issuer = config.jwtVerifyIssuer();
         this.audience = config.jwtVerifyAudience();
         this.oauth2ServerUrl = config.oauth2ServerUrl();
-
-
     }
 
     @Override
@@ -74,32 +71,32 @@ public class ServerSideInterceptor implements ServerInterceptor {
 
         try {
 
-
-            Jws<Claims> jws = Jwts.parser()
-                    .keyLocator(keyLocatorAdapter)
-                    .requireIssuer(issuer)
-                    .requireAudience(audience)
-                    .build()
-                    .parseSignedClaims(jwtHeader);
+            Jws<Claims> jws =
+                    Jwts.parser()
+                            .keyLocator(keyLocatorAdapter)
+                            .requireIssuer(issuer)
+                            .requireAudience(audience)
+                            .build()
+                            .parseSignedClaims(jwtHeader);
 
             Claims claims = jws.getPayload();
 
-            final com.antinvestor.apis.common.context.Context ctx = context
-                    .add(DefaultKeys.TENANT_ID, claims.get(DefaultKeys.TENANT_ID.name()))
-                    .add(DefaultKeys.PARTITION_ID, claims.get(DefaultKeys.PARTITION_ID.name()))
-                    .add(DefaultKeys.ACCESS_ID, claims.get(DefaultKeys.ACCESS_ID.name()))
-                    .add(DefaultKeys.CONTACT_ID, claims.get(DefaultKeys.CONTACT_ID.name()));
+            final com.antinvestor.apis.common.context.Context ctx =
+                    context.add(DefaultKeys.TENANT_ID, claims.get(DefaultKeys.TENANT_ID.name()))
+                            .add(
+                                    DefaultKeys.PARTITION_ID,
+                                    claims.get(DefaultKeys.PARTITION_ID.name()))
+                            .add(DefaultKeys.ACCESS_ID, claims.get(DefaultKeys.ACCESS_ID.name()))
+                            .add(DefaultKeys.CONTACT_ID, claims.get(DefaultKeys.CONTACT_ID.name()));
 
             Context context = Context.current().withValue(CONTEXT_HEADER_KEY, ctx);
             return Contexts.interceptCall(context, call, requestHeaders, next);
         } catch (MissingClaimException | IncorrectClaimException exception) {
 
-            call.close(Status.UNAUTHENTICATED.withDescription(exception.getLocalizedMessage()),
+            call.close(
+                    Status.UNAUTHENTICATED.withDescription(exception.getLocalizedMessage()),
                     new Metadata());
-            return new ServerCall.Listener<>() {
-            };
-
+            return new ServerCall.Listener<>() {};
         }
     }
-
 }

@@ -29,5 +29,4 @@ public interface PartitionConfig extends DefaultConfig {
     @Config.DefaultValue("true")
     @Config.Key("${product}.${env}.partitions.auth.interceptor.enabled")
     Boolean authInterceptorEnabled();
-
 }

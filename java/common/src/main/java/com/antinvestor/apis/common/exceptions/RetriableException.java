@@ -65,7 +65,6 @@
  *      invalidating or conflicting any part to this license.
  */
 
-
 package com.antinvestor.apis.common.exceptions;
 
 /**
@@ -106,6 +105,4 @@ public class RetriableException extends RuntimeException {
     public int getStatus() {
         return status;
     }
-
-
 }

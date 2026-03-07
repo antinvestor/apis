@@ -1,5 +1,4 @@
 dependencies {
    implementation(project(":common"))
-   implementation("build.buf.gen:antinvestor_settingz_protocolbuffers_java:33.1.0.1.20251119162035.17528daea270")
-   implementation("build.buf.gen:antinvestor_settingz_grpc_java:1.77.0.1.20251119162035.17528daea270")
+   implementation("build.buf.gen:antinvestor_settingz_connectrpc_kotlin:0.7.4.2.20260219062126.e9b0d15a670e")
 }

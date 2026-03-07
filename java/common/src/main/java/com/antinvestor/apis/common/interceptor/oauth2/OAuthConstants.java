@@ -34,6 +34,6 @@ public interface OAuthConstants {
     String RESPONSE_TYPE = "response_type";
     String RESPONSE_TYPE_CODE = "code";
 
-    //not OAuth specific
+    // not OAuth specific
     String USER_AGENT_HEADER_NAME = "User-Agent";
 }

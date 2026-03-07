@@ -20,27 +20,27 @@ import com.antinvestor.apis.common.exceptions.RetriableException;
 import com.antinvestor.apis.common.exceptions.UnRetriableException;
 import com.antinvestor.apis.common.interceptor.oauth2.Oauth2ClientHandler;
 import com.antinvestor.apis.common.utilities.AuthenticationUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.http.HttpRequest;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Consumer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ClientSideHttpInterceptorHolder {
 
-
     public static final String BEARER_TYPE = "Bearer";
 
-    private static final Logger log = LoggerFactory.getLogger(ClientSideHttpInterceptorHolder.class);
+    private static final Logger log =
+            LoggerFactory.getLogger(ClientSideHttpInterceptorHolder.class);
     private static final String JWT_HTTP_AUTH_HEADER_KEY = "Authorization";
 
     private final Map<String, Oauth2ClientHandler> clientOauth2HandlerMap;
 
-    private ClientSideHttpInterceptorHolder(Map<String, Oauth2ClientHandler> clientOauth2HandlerMap) {
+    private ClientSideHttpInterceptorHolder(
+            Map<String, Oauth2ClientHandler> clientOauth2HandlerMap) {
         this.clientOauth2HandlerMap = clientOauth2HandlerMap;
     }
 
@@ -54,7 +54,6 @@ public class ClientSideHttpInterceptorHolder {
         var authConfig = authConfigOptional.get();
 
         return new ClientSideHttpInterceptorHolder(authConfig.getTenantHandlers());
-
     }
 
     public Consumer<HttpRequest.Builder> getInterceptor(Context context) {
@@ -67,22 +66,25 @@ public class ClientSideHttpInterceptorHolder {
         var tenantId = optionalTenantId.get();
 
         return builder -> {
-
             try {
 
                 var clientHandler = clientOauth2HandlerMap.get(tenantId);
                 if (Objects.isNull(clientHandler)) {
-                    throw new RuntimeException(String.format(" client handler for tenant : %s is missing", tenantId));
+                    throw new RuntimeException(
+                            String.format(" client handler for tenant : %s is missing", tenantId));
                 }
 
                 var jwtBearerToken = clientHandler.getValidBearerToken();
-                builder.header(JWT_HTTP_AUTH_HEADER_KEY, String.format("%s %s", BEARER_TYPE, jwtBearerToken));
-            } catch (IOException | InterruptedException | URISyntaxException |
-                     UnRetriableException | RetriableException e) {
+                builder.header(
+                        JWT_HTTP_AUTH_HEADER_KEY,
+                        String.format("%s %s", BEARER_TYPE, jwtBearerToken));
+            } catch (IOException
+                    | InterruptedException
+                    | URISyntaxException
+                    | UnRetriableException
+                    | RetriableException e) {
                 throw new RuntimeException(e);
             }
         };
     }
-
-
 }

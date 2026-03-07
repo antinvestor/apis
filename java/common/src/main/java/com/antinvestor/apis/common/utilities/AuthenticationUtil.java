@@ -18,15 +18,14 @@ import com.antinvestor.apis.common.context.Context;
 import com.antinvestor.apis.common.context.DefaultContext;
 import com.antinvestor.apis.common.interceptor.oauth2.Oauth2ClientHandler;
 import com.moandjiezana.toml.Toml;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class AuthenticationUtil {
 
@@ -61,26 +60,42 @@ public class AuthenticationUtil {
     }
 
     public Optional<Toml> getTenantTable(String tenantId) {
-        return getTenantTables().stream().filter(table -> table.getString(TENANT_AUTH_ID).equals(tenantId)).findFirst();
+        return getTenantTables().stream()
+                .filter(table -> table.getString(TENANT_AUTH_ID).equals(tenantId))
+                .findFirst();
     }
 
-    public Map<String, Oauth2ClientHandler> getTenantHandlers(){
+    public Map<String, Oauth2ClientHandler> getTenantHandlers() {
         var handlersMap = new ConcurrentHashMap<String, Oauth2ClientHandler>();
 
         for (var tenantConfig : getTenantTables()) {
 
-            String oauth2ServerUri = tenantConfig.getString(AuthenticationUtil.TENANT_OAUTH2_SERVER);
+            String oauth2ServerUri =
+                    tenantConfig.getString(AuthenticationUtil.TENANT_OAUTH2_SERVER);
             String authApiKey = tenantConfig.getString(AuthenticationUtil.TENANT_AUTH_API_KEY);
             String authSecret = tenantConfig.getString(AuthenticationUtil.TENANT_AUTH_API_SECRET);
             String userAgent = tenantConfig.getString(AuthenticationUtil.TENANT_AUTH_USER_AGENT);
-            List<String> authAudience = tenantConfig.getList(AuthenticationUtil.TENANT_AUTH_AUDIENCE, List.of());
-            List<String> authScopes = tenantConfig.getList(AuthenticationUtil.TENANT_AUTH_SCOPE, List.of());
+            List<String> authAudience =
+                    tenantConfig.getList(AuthenticationUtil.TENANT_AUTH_AUDIENCE, List.of());
+            List<String> authScopes =
+                    tenantConfig.getList(AuthenticationUtil.TENANT_AUTH_SCOPE, List.of());
 
             var tenantId = tenantConfig.getString(AuthenticationUtil.TENANT_AUTH_ID);
-            var handler = Oauth2ClientHandler.from(oauth2ServerUri, authApiKey, authSecret, authAudience, authScopes, userAgent);
+            var handler =
+                    Oauth2ClientHandler.from(
+                            oauth2ServerUri,
+                            authApiKey,
+                            authSecret,
+                            authAudience,
+                            authScopes,
+                            userAgent);
             if (handler.isEmpty()) {
-                log.atWarn().addKeyValue("tenantId", tenantId).addKeyValue("configuration", tenantConfig.toMap()).log("could not create handler from tenant config");
-                throw new RuntimeException("could not instantiate handler from configuration provided ");
+                log.atWarn()
+                        .addKeyValue("tenantId", tenantId)
+                        .addKeyValue("configuration", tenantConfig.toMap())
+                        .log("could not create handler from tenant config");
+                throw new RuntimeException(
+                        "could not instantiate handler from configuration provided ");
             }
 
             handlersMap.put(tenantId, handler.get());
@@ -94,6 +109,8 @@ public class AuthenticationUtil {
     }
 
     public List<String> getTableKeys() {
-        return getTenantTables().stream().map(table -> table.getString(TENANT_AUTH_ID)).collect(Collectors.toList());
+        return getTenantTables().stream()
+                .map(table -> table.getString(TENANT_AUTH_ID))
+                .collect(Collectors.toList());
     }
 }

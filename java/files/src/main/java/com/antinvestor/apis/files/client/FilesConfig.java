@@ -28,5 +28,4 @@ public interface FilesConfig extends DefaultConfig {
     @DefaultValue("true")
     @Key("${product}.${env}.files.auth.interceptor.enabled")
     Boolean authInterceptorEnabled();
-
 }

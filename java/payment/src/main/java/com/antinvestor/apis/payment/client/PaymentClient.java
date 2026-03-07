@@ -14,58 +14,67 @@
 
 package com.antinvestor.apis.payment.client;
 
-
-import build.buf.gen.common.v1.Pagination;
+import build.buf.gen.common.v1.PageCursor;
 import build.buf.gen.common.v1.SearchRequest;
 import build.buf.gen.common.v1.StatusResponse;
 import build.buf.gen.common.v1.StatusUpdateRequest;
+import build.buf.gen.common.v1.StatusUpdateResponse;
 import build.buf.gen.payment.v1.*;
-import com.antinvestor.apis.common.base.GrpcClientBase;
+import com.antinvestor.apis.common.base.ConnectClientBase;
 import com.antinvestor.apis.common.config.DefaultConfig;
 import com.antinvestor.apis.common.context.Context;
 import com.antinvestor.apis.common.utilities.IteratorUtil;
-import io.grpc.ManagedChannel;
+import com.antinvestor.apis.common.utilities.ProtoStructUtil;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
 @ApplicationScoped
-public class PaymentClient extends GrpcClientBase<PaymentServiceGrpc.PaymentServiceBlockingStub> {
-
-    public PaymentClient(ManagedChannel channel) {
-        setChannel( channel);
-    }
+public class PaymentClient extends ConnectClientBase<PaymentServiceClient> {
 
     @Inject
     public PaymentClient(Context context) {
-        setupChannelBuilder(context);
+        setupClient(context);
     }
 
     @Override
     protected ConnectionConfig getConnectionConfig(Context context, DefaultConfig defaultConfig) {
         var cfg = (PaymentConfig) defaultConfig;
-        return  new ConnectionConfig(cfg.paymentsHostUrl(), cfg.paymentsHostPort(), cfg.authInterceptorEnabled() );
+        return new ConnectionConfig(
+                cfg.paymentsHostUrl(), cfg.paymentsHostPort(), cfg.authInterceptorEnabled());
     }
 
-    public PaymentServiceGrpc.PaymentServiceBlockingStub stub(Context context) {
-        var stub =  PaymentServiceGrpc.newBlockingStub(getChannel());
-        return setupStub(context, stub);
+    public PaymentServiceClient stub(Context context) {
+        return new PaymentServiceClient(getProtocolClient());
     }
 
     public Optional<Payment> getByID(Context context, String paymentID) {
 
         SearchRequest filter = SearchRequest.newBuilder().setIdQuery(paymentID).build();
 
-        var paymentIterator = stub(context).search(filter);
+        var paymentIterator =
+                this.<SearchRequest, SearchResponse>executeServerStream(
+                        context,
+                        stub(context),
+                        filter,
+                        (client, headers, continuation) -> client.search(headers, continuation));
         var stream = IteratorUtil.flatMapIterable(paymentIterator, SearchResponse::getDataList);
         return IteratorUtil.firstOf(stream);
     }
 
-    public Iterable<Payment> search(Context context, Integer stateInt, String query, LocalDateTime startDate, LocalDateTime endDate, int page, int size) {
+    public Iterable<Payment> search(
+            Context context,
+            Integer stateInt,
+            String query,
+            LocalDateTime startDate,
+            LocalDateTime endDate,
+            int page,
+            int size) {
 
         SearchRequest.Builder filterBuilder = SearchRequest.newBuilder();
 
@@ -73,41 +82,70 @@ public class PaymentClient extends GrpcClientBase<PaymentServiceGrpc.PaymentServ
             filterBuilder = filterBuilder.setQuery(query);
         }
 
-        var limitsBuilder = Pagination.newBuilder();
-        limitsBuilder.setCount(size)
-                .setPage(page);
+        filterBuilder.setCursor(
+                PageCursor.newBuilder().setLimit(size).setPage(String.valueOf(page)).build());
 
-
+        Map<String, Object> extras = new LinkedHashMap<>();
+        if (Objects.nonNull(stateInt)) {
+            extras.put("state", stateInt);
+        }
         if (Objects.nonNull(startDate)) {
-            limitsBuilder = limitsBuilder.setStartDate(startDate.format(DateTimeFormatter.ISO_DATE_TIME));
+            extras.put("start_date", startDate.format(DateTimeFormatter.ISO_DATE_TIME));
         }
-
         if (Objects.nonNull(endDate)) {
-            limitsBuilder = limitsBuilder.setEndDate(endDate.format(DateTimeFormatter.ISO_DATE_TIME));
+            extras.put("end_date", endDate.format(DateTimeFormatter.ISO_DATE_TIME));
         }
-
-        filterBuilder.setLimits(limitsBuilder.build());
-        var response = stub(context).search(filterBuilder.build());
+        if (!extras.isEmpty()) {
+            filterBuilder.setExtras(ProtoStructUtil.fromMap(extras));
+        }
+        var response =
+                this.<SearchRequest, SearchResponse>executeServerStream(
+                        context,
+                        stub(context),
+                        filterBuilder.build(),
+                        (client, headers, continuation) -> client.search(headers, continuation));
         return IteratorUtil.flatMapIterable(response, SearchResponse::getDataList);
     }
 
     public StatusResponse send(Context context, Payment payment) {
         var request = SendRequest.newBuilder().setData(payment).build();
-        return stub(context).send(request).getData();
+        return this.<SendRequest, SendResponse>executeUnary(
+                        context,
+                        stub(context),
+                        request,
+                        (client, req, headers, continuation) ->
+                                client.send(req, headers, continuation))
+                .getData();
     }
 
     public StatusResponse receive(Context context, Payment payment) {
         var request = ReceiveRequest.newBuilder().setData(payment).build();
-        return stub(context).receive(request).getData();
+        return this.<ReceiveRequest, ReceiveResponse>executeUnary(
+                        context,
+                        stub(context),
+                        request,
+                        (client, req, headers, continuation) ->
+                                client.receive(req, headers, continuation))
+                .getData();
     }
 
     public StatusResponse update(Context context, StatusUpdateRequest update) {
 
-        return stub(context).statusUpdate(update).getData();
+        return this.<StatusUpdateRequest, StatusUpdateResponse>executeUnary(
+                        context,
+                        stub(context),
+                        update,
+                        (client, req, headers, continuation) ->
+                                client.statusUpdate(req, headers, continuation))
+                .getData();
     }
 
-
     public ReconcileResponse reconcile(Context context, ReconcileRequest reconPayment) {
-        return stub(context).reconcile(reconPayment);
+        return this.<ReconcileRequest, ReconcileResponse>executeUnary(
+                context,
+                stub(context),
+                reconPayment,
+                (client, request, headers, continuation) ->
+                        client.reconcile(request, headers, continuation));
     }
 }

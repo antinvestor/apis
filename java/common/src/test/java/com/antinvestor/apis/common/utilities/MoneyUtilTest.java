@@ -14,28 +14,53 @@
 
 package com.antinvestor.apis.common.utilities;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import com.antinvestor.apis.common.exceptions.UnRetriableException;
 import com.google.type.Money;
+import java.math.BigDecimal;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.math.BigDecimal;
-import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 class MoneyUtilTest {
 
     static Stream<Arguments> fromArguments() {
         return Stream.of(
-                Arguments.of(new BigDecimal("123.456789"), "USD", Money.newBuilder().setCurrencyCode("USD").setUnits(123).setNanos(456789000).build()),
-                Arguments.of(new BigDecimal("0"), "EUR", Money.newBuilder().setCurrencyCode("EUR").setUnits(0).setNanos(0).build()),
-                Arguments.of(new BigDecimal("-99.999999999"), "JPY", Money.newBuilder().setCurrencyCode("JPY").setUnits(-99).setNanos(-999999999).build()),
-                Arguments.of(new BigDecimal("0.000000001"), "GBP", Money.newBuilder().setCurrencyCode("GBP").setUnits(0).setNanos(1).build()),
-                Arguments.of(new BigDecimal("-0.000000001"), "CHF", Money.newBuilder().setCurrencyCode("CHF").setUnits(0).setNanos(-1).build())
-        );
+                Arguments.of(
+                        new BigDecimal("123.456789"),
+                        "USD",
+                        Money.newBuilder()
+                                .setCurrencyCode("USD")
+                                .setUnits(123)
+                                .setNanos(456789000)
+                                .build()),
+                Arguments.of(
+                        new BigDecimal("0"),
+                        "EUR",
+                        Money.newBuilder().setCurrencyCode("EUR").setUnits(0).setNanos(0).build()),
+                Arguments.of(
+                        new BigDecimal("-99.999999999"),
+                        "JPY",
+                        Money.newBuilder()
+                                .setCurrencyCode("JPY")
+                                .setUnits(-99)
+                                .setNanos(-999999999)
+                                .build()),
+                Arguments.of(
+                        new BigDecimal("0.000000001"),
+                        "GBP",
+                        Money.newBuilder().setCurrencyCode("GBP").setUnits(0).setNanos(1).build()),
+                Arguments.of(
+                        new BigDecimal("-0.000000001"),
+                        "CHF",
+                        Money.newBuilder()
+                                .setCurrencyCode("CHF")
+                                .setUnits(0)
+                                .setNanos(-1)
+                                .build()));
     }
 
     @ParameterizedTest
@@ -48,34 +73,62 @@ class MoneyUtilTest {
 
     static Stream<Arguments> toBigDecimalArguments() {
         return Stream.of(
-                Arguments.of(Money.newBuilder().setCurrencyCode("USD").setUnits(123).setNanos(456789000).build(), new BigDecimal("123.456789")),
-                Arguments.of(Money.newBuilder().setCurrencyCode("EUR").setUnits(0).setNanos(0).build(), new BigDecimal("0.000000000")),
-                Arguments.of(Money.newBuilder().setCurrencyCode("JPY").setUnits(-100).setNanos(1).build(), new BigDecimal("-99.999999999")),
-                Arguments.of(Money.newBuilder().setCurrencyCode("GBP").setUnits(0).setNanos(1).build(), new BigDecimal("0.000000001")),
-                Arguments.of(Money.newBuilder().setCurrencyCode("CHF").setUnits(0).setNanos(-1).build(), new BigDecimal("-0.000000001"))
-        );
+                Arguments.of(
+                        Money.newBuilder()
+                                .setCurrencyCode("USD")
+                                .setUnits(123)
+                                .setNanos(456789000)
+                                .build(),
+                        new BigDecimal("123.456789")),
+                Arguments.of(
+                        Money.newBuilder().setCurrencyCode("EUR").setUnits(0).setNanos(0).build(),
+                        new BigDecimal("0.000000000")),
+                Arguments.of(
+                        Money.newBuilder()
+                                .setCurrencyCode("JPY")
+                                .setUnits(-100)
+                                .setNanos(1)
+                                .build(),
+                        new BigDecimal("-99.999999999")),
+                Arguments.of(
+                        Money.newBuilder().setCurrencyCode("GBP").setUnits(0).setNanos(1).build(),
+                        new BigDecimal("0.000000001")),
+                Arguments.of(
+                        Money.newBuilder().setCurrencyCode("CHF").setUnits(0).setNanos(-1).build(),
+                        new BigDecimal("-0.000000001")));
     }
-
 
     @ParameterizedTest
     @MethodSource("toBigDecimalArguments")
     @DisplayName("Test toBigDecimal(Money)")
     void testToBigDecimal(Money money, BigDecimal expected) {
         BigDecimal actual = MoneyUtil.toBigDecimal(money);
-        assertEquals(expected.compareTo(actual) , 0);
+        assertEquals(expected.compareTo(actual), 0);
     }
-
 
     static Stream<Arguments> isEqualArguments() {
         return Stream.of(
-                Arguments.of(MoneyUtil.from(new BigDecimal("123.456789"), "USD"), MoneyUtil.from(new BigDecimal("123.456789"), "USD"), true),
-                Arguments.of(MoneyUtil.from(new BigDecimal("0"), "EUR"), MoneyUtil.from(new BigDecimal("0"), "EUR"), true),
-                Arguments.of(MoneyUtil.from(new BigDecimal("-99.999999999"), "JPY"), MoneyUtil.from(new BigDecimal("-99.999999999"), "JPY"), true),
-                Arguments.of(MoneyUtil.from(new BigDecimal("0.000000001"), "GBP"), MoneyUtil.from(new BigDecimal("0.000000001"), "GBP"), true),
-                Arguments.of(MoneyUtil.from(new BigDecimal("100.000000000"), "USD"), MoneyUtil.from(new BigDecimal("123.456789"), "USD"), false)
-        );
+                Arguments.of(
+                        MoneyUtil.from(new BigDecimal("123.456789"), "USD"),
+                        MoneyUtil.from(new BigDecimal("123.456789"), "USD"),
+                        true),
+                Arguments.of(
+                        MoneyUtil.from(new BigDecimal("0"), "EUR"),
+                        MoneyUtil.from(new BigDecimal("0"), "EUR"),
+                        true),
+                Arguments.of(
+                        MoneyUtil.from(new BigDecimal("-99.999999999"), "JPY"),
+                        MoneyUtil.from(new BigDecimal("-99.999999999"), "JPY"),
+                        true),
+                Arguments.of(
+                        MoneyUtil.from(new BigDecimal("0.000000001"), "GBP"),
+                        MoneyUtil.from(new BigDecimal("0.000000001"), "GBP"),
+                        true),
+                Arguments.of(
+                        MoneyUtil.from(new BigDecimal("100.000000000"), "USD"),
+                        MoneyUtil.from(new BigDecimal("123.456789"), "USD"),
+                        false));
     }
-
 
     @ParameterizedTest
     @MethodSource("isEqualArguments")
@@ -85,15 +138,13 @@ class MoneyUtilTest {
         assertEquals(expected, actual);
     }
 
-
     static Stream<Arguments> isZeroArguments() {
         return Stream.of(
                 Arguments.of(MoneyUtil.zeroMoney("USD"), true),
                 Arguments.of(MoneyUtil.zeroMoney("EUR"), true),
                 Arguments.of(MoneyUtil.zeroMoney("JPY"), true),
                 Arguments.of(MoneyUtil.from(new BigDecimal("0.000000001"), "GBP"), false),
-                Arguments.of(MoneyUtil.from(new BigDecimal("-0.000000001"), "CHF"), false)
-        );
+                Arguments.of(MoneyUtil.from(new BigDecimal("-0.000000001"), "CHF"), false));
     }
 
     @ParameterizedTest
@@ -104,16 +155,30 @@ class MoneyUtilTest {
         assertEquals(expected, actual);
     }
 
-
     static Stream<Arguments> isGreaterThanArguments() {
         return Stream.of(
-                Arguments.of(MoneyUtil.from(new BigDecimal("123.456789"), "USD"), MoneyUtil.from(new BigDecimal("100.456789"), "USD"), true),
-                Arguments.of(MoneyUtil.from(new BigDecimal("123.456789"), "USD"), MoneyUtil.from(new BigDecimal("123.456789"), "USD"), false),
-                Arguments.of(MoneyUtil.from(new BigDecimal("-123.456789"), "USD"), MoneyUtil.from(new BigDecimal("-200.456789"), "USD"), true),
-                Arguments.of(MoneyUtil.from(new BigDecimal("0.000000001"), "GBP"), MoneyUtil.from(new BigDecimal("0"), "GBP"), true),
-                Arguments.of(MoneyUtil.from(new BigDecimal("-0.000000001"), "CHF"), MoneyUtil.from(new BigDecimal("0"), "CHF"), false)
-        );
+                Arguments.of(
+                        MoneyUtil.from(new BigDecimal("123.456789"), "USD"),
+                        MoneyUtil.from(new BigDecimal("100.456789"), "USD"),
+                        true),
+                Arguments.of(
+                        MoneyUtil.from(new BigDecimal("123.456789"), "USD"),
+                        MoneyUtil.from(new BigDecimal("123.456789"), "USD"),
+                        false),
+                Arguments.of(
+                        MoneyUtil.from(new BigDecimal("-123.456789"), "USD"),
+                        MoneyUtil.from(new BigDecimal("-200.456789"), "USD"),
+                        true),
+                Arguments.of(
+                        MoneyUtil.from(new BigDecimal("0.000000001"), "GBP"),
+                        MoneyUtil.from(new BigDecimal("0"), "GBP"),
+                        true),
+                Arguments.of(
+                        MoneyUtil.from(new BigDecimal("-0.000000001"), "CHF"),
+                        MoneyUtil.from(new BigDecimal("0"), "CHF"),
+                        false));
     }
+
     @ParameterizedTest
     @MethodSource("isGreaterThanArguments")
     @DisplayName("Test isGreaterThan(Money, Money)")
@@ -128,8 +193,7 @@ class MoneyUtilTest {
                 Arguments.of(MoneyUtil.from(new BigDecimal("0"), "EUR"), false),
                 Arguments.of(MoneyUtil.from(new BigDecimal("-99.999999999"), "JPY"), false),
                 Arguments.of(MoneyUtil.from(new BigDecimal("0.000000001"), "GBP"), true),
-                Arguments.of(MoneyUtil.from(new BigDecimal("-0.000000001"), "CHF"), false)
-        );
+                Arguments.of(MoneyUtil.from(new BigDecimal("-0.000000001"), "CHF"), false));
     }
 
     @ParameterizedTest
@@ -142,14 +206,27 @@ class MoneyUtilTest {
 
     static Stream<Arguments> isLessThanArguments() {
         return Stream.of(
-                Arguments.of(MoneyUtil.from(new BigDecimal("123.456789"), "USD"), MoneyUtil.from(new BigDecimal("200.456789"), "USD"), true),
-                Arguments.of(MoneyUtil.from(new BigDecimal("123.456789"), "USD"), MoneyUtil.from(new BigDecimal("123.456789"), "USD"), false),
-                Arguments.of(MoneyUtil.from(new BigDecimal("-123.456789"), "USD"), MoneyUtil.from(new BigDecimal("-100.456789"), "USD"), true),
-                Arguments.of(MoneyUtil.from(new BigDecimal("0.000000001"), "GBP"), MoneyUtil.from(new BigDecimal("0.000000002"), "GBP"), true),
-                Arguments.of(MoneyUtil.from(new BigDecimal("-0.000000001"), "CHF"), MoneyUtil.from(new BigDecimal("-0.000000002"), "CHF"), false)
-        );
+                Arguments.of(
+                        MoneyUtil.from(new BigDecimal("123.456789"), "USD"),
+                        MoneyUtil.from(new BigDecimal("200.456789"), "USD"),
+                        true),
+                Arguments.of(
+                        MoneyUtil.from(new BigDecimal("123.456789"), "USD"),
+                        MoneyUtil.from(new BigDecimal("123.456789"), "USD"),
+                        false),
+                Arguments.of(
+                        MoneyUtil.from(new BigDecimal("-123.456789"), "USD"),
+                        MoneyUtil.from(new BigDecimal("-100.456789"), "USD"),
+                        true),
+                Arguments.of(
+                        MoneyUtil.from(new BigDecimal("0.000000001"), "GBP"),
+                        MoneyUtil.from(new BigDecimal("0.000000002"), "GBP"),
+                        true),
+                Arguments.of(
+                        MoneyUtil.from(new BigDecimal("-0.000000001"), "CHF"),
+                        MoneyUtil.from(new BigDecimal("-0.000000002"), "CHF"),
+                        false));
     }
-
 
     @ParameterizedTest
     @MethodSource("isLessThanArguments")
@@ -159,16 +236,15 @@ class MoneyUtilTest {
         assertEquals(expected, actual);
     }
 
-
     static Stream<Arguments> isLessThanZeroArguments() {
         return Stream.of(
                 Arguments.of(MoneyUtil.from(new BigDecimal("123.456789"), "USD"), false),
                 Arguments.of(MoneyUtil.from(new BigDecimal("0"), "EUR"), false),
                 Arguments.of(MoneyUtil.from(new BigDecimal("-99.999999999"), "JPY"), true),
                 Arguments.of(MoneyUtil.from(new BigDecimal("0.000000001"), "GBP"), false),
-                Arguments.of(MoneyUtil.from(new BigDecimal("-0.000000001"), "CHF"), true)
-        );
+                Arguments.of(MoneyUtil.from(new BigDecimal("-0.000000001"), "CHF"), true));
     }
+
     @ParameterizedTest
     @MethodSource("isLessThanZeroArguments")
     @DisplayName("Test isLessThanZero(Money)")
@@ -183,8 +259,7 @@ class MoneyUtilTest {
                 Arguments.of(MoneyUtil.from(new BigDecimal("0"), "EUR"), "EUR 0.00"),
                 Arguments.of(MoneyUtil.from(new BigDecimal("-99.999999999"), "JPY"), "JPY -99.99"),
                 Arguments.of(MoneyUtil.from(new BigDecimal("0.000000001"), "GBP"), "GBP 0.00"),
-                Arguments.of(MoneyUtil.from(new BigDecimal("-0.000000001"), "CHF"), "CHF 0.00")
-        );
+                Arguments.of(MoneyUtil.from(new BigDecimal("-0.000000001"), "CHF"), "CHF 0.00"));
     }
 
     @ParameterizedTest
@@ -197,12 +272,21 @@ class MoneyUtilTest {
 
     static Stream<Arguments> zeroMoneyArguments() {
         return Stream.of(
-                Arguments.of("USD", Money.newBuilder().setCurrencyCode("USD").setUnits(0).setNanos(0).build()),
-                Arguments.of("EUR", Money.newBuilder().setCurrencyCode("EUR").setUnits(0).setNanos(0).build()),
-                Arguments.of("JPY", Money.newBuilder().setCurrencyCode("JPY").setUnits(0).setNanos(0).build()),
-                Arguments.of("GBP", Money.newBuilder().setCurrencyCode("GBP").setUnits(0).setNanos(0).build()),
-                Arguments.of("CHF", Money.newBuilder().setCurrencyCode("CHF").setUnits(0).setNanos(0).build())
-        );
+                Arguments.of(
+                        "USD",
+                        Money.newBuilder().setCurrencyCode("USD").setUnits(0).setNanos(0).build()),
+                Arguments.of(
+                        "EUR",
+                        Money.newBuilder().setCurrencyCode("EUR").setUnits(0).setNanos(0).build()),
+                Arguments.of(
+                        "JPY",
+                        Money.newBuilder().setCurrencyCode("JPY").setUnits(0).setNanos(0).build()),
+                Arguments.of(
+                        "GBP",
+                        Money.newBuilder().setCurrencyCode("GBP").setUnits(0).setNanos(0).build()),
+                Arguments.of(
+                        "CHF",
+                        Money.newBuilder().setCurrencyCode("CHF").setUnits(0).setNanos(0).build()));
     }
 
     @ParameterizedTest
@@ -215,14 +299,27 @@ class MoneyUtilTest {
 
     static Stream<Arguments> addArguments() {
         return Stream.of(
-                Arguments.of(MoneyUtil.from(new BigDecimal("100.456789"), "USD"), MoneyUtil.from(new BigDecimal("23.000001"), "USD"), MoneyUtil.from(new BigDecimal("123.456790"), "USD")),
-                Arguments.of(MoneyUtil.from(new BigDecimal("-50.456789"), "USD"), MoneyUtil.from(new BigDecimal("23.000001"), "USD"), MoneyUtil.from(new BigDecimal("-27.456788"), "USD")),
-                Arguments.of(MoneyUtil.from(new BigDecimal("0.000000001"), "USD"), MoneyUtil.from(new BigDecimal("0.000000001"), "USD"), MoneyUtil.from(new BigDecimal("0.000000002"), "USD")),
-                Arguments.of(MoneyUtil.from(new BigDecimal("0"), "USD"), MoneyUtil.from(new BigDecimal("23.000001"), "USD"), MoneyUtil.from(new BigDecimal("23.000001"), "USD")),
-                Arguments.of(MoneyUtil.from(new BigDecimal("100.456789"), "USD"), MoneyUtil.from(new BigDecimal("-100.456789"), "USD"), MoneyUtil.from(new BigDecimal("0"), "USD"))
-        );
+                Arguments.of(
+                        MoneyUtil.from(new BigDecimal("100.456789"), "USD"),
+                        MoneyUtil.from(new BigDecimal("23.000001"), "USD"),
+                        MoneyUtil.from(new BigDecimal("123.456790"), "USD")),
+                Arguments.of(
+                        MoneyUtil.from(new BigDecimal("-50.456789"), "USD"),
+                        MoneyUtil.from(new BigDecimal("23.000001"), "USD"),
+                        MoneyUtil.from(new BigDecimal("-27.456788"), "USD")),
+                Arguments.of(
+                        MoneyUtil.from(new BigDecimal("0.000000001"), "USD"),
+                        MoneyUtil.from(new BigDecimal("0.000000001"), "USD"),
+                        MoneyUtil.from(new BigDecimal("0.000000002"), "USD")),
+                Arguments.of(
+                        MoneyUtil.from(new BigDecimal("0"), "USD"),
+                        MoneyUtil.from(new BigDecimal("23.000001"), "USD"),
+                        MoneyUtil.from(new BigDecimal("23.000001"), "USD")),
+                Arguments.of(
+                        MoneyUtil.from(new BigDecimal("100.456789"), "USD"),
+                        MoneyUtil.from(new BigDecimal("-100.456789"), "USD"),
+                        MoneyUtil.from(new BigDecimal("0"), "USD")));
     }
-
 
     @ParameterizedTest
     @MethodSource("addArguments")
@@ -232,16 +329,30 @@ class MoneyUtilTest {
         assertEquals(expected, actual);
     }
 
-
     static Stream<Arguments> subtractArguments() {
         return Stream.of(
-                Arguments.of(MoneyUtil.from(new BigDecimal("123.456789"), "USD"), MoneyUtil.from(new BigDecimal("23.456789"), "USD"), MoneyUtil.from(new BigDecimal("100.000000"), "USD")),
-                Arguments.of(MoneyUtil.from(new BigDecimal("0"), "USD"), MoneyUtil.from(new BigDecimal("23.456789"), "USD"), MoneyUtil.from(new BigDecimal("-23.456789"), "USD")),
-                Arguments.of(MoneyUtil.from(new BigDecimal("100.456789"), "USD"), MoneyUtil.from(new BigDecimal("100.456789"), "USD"), MoneyUtil.from(new BigDecimal("0"), "USD")),
-                Arguments.of(MoneyUtil.from(new BigDecimal("0.000000002"), "USD"), MoneyUtil.from(new BigDecimal("0.000000001"), "USD"), MoneyUtil.from(new BigDecimal("0.000000001"), "USD")),
-                Arguments.of(MoneyUtil.from(new BigDecimal("-100.456789"), "USD"), MoneyUtil.from(new BigDecimal("23.000001"), "USD"), MoneyUtil.from(new BigDecimal("-123.456790"), "USD"))
-        );
+                Arguments.of(
+                        MoneyUtil.from(new BigDecimal("123.456789"), "USD"),
+                        MoneyUtil.from(new BigDecimal("23.456789"), "USD"),
+                        MoneyUtil.from(new BigDecimal("100.000000"), "USD")),
+                Arguments.of(
+                        MoneyUtil.from(new BigDecimal("0"), "USD"),
+                        MoneyUtil.from(new BigDecimal("23.456789"), "USD"),
+                        MoneyUtil.from(new BigDecimal("-23.456789"), "USD")),
+                Arguments.of(
+                        MoneyUtil.from(new BigDecimal("100.456789"), "USD"),
+                        MoneyUtil.from(new BigDecimal("100.456789"), "USD"),
+                        MoneyUtil.from(new BigDecimal("0"), "USD")),
+                Arguments.of(
+                        MoneyUtil.from(new BigDecimal("0.000000002"), "USD"),
+                        MoneyUtil.from(new BigDecimal("0.000000001"), "USD"),
+                        MoneyUtil.from(new BigDecimal("0.000000001"), "USD")),
+                Arguments.of(
+                        MoneyUtil.from(new BigDecimal("-100.456789"), "USD"),
+                        MoneyUtil.from(new BigDecimal("23.000001"), "USD"),
+                        MoneyUtil.from(new BigDecimal("-123.456790"), "USD")));
     }
+
     @ParameterizedTest
     @MethodSource("subtractArguments")
     @DisplayName("Test subtract(Money, Money)")
@@ -250,32 +361,61 @@ class MoneyUtilTest {
         assertEquals(expected, actual);
     }
 
-
     static Stream<Arguments> multiplyArguments() {
         return Stream.of(
-                Arguments.of(MoneyUtil.from(new BigDecimal("123.456789"), "USD"), new BigDecimal("2.0"), MoneyUtil.from(new BigDecimal("246.913578"), "USD")),
-                Arguments.of(MoneyUtil.from(new BigDecimal("0"), "USD"), new BigDecimal("2.0"), MoneyUtil.from(new BigDecimal("0.000000000"), "USD")),
-                Arguments.of(MoneyUtil.from(new BigDecimal("-123.456789"), "USD"), new BigDecimal("2.0"), MoneyUtil.from(new BigDecimal("-246.913578"), "USD")),
-                Arguments.of(MoneyUtil.from(new BigDecimal("123.456789"), "USD"), new BigDecimal("0.5"), MoneyUtil.from(new BigDecimal("61.7283945"), "USD")),
-                Arguments.of(MoneyUtil.from(new BigDecimal("123.456789"), "USD"), new BigDecimal("-0.5"), MoneyUtil.from(new BigDecimal("-61.7283945"), "USD"))
-        );
+                Arguments.of(
+                        MoneyUtil.from(new BigDecimal("123.456789"), "USD"),
+                        new BigDecimal("2.0"),
+                        MoneyUtil.from(new BigDecimal("246.913578"), "USD")),
+                Arguments.of(
+                        MoneyUtil.from(new BigDecimal("0"), "USD"),
+                        new BigDecimal("2.0"),
+                        MoneyUtil.from(new BigDecimal("0.000000000"), "USD")),
+                Arguments.of(
+                        MoneyUtil.from(new BigDecimal("-123.456789"), "USD"),
+                        new BigDecimal("2.0"),
+                        MoneyUtil.from(new BigDecimal("-246.913578"), "USD")),
+                Arguments.of(
+                        MoneyUtil.from(new BigDecimal("123.456789"), "USD"),
+                        new BigDecimal("0.5"),
+                        MoneyUtil.from(new BigDecimal("61.7283945"), "USD")),
+                Arguments.of(
+                        MoneyUtil.from(new BigDecimal("123.456789"), "USD"),
+                        new BigDecimal("-0.5"),
+                        MoneyUtil.from(new BigDecimal("-61.7283945"), "USD")));
     }
+
     @ParameterizedTest
     @MethodSource("multiplyArguments")
     @DisplayName("Test multiply(Money, BigDecimal)")
-    void testMultiply(Money money, BigDecimal multiplier, Money expected) throws UnRetriableException {
+    void testMultiply(Money money, BigDecimal multiplier, Money expected)
+            throws UnRetriableException {
         Money actual = MoneyUtil.multiply(money, multiplier);
         assertEquals(expected, actual);
     }
 
     static Stream<Arguments> divideArguments() {
         return Stream.of(
-                Arguments.of(MoneyUtil.from(new BigDecimal("123.456789"), "USD"), new BigDecimal("2.0"), MoneyUtil.from(new BigDecimal("61.7283945"), "USD")),
-                Arguments.of(MoneyUtil.from(new BigDecimal("0"), "USD"), new BigDecimal("2.0"), MoneyUtil.from(new BigDecimal("0.000000000"), "USD")),
-                Arguments.of(MoneyUtil.from(new BigDecimal("-123.456789"), "USD"), new BigDecimal("2.0"), MoneyUtil.from(new BigDecimal("-61.7283945"), "USD")),
-                Arguments.of(MoneyUtil.from(new BigDecimal("123.456789"), "USD"), new BigDecimal("0.5"), MoneyUtil.from(new BigDecimal("246.913578"), "USD")),
-                Arguments.of(MoneyUtil.from(new BigDecimal("123.456789"), "USD"), new BigDecimal("-0.5"), MoneyUtil.from(new BigDecimal("-246.913578"), "USD"))
-        );
+                Arguments.of(
+                        MoneyUtil.from(new BigDecimal("123.456789"), "USD"),
+                        new BigDecimal("2.0"),
+                        MoneyUtil.from(new BigDecimal("61.7283945"), "USD")),
+                Arguments.of(
+                        MoneyUtil.from(new BigDecimal("0"), "USD"),
+                        new BigDecimal("2.0"),
+                        MoneyUtil.from(new BigDecimal("0.000000000"), "USD")),
+                Arguments.of(
+                        MoneyUtil.from(new BigDecimal("-123.456789"), "USD"),
+                        new BigDecimal("2.0"),
+                        MoneyUtil.from(new BigDecimal("-61.7283945"), "USD")),
+                Arguments.of(
+                        MoneyUtil.from(new BigDecimal("123.456789"), "USD"),
+                        new BigDecimal("0.5"),
+                        MoneyUtil.from(new BigDecimal("246.913578"), "USD")),
+                Arguments.of(
+                        MoneyUtil.from(new BigDecimal("123.456789"), "USD"),
+                        new BigDecimal("-0.5"),
+                        MoneyUtil.from(new BigDecimal("-246.913578"), "USD")));
     }
 
     @ParameterizedTest
@@ -294,10 +434,8 @@ class MoneyUtilTest {
                 Arguments.of(MoneyUtil.from(new BigDecimal("0.000000001"), "GBP"), "GBP 0.00"),
                 Arguments.of(MoneyUtil.from(new BigDecimal("0.0099999"), "GBP"), "GBP 0.00"),
                 Arguments.of(MoneyUtil.from(new BigDecimal("-0.000000001"), "CHF"), "CHF 0.00"),
-                Arguments.of(MoneyUtil.from(new BigDecimal("-0.009999999"), "CHF"), "CHF 0.00")
-        );
+                Arguments.of(MoneyUtil.from(new BigDecimal("-0.009999999"), "CHF"), "CHF 0.00"));
     }
-
 
     @ParameterizedTest
     @MethodSource("formatArguments")
@@ -306,6 +444,4 @@ class MoneyUtilTest {
         String actual = MoneyUtil.format(money);
         assertEquals(expected, actual);
     }
-
-
 }

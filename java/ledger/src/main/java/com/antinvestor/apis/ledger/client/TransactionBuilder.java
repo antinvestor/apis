@@ -24,7 +24,6 @@ import com.antinvestor.apis.common.exceptions.STATUSCODES;
 import com.antinvestor.apis.common.exceptions.UnRetriableException;
 import com.antinvestor.apis.common.utilities.ProtoStructUtil;
 import com.antinvestor.apis.common.utilities.TextUtils;
-
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
@@ -39,7 +38,6 @@ public class TransactionBuilder {
     private String reference;
     private boolean cleared = true;
     private TransactionType transactionType = TransactionType.NORMAL;
-
 
     private TransactionBuilder(Map<String, Object> data) {
         this.data = data;
@@ -90,7 +88,6 @@ public class TransactionBuilder {
         return this;
     }
 
-
     public TransactionBuilder credit(String account, Money amount) {
         creditEntries.add(new LocalEntry(account, amount));
         return this;
@@ -105,10 +102,16 @@ public class TransactionBuilder {
         String currencyCode = null;
 
         if (Objects.isNull(transactionDate)) {
-            transactionDate = LocalDateTime.now(ZoneOffset.UTC).format(DateTimeFormatter.ISO_DATE_TIME);
+            transactionDate =
+                    LocalDateTime.now(ZoneOffset.UTC).format(DateTimeFormatter.ISO_DATE_TIME);
         }
 
-        CreateTransactionRequest.Builder transactionBuilder = CreateTransactionRequest.newBuilder().setTransactedAt(transactionDate).setType(transactionType).setCleared(cleared).setData(ProtoStructUtil.fromMap(data));
+        CreateTransactionRequest.Builder transactionBuilder =
+                CreateTransactionRequest.newBuilder()
+                        .setTransactedAt(transactionDate)
+                        .setType(transactionType)
+                        .setCleared(cleared)
+                        .setData(ProtoStructUtil.fromMap(data));
 
         if (!TextUtils.isEmpty(reference)) {
             transactionBuilder.setId(reference);
@@ -118,7 +121,12 @@ public class TransactionBuilder {
 
             currencyCode = validateCurrency(currencyCode, localEntry);
 
-            TransactionEntry transactionEntry = TransactionEntry.newBuilder().setAccountId(localEntry.accountReference).setAmount(localEntry.amount).setCredit(false).build();
+            TransactionEntry transactionEntry =
+                    TransactionEntry.newBuilder()
+                            .setAccountId(localEntry.accountReference)
+                            .setAmount(localEntry.amount)
+                            .setCredit(false)
+                            .build();
 
             transactionBuilder.addEntries(transactionEntry);
         }
@@ -127,7 +135,12 @@ public class TransactionBuilder {
 
             currencyCode = validateCurrency(currencyCode, localEntry);
 
-            TransactionEntry transactionEntry = TransactionEntry.newBuilder().setAccountId(localEntry.accountReference).setAmount(localEntry.amount).setCredit(true).build();
+            TransactionEntry transactionEntry =
+                    TransactionEntry.newBuilder()
+                            .setAccountId(localEntry.accountReference)
+                            .setAmount(localEntry.amount)
+                            .setCredit(true)
+                            .build();
 
             transactionBuilder.addEntries(transactionEntry);
         }
@@ -137,25 +150,28 @@ public class TransactionBuilder {
         return transactionBuilder.build();
     }
 
-    private String validateCurrency(String currencyCode, LocalEntry localEntry) throws UnRetriableException {
+    private String validateCurrency(String currencyCode, LocalEntry localEntry)
+            throws UnRetriableException {
         if (TextUtils.isEmpty(localEntry.amount.getCurrencyCode())) {
-            throw new UnRetriableException(STATUSCODES.BAD_CURRENCY_ERROR, "No currency was specified for this amount");
+            throw new UnRetriableException(
+                    STATUSCODES.BAD_CURRENCY_ERROR, "No currency was specified for this amount");
         } else {
 
             if (TextUtils.isEmpty(currencyCode)) {
                 return localEntry.amount.getCurrencyCode();
             } else if (!currencyCode.equalsIgnoreCase(localEntry.amount.getCurrencyCode())) {
-                throw new UnRetriableException(STATUSCODES.BAD_CURRENCY_ERROR, "There is a currency mismatch, all should be the same");
+                throw new UnRetriableException(
+                        STATUSCODES.BAD_CURRENCY_ERROR,
+                        "There is a currency mismatch, all should be the same");
             }
         }
         return currencyCode;
     }
 
-    public Transaction execute(Context context, LedgerClient ledgerClient) throws UnRetriableException {
+    public Transaction execute(Context context, LedgerClient ledgerClient)
+            throws UnRetriableException {
         return ledgerClient.createTransaction(context, this);
     }
 
-    private record LocalEntry(String accountReference, Money amount) {
-
-    }
+    private record LocalEntry(String accountReference, Money amount) {}
 }

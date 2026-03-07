@@ -15,15 +15,12 @@
 package com.antinvestor.apis.common.context;
 
 import com.antinvestor.apis.common.config.DefaultConfig;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-/**
- * Default context provides a
- */
+/** Default context provides a */
 public class DefaultContext implements Context {
 
     private final Map<Key<?>, Object> store;

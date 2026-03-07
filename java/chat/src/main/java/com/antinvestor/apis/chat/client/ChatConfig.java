@@ -29,5 +29,4 @@ public interface ChatConfig extends DefaultConfig {
     @Config.DefaultValue("true")
     @Config.Key("${product}.${env}.chat.auth.interceptor.enabled")
     Boolean authInterceptorEnabled();
-
 }

@@ -29,5 +29,4 @@ public interface NotificationConfig extends DefaultConfig {
     @Config.DefaultValue("true")
     @Config.Key("${product}.${env}.notifications.auth.interceptor.enabled")
     Boolean authInterceptorEnabled();
-
 }

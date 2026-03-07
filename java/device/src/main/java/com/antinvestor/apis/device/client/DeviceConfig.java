@@ -28,5 +28,4 @@ public interface DeviceConfig extends DefaultConfig {
     @DefaultValue("true")
     @Key("${product}.${env}.devices.auth.interceptor.enabled")
     Boolean authInterceptorEnabled();
-
 }

@@ -83,10 +83,9 @@ public class STATUSCODES {
     public static final int MATCHING_ENTRY_EXISTS = 10002;
 
     /**
-     * Status thrown when no route is found in the database to support
-     * the transaction being routed currently.
-     * Such a transaction is expected to be marked as not routed
-     * And is routed appropriately when the appropriate route comes up.
+     * Status thrown when no route is found in the database to support the transaction being routed
+     * currently. Such a transaction is expected to be marked as not routed And is routed
+     * appropriately when the appropriate route comes up.
      */
     public static final int NO_MATCHING_ROUTE_AVAILABLE = 11000;
 
@@ -96,7 +95,6 @@ public class STATUSCODES {
      * */
     public static final int INVALID_ROUTE_CONFIGURATION = 11001;
     public static final int INVALID_SYSTEM_CONFIGURATION = 11002;
-
 
     public static final int UNSPECIFIED_ERROR_WHILE_PROCESSING = 20000;
 
@@ -119,14 +117,12 @@ public class STATUSCODES {
     public static final int BAD_CURRENCY_ERROR = 20009;
     public static final int BAD_PROFILE_ERROR = 20010;
 
-
     public static final int COULD_NOT_GET_QUEUE_ERROR = 20100;
     public static final int COULD_NOT_SUBSCRIBE_TO_QUEUE_ERROR = 20101;
 
     public static final int COULD_NOT_PUBLISH_TO_QUEUE_ERROR = 200102;
 
     public static final int SUBSCRIPTION_ACCOUNT_MISSING = 200103;
-
 
     /**
      * @param status
@@ -189,7 +185,6 @@ public class STATUSCODES {
                 return "Subscription account missing";
             default:
                 return "Invalid code.";
-
         }
     }
 }

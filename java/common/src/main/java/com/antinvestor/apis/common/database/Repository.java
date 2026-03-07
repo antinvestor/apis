@@ -67,7 +67,6 @@
 package com.antinvestor.apis.common.database;
 
 import com.antinvestor.apis.common.context.Context;
-
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
@@ -80,12 +79,12 @@ import java.util.stream.Stream;
 public interface Repository<T extends BaseModel> extends Serializable {
 
     Class<T> entityClass();
+
     Optional<T> findById(Context context, String id);
 
     Stream<T> stream(Context context, String squery, Map<String, Object> parameters);
 
-    /**
-     */
+    /** */
     T save(Context context, T obj);
 
     List<T> saveBatch(Context context, List<T> entities);

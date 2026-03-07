@@ -73,13 +73,11 @@ import java.time.LocalDateTime;
  */
 public interface BaseModel {
 
-
     String getId();
 
     void setId(String id);
 
     int getVersion();
-
 
     String getApplicationID();
 
@@ -88,7 +86,6 @@ public interface BaseModel {
     String getProcessID();
 
     void setProcessID(String processID);
-
 
     String getProcessBatchID();
 
@@ -102,7 +99,7 @@ public interface BaseModel {
 
     void setEntityStatus(int entityStatus);
 
-    //These methods manage client partitioning
+    // These methods manage client partitioning
 
     String getPartitionID();
 
@@ -112,12 +109,9 @@ public interface BaseModel {
 
     void setTenantID(String tenantID);
 
-
     LocalDateTime getDateCreated();
 
     LocalDateTime getDateModified();
 
     LocalDateTime getDateDeleted();
-
-
 }
