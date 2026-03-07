@@ -17,14 +17,14 @@ package connection
 import (
 	"context"
 	"crypto/x509"
-	"net/url"
+	"errors"
+	"net/http"
 	"strings"
 	"sync"
 
 	"github.com/antinvestor/apis/go/common"
 	"github.com/pitabwire/util"
 	"golang.org/x/oauth2"
-	"golang.org/x/oauth2/clientcredentials"
 
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/credentials/insecure"
@@ -81,9 +81,9 @@ func NewGrpcClientBase(ctx context.Context, opts ...common.ClientOption) (*GrpcC
 }
 
 type JWTInterceptor struct {
-	tokenClient *clientcredentials.Config // An oauth2 client to fetch new server token
-	token       *oauth2.Token             // The JWT token that will be used in every call to the server
-	apiKey      string                    // An api key that never changes for a legacy api
+	tokenSource oauth2.TokenSource // An oauth2 token source to fetch new server token
+	token       *oauth2.Token      // The JWT token that will be used in every call to the server
+	apiKey      string             // An api key that never changes for a legacy api
 	mu          sync.Mutex
 }
 
@@ -98,14 +98,14 @@ func (jwt *JWTInterceptor) setTenancyInfo(ctx context.Context) context.Context {
 	return metadata.AppendToOutgoingContext(finalCtx, "access-id", partitionInfo.GetAccessID())
 }
 
-func (jwt *JWTInterceptor) getTokenStr(ctx context.Context) (string, error) {
+func (jwt *JWTInterceptor) getTokenStr() (string, error) {
 	jwt.mu.Lock()
 	defer jwt.mu.Unlock()
 
 	var err error
-	if jwt.tokenClient != nil {
+	if jwt.tokenSource != nil {
 		if jwt.token == nil || !jwt.token.Valid() {
-			jwt.token, err = jwt.tokenClient.Token(ctx)
+			jwt.token, err = jwt.tokenSource.Token()
 			if err != nil {
 				return "", err
 			}
@@ -128,7 +128,7 @@ func (jwt *JWTInterceptor) UnaryClientInterceptor(
 	cc *grpc.ClientConn,
 	invoker grpc.UnaryInvoker,
 	opts ...grpc.CallOption) error {
-	tokenStr, err := jwt.getTokenStr(ctx)
+	tokenStr, err := jwt.getTokenStr()
 	if err != nil {
 		return err
 	}
@@ -153,7 +153,7 @@ func (jwt *JWTInterceptor) StreamClientInterceptor(
 	streamer grpc.Streamer,
 	opts ...grpc.CallOption,
 ) (grpc.ClientStream, error) {
-	tokenStr, err := jwt.getTokenStr(ctx)
+	tokenStr, err := jwt.getTokenStr()
 	if err != nil {
 		return nil, err
 	}
@@ -171,7 +171,7 @@ func (jwt *JWTInterceptor) StreamClientInterceptor(
 }
 
 // DialConnection creates a gRPC connection with the provided options.
-func DialConnection(_ context.Context, opts ...common.ClientOption) (*grpc.ClientConn, error) {
+func DialConnection(ctx context.Context, opts ...common.ClientOption) (*grpc.ClientConn, error) {
 	ds, err := processAndValidateOpts(opts)
 	if err != nil {
 		return nil, err
@@ -198,21 +198,11 @@ func DialConnection(_ context.Context, opts ...common.ClientOption) (*grpc.Clien
 		if ds.APICredential != "" {
 			jwt.apiKey = ds.APICredential
 		} else {
-			var endpointValues url.Values
-			if len(ds.Audiences) > 0 {
-				endpointValues = url.Values{}
-				audienceList := strings.Join(ds.Audiences, " ")
-				endpointValues.Add("audience", audienceList)
+			tokenSource, tokenErr := NewOAuth2TokenSource(ctx, ds, http.DefaultClient)
+			if tokenErr != nil && !errors.Is(tokenErr, errTokenEndpointNotConfigured) {
+				return nil, tokenErr
 			}
-
-			jwt.tokenClient = &clientcredentials.Config{
-				ClientID:       ds.TokenUserName,
-				ClientSecret:   ds.TokenPassword,
-				TokenURL:       ds.TokenEndpoint,
-				Scopes:         ds.Scopes,
-				EndpointParams: endpointValues,
-				AuthStyle:      oauth2.AuthStyleAutoDetect,
-			}
+			jwt.tokenSource = tokenSource
 		}
 
 		unaryInterceptOption := grpc.WithChainUnaryInterceptor(jwt.UnaryClientInterceptor)

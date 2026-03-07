@@ -2369,14 +2369,16 @@ components:
               type: string
               title: media_id
         - oneOf:
-            - properties:
+            - type: object
+              properties:
                 content:
                   title: content
                   $ref: '#/components/schemas/files.v1.GetContentResponse'
               title: content
               required:
                 - content
-            - properties:
+            - type: object
+              properties:
                 error:
                   type: string
                   title: error
@@ -4255,7 +4257,8 @@ components:
 
                  TTL: 24 hours from first request.
         - oneOf:
-            - properties:
+            - type: object
+              properties:
                 chunk:
                   type: string
                   title: chunk
@@ -4267,7 +4270,8 @@ components:
               title: chunk
               required:
                 - chunk
-            - properties:
+            - type: object
+              properties:
                 metadata:
                   title: metadata
                   description: |-

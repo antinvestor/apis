@@ -40,6 +40,10 @@ type HTTPConfig struct {
 
 	TraceRequests       bool
 	TraceRequestHeaders bool
+
+	WorkloadAPITrustDomain string
+	WorkloadAPITargetID    string
+	WorkloadAPITargetPath  string
 }
 
 // WithHTTPTimeout sets the request Timeout.
@@ -102,5 +106,26 @@ func WithHTTPTraceRequests(traceRequests bool) HTTPOption {
 func WithHTTPTraceRequestHeaders(traceRequestHeaders bool) HTTPOption {
 	return func(c *HTTPConfig) {
 		c.TraceRequestHeaders = traceRequestHeaders
+	}
+}
+
+// WithHTTPWorkloadAPITrustDomain configures the SPIFFE trust domain for outbound mTLS.
+func WithHTTPWorkloadAPITrustDomain(trustDomain string) HTTPOption {
+	return func(c *HTTPConfig) {
+		c.WorkloadAPITrustDomain = trustDomain
+	}
+}
+
+// WithHTTPWorkloadAPITargetID configures the exact SPIFFE ID to authorize.
+func WithHTTPWorkloadAPITargetID(targetID string) HTTPOption {
+	return func(c *HTTPConfig) {
+		c.WorkloadAPITargetID = targetID
+	}
+}
+
+// WithHTTPWorkloadAPITargetPath configures the SPIFFE path to authorize within the trust domain.
+func WithHTTPWorkloadAPITargetPath(targetPath string) HTTPOption {
+	return func(c *HTTPConfig) {
+		c.WorkloadAPITargetPath = targetPath
 	}
 }

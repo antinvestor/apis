@@ -90,7 +90,7 @@ func (h *OpenAPIHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Parse the spec
-	var spec map[string]interface{}
+	var spec map[string]any
 	if err := yaml.Unmarshal(h.specData, &spec); err != nil {
 		http.Error(w, "Failed to parse spec", http.StatusInternalServerError)
 		return
@@ -115,10 +115,10 @@ func (h *OpenAPIHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (h *OpenAPIHandler) applyInfoOverride(spec map[string]interface{}) {
-	info, ok := spec["info"].(map[string]interface{})
+func (h *OpenAPIHandler) applyInfoOverride(spec map[string]any) {
+	info, ok := spec["info"].(map[string]any)
 	if !ok {
-		info = make(map[string]interface{})
+		info = make(map[string]any)
 		spec["info"] = info
 	}
 
@@ -127,7 +127,7 @@ func (h *OpenAPIHandler) applyInfoOverride(spec map[string]interface{}) {
 	h.applyLicenseInfo(info)
 }
 
-func (h *OpenAPIHandler) applyBasicInfoFields(info map[string]interface{}) {
+func (h *OpenAPIHandler) applyBasicInfoFields(info map[string]any) {
 	if h.infoOverride.Title != "" {
 		info["title"] = h.infoOverride.Title
 	}
@@ -142,12 +142,12 @@ func (h *OpenAPIHandler) applyBasicInfoFields(info map[string]interface{}) {
 	}
 }
 
-func (h *OpenAPIHandler) applyContactInfo(info map[string]interface{}) {
+func (h *OpenAPIHandler) applyContactInfo(info map[string]any) {
 	if h.infoOverride.Contact == nil {
 		return
 	}
 
-	contact := make(map[string]interface{})
+	contact := make(map[string]any)
 	if h.infoOverride.Contact.Name != "" {
 		contact["name"] = h.infoOverride.Contact.Name
 	}
@@ -162,12 +162,12 @@ func (h *OpenAPIHandler) applyContactInfo(info map[string]interface{}) {
 	}
 }
 
-func (h *OpenAPIHandler) applyLicenseInfo(info map[string]interface{}) {
+func (h *OpenAPIHandler) applyLicenseInfo(info map[string]any) {
 	if h.infoOverride.License == nil {
 		return
 	}
 
-	license := make(map[string]interface{})
+	license := make(map[string]any)
 	if h.infoOverride.License.Name != "" {
 		license["name"] = h.infoOverride.License.Name
 	}

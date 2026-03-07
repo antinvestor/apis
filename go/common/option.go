@@ -18,6 +18,7 @@ import (
 	"crypto/tls"
 	"net/http"
 
+	"github.com/antinvestor/apis/go/common/connection/options"
 	"golang.org/x/oauth2"
 	"google.golang.org/grpc"
 )
@@ -162,6 +163,18 @@ type withTokenEndpoint string
 
 func (w withTokenEndpoint) Apply(o *DialSettings) { o.TokenEndpoint = string(w) }
 
+// WithTokenEndpointAuthMethod specifies the OAuth2 token endpoint client
+// authentication method to use.
+func WithTokenEndpointAuthMethod(method string) ClientOption {
+	return withTokenEndpointAuthMethod(method)
+}
+
+type withTokenEndpointAuthMethod string
+
+func (w withTokenEndpointAuthMethod) Apply(o *DialSettings) {
+	o.TokenEndpointAuthMethod = string(w)
+}
+
 // WithAudiences returns a ClientOption that specifies an audience to be used
 // as the audience field ("aud") for the JWT token authentication.
 func WithAudiences(audience ...string) ClientOption {
@@ -229,6 +242,17 @@ func (w withClientCertSource) Apply(o *DialSettings) {
 	o.ClientCertSource = w.s
 }
 
+// WithTokenPrivateKeyJWT configures private_key_jwt OAuth2 client authentication.
+func WithTokenPrivateKeyJWT(cfg PrivateKeyJWTConfig) ClientOption {
+	return withTokenPrivateKeyJWT{cfg: cfg}
+}
+
+type withTokenPrivateKeyJWT struct{ cfg PrivateKeyJWTConfig }
+
+func (w withTokenPrivateKeyJWT) Apply(o *DialSettings) {
+	o.PrivateKeyJWT = w.cfg.Clone()
+}
+
 // WithTraceRequests returns a ClientOption that specifies whether to trace requests.
 func WithTraceRequests() ClientOption {
 	return withTraceRequests(true)
@@ -255,3 +279,36 @@ func WithTraceHeaders() ClientOption {
 type withTraceHeaders bool
 
 func (w withTraceHeaders) Apply(o *DialSettings) { o.TraceHeaders = bool(w) }
+
+// WithHTTPWorkloadAPITrustDomain configures the SPIFFE trust domain for outbound mTLS.
+func WithHTTPWorkloadAPITrustDomain(trustDomain string) ClientOption {
+	return withHTTPWorkloadAPITrustDomain(trustDomain)
+}
+
+type withHTTPWorkloadAPITrustDomain string
+
+func (w withHTTPWorkloadAPITrustDomain) Apply(o *DialSettings) {
+	o.HTTPDialOpts = append(o.HTTPDialOpts, options.WithHTTPWorkloadAPITrustDomain(string(w)))
+}
+
+// WithHTTPWorkloadAPITargetID configures an exact SPIFFE ID for outbound mTLS.
+func WithHTTPWorkloadAPITargetID(targetID string) ClientOption {
+	return withHTTPWorkloadAPITargetID(targetID)
+}
+
+type withHTTPWorkloadAPITargetID string
+
+func (w withHTTPWorkloadAPITargetID) Apply(o *DialSettings) {
+	o.HTTPDialOpts = append(o.HTTPDialOpts, options.WithHTTPWorkloadAPITargetID(string(w)))
+}
+
+// WithHTTPWorkloadAPITargetPath configures a SPIFFE path for outbound mTLS.
+func WithHTTPWorkloadAPITargetPath(targetPath string) ClientOption {
+	return withHTTPWorkloadAPITargetPath(targetPath)
+}
+
+type withHTTPWorkloadAPITargetPath string
+
+func (w withHTTPWorkloadAPITargetPath) Apply(o *DialSettings) {
+	o.HTTPDialOpts = append(o.HTTPDialOpts, options.WithHTTPWorkloadAPITargetPath(string(w)))
+}

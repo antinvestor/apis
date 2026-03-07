@@ -169,21 +169,24 @@ components:
     chat.v1.ClientCommand:
       type: object
       oneOf:
-        - properties:
+        - type: object
+          properties:
             ack:
               title: ack
               $ref: '#/components/schemas/chat.v1.AckEvent'
           title: ack
           required:
             - ack
-        - properties:
+        - type: object
+          properties:
             event:
               title: event
               $ref: '#/components/schemas/chat.v1.RoomEvent'
           title: event
           required:
             - event
-        - properties:
+        - type: object
+          properties:
             presence:
               title: presence
               description: send a presence message to a room
@@ -191,14 +194,16 @@ components:
           title: presence
           required:
             - presence
-        - properties:
+        - type: object
+          properties:
             readMarker:
               title: read_marker
               $ref: '#/components/schemas/chat.v1.ReadMarker'
           title: read_marker
           required:
             - readMarker
-        - properties:
+        - type: object
+          properties:
             receipt:
               title: receipt
               description: receipt acknowledgement for message delivery
@@ -206,7 +211,8 @@ components:
           title: receipt
           required:
             - receipt
-        - properties:
+        - type: object
+          properties:
             typing:
               title: typing
               $ref: '#/components/schemas/chat.v1.TypingEvent'
@@ -404,7 +410,8 @@ components:
               title: passing_choice_id
               description: Which choice constitutes "passing" (usually YES)
         - oneOf:
-            - properties:
+            - type: object
+              properties:
                 absolute:
                   type: integer
                   title: absolute
@@ -412,7 +419,8 @@ components:
               title: absolute
               required:
                 - absolute
-            - properties:
+            - type: object
+              properties:
                 percentage:
                   type: integer
                   title: percentage
@@ -433,7 +441,8 @@ components:
                  Servers MUST reject mismatches.
               $ref: '#/components/schemas/chat.v1.PayloadType'
         - oneOf:
-            - properties:
+            - type: object
+              properties:
                 attachment:
                   title: attachment
                   description: type = PAYLOAD_TYPE_ATTACHMENT
@@ -441,7 +450,8 @@ components:
               title: attachment
               required:
                 - attachment
-            - properties:
+            - type: object
+              properties:
                 call:
                   title: call
                   description: type = PAYLOAD_TYPE_CALL
@@ -449,7 +459,8 @@ components:
               title: call
               required:
                 - call
-            - properties:
+            - type: object
+              properties:
                 default:
                   title: default
                   description: type = PAYLOAD_TYPE_UNSPECIFIED
@@ -457,7 +468,8 @@ components:
               title: default
               required:
                 - default
-            - properties:
+            - type: object
+              properties:
                 encrypted:
                   title: encrypted
                   description: type = PAYLOAD_TYPE_ENCRYPTED
@@ -465,7 +477,8 @@ components:
               title: encrypted
               required:
                 - encrypted
-            - properties:
+            - type: object
+              properties:
                 moderation:
                   title: moderation
                   description: type = PAYLOAD_TYPE_MODERATION
@@ -473,7 +486,8 @@ components:
               title: moderation
               required:
                 - moderation
-            - properties:
+            - type: object
+              properties:
                 motion:
                   title: motion
                   description: type = PAYLOAD_TYPE_MOTION
@@ -481,7 +495,8 @@ components:
               title: motion
               required:
                 - motion
-            - properties:
+            - type: object
+              properties:
                 motionTally:
                   title: motion_tally
                   description: type = PAYLOAD_TYPE_MOTION_TALLY
@@ -489,7 +504,8 @@ components:
               title: motion_tally
               required:
                 - motionTally
-            - properties:
+            - type: object
+              properties:
                 reaction:
                   title: reaction
                   description: type = PAYLOAD_TYPE_REACTION
@@ -497,7 +513,8 @@ components:
               title: reaction
               required:
                 - reaction
-            - properties:
+            - type: object
+              properties:
                 roomChange:
                   title: room_change
                   description: type = PAYLOAD_TYPE_ROOM_CHANGE
@@ -505,7 +522,8 @@ components:
               title: room_change
               required:
                 - roomChange
-            - properties:
+            - type: object
+              properties:
                 text:
                   title: text
                   description: type = PAYLOAD_TYPE_TEXT
@@ -513,7 +531,8 @@ components:
               title: text
               required:
                 - text
-            - properties:
+            - type: object
+              properties:
                 vote:
                   title: vote
                   description: type = PAYLOAD_TYPE_VOTE
@@ -521,7 +540,8 @@ components:
               title: vote
               required:
                 - vote
-            - properties:
+            - type: object
+              properties:
                 voteTally:
                   title: vote_tally
                   description: type = PAYLOAD_TYPE_VOTE_TALLY

@@ -124,6 +124,16 @@ func (t *loggingTransport) RoundTrip(req *http.Request) (*http.Response, error) 
 	return resp, err
 }
 
+func (t *loggingTransport) CloseIdleConnections() {
+	type closeIdler interface {
+		CloseIdleConnections()
+	}
+
+	if closer, ok := t.transport.(closeIdler); ok {
+		closer.CloseIdleConnections()
+	}
+}
+
 func (t *loggingTransport) logRequest(ctx context.Context, req *http.Request) {
 	if !t.logRequests {
 		return

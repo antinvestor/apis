@@ -16,9 +16,9 @@ package connection
 
 import (
 	"context"
+	"errors"
 	"net/http"
 	"net/url"
-	"strings"
 	"time"
 
 	"connectrpc.com/connect"
@@ -28,7 +28,6 @@ import (
 	"github.com/pitabwire/util"
 	"go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp"
 	"golang.org/x/oauth2"
-	"golang.org/x/oauth2/clientcredentials"
 )
 
 const (
@@ -106,7 +105,13 @@ func NewConnectClientBase(ctx context.Context, opts ...common.ClientOption) (*Co
 
 	httpDialOpts := ds.HTTPDialOpts
 
-	httpClient := NewHTTPClient(ctx, httpDialOpts...)
+	httpClient := ds.HTTPClient
+	if httpClient == nil {
+		httpClient, err = NewHTTPClient(ctx, httpDialOpts...)
+		if err != nil {
+			return nil, err
+		}
+	}
 
 	clientBase := ConnectClientBase{
 		client:   httpClient,
@@ -124,22 +129,14 @@ func NewConnectClientBase(ctx context.Context, opts ...common.ClientOption) (*Co
 		authOpts = append(authOpts, interceptors.WithAPIKey(ds.APICredential))
 	}
 
-	if ds.TokenEndpoint != "" {
-		var endpointValues url.Values
-		if len(ds.Audiences) > 0 {
-			endpointValues = url.Values{}
-			audienceList := strings.Join(ds.Audiences, " ")
-			endpointValues.Add("audience", audienceList)
+	if ds.TokenEndpoint != "" || ds.TokenSource != nil {
+		tokenSource, tokenErr := NewOAuth2TokenSource(ctx, ds, httpClient)
+		if tokenErr != nil && !errors.Is(tokenErr, errTokenEndpointNotConfigured) {
+			return nil, tokenErr
 		}
-		cfg := &clientcredentials.Config{
-			ClientID:       ds.TokenUserName,
-			ClientSecret:   ds.TokenPassword,
-			TokenURL:       ds.TokenEndpoint,
-			Scopes:         ds.Scopes,
-			EndpointParams: endpointValues,
+		if tokenSource != nil {
+			authOpts = append(authOpts, interceptors.WithTokenSource(tokenSource))
 		}
-
-		authOpts = append(authOpts, interceptors.WithTokenSource(cfg.TokenSource(ctx)))
 	}
 
 	clientBase.interceptors = []connect.Interceptor{
@@ -158,32 +155,31 @@ func NewConnectClientBase(ctx context.Context, opts ...common.ClientOption) (*Co
 }
 
 // NewHTTPClient creates a new HTTP client with the provided options.
-// If no transport is specified, it defaults to otelhttp.NewTransport(http.DefaultTransport).
-func NewHTTPClient(ctx context.Context, opts ...options.HTTPOption) *http.Client {
+func NewHTTPClient(ctx context.Context, opts ...options.HTTPOption) (*http.Client, error) {
 	cfg := &options.HTTPConfig{
 		Timeout:     time.Duration(defaultHTTPTimeoutSeconds) * time.Second,
 		IdleTimeout: time.Duration(defaultHTTPIdleTimeoutSeconds) * time.Second,
-		Transport:   otelhttp.NewTransport(http.DefaultTransport),
+		Transport:   http.DefaultTransport,
 	}
 
 	for _, opt := range opts {
 		opt(cfg)
 	}
 
-	base := cfg.Transport
-
-	// Enable H2C if desired
-	if cfg.EnableH2C {
-		if t, ok := base.(*http.Transport); ok {
-			protocols := new(http.Protocols)
-			protocols.SetUnencryptedHTTP2(true)
-			t.Protocols = protocols
-		}
+	base, closeIdleFn, err := prepareBaseTransport(ctx, cfg)
+	if err != nil {
+		return nil, err
 	}
 
-	// Add OpenTelemetry wrapper once
 	if _, ok := base.(*otelhttp.Transport); !ok {
 		base = otelhttp.NewTransport(base)
+	}
+
+	if closeIdleFn != nil {
+		base = closeIdleTransport{
+			inner:       base,
+			closeIdleFn: closeIdleFn,
+		}
 	}
 
 	// Optional: request/response logging
@@ -192,7 +188,8 @@ func NewHTTPClient(ctx context.Context, opts ...options.HTTPOption) *http.Client
 			interceptors.WithTransportLogRequests(true),
 			interceptors.WithTransportLogResponses(true),
 			interceptors.WithTransportLogHeaders(cfg.TraceRequestHeaders),
-			interceptors.WithTransportLogBody(true))
+			interceptors.WithTransportLogBody(true),
+		)
 	}
 
 	client := &http.Client{
@@ -206,11 +203,17 @@ func NewHTTPClient(ctx context.Context, opts ...options.HTTPOption) *http.Client
 		oauth2Ctx := context.WithValue(ctx, oauth2.HTTPClient, client)
 		// Get the OAuth2 client and preserve our transport configuration
 		client = cfg.CliCredCfg.Client(oauth2Ctx)
+		if closeIdleFn != nil {
+			client.Transport = closeIdleTransport{
+				inner:       client.Transport,
+				closeIdleFn: closeIdleFn,
+			}
+		}
 	}
 
-	if t, ok := base.(*http.Transport); ok && cfg.IdleTimeout > 0 {
-		t.IdleConnTimeout = cfg.IdleTimeout
+	if client != nil {
+		return client, nil
 	}
 
-	return client
+	return nil, errors.New("failed to initialize HTTP client")
 }
