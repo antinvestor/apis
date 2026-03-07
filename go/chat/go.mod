@@ -6,7 +6,7 @@ require (
 	buf.build/gen/go/antinvestor/chat/connectrpc/go v1.19.1-20260302135025-ade2cc8115e6.2
 	buf.build/gen/go/antinvestor/chat/protocolbuffers/go v1.36.11-20260302135025-ade2cc8115e6.1
 	connectrpc.com/connect v1.19.1
-	github.com/antinvestor/apis/go/common v1.55.0
+	github.com/antinvestor/apis/go/common v1.55.2
 	github.com/gojuno/minimock/v3 v3.4.7
 )
 
@@ -14,15 +14,19 @@ require (
 	buf.build/gen/go/antinvestor/common/protocolbuffers/go v1.36.11-20260219054105-fe125014d75c.1 // indirect
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.11-20260209202127-80ab13bee0bf.1 // indirect
 	buf.build/gen/go/gnostic/gnostic/protocolbuffers/go v1.36.11-20230414000709-087bc8072ce4.1 // indirect
+	github.com/Microsoft/go-winio v0.6.2 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/felixge/httpsnoop v1.0.4 // indirect
+	github.com/go-jose/go-jose/v4 v4.1.3 // indirect
 	github.com/go-logr/logr v1.4.3 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
+	github.com/golang-jwt/jwt/v5 v5.3.1 // indirect
 	github.com/lmittmann/tint v1.1.3 // indirect
 	github.com/pitabwire/util v0.6.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/rs/xid v1.6.0 // indirect
+	github.com/spiffe/go-spiffe/v2 v2.6.0 // indirect
 	go.opentelemetry.io/auto/sdk v1.2.1 // indirect
 	go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc v0.67.0 // indirect
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.67.0 // indirect
