@@ -29,6 +29,7 @@ const (
 	TokenEndpointAuthMethodClientSecretBasic = "client_secret_basic"
 	TokenEndpointAuthMethodClientSecretPost  = "client_secret_post"
 	TokenEndpointAuthMethodPrivateKeyJWT     = "private" + "_key_" + "jwt"
+	PrivateKeyJWTSourceWorkloadAPI           = "workload_api"
 
 	maxWorkloadAPIHTTPOptions = 2
 )

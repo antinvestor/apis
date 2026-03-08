@@ -36,23 +36,70 @@ import (
 
 	"github.com/antinvestor/apis/go/common"
 	"github.com/golang-jwt/jwt/v5"
+	"github.com/spiffe/go-spiffe/v2/svid/x509svid"
+	"github.com/spiffe/go-spiffe/v2/workloadapi"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/clientcredentials"
 )
 
 const (
-	privateKeyJWTAssertionType = "urn:ietf:params:oauth:client-assertion-type:jwt-bearer"
-	clientAssertionIDBytes     = 16
-	privateKeyJWTLifetime      = 5 * time.Minute
+	privateKeyJWTAssertionType      = "urn:ietf:params:oauth:client-assertion-type:jwt-bearer"
+	clientAssertionIDBytes          = 16
+	privateKeyJWTLifetime           = 5 * time.Minute
+	privateKeyJWTWorkloadAPITimeout = 5 * time.Second
 )
 
-var errTokenEndpointNotConfigured = errors.New("oauth2 token endpoint is not configured")
+var (
+	errTokenEndpointNotConfigured = errors.New("oauth2 token endpoint is not configured")
+	fetchWorkloadAPISVIDs         = workloadapi.FetchX509SVIDs
+)
+
+type privateKeyJWTSigner interface {
+	Signer() (crypto.Signer, error)
+}
+
+type staticPrivateKeyJWTSigner struct {
+	signer crypto.Signer
+}
+
+func (s *staticPrivateKeyJWTSigner) Signer() (crypto.Signer, error) {
+	if s == nil || s.signer == nil {
+		return nil, errors.New("private_key_jwt signer is not configured")
+	}
+
+	return s.signer, nil
+}
+
+type workloadAPIPrivateKeyJWTSigner struct {
+	spiffeID string
+	hint     string
+}
+
+func (s *workloadAPIPrivateKeyJWTSigner) Signer() (crypto.Signer, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), privateKeyJWTWorkloadAPITimeout)
+	defer cancel()
+
+	svids, err := fetchWorkloadAPISVIDs(ctx)
+	if err != nil {
+		return nil, fmt.Errorf("fetch workload API X509-SVIDs: %w", err)
+	}
+
+	svid, err := selectWorkloadAPISVID(svids, s.spiffeID, s.hint)
+	if err != nil {
+		return nil, err
+	}
+	if svid.PrivateKey == nil {
+		return nil, errors.New("selected workload API X509-SVID does not include a private key")
+	}
+
+	return svid.PrivateKey, nil
+}
 
 type privateKeyJWTTokenSource struct {
 	httpClient *http.Client
 	tokenURL   string
 	clientID   string
-	signer     crypto.Signer
+	signer     privateKeyJWTSigner
 	keyID      string
 	audience   string
 	issuer     string
@@ -131,7 +178,7 @@ func NewPrivateKeyJWTTokenSource(
 		return nil, errors.New("private_key_jwt requires private key configuration")
 	}
 
-	privateKey, err := parsePrivateKey(ds.PrivateKeyJWT)
+	signer, err := newPrivateKeyJWTSigner(ds.PrivateKeyJWT)
 	if err != nil {
 		return nil, err
 	}
@@ -163,7 +210,7 @@ func NewPrivateKeyJWTTokenSource(
 		httpClient: httpClient,
 		tokenURL:   validatedTokenEndpoint,
 		clientID:   ds.TokenUserName,
-		signer:     privateKey,
+		signer:     signer,
 		keyID:      strings.TrimSpace(ds.PrivateKeyJWT.KeyID),
 		audience:   audience,
 		issuer:     issuer,
@@ -297,12 +344,17 @@ func (s *privateKeyJWTTokenSource) clientAssertion() (string, error) {
 		"jti": hex.EncodeToString(jtiBytes),
 	}
 
-	token := jwt.NewWithClaims(signingMethodForSigner(s.signer), claims)
+	signer, err := s.signer.Signer()
+	if err != nil {
+		return "", err
+	}
+
+	token := jwt.NewWithClaims(signingMethodForSigner(signer), claims)
 	if s.keyID != "" {
 		token.Header["kid"] = s.keyID
 	}
 
-	return token.SignedString(s.signer)
+	return token.SignedString(signer)
 }
 
 func signingMethodForSigner(signer crypto.Signer) jwt.SigningMethod {
@@ -353,6 +405,94 @@ func parsePrivateKey(cfg *common.PrivateKeyJWTConfig) (crypto.Signer, error) {
 	}
 
 	return nil, errors.New("unsupported private key format")
+}
+
+func newPrivateKeyJWTSigner(cfg *common.PrivateKeyJWTConfig) (privateKeyJWTSigner, error) {
+	if cfg == nil {
+		return nil, errors.New("private key jwt config is required")
+	}
+
+	switch privateKeyJWTSource(cfg) {
+	case "":
+		signer, err := parsePrivateKey(cfg)
+		if err != nil {
+			return nil, err
+		}
+		return &staticPrivateKeyJWTSigner{signer: signer}, nil
+	case common.PrivateKeyJWTSourceWorkloadAPI:
+		if len(cfg.PrivateKeyPEM) > 0 || strings.TrimSpace(cfg.PrivateKeyPath) != "" {
+			return nil, errors.New("workload_api private_key_jwt source cannot be combined with PEM or private key path")
+		}
+
+		return &workloadAPIPrivateKeyJWTSigner{
+			spiffeID: strings.TrimSpace(cfg.SPIFFEID),
+			hint:     strings.TrimSpace(cfg.Hint),
+		}, nil
+	default:
+		return nil, fmt.Errorf("unsupported private_key_jwt source %q", strings.TrimSpace(cfg.Source))
+	}
+}
+
+func privateKeyJWTSource(cfg *common.PrivateKeyJWTConfig) string {
+	if cfg == nil {
+		return ""
+	}
+
+	source := strings.ToLower(strings.TrimSpace(cfg.Source))
+	if source != "" {
+		return source
+	}
+
+	if strings.TrimSpace(cfg.SPIFFEID) != "" || strings.TrimSpace(cfg.Hint) != "" {
+		return common.PrivateKeyJWTSourceWorkloadAPI
+	}
+
+	return ""
+}
+
+func selectWorkloadAPISVID(
+	svids []*x509svid.SVID,
+	expectedSPIFFEID string,
+	expectedHint string,
+) (*x509svid.SVID, error) {
+	if len(svids) == 0 {
+		return nil, errors.New("workload API returned no X509-SVIDs")
+	}
+
+	expectedSPIFFEID = strings.TrimSpace(expectedSPIFFEID)
+	expectedHint = strings.TrimSpace(expectedHint)
+
+	if expectedSPIFFEID == "" && expectedHint == "" {
+		return svids[0], nil
+	}
+
+	for _, svid := range svids {
+		if svid == nil {
+			continue
+		}
+
+		if expectedSPIFFEID != "" && svid.ID.String() != expectedSPIFFEID {
+			continue
+		}
+		if expectedHint != "" && strings.TrimSpace(svid.Hint) != expectedHint {
+			continue
+		}
+
+		return svid, nil
+	}
+
+	if expectedSPIFFEID != "" && expectedHint != "" {
+		return nil, fmt.Errorf(
+			"workload API did not return an X509-SVID matching SPIFFE ID %q and hint %q",
+			expectedSPIFFEID,
+			expectedHint,
+		)
+	}
+	if expectedSPIFFEID != "" {
+		return nil, fmt.Errorf("workload API did not return an X509-SVID with SPIFFE ID %q", expectedSPIFFEID)
+	}
+
+	return nil, fmt.Errorf("workload API did not return an X509-SVID with hint %q", expectedHint)
 }
 
 func validateTokenEndpointURL(rawURL string) (string, error) {

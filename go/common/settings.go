@@ -118,6 +118,9 @@ func (ds *DialSettings) hasExplicitAuthentication() bool {
 type PrivateKeyJWTConfig struct {
 	PrivateKeyPEM  []byte
 	PrivateKeyPath string
+	Source         string
+	SPIFFEID       string
+	Hint           string
 	KeyID          string
 	Audience       string
 	Issuer         string
@@ -145,6 +148,9 @@ func (c *PrivateKeyJWTConfig) IsZero() bool {
 
 	return len(c.PrivateKeyPEM) == 0 &&
 		strings.TrimSpace(c.PrivateKeyPath) == "" &&
+		strings.TrimSpace(c.Source) == "" &&
+		strings.TrimSpace(c.SPIFFEID) == "" &&
+		strings.TrimSpace(c.Hint) == "" &&
 		strings.TrimSpace(c.KeyID) == "" &&
 		strings.TrimSpace(c.Audience) == "" &&
 		strings.TrimSpace(c.Issuer) == "" &&
