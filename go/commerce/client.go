@@ -16,6 +16,7 @@ package commerce
 
 import (
 	"context"
+	"strings"
 
 	"buf.build/gen/go/antinvestor/commerce/connectrpc/go/commerce/v1/commercev1connect"
 	"github.com/antinvestor/apis/go/common"
@@ -26,11 +27,7 @@ type ctxKeyType string
 
 const ctxKeyService = ctxKeyType("commerceClientKey")
 
-func defaultOptions() []common.ClientOption {
-	return []common.ClientOption{
-		common.WithEndpoint("https://commerce.antinvestor.com"),
-	}
-}
+const defaultEndpoint = "https://commerce.antinvestor.com"
 
 func ToContext(ctx context.Context, commerceClient commercev1connect.CommerceServiceClient) context.Context {
 	return context.WithValue(ctx, ctxKeyService, commerceClient)
@@ -45,26 +42,20 @@ func FromContext(ctx context.Context) commercev1connect.CommerceServiceClient {
 	return client
 }
 
-// Client is a client for interacting with the commerce service API.
-// Methods, except Close, may be called concurrently. However,
-// fields must not be modified concurrently with method calls.
-type Client struct {
-	*connection.ConnectClientBase
-	commercev1connect.CommerceServiceClient
-}
+// Client aliases the generated Connect client interface for commerce.
+type Client = commercev1connect.CommerceServiceClient
 
 // NewClient creates a new chat svc client.
 // The service that an application uses to send and access received messages
-func NewClient(ctx context.Context, opts ...common.ClientOption) (commercev1connect.CommerceServiceClient, error) {
-	clientOpts := defaultOptions()
-
-	clientBase, err := connection.NewConnectClientBase(ctx, append(clientOpts, opts...)...)
-	if err != nil {
-		return nil, err
+func NewClient(
+	ctx context.Context,
+	cfg any,
+	target common.ServiceTarget,
+	opts ...common.ClientOption,
+) (commercev1connect.CommerceServiceClient, error) {
+	if strings.TrimSpace(target.Endpoint) == "" {
+		target.Endpoint = defaultEndpoint
 	}
 
-	return &Client{
-		ConnectClientBase:     clientBase,
-		CommerceServiceClient: commercev1connect.NewCommerceServiceClient(clientBase.Client(), clientBase.Endpoint(), clientBase.Options()...),
-	}, nil
+	return connection.NewServiceClient(ctx, cfg, target, commercev1connect.NewCommerceServiceClient, opts...)
 }

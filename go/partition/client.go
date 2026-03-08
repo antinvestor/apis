@@ -16,6 +16,7 @@ package partition
 
 import (
 	"context"
+	"strings"
 
 	"buf.build/gen/go/antinvestor/partition/connectrpc/go/partition/v1/partitionv1connect"
 	"github.com/antinvestor/apis/go/common"
@@ -26,11 +27,7 @@ type ctxKeyType string
 
 const ctxKeyService = ctxKeyType("partitionClientKey")
 
-func defaultOptions() []common.ClientOption {
-	return []common.ClientOption{
-		common.WithEndpoint("https://partition.antinvestor.com"),
-	}
-}
+const defaultEndpoint = "https://partition.antinvestor.com"
 
 func ToContext(ctx context.Context, partitionClient partitionv1connect.PartitionServiceClient) context.Context {
 	return context.WithValue(ctx, ctxKeyService, partitionClient)
@@ -45,26 +42,20 @@ func FromContext(ctx context.Context) partitionv1connect.PartitionServiceClient 
 	return client
 }
 
-// Client is a client for interacting with the partition service API.
-// Methods, except Close, may be called concurrently. However,
-// fields must not be modified concurrently with method calls.
-type Client struct {
-	*connection.ConnectClientBase
-	partitionv1connect.PartitionServiceClient
-}
+// Client aliases the generated Connect client interface for partitions.
+type Client = partitionv1connect.PartitionServiceClient
 
 // NewClient creates a new chat svc client.
 // The service that an application uses to send and access received messages
-func NewClient(ctx context.Context, opts ...common.ClientOption) (partitionv1connect.PartitionServiceClient, error) {
-	clientOpts := defaultOptions()
-
-	clientBase, err := connection.NewConnectClientBase(ctx, append(clientOpts, opts...)...)
-	if err != nil {
-		return nil, err
+func NewClient(
+	ctx context.Context,
+	cfg any,
+	target common.ServiceTarget,
+	opts ...common.ClientOption,
+) (partitionv1connect.PartitionServiceClient, error) {
+	if strings.TrimSpace(target.Endpoint) == "" {
+		target.Endpoint = defaultEndpoint
 	}
 
-	return &Client{
-		ConnectClientBase:      clientBase,
-		PartitionServiceClient: partitionv1connect.NewPartitionServiceClient(clientBase.Client(), clientBase.Endpoint(), clientBase.Options()...),
-	}, nil
+	return connection.NewServiceClient(ctx, cfg, target, partitionv1connect.NewPartitionServiceClient, opts...)
 }

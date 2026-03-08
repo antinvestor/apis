@@ -16,6 +16,7 @@ package notification
 
 import (
 	"context"
+	"strings"
 
 	"buf.build/gen/go/antinvestor/notification/connectrpc/go/notification/v1/notificationv1connect"
 	"github.com/antinvestor/apis/go/common"
@@ -26,11 +27,7 @@ type ctxKeyType string
 
 const ctxKeyService = ctxKeyType("notificationClientKey")
 
-func defaultOptions() []common.ClientOption {
-	return []common.ClientOption{
-		common.WithEndpoint("https://notification.antinvestor.com"),
-	}
-}
+const defaultEndpoint = "https://notification.antinvestor.com"
 
 func ToContext(ctx context.Context, notificationClient notificationv1connect.NotificationServiceClient) context.Context {
 	return context.WithValue(ctx, ctxKeyService, notificationClient)
@@ -45,26 +42,20 @@ func FromContext(ctx context.Context) notificationv1connect.NotificationServiceC
 	return client
 }
 
-// Client is a client for interacting with the notification service API.
-// Methods, except Close, may be called concurrently. However,
-// fields must not be modified concurrently with method calls.
-type Client struct {
-	*connection.ConnectClientBase
-	notificationv1connect.NotificationServiceClient
-}
+// Client aliases the generated Connect client interface for notifications.
+type Client = notificationv1connect.NotificationServiceClient
 
 // NewClient creates a new chat svc client.
 // The service that an application uses to send and access received messages
-func NewClient(ctx context.Context, opts ...common.ClientOption) (notificationv1connect.NotificationServiceClient, error) {
-	clientOpts := defaultOptions()
-
-	clientBase, err := connection.NewConnectClientBase(ctx, append(clientOpts, opts...)...)
-	if err != nil {
-		return nil, err
+func NewClient(
+	ctx context.Context,
+	cfg any,
+	target common.ServiceTarget,
+	opts ...common.ClientOption,
+) (notificationv1connect.NotificationServiceClient, error) {
+	if strings.TrimSpace(target.Endpoint) == "" {
+		target.Endpoint = defaultEndpoint
 	}
 
-	return &Client{
-		ConnectClientBase:         clientBase,
-		NotificationServiceClient: notificationv1connect.NewNotificationServiceClient(clientBase.Client(), clientBase.Endpoint(), clientBase.Options()...),
-	}, nil
+	return connection.NewServiceClient(ctx, cfg, target, notificationv1connect.NewNotificationServiceClient, opts...)
 }

@@ -16,6 +16,7 @@ package chat
 
 import (
 	"context"
+	"strings"
 
 	"buf.build/gen/go/antinvestor/chat/connectrpc/go/chat/v1/chatv1connect"
 	"github.com/antinvestor/apis/go/common"
@@ -26,11 +27,7 @@ type ctxKeyType string
 
 const ctxKeyService = ctxKeyType("chatClientKey")
 
-func defaultOptions() []common.ClientOption {
-	return []common.ClientOption{
-		common.WithEndpoint("https://chat.antinvestor.com"),
-	}
-}
+const defaultEndpoint = "https://chat.antinvestor.com"
 
 func ToContext(ctx context.Context, chatClient chatv1connect.ChatServiceClient) context.Context {
 	return context.WithValue(ctx, ctxKeyService, chatClient)
@@ -45,26 +42,20 @@ func FromContext(ctx context.Context) chatv1connect.ChatServiceClient {
 	return client
 }
 
-// Client is a client for interacting with the chat service API.
-// Methods, except Close, may be called concurrently. However,
-// fields must not be modified concurrently with method calls.
-type Client struct {
-	*connection.ConnectClientBase
-	chatv1connect.ChatServiceClient
-}
+// Client aliases the generated Connect client interface for chat.
+type Client = chatv1connect.ChatServiceClient
 
 // NewClient creates a new chat svc client.
 // The service that an application uses to send and access received messages
-func NewClient(ctx context.Context, opts ...common.ClientOption) (chatv1connect.ChatServiceClient, error) {
-	clientOpts := defaultOptions()
-
-	clientBase, err := connection.NewConnectClientBase(ctx, append(clientOpts, opts...)...)
-	if err != nil {
-		return nil, err
+func NewClient(
+	ctx context.Context,
+	cfg any,
+	target common.ServiceTarget,
+	opts ...common.ClientOption,
+) (chatv1connect.ChatServiceClient, error) {
+	if strings.TrimSpace(target.Endpoint) == "" {
+		target.Endpoint = defaultEndpoint
 	}
 
-	return &Client{
-		ConnectClientBase: clientBase,
-		ChatServiceClient: chatv1connect.NewChatServiceClient(clientBase.Client(), clientBase.Endpoint(), clientBase.Options()...),
-	}, nil
+	return connection.NewServiceClient(ctx, cfg, target, chatv1connect.NewChatServiceClient, opts...)
 }

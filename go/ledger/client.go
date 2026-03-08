@@ -16,6 +16,7 @@ package ledger
 
 import (
 	"context"
+	"strings"
 
 	"buf.build/gen/go/antinvestor/ledger/connectrpc/go/ledger/v1/ledgerv1connect"
 	"github.com/antinvestor/apis/go/common"
@@ -26,11 +27,7 @@ type ctxKeyType string
 
 const ctxKeyService = ctxKeyType("ledgerClientKey")
 
-func defaultOptions() []common.ClientOption {
-	return []common.ClientOption{
-		common.WithEndpoint("https://ledger.antinvestor.com"),
-	}
-}
+const defaultEndpoint = "https://ledger.antinvestor.com"
 
 func ToContext(ctx context.Context, ledgerClient ledgerv1connect.LedgerServiceClient) context.Context {
 	return context.WithValue(ctx, ctxKeyService, ledgerClient)
@@ -45,26 +42,20 @@ func FromContext(ctx context.Context) ledgerv1connect.LedgerServiceClient {
 	return client
 }
 
-// Client is a client for interacting with the ledger service API.
-// Methods, except Close, may be called concurrently. However,
-// fields must not be modified concurrently with method calls.
-type Client struct {
-	*connection.ConnectClientBase
-	ledgerv1connect.LedgerServiceClient
-}
+// Client aliases the generated Connect client interface for ledger.
+type Client = ledgerv1connect.LedgerServiceClient
 
 // NewClient creates a new chat svc client.
 // The service that an application uses to send and access received messages
-func NewClient(ctx context.Context, opts ...common.ClientOption) (ledgerv1connect.LedgerServiceClient, error) {
-	clientOpts := defaultOptions()
-
-	clientBase, err := connection.NewConnectClientBase(ctx, append(clientOpts, opts...)...)
-	if err != nil {
-		return nil, err
+func NewClient(
+	ctx context.Context,
+	cfg any,
+	target common.ServiceTarget,
+	opts ...common.ClientOption,
+) (ledgerv1connect.LedgerServiceClient, error) {
+	if strings.TrimSpace(target.Endpoint) == "" {
+		target.Endpoint = defaultEndpoint
 	}
 
-	return &Client{
-		ConnectClientBase:   clientBase,
-		LedgerServiceClient: ledgerv1connect.NewLedgerServiceClient(clientBase.Client(), clientBase.Endpoint(), clientBase.Options()...),
-	}, nil
+	return connection.NewServiceClient(ctx, cfg, target, ledgerv1connect.NewLedgerServiceClient, opts...)
 }

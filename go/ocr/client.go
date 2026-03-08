@@ -16,6 +16,7 @@ package ocr
 
 import (
 	"context"
+	"strings"
 
 	"buf.build/gen/go/antinvestor/ocr/connectrpc/go/ocr/v1/ocrv1connect"
 	"github.com/antinvestor/apis/go/common"
@@ -26,11 +27,7 @@ type ctxKeyType string
 
 const ctxKeyService = ctxKeyType("ocrClientKey")
 
-func defaultOptions() []common.ClientOption {
-	return []common.ClientOption{
-		common.WithEndpoint("https://ocr.antinvestor.com"),
-	}
-}
+const defaultEndpoint = "https://ocr.antinvestor.com"
 
 func ToContext(ctx context.Context, ocrClient ocrv1connect.OCRServiceClient) context.Context {
 	return context.WithValue(ctx, ctxKeyService, ocrClient)
@@ -45,26 +42,20 @@ func FromContext(ctx context.Context) ocrv1connect.OCRServiceClient {
 	return client
 }
 
-// Client is a client for interacting with the ocr service API.
-// Methods, except Close, may be called concurrently. However,
-// fields must not be modified concurrently with method calls.
-type Client struct {
-	*connection.ConnectClientBase
-	ocrv1connect.OCRServiceClient
-}
+// Client aliases the generated Connect client interface for OCR.
+type Client = ocrv1connect.OCRServiceClient
 
 // NewClient creates a new chat svc client.
 // The service that an application uses to send and access received messages
-func NewClient(ctx context.Context, opts ...common.ClientOption) (ocrv1connect.OCRServiceClient, error) {
-	clientOpts := defaultOptions()
-
-	clientBase, err := connection.NewConnectClientBase(ctx, append(clientOpts, opts...)...)
-	if err != nil {
-		return nil, err
+func NewClient(
+	ctx context.Context,
+	cfg any,
+	target common.ServiceTarget,
+	opts ...common.ClientOption,
+) (ocrv1connect.OCRServiceClient, error) {
+	if strings.TrimSpace(target.Endpoint) == "" {
+		target.Endpoint = defaultEndpoint
 	}
 
-	return &Client{
-		ConnectClientBase: clientBase,
-		OCRServiceClient:  ocrv1connect.NewOCRServiceClient(clientBase.Client(), clientBase.Endpoint(), clientBase.Options()...),
-	}, nil
+	return connection.NewServiceClient(ctx, cfg, target, ocrv1connect.NewOCRServiceClient, opts...)
 }

@@ -426,7 +426,9 @@ func newPrivateKeyJWTSigner(cfg *common.PrivateKeyJWTConfig) (privateKeyJWTSigne
 		return &staticPrivateKeyJWTSigner{signer: signer}, nil
 	case common.PrivateKeyJWTSourceWorkloadAPI:
 		if len(cfg.PrivateKeyPEM) > 0 || strings.TrimSpace(cfg.PrivateKeyPath) != "" {
-			return nil, errors.New("workload_api private_key_jwt source cannot be combined with PEM or private key path")
+			return nil, errors.New(
+				"workload_api private_key_jwt source cannot be combined with PEM or private key path",
+			)
 		}
 
 		return &workloadAPIPrivateKeyJWTSigner{

@@ -16,6 +16,7 @@ package billing
 
 import (
 	"context"
+	"strings"
 
 	"buf.build/gen/go/antinvestor/billing/connectrpc/go/billing/v1/billingv1connect"
 	"github.com/antinvestor/apis/go/common"
@@ -26,11 +27,7 @@ type ctxKeyType string
 
 const ctxKeyService = ctxKeyType("billingClientKey")
 
-func defaultOptions() []common.ClientOption {
-	return []common.ClientOption{
-		common.WithEndpoint("https://billing.antinvestor.com"),
-	}
-}
+const defaultEndpoint = "https://billing.antinvestor.com"
 
 func ToContext(ctx context.Context, billingClient billingv1connect.BillingServiceClient) context.Context {
 	return context.WithValue(ctx, ctxKeyService, billingClient)
@@ -45,26 +42,20 @@ func FromContext(ctx context.Context) billingv1connect.BillingServiceClient {
 	return client
 }
 
-// Client is a client for interacting with the billing service API.
-// Methods, except Close, may be called concurrently. However,
-// fields must not be modified concurrently with method calls.
-type Client struct {
-	*connection.ConnectClientBase
-	billingv1connect.BillingServiceClient
-}
+// Client aliases the generated Connect client interface for billing.
+type Client = billingv1connect.BillingServiceClient
 
 // NewClient creates a new billing service client.
 // The service provides usage-based billing, subscription management, and invoicing.
-func NewClient(ctx context.Context, opts ...common.ClientOption) (billingv1connect.BillingServiceClient, error) {
-	clientOpts := defaultOptions()
-
-	clientBase, err := connection.NewConnectClientBase(ctx, append(clientOpts, opts...)...)
-	if err != nil {
-		return nil, err
+func NewClient(
+	ctx context.Context,
+	cfg any,
+	target common.ServiceTarget,
+	opts ...common.ClientOption,
+) (billingv1connect.BillingServiceClient, error) {
+	if strings.TrimSpace(target.Endpoint) == "" {
+		target.Endpoint = defaultEndpoint
 	}
 
-	return &Client{
-		ConnectClientBase:    clientBase,
-		BillingServiceClient: billingv1connect.NewBillingServiceClient(clientBase.Client(), clientBase.Endpoint(), clientBase.Options()...),
-	}, nil
+	return connection.NewServiceClient(ctx, cfg, target, billingv1connect.NewBillingServiceClient, opts...)
 }

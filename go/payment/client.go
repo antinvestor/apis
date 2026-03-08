@@ -16,6 +16,7 @@ package payment
 
 import (
 	"context"
+	"strings"
 
 	"buf.build/gen/go/antinvestor/payment/connectrpc/go/payment/v1/paymentv1connect"
 	"github.com/antinvestor/apis/go/common"
@@ -26,11 +27,7 @@ type ctxKeyType string
 
 const ctxKeyService = ctxKeyType("paymentClientKey")
 
-func defaultOptions() []common.ClientOption {
-	return []common.ClientOption{
-		common.WithEndpoint("https://payment.antinvestor.com"),
-	}
-}
+const defaultEndpoint = "https://payment.antinvestor.com"
 
 func ToContext(ctx context.Context, paymentClient paymentv1connect.PaymentServiceClient) context.Context {
 	return context.WithValue(ctx, ctxKeyService, paymentClient)
@@ -45,26 +42,20 @@ func FromContext(ctx context.Context) paymentv1connect.PaymentServiceClient {
 	return client
 }
 
-// Client is a client for interacting with the payment service API.
-// Methods, except Close, may be called concurrently. However,
-// fields must not be modified concurrently with method calls.
-type Client struct {
-	*connection.ConnectClientBase
-	paymentv1connect.PaymentServiceClient
-}
+// Client aliases the generated Connect client interface for payments.
+type Client = paymentv1connect.PaymentServiceClient
 
 // NewClient creates a new chat svc client.
 // The service that an application uses to send and access received messages
-func NewClient(ctx context.Context, opts ...common.ClientOption) (paymentv1connect.PaymentServiceClient, error) {
-	clientOpts := defaultOptions()
-
-	clientBase, err := connection.NewConnectClientBase(ctx, append(clientOpts, opts...)...)
-	if err != nil {
-		return nil, err
+func NewClient(
+	ctx context.Context,
+	cfg any,
+	target common.ServiceTarget,
+	opts ...common.ClientOption,
+) (paymentv1connect.PaymentServiceClient, error) {
+	if strings.TrimSpace(target.Endpoint) == "" {
+		target.Endpoint = defaultEndpoint
 	}
 
-	return &Client{
-		ConnectClientBase:    clientBase,
-		PaymentServiceClient: paymentv1connect.NewPaymentServiceClient(clientBase.Client(), clientBase.Endpoint(), clientBase.Options()...),
-	}, nil
+	return connection.NewServiceClient(ctx, cfg, target, paymentv1connect.NewPaymentServiceClient, opts...)
 }

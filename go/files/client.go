@@ -16,6 +16,7 @@ package files
 
 import (
 	"context"
+	"strings"
 
 	"buf.build/gen/go/antinvestor/files/connectrpc/go/files/v1/filesv1connect"
 	"github.com/antinvestor/apis/go/common"
@@ -26,11 +27,7 @@ type ctxKeyType string
 
 const ctxKeyService = ctxKeyType("filesClientKey")
 
-func defaultOptions() []common.ClientOption {
-	return []common.ClientOption{
-		common.WithEndpoint("https://files.antinvestor.com"),
-	}
-}
+const defaultEndpoint = "https://files.antinvestor.com"
 
 func ToContext(ctx context.Context, filesClient filesv1connect.FilesServiceClient) context.Context {
 	return context.WithValue(ctx, ctxKeyService, filesClient)
@@ -45,26 +42,20 @@ func FromContext(ctx context.Context) filesv1connect.FilesServiceClient {
 	return client
 }
 
-// Client is a client for interacting with the files service API.
-// Methods, except Close, may be called concurrently. However,
-// fields must not be modified concurrently with method calls.
-type Client struct {
-	*connection.ConnectClientBase
-	filesv1connect.FilesServiceClient
-}
+// Client aliases the generated Connect client interface for files.
+type Client = filesv1connect.FilesServiceClient
 
 // NewClient creates a new files svc client.
 // The service that an application uses to send and access received messages
-func NewClient(ctx context.Context, opts ...common.ClientOption) (filesv1connect.FilesServiceClient, error) {
-	clientOpts := defaultOptions()
-
-	clientBase, err := connection.NewConnectClientBase(ctx, append(clientOpts, opts...)...)
-	if err != nil {
-		return nil, err
+func NewClient(
+	ctx context.Context,
+	cfg any,
+	target common.ServiceTarget,
+	opts ...common.ClientOption,
+) (filesv1connect.FilesServiceClient, error) {
+	if strings.TrimSpace(target.Endpoint) == "" {
+		target.Endpoint = defaultEndpoint
 	}
 
-	return &Client{
-		ConnectClientBase:  clientBase,
-		FilesServiceClient: filesv1connect.NewFilesServiceClient(clientBase.Client(), clientBase.Endpoint(), clientBase.Options()...),
-	}, nil
+	return connection.NewServiceClient(ctx, cfg, target, filesv1connect.NewFilesServiceClient, opts...)
 }
