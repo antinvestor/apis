@@ -51,7 +51,6 @@ const (
 
 var (
 	errTokenEndpointNotConfigured = errors.New("oauth2 token endpoint is not configured")
-	fetchWorkloadAPISVIDs         = workloadapi.FetchX509SVIDs
 )
 
 type privateKeyJWTSigner interface {
@@ -71,15 +70,21 @@ func (s *staticPrivateKeyJWTSigner) Signer() (crypto.Signer, error) {
 }
 
 type workloadAPIPrivateKeyJWTSigner struct {
-	spiffeID string
-	hint     string
+	spiffeID       string
+	hint           string
+	fetchX509SVIDs func(context.Context, ...workloadapi.ClientOption) ([]*x509svid.SVID, error)
 }
 
 func (s *workloadAPIPrivateKeyJWTSigner) Signer() (crypto.Signer, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), privateKeyJWTWorkloadAPITimeout)
 	defer cancel()
 
-	svids, err := fetchWorkloadAPISVIDs(ctx)
+	fetchX509SVIDs := s.fetchX509SVIDs
+	if fetchX509SVIDs == nil {
+		fetchX509SVIDs = workloadapi.FetchX509SVIDs
+	}
+
+	svids, err := fetchX509SVIDs(ctx)
 	if err != nil {
 		return nil, fmt.Errorf("fetch workload API X509-SVIDs: %w", err)
 	}

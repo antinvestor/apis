@@ -4,6 +4,7 @@ import (
 	"context"
 	"crypto/rand"
 	"crypto/rsa"
+	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -20,41 +21,49 @@ func TestNewPrivateKeyJWTTokenSourceWithWorkloadAPI(t *testing.T) {
 	privateKey, err := rsa.GenerateKey(rand.Reader, 2048)
 	require.NoError(t, err)
 
-	restoreFetch := fetchWorkloadAPISVIDs
-	t.Cleanup(func() {
-		fetchWorkloadAPISVIDs = restoreFetch
-	})
-
-	fetchWorkloadAPISVIDs = func(context.Context, ...workloadapi.ClientOption) ([]*x509svid.SVID, error) {
-		return []*x509svid.SVID{
-			{
-				ID:         spiffeid.RequireFromString("spiffe://example.org/ns/default/sa/other"),
-				Hint:       "external",
-				PrivateKey: privateKey,
-			},
-			{
-				ID:         spiffeid.RequireFromString("spiffe://example.org/ns/default/sa/service-authentication"),
-				Hint:       "internal",
-				PrivateKey: privateKey,
-			},
-		}, nil
-	}
-
 	var tokenURL string
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		require.NoError(t, r.ParseForm())
-		require.Equal(t, privateKeyJWTAssertionType, r.Form.Get("client_assertion_type"))
+		if err = r.ParseForm(); err != nil {
+			t.Errorf("ParseForm() error = %v", err)
+			http.Error(w, fmt.Sprintf("parse form: %v", err), http.StatusBadRequest)
+			return
+		}
+		if got := r.Form.Get("client_assertion_type"); got != privateKeyJWTAssertionType {
+			t.Errorf("client_assertion_type = %q, want %q", got, privateKeyJWTAssertionType)
+			http.Error(w, "unexpected client_assertion_type", http.StatusBadRequest)
+			return
+		}
 
 		parsedToken, parseErr := jwt.Parse(r.Form.Get("client_assertion"), func(_ *jwt.Token) (interface{}, error) {
 			return &privateKey.PublicKey, nil
 		})
-		require.NoError(t, parseErr)
-		require.True(t, parsedToken.Valid)
+		if parseErr != nil {
+			t.Errorf("jwt.Parse() error = %v", parseErr)
+			http.Error(w, fmt.Sprintf("parse jwt: %v", parseErr), http.StatusBadRequest)
+			return
+		}
+		if !parsedToken.Valid {
+			t.Error("parsed token is invalid")
+			http.Error(w, "invalid jwt", http.StatusBadRequest)
+			return
+		}
 
 		claims, ok := parsedToken.Claims.(jwt.MapClaims)
-		require.True(t, ok)
-		require.Equal(t, "svc-client", claims["iss"])
-		require.Equal(t, tokenURL, claims["aud"])
+		if !ok {
+			t.Errorf("claims type = %T, want jwt.MapClaims", parsedToken.Claims)
+			http.Error(w, "unexpected claims type", http.StatusBadRequest)
+			return
+		}
+		if got := claims["iss"]; got != "svc-client" {
+			t.Errorf("iss = %v, want %q", got, "svc-client")
+			http.Error(w, "unexpected iss", http.StatusBadRequest)
+			return
+		}
+		if got := claims["aud"]; got != tokenURL {
+			t.Errorf("aud = %v, want %q", got, tokenURL)
+			http.Error(w, "unexpected aud", http.StatusBadRequest)
+			return
+		}
 
 		w.Header().Set("Content-Type", "application/json")
 		_, _ = w.Write([]byte(`{"access_token":"token-workload-api","token_type":"Bearer","expires_in":60}`))
@@ -72,6 +81,23 @@ func TestNewPrivateKeyJWTTokenSourceWithWorkloadAPI(t *testing.T) {
 		},
 	}, server.Client())
 	require.NoError(t, err)
+
+	workloadSigner, ok := source.(*privateKeyJWTTokenSource).signer.(*workloadAPIPrivateKeyJWTSigner)
+	require.True(t, ok)
+	workloadSigner.fetchX509SVIDs = func(context.Context, ...workloadapi.ClientOption) ([]*x509svid.SVID, error) {
+		return []*x509svid.SVID{
+			{
+				ID:         spiffeid.RequireFromString("spiffe://example.org/ns/default/sa/other"),
+				Hint:       "external",
+				PrivateKey: privateKey,
+			},
+			{
+				ID:         spiffeid.RequireFromString("spiffe://example.org/ns/default/sa/service-authentication"),
+				Hint:       "internal",
+				PrivateKey: privateKey,
+			},
+		}, nil
+	}
 
 	token, err := source.Token()
 	require.NoError(t, err)
