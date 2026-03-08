@@ -97,17 +97,18 @@ func NewConnectClientBase(ctx context.Context, opts ...common.ClientOption) (*Co
 		return nil, err
 	}
 
+	baseHTTPDialOpts := append([]options.HTTPOption(nil), ds.HTTPDialOpts...)
+	serviceHTTPDialOpts := append([]options.HTTPOption(nil), baseHTTPDialOpts...)
+
 	// automatically switch HTTPDialOpts to enable H2C if we have http:// server
 	u, err := url.Parse(ds.Endpoint)
 	if err == nil && u.Scheme == schemeHTTP {
-		ds.HTTPDialOpts = append(ds.HTTPDialOpts, options.WithHTTPEnableH2C())
+		serviceHTTPDialOpts = append(serviceHTTPDialOpts, options.WithHTTPEnableH2C())
 	}
-
-	httpDialOpts := ds.HTTPDialOpts
 
 	httpClient := ds.HTTPClient
 	if httpClient == nil {
-		httpClient, err = NewHTTPClient(ctx, httpDialOpts...)
+		httpClient, err = NewHTTPClient(ctx, serviceHTTPDialOpts...)
 		if err != nil {
 			return nil, err
 		}
@@ -130,7 +131,15 @@ func NewConnectClientBase(ctx context.Context, opts ...common.ClientOption) (*Co
 	}
 
 	if ds.TokenEndpoint != "" || ds.TokenSource != nil {
-		tokenSource, tokenErr := NewOAuth2TokenSource(ctx, ds, httpClient)
+		tokenHTTPClient := httpClient
+		if ds.HTTPClient == nil {
+			tokenHTTPClient, err = NewHTTPClient(ctx, baseHTTPDialOpts...)
+			if err != nil {
+				return nil, err
+			}
+		}
+
+		tokenSource, tokenErr := NewOAuth2TokenSource(ctx, ds, tokenHTTPClient)
 		if tokenErr != nil && !errors.Is(tokenErr, errTokenEndpointNotConfigured) {
 			return nil, tokenErr
 		}
