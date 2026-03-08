@@ -127,22 +127,27 @@ func TestNewConnectClientUsesHTTP11TokenEndpointForHTTPServices(t *testing.T) {
 	}))
 	defer tokenServer.Close()
 
-	serviceServer := httptest.NewUnstartedServer(h2c.NewHandler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if r.URL.Path != procedure {
-			http.NotFound(w, r)
-			return
-		}
-		if got := r.Header.Get("Authorization"); got != "Bearer token-123" {
-			http.Error(w, "missing authorization", http.StatusUnauthorized)
-			return
-		}
-		connect.NewUnaryHandler(
-			procedure,
-			func(_ context.Context, req *connect.Request[emptypb.Empty]) (*connect.Response[emptypb.Empty], error) {
-				return connect.NewResponse(&emptypb.Empty{}), nil
-			},
-		).ServeHTTP(w, r)
-	}), &http2.Server{}))
+	serviceServer := httptest.NewUnstartedServer(
+		h2c.NewHandler(
+			http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				if r.URL.Path != procedure {
+					http.NotFound(w, r)
+					return
+				}
+				if got := r.Header.Get("Authorization"); got != "Bearer token-123" {
+					http.Error(w, "missing authorization", http.StatusUnauthorized)
+					return
+				}
+				connect.NewUnaryHandler(
+					procedure,
+					func(_ context.Context, _ *connect.Request[emptypb.Empty]) (*connect.Response[emptypb.Empty], error) {
+						return connect.NewResponse(&emptypb.Empty{}), nil
+					},
+				).ServeHTTP(w, r)
+			}),
+			&http2.Server{},
+		),
+	)
 	serviceServer.Start()
 	defer serviceServer.Close()
 

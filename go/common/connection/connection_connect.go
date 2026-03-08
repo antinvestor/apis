@@ -124,32 +124,13 @@ func NewConnectClientBase(ctx context.Context, opts ...common.ClientOption) (*Co
 		return &clientBase, nil
 	}
 
-	var authOpts []interceptors.AuthInterceptorOption
-
-	if ds.APICredential != "" {
-		authOpts = append(authOpts, interceptors.WithAPIKey(ds.APICredential))
-	}
-
-	if ds.TokenEndpoint != "" || ds.TokenSource != nil {
-		tokenHTTPClient := httpClient
-		if ds.HTTPClient == nil {
-			tokenHTTPClient, err = NewHTTPClient(ctx, baseHTTPDialOpts...)
-			if err != nil {
-				return nil, err
-			}
-		}
-
-		tokenSource, tokenErr := NewOAuth2TokenSource(ctx, ds, tokenHTTPClient)
-		if tokenErr != nil && !errors.Is(tokenErr, errTokenEndpointNotConfigured) {
-			return nil, tokenErr
-		}
-		if tokenSource != nil {
-			authOpts = append(authOpts, interceptors.WithTokenSource(tokenSource))
-		}
+	authInterceptor, err := newAuthInterceptor(ctx, ds, httpClient, baseHTTPDialOpts)
+	if err != nil {
+		return nil, err
 	}
 
 	clientBase.interceptors = []connect.Interceptor{
-		interceptors.NewAuthInterceptor(authOpts...),
+		authInterceptor,
 		interceptors.NewPartitionInfoInterceptor(clientBase.GetInfo())}
 
 	if ds.TraceRequests || ds.TraceResponses || ds.TraceHeaders {
@@ -161,6 +142,56 @@ func NewConnectClientBase(ctx context.Context, opts ...common.ClientOption) (*Co
 	}
 
 	return &clientBase, nil
+}
+
+func newAuthInterceptor(
+	ctx context.Context,
+	ds *common.DialSettings,
+	serviceHTTPClient *http.Client,
+	baseHTTPDialOpts []options.HTTPOption,
+) (connect.Interceptor, error) {
+	var authOpts []interceptors.AuthInterceptorOption
+
+	if ds.APICredential != "" {
+		authOpts = append(authOpts, interceptors.WithAPIKey(ds.APICredential))
+	}
+
+	tokenSource, err := resolveTokenSource(ctx, ds, serviceHTTPClient, baseHTTPDialOpts)
+	if err != nil {
+		return nil, err
+	}
+	if tokenSource != nil {
+		authOpts = append(authOpts, interceptors.WithTokenSource(tokenSource))
+	}
+
+	return interceptors.NewAuthInterceptor(authOpts...), nil
+}
+
+func resolveTokenSource(
+	ctx context.Context,
+	ds *common.DialSettings,
+	serviceHTTPClient *http.Client,
+	baseHTTPDialOpts []options.HTTPOption,
+) (oauth2.TokenSource, error) {
+	if ds.TokenEndpoint == "" && ds.TokenSource == nil {
+		return nil, nil //nolint:nilnil // Nil token source means OAuth authentication is not configured.
+	}
+
+	tokenHTTPClient := serviceHTTPClient
+	if ds.HTTPClient == nil {
+		var err error
+		tokenHTTPClient, err = NewHTTPClient(ctx, baseHTTPDialOpts...)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	tokenSource, err := NewOAuth2TokenSource(ctx, ds, tokenHTTPClient)
+	if err != nil && !errors.Is(err, errTokenEndpointNotConfigured) {
+		return nil, err
+	}
+
+	return tokenSource, nil
 }
 
 // NewHTTPClient creates a new HTTP client with the provided options.
