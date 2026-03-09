@@ -18,6 +18,7 @@ import (
 	"context"
 	"net/http"
 	"net/http/httptest"
+	"sync/atomic"
 	"testing"
 
 	"connectrpc.com/connect"
@@ -99,8 +100,11 @@ func TestNewServiceClientResolvesTargetBeforeConstructingGeneratedClient(t *test
 
 func TestNewConnectClientUsesHTTP11TokenEndpointForHTTPServices(t *testing.T) {
 	const procedure = "/test.v1.TestService/Ping"
+	var tokenProto atomic.Int32
+	var serviceProto atomic.Int32
 
 	tokenServer := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		tokenProto.Store(int32(r.ProtoMajor))
 		if r.Method != http.MethodPost {
 			http.Error(w, "unexpected method", http.StatusMethodNotAllowed)
 			return
@@ -127,9 +131,87 @@ func TestNewConnectClientUsesHTTP11TokenEndpointForHTTPServices(t *testing.T) {
 	}))
 	defer tokenServer.Close()
 
+	serviceServer := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		serviceProto.Store(int32(r.ProtoMajor))
+		if r.URL.Path != procedure {
+			http.NotFound(w, r)
+			return
+		}
+		if got := r.Header.Get("Authorization"); got != "Bearer token-123" {
+			http.Error(w, "missing authorization", http.StatusUnauthorized)
+			return
+		}
+		connect.NewUnaryHandler(
+			procedure,
+			func(_ context.Context, _ *connect.Request[emptypb.Empty]) (*connect.Response[emptypb.Empty], error) {
+				return connect.NewResponse(&emptypb.Empty{}), nil
+			},
+		).ServeHTTP(w, r)
+	}))
+	defer serviceServer.Close()
+
+	client, err := commonconnection.NewConnectClient(
+		context.Background(),
+		func(httpClient connect.HTTPClient, endpoint string, opts ...connect.ClientOption) *connect.Client[emptypb.Empty, emptypb.Empty] {
+			return connect.NewClient[emptypb.Empty, emptypb.Empty](httpClient, endpoint+procedure, opts...)
+		},
+		common.WithEndpoint(serviceServer.URL),
+		common.WithTokenEndpoint(tokenServer.URL),
+		common.WithTokenUsername("svc-client"),
+		common.WithTokenPassword("secret"),
+	)
+	if err != nil {
+		t.Fatalf("NewConnectClient returned error: %v", err)
+	}
+
+	resp, err := client.CallUnary(context.Background(), connect.NewRequest(&emptypb.Empty{}))
+	if err != nil {
+		t.Fatalf("Ping returned error: %v", err)
+	}
+	if resp == nil || resp.Msg == nil {
+		t.Fatal("expected unary response")
+	}
+	if got := tokenProto.Load(); got != 1 {
+		t.Fatalf("expected token endpoint to use HTTP/1.1, got HTTP/%d", got)
+	}
+	if got := serviceProto.Load(); got != 1 {
+		t.Fatalf("expected service endpoint to default to HTTP/1.1, got HTTP/%d", got)
+	}
+}
+
+func TestNewConnectClientCanOptIntoH2CForHTTPServices(t *testing.T) {
+	const procedure = "/test.v1.TestService/Ping"
+	var tokenProto atomic.Int32
+	var serviceProto atomic.Int32
+
+	tokenServer := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		tokenProto.Store(int32(r.ProtoMajor))
+		if r.Method != http.MethodPost {
+			http.Error(w, "unexpected method", http.StatusMethodNotAllowed)
+			return
+		}
+		if err := r.ParseForm(); err != nil {
+			http.Error(w, "invalid form", http.StatusBadRequest)
+			return
+		}
+		user, password, ok := r.BasicAuth()
+		if !ok {
+			http.Error(w, "missing basic auth", http.StatusBadRequest)
+			return
+		}
+		if user != "svc-client" || password != "secret" {
+			http.Error(w, "unexpected credentials", http.StatusBadRequest)
+			return
+		}
+		w.Header().Set("Content-Type", "application/json")
+		_, _ = w.Write([]byte(`{"access_token":"token-123","token_type":"Bearer","expires_in":3600}`))
+	}))
+	defer tokenServer.Close()
+
 	serviceServer := httptest.NewUnstartedServer(
 		h2c.NewHandler(
 			http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				serviceProto.Store(int32(r.ProtoMajor))
 				if r.URL.Path != procedure {
 					http.NotFound(w, r)
 					return
@@ -157,6 +239,7 @@ func TestNewConnectClientUsesHTTP11TokenEndpointForHTTPServices(t *testing.T) {
 			return connect.NewClient[emptypb.Empty, emptypb.Empty](httpClient, endpoint+procedure, opts...)
 		},
 		common.WithEndpoint(serviceServer.URL),
+		common.WithHTTPEnableH2C(),
 		common.WithTokenEndpoint(tokenServer.URL),
 		common.WithTokenUsername("svc-client"),
 		common.WithTokenPassword("secret"),
@@ -171,5 +254,11 @@ func TestNewConnectClientUsesHTTP11TokenEndpointForHTTPServices(t *testing.T) {
 	}
 	if resp == nil || resp.Msg == nil {
 		t.Fatal("expected unary response")
+	}
+	if got := tokenProto.Load(); got != 1 {
+		t.Fatalf("expected token endpoint to stay on HTTP/1.1, got HTTP/%d", got)
+	}
+	if got := serviceProto.Load(); got != 2 {
+		t.Fatalf("expected service endpoint to use h2c, got HTTP/%d", got)
 	}
 }

@@ -95,6 +95,18 @@ func (w withHTTPClient) Apply(o *DialSettings) {
 	o.HTTPClient = w.client
 }
 
+// WithHTTPEnableH2C enables unencrypted HTTP/2 for outbound HTTP clients.
+// Use this only for downstream services that explicitly require h2c.
+func WithHTTPEnableH2C() ClientOption {
+	return withHTTPEnableH2C{}
+}
+
+type withHTTPEnableH2C struct{}
+
+func (w withHTTPEnableH2C) Apply(o *DialSettings) {
+	o.HTTPEnableH2C = true
+}
+
 // WithGRPCConn returns a ClientOption that specifies the gRPC client
 // connection to use as the basis of communications. This option may only be
 // used with services that support gRPC as their communication transport. When

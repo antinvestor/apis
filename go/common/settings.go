@@ -48,6 +48,7 @@ type DialSettings struct {
 	Audiences               []string
 	DefaultAudience         string
 	HTTPClient              *http.Client
+	HTTPEnableH2C           bool
 	HTTPDialOpts            []options.HTTPOption
 	GRPCDialOpts            []grpc.DialOption
 	GRPCConn                *grpc.ClientConn

@@ -18,7 +18,6 @@ import (
 	"context"
 	"errors"
 	"net/http"
-	"net/url"
 	"time"
 
 	"connectrpc.com/connect"
@@ -33,8 +32,6 @@ import (
 const (
 	defaultHTTPTimeoutSeconds     = 30
 	defaultHTTPIdleTimeoutSeconds = 90
-
-	schemeHTTP = "http"
 )
 
 type ConnectClientBase struct {
@@ -99,10 +96,7 @@ func NewConnectClientBase(ctx context.Context, opts ...common.ClientOption) (*Co
 
 	baseHTTPDialOpts := append([]options.HTTPOption(nil), ds.HTTPDialOpts...)
 	serviceHTTPDialOpts := append([]options.HTTPOption(nil), baseHTTPDialOpts...)
-
-	// automatically switch HTTPDialOpts to enable H2C if we have http:// server
-	u, err := url.Parse(ds.Endpoint)
-	if err == nil && u.Scheme == schemeHTTP {
+	if ds.HTTPEnableH2C {
 		serviceHTTPDialOpts = append(serviceHTTPDialOpts, options.WithHTTPEnableH2C())
 	}
 
