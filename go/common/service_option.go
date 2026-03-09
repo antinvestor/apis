@@ -216,9 +216,8 @@ func oauth2ClientOptions(rawCfg any, cfg OAuth2ClientConfig) ([]ClientOption, er
 	opts = append(opts, WithTokenEndpointAuthMethod(authMethod))
 
 	if authMethod == TokenEndpointAuthMethodPrivateKeyJWT {
-		if provider, ok := oauth2PrivateKeyJWTConfig(rawCfg); ok && provider.GetOauth2PrivateKeyJWTConfig() != nil &&
-			!provider.GetOauth2PrivateKeyJWTConfig().IsZero() {
-			opts = append(opts, WithTokenPrivateKeyJWT(*provider.GetOauth2PrivateKeyJWTConfig()))
+		if cfg := oauth2PrivateKeyJWTConfig(rawCfg); cfg != nil && !cfg.IsZero() {
+			opts = append(opts, WithTokenPrivateKeyJWT(*cfg))
 			return opts, nil
 		}
 		return nil, errors.New("private_key_jwt requires private key configuration")
@@ -248,8 +247,8 @@ func oauth2TokenAuthMethodConfig(cfg any) (OAuth2TokenAuthMethodConfig, bool) {
 	return configAsOAuth2TokenAuthMethodConfig(cfg)
 }
 
-func oauth2PrivateKeyJWTConfig(cfg any) (OAuth2PrivateKeyJWTConfig, bool) {
-	return configAsOAuth2PrivateKeyJWTConfig(cfg)
+func oauth2PrivateKeyJWTConfig(cfg any) *PrivateKeyJWTConfig {
+	return extractPrivateKeyJWTConfig(cfg)
 }
 
 func trustDomain(cfg WorkloadAPIConfig) string {
@@ -389,22 +388,136 @@ func configAsOAuth2TokenAuthMethodConfig(cfg any) (OAuth2TokenAuthMethodConfig, 
 	return typed, ok
 }
 
-func configAsOAuth2PrivateKeyJWTConfig(cfg any) (OAuth2PrivateKeyJWTConfig, bool) {
+func extractPrivateKeyJWTConfig(cfg any) *PrivateKeyJWTConfig {
 	if cfg == nil {
-		return nil, false
+		return nil
 	}
 
 	if typed, ok := cfg.(OAuth2PrivateKeyJWTConfig); ok {
-		return typed, true
+		return clonePrivateKeyJWTConfig(typed.GetOauth2PrivateKeyJWTConfig())
 	}
 
 	ptr := pointerValue(cfg)
-	if ptr == nil {
+	if typed, ok := ptr.(OAuth2PrivateKeyJWTConfig); ok {
+		return clonePrivateKeyJWTConfig(typed.GetOauth2PrivateKeyJWTConfig())
+	}
+
+	return extractPrivateKeyJWTConfigByMethod(cfg)
+}
+
+func extractPrivateKeyJWTConfigByMethod(cfg any) *PrivateKeyJWTConfig {
+	method := reflect.ValueOf(cfg).MethodByName("GetOauth2PrivateKeyJWTConfig")
+	if !method.IsValid() {
+		ptr := pointerValue(cfg)
+		if ptr == nil {
+			return nil
+		}
+
+		method = reflect.ValueOf(ptr).MethodByName("GetOauth2PrivateKeyJWTConfig")
+		if !method.IsValid() {
+			return nil
+		}
+	}
+
+	methodType := method.Type()
+	if methodType.NumIn() != 0 || methodType.NumOut() != 1 {
+		return nil
+	}
+
+	return normalizePrivateKeyJWTConfigValue(method.Call(nil)[0])
+}
+
+func normalizePrivateKeyJWTConfigValue(value reflect.Value) *PrivateKeyJWTConfig {
+	for value.IsValid() && (value.Kind() == reflect.Interface || value.Kind() == reflect.Pointer) {
+		if value.IsNil() {
+			return nil
+		}
+		value = value.Elem()
+	}
+
+	if !value.IsValid() {
+		return nil
+	}
+
+	if cfg, ok := value.Interface().(PrivateKeyJWTConfig); ok {
+		return cfg.Clone()
+	}
+
+	if cfg, ok := value.Interface().(*PrivateKeyJWTConfig); ok {
+		return clonePrivateKeyJWTConfig(cfg)
+	}
+
+	if value.Kind() != reflect.Struct {
+		return nil
+	}
+
+	return buildPrivateKeyJWTConfigFromStruct(value)
+}
+
+func buildPrivateKeyJWTConfigFromStruct(value reflect.Value) *PrivateKeyJWTConfig {
+	cfg := &PrivateKeyJWTConfig{}
+
+	if field, ok := bytesField(value, "PrivateKeyPEM"); ok {
+		cfg.PrivateKeyPEM = field
+	}
+	if field, ok := stringField(value, "PrivateKeyPath"); ok {
+		cfg.PrivateKeyPath = field
+	}
+	if field, ok := stringField(value, "Source"); ok {
+		cfg.Source = field
+	}
+	if field, ok := stringField(value, "SPIFFEID"); ok {
+		cfg.SPIFFEID = field
+	}
+	if field, ok := stringField(value, "Hint"); ok {
+		cfg.Hint = field
+	}
+	if field, ok := stringField(value, "KeyID"); ok {
+		cfg.KeyID = field
+	}
+	if field, ok := stringField(value, "Audience"); ok {
+		cfg.Audience = field
+	}
+	if field, ok := stringField(value, "Issuer"); ok {
+		cfg.Issuer = field
+	}
+	if field, ok := stringField(value, "Subject"); ok {
+		cfg.Subject = field
+	}
+
+	return cfg
+}
+
+func stringField(value reflect.Value, name string) (string, bool) {
+	field := value.FieldByName(name)
+	if !field.IsValid() || field.Kind() != reflect.String {
+		return "", false
+	}
+
+	return field.String(), true
+}
+
+func bytesField(value reflect.Value, name string) ([]byte, bool) {
+	field := value.FieldByName(name)
+	if !field.IsValid() || field.Kind() != reflect.Slice || field.Type().Elem().Kind() != reflect.Uint8 {
 		return nil, false
 	}
 
-	typed, ok := ptr.(OAuth2PrivateKeyJWTConfig)
-	return typed, ok
+	if field.IsNil() {
+		return nil, true
+	}
+
+	data := make([]byte, field.Len())
+	reflect.Copy(reflect.ValueOf(data), field)
+	return data, true
+}
+
+func clonePrivateKeyJWTConfig(cfg *PrivateKeyJWTConfig) *PrivateKeyJWTConfig {
+	if cfg == nil {
+		return nil
+	}
+
+	return cfg.Clone()
 }
 
 func pointerValue(cfg any) any {

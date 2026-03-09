@@ -88,6 +88,27 @@ func (c *pointerOnlyInternalServiceConfig) GetOauth2PrivateKeyJWTConfig() *commo
 	return c.privateKeyJWT
 }
 
+type foreignPrivateKeyJWTConfig struct {
+	PrivateKeyPEM  []byte
+	PrivateKeyPath string
+	Source         string
+	SPIFFEID       string
+	Hint           string
+	KeyID          string
+	Audience       string
+	Issuer         string
+	Subject        string
+}
+
+type foreignPrivateKeyJWTProviderConfig struct {
+	testInternalServiceConfig
+	privateKeyJWT *foreignPrivateKeyJWTConfig
+}
+
+func (c foreignPrivateKeyJWTProviderConfig) GetOauth2PrivateKeyJWTConfig() *foreignPrivateKeyJWTConfig {
+	return c.privateKeyJWT
+}
+
 func TestInternalServiceSuite(t *testing.T) {
 	suite.Run(t, new(InternalServiceSuite))
 }
@@ -173,6 +194,36 @@ func (s *InternalServiceSuite) TestClientOptionsWithPrivateKeyJWTWorkloadAPI() {
 	s.Equal("spiffe://example.org/ns/default/sa/service-authentication", dial.PrivateKeyJWT.SPIFFEID)
 	s.Equal("internal", dial.PrivateKeyJWT.Hint)
 	s.Equal("kid-1", dial.PrivateKeyJWT.KeyID)
+}
+
+func (s *InternalServiceSuite) TestClientOptionsWithForeignPrivateKeyJWTConfig() {
+	cfg := foreignPrivateKeyJWTProviderConfig{
+		testInternalServiceConfig: testInternalServiceConfig{
+			tokenEndpoint:           "https://issuer.example.org/oauth2/token",
+			clientID:                "svc-client",
+			tokenEndpointAuthMethod: common.TokenEndpointAuthMethodPrivateKeyJWT,
+		},
+		privateKeyJWT: &foreignPrivateKeyJWTConfig{
+			Source:   common.PrivateKeyJWTSourceWorkloadAPI,
+			SPIFFEID: "spiffe://example.org/ns/default/sa/service-authentication",
+			Hint:     "internal",
+			KeyID:    "kid-1",
+			Audience: "https://issuer.example.org/oauth2/token",
+		},
+	}
+
+	opts, err := common.ClientOptions(s.T().Context(), cfg, common.ServiceTarget{
+		Endpoint: "http://profile.default.svc.cluster.local",
+	})
+	s.Require().NoError(err)
+
+	dial := applyClientOptions(opts)
+	s.Require().NotNil(dial.PrivateKeyJWT)
+	s.Equal(common.PrivateKeyJWTSourceWorkloadAPI, dial.PrivateKeyJWT.Source)
+	s.Equal("spiffe://example.org/ns/default/sa/service-authentication", dial.PrivateKeyJWT.SPIFFEID)
+	s.Equal("internal", dial.PrivateKeyJWT.Hint)
+	s.Equal("kid-1", dial.PrivateKeyJWT.KeyID)
+	s.Equal("https://issuer.example.org/oauth2/token", dial.PrivateKeyJWT.Audience)
 }
 
 func (s *InternalServiceSuite) TestClientOptionsPrivateKeyJWTRequiresKeyConfig() {
