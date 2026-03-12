@@ -183,11 +183,20 @@ func NewPrivateKeyJWTTokenSource(
 		return nil, errors.New("private_key_jwt requires private key configuration")
 	}
 
-	signer, err := newPrivateKeyJWTSigner(ds.PrivateKeyJWT)
+	validatedTokenEndpoint, err := validateTokenEndpointURL(ds.TokenEndpoint)
 	if err != nil {
 		return nil, err
 	}
-	validatedTokenEndpoint, err := validateTokenEndpointURL(ds.TokenEndpoint)
+
+	if httpClient == nil {
+		httpClient = http.DefaultClient
+	}
+
+	if privateKeyJWTSource(ds.PrivateKeyJWT) == common.PrivateKeyJWTSourceURL {
+		return newRemoteSignerTokenSource(ds, httpClient, validatedTokenEndpoint)
+	}
+
+	signer, err := newPrivateKeyJWTSigner(ds.PrivateKeyJWT)
 	if err != nil {
 		return nil, err
 	}
@@ -205,10 +214,6 @@ func NewPrivateKeyJWTTokenSource(
 	subject := strings.TrimSpace(ds.PrivateKeyJWT.Subject)
 	if subject == "" {
 		subject = ds.TokenUserName
-	}
-
-	if httpClient == nil {
-		httpClient = http.DefaultClient
 	}
 
 	return &privateKeyJWTTokenSource{
@@ -535,4 +540,154 @@ func isLoopbackHost(host string) bool {
 	default:
 		return false
 	}
+}
+
+const maxSignerResponseBytes = 64 << 10 // 64 KiB
+
+type remoteSignerTokenSource struct {
+	httpClient *http.Client
+	tokenURL   string
+	signerURL  string
+	clientID   string
+	audience   string
+	scopes     []string
+	audiences  []string
+}
+
+type signAssertionRequest struct {
+	ClientID      string `json:"client_id"`
+	TokenEndpoint string `json:"token_endpoint"`
+	Audience      string `json:"audience"`
+	JWKSetName    string `json:"jwk_set_name"`
+}
+
+type signAssertionResponse struct {
+	ClientAssertion     string `json:"client_assertion"`
+	ClientAssertionType string `json:"client_assertion_type"`
+}
+
+func newRemoteSignerTokenSource(
+	ds *common.DialSettings,
+	httpClient *http.Client,
+	tokenURL string,
+) (oauth2.TokenSource, error) {
+	signerURL := strings.TrimSpace(ds.PrivateKeyJWT.SignerURL)
+	if signerURL == "" {
+		return nil, errors.New("url private_key_jwt source requires signer_url")
+	}
+
+	audience := strings.TrimSpace(ds.PrivateKeyJWT.Audience)
+	if audience == "" {
+		audience = tokenURL
+	}
+
+	return &remoteSignerTokenSource{
+		httpClient: httpClient,
+		tokenURL:   tokenURL,
+		signerURL:  signerURL,
+		clientID:   ds.TokenUserName,
+		audience:   audience,
+		scopes:     append([]string(nil), ds.GetScopes()...),
+		audiences:  append([]string(nil), ds.GetAudiences()...),
+	}, nil
+}
+
+func (s *remoteSignerTokenSource) Token() (*oauth2.Token, error) {
+	assertion, err := s.fetchSignedAssertion()
+	if err != nil {
+		return nil, fmt.Errorf("fetch signed assertion: %w", err)
+	}
+
+	form := url.Values{}
+	form.Set("grant_type", "client_credentials")
+	form.Set("client_id", s.clientID)
+	form.Set("client_assertion_type", privateKeyJWTAssertionType)
+	form.Set("client_assertion", assertion)
+
+	if len(s.scopes) > 0 {
+		form.Set("scope", strings.Join(s.scopes, " "))
+	}
+	for _, aud := range s.audiences {
+		aud = strings.TrimSpace(aud)
+		if aud != "" {
+			form.Add("audience", aud)
+		}
+	}
+
+	req, err := http.NewRequestWithContext(
+		context.Background(),
+		http.MethodPost,
+		s.tokenURL,
+		strings.NewReader(form.Encode()),
+	)
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+
+	//nolint:gosec // tokenURL is validated during construction and is intentionally configurable.
+	resp, err := s.httpClient.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	return decodeTokenResponse(resp)
+}
+
+func (s *remoteSignerTokenSource) fetchSignedAssertion() (string, error) {
+	reqBody := signAssertionRequest{
+		ClientID:      s.clientID,
+		TokenEndpoint: s.tokenURL,
+		Audience:      s.audience,
+		JWKSetName:    s.clientID,
+	}
+
+	bodyJSON, err := json.Marshal(reqBody)
+	if err != nil {
+		return "", fmt.Errorf("marshal sign request: %w", err)
+	}
+
+	httpReq, err := http.NewRequestWithContext(
+		context.Background(),
+		http.MethodPost,
+		s.signerURL,
+		strings.NewReader(string(bodyJSON)),
+	)
+	if err != nil {
+		return "", fmt.Errorf("build sign request: %w", err)
+	}
+	httpReq.Header.Set("Content-Type", "application/json")
+	httpReq.Header.Set("Accept", "application/json")
+
+	//nolint:gosec // signerURL is validated during construction and is intentionally configurable.
+	resp, err := s.httpClient.Do(httpReq)
+	if err != nil {
+		return "", fmt.Errorf("call signer endpoint: %w", err)
+	}
+	defer func() { _ = resp.Body.Close() }()
+
+	body, err := io.ReadAll(io.LimitReader(resp.Body, maxSignerResponseBytes))
+	if err != nil {
+		return "", fmt.Errorf("read signer response: %w", err)
+	}
+
+	if resp.StatusCode != http.StatusOK {
+		return "", fmt.Errorf(
+			"signer endpoint returned status %d: %s",
+			resp.StatusCode,
+			strings.TrimSpace(string(body)),
+		)
+	}
+
+	var signResp signAssertionResponse
+	if parseErr := json.Unmarshal(body, &signResp); parseErr != nil {
+		return "", fmt.Errorf("parse signer response: %w", parseErr)
+	}
+
+	if signResp.ClientAssertion == "" {
+		return "", errors.New("signer endpoint returned empty client_assertion")
+	}
+
+	return signResp.ClientAssertion, nil
 }

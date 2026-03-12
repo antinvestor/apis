@@ -30,6 +30,7 @@ const (
 	TokenEndpointAuthMethodClientSecretPost  = "client_secret_post"
 	TokenEndpointAuthMethodPrivateKeyJWT     = "private" + "_key_" + "jwt"
 	PrivateKeyJWTSourceWorkloadAPI           = "workload_api"
+	PrivateKeyJWTSourceURL                   = "url"
 
 	maxWorkloadAPIHTTPOptions = 2
 )
@@ -485,6 +486,9 @@ func buildPrivateKeyJWTConfigFromStruct(value reflect.Value) *PrivateKeyJWTConfi
 	}
 	if field, ok := stringField(value, "Subject"); ok {
 		cfg.Subject = field
+	}
+	if field, ok := stringField(value, "SignerURL"); ok {
+		cfg.SignerURL = field
 	}
 
 	return cfg
