@@ -276,8 +276,10 @@ func resolveServiceTarget(cfg any, target ServiceTarget) (ServiceTarget, error) 
 		return ServiceTarget{}, errors.New("only one of workload API target id or target path may be set")
 	}
 
+	// When trust domain is not configured (SPIFFE infrastructure not deployed),
+	// silently clear the workload API target path instead of failing hard.
 	if resolved.WorkloadAPITargetPath != "" && trustDomain(workloadAPIConfig(cfg)) == "" {
-		return ServiceTarget{}, errors.New("workload API target path requires trusted domain configuration")
+		resolved.WorkloadAPITargetPath = ""
 	}
 
 	return resolved, nil

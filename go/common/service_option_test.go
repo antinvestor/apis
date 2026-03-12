@@ -321,13 +321,14 @@ func (s *InternalServiceSuite) TestResolveServiceTargetRejectsAmbiguousWorkloadA
 	s.ErrorContains(err, "only one of workload API target id or target path may be set")
 }
 
-func (s *InternalServiceSuite) TestResolveServiceTargetRejectsTargetPathWithoutTrustDomain() {
-	_, err := common.ResolveServiceTarget(testInternalServiceConfig{}, common.ServiceTarget{
+func (s *InternalServiceSuite) TestResolveServiceTargetClearsTargetPathWithoutTrustDomain() {
+	target, err := common.ResolveServiceTarget(testInternalServiceConfig{}, common.ServiceTarget{
 		Endpoint:              "profile.default.svc.cluster.local",
 		WorkloadAPITargetPath: "/ns/profile/sa/service-profile",
 	})
-	s.Require().Error(err)
-	s.ErrorContains(err, "workload API target path requires trusted domain configuration")
+	s.Require().NoError(err)
+	s.Empty(target.WorkloadAPITargetPath)
+	s.Equal("profile.default.svc.cluster.local", target.Endpoint)
 }
 
 func (s *InternalServiceSuite) TestResolveServiceTargetNormalizesDuplicateScopesAndAudiences() {
