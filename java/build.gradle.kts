@@ -89,7 +89,7 @@ subprojects {
     }
 
     dependencies {
-        api(enforcedPlatform("com.fasterxml.jackson:jackson-bom:2.18.6"))
+        api(enforcedPlatform("com.fasterxml.jackson:jackson-bom:2.21.1"))
 
         api("com.squareup.okhttp3:okhttp:5.3.2")
         api("com.connectrpc:connect-kotlin-okhttp:0.7.4")
@@ -106,7 +106,7 @@ subprojects {
         api("build.buf.gen:gnostic_gnostic_protocolbuffers_java:34.0.0.1.20230414000709.087bc8072ce4")
 
         api("jakarta.enterprise:jakarta.enterprise.cdi-api:4.1.0")
-        api("com.googlecode.libphonenumber:libphonenumber:9.0.25")
+        api("com.googlecode.libphonenumber:libphonenumber:9.0.26")
 
         api("org.slf4j:slf4j-api:2.0.17")
 
