@@ -126,6 +126,7 @@ type PrivateKeyJWTConfig struct {
 	Audience       string
 	Issuer         string
 	Subject        string
+	SignerURL      string
 }
 
 func (c *PrivateKeyJWTConfig) Clone() *PrivateKeyJWTConfig {
@@ -155,5 +156,6 @@ func (c *PrivateKeyJWTConfig) IsZero() bool {
 		strings.TrimSpace(c.KeyID) == "" &&
 		strings.TrimSpace(c.Audience) == "" &&
 		strings.TrimSpace(c.Issuer) == "" &&
-		strings.TrimSpace(c.Subject) == ""
+		strings.TrimSpace(c.Subject) == "" &&
+		strings.TrimSpace(c.SignerURL) == ""
 }

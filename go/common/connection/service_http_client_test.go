@@ -73,11 +73,11 @@ func (s *ServiceHTTPClientSuite) TestNewServiceHTTPClientRejectsInvalidTrustDoma
 	s.Require().Error(err)
 }
 
-func (s *ServiceHTTPClientSuite) TestNewServiceHTTPClientRejectsTargetPathWithoutTrustDomain() {
-	_, err := commonconnection.NewServiceHTTPClient(s.T().Context(), nil, common.ServiceTarget{
+func (s *ServiceHTTPClientSuite) TestNewServiceHTTPClientClearsTargetPathWithoutTrustDomain() {
+	resolved, err := commonconnection.NewServiceHTTPClient(s.T().Context(), nil, common.ServiceTarget{
 		Endpoint:              "http://service.internal",
 		WorkloadAPITargetPath: "/ns/profile/sa/service-profile",
 	})
-	s.Require().Error(err)
-	s.ErrorContains(err, "workload API target path requires trusted domain configuration")
+	s.Require().NoError(err)
+	s.False(resolved.UsesWorkloadAPIMTLS)
 }
