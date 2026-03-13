@@ -549,6 +549,7 @@ type remoteSignerTokenSource struct {
 	tokenURL   string
 	signerURL  string
 	clientID   string
+	keyID      string
 	audience   string
 	scopes     []string
 	audiences  []string
@@ -586,11 +587,14 @@ func newRemoteSignerTokenSource(
 		audience = tokenURL
 	}
 
+	keyID := strings.TrimSpace(ds.PrivateKeyJWT.KeyID)
+
 	return &remoteSignerTokenSource{
 		httpClient: httpClient,
 		tokenURL:   tokenURL,
 		signerURL:  signerURL,
 		clientID:   ds.TokenUserName,
+		keyID:      keyID,
 		audience:   audience,
 		scopes:     append([]string(nil), ds.GetScopes()...),
 		audiences:  append([]string(nil), ds.GetAudiences()...),
@@ -645,7 +649,7 @@ func (s *remoteSignerTokenSource) fetchSignedAssertion() (string, error) {
 		ClientID:      s.clientID,
 		TokenEndpoint: s.tokenURL,
 		Audience:      s.audience,
-		JWKSetName:    s.clientID,
+		JWKSetName:    s.keyID,
 		PodName:       os.Getenv("K8S_POD_NAME"),
 		PodIP:         os.Getenv("K8S_POD_IP"),
 		Namespace:     os.Getenv("K8S_POD_NAMESPACE"),
