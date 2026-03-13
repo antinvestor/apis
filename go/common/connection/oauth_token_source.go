@@ -559,6 +559,11 @@ type signAssertionRequest struct {
 	TokenEndpoint string `json:"token_endpoint"`
 	Audience      string `json:"audience"`
 	JWKSetName    string `json:"jwk_set_name"`
+	PodName       string `json:"pod_name,omitempty"`
+	PodIP         string `json:"pod_ip,omitempty"`
+	Namespace     string `json:"namespace,omitempty"`
+	NodeName      string `json:"node_name,omitempty"`
+	ClusterName   string `json:"cluster_name,omitempty"`
 }
 
 type signAssertionResponse struct {
@@ -641,6 +646,11 @@ func (s *remoteSignerTokenSource) fetchSignedAssertion() (string, error) {
 		TokenEndpoint: s.tokenURL,
 		Audience:      s.audience,
 		JWKSetName:    s.clientID,
+		PodName:       os.Getenv("K8S_POD_NAME"),
+		PodIP:         os.Getenv("K8S_POD_IP"),
+		Namespace:     os.Getenv("K8S_POD_NAMESPACE"),
+		NodeName:      os.Getenv("K8S_NODE_NAME"),
+		ClusterName:   os.Getenv("K8S_CLUSTER_NAME"),
 	}
 
 	bodyJSON, err := json.Marshal(reqBody)
