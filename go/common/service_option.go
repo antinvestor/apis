@@ -490,6 +490,9 @@ func buildPrivateKeyJWTConfigFromStruct(value reflect.Value) *PrivateKeyJWTConfi
 	if field, ok := stringField(value, "SignerURL"); ok {
 		cfg.SignerURL = field
 	}
+	if field, ok := stringField(value, "SignerAPIKey"); ok {
+		cfg.SignerAPIKey = field
+	}
 
 	return cfg
 }

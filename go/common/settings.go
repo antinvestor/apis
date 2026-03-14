@@ -127,6 +127,7 @@ type PrivateKeyJWTConfig struct {
 	Issuer         string
 	Subject        string
 	SignerURL      string
+	SignerAPIKey   string
 }
 
 func (c *PrivateKeyJWTConfig) Clone() *PrivateKeyJWTConfig {

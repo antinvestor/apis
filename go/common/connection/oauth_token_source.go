@@ -545,14 +545,15 @@ func isLoopbackHost(host string) bool {
 const maxSignerResponseBytes = 64 << 10 // 64 KiB
 
 type remoteSignerTokenSource struct {
-	httpClient *http.Client
-	tokenURL   string
-	signerURL  string
-	clientID   string
-	keyID      string
-	audience   string
-	scopes     []string
-	audiences  []string
+	httpClient   *http.Client
+	tokenURL     string
+	signerURL    string
+	signerAPIKey string
+	clientID     string
+	keyID        string
+	audience     string
+	scopes       []string
+	audiences    []string
 }
 
 type signAssertionRequest struct {
@@ -589,15 +590,18 @@ func newRemoteSignerTokenSource(
 
 	keyID := strings.TrimSpace(ds.PrivateKeyJWT.KeyID)
 
+	signerAPIKey := strings.TrimSpace(ds.PrivateKeyJWT.SignerAPIKey)
+
 	return &remoteSignerTokenSource{
-		httpClient: httpClient,
-		tokenURL:   tokenURL,
-		signerURL:  signerURL,
-		clientID:   ds.TokenUserName,
-		keyID:      keyID,
-		audience:   audience,
-		scopes:     append([]string(nil), ds.GetScopes()...),
-		audiences:  append([]string(nil), ds.GetAudiences()...),
+		httpClient:   httpClient,
+		tokenURL:     tokenURL,
+		signerURL:    signerURL,
+		signerAPIKey: signerAPIKey,
+		clientID:     ds.TokenUserName,
+		keyID:        keyID,
+		audience:     audience,
+		scopes:       append([]string(nil), ds.GetScopes()...),
+		audiences:    append([]string(nil), ds.GetAudiences()...),
 	}, nil
 }
 
@@ -673,6 +677,9 @@ func (s *remoteSignerTokenSource) fetchSignedAssertion() (string, error) {
 	}
 	httpReq.Header.Set("Content-Type", "application/json")
 	httpReq.Header.Set("Accept", "application/json")
+	if s.signerAPIKey != "" {
+		httpReq.Header.Set("Authorization", "Bearer "+s.signerAPIKey)
+	}
 
 	//nolint:gosec // signerURL is validated during construction and is intentionally configurable.
 	resp, err := s.httpClient.Do(httpReq)
