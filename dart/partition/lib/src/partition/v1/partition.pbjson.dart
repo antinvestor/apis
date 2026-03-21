@@ -17,6 +17,22 @@ import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $2;
 import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $0;
 import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $1;
 
+@$core.Deprecated('Use tenantEnvironmentDescriptor instead')
+const TenantEnvironment$json = {
+  '1': 'TenantEnvironment',
+  '2': [
+    {'1': 'TENANT_ENVIRONMENT_UNSPECIFIED', '2': 0},
+    {'1': 'TENANT_ENVIRONMENT_PRODUCTION', '2': 1},
+    {'1': 'TENANT_ENVIRONMENT_STAGING', '2': 2},
+  ],
+};
+
+/// Descriptor for `TenantEnvironment`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List tenantEnvironmentDescriptor = $convert.base64Decode(
+    'ChFUZW5hbnRFbnZpcm9ubWVudBIiCh5URU5BTlRfRU5WSVJPTk1FTlRfVU5TUEVDSUZJRUQQAB'
+    'IhCh1URU5BTlRfRU5WSVJPTk1FTlRfUFJPRFVDVElPThABEh4KGlRFTkFOVF9FTlZJUk9OTUVO'
+    'VF9TVEFHSU5HEAI=');
+
 @$core.Deprecated('Use tenantObjectDescriptor instead')
 const TenantObject$json = {
   '1': 'TenantObject',
@@ -27,6 +43,7 @@ const TenantObject$json = {
     {'1': 'properties', '3': 4, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'properties'},
     {'1': 'created_at', '3': 5, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
     {'1': 'state', '3': 6, '4': 1, '5': 14, '6': '.common.v1.STATE', '10': 'state'},
+    {'1': 'environment', '3': 7, '4': 1, '5': 14, '6': '.partition.v1.TenantEnvironment', '8': {}, '10': 'environment'},
   ],
 };
 
@@ -37,7 +54,8 @@ final $typed_data.Uint8List tenantObjectDescriptor = $convert.base64Decode(
     'Qgi6SAVyAxj0A1ILZGVzY3JpcHRpb24SNwoKcHJvcGVydGllcxgEIAEoCzIXLmdvb2dsZS5wcm'
     '90b2J1Zi5TdHJ1Y3RSCnByb3BlcnRpZXMSOQoKY3JlYXRlZF9hdBgFIAEoCzIaLmdvb2dsZS5w'
     'cm90b2J1Zi5UaW1lc3RhbXBSCWNyZWF0ZWRBdBImCgVzdGF0ZRgGIAEoDjIQLmNvbW1vbi52MS'
-    '5TVEFURVIFc3RhdGU=');
+    '5TVEFURVIFc3RhdGUSSwoLZW52aXJvbm1lbnQYByABKA4yHy5wYXJ0aXRpb24udjEuVGVuYW50'
+    'RW52aXJvbm1lbnRCCLpIBYIBAhABUgtlbnZpcm9ubWVudA==');
 
 @$core.Deprecated('Use partitionObjectDescriptor instead')
 const PartitionObject$json = {
@@ -258,6 +276,7 @@ const ListTenantRequest$json = {
     {'1': 'end_date', '3': 5, '4': 1, '5': 9, '10': 'endDate'},
     {'1': 'properties', '3': 6, '4': 3, '5': 9, '10': 'properties'},
     {'1': 'extras', '3': 7, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'extras'},
+    {'1': 'environment', '3': 8, '4': 1, '5': 14, '6': '.partition.v1.TenantEnvironment', '8': {}, '10': 'environment'},
   ],
 };
 
@@ -267,7 +286,8 @@ final $typed_data.Uint8List listTenantRequestDescriptor = $convert.base64Decode(
     'gLMhUuY29tbW9uLnYxLlBhZ2VDdXJzb3JSBmN1cnNvchIdCgpzdGFydF9kYXRlGAQgASgJUglz'
     'dGFydERhdGUSGQoIZW5kX2RhdGUYBSABKAlSB2VuZERhdGUSHgoKcHJvcGVydGllcxgGIAMoCV'
     'IKcHJvcGVydGllcxIvCgZleHRyYXMYByABKAsyFy5nb29nbGUucHJvdG9idWYuU3RydWN0UgZl'
-    'eHRyYXM=');
+    'eHRyYXMSSwoLZW52aXJvbm1lbnQYCCABKA4yHy5wYXJ0aXRpb24udjEuVGVuYW50RW52aXJvbm'
+    '1lbnRCCLpIBYIBAhABUgtlbnZpcm9ubWVudA==');
 
 @$core.Deprecated('Use listTenantResponseDescriptor instead')
 const ListTenantResponse$json = {
@@ -289,6 +309,7 @@ const CreateTenantRequest$json = {
     {'1': 'name', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'name'},
     {'1': 'description', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'description'},
     {'1': 'properties', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'properties'},
+    {'1': 'environment', '3': 4, '4': 1, '5': 14, '6': '.partition.v1.TenantEnvironment', '8': {}, '10': 'environment'},
   ],
 };
 
@@ -296,7 +317,9 @@ const CreateTenantRequest$json = {
 final $typed_data.Uint8List createTenantRequestDescriptor = $convert.base64Decode(
     'ChNDcmVhdGVUZW5hbnRSZXF1ZXN0Eh0KBG5hbWUYASABKAlCCbpIBnIEEAMYZFIEbmFtZRIsCg'
     'tkZXNjcmlwdGlvbhgCIAEoCUIKukgHcgUQChj0A1ILZGVzY3JpcHRpb24SNwoKcHJvcGVydGll'
-    'cxgDIAEoCzIXLmdvb2dsZS5wcm90b2J1Zi5TdHJ1Y3RSCnByb3BlcnRpZXM=');
+    'cxgDIAEoCzIXLmdvb2dsZS5wcm90b2J1Zi5TdHJ1Y3RSCnByb3BlcnRpZXMSSwoLZW52aXJvbm'
+    '1lbnQYBCABKA4yHy5wYXJ0aXRpb24udjEuVGVuYW50RW52aXJvbm1lbnRCCLpIBYIBAhABUgtl'
+    'bnZpcm9ubWVudA==');
 
 @$core.Deprecated('Use createTenantResponseDescriptor instead')
 const CreateTenantResponse$json = {
@@ -320,6 +343,7 @@ const UpdateTenantRequest$json = {
     {'1': 'description', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'description'},
     {'1': 'state', '3': 4, '4': 1, '5': 14, '6': '.common.v1.STATE', '10': 'state'},
     {'1': 'properties', '3': 5, '4': 1, '5': 11, '6': '.google.protobuf.Struct', '10': 'properties'},
+    {'1': 'environment', '3': 6, '4': 1, '5': 14, '6': '.partition.v1.TenantEnvironment', '8': {}, '10': 'environment'},
   ],
 };
 
@@ -329,7 +353,8 @@ final $typed_data.Uint8List updateTenantRequestDescriptor = $convert.base64Decod
     '17Myw0MH1SAmlkEiAKBG5hbWUYAiABKAlCDLpICdgBAXIEEAMYZFIEbmFtZRIvCgtkZXNjcmlw'
     'dGlvbhgDIAEoCUINukgK2AEBcgUQChj0A1ILZGVzY3JpcHRpb24SJgoFc3RhdGUYBCABKA4yEC'
     '5jb21tb24udjEuU1RBVEVSBXN0YXRlEjcKCnByb3BlcnRpZXMYBSABKAsyFy5nb29nbGUucHJv'
-    'dG9idWYuU3RydWN0Ugpwcm9wZXJ0aWVz');
+    'dG9idWYuU3RydWN0Ugpwcm9wZXJ0aWVzEksKC2Vudmlyb25tZW50GAYgASgOMh8ucGFydGl0aW'
+    '9uLnYxLlRlbmFudEVudmlyb25tZW50Qgi6SAWCAQIQAVILZW52aXJvbm1lbnQ=');
 
 @$core.Deprecated('Use updateTenantResponseDescriptor instead')
 const UpdateTenantResponse$json = {

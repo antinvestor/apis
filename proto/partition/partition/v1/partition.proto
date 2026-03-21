@@ -72,6 +72,13 @@ option (gnostic.openapi.v3.document) = {
 // Core Data Types
 // -----------------------------------------------------
 
+// TenantEnvironment identifies the deployment environment a tenant belongs to.
+enum TenantEnvironment {
+  TENANT_ENVIRONMENT_UNSPECIFIED = 0;
+  TENANT_ENVIRONMENT_PRODUCTION = 1;
+  TENANT_ENVIRONMENT_STAGING = 2;
+}
+
 // TenantObject represents a top-level organizational unit.
 message TenantObject {
   string id = 1 [
@@ -87,6 +94,7 @@ message TenantObject {
   google.protobuf.Struct properties = 4; // Additional tenant metadata
   google.protobuf.Timestamp created_at = 5; // Creation timestamp
   common.v1.STATE state = 6; // Tenant state
+  TenantEnvironment environment = 7 [(buf.validate.field).enum.defined_only = true]; // Deployment environment
 }
 
 // PartitionObject represents a data partition within a tenant.
@@ -302,6 +310,7 @@ message ListTenantRequest {
   string end_date = 5;
   repeated string properties = 6;
   google.protobuf.Struct extras = 7;
+  TenantEnvironment environment = 8 [(buf.validate.field).enum.defined_only = true];
 }
 
 message ListTenantResponse {
@@ -318,6 +327,7 @@ message CreateTenantRequest {
     (buf.validate.field).string.max_len = 500
   ];
   google.protobuf.Struct properties = 3;
+  TenantEnvironment environment = 4 [(buf.validate.field).enum.defined_only = true];
 }
 
 message CreateTenantResponse {
@@ -342,6 +352,7 @@ message UpdateTenantRequest {
   ];
   common.v1.STATE state = 4;
   google.protobuf.Struct properties = 5;
+  TenantEnvironment environment = 6 [(buf.validate.field).enum.defined_only = true];
 }
 
 message UpdateTenantResponse {

@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "2.3.10"
+    kotlin("jvm") version "2.3.20"
     id("maven-publish")
     id("com.github.ben-manes.versions") version "0.53.0"
     id("se.patrikerdes.use-latest-versions") version "0.2.19"
@@ -31,7 +31,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("com.diffplug.spotless:spotless-plugin-gradle:8.3.0")
+        classpath("com.diffplug.spotless:spotless-plugin-gradle:8.4.0")
     }
 }
 
@@ -89,19 +89,19 @@ subprojects {
     }
 
     dependencies {
-        api(enforcedPlatform("com.fasterxml.jackson:jackson-bom:2.21.1"))
+        api(enforcedPlatform("com.fasterxml.jackson:jackson-bom:2.21.2"))
 
         api("com.squareup.okhttp3:okhttp:5.3.2")
-        api("com.connectrpc:connect-kotlin-okhttp:0.7.4")
+        api("com.connectrpc:connect-kotlin-okhttp:0.8.0")
         // Java specific dependencies.
-        api("com.connectrpc:connect-kotlin-google-java-ext:0.7.4")
-        api("com.google.protobuf:protobuf-java:4.34.0")
+        api("com.connectrpc:connect-kotlin-google-java-ext:0.8.0")
+        api("com.google.protobuf:protobuf-java:4.34.1")
 
 
 
-        api("io.grpc:grpc-protobuf:1.79.0")
-        api("io.grpc:grpc-services:1.79.0")
-        api("io.grpc:grpc-stub:1.79.0")
+        api("io.grpc:grpc-protobuf:1.80.0")
+        api("io.grpc:grpc-services:1.80.0")
+        api("io.grpc:grpc-stub:1.80.0")
         api("build.buf:protovalidate:1.1.1")
         api("build.buf.gen:gnostic_gnostic_protocolbuffers_java:34.0.0.1.20230414000709.087bc8072ce4")
 
@@ -112,7 +112,7 @@ subprojects {
 
         compileOnly("org.apache.tomcat:annotations-api:6.0.53")
 
-        runtimeOnly("io.grpc:grpc-netty-shaded:1.79.0")
+        runtimeOnly("io.grpc:grpc-netty-shaded:1.80.0")
     }
 
     testing {

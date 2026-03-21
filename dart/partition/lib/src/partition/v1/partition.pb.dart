@@ -18,6 +18,9 @@ import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $2;
 import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $2;
 import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $0;
 import 'package:antinvestor_api_common/antinvestor_api_common.dart' as $1;
+import 'partition.pbenum.dart';
+
+export 'partition.pbenum.dart';
 
 /// TenantObject represents a top-level organizational unit.
 class TenantObject extends $pb.GeneratedMessage {
@@ -28,6 +31,7 @@ class TenantObject extends $pb.GeneratedMessage {
     $0.Struct? properties,
     $1.Timestamp? createdAt,
     $2.STATE? state,
+    TenantEnvironment? environment,
   }) {
     final $result = create();
     if (id != null) {
@@ -48,6 +52,9 @@ class TenantObject extends $pb.GeneratedMessage {
     if (state != null) {
       $result.state = state;
     }
+    if (environment != null) {
+      $result.environment = environment;
+    }
     return $result;
   }
   TenantObject._() : super();
@@ -61,6 +68,7 @@ class TenantObject extends $pb.GeneratedMessage {
     ..aOM<$0.Struct>(4, _omitFieldNames ? '' : 'properties', subBuilder: $0.Struct.create)
     ..aOM<$1.Timestamp>(5, _omitFieldNames ? '' : 'createdAt', subBuilder: $1.Timestamp.create)
     ..e<$2.STATE>(6, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: $2.STATE.CREATED, valueOf: $2.STATE.valueOf, enumValues: $2.STATE.values)
+    ..e<TenantEnvironment>(7, _omitFieldNames ? '' : 'environment', $pb.PbFieldType.OE, defaultOrMaker: TenantEnvironment.TENANT_ENVIRONMENT_UNSPECIFIED, valueOf: TenantEnvironment.valueOf, enumValues: TenantEnvironment.values)
     ..hasRequiredFields = false
   ;
 
@@ -142,6 +150,15 @@ class TenantObject extends $pb.GeneratedMessage {
   $core.bool hasState() => $_has(5);
   @$pb.TagNumber(6)
   void clearState() => clearField(6);
+
+  @$pb.TagNumber(7)
+  TenantEnvironment get environment => $_getN(6);
+  @$pb.TagNumber(7)
+  set environment(TenantEnvironment v) { setField(7, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasEnvironment() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearEnvironment() => clearField(7);
 }
 
 /// PartitionObject represents a data partition within a tenant.
@@ -1295,6 +1312,7 @@ class ListTenantRequest extends $pb.GeneratedMessage {
     $core.String? endDate,
     $core.Iterable<$core.String>? properties,
     $0.Struct? extras,
+    TenantEnvironment? environment,
   }) {
     final $result = create();
     if (query != null) {
@@ -1315,6 +1333,9 @@ class ListTenantRequest extends $pb.GeneratedMessage {
     if (extras != null) {
       $result.extras = extras;
     }
+    if (environment != null) {
+      $result.environment = environment;
+    }
     return $result;
   }
   ListTenantRequest._() : super();
@@ -1328,6 +1349,7 @@ class ListTenantRequest extends $pb.GeneratedMessage {
     ..aOS(5, _omitFieldNames ? '' : 'endDate')
     ..pPS(6, _omitFieldNames ? '' : 'properties')
     ..aOM<$0.Struct>(7, _omitFieldNames ? '' : 'extras', subBuilder: $0.Struct.create)
+    ..e<TenantEnvironment>(8, _omitFieldNames ? '' : 'environment', $pb.PbFieldType.OE, defaultOrMaker: TenantEnvironment.TENANT_ENVIRONMENT_UNSPECIFIED, valueOf: TenantEnvironment.valueOf, enumValues: TenantEnvironment.values)
     ..hasRequiredFields = false
   ;
 
@@ -1403,6 +1425,15 @@ class ListTenantRequest extends $pb.GeneratedMessage {
   void clearExtras() => clearField(7);
   @$pb.TagNumber(7)
   $0.Struct ensureExtras() => $_ensure(5);
+
+  @$pb.TagNumber(8)
+  TenantEnvironment get environment => $_getN(6);
+  @$pb.TagNumber(8)
+  set environment(TenantEnvironment v) { setField(8, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasEnvironment() => $_has(6);
+  @$pb.TagNumber(8)
+  void clearEnvironment() => clearField(8);
 }
 
 class ListTenantResponse extends $pb.GeneratedMessage {
@@ -1454,6 +1485,7 @@ class CreateTenantRequest extends $pb.GeneratedMessage {
     $core.String? name,
     $core.String? description,
     $0.Struct? properties,
+    TenantEnvironment? environment,
   }) {
     final $result = create();
     if (name != null) {
@@ -1465,6 +1497,9 @@ class CreateTenantRequest extends $pb.GeneratedMessage {
     if (properties != null) {
       $result.properties = properties;
     }
+    if (environment != null) {
+      $result.environment = environment;
+    }
     return $result;
   }
   CreateTenantRequest._() : super();
@@ -1475,6 +1510,7 @@ class CreateTenantRequest extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'name')
     ..aOS(2, _omitFieldNames ? '' : 'description')
     ..aOM<$0.Struct>(3, _omitFieldNames ? '' : 'properties', subBuilder: $0.Struct.create)
+    ..e<TenantEnvironment>(4, _omitFieldNames ? '' : 'environment', $pb.PbFieldType.OE, defaultOrMaker: TenantEnvironment.TENANT_ENVIRONMENT_UNSPECIFIED, valueOf: TenantEnvironment.valueOf, enumValues: TenantEnvironment.values)
     ..hasRequiredFields = false
   ;
 
@@ -1527,6 +1563,15 @@ class CreateTenantRequest extends $pb.GeneratedMessage {
   void clearProperties() => clearField(3);
   @$pb.TagNumber(3)
   $0.Struct ensureProperties() => $_ensure(2);
+
+  @$pb.TagNumber(4)
+  TenantEnvironment get environment => $_getN(3);
+  @$pb.TagNumber(4)
+  set environment(TenantEnvironment v) { setField(4, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasEnvironment() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearEnvironment() => clearField(4);
 }
 
 class CreateTenantResponse extends $pb.GeneratedMessage {
@@ -1588,6 +1633,7 @@ class UpdateTenantRequest extends $pb.GeneratedMessage {
     $core.String? description,
     $2.STATE? state,
     $0.Struct? properties,
+    TenantEnvironment? environment,
   }) {
     final $result = create();
     if (id != null) {
@@ -1605,6 +1651,9 @@ class UpdateTenantRequest extends $pb.GeneratedMessage {
     if (properties != null) {
       $result.properties = properties;
     }
+    if (environment != null) {
+      $result.environment = environment;
+    }
     return $result;
   }
   UpdateTenantRequest._() : super();
@@ -1617,6 +1666,7 @@ class UpdateTenantRequest extends $pb.GeneratedMessage {
     ..aOS(3, _omitFieldNames ? '' : 'description')
     ..e<$2.STATE>(4, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: $2.STATE.CREATED, valueOf: $2.STATE.valueOf, enumValues: $2.STATE.values)
     ..aOM<$0.Struct>(5, _omitFieldNames ? '' : 'properties', subBuilder: $0.Struct.create)
+    ..e<TenantEnvironment>(6, _omitFieldNames ? '' : 'environment', $pb.PbFieldType.OE, defaultOrMaker: TenantEnvironment.TENANT_ENVIRONMENT_UNSPECIFIED, valueOf: TenantEnvironment.valueOf, enumValues: TenantEnvironment.values)
     ..hasRequiredFields = false
   ;
 
@@ -1687,6 +1737,15 @@ class UpdateTenantRequest extends $pb.GeneratedMessage {
   void clearProperties() => clearField(5);
   @$pb.TagNumber(5)
   $0.Struct ensureProperties() => $_ensure(4);
+
+  @$pb.TagNumber(6)
+  TenantEnvironment get environment => $_getN(5);
+  @$pb.TagNumber(6)
+  set environment(TenantEnvironment v) { setField(6, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasEnvironment() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearEnvironment() => clearField(6);
 }
 
 class UpdateTenantResponse extends $pb.GeneratedMessage {

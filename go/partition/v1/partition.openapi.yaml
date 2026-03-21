@@ -2240,6 +2240,9 @@ components:
         properties:
           title: properties
           $ref: '#/components/schemas/google.protobuf.Struct'
+        environment:
+          title: environment
+          $ref: '#/components/schemas/partition.v1.TenantEnvironment'
       title: CreateTenantRequest
       additionalProperties: false
     partition.v1.CreateTenantResponse:
@@ -2694,6 +2697,9 @@ components:
         extras:
           title: extras
           $ref: '#/components/schemas/google.protobuf.Struct'
+        environment:
+          title: environment
+          $ref: '#/components/schemas/partition.v1.TenantEnvironment'
       title: ListTenantRequest
       additionalProperties: false
     partition.v1.ListTenantResponse:
@@ -3063,6 +3069,14 @@ components:
       description: |-
         ServiceAccountObject represents a pre-registered service account (bot) for a partition.
          Service accounts get a dedicated child partition with client_credentials grant type.
+    partition.v1.TenantEnvironment:
+      type: string
+      title: TenantEnvironment
+      enum:
+        - TENANT_ENVIRONMENT_UNSPECIFIED
+        - TENANT_ENVIRONMENT_PRODUCTION
+        - TENANT_ENVIRONMENT_STAGING
+      description: TenantEnvironment identifies the deployment environment a tenant belongs to.
     partition.v1.TenantObject:
       type: object
       properties:
@@ -3096,6 +3110,10 @@ components:
           title: state
           description: Tenant state
           $ref: '#/components/schemas/common.v1.STATE'
+        environment:
+          title: environment
+          description: Deployment environment
+          $ref: '#/components/schemas/partition.v1.TenantEnvironment'
       title: TenantObject
       additionalProperties: false
       description: TenantObject represents a top-level organizational unit.
@@ -3337,6 +3355,9 @@ components:
         properties:
           title: properties
           $ref: '#/components/schemas/google.protobuf.Struct'
+        environment:
+          title: environment
+          $ref: '#/components/schemas/partition.v1.TenantEnvironment'
       title: UpdateTenantRequest
       additionalProperties: false
     partition.v1.UpdateTenantResponse:
