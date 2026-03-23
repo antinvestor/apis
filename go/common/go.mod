@@ -7,7 +7,7 @@ require (
 	connectrpc.com/connect v1.19.1
 	github.com/golang-jwt/jwt/v5 v5.3.1
 	github.com/google/gnostic v0.7.1
-	github.com/pitabwire/util v0.6.1
+	github.com/pitabwire/util v0.7.0
 	github.com/spiffe/go-spiffe/v2 v2.6.0
 	github.com/stretchr/testify v1.11.1
 	go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc v0.67.0
