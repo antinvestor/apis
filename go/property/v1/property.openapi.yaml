@@ -10,6 +10,15 @@ info:
     name: Apache License
     url: https://github.com/antinvestor/apis/blob/master/LICENSE
   version: v1.0.0
+x-service-namespace: service_property
+x-service-permissions:
+  - property_type_read
+  - property_type_write
+  - locality_write
+  - property_read
+  - property_write
+  - property_subscription_read
+  - property_subscription_write
 paths:
   /property.v1.PropertyService/AddLocality:
     post:
@@ -48,6 +57,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/property.v1.AddLocalityResponse'
+      x-required-permissions:
+        - locality_write
   /property.v1.PropertyService/AddPropertyType:
     post:
       tags:
@@ -85,6 +96,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/property.v1.AddPropertyTypeResponse'
+      x-required-permissions:
+        - property_type_write
   /property.v1.PropertyService/AddSubscription:
     post:
       tags:
@@ -122,6 +135,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/property.v1.AddSubscriptionResponse'
+      x-required-permissions:
+        - property_subscription_write
   /property.v1.PropertyService/CreateProperty:
     post:
       tags:
@@ -159,6 +174,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/property.v1.CreatePropertyResponse'
+      x-required-permissions:
+        - property_write
   /property.v1.PropertyService/DeleteLocality:
     post:
       tags:
@@ -196,6 +213,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/property.v1.DeleteLocalityResponse'
+      x-required-permissions:
+        - locality_write
   /property.v1.PropertyService/DeleteProperty:
     post:
       tags:
@@ -233,6 +252,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/property.v1.DeletePropertyResponse'
+      x-required-permissions:
+        - property_write
   /property.v1.PropertyService/DeleteSubscription:
     post:
       tags:
@@ -270,6 +291,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/property.v1.DeleteSubscriptionResponse'
+      x-required-permissions:
+        - property_subscription_write
   /property.v1.PropertyService/HistoryOfProperty: {}
   /property.v1.PropertyService/ListPropertyType: {}
   /property.v1.PropertyService/ListSubscription: {}
@@ -328,6 +351,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/property.v1.StateOfPropertyResponse'
+      x-required-permissions:
+        - property_read
     post:
       tags:
         - Properties
@@ -364,6 +389,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/property.v1.StateOfPropertyResponse'
+      x-required-permissions:
+        - property_read
   /property.v1.PropertyService/UpdateProperty:
     post:
       tags:
@@ -401,6 +428,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/property.v1.UpdatePropertyResponse'
+      x-required-permissions:
+        - property_write
 components:
   schemas:
     base64:

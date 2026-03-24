@@ -76,6 +76,7 @@ option (gnostic.openapi.v3.document) = {
 
 service ChatService {
   option (common.v1.service_permissions) = {
+    namespace: "service_chat"
     permissions: [
       "event_read",
       "event_write",

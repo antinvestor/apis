@@ -145,6 +145,7 @@ message SetResponse {
 // All RPCs require authentication via Bearer token.
 service SettingsService {
   option (common.v1.service_permissions) = {
+    namespace: "service_settings"
     permissions: [
       "setting_read",
       "setting_write"

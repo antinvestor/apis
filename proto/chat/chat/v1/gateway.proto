@@ -82,6 +82,7 @@ option (gnostic.openapi.v3.document) = {
 
 service GatewayService {
   option (common.v1.service_permissions) = {
+    namespace: "service_gateway"
     permissions: [
       "gateway_read",
       "gateway_write"

@@ -10,6 +10,10 @@ info:
     name: Apache License
     url: https://github.com/antinvestor/apis/blob/master/LICENSE
   version: v1.0.0
+x-service-namespace: service_settings
+x-service-permissions:
+  - setting_read
+  - setting_write
 paths:
   /settings.v1.SettingsService/Get:
     get:
@@ -65,6 +69,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/settings.v1.GetResponse'
+      x-required-permissions:
+        - setting_read
     post:
       tags:
         - Settings
@@ -101,6 +107,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/settings.v1.GetResponse'
+      x-required-permissions:
+        - setting_read
   /settings.v1.SettingsService/List: {}
   /settings.v1.SettingsService/Search: {}
   /settings.v1.SettingsService/Set:
@@ -140,6 +148,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/settings.v1.SetResponse'
+      x-required-permissions:
+        - setting_write
 components:
   schemas:
     base64:

@@ -572,6 +572,7 @@ message GetTurnCredentialsResponse {
 // All RPCs require authentication via Bearer token unless otherwise specified.
 service DeviceService {
   option (common.v1.service_permissions) = {
+    namespace: "service_device"
     permissions: [
       "device_read",
       "device_write",

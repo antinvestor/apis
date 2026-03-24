@@ -1046,6 +1046,7 @@ message RemoveClientResponse {
 // All RPCs require authentication via Bearer token.
 service PartitionService {
   option (common.v1.service_permissions) = {
+    namespace: "service_partition"
     permissions: [
       "tenant_read",
       "tenant_write",

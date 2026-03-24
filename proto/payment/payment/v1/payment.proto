@@ -244,6 +244,7 @@ message CreatePaymentLinkResponse {
 // All RPCs require authentication via Bearer token.
 service PaymentService {
   option (common.v1.service_permissions) = {
+    namespace: "service_payment"
     permissions: [
       "payment_read",
       "payment_write"

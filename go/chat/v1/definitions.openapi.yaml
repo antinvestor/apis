@@ -1,6 +1,16 @@
 openapi: 3.1.0
 info:
   title: chat.v1
+x-service-namespace: service_chat
+x-service-permissions:
+  - event_read
+  - event_write
+  - room_read
+  - room_write
+  - subscription_read
+  - subscription_write
+  - proposal_read
+  - proposal_write
 paths: {}
 components:
   schemas:

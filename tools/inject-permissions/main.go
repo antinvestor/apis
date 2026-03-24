@@ -55,7 +55,7 @@ func main() {
 	}
 
 	// Extract permissions from descriptors
-	servicePerms, methodPerms := extractPermissions(fds)
+	servicePerms, serviceNamespaces, methodPerms := extractPermissions(fds)
 
 	if len(servicePerms) == 0 && len(methodPerms) == 0 {
 		fmt.Fprintln(os.Stderr, "no permissions found in descriptors")
@@ -76,7 +76,7 @@ func main() {
 	}
 
 	// Inject permissions into OpenAPI
-	injectPermissions(&doc, servicePerms, methodPerms)
+	injectPermissions(&doc, servicePerms, serviceNamespaces, methodPerms)
 
 	// Write updated YAML
 	out, err := os.Create(openapiPath)
@@ -101,9 +101,10 @@ func main() {
 }
 
 // extractPermissions reads all service and method permission annotations from the descriptor set.
-// Returns a map of service full name to permissions, and a map of "package.Service/Method" to permissions.
-func extractPermissions(fds *descriptorpb.FileDescriptorSet) (map[string][]string, map[string][]string) {
+// Returns maps of service full name to permissions/namespace, and "package.Service/Method" to permissions.
+func extractPermissions(fds *descriptorpb.FileDescriptorSet) (map[string][]string, map[string]string, map[string][]string) {
 	servicePerms := make(map[string][]string)
+	serviceNamespaces := make(map[string]string)
 	methodPerms := make(map[string][]string)
 
 	for _, fd := range fds.GetFile() {
@@ -111,11 +112,16 @@ func extractPermissions(fds *descriptorpb.FileDescriptorSet) (map[string][]strin
 		for _, sd := range fd.GetService() {
 			serviceFull := pkg + "." + sd.GetName()
 
-			// Extract service-level permissions
+			// Extract service-level permissions and namespace
 			if sd.GetOptions() != nil {
 				ext, ok := proto.GetExtension(sd.GetOptions(), commonv1.E_ServicePermissions).(*commonv1.ServicePermissions)
-				if ok && ext != nil && len(ext.GetPermissions()) > 0 {
-					servicePerms[serviceFull] = ext.GetPermissions()
+				if ok && ext != nil {
+					if len(ext.GetPermissions()) > 0 {
+						servicePerms[serviceFull] = ext.GetPermissions()
+					}
+					if ext.GetNamespace() != "" {
+						serviceNamespaces[serviceFull] = ext.GetNamespace()
+					}
 				}
 			}
 
@@ -135,11 +141,11 @@ func extractPermissions(fds *descriptorpb.FileDescriptorSet) (map[string][]strin
 		}
 	}
 
-	return servicePerms, methodPerms
+	return servicePerms, serviceNamespaces, methodPerms
 }
 
 // injectPermissions modifies the OpenAPI YAML document to include permission extensions.
-func injectPermissions(doc *yaml.Node, servicePerms map[string][]string, methodPerms map[string][]string) {
+func injectPermissions(doc *yaml.Node, servicePerms map[string][]string, serviceNamespaces map[string]string, methodPerms map[string][]string) {
 	if doc.Kind != yaml.DocumentNode || len(doc.Content) == 0 {
 		return
 	}
@@ -148,8 +154,11 @@ func injectPermissions(doc *yaml.Node, servicePerms map[string][]string, methodP
 		return
 	}
 
-	// Inject x-service-permissions at the top level for each service
-	for _, perms := range servicePerms {
+	// Inject x-service-namespace and x-service-permissions at the top level
+	for svc, perms := range servicePerms {
+		if ns, ok := serviceNamespaces[svc]; ok {
+			injectTopLevelScalar(root, "x-service-namespace", ns)
+		}
 		injectTopLevelExtension(root, "x-service-permissions", perms)
 		break // Only one service per OpenAPI file
 	}
@@ -162,6 +171,35 @@ func injectPermissions(doc *yaml.Node, servicePerms map[string][]string, methodP
 			break
 		}
 	}
+}
+
+// injectTopLevelScalar adds an x-* extension with a scalar string value at the document root.
+func injectTopLevelScalar(root *yaml.Node, key string, value string) {
+	// Check if extension already exists
+	for i := 0; i < len(root.Content)-1; i += 2 {
+		if root.Content[i].Value == key {
+			root.Content[i+1] = &yaml.Node{Kind: yaml.ScalarNode, Value: value, Tag: "!!str"}
+			return
+		}
+	}
+
+	// Add before paths block
+	insertIdx := len(root.Content)
+	for i := 0; i < len(root.Content)-1; i += 2 {
+		if root.Content[i].Value == "paths" {
+			insertIdx = i
+			break
+		}
+	}
+
+	keyNode := &yaml.Node{Kind: yaml.ScalarNode, Value: key, Tag: "!!str"}
+	valNode := &yaml.Node{Kind: yaml.ScalarNode, Value: value, Tag: "!!str"}
+
+	newContent := make([]*yaml.Node, 0, len(root.Content)+2)
+	newContent = append(newContent, root.Content[:insertIdx]...)
+	newContent = append(newContent, keyNode, valNode)
+	newContent = append(newContent, root.Content[insertIdx:]...)
+	root.Content = newContent
 }
 
 // injectTopLevelExtension adds an x-* extension with a string list value at the document root.

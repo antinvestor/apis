@@ -10,6 +10,10 @@ info:
     name: Apache License
     url: https://github.com/antinvestor/apis/blob/master/LICENSE
   version: v1.0.0
+x-service-namespace: service_payment
+x-service-permissions:
+  - payment_read
+  - payment_write
 paths:
   /payment.v1.PaymentService/CreatePaymentLink:
     post:
@@ -48,6 +52,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/payment.v1.CreatePaymentLinkResponse'
+      x-required-permissions:
+        - payment_write
   /payment.v1.PaymentService/InitiatePrompt:
     post:
       tags:
@@ -85,6 +91,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/payment.v1.InitiatePromptResponse'
+      x-required-permissions:
+        - payment_write
   /payment.v1.PaymentService/Receive:
     post:
       tags:
@@ -122,6 +130,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/payment.v1.ReceiveResponse'
+      x-required-permissions:
+        - payment_write
   /payment.v1.PaymentService/Reconcile:
     post:
       tags:
@@ -159,6 +169,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/payment.v1.ReconcileResponse'
+      x-required-permissions:
+        - payment_write
   /payment.v1.PaymentService/Release:
     post:
       tags:
@@ -196,6 +208,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/payment.v1.ReleaseResponse'
+      x-required-permissions:
+        - payment_write
   /payment.v1.PaymentService/Search: {}
   /payment.v1.PaymentService/Send:
     post:
@@ -234,6 +248,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/payment.v1.SendResponse'
+      x-required-permissions:
+        - payment_write
   /payment.v1.PaymentService/Status:
     get:
       tags:
@@ -288,6 +304,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/common.v1.StatusResponse'
+      x-required-permissions:
+        - payment_read
     post:
       tags:
         - Payments
@@ -324,6 +342,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/common.v1.StatusResponse'
+      x-required-permissions:
+        - payment_read
   /payment.v1.PaymentService/StatusUpdate:
     post:
       tags:
@@ -361,6 +381,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/common.v1.StatusUpdateResponse'
+      x-required-permissions:
+        - payment_write
 components:
   schemas:
     base64:

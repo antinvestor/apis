@@ -529,6 +529,7 @@ message DeleteRelationshipResponse {
 // All RPCs require authentication via Bearer token.
 service ProfileService {
   option (common.v1.service_permissions) = {
+    namespace: "service_profile"
     permissions: [
       "profile_read",
       "profile_write",

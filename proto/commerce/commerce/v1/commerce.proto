@@ -83,6 +83,7 @@ option (gnostic.openapi.v3.document) = {
 
 service CommerceService {
   option (common.v1.service_permissions) = {
+    namespace: "service_commerce"
     permissions: [
       "shop_read",
       "shop_write",

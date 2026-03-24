@@ -10,6 +10,10 @@ info:
     name: Apache License
     url: https://github.com/antinvestor/apis/blob/master/LICENSE
   version: v1.0.0
+x-service-namespace: service_ocr
+x-service-permissions:
+  - ocr_read
+  - ocr_write
 paths:
   /ocr.v1.OCRService/Recognize:
     post:
@@ -48,6 +52,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ocr.v1.RecognizeResponse'
+      x-required-permissions:
+        - ocr_write
   /ocr.v1.OCRService/Status:
     get:
       tags:
@@ -102,6 +108,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ocr.v1.StatusResponse'
+      x-required-permissions:
+        - ocr_read
     post:
       tags:
         - OCR
@@ -138,6 +146,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ocr.v1.StatusResponse'
+      x-required-permissions:
+        - ocr_read
 components:
   schemas:
     base64:

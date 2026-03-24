@@ -10,6 +10,26 @@ info:
     name: Apache License
     url: https://github.com/antinvestor/apis/blob/master/LICENSE
   version: v1.0.0
+x-service-namespace: service_billing
+x-service-permissions:
+  - catalog_read
+  - catalog_write
+  - plan_write
+  - component_write
+  - tier_write
+  - subscription_read
+  - subscription_write
+  - usage_read
+  - usage_write
+  - billing_run_read
+  - billing_run_write
+  - invoice_read
+  - invoice_write
+  - payment_record_write
+  - credit_read
+  - credit_write
+  - discount_read
+  - discount_write
 paths:
   /billing.v1.BillingService/CancelSubscription:
     post:
@@ -48,6 +68,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/billing.v1.CancelSubscriptionResponse'
+      x-required-permissions:
+        - subscription_write
   /billing.v1.BillingService/CreateCatalogVersion:
     post:
       tags:
@@ -85,6 +107,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/billing.v1.CreateCatalogVersionResponse'
+      x-required-permissions:
+        - catalog_write
   /billing.v1.BillingService/CreateComponent:
     post:
       tags:
@@ -122,6 +146,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/billing.v1.CreateComponentResponse'
+      x-required-permissions:
+        - component_write
   /billing.v1.BillingService/CreateDiscount:
     post:
       tags:
@@ -159,6 +185,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/billing.v1.CreateDiscountResponse'
+      x-required-permissions:
+        - discount_write
   /billing.v1.BillingService/CreatePlan:
     post:
       tags:
@@ -196,6 +224,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/billing.v1.CreatePlanResponse'
+      x-required-permissions:
+        - plan_write
   /billing.v1.BillingService/CreateSubscription:
     post:
       tags:
@@ -233,6 +263,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/billing.v1.CreateSubscriptionResponse'
+      x-required-permissions:
+        - subscription_write
   /billing.v1.BillingService/CreateTier:
     post:
       tags:
@@ -270,6 +302,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/billing.v1.CreateTierResponse'
+      x-required-permissions:
+        - tier_write
   /billing.v1.BillingService/GetBillingRun:
     get:
       tags:
@@ -324,6 +358,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/billing.v1.GetBillingRunResponse'
+      x-required-permissions:
+        - billing_run_read
     post:
       tags:
         - Billing
@@ -360,6 +396,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/billing.v1.GetBillingRunResponse'
+      x-required-permissions:
+        - billing_run_read
   /billing.v1.BillingService/GetCatalogVersion:
     get:
       tags:
@@ -414,6 +452,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/billing.v1.GetCatalogVersionResponse'
+      x-required-permissions:
+        - catalog_read
     post:
       tags:
         - Catalog
@@ -450,6 +490,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/billing.v1.GetCatalogVersionResponse'
+      x-required-permissions:
+        - catalog_read
   /billing.v1.BillingService/GetCreditBalance:
     get:
       tags:
@@ -504,6 +546,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/billing.v1.GetCreditBalanceResponse'
+      x-required-permissions:
+        - credit_read
     post:
       tags:
         - Credits
@@ -540,6 +584,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/billing.v1.GetCreditBalanceResponse'
+      x-required-permissions:
+        - credit_read
   /billing.v1.BillingService/GetInvoice:
     get:
       tags:
@@ -594,6 +640,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/billing.v1.GetInvoiceResponse'
+      x-required-permissions:
+        - invoice_read
     post:
       tags:
         - Invoices
@@ -630,6 +678,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/billing.v1.GetInvoiceResponse'
+      x-required-permissions:
+        - invoice_read
   /billing.v1.BillingService/GetSubscription:
     get:
       tags:
@@ -684,6 +734,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/billing.v1.GetSubscriptionResponse'
+      x-required-permissions:
+        - subscription_read
     post:
       tags:
         - Subscriptions
@@ -720,6 +772,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/billing.v1.GetSubscriptionResponse'
+      x-required-permissions:
+        - subscription_read
   /billing.v1.BillingService/GrantCredit:
     post:
       tags:
@@ -757,6 +811,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/billing.v1.GrantCreditResponse'
+      x-required-permissions:
+        - credit_write
   /billing.v1.BillingService/IngestUsageEvent:
     post:
       tags:
@@ -794,6 +850,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/billing.v1.IngestUsageEventResponse'
+      x-required-permissions:
+        - usage_write
   /billing.v1.BillingService/IssueInvoice:
     post:
       tags:
@@ -831,6 +889,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/billing.v1.IssueInvoiceResponse'
+      x-required-permissions:
+        - invoice_write
   /billing.v1.BillingService/ListSubscriptions:
     get:
       tags:
@@ -885,6 +945,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/billing.v1.ListSubscriptionsResponse'
+      x-required-permissions:
+        - subscription_read
     post:
       tags:
         - Subscriptions
@@ -921,6 +983,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/billing.v1.ListSubscriptionsResponse'
+      x-required-permissions:
+        - subscription_read
   /billing.v1.BillingService/PublishCatalogVersion:
     post:
       tags:
@@ -958,6 +1022,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/billing.v1.PublishCatalogVersionResponse'
+      x-required-permissions:
+        - catalog_write
   /billing.v1.BillingService/RecordPayment:
     post:
       tags:
@@ -995,6 +1061,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/billing.v1.RecordPaymentResponse'
+      x-required-permissions:
+        - payment_record_write
   /billing.v1.BillingService/RunBilling:
     post:
       tags:
@@ -1032,6 +1100,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/billing.v1.RunBillingResponse'
+      x-required-permissions:
+        - billing_run_write
   /billing.v1.BillingService/SearchCatalogVersions: {}
   /billing.v1.BillingService/SearchDiscounts: {}
   /billing.v1.BillingService/SearchInvoices: {}
@@ -1073,6 +1143,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/billing.v1.VoidInvoiceResponse'
+      x-required-permissions:
+        - invoice_write
 components:
   schemas:
     base64:
@@ -2756,4 +2828,4 @@ tags:
   - name: billing.v1.BillingService
     description: |-
       BillingService provides usage-based billing, subscription management, and invoicing.
-       All RPCs require authentication via Bearer token. -- Catalog Management --
+       All RPCs require authentication via Bearer token.

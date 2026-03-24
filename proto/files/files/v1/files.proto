@@ -1883,6 +1883,7 @@ message GetStorageStatsResponse {
 //   - Analytics: usage, storage stats
 service FilesService {
   option (common.v1.service_permissions) = {
+    namespace: "service_files"
     permissions: [
       "content_read",
       "content_write",

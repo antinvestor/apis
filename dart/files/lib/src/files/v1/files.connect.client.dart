@@ -16,9 +16,6 @@ import "files.connect.spec.dart" as specs;
 ///   - Versioning: listing, restoring
 ///   - Retention: policies, expiration
 ///   - Analytics: usage, storage stats
-/// =================================================================
-/// Upload Operations
-/// =================================================================
 extension type FilesServiceClient (connect.Transport _transport) {
   /// UploadContent uploads content via streaming.
   /// Usage Patterns:

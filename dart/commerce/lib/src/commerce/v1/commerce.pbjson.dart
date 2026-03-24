@@ -1043,26 +1043,27 @@ final $typed_data.Uint8List getFulfilmentResponseDescriptor = $convert.base64Dec
 const $core.Map<$core.String, $core.dynamic> CommerceServiceBase$json = {
   '1': 'CommerceService',
   '2': [
-    {'1': 'CreateShop', '2': '.commerce.v1.CreateShopRequest', '3': '.commerce.v1.CreateShopResponse'},
-    {'1': 'GetShop', '2': '.commerce.v1.GetShopRequest', '3': '.commerce.v1.GetShopResponse'},
-    {'1': 'UpdateShop', '2': '.commerce.v1.UpdateShopRequest', '3': '.commerce.v1.UpdateShopResponse'},
-    {'1': 'CreateProduct', '2': '.commerce.v1.CreateProductRequest', '3': '.commerce.v1.CreateProductResponse'},
-    {'1': 'GetProduct', '2': '.commerce.v1.GetProductRequest', '3': '.commerce.v1.GetProductResponse'},
-    {'1': 'ListProducts', '2': '.commerce.v1.ListProductsRequest', '3': '.commerce.v1.ListProductsResponse'},
-    {'1': 'CreateProductVariant', '2': '.commerce.v1.CreateProductVariantRequest', '3': '.commerce.v1.CreateProductVariantResponse'},
-    {'1': 'UpdateProductVariant', '2': '.commerce.v1.UpdateProductVariantRequest', '3': '.commerce.v1.UpdateProductVariantResponse'},
-    {'1': 'CreateCart', '2': '.commerce.v1.CreateCartRequest', '3': '.commerce.v1.CreateCartResponse'},
-    {'1': 'GetCart', '2': '.commerce.v1.GetCartRequest', '3': '.commerce.v1.GetCartResponse'},
-    {'1': 'AddCartLine', '2': '.commerce.v1.AddCartLineRequest', '3': '.commerce.v1.AddCartLineResponse'},
-    {'1': 'RemoveCartLine', '2': '.commerce.v1.RemoveCartLineRequest', '3': '.commerce.v1.RemoveCartLineResponse'},
-    {'1': 'CreateOrderFromCart', '2': '.commerce.v1.CreateOrderFromCartRequest', '3': '.commerce.v1.CreateOrderFromCartResponse'},
-    {'1': 'CreateOrder', '2': '.commerce.v1.CreateOrderRequest', '3': '.commerce.v1.CreateOrderResponse'},
-    {'1': 'GetOrder', '2': '.commerce.v1.GetOrderRequest', '3': '.commerce.v1.GetOrderResponse'},
-    {'1': 'ListOrders', '2': '.commerce.v1.ListOrdersRequest', '3': '.commerce.v1.ListOrdersResponse'},
-    {'1': 'CreateFulfilment', '2': '.commerce.v1.CreateFulfilmentRequest', '3': '.commerce.v1.CreateFulfilmentResponse'},
-    {'1': 'UpdateFulfilment', '2': '.commerce.v1.UpdateFulfilmentRequest', '3': '.commerce.v1.UpdateFulfilmentResponse'},
-    {'1': 'GetFulfilment', '2': '.commerce.v1.GetFulfilmentRequest', '3': '.commerce.v1.GetFulfilmentResponse'},
+    {'1': 'CreateShop', '2': '.commerce.v1.CreateShopRequest', '3': '.commerce.v1.CreateShopResponse', '4': {}},
+    {'1': 'GetShop', '2': '.commerce.v1.GetShopRequest', '3': '.commerce.v1.GetShopResponse', '4': {}},
+    {'1': 'UpdateShop', '2': '.commerce.v1.UpdateShopRequest', '3': '.commerce.v1.UpdateShopResponse', '4': {}},
+    {'1': 'CreateProduct', '2': '.commerce.v1.CreateProductRequest', '3': '.commerce.v1.CreateProductResponse', '4': {}},
+    {'1': 'GetProduct', '2': '.commerce.v1.GetProductRequest', '3': '.commerce.v1.GetProductResponse', '4': {}},
+    {'1': 'ListProducts', '2': '.commerce.v1.ListProductsRequest', '3': '.commerce.v1.ListProductsResponse', '4': {}},
+    {'1': 'CreateProductVariant', '2': '.commerce.v1.CreateProductVariantRequest', '3': '.commerce.v1.CreateProductVariantResponse', '4': {}},
+    {'1': 'UpdateProductVariant', '2': '.commerce.v1.UpdateProductVariantRequest', '3': '.commerce.v1.UpdateProductVariantResponse', '4': {}},
+    {'1': 'CreateCart', '2': '.commerce.v1.CreateCartRequest', '3': '.commerce.v1.CreateCartResponse', '4': {}},
+    {'1': 'GetCart', '2': '.commerce.v1.GetCartRequest', '3': '.commerce.v1.GetCartResponse', '4': {}},
+    {'1': 'AddCartLine', '2': '.commerce.v1.AddCartLineRequest', '3': '.commerce.v1.AddCartLineResponse', '4': {}},
+    {'1': 'RemoveCartLine', '2': '.commerce.v1.RemoveCartLineRequest', '3': '.commerce.v1.RemoveCartLineResponse', '4': {}},
+    {'1': 'CreateOrderFromCart', '2': '.commerce.v1.CreateOrderFromCartRequest', '3': '.commerce.v1.CreateOrderFromCartResponse', '4': {}},
+    {'1': 'CreateOrder', '2': '.commerce.v1.CreateOrderRequest', '3': '.commerce.v1.CreateOrderResponse', '4': {}},
+    {'1': 'GetOrder', '2': '.commerce.v1.GetOrderRequest', '3': '.commerce.v1.GetOrderResponse', '4': {}},
+    {'1': 'ListOrders', '2': '.commerce.v1.ListOrdersRequest', '3': '.commerce.v1.ListOrdersResponse', '4': {}},
+    {'1': 'CreateFulfilment', '2': '.commerce.v1.CreateFulfilmentRequest', '3': '.commerce.v1.CreateFulfilmentResponse', '4': {}},
+    {'1': 'UpdateFulfilment', '2': '.commerce.v1.UpdateFulfilmentRequest', '3': '.commerce.v1.UpdateFulfilmentResponse', '4': {}},
+    {'1': 'GetFulfilment', '2': '.commerce.v1.GetFulfilmentRequest', '3': '.commerce.v1.GetFulfilmentResponse', '4': {}},
   ],
+  '3': {},
 };
 
 @$core.Deprecated('Use commerceServiceDescriptor instead')
@@ -1133,34 +1134,44 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> CommerceSe
 
 /// Descriptor for `CommerceService`. Decode as a `google.protobuf.ServiceDescriptorProto`.
 final $typed_data.Uint8List commerceServiceDescriptor = $convert.base64Decode(
-    'Cg9Db21tZXJjZVNlcnZpY2USTQoKQ3JlYXRlU2hvcBIeLmNvbW1lcmNlLnYxLkNyZWF0ZVNob3'
-    'BSZXF1ZXN0Gh8uY29tbWVyY2UudjEuQ3JlYXRlU2hvcFJlc3BvbnNlEkQKB0dldFNob3ASGy5j'
-    'b21tZXJjZS52MS5HZXRTaG9wUmVxdWVzdBocLmNvbW1lcmNlLnYxLkdldFNob3BSZXNwb25zZR'
-    'JNCgpVcGRhdGVTaG9wEh4uY29tbWVyY2UudjEuVXBkYXRlU2hvcFJlcXVlc3QaHy5jb21tZXJj'
-    'ZS52MS5VcGRhdGVTaG9wUmVzcG9uc2USVgoNQ3JlYXRlUHJvZHVjdBIhLmNvbW1lcmNlLnYxLk'
-    'NyZWF0ZVByb2R1Y3RSZXF1ZXN0GiIuY29tbWVyY2UudjEuQ3JlYXRlUHJvZHVjdFJlc3BvbnNl'
-    'Ek0KCkdldFByb2R1Y3QSHi5jb21tZXJjZS52MS5HZXRQcm9kdWN0UmVxdWVzdBofLmNvbW1lcm'
-    'NlLnYxLkdldFByb2R1Y3RSZXNwb25zZRJTCgxMaXN0UHJvZHVjdHMSIC5jb21tZXJjZS52MS5M'
-    'aXN0UHJvZHVjdHNSZXF1ZXN0GiEuY29tbWVyY2UudjEuTGlzdFByb2R1Y3RzUmVzcG9uc2USaw'
-    'oUQ3JlYXRlUHJvZHVjdFZhcmlhbnQSKC5jb21tZXJjZS52MS5DcmVhdGVQcm9kdWN0VmFyaWFu'
-    'dFJlcXVlc3QaKS5jb21tZXJjZS52MS5DcmVhdGVQcm9kdWN0VmFyaWFudFJlc3BvbnNlEmsKFF'
-    'VwZGF0ZVByb2R1Y3RWYXJpYW50EiguY29tbWVyY2UudjEuVXBkYXRlUHJvZHVjdFZhcmlhbnRS'
-    'ZXF1ZXN0GikuY29tbWVyY2UudjEuVXBkYXRlUHJvZHVjdFZhcmlhbnRSZXNwb25zZRJNCgpDcm'
-    'VhdGVDYXJ0Eh4uY29tbWVyY2UudjEuQ3JlYXRlQ2FydFJlcXVlc3QaHy5jb21tZXJjZS52MS5D'
-    'cmVhdGVDYXJ0UmVzcG9uc2USRAoHR2V0Q2FydBIbLmNvbW1lcmNlLnYxLkdldENhcnRSZXF1ZX'
-    'N0GhwuY29tbWVyY2UudjEuR2V0Q2FydFJlc3BvbnNlElAKC0FkZENhcnRMaW5lEh8uY29tbWVy'
-    'Y2UudjEuQWRkQ2FydExpbmVSZXF1ZXN0GiAuY29tbWVyY2UudjEuQWRkQ2FydExpbmVSZXNwb2'
-    '5zZRJZCg5SZW1vdmVDYXJ0TGluZRIiLmNvbW1lcmNlLnYxLlJlbW92ZUNhcnRMaW5lUmVxdWVz'
-    'dBojLmNvbW1lcmNlLnYxLlJlbW92ZUNhcnRMaW5lUmVzcG9uc2USaAoTQ3JlYXRlT3JkZXJGcm'
-    '9tQ2FydBInLmNvbW1lcmNlLnYxLkNyZWF0ZU9yZGVyRnJvbUNhcnRSZXF1ZXN0GiguY29tbWVy'
-    'Y2UudjEuQ3JlYXRlT3JkZXJGcm9tQ2FydFJlc3BvbnNlElAKC0NyZWF0ZU9yZGVyEh8uY29tbW'
-    'VyY2UudjEuQ3JlYXRlT3JkZXJSZXF1ZXN0GiAuY29tbWVyY2UudjEuQ3JlYXRlT3JkZXJSZXNw'
-    'b25zZRJHCghHZXRPcmRlchIcLmNvbW1lcmNlLnYxLkdldE9yZGVyUmVxdWVzdBodLmNvbW1lcm'
-    'NlLnYxLkdldE9yZGVyUmVzcG9uc2USTQoKTGlzdE9yZGVycxIeLmNvbW1lcmNlLnYxLkxpc3RP'
-    'cmRlcnNSZXF1ZXN0Gh8uY29tbWVyY2UudjEuTGlzdE9yZGVyc1Jlc3BvbnNlEl8KEENyZWF0ZU'
-    'Z1bGZpbG1lbnQSJC5jb21tZXJjZS52MS5DcmVhdGVGdWxmaWxtZW50UmVxdWVzdBolLmNvbW1l'
-    'cmNlLnYxLkNyZWF0ZUZ1bGZpbG1lbnRSZXNwb25zZRJfChBVcGRhdGVGdWxmaWxtZW50EiQuY2'
-    '9tbWVyY2UudjEuVXBkYXRlRnVsZmlsbWVudFJlcXVlc3QaJS5jb21tZXJjZS52MS5VcGRhdGVG'
-    'dWxmaWxtZW50UmVzcG9uc2USVgoNR2V0RnVsZmlsbWVudBIhLmNvbW1lcmNlLnYxLkdldEZ1bG'
-    'ZpbG1lbnRSZXF1ZXN0GiIuY29tbWVyY2UudjEuR2V0RnVsZmlsbWVudFJlc3BvbnNl');
+    'Cg9Db21tZXJjZVNlcnZpY2USXwoKQ3JlYXRlU2hvcBIeLmNvbW1lcmNlLnYxLkNyZWF0ZVNob3'
+    'BSZXF1ZXN0Gh8uY29tbWVyY2UudjEuQ3JlYXRlU2hvcFJlc3BvbnNlIhCCtRgMCgpzaG9wX3dy'
+    'aXRlElUKB0dldFNob3ASGy5jb21tZXJjZS52MS5HZXRTaG9wUmVxdWVzdBocLmNvbW1lcmNlLn'
+    'YxLkdldFNob3BSZXNwb25zZSIPgrUYCwoJc2hvcF9yZWFkEl8KClVwZGF0ZVNob3ASHi5jb21t'
+    'ZXJjZS52MS5VcGRhdGVTaG9wUmVxdWVzdBofLmNvbW1lcmNlLnYxLlVwZGF0ZVNob3BSZXNwb2'
+    '5zZSIQgrUYDAoKc2hvcF93cml0ZRJrCg1DcmVhdGVQcm9kdWN0EiEuY29tbWVyY2UudjEuQ3Jl'
+    'YXRlUHJvZHVjdFJlcXVlc3QaIi5jb21tZXJjZS52MS5DcmVhdGVQcm9kdWN0UmVzcG9uc2UiE4'
+    'K1GA8KDXByb2R1Y3Rfd3JpdGUSYQoKR2V0UHJvZHVjdBIeLmNvbW1lcmNlLnYxLkdldFByb2R1'
+    'Y3RSZXF1ZXN0Gh8uY29tbWVyY2UudjEuR2V0UHJvZHVjdFJlc3BvbnNlIhKCtRgOCgxwcm9kdW'
+    'N0X3JlYWQSZwoMTGlzdFByb2R1Y3RzEiAuY29tbWVyY2UudjEuTGlzdFByb2R1Y3RzUmVxdWVz'
+    'dBohLmNvbW1lcmNlLnYxLkxpc3RQcm9kdWN0c1Jlc3BvbnNlIhKCtRgOCgxwcm9kdWN0X3JlYW'
+    'QSgAEKFENyZWF0ZVByb2R1Y3RWYXJpYW50EiguY29tbWVyY2UudjEuQ3JlYXRlUHJvZHVjdFZh'
+    'cmlhbnRSZXF1ZXN0GikuY29tbWVyY2UudjEuQ3JlYXRlUHJvZHVjdFZhcmlhbnRSZXNwb25zZS'
+    'ITgrUYDwoNcHJvZHVjdF93cml0ZRKAAQoUVXBkYXRlUHJvZHVjdFZhcmlhbnQSKC5jb21tZXJj'
+    'ZS52MS5VcGRhdGVQcm9kdWN0VmFyaWFudFJlcXVlc3QaKS5jb21tZXJjZS52MS5VcGRhdGVQcm'
+    '9kdWN0VmFyaWFudFJlc3BvbnNlIhOCtRgPCg1wcm9kdWN0X3dyaXRlEl8KCkNyZWF0ZUNhcnQS'
+    'Hi5jb21tZXJjZS52MS5DcmVhdGVDYXJ0UmVxdWVzdBofLmNvbW1lcmNlLnYxLkNyZWF0ZUNhcn'
+    'RSZXNwb25zZSIQgrUYDAoKY2FydF93cml0ZRJVCgdHZXRDYXJ0EhsuY29tbWVyY2UudjEuR2V0'
+    'Q2FydFJlcXVlc3QaHC5jb21tZXJjZS52MS5HZXRDYXJ0UmVzcG9uc2UiD4K1GAsKCWNhcnRfcm'
+    'VhZBJiCgtBZGRDYXJ0TGluZRIfLmNvbW1lcmNlLnYxLkFkZENhcnRMaW5lUmVxdWVzdBogLmNv'
+    'bW1lcmNlLnYxLkFkZENhcnRMaW5lUmVzcG9uc2UiEIK1GAwKCmNhcnRfd3JpdGUSawoOUmVtb3'
+    'ZlQ2FydExpbmUSIi5jb21tZXJjZS52MS5SZW1vdmVDYXJ0TGluZVJlcXVlc3QaIy5jb21tZXJj'
+    'ZS52MS5SZW1vdmVDYXJ0TGluZVJlc3BvbnNlIhCCtRgMCgpjYXJ0X3dyaXRlEnsKE0NyZWF0ZU'
+    '9yZGVyRnJvbUNhcnQSJy5jb21tZXJjZS52MS5DcmVhdGVPcmRlckZyb21DYXJ0UmVxdWVzdBoo'
+    'LmNvbW1lcmNlLnYxLkNyZWF0ZU9yZGVyRnJvbUNhcnRSZXNwb25zZSIRgrUYDQoLb3JkZXJfd3'
+    'JpdGUSYwoLQ3JlYXRlT3JkZXISHy5jb21tZXJjZS52MS5DcmVhdGVPcmRlclJlcXVlc3QaIC5j'
+    'b21tZXJjZS52MS5DcmVhdGVPcmRlclJlc3BvbnNlIhGCtRgNCgtvcmRlcl93cml0ZRJZCghHZX'
+    'RPcmRlchIcLmNvbW1lcmNlLnYxLkdldE9yZGVyUmVxdWVzdBodLmNvbW1lcmNlLnYxLkdldE9y'
+    'ZGVyUmVzcG9uc2UiEIK1GAwKCm9yZGVyX3JlYWQSXwoKTGlzdE9yZGVycxIeLmNvbW1lcmNlLn'
+    'YxLkxpc3RPcmRlcnNSZXF1ZXN0Gh8uY29tbWVyY2UudjEuTGlzdE9yZGVyc1Jlc3BvbnNlIhCC'
+    'tRgMCgpvcmRlcl9yZWFkEncKEENyZWF0ZUZ1bGZpbG1lbnQSJC5jb21tZXJjZS52MS5DcmVhdG'
+    'VGdWxmaWxtZW50UmVxdWVzdBolLmNvbW1lcmNlLnYxLkNyZWF0ZUZ1bGZpbG1lbnRSZXNwb25z'
+    'ZSIWgrUYEgoQZnVsZmlsbWVudF93cml0ZRJ3ChBVcGRhdGVGdWxmaWxtZW50EiQuY29tbWVyY2'
+    'UudjEuVXBkYXRlRnVsZmlsbWVudFJlcXVlc3QaJS5jb21tZXJjZS52MS5VcGRhdGVGdWxmaWxt'
+    'ZW50UmVzcG9uc2UiFoK1GBIKEGZ1bGZpbG1lbnRfd3JpdGUSbQoNR2V0RnVsZmlsbWVudBIhLm'
+    'NvbW1lcmNlLnYxLkdldEZ1bGZpbG1lbnRSZXF1ZXN0GiIuY29tbWVyY2UudjEuR2V0RnVsZmls'
+    'bWVudFJlc3BvbnNlIhWCtRgRCg9mdWxmaWxtZW50X3JlYWQangGCtRiZAQoQc2VydmljZV9jb2'
+    '1tZXJjZRIJc2hvcF9yZWFkEgpzaG9wX3dyaXRlEgxwcm9kdWN0X3JlYWQSDXByb2R1Y3Rfd3Jp'
+    'dGUSCWNhcnRfcmVhZBIKY2FydF93cml0ZRIKb3JkZXJfcmVhZBILb3JkZXJfd3JpdGUSD2Z1bG'
+    'ZpbG1lbnRfcmVhZBIQZnVsZmlsbWVudF93cml0ZQ==');
 

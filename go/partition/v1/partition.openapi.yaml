@@ -10,6 +10,24 @@ info:
     name: Apache License
     url: https://github.com/antinvestor/apis/blob/master/LICENSE
   version: v1.0.0
+x-service-namespace: service_partition
+x-service-permissions:
+  - tenant_read
+  - tenant_write
+  - partition_read
+  - partition_write
+  - partition_role_read
+  - partition_role_write
+  - access_read
+  - access_write
+  - access_role_read
+  - access_role_write
+  - page_read
+  - page_write
+  - service_account_read
+  - service_account_write
+  - client_read
+  - client_write
 paths:
   /partition.v1.PartitionService/CreateAccess:
     post:
@@ -48,6 +66,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/partition.v1.CreateAccessResponse'
+      x-required-permissions:
+        - access_write
   /partition.v1.PartitionService/CreateAccessRole:
     post:
       tags:
@@ -85,6 +105,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/partition.v1.CreateAccessRoleResponse'
+      x-required-permissions:
+        - access_role_write
   /partition.v1.PartitionService/CreateClient:
     post:
       tags:
@@ -122,6 +144,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/partition.v1.CreateClientResponse'
+      x-required-permissions:
+        - client_write
   /partition.v1.PartitionService/CreatePage:
     post:
       tags:
@@ -159,6 +183,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/partition.v1.CreatePageResponse'
+      x-required-permissions:
+        - page_write
   /partition.v1.PartitionService/CreatePartition:
     post:
       tags:
@@ -196,6 +222,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/partition.v1.CreatePartitionResponse'
+      x-required-permissions:
+        - partition_write
   /partition.v1.PartitionService/CreatePartitionRole:
     post:
       tags:
@@ -233,6 +261,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/partition.v1.CreatePartitionRoleResponse'
+      x-required-permissions:
+        - partition_role_write
   /partition.v1.PartitionService/CreateServiceAccount:
     post:
       tags:
@@ -270,6 +300,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/partition.v1.CreateServiceAccountResponse'
+      x-required-permissions:
+        - service_account_write
   /partition.v1.PartitionService/CreateTenant:
     post:
       tags:
@@ -307,6 +339,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/partition.v1.CreateTenantResponse'
+      x-required-permissions:
+        - tenant_write
   /partition.v1.PartitionService/GetAccess:
     get:
       tags:
@@ -361,6 +395,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/partition.v1.GetAccessResponse'
+      x-required-permissions:
+        - access_read
     post:
       tags:
         - Access
@@ -397,6 +433,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/partition.v1.GetAccessResponse'
+      x-required-permissions:
+        - access_read
   /partition.v1.PartitionService/GetClient:
     get:
       tags:
@@ -451,6 +489,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/partition.v1.GetClientResponse'
+      x-required-permissions:
+        - client_read
     post:
       tags:
         - Clients
@@ -487,6 +527,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/partition.v1.GetClientResponse'
+      x-required-permissions:
+        - client_read
   /partition.v1.PartitionService/GetPage:
     get:
       tags:
@@ -541,6 +583,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/partition.v1.GetPageResponse'
+      x-required-permissions:
+        - page_read
     post:
       tags:
         - Pages
@@ -577,6 +621,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/partition.v1.GetPageResponse'
+      x-required-permissions:
+        - page_read
   /partition.v1.PartitionService/GetPartition:
     get:
       tags:
@@ -631,6 +677,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/partition.v1.GetPartitionResponse'
+      x-required-permissions:
+        - partition_read
     post:
       tags:
         - Partitions
@@ -667,6 +715,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/partition.v1.GetPartitionResponse'
+      x-required-permissions:
+        - partition_read
   /partition.v1.PartitionService/GetPartitionParents:
     get:
       tags:
@@ -721,6 +771,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/partition.v1.GetPartitionParentsResponse'
+      x-required-permissions:
+        - partition_read
     post:
       tags:
         - Partitions
@@ -757,6 +809,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/partition.v1.GetPartitionParentsResponse'
+      x-required-permissions:
+        - partition_read
   /partition.v1.PartitionService/GetServiceAccount:
     get:
       tags:
@@ -811,6 +865,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/partition.v1.GetServiceAccountResponse'
+      x-required-permissions:
+        - service_account_read
     post:
       tags:
         - ServiceAccounts
@@ -847,6 +903,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/partition.v1.GetServiceAccountResponse'
+      x-required-permissions:
+        - service_account_read
   /partition.v1.PartitionService/GetTenant:
     get:
       tags:
@@ -901,6 +959,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/partition.v1.GetTenantResponse'
+      x-required-permissions:
+        - tenant_read
     post:
       tags:
         - Tenants
@@ -937,6 +997,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/partition.v1.GetTenantResponse'
+      x-required-permissions:
+        - tenant_read
   /partition.v1.PartitionService/ListAccess: {}
   /partition.v1.PartitionService/ListAccessRole: {}
   /partition.v1.PartitionService/ListClient: {}
@@ -982,6 +1044,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/partition.v1.RemoveAccessResponse'
+      x-required-permissions:
+        - access_write
   /partition.v1.PartitionService/RemoveAccessRole:
     post:
       tags:
@@ -1019,6 +1083,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/partition.v1.RemoveAccessRoleResponse'
+      x-required-permissions:
+        - access_role_write
   /partition.v1.PartitionService/RemoveClient:
     post:
       tags:
@@ -1056,6 +1122,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/partition.v1.RemoveClientResponse'
+      x-required-permissions:
+        - client_write
   /partition.v1.PartitionService/RemovePage:
     post:
       tags:
@@ -1093,6 +1161,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/partition.v1.RemovePageResponse'
+      x-required-permissions:
+        - page_write
   /partition.v1.PartitionService/RemovePartition:
     post:
       tags:
@@ -1130,6 +1200,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/partition.v1.RemovePartitionResponse'
+      x-required-permissions:
+        - partition_write
   /partition.v1.PartitionService/RemovePartitionRole:
     post:
       tags:
@@ -1167,6 +1239,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/partition.v1.RemovePartitionRoleResponse'
+      x-required-permissions:
+        - partition_role_write
   /partition.v1.PartitionService/RemoveServiceAccount:
     post:
       tags:
@@ -1204,6 +1278,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/partition.v1.RemoveServiceAccountResponse'
+      x-required-permissions:
+        - service_account_write
   /partition.v1.PartitionService/RemoveTenant:
     post:
       tags:
@@ -1241,6 +1317,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/partition.v1.RemoveTenantResponse'
+      x-required-permissions:
+        - tenant_write
   /partition.v1.PartitionService/UpdateClient:
     post:
       tags:
@@ -1278,6 +1356,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/partition.v1.UpdateClientResponse'
+      x-required-permissions:
+        - client_write
   /partition.v1.PartitionService/UpdatePage:
     post:
       tags:
@@ -1315,6 +1395,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/partition.v1.UpdatePageResponse'
+      x-required-permissions:
+        - page_write
   /partition.v1.PartitionService/UpdatePartition:
     post:
       tags:
@@ -1352,6 +1434,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/partition.v1.UpdatePartitionResponse'
+      x-required-permissions:
+        - partition_write
   /partition.v1.PartitionService/UpdatePartitionRole:
     post:
       tags:
@@ -1389,6 +1473,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/partition.v1.UpdatePartitionRoleResponse'
+      x-required-permissions:
+        - partition_role_write
   /partition.v1.PartitionService/UpdateServiceAccount:
     post:
       tags:
@@ -1426,6 +1512,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/partition.v1.UpdateServiceAccountResponse'
+      x-required-permissions:
+        - service_account_write
   /partition.v1.PartitionService/UpdateTenant:
     post:
       tags:
@@ -1463,6 +1551,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/partition.v1.UpdateTenantResponse'
+      x-required-permissions:
+        - tenant_write
 components:
   schemas:
     base64:

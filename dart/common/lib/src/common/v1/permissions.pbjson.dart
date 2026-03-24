@@ -31,11 +31,13 @@ final $typed_data.Uint8List methodPermissionsDescriptor = $convert.base64Decode(
 const ServicePermissions$json = {
   '1': 'ServicePermissions',
   '2': [
-    {'1': 'permissions', '3': 1, '4': 3, '5': 9, '10': 'permissions'},
+    {'1': 'namespace', '3': 1, '4': 1, '5': 9, '10': 'namespace'},
+    {'1': 'permissions', '3': 2, '4': 3, '5': 9, '10': 'permissions'},
   ],
 };
 
 /// Descriptor for `ServicePermissions`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List servicePermissionsDescriptor = $convert.base64Decode(
-    'ChJTZXJ2aWNlUGVybWlzc2lvbnMSIAoLcGVybWlzc2lvbnMYASADKAlSC3Blcm1pc3Npb25z');
+    'ChJTZXJ2aWNlUGVybWlzc2lvbnMSHAoJbmFtZXNwYWNlGAEgASgJUgluYW1lc3BhY2USIAoLcG'
+    'VybWlzc2lvbnMYAiADKAlSC3Blcm1pc3Npb25z');
 

@@ -122,6 +122,7 @@ message StatusResponse {
 // All RPCs require authentication via Bearer token.
 service OCRService {
   option (common.v1.service_permissions) = {
+    namespace: "service_ocr"
     permissions: [
       "ocr_read",
       "ocr_write"

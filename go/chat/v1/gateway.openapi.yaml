@@ -10,6 +10,16 @@ info:
     name: Apache License
     url: https://github.com/antinvestor/apis/blob/master/LICENSE
   version: v1.0.0
+x-service-namespace: service_chat
+x-service-permissions:
+  - event_read
+  - event_write
+  - room_read
+  - room_write
+  - subscription_read
+  - subscription_write
+  - proposal_read
+  - proposal_write
 paths:
   /chat.v1.GatewayService/Stream: {}
 components:

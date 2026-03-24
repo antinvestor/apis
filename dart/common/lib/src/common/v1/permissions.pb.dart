@@ -79,9 +79,13 @@ class MethodPermissions extends $pb.GeneratedMessage {
 /// This serves as a registry of permissions that must be provisioned for the service.
 class ServicePermissions extends $pb.GeneratedMessage {
   factory ServicePermissions({
+    $core.String? namespace,
     $core.Iterable<$core.String>? permissions,
   }) {
     final $result = create();
+    if (namespace != null) {
+      $result.namespace = namespace;
+    }
     if (permissions != null) {
       $result.permissions.addAll(permissions);
     }
@@ -92,7 +96,8 @@ class ServicePermissions extends $pb.GeneratedMessage {
   factory ServicePermissions.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ServicePermissions', package: const $pb.PackageName(_omitMessageNames ? '' : 'common.v1'), createEmptyInstance: create)
-    ..pPS(1, _omitFieldNames ? '' : 'permissions')
+    ..aOS(1, _omitFieldNames ? '' : 'namespace')
+    ..pPS(2, _omitFieldNames ? '' : 'permissions')
     ..hasRequiredFields = false
   ;
 
@@ -117,9 +122,21 @@ class ServicePermissions extends $pb.GeneratedMessage {
   static ServicePermissions getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ServicePermissions>(create);
   static ServicePermissions? _defaultInstance;
 
-  /// All permissions this service needs, e.g. "profile_read", "profile_write".
+  /// Namespace for this service's permissions, used for OPL namespace generation
+  /// and ensuring consistency across authorization systems.
+  /// e.g. "profile", "payment", "partition".
   @$pb.TagNumber(1)
-  $core.List<$core.String> get permissions => $_getList(0);
+  $core.String get namespace => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set namespace($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasNamespace() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearNamespace() => clearField(1);
+
+  /// All permissions this service needs, e.g. "profile_read", "profile_write".
+  @$pb.TagNumber(2)
+  $core.List<$core.String> get permissions => $_getList(1);
 }
 
 class Permissions {

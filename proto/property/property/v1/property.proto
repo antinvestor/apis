@@ -384,6 +384,7 @@ message DeleteSubscriptionResponse {
 // All RPCs require authentication via Bearer token.
 service PropertyService {
   option (common.v1.service_permissions) = {
+    namespace: "service_property"
     permissions: [
       "property_type_read",
       "property_type_write",

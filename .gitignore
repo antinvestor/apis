@@ -204,3 +204,4 @@ java/*/target/
 java/*/build/
 java/*/out/
 WORK_STATE.md
+tools/inject-permissions/inject-permissions

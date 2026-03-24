@@ -714,6 +714,7 @@ message SearchDiscountsResponse {
 // All RPCs require authentication via Bearer token.
 service BillingService {
   option (common.v1.service_permissions) = {
+    namespace: "service_billing"
     permissions: [
       "catalog_read",
       "catalog_write",

@@ -15,9 +15,6 @@ import "files.pb.dart" as filesv1files;
 ///   - Versioning: listing, restoring
 ///   - Retention: policies, expiration
 ///   - Analytics: usage, storage stats
-/// =================================================================
-/// Upload Operations
-/// =================================================================
 abstract final class FilesService {
   /// Fully-qualified name of the FilesService service.
   static const name = 'files.v1.FilesService';

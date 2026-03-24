@@ -10,6 +10,18 @@ info:
     name: Apache License
     url: https://github.com/antinvestor/apis/blob/master/LICENSE
   version: v1.0.0
+x-service-namespace: service_commerce
+x-service-permissions:
+  - shop_read
+  - shop_write
+  - product_read
+  - product_write
+  - cart_read
+  - cart_write
+  - order_read
+  - order_write
+  - fulfilment_read
+  - fulfilment_write
 paths:
   /commerce.v1.CommerceService/AddCartLine:
     post:
@@ -46,6 +58,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/commerce.v1.AddCartLineResponse'
+      x-required-permissions:
+        - cart_write
   /commerce.v1.CommerceService/CreateCart:
     post:
       tags:
@@ -81,6 +95,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/commerce.v1.CreateCartResponse'
+      x-required-permissions:
+        - cart_write
   /commerce.v1.CommerceService/CreateFulfilment:
     post:
       tags:
@@ -119,6 +135,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/commerce.v1.CreateFulfilmentResponse'
+      x-required-permissions:
+        - fulfilment_write
   /commerce.v1.CommerceService/CreateOrder:
     post:
       tags:
@@ -164,6 +182,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/commerce.v1.CreateOrderResponse'
+      x-required-permissions:
+        - order_write
   /commerce.v1.CommerceService/CreateOrderFromCart:
     post:
       tags:
@@ -199,6 +219,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/commerce.v1.CreateOrderFromCartResponse'
+      x-required-permissions:
+        - order_write
   /commerce.v1.CommerceService/CreateProduct:
     post:
       tags:
@@ -235,6 +257,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/commerce.v1.CreateProductResponse'
+      x-required-permissions:
+        - product_write
   /commerce.v1.CommerceService/CreateProductVariant:
     post:
       tags:
@@ -271,6 +295,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/commerce.v1.CreateProductVariantResponse'
+      x-required-permissions:
+        - product_write
   /commerce.v1.CommerceService/CreateShop:
     post:
       tags:
@@ -307,6 +333,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/commerce.v1.CreateShopResponse'
+      x-required-permissions:
+        - shop_write
   /commerce.v1.CommerceService/GetCart:
     post:
       tags:
@@ -342,6 +370,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/commerce.v1.GetCartResponse'
+      x-required-permissions:
+        - cart_read
   /commerce.v1.CommerceService/GetFulfilment:
     post:
       tags:
@@ -378,6 +408,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/commerce.v1.GetFulfilmentResponse'
+      x-required-permissions:
+        - fulfilment_read
   /commerce.v1.CommerceService/GetOrder:
     post:
       tags:
@@ -414,6 +446,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/commerce.v1.GetOrderResponse'
+      x-required-permissions:
+        - order_read
   /commerce.v1.CommerceService/GetProduct:
     post:
       tags:
@@ -450,6 +484,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/commerce.v1.GetProductResponse'
+      x-required-permissions:
+        - product_read
   /commerce.v1.CommerceService/GetShop:
     post:
       tags:
@@ -486,6 +522,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/commerce.v1.GetShopResponse'
+      x-required-permissions:
+        - shop_read
   /commerce.v1.CommerceService/ListOrders:
     post:
       tags:
@@ -522,6 +560,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/commerce.v1.ListOrdersResponse'
+      x-required-permissions:
+        - order_read
   /commerce.v1.CommerceService/ListProducts:
     post:
       tags:
@@ -558,6 +598,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/commerce.v1.ListProductsResponse'
+      x-required-permissions:
+        - product_read
   /commerce.v1.CommerceService/RemoveCartLine:
     post:
       tags:
@@ -593,6 +635,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/commerce.v1.RemoveCartLineResponse'
+      x-required-permissions:
+        - cart_write
   /commerce.v1.CommerceService/UpdateFulfilment:
     post:
       tags:
@@ -629,6 +673,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/commerce.v1.UpdateFulfilmentResponse'
+      x-required-permissions:
+        - fulfilment_write
   /commerce.v1.CommerceService/UpdateProductVariant:
     post:
       tags:
@@ -665,6 +711,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/commerce.v1.UpdateProductVariantResponse'
+      x-required-permissions:
+        - product_write
   /commerce.v1.CommerceService/UpdateShop:
     post:
       tags:
@@ -701,6 +749,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/commerce.v1.UpdateShopResponse'
+      x-required-permissions:
+        - shop_write
 components:
   schemas:
     commerce.v1.AddCartLineRequest:
@@ -2272,7 +2322,3 @@ components:
 security: []
 tags:
   - name: commerce.v1.CommerceService
-    description: |-
-      ----------------------
-       Shop
-       ----------------------

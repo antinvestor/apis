@@ -10,6 +10,17 @@ info:
     name: Apache License
     url: https://github.com/antinvestor/apis/blob/master/LICENSE
   version: v1.0.0
+x-service-namespace: service_profile
+x-service-permissions:
+  - profile_read
+  - profile_write
+  - contact_read
+  - contact_write
+  - roster_read
+  - roster_write
+  - address_write
+  - relationship_read
+  - relationship_write
 paths:
   /profile.v1.ProfileService/AddAddress:
     post:
@@ -48,6 +59,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/profile.v1.AddAddressResponse'
+      x-required-permissions:
+        - address_write
   /profile.v1.ProfileService/AddContact:
     post:
       tags:
@@ -85,6 +98,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/profile.v1.AddContactResponse'
+      x-required-permissions:
+        - contact_write
   /profile.v1.ProfileService/AddRelationship:
     post:
       tags:
@@ -122,6 +137,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/profile.v1.AddRelationshipResponse'
+      x-required-permissions:
+        - relationship_write
   /profile.v1.ProfileService/AddRoster:
     post:
       tags:
@@ -159,6 +176,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/profile.v1.AddRosterResponse'
+      x-required-permissions:
+        - roster_write
   /profile.v1.ProfileService/CheckVerification:
     post:
       tags:
@@ -196,6 +215,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/profile.v1.CheckVerificationResponse'
+      x-required-permissions:
+        - contact_write
   /profile.v1.ProfileService/Create:
     post:
       tags:
@@ -233,6 +254,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/profile.v1.CreateResponse'
+      x-required-permissions:
+        - profile_write
   /profile.v1.ProfileService/CreateContact:
     post:
       tags:
@@ -270,6 +293,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/profile.v1.CreateContactResponse'
+      x-required-permissions:
+        - contact_write
   /profile.v1.ProfileService/CreateContactVerification:
     post:
       tags:
@@ -307,6 +332,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/profile.v1.CreateContactVerificationResponse'
+      x-required-permissions:
+        - contact_write
   /profile.v1.ProfileService/DeleteRelationship:
     post:
       tags:
@@ -344,6 +371,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/profile.v1.DeleteRelationshipResponse'
+      x-required-permissions:
+        - relationship_write
   /profile.v1.ProfileService/GetByContact:
     get:
       tags:
@@ -398,6 +427,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/profile.v1.GetByContactResponse'
+      x-required-permissions:
+        - profile_read
     post:
       tags:
         - Profiles
@@ -434,6 +465,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/profile.v1.GetByContactResponse'
+      x-required-permissions:
+        - profile_read
   /profile.v1.ProfileService/GetById:
     get:
       tags:
@@ -488,6 +521,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/profile.v1.GetByIdResponse'
+      x-required-permissions:
+        - profile_read
     post:
       tags:
         - Profiles
@@ -524,6 +559,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/profile.v1.GetByIdResponse'
+      x-required-permissions:
+        - profile_read
   /profile.v1.ProfileService/ListRelationship: {}
   /profile.v1.ProfileService/Merge:
     post:
@@ -562,6 +599,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/profile.v1.MergeResponse'
+      x-required-permissions:
+        - profile_write
   /profile.v1.ProfileService/RemoveContact:
     post:
       tags:
@@ -599,6 +638,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/profile.v1.RemoveContactResponse'
+      x-required-permissions:
+        - contact_write
   /profile.v1.ProfileService/RemoveRoster:
     post:
       tags:
@@ -636,6 +677,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/profile.v1.RemoveRosterResponse'
+      x-required-permissions:
+        - roster_write
   /profile.v1.ProfileService/Search: {}
   /profile.v1.ProfileService/SearchRoster: {}
   /profile.v1.ProfileService/Update:
@@ -675,6 +718,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/profile.v1.UpdateResponse'
+      x-required-permissions:
+        - profile_write
 components:
   schemas:
     base64:

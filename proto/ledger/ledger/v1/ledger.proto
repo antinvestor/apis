@@ -304,6 +304,7 @@ message SearchTransactionEntriesResponse {
 // All RPCs require authentication via Bearer token.
 service LedgerService {
   option (common.v1.service_permissions) = {
+    namespace: "service_ledger"
     permissions: [
       "ledger_read",
       "ledger_write",

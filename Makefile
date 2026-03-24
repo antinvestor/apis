@@ -308,8 +308,12 @@ generate_minimock_mocks: $(BIN)/minimock
 	$(call connect_handler_mock,commerce,v1,commerce,CommerceServiceClient,)
 	$(call connect_handler_mock,billing,v1,billing,BillingServiceClient,)
 
+$(BIN)/inject-permissions: tools/inject-permissions/main.go go/common/v1/permissions.pb.go
+	mkdir -p $(BIN)
+	cd tools/inject-permissions && $(GO) build -o $(BIN)/inject-permissions .
+
 .PHONY: generate_inject_permissions
-generate_inject_permissions: ## Inject permissions into OpenAPI specs
+generate_inject_permissions: $(BIN)/inject-permissions ## Inject permissions into OpenAPI specs
 	@for m in $(MODULES); do \
 		if [ "$$m" = "common" ]; then continue; fi; \
 		proto_dir="proto/$$m"; \
@@ -317,7 +321,7 @@ generate_inject_permissions: ## Inject permissions into OpenAPI specs
 		for yaml_file in $$yaml_files; do \
 			echo "==> inject permissions $$yaml_file"; \
 			buf build "$$proto_dir" -o /dev/stdout | \
-				$(GO) run ./tools/inject-permissions "$$yaml_file"; \
+				$(BIN)/inject-permissions "$$yaml_file"; \
 		done; \
 	done
 

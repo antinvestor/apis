@@ -96,8 +96,12 @@ func (x *MethodPermissions) GetAllowUnauthenticated() bool {
 // This serves as a registry of permissions that must be provisioned for the service.
 type ServicePermissions struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
+	// Namespace for this service's permissions, used for OPL namespace generation
+	// and ensuring consistency across authorization systems.
+	// e.g. "profile", "payment", "partition".
+	Namespace string `protobuf:"bytes,1,opt,name=namespace,proto3" json:"namespace,omitempty"`
 	// All permissions this service needs, e.g. "profile_read", "profile_write".
-	Permissions   []string `protobuf:"bytes,1,rep,name=permissions,proto3" json:"permissions,omitempty"`
+	Permissions   []string `protobuf:"bytes,2,rep,name=permissions,proto3" json:"permissions,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -130,6 +134,13 @@ func (x *ServicePermissions) ProtoReflect() protoreflect.Message {
 // Deprecated: Use ServicePermissions.ProtoReflect.Descriptor instead.
 func (*ServicePermissions) Descriptor() ([]byte, []int) {
 	return file_common_v1_permissions_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *ServicePermissions) GetNamespace() string {
+	if x != nil {
+		return x.Namespace
+	}
+	return ""
 }
 
 func (x *ServicePermissions) GetPermissions() []string {
@@ -181,9 +192,10 @@ const file_common_v1_permissions_proto_rawDesc = "" +
 	"\x1bcommon/v1/permissions.proto\x12\tcommon.v1\x1a google/protobuf/descriptor.proto\"j\n" +
 	"\x11MethodPermissions\x12 \n" +
 	"\vpermissions\x18\x01 \x03(\tR\vpermissions\x123\n" +
-	"\x15allow_unauthenticated\x18\x02 \x01(\bR\x14allowUnauthenticated\"6\n" +
-	"\x12ServicePermissions\x12 \n" +
-	"\vpermissions\x18\x01 \x03(\tR\vpermissions:m\n" +
+	"\x15allow_unauthenticated\x18\x02 \x01(\bR\x14allowUnauthenticated\"T\n" +
+	"\x12ServicePermissions\x12\x1c\n" +
+	"\tnamespace\x18\x01 \x01(\tR\tnamespace\x12 \n" +
+	"\vpermissions\x18\x02 \x03(\tR\vpermissions:m\n" +
 	"\x12method_permissions\x12\x1e.google.protobuf.MethodOptions\x18І\x03 \x01(\v2\x1c.common.v1.MethodPermissionsR\x11methodPermissions:q\n" +
 	"\x13service_permissions\x12\x1f.google.protobuf.ServiceOptions\x18І\x03 \x01(\v2\x1d.common.v1.ServicePermissionsR\x12servicePermissionsB?\n" +
 	"\bcommonv1P\x01Z1github.com/antinvestor/apis/go/common/v1;commonv1b\x06proto3"

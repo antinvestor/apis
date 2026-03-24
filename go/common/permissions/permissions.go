@@ -31,20 +31,30 @@ type MethodPermission struct {
 	AllowUnauthenticated bool
 }
 
-// ForService extracts the full list of permissions declared at the service level.
-// These represent all permissions the service requires to function.
-func ForService(sd protoreflect.ServiceDescriptor) []string {
+// ServicePermission holds the service-level permission registry.
+type ServicePermission struct {
+	// Namespace identifies the service for OPL namespace generation.
+	Namespace string
+	// Permissions lists all permissions this service requires to function.
+	Permissions []string
+}
+
+// ForService extracts the namespace and full list of permissions declared at the service level.
+func ForService(sd protoreflect.ServiceDescriptor) ServicePermission {
 	opts, ok := sd.Options().(*descriptorpb.ServiceOptions)
 	if !ok || opts == nil {
-		return nil
+		return ServicePermission{}
 	}
 
 	ext, ok := proto.GetExtension(opts, commonv1.E_ServicePermissions).(*commonv1.ServicePermissions)
 	if !ok || ext == nil {
-		return nil
+		return ServicePermission{}
 	}
 
-	return ext.GetPermissions()
+	return ServicePermission{
+		Namespace:   ext.GetNamespace(),
+		Permissions: ext.GetPermissions(),
+	}
 }
 
 // ForMethod extracts the permission requirements declared on a specific RPC method.

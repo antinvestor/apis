@@ -255,6 +255,7 @@ message TemplateSaveResponse {
 // All RPCs require authentication via Bearer token unless otherwise specified.
 service NotificationService {
   option (common.v1.service_permissions) = {
+    namespace: "service_notification"
     permissions: [
       "notification_read",
       "notification_write",

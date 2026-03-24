@@ -35,8 +35,13 @@ message MethodPermissions {
 // ServicePermissions declares all permissions a service requires to function.
 // This serves as a registry of permissions that must be provisioned for the service.
 message ServicePermissions {
+  // Namespace for this service's permissions, used for OPL namespace generation
+  // and ensuring consistency across authorization systems.
+  // e.g. "profile", "payment", "partition".
+  string namespace = 1;
+
   // All permissions this service needs, e.g. "profile_read", "profile_write".
-  repeated string permissions = 1;
+  repeated string permissions = 2;
 }
 
 extend google.protobuf.MethodOptions {

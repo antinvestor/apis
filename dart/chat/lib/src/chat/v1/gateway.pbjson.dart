@@ -101,6 +101,7 @@ const $core.Map<$core.String, $core.dynamic> GatewayServiceBase$json = {
   '2': [
     {'1': 'Stream', '2': '.chat.v1.StreamRequest', '3': '.chat.v1.StreamResponse', '4': {}, '5': true, '6': true},
   ],
+  '3': {},
 };
 
 @$core.Deprecated('Use gatewayServiceDescriptor instead')
@@ -144,11 +145,13 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> GatewaySer
 
 /// Descriptor for `GatewayService`. Decode as a `google.protobuf.ServiceDescriptorProto`.
 final $typed_data.Uint8List gatewayServiceDescriptor = $convert.base64Decode(
-    'Cg5HYXRld2F5U2VydmljZRLuAgoGU3RyZWFtEhYuY2hhdC52MS5TdHJlYW1SZXF1ZXN0GhcuY2'
-    'hhdC52MS5TdHJlYW1SZXNwb25zZSKuArpHqgIKCVJlYWwtdGltZRItRXN0YWJsaXNoIGJpLWRp'
+    'Cg5HYXRld2F5U2VydmljZRKBAwoGU3RyZWFtEhYuY2hhdC52MS5TdHJlYW1SZXF1ZXN0GhcuY2'
+    'hhdC52MS5TdHJlYW1SZXNwb25zZSLBArpHqgIKCVJlYWwtdGltZRItRXN0YWJsaXNoIGJpLWRp'
     'cmVjdGlvbmFsIHN0cmVhbWluZyBjb25uZWN0aW9uGuUBT3BlbnMgYSBwZXJzaXN0ZW50IGJpLW'
     'RpcmVjdGlvbmFsIHN0cmVhbSBmb3IgcmVhbC10aW1lIGNoYXQgZXZlbnRzLiBDbGllbnRzIHNl'
     'bmQgU3RyZWFtUmVxdWVzdCBtZXNzYWdlcyAoYXV0aCwgYWNrcywgY29tbWFuZHMpIGFuZCByZW'
     'NlaXZlIFNlcnZlckV2ZW50IG1lc3NhZ2VzIGluIGNocm9ub2xvZ2ljYWwgb3JkZXIuIFN1cHBv'
-    'cnRzIHNlc3Npb24gcmVzdW1wdGlvbiB2aWEgcmVzdW1lX3Rva2VuLioGc3RyZWFtKAEwAQ==');
+    'cnRzIHNlc3Npb24gcmVzdW1wdGlvbiB2aWEgcmVzdW1lX3Rva2VuLioGc3RyZWFtgrUYDwoNZ2'
+    'F0ZXdheV93cml0ZSgBMAEaMoK1GC4KD3NlcnZpY2VfZ2F0ZXdheRIMZ2F0ZXdheV9yZWFkEg1n'
+    'YXRld2F5X3dyaXRl');
 

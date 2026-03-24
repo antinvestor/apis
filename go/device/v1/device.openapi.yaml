@@ -10,6 +10,14 @@ info:
     name: Apache License
     url: https://github.com/antinvestor/apis/blob/master/LICENSE
   version: v1.0.0
+x-service-namespace: service_device
+x-service-permissions:
+  - device_read
+  - device_write
+  - device_key_read
+  - device_key_write
+  - device_log_read
+  - device_log_write
 paths:
   /device.v1.DeviceService/AddKey:
     post:
@@ -48,6 +56,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/device.v1.AddKeyResponse'
+      x-required-permissions:
+        - device_key_write
   /device.v1.DeviceService/Create:
     post:
       tags:
@@ -85,6 +95,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/device.v1.CreateResponse'
+      x-required-permissions:
+        - device_write
   /device.v1.DeviceService/DeRegisterKey:
     post:
       tags:
@@ -122,6 +134,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/device.v1.DeRegisterKeyResponse'
+      x-required-permissions:
+        - device_key_write
   /device.v1.DeviceService/GetById:
     get:
       tags:
@@ -176,6 +190,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/device.v1.GetByIdResponse'
+      x-required-permissions:
+        - device_read
     post:
       tags:
         - Devices
@@ -212,6 +228,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/device.v1.GetByIdResponse'
+      x-required-permissions:
+        - device_read
   /device.v1.DeviceService/GetBySessionId:
     get:
       tags:
@@ -266,6 +284,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/device.v1.GetBySessionIdResponse'
+      x-required-permissions:
+        - device_read
     post:
       tags:
         - Devices
@@ -302,6 +322,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/device.v1.GetBySessionIdResponse'
+      x-required-permissions:
+        - device_read
   /device.v1.DeviceService/GetTurnCredentials:
     post:
       tags:
@@ -339,6 +361,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/device.v1.GetTurnCredentialsResponse'
+      x-required-permissions:
+        - device_read
   /device.v1.DeviceService/Link:
     post:
       tags:
@@ -376,6 +400,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/device.v1.LinkResponse'
+      x-required-permissions:
+        - device_write
   /device.v1.DeviceService/ListLogs: {}
   /device.v1.DeviceService/Log:
     post:
@@ -414,6 +440,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/device.v1.LogResponse'
+      x-required-permissions:
+        - device_log_write
   /device.v1.DeviceService/Notify:
     post:
       tags:
@@ -451,6 +479,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/device.v1.NotifyResponse'
+      x-required-permissions:
+        - device_write
   /device.v1.DeviceService/RegisterKey:
     post:
       tags:
@@ -488,6 +518,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/device.v1.RegisterKeyResponse'
+      x-required-permissions:
+        - device_key_write
   /device.v1.DeviceService/Remove:
     post:
       tags:
@@ -525,6 +557,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/device.v1.RemoveResponse'
+      x-required-permissions:
+        - device_write
   /device.v1.DeviceService/RemoveKey:
     post:
       tags:
@@ -562,6 +596,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/device.v1.RemoveKeyResponse'
+      x-required-permissions:
+        - device_key_write
   /device.v1.DeviceService/Search: {}
   /device.v1.DeviceService/SearchKey:
     get:
@@ -617,6 +653,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/device.v1.SearchKeyResponse'
+      x-required-permissions:
+        - device_key_read
     post:
       tags:
         - Device Keys
@@ -653,6 +691,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/device.v1.SearchKeyResponse'
+      x-required-permissions:
+        - device_key_read
   /device.v1.DeviceService/Update:
     post:
       tags:
@@ -690,6 +730,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/device.v1.UpdateResponse'
+      x-required-permissions:
+        - device_write
   /device.v1.DeviceService/UpdatePresence:
     post:
       tags:
@@ -727,6 +769,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/device.v1.UpdatePresenceResponse'
+      x-required-permissions:
+        - device_write
 components:
   schemas:
     base64:

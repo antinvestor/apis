@@ -10,6 +10,12 @@ info:
     name: Apache License
     url: https://github.com/antinvestor/apis/blob/master/LICENSE
   version: v1.0.0
+x-service-namespace: service_notification
+x-service-permissions:
+  - notification_read
+  - notification_write
+  - template_read
+  - template_write
 paths:
   /notification.v1.NotificationService/Receive: {}
   /notification.v1.NotificationService/Release: {}
@@ -69,6 +75,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/common.v1.StatusResponse'
+      x-required-permissions:
+        - notification_read
     post:
       tags:
         - Notifications
@@ -105,6 +113,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/common.v1.StatusResponse'
+      x-required-permissions:
+        - notification_read
   /notification.v1.NotificationService/StatusUpdate:
     post:
       tags:
@@ -142,6 +152,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/common.v1.StatusUpdateResponse'
+      x-required-permissions:
+        - notification_write
   /notification.v1.NotificationService/TemplateSave:
     post:
       tags:
@@ -179,6 +191,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/notification.v1.TemplateSaveResponse'
+      x-required-permissions:
+        - template_write
   /notification.v1.NotificationService/TemplateSearch: {}
 components:
   schemas:
