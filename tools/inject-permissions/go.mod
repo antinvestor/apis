@@ -3,7 +3,7 @@ module github.com/antinvestor/apis/tools/inject-permissions
 go 1.26.1
 
 require (
-	github.com/antinvestor/apis/go/common v1.55.18
+	github.com/antinvestor/apis/go/common v1.58.0
 	google.golang.org/protobuf v1.36.11
 	gopkg.in/yaml.v3 v3.0.1
 )

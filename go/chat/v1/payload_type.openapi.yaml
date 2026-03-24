@@ -1,9 +1,18 @@
 openapi: 3.1.0
 info:
   title: chat.v1
-x-service-namespace: service_gateway
+x-service-namespace: service_chat
 x-service-permissions:
-  - gateway_connect
+  - event_view
+  - event_send
+  - room_view
+  - room_create
+  - room_update
+  - room_delete
+  - subscription_view
+  - subscription_manage
+  - proposal_view
+  - proposal_manage
 paths: {}
 components:
   schemas:

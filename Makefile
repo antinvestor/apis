@@ -149,21 +149,6 @@ define lint_fix_module
 endef
 
 # ------------------------------------------------------------------------------
-# minimock / connect
-# ------------------------------------------------------------------------------
-
-define connect_handler_mock
-	( \
-	$(call require_dir,go/$(1)); \
-	cd go/$(1); \
-	mkdir -p mocks; \
-	minimock \
-		-o mocks/$(3)_handler.gen.go \
-		-i buf.build/gen/go/antinvestor/$(if $(5),$(5),$(1))/connectrpc/go/$(1)/$(2)/$(1)$(2)connect.$(4); \
-	)
-endef
-
-# ------------------------------------------------------------------------------
 # Dart helpers
 # ------------------------------------------------------------------------------
 
@@ -291,23 +276,6 @@ generate_buf_gen:
 		--year-range "$(COPYRIGHT_YEARS)" \
 		$(LICENSE_IGNORE)
 
-.PHONY: generate_minimock_mocks
-generate_minimock_mocks: $(BIN)/minimock
-	$(call connect_handler_mock,chat,v1,chat,ChatServiceClient,)
-	$(call connect_handler_mock,chat,v1,gateway,GatewayServiceClient,)
-	$(call connect_handler_mock,device,v1,device,DeviceServiceClient,)
-	$(call connect_handler_mock,files,v1,files,FilesServiceClient,)
-	$(call connect_handler_mock,notification,v1,notification,NotificationServiceClient,)
-	$(call connect_handler_mock,ocr,v1,ocr,OCRServiceClient,)
-	$(call connect_handler_mock,partition,v1,partition,PartitionServiceClient,)
-	$(call connect_handler_mock,payment,v1,payment,PaymentServiceClient,)
-	$(call connect_handler_mock,profile,v1,profile,ProfileServiceClient,)
-	$(call connect_handler_mock,property,v1,property,PropertyServiceClient,)
-	$(call connect_handler_mock,settings,v1,settings,SettingsServiceClient,settingz)
-	$(call connect_handler_mock,ledger,v1,ledger,LedgerServiceClient,)
-	$(call connect_handler_mock,commerce,v1,commerce,CommerceServiceClient,)
-	$(call connect_handler_mock,billing,v1,billing,BillingServiceClient,)
-
 $(BIN)/inject-permissions: tools/inject-permissions/main.go go/common/v1/permissions.pb.go
 	mkdir -p $(BIN)
 	cd tools/inject-permissions && $(GO) build -o $(BIN)/inject-permissions .
@@ -345,7 +313,6 @@ generate: $(BIN)/buf $(BIN)/license-header ## Regenerate all code
 	$(MAKE) generate_buf_gen
 	$(MAKE) generate_inject_permissions
 	$(MAKE) generate_opl
-	$(MAKE) generate_minimock_mocks
 
 .PHONY: generate_dart
 generate_dart: $(BIN)/buf ## Generate Dart from proto
@@ -392,6 +359,3 @@ $(BIN)/golangci-lint:
 	mkdir -p $(BIN)
 	$(GO) install github.com/golangci/golangci-lint/v2/cmd/golangci-lint@latest
 
-$(BIN)/minimock:
-	mkdir -p $(BIN)
-	$(GO) install github.com/gojuno/minimock/v3/cmd/minimock@latest
