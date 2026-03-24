@@ -27,6 +27,7 @@ package commerce.v1;
 
 import "buf/validate/validate.proto";
 import "common/v1/common.proto";
+import "common/v1/permissions.proto";
 import "gnostic/openapi/v3/annotations.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/struct.proto";
@@ -81,44 +82,111 @@ option (gnostic.openapi.v3.document) = {
 */
 
 service CommerceService {
+  option (common.v1.service_permissions) = {
+    permissions: [
+      "shop_read",
+      "shop_write",
+      "product_read",
+      "product_write",
+      "cart_read",
+      "cart_write",
+      "order_read",
+      "order_write",
+      "fulfilment_read",
+      "fulfilment_write"
+    ]
+  };
+
   // ----------------------
   // Shop
   // ----------------------
 
   // Creates a new shop. The authenticated user becomes the admin.
-  rpc CreateShop(CreateShopRequest) returns (CreateShopResponse);
+  rpc CreateShop(CreateShopRequest) returns (CreateShopResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["shop_write"]
+    };
+  }
   // Retrieves shop details by ID.
-  rpc GetShop(GetShopRequest) returns (GetShopResponse);
+  rpc GetShop(GetShopRequest) returns (GetShopResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["shop_read"]
+    };
+  }
   // Updates shop details.
-  rpc UpdateShop(UpdateShopRequest) returns (UpdateShopResponse);
+  rpc UpdateShop(UpdateShopRequest) returns (UpdateShopResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["shop_write"]
+    };
+  }
 
   // ----------------------
   // Catalog
   // ----------------------
 
   // Creates a new product in the catalog.
-  rpc CreateProduct(CreateProductRequest) returns (CreateProductResponse);
+  rpc CreateProduct(CreateProductRequest) returns (CreateProductResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["product_write"]
+    };
+  }
   // Retrieves a product by its ID.
-  rpc GetProduct(GetProductRequest) returns (GetProductResponse);
+  rpc GetProduct(GetProductRequest) returns (GetProductResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["product_read"]
+    };
+  }
   // Lists products belonging to a shop, with optional search and filtering.
-  rpc ListProducts(ListProductsRequest) returns (ListProductsResponse);
+  rpc ListProducts(ListProductsRequest) returns (ListProductsResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["product_read"]
+    };
+  }
 
   // Creates a new variant for a product.
-  rpc CreateProductVariant(CreateProductVariantRequest) returns (CreateProductVariantResponse);
+  rpc CreateProductVariant(CreateProductVariantRequest) returns (CreateProductVariantResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["product_write"]
+    };
+  }
   // Updates an existing product variant.
-  rpc UpdateProductVariant(UpdateProductVariantRequest) returns (UpdateProductVariantResponse);
+  rpc UpdateProductVariant(UpdateProductVariantRequest) returns (UpdateProductVariantResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["product_write"]
+    };
+  }
 
   // ----------------------
   // Orders
   // ----------------------
 
-  rpc CreateCart(CreateCartRequest) returns (CreateCartResponse);
-  rpc GetCart(GetCartRequest) returns (GetCartResponse);
+  rpc CreateCart(CreateCartRequest) returns (CreateCartResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["cart_write"]
+    };
+  }
+  rpc GetCart(GetCartRequest) returns (GetCartResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["cart_read"]
+    };
+  }
 
-  rpc AddCartLine(AddCartLineRequest) returns (AddCartLineResponse);
-  rpc RemoveCartLine(RemoveCartLineRequest) returns (RemoveCartLineResponse);
+  rpc AddCartLine(AddCartLineRequest) returns (AddCartLineResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["cart_write"]
+    };
+  }
+  rpc RemoveCartLine(RemoveCartLineRequest) returns (RemoveCartLineResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["cart_write"]
+    };
+  }
 
-  rpc CreateOrderFromCart(CreateOrderFromCartRequest) returns (CreateOrderFromCartResponse);
+  rpc CreateOrderFromCart(CreateOrderFromCartRequest) returns (CreateOrderFromCartResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["order_write"]
+    };
+  }
 
   // ----------------------
   // Orders
@@ -137,12 +205,24 @@ service CommerceService {
      The order is created in CONFIRMED state
      (since this API does not handle payments).
   */
-  rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse);
+  rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["order_write"]
+    };
+  }
 
   // Retrieves an order by ID.
-  rpc GetOrder(GetOrderRequest) returns (GetOrderResponse);
+  rpc GetOrder(GetOrderRequest) returns (GetOrderResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["order_read"]
+    };
+  }
   // Lists orders for a shop, with optional search and filtering.
-  rpc ListOrders(ListOrdersRequest) returns (ListOrdersResponse);
+  rpc ListOrders(ListOrdersRequest) returns (ListOrdersResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["order_read"]
+    };
+  }
 
   // ----------------------
   // Fulfilment
@@ -154,12 +234,24 @@ service CommerceService {
      A fulfilment may contain a subset of order lines.
      Quantity per line MUST NOT exceed remaining unfulfilled quantity.
   */
-  rpc CreateFulfilment(CreateFulfilmentRequest) returns (CreateFulfilmentResponse);
+  rpc CreateFulfilment(CreateFulfilmentRequest) returns (CreateFulfilmentResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["fulfilment_write"]
+    };
+  }
 
   // Updates a fulfilment (e.g. adding tracking number, marking as shipped).
-  rpc UpdateFulfilment(UpdateFulfilmentRequest) returns (UpdateFulfilmentResponse);
+  rpc UpdateFulfilment(UpdateFulfilmentRequest) returns (UpdateFulfilmentResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["fulfilment_write"]
+    };
+  }
   // Retrieves a fulfilment by ID.
-  rpc GetFulfilment(GetFulfilmentRequest) returns (GetFulfilmentResponse);
+  rpc GetFulfilment(GetFulfilmentRequest) returns (GetFulfilmentResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["fulfilment_read"]
+    };
+  }
 }
 
 //

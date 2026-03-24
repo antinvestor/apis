@@ -308,9 +308,23 @@ generate_minimock_mocks: $(BIN)/minimock
 	$(call connect_handler_mock,commerce,v1,commerce,CommerceServiceClient,)
 	$(call connect_handler_mock,billing,v1,billing,BillingServiceClient,)
 
+.PHONY: generate_inject_permissions
+generate_inject_permissions: ## Inject permissions into OpenAPI specs
+	@for m in $(MODULES); do \
+		if [ "$$m" = "common" ]; then continue; fi; \
+		proto_dir="proto/$$m"; \
+		yaml_files=$$(find go/$$m -name '*.openapi.yaml' 2>/dev/null); \
+		for yaml_file in $$yaml_files; do \
+			echo "==> inject permissions $$yaml_file"; \
+			buf build "$$proto_dir" -o /dev/stdout | \
+				$(GO) run ./go/common/cmd/inject-permissions "$$yaml_file"; \
+		done; \
+	done
+
 .PHONY: generate
 generate: $(BIN)/buf $(BIN)/license-header ## Regenerate all code
 	$(MAKE) generate_buf_gen
+	$(MAKE) generate_inject_permissions
 	$(MAKE) generate_minimock_mocks
 
 .PHONY: generate_dart

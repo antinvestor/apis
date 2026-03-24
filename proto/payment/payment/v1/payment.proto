@@ -28,6 +28,7 @@ package payment.v1;
 
 import "buf/validate/validate.proto";
 import "common/v1/common.proto";
+import "common/v1/permissions.proto";
 import "gnostic/openapi/v3/annotations.proto";
 import "google/protobuf/struct.proto";
 import "google/type/money.proto";
@@ -242,9 +243,19 @@ message CreatePaymentLinkResponse {
 // PaymentService handles payment processing and reconciliation.
 // All RPCs require authentication via Bearer token.
 service PaymentService {
+  option (common.v1.service_permissions) = {
+    permissions: [
+      "payment_read",
+      "payment_write"
+    ]
+  };
+
   // Send queues an outbound payment for processing.
   // Payments are queued and require Release to process.
   rpc Send(SendRequest) returns (SendResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["payment_write"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "sendPayment"
       summary: "Queue outbound payment"
@@ -256,6 +267,9 @@ service PaymentService {
   // Receive queues an inbound payment for processing.
   // Used for recording expected incoming payments.
   rpc Receive(ReceiveRequest) returns (ReceiveResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["payment_write"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "receivePayment"
       summary: "Queue inbound payment"
@@ -267,6 +281,9 @@ service PaymentService {
   // InitiatePrompt initiates a payment prompt to the customer.
   // Triggers payment prompts like M-PESA STK push.
   rpc InitiatePrompt(InitiatePromptRequest) returns (InitiatePromptResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["payment_write"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "initiatePaymentPrompt"
       summary: "Initiate payment prompt"
@@ -278,6 +295,9 @@ service PaymentService {
   // CreatePaymentLink generates a shareable payment link.
   // Customers can use the link to make payments via web interface.
   rpc CreatePaymentLink(CreatePaymentLinkRequest) returns (CreatePaymentLinkResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["payment_write"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "createPaymentLink"
       summary: "Create payment link"
@@ -290,6 +310,9 @@ service PaymentService {
   // Returns processing state and status details.
   rpc Status(common.v1.StatusRequest) returns (common.v1.StatusResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
+    option (common.v1.method_permissions) = {
+      permissions: ["payment_read"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getPaymentStatus"
       summary: "Get payment status"
@@ -301,6 +324,9 @@ service PaymentService {
   // StatusUpdate updates the status of a payment.
   // Used for manual status corrections or workflow progression.
   rpc StatusUpdate(common.v1.StatusUpdateRequest) returns (common.v1.StatusUpdateResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["payment_write"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "updatePaymentStatus"
       summary: "Update payment status"
@@ -312,6 +338,9 @@ service PaymentService {
   // Release releases a queued payment for processing.
   // Queued payments must be released to initiate actual transfer.
   rpc Release(ReleaseRequest) returns (ReleaseResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["payment_write"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "releasePayment"
       summary: "Release queued payment"
@@ -324,6 +353,9 @@ service PaymentService {
   // Supports filtering by date, amount, status, route, and more.
   rpc Search(common.v1.SearchRequest) returns (stream SearchResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
+    option (common.v1.method_permissions) = {
+      permissions: ["payment_read"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "searchPayments"
       summary: "Search payments"
@@ -335,6 +367,9 @@ service PaymentService {
   // Reconcile matches external transactions with internal payments.
   // Used for payment reconciliation with provider statements.
   rpc Reconcile(ReconcileRequest) returns (ReconcileResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["payment_write"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "reconcilePayment"
       summary: "Reconcile external transaction"

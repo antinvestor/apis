@@ -25,6 +25,7 @@ import "chat/v1/definitions.proto";
 // - Servers must enforce permission checks for each RPC (see AuthClaims below).
 // -----------------------------------------------------
 import "common/v1/common.proto";
+import "common/v1/permissions.proto";
 import "gnostic/openapi/v3/annotations.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
@@ -74,8 +75,24 @@ option (gnostic.openapi.v3.document) = {
 // -----------------------------------------------------
 
 service ChatService {
+  option (common.v1.service_permissions) = {
+    permissions: [
+      "event_read",
+      "event_write",
+      "room_read",
+      "room_write",
+      "subscription_read",
+      "subscription_write",
+      "proposal_read",
+      "proposal_write"
+    ]
+  };
+
   // Send an event (unified message model). Idempotent if idempotency_key is provided.
   rpc SendEvent(SendEventRequest) returns (SendEventResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["event_write"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "sendEvent"
       summary: "Send an event to a room"
@@ -87,6 +104,9 @@ service ChatService {
   // Fetch a single event by ID. Used for deep-linking, thread rendering, and verification.
   rpc GetEvent(GetEventRequest) returns (GetEventResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
+    option (common.v1.method_permissions) = {
+      permissions: ["event_read"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getEvent"
       summary: "Retrieve a single event by ID"
@@ -98,6 +118,9 @@ service ChatService {
   // Fetch history for a room. Cursor-based paging (cursor = opaque server token).
   rpc GetHistory(GetHistoryRequest) returns (GetHistoryResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
+    option (common.v1.method_permissions) = {
+      permissions: ["event_read"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getHistory"
       summary: "Retrieve message history for a room"
@@ -111,6 +134,9 @@ service ChatService {
   // Fetch a single room by ID.
   rpc GetRoom(GetRoomRequest) returns (GetRoomResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
+    option (common.v1.method_permissions) = {
+      permissions: ["room_read"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getRoom"
       summary: "Retrieve a single room by ID"
@@ -120,6 +146,9 @@ service ChatService {
   }
 
   rpc CreateRoom(CreateRoomRequest) returns (CreateRoomResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["room_write"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "createRoom"
       summary: "Create a new chat room"
@@ -129,6 +158,9 @@ service ChatService {
   }
   rpc SearchRooms(SearchRoomsRequest) returns (stream SearchRoomsResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
+    option (common.v1.method_permissions) = {
+      permissions: ["room_read"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "searchRooms"
       summary: "Search for chat rooms"
@@ -137,6 +169,9 @@ service ChatService {
     };
   }
   rpc UpdateRoom(UpdateRoomRequest) returns (UpdateRoomResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["room_write"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "updateRoom"
       summary: "Update a chat room"
@@ -145,6 +180,9 @@ service ChatService {
     };
   }
   rpc DeleteRoom(DeleteRoomRequest) returns (DeleteRoomResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["room_write"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "deleteRoom"
       summary: "Delete a chat room"
@@ -155,6 +193,9 @@ service ChatService {
 
   // Subscriptionship & roles
   rpc AddRoomSubscriptions(AddRoomSubscriptionsRequest) returns (AddRoomSubscriptionsResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["subscription_write"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "addRoomSubscriptions"
       summary: "Add members to a room"
@@ -163,6 +204,9 @@ service ChatService {
     };
   }
   rpc RemoveRoomSubscriptions(RemoveRoomSubscriptionsRequest) returns (RemoveRoomSubscriptionsResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["subscription_write"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "removeRoomSubscriptions"
       summary: "Remove members from a room"
@@ -171,6 +215,9 @@ service ChatService {
     };
   }
   rpc UpdateSubscriptionRole(UpdateSubscriptionRoleRequest) returns (UpdateSubscriptionRoleResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["subscription_write"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "updateSubscriptionRole"
       summary: "Update a member's role in a room"
@@ -180,6 +227,9 @@ service ChatService {
   }
   rpc SearchRoomSubscriptions(SearchRoomSubscriptionsRequest) returns (SearchRoomSubscriptionsResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
+    option (common.v1.method_permissions) = {
+      permissions: ["subscription_read"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "searchRoomSubscriptions"
       summary: "List room members"
@@ -191,6 +241,9 @@ service ChatService {
   // Get per-room subscription settings for a member (notification preferences, mute, archive)
   rpc GetSubscriptionSettings(GetSubscriptionSettingsRequest) returns (GetSubscriptionSettingsResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
+    option (common.v1.method_permissions) = {
+      permissions: ["subscription_read"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getSubscriptionSettings"
       summary: "Get subscription settings for a room"
@@ -201,6 +254,9 @@ service ChatService {
 
   // Update per-room subscription settings for a member
   rpc UpdateSubscriptionSettings(UpdateSubscriptionSettingsRequest) returns (UpdateSubscriptionSettingsResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["subscription_write"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "updateSubscriptionSettings"
       summary: "Update subscription settings for a room"
@@ -214,6 +270,9 @@ service ChatService {
 
   // Update different states that the client can be in for room subscriptions awareness
   rpc Live(LiveRequest) returns (LiveResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["event_read"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "Live"
       summary: "Executes realtime connection updates"
@@ -230,6 +289,9 @@ service ChatService {
   // List pending proposals for a room
   rpc ListProposals(ListProposalsRequest) returns (ListProposalsResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
+    option (common.v1.method_permissions) = {
+      permissions: ["proposal_read"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "listProposals"
       summary: "List pending proposals for a room"
@@ -240,6 +302,9 @@ service ChatService {
 
   // Submit a decision on a pending proposal (approve or reject)
   rpc SubmitProposal(SubmitProposalRequest) returns (SubmitProposalResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["proposal_write"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "submitProposal"
       summary: "Submit a decision on a pending proposal"

@@ -28,6 +28,7 @@ package profile.v1;
 
 import "buf/validate/validate.proto";
 import "common/v1/common.proto";
+import "common/v1/permissions.proto";
 import "gnostic/openapi/v3/annotations.proto";
 import "google/protobuf/struct.proto";
 
@@ -527,9 +528,26 @@ message DeleteRelationshipResponse {
 // ProfileService manages user and entity profiles.
 // All RPCs require authentication via Bearer token.
 service ProfileService {
+  option (common.v1.service_permissions) = {
+    permissions: [
+      "profile_read",
+      "profile_write",
+      "contact_read",
+      "contact_write",
+      "roster_read",
+      "roster_write",
+      "address_write",
+      "relationship_read",
+      "relationship_write"
+    ]
+  };
+
   // GetById retrieves a profile by its unique ID.
   rpc GetById(GetByIdRequest) returns (GetByIdResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
+    option (common.v1.method_permissions) = {
+      permissions: ["profile_read"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getProfileById"
       summary: "Get profile by ID"
@@ -541,6 +559,9 @@ service ProfileService {
   // GetByContact retrieves a profile by contact information.
   rpc GetByContact(GetByContactRequest) returns (GetByContactResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
+    option (common.v1.method_permissions) = {
+      permissions: ["profile_read"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getProfileByContact"
       summary: "Get profile by contact"
@@ -552,6 +573,9 @@ service ProfileService {
   // Search finds profiles matching specified criteria.
   rpc Search(SearchRequest) returns (stream SearchResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
+    option (common.v1.method_permissions) = {
+      permissions: ["profile_read"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "searchProfiles"
       summary: "Search profiles"
@@ -562,6 +586,9 @@ service ProfileService {
 
   // Merge combines two profiles into one.
   rpc Merge(MergeRequest) returns (MergeResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["profile_write"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "mergeProfiles"
       summary: "Merge profiles"
@@ -572,6 +599,9 @@ service ProfileService {
 
   // Create creates a new profile.
   rpc Create(CreateRequest) returns (CreateResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["profile_write"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "createProfile"
       summary: "Create profile"
@@ -582,6 +612,9 @@ service ProfileService {
 
   // Update updates an existing profile's properties.
   rpc Update(UpdateRequest) returns (UpdateResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["profile_write"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "updateProfile"
       summary: "Update profile"
@@ -592,6 +625,9 @@ service ProfileService {
 
   // AddContact adds a new contact to a profile with automatic verification.
   rpc AddContact(AddContactRequest) returns (AddContactResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["contact_write"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "addContact"
       summary: "Add contact to profile"
@@ -602,6 +638,9 @@ service ProfileService {
 
   // CreateContact creates a standalone contact not linked to a profile.
   rpc CreateContact(CreateContactRequest) returns (CreateContactResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["contact_write"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "createContact"
       summary: "Create standalone contact"
@@ -612,6 +651,9 @@ service ProfileService {
 
   // CreateContactVerification initiates contact verification.
   rpc CreateContactVerification(CreateContactVerificationRequest) returns (CreateContactVerificationResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["contact_write"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "createContactVerification"
       summary: "Create contact verification"
@@ -622,6 +664,9 @@ service ProfileService {
 
   // CheckVerification verifies a contact using the provided code.
   rpc CheckVerification(CheckVerificationRequest) returns (CheckVerificationResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["contact_write"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "checkVerification"
       summary: "Check verification code"
@@ -632,6 +677,9 @@ service ProfileService {
 
   // RemoveContact removes a contact from a profile.
   rpc RemoveContact(RemoveContactRequest) returns (RemoveContactResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["contact_write"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "removeContact"
       summary: "Remove contact"
@@ -643,6 +691,9 @@ service ProfileService {
   // SearchRoster searches a user's contact roster.
   rpc SearchRoster(SearchRosterRequest) returns (stream SearchRosterResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
+    option (common.v1.method_permissions) = {
+      permissions: ["roster_read"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "searchRoster"
       summary: "Search roster"
@@ -653,6 +704,9 @@ service ProfileService {
 
   // AddRoster adds multiple contacts to a user's roster.
   rpc AddRoster(AddRosterRequest) returns (AddRosterResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["roster_write"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "addRoster"
       summary: "Add roster entries"
@@ -663,6 +717,9 @@ service ProfileService {
 
   // RemoveRoster removes a contact from a user's roster.
   rpc RemoveRoster(RemoveRosterRequest) returns (RemoveRosterResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["roster_write"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "removeRoster"
       summary: "Remove roster entry"
@@ -673,6 +730,9 @@ service ProfileService {
 
   // AddAddress adds a new address to a profile.
   rpc AddAddress(AddAddressRequest) returns (AddAddressResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["address_write"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "addAddress"
       summary: "Add address"
@@ -683,6 +743,9 @@ service ProfileService {
 
   // AddRelationship creates a relationship between profiles.
   rpc AddRelationship(AddRelationshipRequest) returns (AddRelationshipResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["relationship_write"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "addRelationship"
       summary: "Add relationship"
@@ -693,6 +756,9 @@ service ProfileService {
 
   // DeleteRelationship removes a relationship between profiles.
   rpc DeleteRelationship(DeleteRelationshipRequest) returns (DeleteRelationshipResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["relationship_write"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "deleteRelationship"
       summary: "Delete relationship"
@@ -704,6 +770,9 @@ service ProfileService {
   // ListRelationship lists all relationships for a profile.
   rpc ListRelationship(ListRelationshipRequest) returns (stream ListRelationshipResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
+    option (common.v1.method_permissions) = {
+      permissions: ["relationship_read"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "listRelationships"
       summary: "List relationships"

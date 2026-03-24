@@ -26,6 +26,7 @@ package ocr.v1;
 
 import "buf/validate/validate.proto";
 import "common/v1/common.proto";
+import "common/v1/permissions.proto";
 import "gnostic/openapi/v3/annotations.proto";
 import "google/protobuf/struct.proto";
 
@@ -120,9 +121,19 @@ message StatusResponse {
 // OCRService provides optical character recognition capabilities.
 // All RPCs require authentication via Bearer token.
 service OCRService {
+  option (common.v1.service_permissions) = {
+    permissions: [
+      "ocr_read",
+      "ocr_write"
+    ]
+  };
+
   // Recognize performs OCR on one or more files.
   // Supports both synchronous and asynchronous processing.
   rpc Recognize(RecognizeRequest) returns (RecognizeResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["ocr_write"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "recognizeText"
       summary: "Perform OCR on files"
@@ -135,6 +146,9 @@ service OCRService {
   // Returns processing status and results if available.
   rpc Status(common.v1.StatusRequest) returns (StatusResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
+    option (common.v1.method_permissions) = {
+      permissions: ["ocr_read"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getOCRStatus"
       summary: "Get OCR request status"

@@ -28,6 +28,7 @@ package billing.v1;
 
 import "buf/validate/validate.proto";
 import "common/v1/common.proto";
+import "common/v1/permissions.proto";
 import "gnostic/openapi/v3/annotations.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
@@ -712,10 +713,36 @@ message SearchDiscountsResponse {
 // BillingService provides usage-based billing, subscription management, and invoicing.
 // All RPCs require authentication via Bearer token.
 service BillingService {
+  option (common.v1.service_permissions) = {
+    permissions: [
+      "catalog_read",
+      "catalog_write",
+      "plan_write",
+      "component_write",
+      "tier_write",
+      "subscription_read",
+      "subscription_write",
+      "usage_read",
+      "usage_write",
+      "billing_run_read",
+      "billing_run_write",
+      "invoice_read",
+      "invoice_write",
+      "payment_record_write",
+      "credit_read",
+      "credit_write",
+      "discount_read",
+      "discount_write"
+    ]
+  };
+
   // -- Catalog Management --
 
   // CreateCatalogVersion creates a new catalog version with plans and pricing.
   rpc CreateCatalogVersion(CreateCatalogVersionRequest) returns (CreateCatalogVersionResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["catalog_write"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "createCatalogVersion"
       summary: "Create a new catalog version"
@@ -727,6 +754,9 @@ service BillingService {
   // GetCatalogVersion retrieves a specific catalog version by ID.
   rpc GetCatalogVersion(GetCatalogVersionRequest) returns (GetCatalogVersionResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
+    option (common.v1.method_permissions) = {
+      permissions: ["catalog_read"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getCatalogVersion"
       summary: "Get a catalog version"
@@ -737,6 +767,9 @@ service BillingService {
 
   // PublishCatalogVersion publishes a catalog version, making it available for subscriptions.
   rpc PublishCatalogVersion(PublishCatalogVersionRequest) returns (PublishCatalogVersionResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["catalog_write"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "publishCatalogVersion"
       summary: "Publish a catalog version"
@@ -748,6 +781,9 @@ service BillingService {
   // SearchCatalogVersions searches for catalog versions.
   rpc SearchCatalogVersions(common.v1.SearchRequest) returns (stream SearchCatalogVersionsResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
+    option (common.v1.method_permissions) = {
+      permissions: ["catalog_read"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "searchCatalogVersions"
       summary: "Search catalog versions"
@@ -758,6 +794,9 @@ service BillingService {
 
   // CreatePlan creates a new plan within a catalog version.
   rpc CreatePlan(CreatePlanRequest) returns (CreatePlanResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["plan_write"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "createPlan"
       summary: "Create a new plan"
@@ -768,6 +807,9 @@ service BillingService {
 
   // CreateComponent creates a new billable component within a plan.
   rpc CreateComponent(CreateComponentRequest) returns (CreateComponentResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["component_write"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "createComponent"
       summary: "Create a new component"
@@ -778,6 +820,9 @@ service BillingService {
 
   // CreateTier creates a new pricing tier within a component.
   rpc CreateTier(CreateTierRequest) returns (CreateTierResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["tier_write"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "createTier"
       summary: "Create a new pricing tier"
@@ -790,6 +835,9 @@ service BillingService {
 
   // CreateSubscription creates a new subscription for a customer.
   rpc CreateSubscription(CreateSubscriptionRequest) returns (CreateSubscriptionResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["subscription_write"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "createSubscription"
       summary: "Create a new subscription"
@@ -801,6 +849,9 @@ service BillingService {
   // GetSubscription retrieves a subscription by ID.
   rpc GetSubscription(GetSubscriptionRequest) returns (GetSubscriptionResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
+    option (common.v1.method_permissions) = {
+      permissions: ["subscription_read"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getSubscription"
       summary: "Get a subscription"
@@ -811,6 +862,9 @@ service BillingService {
 
   // CancelSubscription cancels an active subscription.
   rpc CancelSubscription(CancelSubscriptionRequest) returns (CancelSubscriptionResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["subscription_write"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "cancelSubscription"
       summary: "Cancel a subscription"
@@ -822,6 +876,9 @@ service BillingService {
   // ListSubscriptions lists active subscriptions for a customer.
   rpc ListSubscriptions(ListSubscriptionsRequest) returns (ListSubscriptionsResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
+    option (common.v1.method_permissions) = {
+      permissions: ["subscription_read"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "listSubscriptions"
       summary: "List customer subscriptions"
@@ -834,6 +891,9 @@ service BillingService {
 
   // IngestUsageEvent ingests a single usage event for metering.
   rpc IngestUsageEvent(IngestUsageEventRequest) returns (IngestUsageEventResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["usage_write"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "ingestUsageEvent"
       summary: "Ingest a usage event"
@@ -845,6 +905,9 @@ service BillingService {
   // SearchUsageEvents searches for usage events.
   rpc SearchUsageEvents(common.v1.SearchRequest) returns (stream SearchUsageEventsResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
+    option (common.v1.method_permissions) = {
+      permissions: ["usage_read"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "searchUsageEvents"
       summary: "Search usage events"
@@ -857,6 +920,9 @@ service BillingService {
 
   // RunBilling executes the billing pipeline for a subscription and period.
   rpc RunBilling(RunBillingRequest) returns (RunBillingResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["billing_run_write"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "runBilling"
       summary: "Execute billing run"
@@ -868,6 +934,9 @@ service BillingService {
   // GetBillingRun retrieves a billing run by ID.
   rpc GetBillingRun(GetBillingRunRequest) returns (GetBillingRunResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
+    option (common.v1.method_permissions) = {
+      permissions: ["billing_run_read"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getBillingRun"
       summary: "Get a billing run"
@@ -881,6 +950,9 @@ service BillingService {
   // GetInvoice retrieves an invoice by ID with all line items.
   rpc GetInvoice(GetInvoiceRequest) returns (GetInvoiceResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
+    option (common.v1.method_permissions) = {
+      permissions: ["invoice_read"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getInvoice"
       summary: "Get an invoice"
@@ -891,6 +963,9 @@ service BillingService {
 
   // IssueInvoice issues a draft invoice to the customer.
   rpc IssueInvoice(IssueInvoiceRequest) returns (IssueInvoiceResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["invoice_write"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "issueInvoice"
       summary: "Issue an invoice"
@@ -901,6 +976,9 @@ service BillingService {
 
   // VoidInvoice voids an invoice.
   rpc VoidInvoice(VoidInvoiceRequest) returns (VoidInvoiceResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["invoice_write"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "voidInvoice"
       summary: "Void an invoice"
@@ -911,6 +989,9 @@ service BillingService {
 
   // RecordPayment records payment against an invoice.
   rpc RecordPayment(RecordPaymentRequest) returns (RecordPaymentResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["payment_record_write"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "recordPayment"
       summary: "Record invoice payment"
@@ -922,6 +1003,9 @@ service BillingService {
   // SearchInvoices searches for invoices.
   rpc SearchInvoices(common.v1.SearchRequest) returns (stream SearchInvoicesResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
+    option (common.v1.method_permissions) = {
+      permissions: ["invoice_read"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "searchInvoices"
       summary: "Search invoices"
@@ -934,6 +1018,9 @@ service BillingService {
 
   // GrantCredit creates a prepaid credit grant for a customer.
   rpc GrantCredit(GrantCreditRequest) returns (GrantCreditResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["credit_write"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "grantCredit"
       summary: "Grant prepaid credit"
@@ -945,6 +1032,9 @@ service BillingService {
   // GetCreditBalance retrieves a customer's credit balance.
   rpc GetCreditBalance(GetCreditBalanceRequest) returns (GetCreditBalanceResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
+    option (common.v1.method_permissions) = {
+      permissions: ["credit_read"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getCreditBalance"
       summary: "Get credit balance"
@@ -957,6 +1047,9 @@ service BillingService {
 
   // CreateDiscount creates a new discount rule.
   rpc CreateDiscount(CreateDiscountRequest) returns (CreateDiscountResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["discount_write"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "createDiscount"
       summary: "Create a discount"
@@ -968,6 +1061,9 @@ service BillingService {
   // SearchDiscounts searches for discount rules.
   rpc SearchDiscounts(common.v1.SearchRequest) returns (stream SearchDiscountsResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
+    option (common.v1.method_permissions) = {
+      permissions: ["discount_read"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "searchDiscounts"
       summary: "Search discounts"

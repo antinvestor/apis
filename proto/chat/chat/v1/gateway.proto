@@ -25,6 +25,7 @@ import "chat/v1/definitions.proto";
 // - Servers must enforce permission checks for each RPC (see AuthClaims below).
 // -----------------------------------------------------
 import "common/v1/common.proto";
+import "common/v1/permissions.proto";
 import "gnostic/openapi/v3/annotations.proto";
 import "google/protobuf/timestamp.proto";
 
@@ -80,10 +81,20 @@ option (gnostic.openapi.v3.document) = {
 // -----------------------------------------------------
 
 service GatewayService {
+  option (common.v1.service_permissions) = {
+    permissions: [
+      "gateway_read",
+      "gateway_write"
+    ]
+  };
+
   // Bi-directional, long-lived connection. Client sends StreamRequest (initial auth + acks/commands).
   // Server streams StreamResponse objects in chronological order for rooms the client is subscribed to.
   // Stream resume: client may provide last_received_event_id or resume_token to continue after reconnect.
   rpc Stream(stream StreamRequest) returns (stream StreamResponse) {
+    option (common.v1.method_permissions) = {
+      permissions: ["gateway_write"]
+    };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "stream"
       summary: "Establish bi-directional streaming connection"

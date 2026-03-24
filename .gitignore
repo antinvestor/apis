@@ -203,3 +203,4 @@ java/*/lib/
 java/*/target/
 java/*/build/
 java/*/out/
+WORK_STATE.md
