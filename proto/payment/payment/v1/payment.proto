@@ -246,8 +246,85 @@ service PaymentService {
   option (common.v1.service_permissions) = {
     namespace: "service_payment"
     permissions: [
-      "payment_read",
-      "payment_write"
+      "payment_send",
+      "payment_receive",
+      "payment_search",
+      "payment_status_view",
+      "payment_status_update",
+      "payment_release",
+      "prompt_initiate",
+      "payment_link_create",
+      "reconcile"
+    ]
+    role_bindings: [
+      {
+        role: ROLE_OWNER
+        permissions: [
+          "payment_send",
+          "payment_receive",
+          "payment_search",
+          "payment_status_view",
+          "payment_status_update",
+          "payment_release",
+          "prompt_initiate",
+          "payment_link_create",
+          "reconcile"
+        ]
+      },
+      {
+        role: ROLE_ADMIN
+        permissions: [
+          "payment_send",
+          "payment_receive",
+          "payment_search",
+          "payment_status_view",
+          "payment_status_update",
+          "payment_release",
+          "prompt_initiate",
+          "payment_link_create",
+          "reconcile"
+        ]
+      },
+      {
+        role: ROLE_OPERATOR
+        permissions: [
+          "payment_send",
+          "payment_receive",
+          "payment_search",
+          "payment_status_view",
+          "payment_release",
+          "prompt_initiate",
+          "payment_link_create"
+        ]
+      },
+      {
+        role: ROLE_VIEWER
+        permissions: [
+          "payment_search",
+          "payment_status_view"
+        ]
+      },
+      {
+        role: ROLE_MEMBER
+        permissions: [
+          "payment_search",
+          "payment_status_view"
+        ]
+      },
+      {
+        role: ROLE_SERVICE
+        permissions: [
+          "payment_send",
+          "payment_receive",
+          "payment_search",
+          "payment_status_view",
+          "payment_status_update",
+          "payment_release",
+          "prompt_initiate",
+          "payment_link_create",
+          "reconcile"
+        ]
+      }
     ]
   };
 
@@ -255,7 +332,7 @@ service PaymentService {
   // Payments are queued and require Release to process.
   rpc Send(SendRequest) returns (SendResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["payment_write"]
+      permissions: ["payment_send"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "sendPayment"
@@ -269,7 +346,7 @@ service PaymentService {
   // Used for recording expected incoming payments.
   rpc Receive(ReceiveRequest) returns (ReceiveResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["payment_write"]
+      permissions: ["payment_receive"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "receivePayment"
@@ -283,7 +360,7 @@ service PaymentService {
   // Triggers payment prompts like M-PESA STK push.
   rpc InitiatePrompt(InitiatePromptRequest) returns (InitiatePromptResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["payment_write"]
+      permissions: ["prompt_initiate"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "initiatePaymentPrompt"
@@ -297,7 +374,7 @@ service PaymentService {
   // Customers can use the link to make payments via web interface.
   rpc CreatePaymentLink(CreatePaymentLinkRequest) returns (CreatePaymentLinkResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["payment_write"]
+      permissions: ["payment_link_create"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "createPaymentLink"
@@ -312,7 +389,7 @@ service PaymentService {
   rpc Status(common.v1.StatusRequest) returns (common.v1.StatusResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
     option (common.v1.method_permissions) = {
-      permissions: ["payment_read"]
+      permissions: ["payment_status_view"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getPaymentStatus"
@@ -326,7 +403,7 @@ service PaymentService {
   // Used for manual status corrections or workflow progression.
   rpc StatusUpdate(common.v1.StatusUpdateRequest) returns (common.v1.StatusUpdateResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["payment_write"]
+      permissions: ["payment_status_update"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "updatePaymentStatus"
@@ -340,7 +417,7 @@ service PaymentService {
   // Queued payments must be released to initiate actual transfer.
   rpc Release(ReleaseRequest) returns (ReleaseResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["payment_write"]
+      permissions: ["payment_release"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "releasePayment"
@@ -355,7 +432,7 @@ service PaymentService {
   rpc Search(common.v1.SearchRequest) returns (stream SearchResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
     option (common.v1.method_permissions) = {
-      permissions: ["payment_read"]
+      permissions: ["payment_search"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "searchPayments"
@@ -369,7 +446,7 @@ service PaymentService {
   // Used for payment reconciliation with provider statements.
   rpc Reconcile(ReconcileRequest) returns (ReconcileResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["payment_write"]
+      permissions: ["reconcile"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "reconcilePayment"

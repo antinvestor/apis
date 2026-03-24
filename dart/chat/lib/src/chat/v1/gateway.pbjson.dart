@@ -145,13 +145,15 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> GatewaySer
 
 /// Descriptor for `GatewayService`. Decode as a `google.protobuf.ServiceDescriptorProto`.
 final $typed_data.Uint8List gatewayServiceDescriptor = $convert.base64Decode(
-    'Cg5HYXRld2F5U2VydmljZRKBAwoGU3RyZWFtEhYuY2hhdC52MS5TdHJlYW1SZXF1ZXN0GhcuY2'
-    'hhdC52MS5TdHJlYW1SZXNwb25zZSLBArpHqgIKCVJlYWwtdGltZRItRXN0YWJsaXNoIGJpLWRp'
+    'Cg5HYXRld2F5U2VydmljZRKDAwoGU3RyZWFtEhYuY2hhdC52MS5TdHJlYW1SZXF1ZXN0GhcuY2'
+    'hhdC52MS5TdHJlYW1SZXNwb25zZSLDArpHqgIKCVJlYWwtdGltZRItRXN0YWJsaXNoIGJpLWRp'
     'cmVjdGlvbmFsIHN0cmVhbWluZyBjb25uZWN0aW9uGuUBT3BlbnMgYSBwZXJzaXN0ZW50IGJpLW'
     'RpcmVjdGlvbmFsIHN0cmVhbSBmb3IgcmVhbC10aW1lIGNoYXQgZXZlbnRzLiBDbGllbnRzIHNl'
     'bmQgU3RyZWFtUmVxdWVzdCBtZXNzYWdlcyAoYXV0aCwgYWNrcywgY29tbWFuZHMpIGFuZCByZW'
     'NlaXZlIFNlcnZlckV2ZW50IG1lc3NhZ2VzIGluIGNocm9ub2xvZ2ljYWwgb3JkZXIuIFN1cHBv'
-    'cnRzIHNlc3Npb24gcmVzdW1wdGlvbiB2aWEgcmVzdW1lX3Rva2VuLioGc3RyZWFtgrUYDwoNZ2'
-    'F0ZXdheV93cml0ZSgBMAEaMoK1GC4KD3NlcnZpY2VfZ2F0ZXdheRIMZ2F0ZXdheV9yZWFkEg1n'
-    'YXRld2F5X3dyaXRl');
+    'cnRzIHNlc3Npb24gcmVzdW1wdGlvbiB2aWEgcmVzdW1lX3Rva2VuLioGc3RyZWFtgrUYEQoPZ2'
+    'F0ZXdheV9jb25uZWN0KAEwARqlAYK1GKABCg9zZXJ2aWNlX2dhdGV3YXkSD2dhdGV3YXlfY29u'
+    'bmVjdBoTCAESD2dhdGV3YXlfY29ubmVjdBoTCAISD2dhdGV3YXlfY29ubmVjdBoTCAMSD2dhdG'
+    'V3YXlfY29ubmVjdBoTCAQSD2dhdGV3YXlfY29ubmVjdBoTCAUSD2dhdGV3YXlfY29ubmVjdBoT'
+    'CAYSD2dhdGV3YXlfY29ubmVjdA==');
 

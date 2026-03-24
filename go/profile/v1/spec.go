@@ -15,8 +15,11 @@
 package profilev1
 
 import (
-	_ "embed"
+	"embed"
 )
 
 //go:embed profile.openapi.yaml
 var ApiSpecFile []byte
+
+//go:embed *.opl.ts
+var OPLSpecFiles embed.FS

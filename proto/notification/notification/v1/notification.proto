@@ -257,10 +257,76 @@ service NotificationService {
   option (common.v1.service_permissions) = {
     namespace: "service_notification"
     permissions: [
-      "notification_read",
-      "notification_write",
-      "template_read",
-      "template_write"
+      "notification_send",
+      "notification_release",
+      "notification_search",
+      "notification_status_view",
+      "notification_status_update",
+      "template_manage",
+      "template_view"
+    ]
+    role_bindings: [
+      {
+        role: ROLE_OWNER
+        permissions: [
+          "notification_send",
+          "notification_release",
+          "notification_search",
+          "notification_status_view",
+          "notification_status_update",
+          "template_manage",
+          "template_view"
+        ]
+      },
+      {
+        role: ROLE_ADMIN
+        permissions: [
+          "notification_send",
+          "notification_release",
+          "notification_search",
+          "notification_status_view",
+          "notification_status_update",
+          "template_manage",
+          "template_view"
+        ]
+      },
+      {
+        role: ROLE_OPERATOR
+        permissions: [
+          "notification_send",
+          "notification_release",
+          "notification_search",
+          "notification_status_view",
+          "template_view"
+        ]
+      },
+      {
+        role: ROLE_VIEWER
+        permissions: [
+          "notification_search",
+          "notification_status_view",
+          "template_view"
+        ]
+      },
+      {
+        role: ROLE_MEMBER
+        permissions: [
+          "notification_search",
+          "notification_status_view"
+        ]
+      },
+      {
+        role: ROLE_SERVICE
+        permissions: [
+          "notification_send",
+          "notification_release",
+          "notification_search",
+          "notification_status_view",
+          "notification_status_update",
+          "template_manage",
+          "template_view"
+        ]
+      }
     ]
   };
 
@@ -268,7 +334,7 @@ service NotificationService {
   // Notifications can be auto-released or manually released via the Release RPC.
   rpc Send(SendRequest) returns (stream SendResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["notification_write"]
+      permissions: ["notification_send"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "sendNotifications"
@@ -282,7 +348,7 @@ service NotificationService {
   // Used for batch processing where notifications are queued first, then released together.
   rpc Release(ReleaseRequest) returns (stream ReleaseResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["notification_write"]
+      permissions: ["notification_release"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "releaseNotifications"
@@ -296,7 +362,7 @@ service NotificationService {
   // Used for tracking delivery confirmation and read receipts.
   rpc Receive(ReceiveRequest) returns (stream ReceiveResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["notification_write"]
+      permissions: ["notification_send"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "receiveNotifications"
@@ -311,7 +377,7 @@ service NotificationService {
   rpc Search(common.v1.SearchRequest) returns (stream SearchResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
     option (common.v1.method_permissions) = {
-      permissions: ["notification_read"]
+      permissions: ["notification_search"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "searchNotifications"
@@ -326,7 +392,7 @@ service NotificationService {
   rpc Status(common.v1.StatusRequest) returns (common.v1.StatusResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
     option (common.v1.method_permissions) = {
-      permissions: ["notification_read"]
+      permissions: ["notification_status_view"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getNotificationStatus"
@@ -340,7 +406,7 @@ service NotificationService {
   // Used by delivery workers to update notification state during processing.
   rpc StatusUpdate(common.v1.StatusUpdateRequest) returns (common.v1.StatusUpdateResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["notification_write"]
+      permissions: ["notification_status_update"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "updateNotificationStatus"
@@ -355,7 +421,7 @@ service NotificationService {
   rpc TemplateSearch(TemplateSearchRequest) returns (stream TemplateSearchResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
     option (common.v1.method_permissions) = {
-      permissions: ["template_read"]
+      permissions: ["template_view"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "searchTemplates"
@@ -369,7 +435,7 @@ service NotificationService {
   // Templates enable consistent, reusable notification formatting with localization.
   rpc TemplateSave(TemplateSaveRequest) returns (TemplateSaveResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["template_write"]
+      permissions: ["template_manage"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "saveTemplate"

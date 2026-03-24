@@ -85,16 +85,99 @@ service CommerceService {
   option (common.v1.service_permissions) = {
     namespace: "service_commerce"
     permissions: [
-      "shop_read",
-      "shop_write",
-      "product_read",
-      "product_write",
-      "cart_read",
-      "cart_write",
-      "order_read",
-      "order_write",
-      "fulfilment_read",
-      "fulfilment_write"
+      "shop_view",
+      "shop_create",
+      "shop_update",
+      "product_view",
+      "product_manage",
+      "cart_view",
+      "cart_manage",
+      "order_view",
+      "order_manage",
+      "fulfilment_view",
+      "fulfilment_manage"
+    ]
+    role_bindings: [
+      {
+        role: ROLE_OWNER
+        permissions: [
+          "shop_view",
+          "shop_create",
+          "shop_update",
+          "product_view",
+          "product_manage",
+          "cart_view",
+          "cart_manage",
+          "order_view",
+          "order_manage",
+          "fulfilment_view",
+          "fulfilment_manage"
+        ]
+      },
+      {
+        role: ROLE_ADMIN
+        permissions: [
+          "shop_view",
+          "shop_create",
+          "shop_update",
+          "product_view",
+          "product_manage",
+          "cart_view",
+          "cart_manage",
+          "order_view",
+          "order_manage",
+          "fulfilment_view",
+          "fulfilment_manage"
+        ]
+      },
+      {
+        role: ROLE_OPERATOR
+        permissions: [
+          "shop_view",
+          "product_view",
+          "product_manage",
+          "cart_view",
+          "order_view",
+          "order_manage",
+          "fulfilment_view",
+          "fulfilment_manage"
+        ]
+      },
+      {
+        role: ROLE_VIEWER
+        permissions: [
+          "shop_view",
+          "product_view",
+          "cart_view",
+          "order_view",
+          "fulfilment_view"
+        ]
+      },
+      {
+        role: ROLE_MEMBER
+        permissions: [
+          "shop_view",
+          "product_view",
+          "cart_view",
+          "order_view"
+        ]
+      },
+      {
+        role: ROLE_SERVICE
+        permissions: [
+          "shop_view",
+          "shop_create",
+          "shop_update",
+          "product_view",
+          "product_manage",
+          "cart_view",
+          "cart_manage",
+          "order_view",
+          "order_manage",
+          "fulfilment_view",
+          "fulfilment_manage"
+        ]
+      }
     ]
   };
 
@@ -105,19 +188,19 @@ service CommerceService {
   // Creates a new shop. The authenticated user becomes the admin.
   rpc CreateShop(CreateShopRequest) returns (CreateShopResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["shop_write"]
+      permissions: ["shop_create"]
     };
   }
   // Retrieves shop details by ID.
   rpc GetShop(GetShopRequest) returns (GetShopResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["shop_read"]
+      permissions: ["shop_view"]
     };
   }
   // Updates shop details.
   rpc UpdateShop(UpdateShopRequest) returns (UpdateShopResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["shop_write"]
+      permissions: ["shop_update"]
     };
   }
 
@@ -128,32 +211,32 @@ service CommerceService {
   // Creates a new product in the catalog.
   rpc CreateProduct(CreateProductRequest) returns (CreateProductResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["product_write"]
+      permissions: ["product_manage"]
     };
   }
   // Retrieves a product by its ID.
   rpc GetProduct(GetProductRequest) returns (GetProductResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["product_read"]
+      permissions: ["product_view"]
     };
   }
   // Lists products belonging to a shop, with optional search and filtering.
   rpc ListProducts(ListProductsRequest) returns (ListProductsResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["product_read"]
+      permissions: ["product_view"]
     };
   }
 
   // Creates a new variant for a product.
   rpc CreateProductVariant(CreateProductVariantRequest) returns (CreateProductVariantResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["product_write"]
+      permissions: ["product_manage"]
     };
   }
   // Updates an existing product variant.
   rpc UpdateProductVariant(UpdateProductVariantRequest) returns (UpdateProductVariantResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["product_write"]
+      permissions: ["product_manage"]
     };
   }
 
@@ -163,29 +246,29 @@ service CommerceService {
 
   rpc CreateCart(CreateCartRequest) returns (CreateCartResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["cart_write"]
+      permissions: ["cart_manage"]
     };
   }
   rpc GetCart(GetCartRequest) returns (GetCartResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["cart_read"]
+      permissions: ["cart_view"]
     };
   }
 
   rpc AddCartLine(AddCartLineRequest) returns (AddCartLineResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["cart_write"]
+      permissions: ["cart_manage"]
     };
   }
   rpc RemoveCartLine(RemoveCartLineRequest) returns (RemoveCartLineResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["cart_write"]
+      permissions: ["cart_manage"]
     };
   }
 
   rpc CreateOrderFromCart(CreateOrderFromCartRequest) returns (CreateOrderFromCartResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["order_write"]
+      permissions: ["order_manage"]
     };
   }
 
@@ -208,20 +291,20 @@ service CommerceService {
   */
   rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["order_write"]
+      permissions: ["order_manage"]
     };
   }
 
   // Retrieves an order by ID.
   rpc GetOrder(GetOrderRequest) returns (GetOrderResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["order_read"]
+      permissions: ["order_view"]
     };
   }
   // Lists orders for a shop, with optional search and filtering.
   rpc ListOrders(ListOrdersRequest) returns (ListOrdersResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["order_read"]
+      permissions: ["order_view"]
     };
   }
 
@@ -237,20 +320,20 @@ service CommerceService {
   */
   rpc CreateFulfilment(CreateFulfilmentRequest) returns (CreateFulfilmentResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["fulfilment_write"]
+      permissions: ["fulfilment_manage"]
     };
   }
 
   // Updates a fulfilment (e.g. adding tracking number, marking as shipped).
   rpc UpdateFulfilment(UpdateFulfilmentRequest) returns (UpdateFulfilmentResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["fulfilment_write"]
+      permissions: ["fulfilment_manage"]
     };
   }
   // Retrieves a fulfilment by ID.
   rpc GetFulfilment(GetFulfilmentRequest) returns (GetFulfilmentResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["fulfilment_read"]
+      permissions: ["fulfilment_view"]
     };
   }
 }

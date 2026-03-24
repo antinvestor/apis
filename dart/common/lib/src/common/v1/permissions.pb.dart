@@ -13,6 +13,72 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
+import 'permissions.pbenum.dart';
+
+export 'permissions.pbenum.dart';
+
+/// RoleBinding maps a standard role to the permissions it grants within a service.
+/// Used to generate OPL permit functions and enforce role-based access control.
+class RoleBinding extends $pb.GeneratedMessage {
+  factory RoleBinding({
+    StandardRole? role,
+    $core.Iterable<$core.String>? permissions,
+  }) {
+    final $result = create();
+    if (role != null) {
+      $result.role = role;
+    }
+    if (permissions != null) {
+      $result.permissions.addAll(permissions);
+    }
+    return $result;
+  }
+  RoleBinding._() : super();
+  factory RoleBinding.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory RoleBinding.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RoleBinding', package: const $pb.PackageName(_omitMessageNames ? '' : 'common.v1'), createEmptyInstance: create)
+    ..e<StandardRole>(1, _omitFieldNames ? '' : 'role', $pb.PbFieldType.OE, defaultOrMaker: StandardRole.ROLE_UNSPECIFIED, valueOf: StandardRole.valueOf, enumValues: StandardRole.values)
+    ..pPS(2, _omitFieldNames ? '' : 'permissions')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  RoleBinding clone() => RoleBinding()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  RoleBinding copyWith(void Function(RoleBinding) updates) => super.copyWith((message) => updates(message as RoleBinding)) as RoleBinding;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static RoleBinding create() => RoleBinding._();
+  RoleBinding createEmptyInstance() => create();
+  static $pb.PbList<RoleBinding> createRepeated() => $pb.PbList<RoleBinding>();
+  @$core.pragma('dart2js:noInline')
+  static RoleBinding getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RoleBinding>(create);
+  static RoleBinding? _defaultInstance;
+
+  /// The role being granted permissions.
+  @$pb.TagNumber(1)
+  StandardRole get role => $_getN(0);
+  @$pb.TagNumber(1)
+  set role(StandardRole v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasRole() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearRole() => clearField(1);
+
+  /// Permissions granted to this role. Must be a subset of ServicePermissions.permissions.
+  @$pb.TagNumber(2)
+  $core.List<$core.String> get permissions => $_getList(1);
+}
+
 /// MethodPermissions declares access control requirements for an RPC method.
 class MethodPermissions extends $pb.GeneratedMessage {
   factory MethodPermissions({
@@ -59,7 +125,7 @@ class MethodPermissions extends $pb.GeneratedMessage {
   static MethodPermissions getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MethodPermissions>(create);
   static MethodPermissions? _defaultInstance;
 
-  /// Permissions required to call this method, e.g. "profile_read", "contact_write".
+  /// Permissions required to call this method, e.g. "profile_view", "contact_manage".
   /// All listed permissions must be satisfied (AND logic).
   @$pb.TagNumber(1)
   $core.List<$core.String> get permissions => $_getList(0);
@@ -76,11 +142,13 @@ class MethodPermissions extends $pb.GeneratedMessage {
 }
 
 /// ServicePermissions declares all permissions a service requires to function.
-/// This serves as a registry of permissions that must be provisioned for the service.
+/// This serves as a registry of permissions that must be provisioned for the service,
+/// and includes role bindings for OPL generation and authorization enforcement.
 class ServicePermissions extends $pb.GeneratedMessage {
   factory ServicePermissions({
     $core.String? namespace,
     $core.Iterable<$core.String>? permissions,
+    $core.Iterable<RoleBinding>? roleBindings,
   }) {
     final $result = create();
     if (namespace != null) {
@@ -88,6 +156,9 @@ class ServicePermissions extends $pb.GeneratedMessage {
     }
     if (permissions != null) {
       $result.permissions.addAll(permissions);
+    }
+    if (roleBindings != null) {
+      $result.roleBindings.addAll(roleBindings);
     }
     return $result;
   }
@@ -98,6 +169,7 @@ class ServicePermissions extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ServicePermissions', package: const $pb.PackageName(_omitMessageNames ? '' : 'common.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'namespace')
     ..pPS(2, _omitFieldNames ? '' : 'permissions')
+    ..pc<RoleBinding>(3, _omitFieldNames ? '' : 'roleBindings', $pb.PbFieldType.PM, subBuilder: RoleBinding.create)
     ..hasRequiredFields = false
   ;
 
@@ -124,7 +196,7 @@ class ServicePermissions extends $pb.GeneratedMessage {
 
   /// Namespace for this service's permissions, used for OPL namespace generation
   /// and ensuring consistency across authorization systems.
-  /// e.g. "profile", "payment", "partition".
+  /// e.g. "service_profile", "service_payment", "service_partition".
   @$pb.TagNumber(1)
   $core.String get namespace => $_getSZ(0);
   @$pb.TagNumber(1)
@@ -134,9 +206,14 @@ class ServicePermissions extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearNamespace() => clearField(1);
 
-  /// All permissions this service needs, e.g. "profile_read", "profile_write".
+  /// All permissions this service needs, e.g. "profile_view", "profile_create".
   @$pb.TagNumber(2)
   $core.List<$core.String> get permissions => $_getList(1);
+
+  /// Role-to-permission mappings for this service. Used to generate OPL permit
+  /// functions and for runtime role-based access control.
+  @$pb.TagNumber(3)
+  $core.List<RoleBinding> get roleBindings => $_getList(2);
 }
 
 class Permissions {

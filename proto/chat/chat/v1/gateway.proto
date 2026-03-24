@@ -83,9 +83,32 @@ option (gnostic.openapi.v3.document) = {
 service GatewayService {
   option (common.v1.service_permissions) = {
     namespace: "service_gateway"
-    permissions: [
-      "gateway_read",
-      "gateway_write"
+    permissions: ["gateway_connect"]
+    role_bindings: [
+      {
+        role: ROLE_OWNER
+        permissions: ["gateway_connect"]
+      },
+      {
+        role: ROLE_ADMIN
+        permissions: ["gateway_connect"]
+      },
+      {
+        role: ROLE_OPERATOR
+        permissions: ["gateway_connect"]
+      },
+      {
+        role: ROLE_VIEWER
+        permissions: ["gateway_connect"]
+      },
+      {
+        role: ROLE_MEMBER
+        permissions: ["gateway_connect"]
+      },
+      {
+        role: ROLE_SERVICE
+        permissions: ["gateway_connect"]
+      }
     ]
   };
 
@@ -94,7 +117,7 @@ service GatewayService {
   // Stream resume: client may provide last_received_event_id or resume_token to continue after reconnect.
   rpc Stream(stream StreamRequest) returns (stream StreamResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["gateway_write"]
+      permissions: ["gateway_connect"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "stream"

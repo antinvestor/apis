@@ -12,16 +12,17 @@ info:
   version: v1.0.0
 x-service-namespace: service_commerce
 x-service-permissions:
-  - shop_read
-  - shop_write
-  - product_read
-  - product_write
-  - cart_read
-  - cart_write
-  - order_read
-  - order_write
-  - fulfilment_read
-  - fulfilment_write
+  - shop_view
+  - shop_create
+  - shop_update
+  - product_view
+  - product_manage
+  - cart_view
+  - cart_manage
+  - order_view
+  - order_manage
+  - fulfilment_view
+  - fulfilment_manage
 paths:
   /commerce.v1.CommerceService/AddCartLine:
     post:
@@ -59,7 +60,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/commerce.v1.AddCartLineResponse'
       x-required-permissions:
-        - cart_write
+        - cart_manage
   /commerce.v1.CommerceService/CreateCart:
     post:
       tags:
@@ -96,7 +97,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/commerce.v1.CreateCartResponse'
       x-required-permissions:
-        - cart_write
+        - cart_manage
   /commerce.v1.CommerceService/CreateFulfilment:
     post:
       tags:
@@ -136,7 +137,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/commerce.v1.CreateFulfilmentResponse'
       x-required-permissions:
-        - fulfilment_write
+        - fulfilment_manage
   /commerce.v1.CommerceService/CreateOrder:
     post:
       tags:
@@ -183,7 +184,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/commerce.v1.CreateOrderResponse'
       x-required-permissions:
-        - order_write
+        - order_manage
   /commerce.v1.CommerceService/CreateOrderFromCart:
     post:
       tags:
@@ -220,7 +221,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/commerce.v1.CreateOrderFromCartResponse'
       x-required-permissions:
-        - order_write
+        - order_manage
   /commerce.v1.CommerceService/CreateProduct:
     post:
       tags:
@@ -258,7 +259,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/commerce.v1.CreateProductResponse'
       x-required-permissions:
-        - product_write
+        - product_manage
   /commerce.v1.CommerceService/CreateProductVariant:
     post:
       tags:
@@ -296,7 +297,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/commerce.v1.CreateProductVariantResponse'
       x-required-permissions:
-        - product_write
+        - product_manage
   /commerce.v1.CommerceService/CreateShop:
     post:
       tags:
@@ -334,7 +335,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/commerce.v1.CreateShopResponse'
       x-required-permissions:
-        - shop_write
+        - shop_create
   /commerce.v1.CommerceService/GetCart:
     post:
       tags:
@@ -371,7 +372,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/commerce.v1.GetCartResponse'
       x-required-permissions:
-        - cart_read
+        - cart_view
   /commerce.v1.CommerceService/GetFulfilment:
     post:
       tags:
@@ -409,7 +410,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/commerce.v1.GetFulfilmentResponse'
       x-required-permissions:
-        - fulfilment_read
+        - fulfilment_view
   /commerce.v1.CommerceService/GetOrder:
     post:
       tags:
@@ -447,7 +448,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/commerce.v1.GetOrderResponse'
       x-required-permissions:
-        - order_read
+        - order_view
   /commerce.v1.CommerceService/GetProduct:
     post:
       tags:
@@ -485,7 +486,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/commerce.v1.GetProductResponse'
       x-required-permissions:
-        - product_read
+        - product_view
   /commerce.v1.CommerceService/GetShop:
     post:
       tags:
@@ -523,7 +524,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/commerce.v1.GetShopResponse'
       x-required-permissions:
-        - shop_read
+        - shop_view
   /commerce.v1.CommerceService/ListOrders:
     post:
       tags:
@@ -561,7 +562,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/commerce.v1.ListOrdersResponse'
       x-required-permissions:
-        - order_read
+        - order_view
   /commerce.v1.CommerceService/ListProducts:
     post:
       tags:
@@ -599,7 +600,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/commerce.v1.ListProductsResponse'
       x-required-permissions:
-        - product_read
+        - product_view
   /commerce.v1.CommerceService/RemoveCartLine:
     post:
       tags:
@@ -636,7 +637,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/commerce.v1.RemoveCartLineResponse'
       x-required-permissions:
-        - cart_write
+        - cart_manage
   /commerce.v1.CommerceService/UpdateFulfilment:
     post:
       tags:
@@ -674,7 +675,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/commerce.v1.UpdateFulfilmentResponse'
       x-required-permissions:
-        - fulfilment_write
+        - fulfilment_manage
   /commerce.v1.CommerceService/UpdateProductVariant:
     post:
       tags:
@@ -712,7 +713,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/commerce.v1.UpdateProductVariantResponse'
       x-required-permissions:
-        - product_write
+        - product_manage
   /commerce.v1.CommerceService/UpdateShop:
     post:
       tags:
@@ -750,7 +751,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/commerce.v1.UpdateShopResponse'
       x-required-permissions:
-        - shop_write
+        - shop_update
 components:
   schemas:
     commerce.v1.AddCartLineRequest:

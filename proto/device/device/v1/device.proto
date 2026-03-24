@@ -574,12 +574,72 @@ service DeviceService {
   option (common.v1.service_permissions) = {
     namespace: "service_device"
     permissions: [
-      "device_read",
-      "device_write",
-      "device_key_read",
-      "device_key_write",
-      "device_log_read",
-      "device_log_write"
+      "device_view",
+      "device_manage",
+      "device_key_view",
+      "device_key_manage",
+      "device_log_view",
+      "device_log_manage"
+    ]
+    role_bindings: [
+      {
+        role: ROLE_OWNER
+        permissions: [
+          "device_view",
+          "device_manage",
+          "device_key_view",
+          "device_key_manage",
+          "device_log_view",
+          "device_log_manage"
+        ]
+      },
+      {
+        role: ROLE_ADMIN
+        permissions: [
+          "device_view",
+          "device_manage",
+          "device_key_view",
+          "device_key_manage",
+          "device_log_view",
+          "device_log_manage"
+        ]
+      },
+      {
+        role: ROLE_OPERATOR
+        permissions: [
+          "device_view",
+          "device_manage",
+          "device_key_view",
+          "device_log_view",
+          "device_log_manage"
+        ]
+      },
+      {
+        role: ROLE_VIEWER
+        permissions: [
+          "device_view",
+          "device_key_view",
+          "device_log_view"
+        ]
+      },
+      {
+        role: ROLE_MEMBER
+        permissions: [
+          "device_view",
+          "device_log_view"
+        ]
+      },
+      {
+        role: ROLE_SERVICE
+        permissions: [
+          "device_view",
+          "device_manage",
+          "device_key_view",
+          "device_key_manage",
+          "device_log_view",
+          "device_log_manage"
+        ]
+      }
     ]
   };
 
@@ -588,7 +648,7 @@ service DeviceService {
   rpc GetById(GetByIdRequest) returns (GetByIdResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
     option (common.v1.method_permissions) = {
-      permissions: ["device_read"]
+      permissions: ["device_view"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getDeviceById"
@@ -603,7 +663,7 @@ service DeviceService {
   rpc GetBySessionId(GetBySessionIdRequest) returns (GetBySessionIdResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
     option (common.v1.method_permissions) = {
-      permissions: ["device_read"]
+      permissions: ["device_view"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getDeviceBySessionId"
@@ -618,7 +678,7 @@ service DeviceService {
   rpc Search(SearchRequest) returns (stream SearchResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
     option (common.v1.method_permissions) = {
-      permissions: ["device_read"]
+      permissions: ["device_view"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "searchDevices"
@@ -632,7 +692,7 @@ service DeviceService {
   // Returns a unique device ID that should be stored by the client.
   rpc Create(CreateRequest) returns (CreateResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["device_write"]
+      permissions: ["device_manage"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "createDevice"
@@ -646,7 +706,7 @@ service DeviceService {
   // Only the device owner or administrators can update device information.
   rpc Update(UpdateRequest) returns (UpdateResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["device_write"]
+      permissions: ["device_manage"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "updateDevice"
@@ -660,7 +720,7 @@ service DeviceService {
   // Required before the device can be used for authenticated operations.
   rpc Link(LinkRequest) returns (LinkResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["device_write"]
+      permissions: ["device_manage"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "linkDevice"
@@ -674,7 +734,7 @@ service DeviceService {
   // This operation cannot be undone.
   rpc Remove(RemoveRequest) returns (RemoveResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["device_write"]
+      permissions: ["device_manage"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "removeDevice"
@@ -688,7 +748,7 @@ service DeviceService {
   // Used for session tracking and security auditing.
   rpc Log(LogRequest) returns (LogResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["device_log_write"]
+      permissions: ["device_log_manage"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "logDeviceActivity"
@@ -703,7 +763,7 @@ service DeviceService {
   rpc ListLogs(ListLogsRequest) returns (stream ListLogsResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
     option (common.v1.method_permissions) = {
-      permissions: ["device_log_read"]
+      permissions: ["device_log_view"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "listDeviceLogs"
@@ -717,7 +777,7 @@ service DeviceService {
   // This is used for keys generated by the service or when the service needs to manage the key material directly.
   rpc AddKey(AddKeyRequest) returns (AddKeyResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["device_key_write"]
+      permissions: ["device_key_manage"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "addDeviceKey"
@@ -731,7 +791,7 @@ service DeviceService {
   // This does not handle deregistration from third-party services. For that, use DeRegisterKey.
   rpc RemoveKey(RemoveKeyRequest) returns (RemoveKeyResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["device_key_write"]
+      permissions: ["device_key_manage"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "removeDeviceKey"
@@ -745,7 +805,7 @@ service DeviceService {
   rpc SearchKey(SearchKeyRequest) returns (SearchKeyResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
     option (common.v1.method_permissions) = {
-      permissions: ["device_key_read"]
+      permissions: ["device_key_view"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "searchDeviceKey"
@@ -760,7 +820,7 @@ service DeviceService {
   // but not the key material itself. Use AddKey to store key material.
   rpc RegisterKey(RegisterKeyRequest) returns (RegisterKeyResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["device_key_write"]
+      permissions: ["device_key_manage"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "registerKey"
@@ -774,7 +834,7 @@ service DeviceService {
   // This handles cleanup with the external service and removes the associated key metadata from local storage.
   rpc DeRegisterKey(DeRegisterKeyRequest) returns (DeRegisterKeyResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["device_key_write"]
+      permissions: ["device_key_manage"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "deRegisterKey"
@@ -790,7 +850,7 @@ service DeviceService {
   // secret with the TURN server (RFC 5766 long-term credentials).
   rpc GetTurnCredentials(GetTurnCredentialsRequest) returns (GetTurnCredentialsResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["device_read"]
+      permissions: ["device_view"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getTurnCredentials"
@@ -805,7 +865,7 @@ service DeviceService {
   // If key_id is provided, that specific key will be used; otherwise the service selects the best available key.
   rpc Notify(NotifyRequest) returns (NotifyResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["device_write"]
+      permissions: ["device_manage"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "notifyDevice"
@@ -819,7 +879,7 @@ service DeviceService {
   // Used to track online/offline status and availability for real-time features.
   rpc UpdatePresence(UpdatePresenceRequest) returns (UpdatePresenceResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["device_write"]
+      permissions: ["device_manage"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "updatePresence"

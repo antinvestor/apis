@@ -12,10 +12,13 @@ info:
   version: v1.0.0
 x-service-namespace: service_notification
 x-service-permissions:
-  - notification_read
-  - notification_write
-  - template_read
-  - template_write
+  - notification_send
+  - notification_release
+  - notification_search
+  - notification_status_view
+  - notification_status_update
+  - template_manage
+  - template_view
 paths:
   /notification.v1.NotificationService/Receive: {}
   /notification.v1.NotificationService/Release: {}
@@ -76,7 +79,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/common.v1.StatusResponse'
       x-required-permissions:
-        - notification_read
+        - notification_status_view
     post:
       tags:
         - Notifications
@@ -114,7 +117,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/common.v1.StatusResponse'
       x-required-permissions:
-        - notification_read
+        - notification_status_view
   /notification.v1.NotificationService/StatusUpdate:
     post:
       tags:
@@ -153,7 +156,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/common.v1.StatusUpdateResponse'
       x-required-permissions:
-        - notification_write
+        - notification_status_update
   /notification.v1.NotificationService/TemplateSave:
     post:
       tags:
@@ -192,7 +195,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/notification.v1.TemplateSaveResponse'
       x-required-permissions:
-        - template_write
+        - template_manage
   /notification.v1.NotificationService/TemplateSearch: {}
 components:
   schemas:

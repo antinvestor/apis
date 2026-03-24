@@ -89,3 +89,33 @@ func ForAllMethods(sd protoreflect.ServiceDescriptor) map[string]MethodPermissio
 
 	return result
 }
+
+// BuildProcedureMap builds a map of Connect RPC procedure names to required
+// permissions from a proto service descriptor. The keys use the Connect
+// procedure format: "/<package>.<Service>/<Method>".
+//
+// This map is designed to be passed directly to Frame's
+// NewFunctionAccessInterceptor for automatic permission enforcement.
+//
+// Example:
+//
+//	sd := profilev1.File_profile_v1_profile_proto.Services().ByName("ProfileService")
+//	procMap := permissions.BuildProcedureMap(sd)
+//	// procMap["/profile.v1.ProfileService/GetById"] = ["profile_read"]
+func BuildProcedureMap(sd protoreflect.ServiceDescriptor) map[string][]string {
+	methods := sd.Methods()
+	result := make(map[string][]string, methods.Len())
+
+	serviceFull := string(sd.FullName())
+	for i := range methods.Len() {
+		md := methods.Get(i)
+		perm := ForMethod(md)
+		if len(perm.Permissions) == 0 {
+			continue
+		}
+		procedure := "/" + serviceFull + "/" + string(md.Name())
+		result[procedure] = perm.Permissions
+	}
+
+	return result
+}

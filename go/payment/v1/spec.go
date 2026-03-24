@@ -15,8 +15,11 @@
 package paymentv1
 
 import (
-	_ "embed"
+	"embed"
 )
 
 //go:embed payment.openapi.yaml
 var ApiSpecFile []byte
+
+//go:embed *.opl.ts
+var OPLSpecFiles embed.FS

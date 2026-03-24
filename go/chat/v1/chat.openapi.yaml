@@ -12,8 +12,7 @@ info:
   version: v1.0.0
 x-service-namespace: service_gateway
 x-service-permissions:
-  - gateway_read
-  - gateway_write
+  - gateway_connect
 paths:
   /chat.v1.ChatService/AddRoomSubscriptions:
     post:
@@ -53,7 +52,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/chat.v1.AddRoomSubscriptionsResponse'
       x-required-permissions:
-        - subscription_write
+        - subscription_manage
   /chat.v1.ChatService/CreateRoom:
     post:
       tags:
@@ -92,7 +91,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/chat.v1.CreateRoomResponse'
       x-required-permissions:
-        - room_write
+        - room_create
   /chat.v1.ChatService/DeleteRoom:
     post:
       tags:
@@ -131,7 +130,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/chat.v1.DeleteRoomResponse'
       x-required-permissions:
-        - room_write
+        - room_delete
   /chat.v1.ChatService/GetEvent:
     get:
       tags:
@@ -187,7 +186,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/chat.v1.GetEventResponse'
       x-required-permissions:
-        - event_read
+        - event_view
     post:
       tags:
         - Messages
@@ -225,7 +224,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/chat.v1.GetEventResponse'
       x-required-permissions:
-        - event_read
+        - event_view
   /chat.v1.ChatService/GetHistory:
     get:
       tags:
@@ -281,7 +280,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/chat.v1.GetHistoryResponse'
       x-required-permissions:
-        - event_read
+        - event_view
     post:
       tags:
         - Messages
@@ -319,7 +318,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/chat.v1.GetHistoryResponse'
       x-required-permissions:
-        - event_read
+        - event_view
   /chat.v1.ChatService/GetRoom:
     get:
       tags:
@@ -375,7 +374,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/chat.v1.GetRoomResponse'
       x-required-permissions:
-        - room_read
+        - room_view
     post:
       tags:
         - Rooms
@@ -413,7 +412,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/chat.v1.GetRoomResponse'
       x-required-permissions:
-        - room_read
+        - room_view
   /chat.v1.ChatService/GetSubscriptionSettings:
     get:
       tags:
@@ -469,7 +468,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/chat.v1.GetSubscriptionSettingsResponse'
       x-required-permissions:
-        - subscription_read
+        - subscription_view
     post:
       tags:
         - Subscriptions
@@ -507,7 +506,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/chat.v1.GetSubscriptionSettingsResponse'
       x-required-permissions:
-        - subscription_read
+        - subscription_view
   /chat.v1.ChatService/ListProposals:
     get:
       tags:
@@ -563,7 +562,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/chat.v1.ListProposalsResponse'
       x-required-permissions:
-        - proposal_read
+        - proposal_view
     post:
       tags:
         - Proposals
@@ -601,7 +600,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/chat.v1.ListProposalsResponse'
       x-required-permissions:
-        - proposal_read
+        - proposal_view
   /chat.v1.ChatService/Live:
     post:
       tags:
@@ -640,7 +639,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/chat.v1.LiveResponse'
       x-required-permissions:
-        - event_read
+        - event_view
   /chat.v1.ChatService/RemoveRoomSubscriptions:
     post:
       tags:
@@ -679,7 +678,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/chat.v1.RemoveRoomSubscriptionsResponse'
       x-required-permissions:
-        - subscription_write
+        - subscription_manage
   /chat.v1.ChatService/SearchRoomSubscriptions:
     get:
       tags:
@@ -735,7 +734,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/chat.v1.SearchRoomSubscriptionsResponse'
       x-required-permissions:
-        - subscription_read
+        - subscription_view
     post:
       tags:
         - Subscriptions
@@ -773,7 +772,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/chat.v1.SearchRoomSubscriptionsResponse'
       x-required-permissions:
-        - subscription_read
+        - subscription_view
   /chat.v1.ChatService/SearchRooms: {}
   /chat.v1.ChatService/SendEvent:
     post:
@@ -813,7 +812,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/chat.v1.SendEventResponse'
       x-required-permissions:
-        - event_write
+        - event_send
   /chat.v1.ChatService/SubmitProposal:
     post:
       tags:
@@ -852,7 +851,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/chat.v1.SubmitProposalResponse'
       x-required-permissions:
-        - proposal_write
+        - proposal_manage
   /chat.v1.ChatService/UpdateRoom:
     post:
       tags:
@@ -891,7 +890,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/chat.v1.UpdateRoomResponse'
       x-required-permissions:
-        - room_write
+        - room_update
   /chat.v1.ChatService/UpdateSubscriptionRole:
     post:
       tags:
@@ -930,7 +929,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/chat.v1.UpdateSubscriptionRoleResponse'
       x-required-permissions:
-        - subscription_write
+        - subscription_manage
   /chat.v1.ChatService/UpdateSubscriptionSettings:
     post:
       tags:
@@ -969,7 +968,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/chat.v1.UpdateSubscriptionSettingsResponse'
       x-required-permissions:
-        - subscription_write
+        - subscription_manage
 components:
   schemas:
     base64:

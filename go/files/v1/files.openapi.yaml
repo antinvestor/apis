@@ -12,10 +12,12 @@ info:
   version: v1.0.0
 x-service-namespace: service_files
 x-service-permissions:
-  - content_read
-  - content_write
-  - file_access_read
-  - file_access_write
+  - content_view
+  - content_upload
+  - content_manage
+  - content_delete
+  - file_access_view
+  - file_access_manage
 paths:
   /files.v1.FilesService/AbortMultipartUpload:
     post:
@@ -55,7 +57,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.AbortMultipartUploadResponse'
       x-required-permissions:
-        - content_write
+        - content_delete
   /files.v1.FilesService/BatchDeleteContent:
     post:
       tags:
@@ -94,7 +96,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.BatchDeleteContentResponse'
       x-required-permissions:
-        - content_write
+        - content_delete
   /files.v1.FilesService/BatchGetContent:
     get:
       tags:
@@ -150,7 +152,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.BatchGetContentResponse'
       x-required-permissions:
-        - content_read
+        - content_view
     post:
       tags:
         - Media
@@ -188,7 +190,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.BatchGetContentResponse'
       x-required-permissions:
-        - content_read
+        - content_view
   /files.v1.FilesService/CompleteMultipartUpload:
     post:
       tags:
@@ -227,7 +229,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.CompleteMultipartUploadResponse'
       x-required-permissions:
-        - content_write
+        - content_upload
   /files.v1.FilesService/CreateContent:
     post:
       tags:
@@ -266,7 +268,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.CreateContentResponse'
       x-required-permissions:
-        - content_write
+        - content_upload
   /files.v1.FilesService/CreateMultipartUpload:
     post:
       tags:
@@ -305,7 +307,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.CreateMultipartUploadResponse'
       x-required-permissions:
-        - content_write
+        - content_upload
   /files.v1.FilesService/DeleteContent:
     post:
       tags:
@@ -344,7 +346,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.DeleteContentResponse'
       x-required-permissions:
-        - content_write
+        - content_delete
   /files.v1.FilesService/DownloadContent: {}
   /files.v1.FilesService/DownloadContentRange: {}
   /files.v1.FilesService/FinalizeSignedUpload:
@@ -385,7 +387,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.FinalizeSignedUploadResponse'
       x-required-permissions:
-        - content_write
+        - content_upload
   /files.v1.FilesService/GetConfig:
     get:
       tags:
@@ -441,7 +443,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.GetConfigResponse'
       x-required-permissions:
-        - content_read
+        - content_view
     post:
       tags:
         - Media
@@ -479,7 +481,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.GetConfigResponse'
       x-required-permissions:
-        - content_read
+        - content_view
   /files.v1.FilesService/GetContent:
     get:
       tags:
@@ -535,7 +537,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.GetContentResponse'
       x-required-permissions:
-        - content_read
+        - content_view
     post:
       tags:
         - Media
@@ -573,7 +575,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.GetContentResponse'
       x-required-permissions:
-        - content_read
+        - content_view
   /files.v1.FilesService/GetContentOverrideName:
     get:
       tags:
@@ -629,7 +631,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.GetContentOverrideNameResponse'
       x-required-permissions:
-        - content_read
+        - content_view
     post:
       tags:
         - Media
@@ -667,7 +669,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.GetContentOverrideNameResponse'
       x-required-permissions:
-        - content_read
+        - content_view
   /files.v1.FilesService/GetContentThumbnail:
     get:
       tags:
@@ -723,7 +725,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.GetContentThumbnailResponse'
       x-required-permissions:
-        - content_read
+        - content_view
     post:
       tags:
         - Media
@@ -761,7 +763,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.GetContentThumbnailResponse'
       x-required-permissions:
-        - content_read
+        - content_view
   /files.v1.FilesService/GetMultipartUpload:
     get:
       tags:
@@ -817,7 +819,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.GetMultipartUploadResponse'
       x-required-permissions:
-        - content_read
+        - content_view
     post:
       tags:
         - Media
@@ -855,7 +857,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.GetMultipartUploadResponse'
       x-required-permissions:
-        - content_read
+        - content_view
   /files.v1.FilesService/GetRetentionPolicy:
     get:
       tags:
@@ -911,7 +913,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.GetRetentionPolicyResponse'
       x-required-permissions:
-        - content_read
+        - content_view
     post:
       tags:
         - Retention
@@ -949,7 +951,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.GetRetentionPolicyResponse'
       x-required-permissions:
-        - content_read
+        - content_view
   /files.v1.FilesService/GetSignedDownloadUrl:
     get:
       tags:
@@ -1005,7 +1007,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.GetSignedDownloadUrlResponse'
       x-required-permissions:
-        - content_read
+        - content_view
     post:
       tags:
         - Media
@@ -1043,7 +1045,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.GetSignedDownloadUrlResponse'
       x-required-permissions:
-        - content_read
+        - content_view
   /files.v1.FilesService/GetSignedUploadUrl:
     post:
       tags:
@@ -1082,7 +1084,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.GetSignedUploadUrlResponse'
       x-required-permissions:
-        - content_read
+        - content_view
   /files.v1.FilesService/GetStorageStats:
     get:
       tags:
@@ -1138,7 +1140,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.GetStorageStatsResponse'
       x-required-permissions:
-        - content_read
+        - content_view
     post:
       tags:
         - Analytics
@@ -1176,7 +1178,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.GetStorageStatsResponse'
       x-required-permissions:
-        - content_read
+        - content_view
   /files.v1.FilesService/GetUrlPreview:
     get:
       tags:
@@ -1232,7 +1234,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.GetUrlPreviewResponse'
       x-required-permissions:
-        - content_read
+        - content_view
     post:
       tags:
         - Media
@@ -1270,7 +1272,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.GetUrlPreviewResponse'
       x-required-permissions:
-        - content_read
+        - content_view
   /files.v1.FilesService/GetUserUsage:
     get:
       tags:
@@ -1326,7 +1328,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.GetUserUsageResponse'
       x-required-permissions:
-        - content_read
+        - content_view
     post:
       tags:
         - Analytics
@@ -1364,7 +1366,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.GetUserUsageResponse'
       x-required-permissions:
-        - content_read
+        - content_view
   /files.v1.FilesService/GetVersions:
     get:
       tags:
@@ -1420,7 +1422,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.GetVersionsResponse'
       x-required-permissions:
-        - content_read
+        - content_view
     post:
       tags:
         - Media
@@ -1458,7 +1460,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.GetVersionsResponse'
       x-required-permissions:
-        - content_read
+        - content_view
   /files.v1.FilesService/GrantAccess:
     post:
       tags:
@@ -1497,7 +1499,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.GrantAccessResponse'
       x-required-permissions:
-        - file_access_write
+        - file_access_manage
   /files.v1.FilesService/HeadContent:
     get:
       tags:
@@ -1553,7 +1555,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.HeadContentResponse'
       x-required-permissions:
-        - content_read
+        - content_view
     post:
       tags:
         - Media
@@ -1591,7 +1593,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.HeadContentResponse'
       x-required-permissions:
-        - content_read
+        - content_view
   /files.v1.FilesService/ListAccess:
     get:
       tags:
@@ -1647,7 +1649,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.ListAccessResponse'
       x-required-permissions:
-        - file_access_read
+        - file_access_view
     post:
       tags:
         - Access
@@ -1685,7 +1687,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.ListAccessResponse'
       x-required-permissions:
-        - file_access_read
+        - file_access_view
   /files.v1.FilesService/ListMultipartParts:
     get:
       tags:
@@ -1741,7 +1743,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.ListMultipartPartsResponse'
       x-required-permissions:
-        - content_read
+        - content_view
     post:
       tags:
         - Media
@@ -1779,7 +1781,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.ListMultipartPartsResponse'
       x-required-permissions:
-        - content_read
+        - content_view
   /files.v1.FilesService/ListRetentionPolicies:
     get:
       tags:
@@ -1835,7 +1837,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.ListRetentionPoliciesResponse'
       x-required-permissions:
-        - content_read
+        - content_view
     post:
       tags:
         - Retention
@@ -1873,7 +1875,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.ListRetentionPoliciesResponse'
       x-required-permissions:
-        - content_read
+        - content_view
   /files.v1.FilesService/PatchContent:
     post:
       tags:
@@ -1912,7 +1914,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.PatchContentResponse'
       x-required-permissions:
-        - content_write
+        - content_manage
   /files.v1.FilesService/RestoreVersion:
     post:
       tags:
@@ -1951,7 +1953,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.RestoreVersionResponse'
       x-required-permissions:
-        - content_write
+        - content_manage
   /files.v1.FilesService/RevokeAccess:
     post:
       tags:
@@ -1990,7 +1992,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.RevokeAccessResponse'
       x-required-permissions:
-        - file_access_write
+        - file_access_manage
   /files.v1.FilesService/SearchMedia:
     get:
       tags:
@@ -2046,7 +2048,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.SearchMediaResponse'
       x-required-permissions:
-        - content_read
+        - content_view
     post:
       tags:
         - Media
@@ -2084,7 +2086,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.SearchMediaResponse'
       x-required-permissions:
-        - content_read
+        - content_view
   /files.v1.FilesService/SetRetentionPolicy:
     post:
       tags:
@@ -2123,7 +2125,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.SetRetentionPolicyResponse'
       x-required-permissions:
-        - content_write
+        - content_manage
   /files.v1.FilesService/UploadContent: {}
   /files.v1.FilesService/UploadMultipartPart:
     post:
@@ -2163,7 +2165,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/files.v1.UploadMultipartPartResponse'
       x-required-permissions:
-        - content_write
+        - content_upload
 components:
   schemas:
     base64:

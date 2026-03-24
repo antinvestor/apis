@@ -15,8 +15,11 @@
 package billingv1
 
 import (
-	_ "embed"
+	"embed"
 )
 
 //go:embed billing.openapi.yaml
 var ApiSpecFile []byte
+
+//go:embed *.opl.ts
+var OPLSpecFiles embed.FS

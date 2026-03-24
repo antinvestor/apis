@@ -3,8 +3,7 @@ info:
   title: chat.v1
 x-service-namespace: service_gateway
 x-service-permissions:
-  - gateway_read
-  - gateway_write
+  - gateway_connect
 paths: {}
 components:
   schemas:

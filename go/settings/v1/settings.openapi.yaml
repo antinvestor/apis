@@ -12,8 +12,8 @@ info:
   version: v1.0.0
 x-service-namespace: service_settings
 x-service-permissions:
-  - setting_read
-  - setting_write
+  - setting_view
+  - setting_manage
 paths:
   /settings.v1.SettingsService/Get:
     get:
@@ -70,7 +70,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/settings.v1.GetResponse'
       x-required-permissions:
-        - setting_read
+        - setting_view
     post:
       tags:
         - Settings
@@ -108,7 +108,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/settings.v1.GetResponse'
       x-required-permissions:
-        - setting_read
+        - setting_view
   /settings.v1.SettingsService/List: {}
   /settings.v1.SettingsService/Search: {}
   /settings.v1.SettingsService/Set:
@@ -149,7 +149,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/settings.v1.SetResponse'
       x-required-permissions:
-        - setting_write
+        - setting_manage
 components:
   schemas:
     base64:

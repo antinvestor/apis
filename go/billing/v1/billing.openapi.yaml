@@ -12,24 +12,24 @@ info:
   version: v1.0.0
 x-service-namespace: service_billing
 x-service-permissions:
-  - catalog_read
-  - catalog_write
-  - plan_write
-  - component_write
-  - tier_write
-  - subscription_read
-  - subscription_write
-  - usage_read
-  - usage_write
-  - billing_run_read
-  - billing_run_write
-  - invoice_read
-  - invoice_write
-  - payment_record_write
-  - credit_read
-  - credit_write
-  - discount_read
-  - discount_write
+  - catalog_view
+  - catalog_manage
+  - plan_manage
+  - component_manage
+  - tier_manage
+  - subscription_view
+  - subscription_manage
+  - usage_view
+  - usage_ingest
+  - billing_run_view
+  - billing_run_manage
+  - invoice_view
+  - invoice_manage
+  - payment_record
+  - credit_view
+  - credit_manage
+  - discount_view
+  - discount_manage
 paths:
   /billing.v1.BillingService/CancelSubscription:
     post:
@@ -69,7 +69,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/billing.v1.CancelSubscriptionResponse'
       x-required-permissions:
-        - subscription_write
+        - subscription_manage
   /billing.v1.BillingService/CreateCatalogVersion:
     post:
       tags:
@@ -108,7 +108,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/billing.v1.CreateCatalogVersionResponse'
       x-required-permissions:
-        - catalog_write
+        - catalog_manage
   /billing.v1.BillingService/CreateComponent:
     post:
       tags:
@@ -147,7 +147,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/billing.v1.CreateComponentResponse'
       x-required-permissions:
-        - component_write
+        - component_manage
   /billing.v1.BillingService/CreateDiscount:
     post:
       tags:
@@ -186,7 +186,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/billing.v1.CreateDiscountResponse'
       x-required-permissions:
-        - discount_write
+        - discount_manage
   /billing.v1.BillingService/CreatePlan:
     post:
       tags:
@@ -225,7 +225,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/billing.v1.CreatePlanResponse'
       x-required-permissions:
-        - plan_write
+        - plan_manage
   /billing.v1.BillingService/CreateSubscription:
     post:
       tags:
@@ -264,7 +264,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/billing.v1.CreateSubscriptionResponse'
       x-required-permissions:
-        - subscription_write
+        - subscription_manage
   /billing.v1.BillingService/CreateTier:
     post:
       tags:
@@ -303,7 +303,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/billing.v1.CreateTierResponse'
       x-required-permissions:
-        - tier_write
+        - tier_manage
   /billing.v1.BillingService/GetBillingRun:
     get:
       tags:
@@ -359,7 +359,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/billing.v1.GetBillingRunResponse'
       x-required-permissions:
-        - billing_run_read
+        - billing_run_view
     post:
       tags:
         - Billing
@@ -397,7 +397,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/billing.v1.GetBillingRunResponse'
       x-required-permissions:
-        - billing_run_read
+        - billing_run_view
   /billing.v1.BillingService/GetCatalogVersion:
     get:
       tags:
@@ -453,7 +453,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/billing.v1.GetCatalogVersionResponse'
       x-required-permissions:
-        - catalog_read
+        - catalog_view
     post:
       tags:
         - Catalog
@@ -491,7 +491,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/billing.v1.GetCatalogVersionResponse'
       x-required-permissions:
-        - catalog_read
+        - catalog_view
   /billing.v1.BillingService/GetCreditBalance:
     get:
       tags:
@@ -547,7 +547,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/billing.v1.GetCreditBalanceResponse'
       x-required-permissions:
-        - credit_read
+        - credit_view
     post:
       tags:
         - Credits
@@ -585,7 +585,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/billing.v1.GetCreditBalanceResponse'
       x-required-permissions:
-        - credit_read
+        - credit_view
   /billing.v1.BillingService/GetInvoice:
     get:
       tags:
@@ -641,7 +641,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/billing.v1.GetInvoiceResponse'
       x-required-permissions:
-        - invoice_read
+        - invoice_view
     post:
       tags:
         - Invoices
@@ -679,7 +679,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/billing.v1.GetInvoiceResponse'
       x-required-permissions:
-        - invoice_read
+        - invoice_view
   /billing.v1.BillingService/GetSubscription:
     get:
       tags:
@@ -735,7 +735,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/billing.v1.GetSubscriptionResponse'
       x-required-permissions:
-        - subscription_read
+        - subscription_view
     post:
       tags:
         - Subscriptions
@@ -773,7 +773,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/billing.v1.GetSubscriptionResponse'
       x-required-permissions:
-        - subscription_read
+        - subscription_view
   /billing.v1.BillingService/GrantCredit:
     post:
       tags:
@@ -812,7 +812,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/billing.v1.GrantCreditResponse'
       x-required-permissions:
-        - credit_write
+        - credit_manage
   /billing.v1.BillingService/IngestUsageEvent:
     post:
       tags:
@@ -851,7 +851,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/billing.v1.IngestUsageEventResponse'
       x-required-permissions:
-        - usage_write
+        - usage_ingest
   /billing.v1.BillingService/IssueInvoice:
     post:
       tags:
@@ -890,7 +890,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/billing.v1.IssueInvoiceResponse'
       x-required-permissions:
-        - invoice_write
+        - invoice_manage
   /billing.v1.BillingService/ListSubscriptions:
     get:
       tags:
@@ -946,7 +946,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/billing.v1.ListSubscriptionsResponse'
       x-required-permissions:
-        - subscription_read
+        - subscription_view
     post:
       tags:
         - Subscriptions
@@ -984,7 +984,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/billing.v1.ListSubscriptionsResponse'
       x-required-permissions:
-        - subscription_read
+        - subscription_view
   /billing.v1.BillingService/PublishCatalogVersion:
     post:
       tags:
@@ -1023,7 +1023,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/billing.v1.PublishCatalogVersionResponse'
       x-required-permissions:
-        - catalog_write
+        - catalog_manage
   /billing.v1.BillingService/RecordPayment:
     post:
       tags:
@@ -1062,7 +1062,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/billing.v1.RecordPaymentResponse'
       x-required-permissions:
-        - payment_record_write
+        - payment_record
   /billing.v1.BillingService/RunBilling:
     post:
       tags:
@@ -1101,7 +1101,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/billing.v1.RunBillingResponse'
       x-required-permissions:
-        - billing_run_write
+        - billing_run_manage
   /billing.v1.BillingService/SearchCatalogVersions: {}
   /billing.v1.BillingService/SearchDiscounts: {}
   /billing.v1.BillingService/SearchInvoices: {}
@@ -1144,7 +1144,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/billing.v1.VoidInvoiceResponse'
       x-required-permissions:
-        - invoice_write
+        - invoice_manage
 components:
   schemas:
     base64:

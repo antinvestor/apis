@@ -306,12 +306,72 @@ service LedgerService {
   option (common.v1.service_permissions) = {
     namespace: "service_ledger"
     permissions: [
-      "ledger_read",
-      "ledger_write",
-      "account_read",
-      "account_write",
-      "transaction_read",
-      "transaction_write"
+      "ledger_view",
+      "ledger_manage",
+      "account_view",
+      "account_manage",
+      "transaction_view",
+      "transaction_manage"
+    ]
+    role_bindings: [
+      {
+        role: ROLE_OWNER
+        permissions: [
+          "ledger_view",
+          "ledger_manage",
+          "account_view",
+          "account_manage",
+          "transaction_view",
+          "transaction_manage"
+        ]
+      },
+      {
+        role: ROLE_ADMIN
+        permissions: [
+          "ledger_view",
+          "ledger_manage",
+          "account_view",
+          "account_manage",
+          "transaction_view",
+          "transaction_manage"
+        ]
+      },
+      {
+        role: ROLE_OPERATOR
+        permissions: [
+          "ledger_view",
+          "account_view",
+          "transaction_view",
+          "transaction_manage"
+        ]
+      },
+      {
+        role: ROLE_VIEWER
+        permissions: [
+          "ledger_view",
+          "account_view",
+          "transaction_view"
+        ]
+      },
+      {
+        role: ROLE_MEMBER
+        permissions: [
+          "ledger_view",
+          "account_view",
+          "transaction_view"
+        ]
+      },
+      {
+        role: ROLE_SERVICE
+        permissions: [
+          "ledger_view",
+          "ledger_manage",
+          "account_view",
+          "account_manage",
+          "transaction_view",
+          "transaction_manage"
+        ]
+      }
     ]
   };
 
@@ -320,7 +380,7 @@ service LedgerService {
   rpc SearchLedgers(common.v1.SearchRequest) returns (stream SearchLedgersResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
     option (common.v1.method_permissions) = {
-      permissions: ["ledger_read"]
+      permissions: ["ledger_view"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "searchLedgers"
@@ -334,7 +394,7 @@ service LedgerService {
   // Ledgers can be hierarchical with parent-child relationships.
   rpc CreateLedger(CreateLedgerRequest) returns (CreateLedgerResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["ledger_write"]
+      permissions: ["ledger_manage"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "createLedger"
@@ -348,7 +408,7 @@ service LedgerService {
   // The ledger type and reference cannot be changed.
   rpc UpdateLedger(UpdateLedgerRequest) returns (UpdateLedgerResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["ledger_write"]
+      permissions: ["ledger_manage"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "updateLedger"
@@ -363,7 +423,7 @@ service LedgerService {
   rpc SearchAccounts(common.v1.SearchRequest) returns (stream SearchAccountsResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
     option (common.v1.method_permissions) = {
-      permissions: ["account_read"]
+      permissions: ["account_view"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "searchAccounts"
@@ -377,7 +437,7 @@ service LedgerService {
   // Each account tracks balances and transaction history.
   rpc CreateAccount(CreateAccountRequest) returns (CreateAccountResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["account_write"]
+      permissions: ["account_manage"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "createAccount"
@@ -391,7 +451,7 @@ service LedgerService {
   // Balances are updated through transactions, not directly.
   rpc UpdateAccount(UpdateAccountRequest) returns (UpdateAccountResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["account_write"]
+      permissions: ["account_manage"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "updateAccount"
@@ -406,7 +466,7 @@ service LedgerService {
   rpc SearchTransactions(common.v1.SearchRequest) returns (stream SearchTransactionsResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
     option (common.v1.method_permissions) = {
-      permissions: ["transaction_read"]
+      permissions: ["transaction_view"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "searchTransactions"
@@ -420,7 +480,7 @@ service LedgerService {
   // All entries must be balanced (sum of debits = sum of credits).
   rpc CreateTransaction(CreateTransactionRequest) returns (CreateTransactionResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["transaction_write"]
+      permissions: ["transaction_manage"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "createTransaction"
@@ -434,7 +494,7 @@ service LedgerService {
   // Creates a new REVERSAL transaction that negates the original.
   rpc ReverseTransaction(ReverseTransactionRequest) returns (ReverseTransactionResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["transaction_write"]
+      permissions: ["transaction_manage"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "reverseTransaction"
@@ -448,7 +508,7 @@ service LedgerService {
   // Entries and amounts cannot be changed after creation.
   rpc UpdateTransaction(UpdateTransactionRequest) returns (UpdateTransactionResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["transaction_write"]
+      permissions: ["transaction_manage"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "updateTransaction"
@@ -463,7 +523,7 @@ service LedgerService {
   rpc SearchTransactionEntries(common.v1.SearchRequest) returns (stream SearchTransactionEntriesResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
     option (common.v1.method_permissions) = {
-      permissions: ["transaction_read"]
+      permissions: ["transaction_view"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "searchTransactionEntries"

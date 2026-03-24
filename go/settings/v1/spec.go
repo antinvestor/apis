@@ -15,8 +15,11 @@
 package settingsv1
 
 import (
-	_ "embed"
+	"embed"
 )
 
 //go:embed settings.openapi.yaml
 var ApiSpecFile []byte
+
+//go:embed *.opl.ts
+var OPLSpecFiles embed.FS

@@ -325,10 +325,26 @@ generate_inject_permissions: $(BIN)/inject-permissions ## Inject permissions int
 		done; \
 	done
 
+$(BIN)/generate-opl: tools/generate-opl/main.go go/common/v1/permissions.pb.go
+	mkdir -p $(BIN)
+	cd tools/generate-opl && $(GO) build -o $(BIN)/generate-opl .
+
+.PHONY: generate_opl
+generate_opl: $(BIN)/generate-opl ## Generate OPL namespace files from proto
+	@for m in $(MODULES); do \
+		if [ "$$m" = "common" ]; then continue; fi; \
+		proto_dir="proto/$$m"; \
+		out_dir="go/$$m/v1"; \
+		echo "==> generate opl $$m"; \
+		buf build "$$proto_dir" -o /dev/stdout | \
+			$(BIN)/generate-opl "$$out_dir"; \
+	done
+
 .PHONY: generate
 generate: $(BIN)/buf $(BIN)/license-header ## Regenerate all code
 	$(MAKE) generate_buf_gen
 	$(MAKE) generate_inject_permissions
+	$(MAKE) generate_opl
 	$(MAKE) generate_minimock_mocks
 
 .PHONY: generate_dart

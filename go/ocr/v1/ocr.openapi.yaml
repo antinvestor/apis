@@ -12,8 +12,8 @@ info:
   version: v1.0.0
 x-service-namespace: service_ocr
 x-service-permissions:
-  - ocr_read
-  - ocr_write
+  - ocr_submit
+  - ocr_status_view
 paths:
   /ocr.v1.OCRService/Recognize:
     post:
@@ -53,7 +53,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ocr.v1.RecognizeResponse'
       x-required-permissions:
-        - ocr_write
+        - ocr_submit
   /ocr.v1.OCRService/Status:
     get:
       tags:
@@ -109,7 +109,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ocr.v1.StatusResponse'
       x-required-permissions:
-        - ocr_read
+        - ocr_status_view
     post:
       tags:
         - OCR
@@ -147,7 +147,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ocr.v1.StatusResponse'
       x-required-permissions:
-        - ocr_read
+        - ocr_status_view
 components:
   schemas:
     base64:

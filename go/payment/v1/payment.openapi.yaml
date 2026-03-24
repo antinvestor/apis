@@ -12,8 +12,15 @@ info:
   version: v1.0.0
 x-service-namespace: service_payment
 x-service-permissions:
-  - payment_read
-  - payment_write
+  - payment_send
+  - payment_receive
+  - payment_search
+  - payment_status_view
+  - payment_status_update
+  - payment_release
+  - prompt_initiate
+  - payment_link_create
+  - reconcile
 paths:
   /payment.v1.PaymentService/CreatePaymentLink:
     post:
@@ -53,7 +60,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/payment.v1.CreatePaymentLinkResponse'
       x-required-permissions:
-        - payment_write
+        - payment_link_create
   /payment.v1.PaymentService/InitiatePrompt:
     post:
       tags:
@@ -92,7 +99,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/payment.v1.InitiatePromptResponse'
       x-required-permissions:
-        - payment_write
+        - prompt_initiate
   /payment.v1.PaymentService/Receive:
     post:
       tags:
@@ -131,7 +138,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/payment.v1.ReceiveResponse'
       x-required-permissions:
-        - payment_write
+        - payment_receive
   /payment.v1.PaymentService/Reconcile:
     post:
       tags:
@@ -170,7 +177,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/payment.v1.ReconcileResponse'
       x-required-permissions:
-        - payment_write
+        - reconcile
   /payment.v1.PaymentService/Release:
     post:
       tags:
@@ -209,7 +216,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/payment.v1.ReleaseResponse'
       x-required-permissions:
-        - payment_write
+        - payment_release
   /payment.v1.PaymentService/Search: {}
   /payment.v1.PaymentService/Send:
     post:
@@ -249,7 +256,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/payment.v1.SendResponse'
       x-required-permissions:
-        - payment_write
+        - payment_send
   /payment.v1.PaymentService/Status:
     get:
       tags:
@@ -305,7 +312,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/common.v1.StatusResponse'
       x-required-permissions:
-        - payment_read
+        - payment_status_view
     post:
       tags:
         - Payments
@@ -343,7 +350,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/common.v1.StatusResponse'
       x-required-permissions:
-        - payment_read
+        - payment_status_view
   /payment.v1.PaymentService/StatusUpdate:
     post:
       tags:
@@ -382,7 +389,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/common.v1.StatusUpdateResponse'
       x-required-permissions:
-        - payment_write
+        - payment_status_update
 components:
   schemas:
     base64:

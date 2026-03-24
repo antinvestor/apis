@@ -1885,10 +1885,67 @@ service FilesService {
   option (common.v1.service_permissions) = {
     namespace: "service_files"
     permissions: [
-      "content_read",
-      "content_write",
-      "file_access_read",
-      "file_access_write"
+      "content_view",
+      "content_upload",
+      "content_manage",
+      "content_delete",
+      "file_access_view",
+      "file_access_manage"
+    ]
+    role_bindings: [
+      {
+        role: ROLE_OWNER
+        permissions: [
+          "content_view",
+          "content_upload",
+          "content_manage",
+          "content_delete",
+          "file_access_view",
+          "file_access_manage"
+        ]
+      },
+      {
+        role: ROLE_ADMIN
+        permissions: [
+          "content_view",
+          "content_upload",
+          "content_manage",
+          "content_delete",
+          "file_access_view",
+          "file_access_manage"
+        ]
+      },
+      {
+        role: ROLE_OPERATOR
+        permissions: [
+          "content_view",
+          "content_upload",
+          "content_manage",
+          "file_access_view"
+        ]
+      },
+      {
+        role: ROLE_VIEWER
+        permissions: [
+          "content_view",
+          "file_access_view"
+        ]
+      },
+      {
+        role: ROLE_MEMBER
+        permissions: ["content_view"]
+      },
+      {
+        role: ROLE_SERVICE
+        permissions: [
+          "content_view",
+          "content_upload",
+          "content_manage",
+          "content_delete",
+          "file_access_view",
+          "file_access_manage"
+        ]
+      }
     ]
   };
 
@@ -1913,7 +1970,7 @@ service FilesService {
   //   - FAILED_PRECONDITION: quota exceeded
   rpc UploadContent(stream UploadContentRequest) returns (UploadContentResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["content_write"]
+      permissions: ["content_upload"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "uploadContent"
@@ -1929,7 +1986,7 @@ service FilesService {
   // or for implementing resumable uploads.
   rpc CreateContent(CreateContentRequest) returns (CreateContentResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["content_write"]
+      permissions: ["content_upload"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "createContent"
@@ -1946,7 +2003,7 @@ service FilesService {
   // CreateMultipartUpload initiates a multipart upload session.
   rpc CreateMultipartUpload(CreateMultipartUploadRequest) returns (CreateMultipartUploadResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["content_write"]
+      permissions: ["content_upload"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "createMultipartUpload"
@@ -1960,7 +2017,7 @@ service FilesService {
   rpc GetMultipartUpload(GetMultipartUploadRequest) returns (GetMultipartUploadResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
     option (common.v1.method_permissions) = {
-      permissions: ["content_read"]
+      permissions: ["content_view"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getMultipartUpload"
@@ -1973,7 +2030,7 @@ service FilesService {
   // UploadMultipartPart uploads a single part.
   rpc UploadMultipartPart(UploadMultipartPartRequest) returns (UploadMultipartPartResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["content_write"]
+      permissions: ["content_upload"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "uploadMultipartPart"
@@ -1986,7 +2043,7 @@ service FilesService {
   // CompleteMultipartUpload completes the upload.
   rpc CompleteMultipartUpload(CompleteMultipartUploadRequest) returns (CompleteMultipartUploadResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["content_write"]
+      permissions: ["content_upload"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "completeMultipartUpload"
@@ -1999,7 +2056,7 @@ service FilesService {
   // AbortMultipartUpload cancels the upload.
   rpc AbortMultipartUpload(AbortMultipartUploadRequest) returns (AbortMultipartUploadResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["content_write"]
+      permissions: ["content_delete"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "abortMultipartUpload"
@@ -2013,7 +2070,7 @@ service FilesService {
   rpc ListMultipartParts(ListMultipartPartsRequest) returns (ListMultipartPartsResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
     option (common.v1.method_permissions) = {
-      permissions: ["content_read"]
+      permissions: ["content_view"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "listMultipartParts"
@@ -2031,7 +2088,7 @@ service FilesService {
   rpc HeadContent(HeadContentRequest) returns (HeadContentResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
     option (common.v1.method_permissions) = {
-      permissions: ["content_read"]
+      permissions: ["content_view"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "headContent"
@@ -2044,7 +2101,7 @@ service FilesService {
   // PatchContent updates metadata.
   rpc PatchContent(PatchContentRequest) returns (PatchContentResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["content_write"]
+      permissions: ["content_manage"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "patchContent"
@@ -2061,7 +2118,7 @@ service FilesService {
   // GetSignedUploadUrl gets URL for direct storage upload.
   rpc GetSignedUploadUrl(GetSignedUploadUrlRequest) returns (GetSignedUploadUrlResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["content_read"]
+      permissions: ["content_view"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getSignedUploadUrl"
@@ -2074,7 +2131,7 @@ service FilesService {
   // FinalizeSignedUpload completes a signed upload.
   rpc FinalizeSignedUpload(FinalizeSignedUploadRequest) returns (FinalizeSignedUploadResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["content_write"]
+      permissions: ["content_upload"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "finalizeSignedUpload"
@@ -2088,7 +2145,7 @@ service FilesService {
   rpc GetSignedDownloadUrl(GetSignedDownloadUrlRequest) returns (GetSignedDownloadUrlResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
     option (common.v1.method_permissions) = {
-      permissions: ["content_read"]
+      permissions: ["content_view"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getSignedDownloadUrl"
@@ -2105,7 +2162,7 @@ service FilesService {
   // DeleteContent deletes content.
   rpc DeleteContent(DeleteContentRequest) returns (DeleteContentResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["content_write"]
+      permissions: ["content_delete"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "deleteContent"
@@ -2119,7 +2176,7 @@ service FilesService {
   rpc GetContent(GetContentRequest) returns (GetContentResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
     option (common.v1.method_permissions) = {
-      permissions: ["content_read"]
+      permissions: ["content_view"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getContent"
@@ -2133,7 +2190,7 @@ service FilesService {
   rpc GetContentOverrideName(GetContentOverrideNameRequest) returns (GetContentOverrideNameResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
     option (common.v1.method_permissions) = {
-      permissions: ["content_read"]
+      permissions: ["content_view"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getContentOverrideName"
@@ -2147,7 +2204,7 @@ service FilesService {
   rpc DownloadContent(DownloadContentRequest) returns (stream DownloadContentResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
     option (common.v1.method_permissions) = {
-      permissions: ["content_read"]
+      permissions: ["content_view"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "downloadContent"
@@ -2161,7 +2218,7 @@ service FilesService {
   rpc DownloadContentRange(DownloadContentRangeRequest) returns (stream DownloadContentRangeResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
     option (common.v1.method_permissions) = {
-      permissions: ["content_read"]
+      permissions: ["content_view"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "downloadContentRange"
@@ -2179,7 +2236,7 @@ service FilesService {
   rpc GetContentThumbnail(GetContentThumbnailRequest) returns (GetContentThumbnailResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
     option (common.v1.method_permissions) = {
-      permissions: ["content_read"]
+      permissions: ["content_view"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getContentThumbnail"
@@ -2193,7 +2250,7 @@ service FilesService {
   rpc GetUrlPreview(GetUrlPreviewRequest) returns (GetUrlPreviewResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
     option (common.v1.method_permissions) = {
-      permissions: ["content_read"]
+      permissions: ["content_view"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getUrlPreview"
@@ -2211,7 +2268,7 @@ service FilesService {
   rpc GetConfig(GetConfigRequest) returns (GetConfigResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
     option (common.v1.method_permissions) = {
-      permissions: ["content_read"]
+      permissions: ["content_view"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getConfig"
@@ -2225,7 +2282,7 @@ service FilesService {
   rpc SearchMedia(SearchMediaRequest) returns (SearchMediaResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
     option (common.v1.method_permissions) = {
-      permissions: ["content_read"]
+      permissions: ["content_view"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "searchMedia"
@@ -2243,7 +2300,7 @@ service FilesService {
   rpc BatchGetContent(BatchGetContentRequest) returns (BatchGetContentResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
     option (common.v1.method_permissions) = {
-      permissions: ["content_read"]
+      permissions: ["content_view"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "batchGetContent"
@@ -2256,7 +2313,7 @@ service FilesService {
   // BatchDeleteContent deletes multiple files.
   rpc BatchDeleteContent(BatchDeleteContentRequest) returns (BatchDeleteContentResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["content_write"]
+      permissions: ["content_delete"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "batchDeleteContent"
@@ -2273,7 +2330,7 @@ service FilesService {
   // GrantAccess grants access to media.
   rpc GrantAccess(GrantAccessRequest) returns (GrantAccessResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["file_access_write"]
+      permissions: ["file_access_manage"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "grantAccess"
@@ -2286,7 +2343,7 @@ service FilesService {
   // RevokeAccess revokes access from media.
   rpc RevokeAccess(RevokeAccessRequest) returns (RevokeAccessResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["file_access_write"]
+      permissions: ["file_access_manage"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "revokeAccess"
@@ -2300,7 +2357,7 @@ service FilesService {
   rpc ListAccess(ListAccessRequest) returns (ListAccessResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
     option (common.v1.method_permissions) = {
-      permissions: ["file_access_read"]
+      permissions: ["file_access_view"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "listAccess"
@@ -2318,7 +2375,7 @@ service FilesService {
   rpc GetVersions(GetVersionsRequest) returns (GetVersionsResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
     option (common.v1.method_permissions) = {
-      permissions: ["content_read"]
+      permissions: ["content_view"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getVersions"
@@ -2331,7 +2388,7 @@ service FilesService {
   // RestoreVersion restores a previous version.
   rpc RestoreVersion(RestoreVersionRequest) returns (RestoreVersionResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["content_write"]
+      permissions: ["content_manage"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "restoreVersion"
@@ -2348,7 +2405,7 @@ service FilesService {
   // SetRetentionPolicy applies retention to media.
   rpc SetRetentionPolicy(SetRetentionPolicyRequest) returns (SetRetentionPolicyResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["content_write"]
+      permissions: ["content_manage"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "setRetentionPolicy"
@@ -2362,7 +2419,7 @@ service FilesService {
   rpc GetRetentionPolicy(GetRetentionPolicyRequest) returns (GetRetentionPolicyResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
     option (common.v1.method_permissions) = {
-      permissions: ["content_read"]
+      permissions: ["content_view"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getRetentionPolicy"
@@ -2376,7 +2433,7 @@ service FilesService {
   rpc ListRetentionPolicies(ListRetentionPoliciesRequest) returns (ListRetentionPoliciesResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
     option (common.v1.method_permissions) = {
-      permissions: ["content_read"]
+      permissions: ["content_view"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "listRetentionPolicies"
@@ -2394,7 +2451,7 @@ service FilesService {
   rpc GetUserUsage(GetUserUsageRequest) returns (GetUserUsageResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
     option (common.v1.method_permissions) = {
-      permissions: ["content_read"]
+      permissions: ["content_view"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getUserUsage"
@@ -2408,7 +2465,7 @@ service FilesService {
   rpc GetStorageStats(GetStorageStatsRequest) returns (GetStorageStatsResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
     option (common.v1.method_permissions) = {
-      permissions: ["content_read"]
+      permissions: ["content_view"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getStorageStats"

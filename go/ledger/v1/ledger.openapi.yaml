@@ -12,12 +12,12 @@ info:
   version: v1.0.0
 x-service-namespace: service_ledger
 x-service-permissions:
-  - ledger_read
-  - ledger_write
-  - account_read
-  - account_write
-  - transaction_read
-  - transaction_write
+  - ledger_view
+  - ledger_manage
+  - account_view
+  - account_manage
+  - transaction_view
+  - transaction_manage
 paths:
   /ledger.v1.LedgerService/CreateAccount:
     post:
@@ -57,7 +57,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ledger.v1.CreateAccountResponse'
       x-required-permissions:
-        - account_write
+        - account_manage
   /ledger.v1.LedgerService/CreateLedger:
     post:
       tags:
@@ -96,7 +96,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ledger.v1.CreateLedgerResponse'
       x-required-permissions:
-        - ledger_write
+        - ledger_manage
   /ledger.v1.LedgerService/CreateTransaction:
     post:
       tags:
@@ -135,7 +135,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ledger.v1.CreateTransactionResponse'
       x-required-permissions:
-        - transaction_write
+        - transaction_manage
   /ledger.v1.LedgerService/ReverseTransaction:
     post:
       tags:
@@ -174,7 +174,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ledger.v1.ReverseTransactionResponse'
       x-required-permissions:
-        - transaction_write
+        - transaction_manage
   /ledger.v1.LedgerService/SearchAccounts: {}
   /ledger.v1.LedgerService/SearchLedgers: {}
   /ledger.v1.LedgerService/SearchTransactionEntries: {}
@@ -217,7 +217,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ledger.v1.UpdateAccountResponse'
       x-required-permissions:
-        - account_write
+        - account_manage
   /ledger.v1.LedgerService/UpdateLedger:
     post:
       tags:
@@ -256,7 +256,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ledger.v1.UpdateLedgerResponse'
       x-required-permissions:
-        - ledger_write
+        - ledger_manage
   /ledger.v1.LedgerService/UpdateTransaction:
     post:
       tags:
@@ -295,7 +295,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ledger.v1.UpdateTransactionResponse'
       x-required-permissions:
-        - transaction_write
+        - transaction_manage
 components:
   schemas:
     common.v1.PageCursor:

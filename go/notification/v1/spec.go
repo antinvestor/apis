@@ -15,8 +15,11 @@
 package notificationv1
 
 import (
-	_ "embed"
+	"embed"
 )
 
 //go:embed notification.openapi.yaml
 var ApiSpecFile []byte
+
+//go:embed *.opl.ts
+var OPLSpecFiles embed.FS

@@ -36,10 +36,131 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// StandardRole defines the standard roles used across all services for
+// authorization. These roles map to OPL namespace relations and Keto tuples.
+// buf:lint:ignore ENUM_VALUE_PREFIX
+type StandardRole int32
+
+const (
+	// buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
+	StandardRole_ROLE_UNSPECIFIED StandardRole = 0
+	StandardRole_ROLE_OWNER       StandardRole = 1
+	StandardRole_ROLE_ADMIN       StandardRole = 2
+	StandardRole_ROLE_OPERATOR    StandardRole = 3
+	StandardRole_ROLE_VIEWER      StandardRole = 4
+	StandardRole_ROLE_MEMBER      StandardRole = 5
+	StandardRole_ROLE_SERVICE     StandardRole = 6
+)
+
+// Enum value maps for StandardRole.
+var (
+	StandardRole_name = map[int32]string{
+		0: "ROLE_UNSPECIFIED",
+		1: "ROLE_OWNER",
+		2: "ROLE_ADMIN",
+		3: "ROLE_OPERATOR",
+		4: "ROLE_VIEWER",
+		5: "ROLE_MEMBER",
+		6: "ROLE_SERVICE",
+	}
+	StandardRole_value = map[string]int32{
+		"ROLE_UNSPECIFIED": 0,
+		"ROLE_OWNER":       1,
+		"ROLE_ADMIN":       2,
+		"ROLE_OPERATOR":    3,
+		"ROLE_VIEWER":      4,
+		"ROLE_MEMBER":      5,
+		"ROLE_SERVICE":     6,
+	}
+)
+
+func (x StandardRole) Enum() *StandardRole {
+	p := new(StandardRole)
+	*p = x
+	return p
+}
+
+func (x StandardRole) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (StandardRole) Descriptor() protoreflect.EnumDescriptor {
+	return file_common_v1_permissions_proto_enumTypes[0].Descriptor()
+}
+
+func (StandardRole) Type() protoreflect.EnumType {
+	return &file_common_v1_permissions_proto_enumTypes[0]
+}
+
+func (x StandardRole) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use StandardRole.Descriptor instead.
+func (StandardRole) EnumDescriptor() ([]byte, []int) {
+	return file_common_v1_permissions_proto_rawDescGZIP(), []int{0}
+}
+
+// RoleBinding maps a standard role to the permissions it grants within a service.
+// Used to generate OPL permit functions and enforce role-based access control.
+type RoleBinding struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The role being granted permissions.
+	Role StandardRole `protobuf:"varint,1,opt,name=role,proto3,enum=common.v1.StandardRole" json:"role,omitempty"`
+	// Permissions granted to this role. Must be a subset of ServicePermissions.permissions.
+	Permissions   []string `protobuf:"bytes,2,rep,name=permissions,proto3" json:"permissions,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RoleBinding) Reset() {
+	*x = RoleBinding{}
+	mi := &file_common_v1_permissions_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RoleBinding) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RoleBinding) ProtoMessage() {}
+
+func (x *RoleBinding) ProtoReflect() protoreflect.Message {
+	mi := &file_common_v1_permissions_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RoleBinding.ProtoReflect.Descriptor instead.
+func (*RoleBinding) Descriptor() ([]byte, []int) {
+	return file_common_v1_permissions_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *RoleBinding) GetRole() StandardRole {
+	if x != nil {
+		return x.Role
+	}
+	return StandardRole_ROLE_UNSPECIFIED
+}
+
+func (x *RoleBinding) GetPermissions() []string {
+	if x != nil {
+		return x.Permissions
+	}
+	return nil
+}
+
 // MethodPermissions declares access control requirements for an RPC method.
 type MethodPermissions struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Permissions required to call this method, e.g. "profile_read", "contact_write".
+	// Permissions required to call this method, e.g. "profile_view", "contact_manage".
 	// All listed permissions must be satisfied (AND logic).
 	Permissions []string `protobuf:"bytes,1,rep,name=permissions,proto3" json:"permissions,omitempty"`
 	// If true, the method can be called without authentication.
@@ -50,7 +171,7 @@ type MethodPermissions struct {
 
 func (x *MethodPermissions) Reset() {
 	*x = MethodPermissions{}
-	mi := &file_common_v1_permissions_proto_msgTypes[0]
+	mi := &file_common_v1_permissions_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -62,7 +183,7 @@ func (x *MethodPermissions) String() string {
 func (*MethodPermissions) ProtoMessage() {}
 
 func (x *MethodPermissions) ProtoReflect() protoreflect.Message {
-	mi := &file_common_v1_permissions_proto_msgTypes[0]
+	mi := &file_common_v1_permissions_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -75,7 +196,7 @@ func (x *MethodPermissions) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MethodPermissions.ProtoReflect.Descriptor instead.
 func (*MethodPermissions) Descriptor() ([]byte, []int) {
-	return file_common_v1_permissions_proto_rawDescGZIP(), []int{0}
+	return file_common_v1_permissions_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *MethodPermissions) GetPermissions() []string {
@@ -93,22 +214,26 @@ func (x *MethodPermissions) GetAllowUnauthenticated() bool {
 }
 
 // ServicePermissions declares all permissions a service requires to function.
-// This serves as a registry of permissions that must be provisioned for the service.
+// This serves as a registry of permissions that must be provisioned for the service,
+// and includes role bindings for OPL generation and authorization enforcement.
 type ServicePermissions struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Namespace for this service's permissions, used for OPL namespace generation
 	// and ensuring consistency across authorization systems.
-	// e.g. "profile", "payment", "partition".
+	// e.g. "service_profile", "service_payment", "service_partition".
 	Namespace string `protobuf:"bytes,1,opt,name=namespace,proto3" json:"namespace,omitempty"`
-	// All permissions this service needs, e.g. "profile_read", "profile_write".
-	Permissions   []string `protobuf:"bytes,2,rep,name=permissions,proto3" json:"permissions,omitempty"`
+	// All permissions this service needs, e.g. "profile_view", "profile_create".
+	Permissions []string `protobuf:"bytes,2,rep,name=permissions,proto3" json:"permissions,omitempty"`
+	// Role-to-permission mappings for this service. Used to generate OPL permit
+	// functions and for runtime role-based access control.
+	RoleBindings  []*RoleBinding `protobuf:"bytes,3,rep,name=role_bindings,json=roleBindings,proto3" json:"role_bindings,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ServicePermissions) Reset() {
 	*x = ServicePermissions{}
-	mi := &file_common_v1_permissions_proto_msgTypes[1]
+	mi := &file_common_v1_permissions_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -120,7 +245,7 @@ func (x *ServicePermissions) String() string {
 func (*ServicePermissions) ProtoMessage() {}
 
 func (x *ServicePermissions) ProtoReflect() protoreflect.Message {
-	mi := &file_common_v1_permissions_proto_msgTypes[1]
+	mi := &file_common_v1_permissions_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -133,7 +258,7 @@ func (x *ServicePermissions) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ServicePermissions.ProtoReflect.Descriptor instead.
 func (*ServicePermissions) Descriptor() ([]byte, []int) {
-	return file_common_v1_permissions_proto_rawDescGZIP(), []int{1}
+	return file_common_v1_permissions_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *ServicePermissions) GetNamespace() string {
@@ -146,6 +271,13 @@ func (x *ServicePermissions) GetNamespace() string {
 func (x *ServicePermissions) GetPermissions() []string {
 	if x != nil {
 		return x.Permissions
+	}
+	return nil
+}
+
+func (x *ServicePermissions) GetRoleBindings() []*RoleBinding {
+	if x != nil {
+		return x.RoleBindings
 	}
 	return nil
 }
@@ -189,13 +321,27 @@ var File_common_v1_permissions_proto protoreflect.FileDescriptor
 
 const file_common_v1_permissions_proto_rawDesc = "" +
 	"\n" +
-	"\x1bcommon/v1/permissions.proto\x12\tcommon.v1\x1a google/protobuf/descriptor.proto\"j\n" +
+	"\x1bcommon/v1/permissions.proto\x12\tcommon.v1\x1a google/protobuf/descriptor.proto\"\\\n" +
+	"\vRoleBinding\x12+\n" +
+	"\x04role\x18\x01 \x01(\x0e2\x17.common.v1.StandardRoleR\x04role\x12 \n" +
+	"\vpermissions\x18\x02 \x03(\tR\vpermissions\"j\n" +
 	"\x11MethodPermissions\x12 \n" +
 	"\vpermissions\x18\x01 \x03(\tR\vpermissions\x123\n" +
-	"\x15allow_unauthenticated\x18\x02 \x01(\bR\x14allowUnauthenticated\"T\n" +
+	"\x15allow_unauthenticated\x18\x02 \x01(\bR\x14allowUnauthenticated\"\x91\x01\n" +
 	"\x12ServicePermissions\x12\x1c\n" +
 	"\tnamespace\x18\x01 \x01(\tR\tnamespace\x12 \n" +
-	"\vpermissions\x18\x02 \x03(\tR\vpermissions:m\n" +
+	"\vpermissions\x18\x02 \x03(\tR\vpermissions\x12;\n" +
+	"\rrole_bindings\x18\x03 \x03(\v2\x16.common.v1.RoleBindingR\froleBindings*\x8b\x01\n" +
+	"\fStandardRole\x12\x14\n" +
+	"\x10ROLE_UNSPECIFIED\x10\x00\x12\x0e\n" +
+	"\n" +
+	"ROLE_OWNER\x10\x01\x12\x0e\n" +
+	"\n" +
+	"ROLE_ADMIN\x10\x02\x12\x11\n" +
+	"\rROLE_OPERATOR\x10\x03\x12\x0f\n" +
+	"\vROLE_VIEWER\x10\x04\x12\x0f\n" +
+	"\vROLE_MEMBER\x10\x05\x12\x10\n" +
+	"\fROLE_SERVICE\x10\x06:m\n" +
 	"\x12method_permissions\x12\x1e.google.protobuf.MethodOptions\x18І\x03 \x01(\v2\x1c.common.v1.MethodPermissionsR\x11methodPermissions:q\n" +
 	"\x13service_permissions\x12\x1f.google.protobuf.ServiceOptions\x18І\x03 \x01(\v2\x1d.common.v1.ServicePermissionsR\x12servicePermissionsB?\n" +
 	"\bcommonv1P\x01Z1github.com/antinvestor/apis/go/common/v1;commonv1b\x06proto3"
@@ -212,23 +358,28 @@ func file_common_v1_permissions_proto_rawDescGZIP() []byte {
 	return file_common_v1_permissions_proto_rawDescData
 }
 
-var file_common_v1_permissions_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_common_v1_permissions_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_common_v1_permissions_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_common_v1_permissions_proto_goTypes = []any{
-	(*MethodPermissions)(nil),           // 0: common.v1.MethodPermissions
-	(*ServicePermissions)(nil),          // 1: common.v1.ServicePermissions
-	(*descriptorpb.MethodOptions)(nil),  // 2: google.protobuf.MethodOptions
-	(*descriptorpb.ServiceOptions)(nil), // 3: google.protobuf.ServiceOptions
+	(StandardRole)(0),                   // 0: common.v1.StandardRole
+	(*RoleBinding)(nil),                 // 1: common.v1.RoleBinding
+	(*MethodPermissions)(nil),           // 2: common.v1.MethodPermissions
+	(*ServicePermissions)(nil),          // 3: common.v1.ServicePermissions
+	(*descriptorpb.MethodOptions)(nil),  // 4: google.protobuf.MethodOptions
+	(*descriptorpb.ServiceOptions)(nil), // 5: google.protobuf.ServiceOptions
 }
 var file_common_v1_permissions_proto_depIdxs = []int32{
-	2, // 0: common.v1.method_permissions:extendee -> google.protobuf.MethodOptions
-	3, // 1: common.v1.service_permissions:extendee -> google.protobuf.ServiceOptions
-	0, // 2: common.v1.method_permissions:type_name -> common.v1.MethodPermissions
-	1, // 3: common.v1.service_permissions:type_name -> common.v1.ServicePermissions
-	4, // [4:4] is the sub-list for method output_type
-	4, // [4:4] is the sub-list for method input_type
-	2, // [2:4] is the sub-list for extension type_name
-	0, // [0:2] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	0, // 0: common.v1.RoleBinding.role:type_name -> common.v1.StandardRole
+	1, // 1: common.v1.ServicePermissions.role_bindings:type_name -> common.v1.RoleBinding
+	4, // 2: common.v1.method_permissions:extendee -> google.protobuf.MethodOptions
+	5, // 3: common.v1.service_permissions:extendee -> google.protobuf.ServiceOptions
+	2, // 4: common.v1.method_permissions:type_name -> common.v1.MethodPermissions
+	3, // 5: common.v1.service_permissions:type_name -> common.v1.ServicePermissions
+	6, // [6:6] is the sub-list for method output_type
+	6, // [6:6] is the sub-list for method input_type
+	4, // [4:6] is the sub-list for extension type_name
+	2, // [2:4] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_common_v1_permissions_proto_init() }
@@ -241,13 +392,14 @@ func file_common_v1_permissions_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_common_v1_permissions_proto_rawDesc), len(file_common_v1_permissions_proto_rawDesc)),
-			NumEnums:      0,
-			NumMessages:   2,
+			NumEnums:      1,
+			NumMessages:   3,
 			NumExtensions: 2,
 			NumServices:   0,
 		},
 		GoTypes:           file_common_v1_permissions_proto_goTypes,
 		DependencyIndexes: file_common_v1_permissions_proto_depIdxs,
+		EnumInfos:         file_common_v1_permissions_proto_enumTypes,
 		MessageInfos:      file_common_v1_permissions_proto_msgTypes,
 		ExtensionInfos:    file_common_v1_permissions_proto_extTypes,
 	}.Build()

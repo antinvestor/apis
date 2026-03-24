@@ -22,9 +22,33 @@ option go_package = "github.com/antinvestor/apis/go/common/v1;commonv1";
 option java_multiple_files = true;
 option java_package = "commonv1";
 
+// StandardRole defines the standard roles used across all services for
+// authorization. These roles map to OPL namespace relations and Keto tuples.
+// buf:lint:ignore ENUM_VALUE_PREFIX
+enum StandardRole {
+  // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
+  ROLE_UNSPECIFIED = 0;
+  ROLE_OWNER = 1;
+  ROLE_ADMIN = 2;
+  ROLE_OPERATOR = 3;
+  ROLE_VIEWER = 4;
+  ROLE_MEMBER = 5;
+  ROLE_SERVICE = 6;
+}
+
+// RoleBinding maps a standard role to the permissions it grants within a service.
+// Used to generate OPL permit functions and enforce role-based access control.
+message RoleBinding {
+  // The role being granted permissions.
+  StandardRole role = 1;
+
+  // Permissions granted to this role. Must be a subset of ServicePermissions.permissions.
+  repeated string permissions = 2;
+}
+
 // MethodPermissions declares access control requirements for an RPC method.
 message MethodPermissions {
-  // Permissions required to call this method, e.g. "profile_read", "contact_write".
+  // Permissions required to call this method, e.g. "profile_view", "contact_manage".
   // All listed permissions must be satisfied (AND logic).
   repeated string permissions = 1;
 
@@ -33,15 +57,20 @@ message MethodPermissions {
 }
 
 // ServicePermissions declares all permissions a service requires to function.
-// This serves as a registry of permissions that must be provisioned for the service.
+// This serves as a registry of permissions that must be provisioned for the service,
+// and includes role bindings for OPL generation and authorization enforcement.
 message ServicePermissions {
   // Namespace for this service's permissions, used for OPL namespace generation
   // and ensuring consistency across authorization systems.
-  // e.g. "profile", "payment", "partition".
+  // e.g. "service_profile", "service_payment", "service_partition".
   string namespace = 1;
 
-  // All permissions this service needs, e.g. "profile_read", "profile_write".
+  // All permissions this service needs, e.g. "profile_view", "profile_create".
   repeated string permissions = 2;
+
+  // Role-to-permission mappings for this service. Used to generate OPL permit
+  // functions and for runtime role-based access control.
+  repeated RoleBinding role_bindings = 3;
 }
 
 extend google.protobuf.MethodOptions {

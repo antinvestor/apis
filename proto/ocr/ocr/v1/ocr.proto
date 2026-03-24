@@ -124,8 +124,46 @@ service OCRService {
   option (common.v1.service_permissions) = {
     namespace: "service_ocr"
     permissions: [
-      "ocr_read",
-      "ocr_write"
+      "ocr_submit",
+      "ocr_status_view"
+    ]
+    role_bindings: [
+      {
+        role: ROLE_OWNER
+        permissions: [
+          "ocr_submit",
+          "ocr_status_view"
+        ]
+      },
+      {
+        role: ROLE_ADMIN
+        permissions: [
+          "ocr_submit",
+          "ocr_status_view"
+        ]
+      },
+      {
+        role: ROLE_OPERATOR
+        permissions: [
+          "ocr_submit",
+          "ocr_status_view"
+        ]
+      },
+      {
+        role: ROLE_VIEWER
+        permissions: ["ocr_status_view"]
+      },
+      {
+        role: ROLE_MEMBER
+        permissions: ["ocr_status_view"]
+      },
+      {
+        role: ROLE_SERVICE
+        permissions: [
+          "ocr_submit",
+          "ocr_status_view"
+        ]
+      }
     ]
   };
 
@@ -133,7 +171,7 @@ service OCRService {
   // Supports both synchronous and asynchronous processing.
   rpc Recognize(RecognizeRequest) returns (RecognizeResponse) {
     option (common.v1.method_permissions) = {
-      permissions: ["ocr_write"]
+      permissions: ["ocr_submit"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "recognizeText"
@@ -148,7 +186,7 @@ service OCRService {
   rpc Status(common.v1.StatusRequest) returns (StatusResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
     option (common.v1.method_permissions) = {
-      permissions: ["ocr_read"]
+      permissions: ["ocr_status_view"]
     };
     option (gnostic.openapi.v3.operation) = {
       operation_id: "getOCRStatus"
