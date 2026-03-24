@@ -199,7 +199,7 @@ help:
 
 .PHONY: all
 all: ## Build, test and auto-fix
-	$(MAKE) buf_lint_all golang_build_all lintfix
+	$(MAKE) buf_lint_all generate golang_build_all lintfix
 
 .PHONY: build
 build: ## Auto-fix protobuf, lint, generate, and build Go
@@ -317,7 +317,7 @@ generate_inject_permissions: ## Inject permissions into OpenAPI specs
 		for yaml_file in $$yaml_files; do \
 			echo "==> inject permissions $$yaml_file"; \
 			buf build "$$proto_dir" -o /dev/stdout | \
-				$(GO) run ./go/common/cmd/inject-permissions "$$yaml_file"; \
+				$(GO) run ./tools/inject-permissions "$$yaml_file"; \
 		done; \
 	done
 
