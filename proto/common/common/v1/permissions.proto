@@ -1,0 +1,50 @@
+// Copyright 2023-2026 Ant Investor Ltd
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package common.v1;
+
+import "google/protobuf/descriptor.proto";
+
+option go_package = "github.com/antinvestor/apis/go/common/v1;commonv1";
+option java_multiple_files = true;
+option java_package = "commonv1";
+
+// MethodPermissions declares access control requirements for an RPC method.
+message MethodPermissions {
+  // Permissions required to call this method, e.g. "profile_read", "contact_write".
+  // All listed permissions must be satisfied (AND logic).
+  repeated string permissions = 1;
+
+  // If true, the method can be called without authentication.
+  bool allow_unauthenticated = 2;
+}
+
+// ServicePermissions declares all permissions a service requires to function.
+// This serves as a registry of permissions that must be provisioned for the service.
+message ServicePermissions {
+  // All permissions this service needs, e.g. "profile_read", "profile_write".
+  repeated string permissions = 1;
+}
+
+extend google.protobuf.MethodOptions {
+  // Permission requirements for an individual RPC method.
+  MethodPermissions method_permissions = 50000;
+}
+
+extend google.protobuf.ServiceOptions {
+  // Registry of all permissions the service requires to function.
+  ServicePermissions service_permissions = 50000;
+}
